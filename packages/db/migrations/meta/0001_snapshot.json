@@ -1,7 +1,7 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "77d0047a-f390-4193-aa7d-b8a3f4ceace4",
+  "id": "ca4a93e0-5d53-4b3d-a5fa-5c4663aec712",
   "prevId": "d025f62b-127a-4d81-a8c5-1a2a41469e0c",
   "tables": {
     "categories": {
@@ -2125,27 +2125,6 @@
           "notNull": false,
           "autoincrement": false
         },
-        "commission_structure_json": {
-          "name": "commission_structure_json",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "commission_effective_from": {
-          "name": "commission_effective_from",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "cookie_days": {
-          "name": "cookie_days",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
         "payment_threshold_minor": {
           "name": "payment_threshold_minor",
           "type": "integer",
@@ -3207,6 +3186,13 @@
           "notNull": true,
           "autoincrement": false
         },
+        "aggregation_key": {
+          "name": "aggregation_key",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
         "date": {
           "name": "date",
           "type": "text",
@@ -3297,14 +3283,10 @@
         }
       },
       "indexes": {
-        "rd_dimensions_uq": {
-          "name": "rd_dimensions_uq",
+        "rd_aggregation_key_uq": {
+          "name": "rd_aggregation_key_uq",
           "columns": [
-            "date",
-            "market_id",
-            "product_id",
-            "retailer_id",
-            "affiliate_program_id"
+            "aggregation_key"
           ],
           "isUnique": true
         },
@@ -3316,86 +3298,7 @@
           "isUnique": false
         }
       },
-      "foreignKeys": {
-        "revenue_daily_market_id_markets_id_fk": {
-          "name": "revenue_daily_market_id_markets_id_fk",
-          "tableFrom": "revenue_daily",
-          "tableTo": "markets",
-          "columnsFrom": [
-            "market_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        },
-        "revenue_daily_category_id_categories_id_fk": {
-          "name": "revenue_daily_category_id_categories_id_fk",
-          "tableFrom": "revenue_daily",
-          "tableTo": "categories",
-          "columnsFrom": [
-            "category_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        },
-        "revenue_daily_brand_id_brands_id_fk": {
-          "name": "revenue_daily_brand_id_brands_id_fk",
-          "tableFrom": "revenue_daily",
-          "tableTo": "brands",
-          "columnsFrom": [
-            "brand_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        },
-        "revenue_daily_product_id_products_id_fk": {
-          "name": "revenue_daily_product_id_products_id_fk",
-          "tableFrom": "revenue_daily",
-          "tableTo": "products",
-          "columnsFrom": [
-            "product_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        },
-        "revenue_daily_retailer_id_retailers_id_fk": {
-          "name": "revenue_daily_retailer_id_retailers_id_fk",
-          "tableFrom": "revenue_daily",
-          "tableTo": "retailers",
-          "columnsFrom": [
-            "retailer_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        },
-        "revenue_daily_affiliate_program_id_affiliate_programs_id_fk": {
-          "name": "revenue_daily_affiliate_program_id_affiliate_programs_id_fk",
-          "tableFrom": "revenue_daily",
-          "tableTo": "affiliate_programs",
-          "columnsFrom": [
-            "affiliate_program_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
+      "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
       "checkConstraints": {}

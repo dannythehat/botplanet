@@ -9,13 +9,23 @@ BotPlanet's commercial control centre — not just an affiliate-links table. Thi
 ## Tables (migration 0001)
 | Table | Purpose |
 |---|---|
-| `affiliate_accounts` | Application lifecycle + payout ops: stage/status, application & decision dates, payment threshold/cadence/method label, claim instructions, next expected payment, account manager, terms URL, creative permissions, tax/bank/identity **setup status**, `secret_ref`. |
-| `program_terms_history` | Commission/cookie snapshots over time + verification dates. |
+| `affiliate_accounts` | BotPlanet's **operational** relationship: application lifecycle, payout threshold/cadence/method label, claim instructions, next expected payment, account manager, creative permissions, tax/bank/identity **setup status**, `secret_ref`. **Does not store commission rate or cookie duration** (see ownership rule). |
+| `program_terms_history` | Historical commission/cookie snapshots + verification dates. |
 | `click_events` | Immutable attribution per `/go/:key` redirect (where consent permits). |
 | `commission_transactions` | Conversions imported from networks. An outbound click is **never** assumed to be a sale. |
 | `payouts` | Imported commissions matched to actual network payments. |
-| `revenue_daily` | Daily aggregates by reporting dimension for fast dashboards. |
+| `revenue_daily` | Daily aggregates for fast dashboards (see grain below). |
 | `import_jobs` | CSV/API/postback provenance for every transaction batch. |
+
+## Ownership rule — no duplicated rates
+Commission rate + cookie duration have **one editable source**:
+- `affiliate_programs` = programme identity + **currently-applicable** commercial terms (what offers use).
+- `program_terms_history` = the record of past terms + verification evidence.
+- `affiliate_accounts` = the operational/payout/application relationship, and **references** its programme via `affiliate_program_id`. It never re-stores the rate/cookie, so the two can't drift.
+
+## `revenue_daily` grain & uniqueness
+**Grain:** one row per `date × market × category × brand × product × retailer × affiliate programme`. A dimension intentionally rolled up uses the literal sentinel **`"all"`**, never NULL.
+Because SQLite treats NULLs as distinct (which would permit duplicate aggregate rows), uniqueness is enforced on a deterministic non-null **`aggregation_key`** = `revenueAggregationKey(...)` from `@botplanet/shared` (`date|market|category|brand|product|retailer|programme`, normalised). That key is UNIQUE and is the safe **upsert / rebuild** handle. **Never sum across grains** — e.g. don't add an `all`-products row to per-product rows for the same date.
 
 ## The end-to-end trace this enables
 > *Which visitor journey generated this click → which retailer received it → which transaction came back → how much commission was approved → and was it actually paid?*

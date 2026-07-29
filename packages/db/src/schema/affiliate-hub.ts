@@ -36,9 +36,11 @@ export const affiliateAccounts = sqliteTable(
     decisionDate: integer("decision_date", { mode: "timestamp" }),
     /** Safe external account/publisher reference (NOT a credential). */
     externalAccountRef: text("external_account_ref"),
-    commissionStructureJson: text("commission_structure_json", { mode: "json" }).$type<unknown>(),
-    commissionEffectiveFrom: integer("commission_effective_from", { mode: "timestamp" }),
-    cookieDays: integer("cookie_days"),
+    // OWNERSHIP RULE: commission rate + cookie duration are NOT stored here.
+    // `affiliate_programs` is the single source of currently-applicable commercial
+    // terms (used by offers); `program_terms_history` preserves past terms. An
+    // account references its programme via `affiliate_program_id` — it never
+    // becomes a second editable source for the same rates.
     paymentThresholdMinor: integer("payment_threshold_minor"),
     paymentCadence: text("payment_cadence"), // e.g. net30 | monthly | on_request
     paymentMethodLabel: text("payment_method_label"), // e.g. "PayPal", "ACH" — label only
@@ -185,18 +187,32 @@ export const payouts = sqliteTable(
   (t) => ({ byAccount: index("po_account_idx").on(t.affiliateAccountId) }),
 );
 
-/** Daily revenue aggregates for fast dashboards, by common reporting dimensions. */
+/**
+ * Daily revenue aggregates for fast dashboards.
+ *
+ * GRAIN: one row per (date × market × category × brand × product × retailer ×
+ * affiliate programme). A dimension that is intentionally rolled up uses the
+ * literal sentinel `"all"` (never NULL) so uniqueness is well-defined — SQLite
+ * treats NULLs as distinct, which would allow duplicate aggregate rows.
+ *
+ * `aggregationKey` = revenueAggregationKey(...) from @botplanet/shared: a
+ * deterministic, non-null join of the normalised dimensions. It is UNIQUE and is
+ * the safe upsert / rebuild key. Never sum rows across different grains (i.e. do
+ * not add an "all-products" row to per-product rows for the same date).
+ */
 export const revenueDaily = sqliteTable(
   "revenue_daily",
   {
     id: text("id").primaryKey(),
+    /** Deterministic non-null uniqueness key over the normalised dimensions. */
+    aggregationKey: text("aggregation_key").notNull(),
     date: text("date").notNull(), // yyyy-mm-dd
-    marketId: text("market_id").references(() => markets.id),
-    categoryId: text("category_id").references(() => categories.id),
-    brandId: text("brand_id").references(() => brands.id),
-    productId: text("product_id").references(() => products.id),
-    retailerId: text("retailer_id").references(() => retailers.id),
-    affiliateProgramId: text("affiliate_program_id").references(() => affiliatePrograms.id),
+    marketId: text("market_id"), // "all" encoded in aggregationKey when rolled up
+    categoryId: text("category_id"),
+    brandId: text("brand_id"),
+    productId: text("product_id"),
+    retailerId: text("retailer_id"),
+    affiliateProgramId: text("affiliate_program_id"),
     clicks: integer("clicks").notNull().default(0),
     conversions: integer("conversions").notNull().default(0),
     estimatedCommissionMinor: integer("estimated_commission_minor").notNull().default(0),
@@ -204,13 +220,7 @@ export const revenueDaily = sqliteTable(
     currencyCode: text("currency_code").notNull(),
   },
   (t) => ({
-    byDimensions: uniqueIndex("rd_dimensions_uq").on(
-      t.date,
-      t.marketId,
-      t.productId,
-      t.retailerId,
-      t.affiliateProgramId,
-    ),
+    byKey: uniqueIndex("rd_aggregation_key_uq").on(t.aggregationKey),
     byDate: index("rd_date_idx").on(t.date),
   }),
 );
