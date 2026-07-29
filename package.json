@@ -1,0 +1,30 @@
+{
+  "name": "botplanet",
+  "version": "0.0.0",
+  "private": true,
+  "description": "BotPlanet — global robot shopping & recommendation platform (US-first). Foundation: data model, migrations, deterministic BotMatch scoring. No frontend yet.",
+  "type": "module",
+  "workspaces": [
+    "packages/*"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsc --build",
+    "typecheck": "tsc --build --pretty",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "db:generate": "cd packages/db && drizzle-kit generate"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "drizzle-kit": "^0.30.0",
+    "typescript": "^5.7.0",
+    "vitest": "^2.1.0"
+  },
+  "dependencies": {
+    "drizzle-orm": "^0.38.0",
+    "zod": "^3.24.0"
+  }
+}

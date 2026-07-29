@@ -1,0 +1,221 @@
+/**
+ * Pool-category catalogue seed (PROVISIONAL DRAFT).
+ *
+ * Rules honoured here:
+ *  - Prices are NOT in this file — they live on offers as dated snapshots.
+ *  - No image URLs (rights unconfirmed) — the media table is left empty.
+ *  - Betta SE Plus is typed as `surface_skimmer`, not a full cleaner.
+ *  - The 10th full-cleaner (Dolphin E10, above-ground) is status "proposed",
+ *    pending human confirmation of the above-ground comparison.
+ */
+import type { categories, markets } from "../../src/schema/reference.js";
+import type { brands, products } from "../../src/schema/catalogue.js";
+
+export const SNAPSHOT_DATE = "2026-07-29";
+
+export const marketRows: (typeof markets.$inferInsert)[] = [
+  {
+    id: "us",
+    name: "United States",
+    pathPrefix: "",
+    defaultLocale: "en-US",
+    currencyCode: "USD",
+    measurement: "imperial",
+    launchStatus: "launch",
+    isActive: true,
+  },
+];
+
+export const categoryRows: (typeof categories.$inferInsert)[] = [
+  { id: "cat-pool-cleaners", slug: "robotic-pool-cleaners", name: "Robotic Pool Cleaners", parentId: null },
+];
+
+export const brandRows: (typeof brands.$inferInsert)[] = [
+  { id: "brand-beatbot", slug: "beatbot", name: "Beatbot", maker: "Beatbot", hasDirectAffiliate: true },
+  { id: "brand-dolphin", slug: "dolphin", name: "Dolphin", maker: "Maytronics", hasDirectAffiliate: false, notes: "No direct consumer affiliate programme found; monetise via retailers." },
+  { id: "brand-aiper", slug: "aiper", name: "Aiper", maker: "Aiper", hasDirectAffiliate: true },
+  { id: "brand-wybot", slug: "wybot", name: "WYBOT", maker: "WYBOT", hasDirectAffiliate: true },
+  { id: "brand-polaris", slug: "polaris", name: "Polaris", maker: "Pentair", hasDirectAffiliate: false, notes: "No direct programme; retailer-only." },
+  { id: "brand-betta", slug: "betta", name: "Betta", maker: "Solar Pool Technologies", hasDirectAffiliate: null },
+];
+
+/**
+ * 10 launch products. 9 confirmed + Dolphin E10 (status "proposed").
+ * `status`: published = confirmed for launch draft; proposed = pending review.
+ */
+export const productRows: (typeof products.$inferInsert)[] = [
+  {
+    id: "prod-beatbot-aquasense-2-ultra",
+    slug: "beatbot-aquasense-2-ultra",
+    brandId: "brand-beatbot",
+    categoryId: "cat-pool-cleaners",
+    productClass: "full_cleaner",
+    name: "Beatbot AquaSense 2 Ultra",
+    model: "AquaSense 2 Ultra",
+    environments: ["in_ground"],
+    cleans: ["floor", "walls", "waterline", "water_surface"],
+    powerType: "cordless",
+    priceTier: "ultra",
+    maxPoolLengthFt: null,
+    specsJson: { note: "Premium cordless; also skims the water surface.", snapshotDate: SNAPSHOT_DATE },
+    status: "published",
+  },
+  {
+    id: "prod-aiper-scuba-x1",
+    slug: "aiper-scuba-x1",
+    brandId: "brand-aiper",
+    categoryId: "cat-pool-cleaners",
+    productClass: "full_cleaner",
+    name: "Aiper Scuba X1",
+    model: "Scuba X1",
+    environments: ["in_ground"],
+    cleans: ["floor", "walls", "waterline"],
+    powerType: "cordless",
+    priceTier: "premium",
+    maxPoolLengthFt: null,
+    specsJson: { note: "Cordless; strong on algae.", snapshotDate: SNAPSHOT_DATE },
+    status: "published",
+  },
+  {
+    id: "prod-aiper-scuba-s1",
+    slug: "aiper-scuba-s1",
+    brandId: "brand-aiper",
+    categoryId: "cat-pool-cleaners",
+    productClass: "full_cleaner",
+    name: "Aiper Scuba S1",
+    model: "Scuba S1",
+    environments: ["above_ground", "in_ground"],
+    cleans: ["floor", "walls"],
+    powerType: "cordless",
+    priceTier: "mid",
+    maxPoolLengthFt: null,
+    specsJson: { snapshotDate: SNAPSHOT_DATE },
+    status: "published",
+  },
+  {
+    id: "prod-aiper-seagull-se",
+    slug: "aiper-seagull-se",
+    brandId: "brand-aiper",
+    categoryId: "cat-pool-cleaners",
+    productClass: "full_cleaner",
+    name: "Aiper Seagull SE",
+    model: "Seagull SE",
+    environments: ["above_ground"],
+    cleans: ["floor"],
+    powerType: "cordless",
+    priceTier: "budget",
+    maxPoolLengthFt: null,
+    specsJson: { note: "Budget cordless, floor-only, above-ground.", snapshotDate: SNAPSHOT_DATE },
+    status: "published",
+  },
+  {
+    id: "prod-wybot-c1",
+    slug: "wybot-c1",
+    brandId: "brand-wybot",
+    categoryId: "cat-pool-cleaners",
+    productClass: "full_cleaner",
+    name: "WYBOT C1",
+    model: "C1",
+    environments: ["in_ground"],
+    cleans: ["floor", "walls", "waterline"],
+    powerType: "cordless",
+    priceTier: "mid",
+    maxPoolLengthFt: null,
+    specsJson: { note: "Cordless wall-climbing.", snapshotDate: SNAPSHOT_DATE },
+    status: "published",
+  },
+  {
+    id: "prod-dolphin-nautilus-cc-plus",
+    slug: "dolphin-nautilus-cc-plus",
+    brandId: "brand-dolphin",
+    categoryId: "cat-pool-cleaners",
+    productClass: "full_cleaner",
+    name: "Dolphin Nautilus CC Plus",
+    model: "Nautilus CC Plus (Wi-Fi)",
+    environments: ["in_ground"],
+    cleans: ["floor", "walls", "waterline"],
+    powerType: "corded",
+    priceTier: "mid",
+    maxPoolLengthFt: 50,
+    specsJson: { note: "Corded value; trusted benchmark brand.", snapshotDate: SNAPSHOT_DATE },
+    status: "published",
+  },
+  {
+    id: "prod-dolphin-premier",
+    slug: "dolphin-premier",
+    brandId: "brand-dolphin",
+    categoryId: "cat-pool-cleaners",
+    productClass: "full_cleaner",
+    name: "Dolphin Premier",
+    model: "Premier",
+    environments: ["in_ground"],
+    cleans: ["floor", "walls", "waterline"],
+    powerType: "corded",
+    priceTier: "premium",
+    maxPoolLengthFt: 50,
+    specsJson: { snapshotDate: SNAPSHOT_DATE },
+    status: "published",
+  },
+  {
+    id: "prod-polaris-freedom",
+    slug: "polaris-freedom",
+    brandId: "brand-polaris",
+    categoryId: "cat-pool-cleaners",
+    productClass: "full_cleaner",
+    name: "Polaris FREEDOM",
+    model: "FREEDOM (cordless)",
+    environments: ["in_ground"],
+    cleans: ["floor", "walls", "waterline"],
+    powerType: "cordless",
+    priceTier: "premium",
+    maxPoolLengthFt: 50,
+    specsJson: { snapshotDate: SNAPSHOT_DATE },
+    status: "published",
+  },
+  {
+    id: "prod-betta-se-plus",
+    slug: "betta-se-plus",
+    brandId: "brand-betta",
+    categoryId: "cat-pool-cleaners",
+    // DISTINCT CLASS — never competes as a normal full cleaner.
+    productClass: "surface_skimmer",
+    name: "Betta SE Plus",
+    model: "SE Plus",
+    environments: ["above_ground", "in_ground"],
+    cleans: ["water_surface"],
+    powerType: "solar",
+    priceTier: "budget",
+    maxPoolLengthFt: null,
+    specsJson: { note: "Solar surface skimmer — floating debris only, NOT a floor/wall cleaner.", snapshotDate: SNAPSHOT_DATE },
+    status: "published",
+  },
+  {
+    // CONFIRMED 10th launch product (approved by ChatGPT/Danny, 2026-07-29).
+    // Product identity is confirmed; price / affiliate / image-rights / stock
+    // fields remain provisional snapshots until individually verified.
+    id: "prod-dolphin-e10",
+    slug: "dolphin-e10",
+    brandId: "brand-dolphin",
+    categoryId: "cat-pool-cleaners",
+    productClass: "full_cleaner",
+    name: "Dolphin E10",
+    model: "E10",
+    environments: ["above_ground"],
+    cleans: ["floor"],
+    powerType: "corded",
+    priceTier: "mid",
+    maxPoolLengthFt: 30,
+    specsJson: {
+      note: "Trusted-brand corded above-ground; completes corded-vs-cordless in the above-ground segment. Dolphin Escape held as a later premium above-ground alternative.",
+      snapshotDate: SNAPSHOT_DATE,
+    },
+    status: "published",
+  },
+];
+
+export const productMarketAvailabilityRows = productRows.map((p) => ({
+  id: `pma-${p.id}-us`,
+  productId: p.id as string,
+  marketId: "us",
+  availabilityStatus: "available",
+}));
