@@ -1,0 +1,83 @@
+---
+import Base from "../../../layouts/Base.astro";
+import { getDb, schema } from "../../../lib/db";
+import { usd, freshnessLabel, titleCase } from "../../../lib/format";
+import { and, eq } from "drizzle-orm";
+
+const { category, slug } = Astro.params;
+const db = getDb(Astro.locals);
+
+const product = (
+  await db.select().from(schema.products).where(eq(schema.products.slug, slug!)).limit(1)
+)[0];
+if (!product) return new Response("Product not found", { status: 404 });
+
+const brand = (
+  await db.select().from(schema.brands).where(eq(schema.brands.id, product.brandId)).limit(1)
+)[0];
+
+const offers = await db
+  .select()
+  .from(schema.offers)
+  .where(and(eq(schema.offers.productId, product.id), eq(schema.offers.offerStatus, "active")));
+
+const retailers = await db.select().from(schema.retailers);
+const retailerName = (id: string) => retailers.find((r) => r.id === id)?.name ?? id;
+
+const evidence = await db
+  .select()
+  .from(schema.evidence)
+  .where(eq(schema.evidence.productId, product.id));
+
+offers.sort((a, b) => (a.basePriceMinor ?? Infinity) - (b.basePriceMinor ?? Infinity));
+---
+
+<Base title={`${product.name} — BotPlanet`} description={`${product.name}: specs, offers and suitability.`}>
+  <p class="muted"><a href={`/robots/${category}/`}>← {titleCase(category!)}</a></p>
+  <div class="row" style="justify-content:space-between; align-items:flex-start;">
+    <div>
+      <h1>{product.name}</h1>
+      <div class="row">
+        <span class="pill class">{titleCase(product.productClass)}</span>
+        <span class="pill">{titleCase(product.powerType)}</span>
+        <span class="pill">{(product.environments as string[]).map(titleCase).join(" / ")}</span>
+        <span class="pill">{brand?.name}</span>
+      </div>
+    </div>
+    <a class="btn primary" href={`/botmatch/${category}/`}>Is this right for my pool?</a>
+  </div>
+
+  <h2>Cleans</h2>
+  <div class="row">
+    {(product.cleans as string[]).map((c) => <span class="pill class">{titleCase(c)}</span>)}
+  </div>
+
+  <h2>Current offers</h2>
+  <p class="note">Prices are dated research snapshots — confirm the current price at the retailer. Offer selection favours suitability and freshness, never commission.</p>
+  <table>
+    <thead>
+      <tr><th>Retailer</th><th>Price</th><th>Warranty</th><th>Freshness</th><th></th></tr>
+    </thead>
+    <tbody>
+      {offers.map((o) => (
+        <tr>
+          <td>{retailerName(o.retailerId)}</td>
+          <td class="price" style="font-size:16px;">{usd(o.basePriceMinor)}</td>
+          <td class="muted">{o.warrantySummary ?? "—"}</td>
+          <td><span class="pill">{freshnessLabel(o.freshnessClass)}</span></td>
+          <td>{o.redirectKey ? <a class="btn" href={`/go/${o.redirectKey}`} rel="sponsored nofollow">View offer</a> : null}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+
+  {evidence.length > 0 && (
+    <>
+      <h2>Evidence</h2>
+      {evidence.map((e) => (
+        <p><span class="pill class">{titleCase(e.evidenceLevel)}</span> {e.claim} {e.sourceUrl && <a href={e.sourceUrl} rel="nofollow">source</a>}</p>
+      ))}
+    </>
+  )}
+  <p class="note" style="margin-top:24px;">Affiliate disclosure: BotPlanet may earn a commission from retailer links. This never affects which product is recommended.</p>
+</Base>

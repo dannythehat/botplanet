@@ -1,0 +1,45 @@
+---
+import Base from "../layouts/Base.astro";
+import { getDb, schema } from "../lib/db";
+import { eq } from "drizzle-orm";
+
+const db = getDb(Astro.locals);
+const products = await db
+  .select({ slug: schema.products.slug, name: schema.products.name })
+  .from(schema.products)
+  .where(eq(schema.products.status, "published"))
+  .limit(6);
+---
+
+<Base title="BotPlanet — Find your perfect robot">
+  <section class="hero">
+    <h1>Shop the planet yourself,<br />or let BotPlanet find your perfect robot.</h1>
+    <p class="muted" style="max-width:640px; font-size:18px;">
+      Browse and compare real-world robots normally — or answer a few questions and
+      BotMatch recommends the right one for your needs, on suitability, never commission.
+    </p>
+    <div class="row" style="margin-top:22px;">
+      <a class="btn primary" href="/botmatch/robotic-pool-cleaners/">Start BotMatch</a>
+      <a class="btn" href="/robots/robotic-pool-cleaners/">Browse pool robots</a>
+    </div>
+  </section>
+
+  <h2>Launch category: Robotic Pool Cleaners</h2>
+  <p class="muted">Our first fully-built category. {products.length} products indexed for the US market.</p>
+  <div class="grid" style="margin-top:16px;">
+    {products.map((p) => (
+      <a class="card" href={`/robots/robotic-pool-cleaners/${p.slug}/`}>
+        <span class="pill class">Pool cleaner</span>
+        <h3>{p.name}</h3>
+        <span class="muted">View details & offers →</span>
+      </a>
+    ))}
+  </div>
+
+  <h2>Why BotPlanet is different</h2>
+  <div class="grid">
+    <div class="card"><h3>🎯 Suitability first</h3><p class="muted">BotMatch chooses the best product for you before it ever looks at which retailer pays us.</p></div>
+    <div class="card"><h3>🧾 Honest freshness</h3><p class="muted">Every price shows when it was last checked. No stale "deals".</p></div>
+    <div class="card"><h3>🔍 Real evidence</h3><p class="muted">Claims are labelled by evidence level — researched vs hands-on tested.</p></div>
+  </div>
+</Base>

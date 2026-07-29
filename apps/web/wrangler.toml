@@ -1,0 +1,30 @@
+name = "botplanet-web"
+main = "./dist/_worker.js/index.js"
+compatibility_date = "2025-04-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Static assets produced by the Astro Cloudflare adapter.
+assets = { directory = "./dist", binding = "ASSETS" }
+
+# --- Bindings (dedicated botplanet-* resources) ---
+[[d1_databases]]
+binding = "DB"
+database_name = "botplanet-db"
+database_id = "0ee6da7d-ebc1-46b1-9fe4-e96821891ab7"
+migrations_dir = "../../packages/db/migrations"
+
+[[kv_namespaces]]
+binding = "KV"
+id = "0fc715f587504227a21a131e0ce28f47"
+
+# Astro Cloudflare adapter uses a "SESSION" KV binding for its session store.
+[[kv_namespaces]]
+binding = "SESSION"
+id = "0fc715f587504227a21a131e0ce28f47"
+
+[[r2_buckets]]
+binding = "MEDIA"
+bucket_name = "botplanet-media"
+
+[observability]
+enabled = true
