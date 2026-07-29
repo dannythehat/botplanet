@@ -190,8 +190,9 @@ export const productRows: (typeof products.$inferInsert)[] = [
     status: "published",
   },
   {
-    // PENDING: recommended above-ground pick (see docs/SEED-PROVENANCE.md).
-    // Kept as "proposed" until the above-ground comparison is approved.
+    // CONFIRMED 10th launch product (approved by ChatGPT/Danny, 2026-07-29).
+    // Product identity is confirmed; price / affiliate / image-rights / stock
+    // fields remain provisional snapshots until individually verified.
     id: "prod-dolphin-e10",
     slug: "dolphin-e10",
     brandId: "brand-dolphin",
@@ -205,10 +206,10 @@ export const productRows: (typeof products.$inferInsert)[] = [
     priceTier: "mid",
     maxPoolLengthFt: 30,
     specsJson: {
-      note: "PROPOSED 10th slot: trusted-brand corded above-ground. Completes corded-vs-cordless in the above-ground segment.",
+      note: "Trusted-brand corded above-ground; completes corded-vs-cordless in the above-ground segment. Dolphin Escape held as a later premium above-ground alternative.",
       snapshotDate: SNAPSHOT_DATE,
     },
-    status: "proposed",
+    status: "published",
   },
 ];
 

@@ -18,7 +18,7 @@ packages/
   shared/    market/locale/currency config, product classes, shared domain types
   db/        Drizzle schema (market-aware), SQL migrations, pool seed draft
   scoring/   deterministic BotMatch engine: product suitability + offer ranking (commission-isolated)
-docs/        data model, seed provenance (provisional vs verified), scoring design
+docs/        data model, seed provenance, scoring, affiliate hub, deferred requirements
 ```
 
 ## Commands
@@ -38,4 +38,5 @@ npm run db:generate    # drizzle-kit generate (regenerate SQL from schema)
 - **No credentials or private affiliate tracking parameters** in any seed file.
 - Products and offers are **separate records**.
 - Betta is typed as a **`surface_skimmer`** product class, not a full cleaner.
-- The 10th full-cleaner (above-ground) product is left **pending** review.
+- All **10 launch products confirmed** (Dolphin E10 approved as the above-ground pick); price/affiliate/image fields stay provisional until verified.
+- **Affiliate Hub + attribution** schema (`0001_affiliate_hub`) stores only safe metadata + `secret_ref` — never secrets.

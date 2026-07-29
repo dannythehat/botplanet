@@ -5,3 +5,4 @@ export * from "./catalogue";
 export * from "./commercial";
 export * from "./botmatch";
 export * from "./sessions";
+export * from "./affiliate-hub";

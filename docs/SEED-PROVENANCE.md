@@ -23,10 +23,10 @@ The pool seed (`packages/db/seed/pool`) is a **research draft**, dated **2026-07
 | `email_links_allowed` | conservative default `false` | Only set true after a programme is confirmed to allow it |
 | Evidence rows | provisional, level "researched"/"manufacturer_claimed" | No BotPlanet hands-on testing exists yet |
 
-## The 10th product — PENDING
-The launch shortlist has **9 confirmed** full-cleaner/skimmer products plus one **proposed** slot:
+## The 10th product — CONFIRMED
+All **10 launch products** are now confirmed (`status = "published"`).
 
-- **`prod-dolphin-e10`** (`status = "proposed"`) — recommended above-ground pick from the candidate comparison (trusted-brand, corded, above-ground; ~$529 snapshot; completes the corded-vs-cordless axis in the above-ground segment). Runner-up: Dolphin Escape (premium, ~$799). **Do not treat E10 as locked** until the comparison is approved by ChatGPT/Danny. Its offer (`off-e10-walmart`) is seeded but its redirect link is inactive.
+- **`prod-dolphin-e10`** was approved (ChatGPT + Danny, 2026-07-29) as the trusted-brand, corded, above-ground pick — it completes the corded-vs-cordless axis in the above-ground segment. **Dolphin Escape** (premium, ~$799) is held as a later premium above-ground alternative, not in the initial ten. Product identity is confirmed; its price (`off-e10-walmart`, ~$529 snapshot), affiliate route, image rights and stock remain **provisional** and its redirect link stays inactive until an affiliate programme is approved.
 
 ## Pre-lock confirmations still open
 1. WYBOT & In The Swim affiliate **cookie durations**.

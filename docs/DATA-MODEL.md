@@ -33,6 +33,15 @@ Market-aware from day one. **Products are global; offers and all commercial data
 - `leads` — commercial-robot lead-gen funnel.
 - `audit_log` — offer pauses, config publishes, overrides.
 
+### Affiliate Revenue & Attribution Hub (migration `0001_affiliate_hub`)
+Full detail in `docs/AFFILIATE-HUB.md`. Tables: `affiliate_accounts`, `program_terms_history`, `click_events` (immutable attribution), `commission_transactions`, `payouts`, `revenue_daily`, `import_jobs`. **Secrets are never stored — only `secret_ref` handles + setup status. No personal data in attribution.**
+
+## Indexes
+Common lookups are indexed: products by category/brand; `product_market_availability` unique on (product, market); offers by (product, market) and market; `offer_price_history` by offer; affiliate_programs by market/retailer/brand; `retailer_markets` unique on (retailer, market); recommendation_scores by recommendation; click_events by offer / recommendation / (market, time) / redirect; commission_transactions unique on (network, external_transaction_id) + by program/click/state; revenue_daily unique on the core dimension tuple.
+
+## Known follow-up (non-blocking)
+`scoreProducts` currently gives the pool-size factor full marks once a product passes the hard length exclusion. A later revision should grade it (a robot merely *capable* of a pool vs one *optimally suited* to it). Tracked as a scoring refinement; does not affect commission isolation.
+
 ## Migrations
 Generated from `packages/db/src/schema` via `npm run db:generate` (drizzle-kit, SQLite dialect). Applied with `wrangler d1 migrations apply` once the Cloudflare account/zone are confirmed. No live DB is needed to generate.
 

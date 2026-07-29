@@ -1,5 +1,5 @@
 import { sql } from "drizzle-orm";
-import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
+import { index, integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 import { products } from "./catalogue";
 import { offers } from "./commercial";
 import { categories, markets } from "./reference";
@@ -44,7 +44,7 @@ export const recommendationScores = sqliteTable("recommendation_scores", {
   breakdownJson: text("breakdown_json", { mode: "json" }).$type<unknown>(),
   excluded: integer("excluded", { mode: "boolean" }).notNull().default(false),
   exclusionReason: text("exclusion_reason"),
-});
+}, (t) => ({ byRecommendation: index("rs_reco_idx").on(t.recommendationId) }));
 
 /** Commercial-robot lead-gen funnel (quote / demo / leasing / site assessment). */
 export const leads = sqliteTable("leads", {

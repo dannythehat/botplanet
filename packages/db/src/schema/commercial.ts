@@ -1,5 +1,5 @@
 import { sql } from "drizzle-orm";
-import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
+import { index, integer, sqliteTable, text, uniqueIndex } from "drizzle-orm/sqlite-core";
 import type { FreshnessClass } from "@botplanet/shared";
 import { brands, products } from "./catalogue";
 import { markets } from "./reference";
@@ -25,7 +25,9 @@ export const retailerMarkets = sqliteTable("retailer_markets", {
     .references(() => markets.id),
   approved: integer("approved", { mode: "boolean" }).notNull().default(false),
   shipsToJson: text("ships_to_json", { mode: "json" }).$type<string[]>(),
-});
+}, (t) => ({
+  byRetailerMarket: uniqueIndex("rm_retailer_market_uq").on(t.retailerId, t.marketId),
+}));
 
 /**
  * Affiliate programmes are per-market (Amazon US != Amazon UK). Commission
@@ -51,7 +53,11 @@ export const affiliatePrograms = sqliteTable("affiliate_programs", {
   programUrl: text("program_url"),
   verificationStatus: text("verification_status").notNull().default("provisional"),
   notes: text("notes"),
-});
+}, (t) => ({
+  byMarket: index("ap_market_idx").on(t.marketId),
+  byRetailer: index("ap_retailer_idx").on(t.retailerId),
+  byBrand: index("ap_brand_idx").on(t.brandId),
+}));
 
 /**
  * OFFERS — market-scoped. This is the heart of the product/offer separation.
@@ -101,7 +107,10 @@ export const offers = sqliteTable("offers", {
   updatedAt: integer("updated_at", { mode: "timestamp" })
     .notNull()
     .default(sql`(unixepoch())`),
-});
+}, (t) => ({
+  byProductMarket: index("offers_product_market_idx").on(t.productId, t.marketId),
+  byMarket: index("offers_market_idx").on(t.marketId),
+}));
 
 /** Historical price/stock checks for an offer (freshness + audit). */
 export const offerPriceHistory = sqliteTable("offer_price_history", {
@@ -116,7 +125,7 @@ export const offerPriceHistory = sqliteTable("offer_price_history", {
   checkedAt: integer("checked_at", { mode: "timestamp" })
     .notNull()
     .default(sql`(unixepoch())`),
-});
+}, (t) => ({ byOffer: index("oph_offer_idx").on(t.offerId) }));
 
 /** Central redirect links — the destination can be swapped without editing articles. */
 export const redirectLinks = sqliteTable("redirect_links", {

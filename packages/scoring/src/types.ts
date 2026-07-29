@@ -96,5 +96,15 @@ export interface OfferRankingResult {
   productId: string;
   winner: OfferCandidate | null;
   ranked: OfferCandidate[];
-  tieBreakUsed: boolean; // true if commission decided the winner among equivalents
+  /**
+   * True whenever commission materially decided the winner among equivalents —
+   * including when the commission-winning offer was already first under the
+   * deterministic customer-value ordering. False when no commission difference
+   * existed among the equivalents (or there was only one candidate).
+   */
+  tieBreakUsed: boolean;
+  /** Audit: offerIds judged equivalent to the pre-tie-break leader (includes it). */
+  equivalents: string[];
+  /** Audit: the tolerances under which `equivalents` were judged equivalent. */
+  equivalenceBasis: OfferTolerances | null;
 }

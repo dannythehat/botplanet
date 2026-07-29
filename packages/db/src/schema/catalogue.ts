@@ -1,5 +1,5 @@
 import { sql } from "drizzle-orm";
-import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
+import { index, integer, sqliteTable, text, uniqueIndex } from "drizzle-orm/sqlite-core";
 import type {
   CleaningSurface,
   PoolEnvironment,
@@ -56,7 +56,10 @@ export const products = sqliteTable("products", {
   updatedAt: integer("updated_at", { mode: "timestamp" })
     .notNull()
     .default(sql`(unixepoch())`),
-});
+}, (t) => ({
+  byCategory: index("products_category_idx").on(t.categoryId),
+  byBrand: index("products_brand_idx").on(t.brandId),
+}));
 
 /** Which markets a global product is offered in. */
 export const productMarketAvailability = sqliteTable(
@@ -72,6 +75,7 @@ export const productMarketAvailability = sqliteTable(
     availabilityStatus: text("availability_status").notNull(), // available | unavailable | discontinued
     marketVariantModel: text("market_variant_model"),
   },
+  (t) => ({ byProductMarket: uniqueIndex("pma_product_market_uq").on(t.productId, t.marketId) }),
 );
 
 /**
