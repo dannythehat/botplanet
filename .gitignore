@@ -1,0 +1,25 @@
+# dependencies
+node_modules/
+.pnpm-store/
+
+# build output
+dist/
+*.tsbuildinfo
+
+# local dev / secrets — NEVER commit secrets or affiliate credentials
+.env
+.env.*
+!.env.example
+.dev.vars
+.wrangler/
+
+# local databases
+*.sqlite
+*.sqlite3
+*.db
+
+# os / editor
+.DS_Store
+*.log
+.idea/
+.vscode/
