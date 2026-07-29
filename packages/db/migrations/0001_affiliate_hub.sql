@@ -163,7 +163,13 @@ CREATE TABLE `revenue_daily` (
 	`conversions` integer DEFAULT 0 NOT NULL,
 	`estimated_commission_minor` integer DEFAULT 0 NOT NULL,
 	`confirmed_commission_minor` integer DEFAULT 0 NOT NULL,
-	`currency_code` text NOT NULL
+	`currency_code` text NOT NULL,
+	FOREIGN KEY (`market_id`) REFERENCES `markets`(`id`) ON UPDATE no action ON DELETE no action,
+	FOREIGN KEY (`category_id`) REFERENCES `categories`(`id`) ON UPDATE no action ON DELETE no action,
+	FOREIGN KEY (`brand_id`) REFERENCES `brands`(`id`) ON UPDATE no action ON DELETE no action,
+	FOREIGN KEY (`product_id`) REFERENCES `products`(`id`) ON UPDATE no action ON DELETE no action,
+	FOREIGN KEY (`retailer_id`) REFERENCES `retailers`(`id`) ON UPDATE no action ON DELETE no action,
+	FOREIGN KEY (`affiliate_program_id`) REFERENCES `affiliate_programs`(`id`) ON UPDATE no action ON DELETE no action
 );
 --> statement-breakpoint
 CREATE UNIQUE INDEX `rd_aggregation_key_uq` ON `revenue_daily` (`aggregation_key`);--> statement-breakpoint

@@ -1,7 +1,7 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "ca4a93e0-5d53-4b3d-a5fa-5c4663aec712",
+  "id": "02a562f7-9925-4500-92cb-1469c95587ab",
   "prevId": "d025f62b-127a-4d81-a8c5-1a2a41469e0c",
   "tables": {
     "categories": {
@@ -3298,7 +3298,86 @@
           "isUnique": false
         }
       },
-      "foreignKeys": {},
+      "foreignKeys": {
+        "revenue_daily_market_id_markets_id_fk": {
+          "name": "revenue_daily_market_id_markets_id_fk",
+          "tableFrom": "revenue_daily",
+          "tableTo": "markets",
+          "columnsFrom": [
+            "market_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "revenue_daily_category_id_categories_id_fk": {
+          "name": "revenue_daily_category_id_categories_id_fk",
+          "tableFrom": "revenue_daily",
+          "tableTo": "categories",
+          "columnsFrom": [
+            "category_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "revenue_daily_brand_id_brands_id_fk": {
+          "name": "revenue_daily_brand_id_brands_id_fk",
+          "tableFrom": "revenue_daily",
+          "tableTo": "brands",
+          "columnsFrom": [
+            "brand_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "revenue_daily_product_id_products_id_fk": {
+          "name": "revenue_daily_product_id_products_id_fk",
+          "tableFrom": "revenue_daily",
+          "tableTo": "products",
+          "columnsFrom": [
+            "product_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "revenue_daily_retailer_id_retailers_id_fk": {
+          "name": "revenue_daily_retailer_id_retailers_id_fk",
+          "tableFrom": "revenue_daily",
+          "tableTo": "retailers",
+          "columnsFrom": [
+            "retailer_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "revenue_daily_affiliate_program_id_affiliate_programs_id_fk": {
+          "name": "revenue_daily_affiliate_program_id_affiliate_programs_id_fk",
+          "tableFrom": "revenue_daily",
+          "tableTo": "affiliate_programs",
+          "columnsFrom": [
+            "affiliate_program_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
       "checkConstraints": {}

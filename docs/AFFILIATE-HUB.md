@@ -21,11 +21,16 @@ BotPlanet's commercial control centre — not just an affiliate-links table. Thi
 Commission rate + cookie duration have **one editable source**:
 - `affiliate_programs` = programme identity + **currently-applicable** commercial terms (what offers use).
 - `program_terms_history` = the record of past terms + verification evidence.
-- `affiliate_accounts` = the operational/payout/application relationship, and **references** its programme via `affiliate_program_id`. It never re-stores the rate/cookie, so the two can't drift.
+- `affiliate_accounts` = the operational/payout/application relationship, and **references** its programme via `affiliate_program_id`. It never re-stores the rate/cookie, so the two can't drift. **`affiliate_program_id` is nullable by design** — an account can exist in the early application pipeline (identified/researching/contacted) before a programme record is created and linked; once linked it should not be unset.
 
-## `revenue_daily` grain & uniqueness
-**Grain:** one row per `date × market × category × brand × product × retailer × affiliate programme`. A dimension intentionally rolled up uses the literal sentinel **`"all"`**, never NULL.
-Because SQLite treats NULLs as distinct (which would permit duplicate aggregate rows), uniqueness is enforced on a deterministic non-null **`aggregation_key`** = `revenueAggregationKey(...)` from `@botplanet/shared` (`date|market|category|brand|product|retailer|programme`, normalised). That key is UNIQUE and is the safe **upsert / rebuild** handle. **Never sum across grains** — e.g. don't add an `all`-products row to per-product rows for the same date.
+## `revenue_daily` grain & uniqueness (two-layer model)
+**Grain:** one row per `date × market × category × brand × product × retailer × affiliate programme`.
+
+The model deliberately separates the relational columns from the uniqueness key:
+- **Relational dimension columns stay `NULL`** when a dimension is rolled up — they are **NOT** set to `"all"`. They keep their foreign keys, so referential integrity holds and no fake id is ever written into an entity-referencing column.
+- **Uniqueness** is enforced by a separate deterministic, non-null **`aggregation_key`** = `revenueAggregationKey(...)` from `@botplanet/shared` (`date|market|category|brand|product|retailer|programme`, normalised, with the literal **`"all"`** for rolled-up dimensions). SQLite treats NULLs as distinct, so uniqueness lives on this non-null key, not on the nullable columns. It is UNIQUE and is the safe **upsert / rebuild** handle.
+
+**Never sum across grains** — e.g. don't add an `all`-products row to per-product rows for the same date.
 
 ## The end-to-end trace this enables
 > *Which visitor journey generated this click → which retailer received it → which transaction came back → how much commission was approved → and was it actually paid?*

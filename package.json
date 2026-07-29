@@ -15,7 +15,7 @@
     "typecheck": "tsc --build --pretty",
     "test": "vitest run",
     "test:watch": "vitest",
-    "db:generate": "drizzle-kit generate --config packages/db/drizzle.config.ts"
+    "db:generate": "cd packages/db && drizzle-kit generate"
   },
   "devDependencies": {
     "@types/node": "^22.10.0",

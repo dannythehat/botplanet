@@ -25,6 +25,11 @@ export const affiliateAccounts = sqliteTable(
   "affiliate_accounts",
   {
     id: text("id").primaryKey(),
+    // NULLABLE BY DESIGN: an account may exist in the early application pipeline
+    // (identified / researching / contacted) before its `affiliate_programs`
+    // record is created and linked. Once linked, the programme is the single
+    // source of commission/cookie terms (see ownership rule) and should not be
+    // unset. Not made NOT NULL so a pre-link lifecycle state is representable.
     affiliateProgramId: text("affiliate_program_id").references(() => affiliatePrograms.id),
     network: text("network").notNull(),
     marketId: text("market_id")
@@ -191,28 +196,35 @@ export const payouts = sqliteTable(
  * Daily revenue aggregates for fast dashboards.
  *
  * GRAIN: one row per (date × market × category × brand × product × retailer ×
- * affiliate programme). A dimension that is intentionally rolled up uses the
- * literal sentinel `"all"` (never NULL) so uniqueness is well-defined — SQLite
- * treats NULLs as distinct, which would allow duplicate aggregate rows.
+ * affiliate programme).
  *
- * `aggregationKey` = revenueAggregationKey(...) from @botplanet/shared: a
- * deterministic, non-null join of the normalised dimensions. It is UNIQUE and is
- * the safe upsert / rebuild key. Never sum rows across different grains (i.e. do
- * not add an "all-products" row to per-product rows for the same date).
+ * TWO-LAYER MODEL (deliberate):
+ *  - The relational dimension columns below stay **NULL** when a dimension is
+ *    rolled up. They keep their foreign keys, so referential integrity holds and
+ *    the `"all"` sentinel is NEVER written into a column meant to reference a
+ *    real entity.
+ *  - Uniqueness is enforced separately by `aggregationKey` — a deterministic,
+ *    non-null string (`revenueAggregationKey(...)`, `@botplanet/shared`) where a
+ *    rolled-up dimension is encoded as the literal `"all"`. This sidesteps
+ *    SQLite treating NULLs as distinct (which would allow duplicate rows).
+ *
+ * Never sum rows across grains (e.g. don't add an all-products row to per-product
+ * rows for the same date).
  */
 export const revenueDaily = sqliteTable(
   "revenue_daily",
   {
     id: text("id").primaryKey(),
-    /** Deterministic non-null uniqueness key over the normalised dimensions. */
+    /** Deterministic non-null uniqueness key. Rolled-up dimensions encoded as "all". */
     aggregationKey: text("aggregation_key").notNull(),
     date: text("date").notNull(), // yyyy-mm-dd
-    marketId: text("market_id"), // "all" encoded in aggregationKey when rolled up
-    categoryId: text("category_id"),
-    brandId: text("brand_id"),
-    productId: text("product_id"),
-    retailerId: text("retailer_id"),
-    affiliateProgramId: text("affiliate_program_id"),
+    // Relational columns stay NULL when rolled up (never "all"); FKs preserved.
+    marketId: text("market_id").references(() => markets.id),
+    categoryId: text("category_id").references(() => categories.id),
+    brandId: text("brand_id").references(() => brands.id),
+    productId: text("product_id").references(() => products.id),
+    retailerId: text("retailer_id").references(() => retailers.id),
+    affiliateProgramId: text("affiliate_program_id").references(() => affiliatePrograms.id),
     clicks: integer("clicks").notNull().default(0),
     conversions: integer("conversions").notNull().default(0),
     estimatedCommissionMinor: integer("estimated_commission_minor").notNull().default(0),
