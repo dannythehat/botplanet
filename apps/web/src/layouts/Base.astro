@@ -1,10 +1,49 @@
 ---
-import { TRUST_LINKS } from "../lib/site";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import {
+  buildMeta, isPreviewHost, schemaGraph, organizationSchema, websiteSchema, breadcrumbSchema, type Crumb,
+} from "../lib/seo";
+
 interface Props {
   title: string;
   description?: string;
+  /** Canonical path on production domain; defaults to current pathname. */
+  path?: string;
+  ogImage?: string;
+  ogType?: string;
+  noindex?: boolean;
+  breadcrumbs?: Crumb[];
+  /** Extra JSON-LD nodes (Product, Article, FAQPage, ItemList, Person…). */
+  schema?: (Record<string, unknown> | null | undefined)[];
+  /** Constrain main content width for long-form reading. */
+  narrow?: boolean;
 }
-const { title, description = "Shop the planet yourself, or let BotPlanet find your perfect robot." } = Astro.props;
+
+const {
+  title,
+  description = "Shop the planet yourself, or let BotPlanet find your perfect robot.",
+  path,
+  ogImage,
+  ogType,
+  noindex,
+  breadcrumbs = [],
+  schema = [],
+  narrow = false,
+} = Astro.props;
+
+const host = Astro.request.headers.get("host");
+const canonicalPath = path ?? Astro.url.pathname;
+const meta = buildMeta({ title, description, path: canonicalPath, ogImage, ogType, noindex }, host);
+const preview = isPreviewHost(host);
+
+const graph = schemaGraph(
+  organizationSchema(),
+  websiteSchema(),
+  breadcrumbs.length ? breadcrumbSchema(breadcrumbs) : null,
+  ...schema,
+);
 ---
 
 <!doctype html>
@@ -12,156 +51,106 @@ const { title, description = "Shop the planet yourself, or let BotPlanet find yo
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content={description} />
+    <title>{meta.title}</title>
+    <meta name="description" content={meta.description} />
+    <link rel="canonical" href={meta.canonical} />
+    <meta name="robots" content={meta.robots} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary" />
-    <title>{title}</title>
+    <meta property="og:site_name" content="BotPlanet" />
+    <meta property="og:title" content={meta.ogTitle} />
+    <meta property="og:description" content={meta.ogDescription} />
+    <meta property="og:type" content={meta.ogType} />
+    <meta property="og:url" content={meta.ogUrl} />
+    <meta property="og:image" content={meta.ogImage} />
+    <meta name="twitter:card" content={meta.twitterCard} />
+    <meta name="twitter:title" content={meta.ogTitle} />
+    <meta name="twitter:description" content={meta.ogDescription} />
+    <meta name="twitter:image" content={meta.ogImage} />
+    <slot name="head" />
+    <script type="application/ld+json" set:html={JSON.stringify(graph)} />
     <style is:global>
       :root {
-        --bg: #050507;
-        --panel: #0d0d10;
-        --panel-2: #15151a;
-        --text: #f5f5f7;
-        --muted: #8b8b95;
-        --accent: #7aa2ff; /* used sparingly — colour comes from products */
-        --border: #212127;
-        --border-2: #33333c;
-        --radius: 14px;
+        --bg: #050507; --panel: #0d0d10; --panel-2: #15151a; --text: #f5f5f7;
+        --muted: #8b8b95; --accent: #7aa2ff; --border: #212127; --border-2: #33333c;
+        --ok: #5bd39a; --warn: #e0b657; --bad: #e0796b; --radius: 14px;
       }
       * { box-sizing: border-box; }
       html {
-        /* deep space: subtle cosmic glow at the top over near-black */
-        background:
-          radial-gradient(1100px 600px at 50% -160px, rgba(80,100,170, 0.10), transparent),
-          var(--bg);
+        background: radial-gradient(1100px 600px at 50% -160px, rgba(80,100,170, 0.10), transparent), var(--bg);
+        scroll-behavior: smooth;
       }
+      @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; animation: none !important; } }
       body {
-        margin: 0;
-        background: transparent;
-        color: var(--text);
+        margin: 0; background: transparent; color: var(--text);
         font: 16px/1.65 ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif;
-        -webkit-font-smoothing: antialiased;
-        letter-spacing: -0.011em;
+        -webkit-font-smoothing: antialiased; letter-spacing: -0.011em;
       }
-      /* faint starfield, fixed behind everything */
       body::before {
-        content: "";
-        position: fixed;
-        inset: 0;
-        z-index: -1;
-        pointer-events: none;
+        content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
         background-image:
           radial-gradient(1px 1px at 24px 32px, rgba(255,255,255,0.35), transparent),
           radial-gradient(1px 1px at 96px 128px, rgba(255,255,255,0.22), transparent),
           radial-gradient(1.4px 1.4px at 168px 64px, rgba(255,255,255,0.30), transparent),
           radial-gradient(1px 1px at 208px 190px, rgba(255,255,255,0.18), transparent),
           radial-gradient(1px 1px at 60px 210px, rgba(255,255,255,0.22), transparent);
-        background-size: 240px 240px;
-        opacity: 0.7;
+        background-size: 240px 240px; opacity: 0.7;
       }
       a { color: var(--text); text-decoration: none; }
       a:hover { color: #fff; }
+      :focus-visible { outline: 2px solid #7aa2ff; outline-offset: 2px; border-radius: 4px; }
       .wrap { max-width: 1120px; margin: 0 auto; padding: 0 22px; }
+      header.site { border-bottom: 1px solid var(--border); background: rgba(5,5,7,0.72); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 40; }
 
-      header.site {
-        border-bottom: 1px solid var(--border);
-        background: rgba(5, 5, 7, 0.72);
-        backdrop-filter: blur(12px);
-        position: sticky; top: 0; z-index: 20;
-      }
-      header.site .bar { display: flex; align-items: center; gap: 26px; height: 66px; }
-      .logo { font-weight: 700; font-size: 20px; letter-spacing: -0.02em; color: var(--text); display: flex; align-items: center; }
-      .logo span { color: var(--muted); font-weight: 600; }
-      nav.main { display: flex; gap: 22px; flex-wrap: wrap; }
-      nav.main a { color: var(--muted); font-weight: 500; font-size: 14px; }
-      nav.main a:hover { color: var(--text); }
-      .cta { margin-left: auto; background: #fff; color: #050507; padding: 9px 18px; border-radius: 999px; font-weight: 600; font-size: 14px; }
-      .cta:hover { background: #e7e7ea; color: #050507; }
-
-      main { padding: 54px 0 96px; }
-      h1 { font-size: clamp(32px, 5.4vw, 56px); line-height: 1.03; letter-spacing: -0.038em; margin: 0 0 16px; font-weight: 700; }
-      h2 { font-size: 25px; letter-spacing: -0.022em; margin: 48px 0 18px; font-weight: 640; }
+      main { padding: 34px 0 40px; }
+      main.narrow .wrap { max-width: 760px; }
+      h1 { font-size: clamp(30px, 5vw, 52px); line-height: 1.04; letter-spacing: -0.036em; margin: 0 0 16px; font-weight: 700; }
+      h2 { font-size: 25px; letter-spacing: -0.022em; margin: 44px 0 16px; font-weight: 640; }
+      h3 { letter-spacing: -0.012em; }
+      p { margin: 0 0 14px; }
       .muted { color: var(--muted); }
+      .lede { font-size: 18px; line-height: 1.6; color: #c9c9d1; max-width: 680px; }
 
       .grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); }
-      .card {
-        background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius);
-        padding: 20px; display: flex; flex-direction: column; gap: 9px;
-        transition: border-color 0.16s ease, transform 0.16s ease;
-      }
+      .card { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; display: flex; flex-direction: column; gap: 9px; transition: border-color 0.16s ease, transform 0.16s ease; }
       a.card:hover { border-color: var(--border-2); transform: translateY(-2px); }
       .card h3 { margin: 0; font-size: 17px; font-weight: 600; letter-spacing: -0.01em; }
 
-      .pill {
-        display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase;
-        padding: 4px 10px; border-radius: 999px; background: var(--panel-2); color: var(--muted); border: 1px solid var(--border);
-      }
+      .pill { display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; padding: 4px 10px; border-radius: 999px; background: var(--panel-2); color: var(--muted); border: 1px solid var(--border); }
       .pill.class { color: var(--text); border-color: var(--border-2); }
+      .pill.ok { color: var(--ok); border-color: #244; } .pill.warn { color: var(--warn); border-color: #443; } .pill.bad { color: var(--bad); border-color: #533; }
       .price { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; }
 
-      .btn {
-        display: inline-block; background: transparent; border: 1px solid var(--border-2); color: var(--text);
-        padding: 10px 17px; border-radius: 999px; font-weight: 600; font-size: 14px; transition: 0.16s ease;
-      }
+      .btn { display: inline-block; background: transparent; border: 1px solid var(--border-2); color: var(--text); padding: 10px 17px; border-radius: 999px; font-weight: 600; font-size: 14px; transition: 0.16s ease; cursor: pointer; }
       .btn:hover { border-color: #55555f; color: #fff; }
       .btn.primary { background: #fff; color: #050507; border-color: #fff; }
       .btn.primary:hover { background: #e7e7ea; color: #050507; }
+      .btn.big { padding: 13px 24px; font-size: 15px; }
 
       .row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
-      .hero {
-        position: relative; overflow: hidden;
-        background:
-          radial-gradient(600px 240px at 80% -20%, rgba(90,110,190, 0.14), transparent),
-          var(--panel);
-        border: 1px solid var(--border); border-radius: 22px; padding: 52px; margin-bottom: 36px;
-      }
+      .hero { position: relative; overflow: hidden; background: radial-gradient(600px 240px at 80% -20%, rgba(90,110,190,0.14), transparent), var(--panel); border: 1px solid var(--border); border-radius: 22px; padding: 52px; margin-bottom: 36px; }
 
       table { width: 100%; border-collapse: collapse; font-size: 14px; }
       th, td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--border); }
       th { color: var(--muted); font-weight: 600; font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.04em; }
+      .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 
-      footer.site { border-top: 1px solid var(--border); color: var(--muted); font-size: 13px; padding: 36px 0; margin-top: 40px; }
       .note { font-size: 12.5px; color: var(--muted); }
-      .badge-preview {
-        position: fixed; bottom: 12px; right: 12px; background: var(--panel); color: var(--muted);
-        border: 1px solid var(--border); padding: 6px 11px; border-radius: 8px; font-size: 11.5px; z-index: 50;
-      }
-      /* form controls (space/premium) */
-      select, input[type="number"], input[type="email"] {
-        background: var(--panel-2); color: var(--text); border: 1px solid var(--border-2);
-        border-radius: 10px; padding: 11px 13px; font-size: 15px;
-      }
-      select:focus, input:focus { outline: none; border-color: #55555f; }
+      .badge-preview { position: fixed; bottom: 12px; right: 12px; background: var(--panel); color: var(--muted); border: 1px solid var(--border); padding: 6px 11px; border-radius: 8px; font-size: 11.5px; z-index: 50; }
+      select, input[type="number"], input[type="email"], input[type="text"], input[type="search"], textarea { background: var(--panel-2); color: var(--text); border: 1px solid var(--border-2); border-radius: 10px; padding: 11px 13px; font-size: 15px; font-family: inherit; }
+      select:focus, input:focus, textarea:focus { outline: none; border-color: #7aa2ff; }
+      .skip { position: absolute; left: -999px; } .skip:focus { left: 12px; top: 12px; z-index: 100; background: #fff; color: #000; padding: 8px 12px; border-radius: 8px; }
     </style>
   </head>
   <body>
-    <header class="site">
-      <div class="wrap bar">
-        <a class="logo" href="/"><img src="/favicon.svg" alt="" width="30" height="30" style="vertical-align:-8px;margin-right:9px" />Bot<span>Planet</span></a>
-        <nav class="main">
-          <a href="/robots/robotic-pool-cleaners/">Shop Robots</a>
-          <a href="/compare/robotic-pool-cleaners/">Compare</a>
-          <a href="/botmatch/robotic-pool-cleaners/">Find My Robot</a>
-        </nav>
-        <a class="cta" href="/botmatch/robotic-pool-cleaners/">Start BotMatch</a>
-      </div>
-    </header>
-    <main>
+    <a class="skip" href="#main">Skip to content</a>
+    <Header />
+    <main class:list={[{ narrow }]} id="main">
       <div class="wrap">
+        <Breadcrumbs items={breadcrumbs} />
         <slot />
       </div>
     </main>
-    <footer class="site">
-      <div class="wrap">
-        <nav class="main" style="margin-bottom:14px;">
-          {TRUST_LINKS.map((l) => <a href={l.href}>{l.label}</a>)}
-        </nav>
-        BotPlanet — US preview. Prices are research snapshots, not live truth. Affiliate links are disclosed. Not yet a live commercial site.
-      </div>
-    </footer>
-    <div class="badge-preview">Preview build — provisional data</div>
+    <Footer />
+    {preview && <div class="badge-preview">Preview build · provisional data</div>}
   </body>
 </html>
