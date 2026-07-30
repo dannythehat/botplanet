@@ -11,15 +11,17 @@
  *    APPROVED & LIVE for all 10; Awin/WYBOT is EU/UK only; CJ/Aiper pending.
  *    https://app.notion.com/p/3ade30f1e54081a19981db2536055324
  *  - D1 affiliate_programs.amazon_us.image_permission =
- *    "Product images via Associates/PA-API per terms" (terms_source: Amazon
- *    Associates Operating Agreement; status active/verified; all 10 wired to /go).
+ *    "Amazon Program Content via approved Associates tools / Creators API" (terms_source:
+ *    Amazon Associates Operating Agreement; status active/verified; all 10 wired to /go).
  *  - D1 affiliate_accounts: amazon_us approved/active_partner (botplanet-20);
  *    awin approved but market_id=uk ("not usable for US traffic"); cj pending.
  *
- * HARD RULES:
- *  - Amazon images must be Amazon-hosted, obtained via an approved mechanism
- *    (PA-API / SiteStripe / Amazon link tools), shown in connection with our
- *    tracked Amazon link (live via /go, tag botplanet-20), and kept current.
+ * HARD RULES (Amazon Program Content):
+ *  - Obtained only via Amazon-approved Associates tools (Product Links etc.) or the
+ *    Creators API — never scraped, guessed image URLs, or unapproved downloads.
+ *  - Amazon-hosted where the supplied mechanism requires it; shown with our
+ *    compliant tracked Amazon Special Links (live via /go, tag botplanet-20).
+ *  - Not altered except permitted proportional resizing.
  *  - No scraped/generic photo ever substitutes for a real product image.
  *  - `supportsTestedClaim` is NEVER true unless it's original BotPlanet capture.
  */
@@ -123,9 +125,9 @@ const AMZ = {
   territory: "US",
   imageSourceNow: "Amazon-hosted product images via the Associates programme",
   rightsBasis:
-    "Amazon Associates Operating Agreement — display Amazon-hosted product images in connection with our tracked Amazon link (live via /go, tag botplanet-20). Recorded in D1 image_permission.",
+    "Amazon grants a limited licence to display Amazon Program Content on the approved site in connection with the Associates programme (account botplanet-20), shown with compliant tracked Amazon Special Links (live via /go). Recorded in D1 image_permission.",
   accessStatus:
-    "Available now via SiteStripe / Amazon associate image links (manual); PA-API automated image feed pending Amazon's qualifying-sales threshold.",
+    "Amazon Program Content via Amazon-approved Product Links / Associates linking tools; automated product-image access will use the supported Creators API when available.",
   rightsStatus: "available_now" as const,
   assetStatus: "rights_available_not_ingested" as const,
   blocker: null,
@@ -133,6 +135,19 @@ const AMZ = {
   providerEvidence: AMZ_EVIDENCE,
   dannyAction: null,
 };
+
+/** The compliant Amazon Program Content basis + rules (established at Job 2). */
+export const AMAZON_IMAGE_COMPLIANCE: string[] = [
+  "Amazon Associates US account botplanet-20 is approved and active.",
+  "Amazon grants a limited licence to display Amazon Program Content on the approved site in connection with participation in the Associates programme.",
+  "Images must be obtained through Amazon-approved Associates tools or the Creators API.",
+  "Images must remain Amazon-hosted where required by the supplied mechanism.",
+  "Images must be shown with compliant tracked Amazon Special Links.",
+  "Content must not be altered except for permitted proportional resizing.",
+  "No scraping, guessed image URLs or unapproved downloading.",
+  "The Creators API is the current supported automated image/data interface (PA-API 5 is deprecated).",
+  "Actual asset ingestion and product-page wiring occur in the later implementation job; Job 2 establishes the lawful source, rights registry and compliance rules.",
+];
 
 const CJ_EVIDENCE =
   "CJ Advertiser Lookup adv 6404897 (relationship-status: notjoined = pending); CJ dashboard shows submitted application";

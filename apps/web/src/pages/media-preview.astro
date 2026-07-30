@@ -7,7 +7,7 @@ import PoolSizeShape from "../components/diagrams/PoolSizeShape.astro";
 import BotMatchExplainer from "../components/diagrams/BotMatchExplainer.astro";
 import CategoryHero from "../components/diagrams/CategoryHero.astro";
 import ProductVisual from "../components/ProductVisual.astro";
-import { ORIGINAL_ASSETS, PRODUCT_IMAGE_PLAN, mediaStats } from "../content/media";
+import { ORIGINAL_ASSETS, PRODUCT_IMAGE_PLAN, mediaStats, AMAZON_IMAGE_COMPLIANCE } from "../content/media";
 
 const s = mediaStats();
 ---
@@ -49,6 +49,13 @@ const s = mediaStats();
     </tbody>
   </table></div>
 
+  <h2>Amazon Program Content — compliance basis</h2>
+  <div class="card">
+    <ul style="margin:0; padding-left:18px; line-height:1.8;">
+      {AMAZON_IMAGE_COMPLIANCE.map((r) => <li>{r}</li>)}
+    </ul>
+  </div>
+
   <h2>Product-image rights reconciliation</h2>
   <p class="note">Reconciled against the Affiliate Programme Status tracker + live D1. <strong>All 10 products have a lawful image source today — Amazon Associates</strong> (approved, live, all wired to /go). "Not ingested" means the real image file isn't fetched/wired yet, not that rights are missing. Until wired, tiles use the branded placeholder — never a scraped photo.</p>
   <div class="table-wrap"><table>
@@ -71,7 +78,7 @@ const s = mediaStats();
       ))}
     </tbody>
   </table></div>
-  <p class="note" style="margin-top:10px;">Evidence: <a href="https://app.notion.com/p/3ade30f1e54081a19981db2536055324">Affiliate Programme Status tracker</a> · D1 <span class="mono">affiliate_programs.amazon_us.image_permission</span> = "Product images via Associates/PA-API per terms" · Amazon Associates <span class="mono">botplanet-20</span>.</p>
+  <p class="note" style="margin-top:10px;">Evidence: <a href="https://app.notion.com/p/3ade30f1e54081a19981db2536055324">Affiliate Programme Status tracker</a> · D1 <span class="mono">affiliate_programs.amazon_us.image_permission</span> = "Amazon Program Content via approved Associates tools / Creators API" · Amazon Associates <span class="mono">botplanet-20</span>.</p>
 </Base>
 <style>
   .stack { display: grid; gap: 26px; }
