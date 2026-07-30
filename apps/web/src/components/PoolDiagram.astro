@@ -1,0 +1,27 @@
+---
+// Original BotPlanet diagram: where a robot cleans. Pure inline SVG (no assets).
+---
+<figure style="margin:0;">
+  <svg viewBox="0 0 640 300" width="100%" role="img" aria-label="Pool cross-section showing floor, walls, waterline and water surface cleaning zones" style="max-width:640px; border:1px solid var(--border); border-radius:14px; background:var(--panel);">
+    <!-- pool shell -->
+    <path d="M60 60 L60 240 L580 240 L580 60" fill="none" stroke="#3a4a66" stroke-width="6" stroke-linecap="round"/>
+    <!-- water -->
+    <rect x="63" y="90" width="514" height="147" fill="#173a4d" opacity="0.85"/>
+    <!-- surface line -->
+    <line x1="63" y1="92" x2="577" y2="92" stroke="#4fd1c5" stroke-width="3" stroke-dasharray="6 5"/>
+    <!-- robot -->
+    <rect x="300" y="212" width="46" height="24" rx="6" fill="#7c93ff"/>
+    <circle cx="311" cy="236" r="5" fill="#0b0f17"/>
+    <circle cx="335" cy="236" r="5" fill="#0b0f17"/>
+
+    <!-- labels -->
+    <g font-family="system-ui, sans-serif" font-size="14" font-weight="700">
+      <text x="70" y="82" fill="#4fd1c5">Water surface (skimmers)</text>
+      <text x="360" y="112" fill="#93a1b8">Waterline</text>
+      <line x1="345" y1="107" x2="577" y2="94" stroke="#93a1b8" stroke-width="1"/>
+      <text x="20" y="160" fill="#93a1b8" transform="rotate(-90 20 160)">Walls</text>
+      <text x="300" y="262" fill="#e8edf6">Floor</text>
+    </g>
+  </svg>
+  <figcaption class="note" style="margin-top:8px;">Where a robot cleans — full cleaners handle floor, walls and the waterline; surface skimmers handle floating debris only.</figcaption>
+</figure>

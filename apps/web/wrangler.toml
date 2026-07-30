@@ -2,6 +2,7 @@ name = "botplanet-web"
 main = "./dist/_worker.js/index.js"
 compatibility_date = "2025-04-01"
 compatibility_flags = ["nodejs_compat"]
+# Custom domain (botplanet.io) is managed in the Cloudflare dashboard, not here.
 
 # Static assets produced by the Astro Cloudflare adapter.
 assets = { directory = "./dist", binding = "ASSETS" }

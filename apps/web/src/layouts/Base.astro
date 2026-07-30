@@ -1,4 +1,5 @@
 ---
+import { TRUST_LINKS } from "../lib/site";
 interface Props {
   title: string;
   description?: string;
@@ -97,6 +98,7 @@ const { title, description = "Shop the planet yourself, or let BotPlanet find yo
         <a class="logo" href="/">Bot<span>Planet</span></a>
         <nav class="main">
           <a href="/robots/robotic-pool-cleaners/">Shop Robots</a>
+          <a href="/compare/robotic-pool-cleaners/">Compare</a>
           <a href="/botmatch/robotic-pool-cleaners/">Find My Robot</a>
         </nav>
         <a class="cta" href="/botmatch/robotic-pool-cleaners/">Start BotMatch</a>
@@ -109,6 +111,9 @@ const { title, description = "Shop the planet yourself, or let BotPlanet find yo
     </main>
     <footer class="site">
       <div class="wrap">
+        <nav class="main" style="margin-bottom:14px;">
+          {TRUST_LINKS.map((l) => <a href={l.href}>{l.label}</a>)}
+        </nav>
         BotPlanet — US preview. Prices are research snapshots, not live truth. Affiliate links are disclosed. Not yet a live commercial site.
       </div>
     </footer>

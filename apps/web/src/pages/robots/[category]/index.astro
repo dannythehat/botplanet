@@ -1,5 +1,6 @@
 ---
 import Base from "../../../layouts/Base.astro";
+import PoolDiagram from "../../../components/PoolDiagram.astro";
 import { getDb, schema } from "../../../lib/db";
 import { usd, titleCase } from "../../../lib/format";
 import { and, eq, inArray } from "drizzle-orm";
@@ -38,6 +39,8 @@ function minPrice(productId: string): number | null {
     </div>
     <a class="btn primary" href={`/botmatch/${cat.slug}/`}>Find my robot →</a>
   </div>
+
+  <div style="margin:22px 0;"><PoolDiagram /></div>
 
   <div class="grid" style="margin-top:20px;">
     {products.map((p) => (

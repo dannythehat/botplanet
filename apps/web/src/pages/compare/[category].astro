@@ -1,0 +1,59 @@
+---
+import Base from "../../layouts/Base.astro";
+import { getDb, schema } from "../../lib/db";
+import { usd, titleCase } from "../../lib/format";
+import { and, eq, inArray } from "drizzle-orm";
+
+const { category } = Astro.params;
+const db = getDb(Astro.locals);
+
+const cat = (
+  await db.select().from(schema.categories).where(eq(schema.categories.slug, category!)).limit(1)
+)[0];
+if (!cat) return new Response("Category not found", { status: 404 });
+
+const products = await db
+  .select()
+  .from(schema.products)
+  .where(and(eq(schema.products.categoryId, cat.id), eq(schema.products.status, "published")));
+
+const ids = products.map((p) => p.id);
+const offers = ids.length
+  ? await db.select().from(schema.offers).where(inArray(schema.offers.productId, ids))
+  : [];
+const minPrice = (pid: string) => {
+  const ps = offers.filter((o) => o.productId === pid && o.basePriceMinor != null).map((o) => o.basePriceMinor as number);
+  return ps.length ? Math.min(...ps) : null;
+};
+
+products.sort((a, b) => (minPrice(a.id) ?? Infinity) - (minPrice(b.id) ?? Infinity));
+---
+
+<Base title={`Compare ${cat.name}`} description={`Side-by-side comparison of ${cat.name.toLowerCase()}.`}>
+  <div class="row" style="justify-content:space-between;">
+    <h1>Compare {cat.name}</h1>
+    <a class="btn primary" href={`/botmatch/${cat.slug}/`}>Not sure? Let BotPlanet choose →</a>
+  </div>
+  <p class="note">Prices are dated research snapshots. Surface skimmers are a separate product class — they handle floating debris, not floor/wall cleaning.</p>
+
+  <div style="overflow-x:auto;">
+    <table>
+      <thead>
+        <tr><th>Product</th><th>Class</th><th>Environment</th><th>Cleans</th><th>Power</th><th>Tier</th><th>From</th></tr>
+      </thead>
+      <tbody>
+        {products.map((p) => (
+          <tr>
+            <td><a href={`/robots/${cat.slug}/${p.slug}/`}>{p.name}</a></td>
+            <td>{titleCase(p.productClass)}</td>
+            <td>{(p.environments as string[]).map(titleCase).join(", ")}</td>
+            <td>{(p.cleans as string[]).map((c) => titleCase(c)).join(", ")}</td>
+            <td>{titleCase(p.powerType)}</td>
+            <td>{titleCase(p.priceTier)}</td>
+            <td class="price" style="font-size:15px;">{minPrice(p.id) != null ? usd(minPrice(p.id)) : "—"}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</Base>

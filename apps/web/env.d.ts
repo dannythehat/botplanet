@@ -5,6 +5,7 @@ type ENV = {
   DB: D1Database;
   KV: KVNamespace;
   MEDIA: R2Bucket;
+  RESEND_API_KEY?: string;
 };
 
 type Runtime = import("@astrojs/cloudflare").Runtime<ENV>;
