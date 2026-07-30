@@ -49,7 +49,6 @@ const isActive = (href: string) => href !== "/" && path.startsWith(href.replace(
     <div class="head-actions">
       <button class="icon-btn" type="button" id="btn-search" aria-label="Search" title="Search">⌕</button>
       <button class="icon-btn" type="button" id="btn-saved" aria-label="Saved products" title="Saved">♡<span class="saved-count" id="saved-count" hidden>0</span></button>
-      <span class="market" title="Market">🇺🇸 US</span>
       <a class="cta" href={botmatchHref}>Find My Robot</a>
       <button class="icon-btn burger" type="button" id="btn-menu" aria-label="Menu" aria-expanded="false">☰</button>
     </div>
@@ -191,7 +190,6 @@ const isActive = (href: string) => href !== "/" && path.startsWith(href.replace(
   .icon-btn { background: transparent; border: 1px solid var(--border); color: var(--muted); width: 36px; height: 36px; border-radius: 9px; font-size: 17px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; position: relative; }
   .icon-btn:hover { color: var(--text); border-color: var(--border-2); }
   .saved-count { position: absolute; top: -5px; right: -5px; background: #fff; color: #050507; font-size: 10px; font-weight: 700; min-width: 15px; height: 15px; border-radius: 999px; display: flex; align-items: center; justify-content: center; padding: 0 3px; }
-  .market { font-size: 13px; color: var(--muted); padding: 0 4px; }
   .cta { background: #fff; color: #050507; padding: 9px 17px; border-radius: 999px; font-weight: 600; font-size: 14px; white-space: nowrap; }
   .cta:hover { background: #e7e7ea; color: #050507; }
   .burger { display: none; }
@@ -223,7 +221,7 @@ const isActive = (href: string) => href !== "/" && path.startsWith(href.replace(
   .search-hint { margin: 10px 4px 2px; font-size: 12px; }
 
   @media (max-width: 900px) {
-    nav.main, .market, .cta { display: none; }
+    nav.main, .cta { display: none; }
     .burger { display: inline-flex; }
     .bar { height: 72px; }
     .logo-full { width: 112px; }
