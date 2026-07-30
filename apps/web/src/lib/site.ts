@@ -5,7 +5,13 @@
 export const SITE = {
   name: "BotPlanet",
   domain: "botplanet.io",
-  tagline: "Shop the planet yourself, or let BotPlanet find your perfect robot.",
+  /**
+   * Brand-level statement. Deliberately NOT a BotMatch promise: BotMatch is
+   * category-specific and currently covers robotic pool cleaners only, so no
+   * copy may imply one journey recommends across the whole robotics market.
+   * This is the single source for structured data and any rendered use.
+   */
+  tagline: "Shop the planet’s real-world robots with clearer comparisons, evidence and category-specific guidance.",
   // TODO:founder — replace with the real accountable editorial owner.
   founder: {
     name: "Danny",

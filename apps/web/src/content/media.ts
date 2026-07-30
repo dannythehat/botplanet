@@ -68,7 +68,7 @@ const ORIG = {
 
 /** Original BotPlanet assets — authored in-house, clean rights, no product photos. */
 export const ORIGINAL_ASSETS: MediaAsset[] = [
-  { id: "og-default", kind: "og", src: "/og/botplanet-default.svg", altText: "BotPlanet — shop the planet yourself, or let BotMatch find your perfect robot", focalPoint: { x: 0.5, y: 0.5 }, responsiveVariants: [1200], ...ORIG },
+  { id: "og-default", kind: "og", src: "/og/botplanet-default.svg", altText: "BotPlanet — shop real-world robots with clearer comparisons, evidence and category-specific guidance", focalPoint: { x: 0.5, y: 0.5 }, responsiveVariants: [1200], ...ORIG },
   { id: "dgm-pool-zones", kind: "diagram", src: "components/PoolDiagram.astro", altText: "Pool cross-section showing floor, walls, waterline and water-surface cleaning zones", ...ORIG },
   { id: "dgm-coverage", kind: "diagram", src: "components/diagrams/CoverageZones.astro", altText: "Pool cross-section highlighting floor, wall and waterline cleaning zones", ...ORIG },
   { id: "dgm-corded-cordless", kind: "diagram", src: "components/diagrams/CordedVsCordless.astro", altText: "Corded vs cordless robotic pool cleaners compared", ...ORIG },

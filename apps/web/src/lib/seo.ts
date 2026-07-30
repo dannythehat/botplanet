@@ -10,6 +10,8 @@
  *    appear where a real, attributable review exists.
  */
 
+import { SITE } from "./site";
+
 export const SITE_URL = "https://botplanet.io";
 export const PRODUCTION_HOST = "botplanet.io";
 export const OG_IMAGE_DEFAULT = "/og/botplanet-default.png";
@@ -81,7 +83,7 @@ export function organizationSchema() {
     logo: absUrl("/favicon.svg"),
     description:
       "BotPlanet helps people discover, compare and choose useful real-world robots, starting with robotic pool cleaners in the United States.",
-    slogan: "Shop the planet yourself, or let BotPlanet find your perfect robot.",
+    slogan: SITE.tagline,
   };
 }
 
