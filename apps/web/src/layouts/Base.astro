@@ -2,6 +2,7 @@
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import Breadcrumbs from "../components/Breadcrumbs.astro";
+import Analytics from "../components/Analytics.astro";
 import {
   buildMeta, isPreviewHost, schemaGraph, organizationSchema, websiteSchema, breadcrumbSchema, type Crumb,
 } from "../lib/seo";
@@ -38,6 +39,12 @@ const canonicalPath = path ?? Astro.url.pathname;
 const meta = buildMeta({ title, description, path: canonicalPath, ogImage, ogType, noindex }, host);
 const preview = isPreviewHost(host);
 
+// Google Search Console HTML-tag verification. Emitted on the production host
+// only (Search Console verifies https://botplanet.io), and only when Danny has
+// supplied the value as the Worker secret GOOGLE_SITE_VERIFICATION.
+const searchConsoleToken = (Astro.locals as App.Locals).runtime?.env?.GOOGLE_SITE_VERIFICATION;
+const verifySearchConsole = Boolean(searchConsoleToken) && !preview;
+
 const graph = schemaGraph(
   organizationSchema(),
   websiteSchema(),
@@ -56,6 +63,7 @@ const graph = schemaGraph(
     <link rel="canonical" href={meta.canonical} />
     <meta name="robots" content={meta.robots} />
     <link rel="icon" type="image/png" href="/logo/favicon-128.png" />
+    {verifySearchConsole && <meta name="google-site-verification" content={searchConsoleToken} />}
     <meta property="og:site_name" content="BotPlanet" />
     <meta property="og:title" content={meta.ogTitle} />
     <meta property="og:description" content={meta.ogDescription} />
@@ -152,5 +160,6 @@ const graph = schemaGraph(
       </div>
     </main>
     <Footer />
+    <Analytics />
   </body>
 </html>

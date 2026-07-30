@@ -1,0 +1,288 @@
+---
+/**
+ * Internal operational reporting view — NOT a public dashboard.
+ *
+ * Every figure on this page is read live from D1 at request time. Nothing is
+ * cached, carried forward or estimated: if a system is not connected the page
+ * says so, and if a connected system has no activity it shows "No data yet"
+ * rather than a zero dressed up as a result.
+ */
+import Admin from "../../layouts/Admin.astro";
+import { getDb, schema } from "../../lib/db";
+import { desc, sql } from "drizzle-orm";
+import { summariseClickQuality, type DestinationKind, type PageType } from "@botplanet/shared";
+import {
+  CLOUDFLARE,
+  CLOUDFLARE_REPORT_PATHS,
+  REPORTING_SYSTEMS,
+  STATUS_LABEL,
+  STATUS_TONE,
+  resolveStatus,
+} from "../../lib/reporting";
+
+const db = getDb(Astro.locals);
+const env = (Astro.locals as App.Locals).runtime?.env;
+const runtime = {
+  analyticsToken: env?.CF_WEB_ANALYTICS_TOKEN,
+  searchConsoleToken: env?.GOOGLE_SITE_VERIFICATION,
+};
+
+/* ---- Live click data (first-party, always available). ---- */
+const clickRows = await db
+  .select({
+    productId: schema.clickEvents.productId,
+    offerId: schema.clickEvents.offerId,
+    destinationKind: schema.clickEvents.destinationVersion,
+    sourcePage: schema.clickEvents.sourcePage,
+    pageType: schema.clickEvents.pageType,
+    deviceClass: schema.clickEvents.deviceClass,
+  })
+  .from(schema.clickEvents);
+
+const quality = summariseClickQuality(
+  clickRows.map((r) => ({
+    ...r,
+    destinationKind: (r.destinationKind ?? null) as DestinationKind | null,
+    pageType: (r.pageType ?? null) as PageType | null,
+  })),
+);
+
+const recent = await db
+  .select({
+    occurredAt: schema.clickEvents.occurredAt,
+    productId: schema.clickEvents.productId,
+    retailerId: schema.clickEvents.retailerId,
+    redirectKey: schema.clickEvents.redirectKey,
+    destinationKind: schema.clickEvents.destinationVersion,
+    sourcePage: schema.clickEvents.sourcePage,
+    pageType: schema.clickEvents.pageType,
+    deviceClass: schema.clickEvents.deviceClass,
+  })
+  .from(schema.clickEvents)
+  .orderBy(desc(schema.clickEvents.occurredAt))
+  .limit(25);
+
+const byProduct = await db
+  .select({ productId: schema.clickEvents.productId, n: sql<number>`count(*)` })
+  .from(schema.clickEvents)
+  .groupBy(schema.clickEvents.productId)
+  .orderBy(desc(sql`count(*)`))
+  .limit(10);
+
+// Conversions/commission exist only when a network reports them. Never inferred.
+const txnRows = await db.select({ n: sql<number>`count(*)` }).from(schema.commissionTransactions);
+const txnCount = Number(txnRows[0]?.n ?? 0);
+
+/** Link health: an active redirect whose offer has no tracked destination will
+ *  fall back or fail, so it is surfaced here rather than discovered by a visitor. */
+const linkHealth = await db
+  .select({
+    key: schema.redirectLinks.key,
+    active: schema.redirectLinks.active,
+    retailerId: schema.offers.retailerId,
+    destination: schema.offers.affiliateDestinationUrl,
+  })
+  .from(schema.redirectLinks)
+  .leftJoin(schema.offers, sql`${schema.offers.id} = ${schema.redirectLinks.offerId}`);
+
+const linksTracked = linkHealth.filter((l) => l.destination).length;
+const linksFallback = linkHealth.filter((l) => !l.destination).length;
+
+const systems = REPORTING_SYSTEMS.map((s) => ({ ...s, live: resolveStatus(s, runtime) }));
+const fmt = (d: Date | null) => (d ? d.toISOString().replace("T", " ").slice(0, 16) + " UTC" : "—");
+const checkedAt = new Date().toISOString().replace("T", " ").slice(0, 16) + " UTC";
+---
+<Admin title="Reporting connections" section="report">
+  <p class="sub">
+    Internal operational view. Figures are read live from D1 on each load — nothing is carried forward.
+    Page loaded <span class="mono">{checkedAt}</span>.
+  </p>
+
+  <h2>Connection status</h2>
+  <div class="grid">
+    {systems.map((s) => (
+      <div class="card">
+        <div class="muted">{s.name}</div>
+        <div style="margin:6px 0;"><span class={`tag ${STATUS_TONE[s.live]}`}>{STATUS_LABEL[s.live]}</span></div>
+        <div class="muted" style="font-size:12px;">{s.provider}</div>
+      </div>
+    ))}
+  </div>
+
+  <h2>Affiliate click reporting (first-party)</h2>
+  <div class="grid">
+    <div class="card">
+      <div class="muted">Total outbound clicks</div>
+      <div style="font-size:24px;font-weight:800;">{quality.total}</div>
+      <div class="muted" style="font-size:12px;">{quality.total === 0 ? "No data yet" : "click_events rows in D1"}</div>
+    </div>
+    <div class="card">
+      <div class="muted">Fully attributed</div>
+      <div style="font-size:24px;font-weight:800;color:var(--ok)">{quality.attributed}</div>
+      <div class="muted" style="font-size:12px;">product + offer + tracked destination + page context</div>
+    </div>
+    <div class="card">
+      <div class="muted">Partial</div>
+      <div style="font-size:24px;font-weight:800;color:var(--warn)">{quality.partial}</div>
+      <div class="muted" style="font-size:12px;">known product/offer, missing context or search fallback</div>
+    </div>
+    <div class="card">
+      <div class="muted">Minimal</div>
+      <div style="font-size:24px;font-weight:800;color:var(--bad)">{quality.minimal}</div>
+      <div class="muted" style="font-size:12px;">homepage-only or missing product/offer — not a product click</div>
+    </div>
+  </div>
+  <p class="muted" style="margin-top:10px;font-size:12.5px;">
+    Clicks recorded before the Job 4 release carry product, offer and retailer but no page context, so they count as
+    partial or minimal — not as a data error. Logging never blocks a redirect, so totals can under-report but never
+    over-report.
+  </p>
+
+  <h2>Conversions &amp; commission</h2>
+  <div class="card">
+    {txnCount === 0 ? (
+      <p style="margin:0;">
+        <span class="tag warn">No data yet</span>
+        <span class="muted" style="margin-left:8px;">
+          No affiliate network has reported a transaction. An outbound click is never treated as a sale, so no
+          conversion, commission or revenue figure exists to display.
+        </span>
+      </p>
+    ) : (
+      <p style="margin:0;">{txnCount} network-reported transactions imported. See the programmes view for detail.</p>
+    )}
+  </div>
+
+  <h2>Redirect link health</h2>
+  <div class="grid">
+    <div class="card">
+      <div class="muted">Tracked destinations</div>
+      <div style="font-size:24px;font-weight:800;">{linksTracked}</div>
+      <div class="muted" style="font-size:12px;">offer has a real affiliate URL</div>
+    </div>
+    <div class="card">
+      <div class="muted">Using fallback</div>
+      <div style="font-size:24px;font-weight:800;color:var(--warn)">{linksFallback}</div>
+      <div class="muted" style="font-size:12px;">Amazon search link or retailer homepage until a tracked URL exists</div>
+    </div>
+  </div>
+
+  <h2>Recent click activity</h2>
+  <div class="card" style="padding:0;">
+    <table>
+      <thead>
+        <tr><th>When (UTC)</th><th>Product</th><th>Retailer</th><th>/go key</th><th>Destination</th><th>Source page</th><th>Type</th><th>Device</th></tr>
+      </thead>
+      <tbody>
+        {recent.length === 0 ? (
+          <tr><td colspan="8" class="muted">No clicks recorded yet.</td></tr>
+        ) : (
+          recent.map((r) => (
+            <tr>
+              <td class="mono">{fmt(r.occurredAt as Date | null)}</td>
+              <td>{r.productId ?? <span class="muted">—</span>}</td>
+              <td class="muted">{r.retailerId ?? "—"}</td>
+              <td class="mono">{r.redirectKey ?? "—"}</td>
+              <td class="muted">{r.destinationKind ?? <span class="tag">not recorded</span>}</td>
+              <td class="muted mono">{r.sourcePage ?? "—"}</td>
+              <td class="muted">{r.pageType ?? "—"}</td>
+              <td class="muted">{r.deviceClass ?? "—"}</td>
+            </tr>
+          ))
+        )}
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Clicks by product</h2>
+  <div class="card" style="padding:0;">
+    <table>
+      <thead><tr><th>Product</th><th>Clicks</th></tr></thead>
+      <tbody>
+        {byProduct.length === 0 ? (
+          <tr><td colspan="2" class="muted">No clicks recorded yet.</td></tr>
+        ) : (
+          byProduct.map((p) => (
+            <tr><td>{p.productId ?? <span class="muted">unknown</span>}</td><td>{Number(p.n)}</td></tr>
+          ))
+        )}
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Reporting connections register</h2>
+  <div class="table-wrap card" style="padding:0;">
+    <table>
+      <thead>
+        <tr>
+          <th>System</th><th>Provider</th><th>Status</th><th>Dashboard / path</th>
+          <th>Data available</th><th>Data unavailable</th><th>Last checked</th><th>Owner action</th><th>Secret location (name only)</th>
+        </tr>
+      </thead>
+      <tbody>
+        {systems.map((s) => (
+          <tr>
+            <td><strong>{s.name}</strong></td>
+            <td class="muted">{s.provider}</td>
+            <td><span class={`tag ${STATUS_TONE[s.live]}`}>{STATUS_LABEL[s.live]}</span></td>
+            <td class="muted" style="min-width:200px;">
+              {s.dashboardLink ? <a href={s.dashboardLink} rel="noreferrer noopener nofollow" target="_blank">{s.dashboard}</a> : s.dashboard}
+            </td>
+            <td class="muted" style="min-width:180px;">
+              {s.dataAvailable.length === 0 ? <span class="tag">none</span> : <ul style="margin:0;padding-left:16px;">{s.dataAvailable.map((d) => <li>{d}</li>)}</ul>}
+            </td>
+            <td class="muted" style="min-width:180px;">
+              {s.dataUnavailable.length === 0 ? <span class="muted">—</span> : <ul style="margin:0;padding-left:16px;">{s.dataUnavailable.map((d) => <li>{d}</li>)}</ul>}
+            </td>
+            <td class="mono muted">{s.lastCheckedAt}</td>
+            <td class="muted" style="min-width:240px;">{s.ownerAction ?? <span class="tag ok">none</span>}</td>
+            <td class="muted" style="min-width:200px;">{s.secretStorage ?? "—"}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+  <p class="muted" style="margin-top:8px;font-size:12.5px;">
+    Register source: <span class="mono">apps/web/src/lib/reporting.ts</span>. Secret columns name a location only — no
+    credential is stored in the repository, D1, Notion or any scheduled prompt.
+  </p>
+
+  <h2>Cloudflare reporting locations</h2>
+  <div class="card" style="padding:0;">
+    <table>
+      <thead><tr><th>Metric</th><th>Exact navigation path</th><th>Note</th></tr></thead>
+      <tbody>
+        {CLOUDFLARE_REPORT_PATHS.map((c) => (
+          <tr>
+            <td><strong>{c.metric}</strong></td>
+            <td class="muted"><a href={c.link} rel="noreferrer noopener nofollow" target="_blank">{c.path}</a></td>
+            <td class="muted">{c.note ?? "—"}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+  <p class="muted" style="margin-top:8px;font-size:12.5px;">
+    Worker <span class="mono">{CLOUDFLARE.workerName}</span> · zone <span class="mono">{CLOUDFLARE.zone}</span> ·
+    database <span class="mono">{CLOUDFLARE.d1Database}</span>. Cloudflare dashboard reporting needs no API token.
+  </p>
+
+  <h2>Owner actions outstanding</h2>
+  <div class="card">
+    <ol style="margin:0;padding-left:18px;line-height:1.9;">
+      {systems.filter((s) => s.ownerAction && s.live !== "connected").length === 0 ? (
+        <li class="muted">None.</li>
+      ) : (
+        systems
+          .filter((s) => s.ownerAction && s.live !== "connected")
+          .map((s) => (
+            <li><strong>{s.name}</strong> — {s.ownerAction}</li>
+          ))
+      )}
+    </ol>
+  </div>
+</Admin>
+<style>
+  .table-wrap { overflow-x: auto; }
+  ul { line-height: 1.6; }
+</style>

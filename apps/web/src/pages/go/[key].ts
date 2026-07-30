@@ -1,11 +1,21 @@
 import type { APIRoute } from "astro";
 import { eq } from "drizzle-orm";
+import {
+  deviceClassFromUserAgent,
+  isSafeAffiliateDestination,
+  pageTypeFromPath,
+  resolveSourcePath,
+  type DestinationKind,
+} from "@botplanet/shared";
 import { getDb, schema } from "../../lib/db";
 import { AMAZON_ASSOCIATE_TAG } from "../../lib/site";
+import { ATTRIBUTION_HOSTS } from "../../lib/reporting";
 
-// Placeholder retailer destinations for the preview. In production the real,
-// affiliate-tracked destination comes from offers.affiliate_destination_url,
-// set only after the retailer's programme is approved.
+/**
+ * Retailer homepages, used only as a last-resort outbound destination for a
+ * retailer whose programme has no tracked link yet. A click that lands here is
+ * recorded as `retailer_home` so reporting never counts it as a product click.
+ */
 const RETAILER_HOME: Record<string, string> = {
   "ret-amazon": "https://www.amazon.com",
   "ret-walmart": "https://www.walmart.com",
@@ -31,9 +41,43 @@ export const GET: APIRoute = async ({ params, locals, request }) => {
   )[0];
   if (!offer) return new Response("Offer unavailable", { status: 404 });
 
-  // Immutable attribution event (no personal data).
-  const referer = request.headers.get("referer");
-  await db.insert(schema.clickEvents).values({
+  /* ---- Resolve the destination, recording which kind it was. ---- */
+  let destination: string | null = offer.affiliateDestinationUrl ?? null;
+  let destinationKind: DestinationKind = destination ? "offer_destination" : "unavailable";
+
+  if (!destination && offer.retailerId === "ret-amazon") {
+    // Compliant Amazon Associates search link with our tag. Becomes a deep ASIN
+    // link once ASINs are stored — until then it is a real but imprecise click.
+    const product = (
+      await db
+        .select({ name: schema.products.name })
+        .from(schema.products)
+        .where(eq(schema.products.id, offer.productId))
+        .limit(1)
+    )[0];
+    const q = encodeURIComponent(product?.name ?? "robotic pool cleaner");
+    destination = `https://www.amazon.com/s?k=${q}&tag=${AMAZON_ASSOCIATE_TAG}`;
+    destinationKind = "amazon_search";
+  } else if (!destination) {
+    const home = RETAILER_HOME[offer.retailerId];
+    if (home) {
+      destination = home;
+      destinationKind = "retailer_home";
+    }
+  }
+
+  // Never redirect to an unvalidated value: anything that is not an absolute
+  // http(s) URL with a real host is refused outright rather than guessed at.
+  if (!destination || !isSafeAffiliateDestination(destination)) {
+    return new Response("This offer link is not available right now.", {
+      status: 502,
+      headers: { "content-type": "text/plain; charset=utf-8", "cache-control": "no-store" },
+    });
+  }
+
+  /* ---- Attribution event: anonymous, no query strings, never personal. ---- */
+  const sourcePage = resolveSourcePath(request.headers.get("referer"), ATTRIBUTION_HOSTS);
+  const clickRow = {
     id: crypto.randomUUID(),
     marketId: offer.marketId,
     productId: offer.productId,
@@ -41,23 +85,23 @@ export const GET: APIRoute = async ({ params, locals, request }) => {
     retailerId: offer.retailerId,
     affiliateProgramId: offer.affiliateProgramId,
     redirectKey: key,
-    sourcePage: referer,
-    deviceClass: null,
-  });
+    destinationVersion: destinationKind,
+    sourcePage,
+    pageType: pageTypeFromPath(sourcePage),
+    deviceClass: deviceClassFromUserAgent(request.headers.get("user-agent")),
+  };
 
-  let destination = offer.affiliateDestinationUrl;
-  if (!destination) {
-    if (offer.retailerId === "ret-amazon") {
-      // Real Amazon Associates link (search deep-link + tracking tag). Swap to an
-      // ASIN product link once we store ASINs.
-      const product = (
-        await db.select({ name: schema.products.name }).from(schema.products).where(eq(schema.products.id, offer.productId)).limit(1)
-      )[0];
-      const q = encodeURIComponent(product?.name ?? "robotic pool cleaner");
-      destination = `https://www.amazon.com/s?k=${q}&tag=${AMAZON_ASSOCIATE_TAG}`;
-    } else {
-      destination = RETAILER_HOME[offer.retailerId] ?? "/";
-    }
+  // Logging must never cost the visitor their click. If the write fails the
+  // redirect still happens and the click is simply not counted (under-reporting
+  // is honest; blocking the customer is not).
+  try {
+    await db.insert(schema.clickEvents).values(clickRow);
+  } catch {
+    // Intentionally swallowed — see above. Worker logs capture the failure.
   }
-  return new Response(null, { status: 302, headers: { Location: destination } });
+
+  return new Response(null, {
+    status: 302,
+    headers: { Location: destination, "cache-control": "no-store" },
+  });
 };
