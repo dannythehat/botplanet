@@ -1,0 +1,66 @@
+---
+import Admin from "../../layouts/Admin.astro";
+import { getDb, schema } from "../../lib/db";
+import { sql, eq, and } from "drizzle-orm";
+
+const db = getDb(Astro.locals);
+
+const accounts = await db.select().from(schema.affiliateAccounts);
+const programmes = await db.select().from(schema.affiliatePrograms);
+
+const count = async (table: any, where?: any): Promise<number> => {
+  const q = db.select({ n: sql<number>`count(*)` }).from(table);
+  const rows = where ? await q.where(where) : await q;
+  return Number(rows[0]?.n ?? 0);
+};
+const productsN = await count(schema.products, eq(schema.products.status, "published"));
+const activeOffersN = await count(schema.offers, eq(schema.offers.offerStatus, "active"));
+const liveLinksN = await count(schema.redirectLinks, eq(schema.redirectLinks.active, true));
+const clicksN = await count(schema.clickEvents);
+
+const statusTag = (s: string) =>
+  s === "approved" ? "ok" : s === "pending" ? "warn" : s === "closed" || s === "rejected" ? "bad" : "";
+
+// Action queue: accounts that have a next action, blocked first.
+const queue = [...accounts]
+  .filter((a) => a.nextAction)
+  .sort((a, b) => (a.currentBlocker ? 0 : 1) - (b.currentBlocker ? 0 : 1));
+---
+<Admin title="Supplier & Affiliate Operations" section="dash">
+  <p class="sub">Phase 1 admin — programme state, blockers, offers and <span class="mono">/go</span> control. Commercial data is private; do not share this page.</p>
+
+  <div class="grid">
+    <div class="card"><div class="muted">Amazon US</div><div style="font-size:20px;font-weight:800;color:var(--ok)">LIVE</div><div class="muted mono">botplanet-20 · all products</div></div>
+    <div class="card"><div class="muted">Published products</div><div style="font-size:20px;font-weight:800">{productsN}</div><div class="muted">{activeOffersN} active offers · {liveLinksN} live links</div></div>
+    <div class="card"><div class="muted">Attribution</div><div style="font-size:20px;font-weight:800">{clicksN}</div><div class="muted">click events logged</div></div>
+    <div class="card"><div class="muted">Affiliate programmes</div><div style="font-size:20px;font-weight:800">{programmes.length}</div><div class="muted">{accounts.length} accounts tracked</div></div>
+  </div>
+
+  <h2>Action queue</h2>
+  <div class="card" style="padding:0;">
+    <table>
+      <thead><tr><th>Network</th><th>Status</th><th>Blocker</th><th>Next action</th><th>Owner</th></tr></thead>
+      <tbody>
+        {queue.map((a) => (
+          <tr>
+            <td><strong>{a.network}</strong>{a.externalAccountRef && <div class="muted mono">{a.externalAccountRef}</div>}</td>
+            <td><span class={`tag ${statusTag(a.status)}`}>{a.status}</span><div class="muted" style="margin-top:4px">{a.applicationStage}</div></td>
+            <td class="muted">{a.currentBlocker ?? "—"}</td>
+            <td>{a.nextAction}</td>
+            <td class="muted">{a.nextAction?.toLowerCase().startsWith("danny") ? "Danny" : "Claude"}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Quick reference</h2>
+  <div class="card">
+    <ul style="margin:0; padding-left:18px; line-height:1.9;">
+      <li><strong>Amazon US</strong> — approved &amp; live on all products (<span class="mono">botplanet-20</span>). No affiliate links in email.</li>
+      <li><strong>CJ</strong> (<span class="mono">8029924</span>) — account created, <span style="color:var(--warn)">onboarding incomplete</span>; blocks Aiper (adv 6404897, 8%).</li>
+      <li><strong>Awin</strong> (<span class="mono">3012175</span>) — WYBOT <em>EU/UK</em> only; <span style="color:var(--warn)">parked</span> for a future UK market.</li>
+      <li><strong>Impact</strong> — <span style="color:var(--bad)">declined</span> (£30/mo fee).</li>
+    </ul>
+  </div>
+</Admin>
