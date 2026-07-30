@@ -1,17 +1,29 @@
 ---
+/**
+ * BotPlanet homepage.
+ *
+ * Two routes through the site carry equal weight: browse it yourself, or use
+ * the category-specific recommendation journey. Every figure, price and claim
+ * on this page is read from the database or from the editorial layer — nothing
+ * is invented, and no product is called "best" without evidence behind it.
+ */
 import Base from "../layouts/Base.astro";
 import ProductCard from "../components/ProductCard.astro";
+import HomeHero from "../components/home/HomeHero.astro";
+import RobotSilhouette from "../components/RobotSilhouette.astro";
+import PoolDiagram from "../components/PoolDiagram.astro";
+import CoverageZones from "../components/diagrams/CoverageZones.astro";
 import { getDb, schema } from "../lib/db";
-import { eq } from "drizzle-orm";
+import { eq, inArray } from "drizzle-orm";
 import { usd, titleCase } from "../lib/format";
-import { inArray } from "drizzle-orm";
 import { shellJourney } from "../content/journeys";
+import { LAUNCH_CATEGORY, categoryRoutes } from "../content/routes";
+import { itemListSchema } from "../lib/seo";
 
-// BotMatch is one BotPlanet capability, previewed for the live category —
-// not the purpose of the site, and never a generic "find any robot".
 const journey = shellJourney();
-
+const cat = categoryRoutes(LAUNCH_CATEGORY);
 const db = getDb(Astro.locals);
+
 const products = await db
   .select({
     id: schema.products.id,
@@ -22,8 +34,7 @@ const products = await db
     environments: schema.products.environments,
   })
   .from(schema.products)
-  .where(eq(schema.products.status, "published"))
-  .limit(6);
+  .where(eq(schema.products.status, "published"));
 
 const ids = products.map((p) => p.id);
 const offers = ids.length
@@ -39,112 +50,636 @@ const minPrice = (productId: string): number | null => {
     .map((o) => o.basePriceMinor as number);
   return prices.length ? Math.min(...prices) : null;
 };
+
+const allPrices = products.map((p) => minPrice(p.id)).filter((n): n is number => n != null);
+const floorPrice = allPrices.length ? usd(Math.min(...allPrices)) : null;
+
+/**
+ * Four featured models chosen to span the real decisions a buyer faces —
+ * budget, pool type and power — not a ranking. The labels describe what each
+ * one IS; none of them claims it is best, tested or top-rated.
+ */
+const FEATURED: { slug: string; label: string; why: string }[] = [
+  { slug: "aiper-seagull-se", label: "Entry model", why: "Lowest current price in the catalogue" },
+  { slug: "dolphin-nautilus-cc-plus", label: "Corded, in-ground", why: "Mains-powered for longer cycles" },
+  { slug: "aiper-scuba-x1", label: "Cordless option", why: "No cable to manage" },
+  { slug: "beatbot-aquasense-2-ultra", label: "Higher-spec", why: "Most features in the catalogue" },
+];
+
+const featured = FEATURED.map((f) => {
+  const p = products.find((x) => x.slug === f.slug);
+  return p ? { ...f, product: p } : null;
+}).filter((x): x is { slug: string; label: string; why: string; product: (typeof products)[number] } => x !== null);
+
+/** Three models used purely as a comparison illustration. */
+const compareSet = ["aiper-seagull-se", "dolphin-nautilus-cc-plus", "beatbot-aquasense-2-ultra"]
+  .map((s) => products.find((p) => p.slug === s))
+  .filter((p): p is (typeof products)[number] => Boolean(p));
+
+const schemaGraphNodes = [
+  itemListSchema(
+    featured.map((f) => ({ name: f.product.name, path: `/robots/${LAUNCH_CATEGORY}/${f.product.slug}/` })),
+    "Featured robotic pool cleaners",
+  ),
+];
 ---
 
-<!--
-  Job 5 correction applies the design system to the EXISTING homepage content —
-  same three blocks, same copy, no new marketing sections and no new claims.
-  Job 7 still owns the full homepage story.
--->
 <Base
-  title="BotPlanet — Shop real-world robots"
-  description="Browse, compare and choose real-world robots for the US, with honest pricing, labelled evidence and clear limitations."
+  title="BotPlanet — real-world robots, properly compared"
+  description="BotPlanet reviews, compares and organises useful real-world robots using evidence, current offers and category-specific guidance. Robotic pool cleaners are live for the US."
   bleed={true}
+  schema={schemaGraphNodes}
 >
-  <!-- Band 1: hero, lit from above with orbital geometry behind it. -->
-  <section class="hero lit">
-    <div class="wrap orbit orbit--horizon">
-      <span class="eyebrow">Real-world robots · United States</span>
-      <h1>Shop the planet's real-world robots.</h1>
-      <p>
-        Browse, compare and choose robots that do real work — with honest pricing,
-        labelled evidence and clear limitations. Shopping for a robotic pool cleaner?
-        Try the first BotMatch journey.
-      </p>
-      <div class="hero__actions">
-        <a class="btn btn--accent btn--lg" href={journey.href}>{journey.ctaLabel}</a>
-        <a class="btn btn--lg" href="/robots/robotic-pool-cleaners/">Browse Pool Cleaners</a>
+  <!-- ========== 1. Hero ========== -->
+  <section class="hero-band lit">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <span class="marker">
+          <span class="marker__dot" aria-hidden="true"></span>
+          Now exploring: robotic pool cleaners
+        </span>
+        <h1>Real-world robots,<br />properly compared.</h1>
+        <p class="lede">
+          BotPlanet reviews, compares and organises robots that do actual work around a home. We track what each
+          machine really does, what it currently costs, and where the evidence behind a claim comes from — so you can
+          decide with the facts in front of you.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn--primary btn--lg" href={cat.hub}>Browse Pool Cleaners</a>
+          <a class="btn btn--accent btn--lg" href={journey.href}>{journey.ctaLabel}</a>
+        </div>
+        <p class="note hero-note">
+          {products.length} models in the launch catalogue{floorPrice ? `, from ${floorPrice}` : ""}. Prices are dated
+          snapshots — always confirm at the retailer.
+        </p>
+      </div>
+
+      <div class="hero-visual">
+        <HomeHero productCount={products.length} fromPrice={floorPrice} />
       </div>
     </div>
   </section>
 
-  <!-- Band 2: catalogue, on a raised surface with a technical underlay. -->
+  <!-- ========== 2. Two ways to use BotPlanet ========== -->
   <section class="section section--tight band grid-tech">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="rule-accent" aria-hidden="true"></span>
+        <h2 class="mt-0">Two ways to use BotPlanet</h2>
+        <p>Both routes reach the same catalogue. Neither is the shortcut, and you are never forced into a form.</p>
+      </div>
+
+      <div class="paths">
+        <article class="path elevated">
+          <span class="path__num" aria-hidden="true">A</span>
+          <h3>Explore for yourself</h3>
+          <p>Go straight to the catalogue and make your own call.</p>
+          <ul class="path__list">
+            <li>Browse every model we cover</li>
+            <li>Compare specifications side by side</li>
+            <li>Read how these machines actually work</li>
+            <li>See where each claim came from</li>
+          </ul>
+          <a class="btn btn--primary" href={cat.hub}>Browse Pool Cleaners</a>
+        </article>
+
+        <article class="path elevated path--accent">
+          <span class="path__num" aria-hidden="true">B</span>
+          <h3>Get a pool-specific recommendation</h3>
+          <p>Answer questions about your pool and get one clear answer.</p>
+          <ul class="path__list">
+            <li>Questions about your pool, not generic ones</li>
+            <li>Only models that suit it are considered</li>
+            <li>Suitability decides the order</li>
+            <li>One recommendation, with the reasons and the limits</li>
+          </ul>
+          <a class="btn btn--accent" href={journey.href}>{journey.ctaLabel}</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 3. Launch category showcase ========== -->
+  <section class="section lit lit--left">
+    <div class="wrap">
+      <div class="split split--text-lead">
+        <div>
+          <span class="rule-accent" aria-hidden="true"></span>
+          <span class="eyebrow">The live category</span>
+          <h2 class="mt-0">Robotic pool cleaners</h2>
+          <p class="lede">
+            A pool robot scrubs the floor, climbs walls and skims the waterline so you don't. Choosing one is harder
+            than it looks: the same machine that handles a small above-ground pool can be the wrong answer for a deep
+            in-ground pool with steps.
+          </p>
+          <p>What actually decides it:</p>
+          <ul class="factors">
+            <li>Pool size and shape</li>
+            <li>Above-ground or in-ground</li>
+            <li>Floor, wall and waterline coverage</li>
+            <li>Corded or cordless</li>
+            <li>Filtration and cycle time</li>
+            <li>Current price and availability</li>
+          </ul>
+          <div class="cluster mt-lg">
+            <a class="btn btn--primary" href={cat.hub}>Browse the catalogue</a>
+            <a class="btn" href={cat.compare}>Compare models</a>
+            <a class="btn btn--quiet" href={cat.guides}>Read the guides</a>
+          </div>
+        </div>
+        <div class="cat-visual">
+          <PoolDiagram />
+          <div class="cat-visual__second"><CoverageZones /></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 4. Featured products ========== -->
+  <section class="section section--tight band">
     <div class="wrap">
       <div class="section-head section-head--row">
         <div>
           <span class="rule-accent" aria-hidden="true"></span>
-          <span class="eyebrow">Launch category</span>
-          <h2 class="mt-0">Robotic pool cleaners</h2>
-          <p>Our first fully-built category. {products.length} products indexed for the US market.</p>
+          <h2 class="mt-0">Four models, four different jobs</h2>
+          <p>
+            A spread across budget, pool type and power — not a ranking. We don't publish a "best" until the evidence
+            behind it is in place.
+          </p>
         </div>
-        <a class="btn" href="/robots/robotic-pool-cleaners/">View all</a>
+        <a class="btn" href={cat.hub}>View all pool cleaners</a>
       </div>
 
-      {products.length === 0 ? (
-        <div class="empty">
-          <p class="empty__title">No products published yet</p>
-          <p>The launch catalogue appears here as soon as products are published.</p>
-        </div>
-      ) : (
-        <div class="grid grid--products">
-          {products.map((p, i) => (
+      <div class="grid grid--products">
+        {featured.map((f, i) => (
+          <div class="feat">
+            <span class="feat__label">{f.label}</span>
             <ProductCard
-              href={`/robots/robotic-pool-cleaners/${p.slug}/`}
-              name={p.name}
-              classification={titleCase(p.productClass)}
-              meta={[titleCase(p.powerType), ...(p.environments as string[]).slice(0, 2).map(titleCase)]}
-              price={minPrice(p.id) != null ? `from ${usd(minPrice(p.id))}` : null}
+              href={`/robots/${LAUNCH_CATEGORY}/${f.product.slug}/`}
+              name={f.product.name}
+              classification={titleCase(f.product.productClass)}
+              meta={[
+                titleCase(f.product.powerType),
+                ...(f.product.environments as string[]).slice(0, 2).map((e) => titleCase(e)),
+              ]}
+              price={minPrice(f.product.id) != null ? `from ${usd(minPrice(f.product.id))}` : null}
               priceNote="Snapshot price · confirm at retailer"
               variant={i}
-              saveId={p.id}
+              saveId={f.product.id}
             />
-          ))}
-        </div>
-      )}
+            <p class="feat__why">{f.why}</p>
+          </div>
+        ))}
+      </div>
     </div>
   </section>
 
-  <!-- Band 3: editorial principles, lit from the left. -->
-  <section class="section section--tight lit lit--left">
+  <!-- ========== 5. Comparison preview ========== -->
+  <section class="section section--tight lit lit--right">
     <div class="wrap">
       <div class="section-head">
         <span class="rule-accent" aria-hidden="true"></span>
-        <span class="eyebrow">How we work</span>
-        <h2 class="mt-0">Why BotPlanet is different</h2>
+        <h2 class="mt-0">See the differences that matter</h2>
+        <p>Put models side by side on the things that change your day — not on a score we made up.</p>
       </div>
-      <div class="feature-rows">
-        <article class="feature-row reveal">
-          <div class="feature-row__lead">
-            <span class="feature-row__index" aria-hidden="true">01</span>
-            <span class="feature-row__tick">Ranking</span>
+
+      <div class="cmp elevated">
+        <div class="cmp__row">
+          {compareSet.map((p, i) => (
+            <div class="cmp__col">
+              <div class="cmp__stage stage"><RobotSilhouette variant={i + 1} /></div>
+              <p class="cmp__name">{p.name}</p>
+              <dl class="cmp__facts">
+                <div><dt>Power</dt><dd>{titleCase(p.powerType)}</dd></div>
+                <div><dt>Suits</dt><dd>{(p.environments as string[]).map((e) => titleCase(e)).join(", ")}</dd></div>
+                <div><dt>From</dt><dd>{minPrice(p.id) != null ? usd(minPrice(p.id)) : "—"}</dd></div>
+              </dl>
+            </div>
+          ))}
+        </div>
+        <div class="cmp__foot">
+          <p class="note">
+            Full specification comparison, filtered by your pool type, lives on the comparison page.
+          </p>
+          <a class="btn btn--primary" href={cat.compare}>Compare Pool Cleaners</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 6. BotMatch preview ========== -->
+  <section class="section band--sunken botmatch" id="how-botmatch-helps">
+    <div class="wrap">
+      <div class="split split--text-lead">
+        <div>
+          <span class="rule-accent" aria-hidden="true"></span>
+          <h2 class="mt-0">Not sure which pool cleaner fits your pool?</h2>
+          <p class="lede">
+            Answer a few questions about your pool and get one recommendation you can act on — with the reasons it won
+            and the things it does badly.
+          </p>
+          <ol class="steps">
+            <li>
+              <span class="steps__n" aria-hidden="true">1</span>
+              <div><strong>Answer a few pool-specific questions</strong><span>Size, shape, surface, where the dirt collects, budget.</span></div>
+            </li>
+            <li>
+              <span class="steps__n" aria-hidden="true">2</span>
+              <div><strong>Eligible models are evaluated</strong><span>Anything that can't handle your pool is ruled out before scoring starts.</span></div>
+            </li>
+            <li>
+              <span class="steps__n" aria-hidden="true">3</span>
+              <div><strong>You get one recommendation</strong><span>With the reasoning, the limitations, and what to check before buying.</span></div>
+            </li>
+          </ol>
+          <div class="cluster mt-lg">
+            <a class="btn btn--accent btn--lg" href={journey.href}>{journey.ctaLabel}</a>
           </div>
-          <div class="feature-row__body">
-            <h3>Suitability first</h3>
-            <p>BotMatch chooses the best product for you before it ever looks at which retailer pays us.</p>
+          <p class="note mt-md">
+            Prefer to choose yourself? <a class="link" href={cat.hub}>Browse all pool cleaners</a>.
+          </p>
+        </div>
+        <div class="bm-visual">
+          <div class="bm-card elevated">
+            <span class="bm-card__k">What decides the result</span>
+            <ul class="bm-card__list">
+              <li>Does it physically suit your pool</li>
+              <li>Coverage you actually need</li>
+              <li>Running and maintenance reality</li>
+              <li>Current price and availability</li>
+            </ul>
+            <p class="bm-card__note">
+              Commission never enters the ranking. It is calculated separately, after the order is decided.
+            </p>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 7. Why BotPlanet is different ========== -->
+  <section class="section section--tight lit">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="rule-accent" aria-hidden="true"></span>
+        <h2 class="mt-0">How we work</h2>
+        <p>Four rules we hold ourselves to. Each one is checkable on the site.</p>
+      </div>
+
+      <div class="principles">
+        <article class="principle">
+          <span class="principle__n" aria-hidden="true">01</span>
+          <h3>Evidence before hype</h3>
+          <p>
+            Every specification and claim carries the level of evidence behind it — researched, manufacturer-stated or
+            confirmed. We don't describe a machine as tested unless we tested it.
+          </p>
+          <a class="link" href="/review-methodology/">How we review</a>
         </article>
-        <article class="feature-row reveal">
-          <div class="feature-row__lead">
-            <span class="feature-row__index" aria-hidden="true">02</span>
-            <span class="feature-row__tick">Pricing</span>
-          </div>
-          <div class="feature-row__body">
-            <h3>Honest freshness</h3>
-            <p>Every price shows when it was last checked. No stale "deals".</p>
-          </div>
+        <article class="principle">
+          <span class="principle__n" aria-hidden="true">02</span>
+          <h3>Suitability before commission</h3>
+          <p>
+            Rankings are decided on whether a robot fits your situation. What a retailer pays us is calculated after
+            that order exists, and it cannot change it.
+          </p>
+          <a class="link" href="/affiliate-disclosure/">Affiliate disclosure</a>
         </article>
-        <article class="feature-row reveal">
-          <div class="feature-row__lead">
-            <span class="feature-row__index" aria-hidden="true">03</span>
-            <span class="feature-row__tick">Evidence</span>
-          </div>
-          <div class="feature-row__body">
-            <h3>Real evidence</h3>
-            <p>Claims are labelled by evidence level — researched vs hands-on tested.</p>
-          </div>
+        <article class="principle">
+          <span class="principle__n" aria-hidden="true">03</span>
+          <h3>Prices you can date</h3>
+          <p>
+            Every price is a snapshot with the date it was checked, not a number left to rot. Where stock or shipping
+            isn't confirmed, we say so instead of guessing.
+          </p>
+          <a class="link" href="/editorial-policy/">Editorial policy</a>
         </article>
+        <article class="principle">
+          <span class="principle__n" aria-hidden="true">04</span>
+          <h3>Browse, or be guided</h3>
+          <p>
+            The whole catalogue is open without answering anything. The recommendation journey is there if you want it,
+            and it is specific to the category you're shopping.
+          </p>
+          <a class="link" href="/how-botmatch-works/">How the recommendation works</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 8. Editorial and guidance pathways ========== -->
+  <section class="section section--tight band grid-tech">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="rule-accent" aria-hidden="true"></span>
+        <h2 class="mt-0">Where to go next</h2>
+        <p>The routes through the site, and what each one is for.</p>
+      </div>
+
+      <div class="grid grid--3 paths-grid">
+        <a class="card card--interactive" href={cat.hub}>
+          <h3>The catalogue</h3>
+          <p>Every pool cleaner we cover, with specifications and current offers.</p>
+          <span class="note">Browse →</span>
+        </a>
+        <a class="card card--interactive" href={cat.compare}>
+          <h3>Comparison</h3>
+          <p>Models side by side on the differences that change your day.</p>
+          <span class="note">Compare →</span>
+        </a>
+        <a class="card card--interactive" href="/guides/">
+          <h3>Guides</h3>
+          <p>How these machines work and what to check before you spend.</p>
+          <span class="note">Read →</span>
+        </a>
+        <a class="card card--interactive" href="/best-robots/">
+          <h3>Our picks</h3>
+          <p>Selections by use case, published as the evidence behind each one lands.</p>
+          <span class="note">See picks →</span>
+        </a>
+        <a class="card card--interactive" href="/review-methodology/">
+          <h3>Our method</h3>
+          <p>How we research, what we label as evidence, and what we won't claim.</p>
+          <span class="note">Read the method →</span>
+        </a>
+        <a class="card card--interactive" href="/robots/">
+          <h3>Other categories</h3>
+          <p>What BotPlanet covers next, and what is live today.</p>
+          <span class="note">See categories →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 9. Trust and method strip ========== -->
+  <section class="section section--tight">
+    <div class="wrap">
+      <div class="trust elevated">
+        <div class="trust__items">
+          <div class="trust__item">
+            <strong>Evidence-labelled records</strong>
+            <span>Every claim carries where it came from.</span>
+          </div>
+          <div class="trust__item">
+            <strong>No invented testing</strong>
+            <span>We never imply hands-on testing we haven't done.</span>
+          </div>
+          <div class="trust__item">
+            <strong>Dated prices</strong>
+            <span>Snapshots with the date, not stale numbers.</span>
+          </div>
+          <div class="trust__item">
+            <strong>Disclosed affiliate links</strong>
+            <span>Stated wherever they appear, and never in rankings.</span>
+          </div>
+        </div>
+        <div class="trust__links">
+          <a class="link" href="/review-methodology/">Review methodology</a>
+          <a class="link" href="/editorial-policy/">Editorial policy</a>
+          <a class="link" href="/affiliate-disclosure/">Affiliate disclosure</a>
+        </div>
       </div>
     </div>
   </section>
 </Base>
+
+<style>
+  /* ---------- 1. Hero ---------- */
+  .hero-band { padding-block: clamp(var(--space-2xl), 5vw, var(--space-4xl)) var(--section-gap-tight); }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.02fr 0.98fr;
+    gap: clamp(var(--space-xl), 4vw, var(--space-3xl));
+    align-items: center;
+  }
+
+  .hero-copy h1 {
+    font-size: var(--type-display);
+    line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-display);
+    font-weight: var(--weight-bold);
+    margin: var(--space-md) 0 var(--space-lg);
+  }
+
+  .hero-copy .lede { max-width: 54ch; }
+
+  .marker {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: 5px 12px 5px 10px;
+    border: 1px solid var(--accent-primary-border);
+    background: var(--accent-primary-soft);
+    border-radius: var(--radius-pill);
+    font-family: var(--font-display);
+    font-size: var(--type-meta);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-label);
+    color: var(--accent-primary-text);
+  }
+
+  .marker__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent-primary);
+  }
+
+  .hero-actions { display: flex; flex-wrap: wrap; gap: var(--space-sm); margin-top: var(--space-xl); }
+  .hero-note { margin-top: var(--space-md); max-width: 52ch; }
+
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; gap: var(--space-xl); }
+    /* Visual after the copy on mobile: the message leads. */
+    .hero-visual { order: 2; }
+  }
+
+  @media (max-width: 480px) {
+    .hero-actions .btn { width: 100%; }
+  }
+
+  /* ---------- 2. Two paths ---------- */
+  .paths { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg); }
+
+  .path {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    padding: var(--space-xl);
+    border-radius: var(--radius-lg);
+  }
+
+  .path h3 { font-size: var(--type-subheading); margin: 0; }
+  .path > p { color: var(--text-secondary); margin: 0; }
+
+  .path__num {
+    position: absolute;
+    top: var(--space-lg);
+    right: var(--space-lg);
+    font-family: var(--font-display);
+    font-size: 40px;
+    font-weight: var(--weight-bold);
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1px var(--border-strong);
+  }
+
+  .path--accent { border-color: var(--accent-primary-border); }
+  .path--accent .path__num { -webkit-text-stroke-color: var(--accent-primary-border); }
+
+  .path__list { list-style: none; padding: 0; margin: var(--space-xs) 0 var(--space-lg); display: grid; gap: var(--space-xs); }
+  .path__list li { position: relative; padding-left: 20px; color: var(--text-secondary); font-size: var(--type-body-sm); margin: 0; }
+  .path__list li::before { content: "—"; position: absolute; left: 0; color: var(--text-decorative); }
+  .path .btn { align-self: flex-start; margin-top: auto; }
+
+  @media (max-width: 820px) { .paths { grid-template-columns: 1fr; } }
+
+  /* ---------- 3. Category showcase ---------- */
+  .factors { list-style: none; padding: 0; margin: var(--space-sm) 0 0; display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-xs) var(--space-md); }
+  .factors li { position: relative; padding-left: 18px; font-size: var(--type-body-sm); color: var(--text-secondary); margin: 0; }
+  .factors li::before { content: "›"; position: absolute; left: 0; color: var(--accent-primary); }
+
+  .cat-visual { display: grid; gap: var(--space-md); }
+  .cat-visual__second { opacity: 0.9; }
+
+  @media (max-width: 560px) { .factors { grid-template-columns: 1fr; } }
+
+  /* ---------- 4. Featured ---------- */
+  .feat { display: flex; flex-direction: column; gap: var(--space-xs); }
+
+  .feat__label {
+    font-family: var(--font-display);
+    font-size: var(--type-meta);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-caps);
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+  }
+
+  .feat__why { font-size: var(--type-meta); color: var(--text-quaternary); margin: 0; }
+
+  /* ---------- 5. Comparison ---------- */
+  .cmp { border-radius: var(--radius-lg); padding: var(--space-lg); }
+  .cmp__row { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-lg); }
+  .cmp__col { display: grid; gap: var(--space-sm); }
+
+  .cmp__stage {
+    aspect-ratio: 5 / 3;
+    border-radius: var(--radius-md);
+    display: grid;
+    place-items: center;
+    padding: var(--space-sm);
+  }
+
+  .cmp__stage :global(.robot-sil) { max-width: 72%; }
+
+  .cmp__name {
+    font-family: var(--font-display);
+    font-size: var(--type-body-sm);
+    font-weight: var(--weight-semibold);
+    margin: 0;
+  }
+
+  .cmp__facts { display: grid; gap: 6px; margin: 0; }
+  .cmp__facts > div { display: flex; justify-content: space-between; gap: var(--space-sm); border-bottom: 1px solid var(--border-subtle); padding-bottom: 5px; }
+  .cmp__facts dt { font-size: var(--type-meta); color: var(--text-quaternary); margin: 0; }
+  .cmp__facts dd { font-size: var(--type-meta); color: var(--text-secondary); margin: 0; text-align: right; }
+
+  .cmp__foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+    margin-top: var(--space-lg);
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .cmp__foot .note { margin: 0; max-width: 52ch; }
+
+  @media (max-width: 760px) {
+    .cmp__row { grid-template-columns: 1fr; gap: var(--space-md); }
+    .cmp__col { grid-template-columns: 96px 1fr; display: grid; align-items: center; gap: var(--space-md); }
+    .cmp__stage { aspect-ratio: 1; }
+    .cmp__name { grid-column: 2; }
+    .cmp__facts { grid-column: 2; }
+  }
+
+  /* ---------- 6. BotMatch preview ---------- */
+  .botmatch { border-block: 1px solid var(--border-subtle); }
+
+  .steps { list-style: none; padding: 0; margin: var(--space-lg) 0 0; display: grid; gap: var(--space-md); }
+  .steps li { display: grid; grid-template-columns: auto 1fr; gap: var(--space-md); align-items: start; margin: 0; }
+
+  .steps__n {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: var(--accent-primary-soft);
+    border: 1px solid var(--accent-primary-border);
+    color: var(--accent-primary-text);
+    font-family: var(--font-display);
+    font-size: var(--type-body-sm);
+    font-weight: var(--weight-bold);
+  }
+
+  .steps strong { display: block; font-family: var(--font-display); font-size: var(--type-card); }
+  .steps span { display: block; color: var(--text-secondary); font-size: var(--type-body-sm); margin-top: 2px; }
+
+  .bm-card { border-radius: var(--radius-lg); padding: var(--space-lg); display: grid; gap: var(--space-sm); }
+
+  .bm-card__k {
+    font-family: var(--font-display);
+    font-size: var(--type-meta);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-caps);
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+  }
+
+  .bm-card__list { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--space-xs); }
+  .bm-card__list li { position: relative; padding-left: 20px; font-size: var(--type-body-sm); color: var(--text-secondary); margin: 0; }
+  .bm-card__list li::before { content: "✓"; position: absolute; left: 0; color: var(--accent-primary); font-size: 11px; }
+  .bm-card__note { font-size: var(--type-meta); color: var(--text-quaternary); margin: var(--space-xs) 0 0; padding-top: var(--space-sm); border-top: 1px solid var(--border-subtle); }
+
+  /* ---------- 7. Principles ---------- */
+  .principles { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-xl) var(--space-2xl); }
+
+  .principle { display: grid; gap: var(--space-xs); padding-top: var(--space-md); border-top: 1px solid var(--border-default); }
+  .principle h3 { font-size: var(--type-subheading); margin: 0; }
+  .principle p { color: var(--text-secondary); margin: 0; max-width: 52ch; }
+
+  .principle__n {
+    font-family: var(--font-display);
+    font-size: var(--type-meta);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-caps);
+    color: var(--text-decorative);
+  }
+
+  .principle .link { font-size: var(--type-meta); justify-self: start; margin-top: var(--space-2xs); }
+
+  @media (max-width: 820px) { .principles { grid-template-columns: 1fr; gap: var(--space-lg); } }
+
+  /* ---------- 8. Pathways ---------- */
+  .paths-grid .card h3 { font-size: var(--type-card); }
+  .paths-grid .note { margin-top: auto; color: var(--text-tertiary); }
+
+  /* ---------- 9. Trust ---------- */
+  .trust { border-radius: var(--radius-lg); padding: var(--space-lg) var(--space-xl); display: grid; gap: var(--space-lg); }
+  .trust__items { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-lg); }
+  .trust__item { display: grid; gap: 3px; }
+  .trust__item strong { font-family: var(--font-display); font-size: var(--type-body-sm); color: var(--text-primary); }
+  .trust__item span { font-size: var(--type-meta); color: var(--text-tertiary); }
+
+  .trust__links { display: flex; flex-wrap: wrap; gap: var(--space-lg); padding-top: var(--space-md); border-top: 1px solid var(--border-subtle); }
+  .trust__links .link { font-size: var(--type-meta); }
+
+  @media (max-width: 900px) { .trust__items { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 520px) { .trust__items { grid-template-columns: 1fr; gap: var(--space-md); } }
+</style>

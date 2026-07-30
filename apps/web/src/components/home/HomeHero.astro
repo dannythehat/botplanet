@@ -1,0 +1,170 @@
+---
+/**
+ * Homepage hero composition.
+ *
+ * A single original scene: an orbital horizon, a lit water plane, the owned
+ * robot silhouette as the subject, and a few genuine interface fragments drawn
+ * from real data. Everything here is BotPlanet geometry — no photography, no
+ * stock robot, nothing implying a product was tested.
+ */
+import RobotSilhouette from "../RobotSilhouette.astro";
+
+interface Props {
+  /** Real count of live products, passed in — never invented. */
+  productCount: number;
+  /** Real price floor, already formatted. */
+  fromPrice: string | null;
+}
+const { productCount, fromPrice } = Astro.props;
+---
+<div class="scene" aria-hidden="true">
+  <!-- Orbital horizon: the planet edge the brand is named for. -->
+  <div class="scene__orbit"></div>
+  <div class="scene__orbit scene__orbit--inner"></div>
+
+  <!-- Water plane the subject sits in. Monochrome; colour arrives with photography. -->
+  <div class="scene__plane">
+    <div class="scene__grid"></div>
+  </div>
+
+  <div class="scene__subject">
+    <RobotSilhouette variant={1} />
+  </div>
+
+  <!-- Interface fragments. Every value is real, passed from the database. -->
+  <div class="frag frag--a">
+    <span class="frag__k">Catalogue</span>
+    <span class="frag__v">{productCount} models</span>
+  </div>
+  {fromPrice && (
+    <div class="frag frag--b">
+      <span class="frag__k">From</span>
+      <span class="frag__v">{fromPrice}</span>
+    </div>
+  )}
+  <div class="frag frag--c">
+    <span class="frag__k">Compared on</span>
+    <span class="frag__v">Pool size · Coverage · Power</span>
+  </div>
+</div>
+
+<style>
+  .scene {
+    position: relative;
+    aspect-ratio: 5 / 4;
+    display: grid;
+    place-items: center;
+    isolation: isolate;
+    overflow: hidden;
+    border-radius: var(--radius-xl);
+  }
+
+  /* Orbital arcs — the planetary motif, hairline only. */
+  .scene__orbit {
+    position: absolute;
+    left: 50%;
+    bottom: -46%;
+    translate: -50% 0;
+    width: 128%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    z-index: 0;
+  }
+
+  .scene__orbit--inner {
+    width: 92%;
+    bottom: -34%;
+    border-color: rgba(255, 255, 255, 0.16);
+  }
+
+  /* The lit plane the robot works on. */
+  .scene__plane {
+    position: absolute;
+    inset: auto 0 6% 0;
+    height: 46%;
+    z-index: 0;
+    background: radial-gradient(60% 100% at 50% 100%, rgba(255, 255, 255, 0.10), transparent 72%);
+    -webkit-mask-image: linear-gradient(180deg, transparent, #000 40%);
+    mask-image: linear-gradient(180deg, transparent, #000 40%);
+  }
+
+  .scene__grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 46px 30px;
+    /* Perspective: the grid recedes toward the horizon. */
+    transform: perspective(420px) rotateX(58deg);
+    transform-origin: 50% 100%;
+    -webkit-mask-image: radial-gradient(70% 80% at 50% 100%, #000, transparent 76%);
+    mask-image: radial-gradient(70% 80% at 50% 100%, #000, transparent 76%);
+  }
+
+  .scene__subject {
+    position: relative;
+    z-index: 2;
+    width: min(74%, 420px);
+    translate: 0 -6%;
+    animation: drift 9s var(--ease-in-out) infinite alternate;
+  }
+
+  /* One slow, small vertical drift. No loops of colour, no particles. */
+  @keyframes drift {
+    from { transform: translateY(0); }
+    to { transform: translateY(-10px); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .scene__subject { animation: none; }
+  }
+
+  /* ---- Interface fragments ---- */
+  .frag {
+    position: absolute;
+    z-index: 3;
+    display: grid;
+    gap: 2px;
+    padding: 8px 12px;
+    border-radius: var(--radius-sm);
+    background: rgba(8, 8, 12, 0.72);
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--border-default);
+    box-shadow: var(--shadow-md);
+  }
+
+  .frag__k {
+    font-family: var(--font-display);
+    font-size: 10px;
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-caps);
+    text-transform: uppercase;
+    color: var(--text-quaternary);
+  }
+
+  .frag__v {
+    font-family: var(--font-display);
+    font-size: 13px;
+    font-weight: var(--weight-semibold);
+    color: var(--text-primary);
+    white-space: nowrap;
+  }
+
+  .frag--a { top: 12%; left: 2%; }
+  .frag--b { top: 30%; right: 2%; }
+  .frag--c { bottom: 10%; left: 8%; }
+
+  @media (max-width: 900px) {
+    .scene { aspect-ratio: 4 / 3; }
+    .frag--c { display: none; }
+  }
+
+  @media (max-width: 520px) {
+    .frag { padding: 6px 9px; }
+    .frag__v { font-size: 11.5px; }
+    .frag--a { left: 0; top: 8%; }
+    .frag--b { right: 0; }
+  }
+</style>
