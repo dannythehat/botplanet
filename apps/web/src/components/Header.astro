@@ -1,16 +1,21 @@
 ---
 import { PRIMARY_NAV, navCategories, routes, LAUNCH_CATEGORY } from "../content/nav";
+import { shellJourney } from "../content/journeys";
 
 const cats = navCategories();
-const botmatchHref = routes.botmatch(LAUNCH_CATEGORY);
+// BotMatch is category-specific: the shell advertises a concrete journey, never
+// a generic "find any robot". Label and route both come from the config.
+const journey = shellJourney();
+const botmatchHref = journey.href;
 const path = Astro.url.pathname;
 const isActive = (href: string) => href !== "/" && path.startsWith(href.replace(/\/$/, ""));
 ---
 <!--
-  Approved structure, unchanged: logo | navigation | search | saved | Find My Robot.
-  Job 5 improves execution only — alignment, states, focus, drawer quality and
-  scroll integration. No US label, no second logo row, no square logo, no
-  preview strip, no duplicate branding.
+  Approved structure, unchanged: logo | navigation | search | saved | journey CTA.
+  The CTA is category-specific (currently "Find My Pool Cleaner") and carries the
+  primary accent because it is the highest-value action in the shell. No generic
+  a generic "Find My Robot", no US label, no second logo row, no square logo, no preview
+  strip, no duplicate branding.
 -->
 <header class="site" id="site-header" data-scrolled="false">
   <div class="wrap bar">
@@ -67,11 +72,11 @@ const isActive = (href: string) => href !== "/" && path.startsWith(href.replace(
                   </a>
                 </div>
                 <div class="mega-col mega-feature">
-                  <p class="mega-h">Not sure which?</p>
+                  <p class="mega-h">Not sure which pool cleaner?</p>
                   <a class="mega-cta" href={botmatchHref}>
-                    <span class="mega-cta__title">Try BotMatch <span aria-hidden="true">→</span></span>
+                    <span class="mega-cta__title">{journey.ctaLabel} <span aria-hidden="true">→</span></span>
                     <span class="mega-cta__body">
-                      Answer a few questions, get one clear recommendation on suitability — never commission.
+                      {journey.explanation} Ranked on suitability — never commission.
                     </span>
                   </a>
                 </div>
@@ -96,7 +101,7 @@ const isActive = (href: string) => href !== "/" && path.startsWith(href.replace(
       <button class="icon-btn" type="button" id="btn-saved" aria-label="Saved products" title="Saved">
         <span aria-hidden="true">♡</span><span class="saved-count" id="saved-count" hidden>0</span>
       </button>
-      <a class="btn btn--primary btn--sm cta" href={botmatchHref}>Find My Robot</a>
+      <a class="btn btn--accent btn--sm cta" href={botmatchHref}>{journey.ctaLabel}</a>
       <button
         class="icon-btn burger"
         type="button"
@@ -123,7 +128,7 @@ const isActive = (href: string) => href !== "/" && path.startsWith(href.replace(
         <span aria-hidden="true">✕</span>
       </button>
     </div>
-    <a class="btn btn--primary btn--block drawer-cta" href={botmatchHref}>Find My Robot</a>
+    <a class="btn btn--accent btn--block drawer-cta" href={botmatchHref}>{journey.ctaLabel}</a>
     <div class="drawer-group">
       <p class="drawer-h">Shop robots</p>
       {cats.map((c) =>
@@ -164,7 +169,7 @@ const isActive = (href: string) => href !== "/" && path.startsWith(href.replace(
   </div>
 </div>
 
-<script define:vars={{ cats, nav: PRIMARY_NAV, botmatchHref }}>
+<script define:vars={{ cats, nav: PRIMARY_NAV, botmatchHref, journeyLabel: journey.ctaLabel }}>
   const $ = (id) => document.getElementById(id);
 
   /* ---- Header gains a solid edge once the page scrolls under it. ---- */
@@ -270,7 +275,7 @@ const isActive = (href: string) => href !== "/" && path.startsWith(href.replace(
   /* ---- Search overlay ---- */
   const base = [
     ...cats.filter((c) => c.launch === "live").map((c) => ({ name: c.name, href: "/robots/" + c.slug + "/", kind: "Category" })),
-    { name: "Find My Robot (BotMatch)", href: botmatchHref, kind: "Tool" },
+    { name: journeyLabel + " (BotMatch)", href: botmatchHref, kind: "Tool" },
     ...nav.filter((n) => !n.mega && n.state !== "coming_soon").map((n) => ({ name: n.label, href: n.href, kind: "Page" })),
   ];
   const ov = $("search-ov");
@@ -417,8 +422,8 @@ const isActive = (href: string) => href !== "/" && path.startsWith(href.replace(
     left: 15px;
     right: 15px;
     bottom: 2px;
-    height: 1.5px;
-    background: var(--text-primary);
+    height: 2px;
+    background: var(--accent-primary);
     border-radius: var(--radius-pill);
   }
 
@@ -512,12 +517,16 @@ const isActive = (href: string) => href !== "/" && path.startsWith(href.replace(
     display: block;
     padding: var(--space-md);
     border-radius: var(--radius-md);
-    background: var(--surface-inverse);
-    color: var(--text-on-inverse);
-    transition: transform var(--duration-fast) var(--ease-out);
+    background: var(--accent-primary);
+    color: var(--text-on-accent);
+    transition: transform var(--duration-fast) var(--ease-out), background-color var(--duration-fast) var(--ease-out);
   }
 
-  .mega-cta:hover { transform: translateY(-1px); color: var(--text-on-inverse); }
+  .mega-cta:hover {
+    transform: translateY(-1px);
+    background: var(--accent-primary-hover);
+    color: var(--text-on-accent);
+  }
   .mega-cta:focus-visible { outline: var(--focus-ring); outline-offset: 3px; }
 
   .mega-cta__title {
@@ -531,7 +540,7 @@ const isActive = (href: string) => href !== "/" && path.startsWith(href.replace(
     display: block;
     font-size: var(--type-meta);
     line-height: var(--leading-normal);
-    color: #43434e;
+    color: #06231e;
     margin-top: var(--space-xs);
   }
 

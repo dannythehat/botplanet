@@ -94,10 +94,13 @@ const {
       box-shadow var(--duration-base) var(--ease-out);
   }
 
-  .pcard:hover {
+  /* The single accent moment on a card: the edge and the affordance light up
+     on intent. The card itself stays monochrome. */
+  .pcard:hover,
+  .pcard:focus-visible {
     transform: translateY(-3px);
-    border-color: var(--border-strong);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), var(--shadow-lg);
+    border-color: var(--accent-primary-border);
+    box-shadow: inset 0 1px 0 var(--accent-primary-soft), var(--shadow-lg);
   }
 
   .pcard:focus-visible {
@@ -217,7 +220,11 @@ const {
     transition: transform var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out);
   }
 
-  .pcard:hover .pcard__go { transform: translateX(3px); color: var(--text-primary); }
+  .pcard:hover .pcard__go,
+  .pcard:focus-visible .pcard__go {
+    transform: translateX(3px);
+    color: var(--accent-primary-text);
+  }
 
   .pcard__note {
     font-size: var(--type-meta);

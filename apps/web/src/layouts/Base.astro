@@ -32,7 +32,9 @@ interface Props {
 
 const {
   title,
-  description = "Shop the planet yourself, or let BotPlanet find your perfect robot.",
+  // Neutral shell default: browsing-first, and never implies one questionnaire
+  // covers the whole robotics market. Pages override with their own copy.
+  description = "Browse, compare and choose real-world robots for the US — honest pricing, labelled evidence and clear limitations.",
   path,
   ogImage,
   ogType,

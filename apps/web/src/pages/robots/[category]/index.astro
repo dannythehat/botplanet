@@ -2,6 +2,7 @@
 import Base from "../../../layouts/Base.astro";
 import PoolDiagram from "../../../components/PoolDiagram.astro";
 import ProductCard from "../../../components/ProductCard.astro";
+import { journeyFor } from "../../../content/journeys";
 import { getDb, schema } from "../../../lib/db";
 import { usd, titleCase } from "../../../lib/format";
 import { and, eq, inArray } from "drizzle-orm";
@@ -13,6 +14,8 @@ const cat = (
   await db.select().from(schema.categories).where(eq(schema.categories.slug, category!)).limit(1)
 )[0];
 if (!cat) return new Response("Category not found", { status: 404 });
+
+const journey = journeyFor(category);
 
 const products = await db
   .select()
@@ -39,7 +42,7 @@ function minPrice(productId: string): number | null {
       <h1 class="mt-0">{cat.name}</h1>
       <p class="note">{products.length} products · US market · suitability-ranked by BotMatch</p>
     </div>
-    <a class="btn btn--primary" href={`/botmatch/${cat.slug}/`}>Find my robot</a>
+    {journey && <a class="btn btn--accent" href={journey.href}>{journey.ctaLabel}</a>}
   </div>
 
   <div class="mt-lg mb-lg"><PoolDiagram /></div>

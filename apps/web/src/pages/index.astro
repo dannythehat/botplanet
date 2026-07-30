@@ -5,6 +5,11 @@ import { getDb, schema } from "../lib/db";
 import { eq } from "drizzle-orm";
 import { usd, titleCase } from "../lib/format";
 import { inArray } from "drizzle-orm";
+import { shellJourney } from "../content/journeys";
+
+// BotMatch is one BotPlanet capability, previewed for the live category —
+// not the purpose of the site, and never a generic "find any robot".
+const journey = shellJourney();
 
 const db = getDb(Astro.locals);
 const products = await db
@@ -41,19 +46,24 @@ const minPrice = (productId: string): number | null => {
   same three blocks, same copy, no new marketing sections and no new claims.
   Job 7 still owns the full homepage story.
 -->
-<Base title="BotPlanet — Find your perfect robot" bleed={true}>
+<Base
+  title="BotPlanet — Shop real-world robots"
+  description="Browse, compare and choose real-world robots for the US, with honest pricing, labelled evidence and clear limitations."
+  bleed={true}
+>
   <!-- Band 1: hero, lit from above with orbital geometry behind it. -->
   <section class="hero lit">
     <div class="wrap orbit orbit--horizon">
       <span class="eyebrow">Real-world robots · United States</span>
-      <h1>Shop the planet yourself,<br />or let BotPlanet find your perfect robot.</h1>
+      <h1>Shop the planet's real-world robots.</h1>
       <p>
-        Browse and compare real-world robots normally — or answer a few questions and
-        BotMatch recommends the right one for your needs, on suitability, never commission.
+        Browse, compare and choose robots that do real work — with honest pricing,
+        labelled evidence and clear limitations. Shopping for a robotic pool cleaner?
+        Try the first BotMatch journey.
       </p>
       <div class="hero__actions">
-        <a class="btn btn--primary btn--lg" href="/botmatch/robotic-pool-cleaners/">Start BotMatch</a>
-        <a class="btn btn--lg" href="/robots/robotic-pool-cleaners/">Browse pool robots</a>
+        <a class="btn btn--accent btn--lg" href={journey.href}>{journey.ctaLabel}</a>
+        <a class="btn btn--lg" href="/robots/robotic-pool-cleaners/">Browse Pool Cleaners</a>
       </div>
     </div>
   </section>

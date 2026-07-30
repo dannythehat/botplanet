@@ -46,12 +46,44 @@
   --border-inverse: #ffffff;
 
   /* ---------------------------------------------------------------- */
-  /* Selective-impact colour. Not for routine UI. See rule above.     */
+  /* ACCENT SYSTEM — semantic, and deliberately scarce.                */
+  /*                                                                   */
+  /* One primary BotPlanet accent: a precision teal-cyan. Chosen        */
+  /* because it reads as instrumentation and diagnostics rather than    */
+  /* SaaS purple or gaming neon, it holds 9.51:1 against the canvas,    */
+  /* and it separates cleanly from the blues and navies that dominate   */
+  /* pool-robot photography — so product colour and interface colour    */
+  /* never compete.                                                     */
+  /*                                                                   */
+  /* PERMITTED: primary actions, the recommendation journey, comparison */
+  /* winners, verified evidence, alerts and limitations, conversion     */
+  /* moments, active/selected interactive states, the focus ring.       */
+  /* FORBIDDEN: routine navigation, ordinary borders, standard          */
+  /* metadata, secondary buttons, every card, decorative gradients,     */
+  /* section backgrounds.                                               */
   /* ---------------------------------------------------------------- */
-  --impact-signal: #7aa2ff; /* focus ring, BotMatch, key interactive state */
-  --impact-positive: #5bd39a; /* verified / in-stock / confirmed evidence */
-  --impact-caution: #e0b657; /* provisional, snapshot, awaiting evidence */
-  --impact-critical: #e0796b; /* unavailable, withdrawn, failed */
+  --accent-primary: #17c8b0;
+  --accent-primary-hover: #2fe0c4;
+  --accent-primary-active: #12a894;
+  /* Brighter tone for accent-coloured TEXT on dark surfaces (11.4:1). */
+  --accent-primary-text: #3fe3cc;
+  /* Tinted fill for selected/soft states — never a full-colour panel. */
+  --accent-primary-soft: rgba(23, 200, 176, 0.12);
+  --accent-primary-border: rgba(23, 200, 176, 0.42);
+  /* Text placed ON the accent (e.g. inside a filled button): 9.66:1. */
+  --text-on-accent: #04120f;
+
+  /* Status accents. Each is always paired with a glyph or label so
+     meaning never depends on colour alone. */
+  --accent-positive: #5fde96; /* verified / in stock / confirmed evidence */
+  --accent-warning: #e8b44c; /* provisional, snapshot, awaiting evidence */
+  --accent-critical: #f0776a; /* unavailable, withdrawn, failed */
+
+  /* Back-compatibility: earlier work referenced --impact-*. */
+  --impact-signal: var(--accent-primary);
+  --impact-positive: var(--accent-positive);
+  --impact-caution: var(--accent-warning);
+  --impact-critical: var(--accent-critical);
 
   /* ---------------------------------------------------------------- */
   /* Spacing — a 4px-based scale. Use these, never arbitrary pixels.  */
@@ -155,6 +187,10 @@
 
   --header-height: 84px;
   --header-height-compact: 68px;
+  /* Single source of truth for clearing the sticky header. Used by
+     scroll-padding-top on the document AND scroll-margin-top on every anchor
+     target, so a heading can never land underneath the bar. */
+  --scroll-offset: calc(84px + var(--space-lg));
 
   /* ---------------------------------------------------------------- */
   /* Compatibility aliases.                                           */
@@ -174,6 +210,13 @@
   --warn: var(--impact-caution);
   --bad: var(--impact-critical);
   --radius: var(--radius-md);
+}
+
+/* The compact header is shorter, so the scroll offset must shrink with it. */
+@media (max-width: 900px) {
+  :root {
+    --scroll-offset: calc(68px + var(--space-md));
+  }
 }
 
 /* Reduced motion is respected globally: transitions collapse to instant. */

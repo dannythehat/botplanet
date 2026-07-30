@@ -1,8 +1,11 @@
 ---
-import { FOOTER_GROUPS, routes, LAUNCH_CATEGORY } from "../content/nav";
+import { FOOTER_GROUPS } from "../content/nav";
 import { SITE, TRUST_LINKS } from "../lib/site";
+import { shellJourney } from "../content/journeys";
 const year = 2026;
-const botmatchHref = routes.botmatch(LAUNCH_CATEGORY);
+// Category-specific journey. No generic site-wide BotMatch prompt: one
+// questionnaire cannot meaningfully cover the whole robotics market.
+const journey = shellJourney();
 
 const LEGAL = TRUST_LINKS.filter((l) =>
   ["/privacy/", "/affiliate-disclosure/", "/editorial-policy/"].includes(l.href),
@@ -10,18 +13,19 @@ const LEGAL = TRUST_LINKS.filter((l) =>
 ---
 <!--
   Compact by design. The footer closes the page; it must never be its largest
-  visual section. One slim BotMatch prompt, tight link groups, then legal.
-  No duplicate brand lockup — the header already carries the mark.
+  visual section. One slim, CATEGORY-SPECIFIC journey prompt, tight link groups,
+  then legal. No generic site-wide BotMatch claim and no duplicate brand
+  lockup — the header already carries the mark.
 -->
 <footer class="site">
   <!-- Slim conversion strip: one line of intent + one action. -->
   <div class="foot-prompt">
     <div class="wrap foot-prompt__inner">
       <p class="foot-prompt__text">
-        <strong>Not sure which robot fits?</strong>
-        <span class="muted">One short questionnaire, one clear recommendation — on suitability, never commission.</span>
+        <strong>Not sure which pool cleaner fits?</strong>
+        <span class="muted">{journey.explanation}</span>
       </p>
-      <a class="btn btn--primary btn--sm" href={botmatchHref}>Find My Robot</a>
+      <a class="btn btn--accent btn--sm" href={journey.href}>{journey.ctaLabel}</a>
     </div>
   </div>
 

@@ -62,7 +62,7 @@ export interface NavItem {
 
 export const PRIMARY_NAV: NavItem[] = [
   { label: "Shop Robots", href: routes.category(LAUNCH_CATEGORY), mega: true },
-  { label: "Find My Robot", href: routes.botmatch(LAUNCH_CATEGORY) },
+  { label: "Find My Pool Cleaner", href: routes.botmatch(LAUNCH_CATEGORY) },
   { label: "Compare", href: routes.compare(LAUNCH_CATEGORY) },
   { label: "Best Robots", href: routes.best() },
   { label: "Guides", href: routes.guides() },
@@ -87,7 +87,7 @@ export const FOOTER_GROUPS: { title: string; links: { href: string; label: strin
   {
     title: "BotMatch",
     links: [
-      { href: routes.botmatch(LAUNCH_CATEGORY), label: "Find my robot" },
+      { href: routes.botmatch(LAUNCH_CATEGORY), label: "Find My Pool Cleaner" },
       { href: "/how-botmatch-works/", label: "How BotMatch works" },
     ],
   },

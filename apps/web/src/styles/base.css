@@ -26,8 +26,28 @@ html {
   background: var(--bg-base);
   scroll-behavior: smooth;
   /* Anchor targets clear the sticky header instead of hiding beneath it. */
-  scroll-padding-top: calc(var(--header-height) + var(--space-md));
+  scroll-padding-top: var(--scroll-offset);
   -webkit-text-size-adjust: 100%;
+}
+
+/**
+ * Sticky-header clearance. scroll-padding-top alone is not enough: it is
+ * ignored by some in-page jumps and by focus-driven scrolling. Every heading
+ * and every element that can be an anchor destination also carries a matching
+ * scroll-margin-top, so a destination is never hidden under the bar — whether
+ * it was reached by link, by keyboard, or by the skip link.
+ */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+[id],
+:target,
+section,
+article {
+  scroll-margin-top: var(--scroll-offset);
 }
 
 @media (prefers-reduced-motion: reduce) {
