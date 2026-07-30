@@ -8,7 +8,10 @@ const isActive = (href: string) => href !== "/" && path.startsWith(href.replace(
 ---
 <header class="site">
   <div class="wrap bar">
-    <a class="logo" href="/" aria-label="BotPlanet — home"><img src="/logo/logo-lockup-web.png" alt="BotPlanet" class="logo-full" width="58" height="58" /></a>
+    <a class="logo" href="/" aria-label="BotPlanet — home">
+      <img src="/logo/logo-desktop.png" alt="BotPlanet" class="logo-d" height="52" />
+      <img src="/logo/logo-mobile.png" alt="BotPlanet" class="logo-m" height="40" />
+    </a>
 
     <nav class="main" aria-label="Primary">
       {PRIMARY_NAV.map((item) =>
@@ -63,7 +66,7 @@ const isActive = (href: string) => href !== "/" && path.startsWith(href.replace(
   <div class="drawer" id="drawer" hidden>
     <div class="drawer-panel" role="dialog" aria-label="Menu">
       <div class="drawer-head">
-        <img src="/logo/logo-lockup-web.png" alt="BotPlanet" style="height:42px;width:auto" />
+        <img src="/logo/logo-mobile.png" alt="BotPlanet" style="height:34px;width:auto" />
         <button class="icon-btn" type="button" id="btn-close" aria-label="Close menu">✕</button>
       </div>
       <a class="drawer-cta" href={botmatchHref}>✦ Find My Robot</a>
@@ -164,8 +167,9 @@ const isActive = (href: string) => href !== "/" && path.startsWith(href.replace(
 
 <style>
   .bar { display: flex; align-items: center; gap: 22px; height: 76px; }
-  .logo { display: flex; align-items: center; }
-  .logo-full { height: 58px; width: auto; display: block; }
+  .logo { display: flex; align-items: center; flex: 0 0 auto; }
+  .logo-d { height: 52px; width: auto; display: block; }
+  .logo-m { display: none; height: 40px; width: auto; }
 
   nav.main { display: flex; gap: 4px; align-items: center; margin-left: 6px; }
   .nav-link { color: var(--muted); font-weight: 500; font-size: 14px; padding: 8px 11px; border-radius: 8px; white-space: nowrap; display: inline-flex; align-items: center; gap: 5px; }
@@ -223,10 +227,17 @@ const isActive = (href: string) => href !== "/" && path.startsWith(href.replace(
   .search-hint { margin: 10px 4px 2px; font-size: 12px; }
 
   @media (max-width: 900px) {
-    nav.main, .market { display: none; }
+    nav.main, .market, .cta { display: none; }
     .burger { display: inline-flex; }
-    .cta { padding: 8px 14px; }
-    .bar { height: 64px; }
-    .logo-full { height: 46px; }
+    .bar { height: 62px; }
+    .logo-d { display: none; }
+    .logo-m { display: block; }
+    .head-actions { gap: 6px; }
+    .icon-btn { width: 34px; height: 34px; }
+  }
+  /* small phones: brand + menu only, uncrowded */
+  @media (max-width: 440px) {
+    #btn-search, #btn-saved { display: none; }
+    .logo-m { height: 36px; }
   }
 </style>
