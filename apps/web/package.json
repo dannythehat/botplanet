@@ -25,6 +25,7 @@
     "@cloudflare/workers-types": "^4.20250405.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
+    "playwright-core": "1.49",
     "wrangler": "^3.114.0"
   }
 }

@@ -54,6 +54,10 @@ const isActive = (href: string) => href !== "/" && path.startsWith(href.replace(
       <button class="icon-btn burger" type="button" id="btn-menu" aria-label="Menu" aria-expanded="false">☰</button>
     </div>
   </div>
+</header>
+
+<!-- Overlays live OUTSIDE the backdrop-filtered header so position:fixed is
+     relative to the viewport, not trapped in the 66px header containing block. -->
 
   <!-- Mobile drawer -->
   <div class="drawer" id="drawer" hidden>
@@ -89,7 +93,6 @@ const isActive = (href: string) => href !== "/" && path.startsWith(href.replace(
     </div>
     <div class="search-scrim" id="search-scrim"></div>
   </div>
-</header>
 
 <script define:vars={{ cats, nav: PRIMARY_NAV, botmatchHref }}>
   const $ = (id) => document.getElementById(id);
@@ -209,7 +212,8 @@ const isActive = (href: string) => href !== "/" && path.startsWith(href.replace(
   .drawer-link.soon { color: var(--muted); }
 
   /* search */
-  .search-ov { position: fixed; inset: 0; z-index: 70; display: flex; justify-content: center; align-items: flex-start; }
+  .search-ov { display: none; position: fixed; inset: 0; z-index: 70; justify-content: center; align-items: flex-start; }
+  .search-ov:not([hidden]) { display: flex; }
   .search-scrim { position: absolute; inset: 0; background: rgba(0,0,0,0.65); backdrop-filter: blur(3px); }
   .search-box { position: relative; z-index: 1; width: min(560px, 92vw); margin-top: 12vh; background: var(--panel); border: 1px solid var(--border-2); border-radius: 14px; padding: 14px; box-shadow: 0 30px 80px rgba(0,0,0,0.6); }
   .search-box input { width: 100%; font-size: 17px; }

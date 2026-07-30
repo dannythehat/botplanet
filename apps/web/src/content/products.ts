@@ -18,6 +18,8 @@
 import type { EvidenceKey } from "./team";
 
 export interface ProductEditorial {
+  /** Stable canonical product ID — matches D1 `products.id`. Join through THIS, never the slug (slugs can change). */
+  productId: string;
   slug: string;
   oneLiner: string;
   verdict: string;
@@ -49,7 +51,7 @@ export interface ProductEditorial {
 
 const R = "2026-07-30";
 
-export const PRODUCTS: Record<string, ProductEditorial> = {
+const RAW: Record<string, Omit<ProductEditorial, "productId">> = {
   "wybot-c1": {
     slug: "wybot-c1",
     oneLiner: "Affordable cordless robot for in-ground and above-ground pools with app control and waterline cleaning.",
@@ -595,5 +597,32 @@ export const PRODUCTS: Record<string, ProductEditorial> = {
   },
 };
 
+/**
+ * Stable canonical product IDs — the SINGLE source of the editorial↔D1 join.
+ * These MUST match D1 `products.id` exactly (see packages/db/seed/pool/catalogue.ts).
+ * The slug is only a route identifier and may change; the productId must not.
+ */
+export const PRODUCT_ID: Record<string, string> = {
+  "beatbot-aquasense-2-ultra": "prod-beatbot-aquasense-2-ultra",
+  "aiper-scuba-x1": "prod-aiper-scuba-x1",
+  "aiper-scuba-s1": "prod-aiper-scuba-s1",
+  "aiper-seagull-se": "prod-aiper-seagull-se",
+  "wybot-c1": "prod-wybot-c1",
+  "dolphin-nautilus-cc-plus": "prod-dolphin-nautilus-cc-plus",
+  "dolphin-premier": "prod-dolphin-premier",
+  "polaris-freedom": "prod-polaris-freedom",
+  "betta-se-plus": "prod-betta-se-plus",
+  "dolphin-e10": "prod-dolphin-e10",
+};
+
+/** Editorial records with the stable productId attached, keyed by slug (route id). */
+export const PRODUCTS: Record<string, ProductEditorial> = Object.fromEntries(
+  Object.entries(RAW).map(([slug, r]) => [slug, { ...r, productId: PRODUCT_ID[slug] ?? `prod-${slug}` }]),
+) as Record<string, ProductEditorial>;
+
+/** Lookup by route slug. */
 export const productEditorial = (slug: string): ProductEditorial | undefined => PRODUCTS[slug];
+/** Lookup by stable canonical productId (the D1 join key). */
+export const productEditorialById = (productId: string): ProductEditorial | undefined =>
+  Object.values(PRODUCTS).find((p) => p.productId === productId);
 export const hasEditorial = (slug: string): boolean => slug in PRODUCTS;
