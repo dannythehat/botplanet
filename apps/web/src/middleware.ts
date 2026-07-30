@@ -9,6 +9,13 @@ import { defineMiddleware } from "astro:middleware";
 const PUBLIC = new Set(["/admin/login", "/api/admin/login"]);
 
 export const onRequest = defineMiddleware(async (context, next) => {
+  // Canonical host: 301 www → apex so there is one true production host.
+  const host = context.request.headers.get("host")?.toLowerCase() ?? "";
+  if (host === "www.botplanet.io") {
+    const url = new URL(context.request.url);
+    return context.redirect(`https://botplanet.io${url.pathname}${url.search}`, 301);
+  }
+
   const path = context.url.pathname;
   const guarded = path === "/admin" || path.startsWith("/admin/") || path.startsWith("/api/admin/");
   if (!guarded || PUBLIC.has(path)) return next();
