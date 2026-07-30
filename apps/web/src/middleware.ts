@@ -1,4 +1,5 @@
 import { defineMiddleware } from "astro:middleware";
+import { resolveRedirect, safeQuery } from "./lib/routing";
 
 /**
  * Protect /admin and /api/admin with a shared token (ADMIN_TOKEN secret).
@@ -14,6 +15,18 @@ export const onRequest = defineMiddleware(async (context, next) => {
   if (host === "www.botplanet.io") {
     const url = new URL(context.request.url);
     return context.redirect(`https://botplanet.io${url.pathname}${url.search}`, 301);
+  }
+
+  /**
+   * Canonical URL enforcement. One permanent hop, never a chain: the resolver
+   * normalises and de-aliases in a single step and its destinations are proven
+   * canonical by test. Unknown paths are NOT redirected — they fall through to
+   * a genuine 404 rather than being swept to the homepage.
+   */
+  const redirect = resolveRedirect(context.url.pathname);
+  if (redirect) {
+    const query = safeQuery(context.url.search);
+    return context.redirect(redirect.to + query, redirect.status);
   }
 
   const path = context.url.pathname;

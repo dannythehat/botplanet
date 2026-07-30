@@ -1,15 +1,13 @@
 ---
-import { FOOTER_GROUPS } from "../content/nav";
-import { SITE, TRUST_LINKS } from "../lib/site";
+import { FOOTER_GROUPS, LEGAL_ITEMS } from "../content/nav-surfaces";
+import { SITE } from "../lib/site";
 import { shellJourney } from "../content/journeys";
 const year = 2026;
 // Category-specific journey. No generic site-wide BotMatch prompt: one
 // questionnaire cannot meaningfully cover the whole robotics market.
 const journey = shellJourney();
 
-const LEGAL = TRUST_LINKS.filter((l) =>
-  ["/privacy/", "/affiliate-disclosure/", "/editorial-policy/"].includes(l.href),
-);
+const LEGAL = LEGAL_ITEMS;
 ---
 <!--
   Compact by design. The footer closes the page; it must never be its largest

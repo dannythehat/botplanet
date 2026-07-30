@@ -1,0 +1,36 @@
+---
+/** Guides index — category guide hubs, honest about what is published. */
+import Base from "../../layouts/Base.astro";
+import { CATEGORIES, categoryRoutes } from "../../content/routes";
+import { breadcrumbsFor } from "../../lib/routing";
+
+const cats = CATEGORIES.filter((c) => c.launch !== "hidden").sort((a, b) => a.order - b.order);
+const crumbs = breadcrumbsFor("/guides/");
+---
+<Base
+  title="Robot guides — how they work and what matters"
+  description="Educational and troubleshooting guides for real-world robots: how they work, what actually matters when choosing one, and how to keep one running."
+  breadcrumbs={crumbs}
+>
+  <div class="section-head">
+    <span class="rule-accent" aria-hidden="true"></span>
+    <span class="eyebrow">Guides</span>
+    <h1 class="mt-0">Guides</h1>
+    <p>Plain explanations of how these machines work, what matters when choosing one, and how to keep one running.</p>
+  </div>
+
+  <div class="grid grid--2">
+    {cats.map((c) => (
+      <a class="card card--interactive" href={categoryRoutes(c.slug).guides}>
+        <span class={`pill ${c.launch === "live" ? "pill--strong" : "pill--warn"}`}>
+          {c.launch === "live" ? "In progress" : "Coming soon"}
+        </span>
+        <h2 class="g-title">{c.name} guides</h2>
+        <p>{c.short}</p>
+      </a>
+    ))}
+  </div>
+</Base>
+<style>
+  .g-title { font-size: var(--type-card); margin: 0; }
+</style>

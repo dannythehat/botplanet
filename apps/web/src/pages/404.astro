@@ -1,0 +1,43 @@
+---
+/**
+ * Branded 404. Returns a genuine 404 status (Astro sets it for this route),
+ * is noindex, and offers real onward routes instead of dead-ending or making
+ * a misleading BotMatch promise.
+ */
+import Base from "../layouts/Base.astro";
+import { LAUNCH_CATEGORY, categoryRoutes } from "../content/routes";
+import { shellJourney } from "../content/journeys";
+const cat = categoryRoutes(LAUNCH_CATEGORY);
+const journey = shellJourney();
+---
+<Base title="Page not found — BotPlanet" description="That page does not exist on BotPlanet." noindex={true} narrow={true}>
+  <div class="nf">
+    <span class="eyebrow">Error 404</span>
+    <h1>That page doesn't exist.</h1>
+    <p class="lede">
+      The address may be mistyped, or the page may have been moved. Nothing has been lost — here is where to go next.
+    </p>
+
+    <form class="search-form" method="get" action="/search/" role="search">
+      <label class="sr-only" for="nf-q">Search BotPlanet</label>
+      <input type="search" id="nf-q" name="q" placeholder="Search robots, guides, comparisons…" />
+      <button class="btn btn--primary" type="submit">Search</button>
+    </form>
+
+    <ul class="nf-links">
+      <li><a class="link" href="/robots/">All robot categories</a></li>
+      <li><a class="link" href={cat.hub}>Robotic pool cleaners</a> — the live US catalogue</li>
+      <li><a class="link" href={cat.compare}>Compare pool cleaners</a></li>
+      <li><a class="link" href={journey.href}>{journey.ctaLabel}</a></li>
+      <li><a class="link" href="/">Back to the homepage</a></li>
+    </ul>
+  </div>
+</Base>
+<style>
+  .nf { padding-block: var(--space-xl) var(--space-2xl); }
+  .search-form { display: flex; gap: var(--space-sm); margin: var(--space-lg) 0; flex-wrap: wrap; max-width: 520px; }
+  .search-form input { flex: 1 1 220px; }
+  .nf-links { list-style: none; padding: 0; margin: var(--space-lg) 0 0; display: grid; gap: var(--space-sm); }
+  .nf-links li { margin: 0; color: var(--text-tertiary); font-size: var(--type-body-sm); }
+  .nf-links a { font-weight: var(--weight-semibold); }
+</style>

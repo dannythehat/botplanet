@@ -46,75 +46,26 @@ export const routes = {
   product: (slug: string, productSlug: string) => `/robots/${slug}/${productSlug}/`,
   botmatch: (slug: string) => `/botmatch/${slug}/`,
   compare: (slug: string) => `/compare/${slug}/`,
-  best: (slug?: string) => (slug ? `/best/${slug}/` : "/best/"),
+  best: (slug?: string) => (slug ? `/best-robots/${slug}/` : "/best-robots/"),
   guide: (guideSlug: string) => `/guides/${guideSlug}/`,
+  categoryGuides: (slug: string) => `/guides/${slug}/`,
+  categoryDeals: (slug: string) => `/deals/${slug}/`,
   guides: () => "/guides/",
   deals: () => "/deals/",
 } as const;
 
-/** Primary header items. `mega` opens the Shop Robots panel. */
+/**
+ * Nav surfaces are now DERIVED from the route registry (content/routes.ts) so
+ * a path can never drift between the header, footer, breadcrumbs and sitemap.
+ * These re-exports keep the existing component imports working.
+ *
+ * NOTE: routes.ts imports CATEGORIES/LAUNCH_CATEGORY from this file, so the
+ * derived exports live in content/nav-surfaces.ts to avoid a circular import.
+ */
 export interface NavItem {
-  /**
-   * Display priority in the top bar only. "utility" items stay in the mega
-   * menu, drawer and footer but are kept out of the desktop bar so the header
-   * never overflows; "secondary" items drop out on narrower desktops.
-   * This is presentation, not information architecture — Job 6 owns nav IA.
-   */
   bar?: "primary" | "secondary" | "utility";
   label: string;
   href: string;
   mega?: boolean;
   state?: LaunchState;
 }
-
-export const PRIMARY_NAV: NavItem[] = [
-  { label: "Shop Robots", href: routes.category(LAUNCH_CATEGORY), mega: true },
-  { label: "Find My Pool Cleaner", href: routes.botmatch(LAUNCH_CATEGORY) },
-  { label: "Compare", href: routes.compare(LAUNCH_CATEGORY) },
-  { label: "Best Robots", href: routes.best(), bar: "secondary" },
-  { label: "Guides", href: routes.guides() },
-  { label: "Deals", href: routes.deals(), bar: "secondary" },
-  { label: "Robot News", href: "/news/", state: "coming_soon", bar: "utility" },
-  { label: "For Business", href: "/business/", bar: "utility" },
-  { label: "About", href: "/about/", bar: "utility" },
-];
-
-/** Footer link groups. */
-export const FOOTER_GROUPS: { title: string; links: { href: string; label: string; state?: LaunchState }[] }[] = [
-  {
-    title: "Explore",
-    links: [
-      { href: routes.category(LAUNCH_CATEGORY), label: "Shop pool cleaners" },
-      { href: routes.compare(LAUNCH_CATEGORY), label: "Compare" },
-      { href: routes.best(), label: "Best robotic pool cleaners" },
-      { href: routes.guides(), label: "Guides" },
-      { href: routes.deals(), label: "Deals" },
-    ],
-  },
-  {
-    title: "BotMatch",
-    links: [
-      { href: routes.botmatch(LAUNCH_CATEGORY), label: "Find My Pool Cleaner" },
-      { href: "/how-botmatch-works/", label: "How BotMatch works" },
-    ],
-  },
-  {
-    title: "Company",
-    links: [
-      { href: "/about/", label: "About BotPlanet" },
-      { href: "/review-methodology/", label: "How we review" },
-      { href: "/editorial-policy/", label: "Editorial policy" },
-      { href: "/business/", label: "For business" },
-      { href: "/contact/", label: "Contact" },
-    ],
-  },
-  {
-    title: "Trust & legal",
-    links: [
-      { href: "/affiliate-disclosure/", label: "Affiliate disclosure" },
-      { href: "/evidence-policy/", label: "Evidence & sourcing" },
-      { href: "/privacy/", label: "Privacy" },
-      { href: "/terms/", label: "Terms" },
-    ],
-  },
-];

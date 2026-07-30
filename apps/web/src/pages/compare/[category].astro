@@ -3,6 +3,7 @@ import Base from "../../layouts/Base.astro";
 import { getDb, schema } from "../../lib/db";
 import { usd, titleCase } from "../../lib/format";
 import { and, eq, inArray } from "drizzle-orm";
+import { breadcrumbsFor } from "../../lib/routing";
 
 const { category } = Astro.params;
 const db = getDb(Astro.locals);
@@ -27,9 +28,10 @@ const minPrice = (pid: string) => {
 };
 
 products.sort((a, b) => (minPrice(a.id) ?? Infinity) - (minPrice(b.id) ?? Infinity));
+const crumbs = breadcrumbsFor(Astro.url.pathname);
 ---
 
-<Base title={`Compare ${cat.name}`} description={`Side-by-side comparison of ${cat.name.toLowerCase()}.`}>
+<Base title={`Compare ${cat.name}`} description={`Side-by-side comparison of ${cat.name.toLowerCase()}.`} breadcrumbs={crumbs}>
   <div class="row" style="justify-content:space-between;">
     <h1>Compare {cat.name}</h1>
     <a class="btn primary" href={`/botmatch/${cat.slug}/`}>Not sure? Let BotPlanet choose →</a>

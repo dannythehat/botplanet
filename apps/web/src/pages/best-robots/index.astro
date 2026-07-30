@@ -1,0 +1,39 @@
+---
+/** Best-of index. Lists only categories whose best-of work exists or is named. */
+import Base from "../../layouts/Base.astro";
+import { CATEGORIES, categoryRoutes } from "../../content/routes";
+import { breadcrumbsFor } from "../../lib/routing";
+
+const cats = CATEGORIES.filter((c) => c.launch !== "hidden").sort((a, b) => a.order - b.order);
+const crumbs = breadcrumbsFor("/best-robots/");
+---
+<Base
+  title="Best robots — our picks by use case"
+  description="BotPlanet's best-of picks, chosen by use case with the reasoning, the evidence level and who each product is wrong for."
+  breadcrumbs={crumbs}
+>
+  <div class="section-head">
+    <span class="rule-accent" aria-hidden="true"></span>
+    <span class="eyebrow">Best robots</span>
+    <h1 class="mt-0">Best picks by use case</h1>
+    <p>
+      Every pick states the reasoning, the evidence level behind it, and who should avoid it. Best-of pages publish as
+      each category's product data is verified.
+    </p>
+  </div>
+
+  <div class="grid grid--2">
+    {cats.map((c) => (
+      <a class="card card--interactive" href={categoryRoutes(c.slug).best}>
+        <span class={`pill ${c.launch === "live" ? "pill--strong" : "pill--warn"}`}>
+          {c.launch === "live" ? "In progress" : "Coming soon"}
+        </span>
+        <h2 class="b-title">Best {c.name.toLowerCase()}</h2>
+        <p>{c.short}</p>
+      </a>
+    ))}
+  </div>
+</Base>
+<style>
+  .b-title { font-size: var(--type-card); margin: 0; }
+</style>

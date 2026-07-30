@@ -2,9 +2,15 @@ import type { APIRoute } from "astro";
 import { and, eq } from "drizzle-orm";
 import { getDb, schema } from "../lib/db";
 import { SITE } from "../lib/site";
+import { LAUNCH_CATEGORY, sitemapRoutes } from "../content/routes";
 
-const CAT = "robotic-pool-cleaners";
-
+/**
+ * XML sitemap generated from the route registry plus published products.
+ *
+ * Excluded by construction: non-indexable routes, coming-soon placeholders,
+ * hidden routes, /go, /admin, /api, search and saved, every redirect source,
+ * and any query-parameter variant. Only canonical production URLs appear.
+ */
 export const GET: APIRoute = async ({ locals }) => {
   const db = getDb(locals);
   const base = `https://${SITE.domain}`;
@@ -15,23 +21,17 @@ export const GET: APIRoute = async ({ locals }) => {
     .where(and(eq(schema.products.categoryId, "cat-pool-cleaners"), eq(schema.products.status, "published")));
 
   const paths = [
-    "/",
-    `/robots/${CAT}/`,
-    `/compare/${CAT}/`,
-    `/botmatch/${CAT}/`,
-    "/about/",
-    "/how-botmatch-works/",
-    "/editorial-policy/",
-    "/review-methodology/",
-    "/affiliate-disclosure/",
-    "/privacy/",
-    ...products.map((p) => `/robots/${CAT}/${p.slug}/`),
+    ...sitemapRoutes().map((r) => r.path),
+    ...products.map((p) => `/robots/${LAUNCH_CATEGORY}/${p.slug}/`),
   ];
+
+  // Defensive: the registry is tested, but never emit a duplicate.
+  const unique = [...new Set(paths)].sort();
 
   const xml =
     `<?xml version="1.0" encoding="UTF-8"?>\n` +
     `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
-    paths.map((p) => `  <url><loc>${base}${p}</loc></url>`).join("\n") +
+    unique.map((p) => `  <url><loc>${base}${p}</loc></url>`).join("\n") +
     `\n</urlset>\n`;
 
   return new Response(xml, {

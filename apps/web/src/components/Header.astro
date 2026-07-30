@@ -1,5 +1,7 @@
 ---
-import { PRIMARY_NAV, navCategories, routes, LAUNCH_CATEGORY } from "../content/nav";
+import { navCategories, routes, LAUNCH_CATEGORY } from "../content/nav";
+import { BAR_ITEMS, UTILITY_ITEMS } from "../content/nav-surfaces";
+import { activeNavPath } from "../lib/routing";
 import { shellJourney } from "../content/journeys";
 
 const cats = navCategories();
@@ -8,7 +10,9 @@ const cats = navCategories();
 const journey = shellJourney();
 const botmatchHref = journey.href;
 const path = Astro.url.pathname;
-const isActive = (href: string) => href !== "/" && path.startsWith(href.replace(/\/$/, ""));
+// Exactly one bar item may be active: the most specific section match.
+const activePath = activeNavPath(BAR_ITEMS.map((i) => i.href), path);
+const isActive = (href: string) => href === activePath;
 ---
 <!--
   Approved structure, unchanged: logo | navigation | search | saved | journey CTA.
@@ -24,7 +28,7 @@ const isActive = (href: string) => href !== "/" && path.startsWith(href.replace(
     </a>
 
     <nav class="main" aria-label="Primary">
-      {PRIMARY_NAV.filter((item) => item.href !== journey.href).map((item) =>
+      {BAR_ITEMS.map((item) =>
         item.mega ? (
           <div class="has-mega">
             <a
@@ -88,11 +92,11 @@ const isActive = (href: string) => href !== "/" && path.startsWith(href.replace(
             href={item.href}
             class:list={[
               "nav-link",
-              `nav-link--${item.bar ?? "primary"}`,
-              { active: isActive(item.href), soon: item.state === "coming_soon" },
+              { "nav-link--secondary": item.secondary },
+              { active: isActive(item.href), soon: item.status === "coming_soon" },
             ]}
           >
-            {item.label}{item.state === "coming_soon" && <em class="soon-tag">Soon</em>}
+            {item.label}{item.status === "coming_soon" && <em class="soon-tag">Soon</em>}
           </a>
         )
       )}
@@ -149,9 +153,9 @@ const isActive = (href: string) => href !== "/" && path.startsWith(href.replace(
     </div>
     <div class="drawer-group">
       <p class="drawer-h">More</p>
-      {PRIMARY_NAV.filter((i) => !i.mega && i.href !== journey.href).map((i) => (
+      {[...BAR_ITEMS.filter((i) => !i.mega), ...UTILITY_ITEMS].map((i) => (
         <a class="drawer-link" href={i.href}>
-          <span>{i.label}</span>{i.state === "coming_soon" && <em>soon</em>}
+          <span>{i.label}</span>{i.status === "coming_soon" && <em>soon</em>}
         </a>
       ))}
     </div>
@@ -173,7 +177,7 @@ const isActive = (href: string) => href !== "/" && path.startsWith(href.replace(
   </div>
 </div>
 
-<script define:vars={{ cats, nav: PRIMARY_NAV, botmatchHref, journeyLabel: journey.ctaLabel }}>
+<script define:vars={{ cats, nav: [...BAR_ITEMS, ...UTILITY_ITEMS], botmatchHref, journeyLabel: journey.ctaLabel }}>
   const $ = (id) => document.getElementById(id);
 
   /* ---- Header gains a solid edge once the page scrolls under it. ---- */
@@ -280,7 +284,7 @@ const isActive = (href: string) => href !== "/" && path.startsWith(href.replace(
   const base = [
     ...cats.filter((c) => c.launch === "live").map((c) => ({ name: c.name, href: "/robots/" + c.slug + "/", kind: "Category" })),
     { name: journeyLabel + " (BotMatch)", href: botmatchHref, kind: "Tool" },
-    ...nav.filter((n) => !n.mega && n.state !== "coming_soon").map((n) => ({ name: n.label, href: n.href, kind: "Page" })),
+    ...nav.filter((n) => !n.mega && n.status !== "coming_soon").map((n) => ({ name: n.label, href: n.href, kind: "Page" })),
   ];
   const ov = $("search-ov");
   const input = $("search-input");

@@ -1,0 +1,18 @@
+---
+import Base from "../../layouts/Base.astro";
+import RoutePlaceholder from "../../components/RoutePlaceholder.astro";
+import { routeFor } from "../../content/routes";
+import { breadcrumbsFor } from "../../lib/routing";
+
+const route = routeFor("/news/")!;
+const crumbs = breadcrumbsFor("/news/");
+---
+<Base
+  title={`${route.label} — BotPlanet`}
+  description={route.summary ?? route.label}
+  noindex={!route.indexable}
+  breadcrumbs={crumbs}
+  narrow={true}
+>
+  <RoutePlaceholder title="Robot News" summary="Reporting and analysis on real-world robots." owner="Job 19 onward owns editorial" />
+</Base>

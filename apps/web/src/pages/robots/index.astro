@@ -1,0 +1,76 @@
+---
+/**
+ * Shop Robots — the all-categories index and the top of the commercial spine.
+ * Generated from the category registry, so adding a category is a data change.
+ */
+import Base from "../../layouts/Base.astro";
+import { CATEGORIES, categoryRoutes } from "../../content/routes";
+import { breadcrumbsFor } from "../../lib/routing";
+import { itemListSchema } from "../../lib/seo";
+
+const cats = CATEGORIES.filter((c) => c.launch !== "hidden").sort((a, b) => a.order - b.order);
+const live = cats.filter((c) => c.launch === "live");
+const crumbs = breadcrumbsFor("/robots/");
+const schema = itemListSchema(
+  live.map((c) => ({ name: c.name, path: categoryRoutes(c.slug).hub })),
+  "Robot categories",
+);
+---
+<Base
+  title="Shop Robots — every category BotPlanet covers"
+  description="Browse robot categories on BotPlanet. Robotic pool cleaners are live for the US; further categories follow in the published expansion order."
+  breadcrumbs={crumbs}
+  schema={[schema]}
+>
+  <div class="section-head">
+    <span class="rule-accent" aria-hidden="true"></span>
+    <span class="eyebrow">Shop Robots</span>
+    <h1 class="mt-0">Robot categories</h1>
+    <p>
+      {live.length} category live for the US market. The rest are listed honestly as coming soon — they are not
+      linked to pages that do not exist.
+    </p>
+  </div>
+
+  <div class="grid grid--products">
+    {cats.map((c) => {
+      const r = categoryRoutes(c.slug);
+      return c.launch === "live" ? (
+        <a class="card card--interactive reveal" href={r.hub}>
+          <span class="pill pill--strong">Live</span>
+          <h2 class="cat-title">{c.name}</h2>
+          <p>{c.short}</p>
+          <span class="note">{c.jtbd}</span>
+        </a>
+      ) : (
+        <div class="card reveal is-soon">
+          <span class="pill pill--warn">Coming soon</span>
+          <h2 class="cat-title">{c.name}</h2>
+          <p>{c.short}</p>
+          <span class="note">{c.jtbd} · not yet published</span>
+        </div>
+      );
+    })}
+  </div>
+
+  {live.length > 0 && (
+    <section class="section section--tight">
+      <div class="section-head">
+        <h2 class="mt-0">Robotic pool cleaners — what's inside</h2>
+      </div>
+      <ul class="spine">
+        <li><a class="link" href={categoryRoutes(live[0].slug).hub}>Category hub</a> — all products in the category</li>
+        <li><a class="link" href={categoryRoutes(live[0].slug).compare}>Compare</a> — head-to-head by pool type</li>
+        <li><a class="link" href={categoryRoutes(live[0].slug).botmatch}>Find My Pool Cleaner</a> — answer a few pool-specific questions</li>
+        <li><a class="link" href={categoryRoutes(live[0].slug).best}>Best picks</a> · <a class="link" href={categoryRoutes(live[0].slug).guides}>Guides</a> · <a class="link" href={categoryRoutes(live[0].slug).deals}>Deals</a></li>
+      </ul>
+    </section>
+  )}
+</Base>
+<style>
+  .cat-title { font-size: var(--type-card); margin: 0; }
+  .card.is-soon { opacity: 0.72; }
+  .spine { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--space-sm); }
+  .spine li { color: var(--text-tertiary); font-size: var(--type-body-sm); margin: 0; }
+  .spine a { font-weight: var(--weight-semibold); }
+</style>

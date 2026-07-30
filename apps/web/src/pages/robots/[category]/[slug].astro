@@ -3,6 +3,7 @@ import Base from "../../../layouts/Base.astro";
 import { getDb, schema } from "../../../lib/db";
 import { usd, freshnessLabel, titleCase } from "../../../lib/format";
 import { and, eq } from "drizzle-orm";
+import { breadcrumbsFor } from "../../../lib/routing";
 
 const { category, slug } = Astro.params;
 const db = getDb(Astro.locals);
@@ -30,9 +31,10 @@ const evidence = await db
   .where(eq(schema.evidence.productId, product.id));
 
 offers.sort((a, b) => (a.basePriceMinor ?? Infinity) - (b.basePriceMinor ?? Infinity));
+const crumbs = breadcrumbsFor(Astro.url.pathname, product?.name);
 ---
 
-<Base title={`${product.name} — BotPlanet`} description={`${product.name}: specs, offers and suitability.`}>
+<Base title={`${product.name} — BotPlanet`} description={`${product.name}: specs, offers and suitability.`} breadcrumbs={crumbs}>
   <p class="muted"><a href={`/robots/${category}/`}>← {titleCase(category!)}</a></p>
   <div class="row" style="justify-content:space-between; align-items:flex-start;">
     <div>

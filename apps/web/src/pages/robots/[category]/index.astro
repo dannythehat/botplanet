@@ -6,6 +6,7 @@ import { journeyFor } from "../../../content/journeys";
 import { getDb, schema } from "../../../lib/db";
 import { usd, titleCase } from "../../../lib/format";
 import { and, eq, inArray } from "drizzle-orm";
+import { breadcrumbsFor } from "../../../lib/routing";
 
 const { category } = Astro.params;
 const db = getDb(Astro.locals);
@@ -33,9 +34,10 @@ function minPrice(productId: string): number | null {
     .map((o) => o.basePriceMinor as number);
   return prices.length ? Math.min(...prices) : null;
 }
+const crumbs = breadcrumbsFor(Astro.url.pathname);
 ---
 
-<Base title={`${cat.name} — BotPlanet`} description={`Compare ${cat.name.toLowerCase()} for the US.`}>
+<Base title={`${cat.name} — BotPlanet`} description={`Compare ${cat.name.toLowerCase()} for the US.`} breadcrumbs={crumbs}>
   <div class="section-head section-head--row">
     <div>
       <span class="eyebrow">Category</span>
