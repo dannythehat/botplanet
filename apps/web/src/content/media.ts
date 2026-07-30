@@ -5,14 +5,23 @@
  * usage_scope, supports_tested_claim, status). This repo-managed registry is the
  * reviewable record of WHAT we hold and UNDER WHAT RIGHTS.
  *
- * HARD RULES (enforced here):
- *  - No fake/generic robot photo ever stands in for a real product (see
- *    ProductVisual placeholder instead).
- *  - `supportsTestedClaim` is NEVER true unless it's original BotPlanet capture
- *    of a unit we actually used.
- *  - A product image is `active` (publishable) ONLY with a documented rights
- *    basis. Otherwise it stays `pending_rights` and the product renders the
- *    honest branded placeholder.
+ * RECONCILED 2026-07-30 against the live records (this corrects an earlier draft
+ * that wrongly marked every product `pending_rights`):
+ *  - Notion "Affiliate Programme Status — US Launch": Amazon Associates US
+ *    APPROVED & LIVE for all 10; Awin/WYBOT is EU/UK only; CJ/Aiper pending.
+ *    https://app.notion.com/p/3ade30f1e54081a19981db2536055324
+ *  - D1 affiliate_programs.amazon_us.image_permission =
+ *    "Product images via Associates/PA-API per terms" (terms_source: Amazon
+ *    Associates Operating Agreement; status active/verified; all 10 wired to /go).
+ *  - D1 affiliate_accounts: amazon_us approved/active_partner (botplanet-20);
+ *    awin approved but market_id=uk ("not usable for US traffic"); cj pending.
+ *
+ * HARD RULES:
+ *  - Amazon images must be Amazon-hosted, obtained via an approved mechanism
+ *    (PA-API / SiteStripe / Amazon link tools), shown in connection with our
+ *    tracked Amazon link (live via /go, tag botplanet-20), and kept current.
+ *  - No scraped/generic photo ever substitutes for a real product image.
+ *  - `supportsTestedClaim` is NEVER true unless it's original BotPlanet capture.
  */
 
 export type MediaSource =
@@ -28,19 +37,14 @@ export type MediaStatus = "active" | "pending_rights" | "disabled" | "withdrawn"
 export interface MediaAsset {
   id: string;
   kind: "diagram" | "hero" | "og" | "product_packshot" | "product_alt" | "logo";
-  /** Repo path or (later) R2 key. */
   src: string;
   source: MediaSource;
   rightsBasis: string;
-  /** Permitted channels (usage scope). */
   permittedChannels: string[];
   altText: string;
-  /** Focal point 0-1 for responsive cropping. */
   focalPoint?: { x: number; y: number };
-  /** Responsive widths to generate when rasterized. */
   responsiveVariants?: number[];
   acquisitionDate: string;
-  /** null = no expiry. */
   expiry: string | null;
   isOriginalBotplanet: boolean;
   supportsTestedClaim: boolean;
@@ -71,39 +75,109 @@ export const ORIGINAL_ASSETS: MediaAsset[] = [
   { id: "hero-pool", kind: "hero", src: "components/diagrams/CategoryHero.astro", altText: "Robotic pool cleaners — stylised BotPlanet brand artwork", focalPoint: { x: 0.62, y: 0.55 }, ...ORIG },
 ];
 
+/* ---- Evidence links (reused across the matrix) ---- */
+const NOTION_TRACKER = "https://app.notion.com/p/3ade30f1e54081a19981db2536055324";
+const AMZ_EVIDENCE = "Amazon Associates dashboard (botplanet-20); D1 affiliate_programs.amazon_us.image_permission";
+
 /**
- * Per-product image rights matrix. Status is `pending_rights` until a documented
- * basis exists. `plannedSource` / `rightsPath` record the legitimate route to a
- * publishable image (filled from brand-media research). Until active, product
- * pages use the honest branded placeholder — never a scraped or generic photo.
+ * Per-product image rights reconciliation (Job 2). Records the LAWFUL image
+ * source available TODAY, not assumptions.
+ *
+ * rightsStatus:
+ *  - available_now       — a documented lawful source exists today.
+ *  - pending_approval    — an additional/better source is pending.
+ * assetStatus: whether a real image file has been ingested + wired yet.
  */
 export interface ProductImagePlan {
   productId: string;
   slug: string;
   brand: string;
-  plannedSource: MediaSource;
-  /** The concrete legitimate route (e.g. "CJ product feed once joined"). */
-  rightsPath: string;
-  status: MediaStatus;
-  blocker?: string;
+  /** The programme that provides the image route we rely on for the US site. */
+  affiliateProgramme: string;
+  network: string;
+  accountStatus: string;
+  territory: string;
+  /** Lawful product-image source available NOW for the US site. */
+  imageSourceNow: string;
+  rightsBasis: string;
+  /** How the image is compliantly obtained + current access state. */
+  accessStatus: string;
+  rightsStatus: "available_now" | "pending_approval";
+  /** Have we actually ingested + wired a real image yet? */
+  assetStatus: "rights_available_not_ingested" | "ingested_active";
+  /** A better brand-direct source pending, if any. */
+  upgradeSource?: string;
+  /** Exact blocker for the PRIMARY route today; null if none for launch. */
+  blocker: string | null;
+  notionEvidence: string;
+  providerEvidence: string;
+  /** Only where genuinely required of Danny. */
+  dannyAction: string | null;
 }
 
+/** Common Amazon-Associates image basis shared by all 10 (all sold on Amazon US, all wired to /go). */
+const AMZ = {
+  affiliateProgramme: "Amazon Associates US",
+  network: "Amazon",
+  accountStatus: "Approved — LIVE (active_partner, botplanet-20)",
+  territory: "US",
+  imageSourceNow: "Amazon-hosted product images via the Associates programme",
+  rightsBasis:
+    "Amazon Associates Operating Agreement — display Amazon-hosted product images in connection with our tracked Amazon link (live via /go, tag botplanet-20). Recorded in D1 image_permission.",
+  accessStatus:
+    "Available now via SiteStripe / Amazon associate image links (manual); PA-API automated image feed pending Amazon's qualifying-sales threshold.",
+  rightsStatus: "available_now" as const,
+  assetStatus: "rights_available_not_ingested" as const,
+  blocker: null,
+  notionEvidence: NOTION_TRACKER,
+  providerEvidence: AMZ_EVIDENCE,
+  dannyAction: null,
+};
+
+const CJ_EVIDENCE =
+  "CJ Advertiser Lookup adv 6404897 (relationship-status: notjoined = pending); CJ dashboard shows submitted application";
+
 export const PRODUCT_IMAGE_PLAN: ProductImagePlan[] = [
-  { productId: "prod-aiper-scuba-x1", slug: "aiper-scuba-x1", brand: "Aiper", plannedSource: "affiliate_network", rightsPath: "CJ product feed (adv 6404897) — publisher usage on join", status: "pending_rights", blocker: "Aiper CJ approval" },
-  { productId: "prod-aiper-scuba-s1", slug: "aiper-scuba-s1", brand: "Aiper", plannedSource: "affiliate_network", rightsPath: "CJ product feed (adv 6404897) — publisher usage on join", status: "pending_rights", blocker: "Aiper CJ approval" },
-  { productId: "prod-aiper-seagull-se", slug: "aiper-seagull-se", brand: "Aiper", plannedSource: "affiliate_network", rightsPath: "CJ product feed (adv 6404897) — publisher usage on join", status: "pending_rights", blocker: "Aiper CJ approval" },
-  { productId: "prod-beatbot-aquasense-2-ultra", slug: "beatbot-aquasense-2-ultra", brand: "Beatbot", plannedSource: "affiliate_network", rightsPath: "Impact affiliate program creatives on join + written OK (affiliate@beatbot.com); image use not addressed in terms", status: "pending_rights", blocker: "Beatbot Impact join + written permission" },
-  { productId: "prod-wybot-c1", slug: "wybot-c1", brand: "WYBOT", plannedSource: "affiliate_network", rightsPath: "Impact/Awin 'Marketing Alliance' creatives on join + written media-kit request (maggiezhang@wybotics.com)", status: "pending_rights", blocker: "WYBOT Impact/Awin join + written permission" },
-  { productId: "prod-dolphin-nautilus-cc-plus", slug: "dolphin-nautilus-cc-plus", brand: "Maytronics", plannedSource: "manufacturer", rightsPath: "Written license via Maytronics gated DAM (brand.maytronics.com), OR Amazon PA-API (Associates, links back to Amazon)", status: "pending_rights", blocker: "Maytronics written permission or Amazon PA-API access" },
-  { productId: "prod-dolphin-premier", slug: "dolphin-premier", brand: "Maytronics", plannedSource: "manufacturer", rightsPath: "Written license via Maytronics gated DAM (brand.maytronics.com), OR Amazon PA-API", status: "pending_rights", blocker: "Maytronics written permission or Amazon PA-API access" },
-  { productId: "prod-dolphin-e10", slug: "dolphin-e10", brand: "Maytronics", plannedSource: "manufacturer", rightsPath: "Written license via Maytronics gated DAM (brand.maytronics.com), OR Amazon PA-API", status: "pending_rights", blocker: "Maytronics written permission or Amazon PA-API access" },
-  // NOTE: FREEDOM is a Polaris (Fluidra) product, not Pentair — brand-data fix flagged for Job 5/6.
-  { productId: "prod-polaris-freedom", slug: "polaris-freedom", brand: "Polaris (Fluidra)", plannedSource: "manufacturer", rightsPath: "Written permission via Polaris/Fluidra channel-partner program (no open affiliate program), OR Amazon PA-API", status: "pending_rights", blocker: "Polaris/Fluidra written permission or Amazon PA-API access" },
-  { productId: "prod-betta-se-plus", slug: "betta-se-plus", brand: "Solar Pool Technologies", plannedSource: "affiliate_network", rightsPath: "BettaBot affiliate program (partners.bettabot.com) join + written asset license, OR Amazon PA-API", status: "pending_rights", blocker: "Betta program join + written permission, or Amazon PA-API" },
+  // Aiper ×3 — Amazon now; Aiper CJ feed is the pending upgrade (application submitted, awaiting decision).
+  { productId: "prod-aiper-scuba-x1", slug: "aiper-scuba-x1", brand: "Aiper", ...AMZ,
+    upgradeSource: "Aiper CJ product feed (adv 6404897, 8%) — publisher image rights on approval; application submitted, awaiting decision",
+    providerEvidence: `${AMZ_EVIDENCE}; ${CJ_EVIDENCE}` },
+  { productId: "prod-aiper-scuba-s1", slug: "aiper-scuba-s1", brand: "Aiper", ...AMZ,
+    upgradeSource: "Aiper CJ product feed (adv 6404897, 8%) on approval; application submitted, awaiting decision",
+    providerEvidence: `${AMZ_EVIDENCE}; ${CJ_EVIDENCE}` },
+  { productId: "prod-aiper-seagull-se", slug: "aiper-seagull-se", brand: "Aiper", ...AMZ,
+    upgradeSource: "Aiper CJ product feed (adv 6404897, 8%) on approval; application submitted, awaiting decision",
+    providerEvidence: `${AMZ_EVIDENCE}; ${CJ_EVIDENCE}` },
+
+  // Beatbot — Amazon now; Beatbot direct/FlexOffers a future commission upgrade (Impact declined).
+  { productId: "prod-beatbot-aquasense-2-ultra", slug: "beatbot-aquasense-2-ultra", brand: "Beatbot", ...AMZ,
+    upgradeSource: "Beatbot direct/FlexOffers post-launch (commission upgrade; Impact network declined)" },
+
+  // WYBOT — Amazon now. WYBOT affiliation EXISTS via Awin but is EU/UK only → NOT usable for US assets.
+  { productId: "prod-wybot-c1", slug: "wybot-c1", brand: "WYBOT", ...AMZ,
+    upgradeSource: "None for US: existing WYBOT programme is Awin EU/UK (publisher 3012175), market_id=uk — creatives NOT licensed for the US site; parked for a future UK/EU market",
+    providerEvidence: `${AMZ_EVIDENCE}; Awin publisher 3012175 (WYBOT EU/UK, not US)` },
+
+  // Dolphin/Maytronics ×3 — Amazon now; Doheny's (Pepperjam) is the future non-Amazon retailer route.
+  { productId: "prod-dolphin-nautilus-cc-plus", slug: "dolphin-nautilus-cc-plus", brand: "Maytronics", ...AMZ,
+    upgradeSource: "Doheny's (Pepperjam) or FlexOffers/Leslie's post-launch — no direct Maytronics affiliate/image programme" },
+  { productId: "prod-dolphin-premier", slug: "dolphin-premier", brand: "Maytronics", ...AMZ,
+    upgradeSource: "Doheny's (Pepperjam) or FlexOffers/Leslie's post-launch" },
+  { productId: "prod-dolphin-e10", slug: "dolphin-e10", brand: "Maytronics", ...AMZ,
+    upgradeSource: "Doheny's (Pepperjam) or FlexOffers/Leslie's post-launch" },
+
+  // Polaris FREEDOM (brand: Fluidra, not Pentair — data fix flagged) — Amazon now; Doheny's future.
+  { productId: "prod-polaris-freedom", slug: "polaris-freedom", brand: "Polaris (Fluidra)", ...AMZ,
+    upgradeSource: "Doheny's (Pepperjam) post-launch — no open Polaris/Fluidra affiliate programme. NOTE: correct brand is Fluidra, not Pentair (data fix for Job 5/6)" },
+
+  // Betta / Solar Pool Technologies — Amazon now; BettaBot direct affiliate a future route.
+  { productId: "prod-betta-se-plus", slug: "betta-se-plus", brand: "Solar Pool Technologies", ...AMZ,
+    upgradeSource: "BettaBot direct affiliate (partners.bettabot.com) or FlexOffers post-launch" },
 ];
 
 export const mediaStats = () => ({
   originalActive: ORIGINAL_ASSETS.filter((a) => a.status === "active").length,
-  productActive: PRODUCT_IMAGE_PLAN.filter((p) => p.status === "active").length,
-  productPending: PRODUCT_IMAGE_PLAN.filter((p) => p.status === "pending_rights").length,
+  productsRightsAvailableNow: PRODUCT_IMAGE_PLAN.filter((p) => p.rightsStatus === "available_now").length,
+  productsIngested: PRODUCT_IMAGE_PLAN.filter((p) => p.assetStatus === "ingested_active").length,
+  productsTotal: PRODUCT_IMAGE_PLAN.length,
 });

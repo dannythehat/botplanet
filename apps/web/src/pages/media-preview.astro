@@ -17,8 +17,8 @@ const s = mediaStats();
   <p class="lede">Original BotPlanet assets (clean rights) plus the per-product image rights matrix. No scraped or generic product photos are used; products without a documented rights basis render the honest branded placeholder.</p>
   <div class="row" style="margin:14px 0;">
     <span class="pill ok">{s.originalActive} original assets · active</span>
-    <span class="pill">{s.productActive} product images · active</span>
-    <span class="pill warn">{s.productPending} product images · pending rights</span>
+    <span class="pill ok">{s.productsRightsAvailableNow}/{s.productsTotal} products · lawful image source available now (Amazon)</span>
+    <span class="pill warn">{s.productsIngested}/{s.productsTotal} product images · ingested &amp; wired</span>
   </div>
 
   <h2>Branded category hero</h2>
@@ -49,21 +49,29 @@ const s = mediaStats();
     </tbody>
   </table></div>
 
-  <h2>Product-image rights matrix</h2>
-  <p class="note">Every product currently lacks a publishable rights basis — each row shows the legitimate route and its blocker. Product pages (Job 6) stay on the branded placeholder until a row goes <span class="pill ok">active</span>.</p>
+  <h2>Product-image rights reconciliation</h2>
+  <p class="note">Reconciled against the Affiliate Programme Status tracker + live D1. <strong>All 10 products have a lawful image source today — Amazon Associates</strong> (approved, live, all wired to /go). "Not ingested" means the real image file isn't fetched/wired yet, not that rights are missing. Until wired, tiles use the branded placeholder — never a scraped photo.</p>
   <div class="table-wrap"><table>
-    <thead><tr><th>Product</th><th>Brand</th><th>Planned source</th><th>Legitimate rights path</th><th>Blocker</th><th>Status</th></tr></thead>
+    <thead><tr><th>Product</th><th>Brand</th><th>Programme</th><th>Net</th><th>Acct status</th><th>Terr.</th><th>Image source now</th><th>Access status</th><th>Upgrade (pending)</th><th>Blocker</th><th>Danny action</th></tr></thead>
     <tbody>
       {PRODUCT_IMAGE_PLAN.map((p) => (
         <tr>
-          <td><strong>{p.slug}</strong></td><td>{p.brand}</td><td>{p.plannedSource}</td>
-          <td class="muted" style="min-width:280px;">{p.rightsPath}</td>
-          <td class="muted">{p.blocker}</td>
-          <td><span class="pill warn">{p.status}</span></td>
+          <td><strong>{p.slug}</strong></td>
+          <td>{p.brand}</td>
+          <td>{p.affiliateProgramme}</td>
+          <td>{p.network}</td>
+          <td class="muted">{p.accountStatus}</td>
+          <td>{p.territory}</td>
+          <td class="muted" style="min-width:200px;">{p.imageSourceNow}<br /><span class="pill ok" style="margin-top:4px;">{p.rightsStatus}</span></td>
+          <td class="muted" style="min-width:220px;">{p.accessStatus}</td>
+          <td class="muted" style="min-width:220px;">{p.upgradeSource ?? "—"}</td>
+          <td class="muted">{p.blocker ?? "none for launch"}</td>
+          <td class="muted">{p.dannyAction ?? "none"}</td>
         </tr>
       ))}
     </tbody>
   </table></div>
+  <p class="note" style="margin-top:10px;">Evidence: <a href="https://app.notion.com/p/3ade30f1e54081a19981db2536055324">Affiliate Programme Status tracker</a> · D1 <span class="mono">affiliate_programs.amazon_us.image_permission</span> = "Product images via Associates/PA-API per terms" · Amazon Associates <span class="mono">botplanet-20</span>.</p>
 </Base>
 <style>
   .stack { display: grid; gap: 26px; }
