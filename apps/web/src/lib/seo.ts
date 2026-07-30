@@ -12,7 +12,7 @@
 
 export const SITE_URL = "https://botplanet.io";
 export const PRODUCTION_HOST = "botplanet.io";
-export const OG_IMAGE_DEFAULT = "/og/botplanet-default.svg";
+export const OG_IMAGE_DEFAULT = "/og/botplanet-default.png";
 
 /** Absolute production URL for a path (always canonical to botplanet.io). */
 export function absUrl(path: string): string {
