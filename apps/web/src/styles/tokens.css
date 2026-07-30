@@ -31,7 +31,12 @@
   --text-primary: #f6f6f8;
   --text-secondary: #b4b4c0; /* body support, still comfortably readable */
   --text-tertiary: #8a8a97; /* metadata, timestamps */
-  --text-quaternary: #63636f; /* the quietest permitted level */
+  /* Quietest level for TEXT. Verified 4.63:1 on --surface-2 and 5.08:1 on
+     --bg-base, so it still clears WCAG AA for normal-size text. */
+  --text-quaternary: #7f7f8a;
+  /* Non-text only: decorative numerals, dividers, disabled glyphs. Never used
+     for anything a visitor has to read. */
+  --text-decorative: #63636f;
   --text-on-inverse: #08080b; /* text on --surface-inverse */
 
   /* Border hierarchy. */

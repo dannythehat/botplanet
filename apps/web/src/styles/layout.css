@@ -272,7 +272,7 @@
   font-size: var(--type-heading);
   font-weight: var(--weight-bold);
   letter-spacing: var(--tracking-title);
-  color: var(--text-quaternary);
+  color: var(--text-decorative);
   font-variant-numeric: tabular-nums;
   min-width: 2.2em;
 }
