@@ -8,10 +8,7 @@ const isActive = (href: string) => href !== "/" && path.startsWith(href.replace(
 ---
 <header class="site">
   <div class="wrap bar">
-    <a class="logo" href="/" aria-label="BotPlanet — home">
-      <img src="/logo/logo-desktop.png" alt="BotPlanet" class="logo-d" height="52" />
-      <img src="/logo/logo-mobile.png" alt="BotPlanet" class="logo-m" height="40" />
-    </a>
+    <a class="logo" href="/" aria-label="BotPlanet — home"><img src="/logo/emblem-nav.png" alt="BotPlanet" class="logo-emblem" height="34" /></a>
 
     <nav class="main" aria-label="Primary">
       {PRIMARY_NAV.map((item) =>
@@ -58,6 +55,11 @@ const isActive = (href: string) => href !== "/" && path.startsWith(href.replace(
     </div>
   </div>
 </header>
+
+<!-- Full approved logo, full size, in its own band below the slim nav. -->
+<div class="brandband">
+  <a href="/" aria-label="BotPlanet — home"><img src="/logo/logo-brand.png" alt="BotPlanet" class="brandlogo" /></a>
+</div>
 
 <!-- Overlays live OUTSIDE the backdrop-filtered header so position:fixed is
      relative to the viewport, not trapped in the 66px header containing block. -->
@@ -166,10 +168,11 @@ const isActive = (href: string) => href !== "/" && path.startsWith(href.replace(
 </script>
 
 <style>
-  .bar { display: flex; align-items: center; gap: 22px; height: 76px; }
+  .bar { display: flex; align-items: center; gap: 22px; height: 64px; }
   .logo { display: flex; align-items: center; flex: 0 0 auto; }
-  .logo-d { height: 52px; width: auto; display: block; }
-  .logo-m { display: none; height: 40px; width: auto; }
+  .logo-emblem { height: 34px; width: auto; display: block; }
+  .brandband { display: flex; justify-content: center; align-items: center; padding: 30px 20px 22px; }
+  .brandlogo { height: 132px; width: auto; display: block; }
 
   nav.main { display: flex; gap: 4px; align-items: center; margin-left: 6px; }
   .nav-link { color: var(--muted); font-weight: 500; font-size: 14px; padding: 8px 11px; border-radius: 8px; white-space: nowrap; display: inline-flex; align-items: center; gap: 5px; }
@@ -229,15 +232,10 @@ const isActive = (href: string) => href !== "/" && path.startsWith(href.replace(
   @media (max-width: 900px) {
     nav.main, .market, .cta { display: none; }
     .burger { display: inline-flex; }
-    .bar { height: 62px; }
-    .logo-d { display: none; }
-    .logo-m { display: block; }
+    .bar { height: 56px; }
     .head-actions { gap: 6px; }
     .icon-btn { width: 34px; height: 34px; }
-  }
-  /* small phones: brand + menu only, uncrowded */
-  @media (max-width: 440px) {
-    #btn-search, #btn-saved { display: none; }
-    .logo-m { height: 36px; }
+    .brandlogo { height: 96px; }
+    .brandband { padding: 20px 16px 14px; }
   }
 </style>
