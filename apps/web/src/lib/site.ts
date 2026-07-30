@@ -19,6 +19,9 @@ export const SITE = {
   emailFrom: "BotPlanet <recommendations@botplanet.io>",
 } as const;
 
+/** Amazon Associates US tracking tag (public — appears in outbound links). */
+export const AMAZON_ASSOCIATE_TAG = "botplanet-20";
+
 /** Trust pages shown in the footer. */
 export const TRUST_LINKS: { href: string; label: string }[] = [
   { href: "/about/", label: "About BotPlanet" },

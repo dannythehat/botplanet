@@ -1,6 +1,7 @@
 import type { APIRoute } from "astro";
 import { eq } from "drizzle-orm";
 import { getDb, schema } from "../../lib/db";
+import { AMAZON_ASSOCIATE_TAG } from "../../lib/site";
 
 // Placeholder retailer destinations for the preview. In production the real,
 // affiliate-tracked destination comes from offers.affiliate_destination_url,
@@ -44,6 +45,19 @@ export const GET: APIRoute = async ({ params, locals, request }) => {
     deviceClass: null,
   });
 
-  const destination = offer.affiliateDestinationUrl ?? RETAILER_HOME[offer.retailerId] ?? "/";
+  let destination = offer.affiliateDestinationUrl;
+  if (!destination) {
+    if (offer.retailerId === "ret-amazon") {
+      // Real Amazon Associates link (search deep-link + tracking tag). Swap to an
+      // ASIN product link once we store ASINs.
+      const product = (
+        await db.select({ name: schema.products.name }).from(schema.products).where(eq(schema.products.id, offer.productId)).limit(1)
+      )[0];
+      const q = encodeURIComponent(product?.name ?? "robotic pool cleaner");
+      destination = `https://www.amazon.com/s?k=${q}&tag=${AMAZON_ASSOCIATE_TAG}`;
+    } else {
+      destination = RETAILER_HOME[offer.retailerId] ?? "/";
+    }
+  }
   return new Response(null, { status: 302, headers: { Location: destination } });
 };
