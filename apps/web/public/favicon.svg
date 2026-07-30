@@ -1,0 +1,30 @@
+<svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="bpP" cx="42%" cy="35%" r="75%">
+      <stop offset="0%" stop-color="#3d7cf0"/>
+      <stop offset="55%" stop-color="#123f9c"/>
+      <stop offset="100%" stop-color="#081a42"/>
+    </radialGradient>
+    <linearGradient id="bpR" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#5fb2ff"/>
+      <stop offset="55%" stop-color="#7b6bff"/>
+      <stop offset="100%" stop-color="#3a2fb0"/>
+    </linearGradient>
+    <clipPath id="bpC"><circle cx="60" cy="62" r="30"/></clipPath>
+  </defs>
+  <!-- ring (behind) -->
+  <g transform="rotate(-24 60 62)">
+    <ellipse cx="60" cy="62" rx="54" ry="17" fill="none" stroke="url(#bpR)" stroke-width="6"/>
+  </g>
+  <!-- antenna -->
+  <line x1="60" y1="18" x2="60" y2="34" stroke="#3f80e6" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="60" cy="16" r="5" fill="#4a90ff"/>
+  <!-- planet head -->
+  <circle cx="60" cy="62" r="30" fill="url(#bpP)"/>
+  <g clip-path="url(#bpC)">
+    <ellipse cx="49" cy="49" rx="17" ry="10" fill="#ffffff" opacity="0.16"/>
+    <rect x="30" y="58" width="60" height="22" rx="11" fill="#071c4d"/>
+    <circle cx="52" cy="69" r="5" fill="#8fe6ff"/>
+    <circle cx="68" cy="69" r="5" fill="#8fe6ff"/>
+  </g>
+</svg>

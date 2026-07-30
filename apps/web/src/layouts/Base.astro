@@ -13,6 +13,11 @@ const { title, description = "Shop the planet yourself, or let BotPlanet find yo
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary" />
     <title>{title}</title>
     <style is:global>
       :root {
@@ -95,7 +100,7 @@ const { title, description = "Shop the planet yourself, or let BotPlanet find yo
   <body>
     <header class="site">
       <div class="wrap bar">
-        <a class="logo" href="/">Bot<span>Planet</span></a>
+        <a class="logo" href="/"><img src="/favicon.svg" alt="" width="30" height="30" style="vertical-align:-8px;margin-right:9px" />Bot<span>Planet</span></a>
         <nav class="main">
           <a href="/robots/robotic-pool-cleaners/">Shop Robots</a>
           <a href="/compare/robotic-pool-cleaners/">Compare</a>
