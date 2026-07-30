@@ -1,0 +1,60 @@
+---
+import Admin from "../../layouts/Admin.astro";
+import { getDb, schema } from "../../lib/db";
+import { usd } from "../../lib/format";
+
+const db = getDb(Astro.locals);
+const offers = await db.select().from(schema.offers);
+const products = await db.select().from(schema.products);
+const retailers = await db.select().from(schema.retailers);
+const programmes = await db.select().from(schema.affiliatePrograms);
+const links = await db.select().from(schema.redirectLinks);
+
+const productName = (id: string) => products.find((p) => p.id === id)?.name ?? id;
+const retailerName = (id: string) => retailers.find((r) => r.id === id)?.name ?? id;
+const linkActive = (key: string | null) => (key ? links.find((l) => l.key === key)?.active === true : false);
+offers.sort((a, b) => productName(a.productId).localeCompare(productName(b.productId)));
+const saved = Astro.url.searchParams.has("saved");
+---
+<Admin title="Offers & /go control" section="offers">
+  <p class="sub">Every offer's route, destination and state. Pause an offer, swap its destination centrally, or change the active affiliate programme — attribution (click_events) is preserved.</p>
+  {saved && <div class="banner" style="border-color:#264;color:var(--ok)">Saved.</div>}
+
+  <div class="card" style="padding:0; overflow-x:auto;">
+    <table>
+      <thead>
+        <tr><th>Product</th><th>Retailer</th><th>Price</th><th>Stock</th><th>Freshness</th><th>Offer</th><th>/go</th><th>Route · destination · save</th></tr>
+      </thead>
+      <tbody>
+        {offers.map((o) => (
+          <tr>
+            <td><strong>{productName(o.productId)}</strong><div class="muted">{o.warrantySummary ?? ""}</div></td>
+            <td>{retailerName(o.retailerId)}<div class="muted">{o.sellerIdentity ?? ""}</div></td>
+            <td>{usd(o.basePriceMinor)}<div class="muted">{o.priceVerification}</div></td>
+            <td class="muted">{o.stockStatus ?? "—"}</td>
+            <td><span class="tag">{o.freshnessClass}</span></td>
+            <td><span class={`tag ${o.offerStatus === "active" ? "ok" : "warn"}`}>{o.offerStatus}</span></td>
+            <td><span class={`tag ${linkActive(o.redirectKey) ? "ok" : "bad"}`}>{linkActive(o.redirectKey) ? "live" : "off"}</span><div class="muted mono" style="font-size:10px">{o.redirectKey}</div></td>
+            <td>
+              <form class="inline" method="post" action="/api/admin/offer">
+                <input type="hidden" name="offerId" value={o.id} />
+                {o.redirectKey && <input type="hidden" name="redirectKey" value={o.redirectKey} />}
+                <select name="offerStatus" title="offer status">
+                  {["active", "paused", "expired"].map((s) => <option selected={s === o.offerStatus}>{s}</option>)}
+                </select>
+                <select name="programmeId" title="affiliate route">
+                  <option value="">— none —</option>
+                  {programmes.map((p) => <option value={p.id} selected={p.id === o.affiliateProgramId}>{p.network}</option>)}
+                </select>
+                <label class="muted" style="display:flex;align-items:center;gap:4px;"><input type="checkbox" name="linkActive" checked={linkActive(o.redirectKey)} /> live</label>
+                <input name="destination" placeholder="override destination URL (optional)" value={o.affiliateDestinationUrl ?? ""} style="min-width:200px;" />
+                <button type="submit">Save</button>
+              </form>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+  <p class="note muted" style="margin-top:12px;">Leave destination blank to use the automatic route (e.g. Amazon search + tag). No questionnaire answers ever enter these URLs.</p>
+</Admin>

@@ -28,7 +28,7 @@ export const retailerMarketRows: (typeof retailerMarkets.$inferInsert)[] = retai
   id: `rm-${r.id}-us`,
   retailerId: r.id as string,
   marketId: "us",
-  approved: false, // pending affiliate approval — Danny owns acceptance
+  approved: r.id === "ret-amazon", // Amazon Associates approved; others pending
   shipsToJson: ["US"],
 }));
 
@@ -43,12 +43,12 @@ export const affiliateProgramRows: (typeof affiliatePrograms.$inferInsert)[] = [
     brandId: null,
     marketId: "us",
     network: "amazon_us",
-    status: "identified",
+    status: "active", // approved — tag botplanet-20
     cookieDays: 1, // 24-hour cookie
     commissionType: "percent",
-    commissionValueBp: 300, // ~3% (provisional; category-dependent)
+    commissionValueBp: 300, // ~3% (category-dependent)
     emailLinksAllowed: false, // Amazon prohibits affiliate links in email
-    verificationStatus: "provisional",
+    verificationStatus: "verified",
     notes: "Home/Lawn&Garden ~3%, 24h cookie. No links in email/offline.",
   },
   {
@@ -147,8 +147,16 @@ const offerSeeds: OfferSeed[] = [
   { id: "off-premier-leslies", productId: "prod-dolphin-premier", retailerId: "ret-leslies", affiliateProgramId: "ap-leslies-flexoffers", priceUsd: 1299, warranty: "3-year", redirectKey: "pool-dolphin-premier-leslies" },
   { id: "off-freedom-intheswim", productId: "prod-polaris-freedom", retailerId: "ret-intheswim", affiliateProgramId: null, priceUsd: 1399, warranty: "2-3 year", redirectKey: "pool-polaris-freedom-intheswim" },
   { id: "off-betta-leslies", productId: "prod-betta-se-plus", retailerId: "ret-leslies", affiliateProgramId: "ap-leslies-flexoffers", priceUsd: 389, warranty: "2-year", redirectKey: "pool-betta-seplus-leslies" },
-  // Proposed E10 offer (matches the proposed product; excluded from launch until confirmed).
   { id: "off-e10-walmart", productId: "prod-dolphin-e10", retailerId: "ret-walmart", affiliateProgramId: null, priceUsd: 529, warranty: "2-year", redirectKey: "pool-dolphin-e10-walmart" },
+  // Amazon US offers for every product — Amazon Associates (botplanet-20) is the
+  // approved US route, so every product has a live, tracked buy-link.
+  { id: "off-scubax1-amazon", productId: "prod-aiper-scuba-x1", retailerId: "ret-amazon", affiliateProgramId: "ap-amazon-us", priceUsd: 1299, warranty: "2-year", redirectKey: "pool-aiper-scubax1-amazon" },
+  { id: "off-scubas1-amazon", productId: "prod-aiper-scuba-s1", retailerId: "ret-amazon", affiliateProgramId: "ap-amazon-us", priceUsd: 498, warranty: "2-year", redirectKey: "pool-aiper-scubas1-amazon" },
+  { id: "off-wybotc1-amazon", productId: "prod-wybot-c1", retailerId: "ret-amazon", affiliateProgramId: "ap-amazon-us", priceUsd: 419, warranty: "2-year", redirectKey: "pool-wybot-c1-amazon" },
+  { id: "off-premier-amazon", productId: "prod-dolphin-premier", retailerId: "ret-amazon", affiliateProgramId: "ap-amazon-us", priceUsd: 1299, warranty: "3-year", redirectKey: "pool-dolphin-premier-amazon" },
+  { id: "off-freedom-amazon", productId: "prod-polaris-freedom", retailerId: "ret-amazon", affiliateProgramId: "ap-amazon-us", priceUsd: 1399, warranty: "2-3 year", redirectKey: "pool-polaris-freedom-amazon" },
+  { id: "off-betta-amazon", productId: "prod-betta-se-plus", retailerId: "ret-amazon", affiliateProgramId: "ap-amazon-us", priceUsd: 389, warranty: "2-year", redirectKey: "pool-betta-seplus-amazon" },
+  { id: "off-e10-amazon", productId: "prod-dolphin-e10", retailerId: "ret-amazon", affiliateProgramId: "ap-amazon-us", priceUsd: 529, warranty: "2-year", redirectKey: "pool-dolphin-e10-amazon" },
 ];
 
 export const offerRows: (typeof offers.$inferInsert)[] = offerSeeds.map((o) => ({
@@ -180,5 +188,6 @@ export const offerRows: (typeof offers.$inferInsert)[] = offerSeeds.map((o) => (
 export const redirectLinkRows: (typeof redirectLinks.$inferInsert)[] = offerSeeds.map((o) => ({
   key: o.redirectKey,
   offerId: o.id,
-  active: false, // inactive until an affiliate programme is approved
+  // Live once the offer's affiliate programme is approved (Amazon is).
+  active: o.affiliateProgramId === "ap-amazon-us",
 }));

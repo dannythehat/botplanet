@@ -4,6 +4,7 @@ node_modules/
 
 # build output
 dist/
+.astro/
 *.tsbuildinfo
 # compiled TS output must never sit beside sources (all package source is .ts)
 packages/**/src/**/*.js

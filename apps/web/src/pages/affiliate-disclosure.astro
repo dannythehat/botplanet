@@ -1,0 +1,16 @@
+---
+import Base from "../layouts/Base.astro";
+import { SITE } from "../lib/site";
+---
+<Base title="Affiliate disclosure" description="How BotPlanet uses affiliate links.">
+  <h1>Affiliate disclosure</h1>
+  <p style="max-width:680px;">{SITE.name} participates in affiliate programmes. When you click a retailer link and make a purchase, we may earn a commission — <strong>at no extra cost to you</strong>.</p>
+  <ul>
+    <li>Commission <strong>never</strong> affects which product BotMatch recommends.</li>
+    <li>Product suitability is scored independently of any commercial relationship.</li>
+    <li>Where we have no commercial relationship with a recommended product, we say so.</li>
+    <li>Prices shown are snapshots — always confirm the current price at the retailer.</li>
+  </ul>
+  <p>Retailer links on this site are marked and pass through a tracking redirect so we can attribute clicks. No personal information from BotMatch is included in those links.</p>
+  <p class="note">Questions: <a href={`mailto:${SITE.business.contactEmail}`}>{SITE.business.contactEmail}</a>.</p>
+</Base>

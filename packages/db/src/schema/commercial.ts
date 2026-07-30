@@ -52,6 +52,13 @@ export const affiliatePrograms = sqliteTable("affiliate_programs", {
     .default(false),
   programUrl: text("program_url"),
   verificationStatus: text("verification_status").notNull().default("provisional"),
+  // Terms provenance + integration availability (operational admin fields).
+  termsSource: text("terms_source"),
+  productFeedAvailable: integer("product_feed_available", { mode: "boolean" }),
+  apiAvailable: integer("api_available", { mode: "boolean" }),
+  stockFeedAvailable: integer("stock_feed_available", { mode: "boolean" }),
+  shippingDataAvailable: integer("shipping_data_available", { mode: "boolean" }),
+  imagePermission: text("image_permission"), // creative/image usage summary
   notes: text("notes"),
 }, (t) => ({
   byMarket: index("ap_market_idx").on(t.marketId),

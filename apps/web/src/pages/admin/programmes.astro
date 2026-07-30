@@ -1,0 +1,79 @@
+---
+import Admin from "../../layouts/Admin.astro";
+import { getDb, schema } from "../../lib/db";
+
+const db = getDb(Astro.locals);
+const programmes = await db.select().from(schema.affiliatePrograms);
+const accounts = await db.select().from(schema.affiliateAccounts);
+const brands = await db.select().from(schema.brands);
+const retailers = await db.select().from(schema.retailers);
+
+const accountFor = (pid: string) => accounts.find((a) => a.affiliateProgramId === pid);
+const orphanAccounts = accounts.filter((a) => !a.affiliateProgramId);
+const brandName = (id: string | null) => (id ? brands.find((b) => b.id === id)?.name : null);
+const retailerName = (id: string | null) => (id ? retailers.find((r) => r.id === id)?.name : null);
+const pct = (bp: number | null) => (bp == null ? "—" : `${(bp / 100).toFixed(1)}%`);
+const yn = (b: boolean | null) => (b == null ? "—" : b ? "yes" : "no");
+
+const STAGES = ["identified", "contacted", "applied", "account_created", "under_review", "approved", "active_partner", "paused", "rejected"];
+const PSTATUS = ["identified", "active", "paused", "rejected"];
+const ASTATUS = ["pending", "approved", "closed", "rejected"];
+const saved = Astro.url.searchParams.has("saved");
+---
+<Admin title="Affiliate programmes & accounts" section="prog">
+  <p class="sub">Programme identity, current terms, market eligibility, pipeline stage, blocker and next action. Commission is private.</p>
+  {saved && <div class="banner" style="border-color:#264;color:var(--ok)">Saved.</div>}
+
+  {programmes.map((p) => {
+    const a = accountFor(p.id);
+    const subject = brandName(p.brandId) ?? retailerName(p.retailerId) ?? "—";
+    return (
+      <div class="card" style="margin-bottom:14px;">
+        <div class="row" style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+          <div>
+            <strong style="font-size:16px;">{p.network}</strong> · {subject}
+            <span class="tag" style="margin-left:8px;">{p.marketId.toUpperCase()}</span>
+            <span class={`tag ${p.status === "active" ? "ok" : p.status === "rejected" ? "bad" : "warn"}`} style="margin-left:6px;">{p.status}</span>
+            {p.marketId !== "us" && <span class="tag warn" style="margin-left:6px;">not US-usable</span>}
+          </div>
+          <div class="muted mono">{a?.externalAccountRef ?? ""}</div>
+        </div>
+
+        <table style="margin-top:10px;">
+          <tbody>
+            <tr><th>Commission</th><td>{pct(p.commissionValueBp)}</td><th>Cookie</th><td>{p.cookieDays ?? "—"} days</td><th>Email links</th><td>{yn(p.emailLinksAllowed)}</td></tr>
+            <tr><th>Terms source</th><td>{p.termsSource ?? "—"}</td><th>Verified</th><td>{p.verificationStatus}</td><th>Images</th><td>{p.imagePermission ?? "—"}</td></tr>
+            <tr><th>Product feed</th><td>{yn(p.productFeedAvailable)}</td><th>API</th><td>{yn(p.apiAvailable)}</td><th>Stock / shipping feed</th><td>{yn(p.stockFeedAvailable)} / {yn(p.shippingDataAvailable)}</td></tr>
+            {a && <tr><th>Pipeline stage</th><td>{a.applicationStage}</td><th>Account status</th><td>{a.status}</td><th>Tax/bank setup</th><td>{a.taxBankIdentitySetupStatus}</td></tr>}
+            {a?.currentBlocker && <tr><th>Blocker</th><td colspan="5" style="color:var(--warn)">{a.currentBlocker}</td></tr>}
+            {a?.nextAction && <tr><th>Next action</th><td colspan="5">{a.nextAction}</td></tr>}
+          </tbody>
+        </table>
+
+        <form class="inline" method="post" action="/api/admin/programme" style="margin-top:12px;">
+          <input type="hidden" name="programmeId" value={p.id} />
+          {a && <input type="hidden" name="accountId" value={a.id} />}
+          <label class="muted">Prog<select name="programmeStatus">{PSTATUS.map((s) => <option selected={s === p.status}>{s}</option>)}</select></label>
+          {a && <label class="muted">Stage<select name="stage">{STAGES.map((s) => <option selected={s === a.applicationStage}>{s}</option>)}</select></label>}
+          {a && <label class="muted">Acct<select name="accountStatus">{ASTATUS.map((s) => <option selected={s === a.status}>{s}</option>)}</select></label>}
+          <input name="blocker" placeholder="blocker" value={a?.currentBlocker ?? ""} style="min-width:180px;" />
+          <input name="nextAction" placeholder="next action" value={a?.nextAction ?? ""} style="min-width:220px;" />
+          <button type="submit">Save</button>
+        </form>
+      </div>
+    );
+  })}
+
+  {orphanAccounts.length > 0 && (
+    <>
+      <h2>Other accounts</h2>
+      {orphanAccounts.map((a) => (
+        <div class="card" style="margin-bottom:12px;">
+          <strong>{a.network}</strong>
+          <span class={`tag ${a.status === "closed" || a.status === "rejected" ? "bad" : "warn"}`} style="margin-left:8px;">{a.status}</span>
+          <div class="muted" style="margin-top:6px;">{a.currentBlocker} — {a.nextAction}</div>
+        </div>
+      ))}
+    </>
+  )}
+</Admin>

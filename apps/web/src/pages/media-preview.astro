@@ -1,0 +1,86 @@
+---
+import Base from "../layouts/Base.astro";
+import PoolDiagram from "../components/PoolDiagram.astro";
+import CoverageZones from "../components/diagrams/CoverageZones.astro";
+import CordedVsCordless from "../components/diagrams/CordedVsCordless.astro";
+import PoolSizeShape from "../components/diagrams/PoolSizeShape.astro";
+import BotMatchExplainer from "../components/diagrams/BotMatchExplainer.astro";
+import CategoryHero from "../components/diagrams/CategoryHero.astro";
+import ProductVisual from "../components/ProductVisual.astro";
+import { ORIGINAL_ASSETS, PRODUCT_IMAGE_PLAN, mediaStats, AMAZON_IMAGE_COMPLIANCE } from "../content/media";
+
+const s = mediaStats();
+---
+<Base title="Media & Rights Preview — BotPlanet (internal)" description="Internal Job 2 review: original assets + product-image rights matrix." noindex={true}>
+  <p class="pill warn" style="margin-bottom:8px;">Internal review page · noindex · Job 2 evidence</p>
+  <h1>Media &amp; rights — Job 2 review</h1>
+  <p class="lede">Original BotPlanet assets (clean rights) plus the per-product image rights matrix. No scraped or generic product photos are used; products without a documented rights basis render the honest branded placeholder.</p>
+  <div class="row" style="margin:14px 0;">
+    <span class="pill ok">{s.originalActive} original assets · active</span>
+    <span class="pill ok">{s.productsRightsAvailableNow}/{s.productsTotal} products · lawful image source available now (Amazon)</span>
+    <span class="pill warn">{s.productsIngested}/{s.productsTotal} product images · ingested &amp; wired</span>
+  </div>
+
+  <h2>Branded category hero</h2>
+  <CategoryHero />
+
+  <h2>Original diagrams</h2>
+  <div class="stack">
+    <div><h3>Pool cleaning zones</h3><PoolDiagram /></div>
+    <div><h3>Floor / wall / waterline coverage</h3><CoverageZones /></div>
+    <div><h3>Corded vs cordless</h3><CordedVsCordless /></div>
+    <div><h3>Pool size &amp; shape suitability</h3><PoolSizeShape /></div>
+    <div><h3>How BotMatch works</h3><BotMatchExplainer /></div>
+  </div>
+
+  <h2>Default Open Graph image</h2>
+  <img src="/og/botplanet-default.svg" alt="BotPlanet default Open Graph card" style="max-width:600px;width:100%;border:1px solid var(--border);border-radius:12px;" />
+
+  <h2>Honest product placeholder (until real imagery is rights-cleared)</h2>
+  <div style="max-width:320px;"><ProductVisual name="Dolphin E10" brand="Dolphin" /></div>
+
+  <h2>Original asset rights register</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Asset</th><th>Kind</th><th>Source</th><th>Rights basis</th><th>Status</th></tr></thead>
+    <tbody>
+      {ORIGINAL_ASSETS.map((a) => (
+        <tr><td>{a.id}</td><td>{a.kind}</td><td>{a.source}</td><td class="muted">{a.rightsBasis}</td><td><span class="pill ok">{a.status}</span></td></tr>
+      ))}
+    </tbody>
+  </table></div>
+
+  <h2>Amazon Program Content — compliance basis</h2>
+  <div class="card">
+    <ul style="margin:0; padding-left:18px; line-height:1.8;">
+      {AMAZON_IMAGE_COMPLIANCE.map((r) => <li>{r}</li>)}
+    </ul>
+  </div>
+
+  <h2>Product-image rights reconciliation</h2>
+  <p class="note">Reconciled against the Affiliate Programme Status tracker + live D1. <strong>All 10 products have a lawful image source today — Amazon Associates</strong> (approved, live, all wired to /go). "Not ingested" means the real image file isn't fetched/wired yet, not that rights are missing. Until wired, tiles use the branded placeholder — never a scraped photo.</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Product</th><th>Brand</th><th>Programme</th><th>Net</th><th>Acct status</th><th>Terr.</th><th>Image source now</th><th>Access status</th><th>Upgrade (pending)</th><th>Blocker</th><th>Danny action</th></tr></thead>
+    <tbody>
+      {PRODUCT_IMAGE_PLAN.map((p) => (
+        <tr>
+          <td><strong>{p.slug}</strong></td>
+          <td>{p.brand}</td>
+          <td>{p.affiliateProgramme}</td>
+          <td>{p.network}</td>
+          <td class="muted">{p.accountStatus}</td>
+          <td>{p.territory}</td>
+          <td class="muted" style="min-width:200px;">{p.imageSourceNow}<br /><span class="pill ok" style="margin-top:4px;">{p.rightsStatus}</span></td>
+          <td class="muted" style="min-width:220px;">{p.accessStatus}</td>
+          <td class="muted" style="min-width:220px;">{p.upgradeSource ?? "—"}</td>
+          <td class="muted">{p.blocker ?? "none for launch"}</td>
+          <td class="muted">{p.dannyAction ?? "none"}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table></div>
+  <p class="note" style="margin-top:10px;">Evidence: <a href="https://app.notion.com/p/3ade30f1e54081a19981db2536055324">Affiliate Programme Status tracker</a> · D1 <span class="mono">affiliate_programs.amazon_us.image_permission</span> = "Amazon Program Content via approved Associates tools / Creators API" · Amazon Associates <span class="mono">botplanet-20</span>.</p>
+</Base>
+<style>
+  .stack { display: grid; gap: 26px; }
+  .stack h3 { font-size: 15px; margin: 0 0 8px; color: var(--muted); }
+</style>

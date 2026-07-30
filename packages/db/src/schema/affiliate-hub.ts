@@ -57,6 +57,10 @@ export const affiliateAccounts = sqliteTable(
     coverageNotes: text("coverage_notes"), // which products/offers this account covers
     lastTermsVerifiedAt: integer("last_terms_verified_at", { mode: "timestamp" }),
     suspensionStatus: text("suspension_status"),
+    /** Operational tracking: what's blocking, what's next, and when to follow up. */
+    currentBlocker: text("current_blocker"),
+    nextAction: text("next_action"),
+    followUpDate: integer("follow_up_date", { mode: "timestamp" }),
     /** Status of required tax/bank/identity setup — metadata only, no document contents. */
     taxBankIdentitySetupStatus: text("tax_bank_identity_setup_status").notNull().default("incomplete"),
     /** Reference/handle to a secret in the secret manager. NEVER the secret itself. */

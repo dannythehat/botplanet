@@ -1,0 +1,46 @@
+---
+import { FOOTER_GROUPS } from "../content/nav";
+import { SITE } from "../lib/site";
+const year = 2026;
+---
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <span class="logo-txt">Bot<b>Planet</b></span>
+        <p class="muted">{SITE.tagline}</p>
+        <p class="muted small">Independent robot recommendations for the United States. Suitability first — never commission.</p>
+      </div>
+      {FOOTER_GROUPS.map((g) => (
+        <div class="foot-col">
+          <p class="foot-h">{g.title}</p>
+          {g.links.map((l) => (
+            <a class="foot-link" href={l.href}>{l.label}{l.state === "coming_soon" && <em> · soon</em>}</a>
+          ))}
+        </div>
+      ))}
+    </div>
+    <div class="foot-legal">
+      <p class="muted small">
+        © {year} BotPlanet. Some links are affiliate links — if you buy through them we may earn a commission, at no cost to you. This never changes which product BotMatch recommends. Prices and stock are dated snapshots; always confirm the current price at the retailer.
+      </p>
+      <p class="muted small">Questions: <a href={`mailto:${SITE.business.contactEmail}`}>{SITE.business.contactEmail}</a> · <a href="/contact/">Contact</a></p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  footer.site { border-top: 1px solid var(--border); padding: 48px 0 40px; margin-top: 64px; }
+  .foot-grid { display: grid; grid-template-columns: 1.6fr repeat(4, 1fr); gap: 28px; }
+  .foot-brand .logo-txt { font-size: 18px; font-weight: 700; }
+  .foot-brand .logo-txt b { color: var(--text); } .foot-brand .logo-txt { color: var(--muted); }
+  .foot-brand p { margin: 10px 0 0; font-size: 13px; max-width: 320px; }
+  .small { font-size: 12px; line-height: 1.6; }
+  .foot-h { font-size: 11px; text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted); margin: 0 0 12px; }
+  .foot-link { display: block; color: var(--muted); font-size: 13.5px; padding: 4px 0; }
+  .foot-link:hover { color: var(--text); }
+  .foot-link em { font-style: normal; color: var(--border-2); }
+  .foot-legal { border-top: 1px solid var(--border); margin-top: 32px; padding-top: 20px; display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+  .foot-legal p { margin: 0; max-width: 720px; }
+  @media (max-width: 820px) { .foot-grid { grid-template-columns: 1fr 1fr; } .foot-brand { grid-column: 1 / -1; } }
+</style>

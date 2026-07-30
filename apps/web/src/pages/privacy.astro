@@ -1,0 +1,27 @@
+---
+import Base from "../layouts/Base.astro";
+import { SITE } from "../lib/site";
+---
+<Base title="Privacy" description="How BotPlanet handles your data.">
+  <h1>Privacy</h1>
+  <p style="max-width:680px;">We collect as little as possible.</p>
+
+  <h2>BotMatch</h2>
+  <ul>
+    <li>Your questionnaire answers are used to compute your recommendation.</li>
+    <li>We don't require personal details to get a recommendation.</li>
+    <li>If you ask us to email your result, we store your email address for that purpose and any consent you give.</li>
+    <li>Questionnaire answers are never included in outbound retailer links or analytics.</li>
+  </ul>
+
+  <h2>Analytics & attribution</h2>
+  <ul>
+    <li>We record anonymous events (e.g. which offer was clicked) to understand performance.</li>
+    <li>Retailer purchases and commissions are reconciled from the affiliate networks, not from personal data.</li>
+  </ul>
+
+  <h2>Your choices</h2>
+  <p>You can request deletion of any recommendation record tied to your email by contacting <a href={`mailto:${SITE.business.contactEmail}`}>{SITE.business.contactEmail}</a>.</p>
+
+  <p class="note">This is a launch policy and will be expanded with full legal detail (US state privacy laws, CAN-SPAM, GDPR/UK GDPR) before we operate commercially.</p>
+</Base>

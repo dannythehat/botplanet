@@ -5,7 +5,8 @@
   "description": "BotPlanet — global robot shopping & recommendation platform (US-first). Foundation: data model, migrations, deterministic BotMatch scoring. No frontend yet.",
   "type": "module",
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "apps/*"
   ],
   "engines": {
     "node": ">=20"
@@ -20,6 +21,7 @@
   "devDependencies": {
     "@types/node": "^22.10.0",
     "drizzle-kit": "^0.30.0",
+    "tsx": "^4.19.2",
     "typescript": "^5.7.0",
     "vitest": "^2.1.0"
   },

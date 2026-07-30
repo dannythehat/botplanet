@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="BotPlanet — shop the planet yourself, or let BotMatch find your perfect robot">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="8%" r="70%">
+      <stop offset="0%" stop-color="#5a6ebe" stop-opacity="0.28"/>
+      <stop offset="55%" stop-color="#1a2036" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#050507" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="planet" cx="38%" cy="34%" r="70%">
+      <stop offset="0%" stop-color="#2a3358"/>
+      <stop offset="60%" stop-color="#131727"/>
+      <stop offset="100%" stop-color="#0a0c15"/>
+    </radialGradient>
+    <linearGradient id="ring" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#7c93ff"/>
+      <stop offset="100%" stop-color="#4fd1c5"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="#050507"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <!-- starfield -->
+  <g fill="#ffffff">
+    <circle cx="120" cy="90" r="1.4" opacity="0.5"/><circle cx="320" cy="150" r="1" opacity="0.35"/>
+    <circle cx="520" cy="70" r="1.2" opacity="0.45"/><circle cx="900" cy="120" r="1" opacity="0.3"/>
+    <circle cx="1080" cy="200" r="1.5" opacity="0.5"/><circle cx="1010" cy="460" r="1" opacity="0.3"/>
+    <circle cx="180" cy="470" r="1.2" opacity="0.4"/><circle cx="80" cy="300" r="1" opacity="0.3"/>
+    <circle cx="700" cy="520" r="1.1" opacity="0.35"/><circle cx="420" cy="540" r="1" opacity="0.3"/>
+    <circle cx="1140" cy="360" r="1" opacity="0.3"/><circle cx="600" cy="30" r="1" opacity="0.3"/>
+  </g>
+  <!-- planet motif -->
+  <g transform="translate(930,315)">
+    <ellipse cx="0" cy="0" rx="240" ry="70" fill="none" stroke="url(#ring)" stroke-width="3" opacity="0.5" transform="rotate(-22)"/>
+    <circle cx="0" cy="0" r="120" fill="url(#planet)" stroke="#2c3557" stroke-width="1.5"/>
+    <ellipse cx="0" cy="0" rx="240" ry="70" fill="none" stroke="url(#ring)" stroke-width="6" opacity="0.9" transform="rotate(-22)" stroke-dasharray="360 380"/>
+    <circle cx="-42" cy="-38" r="9" fill="#3b4a6b" opacity="0.6"/>
+    <circle cx="30" cy="20" r="14" fill="#0c1120" opacity="0.7"/>
+    <circle cx="-10" cy="48" r="7" fill="#0c1120" opacity="0.6"/>
+  </g>
+  <!-- wordmark + tagline -->
+  <g font-family="ui-sans-serif, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif">
+    <text x="90" y="300" font-size="82" font-weight="800" letter-spacing="-3" fill="#f5f5f7">Bot<tspan fill="#8b8b95">Planet</tspan></text>
+    <text x="92" y="360" font-size="30" font-weight="500" fill="#c9c9d1">Shop the planet yourself, or let</text>
+    <text x="92" y="400" font-size="30" font-weight="500" fill="#c9c9d1">BotMatch find your perfect robot.</text>
+    <rect x="92" y="452" width="215" height="52" rx="26" fill="#ffffff"/>
+    <text x="199" y="486" font-size="21" font-weight="700" fill="#050507" text-anchor="middle">Find My Robot</text>
+    <text x="332" y="486" font-size="18" font-weight="500" fill="#8b8b95">Independent · US · suitability first</text>
+  </g>
+</svg>

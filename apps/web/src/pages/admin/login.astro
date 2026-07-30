@@ -1,0 +1,28 @@
+---
+const err = Astro.url.searchParams.has("e");
+---
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>BotPlanet Admin — Sign in</title>
+    <style>
+      body { margin:0; background:#0a0a0c; color:#f2f2f4; font:15px/1.6 ui-sans-serif,-apple-system,sans-serif; display:grid; place-items:center; min-height:100vh; }
+      .box { width:320px; background:#131317; border:1px solid #26262c; border-radius:14px; padding:26px; }
+      h1 { font-size:18px; margin:0 0 16px; }
+      input { width:100%; background:#1b1b20; color:#f2f2f4; border:1px solid #33333a; border-radius:9px; padding:11px 12px; font-size:15px; margin-bottom:12px; }
+      button { width:100%; background:#fff; color:#0a0a0c; border:none; border-radius:9px; padding:11px; font-weight:700; cursor:pointer; }
+      .err { color:#f28b82; font-size:13px; margin-bottom:10px; }
+    </style>
+  </head>
+  <body>
+    <form class="box" method="post" action="/api/admin/login">
+      <h1>BotPlanet Admin</h1>
+      {err && <div class="err">Incorrect token.</div>}
+      <input type="password" name="token" placeholder="Admin token" autofocus autocomplete="current-password" />
+      <button type="submit">Sign in</button>
+    </form>
+  </body>
+</html>

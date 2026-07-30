@@ -1,0 +1,124 @@
+---
+import Base from "../../layouts/Base.astro";
+import { getDb, schema } from "../../lib/db";
+import { usd, freshnessLabel } from "../../lib/format";
+import { eq } from "drizzle-orm";
+
+const { token } = Astro.params;
+const db = getDb(Astro.locals);
+
+const rec = (
+  await db.select().from(schema.recommendations).where(eq(schema.recommendations.secureToken, token!)).limit(1)
+)[0];
+if (!rec) return new Response("Recommendation not found", { status: 404 });
+
+const products = await db.select().from(schema.products);
+const productById = (id: string | null) => (id ? products.find((p) => p.id === id) : undefined);
+const chosen = productById(rec.chosenProductId);
+
+const chosenOffer = rec.chosenOfferId
+  ? (await db.select().from(schema.offers).where(eq(schema.offers.id, rec.chosenOfferId)).limit(1))[0]
+  : undefined;
+
+const scores = await db
+  .select()
+  .from(schema.recommendationScores)
+  .where(eq(schema.recommendationScores.recommendationId, rec.id));
+
+const alternatives = scores
+  .filter((s) => !s.excluded && s.productId !== rec.chosenProductId)
+  .sort((a, b) => b.suitabilityScore - a.suitabilityScore)
+  .slice(0, 3);
+
+const explanation = (rec.explanationJson as { text?: string } | null)?.text ?? "";
+const catSlug = "robotic-pool-cleaners";
+---
+
+<Base title="Your BotPlanet recommendation" description="Your personalised, suitability-first robot recommendation.">
+  <p class="muted">Your personalised recommendation · saved at this link</p>
+  {chosen ? (
+    <>
+      <div class="hero">
+        <span class="pill class">BotPlanet recommends</span>
+        <h1 style="margin-top:10px;">{chosen.name}</h1>
+        <p style="font-size:17px;">{explanation}</p>
+        {chosenOffer && (
+          <div class="row" style="margin-top:16px; align-items:center;">
+            <span class="price">{usd(chosenOffer.basePriceMinor)}</span>
+            <span class="pill">{freshnessLabel(chosenOffer.freshnessClass)}</span>
+            {chosenOffer.redirectKey && (
+              <a class="btn primary" href={`/go/${chosenOffer.redirectKey}`} rel="sponsored nofollow">See current offer</a>
+            )}
+            <a class="btn" href={`/robots/${catSlug}/${chosen.slug}/`}>Full details</a>
+          </div>
+        )}
+      </div>
+
+      {alternatives.length > 0 && (
+        <>
+          <h2>Strong alternatives</h2>
+          <div class="grid">
+            {alternatives.map((a) => {
+              const p = productById(a.productId);
+              return p ? (
+                <a class="card" href={`/robots/${catSlug}/${p.slug}/`}>
+                  <span class="pill">Suitability {a.suitabilityScore}/100</span>
+                  <h3>{p.name}</h3>
+                  <span class="muted">View details →</span>
+                </a>
+              ) : null;
+            })}
+          </div>
+        </>
+      )}
+    </>
+  ) : (
+    <>
+      <h1>No perfect match — yet</h1>
+      <p class="muted">None of our current products fit those answers. Try widening your criteria or <a href={`/botmatch/${catSlug}/`}>start again</a>.</p>
+    </>
+  )}
+
+  {chosen && (
+    <div class="card" style="max-width:480px; margin-top:28px;">
+      <h3 style="margin:0;">📧 Email my result</h3>
+      <p class="muted" style="margin:4px 0 12px;">We'll send this recommendation link to your inbox. No spam.</p>
+      <form id="emailform" data-token={token}>
+        <div class="row">
+          <input type="email" name="email" required placeholder="you@example.com" style="flex:1; min-width:200px;" />
+          <button type="submit" class="btn primary">Send</button>
+        </div>
+        <p id="emailmsg" class="note" style="margin-top:10px;"></p>
+      </form>
+    </div>
+    <script>
+      const ef = document.getElementById("emailform") as HTMLFormElement;
+      const msg = document.getElementById("emailmsg") as HTMLElement;
+      ef?.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const btn = ef.querySelector('button[type="submit"]') as HTMLButtonElement;
+        btn.disabled = true;
+        const email = (ef.elements.namedItem("email") as HTMLInputElement).value;
+        try {
+          const res = await fetch("/api/email-result", {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify({ token: ef.dataset.token, email }),
+          });
+          const data = (await res.json()) as { note?: string; error?: string };
+          msg.textContent = data.note ?? data.error ?? "Done.";
+        } catch {
+          msg.textContent = "Something went wrong — please try again.";
+        } finally {
+          btn.disabled = false;
+        }
+      });
+    </script>
+  )}
+
+  <p class="note" style="margin-top:26px;">
+    Chosen on suitability, not commission. Prices are research snapshots — confirm at the retailer.
+    Affiliate disclosure: BotPlanet may earn a commission from retailer links.
+  </p>
+  <p style="margin-top:16px;"><a class="btn" href={`/botmatch/${catSlug}/`}>Start over</a></p>
+</Base>
