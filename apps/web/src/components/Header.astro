@@ -24,7 +24,7 @@ const isActive = (href: string) => href !== "/" && path.startsWith(href.replace(
     </a>
 
     <nav class="main" aria-label="Primary">
-      {PRIMARY_NAV.map((item) =>
+      {PRIMARY_NAV.filter((item) => item.href !== journey.href).map((item) =>
         item.mega ? (
           <div class="has-mega">
             <a
@@ -86,7 +86,11 @@ const isActive = (href: string) => href !== "/" && path.startsWith(href.replace(
         ) : (
           <a
             href={item.href}
-            class:list={["nav-link", { active: isActive(item.href), soon: item.state === "coming_soon" }]}
+            class:list={[
+              "nav-link",
+              `nav-link--${item.bar ?? "primary"}`,
+              { active: isActive(item.href), soon: item.state === "coming_soon" },
+            ]}
           >
             {item.label}{item.state === "coming_soon" && <em class="soon-tag">Soon</em>}
           </a>
@@ -145,7 +149,7 @@ const isActive = (href: string) => href !== "/" && path.startsWith(href.replace(
     </div>
     <div class="drawer-group">
       <p class="drawer-h">More</p>
-      {PRIMARY_NAV.filter((i) => !i.mega).map((i) => (
+      {PRIMARY_NAV.filter((i) => !i.mega && i.href !== journey.href).map((i) => (
         <a class="drawer-link" href={i.href}>
           <span>{i.label}</span>{i.state === "coming_soon" && <em>soon</em>}
         </a>
@@ -728,6 +732,17 @@ const isActive = (href: string) => href !== "/" && path.startsWith(href.replace(
 
   .search-results .none { padding: var(--space-sm); color: var(--text-tertiary); }
   .search-hint { margin: var(--space-sm) var(--space-2xs) 0; }
+
+  /*
+   * Header overflow control. The bar must never exceed its container, so lower
+   * priority destinations are kept out of it — they remain reachable in the
+   * mega menu, the mobile drawer and the footer, so nothing is lost.
+   */
+  .nav-link--utility { display: none; }
+
+  @media (max-width: 1180px) {
+    .nav-link--secondary { display: none; }
+  }
 
   /* ---------------- Responsive ---------------- */
   @media (max-width: 1060px) {

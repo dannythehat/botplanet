@@ -54,6 +54,13 @@ export const routes = {
 
 /** Primary header items. `mega` opens the Shop Robots panel. */
 export interface NavItem {
+  /**
+   * Display priority in the top bar only. "utility" items stay in the mega
+   * menu, drawer and footer but are kept out of the desktop bar so the header
+   * never overflows; "secondary" items drop out on narrower desktops.
+   * This is presentation, not information architecture — Job 6 owns nav IA.
+   */
+  bar?: "primary" | "secondary" | "utility";
   label: string;
   href: string;
   mega?: boolean;
@@ -64,12 +71,12 @@ export const PRIMARY_NAV: NavItem[] = [
   { label: "Shop Robots", href: routes.category(LAUNCH_CATEGORY), mega: true },
   { label: "Find My Pool Cleaner", href: routes.botmatch(LAUNCH_CATEGORY) },
   { label: "Compare", href: routes.compare(LAUNCH_CATEGORY) },
-  { label: "Best Robots", href: routes.best() },
+  { label: "Best Robots", href: routes.best(), bar: "secondary" },
   { label: "Guides", href: routes.guides() },
-  { label: "Deals", href: routes.deals() },
-  { label: "Robot News", href: "/news/", state: "coming_soon" },
-  { label: "For Business", href: "/business/" },
-  { label: "About", href: "/about/" },
+  { label: "Deals", href: routes.deals(), bar: "secondary" },
+  { label: "Robot News", href: "/news/", state: "coming_soon", bar: "utility" },
+  { label: "For Business", href: "/business/", bar: "utility" },
+  { label: "About", href: "/about/", bar: "utility" },
 ];
 
 /** Footer link groups. */
