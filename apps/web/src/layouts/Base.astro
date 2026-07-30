@@ -6,6 +6,12 @@ import {
   buildMeta, isPreviewHost, schemaGraph, organizationSchema, websiteSchema, breadcrumbSchema, type Crumb,
 } from "../lib/seo";
 
+// Global design system. Order matters: tokens → element base → layout → components.
+import "../styles/tokens.css";
+import "../styles/base.css";
+import "../styles/layout.css";
+import "../styles/components.css";
+
 interface Props {
   title: string;
   description?: string;
@@ -19,6 +25,8 @@ interface Props {
   schema?: (Record<string, unknown> | null | undefined)[];
   /** Constrain main content width for long-form reading. */
   narrow?: boolean;
+  /** Let a page own the full width (full-bleed bands) with no wrap/breadcrumbs. */
+  bleed?: boolean;
 }
 
 const {
@@ -31,6 +39,7 @@ const {
   breadcrumbs = [],
   schema = [],
   narrow = false,
+  bleed = false,
 } = Astro.props;
 
 const host = Astro.request.headers.get("host");
@@ -39,24 +48,15 @@ const meta = buildMeta({ title, description, path: canonicalPath, ogImage, ogTyp
 const preview = isPreviewHost(host);
 
 // Google Search Console HTML-tag verification. Not required in practice — the
-// domain property sc-domain:botplanet.io is already verified via DNS, which
-// covers every URL prefix under the domain. The hook stays for the case of a
-// future property that can only be verified by tag, and emits nothing when the
-// value is unset (which it is).
+// domain property sc-domain:botplanet.io is verified via DNS, which covers every
+// URL prefix. The hook emits nothing when the value is unset (which it is).
 const searchConsoleToken = (Astro.locals as App.Locals).runtime?.env?.GOOGLE_SITE_VERIFICATION;
 const verifySearchConsole = Boolean(searchConsoleToken) && !preview;
 
 /**
- * Google Analytics 4 — the single production page-view system.
- *
- * Loaded once, here in the global layout, and only when all three hold:
- *   1. a measurement ID is configured (wrangler.toml [vars] GA_MEASUREMENT_ID),
- *   2. this is a production build — never `astro dev`, and
- *   3. the request host is botplanet.io — never a preview or workers.dev host.
- *
- * The measurement ID is public by design (it ships in the HTML), so it lives in
- * versioned config rather than a secret. No Google credential is involved.
- * The ID is shape-checked before it can reach the page.
+ * GA4 — the single production page-view system. Loaded once, here, and only on
+ * the production host in a production build. The measurement ID is public by
+ * design and lives in wrangler.toml [vars]; it is shape-checked before use.
  */
 const gaId = (Astro.locals as App.Locals).runtime?.env?.GA_MEASUREMENT_ID;
 const gaValid = typeof gaId === "string" && /^G-[A-Z0-9]{4,20}$/i.test(gaId);
@@ -71,7 +71,7 @@ const graph = schemaGraph(
 ---
 
 <!doctype html>
-<html lang="en-US">
+<html lang="en-US" class="no-js">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -79,8 +79,18 @@ const graph = schemaGraph(
     <meta name="description" content={meta.description} />
     <link rel="canonical" href={meta.canonical} />
     <meta name="robots" content={meta.robots} />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#07070a" />
     <link rel="icon" type="image/png" href="/logo/favicon-128.png" />
     {verifySearchConsole && <meta name="google-site-verification" content={searchConsoleToken} />}
+    <!-- Self-hosted display face: preloaded because it renders the first headline. -->
+    <link
+      rel="preload"
+      href="/fonts/space-grotesk-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin="anonymous"
+    />
     <meta property="og:site_name" content="BotPlanet" />
     <meta property="og:title" content={meta.ogTitle} />
     <meta property="og:description" content={meta.ogDescription} />
@@ -102,89 +112,47 @@ const graph = schemaGraph(
         />
       </Fragment>
     )}
-    <style is:global>
-      :root {
-        --bg: #050507; --panel: #0d0d10; --panel-2: #15151a; --text: #f5f5f7;
-        --muted: #8b8b95; --accent: #7aa2ff; --border: #212127; --border-2: #33333c;
-        --ok: #5bd39a; --warn: #e0b657; --bad: #e0796b; --radius: 14px;
-      }
-      * { box-sizing: border-box; }
-      html {
-        background: radial-gradient(1100px 600px at 50% -160px, rgba(80,100,170, 0.10), transparent), var(--bg);
-        scroll-behavior: smooth;
-      }
-      @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; animation: none !important; } }
-      body {
-        margin: 0; background: transparent; color: var(--text);
-        font: 16px/1.65 ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif;
-        -webkit-font-smoothing: antialiased; letter-spacing: -0.011em;
-      }
-      body::before {
-        content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
-        background-image:
-          radial-gradient(1px 1px at 24px 32px, rgba(255,255,255,0.35), transparent),
-          radial-gradient(1px 1px at 96px 128px, rgba(255,255,255,0.22), transparent),
-          radial-gradient(1.4px 1.4px at 168px 64px, rgba(255,255,255,0.30), transparent),
-          radial-gradient(1px 1px at 208px 190px, rgba(255,255,255,0.18), transparent),
-          radial-gradient(1px 1px at 60px 210px, rgba(255,255,255,0.22), transparent);
-        background-size: 240px 240px; opacity: 0.7;
-      }
-      a { color: var(--text); text-decoration: none; }
-      a:hover { color: #fff; }
-      :focus-visible { outline: 2px solid #7aa2ff; outline-offset: 2px; border-radius: 4px; }
-      .wrap { max-width: 1120px; margin: 0 auto; padding: 0 22px; }
-      header.site { border-bottom: 1px solid var(--border); background: rgba(5,5,7,0.72); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 40; }
-
-      main { padding: 34px 0 40px; }
-      main.narrow .wrap { max-width: 760px; }
-      h1 { font-size: clamp(30px, 5vw, 52px); line-height: 1.04; letter-spacing: -0.036em; margin: 0 0 16px; font-weight: 700; }
-      h2 { font-size: 25px; letter-spacing: -0.022em; margin: 44px 0 16px; font-weight: 640; }
-      h3 { letter-spacing: -0.012em; }
-      p { margin: 0 0 14px; }
-      .muted { color: var(--muted); }
-      .lede { font-size: 18px; line-height: 1.6; color: #c9c9d1; max-width: 680px; }
-
-      .grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); }
-      .card { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; display: flex; flex-direction: column; gap: 9px; transition: border-color 0.16s ease, transform 0.16s ease; }
-      a.card:hover { border-color: var(--border-2); transform: translateY(-2px); }
-      .card h3 { margin: 0; font-size: 17px; font-weight: 600; letter-spacing: -0.01em; }
-
-      .pill { display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; padding: 4px 10px; border-radius: 999px; background: var(--panel-2); color: var(--muted); border: 1px solid var(--border); }
-      .pill.class { color: var(--text); border-color: var(--border-2); }
-      .pill.ok { color: var(--ok); border-color: #244; } .pill.warn { color: var(--warn); border-color: #443; } .pill.bad { color: var(--bad); border-color: #533; }
-      .price { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; }
-
-      .btn { display: inline-block; background: transparent; border: 1px solid var(--border-2); color: var(--text); padding: 10px 17px; border-radius: 999px; font-weight: 600; font-size: 14px; transition: 0.16s ease; cursor: pointer; }
-      .btn:hover { border-color: #55555f; color: #fff; }
-      .btn.primary { background: #fff; color: #050507; border-color: #fff; }
-      .btn.primary:hover { background: #e7e7ea; color: #050507; }
-      .btn.big { padding: 13px 24px; font-size: 15px; }
-
-      .row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
-      .hero { position: relative; overflow: hidden; background: radial-gradient(600px 240px at 80% -20%, rgba(90,110,190,0.14), transparent), var(--panel); border: 1px solid var(--border); border-radius: 22px; padding: 52px; margin-bottom: 36px; }
-
-      table { width: 100%; border-collapse: collapse; font-size: 14px; }
-      th, td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--border); }
-      th { color: var(--muted); font-weight: 600; font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.04em; }
-      .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-
-      .note { font-size: 12.5px; color: var(--muted); }
-      .badge-preview { text-align: center; background: var(--panel-2); color: var(--muted); border-bottom: 1px solid var(--border); padding: 5px 12px; font-size: 11.5px; letter-spacing: 0.02em; }
-      select, input[type="number"], input[type="email"], input[type="text"], input[type="search"], textarea { background: var(--panel-2); color: var(--text); border: 1px solid var(--border-2); border-radius: 10px; padding: 11px 13px; font-size: 15px; font-family: inherit; }
-      select:focus, input:focus, textarea:focus { outline: none; border-color: #7aa2ff; }
-      .skip { position: absolute; left: -999px; } .skip:focus { left: 12px; top: 12px; z-index: 100; background: #fff; color: #000; padding: 8px 12px; border-radius: 8px; }
-    </style>
   </head>
   <body>
     <a class="skip" href="#main">Skip to content</a>
     <Header />
-    {preview && <div class="badge-preview">Preview build · provisional data — not the live site</div>}
     <main class:list={[{ narrow }]} id="main">
-      <div class="wrap">
-        <Breadcrumbs items={breadcrumbs} />
+      {bleed ? (
         <slot />
-      </div>
+      ) : (
+        <div class="wrap">
+          <Breadcrumbs items={breadcrumbs} />
+          <slot />
+        </div>
+      )}
     </main>
     <Footer />
+    <script is:inline>
+      // Progressive enhancement flag: CSS then treats no-JS as "already visible".
+      document.documentElement.classList.remove("no-js");
+
+      // One-shot reveal on first scroll into view. Never loops, never re-hides,
+      // and is skipped entirely when the visitor prefers reduced motion.
+      (function () {
+        var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        var targets = document.querySelectorAll(".reveal");
+        if (reduce || !("IntersectionObserver" in window) || !targets.length) {
+          targets.forEach(function (el) { el.classList.add("is-visible"); });
+          return;
+        }
+        var io = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                io.unobserve(entry.target);
+              }
+            });
+          },
+          { rootMargin: "0px 0px -8% 0px", threshold: 0.08 },
+        );
+        targets.forEach(function (el) { io.observe(el); });
+      })();
+    </script>
   </body>
 </html>

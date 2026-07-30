@@ -16,10 +16,30 @@ const { items } = Astro.props;
   </nav>
 )}
 <style>
-  .crumbs { margin: 0 0 20px; }
-  .crumbs ol { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; padding: 0; margin: 0; font-size: 13px; color: var(--muted); }
-  .crumbs li { display: flex; align-items: center; gap: 6px; }
-  .crumbs li:not(:first-child)::before { content: "›"; color: var(--border-2); }
-  .crumbs a { color: var(--muted); } .crumbs a:hover { color: var(--text); }
-  .crumbs [aria-current] { color: var(--text); }
+  .crumbs { margin: 0 0 var(--space-lg); }
+
+  .crumbs ol {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: 0;
+    margin: 0;
+    font-size: var(--type-meta);
+    color: var(--text-tertiary);
+  }
+
+  .crumbs li { display: flex; align-items: center; gap: var(--space-xs); margin: 0; }
+
+  .crumbs li:not(:first-child)::before {
+    content: "/";
+    color: var(--text-quaternary);
+    font-family: var(--font-mono);
+  }
+
+  .crumbs a { color: var(--text-tertiary); padding: 2px 0; }
+  .crumbs a:hover { color: var(--text-primary); }
+  .crumbs a:focus-visible { outline: var(--focus-ring); outline-offset: 3px; }
+  .crumbs [aria-current] { color: var(--text-secondary); }
 </style>

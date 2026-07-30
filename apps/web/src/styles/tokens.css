@@ -1,0 +1,181 @@
+/**
+ * BotPlanet design tokens — the single source of truth for the visual system.
+ *
+ * LOCKED VISUAL PRINCIPLE (Master Blueprint): the interface is a deliberately
+ * monochrome canvas — deep black, off-black, white, soft white, controlled
+ * greys. Colour is scarce so it lands hard when it arrives: real product
+ * photography, BotMatch, hero moments, major comparison conclusions, trust and
+ * evidence signals, meaningful conversion moments and selected interactive
+ * states. Nothing routine gets colour.
+ *
+ * Tokens are named for their ROLE, never for a colour or a component, so a
+ * surface can be re-tuned once here instead of in thirty places.
+ */
+
+:root {
+  /* ---------------------------------------------------------------- */
+  /* Background levels — the "depth of space" ladder, darkest first.  */
+  /* ---------------------------------------------------------------- */
+  --bg-void: #040406; /* the page behind everything */
+  --bg-base: #07070a; /* default page background */
+  --bg-raised: #0c0c11; /* sections lifted off the page */
+  --bg-sunken: #030304; /* wells, code, inset areas */
+
+  /* Surface levels — for things that sit ON a background. */
+  --surface-1: #0e0e13; /* cards, panels */
+  --surface-2: #14141a; /* nested panels, inputs, hover of surface-1 */
+  --surface-3: #1c1c23; /* active/selected surface, chips */
+  --surface-inverse: #f7f7f9; /* white blocks on the dark canvas */
+
+  /* Text hierarchy — four honest levels, no faint unreadable greys. */
+  --text-primary: #f6f6f8;
+  --text-secondary: #b4b4c0; /* body support, still comfortably readable */
+  --text-tertiary: #8a8a97; /* metadata, timestamps */
+  --text-quaternary: #63636f; /* the quietest permitted level */
+  --text-on-inverse: #08080b; /* text on --surface-inverse */
+
+  /* Border hierarchy. */
+  --border-subtle: #1b1b22; /* structural dividers */
+  --border-default: #26262f; /* card and control outlines */
+  --border-strong: #3a3a47; /* hover / emphasis */
+  --border-inverse: #ffffff;
+
+  /* ---------------------------------------------------------------- */
+  /* Selective-impact colour. Not for routine UI. See rule above.     */
+  /* ---------------------------------------------------------------- */
+  --impact-signal: #7aa2ff; /* focus ring, BotMatch, key interactive state */
+  --impact-positive: #5bd39a; /* verified / in-stock / confirmed evidence */
+  --impact-caution: #e0b657; /* provisional, snapshot, awaiting evidence */
+  --impact-critical: #e0796b; /* unavailable, withdrawn, failed */
+
+  /* ---------------------------------------------------------------- */
+  /* Spacing — a 4px-based scale. Use these, never arbitrary pixels.  */
+  /* ---------------------------------------------------------------- */
+  --space-3xs: 2px;
+  --space-2xs: 4px;
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+  --space-4xl: 96px;
+  --space-5xl: 128px;
+
+  /* Section rhythm — deliberately generous, and it breathes with the viewport. */
+  --section-gap: clamp(56px, 8vw, 112px);
+  --section-gap-tight: clamp(36px, 5vw, 64px);
+
+  /* ---------------------------------------------------------------- */
+  /* Widths — several, so not every section sits in one centred box.  */
+  /* ---------------------------------------------------------------- */
+  --width-prose: 68ch; /* long-form reading measure */
+  --width-editorial: 760px;
+  --width-content: 1120px; /* default commercial width */
+  --width-wide: 1320px; /* galleries, comparison tables */
+  --gutter: clamp(18px, 4vw, 32px);
+
+  /* Radii. */
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-pill: 999px;
+
+  /* Shadows — restrained; depth comes mostly from surface value, not glow. */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.45);
+  --shadow-lg: 0 24px 64px rgba(0, 0, 0, 0.55);
+  --shadow-inset-hairline: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+
+  /* ---------------------------------------------------------------- */
+  /* Typography.                                                      */
+  /* ---------------------------------------------------------------- */
+  /* Space Grotesk (SIL OFL 1.1, self-hosted) carries the brand voice:
+     geometric, technical, a little spacey — right for robotics. Body text
+     stays on a highly-legible system stack for speed and readability. */
+  --font-display: "Space Grotesk", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+
+  /* Fluid type scale. Display sizes are intentionally large and tight. */
+  --type-display: clamp(40px, 7vw, 76px);
+  --type-title: clamp(30px, 4.4vw, 48px);
+  --type-heading: clamp(22px, 2.6vw, 30px);
+  --type-subheading: 19px;
+  --type-card: 17px;
+  --type-body-lg: 18px;
+  --type-body: 16px;
+  --type-body-sm: 14.5px;
+  --type-label: 13px;
+  --type-meta: 12.5px;
+
+  --leading-tight: 1.04;
+  --leading-snug: 1.2;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.68;
+
+  --tracking-display: -0.035em;
+  --tracking-title: -0.025em;
+  --tracking-heading: -0.015em;
+  --tracking-body: -0.008em;
+  --tracking-label: 0.02em;
+  --tracking-caps: 0.08em; /* used sparingly — small labels only */
+
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  /* ---------------------------------------------------------------- */
+  /* Motion — short, purposeful, never decorative.                    */
+  /* ---------------------------------------------------------------- */
+  --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-spring: cubic-bezier(0.34, 1.36, 0.64, 1);
+  --duration-instant: 90ms;
+  --duration-fast: 160ms;
+  --duration-base: 240ms;
+  --duration-slow: 420ms;
+
+  /* Focus — one visible, high-contrast treatment everywhere. */
+  --focus-ring: 2px solid var(--impact-signal);
+  --focus-offset: 3px;
+
+  /* Minimum comfortable touch target (WCAG 2.5.5 / 2.5.8). */
+  --tap-min: 44px;
+
+  --header-height: 76px;
+  --header-height-compact: 64px;
+
+  /* ---------------------------------------------------------------- */
+  /* Compatibility aliases.                                           */
+  /* Earlier pages were written against these names; they now resolve  */
+  /* to the token system so old markup inherits the new design instead */
+  /* of drifting from it. New work should use the role tokens above.    */
+  /* ---------------------------------------------------------------- */
+  --bg: var(--bg-base);
+  --panel: var(--surface-1);
+  --panel-2: var(--surface-2);
+  --text: var(--text-primary);
+  --muted: var(--text-tertiary);
+  --border: var(--border-subtle);
+  --border-2: var(--border-default);
+  --accent: var(--impact-signal);
+  --ok: var(--impact-positive);
+  --warn: var(--impact-caution);
+  --bad: var(--impact-critical);
+  --radius: var(--radius-md);
+}
+
+/* Reduced motion is respected globally: transitions collapse to instant. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-instant: 1ms;
+    --duration-fast: 1ms;
+    --duration-base: 1ms;
+    --duration-slow: 1ms;
+  }
+}

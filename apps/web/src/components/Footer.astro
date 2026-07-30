@@ -1,46 +1,220 @@
 ---
-import { FOOTER_GROUPS } from "../content/nav";
-import { SITE } from "../lib/site";
+import { FOOTER_GROUPS, routes, LAUNCH_CATEGORY } from "../content/nav";
+import { SITE, TRUST_LINKS } from "../lib/site";
 const year = 2026;
+const botmatchHref = routes.botmatch(LAUNCH_CATEGORY);
+
+// Legal/trust links are split out of the route groups so the footer reads as
+// three deliberate zones (brand → routes → legal) rather than one link wall.
+const LEGAL = TRUST_LINKS.filter((l) => ["/privacy/", "/affiliate-disclosure/", "/editorial-policy/"].includes(l.href));
 ---
 <footer class="site">
-  <div class="wrap">
-    <div class="foot-grid">
+  <!-- Zone 1: brand + one restrained BotMatch direction. -->
+  <div class="foot-lead">
+    <div class="wrap foot-lead__inner">
       <div class="foot-brand">
-        <span class="logo-txt">Bot<b>Planet</b></span>
-        <p class="muted">{SITE.tagline}</p>
-        <p class="muted small">Independent robot recommendations for the United States. Suitability first — never commission.</p>
+        <img src="/logo/logo-header.png" alt="BotPlanet" width="176" height="33" class="foot-logo" />
+        <p class="foot-tagline">{SITE.tagline}</p>
+        <p class="note foot-independence">
+          Independent robot recommendations for the United States. Suitability first — never commission.
+        </p>
       </div>
+      <div class="foot-action">
+        <p class="foot-action__title">Not sure which robot fits?</p>
+        <p class="note">
+          Answer a few questions and BotMatch gives you one clear recommendation, with the reasons and the limitations.
+        </p>
+        <a class="btn btn--primary" href={botmatchHref}>Find My Robot</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Zone 2: route groups. -->
+  <div class="wrap">
+    <nav class="foot-nav" aria-label="Footer">
       {FOOTER_GROUPS.map((g) => (
         <div class="foot-col">
-          <p class="foot-h">{g.title}</p>
-          {g.links.map((l) => (
-            <a class="foot-link" href={l.href}>{l.label}{l.state === "coming_soon" && <em> · soon</em>}</a>
-          ))}
+          <h2 class="foot-h">{g.title}</h2>
+          <ul class="foot-list">
+            {g.links.map((l) => (
+              <li>
+                {l.state === "coming_soon" ? (
+                  <span class="foot-link is-soon">{l.label}<em>soon</em></span>
+                ) : (
+                  <a class="foot-link" href={l.href}>{l.label}</a>
+                )}
+              </li>
+            ))}
+          </ul>
         </div>
       ))}
-    </div>
+    </nav>
+  </div>
+
+  <!-- Zone 3: transparency + legal. -->
+  <div class="wrap">
     <div class="foot-legal">
-      <p class="muted small">
-        © {year} BotPlanet. Some links are affiliate links — if you buy through them we may earn a commission, at no cost to you. This never changes which product BotMatch recommends. Prices and stock are dated snapshots; always confirm the current price at the retailer.
+      <p class="note foot-disclosure">
+        <strong>Affiliate disclosure.</strong> Some links are affiliate links — if you buy through them we may earn a
+        commission, at no cost to you. This never changes which product BotMatch recommends, and never changes how a
+        product is rated. Prices and stock are dated snapshots; always confirm the current price at the retailer.
       </p>
-      <p class="muted small">Questions: <a href={`mailto:${SITE.business.contactEmail}`}>{SITE.business.contactEmail}</a> · <a href="/contact/">Contact</a></p>
+      <div class="foot-legal__row">
+        <p class="note">© {year} BotPlanet</p>
+        <ul class="foot-legal__links">
+          {LEGAL.map((l) => <li><a class="foot-link" href={l.href}>{l.label}</a></li>)}
+          <li><a class="foot-link" href={`mailto:${SITE.business.contactEmail}`}>{SITE.business.contactEmail}</a></li>
+        </ul>
+      </div>
     </div>
   </div>
 </footer>
 
 <style>
-  footer.site { border-top: 1px solid var(--border); padding: 48px 0 40px; margin-top: 64px; }
-  .foot-grid { display: grid; grid-template-columns: 1.6fr repeat(4, 1fr); gap: 28px; }
-  .foot-brand .logo-txt { font-size: 18px; font-weight: 700; }
-  .foot-brand .logo-txt b { color: var(--text); } .foot-brand .logo-txt { color: var(--muted); }
-  .foot-brand p { margin: 10px 0 0; font-size: 13px; max-width: 320px; }
-  .small { font-size: 12px; line-height: 1.6; }
-  .foot-h { font-size: 11px; text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted); margin: 0 0 12px; }
-  .foot-link { display: block; color: var(--muted); font-size: 13.5px; padding: 4px 0; }
-  .foot-link:hover { color: var(--text); }
-  .foot-link em { font-style: normal; color: var(--border-2); }
-  .foot-legal { border-top: 1px solid var(--border); margin-top: 32px; padding-top: 20px; display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
-  .foot-legal p { margin: 0; max-width: 720px; }
-  @media (max-width: 820px) { .foot-grid { grid-template-columns: 1fr 1fr; } .foot-brand { grid-column: 1 / -1; } }
+  footer.site {
+    margin-top: var(--section-gap);
+    border-top: 1px solid var(--border-subtle);
+    background: var(--bg-raised);
+  }
+
+  /* ---- Zone 1: brand + BotMatch direction ---- */
+  .foot-lead {
+    border-bottom: 1px solid var(--border-subtle);
+    background: var(--bg-sunken);
+  }
+
+  .foot-lead__inner {
+    display: grid;
+    grid-template-columns: 1.35fr 1fr;
+    gap: clamp(var(--space-xl), 5vw, var(--space-4xl));
+    align-items: start;
+    padding-block: var(--space-2xl);
+  }
+
+  .foot-logo { width: 176px; height: auto; }
+
+  .foot-tagline {
+    font-family: var(--font-display);
+    font-size: var(--type-subheading);
+    font-weight: var(--weight-medium);
+    letter-spacing: var(--tracking-heading);
+    color: var(--text-primary);
+    max-width: 34ch;
+    margin: var(--space-md) 0 var(--space-xs);
+  }
+
+  .foot-independence { max-width: 46ch; margin: 0; }
+
+  .foot-action {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-xs);
+    padding: var(--space-lg);
+    background: var(--surface-1);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+  }
+
+  .foot-action__title {
+    font-family: var(--font-display);
+    font-size: var(--type-card);
+    font-weight: var(--weight-semibold);
+    color: var(--text-primary);
+    margin: 0;
+  }
+
+  .foot-action .note { max-width: 42ch; margin: 0 0 var(--space-xs); }
+
+  /* ---- Zone 2: route groups ---- */
+  .foot-nav {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-xl) var(--space-lg);
+    padding-block: var(--space-2xl);
+  }
+
+  .foot-h {
+    font-family: var(--font-display);
+    font-size: var(--type-meta);
+    font-weight: var(--weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-caps);
+    color: var(--text-tertiary);
+    margin: 0 0 var(--space-sm);
+  }
+
+  .foot-list { list-style: none; margin: 0; padding: 0; }
+  .foot-list li { margin: 0; }
+
+  .foot-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2xs);
+    /* Generous vertical padding keeps footer links tappable on mobile. */
+    padding: 7px 0;
+    color: var(--text-secondary);
+    font-size: var(--type-body-sm);
+  }
+
+  .foot-link:hover { color: var(--text-primary); }
+  .foot-link:focus-visible { outline: var(--focus-ring); outline-offset: 3px; }
+
+  .foot-link.is-soon { color: var(--text-quaternary); }
+
+  .foot-link em {
+    font-style: normal;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-caps);
+    color: var(--text-quaternary);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-xs);
+    padding: 1px 5px;
+  }
+
+  /* ---- Zone 3: transparency + legal ---- */
+  .foot-legal {
+    border-top: 1px solid var(--border-subtle);
+    padding-block: var(--space-lg) var(--space-2xl);
+  }
+
+  .foot-disclosure { max-width: 88ch; margin: 0 0 var(--space-md); }
+  .foot-disclosure strong { color: var(--text-secondary); }
+
+  .foot-legal__row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+  }
+
+  .foot-legal__row .note { margin: 0; }
+
+  .foot-legal__links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0 var(--space-lg);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .foot-legal__links li { margin: 0; }
+  .foot-legal__links .foot-link { font-size: var(--type-meta); }
+
+  /* ---- Responsive: deliberate stacking, not a collapsed desktop ---- */
+  @media (max-width: 900px) {
+    .foot-lead__inner { grid-template-columns: 1fr; gap: var(--space-xl); }
+    .foot-action { width: 100%; }
+    .foot-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+
+  @media (max-width: 520px) {
+    .foot-nav { grid-template-columns: 1fr; gap: var(--space-lg); }
+    .foot-legal__row { flex-direction: column; align-items: flex-start; gap: var(--space-xs); }
+    .foot-legal__links { gap: 0 var(--space-md); }
+  }
 </style>

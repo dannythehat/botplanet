@@ -6,120 +6,249 @@ const botmatchHref = routes.botmatch(LAUNCH_CATEGORY);
 const path = Astro.url.pathname;
 const isActive = (href: string) => href !== "/" && path.startsWith(href.replace(/\/$/, ""));
 ---
-<header class="site">
+<!--
+  Approved structure, unchanged: logo | navigation | search | saved | Find My Robot.
+  Job 5 improves execution only — alignment, states, focus, drawer quality and
+  scroll integration. No US label, no second logo row, no square logo, no
+  preview strip, no duplicate branding.
+-->
+<header class="site" id="site-header" data-scrolled="false">
   <div class="wrap bar">
-    <a class="logo" href="/" aria-label="BotPlanet — home"><img src="/logo/logo-header.png" alt="BotPlanet" class="logo-full" width="168" height="32" /></a>
+    <a class="logo" href="/" aria-label="BotPlanet — home">
+      <img src="/logo/logo-header.png" alt="BotPlanet" class="logo-full" width="168" height="32" />
+    </a>
 
     <nav class="main" aria-label="Primary">
       {PRIMARY_NAV.map((item) =>
         item.mega ? (
           <div class="has-mega">
-            <a href={item.href} class:list={["nav-link", { active: isActive(item.href) }]} aria-haspopup="true">{item.label} <span class="caret">▾</span></a>
-            <div class="mega" role="menu">
+            <a
+              href={item.href}
+              class:list={["nav-link", { active: isActive(item.href) }]}
+              aria-haspopup="true"
+            >
+              {item.label}<span class="caret" aria-hidden="true">▾</span>
+            </a>
+            <div class="mega" role="group" aria-label={`${item.label} menu`}>
               <div class="mega-inner">
                 <div class="mega-col">
                   <p class="mega-h">By job to be done</p>
                   {cats.map((c) => (
-                    <a class:list={["mega-item", { soon: c.launch !== "live" }]} href={c.launch === "live" ? routes.category(c.slug) : "#"} aria-disabled={c.launch !== "live"}>
+                    <a
+                      class:list={["mega-item", { soon: c.launch !== "live" }]}
+                      href={c.launch === "live" ? routes.category(c.slug) : "#"}
+                      aria-disabled={c.launch !== "live"}
+                      tabindex={c.launch === "live" ? undefined : -1}
+                    >
                       <span class="mega-jtbd">{c.jtbd}</span>
-                      <span class="mega-sub">{c.name}{c.launch !== "live" && <em class="soon-tag">Coming soon</em>}</span>
+                      <span class="mega-sub">
+                        {c.name}{c.launch !== "live" && <em class="soon-tag">Coming soon</em>}
+                      </span>
                     </a>
                   ))}
                 </div>
                 <div class="mega-col">
                   <p class="mega-h">Robotic pool cleaners</p>
-                  <a class="mega-item" href={routes.category(LAUNCH_CATEGORY)}><span class="mega-jtbd">Browse all pool robots</span><span class="mega-sub">The full US launch catalogue</span></a>
-                  <a class="mega-item" href={routes.best()}><span class="mega-jtbd">Best pool robots</span><span class="mega-sub">Our top picks by use case</span></a>
-                  <a class="mega-item" href={routes.compare(LAUNCH_CATEGORY)}><span class="mega-jtbd">Compare</span><span class="mega-sub">Head-to-head, winner by pool</span></a>
-                  <a class="mega-item" href={routes.guides()}><span class="mega-jtbd">Buying &amp; care guides</span><span class="mega-sub">How they work, what to know</span></a>
+                  <a class="mega-item" href={routes.category(LAUNCH_CATEGORY)}>
+                    <span class="mega-jtbd">Browse all pool robots</span>
+                    <span class="mega-sub">The full US launch catalogue</span>
+                  </a>
+                  <a class="mega-item" href={routes.best()}>
+                    <span class="mega-jtbd">Best pool robots</span>
+                    <span class="mega-sub">Our top picks by use case</span>
+                  </a>
+                  <a class="mega-item" href={routes.compare(LAUNCH_CATEGORY)}>
+                    <span class="mega-jtbd">Compare</span>
+                    <span class="mega-sub">Head-to-head, winner by pool</span>
+                  </a>
+                  <a class="mega-item" href={routes.guides()}>
+                    <span class="mega-jtbd">Buying &amp; care guides</span>
+                    <span class="mega-sub">How they work, what to know</span>
+                  </a>
                 </div>
                 <div class="mega-col mega-feature">
                   <p class="mega-h">Not sure which?</p>
-                  <a class="mega-cta" href={botmatchHref}>Try BotMatch →<span>Answer a few questions, get one clear recommendation on suitability — never commission.</span></a>
+                  <a class="mega-cta" href={botmatchHref}>
+                    <span class="mega-cta__title">Try BotMatch <span aria-hidden="true">→</span></span>
+                    <span class="mega-cta__body">
+                      Answer a few questions, get one clear recommendation on suitability — never commission.
+                    </span>
+                  </a>
                 </div>
               </div>
             </div>
           </div>
         ) : (
-          <a href={item.href} class:list={["nav-link", { active: isActive(item.href), soon: item.state === "coming_soon" }]}>{item.label}{item.state === "coming_soon" && <em class="soon-tag">Soon</em>}</a>
+          <a
+            href={item.href}
+            class:list={["nav-link", { active: isActive(item.href), soon: item.state === "coming_soon" }]}
+          >
+            {item.label}{item.state === "coming_soon" && <em class="soon-tag">Soon</em>}
+          </a>
         )
       )}
     </nav>
 
     <div class="head-actions">
-      <button class="icon-btn" type="button" id="btn-search" aria-label="Search" title="Search">⌕</button>
-      <button class="icon-btn" type="button" id="btn-saved" aria-label="Saved products" title="Saved">♡<span class="saved-count" id="saved-count" hidden>0</span></button>
-      <a class="cta" href={botmatchHref}>Find My Robot</a>
-      <button class="icon-btn burger" type="button" id="btn-menu" aria-label="Menu" aria-expanded="false">☰</button>
+      <button class="icon-btn" type="button" id="btn-search" aria-label="Search" title="Search">
+        <span aria-hidden="true">⌕</span>
+      </button>
+      <button class="icon-btn" type="button" id="btn-saved" aria-label="Saved products" title="Saved">
+        <span aria-hidden="true">♡</span><span class="saved-count" id="saved-count" hidden>0</span>
+      </button>
+      <a class="btn btn--primary btn--sm cta" href={botmatchHref}>Find My Robot</a>
+      <button
+        class="icon-btn burger"
+        type="button"
+        id="btn-menu"
+        aria-label="Menu"
+        aria-expanded="false"
+        aria-controls="drawer"
+      >
+        <span aria-hidden="true">☰</span>
+      </button>
     </div>
   </div>
 </header>
 
 <!-- Overlays live OUTSIDE the backdrop-filtered header so position:fixed is
-     relative to the viewport, not trapped in the 66px header containing block. -->
+     relative to the viewport, not trapped in the header's containing block. -->
 
-  <!-- Mobile drawer -->
-  <div class="drawer" id="drawer" hidden>
-    <div class="drawer-panel" role="dialog" aria-label="Menu">
-      <div class="drawer-head">
-        <img src="/logo/logo-mobile.png" alt="BotPlanet" style="height:34px;width:auto" />
-        <button class="icon-btn" type="button" id="btn-close" aria-label="Close menu">✕</button>
-      </div>
-      <a class="drawer-cta" href={botmatchHref}>✦ Find My Robot</a>
-      <div class="drawer-group">
-        <p class="drawer-h">Shop robots</p>
-        {cats.map((c) => (
-          c.launch === "live"
-            ? <a class="drawer-link" href={routes.category(c.slug)}>{c.jtbd} <em>{c.name}</em></a>
-            : <span class="drawer-link soon">{c.jtbd} <em>{c.name} · soon</em></span>
-        ))}
-      </div>
-      <div class="drawer-group">
-        {PRIMARY_NAV.filter((i) => !i.mega).map((i) => (
-          <a class="drawer-link" href={i.href}>{i.label}{i.state === "coming_soon" && <em>soon</em>}</a>
-        ))}
-      </div>
+<div class="drawer" id="drawer" hidden>
+  <div class="drawer-scrim" id="drawer-scrim"></div>
+  <div class="drawer-panel" role="dialog" aria-modal="true" aria-label="Menu">
+    <div class="drawer-head">
+      <img src="/logo/logo-header.png" alt="BotPlanet" width="132" height="25" class="drawer-logo" />
+      <button class="icon-btn" type="button" id="btn-close" aria-label="Close menu">
+        <span aria-hidden="true">✕</span>
+      </button>
     </div>
-    <div class="drawer-scrim" id="drawer-scrim"></div>
+    <a class="btn btn--primary btn--block drawer-cta" href={botmatchHref}>Find My Robot</a>
+    <div class="drawer-group">
+      <p class="drawer-h">Shop robots</p>
+      {cats.map((c) =>
+        c.launch === "live" ? (
+          <a class="drawer-link" href={routes.category(c.slug)}>
+            <span>{c.jtbd}</span><em>{c.name}</em>
+          </a>
+        ) : (
+          <span class="drawer-link soon">
+            <span>{c.jtbd}</span><em>{c.name} · soon</em>
+          </span>
+        )
+      )}
+    </div>
+    <div class="drawer-group">
+      <p class="drawer-h">More</p>
+      {PRIMARY_NAV.filter((i) => !i.mega).map((i) => (
+        <a class="drawer-link" href={i.href}>
+          <span>{i.label}</span>{i.state === "coming_soon" && <em>soon</em>}
+        </a>
+      ))}
+    </div>
   </div>
+</div>
 
-  <!-- Search overlay -->
-  <div class="search-ov" id="search-ov" hidden>
-    <div class="search-box" role="dialog" aria-label="Search">
-      <input type="search" id="search-input" placeholder="Search robots, guides, comparisons…" autocomplete="off" />
-      <ul class="search-results" id="search-results"></ul>
-      <p class="search-hint muted">More of the catalogue becomes searchable as content lands.</p>
-    </div>
-    <div class="search-scrim" id="search-scrim"></div>
+<div class="search-ov" id="search-ov" hidden>
+  <div class="search-scrim" id="search-scrim"></div>
+  <div class="search-box" role="dialog" aria-modal="true" aria-label="Search">
+    <label class="sr-only" for="search-input">Search BotPlanet</label>
+    <input
+      type="search"
+      id="search-input"
+      placeholder="Search robots, guides, comparisons…"
+      autocomplete="off"
+    />
+    <ul class="search-results" id="search-results"></ul>
+    <p class="search-hint note">More of the catalogue becomes searchable as content lands.</p>
   </div>
+</div>
 
 <script define:vars={{ cats, nav: PRIMARY_NAV, botmatchHref }}>
   const $ = (id) => document.getElementById(id);
-  // --- mobile drawer ---
+
+  /* ---- Header gains a solid edge once the page scrolls under it. ---- */
+  const header = $("site-header");
+  let ticking = false;
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      header?.setAttribute("data-scrolled", window.scrollY > 8 ? "true" : "false");
+      ticking = false;
+    });
+  };
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  /* ---- Focus management shared by both overlays. ---- */
+  let lastFocused = null;
+  const FOCUSABLE = 'a[href], button:not([disabled]), input, [tabindex]:not([tabindex="-1"])';
+
+  function trapFocus(container, e) {
+    if (e.key !== "Tab") return;
+    const items = [...container.querySelectorAll(FOCUSABLE)].filter((el) => el.offsetParent !== null);
+    if (!items.length) return;
+    const first = items[0];
+    const last = items[items.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
+  }
+
+  /* ---- Mobile drawer ---- */
   const drawer = $("drawer");
-  const openDrawer = () => { drawer.hidden = false; $("btn-menu").setAttribute("aria-expanded", "true"); document.body.style.overflow = "hidden"; };
-  const closeDrawer = () => { drawer.hidden = true; $("btn-menu").setAttribute("aria-expanded", "false"); document.body.style.overflow = ""; };
+  const openDrawer = () => {
+    lastFocused = document.activeElement;
+    drawer.hidden = false;
+    $("btn-menu").setAttribute("aria-expanded", "true");
+    document.body.style.overflow = "hidden";
+    // Focus the close button so keyboard users start inside the dialog.
+    setTimeout(() => $("btn-close")?.focus(), 20);
+  };
+  const closeDrawer = () => {
+    if (drawer.hidden) return;
+    drawer.hidden = true;
+    $("btn-menu").setAttribute("aria-expanded", "false");
+    document.body.style.overflow = "";
+    lastFocused?.focus?.();
+  };
   $("btn-menu")?.addEventListener("click", openDrawer);
   $("btn-close")?.addEventListener("click", closeDrawer);
   $("drawer-scrim")?.addEventListener("click", closeDrawer);
+  drawer?.addEventListener("keydown", (e) => trapFocus(drawer, e));
 
-  // --- saved (localStorage) ---
-  function savedIds() { try { return JSON.parse(localStorage.getItem("bp_saved") || "[]"); } catch { return []; } }
+  /* ---- Saved (localStorage) ---- */
+  function savedIds() {
+    try { return JSON.parse(localStorage.getItem("bp_saved") || "[]"); } catch { return []; }
+  }
   function refreshSaved() {
-    const n = savedIds().length; const el = $("saved-count");
+    const n = savedIds().length;
+    const el = $("saved-count");
     if (el) { el.textContent = n; el.hidden = n === 0; }
+    const btn = $("btn-saved");
+    if (btn) btn.setAttribute("aria-label", n ? `Saved products (${n})` : "Saved products");
     document.querySelectorAll("[data-save]").forEach((b) => {
       const on = savedIds().includes(b.getAttribute("data-save"));
-      b.classList.toggle("is-saved", on); b.setAttribute("aria-pressed", on ? "true" : "false");
+      b.classList.toggle("is-saved", on);
+      b.setAttribute("aria-pressed", on ? "true" : "false");
     });
   }
   window.bpToggleSave = function (id) {
-    let s = savedIds(); s = s.includes(id) ? s.filter((x) => x !== id) : [...s, id];
-    localStorage.setItem("bp_saved", JSON.stringify(s)); refreshSaved();
+    let s = savedIds();
+    s = s.includes(id) ? s.filter((x) => x !== id) : [...s, id];
+    localStorage.setItem("bp_saved", JSON.stringify(s));
+    refreshSaved();
   };
   document.addEventListener("click", (e) => {
-    const b = e.target.closest("[data-save]"); if (!b) return;
-    e.preventDefault(); window.bpToggleSave(b.getAttribute("data-save"));
+    const b = e.target.closest("[data-save]");
+    if (!b) return;
+    e.preventDefault();
+    window.bpToggleSave(b.getAttribute("data-save"));
   });
   $("btn-saved")?.addEventListener("click", () => {
     const s = savedIds();
@@ -127,105 +256,460 @@ const isActive = (href: string) => href !== "/" && path.startsWith(href.replace(
   });
   refreshSaved();
 
-  // --- recently viewed (record current product if the page declares one) ---
+  /* ---- Recently viewed ---- */
   const rv = document.querySelector('meta[name="bp:product"]');
   if (rv) {
     try {
       const item = { slug: rv.getAttribute("data-slug"), name: rv.getAttribute("data-name"), href: location.pathname };
       let list = JSON.parse(localStorage.getItem("bp_recent") || "[]").filter((x) => x.slug !== item.slug);
-      list.unshift(item); localStorage.setItem("bp_recent", JSON.stringify(list.slice(0, 8)));
+      list.unshift(item);
+      localStorage.setItem("bp_recent", JSON.stringify(list.slice(0, 8)));
     } catch {}
   }
 
-  // --- search overlay (nav + categories; upgraded with catalogue via window.__BP_INDEX__) ---
+  /* ---- Search overlay ---- */
   const base = [
     ...cats.filter((c) => c.launch === "live").map((c) => ({ name: c.name, href: "/robots/" + c.slug + "/", kind: "Category" })),
     { name: "Find My Robot (BotMatch)", href: botmatchHref, kind: "Tool" },
     ...nav.filter((n) => !n.mega && n.state !== "coming_soon").map((n) => ({ name: n.label, href: n.href, kind: "Page" })),
   ];
-  const ov = $("search-ov"), input = $("search-input"), results = $("search-results");
-  const openSearch = () => { ov.hidden = false; setTimeout(() => input.focus(), 20); render(""); };
-  const closeSearch = () => { ov.hidden = true; input.value = ""; };
+  const ov = $("search-ov");
+  const input = $("search-input");
+  const results = $("search-results");
+  const openSearch = () => {
+    lastFocused = document.activeElement;
+    ov.hidden = false;
+    document.body.style.overflow = "hidden";
+    setTimeout(() => input.focus(), 20);
+    render("");
+  };
+  const closeSearch = () => {
+    if (ov.hidden) return;
+    ov.hidden = true;
+    input.value = "";
+    document.body.style.overflow = "";
+    lastFocused?.focus?.();
+  };
   function render(q) {
     const idx = [...base, ...(window.__BP_INDEX__ || [])];
     const ql = q.trim().toLowerCase();
     const hits = (ql ? idx.filter((i) => i.name.toLowerCase().includes(ql)) : idx).slice(0, 8);
-    results.innerHTML = hits.map((h) => `<li><a href="${h.href}"><span>${h.name}</span><em>${h.kind}</em></a></li>`).join("") || `<li class="none">No matches</li>`;
+    results.innerHTML =
+      hits.map((h) => `<li><a href="${h.href}"><span>${h.name}</span><em>${h.kind}</em></a></li>`).join("") ||
+      `<li class="none">No matches</li>`;
   }
   $("btn-search")?.addEventListener("click", openSearch);
   $("search-scrim")?.addEventListener("click", closeSearch);
   input?.addEventListener("input", (e) => render(e.target.value));
+  ov?.addEventListener("keydown", (e) => trapFocus(ov, e));
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") { closeSearch(); closeDrawer(); }
-    if ((e.key === "/" || (e.key === "k" && (e.metaKey || e.ctrlKey))) && ov.hidden && !/input|textarea|select/i.test(document.activeElement?.tagName || "")) { e.preventDefault(); openSearch(); }
+    const typing = /input|textarea|select/i.test(document.activeElement?.tagName || "");
+    if ((e.key === "/" || (e.key === "k" && (e.metaKey || e.ctrlKey))) && ov.hidden && !typing) {
+      e.preventDefault();
+      openSearch();
+    }
   });
 </script>
 
 <style>
-  .bar { display: flex; align-items: center; gap: 18px; height: 80px; }
-  .logo { display: flex; align-items: center; flex: 0 0 auto; }
-  .logo-full { width: 168px; height: auto; display: block; }
+  /* ---------------- Shell ---------------- */
+  header.site {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background: color-mix(in srgb, var(--bg-base) 78%, transparent);
+    backdrop-filter: blur(14px) saturate(140%);
+    border-bottom: 1px solid transparent;
+    transition:
+      border-color var(--duration-base) var(--ease-out),
+      background-color var(--duration-base) var(--ease-out);
+  }
 
-  nav.main { display: flex; gap: 4px; align-items: center; margin-left: 6px; }
-  .nav-link { color: var(--muted); font-weight: 500; font-size: 14px; padding: 8px 11px; border-radius: 8px; white-space: nowrap; display: inline-flex; align-items: center; gap: 5px; }
-  .nav-link:hover, .nav-link.active { color: var(--text); background: var(--panel-2); }
-  .caret { font-size: 9px; opacity: 0.7; }
-  .soon-tag { font-style: normal; font-size: 9px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--border-2); border-radius: 5px; padding: 1px 4px; margin-left: 5px; }
+  /* Integrated with the page: no hard bar until content passes beneath it. */
+  header.site[data-scrolled="true"] {
+    background: color-mix(in srgb, var(--bg-base) 92%, transparent);
+    border-bottom-color: var(--border-subtle);
+  }
 
+  .bar {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+    height: var(--header-height);
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    flex: 0 0 auto;
+    border-radius: var(--radius-xs);
+  }
+
+  .logo-full {
+    width: 168px;
+    height: auto;
+    display: block;
+    transition: opacity var(--duration-fast) var(--ease-out);
+  }
+
+  .logo:hover .logo-full { opacity: 0.82; }
+  .logo:focus-visible { outline: var(--focus-ring); outline-offset: 6px; }
+
+  /* ---------------- Primary nav ---------------- */
+  nav.main {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3xs);
+    margin-left: var(--space-xs);
+  }
+
+  .nav-link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2xs);
+    padding: 9px 12px;
+    border-radius: var(--radius-sm);
+    color: var(--text-secondary);
+    font-size: var(--type-body-sm);
+    font-weight: var(--weight-medium);
+    white-space: nowrap;
+    transition:
+      color var(--duration-fast) var(--ease-out),
+      background-color var(--duration-fast) var(--ease-out);
+  }
+
+  .nav-link:hover { color: var(--text-primary); background: var(--surface-2); }
+  .nav-link:focus-visible { outline: var(--focus-ring); outline-offset: 2px; }
+
+  /* Active state is a rule under the label — readable without relying on colour. */
+  .nav-link.active { color: var(--text-primary); }
+  .nav-link.active::after {
+    content: "";
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    bottom: 2px;
+    height: 1.5px;
+    background: var(--text-primary);
+    border-radius: var(--radius-pill);
+  }
+
+  .caret { font-size: 9px; opacity: 0.65; transition: transform var(--duration-fast) var(--ease-out); }
+  .has-mega:hover .caret, .has-mega:focus-within .caret { transform: translateY(1px); }
+
+  .soon-tag {
+    font-style: normal;
+    font-size: 10px;
+    letter-spacing: var(--tracking-caps);
+    text-transform: uppercase;
+    color: var(--text-quaternary);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-xs);
+    padding: 1px 5px;
+    margin-left: var(--space-2xs);
+  }
+
+  /* ---------------- Mega menu ---------------- */
   .has-mega { position: relative; }
-  .mega { position: absolute; top: calc(100% + 10px); left: 0; min-width: 720px; background: rgba(10,10,13,0.98); border: 1px solid var(--border-2); border-radius: 16px; padding: 8px; opacity: 0; visibility: hidden; transform: translateY(-6px); transition: 0.16s ease; box-shadow: 0 24px 60px rgba(0,0,0,0.6); backdrop-filter: blur(14px); }
-  .has-mega:hover .mega, .has-mega:focus-within .mega { opacity: 1; visibility: visible; transform: translateY(0); }
-  .mega-inner { display: grid; grid-template-columns: 1.1fr 1.1fr 1fr; gap: 6px; }
-  .mega-col { padding: 12px; } .mega-feature { background: var(--panel-2); border-radius: 12px; }
-  .mega-h { font-size: 11px; text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted); margin: 4px 6px 10px; }
-  .mega-item { display: flex; flex-direction: column; gap: 1px; padding: 9px 10px; border-radius: 9px; }
-  .mega-item:hover { background: var(--panel); }
-  .mega-item.soon { opacity: 0.5; pointer-events: none; }
-  .mega-jtbd { font-weight: 600; font-size: 14px; color: var(--text); }
-  .mega-sub { font-size: 12.5px; color: var(--muted); display: flex; align-items: center; }
-  .mega-cta { display: block; padding: 12px; border-radius: 11px; background: #fff; color: #050507; font-weight: 700; }
-  .mega-cta span { display: block; font-weight: 500; font-size: 12.5px; color: #333; margin-top: 6px; line-height: 1.5; }
 
-  .head-actions { margin-left: auto; display: flex; align-items: center; gap: 10px; }
-  .icon-btn { background: transparent; border: 1px solid var(--border); color: var(--muted); width: 36px; height: 36px; border-radius: 9px; font-size: 17px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; position: relative; }
-  .icon-btn:hover { color: var(--text); border-color: var(--border-2); }
-  .saved-count { position: absolute; top: -5px; right: -5px; background: #fff; color: #050507; font-size: 10px; font-weight: 700; min-width: 15px; height: 15px; border-radius: 999px; display: flex; align-items: center; justify-content: center; padding: 0 3px; }
-  .cta { background: #fff; color: #050507; padding: 9px 17px; border-radius: 999px; font-weight: 600; font-size: 14px; white-space: nowrap; }
-  .cta:hover { background: #e7e7ea; color: #050507; }
+  .mega {
+    position: absolute;
+    top: calc(100% + var(--space-sm));
+    left: 0;
+    min-width: 740px;
+    padding: var(--space-xs);
+    background: color-mix(in srgb, var(--bg-raised) 97%, transparent);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg);
+    backdrop-filter: blur(18px);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px);
+    transition:
+      opacity var(--duration-fast) var(--ease-out),
+      transform var(--duration-fast) var(--ease-out),
+      visibility var(--duration-fast) linear;
+  }
+
+  .has-mega:hover .mega,
+  .has-mega:focus-within .mega {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .mega-inner { display: grid; grid-template-columns: 1.1fr 1.1fr 1fr; gap: var(--space-2xs); }
+  .mega-col { padding: var(--space-sm); }
+  .mega-feature { background: var(--surface-2); border-radius: var(--radius-lg); }
+
+  .mega-h {
+    font-family: var(--font-display);
+    font-size: var(--type-meta);
+    font-weight: var(--weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-caps);
+    color: var(--text-tertiary);
+    margin: var(--space-2xs) var(--space-xs) var(--space-sm);
+  }
+
+  .mega-item {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    padding: 10px var(--space-sm);
+    border-radius: var(--radius-sm);
+    transition: background-color var(--duration-fast) var(--ease-out);
+  }
+
+  .mega-item:hover { background: var(--surface-1); }
+  .mega-item:focus-visible { outline: var(--focus-ring); outline-offset: -2px; }
+  .mega-item.soon { opacity: 0.45; pointer-events: none; }
+
+  .mega-jtbd {
+    font-family: var(--font-display);
+    font-weight: var(--weight-semibold);
+    font-size: var(--type-body-sm);
+    color: var(--text-primary);
+  }
+
+  .mega-sub {
+    font-size: var(--type-meta);
+    color: var(--text-tertiary);
+    display: flex;
+    align-items: center;
+  }
+
+  .mega-cta {
+    display: block;
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+    background: var(--surface-inverse);
+    color: var(--text-on-inverse);
+    transition: transform var(--duration-fast) var(--ease-out);
+  }
+
+  .mega-cta:hover { transform: translateY(-1px); color: var(--text-on-inverse); }
+  .mega-cta:focus-visible { outline: var(--focus-ring); outline-offset: 3px; }
+
+  .mega-cta__title {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: var(--weight-bold);
+    font-size: var(--type-card);
+  }
+
+  .mega-cta__body {
+    display: block;
+    font-size: var(--type-meta);
+    line-height: var(--leading-normal);
+    color: #43434e;
+    margin-top: var(--space-xs);
+  }
+
+  /* ---------------- Actions ---------------- */
+  .head-actions {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+  }
+
+  .saved-count {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    min-width: 16px;
+    height: 16px;
+    padding: 0 4px;
+    background: var(--surface-inverse);
+    color: var(--text-on-inverse);
+    border-radius: var(--radius-pill);
+    font-family: var(--font-display);
+    font-size: 10px;
+    font-weight: var(--weight-bold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .cta { margin-left: var(--space-2xs); }
   .burger { display: none; }
 
-  /* drawer */
+  /* ---------------- Drawer ---------------- */
   .drawer { position: fixed; inset: 0; z-index: 60; }
-  .drawer-scrim { position: absolute; inset: 0; background: rgba(0,0,0,0.6); }
-  .drawer-panel { position: absolute; top: 0; right: 0; width: min(340px, 86vw); height: 100%; background: var(--bg); border-left: 1px solid var(--border-2); padding: 18px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; }
-  .drawer-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-  .drawer-cta { background: #fff; color: #050507; text-align: center; padding: 13px; border-radius: 11px; font-weight: 700; margin-bottom: 8px; }
-  .drawer-group { border-top: 1px solid var(--border); padding-top: 10px; margin-top: 4px; }
-  .drawer-h { font-size: 11px; text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted); margin: 2px 0 8px; }
-  .drawer-link { display: flex; justify-content: space-between; align-items: center; padding: 11px 8px; border-radius: 9px; font-weight: 600; font-size: 15px; }
-  .drawer-link em { font-style: normal; font-weight: 500; font-size: 12px; color: var(--muted); }
-  .drawer-link:hover { background: var(--panel-2); }
-  .drawer-link.soon { color: var(--muted); }
 
-  /* search */
-  .search-ov { display: none; position: fixed; inset: 0; z-index: 70; justify-content: center; align-items: flex-start; }
+  .drawer-scrim {
+    position: absolute;
+    inset: 0;
+    background: rgba(2, 2, 4, 0.66);
+    backdrop-filter: blur(3px);
+    animation: drawer-fade var(--duration-base) var(--ease-out);
+  }
+
+  .drawer-panel {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: min(360px, 88vw);
+    height: 100%;
+    padding: var(--space-md) var(--space-md) var(--space-2xl);
+    background: var(--bg-raised);
+    border-left: 1px solid var(--border-default);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    animation: drawer-in var(--duration-base) var(--ease-out);
+  }
+
+  @keyframes drawer-in {
+    from { transform: translateX(18px); opacity: 0.6; }
+    to { transform: none; opacity: 1; }
+  }
+
+  @keyframes drawer-fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .drawer-panel, .drawer-scrim { animation: none; }
+  }
+
+  .drawer-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: var(--space-sm);
+    margin-bottom: var(--space-xs);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .drawer-logo { width: 132px; height: auto; }
+  .drawer-cta { margin-bottom: var(--space-sm); }
+
+  .drawer-group { border-top: 1px solid var(--border-subtle); padding-top: var(--space-sm); margin-top: var(--space-2xs); }
+  .drawer-group:first-of-type { border-top: 0; }
+
+  .drawer-h {
+    font-family: var(--font-display);
+    font-size: var(--type-meta);
+    font-weight: var(--weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-caps);
+    color: var(--text-tertiary);
+    margin: 0 0 var(--space-xs);
+  }
+
+  .drawer-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-sm);
+    /* Comfortably above the 44px minimum tap target. */
+    min-height: var(--tap-min);
+    padding: 11px var(--space-xs);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-display);
+    font-weight: var(--weight-semibold);
+    font-size: 15.5px;
+    color: var(--text-primary);
+  }
+
+  .drawer-link em {
+    font-style: normal;
+    font-family: var(--font-body);
+    font-weight: var(--weight-regular);
+    font-size: var(--type-meta);
+    color: var(--text-tertiary);
+    text-align: right;
+  }
+
+  .drawer-link:hover { background: var(--surface-2); }
+  .drawer-link:focus-visible { outline: var(--focus-ring); outline-offset: -2px; }
+  .drawer-link.soon { color: var(--text-quaternary); }
+
+  /* ---------------- Search overlay ---------------- */
+  .search-ov {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 70;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  /* [hidden] must win over display:flex — hence the :not() guard. */
   .search-ov:not([hidden]) { display: flex; }
-  .search-scrim { position: absolute; inset: 0; background: rgba(0,0,0,0.65); backdrop-filter: blur(3px); }
-  .search-box { position: relative; z-index: 1; width: min(560px, 92vw); margin-top: 12vh; background: var(--panel); border: 1px solid var(--border-2); border-radius: 14px; padding: 14px; box-shadow: 0 30px 80px rgba(0,0,0,0.6); }
-  .search-box input { width: 100%; font-size: 17px; }
-  .search-results { list-style: none; margin: 12px 0 0; padding: 0; }
-  .search-results li a { display: flex; justify-content: space-between; align-items: center; padding: 11px 12px; border-radius: 9px; }
-  .search-results li a:hover { background: var(--panel-2); }
-  .search-results em { font-style: normal; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); }
-  .search-results .none { padding: 12px; color: var(--muted); }
-  .search-hint { margin: 10px 4px 2px; font-size: 12px; }
+
+  .search-scrim {
+    position: absolute;
+    inset: 0;
+    background: rgba(2, 2, 4, 0.7);
+    backdrop-filter: blur(4px);
+  }
+
+  .search-box {
+    position: relative;
+    z-index: 1;
+    width: min(600px, 92vw);
+    margin-top: min(12vh, 90px);
+    padding: var(--space-md);
+    background: var(--bg-raised);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .search-box input { font-size: var(--type-body-lg); }
+
+  .search-results { list-style: none; margin: var(--space-sm) 0 0; padding: 0; }
+  .search-results li { margin: 0; }
+
+  .search-results li a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-sm);
+    min-height: var(--tap-min);
+    padding: 11px var(--space-sm);
+    border-radius: var(--radius-sm);
+  }
+
+  .search-results li a:hover { background: var(--surface-2); }
+  .search-results li a:focus-visible { outline: var(--focus-ring); outline-offset: -2px; }
+
+  .search-results em {
+    font-style: normal;
+    font-size: var(--type-meta);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-caps);
+    color: var(--text-quaternary);
+  }
+
+  .search-results .none { padding: var(--space-sm); color: var(--text-tertiary); }
+  .search-hint { margin: var(--space-sm) var(--space-2xs) 0; }
+
+  /* ---------------- Responsive ---------------- */
+  @media (max-width: 1060px) {
+    .mega { min-width: min(680px, calc(100vw - var(--space-2xl))); }
+  }
 
   @media (max-width: 900px) {
     nav.main, .cta { display: none; }
     .burger { display: inline-flex; }
-    .bar { height: 72px; }
-    .logo-full { width: 112px; }
-    .head-actions { gap: 8px; }
-    .icon-btn { width: 34px; height: 34px; }
+    .bar { height: var(--header-height-compact); gap: var(--space-md); }
+    .logo-full { width: 124px; }
+  }
+
+  /* Very small phones (320px): tighten only, never overflow. */
+  @media (max-width: 380px) {
+    .logo-full { width: 108px; }
+    .head-actions { gap: var(--space-2xs); }
+    .icon-btn { width: 36px; height: 36px; }
   }
 </style>

@@ -1,0 +1,336 @@
+/**
+ * Element-level foundation: reset, typography defaults, focus and landmarks.
+ * Component classes live in components.css; layout patterns in layout.css.
+ */
+
+/* Self-hosted display face. SIL OFL 1.1 — see /fonts/OFL.txt. Latin subset,
+   variable weight 300–700, ~22KB. swap so text never blocks paint. */
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("/fonts/space-grotesk-latin.woff2") format("woff2-variations");
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--bg-base);
+  scroll-behavior: smooth;
+  /* Anchor targets clear the sticky header instead of hiding beneath it. */
+  scroll-padding-top: calc(var(--header-height) + var(--space-md));
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: var(--type-body);
+  line-height: var(--leading-relaxed);
+  letter-spacing: var(--tracking-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Nothing may cause sideways scrolling of the page itself. Wide content
+     scrolls inside its own container (see .table-wrap / .scroll-x). */
+  overflow-x: hidden;
+}
+
+/**
+ * Star field — the one piece of ambient atmosphere. Static (no animation),
+ * very low contrast, fixed so it reads as depth rather than decoration. It is
+ * pure CSS: no image request, no particles, no glow.
+ */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background-image:
+    radial-gradient(1px 1px at 24px 32px, rgba(255, 255, 255, 0.30), transparent),
+    radial-gradient(1px 1px at 132px 168px, rgba(255, 255, 255, 0.18), transparent),
+    radial-gradient(1.3px 1.3px at 228px 84px, rgba(255, 255, 255, 0.24), transparent),
+    radial-gradient(1px 1px at 296px 244px, rgba(255, 255, 255, 0.14), transparent),
+    radial-gradient(1px 1px at 72px 288px, rgba(255, 255, 255, 0.18), transparent);
+  background-size: 340px 340px;
+  opacity: 0.55;
+}
+
+/* A single, very wide horizon glow anchored behind the header. Monochrome-safe:
+   it is white at 4%, not a colour wash. */
+body::after {
+  content: "";
+  position: fixed;
+  top: -340px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(1500px, 140vw);
+  height: 620px;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(50% 50% at 50% 50%, rgba(255, 255, 255, 0.045), transparent 70%);
+}
+
+/* ---------------------------------------------------------------- */
+/* Typography                                                       */
+/* ---------------------------------------------------------------- */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+  color: var(--text-primary);
+  text-wrap: balance; /* avoids a single orphaned word on a headline */
+  margin: 0;
+}
+
+h1 {
+  font-size: var(--type-title);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-title);
+  font-weight: var(--weight-semibold);
+  margin-bottom: var(--space-md);
+}
+
+h2 {
+  font-size: var(--type-heading);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-heading);
+  font-weight: var(--weight-semibold);
+  margin: var(--space-2xl) 0 var(--space-md);
+}
+
+h3 {
+  font-size: var(--type-subheading);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-heading);
+  font-weight: var(--weight-semibold);
+  margin: 0 0 var(--space-xs);
+}
+
+h4 {
+  font-size: var(--type-card);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-heading);
+}
+
+/* First heading in a section should not push an extra top margin. */
+section > h2:first-child,
+.section > h2:first-child {
+  margin-top: 0;
+}
+
+p {
+  margin: 0 0 var(--space-md);
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+strong,
+b {
+  font-weight: var(--weight-semibold);
+  color: var(--text-primary);
+}
+
+small {
+  font-size: var(--type-meta);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+/* Inline links inside prose stay recognisable without relying on colour alone. */
+.prose a:not(.btn):not(.card),
+a.link {
+  color: var(--text-primary);
+  text-decoration: underline;
+  text-decoration-color: var(--border-strong);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+
+.prose a:not(.btn):not(.card):hover,
+a.link:hover {
+  text-decoration-color: var(--text-primary);
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--border-subtle);
+  margin: var(--space-2xl) 0;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+ul,
+ol {
+  margin: 0 0 var(--space-md);
+  padding-left: 1.25em;
+}
+
+li {
+  margin-bottom: var(--space-2xs);
+}
+
+code,
+kbd,
+samp {
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+}
+
+/* ---------------------------------------------------------------- */
+/* Focus — one treatment, always visible, never removed.            */
+/* ---------------------------------------------------------------- */
+
+:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-offset);
+  border-radius: var(--radius-xs);
+}
+
+/* Mouse users don't get a ring; keyboard users always do. */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+::selection {
+  background: var(--text-primary);
+  color: var(--bg-base);
+}
+
+/* Skip link — visible the moment it receives keyboard focus. */
+.skip {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+}
+
+.skip:focus {
+  left: var(--space-sm);
+  top: var(--space-sm);
+  z-index: 200;
+  background: var(--surface-inverse);
+  color: var(--text-on-inverse);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-sm);
+  font-weight: var(--weight-semibold);
+}
+
+/* Screen-reader-only text that still exists for assistive tech. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---------------------------------------------------------------- */
+/* Text utility roles                                               */
+/* ---------------------------------------------------------------- */
+
+.text-display {
+  font-family: var(--font-display);
+  font-size: var(--type-display);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-display);
+  font-weight: var(--weight-bold);
+  text-wrap: balance;
+}
+
+.lede {
+  font-size: var(--type-body-lg);
+  line-height: var(--leading-relaxed);
+  color: var(--text-secondary);
+  max-width: 62ch;
+}
+
+.muted {
+  color: var(--text-tertiary);
+}
+
+.note,
+.small {
+  font-size: var(--type-meta);
+  line-height: var(--leading-normal);
+  color: var(--text-tertiary);
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-size: 0.94em;
+}
+
+/* The one sanctioned all-caps role: short structural labels. */
+.eyebrow {
+  display: block;
+  font-family: var(--font-display);
+  font-size: var(--type-label);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin-bottom: var(--space-sm);
+}
+
+.metric {
+  font-family: var(--font-display);
+  font-size: var(--type-title);
+  line-height: 1;
+  letter-spacing: var(--tracking-title);
+  font-weight: var(--weight-bold);
+  font-variant-numeric: tabular-nums;
+}
+
+.price {
+  font-family: var(--font-display);
+  font-size: 21px;
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-title);
+  font-variant-numeric: tabular-nums;
+  color: var(--text-primary);
+}

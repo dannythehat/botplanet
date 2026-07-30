@@ -32,28 +32,38 @@ function minPrice(productId: string): number | null {
 ---
 
 <Base title={`${cat.name} — BotPlanet`} description={`Compare ${cat.name.toLowerCase()} for the US.`}>
-  <div class="row" style="justify-content:space-between;">
+  <div class="section-head section-head--row">
     <div>
-      <h1>{cat.name}</h1>
-      <p class="muted">{products.length} products · US market · suitability-ranked by BotMatch</p>
+      <span class="eyebrow">Category</span>
+      <h1 class="mt-0">{cat.name}</h1>
+      <p class="note">{products.length} products · US market · suitability-ranked by BotMatch</p>
     </div>
-    <a class="btn primary" href={`/botmatch/${cat.slug}/`}>Find my robot →</a>
+    <a class="btn btn--primary" href={`/botmatch/${cat.slug}/`}>Find my robot</a>
   </div>
 
-  <div style="margin:22px 0;"><PoolDiagram /></div>
+  <div class="mt-lg mb-lg"><PoolDiagram /></div>
 
-  <div class="grid" style="margin-top:20px;">
-    {products.map((p) => (
-      <a class="card" href={`/robots/${cat.slug}/${p.slug}/`}>
-        <div class="row" style="justify-content:space-between;">
-          <span class="pill class">{titleCase(p.productClass)}</span>
-          <span class="pill">{titleCase(p.powerType)}</span>
-        </div>
-        <h3>{p.name}</h3>
-        <span class="muted">{(p.environments as string[]).map(titleCase).join(" · ")}</span>
-        <div class="price" style="margin-top:6px;">{minPrice(p.id) != null ? `from ${usd(minPrice(p.id))}` : "—"}</div>
-        <span class="note">Snapshot price · check current at retailer</span>
-      </a>
-    ))}
-  </div>
+  {products.length === 0 ? (
+    <div class="empty">
+      <p class="empty__title">No products published in this category yet</p>
+      <p>Published products appear here automatically.</p>
+    </div>
+  ) : (
+    <div class="grid grid--products">
+      {products.map((p) => (
+        <a class="card reveal" href={`/robots/${cat.slug}/${p.slug}/`}>
+          <div class="cluster cluster--between">
+            <span class="pill pill--strong">{titleCase(p.productClass)}</span>
+            <span class="pill">{titleCase(p.powerType)}</span>
+          </div>
+          <h3>{p.name}</h3>
+          <span class="note">{(p.environments as string[]).map(titleCase).join(" · ")}</span>
+          <div class="product-card__foot">
+            <span class="price">{minPrice(p.id) != null ? `from ${usd(minPrice(p.id))}` : "—"}</span>
+          </div>
+          <span class="note">Snapshot price · check current at retailer</span>
+        </a>
+      ))}
+    </div>
+  )}
 </Base>
