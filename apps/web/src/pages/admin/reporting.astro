@@ -14,6 +14,7 @@ import { summariseClickQuality, type DestinationKind, type PageType } from "@bot
 import {
   CLOUDFLARE,
   CLOUDFLARE_REPORT_PATHS,
+  GA_MEASUREMENT_ID,
   REPORTING_SYSTEMS,
   STATUS_LABEL,
   STATUS_TONE,
@@ -22,10 +23,7 @@ import {
 
 const db = getDb(Astro.locals);
 const env = (Astro.locals as App.Locals).runtime?.env;
-const runtime = {
-  analyticsToken: env?.CF_WEB_ANALYTICS_TOKEN,
-  searchConsoleToken: env?.GOOGLE_SITE_VERIFICATION,
-};
+const runtime = { gaMeasurementId: env?.GA_MEASUREMENT_ID };
 
 /* ---- Live click data (first-party, always available). ---- */
 const clickRows = await db
@@ -99,6 +97,16 @@ const checkedAt = new Date().toISOString().replace("T", " ").slice(0, 16) + " UT
   </p>
 
   <h2>Connection status</h2>
+  <div class="card" style="margin-bottom:14px;">
+    <strong>Site analytics provider: Google Analytics 4</strong>
+    <span class="mono muted" style="margin-left:8px;">{GA_MEASUREMENT_ID}</span>
+    <div class="muted" style="margin-top:6px;font-size:12.5px;">
+      Deployed value: <span class="mono">{runtime.gaMeasurementId ?? "not configured"}</span>. Loaded once from
+      <span class="mono">Base.astro</span>, production host only. Cloudflare Web Analytics is deliberately not
+      installed, so only one page-view system is active. Cloudflare zone traffic reporting is documented separately
+      below.
+    </div>
+  </div>
   <div class="grid">
     {systems.map((s) => (
       <div class="card">

@@ -29,3 +29,10 @@ bucket_name = "botplanet-media"
 
 [observability]
 enabled = true
+
+# --- Public configuration (NOT secrets) ---
+# Google Analytics 4 measurement ID. Public by design: it is rendered into the
+# page HTML, so it belongs in versioned config, not in Worker secrets. Only the
+# production host loads it (see Base.astro).
+[vars]
+GA_MEASUREMENT_ID = "G-EEHDN6DNZN"

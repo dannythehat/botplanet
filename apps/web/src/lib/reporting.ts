@@ -43,6 +43,13 @@ export const STATUS_TONE: Record<ConnectionStatus, "ok" | "warn" | "bad"> = {
  */
 export const ATTRIBUTION_HOSTS = ["botplanet.io", "preview.botplanet.io", "botplanet-web.dannythehat2.workers.dev"];
 
+/**
+ * GA4 measurement ID. Public by design — it is rendered into every production
+ * page — so it is versioned config, not a secret. The deployed value comes from
+ * wrangler.toml [vars] GA_MEASUREMENT_ID; this constant labels it in reporting.
+ */
+export const GA_MEASUREMENT_ID = "G-EEHDN6DNZN";
+
 /** Cloudflare account that owns the zone, Worker, D1 and analytics. */
 export const CLOUDFLARE = {
   workerName: "botplanet-web",
@@ -56,7 +63,6 @@ export const CLOUDFLARE = {
   links: {
     zoneTraffic: "https://dash.cloudflare.com/?to=/:account/botplanet.io/analytics/traffic",
     zoneSecurityEvents: "https://dash.cloudflare.com/?to=/:account/botplanet.io/security/events",
-    webAnalytics: "https://dash.cloudflare.com/?to=/:account/web-analytics",
     workerMetrics: "https://dash.cloudflare.com/?to=/:account/workers/services/view/botplanet-web/production/metrics",
     workerDeployments: "https://dash.cloudflare.com/?to=/:account/workers/services/view/botplanet-web/production/deployments",
     workerObservability: "https://dash.cloudflare.com/?to=/:account/workers/services/view/botplanet-web/production/observability",
@@ -109,10 +115,16 @@ export const CLOUDFLARE_REPORT_PATHS: { metric: string; path: string; link: stri
     note: "Enabled in wrangler.toml via [observability].",
   },
   {
+    metric: "Page views & sessions",
+    path: "analytics.google.com → BotPlanet → Reports → Engagement → Pages and screens",
+    link: "https://analytics.google.com/",
+    note: "GA4 is the page-view system of record; Cloudflare covers edge traffic that a tag cannot see.",
+  },
+  {
     metric: "Performance (Core Web Vitals)",
-    path: "dash.cloudflare.com → Analytics & Logs → Web Analytics → botplanet.io → Core Web Vitals",
-    link: CLOUDFLARE.links.webAnalytics,
-    note: "Requires the Web Analytics beacon; no data until the beacon token is set.",
+    path: "Google Search Console → Core Web Vitals, or PageSpeed Insights for a single URL",
+    link: "https://search.google.com/search-console",
+    note: "Cloudflare Web Analytics was removed, so CWV field data comes from Search Console once traffic accrues.",
   },
   {
     metric: "Click / attribution data (BotPlanet's own)",
@@ -152,24 +164,30 @@ export const REPORTING_SYSTEMS: ReportingSystem[] = [
   {
     id: "site-analytics",
     name: "Site analytics (page views)",
-    provider: "Cloudflare Web Analytics (free, privacy-respecting, cookieless)",
-    status: "not_connected",
-    dashboard: "dash.cloudflare.com → Analytics & Logs → Web Analytics → botplanet.io",
-    dashboardLink: CLOUDFLARE.links.webAnalytics,
-    dataAvailable: [],
+    provider: `Google Analytics 4 (${GA_MEASUREMENT_ID})`,
+    // Verified live in the production HTML after deployment: gtag.js loads and
+    // exactly one config call is present. See notes for the verification basis.
+    status: "connected",
+    dashboard: "analytics.google.com → BotPlanet property → Reports → Realtime / Engagement → Pages and screens",
+    dashboardLink: "https://analytics.google.com/",
+    dataAvailable: [
+      "Page views and sessions",
+      "Active users and realtime traffic",
+      "Traffic sources and referrers",
+      "Landing pages and top pages",
+      "Country, device and browser breakdown",
+      "Events (default GA4 enhanced measurement)",
+    ],
     dataUnavailable: [
-      "Page views",
-      "Visits and referrers",
-      "Top pages",
-      "Core Web Vitals",
-      "Country breakdown",
+      "Affiliate conversions and commission — GA4 never sees a retailer's checkout; those figures come only from network reports",
+      "Custom BotMatch or /go events — not configured in this job",
     ],
     lastCheckedAt: CHECKED,
-    ownerAction:
-      "Cloudflare dashboard → Analytics & Logs → Web Analytics → Add a site → enter botplanet.io → choose Manual installation → copy the beacon token, then run: wrangler secret put CF_WEB_ANALYTICS_TOKEN (paste the token). The beacon then loads on botplanet.io only. Automatic installation also works and needs no token — if you use it, no repository change is required.",
-    secretStorage: "Worker secret CF_WEB_ANALYTICS_TOKEN (beacon token; public once rendered, kept in config so it is not hard-coded)",
+    ownerAction: null,
+    secretStorage:
+      "None. The GA4 measurement ID is public by design and lives in apps/web/wrangler.toml [vars] GA_MEASUREMENT_ID. No Google credential, service account or API key is stored anywhere.",
     notes:
-      "No paid analytics provider is introduced. The beacon is rendered only when the token exists and only on the production host.",
+      "Loaded once from Base.astro, async, with window.dataLayer initialised and a single gtag('config') call. Renders only on botplanet.io — never in local development and never on a preview or workers.dev host. Cloudflare Web Analytics was deliberately removed so two page-view systems are not installed at once.",
   },
   {
     id: "cloudflare-analytics",
@@ -187,36 +205,39 @@ export const REPORTING_SYSTEMS: ReportingSystem[] = [
       "Deployment history and version IDs",
     ],
     dataUnavailable: [
-      "Per-URL page views (needs the Web Analytics beacon)",
-      "Core Web Vitals (needs the Web Analytics beacon)",
+      "Per-URL page views and sessions — these come from GA4, which is the page-view system of record",
     ],
     lastCheckedAt: CHECKED,
     ownerAction: null,
     secretStorage:
       "Cloudflare API tokens are NOT stored in the repository, D1, Notion or routines. Dashboard access is Danny's Cloudflare login; any deploy token lives only in Danny's password manager.",
-    notes: "Dashboard reporting needs no token at all — it is read by logging in.",
+    notes:
+      "Kept deliberately separate from GA4: Cloudflare reports edge-side truth (requests, bandwidth, status codes, Worker health, deployments) that a JavaScript tag cannot see, including traffic from visitors who block analytics. Dashboard reporting needs no token — it is read by logging in.",
   },
   {
     id: "google-search-console",
     name: "Google Search Console",
-    provider: "Google",
-    status: "not_connected",
-    dashboard: "search.google.com/search-console",
+    provider: "Google (domain property sc-domain:botplanet.io)",
+    status: "connected",
+    dashboard: "search.google.com/search-console → property sc-domain:botplanet.io → Performance / Pages / Sitemaps",
     dashboardLink: "https://search.google.com/search-console",
-    dataAvailable: [],
-    dataUnavailable: [
-      "Clicks, impressions, CTR, average position",
+    dataAvailable: [
+      "Clicks, impressions, CTR and average position",
       "Queries and pages",
       "Index coverage",
       "Sitemap processing status",
-      "Core Web Vitals (field data)",
+      "Core Web Vitals field data (once enough traffic accrues)",
+    ],
+    dataUnavailable: [
+      "Search figures for a brand-new site read as zero until Google has crawled and accumulated data — that is 'no data yet', not a broken connection",
     ],
     lastCheckedAt: CHECKED,
     ownerAction:
-      "1) Open search.google.com/search-console → Add property → URL prefix → enter https://botplanet.io → Continue. 2) Choose the HTML tag verification method and copy the content value (the long string inside content=\"…\"). 3) Send that value to Claude, or run: wrangler secret put GOOGLE_SITE_VERIFICATION (paste only the content value, not the whole tag). 4) After the next deploy, return to Search Console and press Verify. 5) Then Sitemaps → Add a new sitemap → enter sitemap.xml → Submit.",
-    secretStorage: "Worker secret GOOGLE_SITE_VERIFICATION (verification content value only)",
+      "Optional, once: Search Console → Sitemaps → Add a new sitemap → enter sitemap.xml → Submit. Everything else is done — the domain property is verified.",
+    secretStorage:
+      "None required. GOOGLE_SITE_VERIFICATION is unnecessary because sc-domain:botplanet.io is already verified via DNS, which covers every URL prefix on the domain. Search Console access is Danny's Google login.",
     notes:
-      "Site readiness is already met: production canonical is https://botplanet.io, robots.txt allows production and disallows preview hosts, and /sitemap.xml lists production URLs. Only the property verification itself is outstanding.",
+      "Verification confirmed by the owner. Site readiness independently checked: production canonical is https://botplanet.io, robots.txt allows production while disallowing preview hosts, /sitemap.xml lists 20 production URLs with no preview leakage, and there is no production-wide noindex.",
   },
   {
     id: "go-click-reporting",
@@ -302,15 +323,14 @@ export const REPORTING_SYSTEMS: ReportingSystem[] = [
  * reflects what is actually deployed rather than what was true when this file
  * was written.
  */
-export function resolveStatus(system: ReportingSystem, env: { analyticsToken?: string; searchConsoleToken?: string }): ConnectionStatus {
+export function resolveStatus(system: ReportingSystem, env: { gaMeasurementId?: string }): ConnectionStatus {
   if (system.id === "site-analytics") {
-    // A token means the beacon ships; whether Cloudflare has recorded views can
-    // only be confirmed in the dashboard, so this stays "configured".
-    return env.analyticsToken ? "configured" : "not_connected";
-  }
-  if (system.id === "google-search-console") {
-    // The tag being present is not verification — Danny must press Verify.
-    return env.searchConsoleToken ? "configured" : "not_connected";
+    // GA4 is recorded as connected only because the deployed production HTML was
+    // verified to load gtag.js with exactly one config call. If the deployment
+    // ever loses its measurement ID, the tag cannot ship — so the register must
+    // stop claiming a connection rather than repeat a stale "connected".
+    if (!env.gaMeasurementId) return "not_connected";
+    return env.gaMeasurementId === GA_MEASUREMENT_ID ? system.status : "configured";
   }
   return system.status;
 }

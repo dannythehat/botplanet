@@ -7,9 +7,12 @@ type ENV = {
   MEDIA: R2Bucket;
   RESEND_API_KEY?: string;
   ADMIN_TOKEN?: string;
-  /** Cloudflare Web Analytics beacon token (public once rendered; set via `wrangler secret put`). */
-  CF_WEB_ANALYTICS_TOKEN?: string;
-  /** Google Search Console HTML-tag verification content value. */
+  /** GA4 measurement ID (public by design; set in wrangler.toml [vars]). */
+  GA_MEASUREMENT_ID?: string;
+  /**
+   * Google Search Console HTML-tag verification value. Unused — the domain
+   * property sc-domain:botplanet.io is already verified via DNS.
+   */
   GOOGLE_SITE_VERIFICATION?: string;
 };
 
