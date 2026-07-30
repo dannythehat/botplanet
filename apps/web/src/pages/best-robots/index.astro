@@ -23,17 +23,26 @@ const crumbs = breadcrumbsFor("/best-robots/");
   </div>
 
   <div class="grid grid--2">
-    {cats.map((c) => (
-      <a class="card card--interactive" href={categoryRoutes(c.slug).best}>
-        <span class={`pill ${c.launch === "live" ? "pill--strong" : "pill--warn"}`}>
-          {c.launch === "live" ? "In progress" : "Coming soon"}
-        </span>
-        <h2 class="b-title">Best {c.name.toLowerCase()}</h2>
-        <p>{c.short}</p>
-      </a>
-    ))}
+    {cats.map((c) =>
+      c.launch === "live" ? (
+        <a class="card card--interactive" href={categoryRoutes(c.slug).best}>
+          <span class="pill pill--strong">In progress</span>
+          <h2 class="b-title">Best {c.name.toLowerCase()}</h2>
+          <p>{c.short}</p>
+        </a>
+      ) : (
+        /* Not a link: the destination does not exist yet, and a nav item must
+           never point at a page that is not there. */
+        <div class="card is-soon">
+          <span class="pill pill--warn">Coming soon</span>
+          <h2 class="b-title">Best {c.name.toLowerCase()}</h2>
+          <p>{c.short}</p>
+        </div>
+      )
+    )}
   </div>
 </Base>
 <style>
   .b-title { font-size: var(--type-card); margin: 0; }
+  .card.is-soon { opacity: 0.72; }
 </style>
