@@ -68,9 +68,10 @@
   --space-4xl: 96px;
   --space-5xl: 128px;
 
-  /* Section rhythm — deliberately generous, and it breathes with the viewport. */
-  --section-gap: clamp(56px, 8vw, 112px);
-  --section-gap-tight: clamp(36px, 5vw, 64px);
+  /* Section rhythm. Generous, but every large gap must earn itself with a
+     composition, a transition or a media area — empty black is not premium. */
+  --section-gap: clamp(48px, 5.5vw, 84px);
+  --section-gap-tight: clamp(32px, 3.5vw, 52px);
 
   /* ---------------------------------------------------------------- */
   /* Widths — several, so not every section sits in one centred box.  */
@@ -152,8 +153,8 @@
   /* Minimum comfortable touch target (WCAG 2.5.5 / 2.5.8). */
   --tap-min: 44px;
 
-  --header-height: 76px;
-  --header-height-compact: 64px;
+  --header-height: 84px;
+  --header-height-compact: 68px;
 
   /* ---------------------------------------------------------------- */
   /* Compatibility aliases.                                           */

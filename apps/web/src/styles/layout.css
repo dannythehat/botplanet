@@ -252,46 +252,131 @@
 /* Feature rows — a numbered/led sequence, denser than cards.         */
 /* ---------------------------------------------------------------- */
 
+/**
+ * Editorial feature sequence. The failure mode this replaces: a numbered policy
+ * document. Here each idea is a spread — an oversized ghost numeral, a headline
+ * at real display scale, and a measured column of copy — with the alignment
+ * alternating so the eye travels down the page instead of scanning a list.
+ */
 .feature-rows {
   display: flex;
   flex-direction: column;
-  border-top: 1px solid var(--border-subtle);
+  gap: clamp(var(--space-xl), 4vw, var(--space-3xl));
 }
 
 .feature-row {
+  position: relative;
   display: grid;
-  grid-template-columns: auto 1fr;
-  gap: var(--space-lg);
+  grid-template-columns: minmax(0, 0.42fr) minmax(0, 1fr);
+  gap: clamp(var(--space-lg), 4vw, var(--space-3xl));
   align-items: start;
-  padding-block: var(--space-xl);
-  border-bottom: 1px solid var(--border-subtle);
+  padding-top: var(--space-xl);
+  border-top: 1px solid var(--border-subtle);
+}
+
+/* Alternating rhythm: every second idea leads from the right. */
+.feature-row:nth-child(even) {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.42fr);
+}
+
+.feature-row:nth-child(even) .feature-row__lead {
+  order: 2;
+  text-align: right;
+}
+
+.feature-row:nth-child(even) .feature-row__body {
+  order: 1;
+}
+
+/* The lead column: ghost numeral + a technical tick. */
+.feature-row__lead {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
 }
 
 .feature-row__index {
   font-family: var(--font-display);
-  font-size: var(--type-heading);
+  /* Deliberately huge, and hollow — presence without shouting. */
+  font-size: clamp(56px, 9vw, 104px);
   font-weight: var(--weight-bold);
-  letter-spacing: var(--tracking-title);
-  color: var(--text-decorative);
+  line-height: 0.86;
+  letter-spacing: var(--tracking-display);
   font-variant-numeric: tabular-nums;
-  min-width: 2.2em;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--border-strong);
+  transition: -webkit-text-stroke-color var(--duration-base) var(--ease-out);
+}
+
+.feature-row:hover .feature-row__index {
+  -webkit-text-stroke-color: var(--text-tertiary);
+}
+
+/* Short instrument-style label under the numeral. */
+.feature-row__tick {
+  font-family: var(--font-display);
+  font-size: var(--type-meta);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--text-quaternary);
+}
+
+.feature-row__body {
+  padding-top: var(--space-xs);
 }
 
 .feature-row__body h3 {
-  margin-bottom: var(--space-xs);
+  /* Real typographic contrast against the body copy. */
+  font-size: clamp(22px, 2.6vw, 32px);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-title);
+  font-weight: var(--weight-semibold);
+  margin: 0 0 var(--space-sm);
 }
 
 .feature-row__body p {
   color: var(--text-secondary);
-  max-width: 64ch;
+  font-size: var(--type-body-lg);
+  line-height: var(--leading-relaxed);
+  max-width: 56ch;
   margin: 0;
 }
 
-@media (max-width: 640px) {
-  .feature-row {
+.feature-row:nth-child(even) .feature-row__body p {
+  margin-left: auto;
+}
+
+@media (max-width: 820px) {
+  /* One column, but keep the editorial scale — never collapse to a list. */
+  .feature-row,
+  .feature-row:nth-child(even) {
     grid-template-columns: 1fr;
-    gap: var(--space-xs);
-    padding-block: var(--space-lg);
+    gap: var(--space-sm);
+    padding-top: var(--space-lg);
+  }
+
+  .feature-row:nth-child(even) .feature-row__lead {
+    order: 0;
+    text-align: left;
+  }
+
+  .feature-row:nth-child(even) .feature-row__body {
+    order: 0;
+  }
+
+  .feature-row:nth-child(even) .feature-row__body p {
+    margin-left: 0;
+  }
+
+  .feature-row__lead {
+    flex-direction: row;
+    align-items: baseline;
+    gap: var(--space-sm);
+  }
+
+  .feature-row__index {
+    font-size: clamp(40px, 12vw, 60px);
   }
 }
 
@@ -371,7 +456,9 @@
 main {
   display: block;
   min-height: 50vh;
-  padding-block: var(--space-2xl) var(--space-4xl);
+  /* Tighter tail: the footer now carries the page's close, so main does not
+     need a large empty run-out beneath its last section. */
+  padding-block: var(--space-xl) var(--space-2xl);
 }
 
 main.narrow > .wrap {

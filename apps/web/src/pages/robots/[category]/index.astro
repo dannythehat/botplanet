@@ -1,6 +1,7 @@
 ---
 import Base from "../../../layouts/Base.astro";
 import PoolDiagram from "../../../components/PoolDiagram.astro";
+import ProductCard from "../../../components/ProductCard.astro";
 import { getDb, schema } from "../../../lib/db";
 import { usd, titleCase } from "../../../lib/format";
 import { and, eq, inArray } from "drizzle-orm";
@@ -50,19 +51,17 @@ function minPrice(productId: string): number | null {
     </div>
   ) : (
     <div class="grid grid--products">
-      {products.map((p) => (
-        <a class="card reveal" href={`/robots/${cat.slug}/${p.slug}/`}>
-          <div class="cluster cluster--between">
-            <span class="pill pill--strong">{titleCase(p.productClass)}</span>
-            <span class="pill">{titleCase(p.powerType)}</span>
-          </div>
-          <h3>{p.name}</h3>
-          <span class="note">{(p.environments as string[]).map(titleCase).join(" · ")}</span>
-          <div class="product-card__foot">
-            <span class="price">{minPrice(p.id) != null ? `from ${usd(minPrice(p.id))}` : "—"}</span>
-          </div>
-          <span class="note">Snapshot price · check current at retailer</span>
-        </a>
+      {products.map((p, i) => (
+        <ProductCard
+          href={`/robots/${cat.slug}/${p.slug}/`}
+          name={p.name}
+          classification={titleCase(p.productClass)}
+          meta={[titleCase(p.powerType), ...(p.environments as string[]).slice(0, 2).map(titleCase)]}
+          price={minPrice(p.id) != null ? `from ${usd(minPrice(p.id))}` : null}
+          priceNote="Snapshot price · confirm at retailer"
+          variant={i}
+          saveId={p.id}
+        />
       ))}
     </div>
   )}

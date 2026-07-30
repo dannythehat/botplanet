@@ -1,89 +1,139 @@
 ---
 import Base from "../layouts/Base.astro";
+import ProductCard from "../components/ProductCard.astro";
 import { getDb, schema } from "../lib/db";
 import { eq } from "drizzle-orm";
+import { usd, titleCase } from "../lib/format";
+import { inArray } from "drizzle-orm";
 
 const db = getDb(Astro.locals);
 const products = await db
-  .select({ slug: schema.products.slug, name: schema.products.name })
+  .select({
+    id: schema.products.id,
+    slug: schema.products.slug,
+    name: schema.products.name,
+    productClass: schema.products.productClass,
+    powerType: schema.products.powerType,
+    environments: schema.products.environments,
+  })
   .from(schema.products)
   .where(eq(schema.products.status, "published"))
   .limit(6);
+
+const ids = products.map((p) => p.id);
+const offers = ids.length
+  ? await db
+      .select({ productId: schema.offers.productId, basePriceMinor: schema.offers.basePriceMinor })
+      .from(schema.offers)
+      .where(inArray(schema.offers.productId, ids))
+  : [];
+
+const minPrice = (productId: string): number | null => {
+  const prices = offers
+    .filter((o) => o.productId === productId && o.basePriceMinor != null)
+    .map((o) => o.basePriceMinor as number);
+  return prices.length ? Math.min(...prices) : null;
+};
 ---
 
 <!--
-  Job 5 applies the global design system to the EXISTING homepage content only —
-  same three blocks, same copy, no new sections and no new claims. The full
-  homepage story belongs to Job 7.
+  Job 5 correction applies the design system to the EXISTING homepage content —
+  same three blocks, same copy, no new marketing sections and no new claims.
+  Job 7 still owns the full homepage story.
 -->
-<Base title="BotPlanet — Find your perfect robot">
-  <section class="hero">
-    <span class="eyebrow">Real-world robots · United States</span>
-    <h1>Shop the planet yourself,<br />or let BotPlanet find your perfect robot.</h1>
-    <p>
-      Browse and compare real-world robots normally — or answer a few questions and
-      BotMatch recommends the right one for your needs, on suitability, never commission.
-    </p>
-    <div class="hero__actions">
-      <a class="btn btn--primary btn--lg" href="/botmatch/robotic-pool-cleaners/">Start BotMatch</a>
-      <a class="btn btn--lg" href="/robots/robotic-pool-cleaners/">Browse pool robots</a>
+<Base title="BotPlanet — Find your perfect robot" bleed={true}>
+  <!-- Band 1: hero, lit from above with orbital geometry behind it. -->
+  <section class="hero lit">
+    <div class="wrap orbit orbit--horizon">
+      <span class="eyebrow">Real-world robots · United States</span>
+      <h1>Shop the planet yourself,<br />or let BotPlanet find your perfect robot.</h1>
+      <p>
+        Browse and compare real-world robots normally — or answer a few questions and
+        BotMatch recommends the right one for your needs, on suitability, never commission.
+      </p>
+      <div class="hero__actions">
+        <a class="btn btn--primary btn--lg" href="/botmatch/robotic-pool-cleaners/">Start BotMatch</a>
+        <a class="btn btn--lg" href="/robots/robotic-pool-cleaners/">Browse pool robots</a>
+      </div>
     </div>
   </section>
 
-  <section class="section section--tight">
-    <div class="section-head section-head--row">
-      <div>
-        <span class="eyebrow">Launch category</span>
-        <h2 class="mt-0">Robotic pool cleaners</h2>
-        <p>Our first fully-built category. {products.length} products indexed for the US market.</p>
+  <!-- Band 2: catalogue, on a raised surface with a technical underlay. -->
+  <section class="section section--tight band grid-tech">
+    <div class="wrap">
+      <div class="section-head section-head--row">
+        <div>
+          <span class="rule-accent" aria-hidden="true"></span>
+          <span class="eyebrow">Launch category</span>
+          <h2 class="mt-0">Robotic pool cleaners</h2>
+          <p>Our first fully-built category. {products.length} products indexed for the US market.</p>
+        </div>
+        <a class="btn" href="/robots/robotic-pool-cleaners/">View all</a>
       </div>
-      <a class="btn" href="/robots/robotic-pool-cleaners/">View all</a>
-    </div>
 
-    {products.length === 0 ? (
-      <div class="empty">
-        <p class="empty__title">No products published yet</p>
-        <p>The launch catalogue appears here as soon as products are published.</p>
-      </div>
-    ) : (
-      <div class="grid grid--products">
-        {products.map((p) => (
-          <a class="card reveal" href={`/robots/robotic-pool-cleaners/${p.slug}/`}>
-            <span class="pill pill--strong">Pool cleaner</span>
-            <h3>{p.name}</h3>
-            <span class="note">View details &amp; offers →</span>
-          </a>
-        ))}
-      </div>
-    )}
+      {products.length === 0 ? (
+        <div class="empty">
+          <p class="empty__title">No products published yet</p>
+          <p>The launch catalogue appears here as soon as products are published.</p>
+        </div>
+      ) : (
+        <div class="grid grid--products">
+          {products.map((p, i) => (
+            <ProductCard
+              href={`/robots/robotic-pool-cleaners/${p.slug}/`}
+              name={p.name}
+              classification={titleCase(p.productClass)}
+              meta={[titleCase(p.powerType), ...(p.environments as string[]).slice(0, 2).map(titleCase)]}
+              price={minPrice(p.id) != null ? `from ${usd(minPrice(p.id))}` : null}
+              priceNote="Snapshot price · confirm at retailer"
+              variant={i}
+              saveId={p.id}
+            />
+          ))}
+        </div>
+      )}
+    </div>
   </section>
 
-  <section class="section section--tight">
-    <div class="section-head">
-      <span class="eyebrow">How we work</span>
-      <h2 class="mt-0">Why BotPlanet is different</h2>
-    </div>
-    <div class="feature-rows">
-      <div class="feature-row reveal">
-        <span class="feature-row__index" aria-hidden="true">01</span>
-        <div class="feature-row__body">
-          <h3>Suitability first</h3>
-          <p>BotMatch chooses the best product for you before it ever looks at which retailer pays us.</p>
-        </div>
+  <!-- Band 3: editorial principles, lit from the left. -->
+  <section class="section section--tight lit lit--left">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="rule-accent" aria-hidden="true"></span>
+        <span class="eyebrow">How we work</span>
+        <h2 class="mt-0">Why BotPlanet is different</h2>
       </div>
-      <div class="feature-row reveal">
-        <span class="feature-row__index" aria-hidden="true">02</span>
-        <div class="feature-row__body">
-          <h3>Honest freshness</h3>
-          <p>Every price shows when it was last checked. No stale "deals".</p>
-        </div>
-      </div>
-      <div class="feature-row reveal">
-        <span class="feature-row__index" aria-hidden="true">03</span>
-        <div class="feature-row__body">
-          <h3>Real evidence</h3>
-          <p>Claims are labelled by evidence level — researched vs hands-on tested.</p>
-        </div>
+      <div class="feature-rows">
+        <article class="feature-row reveal">
+          <div class="feature-row__lead">
+            <span class="feature-row__index" aria-hidden="true">01</span>
+            <span class="feature-row__tick">Ranking</span>
+          </div>
+          <div class="feature-row__body">
+            <h3>Suitability first</h3>
+            <p>BotMatch chooses the best product for you before it ever looks at which retailer pays us.</p>
+          </div>
+        </article>
+        <article class="feature-row reveal">
+          <div class="feature-row__lead">
+            <span class="feature-row__index" aria-hidden="true">02</span>
+            <span class="feature-row__tick">Pricing</span>
+          </div>
+          <div class="feature-row__body">
+            <h3>Honest freshness</h3>
+            <p>Every price shows when it was last checked. No stale "deals".</p>
+          </div>
+        </article>
+        <article class="feature-row reveal">
+          <div class="feature-row__lead">
+            <span class="feature-row__index" aria-hidden="true">03</span>
+            <span class="feature-row__tick">Evidence</span>
+          </div>
+          <div class="feature-row__body">
+            <h3>Real evidence</h3>
+            <p>Claims are labelled by evidence level — researched vs hands-on tested.</p>
+          </div>
+        </article>
       </div>
     </div>
   </section>

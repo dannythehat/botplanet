@@ -4,66 +4,60 @@ import { SITE, TRUST_LINKS } from "../lib/site";
 const year = 2026;
 const botmatchHref = routes.botmatch(LAUNCH_CATEGORY);
 
-// Legal/trust links are split out of the route groups so the footer reads as
-// three deliberate zones (brand → routes → legal) rather than one link wall.
-const LEGAL = TRUST_LINKS.filter((l) => ["/privacy/", "/affiliate-disclosure/", "/editorial-policy/"].includes(l.href));
+const LEGAL = TRUST_LINKS.filter((l) =>
+  ["/privacy/", "/affiliate-disclosure/", "/editorial-policy/"].includes(l.href),
+);
 ---
+<!--
+  Compact by design. The footer closes the page; it must never be its largest
+  visual section. One slim BotMatch prompt, tight link groups, then legal.
+  No duplicate brand lockup — the header already carries the mark.
+-->
 <footer class="site">
-  <!-- Zone 1: brand + one restrained BotMatch direction. -->
-  <div class="foot-lead">
-    <div class="wrap foot-lead__inner">
-      <div class="foot-brand">
-        <img src="/logo/logo-header.png" alt="BotPlanet" width="176" height="33" class="foot-logo" />
-        <p class="foot-tagline">{SITE.tagline}</p>
-        <p class="note foot-independence">
-          Independent robot recommendations for the United States. Suitability first — never commission.
-        </p>
-      </div>
-      <div class="foot-action">
-        <p class="foot-action__title">Not sure which robot fits?</p>
-        <p class="note">
-          Answer a few questions and BotMatch gives you one clear recommendation, with the reasons and the limitations.
-        </p>
-        <a class="btn btn--primary" href={botmatchHref}>Find My Robot</a>
-      </div>
+  <!-- Slim conversion strip: one line of intent + one action. -->
+  <div class="foot-prompt">
+    <div class="wrap foot-prompt__inner">
+      <p class="foot-prompt__text">
+        <strong>Not sure which robot fits?</strong>
+        <span class="muted">One short questionnaire, one clear recommendation — on suitability, never commission.</span>
+      </p>
+      <a class="btn btn--primary btn--sm" href={botmatchHref}>Find My Robot</a>
     </div>
   </div>
 
-  <!-- Zone 2: route groups. -->
   <div class="wrap">
-    <nav class="foot-nav" aria-label="Footer">
-      {FOOTER_GROUPS.map((g) => (
-        <div class="foot-col">
-          <h2 class="foot-h">{g.title}</h2>
-          <ul class="foot-list">
-            {g.links.map((l) => (
-              <li>
-                {l.state === "coming_soon" ? (
-                  <span class="foot-link is-soon">{l.label}<em>soon</em></span>
-                ) : (
-                  <a class="foot-link" href={l.href}>{l.label}</a>
-                )}
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
-    </nav>
-  </div>
+    <div class="foot-main">
+      <nav class="foot-nav" aria-label="Footer">
+        {FOOTER_GROUPS.map((g) => (
+          <div class="foot-col">
+            <h2 class="foot-h">{g.title}</h2>
+            <ul class="foot-list">
+              {g.links.map((l) => (
+                <li>
+                  {l.state === "coming_soon" ? (
+                    <span class="foot-link is-soon">{l.label}<em>soon</em></span>
+                  ) : (
+                    <a class="foot-link" href={l.href}>{l.label}</a>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </nav>
+    </div>
 
-  <!-- Zone 3: transparency + legal. -->
-  <div class="wrap">
     <div class="foot-legal">
-      <p class="note foot-disclosure">
-        <strong>Affiliate disclosure.</strong> Some links are affiliate links — if you buy through them we may earn a
-        commission, at no cost to you. This never changes which product BotMatch recommends, and never changes how a
-        product is rated. Prices and stock are dated snapshots; always confirm the current price at the retailer.
+      <p class="foot-disclosure">
+        <strong>Affiliate disclosure.</strong> Some links are affiliate links — we may earn a commission at no cost to
+        you. It never changes which product BotMatch recommends. Prices and stock are dated snapshots; confirm the
+        current price at the retailer.
       </p>
       <div class="foot-legal__row">
-        <p class="note">© {year} BotPlanet</p>
+        <p class="foot-copy">© {year} BotPlanet · Independent robot recommendations for the United States</p>
         <ul class="foot-legal__links">
           {LEGAL.map((l) => <li><a class="foot-link" href={l.href}>{l.label}</a></li>)}
-          <li><a class="foot-link" href={`mailto:${SITE.business.contactEmail}`}>{SITE.business.contactEmail}</a></li>
+          <li><a class="foot-link" href={`mailto:${SITE.business.contactEmail}`}>Contact</a></li>
         </ul>
       </div>
     </div>
@@ -72,76 +66,59 @@ const LEGAL = TRUST_LINKS.filter((l) => ["/privacy/", "/affiliate-disclosure/", 
 
 <style>
   footer.site {
-    margin-top: var(--section-gap);
+    margin-top: var(--section-gap-tight);
     border-top: 1px solid var(--border-subtle);
     background: var(--bg-raised);
   }
 
-  /* ---- Zone 1: brand + BotMatch direction ---- */
-  .foot-lead {
+  /* ---- Slim prompt strip ---- */
+  .foot-prompt {
     border-bottom: 1px solid var(--border-subtle);
-    background: var(--bg-sunken);
+    background:
+      radial-gradient(60% 180% at 22% 50%, rgba(255, 255, 255, 0.045), transparent 70%),
+      var(--bg-sunken);
   }
 
-  .foot-lead__inner {
-    display: grid;
-    grid-template-columns: 1.35fr 1fr;
-    gap: clamp(var(--space-xl), 5vw, var(--space-4xl));
-    align-items: start;
-    padding-block: var(--space-2xl);
-  }
-
-  .foot-logo { width: 176px; height: auto; }
-
-  .foot-tagline {
-    font-family: var(--font-display);
-    font-size: var(--type-subheading);
-    font-weight: var(--weight-medium);
-    letter-spacing: var(--tracking-heading);
-    color: var(--text-primary);
-    max-width: 34ch;
-    margin: var(--space-md) 0 var(--space-xs);
-  }
-
-  .foot-independence { max-width: 46ch; margin: 0; }
-
-  .foot-action {
+  .foot-prompt__inner {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--space-xs);
-    padding: var(--space-lg);
-    background: var(--surface-1);
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-lg);
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-md);
+    /* One row, not a block: ~64px tall on desktop. */
+    padding-block: var(--space-md);
+    flex-wrap: wrap;
   }
 
-  .foot-action__title {
+  .foot-prompt__text {
+    margin: 0;
+    font-size: var(--type-body-sm);
+    line-height: var(--leading-normal);
+  }
+
+  .foot-prompt__text strong {
     font-family: var(--font-display);
-    font-size: var(--type-card);
     font-weight: var(--weight-semibold);
     color: var(--text-primary);
-    margin: 0;
+    margin-right: var(--space-xs);
   }
 
-  .foot-action .note { max-width: 42ch; margin: 0 0 var(--space-xs); }
+  /* ---- Link groups ---- */
+  .foot-main { padding-block: var(--space-xl) var(--space-lg); }
 
-  /* ---- Zone 2: route groups ---- */
   .foot-nav {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: var(--space-xl) var(--space-lg);
-    padding-block: var(--space-2xl);
+    gap: var(--space-lg);
   }
 
   .foot-h {
     font-family: var(--font-display);
-    font-size: var(--type-meta);
+    font-size: 11.5px;
     font-weight: var(--weight-semibold);
     text-transform: uppercase;
     letter-spacing: var(--tracking-caps);
     color: var(--text-tertiary);
-    margin: 0 0 var(--space-sm);
+    margin: 0 0 var(--space-xs);
   }
 
   .foot-list { list-style: none; margin: 0; padding: 0; }
@@ -151,70 +128,82 @@ const LEGAL = TRUST_LINKS.filter((l) => ["/privacy/", "/affiliate-disclosure/", 
     display: inline-flex;
     align-items: center;
     gap: var(--space-2xs);
-    /* Generous vertical padding keeps footer links tappable on mobile. */
-    padding: 7px 0;
+    /* Tight, but still a comfortable target. */
+    padding: 5px 0;
     color: var(--text-secondary);
     font-size: var(--type-body-sm);
+    line-height: 1.4;
   }
 
   .foot-link:hover { color: var(--text-primary); }
   .foot-link:focus-visible { outline: var(--focus-ring); outline-offset: 3px; }
-
   .foot-link.is-soon { color: var(--text-quaternary); }
 
   .foot-link em {
     font-style: normal;
-    font-size: 10px;
+    font-size: 9.5px;
     text-transform: uppercase;
     letter-spacing: var(--tracking-caps);
     color: var(--text-quaternary);
     border: 1px solid var(--border-default);
     border-radius: var(--radius-xs);
-    padding: 1px 5px;
+    padding: 1px 4px;
   }
 
-  /* ---- Zone 3: transparency + legal ---- */
+  /* ---- Legal ---- */
   .foot-legal {
     border-top: 1px solid var(--border-subtle);
-    padding-block: var(--space-lg) var(--space-2xl);
+    padding-block: var(--space-md) var(--space-lg);
   }
 
-  .foot-disclosure { max-width: 88ch; margin: 0 0 var(--space-md); }
-  .foot-disclosure strong { color: var(--text-secondary); }
+  .foot-disclosure {
+    max-width: 96ch;
+    margin: 0 0 var(--space-sm);
+    font-size: var(--type-meta);
+    line-height: var(--leading-normal);
+    color: var(--text-quaternary);
+  }
+
+  .foot-disclosure strong { color: var(--text-tertiary); font-weight: var(--weight-semibold); }
 
   .foot-legal__row {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: var(--space-md);
+    gap: var(--space-sm);
     flex-wrap: wrap;
   }
 
-  .foot-legal__row .note { margin: 0; }
+  .foot-copy {
+    margin: 0;
+    font-size: var(--type-meta);
+    color: var(--text-tertiary);
+  }
 
   .foot-legal__links {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 0 var(--space-lg);
+    gap: 0 var(--space-md);
     list-style: none;
     margin: 0;
     padding: 0;
   }
 
   .foot-legal__links li { margin: 0; }
-  .foot-legal__links .foot-link { font-size: var(--type-meta); }
+  .foot-legal__links .foot-link { font-size: var(--type-meta); padding: 3px 0; }
 
-  /* ---- Responsive: deliberate stacking, not a collapsed desktop ---- */
+  /* ---- Responsive ---- */
   @media (max-width: 900px) {
-    .foot-lead__inner { grid-template-columns: 1fr; gap: var(--space-xl); }
-    .foot-action { width: 100%; }
-    .foot-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .foot-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-lg) var(--space-md); }
   }
 
-  @media (max-width: 520px) {
-    .foot-nav { grid-template-columns: 1fr; gap: var(--space-lg); }
+  @media (max-width: 560px) {
+    .foot-prompt__inner { justify-content: flex-start; gap: var(--space-sm); }
     .foot-legal__row { flex-direction: column; align-items: flex-start; gap: var(--space-xs); }
-    .foot-legal__links { gap: 0 var(--space-md); }
+  }
+
+  @media (max-width: 420px) {
+    .foot-nav { grid-template-columns: 1fr 1fr; }
   }
 </style>

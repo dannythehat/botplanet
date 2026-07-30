@@ -15,7 +15,7 @@ const isActive = (href: string) => href !== "/" && path.startsWith(href.replace(
 <header class="site" id="site-header" data-scrolled="false">
   <div class="wrap bar">
     <a class="logo" href="/" aria-label="BotPlanet — home">
-      <img src="/logo/logo-header.png" alt="BotPlanet" class="logo-full" width="168" height="32" />
+      <img src="/logo/logo-header.png" alt="BotPlanet" class="logo-full" width="208" height="40" />
     </a>
 
     <nav class="main" aria-label="Primary">
@@ -316,26 +316,51 @@ const isActive = (href: string) => href !== "/" && path.startsWith(href.replace(
   /* ---------------- Shell ---------------- */
   header.site {
     position: sticky;
+    /* sticky already establishes a positioning context for ::before/::after */
     top: 0;
     z-index: 40;
     background: color-mix(in srgb, var(--bg-base) 78%, transparent);
     backdrop-filter: blur(14px) saturate(140%);
-    border-bottom: 1px solid transparent;
-    transition:
-      border-color var(--duration-base) var(--ease-out),
-      background-color var(--duration-base) var(--ease-out);
+    transition: background-color var(--duration-base) var(--ease-out);
   }
 
   /* Integrated with the page: no hard bar until content passes beneath it. */
   header.site[data-scrolled="true"] {
-    background: color-mix(in srgb, var(--bg-base) 92%, transparent);
-    border-bottom-color: var(--border-subtle);
+    background: color-mix(in srgb, var(--bg-base) 93%, transparent);
+  }
+
+  /* A hairline that fades at both ends — the header hands over to the page
+     instead of sitting on it as a hard black bar. */
+  header.site::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    pointer-events: none;
+    opacity: 0;
+    background: linear-gradient(90deg, transparent, var(--border-strong) 20%, var(--border-strong) 80%, transparent);
+    transition: opacity var(--duration-base) var(--ease-out);
+  }
+
+  header.site[data-scrolled="true"]::after { opacity: 1; }
+
+  /* Ambient light spilling from behind the lockup, tying the header to the
+     hero beneath it. Monochrome, very low alpha, static. */
+  header.site::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: min(620px, 70%);
+    pointer-events: none;
+    background: radial-gradient(60% 150% at 18% 45%, rgba(255, 255, 255, 0.05), transparent 72%);
   }
 
   .bar {
     display: flex;
     align-items: center;
-    gap: var(--space-lg);
+    gap: var(--space-xl);
     height: var(--header-height);
   }
 
@@ -347,7 +372,7 @@ const isActive = (href: string) => href !== "/" && path.startsWith(href.replace(
   }
 
   .logo-full {
-    width: 168px;
+    width: 208px;
     height: auto;
     display: block;
     transition: opacity var(--duration-fast) var(--ease-out);
@@ -360,8 +385,9 @@ const isActive = (href: string) => href !== "/" && path.startsWith(href.replace(
   nav.main {
     display: flex;
     align-items: center;
-    gap: var(--space-3xs);
-    margin-left: var(--space-xs);
+    /* Nav was cramped against the lockup and against itself. */
+    gap: var(--space-2xs);
+    margin-left: var(--space-sm);
   }
 
   .nav-link {
@@ -369,7 +395,7 @@ const isActive = (href: string) => href !== "/" && path.startsWith(href.replace(
     display: inline-flex;
     align-items: center;
     gap: var(--space-2xs);
-    padding: 9px 12px;
+    padding: 10px 15px;
     border-radius: var(--radius-sm);
     color: var(--text-secondary);
     font-size: var(--type-body-sm);
@@ -388,8 +414,8 @@ const isActive = (href: string) => href !== "/" && path.startsWith(href.replace(
   .nav-link.active::after {
     content: "";
     position: absolute;
-    left: 12px;
-    right: 12px;
+    left: 15px;
+    right: 15px;
     bottom: 2px;
     height: 1.5px;
     background: var(--text-primary);
@@ -514,7 +540,7 @@ const isActive = (href: string) => href !== "/" && path.startsWith(href.replace(
     margin-left: auto;
     display: flex;
     align-items: center;
-    gap: var(--space-xs);
+    gap: var(--space-sm);
   }
 
   .saved-count {
@@ -703,12 +729,12 @@ const isActive = (href: string) => href !== "/" && path.startsWith(href.replace(
     nav.main, .cta { display: none; }
     .burger { display: inline-flex; }
     .bar { height: var(--header-height-compact); gap: var(--space-md); }
-    .logo-full { width: 124px; }
+    .logo-full { width: 150px; }
   }
 
   /* Very small phones (320px): tighten only, never overflow. */
   @media (max-width: 380px) {
-    .logo-full { width: 108px; }
+    .logo-full { width: 128px; }
     .head-actions { gap: var(--space-2xs); }
     .icon-btn { width: 36px; height: 36px; }
   }

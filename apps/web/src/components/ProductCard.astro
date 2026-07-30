@@ -1,0 +1,227 @@
+---
+/**
+ * Product card — the workhorse commercial component.
+ *
+ * It must look deliberate BEFORE real photography exists: a lit media stage
+ * with the owned robot silhouette, a classification chip, meaningful metadata
+ * and a clear price hierarchy. When rights-cleared imagery lands (Job 9), pass
+ * `image` and it replaces the silhouette inside the same stage — no layout
+ * change, no redesign.
+ *
+ * IMAGE RIGHTS: the silhouette is an original BotPlanet asset and is generic by
+ * design, so it never implies it depicts the specific model named on the card.
+ */
+import RobotSilhouette from "./RobotSilhouette.astro";
+
+interface Props {
+  href: string;
+  name: string;
+  /** Product classification, e.g. "Robotic pool cleaner". */
+  classification?: string;
+  /** Short facts shown under the title, e.g. ["Cordless", "Floor · Walls"]. */
+  meta?: string[];
+  /** Formatted price string, already localised. */
+  price?: string | null;
+  /** Note under the price, e.g. freshness caveat. */
+  priceNote?: string;
+  /** Rights-cleared image URL. Omit to use the silhouette stage. */
+  image?: string | null;
+  imageAlt?: string;
+  /** Varies the silhouette so a grid isn't rubber-stamped. */
+  variant?: number;
+  /** Product id for the save affordance. */
+  saveId?: string;
+}
+
+const {
+  href,
+  name,
+  classification,
+  meta = [],
+  price,
+  priceNote,
+  image,
+  imageAlt,
+  variant = 0,
+  saveId,
+} = Astro.props;
+---
+<a class="pcard elevated reveal" href={href}>
+  <div class="pcard__stage stage">
+    {image ? (
+      <img class="pcard__img" src={image} alt={imageAlt ?? name} loading="lazy" decoding="async" />
+    ) : (
+      <RobotSilhouette variant={variant} class="pcard__sil" />
+    )}
+    {classification && <span class="pcard__class">{classification}</span>}
+    {saveId && (
+      <button
+        class="icon-btn pcard__save"
+        type="button"
+        data-save={saveId}
+        aria-pressed="false"
+        aria-label={`Save ${name}`}
+      >
+        <span aria-hidden="true">♡</span>
+      </button>
+    )}
+  </div>
+
+  <div class="pcard__body">
+    <h3 class="pcard__title">{name}</h3>
+    {meta.length > 0 && (
+      <ul class="pcard__meta">
+        {meta.map((m) => <li>{m}</li>)}
+      </ul>
+    )}
+    <div class="pcard__foot">
+      <span class="price">{price ?? "—"}</span>
+      <span class="pcard__go" aria-hidden="true">→</span>
+    </div>
+    {priceNote && <span class="pcard__note">{priceNote}</span>}
+  </div>
+</a>
+
+<style>
+  .pcard {
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition:
+      transform var(--duration-base) var(--ease-out),
+      border-color var(--duration-base) var(--ease-out),
+      box-shadow var(--duration-base) var(--ease-out);
+  }
+
+  .pcard:hover {
+    transform: translateY(-3px);
+    border-color: var(--border-strong);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), var(--shadow-lg);
+  }
+
+  .pcard:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: var(--focus-offset);
+  }
+
+  .pcard:active { transform: translateY(-1px); }
+
+  /* ---- Media stage ---- */
+  .pcard__stage {
+    aspect-ratio: 4 / 3;
+    display: grid;
+    place-items: center;
+    padding: var(--space-lg) var(--space-lg) var(--space-xl);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .pcard__sil {
+    max-width: 72%;
+    transition: transform var(--duration-slow) var(--ease-out);
+  }
+
+  .pcard:hover .pcard__sil { transform: translateY(-3px) scale(1.03); }
+
+  .pcard__img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform var(--duration-slow) var(--ease-out);
+  }
+
+  .pcard:hover .pcard__img { transform: scale(1.04); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pcard:hover { transform: none; }
+    .pcard:hover .pcard__sil,
+    .pcard:hover .pcard__img { transform: none; }
+  }
+
+  /* Classification chip, pinned to the stage like an instrument label. */
+  .pcard__class {
+    position: absolute;
+    top: var(--space-sm);
+    left: var(--space-sm);
+    z-index: 3;
+    padding: 4px 10px;
+    border-radius: var(--radius-pill);
+    background: rgba(6, 6, 9, 0.7);
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--border-default);
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-caps);
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    white-space: nowrap;
+  }
+
+  .pcard__save {
+    position: absolute;
+    top: var(--space-xs);
+    right: var(--space-xs);
+    z-index: 3;
+    background: rgba(6, 6, 9, 0.7);
+    backdrop-filter: blur(8px);
+  }
+
+  /* ---- Body ---- */
+  .pcard__body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    padding: var(--space-md) var(--space-lg) var(--space-lg);
+    flex: 1;
+  }
+
+  .pcard__title {
+    font-family: var(--font-display);
+    font-size: var(--type-card);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-heading);
+    line-height: var(--leading-snug);
+    color: var(--text-primary);
+    margin: 0;
+  }
+
+  .pcard__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0 var(--space-xs);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: var(--type-meta);
+    color: var(--text-tertiary);
+  }
+
+  .pcard__meta li { margin: 0; display: flex; align-items: center; gap: var(--space-xs); }
+  .pcard__meta li + li::before { content: "·"; color: var(--text-decorative); }
+
+  .pcard__foot {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-sm);
+    margin-top: auto;
+    padding-top: var(--space-sm);
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .pcard__go {
+    font-size: var(--type-body);
+    color: var(--text-tertiary);
+    transition: transform var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out);
+  }
+
+  .pcard:hover .pcard__go { transform: translateX(3px); color: var(--text-primary); }
+
+  .pcard__note {
+    font-size: var(--type-meta);
+    color: var(--text-quaternary);
+    line-height: var(--leading-normal);
+  }
+</style>
