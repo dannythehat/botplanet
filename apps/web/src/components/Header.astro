@@ -8,7 +8,7 @@ const isActive = (href: string) => href !== "/" && path.startsWith(href.replace(
 ---
 <header class="site">
   <div class="wrap bar">
-    <a class="logo" href="/"><img src="/logo/mark-light-web.png" alt="BotPlanet" width="63" height="32" class="logo-mark" /><span class="logo-txt">Bot<b>Planet</b></span></a>
+    <a class="logo" href="/" aria-label="BotPlanet — home"><img src="/logo/logo-lockup-web.png" alt="BotPlanet" class="logo-full" width="58" height="58" /></a>
 
     <nav class="main" aria-label="Primary">
       {PRIMARY_NAV.map((item) =>
@@ -63,7 +63,7 @@ const isActive = (href: string) => href !== "/" && path.startsWith(href.replace(
   <div class="drawer" id="drawer" hidden>
     <div class="drawer-panel" role="dialog" aria-label="Menu">
       <div class="drawer-head">
-        <span class="logo-txt">Bot<b>Planet</b></span>
+        <img src="/logo/logo-lockup-web.png" alt="BotPlanet" style="height:42px;width:auto" />
         <button class="icon-btn" type="button" id="btn-close" aria-label="Close menu">✕</button>
       </div>
       <a class="drawer-cta" href={botmatchHref}>✦ Find My Robot</a>
@@ -163,11 +163,9 @@ const isActive = (href: string) => href !== "/" && path.startsWith(href.replace(
 </script>
 
 <style>
-  .bar { display: flex; align-items: center; gap: 22px; height: 66px; }
-  .logo { display: flex; align-items: center; gap: 9px; font-weight: 700; font-size: 19px; letter-spacing: -0.02em; }
-  .logo img { vertical-align: middle; }
-  .logo-txt b { font-weight: 700; } .logo-txt { color: var(--muted); font-weight: 600; }
-  .logo-txt b { color: var(--text); }
+  .bar { display: flex; align-items: center; gap: 22px; height: 76px; }
+  .logo { display: flex; align-items: center; }
+  .logo-full { height: 58px; width: auto; display: block; }
 
   nav.main { display: flex; gap: 4px; align-items: center; margin-left: 6px; }
   .nav-link { color: var(--muted); font-weight: 500; font-size: 14px; padding: 8px 11px; border-radius: 8px; white-space: nowrap; display: inline-flex; align-items: center; gap: 5px; }
@@ -228,5 +226,7 @@ const isActive = (href: string) => href !== "/" && path.startsWith(href.replace(
     nav.main, .market { display: none; }
     .burger { display: inline-flex; }
     .cta { padding: 8px 14px; }
+    .bar { height: 64px; }
+    .logo-full { height: 46px; }
   }
 </style>
