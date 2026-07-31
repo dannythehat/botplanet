@@ -1,12 +1,19 @@
 {
   "generatedFor": "2026-07-31",
-  "total": 15,
+  "total": 17,
   "byRule": {
-    "search_not_offer": 6,
+    "search_not_offer": 8,
     "wrong_region": 1,
     "unclear_seller": 8
   },
   "rows": [
+    {
+      "productId": "prod-wybot-c1",
+      "retailerId": "ret-amazon",
+      "candidate": "amazon.com/s?k=WYBOT C1 Cordless Robotic Pool Cleaner",
+      "reason": "A search-results page is not an offer: it does not identify a single product, a seller, a price or a stock state, and the customer still has to choose. Kept as a fallback click destination, refused as a verified offer.",
+      "rule": "search_not_offer"
+    },
     {
       "productId": "prod-dolphin-premier",
       "retailerId": "ret-amazon",
@@ -33,6 +40,13 @@
       "retailerId": "ret-amazon",
       "candidate": "amazon.com/s?k=Aiper Seagull SE",
       "reason": "A search-results page is not an offer: it does not identify a single product, a seller, a price or a stock state, and the customer still has to choose. Kept as a fallback click destination, refused as a verified offer.",
+      "rule": "search_not_offer"
+    },
+    {
+      "productId": "prod-wybot-c1",
+      "retailerId": "ret-amazon",
+      "candidate": "https://www.amazon.com/dp/B0G64JV6K4",
+      "reason": "DEAD ASIN. The listing recorded in Job 8 no longer exists: /dp/B0G64JV6K4 returns Amazon's 'Sorry, we couldn't find that page'. It passed the original HTTP-200 check because Amazon serves that page with a 200 status, which is why the check is now content-based. Must not be reinstated without a fresh ASIN.",
       "rule": "search_not_offer"
     },
     {

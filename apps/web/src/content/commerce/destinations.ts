@@ -8,13 +8,23 @@
  * the ten now have a specific ASIN; four do not, and are honestly classified as
  * search-only rather than dressed up.
  *
+ * A CORRECTED VERIFICATION METHOD. The first pass checked these destinations
+ * with an HTTP status code and treated 200 as proof the ASIN was live. That was
+ * wrong: Amazon serves its "Sorry, we couldn't find that page" page with HTTP
+ * 200, so a dead ASIN and a real product are indistinguishable by status alone.
+ * One of the six — B0G64JV6K4, carried for the WYBOT C1 — was in fact dead, and
+ * the faulty check let a buy button that landed on Amazon's 404 reach
+ * production. Destinations are now checked by page CONTENT for the 404 marker,
+ * and that ASIN is removed.
+ *
  * WHAT "researched_exact" MEANS AND DOES NOT MEAN:
  *   - the ASIN was captured from a source URL recorded during Job 8;
- *   - the destination was confirmed to resolve on amazon.com (HTTP 200,
- *     2026-07-31), so the identifier is live and the host is Amazon US;
- *   - the MODEL AT THE DESTINATION WAS NOT RE-CONFIRMED. Doing so would mean
- *     reading the page, and the Associates programme forbids scraping. Only an
- *     approved method (Creators API / PA-API) can raise this to verified_exact.
+ *   - the destination returns a real product page, not Amazon's 404;
+ *   - the MODEL AT THE DESTINATION IS STILL NOT CONFIRMED. Amazon serves
+ *     inconsistent markup to non-browser clients — productTitle was readable on
+ *     one of five attempts — so code cannot establish identity here, and
+ *     pushing harder would be scraping. Only an approved API, or a human with a
+ *     browser, can raise this to verified_exact.
  *
  * That gap is why no price and no stock state is published for any offer: a
  * destination that resolves proves the link works, not what it sells for.
@@ -29,7 +39,6 @@ const model = (productId: string): string =>
 
 /** ASINs captured from the Amazon listing URLs cited in the Job 8 records. */
 const AMAZON_ASINS: { productId: string; asin: string; sourceUrl: string }[] = [
-  { productId: "prod-wybot-c1", asin: "B0G64JV6K4", sourceUrl: "https://www.amazon.com/WYBOT-Pool-Vacuum-Inground-Navigation/dp/B0G64JV6K4" },
   { productId: "prod-dolphin-nautilus-cc-plus", asin: "B09K4C9WGF", sourceUrl: "https://www.amazon.com/Dolphin-Nautilus-Robotic-Cleaner-Ground/dp/B09K4C9WGF" },
   { productId: "prod-polaris-freedom", asin: "B0BX9DJS7R", sourceUrl: "https://www.amazon.com/Polaris-Cordless-Cable-Free-Intelligent-Technology/dp/B0BX9DJS7R" },
   { productId: "prod-betta-se-plus", asin: "B0CVMQ3XBX", sourceUrl: "https://www.amazon.com/Betta-SE-Plus-Continuous-Safeguard/dp/B0CVMQ3XBX" },
@@ -39,6 +48,11 @@ const AMAZON_ASINS: { productId: string; asin: string; sourceUrl: string }[] = [
 
 /** Products with no Amazon listing URL in the Job 8 record. */
 const NO_AMAZON_DESTINATION = [
+  // ASIN B0G64JV6K4 was carried for this product and is DEAD — /dp/B0G64JV6K4
+  // returns Amazon's "couldn't find that page" (confirmed by content check and
+  // by the owner in a browser, 2026-07-31). Removed rather than left pointing
+  // at a 404; a new ASIN has to be found before it can carry an offer again.
+  "prod-wybot-c1",
   "prod-dolphin-premier",
   "prod-dolphin-e10",
   "prod-aiper-scuba-s1",
@@ -133,6 +147,14 @@ export const REJECTED_CANDIDATES: RejectedCandidate[] = [
       rule: "search_not_offer",
     }),
   ),
+  {
+    productId: "prod-wybot-c1",
+    retailerId: "ret-amazon",
+    candidate: "https://www.amazon.com/dp/B0G64JV6K4",
+    reason:
+      "DEAD ASIN. The listing recorded in Job 8 no longer exists: /dp/B0G64JV6K4 returns Amazon's 'Sorry, we couldn't find that page'. It passed the original HTTP-200 check because Amazon serves that page with a 200 status, which is why the check is now content-based. Must not be reinstated without a fresh ASIN.",
+    rule: "search_not_offer",
+  },
   {
     productId: "prod-aiper-scuba-x1",
     retailerId: "ret-aiper-store",

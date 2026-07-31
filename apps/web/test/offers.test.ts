@@ -131,11 +131,11 @@ describe("programme territory and state", () => {
 });
 
 describe("exact-product destinations", () => {
-  it("captures an ASIN for six products and refuses to invent the other four", () => {
+  it("captures an ASIN for five products and refuses to invent the rest", () => {
     const exact = DESTINATIONS.filter((d) => d.confidence === "researched_exact");
     const search = DESTINATIONS.filter((d) => d.confidence === "search_only");
-    expect(exact).toHaveLength(6);
-    expect(search).toHaveLength(4);
+    expect(exact).toHaveLength(5);
+    expect(search).toHaveLength(5);
     for (const d of exact) {
       expect(d.identifierKind).toBe("asin");
       expect(d.retailerProductId).toMatch(/^B0[A-Z0-9]{8}$/);
@@ -192,8 +192,19 @@ describe("exact-product destinations", () => {
   });
 
   it("resolves a destination only for the product it belongs to", () => {
-    expect(destinationFor("prod-wybot-c1")!.retailerProductId).toBe("B0G64JV6K4");
+    expect(destinationFor("prod-polaris-freedom")!.retailerProductId).toBe("B0BX9DJS7R");
     expect(destinationFor("prod-dolphin-e10")!.retailerProductId).toBeNull();
+  });
+
+  it("never reinstates the dead WYBOT ASIN", () => {
+    // /dp/B0G64JV6K4 returns Amazon's 404 page with an HTTP 200 status, which is
+    // how it survived the original check and reached production as a live buy
+    // button. It stays out until a fresh ASIN is found.
+    const wybot = destinationFor("prod-wybot-c1")!;
+    expect(wybot.retailerProductId).toBeNull();
+    expect(wybot.confidence).toBe("search_only");
+    for (const d of DESTINATIONS) expect(d.retailerProductId).not.toBe("B0G64JV6K4");
+    expect(REJECTED_CANDIDATES.some((c) => c.candidate.includes("B0G64JV6K4") && /DEAD ASIN/.test(c.reason))).toBe(true);
   });
 });
 
