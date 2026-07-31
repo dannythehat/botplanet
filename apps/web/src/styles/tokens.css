@@ -46,7 +46,7 @@
   --border-inverse: #ffffff;
 
   /* ---------------------------------------------------------------- */
-  /* ACCENT SYSTEM — semantic, and deliberately scarce.                */
+  /* ACCENT SYSTEM — EMPHASIS ONLY, and deliberately scarce.           */
   /*                                                                   */
   /* One primary BotPlanet accent: BRUSHED CHROME.                      */
   /*                                                                   */
@@ -75,15 +75,25 @@
   /* against the canvas, above the 9.51:1 the teal managed, so nothing  */
   /* that passed before fails now.                                     */
   /*                                                                   */
-  /* Because the accent is no longer a hue, MEANING MUST NOT REST ON IT.*/
-  /* Status still carries its own colour and always a glyph or label.   */
+  /* ---------------------------------------------------------------- */
+  /* THE ACCENT IS EMPHASIS ONLY. IT CARRIES NO MEANING.               */
   /*                                                                   */
-  /* PERMITTED: primary actions, the recommendation journey, comparison */
-  /* winners, verified evidence, alerts and limitations, conversion     */
-  /* moments, active/selected interactive states, the focus ring.       */
-  /* FORBIDDEN: routine navigation, ordinary borders, standard          */
-  /* metadata, secondary buttons, every card, decorative gradients,     */
-  /* section backgrounds.                                               */
+  /* It was a hue and is now a neutral, so it can no longer distinguish */
+  /* one state from another by colour. Rather than pretend otherwise,   */
+  /* the contract is narrowed to match what it can actually do.        */
+  /*                                                                   */
+  /* MAY be used for:                                                  */
+  /*   primary actions, links, focus rings, selected states,           */
+  /*   active states, and non-semantic emphasis.                       */
+  /*                                                                   */
+  /* MUST NOT independently communicate:                               */
+  /*   verified evidence, warning, limitation, failure, availability,  */
+  /*   or trust.                                                       */
+  /*                                                                   */
+  /* Every one of those meanings belongs to the status colours below,  */
+  /* and each must ALWAYS be paired with a glyph and/or an explicit    */
+  /* text label — so meaning survives greyscale, colour blindness and  */
+  /* a chrome accent that looks like all of them at once.              */
   /* ---------------------------------------------------------------- */
   --accent-primary: #cdd3da;
   --accent-primary-hover: #f2f4f7;
@@ -96,8 +106,10 @@
   /* Text placed ON the accent (e.g. inside a filled button). */
   --text-on-accent: #08090b;
 
-  /* Status accents. Each is always paired with a glyph or label so
-     meaning never depends on colour alone. */
+  /* Status accents — where ALL semantic meaning now lives.
+     Each is always paired with a glyph and/or an explicit text label, so
+     meaning never depends on colour alone. The chrome accent must never
+     stand in for any of these. */
   --accent-positive: #5fde96; /* verified / in stock / confirmed evidence */
   --accent-warning: #e8b44c; /* provisional, snapshot, awaiting evidence */
   --accent-critical: #f0776a; /* unavailable, withdrawn, failed */

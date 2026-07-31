@@ -24,6 +24,9 @@ import { SUPERSEDED_REFUSALS } from "../src/content/commerce/destinations";
 import { SerpApiAmazonProvider, SERPAPI_SECRET_REF, priceToMinor, toAttributes, toBuyingOptions } from "../src/lib/providers/serpapi-amazon";
 import { MAX_DAILY_EXCEPTIONS, MONTHLY_CREDIT_CEILING, monthlyCost, planRefresh, type ExceptionReason } from "../src/lib/providers/refresh-policy";
 import { attributeSignals } from "../src/lib/providers/marketplace-attributes";
+import { buyNew, gate, matchIdentity, runRefresh } from "../src/lib/providers/refresh-service";
+import { AWAITING_DISCOVERY, EXPECTED_IDENTITIES } from "../src/lib/providers/expected-identity";
+import type { BuyingOption } from "../src/lib/providers/amazon-provider";
 import { AMAZON_ASSOCIATE_TAG, AMAZON_ASSOCIATE_TAG_STATUS, amazonDestination } from "../src/lib/site";
 import { ACTIVE_PRODUCTS, CATALOGUE_WITHDRAWALS, catalogueStatusOf, productEditorialById } from "../src/content/products";
 import { deriveLedger } from "../src/content/evidence/derive";
@@ -935,6 +938,215 @@ describe("SerpApi discovery run — accepted, refused, accounted", () => {
   it("adds no affiliate tag to anything the run produced", () => {
     for (const d of DESTINATIONS) {
       expect(d.destinationUrl ?? "").not.toContain("tag=");
+    }
+  });
+});
+
+describe("scheduled refresh — identity matching", () => {
+  const listing = (attrs: Partial<Record<string, string>>, opts: Partial<{ price: number; stock: string; seller: string; delivery: string; condition: string }> = {}) => ({
+    asin: "B0TEST0001",
+    title: opts.condition === "titleonly" ? "2026 WYBOT C1 Cordless Robotic Pool Vacuum" : "Test listing",
+    buyingOptions: [{
+      condition: (opts.condition === "used" ? "used" : "new") as "new" | "used",
+      priceMinor: opts.price ?? 19900,
+      currency: "USD",
+      stockWording: opts.stock ?? "In Stock",
+      deliveryWording: opts.delivery ?? "FREE delivery Monday",
+      sellerWording: opts.seller ?? "SomeSeller",
+      returnsWording: null,
+    }],
+    attributes: { brandName: null, modelName: null, modelNumber: null, manufacturerPartNumber: null,
+      manufacturer: null, upc: null, other: {}, ...attrs },
+    imageUrls: [], videoCount: 0, providerId: "serpapi" as const, retrievedOn: "2026-08-01", notFound: false,
+  });
+  const wybot = { productId: "prod-wybot-c1", asin: "B0TEST0001", brand: "WYBOT",
+    modelTokens: ["c1"], denyTokens: ["c1 plus", "c1 pro", "c1 max"], lastCheckedOn: null };
+
+  it("refuses a sibling even when the title says otherwise", () => {
+    // The exact failure from the discovery run: title "2026 WYBOT C1",
+    // details table "C1 PLUS". The title is never consulted.
+    const m = matchIdentity(wybot, listing({ brandName: "WYBOT", modelName: "C1 PLUS", modelNumber: "C1 PLUS" }, { condition: "titleonly" }));
+    expect(m.confirmed).toBe(false);
+    expect(m.evidence).toContain("SIBLING MODEL");
+  });
+
+  it("confirms the base model on the structured fields", () => {
+    const m = matchIdentity(wybot, listing({ brandName: "WYBOT", modelName: "C1", modelNumber: "C1" }));
+    expect(m.confirmed).toBe(true);
+    expect(m.evidence).toContain("not the title");
+  });
+
+  it("refuses a listing whose own fields disagree", () => {
+    // model_name "Scuba S1 2026" alongside model_number "X5 Pro 2026".
+    const s1 = { productId: "prod-aiper-scuba-s1", asin: "B0TEST0001", brand: "AIPER",
+      modelTokens: ["scuba s1"], denyTokens: ["scuba v3"], lastCheckedOn: null };
+    const m = matchIdentity(s1, listing({ brandName: "AIPER", modelName: "Scuba S1 2026", modelNumber: "X5 Pro 2026" }));
+    expect(m.confirmed).toBe(false);
+    expect(m.evidence).toContain("SELF-CONTRADICTORY");
+  });
+
+  it("refuses a brand mismatch outright", () => {
+    const m = matchIdentity(wybot, listing({ brandName: "Aiper", modelName: "C1" }));
+    expect(m.confirmed).toBe(false);
+    expect(m.evidence).toContain("Brand mismatch");
+  });
+});
+
+describe("scheduled refresh — publication gates", () => {
+  const base = { productId: "p", asin: "B0TEST0001", brand: "WYBOT", modelTokens: ["c1"], denyTokens: [], lastCheckedOn: null };
+  const ok = { confirmed: true, evidence: "matched" };
+  const mk = (o: Partial<BuyingOption> | null, notFound = false) => ({
+    asin: "B0TEST0001", title: "t",
+    // `null` means a listing with no buying option at all.
+    buyingOptions: o === null ? [] : [{
+      condition: "new" as const, priceMinor: 19900, currency: "USD", stockWording: "In Stock",
+      deliveryWording: "FREE delivery Monday", sellerWording: "SomeSeller", returnsWording: null, ...o }],
+    attributes: { brandName: "WYBOT", modelName: "C1", modelNumber: "C1", manufacturerPartNumber: null,
+      manufacturer: null, upc: null, other: {} },
+    imageUrls: [], videoCount: 0, providerId: "serpapi" as const, retrievedOn: "2026-08-01", notFound,
+  });
+
+  it("passes a complete listing", () => {
+    expect(gate(base, mk({}), ok)).toBeNull();
+  });
+
+  it("refuses a missing listing, a used-only listing and a priceless one", () => {
+    expect(gate(base, mk({}, true), ok)).toContain("does not exist");
+    expect(gate(base, mk(null), ok)).toContain("new-condition");
+    expect(gate(base, mk({ condition: "used" }), ok)).toContain("new-condition");
+    expect(gate(base, mk({ priceMinor: null }), ok)).toContain("No buy-box price");
+  });
+
+  it("refuses an unnamed seller, because the returns route follows the seller", () => {
+    expect(gate(base, mk({ sellerWording: null }), ok)).toContain("returns route");
+  });
+
+  it("refuses whatever identity matching refused", () => {
+    expect(gate(base, mk({}), { confirmed: false, evidence: "SIBLING MODEL: it is a C1 PLUS" })).toContain("C1 PLUS");
+  });
+
+  it("takes the new option and never the used one", () => {
+    const both = mk({});
+    both.buyingOptions.push({ condition: "used", priceMinor: 9900, currency: "USD",
+      stockWording: "Only 1 left", deliveryWording: "FREE", sellerWording: "X", returnsWording: null });
+    expect(buyNew(both)!.priceMinor).toBe(19900);
+  });
+});
+
+describe("scheduled refresh — run behaviour", () => {
+  const provider = (listing: unknown, credits = 1) => ({
+    id: "serpapi" as const,
+    getListing: async () => ({ ok: true, data: listing as never, skipped: null, detail: "", creditsUsed: credits }),
+    search: async () => ({ ok: true, data: [], skipped: null, detail: "", creditsUsed: 1 }),
+    remainingCredits: async () => 198,
+  });
+  const good = {
+    asin: "B0TEST0001", title: "WYBOT C1",
+    buyingOptions: [{ condition: "new" as const, priceMinor: 39999, currency: "USD", stockWording: "In Stock",
+      deliveryWording: "FREE delivery Monday", sellerWording: "WybotDirect", returnsWording: null }],
+    attributes: { brandName: "WYBOT", modelName: "C1", modelNumber: "C1", manufacturerPartNumber: null,
+      manufacturer: null, upc: null, other: {} },
+    imageUrls: [], videoCount: 0, providerId: "serpapi" as const, retrievedOn: "2026-08-08", notFound: false,
+  };
+  const expected = [{ productId: "prod-wybot-c1", asin: "B0TEST0001", brand: "WYBOT",
+    modelTokens: ["c1"], denyTokens: ["c1 plus"], lastCheckedOn: null }];
+
+  it("a dry run writes nothing and spends nothing", async () => {
+    const r = await runRefresh({ provider: provider(good), expected, today: new Date("2026-08-08"),
+      runDate: "2026-08-08", scope: "dry_run", creditsUsedThisMonth: 0, dryRun: true, runId: "run-dry" });
+    expect(r.dryRun).toBe(true);
+    expect(r.creditsUsed).toBe(0);
+    expect(r.observations).toEqual([]);
+    expect(r.notes).toContain("Nothing was written");
+  });
+
+  it("accepts a listing that passes every gate", async () => {
+    const r = await runRefresh({ provider: provider(good), expected, today: new Date("2026-08-08"),
+      runDate: "2026-08-08", scope: "weekly", creditsUsedThisMonth: 0, dryRun: false, runId: "run-w" });
+    expect(r.status).toBe("ok");
+    expect(r.creditsUsed).toBe(1);
+    expect(r.observations[0].accepted).toBe(true);
+    expect(r.observations[0].priceMinor).toBe(39999);
+    expect(r.observations[0].sellerWording).toBe("WybotDirect");
+  });
+
+  it("records a suppressed observation WITHOUT a price", async () => {
+    const sibling = { ...good, attributes: { ...good.attributes, modelName: "C1 PLUS", modelNumber: "C1 PLUS" } };
+    const r = await runRefresh({ provider: provider(sibling), expected, today: new Date("2026-08-08"),
+      runDate: "2026-08-08", scope: "weekly", creditsUsedThisMonth: 0, dryRun: false, runId: "run-w2" });
+    const o = r.observations[0];
+    expect(o.accepted).toBe(false);
+    // What it SAW is kept; what it would have published is not.
+    expect(o.priceMinor).toBeNull();
+    expect(o.modelNumber).toBe("C1 PLUS");
+    expect(o.suppressionReason).toContain("SIBLING");
+  });
+
+  it("stops at the ceiling and records the skip rather than spending", async () => {
+    const r = await runRefresh({ provider: provider(good), expected, today: new Date("2026-08-08"),
+      runDate: "2026-08-08", scope: "weekly", creditsUsedThisMonth: MONTHLY_CREDIT_CEILING,
+      dryRun: false, runId: "run-w3" });
+    expect(r.ceilingReached).toBe(true);
+    expect(r.creditsUsed).toBe(0);
+    expect(r.observations).toEqual([]);
+    expect(r.skips[0].reason).toBe("credit_ceiling_reached");
+    expect(r.status).toBe("skipped");
+  });
+
+  it("records a provider failure instead of dropping it", async () => {
+    const broken = { ...provider(good), getListing: async () => ({ ok: false, data: null, skipped: "provider_error" as const, detail: "502", creditsUsed: 1 }) };
+    const r = await runRefresh({ provider: broken, expected, today: new Date("2026-08-08"),
+      runDate: "2026-08-08", scope: "weekly", creditsUsedThisMonth: 0, dryRun: false, runId: "run-w4" });
+    expect(r.status).toBe("partial");
+    expect(r.skips[0].reason).toBe("provider_error");
+    expect(r.skips[0].detail).toBe("502");
+  });
+
+  it("skips a product that is not yet due", async () => {
+    const fresh = [{ ...expected[0], lastCheckedOn: "2026-08-07" }];
+    const r = await runRefresh({ provider: provider(good), expected: fresh, today: new Date("2026-08-08"),
+      runDate: "2026-08-08", scope: "weekly", creditsUsedThisMonth: 0, dryRun: false, runId: "run-w5" });
+    expect(r.creditsUsed).toBe(0);
+    expect(r.skips[0].reason).toBe("not_due_yet");
+  });
+});
+
+describe("scheduled refresh — wiring", () => {
+  it("carries the cron schedule, and says why it is not active", () => {
+    // The triggers are commented out because Cloudflare allows 5 cron triggers
+    // per ACCOUNT and all 5 belong to other workers. That is an account limit,
+    // not a defect, and the config must keep both the schedule and the reason
+    // so activating it later is uncommenting rather than rediscovering.
+    const wt = readFileSync("apps/web/wrangler.toml", "utf8");
+    expect(wt).toContain("0 3 * * 1");
+    expect(wt).toContain("0 4 * * *");
+    expect(wt).toMatch(/5 cron triggers per account/i);
+    expect(wt).toContain("content-engine");
+  });
+
+  it("exports scheduled beside fetch, without changing request handling", () => {
+    const entry = readFileSync("apps/web/src/worker-entry.ts", "utf8");
+    expect(entry).toContain("scheduled(");
+    expect(entry).toContain("astro.default.fetch");
+  });
+
+  it("names the secret and never a value", () => {
+    const entry = readFileSync("apps/web/src/worker-entry.ts", "utf8");
+    expect(entry).toContain("SERPAPI_API_KEY");
+    expect(entry).not.toMatch(/[a-f0-9]{40,}/);
+  });
+
+  it("gives every product an identity expectation with deny tokens", () => {
+    for (const e of EXPECTED_IDENTITIES) {
+      expect(e.modelTokens.length).toBeGreaterThan(0);
+      // Deny tokens are the half that actually catches siblings.
+      expect(e.denyTokens.length).toBeGreaterThan(0);
+      expect(e.asin).toMatch(/^B0[A-Z0-9]{8}$/);
+    }
+    // Products with no confirmed ASIN need discovery, not a refresh.
+    expect(AWAITING_DISCOVERY).toContain("prod-wybot-c1");
+    for (const id of AWAITING_DISCOVERY) {
+      expect(EXPECTED_IDENTITIES.some((e) => e.productId === id)).toBe(false);
     }
   });
 });

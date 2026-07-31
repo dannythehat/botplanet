@@ -6,6 +6,12 @@ import cloudflare from "@astrojs/cloudflare";
 // (no React SSR on the worker).
 export default defineConfig({
   output: "server",
-  adapter: cloudflare({ platformProxy: { enabled: true } }),
+  // The adapter's own entry exports only `fetch`. A cron trigger needs
+  // `scheduled`, so it is pointed at a wrapper that re-exports Astro's handler
+  // untouched and adds that one export. Request handling is unchanged.
+  adapter: cloudflare({
+    platformProxy: { enabled: true },
+    workerEntryPoint: { path: "./src/worker-entry.ts", namedExports: ["scheduledRefresh"] },
+  }),
   site: "https://botplanet.io",
 });

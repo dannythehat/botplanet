@@ -27,6 +27,35 @@ id = "0fc715f587504227a21a131e0ce28f47"
 binding = "MEDIA"
 bucket_name = "botplanet-media"
 
+# --- Scheduled offer refresh (Job 10 operational addendum) ---
+#
+# Times are UTC. Europe/Sofia is UTC+3 in summer, so 03:00 UTC is 06:00 local —
+# before anyone is reading the site, and well clear of Amazon's own overnight
+# price churn.
+#
+# Weekly sweeps the active catalogue; daily serves ONLY the capped exception
+# list, and the planner refuses anything not actually due, so the daily trigger
+# costs nothing on a day with no exceptions.
+# BLOCKED BY AN ACCOUNT LIMIT, NOT BY THIS CODE.
+#
+# Cloudflare allows 5 cron triggers per account and all 5 are already in use by
+# other workers on this account:
+#
+#   content-engine-draft      30 18 * * *  and  30 6 * * *
+#   content-engine-ingest      0 18 * * *  and   0 6 * * *
+#   content-engine-heartbeat   0 5 * * *
+#
+# Deploying with these lines active fails with error 10072. Freeing a slot means
+# removing a trigger from one of those workers, which belongs to a different
+# project and is the owner's decision, not something to take unilaterally.
+#
+# Everything else is in place: the scheduled() handler ships in the Worker, the
+# D1 tables exist, and /api/admin/refresh runs the identical code path on
+# demand. Uncomment to activate the moment a slot is free.
+#
+# [triggers]
+# crons = ["0 3 * * 1", "0 4 * * *"]
+
 [observability]
 enabled = true
 
