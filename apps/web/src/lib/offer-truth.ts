@@ -12,7 +12,7 @@
  * equivalent approved offers, and even then it is read from D1's private column
  * by the caller and passed in; this module never sees a rate.
  */
-import { PRODUCTS } from "../content/products";
+import { PRODUCTS, catalogueStatusOf } from "../content/products";
 import { buildReport } from "./evidence-report";
 import { WARRANTY_NOT_CONFIRMED } from "./warranty";
 import { DESTINATIONS, REDIRECT_KEYS, REJECTED_CANDIDATES, destinationFor } from "../content/commerce/destinations";
@@ -124,6 +124,10 @@ export function buildOffers(today = new Date(AS_AT)): Offer[] {
   const offers: Offer[] = [];
 
   for (const p of Object.values(PRODUCTS)) {
+    // A product withdrawn from the active catalogue carries no offer at all.
+    // It keeps its page and its evidence; what it loses is the ability to be
+    // sold, which is the whole meaning of the withdrawal.
+    if (catalogueStatusOf(p.productId) !== "active") continue;
     const row = report.products.find((r) => r.productId === p.productId);
 
     for (const r of RETAILERS) {
@@ -435,6 +439,7 @@ export function validateOffers(offers = buildOffers()): OfferIssue[] {
 
   // Every product should be reachable somehow, even if only by a fallback click.
   for (const p of Object.values(PRODUCTS)) {
+    if (catalogueStatusOf(p.productId) !== "active") continue;
     if (!offers.some((o) => o.productId === p.productId)) {
       issues.push({ severity: "warning", rule: "product_has_route", detail: "no offer or fallback route", productId: p.productId });
     }

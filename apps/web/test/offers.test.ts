@@ -20,6 +20,15 @@ import {
 } from "../src/lib/offer-truth";
 import { buildOfferInventory, buildProductOfferMapping, buildProgrammeInventory, buildRejectedCandidates, buildRetailerInventory } from "../src/lib/commerce-mapping";
 import { isSafeAffiliateDestination } from "@botplanet/shared";
+import { SUPERSEDED_REFUSALS } from "../src/content/commerce/destinations";
+import { SerpApiAmazonProvider, SERPAPI_SECRET_REF, priceToMinor, toAttributes, toBuyingOptions } from "../src/lib/providers/serpapi-amazon";
+import { MAX_DAILY_EXCEPTIONS, MONTHLY_CREDIT_CEILING, monthlyCost, planRefresh, type ExceptionReason } from "../src/lib/providers/refresh-policy";
+import { attributeSignals } from "../src/lib/providers/marketplace-attributes";
+import { AMAZON_ASSOCIATE_TAG, AMAZON_ASSOCIATE_TAG_STATUS, amazonDestination } from "../src/lib/site";
+import { ACTIVE_PRODUCTS, CATALOGUE_WITHDRAWALS, catalogueStatusOf, productEditorialById } from "../src/content/products";
+import { deriveLedger } from "../src/content/evidence/derive";
+
+const LEDGER_EVIDENCE = deriveLedger().evidence;
 
 const OFFERS = buildOffers();
 const REPORT = offerReport();
@@ -611,5 +620,209 @@ describe("no private data escapes", () => {
       if (!r.schemaEligible) expect(r.blockers.length).toBeGreaterThan(0);
       else expect(r.blockers).toEqual([]);
     }
+  });
+});
+
+describe("SerpApi provider — normalisation at the boundary", () => {
+  const P = (key: string | undefined) =>
+    new SerpApiAmazonProvider({ apiKey: key, today: "2026-07-31" });
+
+  it("parses money without inventing precision", () => {
+    expect(priceToMinor("$1,199.00")).toBe(119900);
+    expect(priceToMinor(1199)).toBe(119900);
+    expect(priceToMinor("Currently unavailable")).toBeNull();
+    expect(priceToMinor(null)).toBeNull();
+  });
+
+  it("keeps each buying condition separate, with its own seller", () => {
+    // The Polaris listing sells new at $1,199 and used at $934.82 under
+    // different terms. Collapsing them would quote the wrong thing.
+    const opts = toBuyingOptions(
+      {
+        buy_new: { price: "$1,199.00", stock: "In Stock", delivery: ["FREE delivery Thursday, August 6"],
+          features: { shipper_seller: { text: "In The Swim Pool Supplies" }, returns: { text: "FREE 30-day refund/replacement" } } },
+        buy_used: { price: "$934.82", stock: "Only 1 left in stock - order soon." },
+      },
+      {},
+    );
+    const n = opts.find((o) => o.condition === "new")!;
+    const u = opts.find((o) => o.condition === "used")!;
+    expect(n.priceMinor).toBe(119900);
+    expect(n.sellerWording).toBe("In The Swim Pool Supplies");
+    expect(n.returnsWording).toBe("FREE 30-day refund/replacement");
+    expect(u.priceMinor).toBe(93482);
+    expect(u.sellerWording).toBeNull();
+  });
+
+  it("passes retailer wording through verbatim rather than interpreting it", () => {
+    // The provider must not decide what "In Stock" means — one normaliser,
+    // in the offer engine, or two providers can disagree about the same page.
+    const [o] = toBuyingOptions({ buy_new: { price: "$10.00", stock: "Only 1 left in stock - order soon." } }, {});
+    expect(o.stockWording).toBe("Only 1 left in stock - order soon.");
+    expect(normaliseStock(o.stockWording)).toBe("low_stock");
+  });
+
+  it("quarantines seller-entered specs away from the listing's facts", () => {
+    const attrs = toAttributes({ brand_name: "Polaris", model_name: "FREEDOM", model_number: "FFREEDOM",
+      charging_time: "4.5 hours", manufacturer_warranty_description: "2-Year" });
+    expect(attrs.modelNumber).toBe("FFREEDOM");
+    // The contradicting values are present but held in `other`, never promoted.
+    expect(attrs.other.charging_time).toBe("4.5 hours");
+    expect(attrs.other.manufacturer_warranty_description).toBe("2-Year");
+  });
+
+  it("refuses to spend, and says so, with no key or no credits", async () => {
+    const none = await P(undefined).getListing("B0BX9DJS7R");
+    expect(none.ok).toBe(false);
+    expect(none.skipped).toBe("no_credentials");
+    expect(none.creditsUsed).toBe(0);
+
+    const capped = new SerpApiAmazonProvider({ apiKey: "x", today: "2026-07-31", mayspend: () => false });
+    const r = await capped.getListing("B0BX9DJS7R");
+    expect(r.skipped).toBe("credit_ceiling_reached");
+    expect(r.creditsUsed).toBe(0);
+  });
+
+  it("names the secret rather than carrying a value", () => {
+    expect(SERPAPI_SECRET_REF).toBe("SERPAPI_API_KEY");
+    expect(SERPAPI_SECRET_REF).toMatch(/^[A-Z0-9_]+$/);
+  });
+});
+
+describe("refresh cadence and the credit ceiling", () => {
+  const today = new Date("2026-08-15T00:00:00Z");
+  const c = (productId: string, lastCheckedOn: string | null, exception: ExceptionReason | null = null) =>
+    ({ productId, asin: "B0TEST0001", lastCheckedOn, exception });
+
+  it("keeps the plan inside the monthly allowance", () => {
+    // Daily for everything is 300 a month against a 250 plan — the cadence
+    // that looks most thorough is the one that silently stops working.
+    expect(monthlyCost(10, 10)).toBeGreaterThan(250);
+    expect(monthlyCost(10, 0)).toBeLessThan(MONTHLY_CREDIT_CEILING);
+    expect(monthlyCost(10, MAX_DAILY_EXCEPTIONS)).toBeLessThanOrEqual(MONTHLY_CREDIT_CEILING);
+  });
+
+  it("refreshes the catalogue weekly and exceptions daily", () => {
+    const { decisions } = planRefresh(
+      [c("a", "2026-08-14"), c("b", "2026-08-14", "unresolved_identity"), c("d", "2026-08-01")],
+      { today, creditsUsedThisMonth: 0 },
+    );
+    const by = (id: string) => decisions.find((d) => d.productId === id)!;
+    expect(by("a").cadence).toBe("weekly");
+    expect(by("a").due).toBe(false);
+    expect(by("b").cadence).toBe("daily");
+    expect(by("b").due).toBe(true);
+    expect(by("d").due).toBe(true);
+  });
+
+  it("caps the exception list so it cannot become the schedule", () => {
+    const many = Array.from({ length: 9 }, (_, i) => c(`p${i}`, "2026-08-14", "active_investigation"));
+    const { decisions } = planRefresh(many, { today, creditsUsedThisMonth: 0 });
+    expect(decisions.filter((d) => d.cadence === "daily")).toHaveLength(MAX_DAILY_EXCEPTIONS);
+    // The rest are not abandoned — they drop to weekly.
+    expect(decisions.filter((d) => d.cadence === "weekly")).toHaveLength(9 - MAX_DAILY_EXCEPTIONS);
+  });
+
+  it("records a skipped run at the ceiling instead of failing quietly", () => {
+    const { decisions, plannedCredits, ceilingReached } = planRefresh(
+      [c("a", null), c("b", null)],
+      { today, creditsUsedThisMonth: MONTHLY_CREDIT_CEILING },
+    );
+    expect(ceilingReached).toBe(true);
+    expect(plannedCredits).toBe(0);
+    for (const d of decisions) {
+      expect(d.due).toBe(true);
+      expect(d.skipped).toBe("credit_ceiling_reached");
+      expect(d.reason).toContain("ceiling");
+    }
+  });
+});
+
+describe("marketplace attributes never become evidence", () => {
+  const ATTRS = { brandName: null, modelName: null, modelNumber: null, manufacturerPartNumber: null,
+    manufacturer: null, upc: null,
+    other: { charging_time: "4.5 hours", manufacturer_warranty_description: "2-Year", colour_of_box: "blue" } };
+
+  it("flags a conflict with manufacturer evidence and changes nothing", () => {
+    const sig = attributeSignals("prod-polaris-freedom", "B0BX9DJS7R", ATTRS, (f) =>
+      f === "chargeTimeHrs"
+        ? { value: "charges in only 4 hours", hasManufacturerEvidence: true }
+        : { value: null, hasManufacturerEvidence: false });
+    const charge = sig.find((s) => s.attributeKey === "charging_time")!;
+    expect(charge.effect).toBe("conflict_flagged_for_review");
+    expect(charge.needsReview).toBe(true);
+    expect(charge.note).toContain("ledger is unchanged");
+  });
+
+  it("cannot populate a suppressed field on its own", () => {
+    // Warranty is suppressed for the Polaris. A seller typing "2-Year" into
+    // Amazon does not make it true.
+    const sig = attributeSignals("prod-polaris-freedom", "B0BX9DJS7R", ATTRS, () => ({ value: null, hasManufacturerEvidence: false }));
+    const warranty = sig.find((s) => s.attributeKey === "manufacturer_warranty_description")!;
+    expect(warranty.effect).toBe("insufficient_to_populate");
+  });
+
+  it("allows weak corroboration but never for warranty", () => {
+    const agree = attributeSignals("p", "B0", { ...ATTRS, other: { capacity: "4 liters" } }, () => ({ value: "4L", hasManufacturerEvidence: true }));
+    expect(agree[0].effect).toBe("weak_corroboration");
+    const warr = attributeSignals("p", "B0", { ...ATTRS, other: { warranty_type: "Limited" } }, () => ({ value: "Limited", hasManufacturerEvidence: true }));
+    expect(warr[0].effect).toBe("recorded_only");
+  });
+
+  it("writes nothing into the Job 8 ledger", () => {
+    // The structural guarantee: no evidence record may cite an Amazon
+    // attribute as its source.
+    for (const e of LEDGER_EVIDENCE) {
+      expect(e.storedValue === "4.5 hours").toBe(false);
+    }
+  });
+});
+
+describe("no unverified affiliate tag reaches a customer", () => {
+  it("withholds the tag until the account is evidenced", () => {
+    expect(AMAZON_ASSOCIATE_TAG).toBeNull();
+    expect(AMAZON_ASSOCIATE_TAG_STATUS).toContain("unverified");
+  });
+
+  it("builds a clean outbound URL", () => {
+    expect(amazonDestination("https://www.amazon.com/dp/B0BX9DJS7R")).toBe("https://www.amazon.com/dp/B0BX9DJS7R");
+    expect(amazonDestination("https://www.amazon.com/s?k=x")).not.toContain("tag=");
+  });
+
+  it("leaves no tag literal in the redirect route", () => {
+    const route = readFileSync("apps/web/src/pages/go/[key].ts", "utf8");
+    expect(route).not.toContain("botplanet-20");
+    expect(route).toContain("amazonDestination");
+  });
+});
+
+describe("Dolphin Premier is withdrawn but not erased", () => {
+  it("carries no offer and no buy link", () => {
+    expect(catalogueStatusOf("prod-dolphin-premier")).toBe("historical_candidate");
+    expect(OFFERS.some((o) => o.productId === "prod-dolphin-premier")).toBe(false);
+  });
+
+  it("keeps its record, its page and the reason it was withdrawn", () => {
+    expect(productEditorialById("prod-dolphin-premier")).toBeDefined();
+    const w = CATALOGUE_WITHDRAWALS["prod-dolphin-premier"];
+    expect(w.on).toBe("2026-07-31");
+    expect(w.reason).toMatch(/candidate_under_review/);
+    expect(w.reason).toMatch(/no listing|no US retail destination/i);
+  });
+
+  it("substitutes no successor in its place", () => {
+    expect(Object.keys(ACTIVE_PRODUCTS)).toHaveLength(9);
+    expect(Object.values(ACTIVE_PRODUCTS).some((p) => /premier|proteus/i.test(p.slug))).toBe(false);
+  });
+});
+
+describe("an overturned refusal stays in the audit history", () => {
+  it("moves the disproved Betta refusal rather than deleting it", () => {
+    const s = SUPERSEDED_REFUSALS.find((x) => x.productId === "prod-betta-se-plus")!;
+    expect(s.originalReason).toContain("View newer model");
+    expect(s.disprovedBy).toContain("Betta-SE-Plus");
+    expect(s.supersededOn).toBe("2026-07-31");
+    // And it is no longer counted as a live refusal.
+    expect(REJECTED_CANDIDATES.some((c) => c.productId === "prod-betta-se-plus" && c.rule === "different_generation")).toBe(false);
   });
 });

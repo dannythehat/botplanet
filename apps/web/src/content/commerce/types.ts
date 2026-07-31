@@ -185,6 +185,16 @@ export type ShippingState =
 export type OfferSource =
   /** Approved programme API, machine-read. */
   | "programme_api"
+  /**
+   * A retailer's own page, relayed verbatim by an approved aggregator.
+   *
+   * SerpApi reads the Amazon listing and hands back its fields. That is the
+   * retailer speaking, faithfully repeated — not the retailer speaking to us
+   * directly, and not a third party's opinion of the retailer. It therefore
+   * ranks below the Creators API, which is Amazon itself, and above a human
+   * check, which is accurate at one instant and then ages.
+   */
+  | "retailer_api_via_aggregator"
   /** Approved product feed. */
   | "product_feed"
   /** A human read the retailer page on a recorded date. */
@@ -199,6 +209,12 @@ export const FRESHNESS_WINDOW_DAYS: Record<OfferSource, number> = {
   // A feed or API refreshes itself, so it may claim currency for longer.
   programme_api: 2,
   product_feed: 7,
+  /**
+   * A week. The relay re-reads the live page on demand, so it does not drift
+   * the way a written-down figure does — but it is a scheduled snapshot rather
+   * than a live call at render time, so it still expires.
+   */
+  retailer_api_via_aggregator: 7,
   /**
    * A human check gets a MONTH, not a few days.
    *

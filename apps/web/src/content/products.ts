@@ -620,6 +620,52 @@ export const PRODUCTS: Record<string, ProductEditorial> = Object.fromEntries(
   Object.entries(RAW).map(([slug, r]) => [slug, { ...r, productId: PRODUCT_ID[slug] ?? `prod-${slug}` }]),
 ) as Record<string, ProductEditorial>;
 
+/**
+ * CATALOGUE STATUS — which products may be sold and recommended.
+ *
+ * A product is not deleted when it leaves the active catalogue. Its record,
+ * its evidence and its verification history stay exactly where they are, so
+ * the reasoning remains auditable and a URL that was published does not become
+ * a 404. What changes is what BotPlanet is willing to DO with it.
+ *
+ * Dolphin Premier is withdrawn on two independent findings:
+ *   - Job 8 recorded it `candidate_under_review` on evidence grounds; its
+ *     manual is a "Classic 5 / Top 5" document that does not name the model;
+ *   - the owner searched Amazon US in a browser and found no listing at all,
+ *     so there is no US retail destination for it.
+ *
+ * A successor is NOT substituted here. Any replacement becomes its own product
+ * record and must pass the pre-Job-11 reconciliation like anything else —
+ * quietly swapping a different machine in behind the same name is precisely
+ * how a catalogue starts lying.
+ */
+export type CatalogueStatus =
+  /** Sellable and recommendable. */
+  | "active"
+  /** Kept for the record: no offers, no recommendations, no comparisons. */
+  | "historical_candidate";
+
+export const CATALOGUE_STATUS: Record<string, CatalogueStatus> = {
+  "prod-dolphin-premier": "historical_candidate",
+};
+
+export const catalogueStatusOf = (productId: string): CatalogueStatus =>
+  CATALOGUE_STATUS[productId] ?? "active";
+
+/** Why a product left the active catalogue, kept so the decision is traceable. */
+export const CATALOGUE_WITHDRAWALS: Record<string, { on: string; reason: string }> = {
+  "prod-dolphin-premier": {
+    on: "2026-07-31",
+    reason:
+      "Withdrawn from the active launch catalogue. Two independent findings: Job 8 holds it as candidate_under_review because the only manual available covers 'Classic 5 / Top 5' rather than the Premier, and a browser search of Amazon US found no listing, so there is no US retail destination. The record is retained as a historical candidate — non-commercial, not recommendable — and no successor has been substituted.",
+  },
+};
+
+/** The products that may carry an offer or be recommended. */
+export const ACTIVE_PRODUCTS: Record<string, ProductEditorial> = Object.fromEntries(
+  Object.entries(PRODUCTS).filter(([, p]) => catalogueStatusOf(p.productId) === "active"),
+);
+
 /** Lookup by route slug. */
 export const productEditorial = (slug: string): ProductEditorial | undefined => PRODUCTS[slug];
 /** Lookup by stable canonical productId (the D1 join key). */

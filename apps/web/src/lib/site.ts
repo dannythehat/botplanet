@@ -25,8 +25,34 @@ export const SITE = {
   emailFrom: "BotPlanet <recommendations@botplanet.io>",
 } as const;
 
-/** Amazon Associates US tracking tag (public — appears in outbound links). */
-export const AMAZON_ASSOCIATE_TAG = "botplanet-20";
+/**
+ * Amazon Associates US tracking tag.
+ *
+ * WITHHELD. The tag `botplanet-20` was carried on every outbound Amazon link,
+ * but BotPlanet has no evidenced, approved Associates account and no
+ * confirmation that this tag is ours. Both failure modes are real: appending a
+ * tag that belongs to somebody else sends them our commission, and tagging
+ * traffic on an unapproved account is exactly what gets an application refused.
+ *
+ * So it is null until account approval AND ownership are evidenced. Links still
+ * work — a customer reaching the right product page is the point, and the tag
+ * only decides who gets paid. `amazonDestination()` is the single place that
+ * decides, so restoring it later is one constant, not a search across files.
+ */
+export const AMAZON_ASSOCIATE_TAG: string | null = null;
+
+/** Why the tag is withheld, shown on the internal commerce surface. */
+export const AMAZON_ASSOCIATE_TAG_STATUS =
+  "unverified / pending owner confirmation — no approved Associates account is evidenced, so no tag is appended to public destinations";
+
+/**
+ * The ONLY way an outbound Amazon URL is built. Appends the tag when there is a
+ * verified one and leaves the URL clean when there is not.
+ */
+export function amazonDestination(url: string): string {
+  if (!AMAZON_ASSOCIATE_TAG) return url;
+  return `${url}${url.includes("?") ? "&" : "?"}tag=${AMAZON_ASSOCIATE_TAG}`;
+}
 
 /** Trust pages shown in the footer. */
 export const TRUST_LINKS: { href: string; label: string }[] = [

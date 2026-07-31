@@ -209,6 +209,35 @@ export const REDIRECT_KEYS: Record<string, string> = {
  * them was this product" are different findings, and the second one is the
  * useful one when someone revisits this.
  */
+/**
+ * Refusals that were later disproved.
+ *
+ * A refusal is never deleted. Removing one erases the fact that BotPlanet once
+ * refused a destination and why, which is exactly the trail a reviewer needs —
+ * and a wrong refusal matters as much as a wrong acceptance, because it
+ * suppresses a real offer just as effectively. So an overturned refusal moves
+ * here with what disproved it, and stays.
+ */
+export interface SupersededRefusal {
+  productId: string;
+  candidate: string;
+  originalReason: string;
+  supersededOn: string;
+  disprovedBy: string;
+}
+
+export const SUPERSEDED_REFUSALS: SupersededRefusal[] = [
+  {
+    productId: "prod-betta-se-plus",
+    candidate: "ASIN B0CVMQ3XBX (suspected superseded listing)",
+    originalReason:
+      "Amazon's 'View newer model' panel on this listing points at a separate Betta SE Plus at $429.90. Amazon shows that panel only when an ASIN has been superseded, so the ASIN we hold looked like an earlier model.",
+    supersededOn: "2026-07-31",
+    disprovedBy:
+      "The listing's own details table gives Model Name, Model Number and Manufacturer Part Number all as 'Betta-SE-Plus', Brand 'Betta', Model Year 2023. The panel points at a different LISTING of the same model, not a successor. The refusal was wrong and the destination is reinstated.",
+  },
+];
+
 export const REJECTED_CANDIDATES: RejectedCandidate[] = [
   ...NO_AMAZON_DESTINATION.map(
     (productId): RejectedCandidate => ({
@@ -267,14 +296,6 @@ export const REJECTED_CANDIDATES: RejectedCandidate[] = [
       "Returned by the Amazon search for an Aiper Scuba. The A+ hero image has 'SCUBA V3' printed on the chassis, and the panels describe an AI camera, AI Navium scheduling and 7 days on one charge — none of which belongs to the S1 or the X1 we hold.",
     rule: "sibling_model",
   },
-  // A "different_generation" refusal was recorded here for ASIN B0CVMQ3XBX, on
-  // the strength of Amazon's "View newer model" panel pointing at a separate
-  // Betta SE Plus listing at $429.90. Reading the listing's own details table
-  // disproved it: Model Name, Model Number and Manufacturer Part Number are all
-  // "Betta-SE-Plus". The panel points at a different LISTING of the same model,
-  // not a successor. The refusal is withdrawn rather than left standing, since
-  // a wrong refusal suppresses a real offer just as effectively as a wrong
-  // acceptance publishes a false one.
   {
     productId: "prod-aiper-scuba-x1",
     retailerId: "ret-aiper-store",

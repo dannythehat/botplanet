@@ -8,7 +8,7 @@ import {
   type DestinationKind,
 } from "@botplanet/shared";
 import { getDb, schema } from "../../lib/db";
-import { AMAZON_ASSOCIATE_TAG } from "../../lib/site";
+import { amazonDestination } from "../../lib/site";
 import { destinationFor } from "../../content/commerce/destinations";
 import { ATTRIBUTION_HOSTS } from "../../lib/reporting";
 
@@ -52,7 +52,7 @@ export const GET: APIRoute = async ({ params, locals, request }) => {
     // itself rather than on a search page the customer has to work through.
     const exact = destinationFor(offer.productId, "ret-amazon");
     if (exact?.retailerProductId && exact.identifierKind === "asin") {
-      destination = `https://www.amazon.com/dp/${exact.retailerProductId}?tag=${AMAZON_ASSOCIATE_TAG}`;
+      destination = amazonDestination(`https://www.amazon.com/dp/${exact.retailerProductId}`);
       destinationKind = "offer_destination";
     } else {
       // No ASIN was ever captured for this product. A search link is an honest
@@ -67,7 +67,7 @@ export const GET: APIRoute = async ({ params, locals, request }) => {
           .limit(1)
       )[0];
       const q = encodeURIComponent(product?.name ?? "robotic pool cleaner");
-      destination = `https://www.amazon.com/s?k=${q}&tag=${AMAZON_ASSOCIATE_TAG}`;
+      destination = amazonDestination(`https://www.amazon.com/s?k=${q}`);
       destinationKind = "amazon_search";
     }
   } else if (!destination) {
