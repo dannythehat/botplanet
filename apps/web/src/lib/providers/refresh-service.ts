@@ -216,7 +216,7 @@ export interface RefreshDeps {
   expected: ExpectedIdentity[];
   today: Date;
   runDate: string;
-  scope: "weekly" | "daily_exception" | "manual" | "dry_run";
+  scope: "scheduled" | "weekly" | "daily_exception" | "manual" | "dry_run";
   creditsUsedThisMonth: number;
   dryRun: boolean;
   ceiling?: number;

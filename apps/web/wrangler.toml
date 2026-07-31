@@ -36,25 +36,23 @@ bucket_name = "botplanet-media"
 # Weekly sweeps the active catalogue; daily serves ONLY the capped exception
 # list, and the planner refuses anything not actually due, so the daily trigger
 # costs nothing on a day with no exceptions.
-# BLOCKED BY AN ACCOUNT LIMIT, NOT BY THIS CODE.
+# --- Scheduled offer refresh (Job 10 operational addendum) ---
 #
-# Cloudflare allows 5 cron triggers per account and all 5 are already in use by
-# other workers on this account:
+# ONE trigger, because Cloudflare allows five per ACCOUNT and four belong to
+# other workers. A slot was freed by consolidating content-engine-draft's two
+# identical triggers into one equivalent expression — same fire times, no code
+# change, since that worker ignores which trigger fired.
 #
-#   content-engine-draft      30 18 * * *  and  30 6 * * *
-#   content-engine-ingest      0 18 * * *  and   0 6 * * *
-#   content-engine-heartbeat   0 5 * * *
+# One daily firing is enough. The planner enforces the interval per product:
+# seven days for the catalogue, one for the capped exception list, and anything
+# not yet due is skipped without spending a credit. So a single trigger gives
+# the same weekly-plus-exceptions behaviour two triggers would, at about 90
+# credits a month against a 200 ceiling.
 #
-# Deploying with these lines active fails with error 10072. Freeing a slot means
-# removing a trigger from one of those workers, which belongs to a different
-# project and is the owner's decision, not something to take unilaterally.
-#
-# Everything else is in place: the scheduled() handler ships in the Worker, the
-# D1 tables exist, and /api/admin/refresh runs the identical code path on
-# demand. Uncomment to activate the moment a slot is free.
-#
-# [triggers]
-# crons = ["0 3 * * 1", "0 4 * * *"]
+# 03:00 UTC is 06:00 Europe/Sofia — before anyone is reading, and clear of
+# Amazon's overnight price churn.
+[triggers]
+crons = ["0 3 * * *"]
 
 [observability]
 enabled = true

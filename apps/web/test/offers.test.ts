@@ -1112,16 +1112,32 @@ describe("scheduled refresh — run behaviour", () => {
 });
 
 describe("scheduled refresh — wiring", () => {
-  it("carries the cron schedule, and says why it is not active", () => {
-    // The triggers are commented out because Cloudflare allows 5 cron triggers
-    // per ACCOUNT and all 5 belong to other workers. That is an account limit,
-    // not a defect, and the config must keep both the schedule and the reason
-    // so activating it later is uncommenting rather than rediscovering.
+  it("declares one active daily trigger", () => {
     const wt = readFileSync("apps/web/wrangler.toml", "utf8");
-    expect(wt).toContain("0 3 * * 1");
-    expect(wt).toContain("0 4 * * *");
-    expect(wt).toMatch(/5 cron triggers per account/i);
-    expect(wt).toContain("content-engine");
+    expect(wt).toMatch(/^\[triggers\]/m);
+    expect(wt).toMatch(/crons = \["0 3 \* \* \*"\]/);
+    // One trigger, because four of the account's five belong to other workers.
+    expect(wt).toMatch(/five per ACCOUNT/i);
+  });
+
+  it("gets both cadences from one trigger, via the planner", () => {
+    // A single daily firing yields weekly-plus-exceptions because the interval
+    // is enforced PER PRODUCT, and anything not due is skipped for free.
+    const today = new Date("2026-08-15T00:00:00Z");
+    const { decisions, plannedCredits } = planRefresh(
+      [
+        { productId: "weekly-fresh", asin: "B0TEST0001", lastCheckedOn: "2026-08-14", exception: null },
+        { productId: "weekly-due", asin: "B0TEST0002", lastCheckedOn: "2026-08-01", exception: null },
+        { productId: "exception", asin: "B0TEST0003", lastCheckedOn: "2026-08-14", exception: "unresolved_identity" },
+      ],
+      { today, creditsUsedThisMonth: 0 },
+    );
+    const by = (id: string) => decisions.find((d) => d.productId === id)!;
+    expect(by("weekly-fresh").skipped).toBe("not_due_yet");
+    expect(by("weekly-due").due).toBe(true);
+    expect(by("exception").due).toBe(true);
+    // Only the two that are actually due cost anything.
+    expect(plannedCredits).toBe(2);
   });
 
   it("exports scheduled beside fetch, without changing request handling", () => {

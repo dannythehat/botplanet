@@ -35,9 +35,19 @@ export async function scheduledRefresh(env: Env, cron: string): Promise<void> {
   const now = new Date();
   const runDate = now.toISOString().slice(0, 10);
   const startedAt = now.toISOString();
-  // The daily trigger serves only the capped exception list; the weekly one
-  // sweeps the catalogue. Both share the same ceiling.
-  const scope = cron.startsWith("0 3 * * 1") ? "weekly" : "daily_exception";
+  /*
+   * ONE TRIGGER, BOTH CADENCES.
+   *
+   * Cloudflare allows five cron triggers per account and four belong to other
+   * projects, so BotPlanet gets one. That turns out to be enough: the planner
+   * already enforces the interval PER PRODUCT — seven days for the catalogue,
+   * one for the capped exception list — so a single daily firing produces
+   * exactly the weekly-plus-exceptions behaviour that two triggers would.
+   * Anything not yet due is skipped and costs nothing.
+   *
+   * Roughly 90 credits a month at this shape, against a 200 ceiling.
+   */
+  const scope = "scheduled";
 
   try {
     const spent = await creditsUsedThisMonth(env.DB, runDate.slice(0, 7));
@@ -52,7 +62,7 @@ export async function scheduledRefresh(env: Env, cron: string): Promise<void> {
       expected: EXPECTED_IDENTITIES.map((e) => ({ ...e, lastCheckedOn: lastChecked[e.productId] ?? null })),
       today: now,
       runDate,
-      scope: scope as "weekly" | "daily_exception",
+      scope,
       creditsUsedThisMonth: spent,
       dryRun: false,
       runId: `run-${scope}-${runDate}`,
