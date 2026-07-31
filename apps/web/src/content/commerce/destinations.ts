@@ -90,6 +90,28 @@ export const DESTINATIONS: ProductDestination[] = [
 export const destinationFor = (productId: string, retailerId = "ret-amazon"): ProductDestination | undefined =>
   DESTINATIONS.find((d) => d.productId === productId && d.retailerId === retailerId);
 
+/**
+ * The LIVE /go keys, read from D1 rather than generated.
+ *
+ * These were seeded before this job and do not follow a derivable pattern —
+ * `pool-betta-seplus-amazon`, not `pool-betta-se-plus-amazon`. Generating them
+ * produced five paths that 404, which is worse than no link at all: a dead buy
+ * button looks like a broken site rather than an absent offer. The key is a
+ * fact about D1, so it is recorded here and asserted against production.
+ */
+export const REDIRECT_KEYS: Record<string, string> = {
+  "prod-aiper-scuba-s1": "pool-aiper-scubas1-amazon",
+  "prod-aiper-scuba-x1": "pool-aiper-scubax1-amazon",
+  "prod-aiper-seagull-se": "pool-aiper-seagull-amazon",
+  "prod-beatbot-aquasense-2-ultra": "pool-beatbot-ultra-amazon",
+  "prod-betta-se-plus": "pool-betta-seplus-amazon",
+  "prod-dolphin-e10": "pool-dolphin-e10-amazon",
+  "prod-dolphin-nautilus-cc-plus": "pool-dolphin-ccplus-amazon",
+  "prod-dolphin-premier": "pool-dolphin-premier-amazon",
+  "prod-polaris-freedom": "pool-polaris-freedom-amazon",
+  "prod-wybot-c1": "pool-wybot-c1-amazon",
+};
+
 /* ------------------------------------------------------------------ */
 /* Refused candidates                                                  */
 /* ------------------------------------------------------------------ */

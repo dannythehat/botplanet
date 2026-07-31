@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { PRODUCTS } from "../src/content/products";
-import { DESTINATIONS, REJECTED_CANDIDATES, destinationFor } from "../src/content/commerce/destinations";
+import { DESTINATIONS, REDIRECT_KEYS, REJECTED_CANDIDATES, destinationFor } from "../src/content/commerce/destinations";
 import { NOT_RELATIONSHIPS, PROGRAMMES, RETAILERS, approvedUsRetailers, programme, retailer, usableUsProgrammes } from "../src/content/commerce/registry";
 import { CURRENT_PRICE_STATES, FRESHNESS_WINDOW_DAYS } from "../src/content/commerce/types";
 import {
@@ -403,6 +403,22 @@ describe("/go redirect", () => {
       expect(o.redirectKey).toBeTruthy();
       expect(o.redirectKey).toMatch(/^[a-z0-9-]+$/);
     }
+  });
+
+  it("uses the recorded D1 keys rather than deriving them from the slug", () => {
+    // The seeded keys do not follow a derivable pattern — pool-betta-seplus-amazon,
+    // not pool-betta-se-plus-amazon. Deriving them produced five paths that 404,
+    // and a dead buy button reads as a broken site rather than an absent offer.
+    for (const o of OFFERS) {
+      expect(o.redirectKey).toBe(REDIRECT_KEYS[o.productId]);
+    }
+    expect(REDIRECT_KEYS["prod-betta-se-plus"]).toBe("pool-betta-seplus-amazon");
+    expect(REDIRECT_KEYS["prod-betta-se-plus"]).not.toBe("pool-betta-se-plus-amazon");
+  });
+
+  it("records a key for every launch product", () => {
+    for (const id of PRODUCT_IDS) expect(REDIRECT_KEYS[id]).toBeTruthy();
+    expect(new Set(Object.values(REDIRECT_KEYS)).size).toBe(PRODUCT_IDS.length);
   });
 
   it("carries no questionnaire answer into an outbound URL", () => {

@@ -15,7 +15,7 @@
 import { PRODUCTS } from "../content/products";
 import { buildReport } from "./evidence-report";
 import { WARRANTY_NOT_CONFIRMED } from "./warranty";
-import { DESTINATIONS, REJECTED_CANDIDATES, destinationFor } from "../content/commerce/destinations";
+import { DESTINATIONS, REDIRECT_KEYS, REJECTED_CANDIDATES, destinationFor } from "../content/commerce/destinations";
 import { PROGRAMMES, RETAILERS, programme, retailer } from "../content/commerce/registry";
 import {
   CURRENT_PRICE_STATES,
@@ -175,7 +175,8 @@ export function buildOffers(today = new Date(AS_AT)): Offer[] {
         sourceCheckedDate: dest.sourceCheckedDate,
         freshness,
         confidence: dest.confidence === "researched_exact" ? "medium" : "low",
-        redirectKey: `pool-${p.slug}-${r.id.replace(/^ret-/, "")}`,
+        // Read from the recorded D1 keys, never derived from the slug.
+        redirectKey: r.id === "ret-amazon" ? (REDIRECT_KEYS[p.productId] ?? null) : null,
         active: dest.confidence !== "none",
         suppressionReason:
           dest.confidence === "search_only"

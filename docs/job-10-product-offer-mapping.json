@@ -57,7 +57,7 @@
       "lastChecked": "2026-07-31",
       "freshness": "indicative",
       "affiliateProgramme": "prog-amazon-us",
-      "goPath": "/go/pool-dolphin-nautilus-cc-plus-amazon",
+      "goPath": "/go/pool-dolphin-ccplus-amazon",
       "schemaEligible": false,
       "blockers": [
         "no current price from an approved source",
@@ -154,7 +154,7 @@
       "lastChecked": "2026-07-31",
       "freshness": "indicative",
       "affiliateProgramme": "prog-amazon-us",
-      "goPath": "/go/pool-betta-se-plus-amazon",
+      "goPath": "/go/pool-betta-seplus-amazon",
       "schemaEligible": false,
       "blockers": [
         "no current price from an approved source",
@@ -219,7 +219,7 @@
       "lastChecked": "2026-07-31",
       "freshness": "indicative",
       "affiliateProgramme": "prog-amazon-us",
-      "goPath": "/go/pool-beatbot-aquasense-2-ultra-amazon",
+      "goPath": "/go/pool-beatbot-ultra-amazon",
       "schemaEligible": false,
       "blockers": [
         "no current price from an approved source",
@@ -251,7 +251,7 @@
       "lastChecked": "2026-07-31",
       "freshness": "indicative",
       "affiliateProgramme": "prog-amazon-us",
-      "goPath": "/go/pool-aiper-scuba-x1-amazon",
+      "goPath": "/go/pool-aiper-scubax1-amazon",
       "schemaEligible": false,
       "blockers": [
         "no current price from an approved source",
@@ -283,7 +283,7 @@
       "lastChecked": "2026-07-31",
       "freshness": "indicative",
       "affiliateProgramme": "prog-amazon-us",
-      "goPath": "/go/pool-aiper-scuba-s1-amazon",
+      "goPath": "/go/pool-aiper-scubas1-amazon",
       "schemaEligible": false,
       "blockers": [
         "no current price from an approved source",
@@ -316,7 +316,7 @@
       "lastChecked": "2026-07-31",
       "freshness": "indicative",
       "affiliateProgramme": "prog-amazon-us",
-      "goPath": "/go/pool-aiper-seagull-se-amazon",
+      "goPath": "/go/pool-aiper-seagull-amazon",
       "schemaEligible": false,
       "blockers": [
         "no current price from an approved source",
