@@ -1,0 +1,173 @@
+/* BotPlanet metallic direction — global override loaded after the core system. */
+:root {
+  --bg-void: #010203;
+  --bg-base: #050607;
+  --bg-raised: #0a0c0f;
+  --bg-sunken: #020304;
+  --surface-1: #0c0f12;
+  --surface-2: #12161b;
+  --surface-3: #1b2026;
+  --surface-inverse: #e8ebef;
+  --text-primary: #f4f6f8;
+  --text-secondary: #c2c7ce;
+  --text-tertiary: #9299a3;
+  --text-quaternary: #7d848e;
+  --text-decorative: #5f6670;
+  --text-on-inverse: #050607;
+  --border-subtle: #171b20;
+  --border-default: #2b3139;
+  --border-strong: #59616b;
+  --border-inverse: #f2f4f7;
+  --accent-primary: #c9ced5;
+  --accent-primary-hover: #f2f4f7;
+  --accent-primary-active: #979ea8;
+  --accent-primary-text: #e4e7eb;
+  --accent-primary-soft: rgba(205, 211, 218, 0.09);
+  --accent-primary-border: rgba(213, 218, 224, 0.42);
+  --text-on-accent: #08090b;
+  --accent-positive: #d6dbe1;
+  --accent-warning: #a9afb8;
+  --accent-critical: #7d838c;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.55);
+  --shadow-md: 0 16px 36px rgba(0, 0, 0, 0.62);
+  --shadow-lg: 0 34px 90px rgba(0, 0, 0, 0.72);
+}
+
+html,
+body {
+  background:
+    radial-gradient(circle at 18% -10%, rgba(218, 223, 229, 0.08), transparent 31rem),
+    radial-gradient(circle at 85% 7%, rgba(112, 119, 129, 0.07), transparent 26rem),
+    linear-gradient(180deg, #07090b 0%, #020304 42%, #050607 100%);
+  background-attachment: fixed;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.18;
+  background-image:
+    linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.014) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: linear-gradient(to bottom, #000, transparent 82%);
+  z-index: -1;
+}
+
+header.site {
+  background: rgba(4, 6, 8, 0.88) !important;
+  border-bottom: 1px solid rgba(219, 224, 230, 0.14);
+  box-shadow: inset 0 -1px 0 rgba(255,255,255,.025), 0 10px 28px rgba(0,0,0,.34);
+}
+
+.logo-full,
+.drawer-logo {
+  content: url('/logo/botplanet-metal.svg');
+  width: auto !important;
+  height: 46px !important;
+  object-fit: contain;
+  filter: drop-shadow(0 5px 12px rgba(0,0,0,.6));
+}
+
+.drawer-logo { height: 38px !important; }
+
+.btn,
+button,
+input,
+select,
+textarea {
+  border-color: rgba(202, 208, 216, 0.26);
+}
+
+.btn--primary,
+.btn--accent,
+.mega-cta {
+  color: #07090b !important;
+  background:
+    linear-gradient(180deg, #f4f5f7 0%, #bfc5cc 43%, #767e88 100%) !important;
+  border-color: #e3e6ea !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.9),
+    inset 0 -1px 0 rgba(0,0,0,.45),
+    0 9px 25px rgba(0,0,0,.42) !important;
+  text-shadow: 0 1px 0 rgba(255,255,255,.42);
+}
+
+.btn--primary:hover,
+.btn--accent:hover,
+.mega-cta:hover {
+  background: linear-gradient(180deg, #fff 0%, #d6dae0 45%, #9299a3 100%) !important;
+  transform: translateY(-1px);
+}
+
+.elevated,
+.card,
+.path,
+.cmp,
+.bm-card,
+.principle {
+  background:
+    linear-gradient(145deg, rgba(255,255,255,.035), transparent 34%),
+    linear-gradient(180deg, #11151a, #080a0d) !important;
+  border-color: rgba(207, 213, 221, 0.17) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.055),
+    0 18px 44px rgba(0,0,0,.42) !important;
+}
+
+.rule-accent,
+.marker__dot,
+.feat__label,
+.eyebrow,
+.soon-tag {
+  background: linear-gradient(90deg, #f1f3f5, #7e858f) !important;
+  color: #08090b !important;
+}
+
+.link,
+a:not(.btn):hover,
+.nav-link.active {
+  color: #f2f4f7 !important;
+}
+
+.stage,
+.pimg,
+.cat-visual,
+.hero-visual {
+  border-color: rgba(204, 210, 218, 0.15) !important;
+}
+
+/* Never allow the temporary text-heavy product placeholders to dominate public pages. */
+img[data-placeholder="true"] {
+  opacity: 0 !important;
+}
+
+[data-placeholder="true"] + *,
+.stage:has(img[data-placeholder="true"]),
+.pcard__media:has(img[data-placeholder="true"]) {
+  position: relative;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(232,235,239,.17), transparent 8%),
+    radial-gradient(ellipse at 50% 60%, rgba(137,145,156,.12), transparent 38%),
+    linear-gradient(145deg, #171b20 0%, #090b0e 52%, #1b2026 100%) !important;
+}
+
+.stage:has(img[data-placeholder="true"])::after,
+.pcard__media:has(img[data-placeholder="true"])::after {
+  content: "MEDIA PENDING";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: #aeb4bc;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .18em;
+  white-space: nowrap;
+}
+
+@media (max-width: 900px) {
+  .logo-full { height: 38px !important; max-width: 168px; }
+}
