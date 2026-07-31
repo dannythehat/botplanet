@@ -101,7 +101,9 @@ export function freshnessFor(source: OfferSource, checkedDate: string | null, to
   if (source === "researched_snapshot") return "indicative";
   const age = daysBetween(checkedDate, today);
   const window = FRESHNESS_WINDOW_DAYS[source];
-  if (age <= window / 2) return "live";
+  // "live" is reserved for something checked today; everything else inside the
+  // window is "recently checked", which is what a dated price actually is.
+  if (age <= 1) return "live";
   if (age <= window) return "recently_checked";
   return "stale";
 }
@@ -231,8 +233,12 @@ export function publicationFor(offer: Offer): OfferPublication {
   const exact = offer.destination.confidence === "verified_exact" || offer.destination.confidence === "researched_exact";
   if (!exact) blockers.push("no exact product destination — a search link is not an offer");
 
-  const priceCurrent = offer.basePriceMinor !== null && CURRENT_PRICE_STATES.includes(offer.freshness);
+  // A price may be shown only with the date it was checked beside it. That is
+  // what makes a month-old figure honest rather than a stale claim.
+  const priceCurrent =
+    offer.basePriceMinor !== null && offer.sourceCheckedDate !== null && CURRENT_PRICE_STATES.includes(offer.freshness);
   if (offer.basePriceMinor === null) blockers.push("no price from an approved source");
+  else if (offer.sourceCheckedDate === null) blockers.push("price has no check date, so it cannot be shown with one");
   else if (!priceCurrent) blockers.push(`price is ${offer.freshness}, so it may not be shown as current`);
 
   if (offer.stock.state === "unknown") blockers.push("stock state unknown — the destination resolving is not proof of stock");

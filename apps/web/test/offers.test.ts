@@ -286,14 +286,26 @@ describe("price, stock and shipping normalisation", () => {
 });
 
 describe("freshness", () => {
-  it("gives a feed a longer window than a manual check", () => {
-    expect(FRESHNESS_WINDOW_DAYS.product_feed).toBeGreaterThan(FRESHNESS_WINDOW_DAYS.manual_check);
+  it("gives a human check a month, because a shorter window means no prices at all", () => {
+    expect(FRESHNESS_WINDOW_DAYS.manual_check).toBe(30);
     expect(FRESHNESS_WINDOW_DAYS.researched_snapshot).toBe(0);
+  });
+
+  it("keeps a manual price showable for the whole month", () => {
+    expect(freshnessFor("manual_check", "2026-07-31", new Date("2026-08-20"))).toBe("recently_checked");
+    expect(freshnessFor("manual_check", "2026-07-31", new Date("2026-09-05"))).toBe("stale");
+  });
+
+  it("refuses to show a price without the date it was checked", () => {
+    const undated = { ...OFFERS.find((o) => o.basePriceMinor !== null)!, sourceCheckedDate: null };
+    const pub = publicationFor(undated);
+    expect(pub.priceShowable).toBe(false);
+    expect(pub.blockers.join(" ")).toContain("no check date");
   });
 
   it("moves through live, recently checked and stale as a source ages", () => {
     expect(freshnessFor("product_feed", "2026-07-31", new Date("2026-07-31"))).toBe("live");
-    expect(freshnessFor("product_feed", "2026-07-26", new Date("2026-07-31"))).toBe("recently_checked");
+    expect(freshnessFor("product_feed", "2026-07-29", new Date("2026-07-31"))).toBe("recently_checked");
     expect(freshnessFor("product_feed", "2026-07-01", new Date("2026-07-31"))).toBe("stale");
   });
 

@@ -199,8 +199,17 @@ export const FRESHNESS_WINDOW_DAYS: Record<OfferSource, number> = {
   // A feed or API refreshes itself, so it may claim currency for longer.
   programme_api: 2,
   product_feed: 7,
-  // A human check ages faster because nothing revisits it automatically.
-  manual_check: 3,
+  /**
+   * A human check gets a MONTH, not a few days.
+   *
+   * The earlier three-day window was unusable: it asked one person to re-check
+   * ten products every three days forever, which nobody will do, so in practice
+   * it meant no prices at all. A dated price is honest at any age provided the
+   * date is shown — "$749, checked 31 July" tells the reader exactly what they
+   * have. What is NOT honest is an undated price implying it is live, so
+   * `priceShowable` requires a check date and every surface must print it.
+   */
+  manual_check: 30,
   // A researched snapshot was never a current price and never becomes one.
   researched_snapshot: 0,
   none: 0,
