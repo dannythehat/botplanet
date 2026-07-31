@@ -169,5 +169,5 @@ img[data-placeholder="true"] {
 }
 
 @media (max-width: 900px) {
-  .logo-full { height: 38px !important; max-width: 168px; }
+  .logo-full { width: 168px !important; height: auto; }
 }

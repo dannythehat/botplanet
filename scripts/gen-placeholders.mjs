@@ -61,11 +61,11 @@ const svg = (model, brand) => {
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-hidden="true">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="0.6" y2="1">
-      <stop offset="0" stop-color="#14141b"/><stop offset="1" stop-color="#08080b"/>
+      <stop offset="0" stop-color="#12161b"/><stop offset="1" stop-color="#050607"/>
     </linearGradient>
     <radialGradient id="glow" cx="0.5" cy="0.34" r="0.55">
-      <stop offset="0" stop-color="#17c8b0" stop-opacity="0.20"/>
-      <stop offset="1" stop-color="#17c8b0" stop-opacity="0"/>
+      <stop offset="0" stop-color="#cdd3da" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#cdd3da" stop-opacity="0"/>
     </radialGradient>
   </defs>
   <rect width="${W}" height="${H}" fill="url(#bg)"/>
@@ -75,10 +75,10 @@ const svg = (model, brand) => {
   </g>
   <text x="600" y="276" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif"
         font-size="86" font-weight="700" fill="#ffffff" fill-opacity="0.90" letter-spacing="-2">${esc(initials)}</text>
-${lines.map((l, i) => `  <text x="600" y="${startY + i * 42}" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif" font-size="31" font-weight="600" fill="#f2f2f4">${esc(l)}</text>`).join("\n")}
+${lines.map((l, i) => `  <text x="600" y="${startY + i * 42}" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif" font-size="31" font-weight="600" fill="#f4f6f8">${esc(l)}</text>`).join("\n")}
   <text x="600" y="${startY + lines.length * 42 + 26}" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif"
-        font-size="19" fill="#8b8b95">BotPlanet illustration — not a photograph of this product</text>
-  <rect x="0" y="${H - 4}" width="${W}" height="4" fill="#17c8b0" fill-opacity="0.55"/>
+        font-size="19" fill="#9299a3">BotPlanet illustration — not a photograph of this product</text>
+  <rect x="0" y="${H - 4}" width="${W}" height="4" fill="#c9ced5" fill-opacity="0.5"/>
 </svg>
 `;
 };

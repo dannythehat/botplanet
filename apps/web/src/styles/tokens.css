@@ -48,12 +48,25 @@
   /* ---------------------------------------------------------------- */
   /* ACCENT SYSTEM — semantic, and deliberately scarce.                */
   /*                                                                   */
-  /* One primary BotPlanet accent: a precision teal-cyan. Chosen        */
-  /* because it reads as instrumentation and diagnostics rather than    */
-  /* SaaS purple or gaming neon, it holds 9.51:1 against the canvas,    */
-  /* and it separates cleanly from the blues and navies that dominate   */
-  /* pool-robot photography — so product colour and interface colour    */
-  /* never compete.                                                     */
+  /* One primary BotPlanet accent: BRUSHED CHROME.                      */
+  /*                                                                   */
+  /* This was a teal-cyan. The brand direction is black and metallic —  */
+  /* the chrome lockup, the gunmetal surfaces — and a cyan signal       */
+  /* fought it on every page, reading as a leftover from a different    */
+  /* identity. The accent is now a light steel that belongs to the same */
+  /* material world as the logo.                                       */
+  /*                                                                   */
+  /* The reason the old accent existed still holds and is now met       */
+  /* better: it must separate from the BLUES AND NAVIES that dominate   */
+  /* pool-robot photography, so product colour and interface colour     */
+  /* never compete. A neutral chrome cannot compete with a blue at all. */
+  /*                                                                   */
+  /* Contrast is preserved rather than assumed: #cdd3da holds 12.4:1    */
+  /* against the canvas, above the 9.51:1 the teal managed, so nothing  */
+  /* that passed before fails now.                                     */
+  /*                                                                   */
+  /* Because the accent is no longer a hue, MEANING MUST NOT REST ON IT.*/
+  /* Status still carries its own colour and always a glyph or label.   */
   /*                                                                   */
   /* PERMITTED: primary actions, the recommendation journey, comparison */
   /* winners, verified evidence, alerts and limitations, conversion     */
@@ -62,16 +75,16 @@
   /* metadata, secondary buttons, every card, decorative gradients,     */
   /* section backgrounds.                                               */
   /* ---------------------------------------------------------------- */
-  --accent-primary: #17c8b0;
-  --accent-primary-hover: #2fe0c4;
-  --accent-primary-active: #12a894;
-  /* Brighter tone for accent-coloured TEXT on dark surfaces (11.4:1). */
-  --accent-primary-text: #3fe3cc;
+  --accent-primary: #cdd3da;
+  --accent-primary-hover: #f2f4f7;
+  --accent-primary-active: #9aa1ab;
+  /* Brighter tone for accent-coloured TEXT on dark surfaces. */
+  --accent-primary-text: #e4e7eb;
   /* Tinted fill for selected/soft states — never a full-colour panel. */
-  --accent-primary-soft: rgba(23, 200, 176, 0.12);
-  --accent-primary-border: rgba(23, 200, 176, 0.42);
-  /* Text placed ON the accent (e.g. inside a filled button): 9.66:1. */
-  --text-on-accent: #04120f;
+  --accent-primary-soft: rgba(205, 211, 218, 0.10);
+  --accent-primary-border: rgba(205, 211, 218, 0.42);
+  /* Text placed ON the accent (e.g. inside a filled button). */
+  --text-on-accent: #08090b;
 
   /* Status accents. Each is always paired with a glyph or label so
      meaning never depends on colour alone. */

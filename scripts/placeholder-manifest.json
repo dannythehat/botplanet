@@ -5,7 +5,7 @@
     "src": "/media/placeholder/wybot-c1.svg",
     "width": 1200,
     "height": 750,
-    "checksum": "sha256:72ee7389155287612c3d3a05d34ea22c790d26686bc573f53186ee1a9fe7a98f"
+    "checksum": "sha256:639030b982d262b1d8199787ccc0e2a4e145e7502f66d32293015242baff5a1d"
   },
   {
     "slug": "dolphin-nautilus-cc-plus",
@@ -13,7 +13,7 @@
     "src": "/media/placeholder/dolphin-nautilus-cc-plus.svg",
     "width": 1200,
     "height": 750,
-    "checksum": "sha256:670ace4b664df38d378387cbb4a1af541c0677bce9ac97cc4272c5ca937b7b5b"
+    "checksum": "sha256:fccf9cb9a8b9060d4fd3298175bb1a7fc4939c5a0a5270b0ad7bb63f231783cd"
   },
   {
     "slug": "dolphin-premier",
@@ -21,7 +21,7 @@
     "src": "/media/placeholder/dolphin-premier.svg",
     "width": 1200,
     "height": 750,
-    "checksum": "sha256:e5e0277da9e21201a38496962acfea897d9cb630ac36a9e9cb240f8af62a99f8"
+    "checksum": "sha256:7abf3608d468cc8562f43573710789165f408c6559fbcdd2c9d68e062a7c9ab8"
   },
   {
     "slug": "polaris-freedom",
@@ -29,7 +29,7 @@
     "src": "/media/placeholder/polaris-freedom.svg",
     "width": 1200,
     "height": 750,
-    "checksum": "sha256:d330b5e1f021258de0206d8fe4a16291aa37cf39216787721b4b277578bf2b96"
+    "checksum": "sha256:92d6d2e712e260f170bfdacd8023e36befd683d596fc5e7696d19194758519fb"
   },
   {
     "slug": "betta-se-plus",
@@ -37,7 +37,7 @@
     "src": "/media/placeholder/betta-se-plus.svg",
     "width": 1200,
     "height": 750,
-    "checksum": "sha256:bbf51390f29940663356d21fa66507370833810c097887ba77f6f899b9bc45b0"
+    "checksum": "sha256:5d7b3c570592e154a1575c0f6f68e01fecce98ce036dd2f29d46f7f5cead6414"
   },
   {
     "slug": "dolphin-e10",
@@ -45,7 +45,7 @@
     "src": "/media/placeholder/dolphin-e10.svg",
     "width": 1200,
     "height": 750,
-    "checksum": "sha256:ecb62e1247447f2b23e2017de13ddeed7263b0bda3e49c932da825f8736a7f2a"
+    "checksum": "sha256:4fac086aee3ef44441e4ca9313846124a77f412fc268ee7dfe6bc658e60a2627"
   },
   {
     "slug": "beatbot-aquasense-2-ultra",
@@ -53,7 +53,7 @@
     "src": "/media/placeholder/beatbot-aquasense-2-ultra.svg",
     "width": 1200,
     "height": 750,
-    "checksum": "sha256:5aac202481f6dec96a2b9c73d694591dc268e69a8456d0abe1889b739c257153"
+    "checksum": "sha256:11f45e22479158192ff88a4393fac0e95aa6dac221a7724ebaa0d0afbc9ef503"
   },
   {
     "slug": "aiper-scuba-x1",
@@ -61,7 +61,7 @@
     "src": "/media/placeholder/aiper-scuba-x1.svg",
     "width": 1200,
     "height": 750,
-    "checksum": "sha256:0154f5b439f3dd31830a7113c0cdee0e260de49f8ec9bf058c81bd6cdc73dd48"
+    "checksum": "sha256:bacb671d946cd573e13860f511f02c378c80a643eafe0021e3cc9d88bee43230"
   },
   {
     "slug": "aiper-scuba-s1",
@@ -69,7 +69,7 @@
     "src": "/media/placeholder/aiper-scuba-s1.svg",
     "width": 1200,
     "height": 750,
-    "checksum": "sha256:002c3ef64ddf8c4535ab4adfd803b6a3d421ff3d9f0c7abeac697d96e57f5905"
+    "checksum": "sha256:e1ddc459b471fc82a06c768ce907eb2b515468db925d6c5fd8f0115f6b5c5620"
   },
   {
     "slug": "aiper-seagull-se",
@@ -77,6 +77,6 @@
     "src": "/media/placeholder/aiper-seagull-se.svg",
     "width": 1200,
     "height": 750,
-    "checksum": "sha256:3c3e7643af431fb833842d01b3ec7f979dbf7ceb6ccde621be41e0b7054ea648"
+    "checksum": "sha256:4f567305df9f18d66f72581983048f792574536d8da94c6abcadf85ff67c9832"
   }
 ]

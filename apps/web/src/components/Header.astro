@@ -24,7 +24,7 @@ const isActive = (href: string) => href === activePath;
 <header class="site" id="site-header" data-scrolled="false">
   <div class="wrap bar">
     <a class="logo" href="/" aria-label="BotPlanet — home">
-      <img src="/logo/logo-header.png" alt="BotPlanet" class="logo-full" width="208" height="40" />
+      <img src="/logo/botplanet-chrome.png" alt="BotPlanet" class="logo-full" width="760" height="229" />
     </a>
 
     <nav class="main" aria-label="Primary">
@@ -131,7 +131,7 @@ const isActive = (href: string) => href === activePath;
   <div class="drawer-scrim" id="drawer-scrim"></div>
   <div class="drawer-panel" role="dialog" aria-modal="true" aria-label="Menu">
     <div class="drawer-head">
-      <img src="/logo/logo-header.png" alt="BotPlanet" width="132" height="25" class="drawer-logo" />
+      <img src="/logo/botplanet-chrome.png" alt="BotPlanet" width="760" height="229" class="drawer-logo" />
       <button class="icon-btn" type="button" id="btn-close" aria-label="Close menu">
         <span aria-hidden="true">✕</span>
       </button>
@@ -384,12 +384,21 @@ const isActive = (href: string) => href === activePath;
     border-radius: var(--radius-xs);
   }
 
+  /*
+   * The chrome lockup carries its own glow, so roughly 15% of the image box is
+   * soft falloff rather than artwork. The box is sized generously to
+   * compensate: at 232px the visible mark reads about 60px tall in an 84px
+   * header, which is what "big enough to look deliberate" costs.
+   */
   .logo-full {
-    width: 208px;
+    width: 232px;
     height: auto;
     display: block;
-    transition: opacity var(--duration-fast) var(--ease-out);
+    transition: width var(--duration-base) var(--ease-out), opacity var(--duration-fast) var(--ease-out);
   }
+
+  /* Shrinks with the bar when the header compacts on scroll. */
+  header.site[data-scrolled="true"] .logo-full { width: 196px; }
 
   .logo:hover .logo-full { opacity: 0.82; }
   .logo:focus-visible { outline: var(--focus-ring); outline-offset: 6px; }
@@ -632,7 +641,7 @@ const isActive = (href: string) => href === activePath;
     border-bottom: 1px solid var(--border-subtle);
   }
 
-  .drawer-logo { width: 132px; height: auto; }
+  .drawer-logo { width: 176px; height: auto; }
   .drawer-cta { margin-bottom: var(--space-sm); }
 
   .drawer-group { border-top: 1px solid var(--border-subtle); padding-top: var(--space-sm); margin-top: var(--space-2xs); }
@@ -757,12 +766,12 @@ const isActive = (href: string) => href === activePath;
     nav.main, .cta { display: none; }
     .burger { display: inline-flex; }
     .bar { height: var(--header-height-compact); gap: var(--space-md); }
-    .logo-full { width: 150px; }
+    .logo-full { width: 186px; }
   }
 
   /* Very small phones (320px): tighten only, never overflow. */
   @media (max-width: 380px) {
-    .logo-full { width: 128px; }
+    .logo-full { width: 158px; }
     .head-actions { gap: var(--space-2xs); }
     .icon-btn { width: 36px; height: 36px; }
   }
