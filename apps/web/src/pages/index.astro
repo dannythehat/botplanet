@@ -11,6 +11,7 @@ import Base from "../layouts/Base.astro";
 import ProductCard from "../components/ProductCard.astro";
 import HomeHero from "../components/home/HomeHero.astro";
 import RobotSilhouette from "../components/RobotSilhouette.astro";
+import ProductImage from "../components/ProductImage.astro";
 import PoolDiagram from "../components/PoolDiagram.astro";
 import CoverageZones from "../components/diagrams/CoverageZones.astro";
 import { getDb, schema } from "../lib/db";
@@ -261,7 +262,9 @@ const schemaGraphNodes = [
         <div class="cmp__row">
           {compareSet.map((p, i) => (
             <div class="cmp__col">
-              <div class="cmp__stage stage"><RobotSilhouette variant={i + 1} /></div>
+              <div class="cmp__stage stage">
+                <ProductImage productId={p.id} placement="comparison" variant={i + 1} compact />
+              </div>
               <p class="cmp__name">{p.name}</p>
               <dl class="cmp__facts">
                 <div><dt>Power</dt><dd>{titleCase(p.powerType)}</dd></div>

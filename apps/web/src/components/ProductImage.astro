@@ -33,6 +33,13 @@ interface Props {
   priority?: boolean;
   /** Varies the fallback silhouette so a grid is not rubber-stamped. */
   variant?: number;
+  /**
+   * A slot too small to read a text-bearing placeholder in — a comparison
+   * column, for example. Real imagery still renders; a placeholder gives way to
+   * the generic silhouette, which is legible at any size and, being deliberately
+   * generic, implies nothing about the model beside it.
+   */
+  compact?: boolean;
   class?: string;
 }
 
@@ -43,10 +50,12 @@ const {
   sizes = "(min-width: 900px) 360px, (min-width: 600px) 45vw, 90vw",
   priority = false,
   variant = 0,
+  compact = false,
   class: className = "",
 } = Astro.props;
 
-const img = resolveImage(productId, placement, types);
+const resolved = resolveImage(productId, placement, types);
+const img = compact && resolved?.isPlaceholder ? null : resolved;
 
 // A srcset is only honest when derivatives actually exist. Vector assets need
 // none, and an Amazon-hosted image may not be resized by us at all.

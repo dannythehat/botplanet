@@ -514,3 +514,42 @@ describe("register handoff mapping", () => {
     for (const r of mapping.rows) expect(r.imageReadinessStatus).toBe("public_safe_placeholder_only");
   });
 });
+
+describe("compact slots", () => {
+  it("gives way to the generic silhouette rather than an illegible placeholder", () => {
+    const c = readFileSync("apps/web/src/components/ProductImage.astro", "utf8");
+    expect(c).toContain("compact && resolved?.isPlaceholder ? null : resolved");
+  });
+
+  it("still renders real imagery in a compact slot when it exists", () => {
+    // The guard keys on isPlaceholder, not on the compact flag alone, so a
+    // licensed photograph appears in a comparison column the moment one lands.
+    const c = readFileSync("apps/web/src/components/ProductImage.astro", "utf8");
+    expect(c).not.toMatch(/compact\s*\?\s*null/);
+  });
+
+  it("wires the homepage comparison preview through the registry", () => {
+    const home = readFileSync("apps/web/src/pages/index.astro", "utf8");
+    expect(home).toContain('placement="comparison"');
+    expect(home).toContain("compact");
+  });
+});
+
+describe("no unauthenticated media surface remains", () => {
+  it("removed the public media-preview page", () => {
+    expect(() => readFileSync("apps/web/src/pages/media-preview.astro", "utf8")).toThrow();
+  });
+
+  it("keeps the review surface under /admin", () => {
+    const page = readFileSync("apps/web/src/pages/admin/media.astro", "utf8");
+    expect(page).toContain("layouts/Admin.astro");
+    // The admin layout is noindex,nofollow for every page it wraps.
+    expect(readFileSync("apps/web/src/layouts/Admin.astro", "utf8")).toContain('content="noindex, nofollow"');
+  });
+
+  it("names no credential value on the review surface", () => {
+    const page = readFileSync("apps/web/src/pages/admin/media.astro", "utf8");
+    for (const re of CREDENTIAL_PATTERNS) expect(re.test(page)).toBe(false);
+    expect(page).toContain("credentialSecretRef");
+  });
+});
