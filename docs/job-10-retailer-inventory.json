@@ -1,0 +1,154 @@
+{
+  "generatedFor": "2026-07-31",
+  "total": 8,
+  "approved": 1,
+  "researchedOnly": 7,
+  "rows": [
+    {
+      "retailerId": "ret-amazon",
+      "displayName": "Amazon",
+      "website": "https://www.amazon.com",
+      "type": "marketplace",
+      "marketsServed": [
+        "us"
+      ],
+      "sellerModel": "mixed",
+      "approval": "approved",
+      "affiliateNetworks": [
+        "amazon_associates_us"
+      ],
+      "returnsUrl": "https://www.amazon.com/gp/help/customer/display.html?nodeId=GKM69DUUYKQWKWX7",
+      "warrantyRoute": "Manufacturer warranty is claimed with the manufacturer. Amazon's own returns window applies to the purchase, and a marketplace seller may set a different returns route.",
+      "lastReviewedDate": "2026-07-31",
+      "pausedReason": null,
+      "mayCarryPublicOffer": true,
+      "notes": "The only retailer with a live US commercial relationship. Seller identity varies per listing and must be recorded per offer, not assumed."
+    },
+    {
+      "retailerId": "ret-walmart",
+      "displayName": "Walmart",
+      "website": "https://www.walmart.com",
+      "type": "mass_retailer",
+      "marketsServed": [
+        "us"
+      ],
+      "sellerModel": "mixed",
+      "approval": "researched_only",
+      "affiliateNetworks": [],
+      "returnsUrl": null,
+      "warrantyRoute": "Not established — no commercial relationship, so the returns and warranty route has not been verified.",
+      "lastReviewedDate": "2026-07-31",
+      "pausedReason": null,
+      "mayCarryPublicOffer": false,
+      "notes": "Known to stock products in the launch category, but BotPlanet has no affiliate or commercial relationship. Recorded for future application; barred from carrying a public offer until one exists."
+    },
+    {
+      "retailerId": "ret-leslies",
+      "displayName": "Leslie's Pool Supplies",
+      "website": "https://lesliespool.com",
+      "type": "specialist_retailer",
+      "marketsServed": [
+        "us"
+      ],
+      "sellerModel": "retailer_owned_inventory",
+      "approval": "researched_only",
+      "affiliateNetworks": [],
+      "returnsUrl": null,
+      "warrantyRoute": "Not established — no commercial relationship, so the returns and warranty route has not been verified.",
+      "lastReviewedDate": "2026-07-31",
+      "pausedReason": null,
+      "mayCarryPublicOffer": false,
+      "notes": "Known to stock products in the launch category, but BotPlanet has no affiliate or commercial relationship. Recorded for future application; barred from carrying a public offer until one exists."
+    },
+    {
+      "retailerId": "ret-dohenys",
+      "displayName": "Doheny's",
+      "website": "https://www.doheny.com",
+      "type": "specialist_retailer",
+      "marketsServed": [
+        "us"
+      ],
+      "sellerModel": "retailer_owned_inventory",
+      "approval": "researched_only",
+      "affiliateNetworks": [],
+      "returnsUrl": null,
+      "warrantyRoute": "Not established — no commercial relationship, so the returns and warranty route has not been verified.",
+      "lastReviewedDate": "2026-07-31",
+      "pausedReason": null,
+      "mayCarryPublicOffer": false,
+      "notes": "Known to stock products in the launch category, but BotPlanet has no affiliate or commercial relationship. Recorded for future application; barred from carrying a public offer until one exists."
+    },
+    {
+      "retailerId": "ret-intheswim",
+      "displayName": "In The Swim",
+      "website": "https://www.intheswim.com",
+      "type": "specialist_retailer",
+      "marketsServed": [
+        "us"
+      ],
+      "sellerModel": "retailer_owned_inventory",
+      "approval": "researched_only",
+      "affiliateNetworks": [],
+      "returnsUrl": null,
+      "warrantyRoute": "Not established — no commercial relationship, so the returns and warranty route has not been verified.",
+      "lastReviewedDate": "2026-07-31",
+      "pausedReason": null,
+      "mayCarryPublicOffer": false,
+      "notes": "Known to stock products in the launch category, but BotPlanet has no affiliate or commercial relationship. Recorded for future application; barred from carrying a public offer until one exists."
+    },
+    {
+      "retailerId": "ret-aiper-store",
+      "displayName": "Aiper (direct)",
+      "website": "https://aiper.com",
+      "type": "manufacturer_direct",
+      "marketsServed": [
+        "us"
+      ],
+      "sellerModel": "manufacturer_direct",
+      "approval": "researched_only",
+      "affiliateNetworks": [],
+      "returnsUrl": null,
+      "warrantyRoute": "Aiper handles both the sale and the warranty when buying direct, but the terms have not been verified.",
+      "lastReviewedDate": "2026-07-31",
+      "pausedReason": null,
+      "mayCarryPublicOffer": false,
+      "notes": "The Aiper relationship is CJ advertiser 6404897 and is joined, but its product catalogue is empty, so no exact offer can be built from it."
+    },
+    {
+      "retailerId": "ret-beatbot-store",
+      "displayName": "Beatbot (direct)",
+      "website": "https://beatbot.com",
+      "type": "manufacturer_direct",
+      "marketsServed": [
+        "us"
+      ],
+      "sellerModel": "manufacturer_direct",
+      "approval": "researched_only",
+      "affiliateNetworks": [],
+      "returnsUrl": null,
+      "warrantyRoute": "Beatbot handles both the sale and the warranty when buying direct, but the terms have not been verified.",
+      "lastReviewedDate": "2026-07-31",
+      "pausedReason": null,
+      "mayCarryPublicOffer": false,
+      "notes": "No affiliate relationship. Recorded for future application."
+    },
+    {
+      "retailerId": "ret-wybot-store",
+      "displayName": "WYBOT (direct)",
+      "website": "https://www.wybotpool.com",
+      "type": "manufacturer_direct",
+      "marketsServed": [
+        "us"
+      ],
+      "sellerModel": "manufacturer_direct",
+      "approval": "researched_only",
+      "affiliateNetworks": [],
+      "returnsUrl": null,
+      "warrantyRoute": "WYBOT handles both the sale and the warranty when buying direct, but the terms have not been verified.",
+      "lastReviewedDate": "2026-07-31",
+      "pausedReason": null,
+      "mayCarryPublicOffer": false,
+      "notes": "A US Awin programme (WYBOTICS INC, advertiser 76816) has been applied for and is pending. Until it is approved this store carries no public offer."
+    }
+  ]
+}

@@ -9,6 +9,7 @@ import {
 } from "@botplanet/shared";
 import { getDb, schema } from "../../lib/db";
 import { AMAZON_ASSOCIATE_TAG } from "../../lib/site";
+import { destinationFor } from "../../content/commerce/destinations";
 import { ATTRIBUTION_HOSTS } from "../../lib/reporting";
 
 /**
@@ -46,18 +47,29 @@ export const GET: APIRoute = async ({ params, locals, request }) => {
   let destinationKind: DestinationKind = destination ? "offer_destination" : "unavailable";
 
   if (!destination && offer.retailerId === "ret-amazon") {
-    // Compliant Amazon Associates search link with our tag. Becomes a deep ASIN
-    // link once ASINs are stored — until then it is a real but imprecise click.
-    const product = (
-      await db
-        .select({ name: schema.products.name })
-        .from(schema.products)
-        .where(eq(schema.products.id, offer.productId))
-        .limit(1)
-    )[0];
-    const q = encodeURIComponent(product?.name ?? "robotic pool cleaner");
-    destination = `https://www.amazon.com/s?k=${q}&tag=${AMAZON_ASSOCIATE_TAG}`;
-    destinationKind = "amazon_search";
+    // Prefer the exact product. Job 10 captured an ASIN for six of the ten from
+    // the listings recorded in Job 8, so those clicks now land on the product
+    // itself rather than on a search page the customer has to work through.
+    const exact = destinationFor(offer.productId, "ret-amazon");
+    if (exact?.retailerProductId && exact.identifierKind === "asin") {
+      destination = `https://www.amazon.com/dp/${exact.retailerProductId}?tag=${AMAZON_ASSOCIATE_TAG}`;
+      destinationKind = "offer_destination";
+    } else {
+      // No ASIN was ever captured for this product. A search link is an honest
+      // fallback — a real tracked click to an imprecise place — and it is
+      // recorded as `amazon_search` so reporting never counts it as a product
+      // click or lets it be mistaken for a verified offer.
+      const product = (
+        await db
+          .select({ name: schema.products.name })
+          .from(schema.products)
+          .where(eq(schema.products.id, offer.productId))
+          .limit(1)
+      )[0];
+      const q = encodeURIComponent(product?.name ?? "robotic pool cleaner");
+      destination = `https://www.amazon.com/s?k=${q}&tag=${AMAZON_ASSOCIATE_TAG}`;
+      destinationKind = "amazon_search";
+    }
   } else if (!destination) {
     const home = RETAILER_HOME[offer.retailerId];
     if (home) {

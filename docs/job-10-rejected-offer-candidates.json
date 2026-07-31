@@ -1,0 +1,116 @@
+{
+  "generatedFor": "2026-07-31",
+  "total": 15,
+  "byRule": {
+    "search_not_offer": 6,
+    "wrong_region": 1,
+    "unclear_seller": 8
+  },
+  "rows": [
+    {
+      "productId": "prod-dolphin-premier",
+      "retailerId": "ret-amazon",
+      "candidate": "amazon.com/s?k=Dolphin Premier",
+      "reason": "A search-results page is not an offer: it does not identify a single product, a seller, a price or a stock state, and the customer still has to choose. Kept as a fallback click destination, refused as a verified offer.",
+      "rule": "search_not_offer"
+    },
+    {
+      "productId": "prod-dolphin-e10",
+      "retailerId": "ret-amazon",
+      "candidate": "amazon.com/s?k=Dolphin E10",
+      "reason": "A search-results page is not an offer: it does not identify a single product, a seller, a price or a stock state, and the customer still has to choose. Kept as a fallback click destination, refused as a verified offer.",
+      "rule": "search_not_offer"
+    },
+    {
+      "productId": "prod-aiper-scuba-s1",
+      "retailerId": "ret-amazon",
+      "candidate": "amazon.com/s?k=Aiper Scuba S1 Cordless Robotic Pool Cleaner",
+      "reason": "A search-results page is not an offer: it does not identify a single product, a seller, a price or a stock state, and the customer still has to choose. Kept as a fallback click destination, refused as a verified offer.",
+      "rule": "search_not_offer"
+    },
+    {
+      "productId": "prod-aiper-seagull-se",
+      "retailerId": "ret-amazon",
+      "candidate": "amazon.com/s?k=Aiper Seagull SE",
+      "reason": "A search-results page is not an offer: it does not identify a single product, a seller, a price or a stock state, and the customer still has to choose. Kept as a fallback click destination, refused as a verified offer.",
+      "rule": "search_not_offer"
+    },
+    {
+      "productId": "prod-aiper-scuba-x1",
+      "retailerId": "ret-aiper-store",
+      "candidate": "Aiper CJ Product Catalog, feed 17133094",
+      "reason": "The joined CJ feed contains zero products, so no catalogue row exists to match. Building an offer from an empty feed would mean inventing one.",
+      "rule": "search_not_offer"
+    },
+    {
+      "productId": "prod-wybot-c1",
+      "retailerId": "ret-wybot-store",
+      "candidate": "Awin Wybot EU programme 115280 product feed",
+      "reason": "The joined WYBOT programme is Awin advertiser 115280, region Germany, valid domain eu.wybotpool.com. Its offers are EUR and EU-fulfilled, so serving one to a US customer would be a wrong-region offer regardless of the tracking working.",
+      "rule": "wrong_region"
+    },
+    {
+      "productId": "prod-wybot-c1",
+      "retailerId": "ret-wybot-store",
+      "candidate": "Awin WYBOTICS INC programme 76816 product feed",
+      "reason": "The correct US programme, but the application is pending. Awin gates the feed behind 'No relationship exists', so there is no lawful row to build an offer from yet.",
+      "rule": "search_not_offer"
+    },
+    {
+      "productId": "prod-dolphin-e10",
+      "retailerId": "ret-walmart",
+      "candidate": "existing D1 offer at ret-walmart carrying a researched price",
+      "reason": "BotPlanet has no commercial relationship with this retailer, and the stored price was copied from the same research pass as the Amazon row rather than checked at this seller. An unapproved retailer with an unverified price is not an offer, so it is suppressed rather than shown.",
+      "rule": "unclear_seller"
+    },
+    {
+      "productId": "prod-betta-se-plus",
+      "retailerId": "ret-leslies",
+      "candidate": "existing D1 offer at ret-leslies carrying a researched price",
+      "reason": "BotPlanet has no commercial relationship with this retailer, and the stored price was copied from the same research pass as the Amazon row rather than checked at this seller. An unapproved retailer with an unverified price is not an offer, so it is suppressed rather than shown.",
+      "rule": "unclear_seller"
+    },
+    {
+      "productId": "prod-dolphin-premier",
+      "retailerId": "ret-leslies",
+      "candidate": "existing D1 offer at ret-leslies carrying a researched price",
+      "reason": "BotPlanet has no commercial relationship with this retailer, and the stored price was copied from the same research pass as the Amazon row rather than checked at this seller. An unapproved retailer with an unverified price is not an offer, so it is suppressed rather than shown.",
+      "rule": "unclear_seller"
+    },
+    {
+      "productId": "prod-dolphin-nautilus-cc-plus",
+      "retailerId": "ret-dohenys",
+      "candidate": "existing D1 offer at ret-dohenys carrying a researched price",
+      "reason": "BotPlanet has no commercial relationship with this retailer, and the stored price was copied from the same research pass as the Amazon row rather than checked at this seller. An unapproved retailer with an unverified price is not an offer, so it is suppressed rather than shown.",
+      "rule": "unclear_seller"
+    },
+    {
+      "productId": "prod-polaris-freedom",
+      "retailerId": "ret-intheswim",
+      "candidate": "existing D1 offer at ret-intheswim carrying a researched price",
+      "reason": "BotPlanet has no commercial relationship with this retailer, and the stored price was copied from the same research pass as the Amazon row rather than checked at this seller. An unapproved retailer with an unverified price is not an offer, so it is suppressed rather than shown.",
+      "rule": "unclear_seller"
+    },
+    {
+      "productId": "prod-aiper-scuba-x1",
+      "retailerId": "ret-aiper-store",
+      "candidate": "existing D1 offer at ret-aiper-store carrying a researched price",
+      "reason": "BotPlanet has no commercial relationship with this retailer, and the stored price was copied from the same research pass as the Amazon row rather than checked at this seller. An unapproved retailer with an unverified price is not an offer, so it is suppressed rather than shown.",
+      "rule": "unclear_seller"
+    },
+    {
+      "productId": "prod-aiper-scuba-s1",
+      "retailerId": "ret-aiper-store",
+      "candidate": "existing D1 offer at ret-aiper-store carrying a researched price",
+      "reason": "BotPlanet has no commercial relationship with this retailer, and the stored price was copied from the same research pass as the Amazon row rather than checked at this seller. An unapproved retailer with an unverified price is not an offer, so it is suppressed rather than shown.",
+      "rule": "unclear_seller"
+    },
+    {
+      "productId": "prod-beatbot-aquasense-2-ultra",
+      "retailerId": "ret-beatbot-store",
+      "candidate": "existing D1 offer at ret-beatbot-store carrying a researched price",
+      "reason": "BotPlanet has no commercial relationship with this retailer, and the stored price was copied from the same research pass as the Amazon row rather than checked at this seller. An unapproved retailer with an unverified price is not an offer, so it is suppressed rather than shown.",
+      "rule": "unclear_seller"
+    }
+  ]
+}
