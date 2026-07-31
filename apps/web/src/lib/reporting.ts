@@ -287,18 +287,19 @@ export const REPORTING_SYSTEMS: ReportingSystem[] = [
   },
   {
     id: "cj-affiliate",
-    name: "CJ Affiliate (Aiper application)",
-    provider: "CJ (publisher 8029924)",
-    status: "not_connected",
+    name: "CJ Affiliate (Aiper)",
+    provider: "CJ (publisher 8029924, website/property 101845913)",
+    status: "connected",
     dashboard: "members.cj.com → Reports → Performance",
     dashboardLink: "https://members.cj.com",
-    dataAvailable: [],
-    dataUnavailable: ["Clicks", "Commissions", "Advertiser-approved links"],
-    lastCheckedAt: CHECKED,
+    dataAvailable: ["Approved creatives", "Product feed metadata", "Advertiser relationship"],
+    dataUnavailable: ["Product imagery — the advertiser's catalogue is empty", "Product video — no video creatives exist"],
+    lastCheckedAt: "2026-07-31",
     ownerAction:
-      "Wait for the Aiper (advertiser 6404897) decision, then log in at members.cj.com → Reports → Performance. No BotPlanet configuration is needed until approval.",
-    secretStorage: "CJ personal access token would live in a Worker secret named CJ_API_TOKEN if automated reporting is approved later. Not stored today.",
-    notes: "Application submitted and awaiting the advertiser's decision, so there is nothing to report yet.",
+      "Ask Aiper through the CJ advertiser contact to populate their product feed. The programme is live and readable; the gap is that Aiper has published no products to it.",
+    secretStorage: "CJ personal access token is stored as the Worker secret CJ_API_TOKEN. The value is never in the repository, in D1 or in any page.",
+    notes:
+      "APPROVED and verified live on 2026-07-31: link-search returned 12 approved creatives for advertiser 6404897 (Aiper), and shoppingProductFeeds returned feed 17133094. The catalogue itself holds 0 products and none of the 12 creatives is product media, so CJ supplies no Aiper imagery today.",
   },
   {
     id: "awin",

@@ -468,7 +468,7 @@
         "no rights-cleared product hero",
         "no supporting product imagery",
         "no image eligible for Product structured data",
-        "The licensed route is Amazon Program Content via the Creators API. The API needs credentials this build environment does not hold, and the programme forbids scraping, constructing image URLs, or caching Program Content without express permission — so there is no lawful way to fetch an image here. The Aiper CJ feed would supply licensed images but the application is not approved. Aiper publishes no model numbers, so X1 and X1 Pro can only be separated by product page."
+        "The CJ programme is live and fully readable, so this is no longer a permission problem. It is an upstream supply problem: Aiper's CJ Product Catalog contains zero products, and all twelve approved creatives are seasonal campaign banners and text links. Nothing in CJ depicts this model. Aiper publishes no model numbers, so an incoming image must still be matched to the exact X1 product page and never to X1 Pro."
       ]
     },
     {
@@ -524,7 +524,7 @@
         "no rights-cleared product hero",
         "no supporting product imagery",
         "no image eligible for Product structured data",
-        "The licensed route is Amazon Program Content via the Creators API. The API needs credentials this build environment does not hold, and the programme forbids scraping, constructing image URLs, or caching Program Content without express permission — so there is no lawful way to fetch an image here. The Scuba S1 and S1 Pro are separate models with no published SKUs, so only imagery from the exact S1 product page may be attached and Scuba X1 media must never be mixed in."
+        "The CJ programme is live and fully readable, so this is no longer a permission problem. It is an upstream supply problem: Aiper's CJ Product Catalog contains zero products, and all twelve approved creatives are seasonal campaign banners and text links. Nothing in CJ depicts this model. The S1 and S1 Pro are separate models with no published SKUs, so only exact-S1 imagery may be attached and Scuba X1 media must never be mixed in."
       ]
     },
     {
@@ -580,7 +580,7 @@
         "no rights-cleared product hero",
         "no supporting product imagery",
         "no image eligible for Product structured data",
-        "The licensed route is Amazon Program Content via the Creators API. The API needs credentials this build environment does not hold, and the programme forbids scraping, constructing image URLs, or caching Program Content without express permission — so there is no lawful way to fetch an image here. Aiper has shipped more than one Seagull SE revision and publishes no model number, so Seagull Pro, Plus and other generations must never be substituted."
+        "The CJ programme is live and fully readable, so this is no longer a permission problem. It is an upstream supply problem: Aiper's CJ Product Catalog contains zero products, and all twelve approved creatives are seasonal campaign banners and text links. Nothing in CJ depicts this model. Aiper has shipped more than one Seagull SE revision and publishes no model number, so Seagull Pro, Plus and other generations must never be substituted."
       ]
     }
   ]

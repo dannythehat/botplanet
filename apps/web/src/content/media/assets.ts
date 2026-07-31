@@ -276,24 +276,51 @@ export const ACQUISITION_BLOCKERS: AcquisitionBlocker[] = [
   },
   {
     productId: "prod-aiper-scuba-x1",
-    ...AMAZON_BLOCK,
-    checked: [...AMAZON_BLOCK.checked, "aiper.com — no media library", "CJ advertiser 6404897 — application submitted, not approved"],
-    blocker: `${AMAZON_BLOCK.blocker} The Aiper CJ feed would supply licensed images but the application is not approved. Aiper publishes no model numbers, so X1 and X1 Pro can only be separated by product page.`,
-    unblockAction: `${AMAZON_BLOCK.unblockAction} Alternatively, approval of the Aiper CJ programme (advertiser 6404897) would supply a licensed publisher image feed.`,
+    bestAvailableTier: "affiliate_media_feed" as const,
+    checked: [
+      "CJ relationship, verified live 2026-07-31 (publisher 8029924, website 101845913, advertiser 6404897 Aiper)",
+      "CJ shoppingProductFeeds — one feed, adId 17133094 'aiper products feed', productCount 0",
+      "CJ shoppingProducts and products — totalCount 0",
+      "CJ link-search — 12 approved creatives, 0 product images, 0 videos",
+      "aiper.com — no media library",
+    ],
+    blocker:
+      "The CJ programme is live and fully readable, so this is no longer a permission problem. It is an upstream supply problem: Aiper's CJ Product Catalog contains zero products, and all twelve approved creatives are seasonal campaign banners and text links. Nothing in CJ depicts this model. Aiper publishes no model numbers, so an incoming image must still be matched to the exact X1 product page and never to X1 Pro.",
+    unblockAction:
+      "Ask Aiper through the CJ advertiser contact to populate their product feed, or request a media kit direct. No query change or credential will produce imagery that the advertiser has not published.",
+    owner: "manufacturer" as const,
   },
   {
     productId: "prod-aiper-scuba-s1",
-    ...AMAZON_BLOCK,
-    checked: [...AMAZON_BLOCK.checked, "aiper.com — no media library", "CJ advertiser 6404897 — application submitted, not approved"],
-    blocker: `${AMAZON_BLOCK.blocker} The Scuba S1 and S1 Pro are separate models with no published SKUs, so only imagery from the exact S1 product page may be attached and Scuba X1 media must never be mixed in.`,
-    unblockAction: `${AMAZON_BLOCK.unblockAction} Alternatively, approval of the Aiper CJ programme (advertiser 6404897) would supply a licensed publisher image feed.`,
+    bestAvailableTier: "affiliate_media_feed" as const,
+    checked: [
+      "CJ relationship, verified live 2026-07-31 (publisher 8029924, website 101845913, advertiser 6404897 Aiper)",
+      "CJ shoppingProductFeeds — one feed, adId 17133094 'aiper products feed', productCount 0",
+      "CJ shoppingProducts and products — totalCount 0",
+      "CJ link-search — 12 approved creatives, 0 product images, 0 videos",
+      "aiper.com — no media library",
+    ],
+    blocker:
+      "The CJ programme is live and fully readable, so this is no longer a permission problem. It is an upstream supply problem: Aiper's CJ Product Catalog contains zero products, and all twelve approved creatives are seasonal campaign banners and text links. Nothing in CJ depicts this model. The S1 and S1 Pro are separate models with no published SKUs, so only exact-S1 imagery may be attached and Scuba X1 media must never be mixed in.",
+    unblockAction:
+      "Ask Aiper through the CJ advertiser contact to populate their product feed, or request a media kit direct. No query change or credential will produce imagery that the advertiser has not published.",
+    owner: "manufacturer" as const,
   },
   {
     productId: "prod-aiper-seagull-se",
-    ...AMAZON_BLOCK,
-    checked: [...AMAZON_BLOCK.checked, "aiper.com — no media library", "CJ advertiser 6404897 — application submitted, not approved"],
-    blocker: `${AMAZON_BLOCK.blocker} Aiper has shipped more than one Seagull SE revision and publishes no model number, so Seagull Pro, Plus and other generations must never be substituted.`,
-    unblockAction: `${AMAZON_BLOCK.unblockAction} Alternatively, approval of the Aiper CJ programme (advertiser 6404897) would supply a licensed publisher image feed.`,
+    bestAvailableTier: "affiliate_media_feed" as const,
+    checked: [
+      "CJ relationship, verified live 2026-07-31 (publisher 8029924, website 101845913, advertiser 6404897 Aiper)",
+      "CJ shoppingProductFeeds — one feed, adId 17133094 'aiper products feed', productCount 0",
+      "CJ shoppingProducts and products — totalCount 0",
+      "CJ link-search — 12 approved creatives, 0 product images, 0 videos",
+      "aiper.com — no media library",
+    ],
+    blocker:
+      "The CJ programme is live and fully readable, so this is no longer a permission problem. It is an upstream supply problem: Aiper's CJ Product Catalog contains zero products, and all twelve approved creatives are seasonal campaign banners and text links. Nothing in CJ depicts this model. Aiper has shipped more than one Seagull SE revision and publishes no model number, so Seagull Pro, Plus and other generations must never be substituted.",
+    unblockAction:
+      "Ask Aiper through the CJ advertiser contact to populate their product feed, or request a media kit direct. No query change or credential will produce imagery that the advertiser has not published.",
+    owner: "manufacturer" as const,
   },
 ];
 
