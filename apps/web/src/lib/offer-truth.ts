@@ -120,7 +120,36 @@ export function freshnessFor(source: OfferSource, checkedDate: string | null, to
  * produces no offer at all — the suppression happens before an Offer object
  * exists, so there is nothing for a surface to accidentally render.
  */
-export function buildOffers(today = new Date(AS_AT)): Offer[] {
+/**
+ * A live observation from D1, injected by the route.
+ *
+ * The offer engine stays pure: it does not know about databases, it is handed
+ * whatever the caller could read. That keeps every gate testable without a
+ * database and means the fallback decision lives in one visible place rather
+ * than being buried in the engine.
+ */
+export interface LiveObservation {
+  productId: string;
+  checkedDate: string;
+  priceMinor: number | null;
+  stockWording: string | null;
+  shippingWording: string | null;
+  sellerWording: string | null;
+  returnsWording: string | null;
+  identityConfirmed: boolean;
+}
+
+export interface BuildOptions {
+  /**
+   * Accepted observations read from D1. When present these are the production
+   * source. The committed snapshot is a FALLBACK for genuine D1 unavailability
+   * and never overrides a newer D1 row — `observationFor` below picks by date,
+   * so a stale fallback can never displace a fresh read.
+   */
+  live?: LiveObservation[];
+}
+
+export function buildOffers(today = new Date(AS_AT), opts: BuildOptions = {}): Offer[] {
   const report = buildReport(new Date(AS_AT));
   const offers: Offer[] = [];
 
@@ -147,7 +176,23 @@ export function buildOffers(today = new Date(AS_AT)): Offer[] {
        * aggregator wins; where only a human looked, the human stands; where
        * neither did, the researched snapshot can never be a current price.
        */
-      const serp = r.id === "ret-amazon" ? serpApiObservationFor(p.productId) : undefined;
+      /*
+       * D1 IS AUTHORITATIVE. The snapshot is only for D1 having nothing to say.
+       *
+       * An earlier version picked whichever source was checked most recently,
+       * which read as prudent and was wrong: a STALE D1 row would lose to a
+       * fresher committed snapshot and the page would keep showing a price the
+       * refresh had already superseded. Worse, an ageing D1 row could never
+       * expire, because the snapshot would step in and look current.
+       *
+       * So the rule is simple and fail-closed: if D1 has a row, that row is the
+       * offer — fresh or stale, and if stale the freshness gate suppresses the
+       * price exactly as it should. The snapshot applies only when D1 returned
+       * nothing, which the route reports and logs.
+       */
+      const snapshot = r.id === "ret-amazon" ? serpApiObservationFor(p.productId) : undefined;
+      const fromD1 = r.id === "ret-amazon" ? opts.live?.find((l) => l.productId === p.productId) : undefined;
+      const serp = fromD1 ?? snapshot;
       const manual = manualCheckFor(p.productId, r.id);
       const check = serp
         ? {

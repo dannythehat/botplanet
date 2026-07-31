@@ -1150,3 +1150,102 @@ describe("scheduled refresh — wiring", () => {
     }
   });
 });
+
+describe("D1 is the production source; the snapshot is only a fallback", () => {
+  const liveRow = (over: Partial<{ checkedDate: string; priceMinor: number; sellerWording: string }> = {}) => ({
+    productId: "prod-polaris-freedom",
+    checkedDate: "2026-08-02",
+    priceMinor: 109900,
+    stockWording: "In Stock",
+    shippingWording: "FREE delivery Tuesday",
+    sellerWording: "Amazon.com",
+    returnsWording: null,
+    identityConfirmed: true,
+    ...over,
+  });
+  const polaris = (offers: ReturnType<typeof buildOffers>) => offers.find((o) => o.productId === "prod-polaris-freedom")!;
+
+  it("a newer D1 row replaces the committed snapshot", () => {
+    const o = polaris(buildOffers(new Date("2026-08-02"), { live: [liveRow()] }));
+    expect(o.basePriceMinor).toBe(109900);
+    expect(o.destination.sellerIdentity).toBe("Amazon.com");
+    expect(o.sourceCheckedDate).toBe("2026-08-02");
+  });
+
+  it("a D1 row wins even when it is OLDER than the snapshot", () => {
+    // The case that caught a real bug: picking whichever was checked most
+    // recently meant a stale D1 row lost to a fresher snapshot, so an ageing
+    // observation could never expire — the snapshot would step in and look
+    // current forever.
+    const stale = polaris(buildOffers(new Date("2026-07-31"), { live: [liveRow({ checkedDate: "2026-06-01", priceMinor: 99900 })] }));
+    expect(stale.basePriceMinor).toBe(99900);
+    expect(stale.sourceCheckedDate).toBe("2026-06-01");
+    expect(stale.freshness).toBe("stale");
+    expect(publicationFor(stale).priceShowable).toBe(false);
+  });
+
+  it("falls back to the snapshot when D1 returns nothing", () => {
+    const o = polaris(buildOffers(new Date("2026-07-31"), { live: [] }));
+    expect(o.basePriceMinor).toBe(119900);
+    expect(o.sourceCheckedDate).toBe("2026-07-31");
+  });
+
+  it("suppresses an expired D1 price rather than showing it", () => {
+    // Read 2 August, viewed 20 August: outside the 7-day aggregator window.
+    const o = polaris(buildOffers(new Date("2026-08-20"), { live: [liveRow()] }));
+    expect(o.freshness).toBe("stale");
+    expect(publicationFor(o).priceShowable).toBe(false);
+  });
+
+  it("keeps the fail-closed gates after reading D1", () => {
+    // A D1 row with no seller must not publish, exactly as a manual check
+    // without one would not.
+    const noSeller = { ...liveRow(), sellerWording: null };
+    const o = polaris(buildOffers(new Date("2026-08-02"), { live: [noSeller] }));
+    expect(o.destination.sellerIdentity).toBeNull();
+    expect(o.destination.sellerModel).toBe("unknown");
+  });
+
+  it("reads one row per product page, not one per card", () => {
+    const page = readFileSync("apps/web/src/pages/robots/[category]/[slug].astro", "utf8");
+    expect(page).toContain("latestAcceptedForProduct");
+    // A single call, scoped to this product.
+    expect((page.match(/latestAcceptedForProduct\(/g) ?? []).length).toBe(1);
+  });
+
+  it("logs the fallback rather than taking it silently", () => {
+    const page = readFileSync("apps/web/src/pages/robots/[category]/[slug].astro", "utf8");
+    expect(page).toContain("console.error");
+    expect(page).toContain("fallback_snapshot");
+  });
+});
+
+describe("retailer, seller and programme are three different things", () => {
+  it("keeps Amazon the retailer even when a marketplace seller owns the buy box", () => {
+    // The Pool Spot owns the CC Plus buy box. BotPlanet's relationship is with
+    // AMAZON: the affiliate destination, the programme and the retailer are
+    // Amazon's, and the seller only governs fulfilment and returns.
+    const cc = OFFERS.find((o) => o.productId === "prod-dolphin-nautilus-cc-plus")!;
+    expect(cc.retailerId).toBe("ret-amazon");
+    expect(cc.programmeId).toBe("prog-amazon-us");
+    expect(cc.destination.sellerIdentity).toBe("The Pool Spot");
+    expect(cc.destination.destinationUrl).toContain("amazon.com");
+  });
+
+  it("never creates a retailer or programme from a marketplace seller", () => {
+    const sellers = OFFERS.map((o) => o.destination.sellerIdentity).filter(Boolean) as string[];
+    expect(sellers.length).toBeGreaterThan(0);
+    for (const s of sellers) {
+      expect(RETAILERS.some((r) => r.displayName === s)).toBe(false);
+      expect(PROGRAMMES.some((p) => p.network === s)).toBe(false);
+    }
+    // Every offer routes through the one approved retailer.
+    for (const o of OFFERS) expect(o.retailerId).toBe("ret-amazon");
+  });
+
+  it("shows the seller as fulfilment information, under the retailer", () => {
+    const page = readFileSync("apps/web/src/pages/robots/[category]/[slug].astro", "utf8");
+    expect(page).toContain("sold by");
+    expect(page).toContain("retailer(offer.retailerId)");
+  });
+});

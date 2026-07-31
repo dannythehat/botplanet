@@ -222,4 +222,45 @@ export async function latestAcceptedObservations(db: D1): Promise<ObservationRow
   }));
 }
 
+/**
+ * The latest accepted observation for ONE product.
+ *
+ * A product page needs one row, so it issues one query — not a query per card,
+ * and not a whole-catalogue read to render a single page.
+ */
+export async function latestAcceptedForProduct(db: D1, productId: string): Promise<ObservationRow | null> {
+  const r = await db
+    .prepare(
+      `SELECT * FROM refresh_observations
+        WHERE product_id = ?1 AND accepted = 1
+        ORDER BY checked_date DESC LIMIT 1`,
+    )
+    .bind(productId)
+    .first<Record<string, unknown>>();
+  return r ? rowToObservation(r) : null;
+}
+
+function rowToObservation(r: Record<string, unknown>): ObservationRow {
+  return {
+    productId: String(r.product_id),
+    asin: String(r.asin),
+    checkedDate: String(r.checked_date),
+    providerId: String(r.provider_id),
+    observedTitle: (r.observed_title as string) ?? null,
+    brand: (r.brand as string) ?? null,
+    modelName: (r.model_name as string) ?? null,
+    modelNumber: (r.model_number as string) ?? null,
+    priceMinor: r.price_minor === null || r.price_minor === undefined ? null : Number(r.price_minor),
+    currency: String(r.currency ?? "USD"),
+    stockWording: (r.stock_wording as string) ?? null,
+    shippingWording: (r.shipping_wording as string) ?? null,
+    sellerWording: (r.seller_wording as string) ?? null,
+    returnsWording: (r.returns_wording as string) ?? null,
+    identityConfirmed: Boolean(r.identity_confirmed),
+    matchEvidence: String(r.match_evidence ?? ""),
+    accepted: true,
+    suppressionReason: null,
+  };
+}
+
 export type { ObservationRow, SkipRow };

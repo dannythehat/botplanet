@@ -6,7 +6,8 @@ import { and, eq } from "drizzle-orm";
 import { breadcrumbsFor } from "../../../lib/routing";
 import { buildOffers, publicationFor } from "../../../lib/offer-truth";
 import { retailer } from "../../../content/commerce/registry";
-import { catalogueStatusOf, CATALOGUE_WITHDRAWALS, productEditorialById } from "../../../content/products";
+import { catalogueStatusOf, CATALOGUE_WITHDRAWALS } from "../../../content/products";
+import { latestAcceptedForProduct } from "../../../lib/providers/refresh-store";
 
 const { category, slug } = Astro.params;
 const db = getDb(Astro.locals);
@@ -26,20 +27,35 @@ const offers = await db
   .where(and(eq(schema.offers.productId, product.id), eq(schema.offers.offerStatus, "active")));
 
 /**
- * OFFERS COME FROM THE OFFER ENGINE, NOT FROM D1.
+ * THE LIVE PRICE COMES FROM D1; THE GATES COME FROM THE ENGINE.
  *
- * The D1 rows are the pre-Job-10 research snapshots: prices copied during an
- * early pass, for retailers BotPlanet has no relationship with, none of them
- * ever re-checked. Rendering those was the site claiming to know prices it did
- * not know. The engine builds offers from the destination, retailer and
- * programme registries and gates each one, so anything that reaches this page
- * has an approved seller, a verified destination and a dated price behind it.
+ * `refresh_observations` is written by the scheduled refresh and is the
+ * production source for price, seller, availability, delivery and check date.
+ * One query, for this product only — not one per card, and not a
+ * whole-catalogue read to render a single page.
  *
- * Everything shown here is what `publicationFor` permits — the price appears
- * only with the date it was checked, because an undated price implies it is
- * live and that is the one thing it is not.
+ * The committed snapshot remains ONLY as a fallback for D1 being unreachable.
+ * It cannot make stale data look current: `buildOffers` takes whichever source
+ * was CHECKED MOST RECENTLY, so an older fallback never displaces a newer row,
+ * and if both are past their freshness window the price is suppressed either
+ * way. Fail-closed survives the fallback.
+ *
+ * Only `accepted = 1` rows are read. An observation the refresh refused stays
+ * in the table as evidence and never reaches this page.
  */
-const engineOffers = buildOffers()
+let live: Awaited<ReturnType<typeof latestAcceptedForProduct>> = null;
+let liveSource: "d1" | "fallback_snapshot" = "d1";
+try {
+  live = await latestAcceptedForProduct(Astro.locals.runtime.env.DB, product.id);
+  if (!live) liveSource = "fallback_snapshot";
+} catch (err) {
+  // Explicit and logged. A silent fallback is how a site starts showing last
+  // month's price while looking perfectly healthy.
+  liveSource = "fallback_snapshot";
+  console.error(`[offers] D1 unavailable for ${product.id}; falling back to the committed snapshot`, err);
+}
+
+const engineOffers = buildOffers(new Date(), { live: live ? [live] : [] })
   .filter((o) => o.productId === product.id)
   .map((o) => ({ offer: o, pub: publicationFor(o) }))
   .filter((x) => x.pub.showable);
@@ -111,7 +127,10 @@ const crumbs = breadcrumbsFor(Astro.url.pathname, product?.name);
               </td>
               <td class="muted">{pub.stockShowable ? titleCase(offer.stock.state.replace(/_/g, " ")) : "—"}</td>
               <td class="muted">{pub.shippingShowable && offer.shipping.sourceWording ? offer.shipping.sourceWording : "—"}</td>
-              <td class="muted" style="font-size:12px">{offer.sourceCheckedDate ?? "—"}</td>
+              <td class="muted" style="font-size:12px">
+                {offer.sourceCheckedDate ?? "—"}
+                {liveSource === "fallback_snapshot" && <div style="font-size:10px">last recorded check</div>}
+              </td>
               <td>
                 {pub.linkable && offer.redirectKey ? (
                   <a class="btn" href={`/go/${offer.redirectKey}`} rel="sponsored nofollow">View offer</a>
