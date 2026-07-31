@@ -17,6 +17,7 @@ import { buildReport } from "./evidence-report";
 import { WARRANTY_NOT_CONFIRMED } from "./warranty";
 import { DESTINATIONS, REDIRECT_KEYS, REJECTED_CANDIDATES, destinationFor } from "../content/commerce/destinations";
 import { PROGRAMMES, RETAILERS, programme, retailer } from "../content/commerce/registry";
+import { manualCheckFor } from "../content/commerce/manual-checks";
 import {
   CURRENT_PRICE_STATES,
   FRESHNESS_WINDOW_DAYS,
@@ -130,10 +131,13 @@ export function buildOffers(today = new Date(AS_AT)): Offer[] {
 
       const prog = PROGRAMMES.find((x) => x.market === "us" && x.state === "active" && r.affiliateNetworks.includes("amazon_associates_us") && x.id === "prog-amazon-us");
 
-      // The stored price came from the Job 8 research pass, not from a check at
-      // this seller, so it is carried as a snapshot and never as a live price.
-      const source: OfferSource = "researched_snapshot";
-      const freshness = freshnessFor(source, AS_AT, today);
+      // A manual check by a human reading the page is a real source with a real
+      // date. Where one exists it supersedes the researched snapshot entirely.
+      const check = manualCheckFor(p.productId, r.id);
+      const source: OfferSource = check ? "manual_check" : "researched_snapshot";
+      const checkedDate = check?.checkedDate ?? AS_AT;
+      const freshness = freshnessFor(source, checkedDate, today);
+      const shippingState = normaliseShipping(check?.shippingWording ?? null);
 
       offers.push({
         id: `offer-${p.productId}-${r.id}`,
@@ -142,39 +146,53 @@ export function buildOffers(today = new Date(AS_AT)): Offer[] {
         programmeId: prog?.id ?? null,
         market: "us",
         currency: "USD",
-        destination: dest,
-        // No price is published. Nothing has read a current price from an
-        // approved source, and a researched figure is not one.
-        basePriceMinor: null,
+        destination: check?.identityConfirmed
+          ? // A human read the title and confirmed the model, which is the only
+            // thing that can raise a destination to verified_exact here.
+            { ...dest, confidence: "verified_exact" as const, sellerIdentity: check.sellerWording, sellerModel: "marketplace_third_party" as const }
+          : dest,
+        basePriceMinor: check?.priceMinor ?? null,
         shipping: {
-          state: "not_exposed_by_source",
-          sourceWording: null,
-          costMinor: null,
+          state: check ? shippingState : "not_exposed_by_source",
+          sourceWording: check?.shippingWording ?? null,
+          costMinor: shippingState === "free" ? 0 : null,
           estimatedMinDays: null,
           estimatedMaxDays: null,
-          locationSpecific: false,
+          // Amazon quotes delivery against a destination, so it is always
+          // location-specific and the location is recorded on the check.
+          locationSpecific: Boolean(check),
           market: "us",
-          checkedDate: null,
-          confidence: "none",
+          checkedDate: check?.checkedDate ?? null,
+          confidence: check ? "high" : "none",
         },
-        deliveredPriceMinor: null,
-        stock: { state: "unknown", sourceWording: null, checkedDate: null },
+        deliveredPriceMinor: check ? deliveredPrice(check.priceMinor, shippingState === "free" ? 0 : null, shippingState) : null,
+        stock: {
+          state: normaliseStock(check?.stockWording ?? null),
+          sourceWording: check?.stockWording ?? null,
+          checkedDate: check?.checkedDate ?? null,
+        },
         warranty: {
           // Straight from the Job 8 ledger. A retailer never overwrites it.
           manufacturer: row?.warranty.text ?? WARRANTY_NOT_CONFIRMED,
           manufacturerConfirmed: row?.warranty.status === "confirmed",
           retailerProtectionPlan: null,
-          retailerReturnPeriod: null,
+          // The seller's returns offer, labelled as theirs — never merged into
+          // the manufacturer warranty.
+          retailerReturnPeriod: check?.returnsWording ?? null,
           marketplaceSellerReturnRoute:
-            r.sellerModel === "mixed" || r.sellerModel === "marketplace_third_party"
-              ? "Returns route depends on whether the listing is sold by the retailer or a marketplace seller; the seller is not exposed to us."
-              : null,
+            check?.sellerWording
+              ? `Sold by ${check.sellerWording}, a marketplace seller, so returns and any seller warranty are handled by them rather than by Amazon.`
+              : r.sellerModel === "mixed" || r.sellerModel === "marketplace_third_party"
+                ? "Returns route depends on whether the listing is sold by the retailer or a marketplace seller; the seller is not exposed to us."
+                : null,
         },
         source,
-        sourceReference: dest.sourceReference,
-        sourceCheckedDate: dest.sourceCheckedDate,
+        sourceReference: check
+          ? `Read from the live listing by ${check.checkedBy} on ${check.checkedDate}, delivering to ${check.checkedForLocation}.`
+          : dest.sourceReference,
+        sourceCheckedDate: checkedDate,
         freshness,
-        confidence: dest.confidence === "researched_exact" ? "medium" : "low",
+        confidence: check?.identityConfirmed ? "high" : dest.confidence === "researched_exact" ? "medium" : "low",
         // Read from the recorded D1 keys, never derived from the slug.
         redirectKey: r.id === "ret-amazon" ? (REDIRECT_KEYS[p.productId] ?? null) : null,
         active: dest.confidence !== "none",

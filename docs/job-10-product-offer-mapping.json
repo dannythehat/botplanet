@@ -44,27 +44,23 @@
         "1 offer(s) exist for this product",
         "1 from an approved retailer",
         "ranked by exact-match confidence, then stock, then delivered price",
-        "chosen: offer-prod-dolphin-nautilus-cc-plus-ret-amazon (researched_exact)"
+        "chosen: offer-prod-dolphin-nautilus-cc-plus-ret-amazon (verified_exact)"
       ],
       "commissionUsedAsTieBreak": false,
       "retailer": "ret-amazon",
       "exactProductIdentifier": "B09K4C9WGF",
       "identifierKind": "asin",
       "market": "us",
-      "priceState": "not_published",
-      "stockState": "unknown",
-      "deliveryState": "not_exposed_by_source",
+      "priceState": "current",
+      "stockState": "in_stock",
+      "deliveryState": "free",
       "warrantyRoute": "Maytronics (Dolphin) states a warranty of 1 year.",
       "lastChecked": "2026-07-31",
-      "freshness": "indicative",
+      "freshness": "live",
       "affiliateProgramme": "prog-amazon-us",
       "goPath": "/go/pool-dolphin-ccplus-amazon",
-      "schemaEligible": false,
-      "blockers": [
-        "no current price from an approved source",
-        "stock state unknown",
-        "not eligible for Offer structured data"
-      ],
+      "schemaEligible": true,
+      "blockers": [],
       "nextAction": "Obtain price and availability through the Amazon Creators API so the offer can carry a current price and enter Offer schema."
     },
     {

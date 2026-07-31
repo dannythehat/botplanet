@@ -3,6 +3,7 @@ import { describe, expect, it } from "vitest";
 import { PRODUCTS } from "../src/content/products";
 import { DESTINATIONS, REDIRECT_KEYS, REJECTED_CANDIDATES, destinationFor } from "../src/content/commerce/destinations";
 import { NOT_RELATIONSHIPS, PROGRAMMES, RETAILERS, approvedUsRetailers, programme, retailer, usableUsProgrammes } from "../src/content/commerce/registry";
+import { MANUAL_CHECKS } from "../src/content/commerce/manual-checks";
 import { CURRENT_PRICE_STATES, FRESHNESS_WINDOW_DAYS } from "../src/content/commerce/types";
 import {
   AS_AT,
@@ -148,6 +149,8 @@ describe("exact-product destinations", () => {
   });
 
   it("never claims a verified match on researched evidence alone", () => {
+    // The registry itself holds nothing above researched_exact. Only a manual
+    // check, where a person read the title, can raise an OFFER to verified_exact.
     expect(DESTINATIONS.some((d) => d.confidence === "verified_exact")).toBe(false);
     for (const d of DESTINATIONS.filter((x) => x.confidence === "researched_exact")) {
       expect(d.notes).toContain("has NOT been re-confirmed");
@@ -247,13 +250,38 @@ describe("price, stock and shipping normalisation", () => {
     expect(deliveredPrice(null, 500, "charged")).toBeNull();
   });
 
-  it("publishes no price, stock or shipping today, because none is sourced", () => {
-    expect(REPORT.totals.priceShowable).toBe(0);
-    expect(REPORT.totals.stockShowable).toBe(0);
+  it("publishes a price only where a human actually checked the page", () => {
+    const checked = new Set(MANUAL_CHECKS.map((c) => c.productId));
     for (const o of OFFERS) {
-      expect(o.basePriceMinor).toBeNull();
-      expect(o.stock.state).toBe("unknown");
+      if (checked.has(o.productId)) {
+        expect(o.basePriceMinor).not.toBeNull();
+        expect(o.stock.state).not.toBe("unknown");
+      } else {
+        expect(o.basePriceMinor).toBeNull();
+        expect(o.stock.state).toBe("unknown");
+      }
     }
+    expect(REPORT.totals.priceShowable).toBe(checked.size);
+  });
+
+  it("records the manual check verbatim, with its date and delivery location", () => {
+    for (const c of MANUAL_CHECKS) {
+      expect(c.checkedDate).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+      expect(c.checkedForLocation).toMatch(/US/);
+      expect(c.currency).toBe("USD");
+      if (c.stockWording) expect(c.stockWording).not.toBe(c.stockWording.toLowerCase().replace(/\s+/g, "_"));
+    }
+  });
+
+  it("carries a marketplace seller through to the returns route", () => {
+    const cc = OFFERS.find((o) => o.productId === "prod-dolphin-nautilus-cc-plus")!;
+    expect(cc.destination.sellerIdentity).toBe("The Pool Spot");
+    expect(cc.destination.sellerModel).toBe("marketplace_third_party");
+    expect(cc.warranty.marketplaceSellerReturnRoute).toContain("The Pool Spot");
+    // The seller's returns offer must never be merged into the manufacturer term.
+    expect(cc.warranty.retailerReturnPeriod).toBe("FREE 30-day refund/replacement");
+    expect(cc.warranty.manufacturer).toContain("1 year");
+    expect(cc.warranty.manufacturer).not.toContain("30-day");
   });
 });
 
@@ -359,9 +387,21 @@ describe("preferred offer", () => {
 });
 
 describe("schema eligibility gates", () => {
-  it("lets nothing into Offer schema today", () => {
-    expect(REPORT.totals.schemaEligible).toBe(0);
-    for (const o of OFFERS) expect(publicationFor(o).schemaEligible).toBe(false);
+  it("lets an offer into Offer schema only when it is fully evidenced", () => {
+    const checked = new Set(MANUAL_CHECKS.map((c) => c.productId));
+    expect(REPORT.totals.schemaEligible).toBe(checked.size);
+    for (const o of OFFERS) {
+      expect(publicationFor(o).schemaEligible).toBe(checked.has(o.productId));
+    }
+  });
+
+  it("raises a destination to verified_exact only when a human confirmed the title", () => {
+    for (const o of OFFERS) {
+      if (o.destination.confidence !== "verified_exact") continue;
+      const c = MANUAL_CHECKS.find((x) => x.productId === o.productId)!;
+      expect(c.identityConfirmed).toBe(true);
+      expect(c.observedTitle.length).toBeGreaterThan(20);
+    }
   });
 
   it("requires an exact product, a current price, a currency and a stock state", () => {
@@ -380,7 +420,9 @@ describe("schema eligibility gates", () => {
   });
 
   it("separates the right to link from the right to quote a price", () => {
-    const o = OFFERS.find((x) => x.destination.confidence === "researched_exact")!;
+    // An unchecked but exact destination: we may send someone there, but we may
+    // not claim to know what it costs.
+    const o = OFFERS.find((x) => x.destination.confidence === "researched_exact" && x.basePriceMinor === null)!;
     const pub = publicationFor(o);
     expect(pub.linkable).toBe(true);
     expect(pub.priceShowable).toBe(false);
@@ -483,8 +525,11 @@ describe("no private data escapes", () => {
     expect(exports.mapping.rows).toHaveLength(PRODUCT_IDS.length);
     for (const r of exports.mapping.rows) {
       expect(r.canonicalUrl).toMatch(/^https:\/\/botplanet\.io\/robots\/robotic-pool-cleaners\/[a-z0-9-]+\/$/);
-      expect(r.blockers.length).toBeGreaterThan(0);
       expect(r.nextAction.length).toBeGreaterThan(20);
+      // A fully evidenced product legitimately has no blockers — that is the
+      // goal state, not a data error. Everything else must explain itself.
+      if (!r.schemaEligible) expect(r.blockers.length).toBeGreaterThan(0);
+      else expect(r.blockers).toEqual([]);
     }
   });
 });
