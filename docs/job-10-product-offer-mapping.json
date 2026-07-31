@@ -133,7 +133,7 @@
         "1 offer(s) exist for this product",
         "1 from an approved retailer",
         "ranked by exact-match confidence, then stock, then delivered price",
-        "chosen: offer-prod-betta-se-plus-ret-amazon (researched_exact)"
+        "chosen: offer-prod-betta-se-plus-ret-amazon (verified_exact)"
       ],
       "commissionUsedAsTieBreak": false,
       "retailer": "ret-amazon",
@@ -198,7 +198,7 @@
         "1 offer(s) exist for this product",
         "1 from an approved retailer",
         "ranked by exact-match confidence, then stock, then delivered price",
-        "chosen: offer-prod-beatbot-aquasense-2-ultra-ret-amazon (researched_exact)"
+        "chosen: offer-prod-beatbot-aquasense-2-ultra-ret-amazon (verified_exact)"
       ],
       "commissionUsedAsTieBreak": false,
       "retailer": "ret-amazon",

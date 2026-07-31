@@ -1,11 +1,10 @@
 {
   "generatedFor": "2026-07-31",
-  "total": 21,
+  "total": 20,
   "byRule": {
     "search_not_offer": 8,
     "refurbished_or_used": 1,
     "sibling_model": 2,
-    "different_generation": 1,
     "wrong_region": 1,
     "unclear_seller": 8
   },
@@ -72,13 +71,6 @@
       "candidate": "AIPER SCUBA V3 listing",
       "reason": "Returned by the Amazon search for an Aiper Scuba. The A+ hero image has 'SCUBA V3' printed on the chassis, and the panels describe an AI camera, AI Navium scheduling and 7 days on one charge — none of which belongs to the S1 or the X1 we hold.",
       "rule": "sibling_model"
-    },
-    {
-      "productId": "prod-betta-se-plus",
-      "retailerId": "ret-amazon",
-      "candidate": "ASIN B0CVMQ3XBX (older Betta listing carrying a 'View newer model' pointer)",
-      "reason": "The listing recorded for the SE Plus shows Amazon's 'View newer model' panel pointing at a separate Betta SE Plus listing at $429.90. Amazon shows that panel only when the ASIN has been superseded, so the ASIN we hold is very likely an earlier model. Held rather than published until the newer listing's ASIN and title are read.",
-      "rule": "different_generation"
     },
     {
       "productId": "prod-aiper-scuba-x1",

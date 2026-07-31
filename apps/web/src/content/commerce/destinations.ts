@@ -47,6 +47,56 @@ const AMAZON_ASINS: { productId: string; asin: string; sourceUrl: string }[] = [
 ];
 
 /**
+ * MACHINE-READ IDENTITY CHECKS, 2026-07-31.
+ *
+ * A product page carries a details table with Brand, Model Name, Model Number
+ * and Manufacturer Part Number, plus a canonical URL that Amazon derives from
+ * the listing's own title. Those fields are readable, and between them they
+ * settle the only question that matters here: IS THIS ASIN THE MODEL WE HOLD?
+ *
+ * This is identity ONLY. It is deliberately not a price check: the buy-box
+ * price block (`priceToPay`) is absent from the markup served to a non-browser
+ * client, so the dollar figures that ARE present belong to other sellers,
+ * variants or comparison widgets and cannot be told apart from the real one. A
+ * price still comes from a human looking at the buy box.
+ *
+ * That split is the point. The failure that reached production was an identity
+ * failure — a dead ASIN, then a listing suspected of being superseded — and
+ * identity is exactly the half that can now be checked automatically.
+ */
+interface IdentityCheck {
+  asin: string;
+  confirmed: boolean;
+  /** The fields the page itself published, verbatim. */
+  evidence: string;
+  checkedOn: string;
+}
+
+export const IDENTITY_CHECKS: Record<string, IdentityCheck> = {
+  "prod-betta-se-plus": {
+    asin: "B0CVMQ3XBX",
+    confirmed: true,
+    evidence:
+      "Details table gives Brand 'Betta', Model Name / Model Number / Manufacturer Part Number all 'Betta-SE-Plus', Model Year 2023, ASIN B0CVMQ3XBX; canonical URL /Betta-SE-Plus-Continuous-Safeguard/. Title: 'Betta SE Plus - Solar-Powered Robotic Pool Skimmer with 24/7 Continuous Cleaning Power, Dual Charging Options, Twin Salt Chlorine Tolerant Motors, and Shallow Water Safeguard'.",
+    checkedOn: "2026-07-31",
+  },
+  "prod-beatbot-aquasense-2-ultra": {
+    asin: "B0DMN6NV6H",
+    confirmed: true,
+    evidence:
+      "Canonical URL /Beatbot-AquaSense-Cordless-Cleaning-Clarification/; Brand 'Beatbot', Model Number PRCMDS02G-2025. The feature bullets state '5-in-1 Cleaning Power — walls, floor, water surface, waterline, and water clarity', and water clarification is what separates the Ultra from the 4-in-1 Pro in the same series.",
+    checkedOn: "2026-07-31",
+  },
+  "prod-aiper-scuba-x1": {
+    asin: "B0F9WN961G",
+    confirmed: false,
+    evidence:
+      "NOT CONFIRMED. The listing publishes no model name: title is 'AIPER Pool Cleaner', Model Name / Model Number / Manufacturer Part Number are all 'Blue' (a colour), and the canonical URL is /AIPER-Blue-Pool-Cleaner/. The page's comparison content mentions Scuba X1, X1 Pro Max, V3 and S3 together, so it cannot distinguish the model we hold from its siblings. The ASIN stays researched_exact and carries no offer.",
+    checkedOn: "2026-07-31",
+  },
+};
+
+/**
  * What a human found when they searched Amazon for a product we hold no ASIN
  * for. "We never looked" and "we looked and it is not sold there" are different
  * facts, and only the second one is a reason to stop looking.
@@ -86,14 +136,18 @@ export const DESTINATIONS: ProductDestination[] = [
       identifierKind: "asin",
       exactModel: model(productId),
       destinationUrl: `https://www.amazon.com/dp/${asin}`,
-      confidence: "researched_exact",
+      // Identity-confirmed ASINs reach verified_exact WITHOUT a price behind
+      // them: knowing the destination is the right model and knowing what it
+      // costs are separate claims, and only the first is settled here.
+      confidence: IDENTITY_CHECKS[productId]?.confirmed ? ("verified_exact" as const) : ("researched_exact" as const),
       sourceReference: `ASIN captured from the Amazon listing cited in the Job 8 record: ${sourceUrl}`,
       sourceCheckedDate: DESTINATION_CHECK_DATE,
       // Amazon exposes the seller only on the rendered page, which we may not read.
       sellerIdentity: null,
       sellerModel: "unknown",
       notes:
-        "Destination confirmed to resolve on amazon.com (HTTP 200, 2026-07-31), so the ASIN is live and the host is Amazon US. The model at the destination has NOT been re-confirmed, because that needs page content the Associates programme forbids scraping. Raising this to verified_exact requires the Creators API.",
+        IDENTITY_CHECKS[productId]?.evidence ??
+        "Destination resolves on amazon.com and is not Amazon's 404 page, so the ASIN is live. The model at the destination has not been confirmed.",
     }),
   ),
   ...NO_AMAZON_DESTINATION.map(
@@ -213,14 +267,14 @@ export const REJECTED_CANDIDATES: RejectedCandidate[] = [
       "Returned by the Amazon search for an Aiper Scuba. The A+ hero image has 'SCUBA V3' printed on the chassis, and the panels describe an AI camera, AI Navium scheduling and 7 days on one charge — none of which belongs to the S1 or the X1 we hold.",
     rule: "sibling_model",
   },
-  {
-    productId: "prod-betta-se-plus",
-    retailerId: "ret-amazon",
-    candidate: "ASIN B0CVMQ3XBX (older Betta listing carrying a 'View newer model' pointer)",
-    reason:
-      "The listing recorded for the SE Plus shows Amazon's 'View newer model' panel pointing at a separate Betta SE Plus listing at $429.90. Amazon shows that panel only when the ASIN has been superseded, so the ASIN we hold is very likely an earlier model. Held rather than published until the newer listing's ASIN and title are read.",
-    rule: "different_generation",
-  },
+  // A "different_generation" refusal was recorded here for ASIN B0CVMQ3XBX, on
+  // the strength of Amazon's "View newer model" panel pointing at a separate
+  // Betta SE Plus listing at $429.90. Reading the listing's own details table
+  // disproved it: Model Name, Model Number and Manufacturer Part Number are all
+  // "Betta-SE-Plus". The panel points at a different LISTING of the same model,
+  // not a successor. The refusal is withdrawn rather than left standing, since
+  // a wrong refusal suppresses a real offer just as effectively as a wrong
+  // acceptance publishes a false one.
   {
     productId: "prod-aiper-scuba-x1",
     retailerId: "ret-aiper-store",

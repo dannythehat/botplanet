@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { PRODUCTS } from "../src/content/products";
-import { DESTINATIONS, REDIRECT_KEYS, REJECTED_CANDIDATES, destinationFor } from "../src/content/commerce/destinations";
+import { DESTINATIONS, IDENTITY_CHECKS, REDIRECT_KEYS, REJECTED_CANDIDATES, destinationFor } from "../src/content/commerce/destinations";
 import { NOT_RELATIONSHIPS, PROGRAMMES, RETAILERS, approvedUsRetailers, programme, retailer, usableUsProgrammes } from "../src/content/commerce/registry";
 import { MANUAL_CHECKS } from "../src/content/commerce/manual-checks";
 import { CURRENT_PRICE_STATES, FRESHNESS_WINDOW_DAYS } from "../src/content/commerce/types";
@@ -133,7 +133,7 @@ describe("programme territory and state", () => {
 
 describe("exact-product destinations", () => {
   it("captures an ASIN for five products and refuses to invent the rest", () => {
-    const exact = DESTINATIONS.filter((d) => d.confidence === "researched_exact");
+    const exact = DESTINATIONS.filter((d) => d.confidence === "researched_exact" || d.confidence === "verified_exact");
     const search = DESTINATIONS.filter((d) => d.confidence === "search_only");
     expect(exact).toHaveLength(5);
     expect(search).toHaveLength(5);
@@ -149,12 +149,30 @@ describe("exact-product destinations", () => {
   });
 
   it("never claims a verified match on researched evidence alone", () => {
-    // The registry itself holds nothing above researched_exact. Only a manual
-    // check, where a person read the title, can raise an OFFER to verified_exact.
-    expect(DESTINATIONS.some((d) => d.confidence === "verified_exact")).toBe(false);
-    for (const d of DESTINATIONS.filter((x) => x.confidence === "researched_exact")) {
-      expect(d.notes).toContain("has NOT been re-confirmed");
+    // verified_exact now has two routes, and both require a named identifier
+    // that a person or a machine actually READ — never the mere fact that the
+    // ASIN was in our notes and the URL resolves. That was the check that let
+    // a dead ASIN reach production.
+    for (const d of DESTINATIONS.filter((x) => x.confidence === "verified_exact")) {
+      const check = IDENTITY_CHECKS[d.productId];
+      const manual = MANUAL_CHECKS.find((m) => m.productId === d.productId && m.identityConfirmed);
+      expect(Boolean(check?.confirmed) || Boolean(manual)).toBe(true);
+      // The evidence has to name what was read, not assert that it was.
+      if (check?.confirmed) expect(check.evidence).toMatch(/Model Number|Model Name|canonical/i);
     }
+    // Anything short of that stays researched_exact and says why.
+    for (const d of DESTINATIONS.filter((x) => x.confidence === "researched_exact")) {
+      expect(d.notes).toMatch(/NOT CONFIRMED|has not been confirmed/i);
+    }
+  });
+
+  it("refuses an identity check that the listing does not actually support", () => {
+    // The Aiper listing publishes "Blue" as its model name and mentions four
+    // Scuba models in one comparison block. A page that cannot name its own
+    // model cannot confirm one.
+    const aiper = IDENTITY_CHECKS["prod-aiper-scuba-x1"];
+    expect(aiper.confirmed).toBe(false);
+    expect(destinationFor("prod-aiper-scuba-x1")!.confidence).toBe("researched_exact");
   });
 
   it("names the Job 8 exact model on every destination", () => {
@@ -442,12 +460,27 @@ describe("schema eligibility gates", () => {
     }
   });
 
-  it("raises a destination to verified_exact only when a human confirmed the title", () => {
+  it("raises a destination to verified_exact only on a read identifier", () => {
     for (const o of OFFERS) {
       if (o.destination.confidence !== "verified_exact") continue;
-      const c = MANUAL_CHECKS.find((x) => x.productId === o.productId)!;
-      expect(c.identityConfirmed).toBe(true);
-      expect(c.observedTitle.length).toBeGreaterThan(20);
+      const c = MANUAL_CHECKS.find((x) => x.productId === o.productId);
+      const machine = IDENTITY_CHECKS[o.productId];
+      if (c) expect(c.identityConfirmed && c.observedTitle.length > 20).toBe(true);
+      else expect(machine?.confirmed).toBe(true);
+    }
+  });
+
+  it("confirming the model does not confirm the price", () => {
+    // The identity read cannot see the buy box — `priceToPay` is absent from
+    // the markup a non-browser client is served — so a machine-confirmed
+    // destination still publishes no price until a person reads one.
+    for (const [productId, check] of Object.entries(IDENTITY_CHECKS)) {
+      if (!check.confirmed) continue;
+      if (MANUAL_CHECKS.some((m) => m.productId === productId)) continue;
+      const o = OFFERS.find((x) => x.productId === productId)!;
+      expect(o.destination.confidence).toBe("verified_exact");
+      expect(o.basePriceMinor).toBeNull();
+      expect(publicationFor(o).priceShowable).toBe(false);
     }
   });
 
