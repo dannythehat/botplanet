@@ -105,27 +105,23 @@
         "1 offer(s) exist for this product",
         "1 from an approved retailer",
         "ranked by exact-match confidence, then stock, then delivered price",
-        "chosen: offer-prod-polaris-freedom-ret-amazon (researched_exact)"
+        "chosen: offer-prod-polaris-freedom-ret-amazon (verified_exact)"
       ],
       "commissionUsedAsTieBreak": false,
       "retailer": "ret-amazon",
       "exactProductIdentifier": "B0BX9DJS7R",
       "identifierKind": "asin",
       "market": "us",
-      "priceState": "not_published",
-      "stockState": "unknown",
-      "deliveryState": "not_exposed_by_source",
+      "priceState": "current",
+      "stockState": "in_stock",
+      "deliveryState": "free",
       "warrantyRoute": "Manufacturer warranty term not confirmed",
       "lastChecked": "2026-07-31",
-      "freshness": "indicative",
+      "freshness": "live",
       "affiliateProgramme": "prog-amazon-us",
       "goPath": "/go/pool-polaris-freedom-amazon",
-      "schemaEligible": false,
-      "blockers": [
-        "no current price from an approved source",
-        "stock state unknown",
-        "not eligible for Offer structured data"
-      ],
+      "schemaEligible": true,
+      "blockers": [],
       "nextAction": "Obtain price and availability through the Amazon Creators API so the offer can carry a current price and enter Offer schema."
     },
     {

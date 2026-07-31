@@ -156,6 +156,14 @@ export const REJECTED_CANDIDATES: RejectedCandidate[] = [
     rule: "search_not_offer",
   },
   {
+    productId: "prod-polaris-freedom",
+    retailerId: "ret-amazon",
+    candidate: "Used - Like New buying option on B0BX9DJS7R at $934.82",
+    reason:
+      "The same listing offers a used copy $264.18 cheaper than the new one. It is a different thing with a different warranty position — a manufacturer term runs from the original purchase, not from ours — so quoting the lower figure would misdescribe what the buy button buys. Only the buy-new price is recorded.",
+    rule: "refurbished_or_used",
+  },
+  {
     productId: "prod-aiper-scuba-x1",
     retailerId: "ret-aiper-store",
     candidate: "Aiper CJ Product Catalog, feed 17133094",

@@ -149,9 +149,21 @@ export function buildOffers(today = new Date(AS_AT)): Offer[] {
         market: "us",
         currency: "USD",
         destination: check?.identityConfirmed
-          ? // A human read the title and confirmed the model, which is the only
+          ? // A human read the page and confirmed the model, which is the only
             // thing that can raise a destination to verified_exact here.
-            { ...dest, confidence: "verified_exact" as const, sellerIdentity: check.sellerWording, sellerModel: "marketplace_third_party" as const }
+            //
+            // The SELLER is a separate question and does not come along for the
+            // ride: a named seller line means a marketplace third party, and no
+            // seller line means we do not know. It must not default to Amazon,
+            // because the returns route and any seller warranty follow whoever
+            // is actually selling, and the first product checked turned out to
+            // be sold by "The Pool Spot" rather than by Amazon.
+            {
+              ...dest,
+              confidence: "verified_exact" as const,
+              sellerIdentity: check.sellerWording,
+              sellerModel: (check.sellerWording ? "marketplace_third_party" : "unknown") as const,
+            }
           : dest,
         basePriceMinor: check?.priceMinor ?? null,
         shipping: {

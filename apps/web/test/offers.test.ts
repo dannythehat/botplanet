@@ -283,6 +283,41 @@ describe("price, stock and shipping normalisation", () => {
     expect(cc.warranty.manufacturer).toContain("1 year");
     expect(cc.warranty.manufacturer).not.toContain("30-day");
   });
+
+  it("leaves the seller unknown when the page did not show one", () => {
+    // Confirming the MODEL does not confirm the SELLER. The Polaris capture had
+    // no seller line, and defaulting it to Amazon would attach a returns route
+    // and a warranty position we have no evidence for.
+    const pf = OFFERS.find((o) => o.productId === "prod-polaris-freedom")!;
+    expect(pf.destination.confidence).toBe("verified_exact");
+    expect(pf.destination.sellerIdentity).toBeNull();
+    expect(pf.destination.sellerModel).toBe("unknown");
+    expect(pf.warranty.marketplaceSellerReturnRoute).not.toMatch(/Sold by/);
+    expect(pf.warranty.retailerReturnPeriod).toBeNull();
+  });
+
+  it("records the buy-new price and refuses the used option on the same listing", () => {
+    const pf = OFFERS.find((o) => o.productId === "prod-polaris-freedom")!;
+    expect(pf.basePriceMinor).toBe(119900);
+    // The used copy was $934.82 and must never become the quoted price.
+    expect(pf.basePriceMinor).not.toBe(93482);
+    const used = REJECTED_CANDIDATES.find(
+      (c) => c.productId === "prod-polaris-freedom" && c.rule === "refurbished_or_used",
+    );
+    expect(used).toBeDefined();
+    expect(used!.candidate).toContain("934.82");
+  });
+
+  it("quotes the delivery date a non-member actually gets", () => {
+    // The listing also offered "FREE delivery Tomorrow, August 1" to Prime
+    // members. Recording that as the delivery statement would promise most
+    // readers a date they will not be given.
+    const c = MANUAL_CHECKS.find((x) => x.productId === "prod-polaris-freedom")!;
+    expect(c.shippingWording).toBe("FREE delivery Thursday, August 6");
+    expect(c.shippingWording).not.toMatch(/prime/i);
+    const pf = OFFERS.find((o) => o.productId === "prod-polaris-freedom")!;
+    expect(pf.shipping.state).toBe("free");
+  });
 });
 
 describe("freshness", () => {
