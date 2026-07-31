@@ -18,6 +18,9 @@ import {
   BOTMATCH_FIELDS,
   COMPARISON_FIELDS,
   LAUNCH_PRODUCT_COUNT,
+  MATERIAL_REVIEW_FIELDS,
+  REVIEW_SECTIONS,
+  REVIEW_WEIGHTED_THRESHOLD,
   buildReport,
   fieldIsCurrent,
   isCurrent,
@@ -25,6 +28,9 @@ import {
   validateLedger,
 } from "../src/lib/evidence-report";
 import { buildNotionMapping } from "../src/lib/notion-mapping";
+import { LAUNCH_CATEGORY, REDIRECTS, ROUTES, productPath } from "../src/content/routes";
+import { routes as categoryPaths } from "../src/content/nav";
+import { WARRANTY_NOT_CONFIRMED, FORBIDDEN_WARRANTY_WORDINGS, hasForbiddenWarrantyWording, warrantyStatement } from "../src/lib/warranty";
 import { SOURCE_PRIORITY, type ClaimRecord, type EvidenceRecord } from "../src/content/evidence/types";
 import { gramsToPoundsDisplay, normaliseDuration, normaliseLength, normaliseMass, roundLike } from "../src/lib/normalize";
 
@@ -467,8 +473,10 @@ describe("claim ledger", () => {
   it("records what could not be claimed, with the reason", () => {
     expect(blocked.length).toBeGreaterThan(0);
     for (const b of blocked) {
-      expect(b.state).not.toBe("populated");
       expect(b.state).not.toBe("not_applicable");
+      // A populated field is only blocked in the one case where the value is
+      // real but its source cannot speak for the manufacturer: a dealer warranty.
+      if (b.state === "populated") expect(b.field).toBe("warranty");
       expect(b.reason.length).toBeGreaterThan(10);
     }
   });
@@ -646,6 +654,292 @@ describe("commission independence", () => {
       if (!s) continue;
       const ranks = p.sources.map((x) => sources.find((y) => y.url === x.url)).filter(Boolean).map((x) => SOURCE_PRIORITY[x!.type]);
       expect(SOURCE_PRIORITY[s.type]).toBe(Math.min(...ranks));
+    }
+  });
+});
+
+/* ------------------------------------------------------------------ */
+/* Job 8 correction: canonical URLs, readiness gates, warranty wording  */
+/* ------------------------------------------------------------------ */
+
+describe("canonical product URLs in the register mapping", () => {
+  const mapping = buildNotionMapping();
+  const CANONICAL = `/robots/${LAUNCH_CATEGORY}/`;
+
+  it("uses the locked product route for all ten rows", () => {
+    expect(mapping.rows).toHaveLength(LAUNCH_PRODUCT_COUNT);
+    for (const r of mapping.rows) {
+      expect(r.url).toBe(`https://botplanet.io${CANONICAL}${r.slug}/`);
+      expect(r.path.startsWith(CANONICAL)).toBe(true);
+      expect(r.path.endsWith("/")).toBe(true);
+    }
+  });
+
+  it("resolves every URL to the correct stable product", () => {
+    for (const r of mapping.rows) {
+      const p = Object.values(PRODUCTS).find((x) => x.productId === r.productId)!;
+      expect(p).toBeDefined();
+      expect(r.path).toBe(productPath(p.slug));
+      expect(r.url.endsWith(`/${p.slug}/`)).toBe(true);
+    }
+  });
+
+  it("contains zero obsolete /pool-cleaners/ URLs", () => {
+    const obsolete = mapping.rows.filter((r) => /\/pool-cleaners\//.test(r.url) && !r.url.includes(CANONICAL));
+    expect(obsolete).toEqual([]);
+    for (const r of mapping.rows) expect(r.url).not.toContain("botplanet.io/pool-cleaners/");
+  });
+
+  it("generates the URL through the central route configuration, not a second pattern", () => {
+    for (const r of mapping.rows) {
+      expect(r.path).toBe(categoryPaths.product(LAUNCH_CATEGORY, r.slug));
+    }
+  });
+
+  it("agrees with the route registry's category hierarchy", () => {
+    const hub = ROUTES.find((x) => x.path === `/robots/${LAUNCH_CATEGORY}/`);
+    expect(hub).toBeDefined();
+    for (const r of mapping.rows) expect(r.path.startsWith(hub!.path)).toBe(true);
+  });
+
+  it("points no URL at a redirect source", () => {
+    const aliases = new Set(REDIRECTS.map((x) => x.from));
+    for (const r of mapping.rows) {
+      expect(aliases.has(r.path)).toBe(false);
+      // Nor at an alias of any registry route.
+      for (const route of ROUTES) for (const a of route.aliases ?? []) expect(r.path).not.toBe(a);
+    }
+  });
+});
+
+describe("review-writing readiness rule", () => {
+  it("sets the weighted floor at 65%, not the old arbitrary 60%", () => {
+    expect(REVIEW_WEIGHTED_THRESHOLD).toBe(65);
+  });
+
+  it("treats the percentage as necessary but never sufficient", () => {
+    // Every product at or above the floor that is still not review-ready must
+    // have a non-percentage gate failing.
+    for (const p of REPORT.products) {
+      if (p.publication.readyForReviewWriting) continue;
+      if (p.overall.weightedPercent < REVIEW_WEIGHTED_THRESHOLD) continue;
+      const failed = p.reviewGates.filter((g) => !g.passed).map((g) => g.gate);
+      expect(failed.length).toBeGreaterThan(0);
+      expect(failed).not.toEqual(["weighted_completeness"]);
+    }
+  });
+
+  it("checks six critical gates on every product", () => {
+    const expected = [
+      "weighted_completeness",
+      "model_identity",
+      "no_material_conflict",
+      "review_sections_writable",
+      "no_speculation",
+      "corrections_identified",
+    ];
+    for (const p of REPORT.products) expect(p.reviewGates.map((g) => g.gate)).toEqual(expected);
+  });
+
+  it("passes review writing only when every gate passes", () => {
+    for (const p of REPORT.products) {
+      const allPass = p.reviewGates.every((g) => g.passed) && p.publication.safeForLimitedFactualUse;
+      expect(p.publication.readyForReviewWriting).toBe(allPass);
+    }
+  });
+
+  it("blocks a review whose sections cannot be written from evidence", () => {
+    const polaris = REPORT.products.find((p) => p.slug === "polaris-freedom")!;
+    expect(polaris.overall.weightedPercent).toBeGreaterThanOrEqual(REVIEW_WEIGHTED_THRESHOLD);
+    expect(polaris.publication.readyForReviewWriting).toBe(false);
+    expect(polaris.reviewGates.find((g) => g.gate === "review_sections_writable")!.passed).toBe(false);
+  });
+
+  it("blocks a review that would rest on a suppressed value", () => {
+    const beatbot = REPORT.products.find((p) => p.slug === "beatbot-aquasense-2-ultra")!;
+    expect(beatbot.reviewGates.find((g) => g.gate === "no_speculation")!.passed).toBe(false);
+    expect(beatbot.publicationBlockers.join(" ")).toContain("suppressed value");
+  });
+
+  it("blocks a review when a material field carries an unresolved conflict", () => {
+    for (const p of REPORT.products) {
+      const conflicted = MATERIAL_REVIEW_FIELDS.some(
+        (k) => LEDGER.fields.find((f) => f.productId === p.productId && f.field === k)?.state === "conflicting",
+      );
+      if (conflicted) expect(p.publication.readyForReviewWriting).toBe(false);
+    }
+  });
+
+  it("gives every gate a written reason, passing or failing", () => {
+    for (const p of REPORT.products) for (const g of p.reviewGates) expect(g.detail.length).toBeGreaterThan(15);
+  });
+
+  it("never marks a product comparison- or BotMatch-ready without review readiness", () => {
+    for (const p of REPORT.products) {
+      if (p.publication.readyForComparison) expect(p.publication.readyForReviewWriting).toBe(true);
+      if (p.publication.readyForBotMatch) expect(p.publication.readyForReviewWriting).toBe(true);
+    }
+  });
+
+  it("declares the review sections it gates on", () => {
+    expect(REVIEW_SECTIONS.length).toBeGreaterThanOrEqual(5);
+    for (const s of REVIEW_SECTIONS) expect(s.requires.length).toBeGreaterThan(0);
+  });
+});
+
+describe("Dolphin Premier — launch candidate under review", () => {
+  const premier = REPORT.products.find((p) => p.slug === "dolphin-premier")!;
+
+  it("stays in the ledger and the launch inventory", () => {
+    expect(premier).toBeDefined();
+    expect(PRODUCTS["dolphin-premier"]).toBeDefined();
+  });
+
+  it("is structurally valid, factually evidenced and safe for limited factual use", () => {
+    expect(premier.publication.structurallyValid).toBe(true);
+    expect(premier.publication.factuallyEvidenced).toBe(true);
+    expect(premier.publication.safeForLimitedFactualUse).toBe(true);
+  });
+
+  it("carries the dealer-source qualification", () => {
+    expect(premier.evidenceQualification).toContain("dealer-sourced");
+    expect(premier.evidenceQualification).toContain("none is presented as manufacturer-stated");
+  });
+
+  it("is excluded from review writing, comparison and BotMatch", () => {
+    expect(premier.publication.readyForReviewWriting).toBe(false);
+    expect(premier.publication.readyForComparison).toBe(false);
+    expect(premier.publication.readyForBotMatch).toBe(false);
+  });
+
+  it("is typed as a candidate under review", () => {
+    expect(premier.launchStatus).toBe("candidate_under_review");
+  });
+
+  it("lists every required blocker", () => {
+    const blockers = premier.publicationBlockers.join(" | ");
+    expect(blockers).toContain("no accepted official manufacturer page");
+    expect(blockers).toContain("no accepted manual");
+    expect(blockers).toContain("no reliably established model number");
+    expect(blockers).toContain("unresolved conflict on poolSizeSuitability");
+    expect(blockers).toContain("manufacturer identity/evidence weakness");
+    expect(blockers).toContain(`${REVIEW_WEIGHTED_THRESHOLD}% floor`);
+  });
+
+  it("presents no dealer-derived statement as manufacturer-stated", () => {
+    const mine = LEDGER.evidence.filter((e) => e.productId === premier.productId);
+    for (const e of mine) {
+      expect(e.label).not.toBe("manufacturer_stated");
+      expect(e.label).not.toBe("manual_verified");
+    }
+    expect(REPORT.issues.filter((i) => i.rule === "no_dealer_as_manufacturer")).toEqual([]);
+  });
+});
+
+describe("Aiper Seagull SE — limited factual use only", () => {
+  const seagull = REPORT.products.find((p) => p.slug === "aiper-seagull-se")!;
+
+  it("stays in the catalogue", () => {
+    expect(PRODUCTS["aiper-seagull-se"]).toBeDefined();
+    expect(seagull).toBeDefined();
+  });
+
+  it("is safe for limited factual use", () => {
+    expect(seagull.publication.safeForLimitedFactualUse).toBe(true);
+    expect(seagull.launchStatus).toBe("limited_factual_use");
+  });
+
+  it("is excluded from review writing, comparison and BotMatch", () => {
+    expect(seagull.publication.readyForReviewWriting).toBe(false);
+    expect(seagull.publication.readyForComparison).toBe(false);
+    expect(seagull.publication.readyForBotMatch).toBe(false);
+  });
+
+  it("names insufficient evidence coverage in its blockers", () => {
+    expect(seagull.publicationBlockers.join(" | ")).toContain("insufficient evidence coverage");
+  });
+
+  it("does not clear the 65% floor", () => {
+    expect(seagull.overall.weightedPercent).toBeLessThan(REVIEW_WEIGHTED_THRESHOLD);
+  });
+});
+
+describe("warranty wording", () => {
+  const { claims } = buildClaimLedger();
+
+  it("uses one approved sentence, held in one place", () => {
+    expect(WARRANTY_NOT_CONFIRMED).toBe("Manufacturer warranty term not confirmed");
+    for (const p of REPORT.products) {
+      if (p.warranty.status === "not_confirmed") expect(p.warranty.text).toBe(WARRANTY_NOT_CONFIRMED);
+    }
+  });
+
+  it("never asserts that a product has no warranty", () => {
+    for (const p of REPORT.products) expect(hasForbiddenWarrantyWording(p.warranty.text)).toBeNull();
+    for (const c of claims) expect(hasForbiddenWarrantyWording(c.claimText)).toBeNull();
+    for (const p of Object.values(PRODUCTS)) {
+      const prose = [p.verdict, p.oneLiner, p.whoShouldBuy, p.whoShouldAvoid, ...p.pros, ...p.limitations].join(" ");
+      expect(hasForbiddenWarrantyWording(prose)).toBeNull();
+    }
+  });
+
+  it("catches each forbidden phrasing", () => {
+    expect(FORBIDDEN_WARRANTY_WORDINGS.length).toBeGreaterThanOrEqual(5);
+    for (const bad of ["No warranty", "warranty unavailable", "does not offer a warranty", "sold without a warranty"]) {
+      expect(hasForbiddenWarrantyWording(bad)).not.toBeNull();
+    }
+  });
+
+  it("never promotes a dealer's term to the product's canonical warranty", () => {
+    const premier = REPORT.products.find((p) => p.slug === "dolphin-premier")!;
+    expect(premier.warranty.status).toBe("not_confirmed");
+    expect(premier.warranty.internalReason).toContain("dealer");
+    expect(claims.some((c) => c.productId === premier.productId && c.id.endsWith("-warranty"))).toBe(false);
+  });
+
+  it("confirms a term only when the manufacturer states it", () => {
+    for (const p of REPORT.products) {
+      if (p.warranty.status !== "confirmed") continue;
+      const f = LEDGER.fields.find((x) => x.productId === p.productId && x.field === "warranty")!;
+      const ev = LEDGER.evidence.find((e) => e.id === f.evidenceIds[0])!;
+      const src = LEDGER.sources.find((s) => s.id === ev.sourceId)!;
+      expect(["manufacturer_page", "manufacturer_document"]).toContain(src.type);
+    }
+  });
+
+  it("keeps an unconfirmed warranty out of comparison rows", () => {
+    for (const p of REPORT.products) {
+      if (p.publication.readyForComparison) expect(p.warranty.status).toBe("confirmed");
+    }
+  });
+
+  it("returns the approved wording for a missing field record", () => {
+    expect(warrantyStatement(undefined).text).toBe(WARRANTY_NOT_CONFIRMED);
+    expect(warrantyStatement(undefined).status).toBe("not_confirmed");
+  });
+});
+
+describe("register mapping carries the correction", () => {
+  const mapping = buildNotionMapping();
+
+  it("records the launch status of every row", () => {
+    const byStatus = mapping.rows.reduce<Record<string, number>>((a, r) => ({ ...a, [r.launchStatus]: (a[r.launchStatus] ?? 0) + 1 }), {});
+    expect(Object.keys(byStatus).every((k) => ["launch_ready", "limited_factual_use", "candidate_under_review"].includes(k))).toBe(true);
+    expect(mapping.rows.find((r) => r.slug === "dolphin-premier")!.launchStatus).toBe("candidate_under_review");
+    expect(mapping.rows.find((r) => r.slug === "aiper-seagull-se")!.launchStatus).toBe("limited_factual_use");
+  });
+
+  it("records every review gate with its reason", () => {
+    for (const r of mapping.rows) {
+      expect(r.reviewGates).toHaveLength(6);
+      for (const g of r.reviewGates) expect(g.detail.length).toBeGreaterThan(15);
+    }
+  });
+
+  it("records the approved warranty wording per row", () => {
+    for (const r of mapping.rows) {
+      expect(["confirmed", "not_confirmed"]).toContain(r.warrantyStatus);
+      if (r.warrantyStatus === "not_confirmed") expect(r.warrantyPublicWording).toBe(WARRANTY_NOT_CONFIRMED);
     }
   });
 });

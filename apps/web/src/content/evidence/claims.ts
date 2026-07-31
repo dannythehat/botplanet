@@ -204,7 +204,22 @@ export function buildClaimLedger(): ClaimLedger {
 
       const evidenceId = f.evidenceIds[0];
       const ev = ledger.evidence.find((e) => e.id === evidenceId);
-      const publisher = ev ? (byId.get(ev.sourceId)?.publisher ?? "the manufacturer") : "the manufacturer";
+      const src = ev ? byId.get(ev.sourceId) : undefined;
+      const publisher = src?.publisher ?? "the manufacturer";
+
+      // A dealer's warranty offer is a fact about that dealer, not about the
+      // product. It is never written as the product's warranty claim, however
+      // well attributed — a reader treats a warranty line as the maker's terms.
+      if (f.field === "warranty" && src?.type !== "manufacturer_page" && src?.type !== "manufacturer_document") {
+        blocked.push({
+          productId,
+          field: f.field,
+          wouldHaveSaid: t.say(String(f.value), publisher),
+          state: f.state,
+          reason: `the only warranty term is published by ${publisher}, a ${src?.type ?? "non-manufacturer"} source; a seller's terms are not promoted to the product's canonical warranty`,
+        });
+        continue;
+      }
 
       claims.push({
         id: `claim-${productId}-${f.field}`,

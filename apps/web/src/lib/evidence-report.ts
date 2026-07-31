@@ -20,6 +20,7 @@ import { ALL_GROUPS, deriveLedger, type DerivedLedger } from "../content/evidenc
 import { FIELD_REGISTRY, TOTAL_REGISTRY_WEIGHT } from "../content/evidence/field-registry";
 import { RECONCILIATION, reconciliationCounts, type Reconciliation } from "../content/evidence/reconciliation";
 import { VERIFICATIONS } from "../content/evidence/verification";
+import { warrantyStatement, hasForbiddenWarrantyWording, type WarrantyStatement } from "./warranty";
 import {
   CADENCE_DAYS,
   type ClaimRecord,
@@ -46,11 +47,65 @@ export const COMPARISON_FIELDS = [
 /** The fields BotMatch filters and scores on. */
 export const BOTMATCH_FIELDS = ["powerType", "poolTypes", "poolSizeSuitability", "surfacesCleaned", "appSupport"];
 
-/** Identity must be solid before a product can carry a written review. */
+/**
+ * Identity must be solid before a product can carry a written review.
+ *
+ * The line is drawn at "we can point a reader at the manufacturer's own page
+ * for this exact model". Model number and manual are recorded and wanted, but
+ * requiring them would fail seven of ten products for a disclosure habit that
+ * varies by brand — while an absent manufacturer page means we cannot show that
+ * the model we are describing is the model the maker sells.
+ */
 export const IDENTITY_CORE_FIELDS = ["brand", "canonicalName", "officialProductPageUrl"];
 
-/** Weighted completeness a product must reach before a review is written around it. */
-export const REVIEW_WEIGHTED_THRESHOLD = 60;
+/**
+ * Weighted completeness a product must reach before a review is written around
+ * it. Necessary, never sufficient — see REVIEW_SECTIONS and the gates below.
+ */
+export const REVIEW_WEIGHTED_THRESHOLD = 65;
+
+/**
+ * The sections a launch review is expected to contain, and the fields each one
+ * cannot be written honestly without. A percentage cannot tell you whether the
+ * "what it cleans" section can be written; this can.
+ */
+export const REVIEW_SECTIONS: { section: string; requires: string[] }[] = [
+  { section: "What it is", requires: ["brand", "canonicalName", "powerType"] },
+  { section: "Where it fits", requires: ["poolTypes", "poolSizeSuitability"] },
+  { section: "What it cleans", requires: ["surfacesCleaned", "navigation", "filtration"] },
+  { section: "How it runs", requires: ["runtimeMins"] },
+  { section: "Living with it", requires: ["weightLbs"] },
+];
+
+/** Fields where an unresolved conflict makes a review dishonest, not merely thin. */
+export const MATERIAL_REVIEW_FIELDS = [
+  "powerType",
+  "poolTypes",
+  "poolSizeSuitability",
+  "surfacesCleaned",
+  "runtimeMins",
+  "warranty",
+];
+
+/**
+ * Where a product stands in the launch set. An explicit typed state, because
+ * "not ready" covers two very different situations: a well-identified product
+ * with thin data, and a product we cannot firmly identify at all.
+ */
+export type LaunchStatus =
+  /** Identified, evidenced and complete enough to write a review around. */
+  | "launch_ready"
+  /** Identified and safe to state individual facts from, but not to review or compare. */
+  | "limited_factual_use"
+  /** Identity or evidence is too weak to treat as a settled launch product. */
+  | "candidate_under_review";
+
+/** One readiness gate, with the reason it passed or failed. */
+export interface ReviewGate {
+  gate: string;
+  passed: boolean;
+  detail: string;
+}
 
 /* ------------------------------------------------------------------ */
 /* Validation                                                          */
@@ -181,6 +236,36 @@ export function validateLedger(ledger: DerivedLedger, claims: ClaimRecord[] = []
         issues.push({ severity: "error", rule: "no_tested_claims", detail: `editorial prose asserts testing (${re})`, productId: p.productId });
       }
     }
+    // Where no warranty term is confirmed, the copy must not assert an absence.
+    const bad = hasForbiddenWarrantyWording(prose);
+    if (bad) {
+      issues.push({ severity: "error", rule: "warranty_wording", detail: `editorial prose asserts a warranty absence (${bad})`, productId: p.productId });
+    }
+  }
+
+  // A dealer or editorial source must never be labelled as the manufacturer.
+  const byId = new Map(ledger.sources.map((s) => [s.id, s]));
+  for (const e of ledger.evidence) {
+    const src = byId.get(e.sourceId);
+    if (!src) continue;
+    const isManufacturer = src.type === "manufacturer_page" || src.type === "manufacturer_document";
+    if (!isManufacturer && (e.label === "manufacturer_stated" || e.label === "manual_verified")) {
+      issues.push({
+        severity: "error",
+        rule: "no_dealer_as_manufacturer",
+        detail: `${e.field} is labelled ${e.label} but its source is ${src.type} (${src.publisher})`,
+        productId: e.productId,
+        field: e.field,
+      });
+    }
+  }
+
+  // Nothing on a public claim may assert a warranty absence either.
+  for (const c of claims) {
+    const bad = hasForbiddenWarrantyWording(c.claimText);
+    if (bad) {
+      issues.push({ severity: "error", rule: "warranty_wording", detail: `claim ${c.id} asserts a warranty absence (${bad})`, productId: c.productId });
+    }
   }
 
   return issues;
@@ -275,6 +360,14 @@ export interface ProductReport {
   latestVerification: string | null;
   publication: PublicationStates;
   publicationBlockers: string[];
+  /** Where this product stands in the launch set. */
+  launchStatus: LaunchStatus;
+  /** Every review-writing gate, with the reason it passed or failed. */
+  reviewGates: ReviewGate[];
+  /** Set when no manufacturer source backs this product's values. */
+  evidenceQualification: string | null;
+  /** Public wording for the warranty, confirmed or not. */
+  warranty: WarrantyStatement;
 }
 
 export interface EvidenceReport {
@@ -334,32 +427,128 @@ export function buildReport(today = new Date(), claims: ClaimRecord[] = []): Evi
     const unresolved = myConflicts.filter((c) => c.suppressed).length;
     const safeForLimitedFactualUse = structurallyValid && factuallyEvidenced && currentlyVerified;
 
-    const identityComplete = IDENTITY_CORE_FIELDS.every((k) => mine.find((f) => f.field === k)?.publishable);
-    const readyForReviewWriting = safeForLimitedFactualUse && identityComplete && overall.weightedPercent >= REVIEW_WEIGHTED_THRESHOLD;
+    const field = (k: string) => mine.find((x) => x.field === k);
+
+    // Warranty wording is decided once, from the winning source's authority.
+    // A dealer's term is never promoted to the product's canonical warranty.
+    const warrantyEvidence = (() => {
+      const f = field("warranty");
+      const ev = myEvidence.find((e) => e.id === f?.evidenceIds[0]);
+      const src = ev ? ledger.sources.find((s) => s.id === ev.sourceId) : undefined;
+      const fromManufacturer = src?.type === "manufacturer_page" || src?.type === "manufacturer_document";
+      return { statement: warrantyStatement(f, src?.publisher ?? null, Boolean(fromManufacturer)) };
+    })();
+
+    /**
+     * Is a field available to a comparison table or to BotMatch? Warranty is the
+     * one field where "publishable" is not enough: a dealer-stated term is a
+     * real, attributable fact about that dealer's offer, but putting it in a
+     * comparison row would present it as the manufacturer's.
+     */
     const has = (keys: string[]) => keys.every((k) => {
+      if (k === "warranty") return warrantyEvidence.statement.status === "confirmed";
       const f = mine.find((x) => x.field === k);
       return Boolean(f && (f.publishable || f.state === "not_applicable"));
     });
-    const readyForComparison = readyForReviewWriting && has(COMPARISON_FIELDS);
-    const readyForBotMatch = safeForLimitedFactualUse && has(BOTMATCH_FIELDS);
 
+    /* --- The review-writing gates. The percentage is one of six, not the rule. --- */
+    const identityComplete = IDENTITY_CORE_FIELDS.every((k) => field(k)?.publishable);
+    const manualAccepted = Boolean(v?.identity.manual?.coversThisModel);
+    const modelNumberKnown = Boolean(field("modelNumber")?.publishable);
+
+    const conflictedMaterial = MATERIAL_REVIEW_FIELDS.filter((k) => field(k)?.state === "conflicting");
+    const unwritableSections = REVIEW_SECTIONS.filter((s) => !has(s.requires));
+    // A section propped up by a value we are withholding is speculation.
+    const speculativeFields = REVIEW_SECTIONS.flatMap((s) => s.requires).filter((k) => field(k)?.state === "suppressed");
+    // Every stored value that did not survive verification must carry a written
+    // correction, so nothing unsupported can quietly stay in the copy.
+    const myReconciliation = RECONCILIATION.filter((r) => r.productId === p.productId);
+    const correctionsIdentified = myReconciliation
+      .filter((r) => !["agrees", "agrees_rounded", "not_applicable"].includes(r.outcome))
+      .every((r) => r.note.trim().length > 20);
+
+    const reviewGates: ReviewGate[] = [
+      {
+        gate: "weighted_completeness",
+        passed: overall.weightedPercent >= REVIEW_WEIGHTED_THRESHOLD,
+        detail: `weighted completeness ${overall.weightedPercent}% against a ${REVIEW_WEIGHTED_THRESHOLD}% floor`,
+      },
+      {
+        gate: "model_identity",
+        passed: identityComplete,
+        detail: identityComplete
+          ? `identified by ${v?.identity.officialProductPageUrl}${modelNumberKnown ? ", with a published model number" : ", model number not published by the maker"}${manualAccepted ? ", manual accepted" : ", no manual accepted"}`
+          : "no accepted official manufacturer page for this exact model",
+      },
+      {
+        gate: "no_material_conflict",
+        passed: conflictedMaterial.length === 0,
+        detail: conflictedMaterial.length
+          ? `unresolved conflict on material review field(s): ${conflictedMaterial.join(", ")}`
+          : "no unresolved conflict on a material review field",
+      },
+      {
+        gate: "review_sections_writable",
+        passed: unwritableSections.length === 0,
+        detail: unwritableSections.length
+          ? `insufficient evidence coverage for review section(s): ${unwritableSections.map((s) => s.section).join(", ")}`
+          : "every intended review section has the evidence it needs",
+      },
+      {
+        gate: "no_speculation",
+        passed: speculativeFields.length === 0,
+        detail: speculativeFields.length
+          ? `review section(s) would rest on suppressed value(s): ${speculativeFields.join(", ")}`
+          : "no review section rests on a suppressed value",
+      },
+      {
+        gate: "corrections_identified",
+        passed: correctionsIdentified,
+        detail: correctionsIdentified
+          ? "every unsupported or conflicting stored value carries a written correction"
+          : "an unsupported stored value has no written correction",
+      },
+    ];
+
+    const readyForReviewWriting = safeForLimitedFactualUse && reviewGates.every((g) => g.passed);
+    const readyForComparison = readyForReviewWriting && has(COMPARISON_FIELDS);
+    const readyForBotMatch = readyForReviewWriting && has(BOTMATCH_FIELDS);
+
+    /* --- Launch status: an explicit state, not the absence of readiness. --- */
+    const evidenceWeak = !identityComplete || conflictedMaterial.length > 0;
+    const launchStatus: LaunchStatus = evidenceWeak
+      ? "candidate_under_review"
+      : readyForReviewWriting
+        ? "launch_ready"
+        : "limited_factual_use";
+
+    /* --- Evidence qualification: never let a dealer read as the manufacturer. --- */
+    const manufacturerBacked = myEvidence.some((e) => e.label === "manufacturer_stated" || e.label === "manual_verified");
+    const evidenceQualification = manufacturerBacked
+      ? null
+      : "dealer-sourced: no manufacturer page or manual was accepted for this model, so every value is attributed to the dealer that published it and none is presented as manufacturer-stated";
+
+    /* --- Blockers: one line each, in the order a reader would ask them. --- */
     const blockers: string[] = [];
     if (!structurallyValid) blockers.push("validation errors");
     if (!factuallyEvidenced) blockers.push("published fields without evidence");
     if (!currentlyVerified) blockers.push("published fields outside their refresh cadence");
-    if (unresolved) blockers.push(`${unresolved} unresolved conflict(s)`);
-    if (!identityComplete) blockers.push("model identity incomplete");
-    if (overall.weightedPercent < REVIEW_WEIGHTED_THRESHOLD) {
-      blockers.push(`weighted completeness ${overall.weightedPercent}% below the ${REVIEW_WEIGHTED_THRESHOLD}% review threshold`);
+    if (evidenceQualification) blockers.push("manufacturer identity/evidence weakness: no manufacturer-sourced value for this model");
+    // Manual and model number are recorded for every product, but they only
+    // BLOCK when identity as a whole has failed — otherwise a fully ready
+    // product would carry blockers that block nothing.
+    if (!identityComplete) {
+      blockers.push("no accepted official manufacturer page");
+      if (!manualAccepted) blockers.push("no accepted manual");
+      if (!modelNumberKnown) blockers.push("no reliably established model number");
     }
-    for (const k of COMPARISON_FIELDS) {
-      const f = mine.find((x) => x.field === k);
-      if (f && !f.publishable && f.state !== "not_applicable") blockers.push(`comparison field unavailable: ${k}`);
+    for (const k of conflictedMaterial) blockers.push(`unresolved conflict on ${k}`);
+    if (unresolved && conflictedMaterial.length === 0) blockers.push(`${unresolved} unresolved conflict(s)`);
+    for (const g of reviewGates) {
+      if (!g.passed && g.gate !== "model_identity" && g.gate !== "no_material_conflict") blockers.push(g.detail);
     }
-    for (const k of BOTMATCH_FIELDS) {
-      const f = mine.find((x) => x.field === k);
-      if (f && !f.publishable && f.state !== "not_applicable") blockers.push(`BotMatch field unavailable: ${k}`);
-    }
+    for (const k of COMPARISON_FIELDS) if (!has([k])) blockers.push(`comparison field unavailable: ${k}`);
+    for (const k of BOTMATCH_FIELDS) if (!has([k])) blockers.push(`BotMatch field unavailable: ${k}`);
 
     const byClass: Record<string, number> = {};
     for (const c of claims.filter((c) => c.productId === p.productId)) {
@@ -394,6 +583,10 @@ export function buildReport(today = new Date(), claims: ClaimRecord[] = []): Evi
         readyForBotMatch,
       },
       publicationBlockers: blockers,
+      launchStatus,
+      reviewGates,
+      evidenceQualification,
+      warranty: warrantyEvidence.statement,
     };
   });
 

@@ -2,7 +2,7 @@ import type { APIRoute } from "astro";
 import { and, eq } from "drizzle-orm";
 import { getDb, schema } from "../lib/db";
 import { SITE } from "../lib/site";
-import { LAUNCH_CATEGORY, sitemapRoutes } from "../content/routes";
+import { productPath, sitemapRoutes } from "../content/routes";
 
 /**
  * XML sitemap generated from the route registry plus published products.
@@ -22,7 +22,7 @@ export const GET: APIRoute = async ({ locals }) => {
 
   const paths = [
     ...sitemapRoutes().map((r) => r.path),
-    ...products.map((p) => `/robots/${LAUNCH_CATEGORY}/${p.slug}/`),
+    ...products.map((p) => productPath(p.slug)),
   ];
 
   // Defensive: the registry is tested, but never emit a duplicate.

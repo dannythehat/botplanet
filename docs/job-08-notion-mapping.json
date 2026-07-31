@@ -33,7 +33,8 @@
     {
       "productId": "prod-wybot-c1",
       "slug": "wybot-c1",
-      "url": "https://botplanet.io/pool-cleaners/wybot-c1/",
+      "url": "https://botplanet.io/robots/robotic-pool-cleaners/wybot-c1/",
+      "path": "/robots/robotic-pool-cleaners/wybot-c1/",
       "canonicalName": "WYBOT C1 Cordless Robotic Pool Cleaner",
       "brand": "WYBOT",
       "modelNumber": null,
@@ -100,13 +101,50 @@
         "readyForBotMatch": true
       },
       "publicationBlockers": [],
+      "launchStatus": "launch_ready",
+      "reviewGates": [
+        {
+          "gate": "weighted_completeness",
+          "passed": true,
+          "detail": "weighted completeness 71% against a 65% floor"
+        },
+        {
+          "gate": "model_identity",
+          "passed": true,
+          "detail": "identified by https://www.wybotpool.com/products/wybot-c1-cordless-robotic-pool-cleaner, model number not published by the maker, no manual accepted"
+        },
+        {
+          "gate": "no_material_conflict",
+          "passed": true,
+          "detail": "no unresolved conflict on a material review field"
+        },
+        {
+          "gate": "review_sections_writable",
+          "passed": true,
+          "detail": "every intended review section has the evidence it needs"
+        },
+        {
+          "gate": "no_speculation",
+          "passed": true,
+          "detail": "no review section rests on a suppressed value"
+        },
+        {
+          "gate": "corrections_identified",
+          "passed": true,
+          "detail": "every unsupported or conflicting stored value carries a written correction"
+        }
+      ],
+      "evidenceQualification": null,
+      "warrantyStatus": "confirmed",
+      "warrantyPublicWording": "WYBOT states a warranty of 2-year warranty.",
       "claimsPublishable": 13,
       "claimsBlocked": 3
     },
     {
       "productId": "prod-dolphin-nautilus-cc-plus",
       "slug": "dolphin-nautilus-cc-plus",
-      "url": "https://botplanet.io/pool-cleaners/dolphin-nautilus-cc-plus/",
+      "url": "https://botplanet.io/robots/robotic-pool-cleaners/dolphin-nautilus-cc-plus/",
+      "path": "/robots/robotic-pool-cleaners/dolphin-nautilus-cc-plus/",
       "canonicalName": "Dolphin Nautilus CC Plus w/Wi-Fi",
       "brand": "Maytronics (Dolphin)",
       "modelNumber": "99996409-PCI",
@@ -181,13 +219,50 @@
         "readyForBotMatch": true
       },
       "publicationBlockers": [],
+      "launchStatus": "launch_ready",
+      "reviewGates": [
+        {
+          "gate": "weighted_completeness",
+          "passed": true,
+          "detail": "weighted completeness 82% against a 65% floor"
+        },
+        {
+          "gate": "model_identity",
+          "passed": true,
+          "detail": "identified by https://www.maytronics.com/en-us/store/residential-pools/best-performance-cleaners/dolphin-nautilus-cc-plus-w%2Fwi-fi/99996409-PCI.html, with a published model number, no manual accepted"
+        },
+        {
+          "gate": "no_material_conflict",
+          "passed": true,
+          "detail": "no unresolved conflict on a material review field"
+        },
+        {
+          "gate": "review_sections_writable",
+          "passed": true,
+          "detail": "every intended review section has the evidence it needs"
+        },
+        {
+          "gate": "no_speculation",
+          "passed": true,
+          "detail": "no review section rests on a suppressed value"
+        },
+        {
+          "gate": "corrections_identified",
+          "passed": true,
+          "detail": "every unsupported or conflicting stored value carries a written correction"
+        }
+      ],
+      "evidenceQualification": null,
+      "warrantyStatus": "confirmed",
+      "warrantyPublicWording": "Maytronics (Dolphin) states a warranty of 1 year.",
       "claimsPublishable": 13,
       "claimsBlocked": 2
     },
     {
       "productId": "prod-dolphin-premier",
       "slug": "dolphin-premier",
-      "url": "https://botplanet.io/pool-cleaners/dolphin-premier/",
+      "url": "https://botplanet.io/robots/robotic-pool-cleaners/dolphin-premier/",
+      "path": "/robots/robotic-pool-cleaners/dolphin-premier/",
       "canonicalName": "Dolphin Premier",
       "brand": "Maytronics (Dolphin)",
       "modelNumber": null,
@@ -268,20 +343,62 @@
         "readyForBotMatch": false
       },
       "publicationBlockers": [
-        "1 unresolved conflict(s)",
-        "model identity incomplete",
-        "weighted completeness 59% below the 60% review threshold",
+        "manufacturer identity/evidence weakness: no manufacturer-sourced value for this model",
+        "no accepted official manufacturer page",
+        "no accepted manual",
+        "no reliably established model number",
+        "unresolved conflict on poolSizeSuitability",
+        "weighted completeness 59% against a 65% floor",
+        "insufficient evidence coverage for review section(s): Where it fits",
         "comparison field unavailable: poolSizeSuitability",
+        "comparison field unavailable: warranty",
         "BotMatch field unavailable: poolSizeSuitability",
         "BotMatch field unavailable: appSupport"
       ],
-      "claimsPublishable": 10,
-      "claimsBlocked": 4
+      "launchStatus": "candidate_under_review",
+      "reviewGates": [
+        {
+          "gate": "weighted_completeness",
+          "passed": false,
+          "detail": "weighted completeness 59% against a 65% floor"
+        },
+        {
+          "gate": "model_identity",
+          "passed": false,
+          "detail": "no accepted official manufacturer page for this exact model"
+        },
+        {
+          "gate": "no_material_conflict",
+          "passed": false,
+          "detail": "unresolved conflict on material review field(s): poolSizeSuitability"
+        },
+        {
+          "gate": "review_sections_writable",
+          "passed": false,
+          "detail": "insufficient evidence coverage for review section(s): Where it fits"
+        },
+        {
+          "gate": "no_speculation",
+          "passed": true,
+          "detail": "no review section rests on a suppressed value"
+        },
+        {
+          "gate": "corrections_identified",
+          "passed": true,
+          "detail": "every unsupported or conflicting stored value carries a written correction"
+        }
+      ],
+      "evidenceQualification": "dealer-sourced: no manufacturer page or manual was accepted for this model, so every value is attributed to the dealer that published it and none is presented as manufacturer-stated",
+      "warrantyStatus": "not_confirmed",
+      "warrantyPublicWording": "Manufacturer warranty term not confirmed",
+      "claimsPublishable": 9,
+      "claimsBlocked": 5
     },
     {
       "productId": "prod-polaris-freedom",
       "slug": "polaris-freedom",
-      "url": "https://botplanet.io/pool-cleaners/polaris-freedom/",
+      "url": "https://botplanet.io/robots/robotic-pool-cleaners/polaris-freedom/",
+      "path": "/robots/robotic-pool-cleaners/polaris-freedom/",
       "canonicalName": "Polaris FREEDOM Cordless Robotic Cleaner",
       "brand": "Polaris (Fluidra)",
       "modelNumber": "FFREEDOM (SKU); FR550CBR; TYPE EB37 (manual)",
@@ -349,22 +466,61 @@
         "factuallyEvidenced": true,
         "currentlyVerified": true,
         "safeForLimitedFactualUse": true,
-        "readyForReviewWriting": true,
+        "readyForReviewWriting": false,
         "readyForComparison": false,
         "readyForBotMatch": false
       },
       "publicationBlockers": [
+        "insufficient evidence coverage for review section(s): Where it fits",
+        "review section(s) would rest on suppressed value(s): poolSizeSuitability",
         "comparison field unavailable: poolSizeSuitability",
         "comparison field unavailable: warranty",
         "BotMatch field unavailable: poolSizeSuitability"
       ],
+      "launchStatus": "limited_factual_use",
+      "reviewGates": [
+        {
+          "gate": "weighted_completeness",
+          "passed": true,
+          "detail": "weighted completeness 81% against a 65% floor"
+        },
+        {
+          "gate": "model_identity",
+          "passed": true,
+          "detail": "identified by https://www.polarispool.com/en/support/parts/polaris-freedom-cordless-robotic-cleaner, with a published model number, manual accepted"
+        },
+        {
+          "gate": "no_material_conflict",
+          "passed": true,
+          "detail": "no unresolved conflict on a material review field"
+        },
+        {
+          "gate": "review_sections_writable",
+          "passed": false,
+          "detail": "insufficient evidence coverage for review section(s): Where it fits"
+        },
+        {
+          "gate": "no_speculation",
+          "passed": false,
+          "detail": "review section(s) would rest on suppressed value(s): poolSizeSuitability"
+        },
+        {
+          "gate": "corrections_identified",
+          "passed": true,
+          "detail": "every unsupported or conflicting stored value carries a written correction"
+        }
+      ],
+      "evidenceQualification": null,
+      "warrantyStatus": "not_confirmed",
+      "warrantyPublicWording": "Manufacturer warranty term not confirmed",
       "claimsPublishable": 12,
       "claimsBlocked": 3
     },
     {
       "productId": "prod-betta-se-plus",
       "slug": "betta-se-plus",
-      "url": "https://botplanet.io/pool-cleaners/betta-se-plus/",
+      "url": "https://botplanet.io/robots/robotic-pool-cleaners/betta-se-plus/",
+      "path": "/robots/robotic-pool-cleaners/betta-se-plus/",
       "canonicalName": "Betta SE Plus — Solar-Powered Robotic Pool Skimmer",
       "brand": "Betta (Solar Pool Technologies)",
       "modelNumber": null,
@@ -426,20 +582,59 @@
         "factuallyEvidenced": true,
         "currentlyVerified": true,
         "safeForLimitedFactualUse": true,
-        "readyForReviewWriting": true,
-        "readyForComparison": true,
+        "readyForReviewWriting": false,
+        "readyForComparison": false,
         "readyForBotMatch": false
       },
       "publicationBlockers": [
+        "insufficient evidence coverage for review section(s): Living with it",
+        "review section(s) would rest on suppressed value(s): weightLbs",
         "BotMatch field unavailable: appSupport"
       ],
+      "launchStatus": "limited_factual_use",
+      "reviewGates": [
+        {
+          "gate": "weighted_completeness",
+          "passed": true,
+          "detail": "weighted completeness 69% against a 65% floor"
+        },
+        {
+          "gate": "model_identity",
+          "passed": true,
+          "detail": "identified by https://bettabot.com/products/betta-se-plus, model number not published by the maker, manual accepted"
+        },
+        {
+          "gate": "no_material_conflict",
+          "passed": true,
+          "detail": "no unresolved conflict on a material review field"
+        },
+        {
+          "gate": "review_sections_writable",
+          "passed": false,
+          "detail": "insufficient evidence coverage for review section(s): Living with it"
+        },
+        {
+          "gate": "no_speculation",
+          "passed": false,
+          "detail": "review section(s) would rest on suppressed value(s): weightLbs"
+        },
+        {
+          "gate": "corrections_identified",
+          "passed": true,
+          "detail": "every unsupported or conflicting stored value carries a written correction"
+        }
+      ],
+      "evidenceQualification": null,
+      "warrantyStatus": "confirmed",
+      "warrantyPublicWording": "Betta states a warranty of 1-YEAR WARRANTY.",
       "claimsPublishable": 11,
       "claimsBlocked": 5
     },
     {
       "productId": "prod-dolphin-e10",
       "slug": "dolphin-e10",
-      "url": "https://botplanet.io/pool-cleaners/dolphin-e10/",
+      "url": "https://botplanet.io/robots/robotic-pool-cleaners/dolphin-e10/",
+      "path": "/robots/robotic-pool-cleaners/dolphin-e10/",
       "canonicalName": "Dolphin E10",
       "brand": "Maytronics (Dolphin)",
       "modelNumber": "99996133 (global) / 99996133-US (US)",
@@ -516,13 +711,50 @@
       "publicationBlockers": [
         "BotMatch field unavailable: appSupport"
       ],
+      "launchStatus": "launch_ready",
+      "reviewGates": [
+        {
+          "gate": "weighted_completeness",
+          "passed": true,
+          "detail": "weighted completeness 80% against a 65% floor"
+        },
+        {
+          "gate": "model_identity",
+          "passed": true,
+          "detail": "identified by https://www.maytronics.com/global/store/residential-pools/best-value-cleaners/dolphin-e10/99996133.html, with a published model number, manual accepted"
+        },
+        {
+          "gate": "no_material_conflict",
+          "passed": true,
+          "detail": "no unresolved conflict on a material review field"
+        },
+        {
+          "gate": "review_sections_writable",
+          "passed": true,
+          "detail": "every intended review section has the evidence it needs"
+        },
+        {
+          "gate": "no_speculation",
+          "passed": true,
+          "detail": "no review section rests on a suppressed value"
+        },
+        {
+          "gate": "corrections_identified",
+          "passed": true,
+          "detail": "every unsupported or conflicting stored value carries a written correction"
+        }
+      ],
+      "evidenceQualification": null,
+      "warrantyStatus": "confirmed",
+      "warrantyPublicWording": "Maytronics (Dolphin) states a warranty of 2 Years.",
       "claimsPublishable": 12,
       "claimsBlocked": 3
     },
     {
       "productId": "prod-beatbot-aquasense-2-ultra",
       "slug": "beatbot-aquasense-2-ultra",
-      "url": "https://botplanet.io/pool-cleaners/beatbot-aquasense-2-ultra/",
+      "url": "https://botplanet.io/robots/robotic-pool-cleaners/beatbot-aquasense-2-ultra/",
+      "path": "/robots/robotic-pool-cleaners/beatbot-aquasense-2-ultra/",
       "canonicalName": "Beatbot AquaSense 2 Ultra Robotic Pool Cleaner",
       "brand": "Beatbot",
       "modelNumber": null,
@@ -586,18 +818,58 @@
         "factuallyEvidenced": true,
         "currentlyVerified": true,
         "safeForLimitedFactualUse": true,
-        "readyForReviewWriting": true,
-        "readyForComparison": true,
-        "readyForBotMatch": true
+        "readyForReviewWriting": false,
+        "readyForComparison": false,
+        "readyForBotMatch": false
       },
-      "publicationBlockers": [],
+      "publicationBlockers": [
+        "insufficient evidence coverage for review section(s): Living with it",
+        "review section(s) would rest on suppressed value(s): weightLbs"
+      ],
+      "launchStatus": "limited_factual_use",
+      "reviewGates": [
+        {
+          "gate": "weighted_completeness",
+          "passed": true,
+          "detail": "weighted completeness 66% against a 65% floor"
+        },
+        {
+          "gate": "model_identity",
+          "passed": true,
+          "detail": "identified by https://beatbot.com/pages/aquasense-2-ultra, model number not published by the maker, manual accepted"
+        },
+        {
+          "gate": "no_material_conflict",
+          "passed": true,
+          "detail": "no unresolved conflict on a material review field"
+        },
+        {
+          "gate": "review_sections_writable",
+          "passed": false,
+          "detail": "insufficient evidence coverage for review section(s): Living with it"
+        },
+        {
+          "gate": "no_speculation",
+          "passed": false,
+          "detail": "review section(s) would rest on suppressed value(s): weightLbs"
+        },
+        {
+          "gate": "corrections_identified",
+          "passed": true,
+          "detail": "every unsupported or conflicting stored value carries a written correction"
+        }
+      ],
+      "evidenceQualification": null,
+      "warrantyStatus": "confirmed",
+      "warrantyPublicWording": "Beatbot states a warranty of 3-year full replacement.",
       "claimsPublishable": 13,
       "claimsBlocked": 3
     },
     {
       "productId": "prod-aiper-scuba-x1",
       "slug": "aiper-scuba-x1",
-      "url": "https://botplanet.io/pool-cleaners/aiper-scuba-x1/",
+      "url": "https://botplanet.io/robots/robotic-pool-cleaners/aiper-scuba-x1/",
+      "path": "/robots/robotic-pool-cleaners/aiper-scuba-x1/",
       "canonicalName": "Aiper Scuba X1",
       "brand": "Aiper",
       "modelNumber": null,
@@ -663,20 +935,59 @@
         "factuallyEvidenced": true,
         "currentlyVerified": true,
         "safeForLimitedFactualUse": true,
-        "readyForReviewWriting": true,
+        "readyForReviewWriting": false,
         "readyForComparison": false,
-        "readyForBotMatch": true
+        "readyForBotMatch": false
       },
       "publicationBlockers": [
+        "weighted completeness 62% against a 65% floor",
+        "insufficient evidence coverage for review section(s): Living with it",
         "comparison field unavailable: warranty"
       ],
+      "launchStatus": "limited_factual_use",
+      "reviewGates": [
+        {
+          "gate": "weighted_completeness",
+          "passed": false,
+          "detail": "weighted completeness 62% against a 65% floor"
+        },
+        {
+          "gate": "model_identity",
+          "passed": true,
+          "detail": "identified by https://aiper.com/us/aiper-scuba-series/aiper-scuba-x1, model number not published by the maker, no manual accepted"
+        },
+        {
+          "gate": "no_material_conflict",
+          "passed": true,
+          "detail": "no unresolved conflict on a material review field"
+        },
+        {
+          "gate": "review_sections_writable",
+          "passed": false,
+          "detail": "insufficient evidence coverage for review section(s): Living with it"
+        },
+        {
+          "gate": "no_speculation",
+          "passed": true,
+          "detail": "no review section rests on a suppressed value"
+        },
+        {
+          "gate": "corrections_identified",
+          "passed": true,
+          "detail": "every unsupported or conflicting stored value carries a written correction"
+        }
+      ],
+      "evidenceQualification": null,
+      "warrantyStatus": "not_confirmed",
+      "warrantyPublicWording": "Manufacturer warranty term not confirmed",
       "claimsPublishable": 11,
       "claimsBlocked": 5
     },
     {
       "productId": "prod-aiper-scuba-s1",
       "slug": "aiper-scuba-s1",
-      "url": "https://botplanet.io/pool-cleaners/aiper-scuba-s1/",
+      "url": "https://botplanet.io/robots/robotic-pool-cleaners/aiper-scuba-s1/",
+      "path": "/robots/robotic-pool-cleaners/aiper-scuba-s1/",
       "canonicalName": "Aiper Scuba S1 Cordless Robotic Pool Cleaner",
       "brand": "Aiper",
       "modelNumber": null,
@@ -757,19 +1068,58 @@
         "readyForBotMatch": false
       },
       "publicationBlockers": [
-        "1 unresolved conflict(s)",
-        "weighted completeness 58% below the 60% review threshold",
+        "unresolved conflict on poolTypes",
+        "weighted completeness 58% against a 65% floor",
+        "insufficient evidence coverage for review section(s): Where it fits, Living with it",
+        "review section(s) would rest on suppressed value(s): weightLbs",
         "comparison field unavailable: poolTypes",
         "comparison field unavailable: warranty",
         "BotMatch field unavailable: poolTypes"
       ],
+      "launchStatus": "candidate_under_review",
+      "reviewGates": [
+        {
+          "gate": "weighted_completeness",
+          "passed": false,
+          "detail": "weighted completeness 58% against a 65% floor"
+        },
+        {
+          "gate": "model_identity",
+          "passed": true,
+          "detail": "identified by https://aiper.com/us/aiper-scuba-series/aiper-scuba-s1, model number not published by the maker, no manual accepted"
+        },
+        {
+          "gate": "no_material_conflict",
+          "passed": false,
+          "detail": "unresolved conflict on material review field(s): poolTypes"
+        },
+        {
+          "gate": "review_sections_writable",
+          "passed": false,
+          "detail": "insufficient evidence coverage for review section(s): Where it fits, Living with it"
+        },
+        {
+          "gate": "no_speculation",
+          "passed": false,
+          "detail": "review section(s) would rest on suppressed value(s): weightLbs"
+        },
+        {
+          "gate": "corrections_identified",
+          "passed": true,
+          "detail": "every unsupported or conflicting stored value carries a written correction"
+        }
+      ],
+      "evidenceQualification": null,
+      "warrantyStatus": "not_confirmed",
+      "warrantyPublicWording": "Manufacturer warranty term not confirmed",
       "claimsPublishable": 9,
       "claimsBlocked": 6
     },
     {
       "productId": "prod-aiper-seagull-se",
       "slug": "aiper-seagull-se",
-      "url": "https://botplanet.io/pool-cleaners/aiper-seagull-se/",
+      "url": "https://botplanet.io/robots/robotic-pool-cleaners/aiper-seagull-se/",
+      "path": "/robots/robotic-pool-cleaners/aiper-seagull-se/",
       "canonicalName": "Aiper Seagull SE",
       "brand": "Aiper",
       "modelNumber": null,
@@ -863,13 +1213,51 @@
         "readyForBotMatch": false
       },
       "publicationBlockers": [
-        "weighted completeness 40% below the 60% review threshold",
+        "weighted completeness 40% against a 65% floor",
+        "insufficient evidence coverage for review section(s): Where it fits, What it cleans, Living with it",
+        "review section(s) would rest on suppressed value(s): poolSizeSuitability, filtration",
         "comparison field unavailable: poolSizeSuitability",
         "comparison field unavailable: filtration",
         "comparison field unavailable: warranty",
         "BotMatch field unavailable: poolSizeSuitability",
         "BotMatch field unavailable: appSupport"
       ],
+      "launchStatus": "limited_factual_use",
+      "reviewGates": [
+        {
+          "gate": "weighted_completeness",
+          "passed": false,
+          "detail": "weighted completeness 40% against a 65% floor"
+        },
+        {
+          "gate": "model_identity",
+          "passed": true,
+          "detail": "identified by https://aiper.com/us/aiper-seagull-series/aiper-seagull-se-new, model number not published by the maker, no manual accepted"
+        },
+        {
+          "gate": "no_material_conflict",
+          "passed": true,
+          "detail": "no unresolved conflict on a material review field"
+        },
+        {
+          "gate": "review_sections_writable",
+          "passed": false,
+          "detail": "insufficient evidence coverage for review section(s): Where it fits, What it cleans, Living with it"
+        },
+        {
+          "gate": "no_speculation",
+          "passed": false,
+          "detail": "review section(s) would rest on suppressed value(s): poolSizeSuitability, filtration"
+        },
+        {
+          "gate": "corrections_identified",
+          "passed": true,
+          "detail": "every unsupported or conflicting stored value carries a written correction"
+        }
+      ],
+      "evidenceQualification": null,
+      "warrantyStatus": "not_confirmed",
+      "warrantyPublicWording": "Manufacturer warranty term not confirmed",
       "claimsPublishable": 5,
       "claimsBlocked": 10
     }

@@ -15,7 +15,7 @@
  * supersedes the older `/find-my-robot` proposal. The divergence is recorded
  * in the handoff for ChatGPT to ratify.
  */
-import { CATEGORIES, LAUNCH_CATEGORY, type LaunchState } from "./nav";
+import { CATEGORIES, LAUNCH_CATEGORY, routes as categoryPaths, type LaunchState } from "./nav";
 
 export type RouteStatus = LaunchState;
 
@@ -395,13 +395,24 @@ export const sitemapRoutes = () => ROUTES.filter((r) => r.inSitemap && r.indexab
 
 /** Category-scoped section paths, generated rather than hard-coded. */
 export const categoryRoutes = (slug: string) => ({
-  hub: `/robots/${slug}/`,
-  compare: `/compare/${slug}/`,
-  best: `/best-robots/${slug}/`,
-  guides: `/guides/${slug}/`,
-  deals: `/deals/${slug}/`,
-  botmatch: `/botmatch/${slug}/`,
+  hub: categoryPaths.category(slug),
+  compare: categoryPaths.compare(slug),
+  best: categoryPaths.best(slug),
+  guides: categoryPaths.categoryGuides(slug),
+  deals: categoryPaths.categoryDeals(slug),
+  botmatch: categoryPaths.botmatch(slug),
 });
+
+/**
+ * THE canonical path for a product page.
+ *
+ * Anything that needs a product URL — the sitemap, the Notion register export,
+ * internal links — must come through here. A second hand-written pattern is how
+ * ten obsolete `/pool-cleaners/<slug>/` URLs reached the SEO register, and the
+ * only durable fix is to leave exactly one place where the shape is decided.
+ */
+export const productPath = (productSlug: string, categorySlug: string = LAUNCH_CATEGORY): string =>
+  categoryPaths.product(categorySlug, productSlug);
 
 /** Every alias in the registry, mapped to its canonical destination. */
 export const REDIRECTS: { from: string; to: string }[] = ROUTES.flatMap((r) =>

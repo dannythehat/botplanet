@@ -8,6 +8,8 @@
  * Regenerate with `pnpm evidence:mapping`, which writes docs/job-08-notion-mapping.json.
  */
 import { buildClaimLedger } from "../content/evidence/claims";
+import { productPath } from "../content/routes";
+import { absUrl } from "./seo";
 import { RECONCILIATION } from "../content/evidence/reconciliation";
 import { VERIFICATION_DATE, VERIFICATIONS } from "../content/evidence/verification";
 import { buildReport } from "./evidence-report";
@@ -16,7 +18,14 @@ export interface NotionRow {
   /** Stable join key. Never changes. */
   productId: string;
   slug: string;
+  /**
+   * Canonical product URL, generated through the central route registry.
+   * Never hand-written here — that is how ten obsolete `/pool-cleaners/<slug>/`
+   * URLs reached the SEO register in the first place.
+   */
   url: string;
+  /** The path alone, so a route-registry check does not have to parse the URL. */
+  path: string;
   /** Manufacturer's exact wording for this model. */
   canonicalName: string;
   brand: string;
@@ -60,6 +69,15 @@ export interface NotionRow {
     readyForBotMatch: boolean;
   };
   publicationBlockers: string[];
+  /** Explicit launch state, not the absence of readiness. */
+  launchStatus: string;
+  /** Every review-writing gate with the reason it passed or failed. */
+  reviewGates: { gate: string; passed: boolean; detail: string }[];
+  /** Set when no manufacturer source backs this product's values. */
+  evidenceQualification: string | null;
+  /** Approved public warranty wording, confirmed or not. */
+  warrantyStatus: string;
+  warrantyPublicWording: string;
 
   claimsPublishable: number;
   claimsBlocked: number;
@@ -112,7 +130,8 @@ export function buildNotionMapping(today = new Date(VERIFICATION_DATE)): {
     return {
       productId: p.productId,
       slug: p.slug,
-      url: `https://botplanet.io/pool-cleaners/${p.slug}/`,
+      url: absUrl(productPath(p.slug)),
+      path: productPath(p.slug),
       canonicalName: p.canonicalName,
       brand: v?.identity.brand ?? "",
       modelNumber: p.modelNumber,
@@ -153,6 +172,11 @@ export function buildNotionMapping(today = new Date(VERIFICATION_DATE)): {
 
       publicationStates: p.publication,
       publicationBlockers: p.publicationBlockers,
+      launchStatus: p.launchStatus,
+      reviewGates: p.reviewGates,
+      evidenceQualification: p.evidenceQualification,
+      warrantyStatus: p.warranty.status,
+      warrantyPublicWording: p.warranty.text,
 
       claimsPublishable: claims.filter((c) => c.productId === p.productId).length,
       claimsBlocked: blocked.filter((b) => b.productId === p.productId).length,

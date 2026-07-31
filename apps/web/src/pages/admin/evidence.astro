@@ -11,6 +11,8 @@ import { buildReport } from "../../lib/evidence-report";
 import { buildClaimLedger } from "../../content/evidence/claims";
 import { FIELD_REGISTRY } from "../../content/evidence/field-registry";
 import { VERIFICATION_DATE } from "../../content/evidence/verification";
+import { productPath } from "../../content/routes";
+import { REVIEW_WEIGHTED_THRESHOLD, REVIEW_SECTIONS } from "../../lib/evidence-report";
 
 const today = new Date();
 const { claims, blocked } = buildClaimLedger();
@@ -26,6 +28,12 @@ const PUB_LABEL: Record<string, string> = {
   readyForReviewWriting: "Ready for review writing",
   readyForComparison: "Ready for comparison",
   readyForBotMatch: "Ready for BotMatch",
+};
+
+const STATUS_TONE: Record<string, string> = {
+  launch_ready: "ok",
+  limited_factual_use: "warn",
+  candidate_under_review: "bad",
 };
 
 const pubKeys = Object.keys(PUB_LABEL);
@@ -156,8 +164,9 @@ const readyCount = (k: string) => products.filter((p) => pubState(p, k)).length;
         {products.map((p) => (
           <tr>
             <td>
-              <a href={`/pool-cleaners/${p.slug}/`}>{p.canonicalName}</a>
+              <a href={productPath(p.slug)}>{p.canonicalName}</a>
               <div class="muted mono" style="font-size:11px">{p.modelNumber ?? "no model number published"}</div>
+              <div style="margin-top:4px"><span class={`tag ${STATUS_TONE[p.launchStatus]}`}>{p.launchStatus.replace(/_/g, " ")}</span></div>
             </td>
             {pubKeys.map((k) => (
               <td style="text-align:center">
@@ -254,6 +263,52 @@ const readyCount = (k: string) => products.filter((p) => pubState(p, k)).length;
             <td class="mono" style="font-size:12px">{p.modelNumber ?? <span class="tag warn">not published</span>}</td>
             <td>{p.manualUrl ? <a href={p.manualUrl}>document</a> : <span class="tag warn">none accepted</span>}</td>
             <td class="muted" style="font-size:12px">{p.identityIssue}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Review-writing gates</h2>
+  <div class="card">
+    <p class="muted" style="margin-top:0">
+      A percentage alone never makes a product ready. All six gates must pass, on top of safe-for-factual-use.
+      The weighted floor is {REVIEW_WEIGHTED_THRESHOLD}%. Review sections checked:
+      {REVIEW_SECTIONS.map((s) => s.section).join(", ")}.
+    </p>
+    <table>
+      <thead><tr><th>Product</th><th>Status</th><th>Failing gates</th></tr></thead>
+      <tbody>
+        {products.map((p) => (
+          <tr>
+            <td>{p.canonicalName}</td>
+            <td><span class={`tag ${STATUS_TONE[p.launchStatus]}`}>{p.launchStatus.replace(/_/g, " ")}</span></td>
+            <td class="muted" style="font-size:12px">
+              {p.reviewGates.filter((g) => !g.passed).length === 0
+                ? "all gates pass"
+                : p.reviewGates.filter((g) => !g.passed).map((g) => <div>{g.gate}: {g.detail}</div>)}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Warranty status</h2>
+  <div class="card">
+    <p class="muted" style="margin-top:0">
+      A term is confirmed only when the manufacturer's own page or manual states it. A dealer's warranty offer is
+      never promoted to the product's canonical warranty, and an unconfirmed term is never written as an absence.
+    </p>
+    <table>
+      <thead><tr><th>Product</th><th>Status</th><th>Public wording</th><th>Why</th></tr></thead>
+      <tbody>
+        {products.map((p) => (
+          <tr>
+            <td>{p.canonicalName}</td>
+            <td>{p.warranty.status === "confirmed" ? <span class="tag ok">confirmed</span> : <span class="tag warn">not confirmed</span>}</td>
+            <td>{p.warranty.text}</td>
+            <td class="muted" style="font-size:12px">{p.warranty.internalReason ?? "—"}</td>
           </tr>
         ))}
       </tbody>

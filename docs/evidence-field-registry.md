@@ -177,6 +177,55 @@ One boolean cannot express readiness. Seven are reported per product:
 | `factuallyEvidenced` | Every published field traces to a source. |
 | `currentlyVerified` | Every published field was re-checked inside its cadence. |
 | `safeForLimitedFactualUse` | All three of the above. Individual attributed facts may appear. |
-| `readyForReviewWriting` | The above, plus complete core identity, plus weighted completeness ≥ 60%. |
+| `readyForReviewWriting` | The above, plus **all six review gates** below. |
 | `readyForComparison` | The above, plus every comparison field available. |
-| `readyForBotMatch` | Safe for factual use, plus every field BotMatch filters on available. |
+| `readyForBotMatch` | The above, plus every field BotMatch filters on available. |
+
+### The six review-writing gates
+
+A percentage alone never makes a product ready. All six must pass:
+
+| Gate | Passes when |
+| --- | --- |
+| `weighted_completeness` | Weighted completeness is at least **65%**. |
+| `model_identity` | Brand, canonical name and an accepted official manufacturer page are all publishable. |
+| `no_material_conflict` | No unresolved conflict on power type, pool types, pool size, surfaces cleaned, runtime or warranty. |
+| `review_sections_writable` | Every intended review section has the fields it needs. |
+| `no_speculation` | No review section rests on a suppressed value. |
+| `corrections_identified` | Every unsupported or conflicting stored value carries a written correction. |
+
+Review sections and what each one needs: **What it is** (brand, canonical name, power type) · **Where it fits**
+(pool types, pool size) · **What it cleans** (surfaces, navigation, filtration) · **How it runs** (runtime) ·
+**Living with it** (weight).
+
+### Launch status
+
+An explicit typed state, because "not ready" covers two different situations.
+
+| Status | Meaning |
+| --- | --- |
+| `launch_ready` | Identified, evidenced and complete enough to write a review around. |
+| `limited_factual_use` | Identified and safe to state individual facts from, but not to review or compare. |
+| `candidate_under_review` | Identity or evidence is too weak to treat as a settled launch product — no accepted manufacturer page, or an unresolved conflict on a material review field. |
+
+## 10. Canonical product URLs
+
+There is exactly one place where a product URL's shape is decided: `productPath()` in
+`apps/web/src/content/routes.ts`, which delegates to the central category route helpers. The sitemap and the Notion
+register export both call it. A second hand-written pattern is how ten obsolete `/pool-cleaners/<slug>/` URLs reached
+the SEO register, and tests now assert that every mapped URL matches the registry, resolves to a stable product ID,
+and points at no redirect source.
+
+Canonical shape: `https://botplanet.io/robots/robotic-pool-cleaners/<slug>/`
+
+## 11. Warranty wording
+
+Where no official manufacturer term is verified, the single approved public sentence is:
+
+> Manufacturer warranty term not confirmed
+
+Held once in `apps/web/src/lib/warranty.ts`. A term is "confirmed" only when the manufacturer's own page or manual
+states it — a dealer's warranty offer is a fact about that dealer and is never promoted to the product's canonical
+warranty, never enters a comparison row, and never becomes a claim. These phrasings are forbidden anywhere on a
+public surface and are enforced by a validation rule: "no warranty", "warranty unavailable", "does not offer a
+warranty", "without a warranty", "warranty: none".
