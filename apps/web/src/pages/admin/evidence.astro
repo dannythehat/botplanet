@@ -1,0 +1,159 @@
+---
+/**
+ * Internal evidence review. Not a public editorial page: it sits behind the
+ * admin gate and is noindex, because it exposes gaps and confidence grades
+ * that would be misread as product judgements.
+ */
+import Admin from "../../layouts/Admin.astro";
+import { buildReport } from "../../lib/evidence-report";
+import { PRODUCTS } from "../../content/products";
+
+const today = new Date();
+const { ledger, issues, products, denominators } = buildReport(today);
+const errors = issues.filter((i) => i.severity === "error");
+const warnings = issues.filter((i) => i.severity === "warning");
+const safe = products.filter((p) => p.publicationSafe).length;
+const pct = (n: number) => `${n}%`;
+---
+<Admin title="Product evidence review" section="evidence">
+  <p class="sub">
+    Field-level evidence for the {denominators.launchProducts} launch products. Every score names its denominator —
+    nothing here is a percentage of an unknown total.
+  </p>
+
+  <div class="grid">
+    <div class="card"><div class="muted">Evidence records</div><div class="big">{ledger.evidence.length}</div><div class="muted">across {ledger.sources.length} sources</div></div>
+    <div class="card"><div class="muted">Gaps (no value)</div><div class="big" style="color:var(--warn)">{ledger.gaps.length}</div><div class="muted">reported, never guessed</div></div>
+    <div class="card"><div class="muted">Validation errors</div><div class="big" style={errors.length ? "color:var(--bad)" : "color:var(--ok)"}>{errors.length}</div><div class="muted">{warnings.length} warnings</div></div>
+    <div class="card"><div class="muted">Publication safe</div><div class="big">{safe}/{products.length}</div><div class="muted">products cleared for factual use</div></div>
+  </div>
+
+  <h2>Scoring method</h2>
+  <div class="card">
+    <ul style="margin:0;padding-left:18px;line-height:1.9;">
+      <li><strong>Fields tracked per product:</strong> {denominators.fieldsTrackedPerProduct} — the evidence-controlled set. Fields no lawful source currently covers are not counted, so completeness is not inflated by empty rows.</li>
+      <li><strong>Identity completeness:</strong> populated identity fields ÷ {denominators.identityFields} tracked.</li>
+      <li><strong>Technical completeness:</strong> populated technical fields ÷ {denominators.technicalFields} tracked (power, coverage, physical, connectivity, warranty).</li>
+      <li><strong>Suitability completeness:</strong> populated suitability fields ÷ {denominators.suitabilityFields} tracked.</li>
+      <li><strong>Evidence completeness:</strong> populated fields carrying a usable source ÷ populated fields.</li>
+      <li><strong>Publication safety:</strong> has evidence, no unresolved conflicts, no validation errors. It does <em>not</em> mean verified — see the verification column.</li>
+    </ul>
+  </div>
+
+  <h2>Per product</h2>
+  <div class="card" style="padding:0;overflow-x:auto;">
+    <table>
+      <thead>
+        <tr>
+          <th>Product</th><th>Stable ID</th><th>Identity</th><th>Technical</th><th>Suitability</th><th>Evidence</th>
+          <th>Sources</th><th>Missing</th><th>Conflicts</th><th>Stale</th><th>Last verified</th><th>Publication</th>
+        </tr>
+      </thead>
+      <tbody>
+        {products.map((p) => (
+          <tr>
+            <td><strong>{p.slug}</strong></td>
+            <td class="mono muted">{p.productId}</td>
+            <td>{pct(p.identity.percent)} <span class="muted">({p.identity.populated}/{p.identity.tracked})</span></td>
+            <td>{pct(p.technical.percent)} <span class="muted">({p.technical.populated}/{p.technical.tracked})</span></td>
+            <td>{pct(p.suitability.percent)} <span class="muted">({p.suitability.populated}/{p.suitability.tracked})</span></td>
+            <td>{pct(p.evidence.percent)} <span class="muted">({p.evidence.populated}/{p.evidence.tracked})</span></td>
+            <td>{p.sourceCount}</td>
+            <td class="muted">{p.missingFields.length ? p.missingFields.join(", ") : "—"}</td>
+            <td>{p.conflictingFields.length ? <span class="tag bad">{p.conflictingFields.length}</span> : <span class="muted">0</span>}</td>
+            <td>{p.staleFields.length ? <span class="tag warn">{p.staleFields.length}</span> : <span class="muted">0</span>}</td>
+            <td>{p.latestVerification ?? <span class="tag warn">never</span>}</td>
+            <td>{p.publicationSafe ? <span class="tag ok">safe</span> : <span class="tag bad">{p.publicationBlockers.join("; ")}</span>}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Evidence ledger</h2>
+  <div class="card" style="padding:0;overflow-x:auto;">
+    <table>
+      <thead><tr><th>Product</th><th>Field</th><th>Group</th><th>Stored value</th><th>Normalised</th><th>Label</th><th>Confidence</th><th>Source</th><th>Retrieved</th><th>Verified</th><th>Cadence</th></tr></thead>
+      <tbody>
+        {ledger.evidence.map((e) => {
+          const src = ledger.sources.find((s) => s.id === e.sourceId);
+          return (
+            <tr>
+              <td class="mono muted">{e.productId.replace("prod-", "")}</td>
+              <td><strong>{e.field}</strong></td>
+              <td class="muted">{e.group}</td>
+              <td>{String(e.storedValue)}</td>
+              <td class="muted">{e.normalizedValue != null ? `${e.normalizedValue} ${e.normalizedUnit}` : "—"}</td>
+              <td class="muted">{e.label}</td>
+              <td>{e.confidence}</td>
+              <td class="muted">{src ? <a href={src.url} rel="noreferrer nofollow" target="_blank">{src.publisher}</a> : "—"}</td>
+              <td class="mono muted">{e.retrievedDate}</td>
+              <td>{e.verifiedDate ?? <span class="tag warn">unverified</span>}</td>
+              <td class="muted">{e.cadence}</td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Gaps — fields with no sourced value</h2>
+  <div class="card" style="padding:0;overflow-x:auto;">
+    <table>
+      <thead><tr><th>Product</th><th>Field</th><th>Group</th></tr></thead>
+      <tbody>
+        {ledger.gaps.length === 0 ? (
+          <tr><td colspan="3" class="muted">No gaps.</td></tr>
+        ) : ledger.gaps.map((g) => (
+          <tr><td class="mono muted">{g.productId.replace("prod-", "")}</td><td>{g.field}</td><td class="muted">{g.group}</td></tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  {issues.length > 0 && (
+    <>
+      <h2>Validation</h2>
+      <div class="card" style="padding:0;overflow-x:auto;">
+        <table>
+          <thead><tr><th>Severity</th><th>Rule</th><th>Detail</th><th>Product</th></tr></thead>
+          <tbody>
+            {issues.map((i) => (
+              <tr>
+                <td><span class={`tag ${i.severity === "error" ? "bad" : "warn"}`}>{i.severity}</span></td>
+                <td class="mono">{i.rule}</td>
+                <td class="muted">{i.detail}</td>
+                <td class="mono muted">{i.productId ?? "—"}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </>
+  )}
+
+  <h2>Sources</h2>
+  <div class="card" style="padding:0;overflow-x:auto;">
+    <table>
+      <thead><tr><th>Publisher</th><th>Type</th><th>Title</th><th>URL</th></tr></thead>
+      <tbody>
+        {ledger.sources.map((s) => (
+          <tr>
+            <td><strong>{s.publisher}</strong></td>
+            <td class="muted">{s.type}</td>
+            <td class="muted">{s.title}</td>
+            <td class="muted"><a href={s.url} rel="noreferrer nofollow" target="_blank">{s.url.slice(0, 70)}…</a></td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <p class="muted" style="margin-top:12px;font-size:12.5px;">
+    Ledger source: <span class="mono">src/content/evidence/</span> derived from <span class="mono">src/content/products.ts</span>.
+    Offers, prices, stock and shipping are deliberately absent — they are commercial data and cannot enter a factual claim.
+  </p>
+</Admin>
+<style>
+  .big { font-size: 22px; font-weight: 800; }
+</style>
