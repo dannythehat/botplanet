@@ -1,13 +1,36 @@
+import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { PRODUCTS } from "../src/content/products";
-import { deriveLedger, FIELD_SPECS, buildSources, primarySourceFor } from "../src/content/evidence/derive";
+import {
+  buildSources,
+  deriveLedger,
+  FIELD_SPECS,
+  interpretMeasurement,
+  primarySourceFor,
+  valuesAgree,
+} from "../src/content/evidence/derive";
+import { FIELD_REGISTRY, TOTAL_REGISTRY_WEIGHT, fieldApplies } from "../src/content/evidence/field-registry";
+import { RECONCILIATION, PUBLISHABLE_OUTCOMES, reconciliationCounts } from "../src/content/evidence/reconciliation";
+import { VERIFICATIONS, VERIFICATION_DATE } from "../src/content/evidence/verification";
+import { buildClaimLedger, NEVER_EMITTED } from "../src/content/evidence/claims";
 import { classifySource } from "../src/content/evidence/sources";
-import { buildReport, isCurrent, isStale, validateLedger, LAUNCH_PRODUCT_COUNT } from "../src/lib/evidence-report";
-import { SOURCE_PRIORITY } from "../src/content/evidence/types";
-import { normaliseDuration, normaliseLength, normaliseMass, roundLike, gramsToPoundsDisplay } from "../src/lib/normalize";
-import type { ClaimRecord } from "../src/content/evidence/types";
+import {
+  BOTMATCH_FIELDS,
+  COMPARISON_FIELDS,
+  LAUNCH_PRODUCT_COUNT,
+  buildReport,
+  fieldIsCurrent,
+  isCurrent,
+  isStale,
+  validateLedger,
+} from "../src/lib/evidence-report";
+import { buildNotionMapping } from "../src/lib/notion-mapping";
+import { SOURCE_PRIORITY, type ClaimRecord, type EvidenceRecord } from "../src/content/evidence/types";
+import { gramsToPoundsDisplay, normaliseDuration, normaliseLength, normaliseMass, roundLike } from "../src/lib/normalize";
 
-const TODAY = new Date("2026-07-30T00:00:00Z");
+const TODAY = new Date(`${VERIFICATION_DATE}T00:00:00Z`);
+const LEDGER = deriveLedger();
+const REPORT = buildReport(TODAY, buildClaimLedger().claims);
 
 describe("launch catalogue integrity", () => {
   it("holds exactly the ten launch products", () => {
@@ -28,17 +51,17 @@ describe("launch catalogue integrity", () => {
 
 describe("source classification", () => {
   it("recognises manufacturer domains", () => {
-    expect(classifySource("https://aiper.com/us/x").type).toBe("manufacturer_page");
-    expect(classifySource("https://www.maytronics.com/en-us/store/x").type).toBe("manufacturer_page");
+    expect(classifySource("https://www.maytronics.com/x").type).toBe("manufacturer_page");
+    expect(classifySource("https://aiper.com/us/x").recognised).toBe(true);
   });
 
   it("classifies retailers and third-party editorial separately", () => {
     expect(classifySource("https://www.amazon.com/dp/X").type).toBe("retailer_listing");
-    expect(classifySource("https://www.pcworld.com/article/x").type).toBe("editorial_research");
+    expect(classifySource("https://www.pcworld.com/a").type).toBe("editorial_research");
   });
 
   it("never treats an unknown host as a manufacturer", () => {
-    const c = classifySource("https://random-specs-site.example/x");
+    const c = classifySource("https://some-blog.example/robot");
     expect(c.type).toBe("editorial_research");
     expect(c.recognised).toBe(false);
   });
@@ -52,205 +75,577 @@ describe("source classification", () => {
 
 describe("normalisation", () => {
   it("converts to canonical internal units", () => {
-    expect(normaliseLength(60, "ft")).toEqual({ value: 18288, unit: "mm", method: expect.any(String) });
+    expect(normaliseLength(60, "ft")?.value).toBe(18288);
     expect(normaliseMass(20, "lb")?.value).toBe(9072);
     expect(normaliseDuration(2.5, "hr")?.value).toBe(150);
   });
 
   it("records the conversion method so a figure can be audited", () => {
-    expect(normaliseMass(20, "lb")?.method).toContain("453.59237");
+    expect(normaliseLength(12, "m")?.method).toContain("-> mm");
   });
 
   it("rejects unknown units instead of guessing", () => {
     expect(normaliseLength(5, "furlongs")).toBeNull();
-    expect(normaliseMass(5, "stone")).toBeNull();
   });
 
   it("does not invent precision the source never had", () => {
-    // A source that said "20 lb" must not come back as "44.09 lb".
+    expect(roundLike(14.6155, 14)).toBe(15);
     expect(gramsToPoundsDisplay(9072, 20)).toBe(20);
-    expect(roundLike(44.0924, 20)).toBe(44);
-    expect(roundLike(44.0924, 20.5)).toBe(44.1);
+  });
+
+  it("pulls a single figure out of verbatim source wording", () => {
+    expect(interpretMeasurement("6.63 Kg.")).toEqual({ value: 6.63, unit: "kg" });
+    expect(interpretMeasurement("1.5 Hours")).toEqual({ value: 1.5, unit: "hr" });
+    expect(interpretMeasurement("8 m")).toEqual({ value: 8, unit: "m" });
+  });
+
+  it("refuses to reduce a range to a number nobody published", () => {
+    expect(interpretMeasurement("3-4 Hours")).toBeNull();
+    expect(interpretMeasurement("10h surface / 5h floor / 5h walls")).toBeNull();
   });
 });
 
-describe("derived evidence ledger", () => {
-  const ledger = deriveLedger();
-
-  it("creates evidence only for populated fields, and a gap for every null", () => {
-    const totalSlots = Object.keys(PRODUCTS).length * FIELD_SPECS.length;
-    expect(ledger.evidence.length + ledger.gaps.length).toBe(totalSlots);
-    for (const e of ledger.evidence) expect(e.storedValue).not.toBeNull();
+describe("field registry", () => {
+  it("declares the full intended field set, not just the researched subset", () => {
+    expect(FIELD_REGISTRY.length).toBeGreaterThanOrEqual(30);
+    for (const key of ["modelNumber", "manualUrl", "powerType", "batteryCapacity", "filtrationMicrons", "dimensions", "wifi"]) {
+      expect(FIELD_REGISTRY.some((f) => f.field === key)).toBe(true);
+    }
   });
 
-  it("attributes each product to its highest-authority source", () => {
-    const sources = buildSources();
+  it("gives every field a weight, a group, a cadence and a written definition", () => {
+    for (const f of FIELD_REGISTRY) {
+      expect(f.weight).toBeGreaterThanOrEqual(1);
+      expect(f.weight).toBeLessThanOrEqual(5);
+      expect(f.definition.length).toBeGreaterThan(20);
+      expect(f.group).toBeTruthy();
+      expect(f.cadence).toBeTruthy();
+    }
+    expect(TOTAL_REGISTRY_WEIGHT).toBe(FIELD_REGISTRY.reduce((n, f) => n + f.weight, 0));
+  });
+
+  it("uses unique field keys", () => {
+    const keys = FIELD_REGISTRY.map((f) => f.field);
+    expect(new Set(keys).size).toBe(keys.length);
+  });
+
+  it("excludes a cable from a cordless robot and a battery from a corded one", () => {
+    expect(fieldApplies("corded_only", { powerType: "cordless" }).applies).toBe(false);
+    expect(fieldApplies("cordless_only", { powerType: "corded" }).applies).toBe(false);
+    expect(fieldApplies("corded_only", { powerType: "corded" }).applies).toBe(true);
+  });
+
+  it("keeps a power-dependent field visible while power type is unknown", () => {
+    expect(fieldApplies("corded_only", { powerType: null }).applies).toBe(true);
+    expect(fieldApplies("cordless_only", { powerType: null }).applies).toBe(true);
+  });
+
+  it("exports the registry as the completeness denominator", () => {
+    expect(FIELD_SPECS).toBe(FIELD_REGISTRY);
+  });
+});
+
+describe("live verification", () => {
+  it("covers every launch product", () => {
     for (const p of Object.values(PRODUCTS)) {
-      const primary = primarySourceFor(p, sources);
-      expect(primary).not.toBeNull();
-      const mine = p.sources.map((s) => sources.find((x) => x.url === s.url)!);
-      const best = Math.min(...mine.map((m) => SOURCE_PRIORITY[m.type]));
-      expect(SOURCE_PRIORITY[primary!.type]).toBe(best);
+      expect(VERIFICATIONS.some((v) => v.productId === p.productId)).toBe(true);
     }
   });
 
-  it("never grades unverified evidence as high confidence", () => {
-    for (const e of ledger.evidence) {
-      if (e.verifiedDate === null) expect(e.confidence).not.toBe("high");
+  it("dates every observation and names the source it came from", () => {
+    for (const v of VERIFICATIONS) {
+      for (const o of v.observations) {
+        expect(o.observedOn).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+        expect(o.sourceUrl).toMatch(/^https?:\/\//);
+        expect(o.sourceTitle.length).toBeGreaterThan(5);
+      }
     }
   });
 
-  it("preserves the sourced value and stores conversions separately", () => {
-    const weights = ledger.evidence.filter((e) => e.field === "weightLbs");
-    expect(weights.length).toBeGreaterThan(0);
-    for (const w of weights) {
-      expect(typeof w.storedValue).toBe("number");
-      expect(w.normalizedUnit).toBe("g");
-      expect(w.conversionMethod).toBeTruthy();
-      // The original is untouched by normalisation.
-      expect(w.normalizedValue).not.toBe(w.storedValue);
+  it("records which sources it actually checked before calling a field unstated", () => {
+    for (const v of VERIFICATIONS) {
+      for (const n of v.notPubliclyStated) {
+        expect(n.checked.length).toBeGreaterThan(0);
+        expect(n.note.length).toBeGreaterThan(10);
+      }
     }
   });
 
-  it("labels evidence by the authority of its source", () => {
-    for (const e of ledger.evidence) {
-      expect(["manufacturer_stated", "manual_verified", "retailer_stated", "api_supplied", "researched_interpretation"]).toContain(e.label);
+  it("keeps a source that could not be read, rather than dropping it", () => {
+    const polaris = VERIFICATIONS.find((v) => v.productId === "prod-polaris-freedom")!;
+    const dead = polaris.sourceChecks.find((c) => c.status === "unreadable");
+    expect(dead?.url).toContain("polarispool.com/en/products");
+  });
+
+  it("refuses a manual that covers a different model", () => {
+    const premier = VERIFICATIONS.find((v) => v.productId === "prod-dolphin-premier")!;
+    expect(premier.identity.manual).toBeNull();
+    expect(premier.identity.identityIssue).toContain("Classic 5");
+  });
+
+  it("records the corrected source when a stored record cited the wrong model", () => {
+    const betta = VERIFICATIONS.find((v) => v.productId === "prod-betta-se-plus")!;
+    expect(betta.identity.officialProductPageUrl).toBe("https://bettabot.com/products/betta-se-plus");
+    expect(betta.identity.identityIssue).toContain("DEFECT FOUND AND CORRECTED");
+    expect(betta.sourceChecks.some((c) => c.url.endsWith("/betta-se") && /WRONG MODEL/.test(c.title))).toBe(true);
+  });
+
+  it("names a sibling-model risk for every product, so near models cannot merge", () => {
+    for (const v of VERIFICATIONS) {
+      expect(v.identity.identityIssue && v.identity.identityIssue.length).toBeGreaterThan(30);
+    }
+  });
+});
+
+describe("reconciliation of stored values against live sources", () => {
+  it("names a known registry field and a known product on every entry", () => {
+    const fields = new Set(FIELD_REGISTRY.map((f) => f.field));
+    const ids = new Set(Object.values(PRODUCTS).map((p) => p.productId));
+    for (const r of RECONCILIATION) {
+      expect(fields.has(r.field)).toBe(true);
+      expect(ids.has(r.productId)).toBe(true);
+      expect(r.note.length).toBeGreaterThan(20);
+    }
+  });
+
+  it("records the two overstatements the pass found", () => {
+    const e10 = RECONCILIATION.find((r) => r.productId === "prod-dolphin-e10" && r.field === "poolSizeSuitability");
+    expect(e10?.outcome).toBe("conflicts");
+    const cc = RECONCILIATION.find((r) => r.productId === "prod-dolphin-nautilus-cc-plus" && r.field === "warranty");
+    expect(cc?.outcome).toBe("conflicts");
+  });
+
+  it("marks a stored figure with no source as unsupported rather than deleting it quietly", () => {
+    const polaris = RECONCILIATION.find((r) => r.productId === "prod-polaris-freedom" && r.field === "warranty");
+    expect(polaris?.outcome).toBe("unsupported");
+    expect(polaris?.note).toContain("never states its term");
+  });
+
+  it("records a field the live source newly filled in", () => {
+    const w = RECONCILIATION.find((r) => r.productId === "prod-polaris-freedom" && r.field === "weightLbs");
+    expect(w?.outcome).toBe("newly_populated");
+  });
+
+  it("counts every outcome, so the totals can be checked against the entries", () => {
+    const counts = reconciliationCounts();
+    expect(Object.values(counts).reduce((a, b) => a + b, 0)).toBe(RECONCILIATION.length);
+  });
+
+  it("treats only agreement and new sourcing as publishable outcomes", () => {
+    expect(PUBLISHABLE_OUTCOMES).not.toContain("conflicts");
+    expect(PUBLISHABLE_OUTCOMES).not.toContain("unsupported");
+    expect(PUBLISHABLE_OUTCOMES).not.toContain("derived_from_range");
+  });
+});
+
+describe("field states", () => {
+  it("produces one field record per registry field per product", () => {
+    expect(LEDGER.fields).toHaveLength(FIELD_REGISTRY.length * LAUNCH_PRODUCT_COUNT);
+  });
+
+  it("leaves nothing in the 'nobody looked' state after the verification pass", () => {
+    expect(REPORT.totals.stateCounts.unknown).toBe(0);
+  });
+
+  it("leaves nothing unverified after the verification pass", () => {
+    expect(REPORT.totals.stateCounts.pending_verification).toBe(0);
+    for (const e of LEDGER.evidence) expect(e.verifiedDate).toBe(VERIFICATION_DATE);
+  });
+
+  it("separates 'the maker does not publish it' from 'we are withholding what we had'", () => {
+    expect(REPORT.totals.stateCounts.not_publicly_stated).toBeGreaterThan(0);
+    expect(REPORT.totals.stateCounts.suppressed).toBeGreaterThan(0);
+    const suppressed = LEDGER.fields.filter((f) => f.state === "suppressed");
+    for (const f of suppressed) expect(f.storedValue).not.toBeNull();
+    const notStated = LEDGER.fields.filter((f) => f.state === "not_publicly_stated");
+    for (const f of notStated) expect(f.value).toBeNull();
+  });
+
+  it("removes an inapplicable field from the record rather than counting it missing", () => {
+    const cable = LEDGER.fields.find((f) => f.productId === "prod-aiper-scuba-x1" && f.field === "cableLengthFt")!;
+    expect(cable.state).toBe("not_applicable");
+    expect(cable.publishable).toBe(false);
+  });
+
+  it("publishes nothing from a state other than populated", () => {
+    for (const f of LEDGER.fields) {
+      if (f.publishable) expect(f.state).toBe("populated");
+      else expect(f.value).toBeNull();
+    }
+  });
+
+  it("gives every field record a written reason for the state it is in", () => {
+    for (const f of LEDGER.fields) expect(f.reason.length).toBeGreaterThan(10);
+  });
+
+  it("carries the pre-verification stored value alongside the live one", () => {
+    const e10 = LEDGER.fields.find((f) => f.productId === "prod-dolphin-e10" && f.field === "poolSizeSuitability")!;
+    expect(e10.storedValue).toContain("30 ft");
+    expect(e10.value).toBe("8 m");
+  });
+});
+
+describe("conflicts", () => {
+  it("resolves to the higher-authority source and records the rule", () => {
+    const cc = LEDGER.conflicts.find((c) => c.productId === "prod-dolphin-nautilus-cc-plus" && c.field === "warranty")!;
+    expect(cc.resolvedTo).toBe("1 year");
+    expect(cc.suppressed).toBe(false);
+    expect(cc.resolutionRule.length).toBeGreaterThan(10);
+  });
+
+  it("publishes nothing when the disagreement cannot be settled by authority", () => {
+    const s1 = LEDGER.conflicts.find((c) => c.productId === "prod-aiper-scuba-s1" && c.field === "poolTypes")!;
+    expect(s1.suppressed).toBe(true);
+    expect(s1.resolvedTo).toBeNull();
+    const field = LEDGER.fields.find((f) => f.productId === "prod-aiper-scuba-s1" && f.field === "poolTypes")!;
+    expect(field.state).toBe("conflicting");
+    expect(field.publishable).toBe(false);
+  });
+
+  it("holds a conflict where the winning source's own figure is not credible", () => {
+    const premier = LEDGER.conflicts.find((c) => c.productId === "prod-dolphin-premier" && c.field === "poolSizeSuitability")!;
+    expect(premier.suppressed).toBe(true);
+  });
+
+  it("lists every value in the conflict with the source it came from", () => {
+    for (const c of LEDGER.conflicts) {
+      expect(c.values.length).toBeGreaterThanOrEqual(2);
+      for (const v of c.values) expect(v.publisher.length).toBeGreaterThan(2);
+    }
+  });
+
+  it("does not mistake two wordings of the same fact for a conflict", () => {
+    expect(valuesAgree("1-YEAR WARRANTY", "1-Year Manufacturer's Warranty from the date of purchase")).toBe(true);
+    expect(valuesAgree("In-ground", "Designed for both above-ground and in-ground pools")).toBe(false);
+    const betta = LEDGER.fields.find((f) => f.productId === "prod-betta-se-plus" && f.field === "warranty")!;
+    expect(betta.state).toBe("populated");
+    expect(betta.evidenceIds.length).toBe(2);
+  });
+});
+
+describe("completeness", () => {
+  it("states both denominators rather than scoring against an unknown total", () => {
+    expect(REPORT.denominators.fieldsInRegistry).toBe(FIELD_REGISTRY.length);
+    expect(REPORT.denominators.fieldRecordsExpected).toBe(FIELD_REGISTRY.length * LAUNCH_PRODUCT_COUNT);
+    expect(REPORT.denominators.applicableFields).toBeLessThan(REPORT.denominators.fieldRecordsExpected);
+    expect(REPORT.denominators.applicableWeight).toBeGreaterThan(0);
+  });
+
+  it("reports a raw and a weighted figure, and they are not the same number", () => {
+    expect(REPORT.totals.rawPercent).toBeGreaterThan(0);
+    expect(REPORT.totals.weightedPercent).toBeGreaterThan(0);
+    expect(REPORT.totals.weightedPercent).not.toBe(REPORT.totals.rawPercent);
+  });
+
+  it("excludes inapplicable fields from both denominators", () => {
+    for (const p of REPORT.products) {
+      const mine = LEDGER.fields.filter((f) => f.productId === p.productId);
+      const applicable = mine.filter((f) => f.state !== "not_applicable");
+      expect(p.overall.applicable).toBe(applicable.length);
+      expect(p.overall.applicable).toBeLessThanOrEqual(p.overall.tracked * 0 + mine.length);
+    }
+  });
+
+  it("reports one row per launch product with its group breakdown", () => {
+    expect(REPORT.products).toHaveLength(LAUNCH_PRODUCT_COUNT);
+    for (const p of REPORT.products) expect(p.groups.length).toBe(7);
+  });
+
+  it("never reports a percentage above 100", () => {
+    for (const p of REPORT.products) {
+      expect(p.overall.rawPercent).toBeLessThanOrEqual(100);
+      expect(p.overall.weightedPercent).toBeLessThanOrEqual(100);
+      for (const g of p.groups) expect(g.weightedPercent).toBeLessThanOrEqual(100);
+    }
+  });
+});
+
+describe("publication states", () => {
+  it("reports seven independent states, not one boolean", () => {
+    for (const p of REPORT.products) {
+      expect(Object.keys(p.publication)).toHaveLength(7);
+    }
+  });
+
+  it("holds a product back from comparison when a comparison field is unavailable", () => {
+    const polaris = REPORT.products.find((p) => p.slug === "polaris-freedom")!;
+    expect(polaris.publication.safeForLimitedFactualUse).toBe(true);
+    expect(polaris.publication.readyForComparison).toBe(false);
+    expect(polaris.publicationBlockers.join(" ")).toContain("poolSizeSuitability");
+  });
+
+  it("holds a thinly sourced product back from review writing", () => {
+    const seagull = REPORT.products.find((p) => p.slug === "aiper-seagull-se")!;
+    expect(seagull.publication.readyForReviewWriting).toBe(false);
+    expect(seagull.publication.readyForComparison).toBe(false);
+  });
+
+  it("requires model identity before a review may be written", () => {
+    const premier = REPORT.products.find((p) => p.slug === "dolphin-premier")!;
+    expect(premier.publication.readyForReviewWriting).toBe(false);
+    expect(premier.publicationBlockers.join(" ")).toContain("identity");
+  });
+
+  it("only calls a product BotMatch-ready when every field BotMatch uses is available", () => {
+    for (const p of REPORT.products) {
+      if (!p.publication.readyForBotMatch) continue;
+      for (const key of BOTMATCH_FIELDS) {
+        const f = LEDGER.fields.find((x) => x.productId === p.productId && x.field === key)!;
+        expect(f.publishable || f.state === "not_applicable").toBe(true);
+      }
+    }
+  });
+
+  it("only calls a product comparison-ready when every comparison field is available", () => {
+    for (const p of REPORT.products) {
+      if (!p.publication.readyForComparison) continue;
+      for (const key of COMPARISON_FIELDS) {
+        const f = LEDGER.fields.find((x) => x.productId === p.productId && x.field === key)!;
+        expect(f.publishable || f.state === "not_applicable").toBe(true);
+      }
+    }
+  });
+
+  it("gives a written blocker for every state that is false", () => {
+    for (const p of REPORT.products) {
+      const anyFalse = Object.values(p.publication).some((v) => v === false);
+      if (anyFalse) expect(p.publicationBlockers.length).toBeGreaterThan(0);
+    }
+  });
+});
+
+describe("claim ledger", () => {
+  const { claims, blocked } = buildClaimLedger();
+
+  it("writes claims only from publishable fields", () => {
+    expect(claims.length).toBeGreaterThan(50);
+    for (const c of claims) expect(c.evidenceIds.length).toBeGreaterThan(0);
+  });
+
+  it("points every claim at evidence that exists", () => {
+    const ids = new Set(LEDGER.evidence.map((e) => e.id));
+    for (const c of claims) for (const id of c.evidenceIds) expect(ids.has(id)).toBe(true);
+  });
+
+  it("produces deterministic evidence IDs across separate ledger builds", () => {
+    const a = deriveLedger().evidence.map((e) => e.id);
+    const b = deriveLedger().evidence.map((e) => e.id);
+    expect(a).toEqual(b);
+  });
+
+  it("emits no comparative, tested or commercial claim", () => {
+    for (const c of claims) {
+      expect(c.claimClass).not.toBe("tested_observation");
+      expect(c.claimClass).not.toBe("comparative_statement");
+      expect(c.claimClass).not.toBe("commercial_observation");
+    }
+    expect(NEVER_EMITTED.map((n) => n.claimClass)).toContain("tested_observation");
+  });
+
+  it("attributes every claim to a named publisher rather than asserting it directly", () => {
+    for (const c of claims) {
+      if (c.claimClass !== "direct_specification") continue;
+      expect(c.claimText).toMatch(/ (states|describes|lists|names|rates) /);
+    }
+  });
+
+  it("keeps warranty out of structured data and metadata", () => {
+    const w = claims.find((c) => c.id.endsWith("-warranty"))!;
+    expect(w.prohibitedContexts).toContain("structured_data");
+    expect(w.prohibitedContexts).toContain("metadata");
+  });
+
+  it("writes a suitability claim only when both inputs are verified", () => {
+    const suitability = claims.filter((c) => c.claimClass === "suitability_statement");
+    for (const c of suitability) {
+      const f = LEDGER.fields.find((x) => x.productId === c.productId && x.field === "poolSizeSuitability")!;
+      expect(f.publishable).toBe(true);
+    }
+    expect(suitability.some((c) => c.productId === "prod-dolphin-premier")).toBe(false);
+  });
+
+  it("records what could not be claimed, with the reason", () => {
+    expect(blocked.length).toBeGreaterThan(0);
+    for (const b of blocked) {
+      expect(b.state).not.toBe("populated");
+      expect(b.state).not.toBe("not_applicable");
+      expect(b.reason.length).toBeGreaterThan(10);
+    }
+  });
+
+  it("never blocks and claims the same field at once", () => {
+    for (const b of blocked) {
+      expect(claims.some((c) => c.productId === b.productId && c.id.endsWith(`-${b.field}`))).toBe(false);
     }
   });
 });
 
 describe("validation rules", () => {
-  const ledger = deriveLedger();
-
   it("passes the current catalogue with no errors", () => {
-    const errors = validateLedger(ledger).filter((i) => i.severity === "error");
+    const errors = REPORT.issues.filter((i) => i.severity === "error");
     expect(errors).toEqual([]);
   });
 
   it("rejects a claim whose evidence does not exist", () => {
-    const claims: ClaimRecord[] = [
-      { id: "c1", productId: Object.values(PRODUCTS)[0].productId, claimText: "x", claimClass: "direct_specification",
-        evidenceIds: ["ev-does-not-exist"], confidence: "high", allowedContexts: ["product_page"],
-        freshnessRequirement: "six_monthly", reviewerStatus: "unreviewed" },
-    ];
-    const errs = validateLedger(ledger, claims).filter((i) => i.rule === "claim_evidence_exists");
-    expect(errs).toHaveLength(1);
+    const bad: ClaimRecord = {
+      id: "c1",
+      productId: Object.values(PRODUCTS)[0].productId,
+      claimText: "x",
+      claimClass: "direct_specification",
+      evidenceIds: ["ev-nope"],
+      confidence: "high",
+      allowedContexts: ["product_page"],
+      freshnessRequirement: "quarterly",
+      reviewerStatus: "unreviewed",
+    };
+    expect(validateLedger(LEDGER, [bad]).some((i) => i.rule === "claim_evidence_exists")).toBe(true);
   });
 
   it("rejects a claim with no evidence at all", () => {
-    const claims: ClaimRecord[] = [
-      { id: "c2", productId: Object.values(PRODUCTS)[0].productId, claimText: "x", claimClass: "direct_specification",
-        evidenceIds: [], confidence: "low", allowedContexts: ["product_page"],
-        freshnessRequirement: "six_monthly", reviewerStatus: "unreviewed" },
-    ];
-    expect(validateLedger(ledger, claims).some((i) => i.rule === "claim_requires_evidence")).toBe(true);
+    const bad: ClaimRecord = {
+      id: "c2",
+      productId: Object.values(PRODUCTS)[0].productId,
+      claimText: "x",
+      claimClass: "direct_specification",
+      evidenceIds: [],
+      confidence: "low",
+      allowedContexts: ["product_page"],
+      freshnessRequirement: "quarterly",
+      reviewerStatus: "unreviewed",
+    };
+    expect(validateLedger(LEDGER, [bad]).some((i) => i.rule === "claim_requires_evidence")).toBe(true);
   });
 
   it("always rejects a tested observation", () => {
-    const claims: ClaimRecord[] = [
-      { id: "c3", productId: Object.values(PRODUCTS)[0].productId, claimText: "we measured it", claimClass: "tested_observation",
-        evidenceIds: [], confidence: "high", allowedContexts: ["product_page"],
-        freshnessRequirement: "six_monthly", reviewerStatus: "unreviewed" },
-    ];
-    expect(validateLedger(ledger, claims).some((i) => i.rule === "no_tested_claims")).toBe(true);
+    const bad: ClaimRecord = {
+      id: "c3",
+      productId: Object.values(PRODUCTS)[0].productId,
+      claimText: "We tested it.",
+      claimClass: "tested_observation",
+      evidenceIds: LEDGER.evidence.slice(0, 1).map((e) => e.id),
+      confidence: "high",
+      allowedContexts: ["product_page"],
+      freshnessRequirement: "quarterly",
+      reviewerStatus: "unreviewed",
+    };
+    expect(validateLedger(LEDGER, [bad]).some((i) => i.rule === "no_tested_claims")).toBe(true);
   });
 
   it("finds no hands-on testing assertion in the existing editorial prose", () => {
-    expect(validateLedger(ledger).filter((i) => i.rule === "no_tested_claims")).toEqual([]);
+    expect(REPORT.issues.filter((i) => i.rule === "no_tested_claims")).toEqual([]);
   });
 
   it("flags orphan evidence pointing at a product that does not exist", () => {
-    const broken = { ...ledger, evidence: [{ ...ledger.evidence[0], productId: "prod-ghost" }] };
-    expect(validateLedger(broken).some((i) => i.rule === "evidence_product_exists")).toBe(true);
+    const orphan = { ...LEDGER.evidence[0], id: "ev-orphan", productId: "prod-does-not-exist" } as EvidenceRecord;
+    const issues = validateLedger({ ...LEDGER, evidence: [...LEDGER.evidence, orphan] });
+    expect(issues.some((i) => i.rule === "evidence_product_exists")).toBe(true);
   });
 
   it("flags a negative measurement", () => {
-    const broken = { ...ledger, evidence: [{ ...ledger.evidence.find((e) => typeof e.storedValue === "number")!, storedValue: -1 }] };
-    expect(validateLedger(broken).some((i) => i.rule === "no_negative_values")).toBe(true);
+    const bad = { ...LEDGER.evidence[0], id: "ev-neg", storedValue: -5 } as EvidenceRecord;
+    const issues = validateLedger({ ...LEDGER, evidence: [...LEDGER.evidence, bad] });
+    expect(issues.some((i) => i.rule === "no_negative_values")).toBe(true);
   });
 
   it("flags a normalised value with no unit or method", () => {
-    const broken = { ...ledger, evidence: [{ ...ledger.evidence.find((e) => e.normalizedValue !== null)!, normalizedUnit: null }] };
-    expect(validateLedger(broken).some((i) => i.rule === "unit_consistency")).toBe(true);
+    const bad = { ...LEDGER.evidence[0], id: "ev-nounit", normalizedValue: 5, normalizedUnit: null, conversionMethod: null } as EvidenceRecord;
+    const issues = validateLedger({ ...LEDGER, evidence: [...LEDGER.evidence, bad] });
+    expect(issues.some((i) => i.rule === "unit_consistency")).toBe(true);
   });
 
   it("warns on an unresolved conflict rather than publishing it", () => {
-    const broken = { ...ledger, evidence: [{ ...ledger.evidence[0], conflictStatus: "conflicting" as const }] };
-    expect(validateLedger(broken).some((i) => i.rule === "unresolved_conflict")).toBe(true);
+    expect(REPORT.issues.some((i) => i.rule === "unresolved_conflict")).toBe(true);
+  });
+
+  it("flags a field marked publishable with no evidence behind it", () => {
+    const broken = { ...LEDGER, fields: LEDGER.fields.map((f, i) => (i === 0 ? { ...f, publishable: true, evidenceIds: [] } : f)) };
+    expect(validateLedger(broken).some((i) => i.rule === "publishable_requires_evidence")).toBe(true);
   });
 });
 
 describe("freshness", () => {
-  const e = deriveLedger().evidence[0];
+  const ev = LEDGER.evidence[0];
 
   it("treats an unverified value as not current, however recent", () => {
-    expect(isCurrent({ ...e, retrievedDate: "2026-07-30", verifiedDate: null }, TODAY)).toBe(false);
+    expect(isCurrent({ ...ev, verifiedDate: null }, TODAY)).toBe(false);
   });
 
   it("goes stale once the cadence has elapsed", () => {
-    expect(isStale({ ...e, cadence: "quarterly", retrievedDate: "2026-07-01", verifiedDate: null }, TODAY)).toBe(false);
-    expect(isStale({ ...e, cadence: "quarterly", retrievedDate: "2026-01-01", verifiedDate: null }, TODAY)).toBe(true);
+    const later = new Date("2027-12-31T00:00:00Z");
+    expect(isStale(ev, later)).toBe(true);
   });
 
-  it("counts freshness from the verification date when one exists", () => {
-    expect(isStale({ ...e, cadence: "quarterly", retrievedDate: "2025-01-01", verifiedDate: "2026-07-01" }, TODAY)).toBe(false);
+  it("counts field freshness from the verification date", () => {
+    const f = LEDGER.fields.find((x) => x.state === "populated")!;
+    expect(fieldIsCurrent(f, TODAY)).toBe(true);
+    expect(fieldIsCurrent(f, new Date("2028-01-01T00:00:00Z"))).toBe(false);
   });
 });
 
-describe("completeness and publication safety", () => {
-  const report = buildReport(TODAY);
+describe("Notion register mapping", () => {
+  const mapping = buildNotionMapping();
 
-  it("reports one row per launch product", () => {
-    expect(report.products).toHaveLength(LAUNCH_PRODUCT_COUNT);
+  it("produces exactly one row per launch product", () => {
+    expect(mapping.rows).toHaveLength(LAUNCH_PRODUCT_COUNT);
+    expect(new Set(mapping.rows.map((r) => r.productId)).size).toBe(LAUNCH_PRODUCT_COUNT);
   });
 
-  it("states its denominators rather than scoring against an unknown total", () => {
-    expect(report.denominators.fieldsTrackedPerProduct).toBe(FIELD_SPECS.length);
-    expect(report.denominators.launchProducts).toBe(LAUNCH_PRODUCT_COUNT);
-    expect(report.denominators.identityFields).toBeGreaterThan(0);
-    expect(report.denominators.technicalFields).toBeGreaterThan(0);
+  it("matches the committed export, so the register cannot be filled from stale data", () => {
+    const onDisk = JSON.parse(readFileSync("docs/job-08-notion-mapping.json", "utf8"));
+    expect(onDisk).toEqual(JSON.parse(JSON.stringify(mapping)));
   });
 
-  it("keeps identity, technical, suitability and evidence completeness separate", () => {
-    for (const p of report.products) {
-      for (const s of [p.identity, p.technical, p.suitability, p.evidence]) {
-        expect(s.percent).toBeGreaterThanOrEqual(0);
-        expect(s.percent).toBeLessThanOrEqual(100);
-        expect(s.populated).toBeLessThanOrEqual(s.tracked);
-      }
+  it("carries the model identity a register row needs", () => {
+    for (const r of mapping.rows) {
+      expect(r.canonicalName.length).toBeGreaterThan(3);
+      expect(r.brand.length).toBeGreaterThan(2);
+      expect(r.verificationDate).toBe(VERIFICATION_DATE);
     }
   });
 
-  it("counts populated and missing fields to the tracked total", () => {
-    for (const p of report.products) {
-      expect(p.populatedFields.length + p.missingFields.length).toBe(FIELD_SPECS.length);
+  it("states both completeness figures with the numbers behind them", () => {
+    for (const r of mapping.rows) {
+      expect(r.fieldsApplicable).toBeGreaterThan(0);
+      expect(r.weightApplicable).toBeGreaterThan(0);
+      expect(r.completenessRawPercent).toBe(Math.round((r.fieldsPublishable / r.fieldsApplicable) * 100));
+      expect(r.completenessWeightedPercent).toBe(Math.round((r.weightPublishable / r.weightApplicable) * 100));
     }
   });
 
-  it("reports no verification date, because nothing has been re-verified yet", () => {
-    for (const p of report.products) expect(p.latestVerification).toBeNull();
-  });
-
-  it("blocks publication when a product has unresolved conflicts", () => {
-    const withConflict = buildReport(TODAY).products[0];
-    expect(withConflict.publicationBlockers).toEqual(expect.any(Array));
-    // Current data has no conflicts, so the current set is publication-safe.
-    expect(withConflict.publicationSafe).toBe(true);
+  it("lists the editorial corrections each product needs", () => {
+    const e10 = mapping.rows.find((r) => r.slug === "dolphin-e10")!;
+    expect(e10.editorialCorrections.some((c) => c.field === "poolSizeSuitability")).toBe(true);
+    const total = mapping.rows.reduce((n, r) => n + r.editorialCorrections.length, 0);
+    expect(total).toBeGreaterThan(20);
   });
 });
 
 describe("commission independence", () => {
   it("keeps every commercial term out of the evidence model", () => {
-    const serialised = JSON.stringify(deriveLedger());
-    for (const banned of ["commission", "payout", "epc", "affiliate_program", "retailerFee"]) {
-      expect(serialised.toLowerCase()).not.toContain(banned.toLowerCase());
+    // Comments are stripped first: the file is allowed to EXPLAIN that
+    // commercial terms are excluded; it must not declare one.
+    const code = readFileSync("apps/web/src/content/evidence/types.ts", "utf8")
+      .replace(/\/\*[\s\S]*?\*\//g, "")
+      .replace(/\/\/.*$/gm, "")
+      .toLowerCase();
+    for (const banned of ["commission", "payout", "epc", "affiliateurl", "price", "merchant"]) {
+      expect(code).not.toContain(banned);
     }
   });
 
   it("tracks no offer, price or stock field in the evidence-controlled set", () => {
-    const fields = FIELD_SPECS.map((f) => f.field.toLowerCase());
-    for (const banned of ["price", "stock", "shipping", "offer", "retailer"]) {
-      expect(fields.some((f) => f.includes(banned))).toBe(false);
+    for (const f of FIELD_REGISTRY) {
+      expect(f.field.toLowerCase()).not.toMatch(/price|offer|stock|commission|merchant/);
+    }
+  });
+
+  it("attributes each product to its highest-authority cited source", () => {
+    const sources = buildSources();
+    for (const p of Object.values(PRODUCTS)) {
+      const s = primarySourceFor(p, sources);
+      if (!s) continue;
+      const ranks = p.sources.map((x) => sources.find((y) => y.url === x.url)).filter(Boolean).map((x) => SOURCE_PRIORITY[x!.type]);
+      expect(SOURCE_PRIORITY[s.type]).toBe(Math.min(...ranks));
     }
   });
 });

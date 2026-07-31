@@ -40,6 +40,56 @@ export type EvidenceLabel =
 
 export type Confidence = "high" | "medium" | "low" | "none";
 
+/**
+ * What we actually know about a field, for one product.
+ *
+ * These are deliberately seven distinct states rather than "has a value / does
+ * not". "We never looked", "we looked and the manufacturer does not publish it"
+ * and "two sources disagree so we are withholding it" are three different facts
+ * with three different consequences, and collapsing them into `null` is how a
+ * catalogue starts lying by omission.
+ */
+export type FieldState =
+  /** A live source states it and nothing contradicts it. */
+  | "populated"
+  /** No value, and the official sources have not been checked for it. */
+  | "unknown"
+  /** The field cannot apply to this product (e.g. cable length on a cordless unit). */
+  | "not_applicable"
+  /** Official sources were checked and none publishes this value. */
+  | "not_publicly_stated"
+  /** Two or more sources give incompatible values. */
+  | "conflicting"
+  /** A stored value exists but is withheld from publication (unsupported or unresolved conflict). */
+  | "suppressed"
+  /** A value exists but has not been re-checked against its source since it was recorded. */
+  | "pending_verification";
+
+/** States a field may be published from. Everything else is internal only. */
+export const PUBLISHABLE_STATES: FieldState[] = ["populated"];
+
+/**
+ * Publication readiness, separated into the seven things that were previously
+ * squashed into one `publicationSafe` boolean. A product can be structurally
+ * valid and still unfit for a comparison table; the surfaces need to know which.
+ */
+export interface PublicationStates {
+  /** IDs, slugs and references resolve; no schema errors. */
+  structurallyValid: boolean;
+  /** Every published field traces to a source. */
+  factuallyEvidenced: boolean;
+  /** Those sources were re-checked within their cadence. */
+  currentlyVerified: boolean;
+  /** Safe to state individual facts, with attribution, on a product page. */
+  safeForLimitedFactualUse: boolean;
+  /** Enough verified substance to write a review around. */
+  readyForReviewWriting: boolean;
+  /** Enough shared verified fields to sit in a like-for-like comparison. */
+  readyForComparison: boolean;
+  /** The fields BotMatch filters on are verified and unambiguous. */
+  readyForBotMatch: boolean;
+}
+
 /** How often a field must be re-checked before it is treated as stale. */
 export type RefreshCadence = "monthly" | "quarterly" | "six_monthly" | "annual";
 
@@ -99,6 +149,42 @@ export interface EvidenceRecord {
   resolutionNote?: string;
   superseded: boolean;
   notes?: string;
+}
+
+/** One field of one product, with its state and everything backing it. */
+export interface FieldRecord {
+  productId: string;
+  field: string;
+  group: FieldGroup;
+  state: FieldState;
+  /** Weight from the field registry, for weighted completeness. */
+  weight: number;
+  /** The value BotPlanet holds, verbatim from the winning source. */
+  value: string | number | null;
+  /** The value the editorial record held before this verification pass. */
+  storedValue: string | number | null;
+  /** Every evidence record for this field, highest authority first. */
+  evidenceIds: string[];
+  confidence: Confidence;
+  verifiedDate: string | null;
+  cadence: RefreshCadence;
+  applicability: string;
+  /** Why the field is in this state, in one sentence. */
+  reason: string;
+  /** May this field's value appear on a public surface? */
+  publishable: boolean;
+}
+
+/** Two sources, one field, two incompatible values. */
+export interface ConflictEntry {
+  productId: string;
+  field: string;
+  values: { value: string | number; sourceId: string; sourceType: SourceType; publisher: string; url: string }[];
+  /** Which value wins, or null when the conflict is unresolved. */
+  resolvedTo: string | number | null;
+  resolutionRule: string;
+  /** True when no value may be published until a human decides. */
+  suppressed: boolean;
 }
 
 /** How a public statement relates to evidence. */
