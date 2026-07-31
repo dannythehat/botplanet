@@ -44,6 +44,10 @@ const AMAZON_ASINS: { productId: string; asin: string; sourceUrl: string }[] = [
   { productId: "prod-betta-se-plus", asin: "B0CVMQ3XBX", sourceUrl: "https://www.amazon.com/Betta-SE-Plus-Continuous-Safeguard/dp/B0CVMQ3XBX" },
   { productId: "prod-beatbot-aquasense-2-ultra", asin: "B0DMN6NV6H", sourceUrl: "https://www.amazon.com/Beatbot-AquaSense-Cordless-Cleaning-Clarification/dp/B0DMN6NV6H" },
   { productId: "prod-aiper-scuba-x1", asin: "B0F9WN961G", sourceUrl: "https://www.amazon.com/AIPER-High-Power-Horizontal-Waterline-Scrubbing/dp/B0F9WN961G" },
+  // Discovered by the SerpApi run of 2026-07-31 and matched on the details
+  // table, not the title — see serpapi-observations.ts for what each read.
+  { productId: "prod-dolphin-e10", asin: "B0GV15VY1N", sourceUrl: "SerpApi Amazon search, 2026-07-31: details table gives brand Dolphin, model name E10" },
+  { productId: "prod-aiper-seagull-se", asin: "B0H5PY2SPF", sourceUrl: "SerpApi Amazon search, 2026-07-31: details table gives brand AIPER, model Seagull SE ZT20032026" },
 ];
 
 /**
@@ -87,11 +91,25 @@ export const IDENTITY_CHECKS: Record<string, IdentityCheck> = {
       "Canonical URL /Beatbot-AquaSense-Cordless-Cleaning-Clarification/; Brand 'Beatbot', Model Number PRCMDS02G-2025. The feature bullets state '5-in-1 Cleaning Power — walls, floor, water surface, waterline, and water clarity', and water clarification is what separates the Ultra from the 4-in-1 Pro in the same series.",
     checkedOn: "2026-07-31",
   },
+  "prod-dolphin-e10": {
+    asin: "B0GV15VY1N",
+    confirmed: true,
+    evidence:
+      "SerpApi details table: brand 'Dolphin', model name 'E10'. The model NUMBER field reads '1', which is junk and carries no weight either way; the match rests on brand plus model name plus a title naming the E10. The same search returned Nautilus AG, CC, CC Pro and CC Supreme as separate listings, so the siblings are distinguishable.",
+    checkedOn: "2026-07-31",
+  },
+  "prod-aiper-seagull-se": {
+    asin: "B0H5PY2SPF",
+    confirmed: true,
+    evidence:
+      "SerpApi details table: brand 'AIPER'; model name and model number both 'Seagull SE ZT20032026'. Sold by AiperDirect, the brand's own storefront. A renewed listing and a charger accessory in the same search were refused.",
+    checkedOn: "2026-07-31",
+  },
   "prod-aiper-scuba-x1": {
     asin: "B0F9WN961G",
     confirmed: false,
     evidence:
-      "NOT CONFIRMED. The listing publishes no model name: title is 'AIPER Pool Cleaner', Model Name / Model Number / Manufacturer Part Number are all 'Blue' (a colour), and the canonical URL is /AIPER-Blue-Pool-Cleaner/. The page's comparison content mentions Scuba X1, X1 Pro Max, V3 and S3 together, so it cannot distinguish the model we hold from its siblings. The ASIN stays researched_exact and carries no offer.",
+      "NOT CONFIRMED, and now also CURRENTLY UNAVAILABLE. The listing publishes no model name — title 'AIPER Pool Cleaner', with model name, model number and manufacturer part number all 'Blue', a colour — and the SerpApi read of 2026-07-31 found no buying option at all. Two independent failures: nothing to buy, and no way to confirm what it is.",
     checkedOn: "2026-07-31",
   },
 };
@@ -121,9 +139,8 @@ const NO_AMAZON_DESTINATION = [
   // at a 404; a new ASIN has to be found before it can carry an offer again.
   "prod-wybot-c1",
   "prod-dolphin-premier",
-  "prod-dolphin-e10",
+  // Both resolved by the SerpApi run and moved into AMAZON_ASINS above.
   "prod-aiper-scuba-s1",
-  "prod-aiper-seagull-se",
 ];
 
 export const DESTINATIONS: ProductDestination[] = [

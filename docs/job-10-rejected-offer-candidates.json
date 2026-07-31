@@ -1,8 +1,8 @@
 {
   "generatedFor": "2026-07-31",
-  "total": 20,
+  "total": 18,
   "byRule": {
-    "search_not_offer": 8,
+    "search_not_offer": 6,
     "refurbished_or_used": 1,
     "sibling_model": 2,
     "wrong_region": 1,
@@ -24,23 +24,9 @@
       "rule": "search_not_offer"
     },
     {
-      "productId": "prod-dolphin-e10",
-      "retailerId": "ret-amazon",
-      "candidate": "amazon.com/s?k=Dolphin E10",
-      "reason": "A search-results page is not an offer: it does not identify a single product, a seller, a price or a stock state, and the customer still has to choose. Kept as a fallback click destination, refused as a verified offer.",
-      "rule": "search_not_offer"
-    },
-    {
       "productId": "prod-aiper-scuba-s1",
       "retailerId": "ret-amazon",
       "candidate": "amazon.com/s?k=Aiper Scuba S1 Cordless Robotic Pool Cleaner",
-      "reason": "A search-results page is not an offer: it does not identify a single product, a seller, a price or a stock state, and the customer still has to choose. Kept as a fallback click destination, refused as a verified offer.",
-      "rule": "search_not_offer"
-    },
-    {
-      "productId": "prod-aiper-seagull-se",
-      "retailerId": "ret-amazon",
-      "candidate": "amazon.com/s?k=Aiper Seagull SE",
       "reason": "A search-results page is not an offer: it does not identify a single product, a seller, a price or a stock state, and the customer still has to choose. Kept as a fallback click destination, refused as a verified offer.",
       "rule": "search_not_offer"
     },

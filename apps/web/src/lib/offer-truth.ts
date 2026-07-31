@@ -18,6 +18,7 @@ import { WARRANTY_NOT_CONFIRMED } from "./warranty";
 import { DESTINATIONS, REDIRECT_KEYS, REJECTED_CANDIDATES, destinationFor } from "../content/commerce/destinations";
 import { PROGRAMMES, RETAILERS, programme, retailer } from "../content/commerce/registry";
 import { manualCheckFor } from "../content/commerce/manual-checks";
+import { serpApiObservationFor } from "../content/commerce/serpapi-observations";
 import {
   CURRENT_PRICE_STATES,
   FRESHNESS_WINDOW_DAYS,
@@ -137,10 +138,33 @@ export function buildOffers(today = new Date(AS_AT)): Offer[] {
 
       const prog = PROGRAMMES.find((x) => x.market === "us" && x.state === "active" && r.affiliateNetworks.includes("amazon_associates_us") && x.id === "prog-amazon-us");
 
-      // A manual check by a human reading the page is a real source with a real
-      // date. Where one exists it supersedes the researched snapshot entirely.
-      const check = manualCheckFor(p.productId, r.id);
-      const source: OfferSource = check ? "manual_check" : "researched_snapshot";
+      /*
+       * Source precedence, highest authority first.
+       *
+       * The aggregator relays the retailer's own live page, so it outranks a
+       * human check that was exact at one instant and then aged — and it sees
+       * the seller line, which a screenshot often crops. Where both exist the
+       * aggregator wins; where only a human looked, the human stands; where
+       * neither did, the researched snapshot can never be a current price.
+       */
+      const serp = r.id === "ret-amazon" ? serpApiObservationFor(p.productId) : undefined;
+      const manual = manualCheckFor(p.productId, r.id);
+      const check = serp
+        ? {
+            identityConfirmed: serp.identityConfirmed,
+            priceMinor: serp.priceMinor,
+            stockWording: serp.stockWording,
+            shippingWording: serp.shippingWording,
+            sellerWording: serp.sellerWording,
+            returnsWording: serp.returnsWording,
+            checkedDate: serp.checkedDate,
+          }
+        : manual;
+      const source: OfferSource = serp
+        ? "retailer_api_via_aggregator"
+        : manual
+          ? "manual_check"
+          : "researched_snapshot";
       const checkedDate = check?.checkedDate ?? AS_AT;
       const freshness = freshnessFor(source, checkedDate, today);
       const shippingState = normaliseShipping(check?.shippingWording ?? null);

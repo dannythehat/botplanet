@@ -48,6 +48,9 @@ export function priceToMinor(raw: unknown): number | null {
 /** SerpApi labels an option "buy_new" / "buy_used"; anything else is unknown. */
 export function conditionOf(key: string): BuyingOption["condition"] {
   const k = key.toLowerCase();
+  // A listing with one buying option is keyed `single_offer` and is the new
+  // item — there is no other condition on offer to confuse it with.
+  if (k === "single_offer") return "new";
   if (k.includes("new")) return "new";
   if (k.includes("used")) return "used";
   if (k.includes("renew") || k.includes("refurb")) return "renewed";
@@ -57,10 +60,20 @@ export function conditionOf(key: string): BuyingOption["condition"] {
 const firstString = (v: unknown): string | null =>
   Array.isArray(v) ? (typeof v[0] === "string" ? v[0] : null) : typeof v === "string" ? v : null;
 
-const featureText = (features: unknown, key: string): string | null => {
+/**
+ * Amazon words the seller block two ways and SerpApi mirrors both: a single
+ * `shipper_seller` line, or separate `ships_from` and `sold_by` lines. Reading
+ * only the first shape silently loses the seller on every listing that uses the
+ * second — which is most brand-store listings, exactly the ones where knowing
+ * the seller matters most.
+ */
+const featureText = (features: unknown, ...keys: string[]): string | null => {
   if (!features || typeof features !== "object") return null;
-  const f = (features as Record<string, { text?: unknown }>)[key];
-  return typeof f?.text === "string" ? f.text : null;
+  const f = features as Record<string, { text?: unknown }>;
+  for (const key of keys) {
+    if (typeof f[key]?.text === "string") return f[key].text as string;
+  }
+  return null;
 };
 
 export function toBuyingOptions(purchaseOptions: unknown, fallback: Record<string, unknown>): BuyingOption[] {
@@ -73,7 +86,7 @@ export function toBuyingOptions(purchaseOptions: unknown, fallback: Record<strin
         currency: "USD",
         stockWording: typeof raw.stock === "string" ? raw.stock : null,
         deliveryWording: firstString(raw.delivery),
-        sellerWording: featureText(raw.features, "shipper_seller"),
+        sellerWording: featureText(raw.features, "shipper_seller", "sold_by"),
         returnsWording: featureText(raw.features, "returns"),
       });
     }

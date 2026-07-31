@@ -27,6 +27,7 @@ import { attributeSignals } from "../src/lib/providers/marketplace-attributes";
 import { AMAZON_ASSOCIATE_TAG, AMAZON_ASSOCIATE_TAG_STATUS, amazonDestination } from "../src/lib/site";
 import { ACTIVE_PRODUCTS, CATALOGUE_WITHDRAWALS, catalogueStatusOf, productEditorialById } from "../src/content/products";
 import { deriveLedger } from "../src/content/evidence/derive";
+import { SERPAPI_OBSERVATIONS, SERPAPI_REJECTIONS, SERPAPI_RUN_CREDITS, SERPAPI_UNRESOLVED } from "../src/content/commerce/serpapi-observations";
 
 const LEDGER_EVIDENCE = deriveLedger().evidence;
 
@@ -144,8 +145,12 @@ describe("exact-product destinations", () => {
   it("captures an ASIN for five products and refuses to invent the rest", () => {
     const exact = DESTINATIONS.filter((d) => d.confidence === "researched_exact" || d.confidence === "verified_exact");
     const search = DESTINATIONS.filter((d) => d.confidence === "search_only");
-    expect(exact).toHaveLength(5);
-    expect(search).toHaveLength(5);
+    // Seven after the SerpApi discovery run resolved the E10 and the Seagull SE.
+    // Three remain search-only: WYBOT C1 and Aiper Scuba S1, where every
+    // candidate was a sibling or contradicted itself, and Dolphin Premier,
+    // which is not sold on Amazon US at all.
+    expect(exact).toHaveLength(7);
+    expect(search).toHaveLength(3);
     for (const d of exact) {
       expect(d.identifierKind).toBe("asin");
       expect(d.retailerProductId).toMatch(/^B0[A-Z0-9]{8}$/);
@@ -223,7 +228,9 @@ describe("exact-product destinations", () => {
 
   it("resolves a destination only for the product it belongs to", () => {
     expect(destinationFor("prod-polaris-freedom")!.retailerProductId).toBe("B0BX9DJS7R");
-    expect(destinationFor("prod-dolphin-e10")!.retailerProductId).toBeNull();
+    expect(destinationFor("prod-dolphin-e10")!.retailerProductId).toBe("B0GV15VY1N");
+    // Still nothing for the C1: every candidate returned was a sibling.
+    expect(destinationFor("prod-wybot-c1")!.retailerProductId).toBeNull();
   });
 
   it("never reinstates the dead WYBOT ASIN", () => {
@@ -277,8 +284,11 @@ describe("price, stock and shipping normalisation", () => {
     expect(deliveredPrice(null, 500, "charged")).toBeNull();
   });
 
-  it("publishes a price only where a human actually checked the page", () => {
-    const checked = new Set(MANUAL_CHECKS.map((c) => c.productId));
+  it("publishes a price only where a source actually read the page", () => {
+    const checked = new Set([
+      ...MANUAL_CHECKS.map((c) => c.productId),
+      ...SERPAPI_OBSERVATIONS.filter((o) => o.priceMinor !== null).map((o) => o.productId),
+    ]);
     for (const o of OFFERS) {
       if (checked.has(o.productId)) {
         expect(o.basePriceMinor).not.toBeNull();
@@ -311,16 +321,21 @@ describe("price, stock and shipping normalisation", () => {
     expect(cc.warranty.manufacturer).not.toContain("30-day");
   });
 
-  it("leaves the seller unknown when the page did not show one", () => {
-    // Confirming the MODEL does not confirm the SELLER. The Polaris capture had
-    // no seller line, and defaulting it to Amazon would attach a returns route
-    // and a warranty position we have no evidence for.
+  it("leaves the seller unknown when no source has shown one", () => {
+    // Confirming the MODEL does not confirm the SELLER. Refusing to default it
+    // to Amazon was vindicated: the Polaris seller turned out to be In The Swim
+    // Pool Supplies, a marketplace third party, once the aggregator could read
+    // the line the owner's screenshot had cropped.
     const pf = OFFERS.find((o) => o.productId === "prod-polaris-freedom")!;
-    expect(pf.destination.confidence).toBe("verified_exact");
-    expect(pf.destination.sellerIdentity).toBeNull();
-    expect(pf.destination.sellerModel).toBe("unknown");
-    expect(pf.warranty.marketplaceSellerReturnRoute).not.toMatch(/Sold by/);
-    expect(pf.warranty.retailerReturnPeriod).toBeNull();
+    expect(pf.destination.sellerIdentity).toBe("In The Swim Pool Supplies");
+    expect(pf.destination.sellerModel).toBe("marketplace_third_party");
+
+    // Beatbot is the case that still has no seller: identity is confirmed but
+    // the listing exposes no buy box, so nothing about the sale is claimed.
+    const bb = OFFERS.find((o) => o.productId === "prod-beatbot-aquasense-2-ultra")!;
+    expect(bb.destination.sellerIdentity).toBeNull();
+    expect(bb.destination.sellerModel).toBe("unknown");
+    expect(bb.basePriceMinor).toBeNull();
   });
 
   it("records the buy-new price and refuses the used option on the same listing", () => {
@@ -462,7 +477,10 @@ describe("preferred offer", () => {
 
 describe("schema eligibility gates", () => {
   it("lets an offer into Offer schema only when it is fully evidenced", () => {
-    const checked = new Set(MANUAL_CHECKS.map((c) => c.productId));
+    const checked = new Set([
+      ...MANUAL_CHECKS.map((c) => c.productId),
+      ...SERPAPI_OBSERVATIONS.filter((o) => o.priceMinor !== null).map((o) => o.productId),
+    ]);
     expect(REPORT.totals.schemaEligible).toBe(checked.size);
     for (const o of OFFERS) {
       expect(publicationFor(o).schemaEligible).toBe(checked.has(o.productId));
@@ -486,6 +504,7 @@ describe("schema eligibility gates", () => {
     for (const [productId, check] of Object.entries(IDENTITY_CHECKS)) {
       if (!check.confirmed) continue;
       if (MANUAL_CHECKS.some((m) => m.productId === productId)) continue;
+      if (SERPAPI_OBSERVATIONS.some((o) => o.productId === productId && o.priceMinor !== null)) continue;
       const o = OFFERS.find((x) => x.productId === productId)!;
       expect(o.destination.confidence).toBe("verified_exact");
       expect(o.basePriceMinor).toBeNull();
@@ -824,5 +843,98 @@ describe("an overturned refusal stays in the audit history", () => {
     expect(s.supersededOn).toBe("2026-07-31");
     // And it is no longer counted as a live refusal.
     expect(REJECTED_CANDIDATES.some((c) => c.productId === "prod-betta-se-plus" && c.rule === "different_generation")).toBe(false);
+  });
+});
+
+describe("SerpApi discovery run — accepted, refused, accounted", () => {
+  it("refuses a listing whose title and details table disagree", () => {
+    // The single most valuable result of the run. Both of these would have
+    // passed a title check and are a different machine.
+    const c1 = SERPAPI_REJECTIONS.find((r) => r.asin === "B0GQ4FXRBN")!;
+    expect(c1.observedTitle).toContain("WYBOT C1");
+    expect(c1.reason).toContain("C1 PLUS");
+    expect(c1.rule).toBe("sibling_model");
+
+    const s1 = SERPAPI_REJECTIONS.find((r) => r.asin === "B0H6ZZDR3W")!;
+    expect(s1.observedTitle).toContain("Scuba S1");
+    expect(s1.reason).toContain("X5 Pro 2026");
+    expect(s1.rule).toBe("self_contradictory_identity");
+
+    // Neither became a destination.
+    expect(DESTINATIONS.some((d) => d.retailerProductId === "B0GQ4FXRBN")).toBe(false);
+    expect(DESTINATIONS.some((d) => d.retailerProductId === "B0H6ZZDR3W")).toBe(false);
+  });
+
+  it("refuses renewed units and accessories the search dragged in", () => {
+    const renewed = SERPAPI_REJECTIONS.filter((r) => r.rule === "refurbished_or_used");
+    expect(renewed.length).toBeGreaterThanOrEqual(2);
+    const accessory = SERPAPI_REJECTIONS.find((r) => r.rule === "accessory_or_part")!;
+    expect(accessory.observedTitle).toMatch(/charger/i);
+  });
+
+  it("publishes an offer only where every gate passed", () => {
+    for (const o of SERPAPI_OBSERVATIONS) {
+      expect(o.identityConfirmed).toBe(true);
+      expect(o.brand).toBeTruthy();
+      expect(o.sellerWording).toBeTruthy();
+      expect(o.priceMinor).toBeGreaterThan(0);
+      expect(o.currency).toBe("USD");
+      expect(o.stockWording).toBeTruthy();
+      expect(o.shippingWording).toBeTruthy();
+      expect(o.matchEvidence.length).toBeGreaterThan(40);
+      expect(o.checkedDate).toBe("2026-07-31");
+    }
+  });
+
+  it("keeps an identity-confirmed product suppressed when its listing has no buy box", () => {
+    // Beatbot: the model is right, but the listing quoted $2,299.00 in search
+    // and $1,697.07 on the page with no seller. Two prices is not a price.
+    const bb = SERPAPI_REJECTIONS.find((r) => r.productId === "prod-beatbot-aquasense-2-ultra")!;
+    expect(bb.rule).toBe("no_buybox");
+    expect(bb.reason).toContain("2,299");
+    expect(bb.reason).toContain("1,697");
+    const offer = OFFERS.find((o) => o.productId === "prod-beatbot-aquasense-2-ultra")!;
+    expect(offer.basePriceMinor).toBeNull();
+    // The destination is still sound, so the link stays.
+    expect(publicationFor(offer).linkable).toBe(true);
+    expect(publicationFor(offer).priceShowable).toBe(false);
+  });
+
+  it("prefers the aggregator over an older human check, and gains the seller", () => {
+    const pf = OFFERS.find((o) => o.productId === "prod-polaris-freedom")!;
+    expect(pf.source).toBe("retailer_api_via_aggregator");
+    expect(pf.basePriceMinor).toBe(119900);
+    // The manual check recorded no seller; the aggregator read the line.
+    expect(pf.destination.sellerIdentity).toBe("In The Swim Pool Supplies");
+  });
+
+  it("leaves a human check standing where no aggregator read exists", () => {
+    const cc = OFFERS.find((o) => o.productId === "prod-dolphin-nautilus-cc-plus")!;
+    expect(cc.source).toBe("manual_check");
+    expect(cc.basePriceMinor).toBe(74900);
+  });
+
+  it("gives the aggregator a week, not a month", () => {
+    expect(FRESHNESS_WINDOW_DAYS.retailer_api_via_aggregator).toBe(7);
+    expect(freshnessFor("retailer_api_via_aggregator", "2026-07-31", new Date("2026-08-05"))).toBe("recently_checked");
+    expect(freshnessFor("retailer_api_via_aggregator", "2026-07-31", new Date("2026-08-10"))).toBe("stale");
+  });
+
+  it("records what it could not resolve rather than leaving a silent gap", () => {
+    expect(SERPAPI_UNRESOLVED["prod-wybot-c1"]).toContain("C1 PLUS");
+    expect(SERPAPI_UNRESOLVED["prod-aiper-scuba-s1"]).toMatch(/five|ambiguous/i);
+    expect(SERPAPI_UNRESOLVED["prod-aiper-scuba-x1"]).toMatch(/unavailable/i);
+  });
+
+  it("accounts for every credit against the ceiling", () => {
+    expect(SERPAPI_RUN_CREDITS.total).toBe(SERPAPI_RUN_CREDITS.discoverySearches + SERPAPI_RUN_CREDITS.listingReads);
+    expect(SERPAPI_RUN_CREDITS.total).toBeLessThan(SERPAPI_RUN_CREDITS.ceiling);
+    expect(SERPAPI_RUN_CREDITS.remainingAfterRun).toBeGreaterThan(0);
+  });
+
+  it("adds no affiliate tag to anything the run produced", () => {
+    for (const d of DESTINATIONS) {
+      expect(d.destinationUrl ?? "").not.toContain("tag=");
+    }
   });
 });
