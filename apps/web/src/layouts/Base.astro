@@ -6,12 +6,13 @@ import {
   buildMeta, isPreviewHost, schemaGraph, organizationSchema, websiteSchema, breadcrumbSchema, type Crumb,
 } from "../lib/seo";
 
-// Global design system. Order matters: tokens → element base → layout → components.
+// Global design system. Order matters: tokens → element base → layout → components → metallic direction.
 import "../styles/tokens.css";
 import "../styles/base.css";
 import "../styles/layout.css";
 import "../styles/depth.css";
 import "../styles/components.css";
+import "../styles/metal-theme.css";
 
 interface Props {
   title: string;
@@ -32,8 +33,6 @@ interface Props {
 
 const {
   title,
-  // Neutral shell default: browsing-first, and never implies one questionnaire
-  // covers the whole robotics market. Pages override with their own copy.
   description = "Browse, compare and choose real-world robots for the US — honest pricing, labelled evidence and clear limitations.",
   path,
   ogImage,
@@ -50,17 +49,9 @@ const canonicalPath = path ?? Astro.url.pathname;
 const meta = buildMeta({ title, description, path: canonicalPath, ogImage, ogType, noindex }, host);
 const preview = isPreviewHost(host);
 
-// Google Search Console HTML-tag verification. Not required in practice — the
-// domain property sc-domain:botplanet.io is verified via DNS, which covers every
-// URL prefix. The hook emits nothing when the value is unset (which it is).
 const searchConsoleToken = (Astro.locals as App.Locals).runtime?.env?.GOOGLE_SITE_VERIFICATION;
 const verifySearchConsole = Boolean(searchConsoleToken) && !preview;
 
-/**
- * GA4 — the single production page-view system. Loaded once, here, and only on
- * the production host in a production build. The measurement ID is public by
- * design and lives in wrangler.toml [vars]; it is shape-checked before use.
- */
 const gaId = (Astro.locals as App.Locals).runtime?.env?.GA_MEASUREMENT_ID;
 const gaValid = typeof gaId === "string" && /^G-[A-Z0-9]{4,20}$/i.test(gaId);
 const gaEnabled = gaValid && import.meta.env.PROD && !preview;
@@ -83,10 +74,9 @@ const graph = schemaGraph(
     <link rel="canonical" href={meta.canonical} />
     <meta name="robots" content={meta.robots} />
     <meta name="color-scheme" content="dark" />
-    <meta name="theme-color" content="#07070a" />
+    <meta name="theme-color" content="#050607" />
     <link rel="icon" type="image/png" href="/logo/favicon-128.png" />
     {verifySearchConsole && <meta name="google-site-verification" content={searchConsoleToken} />}
-    <!-- Self-hosted display face: preloaded because it renders the first headline. -->
     <link
       rel="preload"
       href="/fonts/space-grotesk-latin.woff2"
@@ -131,11 +121,8 @@ const graph = schemaGraph(
     </main>
     <Footer />
     <script is:inline>
-      // Progressive enhancement flag: CSS then treats no-JS as "already visible".
       document.documentElement.classList.remove("no-js");
 
-      // One-shot reveal on first scroll into view. Never loops, never re-hides,
-      // and is skipped entirely when the visitor prefers reduced motion.
       (function () {
         var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
         var targets = document.querySelectorAll(".reveal");
