@@ -528,10 +528,26 @@ describe("compact slots", () => {
     expect(c).not.toMatch(/compact\s*\?\s*null/);
   });
 
-  it("wires the homepage comparison preview through the registry", () => {
+  it("renders no product imagery on the homepage outside the registry", () => {
+    // The homepage used to carry a comparison strip of branded placeholders,
+    // and this test asserted that strip existed. The rebuild removed it — ten
+    // placeholder tiles read as a pool-cleaner shop rather than a robotics
+    // destination, and a placeholder is not a reason to occupy the fold.
+    //
+    // The guarantee that actually matters survives the redesign and is what is
+    // asserted now: a product image on this page must come from the registry.
+    // Either it goes through ProductImage, or there is none. What must never
+    // appear is a raw <img> pointing at product media, because that is the one
+    // route by which an unlicensed photograph could reach the homepage without
+    // passing the rights check.
     const home = readFileSync("apps/web/src/pages/index.astro", "utf8");
-    expect(home).toContain('placement="comparison"');
-    expect(home).toContain("compact");
+    const rawProductImages = home.match(/<img[^>]+src="(?!\/logo\/)[^"]*\/media\/[^"]*"/g) ?? [];
+    expect(rawProductImages).toEqual([]);
+    if (home.includes("placement=")) expect(home).toContain("ProductImage");
+    // Whatever imagery it does carry is BotPlanet's own brand, not a product.
+    for (const src of home.match(/<img[^>]+src="([^"]+)"/g) ?? []) {
+      expect(src).toMatch(/\/logo\//);
+    }
   });
 });
 
