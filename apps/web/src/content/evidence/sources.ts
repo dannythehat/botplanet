@@ -32,6 +32,45 @@ const HOST_RULES: HostRule[] = [
   { match: /(^|\.)poolbots\.com$/i, type: "editorial_research", publisher: "PoolBots" },
 ];
 
+/**
+ * Manufacturer-authored content hosted on a retailer's page, allowlisted by
+ * EXACT URL.
+ *
+ * Amazon A+ content is written and uploaded by the brand; the retailer only
+ * hosts it. That makes it manufacturer-origin evidence, and it is admitted as
+ * such — but one URL at a time, never by host. Classifying by host would make
+ * every Amazon page a manufacturer source overnight, including the parts a
+ * seller writes, which is exactly the confusion the source hierarchy exists to
+ * prevent. Each entry names who authorised it and when it was captured, because
+ * this content can be replaced without notice on a domain we do not control.
+ */
+export interface RetailerHostedManufacturerSource {
+  url: string;
+  publisher: string;
+  /** The retailer identifier the capture is anchored to, e.g. an ASIN. */
+  retailerProductId: string;
+  capturedOn: string;
+  capturedBy: string;
+  /** Who cleared it, so the exception is traceable to a decision. */
+  authorisedBy: string;
+  note: string;
+}
+
+export const RETAILER_HOSTED_MANUFACTURER_SOURCES: RetailerHostedManufacturerSource[] = [
+  {
+    url: "https://www.amazon.com/dp/B0BX9DJS7R#aplus",
+    publisher: "Polaris (A+ content, hosted by Amazon)",
+    retailerProductId: "B0BX9DJS7R",
+    capturedOn: "2026-07-31",
+    capturedBy: "owner (browser screen capture of the A+ panels on the listing)",
+    authorisedBy: "ChatGPT, narrow Job 8 evidence correction, 2026-07-31",
+    note:
+      "Polaris-authored A+ panels on the exact FREEDOM listing. Carries the brand's own typography and product photography and states two figures the Polaris support page and owner's manual do not: the maximum pool length and a charge time. Cannot be re-read by fetch — Amazon serves inconsistent markup to non-browser clients — so re-verification is a human task and the capture date is the freshness anchor.",
+  },
+];
+
+const allowlisted = (url: string) => RETAILER_HOSTED_MANUFACTURER_SOURCES.find((s) => s.url === url);
+
 export interface ClassifiedSource {
   type: SourceType;
   publisher: string;
@@ -40,6 +79,11 @@ export interface ClassifiedSource {
 }
 
 export function classifySource(url: string): ClassifiedSource {
+  // Exact-URL allowlist first: it must beat the host rule that would otherwise
+  // file this under the retailer that merely hosts it.
+  const hosted = allowlisted(url);
+  if (hosted) return { type: "manufacturer_content_on_retailer", publisher: hosted.publisher, recognised: true };
+
   let host = "";
   try {
     host = new URL(url).hostname;

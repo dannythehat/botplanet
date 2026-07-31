@@ -45,6 +45,14 @@ export interface Observation {
   observedOn: string;
   /** Which variants/markets this observation covers. */
   applicability?: string;
+  /**
+   * Marks a BOUND rather than a competing figure — "charges in under 5 hours"
+   * alongside "charges in only 4 hours". A bound never wins a field and never
+   * counts as a disagreement, but it is not taken on trust either: the derive
+   * step checks the published figure actually falls inside it, and treats the
+   * pair as a real conflict if it does not or if the numbers will not parse.
+   */
+  role?: "bound_supporting";
   note?: string;
 }
 
@@ -293,6 +301,23 @@ const POLARIS_MANUAL = "https://downloads.eu.ctfassets.net/au38h2e94wka/43b8bfef
 const POLARIS_MANUAL_TITLE = "Polaris® Cordless Robotic Cleaner FREEDOM™ Owner's Manual (H0748900_REVC)";
 const POLARIS_QSG = "https://assets.eu.ctfassets.net/au38h2e94wka/5c38db4b-h0748700-pdf/2aa70327ec969a7ad2208d61a0c5569e/h0748700.pdf";
 const POLARIS_QSG_TITLE = "Polaris FREEDOM Quick Start Guide (H0748700_REVC)";
+/**
+ * Polaris-authored A+ content on the FREEDOM listing, ASIN B0BX9DJS7R.
+ *
+ * Admitted as manufacturer-origin, retailer-hosted evidence under a narrow
+ * correction authorised on 2026-07-31. It is the only source that states a
+ * maximum pool LENGTH for this model — the support page and owner's manual give
+ * an operating depth range and nothing more — and the only one to put a figure
+ * on the charge time rather than a ceiling.
+ *
+ * Captured by the owner in a browser on 2026-07-31. It cannot be re-read by
+ * fetch, so that capture date is the freshness anchor and re-verification is a
+ * human task. The exact URL and ASIN are recorded so the capture can be found
+ * again, and the allowlist in sources.ts is what grants this URL — and only
+ * this URL — its authority.
+ */
+const POLARIS_APLUS = "https://www.amazon.com/dp/B0BX9DJS7R#aplus";
+const POLARIS_APLUS_TITLE = "Polaris FREEDOM A+ content, authored by Polaris, hosted on Amazon listing B0BX9DJS7R";
 
 const polarisFreedom: ProductVerification = {
   productId: "prod-polaris-freedom",
@@ -324,7 +349,13 @@ const polarisFreedom: ProductVerification = {
     { url: POLARIS_PARTS, title: POLARIS_PARTS_TITLE, status: "ok" },
     { url: POLARIS_MANUAL, title: POLARIS_MANUAL_TITLE, status: "ok" },
     { url: POLARIS_QSG, title: POLARIS_QSG_TITLE, status: "ok" },
-    { url: "https://www.amazon.com/Polaris-Cordless-Cable-Free-Intelligent-Technology/dp/B0BX9DJS7R", title: "Amazon US listing", status: "not_rechecked", note: "Retailer listing; manufacturer sources checked instead." },
+    { url: "https://www.amazon.com/Polaris-Cordless-Cable-Free-Intelligent-Technology/dp/B0BX9DJS7R", title: "Amazon US listing", status: "not_rechecked", note: "Retailer listing; manufacturer sources checked instead. Anything Amazon or a seller wrote on this page stays a retailer listing — only the A+ panels below are manufacturer-authored." },
+    {
+      url: POLARIS_APLUS,
+      title: POLARIS_APLUS_TITLE,
+      status: "ok",
+      note: "Read from an owner browser capture on 2026-07-31, not by fetch. Amazon serves inconsistent markup to non-browser clients, so this source is human-verified by design and cannot be re-checked automatically.",
+    },
   ],
   observations: [
     { field: "powerType", value: "Cordless (lithium ion battery pack)", sourceUrl: POLARIS_MANUAL, sourceTitle: POLARIS_MANUAL_TITLE, observedOn: D },
@@ -337,7 +368,49 @@ const polarisFreedom: ProductVerification = {
     { field: "minDepthFt", value: "Min 15 in. (40 cm)", sourceUrl: POLARIS_MANUAL, sourceTitle: POLARIS_MANUAL_TITLE, observedOn: D },
     { field: "includedAccessories", value: "Polaris Cleaner; Charging Station; Removal Hook", sourceUrl: POLARIS_MANUAL, sourceTitle: POLARIS_MANUAL_TITLE, observedOn: D },
     { field: "runtimeMins", value: "Floor and walls (2h 30); Floor Only (1h 30)", sourceUrl: POLARIS_QSG, sourceTitle: POLARIS_QSG_TITLE, observedOn: D },
-    { field: "chargeTimeHrs", value: "charges in under 5 hours using the Easy-Charge Station", sourceUrl: POLARIS_PARTS, sourceTitle: POLARIS_PARTS_TITLE, observedOn: D },
+    {
+      field: "runtimeMins",
+      value: "Cleans for up to 2.5 hours",
+      sourceUrl: POLARIS_APLUS,
+      sourceTitle: POLARIS_APLUS_TITLE,
+      observedOn: D,
+      role: "bound_supporting",
+      note: "Corroborates the quick start guide rather than competing with it: 2h 30 for the longest mode is exactly 2.5 hours.",
+    },
+    {
+      field: "chargeTimeHrs",
+      value: "charges in only 4 hours",
+      sourceUrl: POLARIS_APLUS,
+      sourceTitle: POLARIS_APLUS_TITLE,
+      observedOn: D,
+      note: "A+ panel: 'Long-Life 9.6 Ah Lithium-Ion Battery charges in only 4 hours'. The battery figure matches the owner's manual (9.6 Ah at 29.4 V DC), which is what ties this panel to this model.",
+    },
+    {
+      field: "chargeTimeHrs",
+      value: "charges in under 5 hours using the Easy-Charge Station",
+      sourceUrl: POLARIS_PARTS,
+      sourceTitle: POLARIS_PARTS_TITLE,
+      observedOn: D,
+      role: "bound_supporting",
+      note: "A ceiling, not a rival figure. Four hours falls inside it, so the two are one consistent statement at different precisions and the specific figure is the one published.",
+    },
+    {
+      field: "chargeTimeHrs",
+      value: "Recharges in less than 5 hours",
+      sourceUrl: POLARIS_APLUS,
+      sourceTitle: POLARIS_APLUS_TITLE,
+      observedOn: D,
+      role: "bound_supporting",
+      note: "The same ceiling stated a second time, on the panel that also gives the 4-hour figure — so the pairing is Polaris's own, not something reconciled here.",
+    },
+    {
+      field: "poolSizeSuitability",
+      value: "In-ground pools up to 50 ft",
+      sourceUrl: POLARIS_APLUS,
+      sourceTitle: POLARIS_APLUS_TITLE,
+      observedOn: D,
+      note: "The A+ panel sets this in display capitals — 'CORDLESS ROBOTIC POOL CLEANER FOR IN-GROUND POOLS UP TO 50FT'. Recorded in sentence case because the capitals are the panel's typography rather than the manufacturer's wording or unit; the words and the figure are unchanged. This is the only Polaris source that states a pool LENGTH; the manual and support page give operating depth only.",
+    },
     { field: "poolTypes", value: "In-Ground", sourceUrl: POLARIS_PARTS, sourceTitle: POLARIS_PARTS_TITLE, observedOn: D },
     { field: "cleaningModes", value: "Multiple Modes: Floor/Wall/Waterline, Floor, Waterline, SMART", sourceUrl: POLARIS_PARTS, sourceTitle: POLARIS_PARTS_TITLE, observedOn: D },
     { field: "surfacesCleaned", value: "Floor, Wall and Waterline", sourceUrl: POLARIS_PARTS, sourceTitle: POLARIS_PARTS_TITLE, observedOn: D },
@@ -346,12 +419,12 @@ const polarisFreedom: ProductVerification = {
     { field: "wifi", value: "Yes — the manual requires the charging location to have adequate Wi-Fi strength", sourceUrl: POLARIS_MANUAL, sourceTitle: POLARIS_MANUAL_TITLE, observedOn: D },
   ],
   notPubliclyStated: [
-    {
-      field: "poolSizeSuitability",
-      checked: [POLARIS_PARTS, POLARIS_MANUAL, POLARIS_QSG],
-      note: "The specification table gives an operating DEPTH range but no maximum pool length or area. Depth is not pool size and is not substituted for it.",
-    },
-    { field: "warranty", checked: [POLARIS_PARTS, POLARIS_MANUAL], note: "The manual references a Limited Warranty in an exclusion clause but never states its term; the support page states none." },
+    // poolSizeSuitability was recorded here until 2026-07-31, on the correct
+    // finding that the manual, quick start guide and support page publish an
+    // operating DEPTH range and no pool length. That finding still stands for
+    // those three sources — what changed is that a fourth source was admitted.
+    // The A+ panels state a length, so the field moved to `observations`.
+    { field: "warranty", checked: [POLARIS_PARTS, POLARIS_MANUAL], note: "The manual references a Limited Warranty in an exclusion clause but never states its term; the support page states none. The A+ panels state none either." },
     { field: "filtrationMicrons", checked: [POLARIS_PARTS, POLARIS_MANUAL], note: "The canister is described as 'all-purpose'; no micron rating is published." },
     { field: "suctionRate", checked: [POLARIS_PARTS, POLARIS_MANUAL], note: "Operating power (29.4 W) is stated; flow rate is not." },
     { field: "surfaceTypes", checked: [POLARIS_PARTS, POLARIS_MANUAL], note: "The manual warns about vinyl liner patterns but does not enumerate compatible finishes." },

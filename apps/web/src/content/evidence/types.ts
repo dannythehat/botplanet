@@ -14,23 +14,41 @@
 export type SourceType =
   | "manufacturer_page" // 1. official product page
   | "manufacturer_document" // 2. manual, spec sheet, support document
-  | "retailer_api" // 3. approved retailer/affiliate API
-  | "retailer_listing" // 4. attributable retailer listing
-  | "editorial_research"; // 5. independent research, labelled as such
+  /**
+   * 3. Manufacturer-authored content published on a retailer's page — Amazon
+   * A+ / enhanced brand content, which the brand writes and uploads and the
+   * retailer only hosts.
+   *
+   * It is manufacturer-ORIGIN evidence, so it outranks anything the retailer
+   * wrote. It sits below the manufacturer's own estate for one reason: the
+   * manufacturer does not control the URL, so a panel can be swapped or pulled
+   * without any change on a domain we watch, and re-reading it needs a human
+   * rather than a fetch. Authority is inherited; permanence is not.
+   *
+   * It is NEVER inferred from a host. Amazon as a host is a retailer listing;
+   * only the exact URLs in the sources allowlist reach this tier.
+   */
+  | "manufacturer_content_on_retailer"
+  | "retailer_api" // 4. approved retailer/affiliate API
+  | "retailer_listing" // 5. attributable retailer listing
+  | "editorial_research"; // 6. independent research, labelled as such
 
 /** Authority ranking used to resolve conflicts. Lower number wins. */
 export const SOURCE_PRIORITY: Record<SourceType, number> = {
   manufacturer_document: 1,
   manufacturer_page: 2,
-  retailer_api: 3,
-  retailer_listing: 4,
-  editorial_research: 5,
+  manufacturer_content_on_retailer: 3,
+  retailer_api: 4,
+  retailer_listing: 5,
+  editorial_research: 6,
 };
 
 /** What kind of backing a stored value actually has. */
 export type EvidenceLabel =
   | "manufacturer_stated"
   | "manual_verified"
+  /** Written by the manufacturer, published on a retailer's listing. */
+  | "manufacturer_stated_on_retailer"
   | "retailer_stated"
   | "api_supplied"
   | "calculated_from_sourced_values"

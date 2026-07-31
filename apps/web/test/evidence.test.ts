@@ -5,6 +5,7 @@ import {
   buildSources,
   deriveLedger,
   FIELD_SPECS,
+  confidenceFor,
   interpretMeasurement,
   primarySourceFor,
   valuesAgree,
@@ -13,7 +14,8 @@ import { FIELD_REGISTRY, TOTAL_REGISTRY_WEIGHT, fieldApplies } from "../src/cont
 import { RECONCILIATION, PUBLISHABLE_OUTCOMES, reconciliationCounts } from "../src/content/evidence/reconciliation";
 import { VERIFICATIONS, VERIFICATION_DATE } from "../src/content/evidence/verification";
 import { buildClaimLedger, NEVER_EMITTED } from "../src/content/evidence/claims";
-import { classifySource } from "../src/content/evidence/sources";
+import { classifySource, RETAILER_HOSTED_MANUFACTURER_SOURCES } from "../src/content/evidence/sources";
+import { durationsInMinutes, satisfiesBound, upperBoundMinutes } from "../src/content/evidence/bounds";
 import {
   BOTMATCH_FIELDS,
   COMPARISON_FIELDS,
@@ -377,7 +379,12 @@ describe("publication states", () => {
     const polaris = REPORT.products.find((p) => p.slug === "polaris-freedom")!;
     expect(polaris.publication.safeForLimitedFactualUse).toBe(true);
     expect(polaris.publication.readyForComparison).toBe(false);
-    expect(polaris.publicationBlockers.join(" ")).toContain("poolSizeSuitability");
+    // Warranty is the remaining gap: Polaris mentions a Limited Warranty only
+    // inside an exclusion clause and never states its term.
+    expect(polaris.publicationBlockers.join(" ")).toContain("warranty");
+    // poolSizeSuitability WAS the other blocker and no longer is — the A+
+    // content supplies the 50 ft figure the manual and support page omit.
+    expect(polaris.publicationBlockers.join(" ")).not.toContain("poolSizeSuitability");
   });
 
   it("holds a thinly sourced product back from review writing", () => {
@@ -749,10 +756,17 @@ describe("review-writing readiness rule", () => {
   });
 
   it("blocks a review whose sections cannot be written from evidence", () => {
-    const polaris = REPORT.products.find((p) => p.slug === "polaris-freedom")!;
-    expect(polaris.overall.weightedPercent).toBeGreaterThanOrEqual(REVIEW_WEIGHTED_THRESHOLD);
-    expect(polaris.publication.readyForReviewWriting).toBe(false);
-    expect(polaris.reviewGates.find((g) => g.gate === "review_sections_writable")!.passed).toBe(false);
+    // Clearing the completeness threshold is not enough on its own — a review
+    // section still has to be writable from evidence. Betta SE Plus is the
+    // case: 69% weighted, and still blocked.
+    //
+    // Polaris used to be this example. It stopped being one when the A+
+    // correction populated poolSizeSuitability and chargeTimeHrs, which is the
+    // gate working rather than the gate weakening.
+    const betta = REPORT.products.find((p) => p.slug === "betta-se-plus")!;
+    expect(betta.overall.weightedPercent).toBeGreaterThanOrEqual(REVIEW_WEIGHTED_THRESHOLD);
+    expect(betta.publication.readyForReviewWriting).toBe(false);
+    expect(betta.reviewGates.find((g) => g.gate === "review_sections_writable")!.passed).toBe(false);
   });
 
   it("blocks a review that would rest on a suppressed value", () => {
@@ -941,5 +955,92 @@ describe("register mapping carries the correction", () => {
       expect(["confirmed", "not_confirmed"]).toContain(r.warrantyStatus);
       if (r.warrantyStatus === "not_confirmed") expect(r.warrantyPublicWording).toBe(WARRANTY_NOT_CONFIRMED);
     }
+  });
+});
+
+describe("manufacturer content hosted on a retailer", () => {
+  const polaris = LEDGER.fields.filter((f) => f.productId === "prod-polaris-freedom");
+  const field = (name: string) => polaris.find((f) => f.field === name)!;
+  const APLUS = "https://www.amazon.com/dp/B0BX9DJS7R#aplus";
+
+  it("is granted by exact URL, never by host", () => {
+    // The whole point: Amazon as a HOST stays a retailer listing. Only the
+    // allowlisted URL is manufacturer-origin, so a second Amazon page cannot
+    // inherit manufacturer authority by accident.
+    expect(classifySource(APLUS).type).toBe("manufacturer_content_on_retailer");
+    expect(classifySource("https://www.amazon.com/dp/B0BX9DJS7R").type).toBe("retailer_listing");
+    expect(classifySource("https://www.amazon.com/dp/B09K4C9WGF").type).toBe("retailer_listing");
+  });
+
+  it("records the ASIN, the exact URL, the capture and who authorised it", () => {
+    const s = RETAILER_HOSTED_MANUFACTURER_SOURCES.find((x) => x.url === APLUS)!;
+    expect(s.retailerProductId).toBe("B0BX9DJS7R");
+    expect(s.capturedOn).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+    expect(s.capturedBy).toMatch(/owner/i);
+    expect(s.authorisedBy).toBeTruthy();
+  });
+
+  it("outranks a retailer's own words but not the manufacturer's own estate", () => {
+    expect(SOURCE_PRIORITY.manufacturer_content_on_retailer).toBeGreaterThan(SOURCE_PRIORITY.manufacturer_page);
+    expect(SOURCE_PRIORITY.manufacturer_content_on_retailer).toBeLessThan(SOURCE_PRIORITY.retailer_listing);
+  });
+
+  it("caps confidence at medium, because the manufacturer does not control the URL", () => {
+    expect(confidenceFor("manufacturer_content_on_retailer", true)).toBe("medium");
+    expect(confidenceFor("manufacturer_page", true)).toBe("high");
+  });
+
+  it("carries its own label rather than passing as a manufacturer page", () => {
+    const ev = LEDGER.evidence.filter((e) => e.productId === "prod-polaris-freedom");
+    const aplus = ev.filter((e) => {
+      const src = LEDGER.sources.find((s) => s.id === e.sourceId);
+      return src?.url === APLUS;
+    });
+    expect(aplus.length).toBeGreaterThan(0);
+    for (const e of aplus) expect(e.label).toBe("manufacturer_stated_on_retailer");
+  });
+
+  it("publishes the two fields the correction authorised", () => {
+    expect(field("poolSizeSuitability").state).toBe("populated");
+    expect(field("poolSizeSuitability").value).toBe("In-ground pools up to 50 ft");
+    expect(field("chargeTimeHrs").state).toBe("populated");
+    expect(String(field("chargeTimeHrs").value)).toContain("4 hours");
+  });
+
+  it("treats the ceiling as corroboration rather than a conflict", () => {
+    // "charges in under 5 hours" and "charges in only 4 hours" are one
+    // statement at two precisions. The field must publish, not suppress.
+    expect(field("chargeTimeHrs").publishable).toBe(true);
+    expect(LEDGER.conflicts.some((c) => c.productId === "prod-polaris-freedom" && c.field === "chargeTimeHrs")).toBe(false);
+    expect(LEDGER.conflicts.some((c) => c.productId === "prod-polaris-freedom" && c.field === "runtimeMins")).toBe(false);
+    // The runtime figure still comes from the quick start guide, not the bound.
+    expect(String(field("runtimeMins").value)).toContain("2h 30");
+  });
+});
+
+describe("bound satisfaction is checked, not assumed", () => {
+  it("accepts a figure that falls inside the ceiling", () => {
+    expect(satisfiesBound("charges in under 5 hours", "charges in only 4 hours")).toBe(true);
+    expect(satisfiesBound("Recharges in less than 5 hours", "charges in only 4 hours")).toBe(true);
+    // 2h 30 is exactly 2.5 hours, so the longest mode meets the bound.
+    expect(satisfiesBound("Cleans for up to 2.5 hours", "Floor and walls (2h 30); Floor Only (1h 30)")).toBe(true);
+  });
+
+  it("rejects a figure that breaks the ceiling", () => {
+    expect(satisfiesBound("charges in under 5 hours", "charges in 6 hours")).toBe(false);
+    expect(satisfiesBound("up to 2 hours", "Floor and walls (2h 30); Floor Only (1h 30)")).toBe(false);
+  });
+
+  it("fails closed when there is no bound or nothing to compare", () => {
+    // Not a bounding phrase at all — must not be silently accepted.
+    expect(satisfiesBound("charges in 5 hours", "charges in 4 hours")).toBe(false);
+    expect(satisfiesBound("charges in under 5 hours", "quick")).toBe(false);
+    expect(satisfiesBound("all-purpose canister", "4 hours")).toBe(false);
+  });
+
+  it("reads the longest duration a multi-mode value states", () => {
+    expect(durationsInMinutes("Floor and walls (2h 30); Floor Only (1h 30)")).toEqual([150, 90]);
+    expect(upperBoundMinutes("charges in under 5 hours")).toBe(300);
+    expect(upperBoundMinutes("charges in 5 hours")).toBeNull();
   });
 });

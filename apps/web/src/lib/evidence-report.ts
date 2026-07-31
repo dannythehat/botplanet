@@ -248,8 +248,15 @@ export function validateLedger(ledger: DerivedLedger, claims: ClaimRecord[] = []
   for (const e of ledger.evidence) {
     const src = byId.get(e.sourceId);
     if (!src) continue;
-    const isManufacturer = src.type === "manufacturer_page" || src.type === "manufacturer_document";
-    if (!isManufacturer && (e.label === "manufacturer_stated" || e.label === "manual_verified")) {
+    // Manufacturer-authored A+ on a retailer's page counts here: the brand
+    // wrote it. It carries its own label so a reader can tell where it was
+    // published, and the check below still stops a DEALER's words being
+    // dressed as the manufacturer's.
+    const isManufacturer =
+      src.type === "manufacturer_page" ||
+      src.type === "manufacturer_document" ||
+      src.type === "manufacturer_content_on_retailer";
+    if (!isManufacturer && (e.label === "manufacturer_stated" || e.label === "manual_verified" || e.label === "manufacturer_stated_on_retailer")) {
       issues.push({
         severity: "error",
         rule: "no_dealer_as_manufacturer",
@@ -523,7 +530,9 @@ export function buildReport(today = new Date(), claims: ClaimRecord[] = []): Evi
         : "limited_factual_use";
 
     /* --- Evidence qualification: never let a dealer read as the manufacturer. --- */
-    const manufacturerBacked = myEvidence.some((e) => e.label === "manufacturer_stated" || e.label === "manual_verified");
+    const manufacturerBacked = myEvidence.some(
+      (e) => e.label === "manufacturer_stated" || e.label === "manual_verified" || e.label === "manufacturer_stated_on_retailer",
+    );
     const evidenceQualification = manufacturerBacked
       ? null
       : "dealer-sourced: no manufacturer page or manual was accepted for this model, so every value is attributed to the dealer that published it and none is presented as manufacturer-stated";

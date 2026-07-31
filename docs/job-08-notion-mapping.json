@@ -4,27 +4,27 @@
   "fieldsInRegistry": 31,
   "totals": {
     "fieldRecords": 310,
-    "evidenceRecords": 174,
+    "evidenceRecords": 178,
     "stateCounts": {
-      "populated": 170,
+      "populated": 171,
       "unknown": 0,
       "not_applicable": 23,
       "not_publicly_stated": 99,
       "conflicting": 2,
-      "suppressed": 16,
+      "suppressed": 15,
       "pending_verification": 0
     },
     "reconciliation": {
-      "agrees": 44,
+      "agrees": 46,
       "agrees_rounded": 4,
       "agrees_with_unverified_detail": 8,
       "derived_from_range": 1,
       "conflicts": 3,
-      "unsupported": 17,
+      "unsupported": 15,
       "newly_populated": 1,
       "not_applicable": 10
     },
-    "rawPercent": 59,
+    "rawPercent": 60,
     "weightedPercent": 67,
     "conflicts": 4,
     "unresolvedConflicts": 2
@@ -408,23 +408,23 @@
       "manualRevision": "REV C, © 2024 Fluidra",
       "modelIdentityNote": "Polaris sells FREEDOM, FREEDOM SC, FREEDOM LT and FREEDOM Plus. The EB37 chassis designation is shared with FREEDOM Plus, so the chassis code alone does not identify the model — the FFREEDOM SKU does. Only base-FREEDOM figures are recorded.",
       "verificationDate": "2026-07-31",
-      "sourcesUsed": 3,
+      "sourcesUsed": 4,
       "sourcesUnreadable": [
         "https://www.polarispool.com/en/products/pool-cleaners/robotic-pool-cleaners/polaris-freedom"
       ],
-      "completenessRawPercent": 80,
-      "completenessWeightedPercent": 81,
+      "completenessRawPercent": 83,
+      "completenessWeightedPercent": 86,
       "fieldsApplicable": 30,
-      "fieldsPublishable": 24,
+      "fieldsPublishable": 25,
       "weightApplicable": 106,
-      "weightPublishable": 86,
+      "weightPublishable": 91,
       "fieldStates": {
-        "populated": 24,
+        "populated": 25,
         "unknown": 0,
         "not_applicable": 1,
         "not_publicly_stated": 4,
         "conflicting": 0,
-        "suppressed": 2,
+        "suppressed": 1,
         "pending_verification": 0
       },
       "fieldsNotPubliclyStated": [
@@ -434,22 +434,11 @@
         "remoteControl"
       ],
       "fieldsSuppressed": [
-        "poolSizeSuitability",
         "warranty"
       ],
       "fieldsConflicting": [],
       "conflicts": [],
       "editorialCorrections": [
-        {
-          "field": "poolSizeSuitability",
-          "outcome": "unsupported",
-          "action": "Remove the stored value or find a source for it — nothing checked states it. Stored 'In-ground pools up to 50 ft'. The owner's manual publishes an operating DEPTH range (max 13 ft, min 15 in) and no pool length or area at all. Depth is not pool size and is not substituted for it."
-        },
-        {
-          "field": "chargeTimeHrs",
-          "outcome": "unsupported",
-          "action": "Remove the stored value or find a source for it — nothing checked states it. Stored 4 hours. Polaris states only 'charges in under 5 hours'. Four hours is consistent with that but is not stated, so it is not published as a figure."
-        },
         {
           "field": "weightLbs",
           "outcome": "newly_populated",
@@ -466,23 +455,19 @@
         "factuallyEvidenced": true,
         "currentlyVerified": true,
         "safeForLimitedFactualUse": true,
-        "readyForReviewWriting": false,
+        "readyForReviewWriting": true,
         "readyForComparison": false,
-        "readyForBotMatch": false
+        "readyForBotMatch": true
       },
       "publicationBlockers": [
-        "insufficient evidence coverage for review section(s): Where it fits",
-        "review section(s) would rest on suppressed value(s): poolSizeSuitability",
-        "comparison field unavailable: poolSizeSuitability",
-        "comparison field unavailable: warranty",
-        "BotMatch field unavailable: poolSizeSuitability"
+        "comparison field unavailable: warranty"
       ],
-      "launchStatus": "limited_factual_use",
+      "launchStatus": "launch_ready",
       "reviewGates": [
         {
           "gate": "weighted_completeness",
           "passed": true,
-          "detail": "weighted completeness 81% against a 65% floor"
+          "detail": "weighted completeness 86% against a 65% floor"
         },
         {
           "gate": "model_identity",
@@ -496,13 +481,13 @@
         },
         {
           "gate": "review_sections_writable",
-          "passed": false,
-          "detail": "insufficient evidence coverage for review section(s): Where it fits"
+          "passed": true,
+          "detail": "every intended review section has the evidence it needs"
         },
         {
           "gate": "no_speculation",
-          "passed": false,
-          "detail": "review section(s) would rest on suppressed value(s): poolSizeSuitability"
+          "passed": true,
+          "detail": "no review section rests on a suppressed value"
         },
         {
           "gate": "corrections_identified",
@@ -513,8 +498,8 @@
       "evidenceQualification": null,
       "warrantyStatus": "not_confirmed",
       "warrantyPublicWording": "Manufacturer warranty term not confirmed",
-      "claimsPublishable": 12,
-      "claimsBlocked": 3
+      "claimsPublishable": 14,
+      "claimsBlocked": 2
     },
     {
       "productId": "prod-betta-se-plus",

@@ -17,6 +17,7 @@
  */
 import { PRODUCTS, type ProductEditorial } from "../products";
 import { classifySource, isDocument } from "./sources";
+import { satisfiesBound } from "./bounds";
 import { FIELD_REGISTRY, fieldApplies, type FieldDefinition } from "./field-registry";
 import { RECONCILIATION, type ReconciliationEntry } from "./reconciliation";
 import { VERIFICATIONS, type Observation, type ProductVerification } from "./verification";
@@ -60,6 +61,8 @@ const labelFor = (type: SourceType): EvidenceLabel => {
       return "manual_verified";
     case "manufacturer_page":
       return "manufacturer_stated";
+    case "manufacturer_content_on_retailer":
+      return "manufacturer_stated_on_retailer";
     case "retailer_api":
       return "api_supplied";
     case "retailer_listing":
@@ -78,7 +81,11 @@ export const confidenceFor = (type: SourceType, verified: boolean): Confidence =
   const base: Confidence =
     type === "manufacturer_document" || type === "manufacturer_page" || type === "retailer_api"
       ? "high"
-      : type === "retailer_listing"
+      : // Manufacturer-authored, but on a page the manufacturer does not
+        // control and that we cannot re-read by fetch. The words are the
+        // brand's; their continued presence is not guaranteed, so this caps at
+        // medium rather than inheriting a manufacturer page's grade.
+        type === "manufacturer_content_on_retailer" || type === "retailer_listing"
         ? "medium"
         : "low";
   if (!verified && base === "high") return "medium";
@@ -407,18 +414,39 @@ function buildField(a: BuildArgs): { field: FieldRecord; evidence: EvidenceRecor
       evidence.push(makeEvidence(base, o.value, src, o.observedOn, o.applicability ?? "all", i + 1, o.note));
     });
 
-    const top = withSource[0];
+    // A declared bound is recorded as evidence but never competes for the field
+    // — provided the figure that DOES win falls inside it. The check runs
+    // below; a bound that the winner breaks, or that will not parse, is demoted
+    // back to an ordinary rival value so the field conflicts as it should.
+    const declaredBounds = withSource.filter((x) => x.o.role === "bound_supporting");
+    const figures = withSource.filter((x) => x.o.role !== "bound_supporting");
+    const candidate = figures[0];
+    const boundsHold =
+      candidate !== undefined && declaredBounds.every((b) => satisfiesBound(b.o.value, candidate.o.value));
+    const bounds = boundsHold ? declaredBounds : [];
+    const contenders = boundsHold ? figures : withSource;
+
+    const top = contenders[0];
     const evidenceIds = evidence.map((e) => e.id);
-    const disagrees = withSource.some((x) => !valuesAgree(x.o.value, top.o.value));
+    const disagrees = contenders.some((x) => !valuesAgree(x.o.value, top.o.value));
+
+    // Bounds are corroboration, so they are marked as agreeing rather than left
+    // looking like unresolved competing values on the review surface.
+    for (const b of bounds) {
+      const e = evidence.find((x) => x.sourceId === b.src.id && x.storedValue === b.o.value);
+      if (e) e.conflictStatus = "resolved";
+    }
 
     // Two sources, two different values for the same field.
     if (disagrees) {
       const topRank = SOURCE_PRIORITY[top.src.type];
-      const tie = withSource.filter((x) => SOURCE_PRIORITY[x.src.type] === topRank).length > 1;
+      const tie = contenders.filter((x) => SOURCE_PRIORITY[x.src.type] === topRank).length > 1;
       const conflict: ConflictEntry = {
         productId: p.productId,
         field: spec.field,
-        values: withSource.map((x) => ({
+        // Only the rival figures are listed. A bound that the winner satisfies
+        // is corroboration and does not belong in a list of disputed values.
+        values: contenders.map((x) => ({
           value: x.o.value,
           sourceId: x.src.id,
           sourceType: x.src.type,
@@ -449,7 +477,10 @@ function buildField(a: BuildArgs): { field: FieldRecord; evidence: EvidenceRecor
           },
         };
       }
-      for (const e of evidence) if (e.storedValue !== top.o.value) e.superseded = true;
+      const boundValues = new Set(bounds.map((b) => b.o.value));
+      for (const e of evidence) {
+        if (e.storedValue !== top.o.value && !boundValues.has(e.storedValue as string | number)) e.superseded = true;
+      }
       return {
         evidence,
         conflict,
@@ -470,6 +501,9 @@ function buildField(a: BuildArgs): { field: FieldRecord; evidence: EvidenceRecor
     // Agreement across two or more sources raises nothing above "high", but it
     // is recorded so the review surface can show corroboration.
     const corroborated = withSource.length > 1;
+    const boundNote = bounds.length
+      ? ` Also stated as a ceiling by ${bounds.length === 1 ? "one source" : `${bounds.length} sources`}, which this figure falls inside.`
+      : "";
 
     // A stored value that the source contradicts: the source wins, the stored
     // value is retained on the record and flagged as needing correction.
@@ -513,8 +547,8 @@ function buildField(a: BuildArgs): { field: FieldRecord; evidence: EvidenceRecor
         : rec?.unverifiedDetail
           ? `${rec.note} Unverified in the stored wording: ${rec.unverifiedDetail}`
           : corroborated
-            ? `stated by ${withSource.length} independent sources, read ${top.o.observedOn}`
-            : `stated by ${top.src.publisher}, read ${top.o.observedOn}`;
+            ? `stated by ${withSource.length} independent sources, read ${top.o.observedOn}.${boundNote}`.trimEnd()
+            : `stated by ${top.src.publisher}, read ${top.o.observedOn}.${boundNote}`.trimEnd();
 
     return {
       evidence,
