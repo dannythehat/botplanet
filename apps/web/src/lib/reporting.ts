@@ -303,19 +303,20 @@ export const REPORTING_SYSTEMS: ReportingSystem[] = [
   },
   {
     id: "awin",
-    name: "Awin (WYBOT, EU/UK)",
-    provider: "Awin (publisher 3012175)",
-    status: "no_data_yet",
-    dashboard: "ui.awin.com → Reports → Performance",
+    name: "Awin (WYBOT)",
+    provider: "Awin (publisher 3012175, account botplanet)",
+    status: "connected",
+    dashboard: "ui.awin.com → Reports",
     dashboardLink: "https://ui.awin.com",
-    dataAvailable: ["Account is approved, so the dashboard is reachable"],
-    dataUnavailable: [
-      "US figures — the WYBOT programme is EU/UK only and is not used for US traffic",
-    ],
-    lastCheckedAt: CHECKED,
-    ownerAction: null,
-    secretStorage: "Awin API token would live in a Worker secret named AWIN_API_TOKEN if a UK market is launched. Not stored today.",
-    notes: "Parked deliberately until a UK market exists. It must not appear in US reporting.",
+    dataAvailable: ["Programme directory", "Relationship status", "Joined programme detail (EU)"],
+    dataUnavailable: ["US programme terms — gated until WYBOTICS INC approves", "Product feed — needs the separate AWIN_DATAFEED_KEY"],
+    lastCheckedAt: "2026-07-31",
+    ownerAction:
+      "Awaiting WYBOTICS INC (advertiser 76816) approval of the US programme application. On approval, generate the datafeed key under Toolbox → Create-a-Feed.",
+    secretStorage:
+      "Awin OAuth token is stored as the Worker secret AWIN_API_TOKEN. The datafeed key is a SEPARATE credential (AWIN_DATAFEED_KEY) and is not stored yet. Neither value is in the repository, in D1 or in any page.",
+    notes:
+      "Verified live 2026-07-31. JOINED: Wybot EU (115280, Germany, EUR) — EU/UK creatives, not licensed for the US site. PENDING: WYBOTICS INC (76816, US, USD) — a US WYBOT programme that earlier records said did not exist; applied for and confirmed pending by the API. A scan of all 21,429 available programmes found no Aiper, Maytronics, Polaris or Betta on Awin, and Beatbot only in DE/FR/ES/IT.",
   },
 ];
 

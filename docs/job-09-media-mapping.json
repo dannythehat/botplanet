@@ -76,7 +76,7 @@
         "no rights-cleared product hero",
         "no supporting product imagery",
         "no image eligible for Product structured data",
-        "The licensed route is Amazon Program Content via the Creators API. The API needs credentials this build environment does not hold, and the programme forbids scraping, constructing image URLs, or caching Program Content without express permission — so there is no lawful way to fetch an image here. WYBOT's own affiliate creatives are licensed for EU/UK only. Separately, WYBOT sells C1, C1 Pro and C1 Max with no published model number, so any incoming image must be matched by product page rather than SKU."
+        "AWAITING ADVERTISER APPROVAL. A US WYBOT programme exists on Awin and BotPlanet has applied for it; the API confirms the application is pending. Until WYBOTICS INC (advertiser 76816) approves, the programme terms and the product feed are both gated, so no image may be ingested. The EU programme we are already joined to cannot fill the gap: its creatives are licensed for EU/UK traffic, not for a US site. WYBOT also sells C1, C1 Pro and C1 Max with no published model number, so an incoming feed row must be matched on title and any variant token rejects it."
       ]
     },
     {

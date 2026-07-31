@@ -230,9 +230,20 @@ const AMAZON_BLOCK = {
 export const ACQUISITION_BLOCKERS: AcquisitionBlocker[] = [
   {
     productId: "prod-wybot-c1",
-    ...AMAZON_BLOCK,
-    checked: [...AMAZON_BLOCK.checked, "wybotpool.com — no media library", "Awin WYBOT programme (publisher 3012175) — EU/UK only, creatives not licensed for the US site"],
-    blocker: `${AMAZON_BLOCK.blocker} WYBOT's own affiliate creatives are licensed for EU/UK only. Separately, WYBOT sells C1, C1 Pro and C1 Max with no published model number, so any incoming image must be matched by product page rather than SKU.`,
+    bestAvailableTier: "affiliate_media_feed" as const,
+    checked: [
+      "Awin directory, scanned 2026-07-31 — 21,429 programmes, 10,965 of them US",
+      "Awin US programme FOUND: WYBOTICS INC advertiser 76816, USD, Active, www.wybotpool.com",
+      "Awin relationship API — advertiser 76816 returned under relationship=pending on 2026-07-31",
+      "Awin programmedetails 76816 — HTTP 401 'No relationship exists', so terms and feed are gated",
+      "Awin joined programme is Wybot EU (115280, Germany, EUR) — EU/UK creatives, not licensed for the US site",
+      "wybotpool.com — no media library",
+    ],
+    blocker:
+      "AWAITING ADVERTISER APPROVAL. A US WYBOT programme exists on Awin and BotPlanet has applied for it; the API confirms the application is pending. Until WYBOTICS INC (advertiser 76816) approves, the programme terms and the product feed are both gated, so no image may be ingested. The EU programme we are already joined to cannot fill the gap: its creatives are licensed for EU/UK traffic, not for a US site. WYBOT also sells C1, C1 Pro and C1 Max with no published model number, so an incoming feed row must be matched on title and any variant token rejects it.",
+    unblockAction:
+      "Wait for WYBOTICS INC (advertiser 76816) to approve. On approval, generate the Awin datafeed key under Toolbox → Create-a-Feed and store it as the Worker secret AWIN_DATAFEED_KEY — the OAuth token is rejected by productdata.awin.com. Ingestion then exact-matches WYBOT C1 and flows through the existing registry.",
+    owner: "manufacturer" as const,
   },
   {
     productId: "prod-dolphin-nautilus-cc-plus",
