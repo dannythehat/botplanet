@@ -64,6 +64,7 @@ const crumbs = breadcrumbsFor(Astro.url.pathname);
           meta={[titleCase(p.powerType), ...(p.environments as string[]).slice(0, 2).map(titleCase)]}
           price={minPrice(p.id) != null ? `from ${usd(minPrice(p.id))}` : null}
           priceNote="Snapshot price · confirm at retailer"
+          productId={p.id}
           variant={i}
           saveId={p.id}
         />

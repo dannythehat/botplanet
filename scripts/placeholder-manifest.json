@@ -1,0 +1,82 @@
+[
+  {
+    "slug": "wybot-c1",
+    "model": "WYBOT C1 Cordless Robotic Pool Cleaner",
+    "src": "/media/placeholder/wybot-c1.svg",
+    "width": 1200,
+    "height": 750,
+    "checksum": "sha256:72ee7389155287612c3d3a05d34ea22c790d26686bc573f53186ee1a9fe7a98f"
+  },
+  {
+    "slug": "dolphin-nautilus-cc-plus",
+    "model": "Dolphin Nautilus CC Plus w/Wi-Fi",
+    "src": "/media/placeholder/dolphin-nautilus-cc-plus.svg",
+    "width": 1200,
+    "height": 750,
+    "checksum": "sha256:670ace4b664df38d378387cbb4a1af541c0677bce9ac97cc4272c5ca937b7b5b"
+  },
+  {
+    "slug": "dolphin-premier",
+    "model": "Dolphin Premier",
+    "src": "/media/placeholder/dolphin-premier.svg",
+    "width": 1200,
+    "height": 750,
+    "checksum": "sha256:e5e0277da9e21201a38496962acfea897d9cb630ac36a9e9cb240f8af62a99f8"
+  },
+  {
+    "slug": "polaris-freedom",
+    "model": "Polaris FREEDOM Cordless Robotic Cleaner",
+    "src": "/media/placeholder/polaris-freedom.svg",
+    "width": 1200,
+    "height": 750,
+    "checksum": "sha256:d330b5e1f021258de0206d8fe4a16291aa37cf39216787721b4b277578bf2b96"
+  },
+  {
+    "slug": "betta-se-plus",
+    "model": "Betta SE Plus Solar-Powered Robotic Pool Skimmer",
+    "src": "/media/placeholder/betta-se-plus.svg",
+    "width": 1200,
+    "height": 750,
+    "checksum": "sha256:bbf51390f29940663356d21fa66507370833810c097887ba77f6f899b9bc45b0"
+  },
+  {
+    "slug": "dolphin-e10",
+    "model": "Dolphin E10",
+    "src": "/media/placeholder/dolphin-e10.svg",
+    "width": 1200,
+    "height": 750,
+    "checksum": "sha256:ecb62e1247447f2b23e2017de13ddeed7263b0bda3e49c932da825f8736a7f2a"
+  },
+  {
+    "slug": "beatbot-aquasense-2-ultra",
+    "model": "Beatbot AquaSense 2 Ultra Robotic Pool Cleaner",
+    "src": "/media/placeholder/beatbot-aquasense-2-ultra.svg",
+    "width": 1200,
+    "height": 750,
+    "checksum": "sha256:5aac202481f6dec96a2b9c73d694591dc268e69a8456d0abe1889b739c257153"
+  },
+  {
+    "slug": "aiper-scuba-x1",
+    "model": "Aiper Scuba X1",
+    "src": "/media/placeholder/aiper-scuba-x1.svg",
+    "width": 1200,
+    "height": 750,
+    "checksum": "sha256:0154f5b439f3dd31830a7113c0cdee0e260de49f8ec9bf058c81bd6cdc73dd48"
+  },
+  {
+    "slug": "aiper-scuba-s1",
+    "model": "Aiper Scuba S1 Cordless Robotic Pool Cleaner",
+    "src": "/media/placeholder/aiper-scuba-s1.svg",
+    "width": 1200,
+    "height": 750,
+    "checksum": "sha256:002c3ef64ddf8c4535ab4adfd803b6a3d421ff3d9f0c7abeac697d96e57f5905"
+  },
+  {
+    "slug": "aiper-seagull-se",
+    "model": "Aiper Seagull SE",
+    "src": "/media/placeholder/aiper-seagull-se.svg",
+    "width": 1200,
+    "height": 750,
+    "checksum": "sha256:3c3e7643af431fb833842d01b3ec7f979dbf7ceb6ccde621be41e0b7054ea648"
+  }
+]

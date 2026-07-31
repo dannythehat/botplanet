@@ -1,0 +1,587 @@
+{
+  "generatedFor": "2026-07-31",
+  "launchProducts": 10,
+  "position": "No third-party product photograph is ingested. The Amazon Associates route is licensed and the account is live, but obtaining Program Content lawfully requires Creators API credentials that this environment does not hold, and the programme forbids scraping, guessed URLs and unapproved caching. No launch-brand manufacturer publishes a press kit granting third-party image use. Until one of those changes, every product renders an original BotPlanet branded placeholder that names the exact model and does not depict it.",
+  "totals": {
+    "assets": 18,
+    "productAssets": 10,
+    "originalAssets": 8,
+    "placeholders": 10,
+    "locallyStored": 18,
+    "remotelyServed": 0,
+    "withdrawn": 0,
+    "exactModelConfirmed": 10,
+    "publicSafe": 10,
+    "heroReady": 0,
+    "fullSetReady": 0,
+    "derivatives": 0,
+    "altApproved": 16,
+    "altDecorative": 2,
+    "altMissing": 0,
+    "altRejected": 0,
+    "schemaProductEligible": 0,
+    "schemaOpenGraphEligible": 7
+  },
+  "rows": [
+    {
+      "productId": "prod-wybot-c1",
+      "slug": "wybot-c1",
+      "canonicalUrl": "https://botplanet.io/robots/robotic-pool-cleaners/wybot-c1/",
+      "exactModel": "WYBOT C1 Cordless Robotic Pool Cleaner",
+      "heroAssetId": null,
+      "supportingAssetIds": [],
+      "renderedAssetId": "ph-wybot-c1",
+      "renderedIsPlaceholder": true,
+      "imageSource": "branded_placeholder — BotPlanet",
+      "rightsBasis": "Original BotPlanet placeholder artwork. Depicts no real product. Full usage rights, but barred from Product structured data because it is not a photograph of the product it stands in for.",
+      "allowedPlacements": [
+        "product_page",
+        "category_page",
+        "listing_card",
+        "comparison",
+        "homepage"
+      ],
+      "allowedMarkets": [
+        "us",
+        "global"
+      ],
+      "storage": "local_permitted",
+      "remoteServingRequired": false,
+      "altText": "BotPlanet placeholder panel naming the WYBOT C1 Cordless Robotic Pool Cleaner. Product photography is not yet available under a licence we hold.",
+      "altTextStatus": "approved",
+      "structuredDataImages": [],
+      "structuredDataEligible": false,
+      "openGraphEligible": false,
+      "schemaExclusionReason": "a branded placeholder depicts no real product; presenting it as a Product image or an Open Graph preview would tell a machine consumer it is a photograph of the product",
+      "missingImageTypes": [
+        "product_hero",
+        "product_alternate_view",
+        "product_detail",
+        "listing_thumbnail"
+      ],
+      "withdrawalFallback": "the media registry re-resolves on every request: a withdrawn asset is skipped and the next-best asset renders, ending at the branded placeholder. No broken image can appear, and structured data and Open Graph references disappear with it.",
+      "readiness": {
+        "rightsRecordComplete": true,
+        "exactModelConfirmed": true,
+        "heroReady": false,
+        "supportingImagesReady": false,
+        "responsiveVariantsReady": true,
+        "altTextApproved": true,
+        "schemaEligible": false,
+        "publicRenderingSafe": true,
+        "fullProductMediaSetReady": false
+      },
+      "imageReadinessStatus": "public_safe_placeholder_only",
+      "blockers": [
+        "no rights-cleared product hero",
+        "no supporting product imagery",
+        "no image eligible for Product structured data",
+        "The licensed route is Amazon Program Content via the Creators API. The API needs credentials this build environment does not hold, and the programme forbids scraping, constructing image URLs, or caching Program Content without express permission — so there is no lawful way to fetch an image here. WYBOT's own affiliate creatives are licensed for EU/UK only. Separately, WYBOT sells C1, C1 Pro and C1 Max with no published model number, so any incoming image must be matched by product page rather than SKU."
+      ]
+    },
+    {
+      "productId": "prod-dolphin-nautilus-cc-plus",
+      "slug": "dolphin-nautilus-cc-plus",
+      "canonicalUrl": "https://botplanet.io/robots/robotic-pool-cleaners/dolphin-nautilus-cc-plus/",
+      "exactModel": "Dolphin Nautilus CC Plus w/Wi-Fi",
+      "heroAssetId": null,
+      "supportingAssetIds": [],
+      "renderedAssetId": "ph-dolphin-nautilus-cc-plus",
+      "renderedIsPlaceholder": true,
+      "imageSource": "branded_placeholder — BotPlanet",
+      "rightsBasis": "Original BotPlanet placeholder artwork. Depicts no real product. Full usage rights, but barred from Product structured data because it is not a photograph of the product it stands in for.",
+      "allowedPlacements": [
+        "product_page",
+        "category_page",
+        "listing_card",
+        "comparison",
+        "homepage"
+      ],
+      "allowedMarkets": [
+        "us",
+        "global"
+      ],
+      "storage": "local_permitted",
+      "remoteServingRequired": false,
+      "altText": "BotPlanet placeholder panel naming the Dolphin Nautilus CC Plus w/Wi-Fi. Product photography is not yet available under a licence we hold.",
+      "altTextStatus": "approved",
+      "structuredDataImages": [],
+      "structuredDataEligible": false,
+      "openGraphEligible": false,
+      "schemaExclusionReason": "a branded placeholder depicts no real product; presenting it as a Product image or an Open Graph preview would tell a machine consumer it is a photograph of the product",
+      "missingImageTypes": [
+        "product_hero",
+        "product_alternate_view",
+        "product_detail",
+        "listing_thumbnail"
+      ],
+      "withdrawalFallback": "the media registry re-resolves on every request: a withdrawn asset is skipped and the next-best asset renders, ending at the branded placeholder. No broken image can appear, and structured data and Open Graph references disappear with it.",
+      "readiness": {
+        "rightsRecordComplete": true,
+        "exactModelConfirmed": true,
+        "heroReady": false,
+        "supportingImagesReady": false,
+        "responsiveVariantsReady": true,
+        "altTextApproved": true,
+        "schemaEligible": false,
+        "publicRenderingSafe": true,
+        "fullProductMediaSetReady": false
+      },
+      "imageReadinessStatus": "public_safe_placeholder_only",
+      "blockers": [
+        "no rights-cleared product hero",
+        "no supporting product imagery",
+        "no image eligible for Product structured data",
+        "The licensed route is Amazon Program Content via the Creators API. The API needs credentials this build environment does not hold, and the programme forbids scraping, constructing image URLs, or caching Program Content without express permission — so there is no lawful way to fetch an image here. Maytronics ships several near-identical Nautilus CC variants; only part 99996409-PCI may be matched."
+      ]
+    },
+    {
+      "productId": "prod-dolphin-premier",
+      "slug": "dolphin-premier",
+      "canonicalUrl": "https://botplanet.io/robots/robotic-pool-cleaners/dolphin-premier/",
+      "exactModel": "Dolphin Premier",
+      "heroAssetId": null,
+      "supportingAssetIds": [],
+      "renderedAssetId": "ph-dolphin-premier",
+      "renderedIsPlaceholder": true,
+      "imageSource": "branded_placeholder — BotPlanet",
+      "rightsBasis": "Original BotPlanet placeholder artwork. Depicts no real product. Full usage rights, but barred from Product structured data because it is not a photograph of the product it stands in for.",
+      "allowedPlacements": [
+        "product_page",
+        "category_page",
+        "listing_card",
+        "comparison",
+        "homepage"
+      ],
+      "allowedMarkets": [
+        "us",
+        "global"
+      ],
+      "storage": "local_permitted",
+      "remoteServingRequired": false,
+      "altText": "BotPlanet placeholder panel naming the Dolphin Premier. Product photography is not yet available under a licence we hold.",
+      "altTextStatus": "approved",
+      "structuredDataImages": [],
+      "structuredDataEligible": false,
+      "openGraphEligible": false,
+      "schemaExclusionReason": "a branded placeholder depicts no real product; presenting it as a Product image or an Open Graph preview would tell a machine consumer it is a photograph of the product",
+      "missingImageTypes": [
+        "product_hero",
+        "product_alternate_view",
+        "product_detail",
+        "listing_thumbnail"
+      ],
+      "withdrawalFallback": "the media registry re-resolves on every request: a withdrawn asset is skipped and the next-best asset renders, ending at the branded placeholder. No broken image can appear, and structured data and Open Graph references disappear with it.",
+      "readiness": {
+        "rightsRecordComplete": true,
+        "exactModelConfirmed": true,
+        "heroReady": false,
+        "supportingImagesReady": false,
+        "responsiveVariantsReady": true,
+        "altTextApproved": true,
+        "schemaEligible": false,
+        "publicRenderingSafe": true,
+        "fullProductMediaSetReady": false
+      },
+      "imageReadinessStatus": "public_safe_placeholder_only",
+      "blockers": [
+        "no rights-cleared product hero",
+        "no supporting product imagery",
+        "no image eligible for Product structured data",
+        "This product is a candidate under review: no accepted manufacturer page, no accepted manual and no reliable model number. Even with an Amazon credential, no image may be ingested until the exact model identity is defensible — a generic Dolphin image is not acceptable, and there is no SKU to match one against."
+      ]
+    },
+    {
+      "productId": "prod-polaris-freedom",
+      "slug": "polaris-freedom",
+      "canonicalUrl": "https://botplanet.io/robots/robotic-pool-cleaners/polaris-freedom/",
+      "exactModel": "Polaris FREEDOM Cordless Robotic Cleaner",
+      "heroAssetId": null,
+      "supportingAssetIds": [],
+      "renderedAssetId": "ph-polaris-freedom",
+      "renderedIsPlaceholder": true,
+      "imageSource": "branded_placeholder — BotPlanet",
+      "rightsBasis": "Original BotPlanet placeholder artwork. Depicts no real product. Full usage rights, but barred from Product structured data because it is not a photograph of the product it stands in for.",
+      "allowedPlacements": [
+        "product_page",
+        "category_page",
+        "listing_card",
+        "comparison",
+        "homepage"
+      ],
+      "allowedMarkets": [
+        "us",
+        "global"
+      ],
+      "storage": "local_permitted",
+      "remoteServingRequired": false,
+      "altText": "BotPlanet placeholder panel naming the Polaris FREEDOM Cordless Robotic Cleaner. Product photography is not yet available under a licence we hold.",
+      "altTextStatus": "approved",
+      "structuredDataImages": [],
+      "structuredDataEligible": false,
+      "openGraphEligible": false,
+      "schemaExclusionReason": "a branded placeholder depicts no real product; presenting it as a Product image or an Open Graph preview would tell a machine consumer it is a photograph of the product",
+      "missingImageTypes": [
+        "product_hero",
+        "product_alternate_view",
+        "product_detail",
+        "listing_thumbnail"
+      ],
+      "withdrawalFallback": "the media registry re-resolves on every request: a withdrawn asset is skipped and the next-best asset renders, ending at the branded placeholder. No broken image can appear, and structured data and Open Graph references disappear with it.",
+      "readiness": {
+        "rightsRecordComplete": true,
+        "exactModelConfirmed": true,
+        "heroReady": false,
+        "supportingImagesReady": false,
+        "responsiveVariantsReady": true,
+        "altTextApproved": true,
+        "schemaEligible": false,
+        "publicRenderingSafe": true,
+        "fullProductMediaSetReady": false
+      },
+      "imageReadinessStatus": "public_safe_placeholder_only",
+      "blockers": [
+        "no rights-cleared product hero",
+        "no supporting product imagery",
+        "no image eligible for Product structured data",
+        "The licensed route is Amazon Program Content via the Creators API. The API needs credentials this build environment does not hold, and the programme forbids scraping, constructing image URLs, or caching Program Content without express permission — so there is no lawful way to fetch an image here. Polaris sells FREEDOM, FREEDOM SC, FREEDOM LT and FREEDOM Plus on a shared EB37 chassis, so an incoming image must be matched on the FFREEDOM SKU and not on family resemblance."
+      ]
+    },
+    {
+      "productId": "prod-betta-se-plus",
+      "slug": "betta-se-plus",
+      "canonicalUrl": "https://botplanet.io/robots/robotic-pool-cleaners/betta-se-plus/",
+      "exactModel": "Betta SE Plus — Solar-Powered Robotic Pool Skimmer",
+      "heroAssetId": null,
+      "supportingAssetIds": [],
+      "renderedAssetId": "ph-betta-se-plus",
+      "renderedIsPlaceholder": true,
+      "imageSource": "branded_placeholder — BotPlanet",
+      "rightsBasis": "Original BotPlanet placeholder artwork. Depicts no real product. Full usage rights, but barred from Product structured data because it is not a photograph of the product it stands in for.",
+      "allowedPlacements": [
+        "product_page",
+        "category_page",
+        "listing_card",
+        "comparison",
+        "homepage"
+      ],
+      "allowedMarkets": [
+        "us",
+        "global"
+      ],
+      "storage": "local_permitted",
+      "remoteServingRequired": false,
+      "altText": "BotPlanet placeholder panel naming the Betta SE Plus — Solar-Powered Robotic Pool Skimmer. Product photography is not yet available under a licence we hold.",
+      "altTextStatus": "approved",
+      "structuredDataImages": [],
+      "structuredDataEligible": false,
+      "openGraphEligible": false,
+      "schemaExclusionReason": "a branded placeholder depicts no real product; presenting it as a Product image or an Open Graph preview would tell a machine consumer it is a photograph of the product",
+      "missingImageTypes": [
+        "product_hero",
+        "product_alternate_view",
+        "product_detail",
+        "listing_thumbnail"
+      ],
+      "withdrawalFallback": "the media registry re-resolves on every request: a withdrawn asset is skipped and the next-best asset renders, ending at the branded placeholder. No broken image can appear, and structured data and Open Graph references disappear with it.",
+      "readiness": {
+        "rightsRecordComplete": true,
+        "exactModelConfirmed": true,
+        "heroReady": false,
+        "supportingImagesReady": false,
+        "responsiveVariantsReady": true,
+        "altTextApproved": true,
+        "schemaEligible": false,
+        "publicRenderingSafe": true,
+        "fullProductMediaSetReady": false
+      },
+      "imageReadinessStatus": "public_safe_placeholder_only",
+      "blockers": [
+        "no rights-cleared product hero",
+        "no supporting product imagery",
+        "no image eligible for Product structured data",
+        "The licensed route is Amazon Program Content via the Creators API. The API needs credentials this build environment does not hold, and the programme forbids scraping, constructing image URLs, or caching Program Content without express permission — so there is no lawful way to fetch an image here. The stored record previously cited the Betta SE page in error. Any incoming image must be matched to /products/betta-se-plus; Betta SE media must never be imported for this product."
+      ]
+    },
+    {
+      "productId": "prod-dolphin-e10",
+      "slug": "dolphin-e10",
+      "canonicalUrl": "https://botplanet.io/robots/robotic-pool-cleaners/dolphin-e10/",
+      "exactModel": "Dolphin E10",
+      "heroAssetId": null,
+      "supportingAssetIds": [],
+      "renderedAssetId": "ph-dolphin-e10",
+      "renderedIsPlaceholder": true,
+      "imageSource": "branded_placeholder — BotPlanet",
+      "rightsBasis": "Original BotPlanet placeholder artwork. Depicts no real product. Full usage rights, but barred from Product structured data because it is not a photograph of the product it stands in for.",
+      "allowedPlacements": [
+        "product_page",
+        "category_page",
+        "listing_card",
+        "comparison",
+        "homepage"
+      ],
+      "allowedMarkets": [
+        "us",
+        "global"
+      ],
+      "storage": "local_permitted",
+      "remoteServingRequired": false,
+      "altText": "BotPlanet placeholder panel naming the Dolphin E10. Product photography is not yet available under a licence we hold.",
+      "altTextStatus": "approved",
+      "structuredDataImages": [],
+      "structuredDataEligible": false,
+      "openGraphEligible": false,
+      "schemaExclusionReason": "a branded placeholder depicts no real product; presenting it as a Product image or an Open Graph preview would tell a machine consumer it is a photograph of the product",
+      "missingImageTypes": [
+        "product_hero",
+        "product_alternate_view",
+        "product_detail",
+        "listing_thumbnail"
+      ],
+      "withdrawalFallback": "the media registry re-resolves on every request: a withdrawn asset is skipped and the next-best asset renders, ending at the branded placeholder. No broken image can appear, and structured data and Open Graph references disappear with it.",
+      "readiness": {
+        "rightsRecordComplete": true,
+        "exactModelConfirmed": true,
+        "heroReady": false,
+        "supportingImagesReady": false,
+        "responsiveVariantsReady": true,
+        "altTextApproved": true,
+        "schemaEligible": false,
+        "publicRenderingSafe": true,
+        "fullProductMediaSetReady": false
+      },
+      "imageReadinessStatus": "public_safe_placeholder_only",
+      "blockers": [
+        "no rights-cleared product hero",
+        "no supporting product imagery",
+        "no image eligible for Product structured data",
+        "The licensed route is Amazon Program Content via the Creators API. The API needs credentials this build environment does not hold, and the programme forbids scraping, constructing image URLs, or caching Program Content without express permission — so there is no lawful way to fetch an image here. The E10's US part number is 99996133-US and the cited product page is the global store, so an incoming image must be matched on the US part number."
+      ]
+    },
+    {
+      "productId": "prod-beatbot-aquasense-2-ultra",
+      "slug": "beatbot-aquasense-2-ultra",
+      "canonicalUrl": "https://botplanet.io/robots/robotic-pool-cleaners/beatbot-aquasense-2-ultra/",
+      "exactModel": "Beatbot AquaSense 2 Ultra Robotic Pool Cleaner",
+      "heroAssetId": null,
+      "supportingAssetIds": [],
+      "renderedAssetId": "ph-beatbot-aquasense-2-ultra",
+      "renderedIsPlaceholder": true,
+      "imageSource": "branded_placeholder — BotPlanet",
+      "rightsBasis": "Original BotPlanet placeholder artwork. Depicts no real product. Full usage rights, but barred from Product structured data because it is not a photograph of the product it stands in for.",
+      "allowedPlacements": [
+        "product_page",
+        "category_page",
+        "listing_card",
+        "comparison",
+        "homepage"
+      ],
+      "allowedMarkets": [
+        "us",
+        "global"
+      ],
+      "storage": "local_permitted",
+      "remoteServingRequired": false,
+      "altText": "BotPlanet placeholder panel naming the Beatbot AquaSense 2 Ultra Robotic Pool Cleaner. Product photography is not yet available under a licence we hold.",
+      "altTextStatus": "approved",
+      "structuredDataImages": [],
+      "structuredDataEligible": false,
+      "openGraphEligible": false,
+      "schemaExclusionReason": "a branded placeholder depicts no real product; presenting it as a Product image or an Open Graph preview would tell a machine consumer it is a photograph of the product",
+      "missingImageTypes": [
+        "product_hero",
+        "product_alternate_view",
+        "product_detail",
+        "listing_thumbnail"
+      ],
+      "withdrawalFallback": "the media registry re-resolves on every request: a withdrawn asset is skipped and the next-best asset renders, ending at the branded placeholder. No broken image can appear, and structured data and Open Graph references disappear with it.",
+      "readiness": {
+        "rightsRecordComplete": true,
+        "exactModelConfirmed": true,
+        "heroReady": false,
+        "supportingImagesReady": false,
+        "responsiveVariantsReady": true,
+        "altTextApproved": true,
+        "schemaEligible": false,
+        "publicRenderingSafe": true,
+        "fullProductMediaSetReady": false
+      },
+      "imageReadinessStatus": "public_safe_placeholder_only",
+      "blockers": [
+        "no rights-cleared product hero",
+        "no supporting product imagery",
+        "no image eligible for Product structured data",
+        "The licensed route is Amazon Program Content via the Creators API. The API needs credentials this build environment does not hold, and the programme forbids scraping, constructing image URLs, or caching Program Content without express permission — so there is no lawful way to fetch an image here. Beatbot sells AquaSense, AquaSense Pro, AquaSense 2, AquaSense 2 Pro and AquaSense 2 Ultra; only Ultra imagery may be attached and no generation may be substituted."
+      ]
+    },
+    {
+      "productId": "prod-aiper-scuba-x1",
+      "slug": "aiper-scuba-x1",
+      "canonicalUrl": "https://botplanet.io/robots/robotic-pool-cleaners/aiper-scuba-x1/",
+      "exactModel": "Aiper Scuba X1",
+      "heroAssetId": null,
+      "supportingAssetIds": [],
+      "renderedAssetId": "ph-aiper-scuba-x1",
+      "renderedIsPlaceholder": true,
+      "imageSource": "branded_placeholder — BotPlanet",
+      "rightsBasis": "Original BotPlanet placeholder artwork. Depicts no real product. Full usage rights, but barred from Product structured data because it is not a photograph of the product it stands in for.",
+      "allowedPlacements": [
+        "product_page",
+        "category_page",
+        "listing_card",
+        "comparison",
+        "homepage"
+      ],
+      "allowedMarkets": [
+        "us",
+        "global"
+      ],
+      "storage": "local_permitted",
+      "remoteServingRequired": false,
+      "altText": "BotPlanet placeholder panel naming the Aiper Scuba X1. Product photography is not yet available under a licence we hold.",
+      "altTextStatus": "approved",
+      "structuredDataImages": [],
+      "structuredDataEligible": false,
+      "openGraphEligible": false,
+      "schemaExclusionReason": "a branded placeholder depicts no real product; presenting it as a Product image or an Open Graph preview would tell a machine consumer it is a photograph of the product",
+      "missingImageTypes": [
+        "product_hero",
+        "product_alternate_view",
+        "product_detail",
+        "listing_thumbnail"
+      ],
+      "withdrawalFallback": "the media registry re-resolves on every request: a withdrawn asset is skipped and the next-best asset renders, ending at the branded placeholder. No broken image can appear, and structured data and Open Graph references disappear with it.",
+      "readiness": {
+        "rightsRecordComplete": true,
+        "exactModelConfirmed": true,
+        "heroReady": false,
+        "supportingImagesReady": false,
+        "responsiveVariantsReady": true,
+        "altTextApproved": true,
+        "schemaEligible": false,
+        "publicRenderingSafe": true,
+        "fullProductMediaSetReady": false
+      },
+      "imageReadinessStatus": "public_safe_placeholder_only",
+      "blockers": [
+        "no rights-cleared product hero",
+        "no supporting product imagery",
+        "no image eligible for Product structured data",
+        "The licensed route is Amazon Program Content via the Creators API. The API needs credentials this build environment does not hold, and the programme forbids scraping, constructing image URLs, or caching Program Content without express permission — so there is no lawful way to fetch an image here. The Aiper CJ feed would supply licensed images but the application is not approved. Aiper publishes no model numbers, so X1 and X1 Pro can only be separated by product page."
+      ]
+    },
+    {
+      "productId": "prod-aiper-scuba-s1",
+      "slug": "aiper-scuba-s1",
+      "canonicalUrl": "https://botplanet.io/robots/robotic-pool-cleaners/aiper-scuba-s1/",
+      "exactModel": "Aiper Scuba S1 Cordless Robotic Pool Cleaner",
+      "heroAssetId": null,
+      "supportingAssetIds": [],
+      "renderedAssetId": "ph-aiper-scuba-s1",
+      "renderedIsPlaceholder": true,
+      "imageSource": "branded_placeholder — BotPlanet",
+      "rightsBasis": "Original BotPlanet placeholder artwork. Depicts no real product. Full usage rights, but barred from Product structured data because it is not a photograph of the product it stands in for.",
+      "allowedPlacements": [
+        "product_page",
+        "category_page",
+        "listing_card",
+        "comparison",
+        "homepage"
+      ],
+      "allowedMarkets": [
+        "us",
+        "global"
+      ],
+      "storage": "local_permitted",
+      "remoteServingRequired": false,
+      "altText": "BotPlanet placeholder panel naming the Aiper Scuba S1 Cordless Robotic Pool Cleaner. Product photography is not yet available under a licence we hold.",
+      "altTextStatus": "approved",
+      "structuredDataImages": [],
+      "structuredDataEligible": false,
+      "openGraphEligible": false,
+      "schemaExclusionReason": "a branded placeholder depicts no real product; presenting it as a Product image or an Open Graph preview would tell a machine consumer it is a photograph of the product",
+      "missingImageTypes": [
+        "product_hero",
+        "product_alternate_view",
+        "product_detail",
+        "listing_thumbnail"
+      ],
+      "withdrawalFallback": "the media registry re-resolves on every request: a withdrawn asset is skipped and the next-best asset renders, ending at the branded placeholder. No broken image can appear, and structured data and Open Graph references disappear with it.",
+      "readiness": {
+        "rightsRecordComplete": true,
+        "exactModelConfirmed": true,
+        "heroReady": false,
+        "supportingImagesReady": false,
+        "responsiveVariantsReady": true,
+        "altTextApproved": true,
+        "schemaEligible": false,
+        "publicRenderingSafe": true,
+        "fullProductMediaSetReady": false
+      },
+      "imageReadinessStatus": "public_safe_placeholder_only",
+      "blockers": [
+        "no rights-cleared product hero",
+        "no supporting product imagery",
+        "no image eligible for Product structured data",
+        "The licensed route is Amazon Program Content via the Creators API. The API needs credentials this build environment does not hold, and the programme forbids scraping, constructing image URLs, or caching Program Content without express permission — so there is no lawful way to fetch an image here. The Scuba S1 and S1 Pro are separate models with no published SKUs, so only imagery from the exact S1 product page may be attached and Scuba X1 media must never be mixed in."
+      ]
+    },
+    {
+      "productId": "prod-aiper-seagull-se",
+      "slug": "aiper-seagull-se",
+      "canonicalUrl": "https://botplanet.io/robots/robotic-pool-cleaners/aiper-seagull-se/",
+      "exactModel": "Aiper Seagull SE",
+      "heroAssetId": null,
+      "supportingAssetIds": [],
+      "renderedAssetId": "ph-aiper-seagull-se",
+      "renderedIsPlaceholder": true,
+      "imageSource": "branded_placeholder — BotPlanet",
+      "rightsBasis": "Original BotPlanet placeholder artwork. Depicts no real product. Full usage rights, but barred from Product structured data because it is not a photograph of the product it stands in for.",
+      "allowedPlacements": [
+        "product_page",
+        "category_page",
+        "listing_card",
+        "comparison",
+        "homepage"
+      ],
+      "allowedMarkets": [
+        "us",
+        "global"
+      ],
+      "storage": "local_permitted",
+      "remoteServingRequired": false,
+      "altText": "BotPlanet placeholder panel naming the Aiper Seagull SE. Product photography is not yet available under a licence we hold.",
+      "altTextStatus": "approved",
+      "structuredDataImages": [],
+      "structuredDataEligible": false,
+      "openGraphEligible": false,
+      "schemaExclusionReason": "a branded placeholder depicts no real product; presenting it as a Product image or an Open Graph preview would tell a machine consumer it is a photograph of the product",
+      "missingImageTypes": [
+        "product_hero",
+        "product_alternate_view",
+        "product_detail",
+        "listing_thumbnail"
+      ],
+      "withdrawalFallback": "the media registry re-resolves on every request: a withdrawn asset is skipped and the next-best asset renders, ending at the branded placeholder. No broken image can appear, and structured data and Open Graph references disappear with it.",
+      "readiness": {
+        "rightsRecordComplete": true,
+        "exactModelConfirmed": true,
+        "heroReady": false,
+        "supportingImagesReady": false,
+        "responsiveVariantsReady": true,
+        "altTextApproved": true,
+        "schemaEligible": false,
+        "publicRenderingSafe": true,
+        "fullProductMediaSetReady": false
+      },
+      "imageReadinessStatus": "public_safe_placeholder_only",
+      "blockers": [
+        "no rights-cleared product hero",
+        "no supporting product imagery",
+        "no image eligible for Product structured data",
+        "The licensed route is Amazon Program Content via the Creators API. The API needs credentials this build environment does not hold, and the programme forbids scraping, constructing image URLs, or caching Program Content without express permission — so there is no lawful way to fetch an image here. Aiper has shipped more than one Seagull SE revision and publishes no model number, so Seagull Pro, Plus and other generations must never be substituted."
+      ]
+    }
+  ]
+}

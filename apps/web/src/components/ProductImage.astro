@@ -1,0 +1,87 @@
+---
+/**
+ * THE single render path for product imagery.
+ *
+ * Every surface goes through here rather than being handed a URL, because a
+ * component that receives a `src` can render an image the rights registry has
+ * withdrawn. This one asks the registry each time, so a takedown recorded in one
+ * data file empties every card, hero and thumbnail on the next request without
+ * a template being touched.
+ *
+ * What it guarantees:
+ *  - a withdrawn or expired asset is never rendered;
+ *  - width and height are always emitted, so nothing shifts on load;
+ *  - a srcset appears only when real derivatives exist — no invented widths;
+ *  - a decorative asset is hidden from assistive technology rather than given
+ *    a description nobody needs;
+ *  - if nothing is renderable, the owned silhouette takes over. There is no
+ *    path that produces a broken-image icon.
+ */
+import RobotSilhouette from "./RobotSilhouette.astro";
+import { resolveImage } from "../lib/media-registry";
+import type { AssetType, Placement } from "../content/media/types";
+
+interface Props {
+  /** Stable product ID. Never the slug. */
+  productId: string;
+  placement: Placement;
+  /** Preference order. The first renderable type wins. */
+  types?: AssetType[];
+  /** The `sizes` attribute. Only meaningful when derivatives exist. */
+  sizes?: string;
+  /** Set only for a genuinely above-the-fold hero. */
+  priority?: boolean;
+  /** Varies the fallback silhouette so a grid is not rubber-stamped. */
+  variant?: number;
+  class?: string;
+}
+
+const {
+  productId,
+  placement,
+  types = ["product_hero", "product_alternate_view", "branded_placeholder"],
+  sizes = "(min-width: 900px) 360px, (min-width: 600px) 45vw, 90vw",
+  priority = false,
+  variant = 0,
+  class: className = "",
+} = Astro.props;
+
+const img = resolveImage(productId, placement, types);
+
+// A srcset is only honest when derivatives actually exist. Vector assets need
+// none, and an Amazon-hosted image may not be resized by us at all.
+const srcset = img && img.srcset.length > 0 ? img.srcset.map((d) => `${d.src} ${d.width}w`).join(", ") : undefined;
+---
+
+{img ? (
+  <img
+    class:list={["pimg", className]}
+    src={img.src}
+    srcset={srcset}
+    sizes={srcset ? sizes : undefined}
+    width={img.width ?? undefined}
+    height={img.height ?? undefined}
+    alt={img.alt}
+    aria-hidden={img.decorative ? "true" : undefined}
+    loading={priority ? "eager" : "lazy"}
+    fetchpriority={priority ? "high" : undefined}
+    decoding="async"
+    data-asset={img.assetId}
+    data-placeholder={img.isPlaceholder ? "true" : undefined}
+  />
+) : (
+  <RobotSilhouette variant={variant} class={className} />
+)}
+
+<style>
+  /* The intrinsic ratio comes from width/height, so the box is reserved before
+     the file arrives and nothing below it moves. */
+  .pimg {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    background: var(--panel-2);
+    object-fit: cover;
+  }
+</style>

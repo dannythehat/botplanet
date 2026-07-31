@@ -237,6 +237,7 @@ const schemaGraphNodes = [
               ]}
               price={minPrice(f.product.id) != null ? `from ${usd(minPrice(f.product.id))}` : null}
               priceNote="Snapshot price · confirm at retailer"
+              productId={f.product.id}
               variant={i}
               saveId={f.product.id}
             />

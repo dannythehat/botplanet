@@ -12,6 +12,7 @@
  * design, so it never implies it depicts the specific model named on the card.
  */
 import RobotSilhouette from "./RobotSilhouette.astro";
+import ProductImage from "./ProductImage.astro";
 
 interface Props {
   href: string;
@@ -24,9 +25,12 @@ interface Props {
   price?: string | null;
   /** Note under the price, e.g. freshness caveat. */
   priceNote?: string;
-  /** Rights-cleared image URL. Omit to use the silhouette stage. */
-  image?: string | null;
-  imageAlt?: string;
+  /**
+   * Stable product ID. When supplied, the media registry decides what renders —
+   * which is what makes a withdrawal take effect here without a code change.
+   * Omitted only by surfaces that have no product (e.g. a category teaser).
+   */
+  productId?: string | null;
   /** Varies the silhouette so a grid isn't rubber-stamped. */
   variant?: number;
   /** Product id for the save affordance. */
@@ -40,16 +44,15 @@ const {
   meta = [],
   price,
   priceNote,
-  image,
-  imageAlt,
+  productId,
   variant = 0,
   saveId,
 } = Astro.props;
 ---
 <a class="pcard elevated reveal" href={href}>
   <div class="pcard__stage stage">
-    {image ? (
-      <img class="pcard__img" src={image} alt={imageAlt ?? name} loading="lazy" decoding="async" />
+    {productId ? (
+      <ProductImage productId={productId} placement="listing_card" variant={variant} class="pcard__img" />
     ) : (
       <RobotSilhouette variant={variant} class="pcard__sil" />
     )}
