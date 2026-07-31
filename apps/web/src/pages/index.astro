@@ -19,6 +19,7 @@ import { usd, titleCase } from "../lib/format";
 import { shellJourney } from "../content/journeys";
 import { LAUNCH_CATEGORY, categoryRoutes } from "../content/routes";
 import { itemListSchema } from "../lib/seo";
+import { describeProduct } from "../lib/product-labels";
 
 const journey = shellJourney();
 const cat = categoryRoutes(LAUNCH_CATEGORY);
@@ -55,21 +56,33 @@ const allPrices = products.map((p) => minPrice(p.id)).filter((n): n is number =>
 const floorPrice = allPrices.length ? usd(Math.min(...allPrices)) : null;
 
 /**
- * Four featured models chosen to span the real decisions a buyer faces —
- * budget, pool type and power — not a ranking. The labels describe what each
- * one IS; none of them claims it is best, tested or top-rated.
+ * Four featured models spanning the real decisions a buyer faces — pool type
+ * and power — and nothing more. Labels and explanations are DERIVED at render
+ * time from each product's stored fields plus the catalogue's current price
+ * range, so they cannot go stale and cannot assert a ranking. See
+ * lib/product-labels.ts: any price observation disappears the moment the offer
+ * data stops supporting it.
  */
-const FEATURED: { slug: string; label: string; why: string }[] = [
-  { slug: "aiper-seagull-se", label: "Entry model", why: "Lowest current price in the catalogue" },
-  { slug: "dolphin-nautilus-cc-plus", label: "Corded, in-ground", why: "Mains-powered for longer cycles" },
-  { slug: "aiper-scuba-x1", label: "Cordless option", why: "No cable to manage" },
-  { slug: "beatbot-aquasense-2-ultra", label: "Higher-spec", why: "Most features in the catalogue" },
+const FEATURED_SLUGS = [
+  "aiper-seagull-se",
+  "dolphin-nautilus-cc-plus",
+  "aiper-scuba-x1",
+  "beatbot-aquasense-2-ultra",
 ];
 
-const featured = FEATURED.map((f) => {
-  const p = products.find((x) => x.slug === f.slug);
-  return p ? { ...f, product: p } : null;
-}).filter((x): x is { slug: string; label: string; why: string; product: (typeof products)[number] } => x !== null);
+const featured = FEATURED_SLUGS.map((slug) => {
+  const product = products.find((x) => x.slug === slug);
+  if (!product) return null;
+  const described = describeProduct(
+    {
+      powerType: product.powerType,
+      environments: product.environments as string[],
+      priceMinor: minPrice(product.id),
+    },
+    allPrices,
+  );
+  return { product, ...described };
+}).filter((x): x is { product: (typeof products)[number]; label: string; explanation: string; usesPriceData: boolean } => x !== null);
 
 /** Three models used purely as a comparison illustration. */
 const compareSet = ["aiper-seagull-se", "dolphin-nautilus-cc-plus", "beatbot-aquasense-2-ultra"]
@@ -203,8 +216,8 @@ const schemaGraphNodes = [
           <span class="rule-accent" aria-hidden="true"></span>
           <h2 class="mt-0">Four models, four different jobs</h2>
           <p>
-            A spread across budget, pool type and power — not a ranking. We don't publish a "best" until the evidence
-            behind it is in place.
+            A spread across pool type and power, described from what each record actually holds. This is not a ranking —
+            we don't publish a "best" until the evidence behind it is in place.
           </p>
         </div>
         <a class="btn" href={cat.hub}>View all pool cleaners</a>
@@ -227,7 +240,7 @@ const schemaGraphNodes = [
               variant={i}
               saveId={f.product.id}
             />
-            <p class="feat__why">{f.why}</p>
+            <p class="feat__why">{f.explanation}</p>
           </div>
         ))}
       </div>
