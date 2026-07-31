@@ -1,9 +1,11 @@
 {
   "generatedFor": "2026-07-31",
-  "total": 18,
+  "total": 21,
   "byRule": {
     "search_not_offer": 8,
     "refurbished_or_used": 1,
+    "sibling_model": 2,
+    "different_generation": 1,
     "wrong_region": 1,
     "unclear_seller": 8
   },
@@ -56,6 +58,27 @@
       "candidate": "Used - Like New buying option on B0BX9DJS7R at $934.82",
       "reason": "The same listing offers a used copy $264.18 cheaper than the new one. It is a different thing with a different warranty position — a manufacturer term runs from the original purchase, not from ours — so quoting the lower figure would misdescribe what the buy button buys. Only the buy-new price is recorded.",
       "rule": "refurbished_or_used"
+    },
+    {
+      "productId": "prod-dolphin-premier",
+      "retailerId": "ret-amazon",
+      "candidate": "Dolphin PROTEUS DX4 PLUS listing",
+      "reason": "Returned by the Amazon search for the Dolphin Premier. The A+ photography has 'PROTEUS DX4 PLUS' printed on the machine, so it is a different Maytronics model — 33 ft pool rating, 4,000 GPH, weekly timer. The Premier's own figures do not carry over to it.",
+      "rule": "sibling_model"
+    },
+    {
+      "productId": "prod-aiper-scuba-s1",
+      "retailerId": "ret-amazon",
+      "candidate": "AIPER SCUBA V3 listing",
+      "reason": "Returned by the Amazon search for an Aiper Scuba. The A+ hero image has 'SCUBA V3' printed on the chassis, and the panels describe an AI camera, AI Navium scheduling and 7 days on one charge — none of which belongs to the S1 or the X1 we hold.",
+      "rule": "sibling_model"
+    },
+    {
+      "productId": "prod-betta-se-plus",
+      "retailerId": "ret-amazon",
+      "candidate": "ASIN B0CVMQ3XBX (older Betta listing carrying a 'View newer model' pointer)",
+      "reason": "The listing recorded for the SE Plus shows Amazon's 'View newer model' panel pointing at a separate Betta SE Plus listing at $429.90. Amazon shows that panel only when the ASIN has been superseded, so the ASIN we hold is very likely an earlier model. Held rather than published until the newer listing's ASIN and title are read.",
+      "rule": "different_generation"
     },
     {
       "productId": "prod-aiper-scuba-x1",

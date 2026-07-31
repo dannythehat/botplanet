@@ -46,6 +46,23 @@ const AMAZON_ASINS: { productId: string; asin: string; sourceUrl: string }[] = [
   { productId: "prod-aiper-scuba-x1", asin: "B0F9WN961G", sourceUrl: "https://www.amazon.com/AIPER-High-Power-Horizontal-Waterline-Scrubbing/dp/B0F9WN961G" },
 ];
 
+/**
+ * What a human found when they searched Amazon for a product we hold no ASIN
+ * for. "We never looked" and "we looked and it is not sold there" are different
+ * facts, and only the second one is a reason to stop looking.
+ *
+ * These come from the owner searching in a browser, which is the only method
+ * available: Amazon's search results are not readable by fetch, and the /s?k=
+ * page returns HTTP 200 whether or not it found anything.
+ */
+const SEARCH_FINDINGS: Record<string, { checkedOn: string; finding: string }> = {
+  "prod-dolphin-premier": {
+    checkedOn: "2026-07-31",
+    finding:
+      "Owner searched Amazon US in a browser and found NO Dolphin Premier listing. This is an absence confirmed by a person, not a gap in our research — the product does not appear to be sold on Amazon US at all. It is already `candidate_under_review` in the Job 8 record, and having no US retail destination is a second, independent reason to question its place in the launch ten.",
+  },
+};
+
 /** Products with no Amazon listing URL in the Job 8 record. */
 const NO_AMAZON_DESTINATION = [
   // ASIN B0G64JV6K4 was carried for this product and is DEAD — /dp/B0G64JV6K4
@@ -91,8 +108,10 @@ export const DESTINATIONS: ProductDestination[] = [
       // so it can carry a click without ever being called an offer.
       destinationUrl: null,
       confidence: "search_only",
-      sourceReference: "No Amazon listing URL was captured for this product during the Job 8 research pass.",
-      sourceCheckedDate: DESTINATION_CHECK_DATE,
+      sourceReference:
+        SEARCH_FINDINGS[productId]?.finding ??
+        "No Amazon listing URL was captured for this product during the Job 8 research pass.",
+      sourceCheckedDate: SEARCH_FINDINGS[productId]?.checkedOn ?? DESTINATION_CHECK_DATE,
       sellerIdentity: null,
       sellerModel: "unknown",
       notes:
@@ -162,6 +181,45 @@ export const REJECTED_CANDIDATES: RejectedCandidate[] = [
     reason:
       "The same listing offers a used copy $264.18 cheaper than the new one. It is a different thing with a different warranty position — a manufacturer term runs from the original purchase, not from ours — so quoting the lower figure would misdescribe what the buy button buys. Only the buy-new price is recorded.",
     rule: "refurbished_or_used",
+  },
+  /*
+   * SUCCESSOR MODELS SURFACED BY THE MANUAL SEARCH PASS, 2026-07-31.
+   *
+   * Searching Amazon for three of our products returned a NEWER model instead
+   * of the one we hold. Each was identified from manufacturer A+ content the
+   * owner captured — the model name is printed on the machine in the brand's
+   * own photography, which is the most reliable identifier available here.
+   *
+   * All three are refused. A successor is a different product with different
+   * specifications, and pointing a buy button at one would send a reader to
+   * something other than what they read about. They are recorded rather than
+   * dropped because three superseded models out of ten is a fact about the
+   * CATALOGUE, not a research failure — and that is a decision for the owner
+   * and ChatGPT, not something to fix quietly inside a destination file.
+   */
+  {
+    productId: "prod-dolphin-premier",
+    retailerId: "ret-amazon",
+    candidate: "Dolphin PROTEUS DX4 PLUS listing",
+    reason:
+      "Returned by the Amazon search for the Dolphin Premier. The A+ photography has 'PROTEUS DX4 PLUS' printed on the machine, so it is a different Maytronics model — 33 ft pool rating, 4,000 GPH, weekly timer. The Premier's own figures do not carry over to it.",
+    rule: "sibling_model",
+  },
+  {
+    productId: "prod-aiper-scuba-s1",
+    retailerId: "ret-amazon",
+    candidate: "AIPER SCUBA V3 listing",
+    reason:
+      "Returned by the Amazon search for an Aiper Scuba. The A+ hero image has 'SCUBA V3' printed on the chassis, and the panels describe an AI camera, AI Navium scheduling and 7 days on one charge — none of which belongs to the S1 or the X1 we hold.",
+    rule: "sibling_model",
+  },
+  {
+    productId: "prod-betta-se-plus",
+    retailerId: "ret-amazon",
+    candidate: "ASIN B0CVMQ3XBX (older Betta listing carrying a 'View newer model' pointer)",
+    reason:
+      "The listing recorded for the SE Plus shows Amazon's 'View newer model' panel pointing at a separate Betta SE Plus listing at $429.90. Amazon shows that panel only when the ASIN has been superseded, so the ASIN we hold is very likely an earlier model. Held rather than published until the newer listing's ASIN and title are read.",
+    rule: "different_generation",
   },
   {
     productId: "prod-aiper-scuba-x1",
