@@ -1,14 +1,19 @@
 name: SEO Research (temporary)
 
-# TEMPORARY, manually triggered research batch for the 13 approved
-# robotic-pool-cleaner pages. Runs ONLY against research/pool-seo-page-map.
-# Credentials come exclusively from repository secrets and are never printed;
-# the script enforces the $2.00 total spend ceiling internally and the
-# sanitised results are uploaded as an artifact — nothing is committed.
-# Delete this workflow after the research phase is approved.
+# TEMPORARY research batch for the 13 approved robotic-pool-cleaner pages.
+# Credentials come exclusively from GitHub repository secrets and are never printed.
+# The script enforces the $2.00 total spend ceiling internally.
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - research/pool-seo-page-map
+    paths:
+      - .github/workflows/seo-research.yml
+
+permissions:
+  contents: write
 
 jobs:
   research:
@@ -42,3 +47,30 @@ jobs:
           name: seo-research-results
           path: research-output/
           retention-days: 14
+
+      - name: Record successful run receipt
+        if: success()
+        shell: bash
+        run: |
+          node - <<'NODE'
+          const fs = require('fs');
+          const results = JSON.parse(fs.readFileSync('research-output/seo-research-results.json', 'utf8'));
+          const receipt = {
+            runId: Number(process.env.GITHUB_RUN_ID),
+            headSha: process.env.GITHUB_SHA,
+            completedAt: new Date().toISOString(),
+            totalCostUsd: results.totalCostUsd,
+            seedCount: results.seeds,
+            volumeRows: results.volume.length,
+            difficultyRows: results.difficulty.length,
+            relatedRows: results.related.length,
+            serpRows: results.serps.length
+          };
+          fs.mkdirSync('docs/seo', { recursive: true });
+          fs.writeFileSync('docs/seo/latest-research-run.json', JSON.stringify(receipt, null, 2) + '\n');
+          NODE
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/seo/latest-research-run.json
+          git commit -m "Record successful DataForSEO research run [skip ci]"
+          git push
