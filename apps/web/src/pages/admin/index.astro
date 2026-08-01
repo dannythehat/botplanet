@@ -1,25 +1,21 @@
 ---
 import Admin from "../../layouts/Admin.astro";
 import { getDb, schema } from "../../lib/db";
-import { sql, eq, and } from "drizzle-orm";
+import { sql, eq } from "drizzle-orm";
 import { AMAZON_ASSOCIATE_TAG, AMAZON_ASSOCIATE_TAG_STATUS } from "../../lib/site";
 import { AIPER_PROGRAMME_TERMS, AIPER_FEED, CJ_PUBLISHER_ID, CJ_AIPER_ADVERTISER_ID } from "../../content/media/cj";
 
 const db = getDb(Astro.locals);
 
-/**
- * Amazon status is DERIVED from the authoritative configuration the offer
- * system uses (lib/site.ts), never restated here. While the tag is null,
- * Associates ownership and approval are unverified, outbound Amazon links are
- * untagged, and this dashboard must not present Amazon as a live earning
- * programme — a working retail link is not an Associates relationship.
- */
 const amazonTagged = Boolean(AMAZON_ASSOCIATE_TAG);
 const amazonHeadline = amazonTagged ? "TAGGED" : "UNTAGGED";
 const amazonTone = amazonTagged ? "var(--ok)" : "var(--warn)";
 const amazonCardNote = amazonTagged
   ? `tag ${AMAZON_ASSOCIATE_TAG} on outbound links`
   : "retailer links only · earning no commission";
+const amazonEarningsNote = amazonTagged
+  ? "Amazon referral attribution is enabled; actual clicks, orders and commission remain report-driven."
+  : "BotPlanet currently earns no Amazon commission because outbound links are untagged.";
 
 const accounts = await db.select().from(schema.affiliateAccounts);
 const programmes = await db.select().from(schema.affiliatePrograms);
@@ -37,7 +33,6 @@ const clicksN = await count(schema.clickEvents);
 const statusTag = (s: string) =>
   s === "approved" ? "ok" : s === "pending" ? "warn" : s === "closed" || s === "rejected" ? "bad" : "";
 
-// Action queue: accounts that have a next action, blocked first.
 const queue = [...accounts]
   .filter((a) => a.nextAction)
   .sort((a, b) => (a.currentBlocker ? 0 : 1) - (b.currentBlocker ? 0 : 1));
@@ -73,7 +68,7 @@ const queue = [...accounts]
   <h2>Quick reference</h2>
   <div class="card">
     <ul style="margin:0; padding-left:18px; line-height:1.9;">
-      <li><strong>Amazon</strong> — retailer destinations work, but Associates <span style="color:var(--warn)">{AMAZON_ASSOCIATE_TAG_STATUS.split(" — ")[0]}</span>. Outbound links are {amazonTagged ? "tagged" : "untagged"} and BotPlanet currently earns no Amazon commission. The historical tag is unverified history, not configuration. No affiliate links in email.</li>
+      <li><strong>Amazon</strong> — Associates <span style={`color:${amazonTone}`}>{AMAZON_ASSOCIATE_TAG_STATUS}</span>. Outbound links are {amazonTagged ? "tagged" : "untagged"}. {amazonEarningsNote} No affiliate links in email.</li>
       <li><strong>CJ / Aiper</strong> (<span class="mono">{CJ_PUBLISHER_ID}</span> → adv <span class="mono">{CJ_AIPER_ADVERTISER_ID}</span>) — <span style="color:var(--ok)">{AIPER_PROGRAMME_TERMS.relationship}</span>: {AIPER_PROGRAMME_TERMS.baseCommissionPercent}% base, up to {AIPER_PROGRAMME_TERMS.promotionalCommissionMaxPercent}% promotional, {AIPER_PROGRAMME_TERMS.cookieDays}-day cookie. Feed has {AIPER_FEED.productCount} products; direct-link scope <span style="color:var(--warn)">{AIPER_PROGRAMME_TERMS.directLinkPolicy.status === "restricted_unclarified" ? "unresolved — product-level deep links blocked" : AIPER_PROGRAMME_TERMS.directLinkPolicy.status}</span>.</li>
       <li><strong>Awin</strong> (<span class="mono">3012175</span>) — joined WYBOT programme is <em>EU/UK only</em>, never for US traffic; WYBOTICS INC US (adv <span class="mono">76816</span>) <span style="color:var(--warn)">applied, awaiting advertiser decision</span>.</li>
       <li><strong>Impact</strong> — <span style="color:var(--bad)">declined</span> (£30/mo fee).</li>
