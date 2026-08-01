@@ -79,8 +79,54 @@ export const AIPER_RELATIONSHIP: CjRelationship = {
   lastApiResponse:
     "2026-07-31 — GET link-search.api.cj.com/v2/link-search?website-id=101845913&advertiser-ids=6404897 returned HTTP 200 with total-matched=12 and advertiser-name=Aiper; shoppingProductFeeds(companyId 8029924, partnerIds 6404897) returned one feed. The relationship is live and readable.",
   notes:
-    "Acceptance confirmed by the owner AND verified against the live API. The advertiser is Aiper (6404897) via CJ; Awin (publisher 3012175) is the WYBOT EU/UK relationship and is unrelated to Aiper.",
+    "Acceptance confirmed by the owner AND verified against the live API, and now evidenced by the official welcome email (advertiser: Aiper Intelligent, LLC; programme contact Fapoo@Aiper.com). The advertiser is Aiper (6404897) via CJ; Awin (publisher 3012175) is the WYBOT EU/UK relationship and is unrelated to Aiper.",
 };
+
+/**
+ * The programme terms as the ADVERTISER wrote them — the official Aiper CJ
+ * welcome email, supplied by the owner on 2026-07-31. This is the contractual
+ * layer, and it OVERRIDES anything the API merely makes possible.
+ *
+ * The lesson this record exists to keep: on the same day, a live deep-link
+ * test through the CJ click network worked perfectly — and the welcome email
+ * still says "You are not allowed to direct link." Technical capability and
+ * programme permission are different facts from different authorities, and
+ * the contract wins. Nothing may publish a product-level Aiper deep link
+ * until Aiper states in writing which reading of that sentence applies.
+ */
+export const AIPER_PROGRAMME_TERMS = {
+  evidence: "Official Aiper CJ welcome email, owner-supplied 2026-07-31",
+  advertiserLegalName: "Aiper Intelligent, LLC",
+  programmeContact: "Fapoo@Aiper.com",
+  baseCommissionPercent: 8,
+  promotionalCommissionMaxPercent: 15,
+  cookieDays: 45,
+  relationship: "approved and active",
+  prohibited: [
+    "direct linking (verbatim: \"You are not allowed to direct link\" — scope unclarified, see directLinkPolicy)",
+    "bidding on Aiper brand keywords in paid search",
+    "using aiper.com as the ad display URL",
+    "trademark variations and misspellings",
+    "popups and click-unders",
+    "adult traffic",
+    "incentivised traffic",
+    "wholesale or dropshipping-style promotion",
+    "fraud or misleading promotion",
+  ],
+  directLinkPolicy: {
+    status: "restricted_unclarified" as const,
+    verbatim: "You are not allowed to direct link.",
+    openQuestion:
+      "Does the prohibition cover only paid-ad traffic sent straight to Aiper (the common network meaning), or does it also bar product-level deep links from publisher pages?",
+    untilClarified: [
+      "no CJ deep link to an individual Aiper product page may be published anywhere on BotPlanet",
+      "no Aiper product URL in paid advertising; no aiper.com display URL; no brand-keyword bidding",
+      "public CTAs for Aiper products may use only an approved storewide creative (e.g. link 17218623 / evergreen 15736575) or another route whose terms are verified",
+      "no numeric price may be shown unless it belongs to the same retailer and destination as the CTA",
+    ],
+    clarificationOwner: "owner emails Fapoo@Aiper.com; ChatGPT records the ruling",
+  },
+} as const;
 
 /**
  * The Aiper product feed, as the API actually reports it.
@@ -146,6 +192,13 @@ export interface CjTerm {
 }
 
 export const AIPER_CJ_TERMS: CjTerm[] = [
+  { term: "commission", value: "8% base, promotional up to 15% (welcome email)", source: "owner_confirmed" },
+  { term: "cookie duration", value: "45 days (welcome email)", source: "owner_confirmed" },
+  {
+    term: "direct linking",
+    value: "PROHIBITED per welcome email; scope unclarified — product-level deep links blocked until Aiper clarifies",
+    source: "owner_confirmed",
+  },
   { term: "catalogue data use", value: "not confirmed through API", source: "not_confirmed_through_api" },
   { term: "image URL use", value: "not confirmed through API", source: "not_confirmed_through_api" },
   { term: "remote hosting required", value: "assumed required until confirmed", source: "not_confirmed_through_api" },

@@ -5,6 +5,7 @@ import {
   AIPER_CREATIVES,
   AIPER_FEED,
   AIPER_MATCHERS,
+  AIPER_PROGRAMME_TERMS,
   AIPER_RELATIONSHIP,
   CJ_AIPER_ADVERTISER_ID,
   CJ_CONSERVATIVE_RIGHTS,
@@ -19,6 +20,7 @@ import {
 } from "../src/content/media/cj";
 import { fetchAiperCatalogue, fetchRelationship, isStatusStale, redact } from "../src/lib/cj-client";
 import { ACQUISITION_BLOCKERS, MEDIA_ASSETS } from "../src/content/media/assets";
+import { DESTINATIONS, REJECTED_CANDIDATES, destinationFor } from "../src/content/commerce/destinations";
 import { CREDENTIAL_PATTERNS, resolveImage } from "../src/lib/media-registry";
 
 const AIPER_IDS = ["prod-aiper-scuba-x1", "prod-aiper-scuba-s1", "prod-aiper-seagull-se"];
@@ -157,10 +159,29 @@ describe("verified CJ inventory", () => {
 });
 
 describe("CJ rights posture", () => {
-  it("treats every unconfirmed term as restrictive rather than permissive", () => {
-    for (const t of AIPER_CJ_TERMS) {
-      expect(t.source).toBe("not_confirmed_through_api");
+  it("treats every term CJ has not confirmed as restrictive rather than permissive", () => {
+    const unconfirmed = AIPER_CJ_TERMS.filter((t) => t.source === "not_confirmed_through_api");
+    expect(unconfirmed.length).toBeGreaterThan(0);
+    for (const t of unconfirmed) {
       expect(t.value).toMatch(/not confirmed|assumed (required|prohibited|proportional)/);
+    }
+  });
+
+  /**
+   * The welcome email is a CONTRACTUAL source, so it may state real commercial
+   * terms — but it grants no rights. It settles commission, cookie and one
+   * prohibition, and nothing else. Anything touching catalogue, image or
+   * hosting rights must stay unconfirmed, which the next test pins down.
+   */
+  it("admits owner-confirmed contractual terms without letting them grant rights", () => {
+    const owner = AIPER_CJ_TERMS.filter((t) => t.source === "owner_confirmed");
+    expect(owner.map((t) => t.term).sort()).toEqual(["commission", "cookie duration", "direct linking"]);
+    expect(owner.find((t) => t.term === "direct linking")!.value).toContain("PROHIBITED");
+  });
+
+  it("still leaves catalogue, image and hosting rights unconfirmed", () => {
+    for (const term of ["catalogue data use", "image URL use", "remote hosting required"]) {
+      expect(AIPER_CJ_TERMS.find((t) => t.term === term)!.source).toBe("not_confirmed_through_api");
     }
   });
 
@@ -274,5 +295,48 @@ describe("Aiper public fallback", () => {
       expect(b.blocker).toContain("zero products");
       expect(b.checked.join(" ")).toContain("6404897");
     }
+  });
+});
+
+/**
+ * The contractual layer, and the reason it outranks the API.
+ *
+ * A live CJ deep-link test succeeded on the same day the welcome email said
+ * "You are not allowed to direct link." Technical capability and programme
+ * permission are separate facts from separate authorities, and the contract
+ * wins. These tests exist so that precedence cannot be quietly reversed by a
+ * later change that merely proves the link works.
+ */
+describe("Aiper programme terms (welcome-email evidence)", () => {
+  it("records the commercial terms exactly as the advertiser stated them", () => {
+    expect(AIPER_PROGRAMME_TERMS.baseCommissionPercent).toBe(8);
+    expect(AIPER_PROGRAMME_TERMS.promotionalCommissionMaxPercent).toBe(15);
+    expect(AIPER_PROGRAMME_TERMS.cookieDays).toBe(45);
+    expect(AIPER_PROGRAMME_TERMS.evidence).toContain("welcome email");
+  });
+
+  it("keeps the direct-link restriction unresolved rather than assuming permission", () => {
+    expect(AIPER_PROGRAMME_TERMS.directLinkPolicy.status).toBe("restricted_unclarified");
+    expect(AIPER_PROGRAMME_TERMS.directLinkPolicy.verbatim).toBe("You are not allowed to direct link.");
+    expect(AIPER_PROGRAMME_TERMS.directLinkPolicy.untilClarified.join(" ")).toContain(
+      "no CJ deep link to an individual Aiper product page",
+    );
+  });
+
+  it("publishes no Aiper CJ destination while the restriction is unclarified", () => {
+    // Structural block: a product-level Aiper deep link cannot be published
+    // because no live destination routes an Aiper product anywhere but Amazon.
+    for (const id of AIPER_IDS) {
+      const live = DESTINATIONS.filter((d) => d.productId === id);
+      for (const d of live) expect(d.retailerId).toBe("ret-amazon");
+      expect(destinationFor(id, "ret-aiper-store")).toBeUndefined();
+    }
+  });
+
+  it("keeps the empty CJ feed recorded as a refusal, not as a usable route", () => {
+    const cj = REJECTED_CANDIDATES.find(
+      (r) => r.retailerId === "ret-aiper-store" && r.candidate.includes("CJ Product Catalog"),
+    )!;
+    expect(cj.reason).toContain("zero products");
   });
 });
