@@ -24,11 +24,16 @@ interface Zone {
   y: number;
 }
 
+/**
+ * Anchors are set against the supplied cutaway: the water surface plane sits
+ * at roughly 39% of the frame height, the cut-away left wall runs down the
+ * near quarter of the width, and the lit floor reads across the lower middle.
+ */
 const ZONES: Zone[] = [
-  { n: 1, label: "Floor", note: "Silt and debris that settles on the pool bottom", x: 30, y: 82 },
-  { n: 2, label: "Walls", note: "Vertical surfaces a floor-only machine never reaches", x: 12, y: 52 },
-  { n: 3, label: "Waterline", note: "The scum line at the water's edge", x: 22, y: 26 },
-  { n: 4, label: "Surface", note: "Floating leaves, caught before they sink", x: 68, y: 14 },
+  { n: 1, label: "Floor", note: "Silt and debris that settles on the pool bottom", x: 52, y: 70 },
+  { n: 2, label: "Walls", note: "Vertical surfaces a floor-only machine never reaches", x: 30, y: 56 },
+  { n: 3, label: "Waterline", note: "The scum line where the water meets the wall", x: 33, y: 42 },
+  { n: 4, label: "Surface", note: "Floating leaves, caught before they sink", x: 68, y: 36 },
 ];
 ---
 
@@ -36,7 +41,7 @@ const ZONES: Zone[] = [
   <div class="cov__frame">
     <EditorialImage
       src={SRC}
-      alt="Cross-section of a pool showing floor, wall, waterline and surface cleaning zones picked out in light"
+      alt="Cutaway cross-section of an illuminated swimming pool at dusk, showing the water surface, waterline, walls and floor"
       width={1536}
       height={1152}
       ratio="4 / 3"
@@ -89,7 +94,10 @@ const ZONES: Zone[] = [
     display: flex;
     align-items: center;
     gap: 0;
-    transform: translate(-50%, -50%);
+    /* The numbered dot is the anchor, not the centre of the whole pin — the
+       leader and tag trail to its right, so centring the pin as a unit would
+       push the dot off the zone it points at. */
+    transform: translate(-11px, -50%);
   }
   .cov__dot {
     display: grid;

@@ -117,11 +117,14 @@ const HUB_IMAGES = {
     path: "/media/editorial/robotic-pool-cleaners/coverage-classes.jpg",
     width: 1536,
     height: 1152,
-    alt: "Cross-section of a pool showing floor, wall, waterline and surface cleaning zones picked out in light",
+    /* Describes the supplied artwork — a photographic cutaway at dusk — rather
+       than the illustration style the brief originally imagined. */
+    alt: "Cutaway cross-section of an illuminated swimming pool at dusk, showing the water surface, waterline, walls and floor",
     name: "Pool cleaning coverage classes",
-    caption: "Cross-section of a pool showing floor, wall, waterline and surface cleaning zones picked out in light",
+    caption:
+      "Cutaway cross-section of an illuminated swimming pool at dusk, showing the water surface, waterline, walls and floor",
     description:
-      "Original BotPlanet editorial illustration: a pool cross-section distinguishing floor, wall, waterline and surface cleaning coverage. Labels are rendered as page text, not printed on the image.",
+      "Original BotPlanet editorial artwork: a cutaway cross-section of a lit pool distinguishing the floor, walls, waterline and water surface. Coverage labels are rendered as page text, not printed on the image.",
   },
   poolTypes: {
     path: "/media/editorial/robotic-pool-cleaners/pool-types.jpg",
@@ -193,8 +196,8 @@ const schemaNodes = [
           height={HUB_IMAGES.hero.height}
           ratio="16 / 9"
           ratioMobile="4 / 5"
-          position="center 60%"
-          positionMobile="60% 60%"
+          position="center"
+          positionMobile="center"
           priority={true}
           class="hub-hero__img"
         />
@@ -340,7 +343,7 @@ const schemaNodes = [
           width={HUB_IMAGES.poolTypes.width}
           height={HUB_IMAGES.poolTypes.height}
           ratio="16 / 9"
-          ratioMobile="1 / 1"
+          ratioMobile="16 / 9"
           position="center"
           positionMobile="center"
         />
@@ -480,5 +483,17 @@ const schemaNodes = [
   }
   .hub-hero :global(.hub-hero__img) {
     border-radius: 14px;
+  }
+  @media (min-width: 721px) {
+    /* Fill the headline column's height rather than sitting short at the top
+       of it. The artwork is covered into the taller frame, never stretched. */
+    .hub-hero {
+      height: 100%;
+      min-height: 380px;
+    }
+    .hub-hero :global(.hub-hero__img) {
+      height: 100%;
+      aspect-ratio: auto;
+    }
   }
 </style>
