@@ -1,6 +1,14 @@
 # US Pool SEO Page Research — Plan, Seeds and Proposed Page Inventory
 
-**Branch:** `research/pool-seo-page-map` · **Prepared:** 2026-08-01 · **Status:** zero-cost preparation complete; paid batch pending DataForSEO credentials · **Paid spend so far this phase: $0.00** (hard cap $2.00)
+> **SUPERSEDED — HISTORICAL PLANNING RECORD.** The paid DataForSEO batch ran
+> on 2026-08-01 (run 30691679570, **$0.2154 actual spend** against the $2.00
+> cap) and ChatGPT approved the **final 11-page map** on the same day.
+> **`docs/seo/pool-research-findings.md` is the authoritative final map**;
+> the 13-page inventory below is the pre-research proposal kept only as the
+> audit trail of what was planned and why. Credentials are configured
+> (repository secret `DATAFORSEO_BASIC_AUTH`); nothing is pending.
+
+**Branch:** `research/pool-seo-page-map` · **Prepared:** 2026-08-01 · **Status at the time of writing:** zero-cost preparation (superseded by the completed run above)
 
 This is the research artefact for the page-first pool build. It reuses the
 existing DataForSEO Round 1 evidence (2026-07-29, ~$0.36 — see
