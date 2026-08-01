@@ -43,7 +43,10 @@ export const affiliateProgramRows: (typeof affiliatePrograms.$inferInsert)[] = [
     brandId: null,
     marketId: "us",
     network: "amazon_us",
-    status: "active", // approved — tag botplanet-20
+    // HISTORICAL SEED DRAFT — this "active" predates the Job 10 ruling that
+    // Amazon Associates ownership/approval are unverified. The live D1 row is
+    // corrected operationally; this file is a dated draft, not current truth.
+    status: "active",
     cookieDays: 1, // 24-hour cookie
     commissionType: "percent",
     commissionValueBp: 300, // ~3% (category-dependent)
@@ -148,8 +151,10 @@ const offerSeeds: OfferSeed[] = [
   { id: "off-freedom-intheswim", productId: "prod-polaris-freedom", retailerId: "ret-intheswim", affiliateProgramId: null, priceUsd: 1399, warranty: "2-3 year", redirectKey: "pool-polaris-freedom-intheswim" },
   { id: "off-betta-leslies", productId: "prod-betta-se-plus", retailerId: "ret-leslies", affiliateProgramId: "ap-leslies-flexoffers", priceUsd: 389, warranty: "2-year", redirectKey: "pool-betta-seplus-leslies" },
   { id: "off-e10-walmart", productId: "prod-dolphin-e10", retailerId: "ret-walmart", affiliateProgramId: null, priceUsd: 529, warranty: "2-year", redirectKey: "pool-dolphin-e10-walmart" },
-  // Amazon US offers for every product — Amazon Associates (botplanet-20) is the
-  // approved US route, so every product has a live, tracked buy-link.
+  // Amazon US offers for every product. Historical seed note: Associates
+  // ownership/approval are unverified, so outbound links are untagged retailer
+  // links (see apps/web/src/lib/site.ts) — Amazon is a destination, not
+  // evidence of an earning affiliate route.
   { id: "off-scubax1-amazon", productId: "prod-aiper-scuba-x1", retailerId: "ret-amazon", affiliateProgramId: "ap-amazon-us", priceUsd: 1299, warranty: "2-year", redirectKey: "pool-aiper-scubax1-amazon" },
   { id: "off-scubas1-amazon", productId: "prod-aiper-scuba-s1", retailerId: "ret-amazon", affiliateProgramId: "ap-amazon-us", priceUsd: 498, warranty: "2-year", redirectKey: "pool-aiper-scubas1-amazon" },
   { id: "off-wybotc1-amazon", productId: "prod-wybot-c1", retailerId: "ret-amazon", affiliateProgramId: "ap-amazon-us", priceUsd: 419, warranty: "2-year", redirectKey: "pool-wybot-c1-amazon" },

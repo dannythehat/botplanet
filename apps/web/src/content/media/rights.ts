@@ -63,8 +63,9 @@ const PLACEHOLDER: RightsBasisDef = {
 };
 
 /**
- * Amazon Program Content. The licence is real and the account is live, but it
- * is the most restrictive basis we hold: content must be obtained through an
+ * Amazon Program Content. The account's ownership and current approval are
+ * unverified, so this licence is a potential route rather than one held today,
+ * and it is the most restrictive basis we track: content must be obtained through an
  * Amazon-approved interface, must not be cached or altered beyond permitted
  * resizing, and must be shown alongside a compliant tracked Special Link.
  *
@@ -77,7 +78,7 @@ const AMAZON: RightsBasisDef = {
   key: "amazon_associates_program_content",
   tier: "affiliate_api",
   provider: "Amazon Associates US",
-  text: "Amazon grants a limited licence to display Amazon Program Content on the approved site in connection with participation in the Associates programme (account botplanet-20), obtained through Amazon-approved Associates tools or the Creators API, served from Amazon's hosts, unaltered except for permitted proportional resizing, and shown with compliant tracked Amazon Special Links.",
+  text: "Amazon grants a limited licence to display Amazon Program Content on an approved site in connection with participation in the Associates programme, obtained through Amazon-approved Associates tools or the Creators API, served from Amazon's hosts, unaltered except for permitted proportional resizing, and shown with compliant tracked Amazon Special Links. BotPlanet's Associates account ownership and current approval are unverified, so this basis is recorded as a future lawful route, not a licence held today.",
   allowedMarkets: ["us"],
   allowedPlacements: ["product_page", "listing_card", "comparison", "category_page"],
   allowedTransformations: ["proportional_resize"],
@@ -86,7 +87,7 @@ const AMAZON: RightsBasisDef = {
   attributionRequired: null,
   expiryRule: "valid only while the Associates account remains in good standing; re-check quarterly",
   credentialSecretRef: "AMAZON_CREATORS_API_KEY",
-  evidence: "Amazon Associates Operating Agreement; D1 affiliate_programs.amazon_us.image_permission; account botplanet-20 active.",
+  evidence: "Amazon Associates Operating Agreement; D1 affiliate_programs.amazon_us.image_permission. Account ownership and current approval are unverified (pending owner confirmation) — this basis cannot be exercised until both are evidenced.",
 };
 
 /**
@@ -195,4 +196,4 @@ export const MEDIA_SOURCE_CHECKS: SourceCheck[] = [
  * placeholder that names the exact model and claims nothing.
  */
 export const PRODUCT_PHOTOGRAPHY_POSITION =
-  "No third-party product photograph is ingested. The Amazon Associates route is licensed and the account is live, but obtaining Program Content lawfully requires Creators API credentials that this environment does not hold, and the programme forbids scraping, guessed URLs and unapproved caching. No launch-brand manufacturer publishes a press kit granting third-party image use. Until one of those changes, every product renders an original BotPlanet branded placeholder that names the exact model and does not depict it.";
+  "No third-party product photograph is ingested. The Amazon Associates route is a potential lawful source, but the account's ownership and current approval are unverified, and obtaining Program Content lawfully would also require Creators API credentials that this environment does not hold; the programme forbids scraping, guessed URLs and unapproved caching. No launch-brand manufacturer publishes a press kit granting third-party image use. Until one of those changes, every product renders an original BotPlanet branded placeholder that names the exact model and does not depict it.";

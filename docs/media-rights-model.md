@@ -10,10 +10,11 @@
 
 **No third-party product photograph is held.** That is a finding, not an omission.
 
-- The **Amazon Associates** route is licensed and the account (`botplanet-20`) is live, but obtaining Program
-  Content lawfully requires Creators API credentials that the build environment does not hold. The programme
-  forbids scraping, constructing image URLs, and caching Program Content without express permission — so there is
-  no lawful way to fetch an image here.
+- The **Amazon Associates** route is a potential lawful source, but the account's ownership and current
+  approval are unverified (pending owner confirmation), and obtaining Program Content lawfully would also
+  require Creators API credentials that the build environment does not hold. The programme forbids scraping,
+  constructing image URLs, and caching Program Content without express permission — so there is no lawful way
+  to fetch an image here, and the route cannot be exercised until the account is evidenced.
 - **No launch-brand manufacturer publishes a press kit granting third-party image use.** Six brands were checked;
   the results are recorded in `MEDIA_SOURCE_CHECKS` with the URL and outcome for each.
 - Every remaining option — scraping, guessing URLs, taking an image from search results, substituting a similar

@@ -211,7 +211,7 @@ export const MEDIA_ASSETS: MediaAssetRecord[] = [...ORIGINAL_ASSETS, ...PLACEHOL
 const AMAZON_BLOCK = {
   bestAvailableTier: "affiliate_api" as const,
   checked: [
-    "Amazon Associates US account botplanet-20 (approved, active)",
+    "Amazon Associates US account (ownership and current approval unverified — pending owner confirmation)",
     "Amazon Associates Operating Agreement image terms",
     "D1 affiliate_programs.amazon_us.image_permission",
   ],

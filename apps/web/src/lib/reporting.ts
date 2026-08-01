@@ -18,6 +18,8 @@
  * admin reporting view, so a stale figure can never be presented as current.
  */
 
+import { AMAZON_ASSOCIATE_TAG, AMAZON_ASSOCIATE_TAG_STATUS } from "./site.js";
+
 export type ConnectionStatus = "connected" | "configured" | "not_connected" | "no_access" | "no_data_yet";
 
 export const STATUS_LABEL: Record<ConnectionStatus, string> = {
@@ -266,7 +268,13 @@ export const REPORTING_SYSTEMS: ReportingSystem[] = [
   {
     id: "amazon-associates",
     name: "Amazon Associates US",
-    provider: "Amazon (tag botplanet-20)",
+    // Derived from the same configuration the offer system uses (lib/site.ts).
+    // While AMAZON_ASSOCIATE_TAG is null, ownership and programme approval are
+    // unverified, outbound Amazon links carry no tag, and no commission accrues
+    // — so this register must not describe an earning programme.
+    provider: AMAZON_ASSOCIATE_TAG
+      ? `Amazon Associates (tag ${AMAZON_ASSOCIATE_TAG})`
+      : "Amazon Associates (ownership and approval unverified; outbound links untagged)",
     status: "no_access",
     dashboard: "affiliate-program.amazon.com → Reports → Earnings / Link type performance",
     dashboardLink: "https://affiliate-program.amazon.com/home/reports",
@@ -275,15 +283,17 @@ export const REPORTING_SYSTEMS: ReportingSystem[] = [
       "Amazon-side clicks",
       "Ordered items and shipped items",
       "Conversion rate",
-      "Earnings and bounty revenue",
+      "Earnings and bounty revenue — no commission can accrue while outbound links are untagged",
     ],
-    lastCheckedAt: CHECKED,
-    ownerAction:
-      "No setup needed — the programme is approved and live. To report figures, log in at affiliate-program.amazon.com → Reports → Earnings, set the date range, and paste the totals into the daily brief. Automated reporting would require Amazon's reporting API, which is not requested for this job.",
+    lastCheckedAt: "2026-08-01",
+    ownerAction: AMAZON_ASSOCIATE_TAG
+      ? "Log in at affiliate-program.amazon.com → Reports → Earnings, set the date range, and paste the totals into the daily brief."
+      : "Confirm Amazon Associates account ownership and current programme approval. Until both are evidenced, AMAZON_ASSOCIATE_TAG stays null in apps/web/src/lib/site.ts, every outbound Amazon link is an ordinary untagged retailer link, and there are no Amazon figures to report.",
     secretStorage:
-      "Amazon Associates login is Danny's account (password manager). The tracking tag botplanet-20 is public and lives in apps/web/src/lib/site.ts.",
-    notes:
-      "Programme approved and live on all ten launch products. BotPlanet cannot read Amazon's dashboard programmatically, so Amazon-side figures are owner-supplied, not system-connected.",
+      "Amazon Associates login would be Danny's account (password manager). The historical tag value is retained in Job 10 records as unverified history only — it is not active configuration; apps/web/src/lib/site.ts is the single authority and holds AMAZON_ASSOCIATE_TAG.",
+    notes: AMAZON_ASSOCIATE_TAG
+      ? "Tag verified and applied through amazonDestination(). Amazon-side figures are owner-supplied, not system-connected."
+      : `${AMAZON_ASSOCIATE_TAG_STATUS}. Amazon currently functions as a retailer destination only: a working Amazon retail link is not evidence of an active Associates relationship, and BotPlanet earns no Amazon commission in this state.`,
   },
   {
     id: "cj-affiliate",
