@@ -188,7 +188,8 @@ const schemaNodes = [
           )}
         </div>
         <div class="stack">
-          <span class="eyebrow rule-accent">{p.award}</span>
+          <span class="rule-accent" aria-hidden="true"></span>
+          <span class="eyebrow">{p.award}</span>
           <h2 class="mt-0 pick__title"><a class="link" href={`/robots/${LAUNCH_CATEGORY}/${p.product.slug}/`}>{p.product.name}</a></h2>
           <div class="cluster cluster--tight">
             <span class="pill pill--strong">{titleCase(p.product.powerType)}</span>
@@ -302,6 +303,14 @@ const schemaNodes = [
     color: transparent;
     -webkit-text-stroke: 1.5px var(--accent, #cfd6dd);
     opacity: 0.9;
+  }
+  /* The metal theme paints .eyebrow as a metallic fill; block display would
+     stretch that fill across the column, so the award reads as a fitted pill. */
+  .pick .eyebrow {
+    display: inline-block;
+    width: fit-content;
+    padding: 3px 12px;
+    border-radius: 999px;
   }
   .pick__title { font-size: clamp(24px, 3vw, 32px); }
   .pick :global(.pick__img) { border-radius: 12px; }
