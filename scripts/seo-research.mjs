@@ -9,20 +9,18 @@
  * SAFETY_STOP is reached. HARD_CAP is $2.00 (owner ceiling); SAFETY_STOP
  * leaves headroom so an in-flight request can never breach the cap.
  *
- * SECURITY: credentials come only from DATAFORSEO_LOGIN / DATAFORSEO_PASSWORD
- * environment variables (GitHub repository secrets in CI). They are never
- * logged, and the output artifact contains no request headers — only
- * sanitised result fields.
+ * SECURITY: the credential comes only from the DATAFORSEO_BASIC_AUTH
+ * environment variable (GitHub repository secret in CI), used directly as the
+ * pre-encoded Basic value — never decoded, rebuilt or logged. The output
+ * artifact contains no request headers, only sanitised result fields.
  */
 import { mkdirSync, writeFileSync } from "node:fs";
 
-const LOGIN = process.env.DATAFORSEO_LOGIN;
-const PASSWORD = process.env.DATAFORSEO_PASSWORD;
-if (!LOGIN || !PASSWORD) {
-  console.error("DATAFORSEO_LOGIN / DATAFORSEO_PASSWORD are not set. Aborting before any paid call.");
+if (!process.env.DATAFORSEO_BASIC_AUTH?.trim()) {
+  console.error("DATAFORSEO_BASIC_AUTH is not set. Aborting before any paid call.");
   process.exit(1);
 }
-const AUTH = "Basic " + Buffer.from(`${LOGIN}:${PASSWORD}`).toString("base64");
+const AUTH = "Basic " + process.env.DATAFORSEO_BASIC_AUTH.trim();
 
 const HARD_CAP = 2.0;
 const SAFETY_STOP = 1.8;
@@ -42,15 +40,23 @@ async function call(path, tasks, label) {
     headers: { Authorization: AUTH, "Content-Type": "application/json" },
     body: JSON.stringify(tasks),
   });
+  if (res.status === 401) {
+    console.error(`${label}: HTTP 401 — authentication rejected. Failing immediately; no further calls.`);
+    process.exit(1);
+  }
   if (!res.ok) {
     console.error(`${label}: HTTP ${res.status}`);
     return null;
   }
   const json = await res.json();
+  if (json.status_code === 40100 || json.status_code === 40101 || json.status_code === 40102) {
+    console.error(`${label}: API auth error ${json.status_code} ${json.status_message}. Failing immediately.`);
+    process.exit(1);
+  }
   const cost = Number(json.cost ?? 0);
   totalCost += cost;
   costLog.push({ label, path, tasks: tasks.length, cost, runningTotal: Number(totalCost.toFixed(6)) });
-  console.log(`${label}: ${tasks.length} task(s), cost $${cost.toFixed(4)}, total $${totalCost.toFixed(4)}`);
+  console.log(`${label}: ${tasks.length} task(s), cost $${cost.toFixed(4)}, total $${totalCost.toFixed(4)}, api ${json.status_code}`);
   if (json.status_code !== 20000) console.error(`${label}: API status ${json.status_code} ${json.status_message}`);
   return json;
 }
