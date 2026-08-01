@@ -1,0 +1,80 @@
+---
+/**
+ * An owner-created BotPlanet editorial image — the page's own artwork, as
+ * distinct from product media, which flows through ProductImage and the rights
+ * registry.
+ *
+ * Cropping is art-directed rather than left to the browser: each placement
+ * declares the frame it wants at desktop and at mobile, plus the focal point
+ * the Notion visual plan says must survive the crop. The file itself is never
+ * stretched or distorted — it is covered into the frame and anchored at that
+ * focal point.
+ */
+interface Props {
+  /** Site-relative path to the supplied file. */
+  src: string;
+  alt: string;
+  /** True pixel dimensions of the supplied file. */
+  width: number;
+  height: number;
+  /** CSS aspect-ratio for the frame, e.g. "16 / 9". */
+  ratio: string;
+  /** Frame at <=720px. Defaults to the desktop ratio. */
+  ratioMobile?: string;
+  /** object-position keeping the plan's focal area inside the crop. */
+  position?: string;
+  positionMobile?: string;
+  /** Eager-load and high fetch priority — only for above-the-fold artwork. */
+  priority?: boolean;
+  class?: string;
+}
+const {
+  src,
+  alt,
+  width,
+  height,
+  ratio,
+  ratioMobile,
+  position = "center",
+  positionMobile,
+  priority = false,
+  class: className = "",
+} = Astro.props;
+
+const style = [
+  `--ed-ratio:${ratio}`,
+  `--ed-ratio-m:${ratioMobile ?? ratio}`,
+  `--ed-pos:${position}`,
+  `--ed-pos-m:${positionMobile ?? position}`,
+].join(";");
+---
+
+<img
+  class:list={["ed-img", className]}
+  src={src}
+  alt={alt}
+  width={width}
+  height={height}
+  style={style}
+  loading={priority ? "eager" : "lazy"}
+  fetchpriority={priority ? "high" : "auto"}
+  decoding={priority ? "sync" : "async"}
+/>
+
+<style>
+  .ed-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: var(--ed-ratio);
+    object-fit: cover;
+    object-position: var(--ed-pos);
+    border-radius: 12px;
+  }
+  @media (max-width: 720px) {
+    .ed-img {
+      aspect-ratio: var(--ed-ratio-m);
+      object-position: var(--ed-pos-m);
+    }
+  }
+</style>

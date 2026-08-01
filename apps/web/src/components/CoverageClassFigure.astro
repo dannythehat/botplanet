@@ -1,0 +1,161 @@
+---
+/**
+ * The coverage-classes cutaway, labelled in HTML rather than in the artwork.
+ *
+ * The supplied image is a clean, unlabelled illustration; every label and
+ * leader line here is live text, so it stays legible at any size, translates,
+ * is selectable, and can be corrected without regenerating the image. On
+ * narrow viewports the overlay collapses into a numbered legend beneath the
+ * figure, because hairline leader lines are unreadable on a phone.
+ *
+ * The wording describes only where a machine cleans. It says nothing about
+ * materials, finish quality or performance, because nothing here was tested.
+ */
+import EditorialImage from "./EditorialImage.astro";
+
+const SRC = "/media/editorial/robotic-pool-cleaners/coverage-classes.jpg";
+
+interface Zone {
+  n: number;
+  label: string;
+  note: string;
+  /** Anchor point on the artwork, as percentages of the frame. */
+  x: number;
+  y: number;
+}
+
+const ZONES: Zone[] = [
+  { n: 1, label: "Floor", note: "Silt and debris that settles on the pool bottom", x: 30, y: 82 },
+  { n: 2, label: "Walls", note: "Vertical surfaces a floor-only machine never reaches", x: 12, y: 52 },
+  { n: 3, label: "Waterline", note: "The scum line at the water's edge", x: 22, y: 26 },
+  { n: 4, label: "Surface", note: "Floating leaves, caught before they sink", x: 68, y: 14 },
+];
+---
+
+<figure class="cov">
+  <div class="cov__frame">
+    <EditorialImage
+      src={SRC}
+      alt="Cross-section of a pool showing floor, wall, waterline and surface cleaning zones picked out in light"
+      width={1536}
+      height={1152}
+      ratio="4 / 3"
+      ratioMobile="4 / 3"
+      position="center"
+    />
+    <div class="cov__overlay" aria-hidden="true">
+      {ZONES.map((z) => (
+        <span class="cov__pin" style={`--x:${z.x}%;--y:${z.y}%`}>
+          <span class="cov__dot">{z.n}</span>
+          <span class="cov__leader"></span>
+          <span class="cov__tag">{z.label}</span>
+        </span>
+      ))}
+    </div>
+  </div>
+  <figcaption class="cov__legend">
+    <ol>
+      {ZONES.map((z) => (
+        <li>
+          <span class="cov__key">{z.n}</span>
+          <span><strong>{z.label}</strong> — {z.note}</span>
+        </li>
+      ))}
+    </ol>
+  </figcaption>
+</figure>
+
+<style>
+  .cov {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .cov__frame {
+    position: relative;
+  }
+
+  /* --- Overlay pins: desktop and tablet --- */
+  .cov__overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .cov__pin {
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+    display: flex;
+    align-items: center;
+    gap: 0;
+    transform: translate(-50%, -50%);
+  }
+  .cov__dot {
+    display: grid;
+    place-items: center;
+    width: 22px;
+    height: 22px;
+    flex: 0 0 22px;
+    border-radius: 50%;
+    background: rgba(8, 9, 11, 0.82);
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    color: #f2f4f7;
+    font-size: 11px;
+    font-weight: 800;
+    line-height: 1;
+  }
+  .cov__leader {
+    width: 26px;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.18));
+  }
+  .cov__tag {
+    padding: 3px 9px;
+    border-radius: 999px;
+    background: rgba(8, 9, 11, 0.78);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    color: #f2f4f7;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  /* --- Legend: always present, and the only labelling on small screens --- */
+  .cov__legend ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 8px;
+  }
+  .cov__legend li {
+    display: grid;
+    grid-template-columns: 22px 1fr;
+    gap: 10px;
+    align-items: start;
+    font-size: 13px;
+    line-height: 1.45;
+  }
+  .cov__key {
+    display: grid;
+    place-items: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    font-size: 11px;
+    font-weight: 800;
+    line-height: 1;
+  }
+
+  @media (max-width: 720px) {
+    /* Hairline leaders and 11px pills are unreadable at phone width — the
+       numbered legend below the figure carries the labelling instead. */
+    .cov__overlay {
+      display: none;
+    }
+  }
+</style>

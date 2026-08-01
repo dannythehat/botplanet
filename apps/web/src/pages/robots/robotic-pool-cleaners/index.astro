@@ -17,7 +17,8 @@ import Base from "../../../layouts/Base.astro";
 import ProductImage from "../../../components/ProductImage.astro";
 import PickSpecPanel from "../../../components/PickSpecPanel.astro";
 import { resolveImage } from "../../../lib/media-registry";
-import PoolDiagram from "../../../components/PoolDiagram.astro";
+import EditorialImage from "../../../components/EditorialImage.astro";
+import CoverageClassFigure from "../../../components/CoverageClassFigure.astro";
 import CordedVsCordless from "../../../components/diagrams/CordedVsCordless.astro";
 import PoolSizeShape from "../../../components/diagrams/PoolSizeShape.astro";
 import { getDb, schema } from "../../../lib/db";
@@ -30,7 +31,7 @@ import { longFormReview } from "../../../content/reviews";
 import { usd, titleCase } from "../../../lib/format";
 import { buildOffers, publicationFor } from "../../../lib/offer-truth";
 import { latestAcceptedObservations } from "../../../lib/providers/refresh-store";
-import { faqSchema, itemListSchema } from "../../../lib/seo";
+import { faqSchema, itemListSchema, imageObjectSchema, collectionPageSchema } from "../../../lib/seo";
 
 const db = getDb(Astro.locals);
 const cat = (
@@ -95,12 +96,66 @@ const FAQS = [
   { q: "What size pool do I need to check against?", a: "Every robot carries a rated maximum pool length — exceed it and coverage suffers. BotPlanet stores this per product and BotMatch excludes any robot your stated pool length rules out." },
 ];
 
+/**
+ * Owner-created editorial artwork for this page. Widths and heights are the
+ * real dimensions of the supplied files, so the ImageObject nodes below can
+ * never overstate what actually ships. The BotMatch CTA artwork has not been
+ * supplied; no substitute is generated and no node claims one exists.
+ */
+const HUB_IMAGES = {
+  hero: {
+    path: "/media/editorial/robotic-pool-cleaners/hub-hero.jpg",
+    width: 1536,
+    height: 864,
+    alt: "A luxurious modern pool at golden hour with turquoise water, green landscaping and warm stone decking",
+    name: "Robotic pool cleaning at golden hour",
+    caption: "A luxurious modern pool at golden hour with turquoise water, green landscaping and warm stone decking",
+    description:
+      "Original BotPlanet editorial artwork for the robotic pool cleaner category: a modern pool in golden light, with a restrained coverage pattern visible beneath the surface.",
+  },
+  coverage: {
+    path: "/media/editorial/robotic-pool-cleaners/coverage-classes.jpg",
+    width: 1536,
+    height: 1152,
+    alt: "Cross-section of a pool showing floor, wall, waterline and surface cleaning zones picked out in light",
+    name: "Pool cleaning coverage classes",
+    caption: "Cross-section of a pool showing floor, wall, waterline and surface cleaning zones picked out in light",
+    description:
+      "Original BotPlanet editorial illustration: a pool cross-section distinguishing floor, wall, waterline and surface cleaning coverage. Labels are rendered as page text, not printed on the image.",
+  },
+  poolTypes: {
+    path: "/media/editorial/robotic-pool-cleaners/pool-types.jpg",
+    width: 1536,
+    height: 864,
+    alt: "Sunlit aerial view of a round above-ground pool, a rectangular lap pool and a freeform pool under a tree canopy",
+    name: "Different pool types from above",
+    caption:
+      "Sunlit aerial view of a round above-ground pool, a rectangular lap pool and a freeform pool under a tree canopy",
+    description:
+      "Original BotPlanet editorial artwork showing three different residential pool environments — above-ground, rectangular lap and freeform — in one sunlit aerial scene.",
+  },
+} as const;
+
 const crumbs = breadcrumbsFor(Astro.url.pathname);
+const heroImageNode = imageObjectSchema(HUB_IMAGES.hero);
 const schemaNodes = [
+  /* One canonical page node, pointing at the hero as the page's primary image. */
+  collectionPageSchema({
+    path: `/robots/${LAUNCH_CATEGORY}/`,
+    name: "Robotic Pool Cleaners",
+    description:
+      "BotPlanet's research-led category hub for robotic pool cleaners: coverage classes, corded versus cordless, pool size limits, filtration and the models we cover.",
+    primaryImageId: heroImageNode["@id"],
+  }),
+  heroImageNode,
+  imageObjectSchema(HUB_IMAGES.coverage),
+  imageObjectSchema(HUB_IMAGES.poolTypes),
+  /* Matches the visible, ordered featured grid below — same items, same order. */
   itemListSchema(
     featured.map((f) => ({ name: f.product.name, path: `/robots/${LAUNCH_CATEGORY}/${f.product.slug}/` })),
     "Featured robotic pool cleaners",
   ),
+  /* Every question here is rendered visibly on the page. */
   faqSchema(FAQS),
 ];
 ---
@@ -130,8 +185,19 @@ const schemaNodes = [
         </div>
         <p class="note">Two ways in: browse everything yourself, or answer a few pool-specific questions and let BotMatch pick on suitability — never commission.</p>
       </div>
-      <div class="stage elevated">
-        <ProductImage productId="prod-polaris-freedom" placement="category_page" priority={true} class="hub-hero-img" />
+      <div class="hub-hero">
+        <EditorialImage
+          src={HUB_IMAGES.hero.path}
+          alt={HUB_IMAGES.hero.alt}
+          width={HUB_IMAGES.hero.width}
+          height={HUB_IMAGES.hero.height}
+          ratio="16 / 9"
+          ratioMobile="4 / 5"
+          position="center 60%"
+          positionMobile="60% 60%"
+          priority={true}
+          class="hub-hero__img"
+        />
       </div>
     </div>
   </section>
@@ -213,7 +279,7 @@ const schemaNodes = [
         </p>
       </div>
       <div class="stack">
-        <PoolDiagram />
+        <CoverageClassFigure />
       </div>
     </div>
   </section>
@@ -267,7 +333,19 @@ const schemaNodes = [
           price.
         </p>
       </div>
-      <div class="stack"><PoolSizeShape /></div>
+      <div class="stack">
+        <EditorialImage
+          src={HUB_IMAGES.poolTypes.path}
+          alt={HUB_IMAGES.poolTypes.alt}
+          width={HUB_IMAGES.poolTypes.width}
+          height={HUB_IMAGES.poolTypes.height}
+          ratio="16 / 9"
+          ratioMobile="1 / 1"
+          position="center"
+          positionMobile="center"
+        />
+        <PoolSizeShape />
+      </div>
     </div>
   </section>
 
@@ -391,5 +469,16 @@ const schemaNodes = [
 </Base>
 
 <style>
-  :global(.hub-hero-img) { width: 100%; height: auto; border-radius: 14px; display: block; }
+  /* The hero artwork sits beside the headline rather than beneath it, so the
+     image needs no darkening overlay to keep the H1 legible — it ships at the
+     colour and brightness it was supplied at. */
+  .hub-hero {
+    position: relative;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 24px 60px -30px rgba(0, 0, 0, 0.9);
+  }
+  .hub-hero :global(.hub-hero__img) {
+    border-radius: 14px;
+  }
 </style>

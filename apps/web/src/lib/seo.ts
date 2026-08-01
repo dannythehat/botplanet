@@ -245,6 +245,68 @@ export function faqSchema(qas: QA[]) {
   };
 }
 
+export interface ImageObjectInput {
+  /** Site-relative path, e.g. /media/editorial/.../hub-hero.jpg */
+  path: string;
+  name: string;
+  caption: string;
+  description: string;
+  /** The real pixel dimensions of the file on disk — never the brief's target. */
+  width: number;
+  height: number;
+  encodingFormat?: string;
+}
+
+/**
+ * One node per owner-created editorial image. Every value must be true of the
+ * file that actually ships: the width and height are read from the supplied
+ * asset, not from the commissioning brief, so schema can never claim a
+ * resolution the file does not have.
+ */
+export function imageObjectSchema(img: ImageObjectInput) {
+  const url = absUrl(img.path);
+  return {
+    "@type": "ImageObject",
+    "@id": `${url}#image`,
+    name: img.name,
+    caption: img.caption,
+    description: img.description,
+    contentUrl: url,
+    url,
+    width: img.width,
+    height: img.height,
+    encodingFormat: img.encodingFormat ?? "image/jpeg",
+    creator: { "@id": `${SITE_URL}/#organization` },
+    copyrightHolder: { "@id": `${SITE_URL}/#organization` },
+  };
+}
+
+export interface CollectionPageInput {
+  path: string;
+  name: string;
+  description: string;
+  /** @id values of nodes that belong to this page, e.g. its ImageObjects. */
+  primaryImageId?: string;
+}
+
+/**
+ * The single canonical page node for a category hub. Deliberately minimal: it
+ * identifies the page and points at its primary image, and carries no rating,
+ * review or product claim of its own.
+ */
+export function collectionPageSchema(p: CollectionPageInput) {
+  const url = absUrl(p.path);
+  return {
+    "@type": "CollectionPage",
+    "@id": `${url}#webpage`,
+    url,
+    name: p.name,
+    description: p.description,
+    isPartOf: { "@id": `${SITE_URL}/#website` },
+    ...(p.primaryImageId ? { primaryImageOfPage: { "@id": p.primaryImageId } } : {}),
+  };
+}
+
 /** Wrap builders into one @graph document. Drops null/undefined entries. */
 export function schemaGraph(...nodes: (Record<string, unknown> | null | undefined)[]) {
   return {
