@@ -40,6 +40,8 @@ interface Props {
    * generic, implies nothing about the model beside it.
    */
   compact?: boolean;
+  /** Rotate among the product's real photographs so slots on one page vary. */
+  nth?: number;
   class?: string;
 }
 
@@ -51,10 +53,11 @@ const {
   priority = false,
   variant = 0,
   compact = false,
+  nth = 0,
   class: className = "",
 } = Astro.props;
 
-const resolved = resolveImage(productId, placement, types);
+const resolved = resolveImage(productId, placement, types, undefined, nth);
 const img = compact && resolved?.isPlaceholder ? null : resolved;
 
 // A srcset is only honest when derivatives actually exist. Vector assets need

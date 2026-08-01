@@ -82,6 +82,13 @@ export function resolveImage(
   placement: Placement,
   preferredTypes: AssetType[] = ["product_hero", "product_alternate_view", "branded_placeholder"],
   assets = MEDIA_ASSETS,
+  /**
+   * Rotates among equally-preferred renderable assets so two slots on the same
+   * page can show two different owner photographs of the same product instead
+   * of stamping one hero everywhere. 0 keeps the existing behaviour; the index
+   * wraps, so any value is safe.
+   */
+  nth = 0,
 ): ResolvedImage | null {
   const candidates = assets
     .filter((a) => a.productId === productId)
@@ -94,7 +101,10 @@ export function resolveImage(
       return SOURCE_TIER_RANK[x.tier] - SOURCE_TIER_RANK[y.tier];
     });
 
-  const chosen = candidates[0];
+  // Rotation applies within the pool of REAL imagery only — placeholders are
+  // interchangeable by design and rotating onto one would defeat the point.
+  const real = candidates.filter((a) => a.depictsRealProduct);
+  const chosen = real.length > 0 ? real[nth % real.length] : candidates[0];
   if (!chosen) return null;
 
   const derivatives = DERIVATIVES.filter((d) => d.parentAssetId === chosen.id)

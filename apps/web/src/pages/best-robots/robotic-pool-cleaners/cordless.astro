@@ -11,6 +11,8 @@
  */
 import Base from "../../../layouts/Base.astro";
 import ProductImage from "../../../components/ProductImage.astro";
+import DevImageSlot from "../../../components/DevImageSlot.astro";
+import { resolveImage } from "../../../lib/media-registry";
 import CordedVsCordless from "../../../components/diagrams/CordedVsCordless.astro";
 import { getDb, schema } from "../../../lib/db";
 import { and, eq } from "drizzle-orm";
@@ -92,10 +94,17 @@ const PICKS: Pick[] = [
   },
 ];
 
-const picks = PICKS.map((p) => {
+const hasOwnerImage = (productId: string) => {
+  const r = resolveImage(productId, "category_page");
+  return Boolean(r && !r.isPlaceholder);
+};
+
+const picks = PICKS.map((p, i) => {
   const product = products.find((x) => x.slug === p.slug);
   const editorial = productEditorial(p.slug);
-  return product && editorial ? { ...p, product, editorial, live: offerFor(product.id) } : null;
+  return product && editorial
+    ? { ...p, product, editorial, live: offerFor(product.id), owned: hasOwnerImage(product.id), nth: i + 2 }
+    : null;
 }).filter((x): x is NonNullable<typeof x> => x !== null);
 
 const FAQS = [
@@ -161,14 +170,19 @@ const schemaNodes = [
 
   <!-- ============ The picks ============ -->
   {picks.map((p, i) => (
-    <section class="section" id={p.slug}>
-      <div class="split split--media-lead">
-        <div class="stage">
-          <ProductImage productId={p.product.id} placement="category_page" variant={i} />
+    <section class:list={["section", "pick", i % 2 === 1 ? "section--sunken" : "section--raised", "edge-lit"]} id={p.slug}>
+      <div class:list={["split", i % 2 === 1 ? "split--flip" : "", "split--media-lead"]}>
+        <div class="stage elevated pick__stage">
+          <span class="pick__rank" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
+          {p.owned ? (
+            <ProductImage productId={p.product.id} placement="category_page" nth={p.nth} class="pick__img" />
+          ) : (
+            <DevImageSlot productName={p.product.name} filename={`/media/packs/${p.slug}/hero.jpg`} />
+          )}
         </div>
         <div class="stack">
-          <span class="eyebrow">{p.award}</span>
-          <h2 class="mt-0"><a class="link" href={`/robots/${LAUNCH_CATEGORY}/${p.product.slug}/`}>{p.product.name}</a></h2>
+          <span class="eyebrow rule-accent">{p.award}</span>
+          <h2 class="mt-0 pick__title"><a class="link" href={`/robots/${LAUNCH_CATEGORY}/${p.product.slug}/`}>{p.product.name}</a></h2>
           <div class="cluster cluster--tight">
             <span class="pill pill--strong">{titleCase(p.product.powerType)}</span>
             {(p.product.environments as string[]).map((e) => <span class="pill">{titleCase(e)}</span>)}
@@ -266,3 +280,22 @@ const schemaNodes = [
     <p class="note mt-md">Affiliate disclosure: BotPlanet may earn a commission from retailer links on this page. Commission never selects or orders a pick. Updated 2026-08-01.</p>
   </section>
 </Base>
+
+<style>
+  .pick { border-radius: 16px; margin-block: 28px; padding-block: 40px; }
+  .pick__stage { position: relative; padding: 18px; }
+  .pick__rank {
+    position: absolute;
+    top: -14px;
+    left: -6px;
+    z-index: 2;
+    font-size: 44px;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--accent, #cfd6dd);
+    opacity: 0.9;
+  }
+  .pick__title { font-size: clamp(24px, 3vw, 32px); }
+  .pick :global(.pick__img) { border-radius: 12px; }
+</style>

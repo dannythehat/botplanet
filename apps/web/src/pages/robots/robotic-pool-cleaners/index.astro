@@ -15,6 +15,8 @@
  */
 import Base from "../../../layouts/Base.astro";
 import ProductImage from "../../../components/ProductImage.astro";
+import DevImageSlot from "../../../components/DevImageSlot.astro";
+import { resolveImage } from "../../../lib/media-registry";
 import PoolDiagram from "../../../components/PoolDiagram.astro";
 import CordedVsCordless from "../../../components/diagrams/CordedVsCordless.astro";
 import PoolSizeShape from "../../../components/diagrams/PoolSizeShape.astro";
@@ -68,10 +70,17 @@ const FEATURED: { slug: string; role: string; why: string }[] = [
   { slug: "wybot-c1", role: "The budget cordless", why: "Floors, walls and waterline with app scheduling at a recorded street price far below the premium brands — the value route into cordless." },
   { slug: "betta-se-plus", role: "The surface specialist", why: "A solar skimmer for floating debris — a different product class that pairs with a floor robot rather than replacing one." },
 ];
-const featured = FEATURED.map((f) => {
+const hasOwnerImage = (productId: string) => {
+  const r = resolveImage(productId, "category_page");
+  return Boolean(r && !r.isPlaceholder);
+};
+
+const featured = FEATURED.map((f, i) => {
   const p = products.find((x) => x.slug === f.slug);
   const e = productEditorial(f.slug);
-  return p && e ? { ...f, product: p, editorial: e, live: offerFor(p.id) } : null;
+  return p && e
+    ? { ...f, product: p, editorial: e, live: offerFor(p.id), owned: hasOwnerImage(p.id), nth: i + 1 }
+    : null;
 }).filter((x): x is NonNullable<typeof x> => x !== null);
 
 const reviewGrid = products
@@ -153,7 +162,11 @@ const schemaNodes = [
     <div class="grid grid--products">
       {featured.map((f) => (
         <a class="card card--interactive stack stack--sm" href={`/robots/${LAUNCH_CATEGORY}/${f.product.slug}/`}>
-          <ProductImage productId={f.product.id} placement="listing_card" />
+          {f.owned ? (
+            <ProductImage productId={f.product.id} placement="listing_card" nth={f.nth} />
+          ) : (
+            <DevImageSlot productName={f.product.name} filename={`/media/packs/${f.slug}/hero.jpg`} />
+          )}
           <span class="eyebrow">{f.role}</span>
           <h3 class="mt-0">{f.product.name}</h3>
           <p class="muted" style="flex:1;">{f.why}</p>

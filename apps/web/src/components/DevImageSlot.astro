@@ -1,0 +1,53 @@
+---
+/**
+ * A clearly labelled development slot for a page position whose image does not
+ * exist yet. Used ONLY while waiting on an owner-created asset that has a
+ * written brief in Notion — never as disguised finished design, and never in
+ * place of an owner image that already exists (the registry is checked first).
+ */
+interface Props {
+  productName: string;
+  /** The exact filename the Notion brief asks Danny to supply. */
+  filename: string;
+  class?: string;
+}
+const { productName, filename, class: className = "" } = Astro.props;
+---
+
+<div class:list={["dev-slot", className]} role="img" aria-label={`Image pending for ${productName}`}>
+  <span class="dev-slot__tag">IMAGE REQUIRED — SEE NOTION BRIEF</span>
+  <span class="dev-slot__product">{productName}</span>
+  <span class="dev-slot__file">{filename}</span>
+</div>
+
+<style>
+  .dev-slot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    border-radius: 12px;
+    border: 2px dashed var(--warn, #d9a441);
+    background: repeating-linear-gradient(45deg, transparent, transparent 14px, rgba(217, 164, 65, 0.06) 14px, rgba(217, 164, 65, 0.06) 28px);
+    padding: 16px;
+    text-align: center;
+  }
+  .dev-slot__tag {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: var(--warn, #d9a441);
+  }
+  .dev-slot__product {
+    font-weight: 700;
+  }
+  .dev-slot__file {
+    font-size: 11px;
+    font-family: ui-monospace, monospace;
+    color: var(--text-2, #9aa);
+    word-break: break-all;
+  }
+</style>
