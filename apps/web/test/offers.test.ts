@@ -800,18 +800,22 @@ describe("marketplace attributes never become evidence", () => {
   });
 });
 
-describe("no unverified affiliate tag reaches a customer", () => {
-  it("withholds the tag until the account is evidenced", () => {
-    expect(AMAZON_ASSOCIATE_TAG).toBeNull();
-    expect(AMAZON_ASSOCIATE_TAG_STATUS).toContain("unverified");
+describe("the affiliate tag flows only through the central builder", () => {
+  it("carries the owner-confirmed tag in the single authoritative constant", () => {
+    expect(AMAZON_ASSOCIATE_TAG).toBe("botplanet-20");
+    expect(AMAZON_ASSOCIATE_TAG_STATUS).toContain("owner-confirmed and active");
   });
 
-  it("builds a clean outbound URL", () => {
-    expect(amazonDestination("https://www.amazon.com/dp/B0BX9DJS7R")).toBe("https://www.amazon.com/dp/B0BX9DJS7R");
-    expect(amazonDestination("https://www.amazon.com/s?k=x")).not.toContain("tag=");
+  it("tags outbound URLs with ? or & as the URL requires, exactly once", () => {
+    expect(amazonDestination("https://www.amazon.com/dp/B0BX9DJS7R")).toBe(
+      "https://www.amazon.com/dp/B0BX9DJS7R?tag=botplanet-20",
+    );
+    expect(amazonDestination("https://www.amazon.com/s?k=x")).toBe(
+      "https://www.amazon.com/s?k=x&tag=botplanet-20",
+    );
   });
 
-  it("leaves no tag literal in the redirect route", () => {
+  it("leaves no tag literal in the redirect route — tagging stays central", () => {
     const route = readFileSync("apps/web/src/pages/go/[key].ts", "utf8");
     expect(route).not.toContain("botplanet-20");
     expect(route).toContain("amazonDestination");
