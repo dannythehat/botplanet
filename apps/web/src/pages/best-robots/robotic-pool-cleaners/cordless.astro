@@ -11,7 +11,7 @@
  */
 import Base from "../../../layouts/Base.astro";
 import ProductImage from "../../../components/ProductImage.astro";
-import DevImageSlot from "../../../components/DevImageSlot.astro";
+import PickSpecPanel from "../../../components/PickSpecPanel.astro";
 import { resolveImage } from "../../../lib/media-registry";
 import CordedVsCordless from "../../../components/diagrams/CordedVsCordless.astro";
 import { getDb, schema } from "../../../lib/db";
@@ -177,7 +177,14 @@ const schemaNodes = [
           {p.owned ? (
             <ProductImage productId={p.product.id} placement="category_page" nth={p.nth} class="pick__img" />
           ) : (
-            <DevImageSlot productName={p.product.name} filename={`/media/packs/${p.slug}/hero.jpg`} />
+            <PickSpecPanel
+              name={p.product.name}
+              powerType={p.product.powerType}
+              cleans={p.product.cleans as string[]}
+              poolFit={p.editorial.specs.poolSizeSuitability}
+              runtimeMins={p.editorial.specs.runtimeMins}
+              warranty={p.editorial.specs.warranty}
+            />
           )}
         </div>
         <div class="stack">

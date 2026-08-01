@@ -10,7 +10,7 @@
  */
 import Base from "../../../layouts/Base.astro";
 import ProductImage from "../../../components/ProductImage.astro";
-import DevImageSlot from "../../../components/DevImageSlot.astro";
+import PickSpecPanel from "../../../components/PickSpecPanel.astro";
 import { resolveImage } from "../../../lib/media-registry";
 import { getDb, schema } from "../../../lib/db";
 import { and, eq } from "drizzle-orm";
@@ -114,9 +114,9 @@ const PICKS: Pick[] = [
 /**
  * Owner imagery first, always: a pick renders Danny's photographs when the
  * registry holds them, rotating through the pack so repeat appearances show
- * different shots. A product with no owner image gets a clearly labelled
- * development slot pointing at its Notion brief — never a dark placeholder
- * disguised as design.
+ * different shots. Product imagery for unapproved affiliate programmes is
+ * deferred — those picks render a finished specification panel instead, never
+ * a placeholder or a public development slot.
  */
 const hasOwnerImage = (productId: string) => {
   const r = resolveImage(productId, "category_page");
@@ -203,7 +203,14 @@ const schemaNodes = [
           {p.owned ? (
             <ProductImage productId={p.product.id} placement="category_page" nth={p.nth} class="pick__img" />
           ) : (
-            <DevImageSlot productName={p.product.name} filename={`/media/packs/${p.slug}/hero.jpg`} />
+            <PickSpecPanel
+              name={p.product.name}
+              powerType={p.product.powerType}
+              cleans={p.product.cleans as string[]}
+              poolFit={p.editorial.specs.poolSizeSuitability}
+              runtimeMins={p.editorial.specs.runtimeMins}
+              warranty={p.editorial.specs.warranty}
+            />
           )}
         </div>
         <div class="stack">

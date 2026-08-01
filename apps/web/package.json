@@ -11,6 +11,7 @@
     "cf-typegen": "wrangler types"
   },
   "dependencies": {
+    "@astrojs/check": "^0.9.10",
     "@astrojs/cloudflare": "^12.5.0",
     "@astrojs/react": "^4.2.0",
     "@botplanet/db": "*",
@@ -19,7 +20,8 @@
     "astro": "^5.6.0",
     "drizzle-orm": "^0.38.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "typescript": "^6.0.3"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20250405.0",

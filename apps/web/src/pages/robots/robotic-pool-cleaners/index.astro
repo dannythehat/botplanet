@@ -15,7 +15,7 @@
  */
 import Base from "../../../layouts/Base.astro";
 import ProductImage from "../../../components/ProductImage.astro";
-import DevImageSlot from "../../../components/DevImageSlot.astro";
+import PickSpecPanel from "../../../components/PickSpecPanel.astro";
 import { resolveImage } from "../../../lib/media-registry";
 import PoolDiagram from "../../../components/PoolDiagram.astro";
 import CordedVsCordless from "../../../components/diagrams/CordedVsCordless.astro";
@@ -165,7 +165,14 @@ const schemaNodes = [
           {f.owned ? (
             <ProductImage productId={f.product.id} placement="listing_card" nth={f.nth} />
           ) : (
-            <DevImageSlot productName={f.product.name} filename={`/media/packs/${f.slug}/hero.jpg`} />
+            <PickSpecPanel
+              name={f.product.name}
+              powerType={f.product.powerType}
+              cleans={f.product.cleans as string[]}
+              poolFit={f.editorial.specs.poolSizeSuitability}
+              runtimeMins={f.editorial.specs.runtimeMins}
+              warranty={f.editorial.specs.warranty}
+            />
           )}
           <span class="eyebrow">{f.role}</span>
           <h3 class="mt-0">{f.product.name}</h3>

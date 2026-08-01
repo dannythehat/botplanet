@@ -1,0 +1,103 @@
+---
+/**
+ * A polished text-and-specification panel for a pick whose product imagery is
+ * deferred behind affiliate approval. Renders the product's recorded fields as
+ * an intentional visual element — the page must read as finished, not as a
+ * layout waiting for a photo.
+ */
+import { titleCase } from "../lib/format";
+
+interface Props {
+  name: string;
+  powerType: string;
+  cleans: string[];
+  poolFit: string;
+  runtimeMins: number | null;
+  warranty: string;
+  class?: string;
+}
+const { name, powerType, cleans, poolFit, runtimeMins, warranty, class: className = "" } = Astro.props;
+
+const rows: Array<{ label: string; value: string }> = [
+  { label: "Coverage", value: cleans.map(titleCase).join(" · ") },
+  {
+    label: "Power",
+    value: runtimeMins !== null ? `${titleCase(powerType)} · ~${runtimeMins} min runtime` : titleCase(powerType),
+  },
+  { label: "Pool fit", value: poolFit },
+  { label: "Warranty", value: warranty },
+];
+---
+
+<div class:list={["spec-panel", className]}>
+  <span class="spec-panel__eyebrow">Recorded specification</span>
+  <span class="spec-panel__name">{name}</span>
+  <dl class="spec-panel__rows">
+    {rows.map((r) => (
+      <div class="spec-panel__row">
+        <dt>{r.label}</dt>
+        <dd>{r.value}</dd>
+      </div>
+    ))}
+  </dl>
+</div>
+
+<style>
+  .spec-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    justify-content: center;
+    border-radius: 12px;
+    padding: clamp(18px, 4vw, 32px);
+    background:
+      linear-gradient(160deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0) 45%),
+      linear-gradient(320deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0) 55%);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+  }
+  .spec-panel__eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-2, #9aa);
+  }
+  .spec-panel__name {
+    font-size: clamp(18px, 2.4vw, 24px);
+    font-weight: 800;
+    letter-spacing: -0.01em;
+  }
+  .spec-panel__rows {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 0;
+  }
+  .spec-panel__row {
+    display: grid;
+    grid-template-columns: 92px 1fr;
+    gap: 12px;
+    align-items: baseline;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .spec-panel__row dt {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-2, #9aa);
+  }
+  .spec-panel__row dd {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.45;
+  }
+  @media (max-width: 480px) {
+    .spec-panel {
+      aspect-ratio: auto;
+    }
+  }
+</style>
