@@ -1,0 +1,35 @@
+name: SEO Research (temporary)
+
+# TEMPORARY, manually triggered research batch for the 13 approved
+# robotic-pool-cleaner pages. Runs ONLY against research/pool-seo-page-map.
+# Credentials come exclusively from repository secrets and are never printed;
+# the script enforces the $2.00 total spend ceiling internally and the
+# sanitised results are uploaded as an artifact — nothing is committed.
+# Delete this workflow after the research phase is approved.
+
+on:
+  workflow_dispatch:
+
+jobs:
+  research:
+    if: github.ref == 'refs/heads/research/pool-seo-page-map'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Run capped DataForSEO batch
+        run: node scripts/seo-research.mjs
+        env:
+          DATAFORSEO_LOGIN: ${{ secrets.DATAFORSEO_LOGIN }}
+          DATAFORSEO_PASSWORD: ${{ secrets.DATAFORSEO_PASSWORD }}
+
+      - name: Upload sanitised results
+        uses: actions/upload-artifact@v4
+        with:
+          name: seo-research-results
+          path: research-output/
+          retention-days: 14
