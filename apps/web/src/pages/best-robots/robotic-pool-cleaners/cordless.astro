@@ -1,0 +1,268 @@
+---
+/**
+ * Best Cordless Robotic Pool Cleaners (approved page build, Batch 1).
+ *
+ * The one segment page the SERP data justified: 22,200/mo at KD 0 with a
+ * distinct best-of SERP (approved map, run 30691679570). Owns all
+ * cordless-qualified selection intent; the corded-vs-cordless question is
+ * answered here and on the hub by cannibalisation ruling. Same honesty rules
+ * as every BotPlanet page: recorded facts, stated reasoning, no hands-on
+ * claims, no invented numbers, gated dated prices.
+ */
+import Base from "../../../layouts/Base.astro";
+import ProductImage from "../../../components/ProductImage.astro";
+import CordedVsCordless from "../../../components/diagrams/CordedVsCordless.astro";
+import { getDb, schema } from "../../../lib/db";
+import { and, eq } from "drizzle-orm";
+import { breadcrumbsFor } from "../../../lib/routing";
+import { LAUNCH_CATEGORY, categoryRoutes } from "../../../content/routes";
+import { productEditorial, catalogueStatusOf } from "../../../content/products";
+import { usd, titleCase } from "../../../lib/format";
+import { buildOffers, publicationFor } from "../../../lib/offer-truth";
+import { latestAcceptedObservations } from "../../../lib/providers/refresh-store";
+import { faqSchema, itemListSchema } from "../../../lib/seo";
+
+const db = getDb(Astro.locals);
+const cat = (
+  await db.select().from(schema.categories).where(eq(schema.categories.slug, LAUNCH_CATEGORY)).limit(1)
+)[0];
+if (!cat) return new Response("Category not found", { status: 404 });
+const routes = categoryRoutes(LAUNCH_CATEGORY);
+
+const products = (
+  await db
+    .select()
+    .from(schema.products)
+    .where(and(eq(schema.products.categoryId, cat.id), eq(schema.products.status, "published")))
+).filter((p) => catalogueStatusOf(p.id) === "active");
+
+let live: Awaited<ReturnType<typeof latestAcceptedObservations>> = [];
+try {
+  live = await latestAcceptedObservations(Astro.locals.runtime.env.DB);
+} catch (err) {
+  console.error("[cordless] D1 refresh read unavailable; engine falls back to committed snapshot", err);
+}
+const engine = buildOffers(new Date(), { live })
+  .map((o) => ({ offer: o, pub: publicationFor(o) }))
+  .filter((x) => x.pub.showable);
+const offerFor = (productId: string) => engine.find((x) => x.offer.productId === productId) ?? null;
+
+interface Pick {
+  award: string;
+  slug: string;
+  why: string;
+  whoFor: string;
+  limitation: string;
+}
+const PICKS: Pick[] = [
+  {
+    award: "Best cordless overall",
+    slug: "polaris-freedom",
+    why: "The strongest recorded combination of range and pedigree in the cable-free field: manufacturer material rates it for in-ground pools to 50 ft, cleaning about 2.5 hours per ~4-hour charge, from a brand pool owners have trusted for decades. Cordless is where newer names gamble; the FREEDOM is the pick that doesn't ask you to.",
+    whoFor: "In-ground pool owners — including large pools — who want cable-free cleaning without a start-up bet.",
+    limitation: "A single battery cycle bounds each session, and like all lithium machines its runtime will shrink with age.",
+  },
+  {
+    award: "Best premium cordless",
+    slug: "beatbot-aquasense-2-ultra",
+    why: "The recorded 5-in-1 coverage — floor, walls, waterline, water surface and clarification — is the widest of any machine we cover, cordless or not. If the budget reaches flagship territory, this is what flagship buys.",
+    whoFor: "Owners who want one cable-free machine to replace both a cleaner and a skimmer.",
+    limitation: "Flagship price, and a young brand whose long-term reliability record is still being written.",
+  },
+  {
+    award: "Best budget cordless",
+    slug: "wybot-c1",
+    why: "Floor, wall and waterline coverage with app scheduling, cordless, at a recorded street price around a third of the flagships. The value equation of the whole cordless field in one machine.",
+    whoFor: "Small-to-mid pools (in-ground or above-ground) where price beats pedigree.",
+    limitation: "Newer brand, less proven durability, and filtration that trails the premium machines on the finest debris.",
+  },
+  {
+    award: "Best cordless for above-ground pools",
+    slug: "aiper-seagull-se",
+    why: "Above-ground pools need an above-ground rating, and this is the recorded budget cordless pick for that segment — light, simple and priced for the pools it serves.",
+    whoFor: "Above-ground owners who want to stop manual vacuuming for the least money.",
+    limitation: "Floor-focused cleaning with a modest runtime — it is the right size of tool for its segment, not a scaled-down flagship.",
+  },
+  {
+    award: "The cordless outlier: solar surface skimming",
+    slug: "betta-se-plus",
+    why: "Technically the most cordless machine we cover — it recharges itself from the sun and can stay out indefinitely. But it is a surface skimmer, cleaning only floating debris, so it joins this list as a companion, never as your only cleaner.",
+    whoFor: "Tree-lined pools, paired with any floor robot on this page.",
+    limitation: "Nothing below the waterline gets touched. It solves exactly one problem — completely.",
+  },
+];
+
+const picks = PICKS.map((p) => {
+  const product = products.find((x) => x.slug === p.slug);
+  const editorial = productEditorial(p.slug);
+  return product && editorial ? { ...p, product, editorial, live: offerFor(product.id) } : null;
+}).filter((x): x is NonNullable<typeof x> => x !== null);
+
+const FAQS = [
+  { q: "Are cordless pool robots worth it?", a: "If cable handling is what keeps you from running your cleaner, yes — a robot that runs beats a better robot that stays in the garage. The honest cost is that battery runtime is a consumable: expect less capacity in year four than year one, and factor charging into your routine." },
+  { q: "Are cordless robotic pool cleaners any good compared to corded?", a: "The best cordless machines now finish real pools on one charge — the Polaris FREEDOM's recorded rating covers in-ground pools to 50 ft. Corded still wins on unlimited runtime and zero battery ageing; cordless wins on convenience and placement freedom. The decision section below walks through it." },
+  { q: "How long do cordless pool cleaner batteries last per charge?", a: "Across our researched models, roughly 90 to 180 minutes of cleaning per charge, with a few hours of recharging between cycles. Each review records its model's stated figures." },
+  { q: "What is the best cordless robotic pool cleaner for the money?", a: "The WYBOT C1 — full coverage and app control at a recorded street price far under the flagships, traded against a shorter brand track record." },
+];
+
+const crumbs = breadcrumbsFor(Astro.url.pathname);
+const schemaNodes = [
+  itemListSchema(picks.map((p) => ({ name: p.product.name, path: `/robots/${LAUNCH_CATEGORY}/${p.product.slug}/` })), "Best cordless robotic pool cleaners"),
+  faqSchema(FAQS),
+];
+---
+
+<Base
+  title="Best Cordless Robotic Pool Cleaners 2026 | BotPlanet"
+  description="The best cordless robotic pool cleaners for 2026 — battery life, coverage, charging and real limitations compared, with honest picks for every pool and budget."
+  breadcrumbs={crumbs}
+  schema={schemaNodes}
+>
+  <header class="section section--flush-top">
+    <span class="eyebrow">Buying guide · cordless · updated 2026-08-01 · research-led</span>
+    <h1 class="mt-0">The Best Cordless Robotic Pool Cleaners</h1>
+    <p class="lede" style="max-width:70ch;">
+      Cutting the cable is the most popular upgrade in pool robotics — and the most misunderstood purchase. This guide
+      compares every cable-free machine in our researched catalogue on the things that decide cordless ownership:
+      battery life per charge, what actually gets cleaned, how charging fits your routine, and the ageing question the
+      spec sheets skip. Picks are reasoned from recorded facts; we have not hands-on tested these units and say so on
+      every page.
+    </p>
+  </header>
+
+  <!-- ============ Verdict list ============ -->
+  <section class="section section--tight">
+    <div class="card card--inset">
+      <h2 class="mt-0" style="font-size:18px;">The short version</h2>
+      <ul class="feature-rows">
+        {picks.map((p) => (
+          <li class="feature-row">
+            <span class="feature-row__lead">{p.award}:</span>
+            <span class="feature-row__body"><a class="link" href={`#${p.slug}`}>{p.product.name}</a></span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ Battery literacy ============ -->
+  <section class="section section--tight container--prose prose">
+    <h2>Battery life, explained before the picks</h2>
+    <p>
+      Three numbers govern every cordless cleaner, and only two are printed on the box. <strong>Runtime per charge</strong>
+      (90–180 minutes across our researched models) sets how much pool one session can cover.
+      <strong>Charge time</strong> (typically 2–4 hours) sets how soon the next session can start — relevant the day
+      guests are coming and the first cycle wasn't enough. The third number is the one to shop with:
+      <strong>capacity retention</strong>. Lithium cells fade with cycles and heat, and a pool deck in July is a hot
+      place to be a battery. A machine whose runtime barely covers your pool when new will not cover it in year three.
+      Our rule from the recorded specs: <em>buy runtime headroom of at least a third over what your pool needs today.</em>
+    </p>
+  </section>
+
+  <!-- ============ The picks ============ -->
+  {picks.map((p, i) => (
+    <section class="section" id={p.slug}>
+      <div class="split split--media-lead">
+        <div class="stage">
+          <ProductImage productId={p.product.id} placement="category_page" variant={i} />
+        </div>
+        <div class="stack">
+          <span class="eyebrow">{p.award}</span>
+          <h2 class="mt-0"><a class="link" href={`/robots/${LAUNCH_CATEGORY}/${p.product.slug}/`}>{p.product.name}</a></h2>
+          <div class="cluster cluster--tight">
+            <span class="pill pill--strong">{titleCase(p.product.powerType)}</span>
+            {(p.product.environments as string[]).map((e) => <span class="pill">{titleCase(e)}</span>)}
+            {p.editorial.specs.runtimeMins && <span class="pill">{p.editorial.specs.runtimeMins} min runtime</span>}
+          </div>
+          <p><strong>Why it wins:</strong> {p.why}</p>
+          <p><strong>Who it suits:</strong> {p.whoFor}</p>
+          <p class="muted"><strong>The honest limitation:</strong> {p.limitation}</p>
+          <div class="cluster">
+            <a class="btn" href={`/robots/${LAUNCH_CATEGORY}/${p.product.slug}/`}>Read the full record</a>
+            {p.live && p.live.pub.linkable && p.live.offer.redirectKey && (
+              <a class="btn btn--accent" href={`/go/${p.live.offer.redirectKey}`} rel="sponsored nofollow">
+                {p.live.pub.priceShowable && p.live.offer.basePriceMinor !== null
+                  ? `View offer — ${usd(p.live.offer.basePriceMinor)}`
+                  : "Check current price"}
+              </a>
+            )}
+          </div>
+          {p.live && p.live.pub.priceShowable && p.live.offer.sourceCheckedDate && (
+            <p class="note">Price checked {p.live.offer.sourceCheckedDate}. Affiliate disclosure: this link may earn BotPlanet a commission — it did not choose this pick.</p>
+          )}
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <!-- ============ Corded-vs-cordless decision (merged intent) ============ -->
+  <section class="section section--sunken" id="corded-or-cordless">
+    <div class="split split--media-lead">
+      <div class="stack"><CordedVsCordless /></div>
+      <div class="prose">
+        <h2>Should you actually go cordless? The decision, honestly</h2>
+        <p>
+          Stay corded if: your pool is at the large end and you run long or back-to-back cycles; you schedule cleaning
+          and forget it (a cable never has a flat battery); or you plan to keep the machine many years, where zero
+          battery ageing is the quiet economic win. The Dolphin Nautilus CC Plus in our
+          <a class="link" href={routes.best}>main best-of guide</a> is that argument in machine form.
+        </p>
+        <p>
+          Go cordless if: cable storage and handling is the reason cleaning doesn't happen; your outlet placement makes
+          a cable awkward or unsafe; or you value drop-anywhere flexibility over maximum-length cycles. Within
+          cordless, pick by the battery-literacy rule above — runtime headroom over your pool's real need — and by the
+          coverage class your pool requires, exactly as with any robot.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Comparison table ============ -->
+  <section class="section">
+    <h2>The cordless field, side by side</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Model</th><th>Runtime</th><th>Charge</th><th>Coverage</th><th>Pool fit</th><th>Price</th></tr></thead>
+        <tbody>
+          {picks.map((p) => (
+            <tr>
+              <td><a class="link" href={`/robots/${LAUNCH_CATEGORY}/${p.product.slug}/`}>{p.product.name}</a></td>
+              <td>{p.editorial.specs.runtimeMins ? `${p.editorial.specs.runtimeMins} min` : "—"}</td>
+              <td>{p.editorial.specs.chargeTimeHrs ? `${p.editorial.specs.chargeTimeHrs} h` : "—"}</td>
+              <td class="muted">{(p.product.cleans as string[]).map(titleCase).join(", ")}</td>
+              <td class="muted">{p.editorial.specs.poolSizeSuitability}</td>
+              <td class="price">
+                {p.live && p.live.pub.priceShowable && p.live.offer.basePriceMinor !== null
+                  ? usd(p.live.offer.basePriceMinor)
+                  : "Check current price"}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ FAQs ============ -->
+  <section class="section section--tight container--prose">
+    <h2>Cordless FAQs</h2>
+    <div class="stack">
+      {FAQS.map((f) => (
+        <div class="card card--pad-sm">
+          <h3 class="mt-0" style="font-size:16px;">{f.q}</h3>
+          <p class="mt-sm" style="margin-bottom:0;">{f.a}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ============ Onward ============ -->
+  <section class="section section--tight">
+    <div class="cluster">
+      <a class="btn" href={routes.best}>All best-of picks</a>
+      <a class="btn" href={routes.hub}>Category hub</a>
+      <a class="btn btn--accent" href={routes.botmatch}>Let BotMatch choose for you</a>
+    </div>
+    <p class="note mt-md">Affiliate disclosure: BotPlanet may earn a commission from retailer links on this page. Commission never selects or orders a pick. Updated 2026-08-01.</p>
+  </section>
+</Base>

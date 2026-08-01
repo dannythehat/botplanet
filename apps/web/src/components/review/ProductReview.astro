@@ -1,0 +1,255 @@
+---
+/**
+ * The reusable long-form product review template (approved page build, Batch 1).
+ *
+ * Assembles the three content layers — researched editorial record, live D1
+ * offers, long-form narrative — into the approved review structure: hero,
+ * buyer headline, verdict, best-for, strengths/limitations, retailer CTA with
+ * adjacent disclosure, narrative sections, who should buy/avoid, alternatives,
+ * specifications, FAQs, sources with the honest testing status, and the final
+ * verdict CTA. Prices render only through the offer engine's gates, so a stale
+ * figure is suppressed rather than shown.
+ */
+import ProductImage from "../ProductImage.astro";
+import { usd, titleCase } from "../../lib/format";
+import { retailer } from "../../content/commerce/registry";
+import type { ProductEditorial } from "../../content/products";
+import type { LongFormReview } from "../../content/reviews";
+
+interface EngineOffer {
+  offer: any;
+  pub: any;
+}
+
+interface Props {
+  product: { id: string; name: string; slug: string; productClass: string; powerType: string; environments: string[]; cleans: string[] };
+  brandName: string | undefined;
+  editorial: ProductEditorial;
+  review: LongFormReview;
+  engineOffers: EngineOffer[];
+  category: string;
+}
+
+const { product, brandName, editorial, review, engineOffers, category } = Astro.props;
+const primaryOffer = engineOffers[0] ?? null;
+
+const specRows: { label: string; value: string }[] = [
+  { label: "Pool suitability", value: editorial.specs.poolSizeSuitability },
+  ...(editorial.specs.cableLengthFt ? [{ label: "Cable length", value: `${editorial.specs.cableLengthFt} ft` }] : []),
+  ...(editorial.specs.runtimeMins ? [{ label: "Runtime per cycle", value: `${editorial.specs.runtimeMins} min` }] : []),
+  ...(editorial.specs.chargeTimeHrs ? [{ label: "Charge time", value: `${editorial.specs.chargeTimeHrs} h` }] : []),
+  { label: "Filtration", value: editorial.specs.filtration },
+  { label: "Navigation", value: editorial.specs.navigation },
+  ...(editorial.specs.weightLbs ? [{ label: "Weight", value: `${editorial.specs.weightLbs} lb` }] : []),
+  { label: "Warranty", value: editorial.specs.warranty },
+  { label: "App / control", value: editorial.specs.appSupport },
+];
+---
+
+<article class="review">
+  <!-- ============ Hero ============ -->
+  <header class="section section--flush-top">
+    <div class="grid grid--lead">
+      <div class="stack">
+        <span class="eyebrow">{brandName} · {titleCase(product.productClass)} · Research-led review</span>
+        <h1 class="mt-0">{product.name} Review</h1>
+        <p class="lede">{review.buyerHeadline}.</p>
+        <div class="cluster cluster--tight">
+          <span class="pill pill--strong">{titleCase(product.powerType)}</span>
+          {product.environments.map((e) => <span class="pill">{titleCase(e)}</span>)}
+          {product.cleans.map((c) => <span class="pill">{titleCase(c)}</span>)}
+        </div>
+        {primaryOffer && primaryOffer.pub.linkable && primaryOffer.offer.redirectKey && (
+          <div class="stack stack--sm mt-md">
+            <div class="cluster">
+              <a class="btn btn--accent btn--lg" href={`/go/${primaryOffer.offer.redirectKey}`} rel="sponsored nofollow">
+                {primaryOffer.pub.priceShowable && primaryOffer.offer.basePriceMinor !== null
+                  ? `View at ${retailer(primaryOffer.offer.retailerId)?.displayName ?? "retailer"} — ${usd(primaryOffer.offer.basePriceMinor)}`
+                  : `Check current price at ${retailer(primaryOffer.offer.retailerId)?.displayName ?? "retailer"}`}
+              </a>
+            </div>
+            <p class="note">
+              {primaryOffer.pub.priceShowable && primaryOffer.offer.sourceCheckedDate
+                ? `Price checked ${primaryOffer.offer.sourceCheckedDate}. `
+                : ""}Affiliate disclosure: BotPlanet may earn a commission from this link. It never affects which product we recommend.
+            </p>
+          </div>
+        )}
+      </div>
+      <div class="stage elevated">
+        <ProductImage productId={product.id} placement="product_page" priority={true} class="review__hero-img" />
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ Verdict strip ============ -->
+  <section class="section section--tight">
+    <div class="verdict card card--inset edge-lit">
+      <p class="verdict__label">Our verdict</p>
+      <p class="verdict__body">{editorial.verdict}</p>
+      <div class="grid-tech grid-tech--fine mt-md">
+        {review.scorecard.map((s) => (
+          <div>
+            <div class="muted" style="font-size:12px; text-transform:uppercase; letter-spacing:.06em;">{s.label}</div>
+            <div>{s.value}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Strengths / limitations ============ -->
+  <section class="section section--tight">
+    <div class="split">
+      <div class="card">
+        <h2 class="mt-0">Key strengths</h2>
+        <ul class="feature-rows">
+          {editorial.pros.map((p) => <li class="feature-row"><span class="feature-row__tick" aria-hidden="true">✓</span><span class="feature-row__body">{p}</span></li>)}
+        </ul>
+      </div>
+      <div class="card card--flat">
+        <h2 class="mt-0">Honest limitations</h2>
+        <ul class="feature-rows">
+          {editorial.limitations.map((l) => <li class="feature-row"><span class="feature-row__index" aria-hidden="true">—</span><span class="feature-row__body">{l}</span></li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Narrative sections ============ -->
+  <div class="container--prose">
+    {review.sections.map((s) => (
+      <section class="section section--tight prose">
+        <h2>{s.heading}</h2>
+        {s.paragraphs.map((p) => <p>{p}</p>)}
+      </section>
+    ))}
+
+    <!-- ============ Who should buy / avoid ============ -->
+    <section class="section section--tight">
+      <div class="split">
+        <div class="callout callout--evidence">
+          <p class="callout__title">Who should buy it</p>
+          <p>{editorial.whoShouldBuy}</p>
+        </div>
+        <div class="callout callout--caution">
+          <p class="callout__title">Who should avoid it</p>
+          <p>{editorial.whoShouldAvoid}</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============ Alternatives ============ -->
+  <section class="section section--tight">
+    <h2>Alternatives worth considering</h2>
+    <div class="grid grid--products">
+      {review.alternatives.map((a) => (
+        <a class="card card--interactive" href={`/robots/${category}/${a.slug}/`}>
+          <ProductImage productId={`prod-${a.slug}`} placement="listing_card" compact={true} />
+          <h3 class="mt-sm">{a.name}</h3>
+          <p class="muted">{a.when}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- ============ Offers ============ -->
+  <section class="section section--tight" id="offers">
+    <h2>Where to buy</h2>
+    {engineOffers.length === 0 ? (
+      <p class="note">
+        No verified offer right now. We only show a price once someone has checked the seller's page on a recorded
+        date — we would rather show nothing than a figure that has quietly gone out of date.
+      </p>
+    ) : (
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Retailer</th><th>Price</th><th>Availability</th><th>Checked</th><th></th></tr></thead>
+          <tbody>
+            {engineOffers.map(({ offer, pub }) => (
+              <tr>
+                <td>
+                  {retailer(offer.retailerId)?.displayName ?? offer.retailerId}
+                  {offer.destination.sellerIdentity && <div class="muted" style="font-size:12px">sold by {offer.destination.sellerIdentity}</div>}
+                </td>
+                <td class="price">{pub.priceShowable && offer.basePriceMinor !== null ? usd(offer.basePriceMinor) : <span class="muted">Check current price</span>}</td>
+                <td class="muted">{pub.stockShowable ? titleCase(offer.stock.state.replace(/_/g, " ")) : "—"}</td>
+                <td class="muted" style="font-size:12px">{offer.sourceCheckedDate ?? "—"}</td>
+                <td>{pub.linkable && offer.redirectKey ? <a class="btn btn--sm" href={`/go/${offer.redirectKey}`} rel="sponsored nofollow">View offer</a> : null}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    )}
+    <p class="note">Affiliate disclosure: BotPlanet may earn a commission from retailer links. Offer order favours suitability and freshness, never commission.</p>
+  </section>
+
+  <!-- ============ Specifications ============ -->
+  <section class="section section--tight">
+    <h2>Specifications</h2>
+    <div class="table-wrap">
+      <table>
+        <tbody>
+          {specRows.map((r) => <tr><th style="text-align:left; width:38%;">{r.label}</th><td>{r.value}</td></tr>)}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ FAQs ============ -->
+  <section class="section section--tight" id="faqs">
+    <h2>Frequently asked questions</h2>
+    <div class="stack">
+      {editorial.faqs.map((f) => (
+        <div class="card card--pad-sm">
+          <h3 class="mt-0" style="font-size:16px;">{f.q}</h3>
+          <p class="mt-sm" style="margin-bottom:0;">{f.a}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ============ Sources & testing status ============ -->
+  <section class="section section--tight">
+    <h2>Sources and research status</h2>
+    <p class="note">
+      Research-led review, last researched {editorial.researchedDate}, review updated {review.updated}. BotPlanet has
+      <strong> not physically tested this unit</strong>; every fact above is compiled from the manufacturer and
+      retailer sources below and labelled accordingly. When we get review units, hands-on findings will be marked
+      separately.
+    </p>
+    <ul>
+      {editorial.sources.map((s) => <li><a class="link" href={s.url} rel="nofollow noopener">{s.label}</a></li>)}
+    </ul>
+  </section>
+
+  <!-- ============ Final verdict + CTA ============ -->
+  <section class="section section--raised lit">
+    <div class="section-head section-head--center">
+      <h2>Final verdict</h2>
+      <p class="lede" style="max-width:56ch; margin-inline:auto;">{editorial.oneLiner}</p>
+    </div>
+    <div class="cluster" style="justify-content:center;">
+      {primaryOffer && primaryOffer.pub.linkable && primaryOffer.offer.redirectKey && (
+        <a class="btn btn--accent btn--lg" href={`/go/${primaryOffer.offer.redirectKey}`} rel="sponsored nofollow">
+          {primaryOffer.pub.priceShowable && primaryOffer.offer.basePriceMinor !== null
+            ? `View offer — ${usd(primaryOffer.offer.basePriceMinor)}`
+            : "Check current price"}
+        </a>
+      )}
+      <a class="btn" href={`/botmatch/${category}/`}>Not sure? Let BotMatch decide</a>
+    </div>
+    <p class="note" style="text-align:center;">Affiliate disclosure: retailer links may earn BotPlanet a commission.</p>
+  </section>
+</article>
+
+<style>
+  .review :global(.review__hero-img) {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    display: block;
+  }
+</style>

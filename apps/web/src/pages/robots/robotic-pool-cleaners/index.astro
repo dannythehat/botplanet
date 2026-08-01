@@ -1,0 +1,375 @@
+---
+/**
+ * Robotic pool cleaners — the category hub (approved page build, Batch 1).
+ *
+ * The approved SEO brief: owns the grouped head cluster (robotic pool cleaner /
+ * robot pool cleaner / pool cleaning robot — 40,500/mo, KD 14), answers the
+ * category's buying questions in sections (corded-vs-cordless and
+ * walls/waterline live HERE by cannibalisation ruling, not on their own URLs),
+ * and routes visitors onward: reviews for models, best-of for selection,
+ * BotMatch for the undecided. Static route beats the dynamic [category] page,
+ * which continues to serve future categories.
+ *
+ * Every product figure on this page is read from D1 or the editorial layer.
+ * Nothing is invented; no ranking exists without stated reasoning.
+ */
+import Base from "../../../layouts/Base.astro";
+import ProductImage from "../../../components/ProductImage.astro";
+import PoolDiagram from "../../../components/PoolDiagram.astro";
+import CordedVsCordless from "../../../components/diagrams/CordedVsCordless.astro";
+import PoolSizeShape from "../../../components/diagrams/PoolSizeShape.astro";
+import { getDb, schema } from "../../../lib/db";
+import { and, eq } from "drizzle-orm";
+import { breadcrumbsFor } from "../../../lib/routing";
+import { LAUNCH_CATEGORY, categoryRoutes } from "../../../content/routes";
+import { journeyFor } from "../../../content/journeys";
+import { productEditorial, catalogueStatusOf } from "../../../content/products";
+import { longFormReview } from "../../../content/reviews";
+import { usd, titleCase } from "../../../lib/format";
+import { buildOffers, publicationFor } from "../../../lib/offer-truth";
+import { latestAcceptedObservations } from "../../../lib/providers/refresh-store";
+import { faqSchema, itemListSchema } from "../../../lib/seo";
+
+const db = getDb(Astro.locals);
+const cat = (
+  await db.select().from(schema.categories).where(eq(schema.categories.slug, LAUNCH_CATEGORY)).limit(1)
+)[0];
+if (!cat) return new Response("Category not found", { status: 404 });
+
+const journey = journeyFor(LAUNCH_CATEGORY)!;
+const routes = categoryRoutes(LAUNCH_CATEGORY);
+
+const products = (
+  await db
+    .select()
+    .from(schema.products)
+    .where(and(eq(schema.products.categoryId, cat.id), eq(schema.products.status, "published")))
+).filter((p) => catalogueStatusOf(p.id) === "active");
+
+/* Live offers through the engine so every price is gated and dated. */
+let live: Awaited<ReturnType<typeof latestAcceptedObservations>> = [];
+try {
+  live = await latestAcceptedObservations(Astro.locals.runtime.env.DB);
+} catch (err) {
+  console.error("[hub] D1 refresh read unavailable; engine falls back to committed snapshot", err);
+}
+const offers = buildOffers(new Date(), { live })
+  .map((o) => ({ offer: o, pub: publicationFor(o) }))
+  .filter((x) => x.pub.showable);
+const offerFor = (productId: string) => offers.find((x) => x.offer.productId === productId) ?? null;
+
+/**
+ * Featured picks across genuinely different needs and price positions, chosen
+ * by recorded classification (bestFor + attributes), with the reasoning shown.
+ */
+const FEATURED: { slug: string; role: string; why: string }[] = [
+  { slug: "dolphin-nautilus-cc-plus", role: "The proven all-rounder", why: "Corded Maytronics reliability with floor, wall and waterline coverage and app scheduling — the recorded safe pick for in-ground pools up to ~40 ft." },
+  { slug: "polaris-freedom", role: "The cordless flagship", why: "A cable-free cleaner from an established pool brand, rated in manufacturer material for in-ground pools up to 50 ft with about 2.5 hours of cleaning per ~4-hour charge." },
+  { slug: "wybot-c1", role: "The budget cordless", why: "Floors, walls and waterline with app scheduling at a recorded street price far below the premium brands — the value route into cordless." },
+  { slug: "betta-se-plus", role: "The surface specialist", why: "A solar skimmer for floating debris — a different product class that pairs with a floor robot rather than replacing one." },
+];
+const featured = FEATURED.map((f) => {
+  const p = products.find((x) => x.slug === f.slug);
+  const e = productEditorial(f.slug);
+  return p && e ? { ...f, product: p, editorial: e, live: offerFor(p.id) } : null;
+}).filter((x): x is NonNullable<typeof x> => x !== null);
+
+const reviewGrid = products
+  .map((p) => ({ product: p, editorial: productEditorial(p.slug), hasLongForm: Boolean(longFormReview(p.slug)) }))
+  .filter((x) => x.editorial);
+
+const FAQS = [
+  { q: "Are robotic pool cleaners worth it?", a: "For most pool owners, yes — a robot removes the weekly manual vacuuming chore and cleans surfaces (walls, waterline) that suction cleaners miss. The honest exceptions and the total cost of ownership are covered in our dedicated guide." },
+  { q: "Do robotic pool cleaners climb walls and clean the waterline?", a: "Full cleaners in the floor/wall/waterline class do — models like the Dolphin Nautilus CC Plus hold themselves at the waterline to scrub the scum line. Floor-only and skimmer-class machines do not, which is why BotPlanet labels the cleaning coverage on every product." },
+  { q: "Corded or cordless — which is better?", a: "Corded robots run unlimited cycles and never lose battery capacity, at the cost of a floating cable to store and manage. Cordless robots are cable-free but their runtime is a consumable that fades as cells age. Our corded-vs-cordless section below and the cordless best-of guide walk through the decision." },
+  { q: "Can you leave a robotic pool cleaner in the pool?", a: "Corded cleaners are generally removed after cycles; some cordless machines and surface skimmers are designed to stay in the water. Check the manufacturer's guidance per model — we record it in each review's specifications." },
+  { q: "What size pool do I need to check against?", a: "Every robot carries a rated maximum pool length — exceed it and coverage suffers. BotPlanet stores this per product and BotMatch excludes any robot your stated pool length rules out." },
+];
+
+const crumbs = breadcrumbsFor(Astro.url.pathname);
+const schemaNodes = [
+  itemListSchema(
+    featured.map((f) => ({ name: f.product.name, path: `/robots/${LAUNCH_CATEGORY}/${f.product.slug}/` })),
+    "Featured robotic pool cleaners",
+  ),
+  faqSchema(FAQS),
+];
+---
+
+<Base
+  title="Robotic Pool Cleaners — Compare, Choose & Buy | BotPlanet"
+  description="Compare robotic pool cleaners for US pools: corded vs cordless, wall and waterline cleaning, filtration and pool size — with honest research-led guidance and current retailer links."
+  breadcrumbs={crumbs}
+  schema={schemaNodes}
+  bleed={true}
+>
+  <!-- ============ 1. Cinematic hero ============ -->
+  <section class="band lit">
+    <div class="wrap grid grid--lead">
+      <div class="stack">
+        <span class="eyebrow">BotPlanet's first live category · {products.length} researched robots · US market</span>
+        <h1 class="mt-0">Robotic Pool Cleaners</h1>
+        <p class="lede">
+          A robotic pool cleaner turns the worst weekly chore of pool ownership into a machine's job. This hub is
+          BotPlanet's complete guide to choosing one: what the different classes actually clean, where corded beats
+          cordless (and where it doesn't), how pool size rules robots out, and which models our research supports —
+          with every price dated and every claim labelled by its evidence.
+        </p>
+        <div class="cluster">
+          <a class="btn btn--accent btn--lg" href={journey.href}>{journey.ctaLabel}</a>
+          <a class="btn btn--lg" href={routes.best}>See the best-of guide</a>
+        </div>
+        <p class="note">Two ways in: browse everything yourself, or answer a few pool-specific questions and let BotMatch pick on suitability — never commission.</p>
+      </div>
+      <div class="stage elevated">
+        <ProductImage productId="prod-polaris-freedom" placement="category_page" priority={true} class="hub-hero-img" />
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+
+  <!-- ============ 2. Quick orientation ============ -->
+  <section class="section container--prose prose">
+    <h2>What a robotic pool cleaner actually does</h2>
+    <p>
+      Unlike suction or pressure cleaners that run off your pool's pump, a robotic cleaner is self-contained: its own
+      motors drive it around the pool, its own pump pulls water through its own filter basket, and it puts the debris
+      in that basket rather than into your pool's filtration system. That independence is why robots clean better and
+      cost less to run — and why the buying decision comes down to four things this page walks through in order:
+      <strong>what it cleans</strong> (floor only, or walls and waterline too), <strong>how it's powered</strong>
+      (corded or cordless), <strong>whether it fits your pool</strong> (size, shape and above-ground vs in-ground),
+      and <strong>how it handles your debris</strong> (fine silt needs different filtration than leaves).
+    </p>
+  </section>
+
+  <!-- ============ 3. Featured picks ============ -->
+  <section class="section section--raised">
+    <div class="section-head">
+      <span class="eyebrow">Start here</span>
+      <h2 class="mt-0">Four robots that cover the real decisions</h2>
+      <p class="note">Chosen to span pool type, power and price position — each with the reasoning, not just a badge. Full selection logic lives in the <a class="link" href={routes.best}>best-of guide</a>.</p>
+    </div>
+    <div class="grid grid--products">
+      {featured.map((f) => (
+        <a class="card card--interactive stack stack--sm" href={`/robots/${LAUNCH_CATEGORY}/${f.product.slug}/`}>
+          <ProductImage productId={f.product.id} placement="listing_card" />
+          <span class="eyebrow">{f.role}</span>
+          <h3 class="mt-0">{f.product.name}</h3>
+          <p class="muted" style="flex:1;">{f.why}</p>
+          <div class="cluster cluster--between">
+            <span class="pill">{titleCase(f.product.powerType)}</span>
+            {f.live && f.live.pub.priceShowable && f.live.offer.basePriceMinor !== null ? (
+              <span class="price">{usd(f.live.offer.basePriceMinor)} <span class="muted" style="font-size:11px;">checked {f.live.offer.sourceCheckedDate}</span></span>
+            ) : (
+              <span class="muted">Check current price</span>
+            )}
+          </div>
+        </a>
+      ))}
+    </div>
+    <p class="note">Affiliate disclosure: product pages contain retailer links that may earn BotPlanet a commission. Commission never chooses the products above — the reasoning shown does.</p>
+  </section>
+
+  <!-- ============ 4. Coverage classes ============ -->
+  <section class="section">
+    <div class="split split--text-lead">
+      <div class="prose">
+        <h2>Floor, walls, waterline — or just the surface: the classes explained</h2>
+        <p>
+          The single most common buying mistake in this category is paying for coverage you don't need — or worse,
+          discovering the machine you bought never cleans the part of the pool that annoys you. There are four classes,
+          and BotPlanet labels every product with one:
+        </p>
+        <ul>
+          <li><strong>Full cleaners</strong> scrub the floor, climb the walls and hold at the waterline to remove the scum line. This is the default recommendation for in-ground pools — the waterline ring is what makes a pool look dirty even when the chemistry is perfect.</li>
+          <li><strong>Floor-focused cleaners</strong> cover the floor (some manage lower walls) at lower prices. Right for above-ground pools and for owners whose walls stay clean.</li>
+          <li><strong>Surface skimmers</strong> like the <a class="link" href={`/robots/${LAUNCH_CATEGORY}/betta-se-plus/`}>Betta SE Plus</a> float on top and collect leaves before they sink. They clean nothing below the surface — a different tool, not a cheaper substitute, and BotMatch will never offer one as a full-cleaner answer.</li>
+          <li><strong>Premium multi-role machines</strong> such as the Beatbot AquaSense 2 Ultra combine floor, wall, waterline and surface work — at flagship prices.</li>
+        </ul>
+        <p>
+          The practical question: does the waterline bother you? If yes, buy the full-cleaner class. If your problem is
+          floating leaves, a skimmer — possibly alongside a floor robot — is the honest answer.
+        </p>
+      </div>
+      <div class="stack">
+        <PoolDiagram />
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 5. Corded vs cordless (merged section per ruling) ============ -->
+  <section class="section section--sunken" id="corded-vs-cordless">
+    <div class="split split--media-lead">
+      <div class="stack"><CordedVsCordless /></div>
+      <div class="prose">
+        <h2>Corded vs cordless: the real trade</h2>
+        <p>
+          Corded robots draw power through a floating cable from a poolside supply. That buys you unlimited runtime —
+          full-length cycles, every time, for years, because there is no battery to age. The cost is the cable itself:
+          60 ft of it on a machine like the Nautilus CC Plus, needing storage, occasionally needing untangling, and
+          keeping the robot within a cable-length of an outlet.
+        </p>
+        <p>
+          Cordless robots cut the cable and swim free — drop them anywhere, no caddy in the garage. Their honest cost
+          has two parts: a cleaning cycle bounded by battery capacity (typically 90–180 minutes on our researched
+          models, with hours of recharging between), and the quiet reality that lithium capacity is a consumable.
+          The runtime a cordless robot has in year four is not the runtime it shipped with.
+        </p>
+        <p>
+          Our researched rule of thumb: <strong>large pools and set-a-schedule owners lean corded; convenience-first
+          owners and pools without a handy outlet lean cordless.</strong> If you're cordless-curious, the dedicated
+          <a class="link" href={`${routes.best}cordless/`}>best cordless guide</a> compares every cable-free model we
+          cover on battery life, coverage and ageing honestly.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 6. Pool size & shape ============ -->
+  <section class="section">
+    <div class="split split--text-lead">
+      <div class="prose">
+        <h2>Pool size and shape: the hard limits</h2>
+        <p>
+          Every robot carries a rated maximum pool length, and it is a real limit, not marketing: exceed it and the
+          machine runs out of cycle before it runs out of pool. The Nautilus CC Plus is rated to about 40 ft;
+          the Polaris FREEDOM's manufacturer material covers in-ground pools to 50 ft; budget above-ground models rate
+          much lower. BotPlanet stores this figure for every product, and BotMatch treats it as a hard exclusion —
+          state your pool length and unsuitable robots are removed, not down-ranked.
+        </p>
+        <p>
+          Shape matters less than owners fear: modern scanning navigation handles freeform pools well. The genuine
+          trouble spots are tight corners and swim-outs for cable management on corded machines, and very shallow
+          shelves, which some machines can't operate on. Above-ground pools are their own case — soft walls need an
+          above-ground rating (the <a class="link" href={`/robots/${LAUNCH_CATEGORY}/dolphin-e10/`}>Dolphin E10</a> is
+          our researched trusted-brand pick there), and an in-ground-only robot is the wrong purchase no matter the
+          price.
+        </p>
+      </div>
+      <div class="stack"><PoolSizeShape /></div>
+    </div>
+  </section>
+
+  <!-- ============ 7. Filtration & debris ============ -->
+  <section class="section container--prose prose">
+    <h2>Filtration and debris: match the basket to your backyard</h2>
+    <p>
+      Robots differ more in what they can hold than in what they can reach. Fine and ultra-fine cartridge systems
+      (Maytronics' top-load design is the researched benchmark for serviceability) capture silt, pollen and algae dust
+      that coarser baskets pass straight through. Large-basket designs trade fineness for leaf volume. If your pool
+      sits under trees, capacity beats fineness — and the honest answer may be the two-machine strategy: a
+      <a class="link" href={`/robots/${LAUNCH_CATEGORY}/betta-se-plus/`}>surface skimmer</a> intercepting leaves before
+      they sink, plus a floor robot for what gets through. If your problem is dust and pollen, fineness wins and
+      capacity barely matters.
+    </p>
+    <h2>Apps, scheduling and navigation: which features earn their price</h2>
+    <p>
+      Weekly scheduling is the feature that changes ownership — it is the difference between owning a gadget and having
+      a self-cleaning pool. App control beyond scheduling (mode switching, spot cleaning, path selection) is genuinely
+      useful on premium machines and genuinely forgettable on budget ones. Camera-and-AI navigation, the current
+      premium battleground, delivers efficiency gains that matter most in large or complex pools; in a standard
+      rectangle, mature scanning logic like Maytronics' CleverClean covers everything a camera does, a cycle slower.
+      Our reviews state per model which control features are recorded and which are marketing.
+    </p>
+    <h2>Owning one: charging, cables, storage and the unglamorous truth</h2>
+    <p>
+      Whatever you buy, the care loop is the same: empty and rinse the basket after cycles, keep brushes clear, store
+      the machine out of the sun. Corded owners add cable discipline — lay it straight, use the caddy. Cordless owners
+      add charge discipline — a robot with a flat battery on pool-party morning is the classic cordless regret. None
+      of this is hard; all of it is the difference between a robot that lasts three seasons and one that lasts eight.
+    </p>
+  </section>
+
+  <!-- ============ 8. Who should / shouldn't ============ -->
+  <section class="section section--tight">
+    <div class="split">
+      <div class="callout callout--evidence">
+        <p class="callout__title">Who should buy a robotic pool cleaner</p>
+        <p>
+          Anyone vacuuming a pool by hand more than once a month; owners whose waterline ring keeps returning; homes
+          where the pool pump runs long hours just to drive a suction cleaner (a robot's own pump is far cheaper per
+          clean); and anyone who wants the pool ready without thinking about it — that is what scheduling is for.
+        </p>
+      </div>
+      <div class="callout callout--caution">
+        <p class="callout__title">Who may not need one</p>
+        <p>
+          Owners of small, covered or lightly used pools that a weekly net-and-brush genuinely keeps clean; anyone
+          whose only problem is floating debris (a skimmer costs less than a full robot); and pools with a weekly
+          professional service already included — a robot would duplicate what you're paying for.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 9. Methodology ============ -->
+  <section class="section section--tight container--prose prose">
+    <h2>How BotPlanet researches this category — and what we haven't done</h2>
+    <p>
+      Every product record on this site is compiled from manufacturer specifications and verified retailer listings,
+      field by field, with the source and its verification date stored — down to individual claims like the Polaris
+      FREEDOM's 50 ft rating, which traces to manufacturer-authored material on its own listing. Prices are only shown
+      with the date they were checked, and go dark when they age out rather than silently going stale.
+      <strong>We have not yet physically tested these units.</strong> No page on BotPlanet claims hands-on results,
+      and none will until real review units earn that label. Commission from retailer links never influences which
+      product we recommend — our recommendation engine is structurally unable to see commercial terms when it scores
+      suitability. Read the full <a class="link" href="/review-methodology/">review methodology</a>.
+    </p>
+  </section>
+
+  <!-- ============ 10. Full review grid ============ -->
+  <section class="section section--raised">
+    <div class="section-head">
+      <span class="eyebrow">The catalogue</span>
+      <h2 class="mt-0">Every robotic pool cleaner we cover</h2>
+      <p class="note">Research-led records for all {reviewGrid.length} active models. Full long-form reviews are rolling out — the rest carry complete data pages meanwhile.</p>
+    </div>
+    <div class="grid grid--products">
+      {reviewGrid.map(({ product, editorial, hasLongForm }) => (
+        <a class="card card--interactive stack stack--sm" href={`/robots/${LAUNCH_CATEGORY}/${product.slug}/`}>
+          <ProductImage productId={product.id} placement="listing_card" compact={true} />
+          <h3 class="mt-0" style="font-size:16px;">{product.name}</h3>
+          <p class="muted" style="font-size:13px; flex:1;">{editorial!.bestFor}</p>
+          <div class="cluster cluster--tight">
+            <span class="pill">{titleCase(product.powerType)}</span>
+            {hasLongForm && <span class="pill pill--ok">Full review</span>}
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- ============ 11. Onward paths ============ -->
+  <section class="section">
+    <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px;">
+      <a class="card card--interactive" href={routes.best}><h3 class="mt-0">Best robotic pool cleaners</h3><p class="muted">Our picks by need and budget, with reasoning and limitations.</p></a>
+      <a class="card card--interactive" href={`${routes.best}cordless/`}><h3 class="mt-0">Best cordless</h3><p class="muted">Every cable-free model compared on battery, coverage and ageing.</p></a>
+      <a class="card card--interactive" href={routes.compare}><h3 class="mt-0">Compare side by side</h3><p class="muted">Specs, coverage and dated prices in one table.</p></a>
+      <a class="card card--interactive" href={journey.href}><h3 class="mt-0">{journey.ctaLabel}</h3><p class="muted">{journey.explanation}</p></a>
+    </div>
+  </section>
+
+  <!-- ============ 12. FAQs ============ -->
+  <section class="section section--tight container--prose">
+    <h2>Robotic pool cleaner FAQs</h2>
+    <div class="stack">
+      {FAQS.map((f) => (
+        <div class="card card--pad-sm">
+          <h3 class="mt-0" style="font-size:16px;">{f.q}</h3>
+          <p class="mt-sm" style="margin-bottom:0;">{f.a}</p>
+        </div>
+      ))}
+    </div>
+    <p class="note mt-md">
+      Affiliate disclosure: BotPlanet may earn commission from retailer links on product pages. Updated 2026-08-01 ·
+      research-led, not yet hands-on tested.
+    </p>
+  </section>
+
+  </div>
+</Base>
+
+<style>
+  :global(.hub-hero-img) { width: 100%; height: auto; border-radius: 14px; display: block; }
+</style>

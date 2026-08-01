@@ -1,0 +1,286 @@
+---
+/**
+ * Best Robotic Pool Cleaners — the buying guide (approved page build, Batch 1).
+ *
+ * Approved SEO brief: owns the grouped best/top selection cluster (6,600/mo,
+ * KD 13). By cannibalisation ruling, the in-ground, above-ground, large-pool,
+ * leaves and budget variants are SECTIONS here, not URLs — only cordless earns
+ * its own child page. Every pick states its reasoning from recorded fields and
+ * its honest limitation; no ratings, no invented rankings, no hands-on claims.
+ */
+import Base from "../../../layouts/Base.astro";
+import ProductImage from "../../../components/ProductImage.astro";
+import { getDb, schema } from "../../../lib/db";
+import { and, eq } from "drizzle-orm";
+import { breadcrumbsFor } from "../../../lib/routing";
+import { LAUNCH_CATEGORY, categoryRoutes } from "../../../content/routes";
+import { productEditorial, catalogueStatusOf } from "../../../content/products";
+import { usd, titleCase } from "../../../lib/format";
+import { buildOffers, publicationFor } from "../../../lib/offer-truth";
+import { latestAcceptedObservations } from "../../../lib/providers/refresh-store";
+import { faqSchema, itemListSchema } from "../../../lib/seo";
+
+const db = getDb(Astro.locals);
+const cat = (
+  await db.select().from(schema.categories).where(eq(schema.categories.slug, LAUNCH_CATEGORY)).limit(1)
+)[0];
+if (!cat) return new Response("Category not found", { status: 404 });
+const routes = categoryRoutes(LAUNCH_CATEGORY);
+
+const products = (
+  await db
+    .select()
+    .from(schema.products)
+    .where(and(eq(schema.products.categoryId, cat.id), eq(schema.products.status, "published")))
+).filter((p) => catalogueStatusOf(p.id) === "active");
+
+let live: Awaited<ReturnType<typeof latestAcceptedObservations>> = [];
+try {
+  live = await latestAcceptedObservations(Astro.locals.runtime.env.DB);
+} catch (err) {
+  console.error("[best-of] D1 refresh read unavailable; engine falls back to committed snapshot", err);
+}
+const engine = buildOffers(new Date(), { live })
+  .map((o) => ({ offer: o, pub: publicationFor(o) }))
+  .filter((x) => x.pub.showable);
+const offerFor = (productId: string) => engine.find((x) => x.offer.productId === productId) ?? null;
+
+/**
+ * The picks. Selection is editorial reasoning over RECORDED fields — coverage,
+ * power, rated pool size, price tier, brand track record — written out in
+ * full so a reader can disagree with the logic, not guess at it.
+ */
+interface Pick {
+  award: string;
+  slug: string;
+  why: string;
+  whoFor: string;
+  limitation: string;
+}
+const PICKS: Pick[] = [
+  {
+    award: "Best overall",
+    slug: "dolphin-nautilus-cc-plus",
+    why: "It has no weak point that matters for a standard in-ground pool: floor, wall and waterline coverage, corded power that never degrades, the easiest filter servicing in the class, app scheduling, and the Maytronics track record. Newer machines beat it on features-per-dollar; nothing we researched beats it on confidence-per-dollar.",
+    whoFor: "In-ground pool owners up to ~40 ft who want cleaning to become a scheduled non-event.",
+    limitation: "The 60 ft floating cable and caddy demand storage and occasional untangling, and there is no above-ground rating.",
+  },
+  {
+    award: "Best cordless",
+    slug: "polaris-freedom",
+    why: "The cable-free pick from an established pool brand: manufacturer material rates it for in-ground pools to 50 ft with roughly 2.5 hours of cleaning per ~4-hour charge — enough to finish real pools, not just spec sheets. The full cable-free field is compared in our dedicated cordless guide.",
+    whoFor: "Owners who have ruled out cables and want an established brand rather than a start-up bet.",
+    limitation: "Like every cordless machine, its runtime is battery-bound and will shrink as cells age; charging discipline is part of ownership.",
+  },
+  {
+    award: "Best premium",
+    slug: "beatbot-aquasense-2-ultra",
+    why: "The recorded 5-in-1 coverage — floor, walls, waterline, water surface and water clarification — is the widest in our catalogue; it is the one machine that also does a skimmer's job. That breadth is what the flagship price buys.",
+    whoFor: "Large-budget owners who want one machine to do everything, including surface debris.",
+    limitation: "It costs several times the budget picks, and its newer brand cannot yet match Maytronics' longevity record.",
+  },
+  {
+    award: "Best budget",
+    slug: "wybot-c1",
+    why: "Floor, wall and waterline coverage plus app scheduling at a recorded street price around a third of the premium cordless flagships. On covered surfaces per dollar it is the strongest value in the catalogue.",
+    whoFor: "Small-to-mid pools where cordless convenience matters more than pedigree.",
+    limitation: "A newer brand with a shorter reliability record, and filtration fineness that trails the premium machines.",
+  },
+  {
+    award: "Best for above-ground pools",
+    slug: "dolphin-e10",
+    why: "Above-ground pools need an above-ground rating — soft walls are a hard exclusion in our data model, not a preference. The E10 brings Maytronics build quality to that segment as the recorded trusted-brand corded pick.",
+    whoFor: "Above-ground pool owners who want the proven-brand route.",
+    limitation: "Floor-focused coverage — it does not scrub the waterline the way its in-ground siblings do.",
+  },
+  {
+    award: "Best for large pools",
+    slug: "polaris-freedom",
+    why: "Rated pool length is the deciding spec for big pools, and the FREEDOM's manufacturer-evidenced 50 ft rating is the longest recorded in our active catalogue. The same machine that wins cordless also goes largest.",
+    whoFor: "Owners of in-ground pools beyond the ~40 ft envelope most robots are rated for.",
+    limitation: "One battery cycle still bounds a single cleaning session; a very large, very dirty pool may want two cycles with a recharge between.",
+  },
+  {
+    award: "Best for surface debris",
+    slug: "betta-se-plus",
+    why: "Leaves are cheapest to catch while they still float. This solar skimmer patrols continuously and pairs with any floor robot — it is a different class doing a different job, and for tree-lined pools it is the missing half of the answer.",
+    whoFor: "Pools under trees, or anyone tired of netting the surface daily.",
+    limitation: "It cleans nothing below the surface — never buy it as your only cleaner unless floating debris is genuinely your only problem.",
+  },
+];
+
+const picks = PICKS.map((p) => {
+  const product = products.find((x) => x.slug === p.slug);
+  const editorial = productEditorial(p.slug);
+  return product && editorial ? { ...p, product, editorial, live: offerFor(product.id) } : null;
+}).filter((x): x is NonNullable<typeof x> => x !== null);
+
+const FAQS = [
+  { q: "What is the best robotic pool cleaner overall?", a: "For a standard in-ground pool our research supports the Dolphin Nautilus CC Plus Wi-Fi: full floor/wall/waterline coverage, corded reliability and the strongest brand track record in the category. The full reasoning and its honest limitations are above." },
+  { q: "Is Polaris or Dolphin better?", a: "Neither brand wins outright — Dolphin's corded machines carry the longer reliability record, while the Polaris FREEDOM is our researched cordless and large-pool pick. It comes down to the cable question; our comparison hub covers the head-to-head." },
+  { q: "Which robotic pool cleaner is the best value for money?", a: "The WYBOT C1: full coverage and app scheduling at a recorded street price far below the premium brands, traded against a shorter brand track record." },
+  { q: "What about the best cordless option?", a: "The cordless field is deep enough that it has its own guide — see Best Cordless Robotic Pool Cleaners, where every cable-free model is compared on battery, coverage and ageing." },
+];
+
+const crumbs = breadcrumbsFor(Astro.url.pathname);
+const schemaNodes = [
+  itemListSchema(picks.map((p) => ({ name: p.product.name, path: `/robots/${LAUNCH_CATEGORY}/${p.product.slug}/` })), "Best robotic pool cleaners"),
+  faqSchema(FAQS),
+];
+---
+
+<Base
+  title="Best Robotic Pool Cleaners 2026 | BotPlanet"
+  description="Our research-led picks of the best robotic pool cleaners for 2026 — best overall, cordless, above-ground, large pools and budget — with reasoning, limitations and current links."
+  breadcrumbs={crumbs}
+  schema={schemaNodes}
+>
+  <header class="section section--flush-top">
+    <span class="eyebrow">Buying guide · updated 2026-08-01 · research-led</span>
+    <h1 class="mt-0">The Best Robotic Pool Cleaners in 2026</h1>
+    <p class="lede" style="max-width:70ch;">
+      Seven picks across the decisions that actually split buyers — pool type, power, budget and debris — each with the
+      reasoning written out and the limitation stated. We research from manufacturer specifications and verified
+      retailer data, store the evidence per claim, and have not yet hands-on tested these units; nothing here claims
+      otherwise. Commission never chooses a pick: our recommendation engine cannot see commercial terms when it scores
+      suitability, and neither did this list.
+    </p>
+  </header>
+
+  <!-- ============ Verdict list up front ============ -->
+  <section class="section section--tight">
+    <div class="card card--inset">
+      <h2 class="mt-0" style="font-size:18px;">The short version</h2>
+      <ul class="feature-rows">
+        {picks.map((p) => (
+          <li class="feature-row">
+            <span class="feature-row__lead">{p.award}:</span>
+            <span class="feature-row__body"><a class="link" href={`#${p.slug}-${p.award.toLowerCase().replace(/[^a-z]+/g, "-")}`}>{p.product.name}</a></span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ How we chose ============ -->
+  <section class="section section--tight container--prose prose">
+    <h2>How we chose — and what we didn't do</h2>
+    <p>
+      Every product in our catalogue carries recorded, sourced fields: what it cleans (floor, walls, waterline,
+      surface), how it is powered, its rated maximum pool length, its price tier and its warranty as stated. The picks
+      below are editorial reasoning over those recorded facts — the same facts BotMatch scores — written out so you can
+      check the logic. We did not run bake-off tests (no hands-on claims appear anywhere on BotPlanet until real
+      review units earn them), we did not rank by commission (the engine is structurally unable to see it), and we do
+      not use scores out of ten, because a number would imply a precision our research method doesn't have.
+    </p>
+  </section>
+
+  <!-- ============ The picks ============ -->
+  {picks.map((p, i) => (
+    <section class="section" id={`${p.slug}-${p.award.toLowerCase().replace(/[^a-z]+/g, "-")}`}>
+      <div class="split split--media-lead">
+        <div class="stage">
+          <ProductImage productId={p.product.id} placement="category_page" variant={i} />
+        </div>
+        <div class="stack">
+          <span class="eyebrow">{p.award}</span>
+          <h2 class="mt-0"><a class="link" href={`/robots/${LAUNCH_CATEGORY}/${p.product.slug}/`}>{p.product.name}</a></h2>
+          <div class="cluster cluster--tight">
+            <span class="pill pill--strong">{titleCase(p.product.powerType)}</span>
+            {(p.product.environments as string[]).map((e) => <span class="pill">{titleCase(e)}</span>)}
+            <span class="pill">{titleCase(p.product.productClass)}</span>
+          </div>
+          <p><strong>Why it wins:</strong> {p.why}</p>
+          <p><strong>Who it suits:</strong> {p.whoFor}</p>
+          <p class="muted"><strong>The honest limitation:</strong> {p.limitation}</p>
+          <div class="cluster">
+            <a class="btn" href={`/robots/${LAUNCH_CATEGORY}/${p.product.slug}/`}>Read the full record</a>
+            {p.live && p.live.pub.linkable && p.live.offer.redirectKey && (
+              <a class="btn btn--accent" href={`/go/${p.live.offer.redirectKey}`} rel="sponsored nofollow">
+                {p.live.pub.priceShowable && p.live.offer.basePriceMinor !== null
+                  ? `View offer — ${usd(p.live.offer.basePriceMinor)}`
+                  : "Check current price"}
+              </a>
+            )}
+          </div>
+          {p.live && p.live.pub.priceShowable && p.live.offer.sourceCheckedDate && (
+            <p class="note">Price checked {p.live.offer.sourceCheckedDate}. Affiliate disclosure: this link may earn BotPlanet a commission — it did not choose this pick.</p>
+          )}
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <!-- ============ Pool-type sections (merged intents) ============ -->
+  <section class="section section--sunken container--prose prose">
+    <h2>In-ground vs above-ground: reading the picks by pool type</h2>
+    <p>
+      Searches for the best in-ground robot and the best robot overall land on the same answers, because the category's
+      flagships are built in-ground-first — the Nautilus CC Plus, Polaris FREEDOM and Beatbot picks above are all
+      in-ground machines. Above-ground pools are the segment with a genuinely different answer: soft walls need an
+      explicit above-ground rating, which is why the Dolphin E10 carries that pick, with the Aiper Seagull SE as the
+      recorded cordless budget alternative in the same segment. If you're unsure which segment you're even shopping,
+      <a class="link" href={routes.botmatch}>BotMatch asks one question and routes you correctly</a>.
+    </p>
+    <h2>Large pools, heavy leaves and small budgets</h2>
+    <p>
+      <strong>Large pools</strong> come down to one recorded spec — rated maximum length — which the Polaris FREEDOM
+      currently leads at 50 ft. <strong>Heavy leaf-fall</strong> is a capacity-and-strategy question: the Betta SE Plus
+      skimmer intercepts leaves before they sink so a floor robot's basket can handle what remains; for a single
+      machine, prioritise basket volume over filter fineness. <strong>Budget buyers</strong> should read the WYBOT C1
+      pick knowing exactly what the saving trades away: brand track record and filtration fineness, not coverage.
+      None of these variants needs its own top-ten page — the picks above are the picks; this section exists to route
+      each situation to the right one.
+    </p>
+  </section>
+
+  <!-- ============ Comparison table ============ -->
+  <section class="section">
+    <h2>The picks, side by side</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Model</th><th>Award</th><th>Power</th><th>Coverage</th><th>Pool fit</th><th>Price</th></tr></thead>
+        <tbody>
+          {picks.map((p) => (
+            <tr>
+              <td><a class="link" href={`/robots/${LAUNCH_CATEGORY}/${p.product.slug}/`}>{p.product.name}</a></td>
+              <td class="muted">{p.award}</td>
+              <td>{titleCase(p.product.powerType)}</td>
+              <td class="muted">{(p.product.cleans as string[]).map(titleCase).join(", ")}</td>
+              <td class="muted">{p.editorial.specs.poolSizeSuitability}</td>
+              <td class="price">
+                {p.live && p.live.pub.priceShowable && p.live.offer.basePriceMinor !== null
+                  ? usd(p.live.offer.basePriceMinor)
+                  : "Check current price"}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Prices show only when checked on a recorded date; “Check current price” means we won't show a stale figure. Full comparison tooling lives on the <a class="link" href={routes.compare}>comparison hub</a>.</p>
+  </section>
+
+  <!-- ============ FAQs ============ -->
+  <section class="section section--tight container--prose">
+    <h2>Best-of FAQs</h2>
+    <div class="stack">
+      {FAQS.map((f) => (
+        <div class="card card--pad-sm">
+          <h3 class="mt-0" style="font-size:16px;">{f.q}</h3>
+          <p class="mt-sm" style="margin-bottom:0;">{f.a}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ============ Onward ============ -->
+  <section class="section section--tight">
+    <div class="cluster">
+      <a class="btn btn--accent" href={`${routes.best}cordless/`}>Best cordless guide</a>
+      <a class="btn" href={routes.hub}>Category hub</a>
+      <a class="btn" href={routes.botmatch}>Let BotMatch choose for you</a>
+    </div>
+    <p class="note mt-md">Affiliate disclosure: BotPlanet may earn a commission from retailer links on this page. Commission never selects or orders a pick. Updated 2026-08-01.</p>
+  </section>
+</Base>

@@ -13,10 +13,18 @@ if (!cat) return new Response("Category not found", { status: 404 });
 const crumbs = breadcrumbsFor(Astro.url.pathname);
 ---
 
-<Base title={`BotMatch — ${cat.name}`} description="Answer a few questions and get a personalised, suitability-first recommendation." breadcrumbs={crumbs}>
+<Base
+  title={`Find My Pool Cleaner — BotMatch | BotPlanet`}
+  description="Answer a few pool-specific questions and BotMatch recommends one robotic pool cleaner on suitability — never commission — with the reasoning shown."
+  breadcrumbs={crumbs}
+>
   <div style="max-width:560px; margin:0 auto;">
-    <h1>Find your {cat.name.toLowerCase().replace(/s$/, "")}</h1>
-    <p class="muted">A few quick questions. BotMatch picks the best product on suitability — pool type, cleaning needs, power and budget — before it ever looks at which retailer pays us.</p>
+    <span class="eyebrow">BotMatch · deterministic · suitability-first</span>
+    <h1 class="mt-0">Find your {cat.name.toLowerCase().replace(/s$/, "")}</h1>
+    <p class="lede">
+      Six questions about your pool. One recommendation, with the reasoning shown — chosen on suitability before
+      BotMatch is ever allowed to see which retailer pays us.
+    </p>
 
     <div class="card" style="margin-top:20px;">
       <form id="botmatch" data-category={cat.slug}>
@@ -71,6 +79,29 @@ const crumbs = breadcrumbsFor(Astro.url.pathname);
       </form>
     </div>
     <p class="note" style="margin-top:14px;">Your answers are used only to compute your recommendation. Surface skimmers only appear when floating debris is your main need.</p>
+
+    <div class="stack mt-lg">
+      <div class="card card--pad-sm">
+        <h2 class="mt-0" style="font-size:16px;">How the recommendation is made</h2>
+        <p class="mt-sm" style="margin-bottom:0;">
+          BotMatch scores every published robot against your answers using recorded product facts — coverage, power,
+          rated pool length, price tier. Robots your pool rules out are excluded, not down-ranked. The scoring engine
+          is structurally unable to see prices or commission while it chooses the product; commercial data only enters
+          afterwards, to pick the best current offer for the robot already chosen. Same answers, same result, every
+          time — and every recommendation stores its reasoning so we can prove commission never moved it.
+          <a class="link" href="/how-botmatch-works/">Read the full explanation</a>.
+        </p>
+      </div>
+      <div class="card card--pad-sm">
+        <h2 class="mt-0" style="font-size:16px;">What you get — and your privacy</h2>
+        <p class="mt-sm" style="margin-bottom:0;">
+          A single recommendation page with the why, who it suits, its honest limitations, and current dated offers.
+          Your answers compute the result and are never attached to outbound links or analytics. Prefer to browse
+          instead? The <a class="link" href={`/robots/${cat.slug}/`}>category hub</a> and
+          <a class="link" href={`/best-robots/${cat.slug}/`}>best-of guide</a> cover the same ground at your own pace.
+        </p>
+      </div>
+    </div>
   </div>
 
   <style>
