@@ -9,7 +9,12 @@ on:
   push:
     branches:
       - main
+    paths-ignore:
+      - "docs/deployments/**"
   workflow_dispatch:
+
+permissions:
+  contents: write
 
 concurrency:
   group: deploy-botplanet
@@ -42,6 +47,77 @@ jobs:
         run: npm run build -w @botplanet/web
 
       - name: Deploy botplanet-web Worker
-        run: npm run deploy -w @botplanet/web
+        id: deploy
+        shell: bash
+        run: |
+          set -o pipefail
+          npm run deploy -w @botplanet/web 2>&1 | tee /tmp/wrangler-deploy.log
+          deployment_id="$(grep -Eo '(Current Deployment ID|Version ID):[[:space:]]+[0-9a-f-]+' /tmp/wrangler-deploy.log | tail -1 | awk '{print $NF}')"
+          echo "deployment_id=${deployment_id:-unreported}" >> "$GITHUB_OUTPUT"
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+
+      - name: Verify production and Amazon referral redirect
+        id: verify
+        shell: bash
+        run: |
+          set -euo pipefail
+          homepage_status=""
+          redirect_status=""
+          redirect_location=""
+
+          for attempt in {1..12}; do
+            homepage_status="$(curl -sS -o /dev/null -w '%{http_code}' https://botplanet.io/)"
+            headers="$(curl -sS -o /dev/null -D - https://botplanet.io/go/pool-dolphin-ccplus-amazon || true)"
+            redirect_status="$(printf '%s\n' "$headers" | awk 'toupper($1) ~ /^HTTP\// {code=$2} END {print code}')"
+            redirect_location="$(printf '%s\n' "$headers" | awk 'BEGIN{IGNORECASE=1} /^location:/ {sub(/^[^:]+:[[:space:]]*/, ""); sub(/\r$/, ""); print; exit}')"
+
+            if [[ "$homepage_status" == "200" && "$redirect_status" == "302" && "$redirect_location" == *"tag=botplanet-20"* ]]; then
+              break
+            fi
+            sleep 5
+          done
+
+          [[ "$homepage_status" == "200" ]]
+          [[ "$redirect_status" == "302" ]]
+          [[ "$redirect_location" == *"tag=botplanet-20"* ]]
+
+          echo "homepage_status=$homepage_status" >> "$GITHUB_OUTPUT"
+          echo "redirect_status=$redirect_status" >> "$GITHUB_OUTPUT"
+          echo "redirect_location=$redirect_location" >> "$GITHUB_OUTPUT"
+
+      - name: Record deployment receipt
+        shell: bash
+        env:
+          DEPLOYMENT_ID: ${{ steps.deploy.outputs.deployment_id }}
+          HOMEPAGE_STATUS: ${{ steps.verify.outputs.homepage_status }}
+          REDIRECT_STATUS: ${{ steps.verify.outputs.redirect_status }}
+          REDIRECT_LOCATION: ${{ steps.verify.outputs.redirect_location }}
+        run: |
+          mkdir -p docs/deployments
+          python - <<'PY'
+          import json
+          import os
+          from datetime import datetime, timezone
+
+          receipt = {
+              "worker": "botplanet-web",
+              "productionUrl": "https://botplanet.io",
+              "deployedCommit": os.environ["GITHUB_SHA"],
+              "deploymentId": os.environ.get("DEPLOYMENT_ID", "unreported"),
+              "deployedAt": datetime.now(timezone.utc).isoformat(),
+              "homepageStatus": int(os.environ["HOMEPAGE_STATUS"]),
+              "amazonRedirectStatus": int(os.environ["REDIRECT_STATUS"]),
+              "amazonRedirectLocation": os.environ["REDIRECT_LOCATION"],
+              "amazonTagVerified": "tag=botplanet-20" in os.environ["REDIRECT_LOCATION"],
+          }
+          with open("docs/deployments/latest.json", "w", encoding="utf-8") as file:
+              json.dump(receipt, file, indent=2)
+              file.write("\n")
+          PY
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/deployments/latest.json
+          git commit -m "Record verified production deployment [skip ci]"
+          git push origin HEAD:main
