@@ -1,12 +1,14 @@
 name: Deploy BotPlanet
 
-# Manual production deployment of the botplanet-web Worker.
-# Deploys ONLY from main, after the full validation suite passes.
-# CLOUDFLARE_API_TOKEN comes exclusively from GitHub secrets and is never
-# printed; wrangler reads it from the environment. CLOUDFLARE_ACCOUNT_ID is
-# optional — set it as a secret only if the token can see multiple accounts.
+# Production deployment of the botplanet-web Worker.
+# Runs for pushes to main and can also be started manually.
+# CLOUDFLARE_API_TOKEN comes exclusively from GitHub Actions repository secrets
+# and is never printed. The Cloudflare account ID is non-secret configuration.
 
 on:
+  push:
+    branches:
+      - main
   workflow_dispatch:
 
 concurrency:
@@ -17,6 +19,8 @@ jobs:
   deploy:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
+    env:
+      CLOUDFLARE_ACCOUNT_ID: a517d133ccec0093de719211a6694951
     steps:
       - uses: actions/checkout@v4
 
@@ -41,4 +45,3 @@ jobs:
         run: npm run deploy -w @botplanet/web
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
