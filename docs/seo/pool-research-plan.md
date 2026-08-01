@@ -31,7 +31,14 @@ Technologies, WYBOT, Beatbot), and retailer listing language captured in Job 10
 The full machine-readable seed list is generated at paid-run time and cached
 gitignored (`docs/seo/cache/`, see §4) so raw API responses never enter git.
 
-## 2. Proposed page inventory (the keyword-to-URL map)
+## 2. Proposed page inventory (the keyword-to-URL map) — 13 pages
+
+**Count correction (2026-08-01):** the initial handoff said 14 proposed pages;
+the actual inventory below is **13** (4 core commercial + 5 product reviews +
+3 guides + 1 direct comparison). The 14 was a summary miscount, not a missing
+page — no filler page is invented to reach it. Additional URLs (segment
+best-ofs, further pair comparisons, more guides) are created only where the
+paid SERP evidence justifies a split.
 
 One canonical URL = one intent cluster. URLs follow the **locked Job 6 route
 registry**; the Round 1 map's obsolete shapes (`/best/…`, `/guides/<flat>`)
