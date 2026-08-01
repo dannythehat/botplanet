@@ -28,22 +28,15 @@ export const SITE = {
 /**
  * Amazon Associates US tracking tag.
  *
- * WITHHELD. The tag `botplanet-20` was carried on every outbound Amazon link,
- * but BotPlanet has no evidenced, approved Associates account and no
- * confirmation that this tag is ours. Both failure modes are real: appending a
- * tag that belongs to somebody else sends them our commission, and tagging
- * traffic on an unapproved account is exactly what gets an application refused.
- *
- * So it is null until account approval AND ownership are evidenced. Links still
- * work — a customer reaching the right product page is the point, and the tag
- * only decides who gets paid. `amazonDestination()` is the single place that
- * decides, so restoring it later is one constant, not a search across files.
+ * Owner-confirmed for BotPlanet on 1 August 2026. All public Amazon destinations
+ * are built through amazonDestination(), so this single value controls tagging
+ * everywhere without duplicating the tag across pages or product data.
  */
-export const AMAZON_ASSOCIATE_TAG: string | null = null;
+export const AMAZON_ASSOCIATE_TAG: string | null = "botplanet-20";
 
-/** Why the tag is withheld, shown on the internal commerce surface. */
+/** Current Amazon Associates state shown on internal commerce surfaces. */
 export const AMAZON_ASSOCIATE_TAG_STATUS =
-  "unverified / pending owner confirmation — no approved Associates account is evidenced, so no tag is appended to public destinations";
+  "owner-confirmed and active — botplanet-20 is appended to public Amazon destinations";
 
 /**
  * The ONLY way an outbound Amazon URL is built. Appends the tag when there is a
