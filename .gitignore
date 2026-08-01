@@ -29,3 +29,6 @@ packages/**/test/**/*.d.ts
 *.log
 .idea/
 .vscode/
+
+# SEO research raw API cache — never committed
+docs/seo/cache/
