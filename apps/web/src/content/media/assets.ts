@@ -19,6 +19,7 @@
 import { VERIFICATIONS } from "../evidence/verification";
 import { PRODUCT_ID } from "../products";
 import MANIFEST from "../../../../../scripts/placeholder-manifest.json";
+import PACKS from "../../../../../scripts/pack-manifest.json";
 import { rightsBasis } from "./rights";
 import type { AcquisitionBlocker, MediaAssetRecord, SchemaEligibility } from "./types";
 
@@ -202,7 +203,74 @@ export const PLACEHOLDER_ASSETS: MediaAssetRecord[] = manifest.map((m): MediaAss
   };
 });
 
-export const MEDIA_ASSETS: MediaAssetRecord[] = [...ORIGINAL_ASSETS, ...PLACEHOLDER_ASSETS];
+/* ------------------------------------------------------------------ */
+/* Owner-supplied manufacturer marketing packs                         */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Registered under the recorded owner/PM ruling of 2026-07-31 — see the
+ * `owner_supplied_manufacturer_marketing` rights basis for exactly what that
+ * ruling does and does not establish. Three deliberate consequences:
+ *
+ *   - every structured-data slot is FALSE, because no manufacturer permission
+ *     is evidenced and a Product image slot asserts a licence we do not hold;
+ *   - only the reviewed hero renders today; the supporting panels are
+ *     preserved for Job 13 with draft alt text and an unreviewed status, so
+ *     nothing unreviewed can reach a page through the placement gates;
+ *   - the phone captures of retailer UI in the same uploads were EXCLUDED at
+ *     ingestion (see the manifest) — they are manual-check evidence, not
+ *     marketing imagery, and publishing them would republish Amazon's page.
+ */
+const HERO_ALT: Record<string, string> = {
+  "prod-dolphin-nautilus-cc-plus":
+    "Dolphin Nautilus CC Plus robotic pool cleaner with wall-climbing scrubber brushes, shown with the Dolphin app on a phone",
+  "prod-polaris-freedom":
+    "Polaris FREEDOM cordless robotic pool cleaner on rugged tracks, shown with the iAquaLink app running a cleaning cycle",
+  "prod-betta-se-plus":
+    "Betta SE Plus solar-powered robotic pool skimmer with its twin solar panels and grey hull",
+};
+
+const PACK_SCHEMA: SchemaEligibility = {
+  productImage: false,
+  imageObject: false,
+  articleImage: false,
+  openGraph: false,
+  twitter: false,
+  reason:
+    "manufacturer-authored imagery used under a recorded owner ruling without an evidenced manufacturer licence; asserting it in Product structured data, Open Graph or social slots would present it as licensed content",
+};
+
+export const OWNER_PACK_ASSETS: MediaAssetRecord[] = Object.entries(PACKS.packs).flatMap(([productId, pack]) =>
+  pack.assets.map((m, i): MediaAssetRecord => {
+    const hero = m.role === "hero";
+    const model = VERIFICATIONS.find((v) => v.productId === productId)!.identity.canonicalName;
+    return {
+      ...base(`pack-${pack.slug}-${hero ? "hero" : String(i).padStart(2, "0")}`, "owner_supplied_manufacturer_marketing"),
+      productId,
+      purpose: null,
+      exactModel: model,
+      type: hero ? "product_hero" : "product_detail",
+      acquisitionMethod: "owner_supplied_capture",
+      sourceRef: `owner upload ${m.sourceUpload}, 2026-07-31`,
+      checksum: `sha256:${m.sha256}`,
+      width: m.width,
+      height: m.height,
+      src: m.file,
+      altText: hero ? HERO_ALT[productId] : `${model} — manufacturer marketing panel (pending Job 13 review)`,
+      altTextStatus: hero ? ("approved" as const) : ("draft" as const),
+      schema: PACK_SCHEMA,
+      // Heroes were individually reviewed against the Job 8 identity record;
+      // the supporting panels wait for Job 13's product-page review.
+      reviewerStatus: hero ? ("reviewed" as const) : ("unreviewed" as const),
+      depictsRealProduct: true,
+      notes: hero
+        ? "Category and listing hero for the exact model, reviewed against the Job 8 identity record."
+        : "Preserved for the Job 13 product page; not rendered until reviewed.",
+    };
+  }),
+);
+
+export const MEDIA_ASSETS: MediaAssetRecord[] = [...ORIGINAL_ASSETS, ...PLACEHOLDER_ASSETS, ...OWNER_PACK_ASSETS];
 
 /* ------------------------------------------------------------------ */
 /* Why no product photography exists yet                               */

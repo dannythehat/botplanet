@@ -1,0 +1,247 @@
+{
+ "generatedOn": "2026-07-31",
+ "note": "Owner-supplied manufacturer marketing packs. Phone captures of retailer UI (aspect < 0.6) are excluded from publication and retained only as manual-check evidence outside the repo.",
+ "packs": {
+  "prod-dolphin-nautilus-cc-plus": {
+   "slug": "dolphin-nautilus-cc-plus",
+   "assets": [
+    {
+     "file": "/media/packs/dolphin-nautilus-cc-plus/hero.jpg",
+     "sourceUpload": "fddd27f9-1000022894.jpg",
+     "width": 954,
+     "height": 622,
+     "sha256": "d94b16b4de5bcaef28bddae5534820be1c2f2f2895a6d14f50f3ce29d41781fa",
+     "role": "hero"
+    },
+    {
+     "file": "/media/packs/dolphin-nautilus-cc-plus/02.jpg",
+     "sourceUpload": "7862fed9-1000022895.jpg",
+     "width": 1000,
+     "height": 1000,
+     "sha256": "056e2696d346bc8b7c0e0f12a4c33676e7872da99026dda7022ebc1fdaaa8478",
+     "role": "supporting"
+    },
+    {
+     "file": "/media/packs/dolphin-nautilus-cc-plus/03.jpg",
+     "sourceUpload": "aa797d28-1000022896.jpg",
+     "width": 1000,
+     "height": 1000,
+     "sha256": "8a5bd6056ca1e20d25bc9ef81791c37268dd8606854055a0c9de40661d5f1add",
+     "role": "supporting"
+    },
+    {
+     "file": "/media/packs/dolphin-nautilus-cc-plus/04.jpg",
+     "sourceUpload": "c2873b73-1000022897.jpg",
+     "width": 1000,
+     "height": 1000,
+     "sha256": "2878b127e3cf82b415b5bc9206dab3f5bf27e46b95ba4bb092bd26a233d27ed1",
+     "role": "supporting"
+    },
+    {
+     "file": "/media/packs/dolphin-nautilus-cc-plus/05.jpg",
+     "sourceUpload": "861b06d6-1000022898.jpg",
+     "width": 1000,
+     "height": 1000,
+     "sha256": "baf6b8a24706d62b06e4095934717b2ffd687804db6c3ec6284ad38f0214c889",
+     "role": "supporting"
+    },
+    {
+     "file": "/media/packs/dolphin-nautilus-cc-plus/06.jpg",
+     "sourceUpload": "71e9f9cb-1000022899.jpg",
+     "width": 1000,
+     "height": 1000,
+     "sha256": "233c825327b19d70a7c000adaa04c287b6ef2fc5d430f7f3f59f4140c8d86e1a",
+     "role": "supporting"
+    },
+    {
+     "file": "/media/packs/dolphin-nautilus-cc-plus/07.jpg",
+     "sourceUpload": "d8adf12a-1000022900.jpg",
+     "width": 1000,
+     "height": 1000,
+     "sha256": "36babf237cbed4fb11c94bd721ec2e9a25920302ceedc25f95f4911f7684f50b",
+     "role": "supporting"
+    },
+    {
+     "file": "/media/packs/dolphin-nautilus-cc-plus/08.jpg",
+     "sourceUpload": "96d7ad60-1000022901.jpg",
+     "width": 1000,
+     "height": 1000,
+     "sha256": "ef5567863dc6d4885ad894543d76234155b345f70d586976a63448035eccee7f",
+     "role": "supporting"
+    }
+   ],
+   "excluded": [
+    {
+     "file": "63b162c1-1000022893.jpg",
+     "reason": "phone capture of retailer UI (1080x2400) \u2014 evidence, not marketing imagery"
+    },
+    {
+     "file": "2171c9a3-1000022902.jpg",
+     "reason": "phone capture of retailer UI (1080x2400) \u2014 evidence, not marketing imagery"
+    },
+    {
+     "file": "cc243e34-1000022902.jpg",
+     "reason": "phone capture of retailer UI (1080x2400) \u2014 evidence, not marketing imagery"
+    }
+   ]
+  },
+  "prod-polaris-freedom": {
+   "slug": "polaris-freedom",
+   "assets": [
+    {
+     "file": "/media/packs/polaris-freedom/hero.jpg",
+     "sourceUpload": "807b2264-1000022904.jpg",
+     "width": 1500,
+     "height": 1363,
+     "sha256": "04c0370ad9c41b7addc99d088a72a2044ba4486c8c014859c2d40492cbeb7c6c",
+     "role": "hero"
+    },
+    {
+     "file": "/media/packs/polaris-freedom/02.jpg",
+     "sourceUpload": "bc4ac493-1000022905.jpg",
+     "width": 1500,
+     "height": 1500,
+     "sha256": "b284a43ad657d0703d3f8919b13194d66fd3066fedb37dae31e862b50720f828",
+     "role": "supporting"
+    },
+    {
+     "file": "/media/packs/polaris-freedom/03.jpg",
+     "sourceUpload": "c72895a0-1000022906.jpg",
+     "width": 1500,
+     "height": 1500,
+     "sha256": "70ab20861c5809d79fc96a6ebce22f6e4836f3f23b654088574cdde8b72a6e98",
+     "role": "supporting"
+    },
+    {
+     "file": "/media/packs/polaris-freedom/04.jpg",
+     "sourceUpload": "29abc519-1000022907.jpg",
+     "width": 500,
+     "height": 500,
+     "sha256": "176f386fde9c6f389f30d6cabb4e5576c1e4c96febe67b158130fbc41642da9b",
+     "role": "supporting"
+    },
+    {
+     "file": "/media/packs/polaris-freedom/05.jpg",
+     "sourceUpload": "8b9de899-1000022908.jpg",
+     "width": 1500,
+     "height": 1500,
+     "sha256": "fc889e797f4be760edf8f835019af5097992861cb490f6aeb5122625a64f512f",
+     "role": "supporting"
+    },
+    {
+     "file": "/media/packs/polaris-freedom/06.jpg",
+     "sourceUpload": "541d7020-1000022909.jpg",
+     "width": 1500,
+     "height": 1500,
+     "sha256": "d499cdfb544f1ad28eaa320be37bc79b24ce1d807956708c2eddfe69cc1ce9ee",
+     "role": "supporting"
+    },
+    {
+     "file": "/media/packs/polaris-freedom/07.jpg",
+     "sourceUpload": "029128c4-1000022910.jpg",
+     "width": 1500,
+     "height": 1500,
+     "sha256": "eef9e0f784804a539b585b3907c1499c09ed31dc4e37c5aa86e2ce9d826ffffc",
+     "role": "supporting"
+    }
+   ],
+   "excluded": [
+    {
+     "file": "4acc18c9-1000022911.jpg",
+     "reason": "phone capture of retailer UI (1080x2400) \u2014 evidence, not marketing imagery"
+    }
+   ]
+  },
+  "prod-betta-se-plus": {
+   "slug": "betta-se-plus",
+   "assets": [
+    {
+     "file": "/media/packs/betta-se-plus/hero.jpg",
+     "sourceUpload": "dbff5414-1000022916.webp",
+     "width": 1000,
+     "height": 696,
+     "sha256": "1cac62e61798f4032e8e64ac754b3c1212e10c534aa2cef78ee0b7008795aa11",
+     "role": "hero"
+    },
+    {
+     "file": "/media/packs/betta-se-plus/02.jpg",
+     "sourceUpload": "d5491fba-1000022917.jpg",
+     "width": 1455,
+     "height": 1455,
+     "sha256": "e5383c2e2ca1781e56329e5efab664b8073e90a2563febc371c269763718783e",
+     "role": "supporting"
+    },
+    {
+     "file": "/media/packs/betta-se-plus/03.jpg",
+     "sourceUpload": "122525e7-1000022918.jpg",
+     "width": 1080,
+     "height": 1080,
+     "sha256": "fc1cba982037178cd7fda578a725c74fe7bbe0b82dbb08366b4b7dc80ba93bab",
+     "role": "supporting"
+    },
+    {
+     "file": "/media/packs/betta-se-plus/04.jpg",
+     "sourceUpload": "c1825178-1000022919.jpg",
+     "width": 1080,
+     "height": 1080,
+     "sha256": "5d3bbe4296e46c0912fb4f8e69894ffa7ddb173197ed9c93c320373511e3cf2c",
+     "role": "supporting"
+    },
+    {
+     "file": "/media/packs/betta-se-plus/05.jpg",
+     "sourceUpload": "5790ee58-1000022920.jpg",
+     "width": 1080,
+     "height": 1058,
+     "sha256": "72f8f5c77e94fb5b11ebd6ad9f6ba47143bb50920c4918b19aa91310bb38a404",
+     "role": "supporting"
+    },
+    {
+     "file": "/media/packs/betta-se-plus/06.jpg",
+     "sourceUpload": "18fb2c55-1000022921.jpg",
+     "width": 1080,
+     "height": 1080,
+     "sha256": "335684638be5e29e177cd8009ff063aacdc4488c67ee2afba0b600e6a58763c7",
+     "role": "supporting"
+    },
+    {
+     "file": "/media/packs/betta-se-plus/07.jpg",
+     "sourceUpload": "12b96dcf-1000022922.jpg",
+     "width": 1080,
+     "height": 1080,
+     "sha256": "44eb5ce7675f5d5fdf728847b0e10e327fb2a729e76d1a442c227b62840e391b",
+     "role": "supporting"
+    },
+    {
+     "file": "/media/packs/betta-se-plus/08.jpg",
+     "sourceUpload": "2913680e-1000022923.jpg",
+     "width": 1080,
+     "height": 1080,
+     "sha256": "71e4f0a7376c1e4180100d62de2251c5bccae4e8788e214cdd294755be238c2c",
+     "role": "supporting"
+    },
+    {
+     "file": "/media/packs/betta-se-plus/09.jpg",
+     "sourceUpload": "a485be8b-1000022924.jpg",
+     "width": 1080,
+     "height": 1080,
+     "sha256": "2bc3f6a85ab3e5600449e4ecda7afde89b3e48cfb2b63cfca2ca78ec47354b83",
+     "role": "supporting"
+    }
+   ],
+   "excluded": [
+    {
+     "file": "082176c3-1000022925.jpg",
+     "reason": "phone capture of retailer UI (1080x2400) \u2014 evidence, not marketing imagery"
+    },
+    {
+     "file": "adbfd914-1000022925.jpg",
+     "reason": "phone capture of retailer UI (1080x2400) \u2014 evidence, not marketing imagery"
+    },
+    {
+     "file": "b8613c73-1000022926.jpg",
+     "reason": "phone capture of retailer UI (1080x2400) \u2014 evidence, not marketing imagery"
+    }
+   ]
+  }
+ }
+}

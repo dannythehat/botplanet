@@ -112,7 +112,40 @@ const PRESS_KIT: RightsBasisDef = {
   evidence: "The press kit page itself, quoted verbatim on the asset record.",
 };
 
-export const RIGHTS_BASES: RightsBasisDef[] = [PRESS_KIT, AMAZON, ORIGINAL, PLACEHOLDER];
+/**
+ * Owner-supplied manufacturer marketing imagery, under a recorded ruling.
+ *
+ * WHAT THIS IS: manufacturer-authored product photography and A+ marketing
+ * panels for three launch models, captured by the owner from each model's own
+ * Amazon listing and supplied as files on 2026-07-31. The Job 8 ruling of the
+ * same date classifies A+ modules as manufacturer-authored, retailer-hosted
+ * content when attached to the exact model listing.
+ *
+ * WHAT THIS IS NOT: an evidenced manufacturer licence. BotPlanet raised that
+ * gap twice; the owner and the PM ruled to register and use the packs
+ * (build-queue instruction, 2026-07-31). The registration therefore records
+ * the true position instead of inventing a licence: authorship is credited to
+ * the manufacturer, no structured-data slot may present the file as licensed
+ * Program Content, `supportsTestedClaim` stays false, and every asset sits
+ * behind the central withdrawal switch so a manufacturer objection is honoured
+ * by flipping one record, not by hunting files.
+ */
+const OWNER_SUPPLIED: RightsBasisDef = {
+  key: "owner_supplied_manufacturer_marketing",
+  tier: "owner_supplied_manufacturer_marketing",
+  provider: "Manufacturer-authored, owner-supplied",
+  text: "Manufacturer-authored marketing imagery for the exact model, supplied by the owner from the model's own retail listing and used under the recorded owner/PM ruling of 2026-07-31. Manufacturer permission is not evidenced: excluded from Product structured data, Open Graph and email, credited to the manufacturer, and withdrawable centrally the moment any objection or licensed source supersedes it.",
+  allowedMarkets: ["us"],
+  allowedPlacements: ["product_page", "category_page", "listing_card", "comparison"],
+  allowedTransformations: ["proportional_resize", "format_conversion", "approved_crop"],
+  remoteServingRequired: false,
+  credentialSecretRef: null,
+  attributionRequired: "Product imagery: the manufacturer",
+  expiryRule: "re-check on any manufacturer objection, licence grant, or listing change",
+  evidence: "Owner file supply and PM build-queue instruction, 2026-07-31; Job 8 ruling classifying A+ modules as manufacturer-authored; scripts/pack-manifest.json records source, checksum and exclusions.",
+};
+
+export const RIGHTS_BASES: RightsBasisDef[] = [PRESS_KIT, AMAZON, ORIGINAL, PLACEHOLDER, OWNER_SUPPLIED];
 
 export const rightsBasis = (key: string): RightsBasisDef | undefined => RIGHTS_BASES.find((r) => r.key === key);
 
@@ -196,4 +229,4 @@ export const MEDIA_SOURCE_CHECKS: SourceCheck[] = [
  * placeholder that names the exact model and claims nothing.
  */
 export const PRODUCT_PHOTOGRAPHY_POSITION =
-  "No third-party product photograph is ingested. The Amazon Associates route is a potential lawful source, but the account's ownership and current approval are unverified, and obtaining Program Content lawfully would also require Creators API credentials that this environment does not hold; the programme forbids scraping, guessed URLs and unapproved caching. No launch-brand manufacturer publishes a press kit granting third-party image use. Until one of those changes, every product renders an original BotPlanet branded placeholder that names the exact model and does not depict it.";
+  "No third-party product photograph is ingested through an automated route. Three launch models render owner-supplied manufacturer marketing imagery under the recorded ruling of 2026-07-31, credited to the manufacturer and excluded from structured data because no manufacturer permission is evidenced. The Amazon Associates Program Content route would additionally require Creators API credentials that this environment does not hold, and the programme forbids scraping, guessed URLs and unapproved caching. No launch-brand manufacturer publishes a press kit granting third-party image use. Every other product renders an original BotPlanet branded placeholder that names the exact model and does not depict it.";

@@ -25,6 +25,10 @@ import {
 } from "../src/lib/media-registry";
 import { buildMediaMapping } from "../src/lib/media-mapping";
 import { LAUNCH_CATEGORY, productPath } from "../src/content/routes";
+import PACK_MANIFEST from "../../../scripts/pack-manifest.json";
+
+/** The three products carrying owner-supplied reviewed heroes. */
+const PACKED_IDS = ["prod-dolphin-nautilus-cc-plus", "prod-polaris-freedom", "prod-betta-se-plus"];
 
 const REPORT = mediaReport();
 const PRODUCT_IDS = Object.values(PRODUCTS).map((p) => p.productId);
@@ -126,12 +130,32 @@ describe("exact model identity", () => {
 });
 
 describe("lawful sourcing", () => {
-  it("holds no third-party product photograph, and says so", () => {
+  it("admits third-party imagery only through the owner-supplied tier, rights-honest", () => {
+    // The inventory changed on 2026-07-31: the owner supplied manufacturer
+    // marketing packs and the PM ruled to register them. Everything third-party
+    // must sit in that one tier, credit the manufacturer, stay out of every
+    // structured-data slot, and remain one withdrawal flip from gone.
     const thirdParty = MEDIA_ASSETS.filter(
       (a) => a.tier !== "original_botplanet" && a.tier !== "branded_placeholder",
     );
-    expect(thirdParty).toEqual([]);
+    expect(thirdParty.length).toBeGreaterThan(0);
+    for (const a of thirdParty) {
+      expect(a.tier).toBe("owner_supplied_manufacturer_marketing");
+      expect(a.acquisitionMethod).toBe("owner_supplied_capture");
+      expect(a.schema.productImage).toBe(false);
+      expect(a.schema.openGraph).toBe(false);
+      expect(a.attributionRequired).toContain("manufacturer");
+      expect(a.checksum).toMatch(/^sha256:/);
+      expect(a.exactModel).toBeTruthy();
+    }
     expect(PRODUCT_PHOTOGRAPHY_POSITION).toContain("No third-party product photograph is ingested");
+  });
+
+  it("excluded every phone capture of retailer UI from publication", () => {
+    for (const pack of Object.values(PACK_MANIFEST.packs)) {
+      for (const x of pack.excluded) expect(x.reason).toMatch(/retailer UI|not present/);
+      for (const a of pack.assets) expect(a.width / a.height).toBeGreaterThanOrEqual(0.6);
+    }
   });
 
   it("records the lawful-source check that produced that finding", () => {
@@ -220,8 +244,12 @@ describe("responsive derivatives", () => {
     for (const a of PLACEHOLDER_ASSETS) expect(a.src!.endsWith(".svg")).toBe(true);
   });
 
-  it("counts a vector asset as variant-ready, because it scales without one", () => {
-    for (const id of PRODUCT_IDS) expect(readinessFor(id).responsiveVariantsReady).toBe(true);
+  it("counts a vector asset as variant-ready, and a raster hero as not-yet", () => {
+    for (const id of PRODUCT_IDS) {
+      // Raster pack heroes have no derivatives until Job 13 generates them;
+      // placeholder-only products stay vector and need none.
+      expect(readinessFor(id).responsiveVariantsReady).toBe(!PACKED_IDS.includes(id));
+    }
   });
 
   it("rejects a derivative wider than its source", () => {
@@ -418,10 +446,11 @@ describe("readiness states", () => {
     }
   });
 
-  it("calls no product hero-ready, schema-eligible or media-complete", () => {
+  it("grants hero-readiness to the packed three and nothing beyond it", () => {
     for (const id of PRODUCT_IDS) {
       const r = readinessFor(id);
-      expect(r.heroReady).toBe(false);
+      expect(r.heroReady).toBe(PACKED_IDS.includes(id));
+      // Schema stays closed for everyone: no manufacturer licence is evidenced.
       expect(r.schemaEligible).toBe(false);
       expect(r.fullProductMediaSetReady).toBe(false);
     }
@@ -429,18 +458,24 @@ describe("readiness states", () => {
 
   it("lists the missing target types honestly rather than inventing records", () => {
     for (const p of REPORT.products) {
-      expect(p.missingTypes).toEqual(TARGET_TYPES);
-      expect(p.assets.length).toBe(1);
+      if (PACKED_IDS.includes(p.productId)) {
+        expect(p.missingTypes).not.toContain("product_hero");
+        expect(p.missingTypes).toContain("listing_thumbnail");
+        expect(p.assets.length).toBeGreaterThan(1);
+      } else {
+        expect(p.missingTypes).toEqual(TARGET_TYPES);
+        expect(p.assets.length).toBe(1);
+      }
     }
   });
 });
 
 describe("public integration", () => {
-  it("renders a placeholder for every product today", () => {
+  it("renders the reviewed hero where one exists and the placeholder elsewhere", () => {
     for (const id of PRODUCT_IDS) {
       const r = resolveImage(id, "listing_card", ["product_hero", "branded_placeholder"])!;
       expect(r).toBeTruthy();
-      expect(r.isPlaceholder).toBe(true);
+      expect(r.isPlaceholder).toBe(!PACKED_IDS.includes(id));
       expect(r.schemaProductImage).toBe(false);
       expect(r.width).toBeGreaterThan(0);
       expect(r.height).toBeGreaterThan(0);
@@ -511,7 +546,11 @@ describe("register handoff mapping", () => {
   });
 
   it("reports the honest readiness status", () => {
-    for (const r of mapping.rows) expect(r.imageReadinessStatus).toBe("public_safe_placeholder_only");
+    for (const r of mapping.rows) {
+      expect(r.imageReadinessStatus).toBe(
+        PACKED_IDS.includes(r.productId) ? "hero_live_supporting_pending" : "public_safe_placeholder_only",
+      );
+    }
   });
 });
 

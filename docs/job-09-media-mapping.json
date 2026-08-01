@@ -1,21 +1,21 @@
 {
   "generatedFor": "2026-07-31",
   "launchProducts": 10,
-  "position": "No third-party product photograph is ingested. The Amazon Associates route is a potential lawful source, but the account's ownership and current approval are unverified, and obtaining Program Content lawfully would also require Creators API credentials that this environment does not hold; the programme forbids scraping, guessed URLs and unapproved caching. No launch-brand manufacturer publishes a press kit granting third-party image use. Until one of those changes, every product renders an original BotPlanet branded placeholder that names the exact model and does not depict it.",
+  "position": "No third-party product photograph is ingested through an automated route. Three launch models render owner-supplied manufacturer marketing imagery under the recorded ruling of 2026-07-31, credited to the manufacturer and excluded from structured data because no manufacturer permission is evidenced. The Amazon Associates Program Content route would additionally require Creators API credentials that this environment does not hold, and the programme forbids scraping, guessed URLs and unapproved caching. No launch-brand manufacturer publishes a press kit granting third-party image use. Every other product renders an original BotPlanet branded placeholder that names the exact model and does not depict it.",
   "totals": {
-    "assets": 18,
-    "productAssets": 10,
+    "assets": 42,
+    "productAssets": 34,
     "originalAssets": 8,
     "placeholders": 10,
-    "locallyStored": 18,
+    "locallyStored": 42,
     "remotelyServed": 0,
     "withdrawn": 0,
     "exactModelConfirmed": 10,
     "publicSafe": 10,
-    "heroReady": 0,
+    "heroReady": 3,
     "fullSetReady": 0,
     "derivatives": 0,
-    "altApproved": 16,
+    "altApproved": 19,
     "altDecorative": 2,
     "altMissing": 0,
     "altRejected": 0,
@@ -84,33 +84,30 @@
       "slug": "dolphin-nautilus-cc-plus",
       "canonicalUrl": "https://botplanet.io/robots/robotic-pool-cleaners/dolphin-nautilus-cc-plus/",
       "exactModel": "Dolphin Nautilus CC Plus w/Wi-Fi",
-      "heroAssetId": null,
+      "heroAssetId": "pack-dolphin-nautilus-cc-plus-hero",
       "supportingAssetIds": [],
-      "renderedAssetId": "ph-dolphin-nautilus-cc-plus",
-      "renderedIsPlaceholder": true,
-      "imageSource": "branded_placeholder — BotPlanet",
-      "rightsBasis": "Original BotPlanet placeholder artwork. Depicts no real product. Full usage rights, but barred from Product structured data because it is not a photograph of the product it stands in for.",
+      "renderedAssetId": "pack-dolphin-nautilus-cc-plus-hero",
+      "renderedIsPlaceholder": false,
+      "imageSource": "owner_supplied_manufacturer_marketing — Manufacturer-authored, owner-supplied",
+      "rightsBasis": "Manufacturer-authored marketing imagery for the exact model, supplied by the owner from the model's own retail listing and used under the recorded owner/PM ruling of 2026-07-31. Manufacturer permission is not evidenced: excluded from Product structured data, Open Graph and email, credited to the manufacturer, and withdrawable centrally the moment any objection or licensed source supersedes it.",
       "allowedPlacements": [
         "product_page",
         "category_page",
         "listing_card",
-        "comparison",
-        "homepage"
+        "comparison"
       ],
       "allowedMarkets": [
-        "us",
-        "global"
+        "us"
       ],
       "storage": "local_permitted",
       "remoteServingRequired": false,
-      "altText": "BotPlanet placeholder panel naming the Dolphin Nautilus CC Plus w/Wi-Fi. Product photography is not yet available under a licence we hold.",
+      "altText": "Dolphin Nautilus CC Plus robotic pool cleaner with wall-climbing scrubber brushes, shown with the Dolphin app on a phone",
       "altTextStatus": "approved",
       "structuredDataImages": [],
       "structuredDataEligible": false,
       "openGraphEligible": false,
-      "schemaExclusionReason": "a branded placeholder depicts no real product; presenting it as a Product image or an Open Graph preview would tell a machine consumer it is a photograph of the product",
+      "schemaExclusionReason": "manufacturer-authored imagery used under a recorded owner ruling without an evidenced manufacturer licence; asserting it in Product structured data, Open Graph or social slots would present it as licensed content",
       "missingImageTypes": [
-        "product_hero",
         "product_alternate_view",
         "product_detail",
         "listing_thumbnail"
@@ -119,17 +116,16 @@
       "readiness": {
         "rightsRecordComplete": true,
         "exactModelConfirmed": true,
-        "heroReady": false,
+        "heroReady": true,
         "supportingImagesReady": false,
-        "responsiveVariantsReady": true,
+        "responsiveVariantsReady": false,
         "altTextApproved": true,
         "schemaEligible": false,
         "publicRenderingSafe": true,
         "fullProductMediaSetReady": false
       },
-      "imageReadinessStatus": "public_safe_placeholder_only",
+      "imageReadinessStatus": "hero_live_supporting_pending",
       "blockers": [
-        "no rights-cleared product hero",
         "no supporting product imagery",
         "no image eligible for Product structured data",
         "The licensed route is Amazon Program Content via the Creators API. The API needs credentials this build environment does not hold, and the programme forbids scraping, constructing image URLs, or caching Program Content without express permission — so there is no lawful way to fetch an image here. Maytronics ships several near-identical Nautilus CC variants; only part 99996409-PCI may be matched."
@@ -196,33 +192,30 @@
       "slug": "polaris-freedom",
       "canonicalUrl": "https://botplanet.io/robots/robotic-pool-cleaners/polaris-freedom/",
       "exactModel": "Polaris FREEDOM Cordless Robotic Cleaner",
-      "heroAssetId": null,
+      "heroAssetId": "pack-polaris-freedom-hero",
       "supportingAssetIds": [],
-      "renderedAssetId": "ph-polaris-freedom",
-      "renderedIsPlaceholder": true,
-      "imageSource": "branded_placeholder — BotPlanet",
-      "rightsBasis": "Original BotPlanet placeholder artwork. Depicts no real product. Full usage rights, but barred from Product structured data because it is not a photograph of the product it stands in for.",
+      "renderedAssetId": "pack-polaris-freedom-hero",
+      "renderedIsPlaceholder": false,
+      "imageSource": "owner_supplied_manufacturer_marketing — Manufacturer-authored, owner-supplied",
+      "rightsBasis": "Manufacturer-authored marketing imagery for the exact model, supplied by the owner from the model's own retail listing and used under the recorded owner/PM ruling of 2026-07-31. Manufacturer permission is not evidenced: excluded from Product structured data, Open Graph and email, credited to the manufacturer, and withdrawable centrally the moment any objection or licensed source supersedes it.",
       "allowedPlacements": [
         "product_page",
         "category_page",
         "listing_card",
-        "comparison",
-        "homepage"
+        "comparison"
       ],
       "allowedMarkets": [
-        "us",
-        "global"
+        "us"
       ],
       "storage": "local_permitted",
       "remoteServingRequired": false,
-      "altText": "BotPlanet placeholder panel naming the Polaris FREEDOM Cordless Robotic Cleaner. Product photography is not yet available under a licence we hold.",
+      "altText": "Polaris FREEDOM cordless robotic pool cleaner on rugged tracks, shown with the iAquaLink app running a cleaning cycle",
       "altTextStatus": "approved",
       "structuredDataImages": [],
       "structuredDataEligible": false,
       "openGraphEligible": false,
-      "schemaExclusionReason": "a branded placeholder depicts no real product; presenting it as a Product image or an Open Graph preview would tell a machine consumer it is a photograph of the product",
+      "schemaExclusionReason": "manufacturer-authored imagery used under a recorded owner ruling without an evidenced manufacturer licence; asserting it in Product structured data, Open Graph or social slots would present it as licensed content",
       "missingImageTypes": [
-        "product_hero",
         "product_alternate_view",
         "product_detail",
         "listing_thumbnail"
@@ -231,17 +224,16 @@
       "readiness": {
         "rightsRecordComplete": true,
         "exactModelConfirmed": true,
-        "heroReady": false,
+        "heroReady": true,
         "supportingImagesReady": false,
-        "responsiveVariantsReady": true,
+        "responsiveVariantsReady": false,
         "altTextApproved": true,
         "schemaEligible": false,
         "publicRenderingSafe": true,
         "fullProductMediaSetReady": false
       },
-      "imageReadinessStatus": "public_safe_placeholder_only",
+      "imageReadinessStatus": "hero_live_supporting_pending",
       "blockers": [
-        "no rights-cleared product hero",
         "no supporting product imagery",
         "no image eligible for Product structured data",
         "The licensed route is Amazon Program Content via the Creators API. The API needs credentials this build environment does not hold, and the programme forbids scraping, constructing image URLs, or caching Program Content without express permission — so there is no lawful way to fetch an image here. Polaris sells FREEDOM, FREEDOM SC, FREEDOM LT and FREEDOM Plus on a shared EB37 chassis, so an incoming image must be matched on the FFREEDOM SKU and not on family resemblance."
@@ -252,33 +244,30 @@
       "slug": "betta-se-plus",
       "canonicalUrl": "https://botplanet.io/robots/robotic-pool-cleaners/betta-se-plus/",
       "exactModel": "Betta SE Plus — Solar-Powered Robotic Pool Skimmer",
-      "heroAssetId": null,
+      "heroAssetId": "pack-betta-se-plus-hero",
       "supportingAssetIds": [],
-      "renderedAssetId": "ph-betta-se-plus",
-      "renderedIsPlaceholder": true,
-      "imageSource": "branded_placeholder — BotPlanet",
-      "rightsBasis": "Original BotPlanet placeholder artwork. Depicts no real product. Full usage rights, but barred from Product structured data because it is not a photograph of the product it stands in for.",
+      "renderedAssetId": "pack-betta-se-plus-hero",
+      "renderedIsPlaceholder": false,
+      "imageSource": "owner_supplied_manufacturer_marketing — Manufacturer-authored, owner-supplied",
+      "rightsBasis": "Manufacturer-authored marketing imagery for the exact model, supplied by the owner from the model's own retail listing and used under the recorded owner/PM ruling of 2026-07-31. Manufacturer permission is not evidenced: excluded from Product structured data, Open Graph and email, credited to the manufacturer, and withdrawable centrally the moment any objection or licensed source supersedes it.",
       "allowedPlacements": [
         "product_page",
         "category_page",
         "listing_card",
-        "comparison",
-        "homepage"
+        "comparison"
       ],
       "allowedMarkets": [
-        "us",
-        "global"
+        "us"
       ],
       "storage": "local_permitted",
       "remoteServingRequired": false,
-      "altText": "BotPlanet placeholder panel naming the Betta SE Plus — Solar-Powered Robotic Pool Skimmer. Product photography is not yet available under a licence we hold.",
+      "altText": "Betta SE Plus solar-powered robotic pool skimmer with its twin solar panels and grey hull",
       "altTextStatus": "approved",
       "structuredDataImages": [],
       "structuredDataEligible": false,
       "openGraphEligible": false,
-      "schemaExclusionReason": "a branded placeholder depicts no real product; presenting it as a Product image or an Open Graph preview would tell a machine consumer it is a photograph of the product",
+      "schemaExclusionReason": "manufacturer-authored imagery used under a recorded owner ruling without an evidenced manufacturer licence; asserting it in Product structured data, Open Graph or social slots would present it as licensed content",
       "missingImageTypes": [
-        "product_hero",
         "product_alternate_view",
         "product_detail",
         "listing_thumbnail"
@@ -287,17 +276,16 @@
       "readiness": {
         "rightsRecordComplete": true,
         "exactModelConfirmed": true,
-        "heroReady": false,
+        "heroReady": true,
         "supportingImagesReady": false,
-        "responsiveVariantsReady": true,
+        "responsiveVariantsReady": false,
         "altTextApproved": true,
         "schemaEligible": false,
         "publicRenderingSafe": true,
         "fullProductMediaSetReady": false
       },
-      "imageReadinessStatus": "public_safe_placeholder_only",
+      "imageReadinessStatus": "hero_live_supporting_pending",
       "blockers": [
-        "no rights-cleared product hero",
         "no supporting product imagery",
         "no image eligible for Product structured data",
         "The licensed route is Amazon Program Content via the Creators API. The API needs credentials this build environment does not hold, and the programme forbids scraping, constructing image URLs, or caching Program Content without express permission — so there is no lawful way to fetch an image here. The stored record previously cited the Betta SE page in error. Any incoming image must be matched to /products/betta-se-plus; Betta SE media must never be imported for this product."

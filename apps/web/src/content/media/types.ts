@@ -18,6 +18,14 @@ export type SourceTier =
   | "manufacturer_page_permitted" // 2. manufacturer page via an explicitly permitted method
   | "affiliate_api" // 3. approved affiliate API supplying image content
   | "affiliate_media_feed" // 4. approved retailer/affiliate media feed
+  /**
+   * 4.5 — manufacturer-authored marketing imagery supplied BY THE OWNER from
+   * the exact model's listing, registered under a recorded owner ruling.
+   * Ranked between the licensed feeds above and our own artwork below: the
+   * imagery is the manufacturer's, but no manufacturer permission is evidenced,
+   * so it never inherits a licensed tier and stays one flip from withdrawal.
+   */
+  | "owner_supplied_manufacturer_marketing"
   | "original_botplanet" // 5. artwork we made
   | "branded_placeholder"; // 6. honest branded placeholder
 
@@ -27,6 +35,7 @@ export const SOURCE_TIER_RANK: Record<SourceTier, number> = {
   manufacturer_page_permitted: 2,
   affiliate_api: 3,
   affiliate_media_feed: 4,
+  owner_supplied_manufacturer_marketing: 4.5,
   original_botplanet: 5,
   branded_placeholder: 6,
 };
@@ -38,6 +47,8 @@ export type AcquisitionMethod =
   | "affiliate_feed_record"
   | "authored_in_house"
   | "generated_from_house_template"
+  /** Supplied by the owner as files, from the exact model's own listing. */
+  | "owner_supplied_capture"
   /** Recorded when nothing has been obtained yet, so the gap is explicit. */
   | "not_yet_acquired";
 

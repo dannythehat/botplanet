@@ -46,7 +46,7 @@ export interface MediaRegisterRow {
   withdrawalFallback: string;
 
   readiness: Record<string, boolean>;
-  imageReadinessStatus: "full_set" | "public_safe_placeholder_only" | "not_renderable";
+  imageReadinessStatus: "full_set" | "hero_live_supporting_pending" | "public_safe_placeholder_only" | "not_renderable";
   blockers: string[];
 }
 
@@ -64,11 +64,16 @@ export function buildMediaMapping(): {
     const asset = MEDIA_ASSETS.find((a) => a.id === rendered?.assetId);
     const schemaImages = schemaImagesFor(p.productId);
 
+    // A live reviewed hero with unreviewed supporting panels is neither a full
+    // set nor a placeholder-only product — naming the middle state keeps the
+    // register honest about what a visitor actually sees.
     const status: MediaRegisterRow["imageReadinessStatus"] = p.readiness.fullProductMediaSetReady
       ? "full_set"
-      : p.readiness.publicRenderingSafe
-        ? "public_safe_placeholder_only"
-        : "not_renderable";
+      : p.readiness.publicRenderingSafe && p.readiness.heroReady
+        ? "hero_live_supporting_pending"
+        : p.readiness.publicRenderingSafe
+          ? "public_safe_placeholder_only"
+          : "not_renderable";
 
     const blockers: string[] = [];
     if (!p.readiness.heroReady) blockers.push("no rights-cleared product hero");

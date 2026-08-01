@@ -35,6 +35,10 @@ export function isRenderable(a: MediaAssetRecord): boolean {
   if (a.withdrawal !== "active") return false;
   if (!a.src) return false;
   if (a.altTextStatus === "missing" || a.altTextStatus === "rejected") return false;
+  // Draft alt text means the asset has not passed review. The owner-supplied
+  // supporting panels sit in exactly this state on purpose: preserved for the
+  // Job 13 review, invisible to every public surface until it happens.
+  if (a.altTextStatus === "draft") return false;
   return true;
 }
 
