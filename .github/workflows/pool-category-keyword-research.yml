@@ -21,16 +21,36 @@ jobs:
         with:
           node-version: "20"
 
+      - name: Record credential availability without values
+        env:
+          DATAFORSEO_LOGIN: ${{ secrets.DATAFORSEO_LOGIN }}
+          DATAFORSEO_PASSWORD: ${{ secrets.DATAFORSEO_PASSWORD }}
+          DATAFORSEO_BASIC_AUTH: ${{ secrets.DATAFORSEO_BASIC_AUTH }}
+        run: |
+          mkdir -p research-output
+          node - <<'NODE'
+          const fs = require('fs');
+          fs.writeFileSync('research-output/dataforseo-credential-presence.json', JSON.stringify({
+            loginPresent: Boolean(process.env.DATAFORSEO_LOGIN),
+            passwordPresent: Boolean(process.env.DATAFORSEO_PASSWORD),
+            basicAuthPresent: Boolean(process.env.DATAFORSEO_BASIC_AUTH)
+          }, null, 2));
+          NODE
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add research-output/dataforseo-credential-presence.json
+          git commit -m "Record DataForSEO credential availability [skip ci]"
+          git push origin HEAD:research/pool-seo-page-map
+
       - name: Run DataForSEO research
         run: node scripts/pool-category-keyword-research.mjs
         env:
           DATAFORSEO_LOGIN: ${{ secrets.DATAFORSEO_LOGIN }}
           DATAFORSEO_PASSWORD: ${{ secrets.DATAFORSEO_PASSWORD }}
+          DATAFORSEO_BASIC_AUTH: ${{ secrets.DATAFORSEO_BASIC_AUTH }}
 
       - name: Commit sanitised results to research branch
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add research-output/pool-category-keyword-research.json research-output/pool-category-cost.json
           git commit -m "Record pool category keyword research [skip ci]"
           git push origin HEAD:research/pool-seo-page-map
@@ -39,5 +59,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: pool-category-keyword-research
-          path: research-output/pool-category-*.json
+          path: research-output/*.json
           retention-days: 14
