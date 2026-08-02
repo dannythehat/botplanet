@@ -32,13 +32,28 @@ interface Props {
   primaryCta?: HeroCta;
   secondaryCta?: HeroCta;
   image?: HeroImage;
+  /**
+   * "above"  — full-bleed band across the top, copy beneath. Suits wide
+   *            cinematic artwork where nothing should be cropped away.
+   * "beside" — image in a column next to the copy. Suits squarer artwork.
+   */
+  imageLayout?: "above" | "beside";
 }
 
-const { eyebrow, title, subtitle, primaryCta, secondaryCta, image } = Astro.props;
+const {
+  eyebrow,
+  title,
+  subtitle,
+  primaryCta,
+  secondaryCta,
+  image,
+  imageLayout = "above",
+} = Astro.props;
 const hasImage = Boolean(image?.src);
+const layout = hasImage ? imageLayout : "none";
 ---
 
-<section class="chero" data-has-image={hasImage ? "true" : "false"}>
+<section class="chero" data-has-image={hasImage ? "true" : "false"} data-layout={layout}>
   <div class="chero__inner">
     <div class="chero__copy">
       {eyebrow && <span class="chero__eyebrow">{eyebrow}</span>}
@@ -217,27 +232,63 @@ const hasImage = Boolean(image?.src);
     object-position: center;
   }
 
+  /* ---------- layout: image as a full-bleed band above the copy ---------- */
+  .chero[data-layout="above"] {
+    padding: 0;
+  }
+
+  .chero[data-layout="above"] .chero__inner {
+    gap: 0;
+  }
+
+  /* H1 stays first in the markup for screen readers and search;
+     the artwork is lifted above it visually. */
+  .chero[data-layout="above"] .chero__figure {
+    order: -1;
+    border: 0;
+    border-bottom: 1px solid rgba(204, 210, 218, 0.16);
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .chero[data-layout="above"] .chero__figure img {
+    aspect-ratio: 3 / 2;
+  }
+
+  .chero[data-layout="above"] .chero__copy {
+    padding: clamp(1.5rem, 5vw, 2.5rem);
+  }
+
   /* ---------- desktop ---------- */
   @media (min-width: 900px) {
-    .chero {
+    .chero[data-layout="beside"],
+    .chero[data-layout="none"] {
       padding: clamp(2.75rem, 4vw, 4rem);
     }
 
-    .chero[data-has-image="true"] .chero__inner {
+    .chero[data-layout="beside"] .chero__inner {
       grid-template-columns: 1.02fr 0.98fr;
+    }
+
+    .chero[data-layout="beside"] .chero__figure img {
+      aspect-ratio: 4 / 3;
+    }
+
+    .chero[data-layout="above"] .chero__figure img {
+      aspect-ratio: 16 / 9;
+    }
+
+    .chero[data-layout="above"] .chero__copy {
+      padding: clamp(2.5rem, 3.6vw, 3.5rem);
     }
 
     .chero__subtitle {
       font-size: 1.1875rem; /* 19px */
     }
-
-    .chero__figure img {
-      aspect-ratio: 4 / 3;
-    }
   }
 
   /* Without an image the copy gets the full width but stays readable. */
-  .chero[data-has-image="false"] .chero__subtitle {
+  .chero[data-layout="none"] .chero__subtitle {
     max-width: 62ch;
   }
 

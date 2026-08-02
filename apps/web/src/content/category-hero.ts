@@ -28,6 +28,8 @@ export interface CategoryHeroContent {
   secondaryCta?: HeroCta;
   /** Drop the artwork in and fill this out. Omit it and the hero renders text-only. */
   image?: HeroImage;
+  /** "above" for wide cinematic artwork, "beside" for squarer artwork. */
+  imageLayout?: "above" | "beside";
 }
 
 export const CATEGORY_HERO: Record<string, CategoryHeroContent> = {
@@ -47,20 +49,21 @@ export const CATEGORY_HERO: Record<string, CategoryHeroContent> = {
     primaryCta: { label: "Compare pool robots", href: "#products" },
     secondaryCta: { label: "Try Pool BotMatch", href: "/botmatch/robotic-pool-cleaners/" },
 
-    /* ------------------------------------------------------------------
-       IMAGE SLOT — currently empty, so the hero renders text-only.
-
-       To add the artwork:
-         1. put the files in  apps/web/public/media/pool/
-         2. uncomment the block below and set the real filenames + alt text
-
-       image: {
-         src: "/media/pool/hero-desktop.jpg",
-         mobileSrc: "/media/pool/hero-mobile.jpg",
-         alt: "A robotic pool cleaner working across the floor of a lit swimming pool at dusk.",
-         focal: "50% 45%",
-       },
-       ------------------------------------------------------------------ */
+    /* Owner-created BotPlanet artwork. Carries approved in-image BotPlanet
+       branding, which is deliberate editorial media — do not crop it out or
+       swap it for a plain packshot. Master supplied as PNG; the files below
+       are the optimised WebP derivatives (133 KB / 85 KB).
+       Mobile is a 3:2 centre crop that keeps both the logo and the robot. */
+    image: {
+      src: "/media/pool/hero-desktop.webp",
+      mobileSrc: "/media/pool/hero-mobile.webp",
+      alt:
+        "Cutaway view of a lit in-ground swimming pool at dusk with a tracked " +
+        "BotPlanet robotic pool cleaner working across the pool floor, a modern " +
+        "house lit behind it.",
+      focal: "50% 55%",
+    },
+    imageLayout: "above",
   },
 };
 
