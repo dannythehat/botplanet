@@ -2,12 +2,15 @@ import { mkdirSync, writeFileSync } from "node:fs";
 
 const login = process.env.DATAFORSEO_LOGIN?.trim();
 const password = process.env.DATAFORSEO_PASSWORD?.trim();
-if (!login || !password) {
+const preEncoded = process.env.DATAFORSEO_BASIC_AUTH?.trim();
+if (!preEncoded && (!login || !password)) {
   console.error("DataForSEO credentials are unavailable.");
   process.exit(1);
 }
 
-const AUTH = `Basic ${Buffer.from(`${login}:${password}`).toString("base64")}`;
+const AUTH = preEncoded
+  ? `Basic ${preEncoded}`
+  : `Basic ${Buffer.from(`${login}:${password}`).toString("base64")}`;
 const BASE = "https://api.dataforseo.com/v3";
 const US = { location_code: 2840, language_code: "en" };
 const HARD_CAP_USD = 0.60;
