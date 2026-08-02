@@ -1,0 +1,250 @@
+---
+import Base from "../../layouts/Base.astro";
+
+const products = [
+  {
+    no: "01",
+    name: "Dolphin Nautilus CC Plus Wi-Fi",
+    role: "Corded all-rounder",
+    verdict: "For owners who value dependable scheduled cleaning more than cable-free convenience.",
+    suited: "Routine in-ground cleaning",
+    power: "Corded",
+    coverage: "Floor + walls",
+    focus: "Wi-Fi scheduling",
+    limitation: "Cable management",
+    tone: "blue",
+  },
+  {
+    no: "02",
+    name: "Polaris FREEDOM",
+    role: "Cordless convenience",
+    verdict: "A cable-free route for owners who prioritise easier setup and retrieval.",
+    suited: "Convenience-first owners",
+    power: "Cordless",
+    coverage: "Floor + walls",
+    focus: "Cable-free handling",
+    limitation: "Charging and runtime",
+    tone: "gold",
+  },
+  {
+    no: "03",
+    name: "Betta SE Plus",
+    role: "Surface specialist",
+    verdict: "A dedicated surface skimmer for leaves, pollen and floating debris — not a floor-and-wall cleaner.",
+    suited: "Companion to a full cleaner",
+    power: "Solar-assisted",
+    coverage: "Surface only",
+    focus: "Floating debris",
+    limitation: "Does not clean the floor",
+    tone: "cyan",
+    skimmer: true,
+  },
+  {
+    no: "04",
+    name: "Dolphin Proteus DX4 Plus",
+    role: "Coverage-first",
+    verdict: "For pool owners who place wall climbing and waterline attention high on the list.",
+    suited: "Coverage-led decisions",
+    power: "Corded",
+    coverage: "Floor · walls · line",
+    focus: "Climbing performance",
+    limitation: "Cable and premium position",
+    tone: "violet",
+  },
+  {
+    no: "05",
+    name: "Aiper Scuba V3 AI Vision",
+    role: "Sensor-led cordless",
+    verdict: "A technology-forward cordless option where navigation and object awareness are part of the appeal.",
+    suited: "Tech-first cordless buyers",
+    power: "Cordless",
+    coverage: "Floor · walls · line",
+    focus: "Navigation and sensors",
+    limitation: "Battery and runtime",
+    tone: "green",
+  },
+];
+---
+
+<Base
+  title="Robotic Pool Cleaners: Compare Pool Robots for Every Pool Type | BotPlanet"
+  description="Compare robotic pool cleaners by pool type, cleaning coverage, corded or cordless power, filtration and smart controls."
+  bleed={true}
+>
+  <main class="pool-proof">
+    <section class="hero">
+      <div class="wrap hero__grid">
+        <div class="hero__copy">
+          <p class="kicker">ROBOTIC POOL CLEANERS · US BUYING HUB</p>
+          <h1>Compare pool robots for <span>your pool.</span></h1>
+          <p class="lede">
+            A robotic pool cleaner should fit the pool, debris and cleaning coverage you actually need. Compare five distinct machines — from floor-and-wall cleaners to a dedicated surface skimmer — without pretending one robot suits everyone.
+          </p>
+          <div class="actions">
+            <a class="button button--light" href="#compare">Compare the five robots ↓</a>
+            <a class="button" href="/botmatch/robotic-pool-cleaners/">Find my pool cleaner</a>
+          </div>
+          <div class="proof">
+            <span><strong>5</strong>selected models</span>
+            <span><strong>4</strong>cleaning zones</span>
+            <span><strong>0</strong>paid ranking influence</span>
+          </div>
+        </div>
+        <div class="hero__visual" aria-label="Stylised robotic pool cleaner scanning a pool">
+          <div class="pool"><div class="water"></div><div class="scan"></div><div class="robot"><i></i><b></b><em></em></div></div>
+          <div class="tag tag--one">CLEANING COVERAGE<strong>Floor · Walls · Waterline</strong></div>
+          <div class="tag tag--two">POOL SIZE<strong>Match length + runtime</strong></div>
+          <div class="tag tag--three">POWER TYPE<strong>Corded or cordless</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="section__head">
+          <div><p class="kicker">START WITH THE POOL, NOT THE BRAND</p><h2>Four decisions narrow the market fast.</h2></div>
+          <p>Most bad purchases happen because people compare features before checking compatibility. Start with the physical job, then choose the machine.</p>
+        </div>
+        <div class="decision-grid">
+          <article><small>01 · POOL TYPE</small><h3>In-ground or above-ground?</h3><p>Wall angles, liner care and deep ends change what compatible really means.</p></article>
+          <article><small>02 · COVERAGE</small><h3>Floor, walls, waterline or surface?</h3><p>A surface skimmer and a floor cleaner solve completely different problems.</p></article>
+          <article><small>03 · POWER</small><h3>Corded reliability or cordless freedom?</h3><p>Trade continuous power for charging, runtime and easier setup.</p></article>
+          <article><small>04 · DEBRIS</small><h3>Leaves, sand, silt or algae?</h3><p>Basket volume and filter fineness matter more than vague suction claims.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="compare">
+      <div class="wrap">
+        <div class="section__head">
+          <div><p class="kicker">THE FIVE BOTPLANET MODELS</p><h2>One glance. Five different jobs.</h2></div>
+          <p>This is a category comparison, not a fake leaderboard. Each model earns a place for a different owner or cleaning task.</p>
+        </div>
+        <div class="comparison">
+          <div class="comparison__row comparison__head">
+            <div><small>QUICK COMPARE</small><strong>Choose by suitability</strong></div>
+            {products.map((p) => <div class:list={["mini", `mini--${p.tone}`, { "mini--skimmer": p.skimmer }]}><i></i><strong>{p.name}</strong><small>{p.role}</small></div>)}
+          </div>
+          <div class="comparison__row"><b>Best suited to</b>{products.map((p) => <span>{p.suited}</span>)}</div>
+          <div class="comparison__row"><b>Power</b>{products.map((p) => <span>{p.power}</span>)}</div>
+          <div class="comparison__row"><b>Cleaning role</b>{products.map((p) => <span class:list={{ warning: p.skimmer }}>{p.coverage}</span>)}</div>
+          <div class="comparison__row"><b>Main trade-off</b>{products.map((p) => <span>{p.limitation}</span>)}</div>
+          <p class="comparison__note">No star scores, invented review counts or universal winner badge. Exact US specifications and retailer availability must be verified before purchase.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section products">
+      <div class="wrap">
+        <div class="section__head">
+          <div><p class="kicker">EXPLORE THE FIVE</p><h2>Different machines. Different reasons to buy.</h2></div>
+          <p>Each model gets its own visual treatment, buying role and honest limitation — not another row of repetitive affiliate cards.</p>
+        </div>
+        <div class="product-list">
+          {products.map((p, index) => (
+            <article class:list={["product", `product--${p.tone}`, { "product--reverse": index % 2 === 1, "product--skimmer": p.skimmer }]}>
+              <div class="product__scene"><div class="scene-water"></div><div class="scene-grid"></div><div class="scene-robot"><i></i><b></b><em></em></div></div>
+              <div class="product__copy">
+                <small>MODEL {p.no} · {p.role}</small>
+                <h3>{p.name}</h3>
+                <p class="verdict">{p.verdict}</p>
+                <span class="suit">Best suited to {p.suited.toLowerCase()}</span>
+                <div class="facts"><div><small>Power</small><strong>{p.power}</strong></div><div><small>Coverage</small><strong>{p.coverage}</strong></div><div><small>Focus</small><strong>{p.focus}</strong></div></div>
+                <div class="truth"><div><strong>Why it earns a place</strong><p>{p.verdict}</p></div><div><strong>Know before buying</strong><p>{p.limitation}.</p></div></div>
+                <div class="actions"><a class="button button--light" href="/botmatch/robotic-pool-cleaners/">Check suitability</a><a class="button" href="#compare">Back to comparison</a></div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="botmatch">
+      <div class="wrap botmatch__panel">
+        <div>
+          <p class="kicker">BOTMATCH · SUITABILITY BEFORE COMMISSION</p>
+          <h2>Tell us about the pool. Not the brand you saw in an advert.</h2>
+          <p>Pool type, dimensions, cleaning zones, debris, power preference and ownership needs narrow the five models. Affiliate value does not change the suitability result.</p>
+          <div class="actions"><a class="button button--blue" href="/botmatch/robotic-pool-cleaners/">Start Pool BotMatch →</a><a class="button" href="#compare">Compare manually</a></div>
+        </div>
+        <div class="questions"><span>What type of pool do you have?<b>SELECT →</b></span><span>Which zones must the robot clean?<b>SELECT →</b></span><span>What debris causes the most work?<b>SELECT →</b></span><span>Corded, cordless or no preference?<b>SELECT →</b></span><span>How important is easy retrieval?<b>SELECT →</b></span></div>
+      </div>
+    </section>
+
+    <p class="disclosure wrap">BotPlanet may earn a commission when you use a verified retailer link. Product suitability is assessed before commercial value, and every recommendation must show limitations and unsuitable buyers.</p>
+  </main>
+</Base>
+
+<style>
+  .pool-proof { --bg:#050607; --panel:#0c0f12; --line:rgba(255,255,255,.13); --text:#f6f8fa; --muted:#98a2ac; --blue:#57d7ff; background:var(--bg); color:var(--text); overflow:hidden; }
+  .pool-proof * { box-sizing:border-box; }
+  .wrap { width:min(1240px,calc(100% - 48px)); margin-inline:auto; }
+  .kicker { margin:0 0 14px; color:#b8c0c8; font-size:11px; font-weight:800; letter-spacing:.2em; text-transform:uppercase; }
+  .hero { min-height:690px; display:grid; align-items:center; border-bottom:1px solid var(--line); background:radial-gradient(circle at 77% 42%,rgba(57,171,255,.22),transparent 28%),linear-gradient(180deg,#080a0c,#050607); }
+  .hero__grid { display:grid; grid-template-columns:1.04fr .96fr; gap:70px; align-items:center; padding:90px 0 75px; }
+  h1,h2,h3,p { margin-top:0; }
+  h1 { max-width:780px; margin-bottom:0; font-size:clamp(54px,7vw,92px); line-height:.95; letter-spacing:-.06em; }
+  h1 span { color:#aab3bd; }
+  .lede { max-width:650px; margin:28px 0 0; color:#adb6bf; font-size:19px; line-height:1.65; }
+  .actions { display:flex; flex-wrap:wrap; gap:11px; margin-top:28px; }
+  .button { display:inline-flex; align-items:center; justify-content:center; padding:13px 18px; border:1px solid rgba(255,255,255,.18); border-radius:999px; color:inherit; background:rgba(255,255,255,.025); font-size:12px; font-weight:850; text-decoration:none; }
+  .button--light { border:0; color:#050607; background:linear-gradient(135deg,#fff,#bfc6cd); }
+  .button--blue { border:0; color:#031018; background:linear-gradient(135deg,#5edcff,#1a7bff); }
+  .proof { display:flex; gap:30px; margin-top:34px; padding-top:22px; border-top:1px solid var(--line); color:#7e8892; font-size:11px; }
+  .proof strong { display:block; color:#fff; font-size:19px; }
+  .hero__visual { height:540px; position:relative; }
+  .pool { position:absolute; inset:46px 0 24px 16px; overflow:hidden; border:1px solid rgba(255,255,255,.2); border-radius:40px; background:#091015; box-shadow:0 35px 80px rgba(0,0,0,.55),inset 0 1px rgba(255,255,255,.16); transform:perspective(900px) rotateY(-5deg); }
+  .water,.scene-water { position:absolute; inset:36% 0 0; background:linear-gradient(180deg,#1c7892,#092235); clip-path:polygon(0 14%,100% 0,100% 100%,0 100%); }
+  .scan { position:absolute; right:55px; bottom:75px; width:245px; height:245px; border:1px solid rgba(78,218,255,.25); border-radius:50%; box-shadow:0 0 0 34px rgba(78,218,255,.05),0 0 0 68px rgba(78,218,255,.025); }
+  .robot,.scene-robot { position:absolute; right:70px; bottom:93px; width:235px; height:145px; filter:drop-shadow(0 28px 24px rgba(0,0,0,.55)); transform:rotate(-7deg); }
+  .robot i,.scene-robot i { position:absolute; inset:20px 18px 24px; border:1px solid rgba(255,255,255,.6); border-radius:44px 44px 30px 30px; background:linear-gradient(155deg,#e5e9ed,#69747e 54%,#20272d); box-shadow:inset 0 0 0 8px rgba(0,0,0,.14); }
+  .robot b,.scene-robot b { position:absolute; left:92px; top:47px; width:52px; height:22px; border:2px solid var(--blue); border-radius:13px; background:#06151c; box-shadow:0 0 22px rgba(77,215,255,.55); }
+  .robot em,.scene-robot em { position:absolute; left:32px; right:32px; bottom:8px; height:44px; border-left:55px solid #303840; border-right:55px solid #303840; border-radius:18px; }
+  .tag { position:absolute; padding:12px 14px; border:1px solid rgba(255,255,255,.2); border-radius:13px; background:rgba(6,9,12,.82); color:#9da7b1; font-size:10px; letter-spacing:.07em; backdrop-filter:blur(10px); }
+  .tag strong { display:block; margin-top:4px; color:#fff; font-size:13px; letter-spacing:0; }
+  .tag--one { top:34px; right:5px; }.tag--two { left:0; bottom:65px; }.tag--three { right:12px; bottom:4px; }
+  .section { padding:96px 0; border-bottom:1px solid var(--line); }
+  .section__head { display:grid; grid-template-columns:1fr .7fr; gap:50px; align-items:end; margin-bottom:40px; }
+  .section__head h2,.botmatch h2 { margin-bottom:0; font-size:clamp(39px,5vw,64px); line-height:1; letter-spacing:-.05em; }
+  .section__head>p { margin-bottom:0; color:var(--muted); font-size:16px; }
+  .decision-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
+  .decision-grid article { min-height:220px; display:flex; flex-direction:column; padding:23px; border:1px solid var(--line); border-radius:20px; background:linear-gradient(145deg,rgba(255,255,255,.045),transparent 40%),var(--panel); }
+  .decision-grid small,.product__copy>small { color:#818b95; font-size:10px; font-weight:850; letter-spacing:.15em; text-transform:uppercase; }
+  .decision-grid h3 { margin:auto 0 10px; font-size:23px; line-height:1.08; }
+  .decision-grid p { margin-bottom:0; color:#8d98a2; font-size:12px; }
+  .comparison { overflow:hidden; border:1px solid rgba(255,255,255,.16); border-radius:24px; background:#090c0f; box-shadow:0 28px 65px rgba(0,0,0,.4); }
+  .comparison__row { display:grid; grid-template-columns:210px repeat(5,1fr); border-top:1px solid rgba(255,255,255,.075); }
+  .comparison__row>* { min-width:0; padding:14px; border-left:1px solid rgba(255,255,255,.075); color:#b7c0c8; font-size:11px; }
+  .comparison__row>*:first-child { border-left:0; }
+  .comparison__row>b { color:#77818b; font-size:10px; letter-spacing:.1em; text-transform:uppercase; }
+  .comparison__head { min-height:155px; border-top:0; background:linear-gradient(180deg,#151a1f,#0b0e11); }
+  .comparison__head>div:first-child { display:flex; flex-direction:column; justify-content:center; }
+  .comparison__head small { display:block; color:#78828c; }
+  .mini { position:relative; display:flex; flex-direction:column; justify-content:end; overflow:hidden; }
+  .mini i { position:absolute; right:11px; top:22px; width:88px; height:55px; border:1px solid rgba(255,255,255,.48); border-radius:24px 24px 16px 16px; background:linear-gradient(150deg,#dce1e5,#46515a 58%,#171b1f); box-shadow:0 14px 24px rgba(0,0,0,.35); transform:rotate(-7deg); }
+  .mini--skimmer i { height:27px; top:40px; border-radius:50%; }
+  .mini--gold { background:radial-gradient(circle at 70% 20%,rgba(255,188,65,.18),transparent 48%); }.mini--cyan { background:radial-gradient(circle at 70% 20%,rgba(48,226,255,.18),transparent 48%); }.mini--violet { background:radial-gradient(circle at 70% 20%,rgba(143,94,255,.18),transparent 48%); }.mini--green { background:radial-gradient(circle at 70% 20%,rgba(48,255,181,.15),transparent 48%); }
+  .mini strong { position:relative; line-height:1.15; }.warning { color:#f3be69!important; }
+  .comparison__note { margin:0; padding:15px 18px; border-top:1px solid var(--line); color:#737e88; font-size:10px; }
+  .product-list { display:grid; gap:22px; }
+  .product { display:grid; grid-template-columns:1.02fr .98fr; min-height:445px; overflow:hidden; border:1px solid rgba(255,255,255,.16); border-radius:27px; background:#090c0f; box-shadow:0 20px 55px rgba(0,0,0,.32); }
+  .product--reverse { grid-template-columns:.98fr 1.02fr; }.product--reverse .product__scene { order:2; }
+  .product__scene { position:relative; min-height:445px; overflow:hidden; background:radial-gradient(circle at 25% 20%,rgba(72,151,255,.3),transparent 30%),#09131c; }
+  .product--gold .product__scene { background:radial-gradient(circle at 72% 18%,rgba(255,187,56,.3),transparent 30%),#181209; }.product--cyan .product__scene { background:radial-gradient(circle at 45% 12%,rgba(49,229,255,.34),transparent 30%),#082326; }.product--violet .product__scene { background:radial-gradient(circle at 70% 20%,rgba(145,88,255,.3),transparent 30%),#150d21; }.product--green .product__scene { background:radial-gradient(circle at 48% 20%,rgba(46,255,180,.25),transparent 30%),#09201a; }
+  .scene-water { inset:36% 0 0; }.scene-grid { position:absolute; inset:43% 0 0; background:repeating-linear-gradient(10deg,transparent 0 34px,rgba(255,255,255,.06) 35px 36px),repeating-linear-gradient(100deg,transparent 0 45px,rgba(255,255,255,.05) 46px 47px); }
+  .scene-robot { left:50%; right:auto; top:52%; bottom:auto; transform:translate(-50%,-50%) rotate(-7deg); }
+  .product--gold .scene-robot b { border-color:#ffd66c; box-shadow:0 0 22px rgba(255,214,108,.5); }.product--violet .scene-robot b { border-color:#aa79ff; box-shadow:0 0 22px rgba(170,121,255,.5); }.product--green .scene-robot b { border-color:#45efb2; box-shadow:0 0 22px rgba(69,239,178,.5); }
+  .product--skimmer .scene-robot { width:280px; height:70px; border:1px solid rgba(255,255,255,.62); border-radius:50%; background:linear-gradient(160deg,#f0f3f5,#78848d 55%,#20262b); box-shadow:0 24px 44px rgba(0,0,0,.48),0 0 34px rgba(55,224,255,.2); }
+  .product--skimmer .scene-robot i { inset:13px 26px; border:2px solid #4ce3ff; border-radius:50%; background:#0b1b21; }.product--skimmer .scene-robot b,.product--skimmer .scene-robot em { display:none; }
+  .product__copy { display:flex; flex-direction:column; padding:42px; }
+  .product__copy h3 { margin:15px 0 11px; font-size:clamp(31px,4vw,48px); line-height:1; letter-spacing:-.045em; }
+  .verdict { color:#c0c7ce; font-size:15px; }.suit { align-self:flex-start; padding:7px 10px; border:1px solid rgba(255,255,255,.16); border-radius:999px; color:#a8b1ba; font-size:9px; letter-spacing:.11em; text-transform:uppercase; }
+  .facts { display:grid; grid-template-columns:repeat(3,1fr); gap:9px; margin:22px 0; }.facts div { padding:12px; border:1px solid rgba(255,255,255,.09); border-radius:13px; background:#0f1317; }.facts small { display:block; color:#707b85; font-size:8px; letter-spacing:.1em; text-transform:uppercase; }.facts strong { display:block; margin-top:4px; font-size:12px; }
+  .truth { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:auto; }.truth div { padding-top:11px; border-top:1px solid rgba(255,255,255,.1); }.truth strong { font-size:9px; letter-spacing:.1em; text-transform:uppercase; }.truth p { margin:5px 0 0; color:#89949e; font-size:11px; }
+  .botmatch { padding:105px 0; background:radial-gradient(circle at 74% 45%,rgba(54,190,255,.2),transparent 28%),#07090b; }
+  .botmatch__panel { display:grid; grid-template-columns:1fr .82fr; gap:48px; align-items:center; padding:55px; border:1px solid rgba(255,255,255,.17); border-radius:31px; background:linear-gradient(145deg,rgba(255,255,255,.06),transparent 45%); }
+  .botmatch__panel>div>p:not(.kicker) { color:#a5aeb7; font-size:16px; }.questions { display:grid; gap:10px; }.questions span { display:flex; justify-content:space-between; padding:15px 16px; border:1px solid rgba(255,255,255,.12); border-radius:15px; background:rgba(3,5,7,.5); color:#abb5be; font-size:11px; }.questions b { color:#62d9ff; font-size:9px; letter-spacing:.1em; }
+  .disclosure { padding:24px 0 42px; color:#69737d; font-size:10px; text-align:center; }
+  @media(max-width:1000px){ .hero__grid,.section__head,.product,.product--reverse,.botmatch__panel { grid-template-columns:1fr; }.product--reverse .product__scene { order:0; }.hero__visual { height:450px; }.decision-grid { grid-template-columns:repeat(2,1fr); }.comparison { overflow-x:auto; }.comparison__row { min-width:970px; } }
+  @media(max-width:620px){ .wrap { width:calc(100% - 28px); }.hero { min-height:auto; }.hero__grid { gap:26px; padding:58px 0 52px; }.hero h1 { font-size:47px; }.lede { font-size:15px; }.actions .button { width:100%; }.proof { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }.hero__visual { height:335px; }.pool { inset:24px 0 8px; }.robot { width:165px; height:105px; right:22px; bottom:62px; }.robot b { left:63px; top:33px; width:38px; height:17px; }.scan { width:175px; height:175px; right:24px; bottom:58px; }.tag { padding:8px 10px; font-size:8px; }.tag strong { font-size:10px; }.tag--one { top:2px; }.tag--two { bottom:34px; }.tag--three { display:none; }.section { padding:68px 0; }.section__head { gap:15px; }.section__head h2,.botmatch h2 { font-size:40px; }.decision-grid { grid-template-columns:1fr; }.decision-grid article { min-height:180px; }.product__scene { min-height:315px; }.product__copy { padding:29px 21px; }.product__copy h3 { font-size:36px; }.facts { grid-template-columns:1fr 1fr; }.truth { grid-template-columns:1fr; }.botmatch { padding:72px 0; }.botmatch__panel { padding:30px 22px; } }
+</style>
