@@ -1,0 +1,4884 @@
+{
+  "generatedAt": "2026-08-02T06:39:03.718Z",
+  "market": "United States",
+  "hardCapUsd": 0.75,
+  "products": [
+    {
+      "id": "dolphin-nautilus-cc-plus-wifi",
+      "name": "Dolphin Nautilus CC Plus Wi-Fi",
+      "base": "dolphin nautilus cc plus",
+      "seeds": [
+        "dolphin nautilus cc plus",
+        "dolphin nautilus cc plus wifi",
+        "dolphin nautilus cc plus wi-fi",
+        "dolphin nautilus cc plus review",
+        "dolphin nautilus cc plus wifi review",
+        "nautilus cc plus review",
+        "dolphin nautilus cc plus price",
+        "dolphin nautilus cc plus amazon",
+        "dolphin nautilus cc plus manual",
+        "dolphin nautilus cc plus troubleshooting",
+        "dolphin nautilus cc plus parts",
+        "dolphin nautilus cc plus vs proteus dx4"
+      ]
+    },
+    {
+      "id": "polaris-freedom",
+      "name": "Polaris FREEDOM",
+      "base": "polaris freedom robotic pool cleaner",
+      "seeds": [
+        "polaris freedom",
+        "polaris freedom robotic pool cleaner",
+        "polaris freedom pool cleaner",
+        "polaris freedom review",
+        "polaris freedom robotic pool cleaner review",
+        "polaris freedom cordless pool cleaner review",
+        "polaris freedom price",
+        "polaris freedom amazon",
+        "polaris freedom manual",
+        "polaris freedom troubleshooting",
+        "polaris freedom parts",
+        "polaris freedom vs dolphin"
+      ]
+    },
+    {
+      "id": "dolphin-proteus-dx4-plus",
+      "name": "Dolphin Proteus DX4 Plus",
+      "base": "dolphin proteus dx4 plus",
+      "seeds": [
+        "dolphin proteus dx4 plus",
+        "proteus dx4 plus",
+        "dolphin proteus dx4",
+        "dolphin proteus dx4 plus review",
+        "proteus dx4 plus review",
+        "dolphin proteus dx4 review",
+        "dolphin proteus dx4 plus price",
+        "dolphin proteus dx4 plus amazon",
+        "dolphin proteus dx4 plus manual",
+        "dolphin proteus dx4 plus troubleshooting",
+        "dolphin proteus dx4 parts",
+        "dolphin proteus dx4 vs nautilus cc plus"
+      ]
+    },
+    {
+      "id": "aiper-scuba-v3-ai-vision",
+      "name": "Aiper Scuba V3 AI Vision",
+      "base": "aiper scuba v3 ai vision",
+      "seeds": [
+        "aiper scuba v3 ai vision",
+        "aiper scuba v3",
+        "scuba v3 ai vision",
+        "aiper scuba v3 ai vision review",
+        "aiper scuba v3 review",
+        "scuba v3 review",
+        "aiper scuba v3 price",
+        "aiper scuba v3 amazon",
+        "aiper scuba v3 manual",
+        "aiper scuba v3 troubleshooting",
+        "aiper scuba v3 filter",
+        "aiper scuba v3 vs polaris freedom"
+      ]
+    },
+    {
+      "id": "betta-se-plus",
+      "name": "Betta SE Plus",
+      "base": "betta se plus",
+      "seeds": [
+        "betta se plus",
+        "betta se plus pool skimmer",
+        "betta se plus robotic pool skimmer",
+        "betta se plus review",
+        "betta se plus pool skimmer review",
+        "betta se plus robotic pool skimmer review",
+        "betta se plus price",
+        "betta se plus amazon",
+        "betta se plus manual",
+        "betta se plus troubleshooting",
+        "betta se plus parts",
+        "betta se plus vs betta 2"
+      ]
+    }
+  ],
+  "volume": [
+    {
+      "keyword": "dolphin nautilus cc plus",
+      "searchVolume": 5400,
+      "cpcUsd": 3.42,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 9900
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 9900
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 6600
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 5400
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 2400
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 1600
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 1600
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 2900
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 2900
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 3600
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 6600
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 9900
+        }
+      ]
+    },
+    {
+      "keyword": "dolphin nautilus cc plus wifi",
+      "searchVolume": 480,
+      "cpcUsd": 4.49,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 1000
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 880
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 720
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 720
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 260
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 210
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 210
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 480
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 320
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 260
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 390
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 480
+        }
+      ]
+    },
+    {
+      "keyword": "dolphin nautilus cc plus wi-fi",
+      "searchVolume": 480,
+      "cpcUsd": 4.49,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 1000
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 880
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 720
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 720
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 260
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 210
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 210
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 480
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 320
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 260
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 390
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 480
+        }
+      ]
+    },
+    {
+      "keyword": "dolphin nautilus cc plus review",
+      "searchVolume": 140,
+      "cpcUsd": 2.58,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 320
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 260
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 210
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 140
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 50
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 50
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 40
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 40
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 30
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 70
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 170
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 210
+        }
+      ]
+    },
+    {
+      "keyword": "dolphin nautilus cc plus wifi review",
+      "searchVolume": 20,
+      "cpcUsd": 4.1,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 40
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 40
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 20
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 20
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 20
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 30
+        }
+      ]
+    },
+    {
+      "keyword": "nautilus cc plus review",
+      "searchVolume": 30,
+      "cpcUsd": 2.07,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 70
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 70
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 50
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 40
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 30
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 50
+        }
+      ]
+    },
+    {
+      "keyword": "dolphin nautilus cc plus price",
+      "searchVolume": 70,
+      "cpcUsd": 3.21,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 50
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 90
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 50
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 50
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 30
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 30
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 30
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 20
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 40
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 90
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 140
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 170
+        }
+      ]
+    },
+    {
+      "keyword": "dolphin nautilus cc plus amazon",
+      "searchVolume": 10,
+      "cpcUsd": 1.95,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 30
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 30
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 20
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 20
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 20
+        }
+      ]
+    },
+    {
+      "keyword": "dolphin nautilus cc plus manual",
+      "searchVolume": 210,
+      "cpcUsd": 0.7,
+      "competition": "LOW",
+      "competitionIndex": 31,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 390
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 390
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 210
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 110
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 40
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 40
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 50
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 70
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 70
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 210
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 390
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 590
+        }
+      ]
+    },
+    {
+      "keyword": "dolphin nautilus cc plus troubleshooting",
+      "searchVolume": 70,
+      "cpcUsd": 1.08,
+      "competition": "LOW",
+      "competitionIndex": 24,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 110
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 110
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 70
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 50
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 30
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 20
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 20
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 20
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 50
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 90
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 140
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 170
+        }
+      ]
+    },
+    {
+      "keyword": "dolphin nautilus cc plus parts",
+      "searchVolume": 390,
+      "cpcUsd": 1.83,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 720
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 720
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 390
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 320
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 110
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 90
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 90
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 140
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 210
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 320
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 590
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 720
+        }
+      ]
+    },
+    {
+      "keyword": "dolphin nautilus cc plus vs proteus dx4",
+      "searchVolume": 10,
+      "cpcUsd": null,
+      "competition": "LOW",
+      "competitionIndex": 0,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 0
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 0
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 0
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 10
+        }
+      ]
+    },
+    {
+      "keyword": "polaris freedom",
+      "searchVolume": 1000,
+      "cpcUsd": 3.45,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 1900
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 2400
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 1600
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 1300
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 480
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 480
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 390
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 480
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 590
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 720
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 1000
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 1300
+        }
+      ]
+    },
+    {
+      "keyword": "polaris freedom robotic pool cleaner",
+      "searchVolume": 260,
+      "cpcUsd": 5.62,
+      "competition": "HIGH",
+      "competitionIndex": 72,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 590
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 320
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 90
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 110
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 50
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 40
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 110
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 390
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 210
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 260
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 590
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 140
+        }
+      ]
+    },
+    {
+      "keyword": "polaris freedom pool cleaner",
+      "searchVolume": 720,
+      "cpcUsd": 3.57,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 720
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 720
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 2900
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 1600
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 210
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 140
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 110
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 140
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 1000
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 480
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 720
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 590
+        }
+      ]
+    },
+    {
+      "keyword": "polaris freedom review",
+      "searchVolume": 20,
+      "cpcUsd": 2.47,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 30
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 40
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 30
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 30
+        }
+      ]
+    },
+    {
+      "keyword": "polaris freedom robotic pool cleaner review",
+      "searchVolume": null,
+      "cpcUsd": null,
+      "competition": null,
+      "competitionIndex": null,
+      "monthlySearches": []
+    },
+    {
+      "keyword": "polaris freedom cordless pool cleaner review",
+      "searchVolume": null,
+      "cpcUsd": null,
+      "competition": null,
+      "competitionIndex": null,
+      "monthlySearches": []
+    },
+    {
+      "keyword": "polaris freedom price",
+      "searchVolume": 10,
+      "cpcUsd": 1.33,
+      "competition": "HIGH",
+      "competitionIndex": 83,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 20
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 0
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 10
+        }
+      ]
+    },
+    {
+      "keyword": "polaris freedom amazon",
+      "searchVolume": null,
+      "cpcUsd": null,
+      "competition": null,
+      "competitionIndex": null,
+      "monthlySearches": []
+    },
+    {
+      "keyword": "polaris freedom manual",
+      "searchVolume": 30,
+      "cpcUsd": null,
+      "competition": "LOW",
+      "competitionIndex": 0,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 40
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 50
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 50
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 40
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 20
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 30
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 20
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 30
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 20
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 40
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 40
+        }
+      ]
+    },
+    {
+      "keyword": "polaris freedom troubleshooting",
+      "searchVolume": null,
+      "cpcUsd": null,
+      "competition": null,
+      "competitionIndex": null,
+      "monthlySearches": []
+    },
+    {
+      "keyword": "polaris freedom parts",
+      "searchVolume": 20,
+      "cpcUsd": 2.21,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 20
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 20
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 20
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 20
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 20
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 50
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 20
+        }
+      ]
+    },
+    {
+      "keyword": "polaris freedom vs dolphin",
+      "searchVolume": null,
+      "cpcUsd": null,
+      "competition": null,
+      "competitionIndex": null,
+      "monthlySearches": []
+    },
+    {
+      "keyword": "dolphin proteus dx4 plus",
+      "searchVolume": null,
+      "cpcUsd": null,
+      "competition": null,
+      "competitionIndex": null,
+      "monthlySearches": []
+    },
+    {
+      "keyword": "proteus dx4 plus",
+      "searchVolume": null,
+      "cpcUsd": null,
+      "competition": null,
+      "competitionIndex": null,
+      "monthlySearches": []
+    },
+    {
+      "keyword": "dolphin proteus dx4",
+      "searchVolume": 390,
+      "cpcUsd": 2.71,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 880
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 720
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 390
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 320
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 170
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 140
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 210
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 260
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 260
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 260
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 590
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 590
+        }
+      ]
+    },
+    {
+      "keyword": "dolphin proteus dx4 plus review",
+      "searchVolume": null,
+      "cpcUsd": null,
+      "competition": null,
+      "competitionIndex": null,
+      "monthlySearches": []
+    },
+    {
+      "keyword": "proteus dx4 plus review",
+      "searchVolume": null,
+      "cpcUsd": null,
+      "competition": null,
+      "competitionIndex": null,
+      "monthlySearches": []
+    },
+    {
+      "keyword": "dolphin proteus dx4 review",
+      "searchVolume": 40,
+      "cpcUsd": 3.18,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 40
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 40
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 20
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 20
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 30
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 20
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 40
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 40
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 50
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 90
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 110
+        }
+      ]
+    },
+    {
+      "keyword": "dolphin proteus dx4 plus price",
+      "searchVolume": null,
+      "cpcUsd": null,
+      "competition": null,
+      "competitionIndex": null,
+      "monthlySearches": []
+    },
+    {
+      "keyword": "dolphin proteus dx4 plus amazon",
+      "searchVolume": null,
+      "cpcUsd": null,
+      "competition": null,
+      "competitionIndex": null,
+      "monthlySearches": []
+    },
+    {
+      "keyword": "dolphin proteus dx4 plus manual",
+      "searchVolume": null,
+      "cpcUsd": null,
+      "competition": null,
+      "competitionIndex": null,
+      "monthlySearches": []
+    },
+    {
+      "keyword": "dolphin proteus dx4 plus troubleshooting",
+      "searchVolume": null,
+      "cpcUsd": null,
+      "competition": null,
+      "competitionIndex": null,
+      "monthlySearches": []
+    },
+    {
+      "keyword": "dolphin proteus dx4 parts",
+      "searchVolume": 50,
+      "cpcUsd": 1.61,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 110
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 90
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 70
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 40
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 30
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 20
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 30
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 20
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 30
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 40
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 50
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 70
+        }
+      ]
+    },
+    {
+      "keyword": "dolphin proteus dx4 vs nautilus cc plus",
+      "searchVolume": 10,
+      "cpcUsd": null,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 20
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 20
+        }
+      ]
+    },
+    {
+      "keyword": "aiper scuba v3 ai vision",
+      "searchVolume": 30,
+      "cpcUsd": 8.79,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 170
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 110
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 50
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 0
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 0
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 0
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 0
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 0
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 0
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 0
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 0
+        }
+      ]
+    },
+    {
+      "keyword": "aiper scuba v3",
+      "searchVolume": 1000,
+      "cpcUsd": 8.05,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 5400
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 4400
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 1900
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 880
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 210
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 260
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 20
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 110
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 0
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 0
+        }
+      ]
+    },
+    {
+      "keyword": "scuba v3 ai vision",
+      "searchVolume": null,
+      "cpcUsd": null,
+      "competition": null,
+      "competitionIndex": null,
+      "monthlySearches": []
+    },
+    {
+      "keyword": "aiper scuba v3 ai vision review",
+      "searchVolume": null,
+      "cpcUsd": null,
+      "competition": null,
+      "competitionIndex": null,
+      "monthlySearches": []
+    },
+    {
+      "keyword": "aiper scuba v3 review",
+      "searchVolume": 170,
+      "cpcUsd": 7.61,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 880
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 590
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 390
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 210
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 0
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 0
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 0
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 0
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 0
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 0
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 0
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 0
+        }
+      ]
+    },
+    {
+      "keyword": "scuba v3 review",
+      "searchVolume": 10,
+      "cpcUsd": 2.92,
+      "competition": "MEDIUM",
+      "competitionIndex": 66,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 40
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 40
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 0
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 0
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 0
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 0
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 0
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 0
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 0
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 0
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 0
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 0
+        }
+      ]
+    },
+    {
+      "keyword": "aiper scuba v3 price",
+      "searchVolume": 40,
+      "cpcUsd": 5.82,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 110
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 110
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 70
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 70
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 50
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 140
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 0
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 0
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 0
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 0
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 0
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 0
+        }
+      ]
+    },
+    {
+      "keyword": "aiper scuba v3 amazon",
+      "searchVolume": 10,
+      "cpcUsd": 3.07,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 20
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 0
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 0
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 0
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 0
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 0
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 0
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 0
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 0
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 0
+        }
+      ]
+    },
+    {
+      "keyword": "aiper scuba v3 manual",
+      "searchVolume": 20,
+      "cpcUsd": 3.27,
+      "competition": "LOW",
+      "competitionIndex": 32,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 90
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 50
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 40
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 0
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 0
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 0
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 0
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 0
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 0
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 0
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 0
+        }
+      ]
+    },
+    {
+      "keyword": "aiper scuba v3 troubleshooting",
+      "searchVolume": null,
+      "cpcUsd": null,
+      "competition": null,
+      "competitionIndex": null,
+      "monthlySearches": []
+    },
+    {
+      "keyword": "aiper scuba v3 filter",
+      "searchVolume": 10,
+      "cpcUsd": 4.26,
+      "competition": "HIGH",
+      "competitionIndex": 94,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 20
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 30
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 0
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 0
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 0
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 0
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 0
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 0
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 0
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 0
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 0
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 0
+        }
+      ]
+    },
+    {
+      "keyword": "aiper scuba v3 vs polaris freedom",
+      "searchVolume": null,
+      "cpcUsd": null,
+      "competition": null,
+      "competitionIndex": null,
+      "monthlySearches": []
+    },
+    {
+      "keyword": "betta se plus",
+      "searchVolume": 1600,
+      "cpcUsd": 6.95,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 5400
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 5400
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 2900
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 1900
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 480
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 480
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 480
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 720
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 590
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 880
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 1000
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 1900
+        }
+      ]
+    },
+    {
+      "keyword": "betta se plus pool skimmer",
+      "searchVolume": 590,
+      "cpcUsd": 6.68,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 1900
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 1900
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 880
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 880
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 140
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 90
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 140
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 210
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 260
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 260
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 260
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 480
+        }
+      ]
+    },
+    {
+      "keyword": "betta se plus robotic pool skimmer",
+      "searchVolume": 590,
+      "cpcUsd": 5.36,
+      "competition": "LOW",
+      "competitionIndex": 7,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 4400
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 2400
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 260
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 390
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 20
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 70
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 50
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 40
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 50
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 40
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 110
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 40
+        }
+      ]
+    },
+    {
+      "keyword": "betta se plus review",
+      "searchVolume": 70,
+      "cpcUsd": 2.46,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 110
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 170
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 70
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 90
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 20
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 20
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 20
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 40
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 50
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 110
+        }
+      ]
+    },
+    {
+      "keyword": "betta se plus pool skimmer review",
+      "searchVolume": null,
+      "cpcUsd": null,
+      "competition": null,
+      "competitionIndex": null,
+      "monthlySearches": []
+    },
+    {
+      "keyword": "betta se plus robotic pool skimmer review",
+      "searchVolume": null,
+      "cpcUsd": null,
+      "competition": null,
+      "competitionIndex": null,
+      "monthlySearches": []
+    },
+    {
+      "keyword": "betta se plus price",
+      "searchVolume": null,
+      "cpcUsd": null,
+      "competition": null,
+      "competitionIndex": null,
+      "monthlySearches": []
+    },
+    {
+      "keyword": "betta se plus amazon",
+      "searchVolume": 10,
+      "cpcUsd": 4.1,
+      "competition": "HIGH",
+      "competitionIndex": 96,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 30
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 20
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 20
+        }
+      ]
+    },
+    {
+      "keyword": "betta se plus manual",
+      "searchVolume": 50,
+      "cpcUsd": 0.17,
+      "competition": "LOW",
+      "competitionIndex": 12,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 70
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 70
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 40
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 30
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 20
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 20
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 30
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 40
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 50
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 70
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 90
+        }
+      ]
+    },
+    {
+      "keyword": "betta se plus troubleshooting",
+      "searchVolume": null,
+      "cpcUsd": null,
+      "competition": null,
+      "competitionIndex": null,
+      "monthlySearches": []
+    },
+    {
+      "keyword": "betta se plus parts",
+      "searchVolume": 10,
+      "cpcUsd": 2.56,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 50
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 40
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 30
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 0
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 0
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 0
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 0
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 0
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 0
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 0
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 0
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 0
+        }
+      ]
+    },
+    {
+      "keyword": "betta se plus vs betta 2",
+      "searchVolume": null,
+      "cpcUsd": null,
+      "competition": null,
+      "competitionIndex": null,
+      "monthlySearches": []
+    }
+  ],
+  "difficulty": [
+    {
+      "keyword": "aiper scuba v3",
+      "keywordDifficulty": 14
+    },
+    {
+      "keyword": "aiper scuba v3 ai vision",
+      "keywordDifficulty": null
+    },
+    {
+      "keyword": "aiper scuba v3 manual",
+      "keywordDifficulty": null
+    },
+    {
+      "keyword": "aiper scuba v3 price",
+      "keywordDifficulty": null
+    },
+    {
+      "keyword": "aiper scuba v3 review",
+      "keywordDifficulty": 3
+    },
+    {
+      "keyword": "betta se plus",
+      "keywordDifficulty": 0
+    },
+    {
+      "keyword": "betta se plus amazon",
+      "keywordDifficulty": null
+    },
+    {
+      "keyword": "betta se plus manual",
+      "keywordDifficulty": 0
+    },
+    {
+      "keyword": "betta se plus parts",
+      "keywordDifficulty": null
+    },
+    {
+      "keyword": "betta se plus pool skimmer",
+      "keywordDifficulty": 0
+    },
+    {
+      "keyword": "betta se plus review",
+      "keywordDifficulty": 0
+    },
+    {
+      "keyword": "dolphin nautilus cc plus",
+      "keywordDifficulty": 0
+    },
+    {
+      "keyword": "dolphin nautilus cc plus amazon",
+      "keywordDifficulty": 19
+    },
+    {
+      "keyword": "dolphin nautilus cc plus manual",
+      "keywordDifficulty": 1
+    },
+    {
+      "keyword": "dolphin nautilus cc plus parts",
+      "keywordDifficulty": 0
+    },
+    {
+      "keyword": "dolphin nautilus cc plus price",
+      "keywordDifficulty": 0
+    },
+    {
+      "keyword": "dolphin nautilus cc plus review",
+      "keywordDifficulty": 0
+    },
+    {
+      "keyword": "dolphin nautilus cc plus troubleshooting",
+      "keywordDifficulty": 0
+    },
+    {
+      "keyword": "dolphin nautilus cc plus vs proteus dx4",
+      "keywordDifficulty": 0
+    },
+    {
+      "keyword": "dolphin nautilus cc plus wi-fi",
+      "keywordDifficulty": 0
+    },
+    {
+      "keyword": "dolphin nautilus cc plus wifi review",
+      "keywordDifficulty": 0
+    },
+    {
+      "keyword": "dolphin proteus dx4",
+      "keywordDifficulty": 0
+    },
+    {
+      "keyword": "dolphin proteus dx4 parts",
+      "keywordDifficulty": 0
+    },
+    {
+      "keyword": "dolphin proteus dx4 review",
+      "keywordDifficulty": 0
+    },
+    {
+      "keyword": "dolphin proteus dx4 vs nautilus cc plus",
+      "keywordDifficulty": 0
+    },
+    {
+      "keyword": "nautilus cc plus review",
+      "keywordDifficulty": 0
+    },
+    {
+      "keyword": "polaris freedom",
+      "keywordDifficulty": 0
+    },
+    {
+      "keyword": "polaris freedom manual",
+      "keywordDifficulty": 0
+    },
+    {
+      "keyword": "polaris freedom parts",
+      "keywordDifficulty": null
+    },
+    {
+      "keyword": "polaris freedom pool cleaner",
+      "keywordDifficulty": 0
+    },
+    {
+      "keyword": "polaris freedom price",
+      "keywordDifficulty": null
+    },
+    {
+      "keyword": "polaris freedom review",
+      "keywordDifficulty": 0
+    },
+    {
+      "keyword": "polaris freedom robotic pool cleaner",
+      "keywordDifficulty": 0
+    },
+    {
+      "keyword": "polaris freedom troubleshooting",
+      "keywordDifficulty": null
+    },
+    {
+      "keyword": "dolphin nautilus cc plus wifi",
+      "keywordDifficulty": 0
+    },
+    {
+      "keyword": "polaris freedom robotic pool cleaner review",
+      "keywordDifficulty": null
+    },
+    {
+      "keyword": "polaris freedom cordless pool cleaner review",
+      "keywordDifficulty": null
+    },
+    {
+      "keyword": "polaris freedom amazon",
+      "keywordDifficulty": null
+    },
+    {
+      "keyword": "polaris freedom vs dolphin",
+      "keywordDifficulty": null
+    },
+    {
+      "keyword": "dolphin proteus dx4 plus",
+      "keywordDifficulty": null
+    },
+    {
+      "keyword": "proteus dx4 plus",
+      "keywordDifficulty": null
+    },
+    {
+      "keyword": "dolphin proteus dx4 plus review",
+      "keywordDifficulty": null
+    },
+    {
+      "keyword": "proteus dx4 plus review",
+      "keywordDifficulty": null
+    },
+    {
+      "keyword": "dolphin proteus dx4 plus price",
+      "keywordDifficulty": null
+    },
+    {
+      "keyword": "dolphin proteus dx4 plus amazon",
+      "keywordDifficulty": null
+    },
+    {
+      "keyword": "dolphin proteus dx4 plus manual",
+      "keywordDifficulty": null
+    },
+    {
+      "keyword": "dolphin proteus dx4 plus troubleshooting",
+      "keywordDifficulty": null
+    },
+    {
+      "keyword": "scuba v3 ai vision",
+      "keywordDifficulty": null
+    },
+    {
+      "keyword": "aiper scuba v3 ai vision review",
+      "keywordDifficulty": null
+    },
+    {
+      "keyword": "scuba v3 review",
+      "keywordDifficulty": null
+    },
+    {
+      "keyword": "aiper scuba v3 amazon",
+      "keywordDifficulty": null
+    },
+    {
+      "keyword": "aiper scuba v3 troubleshooting",
+      "keywordDifficulty": null
+    },
+    {
+      "keyword": "aiper scuba v3 filter",
+      "keywordDifficulty": null
+    },
+    {
+      "keyword": "aiper scuba v3 vs polaris freedom",
+      "keywordDifficulty": null
+    },
+    {
+      "keyword": "betta se plus robotic pool skimmer",
+      "keywordDifficulty": null
+    },
+    {
+      "keyword": "betta se plus pool skimmer review",
+      "keywordDifficulty": null
+    },
+    {
+      "keyword": "betta se plus robotic pool skimmer review",
+      "keywordDifficulty": null
+    },
+    {
+      "keyword": "betta se plus price",
+      "keywordDifficulty": null
+    },
+    {
+      "keyword": "betta se plus troubleshooting",
+      "keywordDifficulty": null
+    },
+    {
+      "keyword": "betta se plus vs betta 2",
+      "keywordDifficulty": null
+    }
+  ],
+  "related": {
+    "dolphin-nautilus-cc-plus-wifi": [
+      {
+        "keyword": "dolphin nautilus cc plus",
+        "searchVolume": 5400,
+        "cpcUsd": 3.42,
+        "keywordDifficulty": 0,
+        "searchIntent": "transactional"
+      },
+      {
+        "keyword": "dolphin nautilus cc pro",
+        "searchVolume": 590,
+        "cpcUsd": 4.79,
+        "keywordDifficulty": 0,
+        "searchIntent": "transactional"
+      },
+      {
+        "keyword": "dolphin nautilus cc supreme",
+        "searchVolume": 590,
+        "cpcUsd": 5.91,
+        "keywordDifficulty": 0,
+        "searchIntent": "transactional"
+      },
+      {
+        "keyword": "dolphin nautilus cc plus wifi",
+        "searchVolume": 480,
+        "cpcUsd": 4.49,
+        "keywordDifficulty": 0,
+        "searchIntent": "transactional"
+      },
+      {
+        "keyword": "dolphin nautilus cc plus parts",
+        "searchVolume": 390,
+        "cpcUsd": 1.83,
+        "keywordDifficulty": 0,
+        "searchIntent": "transactional"
+      },
+      {
+        "keyword": "dolphin nautilus cc parts",
+        "searchVolume": 260,
+        "cpcUsd": 1.41,
+        "keywordDifficulty": 0,
+        "searchIntent": "transactional"
+      },
+      {
+        "keyword": "dolphin nautilus cc plus manual",
+        "searchVolume": 210,
+        "cpcUsd": 0.7,
+        "keywordDifficulty": 1,
+        "searchIntent": "informational"
+      },
+      {
+        "keyword": "maytronics dolphin parts diagram",
+        "searchVolume": 210,
+        "cpcUsd": 0.96,
+        "keywordDifficulty": 0,
+        "searchIntent": "informational"
+      },
+      {
+        "keyword": "dolphin nautilus cc plus review",
+        "searchVolume": 140,
+        "cpcUsd": 2.58,
+        "keywordDifficulty": 0,
+        "searchIntent": "commercial"
+      },
+      {
+        "keyword": "maytronics warranty claim",
+        "searchVolume": 140,
+        "cpcUsd": 0.11,
+        "keywordDifficulty": 0,
+        "searchIntent": "navigational"
+      },
+      {
+        "keyword": "dolphin nautilus cc review",
+        "searchVolume": 140,
+        "cpcUsd": 2.62,
+        "keywordDifficulty": 0,
+        "searchIntent": "informational"
+      },
+      {
+        "keyword": "dolphin nautilus cc plus best price",
+        "searchVolume": 110,
+        "cpcUsd": 3.66,
+        "keywordDifficulty": 0,
+        "searchIntent": "commercial"
+      },
+      {
+        "keyword": "dolphin nautilus cc plus warranty",
+        "searchVolume": 90,
+        "cpcUsd": 1.38,
+        "keywordDifficulty": 4,
+        "searchIntent": "informational"
+      },
+      {
+        "keyword": "dolphin nautilus cc plus not moving",
+        "searchVolume": 90,
+        "cpcUsd": 0.28,
+        "keywordDifficulty": 0,
+        "searchIntent": "informational"
+      },
+      {
+        "keyword": "dolphin nautilus cc pro review",
+        "searchVolume": 90,
+        "cpcUsd": 3.02,
+        "keywordDifficulty": 0,
+        "searchIntent": "commercial"
+      },
+      {
+        "keyword": "dolphin nautilus cc plus price",
+        "searchVolume": 70,
+        "cpcUsd": 3.21,
+        "keywordDifficulty": 0,
+        "searchIntent": "commercial"
+      },
+      {
+        "keyword": "dolphin nautilus cc plus not working",
+        "searchVolume": 70,
+        "cpcUsd": 2.16,
+        "keywordDifficulty": 0,
+        "searchIntent": "informational"
+      },
+      {
+        "keyword": "dolphin nautilus cc plus parts list",
+        "searchVolume": 70,
+        "cpcUsd": 1.38,
+        "keywordDifficulty": 0,
+        "searchIntent": "informational"
+      },
+      {
+        "keyword": "dolphin nautilus cc vs cc plus",
+        "searchVolume": 70,
+        "cpcUsd": 4.31,
+        "keywordDifficulty": 0,
+        "searchIntent": "commercial"
+      },
+      {
+        "keyword": "dolphin nautilus cc plus parts diagram",
+        "searchVolume": 50,
+        "cpcUsd": 1.2,
+        "keywordDifficulty": 0,
+        "searchIntent": "informational"
+      },
+      {
+        "keyword": "maytronics warranty registration",
+        "searchVolume": 50,
+        "cpcUsd": 0.34,
+        "keywordDifficulty": 13,
+        "searchIntent": "navigational"
+      },
+      {
+        "keyword": "dolphin nautilus cc plus starts then stops",
+        "searchVolume": 40,
+        "cpcUsd": 3.74,
+        "keywordDifficulty": 0,
+        "searchIntent": "informational"
+      },
+      {
+        "keyword": "dolphin nautilus cc vs plus",
+        "searchVolume": 30,
+        "cpcUsd": 4.49,
+        "keywordDifficulty": 0,
+        "searchIntent": "commercial"
+      },
+      {
+        "keyword": "dolphin nautilus cc plus repair near me",
+        "searchVolume": 30,
+        "cpcUsd": 5.85,
+        "keywordDifficulty": 0,
+        "searchIntent": "navigational"
+      },
+      {
+        "keyword": "maytronics dolphin nautilus cc parts list pdf",
+        "searchVolume": 20,
+        "cpcUsd": 1.08,
+        "keywordDifficulty": null,
+        "searchIntent": "navigational"
+      },
+      {
+        "keyword": "dolphin nautilus cc plus rebuild kit",
+        "searchVolume": 20,
+        "cpcUsd": 1.41,
+        "keywordDifficulty": null,
+        "searchIntent": "transactional"
+      },
+      {
+        "keyword": "dolphin nautilus cc plus manual pdf",
+        "searchVolume": 20,
+        "cpcUsd": 0.28,
+        "keywordDifficulty": 0,
+        "searchIntent": "informational"
+      },
+      {
+        "keyword": "dolphin nautilus cc plus wifi review",
+        "searchVolume": 20,
+        "cpcUsd": 4.1,
+        "keywordDifficulty": 0,
+        "searchIntent": "commercial"
+      },
+      {
+        "keyword": "dolphin nautilus cc plus reset button",
+        "searchVolume": 20,
+        "cpcUsd": 1.77,
+        "keywordDifficulty": 0,
+        "searchIntent": "informational"
+      },
+      {
+        "keyword": "dolphin nautilus cc plus power supply not working",
+        "searchVolume": 20,
+        "cpcUsd": 1.28,
+        "keywordDifficulty": 0,
+        "searchIntent": "navigational"
+      },
+      {
+        "keyword": "dolphin nautilus cc plus app",
+        "searchVolume": 10,
+        "cpcUsd": 0.24,
+        "keywordDifficulty": null,
+        "searchIntent": "navigational"
+      },
+      {
+        "keyword": "dolphin nautilus cc plus wifi manual",
+        "searchVolume": 10,
+        "cpcUsd": 0.47,
+        "keywordDifficulty": null,
+        "searchIntent": "navigational"
+      },
+      {
+        "keyword": "dolphin nautilus cc plus serial number",
+        "searchVolume": 10,
+        "cpcUsd": null,
+        "keywordDifficulty": null,
+        "searchIntent": "transactional"
+      }
+    ],
+    "polaris-freedom": [
+      {
+        "keyword": "polaris freedom plus",
+        "searchVolume": 720,
+        "cpcUsd": 5.05,
+        "keywordDifficulty": 0,
+        "searchIntent": "transactional"
+      },
+      {
+        "keyword": "polaris freedom robotic pool cleaner",
+        "searchVolume": 260,
+        "cpcUsd": 5.62,
+        "keywordDifficulty": 0,
+        "searchIntent": "transactional"
+      },
+      {
+        "keyword": "polaris freedom sc",
+        "searchVolume": 210,
+        "cpcUsd": 3.72,
+        "keywordDifficulty": 0,
+        "searchIntent": "informational"
+      },
+      {
+        "keyword": "polaris freedom plus reviews",
+        "searchVolume": 70,
+        "cpcUsd": 3.11,
+        "keywordDifficulty": 0,
+        "searchIntent": "commercial"
+      },
+      {
+        "keyword": "polaris freedom manual",
+        "searchVolume": 30,
+        "cpcUsd": null,
+        "keywordDifficulty": 0,
+        "searchIntent": "informational"
+      },
+      {
+        "keyword": "polaris freedom battery replacement",
+        "searchVolume": 30,
+        "cpcUsd": 3.43,
+        "keywordDifficulty": 0,
+        "searchIntent": "transactional"
+      },
+      {
+        "keyword": "polaris freedom app",
+        "searchVolume": 20,
+        "cpcUsd": 2.64,
+        "keywordDifficulty": null,
+        "searchIntent": "navigational"
+      },
+      {
+        "keyword": "polaris freedom pool cleaner battery replacement",
+        "searchVolume": 10,
+        "cpcUsd": 3.01,
+        "keywordDifficulty": null,
+        "searchIntent": "navigational"
+      },
+      {
+        "keyword": "polaris freedom plus manual",
+        "searchVolume": 10,
+        "cpcUsd": 8.39,
+        "keywordDifficulty": null,
+        "searchIntent": "transactional"
+      },
+      {
+        "keyword": "polaris freedom plus price",
+        "searchVolume": 10,
+        "cpcUsd": 3.43,
+        "keywordDifficulty": null,
+        "searchIntent": "commercial"
+      },
+      {
+        "keyword": "polaris freedom plus for sale",
+        "searchVolume": 10,
+        "cpcUsd": 9.54,
+        "keywordDifficulty": 0,
+        "searchIntent": "transactional"
+      },
+      {
+        "keyword": "polaris freedom plus vs freedom",
+        "searchVolume": 10,
+        "cpcUsd": 1.42,
+        "keywordDifficulty": null,
+        "searchIntent": "commercial"
+      }
+    ],
+    "dolphin-proteus-dx4-plus": [],
+    "aiper-scuba-v3-ai-vision": [
+      {
+        "keyword": "aiper scuba v3 ai vision",
+        "searchVolume": 30,
+        "cpcUsd": 8.79,
+        "keywordDifficulty": null,
+        "searchIntent": "transactional"
+      }
+    ],
+    "betta-se-plus": [
+      {
+        "keyword": "betta se plus",
+        "searchVolume": 1600,
+        "cpcUsd": 6.95,
+        "keywordDifficulty": 0,
+        "searchIntent": "informational"
+      },
+      {
+        "keyword": "betta se plus solar-powered robotic pool skimmer",
+        "searchVolume": 390,
+        "cpcUsd": 6.67,
+        "keywordDifficulty": 0,
+        "searchIntent": "transactional"
+      },
+      {
+        "keyword": "betta pool skimmer reviews",
+        "searchVolume": 210,
+        "cpcUsd": 3.65,
+        "keywordDifficulty": 0,
+        "searchIntent": "informational"
+      },
+      {
+        "keyword": "betta se vs betta se plus",
+        "searchVolume": 140,
+        "cpcUsd": 5.33,
+        "keywordDifficulty": 0,
+        "searchIntent": "commercial"
+      },
+      {
+        "keyword": "betta se plus skimmer",
+        "searchVolume": 70,
+        "cpcUsd": 8.44,
+        "keywordDifficulty": 0,
+        "searchIntent": "informational"
+      },
+      {
+        "keyword": "betta pool skimmer manual",
+        "searchVolume": 70,
+        "cpcUsd": 1.26,
+        "keywordDifficulty": 0,
+        "searchIntent": "informational"
+      },
+      {
+        "keyword": "betta flex vs betta se plus",
+        "searchVolume": 70,
+        "cpcUsd": 7.9,
+        "keywordDifficulty": 0,
+        "searchIntent": "commercial"
+      },
+      {
+        "keyword": "betta neo skimmer",
+        "searchVolume": 70,
+        "cpcUsd": 5.5,
+        "keywordDifficulty": 0,
+        "searchIntent": "transactional"
+      },
+      {
+        "keyword": "betta se plus review",
+        "searchVolume": 70,
+        "cpcUsd": 2.46,
+        "keywordDifficulty": 0,
+        "searchIntent": "commercial"
+      },
+      {
+        "keyword": "betta se plus costco",
+        "searchVolume": 50,
+        "cpcUsd": 5.04,
+        "keywordDifficulty": null,
+        "searchIntent": "commercial"
+      },
+      {
+        "keyword": "betta se plus manual",
+        "searchVolume": 50,
+        "cpcUsd": 0.17,
+        "keywordDifficulty": 0,
+        "searchIntent": "transactional"
+      },
+      {
+        "keyword": "betta se plus vs betta flex",
+        "searchVolume": 30,
+        "cpcUsd": 6.48,
+        "keywordDifficulty": 0,
+        "searchIntent": "commercial"
+      },
+      {
+        "keyword": "betta se plus sam's club",
+        "searchVolume": 10,
+        "cpcUsd": 4.55,
+        "keywordDifficulty": null,
+        "searchIntent": "informational"
+      },
+      {
+        "keyword": "betta se plus amazon",
+        "searchVolume": 10,
+        "cpcUsd": 4.1,
+        "keywordDifficulty": null,
+        "searchIntent": "informational"
+      },
+      {
+        "keyword": "betta se plus for sale",
+        "searchVolume": 10,
+        "cpcUsd": 7.38,
+        "keywordDifficulty": null,
+        "searchIntent": "transactional"
+      },
+      {
+        "keyword": "betta se plus parts",
+        "searchVolume": 10,
+        "cpcUsd": 2.56,
+        "keywordDifficulty": null,
+        "searchIntent": "transactional"
+      },
+      {
+        "keyword": "betta se vs betta se plus reddit",
+        "searchVolume": 10,
+        "cpcUsd": null,
+        "keywordDifficulty": null,
+        "searchIntent": "informational"
+      },
+      {
+        "keyword": "betta se plus vs betta neo",
+        "searchVolume": 10,
+        "cpcUsd": 10.54,
+        "keywordDifficulty": null,
+        "searchIntent": "commercial"
+      }
+    ]
+  },
+  "serps": {
+    "dolphin-nautilus-cc-plus-wifi:model": {
+      "keyword": "dolphin nautilus cc plus",
+      "itemTypes": [
+        "ai_overview",
+        "organic",
+        "video",
+        "discussions_and_forums",
+        "people_also_ask",
+        "related_searches",
+        "google_reviews",
+        "knowledge_graph",
+        "popular_products"
+      ],
+      "organic": [
+        {
+          "position": 2,
+          "domain": "www.maytronics.com",
+          "title": "Dolphin Nautilus CC Plus w/Wi-Fi",
+          "url": "https://www.maytronics.com/en-us/store/residential-pools/best-performance-cleaners/dolphin-nautilus-cc-plus-w%2Fwi-fi/99996409-PCI.html?srsltid=AfmBOorQC1Mil62WSwBPZV2-slVer7j5y3H7dp9RrtaBLMW7sGsSTMZq"
+        },
+        {
+          "position": 5,
+          "domain": "www.amazon.com",
+          "title": "Dolphin Nautilus CC Plus Wi-Fi Automatic Robotic Pool ...",
+          "url": "https://www.amazon.com/Dolphin-Nautilus-Robotic-Cleaner-Ground/dp/B09K4C9WGF"
+        },
+        {
+          "position": 7,
+          "domain": "www.thepoolnerd.com",
+          "title": "Dolphin Nautilus CC Plus Review",
+          "url": "https://www.thepoolnerd.com/dolphin-nautilus-cc-plus-review"
+        },
+        {
+          "position": 8,
+          "domain": "www.quantumrobotic.com",
+          "title": "Dolphin Nautilus CC Plus Robotic Pool Cleaner",
+          "url": "https://www.quantumrobotic.com/dolphin-nautilus-cc-plus"
+        },
+        {
+          "position": 9,
+          "domain": "manuals.maytronics.com",
+          "title": "Maytronics Dolphin Nautilus CC Plus Manual",
+          "url": "https://manuals.maytronics.com/intro/?pn=99996403-PC"
+        },
+        {
+          "position": 10,
+          "domain": "www.poolbots.com",
+          "title": "Dolphin Nautilus CC Plus vs Nautilus CC Supreme",
+          "url": "https://www.poolbots.com/learn/dolphin-nautilus-cc-plus-vs-dolphin-nautilus-cc-supreme"
+        },
+        {
+          "position": 11,
+          "domain": "www.premierrobotic.com",
+          "title": "Dolphin Nautilus CC Plus Robotic Pool Cleaner",
+          "url": "https://www.premierrobotic.com/dolphin-nautilus-cc-plus"
+        },
+        {
+          "position": 13,
+          "domain": "www.reddit.com",
+          "title": "Dolphin Nautilus CC Plus Useless : r/pools",
+          "url": "https://www.reddit.com/r/pools/comments/1e6ad07/dolphin_nautilus_cc_plus_useless/"
+        },
+        {
+          "position": 14,
+          "domain": "shibleysmiles.com",
+          "title": "Nautilus CC vs. Nautilus CC Plus: Which Is Better?",
+          "url": "https://shibleysmiles.com/nautilus-cc-vs-nautilus-cc-plus-review-robotic-pool-cleaner/"
+        },
+        {
+          "position": 15,
+          "domain": "www.troublefreepool.com",
+          "title": "Dolphin Nautilus CC vs Plus",
+          "url": "https://www.troublefreepool.com/threads/dolphin-nautilus-cc-vs-plus.168465/"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "Is the Dolphin Nautilus CC Plus worth it?",
+        "What is the difference between dolphin nautilus cc and plus?",
+        "What is the life expectancy of a Dolphin pool cleaner?",
+        "How do I reset my Dolphin Nautilus CC Plus?"
+      ]
+    },
+    "dolphin-nautilus-cc-plus-wifi:review": {
+      "keyword": "dolphin nautilus cc plus review",
+      "itemTypes": [],
+      "organic": [],
+      "peopleAlsoAsk": []
+    },
+    "polaris-freedom:model": {
+      "keyword": "polaris freedom robotic pool cleaner",
+      "itemTypes": [],
+      "organic": [],
+      "peopleAlsoAsk": []
+    },
+    "polaris-freedom:review": {
+      "keyword": "polaris freedom robotic pool cleaner review",
+      "itemTypes": [],
+      "organic": [],
+      "peopleAlsoAsk": []
+    },
+    "dolphin-proteus-dx4-plus:model": {
+      "keyword": "dolphin proteus dx4 plus",
+      "itemTypes": [],
+      "organic": [],
+      "peopleAlsoAsk": []
+    },
+    "dolphin-proteus-dx4-plus:review": {
+      "keyword": "dolphin proteus dx4 plus review",
+      "itemTypes": [],
+      "organic": [],
+      "peopleAlsoAsk": []
+    },
+    "aiper-scuba-v3-ai-vision:model": {
+      "keyword": "aiper scuba v3 ai vision",
+      "itemTypes": [],
+      "organic": [],
+      "peopleAlsoAsk": []
+    },
+    "aiper-scuba-v3-ai-vision:review": {
+      "keyword": "aiper scuba v3 ai vision review",
+      "itemTypes": [],
+      "organic": [],
+      "peopleAlsoAsk": []
+    },
+    "betta-se-plus:model": {
+      "keyword": "betta se plus",
+      "itemTypes": [],
+      "organic": [],
+      "peopleAlsoAsk": []
+    },
+    "betta-se-plus:review": {
+      "keyword": "betta se plus review",
+      "itemTypes": [],
+      "organic": [],
+      "peopleAlsoAsk": []
+    }
+  },
+  "costLog": [
+    {
+      "label": "volume-cpc",
+      "path": "/keywords_data/google_ads/search_volume/live",
+      "tasks": 1,
+      "cost": 0.09,
+      "runningTotal": 0.09
+    },
+    {
+      "label": "bulk-kd",
+      "path": "/dataforseo_labs/google/bulk_keyword_difficulty/live",
+      "tasks": 1,
+      "cost": 0.0192,
+      "runningTotal": 0.1092
+    },
+    {
+      "label": "related:dolphin-nautilus-cc-plus-wifi",
+      "path": "/dataforseo_labs/google/related_keywords/live",
+      "tasks": 1,
+      "cost": 0.01596,
+      "runningTotal": 0.12516
+    },
+    {
+      "label": "related:polaris-freedom",
+      "path": "/dataforseo_labs/google/related_keywords/live",
+      "tasks": 1,
+      "cost": 0.01344,
+      "runningTotal": 0.1386
+    },
+    {
+      "label": "related:dolphin-proteus-dx4-plus",
+      "path": "/dataforseo_labs/google/related_keywords/live",
+      "tasks": 1,
+      "cost": 0.012,
+      "runningTotal": 0.1506
+    },
+    {
+      "label": "related:aiper-scuba-v3-ai-vision",
+      "path": "/dataforseo_labs/google/related_keywords/live",
+      "tasks": 1,
+      "cost": 0.01212,
+      "runningTotal": 0.16272
+    },
+    {
+      "label": "related:betta-se-plus",
+      "path": "/dataforseo_labs/google/related_keywords/live",
+      "tasks": 1,
+      "cost": 0.01416,
+      "runningTotal": 0.17688
+    },
+    {
+      "label": "serps",
+      "path": "/serp/google/organic/live/advanced",
+      "tasks": 10,
+      "cost": 0.004,
+      "runningTotal": 0.18088
+    }
+  ],
+  "totalCostUsd": 0.18088,
+  "summary": [
+    {
+      "id": "dolphin-nautilus-cc-plus-wifi",
+      "name": "Dolphin Nautilus CC Plus Wi-Fi",
+      "seeds": [
+        {
+          "keyword": "dolphin nautilus cc plus",
+          "searchVolume": 5400,
+          "cpcUsd": 3.42,
+          "competition": "HIGH",
+          "competitionIndex": 100,
+          "keywordDifficulty": 0
+        },
+        {
+          "keyword": "dolphin nautilus cc plus wifi",
+          "searchVolume": 480,
+          "cpcUsd": 4.49,
+          "competition": "HIGH",
+          "competitionIndex": 100,
+          "keywordDifficulty": 0
+        },
+        {
+          "keyword": "dolphin nautilus cc plus wi-fi",
+          "searchVolume": 480,
+          "cpcUsd": 4.49,
+          "competition": "HIGH",
+          "competitionIndex": 100,
+          "keywordDifficulty": 0
+        },
+        {
+          "keyword": "dolphin nautilus cc plus parts",
+          "searchVolume": 390,
+          "cpcUsd": 1.83,
+          "competition": "HIGH",
+          "competitionIndex": 100,
+          "keywordDifficulty": 0
+        },
+        {
+          "keyword": "dolphin nautilus cc plus manual",
+          "searchVolume": 210,
+          "cpcUsd": 0.7,
+          "competition": "LOW",
+          "competitionIndex": 31,
+          "keywordDifficulty": 1
+        },
+        {
+          "keyword": "dolphin nautilus cc plus review",
+          "searchVolume": 140,
+          "cpcUsd": 2.58,
+          "competition": "HIGH",
+          "competitionIndex": 100,
+          "keywordDifficulty": 0
+        },
+        {
+          "keyword": "dolphin nautilus cc plus price",
+          "searchVolume": 70,
+          "cpcUsd": 3.21,
+          "competition": "HIGH",
+          "competitionIndex": 100,
+          "keywordDifficulty": 0
+        },
+        {
+          "keyword": "dolphin nautilus cc plus troubleshooting",
+          "searchVolume": 70,
+          "cpcUsd": 1.08,
+          "competition": "LOW",
+          "competitionIndex": 24,
+          "keywordDifficulty": 0
+        },
+        {
+          "keyword": "nautilus cc plus review",
+          "searchVolume": 30,
+          "cpcUsd": 2.07,
+          "competition": "HIGH",
+          "competitionIndex": 100,
+          "keywordDifficulty": 0
+        },
+        {
+          "keyword": "dolphin nautilus cc plus wifi review",
+          "searchVolume": 20,
+          "cpcUsd": 4.1,
+          "competition": "HIGH",
+          "competitionIndex": 100,
+          "keywordDifficulty": 0
+        },
+        {
+          "keyword": "dolphin nautilus cc plus amazon",
+          "searchVolume": 10,
+          "cpcUsd": 1.95,
+          "competition": "HIGH",
+          "competitionIndex": 100,
+          "keywordDifficulty": 19
+        },
+        {
+          "keyword": "dolphin nautilus cc plus vs proteus dx4",
+          "searchVolume": 10,
+          "cpcUsd": null,
+          "competition": "LOW",
+          "competitionIndex": 0,
+          "keywordDifficulty": 0
+        }
+      ],
+      "related": [
+        {
+          "keyword": "dolphin nautilus cc plus",
+          "searchVolume": 5400,
+          "cpcUsd": 3.42,
+          "keywordDifficulty": 0,
+          "searchIntent": "transactional"
+        },
+        {
+          "keyword": "dolphin nautilus cc pro",
+          "searchVolume": 590,
+          "cpcUsd": 4.79,
+          "keywordDifficulty": 0,
+          "searchIntent": "transactional"
+        },
+        {
+          "keyword": "dolphin nautilus cc supreme",
+          "searchVolume": 590,
+          "cpcUsd": 5.91,
+          "keywordDifficulty": 0,
+          "searchIntent": "transactional"
+        },
+        {
+          "keyword": "dolphin nautilus cc plus wifi",
+          "searchVolume": 480,
+          "cpcUsd": 4.49,
+          "keywordDifficulty": 0,
+          "searchIntent": "transactional"
+        },
+        {
+          "keyword": "dolphin nautilus cc plus parts",
+          "searchVolume": 390,
+          "cpcUsd": 1.83,
+          "keywordDifficulty": 0,
+          "searchIntent": "transactional"
+        },
+        {
+          "keyword": "dolphin nautilus cc parts",
+          "searchVolume": 260,
+          "cpcUsd": 1.41,
+          "keywordDifficulty": 0,
+          "searchIntent": "transactional"
+        },
+        {
+          "keyword": "dolphin nautilus cc plus manual",
+          "searchVolume": 210,
+          "cpcUsd": 0.7,
+          "keywordDifficulty": 1,
+          "searchIntent": "informational"
+        },
+        {
+          "keyword": "maytronics dolphin parts diagram",
+          "searchVolume": 210,
+          "cpcUsd": 0.96,
+          "keywordDifficulty": 0,
+          "searchIntent": "informational"
+        },
+        {
+          "keyword": "dolphin nautilus cc plus review",
+          "searchVolume": 140,
+          "cpcUsd": 2.58,
+          "keywordDifficulty": 0,
+          "searchIntent": "commercial"
+        },
+        {
+          "keyword": "maytronics warranty claim",
+          "searchVolume": 140,
+          "cpcUsd": 0.11,
+          "keywordDifficulty": 0,
+          "searchIntent": "navigational"
+        },
+        {
+          "keyword": "dolphin nautilus cc review",
+          "searchVolume": 140,
+          "cpcUsd": 2.62,
+          "keywordDifficulty": 0,
+          "searchIntent": "informational"
+        },
+        {
+          "keyword": "dolphin nautilus cc plus best price",
+          "searchVolume": 110,
+          "cpcUsd": 3.66,
+          "keywordDifficulty": 0,
+          "searchIntent": "commercial"
+        },
+        {
+          "keyword": "dolphin nautilus cc plus warranty",
+          "searchVolume": 90,
+          "cpcUsd": 1.38,
+          "keywordDifficulty": 4,
+          "searchIntent": "informational"
+        },
+        {
+          "keyword": "dolphin nautilus cc plus not moving",
+          "searchVolume": 90,
+          "cpcUsd": 0.28,
+          "keywordDifficulty": 0,
+          "searchIntent": "informational"
+        },
+        {
+          "keyword": "dolphin nautilus cc pro review",
+          "searchVolume": 90,
+          "cpcUsd": 3.02,
+          "keywordDifficulty": 0,
+          "searchIntent": "commercial"
+        },
+        {
+          "keyword": "dolphin nautilus cc plus price",
+          "searchVolume": 70,
+          "cpcUsd": 3.21,
+          "keywordDifficulty": 0,
+          "searchIntent": "commercial"
+        },
+        {
+          "keyword": "dolphin nautilus cc plus not working",
+          "searchVolume": 70,
+          "cpcUsd": 2.16,
+          "keywordDifficulty": 0,
+          "searchIntent": "informational"
+        },
+        {
+          "keyword": "dolphin nautilus cc plus parts list",
+          "searchVolume": 70,
+          "cpcUsd": 1.38,
+          "keywordDifficulty": 0,
+          "searchIntent": "informational"
+        },
+        {
+          "keyword": "dolphin nautilus cc vs cc plus",
+          "searchVolume": 70,
+          "cpcUsd": 4.31,
+          "keywordDifficulty": 0,
+          "searchIntent": "commercial"
+        },
+        {
+          "keyword": "dolphin nautilus cc plus parts diagram",
+          "searchVolume": 50,
+          "cpcUsd": 1.2,
+          "keywordDifficulty": 0,
+          "searchIntent": "informational"
+        },
+        {
+          "keyword": "maytronics warranty registration",
+          "searchVolume": 50,
+          "cpcUsd": 0.34,
+          "keywordDifficulty": 13,
+          "searchIntent": "navigational"
+        },
+        {
+          "keyword": "dolphin nautilus cc plus starts then stops",
+          "searchVolume": 40,
+          "cpcUsd": 3.74,
+          "keywordDifficulty": 0,
+          "searchIntent": "informational"
+        },
+        {
+          "keyword": "dolphin nautilus cc vs plus",
+          "searchVolume": 30,
+          "cpcUsd": 4.49,
+          "keywordDifficulty": 0,
+          "searchIntent": "commercial"
+        },
+        {
+          "keyword": "dolphin nautilus cc plus repair near me",
+          "searchVolume": 30,
+          "cpcUsd": 5.85,
+          "keywordDifficulty": 0,
+          "searchIntent": "navigational"
+        },
+        {
+          "keyword": "maytronics dolphin nautilus cc parts list pdf",
+          "searchVolume": 20,
+          "cpcUsd": 1.08,
+          "keywordDifficulty": null,
+          "searchIntent": "navigational"
+        },
+        {
+          "keyword": "dolphin nautilus cc plus rebuild kit",
+          "searchVolume": 20,
+          "cpcUsd": 1.41,
+          "keywordDifficulty": null,
+          "searchIntent": "transactional"
+        },
+        {
+          "keyword": "dolphin nautilus cc plus manual pdf",
+          "searchVolume": 20,
+          "cpcUsd": 0.28,
+          "keywordDifficulty": 0,
+          "searchIntent": "informational"
+        },
+        {
+          "keyword": "dolphin nautilus cc plus wifi review",
+          "searchVolume": 20,
+          "cpcUsd": 4.1,
+          "keywordDifficulty": 0,
+          "searchIntent": "commercial"
+        },
+        {
+          "keyword": "dolphin nautilus cc plus reset button",
+          "searchVolume": 20,
+          "cpcUsd": 1.77,
+          "keywordDifficulty": 0,
+          "searchIntent": "informational"
+        },
+        {
+          "keyword": "dolphin nautilus cc plus power supply not working",
+          "searchVolume": 20,
+          "cpcUsd": 1.28,
+          "keywordDifficulty": 0,
+          "searchIntent": "navigational"
+        }
+      ],
+      "modelSerp": {
+        "keyword": "dolphin nautilus cc plus",
+        "itemTypes": [
+          "ai_overview",
+          "organic",
+          "video",
+          "discussions_and_forums",
+          "people_also_ask",
+          "related_searches",
+          "google_reviews",
+          "knowledge_graph",
+          "popular_products"
+        ],
+        "organic": [
+          {
+            "position": 2,
+            "domain": "www.maytronics.com",
+            "title": "Dolphin Nautilus CC Plus w/Wi-Fi",
+            "url": "https://www.maytronics.com/en-us/store/residential-pools/best-performance-cleaners/dolphin-nautilus-cc-plus-w%2Fwi-fi/99996409-PCI.html?srsltid=AfmBOorQC1Mil62WSwBPZV2-slVer7j5y3H7dp9RrtaBLMW7sGsSTMZq"
+          },
+          {
+            "position": 5,
+            "domain": "www.amazon.com",
+            "title": "Dolphin Nautilus CC Plus Wi-Fi Automatic Robotic Pool ...",
+            "url": "https://www.amazon.com/Dolphin-Nautilus-Robotic-Cleaner-Ground/dp/B09K4C9WGF"
+          },
+          {
+            "position": 7,
+            "domain": "www.thepoolnerd.com",
+            "title": "Dolphin Nautilus CC Plus Review",
+            "url": "https://www.thepoolnerd.com/dolphin-nautilus-cc-plus-review"
+          },
+          {
+            "position": 8,
+            "domain": "www.quantumrobotic.com",
+            "title": "Dolphin Nautilus CC Plus Robotic Pool Cleaner",
+            "url": "https://www.quantumrobotic.com/dolphin-nautilus-cc-plus"
+          },
+          {
+            "position": 9,
+            "domain": "manuals.maytronics.com",
+            "title": "Maytronics Dolphin Nautilus CC Plus Manual",
+            "url": "https://manuals.maytronics.com/intro/?pn=99996403-PC"
+          },
+          {
+            "position": 10,
+            "domain": "www.poolbots.com",
+            "title": "Dolphin Nautilus CC Plus vs Nautilus CC Supreme",
+            "url": "https://www.poolbots.com/learn/dolphin-nautilus-cc-plus-vs-dolphin-nautilus-cc-supreme"
+          },
+          {
+            "position": 11,
+            "domain": "www.premierrobotic.com",
+            "title": "Dolphin Nautilus CC Plus Robotic Pool Cleaner",
+            "url": "https://www.premierrobotic.com/dolphin-nautilus-cc-plus"
+          },
+          {
+            "position": 13,
+            "domain": "www.reddit.com",
+            "title": "Dolphin Nautilus CC Plus Useless : r/pools",
+            "url": "https://www.reddit.com/r/pools/comments/1e6ad07/dolphin_nautilus_cc_plus_useless/"
+          },
+          {
+            "position": 14,
+            "domain": "shibleysmiles.com",
+            "title": "Nautilus CC vs. Nautilus CC Plus: Which Is Better?",
+            "url": "https://shibleysmiles.com/nautilus-cc-vs-nautilus-cc-plus-review-robotic-pool-cleaner/"
+          },
+          {
+            "position": 15,
+            "domain": "www.troublefreepool.com",
+            "title": "Dolphin Nautilus CC vs Plus",
+            "url": "https://www.troublefreepool.com/threads/dolphin-nautilus-cc-vs-plus.168465/"
+          }
+        ],
+        "peopleAlsoAsk": [
+          "Is the Dolphin Nautilus CC Plus worth it?",
+          "What is the difference between dolphin nautilus cc and plus?",
+          "What is the life expectancy of a Dolphin pool cleaner?",
+          "How do I reset my Dolphin Nautilus CC Plus?"
+        ]
+      },
+      "reviewSerp": {
+        "keyword": "dolphin nautilus cc plus review",
+        "itemTypes": [],
+        "organic": [],
+        "peopleAlsoAsk": []
+      }
+    },
+    {
+      "id": "polaris-freedom",
+      "name": "Polaris FREEDOM",
+      "seeds": [
+        {
+          "keyword": "polaris freedom",
+          "searchVolume": 1000,
+          "cpcUsd": 3.45,
+          "competition": "HIGH",
+          "competitionIndex": 100,
+          "keywordDifficulty": 0
+        },
+        {
+          "keyword": "polaris freedom pool cleaner",
+          "searchVolume": 720,
+          "cpcUsd": 3.57,
+          "competition": "HIGH",
+          "competitionIndex": 100,
+          "keywordDifficulty": 0
+        },
+        {
+          "keyword": "polaris freedom robotic pool cleaner",
+          "searchVolume": 260,
+          "cpcUsd": 5.62,
+          "competition": "HIGH",
+          "competitionIndex": 72,
+          "keywordDifficulty": 0
+        },
+        {
+          "keyword": "polaris freedom manual",
+          "searchVolume": 30,
+          "cpcUsd": null,
+          "competition": "LOW",
+          "competitionIndex": 0,
+          "keywordDifficulty": 0
+        },
+        {
+          "keyword": "polaris freedom review",
+          "searchVolume": 20,
+          "cpcUsd": 2.47,
+          "competition": "HIGH",
+          "competitionIndex": 100,
+          "keywordDifficulty": 0
+        },
+        {
+          "keyword": "polaris freedom parts",
+          "searchVolume": 20,
+          "cpcUsd": 2.21,
+          "competition": "HIGH",
+          "competitionIndex": 100,
+          "keywordDifficulty": null
+        },
+        {
+          "keyword": "polaris freedom price",
+          "searchVolume": 10,
+          "cpcUsd": 1.33,
+          "competition": "HIGH",
+          "competitionIndex": 83,
+          "keywordDifficulty": null
+        },
+        {
+          "keyword": "polaris freedom robotic pool cleaner review",
+          "searchVolume": null,
+          "cpcUsd": null,
+          "competition": null,
+          "competitionIndex": null,
+          "keywordDifficulty": null
+        },
+        {
+          "keyword": "polaris freedom cordless pool cleaner review",
+          "searchVolume": null,
+          "cpcUsd": null,
+          "competition": null,
+          "competitionIndex": null,
+          "keywordDifficulty": null
+        },
+        {
+          "keyword": "polaris freedom amazon",
+          "searchVolume": null,
+          "cpcUsd": null,
+          "competition": null,
+          "competitionIndex": null,
+          "keywordDifficulty": null
+        },
+        {
+          "keyword": "polaris freedom troubleshooting",
+          "searchVolume": null,
+          "cpcUsd": null,
+          "competition": null,
+          "competitionIndex": null,
+          "keywordDifficulty": null
+        },
+        {
+          "keyword": "polaris freedom vs dolphin",
+          "searchVolume": null,
+          "cpcUsd": null,
+          "competition": null,
+          "competitionIndex": null,
+          "keywordDifficulty": null
+        }
+      ],
+      "related": [
+        {
+          "keyword": "polaris freedom plus",
+          "searchVolume": 720,
+          "cpcUsd": 5.05,
+          "keywordDifficulty": 0,
+          "searchIntent": "transactional"
+        },
+        {
+          "keyword": "polaris freedom robotic pool cleaner",
+          "searchVolume": 260,
+          "cpcUsd": 5.62,
+          "keywordDifficulty": 0,
+          "searchIntent": "transactional"
+        },
+        {
+          "keyword": "polaris freedom sc",
+          "searchVolume": 210,
+          "cpcUsd": 3.72,
+          "keywordDifficulty": 0,
+          "searchIntent": "informational"
+        },
+        {
+          "keyword": "polaris freedom plus reviews",
+          "searchVolume": 70,
+          "cpcUsd": 3.11,
+          "keywordDifficulty": 0,
+          "searchIntent": "commercial"
+        },
+        {
+          "keyword": "polaris freedom manual",
+          "searchVolume": 30,
+          "cpcUsd": null,
+          "keywordDifficulty": 0,
+          "searchIntent": "informational"
+        },
+        {
+          "keyword": "polaris freedom battery replacement",
+          "searchVolume": 30,
+          "cpcUsd": 3.43,
+          "keywordDifficulty": 0,
+          "searchIntent": "transactional"
+        },
+        {
+          "keyword": "polaris freedom app",
+          "searchVolume": 20,
+          "cpcUsd": 2.64,
+          "keywordDifficulty": null,
+          "searchIntent": "navigational"
+        },
+        {
+          "keyword": "polaris freedom pool cleaner battery replacement",
+          "searchVolume": 10,
+          "cpcUsd": 3.01,
+          "keywordDifficulty": null,
+          "searchIntent": "navigational"
+        },
+        {
+          "keyword": "polaris freedom plus manual",
+          "searchVolume": 10,
+          "cpcUsd": 8.39,
+          "keywordDifficulty": null,
+          "searchIntent": "transactional"
+        },
+        {
+          "keyword": "polaris freedom plus price",
+          "searchVolume": 10,
+          "cpcUsd": 3.43,
+          "keywordDifficulty": null,
+          "searchIntent": "commercial"
+        },
+        {
+          "keyword": "polaris freedom plus for sale",
+          "searchVolume": 10,
+          "cpcUsd": 9.54,
+          "keywordDifficulty": 0,
+          "searchIntent": "transactional"
+        },
+        {
+          "keyword": "polaris freedom plus vs freedom",
+          "searchVolume": 10,
+          "cpcUsd": 1.42,
+          "keywordDifficulty": null,
+          "searchIntent": "commercial"
+        }
+      ],
+      "modelSerp": {
+        "keyword": "polaris freedom robotic pool cleaner",
+        "itemTypes": [],
+        "organic": [],
+        "peopleAlsoAsk": []
+      },
+      "reviewSerp": {
+        "keyword": "polaris freedom robotic pool cleaner review",
+        "itemTypes": [],
+        "organic": [],
+        "peopleAlsoAsk": []
+      }
+    },
+    {
+      "id": "dolphin-proteus-dx4-plus",
+      "name": "Dolphin Proteus DX4 Plus",
+      "seeds": [
+        {
+          "keyword": "dolphin proteus dx4",
+          "searchVolume": 390,
+          "cpcUsd": 2.71,
+          "competition": "HIGH",
+          "competitionIndex": 100,
+          "keywordDifficulty": 0
+        },
+        {
+          "keyword": "dolphin proteus dx4 parts",
+          "searchVolume": 50,
+          "cpcUsd": 1.61,
+          "competition": "HIGH",
+          "competitionIndex": 100,
+          "keywordDifficulty": 0
+        },
+        {
+          "keyword": "dolphin proteus dx4 review",
+          "searchVolume": 40,
+          "cpcUsd": 3.18,
+          "competition": "HIGH",
+          "competitionIndex": 100,
+          "keywordDifficulty": 0
+        },
+        {
+          "keyword": "dolphin proteus dx4 vs nautilus cc plus",
+          "searchVolume": 10,
+          "cpcUsd": null,
+          "competition": "HIGH",
+          "competitionIndex": 100,
+          "keywordDifficulty": 0
+        },
+        {
+          "keyword": "dolphin proteus dx4 plus",
+          "searchVolume": null,
+          "cpcUsd": null,
+          "competition": null,
+          "competitionIndex": null,
+          "keywordDifficulty": null
+        },
+        {
+          "keyword": "proteus dx4 plus",
+          "searchVolume": null,
+          "cpcUsd": null,
+          "competition": null,
+          "competitionIndex": null,
+          "keywordDifficulty": null
+        },
+        {
+          "keyword": "dolphin proteus dx4 plus review",
+          "searchVolume": null,
+          "cpcUsd": null,
+          "competition": null,
+          "competitionIndex": null,
+          "keywordDifficulty": null
+        },
+        {
+          "keyword": "proteus dx4 plus review",
+          "searchVolume": null,
+          "cpcUsd": null,
+          "competition": null,
+          "competitionIndex": null,
+          "keywordDifficulty": null
+        },
+        {
+          "keyword": "dolphin proteus dx4 plus price",
+          "searchVolume": null,
+          "cpcUsd": null,
+          "competition": null,
+          "competitionIndex": null,
+          "keywordDifficulty": null
+        },
+        {
+          "keyword": "dolphin proteus dx4 plus amazon",
+          "searchVolume": null,
+          "cpcUsd": null,
+          "competition": null,
+          "competitionIndex": null,
+          "keywordDifficulty": null
+        },
+        {
+          "keyword": "dolphin proteus dx4 plus manual",
+          "searchVolume": null,
+          "cpcUsd": null,
+          "competition": null,
+          "competitionIndex": null,
+          "keywordDifficulty": null
+        },
+        {
+          "keyword": "dolphin proteus dx4 plus troubleshooting",
+          "searchVolume": null,
+          "cpcUsd": null,
+          "competition": null,
+          "competitionIndex": null,
+          "keywordDifficulty": null
+        }
+      ],
+      "related": [],
+      "modelSerp": {
+        "keyword": "dolphin proteus dx4 plus",
+        "itemTypes": [],
+        "organic": [],
+        "peopleAlsoAsk": []
+      },
+      "reviewSerp": {
+        "keyword": "dolphin proteus dx4 plus review",
+        "itemTypes": [],
+        "organic": [],
+        "peopleAlsoAsk": []
+      }
+    },
+    {
+      "id": "aiper-scuba-v3-ai-vision",
+      "name": "Aiper Scuba V3 AI Vision",
+      "seeds": [
+        {
+          "keyword": "aiper scuba v3",
+          "searchVolume": 1000,
+          "cpcUsd": 8.05,
+          "competition": "HIGH",
+          "competitionIndex": 100,
+          "keywordDifficulty": 14
+        },
+        {
+          "keyword": "aiper scuba v3 review",
+          "searchVolume": 170,
+          "cpcUsd": 7.61,
+          "competition": "HIGH",
+          "competitionIndex": 100,
+          "keywordDifficulty": 3
+        },
+        {
+          "keyword": "aiper scuba v3 price",
+          "searchVolume": 40,
+          "cpcUsd": 5.82,
+          "competition": "HIGH",
+          "competitionIndex": 100,
+          "keywordDifficulty": null
+        },
+        {
+          "keyword": "aiper scuba v3 ai vision",
+          "searchVolume": 30,
+          "cpcUsd": 8.79,
+          "competition": "HIGH",
+          "competitionIndex": 100,
+          "keywordDifficulty": null
+        },
+        {
+          "keyword": "aiper scuba v3 manual",
+          "searchVolume": 20,
+          "cpcUsd": 3.27,
+          "competition": "LOW",
+          "competitionIndex": 32,
+          "keywordDifficulty": null
+        },
+        {
+          "keyword": "scuba v3 review",
+          "searchVolume": 10,
+          "cpcUsd": 2.92,
+          "competition": "MEDIUM",
+          "competitionIndex": 66,
+          "keywordDifficulty": null
+        },
+        {
+          "keyword": "aiper scuba v3 amazon",
+          "searchVolume": 10,
+          "cpcUsd": 3.07,
+          "competition": "HIGH",
+          "competitionIndex": 100,
+          "keywordDifficulty": null
+        },
+        {
+          "keyword": "aiper scuba v3 filter",
+          "searchVolume": 10,
+          "cpcUsd": 4.26,
+          "competition": "HIGH",
+          "competitionIndex": 94,
+          "keywordDifficulty": null
+        },
+        {
+          "keyword": "scuba v3 ai vision",
+          "searchVolume": null,
+          "cpcUsd": null,
+          "competition": null,
+          "competitionIndex": null,
+          "keywordDifficulty": null
+        },
+        {
+          "keyword": "aiper scuba v3 ai vision review",
+          "searchVolume": null,
+          "cpcUsd": null,
+          "competition": null,
+          "competitionIndex": null,
+          "keywordDifficulty": null
+        },
+        {
+          "keyword": "aiper scuba v3 troubleshooting",
+          "searchVolume": null,
+          "cpcUsd": null,
+          "competition": null,
+          "competitionIndex": null,
+          "keywordDifficulty": null
+        },
+        {
+          "keyword": "aiper scuba v3 vs polaris freedom",
+          "searchVolume": null,
+          "cpcUsd": null,
+          "competition": null,
+          "competitionIndex": null,
+          "keywordDifficulty": null
+        }
+      ],
+      "related": [
+        {
+          "keyword": "aiper scuba v3 ai vision",
+          "searchVolume": 30,
+          "cpcUsd": 8.79,
+          "keywordDifficulty": null,
+          "searchIntent": "transactional"
+        }
+      ],
+      "modelSerp": {
+        "keyword": "aiper scuba v3 ai vision",
+        "itemTypes": [],
+        "organic": [],
+        "peopleAlsoAsk": []
+      },
+      "reviewSerp": {
+        "keyword": "aiper scuba v3 ai vision review",
+        "itemTypes": [],
+        "organic": [],
+        "peopleAlsoAsk": []
+      }
+    },
+    {
+      "id": "betta-se-plus",
+      "name": "Betta SE Plus",
+      "seeds": [
+        {
+          "keyword": "betta se plus",
+          "searchVolume": 1600,
+          "cpcUsd": 6.95,
+          "competition": "HIGH",
+          "competitionIndex": 100,
+          "keywordDifficulty": 0
+        },
+        {
+          "keyword": "betta se plus pool skimmer",
+          "searchVolume": 590,
+          "cpcUsd": 6.68,
+          "competition": "HIGH",
+          "competitionIndex": 100,
+          "keywordDifficulty": 0
+        },
+        {
+          "keyword": "betta se plus robotic pool skimmer",
+          "searchVolume": 590,
+          "cpcUsd": 5.36,
+          "competition": "LOW",
+          "competitionIndex": 7,
+          "keywordDifficulty": null
+        },
+        {
+          "keyword": "betta se plus review",
+          "searchVolume": 70,
+          "cpcUsd": 2.46,
+          "competition": "HIGH",
+          "competitionIndex": 100,
+          "keywordDifficulty": 0
+        },
+        {
+          "keyword": "betta se plus manual",
+          "searchVolume": 50,
+          "cpcUsd": 0.17,
+          "competition": "LOW",
+          "competitionIndex": 12,
+          "keywordDifficulty": 0
+        },
+        {
+          "keyword": "betta se plus amazon",
+          "searchVolume": 10,
+          "cpcUsd": 4.1,
+          "competition": "HIGH",
+          "competitionIndex": 96,
+          "keywordDifficulty": null
+        },
+        {
+          "keyword": "betta se plus parts",
+          "searchVolume": 10,
+          "cpcUsd": 2.56,
+          "competition": "HIGH",
+          "competitionIndex": 100,
+          "keywordDifficulty": null
+        },
+        {
+          "keyword": "betta se plus pool skimmer review",
+          "searchVolume": null,
+          "cpcUsd": null,
+          "competition": null,
+          "competitionIndex": null,
+          "keywordDifficulty": null
+        },
+        {
+          "keyword": "betta se plus robotic pool skimmer review",
+          "searchVolume": null,
+          "cpcUsd": null,
+          "competition": null,
+          "competitionIndex": null,
+          "keywordDifficulty": null
+        },
+        {
+          "keyword": "betta se plus price",
+          "searchVolume": null,
+          "cpcUsd": null,
+          "competition": null,
+          "competitionIndex": null,
+          "keywordDifficulty": null
+        },
+        {
+          "keyword": "betta se plus troubleshooting",
+          "searchVolume": null,
+          "cpcUsd": null,
+          "competition": null,
+          "competitionIndex": null,
+          "keywordDifficulty": null
+        },
+        {
+          "keyword": "betta se plus vs betta 2",
+          "searchVolume": null,
+          "cpcUsd": null,
+          "competition": null,
+          "competitionIndex": null,
+          "keywordDifficulty": null
+        }
+      ],
+      "related": [
+        {
+          "keyword": "betta se plus",
+          "searchVolume": 1600,
+          "cpcUsd": 6.95,
+          "keywordDifficulty": 0,
+          "searchIntent": "informational"
+        },
+        {
+          "keyword": "betta se plus solar-powered robotic pool skimmer",
+          "searchVolume": 390,
+          "cpcUsd": 6.67,
+          "keywordDifficulty": 0,
+          "searchIntent": "transactional"
+        },
+        {
+          "keyword": "betta pool skimmer reviews",
+          "searchVolume": 210,
+          "cpcUsd": 3.65,
+          "keywordDifficulty": 0,
+          "searchIntent": "informational"
+        },
+        {
+          "keyword": "betta se vs betta se plus",
+          "searchVolume": 140,
+          "cpcUsd": 5.33,
+          "keywordDifficulty": 0,
+          "searchIntent": "commercial"
+        },
+        {
+          "keyword": "betta se plus skimmer",
+          "searchVolume": 70,
+          "cpcUsd": 8.44,
+          "keywordDifficulty": 0,
+          "searchIntent": "informational"
+        },
+        {
+          "keyword": "betta pool skimmer manual",
+          "searchVolume": 70,
+          "cpcUsd": 1.26,
+          "keywordDifficulty": 0,
+          "searchIntent": "informational"
+        },
+        {
+          "keyword": "betta flex vs betta se plus",
+          "searchVolume": 70,
+          "cpcUsd": 7.9,
+          "keywordDifficulty": 0,
+          "searchIntent": "commercial"
+        },
+        {
+          "keyword": "betta neo skimmer",
+          "searchVolume": 70,
+          "cpcUsd": 5.5,
+          "keywordDifficulty": 0,
+          "searchIntent": "transactional"
+        },
+        {
+          "keyword": "betta se plus review",
+          "searchVolume": 70,
+          "cpcUsd": 2.46,
+          "keywordDifficulty": 0,
+          "searchIntent": "commercial"
+        },
+        {
+          "keyword": "betta se plus costco",
+          "searchVolume": 50,
+          "cpcUsd": 5.04,
+          "keywordDifficulty": null,
+          "searchIntent": "commercial"
+        },
+        {
+          "keyword": "betta se plus manual",
+          "searchVolume": 50,
+          "cpcUsd": 0.17,
+          "keywordDifficulty": 0,
+          "searchIntent": "transactional"
+        },
+        {
+          "keyword": "betta se plus vs betta flex",
+          "searchVolume": 30,
+          "cpcUsd": 6.48,
+          "keywordDifficulty": 0,
+          "searchIntent": "commercial"
+        },
+        {
+          "keyword": "betta se plus sam's club",
+          "searchVolume": 10,
+          "cpcUsd": 4.55,
+          "keywordDifficulty": null,
+          "searchIntent": "informational"
+        },
+        {
+          "keyword": "betta se plus amazon",
+          "searchVolume": 10,
+          "cpcUsd": 4.1,
+          "keywordDifficulty": null,
+          "searchIntent": "informational"
+        },
+        {
+          "keyword": "betta se plus for sale",
+          "searchVolume": 10,
+          "cpcUsd": 7.38,
+          "keywordDifficulty": null,
+          "searchIntent": "transactional"
+        },
+        {
+          "keyword": "betta se plus parts",
+          "searchVolume": 10,
+          "cpcUsd": 2.56,
+          "keywordDifficulty": null,
+          "searchIntent": "transactional"
+        },
+        {
+          "keyword": "betta se vs betta se plus reddit",
+          "searchVolume": 10,
+          "cpcUsd": null,
+          "keywordDifficulty": null,
+          "searchIntent": "informational"
+        },
+        {
+          "keyword": "betta se plus vs betta neo",
+          "searchVolume": 10,
+          "cpcUsd": 10.54,
+          "keywordDifficulty": null,
+          "searchIntent": "commercial"
+        }
+      ],
+      "modelSerp": {
+        "keyword": "betta se plus",
+        "itemTypes": [],
+        "organic": [],
+        "peopleAlsoAsk": []
+      },
+      "reviewSerp": {
+        "keyword": "betta se plus review",
+        "itemTypes": [],
+        "organic": [],
+        "peopleAlsoAsk": []
+      }
+    }
+  ]
+}
