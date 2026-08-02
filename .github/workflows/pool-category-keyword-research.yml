@@ -1,17 +1,16 @@
 name: Pool category keyword research
 
 on:
-  push:
-    branches:
-      - claude/cloudflare-notion-setup-nso4uj
-    paths:
-      - .github/workflows/pool-category-keyword-research.yml
+  issues:
+    types: [opened]
+  workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
   research:
+    if: github.event_name == 'workflow_dispatch' || github.event.issue.title == 'RUN POOL CATEGORY KEYWORD RESEARCH'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
