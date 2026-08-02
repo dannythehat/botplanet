@@ -1,0 +1,241 @@
+---
+/* ============================================================
+   BotPlanet — Decision section (H2 + intro + decision cards)
+
+   The second section on every category page. Reusable as-is:
+   only the heading, the intro copy and the cards change.
+
+   Cards are designed to look finished with no picture at all,
+   so a page is never blocked waiting on artwork. Add an image
+   to a card later and it appears above that card's text.
+   ============================================================ */
+
+import type { HeroImage } from "./CategoryHero.astro";
+
+export interface DecisionCard {
+  /** Short label, e.g. "In-ground pools". */
+  title: string;
+  /** One line answering "who is this for?". */
+  bestFor: string;
+  /** Two or three scannable points. */
+  points: string[];
+  /** Optional. The card is complete without it. */
+  image?: HeroImage;
+}
+
+interface Props {
+  /** Anchor id, so the section can be linked to. */
+  id?: string;
+  /** The H2. Carries the section's secondary keyword. */
+  title: string;
+  /** 60–100 words. */
+  intro: string;
+  cards: DecisionCard[];
+}
+
+const { id, title, intro, cards } = Astro.props;
+---
+
+<section class="dsec" id={id}>
+  <div class="dsec__head">
+    <h2 class="dsec__title">{title}</h2>
+    <p class="dsec__intro">{intro}</p>
+  </div>
+
+  <div class="dsec__grid" data-count={cards.length}>
+    {cards.map((card, i) => (
+      <article class="dcard">
+        {card.image?.src && (
+          <figure class="dcard__figure">
+            <picture>
+              {card.image.mobileSrc && (
+                <source media="(max-width: 719px)" srcset={card.image.mobileSrc} />
+              )}
+              <img
+                src={card.image.src}
+                alt={card.image.alt}
+                style={card.image.focal ? `object-position: ${card.image.focal}` : undefined}
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
+          </figure>
+        )}
+
+        <div class="dcard__body">
+          <span class="dcard__index">{String(i + 1).padStart(2, "0")}</span>
+          <h3 class="dcard__title">{card.title}</h3>
+          <p class="dcard__bestfor">{card.bestFor}</p>
+          <ul class="dcard__points">
+            {card.points.map((point) => <li>{point}</li>)}
+          </ul>
+        </div>
+      </article>
+    ))}
+  </div>
+</section>
+
+<style>
+  .dsec {
+    margin: 0 0 var(--space-2xl, 3rem);
+  }
+
+  /* ---------- heading + intro ---------- */
+  .dsec__head {
+    max-width: 62ch;
+    margin-bottom: clamp(1.5rem, 3.5vw, 2.25rem);
+  }
+
+  .dsec__title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.6rem, 4.4vw, 2.35rem);
+    line-height: 1.14;
+    letter-spacing: -0.018em;
+    text-wrap: balance;
+    color: var(--text-primary);
+  }
+
+  .dsec__intro {
+    margin: 0.9rem 0 0;
+    font-size: 1.0625rem; /* 17px */
+    line-height: 1.62;
+    color: var(--text-secondary);
+  }
+
+  /* ---------- grid ---------- */
+  .dsec__grid {
+    display: grid;
+    gap: clamp(0.9rem, 2vw, 1.25rem);
+    grid-template-columns: 1fr;
+  }
+
+  /* ---------- card ---------- */
+  .dcard {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid rgba(207, 213, 221, 0.16);
+    border-radius: 14px;
+    background:
+      linear-gradient(145deg, rgba(255, 255, 255, 0.035), transparent 34%),
+      linear-gradient(180deg, #11151a, #080a0d);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.055),
+      0 18px 44px rgba(0, 0, 0, 0.4);
+  }
+
+  /* metal hairline along the top edge of each card */
+  .dcard::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(244, 246, 248, 0.42) 30%,
+      rgba(244, 246, 248, 0.6) 50%,
+      rgba(244, 246, 248, 0.35) 70%,
+      transparent
+    );
+    z-index: 1;
+  }
+
+  .dcard__figure {
+    margin: 0;
+    border-bottom: 1px solid rgba(204, 210, 218, 0.14);
+  }
+
+  .dcard__figure img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+  }
+
+  .dcard__body {
+    padding: clamp(1.25rem, 3.4vw, 1.6rem);
+  }
+
+  .dcard__index {
+    display: block;
+    margin-bottom: 0.7rem;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    background: linear-gradient(90deg, #f1f3f5, #6f767f);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .dcard__title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.2rem;
+    line-height: 1.24;
+    letter-spacing: -0.01em;
+    color: var(--text-primary);
+  }
+
+  .dcard__bestfor {
+    margin: 0.5rem 0 0;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: var(--text-tertiary);
+  }
+
+  .dcard__points {
+    margin: 1.05rem 0 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.6rem;
+  }
+
+  .dcard__points li {
+    position: relative;
+    padding-left: 1.1rem;
+    font-size: 0.95rem;
+    line-height: 1.55;
+    color: var(--text-secondary);
+  }
+
+  /* small metallic marker instead of a bullet */
+  .dcard__points li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.62em;
+    width: 6px;
+    height: 1px;
+    background: linear-gradient(90deg, #f1f3f5, #767e88);
+  }
+
+  /* ---------- wider screens ---------- */
+  @media (min-width: 700px) {
+    .dsec__grid[data-count="2"],
+    .dsec__grid[data-count="4"] {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 900px) {
+    .dsec__intro {
+      font-size: 1.1875rem; /* 19px */
+    }
+
+    .dsec__grid[data-count="3"] {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .dsec__grid[data-count="5"] {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

@@ -8,6 +8,8 @@ import { and, eq, inArray } from "drizzle-orm";
 import { breadcrumbsFor } from "../../../lib/routing";
 import CategoryHero from "../../../components/CategoryHero.astro";
 import { heroFor } from "../../../content/category-hero";
+import DecisionCards from "../../../components/DecisionCards.astro";
+import { decisionSectionFor } from "../../../content/category-sections";
 
 const { category } = Astro.params;
 const db = getDb(Astro.locals);
@@ -38,6 +40,7 @@ function minPrice(productId: string): number | null {
 const crumbs = breadcrumbsFor(Astro.url.pathname);
 
 const hero = heroFor(category);
+const decision = decisionSectionFor(category);
 ---
 
 <Base
@@ -64,6 +67,15 @@ const hero = heroFor(category);
       </div>
       {journey && <a class="btn btn--accent" href={journey.href}>{journey.ctaLabel}</a>}
     </div>
+  )}
+
+  {decision && (
+    <DecisionCards
+      id={decision.id}
+      title={decision.title}
+      intro={decision.intro}
+      cards={decision.cards}
+    />
   )}
 
   {products.length === 0 ? (
