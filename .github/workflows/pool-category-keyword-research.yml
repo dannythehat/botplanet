@@ -1,0 +1,45 @@
+name: Pool category keyword research
+
+on:
+  push:
+    branches:
+      - research/pool-seo-page-map
+    paths:
+      - scripts/pool-category-keyword-research.mjs
+      - .github/workflows/pool-category-keyword-research.yml
+
+permissions:
+  contents: write
+
+jobs:
+  research:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: research/pool-seo-page-map
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Run DataForSEO research
+        run: node scripts/pool-category-keyword-research.mjs
+        env:
+          DATAFORSEO_LOGIN: ${{ secrets.DATAFORSEO_LOGIN }}
+          DATAFORSEO_PASSWORD: ${{ secrets.DATAFORSEO_PASSWORD }}
+
+      - name: Commit sanitised results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add research-output/pool-category-keyword-research.json research-output/pool-category-cost.json
+          git commit -m "Record pool category keyword research [skip ci]"
+          git push origin HEAD:research/pool-seo-page-map
+
+      - name: Upload results artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: pool-category-keyword-research
+          path: research-output/pool-category-*.json
+          retention-days: 14
