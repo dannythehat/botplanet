@@ -1,0 +1,39 @@
+---
+/* TEMPORARY design preview for the category hero.
+   Not linked from anywhere, noindex, prerendered so it needs no database.
+   Delete once the hero is signed off. */
+export const prerender = true;
+
+import CategoryHero from "../../components/CategoryHero.astro";
+import { heroFor } from "../../content/category-hero";
+
+import "../../styles/tokens.css";
+import "../../styles/base.css";
+import "../../styles/layout.css";
+import "../../styles/depth.css";
+import "../../styles/components.css";
+import "../../styles/metal-theme.css";
+
+const hero = heroFor("robotic-pool-cleaners")!;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Hero preview — BotPlanet</title>
+  </head>
+  <body>
+    <main class="wrap" style="padding-top: 2rem; padding-bottom: 4rem;">
+      <CategoryHero
+        eyebrow={hero.eyebrow}
+        title={hero.title}
+        subtitle={hero.subtitle}
+        primaryCta={hero.primaryCta}
+        secondaryCta={hero.secondaryCta}
+        image={hero.image}
+      />
+    </main>
+  </body>
+</html>

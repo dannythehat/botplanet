@@ -7,6 +7,8 @@ import { getDb, schema } from "../../../lib/db";
 import { usd, titleCase } from "../../../lib/format";
 import { and, eq, inArray } from "drizzle-orm";
 import { breadcrumbsFor } from "../../../lib/routing";
+import CategoryHero from "../../../components/CategoryHero.astro";
+import { heroFor } from "../../../content/category-hero";
 
 const { category } = Astro.params;
 const db = getDb(Astro.locals);
@@ -35,17 +37,34 @@ function minPrice(productId: string): number | null {
   return prices.length ? Math.min(...prices) : null;
 }
 const crumbs = breadcrumbsFor(Astro.url.pathname);
+
+const hero = heroFor(category);
 ---
 
-<Base title={`${cat.name} — BotPlanet`} description={`Compare ${cat.name.toLowerCase()} for the US.`} breadcrumbs={crumbs}>
-  <div class="section-head section-head--row">
-    <div>
-      <span class="eyebrow">Category</span>
-      <h1 class="mt-0">{cat.name}</h1>
-      <p class="note">{products.length} products · US market · suitability-ranked by BotMatch</p>
+<Base
+  title={hero?.seoTitle ?? `${cat.name} — BotPlanet`}
+  description={hero?.metaDescription ?? `Compare ${cat.name.toLowerCase()} for the US.`}
+  breadcrumbs={crumbs}
+>
+  {hero ? (
+    <CategoryHero
+      eyebrow={hero.eyebrow}
+      title={hero.title}
+      subtitle={hero.subtitle}
+      primaryCta={hero.primaryCta}
+      secondaryCta={hero.secondaryCta}
+      image={hero.image}
+    />
+  ) : (
+    <div class="section-head section-head--row">
+      <div>
+        <span class="eyebrow">Category</span>
+        <h1 class="mt-0">{cat.name}</h1>
+        <p class="note">{products.length} products · US market · suitability-ranked by BotMatch</p>
+      </div>
+      {journey && <a class="btn btn--accent" href={journey.href}>{journey.ctaLabel}</a>}
     </div>
-    {journey && <a class="btn btn--accent" href={journey.href}>{journey.ctaLabel}</a>}
-  </div>
+  )}
 
   <div class="mt-lg mb-lg"><PoolDiagram /></div>
 
@@ -55,7 +74,7 @@ const crumbs = breadcrumbsFor(Astro.url.pathname);
       <p>Published products appear here automatically.</p>
     </div>
   ) : (
-    <div class="grid grid--products">
+    <div class="grid grid--products" id="products">
       {products.map((p, i) => (
         <ProductCard
           href={`/robots/${cat.slug}/${p.slug}/`}
