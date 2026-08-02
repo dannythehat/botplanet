@@ -36,12 +36,15 @@ export const CATEGORY_HERO: Record<string, CategoryHeroContent> = {
   "robotic-pool-cleaners": {
     eyebrow: "Robot category",
     title: "Robotic Pool Cleaners: Compare Pool Robots for Every Pool Type",
+    /* 40 words. Danny approved this shorter intro on 2 August 2026 in place of
+       the 55–85 word range in the Notion research, so the block scans in about
+       four lines on a phone rather than nine. Keyword rules still hold:
+       "robotic pool cleaner" opens the first sentence and "pool robot" follows
+       as the natural synonym. */
     subtitle:
-      "A robotic pool cleaner does the job you would rather not do — scrubbing the floor, " +
-      "climbing the walls and lifting debris out of the water while you get on with your day. " +
-      "Not every pool robot suits every pool. We compare models on the things that actually " +
-      "decide it: pool type and size, how much of the pool they reach, corded or cordless " +
-      "power, filtration and smart controls.",
+      "A robotic pool cleaner scrubs the floor, climbs the walls and lifts debris out of " +
+      "the water while you get on with your day. Not every pool robot suits every pool — " +
+      "we compare them on the things that actually decide it.",
     seoTitle: "Robotic Pool Cleaners: Compare Pool Robots | BotPlanet",
     metaDescription:
       "Compare robotic pool cleaners by pool type, floor, wall and waterline coverage, corded " +
