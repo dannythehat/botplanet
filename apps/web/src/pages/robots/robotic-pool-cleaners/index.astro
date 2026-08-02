@@ -172,22 +172,14 @@ const schemaNodes = [
 >
   <!-- ============ 1. Cinematic hero ============ -->
   <section class="band lit">
-    <div class="wrap grid grid--lead">
-      <div class="stack">
-        <span class="eyebrow">BotPlanet's first live category · {products.length} researched robots · US market</span>
-        <h1 class="mt-0">Robotic Pool Cleaners</h1>
-        <p class="lede">
-          A robotic pool cleaner turns the worst weekly chore of pool ownership into a machine's job. This hub is
-          BotPlanet's complete guide to choosing one: what the different classes actually clean, where corded beats
-          cordless (and where it doesn't), how pool size rules robots out, and which models our research supports —
-          with every price dated and every claim labelled by its evidence.
-        </p>
-        <div class="cluster">
-          <a class="btn btn--accent btn--lg" href={journey.href}>{journey.ctaLabel}</a>
-          <a class="btn btn--lg" href={routes.best}>See the best-of guide</a>
-        </div>
-        <p class="note">Two ways in: browse everything yourself, or answer a few pool-specific questions and let BotMatch pick on suitability — never commission.</p>
-      </div>
+    <!--
+      Source order is eyebrow → artwork → headline. On mobile that is exactly
+      what renders, so the colour arrives inside the first viewport instead of
+      after a full screen of dark text. On desktop the grid areas below put the
+      artwork back in its own column beside the headline.
+    -->
+    <div class="wrap hero-lead">
+      <span class="eyebrow hero-lead__eyebrow">BotPlanet's first live category · {products.length} researched robots · US market</span>
       <div class="hub-hero">
         <EditorialImage
           src={HUB_IMAGES.hero.path}
@@ -201,6 +193,20 @@ const schemaNodes = [
           priority={true}
           class="hub-hero__img"
         />
+      </div>
+      <div class="stack hero-lead__text">
+        <h1 class="mt-0">Robotic Pool Cleaners</h1>
+        <p class="lede">
+          A robotic pool cleaner turns the worst weekly chore of pool ownership into a machine's job. This hub is
+          BotPlanet's complete guide to choosing one: what the different classes actually clean, where corded beats
+          cordless (and where it doesn't), how pool size rules robots out, and which models our research supports —
+          with every price dated and every claim labelled by its evidence.
+        </p>
+        <div class="cluster">
+          <a class="btn btn--accent btn--lg" href={journey.href}>{journey.ctaLabel}</a>
+          <a class="btn btn--lg" href={routes.best}>See the best-of guide</a>
+        </div>
+        <p class="note">Two ways in: browse everything yourself, or answer a few pool-specific questions and let BotMatch pick on suitability — never commission.</p>
       </div>
     </div>
   </section>
@@ -475,6 +481,12 @@ const schemaNodes = [
   /* The hero artwork sits beside the headline rather than beneath it, so the
      image needs no darkening overlay to keep the H1 legible — it ships at the
      colour and brightness it was supplied at. */
+  /* Mobile: a plain stack in source order — eyebrow, artwork, then the
+     headline and body copy. The artwork is inside the first viewport. */
+  .hero-lead {
+    display: grid;
+    gap: var(--space-md);
+  }
   .hub-hero {
     position: relative;
     border-radius: 14px;
@@ -485,9 +497,29 @@ const schemaNodes = [
     border-radius: 14px;
   }
   @media (min-width: 721px) {
+    /* Desktop: named areas restore the two-column layout regardless of source
+       order — eyebrow above the headline on the left, artwork spanning both
+       rows on the right. */
+    .hero-lead {
+      grid-template-columns: 1.65fr 1fr;
+      grid-template-areas:
+        "eyebrow media"
+        "text    media";
+      column-gap: var(--space-xl);
+      row-gap: var(--space-sm);
+      align-items: start;
+    }
+    .hero-lead__eyebrow {
+      grid-area: eyebrow;
+    }
+    .hero-lead__text {
+      grid-area: text;
+    }
     /* Fill the headline column's height rather than sitting short at the top
        of it. The artwork is covered into the taller frame, never stretched. */
     .hub-hero {
+      grid-area: media;
+      align-self: stretch;
       height: 100%;
       min-height: 380px;
     }
