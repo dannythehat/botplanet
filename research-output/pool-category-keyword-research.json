@@ -1,0 +1,4166 @@
+{
+  "generatedAt": "2026-08-02T06:02:38.808Z",
+  "market": "United States",
+  "language": "English",
+  "scope": "Main robotic pool cleaner category page only",
+  "hardCapUsd": 0.6,
+  "seeds": [
+    "robotic pool cleaner",
+    "robot pool cleaner",
+    "pool cleaning robot",
+    "robotic pool vacuum",
+    "pool robot",
+    "automatic pool cleaner robot",
+    "pool vacuum robot",
+    "robot pool vacuum",
+    "automatic robotic pool cleaner",
+    "robotic swimming pool cleaner",
+    "electric pool cleaner robot",
+    "pool cleaner robot",
+    "swimming pool cleaning robot",
+    "automatic pool cleaning robot",
+    "robotic cleaner for swimming pool",
+    "inground robotic pool cleaner",
+    "in ground pool robot",
+    "above ground pool robot",
+    "robotic pool cleaner for inground pools",
+    "robotic pool cleaner for above ground pools",
+    "wall climbing robotic pool cleaner",
+    "robotic pool cleaner that climbs walls",
+    "waterline pool robot",
+    "pool floor cleaning robot",
+    "robotic pool cleaner with app",
+    "wifi robotic pool cleaner",
+    "smart robotic pool cleaner",
+    "cordless robotic pool cleaner",
+    "corded robotic pool cleaner",
+    "solar pool skimmer robot",
+    "robotic pool skimmer",
+    "pool surface cleaning robot",
+    "robotic pool cleaner for leaves",
+    "robotic pool cleaner for algae",
+    "robotic pool cleaner for saltwater pool",
+    "robotic pool cleaner for vinyl liner",
+    "robotic pool cleaner for fiberglass pool",
+    "robotic pool cleaner for small pool",
+    "robotic pool cleaner for large pool",
+    "robotic pool cleaner for freeform pool",
+    "pool robot for leaves",
+    "pool robot for debris",
+    "pool robot for walls",
+    "pool robot for waterline",
+    "pool robot for inground pool",
+    "pool robot for above ground pool",
+    "automatic pool vacuum robot",
+    "pool cleaning machine robot",
+    "robot pool cleaning machine",
+    "residential pool cleaning robot"
+  ],
+  "volume": [
+    {
+      "keyword": "robotic pool cleaner",
+      "searchVolume": 40500,
+      "cpcUsd": 5.17,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 90500
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 60500
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 40500
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 33100
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 12100
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 12100
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 9900
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 12100
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 18100
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 27100
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 49500
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 74000
+        }
+      ]
+    },
+    {
+      "keyword": "robot pool cleaner",
+      "searchVolume": 40500,
+      "cpcUsd": 5.17,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 90500
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 60500
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 40500
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 33100
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 12100
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 12100
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 9900
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 12100
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 18100
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 27100
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 49500
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 74000
+        }
+      ]
+    },
+    {
+      "keyword": "pool cleaning robot",
+      "searchVolume": 40500,
+      "cpcUsd": 5.17,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 90500
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 60500
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 40500
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 33100
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 12100
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 12100
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 9900
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 12100
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 18100
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 27100
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 49500
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 74000
+        }
+      ]
+    },
+    {
+      "keyword": "robotic pool vacuum",
+      "searchVolume": 40500,
+      "cpcUsd": 5.17,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 90500
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 60500
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 40500
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 33100
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 12100
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 12100
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 9900
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 12100
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 18100
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 27100
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 49500
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 74000
+        }
+      ]
+    },
+    {
+      "keyword": "pool robot",
+      "searchVolume": 5400,
+      "cpcUsd": 5.67,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 12100
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 9900
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 6600
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 4400
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 1900
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 1600
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 1600
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 1900
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 2400
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 2900
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 5400
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 9900
+        }
+      ]
+    },
+    {
+      "keyword": "automatic pool cleaner robot",
+      "searchVolume": 720,
+      "cpcUsd": 6.76,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 480
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 880
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 1000
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 1000
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 320
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 210
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 140
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 110
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 260
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 1300
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 1300
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 880
+        }
+      ]
+    },
+    {
+      "keyword": "pool vacuum robot",
+      "searchVolume": 40500,
+      "cpcUsd": 5.17,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 90500
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 60500
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 40500
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 33100
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 12100
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 12100
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 9900
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 12100
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 18100
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 27100
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 49500
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 74000
+        }
+      ]
+    },
+    {
+      "keyword": "robot pool vacuum",
+      "searchVolume": 40500,
+      "cpcUsd": 5.17,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 90500
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 60500
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 40500
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 33100
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 12100
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 12100
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 9900
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 12100
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 18100
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 27100
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 49500
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 74000
+        }
+      ]
+    },
+    {
+      "keyword": "automatic robotic pool cleaner",
+      "searchVolume": 720,
+      "cpcUsd": 6.76,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 480
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 880
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 1000
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 1000
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 320
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 210
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 140
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 110
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 260
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 1300
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 1300
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 880
+        }
+      ]
+    },
+    {
+      "keyword": "robotic swimming pool cleaner",
+      "searchVolume": 40500,
+      "cpcUsd": 5.17,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 90500
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 60500
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 40500
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 33100
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 12100
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 12100
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 9900
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 12100
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 18100
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 27100
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 49500
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 74000
+        }
+      ]
+    },
+    {
+      "keyword": "electric pool cleaner robot",
+      "searchVolume": 70,
+      "cpcUsd": 6.07,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 140
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 140
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 110
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 90
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 50
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 30
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 20
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 40
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 30
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 40
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 90
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 140
+        }
+      ]
+    },
+    {
+      "keyword": "pool cleaner robot",
+      "searchVolume": 40500,
+      "cpcUsd": 5.17,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 90500
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 60500
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 40500
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 33100
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 12100
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 12100
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 9900
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 12100
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 18100
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 27100
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 49500
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 74000
+        }
+      ]
+    },
+    {
+      "keyword": "swimming pool cleaning robot",
+      "searchVolume": 40500,
+      "cpcUsd": 5.17,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 90500
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 60500
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 40500
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 33100
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 12100
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 12100
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 9900
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 12100
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 18100
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 27100
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 49500
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 74000
+        }
+      ]
+    },
+    {
+      "keyword": "automatic pool cleaning robot",
+      "searchVolume": 720,
+      "cpcUsd": 6.76,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 480
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 880
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 1000
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 1000
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 320
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 210
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 140
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 110
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 260
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 1300
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 1300
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 880
+        }
+      ]
+    },
+    {
+      "keyword": "robotic cleaner for swimming pool",
+      "searchVolume": 40500,
+      "cpcUsd": 5.17,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 90500
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 60500
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 40500
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 33100
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 12100
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 12100
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 9900
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 12100
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 18100
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 27100
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 49500
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 74000
+        }
+      ]
+    },
+    {
+      "keyword": "inground robotic pool cleaner",
+      "searchVolume": 1300,
+      "cpcUsd": 6.11,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 2400
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 1900
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 1000
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 720
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 320
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 390
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 260
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 1000
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 880
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 1000
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 2400
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 4400
+        }
+      ]
+    },
+    {
+      "keyword": "in ground pool robot",
+      "searchVolume": 70,
+      "cpcUsd": 5.92,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 140
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 110
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 70
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 70
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 20
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 20
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 20
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 40
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 170
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 110
+        }
+      ]
+    },
+    {
+      "keyword": "above ground pool robot",
+      "searchVolume": 320,
+      "cpcUsd": 4.29,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 880
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 720
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 390
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 170
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 40
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 40
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 40
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 40
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 90
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 170
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 480
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 720
+        }
+      ]
+    },
+    {
+      "keyword": "robotic pool cleaner for inground pools",
+      "searchVolume": 320,
+      "cpcUsd": 5.61,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 260
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 390
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 320
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 210
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 260
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 210
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 70
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 170
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 90
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 210
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 880
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 480
+        }
+      ]
+    },
+    {
+      "keyword": "robotic pool cleaner for above ground pools",
+      "searchVolume": 110,
+      "cpcUsd": 3.7,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 90
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 110
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 210
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 20
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 20
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 70
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 30
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 390
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 480
+        }
+      ]
+    },
+    {
+      "keyword": "wall climbing robotic pool cleaner",
+      "searchVolume": 30,
+      "cpcUsd": 2.69,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 0
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 20
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 260
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 10
+        }
+      ]
+    },
+    {
+      "keyword": "robotic pool cleaner that climbs walls",
+      "searchVolume": 20,
+      "cpcUsd": 1.98,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 50
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 70
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 20
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 20
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 20
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 30
+        }
+      ]
+    },
+    {
+      "keyword": "waterline pool robot",
+      "searchVolume": null,
+      "cpcUsd": null,
+      "competition": null,
+      "competitionIndex": null,
+      "monthlySearches": []
+    },
+    {
+      "keyword": "pool floor cleaning robot",
+      "searchVolume": null,
+      "cpcUsd": null,
+      "competition": null,
+      "competitionIndex": null,
+      "monthlySearches": []
+    },
+    {
+      "keyword": "robotic pool cleaner with app",
+      "searchVolume": null,
+      "cpcUsd": null,
+      "competition": null,
+      "competitionIndex": null,
+      "monthlySearches": []
+    },
+    {
+      "keyword": "wifi robotic pool cleaner",
+      "searchVolume": 10,
+      "cpcUsd": 5.69,
+      "competition": "HIGH",
+      "competitionIndex": 71,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 0
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 0
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 10
+        }
+      ]
+    },
+    {
+      "keyword": "smart robotic pool cleaner",
+      "searchVolume": 110,
+      "cpcUsd": 4.47,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 90
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 70
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 50
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 90
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 40
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 140
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 170
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 90
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 90
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 140
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 320
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 110
+        }
+      ]
+    },
+    {
+      "keyword": "cordless robotic pool cleaner",
+      "searchVolume": 22200,
+      "cpcUsd": 5.32,
+      "competition": "LOW",
+      "competitionIndex": 23,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 49500
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 60500
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 27100
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 18100
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 8100
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 6600
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 5400
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 4400
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 5400
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 12100
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 18100
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 33100
+        }
+      ]
+    },
+    {
+      "keyword": "corded robotic pool cleaner",
+      "searchVolume": 590,
+      "cpcUsd": 3.75,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 720
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 1000
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 590
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 590
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 210
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 110
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 140
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 110
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 260
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 720
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 1300
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 720
+        }
+      ]
+    },
+    {
+      "keyword": "solar pool skimmer robot",
+      "searchVolume": 320,
+      "cpcUsd": 6.3,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 880
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 720
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 390
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 390
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 90
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 50
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 90
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 110
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 110
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 170
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 260
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 590
+        }
+      ]
+    },
+    {
+      "keyword": "robotic pool skimmer",
+      "searchVolume": 2900,
+      "cpcUsd": 5.51,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 6600
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 6600
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 3600
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 2400
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 590
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 480
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 590
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 590
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 880
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 1600
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 2900
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 5400
+        }
+      ]
+    },
+    {
+      "keyword": "pool surface cleaning robot",
+      "searchVolume": 110,
+      "cpcUsd": 7,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 260
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 260
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 140
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 90
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 20
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 50
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 50
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 40
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 40
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 50
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 90
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 140
+        }
+      ]
+    },
+    {
+      "keyword": "robotic pool cleaner for leaves",
+      "searchVolume": 10,
+      "cpcUsd": 1.98,
+      "competition": "HIGH",
+      "competitionIndex": 98,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 20
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 10
+        }
+      ]
+    },
+    {
+      "keyword": "robotic pool cleaner for algae",
+      "searchVolume": 30,
+      "cpcUsd": 3.34,
+      "competition": "HIGH",
+      "competitionIndex": 94,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 20
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 20
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 20
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 20
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 50
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 170
+        }
+      ]
+    },
+    {
+      "keyword": "robotic pool cleaner for saltwater pool",
+      "searchVolume": null,
+      "cpcUsd": null,
+      "competition": null,
+      "competitionIndex": null,
+      "monthlySearches": []
+    },
+    {
+      "keyword": "robotic pool cleaner for vinyl liner",
+      "searchVolume": 20,
+      "cpcUsd": 4.78,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 30
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 40
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 50
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 20
+        }
+      ]
+    },
+    {
+      "keyword": "robotic pool cleaner for fiberglass pool",
+      "searchVolume": 10,
+      "cpcUsd": null,
+      "competition": "LOW",
+      "competitionIndex": 4,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 10
+        }
+      ]
+    },
+    {
+      "keyword": "robotic pool cleaner for small pool",
+      "searchVolume": 260,
+      "cpcUsd": 0.96,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 0
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 0
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 2900
+        }
+      ]
+    },
+    {
+      "keyword": "robotic pool cleaner for large pool",
+      "searchVolume": 20,
+      "cpcUsd": 5.46,
+      "competition": "MEDIUM",
+      "competitionIndex": 60,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 110
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 20
+        }
+      ]
+    },
+    {
+      "keyword": "robotic pool cleaner for freeform pool",
+      "searchVolume": null,
+      "cpcUsd": null,
+      "competition": null,
+      "competitionIndex": null,
+      "monthlySearches": []
+    },
+    {
+      "keyword": "pool robot for leaves",
+      "searchVolume": null,
+      "cpcUsd": null,
+      "competition": null,
+      "competitionIndex": null,
+      "monthlySearches": []
+    },
+    {
+      "keyword": "pool robot for debris",
+      "searchVolume": null,
+      "cpcUsd": null,
+      "competition": null,
+      "competitionIndex": null,
+      "monthlySearches": []
+    },
+    {
+      "keyword": "pool robot for walls",
+      "searchVolume": null,
+      "cpcUsd": null,
+      "competition": null,
+      "competitionIndex": null,
+      "monthlySearches": []
+    },
+    {
+      "keyword": "pool robot for waterline",
+      "searchVolume": null,
+      "cpcUsd": null,
+      "competition": null,
+      "competitionIndex": null,
+      "monthlySearches": []
+    },
+    {
+      "keyword": "pool robot for inground pool",
+      "searchVolume": 20,
+      "cpcUsd": 5.62,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 70
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 40
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 20
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 20
+        }
+      ]
+    },
+    {
+      "keyword": "pool robot for above ground pool",
+      "searchVolume": 320,
+      "cpcUsd": 4.29,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 880
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 720
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 390
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 170
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 40
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 40
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 40
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 40
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 90
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 170
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 480
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 720
+        }
+      ]
+    },
+    {
+      "keyword": "automatic pool vacuum robot",
+      "searchVolume": 10,
+      "cpcUsd": 4.79,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "monthlySearches": [
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 30
+        },
+        {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 20
+        },
+        {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 20
+        },
+        {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "search_volume": 10
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "search_volume": 20
+        }
+      ]
+    },
+    {
+      "keyword": "pool cleaning machine robot",
+      "searchVolume": null,
+      "cpcUsd": null,
+      "competition": null,
+      "competitionIndex": null,
+      "monthlySearches": []
+    },
+    {
+      "keyword": "robot pool cleaning machine",
+      "searchVolume": null,
+      "cpcUsd": null,
+      "competition": null,
+      "competitionIndex": null,
+      "monthlySearches": []
+    },
+    {
+      "keyword": "residential pool cleaning robot",
+      "searchVolume": null,
+      "cpcUsd": null,
+      "competition": null,
+      "competitionIndex": null,
+      "monthlySearches": []
+    }
+  ],
+  "difficulty": [
+    {
+      "keyword": "above ground pool robot",
+      "keywordDifficulty": 0
+    },
+    {
+      "keyword": "automatic pool vacuum robot",
+      "keywordDifficulty": 64
+    },
+    {
+      "keyword": "automatic robotic pool cleaner",
+      "keywordDifficulty": 0
+    },
+    {
+      "keyword": "corded robotic pool cleaner",
+      "keywordDifficulty": 0
+    },
+    {
+      "keyword": "cordless robotic pool cleaner",
+      "keywordDifficulty": 0
+    },
+    {
+      "keyword": "electric pool cleaner robot",
+      "keywordDifficulty": 0
+    },
+    {
+      "keyword": "in ground pool robot",
+      "keywordDifficulty": 0
+    },
+    {
+      "keyword": "pool cleaning robot",
+      "keywordDifficulty": 0
+    },
+    {
+      "keyword": "pool robot",
+      "keywordDifficulty": 5
+    },
+    {
+      "keyword": "pool robot for inground pool",
+      "keywordDifficulty": 0
+    },
+    {
+      "keyword": "pool vacuum robot",
+      "keywordDifficulty": 14
+    },
+    {
+      "keyword": "robot pool cleaner",
+      "keywordDifficulty": 0
+    },
+    {
+      "keyword": "robot pool vacuum",
+      "keywordDifficulty": 14
+    },
+    {
+      "keyword": "robotic pool cleaner",
+      "keywordDifficulty": 14
+    },
+    {
+      "keyword": "robotic pool cleaner for above ground pools",
+      "keywordDifficulty": 0
+    },
+    {
+      "keyword": "robotic pool cleaner for algae",
+      "keywordDifficulty": 0
+    },
+    {
+      "keyword": "robotic pool cleaner for inground pools",
+      "keywordDifficulty": 0
+    },
+    {
+      "keyword": "robotic pool cleaner for leaves",
+      "keywordDifficulty": null
+    },
+    {
+      "keyword": "robotic pool cleaner for small pool",
+      "keywordDifficulty": 0
+    },
+    {
+      "keyword": "robotic pool cleaner for vinyl liner",
+      "keywordDifficulty": 0
+    },
+    {
+      "keyword": "robotic pool cleaner that climbs walls",
+      "keywordDifficulty": 4
+    },
+    {
+      "keyword": "robotic pool skimmer",
+      "keywordDifficulty": 24
+    },
+    {
+      "keyword": "robotic swimming pool cleaner",
+      "keywordDifficulty": 0
+    },
+    {
+      "keyword": "smart robotic pool cleaner",
+      "keywordDifficulty": 0
+    },
+    {
+      "keyword": "solar pool skimmer robot",
+      "keywordDifficulty": 1
+    },
+    {
+      "keyword": "wall climbing robotic pool cleaner",
+      "keywordDifficulty": 0
+    },
+    {
+      "keyword": "wifi robotic pool cleaner",
+      "keywordDifficulty": 52
+    },
+    {
+      "keyword": "pool robot for above ground pool",
+      "keywordDifficulty": 0
+    },
+    {
+      "keyword": "automatic pool cleaner robot",
+      "keywordDifficulty": 0
+    },
+    {
+      "keyword": "automatic pool cleaning robot",
+      "keywordDifficulty": 0
+    },
+    {
+      "keyword": "pool surface cleaning robot",
+      "keywordDifficulty": 7
+    },
+    {
+      "keyword": "swimming pool cleaning robot",
+      "keywordDifficulty": 13
+    },
+    {
+      "keyword": "pool cleaner robot",
+      "keywordDifficulty": 14
+    },
+    {
+      "keyword": "robotic cleaner for swimming pool",
+      "keywordDifficulty": 14
+    },
+    {
+      "keyword": "robotic pool vacuum",
+      "keywordDifficulty": 14
+    },
+    {
+      "keyword": "inground robotic pool cleaner",
+      "keywordDifficulty": 14
+    },
+    {
+      "keyword": "waterline pool robot",
+      "keywordDifficulty": null
+    },
+    {
+      "keyword": "pool floor cleaning robot",
+      "keywordDifficulty": null
+    },
+    {
+      "keyword": "robotic pool cleaner with app",
+      "keywordDifficulty": null
+    },
+    {
+      "keyword": "robotic pool cleaner for saltwater pool",
+      "keywordDifficulty": null
+    },
+    {
+      "keyword": "robotic pool cleaner for fiberglass pool",
+      "keywordDifficulty": null
+    },
+    {
+      "keyword": "robotic pool cleaner for large pool",
+      "keywordDifficulty": null
+    },
+    {
+      "keyword": "robotic pool cleaner for freeform pool",
+      "keywordDifficulty": null
+    },
+    {
+      "keyword": "pool robot for leaves",
+      "keywordDifficulty": null
+    },
+    {
+      "keyword": "pool robot for debris",
+      "keywordDifficulty": null
+    },
+    {
+      "keyword": "pool robot for walls",
+      "keywordDifficulty": null
+    },
+    {
+      "keyword": "pool robot for waterline",
+      "keywordDifficulty": null
+    },
+    {
+      "keyword": "pool cleaning machine robot",
+      "keywordDifficulty": null
+    },
+    {
+      "keyword": "robot pool cleaning machine",
+      "keywordDifficulty": null
+    },
+    {
+      "keyword": "residential pool cleaning robot",
+      "keywordDifficulty": null
+    }
+  ],
+  "related": [
+    {
+      "keyword": "robotic pool cleaner",
+      "searchVolume": 40500,
+      "cpcUsd": 5.17,
+      "keywordDifficulty": 14,
+      "searchIntent": "transactional"
+    },
+    {
+      "keyword": "cordless robotic pool cleaner",
+      "searchVolume": 22200,
+      "cpcUsd": 5.32,
+      "keywordDifficulty": 0,
+      "searchIntent": "transactional"
+    },
+    {
+      "keyword": "dolphin pool cleaner",
+      "searchVolume": 14800,
+      "cpcUsd": 3.45,
+      "keywordDifficulty": 4,
+      "searchIntent": "transactional"
+    },
+    {
+      "keyword": "dolphin premier robotic pool cleaner",
+      "searchVolume": 9900,
+      "cpcUsd": 3.42,
+      "keywordDifficulty": 0,
+      "searchIntent": "transactional"
+    },
+    {
+      "keyword": "best robotic pool cleaner",
+      "searchVolume": 6600,
+      "cpcUsd": 6.21,
+      "keywordDifficulty": 13,
+      "searchIntent": "commercial"
+    },
+    {
+      "keyword": "dolphin nautilus cc plus robotic pool cleaner",
+      "searchVolume": 5400,
+      "cpcUsd": 3.88,
+      "keywordDifficulty": 0,
+      "searchIntent": "transactional"
+    },
+    {
+      "keyword": "automatic pool cleaner for inground pools",
+      "searchVolume": 4400,
+      "cpcUsd": 3.98,
+      "keywordDifficulty": 0,
+      "searchIntent": "transactional"
+    },
+    {
+      "keyword": "best pool vacuum for inground pool",
+      "searchVolume": 2900,
+      "cpcUsd": 4.62,
+      "keywordDifficulty": 8,
+      "searchIntent": "commercial"
+    },
+    {
+      "keyword": "dolphin nautilus cc robotic pool cleaner",
+      "searchVolume": 1600,
+      "cpcUsd": 2.3,
+      "keywordDifficulty": 0,
+      "searchIntent": "transactional"
+    },
+    {
+      "keyword": "dolphin quantum robotic pool cleaner",
+      "searchVolume": 1000,
+      "cpcUsd": 4.19,
+      "keywordDifficulty": 0,
+      "searchIntent": "transactional"
+    },
+    {
+      "keyword": "pool vacuum robot for above ground",
+      "searchVolume": 1000,
+      "cpcUsd": 3.84,
+      "keywordDifficulty": 0,
+      "searchIntent": "transactional"
+    },
+    {
+      "keyword": "robotic pool cleaner reviews",
+      "searchVolume": 880,
+      "cpcUsd": 4.69,
+      "keywordDifficulty": 5,
+      "searchIntent": "informational"
+    },
+    {
+      "keyword": "pool vacuum robot inground",
+      "searchVolume": 880,
+      "cpcUsd": 5.61,
+      "keywordDifficulty": 0,
+      "searchIntent": "transactional"
+    },
+    {
+      "keyword": "best robotic pool cleaner 2026",
+      "searchVolume": 720,
+      "cpcUsd": 5.63,
+      "keywordDifficulty": 4,
+      "searchIntent": "commercial"
+    },
+    {
+      "keyword": "best robotic pool cleaner consumer reports",
+      "searchVolume": 390,
+      "cpcUsd": 4.41,
+      "keywordDifficulty": 0,
+      "searchIntent": "commercial"
+    },
+    {
+      "keyword": "dolphin premier robotic pool cleaner best price",
+      "searchVolume": 210,
+      "cpcUsd": 3.28,
+      "keywordDifficulty": 0,
+      "searchIntent": "commercial"
+    },
+    {
+      "keyword": "best pool cleaners 2026",
+      "searchVolume": 210,
+      "cpcUsd": 5.87,
+      "keywordDifficulty": 4,
+      "searchIntent": "commercial"
+    },
+    {
+      "keyword": "best cordless robotic pool cleaners",
+      "searchVolume": 210,
+      "cpcUsd": 6.78,
+      "keywordDifficulty": 0,
+      "searchIntent": "commercial"
+    },
+    {
+      "keyword": "dolphin nautilus cc plus manual",
+      "searchVolume": 210,
+      "cpcUsd": 0.7,
+      "keywordDifficulty": 1,
+      "searchIntent": "informational"
+    },
+    {
+      "keyword": "robotic pool cleaner amazon",
+      "searchVolume": 170,
+      "cpcUsd": 1.93,
+      "keywordDifficulty": 0,
+      "searchIntent": "transactional"
+    },
+    {
+      "keyword": "dolphin premier robotic pool cleaner price",
+      "searchVolume": 170,
+      "cpcUsd": 2.49,
+      "keywordDifficulty": 0,
+      "searchIntent": "commercial"
+    },
+    {
+      "keyword": "best robotic pool cleaners under $500",
+      "searchVolume": 170,
+      "cpcUsd": 4.33,
+      "keywordDifficulty": 0,
+      "searchIntent": "commercial"
+    },
+    {
+      "keyword": "dolphin premier robotic pool cleaner reviews",
+      "searchVolume": 90,
+      "cpcUsd": 3.42,
+      "keywordDifficulty": 0,
+      "searchIntent": "informational"
+    },
+    {
+      "keyword": "best robotic pool cleaner for large pools",
+      "searchVolume": 70,
+      "cpcUsd": 7.25,
+      "keywordDifficulty": 15,
+      "searchIntent": "commercial"
+    },
+    {
+      "keyword": "dolphin nautilus cc plus robotic pool cleaner with wi-fi",
+      "searchVolume": 70,
+      "cpcUsd": 3.13,
+      "keywordDifficulty": 0,
+      "searchIntent": "transactional"
+    },
+    {
+      "keyword": "best robotic pool cleaner 2026 reviews",
+      "searchVolume": 50,
+      "cpcUsd": 4.3,
+      "keywordDifficulty": null,
+      "searchIntent": "commercial"
+    },
+    {
+      "keyword": "dolphin premier robotic pool cleaner parts",
+      "searchVolume": 40,
+      "cpcUsd": 1.71,
+      "keywordDifficulty": 0,
+      "searchIntent": "transactional"
+    },
+    {
+      "keyword": "dolphin premier robotic pool cleaner for sale",
+      "searchVolume": 40,
+      "cpcUsd": 2.36,
+      "keywordDifficulty": 12,
+      "searchIntent": "transactional"
+    },
+    {
+      "keyword": "best corded robotic pool cleaner 2026",
+      "searchVolume": 40,
+      "cpcUsd": 4.26,
+      "keywordDifficulty": null,
+      "searchIntent": "commercial"
+    },
+    {
+      "keyword": "robotic pool cleaner price",
+      "searchVolume": 30,
+      "cpcUsd": 1.96,
+      "keywordDifficulty": 4,
+      "searchIntent": "commercial"
+    },
+    {
+      "keyword": "best robotic pool cleaner reviews",
+      "searchVolume": 30,
+      "cpcUsd": 4.65,
+      "keywordDifficulty": 0,
+      "searchIntent": "commercial"
+    },
+    {
+      "keyword": "dolphin nautilus cc plus robotic pool cleaner reviews",
+      "searchVolume": 30,
+      "cpcUsd": 2.27,
+      "keywordDifficulty": 0,
+      "searchIntent": "commercial"
+    },
+    {
+      "keyword": "best robotic pool cleaner for leaves",
+      "searchVolume": 20,
+      "cpcUsd": 5.11,
+      "keywordDifficulty": 10,
+      "searchIntent": "commercial"
+    },
+    {
+      "keyword": "dolphin premier robotic pool cleaner amazon",
+      "searchVolume": 20,
+      "cpcUsd": 4.72,
+      "keywordDifficulty": null,
+      "searchIntent": "transactional"
+    },
+    {
+      "keyword": "dolphin premier robotic pool cleaner near me",
+      "searchVolume": 20,
+      "cpcUsd": 3.2,
+      "keywordDifficulty": null,
+      "searchIntent": "commercial"
+    },
+    {
+      "keyword": "pool vacuum robot pick up today",
+      "searchVolume": 20,
+      "cpcUsd": 0.57,
+      "keywordDifficulty": null,
+      "searchIntent": "transactional"
+    },
+    {
+      "keyword": "best robotic pool cleaners reddit",
+      "searchVolume": 10,
+      "cpcUsd": 12.96,
+      "keywordDifficulty": null,
+      "searchIntent": "informational"
+    },
+    {
+      "keyword": "robotic pool cleaner reviews consumer reports",
+      "searchVolume": 10,
+      "cpcUsd": 4.64,
+      "keywordDifficulty": 47,
+      "searchIntent": "commercial"
+    },
+    {
+      "keyword": "best pool vacuum robot inground",
+      "searchVolume": 10,
+      "cpcUsd": 5.07,
+      "keywordDifficulty": 0,
+      "searchIntent": "commercial"
+    },
+    {
+      "keyword": "dolphin nautilus cc plus robotic pool cleaner troubleshooting",
+      "searchVolume": 10,
+      "cpcUsd": 1.15,
+      "keywordDifficulty": null,
+      "searchIntent": "navigational"
+    },
+    {
+      "keyword": "dolphin nautilus cc plus robotic pool cleaner parts",
+      "searchVolume": 10,
+      "cpcUsd": 1.13,
+      "keywordDifficulty": null,
+      "searchIntent": "transactional"
+    }
+  ],
+  "serps": [
+    {
+      "keyword": "robotic pool cleaner",
+      "itemTypes": [
+        "organic",
+        "popular_products",
+        "product_considerations",
+        "people_also_ask",
+        "perspectives",
+        "related_searches"
+      ],
+      "organic": [
+        {
+          "position": 1,
+          "domain": "www.thepoolnerd.com",
+          "title": "Robotic Pool Cleaner Reviews | 37+ Tested (2026)",
+          "url": "https://www.thepoolnerd.com/robotic-pool-cleaner-reviews"
+        },
+        {
+          "position": 2,
+          "domain": "lesliespool.com",
+          "title": "Robotic Pool Cleaners",
+          "url": "https://lesliespool.com/robotic-cleaners/?srsltid=AfmBOoqTLAio6XEkYrU3gUqrh59nqvOWnxIgGPk9mYZNdGq_mI44ClxK"
+        },
+        {
+          "position": 3,
+          "domain": "www.poolbots.com",
+          "title": "The 7 Best Robotic Pool Cleaners of 2026",
+          "url": "https://www.poolbots.com/best-robotic-pool-cleaners"
+        },
+        {
+          "position": 7,
+          "domain": "www.amazon.com",
+          "title": "Best Robotic Pool Cleaners",
+          "url": "https://www.amazon.com/Best-Sellers-Robotic-Pool-Cleaners/zgbs/lawn-garden/1272979011"
+        },
+        {
+          "position": 8,
+          "domain": "www.youtube.com",
+          "title": "Best Robotic Pool Cleaners of 2026 (40+ Models Reviewed ...",
+          "url": "https://www.youtube.com/watch?v=YfRB8WX-8tc"
+        },
+        {
+          "position": 9,
+          "domain": "pinchapenny.com",
+          "title": "Automatic Pool Cleaners",
+          "url": "https://pinchapenny.com/automatic-pool-cleaners?srsltid=AfmBOor-ywnc-jMcy2Xa9n0GAhogD_41fbhkTLJAzj2yezeLPoWq1bvq"
+        },
+        {
+          "position": 10,
+          "domain": "www.doheny.com",
+          "title": "Robotic Pool Cleaners - Best for All Pools | Doheny's",
+          "url": "https://www.doheny.com/pool-supplies/equipment/cleaners/robotic-cleaners?srsltid=AfmBOoqB3C7xmp6W390feMkRmbFiAym32QVnmvq3uFUEQ4lLB6iPq8HR"
+        },
+        {
+          "position": 12,
+          "domain": "www.homedepot.com",
+          "title": "Robotic Pool Vacuums",
+          "url": "https://www.homedepot.com/b/Outdoors-Pool-Supplies-Pool-Vacuums-Robotic-Pool-Vacuums/N-5yc1vZcfyc"
+        },
+        {
+          "position": 13,
+          "domain": "www.thepoolnerd.com",
+          "title": "Best Robotic Pool Cleaners of 2026",
+          "url": "https://www.thepoolnerd.com/best-robotic-pool-cleaners"
+        },
+        {
+          "position": 15,
+          "domain": "www.walmart.com",
+          "title": "Automatic Pool Cleaners in Pool Cleaning Tools",
+          "url": "https://www.walmart.com/browse/patio-garden/automatic-pool-cleaners/5428_132873_3700536_9307567_9735672"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "Is a robot pool cleaner worth it?",
+        "Which robot pool cleaner is the best?",
+        "What are the disadvantages of robotic pool cleaners?",
+        "What is the best price robotic pool cleaner?"
+      ]
+    },
+    {
+      "keyword": "robot pool cleaner",
+      "itemTypes": [],
+      "organic": [],
+      "peopleAlsoAsk": []
+    },
+    {
+      "keyword": "robotic pool vacuum",
+      "itemTypes": [],
+      "organic": [],
+      "peopleAlsoAsk": []
+    },
+    {
+      "keyword": "pool cleaning robot",
+      "itemTypes": [],
+      "organic": [],
+      "peopleAlsoAsk": []
+    }
+  ],
+  "costLog": [
+    {
+      "label": "search volume and CPC",
+      "path": "/keywords_data/google_ads/search_volume/live",
+      "tasks": 1,
+      "cost": 0.09,
+      "runningTotal": 0.09
+    },
+    {
+      "label": "bulk keyword difficulty",
+      "path": "/dataforseo_labs/google/bulk_keyword_difficulty/live",
+      "tasks": 1,
+      "cost": 0.018,
+      "runningTotal": 0.108
+    },
+    {
+      "label": "related keywords",
+      "path": "/dataforseo_labs/google/related_keywords/live",
+      "tasks": 1,
+      "cost": 0.01692,
+      "runningTotal": 0.12492
+    },
+    {
+      "label": "SERP intent comparison",
+      "path": "/serp/google/organic/live/advanced",
+      "tasks": 4,
+      "cost": 0.004,
+      "runningTotal": 0.12892
+    }
+  ],
+  "totalCostUsd": 0.12892,
+  "mergedKeywords": [
+    {
+      "keyword": "robotic pool cleaner",
+      "searchVolume": 40500,
+      "cpcUsd": 5.17,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "keywordDifficulty": 14,
+      "source": "seed+related",
+      "searchIntent": "transactional"
+    },
+    {
+      "keyword": "robot pool cleaner",
+      "searchVolume": 40500,
+      "cpcUsd": 5.17,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "keywordDifficulty": 0,
+      "source": "seed"
+    },
+    {
+      "keyword": "pool cleaning robot",
+      "searchVolume": 40500,
+      "cpcUsd": 5.17,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "keywordDifficulty": 0,
+      "source": "seed"
+    },
+    {
+      "keyword": "robotic pool vacuum",
+      "searchVolume": 40500,
+      "cpcUsd": 5.17,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "keywordDifficulty": 14,
+      "source": "seed"
+    },
+    {
+      "keyword": "pool vacuum robot",
+      "searchVolume": 40500,
+      "cpcUsd": 5.17,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "keywordDifficulty": 14,
+      "source": "seed"
+    },
+    {
+      "keyword": "robot pool vacuum",
+      "searchVolume": 40500,
+      "cpcUsd": 5.17,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "keywordDifficulty": 14,
+      "source": "seed"
+    },
+    {
+      "keyword": "robotic swimming pool cleaner",
+      "searchVolume": 40500,
+      "cpcUsd": 5.17,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "keywordDifficulty": 0,
+      "source": "seed"
+    },
+    {
+      "keyword": "pool cleaner robot",
+      "searchVolume": 40500,
+      "cpcUsd": 5.17,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "keywordDifficulty": 14,
+      "source": "seed"
+    },
+    {
+      "keyword": "swimming pool cleaning robot",
+      "searchVolume": 40500,
+      "cpcUsd": 5.17,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "keywordDifficulty": 13,
+      "source": "seed"
+    },
+    {
+      "keyword": "robotic cleaner for swimming pool",
+      "searchVolume": 40500,
+      "cpcUsd": 5.17,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "keywordDifficulty": 14,
+      "source": "seed"
+    },
+    {
+      "keyword": "cordless robotic pool cleaner",
+      "searchVolume": 22200,
+      "cpcUsd": 5.32,
+      "competition": "LOW",
+      "competitionIndex": 23,
+      "keywordDifficulty": 0,
+      "source": "seed+related",
+      "searchIntent": "transactional"
+    },
+    {
+      "keyword": "dolphin pool cleaner",
+      "searchVolume": 14800,
+      "cpcUsd": 3.45,
+      "keywordDifficulty": 4,
+      "searchIntent": "transactional",
+      "source": "related"
+    },
+    {
+      "keyword": "dolphin premier robotic pool cleaner",
+      "searchVolume": 9900,
+      "cpcUsd": 3.42,
+      "keywordDifficulty": 0,
+      "searchIntent": "transactional",
+      "source": "related"
+    },
+    {
+      "keyword": "best robotic pool cleaner",
+      "searchVolume": 6600,
+      "cpcUsd": 6.21,
+      "keywordDifficulty": 13,
+      "searchIntent": "commercial",
+      "source": "related"
+    },
+    {
+      "keyword": "pool robot",
+      "searchVolume": 5400,
+      "cpcUsd": 5.67,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "keywordDifficulty": 5,
+      "source": "seed"
+    },
+    {
+      "keyword": "dolphin nautilus cc plus robotic pool cleaner",
+      "searchVolume": 5400,
+      "cpcUsd": 3.88,
+      "keywordDifficulty": 0,
+      "searchIntent": "transactional",
+      "source": "related"
+    },
+    {
+      "keyword": "automatic pool cleaner for inground pools",
+      "searchVolume": 4400,
+      "cpcUsd": 3.98,
+      "keywordDifficulty": 0,
+      "searchIntent": "transactional",
+      "source": "related"
+    },
+    {
+      "keyword": "robotic pool skimmer",
+      "searchVolume": 2900,
+      "cpcUsd": 5.51,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "keywordDifficulty": 24,
+      "source": "seed"
+    },
+    {
+      "keyword": "best pool vacuum for inground pool",
+      "searchVolume": 2900,
+      "cpcUsd": 4.62,
+      "keywordDifficulty": 8,
+      "searchIntent": "commercial",
+      "source": "related"
+    },
+    {
+      "keyword": "dolphin nautilus cc robotic pool cleaner",
+      "searchVolume": 1600,
+      "cpcUsd": 2.3,
+      "keywordDifficulty": 0,
+      "searchIntent": "transactional",
+      "source": "related"
+    },
+    {
+      "keyword": "inground robotic pool cleaner",
+      "searchVolume": 1300,
+      "cpcUsd": 6.11,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "keywordDifficulty": 14,
+      "source": "seed"
+    },
+    {
+      "keyword": "dolphin quantum robotic pool cleaner",
+      "searchVolume": 1000,
+      "cpcUsd": 4.19,
+      "keywordDifficulty": 0,
+      "searchIntent": "transactional",
+      "source": "related"
+    },
+    {
+      "keyword": "pool vacuum robot for above ground",
+      "searchVolume": 1000,
+      "cpcUsd": 3.84,
+      "keywordDifficulty": 0,
+      "searchIntent": "transactional",
+      "source": "related"
+    },
+    {
+      "keyword": "robotic pool cleaner reviews",
+      "searchVolume": 880,
+      "cpcUsd": 4.69,
+      "keywordDifficulty": 5,
+      "searchIntent": "informational",
+      "source": "related"
+    },
+    {
+      "keyword": "pool vacuum robot inground",
+      "searchVolume": 880,
+      "cpcUsd": 5.61,
+      "keywordDifficulty": 0,
+      "searchIntent": "transactional",
+      "source": "related"
+    },
+    {
+      "keyword": "automatic pool cleaner robot",
+      "searchVolume": 720,
+      "cpcUsd": 6.76,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "keywordDifficulty": 0,
+      "source": "seed"
+    },
+    {
+      "keyword": "automatic robotic pool cleaner",
+      "searchVolume": 720,
+      "cpcUsd": 6.76,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "keywordDifficulty": 0,
+      "source": "seed"
+    },
+    {
+      "keyword": "automatic pool cleaning robot",
+      "searchVolume": 720,
+      "cpcUsd": 6.76,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "keywordDifficulty": 0,
+      "source": "seed"
+    },
+    {
+      "keyword": "best robotic pool cleaner 2026",
+      "searchVolume": 720,
+      "cpcUsd": 5.63,
+      "keywordDifficulty": 4,
+      "searchIntent": "commercial",
+      "source": "related"
+    },
+    {
+      "keyword": "corded robotic pool cleaner",
+      "searchVolume": 590,
+      "cpcUsd": 3.75,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "keywordDifficulty": 0,
+      "source": "seed"
+    },
+    {
+      "keyword": "best robotic pool cleaner consumer reports",
+      "searchVolume": 390,
+      "cpcUsd": 4.41,
+      "keywordDifficulty": 0,
+      "searchIntent": "commercial",
+      "source": "related"
+    },
+    {
+      "keyword": "above ground pool robot",
+      "searchVolume": 320,
+      "cpcUsd": 4.29,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "keywordDifficulty": 0,
+      "source": "seed"
+    },
+    {
+      "keyword": "robotic pool cleaner for inground pools",
+      "searchVolume": 320,
+      "cpcUsd": 5.61,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "keywordDifficulty": 0,
+      "source": "seed"
+    },
+    {
+      "keyword": "solar pool skimmer robot",
+      "searchVolume": 320,
+      "cpcUsd": 6.3,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "keywordDifficulty": 1,
+      "source": "seed"
+    },
+    {
+      "keyword": "pool robot for above ground pool",
+      "searchVolume": 320,
+      "cpcUsd": 4.29,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "keywordDifficulty": 0,
+      "source": "seed"
+    },
+    {
+      "keyword": "robotic pool cleaner for small pool",
+      "searchVolume": 260,
+      "cpcUsd": 0.96,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "keywordDifficulty": 0,
+      "source": "seed"
+    },
+    {
+      "keyword": "dolphin premier robotic pool cleaner best price",
+      "searchVolume": 210,
+      "cpcUsd": 3.28,
+      "keywordDifficulty": 0,
+      "searchIntent": "commercial",
+      "source": "related"
+    },
+    {
+      "keyword": "best pool cleaners 2026",
+      "searchVolume": 210,
+      "cpcUsd": 5.87,
+      "keywordDifficulty": 4,
+      "searchIntent": "commercial",
+      "source": "related"
+    },
+    {
+      "keyword": "best cordless robotic pool cleaners",
+      "searchVolume": 210,
+      "cpcUsd": 6.78,
+      "keywordDifficulty": 0,
+      "searchIntent": "commercial",
+      "source": "related"
+    },
+    {
+      "keyword": "dolphin nautilus cc plus manual",
+      "searchVolume": 210,
+      "cpcUsd": 0.7,
+      "keywordDifficulty": 1,
+      "searchIntent": "informational",
+      "source": "related"
+    },
+    {
+      "keyword": "robotic pool cleaner amazon",
+      "searchVolume": 170,
+      "cpcUsd": 1.93,
+      "keywordDifficulty": 0,
+      "searchIntent": "transactional",
+      "source": "related"
+    },
+    {
+      "keyword": "dolphin premier robotic pool cleaner price",
+      "searchVolume": 170,
+      "cpcUsd": 2.49,
+      "keywordDifficulty": 0,
+      "searchIntent": "commercial",
+      "source": "related"
+    },
+    {
+      "keyword": "best robotic pool cleaners under $500",
+      "searchVolume": 170,
+      "cpcUsd": 4.33,
+      "keywordDifficulty": 0,
+      "searchIntent": "commercial",
+      "source": "related"
+    },
+    {
+      "keyword": "robotic pool cleaner for above ground pools",
+      "searchVolume": 110,
+      "cpcUsd": 3.7,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "keywordDifficulty": 0,
+      "source": "seed"
+    },
+    {
+      "keyword": "smart robotic pool cleaner",
+      "searchVolume": 110,
+      "cpcUsd": 4.47,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "keywordDifficulty": 0,
+      "source": "seed"
+    },
+    {
+      "keyword": "pool surface cleaning robot",
+      "searchVolume": 110,
+      "cpcUsd": 7,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "keywordDifficulty": 7,
+      "source": "seed"
+    },
+    {
+      "keyword": "dolphin premier robotic pool cleaner reviews",
+      "searchVolume": 90,
+      "cpcUsd": 3.42,
+      "keywordDifficulty": 0,
+      "searchIntent": "informational",
+      "source": "related"
+    },
+    {
+      "keyword": "electric pool cleaner robot",
+      "searchVolume": 70,
+      "cpcUsd": 6.07,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "keywordDifficulty": 0,
+      "source": "seed"
+    },
+    {
+      "keyword": "in ground pool robot",
+      "searchVolume": 70,
+      "cpcUsd": 5.92,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "keywordDifficulty": 0,
+      "source": "seed"
+    },
+    {
+      "keyword": "best robotic pool cleaner for large pools",
+      "searchVolume": 70,
+      "cpcUsd": 7.25,
+      "keywordDifficulty": 15,
+      "searchIntent": "commercial",
+      "source": "related"
+    },
+    {
+      "keyword": "dolphin nautilus cc plus robotic pool cleaner with wi-fi",
+      "searchVolume": 70,
+      "cpcUsd": 3.13,
+      "keywordDifficulty": 0,
+      "searchIntent": "transactional",
+      "source": "related"
+    },
+    {
+      "keyword": "best robotic pool cleaner 2026 reviews",
+      "searchVolume": 50,
+      "cpcUsd": 4.3,
+      "keywordDifficulty": null,
+      "searchIntent": "commercial",
+      "source": "related"
+    },
+    {
+      "keyword": "dolphin premier robotic pool cleaner parts",
+      "searchVolume": 40,
+      "cpcUsd": 1.71,
+      "keywordDifficulty": 0,
+      "searchIntent": "transactional",
+      "source": "related"
+    },
+    {
+      "keyword": "dolphin premier robotic pool cleaner for sale",
+      "searchVolume": 40,
+      "cpcUsd": 2.36,
+      "keywordDifficulty": 12,
+      "searchIntent": "transactional",
+      "source": "related"
+    },
+    {
+      "keyword": "best corded robotic pool cleaner 2026",
+      "searchVolume": 40,
+      "cpcUsd": 4.26,
+      "keywordDifficulty": null,
+      "searchIntent": "commercial",
+      "source": "related"
+    },
+    {
+      "keyword": "wall climbing robotic pool cleaner",
+      "searchVolume": 30,
+      "cpcUsd": 2.69,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "keywordDifficulty": 0,
+      "source": "seed"
+    },
+    {
+      "keyword": "robotic pool cleaner for algae",
+      "searchVolume": 30,
+      "cpcUsd": 3.34,
+      "competition": "HIGH",
+      "competitionIndex": 94,
+      "keywordDifficulty": 0,
+      "source": "seed"
+    },
+    {
+      "keyword": "robotic pool cleaner price",
+      "searchVolume": 30,
+      "cpcUsd": 1.96,
+      "keywordDifficulty": 4,
+      "searchIntent": "commercial",
+      "source": "related"
+    },
+    {
+      "keyword": "best robotic pool cleaner reviews",
+      "searchVolume": 30,
+      "cpcUsd": 4.65,
+      "keywordDifficulty": 0,
+      "searchIntent": "commercial",
+      "source": "related"
+    },
+    {
+      "keyword": "dolphin nautilus cc plus robotic pool cleaner reviews",
+      "searchVolume": 30,
+      "cpcUsd": 2.27,
+      "keywordDifficulty": 0,
+      "searchIntent": "commercial",
+      "source": "related"
+    },
+    {
+      "keyword": "robotic pool cleaner that climbs walls",
+      "searchVolume": 20,
+      "cpcUsd": 1.98,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "keywordDifficulty": 4,
+      "source": "seed"
+    },
+    {
+      "keyword": "robotic pool cleaner for vinyl liner",
+      "searchVolume": 20,
+      "cpcUsd": 4.78,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "keywordDifficulty": 0,
+      "source": "seed"
+    },
+    {
+      "keyword": "robotic pool cleaner for large pool",
+      "searchVolume": 20,
+      "cpcUsd": 5.46,
+      "competition": "MEDIUM",
+      "competitionIndex": 60,
+      "keywordDifficulty": null,
+      "source": "seed"
+    },
+    {
+      "keyword": "pool robot for inground pool",
+      "searchVolume": 20,
+      "cpcUsd": 5.62,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "keywordDifficulty": 0,
+      "source": "seed"
+    },
+    {
+      "keyword": "best robotic pool cleaner for leaves",
+      "searchVolume": 20,
+      "cpcUsd": 5.11,
+      "keywordDifficulty": 10,
+      "searchIntent": "commercial",
+      "source": "related"
+    },
+    {
+      "keyword": "dolphin premier robotic pool cleaner amazon",
+      "searchVolume": 20,
+      "cpcUsd": 4.72,
+      "keywordDifficulty": null,
+      "searchIntent": "transactional",
+      "source": "related"
+    },
+    {
+      "keyword": "dolphin premier robotic pool cleaner near me",
+      "searchVolume": 20,
+      "cpcUsd": 3.2,
+      "keywordDifficulty": null,
+      "searchIntent": "commercial",
+      "source": "related"
+    },
+    {
+      "keyword": "pool vacuum robot pick up today",
+      "searchVolume": 20,
+      "cpcUsd": 0.57,
+      "keywordDifficulty": null,
+      "searchIntent": "transactional",
+      "source": "related"
+    },
+    {
+      "keyword": "wifi robotic pool cleaner",
+      "searchVolume": 10,
+      "cpcUsd": 5.69,
+      "competition": "HIGH",
+      "competitionIndex": 71,
+      "keywordDifficulty": 52,
+      "source": "seed"
+    },
+    {
+      "keyword": "robotic pool cleaner for leaves",
+      "searchVolume": 10,
+      "cpcUsd": 1.98,
+      "competition": "HIGH",
+      "competitionIndex": 98,
+      "keywordDifficulty": null,
+      "source": "seed"
+    },
+    {
+      "keyword": "robotic pool cleaner for fiberglass pool",
+      "searchVolume": 10,
+      "cpcUsd": null,
+      "competition": "LOW",
+      "competitionIndex": 4,
+      "keywordDifficulty": null,
+      "source": "seed"
+    },
+    {
+      "keyword": "automatic pool vacuum robot",
+      "searchVolume": 10,
+      "cpcUsd": 4.79,
+      "competition": "HIGH",
+      "competitionIndex": 100,
+      "keywordDifficulty": 64,
+      "source": "seed"
+    },
+    {
+      "keyword": "best robotic pool cleaners reddit",
+      "searchVolume": 10,
+      "cpcUsd": 12.96,
+      "keywordDifficulty": null,
+      "searchIntent": "informational",
+      "source": "related"
+    },
+    {
+      "keyword": "robotic pool cleaner reviews consumer reports",
+      "searchVolume": 10,
+      "cpcUsd": 4.64,
+      "keywordDifficulty": 47,
+      "searchIntent": "commercial",
+      "source": "related"
+    },
+    {
+      "keyword": "best pool vacuum robot inground",
+      "searchVolume": 10,
+      "cpcUsd": 5.07,
+      "keywordDifficulty": 0,
+      "searchIntent": "commercial",
+      "source": "related"
+    },
+    {
+      "keyword": "dolphin nautilus cc plus robotic pool cleaner troubleshooting",
+      "searchVolume": 10,
+      "cpcUsd": 1.15,
+      "keywordDifficulty": null,
+      "searchIntent": "navigational",
+      "source": "related"
+    },
+    {
+      "keyword": "dolphin nautilus cc plus robotic pool cleaner parts",
+      "searchVolume": 10,
+      "cpcUsd": 1.13,
+      "keywordDifficulty": null,
+      "searchIntent": "transactional",
+      "source": "related"
+    },
+    {
+      "keyword": "waterline pool robot",
+      "searchVolume": null,
+      "cpcUsd": null,
+      "competition": null,
+      "competitionIndex": null,
+      "keywordDifficulty": null,
+      "source": "seed"
+    },
+    {
+      "keyword": "pool floor cleaning robot",
+      "searchVolume": null,
+      "cpcUsd": null,
+      "competition": null,
+      "competitionIndex": null,
+      "keywordDifficulty": null,
+      "source": "seed"
+    },
+    {
+      "keyword": "robotic pool cleaner with app",
+      "searchVolume": null,
+      "cpcUsd": null,
+      "competition": null,
+      "competitionIndex": null,
+      "keywordDifficulty": null,
+      "source": "seed"
+    },
+    {
+      "keyword": "robotic pool cleaner for saltwater pool",
+      "searchVolume": null,
+      "cpcUsd": null,
+      "competition": null,
+      "competitionIndex": null,
+      "keywordDifficulty": null,
+      "source": "seed"
+    },
+    {
+      "keyword": "robotic pool cleaner for freeform pool",
+      "searchVolume": null,
+      "cpcUsd": null,
+      "competition": null,
+      "competitionIndex": null,
+      "keywordDifficulty": null,
+      "source": "seed"
+    },
+    {
+      "keyword": "pool robot for leaves",
+      "searchVolume": null,
+      "cpcUsd": null,
+      "competition": null,
+      "competitionIndex": null,
+      "keywordDifficulty": null,
+      "source": "seed"
+    },
+    {
+      "keyword": "pool robot for debris",
+      "searchVolume": null,
+      "cpcUsd": null,
+      "competition": null,
+      "competitionIndex": null,
+      "keywordDifficulty": null,
+      "source": "seed"
+    },
+    {
+      "keyword": "pool robot for walls",
+      "searchVolume": null,
+      "cpcUsd": null,
+      "competition": null,
+      "competitionIndex": null,
+      "keywordDifficulty": null,
+      "source": "seed"
+    },
+    {
+      "keyword": "pool robot for waterline",
+      "searchVolume": null,
+      "cpcUsd": null,
+      "competition": null,
+      "competitionIndex": null,
+      "keywordDifficulty": null,
+      "source": "seed"
+    },
+    {
+      "keyword": "pool cleaning machine robot",
+      "searchVolume": null,
+      "cpcUsd": null,
+      "competition": null,
+      "competitionIndex": null,
+      "keywordDifficulty": null,
+      "source": "seed"
+    },
+    {
+      "keyword": "robot pool cleaning machine",
+      "searchVolume": null,
+      "cpcUsd": null,
+      "competition": null,
+      "competitionIndex": null,
+      "keywordDifficulty": null,
+      "source": "seed"
+    },
+    {
+      "keyword": "residential pool cleaning robot",
+      "searchVolume": null,
+      "cpcUsd": null,
+      "competition": null,
+      "competitionIndex": null,
+      "keywordDifficulty": null,
+      "source": "seed"
+    }
+  ]
+}

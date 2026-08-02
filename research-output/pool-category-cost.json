@@ -1,0 +1,34 @@
+{
+  "hardCapUsd": 0.6,
+  "totalCostUsd": 0.12892,
+  "costLog": [
+    {
+      "label": "search volume and CPC",
+      "path": "/keywords_data/google_ads/search_volume/live",
+      "tasks": 1,
+      "cost": 0.09,
+      "runningTotal": 0.09
+    },
+    {
+      "label": "bulk keyword difficulty",
+      "path": "/dataforseo_labs/google/bulk_keyword_difficulty/live",
+      "tasks": 1,
+      "cost": 0.018,
+      "runningTotal": 0.108
+    },
+    {
+      "label": "related keywords",
+      "path": "/dataforseo_labs/google/related_keywords/live",
+      "tasks": 1,
+      "cost": 0.01692,
+      "runningTotal": 0.12492
+    },
+    {
+      "label": "SERP intent comparison",
+      "path": "/serp/google/organic/live/advanced",
+      "tasks": 4,
+      "cost": 0.004,
+      "runningTotal": 0.12892
+    }
+  ]
+}
