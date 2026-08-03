@@ -738,66 +738,77 @@ const X1_PAGE = "https://aiper.com/us/aiper-scuba-series/aiper-scuba-x1";
 const X1_TITLE = "Aiper Scuba X1 Essential — official US product page (the base model, not the Pro)";
 const X1_MOVED = "2026-08-03";
 
+const X1PM_PAGE = "https://aiper.com/us/aiper-scuba-series/aiper-scuba-x1-pro-max";
+const X1PM_TITLE = "Aiper Scuba X1 Pro Max Pinnacle In-Ground Pool Cleaner — official US product page";
+const X1PM_READ = "2026-08-03";
+
 const aiperScubaX1: ProductVerification = {
   productId: "prod-aiper-scuba-x1",
-  checkedOn: X1_MOVED,
+  checkedOn: X1PM_READ,
   identity: {
-    brand: "Aiper",
-    canonicalName: "Aiper Scuba X1 Pro",
-    modelNumber: null,
-    modelNumberSource: null,
-    // No readable official page for the Pro: aiper.com/us/aiper-scuba-series/
-    // aiper-scuba-x1-pro returns 404. Recording the Essential's page here would
-    // attach the wrong machine's specification to this record.
-    officialProductPageUrl: null,
+    brand: "AIPER",
+    canonicalName: "Aiper Scuba X1 Pro Max",
+    modelNumber: "X9-Grey",
+    modelNumberSource: "https://www.amazon.com/Robotic-Skimmer-Ultra-fine-Filtration-Inground/dp/B0GMPWMS2H",
+    officialProductPageUrl: X1PM_PAGE,
     manual: null,
     identityIssue:
-      "THIS RECORD CHANGED MODEL ON 3 AUGUST 2026, at the owner's direction, from the Aiper Scuba X1 to the Aiper Scuba X1 Pro. Everything that follows must be read in that light. Aiper's Scuba line runs SE, S1, S1 Pro, X1 Essential, X1 Pro and X1 Pro Max with no published model number, so models separate only by page URL and product name — and the page this record was originally built against is titled 'Scuba X1 Essential', meaning the stored specification described the entry model. Those observations have been REMOVED rather than carried across: they are evidence about a different machine, and no observation for the Pro has been read. No official Aiper page for the Pro was reachable (404), and the Amazon listing the owner supplied returns a bot-mitigation page to server-side reads. The identity therefore rests on the owner's confirmation alone, and the Pro's specification is unverified.",
+      "THIS RECORD MOVED TWICE ON 3 AUGUST 2026: Scuba X1 → Scuba X1 Pro → Scuba X1 Pro Max, each time at the owner's direction. It is worth stating why, because the middle step is a caution. The page the original record was built against is titled 'Scuba X1 Essential' — the entry model. A listing supplied for the Pro was accepted on the strength of its URL reading /AIPER-Scuba-X1-Pro-Underwater/ and was WRONG: the listing's own fields give Model Name 'Scuba X1+Hy Pro', the base X1 bundled with a HydroComm Pro monitor. It was refused once read. The Pro Max listing names itself in its own details table — Brand AIPER, Model Name 'Scuba X1 Pro Max' — and Aiper publishes a matching page, so this identity rests on published fields rather than on a URL that looked like confirmation. Every observation the Essential's record held was removed rather than carried across.",
   },
   sourceChecks: [
-    { url: X1_PAGE, title: X1_TITLE, status: "ok" },
-    { url: "https://aiper.com/us/pages/user-manual", title: "Aiper manual index (attempted)", status: "unreadable", note: "HTTP 404." },
-    { url: "https://aiper.com/pages/user-manuals", title: "Aiper manual index (attempted, alternate path)", status: "unreadable", note: "HTTP 404." },
+    { url: X1PM_PAGE, title: X1PM_TITLE, status: "ok", note: "Read 3 August 2026. Comparison table's own column gives Pool Size 3230 sq.ft (300㎡) / 100ft (30m) in length." },
     {
-      url: "https://aiper.com/us/aiper-scuba-series/aiper-scuba-x1-pro",
-      title: "Aiper Scuba X1 Pro — official page (attempted)",
-      status: "unreadable",
-      note: "HTTP 404 on 3 August 2026. No official Aiper page for the Pro was found, which is why this record carries no product page URL.",
+      url: "https://www.amazon.com/Robotic-Skimmer-Ultra-fine-Filtration-Inground/dp/B0GMPWMS2H",
+      title: "Amazon US listing (B0GMPWMS2H) — Aiper Scuba X1 Pro Max",
+      status: "ok",
+      note: "Read 3 August 2026. Details table: Brand 'AIPER', Manufacturer 'AIPER', Model Name 'Scuba X1 Pro Max', Model Number 'X9-Grey', Power Source 'Battery Powered'. Title names the Pro Max and describes it as a skimmer as well as a vacuum.",
     },
     {
-      url: "https://www.amazon.com/AIPER-High-Power-Horizontal-Waterline-Scrubbing/dp/B0F9WN961G",
-      title: "Amazon US listing (B0F9WN961G) — retired, and it had nothing to buy",
-      status: "not_rechecked",
-      note: "Was the destination until 3 August 2026. It never confirmed its own model — title 'AIPER Pool Cleaner', model name and model number both 'Blue' — and the SerpApi read of 31 July found no buying option at all, so the buy button led to a listing nobody could purchase from.",
+      url: "https://aiper.com/us/aiper-scuba-series/aiper-scuba-x1",
+      title: "Aiper Scuba X1 Essential — the page this record was ORIGINALLY built against",
+      status: "ok",
+      note: "Titled 'Scuba X1 Essential In-Ground Pool Cleaner'. Kept to show what the earlier observations described, and why they could not follow the record to the Pro Max.",
     },
     {
       url: "https://www.amazon.com/AIPER-Scuba-X1-Pro-Underwater/dp/B0GVT2YPLB",
-      title: "Amazon US listing (B0GVT2YPLB) — current destination, supplied by the owner",
-      status: "not_rechecked",
-      note: "Supplied and confirmed by the owner on 3 August 2026. Not independently read: Amazon returns a bot-mitigation page to server-side requests. The listing URL names the X1 Pro and the owner's artwork shows 'SCUBA X1 PRO' on the machine's body, which is consistent, but neither is a reading of the listing itself.",
+      title: "Amazon US listing (B0GVT2YPLB) — REFUSED, a bundle of the base X1",
+      status: "ok",
+      note: "Model Name and Model Number both 'Scuba X1+Hy Pro'; title 'AIPER Scuba X1 Robotic Pool Cleaner with HydroComm Pro Smart Pool Monitor'. Briefly accepted on 3 August on the strength of its URL slug, then refused on its own fields. Recorded so the mistake cannot be repeated.",
     },
   ],
-  /* Deliberately empty. Every observation previously here was read from the
-     Scuba X1 Essential's page and is evidence about a different machine. They
-     were removed when this record moved to the Pro rather than relabelled —
-     carrying them across is exactly the substitution this registry exists to
-     prevent. Nothing on this product may be stated as fact until a readable
-     source for the Pro is found. */
-  observations: [],
+  observations: [
+    { field: "powerType", value: "cordless (battery)", sourceUrl: X1PM_PAGE, sourceTitle: X1PM_TITLE, observedOn: X1PM_READ },
+    { field: "poolTypes", value: "In-ground", sourceUrl: X1PM_PAGE, sourceTitle: X1PM_TITLE, observedOn: X1PM_READ },
+    {
+      field: "poolSizeSuitability",
+      value: "3230 sq.ft (300㎡), 100ft (30m) in length",
+      sourceUrl: X1PM_PAGE,
+      sourceTitle: X1PM_TITLE,
+      observedOn: X1PM_READ,
+      note: "The owner's artwork prints 'UP TO 80 FT POOL LENGTH'. Aiper's own comparison table says 100ft (30m). The manufacturer figure is recorded; the artwork understates it and should be corrected if redrawn.",
+    },
+    { field: "surfaceTypes", value: "Concrete, fibreglass, vinyl, tiles", sourceUrl: X1PM_PAGE, sourceTitle: X1PM_TITLE, observedOn: X1PM_READ },
+    { field: "surfacesCleaned", value: "floor, walls, waterline and water surface", sourceUrl: X1PM_PAGE, sourceTitle: X1PM_TITLE, observedOn: X1PM_READ, note: "Aiper markets it as a vacuum and a skimmer in one; the Amazon title says 'Pool Robot Vacuum & Robotic Pool Skimmer'." },
+    { field: "suctionRate", value: "8500 GPH (32000 LPH)", sourceUrl: X1PM_PAGE, sourceTitle: X1PM_TITLE, observedOn: X1PM_READ },
+    { field: "filtration", value: "Dual ultra-fine, 180μm/3μm", sourceUrl: X1PM_PAGE, sourceTitle: X1PM_TITLE, observedOn: X1PM_READ },
+    { field: "filtrationMicrons", value: "3μm", sourceUrl: X1PM_PAGE, sourceTitle: X1PM_TITLE, observedOn: X1PM_READ },
+    { field: "filterCapacityL", value: "Top Load 5L", sourceUrl: X1PM_PAGE, sourceTitle: X1PM_TITLE, observedOn: X1PM_READ },
+    { field: "runtimeMins", value: "Up to 300 minutes / 5 hours floor; up to 600 minutes / 10 hours surface skimming", sourceUrl: X1PM_PAGE, sourceTitle: X1PM_TITLE, observedOn: X1PM_READ, note: "Two mode figures; there is no single whole-machine runtime." },
+    { field: "chargeTimeHrs", value: "4 hours", sourceUrl: X1PM_PAGE, sourceTitle: X1PM_TITLE, observedOn: X1PM_READ, note: "The owner's artwork says '4-5 hours'. Aiper's table says 4." },
+    { field: "navigation", value: "FlexiPath™ 2.0 with OmniSense+™ mapping", sourceUrl: X1PM_PAGE, sourceTitle: X1PM_TITLE, observedOn: X1PM_READ },
+    { field: "appSupport", value: "Aiper app — complete app control", sourceUrl: X1PM_PAGE, sourceTitle: X1PM_TITLE, observedOn: X1PM_READ },
+    { field: "dimensions", value: '15"L x 11"W x 17"H', sourceUrl: "https://www.amazon.com/Robotic-Skimmer-Ultra-fine-Filtration-Inground/dp/B0GMPWMS2H", sourceTitle: "Amazon US listing (B0GMPWMS2H)", observedOn: X1PM_READ, note: "Retailer-stated, not manufacturer-stated." },
+  ],
   notPubliclyStated: [
-    { field: "warranty", checked: [X1_PAGE], note: "No warranty term stated anywhere on the official product page." },
-    { field: "weightLbs", checked: [X1_PAGE], note: "Not published." },
-    { field: "dimensions", checked: [X1_PAGE], note: "Not published." },
-    { field: "batteryCapacity", checked: [X1_PAGE], note: "Runtime and charge time are stated; cell capacity is not." },
-    { field: "modelNumber", checked: [X1_PAGE], note: "No SKU published." },
-    { field: "manualUrl", checked: [X1_PAGE, "https://aiper.com/pages/user-manuals"], note: "A printed manual is listed in the box, but no downloadable manual was found on the official domain." },
-    { field: "wifi", checked: [X1_PAGE], note: "App control is stated; connection type is not." },
-    { field: "remoteControl", checked: [X1_PAGE], note: "Not mentioned." },
-    { field: "maxDepthFt", checked: [X1_PAGE], note: "Not published." },
-    { field: "minDepthFt", checked: [X1_PAGE], note: "Not published." },
-    { field: "suctionRate", checked: [X1_PAGE], note: "Not published for this model." },
-    { field: "filterCapacityL", checked: [X1_PAGE], note: "Not published." },
-    { field: "cleaningModes", checked: [X1_PAGE], note: "Coverage is described; selectable modes are not enumerated." },
+    { field: "weightLbs", checked: [X1PM_PAGE], note: "Not published on the product page." },
+    { field: "batteryCapacity", checked: [X1PM_PAGE], note: "Runtime and charge time are stated; cell capacity is not." },
+    { field: "warranty", checked: [X1PM_PAGE], note: "No warranty term stated on the product page." },
+    { field: "maxDepthFt", checked: [X1PM_PAGE], note: "Not published." },
+    { field: "minDepthFt", checked: [X1PM_PAGE], note: "Not published." },
+    { field: "cleaningModes", checked: [X1PM_PAGE], note: "Floor, wall, waterline, surface and All are shown in the app, but no enumerated mode list is published." },
+    { field: "wifi", checked: [X1PM_PAGE], note: "App control is stated; connection type is not." },
+    { field: "remoteControl", checked: [X1PM_PAGE], note: "Not mentioned either way." },
+    { field: "includedAccessories", checked: [X1PM_PAGE], note: "A charging dock is shown; no box-contents list is published." },
   ],
 };
 

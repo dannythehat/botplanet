@@ -50,7 +50,12 @@ const AMAZON_ASINS: { productId: string; asin: string; sourceUrl: string }[] = [
   // bot-mitigation page to server-side reads. The previous identity check is
   // kept below, and now applies only to the ASIN it actually examined.
   { productId: "prod-beatbot-aquasense-2-ultra", asin: "B0G7B6F5FZ", sourceUrl: "Owner-confirmed 2026-08-03: https://www.amazon.com/Beatbot-AquaSense-Ultra-Cordless-Clarification/dp/B0G7B6F5FZ" },
-  // prod-aiper-scuba-x1 HAS NO ASIN. It carried B0GVT2YPLB for a few hours on
+  // The Scuba X1 Pro Max, supplied by the owner and READ before acceptance this
+  // time — Brand AIPER, Model Name "Scuba X1 Pro Max", Model Number X9-Grey.
+  // It replaces a listing that was accepted on its URL alone and turned out to
+  // be a different machine; see the refusal in REJECTED_CANDIDATES.
+  { productId: "prod-aiper-scuba-x1", asin: "B0GMPWMS2H", sourceUrl: "Owner-supplied 2026-08-03, read the same day: https://www.amazon.com/Robotic-Skimmer-Ultra-fine-Filtration-Inground/dp/B0GMPWMS2H" },
+  // NOTE ON B0GVT2YPLB, which this replaces. It carried that ASIN for minutes on
   // 3 August 2026 and that was MY ERROR: I read "Scuba-X1-Pro" in the listing
   // URL and took it for the Scuba X1 Pro. It is not. Reading the listing itself
   // shows Model Name and Model Number both "Scuba X1+Hy Pro", and a title of
@@ -119,6 +124,13 @@ interface IdentityCheck {
 }
 
 export const IDENTITY_CHECKS: Record<string, IdentityCheck> = {
+  "prod-aiper-scuba-x1": {
+    asin: "B0GMPWMS2H",
+    confirmed: true,
+    evidence:
+      "Details table gives Brand 'AIPER', Manufacturer 'AIPER', Model Name 'Scuba X1 Pro Max', Model Number 'X9-Grey', Power Source 'Battery Powered'; canonical URL /Robotic-Skimmer-Ultra-fine-Filtration-Inground/. Title: 'Aiper Scuba X1 Pro Max Pool Robot Vacuum & Robotic Pool Skimmer with 8,500 GPH Suction'. Aiper publishes a matching page at /us/aiper-scuba-series/aiper-scuba-x1-pro-max titled 'Scuba X1 Pro Max Pinnacle In-Ground Pool Cleaner'. The model name is written out in full, which is what separates it from the Pro and from the X1+HydroComm bundle that was refused.",
+    checkedOn: "2026-08-03",
+  },
   // Read on 3 August 2026. This record now holds a BuBlue, not a Dolphin —
   // see content/product-names.ts and the verification record for the move.
   "prod-dolphin-premier": {
@@ -173,8 +185,9 @@ export const IDENTITY_CHECKS: Record<string, IdentityCheck> = {
   // RETIRED TWICE OVER: this examined B0F9WN961G, which is no longer the
   // destination, for the Scuba X1, which is no longer the model this record
   // holds. Kept because "the listing we used to point at could not name itself
-  // and had nothing to buy" is the reason the swap happened.
-  "prod-aiper-scuba-x1": {
+  // and had nothing to buy" is the reason the swap happened. Keyed separately
+  // from the live check above so both readings survive.
+  "retired-prod-aiper-scuba-x1-B0F9WN961G": {
     asin: "B0F9WN961G",
     confirmed: false,
     evidence:
@@ -218,11 +231,9 @@ const NO_AMAZON_DESTINATION = [
   // Aiper Scuba S1 was here as well, every candidate having been a sibling.
   // The owner supplied a listing that names the S1 outright.
   //
-  // The Scuba X1 Pro joins the list on 3 August 2026 — see the note in
-  // AMAZON_ASINS. It is the only product here for want of a CORRECT listing
-  // rather than any listing: the one supplied turned out to be a bundle of the
-  // base X1, and shipping it would have sent buyers to the wrong machine.
-  "prod-aiper-scuba-x1",
+  // The Scuba X1 Pro was here for part of 3 August 2026, for want of a CORRECT
+  // listing rather than any listing. It left the same day: the owner supplied
+  // the Pro Max, whose listing names itself in its own details table.
 ];
 
 export const DESTINATIONS: ProductDestination[] = [

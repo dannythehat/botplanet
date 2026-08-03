@@ -150,17 +150,16 @@ describe("exact-product destinations", () => {
   it("captures an ASIN for five products and refuses to invent the rest", () => {
     const exact = DESTINATIONS.filter((d) => d.confidence === "researched_exact" || d.confidence === "verified_exact");
     const search = DESTINATIONS.filter((d) => d.confidence === "search_only");
-    // Eleven exact, one search-only. Every product reached a specific ASIN on
-    // 3 August 2026 — and one was then taken BACK OFF the same day. The listing
-    // supplied for the Scuba X1 Pro turned out to be the base X1 bundled with a
-    // HydroComm Pro monitor, so it was refused and the product returned to a
-    // search fallback rather than sending buyers to the wrong machine.
+    // Twelve exact, nothing search-only. One of them took three attempts in a
+    // single day: a listing accepted on its URL slug turned out to be the base
+    // X1 bundled with a monitor, was refused once read, and was replaced by a
+    // Pro Max listing that names itself in its own details table.
     //
-    // A search fallback is the honest answer when no correct listing is held.
-    // If this changes, the count is what should change — never the classification.
-    expect(exact).toHaveLength(11);
-    expect(search).toHaveLength(1);
-    expect(search[0].productId).toBe("prod-aiper-scuba-x1");
+    // A search fallback remains the honest answer whenever no correct listing
+    // is held. If that happens again the count is what should change — never
+    // the classification.
+    expect(exact).toHaveLength(12);
+    expect(search).toHaveLength(0);
     for (const d of exact) {
       expect(d.identifierKind).toBe("asin");
       expect(d.retailerProductId).toMatch(/^B0[A-Z0-9]{8}$/);
@@ -194,14 +193,16 @@ describe("exact-product destinations", () => {
     // The Aiper listing publishes "Blue" as its model name and mentions four
     // Scuba models in one comparison block. A page that cannot name its own
     // model cannot confirm one.
-    const aiper = IDENTITY_CHECKS["prod-aiper-scuba-x1"];
+    const aiper = IDENTITY_CHECKS["retired-prod-aiper-scuba-x1-B0F9WN961G"];
     expect(aiper.confirmed).toBe(false);
-    // And it now has no ASIN at all: the replacement supplied on 3 August was a
-    // bundle of the base X1, refused on the listing's own model-name field.
-    expect(destinationFor("prod-aiper-scuba-x1")!.confidence).toBe("search_only");
+    // A second listing for the same product was refused on the same principle:
+    // its URL said "Scuba-X1-Pro", its own fields said "Scuba X1+Hy Pro".
     const refusal = REJECTED_CANDIDATES.find((c) => c.candidate.includes("B0GVT2YPLB"))!;
     expect(refusal.rule).toBe("sibling_model");
     expect(refusal.reason).toContain("Scuba X1+Hy Pro");
+    // What the product carries now names itself in full, in its own details table.
+    expect(destinationFor("prod-aiper-scuba-x1")!.retailerProductId).toBe("B0GMPWMS2H");
+    expect(IDENTITY_CHECKS["prod-aiper-scuba-x1"].evidence).toContain("Scuba X1 Pro Max");
   });
 
   it("names the Job 8 exact model on every destination", () => {

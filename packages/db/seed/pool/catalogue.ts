@@ -62,22 +62,26 @@ export const productRows: (typeof products.$inferInsert)[] = [
     status: "published",
   },
   {
-    // Moved from the Scuba X1 Essential to the X1 Pro on 2026-08-03 at the
-    // owner's direction. The ID is the stable join key and does not move with
+    // Moved from the Scuba X1 Essential to the X1 Pro and then to the X1 Pro
+    // Max on 2026-08-03, both at the owner's direction. The ID is the stable join key and does not move with
     // the model; the old slug redirects — see apps/web/src/content/product-names.ts.
     id: "prod-aiper-scuba-x1",
-    slug: "aiper-scuba-x1-pro",
+    slug: "aiper-scuba-x1-pro-max",
     brandId: "brand-aiper",
     categoryId: "cat-pool-cleaners",
     productClass: "full_cleaner",
-    name: "Aiper Scuba X1 Pro",
-    model: "Scuba X1 Pro",
+    name: "Aiper Scuba X1 Pro Max",
+    model: "Scuba X1 Pro Max",
     environments: ["in_ground"],
-    cleans: ["floor", "walls", "waterline"],
+    // Aiper markets it as a vacuum AND a skimmer, so it cleans the surface too.
+    cleans: ["floor", "walls", "waterline", "water_surface"],
     powerType: "cordless",
     priceTier: "premium",
-    maxPoolLengthFt: null,
-    specsJson: { note: "Cordless; strong on algae.", snapshotDate: SNAPSHOT_DATE },
+    // Aiper's own comparison table: 3230 sq.ft (300㎡), 100ft (30m) in length.
+    // The owner's artwork prints 80 ft; the manufacturer figure is used.
+    maxPoolLengthFt: 100,
+    maxPoolAreaSqFt: 3230,
+    specsJson: { note: "Cordless; vacuums and skims. 8500 GPH.", snapshotDate: SNAPSHOT_DATE },
     status: "published",
   },
   {
@@ -162,6 +166,9 @@ export const productRows: (typeof products.$inferInsert)[] = [
     powerType: "corded",
     priceTier: "mid",
     maxPoolLengthFt: null,
+    // Corded, but the cord is 50 ft and that is NOT a pool-length rating.
+    // BuBlue publishes an area only.
+    maxPoolAreaSqFt: 1076,
     specsJson: { snapshotDate: SNAPSHOT_DATE },
     status: "published",
   },

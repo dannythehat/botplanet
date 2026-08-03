@@ -294,11 +294,11 @@ const OWNER_ARTWORK: OwnerArtwork[] = [
   {
     slug: "aiper-scuba-x1",
     file: "aiper-scuba-x1.webp",
-    checksum: "sha256:cb85855c187847ea25c9aef6fdcc50c65a7bb05d9f4cf715968f224c2d5e62d9",
-    width: 1254,
-    height: 1254,
+    checksum: "sha256:b61a0d6a69177adb170f8550f7f21a9c6ba10857f6c7f61b943c3f0de44ec496",
+    width: 1402,
+    height: 1122,
     scene:
-      "the black cleaner upright on its charging stand beside a lit pool and waterfall at dusk, 'SCUBA X1 PRO' printed on its front, with a phone showing the Aiper app and callouts for app control, floor, wall and waterline cleaning, cordless running and navigation",
+      "the grey and black cleaner on its dock at the poolside at night, 'SCUBA X1 Pro Max' printed on its front, with a phone showing the Aiper app and callouts for suction, surface skimming, navigation, filtration and runtime",
   },
   {
     slug: "aiper-seagull-se",

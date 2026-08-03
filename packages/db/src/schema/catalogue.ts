@@ -43,7 +43,12 @@ export const products = sqliteTable("products", {
   cleans: text("cleans", { mode: "json" }).$type<CleaningSurface[]>().notNull(),
   powerType: text("power_type").$type<PowerType>().notNull(),
   priceTier: text("price_tier").notNull(), // budget | mid | premium | ultra
+  /* Manufacturers do not agree on which limit to publish. Aiper states an area
+     for the Scuba V3 and no length at all; Maytronics states a length. Both
+     columns exist so neither has to be invented, and the matcher treats a
+     missing pair as "unknown" rather than "unsuitable". */
   maxPoolLengthFt: integer("max_pool_length_ft"),
+  maxPoolAreaSqFt: integer("max_pool_area_sqft"),
 
   specsJson: text("specs_json", { mode: "json" }).$type<Record<string, unknown>>(),
 

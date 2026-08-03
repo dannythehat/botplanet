@@ -4,15 +4,15 @@
   "fieldsInRegistry": 31,
   "totals": {
     "fieldRecords": 310,
-    "evidenceRecords": 153,
+    "evidenceRecords": 169,
     "stateCounts": {
-      "populated": 147,
-      "unknown": 24,
+      "populated": 163,
+      "unknown": 18,
       "not_applicable": 22,
-      "not_publicly_stated": 88,
+      "not_publicly_stated": 84,
       "conflicting": 1,
-      "suppressed": 18,
-      "pending_verification": 10
+      "suppressed": 17,
+      "pending_verification": 5
     },
     "reconciliation": {
       "agrees": 46,
@@ -24,8 +24,8 @@
       "newly_populated": 1,
       "not_applicable": 10
     },
-    "rawPercent": 51,
-    "weightedPercent": 58,
+    "rawPercent": 57,
+    "weightedPercent": 64,
     "conflicts": 3,
     "unresolvedConflicts": 1
   },
@@ -844,52 +844,43 @@
       "slug": "aiper-scuba-x1",
       "url": "https://botplanet.io/robots/robotic-pool-cleaners/aiper-scuba-x1/",
       "path": "/robots/robotic-pool-cleaners/aiper-scuba-x1/",
-      "canonicalName": "Aiper Scuba X1 Pro",
-      "brand": "Aiper",
-      "modelNumber": null,
-      "officialProductPage": null,
+      "canonicalName": "Aiper Scuba X1 Pro Max",
+      "brand": "AIPER",
+      "modelNumber": "X9-Grey",
+      "officialProductPage": "https://aiper.com/us/aiper-scuba-series/aiper-scuba-x1-pro-max",
       "manualUrl": null,
       "manualDocumentId": null,
       "manualRevision": null,
-      "modelIdentityNote": "THIS RECORD CHANGED MODEL ON 3 AUGUST 2026, at the owner's direction, from the Aiper Scuba X1 to the Aiper Scuba X1 Pro. Everything that follows must be read in that light. Aiper's Scuba line runs SE, S1, S1 Pro, X1 Essential, X1 Pro and X1 Pro Max with no published model number, so models separate only by page URL and product name — and the page this record was originally built against is titled 'Scuba X1 Essential', meaning the stored specification described the entry model. Those observations have been REMOVED rather than carried across: they are evidence about a different machine, and no observation for the Pro has been read. No official Aiper page for the Pro was reachable (404), and the Amazon listing the owner supplied returns a bot-mitigation page to server-side reads. The identity therefore rests on the owner's confirmation alone, and the Pro's specification is unverified.",
+      "modelIdentityNote": "THIS RECORD MOVED TWICE ON 3 AUGUST 2026: Scuba X1 → Scuba X1 Pro → Scuba X1 Pro Max, each time at the owner's direction. It is worth stating why, because the middle step is a caution. The page the original record was built against is titled 'Scuba X1 Essential' — the entry model. A listing supplied for the Pro was accepted on the strength of its URL reading /AIPER-Scuba-X1-Pro-Underwater/ and was WRONG: the listing's own fields give Model Name 'Scuba X1+Hy Pro', the base X1 bundled with a HydroComm Pro monitor. It was refused once read. The Pro Max listing names itself in its own details table — Brand AIPER, Model Name 'Scuba X1 Pro Max' — and Aiper publishes a matching page, so this identity rests on published fields rather than on a URL that looked like confirmation. Every observation the Essential's record held was removed rather than carried across.",
       "verificationDate": "2026-08-03",
-      "sourcesUsed": 1,
-      "sourcesUnreadable": [
-        "https://aiper.com/us/pages/user-manual",
-        "https://aiper.com/pages/user-manuals",
-        "https://aiper.com/us/aiper-scuba-series/aiper-scuba-x1-pro"
-      ],
-      "completenessRawPercent": 7,
-      "completenessWeightedPercent": 10,
+      "sourcesUsed": 2,
+      "sourcesUnreadable": [],
+      "completenessRawPercent": 64,
+      "completenessWeightedPercent": 71,
       "fieldsApplicable": 28,
-      "fieldsPublishable": 2,
+      "fieldsPublishable": 18,
       "weightApplicable": 102,
-      "weightPublishable": 10,
+      "weightPublishable": 72,
       "fieldStates": {
-        "populated": 2,
-        "unknown": 7,
+        "populated": 18,
+        "unknown": 1,
         "not_applicable": 3,
-        "not_publicly_stated": 12,
+        "not_publicly_stated": 8,
         "conflicting": 0,
-        "suppressed": 2,
-        "pending_verification": 5
+        "suppressed": 1,
+        "pending_verification": 0
       },
       "fieldsNotPubliclyStated": [
-        "modelNumber",
-        "manualUrl",
         "batteryCapacity",
         "maxDepthFt",
         "minDepthFt",
-        "filterCapacityL",
-        "suctionRate",
         "cleaningModes",
         "weightLbs",
-        "dimensions",
+        "includedAccessories",
         "wifi",
         "remoteControl"
       ],
       "fieldsSuppressed": [
-        "navigation",
         "warranty"
       ],
       "fieldsConflicting": [],
@@ -916,36 +907,20 @@
         "readyForBotMatch": false
       },
       "publicationBlockers": [
-        "no accepted official manufacturer page",
-        "no accepted manual",
-        "no reliably established model number",
-        "weighted completeness 10% against a 65% floor",
-        "insufficient evidence coverage for review section(s): What it is, Where it fits, What it cleans, How it runs, Living with it",
-        "review section(s) would rest on suppressed value(s): navigation",
-        "comparison field unavailable: powerType",
-        "comparison field unavailable: poolTypes",
-        "comparison field unavailable: poolSizeSuitability",
-        "comparison field unavailable: runtimeMins",
-        "comparison field unavailable: surfacesCleaned",
-        "comparison field unavailable: filtration",
-        "comparison field unavailable: warranty",
-        "BotMatch field unavailable: powerType",
-        "BotMatch field unavailable: poolTypes",
-        "BotMatch field unavailable: poolSizeSuitability",
-        "BotMatch field unavailable: surfacesCleaned",
-        "BotMatch field unavailable: appSupport"
+        "insufficient evidence coverage for review section(s): Living with it",
+        "comparison field unavailable: warranty"
       ],
-      "launchStatus": "candidate_under_review",
+      "launchStatus": "limited_factual_use",
       "reviewGates": [
         {
           "gate": "weighted_completeness",
-          "passed": false,
-          "detail": "weighted completeness 10% against a 65% floor"
+          "passed": true,
+          "detail": "weighted completeness 71% against a 65% floor"
         },
         {
           "gate": "model_identity",
-          "passed": false,
-          "detail": "no accepted official manufacturer page for this exact model"
+          "passed": true,
+          "detail": "identified by https://aiper.com/us/aiper-scuba-series/aiper-scuba-x1-pro-max, with a published model number, no manual accepted"
         },
         {
           "gate": "no_material_conflict",
@@ -955,12 +930,12 @@
         {
           "gate": "review_sections_writable",
           "passed": false,
-          "detail": "insufficient evidence coverage for review section(s): What it is, Where it fits, What it cleans, How it runs, Living with it"
+          "detail": "insufficient evidence coverage for review section(s): Living with it"
         },
         {
           "gate": "no_speculation",
-          "passed": false,
-          "detail": "review section(s) would rest on suppressed value(s): navigation"
+          "passed": true,
+          "detail": "no review section rests on a suppressed value"
         },
         {
           "gate": "corrections_identified",
@@ -971,8 +946,8 @@
       "evidenceQualification": null,
       "warrantyStatus": "not_confirmed",
       "warrantyPublicWording": "Manufacturer warranty term not confirmed",
-      "claimsPublishable": 0,
-      "claimsBlocked": 15
+      "claimsPublishable": 11,
+      "claimsBlocked": 5
     },
     {
       "productId": "prod-aiper-scuba-s1",

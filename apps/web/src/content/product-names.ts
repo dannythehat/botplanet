@@ -30,13 +30,25 @@ export interface RetiredSlug {
 }
 
 export const RETIRED_SLUGS: Record<string, RetiredSlug> = {
+  /* Both of these point at the FINAL destination, not at each other. The
+     record moved twice in one day — X1 → X1 Pro → X1 Pro Max — and a chain of
+     301s is a chain of chances to lose a visitor. Each retired URL gets there
+     in a single hop. */
   "aiper-scuba-x1": {
-    to: "aiper-scuba-x1-pro",
+    to: "aiper-scuba-x1-pro-max",
     wasNamed: "Aiper Scuba X1",
-    isNamed: "Aiper Scuba X1 Pro",
+    isNamed: "Aiper Scuba X1 Pro Max",
     changedOn: "2026-08-03",
     reason:
-      "Aiper's own page for the URL this record was built against is titled 'Scuba X1 Essential' — the entry model of an X1 Essential / X1 Pro / X1 Pro Max family — and its Amazon listing had no buying option at all. The owner supplied the Pro's listing and artwork and confirmed the Pro is what BotPlanet should sell. Every observation the record held was read from the Essential's page and was removed rather than carried across.",
+      "Aiper's own page for the URL this record was built against is titled 'Scuba X1 Essential' — the entry model of an X1 Essential / X1 Pro / X1 Pro Max family — and its Amazon listing had no buying option at all. The owner supplied the Pro's listing and artwork and confirmed the Pro is what BotPlanet should sell. The record then moved again the same day, to the Pro Max, when the owner supplied that listing instead. Every observation the record held was read from the Essential's page and was removed rather than carried across.",
+  },
+  "aiper-scuba-x1-pro": {
+    to: "aiper-scuba-x1-pro-max",
+    wasNamed: "Aiper Scuba X1 Pro",
+    isNamed: "Aiper Scuba X1 Pro Max",
+    changedOn: "2026-08-03",
+    reason:
+      "Held the Scuba X1 Pro for part of one day. The only listing supplied for the Pro turned out to be the base X1 bundled with a HydroComm Pro monitor, so the Pro never had a buy link; the owner then supplied the Pro Max, whose Amazon listing names itself unambiguously (Model Name \"Scuba X1 Pro Max\"). This URL was live briefly and is redirected rather than left to 404.",
   },
   "dolphin-premier": {
     to: "bublue-bubot-800p",
