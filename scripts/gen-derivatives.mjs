@@ -82,6 +82,7 @@ const SOURCES = [
   "/media/botmatch/explainer-desktop.webp",
   "/media/botmatch/explainer-mobile.webp",
   "/media/matcher/pool-bot-matcher.webp",
+  "/media/pool-category/feature-desktop.webp",
   "/media/pool/hero-desktop.webp",
   "/media/pool/hero-mobile.webp",
   "/media/pool/pool-type-inground.webp",

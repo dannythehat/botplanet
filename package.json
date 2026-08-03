@@ -16,7 +16,9 @@
     "typecheck": "tsc --build --pretty",
     "test": "vitest run",
     "test:watch": "vitest",
-    "db:generate": "cd packages/db && drizzle-kit generate"
+    "db:generate": "cd packages/db && drizzle-kit generate",
+    "gen:media-mapping": "tsx scripts/gen-media-mapping.ts",
+    "gen:derivatives": "node scripts/gen-derivatives.mjs"
   },
   "devDependencies": {
     "@types/node": "^22.10.0",

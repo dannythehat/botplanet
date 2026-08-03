@@ -181,6 +181,35 @@ export const ORIGINAL_ASSETS: MediaAssetRecord[] = [
       "Owner-created, supplied 3 August 2026 as a composed desktop/mobile pair. It shows all six categories linked to the matcher; only pool cleaners is live, so the copy beside it must keep saying so — see the section note on the homepage.",
   })),
   {
+    ...base("feature-pool-category-desktop", "botplanet_original"),
+    productId: null,
+    purpose: "Robotic pool cleaners feature section on the homepage",
+    exactModel: null,
+    type: "category_hero",
+    acquisitionMethod: "authored_in_house",
+    checksum: "sha256:d7e557392590cb1330b44fb75a3a77bde5a39cbe39b480916877d4cfb2df9688",
+    width: 1672,
+    height: 941,
+    src: "/media/pool-category/feature-desktop.webp",
+    // Decorative: every word and every button in this section is real HTML
+    // beside the picture, so the picture repeats nothing and names nothing.
+    // A described alt here would be the third telling of the same fact.
+    altText: "",
+    altTextStatus: "decorative",
+    schema: {
+      ...ORIGINAL_SCHEMA,
+      productImage: false,
+      reason:
+        "decorative section artwork showing a generic machine; it illustrates the category and depicts no product in the catalogue",
+    },
+    depictsRealProduct: false,
+    presentation: "bleed",
+    retrievedDate: "2026-08-03",
+    lastCheckedDate: "2026-08-03",
+    notes:
+      "Owner-created, supplied 3 August 2026. Composed with the left third dark and empty so the section's real headline and buttons sit over clean space rather than over detail. The robot is a rendered generic, deliberately not any brand's model.",
+  },
+  {
     ...base("promo-botmatch-pool", "botplanet_original"),
     productId: null,
     purpose: "BotMatch promotional panel on the robotic pool cleaners category page",

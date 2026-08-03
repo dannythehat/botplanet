@@ -17,6 +17,14 @@ const matcherImage = {
     "A BotMatch panel at the centre of six linked category tiles — pool cleaning, window cleaning, floor care, lawn and garden, security, and companion and service — showing a best-match result being confirmed.",
 };
 
+/* Robotic pool cleaners feature artwork. Decorative — the section's words and
+   buttons are real HTML beside it, never drawn into the picture. */
+const featureImage = {
+  src: "/media/pool-category/feature-desktop.webp",
+  width: 1672,
+  height: 941,
+};
+
 const categories = [
   { name: "Pool cleaning", description: "Robots that scrub floors, walls and waterlines.", state: "Live", href: live.hub, code: "01" },
   { name: "Window cleaning", description: "Glass-cleaning robots for homes and high-rise surfaces.", state: "In development", code: "02" },
@@ -174,18 +182,43 @@ const categories = [
     </div>
   </section>
 
-  <section class="live-category">
-    <div class="wrap live-category__grid">
-      <div>
-        <p class="kicker">FIRST LIVE ROBOT WORLD</p>
-        <h2>Robotic pool cleaners</h2>
-        <p class="large">
-          Our first complete category is live. This is the proving ground for BotPlanet’s evidence, comparison, offer and recommendation systems before they expand across the wider robotics market.
-        </p>
+  {/* The artwork is decorative and carries no words: every line and every
+      button here is real HTML, so Google reads them and a screen reader
+      announces them. Text drawn inside a picture is invisible to both.
+
+      It was composed with the left third dark and empty, so on desktop it
+      becomes the section's background and the copy sits in that space. Below
+      1000px overlaid text stops being reliably readable, so the picture
+      unhooks and stacks underneath instead. */}
+  <section class="live-category" aria-labelledby="live-category-heading">
+    <div class="wrap live-category__inner">
+      <div class="live-category__copy">
+        <p class="kicker">LIVE CATEGORY</p>
+        <h2 id="live-category-heading">Robotic pool cleaners</h2>
+        <p class="large">Find verified robots that scrub floors, walls and waterlines.</p>
+
+        <div class="live-category__actions">
+          <a class="btn btn--primary btn--lg" href={live.hub}>Browse pool-cleaning robots</a>
+          <a class="btn btn--quiet btn--lg" href={live.botmatch}>Find My Pool Cleaner</a>
+        </div>
+
+        <a class="live-category__more" href={live.compare}>Compare live models &#8594;</a>
       </div>
-      <div class="live-category__actions">
-        <a class="btn btn--primary btn--lg" href={live.hub}>Browse pool-cleaning robots</a>
-        <a class="text-link" href={live.compare}>Compare the live models →</a>
+
+      {/* Last in the DOM so it stacks under the copy on a phone. On desktop it
+          is taken out of the flow entirely, where source order stops mattering
+          and the z-index decides what sits in front. */}
+      <div class="live-category__media">
+        <img
+          src={featureImage.src}
+          srcset={srcsetFor(featureImage.src)}
+          sizes="100vw"
+          width={featureImage.width}
+          height={featureImage.height}
+          alt=""
+          loading="lazy"
+          decoding="async"
+        />
       </div>
     </div>
   </section>
@@ -335,13 +368,40 @@ const categories = [
   .world__state { align-self: flex-end; margin-top: -12px; color: #aeb4bc; font: 700 10px/1 var(--font-mono); letter-spacing: .12em; text-transform: uppercase; }
   .world h3 { margin: auto 0 12px; font-size: 27px; }.world p { color: var(--text-secondary); line-height: 1.55; }
   .world__action { margin-top: 18px; color: #eef0f3; font-weight: 700; }.world__action--quiet { color: #747b85; font-size: 13px; }
-  .live-category { padding: var(--section-gap) 0; border-top: 1px solid rgba(210,216,224,.1); border-bottom: 1px solid rgba(210,216,224,.1); background: radial-gradient(circle at 75% 40%,rgba(229,233,238,.09),transparent 25rem),#080a0d; }
-  .live-category__grid { display: grid; grid-template-columns: minmax(0,1.2fr) minmax(310px,.8fr); gap: 70px; align-items: center; }
-  .live-category__actions { display: grid; gap: 13px; }.text-link { color: #c8cdd4; text-align: center; text-decoration: none; font-weight: 700; }
+  /* ---------- live category feature ---------- */
+  .live-category { position: relative; isolation: isolate; overflow: hidden; padding: var(--section-gap) 0; border-top: 1px solid rgba(210,216,224,.1); border-bottom: 1px solid rgba(210,216,224,.1); background: #05070a; }
+  /* The copy carries the stacking context, not its wrapper: the picture is
+     absolutely positioned against the section so it can bleed past the wrap's
+     max-width, which it could not do if the wrap were the containing block. */
+  .live-category__copy { position: relative; z-index: 1; max-width: 34rem; }
+  .live-category h2 { margin: 0; }
+  .live-category .large { margin: 18px 0 0; max-width: 26rem; }
+  .live-category__actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+  .live-category__actions .btn { flex: 0 1 auto; }
+  .live-category__more { display: inline-block; margin-top: 20px; color: #c8cdd4; font-weight: 700; text-decoration: none; border-bottom: 1px solid rgba(200,205,212,.32); padding-bottom: 2px; transition: color .2s ease, border-color .2s ease; }
+  .live-category__more:hover { color: #fff; border-color: #fff; }
+  .text-link { color: #c8cdd4; text-align: center; text-decoration: none; font-weight: 700; }
+
+  /* Mobile and tablet: the picture is a stacked figure under the copy. */
+  .live-category__media { margin: 34px 0 0; border: 1px solid rgba(207,213,220,.18); border-radius: 18px; overflow: hidden; }
+  .live-category__media img { display: block; width: 100%; height: auto; }
+
+  @media (min-width: 1000px) {
+    /* The picture leaves the flow and becomes the section's own surface. */
+    .live-category { padding: clamp(96px,9vw,150px) 0; }
+    .live-category__media { position: absolute; inset: 0; z-index: 0; margin: 0; border: 0; border-radius: 0; }
+    /* object-position keeps the robot in frame when the section is shorter
+       than the file's 16:9, rather than cropping it away from the right. */
+    .live-category__media img { width: 100%; height: 100%; object-fit: cover; object-position: 82% center; }
+    /* The artwork is already dark on the left; this guarantees the contrast
+       rather than trusting it, at no visible cost on an image this dark. */
+    .live-category__media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg,#05070a 0%,rgba(5,7,10,.94) 26%,rgba(5,7,10,.6) 48%,rgba(5,7,10,.12) 68%,transparent 82%); }
+    .live-category__inner { min-height: 30rem; display: flex; align-items: center; }
+  }
   .system-grid { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 14px; }
   .system-grid article { padding: 25px; background: #090c0f; border: 1px solid rgba(207,213,220,.13); border-radius: 16px; }
   .system-grid span { color: #747b85; font: 700 12px/1 var(--font-mono); }.system-grid h3 { margin: 34px 0 12px; }.system-grid p { color: var(--text-secondary); line-height: 1.55; }
   .close { padding: clamp(70px,10vw,140px) 0; }.close__inner { text-align: center; }.close img { width: min(520px,82vw); height: auto; }.close p { margin: 20px auto 30px; color: var(--text-secondary); font-size: 20px; }
-  @media(max-width:960px){.live-category__grid{grid-template-columns:1fr}.world-grid{grid-template-columns:repeat(2,1fr)}.system-grid{grid-template-columns:repeat(2,1fr)}}
-  @media(max-width:620px){.hero{min-height:auto;padding:48px 0 70px}.hero__grid{gap:26px}h1{font-size:40px}.world-grid,.system-grid{grid-template-columns:1fr}.world{min-height:235px}.live-category__grid{gap:30px}.section-intro h2,.live-category h2,.system h2{font-size:40px}}
+  @media(max-width:960px){.world-grid{grid-template-columns:repeat(2,1fr)}.system-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:620px){.hero{min-height:auto;padding:48px 0 70px}.hero__grid{gap:26px}h1{font-size:40px}.world-grid,.system-grid{grid-template-columns:1fr}.world{min-height:235px}.section-intro h2,.live-category h2,.system h2{font-size:40px}.live-category__actions .btn{flex:1 1 100%}}
 </style>
