@@ -4,15 +4,15 @@
   "fieldsInRegistry": 31,
   "totals": {
     "fieldRecords": 310,
-    "evidenceRecords": 178,
+    "evidenceRecords": 165,
     "stateCounts": {
-      "populated": 171,
-      "unknown": 0,
+      "populated": 158,
+      "unknown": 7,
       "not_applicable": 23,
       "not_publicly_stated": 99,
       "conflicting": 2,
-      "suppressed": 15,
-      "pending_verification": 0
+      "suppressed": 16,
+      "pending_verification": 5
     },
     "reconciliation": {
       "agrees": 46,
@@ -24,8 +24,8 @@
       "newly_populated": 1,
       "not_applicable": 10
     },
-    "rawPercent": 60,
-    "weightedPercent": 67,
+    "rawPercent": 55,
+    "weightedPercent": 62,
     "conflicts": 4,
     "unresolvedConflicts": 2
   },
@@ -856,34 +856,35 @@
       "slug": "aiper-scuba-x1",
       "url": "https://botplanet.io/robots/robotic-pool-cleaners/aiper-scuba-x1/",
       "path": "/robots/robotic-pool-cleaners/aiper-scuba-x1/",
-      "canonicalName": "Aiper Scuba X1",
+      "canonicalName": "Aiper Scuba X1 Pro",
       "brand": "Aiper",
       "modelNumber": null,
-      "officialProductPage": "https://aiper.com/us/aiper-scuba-series/aiper-scuba-x1",
+      "officialProductPage": null,
       "manualUrl": null,
       "manualDocumentId": null,
       "manualRevision": null,
-      "modelIdentityNote": "Aiper's Scuba line includes SE, S1, S1 Pro, X1 and X1 Pro. No model number is published, so models can only be separated by page URL and by product name. No official manual index was found on aiper.com.",
-      "verificationDate": "2026-07-31",
+      "modelIdentityNote": "THIS RECORD CHANGED MODEL ON 3 AUGUST 2026, at the owner's direction, from the Aiper Scuba X1 to the Aiper Scuba X1 Pro. Everything that follows must be read in that light. Aiper's Scuba line runs SE, S1, S1 Pro, X1 Essential, X1 Pro and X1 Pro Max with no published model number, so models separate only by page URL and product name — and the page this record was originally built against is titled 'Scuba X1 Essential', meaning the stored specification described the entry model. Those observations have been REMOVED rather than carried across: they are evidence about a different machine, and no observation for the Pro has been read. No official Aiper page for the Pro was reachable (404), and the Amazon listing the owner supplied returns a bot-mitigation page to server-side reads. The identity therefore rests on the owner's confirmation alone, and the Pro's specification is unverified.",
+      "verificationDate": "2026-08-03",
       "sourcesUsed": 1,
       "sourcesUnreadable": [
         "https://aiper.com/us/pages/user-manual",
-        "https://aiper.com/pages/user-manuals"
+        "https://aiper.com/pages/user-manuals",
+        "https://aiper.com/us/aiper-scuba-series/aiper-scuba-x1-pro"
       ],
-      "completenessRawPercent": 54,
-      "completenessWeightedPercent": 62,
+      "completenessRawPercent": 7,
+      "completenessWeightedPercent": 10,
       "fieldsApplicable": 28,
-      "fieldsPublishable": 15,
+      "fieldsPublishable": 2,
       "weightApplicable": 102,
-      "weightPublishable": 63,
+      "weightPublishable": 10,
       "fieldStates": {
-        "populated": 15,
-        "unknown": 0,
+        "populated": 2,
+        "unknown": 7,
         "not_applicable": 3,
         "not_publicly_stated": 12,
         "conflicting": 0,
-        "suppressed": 1,
-        "pending_verification": 0
+        "suppressed": 2,
+        "pending_verification": 5
       },
       "fieldsNotPubliclyStated": [
         "modelNumber",
@@ -900,6 +901,7 @@
         "remoteControl"
       ],
       "fieldsSuppressed": [
+        "navigation",
         "warranty"
       ],
       "fieldsConflicting": [],
@@ -926,21 +928,36 @@
         "readyForBotMatch": false
       },
       "publicationBlockers": [
-        "weighted completeness 62% against a 65% floor",
-        "insufficient evidence coverage for review section(s): Living with it",
-        "comparison field unavailable: warranty"
+        "no accepted official manufacturer page",
+        "no accepted manual",
+        "no reliably established model number",
+        "weighted completeness 10% against a 65% floor",
+        "insufficient evidence coverage for review section(s): What it is, Where it fits, What it cleans, How it runs, Living with it",
+        "review section(s) would rest on suppressed value(s): navigation",
+        "comparison field unavailable: powerType",
+        "comparison field unavailable: poolTypes",
+        "comparison field unavailable: poolSizeSuitability",
+        "comparison field unavailable: runtimeMins",
+        "comparison field unavailable: surfacesCleaned",
+        "comparison field unavailable: filtration",
+        "comparison field unavailable: warranty",
+        "BotMatch field unavailable: powerType",
+        "BotMatch field unavailable: poolTypes",
+        "BotMatch field unavailable: poolSizeSuitability",
+        "BotMatch field unavailable: surfacesCleaned",
+        "BotMatch field unavailable: appSupport"
       ],
-      "launchStatus": "limited_factual_use",
+      "launchStatus": "candidate_under_review",
       "reviewGates": [
         {
           "gate": "weighted_completeness",
           "passed": false,
-          "detail": "weighted completeness 62% against a 65% floor"
+          "detail": "weighted completeness 10% against a 65% floor"
         },
         {
           "gate": "model_identity",
-          "passed": true,
-          "detail": "identified by https://aiper.com/us/aiper-scuba-series/aiper-scuba-x1, model number not published by the maker, no manual accepted"
+          "passed": false,
+          "detail": "no accepted official manufacturer page for this exact model"
         },
         {
           "gate": "no_material_conflict",
@@ -950,12 +967,12 @@
         {
           "gate": "review_sections_writable",
           "passed": false,
-          "detail": "insufficient evidence coverage for review section(s): Living with it"
+          "detail": "insufficient evidence coverage for review section(s): What it is, Where it fits, What it cleans, How it runs, Living with it"
         },
         {
           "gate": "no_speculation",
-          "passed": true,
-          "detail": "no review section rests on a suppressed value"
+          "passed": false,
+          "detail": "review section(s) would rest on suppressed value(s): navigation"
         },
         {
           "gate": "corrections_identified",
@@ -966,8 +983,8 @@
       "evidenceQualification": null,
       "warrantyStatus": "not_confirmed",
       "warrantyPublicWording": "Manufacturer warranty term not confirmed",
-      "claimsPublishable": 11,
-      "claimsBlocked": 5
+      "claimsPublishable": 0,
+      "claimsBlocked": 15
     },
     {
       "productId": "prod-aiper-scuba-s1",

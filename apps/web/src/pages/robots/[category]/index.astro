@@ -2,6 +2,7 @@
 import Base from "../../../layouts/Base.astro";
 import ProductCard from "../../../components/ProductCard.astro";
 import { journeyFor } from "../../../content/journeys";
+import { displayName } from "../../../content/product-names";
 import { getDb, schema } from "../../../lib/db";
 import { usd, titleCase } from "../../../lib/format";
 import { and, eq, inArray } from "drizzle-orm";
@@ -212,7 +213,7 @@ const pageSchema = hero
       {products.map((p, i) => (
         <ProductCard
           href={`/robots/${cat.slug}/${p.slug}/`}
-          name={p.name}
+          name={displayName(p.id, p.name)}
           classification={titleCase(p.productClass)}
           meta={[titleCase(p.powerType), ...(p.environments as string[]).slice(0, 2).map(titleCase)]}
           price={minPrice(p.id) != null ? `from ${usd(minPrice(p.id))}` : null}

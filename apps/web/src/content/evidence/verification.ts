@@ -652,42 +652,60 @@ const beatbotAquasense2Ultra: ProductVerification = {
 
 /* ------------------------------------------------------------------ */
 
+/* This URL was recorded as "the X1". Re-read on 3 August 2026 it is titled     */
+/* "Scuba X1 Essential In-Ground Pool Cleaner" — the ENTRY model of the X1      */
+/* family, not the Pro. It is kept as a source check, and is no longer this     */
+/* record's product page.                                                      */
 const X1_PAGE = "https://aiper.com/us/aiper-scuba-series/aiper-scuba-x1";
-const X1_TITLE = "Aiper Scuba X1 — official US product page";
+const X1_TITLE = "Aiper Scuba X1 Essential — official US product page (the base model, not the Pro)";
+const X1_MOVED = "2026-08-03";
 
 const aiperScubaX1: ProductVerification = {
   productId: "prod-aiper-scuba-x1",
-  checkedOn: D,
+  checkedOn: X1_MOVED,
   identity: {
     brand: "Aiper",
-    canonicalName: "Aiper Scuba X1",
+    canonicalName: "Aiper Scuba X1 Pro",
     modelNumber: null,
     modelNumberSource: null,
-    officialProductPageUrl: X1_PAGE,
+    // No readable official page for the Pro: aiper.com/us/aiper-scuba-series/
+    // aiper-scuba-x1-pro returns 404. Recording the Essential's page here would
+    // attach the wrong machine's specification to this record.
+    officialProductPageUrl: null,
     manual: null,
     identityIssue:
-      "Aiper's Scuba line includes SE, S1, S1 Pro, X1 and X1 Pro. No model number is published, so models can only be separated by page URL and by product name. No official manual index was found on aiper.com.",
+      "THIS RECORD CHANGED MODEL ON 3 AUGUST 2026, at the owner's direction, from the Aiper Scuba X1 to the Aiper Scuba X1 Pro. Everything that follows must be read in that light. Aiper's Scuba line runs SE, S1, S1 Pro, X1 Essential, X1 Pro and X1 Pro Max with no published model number, so models separate only by page URL and product name — and the page this record was originally built against is titled 'Scuba X1 Essential', meaning the stored specification described the entry model. Those observations have been REMOVED rather than carried across: they are evidence about a different machine, and no observation for the Pro has been read. No official Aiper page for the Pro was reachable (404), and the Amazon listing the owner supplied returns a bot-mitigation page to server-side reads. The identity therefore rests on the owner's confirmation alone, and the Pro's specification is unverified.",
   },
   sourceChecks: [
     { url: X1_PAGE, title: X1_TITLE, status: "ok" },
     { url: "https://aiper.com/us/pages/user-manual", title: "Aiper manual index (attempted)", status: "unreadable", note: "HTTP 404." },
     { url: "https://aiper.com/pages/user-manuals", title: "Aiper manual index (attempted, alternate path)", status: "unreadable", note: "HTTP 404." },
-    { url: "https://www.amazon.com/AIPER-High-Power-Horizontal-Waterline-Scrubbing/dp/B0F9WN961G", title: "Amazon US listing", status: "not_rechecked", note: "Retailer listing; manufacturer source checked instead." },
+    {
+      url: "https://aiper.com/us/aiper-scuba-series/aiper-scuba-x1-pro",
+      title: "Aiper Scuba X1 Pro — official page (attempted)",
+      status: "unreadable",
+      note: "HTTP 404 on 3 August 2026. No official Aiper page for the Pro was found, which is why this record carries no product page URL.",
+    },
+    {
+      url: "https://www.amazon.com/AIPER-High-Power-Horizontal-Waterline-Scrubbing/dp/B0F9WN961G",
+      title: "Amazon US listing (B0F9WN961G) — retired, and it had nothing to buy",
+      status: "not_rechecked",
+      note: "Was the destination until 3 August 2026. It never confirmed its own model — title 'AIPER Pool Cleaner', model name and model number both 'Blue' — and the SerpApi read of 31 July found no buying option at all, so the buy button led to a listing nobody could purchase from.",
+    },
+    {
+      url: "https://www.amazon.com/AIPER-Scuba-X1-Pro-Underwater/dp/B0GVT2YPLB",
+      title: "Amazon US listing (B0GVT2YPLB) — current destination, supplied by the owner",
+      status: "not_rechecked",
+      note: "Supplied and confirmed by the owner on 3 August 2026. Not independently read: Amazon returns a bot-mitigation page to server-side requests. The listing URL names the X1 Pro and the owner's artwork shows 'SCUBA X1 PRO' on the machine's body, which is consistent, but neither is a reading of the listing itself.",
+    },
   ],
-  observations: [
-    { field: "powerType", value: "Cordless", sourceUrl: X1_PAGE, sourceTitle: X1_TITLE, observedOn: D },
-    { field: "runtimeMins", value: "Up to 180 minutes", sourceUrl: X1_PAGE, sourceTitle: X1_TITLE, observedOn: D },
-    { field: "chargeTimeHrs", value: "4 hours", sourceUrl: X1_PAGE, sourceTitle: X1_TITLE, observedOn: D },
-    { field: "poolSizeSuitability", value: "2150 sq.ft (200㎡) / 66ft (20m)", sourceUrl: X1_PAGE, sourceTitle: X1_TITLE, observedOn: D },
-    { field: "poolTypes", value: "In-ground", sourceUrl: X1_PAGE, sourceTitle: X1_TITLE, observedOn: D },
-    { field: "surfaceTypes", value: "concrete, fiberglass, vinyl, tiles", sourceUrl: X1_PAGE, sourceTitle: X1_TITLE, observedOn: D },
-    { field: "surfacesCleaned", value: "floor, walls and waterline", sourceUrl: X1_PAGE, sourceTitle: X1_TITLE, observedOn: D },
-    { field: "filtration", value: "MicroMesh™ ultra-fine filter", sourceUrl: X1_PAGE, sourceTitle: X1_TITLE, observedOn: D },
-    { field: "filtrationMicrons", value: "3 μm", sourceUrl: X1_PAGE, sourceTitle: X1_TITLE, observedOn: D },
-    { field: "navigation", value: "WavePath 3.0", sourceUrl: X1_PAGE, sourceTitle: X1_TITLE, observedOn: D },
-    { field: "appSupport", value: "App control", sourceUrl: X1_PAGE, sourceTitle: X1_TITLE, observedOn: D },
-    { field: "includedAccessories", value: "DC charger, charging dock, retrieval hook, extra 3μm filter, user manual", sourceUrl: X1_PAGE, sourceTitle: X1_TITLE, observedOn: D },
-  ],
+  /* Deliberately empty. Every observation previously here was read from the
+     Scuba X1 Essential's page and is evidence about a different machine. They
+     were removed when this record moved to the Pro rather than relabelled —
+     carrying them across is exactly the substitution this registry exists to
+     prevent. Nothing on this product may be stated as fact until a readable
+     source for the Pro is found. */
+  observations: [],
   notPubliclyStated: [
     { field: "warranty", checked: [X1_PAGE], note: "No warranty term stated anywhere on the official product page." },
     { field: "weightLbs", checked: [X1_PAGE], note: "Not published." },

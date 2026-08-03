@@ -50,11 +50,23 @@ const AMAZON_ASINS: { productId: string; asin: string; sourceUrl: string }[] = [
   // bot-mitigation page to server-side reads. The previous identity check is
   // kept below, and now applies only to the ASIN it actually examined.
   { productId: "prod-beatbot-aquasense-2-ultra", asin: "B0G7B6F5FZ", sourceUrl: "Owner-confirmed 2026-08-03: https://www.amazon.com/Beatbot-AquaSense-Ultra-Cordless-Clarification/dp/B0G7B6F5FZ" },
-  { productId: "prod-aiper-scuba-x1", asin: "B0F9WN961G", sourceUrl: "https://www.amazon.com/AIPER-High-Power-Horizontal-Waterline-Scrubbing/dp/B0F9WN961G" },
+  // REPLACES B0F9WN961G, and replaces the MODEL with it. That listing could not
+  // name its own model — "Blue" in both the model name and model number fields —
+  // and the SerpApi read of 31 July found no buying option at all, so the buy
+  // button pointed at something nobody could purchase. The owner supplied the
+  // X1 Pro's listing and confirmed the Pro is what BotPlanet should sell; the
+  // verification record moved to the Pro with it, and the Essential's stored
+  // specification was removed rather than carried across.
+  { productId: "prod-aiper-scuba-x1", asin: "B0GVT2YPLB", sourceUrl: "Owner-confirmed 2026-08-03: https://www.amazon.com/AIPER-Scuba-X1-Pro-Underwater/dp/B0GVT2YPLB" },
   // Discovered by the SerpApi run of 2026-07-31 and matched on the details
   // table, not the title — see serpapi-observations.ts for what each read.
   { productId: "prod-dolphin-e10", asin: "B0GV15VY1N", sourceUrl: "SerpApi Amazon search, 2026-07-31: details table gives brand Dolphin, model name E10" },
-  { productId: "prod-aiper-seagull-se", asin: "B0H5PY2SPF", sourceUrl: "SerpApi Amazon search, 2026-07-31: details table gives brand AIPER, model Seagull SE ZT20032026" },
+  // REPLACES B0H5PY2SPF at the owner's direction, 3 August 2026. Both listings
+  // are live. Same trade as the Beatbot: the retired ASIN was machine-read
+  // (brand AIPER, model Seagull SE ZT20032026, sold by the brand's own
+  // storefront), this one rests on the owner's confirmation, so the destination
+  // drops to researched_exact.
+  { productId: "prod-aiper-seagull-se", asin: "B0DJ6MV81N", sourceUrl: "Owner-confirmed 2026-08-03: https://www.amazon.com/AIPER-Cordless-Self-Parking-Technology-Above-Ground/dp/B0DJ6MV81N" },
   // Owner-supplied and owner-confirmed, 3 August 2026. Identity rests on the
   // owner's confirmation rather than a listing read — see the matching records
   // in evidence/verification.ts, which say so plainly.
@@ -122,6 +134,8 @@ export const IDENTITY_CHECKS: Record<string, IdentityCheck> = {
       "SerpApi details table: brand 'Dolphin', model name 'E10'. The model NUMBER field reads '1', which is junk and carries no weight either way; the match rests on brand plus model name plus a title naming the E10. The same search returned Nautilus AG, CC, CC Pro and CC Supreme as separate listings, so the siblings are distinguishable.",
     checkedOn: "2026-07-31",
   },
+  // RETIRED, kept for the same reason as the Beatbot's: the reading was real,
+  // and it applies to B0H5PY2SPF only.
   "prod-aiper-seagull-se": {
     asin: "B0H5PY2SPF",
     confirmed: true,
@@ -129,6 +143,10 @@ export const IDENTITY_CHECKS: Record<string, IdentityCheck> = {
       "SerpApi details table: brand 'AIPER'; model name and model number both 'Seagull SE ZT20032026'. Sold by AiperDirect, the brand's own storefront. A renewed listing and a charger accessory in the same search were refused.",
     checkedOn: "2026-07-31",
   },
+  // RETIRED TWICE OVER: this examined B0F9WN961G, which is no longer the
+  // destination, for the Scuba X1, which is no longer the model this record
+  // holds. Kept because "the listing we used to point at could not name itself
+  // and had nothing to buy" is the reason the swap happened.
   "prod-aiper-scuba-x1": {
     asin: "B0F9WN961G",
     confirmed: false,

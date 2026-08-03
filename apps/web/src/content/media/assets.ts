@@ -272,6 +272,24 @@ const OWNER_ARTWORK: OwnerArtwork[] = [
       "the grey and blue tracked cleaner resting on stone coping beside a curved pool at dusk, with callouts for navigation, wall and waterline cleaning and top-load filtration",
   },
   {
+    slug: "aiper-scuba-x1",
+    file: "aiper-scuba-x1.webp",
+    checksum: "sha256:cb85855c187847ea25c9aef6fdcc50c65a7bb05d9f4cf715968f224c2d5e62d9",
+    width: 1254,
+    height: 1254,
+    scene:
+      "the black cleaner upright on its charging stand beside a lit pool and waterfall at dusk, 'SCUBA X1 PRO' printed on its front, with a phone showing the Aiper app and callouts for app control, floor, wall and waterline cleaning, cordless running and navigation",
+  },
+  {
+    slug: "aiper-seagull-se",
+    file: "aiper-seagull-se.webp",
+    checksum: "sha256:8a2ea0d26ab0dc08090cb46927106f189c210fc8111fd62347ab53dcd8142f2d",
+    width: 1254,
+    height: 1254,
+    scene:
+      "the compact grey cleaner on poolside paving next to its retrieval hook, 'SEAGULL SE' on the carry handle, with callouts for cordless running, self-parking, easy retrieval and a compact build",
+  },
+  {
     slug: "beatbot-aquasense-2-ultra",
     file: "beatbot-aquasense-2-ultra.webp",
     checksum: "sha256:ed6e41162f96875cda3a335032630e6bf24fa2a5fec5fb32094c681edd8aaa6f",

@@ -7,6 +7,7 @@ import { breadcrumbsFor } from "../../../lib/routing";
 import { buildOffers, publicationFor } from "../../../lib/offer-truth";
 import { retailer } from "../../../content/commerce/registry";
 import { catalogueStatusOf, CATALOGUE_WITHDRAWALS } from "../../../content/products";
+import { displayName } from "../../../content/product-names";
 import { latestAcceptedForProduct } from "../../../lib/providers/refresh-store";
 
 const { category, slug } = Astro.params;
@@ -68,14 +69,17 @@ const evidence = await db
   .from(schema.evidence)
   .where(eq(schema.evidence.productId, product.id));
 
-const crumbs = breadcrumbsFor(Astro.url.pathname, product?.name);
+/* The repo is the authority on which machine a record describes; D1 supplies
+   the name only when the two agree. See content/product-names.ts. */
+const shownName = displayName(product.id, product.name);
+const crumbs = breadcrumbsFor(Astro.url.pathname, shownName);
 ---
 
-<Base title={`${product.name} — BotPlanet`} description={`${product.name}: specs, offers and suitability.`} breadcrumbs={crumbs}>
+<Base title={`${shownName} — BotPlanet`} description={`${shownName}: specs, offers and suitability.`} breadcrumbs={crumbs}>
   <p class="muted"><a href={`/robots/${category}/`}>← {titleCase(category!)}</a></p>
   <div class="row" style="justify-content:space-between; align-items:flex-start;">
     <div>
-      <h1>{product.name}</h1>
+      <h1>{shownName}</h1>
       <div class="row">
         <span class="pill class">{titleCase(product.productClass)}</span>
         <span class="pill">{titleCase(product.powerType)}</span>

@@ -1,6 +1,7 @@
 # Owner-created product artwork — rights record
 
-Supplied by Danny on 3 August 2026 (five, then the WYBOT C1, then the Beatbot).
+Supplied by Danny on 3 August 2026, in batches: five, then the WYBOT C1, then
+the Beatbot, then the Aiper pair.
 Optimised from
 PNG masters to WebP; no
 crop, no recolour, no removal of in-image text or branding.
@@ -19,6 +20,8 @@ because it contains text.
 | `aiper-scuba-v3-ai-vision.webp` | Aiper Scuba V3 AI Vision | 1254×1254 PNG, 2.0 MB | 1200×1200, 171 KB |
 | `wybot-c1.webp` | WYBOT C1 | 1254×1254 PNG | 1254×1254, 158 KB |
 | `beatbot-aquasense-2-ultra.webp` | Beatbot AquaSense 2 Ultra | 1254×1254 PNG | 1254×1254, 159 KB |
+| `aiper-scuba-x1.webp` | Aiper Scuba X1 **Pro** | 1254×1254 PNG | 1254×1254, 189 KB |
+| `aiper-seagull-se.webp` | Aiper Seagull SE | 1254×1254 PNG | 1254×1254, 181 KB |
 
 ## Rights status
 
@@ -46,7 +49,7 @@ They are **not** eligible for `Product` structured data: a schema consumer reads
 that field as a photograph of the product, and these carry BotPlanet branding
 and headline text set into the image.
 
-Two of the seven — **Dolphin Proteus DX4 Plus** and **Aiper Scuba V3 AI Vision** —
+Two of the nine — **Dolphin Proteus DX4 Plus** and **Aiper Scuba V3 AI Vision** —
 have verification records and live D1 product rows but no editorial record yet.
 Their identity is owner-confirmed rather than source-verified, and Notion still
 lists both as pending exact ASIN and redirect verification, so neither may ship
@@ -61,7 +64,17 @@ is owner-confirmed rather than machine-read, so it is held at
 C1 Max under near-identical titles.
 
 Danny has said more detailed photography will follow for the individual review
-pages. These seven are the lead category-page visuals.
+pages. These nine are the lead category-page visuals.
+
+## The Aiper X1 file name
+
+`aiper-scuba-x1.webp` shows the **X1 Pro** — the machine's body reads
+"SCUBA X1 PRO" — and is attached to `prod-aiper-scuba-x1`, whose record moved
+from the base X1 to the Pro on 3 August 2026 at the owner's direction. The file
+name follows the product ID, not the model, exactly as every other file here
+does. The model it depicts is named in the asset record and is checked against
+the verification registry on every test run, so the file name cannot cause a
+mismatch.
 
 ## One naming note
 

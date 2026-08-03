@@ -280,10 +280,14 @@ describe("catalogue ingestion behaviour", () => {
 });
 
 describe("Aiper public fallback", () => {
-  it("still renders the branded placeholder for all three Aiper products", () => {
+  it("never renders a CJ creative for an Aiper product", () => {
+    // Aiper's CJ catalogue is empty and its approved creatives are seasonal
+    // banners, so nothing from the network may stand in for a product. What
+    // renders is either BotPlanet's own artwork or the branded placeholder —
+    // and neither is ever offered to Product structured data.
     for (const id of AIPER_IDS) {
       const r = resolveImage(id, "listing_card", ["product_hero", "branded_placeholder"])!;
-      expect(r.isPlaceholder).toBe(true);
+      expect(r.assetId).toMatch(/^(art|ph)-/);
       expect(r.schemaProductImage).toBe(false);
     }
   });

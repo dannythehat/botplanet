@@ -251,13 +251,30 @@ describe("field states", () => {
     expect(LEDGER.fields).toHaveLength(FIELD_REGISTRY.length * LAUNCH_PRODUCT_COUNT);
   });
 
-  it("leaves nothing in the 'nobody looked' state after the verification pass", () => {
-    expect(REPORT.totals.stateCounts.unknown).toBe(0);
+  /**
+   * One product is mid-move. On 3 August 2026 the Scuba X1 record was pointed
+   * at the Scuba X1 Pro at the owner's direction, and every observation it
+   * held was removed — they were read from the X1 Essential's page and are
+   * evidence about a different machine. So its fields are legitimately back in
+   * the 'nobody looked' state until the Pro is researched.
+   *
+   * The allowance is scoped to that one product on purpose. Any OTHER product
+   * drifting into these states still fails, which is what these tests are for.
+   */
+  const AWAITING_REVERIFICATION = "prod-aiper-scuba-x1";
+
+  it("leaves nothing in the 'nobody looked' state, except a record awaiting re-verification", () => {
+    const stranded = LEDGER.fields.filter((f) => f.state === "unknown");
+    expect(new Set(stranded.map((f) => f.productId))).toEqual(new Set([AWAITING_REVERIFICATION]));
   });
 
-  it("leaves nothing unverified after the verification pass", () => {
-    expect(REPORT.totals.stateCounts.pending_verification).toBe(0);
-    for (const e of LEDGER.evidence) expect(e.verifiedDate).toBe(VERIFICATION_DATE);
+  it("leaves nothing unverified, except a record awaiting re-verification", () => {
+    const pending = LEDGER.fields.filter((f) => f.state === "pending_verification");
+    expect(new Set(pending.map((f) => f.productId)).size).toBeLessThanOrEqual(1);
+    for (const f of pending) expect(f.productId).toBe(AWAITING_REVERIFICATION);
+    // Never earlier than the pass. A record re-checked later carries its own
+    // date; one dated before the pass would mean stale evidence had crept back.
+    for (const e of LEDGER.evidence) expect(e.verifiedDate >= VERIFICATION_DATE).toBe(true);
   });
 
   it("separates 'the maker does not publish it' from 'we are withholding what we had'", () => {
@@ -614,7 +631,10 @@ describe("Notion register mapping", () => {
     for (const r of mapping.rows) {
       expect(r.canonicalName.length).toBeGreaterThan(3);
       expect(r.brand.length).toBeGreaterThan(2);
-      expect(r.verificationDate).toBe(VERIFICATION_DATE);
+      // A record that has been re-checked since the pass carries its own,
+      // later date. Pinning every row to the pass date would mean a record
+      // could never be revisited without failing a test.
+      expect(r.verificationDate >= VERIFICATION_DATE).toBe(true);
     }
   });
 
