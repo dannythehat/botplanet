@@ -80,7 +80,17 @@ export function organizationSchema() {
     "@id": `${SITE_URL}/#organization`,
     name: "BotPlanet",
     url: SITE_URL,
-    logo: absUrl("/favicon.svg"),
+    /* The brand logo, not the favicon. This used to point at /favicon.svg —
+       a 16px browser-tab glyph offered to Google as the organisation's logo,
+       which is the wrong image and too small to be used for anything. */
+    logo: {
+      "@type": "ImageObject",
+      "@id": `${SITE_URL}/#logo`,
+      url: absUrl("/logo/botplanet-chrome-760w.webp"),
+      width: 760,
+      height: 229,
+      caption: "BotPlanet",
+    },
     description:
       "BotPlanet helps people discover, compare and choose useful real-world robots, starting with robotic pool cleaners in the United States.",
     slogan: SITE.tagline,
@@ -94,6 +104,40 @@ export function websiteSchema() {
     url: SITE_URL,
     name: "BotPlanet",
     publisher: { "@id": `${SITE_URL}/#organization` },
+    inLanguage: "en-US",
+    /* Declared only because /search/ genuinely answers ?q= — this is the one
+       schema property that makes a promise Google will follow and test. */
+    potentialAction: {
+      "@type": "SearchAction",
+      target: {
+        "@type": "EntryPoint",
+        urlTemplate: `${SITE_URL}/search/?q={search_term_string}`,
+      },
+      "query-input": "required name=search_term_string",
+    },
+  };
+}
+
+/**
+ * The page itself, tied to the site and the organisation.
+ *
+ * Without this the graph described a website and a company but never the
+ * document being read, leaving every page anonymous inside its own markup.
+ */
+export function webPageSchema(input: {
+  path: string;
+  name: string;
+  description: string;
+  type?: "WebPage" | "CollectionPage" | "AboutPage" | "ContactPage";
+}) {
+  return {
+    "@type": input.type ?? "WebPage",
+    "@id": `${absUrl(input.path)}#webpage`,
+    url: absUrl(input.path),
+    name: input.name,
+    description: input.description,
+    isPartOf: { "@id": `${SITE_URL}/#website` },
+    about: { "@id": `${SITE_URL}/#organization` },
     inLanguage: "en-US",
   };
 }
