@@ -11,7 +11,8 @@ import CoverageRows from "../../components/CoverageRows.astro";
 import DecisionSplit from "../../components/DecisionSplit.astro";
 import MatrixTable from "../../components/MatrixTable.astro";
 import CheckList from "../../components/CheckList.astro";
-import { decisionSectionFor, coverageSectionFor, splitSectionFor, matrixSectionFor, checkSectionFor } from "../../content/category-sections";
+import PriceLadder from "../../components/PriceLadder.astro";
+import { decisionSectionFor, coverageSectionFor, splitSectionFor, matrixSectionFor, checkSectionFor, priceSectionFor } from "../../content/category-sections";
 import { collectionPageSchema, imageObjectSchema, schemaGraph, breadcrumbSchema } from "../../lib/seo";
 
 import "../../styles/tokens.css";
@@ -27,6 +28,7 @@ const coverage = coverageSectionFor("robotic-pool-cleaners")!;
 const split = splitSectionFor("robotic-pool-cleaners")!;
 const matrix = matrixSectionFor("robotic-pool-cleaners")!;
 const check = checkSectionFor("robotic-pool-cleaners")!;
+const price = priceSectionFor("robotic-pool-cleaners")!;
 
 const editorialImages = [
   { path: hero.image!.src, caption: hero.image!.alt, width: 1600, height: 900 },
@@ -86,6 +88,7 @@ const graph = schemaGraph(
       <DecisionSplit id={split.id} eyebrow={split.eyebrow} title={split.title} intro={split.intro} panels={split.panels} />
       <MatrixTable id={matrix.id} eyebrow={matrix.eyebrow} title={matrix.title} intro={matrix.intro} columns={matrix.columns} rows={matrix.rows} note={matrix.note} />
       <CheckList id={check.id} eyebrow={check.eyebrow} title={check.title} intro={check.intro} boxLabel={check.boxLabel} items={check.items} />
+      <PriceLadder id={price.id} eyebrow={price.eyebrow} title={price.title} intro={price.intro} rungs={price.rungs} note={price.note} />
     </main>
   </body>
 </html>

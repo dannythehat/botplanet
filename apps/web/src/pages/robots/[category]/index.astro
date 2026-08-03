@@ -14,7 +14,8 @@ import CoverageRows from "../../../components/CoverageRows.astro";
 import DecisionSplit from "../../../components/DecisionSplit.astro";
 import MatrixTable from "../../../components/MatrixTable.astro";
 import CheckList from "../../../components/CheckList.astro";
-import { decisionSectionFor, coverageSectionFor, splitSectionFor, matrixSectionFor, checkSectionFor } from "../../../content/category-sections";
+import PriceLadder from "../../../components/PriceLadder.astro";
+import { decisionSectionFor, coverageSectionFor, splitSectionFor, matrixSectionFor, checkSectionFor, priceSectionFor } from "../../../content/category-sections";
 
 const { category } = Astro.params;
 const db = getDb(Astro.locals);
@@ -50,6 +51,7 @@ const coverage = coverageSectionFor(category);
 const split = splitSectionFor(category);
 const matrix = matrixSectionFor(category);
 const check = checkSectionFor(category);
+const price = priceSectionFor(category);
 
 /* Schema is built from the images this page actually renders, so every
    ImageObject has visible content behind it. Product, Review and
@@ -140,6 +142,10 @@ const pageSchema = hero
 
   {check && (
     <CheckList id={check.id} eyebrow={check.eyebrow} title={check.title} intro={check.intro} boxLabel={check.boxLabel} items={check.items} />
+  )}
+
+  {price && (
+    <PriceLadder id={price.id} eyebrow={price.eyebrow} title={price.title} intro={price.intro} rungs={price.rungs} note={price.note} />
   )}
 
   {products.length === 0 ? (

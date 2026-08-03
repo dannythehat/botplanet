@@ -21,6 +21,7 @@ import type { CoverageRow } from "../components/CoverageRows.astro";
 import type { SplitPanel } from "../components/DecisionSplit.astro";
 import type { MatrixRow } from "../components/MatrixTable.astro";
 import type { CheckItem } from "../components/CheckList.astro";
+import type { PriceRung } from "../components/PriceLadder.astro";
 import type { HeroImage } from "../components/CategoryHero.astro";
 
 export interface DecisionSectionContent {
@@ -427,4 +428,81 @@ export const CHECK_SECTION: Record<string, CheckSectionContent> = {
 
 export function checkSectionFor(slug: string | undefined): CheckSectionContent | undefined {
   return slug ? CHECK_SECTION[slug] : undefined;
+}
+
+
+/* ============================================================
+   Section 7 — cost.
+
+   Pool wording follows the approved Notion research ("How much
+   does a robotic pool cleaner cost?"), including its constraint:
+   researched price bands only once the current products are
+   verified. They are not, so no figure is printed. Every rung
+   shows "Check current price" until a dated, sourced check
+   exists — the component takes a price with its date and seller
+   the moment one does.
+
+   This answers the price objection without becoming a deals
+   page: what drives the number, and what each step up buys.
+   ============================================================ */
+
+export interface PriceSectionContent {
+  id: string;
+  eyebrow?: string;
+  title: string;
+  intro: string;
+  rungs: PriceRung[];
+  note?: string;
+}
+
+export const PRICE_SECTION: Record<string, PriceSectionContent> = {
+  "robotic-pool-cleaners": {
+    id: "cost",
+    eyebrow: "Cost",
+    title: "How much does a robotic pool cleaner cost?",
+
+    /* 74 words. */
+    intro:
+      "There is no single answer, because a robotic pool cleaner is really four different " +
+      "machines sold under one name. What moves the price is how much of the pool it reaches, " +
+      "how finely it filters, how it navigates, and whether there is a battery and an app " +
+      "involved. Prices also move week to week, so a figure printed here would be wrong by the " +
+      "time you read it. What follows is what each step up actually buys.",
+
+    rungs: [
+      {
+        label: "Entry",
+        what:
+          "Floor cleaning and not much above it. Shorter cycles, simpler filters, lighter " +
+          "build. Genuinely enough for a small flat-bottomed pool where the dirt settles.",
+      },
+      {
+        label: "Mid",
+        what:
+          "Wall climbing starts to appear, filtration gets finer and cycles get longer. Often " +
+          "the first point at which scheduling shows up. The busiest part of the market.",
+      },
+      {
+        label: "Upper",
+        what:
+          "Floor, walls and waterline together, with navigation that maps the pool rather than " +
+          "bouncing around it, and app control that is worth having rather than a gimmick.",
+      },
+      {
+        label: "Top",
+        what:
+          "Cordless convenience at larger pool sizes, the longest runtimes, the finest filters, " +
+          "and extras like surface skimming or a charging dock. Diminishing returns on a small pool.",
+      },
+    ],
+
+    note:
+      "We do not print a price we have not checked. When a figure appears here it carries the " +
+      "date it was checked and who was selling it — the retailer and a marketplace seller on the " +
+      "same site are not the same thing, and their prices can differ.",
+  },
+};
+
+export function priceSectionFor(slug: string | undefined): PriceSectionContent | undefined {
+  return slug ? PRICE_SECTION[slug] : undefined;
 }
