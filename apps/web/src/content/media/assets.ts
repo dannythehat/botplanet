@@ -116,8 +116,8 @@ export const ORIGINAL_ASSETS: MediaAssetRecord[] = [
   },
   ...(
     [
-      ["hero-home-desktop", "/media/home/hero-desktop.webp", 1672, 941, "sha256:2c5967d28938e40c395277b7416cdb5982778c3e82cbc95b37a60e6590fd5765"],
-      ["hero-home-mobile", "/media/home/hero-mobile.webp", 1100, 1375, "sha256:ed375c791ee6443f4c613cb9cb2a69b629a2f1cf9317fc8cc2ac41e4e4984198"],
+      ["hero-home-desktop", "/media/home/hero-desktop.webp", 1672, 941, "sha256:ce8f54daae0b0f6f71a1eb087a47b22e2b128846cd95dcd58d77af2374728f28"],
+      ["hero-home-mobile", "/media/home/hero-mobile.webp", 941, 1672, "sha256:fed2c212c664eb81cdacd759cf827d48fd9b521a60b3f18d6b3a5c97a0449ae6"],
     ] as const
   ).map(([id, src, width, height, checksum]): MediaAssetRecord => ({
     ...base(id, "botplanet_original"),
@@ -144,7 +144,7 @@ export const ORIGINAL_ASSETS: MediaAssetRecord[] = [
     presentation: "bleed",
     retrievedDate: "2026-08-03",
     lastCheckedDate: "2026-08-03",
-    notes: "Owner-created, supplied 3 August 2026. The mobile file is a 4:5 crop of the same master, taken centre, with no recolour.",
+    notes: "Owner-created, supplied 3 August 2026. Both are authored compositions, not crops — the portrait version is recomposed so all six machines survive on a phone, which a centre crop of the wide file could not do.",
   })),
   {
     ...base("promo-botmatch-pool", "botplanet_original"),
