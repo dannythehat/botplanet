@@ -57,16 +57,37 @@ interface Props {
   more?: FeatureLink;
   /** Stable id so the heading can be referenced and linked to. */
   id: string;
+  /**
+   * The word in `heading` to render in brushed metal — the one that says what
+   * the category actually is. Must appear in `heading` verbatim; if it does
+   * not, the heading renders plain rather than silently dropping a word.
+   */
+  metalWord?: string;
 }
 
-const { state, heading, body, side, image, primary, secondary, more, id } = Astro.props;
+const { state, heading, body, side, image, primary, secondary, more, id, metalWord } = Astro.props;
+
+/* Split once, around the metal word, so the heading stays a single readable
+   string in the DOM. Screen readers and search engines see the same sentence
+   either way — the gradient is presentation, not meaning. */
+const at = metalWord ? heading.indexOf(metalWord) : -1;
+const parts =
+  at >= 0
+    ? { lead: heading.slice(0, at), metal: metalWord!, tail: heading.slice(at + metalWord!.length) }
+    : null;
 ---
 
 <section class="catfeat" data-side={side} aria-labelledby={`${id}-heading`}>
   <div class="wrap catfeat__inner">
     <div class="catfeat__copy">
       <p class="catfeat__state">{state}</p>
-      <h2 id={`${id}-heading`}>{heading}</h2>
+      <h2 id={`${id}-heading`}>
+        {parts ? (
+          <Fragment>{parts.lead}<span class="catfeat__metal">{parts.metal}</span>{parts.tail}</Fragment>
+        ) : (
+          heading
+        )}
+      </h2>
       <p class="catfeat__body">{body}</p>
 
       <div class="catfeat__actions">
@@ -140,6 +161,31 @@ const { state, heading, body, side, image, primary, secondary, more, id } = Astr
     font-size: clamp(38px, 5vw, 64px);
     letter-spacing: -0.045em;
     text-wrap: balance;
+  }
+
+  /* Brushed metal, the same recipe the comparison table and review headers
+     use. `color` is set first and only then painted over: if background-clip
+     is unsupported the word stays visible in plain silver rather than
+     vanishing into a transparent fill. */
+  .catfeat__metal {
+    color: #dfe4ec;
+    /* A diagonal sweep rather than the near-vertical fade used on small text:
+       across a 64px heading a top-to-bottom gradient reads as a shadow, and
+       only a highlight travelling through the letterforms reads as metal. */
+    background: linear-gradient(
+      118deg,
+      #ffffff 0%,
+      #dfe6f2 26%,
+      #949dad 48%,
+      #f4f7fb 66%,
+      #aeb7c4 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+
+  @supports ((-webkit-background-clip: text) or (background-clip: text)) {
+    .catfeat__metal { color: transparent; }
   }
 
   .catfeat__body {
@@ -236,15 +282,28 @@ const { state, heading, body, side, image, primary, secondary, more, id } = Astr
       );
     }
 
+    /* Two equal halves rather than a block shoved to one edge. The copy then
+       sits centred in the half the artwork left empty, instead of hugging the
+       wrap's outer gutter with a wide gap on the far side of it. Its own text
+       stays left-aligned — a right-aligned paragraph is harder to read for no
+       gain, and the ragged edge would fight the buttons underneath it. */
     .catfeat__inner {
       min-height: 30rem;
-      display: flex;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       align-items: center;
     }
 
-    /* Copy to the right: pushed across, and its own text stays left-aligned —
-       a right-aligned paragraph is harder to read for no gain. */
-    .catfeat[data-side="right"] .catfeat__inner { justify-content: flex-end; }
+    .catfeat__copy {
+      grid-column: 1;
+      justify-self: center;
+      /* Wide enough to keep the two buttons on one line: at 30rem they wrapped
+         and the section grew a stacked-button column it did not need. */
+      width: min(100%, 34rem);
+      max-width: none;
+    }
+
+    .catfeat[data-side="right"] .catfeat__copy { grid-column: 2; }
   }
 
   @media (max-width: 620px) {
