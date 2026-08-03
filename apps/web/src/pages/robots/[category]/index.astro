@@ -51,6 +51,19 @@ function minPrice(productId: string): number | null {
     .map((o) => o.basePriceMinor as number);
   return prices.length ? Math.min(...prices) : null;
 }
+const crumbs = breadcrumbsFor(Astro.url.pathname);
+
+const hero = heroFor(category);
+const decision = decisionSectionFor(category);
+const coverage = coverageSectionFor(category);
+const split = splitSectionFor(category);
+const matrix = matrixSectionFor(category);
+const check = checkSectionFor(category);
+const price = priceSectionFor(category);
+const verdict = verdictSectionFor(category);
+const faq = faqSectionFor(category);
+const bmCta = botMatchCtaFor(category);
+
 /* Built from the catalogue rather than written out, so a product that changes
    model cannot leave a stale row behind. */
 const compareRows = comparisonRows(
@@ -68,25 +81,22 @@ const compareRows = comparisonRows(
   cat.slug,
 );
 
-const crumbs = breadcrumbsFor(Astro.url.pathname);
-
-const hero = heroFor(category);
-const decision = decisionSectionFor(category);
-const coverage = coverageSectionFor(category);
-const split = splitSectionFor(category);
-const matrix = matrixSectionFor(category);
-const check = checkSectionFor(category);
-const price = priceSectionFor(category);
-const verdict = verdictSectionFor(category);
-const faq = faqSectionFor(category);
-const bmCta = botMatchCtaFor(category);
-
 /* Jump links are derived from the sections this page actually renders, so the
    list can never name a heading that is not there. Label is the section's
    eyebrow — short enough for a chip, unlike the full H2. */
-const jumpTargets = [decision, coverage, split, matrix, check, price, verdict, faq]
-  .filter((sec): sec is NonNullable<typeof sec> => Boolean(sec?.id && sec?.eyebrow))
-  .map((sec) => ({ id: sec.id, label: sec.eyebrow! }));
+const jumpTargets = [
+  ...[decision, coverage, split, matrix]
+    .filter((sec): sec is NonNullable<typeof sec> => Boolean(sec?.id && sec?.eyebrow))
+    .map((sec) => ({ id: sec.id, label: sec.eyebrow! })),
+  /* The comparison table is not a content section, so it is not in the list
+     above — but it is the section most readers actually want, and leaving it
+     out of the jump nav hid it behind eight scrolls. Inserted where it renders
+     rather than appended, so the nav order matches the page order. */
+  ...(compareRows.length > 1 ? [{ id: "compare", label: "Compare all" }] : []),
+  ...[check, price, verdict, faq]
+    .filter((sec): sec is NonNullable<typeof sec> => Boolean(sec?.id && sec?.eyebrow))
+    .map((sec) => ({ id: sec.id, label: sec.eyebrow! })),
+];
 
 /* Every figure below is real. Nothing claims hands-on testing — the evidence
    model here is desk research plus dated manual checks. */
