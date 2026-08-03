@@ -180,20 +180,69 @@ export const ORIGINAL_ASSETS: MediaAssetRecord[] = [
     notes:
       "Owner-created, supplied 3 August 2026 as a composed desktop/mobile pair. It shows all six categories linked to the matcher; only pool cleaners is live, so the copy beside it must keep saying so — see the section note on the homepage.",
   })),
-  {
-    ...base("feature-pool-category-desktop", "botplanet_original"),
+  /* Homepage category feature artwork. Every one of these is decorative: the
+     section's headline, body and buttons are real HTML beside the picture, so
+     described alt text would be the same fact told twice. Each file is composed
+     with one side dark and empty for the copy — the note records which. */
+  ...(
+    [
+      [
+        "feature-pool-category-desktop",
+        "/media/pool-category/feature-desktop.webp",
+        1672,
+        941,
+        "sha256:d7e557392590cb1330b44fb75a3a77bde5a39cbe39b480916877d4cfb2df9688",
+        "Robotic pool cleaners",
+        "Composed with the left third dark and empty. The robot is a rendered generic, deliberately not any brand's model.",
+      ],
+      [
+        "feature-window-category-desktop",
+        "/media/window-category/feature-desktop.webp",
+        1672,
+        941,
+        "sha256:bfcff7b089dd84af0fce770d37a4a5aceb788c47296ebf5ebac75a548463c034",
+        "Window-cleaning robots",
+        "Composed with the right side open sky, so the copy sits there. The machine is a rendered generic, deliberately not any brand's model.",
+      ],
+      [
+        "feature-window-category-mobile",
+        "/media/window-category/feature-mobile.webp",
+        941,
+        1672,
+        "sha256:4cb0b3bb7b4a66a1e5c82d8767bb1c7969087dbb1a2ecbf95d4b6e3a70b50e13",
+        "Window-cleaning robots",
+        "The portrait companion to the desktop file — recomposed, not cropped, so the machine and the glass both survive on a phone.",
+      ],
+      [
+        "feature-lawn-category-desktop",
+        "/media/lawn-category/feature-desktop.webp",
+        1672,
+        941,
+        "sha256:7d85dcab488132d6bf5ca8cc7a3db7e6813cbadbe5cf182cb44c177ac93efb26",
+        "Lawn and garden robots",
+        "Composed with the left third falling to black, so the copy sits there. The mower is a rendered generic, deliberately not any brand's model.",
+      ],
+      [
+        "feature-lawn-category-mobile",
+        "/media/lawn-category/feature-mobile.webp",
+        941,
+        1672,
+        "sha256:ad50108c15f6f3a9deda745009ba26541eb9103262ac367e334473bc85e911af",
+        "Lawn and garden robots",
+        "The portrait companion to the desktop file — recomposed, not cropped, so the mower, the lawn and the lit garden all survive on a phone.",
+      ],
+    ] as const
+  ).map(([id, src, width, height, checksum, category, note]): MediaAssetRecord => ({
+    ...base(id, "botplanet_original"),
     productId: null,
-    purpose: "Robotic pool cleaners feature section on the homepage",
+    purpose: `${category} feature section on the homepage`,
     exactModel: null,
     type: "category_hero",
     acquisitionMethod: "authored_in_house",
-    checksum: "sha256:d7e557392590cb1330b44fb75a3a77bde5a39cbe39b480916877d4cfb2df9688",
-    width: 1672,
-    height: 941,
-    src: "/media/pool-category/feature-desktop.webp",
-    // Decorative: every word and every button in this section is real HTML
-    // beside the picture, so the picture repeats nothing and names nothing.
-    // A described alt here would be the third telling of the same fact.
+    checksum,
+    width,
+    height,
+    src,
     altText: "",
     altTextStatus: "decorative",
     schema: {
@@ -206,9 +255,8 @@ export const ORIGINAL_ASSETS: MediaAssetRecord[] = [
     presentation: "bleed",
     retrievedDate: "2026-08-03",
     lastCheckedDate: "2026-08-03",
-    notes:
-      "Owner-created, supplied 3 August 2026. Composed with the left third dark and empty so the section's real headline and buttons sit over clean space rather than over detail. The robot is a rendered generic, deliberately not any brand's model.",
-  },
+    notes: `Owner-created, supplied 3 August 2026. ${note}`,
+  })),
   {
     ...base("promo-botmatch-pool", "botplanet_original"),
     productId: null,

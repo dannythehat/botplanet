@@ -2,6 +2,7 @@
 import Base from "../layouts/Base.astro";
 import { LAUNCH_CATEGORY, categoryRoutes } from "../content/routes";
 import { srcsetFor } from "../lib/srcset";
+import CategoryFeature from "../components/CategoryFeature.astro";
 
 const live = categoryRoutes(LAUNCH_CATEGORY);
 
@@ -17,12 +18,33 @@ const matcherImage = {
     "A BotMatch panel at the centre of six linked category tiles — pool cleaning, window cleaning, floor care, lawn and garden, security, and companion and service — showing a best-match result being confirmed.",
 };
 
-/* Robotic pool cleaners feature artwork. Decorative — the section's words and
-   buttons are real HTML beside it, never drawn into the picture. */
+/* Category feature artwork. All decorative — the sections' words and buttons
+   are real HTML beside the picture, never drawn into it. Each file is composed
+   with one side dark and empty, which is what `side` on the component names. */
 const featureImage = {
   src: "/media/pool-category/feature-desktop.webp",
   width: 1672,
   height: 941,
+};
+
+const windowFeatureImage = {
+  src: "/media/window-category/feature-desktop.webp",
+  mobileSrc: "/media/window-category/feature-mobile.webp",
+  width: 1672,
+  height: 941,
+  /* Pulled left of centre so the machine on the glass survives the crop when
+     the section is shorter than the file's own 16:9. */
+  focal: "24% center",
+};
+
+const lawnFeatureImage = {
+  src: "/media/lawn-category/feature-desktop.webp",
+  mobileSrc: "/media/lawn-category/feature-mobile.webp",
+  width: 1672,
+  height: 941,
+  /* Right of centre: the mower and the lit house are both over there, and a
+     centre crop would push the machine off the edge on a short section. */
+  focal: "78% center",
 };
 
 const categories = [
@@ -182,46 +204,45 @@ const categories = [
     </div>
   </section>
 
-  {/* The artwork is decorative and carries no words: every line and every
-      button here is real HTML, so Google reads them and a screen reader
-      announces them. Text drawn inside a picture is invisible to both.
+  <CategoryFeature
+    id="live-pool"
+    state="Live category"
+    heading="Robotic pool cleaners"
+    body="Find verified robots that scrub floors, walls and waterlines."
+    side="left"
+    image={{ ...featureImage, focal: "82% center" }}
+    primary={{ label: "Browse pool-cleaning robots", href: live.hub }}
+    secondary={{ label: "Find My Pool Cleaner", href: live.botmatch }}
+    more={{ label: "Compare live models", href: live.compare }}
+  />
 
-      It was composed with the left third dark and empty, so on desktop it
-      becomes the section's background and the copy sits in that space. Below
-      1000px overlaid text stops being reliably readable, so the picture
-      unhooks and stacks underneath instead. */}
-  <section class="live-category" aria-labelledby="live-category-heading">
-    <div class="wrap live-category__inner">
-      <div class="live-category__copy">
-        <p class="kicker">LIVE CATEGORY</p>
-        <h2 id="live-category-heading">Robotic pool cleaners</h2>
-        <p class="large">Find verified robots that scrub floors, walls and waterlines.</p>
+  {/* Window cleaning is genuinely in development: there is no
+      /robots/window-cleaning-robots/ page to send anyone to, so this section
+      does not pretend otherwise. The state line says so, and both buttons go
+      somewhere that exists today rather than to a 404 dressed as a category. */}
+  <CategoryFeature
+    id="next-window"
+    state="Next category — in development"
+    heading="Window-cleaning robots"
+    body="Robots that grip glass and clean windows, balcony doors and high panes you would rather not reach. We are verifying the models now."
+    side="right"
+    image={windowFeatureImage}
+    primary={{ label: "See every robot category", href: "/robots/" }}
+    secondary={{ label: "Start with pool cleaners", href: live.hub }}
+    more={{ label: "How BotPlanet verifies a robot", href: "/review-methodology/" }}
+  />
 
-        <div class="live-category__actions">
-          <a class="btn btn--primary btn--lg" href={live.hub}>Browse pool-cleaning robots</a>
-          <a class="btn btn--quiet btn--lg" href={live.botmatch}>Find My Pool Cleaner</a>
-        </div>
-
-        <a class="live-category__more" href={live.compare}>Compare live models &#8594;</a>
-      </div>
-
-      {/* Last in the DOM so it stacks under the copy on a phone. On desktop it
-          is taken out of the flow entirely, where source order stops mattering
-          and the z-index decides what sits in front. */}
-      <div class="live-category__media">
-        <img
-          src={featureImage.src}
-          srcset={srcsetFor(featureImage.src)}
-          sizes="100vw"
-          width={featureImage.width}
-          height={featureImage.height}
-          alt=""
-          loading="lazy"
-          decoding="async"
-        />
-      </div>
-    </div>
-  </section>
+  <CategoryFeature
+    id="next-lawn"
+    state="Next category — in development"
+    heading="Lawn and garden robots"
+    body="Wire-free mowers that keep the lawn cut on their own, plus the irrigation and outdoor machines that work alongside them."
+    side="left"
+    image={lawnFeatureImage}
+    primary={{ label: "See every robot category", href: "/robots/" }}
+    secondary={{ label: "Start with pool cleaners", href: live.hub }}
+    more={{ label: "How BotPlanet verifies a robot", href: "/review-methodology/" }}
+  />
 
   <section class="system">
     <div class="wrap">
@@ -358,8 +379,8 @@ const categories = [
 
   .worlds,.system { padding: var(--section-gap) 0; background: linear-gradient(180deg,rgba(255,255,255,.025),transparent); border-top: 1px solid rgba(210,216,224,.1); }
   .section-intro { max-width: 820px; margin-bottom: 46px; }.section-intro--compact { margin-bottom: 30px; }
-  .section-intro h2,.live-category h2,.system h2 { margin: 0; font-size: clamp(38px,5vw,64px); letter-spacing: -.045em; }
-  .section-intro > p:last-child,.live-category .large { color: var(--text-secondary); font-size: 19px; line-height: 1.65; }
+  .section-intro h2,.system h2 { margin: 0; font-size: clamp(38px,5vw,64px); letter-spacing: -.045em; }
+  .section-intro > p:last-child { color: var(--text-secondary); font-size: 19px; line-height: 1.65; }
   .world-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 16px; }
   .world { min-height: 290px; display: flex; flex-direction: column; padding: 25px; color: inherit; text-decoration: none; background: linear-gradient(145deg,rgba(255,255,255,.04),transparent 36%),#0a0d10; border: 1px solid rgba(207,213,220,.14); border-radius: 18px; transition: transform .2s ease,border-color .2s ease,background .2s ease; }
   .world--live { background: linear-gradient(145deg,rgba(255,255,255,.12),transparent 36%),linear-gradient(180deg,#171b20,#090b0e); border-color: rgba(228,232,237,.42); }
@@ -368,40 +389,12 @@ const categories = [
   .world__state { align-self: flex-end; margin-top: -12px; color: #aeb4bc; font: 700 10px/1 var(--font-mono); letter-spacing: .12em; text-transform: uppercase; }
   .world h3 { margin: auto 0 12px; font-size: 27px; }.world p { color: var(--text-secondary); line-height: 1.55; }
   .world__action { margin-top: 18px; color: #eef0f3; font-weight: 700; }.world__action--quiet { color: #747b85; font-size: 13px; }
-  /* ---------- live category feature ---------- */
-  .live-category { position: relative; isolation: isolate; overflow: hidden; padding: var(--section-gap) 0; border-top: 1px solid rgba(210,216,224,.1); border-bottom: 1px solid rgba(210,216,224,.1); background: #05070a; }
-  /* The copy carries the stacking context, not its wrapper: the picture is
-     absolutely positioned against the section so it can bleed past the wrap's
-     max-width, which it could not do if the wrap were the containing block. */
-  .live-category__copy { position: relative; z-index: 1; max-width: 34rem; }
-  .live-category h2 { margin: 0; }
-  .live-category .large { margin: 18px 0 0; max-width: 26rem; }
-  .live-category__actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
-  .live-category__actions .btn { flex: 0 1 auto; }
-  .live-category__more { display: inline-block; margin-top: 20px; color: #c8cdd4; font-weight: 700; text-decoration: none; border-bottom: 1px solid rgba(200,205,212,.32); padding-bottom: 2px; transition: color .2s ease, border-color .2s ease; }
-  .live-category__more:hover { color: #fff; border-color: #fff; }
+  /* The category feature sections style themselves — see CategoryFeature.astro. */
   .text-link { color: #c8cdd4; text-align: center; text-decoration: none; font-weight: 700; }
-
-  /* Mobile and tablet: the picture is a stacked figure under the copy. */
-  .live-category__media { margin: 34px 0 0; border: 1px solid rgba(207,213,220,.18); border-radius: 18px; overflow: hidden; }
-  .live-category__media img { display: block; width: 100%; height: auto; }
-
-  @media (min-width: 1000px) {
-    /* The picture leaves the flow and becomes the section's own surface. */
-    .live-category { padding: clamp(96px,9vw,150px) 0; }
-    .live-category__media { position: absolute; inset: 0; z-index: 0; margin: 0; border: 0; border-radius: 0; }
-    /* object-position keeps the robot in frame when the section is shorter
-       than the file's 16:9, rather than cropping it away from the right. */
-    .live-category__media img { width: 100%; height: 100%; object-fit: cover; object-position: 82% center; }
-    /* The artwork is already dark on the left; this guarantees the contrast
-       rather than trusting it, at no visible cost on an image this dark. */
-    .live-category__media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg,#05070a 0%,rgba(5,7,10,.94) 26%,rgba(5,7,10,.6) 48%,rgba(5,7,10,.12) 68%,transparent 82%); }
-    .live-category__inner { min-height: 30rem; display: flex; align-items: center; }
-  }
   .system-grid { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 14px; }
   .system-grid article { padding: 25px; background: #090c0f; border: 1px solid rgba(207,213,220,.13); border-radius: 16px; }
   .system-grid span { color: #747b85; font: 700 12px/1 var(--font-mono); }.system-grid h3 { margin: 34px 0 12px; }.system-grid p { color: var(--text-secondary); line-height: 1.55; }
   .close { padding: clamp(70px,10vw,140px) 0; }.close__inner { text-align: center; }.close img { width: min(520px,82vw); height: auto; }.close p { margin: 20px auto 30px; color: var(--text-secondary); font-size: 20px; }
   @media(max-width:960px){.world-grid{grid-template-columns:repeat(2,1fr)}.system-grid{grid-template-columns:repeat(2,1fr)}}
-  @media(max-width:620px){.hero{min-height:auto;padding:48px 0 70px}.hero__grid{gap:26px}h1{font-size:40px}.world-grid,.system-grid{grid-template-columns:1fr}.world{min-height:235px}.section-intro h2,.live-category h2,.system h2{font-size:40px}.live-category__actions .btn{flex:1 1 100%}}
+  @media(max-width:620px){.hero{min-height:auto;padding:48px 0 70px}.hero__grid{gap:26px}h1{font-size:40px}.world-grid,.system-grid{grid-template-columns:1fr}.world{min-height:235px}.section-intro h2,.system h2{font-size:40px}}
 </style>

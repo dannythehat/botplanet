@@ -1,0 +1,254 @@
+---
+/* ============================================================
+   BotPlanet — homepage category feature
+
+   One robot world, given a full-width plate and premium artwork.
+
+   THE RULE THIS COMPONENT EXISTS TO ENFORCE. Not one word and not
+   one button is drawn inside the picture. A headline painted into a
+   JPEG is invisible to Google and silent to a screen reader, and a
+   button drawn into a JPEG is a picture of a button — it cannot be
+   focused, cannot be tabbed to, and does nothing when clicked. Every
+   line and every destination here is real HTML sitting beside the
+   artwork, which is why the artwork is registered as decorative with
+   empty alt text: it repeats nothing and it names nothing.
+
+   LAYOUT. The artwork is composed with one side deliberately dark
+   and empty. `side` says which side that is, and the copy goes
+   there. On desktop the picture becomes the section's own surface
+   and the copy sits in the space left for it. Below 1000px overlaid
+   text stops being reliably readable at any scrim strength, so the
+   picture unhooks from the background and stacks underneath the
+   buttons instead — which is also why a portrait `mobileSrc` is
+   worth supplying rather than letting a 16:9 file letterbox.
+
+   HONESTY. `state` is the category's real launch state, printed as
+   the kicker. A category that is not live must not be dressed as one,
+   and its buttons must go somewhere that exists — see the homepage
+   for the destinations actually available to a category in
+   development.
+   ============================================================ */
+import { srcsetFor } from "../lib/srcset";
+
+export interface FeatureLink {
+  label: string;
+  href: string;
+}
+
+interface Props {
+  /** Small mono line above the heading — the category's real state. */
+  state: string;
+  heading: string;
+  body: string;
+  /** Which side of the artwork is the empty, dark one. */
+  side: "left" | "right";
+  image: {
+    src: string;
+    /** Composed portrait version. Without it the wide file is reused. */
+    mobileSrc?: string;
+    width: number;
+    height: number;
+    /** Horizontal focus for the desktop crop, e.g. "82% center". */
+    focal?: string;
+  };
+  primary: FeatureLink;
+  secondary?: FeatureLink;
+  /** Quiet text link under the buttons. */
+  more?: FeatureLink;
+  /** Stable id so the heading can be referenced and linked to. */
+  id: string;
+}
+
+const { state, heading, body, side, image, primary, secondary, more, id } = Astro.props;
+---
+
+<section class="catfeat" data-side={side} aria-labelledby={`${id}-heading`}>
+  <div class="wrap catfeat__inner">
+    <div class="catfeat__copy">
+      <p class="catfeat__state">{state}</p>
+      <h2 id={`${id}-heading`}>{heading}</h2>
+      <p class="catfeat__body">{body}</p>
+
+      <div class="catfeat__actions">
+        <a class="btn btn--primary btn--lg" href={primary.href}>{primary.label}</a>
+        {secondary && <a class="btn btn--quiet btn--lg" href={secondary.href}>{secondary.label}</a>}
+      </div>
+
+      {more && <a class="catfeat__more" href={more.href}>{more.label} &#8594;</a>}
+    </div>
+
+    {/* Last in the DOM so it stacks under the copy on a phone. On desktop it
+        leaves the flow entirely, where source order stops mattering and the
+        stacking context decides what sits in front. */}
+    <div class="catfeat__media">
+      <picture>
+        {image.mobileSrc && (
+          <source
+            media="(max-width: 999px)"
+            srcset={srcsetFor(image.mobileSrc) ?? image.mobileSrc}
+            sizes="100vw"
+          />
+        )}
+        <img
+          src={image.src}
+          srcset={srcsetFor(image.src)}
+          sizes="100vw"
+          width={image.width}
+          height={image.height}
+          alt=""
+          loading="lazy"
+          decoding="async"
+          style={image.focal ? `--catfeat-focal: ${image.focal}` : undefined}
+        />
+      </picture>
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  .catfeat {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    padding: var(--section-gap) 0;
+    border-top: 1px solid rgba(210, 216, 224, 0.1);
+    border-bottom: 1px solid rgba(210, 216, 224, 0.1);
+    background: #05070a;
+  }
+
+  /* The copy carries the stacking context, not its wrapper: the picture is
+     positioned against the section so it can bleed past the wrap's max-width,
+     which it could not do if the wrap were the containing block. */
+  .catfeat__copy {
+    position: relative;
+    z-index: 1;
+    max-width: 34rem;
+  }
+
+  .catfeat__state {
+    margin: 0 0 14px;
+    color: #aeb4bc;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .catfeat h2 {
+    margin: 0;
+    font-size: clamp(38px, 5vw, 64px);
+    letter-spacing: -0.045em;
+    text-wrap: balance;
+  }
+
+  .catfeat__body {
+    margin: 18px 0 0;
+    max-width: 27rem;
+    color: var(--text-secondary);
+    font-size: 19px;
+    line-height: 1.65;
+  }
+
+  .catfeat__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 30px;
+  }
+
+  .catfeat__actions .btn { flex: 0 1 auto; }
+
+  .catfeat__more {
+    display: inline-block;
+    margin-top: 20px;
+    padding-bottom: 2px;
+    border-bottom: 1px solid rgba(200, 205, 212, 0.32);
+    color: #c8cdd4;
+    font-weight: 700;
+    text-decoration: none;
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .catfeat__more:hover { color: #fff; border-color: #fff; }
+
+  /* ---------- phone and tablet: the picture is a figure under the copy ---------- */
+  .catfeat__media {
+    margin: 34px 0 0;
+    border: 1px solid rgba(207, 213, 220, 0.18);
+    border-radius: 18px;
+    overflow: hidden;
+  }
+
+  .catfeat__media img { display: block; width: 100%; height: auto; }
+
+  /* ---------- desktop: the picture becomes the section's surface ---------- */
+  @media (min-width: 1000px) {
+    .catfeat { padding: clamp(96px, 9vw, 150px) 0; }
+
+    .catfeat__media {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      margin: 0;
+      border: 0;
+      border-radius: 0;
+    }
+
+    /* The focal point keeps the subject in frame when the section is shorter
+       than the file's own ratio, rather than cropping it away at the edge. */
+    .catfeat__media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: var(--catfeat-focal, center);
+    }
+
+    /* The artwork is already quiet where the copy lands; the scrim guarantees
+       the contrast rather than trusting it to survive four compression passes.
+       It fades away from the copy, so the subject is never dulled. */
+    .catfeat__media::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        90deg,
+        #05070a 0%,
+        rgba(5, 7, 10, 0.94) 26%,
+        rgba(5, 7, 10, 0.6) 48%,
+        rgba(5, 7, 10, 0.12) 68%,
+        transparent 82%
+      );
+    }
+
+    /* The right-hand variant stops short of solid black. These compositions put
+       the sky on the copy side, and a sunset is the reason the picture is worth
+       looking at — 0.88 is enough to carry white text over mid-grey cloud while
+       leaving the warmth visible underneath it. */
+    .catfeat[data-side="right"] .catfeat__media::after {
+      background: linear-gradient(
+        270deg,
+        rgba(5, 7, 10, 0.88) 0%,
+        rgba(5, 7, 10, 0.86) 30%,
+        rgba(5, 7, 10, 0.58) 50%,
+        rgba(5, 7, 10, 0.14) 70%,
+        transparent 84%
+      );
+    }
+
+    .catfeat__inner {
+      min-height: 30rem;
+      display: flex;
+      align-items: center;
+    }
+
+    /* Copy to the right: pushed across, and its own text stays left-aligned —
+       a right-aligned paragraph is harder to read for no gain. */
+    .catfeat[data-side="right"] .catfeat__inner { justify-content: flex-end; }
+  }
+
+  @media (max-width: 620px) {
+    .catfeat h2 { font-size: 40px; }
+    .catfeat__actions .btn { flex: 1 1 100%; }
+  }
+</style>
