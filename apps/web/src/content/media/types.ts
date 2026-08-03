@@ -56,6 +56,8 @@ export type AssetType =
   | "open_graph"
   | "category_hero"
   | "educational_diagram"
+  /** A finished promotional composition — headline, copy and button drawn in. */
+  | "promotional_panel"
   | "branded_placeholder";
 
 /** Asset types that depict a specific real product and must match it exactly. */
@@ -181,6 +183,17 @@ export interface MediaAssetRecord {
   supportsTestedClaim: boolean;
   /** True when the asset is a placeholder and depicts no real product. */
   depictsRealProduct: boolean;
+  /**
+   * How the file wants to be framed.
+   *
+   * `contained` is the default: a cut-out or packshot that needs a lit stage
+   * and breathing room around it. `bleed` marks a finished composition — a
+   * full creative with its own background, framing and text — which must fill
+   * its slot edge to edge at its own aspect ratio. Cropping one of those to a
+   * card ratio cuts the headline off, so the surface adapts to the file rather
+   * than the other way round.
+   */
+  presentation?: "contained" | "bleed";
   notes?: string;
 }
 

@@ -1,9 +1,12 @@
 /**
  * The asset inventory.
  *
- * Two kinds of record live here and nothing else:
+ * Three kinds of record live here and nothing else:
  *   1. original BotPlanet artwork, which we own outright;
- *   2. branded placeholders, which stand in for photography we may not lawfully
+ *   2. owner-created product creatives — finished compositions that DO show a
+ *      real machine, with BotPlanet branding and headline text set into the
+ *      image. Ours, cleared, and still not photography;
+ *   3. branded placeholders, which stand in for photography we may not lawfully
  *      hold yet and which depict nothing.
  *
  * THERE ARE NO THIRD-PARTY PRODUCT PHOTOGRAPHS. That is a finding, not an
@@ -112,6 +115,36 @@ export const ORIGINAL_ASSETS: MediaAssetRecord[] = [
     notes: "Rendered as an inline Astro component, so it has no intrinsic file dimensions and needs no responsive derivatives.",
   },
   {
+    ...base("promo-botmatch-pool", "botplanet_original"),
+    productId: null,
+    purpose: "BotMatch promotional panel on the robotic pool cleaners category page",
+    exactModel: null,
+    type: "promotional_panel",
+    acquisitionMethod: "authored_in_house",
+    checksum: "sha256:8624684735bcdf34705ee45c7289987780897e0fd5d9b6127207384eada19485",
+    width: 941,
+    height: 1672,
+    src: "/media/matcher/pool-bot-matcher.webp",
+    altText:
+      "Find your perfect pool bot. Tell us your budget, pool size or priorities like fast shipping, and in 30 seconds we will match you with the right robotic pool cleaner. Start the 30-second match.",
+    altTextStatus: "approved",
+    // The robot in the frame is a rendered generic machine, not a model we
+    // sell, so this panel makes no claim about any product in the catalogue.
+    schema: {
+      ...ORIGINAL_SCHEMA,
+      imageObject: false,
+      articleImage: false,
+      reason:
+        "a promotional panel is advertising, not editorial illustration; it may serve as a social preview but must not be emitted as an ImageObject supporting the article's content",
+    },
+    depictsRealProduct: false,
+    presentation: "bleed",
+    retrievedDate: "2026-08-03",
+    lastCheckedDate: "2026-08-03",
+    notes:
+      "Owner-created, supplied 3 August 2026 as a 941×1672 PNG and converted to WebP with no crop or recolour. The headline, body copy and button are drawn into the artwork, so BOTMATCH_CTA in category-sections.ts must keep saying the same thing — see the poster field there.",
+  },
+  {
     ...base("silhouette-generic-robot", "botplanet_original"),
     productId: null,
     purpose: "Generic robot silhouette used inside product-card media stages",
@@ -154,6 +187,131 @@ export const ORIGINAL_ASSETS: MediaAssetRecord[] = [
     notes: "Inline SVG component: no file, no derivatives, no layout shift.",
   })),
 ];
+
+/* ------------------------------------------------------------------ */
+/* Owner-created product creatives                                     */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Danny's own artwork for five pool robots, supplied 3 August 2026.
+ *
+ * These are NOT placeholders and NOT product photography. Each is a finished
+ * BotPlanet composition: the robot in a scene, with BotPlanet branding and
+ * headline text set into the image. That distinction drives three decisions:
+ *
+ *  - `depictsRealProduct` is true, so the "MEDIA PENDING" treatment that hides
+ *    placeholders does not apply and the card renders the artwork;
+ *  - `productImage` is false, because a search engine reading Product schema
+ *    expects a photograph of the product, not a creative with marketing text
+ *    burnt into it;
+ *  - `presentation` is "bleed", because the composition is the whole frame.
+ *    Cropping one to a 4:3 card would cut the model name off the top.
+ *
+ * The claims printed inside the artwork ("up to 2.5 hours of runtime", "3µm
+ * MicroMesh filter") are brand copy. They carry no evidence weight here: any
+ * specification that appears as body copy still needs its own evidence record,
+ * exactly as it would if the artwork did not exist.
+ *
+ * Rights: owned outright — see public/media/products/RIGHTS.md.
+ */
+const OWNER_ARTWORK_SCHEMA: SchemaEligibility = {
+  productImage: false,
+  imageObject: true,
+  articleImage: true,
+  openGraph: true,
+  twitter: true,
+  reason:
+    "an owner-created creative depicts the real product but carries BotPlanet branding and headline text set into the image; Product schema expects a clean photograph, so it illustrates and previews but never stands as the product image",
+};
+
+interface OwnerArtwork {
+  slug: string;
+  file: string;
+  checksum: string;
+  width: number;
+  height: number;
+  /** What the composition actually shows, beyond the robot itself. */
+  scene: string;
+}
+
+const OWNER_ARTWORK: OwnerArtwork[] = [
+  {
+    slug: "dolphin-nautilus-cc-plus",
+    file: "dolphin-nautilus-cc-plus.webp",
+    checksum: "sha256:4bf32f1eb3d1918a24ca79b85edd80c58a08e9b4e32976de0cfb86ecd39855fe",
+    width: 1122,
+    height: 1402,
+    scene:
+      "the black and blue cleaner lifting out of dark water beside a phone showing the Dolphin app, over icons for Wi-Fi control, wall climbing and top-load filter access",
+  },
+  {
+    slug: "polaris-freedom",
+    file: "polaris-freedom.webp",
+    checksum: "sha256:a224297287dffbe25f8b55206705dc2a1eb062083d48fcf2c7a5fa4675b0ea4b",
+    width: 1200,
+    height: 1200,
+    scene:
+      "the blue tracked cordless cleaner in shallow water beside a phone showing the Polaris app, with callouts for cordless running, four cleaning modes, navigation and the top-load filter",
+  },
+  {
+    slug: "betta-se-plus",
+    file: "betta-se-plus.webp",
+    checksum: "sha256:eb452fb8b81bec8339ccd0b8a99d19daf82eb7886141e56a10cdf068a632b890",
+    width: 1200,
+    height: 1200,
+    scene:
+      "the solar-panelled surface skimmer floating on a leaf-strewn pool in a sunlit garden, with callouts for continuous surface cleaning, solar charging, dual charging and shallow-water safeguarding",
+  },
+  {
+    slug: "dolphin-proteus-dx4-plus",
+    file: "dolphin-proteus-dx4-plus.webp",
+    checksum: "sha256:1fe618cc48b9c5f80eb025f1fc81176646415fb563d6d7a85d650da5a5353052",
+    width: 1200,
+    height: 1200,
+    scene:
+      "the grey and blue tracked cleaner resting on stone coping beside a curved pool at dusk, with callouts for navigation, wall and waterline cleaning and top-load filtration",
+  },
+  {
+    slug: "aiper-scuba-v3-ai-vision",
+    file: "aiper-scuba-v3-ai-vision.webp",
+    checksum: "sha256:e32fc4d8cd4bab2736e61c45800795c191d054015c108af0a8e0a362ec723c19",
+    width: 1200,
+    height: 1200,
+    scene:
+      "the black cordless cleaner on its charging dock beside a lit resort pool, with callouts for camera navigation, wireless charging, weight, filtration and floor, wall and waterline cleaning",
+  },
+];
+
+export const OWNER_PRODUCT_ARTWORK: MediaAssetRecord[] = OWNER_ARTWORK.map((a): MediaAssetRecord => {
+  const productId = PRODUCT_ID[a.slug] ?? `prod-${a.slug}`;
+  // The model name comes from the verification record, never from the file
+  // name, so a renamed file can never quietly move artwork onto a sibling model.
+  const model = VERIFICATIONS.find((v) => v.productId === productId)?.identity.canonicalName ?? null;
+  return {
+    ...base(`art-${a.slug}`, "botplanet_original"),
+    productId,
+    purpose: null,
+    exactModel: model,
+    type: "product_hero",
+    acquisitionMethod: "authored_in_house",
+    checksum: a.checksum,
+    width: a.width,
+    height: a.height,
+    src: `/media/products/${a.file}`,
+    // The alt text describes what is in the frame and names the model. It does
+    // not repeat the sales claims printed in the artwork, because a screen
+    // reader user should get the picture, not the pitch.
+    altText: `BotPlanet artwork for the ${model}: ${a.scene}.`,
+    altTextStatus: "approved",
+    schema: OWNER_ARTWORK_SCHEMA,
+    depictsRealProduct: true,
+    presentation: "bleed",
+    retrievedDate: "2026-08-03",
+    lastCheckedDate: "2026-08-03",
+    notes:
+      "Owner-created creative, optimised from a PNG master to WebP with no crop, recolour or removal of in-image text. Not Amazon Program Content — see public/media/products/RIGHTS.md.",
+  };
+});
 
 /* ------------------------------------------------------------------ */
 /* Branded product placeholders                                        */
@@ -202,7 +360,14 @@ export const PLACEHOLDER_ASSETS: MediaAssetRecord[] = manifest.map((m): MediaAss
   };
 });
 
-export const MEDIA_ASSETS: MediaAssetRecord[] = [...ORIGINAL_ASSETS, ...PLACEHOLDER_ASSETS];
+/* Owner artwork sits ahead of the placeholders so a product that has both
+   resolves to the artwork; the placeholder stays as the fallback if the
+   artwork is ever withdrawn. */
+export const MEDIA_ASSETS: MediaAssetRecord[] = [
+  ...ORIGINAL_ASSETS,
+  ...OWNER_PRODUCT_ARTWORK,
+  ...PLACEHOLDER_ASSETS,
+];
 
 /* ------------------------------------------------------------------ */
 /* Why no product photography exists yet                               */
@@ -226,7 +391,15 @@ const AMAZON_BLOCK = {
  * One record per product. Each names the specific identity risk carried over
  * from Job 8, because the wrong-model risk is different for each brand and a
  * generic "no images yet" line would lose it.
+ *
+ * A blocker here is about PHOTOGRAPHY. Five products now carry owner-created
+ * BotPlanet artwork (OWNER_PRODUCT_ARTWORK above), so their cards are no longer
+ * empty — but a creative is not a packshot, and the blocker below still stands
+ * for anything that needs an actual photograph of the machine.
  */
+const HAS_OWNER_ARTWORK =
+  " BotPlanet's own artwork now fills this product's card; that is a creative, not photography, and does not clear this blocker.";
+
 export const ACQUISITION_BLOCKERS: AcquisitionBlocker[] = [
   {
     productId: "prod-wybot-c1",
@@ -249,7 +422,7 @@ export const ACQUISITION_BLOCKERS: AcquisitionBlocker[] = [
     productId: "prod-dolphin-nautilus-cc-plus",
     ...AMAZON_BLOCK,
     checked: [...AMAZON_BLOCK.checked, "maytronics.com press page — HTTP 404"],
-    blocker: `${AMAZON_BLOCK.blocker} Maytronics ships several near-identical Nautilus CC variants; only part 99996409-PCI may be matched.`,
+    blocker: `${AMAZON_BLOCK.blocker} Maytronics ships several near-identical Nautilus CC variants; only part 99996409-PCI may be matched.${HAS_OWNER_ARTWORK}`,
   },
   {
     productId: "prod-dolphin-premier",
@@ -265,13 +438,13 @@ export const ACQUISITION_BLOCKERS: AcquisitionBlocker[] = [
     productId: "prod-polaris-freedom",
     ...AMAZON_BLOCK,
     checked: [...AMAZON_BLOCK.checked, "fluidra.com press room — no readable content", "polarispool.com support/parts page for SKU FFREEDOM"],
-    blocker: `${AMAZON_BLOCK.blocker} Polaris sells FREEDOM, FREEDOM SC, FREEDOM LT and FREEDOM Plus on a shared EB37 chassis, so an incoming image must be matched on the FFREEDOM SKU and not on family resemblance.`,
+    blocker: `${AMAZON_BLOCK.blocker} Polaris sells FREEDOM, FREEDOM SC, FREEDOM LT and FREEDOM Plus on a shared EB37 chassis, so an incoming image must be matched on the FFREEDOM SKU and not on family resemblance.${HAS_OWNER_ARTWORK}`,
   },
   {
     productId: "prod-betta-se-plus",
     ...AMAZON_BLOCK,
     checked: [...AMAZON_BLOCK.checked, "bettabot.com — no media library"],
-    blocker: `${AMAZON_BLOCK.blocker} The stored record previously cited the Betta SE page in error. Any incoming image must be matched to /products/betta-se-plus; Betta SE media must never be imported for this product.`,
+    blocker: `${AMAZON_BLOCK.blocker} The stored record previously cited the Betta SE page in error. Any incoming image must be matched to /products/betta-se-plus; Betta SE media must never be imported for this product.${HAS_OWNER_ARTWORK}`,
   },
   {
     productId: "prod-dolphin-e10",

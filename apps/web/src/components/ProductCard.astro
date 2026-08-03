@@ -13,6 +13,7 @@
  */
 import RobotSilhouette from "./RobotSilhouette.astro";
 import ProductImage from "./ProductImage.astro";
+import { resolveImage } from "../lib/media-registry";
 
 interface Props {
   href: string;
@@ -48,15 +49,21 @@ const {
   variant = 0,
   saveId,
 } = Astro.props;
+
+/* Ask the registry how this card's image wants to be framed. ProductImage
+   still does the rendering — this only decides where the chrome goes, because
+   a full-bleed creative already carries branding in its own top corner and a
+   chip dropped on top of it lands on the logo. */
+const bleed = productId ? Boolean(resolveImage(productId, "listing_card")?.bleed) : false;
 ---
-<a class="pcard elevated reveal" href={href}>
+<a class="pcard elevated reveal" href={href} data-bleed={bleed ? "true" : undefined}>
   <div class="pcard__stage stage">
     {productId ? (
       <ProductImage productId={productId} placement="listing_card" variant={variant} class="pcard__img" />
     ) : (
       <RobotSilhouette variant={variant} class="pcard__sil" />
     )}
-    {classification && <span class="pcard__class">{classification}</span>}
+    {classification && !bleed && <span class="pcard__class">{classification}</span>}
     {saveId && (
       <button
         class="icon-btn pcard__save"
@@ -71,6 +78,10 @@ const {
   </div>
 
   <div class="pcard__body">
+    {/* The classification does not vanish when it leaves the stage — it joins
+        the facts under the title, where it reads as information rather than
+        as a label stuck over someone's artwork. */}
+    {classification && bleed && <span class="pcard__class pcard__class--inline">{classification}</span>}
     <h3 class="pcard__title">{name}</h3>
     {meta.length > 0 && (
       <ul class="pcard__meta">
@@ -138,6 +149,23 @@ const {
 
   .pcard:hover .pcard__img { transform: scale(1.04); }
 
+  /* A full composition takes the whole stage: no padding to inset it, no fixed
+     ratio to crop it, no hover zoom to push its own headline out of frame. The
+     registry decides which images these are — see `presentation` in the asset
+     record — so a packshot arriving later still lands on the lit stage above. */
+  .pcard__stage:has(.pcard__img[data-bleed]) {
+    aspect-ratio: auto;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .pcard__stage:has(.pcard__img[data-bleed]) .pcard__img {
+    height: auto;
+    object-fit: cover;
+  }
+
+  .pcard:hover .pcard__img[data-bleed] { transform: none; }
+
   @media (prefers-reduced-motion: reduce) {
     .pcard:hover { transform: none; }
     .pcard:hover .pcard__sil,
@@ -162,6 +190,14 @@ const {
     text-transform: uppercase;
     color: var(--text-secondary);
     white-space: nowrap;
+  }
+
+  .pcard__class--inline {
+    position: static;
+    align-self: start;
+    margin-bottom: 2px;
+    backdrop-filter: none;
+    background: rgba(255, 255, 255, 0.045);
   }
 
   .pcard__save {

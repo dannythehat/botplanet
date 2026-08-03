@@ -192,8 +192,9 @@ export const MEDIA_SOURCE_CHECKS: SourceCheck[] = [
  * live but requires Creators API credentials held by Danny; no manufacturer
  * publishes a press kit granting third-party use; and the remaining options
  * (scraping, guessing URLs, borrowing from search results, substituting a
- * similar model) are all prohibited. Every product therefore renders a branded
- * placeholder that names the exact model and claims nothing.
+ * similar model) are all prohibited. A product with no BotPlanet artwork of its
+ * own therefore renders a branded placeholder that names the exact model and
+ * claims nothing.
  */
 export const PRODUCT_PHOTOGRAPHY_POSITION =
-  "No third-party product photograph is ingested. The Amazon Associates route is a potential lawful source, but the account's ownership and current approval are unverified, and obtaining Program Content lawfully would also require Creators API credentials that this environment does not hold; the programme forbids scraping, guessed URLs and unapproved caching. No launch-brand manufacturer publishes a press kit granting third-party image use. Until one of those changes, every product renders an original BotPlanet branded placeholder that names the exact model and does not depict it.";
+  "No third-party product photograph is ingested. The Amazon Associates route is a potential lawful source, but the account's ownership and current approval are unverified, and obtaining Program Content lawfully would also require Creators API credentials that this environment does not hold; the programme forbids scraping, guessed URLs and unapproved caching. No launch-brand manufacturer publishes a press kit granting third-party image use. Until one of those changes, no product carries a photograph. Five products are shown in original BotPlanet creatives, which we own outright and which do show the machine but carry our branding and headline text set into the image \u2014 they illustrate, they are not evidence, and they never enter Product structured data. Every other product renders an original BotPlanet branded placeholder that names the exact model and does not depict it.";

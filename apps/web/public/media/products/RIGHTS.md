@@ -29,13 +29,24 @@ because it contains text.
   used as evidence for a performance claim, and any specification stated in the
   artwork still needs its own evidence record before it appears as body copy.
 
-## Not yet placed on any page
+## Where these are used
 
-The product modules section of the category page is not built — it waits on the
-confirmed product set. Two of these five have no product record and no verified
-ASIN in the repository at all: **Dolphin Proteus DX4 Plus** and
-**Aiper Scuba V3 AI Vision**. Notion also lists both as pending exact ASIN and
-redirect verification, so neither may ship a working affiliate button yet.
+Registered in `apps/web/src/content/media/assets.ts` as `art-<slug>` and resolved
+through `resolveImage()` like every other asset, so a withdrawal recorded there
+empties every card at once. They render on the robotic pool cleaners category
+page product grid, full-bleed at their own aspect ratio — the classification
+chip moves into the card body rather than sitting on top of the artwork, and no
+crop is applied.
+
+They are **not** eligible for `Product` structured data: a schema consumer reads
+that field as a photograph of the product, and these carry BotPlanet branding
+and headline text set into the image.
+
+Two of the five — **Dolphin Proteus DX4 Plus** and **Aiper Scuba V3 AI Vision** —
+have verification records and live D1 product rows but no editorial record yet.
+Their identity is owner-confirmed rather than source-verified, and Notion still
+lists both as pending exact ASIN and redirect verification, so neither may ship
+a working affiliate button until that is closed out.
 
 Danny has said more detailed photography will follow for the individual review
 pages. These five are the lead category-page visuals.

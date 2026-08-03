@@ -54,7 +54,8 @@ const { id, eyebrow, title, intro, items, openFirst = true } = Astro.props;
 
 <style is:global>
   .bp-faq {
-    margin: 0 0 clamp(3.5rem, 8vw, 6rem);
+    /* Outer spacing, padding, border and background come from the section
+       plate rule in metal-theme.css, so every section shares one rhythm. */
   }
 
   .bp-faq__list {
