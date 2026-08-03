@@ -77,13 +77,15 @@ const companionFeatureImage = {
   focal: "76% center",
 };
 
+/* Every card carries the same artwork as its feature section below, so the
+   directory reads as pictures of six worlds rather than six paragraphs. */
 const categories = [
-  { name: "Pool cleaning", description: "Robots that scrub floors, walls and waterlines.", state: "Live", href: live.hub, code: "01" },
-  { name: "Window cleaning", description: "Glass-cleaning robots for homes and high-rise surfaces.", state: "In development", code: "02" },
-  { name: "Lawn & garden", description: "Autonomous mowers, irrigation and outdoor maintenance.", state: "In development", code: "03" },
-  { name: "Floor care", description: "Vacuum, mop and specialist indoor cleaning robots.", state: "Planned", code: "04" },
-  { name: "Security", description: "Patrol, monitoring and property-protection robotics.", state: "Planned", code: "05" },
-  { name: "Companion & service", description: "Useful home, hospitality and personal-assistance robots.", state: "Planned", code: "06" },
+  { name: "Pool cleaning", description: "Robots that scrub floors, walls and waterlines.", state: "Live", href: live.hub, code: "01", art: featureImage.src, focal: "78% center" },
+  { name: "Window cleaning", description: "Glass-cleaning robots for homes and high-rise surfaces.", state: "In development", code: "02", art: windowFeatureImage.src, focal: "28% center" },
+  { name: "Lawn & garden", description: "Autonomous mowers, irrigation and outdoor maintenance.", state: "In development", code: "03", art: lawnFeatureImage.src, focal: "76% center" },
+  { name: "Floor care", description: "Vacuum, mop and specialist indoor cleaning robots.", state: "Planned", code: "04", art: floorFeatureImage.src, focal: "24% center" },
+  { name: "Security", description: "Patrol, monitoring and property-protection robotics.", state: "Planned", code: "05", art: securityFeatureImage.src, focal: "82% center" },
+  { name: "Companion & service", description: "Useful home, hospitality and personal-assistance robots.", state: "Planned", code: "06", art: companionFeatureImage.src, focal: "74% center" },
 ];
 
 /* The homepage is a directory of six categories, and until now its markup
@@ -178,67 +180,55 @@ const homeSchema = [
       </div>
 
       <div class="world-grid">
-        {categories.map((category) => (
-          category.href ? (
-            <a class="world world--live" href={category.href}>
+        {categories.map((category) => {
+          /* The artwork is decorative: the card's name, state and description
+             are all real text above it, so alt would repeat them. */
+          const art = (
+            <span class="world__art" aria-hidden="true">
+              <img src={category.art} srcset={srcsetFor(category.art)}
+                   sizes="(min-width: 961px) 33vw, (min-width: 621px) 50vw, 100vw"
+                   alt="" loading="lazy" decoding="async"
+                   style={`object-position: ${category.focal}`} />
+            </span>
+          );
+          const body = (
+            <span class="world__body">
               <span class="world__code">{category.code}</span>
               <span class="world__state">{category.state}</span>
               <h3>{category.name}</h3>
               <p>{category.description}</p>
+            </span>
+          );
+          return category.href ? (
+            <a class="world world--live" href={category.href}>
+              {art}
+              {body}
               <span class="world__action">Explore category <span aria-hidden="true">→</span></span>
             </a>
           ) : (
             <article class="world">
-              <span class="world__code">{category.code}</span>
-              <span class="world__state">{category.state}</span>
-              <h3>{category.name}</h3>
-              <p>{category.description}</p>
+              {art}
+              {body}
               <span class="world__action world__action--quiet">Category system being built</span>
             </article>
-          )
-        ))}
+          );
+        })}
       </div>
     </div>
   </section>
 
   <section class="botmatch" id="botmatch">
+    {/* Three blocks, in the order a reader needs them: what it is, what it
+        looks like, how it works — and the button last. The section used to
+        put the button in the middle and keep talking afterwards, with the
+        picture stranded below all of it on a phone. Nothing follows the
+        call to action now. */}
     <div class="wrap botmatch__grid">
-      <div class="botmatch__copy">
+      <div class="botmatch__intro">
         <p class="kicker">BOTMATCH</p>
         <h2>Tell it about your home. It tells you which robot fits.</h2>
         <p class="large">
           Specifications only matter once you translate them into your house, your garden or your pool. BotMatch does that translation: a handful of plain questions about the space the machine has to work in, and a shortlist of the robots that actually suit it — with the ones to rule out, and why.
-        </p>
-
-        <ol class="botmatch__steps">
-          <li>
-            <span class="botmatch__step">01</span>
-            <h3>You answer, in your own terms</h3>
-            <p>Length, shape, surface, what you are tired of doing yourself. No model numbers and no jargon.</p>
-          </li>
-          <li>
-            <span class="botmatch__step">02</span>
-            <h3>It rules machines out first</h3>
-            <p>A robot rated for a shorter pool than yours is excluded outright, not quietly ranked lower. Where a maker publishes nothing, that reads as unknown — never as unsuitable.</p>
-          </li>
-          <li>
-            <span class="botmatch__step">03</span>
-            <h3>You get a result you can check</h3>
-            <p>Every recommendation shows what it was matched on, so you can disagree with it. We email the result and keep it on a page you can return to.</p>
-          </li>
-        </ol>
-
-        <p class="botmatch__integrity">
-          What BotMatch cannot see is what we earn. Commission is not available to the part of the system that chooses your robot — that is enforced in the code, not promised in a policy.
-        </p>
-
-        <div class="botmatch__actions">
-          <a class="btn btn--primary btn--lg" href={`/botmatch/${LAUNCH_CATEGORY}/`}>Try it on pool cleaners</a>
-          <a class="text-link" href={live.hub}>Or browse the category first &#8594;</a>
-        </div>
-
-        <p class="botmatch__note">
-          <strong>Robotic pool cleaners is the only category BotMatch answers today.</strong> The other five are mapped, not built. Each will get its own questions when it opens, because the thing that decides a mower is not the thing that decides a pool robot.
         </p>
       </div>
 
@@ -265,6 +255,39 @@ const homeSchema = [
           </picture>
         </figure>
       )}
+
+      <div class="botmatch__detail">
+        <ol class="botmatch__steps">
+          <li>
+            <span class="botmatch__step">01</span>
+            <h3>You answer, in your own terms</h3>
+            <p>Length, shape, surface, what you are tired of doing yourself. No model numbers and no jargon.</p>
+          </li>
+          <li>
+            <span class="botmatch__step">02</span>
+            <h3>It rules machines out first</h3>
+            <p>A robot rated for a shorter pool than yours is excluded outright, not quietly ranked lower. Where a maker publishes nothing, that reads as unknown — never as unsuitable.</p>
+          </li>
+          <li>
+            <span class="botmatch__step">03</span>
+            <h3>You get a result you can check</h3>
+            <p>Every recommendation shows what it was matched on, so you can disagree with it. We email the result and keep it on a page you can return to.</p>
+          </li>
+        </ol>
+
+        <p class="botmatch__note">
+          <strong>Robotic pool cleaners is the only category BotMatch answers today.</strong> The other five are mapped, not built. Each will get its own questions when it opens, because the thing that decides a mower is not the thing that decides a pool robot.
+        </p>
+
+        <p class="botmatch__integrity">
+          What BotMatch cannot see is what we earn. Commission is not available to the part of the system that chooses your robot — that is enforced in the code, not promised in a policy.
+        </p>
+
+        <div class="botmatch__actions">
+          <a class="btn btn--primary btn--lg" href={`/botmatch/${LAUNCH_CATEGORY}/`}>Try it on pool cleaners</a>
+          <a class="text-link" href={live.hub}>Or browse the category first &#8594;</a>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -429,8 +452,10 @@ const homeSchema = [
       radial-gradient(ellipse at 12% 0%, rgba(226,232,244,.055), transparent 58%),
       linear-gradient(180deg, #0c1015 0%, #080a0d 100%);
   }
-  .botmatch__grid { display: grid; grid-template-columns: 1fr; gap: clamp(32px, 5vw, 56px); align-items: center; }
-  .botmatch__copy { max-width: 62rem; }
+  /* One column on a phone, and the DOM order is the reading order: what it
+     is, what it looks like, how it works, then the button. */
+  .botmatch__grid { display: grid; grid-template-columns: 1fr; gap: clamp(28px, 4vw, 44px); align-items: start; }
+  .botmatch__intro, .botmatch__detail { max-width: 62rem; min-width: 0; }
   .botmatch h2 { margin: 0; max-width: 20ch; font-size: clamp(32px,4vw,50px); letter-spacing: -.04em; line-height: 1.06; }
   .botmatch .large { margin: 22px 0 0; max-width: 60ch; }
 
@@ -480,7 +505,18 @@ const homeSchema = [
   .botmatch__art img { display: block; width: 100%; height: auto; }
 
   @media (min-width: 1000px) {
-    .botmatch__grid:has(.botmatch__art) { grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); }
+    /* Named areas rather than source order: the picture sits beside both
+       copy blocks in one tall column, while on a phone the same markup
+       stacks between them without any reordering trickery. */
+    .botmatch__grid:has(.botmatch__art) {
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr);
+      grid-template-areas: "intro art" "detail art";
+      column-gap: clamp(32px, 5vw, 56px);
+      align-items: start;
+    }
+    .botmatch__grid:has(.botmatch__art) .botmatch__intro  { grid-area: intro; }
+    .botmatch__grid:has(.botmatch__art) .botmatch__detail { grid-area: detail; }
+    .botmatch__grid:has(.botmatch__art) .botmatch__art    { grid-area: art; position: sticky; top: 96px; }
   }
 
   .worlds,.system { padding: var(--section-gap) 0; background: linear-gradient(180deg,rgba(255,255,255,.025),transparent); border-top: 1px solid rgba(210,216,224,.1); }
@@ -488,13 +524,39 @@ const homeSchema = [
   .section-intro h2,.system h2 { margin: 0; font-size: clamp(38px,5vw,64px); letter-spacing: -.045em; }
   .section-intro > p:last-child { color: var(--text-secondary); font-size: 19px; line-height: 1.65; }
   .world-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 16px; }
-  .world { min-height: 290px; display: flex; flex-direction: column; padding: 25px; color: inherit; text-decoration: none; background: linear-gradient(145deg,rgba(255,255,255,.04),transparent 36%),#0a0d10; border: 1px solid rgba(207,213,220,.14); border-radius: 18px; transition: transform .2s ease,border-color .2s ease,background .2s ease; }
-  .world--live { background: linear-gradient(145deg,rgba(255,255,255,.12),transparent 36%),linear-gradient(180deg,#171b20,#090b0e); border-color: rgba(228,232,237,.42); }
+  /* The picture is the card's surface; the text sits on it. Padding moves to
+     the inner blocks so the artwork reaches the rounded edge with no inset. */
+  .world { position: relative; isolation: isolate; overflow: hidden; min-height: 340px; display: flex; flex-direction: column; color: inherit; text-decoration: none; background: #0a0d10; border: 1px solid rgba(207,213,220,.14); border-radius: 18px; transition: transform .2s ease,border-color .2s ease; }
+  .world__art { position: absolute; inset: 0; z-index: 0; }
+  .world__art img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: .92; transition: opacity .3s ease, transform .4s ease; }
+  /* A scrim, not a tint: the copy has to stay legible over whichever part of
+     the photograph the crop happens to land on. */
+  .world__art::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    /* Heavy where the words are, near-clear through the band below them, then
+       dark again under the action line. The card should look like a
+       photograph with copy on it, not a black tile with a hint of picture. */
+    background: linear-gradient(180deg,
+      rgba(6,9,13,.88) 0%,
+      rgba(6,9,13,.84) 42%,
+      rgba(6,9,13,.44) 62%,
+      rgba(6,9,13,.34) 76%,
+      rgba(6,9,13,.86) 100%);
+  }
+  .world__body { position: relative; z-index: 1; display: block; padding: 25px 25px 0; }
+  .world:hover .world__art img { opacity: 1; transform: scale(1.04); }
+  @media (prefers-reduced-motion: reduce) { .world__art img { transition: none; } .world:hover .world__art img { transform: none; } }
+  .world--live { border-color: rgba(228,232,237,.42); }
+  .world--live .world__art img { opacity: 1; }
   .world--live:hover { transform: translateY(-4px); border-color: #e4e8ec; }
   .world__code { color: #686f78; font: 700 12px/1 var(--font-mono); letter-spacing: .15em; }
   .world__state { align-self: flex-end; margin-top: -12px; color: #aeb4bc; font: 700 10px/1 var(--font-mono); letter-spacing: .12em; text-transform: uppercase; }
-  .world h3 { margin: auto 0 12px; font-size: 27px; }.world p { color: var(--text-secondary); line-height: 1.55; }
-  .world__action { margin-top: 18px; color: #eef0f3; font-weight: 700; }.world__action--quiet { color: #747b85; font-size: 13px; }
+  .world h3 { margin: 34px 0 10px; font-size: 27px; }
+  .world p { color: #c3c9d2; line-height: 1.55; }
+  .world__action { position: relative; z-index: 1; margin-top: auto; padding: 18px 25px 25px; color: #eef0f3; font-weight: 700; }
+  .world__action--quiet { color: #9aa2ac; font-size: 13px; }
   /* The category feature sections style themselves — see CategoryFeature.astro. */
   .text-link { color: #c8cdd4; text-align: center; text-decoration: none; font-weight: 700; }
   .system-grid { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 14px; }
@@ -502,5 +564,5 @@ const homeSchema = [
   .system-grid span { color: #747b85; font: 700 12px/1 var(--font-mono); }.system-grid h3 { margin: 34px 0 12px; }.system-grid p { color: var(--text-secondary); line-height: 1.55; }
   .close { padding: clamp(70px,10vw,140px) 0; }.close__inner { text-align: center; }.close img { width: min(520px,82vw); height: auto; }.close p { margin: 20px auto 30px; color: var(--text-secondary); font-size: 20px; }
   @media(max-width:960px){.world-grid{grid-template-columns:repeat(2,1fr)}.system-grid{grid-template-columns:repeat(2,1fr)}}
-  @media(max-width:620px){.hero{min-height:auto;padding:48px 0 70px}.hero__grid{gap:26px}h1{font-size:40px}.world-grid,.system-grid{grid-template-columns:1fr}.world{min-height:235px}.section-intro h2,.system h2{font-size:40px}}
+  @media(max-width:620px){.hero{min-height:auto;padding:48px 0 70px}.hero__grid{gap:26px}h1{font-size:40px}.world-grid,.system-grid{grid-template-columns:1fr}.world{min-height:300px}.section-intro h2,.system h2{font-size:40px}}
 </style>
