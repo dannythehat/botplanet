@@ -153,29 +153,30 @@
     {
       "productId": "prod-dolphin-e10",
       "canonicalUrl": "https://botplanet.io/robots/robotic-pool-cleaners/dolphin-e10/",
-      "verifiedOffers": 1,
-      "preferredOfferId": "offer-prod-dolphin-e10-ret-amazon",
+      "verifiedOffers": 0,
+      "preferredOfferId": null,
       "preferredOfferAudit": [
-        "1 offer(s) exist for this product",
-        "1 from an approved retailer",
-        "ranked by exact-match confidence, then stock, then delivered price",
-        "chosen: offer-prod-dolphin-e10-ret-amazon (verified_exact)"
+        "0 offer(s) exist for this product",
+        "0 from an approved retailer",
+        "no approved offer — nothing is featured"
       ],
       "commissionUsedAsTieBreak": false,
-      "retailer": "ret-amazon",
+      "retailer": null,
       "exactProductIdentifier": "B0GV15VY1N",
       "identifierKind": "asin",
       "market": "us",
-      "priceState": "current",
-      "stockState": "in_stock",
-      "deliveryState": "free",
-      "warrantyRoute": "Maytronics (Dolphin) states a warranty of 2 Years.",
-      "lastChecked": "2026-07-31",
-      "freshness": "live",
-      "affiliateProgramme": "prog-amazon-us",
-      "goPath": "/go/pool-dolphin-e10-amazon",
-      "schemaEligible": true,
-      "blockers": [],
+      "priceState": "not_published",
+      "stockState": "unknown",
+      "deliveryState": "unknown",
+      "warrantyRoute": null,
+      "lastChecked": null,
+      "freshness": "unknown",
+      "affiliateProgramme": null,
+      "goPath": null,
+      "schemaEligible": false,
+      "blockers": [
+        "no approved offer"
+      ],
       "nextAction": "Obtain price and availability through the Amazon Creators API so the offer can carry a current price and enter Offer schema."
     },
     {

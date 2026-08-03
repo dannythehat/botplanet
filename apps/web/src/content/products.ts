@@ -653,10 +653,19 @@ export type CatalogueStatus =
   /** Sellable and recommendable. */
   | "active"
   /** Kept for the record: no offers, no recommendations, no comparisons. */
-  | "historical_candidate";
+  | "historical_candidate"
+  /**
+   * Taken out of the catalogue by an owner decision rather than by a finding
+   * against the product. Distinct from historical_candidate on purpose: one
+   * says "we could not stand behind this", the other says "we chose to stop
+   * carrying it". Collapsing them would lose the difference, and the
+   * difference is the whole reason either label exists.
+   */
+  | "removed";
 
 export const CATALOGUE_STATUS: Record<string, CatalogueStatus> = {
-  /* Empty since 3 August 2026. `prod-dolphin-premier` was the one entry; that
+  "prod-dolphin-e10": "removed",
+  /* `prod-dolphin-premier` was the other entry; that
      record now holds the BuBlue Bubot 800P Gen2, which has a machine-read
      identity and a live destination, so it is an ordinary active product. The
      Dolphin Premier itself is still not sellable and never became so — see

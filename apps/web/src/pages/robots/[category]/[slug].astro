@@ -7,7 +7,7 @@ import { breadcrumbsFor } from "../../../lib/routing";
 import { buildOffers, publicationFor } from "../../../lib/offer-truth";
 import { retailer } from "../../../content/commerce/registry";
 import { catalogueStatusOf, CATALOGUE_WITHDRAWALS } from "../../../content/products";
-import { resolveSlug } from "../../../content/product-names";
+import { resolveSlug, removedRedirect } from "../../../content/product-names";
 import { latestAcceptedForProduct } from "../../../lib/providers/refresh-store";
 
 const { category, slug } = Astro.params;
@@ -18,6 +18,11 @@ const db = getDb(Astro.locals);
    permanently rather than answered with a page that contradicts its address. */
 const { storedSlug, redirectTo } = resolveSlug(slug!);
 if (redirectTo) return Astro.redirect(`/robots/${category}/${redirectTo}/`, 301);
+
+/* A product that has left the catalogue keeps its archived row but loses its
+   page. The URL was indexed, so it goes to the category rather than 404ing. */
+const gone = removedRedirect(slug!);
+if (gone) return Astro.redirect(gone, 301);
 
 const product = (
   await db.select().from(schema.products).where(eq(schema.products.slug, storedSlug)).limit(1)

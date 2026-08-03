@@ -70,3 +70,39 @@ export function resolveSlug(requested: string): { storedSlug: string; redirectTo
   const retired = RETIRED_SLUGS[requested];
   return retired ? { storedSlug: retired.to, redirectTo: retired.to } : { storedSlug: requested, redirectTo: null };
 }
+
+/* ------------------------------------------------------------------ */
+/* Products removed from the catalogue                                 */
+/* ------------------------------------------------------------------ */
+
+/**
+ * A product that has LEFT, rather than one that changed model.
+ *
+ * Its row stays in D1 as `archived`, so nothing about it is destroyed, but it
+ * no longer appears in listings, the comparison table, the matcher or the
+ * sitemap. Its URL was published and indexed, so it must not 404 — it goes to
+ * the category it belonged to, which is the nearest genuinely useful page.
+ */
+export interface RemovedProduct {
+  /** Category slug to send the visitor to. */
+  categorySlug: string;
+  name: string;
+  removedOn: string;
+  reason: string;
+}
+
+export const REMOVED_PRODUCTS: Record<string, RemovedProduct> = {
+  "dolphin-e10": {
+    categorySlug: "robotic-pool-cleaners",
+    name: "Dolphin E10",
+    removedOn: "2026-08-03",
+    reason:
+      "Removed from the catalogue at the owner's direction. It was the only product with no BotPlanet artwork, and the only above-ground floor-only machine in a set that had moved upmarket around it. The evidence record is kept in RETIRED_VERIFICATIONS and the D1 row is archived rather than deleted, so the decision stays traceable and the product could return.",
+  },
+};
+
+/** Where a removed product's URL should send a visitor, or null. */
+export const removedRedirect = (slug: string): string | null => {
+  const r = REMOVED_PRODUCTS[slug];
+  return r ? `/robots/${r.categorySlug}/` : null;
+};

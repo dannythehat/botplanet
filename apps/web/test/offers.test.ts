@@ -312,10 +312,16 @@ describe("price, stock and shipping normalisation", () => {
   });
 
   it("publishes a price only where a source actually read the page", () => {
-    const checked = new Set([
-      ...MANUAL_CHECKS.map((c) => c.productId),
-      ...SERPAPI_OBSERVATIONS.filter((o) => o.priceMinor !== null).map((o) => o.productId),
-    ]);
+    // A price reading for a product that has left the catalogue produces no
+    // showable price, because it produces no offer at all. Filtering here keeps
+    // the test measuring what it means to measure — evidence reaching a live
+    // offer — rather than counting readings for things we no longer sell.
+    const checked = new Set(
+      [
+        ...MANUAL_CHECKS.map((c) => c.productId),
+        ...SERPAPI_OBSERVATIONS.filter((o) => o.priceMinor !== null).map((o) => o.productId),
+      ].filter((id) => catalogueStatusOf(id) === "active"),
+    );
     for (const o of OFFERS) {
       if (checked.has(o.productId)) {
         expect(o.basePriceMinor).not.toBeNull();
@@ -504,10 +510,16 @@ describe("preferred offer", () => {
 
 describe("schema eligibility gates", () => {
   it("lets an offer into Offer schema only when it is fully evidenced", () => {
-    const checked = new Set([
-      ...MANUAL_CHECKS.map((c) => c.productId),
-      ...SERPAPI_OBSERVATIONS.filter((o) => o.priceMinor !== null).map((o) => o.productId),
-    ]);
+    // A price reading for a product that has left the catalogue produces no
+    // showable price, because it produces no offer at all. Filtering here keeps
+    // the test measuring what it means to measure — evidence reaching a live
+    // offer — rather than counting readings for things we no longer sell.
+    const checked = new Set(
+      [
+        ...MANUAL_CHECKS.map((c) => c.productId),
+        ...SERPAPI_OBSERVATIONS.filter((o) => o.priceMinor !== null).map((o) => o.productId),
+      ].filter((id) => catalogueStatusOf(id) === "active"),
+    );
     expect(REPORT.totals.schemaEligible).toBe(checked.size);
     for (const o of OFFERS) {
       expect(publicationFor(o).schemaEligible).toBe(checked.has(o.productId));

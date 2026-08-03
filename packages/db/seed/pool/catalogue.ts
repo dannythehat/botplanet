@@ -219,6 +219,9 @@ export const productRows: (typeof products.$inferInsert)[] = [
     // CONFIRMED 10th launch product (approved by ChatGPT/Danny, 2026-07-29).
     // Product identity is confirmed; price / affiliate / image-rights / stock
     // fields remain provisional snapshots until individually verified.
+    // REMOVED from the catalogue on 2026-08-03 at the owner's direction. The row
+    // is archived rather than deleted so the decision stays traceable and the
+    // product could return; its URL redirects to the category.
     id: "prod-dolphin-e10",
     slug: "dolphin-e10",
     brandId: "brand-dolphin",
@@ -237,7 +240,7 @@ export const productRows: (typeof products.$inferInsert)[] = [
       note: "Trusted-brand corded above-ground; completes corded-vs-cordless in the above-ground segment. Dolphin Escape held as a later premium above-ground alternative.",
       snapshotDate: SNAPSHOT_DATE,
     },
-    status: "published",
+    status: "archived",
   },
 ];
 
