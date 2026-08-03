@@ -9,7 +9,8 @@ import { heroFor } from "../../content/category-hero";
 import DecisionCards from "../../components/DecisionCards.astro";
 import CoverageRows from "../../components/CoverageRows.astro";
 import DecisionSplit from "../../components/DecisionSplit.astro";
-import { decisionSectionFor, coverageSectionFor, splitSectionFor } from "../../content/category-sections";
+import MatrixTable from "../../components/MatrixTable.astro";
+import { decisionSectionFor, coverageSectionFor, splitSectionFor, matrixSectionFor } from "../../content/category-sections";
 
 import "../../styles/tokens.css";
 import "../../styles/base.css";
@@ -22,6 +23,7 @@ const hero = heroFor("robotic-pool-cleaners")!;
 const decision = decisionSectionFor("robotic-pool-cleaners")!;
 const coverage = coverageSectionFor("robotic-pool-cleaners")!;
 const split = splitSectionFor("robotic-pool-cleaners")!;
+const matrix = matrixSectionFor("robotic-pool-cleaners")!;
 ---
 
 <html lang="en">
@@ -58,6 +60,7 @@ const split = splitSectionFor("robotic-pool-cleaners")!;
         rows={coverage.rows}
       />
       <DecisionSplit id={split.id} eyebrow={split.eyebrow} title={split.title} intro={split.intro} panels={split.panels} />
+      <MatrixTable id={matrix.id} eyebrow={matrix.eyebrow} title={matrix.title} intro={matrix.intro} columns={matrix.columns} rows={matrix.rows} note={matrix.note} />
     </main>
   </body>
 </html>

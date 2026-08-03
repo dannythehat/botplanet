@@ -19,6 +19,7 @@
 import type { DecisionCard } from "../components/DecisionCards.astro";
 import type { CoverageRow } from "../components/CoverageRows.astro";
 import type { SplitPanel } from "../components/DecisionSplit.astro";
+import type { MatrixRow } from "../components/MatrixTable.astro";
 import type { HeroImage } from "../components/CategoryHero.astro";
 
 export interface DecisionSectionContent {
@@ -226,4 +227,82 @@ export const SPLIT_SECTION: Record<string, SplitSectionContent> = {
 
 export function splitSectionFor(slug: string | undefined): SplitSectionContent | undefined {
   return slug ? SPLIT_SECTION[slug] : undefined;
+}
+
+/* ============================================================
+   Section 5 — the capability matrix.
+
+   Pool wording follows the approved Notion research ("What
+   debris can a pool robot actually remove?"), which specifies a
+   debris-versus-filter matrix and three sub-topics: leaves and
+   larger debris, fine dirt and silt, algae and stuck-on dirt.
+
+   This section is also where the core synonyms "robotic pool
+   vacuum" and "pool cleaning robot" land. They belong to the
+   same 40,500 keyword family as the primary term, and filtration
+   is the one place "vacuum" is the honest word to use rather
+   than a term dropped in for search engines.
+   ============================================================ */
+
+export interface MatrixSectionContent {
+  id: string;
+  eyebrow?: string;
+  title: string;
+  intro: string;
+  columns: string[];
+  rows: MatrixRow[];
+  note?: string;
+}
+
+export const MATRIX_SECTION: Record<string, MatrixSectionContent> = {
+  "robotic-pool-cleaners": {
+    id: "debris",
+    eyebrow: "Debris and filtration",
+    title: "What debris can a pool robot actually remove?",
+
+    /* 75 words. Carries "robotic pool vacuum" and the filtration cluster. */
+    intro:
+      "A robotic pool vacuum does not treat all dirt the same way. Leaves are a volume " +
+      "problem — they fill the basket. Fine silt is a filtration problem, and depends on how " +
+      "fine the filter genuinely is rather than what the box calls it. Algae is a chemistry " +
+      "problem a robot can help with but never solve. Match the debris you actually get to " +
+      "the basket and the filter, not to a marketing word like ultra-fine.",
+
+    columns: ["What it needs", "Where a robot falls short"],
+
+    rows: [
+      {
+        label: "Leaves and larger debris",
+        cells: [
+          "A wide intake and a basket big enough to hold a full load in one cycle.",
+          "A full basket stops collecting. Under heavy leaf fall you may have to empty it " +
+            "part-way through a run.",
+        ],
+      },
+      {
+        label: "Fine dirt, sand and silt",
+        cells: [
+          "A filter that is genuinely fine, stated as a measurement rather than described " +
+            "as fine on the packaging.",
+          "Fine filters block sooner and lose suction if they are not rinsed between runs.",
+        ],
+      },
+      {
+        label: "Algae and stuck-on dirt",
+        cells: [
+          "Active brushing and enough traction to scrub, rather than suction on its own.",
+          "A pool cleaning robot lifts algae once it is loosened, but it does not correct " +
+            "the water chemistry that grew it.",
+        ],
+      },
+    ],
+
+    note:
+      "Filter fineness is usually given in microns. A lower number means a finer filter — " +
+      "and a filter that needs rinsing more often.",
+  },
+};
+
+export function matrixSectionFor(slug: string | undefined): MatrixSectionContent | undefined {
+  return slug ? MATRIX_SECTION[slug] : undefined;
 }
