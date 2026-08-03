@@ -7,7 +7,8 @@ export const prerender = true;
 import CategoryHero from "../../components/CategoryHero.astro";
 import { heroFor } from "../../content/category-hero";
 import DecisionCards from "../../components/DecisionCards.astro";
-import { decisionSectionFor } from "../../content/category-sections";
+import CoverageRows from "../../components/CoverageRows.astro";
+import { decisionSectionFor, coverageSectionFor } from "../../content/category-sections";
 
 import "../../styles/tokens.css";
 import "../../styles/base.css";
@@ -18,6 +19,7 @@ import "../../styles/metal-theme.css";
 
 const hero = heroFor("robotic-pool-cleaners")!;
 const decision = decisionSectionFor("robotic-pool-cleaners")!;
+const coverage = coverageSectionFor("robotic-pool-cleaners")!;
 ---
 
 <html lang="en">
@@ -43,6 +45,13 @@ const decision = decisionSectionFor("robotic-pool-cleaners")!;
         title={decision.title}
         intro={decision.intro}
         cards={decision.cards}
+      />
+      <CoverageRows
+        id={coverage.id}
+        title={coverage.title}
+        intro={coverage.intro}
+        image={coverage.image}
+        rows={coverage.rows}
       />
     </main>
   </body>

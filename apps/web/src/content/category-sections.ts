@@ -17,6 +17,8 @@
    ============================================================ */
 
 import type { DecisionCard } from "../components/DecisionCards.astro";
+import type { CoverageRow } from "../components/CoverageRows.astro";
+import type { HeroImage } from "../components/CategoryHero.astro";
 
 export interface DecisionSectionContent {
   /** Anchor id for internal links. */
@@ -76,4 +78,75 @@ export const DECISION_SECTION: Record<string, DecisionSectionContent> = {
 
 export function decisionSectionFor(slug: string | undefined): DecisionSectionContent | undefined {
   return slug ? DECISION_SECTION[slug] : undefined;
+}
+
+/* ============================================================
+   Section 3 — coverage. What does the machine actually clean?
+
+   Pool wording follows the approved Notion research ("Floor,
+   walls, waterline or surface: what should the robot clean?"),
+   which assigns this section the wall-climbing cluster.
+
+   The image slot is for the approved four-zone cutaway (floor,
+   walls, waterline, surface). The rows read as finished without
+   it, so the section is not blocked waiting on artwork.
+   ============================================================ */
+
+export interface CoverageSectionContent {
+  id: string;
+  title: string;
+  intro: string;
+  image?: HeroImage;
+  rows: CoverageRow[];
+}
+
+export const COVERAGE_SECTION: Record<string, CoverageSectionContent> = {
+  "robotic-pool-cleaners": {
+    id: "coverage",
+    title: "Floor, walls, waterline or surface: what should the robot clean?",
+
+    /* 75 words. Carries "wall climbing robotic pool cleaner" (30) plus the
+       floor and waterline terminology this section owns. */
+    intro:
+      "Not every pool robot cleans the same surfaces. Some only handle the floor. Others " +
+      "climb the walls and scrub the waterline, where the tile line grows a greasy ring. A " +
+      "few stay on the surface and never touch the floor at all. Manufacturers use these " +
+      "terms loosely, so check coverage model by model rather than trusting the category " +
+      "name — a wall climbing robotic pool cleaner and a floor-only machine can sit at the " +
+      "same price.",
+
+    rows: [
+      {
+        title: "Floor-only cleaning",
+        whoFor: "Flat floors, settled dirt, tighter budgets",
+        body:
+          "A floor-only machine covers the pool floor and nothing above it. For a pool with " +
+          "a flat base where most of the dirt settles rather than sticking to the sides, that " +
+          "is often genuinely enough. It also costs less than paying for climbing ability you " +
+          "will never use.",
+      },
+      {
+        title: "Wall and waterline cleaning",
+        whoFor: "In-ground pools with a visible tile line",
+        body:
+          "Climbing depends on traction, not raw power. A robot can reach the wall without " +
+          "ever scrubbing the waterline, which is exactly where the oily ring forms. Treat " +
+          "\"climbs walls\" and \"cleans the waterline\" as two separate claims, and confirm " +
+          "both for the exact model rather than the product range.",
+      },
+      {
+        title: "Surface skimming",
+        whoFor: "Pools under trees, where leaves land faster than they sink",
+        body:
+          "A surface skimmer collects floating debris before it settles. It does not clean the " +
+          "floor or the walls, so it works alongside a floor-and-wall robot rather than " +
+          "replacing one. Leaves lifted at the surface never become the load your main robot " +
+          "has to shift later.",
+      },
+    ],
+  },
+};
+
+export function coverageSectionFor(slug: string | undefined): CoverageSectionContent | undefined {
+  return slug ? COVERAGE_SECTION[slug] : undefined;
 }

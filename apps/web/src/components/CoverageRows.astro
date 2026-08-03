@@ -1,0 +1,175 @@
+---
+/* ============================================================
+   BotPlanet — Coverage section (H2 + intro + labelled rows)
+
+   Section 3 on every category page. Same fixed shape as the
+   decision section, but a different element on purpose: rows
+   divided by hairlines rather than boxed cards, so the page
+   does not read as the same component three times.
+
+   Each row carries a real H3, so the sub-topics are headings
+   in their own right rather than bold text.
+
+   The image is optional — the rows are complete without it.
+   ============================================================ */
+
+import type { HeroImage } from "./CategoryHero.astro";
+
+export interface CoverageRow {
+  /** The H3, e.g. "Wall and waterline cleaning". */
+  title: string;
+  /** One line: who genuinely needs this. */
+  whoFor: string;
+  /** Two to four sentences. */
+  body: string;
+}
+
+interface Props {
+  id?: string;
+  /** The H2. Carries the section's secondary keyword. */
+  title: string;
+  /** 60–100 words. */
+  intro: string;
+  /** Optional supporting visual, shown above the rows. */
+  image?: HeroImage;
+  rows: CoverageRow[];
+}
+
+const { id, title, intro, image, rows } = Astro.props;
+---
+
+<section class="cov" id={id}>
+  <div class="cov__head">
+    <h2 class="cov__title">{title}</h2>
+    <p class="cov__intro">{intro}</p>
+  </div>
+
+  {image?.src && (
+    <figure class="cov__figure">
+      <picture>
+        {image.mobileSrc && <source media="(max-width: 719px)" srcset={image.mobileSrc} />}
+        <img
+          src={image.src}
+          alt={image.alt}
+          style={image.focal ? `object-position: ${image.focal}` : undefined}
+          loading="lazy"
+          decoding="async"
+        />
+      </picture>
+    </figure>
+  )}
+
+  <div class="cov__rows">
+    {rows.map((row) => (
+      <div class="crow">
+        <div class="crow__label">
+          <h3 class="crow__title">{row.title}</h3>
+          <p class="crow__who">{row.whoFor}</p>
+        </div>
+        <p class="crow__body">{row.body}</p>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .cov {
+    margin: 0 0 var(--space-2xl, 3rem);
+  }
+
+  /* ---------- heading + intro ---------- */
+  .cov__head {
+    max-width: 62ch;
+    margin-bottom: clamp(1.5rem, 3.5vw, 2.25rem);
+  }
+
+  .cov__title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.6rem, 4.4vw, 2.35rem);
+    line-height: 1.14;
+    letter-spacing: -0.018em;
+    text-wrap: balance;
+    color: var(--text-primary);
+  }
+
+  .cov__intro {
+    margin: 0.9rem 0 0;
+    font-size: 1.0625rem;
+    line-height: 1.62;
+    color: var(--text-secondary);
+  }
+
+  /* ---------- optional visual ---------- */
+  .cov__figure {
+    margin: 0 0 clamp(1.25rem, 3vw, 2rem);
+    border: 1px solid rgba(204, 210, 218, 0.16);
+    border-radius: 14px;
+    overflow: hidden;
+    background: linear-gradient(160deg, #171b20, #090b0e);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 18px 44px rgba(0, 0, 0, 0.4);
+  }
+
+  .cov__figure img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+
+  /* ---------- rows ---------- */
+  .cov__rows {
+    border-top: 1px solid rgba(203, 210, 218, 0.16);
+  }
+
+  .crow {
+    display: grid;
+    gap: 0.55rem;
+    padding: clamp(1.25rem, 3.2vw, 1.75rem) 0;
+    border-bottom: 1px solid rgba(203, 210, 218, 0.12);
+  }
+
+  .crow__title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.15rem;
+    line-height: 1.26;
+    letter-spacing: -0.008em;
+    color: var(--text-primary);
+  }
+
+  .crow__who {
+    margin: 0.35rem 0 0;
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    letter-spacing: 0.06em;
+    line-height: 1.5;
+    color: var(--text-tertiary);
+  }
+
+  .crow__body {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.62;
+    color: var(--text-secondary);
+  }
+
+  /* ---------- wider screens ---------- */
+  @media (min-width: 860px) {
+    .cov__intro {
+      font-size: 1.1875rem;
+    }
+
+    .crow {
+      grid-template-columns: 15rem 1fr;
+      gap: clamp(1.5rem, 4vw, 3rem);
+      align-items: start;
+    }
+
+    .crow__body {
+      max-width: 66ch;
+    }
+  }
+</style>

@@ -9,7 +9,8 @@ import { breadcrumbsFor } from "../../../lib/routing";
 import CategoryHero from "../../../components/CategoryHero.astro";
 import { heroFor } from "../../../content/category-hero";
 import DecisionCards from "../../../components/DecisionCards.astro";
-import { decisionSectionFor } from "../../../content/category-sections";
+import CoverageRows from "../../../components/CoverageRows.astro";
+import { decisionSectionFor, coverageSectionFor } from "../../../content/category-sections";
 
 const { category } = Astro.params;
 const db = getDb(Astro.locals);
@@ -41,6 +42,7 @@ const crumbs = breadcrumbsFor(Astro.url.pathname);
 
 const hero = heroFor(category);
 const decision = decisionSectionFor(category);
+const coverage = coverageSectionFor(category);
 ---
 
 <Base
@@ -75,6 +77,16 @@ const decision = decisionSectionFor(category);
       title={decision.title}
       intro={decision.intro}
       cards={decision.cards}
+    />
+  )}
+
+  {coverage && (
+    <CoverageRows
+      id={coverage.id}
+      title={coverage.title}
+      intro={coverage.intro}
+      image={coverage.image}
+      rows={coverage.rows}
     />
   )}
 
