@@ -146,6 +146,39 @@ export const ORIGINAL_ASSETS: MediaAssetRecord[] = [
     lastCheckedDate: "2026-08-03",
     notes: "Owner-created, supplied 3 August 2026. Both are authored compositions, not crops — the portrait version is recomposed so all six machines survive on a phone, which a centre crop of the wide file could not do.",
   })),
+  ...(
+    [
+      ["botmatch-explainer-desktop", "/media/botmatch/explainer-desktop.webp", 1672, 941, "sha256:0d914ba007ccd6197e5be035a2cc68d81e4206af5e6bcec13a8116e20ca83674"],
+      ["botmatch-explainer-mobile", "/media/botmatch/explainer-mobile.webp", 941, 1672, "sha256:491cc7596cc3902713eb180e662e839a9c505bed917ffdd37b24ec0380ad98fe"],
+    ] as const
+  ).map(([id, src, width, height, checksum]): MediaAssetRecord => ({
+    ...base(id, "botplanet_original"),
+    productId: null,
+    purpose: "BotMatch explainer on the homepage",
+    exactModel: null,
+    type: "promotional_panel",
+    acquisitionMethod: "authored_in_house",
+    checksum,
+    width,
+    height,
+    src,
+    altText:
+      "A BotMatch panel at the centre of six linked category tiles — pool cleaning, window cleaning, floor care, lawn and garden, security, and companion and service — showing a best-match result being confirmed.",
+    altTextStatus: "approved",
+    schema: {
+      ...ORIGINAL_SCHEMA,
+      imageObject: false,
+      articleImage: false,
+      reason:
+        "an interface illustration of BotPlanet's own tool, not editorial content about a product; it may preview socially but must not be emitted as an ImageObject supporting the article",
+    },
+    depictsRealProduct: false,
+    presentation: "bleed",
+    retrievedDate: "2026-08-03",
+    lastCheckedDate: "2026-08-03",
+    notes:
+      "Owner-created, supplied 3 August 2026 as a composed desktop/mobile pair. It shows all six categories linked to the matcher; only pool cleaners is live, so the copy beside it must keep saying so — see the section note on the homepage.",
+  })),
   {
     ...base("promo-botmatch-pool", "botplanet_original"),
     productId: null,

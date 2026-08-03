@@ -4,9 +4,17 @@ import { LAUNCH_CATEGORY, categoryRoutes } from "../content/routes";
 
 const live = categoryRoutes(LAUNCH_CATEGORY);
 
-/* BotMatch section artwork. Null until Danny supplies it — the section is built
-   to read as finished without a picture, so an empty slot is never a grey box. */
-const matcherImage: { src: string; width: number; height: number; alt: string } | null = null;
+/* BotMatch section artwork, supplied as a composed desktop/mobile pair. */
+const matcherImage = {
+  src: "/media/botmatch/explainer-desktop.webp",
+  mobileSrc: "/media/botmatch/explainer-mobile.webp",
+  width: 1672,
+  height: 941,
+  mobileWidth: 941,
+  mobileHeight: 1672,
+  alt:
+    "A BotMatch panel at the centre of six linked category tiles — pool cleaning, window cleaning, floor care, lawn and garden, security, and companion and service — showing a best-match result being confirmed.",
+};
 
 const categories = [
   { name: "Pool cleaning", description: "Robots that scrub floors, walls and waterlines.", state: "Live", href: live.hub, code: "01" },
@@ -143,13 +151,16 @@ const categories = [
         </div>
 
         <p class="botmatch__note">
-          Live for robotic pool cleaners today. Each new category gets its own questions, because the thing that decides a mower is not the thing that decides a pool robot.
+          <strong>Robotic pool cleaners is the only category BotMatch answers today.</strong> The other five are mapped, not built. Each will get its own questions when it opens, because the thing that decides a mower is not the thing that decides a pool robot.
         </p>
       </div>
 
       {matcherImage && (
         <figure class="botmatch__art">
-          <img src={matcherImage.src} width={matcherImage.width} height={matcherImage.height} alt={matcherImage.alt} loading="lazy" decoding="async" />
+          <picture>
+            <source media="(max-width: 720px)" srcset={matcherImage.mobileSrc} width={matcherImage.mobileWidth} height={matcherImage.mobileHeight} />
+            <img src={matcherImage.src} width={matcherImage.width} height={matcherImage.height} alt={matcherImage.alt} loading="lazy" decoding="async" />
+          </picture>
         </figure>
       )}
     </div>
@@ -269,7 +280,11 @@ const categories = [
   }
 
   .botmatch__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; margin-top: 30px; }
-  .botmatch__note { margin: 20px 0 0; font-size: 13.5px; line-height: 1.6; color: var(--text-quaternary); max-width: 62ch; }
+  .botmatch__note { margin: 20px 0 0; font-size: 13.5px; line-height: 1.6; color: var(--text-tertiary); max-width: 62ch; }
+  /* The artwork shows six routes into the matcher and five of them do not
+     exist yet. This line is the correction, so it is not dimmed into a
+     footnote beside a picture that promises more than the tool does. */
+  .botmatch__note strong { color: #eef0f3; font-weight: 600; }
 
   .botmatch__art {
     margin: 0;
