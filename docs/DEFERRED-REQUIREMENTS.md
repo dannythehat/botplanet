@@ -38,3 +38,41 @@ Internal-link clicks (source→destination), CTA impressions/clicks, BotMatch en
 
 ---
 **None of this is built in this PR.** It is recorded so the foundation stays compatible: `click_events` already carries page/placement/recommendation/cluster/campaign dimensions; `evidence` and `media` exist; the scoring engine keeps commission out of recommendations. The page-records/linking/EEAT/CTA/pop-up tables are the next migration group after the frontend is scaffolded.
+
+---
+
+# Owner requests logged during the category-template build (2 August 2026)
+
+Recorded so they are not lost. Neither is built yet.
+
+## 11. Jump-links table near the top of the page
+**Danny, 2 August 2026:** the article needs a jump-links table so a reader can
+skip straight to the section they want. Timing is open — "doesn't matter when".
+
+Groundwork is already in place: every section component takes an `id` and the
+pool page already renders `#pool-type`, `#coverage` and `#power`, so the anchors
+exist and are stable. What is still needed is the component itself, plus a
+decision on where it sits (the approved Notion component order puts nothing
+between the intro and the trust strip, so adding it needs Danny's sign-off on
+placement) and how it behaves on mobile, where a full table of contents can eat
+the whole first screen.
+
+Build it as one reusable component driven by the same per-category content file
+as the sections, so a page's jump links cannot drift out of step with its
+actual headings.
+
+## 12. Internal links and natural anchor text
+**Danny, 2 August 2026:** the page needs real internal links with natural
+anchors — deliberately deferred, because most destinations do not exist yet.
+
+Confirmed missing as of this date: the cordless guide
+(`/best-robots/robotic-pool-cleaners/cordless/`), the pool-skimmer page, and the
+"are robotic pool cleaners worth it?" guide. The category page currently links
+out to none of them, which is correct — the approved research forbids promoting
+an unfinished destination.
+
+The anchor-text variants are already specified in the Notion research (for
+example `compare robotic pool cleaners`, `see all pool robots`, `Betta SE Plus
+pool skimmer review`). Section 3's surface-skimming row and section 4's power
+comparison are the two places already written to receive a link the moment
+their destination pages ship.
