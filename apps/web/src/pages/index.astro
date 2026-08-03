@@ -3,6 +3,7 @@ import Base from "../layouts/Base.astro";
 import { LAUNCH_CATEGORY, categoryRoutes } from "../content/routes";
 import { srcsetFor } from "../lib/srcset";
 import CategoryFeature from "../components/CategoryFeature.astro";
+import { webPageSchema, SITE_URL } from "../lib/seo";
 
 const live = categoryRoutes(LAUNCH_CATEGORY);
 
@@ -84,12 +85,46 @@ const categories = [
   { name: "Security", description: "Patrol, monitoring and property-protection robotics.", state: "Planned", code: "05" },
   { name: "Companion & service", description: "Useful home, hospitality and personal-assistance robots.", state: "Planned", code: "06" },
 ];
+
+/* The homepage is a directory of six categories, and until now its markup
+   said so to a reader but not to a crawler: the graph described a company and
+   a website and never the thing the page actually lists.
+
+   Only the live category carries a url, because only it has a page. A ListItem
+   naming a category we have not built yet is still true — it is on the roadmap
+   and the page says so — but pointing it at a URL would not be. */
+const categoryList = {
+  "@type": "ItemList",
+  "@id": `${SITE_URL}/#robot-categories`,
+  name: "Robot categories on BotPlanet",
+  numberOfItems: categories.length,
+  itemListOrder: "https://schema.org/ItemListOrderAscending",
+  itemListElement: categories.map((c, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    name: c.name,
+    description: c.description,
+    ...(c.href ? { url: `${SITE_URL}${c.href}` } : {}),
+  })),
+};
+
+const homeSchema = [
+  webPageSchema({
+    path: "/",
+    name: "BotPlanet — the world of real-world robots",
+    description:
+      "Discover, compare and choose real-world robots across home, garden, cleaning, security and service categories. Robotic pool cleaners are the first live category.",
+    type: "CollectionPage",
+  }),
+  categoryList,
+];
 ---
 
 <Base
   title="BotPlanet — the world of real-world robots"
   description="Discover, compare and choose real-world robots across home, garden, cleaning, security and service categories. Robotic pool cleaners are the first live category."
   bleed={true}
+  schema={homeSchema}
 >
   <section class="hero">
     <div class="wrap hero__grid">
