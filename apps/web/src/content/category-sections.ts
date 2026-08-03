@@ -24,6 +24,7 @@ import type { CheckItem } from "../components/CheckList.astro";
 import type { PriceRung } from "../components/PriceLadder.astro";
 import type { FaqItem } from "../components/FaqList.astro";
 import type { HeroImage } from "../components/CategoryHero.astro";
+import type { PosterImage } from "../components/BotMatchCta.astro";
 
 export interface DecisionSectionContent {
   /** Anchor id for internal links. */
@@ -657,16 +658,34 @@ export interface BotMatchCtaContent {
   ctaLabel: string;
   note?: string;
   image?: HeroImage;
+  /**
+   * Full-bleed artwork that already carries the headline, the body and the
+   * button. When present the panel renders as the artwork alone and the copy
+   * above moves to screen-reader text — so it must SAY THE SAME THING as the
+   * picture. If the artwork is redrawn with different wording, the copy here
+   * changes with it.
+   */
+  poster?: PosterImage;
 }
 
 export const BOTMATCH_CTA: Record<string, BotMatchCtaContent> = {
   "robotic-pool-cleaners": {
-    headline: "Still not sure which one is right for your pool?",
+    // Wording tracks the artwork below: "Find your perfect pool bot",
+    // "30 seconds", "Start 30-second match".
+    headline: "Find your perfect pool bot",
     body:
-      "Answer eight short questions about your pool and we will tell you which robot fits — " +
-      "and, just as usefully, which ones to rule out. It takes about a minute.",
-    points: ["About 60 seconds", "Eight plain questions", "No account needed"],
-    ctaLabel: "Find my pool robot",
+      "Tell us your budget, pool size or priorities like fast shipping. In about 30 seconds " +
+      "we will match you with the right robotic pool cleaner — and tell you which ones to rule out.",
+    points: ["About 30 seconds", "Eight plain questions", "No account needed"],
+    ctaLabel: "Start 30-second match",
+    poster: {
+      src: "/media/matcher/pool-bot-matcher.webp",
+      width: 941,
+      height: 1672,
+      alt:
+        "Find your perfect pool bot. Tell us your budget, pool size or priorities like fast shipping, " +
+        "and in 30 seconds we will match you with the right robotic pool cleaner. Start the 30-second match.",
+    },
     note: "Free. We email your result and save it to a page you can come back to.",
   },
 };

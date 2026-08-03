@@ -29,6 +29,19 @@ import { LAUNCH_CATEGORY, productPath } from "../src/content/routes";
 const REPORT = mediaReport();
 const PRODUCT_IDS = Object.values(PRODUCTS).map((p) => p.productId);
 
+/**
+ * Products that carry owner-created BotPlanet artwork. These behave differently
+ * from the rest and the difference is the point: a product with artwork renders
+ * the artwork, not the placeholder, and counts as hero-ready.
+ *
+ * The list is derived, not typed out, so supplying a sixth creative updates
+ * every assertion below instead of turning one of them red.
+ */
+const ARTWORK_PRODUCT_IDS = new Set(
+  MEDIA_ASSETS.filter((a) => a.type === "product_hero" && a.productId).map((a) => a.productId!),
+);
+const PLACEHOLDER_ONLY_IDS = PRODUCT_IDS.filter((id) => !ARTWORK_PRODUCT_IDS.has(id));
+
 describe("asset record integrity", () => {
   it("passes validation with no errors", () => {
     expect(REPORT.issues.filter((i) => i.severity === "error")).toEqual([]);
@@ -40,9 +53,13 @@ describe("asset record integrity", () => {
   });
 
   it("attaches every asset to a real product or a stated purpose", () => {
+    // A product counts as real once it is VERIFIED, which happens before its
+    // editorial is written — the same rule the validator applies, so a product
+    // that is live in D1 can hold artwork without waiting on prose.
+    const known = new Set([...PRODUCT_IDS, ...VERIFICATIONS.map((v) => v.productId)]);
     for (const a of MEDIA_ASSETS) {
       if (a.productId === null) expect(a.purpose).toBeTruthy();
-      else expect(PRODUCT_IDS).toContain(a.productId);
+      else expect([...known]).toContain(a.productId);
     }
   });
 
@@ -221,7 +238,16 @@ describe("responsive derivatives", () => {
   });
 
   it("counts a vector asset as variant-ready, because it scales without one", () => {
-    for (const id of PRODUCT_IDS) expect(readinessFor(id).responsiveVariantsReady).toBe(true);
+    for (const id of PLACEHOLDER_ONLY_IDS) expect(readinessFor(id).responsiveVariantsReady).toBe(true);
+  });
+
+  it("does not pretend a raster creative is variant-ready without derivatives", () => {
+    // The owner artwork is WebP, not vector. One file serves every width today,
+    // which works but is not the same as having derivatives — saying otherwise
+    // would hide a real optimisation still owed.
+    for (const id of ARTWORK_PRODUCT_IDS) {
+      expect(readinessFor(id).responsiveVariantsReady).toBe(false);
+    }
   });
 
   it("rejects a derivative wider than its source", () => {
@@ -418,10 +444,17 @@ describe("readiness states", () => {
     }
   });
 
-  it("calls no product hero-ready, schema-eligible or media-complete", () => {
+  it("calls a product hero-ready only where owner artwork exists", () => {
+    for (const id of PLACEHOLDER_ONLY_IDS) expect(readinessFor(id).heroReady).toBe(false);
+    for (const id of ARTWORK_PRODUCT_IDS) expect(readinessFor(id).heroReady).toBe(true);
+  });
+
+  it("still calls no product schema-eligible or media-complete", () => {
+    // Owner artwork carries branding and headline text set into the image, so
+    // it is never a Product schema image — having a hero does not change that,
+    // and no product has the full four-type set either.
     for (const id of PRODUCT_IDS) {
       const r = readinessFor(id);
-      expect(r.heroReady).toBe(false);
       expect(r.schemaEligible).toBe(false);
       expect(r.fullProductMediaSetReady).toBe(false);
     }
@@ -429,22 +462,41 @@ describe("readiness states", () => {
 
   it("lists the missing target types honestly rather than inventing records", () => {
     for (const p of REPORT.products) {
-      expect(p.missingTypes).toEqual(TARGET_TYPES);
-      expect(p.assets.length).toBe(1);
+      const hasArtwork = ARTWORK_PRODUCT_IDS.has(p.productId);
+      expect(p.missingTypes).toEqual(hasArtwork ? TARGET_TYPES.filter((t) => t !== "product_hero") : TARGET_TYPES);
+      expect(p.assets.length).toBe(hasArtwork ? 2 : 1);
     }
   });
 });
 
 describe("public integration", () => {
-  it("renders a placeholder for every product today", () => {
+  it("renders something for every product, and never a bare product-schema image", () => {
     for (const id of PRODUCT_IDS) {
       const r = resolveImage(id, "listing_card", ["product_hero", "branded_placeholder"])!;
       expect(r).toBeTruthy();
-      expect(r.isPlaceholder).toBe(true);
+      // Artwork where we have it, placeholder where we do not. Neither is ever
+      // offered to Product structured data.
+      expect(r.isPlaceholder).toBe(!ARTWORK_PRODUCT_IDS.has(id));
       expect(r.schemaProductImage).toBe(false);
       expect(r.width).toBeGreaterThan(0);
       expect(r.height).toBeGreaterThan(0);
     }
+  });
+
+  it("prefers owner artwork over the placeholder, and falls back when it is withdrawn", () => {
+    const id = [...ARTWORK_PRODUCT_IDS][0];
+    const chosen = resolveImage(id, "listing_card")!;
+    expect(chosen.assetId.startsWith("art-")).toBe(true);
+    expect(chosen.bleed).toBe(true);
+
+    const pulled = MEDIA_ASSETS.map((a) =>
+      a.id === chosen.assetId
+        ? { ...a, withdrawal: "withdrawn" as const, withdrawalDate: "2026-08-03", withdrawalReason: "test takedown" }
+        : a,
+    );
+    const after = resolveImage(id, "listing_card", ["product_hero", "branded_placeholder"], pulled)!;
+    expect(after.assetId.startsWith("ph-")).toBe(true);
+    expect(after.isPlaceholder).toBe(true);
   });
 
   it("emits no srcset when no derivative exists, rather than inventing widths", () => {

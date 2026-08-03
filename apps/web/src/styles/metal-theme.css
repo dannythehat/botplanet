@@ -196,3 +196,87 @@ img[data-placeholder="true"] {
     radial-gradient(ellipse at 0% 0%, rgba(226, 232, 244, 0.07), transparent 60%),
     linear-gradient(180deg, #141920 0%, #0a0d11 100%);
 }
+
+/* ------------------------------------------------------------------
+   Section plates.
+
+   Every editorial section on a category page sits on its own metallic
+   plate, so the reader can see at a glance where one idea stops and
+   the next begins. Applied here rather than in each component because
+   the treatment is a page-level rhythm, not a property of any one
+   element — changing the radius or the sheen once changes all nine.
+
+   The plate is the OUTER frame. Anything already framed inside it —
+   a card, a rung, a table, an accordion row — steps down to the soft
+   hairline so a box inside a box does not read as two heavy borders.
+   ------------------------------------------------------------------ */
+.bp-dsec,
+.bp-cov,
+.bp-split,
+.bp-mx,
+.bp-chk,
+.bp-price,
+.bp-verdict,
+.bp-faq {
+  position: relative;
+  margin-bottom: clamp(1.75rem, 4vw, 2.75rem);
+  padding: clamp(1.35rem, 4vw, 2.75rem);
+  /* Brighter than the hairlines used inside a section: this edge has to be
+     findable at a glance, which is the whole point of boxing them. */
+  border: 1px solid rgba(206, 214, 228, 0.26);
+  border-radius: 20px;
+  background:
+    radial-gradient(ellipse at 6% -20%, rgba(226, 232, 244, 0.06), transparent 55%),
+    linear-gradient(179deg, #12161c 0%, #0a0d11 68%, #0e1217 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.5),
+    0 22px 52px rgba(0, 0, 0, 0.4);
+}
+
+/* A hairline of light across the top edge — the same lit-metal cue the
+   hero uses, held back so it separates plates without competing with
+   the BotMatch panel, which is meant to be the brightest thing here. */
+.bp-dsec::before,
+.bp-cov::before,
+.bp-split::before,
+.bp-mx::before,
+.bp-chk::before,
+.bp-price::before,
+.bp-verdict::before,
+.bp-faq::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1px;
+  border-radius: 20px 20px 0 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(246, 248, 252, 0.3) 24%,
+    rgba(246, 248, 252, 0.5) 50%,
+    rgba(246, 248, 252, 0.28) 76%,
+    transparent
+  );
+  pointer-events: none;
+}
+
+/* Nested frames step down a level so the plate stays the outer edge.
+   The element qualifier is deliberate: Astro's scoped styles carry an
+   attribute selector, so a bare class here would tie and lose. */
+section.bp-dsec .bp-dcard,
+section.bp-split .bp-spanel,
+section.bp-mx .bp-mx__frame,
+section.bp-chk .bp-chk__box,
+section.bp-price .bp-rung,
+section.bp-verdict .bp-verdict__panel,
+section.bp-faq .bp-faq__item,
+section.bp-cov .bp-cov__figure {
+  border-color: var(--cs-line-soft);
+}
+
+/* The last plate before the product grid needs its normal breathing room
+   back, otherwise the footer and the grid crowd the final section. */
+.bp-faq {
+  margin-bottom: clamp(2.5rem, 6vw, 4rem);
+}

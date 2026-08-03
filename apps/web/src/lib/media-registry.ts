@@ -57,6 +57,12 @@ export interface ResolvedImage {
   isPlaceholder: boolean;
   /** True when the licence forbids us hosting the file. */
   remoteOnly: boolean;
+  /**
+   * True when the asset is a finished composition that must fill its slot at
+   * its own aspect ratio. A surface that crops to a fixed card ratio has to
+   * stand down for these, or it cuts the model name off the artwork.
+   */
+  bleed: boolean;
   /** Derivatives available for a srcset, in ascending width order. */
   srcset: { src: string; width: number }[];
   /** May this image appear in Product structured data? */
@@ -106,6 +112,7 @@ export function resolveImage(
     decorative: chosen.altTextStatus === "decorative",
     isPlaceholder: !chosen.depictsRealProduct,
     remoteOnly: chosen.remoteServingRequired,
+    bleed: chosen.presentation === "bleed",
     srcset: derivatives,
     schemaProductImage: chosen.schema.productImage,
     reason:
@@ -202,7 +209,19 @@ export const CREDENTIAL_PATTERNS: RegExp[] = [
 
 export function validateMedia(assets = MEDIA_ASSETS): MediaIssue[] {
   const issues: MediaIssue[] = [];
-  const productIds = new Set(Object.values(PRODUCTS).map((p) => p.productId));
+  /**
+   * A product is "real" if it has an editorial record OR a verification record.
+   * Both are required eventually, but they do not land at the same time: a
+   * product can be verified, published to D1 and rendering on a category page
+   * days before its editorial is written. Checking only the editorial map would
+   * reject artwork for a product that is already live, which is the wrong way
+   * round — the identity check is what protects the image, and that lives in
+   * the verification registry.
+   */
+  const productIds = new Set([
+    ...Object.values(PRODUCTS).map((p) => p.productId),
+    ...VERIFICATIONS.map((v) => v.productId),
+  ]);
   const basisTexts = new Set(RIGHTS_BASES.map((r) => r.text));
   const seen = new Set<string>();
 
