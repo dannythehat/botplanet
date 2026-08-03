@@ -233,6 +233,49 @@ describe("stored files", () => {
     const bad: MediaAssetRecord = { ...PLACEHOLDER_ASSETS[0], id: "x-nosum", checksum: null };
     expect(validateMedia([...MEDIA_ASSETS, bad]).some((i) => i.rule === "checksum_required")).toBe(true);
   });
+
+  /* The two tests below exist because the suite once passed green while two
+     registered files were absent from disk entirely. The registry named them,
+     recorded their dimensions and recorded a checksum for bytes that were not
+     there, and nothing noticed — the checksum checks above only covered
+     placeholders and the Open Graph card. A registry that describes a file it
+     cannot produce is worse than no registry: it reports confidence it has not
+     earned, and the failure only appears as a broken image in production. */
+  it("can produce every local file the registry names, byte for byte", () => {
+    const missing: string[] = [];
+    const wrong: string[] = [];
+
+    for (const a of MEDIA_ASSETS) {
+      if (!a.src?.startsWith("/")) continue; // component-rendered or remote
+      let bytes: Buffer;
+      try {
+        bytes = readFileSync(`apps/web/public${a.src}`);
+      } catch {
+        missing.push(`${a.id} → ${a.src}`);
+        continue;
+      }
+      if (!a.checksum) continue;
+      const actual = `sha256:${createHash("sha256").update(bytes).digest("hex")}`;
+      if (actual !== a.checksum) wrong.push(`${a.id} → ${a.src}`);
+    }
+
+    expect({ missing, wrong }).toEqual({ missing: [], wrong: [] });
+  });
+
+  it("can produce every derivative the srcset will offer", () => {
+    const missing = DERIVATIVES.filter((d) => {
+      try {
+        readFileSync(`apps/web/public${d.src}`);
+        return false;
+      } catch {
+        return true;
+      }
+    }).map((d) => d.src);
+
+    // A srcset entry with no file behind it is a 404 the browser picks on its
+    // own, at whichever viewport width happens to select it.
+    expect(missing).toEqual([]);
+  });
 });
 
 describe("responsive derivatives", () => {

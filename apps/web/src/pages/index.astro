@@ -47,6 +47,26 @@ const lawnFeatureImage = {
   focal: "78% center",
 };
 
+const floorFeatureImage = {
+  src: "/media/floor-category/feature-desktop.webp",
+  mobileSrc: "/media/floor-category/feature-mobile.webp",
+  width: 1672,
+  height: 941,
+  /* Left of centre: the machine and the lit room are both over there, and the
+     right of the frame is bare wall that survives any crop. */
+  focal: "22% center",
+};
+
+const securityFeatureImage = {
+  src: "/media/security-category/feature-desktop.webp",
+  mobileSrc: "/media/security-category/feature-mobile.webp",
+  width: 1672,
+  height: 941,
+  /* Well right of centre: the patrol robot sits near the edge of the wide file
+     and a centre crop would walk it out of the frame. */
+  focal: "84% center",
+};
+
 const categories = [
   { name: "Pool cleaning", description: "Robots that scrub floors, walls and waterlines.", state: "Live", href: live.hub, code: "01" },
   { name: "Window cleaning", description: "Glass-cleaning robots for homes and high-rise surfaces.", state: "In development", code: "02" },
@@ -222,7 +242,7 @@ const categories = [
       somewhere that exists today rather than to a 404 dressed as a category. */}
   <CategoryFeature
     id="next-window"
-    state="Next category — in development"
+    state="In development"
     heading="Window-cleaning robots"
     body="Robots that grip glass and clean windows, balcony doors and high panes you would rather not reach. We are verifying the models now."
     side="right"
@@ -234,11 +254,35 @@ const categories = [
 
   <CategoryFeature
     id="next-lawn"
-    state="Next category — in development"
+    state="In development"
     heading="Lawn and garden robots"
     body="Wire-free mowers that keep the lawn cut on their own, plus the irrigation and outdoor machines that work alongside them."
     side="left"
     image={lawnFeatureImage}
+    primary={{ label: "See every robot category", href: "/robots/" }}
+    secondary={{ label: "Start with pool cleaners", href: live.hub }}
+    more={{ label: "How BotPlanet verifies a robot", href: "/review-methodology/" }}
+  />
+
+  <CategoryFeature
+    id="next-floor"
+    state="Planned category"
+    heading="Robotic floor cleaners"
+    body="Vacuum and mop robots that map the house, empty themselves and keep hard floors and carpet clean without being asked."
+    side="right"
+    image={floorFeatureImage}
+    primary={{ label: "See every robot category", href: "/robots/" }}
+    secondary={{ label: "Start with pool cleaners", href: live.hub }}
+    more={{ label: "How BotPlanet verifies a robot", href: "/review-methodology/" }}
+  />
+
+  <CategoryFeature
+    id="next-security"
+    state="Planned category"
+    heading="Security robots"
+    body="Patrol and monitoring machines that walk the property, watch the approaches and tell you what they found."
+    side="left"
+    image={securityFeatureImage}
     primary={{ label: "See every robot category", href: "/robots/" }}
     secondary={{ label: "Start with pool cleaners", href: live.hub }}
     more={{ label: "How BotPlanet verifies a robot", href: "/review-methodology/" }}
