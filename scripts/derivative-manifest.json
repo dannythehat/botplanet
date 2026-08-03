@@ -434,6 +434,68 @@
     ]
   },
   {
+    "source": "/media/companion-category/feature-desktop.webp",
+    "sourceWidth": 1612,
+    "sourceHeight": 881,
+    "derivatives": [
+      {
+        "id": "media-companion-category-feature-desktop-webp-360",
+        "src": "/media/companion-category/feature-desktop-360w.webp",
+        "width": 360,
+        "height": 197,
+        "bytes": 3868,
+        "checksum": "sha256:c576044ca7fa245c8c60fed40c5a6c0da55230dfdf2c7aa2760adb711be226e9"
+      },
+      {
+        "id": "media-companion-category-feature-desktop-webp-640",
+        "src": "/media/companion-category/feature-desktop-640w.webp",
+        "width": 640,
+        "height": 350,
+        "bytes": 8726,
+        "checksum": "sha256:12b0775afd21c514617c6cdcddc3e8f1d9bf3a3600f41162c118b2a6ffe8d4ba"
+      },
+      {
+        "id": "media-companion-category-feature-desktop-webp-960",
+        "src": "/media/companion-category/feature-desktop-960w.webp",
+        "width": 960,
+        "height": 525,
+        "bytes": 16906,
+        "checksum": "sha256:686e9cf3e5a336a1b4617eda56897478cb731c9a4e39b5d64730c7f7eb7c6e51"
+      },
+      {
+        "id": "media-companion-category-feature-desktop-webp-1440",
+        "src": "/media/companion-category/feature-desktop-1440w.webp",
+        "width": 1440,
+        "height": 787,
+        "bytes": 27174,
+        "checksum": "sha256:5ed6346b81aa19a0bef1240545c1df52a457a9eb0360a8cd67a2d8a2099fe0ac"
+      }
+    ]
+  },
+  {
+    "source": "/media/companion-category/feature-mobile.webp",
+    "sourceWidth": 881,
+    "sourceHeight": 1612,
+    "derivatives": [
+      {
+        "id": "media-companion-category-feature-mobile-webp-360",
+        "src": "/media/companion-category/feature-mobile-360w.webp",
+        "width": 360,
+        "height": 659,
+        "bytes": 6912,
+        "checksum": "sha256:ed1360d1977a0ac9ad3090c4ac835310423654777b71aa7a636cb179739fdc93"
+      },
+      {
+        "id": "media-companion-category-feature-mobile-webp-640",
+        "src": "/media/companion-category/feature-mobile-640w.webp",
+        "width": 640,
+        "height": 1171,
+        "bytes": 16356,
+        "checksum": "sha256:5a05e06b7e8759a2af430d92737151ef253795231b0b57f1d13a18a52e70991e"
+      }
+    ]
+  },
+  {
     "source": "/media/pool/hero-desktop.webp",
     "sourceWidth": 1600,
     "sourceHeight": 900,

@@ -67,6 +67,15 @@ const securityFeatureImage = {
   focal: "84% center",
 };
 
+const companionFeatureImage = {
+  src: "/media/companion-category/feature-desktop.webp",
+  mobileSrc: "/media/companion-category/feature-mobile.webp",
+  width: 1612,
+  height: 881,
+  /* Right of centre, where the robot and the lit living room both sit. */
+  focal: "76% center",
+};
+
 const categories = [
   { name: "Pool cleaning", description: "Robots that scrub floors, walls and waterlines.", state: "Live", href: live.hub, code: "01" },
   { name: "Window cleaning", description: "Glass-cleaning robots for homes and high-rise surfaces.", state: "In development", code: "02" },
@@ -288,6 +297,19 @@ const categories = [
     body="Patrol and monitoring machines that walk the property, watch the approaches and tell you what they found."
     side="left"
     image={securityFeatureImage}
+    primary={{ label: "See every robot category", href: "/robots/" }}
+    secondary={{ label: "Start with pool cleaners", href: live.hub }}
+    more={{ label: "How BotPlanet verifies a robot", href: "/review-methodology/" }}
+  />
+
+  <CategoryFeature
+    id="next-companion"
+    state="Planned category"
+    heading="Companion and service robots"
+    metalWord="Companion"
+    body="Machines that help rather than clean — company at home, assistance where it is needed, and service robots that carry, greet and fetch."
+    side="left"
+    image={companionFeatureImage}
     primary={{ label: "See every robot category", href: "/robots/" }}
     secondary={{ label: "Start with pool cleaners", href: live.hub }}
     more={{ label: "How BotPlanet verifies a robot", href: "/review-methodology/" }}

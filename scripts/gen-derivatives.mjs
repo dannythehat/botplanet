@@ -91,6 +91,8 @@ const SOURCES = [
   "/media/floor-category/feature-mobile.webp",
   "/media/security-category/feature-desktop.webp",
   "/media/security-category/feature-mobile.webp",
+  "/media/companion-category/feature-desktop.webp",
+  "/media/companion-category/feature-mobile.webp",
   "/media/pool/hero-desktop.webp",
   "/media/pool/hero-mobile.webp",
   "/media/pool/pool-type-inground.webp",

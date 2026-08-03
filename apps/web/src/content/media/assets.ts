@@ -267,6 +267,24 @@ export const ORIGINAL_ASSETS: MediaAssetRecord[] = [
         "Security robots",
         "The portrait companion to the desktop file — recomposed, not cropped, so the robot and the lit approach both survive on a phone.",
       ],
+      [
+        "feature-companion-category-desktop",
+        "/media/companion-category/feature-desktop.webp",
+        1612,
+        881,
+        "sha256:06aeafc3a716c0863e733e8b71c43d0f78a154bd9bcf5fd33b71a2fc90dc9400",
+        "Companion and service robots",
+        "Composed with the left half falling to black, so the copy sits there. Inset 30px on every edge from the supplied file: the original carried a thin blue frame drawn a few pixels in from the border, which would have shown as a broken hairline once the picture bleeds to the section edges. Nothing else is altered and the aspect ratio is untouched beyond that inset.",
+      ],
+      [
+        "feature-companion-category-mobile",
+        "/media/companion-category/feature-mobile.webp",
+        881,
+        1612,
+        "sha256:21bd05b04abe239ecce4b96cdc89884ecf0eccda9f804621d8b3de0c4ac6365d",
+        "Companion and service robots",
+        "The portrait companion to the desktop file, inset 30px on every edge for the same reason — the supplied file carried the same drawn frame.",
+      ],
     ] as const
   ).map(([id, src, width, height, checksum, category, note]): MediaAssetRecord => ({
     ...base(id, "botplanet_original"),
