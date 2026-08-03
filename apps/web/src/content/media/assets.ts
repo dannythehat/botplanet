@@ -272,6 +272,15 @@ const OWNER_ARTWORK: OwnerArtwork[] = [
       "the grey and blue tracked cleaner resting on stone coping beside a curved pool at dusk, with callouts for navigation, wall and waterline cleaning and top-load filtration",
   },
   {
+    slug: "wybot-c1",
+    file: "wybot-c1.webp",
+    checksum: "sha256:c6fcc066410578e897e331420bd6eb82e5eaeab4970d97167aa578b5fab71b0b",
+    width: 1254,
+    height: 1254,
+    scene:
+      "the black and silver tracked cleaner on stone paving beside a lit pool at dusk, with a phone showing the WYBOT app and callouts for app control, floor, wall and waterline cleaning, cordless running and navigation",
+  },
+  {
     slug: "aiper-scuba-v3-ai-vision",
     file: "aiper-scuba-v3-ai-vision.webp",
     checksum: "sha256:e32fc4d8cd4bab2736e61c45800795c191d054015c108af0a8e0a362ec723c19",

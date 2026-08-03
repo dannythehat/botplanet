@@ -117,9 +117,16 @@ const wybotC1: ProductVerification = {
     { url: WYBOT_PAGE, title: WYBOT_TITLE, status: "ok" },
     {
       url: "https://www.amazon.com/WYBOT-Pool-Vacuum-Inground-Navigation/dp/B0G64JV6K4",
-      title: "Amazon US listing (WYBOT C1)",
+      title: "Amazon US listing (WYBOT C1) — DEAD, superseded",
+      status: "unreadable",
+      note: "ASIN B0G64JV6K4 returns Amazon's 'couldn't find that page' with HTTP 200. Confirmed dead by content check and by the owner in a browser on 31 July 2026, and removed from the offer register that day. Kept here so the retired destination stays on the record.",
+    },
+    {
+      url: "https://www.amazon.com/WYBOT-C1-Cordless-Inground-Professional/dp/B0GYWJMNWK",
+      title: "Amazon US listing (WYBOT C1) — replacement supplied by the owner",
       status: "not_rechecked",
-      note: "Retailer listings are not re-fetched for factual verification; the manufacturer page is authoritative and was checked instead.",
+      note:
+        "ASIN B0GYWJMNWK. Supplied and confirmed by the owner on 3 August 2026 as the base C1. Not independently read: Amazon returns a bot-mitigation page to server-side requests. This matters more here than elsewhere — WYBOT publishes no model number and sells C1, C1 Pro and C1 Max under near-identical titles, so the owner's confirmation is the only thing separating them and no machine check stands behind it.",
     },
     {
       url: "https://www.wybotpool.com/pages/user-manual",

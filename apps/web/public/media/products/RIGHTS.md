@@ -1,6 +1,7 @@
 # Owner-created product artwork — rights record
 
-Supplied by Danny on 3 August 2026. Optimised from PNG masters to WebP; no
+Supplied by Danny on 3 August 2026 (five, then the WYBOT C1). Optimised from
+PNG masters to WebP; no
 crop, no recolour, no removal of in-image text or branding.
 
 Every file carries approved in-image BotPlanet branding and headline text.
@@ -15,6 +16,7 @@ because it contains text.
 | `betta-se-plus.webp` | Betta SE Plus | 1254×1254 PNG, 2.0 MB | 1200×1200, 161 KB |
 | `dolphin-proteus-dx4-plus.webp` | Dolphin Proteus DX4 Plus | 1254×1254 PNG, 2.3 MB | 1200×1200, 196 KB |
 | `aiper-scuba-v3-ai-vision.webp` | Aiper Scuba V3 AI Vision | 1254×1254 PNG, 2.0 MB | 1200×1200, 171 KB |
+| `wybot-c1.webp` | WYBOT C1 | 1254×1254 PNG | 1254×1254, 158 KB |
 
 ## Rights status
 
@@ -42,11 +44,19 @@ They are **not** eligible for `Product` structured data: a schema consumer reads
 that field as a photograph of the product, and these carry BotPlanet branding
 and headline text set into the image.
 
-Two of the five — **Dolphin Proteus DX4 Plus** and **Aiper Scuba V3 AI Vision** —
+Two of the six — **Dolphin Proteus DX4 Plus** and **Aiper Scuba V3 AI Vision** —
 have verification records and live D1 product rows but no editorial record yet.
 Their identity is owner-confirmed rather than source-verified, and Notion still
 lists both as pending exact ASIN and redirect verification, so neither may ship
 a working affiliate button until that is closed out.
 
+The **WYBOT C1** artwork is a separate matter from its Awin position. The US
+WYBOT programme is still pending approval, so no WYBOT-supplied creative may be
+used; this file is ours outright and is unaffected by that. Its Amazon
+destination (ASIN B0GYWJMNWK, supplied 3 August 2026) replaces a dead ASIN and
+is owner-confirmed rather than machine-read, so it is held at
+`researched_exact` — WYBOT publishes no model number and ships C1, C1 Pro and
+C1 Max under near-identical titles.
+
 Danny has said more detailed photography will follow for the individual review
-pages. These five are the lead category-page visuals.
+pages. These six are the lead category-page visuals.

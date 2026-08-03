@@ -53,6 +53,12 @@ const AMAZON_ASINS: { productId: string; asin: string; sourceUrl: string }[] = [
   // in evidence/verification.ts, which say so plainly.
   { productId: "prod-dolphin-proteus-dx4-plus", asin: "B083YWJ5PQ", sourceUrl: "Owner-confirmed 2026-08-03: https://www.amazon.com/Dolphin-Automatic-Climbing-Waterline-Scrubber/dp/B083YWJ5PQ" },
   { productId: "prod-aiper-scuba-v3-ai-vision", asin: "B0GG97427D", sourceUrl: "Owner-confirmed 2026-08-03: https://www.amazon.com/AIPER-Vision-Cordless-Robotic-Cleaner/dp/B0GG97427D" },
+  // REPLACES the dead B0G64JV6K4. That ASIN returned Amazon's 404 and was
+  // pulled on 31 July; this is a different listing entirely, supplied and
+  // confirmed by the owner. WYBOT ships C1, C1 Pro and C1 Max with no published
+  // model number, so the owner's confirmation is doing the work a SKU normally
+  // would — recorded as such in evidence/verification.ts rather than implied.
+  { productId: "prod-wybot-c1", asin: "B0GYWJMNWK", sourceUrl: "Owner-confirmed 2026-08-03: https://www.amazon.com/WYBOT-C1-Cordless-Inground-Professional/dp/B0GYWJMNWK" },
 ];
 
 
@@ -139,11 +145,13 @@ const SEARCH_FINDINGS: Record<string, { checkedOn: string; finding: string }> = 
 
 /** Products with no Amazon listing URL in the Job 8 record. */
 const NO_AMAZON_DESTINATION = [
-  // ASIN B0G64JV6K4 was carried for this product and is DEAD — /dp/B0G64JV6K4
-  // returns Amazon's "couldn't find that page" (confirmed by content check and
-  // by the owner in a browser, 2026-07-31). Removed rather than left pointing
-  // at a 404; a new ASIN has to be found before it can carry an offer again.
-  "prod-wybot-c1",
+  // WYBOT C1 was here. ASIN B0G64JV6K4 was carried for it and was DEAD —
+  // /dp/B0G64JV6K4 returned Amazon's "couldn't find that page" (confirmed by
+  // content check and by the owner in a browser, 2026-07-31) — so it was pulled
+  // rather than left pointing at a 404. The owner supplied a live replacement,
+  // B0GYWJMNWK, on 3 August 2026 and it now sits in AMAZON_ASINS above. The
+  // history stays here because "we once shipped a dead link for this product"
+  // is the fact a reviewer needs, and deleting the note would erase it.
   "prod-dolphin-premier",
   // Both resolved by the SerpApi run and moved into AMAZON_ASINS above.
   "prod-aiper-scuba-s1",

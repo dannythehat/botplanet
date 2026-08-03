@@ -148,14 +148,15 @@ describe("exact-product destinations", () => {
   it("captures an ASIN for five products and refuses to invent the rest", () => {
     const exact = DESTINATIONS.filter((d) => d.confidence === "researched_exact" || d.confidence === "verified_exact");
     const search = DESTINATIONS.filter((d) => d.confidence === "search_only");
-    // Nine: seven after the SerpApi discovery run resolved the E10 and the
-    // Seagull SE, plus the Proteus DX4 Plus and Scuba V3 AI Vision, whose ASINs
-    // the owner supplied and confirmed on 3 August 2026.
-    // Three remain search-only: WYBOT C1 and Aiper Scuba S1, where every
-    // candidate was a sibling or contradicted itself, and Dolphin Premier,
-    // which is not sold on Amazon US at all.
-    expect(exact).toHaveLength(9);
-    expect(search).toHaveLength(3);
+    // Ten: seven after the SerpApi discovery run resolved the E10 and the
+    // Seagull SE, plus the Proteus DX4 Plus, the Scuba V3 AI Vision and a
+    // replacement WYBOT C1, whose ASINs the owner supplied and confirmed on
+    // 3 August 2026.
+    // Two remain search-only: the Aiper Scuba S1, where every candidate was a
+    // sibling or contradicted itself, and the Dolphin Premier, which is not
+    // sold on Amazon US at all.
+    expect(exact).toHaveLength(10);
+    expect(search).toHaveLength(2);
     for (const d of exact) {
       expect(d.identifierKind).toBe("asin");
       expect(d.retailerProductId).toMatch(/^B0[A-Z0-9]{8}$/);
@@ -234,19 +235,30 @@ describe("exact-product destinations", () => {
   it("resolves a destination only for the product it belongs to", () => {
     expect(destinationFor("prod-polaris-freedom")!.retailerProductId).toBe("B0BX9DJS7R");
     expect(destinationFor("prod-dolphin-e10")!.retailerProductId).toBe("B0GV15VY1N");
-    // Still nothing for the C1: every candidate returned was a sibling.
-    expect(destinationFor("prod-wybot-c1")!.retailerProductId).toBeNull();
+    // The C1 carries the owner-supplied replacement, not the dead ASIN.
+    expect(destinationFor("prod-wybot-c1")!.retailerProductId).toBe("B0GYWJMNWK");
   });
 
   it("never reinstates the dead WYBOT ASIN", () => {
     // /dp/B0G64JV6K4 returns Amazon's 404 page with an HTTP 200 status, which is
     // how it survived the original check and reached production as a live buy
-    // button. It stays out until a fresh ASIN is found.
+    // button. The C1 now has a live replacement, but the dead one must never
+    // come back with it — a replacement is not an amnesty.
     const wybot = destinationFor("prod-wybot-c1")!;
-    expect(wybot.retailerProductId).toBeNull();
-    expect(wybot.confidence).toBe("search_only");
+    expect(wybot.retailerProductId).not.toBe("B0G64JV6K4");
     for (const d of DESTINATIONS) expect(d.retailerProductId).not.toBe("B0G64JV6K4");
     expect(REJECTED_CANDIDATES.some((c) => c.candidate.includes("B0G64JV6K4") && /DEAD ASIN/.test(c.reason))).toBe(true);
+  });
+
+  it("holds the replacement C1 at researched_exact, because nothing read the listing", () => {
+    // WYBOT publishes no model number and sells C1, C1 Pro and C1 Max under
+    // near-identical titles. The owner's confirmation is what separates them,
+    // and an owner's word is not a machine-read identifier — so this must not
+    // reach verified_exact however confident anyone is.
+    const wybot = destinationFor("prod-wybot-c1")!;
+    expect(wybot.retailerProductId).toBe("B0GYWJMNWK");
+    expect(wybot.confidence).toBe("researched_exact");
+    expect(IDENTITY_CHECKS["prod-wybot-c1"]).toBeUndefined();
   });
 });
 
