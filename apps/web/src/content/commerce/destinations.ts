@@ -42,7 +42,14 @@ const AMAZON_ASINS: { productId: string; asin: string; sourceUrl: string }[] = [
   { productId: "prod-dolphin-nautilus-cc-plus", asin: "B09K4C9WGF", sourceUrl: "https://www.amazon.com/Dolphin-Nautilus-Robotic-Cleaner-Ground/dp/B09K4C9WGF" },
   { productId: "prod-polaris-freedom", asin: "B0BX9DJS7R", sourceUrl: "https://www.amazon.com/Polaris-Cordless-Cable-Free-Intelligent-Technology/dp/B0BX9DJS7R" },
   { productId: "prod-betta-se-plus", asin: "B0CVMQ3XBX", sourceUrl: "https://www.amazon.com/Betta-SE-Plus-Continuous-Safeguard/dp/B0CVMQ3XBX" },
-  { productId: "prod-beatbot-aquasense-2-ultra", asin: "B0DMN6NV6H", sourceUrl: "https://www.amazon.com/Beatbot-AquaSense-Cordless-Cleaning-Clarification/dp/B0DMN6NV6H" },
+  // REPLACES B0DMN6NV6H at the owner's direction, 3 August 2026. Both listings
+  // are live; this is a different listing for the same model, not a fix for a
+  // broken one. The trade is deliberate and is a DOWNGRADE in evidence: the
+  // previous ASIN was machine-read (brand, model number PRCMDS02G-2025), this
+  // one rests on the owner's confirmation because Amazon serves a
+  // bot-mitigation page to server-side reads. The previous identity check is
+  // kept below, and now applies only to the ASIN it actually examined.
+  { productId: "prod-beatbot-aquasense-2-ultra", asin: "B0G7B6F5FZ", sourceUrl: "Owner-confirmed 2026-08-03: https://www.amazon.com/Beatbot-AquaSense-Ultra-Cordless-Clarification/dp/B0G7B6F5FZ" },
   { productId: "prod-aiper-scuba-x1", asin: "B0F9WN961G", sourceUrl: "https://www.amazon.com/AIPER-High-Power-Horizontal-Waterline-Scrubbing/dp/B0F9WN961G" },
   // Discovered by the SerpApi run of 2026-07-31 and matched on the details
   // table, not the title — see serpapi-observations.ts for what each read.
@@ -96,6 +103,11 @@ export const IDENTITY_CHECKS: Record<string, IdentityCheck> = {
       "Details table gives Brand 'Betta', Model Name / Model Number / Manufacturer Part Number all 'Betta-SE-Plus', Model Year 2023, ASIN B0CVMQ3XBX; canonical URL /Betta-SE-Plus-Continuous-Safeguard/. Title: 'Betta SE Plus - Solar-Powered Robotic Pool Skimmer with 24/7 Continuous Cleaning Power, Dual Charging Options, Twin Salt Chlorine Tolerant Motors, and Shallow Water Safeguard'.",
     checkedOn: "2026-07-31",
   },
+  // RETIRED, and kept deliberately. This examined B0DMN6NV6H, which is no
+  // longer the destination — the owner replaced it with B0G7B6F5FZ on 3 August
+  // 2026. The record stays because the reading was real and may be needed again
+  // if the swap is ever revisited; the ASIN field is what stops it vouching for
+  // the listing that replaced it.
   "prod-beatbot-aquasense-2-ultra": {
     asin: "B0DMN6NV6H",
     confirmed: true,
@@ -170,15 +182,24 @@ export const DESTINATIONS: ProductDestination[] = [
       // Identity-confirmed ASINs reach verified_exact WITHOUT a price behind
       // them: knowing the destination is the right model and knowing what it
       // costs are separate claims, and only the first is settled here.
-      confidence: IDENTITY_CHECKS[productId]?.confirmed ? ("verified_exact" as const) : ("researched_exact" as const),
+      // The identity check must have examined THIS ASIN. A check keyed only by
+      // product would keep vouching after the ASIN was swapped, which is how a
+      // machine-read verdict silently transfers to a listing nobody has read.
+      confidence:
+        IDENTITY_CHECKS[productId]?.confirmed && IDENTITY_CHECKS[productId]?.asin === asin
+          ? ("verified_exact" as const)
+          : ("researched_exact" as const),
       sourceReference: `ASIN captured from the Amazon listing cited in the Job 8 record: ${sourceUrl}`,
       sourceCheckedDate: DESTINATION_CHECK_DATE,
       // Amazon exposes the seller only on the rendered page, which we may not read.
       sellerIdentity: null,
       sellerModel: "unknown",
+      // The evidence text describes a specific ASIN, so it may only be quoted
+      // for that ASIN. Anything else falls back to the honest default.
       notes:
-        IDENTITY_CHECKS[productId]?.evidence ??
-        "Destination resolves on amazon.com and is not Amazon's 404 page, so the ASIN is live. The model at the destination has not been confirmed.",
+        IDENTITY_CHECKS[productId]?.asin === asin
+          ? IDENTITY_CHECKS[productId]!.evidence
+          : "Destination resolves on amazon.com and is not Amazon's 404 page, so the ASIN is live. The model at the destination has not been confirmed.",
     }),
   ),
   ...NO_AMAZON_DESTINATION.map(

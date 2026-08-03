@@ -523,6 +523,9 @@ describe("schema eligibility gates", () => {
       if (MANUAL_CHECKS.some((m) => m.productId === productId)) continue;
       if (SERPAPI_OBSERVATIONS.some((o) => o.productId === productId && o.priceMinor !== null)) continue;
       const o = OFFERS.find((x) => x.productId === productId)!;
+      // A check only vouches for the ASIN it read. Once the destination moves
+      // to a different listing the check is history, not evidence.
+      if (o.destination.retailerProductId !== check.asin) continue;
       expect(o.destination.confidence).toBe("verified_exact");
       expect(o.basePriceMinor).toBeNull();
       expect(publicationFor(o).priceShowable).toBe(false);

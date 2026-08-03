@@ -603,7 +603,20 @@ const beatbotAquasense2Ultra: ProductVerification = {
   sourceChecks: [
     { url: BEATBOT_PAGE, title: BEATBOT_TITLE, status: "ok" },
     { url: BEATBOT_MANUAL_INDEX, title: "Beatbot official user-manual index", status: "ok" },
-    { url: "https://www.amazon.com/Beatbot-AquaSense-Cordless-Cleaning-Clarification/dp/B0DMN6NV6H", title: "Amazon US listing", status: "not_rechecked", note: "Retailer listing; manufacturer sources checked instead." },
+    {
+      url: "https://www.amazon.com/Beatbot-AquaSense-Cordless-Cleaning-Clarification/dp/B0DMN6NV6H",
+      title: "Amazon US listing (B0DMN6NV6H) — retired as the destination, still live",
+      status: "not_rechecked",
+      note:
+        "Was the destination until 3 August 2026. It read cleanly on 31 July — brand Beatbot, model number PRCMDS02G-2025 — and it is not dead; the owner simply directed us to a different listing. Recorded so the swap is visible rather than looking like a correction of a fault.",
+    },
+    {
+      url: "https://www.amazon.com/Beatbot-AquaSense-Ultra-Cordless-Clarification/dp/B0G7B6F5FZ",
+      title: "Amazon US listing (B0G7B6F5FZ) — current destination, supplied by the owner",
+      status: "not_rechecked",
+      note:
+        "Supplied and confirmed by the owner on 3 August 2026. Five server-side reads on that date all returned Amazon's bot-mitigation page, so nothing on the listing has been read here and the model number could not be compared with the retired ASIN's. Beatbot ships AquaSense, AquaSense Pro, AquaSense 2, AquaSense 2 Pro and AquaSense 2 Ultra, so this rests entirely on the owner's confirmation.",
+    },
   ],
   observations: [
     { field: "powerType", value: "Cordless", sourceUrl: BEATBOT_PAGE, sourceTitle: BEATBOT_TITLE, observedOn: D },

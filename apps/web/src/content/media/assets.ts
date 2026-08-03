@@ -272,6 +272,15 @@ const OWNER_ARTWORK: OwnerArtwork[] = [
       "the grey and blue tracked cleaner resting on stone coping beside a curved pool at dusk, with callouts for navigation, wall and waterline cleaning and top-load filtration",
   },
   {
+    slug: "beatbot-aquasense-2-ultra",
+    file: "beatbot-aquasense-2-ultra.webp",
+    checksum: "sha256:ed6e41162f96875cda3a335032630e6bf24fa2a5fec5fb32094c681edd8aaa6f",
+    width: 1254,
+    height: 1254,
+    scene:
+      "the dark grey cleaner tilted on its dock beside a lit infinity pool at dusk, with a phone showing the AquaSense 2 Ultra app mid-cycle and callouts for app control, floor, wall and waterline cleaning, cordless running and navigation",
+  },
+  {
     slug: "wybot-c1",
     file: "wybot-c1.webp",
     checksum: "sha256:c6fcc066410578e897e331420bd6eb82e5eaeab4970d97167aa578b5fab71b0b",

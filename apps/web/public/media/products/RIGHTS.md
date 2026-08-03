@@ -1,6 +1,7 @@
 # Owner-created product artwork — rights record
 
-Supplied by Danny on 3 August 2026 (five, then the WYBOT C1). Optimised from
+Supplied by Danny on 3 August 2026 (five, then the WYBOT C1, then the Beatbot).
+Optimised from
 PNG masters to WebP; no
 crop, no recolour, no removal of in-image text or branding.
 
@@ -17,6 +18,7 @@ because it contains text.
 | `dolphin-proteus-dx4-plus.webp` | Dolphin Proteus DX4 Plus | 1254×1254 PNG, 2.3 MB | 1200×1200, 196 KB |
 | `aiper-scuba-v3-ai-vision.webp` | Aiper Scuba V3 AI Vision | 1254×1254 PNG, 2.0 MB | 1200×1200, 171 KB |
 | `wybot-c1.webp` | WYBOT C1 | 1254×1254 PNG | 1254×1254, 158 KB |
+| `beatbot-aquasense-2-ultra.webp` | Beatbot AquaSense 2 Ultra | 1254×1254 PNG | 1254×1254, 159 KB |
 
 ## Rights status
 
@@ -44,7 +46,7 @@ They are **not** eligible for `Product` structured data: a schema consumer reads
 that field as a photograph of the product, and these carry BotPlanet branding
 and headline text set into the image.
 
-Two of the six — **Dolphin Proteus DX4 Plus** and **Aiper Scuba V3 AI Vision** —
+Two of the seven — **Dolphin Proteus DX4 Plus** and **Aiper Scuba V3 AI Vision** —
 have verification records and live D1 product rows but no editorial record yet.
 Their identity is owner-confirmed rather than source-verified, and Notion still
 lists both as pending exact ASIN and redirect verification, so neither may ship
@@ -59,4 +61,12 @@ is owner-confirmed rather than machine-read, so it is held at
 C1 Max under near-identical titles.
 
 Danny has said more detailed photography will follow for the individual review
-pages. These six are the lead category-page visuals.
+pages. These seven are the lead category-page visuals.
+
+## One naming note
+
+The Beatbot artwork's headline reads "Beatbot AquaSense Ultra 2". The model is
+the **AquaSense 2 Ultra** — the app screenshot inside the same artwork has it
+right, and so does Beatbot's own product page. The words are transposed in the
+headline only. Nothing in the page copy, the alt text or the schema repeats the
+transposition, so this is cosmetic; worth correcting if the file is ever redrawn.
