@@ -234,11 +234,11 @@ export const ORIGINAL_ASSETS: MediaAssetRecord[] = [
       [
         "feature-lawn-category-mobile",
         "/media/lawn-category/feature-mobile.webp",
-        941,
-        1672,
-        "sha256:ad50108c15f6f3a9deda745009ba26541eb9103262ac367e334473bc85e911af",
+        857,
+        1588,
+        "sha256:4060220ccf0869be9ee8f57db1b0ed6fd948635e1f58b0c6c71913538977e8db",
         "Lawn and garden robots",
-        "The portrait companion to the desktop file — recomposed, not cropped, so the mower, the lawn and the lit garden all survive on a phone.",
+        "Replaced 3 August 2026 with a version composed for the phone layout: empty upper half, the mower and the lit garden in the lower half so they survive the crop. Inset 42px on every edge from the supplied file, which carried a drawn silver frame a few pixels in from the border. Nothing else is altered.",
       ],
       [
         "feature-floor-category-desktop",
@@ -252,11 +252,11 @@ export const ORIGINAL_ASSETS: MediaAssetRecord[] = [
       [
         "feature-floor-category-mobile",
         "/media/floor-category/feature-mobile.webp",
-        941,
-        1672,
-        "sha256:a19437d9df3dbb6eb318cbcd2eaea3d60f2d451a6c0b8886146e6af2986656d3",
+        857,
+        1588,
+        "sha256:f60926001531dcb8967099fb8596a21d26ad57acdfe6a54fa6ef4fb5594f0da4",
         "Robotic floor cleaners",
-        "The portrait companion to the desktop file — recomposed, not cropped, so the machine, the marble and the lit alcove all survive on a phone.",
+        "Replaced 3 August 2026 with a version composed for the phone layout: empty upper half, the machine and the lit room in the lower half so they survive the crop. Inset 42px on every edge from the supplied file, which carried a drawn silver frame a few pixels in from the border. Nothing else is altered.",
       ],
       [
         "feature-security-category-desktop",
