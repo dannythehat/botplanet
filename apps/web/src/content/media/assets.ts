@@ -270,11 +270,11 @@ export const ORIGINAL_ASSETS: MediaAssetRecord[] = [
       [
         "feature-security-category-mobile",
         "/media/security-category/feature-mobile.webp",
-        941,
-        1672,
-        "sha256:41934689b2b16ce674b3eb7f894011213b342e915b19c6326352800ec85f7c30",
+        857,
+        1588,
+        "sha256:6c0db37f462a87b84684ac4c6a87b689df07eb73cf082f727257ed92426a7b86",
         "Security robots",
-        "The portrait companion to the desktop file — recomposed, not cropped, so the robot and the lit approach both survive on a phone.",
+        "Replaced 3 August 2026 with a version composed for the phone layout: empty upper half, the patrol robot and the lit approach in the lower half so they survive the crop. Inset 42px on every edge from the supplied file, which carried a drawn silver frame about eight pixels in from the border. Nothing else is altered.",
       ],
       [
         "feature-companion-category-desktop",
@@ -288,11 +288,11 @@ export const ORIGINAL_ASSETS: MediaAssetRecord[] = [
       [
         "feature-companion-category-mobile",
         "/media/companion-category/feature-mobile.webp",
-        881,
-        1612,
-        "sha256:21bd05b04abe239ecce4b96cdc89884ecf0eccda9f804621d8b3de0c4ac6365d",
+        857,
+        1588,
+        "sha256:7d7c2853c0ad501b5fdf83a81d23587c3e784969798372063fa39f9a93d7d52c",
         "Companion and service robots",
-        "The portrait companion to the desktop file, inset 30px on every edge for the same reason — the supplied file carried the same drawn frame.",
+        "Replaced 3 August 2026 with a version composed for the phone layout: empty upper half, the robot and the lit room in the lower half so they survive the crop. Inset 42px on every edge from the supplied file, which carried a drawn silver frame a few pixels in from the border. Verified clean by scripts/check-drawn-frame.mjs. Nothing else is altered.",
       ],
     ] as const
   ).map(([id, src, width, height, checksum, category, note]): MediaAssetRecord => ({
