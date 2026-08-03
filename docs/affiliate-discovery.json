@@ -1,0 +1,78 @@
+{
+  "ranAt": "2026-08-03T10:05:41.454Z",
+  "note": "Discovery only. Nothing here is a publishable offer: a product in a feed is not a verified destination for an exact model. Promote a row into the offer register only after its identity is confirmed.",
+  "awin": {
+    "programmes": {
+      "joined": [
+        {
+          "advertiserId": "33889",
+          "name": "Petcube (US)",
+          "country": "US",
+          "currency": "USD",
+          "displayUrl": "https://petcube.com/",
+          "market": "United States of America"
+        },
+        {
+          "advertiserId": "115280",
+          "name": "Wybot EU",
+          "country": "DE",
+          "currency": "EUR",
+          "displayUrl": "https://www.eu.wybotpool.com/",
+          "market": "Germany"
+        },
+        {
+          "advertiserId": "120083",
+          "name": "Chitu Systems",
+          "country": "US",
+          "currency": "USD",
+          "displayUrl": "https://www.chitusystems.com/",
+          "market": "United States of America"
+        }
+      ],
+      "pending": [
+        {
+          "advertiserId": "26009",
+          "name": "Aliexpress FR",
+          "country": "FR",
+          "currency": "EUR",
+          "displayUrl": "https://s.click.aliexpress.com/e/_opDIqA3",
+          "market": "France"
+        },
+        {
+          "advertiserId": "74978",
+          "name": "SwitchBot",
+          "country": "US",
+          "currency": "USD",
+          "displayUrl": "https://switch-bot.com",
+          "market": "United States of America"
+        },
+        {
+          "advertiserId": "76816",
+          "name": "WYBOTICS INC",
+          "country": "US",
+          "currency": "USD",
+          "displayUrl": "https://www.wybotpool.com",
+          "market": "United States of America"
+        }
+      ]
+    },
+    "datafeeds": {
+      "skipped": "AWIN_DATAFEED_KEY not set"
+    }
+  },
+  "cj": {
+    "advertisers": [
+      {
+        "name": "SwitchBot",
+        "advertiserId": "5661292",
+        "productsInSample": 115
+      },
+      {
+        "name": "Honiture",
+        "advertiserId": "7879535",
+        "productsInSample": 124
+      }
+    ],
+    "poolProducts": []
+  }
+}

@@ -117,51 +117,60 @@ async function awinFeeds() {
 /* CJ                                                                  */
 /* ------------------------------------------------------------------ */
 
-async function cjAdvertisers() {
+/**
+ * CJ's ads API has no advertiser-lookup query — introspection on 3 August 2026
+ * shows only product queries. The joined advertisers are therefore derived from
+ * the products they expose, which is the thing we actually care about anyway:
+ * an advertiser with no products cannot carry an offer.
+ */
+async function cjJoined() {
   if (!token.cj) return { skipped: "CJ_API_TOKEN not set" };
-  const query = `{ advertiserLookup(companyId: "8029924", forPublishers: true) {
-    totalCount resultList { advertiserId advertiserName relationshipStatus networkRank } } }`;
+  const query = `{ shoppingProducts(companyId: "8029924", partnerStatus: JOINED, limit: 1000) {
+    totalCount resultList { advertiserName advertiserId } } }`;
   const r = await getJson(CJ.ads, {
     method: "POST",
     headers: { Authorization: `Bearer ${token.cj}`, "content-type": "application/json" },
     body: JSON.stringify({ query }),
   });
   if (!r.ok) return { error: `HTTP ${r.status}`, body: redact(r.body) };
-  const list = r.data?.data?.advertiserLookup?.resultList ?? [];
-  log(`  CJ advertisers: ${list.length}`);
-  return list.map((a) => ({
-    advertiserId: a.advertiserId,
-    name: a.advertiserName,
-    relationship: a.relationshipStatus,
-  }));
+  if (r.data?.errors) return { error: redact(JSON.stringify(r.data.errors).slice(0, 300)) };
+  const rows = r.data?.data?.shoppingProducts?.resultList ?? [];
+  const byAdv = new Map();
+  for (const p of rows) {
+    const k = `${p.advertiserName}|${p.advertiserId}`;
+    byAdv.set(k, (byAdv.get(k) ?? 0) + 1);
+  }
+  const list = [...byAdv].map(([k, n]) => {
+    const [name, advertiserId] = k.split("|");
+    return { name, advertiserId, productsInSample: n };
+  });
+  log(`  CJ joined advertisers with products: ${list.length}`);
+  return list;
 }
 
-async function cjPoolProducts(advertisers) {
+async function cjPoolProducts() {
   if (!token.cj) return { skipped: "CJ_API_TOKEN not set" };
-  const joined = (Array.isArray(advertisers) ? advertisers : []).filter(
-    (a) => String(a.relationship || "").toLowerCase() === "joined",
-  );
-  if (!joined.length) return { note: "No joined CJ advertisers to search." };
-
   const found = [];
-  for (const adv of joined) {
-    const query = `{ shoppingProducts(companyId: "8029924", partnerIds: ["${adv.advertiserId}"], keyword: "pool cleaner", limit: 50) {
-      totalCount resultList { title brand price { amount currency } linkCode(pid: "101845913") { clickUrl } } } }`;
+  for (const kw of POOL_TERMS) {
+    const query = `{ shoppingProducts(companyId: "8029924", keywords: ["${kw}"], partnerStatus: JOINED, advertiserCountries: ["US"], limit: 100) {
+      totalCount resultList { title brand advertiserName price { amount currency } linkCode(pid: "101845913") { clickUrl } } } }`;
     const r = await getJson(CJ.ads, {
       method: "POST",
       headers: { Authorization: `Bearer ${token.cj}`, "content-type": "application/json" },
       body: JSON.stringify({ query }),
     });
-    if (!r.ok) { found.push({ advertiser: adv.name, error: `HTTP ${r.status}` }); continue; }
+    if (!r.ok || r.data?.errors) { log(`  CJ "${kw}": query failed`); continue; }
     const rows = r.data?.data?.shoppingProducts?.resultList ?? [];
+    // CJ matches the words loosely, so a household vacuum comes back for
+    // "pool vacuum". Keep only titles that genuinely name a pool product.
     const pool = rows.filter((p) => isPool(p.title));
-    log(`  CJ ${adv.name}: ${rows.length} returned, ${pool.length} look like pool cleaners`);
+    log(`  CJ "${kw}": ${rows.length} returned, ${pool.length} genuinely pool`);
     for (const p of pool) {
+      if (found.some((f) => f.title === p.title)) continue;
       found.push({
-        advertiser: adv.name,
-        advertiserId: adv.advertiserId,
-        title: p.title,
+        advertiser: p.advertiserName,
         brand: p.brand ?? null,
+        title: p.title,
         price: p.price ? `${p.price.amount} ${p.price.currency}` : null,
         affiliateUrl: p.linkCode?.clickUrl ?? null,
       });
@@ -180,8 +189,8 @@ const run = async () => {
   const feeds = await awinFeeds();
 
   log("\nCJ:");
-  const cjAdvs = await cjAdvertisers();
-  const cjProducts = await cjPoolProducts(cjAdvs);
+  const cjAdvs = await cjJoined();
+  const cjProducts = await cjPoolProducts();
 
   const result = {
     ranAt: new Date().toISOString(),
@@ -210,7 +219,7 @@ const run = async () => {
   table("Awin — joined", awinProgs.joined, ["advertiserId", "name", "country", "market"]);
   table("Awin — pending", awinProgs.pending, ["advertiserId", "name", "country", "market"]);
   table("Awin — product feeds", feeds, ["advertiserId", "advertiserName", "region", "membership", "products"]);
-  table("CJ — advertisers", cjAdvs, ["advertiserId", "name", "relationship"]);
+  table("CJ — joined advertisers with products", cjAdvs, ["advertiserId", "name", "productsInSample"]);
   table("CJ — pool products found", cjProducts, ["advertiser", "brand", "title", "price"]);
   writeFileSync("docs/affiliate-discovery.md", lines.join("\n"));
 
