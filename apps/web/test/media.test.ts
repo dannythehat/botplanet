@@ -597,12 +597,22 @@ describe("compact slots", () => {
     // route by which an unlicensed photograph could reach the homepage without
     // passing the rights check.
     const home = readFileSync("apps/web/src/pages/index.astro", "utf8");
-    const rawProductImages = home.match(/<img[^>]+src="(?!\/logo\/)[^"]*\/media\/[^"]*"/g) ?? [];
-    expect(rawProductImages).toEqual([]);
+    const mediaSrcs = [...home.matchAll(/(?:src|srcset)="(\/media\/[^"\s]*)"/g)].map((m) => m[1]);
+    // Brand artwork may appear directly — it is ours and depicts no catalogue
+    // model — but only if the registry knows about it. That is the same rights
+    // check ProductImage performs, applied to the one page that does not use it.
+    for (const src of mediaSrcs) {
+      const asset = MEDIA_ASSETS.find((a) => a.src === src);
+      expect(asset, `${src} is not in the media registry`).toBeTruthy();
+      expect(asset!.depictsRealProduct).toBe(false);
+      expect(asset!.productId).toBeNull();
+    }
     if (home.includes("placement=")) expect(home).toContain("ProductImage");
-    // Whatever imagery it does carry is BotPlanet's own brand, not a product.
-    for (const src of home.match(/<img[^>]+src="([^"]+)"/g) ?? []) {
-      expect(src).toMatch(/\/logo\//);
+    // Every <img> on the page is either the logo or registry-cleared artwork.
+    // The loop above already proved the /media/ ones are registered; this
+    // catches an <img> pointing anywhere else entirely.
+    for (const tag of home.match(/<img[^>]+src="([^"]+)"/g) ?? []) {
+      expect(tag).toMatch(/src="(\/logo\/|\/media\/)/);
     }
   });
 });

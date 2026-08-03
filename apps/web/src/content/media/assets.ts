@@ -114,6 +114,38 @@ export const ORIGINAL_ASSETS: MediaAssetRecord[] = [
     depictsRealProduct: false,
     notes: "Rendered as an inline Astro component, so it has no intrinsic file dimensions and needs no responsive derivatives.",
   },
+  ...(
+    [
+      ["hero-home-desktop", "/media/home/hero-desktop.webp", 1672, 941, "sha256:2c5967d28938e40c395277b7416cdb5982778c3e82cbc95b37a60e6590fd5765"],
+      ["hero-home-mobile", "/media/home/hero-mobile.webp", 1100, 1375, "sha256:ed375c791ee6443f4c613cb9cb2a69b629a2f1cf9317fc8cc2ac41e4e4984198"],
+    ] as const
+  ).map(([id, src, width, height, checksum]): MediaAssetRecord => ({
+    ...base(id, "botplanet_original"),
+    productId: null,
+    purpose: "Homepage hero",
+    exactModel: null,
+    type: "category_hero",
+    acquisitionMethod: "authored_in_house",
+    checksum,
+    width,
+    height,
+    src,
+    altText:
+      "A night-time home where six kinds of robot are working at once: a pool cleaner in the water, a window cleaner on the glass, a mower on the lawn, a vacuum on the terrace, a four-legged patrol robot and a companion robot at the door, beneath the BotPlanet logo and the Earth.",
+    altTextStatus: "approved",
+    // The machines in the frame are rendered generics, not catalogue models, so
+    // this illustrates the category set without depicting any product we sell.
+    schema: {
+      ...ORIGINAL_SCHEMA,
+      reason:
+        "original brand artwork showing generic machines of each category; it may illustrate the page and preview socially, but depicts no product in the catalogue and is never a Product image",
+    },
+    depictsRealProduct: false,
+    presentation: "bleed",
+    retrievedDate: "2026-08-03",
+    lastCheckedDate: "2026-08-03",
+    notes: "Owner-created, supplied 3 August 2026. The mobile file is a 4:5 crop of the same master, taken centre, with no recolour.",
+  })),
   {
     ...base("promo-botmatch-pool", "botplanet_original"),
     productId: null,
