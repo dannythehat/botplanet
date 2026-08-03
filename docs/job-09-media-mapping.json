@@ -3,24 +3,24 @@
   "launchProducts": 10,
   "position": "No third-party product photograph is ingested. The Amazon Associates route is a potential lawful source, but the account's ownership and current approval are unverified, and obtaining Program Content lawfully would also require Creators API credentials that this environment does not hold; the programme forbids scraping, guessed URLs and unapproved caching. No launch-brand manufacturer publishes a press kit granting third-party image use. Until one of those changes, no product carries a photograph. Five products are shown in original BotPlanet creatives, which we own outright and which do show the machine but carry our branding and headline text set into the image — they illustrate, they are not evidence, and they never enter Product structured data. Every other product renders an original BotPlanet branded placeholder that names the exact model and does not depict it.",
   "totals": {
-    "assets": 43,
+    "assets": 45,
     "productAssets": 21,
-    "originalAssets": 33,
+    "originalAssets": 35,
     "placeholders": 10,
-    "locallyStored": 43,
+    "locallyStored": 45,
     "remotelyServed": 0,
     "withdrawn": 0,
     "exactModelConfirmed": 10,
     "publicSafe": 10,
     "heroReady": 9,
     "fullSetReady": 0,
-    "derivatives": 75,
+    "derivatives": 81,
     "altApproved": 32,
-    "altDecorative": 11,
+    "altDecorative": 13,
     "altMissing": 0,
     "altRejected": 0,
     "schemaProductEligible": 0,
-    "schemaOpenGraphEligible": 32
+    "schemaOpenGraphEligible": 34
   },
   "rows": [
     {
