@@ -1,9 +1,9 @@
 {
   "worker": "botplanet-web",
   "productionUrl": "https://botplanet.io",
-  "deployedCommit": "c36ac444f08493f8305f5f545a4ff8b96d29d9cd",
-  "deploymentId": "d8f8fdd8-9aaa-4d73-a0b1-b98eb9e012a7",
-  "deployedAt": "2026-08-03T17:37:53.854472+00:00",
+  "deployedCommit": "1dec301fcf7561aab1a5128ad04f3fcdb99e7256",
+  "deploymentId": "284714ce-d0f9-45a1-91b6-d6d51f79daca",
+  "deployedAt": "2026-08-03T17:43:43.625450+00:00",
   "homepageStatus": 200,
   "amazonRedirectStatus": 302,
   "amazonRedirectLocation": "https://www.amazon.com/dp/B09K4C9WGF?tag=botplanet-20",
