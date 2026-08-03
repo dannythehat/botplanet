@@ -1,21 +1,19 @@
 ---
 /* ============================================================
-   BotPlanet — Split decision section (H2 + intro + two panels)
+   BotPlanet — Split decision section (section head + 2 panels)
 
-   Section 4 on every category page, for the one binary choice
-   each category has: corded or cordless here, mains or battery,
-   wired or wireless elsewhere.
+   For the one binary choice each category has: corded or
+   cordless here, mains or battery, wired or wireless elsewhere.
 
-   Deliberately a third element type. Two wide panels rather
-   than a card grid or hairline rows, so the page keeps its
-   visual rhythm instead of repeating one component.
-
-   Kept short by design: the detail belongs on the dedicated
-   guide, not on the category hub.
+   A third element type, so the page keeps its rhythm. Kept
+   short by design — the detail belongs on the dedicated guide,
+   not on the category hub.
    ============================================================ */
 
+import SectionHead from "./SectionHead.astro";
+
 export interface SplitPanel {
-  /** Short mono label, e.g. "CORDED". */
+  /** Short label, e.g. "CORDED". */
   label: string;
   /** The H3, e.g. "When corded is the stronger choice". */
   title: string;
@@ -27,168 +25,171 @@ export interface SplitPanel {
 
 interface Props {
   id?: string;
-  /** The H2. Carries the section's secondary keyword. */
+  eyebrow?: string;
   title: string;
-  /** 60–100 words. */
   intro: string;
   panels: SplitPanel[];
 }
 
-const { id, title, intro, panels } = Astro.props;
+const { id, eyebrow, title, intro, panels } = Astro.props;
 ---
 
-<section class="split" id={id}>
-  <div class="split__head">
-    <h2 class="split__title">{title}</h2>
-    <p class="split__intro">{intro}</p>
-  </div>
+<section class="bp-split" id={id}>
+  <SectionHead eyebrow={eyebrow} title={title} intro={intro} />
 
-  <div class="split__grid">
+  <div class="bp-split__grid">
     {panels.map((panel) => (
-      <article class="spanel">
-        <span class="spanel__label">{panel.label}</span>
-        <h3 class="spanel__title">{panel.title}</h3>
+      <article class="bp-spanel">
+        <span class="bp-spanel__label">{panel.label}</span>
+        <h3 class="bp-spanel__title">{panel.title}</h3>
 
-        <ul class="spanel__points">
+        <ul class="bp-spanel__points">
           {panel.points.map((point) => <li>{point}</li>)}
         </ul>
 
-        <p class="spanel__tradeoff">
-          <span class="spanel__tradeoff-label">Trade-off</span>
-          {panel.tradeOff}
-        </p>
+        <div class="bp-spanel__tradeoff">
+          <span class="bp-spanel__tradeoff-label">Trade-off</span>
+          <p class="bp-spanel__tradeoff-text">{panel.tradeOff}</p>
+        </div>
       </article>
     ))}
   </div>
 </section>
 
 <style>
-  .split {
-    margin: 0 0 var(--space-2xl, 3rem);
+  .bp-split {
+    margin: 0 0 clamp(3.5rem, 8vw, 6rem);
   }
 
-  /* ---------- heading + intro ---------- */
-  .split__head {
-    max-width: 62ch;
-    margin-bottom: clamp(1.5rem, 3.5vw, 2.25rem);
-  }
-
-  .split__title {
-    margin: 0;
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: clamp(1.6rem, 4.4vw, 2.35rem);
-    line-height: 1.14;
-    letter-spacing: -0.018em;
-    text-wrap: balance;
-    color: var(--text-primary);
-  }
-
-  .split__intro {
-    margin: 0.9rem 0 0;
-    font-size: 1.0625rem;
-    line-height: 1.62;
-    color: var(--text-secondary);
-  }
-
-  /* ---------- panels ---------- */
-  .split__grid {
+  .bp-split__grid {
     display: grid;
-    gap: clamp(0.9rem, 2vw, 1.25rem);
+    gap: clamp(1rem, 2.2vw, 1.5rem);
     grid-template-columns: 1fr;
   }
 
-  .spanel {
+  /* ---------- panel ---------- */
+  .bp-spanel {
     position: relative;
-    padding: clamp(1.35rem, 3.4vw, 1.9rem);
-    border: 1px solid rgba(207, 213, 221, 0.16);
-    border-radius: 14px;
+    display: flex;
+    flex-direction: column;
+    padding: clamp(1.6rem, 3.8vw, 2.15rem);
+    border: 1px solid var(--cs-line);
+    border-radius: 16px;
     overflow: hidden;
-    background:
-      radial-gradient(ellipse at 0% 0%, rgba(232, 235, 239, 0.055), transparent 62%),
-      linear-gradient(180deg, #11151a, #080a0d);
+    background: var(--cs-surface-lift);
     box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.05),
-      0 18px 44px rgba(0, 0, 0, 0.4);
+      inset 0 1px 0 rgba(255, 255, 255, 0.06),
+      0 22px 52px rgba(0, 0, 0, 0.46);
   }
 
-  .spanel__label {
-    display: inline-block;
-    margin-bottom: 0.85rem;
-    padding: 0.28rem 0.6rem;
-    border: 1px solid rgba(202, 208, 216, 0.3);
+  .bp-spanel::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(246, 248, 252, 0.5) 26%,
+      rgba(246, 248, 252, 0.72) 50%,
+      rgba(246, 248, 252, 0.42) 74%,
+      transparent
+    );
+  }
+
+  .bp-spanel__label {
+    align-self: flex-start;
+    margin-bottom: 1.05rem;
+    padding: 0.34rem 0.78rem;
     border-radius: 999px;
     font-family: var(--font-mono);
-    font-size: 0.64rem;
-    font-weight: 600;
-    letter-spacing: 0.2em;
-    color: var(--text-secondary);
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    color: #0a0d11;
+    background: var(--cs-sheen);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.85),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.35),
+      0 4px 12px rgba(0, 0, 0, 0.4);
   }
 
-  .spanel__title {
+  .bp-spanel__title {
     margin: 0;
     font-family: var(--font-display);
     font-weight: 700;
-    font-size: 1.2rem;
-    line-height: 1.24;
-    letter-spacing: -0.01em;
-    color: var(--text-primary);
+    font-size: clamp(1.25rem, 2.4vw, 1.42rem);
+    line-height: 1.2;
+    letter-spacing: -0.014em;
+    color: var(--cs-hi);
   }
 
-  .spanel__points {
-    margin: 1.1rem 0 0;
+  .bp-spanel__points {
+    margin: 1.3rem 0 0;
     padding: 0;
     list-style: none;
     display: grid;
-    gap: 0.62rem;
+    gap: 0.78rem;
   }
 
-  .spanel__points li {
+  .bp-spanel__points li {
     position: relative;
-    padding-left: 1.15rem;
-    font-size: 0.97rem;
-    line-height: 1.56;
+    padding-left: 1.35rem;
+    font-size: 0.99rem;
+    line-height: 1.6;
     color: var(--text-secondary);
   }
 
-  .spanel__points li::before {
+  .bp-spanel__points li::before {
     content: "";
     position: absolute;
     left: 0;
-    top: 0.63em;
-    width: 7px;
-    height: 1px;
-    background: linear-gradient(90deg, #f1f3f5, #767e88);
+    top: 0.55em;
+    width: 0.4rem;
+    height: 0.4rem;
+    transform: rotate(45deg);
+    background: var(--cs-sheen);
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4);
   }
 
-  /* the downside, set apart so it reads as a real caveat */
-  .spanel__tradeoff {
-    margin: 1.15rem 0 0;
-    padding-top: 1rem;
-    border-top: 1px solid rgba(203, 210, 218, 0.14);
-    font-size: 0.92rem;
-    line-height: 1.55;
-    color: var(--text-tertiary);
+  /* the downside, inset so it reads as a real caveat */
+  .bp-spanel__tradeoff {
+    margin-top: auto;
+    padding: 1.05rem 1.15rem;
+    border: 1px solid var(--cs-line-soft);
+    border-radius: 11px;
+    background: rgba(0, 0, 0, 0.28);
   }
 
-  .spanel__tradeoff-label {
+  .bp-spanel__tradeoff + .bp-spanel__tradeoff,
+  .bp-spanel__points + .bp-spanel__tradeoff {
+    margin-top: 1.5rem;
+  }
+
+  .bp-spanel__tradeoff-label {
     display: block;
-    margin-bottom: 0.3rem;
+    margin-bottom: 0.4rem;
     font-family: var(--font-mono);
-    font-size: 0.64rem;
-    font-weight: 600;
-    letter-spacing: 0.2em;
+    font-size: 0.63rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--text-quaternary);
+    background: var(--cs-sheen);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .bp-spanel__tradeoff-text {
+    margin: 0;
+    font-size: 0.93rem;
+    line-height: 1.6;
+    color: var(--cs-mid);
   }
 
   /* ---------- wider screens ---------- */
-  @media (min-width: 820px) {
-    .split__intro {
-      font-size: 1.1875rem;
-    }
-
-    .split__grid {
+  @media (min-width: 860px) {
+    .bp-split__grid {
       grid-template-columns: repeat(2, 1fr);
     }
   }

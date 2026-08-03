@@ -1,24 +1,23 @@
 ---
 /* ============================================================
-   BotPlanet — Coverage section (H2 + intro + labelled rows)
+   BotPlanet — Coverage section (section head + labelled rows)
 
-   Section 3 on every category page. Same fixed shape as the
-   decision section, but a different element on purpose: rows
-   divided by hairlines rather than boxed cards, so the page
-   does not read as the same component three times.
+   Same fixed shape as the decision section, different element
+   on purpose: rows on their own panels rather than a card grid,
+   so the page keeps a visual rhythm instead of repeating one
+   component down the screen.
 
-   Each row carries a real H3, so the sub-topics are headings
-   in their own right rather than bold text.
-
-   The image is optional — the rows are complete without it.
+   Each row carries a real H3, so the sub-topics are headings in
+   their own right. The image is optional.
    ============================================================ */
 
+import SectionHead from "./SectionHead.astro";
 import type { HeroImage } from "./CategoryHero.astro";
 
 export interface CoverageRow {
   /** The H3, e.g. "Wall and waterline cleaning". */
   title: string;
-  /** One line: who genuinely needs this. */
+  /** One short line: who genuinely needs this. */
   whoFor: string;
   /** Two to four sentences. */
   body: string;
@@ -26,26 +25,22 @@ export interface CoverageRow {
 
 interface Props {
   id?: string;
-  /** The H2. Carries the section's secondary keyword. */
+  eyebrow?: string;
   title: string;
-  /** 60–100 words. */
   intro: string;
   /** Optional supporting visual, shown above the rows. */
   image?: HeroImage;
   rows: CoverageRow[];
 }
 
-const { id, title, intro, image, rows } = Astro.props;
+const { id, eyebrow, title, intro, image, rows } = Astro.props;
 ---
 
-<section class="cov" id={id}>
-  <div class="cov__head">
-    <h2 class="cov__title">{title}</h2>
-    <p class="cov__intro">{intro}</p>
-  </div>
+<section class="bp-cov" id={id}>
+  <SectionHead eyebrow={eyebrow} title={title} intro={intro} />
 
   {image?.src && (
-    <figure class="cov__figure">
+    <figure class="bp-cov__figure">
       <picture>
         {image.mobileSrc && <source media="(max-width: 719px)" srcset={image.mobileSrc} />}
         <img
@@ -59,59 +54,37 @@ const { id, title, intro, image, rows } = Astro.props;
     </figure>
   )}
 
-  <div class="cov__rows">
+  <div class="bp-cov__rows">
     {rows.map((row) => (
-      <div class="crow">
-        <div class="crow__label">
-          <h3 class="crow__title">{row.title}</h3>
-          <p class="crow__who">{row.whoFor}</p>
+      <article class="bp-crow">
+        <div class="bp-crow__label">
+          <h3 class="bp-crow__title">{row.title}</h3>
+          <span class="bp-crow__who">{row.whoFor}</span>
         </div>
-        <p class="crow__body">{row.body}</p>
-      </div>
+        <p class="bp-crow__body">{row.body}</p>
+      </article>
     ))}
   </div>
 </section>
 
 <style>
-  .cov {
-    margin: 0 0 var(--space-2xl, 3rem);
-  }
-
-  /* ---------- heading + intro ---------- */
-  .cov__head {
-    max-width: 62ch;
-    margin-bottom: clamp(1.5rem, 3.5vw, 2.25rem);
-  }
-
-  .cov__title {
-    margin: 0;
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: clamp(1.6rem, 4.4vw, 2.35rem);
-    line-height: 1.14;
-    letter-spacing: -0.018em;
-    text-wrap: balance;
-    color: var(--text-primary);
-  }
-
-  .cov__intro {
-    margin: 0.9rem 0 0;
-    font-size: 1.0625rem;
-    line-height: 1.62;
-    color: var(--text-secondary);
+  .bp-cov {
+    margin: 0 0 clamp(3.5rem, 8vw, 6rem);
   }
 
   /* ---------- optional visual ---------- */
-  .cov__figure {
-    margin: 0 0 clamp(1.25rem, 3vw, 2rem);
-    border: 1px solid rgba(204, 210, 218, 0.16);
-    border-radius: 14px;
+  .bp-cov__figure {
+    margin: 0 0 clamp(1.5rem, 3.5vw, 2.25rem);
+    border: 1px solid var(--cs-line);
+    border-radius: 16px;
     overflow: hidden;
-    background: linear-gradient(160deg, #171b20, #090b0e);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 18px 44px rgba(0, 0, 0, 0.4);
+    background: var(--cs-surface);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.055),
+      0 22px 52px rgba(0, 0, 0, 0.44);
   }
 
-  .cov__figure img {
+  .bp-cov__figure img {
     display: block;
     width: 100%;
     aspect-ratio: 16 / 9;
@@ -119,57 +92,77 @@ const { id, title, intro, image, rows } = Astro.props;
   }
 
   /* ---------- rows ---------- */
-  .cov__rows {
-    border-top: 1px solid rgba(203, 210, 218, 0.16);
-  }
-
-  .crow {
+  .bp-cov__rows {
     display: grid;
-    gap: 0.55rem;
-    padding: clamp(1.25rem, 3.2vw, 1.75rem) 0;
-    border-bottom: 1px solid rgba(203, 210, 218, 0.12);
+    gap: clamp(0.9rem, 2vw, 1.15rem);
   }
 
-  .crow__title {
+  .bp-crow {
+    position: relative;
+    display: grid;
+    gap: 0.85rem;
+    padding: clamp(1.5rem, 3.6vw, 2rem);
+    border: 1px solid var(--cs-line-soft);
+    border-radius: 14px;
+    background: var(--cs-surface);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.34);
+  }
+
+  /* vertical chrome rail marking each zone */
+  .bp-crow::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 1.35rem;
+    bottom: 1.35rem;
+    width: 2px;
+    border-radius: 0 2px 2px 0;
+    background: linear-gradient(180deg, var(--cs-hi), rgba(138, 146, 161, 0.14));
+  }
+
+  .bp-crow__title {
     margin: 0;
     font-family: var(--font-display);
     font-weight: 700;
-    font-size: 1.15rem;
-    line-height: 1.26;
-    letter-spacing: -0.008em;
-    color: var(--text-primary);
+    font-size: clamp(1.15rem, 2.3vw, 1.3rem);
+    line-height: 1.22;
+    letter-spacing: -0.012em;
+    color: var(--cs-hi);
   }
 
-  .crow__who {
-    margin: 0.35rem 0 0;
-    font-family: var(--font-mono);
-    font-size: 0.76rem;
-    letter-spacing: 0.06em;
-    line-height: 1.5;
-    color: var(--text-tertiary);
+  /* proper tag, not terminal text */
+  .bp-crow__who {
+    display: inline-block;
+    margin-top: 0.65rem;
+    padding: 0.32rem 0.68rem;
+    border: 1px solid var(--cs-line);
+    border-radius: 999px;
+    font-size: 0.78rem;
+    line-height: 1.35;
+    letter-spacing: 0.01em;
+    color: var(--cs-mid);
+    background: rgba(255, 255, 255, 0.022);
   }
 
-  .crow__body {
+  .bp-crow__body {
     margin: 0;
     font-size: 1rem;
-    line-height: 1.62;
+    line-height: 1.66;
     color: var(--text-secondary);
   }
 
   /* ---------- wider screens ---------- */
-  @media (min-width: 860px) {
-    .cov__intro {
-      font-size: 1.1875rem;
-    }
-
-    .crow {
-      grid-template-columns: 15rem 1fr;
-      gap: clamp(1.5rem, 4vw, 3rem);
+  @media (min-width: 880px) {
+    .bp-crow {
+      grid-template-columns: 17rem 1fr;
+      gap: clamp(1.75rem, 4vw, 3.25rem);
       align-items: start;
+      padding: clamp(1.75rem, 3vw, 2.25rem);
     }
 
-    .crow__body {
-      max-width: 66ch;
+    .bp-crow__body {
+      max-width: 64ch;
+      padding-top: 0.15rem;
     }
   }
 </style>

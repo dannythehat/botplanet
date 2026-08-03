@@ -44,18 +44,20 @@ const split = splitSectionFor("robotic-pool-cleaners")!;
       />
       <DecisionCards
         id={decision.id}
+        eyebrow={decision.eyebrow}
         title={decision.title}
         intro={decision.intro}
         cards={decision.cards}
       />
       <CoverageRows
         id={coverage.id}
+        eyebrow={coverage.eyebrow}
         title={coverage.title}
         intro={coverage.intro}
         image={coverage.image}
         rows={coverage.rows}
       />
-      <DecisionSplit id={split.id} title={split.title} intro={split.intro} panels={split.panels} />
+      <DecisionSplit id={split.id} eyebrow={split.eyebrow} title={split.title} intro={split.intro} panels={split.panels} />
     </main>
   </body>
 </html>

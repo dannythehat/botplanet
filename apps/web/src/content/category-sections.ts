@@ -24,6 +24,8 @@ import type { HeroImage } from "../components/CategoryHero.astro";
 export interface DecisionSectionContent {
   /** Anchor id for internal links. */
   id: string;
+  /** Short label above the H2. */
+  eyebrow?: string;
   /** The H2. */
   title: string;
   /** 60–100 words. */
@@ -34,6 +36,7 @@ export interface DecisionSectionContent {
 export const DECISION_SECTION: Record<string, DecisionSectionContent> = {
   "robotic-pool-cleaners": {
     id: "pool-type",
+    eyebrow: "Pool type",
     title: "Choose a robotic pool cleaner for your pool type",
 
     /* 72 words. Carries "inground robotic pool cleaner" (1,300),
@@ -95,6 +98,7 @@ export function decisionSectionFor(slug: string | undefined): DecisionSectionCon
 
 export interface CoverageSectionContent {
   id: string;
+  eyebrow?: string;
   title: string;
   intro: string;
   image?: HeroImage;
@@ -104,6 +108,7 @@ export interface CoverageSectionContent {
 export const COVERAGE_SECTION: Record<string, CoverageSectionContent> = {
   "robotic-pool-cleaners": {
     id: "coverage",
+    eyebrow: "Cleaning coverage",
     title: "Floor, walls, waterline or surface: what should the robot clean?",
 
     /* 75 words. Carries "wall climbing robotic pool cleaner" (30) plus the
@@ -170,6 +175,7 @@ export function coverageSectionFor(slug: string | undefined): CoverageSectionCon
 
 export interface SplitSectionContent {
   id: string;
+  eyebrow?: string;
   title: string;
   intro: string;
   panels: SplitPanel[];
@@ -178,6 +184,7 @@ export interface SplitSectionContent {
 export const SPLIT_SECTION: Record<string, SplitSectionContent> = {
   "robotic-pool-cleaners": {
     id: "power",
+    eyebrow: "Power",
     title: "Corded vs cordless robotic pool cleaners",
 
     /* 77 words. Carries "corded robotic pool cleaner" (590) once, naturally. */

@@ -1,15 +1,16 @@
 ---
 /* ============================================================
-   BotPlanet — Decision section (H2 + intro + decision cards)
+   BotPlanet — Decision section (section head + decision cards)
 
-   The second section on every category page. Reusable as-is:
-   only the heading, the intro copy and the cards change.
+   Reusable on every category page: only the heading, the intro
+   and the cards change.
 
    Cards are designed to look finished with no picture at all,
    so a page is never blocked waiting on artwork. Add an image
    to a card later and it appears above that card's text.
    ============================================================ */
 
+import SectionHead from "./SectionHead.astro";
 import type { HeroImage } from "./CategoryHero.astro";
 
 export interface DecisionCard {
@@ -24,29 +25,24 @@ export interface DecisionCard {
 }
 
 interface Props {
-  /** Anchor id, so the section can be linked to. */
   id?: string;
-  /** The H2. Carries the section's secondary keyword. */
+  eyebrow?: string;
   title: string;
-  /** 60–100 words. */
   intro: string;
   cards: DecisionCard[];
 }
 
-const { id, title, intro, cards } = Astro.props;
+const { id, eyebrow, title, intro, cards } = Astro.props;
 ---
 
-<section class="dsec" id={id}>
-  <div class="dsec__head">
-    <h2 class="dsec__title">{title}</h2>
-    <p class="dsec__intro">{intro}</p>
-  </div>
+<section class="bp-dsec" id={id}>
+  <SectionHead eyebrow={eyebrow} title={title} intro={intro} />
 
-  <div class="dsec__grid" data-count={cards.length}>
+  <div class="bp-dsec__grid" data-count={cards.length}>
     {cards.map((card, i) => (
-      <article class="dcard">
+      <article class="bp-dcard">
         {card.image?.src && (
-          <figure class="dcard__figure">
+          <figure class="bp-dcard__figure">
             <picture>
               {card.image.mobileSrc && (
                 <source media="(max-width: 719px)" srcset={card.image.mobileSrc} />
@@ -62,11 +58,14 @@ const { id, title, intro, cards } = Astro.props;
           </figure>
         )}
 
-        <div class="dcard__body">
-          <span class="dcard__index">{String(i + 1).padStart(2, "0")}</span>
-          <h3 class="dcard__title">{card.title}</h3>
-          <p class="dcard__bestfor">{card.bestFor}</p>
-          <ul class="dcard__points">
+        <div class="bp-dcard__body">
+          <span class="bp-dcard__index">{String(i + 1).padStart(2, "0")}</span>
+          <h3 class="bp-dcard__title">{card.title}</h3>
+          <p class="bp-dcard__bestfor">{card.bestFor}</p>
+
+          <span class="bp-dcard__divider" aria-hidden="true"></span>
+
+          <ul class="bp-dcard__points">
             {card.points.map((point) => <li>{point}</li>)}
           </ul>
         </div>
@@ -76,59 +75,32 @@ const { id, title, intro, cards } = Astro.props;
 </section>
 
 <style>
-  .dsec {
-    margin: 0 0 var(--space-2xl, 3rem);
+  .bp-dsec {
+    margin: 0 0 clamp(3.5rem, 8vw, 6rem);
   }
 
-  /* ---------- heading + intro ---------- */
-  .dsec__head {
-    max-width: 62ch;
-    margin-bottom: clamp(1.5rem, 3.5vw, 2.25rem);
-  }
-
-  .dsec__title {
-    margin: 0;
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: clamp(1.6rem, 4.4vw, 2.35rem);
-    line-height: 1.14;
-    letter-spacing: -0.018em;
-    text-wrap: balance;
-    color: var(--text-primary);
-  }
-
-  .dsec__intro {
-    margin: 0.9rem 0 0;
-    font-size: 1.0625rem; /* 17px */
-    line-height: 1.62;
-    color: var(--text-secondary);
-  }
-
-  /* ---------- grid ---------- */
-  .dsec__grid {
+  .bp-dsec__grid {
     display: grid;
-    gap: clamp(0.9rem, 2vw, 1.25rem);
+    gap: clamp(1rem, 2.2vw, 1.5rem);
     grid-template-columns: 1fr;
   }
 
   /* ---------- card ---------- */
-  .dcard {
+  .bp-dcard {
     position: relative;
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    border: 1px solid rgba(207, 213, 221, 0.16);
-    border-radius: 14px;
-    background:
-      linear-gradient(145deg, rgba(255, 255, 255, 0.035), transparent 34%),
-      linear-gradient(180deg, #11151a, #080a0d);
+    border: 1px solid var(--cs-line);
+    border-radius: 16px;
+    background: var(--cs-surface-lift);
     box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.055),
-      0 18px 44px rgba(0, 0, 0, 0.4);
+      inset 0 1px 0 rgba(255, 255, 255, 0.06),
+      0 22px 52px rgba(0, 0, 0, 0.46);
   }
 
-  /* metal hairline along the top edge of each card */
-  .dcard::before {
+  /* brushed hairline across the top of each card */
+  .bp-dcard::before {
     content: "";
     position: absolute;
     inset: 0 0 auto 0;
@@ -136,105 +108,116 @@ const { id, title, intro, cards } = Astro.props;
     background: linear-gradient(
       90deg,
       transparent,
-      rgba(244, 246, 248, 0.42) 30%,
-      rgba(244, 246, 248, 0.6) 50%,
-      rgba(244, 246, 248, 0.35) 70%,
+      rgba(246, 248, 252, 0.5) 26%,
+      rgba(246, 248, 252, 0.72) 50%,
+      rgba(246, 248, 252, 0.42) 74%,
       transparent
     );
     z-index: 1;
   }
 
-  .dcard__figure {
+  .bp-dcard__figure {
     margin: 0;
-    border-bottom: 1px solid rgba(204, 210, 218, 0.14);
+    border-bottom: 1px solid var(--cs-line-soft);
   }
 
-  .dcard__figure img {
+  .bp-dcard__figure img {
     display: block;
     width: 100%;
     aspect-ratio: 16 / 10;
     object-fit: cover;
   }
 
-  .dcard__body {
-    padding: clamp(1.25rem, 3.4vw, 1.6rem);
+  .bp-dcard__body {
+    padding: clamp(1.5rem, 3.6vw, 2rem);
   }
 
-  .dcard__index {
-    display: block;
-    margin-bottom: 0.7rem;
+  /* ---------- index chip ---------- */
+  .bp-dcard__index {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.15rem;
+    height: 1.6rem;
+    margin-bottom: 1.05rem;
+    padding: 0 0.5rem;
+    border-radius: 999px;
     font-family: var(--font-mono);
     font-size: 0.68rem;
-    font-weight: 600;
-    letter-spacing: 0.2em;
-    background: linear-gradient(90deg, #f1f3f5, #6f767f);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: #0a0d11;
+    background: var(--cs-sheen);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.85),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.35),
+      0 4px 12px rgba(0, 0, 0, 0.4);
   }
 
-  .dcard__title {
+  .bp-dcard__title {
     margin: 0;
     font-family: var(--font-display);
     font-weight: 700;
-    font-size: 1.2rem;
-    line-height: 1.24;
-    letter-spacing: -0.01em;
-    color: var(--text-primary);
+    font-size: clamp(1.25rem, 2.4vw, 1.4rem);
+    line-height: 1.2;
+    letter-spacing: -0.014em;
+    color: var(--cs-hi);
   }
 
-  .dcard__bestfor {
-    margin: 0.5rem 0 0;
-    font-size: 0.95rem;
+  .bp-dcard__bestfor {
+    margin: 0.6rem 0 0;
+    font-size: 0.97rem;
     line-height: 1.5;
-    color: var(--text-tertiary);
+    color: var(--cs-mid);
   }
 
-  .dcard__points {
-    margin: 1.05rem 0 0;
+  .bp-dcard__divider {
+    display: block;
+    height: 1px;
+    margin: 1.35rem 0;
+    background: linear-gradient(90deg, var(--cs-line), transparent 78%);
+  }
+
+  .bp-dcard__points {
+    margin: 0;
     padding: 0;
     list-style: none;
     display: grid;
-    gap: 0.6rem;
+    gap: 0.75rem;
   }
 
-  .dcard__points li {
+  .bp-dcard__points li {
     position: relative;
-    padding-left: 1.1rem;
-    font-size: 0.95rem;
-    line-height: 1.55;
+    padding-left: 1.35rem;
+    font-size: 0.97rem;
+    line-height: 1.58;
     color: var(--text-secondary);
   }
 
-  /* small metallic marker instead of a bullet */
-  .dcard__points li::before {
+  /* chrome diamond instead of a bullet */
+  .bp-dcard__points li::before {
     content: "";
     position: absolute;
     left: 0;
-    top: 0.62em;
-    width: 6px;
-    height: 1px;
-    background: linear-gradient(90deg, #f1f3f5, #767e88);
+    top: 0.55em;
+    width: 0.4rem;
+    height: 0.4rem;
+    transform: rotate(45deg);
+    background: var(--cs-sheen);
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4);
   }
 
   /* ---------- wider screens ---------- */
   @media (min-width: 700px) {
-    .dsec__grid[data-count="2"],
-    .dsec__grid[data-count="4"] {
+    .bp-dsec__grid[data-count="2"],
+    .bp-dsec__grid[data-count="4"] {
       grid-template-columns: repeat(2, 1fr);
     }
   }
 
-  @media (min-width: 900px) {
-    .dsec__intro {
-      font-size: 1.1875rem; /* 19px */
-    }
-
-    .dsec__grid[data-count="3"] {
-      grid-template-columns: repeat(3, 1fr);
-    }
-
-    .dsec__grid[data-count="5"] {
+  @media (min-width: 940px) {
+    .bp-dsec__grid[data-count="3"],
+    .bp-dsec__grid[data-count="5"] {
       grid-template-columns: repeat(3, 1fr);
     }
   }
