@@ -435,24 +435,24 @@
   },
   {
     "source": "/media/security-category/feature-mobile.webp",
-    "sourceWidth": 941,
-    "sourceHeight": 1672,
+    "sourceWidth": 857,
+    "sourceHeight": 1588,
     "derivatives": [
       {
         "id": "media-security-category-feature-mobile-webp-360",
         "src": "/media/security-category/feature-mobile-360w.webp",
         "width": 360,
-        "height": 640,
-        "bytes": 8542,
-        "checksum": "sha256:914898119456fc158222f5a69b3c031cd731982e1c1fb6de399cc2e91b503b88"
+        "height": 667,
+        "bytes": 10848,
+        "checksum": "sha256:a01f64d5db45ae48eb6639c3770e2242c1fad5b2431a804c1bc6812455b4ae5b"
       },
       {
         "id": "media-security-category-feature-mobile-webp-640",
         "src": "/media/security-category/feature-mobile-640w.webp",
         "width": 640,
-        "height": 1137,
-        "bytes": 22100,
-        "checksum": "sha256:c89833524350043339094d37d7d49d48b71a87903058909451bd9eacf31ad165"
+        "height": 1186,
+        "bytes": 28110,
+        "checksum": "sha256:fbe6cf456dd65c96325abc5f764a1c02152991f48b3aff7210a3839ffa929226"
       }
     ]
   },
@@ -497,24 +497,24 @@
   },
   {
     "source": "/media/companion-category/feature-mobile.webp",
-    "sourceWidth": 881,
-    "sourceHeight": 1612,
+    "sourceWidth": 857,
+    "sourceHeight": 1588,
     "derivatives": [
       {
         "id": "media-companion-category-feature-mobile-webp-360",
         "src": "/media/companion-category/feature-mobile-360w.webp",
         "width": 360,
-        "height": 659,
-        "bytes": 6912,
-        "checksum": "sha256:ed1360d1977a0ac9ad3090c4ac835310423654777b71aa7a636cb179739fdc93"
+        "height": 667,
+        "bytes": 9502,
+        "checksum": "sha256:4bff9ccde8ef5ca4f737e21e0e119a4c574ed49ee2f7e86e4067a4188d9c63fd"
       },
       {
         "id": "media-companion-category-feature-mobile-webp-640",
         "src": "/media/companion-category/feature-mobile-640w.webp",
         "width": 640,
-        "height": 1171,
-        "bytes": 16356,
-        "checksum": "sha256:5a05e06b7e8759a2af430d92737151ef253795231b0b57f1d13a18a52e70991e"
+        "height": 1186,
+        "bytes": 22766,
+        "checksum": "sha256:dc70a9becb4f029833c67cda50ffb9850af184c50addb691fb7e472d451c220b"
       }
     ]
   },
