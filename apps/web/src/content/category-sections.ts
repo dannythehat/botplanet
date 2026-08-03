@@ -20,6 +20,7 @@ import type { DecisionCard } from "../components/DecisionCards.astro";
 import type { CoverageRow } from "../components/CoverageRows.astro";
 import type { SplitPanel } from "../components/DecisionSplit.astro";
 import type { MatrixRow } from "../components/MatrixTable.astro";
+import type { CheckItem } from "../components/CheckList.astro";
 import type { HeroImage } from "../components/CategoryHero.astro";
 
 export interface DecisionSectionContent {
@@ -341,4 +342,89 @@ export const MATRIX_SECTION: Record<string, MatrixSectionContent> = {
 
 export function matrixSectionFor(slug: string | undefined): MatrixSectionContent | undefined {
   return slug ? MATRIX_SECTION[slug] : undefined;
+}
+
+/* ============================================================
+   Section 6 — the pre-purchase checklist.
+
+   Pool wording follows the approved Notion research ("Features
+   that matter before you buy"), including its five sub-topics and
+   its instruction to translate specification fields into customer
+   consequences rather than produce a feature dump. Every item
+   therefore pairs the explanation with the exact question to ask.
+
+   Carries "smart robotic pool cleaner" (110) in the app and
+   scheduling item, where it is the natural phrase.
+   ============================================================ */
+
+export interface CheckSectionContent {
+  id: string;
+  eyebrow?: string;
+  title: string;
+  intro: string;
+  boxLabel?: string;
+  items: CheckItem[];
+}
+
+export const CHECK_SECTION: Record<string, CheckSectionContent> = {
+  "robotic-pool-cleaners": {
+    id: "before-you-buy",
+    eyebrow: "Before you buy",
+    title: "Features that matter before you buy",
+
+    /* 67 words. */
+    intro:
+      "Specifications only matter once you translate them into what happens in your pool. A " +
+      "maximum length figure decides whether a cycle finishes. Filter access decides whether " +
+      "you keep using the thing. A smart robotic pool cleaner is only smart for as long as " +
+      "its app is still supported. Check these five before you spend, rather than after.",
+
+    boxLabel: "Check these before buying",
+
+    items: [
+      {
+        title: "Pool length and navigation",
+        body:
+          "The stated maximum length is the number that decides whether a cycle finishes the " +
+          "floor. Navigation decides whether it covers the whole pool or misses the same " +
+          "corner every run.",
+        ask: "Does the stated maximum length cover my longest run, not my average?",
+      },
+      {
+        title: "Filter access and maintenance",
+        body:
+          "A filter you have to fight with is a filter you stop rinsing, and a clogged filter " +
+          "quietly loses you suction. Top-access baskets are quicker to empty than ones " +
+          "reached from underneath.",
+        ask: "Can I empty and rinse it without turning the machine over?",
+      },
+      {
+        title: "App, Wi-Fi and scheduling controls",
+        body:
+          "Scheduling is what turns pool cleaning into something you stop thinking about. But " +
+          "an app is also a dependency — it has to keep working for as long as you own the " +
+          "robot.",
+        ask: "Does it still run on its own if the app stops being updated?",
+      },
+      {
+        title: "Retrieval, weight and storage",
+        body:
+          "A robot full of water is considerably heavier than its dry weight on the box, and " +
+          "you lift it out after every cycle. The weight that matters is the one you feel at " +
+          "the poolside.",
+        ask: "What does it weigh coming out of the water, and where will it live?",
+      },
+      {
+        title: "Warranty, parts and retailer support",
+        body:
+          "Brushes, filters and tracks are consumables. A robot is only as serviceable as its " +
+          "spare parts, and warranty terms can differ by retailer as well as by brand.",
+        ask: "Are replacement parts sold separately, and who actually honours the warranty?",
+      },
+    ],
+  },
+};
+
+export function checkSectionFor(slug: string | undefined): CheckSectionContent | undefined {
+  return slug ? CHECK_SECTION[slug] : undefined;
 }
