@@ -1,0 +1,110 @@
+---
+/* ============================================================
+   BotPlanet — Jump links
+
+   Sits directly under the hero. Danny's request, 3 August 2026:
+   a reader should be able to skip to the section they want.
+
+   The list is DERIVED from the sections the page actually
+   renders, not written out by hand, so it cannot drift out of
+   step with the headings the way a hand-maintained contents list
+   always eventually does.
+
+   On a phone it is a single scrolling row of chips rather than a
+   stacked list — a full contents list there eats the whole first
+   screen, which is the thing that makes people leave.
+   ============================================================ */
+
+export interface JumpTarget {
+  /** The section's anchor id. */
+  id: string;
+  /** Short label — the section eyebrow, not its full heading. */
+  label: string;
+}
+
+interface Props {
+  targets: JumpTarget[];
+}
+
+const { targets } = Astro.props;
+---
+
+{targets.length > 1 && (
+  <nav class="bp-jump" aria-label="Jump to a section">
+    <span class="bp-jump__label">On this page</span>
+    <ul class="bp-jump__list">
+      {targets.map((t) => (
+        <li><a class="bp-jump__link" href={`#${t.id}`}>{t.label}</a></li>
+      ))}
+    </ul>
+  </nav>
+)}
+
+<style is:global>
+  .bp-jump {
+    margin: 0 0 clamp(2.5rem, 6vw, 4rem);
+    padding: clamp(1rem, 2.5vw, 1.25rem) 0;
+    border-top: 1px solid var(--cs-line-soft);
+    border-bottom: 1px solid var(--cs-line-soft);
+  }
+
+  .bp-jump__label {
+    display: block;
+    margin-bottom: 0.8rem;
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text-quaternary);
+  }
+
+  .bp-jump__list {
+    display: flex;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0 0 0.2rem;
+    list-style: none;
+    /* one scrolling row on a phone, so it never eats the screen */
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .bp-jump__list::-webkit-scrollbar { display: none; }
+
+  .bp-jump__list li { flex: none; }
+
+  .bp-jump__link {
+    display: inline-block;
+    padding: 0.45rem 0.85rem;
+    border: 1px solid var(--cs-line);
+    border-radius: 999px;
+    font-size: 0.87rem;
+    line-height: 1.3;
+    white-space: nowrap;
+    text-decoration: none;
+    color: var(--cs-mid);
+    background: rgba(255, 255, 255, 0.022);
+    transition: color 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+  }
+
+  .bp-jump__link:hover,
+  .bp-jump__link:focus-visible {
+    color: var(--cs-hi);
+    border-color: rgba(233, 237, 242, 0.5);
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  /* on a wide screen there is room to wrap and show everything at once */
+  @media (min-width: 900px) {
+    .bp-jump__list {
+      flex-wrap: wrap;
+      overflow-x: visible;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bp-jump__link { transition: none; }
+  }
+</style>

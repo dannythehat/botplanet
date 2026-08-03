@@ -14,6 +14,9 @@ import CoverageRows from "../../../components/CoverageRows.astro";
 import DecisionSplit from "../../../components/DecisionSplit.astro";
 import MatrixTable from "../../../components/MatrixTable.astro";
 import CheckList from "../../../components/CheckList.astro";
+import JumpLinks from "../../../components/JumpLinks.astro";
+import TrustStrip from "../../../components/TrustStrip.astro";
+import ArticleFooter from "../../../components/ArticleFooter.astro";
 import PriceLadder from "../../../components/PriceLadder.astro";
 import VerdictPanel from "../../../components/VerdictPanel.astro";
 import FaqList from "../../../components/FaqList.astro";
@@ -56,6 +59,23 @@ const check = checkSectionFor(category);
 const price = priceSectionFor(category);
 const verdict = verdictSectionFor(category);
 const faq = faqSectionFor(category);
+
+/* Jump links are derived from the sections this page actually renders, so the
+   list can never name a heading that is not there. Label is the section's
+   eyebrow — short enough for a chip, unlike the full H2. */
+const jumpTargets = [decision, coverage, split, matrix, check, price, verdict, faq]
+  .filter((sec): sec is NonNullable<typeof sec> => Boolean(sec?.id && sec?.eyebrow))
+  .map((sec) => ({ id: sec.id, label: sec.eyebrow! }));
+
+/* Every figure below is real. Nothing claims hands-on testing — the evidence
+   model here is desk research plus dated manual checks. */
+const LAST_REVIEWED = "2026-08-03";
+const trustItems = [
+  { value: `${products.length}`, label: `${cat.name.toLowerCase()} researched` },
+  { value: "Suitability first", label: "Commission never picks your robot", href: "/editorial-policy/" },
+  { value: "Dated", label: "Every price carries the date it was checked" },
+  { value: "3 Aug 2026", label: "Last reviewed", href: "/review-methodology/" },
+];
 
 /* Schema is built from the images this page actually renders, so every
    ImageObject has visible content behind it. Product, Review and
@@ -116,6 +136,10 @@ const pageSchema = hero
     </div>
   )}
 
+  <JumpLinks targets={jumpTargets} />
+
+  <TrustStrip items={trustItems} />
+
   {decision && (
     <DecisionCards
       id={decision.id}
@@ -160,6 +184,8 @@ const pageSchema = hero
   {faq && (
     <FaqList id={faq.id} eyebrow={faq.eyebrow} title={faq.title} intro={faq.intro} items={faq.items} />
   )}
+
+  <ArticleFooter lastReviewed={LAST_REVIEWED} />
 
   {products.length === 0 ? (
     <div class="empty">
