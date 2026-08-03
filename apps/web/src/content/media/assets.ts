@@ -339,7 +339,7 @@ export const ORIGINAL_ASSETS: MediaAssetRecord[] = [
     retrievedDate: "2026-08-03",
     lastCheckedDate: "2026-08-03",
     notes:
-      "Owner-created, supplied 3 August 2026 as a 941×1672 PNG and converted to WebP with no crop or recolour. The headline, body copy and button are drawn into the artwork, so BOTMATCH_CTA in category-sections.ts must keep saying the same thing — see the poster field there.",
+      "Owner-created, supplied 3 August 2026 as a 941×1672 PNG and converted to WebP with no crop or recolour. RETIRED FROM RENDER on 3 August 2026: the headline, body copy and button are drawn into the artwork, which makes every word of the offer invisible to search and turns the button into a picture of a button. The BotMatch panel now renders real copy and a real link beside text-free artwork. The record is kept because the file is BotPlanet's own work and may be reused as a social card, where baked-in type is the right choice.",
   },
   {
     ...base("silhouette-generic-robot", "botplanet_original"),

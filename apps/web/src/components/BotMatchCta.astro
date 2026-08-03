@@ -18,33 +18,24 @@
    The image is optional. Without it the panel is a single wide
    column and still looks deliberate.
 
-   MODES
-   -----
-   "beside"  the default. Rendered copy, a real button, and the
-             artwork as a supporting 4:3 figure alongside.
+   THERE IS ONE MODE, AND THAT IS DELIBERATE.
 
-   "poster"  the CryptoWatchdog treatment. The artwork is a finished
-             composition — headline, body and button already set into
-             the image — so the panel becomes the artwork and nothing
-             else. Repeating the words underneath would say the same
-             thing twice in two different typefaces.
+   This component used to offer a "poster" mode: pass finished
+   artwork with the headline, the body and the button already
+   painted into it, and the panel became the picture alone. It
+   looked good and it was wrong. Words drawn into a JPEG are
+   pixels — Google reads none of them — and a drawn button is a
+   picture of a button that cannot be focused or tabbed to. The
+   .sr-only copy underneath was a workaround for a problem that
+   did not need to exist.
 
-             The copy does not disappear. It moves to .sr-only, so a
-             screen reader still hears the offer and a crawler still
-             reads it. The whole poster is one link, named by its alt
-             text, and it fires the same event as the button does.
+   Poster mode is gone rather than merely unused, because a mode
+   left in the codebase is a mode someone reintroduces later by
+   passing one prop. Copy is rendered. Buttons are real. Artwork
+   sits beside the words and carries none of them.
    ============================================================ */
 
 import type { HeroImage } from "./CategoryHero.astro";
-
-/**
- * A poster carries its own frame and ratio, so it needs the intrinsic size
- * to reserve space before the file lands.
- */
-export interface PosterImage extends HeroImage {
-  width: number;
-  height: number;
-}
 
 interface Props {
   categorySlug: string;
@@ -58,75 +49,43 @@ interface Props {
   /** Reassurance under the button. */
   note?: string;
   image?: HeroImage;
-  /** Full-bleed artwork that already contains the headline and the button. */
-  poster?: PosterImage;
 }
 
-const { categorySlug, headline, body, points, ctaLabel, note, image, poster } = Astro.props;
+const { categorySlug, headline, body, points, ctaLabel, note, image } = Astro.props;
 const href = `/botmatch/${categorySlug}/?start=quiz`;
-const hasPoster = Boolean(poster?.src);
-const hasImage = !hasPoster && Boolean(image?.src);
+const hasImage = Boolean(image?.src);
 
 import { srcsetFor } from "../lib/srcset";
 ---
 
-{hasPoster ? (
-  <section class="bp-bmcta bp-bmcta--poster" aria-labelledby={`bmcta-${categorySlug}`}>
-    {/* Present to assistive technology and to search, absent from the layout:
-        every word here is already drawn inside the artwork. */}
-    <div class="sr-only">
-      <p id={`bmcta-${categorySlug}`}>{headline}</p>
-      <p>{body}</p>
-      <ul>{points.map((p) => <li>{p}</li>)}</ul>
-      {note && <p>{note}</p>}
+<section class="bp-bmcta" data-has-image={hasImage ? "true" : "false"}>
+  <div class="bp-bmcta__inner">
+    <div class="bp-bmcta__copy">
+      <span class="bp-bmcta__eyebrow">BotMatch</span>
+      <p class="bp-bmcta__headline">{headline}</p>
+      <p class="bp-bmcta__body">{body}</p>
+
+      <ul class="bp-bmcta__points">
+        {points.map((p) => <li>{p}</li>)}
+      </ul>
+
+      <a class="btn btn--accent bp-bmcta__btn" href={href} data-botmatch-cta={categorySlug}>
+        {ctaLabel}
+      </a>
+      {note && <p class="bp-bmcta__note">{note}</p>}
     </div>
 
-    <a class="bp-bmcta__poster" href={href} data-botmatch-cta={categorySlug}>
-      <picture>
-        {poster!.mobileSrc && <source media="(max-width: 719px)" srcset={srcsetFor(poster!.mobileSrc) ?? poster!.mobileSrc} sizes="100vw" />}
-        <img
-          src={poster!.src}
-          srcset={srcsetFor(poster!.src)}
-          sizes="(min-width: 900px) 560px, 100vw"
-          width={poster!.width}
-          height={poster!.height}
-          alt={poster!.alt}
-          loading="lazy"
-          decoding="async"
-        />
-      </picture>
-    </a>
-  </section>
-) : (
-  <section class="bp-bmcta" data-has-image={hasImage ? "true" : "false"}>
-    <div class="bp-bmcta__inner">
-      <div class="bp-bmcta__copy">
-        <span class="bp-bmcta__eyebrow">BotMatch</span>
-        <p class="bp-bmcta__headline">{headline}</p>
-        <p class="bp-bmcta__body">{body}</p>
-
-        <ul class="bp-bmcta__points">
-          {points.map((p) => <li>{p}</li>)}
-        </ul>
-
-        <a class="btn btn--accent bp-bmcta__btn" href={href} data-botmatch-cta={categorySlug}>
-          {ctaLabel}
-        </a>
-        {note && <p class="bp-bmcta__note">{note}</p>}
-      </div>
-
-      {hasImage && (
-        <figure class="bp-bmcta__figure">
-          <picture>
-            {image!.mobileSrc && <source media="(max-width: 719px)" srcset={srcsetFor(image!.mobileSrc) ?? image!.mobileSrc} sizes="100vw" />}
-            <img src={image!.src} srcset={srcsetFor(image!.src)} sizes="(min-width: 900px) 560px, 100vw" alt={image!.alt} loading="lazy" decoding="async"
-                 style={image!.focal ? `object-position: ${image!.focal}` : undefined} />
-          </picture>
-        </figure>
-      )}
-    </div>
-  </section>
-)}
+    {hasImage && (
+      <figure class="bp-bmcta__figure">
+        <picture>
+          {image!.mobileSrc && <source media="(max-width: 719px)" srcset={srcsetFor(image!.mobileSrc) ?? image!.mobileSrc} sizes="100vw" />}
+          <img src={image!.src} srcset={srcsetFor(image!.src)} sizes="(min-width: 900px) 560px, 100vw" alt={image!.alt} loading="lazy" decoding="async"
+               style={image!.focal ? `object-position: ${image!.focal}` : undefined} />
+        </picture>
+      </figure>
+    )}
+  </div>
+</section>
 
 <script>
   // Same event name the funnel uses, so promo → start → answer → lead can be
@@ -287,63 +246,5 @@ import { srcsetFor } from "../lib/srcset";
     }
   }
 
-  /* ---------- poster mode ---------- */
 
-  /* The section stops being a panel: the artwork is the panel. Padding,
-     border and background all belong to the link instead, so the frame sits
-     exactly on the edge of the picture with no dark margin inside it. */
-  .bp-bmcta--poster {
-    padding: 0;
-    border: 0;
-    background: none;
-    box-shadow: none;
-  }
-
-  .bp-bmcta--poster::before { display: none; }
-
-  .bp-bmcta__poster {
-    display: block;
-    max-width: 560px;
-    margin: 0 auto;
-    border: 1px solid var(--cs-line);
-    border-radius: 20px;
-    overflow: hidden;
-    /* The artwork is dark to its own edge; the outer glow is what separates
-       it from the page rather than a lighter background behind it. */
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.09),
-      0 26px 60px rgba(0, 0, 0, 0.55);
-    transition:
-      transform var(--duration-base, 200ms) ease,
-      border-color var(--duration-base, 200ms) ease,
-      box-shadow var(--duration-base, 200ms) ease;
-  }
-
-  .bp-bmcta__poster img {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
-
-  .bp-bmcta__poster:hover,
-  .bp-bmcta__poster:focus-visible {
-    transform: translateY(-3px);
-    border-color: rgba(226, 232, 244, 0.42);
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.14),
-      0 34px 74px rgba(0, 0, 0, 0.6);
-  }
-
-  .bp-bmcta__poster:focus-visible {
-    outline: var(--focus-ring, 2px solid #dfe4ec);
-    outline-offset: var(--focus-offset, 3px);
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .bp-bmcta__poster,
-    .bp-bmcta__poster:hover {
-      transform: none;
-      transition: none;
-    }
-  }
 </style>
