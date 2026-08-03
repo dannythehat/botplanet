@@ -48,7 +48,13 @@ const AMAZON_ASINS: { productId: string; asin: string; sourceUrl: string }[] = [
   // table, not the title — see serpapi-observations.ts for what each read.
   { productId: "prod-dolphin-e10", asin: "B0GV15VY1N", sourceUrl: "SerpApi Amazon search, 2026-07-31: details table gives brand Dolphin, model name E10" },
   { productId: "prod-aiper-seagull-se", asin: "B0H5PY2SPF", sourceUrl: "SerpApi Amazon search, 2026-07-31: details table gives brand AIPER, model Seagull SE ZT20032026" },
+  // Owner-supplied and owner-confirmed, 3 August 2026. Identity rests on the
+  // owner's confirmation rather than a listing read — see the matching records
+  // in evidence/verification.ts, which say so plainly.
+  { productId: "prod-dolphin-proteus-dx4-plus", asin: "B083YWJ5PQ", sourceUrl: "Owner-confirmed 2026-08-03: https://www.amazon.com/Dolphin-Automatic-Climbing-Waterline-Scrubber/dp/B083YWJ5PQ" },
+  { productId: "prod-aiper-scuba-v3-ai-vision", asin: "B0GG97427D", sourceUrl: "Owner-confirmed 2026-08-03: https://www.amazon.com/AIPER-Vision-Cordless-Robotic-Cleaner/dp/B0GG97427D" },
 ];
+
 
 /**
  * MACHINE-READ IDENTITY CHECKS, 2026-07-31.

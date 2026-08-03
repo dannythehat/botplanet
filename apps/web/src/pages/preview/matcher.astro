@@ -1,0 +1,28 @@
+---
+/* TEMPORARY preview of the BotMatch funnel. Prerendered, noindex,
+   not linked from anywhere. Delete once the funnel is signed off. */
+export const prerender = true;
+
+import PoolMatcher from "../../components/PoolMatcher.astro";
+
+import "../../styles/tokens.css";
+import "../../styles/base.css";
+import "../../styles/layout.css";
+import "../../styles/depth.css";
+import "../../styles/components.css";
+import "../../styles/metal-theme.css";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>BotMatch preview — BotPlanet</title>
+  </head>
+  <body>
+    <main class="wrap" style="padding-top:2.5rem;padding-bottom:5rem;">
+      <PoolMatcher categorySlug="robotic-pool-cleaners" categoryName="Robotic Pool Cleaners" />
+    </main>
+  </body>
+</html>

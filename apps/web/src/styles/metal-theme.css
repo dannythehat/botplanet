@@ -171,3 +171,28 @@ img[data-placeholder="true"] {
 @media (max-width: 900px) {
   .logo-full { width: 168px !important; height: auto; }
 }
+
+/* ------------------------------------------------------------------
+   Cosmic silver — the section accent.
+   A cool, high-luminance chrome with a faint blue-violet cast in the
+   shadows. Used for section eyebrows, index chips, tags and markers
+   so the page below the hero carries the same metal as the hero does.
+   ------------------------------------------------------------------ */
+:root {
+  --cs-hi: #f6f8fc;
+  --cs-bright: #dfe4ec;
+  --cs-mid: #aab2c0;
+  --cs-low: #6c7482;
+  --cs-deep: #3d434e;
+
+  --cs-sheen: linear-gradient(135deg, #f6f8fc 0%, #cfd6e2 38%, #8a92a1 72%, #dfe4ec 100%);
+  --cs-rule: linear-gradient(90deg, rgba(246,248,252,.72), rgba(138,146,161,.16));
+  --cs-line: rgba(200, 208, 222, 0.2);
+  --cs-line-soft: rgba(200, 208, 222, 0.12);
+  --cs-glow: rgba(198, 208, 226, 0.09);
+
+  --cs-surface: linear-gradient(180deg, #12161c 0%, #0a0d11 100%);
+  --cs-surface-lift:
+    radial-gradient(ellipse at 0% 0%, rgba(226, 232, 244, 0.07), transparent 60%),
+    linear-gradient(180deg, #141920 0%, #0a0d11 100%);
+}

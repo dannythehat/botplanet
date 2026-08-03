@@ -110,7 +110,13 @@ export const POST: APIRoute = async ({ request, locals }) => {
     );
   }
 
-  return json({ token });
+  // The winner's name, so the matcher's email can say what it picked without a
+  // second round trip. Nothing commercial is returned here.
+  const winnerName = winner
+    ? (products.find((p) => p.id === winner.productId)?.name ?? null)
+    : null;
+
+  return json({ token, productName: winnerName });
 };
 
 function json(data: unknown, status = 200): Response {

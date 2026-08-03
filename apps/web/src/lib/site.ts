@@ -22,7 +22,7 @@ export const SITE = {
     legalName: "BotPlanet",
     contactEmail: "hello@botplanet.io",
   },
-  emailFrom: "BotPlanet <recommendations@botplanet.io>",
+  emailFrom: "Danny at BotPlanet <hello@botplanet.io>",
 } as const;
 
 /**

@@ -1,0 +1,44 @@
+# Asks CJ and Awin what we are actually approved for, and what pool products
+# they can supply. Manual only — it costs nothing but it talks to live networks,
+# so it runs when someone asks for it rather than on a schedule.
+#
+# Tokens stay repository secrets and are never printed: the script redacts them
+# from its own output, including error messages.
+name: Affiliate discovery
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: claude/bot-planet-review-xkp7hh
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Query the networks
+        env:
+          AWIN_API_TOKEN: ${{ secrets.AWIN_API_TOKEN }}
+          AWIN_DATAFEED_KEY: ${{ secrets.AWIN_DATAFEED_KEY }}
+          CJ_API_TOKEN: ${{ secrets.CJ_API_TOKEN }}
+        run: node scripts/affiliate-discovery.mjs
+
+      - name: Commit the findings
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet -- docs/affiliate-discovery.json docs/affiliate-discovery.md; then
+            echo "No change in what the networks reported."
+            exit 0
+          fi
+          git add docs/affiliate-discovery.json docs/affiliate-discovery.md
+          git commit -m "Affiliate discovery run: what CJ and Awin currently report"
+          git push

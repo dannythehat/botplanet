@@ -1,12 +1,27 @@
 ---
 import Base from "../../../layouts/Base.astro";
-import PoolDiagram from "../../../components/PoolDiagram.astro";
 import ProductCard from "../../../components/ProductCard.astro";
 import { journeyFor } from "../../../content/journeys";
 import { getDb, schema } from "../../../lib/db";
 import { usd, titleCase } from "../../../lib/format";
 import { and, eq, inArray } from "drizzle-orm";
 import { breadcrumbsFor } from "../../../lib/routing";
+import { collectionPageSchema, imageObjectSchema, faqPageSchema } from "../../../lib/seo";
+import CategoryHero from "../../../components/CategoryHero.astro";
+import { heroFor } from "../../../content/category-hero";
+import DecisionCards from "../../../components/DecisionCards.astro";
+import CoverageRows from "../../../components/CoverageRows.astro";
+import DecisionSplit from "../../../components/DecisionSplit.astro";
+import MatrixTable from "../../../components/MatrixTable.astro";
+import CheckList from "../../../components/CheckList.astro";
+import JumpLinks from "../../../components/JumpLinks.astro";
+import TrustStrip from "../../../components/TrustStrip.astro";
+import ArticleFooter from "../../../components/ArticleFooter.astro";
+import BotMatchCta from "../../../components/BotMatchCta.astro";
+import PriceLadder from "../../../components/PriceLadder.astro";
+import VerdictPanel from "../../../components/VerdictPanel.astro";
+import FaqList from "../../../components/FaqList.astro";
+import { decisionSectionFor, coverageSectionFor, splitSectionFor, matrixSectionFor, checkSectionFor, priceSectionFor, verdictSectionFor, faqSectionFor, botMatchCtaFor } from "../../../content/category-sections";
 
 const { category } = Astro.params;
 const db = getDb(Astro.locals);
@@ -35,19 +50,156 @@ function minPrice(productId: string): number | null {
   return prices.length ? Math.min(...prices) : null;
 }
 const crumbs = breadcrumbsFor(Astro.url.pathname);
+
+const hero = heroFor(category);
+const decision = decisionSectionFor(category);
+const coverage = coverageSectionFor(category);
+const split = splitSectionFor(category);
+const matrix = matrixSectionFor(category);
+const check = checkSectionFor(category);
+const price = priceSectionFor(category);
+const verdict = verdictSectionFor(category);
+const faq = faqSectionFor(category);
+const bmCta = botMatchCtaFor(category);
+
+/* Jump links are derived from the sections this page actually renders, so the
+   list can never name a heading that is not there. Label is the section's
+   eyebrow — short enough for a chip, unlike the full H2. */
+const jumpTargets = [decision, coverage, split, matrix, check, price, verdict, faq]
+  .filter((sec): sec is NonNullable<typeof sec> => Boolean(sec?.id && sec?.eyebrow))
+  .map((sec) => ({ id: sec.id, label: sec.eyebrow! }));
+
+/* Every figure below is real. Nothing claims hands-on testing — the evidence
+   model here is desk research plus dated manual checks. */
+const LAST_REVIEWED = "2026-08-03";
+const trustItems = [
+  { value: `${products.length}`, label: `${cat.name.toLowerCase()} researched` },
+  { value: "Suitability first", label: "Commission never picks your robot", href: "/editorial-policy/" },
+  { value: "Dated", label: "Every price carries the date it was checked" },
+  { value: "3 Aug 2026", label: "Last reviewed", href: "/review-methodology/" },
+];
+
+/* Schema is built from the images this page actually renders, so every
+   ImageObject has visible content behind it. Product, Review and
+   AggregateRating are deliberately absent from a category hub. */
+const editorialImages = [
+  hero?.image?.src
+    ? { path: hero.image.src, caption: hero.image.alt, width: 1600, height: 900 }
+    : null,
+  ...(decision?.cards ?? [])
+    .filter((c) => c.image?.src)
+    .map((c) => ({ path: c.image!.src, caption: c.image!.alt, width: 800, height: 500 })),
+  coverage?.image?.src
+    ? { path: coverage.image.src, caption: coverage.image.alt, width: 1600, height: 900 }
+    : null,
+  ...(matrix?.rows ?? [])
+    .filter((r) => r.image?.src)
+    .map((r) => ({ path: r.image!.src, caption: r.image!.alt, width: 700, height: 467 })),
+].filter(Boolean) as { path: string; caption: string; width: number; height: number }[];
+
+const pageSchema = hero
+  ? [
+      collectionPageSchema({
+        path: `/robots/${cat.slug}/`,
+        name: hero.title,
+        description: hero.metaDescription,
+        images: editorialImages,
+      }),
+      ...editorialImages.map(imageObjectSchema),
+      faqPageSchema(faq?.items ?? [], `/robots/${cat.slug}/`),
+    ]
+  : [];
 ---
 
-<Base title={`${cat.name} — BotPlanet`} description={`Compare ${cat.name.toLowerCase()} for the US.`} breadcrumbs={crumbs}>
-  <div class="section-head section-head--row">
-    <div>
-      <span class="eyebrow">Category</span>
-      <h1 class="mt-0">{cat.name}</h1>
-      <p class="note">{products.length} products · US market · suitability-ranked by BotMatch</p>
+<Base
+  title={hero?.seoTitle ?? `${cat.name} — BotPlanet`}
+  description={hero?.metaDescription ?? `Compare ${cat.name.toLowerCase()} for the US.`}
+  breadcrumbs={crumbs}
+  schema={pageSchema}
+>
+  {hero ? (
+    <CategoryHero
+      eyebrow={hero.eyebrow}
+      title={hero.title}
+      subtitle={hero.subtitle}
+      primaryCta={hero.primaryCta}
+      secondaryCta={hero.secondaryCta}
+      image={hero.image}
+      imageLayout={hero.imageLayout}
+    />
+  ) : (
+    <div class="section-head section-head--row">
+      <div>
+        <span class="eyebrow">Category</span>
+        <h1 class="mt-0">{cat.name}</h1>
+        <p class="note">{products.length} products · US market · suitability-ranked by BotMatch</p>
+      </div>
+      {journey && <a class="btn btn--accent" href={journey.href}>{journey.ctaLabel}</a>}
     </div>
-    {journey && <a class="btn btn--accent" href={journey.href}>{journey.ctaLabel}</a>}
-  </div>
+  )}
 
-  <div class="mt-lg mb-lg"><PoolDiagram /></div>
+  <JumpLinks targets={jumpTargets} />
+
+  <TrustStrip items={trustItems} />
+
+  {decision && (
+    <DecisionCards
+      id={decision.id}
+      eyebrow={decision.eyebrow}
+      title={decision.title}
+      intro={decision.intro}
+      cards={decision.cards}
+    />
+  )}
+
+  {coverage && (
+    <CoverageRows
+      id={coverage.id}
+      eyebrow={coverage.eyebrow}
+      title={coverage.title}
+      intro={coverage.intro}
+      image={coverage.image}
+      rows={coverage.rows}
+    />
+  )}
+
+  {split && (
+    <DecisionSplit id={split.id} eyebrow={split.eyebrow} title={split.title} intro={split.intro} panels={split.panels} />
+  )}
+
+  {matrix && (
+    <MatrixTable id={matrix.id} eyebrow={matrix.eyebrow} title={matrix.title} intro={matrix.intro} columns={matrix.columns} rows={matrix.rows} note={matrix.note} />
+  )}
+
+  {check && (
+    <CheckList id={check.id} eyebrow={check.eyebrow} title={check.title} intro={check.intro} boxLabel={check.boxLabel} items={check.items} />
+  )}
+
+  {bmCta && (
+    <BotMatchCta
+      categorySlug={cat.slug}
+      headline={bmCta.headline}
+      body={bmCta.body}
+      points={bmCta.points}
+      ctaLabel={bmCta.ctaLabel}
+      note={bmCta.note}
+      image={bmCta.image}
+    />
+  )}
+
+  {price && (
+    <PriceLadder id={price.id} eyebrow={price.eyebrow} title={price.title} intro={price.intro} rungs={price.rungs} note={price.note} />
+  )}
+
+  {verdict && (
+    <VerdictPanel id={verdict.id} eyebrow={verdict.eyebrow} title={verdict.title} intro={verdict.intro} verdict={verdict.verdict} body={verdict.body} against={verdict.against} />
+  )}
+
+  {faq && (
+    <FaqList id={faq.id} eyebrow={faq.eyebrow} title={faq.title} intro={faq.intro} items={faq.items} />
+  )}
+
+  <ArticleFooter lastReviewed={LAST_REVIEWED} />
 
   {products.length === 0 ? (
     <div class="empty">
@@ -55,7 +207,7 @@ const crumbs = breadcrumbsFor(Astro.url.pathname);
       <p>Published products appear here automatically.</p>
     </div>
   ) : (
-    <div class="grid grid--products">
+    <div class="grid grid--products" id="products">
       {products.map((p, i) => (
         <ProductCard
           href={`/robots/${cat.slug}/${p.slug}/`}

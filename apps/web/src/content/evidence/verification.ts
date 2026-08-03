@@ -794,6 +794,69 @@ const aiperSeagullSe: ProductVerification = {
 
 /* ------------------------------------------------------------------ */
 
+/* ------------------------------------------------------------------ */
+/* Owner-confirmed identities — 3 August 2026.                          */
+/*                                                                      */
+/* Danny supplied both Amazon listings and confirmed they are the right */
+/* models. Amazon serves a bot-mitigation page to server-side reads, so  */
+/* the listing title could not be read back the way every record above  */
+/* was checked against a manufacturer page. The identity here therefore */
+/* rests on the owner's confirmation, which is recorded as such rather  */
+/* than dressed up as a source check.                                   */
+/* ------------------------------------------------------------------ */
+
+const OWNER_CONFIRMED = "2026-08-03";
+
+const dolphinProteusDx4Plus: ProductVerification = {
+  productId: "prod-dolphin-proteus-dx4-plus",
+  checkedOn: OWNER_CONFIRMED,
+  identity: {
+    brand: "Maytronics",
+    canonicalName: "Dolphin Proteus DX4 Plus",
+    modelNumber: null,
+    modelNumberSource: null,
+    officialProductPageUrl: null,
+    manual: null,
+    identityIssue:
+      "Identity is owner-confirmed, not source-verified. Danny supplied ASIN B083YWJ5PQ on 3 August 2026 and confirmed the listing is the Proteus DX4 Plus. No manufacturer page has been read for this record, and Amazon blocks server-side reads of the listing, so no independent check stands behind the model name yet.",
+  },
+  sourceChecks: [
+    {
+      url: "https://www.amazon.com/Dolphin-Automatic-Climbing-Waterline-Scrubber/dp/B083YWJ5PQ",
+      title: "Amazon listing supplied by the owner",
+      status: "not_rechecked",
+      note: "Supplied and confirmed by the owner on 3 August 2026. Not independently read: Amazon returns a bot-mitigation page to server-side requests.",
+    },
+  ],
+  observations: [],
+  notPubliclyStated: [],
+};
+
+const aiperScubaV3AiVision: ProductVerification = {
+  productId: "prod-aiper-scuba-v3-ai-vision",
+  checkedOn: OWNER_CONFIRMED,
+  identity: {
+    brand: "AIPER",
+    canonicalName: "AIPER Scuba V3 AI Vision",
+    modelNumber: null,
+    modelNumberSource: null,
+    officialProductPageUrl: null,
+    manual: null,
+    identityIssue:
+      "Identity is owner-confirmed, not source-verified. Danny supplied ASIN B0GG97427D on 3 August 2026 and confirmed the listing is the Scuba V3 AI Vision. AIPER sells Scuba S1, X1 and V3 as separate models, so this record must not be conflated with the Scuba X1 or S1 already held.",
+  },
+  sourceChecks: [
+    {
+      url: "https://www.amazon.com/AIPER-Vision-Cordless-Robotic-Cleaner/dp/B0GG97427D",
+      title: "Amazon listing supplied by the owner",
+      status: "not_rechecked",
+      note: "Supplied and confirmed by the owner on 3 August 2026. Not independently read: Amazon returns a bot-mitigation page to server-side requests.",
+    },
+  ],
+  observations: [],
+  notPubliclyStated: [],
+};
+
 export const VERIFICATIONS: ProductVerification[] = [
   wybotC1,
   nautilusCcPlus,
@@ -805,6 +868,8 @@ export const VERIFICATIONS: ProductVerification[] = [
   aiperScubaX1,
   aiperScubaS1,
   aiperSeagullSe,
+  dolphinProteusDx4Plus,
+  aiperScubaV3AiVision,
 ];
 
 export const verificationFor = (productId: string): ProductVerification | undefined =>

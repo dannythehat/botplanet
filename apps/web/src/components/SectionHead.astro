@@ -1,0 +1,97 @@
+---
+/* ============================================================
+   BotPlanet — Shared section header
+
+   Every section below the hero opens with this, on every page
+   of the site. One place to change the heading treatment for
+   the whole template.
+
+   Eyebrow rule + eyebrow + H2 (cosmic silver) + intro.
+   ============================================================ */
+
+interface Props {
+  /** Short label, e.g. "Pool type". Sits above the heading. */
+  eyebrow?: string;
+  /** The H2. */
+  title: string;
+  /** 60–100 words. */
+  intro: string;
+}
+
+const { eyebrow, title, intro } = Astro.props;
+---
+
+<header class="bp-shead">
+  {eyebrow && (
+    <div class="bp-shead__eyebrow">
+      <span class="bp-shead__rule" aria-hidden="true"></span>
+      <span class="bp-shead__eyebrow-text">{eyebrow}</span>
+    </div>
+  )}
+  <h2 class="bp-shead__title">{title}</h2>
+  <p class="bp-shead__intro">{intro}</p>
+</header>
+
+<style>
+  .bp-shead {
+    max-width: 64ch;
+    margin-bottom: clamp(1.75rem, 4vw, 2.75rem);
+  }
+
+  /* ---------- eyebrow ---------- */
+  .bp-shead__eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin-bottom: 1.05rem;
+  }
+
+  .bp-shead__rule {
+    width: 2.1rem;
+    height: 1px;
+    flex: none;
+    background: var(--cs-rule);
+  }
+
+  .bp-shead__eyebrow-text {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    background: var(--cs-sheen);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* ---------- heading ---------- */
+  .bp-shead__title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.75rem, 4.8vw, 2.6rem);
+    line-height: 1.11;
+    letter-spacing: -0.021em;
+    text-wrap: balance;
+    background: linear-gradient(172deg, #ffffff 4%, #e4e9f1 44%, #a2aab8 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* ---------- intro ---------- */
+  .bp-shead__intro {
+    margin: 1.05rem 0 0;
+    font-size: 1.0625rem; /* 17px */
+    line-height: 1.66;
+    color: var(--text-secondary);
+  }
+
+  @media (min-width: 860px) {
+    .bp-shead__intro {
+      font-size: 1.1875rem; /* 19px */
+      line-height: 1.62;
+    }
+  }
+</style>
