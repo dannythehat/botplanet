@@ -148,11 +148,13 @@ describe("exact-product destinations", () => {
   it("captures an ASIN for five products and refuses to invent the rest", () => {
     const exact = DESTINATIONS.filter((d) => d.confidence === "researched_exact" || d.confidence === "verified_exact");
     const search = DESTINATIONS.filter((d) => d.confidence === "search_only");
-    // Seven after the SerpApi discovery run resolved the E10 and the Seagull SE.
+    // Nine: seven after the SerpApi discovery run resolved the E10 and the
+    // Seagull SE, plus the Proteus DX4 Plus and Scuba V3 AI Vision, whose ASINs
+    // the owner supplied and confirmed on 3 August 2026.
     // Three remain search-only: WYBOT C1 and Aiper Scuba S1, where every
     // candidate was a sibling or contradicted itself, and Dolphin Premier,
     // which is not sold on Amazon US at all.
-    expect(exact).toHaveLength(7);
+    expect(exact).toHaveLength(9);
     expect(search).toHaveLength(3);
     for (const d of exact) {
       expect(d.identifierKind).toBe("asin");

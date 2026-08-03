@@ -48,45 +48,13 @@ const AMAZON_ASINS: { productId: string; asin: string; sourceUrl: string }[] = [
   // table, not the title — see serpapi-observations.ts for what each read.
   { productId: "prod-dolphin-e10", asin: "B0GV15VY1N", sourceUrl: "SerpApi Amazon search, 2026-07-31: details table gives brand Dolphin, model name E10" },
   { productId: "prod-aiper-seagull-se", asin: "B0H5PY2SPF", sourceUrl: "SerpApi Amazon search, 2026-07-31: details table gives brand AIPER, model Seagull SE ZT20032026" },
+  // Owner-supplied and owner-confirmed, 3 August 2026. Identity rests on the
+  // owner's confirmation rather than a listing read — see the matching records
+  // in evidence/verification.ts, which say so plainly.
+  { productId: "prod-dolphin-proteus-dx4-plus", asin: "B083YWJ5PQ", sourceUrl: "Owner-confirmed 2026-08-03: https://www.amazon.com/Dolphin-Automatic-Climbing-Waterline-Scrubber/dp/B083YWJ5PQ" },
+  { productId: "prod-aiper-scuba-v3-ai-vision", asin: "B0GG97427D", sourceUrl: "Owner-confirmed 2026-08-03: https://www.amazon.com/AIPER-Vision-Cordless-Robotic-Cleaner/dp/B0GG97427D" },
 ];
 
-/**
- * Owner-supplied ASINs that are NOT yet destinations.
- *
- * Danny supplied these on 3 August 2026 for the two products Notion had flagged
- * as pending an exact ASIN. They are deliberately kept out of DESTINATIONS: a
- * destination has to name the verified exact model, and neither product has an
- * identity-verification record yet. Amazon serves a bot-mitigation page to
- * server-side reads, so the listing title could not be read back the way the
- * SerpApi rows above were.
- *
- * This is the same discipline that caught a dead ASIN on the WYBOT C1, where a
- * generated link produced a buy button that 404'd. Recorded here so the ASINs
- * are not lost; promoted into AMAZON_ASINS once someone opens each listing and
- * confirms the details table names the exact model.
- */
-export const PENDING_OWNER_ASINS: {
-  productId: string;
-  asin: string;
-  expectedModel: string;
-  sourceUrl: string;
-  suppliedOn: string;
-}[] = [
-  {
-    productId: "prod-dolphin-proteus-dx4-plus",
-    asin: "B083YWJ5PQ",
-    expectedModel: "Dolphin Proteus DX4 Plus",
-    sourceUrl: "https://www.amazon.com/Dolphin-Automatic-Climbing-Waterline-Scrubber/dp/B083YWJ5PQ",
-    suppliedOn: "2026-08-03",
-  },
-  {
-    productId: "prod-aiper-scuba-v3-ai-vision",
-    asin: "B0GG97427D",
-    expectedModel: "Aiper Scuba V3 AI Vision",
-    sourceUrl: "https://www.amazon.com/AIPER-Vision-Cordless-Robotic-Cleaner/dp/B0GG97427D",
-    suppliedOn: "2026-08-03",
-  },
-];
 
 /**
  * MACHINE-READ IDENTITY CHECKS, 2026-07-31.
