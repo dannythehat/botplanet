@@ -635,3 +635,42 @@ export const FAQ_SECTION: Record<string, FaqSectionContent> = {
 export function faqSectionFor(slug: string | undefined): FaqSectionContent | undefined {
   return slug ? FAQ_SECTION[slug] : undefined;
 }
+
+/* ============================================================
+   The BotMatch call to action.
+
+   Not in the approved 17-step component order — Danny asked for
+   it on 3 August 2026. Placed after the buying checklist, where
+   the reader has just been shown five things to verify and
+   "just tell me which one" is the honest reaction.
+
+   The copy sells the one thing that is actually different about
+   BotMatch, which is that the part choosing the robot cannot see
+   commission. That claim is enforced at the type level in
+   packages/scoring, so it is safe to make.
+   ============================================================ */
+
+export interface BotMatchCtaContent {
+  headline: string;
+  body: string;
+  points: string[];
+  ctaLabel: string;
+  note?: string;
+  image?: HeroImage;
+}
+
+export const BOTMATCH_CTA: Record<string, BotMatchCtaContent> = {
+  "robotic-pool-cleaners": {
+    headline: "Still not sure which one is right for your pool?",
+    body:
+      "Answer eight short questions about your pool and we will tell you which robot fits — " +
+      "and, just as usefully, which ones to rule out. It takes about a minute.",
+    points: ["About 60 seconds", "Eight plain questions", "No account needed"],
+    ctaLabel: "Find my pool robot",
+    note: "Free. We email your result and save it to a page you can come back to.",
+  },
+};
+
+export function botMatchCtaFor(slug: string | undefined): BotMatchCtaContent | undefined {
+  return slug ? BOTMATCH_CTA[slug] : undefined;
+}

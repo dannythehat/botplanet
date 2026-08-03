@@ -17,10 +17,11 @@ import CheckList from "../../../components/CheckList.astro";
 import JumpLinks from "../../../components/JumpLinks.astro";
 import TrustStrip from "../../../components/TrustStrip.astro";
 import ArticleFooter from "../../../components/ArticleFooter.astro";
+import BotMatchCta from "../../../components/BotMatchCta.astro";
 import PriceLadder from "../../../components/PriceLadder.astro";
 import VerdictPanel from "../../../components/VerdictPanel.astro";
 import FaqList from "../../../components/FaqList.astro";
-import { decisionSectionFor, coverageSectionFor, splitSectionFor, matrixSectionFor, checkSectionFor, priceSectionFor, verdictSectionFor, faqSectionFor } from "../../../content/category-sections";
+import { decisionSectionFor, coverageSectionFor, splitSectionFor, matrixSectionFor, checkSectionFor, priceSectionFor, verdictSectionFor, faqSectionFor, botMatchCtaFor } from "../../../content/category-sections";
 
 const { category } = Astro.params;
 const db = getDb(Astro.locals);
@@ -59,6 +60,7 @@ const check = checkSectionFor(category);
 const price = priceSectionFor(category);
 const verdict = verdictSectionFor(category);
 const faq = faqSectionFor(category);
+const bmCta = botMatchCtaFor(category);
 
 /* Jump links are derived from the sections this page actually renders, so the
    list can never name a heading that is not there. Label is the section's
@@ -171,6 +173,18 @@ const pageSchema = hero
 
   {check && (
     <CheckList id={check.id} eyebrow={check.eyebrow} title={check.title} intro={check.intro} boxLabel={check.boxLabel} items={check.items} />
+  )}
+
+  {bmCta && (
+    <BotMatchCta
+      categorySlug={cat.slug}
+      headline={bmCta.headline}
+      body={bmCta.body}
+      points={bmCta.points}
+      ctaLabel={bmCta.ctaLabel}
+      note={bmCta.note}
+      image={bmCta.image}
+    />
   )}
 
   {price && (
