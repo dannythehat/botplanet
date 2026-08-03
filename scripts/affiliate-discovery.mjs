@@ -9,9 +9,14 @@
  * happen in Danny's dashboards, not in this repo, so the only way to know the
  * current position is to ask the networks.
  *
- * Runs in GitHub Actions so the tokens stay as repository secrets and never
- * reach a developer machine or this file. Writes docs/affiliate-discovery.json
- * and docs/affiliate-discovery.md.
+ * Reads its credentials from the environment. Danny has authorised supplying
+ * API keys directly for a run, and running it that way is fine — the one rule
+ * that stays is that a key is never written into a file or a commit, because a
+ * key in git history is permanent in a way a key in a terminal is not. The
+ * script redacts every token from its own output, including error messages.
+ *
+ * Can also run from GitHub Actions on repository secrets. Writes
+ * docs/affiliate-discovery.json and docs/affiliate-discovery.md.
  *
  * Nothing here writes to the offer register. Discovery and publication are
  * separate on purpose: a product appearing in a feed is not the same as a
