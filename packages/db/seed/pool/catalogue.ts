@@ -57,7 +57,9 @@ export const productRows: (typeof products.$inferInsert)[] = [
     cleans: ["floor", "walls", "waterline", "water_surface"],
     powerType: "cordless",
     priceTier: "ultra",
+    // Beatbot publishes an area only.
     maxPoolLengthFt: null,
+    maxPoolAreaSqFt: 3875,
     specsJson: { note: "Premium cordless; also skims the water surface.", snapshotDate: SNAPSHOT_DATE },
     status: "published",
   },
@@ -96,7 +98,9 @@ export const productRows: (typeof products.$inferInsert)[] = [
     cleans: ["floor", "walls"],
     powerType: "cordless",
     priceTier: "mid",
-    maxPoolLengthFt: null,
+    // Aiper states 1600 sq.ft (150m2), 50ft (15m) in length.
+    maxPoolLengthFt: 50,
+    maxPoolAreaSqFt: 1600,
     specsJson: { snapshotDate: SNAPSHOT_DATE },
     status: "published",
   },
@@ -128,7 +132,9 @@ export const productRows: (typeof products.$inferInsert)[] = [
     cleans: ["floor", "walls", "waterline"],
     powerType: "cordless",
     priceTier: "mid",
+    // WYBOT publishes an area only.
     maxPoolLengthFt: null,
+    maxPoolAreaSqFt: 1615,
     specsJson: { note: "Cordless wall-climbing.", snapshotDate: SNAPSHOT_DATE },
     status: "published",
   },
@@ -144,7 +150,9 @@ export const productRows: (typeof products.$inferInsert)[] = [
     cleans: ["floor", "walls", "waterline"],
     powerType: "corded",
     priceTier: "mid",
-    maxPoolLengthFt: 50,
+    // Maytronics states 40 ft. The seed carried 50, which would have recommended it for pools a quarter longer than it is rated for.
+    maxPoolLengthFt: 40,
+    maxPoolAreaSqFt: null,
     specsJson: { note: "Corded value; trusted benchmark brand.", snapshotDate: SNAPSHOT_DATE },
     status: "published",
   },
@@ -201,7 +209,9 @@ export const productRows: (typeof products.$inferInsert)[] = [
     cleans: ["water_surface"],
     powerType: "solar",
     priceTier: "budget",
-    maxPoolLengthFt: null,
+    // Betta states up to 40 ft x 60 ft, approx. 2,400 sq ft.
+    maxPoolLengthFt: 40,
+    maxPoolAreaSqFt: 2400,
     specsJson: { note: "Solar surface skimmer — floating debris only, NOT a floor/wall cleaner.", snapshotDate: SNAPSHOT_DATE },
     status: "published",
   },
@@ -220,7 +230,9 @@ export const productRows: (typeof products.$inferInsert)[] = [
     cleans: ["floor"],
     powerType: "corded",
     priceTier: "mid",
-    maxPoolLengthFt: 30,
+    // Maytronics states 8 m. Converted and rounded DOWN, because this is a hard exclusion and rounding up over-promises.
+    maxPoolLengthFt: 26,
+    maxPoolAreaSqFt: null,
     specsJson: {
       note: "Trusted-brand corded above-ground; completes corded-vs-cordless in the above-ground segment. Dolphin Escape held as a later premium above-ground alternative.",
       snapshotDate: SNAPSHOT_DATE,

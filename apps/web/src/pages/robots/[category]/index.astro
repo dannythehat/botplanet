@@ -13,6 +13,8 @@ import DecisionCards from "../../../components/DecisionCards.astro";
 import CoverageRows from "../../../components/CoverageRows.astro";
 import DecisionSplit from "../../../components/DecisionSplit.astro";
 import MatrixTable from "../../../components/MatrixTable.astro";
+import ComparisonTable from "../../../components/ComparisonTable.astro";
+import { comparisonRows } from "../../../content/comparison";
 import CheckList from "../../../components/CheckList.astro";
 import JumpLinks from "../../../components/JumpLinks.astro";
 import TrustStrip from "../../../components/TrustStrip.astro";
@@ -49,6 +51,23 @@ function minPrice(productId: string): number | null {
     .map((o) => o.basePriceMinor as number);
   return prices.length ? Math.min(...prices) : null;
 }
+/* Built from the catalogue rather than written out, so a product that changes
+   model cannot leave a stale row behind. */
+const compareRows = comparisonRows(
+  products.map((p) => ({
+    id: p.id,
+    slug: p.slug,
+    name: p.name,
+    environments: p.environments as string[],
+    cleans: p.cleans as string[],
+    powerType: p.powerType,
+    priceTier: p.priceTier,
+    maxPoolLengthFt: p.maxPoolLengthFt,
+    maxPoolAreaSqFt: (p as { maxPoolAreaSqFt?: number | null }).maxPoolAreaSqFt ?? null,
+  })),
+  cat.slug,
+);
+
 const crumbs = breadcrumbsFor(Astro.url.pathname);
 
 const hero = heroFor(category);
@@ -169,6 +188,17 @@ const pageSchema = hero
 
   {matrix && (
     <MatrixTable id={matrix.id} eyebrow={matrix.eyebrow} title={matrix.title} intro={matrix.intro} columns={matrix.columns} rows={matrix.rows} note={matrix.note} />
+  )}
+
+  {compareRows.length > 1 && (
+    <ComparisonTable
+      id="compare"
+      eyebrow="Side by side"
+      title={`Compare every ${cat.name.toLowerCase().replace(/s$/, "")}`}
+      intro={`All ${compareRows.length} ${cat.name.toLowerCase()} we hold, on the four things that decide whether one fits your pool. Where a manufacturer does not publish a figure the cell says so rather than guessing.`}
+      rows={compareRows}
+      note="Ordered by price band, then alphabetically — not by what we earn. Pool size is shown as a maximum length where the maker publishes one, and as a maximum area where it publishes that instead; the two are not interchangeable."
+    />
   )}
 
   {check && (
