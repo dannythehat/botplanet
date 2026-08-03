@@ -109,7 +109,7 @@ const graph = schemaGraph(
   <body>
     <a class="skip" href="#main">Skip to content</a>
     <Header />
-    <main class:list={[{ narrow }]} id="main">
+    <main class:list={[{ narrow, bleed }]} id="main">
       {bleed ? (
         <slot />
       ) : (

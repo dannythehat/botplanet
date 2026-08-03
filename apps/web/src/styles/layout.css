@@ -461,6 +461,12 @@ main {
   padding-block: var(--space-xl) var(--space-2xl);
 }
 
+/* A full-bleed page owns its own vertical rhythm: its first band is designed
+   to meet the header, so main's padding would only ever push it away. */
+main.bleed {
+  padding-block: 0;
+}
+
 main.narrow > .wrap {
   max-width: var(--width-editorial);
 }
