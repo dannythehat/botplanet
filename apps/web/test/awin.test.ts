@@ -255,9 +255,13 @@ describe("credential safety", () => {
 });
 
 describe("public position while approval is pending", () => {
-  it("still renders the branded placeholder for the WYBOT C1", () => {
+  it("renders BotPlanet's own C1 artwork, never an Awin creative", () => {
+    // The Awin US programme is still pending, so nothing from WYBOT may be
+    // shown. What renders is the owner's own artwork — ours outright, and
+    // still barred from Product schema because it carries branding and
+    // headline text set into the image.
     const r = resolveImage("prod-wybot-c1", "listing_card", ["product_hero", "branded_placeholder"])!;
-    expect(r.isPlaceholder).toBe(true);
+    expect(r.assetId).toBe("art-wybot-c1");
     expect(r.schemaProductImage).toBe(false);
   });
 
