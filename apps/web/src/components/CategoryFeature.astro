@@ -83,80 +83,145 @@ const parts =
   data-mobile-art={image.mobileSrc ? "true" : "false"}
   aria-labelledby={`${id}-heading`}
 >
-  <div class="wrap catfeat__inner">
-    <div class="catfeat__copy">
-      <p class="catfeat__state">{state}</p>
-      <h2 id={`${id}-heading`}>
-        {parts ? (
-          <Fragment>{parts.lead}<span class="catfeat__metal">{parts.metal}</span>{parts.tail}</Fragment>
-        ) : (
-          heading
-        )}
-      </h2>
-      <p class="catfeat__body">{body}</p>
-
-      <div class="catfeat__actions">
-        <a class="catfeat__btn catfeat__btn--primary" href={primary.href}>
-          <span>{primary.label}</span>
-          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-        {secondary && (
-          <a class="catfeat__btn catfeat__btn--ghost" href={secondary.href}>
-            <span>{secondary.label}</span>
-            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
-        )}
+  <div class="wrap">
+    {/* One plate. The picture is the plate's surface and the copy sits in the
+        half of it the artwork left empty — 50/50, at every width. On a phone
+        the portrait file does the same job vertically. */}
+    <div class="catfeat__plate">
+      <div class="catfeat__media">
+        <picture>
+          {image.mobileSrc && (
+            <source
+              media="(max-width: 899px)"
+              srcset={srcsetFor(image.mobileSrc) ?? image.mobileSrc}
+              sizes="100vw"
+            />
+          )}
+          <img
+            src={image.src}
+            srcset={srcsetFor(image.src)}
+            sizes="(min-width: 1400px) 1320px, 100vw"
+            width={image.width}
+            height={image.height}
+            alt=""
+            loading="lazy"
+            decoding="async"
+            style={image.focal ? `--catfeat-focal: ${image.focal}` : undefined}
+          />
+        </picture>
       </div>
 
-      {more && <a class="catfeat__more" href={more.href}>{more.label} &#8594;</a>}
-    </div>
+      <div class="catfeat__copy">
+        <p class="catfeat__state">{state}</p>
+        <h2 id={`${id}-heading`}>
+          {parts ? (
+            <Fragment>{parts.lead}<span class="catfeat__metal">{parts.metal}</span>{parts.tail}</Fragment>
+          ) : (
+            heading
+          )}
+        </h2>
+        <p class="catfeat__body">{body}</p>
 
-    {/* Last in the DOM so it stacks under the copy on a phone. On desktop it
-        leaves the flow entirely, where source order stops mattering and the
-        stacking context decides what sits in front. */}
-    <div class="catfeat__media">
-      <picture>
-        {image.mobileSrc && (
-          <source
-            media="(max-width: 999px)"
-            srcset={srcsetFor(image.mobileSrc) ?? image.mobileSrc}
-            sizes="100vw"
-          />
-        )}
-        <img
-          src={image.src}
-          srcset={srcsetFor(image.src)}
-          sizes="100vw"
-          width={image.width}
-          height={image.height}
-          alt=""
-          loading="lazy"
-          decoding="async"
-          style={image.focal ? `--catfeat-focal: ${image.focal}` : undefined}
-        />
-      </picture>
+        <div class="catfeat__actions">
+          <a class="catfeat__btn catfeat__btn--primary" href={primary.href}>
+            <span>{primary.label}</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          {secondary && (
+            <a class="catfeat__btn catfeat__btn--ghost" href={secondary.href}>
+              <span>{secondary.label}</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          )}
+        </div>
+
+        {more && <a class="catfeat__more" href={more.href}>{more.label} &#8594;</a>}
+      </div>
     </div>
   </div>
 </section>
 
 <style is:global>
+  /* ============================================================
+     A section is one metallic plate. Inside it the artwork is the
+     surface and the copy sits in the half the artwork left empty:
+     50% picture, 50% words and buttons, at every width.
+
+     On a phone the same thing happens vertically, using the
+     composed portrait file — copy over the empty top half, subject
+     in the bottom half. It is never a block of text with a picture
+     bolted underneath it.
+     ============================================================ */
+
   .catfeat {
-    position: relative;
-    isolation: isolate;
-    overflow: hidden;
-    padding: var(--section-gap) 0;
-    border-top: 1px solid rgba(210, 216, 224, 0.1);
-    border-bottom: 1px solid rgba(210, 216, 224, 0.1);
+    padding: clamp(1.1rem, 2.4vw, 2rem) 0;
     background: #05070a;
   }
 
-  /* The copy carries the stacking context, not its wrapper: the picture is
-     positioned against the section so it can bleed past the wrap's max-width,
-     which it could not do if the wrap were the containing block. */
+  .catfeat__plate {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    display: grid;
+    border: 1px solid var(--cs-line, rgba(200, 208, 222, 0.2));
+    border-radius: 22px;
+    background: #05070a;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.07),
+      0 30px 70px rgba(0, 0, 0, 0.55);
+  }
+
+  /* The brushed highlight along the top edge — the same hairline the section
+     plates on the category pages carry, so a page reads as one set of parts. */
+  .catfeat__plate::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    z-index: 3;
+    height: 1px;
+    border-radius: 22px 22px 0 0;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(246, 248, 252, 0.32) 24%,
+      rgba(246, 248, 252, 0.55) 50%,
+      rgba(246, 248, 252, 0.3) 76%,
+      transparent
+    );
+    pointer-events: none;
+  }
+
+  /* Both children occupy the same cell: the picture fills the plate and the
+     copy is laid over it. That is what makes the split exactly half — the
+     copy column is half the plate, and the artwork behind it is the other. */
+  .catfeat__media,
+  .catfeat__copy { grid-area: 1 / 1; }
+
+  .catfeat__media { position: relative; z-index: 0; }
+
+  .catfeat__media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: var(--catfeat-focal, center);
+  }
+
+  /* A scrim over the copy half only, easing to nothing before it reaches the
+     subject. Enough to carry white text over the artwork, never so much that
+     the plate looks like a black panel with a photograph stapled beside it. */
+  .catfeat__media::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+
   .catfeat__copy {
     position: relative;
-    z-index: 1;
-    max-width: 34rem;
+    z-index: 2;
+    align-self: center;
+    padding: clamp(1.9rem, 4vw, 3.4rem);
   }
 
   .catfeat__state {
@@ -173,8 +238,9 @@ const parts =
 
   .catfeat h2 {
     margin: 0;
-    font-size: clamp(38px, 5vw, 64px);
-    letter-spacing: -0.045em;
+    font-size: clamp(34px, 3.6vw, 52px);
+    letter-spacing: -0.04em;
+    line-height: 1.06;
     text-wrap: balance;
   }
 
@@ -185,16 +251,9 @@ const parts =
   .catfeat__metal {
     color: #dfe4ec;
     /* A diagonal sweep rather than the near-vertical fade used on small text:
-       across a 64px heading a top-to-bottom gradient reads as a shadow, and
+       across a large heading a top-to-bottom gradient reads as a shadow, and
        only a highlight travelling through the letterforms reads as metal. */
-    background: linear-gradient(
-      118deg,
-      #ffffff 0%,
-      #dfe6f2 26%,
-      #949dad 48%,
-      #f4f7fb 66%,
-      #aeb7c4 100%
-    );
+    background: linear-gradient(118deg, #ffffff 0%, #dfe6f2 26%, #949dad 48%, #f4f7fb 66%, #aeb7c4 100%);
     -webkit-background-clip: text;
     background-clip: text;
   }
@@ -204,11 +263,11 @@ const parts =
   }
 
   .catfeat__body {
-    margin: 18px 0 0;
-    max-width: 27rem;
-    color: var(--text-secondary);
-    font-size: 19px;
-    line-height: 1.65;
+    margin: 16px 0 0;
+    max-width: 34ch;
+    color: #c6ccd6;
+    font-size: clamp(15.5px, 1.15vw, 18px);
+    line-height: 1.62;
   }
 
   /* Stacked and equal width, so the two actions read as one control block
@@ -217,8 +276,8 @@ const parts =
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 12px;
-    margin-top: 30px;
+    gap: 11px;
+    margin-top: 26px;
   }
 
   .catfeat__btn {
@@ -226,17 +285,17 @@ const parts =
     align-items: center;
     justify-content: space-between;
     gap: 18px;
-    width: min(100%, 23rem);
-    min-height: 3.4rem;
-    padding: 0 1.15rem 0 1.45rem;
+    width: min(100%, 21rem);
+    min-height: 3.25rem;
+    padding: 0 1.05rem 0 1.35rem;
     border-radius: 12px;
-    font-size: 1rem;
+    font-size: 0.97rem;
     font-weight: 700;
     text-decoration: none;
     transition: transform .18s ease, box-shadow .18s ease, background .18s ease, border-color .18s ease;
   }
 
-  .catfeat__btn svg { width: 1.15rem; height: 1.15rem; flex: 0 0 auto; opacity: .9; }
+  .catfeat__btn svg { width: 1.1rem; height: 1.1rem; flex: 0 0 auto; opacity: .9; }
 
   .catfeat__btn--primary {
     color: #fff;
@@ -249,136 +308,113 @@ const parts =
 
   .catfeat__btn--ghost {
     color: #eaf0f8;
-    background: rgba(10, 16, 26, .55);
+    background: rgba(8, 13, 21, .62);
     border: 1px solid rgba(126, 160, 205, .42);
-    backdrop-filter: blur(3px);
+    backdrop-filter: blur(4px);
   }
 
-  .catfeat__btn--ghost:hover { border-color: rgba(170, 200, 240, .72); background: rgba(16, 26, 42, .7); }
+  .catfeat__btn--ghost:hover { border-color: rgba(170, 200, 240, .72); background: rgba(16, 26, 42, .74); }
 
   .catfeat__btn:focus-visible { outline: var(--focus-ring, 2px solid #dfe4ec); outline-offset: 3px; }
 
-  @media (prefers-reduced-motion: reduce) {
-    .catfeat__btn, .catfeat__btn:hover { transform: none; transition: none; }
-  }
-
   .catfeat__more {
     display: inline-block;
-    margin-top: 22px;
+    margin-top: 20px;
     padding-bottom: 2px;
     border-bottom: 1px solid rgba(200, 205, 212, 0.32);
     color: #c8cdd4;
     font-weight: 700;
+    font-size: 0.95rem;
     text-decoration: none;
     transition: color 0.2s ease, border-color 0.2s ease;
   }
 
   .catfeat__more:hover { color: #fff; border-color: #fff; }
 
-  /* ---------- phone and tablet: the picture is a figure under the copy ---------- */
-  .catfeat__media {
-    margin: 34px 0 0;
-    border: 1px solid rgba(207, 213, 220, 0.18);
-    border-radius: 18px;
-    overflow: hidden;
+  @media (prefers-reduced-motion: reduce) {
+    .catfeat__btn, .catfeat__btn:hover { transform: none; transition: none; }
   }
 
-  /* A composed portrait file is shown whole — that is the point of supplying
-     one, and cropping it would undo the composition. */
-  .catfeat__media img { display: block; width: 100%; height: auto; }
+  /* ---------- phone: the split runs top to bottom ---------- */
+  @media (max-width: 899px) {
+    .catfeat__plate { min-height: 44rem; }
+    /* Tightened deliberately: every pixel the copy gives back on a phone is a
+       pixel of the photograph that stays visible below it. */
+    .catfeat__copy { align-self: start; width: 100%; padding: clamp(1.5rem, 5vw, 2rem); }
+    .catfeat h2 { font-size: 30px; }
+    .catfeat__body { margin-top: 12px; font-size: 15px; line-height: 1.55; max-width: 30ch; }
+    .catfeat__actions { margin-top: 20px; gap: 9px; }
+    .catfeat__btn { min-height: 3rem; font-size: 0.93rem; }
+    .catfeat__more { margin-top: 16px; }
 
-  /* Without one, the wide desktop file is all there is, and half of it is the
-     empty space reserved for desktop copy. Shown at its natural ratio on a
-     phone that empty half reads as a broken image, so the fallback crops to
-     the focal point instead: the subject fills the frame and the negative
-     space it was carrying for the desktop layout is left out of it. */
-  .catfeat[data-mobile-art="false"] .catfeat__media img {
-    aspect-ratio: 4 / 3;
-    height: auto;
-    object-fit: cover;
-    object-position: var(--catfeat-focal, center);
-  }
+    /* Anchored to the bottom. The portrait files put their empty half at the
+       top and their subject at the bottom, so cropping from the top removes
+       only empty space — and the subject stays whole however tall the copy
+       above it runs. Centring it instead pushed the subject up behind the
+       words and cut the machine's head off. */
+    .catfeat__media img { object-position: center bottom; }
 
-  /* ---------- desktop: the picture becomes the section's surface ---------- */
-  @media (min-width: 1000px) {
-    .catfeat { padding: clamp(96px, 9vw, 150px) 0; }
-
-    .catfeat__media {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      margin: 0;
-      border: 0;
-      border-radius: 0;
-    }
-
-    /* The focal point keeps the subject in frame when the section is shorter
-       than the file's own ratio, rather than cropping it away at the edge. */
-    .catfeat__media img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: var(--catfeat-focal, center);
-    }
-
-    /* The artwork is already quiet where the copy lands; the scrim guarantees
-       the contrast rather than trusting it to survive four compression passes.
-       It fades away from the copy, so the subject is never dulled. */
     .catfeat__media::after {
-      content: "";
-      position: absolute;
-      inset: 0;
       background: linear-gradient(
-        90deg,
-        #05070a 0%,
-        rgba(5, 7, 10, 0.94) 26%,
-        rgba(5, 7, 10, 0.6) 48%,
-        rgba(5, 7, 10, 0.12) 68%,
-        transparent 82%
+        180deg,
+        rgba(5, 7, 10, 0.93) 0%,
+        rgba(5, 7, 10, 0.9) 40%,
+        rgba(5, 7, 10, 0.62) 56%,
+        rgba(5, 7, 10, 0.16) 74%,
+        transparent 88%
       );
     }
 
-    /* The right-hand variant stops short of solid black. These compositions put
-       the sky on the copy side, and a sunset is the reason the picture is worth
-       looking at — 0.88 is enough to carry white text over mid-grey cloud while
-       leaving the warmth visible underneath it. */
+    /* NO PORTRAIT FILE. Pool is the one category without one, and a wide
+       desktop image cover-cropped into a tall frame is mostly the empty half
+       it was carrying for the desktop layout — a robot in a sliver of corner
+       and black everywhere else.
+
+       So it stops pretending. The plate splits into two real rows: copy above,
+       the picture whole beneath it at its own ratio. Still half and half, still
+       one plate, and nothing is cropped to nonsense. This is a stand-in until
+       the composed portrait exists, not the intended treatment. */
+    .catfeat[data-mobile-art="false"] .catfeat__plate {
+      grid-template-rows: auto auto;
+      min-height: 0;
+    }
+    .catfeat[data-mobile-art="false"] .catfeat__copy { grid-area: 1 / 1; padding-bottom: clamp(1.4rem, 3vw, 2rem); }
+    .catfeat[data-mobile-art="false"] .catfeat__media { grid-area: 2 / 1; }
+    .catfeat[data-mobile-art="false"] .catfeat__media img { height: auto; object-position: center; }
+    .catfeat[data-mobile-art="false"] .catfeat__media::after { background: none; }
+  }
+
+  /* ---------- desktop: the split runs left to right ---------- */
+  @media (min-width: 900px) {
+    .catfeat { padding: clamp(1.4rem, 2.6vw, 2.4rem) 0; }
+    .catfeat__plate { min-height: min(34rem, 46vw); }
+
+    /* Exactly half. The copy column is one half of the plate and the artwork
+       fills the whole plate behind it, so the subject — which the artwork puts
+       in its own far half — lands in the half the copy does not occupy. */
+    .catfeat__copy { width: 50%; padding: clamp(2.2rem, 3.4vw, 3.6rem); }
+    .catfeat[data-side="right"] .catfeat__copy { justify-self: end; }
+
+    .catfeat__media::after {
+      background: linear-gradient(
+        90deg,
+        rgba(5, 7, 10, 0.93) 0%,
+        rgba(5, 7, 10, 0.88) 32%,
+        rgba(5, 7, 10, 0.55) 47%,
+        rgba(5, 7, 10, 0.12) 62%,
+        transparent 74%
+      );
+    }
+
     .catfeat[data-side="right"] .catfeat__media::after {
       background: linear-gradient(
         270deg,
-        rgba(5, 7, 10, 0.88) 0%,
-        rgba(5, 7, 10, 0.86) 30%,
-        rgba(5, 7, 10, 0.58) 50%,
-        rgba(5, 7, 10, 0.14) 70%,
-        transparent 84%
+        rgba(5, 7, 10, 0.9) 0%,
+        rgba(5, 7, 10, 0.86) 32%,
+        rgba(5, 7, 10, 0.55) 47%,
+        rgba(5, 7, 10, 0.12) 62%,
+        transparent 74%
       );
     }
-
-    /* Two equal halves rather than a block shoved to one edge. The copy then
-       sits centred in the half the artwork left empty, instead of hugging the
-       wrap's outer gutter with a wide gap on the far side of it. Its own text
-       stays left-aligned — a right-aligned paragraph is harder to read for no
-       gain, and the ragged edge would fight the buttons underneath it. */
-    .catfeat__inner {
-      min-height: 30rem;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      align-items: center;
-    }
-
-    .catfeat__copy {
-      grid-column: 1;
-      justify-self: center;
-      /* Wide enough to keep the two buttons on one line: at 30rem they wrapped
-         and the section grew a stacked-button column it did not need. */
-      width: min(100%, 34rem);
-      max-width: none;
-    }
-
-    .catfeat[data-side="right"] .catfeat__copy { grid-column: 2; }
-  }
-
-  @media (max-width: 620px) {
-    .catfeat h2 { font-size: 40px; }
-    .catfeat__btn { width: 100%; }
   }
 </style>
