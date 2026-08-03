@@ -237,20 +237,38 @@ describe("stored files", () => {
 
 describe("responsive derivatives", () => {
   it("generates no raster copies of vector artwork", () => {
-    expect(DERIVATIVES).toEqual([]);
+    // Derivatives exist now — the table was empty until 3 August 2026, which is
+    // why every picture was served at its authored size and the pool page
+    // shipped roughly 2.5 MB of images. What must NOT happen is raster copies
+    // of an SVG: one vector file already serves every width.
+    const byId = new Map(MEDIA_ASSETS.map((a) => [a.id, a]));
+    for (const d of DERIVATIVES) {
+      const parent = byId.get(d.parentAssetId)!;
+      expect(parent, `${d.id} has no parent asset`).toBeTruthy();
+      expect(parent.src!.endsWith(".svg")).toBe(false);
+    }
     for (const a of PLACEHOLDER_ASSETS) expect(a.src!.endsWith(".svg")).toBe(true);
+  });
+
+  it("never offers a width the source file does not contain", () => {
+    // Upscaling in a srcset is a promise of detail that is not in the bytes.
+    const byId = new Map(MEDIA_ASSETS.map((a) => [a.id, a]));
+    for (const d of DERIVATIVES) {
+      const parent = byId.get(d.parentAssetId)!;
+      if (parent.width) expect(d.width).toBeLessThan(parent.width);
+    }
   });
 
   it("counts a vector asset as variant-ready, because it scales without one", () => {
     for (const id of PLACEHOLDER_ONLY_IDS) expect(readinessFor(id).responsiveVariantsReady).toBe(true);
   });
 
-  it("does not pretend a raster creative is variant-ready without derivatives", () => {
-    // The owner artwork is WebP, not vector. One file serves every width today,
-    // which works but is not the same as having derivatives — saying otherwise
-    // would hide a real optimisation still owed.
+  it("now counts the raster creatives as variant-ready, because they have derivatives", () => {
+    // This asserted the opposite until 3 August 2026 — the artwork was WebP with
+    // no variants, and saying it was ready would have hidden a real optimisation
+    // still owed. The optimisation has now been done, so the assertion flips.
     for (const id of ARTWORK_PRODUCT_IDS) {
-      expect(readinessFor(id).responsiveVariantsReady).toBe(false);
+      expect(readinessFor(id).responsiveVariantsReady).toBe(true);
     }
   });
 

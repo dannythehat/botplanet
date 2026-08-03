@@ -34,6 +34,8 @@ interface Props {
 }
 
 const { id, eyebrow, title, intro, image, rows } = Astro.props;
+
+import { srcsetFor } from "../lib/srcset";
 ---
 
 <section class="bp-cov" id={id}>
@@ -42,9 +44,11 @@ const { id, eyebrow, title, intro, image, rows } = Astro.props;
   {image?.src && (
     <figure class="bp-cov__figure">
       <picture>
-        {image.mobileSrc && <source media="(max-width: 719px)" srcset={image.mobileSrc} />}
+        {image.mobileSrc && <source media="(max-width: 719px)" srcset={srcsetFor(image.mobileSrc) ?? image.mobileSrc} sizes="100vw" />}
         <img
           src={image.src}
+          srcset={srcsetFor(image.src)}
+          sizes="(min-width: 900px) 1100px, 100vw"
           alt={image.alt}
           style={image.focal ? `object-position: ${image.focal}` : undefined}
           loading="lazy"

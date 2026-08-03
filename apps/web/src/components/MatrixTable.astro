@@ -41,6 +41,8 @@ interface Props {
 }
 
 const { id, eyebrow, title, intro, columns, rows, note } = Astro.props;
+
+import { srcsetFor } from "../lib/srcset";
 ---
 
 <section class="bp-mx" id={id}>

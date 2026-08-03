@@ -1,0 +1,698 @@
+[
+  {
+    "source": "/media/home/hero-desktop.webp",
+    "sourceWidth": 1672,
+    "sourceHeight": 941,
+    "derivatives": [
+      {
+        "id": "media-home-hero-desktop-webp-360",
+        "src": "/media/home/hero-desktop-360w.webp",
+        "width": 360,
+        "height": 203,
+        "bytes": 9250,
+        "checksum": "sha256:f243594d4a46b0d68705368db59da385b56bdb9bfa97e8313dfa5e1239a4824c"
+      },
+      {
+        "id": "media-home-hero-desktop-webp-640",
+        "src": "/media/home/hero-desktop-640w.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 26142,
+        "checksum": "sha256:9940f59f2f6eb1580019f1fdab6fa77245b1f5c1f92eedf3db92290a62a03652"
+      },
+      {
+        "id": "media-home-hero-desktop-webp-960",
+        "src": "/media/home/hero-desktop-960w.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 56770,
+        "checksum": "sha256:c06a89447c23533278d11512a1193d15b24616a008df1ae44c9f052bcfd3318c"
+      },
+      {
+        "id": "media-home-hero-desktop-webp-1440",
+        "src": "/media/home/hero-desktop-1440w.webp",
+        "width": 1440,
+        "height": 810,
+        "bytes": 98242,
+        "checksum": "sha256:6e101e550e97e4f8af1bf8f40290c4013a4dd1875c5135a9f0ccf982c95e17b7"
+      }
+    ]
+  },
+  {
+    "source": "/media/home/hero-mobile.webp",
+    "sourceWidth": 941,
+    "sourceHeight": 1672,
+    "derivatives": [
+      {
+        "id": "media-home-hero-mobile-webp-360",
+        "src": "/media/home/hero-mobile-360w.webp",
+        "width": 360,
+        "height": 640,
+        "bytes": 23192,
+        "checksum": "sha256:adbcb0b79d6530b7536b3341f1b62155aa4d04fbaf923d96a4e117c68d5b81c5"
+      },
+      {
+        "id": "media-home-hero-mobile-webp-640",
+        "src": "/media/home/hero-mobile-640w.webp",
+        "width": 640,
+        "height": 1137,
+        "bytes": 63936,
+        "checksum": "sha256:db2d321b355c4e8b60a48a1bc6d5773856d7c04e951c9a7ddf5ea72f2d51bc22"
+      }
+    ]
+  },
+  {
+    "source": "/media/botmatch/explainer-desktop.webp",
+    "sourceWidth": 1672,
+    "sourceHeight": 941,
+    "derivatives": [
+      {
+        "id": "media-botmatch-explainer-desktop-webp-360",
+        "src": "/media/botmatch/explainer-desktop-360w.webp",
+        "width": 360,
+        "height": 203,
+        "bytes": 5762,
+        "checksum": "sha256:d0a188b9c8c23662212daf4361f2011ef2577068656fe21b430c6833fa1b4577"
+      },
+      {
+        "id": "media-botmatch-explainer-desktop-webp-640",
+        "src": "/media/botmatch/explainer-desktop-640w.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 14178,
+        "checksum": "sha256:16b61e3fddf5c0cc62ff9b9f62e54c612c99387c862107015634d0ecb6ffcd3a"
+      },
+      {
+        "id": "media-botmatch-explainer-desktop-webp-960",
+        "src": "/media/botmatch/explainer-desktop-960w.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 27996,
+        "checksum": "sha256:697b75870a0a87a5107c1b78590c6919fe86a02770ba4b3dfe9127e046e3ba93"
+      },
+      {
+        "id": "media-botmatch-explainer-desktop-webp-1440",
+        "src": "/media/botmatch/explainer-desktop-1440w.webp",
+        "width": 1440,
+        "height": 810,
+        "bytes": 47094,
+        "checksum": "sha256:9a5c06db67a138b32c67d5b1a4828eaee9dc10d335482e3c7fc9eaa4a4ffce17"
+      }
+    ]
+  },
+  {
+    "source": "/media/botmatch/explainer-mobile.webp",
+    "sourceWidth": 941,
+    "sourceHeight": 1672,
+    "derivatives": [
+      {
+        "id": "media-botmatch-explainer-mobile-webp-360",
+        "src": "/media/botmatch/explainer-mobile-360w.webp",
+        "width": 360,
+        "height": 640,
+        "bytes": 14568,
+        "checksum": "sha256:ff08a9ed132ed2568e2d9cb73ccdf0492d911a65e82e7535d23c512244cf2288"
+      },
+      {
+        "id": "media-botmatch-explainer-mobile-webp-640",
+        "src": "/media/botmatch/explainer-mobile-640w.webp",
+        "width": 640,
+        "height": 1137,
+        "bytes": 34454,
+        "checksum": "sha256:ed72224100f660439e25d42d8b96faad7b75318e1fc42df4feb8036cc605c331"
+      }
+    ]
+  },
+  {
+    "source": "/media/matcher/pool-bot-matcher.webp",
+    "sourceWidth": 941,
+    "sourceHeight": 1672,
+    "derivatives": [
+      {
+        "id": "media-matcher-pool-bot-matcher-webp-360",
+        "src": "/media/matcher/pool-bot-matcher-360w.webp",
+        "width": 360,
+        "height": 640,
+        "bytes": 21786,
+        "checksum": "sha256:c03fa929f1930c222a9c81222ff095c6ecf564b0fef4995c811dc17e04861e6d"
+      },
+      {
+        "id": "media-matcher-pool-bot-matcher-webp-640",
+        "src": "/media/matcher/pool-bot-matcher-640w.webp",
+        "width": 640,
+        "height": 1137,
+        "bytes": 53298,
+        "checksum": "sha256:89ff1fb229575fa8764741411f10ea5988c8e8122bc39459040eeb73a432763a"
+      }
+    ]
+  },
+  {
+    "source": "/media/pool/hero-desktop.webp",
+    "sourceWidth": 1600,
+    "sourceHeight": 900,
+    "derivatives": [
+      {
+        "id": "media-pool-hero-desktop-webp-360",
+        "src": "/media/pool/hero-desktop-360w.webp",
+        "width": 360,
+        "height": 203,
+        "bytes": 7642,
+        "checksum": "sha256:c9ef91041c3e072026db99fff227e10650e14066343da278253c55f268c313d2"
+      },
+      {
+        "id": "media-pool-hero-desktop-webp-640",
+        "src": "/media/pool/hero-desktop-640w.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 22854,
+        "checksum": "sha256:65342967be3c67883f5c4eb5d1cc41efad5697e585a5b36cd7de888756733657"
+      },
+      {
+        "id": "media-pool-hero-desktop-webp-960",
+        "src": "/media/pool/hero-desktop-960w.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 51892,
+        "checksum": "sha256:0c2b36801ed838797250213059129fc95bec3b6ca5c5085bbfc7c65a62ca05ce"
+      },
+      {
+        "id": "media-pool-hero-desktop-webp-1440",
+        "src": "/media/pool/hero-desktop-1440w.webp",
+        "width": 1440,
+        "height": 810,
+        "bytes": 89094,
+        "checksum": "sha256:883ff556ec3204759567f48fb01a36d2e9f2622d6e952a0ac74e6aff2b31dbd9"
+      }
+    ]
+  },
+  {
+    "source": "/media/pool/hero-mobile.webp",
+    "sourceWidth": 1200,
+    "sourceHeight": 800,
+    "derivatives": [
+      {
+        "id": "media-pool-hero-mobile-webp-360",
+        "src": "/media/pool/hero-mobile-360w.webp",
+        "width": 360,
+        "height": 240,
+        "bytes": 9204,
+        "checksum": "sha256:22f23b21db51afdf0324ae6c91cad3fd577e28713e8652cfec43aa8244fd74ca"
+      },
+      {
+        "id": "media-pool-hero-mobile-webp-640",
+        "src": "/media/pool/hero-mobile-640w.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 25992,
+        "checksum": "sha256:956d716ab356d245c1446494d9cb87b0a0691d82563572aef0d0e62b109bc43c"
+      },
+      {
+        "id": "media-pool-hero-mobile-webp-960",
+        "src": "/media/pool/hero-mobile-960w.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 53252,
+        "checksum": "sha256:8b1df6d965757ecf18065caaeb45284ea59ed018c219a38a5344c20ea367210b"
+      }
+    ]
+  },
+  {
+    "source": "/media/pool/pool-type-inground.webp",
+    "sourceWidth": 800,
+    "sourceHeight": 500,
+    "derivatives": [
+      {
+        "id": "media-pool-pool-type-inground-webp-360",
+        "src": "/media/pool/pool-type-inground-360w.webp",
+        "width": 360,
+        "height": 225,
+        "bytes": 20950,
+        "checksum": "sha256:60646d14f022192b2ce1411d80d8b4c42034050887d340701925cab878a31433"
+      },
+      {
+        "id": "media-pool-pool-type-inground-webp-640",
+        "src": "/media/pool/pool-type-inground-640w.webp",
+        "width": 640,
+        "height": 400,
+        "bytes": 63036,
+        "checksum": "sha256:04f6da8c0152928c938af27e91bd088136c721f59cb647f5bd118d233300c70b"
+      }
+    ]
+  },
+  {
+    "source": "/media/pool/pool-type-above-ground.webp",
+    "sourceWidth": 800,
+    "sourceHeight": 500,
+    "derivatives": [
+      {
+        "id": "media-pool-pool-type-above-ground-webp-360",
+        "src": "/media/pool/pool-type-above-ground-360w.webp",
+        "width": 360,
+        "height": 225,
+        "bytes": 22134,
+        "checksum": "sha256:7768cf3255fb623821b7a814aedc1d04d06a65332a69f88758620e1955206aa1"
+      },
+      {
+        "id": "media-pool-pool-type-above-ground-webp-640",
+        "src": "/media/pool/pool-type-above-ground-640w.webp",
+        "width": 640,
+        "height": 400,
+        "bytes": 67742,
+        "checksum": "sha256:fe389d9c5d208b9a4c2beeaa7a58d50b07ff706c3be28460089d01c4f7ec7680"
+      }
+    ]
+  },
+  {
+    "source": "/media/pool/pool-type-freeform.webp",
+    "sourceWidth": 800,
+    "sourceHeight": 500,
+    "derivatives": [
+      {
+        "id": "media-pool-pool-type-freeform-webp-360",
+        "src": "/media/pool/pool-type-freeform-360w.webp",
+        "width": 360,
+        "height": 225,
+        "bytes": 18648,
+        "checksum": "sha256:c1caae5f7507e09e5645638684c979629d5fe409438019f7cea47659a9e1b88a"
+      },
+      {
+        "id": "media-pool-pool-type-freeform-webp-640",
+        "src": "/media/pool/pool-type-freeform-640w.webp",
+        "width": 640,
+        "height": 400,
+        "bytes": 53446,
+        "checksum": "sha256:e98a905793bf0bf7749dc8fa55e989d5ec78a1bb5f35e52b81916d81839b7a5d"
+      }
+    ]
+  },
+  {
+    "source": "/media/pool/debris-leaves.webp",
+    "sourceWidth": 700,
+    "sourceHeight": 467,
+    "derivatives": [
+      {
+        "id": "media-pool-debris-leaves-webp-360",
+        "src": "/media/pool/debris-leaves-360w.webp",
+        "width": 360,
+        "height": 240,
+        "bytes": 10484,
+        "checksum": "sha256:f7a4db110c9c5d236a47f7d1750f4fdbd8bbb730413b299113dc1bebbc6389c4"
+      },
+      {
+        "id": "media-pool-debris-leaves-webp-640",
+        "src": "/media/pool/debris-leaves-640w.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 32332,
+        "checksum": "sha256:f02cd349f70f484661722558fa3a8a22dd476dc8637a36fa66e601a24b086289"
+      }
+    ]
+  },
+  {
+    "source": "/media/pool/debris-silt.webp",
+    "sourceWidth": 700,
+    "sourceHeight": 467,
+    "derivatives": [
+      {
+        "id": "media-pool-debris-silt-webp-360",
+        "src": "/media/pool/debris-silt-360w.webp",
+        "width": 360,
+        "height": 240,
+        "bytes": 9322,
+        "checksum": "sha256:19686d5205cbf0f1ea572216c985f8b1a208b47e5637c96c9ad4880de84abd25"
+      },
+      {
+        "id": "media-pool-debris-silt-webp-640",
+        "src": "/media/pool/debris-silt-640w.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 29860,
+        "checksum": "sha256:f11e05a7e2b4115068011088089b8ebb9fa8e643342c3113906489ab9f28c9fa"
+      }
+    ]
+  },
+  {
+    "source": "/media/pool/debris-algae.webp",
+    "sourceWidth": 700,
+    "sourceHeight": 467,
+    "derivatives": [
+      {
+        "id": "media-pool-debris-algae-webp-360",
+        "src": "/media/pool/debris-algae-360w.webp",
+        "width": 360,
+        "height": 240,
+        "bytes": 9260,
+        "checksum": "sha256:9bdae46d2065cb38dcbcd09cedfbee535669b53a3514bf761ba9058594e7b755"
+      },
+      {
+        "id": "media-pool-debris-algae-webp-640",
+        "src": "/media/pool/debris-algae-640w.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 27206,
+        "checksum": "sha256:9d12fc1a56fb183da014866f723968c0a53260064c9f8a79a58d5b9f8a9adc4d"
+      }
+    ]
+  },
+  {
+    "source": "/media/products/dolphin-nautilus-cc-plus.webp",
+    "sourceWidth": 1122,
+    "sourceHeight": 1402,
+    "derivatives": [
+      {
+        "id": "media-products-dolphin-nautilus-cc-plus-webp-360",
+        "src": "/media/products/dolphin-nautilus-cc-plus-360w.webp",
+        "width": 360,
+        "height": 450,
+        "bytes": 16300,
+        "checksum": "sha256:a5746137881c3dad8980140173d75c851fe99096d3a698fce7e56625c3fff4cf"
+      },
+      {
+        "id": "media-products-dolphin-nautilus-cc-plus-webp-640",
+        "src": "/media/products/dolphin-nautilus-cc-plus-640w.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 40504,
+        "checksum": "sha256:3eef36a9b9a37240b131d0a9a34c8592e155ead5c7ec49b99c04fa1ef8411577"
+      },
+      {
+        "id": "media-products-dolphin-nautilus-cc-plus-webp-960",
+        "src": "/media/products/dolphin-nautilus-cc-plus-960w.webp",
+        "width": 960,
+        "height": 1200,
+        "bytes": 75794,
+        "checksum": "sha256:7720a4be097267e59689ae6e67eee89a9ff4b27a98984cb3775389bcd5692b4f"
+      }
+    ]
+  },
+  {
+    "source": "/media/products/polaris-freedom.webp",
+    "sourceWidth": 1200,
+    "sourceHeight": 1200,
+    "derivatives": [
+      {
+        "id": "media-products-polaris-freedom-webp-360",
+        "src": "/media/products/polaris-freedom-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 20622,
+        "checksum": "sha256:d57a56430c7f58fa101c1bde27dc1530c17a97d45d330ca5ee6b20aaf19e42cc"
+      },
+      {
+        "id": "media-products-polaris-freedom-webp-640",
+        "src": "/media/products/polaris-freedom-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 53906,
+        "checksum": "sha256:e3b99f7a1ad1bf2a8648cc4de195b2bd5760ffca7d54108e1db2ad5536cfcb86"
+      },
+      {
+        "id": "media-products-polaris-freedom-webp-960",
+        "src": "/media/products/polaris-freedom-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 103588,
+        "checksum": "sha256:00ca24ecd6ffc4ade8821be3ef2efe4102c98c007fb9cb62ae5e593f1c942e23"
+      }
+    ]
+  },
+  {
+    "source": "/media/products/betta-se-plus.webp",
+    "sourceWidth": 1200,
+    "sourceHeight": 1200,
+    "derivatives": [
+      {
+        "id": "media-products-betta-se-plus-webp-360",
+        "src": "/media/products/betta-se-plus-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 21282,
+        "checksum": "sha256:dabeba377cbac98516221cd7b89064fc07314a9d027881ef28dffabd7edeed09"
+      },
+      {
+        "id": "media-products-betta-se-plus-webp-640",
+        "src": "/media/products/betta-se-plus-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 54370,
+        "checksum": "sha256:0ae366ab1faeb42f66f3b5ed7b76f9fe1641f90f073aa00d245cbff933aa583a"
+      },
+      {
+        "id": "media-products-betta-se-plus-webp-960",
+        "src": "/media/products/betta-se-plus-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 102726,
+        "checksum": "sha256:929da3f8194932887e72839c72ceb0513e594d2e25606406d4d0005181250d8f"
+      }
+    ]
+  },
+  {
+    "source": "/media/products/dolphin-proteus-dx4-plus.webp",
+    "sourceWidth": 1200,
+    "sourceHeight": 1200,
+    "derivatives": [
+      {
+        "id": "media-products-dolphin-proteus-dx4-plus-webp-360",
+        "src": "/media/products/dolphin-proteus-dx4-plus-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 23448,
+        "checksum": "sha256:5b28342b304f3db4cb32c8c2598a1d182ceddfd063ced2624e714ac50c4b143e"
+      },
+      {
+        "id": "media-products-dolphin-proteus-dx4-plus-webp-640",
+        "src": "/media/products/dolphin-proteus-dx4-plus-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 62268,
+        "checksum": "sha256:66c622b9621d515ba6a97ec553fdc6d0edfab650b2a53a4a7e99fc51576a43b8"
+      },
+      {
+        "id": "media-products-dolphin-proteus-dx4-plus-webp-960",
+        "src": "/media/products/dolphin-proteus-dx4-plus-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 125966,
+        "checksum": "sha256:d7d8274daa9a867f583c2b8ce76cd09bb3f26e4b25d86c8d75ce1bcb12ecc51a"
+      }
+    ]
+  },
+  {
+    "source": "/media/products/aiper-scuba-v3-ai-vision.webp",
+    "sourceWidth": 1200,
+    "sourceHeight": 1200,
+    "derivatives": [
+      {
+        "id": "media-products-aiper-scuba-v3-ai-vision-webp-360",
+        "src": "/media/products/aiper-scuba-v3-ai-vision-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 23426,
+        "checksum": "sha256:6c115ba5be14f9e6bac8abaf2a157b2421ad1b1c5c98f7e856dd597275ebdabd"
+      },
+      {
+        "id": "media-products-aiper-scuba-v3-ai-vision-webp-640",
+        "src": "/media/products/aiper-scuba-v3-ai-vision-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 59372,
+        "checksum": "sha256:b7d21eaf83f0e7d0845cb25fe6eb9a655bcde396777161e27dd20ec1a9b149b8"
+      },
+      {
+        "id": "media-products-aiper-scuba-v3-ai-vision-webp-960",
+        "src": "/media/products/aiper-scuba-v3-ai-vision-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 113220,
+        "checksum": "sha256:9dc2d35a4599ef59855ef2280c345f08e9500653cf74de783a75e74904e4a2d7"
+      }
+    ]
+  },
+  {
+    "source": "/media/products/aiper-scuba-x1.webp",
+    "sourceWidth": 1402,
+    "sourceHeight": 1122,
+    "derivatives": [
+      {
+        "id": "media-products-aiper-scuba-x1-webp-360",
+        "src": "/media/products/aiper-scuba-x1-360w.webp",
+        "width": 360,
+        "height": 288,
+        "bytes": 19390,
+        "checksum": "sha256:1f91d95073b75803da02c3f3f0a2361957b239d83efe5963d2c391e108350607"
+      },
+      {
+        "id": "media-products-aiper-scuba-x1-webp-640",
+        "src": "/media/products/aiper-scuba-x1-640w.webp",
+        "width": 640,
+        "height": 512,
+        "bytes": 52392,
+        "checksum": "sha256:f35ac4ef0a0914d0b088969a6b34fa322933e79f09d9f8983036759958072660"
+      },
+      {
+        "id": "media-products-aiper-scuba-x1-webp-960",
+        "src": "/media/products/aiper-scuba-x1-960w.webp",
+        "width": 960,
+        "height": 768,
+        "bytes": 104374,
+        "checksum": "sha256:534822dddc56ca8b3976ff2dc8a43b5c9ad423b293c5e2c98407614c6cc61934"
+      }
+    ]
+  },
+  {
+    "source": "/media/products/aiper-scuba-s1.webp",
+    "sourceWidth": 1402,
+    "sourceHeight": 1122,
+    "derivatives": [
+      {
+        "id": "media-products-aiper-scuba-s1-webp-360",
+        "src": "/media/products/aiper-scuba-s1-360w.webp",
+        "width": 360,
+        "height": 288,
+        "bytes": 16386,
+        "checksum": "sha256:f7aaa40528103d17018938e9e02cbed8d00c678d45aefd640019e14cbcdd9068"
+      },
+      {
+        "id": "media-products-aiper-scuba-s1-webp-640",
+        "src": "/media/products/aiper-scuba-s1-640w.webp",
+        "width": 640,
+        "height": 512,
+        "bytes": 45354,
+        "checksum": "sha256:0150b7756bb61d2e159e2c9c6cf39fce688a021f6431f0959a948bceef288245"
+      },
+      {
+        "id": "media-products-aiper-scuba-s1-webp-960",
+        "src": "/media/products/aiper-scuba-s1-960w.webp",
+        "width": 960,
+        "height": 768,
+        "bytes": 89218,
+        "checksum": "sha256:37386d9b86cf3f73bde7aef5c9047e170b1c5d2ea45f69b280ff62227f66c83e"
+      }
+    ]
+  },
+  {
+    "source": "/media/products/aiper-seagull-se.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-products-aiper-seagull-se-webp-360",
+        "src": "/media/products/aiper-seagull-se-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 19230,
+        "checksum": "sha256:0222f1dd84b0cba7d23b63941bffaec636abe3119ea0a94fa07edfe01767e10f"
+      },
+      {
+        "id": "media-products-aiper-seagull-se-webp-640",
+        "src": "/media/products/aiper-seagull-se-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 50012,
+        "checksum": "sha256:04ac40ebbda718f359b7346d241f93148b8896b4c61ace6f21ef402cd01e8131"
+      },
+      {
+        "id": "media-products-aiper-seagull-se-webp-960",
+        "src": "/media/products/aiper-seagull-se-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 97726,
+        "checksum": "sha256:5490aa57202c871fcca44653613e6cfc650aa30013bfb3b696f07b3f3384d81c"
+      }
+    ]
+  },
+  {
+    "source": "/media/products/beatbot-aquasense-2-ultra.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-products-beatbot-aquasense-2-ultra-webp-360",
+        "src": "/media/products/beatbot-aquasense-2-ultra-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 18572,
+        "checksum": "sha256:057ac8bd78e52e3621fa7ed1b394b30888dcdd3d99171e987db581be0874b31c"
+      },
+      {
+        "id": "media-products-beatbot-aquasense-2-ultra-webp-640",
+        "src": "/media/products/beatbot-aquasense-2-ultra-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 47968,
+        "checksum": "sha256:aa196ac1807ad9c63e8f906b351806d3dbdf11e6ab5ebe22b4d55c410de860c0"
+      },
+      {
+        "id": "media-products-beatbot-aquasense-2-ultra-webp-960",
+        "src": "/media/products/beatbot-aquasense-2-ultra-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 90338,
+        "checksum": "sha256:884eeeb8ea434aa274e10e926ee8d0d375378eae295cf7ce5546675953b6d3b9"
+      }
+    ]
+  },
+  {
+    "source": "/media/products/wybot-c1.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-products-wybot-c1-webp-360",
+        "src": "/media/products/wybot-c1-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 18914,
+        "checksum": "sha256:7a41625881b2a3670526492859977d7e5769e9dd363e74f86ce7154caad895c7"
+      },
+      {
+        "id": "media-products-wybot-c1-webp-640",
+        "src": "/media/products/wybot-c1-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 48750,
+        "checksum": "sha256:f2737bb2a9323acc02955b8ea2be0838e5eeaa6bd934f68f9d687a6f786874ea"
+      },
+      {
+        "id": "media-products-wybot-c1-webp-960",
+        "src": "/media/products/wybot-c1-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 90362,
+        "checksum": "sha256:1567a15f6a4b0a51d598226bfb4595e4f4c46b8fc3b4ef07a58bd0031c41670f"
+      }
+    ]
+  },
+  {
+    "source": "/media/products/dolphin-premier.webp",
+    "sourceWidth": 1402,
+    "sourceHeight": 1122,
+    "derivatives": [
+      {
+        "id": "media-products-dolphin-premier-webp-360",
+        "src": "/media/products/dolphin-premier-360w.webp",
+        "width": 360,
+        "height": 288,
+        "bytes": 20176,
+        "checksum": "sha256:02822f9867a42eeafc60a9945a52855e0eafb8f5e783726ed9746fb9c0d19d2f"
+      },
+      {
+        "id": "media-products-dolphin-premier-webp-640",
+        "src": "/media/products/dolphin-premier-640w.webp",
+        "width": 640,
+        "height": 512,
+        "bytes": 52180,
+        "checksum": "sha256:b3d9c6f53e864a8ff03f0bb3d71f86e23a8391f2de594c38fada6a2dfb49f1d4"
+      },
+      {
+        "id": "media-products-dolphin-premier-webp-960",
+        "src": "/media/products/dolphin-premier-960w.webp",
+        "width": 960,
+        "height": 768,
+        "bytes": 105426,
+        "checksum": "sha256:782e4fc0ce07510edc583f7aa5910ab592257c07bb34ccc5f1d9ca6294ce72a9"
+      }
+    ]
+  }
+]

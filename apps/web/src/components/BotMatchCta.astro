@@ -66,6 +66,8 @@ const { categorySlug, headline, body, points, ctaLabel, note, image, poster } = 
 const href = `/botmatch/${categorySlug}/?start=quiz`;
 const hasPoster = Boolean(poster?.src);
 const hasImage = !hasPoster && Boolean(image?.src);
+
+import { srcsetFor } from "../lib/srcset";
 ---
 
 {hasPoster ? (
@@ -81,9 +83,11 @@ const hasImage = !hasPoster && Boolean(image?.src);
 
     <a class="bp-bmcta__poster" href={href} data-botmatch-cta={categorySlug}>
       <picture>
-        {poster!.mobileSrc && <source media="(max-width: 719px)" srcset={poster!.mobileSrc} />}
+        {poster!.mobileSrc && <source media="(max-width: 719px)" srcset={srcsetFor(poster!.mobileSrc) ?? poster!.mobileSrc} sizes="100vw" />}
         <img
           src={poster!.src}
+          srcset={srcsetFor(poster!.src)}
+          sizes="(min-width: 900px) 560px, 100vw"
           width={poster!.width}
           height={poster!.height}
           alt={poster!.alt}
@@ -114,8 +118,8 @@ const hasImage = !hasPoster && Boolean(image?.src);
       {hasImage && (
         <figure class="bp-bmcta__figure">
           <picture>
-            {image!.mobileSrc && <source media="(max-width: 719px)" srcset={image!.mobileSrc} />}
-            <img src={image!.src} alt={image!.alt} loading="lazy" decoding="async"
+            {image!.mobileSrc && <source media="(max-width: 719px)" srcset={srcsetFor(image!.mobileSrc) ?? image!.mobileSrc} sizes="100vw" />}
+            <img src={image!.src} srcset={srcsetFor(image!.src)} sizes="(min-width: 900px) 560px, 100vw" alt={image!.alt} loading="lazy" decoding="async"
                  style={image!.focal ? `object-position: ${image!.focal}` : undefined} />
           </picture>
         </figure>

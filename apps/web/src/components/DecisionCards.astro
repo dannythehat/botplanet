@@ -33,6 +33,8 @@ interface Props {
 }
 
 const { id, eyebrow, title, intro, cards } = Astro.props;
+
+import { srcsetFor } from "../lib/srcset";
 ---
 
 <section class="bp-dsec" id={id}>
@@ -45,10 +47,12 @@ const { id, eyebrow, title, intro, cards } = Astro.props;
           <figure class="bp-dcard__figure">
             <picture>
               {card.image.mobileSrc && (
-                <source media="(max-width: 719px)" srcset={card.image.mobileSrc} />
+                <source media="(max-width: 719px)" srcset={srcsetFor(card.image.mobileSrc) ?? card.image.mobileSrc} sizes="100vw" />
               )}
               <img
                 src={card.image.src}
+                srcset={srcsetFor(card.image.src)}
+                sizes="(min-width: 900px) 33vw, 100vw"
                 alt={card.image.alt}
                 style={card.image.focal ? `object-position: ${card.image.focal}` : undefined}
                 loading="lazy"

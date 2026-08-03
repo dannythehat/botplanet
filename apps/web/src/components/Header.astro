@@ -24,7 +24,17 @@ const isActive = (href: string) => href === activePath;
 <header class="site" id="site-header" data-scrolled="false">
   <div class="wrap bar">
     <a class="logo" href="/" aria-label="BotPlanet — home">
-      <img src="/logo/botplanet-chrome.png" alt="BotPlanet" class="logo-full" width="760" height="229" />
+      <img
+        src="/logo/botplanet-chrome-340w.webp"
+        srcset="/logo/botplanet-chrome-340w.webp 340w, /logo/botplanet-chrome-520w.webp 520w, /logo/botplanet-chrome-760w.webp 760w"
+        sizes="220px"
+        alt="BotPlanet"
+        class="logo-full"
+        width="760"
+        height="229"
+        fetchpriority="high"
+        decoding="async"
+      />
     </a>
 
     <nav class="main" aria-label="Primary">
@@ -131,7 +141,17 @@ const isActive = (href: string) => href === activePath;
   <div class="drawer-scrim" id="drawer-scrim"></div>
   <div class="drawer-panel" role="dialog" aria-modal="true" aria-label="Menu">
     <div class="drawer-head">
-      <img src="/logo/botplanet-chrome.png" alt="BotPlanet" width="760" height="229" class="drawer-logo" />
+      <img
+        src="/logo/botplanet-chrome-340w.webp"
+        srcset="/logo/botplanet-chrome-340w.webp 340w, /logo/botplanet-chrome-520w.webp 520w"
+        sizes="176px"
+        alt="BotPlanet"
+        width="760"
+        height="229"
+        class="drawer-logo"
+        loading="lazy"
+        decoding="async"
+      />
       <button class="icon-btn" type="button" id="btn-close" aria-label="Close menu">
         <span aria-hidden="true">✕</span>
       </button>

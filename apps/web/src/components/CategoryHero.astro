@@ -51,6 +51,8 @@ const {
 } = Astro.props;
 const hasImage = Boolean(image?.src);
 const layout = hasImage ? imageLayout : "none";
+
+import { srcsetFor } from "../lib/srcset";
 ---
 
 <section class="chero" data-has-image={hasImage ? "true" : "false"} data-layout={layout}>
@@ -76,10 +78,12 @@ const layout = hasImage ? imageLayout : "none";
       <figure class="chero__figure" data-hero-image>
         <picture>
           {image!.mobileSrc && (
-            <source media="(max-width: 719px)" srcset={image!.mobileSrc} />
+            <source media="(max-width: 719px)" srcset={srcsetFor(image!.mobileSrc) ?? image!.mobileSrc} sizes="100vw" />
           )}
           <img
             src={image!.src}
+            srcset={srcsetFor(image!.src)}
+            sizes="(min-width: 900px) 1100px, 100vw"
             alt={image!.alt}
             style={image!.focal ? `object-position: ${image!.focal}` : undefined}
             width="1200"

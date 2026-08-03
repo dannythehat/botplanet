@@ -1,6 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
 import { LAUNCH_CATEGORY, categoryRoutes } from "../content/routes";
+import { srcsetFor } from "../lib/srcset";
 
 const live = categoryRoutes(LAUNCH_CATEGORY);
 
@@ -50,9 +51,17 @@ const categories = [
 
       <figure class="hero__art">
         <picture>
-          <source media="(max-width: 720px)" srcset="/media/home/hero-mobile.webp" width="941" height="1672" />
+          <source
+            media="(max-width: 720px)"
+            srcset={srcsetFor("/media/home/hero-mobile.webp")}
+            sizes="100vw"
+            width="941"
+            height="1672"
+          />
           <img
             src="/media/home/hero-desktop.webp"
+            srcset={srcsetFor("/media/home/hero-desktop.webp")}
+            sizes="(min-width: 1100px) 58vw, 100vw"
             width="1672"
             height="941"
             alt="A night-time home where six kinds of robot are working at once: a pool cleaner in the water, a window cleaner on the glass, a mower on the lawn, a vacuum on the terrace, a four-legged patrol robot and a companion robot at the door, beneath the BotPlanet logo and the Earth."
@@ -142,8 +151,23 @@ const categories = [
       {matcherImage && (
         <figure class="botmatch__art">
           <picture>
-            <source media="(max-width: 720px)" srcset={matcherImage.mobileSrc} width={matcherImage.mobileWidth} height={matcherImage.mobileHeight} />
-            <img src={matcherImage.src} width={matcherImage.width} height={matcherImage.height} alt={matcherImage.alt} loading="lazy" decoding="async" />
+            <source
+              media="(max-width: 720px)"
+              srcset={srcsetFor(matcherImage.mobileSrc)}
+              sizes="100vw"
+              width={matcherImage.mobileWidth}
+              height={matcherImage.mobileHeight}
+            />
+            <img
+              src={matcherImage.src}
+              srcset={srcsetFor(matcherImage.src)}
+              sizes="(min-width: 1000px) 46vw, 100vw"
+              width={matcherImage.width}
+              height={matcherImage.height}
+              alt={matcherImage.alt}
+              loading="lazy"
+              decoding="async"
+            />
           </picture>
         </figure>
       )}
