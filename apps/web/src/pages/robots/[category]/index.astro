@@ -6,7 +6,7 @@ import { getDb, schema } from "../../../lib/db";
 import { usd, titleCase } from "../../../lib/format";
 import { and, eq, inArray } from "drizzle-orm";
 import { breadcrumbsFor } from "../../../lib/routing";
-import { collectionPageSchema, imageObjectSchema, faqPageSchema } from "../../../lib/seo";
+import { collectionPageSchema, imageObjectSchema, faqPageSchema, itemListSchema } from "../../../lib/seo";
 import CategoryHero from "../../../components/CategoryHero.astro";
 import { heroFor } from "../../../content/category-hero";
 import DecisionCards from "../../../components/DecisionCards.astro";
@@ -125,6 +125,17 @@ const pageSchema = hero
         images: editorialImages,
       }),
       ...editorialImages.map(imageObjectSchema),
+      /* The products this page actually lists, in the order the comparison
+         table shows them. Built from the same rows, so the two can never
+         disagree about what is on the page or how it is ordered. No Product,
+         Offer or AggregateRating node: a hub links to products, it does not
+         sell them, and this page publishes no price. */
+      compareRows.length
+        ? itemListSchema(
+            compareRows.map((r) => ({ name: r.name, path: r.href })),
+            `${cat.name} compared`,
+          )
+        : null,
       faqPageSchema(faq?.items ?? [], `/robots/${cat.slug}/`),
     ]
   : [];
@@ -133,6 +144,10 @@ const pageSchema = hero
 <Base
   title={hero?.seoTitle ?? `${cat.name} — BotPlanet`}
   description={hero?.metaDescription ?? `Compare ${cat.name.toLowerCase()} for the US.`}
+  /* A category's own hero previews far better than the site-wide brand card,
+     and it is original artwork we own, so it may be shared. Falls back to the
+     brand card when a category has no hero yet. */
+  ogImage={hero?.image?.src}
   breadcrumbs={crumbs}
   schema={pageSchema}
 >
