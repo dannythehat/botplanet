@@ -4,15 +4,15 @@
   "fieldsInRegistry": 31,
   "totals": {
     "fieldRecords": 310,
-    "evidenceRecords": 169,
+    "evidenceRecords": 175,
     "stateCounts": {
-      "populated": 163,
-      "unknown": 18,
-      "not_applicable": 22,
-      "not_publicly_stated": 84,
-      "conflicting": 1,
-      "suppressed": 17,
-      "pending_verification": 5
+      "populated": 168,
+      "unknown": 9,
+      "not_applicable": 23,
+      "not_publicly_stated": 89,
+      "conflicting": 2,
+      "suppressed": 18,
+      "pending_verification": 1
     },
     "reconciliation": {
       "agrees": 46,
@@ -24,10 +24,10 @@
       "newly_populated": 1,
       "not_applicable": 10
     },
-    "rawPercent": 57,
-    "weightedPercent": 64,
-    "conflicts": 3,
-    "unresolvedConflicts": 1
+    "rawPercent": 59,
+    "weightedPercent": 66,
+    "conflicts": 4,
+    "unresolvedConflicts": 2
   },
   "rows": [
     {
@@ -275,29 +275,45 @@
       "verificationDate": "2026-08-03",
       "sourcesUsed": 1,
       "sourcesUnreadable": [],
-      "completenessRawPercent": 11,
-      "completenessWeightedPercent": 15,
-      "fieldsApplicable": 28,
-      "fieldsPublishable": 3,
-      "weightApplicable": 103,
-      "weightPublishable": 15,
+      "completenessRawPercent": 30,
+      "completenessWeightedPercent": 35,
+      "fieldsApplicable": 27,
+      "fieldsPublishable": 8,
+      "weightApplicable": 100,
+      "weightPublishable": 35,
       "fieldStates": {
-        "populated": 3,
-        "unknown": 17,
-        "not_applicable": 3,
-        "not_publicly_stated": 0,
-        "conflicting": 0,
-        "suppressed": 3,
-        "pending_verification": 5
+        "populated": 8,
+        "unknown": 8,
+        "not_applicable": 4,
+        "not_publicly_stated": 5,
+        "conflicting": 1,
+        "suppressed": 4,
+        "pending_verification": 1
       },
-      "fieldsNotPubliclyStated": [],
-      "fieldsSuppressed": [
-        "poolSizeSuitability",
-        "navigation",
-        "appSupport"
+      "fieldsNotPubliclyStated": [
+        "officialProductPageUrl",
+        "manualUrl",
+        "poolTypes",
+        "filtrationMicrons",
+        "suctionRate"
       ],
-      "fieldsConflicting": [],
-      "conflicts": [],
+      "fieldsSuppressed": [
+        "cableLengthFt",
+        "runtimeMins",
+        "weightLbs",
+        "warranty"
+      ],
+      "fieldsConflicting": [
+        "poolSizeSuitability"
+      ],
+      "conflicts": [
+        {
+          "field": "poolSizeSuitability",
+          "resolvedTo": null,
+          "rule": "the live source's own figure is not credible — held for human resolution",
+          "suppressed": true
+        }
+      ],
       "editorialCorrections": [
         {
           "field": "poolSizeSuitability",
@@ -328,28 +344,24 @@
         "manufacturer identity/evidence weakness: no manufacturer-sourced value for this model",
         "no accepted official manufacturer page",
         "no accepted manual",
-        "weighted completeness 15% against a 65% floor",
-        "insufficient evidence coverage for review section(s): What it is, Where it fits, What it cleans, How it runs, Living with it",
-        "review section(s) would rest on suppressed value(s): poolSizeSuitability, navigation",
-        "comparison field unavailable: powerType",
+        "unresolved conflict on poolSizeSuitability",
+        "weighted completeness 35% against a 65% floor",
+        "insufficient evidence coverage for review section(s): Where it fits, What it cleans, How it runs, Living with it",
+        "review section(s) would rest on suppressed value(s): runtimeMins, weightLbs",
         "comparison field unavailable: poolTypes",
         "comparison field unavailable: poolSizeSuitability",
         "comparison field unavailable: runtimeMins",
-        "comparison field unavailable: surfacesCleaned",
         "comparison field unavailable: filtration",
         "comparison field unavailable: warranty",
-        "BotMatch field unavailable: powerType",
         "BotMatch field unavailable: poolTypes",
-        "BotMatch field unavailable: poolSizeSuitability",
-        "BotMatch field unavailable: surfacesCleaned",
-        "BotMatch field unavailable: appSupport"
+        "BotMatch field unavailable: poolSizeSuitability"
       ],
       "launchStatus": "candidate_under_review",
       "reviewGates": [
         {
           "gate": "weighted_completeness",
           "passed": false,
-          "detail": "weighted completeness 15% against a 65% floor"
+          "detail": "weighted completeness 35% against a 65% floor"
         },
         {
           "gate": "model_identity",
@@ -358,18 +370,18 @@
         },
         {
           "gate": "no_material_conflict",
-          "passed": true,
-          "detail": "no unresolved conflict on a material review field"
+          "passed": false,
+          "detail": "unresolved conflict on material review field(s): poolSizeSuitability"
         },
         {
           "gate": "review_sections_writable",
           "passed": false,
-          "detail": "insufficient evidence coverage for review section(s): What it is, Where it fits, What it cleans, How it runs, Living with it"
+          "detail": "insufficient evidence coverage for review section(s): Where it fits, What it cleans, How it runs, Living with it"
         },
         {
           "gate": "no_speculation",
           "passed": false,
-          "detail": "review section(s) would rest on suppressed value(s): poolSizeSuitability, navigation"
+          "detail": "review section(s) would rest on suppressed value(s): runtimeMins, weightLbs"
         },
         {
           "gate": "corrections_identified",
@@ -380,8 +392,8 @@
       "evidenceQualification": "dealer-sourced: no manufacturer page or manual was accepted for this model, so every value is attributed to the dealer that published it and none is presented as manufacturer-stated",
       "warrantyStatus": "not_confirmed",
       "warrantyPublicWording": "Manufacturer warranty term not confirmed",
-      "claimsPublishable": 0,
-      "claimsBlocked": 15
+      "claimsPublishable": 4,
+      "claimsBlocked": 10
     },
     {
       "productId": "prod-polaris-freedom",

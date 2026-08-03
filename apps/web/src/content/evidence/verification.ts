@@ -366,16 +366,30 @@ const dolphinPremier: ProductVerification = {
       note: "Named the product but served a Classic 5 / Top 5 document. One of the two findings that withdrew the Dolphin Premier.",
     },
   ],
-  /* Deliberately empty. The Dolphin Premier's observations came from a
-     Maytronics dealer page; keeping them under a BuBlue's name would attach one
-     manufacturer's specification to another's machine. Identity is established;
-     nothing else about this product may be stated until a source for the Bubot
-     800P Gen2 is read. */
-  observations: [],
-  /* Also empty, and for a different reason: "not publicly stated" means we
-     looked at the maker's own source and it was silent. No BuBlue source has
-     been read at all, so claiming that would be a check nobody performed. */
-  notPubliclyStated: [],
+  /* The Dolphin Premier's observations are NOT here: they came from a
+     Maytronics dealer page and describe a different manufacturer's machine.
+     What follows was read from the BuBlue's own listing on 3 August 2026, and
+     every line is marked retailer-stated — BuBlue's own site was not reachable
+     for a product page that day. */
+  observations: [
+    { field: "powerType", value: "ac (corded)", sourceUrl: BUBOT_LISTING, sourceTitle: BUBOT_LISTING_TITLE, observedOn: BUBOT_READ, note: "Retailer-stated." },
+    { field: "dimensions", value: '19"L x 18"W x 9"H', sourceUrl: BUBOT_LISTING, sourceTitle: BUBOT_LISTING_TITLE, observedOn: BUBOT_READ, note: "Retailer-stated." },
+    { field: "surfacesCleaned", value: "Floor, wall, waterline and shallow areas", sourceUrl: BUBOT_LISTING, sourceTitle: BUBOT_LISTING_TITLE, observedOn: BUBOT_READ, note: "Retailer-stated, from the listing title." },
+    { field: "poolSizeSuitability", value: "Pools up to 1,076 sq ft", sourceUrl: BUBOT_LISTING, sourceTitle: BUBOT_LISTING_TITLE, observedOn: BUBOT_READ, note: "Retailer-stated, as an AREA. The 50 ft power cord is not a pool-length rating and must not be used as one." },
+    { field: "navigation", value: "Smart navigation with app control and scheduling", sourceUrl: BUBOT_LISTING, sourceTitle: BUBOT_LISTING_TITLE, observedOn: BUBOT_READ, note: "Retailer-stated." },
+    { field: "appSupport", value: "App control and scheduling", sourceUrl: BUBOT_LISTING, sourceTitle: BUBOT_LISTING_TITLE, observedOn: BUBOT_READ, note: "Retailer-stated." },
+  ],
+  notPubliclyStated: [
+    { field: "officialProductPageUrl", checked: [BUBOT_LISTING], note: "bubluepool.com did not resolve on 3 August 2026. Everything recorded for this product is retailer-sourced and none of it is presented as manufacturer-stated." },
+    { field: "manualUrl", checked: [BUBOT_LISTING], note: "Not linked from the listing." },
+    { field: "runtimeMins", checked: [BUBOT_LISTING], note: "Corded, so it runs for as long as the cycle lasts; no cycle time is stated." },
+    { field: "cableLengthFt", checked: [BUBOT_LISTING], note: "The owner's research gives a 50 ft cord. Not confirmed from the listing read, and deliberately not stored as a pool-length rating." },
+    { field: "filtrationMicrons", checked: [BUBOT_LISTING], note: "Dual filtration is claimed; no fineness is stated." },
+    { field: "suctionRate", checked: [BUBOT_LISTING], note: "'Powerful suction' is claimed; no figure is given." },
+    { field: "weightLbs", checked: [BUBOT_LISTING], note: "Not stated." },
+    { field: "warranty", checked: [BUBOT_LISTING], note: "No term stated on the listing." },
+    { field: "poolTypes", checked: [BUBOT_LISTING], note: "CONFLICTED, and stored as both. The listing title says inground; the owner's research found BuBlue's own FAQ saying above-ground. Both are carried in the catalogue so neither reading hides the product, and the disagreement is recorded here rather than resolved by picking one." },
+  ],
 };
 
 /* ------------------------------------------------------------------ */
@@ -933,6 +947,10 @@ const aiperSeagullSe: ProductVerification = {
 /* ------------------------------------------------------------------ */
 
 const OWNER_CONFIRMED = "2026-08-03";
+const V3_PAGE = "https://aiper.com/us/aiper-scuba-v3";
+const V3_TITLE = "Aiper Scuba V3 Cognitive AI Robotic Pool Cleaner — official US product page";
+const PROTEUS_LISTING = "https://www.amazon.com/dp/B083YWJ5PQ";
+const PROTEUS_TITLE = "Amazon US listing (B083YWJ5PQ) — Dolphin Proteus DX4 Plus";
 
 const dolphinProteusDx4Plus: ProductVerification = {
   productId: "prod-dolphin-proteus-dx4-plus",
@@ -944,19 +962,36 @@ const dolphinProteusDx4Plus: ProductVerification = {
     modelNumberSource: null,
     officialProductPageUrl: null,
     manual: null,
+    modelNumber: "99996207-LESW",
+    modelNumberSource: "https://www.amazon.com/dp/B083YWJ5PQ",
     identityIssue:
-      "Identity is owner-confirmed, not source-verified. Danny supplied ASIN B083YWJ5PQ on 3 August 2026 and confirmed the listing is the Proteus DX4 Plus. No manufacturer page has been read for this record, and Amazon blocks server-side reads of the listing, so no independent check stands behind the model name yet.",
+      "Owner-supplied on 3 August 2026 and READ the same day, which upgraded this from the owner's word to published fields: Brand 'Dolphin', Manufacturer 'MAYTRONICS US, INC.', Model Name 'Proteus DX4 plus'. One thing conflicts and is recorded rather than resolved — the owner's research names SKU 99996290-DX4, while the listing's own Model Number field reads 99996207-LESW. Maytronics part numbers carry a market/retailer suffix, so both may be genuine for different channels; the listing's own figure is stored because that is the one that was read. Maytronics ships Proteus DX3, DX4 and DX4 Plus, and the title names the Plus.",
   },
   sourceChecks: [
     {
-      url: "https://www.amazon.com/Dolphin-Automatic-Climbing-Waterline-Scrubber/dp/B083YWJ5PQ",
-      title: "Amazon listing supplied by the owner",
-      status: "not_rechecked",
-      note: "Supplied and confirmed by the owner on 3 August 2026. Not independently read: Amazon returns a bot-mitigation page to server-side requests.",
+      url: "https://www.amazon.com/dp/B083YWJ5PQ",
+      title: "Amazon US listing (B083YWJ5PQ) — Dolphin Proteus DX4 Plus",
+      status: "ok",
+      note: "Read 3 August 2026. Details table: Brand 'Dolphin', Manufacturer 'MAYTRONICS US, INC.', Model Name 'Proteus DX4 plus', Model Number '99996207-LESW', Power Source 'Corded Electric', Item Weight 18.5 pounds, Product Dimensions 22.2\"L x 17.6\"W x 12.8\"H. Title states 'Ideal for Pools up to 33 FT'.",
     },
   ],
-  observations: [],
-  notPubliclyStated: [],
+  observations: [
+    { field: "powerType", value: "Corded Electric", sourceUrl: PROTEUS_LISTING, sourceTitle: PROTEUS_TITLE, observedOn: OWNER_CONFIRMED, note: "Retailer-stated, not manufacturer-stated." },
+    { field: "poolSizeSuitability", value: "Pools up to 33 ft", sourceUrl: PROTEUS_LISTING, sourceTitle: PROTEUS_TITLE, observedOn: OWNER_CONFIRMED, note: "Retailer-stated. This is the DX4 PLUS: the ordinary Proteus DX4 is rated to 50 ft and its figure must not be borrowed." },
+    { field: "surfacesCleaned", value: "Floor, walls and sun ledges", sourceUrl: PROTEUS_LISTING, sourceTitle: PROTEUS_TITLE, observedOn: OWNER_CONFIRMED, note: "Retailer-stated." },
+    { field: "weightLbs", value: "18.5 pounds", sourceUrl: PROTEUS_LISTING, sourceTitle: PROTEUS_TITLE, observedOn: OWNER_CONFIRMED, note: "Retailer-stated." },
+    { field: "dimensions", value: '22.2"L x 17.6"W x 12.8"H', sourceUrl: PROTEUS_LISTING, sourceTitle: PROTEUS_TITLE, observedOn: OWNER_CONFIRMED, note: "Retailer-stated." },
+    { field: "filtration", value: "Top-load filter", sourceUrl: PROTEUS_LISTING, sourceTitle: PROTEUS_TITLE, observedOn: OWNER_CONFIRMED, note: "Retailer-stated; fineness is not given." },
+    { field: "navigation", value: "Smart navigation", sourceUrl: PROTEUS_LISTING, sourceTitle: PROTEUS_TITLE, observedOn: OWNER_CONFIRMED, note: "Retailer-stated; Maytronics' own name for the system is not given on this listing." },
+  ],
+  notPubliclyStated: [
+    { field: "officialProductPageUrl", checked: [PROTEUS_LISTING], note: "No Maytronics page for the Proteus DX4 Plus has been read. Everything above is retailer-sourced and none of it is presented as manufacturer-stated." },
+    { field: "manualUrl", checked: [PROTEUS_LISTING], note: "Not linked from the listing." },
+    { field: "runtimeMins", checked: [PROTEUS_LISTING], note: "No cycle time stated on the listing." },
+    { field: "filtrationMicrons", checked: [PROTEUS_LISTING], note: "Filter type is stated; fineness is not." },
+    { field: "cableLengthFt", checked: [PROTEUS_LISTING], note: "Corded, but no cable length is stated." },
+    { field: "warranty", checked: [PROTEUS_LISTING], note: "No term stated on the listing." },
+  ],
 };
 
 const aiperScubaV3AiVision: ProductVerification = {
@@ -969,19 +1004,37 @@ const aiperScubaV3AiVision: ProductVerification = {
     modelNumberSource: null,
     officialProductPageUrl: null,
     manual: null,
+    officialProductPageUrl: V3_PAGE,
     identityIssue:
-      "Identity is owner-confirmed, not source-verified. Danny supplied ASIN B0GG97427D on 3 August 2026 and confirmed the listing is the Scuba V3 AI Vision. AIPER sells Scuba S1, X1 and V3 as separate models, so this record must not be conflated with the Scuba X1 or S1 already held.",
+      "Owner-supplied on 3 August 2026. Aiper's own page for this machine is titled 'Scuba V3 Cognitive AI Robotic Pool Cleaner' — the model is the SCUBA V3, and 'AI Vision' is a tier descriptor rather than part of the name. The stored canonical name keeps the owner's wording because that is what the listing and the artwork both say, but anyone matching on model name should match on 'Scuba V3'. Aiper sells Scuba SE, S1, S1 Pro, X1 Essential, X1 Pro, X1 Pro Max and V3 with no published model number, so the models separate only by page URL and product name. The Amazon listing itself was not read: it returned a bot-mitigation page on the day of the check.",
   },
   sourceChecks: [
+    { url: V3_PAGE, title: V3_TITLE, status: "ok", note: "Read 3 August 2026. Titled 'Scuba V3 Cognitive AI Robotic Pool Cleaner'." },
     {
       url: "https://www.amazon.com/AIPER-Vision-Cordless-Robotic-Cleaner/dp/B0GG97427D",
       title: "Amazon listing supplied by the owner",
-      status: "not_rechecked",
-      note: "Supplied and confirmed by the owner on 3 August 2026. Not independently read: Amazon returns a bot-mitigation page to server-side requests.",
+      status: "unreadable",
+      note: "Supplied and confirmed by the owner on 3 August 2026. Returned a bot-mitigation page to server-side reads that day, so nothing on it has been verified here.",
     },
   ],
-  observations: [],
-  notPubliclyStated: [],
+  observations: [
+    { field: "powerType", value: "Cordless", sourceUrl: V3_PAGE, sourceTitle: V3_TITLE, observedOn: OWNER_CONFIRMED },
+    { field: "suctionRate", value: "4800 GPH", sourceUrl: V3_PAGE, sourceTitle: V3_TITLE, observedOn: OWNER_CONFIRMED },
+    { field: "surfacesCleaned", value: "floor, walls and waterline", sourceUrl: V3_PAGE, sourceTitle: V3_TITLE, observedOn: OWNER_CONFIRMED, note: "Aiper describes 'JetAssist horizontal waterline cleaning' and full floor coverage." },
+    { field: "navigation", value: "VisionPath™ adaptive path planning", sourceUrl: V3_PAGE, sourceTitle: V3_TITLE, observedOn: OWNER_CONFIRMED },
+    { field: "poolTypes", value: "In-ground", sourceUrl: V3_PAGE, sourceTitle: V3_TITLE, observedOn: OWNER_CONFIRMED },
+  ],
+  notPubliclyStated: [
+    { field: "modelNumber", checked: [V3_PAGE], note: "Aiper publishes no SKU for any Scuba model." },
+    { field: "manualUrl", checked: [V3_PAGE], note: "No manual index found on aiper.com." },
+    { field: "poolSizeSuitability", checked: [V3_PAGE], note: "The catalogue holds 1,614 sq ft from the owner's research. Aiper's own page states an AREA and no maximum length at all — which is why the schema carries both measures. The figure has not been re-read from the page itself." },
+    { field: "runtimeMins", checked: [V3_PAGE], note: "Not stated on the page read; the owner's research gives up to 180 minutes, 210 in Eco." },
+    { field: "chargeTimeHrs", checked: [V3_PAGE], note: "Not stated on the page read; the owner's research gives 5 hours." },
+    { field: "filtrationMicrons", checked: [V3_PAGE], note: "Not stated on the page read." },
+    { field: "weightLbs", checked: [V3_PAGE], note: "Not published." },
+    { field: "dimensions", checked: [V3_PAGE], note: "Not published." },
+    { field: "warranty", checked: [V3_PAGE], note: "No term stated on the product page." },
+  ],
 };
 
 /** Retired records. Real evidence about products no longer in the catalogue. */
