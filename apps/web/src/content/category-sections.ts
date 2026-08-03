@@ -18,6 +18,7 @@
 
 import type { DecisionCard } from "../components/DecisionCards.astro";
 import type { CoverageRow } from "../components/CoverageRows.astro";
+import type { SplitPanel } from "../components/DecisionSplit.astro";
 import type { HeroImage } from "../components/CategoryHero.astro";
 
 export interface DecisionSectionContent {
@@ -149,4 +150,73 @@ export const COVERAGE_SECTION: Record<string, CoverageSectionContent> = {
 
 export function coverageSectionFor(slug: string | undefined): CoverageSectionContent | undefined {
   return slug ? COVERAGE_SECTION[slug] : undefined;
+}
+
+/* ============================================================
+   Section 4 — the binary power choice.
+
+   Pool wording follows the approved Notion research ("Corded vs
+   cordless robotic pool cleaners"), including its boundary rule:
+   this section owns "corded robotic pool cleaner" (590, KD 0)
+   and must NOT be optimised for "cordless robotic pool cleaner"
+   (22,200) — that term belongs to the dedicated cordless guide.
+   The exact cordless phrase is therefore avoided here, and the
+   section stays short.
+
+   No outbound link yet: /best-robots/robotic-pool-cleaners/
+   cordless/ does not exist, and the research forbids promoting
+   an unfinished destination. Add the link when that page ships.
+   ============================================================ */
+
+export interface SplitSectionContent {
+  id: string;
+  title: string;
+  intro: string;
+  panels: SplitPanel[];
+}
+
+export const SPLIT_SECTION: Record<string, SplitSectionContent> = {
+  "robotic-pool-cleaners": {
+    id: "power",
+    title: "Corded vs cordless robotic pool cleaners",
+
+    /* 77 words. Carries "corded robotic pool cleaner" (590) once, naturally. */
+    intro:
+      "Power is the first real fork in the decision. A corded robotic pool cleaner draws " +
+      "continuous power from a transformer at the poolside, so a long cycle is never cut " +
+      "short by a battery. A cordless machine charges between runs and goes in with no cable " +
+      "to manage. Neither is better in the abstract — it comes down to the size of your pool, " +
+      "how you lift the robot in and out, and how much cable you are willing to untangle.",
+
+    panels: [
+      {
+        label: "CORDED",
+        title: "When corded is the stronger choice",
+        points: [
+          "Continuous power, so a full cycle never stops half way through.",
+          "Better suited to longer pools, where a battery can run flat before the floor is done.",
+          "Cycle length stays predictable — the same clean every run.",
+        ],
+        tradeOff:
+          "The cable has to be managed, and it can twist on a freeform pool or one with a lot " +
+          "of corners.",
+      },
+      {
+        label: "CORDLESS",
+        title: "When cordless is the stronger choice",
+        points: [
+          "Nothing to plug in and nothing trailing across the deck.",
+          "Quicker to drop in for a short run without setting up a transformer.",
+          "Easier to move between a pool and a spa, or to store away.",
+        ],
+        tradeOff:
+          "Runtime caps how much ground it covers in one go, and a bigger pool may need a " +
+          "recharge part-way through.",
+      },
+    ],
+  },
+};
+
+export function splitSectionFor(slug: string | undefined): SplitSectionContent | undefined {
+  return slug ? SPLIT_SECTION[slug] : undefined;
 }

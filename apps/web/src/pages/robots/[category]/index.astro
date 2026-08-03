@@ -10,7 +10,8 @@ import CategoryHero from "../../../components/CategoryHero.astro";
 import { heroFor } from "../../../content/category-hero";
 import DecisionCards from "../../../components/DecisionCards.astro";
 import CoverageRows from "../../../components/CoverageRows.astro";
-import { decisionSectionFor, coverageSectionFor } from "../../../content/category-sections";
+import DecisionSplit from "../../../components/DecisionSplit.astro";
+import { decisionSectionFor, coverageSectionFor, splitSectionFor } from "../../../content/category-sections";
 
 const { category } = Astro.params;
 const db = getDb(Astro.locals);
@@ -43,6 +44,7 @@ const crumbs = breadcrumbsFor(Astro.url.pathname);
 const hero = heroFor(category);
 const decision = decisionSectionFor(category);
 const coverage = coverageSectionFor(category);
+const split = splitSectionFor(category);
 ---
 
 <Base
@@ -88,6 +90,10 @@ const coverage = coverageSectionFor(category);
       image={coverage.image}
       rows={coverage.rows}
     />
+  )}
+
+  {split && (
+    <DecisionSplit id={split.id} title={split.title} intro={split.intro} panels={split.panels} />
   )}
 
   {products.length === 0 ? (

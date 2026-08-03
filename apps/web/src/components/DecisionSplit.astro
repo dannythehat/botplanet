@@ -1,0 +1,195 @@
+---
+/* ============================================================
+   BotPlanet — Split decision section (H2 + intro + two panels)
+
+   Section 4 on every category page, for the one binary choice
+   each category has: corded or cordless here, mains or battery,
+   wired or wireless elsewhere.
+
+   Deliberately a third element type. Two wide panels rather
+   than a card grid or hairline rows, so the page keeps its
+   visual rhythm instead of repeating one component.
+
+   Kept short by design: the detail belongs on the dedicated
+   guide, not on the category hub.
+   ============================================================ */
+
+export interface SplitPanel {
+  /** Short mono label, e.g. "CORDED". */
+  label: string;
+  /** The H3, e.g. "When corded is the stronger choice". */
+  title: string;
+  /** Two or three reasons to choose this side. */
+  points: string[];
+  /** The honest downside. Always shown — never omit it. */
+  tradeOff: string;
+}
+
+interface Props {
+  id?: string;
+  /** The H2. Carries the section's secondary keyword. */
+  title: string;
+  /** 60–100 words. */
+  intro: string;
+  panels: SplitPanel[];
+}
+
+const { id, title, intro, panels } = Astro.props;
+---
+
+<section class="split" id={id}>
+  <div class="split__head">
+    <h2 class="split__title">{title}</h2>
+    <p class="split__intro">{intro}</p>
+  </div>
+
+  <div class="split__grid">
+    {panels.map((panel) => (
+      <article class="spanel">
+        <span class="spanel__label">{panel.label}</span>
+        <h3 class="spanel__title">{panel.title}</h3>
+
+        <ul class="spanel__points">
+          {panel.points.map((point) => <li>{point}</li>)}
+        </ul>
+
+        <p class="spanel__tradeoff">
+          <span class="spanel__tradeoff-label">Trade-off</span>
+          {panel.tradeOff}
+        </p>
+      </article>
+    ))}
+  </div>
+</section>
+
+<style>
+  .split {
+    margin: 0 0 var(--space-2xl, 3rem);
+  }
+
+  /* ---------- heading + intro ---------- */
+  .split__head {
+    max-width: 62ch;
+    margin-bottom: clamp(1.5rem, 3.5vw, 2.25rem);
+  }
+
+  .split__title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.6rem, 4.4vw, 2.35rem);
+    line-height: 1.14;
+    letter-spacing: -0.018em;
+    text-wrap: balance;
+    color: var(--text-primary);
+  }
+
+  .split__intro {
+    margin: 0.9rem 0 0;
+    font-size: 1.0625rem;
+    line-height: 1.62;
+    color: var(--text-secondary);
+  }
+
+  /* ---------- panels ---------- */
+  .split__grid {
+    display: grid;
+    gap: clamp(0.9rem, 2vw, 1.25rem);
+    grid-template-columns: 1fr;
+  }
+
+  .spanel {
+    position: relative;
+    padding: clamp(1.35rem, 3.4vw, 1.9rem);
+    border: 1px solid rgba(207, 213, 221, 0.16);
+    border-radius: 14px;
+    overflow: hidden;
+    background:
+      radial-gradient(ellipse at 0% 0%, rgba(232, 235, 239, 0.055), transparent 62%),
+      linear-gradient(180deg, #11151a, #080a0d);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.05),
+      0 18px 44px rgba(0, 0, 0, 0.4);
+  }
+
+  .spanel__label {
+    display: inline-block;
+    margin-bottom: 0.85rem;
+    padding: 0.28rem 0.6rem;
+    border: 1px solid rgba(202, 208, 216, 0.3);
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    color: var(--text-secondary);
+  }
+
+  .spanel__title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.2rem;
+    line-height: 1.24;
+    letter-spacing: -0.01em;
+    color: var(--text-primary);
+  }
+
+  .spanel__points {
+    margin: 1.1rem 0 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.62rem;
+  }
+
+  .spanel__points li {
+    position: relative;
+    padding-left: 1.15rem;
+    font-size: 0.97rem;
+    line-height: 1.56;
+    color: var(--text-secondary);
+  }
+
+  .spanel__points li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.63em;
+    width: 7px;
+    height: 1px;
+    background: linear-gradient(90deg, #f1f3f5, #767e88);
+  }
+
+  /* the downside, set apart so it reads as a real caveat */
+  .spanel__tradeoff {
+    margin: 1.15rem 0 0;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(203, 210, 218, 0.14);
+    font-size: 0.92rem;
+    line-height: 1.55;
+    color: var(--text-tertiary);
+  }
+
+  .spanel__tradeoff-label {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-quaternary);
+  }
+
+  /* ---------- wider screens ---------- */
+  @media (min-width: 820px) {
+    .split__intro {
+      font-size: 1.1875rem;
+    }
+
+    .split__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

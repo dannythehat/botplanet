@@ -8,7 +8,8 @@ import CategoryHero from "../../components/CategoryHero.astro";
 import { heroFor } from "../../content/category-hero";
 import DecisionCards from "../../components/DecisionCards.astro";
 import CoverageRows from "../../components/CoverageRows.astro";
-import { decisionSectionFor, coverageSectionFor } from "../../content/category-sections";
+import DecisionSplit from "../../components/DecisionSplit.astro";
+import { decisionSectionFor, coverageSectionFor, splitSectionFor } from "../../content/category-sections";
 
 import "../../styles/tokens.css";
 import "../../styles/base.css";
@@ -20,6 +21,7 @@ import "../../styles/metal-theme.css";
 const hero = heroFor("robotic-pool-cleaners")!;
 const decision = decisionSectionFor("robotic-pool-cleaners")!;
 const coverage = coverageSectionFor("robotic-pool-cleaners")!;
+const split = splitSectionFor("robotic-pool-cleaners")!;
 ---
 
 <html lang="en">
@@ -53,6 +55,7 @@ const coverage = coverageSectionFor("robotic-pool-cleaners")!;
         image={coverage.image}
         rows={coverage.rows}
       />
+      <DecisionSplit id={split.id} title={split.title} intro={split.intro} panels={split.panels} />
     </main>
   </body>
 </html>
