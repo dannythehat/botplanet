@@ -311,24 +311,24 @@
   },
   {
     "source": "/media/lawn-category/feature-mobile.webp",
-    "sourceWidth": 941,
-    "sourceHeight": 1672,
+    "sourceWidth": 857,
+    "sourceHeight": 1588,
     "derivatives": [
       {
         "id": "media-lawn-category-feature-mobile-webp-360",
         "src": "/media/lawn-category/feature-mobile-360w.webp",
         "width": 360,
-        "height": 640,
-        "bytes": 20734,
-        "checksum": "sha256:449ba64ab0d3b5673682d17c49c9c471a2ea02f521c6661d2cd30644bfb0b99f"
+        "height": 667,
+        "bytes": 18304,
+        "checksum": "sha256:2f601f4458198072216c8ce96630e2a668403e92c1cd73b0739747c953b09e10"
       },
       {
         "id": "media-lawn-category-feature-mobile-webp-640",
         "src": "/media/lawn-category/feature-mobile-640w.webp",
         "width": 640,
-        "height": 1137,
-        "bytes": 65732,
-        "checksum": "sha256:d469b277ad0892be812f061b89578a73264e62f9acab865158449ede128eafe1"
+        "height": 1186,
+        "bytes": 49342,
+        "checksum": "sha256:5c48debdba76f7cb2cf2ea3dc97dff507bd1bf3a5d1fd32e6ab53c5952d284d3"
       }
     ]
   },
@@ -373,24 +373,24 @@
   },
   {
     "source": "/media/floor-category/feature-mobile.webp",
-    "sourceWidth": 941,
-    "sourceHeight": 1672,
+    "sourceWidth": 857,
+    "sourceHeight": 1588,
     "derivatives": [
       {
         "id": "media-floor-category-feature-mobile-webp-360",
         "src": "/media/floor-category/feature-mobile-360w.webp",
         "width": 360,
-        "height": 640,
-        "bytes": 11516,
-        "checksum": "sha256:72054e88c7418e1d387ce1d49f28a90e0cb7491c94b8223bb87629ebd9d96c7d"
+        "height": 667,
+        "bytes": 8602,
+        "checksum": "sha256:e0c21806a91eef503e2645ca74aa70cff111cbe831063f007ac176ea8240e84d"
       },
       {
         "id": "media-floor-category-feature-mobile-webp-640",
         "src": "/media/floor-category/feature-mobile-640w.webp",
         "width": 640,
-        "height": 1137,
-        "bytes": 28158,
-        "checksum": "sha256:7893c0776d4df4450a8a8a32f981ed71bcf7aa3c96e0fd2652adbd8f61977060"
+        "height": 1186,
+        "bytes": 22144,
+        "checksum": "sha256:9de05c23ff6c80705bca6c288d14791920926f21d88ad8d944f69dd4f6809d61"
       }
     ]
   },
