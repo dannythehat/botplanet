@@ -65,32 +65,34 @@
     {
       "productId": "prod-dolphin-premier",
       "canonicalUrl": "https://botplanet.io/robots/robotic-pool-cleaners/dolphin-premier/",
-      "verifiedOffers": 0,
-      "preferredOfferId": null,
+      "verifiedOffers": 1,
+      "preferredOfferId": "offer-prod-dolphin-premier-ret-amazon",
       "preferredOfferAudit": [
-        "0 offer(s) exist for this product",
-        "0 from an approved retailer",
-        "no approved offer — nothing is featured"
+        "1 offer(s) exist for this product",
+        "1 from an approved retailer",
+        "ranked by exact-match confidence, then stock, then delivered price",
+        "chosen: offer-prod-dolphin-premier-ret-amazon (verified_exact)"
       ],
       "commissionUsedAsTieBreak": false,
-      "retailer": null,
-      "exactProductIdentifier": null,
-      "identifierKind": null,
+      "retailer": "ret-amazon",
+      "exactProductIdentifier": "B0GTYX922J",
+      "identifierKind": "asin",
       "market": "us",
       "priceState": "not_published",
       "stockState": "unknown",
-      "deliveryState": "unknown",
-      "warrantyRoute": null,
-      "lastChecked": null,
-      "freshness": "unknown",
-      "affiliateProgramme": null,
-      "goPath": null,
+      "deliveryState": "not_exposed_by_source",
+      "warrantyRoute": "Manufacturer warranty term not confirmed",
+      "lastChecked": "2026-07-31",
+      "freshness": "indicative",
+      "affiliateProgramme": "prog-amazon-us",
+      "goPath": "/go/pool-dolphin-premier-amazon",
       "schemaEligible": false,
       "blockers": [
-        "no approved offer",
-        "no exact Amazon destination — only a search fallback"
+        "no current price from an approved source",
+        "stock state unknown",
+        "not eligible for Offer structured data"
       ],
-      "nextAction": "Capture an exact Amazon ASIN for this product, then re-run the destination check."
+      "nextAction": "Obtain price and availability through the Amazon Creators API so the offer can carry a current price and enter Offer schema."
     },
     {
       "productId": "prod-polaris-freedom",
@@ -243,18 +245,18 @@
     {
       "productId": "prod-aiper-scuba-s1",
       "canonicalUrl": "https://botplanet.io/robots/robotic-pool-cleaners/aiper-scuba-s1/",
-      "verifiedOffers": 0,
+      "verifiedOffers": 1,
       "preferredOfferId": "offer-prod-aiper-scuba-s1-ret-amazon",
       "preferredOfferAudit": [
         "1 offer(s) exist for this product",
         "1 from an approved retailer",
         "ranked by exact-match confidence, then stock, then delivered price",
-        "chosen: offer-prod-aiper-scuba-s1-ret-amazon (search_only)"
+        "chosen: offer-prod-aiper-scuba-s1-ret-amazon (verified_exact)"
       ],
       "commissionUsedAsTieBreak": false,
       "retailer": "ret-amazon",
-      "exactProductIdentifier": null,
-      "identifierKind": null,
+      "exactProductIdentifier": "B0FJ818NNZ",
+      "identifierKind": "asin",
       "market": "us",
       "priceState": "not_published",
       "stockState": "unknown",
@@ -268,10 +270,9 @@
       "blockers": [
         "no current price from an approved source",
         "stock state unknown",
-        "no exact Amazon destination — only a search fallback",
         "not eligible for Offer structured data"
       ],
-      "nextAction": "Capture an exact Amazon ASIN for this product, then re-run the destination check."
+      "nextAction": "Obtain price and availability through the Amazon Creators API so the offer can carry a current price and enter Offer schema."
     },
     {
       "productId": "prod-aiper-seagull-se",

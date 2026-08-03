@@ -137,7 +137,11 @@ describe("exact model identity", () => {
     expect(names).toContain("Polaris FREEDOM Cordless Robotic Cleaner");
     expect(names).toContain("Aiper Scuba S1 Cordless Robotic Pool Cleaner");
     expect(names).toContain("Aiper Seagull SE");
-    expect(names).toContain("Dolphin Premier");
+    // This slot held the Dolphin Premier until 3 August 2026. The record now
+    // holds a BuBlue; the point of the test is unchanged — every placeholder
+    // names exactly one machine, and no two name the same one.
+    expect(names).toContain("BuBlue Bubot 800P Gen2");
+    expect(names).not.toContain("Dolphin Premier");
     expect(new Set(names).size).toBe(names.length);
   });
 });

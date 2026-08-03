@@ -78,6 +78,12 @@ const AMAZON_ASINS: { productId: string; asin: string; sourceUrl: string }[] = [
   // model number, so the owner's confirmation is doing the work a SKU normally
   // would — recorded as such in evidence/verification.ts rather than implied.
   { productId: "prod-wybot-c1", asin: "B0GYWJMNWK", sourceUrl: "Owner-confirmed 2026-08-03: https://www.amazon.com/WYBOT-C1-Cordless-Inground-Professional/dp/B0GYWJMNWK" },
+  // Owner-supplied on 3 August 2026 and, unusually, MACHINE-READ. Amazon
+  // normally serves a bot-mitigation page here; both of these returned real
+  // markup, so their identity rests on published fields rather than on the
+  // owner's word. See IDENTITY_CHECKS below for what each page actually said.
+  { productId: "prod-dolphin-premier", asin: "B0GTYX922J", sourceUrl: "Owner-supplied 2026-08-03, read the same day: https://www.amazon.com/BUBLUE-Bubot-800P-Navigation-Scheduling/dp/B0GTYX922J" },
+  { productId: "prod-aiper-scuba-s1", asin: "B0FJ818NNZ", sourceUrl: "Owner-supplied 2026-08-03, read the same day: https://www.amazon.com/Waterline-Cleaning-Filtration-Navigation-High-Precision/dp/B0FJ818NNZ" },
 ];
 
 
@@ -108,6 +114,22 @@ interface IdentityCheck {
 }
 
 export const IDENTITY_CHECKS: Record<string, IdentityCheck> = {
+  // Read on 3 August 2026. This record now holds a BuBlue, not a Dolphin —
+  // see content/product-names.ts and the verification record for the move.
+  "prod-dolphin-premier": {
+    asin: "B0GTYX922J",
+    confirmed: true,
+    evidence:
+      "Details table gives Brand 'BUBLUE', Manufacturer 'BUBLUE', Model Number 'Bubot 800P gen2', Power Source 'ac' and Product Dimensions 19\"L x 18\"W x 9\"H; Amazon's canonical URL is /BUBLUE-Bubot-800P-Navigation-Scheduling/. Title: '(2026 New) BUBLUE Bubot 800P Gen2 Robotic Pool Vacuum, Cleans Floor/Wall/Waterline/Shallow Area'. The Model Number field settles the 800P / 880P question outright.",
+    checkedOn: "2026-08-03",
+  },
+  "prod-aiper-scuba-s1": {
+    asin: "B0FJ818NNZ",
+    confirmed: true,
+    evidence:
+      "Details table gives Brand 'AIPER', Manufacturer 'Aiper', Model Name 'Scuba S1' and Power Source 'Battery Powered'; canonical URL /Waterline-Cleaning-Filtration-Navigation-High-Precision/. Title: 'Aiper Scuba S1 Robotic Pool Cleaner, Wall & Waterline Cleaning, Dual Filtration, Extended 180-Min Battery Life'. The Model NUMBER field reads '1', which is junk and carries no weight either way — the match rests on brand plus model name plus a title naming the S1, the same basis the E10 was accepted on. It names the S1 and not the S1 Pro, which is the distinction that matters for this product.",
+    checkedOn: "2026-08-03",
+  },
   "prod-betta-se-plus": {
     asin: "B0CVMQ3XBX",
     confirmed: true,
@@ -182,9 +204,14 @@ const NO_AMAZON_DESTINATION = [
   // B0GYWJMNWK, on 3 August 2026 and it now sits in AMAZON_ASINS above. The
   // history stays here because "we once shipped a dead link for this product"
   // is the fact a reviewer needs, and deleting the note would erase it.
-  "prod-dolphin-premier",
-  // Both resolved by the SerpApi run and moved into AMAZON_ASINS above.
-  "prod-aiper-scuba-s1",
+  // Dolphin Premier was here too, on the owner's browser search finding no
+  // Amazon US listing at all. That finding stands and is kept in
+  // SEARCH_FINDINGS: the DOLPHIN is still not sold there. The record itself no
+  // longer holds a Dolphin — the owner replaced it with a BuBlue on 3 August
+  // 2026, and the BuBlue does have a listing.
+  //
+  // Aiper Scuba S1 was here as well, every candidate having been a sibling.
+  // The owner supplied a listing that names the S1 outright.
 ];
 
 export const DESTINATIONS: ProductDestination[] = [

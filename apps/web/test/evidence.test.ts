@@ -12,7 +12,8 @@ import {
 } from "../src/content/evidence/derive";
 import { FIELD_REGISTRY, TOTAL_REGISTRY_WEIGHT, fieldApplies } from "../src/content/evidence/field-registry";
 import { RECONCILIATION, PUBLISHABLE_OUTCOMES, reconciliationCounts } from "../src/content/evidence/reconciliation";
-import { VERIFICATIONS, VERIFICATION_DATE } from "../src/content/evidence/verification";
+import { RETIRED_VERIFICATIONS, VERIFICATIONS, VERIFICATION_DATE } from "../src/content/evidence/verification";
+import { DESTINATIONS } from "../src/content/commerce/destinations";
 import { buildClaimLedger, NEVER_EMITTED } from "../src/content/evidence/claims";
 import { classifySource, RETAILER_HOSTED_MANUFACTURER_SOURCES } from "../src/content/evidence/sources";
 import { durationsInMinutes, satisfiesBound, upperBoundMinutes } from "../src/content/evidence/bounds";
@@ -186,7 +187,10 @@ describe("live verification", () => {
   });
 
   it("refuses a manual that covers a different model", () => {
-    const premier = VERIFICATIONS.find((v) => v.productId === "prod-dolphin-premier")!;
+    // The Dolphin Premier left the catalogue on 3 August 2026, replaced by a
+    // BuBlue at the owner's direction. The finding that refused its manual is
+    // not thereby undone — it moved to the retired registry with the record.
+    const premier = RETIRED_VERIFICATIONS.find((v) => v.identity.canonicalName === "Dolphin Premier")!;
     expect(premier.identity.manual).toBeNull();
     expect(premier.identity.identityIssue).toContain("Classic 5");
   });
@@ -261,17 +265,21 @@ describe("field states", () => {
    * The allowance is scoped to that one product on purpose. Any OTHER product
    * drifting into these states still fails, which is what these tests are for.
    */
-  const AWAITING_REVERIFICATION = "prod-aiper-scuba-x1";
+  const AWAITING_REVERIFICATION = new Set([
+    // Moved from the Scuba X1 Essential to the X1 Pro.
+    "prod-aiper-scuba-x1",
+    // Moved from the Maytronics Dolphin Premier to the BuBlue Bubot 800P Gen2.
+    "prod-dolphin-premier",
+  ]);
 
   it("leaves nothing in the 'nobody looked' state, except a record awaiting re-verification", () => {
     const stranded = LEDGER.fields.filter((f) => f.state === "unknown");
-    expect(new Set(stranded.map((f) => f.productId))).toEqual(new Set([AWAITING_REVERIFICATION]));
+    for (const f of stranded) expect(AWAITING_REVERIFICATION.has(f.productId)).toBe(true);
   });
 
   it("leaves nothing unverified, except a record awaiting re-verification", () => {
     const pending = LEDGER.fields.filter((f) => f.state === "pending_verification");
-    expect(new Set(pending.map((f) => f.productId)).size).toBeLessThanOrEqual(1);
-    for (const f of pending) expect(f.productId).toBe(AWAITING_REVERIFICATION);
+    for (const f of pending) expect(AWAITING_REVERIFICATION.has(f.productId)).toBe(true);
     // Never earlier than the pass. A record re-checked later carries its own
     // date; one dated before the pass would mean stale evidence had crept back.
     for (const e of LEDGER.evidence) expect(e.verifiedDate >= VERIFICATION_DATE).toBe(true);
@@ -327,9 +335,17 @@ describe("conflicts", () => {
     expect(field.publishable).toBe(false);
   });
 
-  it("holds a conflict where the winning source's own figure is not credible", () => {
-    const premier = LEDGER.conflicts.find((c) => c.productId === "prod-dolphin-premier" && c.field === "poolSizeSuitability")!;
-    expect(premier.suppressed).toBe(true);
+  it("records a figure verbatim even when the source's own figure is not credible", () => {
+    // The Dolphin Premier's dealer published a maximum pool length of "55 in",
+    // which is almost certainly a typo for feet. The rule it demonstrated —
+    // record what the source printed, never a correction the source never made
+    // — is what the retired record still holds. The conflict itself left the
+    // live ledger with the product on 3 August 2026.
+    const premier = RETIRED_VERIFICATIONS.find((v) => v.identity.canonicalName === "Dolphin Premier")!;
+    const size = premier.observations.find((o) => o.field === "poolSizeSuitability")!;
+    expect(size.value).toContain("55 in");
+    expect(size.note).toMatch(/typographical error/i);
+    expect(size.note).toMatch(/does not publish a corrected figure/i);
   });
 
   it("lists every value in the conflict with the source it came from", () => {
@@ -821,52 +837,40 @@ describe("review-writing readiness rule", () => {
   });
 });
 
-describe("Dolphin Premier — launch candidate under review", () => {
-  const premier = REPORT.products.find((p) => p.slug === "dolphin-premier")!;
+/**
+ * The Dolphin Premier was BotPlanet's weakest-identified candidate and was
+ * withdrawn on 31 July 2026. On 3 August the owner replaced it with the BuBlue
+ * Bubot 800P Gen2, so it is no longer in the live ledger.
+ *
+ * These assertions moved to the retired registry rather than being deleted.
+ * Everything Job 8 established about the Dolphin is still true about the
+ * Dolphin, and the reason BotPlanet would not sell it is exactly the sort of
+ * finding that must not evaporate the moment the product leaves the page.
+ */
+describe("Dolphin Premier — retired, and its findings kept", () => {
+  const premier = RETIRED_VERIFICATIONS.find((v) => v.identity.canonicalName === "Dolphin Premier")!;
 
-  it("stays in the ledger and the launch inventory", () => {
+  it("is out of the live registry and into the retired one", () => {
     expect(premier).toBeDefined();
-    expect(PRODUCTS["dolphin-premier"]).toBeDefined();
+    expect(VERIFICATIONS.some((v) => v.identity.canonicalName === "Dolphin Premier")).toBe(false);
   });
 
-  it("is structurally valid, factually evidenced and safe for limited factual use", () => {
-    expect(premier.publication.structurallyValid).toBe(true);
-    expect(premier.publication.factuallyEvidenced).toBe(true);
-    expect(premier.publication.safeForLimitedFactualUse).toBe(true);
+  it("keeps the identity weaknesses that withdrew it", () => {
+    expect(premier.identity.officialProductPageUrl).toBeNull();
+    expect(premier.identity.manual).toBeNull();
+    expect(premier.identity.modelNumber).toBeNull();
+    expect(premier.identity.identityIssue).toContain("Classic 5");
+    expect(premier.identity.identityIssue).toMatch(/weakest-identified/i);
   });
 
-  it("carries the dealer-source qualification", () => {
-    expect(premier.evidenceQualification).toContain("dealer-sourced");
-    expect(premier.evidenceQualification).toContain("none is presented as manufacturer-stated");
+  it("keeps its evidence, all of it dealer-sourced and none of it manufacturer-stated", () => {
+    expect(premier.observations.length).toBeGreaterThan(5);
+    for (const o of premier.observations) expect(o.sourceUrl).toContain("premierrobotic.com");
+    expect(premier.identity.brand).toBe("Maytronics (Dolphin)");
   });
 
-  it("is excluded from review writing, comparison and BotMatch", () => {
-    expect(premier.publication.readyForReviewWriting).toBe(false);
-    expect(premier.publication.readyForComparison).toBe(false);
-    expect(premier.publication.readyForBotMatch).toBe(false);
-  });
-
-  it("is typed as a candidate under review", () => {
-    expect(premier.launchStatus).toBe("candidate_under_review");
-  });
-
-  it("lists every required blocker", () => {
-    const blockers = premier.publicationBlockers.join(" | ");
-    expect(blockers).toContain("no accepted official manufacturer page");
-    expect(blockers).toContain("no accepted manual");
-    expect(blockers).toContain("no reliably established model number");
-    expect(blockers).toContain("unresolved conflict on poolSizeSuitability");
-    expect(blockers).toContain("manufacturer identity/evidence weakness");
-    expect(blockers).toContain(`${REVIEW_WEIGHTED_THRESHOLD}% floor`);
-  });
-
-  it("presents no dealer-derived statement as manufacturer-stated", () => {
-    const mine = LEDGER.evidence.filter((e) => e.productId === premier.productId);
-    for (const e of mine) {
-      expect(e.label).not.toBe("manufacturer_stated");
-      expect(e.label).not.toBe("manual_verified");
-    }
-    expect(REPORT.issues.filter((i) => i.rule === "no_dealer_as_manufacturer")).toEqual([]);
+  it("never acquired a destination, because it is not sold on Amazon US", () => {
+    expect(DESTINATIONS.some((d) => d.exactModel === "Dolphin Premier")).toBe(false);
   });
 });
 
@@ -925,10 +929,17 @@ describe("warranty wording", () => {
   });
 
   it("never promotes a dealer's term to the product's canonical warranty", () => {
-    const premier = REPORT.products.find((p) => p.slug === "dolphin-premier")!;
-    expect(premier.warranty.status).toBe("not_confirmed");
-    expect(premier.warranty.internalReason).toContain("dealer");
-    expect(claims.some((c) => c.productId === premier.productId && c.id.endsWith("-warranty"))).toBe(false);
+    // The Dolphin Premier's only warranty figure came from a dealer, and was
+    // marked as applying to that dealer's offer rather than to the product.
+    // The record retired with the product; the marking is the thing that had
+    // to survive, and it did.
+    const premier = RETIRED_VERIFICATIONS.find((v) => v.identity.canonicalName === "Dolphin Premier")!;
+    const warranty = premier.observations.find((o) => o.field === "warranty")!;
+    expect(warranty.applicability).toMatch(/dealer/i);
+    // And no live product carries a warranty claim sourced from a dealer.
+    for (const p of REPORT.products) {
+      if (p.warranty.status === "confirmed") expect(p.warranty.internalReason ?? "").not.toMatch(/dealer/i);
+    }
   });
 
   it("confirms a term only when the manufacturer states it", () => {

@@ -7,7 +7,7 @@ import { breadcrumbsFor } from "../../../lib/routing";
 import { buildOffers, publicationFor } from "../../../lib/offer-truth";
 import { retailer } from "../../../content/commerce/registry";
 import { catalogueStatusOf, CATALOGUE_WITHDRAWALS } from "../../../content/products";
-import { displayName } from "../../../content/product-names";
+import { displayName, displayBrand } from "../../../content/product-names";
 import { latestAcceptedForProduct } from "../../../lib/providers/refresh-store";
 
 const { category, slug } = Astro.params;
@@ -84,7 +84,7 @@ const crumbs = breadcrumbsFor(Astro.url.pathname, shownName);
         <span class="pill class">{titleCase(product.productClass)}</span>
         <span class="pill">{titleCase(product.powerType)}</span>
         <span class="pill">{(product.environments as string[]).map(titleCase).join(" / ")}</span>
-        <span class="pill">{brand?.name}</span>
+        <span class="pill">{displayBrand(product.id, brand?.name)}</span>
       </div>
     </div>
     <a class="btn primary" href={`/botmatch/${category}/`}>Is this right for my pool?</a>

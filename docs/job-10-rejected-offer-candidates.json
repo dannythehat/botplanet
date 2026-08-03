@@ -1,28 +1,14 @@
 {
   "generatedFor": "2026-07-31",
-  "total": 17,
+  "total": 15,
   "byRule": {
-    "search_not_offer": 5,
+    "search_not_offer": 3,
     "refurbished_or_used": 1,
     "sibling_model": 2,
     "wrong_region": 1,
     "unclear_seller": 8
   },
   "rows": [
-    {
-      "productId": "prod-dolphin-premier",
-      "retailerId": "ret-amazon",
-      "candidate": "amazon.com/s?k=Dolphin Premier",
-      "reason": "A search-results page is not an offer: it does not identify a single product, a seller, a price or a stock state, and the customer still has to choose. Kept as a fallback click destination, refused as a verified offer.",
-      "rule": "search_not_offer"
-    },
-    {
-      "productId": "prod-aiper-scuba-s1",
-      "retailerId": "ret-amazon",
-      "candidate": "amazon.com/s?k=Aiper Scuba S1 Cordless Robotic Pool Cleaner",
-      "reason": "A search-results page is not an offer: it does not identify a single product, a seller, a price or a stock state, and the customer still has to choose. Kept as a fallback click destination, refused as a verified offer.",
-      "rule": "search_not_offer"
-    },
     {
       "productId": "prod-wybot-c1",
       "retailerId": "ret-amazon",

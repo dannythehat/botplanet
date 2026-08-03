@@ -28,7 +28,9 @@ import { buyNew, gate, matchIdentity, runRefresh } from "../src/lib/providers/re
 import { AWAITING_DISCOVERY, EXPECTED_IDENTITIES } from "../src/lib/providers/expected-identity";
 import type { BuyingOption } from "../src/lib/providers/amazon-provider";
 import { AMAZON_ASSOCIATE_TAG, AMAZON_ASSOCIATE_TAG_STATUS, amazonDestination } from "../src/lib/site";
-import { ACTIVE_PRODUCTS, CATALOGUE_WITHDRAWALS, catalogueStatusOf, productEditorialById } from "../src/content/products";
+import { ACTIVE_PRODUCTS, CATALOGUE_WITHDRAWALS, LIFTED_WITHDRAWALS, catalogueStatusOf, productEditorialById } from "../src/content/products";
+import { PRODUCT_NAME_OVERRIDES, wrongSlugs } from "../src/content/product-names";
+import { RETIRED_VERIFICATIONS } from "../src/content/evidence/verification";
 import { deriveLedger } from "../src/content/evidence/derive";
 import { SERPAPI_OBSERVATIONS, SERPAPI_REJECTIONS, SERPAPI_RUN_CREDITS, SERPAPI_UNRESOLVED } from "../src/content/commerce/serpapi-observations";
 
@@ -148,15 +150,16 @@ describe("exact-product destinations", () => {
   it("captures an ASIN for five products and refuses to invent the rest", () => {
     const exact = DESTINATIONS.filter((d) => d.confidence === "researched_exact" || d.confidence === "verified_exact");
     const search = DESTINATIONS.filter((d) => d.confidence === "search_only");
-    // Ten: seven after the SerpApi discovery run resolved the E10 and the
-    // Seagull SE, plus the Proteus DX4 Plus, the Scuba V3 AI Vision and a
-    // replacement WYBOT C1, whose ASINs the owner supplied and confirmed on
-    // 3 August 2026.
-    // Two remain search-only: the Aiper Scuba S1, where every candidate was a
-    // sibling or contradicted itself, and the Dolphin Premier, which is not
-    // sold on Amazon US at all.
-    expect(exact).toHaveLength(10);
-    expect(search).toHaveLength(2);
+    // TWELVE, AND NOTHING SEARCH-ONLY. As of 3 August 2026 every product in
+    // the catalogue has a specific ASIN. The last two closed on the same day:
+    // the Aiper Scuba S1, whose candidates had all been siblings, and the slot
+    // that held the Dolphin Premier — which is still not sold on Amazon US, and
+    // is no longer the product in that record.
+    //
+    // If this ever drops back, a search fallback is the honest answer and the
+    // count below is what should change — not the classification.
+    expect(exact).toHaveLength(12);
+    expect(search).toHaveLength(0);
     for (const d of exact) {
       expect(d.identifierKind).toBe("asin");
       expect(d.retailerProductId).toMatch(/^B0[A-Z0-9]{8}$/);
@@ -543,7 +546,13 @@ describe("schema eligibility gates", () => {
     expect(publicationFor({ ...ready, basePriceMinor: null }).schemaEligible).toBe(false);
     expect(publicationFor({ ...ready, currency: "EUR" }).schemaEligible).toBe(false);
     expect(publicationFor({ ...ready, stock: { state: "unknown", sourceWording: null, checkedDate: null } }).schemaEligible).toBe(false);
-    const searchOnly = OFFERS.find((o) => o.destination.confidence === "search_only")!;
+    // Every product now has an exact ASIN, so there is no live search-only
+    // offer to borrow. The rule still has to hold, so the case is constructed:
+    // a search link with a price and a fresh check is STILL not schema-eligible.
+    const searchOnly = {
+      ...ready,
+      destination: { ...ready.destination, confidence: "search_only" as const, retailerProductId: null, destinationUrl: null },
+    };
     expect(publicationFor({ ...searchOnly, basePriceMinor: 49900, freshness: "live" }).schemaEligible).toBe(false);
   });
 
@@ -840,22 +849,43 @@ describe("the affiliate tag flows only through the central builder", () => {
 });
 
 describe("Dolphin Premier is withdrawn but not erased", () => {
-  it("carries no offer and no buy link", () => {
-    expect(catalogueStatusOf("prod-dolphin-premier")).toBe("historical_candidate");
-    expect(OFFERS.some((o) => o.productId === "prod-dolphin-premier")).toBe(false);
+  it("still carries no offer, because the withdrawal was never lifted for IT", () => {
+    // The record that used to hold the Dolphin Premier now holds a BuBlue and
+    // is active, which is why catalogueStatusOf is no longer a useful test here.
+    // What must remain true is that the Dolphin itself never became sellable:
+    // its evidence sits in the retired registry with no destination attached.
+    const retired = RETIRED_VERIFICATIONS.find((v) => v.identity.canonicalName === "Dolphin Premier")!;
+    expect(retired).toBeDefined();
+    expect(retired.identity.officialProductPageUrl).toBeNull();
+    expect(retired.identity.manual).toBeNull();
+    expect(DESTINATIONS.some((d) => d.exactModel === "Dolphin Premier")).toBe(false);
   });
 
-  it("keeps its record, its page and the reason it was withdrawn", () => {
+  it("keeps the reason it was withdrawn, even though the withdrawal has ended", () => {
+    // The withdrawal ended on 3 August 2026 — not because the Dolphin Premier
+    // became sellable, but because that record stopped holding a Dolphin. The
+    // reasoning has to survive that, or a future reader sees an ordinary
+    // product and never learns BotPlanet once refused to sell one here.
     expect(productEditorialById("prod-dolphin-premier")).toBeDefined();
-    const w = CATALOGUE_WITHDRAWALS["prod-dolphin-premier"];
+    expect(CATALOGUE_WITHDRAWALS["prod-dolphin-premier"]).toBeUndefined();
+    const w = LIFTED_WITHDRAWALS["prod-dolphin-premier"];
     expect(w.on).toBe("2026-07-31");
     expect(w.reason).toMatch(/candidate_under_review/);
     expect(w.reason).toMatch(/no listing|no US retail destination/i);
+    expect(w.liftedBecause).toMatch(/never lifted for the Dolphin Premier/i);
   });
 
-  it("substitutes no successor in its place", () => {
-    expect(Object.keys(ACTIVE_PRODUCTS)).toHaveLength(9);
-    expect(Object.values(ACTIVE_PRODUCTS).some((p) => /premier|proteus/i.test(p.slug))).toBe(false);
+  it("was replaced by an owner decision, not by a quiet substitution", () => {
+    // A successor was never slipped in behind the Dolphin's name. The change
+    // was made explicitly, by the owner, and the record says so in the open:
+    // the visible name and brand both change, and the override states why.
+    const o = PRODUCT_NAME_OVERRIDES["prod-dolphin-premier"];
+    expect(o.wasNamed).toBe("Dolphin Premier");
+    expect(o.name).toBe("BuBlue Bubot 800P Gen2");
+    expect(o.brand).toBe("BUBLUE");
+    expect(o.reason).toMatch(/owner/i);
+    // And the route it still answers on is flagged as wrong, not left silent.
+    expect(wrongSlugs().map((w) => w.productId)).toContain("prod-dolphin-premier");
   });
 });
 

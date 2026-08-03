@@ -272,6 +272,26 @@ const OWNER_ARTWORK: OwnerArtwork[] = [
       "the grey and blue tracked cleaner resting on stone coping beside a curved pool at dusk, with callouts for navigation, wall and waterline cleaning and top-load filtration",
   },
   {
+    slug: "aiper-scuba-s1",
+    file: "aiper-scuba-s1.webp",
+    checksum: "sha256:147316cbcc6b17b06f23b0f71ff8399b6492973a9b399d1a95ad77184f15ee05",
+    width: 1402,
+    height: 1122,
+    scene:
+      "the grey and black tracked cleaner on wet paving beside a lit pool at night, with a phone showing the Aiper app mid-cycle and callouts for navigation, suction, waterline cleaning, filtration and battery life",
+  },
+  {
+    // The file name follows the product ID, as every file here does. What it
+    // DEPICTS is the BuBlue that this record now holds — see product-names.ts.
+    slug: "dolphin-premier",
+    file: "dolphin-premier.webp",
+    checksum: "sha256:d423972cffdbc682bf25b7818e173edd33271322930f1022b8c0f18cbca06c56",
+    width: 1402,
+    height: 1122,
+    scene:
+      "the grey corded cleaner on its caddy at the poolside at night, lit blue along its front edge, with a phone showing the BuBlue app and callouts for suction, navigation, runtime, filtration and app control",
+  },
+  {
     slug: "aiper-scuba-x1",
     file: "aiper-scuba-x1.webp",
     checksum: "sha256:cb85855c187847ea25c9aef6fdcc50c65a7bb05d9f4cf715968f224c2d5e62d9",

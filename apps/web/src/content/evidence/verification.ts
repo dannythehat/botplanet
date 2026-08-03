@@ -243,7 +243,31 @@ const nautilusCcPlus: ProductVerification = {
 const PREMIER_SPECS = "https://www.premierrobotic.com/dolphin-cleaner-specs";
 const PREMIER_SPECS_TITLE = "Premier Robotic — Dolphin Premier specifications (authorised dealer listing)";
 
-const dolphinPremier: ProductVerification = {
+/* ------------------------------------------------------------------ */
+/* This record was the Maytronics Dolphin Premier until 3 August 2026.  */
+/* It was withdrawn on 31 July on two independent findings — no         */
+/* manufacturer page, and a manual that covered a different machine —   */
+/* and the owner replaced it with a BuBlue. The productId still reads   */
+/* "prod-dolphin-premier" because that is the D1 join key and this      */
+/* environment cannot rewrite it; the visible name and brand come from  */
+/* content/product-names.ts, which also records that the ROUTE is now   */
+/* wrong and must be fixed in the database.                             */
+/* ------------------------------------------------------------------ */
+
+/**
+ * RETIRED — the Maytronics Dolphin Premier, exactly as it was verified.
+ *
+ * The record is kept whole and unedited. On 3 August 2026 the owner replaced
+ * this product with a BuBlue, and `prod-dolphin-premier` — the D1 join key —
+ * now describes that machine instead. Everything Job 8 established about the
+ * Dolphin is still true about the Dolphin; it simply is no longer in the
+ * catalogue, and its evidence must not be read as though it were the BuBlue's.
+ *
+ * It is deliberately NOT in VERIFICATIONS: two records cannot share a product
+ * ID, and the live one has to be the machine on the page. It stays exported so
+ * the findings that withdrew it remain checkable.
+ */
+const retiredDolphinPremier: ProductVerification = {
   productId: "prod-dolphin-premier",
   checkedOn: D,
   identity: {
@@ -298,6 +322,60 @@ const dolphinPremier: ProductVerification = {
     { field: "remoteControl", checked: [PREMIER_SPECS], note: "Not stated for this configuration." },
     { field: "includedAccessories", checked: [PREMIER_SPECS], note: "Filter media are listed; a full box-contents list is not." },
   ],
+};
+
+const BUBOT_LISTING = "https://www.amazon.com/BUBLUE-Bubot-800P-Navigation-Scheduling/dp/B0GTYX922J";
+const BUBOT_LISTING_TITLE = "Amazon US listing (B0GTYX922J) — BUBLUE Bubot 800P Gen2";
+const BUBOT_READ = "2026-08-03";
+
+const dolphinPremier: ProductVerification = {
+  productId: "prod-dolphin-premier",
+  checkedOn: BUBOT_READ,
+  identity: {
+    brand: "BUBLUE",
+    canonicalName: "BuBlue Bubot 800P Gen2",
+    modelNumber: "Bubot 800P gen2",
+    modelNumberSource: BUBOT_LISTING,
+    // BuBlue's own site was not reachable for a product page on the day of the
+    // check, so the retailer listing is the only source — and unusually, it
+    // read. That is why this is the one owner-supplied swap that reaches a
+    // machine-read identity rather than resting on the owner's word.
+    officialProductPageUrl: null,
+    manual: null,
+    identityIssue:
+      "MODEL AND MANUFACTURER BOTH CHANGED ON 3 AUGUST 2026. This record held the Maytronics Dolphin Premier, which was withdrawn on 31 July for having no manufacturer page, a manual covering a different machine, and no Amazon US listing at all. The owner replaced it with the BuBlue Bubot 800P Gen2. Every observation the Dolphin record held was read from a Maytronics dealer's specification page and has been REMOVED rather than carried across — it describes a different machine from a different manufacturer. The owner's message named an '880P'; the Amazon listing and the owner's own artwork both say 800P, and the listing's Model Number field reads 'Bubot 800P gen2', so 800P is what is recorded. No manufacturer page for this model has been read, so beyond identity the specification is unverified.",
+  },
+  sourceChecks: [
+    {
+      url: BUBOT_LISTING,
+      title: BUBOT_LISTING_TITLE,
+      status: "ok",
+      note:
+        "Read successfully on 3 August 2026, which is rare for Amazon here. The details table published Brand 'BUBLUE', Manufacturer 'BUBLUE', Model Number 'Bubot 800P gen2', Power Source 'ac' and Product Dimensions 19\"L x 18\"W x 9\"H, and Amazon's own canonical URL reads /BUBLUE-Bubot-800P-Navigation-Scheduling/. Identity only: the buy box is not treated as a price source.",
+    },
+    {
+      url: "https://www.premierrobotic.com/dolphin-premier-specs",
+      title: "Dealer specification page for the RETIRED Dolphin Premier",
+      status: "not_rechecked",
+      note: "Kept as history. This was the only substantive source the Dolphin Premier ever had, and it was a dealer, not the manufacturer. It says nothing about the BuBlue.",
+    },
+    {
+      url: "https://manuals.maytronics.com/intro/?pn=99996339",
+      title: "Maytronics manual portal, queried for 'Dolphin Premier' — history only",
+      status: "ok",
+      note: "Named the product but served a Classic 5 / Top 5 document. One of the two findings that withdrew the Dolphin Premier.",
+    },
+  ],
+  /* Deliberately empty. The Dolphin Premier's observations came from a
+     Maytronics dealer page; keeping them under a BuBlue's name would attach one
+     manufacturer's specification to another's machine. Identity is established;
+     nothing else about this product may be stated until a source for the Bubot
+     800P Gen2 is read. */
+  observations: [],
+  /* Also empty, and for a different reason: "not publicly stated" means we
+     looked at the maker's own source and it was silent. No BuBlue source has
+     been read at all, so claiming that would be a check nobody performed. */
+  notPubliclyStated: [],
 };
 
 /* ------------------------------------------------------------------ */
@@ -894,6 +972,9 @@ const aiperScubaV3AiVision: ProductVerification = {
   observations: [],
   notPubliclyStated: [],
 };
+
+/** Retired records. Real evidence about products no longer in the catalogue. */
+export const RETIRED_VERIFICATIONS: ProductVerification[] = [retiredDolphinPremier];
 
 export const VERIFICATIONS: ProductVerification[] = [
   wybotC1,

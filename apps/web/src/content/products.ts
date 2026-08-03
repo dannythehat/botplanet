@@ -646,7 +646,11 @@ export type CatalogueStatus =
   | "historical_candidate";
 
 export const CATALOGUE_STATUS: Record<string, CatalogueStatus> = {
-  "prod-dolphin-premier": "historical_candidate",
+  /* Empty since 3 August 2026. `prod-dolphin-premier` was the one entry; that
+     record now holds the BuBlue Bubot 800P Gen2, which has a machine-read
+     identity and a live destination, so it is an ordinary active product. The
+     Dolphin Premier itself is still not sellable and never became so — see
+     LIFTED_WITHDRAWALS below and RETIRED_VERIFICATIONS in evidence. */
 };
 
 export const catalogueStatusOf = (productId: string): CatalogueStatus =>
@@ -654,10 +658,26 @@ export const catalogueStatusOf = (productId: string): CatalogueStatus =>
 
 /** Why a product left the active catalogue, kept so the decision is traceable. */
 export const CATALOGUE_WITHDRAWALS: Record<string, { on: string; reason: string }> = {
+  /* Empty. The one withdrawal is recorded below, because a withdrawal that is
+     simply deleted takes its reasoning with it. */
+};
+
+/**
+ * Withdrawals that ended, and how.
+ *
+ * A product leaves this catalogue for a reason, and the reason has to outlive
+ * the withdrawal — otherwise a future reader sees an ordinary product and never
+ * learns that BotPlanet once refused to sell it, or why. So a lifted withdrawal
+ * moves here rather than disappearing.
+ */
+export const LIFTED_WITHDRAWALS: Record<string, { on: string; reason: string; liftedOn: string; liftedBecause: string }> = {
   "prod-dolphin-premier": {
     on: "2026-07-31",
     reason:
       "Withdrawn from the active launch catalogue. Two independent findings: Job 8 holds it as candidate_under_review because the only manual available covers 'Classic 5 / Top 5' rather than the Premier, and a browser search of Amazon US found no listing, so there is no US retail destination. The record is retained as a historical candidate — non-commercial, not recommendable — and no successor has been substituted.",
+    liftedOn: "2026-08-03",
+    liftedBecause:
+      "The withdrawal was never lifted for the Dolphin Premier — both findings against it still stand, and it is still not sold on Amazon US. What changed is that this RECORD no longer holds a Dolphin. On the owner's direction it now holds the BuBlue Bubot 800P Gen2, whose identity was machine-read from its Amazon listing the same day: Brand BUBLUE, Model Number 'Bubot 800P gen2'. A record with a verified identity and a live destination is not a withdrawn record, so the withdrawal ends with the product it applied to. The route still reads /dolphin-premier/ until D1 can be updated — see content/product-names.ts.",
   },
 };
 
