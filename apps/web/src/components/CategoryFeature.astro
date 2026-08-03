@@ -335,53 +335,33 @@ const parts =
     .catfeat__btn, .catfeat__btn:hover { transform: none; transition: none; }
   }
 
-  /* ---------- phone: the split runs top to bottom ---------- */
+  /* ---------- phone: copy on top, picture beneath ---------- */
   @media (max-width: 899px) {
-    .catfeat__plate { min-height: 44rem; }
-    /* Tightened deliberately: every pixel the copy gives back on a phone is a
-       pixel of the photograph that stays visible below it. */
-    .catfeat__copy { align-self: start; width: 100%; padding: clamp(1.5rem, 5vw, 2rem); }
+    /* Two real rows rather than an overlay. The portrait files carry an empty
+       upper half, and laying the copy over that half meant the copy's height
+       decided how much of the machine survived — on a long body paragraph it
+       cut the robot's head off. Given its own row the picture is never
+       covered by anything and never cropped by the length of a sentence. */
+    .catfeat__plate { grid-template-rows: auto auto; min-height: 0; }
+    .catfeat__copy { grid-area: 1 / 1; align-self: start; width: 100%; padding: clamp(1.5rem, 5vw, 2rem); }
+    .catfeat__media { grid-area: 2 / 1; }
+
+    /* The portrait files carry an empty upper half because that half used to
+       sit behind the copy. With the copy in its own row above, that emptiness
+       would just be a black gap between the words and the machine — so the
+       picture is anchored to its bottom edge and the dead top is cropped off.
+       3/4 keeps roughly the lower three-quarters, which is enough to hold the
+       subject in every one of the six without clipping it. */
+    .catfeat__media img { aspect-ratio: 3 / 4; height: auto; object-fit: cover; object-position: center bottom; }
+    .catfeat__media::after { background: none; }
+
+    /* Tightened deliberately: every pixel the copy gives back is a pixel of
+       the photograph that fits on the screen with it. */
     .catfeat h2 { font-size: 30px; }
-    .catfeat__body { margin-top: 12px; font-size: 15px; line-height: 1.55; max-width: 30ch; }
+    .catfeat__body { margin-top: 12px; font-size: 15px; line-height: 1.55; max-width: 32ch; }
     .catfeat__actions { margin-top: 20px; gap: 9px; }
     .catfeat__btn { min-height: 3rem; font-size: 0.93rem; }
     .catfeat__more { margin-top: 16px; }
-
-    /* Anchored to the bottom. The portrait files put their empty half at the
-       top and their subject at the bottom, so cropping from the top removes
-       only empty space — and the subject stays whole however tall the copy
-       above it runs. Centring it instead pushed the subject up behind the
-       words and cut the machine's head off. */
-    .catfeat__media img { object-position: center bottom; }
-
-    .catfeat__media::after {
-      background: linear-gradient(
-        180deg,
-        rgba(5, 7, 10, 0.93) 0%,
-        rgba(5, 7, 10, 0.9) 40%,
-        rgba(5, 7, 10, 0.62) 56%,
-        rgba(5, 7, 10, 0.16) 74%,
-        transparent 88%
-      );
-    }
-
-    /* NO PORTRAIT FILE. Pool is the one category without one, and a wide
-       desktop image cover-cropped into a tall frame is mostly the empty half
-       it was carrying for the desktop layout — a robot in a sliver of corner
-       and black everywhere else.
-
-       So it stops pretending. The plate splits into two real rows: copy above,
-       the picture whole beneath it at its own ratio. Still half and half, still
-       one plate, and nothing is cropped to nonsense. This is a stand-in until
-       the composed portrait exists, not the intended treatment. */
-    .catfeat[data-mobile-art="false"] .catfeat__plate {
-      grid-template-rows: auto auto;
-      min-height: 0;
-    }
-    .catfeat[data-mobile-art="false"] .catfeat__copy { grid-area: 1 / 1; padding-bottom: clamp(1.4rem, 3vw, 2rem); }
-    .catfeat[data-mobile-art="false"] .catfeat__media { grid-area: 2 / 1; }
-    .catfeat[data-mobile-art="false"] .catfeat__media img { height: auto; object-position: center; }
-    .catfeat[data-mobile-art="false"] .catfeat__media::after { background: none; }
   }
 
   /* ---------- desktop: the split runs left to right ---------- */

@@ -186,6 +186,29 @@
     ]
   },
   {
+    "source": "/media/pool-category/feature-mobile.webp",
+    "sourceWidth": 857,
+    "sourceHeight": 1588,
+    "derivatives": [
+      {
+        "id": "media-pool-category-feature-mobile-webp-360",
+        "src": "/media/pool-category/feature-mobile-360w.webp",
+        "width": 360,
+        "height": 667,
+        "bytes": 14994,
+        "checksum": "sha256:6bde3cf7654f30c917cb78d316611a6c122c475d531b5cef52c9300bb7bbbd15"
+      },
+      {
+        "id": "media-pool-category-feature-mobile-webp-640",
+        "src": "/media/pool-category/feature-mobile-640w.webp",
+        "width": 640,
+        "height": 1186,
+        "bytes": 39066,
+        "checksum": "sha256:144058ff1a4429ff8631bb18c7cb3a8ff534e812369324e39ed1ce2318ae7de6"
+      }
+    ]
+  },
+  {
     "source": "/media/window-category/feature-desktop.webp",
     "sourceWidth": 1672,
     "sourceHeight": 941,
@@ -226,24 +249,24 @@
   },
   {
     "source": "/media/window-category/feature-mobile.webp",
-    "sourceWidth": 941,
-    "sourceHeight": 1672,
+    "sourceWidth": 857,
+    "sourceHeight": 1588,
     "derivatives": [
       {
         "id": "media-window-category-feature-mobile-webp-360",
         "src": "/media/window-category/feature-mobile-360w.webp",
         "width": 360,
-        "height": 640,
-        "bytes": 9910,
-        "checksum": "sha256:300512ba74bc2ef9bce12c4f4bc76354c5c277802085d0ccf3f1f49054469eef"
+        "height": 667,
+        "bytes": 7832,
+        "checksum": "sha256:a23924f20d0b6e4d59a6a1eec6e3ff065e57d2f18e0c96c1690ed563a1aad09d"
       },
       {
         "id": "media-window-category-feature-mobile-webp-640",
         "src": "/media/window-category/feature-mobile-640w.webp",
         "width": 640,
-        "height": 1137,
-        "bytes": 27942,
-        "checksum": "sha256:2fb238386ffdc6cb8c47fe8f47741f7512277ff380c2348fac9571237df3db11"
+        "height": 1186,
+        "bytes": 18580,
+        "checksum": "sha256:47403d1245622118a3fe6ce78e0361fb7cb5b8412433c71541fbda09dfa35691"
       }
     ]
   },

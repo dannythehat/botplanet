@@ -196,6 +196,15 @@ export const ORIGINAL_ASSETS: MediaAssetRecord[] = [
         "Composed with the left third dark and empty. The robot is a rendered generic, deliberately not any brand's model.",
       ],
       [
+        "feature-pool-category-mobile",
+        "/media/pool-category/feature-mobile.webp",
+        857,
+        1588,
+        "sha256:7802a1cb1b9ba5556fce972a15d4f197418f1993b5e9810b1415515b39a4fcba",
+        "Robotic pool cleaners",
+        "The portrait companion to the desktop file, supplied later than the rest. Composed for the phone layout: empty upper half for the copy, the machine in the lower half. Inset 42px on every edge from the supplied file, which carried a drawn silver frame a few pixels in from the border — that would have shown as a broken hairline once the picture reaches the plate's edge. Nothing else is altered.",
+      ],
+      [
         "feature-window-category-desktop",
         "/media/window-category/feature-desktop.webp",
         1672,
@@ -207,11 +216,11 @@ export const ORIGINAL_ASSETS: MediaAssetRecord[] = [
       [
         "feature-window-category-mobile",
         "/media/window-category/feature-mobile.webp",
-        941,
-        1672,
-        "sha256:4cb0b3bb7b4a66a1e5c82d8767bb1c7969087dbb1a2ecbf95d4b6e3a70b50e13",
+        857,
+        1588,
+        "sha256:629d66d2a6d0ea3f848e1edbc5f56da2e04cbc6049371760401009b1e21bc425",
         "Window-cleaning robots",
-        "The portrait companion to the desktop file — recomposed, not cropped, so the machine and the glass both survive on a phone.",
+        "Replaced 3 August 2026 with a version composed for the phone layout: empty upper half, the machine in the lower half so it survives the crop. Inset 42px on every edge from the supplied file, which carried a drawn silver frame a few pixels in from the border. Nothing else is altered.",
       ],
       [
         "feature-lawn-category-desktop",
