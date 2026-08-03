@@ -45,6 +45,9 @@ export const POST: APIRoute = async ({ request, locals }) => {
     powerType: p.powerType,
     priceTier: p.priceTier as SuitabilityCandidate["priceTier"],
     maxPoolLengthFt: p.maxPoolLengthFt,
+    // Null for every product until the column exists in D1; the scorer treats
+    // that as "unknown", never as "too big".
+    maxPoolAreaSqFt: (p as { maxPoolAreaSqFt?: number | null }).maxPoolAreaSqFt ?? null,
   }));
 
   const result = scoreProducts(answers, candidates, config);

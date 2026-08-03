@@ -60,20 +60,14 @@ export function scoreProducts(
     if (config.hardExclusions.environmentMismatch && !c.environments.includes(answers.environment)) {
       return exclude(c.productId, "environment_mismatch");
     }
-    if (
-      config.hardExclusions.poolTooLong &&
-      c.maxPoolLengthFt !== null &&
-      answers.pool_length_ft !== null &&
-      c.maxPoolLengthFt < answers.pool_length_ft
-    ) {
-      return exclude(c.productId, "pool_too_long");
-    }
+    const size = poolSizeFit(answers, c, config);
+    if (size.excluded) return exclude(c.productId, size.reason!);
 
     // --- Weighted suitability (each factor 0-1) ---
     const fCleans = cleansCoverage(answers, c);
     const fPower = powerMatch(answers, c);
     const fPrice = priceTierMatch(answers, c);
-    const fSize = 1; // already excluded above if too long
+    const fSize = size.factor;
 
     const raw =
       fCleans * weights.cleansCoverage +
@@ -105,6 +99,49 @@ export function scoreProducts(
   });
 
   return { configVersion: config.version, eligibleClasses: eligible, ranked };
+}
+
+/**
+ * Does this robot fit the pool?
+ *
+ * Three outcomes, not two, and the third is the point:
+ *
+ *   EXCLUDED   the maker states a limit and the reader's pool exceeds it.
+ *   FITS       the maker states a limit and the pool is inside it.
+ *   UNKNOWN    there is no comparable pair of figures.
+ *
+ * UNKNOWN must never behave like EXCLUDED. A manufacturer that publishes an
+ * area and no length — Aiper does exactly this for the Scuba V3 — would
+ * otherwise disappear from every result for a reader who gave a length, which
+ * looks like "this robot is unsuitable" when it means "nobody has said".
+ *
+ * Nor may it behave like FITS. Scoring an unverified fit as full marks would
+ * let a product with no published limit outrank one that is documented to fit.
+ * So it carries a discount: visible, ranked below a confirmed fit, never hidden.
+ */
+const UNKNOWN_FIT = 0.6;
+
+function poolSizeFit(
+  answers: PoolAnswers,
+  c: SuitabilityCandidate,
+  config: ScoringConfig,
+): { excluded: boolean; reason?: string; factor: number } {
+  if (c.maxPoolLengthFt !== null && answers.pool_length_ft !== null) {
+    if (config.hardExclusions.poolTooLong && c.maxPoolLengthFt < answers.pool_length_ft) {
+      return { excluded: true, reason: "pool_too_long", factor: 0 };
+    }
+    return { excluded: false, factor: 1 };
+  }
+
+  const area = answers.pool_area_sqft ?? null;
+  if (c.maxPoolAreaSqFt !== null && area !== null) {
+    if (config.hardExclusions.poolTooLong && c.maxPoolAreaSqFt < area) {
+      return { excluded: true, reason: "pool_too_large", factor: 0 };
+    }
+    return { excluded: false, factor: 1 };
+  }
+
+  return { excluded: false, factor: UNKNOWN_FIT };
 }
 
 function exclude(productId: string, reason: string): ProductScore {

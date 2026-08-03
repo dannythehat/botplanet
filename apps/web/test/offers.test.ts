@@ -29,7 +29,7 @@ import { AWAITING_DISCOVERY, EXPECTED_IDENTITIES } from "../src/lib/providers/ex
 import type { BuyingOption } from "../src/lib/providers/amazon-provider";
 import { AMAZON_ASSOCIATE_TAG, AMAZON_ASSOCIATE_TAG_STATUS, amazonDestination } from "../src/lib/site";
 import { ACTIVE_PRODUCTS, CATALOGUE_WITHDRAWALS, LIFTED_WITHDRAWALS, catalogueStatusOf, productEditorialById } from "../src/content/products";
-import { PRODUCT_NAME_OVERRIDES, wrongSlugs } from "../src/content/product-names";
+import { RETIRED_SLUGS, resolveSlug } from "../src/content/product-names";
 import { RETIRED_VERIFICATIONS } from "../src/content/evidence/verification";
 import { deriveLedger } from "../src/content/evidence/derive";
 import { SERPAPI_OBSERVATIONS, SERPAPI_REJECTIONS, SERPAPI_RUN_CREDITS, SERPAPI_UNRESOLVED } from "../src/content/commerce/serpapi-observations";
@@ -150,16 +150,17 @@ describe("exact-product destinations", () => {
   it("captures an ASIN for five products and refuses to invent the rest", () => {
     const exact = DESTINATIONS.filter((d) => d.confidence === "researched_exact" || d.confidence === "verified_exact");
     const search = DESTINATIONS.filter((d) => d.confidence === "search_only");
-    // TWELVE, AND NOTHING SEARCH-ONLY. As of 3 August 2026 every product in
-    // the catalogue has a specific ASIN. The last two closed on the same day:
-    // the Aiper Scuba S1, whose candidates had all been siblings, and the slot
-    // that held the Dolphin Premier — which is still not sold on Amazon US, and
-    // is no longer the product in that record.
+    // Eleven exact, one search-only. Every product reached a specific ASIN on
+    // 3 August 2026 — and one was then taken BACK OFF the same day. The listing
+    // supplied for the Scuba X1 Pro turned out to be the base X1 bundled with a
+    // HydroComm Pro monitor, so it was refused and the product returned to a
+    // search fallback rather than sending buyers to the wrong machine.
     //
-    // If this ever drops back, a search fallback is the honest answer and the
-    // count below is what should change — not the classification.
-    expect(exact).toHaveLength(12);
-    expect(search).toHaveLength(0);
+    // A search fallback is the honest answer when no correct listing is held.
+    // If this changes, the count is what should change — never the classification.
+    expect(exact).toHaveLength(11);
+    expect(search).toHaveLength(1);
+    expect(search[0].productId).toBe("prod-aiper-scuba-x1");
     for (const d of exact) {
       expect(d.identifierKind).toBe("asin");
       expect(d.retailerProductId).toMatch(/^B0[A-Z0-9]{8}$/);
@@ -195,7 +196,12 @@ describe("exact-product destinations", () => {
     // model cannot confirm one.
     const aiper = IDENTITY_CHECKS["prod-aiper-scuba-x1"];
     expect(aiper.confirmed).toBe(false);
-    expect(destinationFor("prod-aiper-scuba-x1")!.confidence).toBe("researched_exact");
+    // And it now has no ASIN at all: the replacement supplied on 3 August was a
+    // bundle of the base X1, refused on the listing's own model-name field.
+    expect(destinationFor("prod-aiper-scuba-x1")!.confidence).toBe("search_only");
+    const refusal = REJECTED_CANDIDATES.find((c) => c.candidate.includes("B0GVT2YPLB"))!;
+    expect(refusal.rule).toBe("sibling_model");
+    expect(refusal.reason).toContain("Scuba X1+Hy Pro");
   });
 
   it("names the Job 8 exact model on every destination", () => {
@@ -879,13 +885,13 @@ describe("Dolphin Premier is withdrawn but not erased", () => {
     // A successor was never slipped in behind the Dolphin's name. The change
     // was made explicitly, by the owner, and the record says so in the open:
     // the visible name and brand both change, and the override states why.
-    const o = PRODUCT_NAME_OVERRIDES["prod-dolphin-premier"];
+    const o = RETIRED_SLUGS["dolphin-premier"];
     expect(o.wasNamed).toBe("Dolphin Premier");
-    expect(o.name).toBe("BuBlue Bubot 800P Gen2");
-    expect(o.brand).toBe("BUBLUE");
+    expect(o.isNamed).toBe("BuBlue Bubot 800P Gen2");
     expect(o.reason).toMatch(/owner/i);
-    // And the route it still answers on is flagged as wrong, not left silent.
-    expect(wrongSlugs().map((w) => w.productId)).toContain("prod-dolphin-premier");
+    // The old URL was published, so it must redirect rather than 404.
+    expect(resolveSlug("dolphin-premier")).toEqual({ storedSlug: "bublue-bubot-800p", redirectTo: "bublue-bubot-800p" });
+    expect(resolveSlug("bublue-bubot-800p").redirectTo).toBeNull();
   });
 });
 

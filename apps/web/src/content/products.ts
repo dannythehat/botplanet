@@ -109,9 +109,15 @@ const RAW: Record<string, Omit<ProductEditorial, "productId">> = {
 
   "dolphin-nautilus-cc-plus": {
     slug: "dolphin-nautilus-cc-plus",
-    oneLiner: "Popular corded Maytronics robot with Wi-Fi app control, wall and waterline scrubbing for in-ground pools.",
+    /* CORRECTED 3 August 2026. This record claimed waterline cleaning in five
+       places. Maytronics' own page for part 99996409-PCI states "Cleaning
+       Coverage: Floor and Walls", "Waterline Scrubbing: No" and "Active Brush:
+       No". Every one of those claims has been removed rather than softened —
+       the waterline is exactly where the greasy tile ring forms, so a buyer who
+       bought this for that reason bought the wrong machine. */
+    oneLiner: "Popular corded Maytronics robot with Wi-Fi app control and floor and wall cleaning for in-ground pools.",
     verdict:
-      "Maytronics' best-selling mid-range cleaner delivers reliable floor, wall and waterline cleaning with app scheduling via MyDolphin Plus. Its corded design with an anti-tangle swivel means no recharging, and top-load cartridge filters are easy to service. A safe, proven choice for in-ground pools up to about 40 ft, though the caddy and floating cable add handling bulk.",
+      "Maytronics' best-selling mid-range cleaner delivers reliable floor and wall cleaning with app scheduling via MyDolphin Plus. Its corded design with an anti-tangle swivel means no recharging, and top-load cartridge filters are easy to service. A safe, proven choice for in-ground pools up to 40 ft — but Maytronics states it does not scrub the waterline, so if the tile line is your problem this is not the machine for it.",
     bestFor: "Proven in-ground everyday cleaning",
     priceRangeUsdApprox: [700, 999],
     specs: {
@@ -119,15 +125,18 @@ const RAW: Record<string, Omit<ProductEditorial, "productId">> = {
       cableLengthFt: 60,
       runtimeMins: 120,
       chargeTimeHrs: null,
-      filtration: "Top-load fine/ultra-fine cartridge filter basket",
+      filtration: "Top-load Ultra-Fine Filter Kit",
       navigation: "CleverClean scanning with anti-tangle swivel cable",
       weightLbs: 20,
-      warranty: "2-year limited (varies by retailer)",
+      // Maytronics states 1 year on its own product page. The previous "2-year
+      // limited (varies by retailer)" was a retailer's term, not the maker's.
+      warranty: "1 year (Maytronics, US)",
       appSupport: "Wi-Fi + MyDolphin Plus — start, stop, schedule remotely",
     },
     notableFeatures: [
       "Wi-Fi + MyDolphin Plus app scheduling",
-      "Active wall and waterline scrubbing brush",
+      "Two combined brushes for floor and wall scrubbing",
+      "4,500 gph suction rate",
       "Anti-tangle 60 ft swivel cable",
       "Easy top-load cartridge filter access",
       "Weekly cleaning scheduler",
@@ -135,21 +144,22 @@ const RAW: Record<string, Omit<ProductEditorial, "productId">> = {
     pros: [
       "Proven Maytronics reliability and support",
       "Corded — no battery to recharge or degrade",
-      "Cleans floor, walls and waterline",
+      "Climbs and cleans walls, not just the floor",
       "Simple top-load filter cleaning",
       "App control and scheduling",
     ],
     limitations: [
       "Floating cable can tangle in tight or odd-shaped pools",
       "Caddy and cable add storage and handling bulk",
-      "Best suited to in-ground pools up to ~40 ft only",
+      "Does not scrub the waterline — Maytronics states so explicitly",
+      "Best suited to in-ground pools up to 40 ft only",
       "No above-ground rating",
-      "Warranty length varies by seller",
+      "1-year manufacturer warranty is short for the money",
     ],
     whoShouldBuy: "In-ground pool owners wanting a proven, low-maintenance corded robot with app scheduling.",
     whoShouldAvoid: "Anyone with an above-ground pool, or who wants a fully cordless, cable-free experience.",
     faqs: [
-      { q: "Does the CC Plus Wi-Fi clean the waterline?", a: "Yes — it scrubs floors, walls and the waterline with its active brush." },
+      { q: "Does the CC Plus Wi-Fi clean the waterline?", a: "No. Maytronics' own specification for part 99996409-PCI lists Cleaning Coverage as \"Floor and Walls\" and Waterline Scrubbing as \"No\". It climbs and scrubs walls, which is a different thing: the waterline is the tile band at the surface where the oily ring forms, and this machine is not rated to clean it." },
       { q: "Is it cordless?", a: "No, it is corded with a 60 ft anti-tangle swivel cable; there is no battery to charge." },
       { q: "How is it controlled?", a: "Via Wi-Fi and the MyDolphin Plus app, which lets you start, stop and schedule cycles remotely." },
     ],

@@ -37,6 +37,7 @@ export const brandRows: (typeof brands.$inferInsert)[] = [
   { id: "brand-wybot", slug: "wybot", name: "WYBOT", maker: "WYBOT", hasDirectAffiliate: true },
   { id: "brand-polaris", slug: "polaris", name: "Polaris", maker: "Pentair", hasDirectAffiliate: false, notes: "No direct programme; retailer-only." },
   { id: "brand-betta", slug: "betta", name: "Betta", maker: "Solar Pool Technologies", hasDirectAffiliate: null },
+  { id: "brand-bublue", slug: "bublue", name: "BUBLUE", maker: "BUBLUE", hasDirectAffiliate: null, notes: "Added 2026-08-03 with the Bubot 800P Gen2. No affiliate programme checked yet; sold through Amazon." },
 ];
 
 /**
@@ -61,13 +62,16 @@ export const productRows: (typeof products.$inferInsert)[] = [
     status: "published",
   },
   {
+    // Moved from the Scuba X1 Essential to the X1 Pro on 2026-08-03 at the
+    // owner's direction. The ID is the stable join key and does not move with
+    // the model; the old slug redirects — see apps/web/src/content/product-names.ts.
     id: "prod-aiper-scuba-x1",
-    slug: "aiper-scuba-x1",
+    slug: "aiper-scuba-x1-pro",
     brandId: "brand-aiper",
     categoryId: "cat-pool-cleaners",
     productClass: "full_cleaner",
-    name: "Aiper Scuba X1",
-    model: "Scuba X1",
+    name: "Aiper Scuba X1 Pro",
+    model: "Scuba X1 Pro",
     environments: ["in_ground"],
     cleans: ["floor", "walls", "waterline"],
     powerType: "cordless",
@@ -141,18 +145,23 @@ export const productRows: (typeof products.$inferInsert)[] = [
     status: "published",
   },
   {
+    // Held the Maytronics Dolphin Premier until 2026-08-03, when the owner
+    // replaced it with a BuBlue. Different manufacturer, so the brand moves too.
+    // maxPoolLengthFt is now NULL rather than the Dolphin's 50: it is a hard
+    // exclusion in the matcher, and carrying another machine's number would
+    // silently mis-filter this one. It stays null until the real figure is read.
     id: "prod-dolphin-premier",
-    slug: "dolphin-premier",
-    brandId: "brand-dolphin",
+    slug: "bublue-bubot-800p",
+    brandId: "brand-bublue",
     categoryId: "cat-pool-cleaners",
     productClass: "full_cleaner",
-    name: "Dolphin Premier",
-    model: "Premier",
+    name: "BuBlue Bubot 800P Gen2",
+    model: "Bubot 800P gen2",
     environments: ["in_ground"],
     cleans: ["floor", "walls", "waterline"],
     powerType: "corded",
-    priceTier: "premium",
-    maxPoolLengthFt: 50,
+    priceTier: "mid",
+    maxPoolLengthFt: null,
     specsJson: { snapshotDate: SNAPSHOT_DATE },
     status: "published",
   },

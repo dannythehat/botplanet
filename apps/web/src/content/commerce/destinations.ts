@@ -50,14 +50,19 @@ const AMAZON_ASINS: { productId: string; asin: string; sourceUrl: string }[] = [
   // bot-mitigation page to server-side reads. The previous identity check is
   // kept below, and now applies only to the ASIN it actually examined.
   { productId: "prod-beatbot-aquasense-2-ultra", asin: "B0G7B6F5FZ", sourceUrl: "Owner-confirmed 2026-08-03: https://www.amazon.com/Beatbot-AquaSense-Ultra-Cordless-Clarification/dp/B0G7B6F5FZ" },
-  // REPLACES B0F9WN961G, and replaces the MODEL with it. That listing could not
-  // name its own model — "Blue" in both the model name and model number fields —
-  // and the SerpApi read of 31 July found no buying option at all, so the buy
-  // button pointed at something nobody could purchase. The owner supplied the
-  // X1 Pro's listing and confirmed the Pro is what BotPlanet should sell; the
-  // verification record moved to the Pro with it, and the Essential's stored
-  // specification was removed rather than carried across.
-  { productId: "prod-aiper-scuba-x1", asin: "B0GVT2YPLB", sourceUrl: "Owner-confirmed 2026-08-03: https://www.amazon.com/AIPER-Scuba-X1-Pro-Underwater/dp/B0GVT2YPLB" },
+  // prod-aiper-scuba-x1 HAS NO ASIN. It carried B0GVT2YPLB for a few hours on
+  // 3 August 2026 and that was MY ERROR: I read "Scuba-X1-Pro" in the listing
+  // URL and took it for the Scuba X1 Pro. It is not. Reading the listing itself
+  // shows Model Name and Model Number both "Scuba X1+Hy Pro", and a title of
+  // "AIPER Scuba X1 Robotic Pool Cleaner with HydroComm Pro Smart Pool Monitor"
+  // — the BASE X1 bundled with a monitor accessory. The "Pro" in the slug
+  // belongs to HydroComm Pro, not to the cleaner.
+  //
+  // The record is the Scuba X1 Pro, which is a different machine with its own
+  // manufacturer page. Rather than ship a buy button to the wrong product, this
+  // product has no destination until the correct ASIN is supplied. A URL slug
+  // is not an identifier; it is marketing copy in a path, and this is the cost
+  // of having trusted one.
   // Discovered by the SerpApi run of 2026-07-31 and matched on the details
   // table, not the title — see serpapi-observations.ts for what each read.
   { productId: "prod-dolphin-e10", asin: "B0GV15VY1N", sourceUrl: "SerpApi Amazon search, 2026-07-31: details table gives brand Dolphin, model name E10" },
@@ -212,6 +217,12 @@ const NO_AMAZON_DESTINATION = [
   //
   // Aiper Scuba S1 was here as well, every candidate having been a sibling.
   // The owner supplied a listing that names the S1 outright.
+  //
+  // The Scuba X1 Pro joins the list on 3 August 2026 — see the note in
+  // AMAZON_ASINS. It is the only product here for want of a CORRECT listing
+  // rather than any listing: the one supplied turned out to be a bundle of the
+  // base X1, and shipping it would have sent buyers to the wrong machine.
+  "prod-aiper-scuba-x1",
 ];
 
 export const DESTINATIONS: ProductDestination[] = [
@@ -336,6 +347,14 @@ export const SUPERSEDED_REFUSALS: SupersededRefusal[] = [
 ];
 
 export const REJECTED_CANDIDATES: RejectedCandidate[] = [
+  {
+    productId: "prod-aiper-scuba-x1",
+    retailerId: "ret-amazon",
+    candidate: "https://www.amazon.com/AIPER-Scuba-X1-Pro-Underwater/dp/B0GVT2YPLB",
+    reason:
+      "REFUSED AS A BUNDLE OF A SIBLING MODEL. The listing URL reads /AIPER-Scuba-X1-Pro-Underwater/, which is why it was briefly accepted, but the page's own details table gives Model Name and Model Number as \"Scuba X1+Hy Pro\" and the title as \"AIPER Scuba X1 Robotic Pool Cleaner with HydroComm Pro Smart Pool Monitor\". That is the base Scuba X1 packaged with a HydroComm Pro monitor, not the Scuba X1 Pro, which Aiper sells on its own page at /us/aiper-scuba-series/aiper-scuba-x1pro. Read on 3 August 2026.",
+    rule: "sibling_model",
+  },
   ...NO_AMAZON_DESTINATION.map(
     (productId): RejectedCandidate => ({
       productId,

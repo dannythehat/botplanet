@@ -213,18 +213,18 @@
     {
       "productId": "prod-aiper-scuba-x1",
       "canonicalUrl": "https://botplanet.io/robots/robotic-pool-cleaners/aiper-scuba-x1/",
-      "verifiedOffers": 1,
+      "verifiedOffers": 0,
       "preferredOfferId": "offer-prod-aiper-scuba-x1-ret-amazon",
       "preferredOfferAudit": [
         "1 offer(s) exist for this product",
         "1 from an approved retailer",
         "ranked by exact-match confidence, then stock, then delivered price",
-        "chosen: offer-prod-aiper-scuba-x1-ret-amazon (researched_exact)"
+        "chosen: offer-prod-aiper-scuba-x1-ret-amazon (search_only)"
       ],
       "commissionUsedAsTieBreak": false,
       "retailer": "ret-amazon",
-      "exactProductIdentifier": "B0GVT2YPLB",
-      "identifierKind": "asin",
+      "exactProductIdentifier": null,
+      "identifierKind": null,
       "market": "us",
       "priceState": "not_published",
       "stockState": "unknown",
@@ -238,9 +238,10 @@
       "blockers": [
         "no current price from an approved source",
         "stock state unknown",
+        "no exact Amazon destination — only a search fallback",
         "not eligible for Offer structured data"
       ],
-      "nextAction": "Obtain price and availability through the Amazon Creators API so the offer can carry a current price and enter Offer schema."
+      "nextAction": "Capture an exact Amazon ASIN for this product, then re-run the destination check."
     },
     {
       "productId": "prod-aiper-scuba-s1",

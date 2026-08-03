@@ -1,14 +1,28 @@
 {
   "generatedFor": "2026-07-31",
-  "total": 15,
+  "total": 17,
   "byRule": {
-    "search_not_offer": 3,
+    "sibling_model": 3,
+    "search_not_offer": 4,
     "refurbished_or_used": 1,
-    "sibling_model": 2,
     "wrong_region": 1,
     "unclear_seller": 8
   },
   "rows": [
+    {
+      "productId": "prod-aiper-scuba-x1",
+      "retailerId": "ret-amazon",
+      "candidate": "https://www.amazon.com/AIPER-Scuba-X1-Pro-Underwater/dp/B0GVT2YPLB",
+      "reason": "REFUSED AS A BUNDLE OF A SIBLING MODEL. The listing URL reads /AIPER-Scuba-X1-Pro-Underwater/, which is why it was briefly accepted, but the page's own details table gives Model Name and Model Number as \"Scuba X1+Hy Pro\" and the title as \"AIPER Scuba X1 Robotic Pool Cleaner with HydroComm Pro Smart Pool Monitor\". That is the base Scuba X1 packaged with a HydroComm Pro monitor, not the Scuba X1 Pro, which Aiper sells on its own page at /us/aiper-scuba-series/aiper-scuba-x1pro. Read on 3 August 2026.",
+      "rule": "sibling_model"
+    },
+    {
+      "productId": "prod-aiper-scuba-x1",
+      "retailerId": "ret-amazon",
+      "candidate": "amazon.com/s?k=Aiper Scuba X1 Pro",
+      "reason": "A search-results page is not an offer: it does not identify a single product, a seller, a price or a stock state, and the customer still has to choose. Kept as a fallback click destination, refused as a verified offer.",
+      "rule": "search_not_offer"
+    },
     {
       "productId": "prod-wybot-c1",
       "retailerId": "ret-amazon",

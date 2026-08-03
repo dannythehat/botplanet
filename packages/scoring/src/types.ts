@@ -13,6 +13,8 @@ export interface PoolAnswers {
   power_pref: PowerType | "no_pref";
   budget_tier: "budget" | "mid" | "premium" | "ultra" | "no_pref";
   pool_length_ft: number | null;
+  /** Surface area, when the reader gives it instead of a length. */
+  pool_area_sqft?: number | null;
 }
 
 /**
@@ -31,7 +33,15 @@ export interface SuitabilityCandidate {
   cleans: CleaningSurface[];
   powerType: PowerType;
   priceTier: "budget" | "mid" | "premium" | "ultra";
+  /**
+   * Maximum pool length and maximum surface area, each null when the maker does
+   * not publish it. BOTH are here because manufacturers do not agree on which
+   * to state: Aiper publishes an area for the Scuba V3 and no length at all,
+   * while Maytronics publishes a length. Carrying only length would force one of
+   * two bad choices — invent a length, or let the product be judged on nothing.
+   */
   maxPoolLengthFt: number | null;
+  maxPoolAreaSqFt: number | null;
 }
 
 export interface ScoringWeights {
