@@ -77,7 +77,12 @@ const parts =
     : null;
 ---
 
-<section class="catfeat" data-side={side} aria-labelledby={`${id}-heading`}>
+<section
+  class="catfeat"
+  data-side={side}
+  data-mobile-art={image.mobileSrc ? "true" : "false"}
+  aria-labelledby={`${id}-heading`}
+>
   <div class="wrap catfeat__inner">
     <div class="catfeat__copy">
       <p class="catfeat__state">{state}</p>
@@ -278,7 +283,21 @@ const parts =
     overflow: hidden;
   }
 
+  /* A composed portrait file is shown whole — that is the point of supplying
+     one, and cropping it would undo the composition. */
   .catfeat__media img { display: block; width: 100%; height: auto; }
+
+  /* Without one, the wide desktop file is all there is, and half of it is the
+     empty space reserved for desktop copy. Shown at its natural ratio on a
+     phone that empty half reads as a broken image, so the fallback crops to
+     the focal point instead: the subject fills the frame and the negative
+     space it was carrying for the desktop layout is left out of it. */
+  .catfeat[data-mobile-art="false"] .catfeat__media img {
+    aspect-ratio: 4 / 3;
+    height: auto;
+    object-fit: cover;
+    object-position: var(--catfeat-focal, center);
+  }
 
   /* ---------- desktop: the picture becomes the section's surface ---------- */
   @media (min-width: 1000px) {
