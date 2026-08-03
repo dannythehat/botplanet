@@ -91,8 +91,16 @@ const parts =
       <p class="catfeat__body">{body}</p>
 
       <div class="catfeat__actions">
-        <a class="btn btn--primary btn--lg" href={primary.href}>{primary.label}</a>
-        {secondary && <a class="btn btn--quiet btn--lg" href={secondary.href}>{secondary.label}</a>}
+        <a class="catfeat__btn catfeat__btn--primary" href={primary.href}>
+          <span>{primary.label}</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        {secondary && (
+          <a class="catfeat__btn catfeat__btn--ghost" href={secondary.href}>
+            <span>{secondary.label}</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        )}
       </div>
 
       {more && <a class="catfeat__more" href={more.href}>{more.label} &#8594;</a>}
@@ -148,7 +156,9 @@ const parts =
 
   .catfeat__state {
     margin: 0 0 14px;
-    color: #aeb4bc;
+    /* Picks up the electric blue that runs through every one of these
+       photographs, so the label belongs to the picture behind it. */
+    color: #5aa9ff;
     font-family: var(--font-mono);
     font-size: 12px;
     font-weight: 700;
@@ -196,18 +206,60 @@ const parts =
     line-height: 1.65;
   }
 
+  /* Stacked and equal width, so the two actions read as one control block
+     rather than a row that rewraps at every breakpoint. */
   .catfeat__actions {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: flex-start;
     gap: 12px;
     margin-top: 30px;
   }
 
-  .catfeat__actions .btn { flex: 0 1 auto; }
+  .catfeat__btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    width: min(100%, 23rem);
+    min-height: 3.4rem;
+    padding: 0 1.15rem 0 1.45rem;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: transform .18s ease, box-shadow .18s ease, background .18s ease, border-color .18s ease;
+  }
+
+  .catfeat__btn svg { width: 1.15rem; height: 1.15rem; flex: 0 0 auto; opacity: .9; }
+
+  .catfeat__btn--primary {
+    color: #fff;
+    background: linear-gradient(135deg, #2f7fe4 0%, #1f66d0 52%, #1a55b4 100%);
+    border: 1px solid rgba(120, 176, 255, .55);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.28), 0 10px 26px rgba(20, 74, 158, .42);
+  }
+
+  .catfeat__btn--primary:hover { transform: translateY(-2px); box-shadow: inset 0 1px 0 rgba(255,255,255,.34), 0 16px 34px rgba(20, 74, 158, .52); }
+
+  .catfeat__btn--ghost {
+    color: #eaf0f8;
+    background: rgba(10, 16, 26, .55);
+    border: 1px solid rgba(126, 160, 205, .42);
+    backdrop-filter: blur(3px);
+  }
+
+  .catfeat__btn--ghost:hover { border-color: rgba(170, 200, 240, .72); background: rgba(16, 26, 42, .7); }
+
+  .catfeat__btn:focus-visible { outline: var(--focus-ring, 2px solid #dfe4ec); outline-offset: 3px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .catfeat__btn, .catfeat__btn:hover { transform: none; transition: none; }
+  }
 
   .catfeat__more {
     display: inline-block;
-    margin-top: 20px;
+    margin-top: 22px;
     padding-bottom: 2px;
     border-bottom: 1px solid rgba(200, 205, 212, 0.32);
     color: #c8cdd4;
@@ -308,6 +360,6 @@ const parts =
 
   @media (max-width: 620px) {
     .catfeat h2 { font-size: 40px; }
-    .catfeat__actions .btn { flex: 1 1 100%; }
+    .catfeat__btn { width: 100%; }
   }
 </style>
