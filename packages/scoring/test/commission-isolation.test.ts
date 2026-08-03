@@ -55,6 +55,7 @@ describe("commission isolation in product scoring", () => {
       powerType: "cordless",
       priceTier: "premium",
       maxPoolLengthFt: null,
+      maxPoolAreaSqFt: null,
     };
     const twinB: SuitabilityCandidate = { ...twinA, productId: "twin-b" };
 

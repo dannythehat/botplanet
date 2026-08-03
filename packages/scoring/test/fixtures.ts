@@ -30,6 +30,8 @@ export const CANDIDATES: SuitabilityCandidate[] = [
     powerType: "corded",
     priceTier: "mid",
     maxPoolLengthFt: 50,
+    // Not published for any fixture; the scorer treats that as unknown, not unfit.
+    maxPoolAreaSqFt: null,
   },
   {
     productId: "prod-aiper-scuba-x1",
@@ -39,6 +41,8 @@ export const CANDIDATES: SuitabilityCandidate[] = [
     powerType: "cordless",
     priceTier: "premium",
     maxPoolLengthFt: null,
+    // Not published for any fixture; the scorer treats that as unknown, not unfit.
+    maxPoolAreaSqFt: null,
   },
   {
     productId: "prod-aiper-seagull-se",
@@ -48,6 +52,8 @@ export const CANDIDATES: SuitabilityCandidate[] = [
     powerType: "cordless",
     priceTier: "budget",
     maxPoolLengthFt: null,
+    // Not published for any fixture; the scorer treats that as unknown, not unfit.
+    maxPoolAreaSqFt: null,
   },
   {
     productId: "prod-polaris-freedom",
@@ -57,6 +63,8 @@ export const CANDIDATES: SuitabilityCandidate[] = [
     powerType: "cordless",
     priceTier: "premium",
     maxPoolLengthFt: 50,
+    // Not published for any fixture; the scorer treats that as unknown, not unfit.
+    maxPoolAreaSqFt: null,
   },
   {
     productId: "prod-betta-se-plus",
@@ -66,5 +74,7 @@ export const CANDIDATES: SuitabilityCandidate[] = [
     powerType: "solar",
     priceTier: "budget",
     maxPoolLengthFt: null,
+    // Not published for any fixture; the scorer treats that as unknown, not unfit.
+    maxPoolAreaSqFt: null,
   },
 ];
