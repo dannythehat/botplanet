@@ -22,6 +22,8 @@ because it contains text.
 | `beatbot-aquasense-2-ultra.webp` | Beatbot AquaSense 2 Ultra | 1254×1254 PNG | 1254×1254, 159 KB |
 | `aiper-scuba-x1.webp` | Aiper Scuba X1 **Pro** | 1254×1254 PNG | 1254×1254, 189 KB |
 | `aiper-seagull-se.webp` | Aiper Seagull SE | 1254×1254 PNG | 1254×1254, 181 KB |
+| `aiper-scuba-s1.webp` | Aiper Scuba S1 | 1402×1122 PNG | 1402×1122, 174 KB |
+| `dolphin-premier.webp` | BuBlue Bubot 800P Gen2 | 1402×1122 PNG | 1402×1122, 205 KB |
 
 ## Rights status
 
@@ -49,7 +51,7 @@ They are **not** eligible for `Product` structured data: a schema consumer reads
 that field as a photograph of the product, and these carry BotPlanet branding
 and headline text set into the image.
 
-Two of the nine — **Dolphin Proteus DX4 Plus** and **Aiper Scuba V3 AI Vision** —
+Two of the eleven — **Dolphin Proteus DX4 Plus** and **Aiper Scuba V3 AI Vision** —
 have verification records and live D1 product rows but no editorial record yet.
 Their identity is owner-confirmed rather than source-verified, and Notion still
 lists both as pending exact ASIN and redirect verification, so neither may ship
@@ -64,7 +66,15 @@ is owner-confirmed rather than machine-read, so it is held at
 C1 Max under near-identical titles.
 
 Danny has said more detailed photography will follow for the individual review
-pages. These nine are the lead category-page visuals.
+pages. These eleven are the lead category-page visuals — every product in the
+category now has one.
+
+## Two file names that do not match what they show
+
+`dolphin-premier.webp` shows a **BuBlue Bubot 800P Gen2**, not a Dolphin. That
+record held the Maytronics Dolphin Premier until 3 August 2026, when the owner
+replaced it. File names follow the product ID, which lives in D1 and cannot be
+changed from here.
 
 ## The Aiper X1 file name
 
