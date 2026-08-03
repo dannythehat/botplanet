@@ -316,3 +316,22 @@ export function collectionPageSchema(input: CollectionPageInput) {
     ...(input.lastReviewed ? { dateModified: input.lastReviewed } : {}),
   };
 }
+
+/**
+ * FAQPage, built from the questions the page actually renders.
+ *
+ * Takes the same array the FAQ component takes, so the structured data cannot
+ * drift from the visible content — the failure mode Google penalises.
+ */
+export function faqPageSchema(items: { q: string; a: string }[], path: string) {
+  if (!items.length) return null;
+  return {
+    "@type": "FAQPage",
+    "@id": absUrl(path) + "#faq",
+    mainEntity: items.map((i) => ({
+      "@type": "Question",
+      name: i.q,
+      acceptedAnswer: { "@type": "Answer", text: i.a },
+    })),
+  };
+}

@@ -22,6 +22,7 @@ import type { SplitPanel } from "../components/DecisionSplit.astro";
 import type { MatrixRow } from "../components/MatrixTable.astro";
 import type { CheckItem } from "../components/CheckList.astro";
 import type { PriceRung } from "../components/PriceLadder.astro";
+import type { FaqItem } from "../components/FaqList.astro";
 import type { HeroImage } from "../components/CategoryHero.astro";
 
 export interface DecisionSectionContent {
@@ -434,16 +435,13 @@ export function checkSectionFor(slug: string | undefined): CheckSectionContent |
 /* ============================================================
    Section 7 — cost.
 
-   Pool wording follows the approved Notion research ("How much
-   does a robotic pool cleaner cost?"), including its constraint:
-   researched price bands only once the current products are
-   verified. They are not, so no figure is printed. Every rung
-   shows "Check current price" until a dated, sourced check
-   exists — the component takes a price with its date and seller
-   the moment one does.
-
-   This answers the price objection without becoming a deals
-   page: what drives the number, and what each step up buys.
+   The approved research is explicit that researched price bands
+   wait until the five products are verified, and that every
+   displayed price carries a date and names its seller. None of
+   that is in place, so no rung carries a figure yet and each
+   shows "Check current price". The rungs describe what changes
+   as the price climbs, which answers the question honestly
+   without printing a number that is stale by Tuesday.
    ============================================================ */
 
 export interface PriceSectionContent {
@@ -460,49 +458,180 @@ export const PRICE_SECTION: Record<string, PriceSectionContent> = {
     id: "cost",
     eyebrow: "Cost",
     title: "How much does a robotic pool cleaner cost?",
-
-    /* 74 words. */
     intro:
-      "There is no single answer, because a robotic pool cleaner is really four different " +
-      "machines sold under one name. What moves the price is how much of the pool it reaches, " +
-      "how finely it filters, how it navigates, and whether there is a battery and an app " +
-      "involved. Prices also move week to week, so a figure printed here would be wrong by the " +
-      "time you read it. What follows is what each step up actually buys.",
-
+      "There is no single answer, because a robotic pool cleaner is really four products at " +
+      "four prices. What moves the number is coverage — floor only, or floor, walls and " +
+      "waterline — along with navigation, filter fineness, battery size and whether an app is " +
+      "involved. Prices also move week to week, so a figure printed here would be wrong before " +
+      "you read it. What follows is what each step up actually buys.",
     rungs: [
       {
         label: "Entry",
         what:
-          "Floor cleaning and not much above it. Shorter cycles, simpler filters, lighter " +
-          "build. Genuinely enough for a small flat-bottomed pool where the dirt settles.",
+          "Floor-only cleaning, shorter cycles and simpler filters. Genuinely enough for a " +
+          "flat, smaller pool where the dirt settles rather than sticking to the sides.",
       },
       {
         label: "Mid",
         what:
-          "Wall climbing starts to appear, filtration gets finer and cycles get longer. Often " +
-          "the first point at which scheduling shows up. The busiest part of the market.",
+          "Wall climbing appears, filtration gets finer and cycles run longer. Basic " +
+          "scheduling sometimes arrives at this level, sometimes not — check per model.",
       },
       {
         label: "Upper",
         what:
-          "Floor, walls and waterline together, with navigation that maps the pool rather than " +
-          "bouncing around it, and app control that is worth having rather than a gimmick.",
+          "Full floor, wall and waterline coverage, real navigation rather than a random " +
+          "pattern, and app control that is worth using rather than a checkbox on the box.",
       },
       {
         label: "Top",
         what:
-          "Cordless convenience at larger pool sizes, the longest runtimes, the finest filters, " +
-          "and extras like surface skimming or a charging dock. Diminishing returns on a small pool.",
+          "Cordless convenience at larger pool sizes, the longest runtimes, surface skimming " +
+          "or docking, and the finest filtration. Diminishing returns unless your pool is big.",
       },
     ],
-
     note:
-      "We do not print a price we have not checked. When a figure appears here it carries the " +
-      "date it was checked and who was selling it — the retailer and a marketplace seller on the " +
-      "same site are not the same thing, and their prices can differ.",
+      "Every price on BotPlanet carries the date it was checked and names whether it came from " +
+      "the retailer or a marketplace seller. Where we have not checked recently, we say " +
+      "\"Check current price\" rather than guess.",
   },
 };
 
 export function priceSectionFor(slug: string | undefined): PriceSectionContent | undefined {
   return slug ? PRICE_SECTION[slug] : undefined;
+}
+
+/* ============================================================
+   Section 8 — the worth-it verdict.
+
+   Answers the biggest question the category attracts, at
+   category level, in the 120–180 words the research allows. The
+   dedicated worth-it guide does not exist yet, so nothing links
+   out to it.
+   ============================================================ */
+
+export interface VerdictSectionContent {
+  id: string;
+  eyebrow?: string;
+  title: string;
+  intro: string;
+  verdict: string;
+  body: string;
+  against: string;
+}
+
+export const VERDICT_SECTION: Record<string, VerdictSectionContent> = {
+  "robotic-pool-cleaners": {
+    id: "worth-it",
+    eyebrow: "The verdict",
+    title: "Are robotic pool cleaners worth it?",
+    intro:
+      "It is the question the category attracts most, and it deserves a straight answer rather " +
+      "than a sales pitch. Here is ours, at category level.",
+    verdict:
+      "For most pool owners with an in-ground pool, yes — but for the time it gives back, not " +
+      "for the cleaning itself.",
+    /* 152 words. */
+    body:
+      "A robot does not clean better than you would with a brush and a spare hour. What it does " +
+      "is clean consistently, on a schedule, without the hour. That is the whole proposition, " +
+      "and it is a genuine one: most pools get neglected not because the owner cannot clean " +
+      "them but because doing it every week is tedious. Running costs are modest — a cycle " +
+      "draws roughly what a fridge does over a few hours, and the consumables are brushes and " +
+      "filters. Against that, it is a machine that lives in water. It will need parts, it may " +
+      "need a repair, and it will not fix your water chemistry, your skimmer or your filter " +
+      "pump. Treat it as one job removed from your week rather than pool maintenance solved, " +
+      "and the money makes sense.",
+    against:
+      "A small above-ground pool you can brush in ten minutes, a pool used a few weeks a year, " +
+      "or a pool where the real problem is chemistry rather than debris. In those cases a " +
+      "manual vacuum and a decent skimmer net do the same job for a fraction of the money.",
+  },
+};
+
+export function verdictSectionFor(slug: string | undefined): VerdictSectionContent | undefined {
+  return slug ? VERDICT_SECTION[slug] : undefined;
+}
+
+/* ============================================================
+   Section 9 — FAQs.
+
+   The six questions the approved research specifies, answered
+   concisely. Troubleshooting and maintenance depth belong to the
+   supporting guides, per the research boundary.
+
+   These same items generate the FAQPage schema, so the
+   structured data cannot claim a question the page does not show.
+   ============================================================ */
+
+export interface FaqSectionContent {
+  id: string;
+  eyebrow?: string;
+  title: string;
+  intro: string;
+  items: FaqItem[];
+}
+
+export const FAQ_SECTION: Record<string, FaqSectionContent> = {
+  "robotic-pool-cleaners": {
+    id: "faqs",
+    eyebrow: "Questions",
+    title: "Robotic pool cleaner FAQs",
+    intro:
+      "The questions people ask most before buying, answered plainly. Anything that needs a " +
+      "longer explanation gets its own guide rather than a paragraph here.",
+    items: [
+      {
+        q: "Do robotic pool cleaners climb walls?",
+        a:
+          "Some do, many do not, and the ability is model-specific rather than a feature of the " +
+          "category. Climbing depends on traction against a wet surface, so a machine can be " +
+          "powerful and still stay on the floor. Check the exact model rather than the product " +
+          "range, because manufacturers often share a name across both.",
+      },
+      {
+        q: "Do pool robots clean the waterline?",
+        a:
+          "Only if they are stated to. Reaching the wall and scrubbing the waterline are two " +
+          "different claims: the waterline is the tile band at the surface where an oily ring " +
+          "forms, and it needs the robot to hold position there and brush. Treat the two as " +
+          "separate capabilities and confirm both.",
+      },
+      {
+        q: "Can you leave a robotic pool cleaner in the pool?",
+        a:
+          "It is not recommended between cycles. Continuous exposure to pool chemicals ages " +
+          "seals, brushes and cable, and most manufacturers say to remove the unit after a run. " +
+          "Leaving it in also means it is sitting in the water during shock treatments, which " +
+          "is where damage tends to happen.",
+      },
+      {
+        q: "How often should a pool robot run?",
+        a:
+          "Twice a week suits most pools in season, with more during heavy leaf fall or after a " +
+          "storm. Running it daily rarely improves the water and wears the consumables faster. " +
+          "If the pool still looks dirty on that schedule, the issue is usually filtration or " +
+          "chemistry rather than cleaning frequency.",
+      },
+      {
+        q: "How long do robotic pool cleaners last?",
+        a:
+          "Expect several seasons rather than a decade, with brushes, filters and tracks " +
+          "replaced along the way as consumables. Lifespan depends heavily on whether the unit " +
+          "is removed and rinsed after cycles. Before buying, check that spare parts are sold " +
+          "separately — a robot is only as serviceable as its parts supply.",
+      },
+      {
+        q: "Can a robotic pool cleaner remove algae?",
+        a:
+          "It can lift algae once it is loosened, and a machine that actively brushes will help. " +
+          "What it cannot do is stop algae returning, because that is a water-chemistry problem. " +
+          "Balance the water first, then let the robot clear what has been dislodged.",
+      },
+    ],
+  },
+};
+
+export function faqSectionFor(slug: string | undefined): FaqSectionContent | undefined {
+  return slug ? FAQ_SECTION[slug] : undefined;
 }

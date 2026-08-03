@@ -6,7 +6,7 @@ import { getDb, schema } from "../../../lib/db";
 import { usd, titleCase } from "../../../lib/format";
 import { and, eq, inArray } from "drizzle-orm";
 import { breadcrumbsFor } from "../../../lib/routing";
-import { collectionPageSchema, imageObjectSchema } from "../../../lib/seo";
+import { collectionPageSchema, imageObjectSchema, faqPageSchema } from "../../../lib/seo";
 import CategoryHero from "../../../components/CategoryHero.astro";
 import { heroFor } from "../../../content/category-hero";
 import DecisionCards from "../../../components/DecisionCards.astro";
@@ -15,7 +15,9 @@ import DecisionSplit from "../../../components/DecisionSplit.astro";
 import MatrixTable from "../../../components/MatrixTable.astro";
 import CheckList from "../../../components/CheckList.astro";
 import PriceLadder from "../../../components/PriceLadder.astro";
-import { decisionSectionFor, coverageSectionFor, splitSectionFor, matrixSectionFor, checkSectionFor, priceSectionFor } from "../../../content/category-sections";
+import VerdictPanel from "../../../components/VerdictPanel.astro";
+import FaqList from "../../../components/FaqList.astro";
+import { decisionSectionFor, coverageSectionFor, splitSectionFor, matrixSectionFor, checkSectionFor, priceSectionFor, verdictSectionFor, faqSectionFor } from "../../../content/category-sections";
 
 const { category } = Astro.params;
 const db = getDb(Astro.locals);
@@ -52,6 +54,8 @@ const split = splitSectionFor(category);
 const matrix = matrixSectionFor(category);
 const check = checkSectionFor(category);
 const price = priceSectionFor(category);
+const verdict = verdictSectionFor(category);
+const faq = faqSectionFor(category);
 
 /* Schema is built from the images this page actually renders, so every
    ImageObject has visible content behind it. Product, Review and
@@ -80,6 +84,7 @@ const pageSchema = hero
         images: editorialImages,
       }),
       ...editorialImages.map(imageObjectSchema),
+      faqPageSchema(faq?.items ?? [], `/robots/${cat.slug}/`),
     ]
   : [];
 ---
@@ -146,6 +151,14 @@ const pageSchema = hero
 
   {price && (
     <PriceLadder id={price.id} eyebrow={price.eyebrow} title={price.title} intro={price.intro} rungs={price.rungs} note={price.note} />
+  )}
+
+  {verdict && (
+    <VerdictPanel id={verdict.id} eyebrow={verdict.eyebrow} title={verdict.title} intro={verdict.intro} verdict={verdict.verdict} body={verdict.body} against={verdict.against} />
+  )}
+
+  {faq && (
+    <FaqList id={faq.id} eyebrow={faq.eyebrow} title={faq.title} intro={faq.intro} items={faq.items} />
   )}
 
   {products.length === 0 ? (
