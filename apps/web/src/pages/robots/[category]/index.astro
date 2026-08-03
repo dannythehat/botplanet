@@ -6,6 +6,7 @@ import { getDb, schema } from "../../../lib/db";
 import { usd, titleCase } from "../../../lib/format";
 import { and, eq, inArray } from "drizzle-orm";
 import { breadcrumbsFor } from "../../../lib/routing";
+import { collectionPageSchema, imageObjectSchema } from "../../../lib/seo";
 import CategoryHero from "../../../components/CategoryHero.astro";
 import { heroFor } from "../../../content/category-hero";
 import DecisionCards from "../../../components/DecisionCards.astro";
@@ -47,12 +48,43 @@ const decision = decisionSectionFor(category);
 const coverage = coverageSectionFor(category);
 const split = splitSectionFor(category);
 const matrix = matrixSectionFor(category);
+
+/* Schema is built from the images this page actually renders, so every
+   ImageObject has visible content behind it. Product, Review and
+   AggregateRating are deliberately absent from a category hub. */
+const editorialImages = [
+  hero?.image?.src
+    ? { path: hero.image.src, caption: hero.image.alt, width: 1600, height: 900 }
+    : null,
+  ...(decision?.cards ?? [])
+    .filter((c) => c.image?.src)
+    .map((c) => ({ path: c.image!.src, caption: c.image!.alt, width: 800, height: 500 })),
+  coverage?.image?.src
+    ? { path: coverage.image.src, caption: coverage.image.alt, width: 1600, height: 900 }
+    : null,
+  ...(matrix?.rows ?? [])
+    .filter((r) => r.image?.src)
+    .map((r) => ({ path: r.image!.src, caption: r.image!.alt, width: 700, height: 467 })),
+].filter(Boolean) as { path: string; caption: string; width: number; height: number }[];
+
+const pageSchema = hero
+  ? [
+      collectionPageSchema({
+        path: `/robots/${cat.slug}/`,
+        name: hero.title,
+        description: hero.metaDescription,
+        images: editorialImages,
+      }),
+      ...editorialImages.map(imageObjectSchema),
+    ]
+  : [];
 ---
 
 <Base
   title={hero?.seoTitle ?? `${cat.name} — BotPlanet`}
   description={hero?.metaDescription ?? `Compare ${cat.name.toLowerCase()} for the US.`}
   breadcrumbs={crumbs}
+  schema={pageSchema}
 >
   {hero ? (
     <CategoryHero

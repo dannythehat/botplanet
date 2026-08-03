@@ -16,12 +16,16 @@
    ============================================================ */
 
 import SectionHead from "./SectionHead.astro";
+import type { HeroImage } from "./CategoryHero.astro";
 
 export interface MatrixRow {
   /** Row label — rendered as the H3. */
   label: string;
   /** One entry per column, in the same order as `columns`. */
   cells: string[];
+  /** Optional thumbnail. Deliberately small and 3:2 — a different
+      treatment from the card sections, so the page stays varied. */
+  image?: HeroImage;
 }
 
 interface Props {
@@ -54,6 +58,16 @@ const { id, eyebrow, title, intro, columns, rows, note } = Astro.props;
         {rows.map((row) => (
           <tr>
             <th scope="row">
+              {row.image?.src && (
+                <img
+                  class="bp-mx__thumb"
+                  src={row.image.src}
+                  alt={row.image.alt}
+                  style={row.image.focal ? `object-position: ${row.image.focal}` : undefined}
+                  loading="lazy"
+                  decoding="async"
+                />
+              )}
               <h3 class="bp-mx__rowtitle">{row.label}</h3>
             </th>
             {row.cells.map((cell, i) => (
@@ -87,6 +101,18 @@ const { id, eyebrow, title, intro, columns, rows, note } = Astro.props;
     width: 100%;
     border-collapse: collapse;
     text-align: left;
+  }
+
+  /* Thumbnail: 3:2 and small, so it reads as a reference picture
+     inside a table rather than a card image capping a panel. */
+  .bp-mx__thumb {
+    display: block;
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    border: 1px solid var(--cs-line-soft);
+    border-radius: 10px;
+    margin-bottom: 0.95rem;
   }
 
   .bp-mx__rowtitle {
@@ -152,6 +178,10 @@ const { id, eyebrow, title, intro, columns, rows, note } = Astro.props;
       border-bottom: 1px solid var(--cs-line-soft);
     }
 
+    .bp-mx__thumb {
+      aspect-ratio: 16 / 9;
+    }
+
     .bp-mx__table td {
       padding: 1rem 0 0;
       font-size: 0.97rem;
@@ -198,7 +228,7 @@ const { id, eyebrow, title, intro, columns, rows, note } = Astro.props;
     }
 
     .bp-mx__table tbody th {
-      width: 15rem;
+      width: 17.5rem;
       padding: 1.5rem;
       vertical-align: top;
     }

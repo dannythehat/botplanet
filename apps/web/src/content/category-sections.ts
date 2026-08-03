@@ -53,6 +53,12 @@ export const DECISION_SECTION: Record<string, DecisionSectionContent> = {
       {
         title: "In-ground pools",
         bestFor: "Deeper water, walls and a visible waterline.",
+        image: {
+          src: "/media/pool/pool-type-inground.webp",
+          alt:
+            "A rectangular in-ground swimming pool with blue tiled walls and a stainless " +
+            "steel handrail, set into a stone patio beside a house.",
+        },
         points: [
           "Check the stated maximum pool length covers your longest run, not just your average.",
           "Wall and waterline cleaning is a separate capability from floor cleaning — confirm it per model.",
@@ -62,6 +68,12 @@ export const DECISION_SECTION: Record<string, DecisionSectionContent> = {
       {
         title: "Above-ground pools",
         bestFor: "Flat floors and liners that need a gentler touch.",
+        image: {
+          src: "/media/pool/pool-type-above-ground.webp",
+          alt:
+            "A round above-ground swimming pool with grey panelled walls, edged with pebbles " +
+            "and lawn, next to a raised timber deck.",
+        },
         points: [
           "Floor-only cleaning is often genuinely enough, and costs less.",
           "Look for brushes and tracks rated as safe for a vinyl liner.",
@@ -71,6 +83,12 @@ export const DECISION_SECTION: Record<string, DecisionSectionContent> = {
       {
         title: "Small, large and freeform pools",
         bestFor: "Unusual shapes, long spans and tight corners.",
+        image: {
+          src: "/media/pool/pool-type-freeform.webp",
+          alt:
+            "Two freeform pools side by side: a small kidney-shaped pool on a stone patio, " +
+            "and a large curved lagoon pool with rock edging and waterfalls.",
+        },
         points: [
           "Maximum pool length matters more than any size label on the box.",
           "Curves and corners depend on navigation, not raw suction.",
@@ -273,6 +291,12 @@ export const MATRIX_SECTION: Record<string, MatrixSectionContent> = {
     rows: [
       {
         label: "Leaves and larger debris",
+        image: {
+          src: "/media/pool/debris-leaves.webp",
+          alt:
+            "Fallen leaves floating on the surface and settled across the floor of a blue " +
+            "in-ground swimming pool.",
+        },
         cells: [
           "A wide intake and a basket big enough to hold a full load in one cycle.",
           "A full basket stops collecting. Under heavy leaf fall you may have to empty it " +
@@ -281,6 +305,12 @@ export const MATRIX_SECTION: Record<string, MatrixSectionContent> = {
       },
       {
         label: "Fine dirt, sand and silt",
+        image: {
+          src: "/media/pool/debris-silt.webp",
+          alt:
+            "Underwater view of fine brown silt gathered along the join between the floor " +
+            "and the wall of a swimming pool.",
+        },
         cells: [
           "A filter that is genuinely fine, stated as a measurement rather than described " +
             "as fine on the packaging.",
@@ -289,6 +319,12 @@ export const MATRIX_SECTION: Record<string, MatrixSectionContent> = {
       },
       {
         label: "Algae and stuck-on dirt",
+        image: {
+          src: "/media/pool/debris-algae.webp",
+          alt:
+            "A freeform swimming pool with cloudy green algae-tinted water and debris " +
+            "suspended near the surface.",
+        },
         cells: [
           "Active brushing and enough traction to scrub, rather than suction on its own.",
           "A pool cleaning robot lifts algae once it is loosened, but it does not correct " +

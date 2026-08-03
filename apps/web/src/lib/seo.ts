@@ -252,3 +252,67 @@ export function schemaGraph(...nodes: (Record<string, unknown> | null | undefine
     "@graph": nodes.filter(Boolean),
   };
 }
+
+/* ------------------------------------------------------------------
+   Category-hub schema.
+
+   The approved research limits a category page to CollectionPage,
+   BreadcrumbList, ItemList (only for products visibly listed),
+   ImageObject (for the editorial images) and FAQPage (only for FAQs
+   actually rendered). Review and AggregateRating are deliberately
+   absent — those belong to the individual review pages, and emitting
+   them here would claim ratings the page does not show.
+   ------------------------------------------------------------------ */
+
+export interface EditorialImageInput {
+  /** Site-relative path, e.g. "/media/pool/hero-desktop.webp". */
+  path: string;
+  /** Same text as the rendered alt — the description must match what is visible. */
+  caption: string;
+  width: number;
+  height: number;
+}
+
+export function imageObjectSchema(img: EditorialImageInput) {
+  return {
+    "@type": "ImageObject",
+    "@id": absUrl(img.path) + "#image",
+    contentUrl: absUrl(img.path),
+    url: absUrl(img.path),
+    caption: img.caption,
+    width: img.width,
+    height: img.height,
+  };
+}
+
+export interface CollectionPageInput {
+  /** Canonical path of the page. */
+  path: string;
+  /** The visible H1. */
+  name: string;
+  description: string;
+  /** Images rendered on the page. The first is treated as the primary. */
+  images?: EditorialImageInput[];
+  /** Date the page content was last reviewed, ISO yyyy-mm-dd. */
+  lastReviewed?: string;
+}
+
+export function collectionPageSchema(input: CollectionPageInput) {
+  const images = input.images ?? [];
+  return {
+    "@type": "CollectionPage",
+    "@id": absUrl(input.path) + "#page",
+    url: absUrl(input.path),
+    name: input.name,
+    description: input.description,
+    isPartOf: { "@id": `${SITE_URL}/#website` },
+    publisher: { "@id": `${SITE_URL}/#organization` },
+    ...(images.length
+      ? {
+          primaryImageOfPage: { "@id": absUrl(images[0].path) + "#image" },
+          image: images.map((i) => ({ "@id": absUrl(i.path) + "#image" })),
+        }
+      : {}),
+    ...(input.lastReviewed ? { dateModified: input.lastReviewed } : {}),
+  };
+}

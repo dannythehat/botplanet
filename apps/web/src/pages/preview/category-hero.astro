@@ -11,6 +11,7 @@ import CoverageRows from "../../components/CoverageRows.astro";
 import DecisionSplit from "../../components/DecisionSplit.astro";
 import MatrixTable from "../../components/MatrixTable.astro";
 import { decisionSectionFor, coverageSectionFor, splitSectionFor, matrixSectionFor } from "../../content/category-sections";
+import { collectionPageSchema, imageObjectSchema, schemaGraph, breadcrumbSchema } from "../../lib/seo";
 
 import "../../styles/tokens.css";
 import "../../styles/base.css";
@@ -24,6 +25,26 @@ const decision = decisionSectionFor("robotic-pool-cleaners")!;
 const coverage = coverageSectionFor("robotic-pool-cleaners")!;
 const split = splitSectionFor("robotic-pool-cleaners")!;
 const matrix = matrixSectionFor("robotic-pool-cleaners")!;
+
+const editorialImages = [
+  { path: hero.image!.src, caption: hero.image!.alt, width: 1600, height: 900 },
+  ...decision.cards.filter((c) => c.image?.src)
+    .map((c) => ({ path: c.image!.src, caption: c.image!.alt, width: 800, height: 500 })),
+];
+const graph = schemaGraph(
+  breadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Robots", path: "/robots/" },
+    { name: "Robotic Pool Cleaners", path: "/robots/robotic-pool-cleaners/" },
+  ]),
+  collectionPageSchema({
+    path: "/robots/robotic-pool-cleaners/",
+    name: hero.title,
+    description: hero.metaDescription,
+    images: editorialImages,
+  }),
+  ...editorialImages.map(imageObjectSchema),
+);
 ---
 
 <html lang="en">
@@ -32,6 +53,7 @@ const matrix = matrixSectionFor("robotic-pool-cleaners")!;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex, nofollow" />
     <title>Hero preview — BotPlanet</title>
+    <script type="application/ld+json" set:html={JSON.stringify(graph)} />
   </head>
   <body>
     <main class="wrap" style="padding-top: 2rem; padding-bottom: 4rem;">
