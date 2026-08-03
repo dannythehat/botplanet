@@ -310,6 +310,130 @@
     ]
   },
   {
+    "source": "/media/floor-category/feature-desktop.webp",
+    "sourceWidth": 1672,
+    "sourceHeight": 941,
+    "derivatives": [
+      {
+        "id": "media-floor-category-feature-desktop-webp-360",
+        "src": "/media/floor-category/feature-desktop-360w.webp",
+        "width": 360,
+        "height": 203,
+        "bytes": 4348,
+        "checksum": "sha256:176b735e716bbba75383dff931c40339ad480542f25f8506f27fb4cf1fd6c422"
+      },
+      {
+        "id": "media-floor-category-feature-desktop-webp-640",
+        "src": "/media/floor-category/feature-desktop-640w.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 11194,
+        "checksum": "sha256:b7463c18c39a41d3bd18cccbe95ad78b5df7cc332302d64c7513d78e63c69ff8"
+      },
+      {
+        "id": "media-floor-category-feature-desktop-webp-960",
+        "src": "/media/floor-category/feature-desktop-960w.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 22896,
+        "checksum": "sha256:11320bb48cee7e216a4a83ecebca84ee8a4d67c994fdd5c9a1c1befffc949466"
+      },
+      {
+        "id": "media-floor-category-feature-desktop-webp-1440",
+        "src": "/media/floor-category/feature-desktop-1440w.webp",
+        "width": 1440,
+        "height": 810,
+        "bytes": 37840,
+        "checksum": "sha256:542e457e9091ec3d5b2a481cfc71eeff9decbf31cbe37c4c8f54d5c1030c6c0c"
+      }
+    ]
+  },
+  {
+    "source": "/media/floor-category/feature-mobile.webp",
+    "sourceWidth": 941,
+    "sourceHeight": 1672,
+    "derivatives": [
+      {
+        "id": "media-floor-category-feature-mobile-webp-360",
+        "src": "/media/floor-category/feature-mobile-360w.webp",
+        "width": 360,
+        "height": 640,
+        "bytes": 11516,
+        "checksum": "sha256:72054e88c7418e1d387ce1d49f28a90e0cb7491c94b8223bb87629ebd9d96c7d"
+      },
+      {
+        "id": "media-floor-category-feature-mobile-webp-640",
+        "src": "/media/floor-category/feature-mobile-640w.webp",
+        "width": 640,
+        "height": 1137,
+        "bytes": 28158,
+        "checksum": "sha256:7893c0776d4df4450a8a8a32f981ed71bcf7aa3c96e0fd2652adbd8f61977060"
+      }
+    ]
+  },
+  {
+    "source": "/media/security-category/feature-desktop.webp",
+    "sourceWidth": 1672,
+    "sourceHeight": 941,
+    "derivatives": [
+      {
+        "id": "media-security-category-feature-desktop-webp-360",
+        "src": "/media/security-category/feature-desktop-360w.webp",
+        "width": 360,
+        "height": 203,
+        "bytes": 3338,
+        "checksum": "sha256:9277f022b3a2f57444fe5879cc6153fa252f9ca78cb7d29038447a602264afb3"
+      },
+      {
+        "id": "media-security-category-feature-desktop-webp-640",
+        "src": "/media/security-category/feature-desktop-640w.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 8744,
+        "checksum": "sha256:87b3f1686167ebb4243b020c37acfddec07ada5888a8af72ed95b02eab3c2b51"
+      },
+      {
+        "id": "media-security-category-feature-desktop-webp-960",
+        "src": "/media/security-category/feature-desktop-960w.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 19156,
+        "checksum": "sha256:4c6c686442febed34f3e0a1ce1be36fa81ce2b3290ba101ac1af06c9a7b5bd60"
+      },
+      {
+        "id": "media-security-category-feature-desktop-webp-1440",
+        "src": "/media/security-category/feature-desktop-1440w.webp",
+        "width": 1440,
+        "height": 810,
+        "bytes": 32158,
+        "checksum": "sha256:df2f8e49ca4e3cb7d16e9512d2c1aa66529806bdc2fd5829e75f971a8aef5f94"
+      }
+    ]
+  },
+  {
+    "source": "/media/security-category/feature-mobile.webp",
+    "sourceWidth": 941,
+    "sourceHeight": 1672,
+    "derivatives": [
+      {
+        "id": "media-security-category-feature-mobile-webp-360",
+        "src": "/media/security-category/feature-mobile-360w.webp",
+        "width": 360,
+        "height": 640,
+        "bytes": 8542,
+        "checksum": "sha256:914898119456fc158222f5a69b3c031cd731982e1c1fb6de399cc2e91b503b88"
+      },
+      {
+        "id": "media-security-category-feature-mobile-webp-640",
+        "src": "/media/security-category/feature-mobile-640w.webp",
+        "width": 640,
+        "height": 1137,
+        "bytes": 22100,
+        "checksum": "sha256:c89833524350043339094d37d7d49d48b71a87903058909451bd9eacf31ad165"
+      }
+    ]
+  },
+  {
     "source": "/media/pool/hero-desktop.webp",
     "sourceWidth": 1600,
     "sourceHeight": 900,
