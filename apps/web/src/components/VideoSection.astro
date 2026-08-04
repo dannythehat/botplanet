@@ -66,6 +66,11 @@ const isYouTube = /^https:\/\/(www\.)?(youtube\.com\/watch\?v=|youtu\.be\/)/.tes
           ) : (
             <span class="bp-vid__blank" aria-hidden="true"></span>
           )}
+          {/* The poster is BotPlanet-branded and the video is not ours. Without
+              this the card reads as our own footage, which is exactly the
+              confusion the channel line further down is meant to prevent —
+              and a caption below a picture loses to the picture every time. */}
+          <span class="bp-vid__credit">Video by {video.channel}</span>
           <span class="bp-vid__play" aria-hidden="true">
             <svg viewBox="0 0 68 48"><path class="bp-vid__playbg" d="M66.5 7.7a8.6 8.6 0 0 0-6-6C55.2 0 34 0 34 0S12.8 0 7.5 1.6a8.6 8.6 0 0 0-6 6A89.6 89.6 0 0 0 0 24a89.6 89.6 0 0 0 1.5 16.3 8.6 8.6 0 0 0 6 6C12.8 48 34 48 34 48s21.2 0 26.5-1.6a8.6 8.6 0 0 0 6-6A89.6 89.6 0 0 0 68 24a89.6 89.6 0 0 0-1.5-16.3z"/><path d="M45 24 27 14v20z" fill="#fff"/></svg>
           </span>
@@ -156,6 +161,23 @@ const isYouTube = /^https:\/\/(www\.)?(youtube\.com\/watch\?v=|youtu\.be\/)/.tes
 
   .bp-vid__poster img { display: block; width: 100%; height: auto; }
   .bp-vid__blank { display: block; aspect-ratio: 16 / 9; background: linear-gradient(150deg, #161b22, #0a0d11); }
+
+  .bp-vid__credit {
+    position: absolute;
+    left: 0.7rem;
+    bottom: 0.7rem;
+    z-index: 2;
+    padding: 0.3rem 0.65rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    background: rgba(6, 9, 13, 0.82);
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #e8edf5;
+  }
 
   .bp-vid__play {
     position: absolute;

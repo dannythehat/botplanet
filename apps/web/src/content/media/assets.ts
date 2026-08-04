@@ -649,6 +649,17 @@ const REVIEW_FIGURES: ReviewFigure[] = [
       "the cleaner on wet stone beside a phone running the MyDolphin Plus app, showing a scheduled quick clean",
   },
   {
+    slug: "video-poster",
+    productSlug: "dolphin-nautilus-cc-plus",
+    type: "product_in_use",
+    file: "video-poster.webp",
+    checksum: "sha256:d40f53d5f461b7f7260ceb402b818f8981f0d0bca64a65d0b840b84ca24823d9",
+    width: 1672,
+    height: 941,
+    scene:
+      "a BotPlanet review card for the machine, shown beside a phone running the MyDolphin Plus app with a Wi-Fi symbol between them",
+  },
+  {
     slug: "filter-access",
     productSlug: "dolphin-nautilus-cc-plus",
     type: "filtration_detail",
