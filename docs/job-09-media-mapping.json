@@ -3,24 +3,24 @@
   "launchProducts": 10,
   "position": "No third-party product photograph is ingested. The Amazon Associates route is a potential lawful source, but the account's ownership and current approval are unverified, and obtaining Program Content lawfully would also require Creators API credentials that this environment does not hold; the programme forbids scraping, guessed URLs and unapproved caching. No launch-brand manufacturer publishes a press kit granting third-party image use. Until one of those changes, no product carries a photograph. Five products are shown in original BotPlanet creatives, which we own outright and which do show the machine but carry our branding and headline text set into the image — they illustrate, they are not evidence, and they never enter Product structured data. Every other product renders an original BotPlanet branded placeholder that names the exact model and does not depict it.",
   "totals": {
-    "assets": 51,
-    "productAssets": 26,
-    "originalAssets": 41,
+    "assets": 54,
+    "productAssets": 29,
+    "originalAssets": 44,
     "placeholders": 10,
-    "locallyStored": 51,
+    "locallyStored": 54,
     "remotelyServed": 0,
     "withdrawn": 0,
     "exactModelConfirmed": 10,
     "publicSafe": 10,
     "heroReady": 9,
     "fullSetReady": 0,
-    "derivatives": 99,
-    "altApproved": 37,
+    "derivatives": 108,
+    "altApproved": 40,
     "altDecorative": 14,
     "altMissing": 0,
     "altRejected": 0,
     "schemaProductEligible": 0,
-    "schemaOpenGraphEligible": 40
+    "schemaOpenGraphEligible": 43
   },
   "rows": [
     {
@@ -205,7 +205,11 @@
       "canonicalUrl": "https://botplanet.io/robots/robotic-pool-cleaners/polaris-freedom/",
       "exactModel": "Polaris FREEDOM Cordless Robotic Cleaner",
       "heroAssetId": "art-polaris-freedom",
-      "supportingAssetIds": [],
+      "supportingAssetIds": [
+        "fig-polaris-freedom-hero",
+        "fig-polaris-freedom-cordless-dock",
+        "fig-polaris-freedom-app-control"
+      ],
       "renderedAssetId": "art-polaris-freedom",
       "renderedIsPlaceholder": false,
       "imageSource": "original_botplanet — BotPlanet",
@@ -242,7 +246,7 @@
         "rightsRecordComplete": true,
         "exactModelConfirmed": true,
         "heroReady": true,
-        "supportingImagesReady": false,
+        "supportingImagesReady": true,
         "responsiveVariantsReady": true,
         "altTextApproved": true,
         "schemaEligible": false,
@@ -251,7 +255,6 @@
       },
       "imageReadinessStatus": "public_safe_placeholder_only",
       "blockers": [
-        "no supporting product imagery",
         "no image eligible for Product structured data",
         "The licensed route is Amazon Program Content via the Creators API. The API needs credentials this build environment does not hold, and the programme forbids scraping, constructing image URLs, or caching Program Content without express permission — so there is no lawful way to fetch an image here. Polaris sells FREEDOM, FREEDOM SC, FREEDOM LT and FREEDOM Plus on a shared EB37 chassis, so an incoming image must be matched on the FFREEDOM SKU and not on family resemblance. BotPlanet's own artwork now fills this product's card; that is a creative, not photography, and does not clear this blocker."
       ]

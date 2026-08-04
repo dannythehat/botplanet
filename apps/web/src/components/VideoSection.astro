@@ -22,11 +22,24 @@
 import { srcsetFor } from "../lib/srcset";
 
 export interface ReviewVideo {
-  /** Full YouTube watch URL. Without it the section does not render. */
+  /** Full YouTube watch URL, or an Amazon /vdp/ video page. */
   url: string;
   title: string;
   /** Who made it — printed, so its provenance is never ambiguous. */
   channel: string;
+  /**
+   * WHOSE VIDEO IT IS, AS A FACT RATHER THAN A TONE.
+   *
+   * "independent" is somebody who bought one. "seller" is the manufacturer or
+   * their storefront — an Amazon URL carrying `amzn1.ive.seller.video` is the
+   * latter by definition, and the Polaris FREEDOM link is exactly that.
+   *
+   * It is a separate field rather than something inferred from the channel
+   * name because the difference changes what the reader should take from the
+   * footage, and a reader cannot be expected to decode an Amazon URL. A seller
+   * video shows a machine working; it is not evidence that it works.
+   */
+  source?: "independent" | "seller";
   /** Roughly how long, e.g. "8 min". */
   duration?: string;
   /** One line on what it shows and what it does not. */
@@ -44,9 +57,24 @@ const { video, productName } = Astro.props;
 
 /** True only for a real YouTube watch or short-link URL. */
 const isYouTube = /^https:\/\/(www\.)?(youtube\.com\/watch\?v=|youtu\.be\/)/.test(video.url);
+/** An Amazon video detail page, which is where a seller's own footage lives. */
+const isAmazon = /^https:\/\/(www\.)?amazon\.[a-z.]+\/vdp\//.test(video.url);
+const renders = isYouTube || isAmazon;
+
+const isSeller = video.source === "seller";
+const host = isYouTube ? "YouTube" : "Amazon";
+
+/* The credit over the poster. Our poster is BotPlanet-branded, so without this
+   the card reads as our own footage — and for a seller video that would be two
+   wrong impressions at once. */
+const creditLabel = isSeller ? `${video.channel} — seller video` : `Video by ${video.channel}`;
+
+const privacyLine = isYouTube
+  ? "Opens on YouTube in a new tab. We do not embed the player, so nothing loads from Google until you choose to go there."
+  : "Opens on Amazon in a new tab. We do not embed the player, so nothing loads from Amazon until you choose to go there.";
 ---
 
-{isYouTube && (
+{renders && (
   <section class="bp-vid" aria-labelledby="video-heading">
     <div class="bp-vid__plate">
       <p class="bp-vid__eyebrow">Watch it work</p>
@@ -70,7 +98,7 @@ const isYouTube = /^https:\/\/(www\.)?(youtube\.com\/watch\?v=|youtu\.be\/)/.tes
               this the card reads as our own footage, which is exactly the
               confusion the channel line further down is meant to prevent —
               and a caption below a picture loses to the picture every time. */}
-          <span class="bp-vid__credit">Video by {video.channel}</span>
+          <span class="bp-vid__credit" data-seller={isSeller ? "true" : "false"}>{creditLabel}</span>
           <span class="bp-vid__play" aria-hidden="true">
             <svg viewBox="0 0 68 48"><path class="bp-vid__playbg" d="M66.5 7.7a8.6 8.6 0 0 0-6-6C55.2 0 34 0 34 0S12.8 0 7.5 1.6a8.6 8.6 0 0 0-6 6A89.6 89.6 0 0 0 0 24a89.6 89.6 0 0 0 1.5 16.3 8.6 8.6 0 0 0 6 6C12.8 48 34 48 34 48s21.2 0 26.5-1.6a8.6 8.6 0 0 0 6-6A89.6 89.6 0 0 0 68 24a89.6 89.6 0 0 0-1.5-16.3z"/><path d="M45 24 27 14v20z" fill="#fff"/></svg>
           </span>
@@ -82,16 +110,13 @@ const isYouTube = /^https:\/\/(www\.)?(youtube\.com\/watch\?v=|youtu\.be\/)/.tes
             {video.channel}
             {video.duration && <span class="bp-vid__dur">{video.duration}</span>}
           </span>
-          <span class="bp-vid__go">Watch on YouTube <span aria-hidden="true">&#8599;</span></span>
+          <span class="bp-vid__go">Watch on {host} <span aria-hidden="true">&#8599;</span></span>
         </span>
       </a>
 
       {video.note && <p class="bp-vid__note">{video.note}</p>}
 
-      <p class="bp-vid__privacy">
-        Opens on YouTube in a new tab. We do not embed the player, so nothing loads from Google
-        until you choose to go there.
-      </p>
+      <p class="bp-vid__privacy">{privacyLine}</p>
     </div>
   </section>
 )}
@@ -177,6 +202,14 @@ const isYouTube = /^https:\/\/(www\.)?(youtube\.com\/watch\?v=|youtu\.be\/)/.tes
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: #e8edf5;
+  }
+
+  /* A seller's own footage gets an amber rim rather than the neutral one. Not
+     a warning — a label. The reader should be able to tell at a glance whether
+     they are about to watch an owner or a marketing department. */
+  .bp-vid__credit[data-seller="true"] {
+    border-color: rgba(217, 164, 65, 0.6);
+    color: #f0dcb4;
   }
 
   .bp-vid__play {

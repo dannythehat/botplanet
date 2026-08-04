@@ -27,8 +27,30 @@ export interface LinkResult {
   applied: { anchor: string; href: string }[];
 }
 
-export function applyInternalLinks(html: string, anchors: InternalAnchor[]): LinkResult {
-  const live = anchors.filter((a) => a.status === "live");
+/**
+ * @param selfPath The path of the page being rendered. Anchors pointing at it
+ *   are dropped.
+ *
+ *   THIS MATTERS FROM THE SECOND REVIEW ONWARDS. With one review the anchor
+ *   list could only point elsewhere. With two, "Polaris FREEDOM" is both a
+ *   phrase in the Nautilus review and the name of a page — and without this the
+ *   Polaris page would link its own product name to itself, on every mention.
+ *   A self-link is a dead end for a reader and a wasted signal for a crawler.
+ */
+export function applyInternalLinks(
+  html: string,
+  anchors: InternalAnchor[],
+  selfPath?: string,
+): LinkResult {
+  /* Compared without a trailing slash so "/robots/x/" and "/robots/x" are the
+     same page, which they are. A fragment link back into the current page is
+     left alone — that is navigation, not a self-link. */
+  const norm = (p: string) => p.split("#")[0].replace(/\/+$/, "");
+  const self = selfPath ? norm(selfPath) : null;
+
+  const live = anchors.filter(
+    (a) => a.status === "live" && !(self !== null && norm(a.href) === self && !a.href.includes("#")),
+  );
   if (live.length === 0) return { html, applied: [] };
 
   const remaining = new Map(live.map((a) => [a.anchor.toLowerCase(), a.max ?? 1]));

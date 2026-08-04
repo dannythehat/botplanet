@@ -136,6 +136,55 @@ export const SNAPSHOTS: Record<string, ProductSnapshot> = {
       { need: "You want a cordless machine", test: { kind: "power", value: "cordless" } },
     ],
   },
+
+  "polaris-freedom": {
+    slug: "polaris-freedom",
+    priceBand: "premium",
+    priceBandWhy:
+      "The top of this category. You are paying for the battery and the dock, not for extra cleaning ability — a corded machine covers the same surfaces for considerably less.",
+    shipping: "Prime-eligible on Amazon, so usually a day or two rather than a week.",
+    shippingSpeed: "fast",
+    points: [
+      {
+        label: "Cleans",
+        value: "Floor, walls and waterline",
+        note: "A dedicated waterline-only mode, which most floor-and-wall machines do not have at all.",
+      },
+      {
+        label: "Power",
+        value: "Cordless, 9.6 Ah lithium-ion",
+        note: "Nothing in the water to tangle. The battery is a wear part — budget for replacing it.",
+      },
+      {
+        label: "Biggest pool it is rated for",
+        value: "50 ft",
+        note: "Polaris states this only in its marketing panels. The manual and support page give depth and no length.",
+      },
+      {
+        label: "Runtime",
+        value: "2 h 30",
+        note: "Floor and walls. Floor only is 1 h 30. Recharges in four hours on the dock.",
+      },
+      {
+        label: "Filter",
+        value: "4 L canister",
+        note: "Large for the class. No micron rating is published by Polaris.",
+      },
+      {
+        label: "Warranty",
+        value: null,
+        note: "Polaris does not state a term in the manual, on the support page or in the A+ panels.",
+      },
+    ],
+    suitsYouIf:
+      "You have an in-ground pool up to about 50 ft, the cable is the thing you actually hate, and you want the waterline handled as well as the floor.",
+    ruleOutIf:
+      "Your pool is above ground, it is deeper than 13 ft, or you would rather not own a machine with a part that wears out on a calendar.",
+    ruleOuts: [
+      { need: "Your pool is above ground", test: { kind: "cleans", value: "floor" } },
+      { need: "You would rather have mains power than a battery", test: { kind: "power", value: "corded" } },
+    ],
+  },
 };
 
 export const snapshotFor = (slug: string | undefined): ProductSnapshot | undefined =>

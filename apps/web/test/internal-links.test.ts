@@ -4,6 +4,7 @@ import { applyInternalLinks } from "../src/lib/internal-linker";
 import { CATEGORY_ANCHORS, anchorsFor, liveAnchorsFor } from "../src/content/internal-links";
 import { REVIEWS } from "../src/content/reviews";
 import { ROUTES } from "../src/content/routes";
+import { productEditorial, catalogueStatusOf } from "../src/content/products";
 
 const POOL = anchorsFor("robotic-pool-cleaners");
 
@@ -68,12 +69,26 @@ describe("the anchor plan itself", () => {
     }
   });
 
+  /**
+   * A product page is not in ROUTES — those URLs are generated per product, so
+   * the registry cannot list them. They are validated against the catalogue
+   * instead, which is the real answer to "does this page exist": an anchor may
+   * point at a product only if that product is still active.
+   */
+  const productSlug = (path: string) => /^\/robots\/[a-z0-9-]+\/([a-z0-9-]+)\/$/.exec(path)?.[1];
+  const activeProduct = (slug: string) => {
+    const p = productEditorial(slug);
+    return Boolean(p && catalogueStatusOf(p.productId) === "active");
+  };
+
   it("points every live anchor at a path the route registry knows", () => {
     const known = new Set(ROUTES.map((r) => r.path));
     for (const [cat, list] of Object.entries(CATEGORY_ANCHORS)) {
       for (const a of list.filter((x) => x.status === "live")) {
         const path = a.href.split("#")[0];
-        expect(known.has(path), `${cat}: ${a.anchor} → ${path}`).toBe(true);
+        const slug = productSlug(path);
+        const ok = slug ? activeProduct(slug) : known.has(path);
+        expect(ok, `${cat}: ${a.anchor} → ${path}`).toBe(true);
       }
     }
   });
@@ -82,7 +97,15 @@ describe("the anchor plan itself", () => {
     const status = new Map(ROUTES.map((r) => [r.path, r.status]));
     for (const list of Object.values(CATEGORY_ANCHORS)) {
       for (const a of list.filter((x) => x.status === "live")) {
-        expect(status.get(a.href.split("#")[0])).toBe("live");
+        const path = a.href.split("#")[0];
+        const slug = productSlug(path);
+        if (slug) {
+          /* A withdrawn product keeps its record and loses its page, so an
+             anchor pointing at one would be a live link to a redirect. */
+          expect(activeProduct(slug), `${a.anchor} → ${path} is not an active product`).toBe(true);
+          continue;
+        }
+        expect(status.get(path)).toBe("live");
       }
     }
   });

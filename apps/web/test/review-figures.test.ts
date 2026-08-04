@@ -119,14 +119,35 @@ describe("review video", () => {
    * channel. Both matter: a reader should never be unclear whether they are
    * about to watch us, the manufacturer, or a stranger.
    */
-  it("points at a real YouTube URL with no share token", () => {
+  it("points at a real YouTube or Amazon video URL, with no share token", () => {
+    const YT = /^https:\/\/(www\.)?(youtube\.com\/watch\?v=|youtu\.be\/)[\w-]+$/;
+    /* Amazon hosts a seller's own footage on a /vdp/ page. The query string is
+       load-bearing there — `product` ties the video to the ASIN — so unlike a
+       YouTube link it is not stripped to a bare URL. */
+    const AMZ = /^https:\/\/(www\.)?amazon\.[a-z.]+\/vdp\/[0-9a-f]+\?/;
     for (const review of Object.values(REVIEWS)) {
       if (!review.video) continue;
-      expect(review.video.url).toMatch(
-        /^https:\/\/(www\.)?(youtube\.com\/watch\?v=|youtu\.be\/)[\w-]+$/,
-      );
-      // A share token identifies whoever sent the link, not the video.
+      expect(YT.test(review.video.url) || AMZ.test(review.video.url), review.video.url).toBe(true);
+      /* A share token identifies whoever sent the link, not the video.
+         YouTube uses si/is; Amazon uses ref=cm_sw_… on a shared link. */
       expect(review.video.url).not.toMatch(/[?&](si|is)=/);
+      expect(review.video.url).not.toMatch(/[?&]ref=cm_sw_/);
+    }
+  });
+
+  it("marks a seller's own video as a seller's own video", () => {
+    /* An Amazon URL carrying `amzn1.ive.seller.video` is the manufacturer's
+       marketing by definition. A reader cannot decode that, so the flag has to
+       be set explicitly and the note has to say it in words. */
+    for (const review of Object.values(REVIEWS)) {
+      const v = review.video;
+      if (!v) continue;
+      if (/amzn1\.ive\.seller\.video/.test(v.url)) {
+        expect(v.source, `${review.slug}: seller video not flagged`).toBe("seller");
+      }
+      if (v.source === "seller") {
+        expect(v.note?.toLowerCase() ?? "").toMatch(/own video|seller|marketing/);
+      }
     }
   });
 
@@ -141,8 +162,11 @@ describe("review video", () => {
   it("says plainly when the video is not ours", () => {
     for (const review of Object.values(REVIEWS)) {
       if (!review.video?.note) continue;
-      // Someone else's video must be labelled as someone else's.
-      expect(review.video.note.toLowerCase()).toMatch(/not ours|independent|third[- ]party/);
+      // Someone else's video must be labelled as someone else's — whether that
+      // someone is a stranger with a phone or the manufacturer's marketing team.
+      expect(review.video.note.toLowerCase()).toMatch(
+        /not ours|independent|third[- ]party|own video|seller|marketing/,
+      );
     }
   });
 });

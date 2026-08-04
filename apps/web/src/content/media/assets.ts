@@ -670,6 +670,41 @@ const REVIEW_FIGURES: ReviewFigure[] = [
     scene:
       "two hands lifting the filter baskets out through the top of the machine at the poolside",
   },
+
+  /* ---- Polaris FREEDOM ---- */
+  {
+    slug: "hero",
+    productSlug: "polaris-freedom",
+    type: "product_in_use",
+    file: "hero.webp",
+    checksum: "sha256:9c0fdbb8ca88073fab0b2cce35b4da9ff1c29e6596da7a3ddec0bf1a53aa811c",
+    width: 1254,
+    height: 1254,
+    scene:
+      "the blue and black tracked cleaner at the edge of a lit pool at night beside a phone showing a two hour thirty cycle running in floor and wall mode",
+  },
+  {
+    slug: "cordless-dock",
+    productSlug: "polaris-freedom",
+    type: "product_in_use",
+    file: "cordless-dock.webp",
+    checksum: "sha256:bf0532219a9d0c3d0cff9786fc7a548a7a2742d1470ed0d5b0a1f744c24a9b64",
+    width: 1254,
+    height: 1254,
+    scene:
+      "the cleaner standing on a terrace beside its upright charging station and a phone, with a lit pool behind",
+  },
+  {
+    slug: "app-control",
+    productSlug: "polaris-freedom",
+    type: "app_screenshot",
+    file: "app-control.webp",
+    checksum: "sha256:e1568cf32873fe756c8b9f93ca29a5b3603ec216364d32ba5cc9b891ec87ef52",
+    width: 1254,
+    height: 1254,
+    scene:
+      "a phone running the iAquaLink app showing a two hour thirty floor and wall cycle and a full battery, beside the cleaner at a lit poolside",
+  },
 ];
 
 /**
@@ -705,6 +740,20 @@ export const REVIEW_FIGURES_WITHHELD: {
     claim: "Active scrubbing brush — helps loosen dirt and debris",
     contradicts:
       "The same sheet lists Active Brush: No, and the review states 'Actively driven brush: No'. The brushes are passive and work as the robot moves.",
+  },
+  {
+    productSlug: "polaris-freedom",
+    supplied: "FREEDOM — Clean. Smart. Cordless. (supplied as the main image)",
+    claim: "4 intelligent cleaning modes: Floor, Wall, Waterline & Max Clean",
+    contradicts:
+      "There is no mode called Max Clean. Polaris's own listing bullet names the four as: floor, and floor+walls+waterline on the unit, plus Waterline only and SMART Cycle in the app. 'Max Clean' appears nowhere in the listing, the manual, the quick start guide or the support page. Everything else in this creative checks out — 2.5 hours, 50 ft, lithium-ion, cordless — so it is one wrong word on an otherwise accurate image, and changing it to SMART Cycle would make it publishable.",
+  },
+  {
+    productSlug: "polaris-freedom",
+    supplied: "Waterline Retrieval Options",
+    claim: "Three retrieval options, including 'Tap & Lift — tap the robot on the top and it will rise to the waterline for easy lifting'",
+    contradicts:
+      "Polaris publishes TWO retrieval methods, not three: 'FREEDOM climbs to the waterline at end-of-cycle for lightweight removal... Or use the manual retrieval hook (included) and a standard pole.' The climb is automatic at the end of a cycle — no tap. Tapping the machine to summon it is not a feature Polaris describes anywhere. The push-notification panel on this creative IS accurate; it is presented as a third retrieval method, which it is not.",
   },
 ];
 

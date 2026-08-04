@@ -91,6 +91,34 @@ export const CATEGORY_ANCHORS: Record<string, InternalAnchor[]> = {
       why: "Any claim about how we check things should be one click from the page that says how we check things.",
       status: "live",
     },
+    /* ---- Review-to-review. Live from the second review onwards. ----
+       These are the ones that earn their place: a reader being told a machine
+       is wrong for them is at the exact moment a named alternative helps. The
+       linker refuses to point a page at itself, so the same anchor list is
+       safe on every review. */
+    {
+      anchor: "Dolphin Nautilus CC Plus",
+      href: "/robots/robotic-pool-cleaners/dolphin-nautilus-cc-plus/",
+      why: "The corded mid-range comparison. Named in the Polaris review where the cordless premium is being justified against it.",
+      status: "live",
+    },
+    {
+      anchor: "Polaris FREEDOM",
+      href: "/robots/robotic-pool-cleaners/polaris-freedom/",
+      why: "The cordless answer to the Nautilus's biggest rule-out. A reader told 'this one has a cord' should be one click from the one that does not.",
+      status: "live",
+    },
+    {
+      anchor: "iAquaLink",
+      href: "/robots/robotic-pool-cleaners/polaris-freedom/",
+      why: "The app is only discussed at length on the Freedom review, so a mention elsewhere should reach it.",
+      status: "live",
+    },
+
+    /* ---- Declared now, linked when the page ships. ----
+       A planned anchor renders as plain text, so none of these can 404. The
+       wiring is done, and each becomes a real link the day its target exists —
+       rather than being remembered, or not, months later. */
     {
       anchor: "best robotic pool cleaner",
       href: "/best-robots/robotic-pool-cleaners/",
@@ -101,6 +129,30 @@ export const CATEGORY_ANCHORS: Record<string, InternalAnchor[]> = {
       anchor: "worth it",
       href: "/guides/are-robotic-pool-cleaners-worth-it/",
       why: "The is-it-worth-it guide owns that query. Planned: the page returns 404 today.",
+      status: "planned",
+    },
+    {
+      anchor: "battery",
+      href: "/guides/robotic-pool-cleaner-batteries/",
+      why: "Every cordless review reaches the same paragraph about cells degrading. That belongs in one guide the reviews point at, not repeated five times. Planned.",
+      status: "planned",
+    },
+    {
+      anchor: "filter",
+      href: "/guides/robotic-pool-cleaner-filters/",
+      why: "Micron ratings, canister capacity and how often you really rinse. Recurs in every review and is explained properly in none of them yet. Planned.",
+      status: "planned",
+    },
+    {
+      anchor: "pool size",
+      href: "/guides/what-size-robotic-pool-cleaner/",
+      why: "The single most common rule-out on this site is pool length. Planned as the page that explains how the ratings are arrived at and how much to trust them.",
+      status: "planned",
+    },
+    {
+      anchor: "warranty",
+      href: "/guides/robotic-pool-cleaner-warranties/",
+      why: "Two reviews so far have hit a manufacturer that will not state a term. Planned as the page that records who publishes what.",
       status: "planned",
     },
   ],
