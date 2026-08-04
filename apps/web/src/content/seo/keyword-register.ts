@@ -441,6 +441,41 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
     ],
     researchedOn: RUN,
   },
+  {
+    path: "/robots/robotic-pool-cleaners/beatbot-aquasense-2-ultra/",
+    primary: { term: "beatbot aquasense 2 ultra review", volume: 0, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "beatbot aquasense 2 ultra", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "aquasense 2 ultra", volume: 0, difficulty: 0, mustAppear: true },
+      // The purchase-deciding questions for this machine's actual buyer.
+      { term: "pool robot that skims the surface", volume: 0, difficulty: 0, mustAppear: false },
+      { term: "beatbot aquasense 2 ultra warranty", volume: 0, difficulty: 0, mustAppear: false },
+      { term: "beatbot clarification", volume: 0, difficulty: 0, mustAppear: false },
+    ],
+    cededTo: [
+      {
+        term: "robotic pool cleaner",
+        path: "/robots/robotic-pool-cleaners/",
+        why: "The category head term belongs to the hub, as on every review.",
+      },
+      {
+        term: "best robotic pool cleaner",
+        path: "/best-robots/robotic-pool-cleaners/",
+        why: "A comparison SERP. One review is not a best-of, even the flagship's.",
+      },
+      {
+        term: "cordless robotic pool cleaner",
+        path: "/best-robots/robotic-pool-cleaners/cordless/",
+        why: "Seven cordless reviews now. The shortlist page owns the head term so they do not fight each other for it.",
+      },
+      {
+        term: "aiper scuba x1 pro max review",
+        path: "/robots/robotic-pool-cleaners/aiper-scuba-x1-pro-max/",
+        why: "The X1 Pro Max is named as the cheaper surface-skimming alternative. Naming a rival is not targeting its term.",
+      },
+    ],
+    researchedOn: RUN,
+  },
 ];
 
 export const keywordsFor = (path: string): PageKeywords | undefined =>

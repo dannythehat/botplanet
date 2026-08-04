@@ -1678,6 +1678,147 @@ export const REVIEWS: Record<string, ReviewContent> = {
       "C1 PLUS in its identity fields. Check the listing says C1, alone, before buying anywhere.",
     lastReviewed: "2026-08-04",
   },
+
+  "beatbot-aquasense-2-ultra": {
+    slug: "beatbot-aquasense-2-ultra",
+    categorySlug: "robotic-pool-cleaners",
+    eyebrow: "Robotic pool cleaner review",
+    title: "Beatbot AquaSense 2 Ultra review",
+    seoTitle: "Beatbot AquaSense 2 Ultra Review | BotPlanet",
+    metaDescription:
+      "An honest review of the Beatbot AquaSense 2 Ultra: five jobs in one machine including " +
+      "surface skimming and water clarification, the camera that maps your pool, and the " +
+      "3-year warranty that changes the arithmetic.",
+    verdict:
+      "The ceiling of our catalogue: floor, walls, waterline, surface skimming and a " +
+      "clarification system nobody else attempts, behind a pool-mapping camera stack and an " +
+      "industry-first 3-year full replacement warranty — for $2,299. Worth it for the big, " +
+      "complicated pool that uses all five jobs; overkill for everyone else.",
+    bestFor:
+      "A large, debris-heavy in-ground pool — up to 3,875 sq ft of floor per cycle — whose " +
+      "owner wants sunk debris, walls, waterline, floating leaves and cloudy water handled by " +
+      "one machine.",
+    notIdealFor:
+      "Modest or above-ground pools, buyers who want skimming without flagship money, or " +
+      "anyone a WYBOT C1 or Aiper Scuba S1 would serve at a fraction of the price.",
+    image: {
+      src: "/media/reviews/beatbot-aquasense-2-ultra/hero.webp",
+      alt:
+        "BotPlanet artwork for the Beatbot AquaSense 2 Ultra robotic pool cleaner, shown on " +
+        "its dock beside an infinity pool at dusk with a phone running the Beatbot app.",
+    },
+    figures: [
+      {
+        afterHeading: "One machine, five jobs — including two nobody else does",
+        src: "/media/reviews/beatbot-aquasense-2-ultra/coverage.webp",
+        caption:
+          "Beatbot's 5-in-1 set: surface, clarification, walls, platforms, waterline and floor. The \"multizone mode\" label is our artwork's phrasing — Beatbot calls it Adaptive Multi-Platform Cleaning.",
+      },
+      {
+        afterHeading: "HybridSense, CleverNav and the camera that maps your pool",
+        src: "/media/reviews/beatbot-aquasense-2-ultra/navigation.webp",
+        caption:
+          "CleverNav path planning over a HybridSense map: camera, infrared, ultrasonic and dual time-of-flight sensors, with inlets, drains and ladders treated as obstacles. Both names are Beatbot's own.",
+      },
+      {
+        afterHeading: "The battery: three runtimes and a lab-tested footnote",
+        src: "/media/reviews/beatbot-aquasense-2-ultra/battery.webp",
+        caption:
+          "13,400 mAh, with Beatbot's own footnote about the 3,875 sq ft figure reproduced at the base. One correction: this creative says up to 11 hours for surface cleaning — Beatbot's page says up to 10, and 10 is the number to plan on.",
+      },
+    ],
+    folds: [
+      {
+        id: "clarification-the-robot-that-doses-your-water",
+        teaser: "The fifth job: a clarifying agent released as it drives, refills sold separately.",
+      },
+      {
+        id: "the-battery-three-runtimes-and-a-lab-tested-footnote",
+        teaser: "13,400 mAh, three different runtime claims, and the asterisk on 3,875 sq ft.",
+      },
+      {
+        id: "the-name-the-family-and-the-listing-we-could-not-machine-read",
+        teaser: "Five near-identical model names, one transposed on our own artwork — and why it matters.",
+      },
+      {
+        id: "what-we-cannot-tell-you",
+        teaser: "Six gaps, including a live Amazon price and what clarification does to your chemistry.",
+      },
+    ],
+    facts: [
+      { label: "Cleans", value: "Floor, walls, waterline, surface" },
+      { label: "Power", value: "Cordless battery" },
+      { label: "Max cleaning area", value: "3,875 sq ft" },
+      { label: "Warranty", value: "3-year full replacement" },
+    ],
+    specGroups: [
+      {
+        heading: "Power and runtime",
+        rows: [
+          { label: "Power type", value: "Cordless lithium-ion, wireless charging dock" },
+          { label: "Battery capacity", value: "13,400 mAh", note: "The largest in our catalogue." },
+          {
+            label: "Runtime",
+            value: "Up to 10 h surface / 5 h floor / 5 h walls and waterline",
+            note: "Three mode figures, all Beatbot's. Our artwork's 11-hour surface figure has no source — plan on 10.",
+          },
+          { label: "Charge time", value: "4.5 hours", note: "Beatbot's figure." },
+        ],
+      },
+      {
+        heading: "Pool compatibility",
+        rows: [
+          { label: "Installation", value: "In-ground", note: "Beatbot's marketing; no above-ground rating." },
+          {
+            label: "Max cleaning area",
+            value: "3,875 sq ft",
+            note: "Beatbot's own footnote: floor cleaning in one full battery cycle, lab-tested. Other jobs draw the same battery.",
+          },
+        ],
+      },
+      {
+        heading: "Cleaning",
+        rows: [
+          { label: "Surfaces", value: "5-in-1: floor, walls, waterline, water surface, clarification", note: "Beatbot's own coverage list." },
+          { label: "Platforms", value: "Adaptive Multi-Platform Cleaning", note: "Ledges, slopes and raised shelves — Beatbot's claim." },
+          { label: "Clarification", value: "ClearWater clarifying agent, released while cleaning", note: "Described by Beatbot as 100% natural; refill kits sold separately." },
+          { label: "Navigation", value: "HybridSense AI camera + IR + ultrasonic + dual TOF, CleverNav path planning", note: "Full pool mapping with obstacle awareness." },
+        ],
+      },
+      {
+        heading: "Filtration",
+        rows: [
+          { label: "Filter", value: "Two-stage, down to 150 μm", note: "Beatbot's stated fineness — from twigs to 150-micron particles." },
+        ],
+      },
+      {
+        heading: "Control and support",
+        rows: [
+          { label: "App", value: "Scheduling, water temperature, alerts, one-tap poolside return" },
+          {
+            label: "Warranty",
+            value: "3-year full replacement",
+            note: "Beatbot calls it the industry's first. The longest and strongest term in our catalogue.",
+          },
+        ],
+      },
+      {
+        heading: "Handling",
+        rows: [
+          { label: "Weight", value: null, note: "Not published by Beatbot; our research holds about 29 lbs." },
+          { label: "Dimensions", value: null, note: "Not published." },
+          { label: "Retrieval", value: "Smart return — surfaces at the poolside on one tap" },
+        ],
+      },
+    ],
+    skuNote:
+      "Specifications come from Beatbot's own AquaSense 2 Ultra page, read 31 July 2026 and " +
+      "re-read 4 August 2026, and its manual index. Beatbot publishes no SKU; the retired " +
+      "Amazon listing's details table read PRCMDS02G-2025. Beatbot sells five machines whose " +
+      "names differ by a suffix — AquaSense, Pro, 2, 2 Pro, 2 Ultra — so check the details " +
+      "table names the 2 Ultra before buying anywhere.",
+    lastReviewed: "2026-08-04",
+  },
 };
 
 export function reviewFor(slug: string | undefined): ReviewContent | undefined {

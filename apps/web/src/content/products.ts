@@ -603,7 +603,9 @@ const RAW: Record<string, Omit<ProductEditorial, "productId">> = {
     ],
     sources: [
       { label: "Beatbot spec page", url: "https://beatbot.com/pages/aquasense-2-ultra" },
-      { label: "Amazon US listing", url: "https://www.amazon.com/Beatbot-AquaSense-Cordless-Cleaning-Clarification/dp/B0DMN6NV6H" },
+      // Replaced 4 August 2026 — the previous source cited B0DMN6NV6H, the
+      // listing retired from the destination register on 3 August.
+      { label: "Amazon US listing", url: "https://www.amazon.com/Beatbot-AquaSense-Ultra-Cordless-Clarification/dp/B0G7B6F5FZ" },
     ],
     evidence: "manufacturer_verified",
     confidence: "high",

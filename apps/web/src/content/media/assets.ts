@@ -1098,6 +1098,58 @@ const REVIEW_FIGURES: ReviewFigure[] = [
     scene:
       "the cleaner plugged into a wall charger on a poolside patio at night, with badges for charging time and battery capacity",
   },
+
+  /* ---- Beatbot AquaSense 2 Ultra ----
+     The hero prints the model name transposed ("AquaSense Ultra 2" — the real
+     name is AquaSense 2 Ultra), the battery creative prints "up to 11 hours"
+     surface cleaning where Beatbot's own page says up to 10, and the coverage
+     creative's "multizone mode" label is our phrasing for what Beatbot calls
+     Adaptive Multi-Platform Cleaning. All four publish per the owner's
+     standing rule; the review and captions carry the corrections. */
+  {
+    slug: "hero",
+    productSlug: "beatbot-aquasense-2-ultra",
+    type: "product_in_use",
+    file: "hero.webp",
+    checksum: "sha256:4a6dad0bf3667bfd3a1665f0173e654fded48e55bfa7f22692c0dcb7cbe5c4a5",
+    width: 1254,
+    height: 1254,
+    scene:
+      "the dark grey cleaner tilted on its dock beside an infinity pool at dusk, next to a phone showing the AquaSense app and panels for app control, floor, wall and waterline cleaning, cordless running and navigation",
+  },
+  {
+    slug: "coverage",
+    productSlug: "beatbot-aquasense-2-ultra",
+    type: "product_in_use",
+    file: "coverage.webp",
+    checksum: "sha256:e2cc427ccdf33e8705f864732b12575967667eebacf5e1aac510fcadb99410d7",
+    width: 1254,
+    height: 1254,
+    scene:
+      "six labelled panels showing the cleaner skimming the water surface, releasing clarifier, climbing a wall, cleaning a raised platform, working the waterline and crossing the floor",
+  },
+  {
+    slug: "navigation",
+    productSlug: "beatbot-aquasense-2-ultra",
+    type: "product_in_use",
+    file: "navigation.webp",
+    checksum: "sha256:73e945d365eb530df121154f32509dc6a7375424664aaa4fbcc51f355236b2b3",
+    width: 1254,
+    height: 1254,
+    scene:
+      "the cleaner projecting a glowing route map above itself on a tiled pool floor, with icons marking an inlet, a drain and a ladder as obstacles",
+  },
+  {
+    slug: "battery",
+    productSlug: "beatbot-aquasense-2-ultra",
+    type: "product_in_use",
+    file: "battery.webp",
+    checksum: "sha256:2eccefbcfc4ba5780fbd6460709580c71985b267172d2291a1bd9eb5f516ae68",
+    width: 1254,
+    height: 1254,
+    scene:
+      "the cleaner afloat in an infinity pool at dusk beneath runtime badges for surface, floor and wall cleaning, above a battery outline and a coverage figure",
+  },
 ];
 
 /**
