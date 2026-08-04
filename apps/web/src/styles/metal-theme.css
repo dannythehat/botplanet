@@ -215,6 +215,35 @@ img[data-placeholder="true"] {
   --cs-surface-lift:
     radial-gradient(ellipse at 0% 0%, rgba(226, 232, 244, 0.07), transparent 60%),
     linear-gradient(180deg, #141920 0%, #0a0d11 100%);
+
+  /* ----------------------------------------------------------------
+     THE GLINT — colour, in the quantity metal actually has it.
+
+     Polished steel is never grey. It is grey with something cold
+     caught in it, and that is the only colour this palette gets:
+     an edge, a dot, a two-percent wash under a highlight. These
+     three blues already existed on the BotMatch panel; they were
+     just trapped on the one white surface on the site while every
+     dark plate stayed monochrome.
+
+     The rule for using them: a glint marks an EDGE or a STATE. It
+     never fills an area, never colours body text, and never
+     competes with the silver for the eye. If a change reads as
+     "the box is blue now" rather than "the box has a highlight",
+     it has gone too far.
+     ---------------------------------------------------------------- */
+  --cs-glint: #3d8ef0;
+  --cs-glint-deep: #1b5fc4;
+  --cs-glint-wash: rgba(61, 142, 240, 0.14);
+
+  /* States. Cool enough to sit beside the steel rather than on top of it. */
+  --cs-good: #3fb87a;
+  --cs-good-wash: rgba(63, 184, 122, 0.14);
+  --cs-warn: #d9a441;
+
+  /* Silver with the blue left in, for a highlight that should read as a
+     reflection rather than as a coloured object. */
+  --cs-sheen-cool: linear-gradient(135deg, #ffffff 0%, #dbe6f7 30%, #93a6c4 68%, #e8eefa 100%);
 }
 
 /* ------------------------------------------------------------------
