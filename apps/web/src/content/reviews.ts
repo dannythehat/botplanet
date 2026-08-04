@@ -1103,6 +1103,139 @@ export const REVIEWS: Record<string, ReviewContent> = {
       "read. Check the model name in the details table, never the URL.",
     lastReviewed: "2026-08-04",
   },
+
+  "aiper-seagull-se": {
+    slug: "aiper-seagull-se",
+    categorySlug: "robotic-pool-cleaners",
+    eyebrow: "Robotic pool cleaner review",
+    title: "Aiper Seagull SE review",
+    seoTitle: "Aiper Seagull SE Review | BotPlanet",
+    metaDescription:
+      "An honest review of the Aiper Seagull SE: 90 minutes of floor-only cleaning for a small " +
+      "above-ground pool, the sparsest spec sheet we cover, and the Amazon listing that died " +
+      "while we wrote it.",
+    verdict:
+      "The cheapest machine we cover and the most honest thing in the budget end of the market: " +
+      "a cordless vacuum that does the floor of a small above-ground pool for ninety minutes and " +
+      "does nothing else. No walls, no waterline, no app — and at this price, that is the correct " +
+      "product, not a compromise.",
+    bestFor:
+      "A small, flat-bottomed above-ground pool where the job is sand and sunk leaves on the " +
+      "floor, and a first robot for anyone learning what one changes.",
+    notIdealFor:
+      "An in-ground pool with real walls, a waterline ring, or anyone who wants an app, a " +
+      "schedule or a map.",
+    image: {
+      src: "/media/reviews/aiper-seagull-se/hero.webp",
+      alt:
+        "BotPlanet artwork for the Aiper Seagull SE compact cordless pool cleaner, shown at a " +
+        "poolside beside its retrieval hook.",
+    },
+    figures: [
+      {
+        afterHeading: "What 90 minutes actually covers",
+        src: "/media/reviews/aiper-seagull-se/battery.webp",
+        caption:
+          "Ninety minutes is Aiper's own figure. The 2x battery badge rounds up — Aiper's published claim is an 80% increase over what it calls similar Seagull models.",
+      },
+      {
+        afterHeading: "Getting it in and out",
+        src: "/media/reviews/aiper-seagull-se/retrieval.webp",
+        caption:
+          "The retrieval hook ships in the box and fits a standard pole. At the end of a cycle the machine parks itself against the pool wall — Aiper's own description.",
+      },
+      {
+        afterHeading: "The sparsest specification sheet we cover",
+        src: "/media/reviews/aiper-seagull-se/charging.webp",
+        caption:
+          "The 2.5-hour recharge is the surviving Amazon listing's figure; Aiper's own page says only that charging time halved against earlier Seagull models, and states no absolute number.",
+      },
+    ],
+    folds: [
+      {
+        id: "getting-it-in-and-out",
+        teaser: "Self-parking at the wall, a hook in the box, and one number nobody publishes.",
+      },
+      {
+        id: "the-renewed-listing-and-the-100-minute-trap",
+        teaser: "A refurbished listing advertises 100 minutes; Aiper's page says 90.",
+      },
+      {
+        id: "what-we-cannot-tell-you",
+        teaser: "Six gaps, most of them because Aiper publishes almost nothing.",
+      },
+    ],
+    facts: [
+      { label: "Power", value: "Cordless battery" },
+      { label: "Cleans", value: "Floor only" },
+      { label: "Runtime", value: "90 min" },
+      { label: "Pool type", value: "Above-ground" },
+    ],
+    specGroups: [
+      {
+        heading: "Power and runtime",
+        rows: [
+          { label: "Power type", value: "Cordless lithium-ion" },
+          { label: "Runtime", value: "90 minutes", note: "Aiper's own figure, from its current product page." },
+          {
+            label: "Charge time",
+            value: "~2.5 hours",
+            note: "The surviving Amazon listing's figure. Aiper's page states only that charging halved against earlier Seagull models.",
+          },
+          { label: "Battery capacity", value: null, note: "Not published anywhere we read." },
+        ],
+      },
+      {
+        heading: "Pool compatibility",
+        rows: [
+          { label: "Installation", value: "Above-ground" },
+          {
+            label: "Max pool size",
+            value: "~33 ft (researched)",
+            note: "Our research. Aiper publishes no maximum length or area for this machine.",
+          },
+        ],
+      },
+      {
+        heading: "Cleaning",
+        rows: [
+          {
+            label: "Surfaces",
+            value: "Pool floor only",
+            note: "No walls, no waterline. In a soft-sided above-ground pool the floor is the whole job.",
+          },
+          { label: "Navigation", value: "Random path, no mapping", note: "Self-parks against the pool wall at the end of a cycle." },
+          { label: "Filter", value: null, note: "Aiper publishes no filter description or micron rating at all." },
+        ],
+      },
+      {
+        heading: "Control and support",
+        rows: [
+          { label: "App", value: "None — a power button is the interface" },
+          {
+            label: "Warranty",
+            value: null,
+            note: "No term stated on Aiper's product page. Older research recorded one year; we cannot currently show a source for it.",
+          },
+        ],
+      },
+      {
+        heading: "Handling",
+        rows: [
+          { label: "Weight", value: null, note: "Not published — the one handling fact we would most like to give you." },
+          { label: "In the box", value: "Cleaner, 2× brushes, 2× wheels, retrieval hook, charger", note: "From Aiper's own page." },
+        ],
+      },
+    ],
+    skuNote:
+      "Specifications come from Aiper's current Seagull SE product page and the surviving Amazon " +
+      "listing (B0DJ6MV81N, 'Seagull SE 2025'), both read 4 August 2026. A second Amazon listing — " +
+      "the '2026 model', ZT20032026, sold by AiperDirect — returned a 404 the day this review was " +
+      "written, and a Renewed listing advertising 100 minutes remains refused as refurbished " +
+      "stock. Aiper publishes no SKU on its own page, so check the listing title names the " +
+      "Seagull SE.",
+    lastReviewed: "2026-08-04",
+  },
 };
 
 export function reviewFor(slug: string | undefined): ReviewContent | undefined {

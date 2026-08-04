@@ -901,6 +901,52 @@ const REVIEW_FIGURES: ReviewFigure[] = [
     scene:
       "two filter baskets side by side underwater — the 180 micron standard mesh with leaves and stones, and the 3 micron ultra-fine basket with dust and algae",
   },
+
+  /* ---- Aiper Seagull SE ---- */
+  {
+    slug: "hero",
+    productSlug: "aiper-seagull-se",
+    type: "product_in_use",
+    file: "hero.webp",
+    checksum: "sha256:54703cc18761b0ce99c25efac24ceb493de9a11c873a98712d60aa012a30e71c",
+    width: 1254,
+    height: 1254,
+    scene:
+      "the compact grey cleaner with its carbon-weave handle beside its retrieval hook at a poolside, above panels for cordless design, self-parking, easy retrieval and compact build",
+  },
+  {
+    slug: "charging",
+    productSlug: "aiper-seagull-se",
+    type: "product_in_use",
+    file: "charging.webp",
+    checksum: "sha256:5a7de7cd2ba442947a13b668232aeacdd8b12ae0d8467c2431a6490b6a526cd2",
+    width: 1254,
+    height: 1254,
+    scene:
+      "the cleaner on an indoor floor beside its wall charger, with a 2.5 hours badge and a note comparing charging time with the Seagull 600",
+  },
+  {
+    slug: "battery",
+    productSlug: "aiper-seagull-se",
+    type: "product_in_use",
+    file: "battery.webp",
+    checksum: "sha256:0019449cb5ac7a89c2f68a27d338dd58c852e767ccdb6f1f8233b0017dd3efdc",
+    width: 1254,
+    height: 1254,
+    scene:
+      "an above-ground pool seen from directly overhead on a lawn, the cleaner working inside a 90 minutes dial, with a 2x battery badge in the corner",
+  },
+  {
+    slug: "retrieval",
+    productSlug: "aiper-seagull-se",
+    type: "product_in_use",
+    file: "retrieval.webp",
+    checksum: "sha256:8aaaec19e73c52ae4b80815d48307fe0f203cd25fb3c1d51d5ba9c16afa2e49d",
+    width: 1254,
+    height: 1254,
+    scene:
+      "the cleaner lifted dripping from an infinity pool on the included hook and pole, with feature panels beneath",
+  },
 ];
 
 /**

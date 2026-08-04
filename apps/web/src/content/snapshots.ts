@@ -381,6 +381,55 @@ export const SNAPSHOTS: Record<string, ProductSnapshot> = {
       { need: "You only need the surface skimmed, not the whole pool", test: { kind: "cleans", value: "water_surface" } },
     ],
   },
+
+  "aiper-seagull-se": {
+    slug: "aiper-seagull-se",
+    priceBand: "entry",
+    priceBandWhy:
+      "The cheapest machine in the catalogue — a tenth of the flagships. You are paying for a motor, a battery and ninety minutes of floor coverage, and nothing else is pretended.",
+    shipping: "Prime-eligible on Amazon, so usually a day or two rather than a week.",
+    shippingSpeed: "fast",
+    points: [
+      {
+        label: "Cleans",
+        value: "Floor only",
+        note: "No walls, no waterline. In a soft-sided above-ground pool the floor is the whole job.",
+      },
+      {
+        label: "Power",
+        value: "Cordless battery",
+        note: "90 minutes of runtime per Aiper; roughly a 2.5-hour recharge per the listing.",
+      },
+      {
+        label: "Pool type",
+        value: "Above-ground, to about 33 ft",
+        note: "The ceiling is our research — Aiper publishes no maximum size at all.",
+      },
+      {
+        label: "Navigation",
+        value: "Random path, self-parking",
+        note: "Parks against the pool wall at the end of a cycle; a hook ships in the box.",
+      },
+      {
+        label: "Filter",
+        value: null,
+        note: "Aiper publishes no filter description or micron rating for this machine.",
+      },
+      {
+        label: "Warranty",
+        value: null,
+        note: "No term stated on Aiper's product page.",
+      },
+    ],
+    suitsYouIf:
+      "You have a small, flat-bottomed above-ground pool and want the floor handled for the price of a good pool net with a motor.",
+    ruleOutIf:
+      "Your pool is in-ground with real walls, the waterline ring is your complaint, or you want an app, a schedule or a map.",
+    ruleOuts: [
+      { need: "You need the walls climbed", test: { kind: "cleans", value: "walls" } },
+      { need: "You need the waterline scrubbed", test: { kind: "cleans", value: "waterline" } },
+    ],
+  },
 };
 
 export const snapshotFor = (slug: string | undefined): ProductSnapshot | undefined =>

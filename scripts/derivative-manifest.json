@@ -1487,6 +1487,130 @@
     ]
   },
   {
+    "source": "/media/reviews/aiper-seagull-se/hero.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-aiper-seagull-se-hero-webp-360",
+        "src": "/media/reviews/aiper-seagull-se/hero-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 19398,
+        "checksum": "sha256:4c963c09766869846ca141572a198505e14fc1415787f5d5a2ca7550bd55fe59"
+      },
+      {
+        "id": "media-reviews-aiper-seagull-se-hero-webp-640",
+        "src": "/media/reviews/aiper-seagull-se/hero-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 50170,
+        "checksum": "sha256:6d5a40afb16f80eec22be1723e598c9dc5946e22c3f1d75731ad20bf2f9cab5e"
+      },
+      {
+        "id": "media-reviews-aiper-seagull-se-hero-webp-960",
+        "src": "/media/reviews/aiper-seagull-se/hero-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 97714,
+        "checksum": "sha256:e9093b8aa60a48e5a5fec9ac11038e2419fcdbfe9ce765cb3e77dc63b510615f"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/aiper-seagull-se/charging.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-aiper-seagull-se-charging-webp-360",
+        "src": "/media/reviews/aiper-seagull-se/charging-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 15774,
+        "checksum": "sha256:f24c3c0d13f0618bf887bb67983807e22b31440d2d2958c1ae3ed4c9561c2e3f"
+      },
+      {
+        "id": "media-reviews-aiper-seagull-se-charging-webp-640",
+        "src": "/media/reviews/aiper-seagull-se/charging-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 39366,
+        "checksum": "sha256:5666a49c67b8e9a9c667fd6c1e280557ba2ce72e65be92cc028aeddf5b7fce13"
+      },
+      {
+        "id": "media-reviews-aiper-seagull-se-charging-webp-960",
+        "src": "/media/reviews/aiper-seagull-se/charging-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 75416,
+        "checksum": "sha256:57361c37cb5371a6248f0c9543e8936be11d859e7f68dbd7f8bd6d05f942d320"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/aiper-seagull-se/battery.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-aiper-seagull-se-battery-webp-360",
+        "src": "/media/reviews/aiper-seagull-se/battery-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 26298,
+        "checksum": "sha256:6cb4f530e08e4f953a0613d7205d8f793bf7bc5a13fa96d7720c43ac37652e1a"
+      },
+      {
+        "id": "media-reviews-aiper-seagull-se-battery-webp-640",
+        "src": "/media/reviews/aiper-seagull-se/battery-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 90674,
+        "checksum": "sha256:e0ff54414723c579d891a1ae53db00d7dc879dd30283e6e7f3bb97101c0767d5"
+      },
+      {
+        "id": "media-reviews-aiper-seagull-se-battery-webp-960",
+        "src": "/media/reviews/aiper-seagull-se/battery-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 216936,
+        "checksum": "sha256:af3adf71b2aec8a7b60f8de69c8fe3918af4b1f5af0d72ad8ba42a9c344dd597"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/aiper-seagull-se/retrieval.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-aiper-seagull-se-retrieval-webp-360",
+        "src": "/media/reviews/aiper-seagull-se/retrieval-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 17878,
+        "checksum": "sha256:f71fc6eddb0f1b1fde11afae55b77fb7d16028b5643292b966768195f2d020a0"
+      },
+      {
+        "id": "media-reviews-aiper-seagull-se-retrieval-webp-640",
+        "src": "/media/reviews/aiper-seagull-se/retrieval-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 44966,
+        "checksum": "sha256:41e2f07803445fafd097185cd457ef5ca7085a0b1c72786423e61157c3b61534"
+      },
+      {
+        "id": "media-reviews-aiper-seagull-se-retrieval-webp-960",
+        "src": "/media/reviews/aiper-seagull-se/retrieval-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 88020,
+        "checksum": "sha256:26788a3efa0acf1dbae9942bb68beca16bf1ab746f47bb6debcd83121e5f3004"
+      }
+    ]
+  },
+  {
     "source": "/media/products/dolphin-nautilus-cc-plus.webp",
     "sourceWidth": 1122,
     "sourceHeight": 1402,

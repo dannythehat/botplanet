@@ -77,10 +77,19 @@ export const EXPECTED_IDENTITIES: IdentityExpectation[] = [
   },
   {
     productId: "prod-aiper-seagull-se",
-    asin: "B0H5PY2SPF",
+    /* MOVED 4 August 2026, B0H5PY2SPF -> B0DJ6MV81N. The 2026-model listing
+       (ZT20032026, AiperDirect, $149.99 on 31 July) 404s as of today — gone,
+       not out of stock. The owner-confirmed destination B0DJ6MV81N ("Seagull
+       SE 2025", read alive today at $159.99, 90 min, 2.5 h charge) was
+       already where /go pointed; the refresh now reads the same listing the
+       reader lands on, which the two ASINs previously did not agree about. */
+    asin: "B0DJ6MV81N",
     brand: "AIPER",
     modelTokens: ["seagull se", "zt2003"],
     denyTokens: ["seagull pro", "seagull plus", "seagull 1000", "scuba"],
+    /* Daily until the first clean read of the new ASIN confirms identity and
+       price, then back to the normal cadence. */
+    exception: "recently_changed",
   },
   {
     productId: "prod-aiper-scuba-x1",
