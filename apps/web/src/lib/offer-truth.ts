@@ -29,6 +29,7 @@ import {
   type ShippingState,
   type StockState,
 } from "../content/commerce/types";
+import { SHOW_PRICES } from "../content/commerce/price-display";
 
 export const AS_AT = "2026-07-31";
 
@@ -320,11 +321,29 @@ export function publicationFor(offer: Offer): OfferPublication {
 
   // A price may be shown only with the date it was checked beside it. That is
   // what makes a month-old figure honest rather than a stale claim.
-  const priceCurrent =
-    offer.basePriceMinor !== null && offer.sourceCheckedDate !== null && CURRENT_PRICE_STATES.includes(offer.freshness);
+  //
+  // SHOW_PRICES sits in FRONT of all of that, not instead of it. Every rule
+  // below still runs and still records its blockers, so turning the switch back
+  // on restores the old behaviour exactly rather than a remembered version of
+  // it. See content/commerce/price-display.ts for why it is currently off.
+  //
+  // The evidence question and the display question are kept apart on purpose.
+  // Folding the switch into `priceEvidenced` made the blocker list say "price
+  // is live, so it may not be shown as current" — a sentence that contradicts
+  // itself, and exactly the kind of misleading diagnostic that sends someone
+  // hunting a freshness bug that is not there.
+  const priceEvidenced =
+    offer.basePriceMinor !== null &&
+    offer.sourceCheckedDate !== null &&
+    CURRENT_PRICE_STATES.includes(offer.freshness);
+
   if (offer.basePriceMinor === null) blockers.push("no price from an approved source");
   else if (offer.sourceCheckedDate === null) blockers.push("price has no check date, so it cannot be shown with one");
-  else if (!priceCurrent) blockers.push(`price is ${offer.freshness}, so it may not be shown as current`);
+  else if (!priceEvidenced) blockers.push(`price is ${offer.freshness}, so it may not be shown as current`);
+
+  if (!SHOW_PRICES) blockers.push("price display is switched off site-wide — see content/commerce/price-display.ts");
+
+  const priceCurrent = SHOW_PRICES && priceEvidenced;
 
   if (offer.stock.state === "unknown") blockers.push("stock state unknown — the destination resolving is not proof of stock");
   if (offer.shipping.state === "unknown" || offer.shipping.state === "not_exposed_by_source") {

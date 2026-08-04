@@ -30,6 +30,8 @@ import type { BuyingOption } from "../src/lib/providers/amazon-provider";
 import { AMAZON_ASSOCIATE_TAG, AMAZON_ASSOCIATE_TAG_STATUS, amazonDestination } from "../src/lib/site";
 import { ACTIVE_PRODUCTS, CATALOGUE_WITHDRAWALS, LIFTED_WITHDRAWALS, catalogueStatusOf, productEditorialById } from "../src/content/products";
 import { RETIRED_SLUGS, resolveSlug } from "../src/content/product-names";
+import { SHOW_PRICES } from "../src/content/commerce/price-display";
+import { marketplaceFor } from "../src/content/commerce/amazon-marketplaces";
 import { RETIRED_VERIFICATIONS } from "../src/content/evidence/verification";
 import { deriveLedger } from "../src/content/evidence/derive";
 import { SERPAPI_OBSERVATIONS, SERPAPI_REJECTIONS, SERPAPI_RUN_CREDITS, SERPAPI_UNRESOLVED } from "../src/content/commerce/serpapi-observations";
@@ -331,7 +333,30 @@ describe("price, stock and shipping normalisation", () => {
         expect(o.stock.state).toBe("unknown");
       }
     }
-    expect(REPORT.totals.priceShowable).toBe(checked.size);
+    /* The site-wide switch sits in front of every rule above. While it is off
+       nothing prints a price at all, so the count is zero — but the evidence
+       assertions in the loop still run, which is the point: the rules keep
+       being tested while the display is dark, so turning it back on restores
+       a behaviour that is still under test rather than one nobody has
+       exercised in months. */
+    expect(REPORT.totals.priceShowable).toBe(SHOW_PRICES ? checked.size : 0);
+  });
+
+  it("the switch is the ONLY thing suppressing those prices", () => {
+    /* Guards against the switch masking a real regression. Every offer that
+       would be publishable is still fully evidenced — price, check date and a
+       current freshness state — so flipping SHOW_PRICES back on cannot
+       reveal a hole that opened while it was off. */
+    const evidenced = OFFERS.filter(
+      (o) => o.basePriceMinor !== null && o.sourceCheckedDate !== null && CURRENT_PRICE_STATES.includes(o.freshness),
+    );
+    expect(evidenced.length).toBeGreaterThan(0);
+    for (const o of evidenced) {
+      const blockers = publicationFor(o).blockers;
+      expect(blockers).toContain("price display is switched off site-wide — see content/commerce/price-display.ts");
+      // Nothing ELSE is blocking the price on these.
+      expect(blockers.filter((b) => /price/.test(b) && !b.includes("switched off"))).toEqual([]);
+    }
   });
 
   it("records the manual check verbatim, with its date and delivery location", () => {
@@ -520,9 +545,12 @@ describe("schema eligibility gates", () => {
         ...SERPAPI_OBSERVATIONS.filter((o) => o.priceMinor !== null).map((o) => o.productId),
       ].filter((id) => catalogueStatusOf(id) === "active"),
     );
-    expect(REPORT.totals.schemaEligible).toBe(checked.size);
+    /* Offer schema carries a price in machine-readable form, so it follows the
+       display switch exactly — publishing a figure to Google that the page
+       itself refuses to print would be the same claim in a worse place. */
+    expect(REPORT.totals.schemaEligible).toBe(SHOW_PRICES ? checked.size : 0);
     for (const o of OFFERS) {
-      expect(publicationFor(o).schemaEligible).toBe(checked.has(o.productId));
+      expect(publicationFor(o).schemaEligible).toBe(SHOW_PRICES && checked.has(o.productId));
     }
   });
 
@@ -561,7 +589,7 @@ describe("schema eligibility gates", () => {
       freshness: "live" as const,
       stock: { state: "in_stock" as const, sourceWording: "In Stock", checkedDate: AS_AT },
     };
-    expect(publicationFor(ready).schemaEligible).toBe(true);
+    expect(publicationFor(ready).schemaEligible).toBe(SHOW_PRICES);
     expect(publicationFor({ ...ready, basePriceMinor: null }).schemaEligible).toBe(false);
     expect(publicationFor({ ...ready, currency: "EUR" }).schemaEligible).toBe(false);
     expect(publicationFor({ ...ready, stock: { state: "unknown", sourceWording: null, checkedDate: null } }).schemaEligible).toBe(false);
@@ -589,8 +617,11 @@ describe("/go redirect", () => {
   const route = readFileSync("apps/web/src/pages/go/[key].ts", "utf8");
 
   it("deep-links to the exact ASIN where one exists", () => {
-    expect(route).toContain("amazon.com/dp/${exact.retailerProductId}");
     expect(route).toContain("destinationFor(offer.productId");
+    // The exact ASIN now goes through marketplaceFor, which decides which
+    // Amazon store it belongs to — but it is still the ASIN, never a search.
+    expect(route).toContain("marketplaceFor(offer.productId, exact.retailerProductId");
+    expect(marketplaceFor("prod-x", "B09K4C9WGF", "US").url).toContain("/dp/B09K4C9WGF");
   });
 
   it("keeps an honest search fallback for products with no ASIN", () => {

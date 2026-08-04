@@ -10,6 +10,7 @@ import {
 import { getDb, schema } from "../../lib/db";
 import { amazonDestination } from "../../lib/site";
 import { destinationFor } from "../../content/commerce/destinations";
+import { marketplaceFor } from "../../content/commerce/amazon-marketplaces";
 import { ATTRIBUTION_HOSTS } from "../../lib/reporting";
 
 /**
@@ -46,13 +47,27 @@ export const GET: APIRoute = async ({ params, locals, request }) => {
   let destination: string | null = offer.affiliateDestinationUrl ?? null;
   let destinationKind: DestinationKind = destination ? "offer_destination" : "unavailable";
 
+  /* Cloudflare resolves the country at the edge before the request reaches us.
+     Used only to pick an Amazon store — never stored against a visitor, and
+     never used to vary the page itself. */
+  const country =
+    (locals as App.Locals).runtime?.cf?.country ??
+    request.headers.get("cf-ipcountry") ??
+    null;
+  let marketplace = "US";
+
   if (!destination && offer.retailerId === "ret-amazon") {
     // Prefer the exact product. Job 10 captured an ASIN for six of the ten from
     // the listings recorded in Job 8, so those clicks now land on the product
     // itself rather than on a search page the customer has to work through.
     const exact = destinationFor(offer.productId, "ret-amazon");
     if (exact?.retailerProductId && exact.identifierKind === "asin") {
-      destination = amazonDestination(`https://www.amazon.com/dp/${exact.retailerProductId}`);
+      /* Localised where we can do it safely, US otherwise — the rule and the
+         reason are in content/commerce/amazon-marketplaces.ts. Cloudflare
+         gives the country on the request, so this costs nothing. */
+      const routed = marketplaceFor(offer.productId, exact.retailerProductId, country);
+      destination = routed.localised ? routed.url : amazonDestination(routed.url);
+      marketplace = routed.marketplace;
       destinationKind = "offer_destination";
     } else {
       // No ASIN was ever captured for this product. A search link is an honest
@@ -97,7 +112,10 @@ export const GET: APIRoute = async ({ params, locals, request }) => {
     retailerId: offer.retailerId,
     affiliateProgramId: offer.affiliateProgramId,
     redirectKey: key,
-    destinationVersion: destinationKind,
+    /* Which Amazon store took the click. A US row from a UK visitor is a click
+       we could not localise, so the cost of the unconfigured countries is
+       countable rather than invisible. */
+    destinationVersion: marketplace === "US" ? destinationKind : `${destinationKind}:${marketplace}`,
     sourcePage,
     pageType: pageTypeFromPath(sourcePage),
     deviceClass: deviceClassFromUserAgent(request.headers.get("user-agent")),
