@@ -301,6 +301,41 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
     ],
     researchedOn: RUN,
   },
+  {
+    path: "/robots/robotic-pool-cleaners/aiper-seagull-se/",
+    primary: { term: "aiper seagull se review", volume: 0, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "aiper seagull se", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "seagull se", volume: 0, difficulty: 0, mustAppear: true },
+      // The purchase-deciding questions for this machine's actual buyer.
+      { term: "above-ground pool robot", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "aiper seagull se runtime", volume: 0, difficulty: 0, mustAppear: false },
+      { term: "aiper seagull se charge time", volume: 0, difficulty: 0, mustAppear: false },
+    ],
+    cededTo: [
+      {
+        term: "robotic pool cleaner",
+        path: "/robots/robotic-pool-cleaners/",
+        why: "The category head term belongs to the hub, as on every review.",
+      },
+      {
+        term: "best robotic pool cleaner",
+        path: "/best-robots/robotic-pool-cleaners/",
+        why: "A comparison SERP. One review is not a best-of.",
+      },
+      {
+        term: "cordless robotic pool cleaner",
+        path: "/best-robots/robotic-pool-cleaners/cordless/",
+        why: "Four cordless reviews now; the shortlist page owns the head term so they do not fight each other for it.",
+      },
+      {
+        term: "cheap robotic pool cleaner",
+        path: "/best-robots/robotic-pool-cleaners/",
+        why: "A price-first searcher wants a comparison, not one product. This page will earn that click from the best-of, not from the SERP.",
+      },
+    ],
+    researchedOn: RUN,
+  },
 ];
 
 export const keywordsFor = (path: string): PageKeywords | undefined =>

@@ -123,6 +123,12 @@ export const SERPAPI_OBSERVATIONS: SerpApiObservation[] = [
       "Details table: brand 'Dolphin', model name 'E10'. The model NUMBER field reads '1', which is junk data and carries no weight either way; the match rests on brand plus model name plus a title that names the E10. The '2026 Model' prefix is a model-year label, not a different model name — the same search returned Nautilus AG, Nautilus CC, CC Pro and CC Supreme as separate listings, so the siblings are distinguishable.",
     checkedDate: SERPAPI_RUN_DATE,
   },
+  /* REMOVED 4 August 2026. The row below recorded B0H5PY2SPF at $149.99, in
+     stock, sold by AiperDirect, read 31 July. That listing 404s as of today —
+     and a price whose listing no longer exists must not publish, whatever its
+     freshness window says. The refresh gate's own first rule applies: "The
+     listing does not exist. Nothing may be published for a destination that
+     is not there."
   {
     productId: "prod-aiper-seagull-se",
     asin: "B0H5PY2SPF",
@@ -142,6 +148,7 @@ export const SERPAPI_OBSERVATIONS: SerpApiObservation[] = [
       "Details table: brand 'AIPER'; model name and model number both 'Seagull SE ZT20032026'. Sold by AiperDirect, the brand's own storefront. A renewed listing (B0H7JNPZJ9) and a charger accessory (B0F6XRZ6GM) appeared in the same search and are refused.",
     checkedDate: SERPAPI_RUN_DATE,
   },
+  */
 ];
 
 export const serpApiObservationFor = (productId: string): SerpApiObservation | undefined =>
