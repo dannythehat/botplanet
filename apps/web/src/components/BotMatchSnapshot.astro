@@ -121,27 +121,68 @@ const speedLabel =
   /* Brushed silver. Three gradients rather than one: a broad diagonal sweep
      for the metal, a fine repeating stripe for the brushed grain, and a soft
      top highlight so the plate reads as lit rather than flat. */
+  /* REAL BRUSHED METAL, NOT A GREY BOX.
+     A flat grey fill with a border is what the first version was, and it
+     looked like paper. Metal reads as metal because of four things layered in
+     this order, and dropping any one of them loses it:
+
+       1. a hard-stopped conic sweep — the bright/dark bands that make a
+          surface look curved and lit from one side. Linear gradients cannot
+          do this; they fade, and fading reads as paper;
+       2. a fine repeating stripe at a slight angle, for the brush grain;
+       3. a bright rolled edge at the top and a dark one at the bottom, so the
+          plate has thickness rather than being a rectangle of colour;
+       4. a warm-white specular highlight off-centre, so the light has a
+          direction. */
   .bp-snap__plate {
     position: relative;
     overflow: hidden;
     padding: clamp(1.5rem, 4vw, 2.6rem);
-    border: 1px solid #9aa3b0;
+    border: 1px solid #7d8793;
     border-radius: 22px;
     color: #0a0d11;
     background:
-      linear-gradient(180deg, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0) 40%),
+      /* specular highlight */
+      radial-gradient(120% 80% at 22% -10%, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0) 55%),
+      /* brush grain */
       repeating-linear-gradient(
-        102deg,
-        rgba(255, 255, 255, 0.5) 0px,
-        rgba(255, 255, 255, 0.5) 1px,
-        rgba(155, 165, 178, 0.14) 2px,
-        rgba(155, 165, 178, 0.14) 3px
+        96deg,
+        rgba(255, 255, 255, 0.34) 0px,
+        rgba(255, 255, 255, 0.34) 1px,
+        rgba(120, 132, 148, 0.16) 2px,
+        rgba(120, 132, 148, 0.16) 3px
       ),
-      linear-gradient(122deg, #f2f5f9 0%, #d6dce5 26%, #b8c0cc 48%, #e8edf3 68%, #c3cad5 100%);
+      /* the sweep: hard stops, because metal has edges of light, not fades */
+      conic-gradient(
+        from 202deg at 50% 50%,
+        #eef2f7 0deg,
+        #cdd5df 42deg,
+        #9aa4b2 78deg,
+        #e6ebf2 128deg,
+        #b6bfcb 176deg,
+        #f4f7fa 214deg,
+        #a8b2c0 258deg,
+        #dde3ea 306deg,
+        #eef2f7 360deg
+      );
     box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.9),
-      inset 0 -1px 0 rgba(0, 0, 0, 0.18),
-      0 26px 60px rgba(0, 0, 0, 0.5);
+      inset 0 2px 0 rgba(255, 255, 255, 0.95),
+      inset 0 -2px 0 rgba(0, 0, 0, 0.3),
+      inset 2px 0 0 rgba(255, 255, 255, 0.35),
+      inset -2px 0 0 rgba(0, 0, 0, 0.14),
+      0 30px 66px rgba(0, 0, 0, 0.55);
+  }
+
+  /* A polished bevel just inside the edge — the line that separates a milled
+     plate from a printed rectangle. */
+  .bp-snap__plate::before {
+    content: "";
+    position: absolute;
+    inset: 5px;
+    border-radius: 17px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: inset 0 0 0 1px rgba(80, 92, 108, 0.22);
+    pointer-events: none;
   }
 
   .bp-snap__eyebrow {

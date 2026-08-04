@@ -159,7 +159,22 @@ const reviewGraph = hasReview
 >
   <p class="muted"><a href={`/robots/${category}/`}>← {titleCase(category!)}</a></p>
 
-  {hasReview && <ReviewArticle review={review!} html={reviewHtml!} productName={product.name} />}
+  {hasReview && (
+  <ReviewArticle
+    review={review!}
+    html={reviewHtml!}
+    productName={product.name}
+    offers={engineOffers.map(({ offer, pub }) => ({
+      retailerName: retailer(offer.retailerId)?.displayName ?? offer.retailerId,
+      sellerIdentity: offer.destination.sellerIdentity ?? null,
+      price: pub.priceShowable && offer.basePriceMinor !== null ? usd(offer.basePriceMinor) : null,
+      checkedDate: offer.sourceCheckedDate ?? null,
+      stock: pub.stockShowable ? titleCase(offer.stock.state.replace(/_/g, " ")) : null,
+      shipping: pub.shippingShowable ? (offer.shipping.sourceWording ?? null) : null,
+      redirectKey: pub.linkable ? (offer.redirectKey ?? null) : null,
+    }))}
+  />
+)}
 
   {/* The review supplies its own H1, verdict and key facts, so the plain
       product header would be a second H1 saying the same thing in a weaker
@@ -186,8 +201,12 @@ const reviewGraph = hasReview
     </>
   )}
 
-  <h2 id="where-to-buy">Current offers</h2>
-  {withdrawn ? (
+  {/* The buy box above replaces this table on a review page. Products without
+      a review still need somewhere to show their offers. */}
+  {!hasReview && (
+    <>
+      <h2 id="where-to-buy">Current offers</h2>
+      {withdrawn ? (
     <p class="note">
       This robot is no longer part of the BotPlanet launch selection, so we do not link to a seller for it or
       recommend it. Its record stays published because the research behind it is still worth reading.
@@ -235,6 +254,8 @@ const reviewGraph = hasReview
           ))}
         </tbody>
       </table>
+    </>
+  )}
     </>
   )}
 

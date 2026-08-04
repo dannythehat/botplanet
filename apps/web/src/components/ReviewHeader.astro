@@ -27,6 +27,8 @@ interface Props {
   facts?: { label: string; value: string }[];
 }
 
+import { srcsetFor } from "../lib/srcset";
+
 const { eyebrow, title, verdict, bestFor, notIdealFor, image, facts = [] } = Astro.props;
 ---
 
@@ -49,8 +51,21 @@ const { eyebrow, title, verdict, bestFor, notIdealFor, image, facts = [] } = Ast
     {image?.src && (
       <figure class="bp-rev__figure">
         <picture>
-          {image.mobileSrc && <source media="(max-width: 719px)" srcset={image.mobileSrc} />}
-          <img src={image.src} alt={image.alt} loading="eager" fetchpriority="high" decoding="async" />
+          {image.mobileSrc && (
+            <source media="(max-width: 719px)" srcset={srcsetFor(image.mobileSrc) ?? image.mobileSrc} sizes="100vw" />
+          )}
+          {/* This is the one image above the fold, and it had no srcset — so
+              every visitor downloaded the full-size creative regardless of the
+              space it renders into. */}
+          <img
+            src={image.src}
+            srcset={srcsetFor(image.src)}
+            sizes="(min-width: 900px) 44vw, 100vw"
+            alt={image.alt}
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+          />
         </picture>
       </figure>
     )}
