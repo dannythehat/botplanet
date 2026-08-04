@@ -22,7 +22,7 @@ import { buildOfferInventory, buildProductOfferMapping, buildProgrammeInventory,
 import { isSafeAffiliateDestination } from "@botplanet/shared";
 import { SUPERSEDED_REFUSALS } from "../src/content/commerce/destinations";
 import { SerpApiAmazonProvider, SERPAPI_SECRET_REF, priceToMinor, toAttributes, toBuyingOptions } from "../src/lib/providers/serpapi-amazon";
-import { MAX_DAILY_EXCEPTIONS, MONTHLY_CREDIT_CEILING, monthlyCost, planRefresh, type ExceptionReason } from "../src/lib/providers/refresh-policy";
+import { CATALOGUE_INTERVAL_DAYS, DAILY_INTERVAL_DAYS, MAX_DAILY_EXCEPTIONS, MONTHLY_CREDIT_CEILING, monthlyCost, planRefresh, type ExceptionReason } from "../src/lib/providers/refresh-policy";
 import { attributeSignals } from "../src/lib/providers/marketplace-attributes";
 import { buyNew, gate, matchIdentity, runRefresh } from "../src/lib/providers/refresh-service";
 import { AWAITING_DISCOVERY, EXPECTED_IDENTITIES } from "../src/lib/providers/expected-identity";
@@ -1384,5 +1384,32 @@ describe("outbound call-to-action wording", () => {
     for (const [name, src] of [["BuyBox", buyBox], ["BuyStrip", buyStrip]] as const) {
       expect(src, `${name} still says "View on"`).not.toMatch(/>View on /);
     }
+  });
+});
+
+describe("the refresh cadence fits inside the allowance", () => {
+  /* The interval was seven days, chosen against a hypothetical ten-product
+     catalogue. The real register is eight products and the month's spend when
+     this was written was 8 credits of 200 — while a live price sat four days
+     stale. Three days is the new interval; this test is what stops the
+     catalogue growing past what the allowance can actually pay for. */
+  it("stays under the ceiling at full exception load", () => {
+    const products = EXPECTED_IDENTITIES.length;
+    const worst = monthlyCost(products, MAX_DAILY_EXCEPTIONS);
+    expect(worst).toBeLessThan(MONTHLY_CREDIT_CEILING);
+  });
+
+  it("caps how stale a published price can get", () => {
+    expect(CATALOGUE_INTERVAL_DAYS).toBeLessThanOrEqual(3);
+    expect(CATALOGUE_INTERVAL_DAYS).toBeGreaterThan(DAILY_INTERVAL_DAYS);
+  });
+
+  it("re-reads a product that was checked four days ago", () => {
+    const { decisions } = planRefresh(
+      [{ productId: "p", asin: "B0", lastCheckedOn: "2026-07-31", exception: null }],
+      { today: new Date("2026-08-04T03:00:00Z"), creditsUsedThisMonth: 8 },
+    );
+    expect(decisions[0].due).toBe(true);
+    expect(decisions[0].skipped).toBeNull();
   });
 });
