@@ -1,0 +1,127 @@
+---
+/* ============================================================
+   BotPlanet — article contents.
+
+   Twelve sections and 2,000-odd words with no way to navigate is a
+   page that only rewards the reader who starts at the top and never
+   stops. Most do not: they arrive with one question, and the section
+   that answers it is four screens down.
+
+   Built from the prose itself, not from a hand-written list. A
+   contents block that has to be maintained alongside the writing is
+   a contents block that goes stale, and a stale one is worse than
+   none because it links to sections that moved.
+
+   It renders nothing below four headings — a list of three is not
+   navigation, it is clutter.
+   ============================================================ */
+
+interface Props {
+  /** Compiled prose. Headings are read from it. */
+  html: string;
+  /** Extra destinations that are not H2s in the prose. */
+  extra?: { id: string; text: string }[];
+}
+
+const { html, extra = [] } = Astro.props;
+
+/**
+ * Astro's markdown pipeline gives every heading an id, so this reads what is
+ * actually in the document rather than re-slugifying the text and hoping the
+ * two agree.
+ */
+const headings = [...html.matchAll(/<h2\b[^>]*\bid="([^"]+)"[^>]*>([\s\S]*?)<\/h2>/g)].map((m) => ({
+  id: m[1],
+  text: m[2].replace(/<[^>]+>/g, "").trim(),
+}));
+
+const items = [...headings, ...extra];
+const show = headings.length >= 4;
+---
+
+{show && (
+  <nav class="bp-toc" aria-labelledby="toc-heading">
+    <p class="bp-toc__title" id="toc-heading">In this review</p>
+    <ol class="bp-toc__list">
+      {items.map((h, i) => (
+        <li>
+          <a href={`#${h.id}`}>
+            <span class="bp-toc__num">{String(i + 1).padStart(2, "0")}</span>
+            <span class="bp-toc__text">{h.text}</span>
+          </a>
+        </li>
+      ))}
+    </ol>
+  </nav>
+)}
+
+<style is:global>
+  .bp-toc {
+    margin: clamp(2rem, 5vw, 3rem) 0;
+    padding: clamp(1.2rem, 3vw, 1.7rem);
+    border: 1px solid var(--cs-line-soft);
+    border-radius: 18px;
+    background: var(--cs-surface);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+
+  .bp-toc__title {
+    margin: 0 0 0.9rem;
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    background: var(--cs-sheen);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .bp-toc__list {
+    display: grid;
+    gap: 0.1rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: none;
+  }
+
+  .bp-toc__list a {
+    display: flex;
+    gap: 0.8rem;
+    align-items: baseline;
+    padding: 0.5rem 0.6rem;
+    border-radius: 9px;
+    text-decoration: none;
+    transition: background 0.16s ease;
+  }
+
+  .bp-toc__list a:hover { background: rgba(255, 255, 255, 0.04); }
+  .bp-toc__list a:focus-visible { outline: var(--focus-ring, 2px solid #dfe4ec); outline-offset: 2px; }
+
+  .bp-toc__num {
+    flex: 0 0 auto;
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--text-quaternary);
+  }
+
+  .bp-toc__text {
+    font-size: 0.95rem;
+    line-height: 1.45;
+    color: var(--text-secondary);
+  }
+
+  .bp-toc__list a:hover .bp-toc__text { color: var(--cs-hi); }
+
+  /* Headings need clearance so a jump does not land them under the sticky
+     header — the commonest bug in any table of contents. */
+  .bp-prose h2 { scroll-margin-top: 5.5rem; }
+
+  @media (min-width: 760px) {
+    .bp-toc__list { grid-template-columns: 1fr 1fr; column-gap: 1.5rem; }
+  }
+</style>

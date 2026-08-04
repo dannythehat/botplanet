@@ -112,6 +112,24 @@ if (proseModule) {
 }
 const hasReview = Boolean(review && reviewHtml);
 
+/* Siblings in the same category, for answering the review's rule-outs.
+   Catalogue facts only — no price, no offer, nothing commission-shaped. */
+const siblings = hasReview
+  ? (
+      await db
+        .select()
+        .from(schema.products)
+        .where(and(eq(schema.products.categoryId, product.categoryId), eq(schema.products.status, "published")))
+    ).map((p) => ({
+      id: p.id,
+      slug: p.slug,
+      name: p.name,
+      cleans: (p.cleans as string[]) ?? [],
+      powerType: p.powerType,
+      maxPoolLengthFt: p.maxPoolLengthFt ?? null,
+    }))
+  : [];
+
 /* Review + Article, and no rating anywhere in it — see reviewSchema for why a
    star is the one thing this site has not earned. */
 const reviewGraph = hasReview
@@ -173,6 +191,7 @@ const reviewGraph = hasReview
       shipping: pub.shippingShowable ? (offer.shipping.sourceWording ?? null) : null,
       redirectKey: pub.linkable ? (offer.redirectKey ?? null) : null,
     }))}
+    siblings={siblings}
   />
 )}
 
