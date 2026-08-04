@@ -241,8 +241,18 @@ const RAW: Record<string, Omit<ProductEditorial, "productId">> = {
       chargeTimeHrs: 4,
       filtration: "Large easy-empty top-access filter canister",
       navigation: "Intelligent cleaning with app-optimized SMART Cycle",
-      weightLbs: null,
-      warranty: "2-year limited",
+      /* CORRECTED 2026-08-04, both of them, and both said so in the review.
+         weightLbs was null on the finding that Polaris does not publish a
+         weight. Polaris does: 20 lb (9.1 kg) in the owner's manual's own
+         specification table. Nobody read far enough.
+         warranty said "2-year limited". No Polaris source we can find states
+         a term at all — the manual mentions a Limited Warranty inside an
+         exclusion clause and never gives its length, and the support page and
+         A+ panels give none. The figure is removed rather than left standing,
+         because a warranty length is exactly the kind of number a buyer
+         decides on. */
+      weightLbs: 20,
+      warranty: null,
       appSupport: "iAquaLink (Wi-Fi) — modes, battery status, cycle-complete alerts",
     },
     notableFeatures: [

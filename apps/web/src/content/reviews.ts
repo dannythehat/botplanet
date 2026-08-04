@@ -256,6 +256,216 @@ export const REVIEWS: Record<string, ReviewContent> = {
       "and installation type. Confirm the SKU on the listing before buying.",
     lastReviewed: "2026-08-03",
   },
+
+  "polaris-freedom": {
+    slug: "polaris-freedom",
+    categorySlug: "robotic-pool-cleaners",
+    eyebrow: "Robotic pool cleaner review",
+    title: "Polaris FREEDOM cordless review",
+    seoTitle: "Polaris FREEDOM Cordless Robotic Pool Cleaner Review | BotPlanet",
+    metaDescription:
+      "An honest review of the Polaris FREEDOM: what it cleans, the 2.5-hour runtime, the battery " +
+      "you are really buying, and why the 50 ft pool limit appears only in marketing artwork.",
+    verdict:
+      "A genuinely cordless in-ground cleaner that does the floor, the walls and the waterline, runs " +
+      "two and a half hours on a charge, and parks itself on a dock. You are paying a premium for a " +
+      "battery — the one part guaranteed to be worse in five years than it is today.",
+    bestFor:
+      "An in-ground pool up to about 50 ft where the cable is the thing you actually hate, and the " +
+      "waterline needs doing as well as the floor.",
+    notIdealFor:
+      "Your pool is above ground, deeper than 13 ft, or you keep equipment for a decade and do not " +
+      "want a part that wears out on a calendar.",
+    image: {
+      src: "/media/reviews/polaris-freedom/hero.webp",
+      alt:
+        "BotPlanet artwork for the Polaris FREEDOM cordless robotic pool cleaner, shown at the edge " +
+        "of a lit pool beside a phone running a two hour thirty cycle.",
+    },
+    figures: [
+      {
+        afterHeading: "Cordless, and what that actually costs",
+        src: "/media/reviews/polaris-freedom/cordless-dock.webp",
+        caption:
+          "The Easy-Charge station is a contact dock rather than a plug, and it lives outdoors. Four hours from empty.",
+      },
+      {
+        afterHeading: "The app, and the Wi-Fi requirement nobody mentions before you buy",
+        src: "/media/reviews/polaris-freedom/app-control.webp",
+        caption:
+          "iAquaLink handles modes, charge status and a push notification when the machine is parked at the waterline waiting to be lifted out.",
+      },
+    ],
+    /* POLARIS'S OWN VIDEO, LABELLED AS SUCH.
+       The URL carries `amzn1.ive.seller.video`, which is Amazon's own marker
+       for footage the seller supplied — so this is the manufacturer showing
+       you their machine, not an owner reporting on it. It is still worth
+       linking: watching the thing climb out and park at the waterline shows
+       something no specification table can. It is not evidence for any claim
+       on this page and nothing here rests on it.
+
+       The `ref=cm_sw_wa_r_ib_mb_…` share token was stripped. It identifies
+       whoever sent the link, not the video. */
+    video: {
+      url: "https://www.amazon.com/vdp/08d6671e239a42299ebaff7ba7442f9a?aci=amzn1.ive.seller.video.08d6671e239a42299ebaff7ba7442f9a&product=B0BX9DJS7R",
+      title: "Polaris FREEDOM Robotic Pool Cleaner",
+      channel: "Polaris",
+      source: "seller",
+      note:
+        "Polaris's own video, hosted on Amazon. We link it because seeing the machine climb out and park at the waterline is worth more than a paragraph describing it. It is marketing rather than testing, nobody here has run this robot, and nothing on this page is evidenced by it.",
+    },
+    /* Five of the twelve sections ship shut. The five that decide the purchase —
+       who it is for, who should not, the 50 ft question, what it cleans, and the
+       battery — stay open, as does the verdict. */
+    folds: [
+      {
+        id: "runtime-and-two-figures-that-are-the-same-figure",
+        teaser: "Why 2h30 and 2.5 hours are one number, not two sources disagreeing.",
+      },
+      {
+        id: "filtration-and-the-rating-nobody-publishes",
+        teaser: "A 4 litre canister, and why no micron figure here has a source.",
+      },
+      {
+        id: "weight-handling-and-getting-it-out",
+        teaser: "Twenty pounds, plus water — and a correction to our own record.",
+      },
+      {
+        id: "what-is-in-the-box-and-the-warranty-we-cannot-confirm",
+        teaser: "Three items, and a warranty term Polaris does not print anywhere.",
+      },
+      {
+        id: "the-name-trap",
+        teaser: "FREEDOM, SC, LT and Plus — and a chassis code shared between two of them.",
+      },
+      {
+        id: "what-we-cannot-tell-you",
+        teaser: "Seven things no published source answers, listed rather than glossed.",
+      },
+    ],
+    facts: [
+      { label: "Power", value: "Cordless battery" },
+      { label: "Cleans", value: "Floor, walls, waterline" },
+      { label: "Max pool length", value: "50 ft" },
+      { label: "Runtime", value: "2 h 30" },
+    ],
+    specGroups: [
+      {
+        heading: "Power and runtime",
+        rows: [
+          { label: "Power type", value: "Cordless lithium-ion" },
+          { label: "Battery", value: "9.6 Ah at 29.4 V DC" },
+          {
+            label: "Runtime — floor and walls",
+            value: "2 h 30",
+            note: "The longest mode. Polaris's 'up to 2.5 hours' is the same figure stated less precisely.",
+          },
+          { label: "Runtime — floor only", value: "1 h 30" },
+          {
+            label: "Charge time",
+            value: "4 hours",
+            note: "Polaris also states 'under 5 hours' in two places. That is a ceiling, not a rival figure.",
+          },
+          { label: "Operating power", value: "29.4 W" },
+          {
+            label: "Battery cycle life",
+            value: null,
+            note: "No source publishes one. The capacity will fall with age; nobody says over how many cycles.",
+          },
+          { label: "Replacement battery cost", value: null },
+        ],
+      },
+      {
+        heading: "Pool compatibility",
+        rows: [
+          { label: "Installation", value: "In-ground only" },
+          {
+            label: "Max pool length",
+            value: "50 ft",
+            note: "Stated only in the manufacturer's A+ marketing panels. The manual, quick start guide and support page give depth and no length at all.",
+          },
+          { label: "Max depth", value: "13 ft / 4 m" },
+          { label: "Min depth", value: "15 in / 40 cm" },
+          {
+            label: "Surface finishes",
+            value: null,
+            note: "The manual warns about vinyl liner patterns but does not enumerate compatible finishes.",
+          },
+        ],
+      },
+      {
+        heading: "Cleaning",
+        rows: [
+          { label: "Surfaces", value: "Floor, wall and waterline" },
+          {
+            label: "Modes",
+            value: "Four",
+            note: "Floor, and floor + walls + waterline on the unit; Waterline only and SMART Cycle in the app.",
+          },
+          { label: "Navigation", value: "SMART cycle, app-selectable" },
+          {
+            label: "Flow rate",
+            value: null,
+            note: "Operating power is published; suction is not. Any flow figure quoted for this machine did not come from Polaris.",
+          },
+        ],
+      },
+      {
+        heading: "Filtration",
+        rows: [
+          { label: "Filter", value: "All-purpose canister" },
+          { label: "Capacity", value: "4 L" },
+          {
+            label: "Micron rating",
+            value: null,
+            note: "Not published on the support page or in the manual.",
+          },
+          { label: "Full-filter indicator", value: null },
+        ],
+      },
+      {
+        heading: "Control",
+        rows: [
+          { label: "App", value: "iAquaLink" },
+          {
+            label: "Wi-Fi",
+            value: "Required at the charging location",
+            note: "The manual requires adequate signal where the dock sits, not where the pool is. Check this before buying.",
+          },
+          { label: "Physical remote", value: "None supplied — app or an on-unit slider" },
+          { label: "Push notifications", value: "Cycle complete, and ready to retrieve at the waterline" },
+        ],
+      },
+      {
+        heading: "Handling",
+        rows: [
+          {
+            label: "Weight",
+            value: "20 lb / 9.1 kg",
+            note: "Cleaner only, from the owner's manual. The 33 lb figure Polaris also prints is packed weight and is not what you lift.",
+          },
+          { label: "Dimensions", value: "16 × 16.5 × 11 in / 41 × 42 × 28 cm" },
+          {
+            label: "Retrieval",
+            value: "Climbs to the waterline at end of cycle, or the supplied hook",
+            note: "Two methods, per Polaris. There is no tap-to-summon.",
+          },
+          { label: "In the box", value: "Cleaner, charging station, removal hook" },
+          {
+            label: "Warranty",
+            value: null,
+            note: "The manual references a Limited Warranty inside an exclusion clause and never states its term. The support page and the A+ panels state none.",
+          },
+        ],
+      },
+    ],
+    skuNote:
+      "Specifications describe SKU FFREEDOM (also referenced FR550CBR), from Polaris' own support " +
+      "page, owner's manual H0748900_REVC and quick start guide, accessed 31 July 2026, with the " +
+      "pool-length figure from the manufacturer's A+ panels. The manual's chassis designation " +
+      "TYPE EB37 is shared with the FREEDOM Plus, so check the SKU rather than the chassis code.",
+    lastReviewed: "2026-08-04",
+  },
 };
 
 export function reviewFor(slug: string | undefined): ReviewContent | undefined {

@@ -117,6 +117,43 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
        is worse than a blank, because it gets planned against. */
     researchedOn: RUN,
   },
+  {
+    path: "/robots/robotic-pool-cleaners/polaris-freedom/",
+    primary: { term: "polaris freedom review", volume: 0, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "polaris freedom cordless robotic pool cleaner", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "polaris freedom", volume: 0, difficulty: 0, mustAppear: true },
+      // The section the page is actually built around, and the reason it beats
+      // a spec sheet: the pool-size limit exists only in marketing artwork.
+      { term: "polaris freedom max pool size", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "polaris freedom battery", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "polaris freedom runtime", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "iaqualink", volume: 0, difficulty: 0, mustAppear: true },
+    ],
+    cededTo: [
+      {
+        term: "robotic pool cleaner",
+        path: "/robots/robotic-pool-cleaners/",
+        why: "The category head term belongs to the hub, for the same reason it does on every other review.",
+      },
+      {
+        term: "best robotic pool cleaner",
+        path: "/best-robots/robotic-pool-cleaners/",
+        why: "A comparison SERP. One review is not a best-of.",
+      },
+      {
+        term: "cordless robotic pool cleaner",
+        path: "/best-robots/robotic-pool-cleaners/cordless/",
+        why: "THE ONE THIS PAGE WOULD MOST LIKE TO HAVE, AND MUST NOT TAKE. The Freedom is our flagship cordless machine, so a review targeting the cordless head term is the single most likely piece of self-cannibalisation on this site. That query wants a shortlist; this page is one product. Ceded on purpose.",
+      },
+      {
+        term: "dolphin nautilus cc plus review",
+        path: "/robots/robotic-pool-cleaners/dolphin-nautilus-cc-plus/",
+        why: "The Nautilus is named on this page as the corded comparison. Naming a rival is not targeting its term.",
+      },
+    ],
+    researchedOn: RUN,
+  },
 ];
 
 export const keywordsFor = (path: string): PageKeywords | undefined =>

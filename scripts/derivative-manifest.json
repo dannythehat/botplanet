@@ -890,6 +890,99 @@
     ]
   },
   {
+    "source": "/media/reviews/polaris-freedom/hero.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-polaris-freedom-hero-webp-360",
+        "src": "/media/reviews/polaris-freedom/hero-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 22650,
+        "checksum": "sha256:e80a5dbf7231348daca5ebfd8b8d90f6540fc3dc0f2d083cef07a3b3c27e05c2"
+      },
+      {
+        "id": "media-reviews-polaris-freedom-hero-webp-640",
+        "src": "/media/reviews/polaris-freedom/hero-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 59308,
+        "checksum": "sha256:7376baa1660fa3d6c42b8a7b9dcfe172cb8c9abdf0ee692a3f8085a085dcc496"
+      },
+      {
+        "id": "media-reviews-polaris-freedom-hero-webp-960",
+        "src": "/media/reviews/polaris-freedom/hero-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 115498,
+        "checksum": "sha256:9ae5d60f823b8f0a8f81c7ee25fa1d95f130c67fdeaf27e99367351035840cf7"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/polaris-freedom/cordless-dock.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-polaris-freedom-cordless-dock-webp-360",
+        "src": "/media/reviews/polaris-freedom/cordless-dock-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 17420,
+        "checksum": "sha256:28ce077d534d1a6f1277dd581455ffca3bd7f931b5e94f0ce1e3cd8bd18159f4"
+      },
+      {
+        "id": "media-reviews-polaris-freedom-cordless-dock-webp-640",
+        "src": "/media/reviews/polaris-freedom/cordless-dock-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 47118,
+        "checksum": "sha256:86deef18b3abb6800fe3da22c05b04e34e964d3337faaf4ef644efc8d2256989"
+      },
+      {
+        "id": "media-reviews-polaris-freedom-cordless-dock-webp-960",
+        "src": "/media/reviews/polaris-freedom/cordless-dock-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 95910,
+        "checksum": "sha256:afcb14d7c24fe2783513ddfe699a2ddc4885e9a1e6bbac949cf621302ce66d35"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/polaris-freedom/app-control.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-polaris-freedom-app-control-webp-360",
+        "src": "/media/reviews/polaris-freedom/app-control-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 17442,
+        "checksum": "sha256:a8dd1302212a2461f90ef915f3465bffa3134c9e1abe9b4c1a3c462b5aa6189f"
+      },
+      {
+        "id": "media-reviews-polaris-freedom-app-control-webp-640",
+        "src": "/media/reviews/polaris-freedom/app-control-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 42696,
+        "checksum": "sha256:9b875249fdef7a90f2407b0bfb0de88cdde6747e45d6b5d2ec6f0727c2b812a4"
+      },
+      {
+        "id": "media-reviews-polaris-freedom-app-control-webp-960",
+        "src": "/media/reviews/polaris-freedom/app-control-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 81462,
+        "checksum": "sha256:2ef9ae298373459d02004b5de75c2a4310ec10cc9c11b266fa79c33c38703c82"
+      }
+    ]
+  },
+  {
     "source": "/media/products/dolphin-nautilus-cc-plus.webp",
     "sourceWidth": 1122,
     "sourceHeight": 1402,

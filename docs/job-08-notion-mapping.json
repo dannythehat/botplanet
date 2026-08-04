@@ -9,9 +9,9 @@
       "populated": 168,
       "unknown": 9,
       "not_applicable": 23,
-      "not_publicly_stated": 89,
+      "not_publicly_stated": 90,
       "conflicting": 2,
-      "suppressed": 18,
+      "suppressed": 17,
       "pending_verification": 1
     },
     "reconciliation": {
@@ -423,20 +423,19 @@
         "populated": 25,
         "unknown": 0,
         "not_applicable": 1,
-        "not_publicly_stated": 4,
+        "not_publicly_stated": 5,
         "conflicting": 0,
-        "suppressed": 1,
+        "suppressed": 0,
         "pending_verification": 0
       },
       "fieldsNotPubliclyStated": [
         "surfaceTypes",
         "filtrationMicrons",
         "suctionRate",
-        "remoteControl"
-      ],
-      "fieldsSuppressed": [
+        "remoteControl",
         "warranty"
       ],
+      "fieldsSuppressed": [],
       "fieldsConflicting": [],
       "conflicts": [],
       "editorialCorrections": [

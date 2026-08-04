@@ -64,7 +64,11 @@ const bmCta = botMatchCtaFor(review.categorySlug);
    caption, so the figures have to exist before it runs for that to mean
    anything. */
 const withFigures = injectFigures(html, review.figures, import.meta.env.DEV);
-const { html: linked } = applyInternalLinks(withFigures, anchorsFor(review.categorySlug));
+const { html: linked } = applyInternalLinks(
+  withFigures,
+  anchorsFor(review.categorySlug),
+  `/robots/${review.categorySlug}/${review.slug}/`,
+);
 
 /* Folding runs last, on the finished HTML. It only moves markup around — it
    does not rewrite text — so the linker and the figure injector never see the
