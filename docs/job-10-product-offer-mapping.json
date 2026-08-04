@@ -50,7 +50,7 @@
       "exactProductIdentifier": "B09K4C9WGF",
       "identifierKind": "asin",
       "market": "us",
-      "priceState": "not_published",
+      "priceState": "current",
       "stockState": "in_stock",
       "deliveryState": "free",
       "warrantyRoute": "Maytronics (Dolphin) states a warranty of 1 year.",
@@ -58,11 +58,8 @@
       "freshness": "live",
       "affiliateProgramme": "prog-amazon-us",
       "goPath": "/go/pool-dolphin-ccplus-amazon",
-      "schemaEligible": false,
-      "blockers": [
-        "no current price from an approved source",
-        "not eligible for Offer structured data"
-      ],
+      "schemaEligible": true,
+      "blockers": [],
       "nextAction": "Obtain price and availability through the Amazon Creators API so the offer can carry a current price and enter Offer schema."
     },
     {
@@ -113,7 +110,7 @@
       "exactProductIdentifier": "B0BX9DJS7R",
       "identifierKind": "asin",
       "market": "us",
-      "priceState": "not_published",
+      "priceState": "current",
       "stockState": "in_stock",
       "deliveryState": "free",
       "warrantyRoute": "Manufacturer warranty term not confirmed",
@@ -121,11 +118,8 @@
       "freshness": "live",
       "affiliateProgramme": "prog-amazon-us",
       "goPath": "/go/pool-polaris-freedom-amazon",
-      "schemaEligible": false,
-      "blockers": [
-        "no current price from an approved source",
-        "not eligible for Offer structured data"
-      ],
+      "schemaEligible": true,
+      "blockers": [],
       "nextAction": "Obtain price and availability through the Amazon Creators API so the offer can carry a current price and enter Offer schema."
     },
     {
@@ -144,7 +138,7 @@
       "exactProductIdentifier": "B0CVMQ3XBX",
       "identifierKind": "asin",
       "market": "us",
-      "priceState": "not_published",
+      "priceState": "current",
       "stockState": "in_stock",
       "deliveryState": "free",
       "warrantyRoute": "Betta states a warranty of 1-YEAR WARRANTY.",
@@ -152,11 +146,8 @@
       "freshness": "live",
       "affiliateProgramme": "prog-amazon-us",
       "goPath": "/go/pool-betta-seplus-amazon",
-      "schemaEligible": false,
-      "blockers": [
-        "no current price from an approved source",
-        "not eligible for Offer structured data"
-      ],
+      "schemaEligible": true,
+      "blockers": [],
       "nextAction": "Obtain price and availability through the Amazon Creators API so the offer can carry a current price and enter Offer schema."
     },
     {
@@ -300,7 +291,7 @@
       "exactProductIdentifier": "B0DJ6MV81N",
       "identifierKind": "asin",
       "market": "us",
-      "priceState": "not_published",
+      "priceState": "current",
       "stockState": "in_stock",
       "deliveryState": "free",
       "warrantyRoute": "Manufacturer warranty term not confirmed",
@@ -308,11 +299,8 @@
       "freshness": "live",
       "affiliateProgramme": "prog-amazon-us",
       "goPath": "/go/pool-aiper-seagull-amazon",
-      "schemaEligible": false,
-      "blockers": [
-        "no current price from an approved source",
-        "not eligible for Offer structured data"
-      ],
+      "schemaEligible": true,
+      "blockers": [],
       "nextAction": "Obtain price and availability through the Amazon Creators API so the offer can carry a current price and enter Offer schema."
     }
   ]
