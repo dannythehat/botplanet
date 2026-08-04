@@ -154,6 +154,38 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
     ],
     researchedOn: RUN,
   },
+  {
+    path: "/robots/robotic-pool-cleaners/betta-se-plus/",
+    primary: { term: "betta se plus review", volume: 0, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "solar pool skimmer", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "robotic pool skimmer", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "betta se plus", volume: 0, difficulty: 0, mustAppear: true },
+      // The question the page is built to answer, and the one most likely to
+      // be typed by someone about to buy the wrong machine.
+      { term: "does the betta se plus clean the pool floor", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "betta se plus runtime", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "betta se plus warranty", volume: 0, difficulty: 0, mustAppear: true },
+    ],
+    cededTo: [
+      {
+        term: "robotic pool cleaner",
+        path: "/robots/robotic-pool-cleaners/",
+        why: "The category head term belongs to the hub — and doubly so here, because this machine is not a pool cleaner. Ranking a skimmer for that query would be the wrong answer for the searcher AND a bad result for us.",
+      },
+      {
+        term: "best robotic pool cleaner",
+        path: "/best-robots/robotic-pool-cleaners/",
+        why: "A comparison SERP. One review is not a best-of.",
+      },
+      {
+        term: "cordless robotic pool cleaner",
+        path: "/best-robots/robotic-pool-cleaners/cordless/",
+        why: "Cordless it is, a pool cleaner it is not. Chasing that term would put a surface skimmer in front of people shopping for a floor robot.",
+      },
+    ],
+    researchedOn: RUN,
+  },
 ];
 
 export const keywordsFor = (path: string): PageKeywords | undefined =>

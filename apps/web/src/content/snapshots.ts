@@ -185,6 +185,55 @@ export const SNAPSHOTS: Record<string, ProductSnapshot> = {
       { need: "You would rather have mains power than a battery", test: { kind: "power", value: "corded" } },
     ],
   },
+
+  "betta-se-plus": {
+    slug: "betta-se-plus",
+    priceBand: "entry",
+    priceBandWhy:
+      "The cheapest machine we cover, and it is not competing with the others. A skimmer and a floor robot do different jobs, so this is an addition to a setup rather than an alternative to one.",
+    shipping: "Prime-eligible on Amazon, so usually a day or two rather than a week.",
+    shippingSpeed: "fast",
+    points: [
+      {
+        label: "Cleans",
+        value: "The surface only",
+        note: "Leaves, pollen, insects, pet hair. Never the floor, the walls or the waterline — Betta says so itself.",
+      },
+      {
+        label: "Power",
+        value: "Solar, with a mains adapter",
+        note: "5 to 6 hours in sun, 3.5 on the adapter. In a sunny month it tops itself up while it works.",
+      },
+      {
+        label: "Runtime",
+        value: "30+ hours continuous",
+        note: "Not a misprint. A small motor moving a floating hull is a different problem from climbing a wall.",
+      },
+      {
+        label: "Biggest pool it is rated for",
+        value: "40 × 60 ft",
+        note: "About 2,400 sq ft, from Betta's own product page.",
+      },
+      {
+        label: "Filter",
+        value: "200 micron basket",
+        note: "One of the few machines here whose maker publishes a micron rating at all.",
+      },
+      {
+        label: "Warranty",
+        value: "1 year",
+        note: "Stated on the product page and again in the manual.",
+      },
+    ],
+    suitsYouIf:
+      "Your pool sits under trees and the surface is the thing that always looks dirty — especially if you already have a floor robot doing the bottom.",
+    ruleOutIf:
+      "You want the floor or the waterline cleaned, your pool is bigger than about 40 by 60 ft, or it sits in permanent shade.",
+    ruleOuts: [
+      { need: "You need the floor cleaned", test: { kind: "cleans", value: "floor" } },
+      { need: "You need the waterline scrubbed", test: { kind: "cleans", value: "waterline" } },
+    ],
+  },
 };
 
 export const snapshotFor = (slug: string | undefined): ProductSnapshot | undefined =>
