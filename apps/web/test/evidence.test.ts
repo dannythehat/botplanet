@@ -278,6 +278,13 @@ describe("field states", () => {
        allowance working as intended rather than being widened: the moment a
        Maytronics page is read, the record leaves this set. */
     "prod-dolphin-proteus-dx4-plus",
+    /* Added 4 August 2026 with its review. Aiper's page and the Amazon listing
+       were both read that day, but the runtime, charge-time and pool-area
+       figures come from earlier owner research that Aiper's current page does
+       not state anywhere it can be re-read — so those fields sit pending until
+       a source that states them is found. Identity, weight, filtration and
+       surfaces are verified. */
+    "prod-aiper-scuba-v3-ai-vision",
   ]);
 
   it("leaves nothing in the 'nobody looked' state, except a record awaiting re-verification", () => {

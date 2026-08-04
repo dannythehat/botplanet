@@ -283,6 +283,55 @@ export const SNAPSHOTS: Record<string, ProductSnapshot> = {
       { need: "You want a cordless machine", test: { kind: "power", value: "cordless" } },
     ],
   },
+
+  "aiper-scuba-v3-ai-vision": {
+    slug: "aiper-scuba-v3-ai-vision",
+    priceBand: "upper_mid",
+    priceBandWhy:
+      "The same money as a corded Dolphin that does not touch the waterline, buying a camera, cordless freedom and the finest published filter rating we list. The mapping flagships sit above it.",
+    shipping: "Prime-eligible on Amazon, so usually a day or two rather than a week.",
+    shippingSpeed: "fast",
+    points: [
+      {
+        label: "Cleans",
+        value: "Floor, walls and waterline",
+        note: "4,800 GPH through dual brushes, per Aiper. Waterline coverage at this price is uncommon.",
+      },
+      {
+        label: "Navigation",
+        value: "Camera — it looks at the pool",
+        note: "2 m detection range, twenty-plus debris types recognised, night lights. Aiper's design figures.",
+      },
+      {
+        label: "Power",
+        value: "Cordless, wireless dock",
+        note: "One charge runs AI Navium's weekly plan — short cleans spread over 7 days, not 168 hours of runtime.",
+      },
+      {
+        label: "Filter",
+        value: "3 μm + 180 μm layers",
+        note: "The finest published rating in our catalogue. Manufacturer's figure, not a lab result.",
+      },
+      {
+        label: "Weight",
+        value: "18.1 lb",
+        note: "The lightest full cleaner we list, and it parks at the waterline for lifting.",
+      },
+      {
+        label: "Warranty",
+        value: null,
+        note: "Aiper has a warranty process; no stated term for this machine was found.",
+      },
+    ],
+    suitsYouIf:
+      "Your in-ground pool collects real debris and you want the robot to see it and go to it, with the lightest daily routine here.",
+    ruleOutIf:
+      "Your pool is above ground, you want a stated maximum pool length or warranty term, or you would rather not have a camera in the water.",
+    ruleOuts: [
+      { need: "You would rather have mains power than a battery", test: { kind: "power", value: "corded" } },
+      { need: "You want a machine with a stated length rating for a big pool", test: { kind: "maxLengthOver", feet: 50 } },
+    ],
+  },
 };
 
 export const snapshotFor = (slug: string | undefined): ProductSnapshot | undefined =>

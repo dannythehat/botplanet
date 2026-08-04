@@ -347,6 +347,76 @@ const RAW: Record<string, Omit<ProductEditorial, "productId">> = {
     researchedDate: R,
   },
 
+  /* Added 4 August 2026, same day as its review. Like the Proteus, it had a
+     D1 row and a live page before the repo knew it existed. Aiper's own page
+     and the Amazon listing were both read on the day of writing, so unlike
+     the Proteus this record has a manufacturer source. */
+  "aiper-scuba-v3-ai-vision": {
+    slug: "aiper-scuba-v3-ai-vision",
+    oneLiner:
+      "Camera-guided cordless cleaner that recognises debris and steers at it, covering floor, walls and waterline.",
+    verdict:
+      "The first robot in the catalogue that looks at the pool: a front camera with a 2 m detection range recognises twenty-plus debris types and plans routes toward what it sees, with night lights for after dark. Cordless, 18.1 lb — the lightest full cleaner here — with a wireless dock, waterline parking with app alerts, and a 3 micron fine filter layer that is the finest published rating we list. The headline 10x figure is Aiper's own benchmark, and neither a maximum pool length nor a warranty term is published.",
+    bestFor: "Camera-guided cleaning of pools that collect real debris",
+    priceRangeUsdApprox: [800, 900],
+    specs: {
+      poolSizeSuitability: "In-ground pools; Aiper states an area (~1,614 sq ft researched), no length",
+      cableLengthFt: null,
+      runtimeMins: 180,
+      chargeTimeHrs: 5,
+      filtration: "Multi-layer basket: 180 micron debris mesh + 3 micron fine layer",
+      navigation: "Front camera, 2 m / 6.6 ft detection range, 20+ debris types, night lights",
+      weightLbs: 18.1,
+      warranty: "Not stated — Aiper has a warranty process but publishes no term for this machine",
+      appSupport: "Aiper app — AI Navium weekly plans, mode selection, waterline-ready alerts",
+    },
+    notableFeatures: [
+      "Debris-recognising camera with 2 m detection range",
+      "AI Navium mode: one charge budgeted across a week of short cleans",
+      "3 micron fine filtration layer — the finest published figure in the catalogue",
+      "18.1 lb, wireless charging dock, waterline parking with app alert",
+      "Night cleaning by onboard lights",
+    ],
+    pros: [
+      "Goes to visible debris instead of sweeping blind",
+      "Lightest full cleaner in the catalogue",
+      "Waterline coverage on a cordless machine at this price",
+      "Aiper publishes more numbers than most rivals, including a micron rating",
+    ],
+    limitations: [
+      "No maximum pool length published — an area only",
+      "Warranty term not published",
+      "The 10x cleaning-speed figure is Aiper's own unnamed-baseline benchmark",
+      "What the camera records and retains is not spelled out beyond a TUV certification claim",
+      "Runtime and charge time are researched figures, not re-read from Aiper's page",
+    ],
+    whoShouldBuy:
+      "Owners of in-ground pools that collect leaves, sand and twigs, who want the robot to see the mess and go to it with the lightest daily routine available.",
+    whoShouldAvoid:
+      "Above-ground pool owners, anyone needing a stated length rating or warranty term, or anyone uncomfortable putting a camera in the water.",
+    faqs: [
+      {
+        q: "What does \"7 days on one charge\" mean on the Aiper Scuba V3?",
+        a: "Not 168 hours of runtime. AI Navium mode plans a week of short autonomous cleans sized to your pool and spreads them across seven days, so one charge covers the week. Continuous runtime is roughly 180 minutes per owner research.",
+      },
+      {
+        q: "Is the Scuba V3 the same as the Scuba V3 AI Vision?",
+        a: "Yes. Aiper's own site titles it 'Scuba V3 Cognitive AI' and Amazon sells it as 'AI Vision' — the model in Amazon's details table is simply Aiper Scuba V3. The Gray and Blue ASINs are colour variants of the same machine.",
+      },
+      {
+        q: "Does it clean the waterline?",
+        a: "Yes — floor, walls and waterline, per both Aiper's page and the listing, with 4,800 GPH of suction through dual brushes.",
+      },
+    ],
+    sources: [
+      { label: "Aiper Scuba V3 product page (titled 'Scuba V3 Cognitive AI')", url: "https://aiper.com/us/aiper-scuba-v3" },
+      { label: "Amazon US listing (B0GG97427D, Gray)", url: "https://www.amazon.com/dp/B0GG97427D" },
+    ],
+    evidence: "manufacturer_verified",
+    confidence: "medium",
+    researchedDate: "2026-08-04",
+  },
+
   /* Added 4 August 2026. The row already existed in D1 and the page already
      rendered; the repo simply did not know about it, which the internal-link
      test caught. Every figure here is RETAILER-sourced — no Maytronics product
@@ -711,6 +781,7 @@ export const PRODUCT_ID: Record<string, string> = {
   "betta-se-plus": "prod-betta-se-plus",
   "dolphin-e10": "prod-dolphin-e10",
   "dolphin-proteus-dx4-plus": "prod-dolphin-proteus-dx4-plus",
+  "aiper-scuba-v3-ai-vision": "prod-aiper-scuba-v3-ai-vision",
 };
 
 /** Editorial records with the stable productId attached, keyed by slug (route id). */

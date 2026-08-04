@@ -308,6 +308,7 @@ export const destinationFor = (productId: string, retailerId = "ret-amazon"): Pr
 export const REDIRECT_KEYS: Record<string, string> = {
   "prod-aiper-scuba-s1": "pool-aiper-scubas1-amazon",
   "prod-aiper-scuba-x1": "pool-aiper-scubax1-amazon",
+  "prod-aiper-scuba-v3-ai-vision": "pool-aiper-scubav3-amazon",
   "prod-aiper-seagull-se": "pool-aiper-seagull-amazon",
   "prod-beatbot-aquasense-2-ultra": "pool-beatbot-ultra-amazon",
   "prod-betta-se-plus": "pool-betta-seplus-amazon",

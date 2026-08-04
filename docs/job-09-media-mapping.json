@@ -1,26 +1,26 @@
 {
   "generatedFor": "2026-07-31",
-  "launchProducts": 11,
+  "launchProducts": 12,
   "position": "No third-party product photograph is ingested. The Amazon Associates route is a potential lawful source, but the account's ownership and current approval are unverified, and obtaining Program Content lawfully would also require Creators API credentials that this environment does not hold; the programme forbids scraping, guessed URLs and unapproved caching. No launch-brand manufacturer publishes a press kit granting third-party image use. Until one of those changes, no product carries a photograph. Five products are shown in original BotPlanet creatives, which we own outright and which do show the machine but carry our branding and headline text set into the image — they illustrate, they are not evidence, and they never enter Product structured data. Every other product renders an original BotPlanet branded placeholder that names the exact model and does not depict it.",
   "totals": {
-    "assets": 62,
-    "productAssets": 37,
-    "originalAssets": 52,
+    "assets": 66,
+    "productAssets": 41,
+    "originalAssets": 56,
     "placeholders": 10,
-    "locallyStored": 62,
+    "locallyStored": 66,
     "remotelyServed": 0,
     "withdrawn": 0,
-    "exactModelConfirmed": 11,
-    "publicSafe": 11,
-    "heroReady": 10,
+    "exactModelConfirmed": 12,
+    "publicSafe": 12,
+    "heroReady": 11,
     "fullSetReady": 0,
-    "derivatives": 133,
-    "altApproved": 48,
+    "derivatives": 145,
+    "altApproved": 52,
     "altDecorative": 14,
     "altMissing": 0,
     "altRejected": 0,
     "schemaProductEligible": 0,
-    "schemaOpenGraphEligible": 51
+    "schemaOpenGraphEligible": 55
   },
   "rows": [
     {
@@ -318,6 +318,67 @@
       "blockers": [
         "no image eligible for Product structured data",
         "The licensed route is Amazon Program Content via the Creators API. The API needs credentials this build environment does not hold, and the programme forbids scraping, constructing image URLs, or caching Program Content without express permission — so there is no lawful way to fetch an image here. The stored record previously cited the Betta SE page in error. Any incoming image must be matched to /products/betta-se-plus; Betta SE media must never be imported for this product. BotPlanet's own artwork now fills this product's card; that is a creative, not photography, and does not clear this blocker."
+      ]
+    },
+    {
+      "productId": "prod-aiper-scuba-v3-ai-vision",
+      "slug": "aiper-scuba-v3-ai-vision",
+      "canonicalUrl": "https://botplanet.io/robots/robotic-pool-cleaners/aiper-scuba-v3-ai-vision/",
+      "exactModel": "AIPER Scuba V3 AI Vision",
+      "heroAssetId": "art-aiper-scuba-v3-ai-vision",
+      "supportingAssetIds": [
+        "fig-aiper-scuba-v3-ai-vision-hero",
+        "fig-aiper-scuba-v3-ai-vision-ai-patrol",
+        "fig-aiper-scuba-v3-ai-vision-carefree",
+        "fig-aiper-scuba-v3-ai-vision-filtration"
+      ],
+      "renderedAssetId": "art-aiper-scuba-v3-ai-vision",
+      "renderedIsPlaceholder": false,
+      "imageSource": "original_botplanet — BotPlanet",
+      "rightsBasis": "Original artwork authored in-house. Full usage rights in every market and placement, no attribution required, no expiry.",
+      "allowedPlacements": [
+        "product_page",
+        "category_page",
+        "listing_card",
+        "comparison",
+        "homepage",
+        "guide",
+        "open_graph",
+        "email"
+      ],
+      "allowedMarkets": [
+        "us",
+        "global"
+      ],
+      "storage": "local_permitted",
+      "remoteServingRequired": false,
+      "altText": "BotPlanet artwork for the AIPER Scuba V3 AI Vision: the black cordless cleaner on its charging dock beside a lit resort pool, with callouts for camera navigation, wireless charging, weight, filtration and floor, wall and waterline cleaning.",
+      "altTextStatus": "approved",
+      "structuredDataImages": [],
+      "structuredDataEligible": false,
+      "openGraphEligible": true,
+      "schemaExclusionReason": "an owner-created creative depicts the real product but carries BotPlanet branding and headline text set into the image; Product schema expects a clean photograph, so it illustrates and previews but never stands as the product image",
+      "missingImageTypes": [
+        "product_alternate_view",
+        "product_detail",
+        "listing_thumbnail"
+      ],
+      "withdrawalFallback": "the media registry re-resolves on every request: a withdrawn asset is skipped and the next-best asset renders, ending at the branded placeholder. No broken image can appear, and structured data and Open Graph references disappear with it.",
+      "readiness": {
+        "rightsRecordComplete": true,
+        "exactModelConfirmed": true,
+        "heroReady": true,
+        "supportingImagesReady": true,
+        "responsiveVariantsReady": true,
+        "altTextApproved": true,
+        "schemaEligible": false,
+        "publicRenderingSafe": true,
+        "fullProductMediaSetReady": false
+      },
+      "imageReadinessStatus": "public_safe_placeholder_only",
+      "blockers": [
+        "no image eligible for Product structured data",
+        "NO LICENSED PHOTOGRAPHY ROUTE IS OPEN YET. Aiper runs a direct affiliate programme, which is the plausible lawful source for product imagery, but BotPlanet holds no approved membership or feed credentials for it. Aiper's own site publishes photography with no stated reuse licence, and the Amazon listing may not be scraped under Associates rules. The product currently renders owner-created BotPlanet creatives and a branded placeholder, not photography."
       ]
     },
     {
