@@ -1366,3 +1366,23 @@ describe("retailer, seller and programme are three different things", () => {
     expect(page).toContain("retailer(offer.retailerId)");
   });
 });
+
+describe("outbound call-to-action wording", () => {
+  /* The review page shipped with two labels for the same action: BuyStrip said
+     "Check price on Amazon" and the buy box said "View on Amazon". One page,
+     one action, one sentence — and with no price printed, "view" also
+     undersells what the click is for. */
+  const buyBox = readFileSync("apps/web/src/components/BuyBox.astro", "utf8");
+  const buyStrip = readFileSync("apps/web/src/components/BuyStrip.astro", "utf8");
+
+  it("uses the same wording in the buy box and the buy strip", () => {
+    expect(buyBox).toContain("Check price on {lead.retailerName}");
+    expect(buyStrip).toContain("Check price on {retailerName}");
+  });
+
+  it("has no 'View on <retailer>' left anywhere", () => {
+    for (const [name, src] of [["BuyBox", buyBox], ["BuyStrip", buyStrip]] as const) {
+      expect(src, `${name} still says "View on"`).not.toMatch(/>View on /);
+    }
+  });
+});
