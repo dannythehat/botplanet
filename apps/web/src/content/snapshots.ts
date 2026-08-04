@@ -234,6 +234,55 @@ export const SNAPSHOTS: Record<string, ProductSnapshot> = {
       { need: "You need the waterline scrubbed", test: { kind: "cleans", value: "waterline" } },
     ],
   },
+
+  "dolphin-proteus-dx4-plus": {
+    slug: "dolphin-proteus-dx4-plus",
+    priceBand: "upper_mid",
+    priceBandWhy:
+      "Above the entry Dolphins and below the app-and-mapping models. You are paying for wall climbing, ledges and a top-load filter from the most established brand in the category.",
+    shipping: "Prime-eligible on Amazon, so usually a day or two rather than a week.",
+    shippingSpeed: "fast",
+    points: [
+      {
+        label: "Cleans",
+        value: "Floor, walls, steps and sun ledges",
+        note: "The waterline is claimed on Maytronics' listing but no technical sheet has been found to corroborate it.",
+      },
+      {
+        label: "Power",
+        value: "Corded mains",
+        note: "No battery to charge or replace, and no runtime limit on a cycle.",
+      },
+      {
+        label: "Biggest pool it is rated for",
+        value: "33 ft",
+        note: "Shorter than people assume. The plain Proteus DX4 is rated to 50 ft and shares the same product page.",
+      },
+      {
+        label: "Filter",
+        value: "Top-load cartridge",
+        note: "Lift the lid at the poolside rather than turning a wet machine over. No micron rating is published.",
+      },
+      {
+        label: "Weight",
+        value: "18.5 lb dry",
+        note: "A two-handed lift, and heavier coming out than going in.",
+      },
+      {
+        label: "Warranty",
+        value: null,
+        note: "No term is stated on the listing, and no Maytronics page for this model has been found.",
+      },
+    ],
+    suitsYouIf:
+      "You have an in-ground pool under 33 ft with steps or a sun ledge, and you want every surface handled by one corded machine.",
+    ruleOutIf:
+      "Your pool runs longer than 33 ft, it is above ground, or the waterline is the single reason you are buying.",
+    ruleOuts: [
+      { need: "Your pool runs longer than 33 ft", test: { kind: "maxLengthOver", feet: 33 } },
+      { need: "You want a cordless machine", test: { kind: "power", value: "cordless" } },
+    ],
+  },
 };
 
 export const snapshotFor = (slug: string | undefined): ProductSnapshot | undefined =>

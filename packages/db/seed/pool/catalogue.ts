@@ -147,7 +147,13 @@ export const productRows: (typeof products.$inferInsert)[] = [
     name: "Dolphin Nautilus CC Plus",
     model: "Nautilus CC Plus (Wi-Fi)",
     environments: ["in_ground"],
-    cleans: ["floor", "walls", "waterline"],
+    /* NOT waterline. Maytronics' own technical sheet for part 99996409-PCI
+       lists Waterline Scrubbing: No, and the whole first section of this
+       machine's review is about that. The seed and D1 both carried
+       "waterline" until 4 August 2026, which meant BotMatch would recommend
+       it to the one buyer the review exists to warn off — the person whose
+       actual complaint is the tide-mark at the tile line. Corrected in both. */
+    cleans: ["floor", "walls"],
     powerType: "corded",
     priceTier: "mid",
     // Maytronics states 40 ft. The seed carried 50, which would have recommended it for pools a quarter longer than it is rated for.

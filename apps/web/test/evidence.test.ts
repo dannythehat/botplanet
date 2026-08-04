@@ -270,6 +270,14 @@ describe("field states", () => {
     "prod-aiper-scuba-x1",
     // Moved from the Maytronics Dolphin Premier to the BuBlue Bubot 800P Gen2.
     "prod-dolphin-premier",
+    /* Added to the editorial layer on 4 August 2026 with NO MANUFACTURER
+       SOURCE. Maytronics publishes no product page we have found for the
+       Proteus DX4 Plus, so every field is retailer-sourced and several are
+       legitimately unknown — including whether it scrubs the waterline, which
+       its own listing claims in a bullet and omits from its title. This is the
+       allowance working as intended rather than being widened: the moment a
+       Maytronics page is read, the record leaves this set. */
+    "prod-dolphin-proteus-dx4-plus",
   ]);
 
   it("leaves nothing in the 'nobody looked' state, except a record awaiting re-verification", () => {

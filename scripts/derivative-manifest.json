@@ -1107,6 +1107,138 @@
     ]
   },
   {
+    "source": "/media/reviews/dolphin-proteus-dx4-plus/hero.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-dolphin-proteus-dx4-plus-hero-webp-360",
+        "src": "/media/reviews/dolphin-proteus-dx4-plus/hero-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 23694,
+        "checksum": "sha256:65f750b3171915881145a471b542513f9ffe61cdd0f909aa28a4a9cf215d09f4"
+      },
+      {
+        "id": "media-reviews-dolphin-proteus-dx4-plus-hero-webp-640",
+        "src": "/media/reviews/dolphin-proteus-dx4-plus/hero-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 62702,
+        "checksum": "sha256:0d0b59f16db8940e54220ffaeffd44fc6053d5a6071b501be28e2a29ed71c210"
+      },
+      {
+        "id": "media-reviews-dolphin-proteus-dx4-plus-hero-webp-960",
+        "src": "/media/reviews/dolphin-proteus-dx4-plus/hero-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 128504,
+        "checksum": "sha256:af2bd69d79f0be148512d594fc61e80e3843386e7bca10335f52851d132db2fc"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/dolphin-proteus-dx4-plus/every-surface.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-dolphin-proteus-dx4-plus-every-surface-webp-360",
+        "src": "/media/reviews/dolphin-proteus-dx4-plus/every-surface-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 25850,
+        "checksum": "sha256:453c99121b6673366ca6afcabab1297886fbb98a56c7047e29fc4bf14a765aa4"
+      },
+      {
+        "id": "media-reviews-dolphin-proteus-dx4-plus-every-surface-webp-640",
+        "src": "/media/reviews/dolphin-proteus-dx4-plus/every-surface-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 67142,
+        "checksum": "sha256:9c92ebe3aec4237f08ab23f6a40ed96ee6eee7a49ced3c5d55cf015ba0d09aa9"
+      },
+      {
+        "id": "media-reviews-dolphin-proteus-dx4-plus-every-surface-webp-960",
+        "src": "/media/reviews/dolphin-proteus-dx4-plus/every-surface-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 131408,
+        "checksum": "sha256:8a133a1b5178a721f99223029577b02e0948fb29669e08e8ffe9bd7dc8466923"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/dolphin-proteus-dx4-plus/weekly-timer.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-dolphin-proteus-dx4-plus-weekly-timer-webp-360",
+        "src": "/media/reviews/dolphin-proteus-dx4-plus/weekly-timer-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 21662,
+        "checksum": "sha256:f8e61124af0eb35c4546464145065029f66cdb114ec9936666e4377609e7584c"
+      },
+      {
+        "id": "media-reviews-dolphin-proteus-dx4-plus-weekly-timer-webp-640",
+        "src": "/media/reviews/dolphin-proteus-dx4-plus/weekly-timer-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 54136,
+        "checksum": "sha256:c0940fb4fd92861c30fc747e6e6f7f080852be73d8344a0db9ce3a1484477cf4"
+      },
+      {
+        "id": "media-reviews-dolphin-proteus-dx4-plus-weekly-timer-webp-960",
+        "src": "/media/reviews/dolphin-proteus-dx4-plus/weekly-timer-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 103466,
+        "checksum": "sha256:ac8580d4b3ee15ad78f33d0539ea4c873f72a7ca61ee962164b90ef2b06ce556"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/dolphin-proteus-dx4-plus/filtration.webp",
+    "sourceWidth": 1536,
+    "sourceHeight": 1536,
+    "derivatives": [
+      {
+        "id": "media-reviews-dolphin-proteus-dx4-plus-filtration-webp-360",
+        "src": "/media/reviews/dolphin-proteus-dx4-plus/filtration-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 18960,
+        "checksum": "sha256:5c34a3465d63a8f248c2f8366243ed9e6d585b64b46f4e51dc7f6ddc7a5121e5"
+      },
+      {
+        "id": "media-reviews-dolphin-proteus-dx4-plus-filtration-webp-640",
+        "src": "/media/reviews/dolphin-proteus-dx4-plus/filtration-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 39112,
+        "checksum": "sha256:7115a73d199ed20c99565dcdf4e6e3f1b52588a0f0214363ba8ad51510d3eeeb"
+      },
+      {
+        "id": "media-reviews-dolphin-proteus-dx4-plus-filtration-webp-960",
+        "src": "/media/reviews/dolphin-proteus-dx4-plus/filtration-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 70782,
+        "checksum": "sha256:af3cad0c22a7c545deef0ea4e964aa2f2aa38089184d807e091e097711b59ba0"
+      },
+      {
+        "id": "media-reviews-dolphin-proteus-dx4-plus-filtration-webp-1440",
+        "src": "/media/reviews/dolphin-proteus-dx4-plus/filtration-1440w.webp",
+        "width": 1440,
+        "height": 1440,
+        "bytes": 107658,
+        "checksum": "sha256:1277e84118ab91f97f4f259d557c70b117f6d50e62a0109788cb47cc152e3c54"
+      }
+    ]
+  },
+  {
     "source": "/media/products/dolphin-nautilus-cc-plus.webp",
     "sourceWidth": 1122,
     "sourceHeight": 1402,

@@ -646,6 +646,145 @@ export const REVIEWS: Record<string, ReviewContent> = {
       "different machine with its own manual — check the listing names the SE Plus.",
     lastReviewed: "2026-08-04",
   },
+
+  "dolphin-proteus-dx4-plus": {
+    slug: "dolphin-proteus-dx4-plus",
+    categorySlug: "robotic-pool-cleaners",
+    eyebrow: "Robotic pool cleaner review",
+    title: "Dolphin Proteus DX4 Plus review",
+    seoTitle: "Dolphin Proteus DX4 Plus Review | BotPlanet",
+    metaDescription:
+      "An honest review of the Dolphin Proteus DX4 Plus: the 33 ft limit that catches people out, " +
+      "the sibling rated for 50, and why we are careful about the waterline claim.",
+    verdict:
+      "A corded Maytronics machine that climbs walls, does the sun ledges and — per Maytronics' own " +
+      "listing copy — the waterline too. Rated for pools up to 33 ft, which is shorter than people " +
+      "assume and shorter than the Proteus DX4 sitting next to it on the same page.",
+    bestFor:
+      "An in-ground pool under 33 ft with steps and a sun ledge, where you want one corded machine " +
+      "to handle every surface and no battery to think about.",
+    notIdealFor:
+      "Your pool runs longer than 33 ft, it is above ground, or the waterline is the entire reason " +
+      "you are buying — read the waterline section before committing.",
+    image: {
+      src: "/media/reviews/dolphin-proteus-dx4-plus/hero.webp",
+      alt:
+        "BotPlanet artwork for the Dolphin Proteus DX4 Plus robotic pool cleaner, shown on stone " +
+        "paving beside a curved pool at dusk.",
+    },
+    figures: [
+      {
+        afterHeading: "What it actually cleans",
+        src: "/media/reviews/dolphin-proteus-dx4-plus/every-surface.webp",
+        caption:
+          "Floor, walls, steps and sun ledges, on tracks rather than wheels. The waterline is claimed by Maytronics on the listing but not corroborated by any technical sheet we could find — see the section above.",
+      },
+      {
+        afterHeading: "Filtration",
+        src: "/media/reviews/dolphin-proteus-dx4-plus/filtration.webp",
+        caption:
+          "Top-load access: lift the lid at the poolside rather than turning eighteen wet pounds over. Maytronics publishes no micron rating for the cartridge.",
+      },
+      {
+        afterHeading: "Weight, handling and the things nobody publishes",
+        src: "/media/reviews/dolphin-proteus-dx4-plus/weekly-timer.webp",
+        caption:
+          "The mains power supply. Our artwork shows a programmable weekly schedule on it — that feature is not described anywhere on the listing we read, so treat it as illustration until Maytronics confirms it.",
+      },
+    ],
+    folds: [
+      {
+        id: "filtration",
+        teaser: "Top-load access, and the rating Maytronics does not publish.",
+      },
+      {
+        id: "weight-handling-and-the-things-nobody-publishes",
+        teaser: "18.5 lb dry, 22 inches long, and no caddy in this configuration.",
+      },
+      {
+        id: "what-we-cannot-tell-you",
+        teaser: "Six gaps, and the reason there are more than usual.",
+      },
+    ],
+    facts: [
+      { label: "Power", value: "Corded mains" },
+      { label: "Cleans", value: "Floor, walls, ledges" },
+      { label: "Max pool length", value: "33 ft" },
+      { label: "Weight", value: "18.5 lb" },
+    ],
+    specGroups: [
+      {
+        heading: "Power and reach",
+        rows: [
+          { label: "Power type", value: "Corded mains" },
+          { label: "Cable length", value: null, note: "Not stated on the listing." },
+          { label: "Cycle time", value: null, note: "No cycle duration is published." },
+          { label: "Battery", value: null, note: "None — corded, so nothing degrades on a calendar." },
+        ],
+      },
+      {
+        heading: "Pool compatibility",
+        rows: [
+          { label: "Installation", value: "In-ground" },
+          {
+            label: "Max pool length",
+            value: "33 ft",
+            note: "The plain Proteus DX4 is rated to 50 ft and shares this product page. Check the title of the listing you are buying.",
+          },
+        ],
+      },
+      {
+        heading: "Cleaning",
+        rows: [
+          { label: "Surfaces", value: "Floor, walls, steps and sun ledges" },
+          {
+            label: "Waterline",
+            value: "Claimed on the listing, not corroborated",
+            note: "Maytronics' bullet says it scrubs the waterline; the product title says 'Wall & Sun-ledge Scrubbing' and omits it. No technical sheet for this model has been found. The same manufacturer's marketing and spec sheet disagree on this feature for the Nautilus CC Plus.",
+          },
+          { label: "Navigation", value: "Smart navigation", note: "Maytronics' own name for the system is not given on this listing." },
+          { label: "Drive", value: "Tracks" },
+        ],
+      },
+      {
+        heading: "Filtration",
+        rows: [
+          { label: "Filter", value: "Top-load cartridge" },
+          { label: "Micron rating", value: null, note: "Filter type is stated; fineness is not." },
+          { label: "Full-filter indicator", value: null },
+        ],
+      },
+      {
+        heading: "Control",
+        rows: [
+          { label: "App", value: null, note: "No app is mentioned on the listing either way." },
+          { label: "Wi-Fi", value: null },
+          {
+            label: "Weekly timer",
+            value: null,
+            note: "Not described on the listing we read. Our own artwork shows one on the power supply; that is illustration, not specification.",
+          },
+        ],
+      },
+      {
+        heading: "Handling",
+        rows: [
+          { label: "Dry weight", value: "18.5 lb", note: "It comes out of the water heavier than it went in." },
+          { label: "Dimensions (L×W×H)", value: '22.2 × 17.6 × 12.8 in' },
+          { label: "Caddy", value: "Not included", note: "One of the six siblings ships with a caddy. This is not that one." },
+          { label: "Warranty", value: null, note: "No term stated on the listing." },
+        ],
+      },
+    ],
+    skuNote:
+      "Specifications describe the Dolphin Proteus DX4 Plus, ASIN B083YWJ5PQ, model number " +
+      "99996207-LESW as printed in the listing's own details table — owner research also names " +
+      "99996290-DX4, and Maytronics part numbers carry market and retailer suffixes, so both may be " +
+      "genuine for different channels. Read 3 August 2026 and re-read 4 August 2026. NO MAYTRONICS " +
+      "PRODUCT PAGE FOR THIS MODEL HAS BEEN FOUND: every figure here is retailer-sourced and none is " +
+      "presented as manufacturer-verified. Six Proteus models share one Amazon parent listing.",
+    lastReviewed: "2026-08-04",
+  },
 };
 
 export function reviewFor(slug: string | undefined): ReviewContent | undefined {

@@ -347,6 +347,83 @@ const RAW: Record<string, Omit<ProductEditorial, "productId">> = {
     researchedDate: R,
   },
 
+  /* Added 4 August 2026. The row already existed in D1 and the page already
+     rendered; the repo simply did not know about it, which the internal-link
+     test caught. Every figure here is RETAILER-sourced — no Maytronics product
+     page for this model has been found — and the fields nobody publishes are
+     null rather than borrowed from the Proteus DX4, which is a different
+     machine rated to 50 ft. */
+  "dolphin-proteus-dx4-plus": {
+    slug: "dolphin-proteus-dx4-plus",
+    oneLiner:
+      "Corded Maytronics cleaner for in-ground pools up to 33 ft, covering floor, walls, steps and sun ledges.",
+    verdict:
+      "A mid-range corded Dolphin that climbs walls and handles the shapes cheaper robots skip — steps and sun ledges — with a top-load filter that makes weekly maintenance a lid rather than a wrestle. Two cautions. It is rated to 33 ft, not the 50 ft of the plain Proteus DX4 it shares a product page with. And its waterline claim comes from Maytronics' sales listing rather than a technical sheet, on a range where we have already found those two disagreeing.",
+    bestFor: "Corded whole-surface cleaning on a smaller in-ground pool",
+    priceRangeUsdApprox: [850, 950],
+    specs: {
+      poolSizeSuitability: "In-ground pools up to 33 ft",
+      cableLengthFt: null,
+      runtimeMins: null,
+      chargeTimeHrs: null,
+      filtration: "Top-load cartridge filter; no micron rating published",
+      navigation: "Smart navigation (Maytronics' own name for it is not given on the listing)",
+      weightLbs: 18.5,
+      // Not "unknown" — checked and not published. The listing states no term.
+      warranty: "Not stated on the listing; no Maytronics page found for this model",
+      appSupport: "None mentioned on the listing",
+    },
+    notableFeatures: [
+      "Wall climbing on tracks rather than wheels",
+      "Steps and sun ledges named explicitly by the manufacturer",
+      "Top-load filter access",
+      "Corded — no battery to degrade and no runtime limit",
+    ],
+    pros: [
+      "Covers floor, walls, steps and ledges from one corded machine",
+      "Top-load filter is emptied at the poolside rather than upside down",
+      "No battery, so nothing wears out on a calendar",
+      "Maytronics is the most established brand in the category",
+    ],
+    limitations: [
+      "Rated to 33 ft — a third less pool than the similarly named Proteus DX4",
+      "Waterline scrubbing is claimed on the listing and contradicted by the listing's own title",
+      "No Maytronics product page or technical sheet has been found for this model",
+      "No cycle time, cable length, micron rating or warranty term published",
+      "No caddy in this configuration",
+    ],
+    whoShouldBuy:
+      "Owners of in-ground pools under 33 ft with steps or a sun ledge who want every surface handled by one corded machine.",
+    whoShouldAvoid:
+      "Anyone with a pool longer than 33 ft, an above-ground pool, or whose single reason for buying is waterline scrubbing.",
+    faqs: [
+      {
+        q: "What size pool is the Proteus DX4 Plus for?",
+        a: "In-ground pools up to 33 ft. The plain Proteus DX4 is rated to 50 ft and is sold from the same Amazon product page, so check the title of the listing you are buying.",
+      },
+      {
+        q: "Does the Dolphin Proteus DX4 Plus clean the waterline?",
+        a: "Maytronics' listing bullet says it scrubs the floor, walls, waterline, steps and sun ledges. The same listing's title says 'Wall & Sun-ledge Scrubbing' and does not mention the waterline. No Maytronics technical sheet for this model has been found, and on the Nautilus CC Plus the marketing and the spec sheet disagree on exactly this feature — so we report the claim and flag that it is uncorroborated.",
+      },
+      {
+        q: "How heavy is it?",
+        a: "18.5 lb dry, per the listing's details table. It comes out of the water heavier than that.",
+      },
+    ],
+    sources: [
+      {
+        label: "Amazon US listing (B083YWJ5PQ) — Dolphin Proteus DX4 Plus",
+        url: "https://www.amazon.com/dp/B083YWJ5PQ",
+      },
+    ],
+    /* NOT manufacturer_verified, deliberately. Every figure came from the
+       retail listing because no Maytronics page for this model has been found,
+       and the label has to say so. */
+    evidence: "researched",
+    confidence: "medium",
+    researchedDate: "2026-08-04",
+  },
+
   "dolphin-e10": {
     slug: "dolphin-e10",
     oneLiner: "Affordable corded robotic cleaner built for above-ground pools up to 30 ft, cleaning the floor in ~1.5 hrs.",
@@ -633,6 +710,7 @@ export const PRODUCT_ID: Record<string, string> = {
   "polaris-freedom": "prod-polaris-freedom",
   "betta-se-plus": "prod-betta-se-plus",
   "dolphin-e10": "prod-dolphin-e10",
+  "dolphin-proteus-dx4-plus": "prod-dolphin-proteus-dx4-plus",
 };
 
 /** Editorial records with the stable productId attached, keyed by slug (route id). */

@@ -186,6 +186,43 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
     ],
     researchedOn: RUN,
   },
+  {
+    path: "/robots/robotic-pool-cleaners/dolphin-proteus-dx4-plus/",
+    primary: { term: "dolphin proteus dx4 plus review", volume: 0, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "dolphin proteus dx4 plus", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "proteus dx4 plus", volume: 0, difficulty: 0, mustAppear: true },
+      // The two questions the page is built to answer, and the two that decide
+      // whether someone buys the right machine.
+      { term: "dolphin proteus dx4 plus max pool size", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "does the dolphin proteus dx4 plus clean the waterline", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "dolphin proteus dx4 plus filter", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "dolphin proteus dx4 plus weight", volume: 0, difficulty: 0, mustAppear: true },
+    ],
+    cededTo: [
+      {
+        term: "robotic pool cleaner",
+        path: "/robots/robotic-pool-cleaners/",
+        why: "The category head term belongs to the hub, as on every review.",
+      },
+      {
+        term: "best robotic pool cleaner",
+        path: "/best-robots/robotic-pool-cleaners/",
+        why: "A comparison SERP. One review is not a best-of.",
+      },
+      {
+        term: "dolphin proteus dx4",
+        path: "/robots/robotic-pool-cleaners/",
+        why: "A DIFFERENT MACHINE, rated to 50 ft where this one is rated to 33. Ranking this page for the sibling's name would send someone to a specification that is not the one they searched for — which is the exact mistake the review's third section exists to prevent. It goes to the hub until the DX4 has a page of its own.",
+      },
+      {
+        term: "dolphin nautilus cc plus review",
+        path: "/robots/robotic-pool-cleaners/dolphin-nautilus-cc-plus/",
+        why: "The Nautilus is named on this page as the precedent for a Maytronics waterline claim not matching its spec sheet. Naming it is not targeting its term.",
+      },
+    ],
+    researchedOn: RUN,
+  },
 ];
 
 export const keywordsFor = (path: string): PageKeywords | undefined =>

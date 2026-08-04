@@ -763,6 +763,52 @@ const REVIEW_FIGURES: ReviewFigure[] = [
     scene:
       "the skimmer with its top cover raised showing a basket full of leaves, above a three-step sequence ending with the basket being emptied into a bin",
   },
+
+  /* ---- Dolphin Proteus DX4 Plus ---- */
+  {
+    slug: "hero",
+    productSlug: "dolphin-proteus-dx4-plus",
+    type: "product_in_use",
+    file: "hero.webp",
+    checksum: "sha256:4322c17dd68111fc13da45f2ae7e791f2f758bf39df352c8192cbe417c5a4236",
+    width: 1254,
+    height: 1254,
+    scene:
+      "the white and blue tracked cleaner on stone paving beside a curved pool at dusk, with its cable coiled behind it",
+  },
+  {
+    slug: "every-surface",
+    productSlug: "dolphin-proteus-dx4-plus",
+    type: "product_in_use",
+    file: "every-surface.webp",
+    checksum: "sha256:48de5cb59170a0064249f67d36ddb32bec2a59f0f086f4739e6d998900e27de8",
+    width: 1254,
+    height: 1254,
+    scene:
+      "the cleaner on a pool floor with two further views of it climbing a tiled wall above, beside panels naming floor cleaning, wall climbing and waterline coverage",
+  },
+  {
+    slug: "weekly-timer",
+    productSlug: "dolphin-proteus-dx4-plus",
+    type: "product_in_use",
+    file: "weekly-timer.webp",
+    checksum: "sha256:b8058f4fc5bb966b85df51997ad4c2125e3453334e292c2870bc2dae8cf4e103",
+    width: 1254,
+    height: 1254,
+    scene:
+      "the cleaner beside its mains power supply unit at a poolside, with the supply's button panel facing the camera",
+  },
+  {
+    slug: "filtration",
+    productSlug: "dolphin-proteus-dx4-plus",
+    type: "filtration_detail",
+    file: "filtration.webp",
+    checksum: "sha256:b7b1d51d8db347685e6f292a6ff9ef1a499cad06ab563ed5cc42ad3a93587e25",
+    width: 1536,
+    height: 1536,
+    scene:
+      "a hand lifting the filter cartridge out through the opened top lid of the machine at the poolside",
+  },
 ];
 
 /**
@@ -933,6 +979,20 @@ const HAS_OWNER_ARTWORK =
   " BotPlanet's own artwork now fills this product's card; that is a creative, not photography, and does not clear this blocker.";
 
 export const ACQUISITION_BLOCKERS: AcquisitionBlocker[] = [
+  {
+    productId: "prod-dolphin-proteus-dx4-plus",
+    bestAvailableTier: "manufacturer_press_kit" as const,
+    checked: [
+      "Maytronics US site — no product page for the Proteus DX4 Plus found on 4 August 2026",
+      "Amazon US listing B083YWJ5PQ — read 3 and 4 August 2026; retailer listing, not a licensable media source",
+      "No Maytronics press room or media library published for the Proteus range",
+    ],
+    blocker:
+      "NO MANUFACTURER SOURCE EXISTS TO LICENCE FROM. Maytronics publishes no product page for this model that we have been able to find, so there is no press kit, no media library and no image licence to ask for. The Amazon listing carries photography, but a retailer listing grants no reuse right and the Associates programme forbids scraping it. The same problem blocks the specification: every figure on this product is retailer-sourced, which is why its evidence label reads Researched rather than Manufacturer data verified.",
+    unblockAction:
+      "Ask Maytronics US directly for a product page URL and a media pack for part 99996207-LESW, naming the Proteus DX4 Plus specifically — the DX4 and DX4 Plus are different machines and a pack for the wrong one is worse than none. A manufacturer page would also settle the waterline question the review currently has to flag as uncorroborated.",
+    owner: "manufacturer" as const,
+  },
   {
     productId: "prod-wybot-c1",
     bestAvailableTier: "affiliate_media_feed" as const,
