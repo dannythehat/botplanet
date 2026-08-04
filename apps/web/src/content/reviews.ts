@@ -100,6 +100,16 @@ export const REVIEWS: Record<string, ReviewContent> = {
           "MyDolphin Plus handles scheduling and cycle selection. What it does not do is tell you the filter is full.",
       },
     ],
+    /* Title and channel came from YouTube's oEmbed endpoint on 3 August 2026,
+       not from memory. The share token was stripped from the URL — it
+       identifies whoever sent the link, not the video. */
+    video: {
+      url: "https://youtu.be/9cjD-Oiulag",
+      title: "Dolphin Nautilus CC Plus Automatic Robotic Pool Vacuum Cleaner Review - Is It Worth It?",
+      channel: "Shop with me!",
+      note:
+        "An independent owner's review — not ours, and not Maytronics'. We link it because watching the machine lifted out, opened and rinsed shows things a specification sheet cannot. It is one person's experience rather than our testing, and nothing in it has been used as evidence for any claim on this page.",
+    },
     facts: [
       { label: "Power", value: "Corded mains" },
       { label: "Cleans", value: "Floor and walls" },
