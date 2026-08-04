@@ -181,7 +181,12 @@ export const productRows: (typeof products.$inferInsert)[] = [
     productClass: "full_cleaner",
     name: "BuBlue Bubot 800P Gen2",
     model: "Bubot 800P gen2",
-    environments: ["in_ground"],
+    /* CORRECTED 4 August 2026 to include above_ground. BuBlue's own FAQ calls
+       it "ideal for above-ground pools up to 1,076 sq ft"; the same FAQ lists
+       vinyl, fiberglass and concrete, and the listing title says inground.
+       Both readings are stored so neither hides the product from the one
+       BotMatch buyer it fits — the same class of bug as the S1 waterline. */
+    environments: ["above_ground", "in_ground"],
     cleans: ["floor", "walls", "waterline"],
     powerType: "corded",
     priceTier: "mid",

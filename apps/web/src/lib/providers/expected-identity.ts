@@ -109,6 +109,24 @@ export const EXPECTED_IDENTITIES: IdentityExpectation[] = [
        real name and would refuse the machine itself. */
     denyTokens: ["hy pro", "hydrocomm", "caddy", "essential", "advanced", "scuba v3", "scuba s1", "seagull"],
   },
+  {
+    /* The record ID predates the product: it held the Dolphin Premier until
+       3 August 2026 and now holds the BuBlue — see content/product-names.ts.
+       Identity was machine-read from the listing's own details table that day:
+       Brand 'BUBLUE', Model Number 'Bubot 800P gen2', which settles the
+       800P / 880P question outright. */
+    productId: "prod-dolphin-premier",
+    asin: "B0GTYX922J",
+    brand: "BUBLUE",
+    modelTokens: ["bubot 800p", "800p gen2"],
+    /* BuBlue sells a Bubot family of near-identical names. Deliberately NOT
+       "800p" alone — it is a whole-token substring of the real name and would
+       refuse the machine itself. */
+    denyTokens: ["880p", "700p", "500p", "300p", "800p pro", "800p max"],
+    /* Daily until the first clean read confirms identity and price on this
+       newly adopted destination, then back to the normal cadence. */
+    exception: "recently_changed",
+  },
 ];
 
 /** Products with no confirmed ASIN. They need discovery, not a refresh. */

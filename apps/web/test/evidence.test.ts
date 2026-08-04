@@ -441,10 +441,17 @@ describe("publication states", () => {
     expect(seagull.publication.readyForComparison).toBe(false);
   });
 
-  it("requires model identity before a review may be written", () => {
-    const premier = REPORT.products.find((p) => p.slug === "dolphin-premier")!;
-    expect(premier.publication.readyForReviewWriting).toBe(false);
-    expect(premier.publicationBlockers.join(" ")).toContain("identity");
+  it("holds the BuBlue back on its one honest gap, not on identity", () => {
+    /* This record (prod-dolphin-premier) held the Dolphin Premier, which was
+       blocked on identity outright. The BuBlue that replaced it has a
+       machine-read identity AND a manufacturer page (bublue.com, found 4
+       August 2026 after a wrong-domain error said none existed) — so the old
+       identity blocker must be GONE, and what remains is the one field
+       neither source publishes: the weight. */
+    const bubot = REPORT.products.find((p) => p.slug === "bublue-bubot-800p")!;
+    expect(bubot.publication.readyForReviewWriting).toBe(false);
+    expect(bubot.publicationBlockers.join(" ")).not.toContain("identity");
+    expect(bubot.publicationBlockers.join(" ")).toContain("Living with it");
   });
 
   it("only calls a product BotMatch-ready when every field BotMatch uses is available", () => {
@@ -522,7 +529,12 @@ describe("claim ledger", () => {
       const f = LEDGER.fields.find((x) => x.productId === c.productId && x.field === "poolSizeSuitability")!;
       expect(f.publishable).toBe(true);
     }
-    expect(suitability.some((c) => c.productId === "prod-dolphin-premier")).toBe(false);
+    /* This asserted the ABSENCE of a claim for prod-dolphin-premier while the
+       record held the Dolphin, whose stored 50 ft conflicted with its only
+       source. The BuBlue that replaced it stores the 1,076 sq ft BuBlue's own
+       FAQ states, so the claim now writes — and its presence is what proves
+       the conflict machinery released the field rather than losing it. */
+    expect(suitability.some((c) => c.productId === "prod-dolphin-premier")).toBe(true);
   });
 
   it("records what could not be claimed, with the reason", () => {
@@ -985,7 +997,11 @@ describe("register mapping carries the correction", () => {
   it("records the launch status of every row", () => {
     const byStatus = mapping.rows.reduce<Record<string, number>>((a, r) => ({ ...a, [r.launchStatus]: (a[r.launchStatus] ?? 0) + 1 }), {});
     expect(Object.keys(byStatus).every((k) => ["launch_ready", "limited_factual_use", "candidate_under_review"].includes(k))).toBe(true);
-    expect(mapping.rows.find((r) => r.slug === "dolphin-premier")!.launchStatus).toBe("candidate_under_review");
+    /* Was "dolphin-premier" at "candidate_under_review" until 4 August 2026:
+       the record now holds the BuBlue, whose identity is machine-read and
+       whose manufacturer page has been read, so it clears candidacy but stays
+       below launch_ready on the unpublished weight. */
+    expect(mapping.rows.find((r) => r.slug === "bublue-bubot-800p")!.launchStatus).toBe("limited_factual_use");
     expect(mapping.rows.find((r) => r.slug === "aiper-seagull-se")!.launchStatus).toBe("limited_factual_use");
   });
 

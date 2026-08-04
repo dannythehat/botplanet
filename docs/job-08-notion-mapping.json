@@ -4,30 +4,30 @@
   "fieldsInRegistry": 31,
   "totals": {
     "fieldRecords": 372,
-    "evidenceRecords": 193,
+    "evidenceRecords": 199,
     "stateCounts": {
-      "populated": 186,
+      "populated": 193,
       "unknown": 28,
-      "not_applicable": 30,
-      "not_publicly_stated": 99,
-      "conflicting": 2,
-      "suppressed": 23,
-      "pending_verification": 4
+      "not_applicable": 31,
+      "not_publicly_stated": 97,
+      "conflicting": 1,
+      "suppressed": 19,
+      "pending_verification": 3
     },
     "reconciliation": {
-      "agrees": 46,
+      "agrees": 45,
       "agrees_rounded": 4,
       "agrees_with_unverified_detail": 8,
       "derived_from_range": 1,
-      "conflicts": 3,
-      "unsupported": 15,
+      "conflicts": 2,
+      "unsupported": 16,
       "newly_populated": 1,
-      "not_applicable": 10
+      "not_applicable": 11
     },
-    "rawPercent": 54,
-    "weightedPercent": 62,
-    "conflicts": 4,
-    "unresolvedConflicts": 2
+    "rawPercent": 57,
+    "weightedPercent": 64,
+    "conflicts": 3,
+    "unresolvedConflicts": 1
   },
   "rows": [
     {
@@ -261,74 +261,58 @@
     },
     {
       "productId": "prod-dolphin-premier",
-      "slug": "dolphin-premier",
-      "url": "https://botplanet.io/robots/robotic-pool-cleaners/dolphin-premier/",
-      "path": "/robots/robotic-pool-cleaners/dolphin-premier/",
+      "slug": "bublue-bubot-800p",
+      "url": "https://botplanet.io/robots/robotic-pool-cleaners/bublue-bubot-800p/",
+      "path": "/robots/robotic-pool-cleaners/bublue-bubot-800p/",
       "canonicalName": "BuBlue Bubot 800P Gen2",
       "brand": "BUBLUE",
       "modelNumber": "Bubot 800P gen2",
-      "officialProductPage": null,
+      "officialProductPage": "https://www.bublue.com/products/bublue-bubot-800p",
       "manualUrl": null,
       "manualDocumentId": null,
       "manualRevision": null,
-      "modelIdentityNote": "MODEL AND MANUFACTURER BOTH CHANGED ON 3 AUGUST 2026. This record held the Maytronics Dolphin Premier, which was withdrawn on 31 July for having no manufacturer page, a manual covering a different machine, and no Amazon US listing at all. The owner replaced it with the BuBlue Bubot 800P Gen2. Every observation the Dolphin record held was read from a Maytronics dealer's specification page and has been REMOVED rather than carried across — it describes a different machine from a different manufacturer. The owner's message named an '880P'; the Amazon listing and the owner's own artwork both say 800P, and the listing's Model Number field reads 'Bubot 800P gen2', so 800P is what is recorded. No manufacturer page for this model has been read, so beyond identity the specification is unverified.",
+      "modelIdentityNote": "MODEL AND MANUFACTURER BOTH CHANGED ON 3 AUGUST 2026. This record held the Maytronics Dolphin Premier, which was withdrawn on 31 July for having no manufacturer page, a manual covering a different machine, and no Amazon US listing at all. The owner replaced it with the BuBlue Bubot 800P Gen2. Every observation the Dolphin record held was read from a Maytronics dealer's specification page and has been REMOVED rather than carried across — it describes a different machine from a different manufacturer. The owner's message named an '880P'; the Amazon listing and the owner's own artwork both say 800P, and the listing's Model Number field reads 'Bubot 800P gen2', so 800P is what is recorded. On 4 August 2026 BuBlue's own product page was read as well — this record briefly said no BuBlue website existed, which was our wrong-domain error — and the specification now rests on manufacturer statements where the observations say so.",
       "verificationDate": "2026-08-03",
-      "sourcesUsed": 1,
+      "sourcesUsed": 2,
       "sourcesUnreadable": [],
-      "completenessRawPercent": 30,
-      "completenessWeightedPercent": 35,
-      "fieldsApplicable": 27,
-      "fieldsPublishable": 8,
-      "weightApplicable": 100,
-      "weightPublishable": 35,
+      "completenessRawPercent": 58,
+      "completenessWeightedPercent": 67,
+      "fieldsApplicable": 26,
+      "fieldsPublishable": 15,
+      "weightApplicable": 95,
+      "weightPublishable": 64,
       "fieldStates": {
-        "populated": 8,
+        "populated": 15,
         "unknown": 8,
-        "not_applicable": 4,
-        "not_publicly_stated": 5,
-        "conflicting": 1,
-        "suppressed": 4,
-        "pending_verification": 1
+        "not_applicable": 5,
+        "not_publicly_stated": 3,
+        "conflicting": 0,
+        "suppressed": 0,
+        "pending_verification": 0
       },
       "fieldsNotPubliclyStated": [
-        "officialProductPageUrl",
         "manualUrl",
-        "poolTypes",
-        "filtrationMicrons",
-        "suctionRate"
-      ],
-      "fieldsSuppressed": [
         "cableLengthFt",
-        "runtimeMins",
-        "weightLbs",
-        "warranty"
+        "weightLbs"
       ],
-      "fieldsConflicting": [
-        "poolSizeSuitability"
-      ],
-      "conflicts": [
-        {
-          "field": "poolSizeSuitability",
-          "resolvedTo": null,
-          "rule": "the live source's own figure is not credible — held for human resolution",
-          "suppressed": true
-        }
-      ],
+      "fieldsSuppressed": [],
+      "fieldsConflicting": [],
+      "conflicts": [],
       "editorialCorrections": [
         {
-          "field": "poolSizeSuitability",
-          "outcome": "conflicts",
-          "action": "Correct the stored value — the manufacturer source disagrees. Stored 'up to ~50 ft'. The only checked source states 'up to 55 in long' — a figure of 55 with an implausible unit. Stored 50 matches neither the number nor the unit, and no corrected figure is invented, so nothing is published."
+          "field": "cableLengthFt",
+          "outcome": "unsupported",
+          "action": "Remove the stored value or find a source for it — nothing checked states it. Stored null. The owner's research gives a 50 ft cord; neither BuBlue's page nor the listing states a length, so nothing is published."
         },
         {
           "field": "navigation",
           "outcome": "agrees_with_unverified_detail",
-          "action": "Trim the unsourced wording; the headline value is verified. SmartNav is stated by the source. Unsourced wording: '(no Wi-Fi)' is an inference — the source does not state the absence of Wi-Fi."
+          "action": "Trim the unsourced wording; the headline value is verified. Ultrasonic sensors and app path control are stated — the listing bullets name the sensors, BuBlue's page the path-width control. Unsourced wording: '(no camera)' is an inference — neither source states the absence of a camera."
         },
         {
-          "field": "appSupport",
+          "field": "weightLbs",
           "outcome": "unsupported",
-          "action": "Remove the stored value or find a source for it — nothing checked states it. Stored 'None — single-button plug-and-play'. The source is silent on app support; silence is not a manufacturer statement that there is none."
+          "action": "Remove the stored value or find a source for it — nothing checked states it. Stored null. Neither BuBlue's page nor the listing states a weight, so nothing is published."
         }
       ],
       "publicationStates": {
@@ -341,47 +325,34 @@
         "readyForBotMatch": false
       },
       "publicationBlockers": [
-        "manufacturer identity/evidence weakness: no manufacturer-sourced value for this model",
-        "no accepted official manufacturer page",
-        "no accepted manual",
-        "unresolved conflict on poolSizeSuitability",
-        "weighted completeness 35% against a 65% floor",
-        "insufficient evidence coverage for review section(s): Where it fits, What it cleans, How it runs, Living with it",
-        "review section(s) would rest on suppressed value(s): runtimeMins, weightLbs",
-        "comparison field unavailable: poolTypes",
-        "comparison field unavailable: poolSizeSuitability",
-        "comparison field unavailable: runtimeMins",
-        "comparison field unavailable: filtration",
-        "comparison field unavailable: warranty",
-        "BotMatch field unavailable: poolTypes",
-        "BotMatch field unavailable: poolSizeSuitability"
+        "insufficient evidence coverage for review section(s): Living with it"
       ],
-      "launchStatus": "candidate_under_review",
+      "launchStatus": "limited_factual_use",
       "reviewGates": [
         {
           "gate": "weighted_completeness",
-          "passed": false,
-          "detail": "weighted completeness 35% against a 65% floor"
+          "passed": true,
+          "detail": "weighted completeness 67% against a 65% floor"
         },
         {
           "gate": "model_identity",
-          "passed": false,
-          "detail": "no accepted official manufacturer page for this exact model"
+          "passed": true,
+          "detail": "identified by https://www.bublue.com/products/bublue-bubot-800p, with a published model number, no manual accepted"
         },
         {
           "gate": "no_material_conflict",
-          "passed": false,
-          "detail": "unresolved conflict on material review field(s): poolSizeSuitability"
+          "passed": true,
+          "detail": "no unresolved conflict on a material review field"
         },
         {
           "gate": "review_sections_writable",
           "passed": false,
-          "detail": "insufficient evidence coverage for review section(s): Where it fits, What it cleans, How it runs, Living with it"
+          "detail": "insufficient evidence coverage for review section(s): Living with it"
         },
         {
           "gate": "no_speculation",
-          "passed": false,
-          "detail": "review section(s) would rest on suppressed value(s): runtimeMins, weightLbs"
+          "passed": true,
+          "detail": "no review section rests on a suppressed value"
         },
         {
           "gate": "corrections_identified",
@@ -389,11 +360,11 @@
           "detail": "every unsupported or conflicting stored value carries a written correction"
         }
       ],
-      "evidenceQualification": "dealer-sourced: no manufacturer page or manual was accepted for this model, so every value is attributed to the dealer that published it and none is presented as manufacturer-stated",
-      "warrantyStatus": "not_confirmed",
-      "warrantyPublicWording": "Manufacturer warranty term not confirmed",
-      "claimsPublishable": 4,
-      "claimsBlocked": 10
+      "evidenceQualification": null,
+      "warrantyStatus": "confirmed",
+      "warrantyPublicWording": "BUBLUE states a warranty of 1 year, with 30-day money-back and 24/7 support.",
+      "claimsPublishable": 10,
+      "claimsBlocked": 4
     },
     {
       "productId": "prod-polaris-freedom",

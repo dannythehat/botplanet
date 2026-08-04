@@ -371,6 +371,41 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
     ],
     researchedOn: RUN,
   },
+  {
+    path: "/robots/robotic-pool-cleaners/bublue-bubot-800p/",
+    primary: { term: "bublue bubot 800p review", volume: 0, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "bublue bubot 800p", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "bubot 800p", volume: 0, difficulty: 0, mustAppear: true },
+      // The questions this page is built to answer for its actual buyer.
+      { term: "corded robotic pool cleaner", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "bublue bubot 800p warranty", volume: 0, difficulty: 0, mustAppear: false },
+      { term: "bubot 800p shallow water", volume: 0, difficulty: 0, mustAppear: false },
+    ],
+    cededTo: [
+      {
+        term: "robotic pool cleaner",
+        path: "/robots/robotic-pool-cleaners/",
+        why: "The category head term belongs to the hub, as on every review.",
+      },
+      {
+        term: "best robotic pool cleaner",
+        path: "/best-robots/robotic-pool-cleaners/",
+        why: "A comparison SERP. One review is not a best-of.",
+      },
+      {
+        term: "cordless robotic pool cleaner",
+        path: "/best-robots/robotic-pool-cleaners/cordless/",
+        why: "This machine is the corded counter-argument; it names the cordless shortlist without chasing its term.",
+      },
+      {
+        term: "aiper scuba s1 review",
+        path: "/robots/robotic-pool-cleaners/aiper-scuba-s1/",
+        why: "The S1 is named as the cordless alternative for the same four zones. Naming a rival is not targeting its term.",
+      },
+    ],
+    researchedOn: RUN,
+  },
 ];
 
 export const keywordsFor = (path: string): PageKeywords | undefined =>
