@@ -1,0 +1,211 @@
+---
+/* ============================================================
+   BotPlanet — "then what should I buy instead?"
+
+   The review names three specific reasons this machine is wrong for
+   a reader. Without this section, that reader is told no and sent
+   back to the start of their search — which is the moment most
+   review sites lose them, and the moment a site that answers the
+   question earns the trust.
+
+   Every pick here comes from catalogue facts. Commission cannot
+   reach this component; nor can price. Where nothing in the
+   catalogue answers a reason, it says so rather than offering the
+   nearest thing, because a reader who has just told you exactly
+   what they need is the last person to fob off.
+   ============================================================ */
+import { productPath } from "../content/routes";
+import type { AlternativeMatch } from "../lib/alternatives";
+
+interface Props {
+  matches: AlternativeMatch[];
+  categorySlug: string;
+  productName: string;
+}
+
+const { matches, categorySlug, productName } = Astro.props;
+const anyPick = matches.some((m) => m.pick);
+---
+
+{matches.length > 0 && (
+  <section class="bp-alt" aria-labelledby="alternatives-heading">
+    <div class="bp-alt__plate">
+      <p class="bp-alt__eyebrow">If this one is not for you</p>
+      <h2 id="alternatives-heading">What to look at instead</h2>
+      <p class="bp-alt__lede">
+        The {productName} is ruled out for three specific reasons. Here is what answers each one,
+        chosen on published specification alone — never on what it pays us.
+      </p>
+
+      <ul class="bp-alt__list">
+        {matches.map((m) => (
+          <li class="bp-alt__row" data-found={m.pick ? "true" : "false"}>
+            <span class="bp-alt__need">{m.need}</span>
+            {m.pick ? (
+              <a class="bp-alt__pick" href={productPath(m.pick.slug, categorySlug)}>
+                <span class="bp-alt__name">{m.pick.name}</span>
+                <span class="bp-alt__because">{m.pick.because}</span>
+              </a>
+            ) : (
+              <span class="bp-alt__none">
+                Nothing in our catalogue does this yet. We would rather say so than send you to the
+                nearest thing.
+              </span>
+            )}
+          </li>
+        ))}
+      </ul>
+
+      {anyPick && (
+        <a class="bp-alt__more" href={`/compare/${categorySlug}/`}>
+          Compare every model side by side <span aria-hidden="true">&#8594;</span>
+        </a>
+      )}
+    </div>
+  </section>
+)}
+
+<style is:global>
+  .bp-alt { margin: clamp(2.5rem, 6vw, 4rem) 0; }
+
+  .bp-alt__plate {
+    position: relative;
+    overflow: hidden;
+    padding: clamp(1.4rem, 4vw, 2.4rem);
+    border: 1px solid var(--cs-line);
+    border-radius: 22px;
+    background:
+      radial-gradient(120% 90% at 12% -20%, rgba(226, 234, 248, 0.08), transparent 62%),
+      linear-gradient(178deg, #12171d 0%, #0a0d11 62%, #0d1116 100%);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 26px 60px rgba(0, 0, 0, 0.5);
+  }
+
+  .bp-alt__plate::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(246,248,252,.5) 30%, rgba(255,255,255,.8) 50%, rgba(246,248,252,.45) 70%, transparent);
+  }
+
+  .bp-alt__eyebrow {
+    margin: 0 0 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    background: var(--cs-sheen);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .bp-alt h2 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(1.3rem, 3vw, 1.75rem);
+    letter-spacing: -0.022em;
+    line-height: 1.14;
+    color: var(--cs-hi);
+  }
+
+  .bp-alt__lede {
+    margin: 0.7rem 0 0;
+    max-width: 58ch;
+    font-size: 0.98rem;
+    line-height: 1.62;
+    color: var(--text-secondary);
+  }
+
+  .bp-alt__list {
+    display: grid;
+    gap: 1px;
+    margin: clamp(1.2rem, 3vw, 1.7rem) 0 0;
+    padding: 0;
+    list-style: none;
+    border: 1px solid var(--cs-line-soft);
+    border-radius: 14px;
+    overflow: hidden;
+    background: var(--cs-line-soft);
+  }
+
+  .bp-alt__row {
+    display: grid;
+    gap: 0.7rem;
+    padding: 1rem 1.15rem;
+    background: var(--cs-surface);
+    align-items: center;
+  }
+
+  .bp-alt__need {
+    font-size: 0.97rem;
+    line-height: 1.5;
+    color: var(--text-secondary);
+  }
+
+  .bp-alt__pick {
+    display: grid;
+    gap: 0.18rem;
+    padding: 0.7rem 0.95rem;
+    border: 1px solid var(--cs-line);
+    border-radius: 11px;
+    background: linear-gradient(178deg, rgba(255,255,255,.06), rgba(255,255,255,0));
+    text-decoration: none;
+    transition: border-color 0.18s ease, transform 0.18s ease;
+  }
+
+  .bp-alt__pick:hover { border-color: rgba(226, 232, 244, 0.5); transform: translateY(-1px); }
+  .bp-alt__pick:focus-visible { outline: var(--focus-ring, 2px solid #dfe4ec); outline-offset: 3px; }
+
+  .bp-alt__name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1rem;
+    background: linear-gradient(172deg, #ffffff 4%, #e8ecf3 46%, #a4acb9 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .bp-alt__because {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--cs-mid);
+  }
+
+  /* A reason with no answer is stated plainly, not hidden. It is the most
+     trustworthy line on the page and it should look deliberate. */
+  .bp-alt__none {
+    padding: 0.7rem 0.95rem;
+    border: 1px dashed var(--cs-line-soft);
+    border-radius: 11px;
+    font-size: 0.88rem;
+    line-height: 1.55;
+    color: var(--text-quaternary);
+  }
+
+  .bp-alt__more {
+    display: inline-block;
+    margin: clamp(1.1rem, 2.6vw, 1.5rem) 0 0;
+    padding-bottom: 2px;
+    border-bottom: 1px solid rgba(200, 205, 212, 0.32);
+    color: #c8cdd4;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .bp-alt__more:hover { color: #fff; border-color: #fff; }
+
+  @media (min-width: 720px) {
+    .bp-alt__row { grid-template-columns: 1fr minmax(0, 20rem); gap: 1.4rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bp-alt__pick, .bp-alt__pick:hover { transform: none; transition: none; }
+  }
+</style>

@@ -63,6 +63,27 @@ export interface ProductSnapshot {
   suitsYouIf: string;
   /** The single sentence that rules it out. Never omitted. */
   ruleOutIf: string;
+  /**
+   * The same rule-outs, structured.
+   *
+   * WHY BOTH. `ruleOutIf` is the sentence a reader reads. These are the same
+   * reasons expressed as tests a machine can run against the catalogue, so the
+   * page can answer "then what should I buy?" from data rather than from an
+   * editor's memory of the range. A reason with no qualifying product says so
+   * — it never quietly promotes the nearest thing.
+   */
+  ruleOuts?: RuleOut[];
+}
+
+/** A reason to rule this machine out, and what would answer it instead. */
+export interface RuleOut {
+  /** Printed to the reader. */
+  need: string;
+  /** How a replacement is found in the catalogue. */
+  test:
+    | { kind: "cleans"; value: string }
+    | { kind: "maxLengthOver"; feet: number }
+    | { kind: "power"; value: string };
 }
 
 export const SNAPSHOTS: Record<string, ProductSnapshot> = {
@@ -109,6 +130,11 @@ export const SNAPSHOTS: Record<string, ProductSnapshot> = {
       "You have an in-ground pool up to 40 ft, you want floor and wall cleaning on a schedule, and you would rather never think about charging.",
     ruleOutIf:
       "The waterline ring is your actual complaint, your pool runs longer than 40 ft, or you want a cordless machine you can drop in anywhere.",
+    ruleOuts: [
+      { need: "You need the waterline scrubbed", test: { kind: "cleans", value: "waterline" } },
+      { need: "Your pool runs longer than 40 ft", test: { kind: "maxLengthOver", feet: 40 } },
+      { need: "You want a cordless machine", test: { kind: "power", value: "cordless" } },
+    ],
   },
 };
 

@@ -28,6 +28,8 @@
 import ReviewHeader from "./ReviewHeader.astro";
 import BotMatchSnapshot from "./BotMatchSnapshot.astro";
 import BuyBox from "./BuyBox.astro";
+import ArticleContents from "./ArticleContents.astro";
+import Alternatives from "./Alternatives.astro";
 import VideoSection from "./VideoSection.astro";
 import SpecTable from "./SpecTable.astro";
 import BotMatchCta from "./BotMatchCta.astro";
@@ -35,6 +37,7 @@ import ArticleFooter from "./ArticleFooter.astro";
 import { botMatchCtaFor } from "../content/category-sections";
 import { injectFigures } from "../lib/review-figures";
 import { snapshotFor } from "../content/snapshots";
+import { findAlternatives } from "../lib/alternatives";
 import { applyInternalLinks } from "../lib/internal-linker";
 import { anchorsFor } from "../content/internal-links";
 import type { ReviewContent } from "../content/reviews";
@@ -47,9 +50,11 @@ interface Props {
   productName: string;
   /** Live offers, already filtered to what may be published. */
   offers?: import("./BuyBox.astro").BuyOffer[];
+  /** Sibling products, for answering the rule-outs. Catalogue facts only. */
+  siblings?: import("../lib/alternatives").AlternativeCandidate[];
 }
 
-const { review, html, productName, offers = [] } = Astro.props;
+const { review, html, productName, offers = [], siblings = [] } = Astro.props;
 const snapshot = snapshotFor(review.slug);
 const bmCta = botMatchCtaFor(review.categorySlug);
 
@@ -58,6 +63,13 @@ const bmCta = botMatchCtaFor(review.categorySlug);
    anything. */
 const withFigures = injectFigures(html, review.figures, import.meta.env.DEV);
 const { html: body } = applyInternalLinks(withFigures, anchorsFor(review.categorySlug));
+
+/* Answers the rule-outs from the catalogue. Commission and price cannot
+   reach findAlternatives — see the note at the top of lib/alternatives.ts. */
+const alternatives =
+  snapshot?.ruleOuts?.length && siblings.length
+    ? findAlternatives(snapshot.ruleOuts, siblings, review.slug)
+    : [];
 ---
 
 <ReviewHeader
@@ -76,7 +88,14 @@ const { html: body } = applyInternalLinks(withFigures, anchorsFor(review.categor
   <BotMatchSnapshot snapshot={snapshot} productName={productName} categorySlug={review.categorySlug} />
 )}
 
+<ArticleContents html={body} extra={[
+  { id: "buy", text: "Where to buy" },
+  { id: "specifications", text: "Full specification" },
+]} />
+
 <article class="bp-prose" set:html={body} />
+
+<Alternatives matches={alternatives} categorySlug={review.categorySlug} productName={productName} />
 
 {/* The buy box sits after the reasoning and before the specification detail:
     a reader who has decided does not have to scroll past a spec table to act,
