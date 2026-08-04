@@ -1536,6 +1536,148 @@ export const REVIEWS: Record<string, ReviewContent> = {
       "title, before buying anywhere.",
     lastReviewed: "2026-08-04",
   },
+
+  "wybot-c1": {
+    slug: "wybot-c1",
+    categorySlug: "robotic-pool-cleaners",
+    eyebrow: "Robotic pool cleaner review",
+    title: "WYBOT C1 review",
+    seoTitle: "WYBOT C1 Review | BotPlanet",
+    metaDescription:
+      "An honest review of the WYBOT C1: floor, wall and waterline cleaning for about $500, " +
+      "the weekly cycle timer that splits one charge into four cleans, and the Amazon " +
+      "listing history you should know about.",
+    verdict:
+      "The best budget case in our catalogue for a pool with walls worth climbing: " +
+      "floor-wall-waterline coverage, a genuinely useful weekly cycle timer and a stated " +
+      "2-year warranty for about $500. The honest trade-offs are a 180-micron filter with no " +
+      "ultra-fine layer, mid-pack runtime, and an Amazon listing that a person — not a " +
+      "machine — had to identity-check.",
+    bestFor:
+      "A small-to-mid pool, above-ground or in-ground, where the budget stops short of four " +
+      "figures but the job list still includes walls, waterline, steps and a weekly schedule.",
+    notIdealFor:
+      "A pool over 1,615 sq ft, anyone who wants ultra-fine filtration or a camera, or anyone " +
+      "who wants the water surface skimmed.",
+    image: {
+      src: "/media/reviews/wybot-c1/hero.webp",
+      alt:
+        "BotPlanet artwork for the WYBOT C1 cordless robotic pool cleaner, shown poolside at " +
+        "night beside a phone running the WYBOT app.",
+    },
+    figures: [
+      {
+        afterHeading: "Suction: 3,038 GPH, and the numbers on our artwork",
+        src: "/media/reviews/wybot-c1/suction.webp",
+        caption:
+          "Leaves, dirt, hair and twigs into a 180-micron filter — WYBOT's own claims. The 11.5 m³/h printed here is WYBOT's 3,038 GPH converted; the 65 W and four-wheel-drive figures have no WYBOT source we have read.",
+      },
+      {
+        afterHeading: "The cycle timer: four cleans from one charge",
+        src: "/media/reviews/wybot-c1/cycles.webp",
+        caption:
+          "One charge, split one to four ways across the week from the app. The splits sum to 120 minutes; WYBOT's headline runtime says up to 150. Both numbers are WYBOT's — see the arithmetic note above.",
+      },
+      {
+        afterHeading: "Charging, battery and retrieval",
+        src: "/media/reviews/wybot-c1/charging.webp",
+        caption:
+          "The 3-hour charge is WYBOT's own figure. The 4,600 mAh beside it is our research — WYBOT publishes no battery capacity, and no source we read states one.",
+      },
+    ],
+    folds: [
+      {
+        id: "five-modes-six-paths-and-the-s-path-brain",
+        teaser: "Full, floor, wall, wall-then-floor and eco — and why the sequencing mode matters.",
+      },
+      {
+        id: "the-cycle-timer-four-cleans-from-one-charge",
+        teaser: "One charge, four scheduled cleans — and the 120-versus-150 arithmetic WYBOT leaves open.",
+      },
+      {
+        id: "charging-battery-and-retrieval",
+        teaser: "Three hours to charge, self-parking at the waterline, and 17.6 lbs to lift.",
+      },
+      {
+        id: "what-we-cannot-tell-you",
+        teaser: "Six gaps, including three numbers printed on our own artwork.",
+      },
+    ],
+    facts: [
+      { label: "Cleans", value: "Floor, walls, waterline" },
+      { label: "Power", value: "Cordless battery" },
+      { label: "Max pool area", value: "1,615 sq ft" },
+      { label: "Filter", value: "180 μm" },
+    ],
+    specGroups: [
+      {
+        heading: "Power and runtime",
+        rows: [
+          { label: "Power type", value: "Cordless lithium-ion" },
+          {
+            label: "Runtime",
+            value: "Up to 150 minutes",
+            note: "WYBOT's headline figure. The cycle timer's splits sum to 120 — see the review.",
+          },
+          { label: "Charge time", value: "3 hours", note: "WYBOT's own comparison table." },
+          { label: "Battery capacity", value: null, note: "Not published. Our artwork's 4,600 mAh is research, not a WYBOT statement." },
+        ],
+      },
+      {
+        heading: "Pool compatibility",
+        rows: [
+          {
+            label: "Installation",
+            value: "Above-ground and in-ground",
+            note: "WYBOT's own classification, for all pool shapes. Our catalogue said in-ground only until this review was written.",
+          },
+          { label: "Max pool", value: "1,615 sq ft", note: "An area rating; WYBOT publishes no length figure." },
+        ],
+      },
+      {
+        heading: "Cleaning",
+        rows: [
+          { label: "Surfaces", value: "Floor, walls, waterline, steps and slopes", note: "WYBOT's own coverage list." },
+          { label: "Suction", value: "3,038 GPH", note: "WYBOT's pump figure — 11.5 m³/h in metric." },
+          { label: "Brushes", value: "Dual PVC brushes" },
+          { label: "Navigation", value: "S-path / N-path planned paths", note: "No camera, no sonar — the planned-path middle class." },
+          { label: "Modes", value: "Full, floor, wall, wall-then-floor, eco floor", note: "Five modes over six cleaning paths." },
+        ],
+      },
+      {
+        heading: "Filtration",
+        rows: [
+          { label: "Filter", value: "180 μm ultra-fine filter", note: "One stated fineness — no second, finer layer like Aiper's 3 μm." },
+        ],
+      },
+      {
+        heading: "Control and support",
+        rows: [
+          { label: "App", value: "WYBOT app — modes, remote control, cycle timer, OTA updates" },
+          { label: "Scheduling", value: "Up to 4 cycles per week from one charge", note: "WYBOT's cycle timer." },
+          {
+            label: "Warranty",
+            value: "2 years",
+            note: "Stated by WYBOT, with a 30-day return and 30-day price guarantee beside it.",
+          },
+        ],
+      },
+      {
+        heading: "Handling",
+        rows: [
+          { label: "Weight", value: "17.6 lbs", note: "WYBOT's figure — one of the lighter wall-climbers we cover." },
+          { label: "Retrieval", value: "Self-parks at the waterline", note: "WYBOT's claim." },
+          { label: "Dimensions", value: null, note: "Not published." },
+        ],
+      },
+    ],
+    skuNote:
+      "Specifications come from WYBOT's own C1 product page, read 31 July 2026 and re-read 4 " +
+      "August 2026. WYBOT publishes no model number for the C1, and it sells C1, C1 Pro and " +
+      "C1 Max as separate machines — one rejected Amazon candidate was titled C1 but read " +
+      "C1 PLUS in its identity fields. Check the listing says C1, alone, before buying anywhere.",
+    lastReviewed: "2026-08-04",
+  },
 };
 
 export function reviewFor(slug: string | undefined): ReviewContent | undefined {

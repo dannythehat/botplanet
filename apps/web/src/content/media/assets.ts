@@ -1046,6 +1046,58 @@ const REVIEW_FIGURES: ReviewFigure[] = [
     scene:
       "the cleaner on a shallow tanning platform in clear water, with a 12 inch depth callout beside it",
   },
+
+  /* ---- WYBOT C1 ----
+     The suction creative prints 65 W motors, an 11.5 m³/h flow rate and
+     four-wheel drive; the charging creative prints 4,600 mAh. WYBOT's page
+     states 3,038 GPH (11.5 m³/h is that figure converted), a triple-motor
+     system with no wattage, treads in every photo, and no battery capacity.
+     The 3-hour charge IS WYBOT's own figure. All four publish per the owner's
+     standing rule; the review and captions carry the corrections. */
+  {
+    slug: "hero",
+    productSlug: "wybot-c1",
+    type: "product_in_use",
+    file: "hero.webp",
+    checksum: "sha256:b4a18087fa075c54dc7b5be415cdc5129402269ae1c26212c25bf90ca7896274",
+    width: 1254,
+    height: 1254,
+    scene:
+      "the black and silver tracked cleaner on stone paving beside a night pool, next to a phone showing the WYBOT app and panels for app control, floor, wall and waterline cleaning, cordless running and navigation",
+  },
+  {
+    slug: "suction",
+    productSlug: "wybot-c1",
+    type: "product_in_use",
+    file: "suction.webp",
+    checksum: "sha256:6c536beaec7191f4b59f77ec6d0b889d97d17beedc1c165aa4ad691ab802a803",
+    width: 1254,
+    height: 1254,
+    scene:
+      "the cleaner underwater from below, intake vortices drawing in leaves, above a row of debris icons for leaves, dirt, hair and twigs",
+  },
+  {
+    slug: "cycles",
+    productSlug: "wybot-c1",
+    type: "app_screenshot",
+    file: "cycles.webp",
+    checksum: "sha256:3c7ef23bd1d13bc9fa6783cf5d10ac965ffa92162871c91dbb32c4c6a620d164",
+    width: 1254,
+    height: 1254,
+    scene:
+      "a phone showing the WYBOT app's cycle timer beside a ring diagram splitting one charge into one, two, three or four cleaning days",
+  },
+  {
+    slug: "charging",
+    productSlug: "wybot-c1",
+    type: "product_in_use",
+    file: "charging.webp",
+    checksum: "sha256:65817bf8450d34f82109ead5302ab830cf96f2ff691de233543028c296b71807",
+    width: 1254,
+    height: 1254,
+    scene:
+      "the cleaner plugged into a wall charger on a poolside patio at night, with badges for charging time and battery capacity",
+  },
 ];
 
 /**

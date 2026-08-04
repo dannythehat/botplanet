@@ -528,6 +528,55 @@ export const SNAPSHOTS: Record<string, ProductSnapshot> = {
       { need: "You want the water surface skimmed too", test: { kind: "cleans", value: "water_surface" } },
     ],
   },
+
+  "wybot-c1": {
+    slug: "wybot-c1",
+    priceBand: "mid",
+    priceBandWhy:
+      "About $500 from WYBOT's own store — double the Seagull SE, well under the $850 class, for a feature list much closer to the latter: walls, waterline, app scheduling and a stated 2-year warranty.",
+    shipping: "Prime-eligible on Amazon, so usually a day or two rather than a week.",
+    shippingSpeed: "fast",
+    points: [
+      {
+        label: "Cleans",
+        value: "Floor, walls, waterline, steps and slopes",
+        note: "WYBOT's own coverage list — the full set short of the water surface.",
+      },
+      {
+        label: "Power",
+        value: "Cordless, wall charger",
+        note: "Up to 150 minutes per WYBOT; 3 hours to charge from its own table.",
+      },
+      {
+        label: "Biggest pool it is rated for",
+        value: "1,615 sq ft",
+        note: "Above-ground and in-ground, all pool shapes — WYBOT's classification.",
+      },
+      {
+        label: "Scheduling",
+        value: "Up to 4 cleans a week from one charge",
+        note: "The cycle timer is the standout feature at this price.",
+      },
+      {
+        label: "Filter",
+        value: "180 μm ultra-fine",
+        note: "One stated fineness — no second, finer layer like Aiper's 3 μm.",
+      },
+      {
+        label: "Warranty",
+        value: "2 years",
+        note: "Stated by WYBOT, with a 30-day return beside it — longer than several pricier brands manage.",
+      },
+    ],
+    suitsYouIf:
+      "Your pool fits inside 1,615 sq ft — above-ground or in-ground — and you want walls, waterline and a weekly schedule handled for about $500.",
+    ruleOutIf:
+      "Your pool is larger, you want ultra-fine filtration or a camera, or you want the water surface skimmed.",
+    ruleOuts: [
+      { need: "You want the water surface skimmed too", test: { kind: "cleans", value: "water_surface" } },
+      { need: "You would rather have mains power than a battery", test: { kind: "power", value: "corded" } },
+    ],
+  },
 };
 
 export const snapshotFor = (slug: string | undefined): ProductSnapshot | undefined =>

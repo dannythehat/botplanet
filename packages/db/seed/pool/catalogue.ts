@@ -134,7 +134,12 @@ export const productRows: (typeof products.$inferInsert)[] = [
     productClass: "full_cleaner",
     name: "WYBOT C1",
     model: "C1",
-    environments: ["in_ground"],
+    /* CORRECTED 4 August 2026 to include above_ground. WYBOT's own comparison
+       table classifies the C1 "Above-Ground & In-Ground", for all pool shapes,
+       and the verification record has held that since 31 July. The seed and D1
+       said in-ground only, which hid this machine from the above-ground
+       BotMatch buyer it exists for — the S1-waterline class of bug again. */
+    environments: ["above_ground", "in_ground"],
     cleans: ["floor", "walls", "waterline"],
     powerType: "cordless",
     priceTier: "mid",

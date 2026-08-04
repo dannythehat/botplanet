@@ -1265,8 +1265,12 @@ describe("scheduled refresh — wiring", () => {
       expect(e.denyTokens.length).toBeGreaterThan(0);
       expect(e.asin).toMatch(/^B0[A-Z0-9]{8}$/);
     }
-    // Products with no confirmed ASIN need discovery, not a refresh.
-    expect(AWAITING_DISCOVERY).toContain("prod-wybot-c1");
+    // Products with no confirmed ASIN need discovery, not a refresh. The C1
+    // left this list on 4 August 2026: its owner-confirmed destination had
+    // existed since 3 August, and holding it here meant the refresh never read
+    // the very listing the buy button pointed at.
+    expect(AWAITING_DISCOVERY).toContain("prod-aiper-scuba-s1");
+    expect(EXPECTED_IDENTITIES.some((e) => e.productId === "prod-wybot-c1")).toBe(true);
     for (const id of AWAITING_DISCOVERY) {
       expect(EXPECTED_IDENTITIES.some((e) => e.productId === id)).toBe(false);
     }

@@ -127,7 +127,24 @@ export const EXPECTED_IDENTITIES: IdentityExpectation[] = [
        newly adopted destination, then back to the normal cadence. */
     exception: "recently_changed",
   },
+  {
+    /* MOVED OFF AWAITING_DISCOVERY on 4 August 2026 — it had been stale there
+       since 3 August, when the owner confirmed this destination; the refresh
+       never read the listing because this entry did not exist. Identity rests
+       on the owner's confirmation: the listing could not be machine-read
+       (Amazon served its bot page on every attempt), so the first clean
+       provider read is what upgrades it. */
+    productId: "prod-wybot-c1",
+    asin: "B0GYWJMNWK",
+    brand: "WYBOT",
+    modelTokens: ["wybot c1", "c1"],
+    /* The trap this register exists for: a rejected candidate was TITLED
+       "2026 WYBOT C1" and read C1 PLUS in its identity fields. Deny is checked
+       before matching, so "c1 plus" refuses before "c1" can confirm. */
+    denyTokens: ["c1 plus", "c1 pro", "c1 max", "c2", "s2", "s3", "a1", "b1", "f1"],
+    exception: "recently_changed",
+  },
 ];
 
 /** Products with no confirmed ASIN. They need discovery, not a refresh. */
-export const AWAITING_DISCOVERY = ["prod-wybot-c1", "prod-aiper-scuba-s1"];
+export const AWAITING_DISCOVERY = ["prod-aiper-scuba-s1"];
