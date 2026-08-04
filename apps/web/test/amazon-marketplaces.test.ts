@@ -20,10 +20,30 @@ import {
 const NAUTILUS = "prod-dolphin-nautilus-cc-plus";
 const US_ASIN = "B09K4C9WGF";
 
+describe("the URL comes back untagged", () => {
+  /* Production shipped `?tag=botplanet-20&tag=botplanet-20` because this
+     function tagged the URL and the caller tagged it again. Tagging belongs to
+     amazonDestination, which lib/site.ts calls the only way an outbound Amazon
+     URL is built — a claim that has to keep being true. */
+  it("never returns a tag, for any country", () => {
+    for (const m of AMAZON_MARKETPLACES) {
+      const url = marketplaceFor(NAUTILUS, US_ASIN, m.country).url;
+      expect(url, `${m.country} came back pre-tagged`).not.toContain("tag=");
+      expect(url).not.toContain("?");
+    }
+  });
+
+  it("survives being tagged exactly once", () => {
+    const url = marketplaceFor(NAUTILUS, US_ASIN, "GB").url;
+    const tagged = `${url}${url.includes("?") ? "&" : "?"}tag=botplanet-20`;
+    expect(tagged.match(/tag=/g)).toHaveLength(1);
+  });
+});
+
 describe("the US default", () => {
-  it("uses amazon.com with the US tag", () => {
+  it("uses amazon.com and the exact ASIN", () => {
     const r = marketplaceFor(NAUTILUS, US_ASIN, "US");
-    expect(r.url).toBe(`https://www.amazon.com/dp/${US_ASIN}?tag=botplanet-20`);
+    expect(r.url).toBe(`https://www.amazon.com/dp/${US_ASIN}`);
     expect(r.localised).toBe(false);
   });
 
@@ -61,9 +81,9 @@ describe("refusing to route", () => {
     }
   });
 
-  it("never emits a URL containing the string 'null' from a missing tag", () => {
+  it("never leaks a null or undefined into the URL", () => {
     for (const m of AMAZON_MARKETPLACES) {
-      expect(marketplaceFor(NAUTILUS, US_ASIN, m.country).url).not.toMatch(/tag=(null|undefined|)$/);
+      expect(marketplaceFor(NAUTILUS, US_ASIN, m.country).url).not.toMatch(/null|undefined/);
     }
   });
 });

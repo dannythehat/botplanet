@@ -66,7 +66,7 @@ export const GET: APIRoute = async ({ params, locals, request }) => {
          reason are in content/commerce/amazon-marketplaces.ts. Cloudflare
          gives the country on the request, so this costs nothing. */
       const routed = marketplaceFor(offer.productId, exact.retailerProductId, country);
-      destination = routed.localised ? routed.url : amazonDestination(routed.url);
+      destination = amazonDestination(routed.url);
       marketplace = routed.marketplace;
       destinationKind = "offer_destination";
     } else {
