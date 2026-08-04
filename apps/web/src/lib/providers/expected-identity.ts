@@ -84,13 +84,21 @@ export const EXPECTED_IDENTITIES: IdentityExpectation[] = [
   },
   {
     productId: "prod-aiper-scuba-x1",
-    asin: "B0F9WN961G",
+    /* CORRECTED 4 August 2026. This entry still held B0F9WN961G — an ASIN the
+       verification record had already retired — with modelTokens for the base
+       X1 and a deny list containing "x1 pro max": it was configured to REFUSE
+       the very machine the record now represents, which is why this product
+       failed identity on every daily run since the rename. The destination
+       register has held B0GMPWMS2H (Model Name "Scuba X1 Pro Max", read from
+       the listing's own fields) since 3 August; the refresh now reads it too. */
+    asin: "B0GMPWMS2H",
     brand: "AIPER",
-    modelTokens: ["scuba x1"],
-    // The held listing is currently unavailable and names its model "Blue",
-    // so it is on the daily list until it resolves one way or the other.
-    denyTokens: ["x1 pro", "x1 pro max", "scuba s1", "scuba v3", "scuba s3"],
-    exception: "unavailable_offer",
+    modelTokens: ["scuba x1 pro max", "x1 pro max"],
+    /* "hy pro" catches the Scuba X1+Hy Pro impostor whose URL says Pro;
+       "caddy" and "hydrocomm" catch the two bundles; the rest are siblings.
+       Deliberately NOT "x1 pro" alone — it is a whole-token substring of the
+       real name and would refuse the machine itself. */
+    denyTokens: ["hy pro", "hydrocomm", "caddy", "essential", "advanced", "scuba v3", "scuba s1", "seagull"],
   },
 ];
 

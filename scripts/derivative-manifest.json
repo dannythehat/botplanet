@@ -1363,6 +1363,130 @@
     ]
   },
   {
+    "source": "/media/reviews/aiper-scuba-x1-pro-max/hero.webp",
+    "sourceWidth": 1402,
+    "sourceHeight": 1122,
+    "derivatives": [
+      {
+        "id": "media-reviews-aiper-scuba-x1-pro-max-hero-webp-360",
+        "src": "/media/reviews/aiper-scuba-x1-pro-max/hero-360w.webp",
+        "width": 360,
+        "height": 288,
+        "bytes": 20094,
+        "checksum": "sha256:6ba28d44ef174be3ea5f6f6e55dd3641ba7394a0c5cbc09a219858bc213de04e"
+      },
+      {
+        "id": "media-reviews-aiper-scuba-x1-pro-max-hero-webp-640",
+        "src": "/media/reviews/aiper-scuba-x1-pro-max/hero-640w.webp",
+        "width": 640,
+        "height": 512,
+        "bytes": 54410,
+        "checksum": "sha256:f40b99445aac0a032daea9a55c0ad4089e92d73a03a9bb73be6d5dcc73c3ca99"
+      },
+      {
+        "id": "media-reviews-aiper-scuba-x1-pro-max-hero-webp-960",
+        "src": "/media/reviews/aiper-scuba-x1-pro-max/hero-960w.webp",
+        "width": 960,
+        "height": 768,
+        "bytes": 113568,
+        "checksum": "sha256:4ba0466bc03f7ca6d533a98beec73b9e070aa11e212588cae6490a50af78f4c2"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/aiper-scuba-x1-pro-max/suction.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-aiper-scuba-x1-pro-max-suction-webp-360",
+        "src": "/media/reviews/aiper-scuba-x1-pro-max/suction-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 28118,
+        "checksum": "sha256:2568da5c6a1cf9a61454f819a0d565041e9035faaeceee494ec1c84320e72759"
+      },
+      {
+        "id": "media-reviews-aiper-scuba-x1-pro-max-suction-webp-640",
+        "src": "/media/reviews/aiper-scuba-x1-pro-max/suction-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 81352,
+        "checksum": "sha256:dc85b37d7846ddf03d9097f4dceee695f57d04d09cac204706c75f320ca585f6"
+      },
+      {
+        "id": "media-reviews-aiper-scuba-x1-pro-max-suction-webp-960",
+        "src": "/media/reviews/aiper-scuba-x1-pro-max/suction-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 172350,
+        "checksum": "sha256:cbc13621c0013bbe93113fd9b1e1c1563612fa6c7f01c7040a0030e0c5cd4648"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/aiper-scuba-x1-pro-max/runtimes.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-aiper-scuba-x1-pro-max-runtimes-webp-360",
+        "src": "/media/reviews/aiper-scuba-x1-pro-max/runtimes-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 20176,
+        "checksum": "sha256:66a2019e086d97168cff130a898eb89add9e7e9edee8a2c3d762d050c0eb9282"
+      },
+      {
+        "id": "media-reviews-aiper-scuba-x1-pro-max-runtimes-webp-640",
+        "src": "/media/reviews/aiper-scuba-x1-pro-max/runtimes-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 48516,
+        "checksum": "sha256:652f49b84b7c55bc05bfc0cccdd93da090e420df6360d4790a569fa4a9701864"
+      },
+      {
+        "id": "media-reviews-aiper-scuba-x1-pro-max-runtimes-webp-960",
+        "src": "/media/reviews/aiper-scuba-x1-pro-max/runtimes-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 93116,
+        "checksum": "sha256:fa1725a7b805c7be94a10e8111caf7c1c339bacf38f757e5b6929e74d0242c71"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/aiper-scuba-x1-pro-max/filtration.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-aiper-scuba-x1-pro-max-filtration-webp-360",
+        "src": "/media/reviews/aiper-scuba-x1-pro-max/filtration-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 22982,
+        "checksum": "sha256:26947b514b5594dae07078ae1bc89d53a39b4e25f27faebfb2b15f40f93bc1b7"
+      },
+      {
+        "id": "media-reviews-aiper-scuba-x1-pro-max-filtration-webp-640",
+        "src": "/media/reviews/aiper-scuba-x1-pro-max/filtration-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 58412,
+        "checksum": "sha256:166f1749fc81222b062853c3a905a93a4cef12d1c1d560a8b35ccd157cfa48af"
+      },
+      {
+        "id": "media-reviews-aiper-scuba-x1-pro-max-filtration-webp-960",
+        "src": "/media/reviews/aiper-scuba-x1-pro-max/filtration-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 109518,
+        "checksum": "sha256:16c60a7960deb5c07e770f65c5e0f36d3debf336c5eccab65b508ee9b8adbe9e"
+      }
+    ]
+  },
+  {
     "source": "/media/products/dolphin-nautilus-cc-plus.webp",
     "sourceWidth": 1122,
     "sourceHeight": 1402,

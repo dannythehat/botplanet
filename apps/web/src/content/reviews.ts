@@ -949,6 +949,160 @@ export const REVIEWS: Record<string, ReviewContent> = {
       "presented as manufacturer-verified. Six Proteus models share one Amazon parent listing.",
     lastReviewed: "2026-08-04",
   },
+
+  "aiper-scuba-x1-pro-max": {
+    slug: "aiper-scuba-x1-pro-max",
+    categorySlug: "robotic-pool-cleaners",
+    eyebrow: "Robotic pool cleaner review",
+    title: "Aiper Scuba X1 Pro Max review",
+    seoTitle: "Aiper Scuba X1 Pro Max Review | BotPlanet",
+    metaDescription:
+      "An honest review of the Aiper Scuba X1 Pro Max: the only robot we cover that skims the " +
+      "surface as well as the floor, the 8,500 GPH claim, the 3-year warranty, and the bundle trap " +
+      "that once fooled our own records.",
+    verdict:
+      "The most expensive machine we cover and the only one that honestly claims all four jobs — " +
+      "surface, waterline, walls and floor — with ultrasonic mapping, 8,500 GPH of claimed suction " +
+      "and the longest stated warranty in our catalogue. Twice the price of Aiper's own camera " +
+      "robot, and the difference is mostly the skimming.",
+    bestFor:
+      "A large in-ground pool whose owner wants one machine doing the skimmer's job and the " +
+      "cleaner's — surface debris caught before it sinks, then waterline, walls and floor.",
+    notIdealFor:
+      "Your budget is under four figures, your pool already has surface skimming you like, or it " +
+      "is above ground.",
+    image: {
+      src: "/media/reviews/aiper-scuba-x1-pro-max/hero.webp",
+      alt:
+        "BotPlanet artwork for the Aiper Scuba X1 Pro Max robotic pool cleaner, shown at the edge " +
+        "of a night pool with sensor beams fanning across scattered leaves.",
+    },
+    figures: [
+      {
+        afterHeading: "Suction: 8,500 GPH and nine motors",
+        src: "/media/reviews/aiper-scuba-x1-pro-max/suction.webp",
+        caption:
+          "8,500 GPH through a dual-jet system on nine brushless motors — Aiper's figures, printed in its listing title and on its own page. A pump rating, not an independent measurement.",
+      },
+      {
+        afterHeading: "The mode times, decoded",
+        src: "/media/reviews/aiper-scuba-x1-pro-max/runtimes.webp",
+        caption:
+          "The three durations are Aiper's, with two labels straightened out: Amazon names them Skim Mode (up to 12 hours) and Eco Mode (up to 5 hours), and rates floor cleaning at up to 5.5 hours. Neither source names a mode called SuperEco.",
+      },
+      {
+        afterHeading: "Filtration: the same 3-micron story, doubled",
+        src: "/media/reviews/aiper-scuba-x1-pro-max/filtration.webp",
+        caption:
+          "A 180 micron standard mesh paired with a replaceable 3 micron ultra-fine filter in a five-litre basket — the same dual-layer arrangement as the Scuba V3, at flagship scale.",
+      },
+    ],
+    folds: [
+      {
+        id: "suction-8500-gph-and-nine-motors",
+        teaser: "The biggest suction claim in our catalogue, and what a GPH figure does not prove.",
+      },
+      {
+        id: "the-mode-times-decoded",
+        teaser: "12, 5 and 5.5 hours are all real — two of the labels on our artwork are not.",
+      },
+      {
+        id: "filtration-the-same-3-micron-story-doubled",
+        teaser: "3 μm + 180 μm in a five-litre basket, same as the V3, bigger.",
+      },
+      {
+        id: "what-we-cannot-tell-you",
+        teaser: "Five gaps, including the machine's own weight and the 40-sensor figure.",
+      },
+    ],
+    facts: [
+      { label: "Cleans", value: "Surface to floor" },
+      { label: "Suction", value: "8,500 GPH" },
+      { label: "Warranty", value: "3 years" },
+      { label: "Power", value: "Cordless battery" },
+    ],
+    specGroups: [
+      {
+        heading: "Power and runtime",
+        rows: [
+          { label: "Power type", value: "Cordless lithium-ion" },
+          { label: "Skim mode", value: "Up to 12 hours", note: "Amazon's own mode description." },
+          { label: "Eco mode", value: "Up to 5 hours" },
+          { label: "Floor cleaning", value: "Up to 5.5 hours", note: "From the listing's efficiency line." },
+          { label: "Charge time", value: null, note: "Not stated on either source we read." },
+          { label: "Charging", value: "Wireless, per the listing's feature list" },
+        ],
+      },
+      {
+        heading: "Pool compatibility",
+        rows: [
+          { label: "Installation", value: "In-ground" },
+          {
+            label: "Max pool length",
+            value: "100 ft (researched)",
+            note: "From owner research. Amazon says only 'for all in-ground pools'; Aiper's page states no length.",
+          },
+        ],
+      },
+      {
+        heading: "Cleaning",
+        rows: [
+          {
+            label: "Surfaces",
+            value: "Water surface, waterline, walls and floor",
+            note: "The only machine we cover that claims all four. Sold as a vacuum AND a robotic pool skimmer.",
+          },
+          { label: "Suction", value: "8,500 GPH", note: "Aiper's pump rating — the largest claim in our catalogue. Dual-jet, nine brushless motors." },
+          {
+            label: "Navigation",
+            value: "OmniSense+ 2.0 ultrasonic mapping",
+            note: "Maps the pool and plans coverage. No camera — debris recognition is the Scuba V3's trick, not this one's.",
+          },
+          {
+            label: "Sensor count",
+            value: null,
+            note: "Our artwork carries a 40-sensor figure; neither Aiper's page nor the listing states a count. Unverified.",
+          },
+          { label: "End of cycle", value: "Smart Surface Parking — floats to the edge for collection" },
+        ],
+      },
+      {
+        heading: "Filtration",
+        rows: [
+          { label: "Filter", value: "Dual-layer: 180 μm standard + 3 μm ultra-fine (replaceable)" },
+          { label: "Basket capacity", value: "5 L", note: "From the listing's details table." },
+        ],
+      },
+      {
+        heading: "Warranty and durability",
+        rows: [
+          {
+            label: "Warranty",
+            value: "3 years",
+            note: "Stated on Aiper's own page — the longest published term in our catalogue.",
+          },
+          { label: "Design lifespan", value: "10 years, per Aiper's durability sheet" },
+          { label: "Salt tolerance", value: "Tested to 50,000 ppm NaCl", note: "Aiper's own test claim, alongside chlorine to 40 ppm and -4°F to 158°F." },
+        ],
+      },
+      {
+        heading: "Handling",
+        rows: [
+          { label: "Weight", value: null, note: "Not published by Aiper or the listing — a real gap for a machine this size." },
+          { label: "Dimensions (L×W×H)", value: "15 × 11 × 17 in" },
+          { label: "Model number", value: "X9-Grey", note: "The one Aiper machine with a part number in its listing table." },
+        ],
+      },
+    ],
+    skuNote:
+      "Specifications describe the bare Aiper Scuba X1 Pro Max in grey, ASIN B0GMPWMS2H, model " +
+      "number X9-Grey, from Aiper's own product page and the Amazon listing, both read 4 August " +
+      "2026. Two bundles share the name — a caddy version and a HydroComm Pure version — and a " +
+      "further listing whose URL says 'Scuba-X1-Pro' names itself 'Scuba X1+Hy Pro' in its own " +
+      "fields: a different machine our own register once accepted on the URL and refused once " +
+      "read. Check the model name in the details table, never the URL.",
+    lastReviewed: "2026-08-04",
+  },
 };
 
 export function reviewFor(slug: string | undefined): ReviewContent | undefined {
