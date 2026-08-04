@@ -58,10 +58,9 @@ on the strength of that line, we would rather lose the sale than have you open t
 box and find a tide-mark still there.
 
 **What to do with that information:** if the waterline is genuinely your problem,
-you want a model that states waterline scrubbing explicitly in its own specification
-— and you should check that on the exact product page for the exact SKU you are
-buying, not on a category page or a retailer listing that may be describing a
-different variant.
+you want a model that states waterline scrubbing explicitly in its own
+specification. Check that on the product page for the exact SKU you are buying.
+A category page or a retailer listing may be describing a different variant.
 
 ---
 
