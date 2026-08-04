@@ -602,8 +602,13 @@ const RAW: Record<string, Omit<ProductEditorial, "productId">> = {
     researchedDate: R,
   },
 
-  "aiper-scuba-x1": {
-    slug: "aiper-scuba-x1",
+  /* RENAMED 4 August 2026, "aiper-scuba-x1" -> "aiper-scuba-x1-pro-max". This
+     file is keyed by the D1 product slug and the D1 slug has been
+     aiper-scuba-x1-pro-max since the record moved up the range; the old key
+     meant the editorial layer silently failed to join on the live page. The
+     old URL still 301s via product-names.ts. */
+  "aiper-scuba-x1-pro-max": {
+    slug: "aiper-scuba-x1-pro-max",
     oneLiner: "Cordless in-ground robot with 6,600 GPH suction and smart navigation for medium-to-large pools.",
     verdict:
       "Aiper's mainstream in-ground cleaner pairs strong 6,600 GPH suction with WavePath 3.0 navigation and 3-hour runtime to cover floor, walls and waterline — a solid mid-range choice well below Beatbot money. Note Aiper now positions the base unit as the 'Scuba X1 Essential' within a wider X1 / X1 Pro / X1 Pro Max lineup, so confirm exactly which model a listing sells.",
@@ -771,7 +776,7 @@ const RAW: Record<string, Omit<ProductEditorial, "productId">> = {
  */
 export const PRODUCT_ID: Record<string, string> = {
   "beatbot-aquasense-2-ultra": "prod-beatbot-aquasense-2-ultra",
-  "aiper-scuba-x1": "prod-aiper-scuba-x1",
+  "aiper-scuba-x1-pro-max": "prod-aiper-scuba-x1",
   "aiper-scuba-s1": "prod-aiper-scuba-s1",
   "aiper-seagull-se": "prod-aiper-seagull-se",
   "wybot-c1": "prod-wybot-c1",

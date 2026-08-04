@@ -855,6 +855,52 @@ const REVIEW_FIGURES: ReviewFigure[] = [
     scene:
       "an exploded view of the white filter basket inside the dark debris basket, with the mesh layers fanned out and the 3 micron and 180 micron layers labelled",
   },
+
+  /* ---- Aiper Scuba X1 Pro Max ---- */
+  {
+    slug: "hero",
+    productSlug: "aiper-scuba-x1-pro-max",
+    type: "product_in_use",
+    file: "hero.webp",
+    checksum: "sha256:b52ba7ea6db769785e39c3d2cf7658193102a02d584e5a9e3741da95bbbd31a3",
+    width: 1402,
+    height: 1122,
+    scene:
+      "the dark tracked flagship at the edge of a night pool, sensor beams fanning across scattered leaves, beside a feature list from surface skimming to app control",
+  },
+  {
+    slug: "suction",
+    productSlug: "aiper-scuba-x1-pro-max",
+    type: "product_in_use",
+    file: "suction.webp",
+    checksum: "sha256:8f4d13a8bf77f9349d1bbfc426da93c672b33135df488929eb6e43566187378a",
+    width: 1254,
+    height: 1254,
+    scene:
+      "the cleaner on a leaf-strewn pool floor with two jets of water rising from its outlets and suction streaks drawn ahead of it",
+  },
+  {
+    slug: "runtimes",
+    productSlug: "aiper-scuba-x1-pro-max",
+    type: "product_in_use",
+    file: "runtimes.webp",
+    checksum: "sha256:8e49037240001266efface4ff526d4a8e5ab9beea74581007137c21261682de6",
+    width: 1254,
+    height: 1254,
+    scene:
+      "the cleaner floating at the surface of a lit pool at night beside three duration panels for surface, floor and eco cleaning",
+  },
+  {
+    slug: "filtration",
+    productSlug: "aiper-scuba-x1-pro-max",
+    type: "filtration_detail",
+    file: "filtration.webp",
+    checksum: "sha256:df490c18c93c4c510b13d96dc257b930249e2aca2661bce5e1b51926573145aa",
+    width: 1254,
+    height: 1254,
+    scene:
+      "two filter baskets side by side underwater — the 180 micron standard mesh with leaves and stones, and the 3 micron ultra-fine basket with dust and algae",
+  },
 ];
 
 /**

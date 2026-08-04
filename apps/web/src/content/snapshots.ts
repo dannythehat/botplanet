@@ -332,6 +332,55 @@ export const SNAPSHOTS: Record<string, ProductSnapshot> = {
       { need: "You want a machine with a stated length rating for a big pool", test: { kind: "maxLengthOver", feet: 50 } },
     ],
   },
+
+  "aiper-scuba-x1-pro-max": {
+    slug: "aiper-scuba-x1-pro-max",
+    priceBand: "premium",
+    priceBandWhy:
+      "The top of the catalogue, and the only machine in it doing four jobs. The premium over Aiper's own camera robot is mostly the surface skimming, the mapping and the 3-year warranty.",
+    shipping: "Prime-eligible on Amazon, so usually a day or two rather than a week.",
+    shippingSpeed: "fast",
+    points: [
+      {
+        label: "Cleans",
+        value: "Surface, waterline, walls and floor",
+        note: "The only machine we cover that claims all four — it is sold as a vacuum and a skimmer in one.",
+      },
+      {
+        label: "Suction",
+        value: "8,500 GPH",
+        note: "Aiper's pump rating, the largest claim in our catalogue, on nine brushless motors.",
+      },
+      {
+        label: "Navigation",
+        value: "OmniSense+ 2.0 ultrasonic mapping",
+        note: "Maps the pool and plans coverage. The camera trick belongs to the cheaper Scuba V3.",
+      },
+      {
+        label: "Runtime",
+        value: "Up to 12 h skimming / 5.5 h floor",
+        note: "The longest-legged machine we list, by Amazon's own mode descriptions.",
+      },
+      {
+        label: "Filter",
+        value: "3 μm + 180 μm, 5 L basket",
+        note: "The catalogue's finest published rating, in its biggest stated basket.",
+      },
+      {
+        label: "Warranty",
+        value: "3 years",
+        note: "Stated on Aiper's page — the longest published term of anything we cover.",
+      },
+    ],
+    suitsYouIf:
+      "You have a large in-ground pool and want one machine doing the skimmer's job and the cleaner's, with the longest warranty on offer.",
+    ruleOutIf:
+      "Your budget is under four figures, your pool already has surface skimming you like, or it is above ground.",
+    ruleOuts: [
+      { need: "You would rather have mains power than a battery", test: { kind: "power", value: "corded" } },
+      { need: "You only need the surface skimmed, not the whole pool", test: { kind: "cleans", value: "water_surface" } },
+    ],
+  },
 };
 
 export const snapshotFor = (slug: string | undefined): ProductSnapshot | undefined =>

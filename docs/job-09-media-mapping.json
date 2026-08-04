@@ -3,24 +3,24 @@
   "launchProducts": 12,
   "position": "No third-party product photograph is ingested. The Amazon Associates route is a potential lawful source, but the account's ownership and current approval are unverified, and obtaining Program Content lawfully would also require Creators API credentials that this environment does not hold; the programme forbids scraping, guessed URLs and unapproved caching. No launch-brand manufacturer publishes a press kit granting third-party image use. Until one of those changes, no product carries a photograph. Five products are shown in original BotPlanet creatives, which we own outright and which do show the machine but carry our branding and headline text set into the image — they illustrate, they are not evidence, and they never enter Product structured data. Every other product renders an original BotPlanet branded placeholder that names the exact model and does not depict it.",
   "totals": {
-    "assets": 66,
-    "productAssets": 41,
-    "originalAssets": 56,
+    "assets": 70,
+    "productAssets": 45,
+    "originalAssets": 60,
     "placeholders": 10,
-    "locallyStored": 66,
+    "locallyStored": 70,
     "remotelyServed": 0,
     "withdrawn": 0,
     "exactModelConfirmed": 12,
     "publicSafe": 12,
     "heroReady": 11,
     "fullSetReady": 0,
-    "derivatives": 145,
-    "altApproved": 52,
+    "derivatives": 157,
+    "altApproved": 56,
     "altDecorative": 14,
     "altMissing": 0,
     "altRejected": 0,
     "schemaProductEligible": 0,
-    "schemaOpenGraphEligible": 55
+    "schemaOpenGraphEligible": 59
   },
   "rows": [
     {
@@ -557,11 +557,16 @@
     },
     {
       "productId": "prod-aiper-scuba-x1",
-      "slug": "aiper-scuba-x1",
-      "canonicalUrl": "https://botplanet.io/robots/robotic-pool-cleaners/aiper-scuba-x1/",
+      "slug": "aiper-scuba-x1-pro-max",
+      "canonicalUrl": "https://botplanet.io/robots/robotic-pool-cleaners/aiper-scuba-x1-pro-max/",
       "exactModel": "Aiper Scuba X1 Pro Max",
       "heroAssetId": "art-aiper-scuba-x1",
-      "supportingAssetIds": [],
+      "supportingAssetIds": [
+        "fig-aiper-scuba-x1-pro-max-hero",
+        "fig-aiper-scuba-x1-pro-max-suction",
+        "fig-aiper-scuba-x1-pro-max-runtimes",
+        "fig-aiper-scuba-x1-pro-max-filtration"
+      ],
       "renderedAssetId": "art-aiper-scuba-x1",
       "renderedIsPlaceholder": false,
       "imageSource": "original_botplanet — BotPlanet",
@@ -598,7 +603,7 @@
         "rightsRecordComplete": true,
         "exactModelConfirmed": true,
         "heroReady": true,
-        "supportingImagesReady": false,
+        "supportingImagesReady": true,
         "responsiveVariantsReady": true,
         "altTextApproved": true,
         "schemaEligible": false,
@@ -607,7 +612,6 @@
       },
       "imageReadinessStatus": "public_safe_placeholder_only",
       "blockers": [
-        "no supporting product imagery",
         "no image eligible for Product structured data",
         "The CJ programme is live and fully readable, so this is no longer a permission problem. It is an upstream supply problem: Aiper's CJ Product Catalog contains zero products, and all twelve approved creatives are seasonal campaign banners and text links. Nothing in CJ depicts this model. Aiper publishes no model numbers, so an incoming image must still be matched to the exact X1 product page and never to X1 Pro."
       ]

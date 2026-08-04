@@ -253,8 +253,50 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
       },
       {
         term: "aiper scuba x1 pro max",
+        path: "/robots/robotic-pool-cleaners/aiper-scuba-x1-pro-max/",
+        why: "A different Aiper at a different price, named on this page only as the machine with a real length rating. Retargeted to its own review on 4 August 2026, the day that review shipped.",
+      },
+    ],
+    researchedOn: RUN,
+  },
+  {
+    path: "/robots/robotic-pool-cleaners/aiper-scuba-x1-pro-max/",
+    primary: { term: "aiper scuba x1 pro max review", volume: 0, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "aiper scuba x1 pro max", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "scuba x1 pro max", volume: 0, difficulty: 0, mustAppear: true },
+      // The questions the page is built around: the four-surface claim and the
+      // family of lookalike listings.
+      { term: "robotic pool skimmer", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "aiper scuba x1 pro max runtime", volume: 0, difficulty: 0, mustAppear: false },
+      { term: "omnisense", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "aiper scuba x1 pro max warranty", volume: 0, difficulty: 0, mustAppear: false },
+    ],
+    cededTo: [
+      {
+        term: "robotic pool cleaner",
         path: "/robots/robotic-pool-cleaners/",
-        why: "A different Aiper at a different price, named on this page only as the machine with a real length rating. Goes to the hub until it has a review of its own.",
+        why: "The category head term belongs to the hub, as on every review.",
+      },
+      {
+        term: "best robotic pool cleaner",
+        path: "/best-robots/robotic-pool-cleaners/",
+        why: "A comparison SERP. One review is not a best-of.",
+      },
+      {
+        term: "cordless robotic pool cleaner",
+        path: "/best-robots/robotic-pool-cleaners/cordless/",
+        why: "Three of our own cordless reviews would otherwise contest one query. The shortlist page owns it; none of them do.",
+      },
+      {
+        term: "aiper scuba v3 review",
+        path: "/robots/robotic-pool-cleaners/aiper-scuba-v3-ai-vision/",
+        why: "The V3 is this page's main comparison — half the price, camera instead of sonar. Naming it repeatedly is not targeting its term.",
+      },
+      {
+        term: "solar pool skimmer",
+        path: "/robots/robotic-pool-cleaners/betta-se-plus/",
+        why: "This machine skims, but a skimmer-only searcher wants the Betta's price bracket, not a $1,700 flagship.",
       },
     ],
     researchedOn: RUN,
