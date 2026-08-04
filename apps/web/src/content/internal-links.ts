@@ -168,6 +168,12 @@ export const CATEGORY_ANCHORS: Record<string, InternalAnchor[]> = {
       why: "The corded counter-argument in the upper mid-range. Named wherever a review weighs a battery against a cable, or reaches for the corded machine that still does the waterline.",
       status: "live",
     },
+    {
+      anchor: "WYBOT C1",
+      href: "/robots/robotic-pool-cleaners/wybot-c1/",
+      why: "The budget wall-climber. Named wherever a review tells a reader the full floor-wall-waterline job can be had for about $500.",
+      status: "live",
+    },
 
     /* ---- Declared now, linked when the page ships. ----
        A planned anchor renders as plain text, so none of these can 404. The

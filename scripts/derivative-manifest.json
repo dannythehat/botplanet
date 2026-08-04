@@ -1859,6 +1859,130 @@
     ]
   },
   {
+    "source": "/media/reviews/wybot-c1/hero.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-wybot-c1-hero-webp-360",
+        "src": "/media/reviews/wybot-c1/hero-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 18896,
+        "checksum": "sha256:96c2915574a3d3144fde6e279468bc9f2d89f90d202c6f33c14e75468d9abdc9"
+      },
+      {
+        "id": "media-reviews-wybot-c1-hero-webp-640",
+        "src": "/media/reviews/wybot-c1/hero-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 48846,
+        "checksum": "sha256:e679fef73be777d658f47d106720a05fc156551755b2348be08ed6daf3417683"
+      },
+      {
+        "id": "media-reviews-wybot-c1-hero-webp-960",
+        "src": "/media/reviews/wybot-c1/hero-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 90596,
+        "checksum": "sha256:5af6ba46b5421e99e0b032fb123fd19a5b09f9d2043d8c58c65f83522a713c1a"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/wybot-c1/suction.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-wybot-c1-suction-webp-360",
+        "src": "/media/reviews/wybot-c1/suction-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 24384,
+        "checksum": "sha256:52628d137dc56f1a5ae14e808dd02c0b071b16a47427e5672c8a069246694ca6"
+      },
+      {
+        "id": "media-reviews-wybot-c1-suction-webp-640",
+        "src": "/media/reviews/wybot-c1/suction-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 64228,
+        "checksum": "sha256:c28b0b647ea44eed14e2396d8d9c17915cf014c241d2d6eafcc7b8b11381193c"
+      },
+      {
+        "id": "media-reviews-wybot-c1-suction-webp-960",
+        "src": "/media/reviews/wybot-c1/suction-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 129218,
+        "checksum": "sha256:03c8ffb6662779ba652ebce973a307e9f692ec085c48dfeb80cad25f00d43b75"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/wybot-c1/cycles.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-wybot-c1-cycles-webp-360",
+        "src": "/media/reviews/wybot-c1/cycles-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 21940,
+        "checksum": "sha256:bdfaf4b81a0f3284d46265fed8d397f49a6ced90795549cc850b72dd68c5bb9f"
+      },
+      {
+        "id": "media-reviews-wybot-c1-cycles-webp-640",
+        "src": "/media/reviews/wybot-c1/cycles-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 56656,
+        "checksum": "sha256:475555072e82dce53d3ade9da147348bca40e700108e908c812b3589c44b8f96"
+      },
+      {
+        "id": "media-reviews-wybot-c1-cycles-webp-960",
+        "src": "/media/reviews/wybot-c1/cycles-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 107288,
+        "checksum": "sha256:57cd6680822e6cbc73f867309887c35d1be1c4021e6e7b282cbcb7ea60135220"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/wybot-c1/charging.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-wybot-c1-charging-webp-360",
+        "src": "/media/reviews/wybot-c1/charging-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 17752,
+        "checksum": "sha256:2d84d3cadaf75f89de6f5fd85357a54b45cc143ab801a7fa985d64efce330616"
+      },
+      {
+        "id": "media-reviews-wybot-c1-charging-webp-640",
+        "src": "/media/reviews/wybot-c1/charging-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 43900,
+        "checksum": "sha256:ba933ba4ac1ae144701937ef552a69b95a98ff52543362abfa7d0d81d81a1f45"
+      },
+      {
+        "id": "media-reviews-wybot-c1-charging-webp-960",
+        "src": "/media/reviews/wybot-c1/charging-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 86372,
+        "checksum": "sha256:42c2bd0a8005e389f6449ddfcfac33865d0b3fc2697234016cff6e0d4b01410d"
+      }
+    ]
+  },
+  {
     "source": "/media/products/dolphin-nautilus-cc-plus.webp",
     "sourceWidth": 1122,
     "sourceHeight": 1402,

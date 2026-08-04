@@ -114,7 +114,13 @@ const wybotC1: ProductVerification = {
       "WYBOT sells C1, C1 Pro and C1 Max as separate models with separate manuals. The stored record is the base C1; no model number is published on the official page, so the three cannot be told apart by SKU here. Third-party manual libraries list 'OS7010C' for a C1, but that string was not found on wybotpool.com and is therefore not recorded as the model number.",
   },
   sourceChecks: [
-    { url: WYBOT_PAGE, title: WYBOT_TITLE, status: "ok" },
+    {
+      url: WYBOT_PAGE,
+      title: WYBOT_TITLE,
+      status: "ok",
+      note:
+        "Re-read 4 August 2026 for the review build; every figure below re-confirmed. The re-read added detail the first pass had not recorded: the five modes are named (full / floor / wall / wall-then-floor / eco floor) over six cleaning paths, the cycle timer schedules up to 4 cycles per week, pool classification is 'Above-Ground & In-Ground' for all pool shapes, and WYBOT's own store lists $499.99 against a struck $699.99. Charging time 3 hrs is in WYBOT's own comparison table. NOT stated anywhere on the page: motor wattage (our artwork's 65 W), battery capacity (our artwork's 4,600 mAh), or any drivetrain description (our artwork's four-wheel drive; WYBOT's photos show treads). The artwork's 11.5 m³/h flow figure is WYBOT's 3,038 GPH converted to metric, not a second source.",
+    },
     {
       url: "https://www.amazon.com/WYBOT-Pool-Vacuum-Inground-Navigation/dp/B0G64JV6K4",
       title: "Amazon US listing (WYBOT C1) — DEAD, superseded",
@@ -147,7 +153,7 @@ const wybotC1: ProductVerification = {
     { field: "filtrationMicrons", value: "180μm", sourceUrl: WYBOT_PAGE, sourceTitle: WYBOT_TITLE, observedOn: D },
     { field: "suctionRate", value: "3,038 GPH", sourceUrl: WYBOT_PAGE, sourceTitle: WYBOT_TITLE, observedOn: D },
     { field: "navigation", value: "S-path and N-path smart path planning", sourceUrl: WYBOT_PAGE, sourceTitle: WYBOT_TITLE, observedOn: D },
-    { field: "cleaningModes", value: "5 cleaning modes", sourceUrl: WYBOT_PAGE, sourceTitle: WYBOT_TITLE, observedOn: D },
+    { field: "cleaningModes", value: "5 modes (full / floor / wall / wall-then-floor / eco floor), 6 cleaning paths; cycle timer schedules up to 4 cycles/week", sourceUrl: WYBOT_PAGE, sourceTitle: WYBOT_TITLE, observedOn: "2026-08-04", note: "Named on the re-read for the review build; the first pass recorded the count only." },
     { field: "appSupport", value: "WYBOT App with OTA updates", sourceUrl: WYBOT_PAGE, sourceTitle: WYBOT_TITLE, observedOn: D },
     { field: "warranty", value: "2-year warranty", sourceUrl: WYBOT_PAGE, sourceTitle: WYBOT_TITLE, observedOn: D, applicability: "US market" },
   ],

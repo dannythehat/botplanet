@@ -100,7 +100,9 @@ const RAW: Record<string, Omit<ProductEditorial, "productId">> = {
     ],
     sources: [
       { label: "WYBOT official product page", url: "https://www.wybotpool.com/products/wybot-c1-cordless-robotic-pool-cleaner" },
-      { label: "Amazon US listing (WYBOT C1)", url: "https://www.amazon.com/WYBOT-Pool-Vacuum-Inground-Navigation/dp/B0G64JV6K4" },
+      // Replaced 4 August 2026 — the previous source cited B0G64JV6K4, the dead
+      // ASIN the rejection register retired on 31 July.
+      { label: "Amazon US listing (WYBOT C1)", url: "https://www.amazon.com/WYBOT-C1-Cordless-Inground-Professional/dp/B0GYWJMNWK" },
     ],
     evidence: "manufacturer_verified",
     confidence: "high",
