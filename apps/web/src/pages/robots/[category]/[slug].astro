@@ -13,6 +13,11 @@ import ReviewArticle from "../../../components/ReviewArticle.astro";
 import { reviewFor } from "../../../content/reviews";
 import { reviewSchema, articleSchema, webPageSchema } from "../../../lib/seo";
 import { FOUNDER } from "../../../content/team";
+import { deliveryLine, deliveryNote } from "../../../lib/delivery-wording";
+
+/* Today, as a date rather than an instant, resolved once for the whole render
+   so two offers on one page cannot straddle midnight and disagree. */
+const TODAY = new Date().toISOString().slice(0, 10);
 
 /* Review prose, loaded by slug. A product with a review renders the article;
    one without keeps the plain specification page, so adding a review is two
@@ -188,7 +193,15 @@ const reviewGraph = hasReview
       price: pub.priceShowable && offer.basePriceMinor !== null ? usd(offer.basePriceMinor) : null,
       checkedDate: offer.sourceCheckedDate ?? null,
       stock: pub.stockShowable ? titleCase(offer.stock.state.replace(/_/g, " ")) : null,
-      shipping: pub.shippingShowable ? (offer.shipping.sourceWording ?? null) : null,
+      /* NOT the captured wording. A delivery sentence rots faster than the
+         price it was read alongside — see lib/delivery-wording.ts for the
+         one this page shipped for four days. */
+      shipping: pub.shippingShowable
+        ? deliveryLine(offer.shipping.sourceWording, offer.sourceCheckedDate, TODAY)
+        : null,
+      shippingNote: pub.shippingShowable
+        ? deliveryNote(offer.shipping.sourceWording, offer.sourceCheckedDate, TODAY)
+        : null,
       redirectKey: pub.linkable ? (offer.redirectKey ?? null) : null,
     }))}
     siblings={siblings}
@@ -259,7 +272,7 @@ const reviewGraph = hasReview
                 {pub.priceShowable && offer.basePriceMinor !== null ? usd(offer.basePriceMinor) : <span class="muted">not confirmed</span>}
               </td>
               <td class="muted">{pub.stockShowable ? titleCase(offer.stock.state.replace(/_/g, " ")) : "—"}</td>
-              <td class="muted">{pub.shippingShowable && offer.shipping.sourceWording ? offer.shipping.sourceWording : "—"}</td>
+              <td class="muted">{(pub.shippingShowable && deliveryLine(offer.shipping.sourceWording, offer.sourceCheckedDate, TODAY)) || "—"}</td>
               <td class="muted" style="font-size:12px">
                 {offer.sourceCheckedDate ?? "—"}
                 {liveSource === "fallback_snapshot" && <div style="font-size:10px">last recorded check</div>}

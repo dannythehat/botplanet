@@ -28,7 +28,14 @@ export interface BuyOffer {
   /** ISO date the price was checked. */
   checkedDate: string | null;
   stock: string | null;
+  /**
+   * The DURABLE part of the delivery statement — see lib/delivery-wording.ts.
+   * Never the retailer's captured sentence: that carries a date and a
+   * countdown, both of which stop being true long before the price does.
+   */
   shipping: string | null;
+  /** Why the date is not here, when it has been removed. */
+  shippingNote?: string | null;
   /** /go redirect key. Without one there is no link. */
   redirectKey: string | null;
   /** True when this is the offer we would send someone to. */
@@ -88,10 +95,15 @@ const others = linkable.filter((o) => o !== lead);
             </p>
 
             <ul class="bp-buy__meta">
-              {lead.stock && <li>{lead.stock}</li>}
+              {/* The marker is coloured by the STATE, not by position in the
+                  list — "Only 1 left" and "In Stock" are different news and
+                  should not look identical. */}
+              {lead.stock && <li data-state={/in stock|available/i.test(lead.stock) ? "good" : "warn"}>{lead.stock}</li>}
               {lead.shipping && <li>{lead.shipping}</li>}
               {lead.checkedDate && <li>Price checked {lead.checkedDate}</li>}
             </ul>
+
+            {lead.shippingNote && <p class="bp-buy__shipnote">{lead.shippingNote}</p>}
 
             <a class="bp-buy__cta" href={`/go/${lead.redirectKey}`} rel="sponsored nofollow">
               <span>View on {lead.retailerName}</span>
@@ -144,13 +156,38 @@ const others = linkable.filter((o) => o !== lead);
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 28px 34px rgba(0, 0, 0, 0.55);
   }
 
+  /* The top hairline, with the glint left in it. Steel catches the sky at a
+     grazing angle and goes blue at the edges before it goes white in the
+     middle — pure white end to end is the one thing real metal never does. */
   .bp-buy__plate::before {
     content: "";
     position: absolute;
     inset: 0 0 auto 0;
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(246, 248, 252, 0.7) 30%, rgba(255,255,255,.95) 50%, rgba(246, 248, 252, 0.65) 70%, transparent);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(61, 142, 240, 0.55) 16%,
+      rgba(246, 248, 252, 0.7) 34%,
+      rgba(255, 255, 255, 0.95) 50%,
+      rgba(246, 248, 252, 0.65) 68%,
+      rgba(61, 142, 240, 0.4) 86%,
+      transparent
+    );
   }
+
+  /* A cold wash in the top-left corner, under the highlight rather than
+     beside it. At 6% it is not a colour anyone names — it is the reason the
+     plate stops looking like flat charcoal. */
+  .bp-buy__plate::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(90% 70% at 6% -12%, var(--cs-glint-wash), transparent 58%);
+  }
+
+  .bp-buy__plate > * { position: relative; z-index: 1; }
 
   .bp-buy__eyebrow {
     margin: 0 0 0.5rem;
@@ -207,7 +244,10 @@ const others = linkable.filter((o) => o !== lead);
     font-weight: 700;
     letter-spacing: -0.03em;
     line-height: 1;
-    background: linear-gradient(172deg, #ffffff 4%, #e8ecf3 46%, #a4acb9 100%);
+    /* Polished rather than painted: white at the top edge, cooling through a
+       faint blue in the middle band, dropping to shadowed steel at the base.
+       The blue stop is what stops it reading as plain grey text. */
+    background: linear-gradient(168deg, #ffffff 2%, #eaf1fb 34%, #b9c8de 62%, #93a0b1 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -243,6 +283,29 @@ const others = linkable.filter((o) => o !== lead);
     background: var(--cs-sheen);
   }
 
+  /* Two states, two colours, and a glow so the marker reads at 6px. Colour is
+     never the only signal — the words next to it say the same thing. */
+  .bp-buy__meta li[data-state="good"]::before {
+    background: var(--cs-good);
+    box-shadow: 0 0 6px var(--cs-good-wash);
+  }
+
+  .bp-buy__meta li[data-state="warn"]::before {
+    background: var(--cs-warn);
+    box-shadow: 0 0 6px rgba(217, 164, 65, 0.22);
+  }
+
+  .bp-buy__meta li[data-state="good"] { color: var(--text-secondary); }
+
+  /* Why the delivery date is not printed here. Set quietly — it is a caveat,
+     not a selling point. */
+  .bp-buy__shipnote {
+    margin: 0.6rem 0 0;
+    font-size: 0.8rem;
+    line-height: 1.5;
+    color: var(--text-quaternary);
+  }
+
   .bp-buy__cta {
     display: inline-flex;
     align-items: center;
@@ -254,18 +317,40 @@ const others = linkable.filter((o) => o !== lead);
     padding: 0 1.1rem 0 1.4rem;
     border-radius: 13px;
     border: 1px solid rgba(255, 255, 255, 0.7);
-    background: linear-gradient(178deg, #ffffff 0%, #e4e9f0 42%, #b9c1cd 100%);
+    /* Brushed steel with the sky in it — the middle band cools to a blue-grey
+       instead of a neutral one, which is the difference between a metal
+       button and a grey one. */
+    background: linear-gradient(178deg, #ffffff 0%, #e6ecf6 40%, #b4bfd0 100%);
     color: #0a0d11;
     font-weight: 800;
     font-size: 1rem;
     text-decoration: none;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.95), inset 0 -2px 0 rgba(0,0,0,.18), 0 12px 28px rgba(0, 0, 0, 0.5);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.95),
+      inset 0 -2px 0 rgba(0, 0, 0, 0.18),
+      0 0 0 1px rgba(61, 142, 240, 0.18),
+      0 12px 28px rgba(0, 0, 0, 0.5);
     transition: transform 0.18s ease, box-shadow 0.18s ease;
   }
 
   .bp-buy__cta svg { width: 1.1rem; height: 1.1rem; }
-  .bp-buy__cta:hover { transform: translateY(-2px); box-shadow: inset 0 1px 0 rgba(255,255,255,.95), inset 0 -2px 0 rgba(0,0,0,.18), 0 18px 38px rgba(0,0,0,.6); }
-  .bp-buy__cta:focus-visible { outline: 2px solid #dfe4ec; outline-offset: 3px; }
+  /* On hover the glint comes up rather than the button changing colour: the
+     cold rim brightens and throws a little of itself onto the plate behind. */
+  .bp-buy__cta:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.95),
+      inset 0 -2px 0 rgba(0, 0, 0, 0.18),
+      0 0 0 1px rgba(61, 142, 240, 0.55),
+      0 8px 24px rgba(61, 142, 240, 0.22),
+      0 18px 38px rgba(0, 0, 0, 0.6);
+  }
+
+  .bp-buy__cta:focus-visible { outline: 2px solid var(--cs-glint); outline-offset: 3px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bp-buy__cta, .bp-buy__cta:hover { transform: none; transition: none; }
+  }
 
   .bp-buy__others {
     display: grid;
