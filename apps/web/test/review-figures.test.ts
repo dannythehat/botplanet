@@ -112,3 +112,37 @@ describe("creatives held back for contradicting the review", () => {
     }
   });
 });
+
+describe("review video", () => {
+  /**
+   * The section renders only for a real YouTube watch URL, and prints the
+   * channel. Both matter: a reader should never be unclear whether they are
+   * about to watch us, the manufacturer, or a stranger.
+   */
+  it("points at a real YouTube URL with no share token", () => {
+    for (const review of Object.values(REVIEWS)) {
+      if (!review.video) continue;
+      expect(review.video.url).toMatch(
+        /^https:\/\/(www\.)?(youtube\.com\/watch\?v=|youtu\.be\/)[\w-]+$/,
+      );
+      // A share token identifies whoever sent the link, not the video.
+      expect(review.video.url).not.toMatch(/[?&](si|is)=/);
+    }
+  });
+
+  it("names the channel, so its provenance is never ambiguous", () => {
+    for (const review of Object.values(REVIEWS)) {
+      if (!review.video) continue;
+      expect(review.video.channel.length).toBeGreaterThan(1);
+      expect(review.video.title.length).toBeGreaterThan(10);
+    }
+  });
+
+  it("says plainly when the video is not ours", () => {
+    for (const review of Object.values(REVIEWS)) {
+      if (!review.video?.note) continue;
+      // Someone else's video must be labelled as someone else's.
+      expect(review.video.note.toLowerCase()).toMatch(/not ours|independent|third[- ]party/);
+    }
+  });
+});
