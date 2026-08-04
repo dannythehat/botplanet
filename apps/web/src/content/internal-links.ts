@@ -126,6 +126,18 @@ export const CATEGORY_ANCHORS: Record<string, InternalAnchor[]> = {
       why: "The word itself is the distinction most buyers get wrong — a skimmer is not a cleaner. Wherever it appears, it should be one click from the page that explains the difference.",
       status: "live",
     },
+    {
+      anchor: "Dolphin Proteus DX4 Plus",
+      href: "/robots/robotic-pool-cleaners/dolphin-proteus-dx4-plus/",
+      why: "The corded machine that does the ledges and steps. Named wherever a reader's pool shape is the deciding factor rather than its length.",
+      status: "live",
+    },
+    {
+      anchor: "sun ledge",
+      href: "/robots/robotic-pool-cleaners/dolphin-proteus-dx4-plus/",
+      why: "Sun ledges and steps are the shapes cheaper robots skip, and the Proteus review is where that is actually discussed.",
+      status: "live",
+    },
 
     /* ---- Declared now, linked when the page ships. ----
        A planned anchor renders as plain text, so none of these can 404. The

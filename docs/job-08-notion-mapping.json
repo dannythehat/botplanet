@@ -1,18 +1,18 @@
 {
   "generatedFor": "2026-07-31",
-  "launchProducts": 10,
+  "launchProducts": 11,
   "fieldsInRegistry": 31,
   "totals": {
-    "fieldRecords": 310,
-    "evidenceRecords": 175,
+    "fieldRecords": 341,
+    "evidenceRecords": 185,
     "stateCounts": {
-      "populated": 168,
-      "unknown": 9,
-      "not_applicable": 23,
-      "not_publicly_stated": 90,
+      "populated": 178,
+      "unknown": 19,
+      "not_applicable": 27,
+      "not_publicly_stated": 95,
       "conflicting": 2,
-      "suppressed": 17,
-      "pending_verification": 1
+      "suppressed": 18,
+      "pending_verification": 2
     },
     "reconciliation": {
       "agrees": 46,
@@ -24,8 +24,8 @@
       "newly_populated": 1,
       "not_applicable": 10
     },
-    "rawPercent": 59,
-    "weightedPercent": 66,
+    "rawPercent": 57,
+    "weightedPercent": 64,
     "conflicts": 4,
     "unresolvedConflicts": 2
   },
@@ -614,6 +614,110 @@
       "warrantyPublicWording": "Betta states a warranty of 1-YEAR WARRANTY.",
       "claimsPublishable": 11,
       "claimsBlocked": 5
+    },
+    {
+      "productId": "prod-dolphin-proteus-dx4-plus",
+      "slug": "dolphin-proteus-dx4-plus",
+      "url": "https://botplanet.io/robots/robotic-pool-cleaners/dolphin-proteus-dx4-plus/",
+      "path": "/robots/robotic-pool-cleaners/dolphin-proteus-dx4-plus/",
+      "canonicalName": "Dolphin Proteus DX4 Plus",
+      "brand": "Maytronics",
+      "modelNumber": "99996207-LESW",
+      "officialProductPage": null,
+      "manualUrl": null,
+      "manualDocumentId": null,
+      "manualRevision": null,
+      "modelIdentityNote": "Owner-supplied on 3 August 2026 and READ the same day, which upgraded this from the owner's word to published fields: Brand 'Dolphin', Manufacturer 'MAYTRONICS US, INC.', Model Name 'Proteus DX4 plus'. One thing conflicts and is recorded rather than resolved — the owner's research names SKU 99996290-DX4, while the listing's own Model Number field reads 99996207-LESW. Maytronics part numbers carry a market/retailer suffix, so both may be genuine for different channels; the listing's own figure is stored because that is the one that was read. Maytronics ships Proteus DX3, DX4 and DX4 Plus, and the title names the Plus.",
+      "verificationDate": "2026-08-03",
+      "sourcesUsed": 1,
+      "sourcesUnreadable": [],
+      "completenessRawPercent": 37,
+      "completenessWeightedPercent": 44,
+      "fieldsApplicable": 27,
+      "fieldsPublishable": 10,
+      "weightApplicable": 100,
+      "weightPublishable": 44,
+      "fieldStates": {
+        "populated": 10,
+        "unknown": 10,
+        "not_applicable": 4,
+        "not_publicly_stated": 5,
+        "conflicting": 0,
+        "suppressed": 1,
+        "pending_verification": 1
+      },
+      "fieldsNotPubliclyStated": [
+        "officialProductPageUrl",
+        "manualUrl",
+        "cableLengthFt",
+        "runtimeMins",
+        "filtrationMicrons"
+      ],
+      "fieldsSuppressed": [
+        "warranty"
+      ],
+      "fieldsConflicting": [],
+      "conflicts": [],
+      "editorialCorrections": [],
+      "publicationStates": {
+        "structurallyValid": true,
+        "factuallyEvidenced": true,
+        "currentlyVerified": true,
+        "safeForLimitedFactualUse": true,
+        "readyForReviewWriting": false,
+        "readyForComparison": false,
+        "readyForBotMatch": false
+      },
+      "publicationBlockers": [
+        "manufacturer identity/evidence weakness: no manufacturer-sourced value for this model",
+        "no accepted official manufacturer page",
+        "no accepted manual",
+        "weighted completeness 44% against a 65% floor",
+        "insufficient evidence coverage for review section(s): Where it fits, How it runs",
+        "comparison field unavailable: poolTypes",
+        "comparison field unavailable: runtimeMins",
+        "comparison field unavailable: warranty",
+        "BotMatch field unavailable: poolTypes",
+        "BotMatch field unavailable: appSupport"
+      ],
+      "launchStatus": "candidate_under_review",
+      "reviewGates": [
+        {
+          "gate": "weighted_completeness",
+          "passed": false,
+          "detail": "weighted completeness 44% against a 65% floor"
+        },
+        {
+          "gate": "model_identity",
+          "passed": false,
+          "detail": "no accepted official manufacturer page for this exact model"
+        },
+        {
+          "gate": "no_material_conflict",
+          "passed": true,
+          "detail": "no unresolved conflict on a material review field"
+        },
+        {
+          "gate": "review_sections_writable",
+          "passed": false,
+          "detail": "insufficient evidence coverage for review section(s): Where it fits, How it runs"
+        },
+        {
+          "gate": "no_speculation",
+          "passed": true,
+          "detail": "no review section rests on a suppressed value"
+        },
+        {
+          "gate": "corrections_identified",
+          "passed": true,
+          "detail": "every unsupported or conflicting stored value carries a written correction"
+        }
+      ],
+      "evidenceQualification": "dealer-sourced: no manufacturer page or manual was accepted for this model, so every value is attributed to the dealer that published it and none is presented as manufacturer-stated",
+      "warrantyStatus": "not_confirmed",
+      "warrantyPublicWording": "Manufacturer warranty term not confirmed",
+      "claimsPublishable": 6,
+      "claimsBlocked": 8
     },
     {
       "productId": "prod-dolphin-e10",

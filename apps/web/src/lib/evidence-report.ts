@@ -31,7 +31,10 @@ import {
   type PublicationStates,
 } from "../content/evidence/types";
 
-export const LAUNCH_PRODUCT_COUNT = 10;
+/* Eleven since 4 August 2026, when the Dolphin Proteus DX4 Plus was added to
+   the editorial layer. It had a D1 row and a live page before that; the repo
+   simply did not know about it, which is exactly what this constant is for. */
+export const LAUNCH_PRODUCT_COUNT = 11;
 
 /** The fields a like-for-like comparison table needs before it can be drawn. */
 export const COMPARISON_FIELDS = [

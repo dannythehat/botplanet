@@ -314,6 +314,7 @@ export const REDIRECT_KEYS: Record<string, string> = {
   "prod-dolphin-e10": "pool-dolphin-e10-amazon",
   "prod-dolphin-nautilus-cc-plus": "pool-dolphin-ccplus-amazon",
   "prod-dolphin-premier": "pool-dolphin-premier-amazon",
+  "prod-dolphin-proteus-dx4-plus": "pool-dolphin-proteus-dx4plus-amazon",
   "prod-polaris-freedom": "pool-polaris-freedom-amazon",
   "prod-wybot-c1": "pool-wybot-c1-amazon",
 };
