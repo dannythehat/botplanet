@@ -100,9 +100,19 @@ export function applyInternalLinks(
       const left = remaining.get(key) ?? 0;
       if (left <= 0) continue;
 
-      // \b does not work either side of a hyphen, so the boundary is spelled
-      // out: not preceded or followed by a word character or a hyphen.
-      const re = new RegExp(`(^|[^\\w-])(${escapeRe(a.anchor)})(?![\\w-])`, "i");
+      /* \b does not work either side of a hyphen, so the boundary is spelled
+         out: not preceded or followed by a word character or a hyphen.
+
+         SPACES IN THE ANCHOR MATCH ANY WHITESPACE, INCLUDING A NEWLINE.
+         Markdown keeps the author's line breaks inside a paragraph, so a
+         phrase that happened to wrap in the source arrives here as
+         "Dolphin\nNautilus CC Plus". Matching a literal space meant the
+         longer an anchor was, the more likely it silently failed to link —
+         and it failed invisibly, because the page still rendered perfectly.
+         Found on the live Polaris review, where the one cross-review link on
+         the page was missing for exactly this reason. */
+      const pattern = escapeRe(a.anchor).replace(/ /g, "\\s+");
+      const re = new RegExp(`(^|[^\\w-])(${pattern})(?![\\w-])`, "i");
       const hit = re.exec(result);
       if (!hit) continue;
 
