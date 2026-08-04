@@ -114,6 +114,18 @@ export const CATEGORY_ANCHORS: Record<string, InternalAnchor[]> = {
       why: "The app is only discussed at length on the Freedom review, so a mention elsewhere should reach it.",
       status: "live",
     },
+    {
+      anchor: "Betta SE Plus",
+      href: "/robots/robotic-pool-cleaners/betta-se-plus/",
+      why: "The surface skimmer. Every floor-robot review reaches a point where the reader's real complaint turns out to be what is floating on top, and this is where that goes.",
+      status: "live",
+    },
+    {
+      anchor: "skimmer",
+      href: "/robots/robotic-pool-cleaners/betta-se-plus/",
+      why: "The word itself is the distinction most buyers get wrong — a skimmer is not a cleaner. Wherever it appears, it should be one click from the page that explains the difference.",
+      status: "live",
+    },
 
     /* ---- Declared now, linked when the page ships. ----
        A planned anchor renders as plain text, so none of these can 404. The

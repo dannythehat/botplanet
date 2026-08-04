@@ -983,6 +983,130 @@
     ]
   },
   {
+    "source": "/media/reviews/betta-se-plus/hero.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-betta-se-plus-hero-webp-360",
+        "src": "/media/reviews/betta-se-plus/hero-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 21448,
+        "checksum": "sha256:762404b60a9e4f1289624d155bc6bcf2bb628ca78ee33cf7bbd0e61b05b059a4"
+      },
+      {
+        "id": "media-reviews-betta-se-plus-hero-webp-640",
+        "src": "/media/reviews/betta-se-plus/hero-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 54764,
+        "checksum": "sha256:7466d44e0e5a4f58141a92a9b399570ab46031166d2341df52a5da06bafb3fa5"
+      },
+      {
+        "id": "media-reviews-betta-se-plus-hero-webp-960",
+        "src": "/media/reviews/betta-se-plus/hero-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 107026,
+        "checksum": "sha256:ce27507c9b862c1a3fb112e90e9343219ade4bdda144bde089b62c24bfe6f7a4"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/betta-se-plus/twin-motors.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-betta-se-plus-twin-motors-webp-360",
+        "src": "/media/reviews/betta-se-plus/twin-motors-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 24676,
+        "checksum": "sha256:6de3d669cd2e628cf9731723329fb5e05412d8b4f228b8f267e5a157e32e4d26"
+      },
+      {
+        "id": "media-reviews-betta-se-plus-twin-motors-webp-640",
+        "src": "/media/reviews/betta-se-plus/twin-motors-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 65168,
+        "checksum": "sha256:c1ba2b2b0c4485cea9ecb6d105374f0840d0a34008b86a8bdf43386995f135a3"
+      },
+      {
+        "id": "media-reviews-betta-se-plus-twin-motors-webp-960",
+        "src": "/media/reviews/betta-se-plus/twin-motors-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 125630,
+        "checksum": "sha256:bdf09ac858a7a0943662f98695e236759fe80871a7ff235bd46d5c269eb537bc"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/betta-se-plus/sensors.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-betta-se-plus-sensors-webp-360",
+        "src": "/media/reviews/betta-se-plus/sensors-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 20886,
+        "checksum": "sha256:6bac25db6e6f0f8c356aacbd0fdcb0b38364b773140cca2e9a26fc97de3b4a3a"
+      },
+      {
+        "id": "media-reviews-betta-se-plus-sensors-webp-640",
+        "src": "/media/reviews/betta-se-plus/sensors-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 53936,
+        "checksum": "sha256:df923d6a3673e77707bb4dfb57de3426657c53afa5a4ae5a0d5729a96261f61e"
+      },
+      {
+        "id": "media-reviews-betta-se-plus-sensors-webp-960",
+        "src": "/media/reviews/betta-se-plus/sensors-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 103266,
+        "checksum": "sha256:e279dd1032d51fb9c1a2f1d5a44f9bb5d9bb4ac2f8e0baf7408d0dad0791be97"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/betta-se-plus/debris-basket.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-betta-se-plus-debris-basket-webp-360",
+        "src": "/media/reviews/betta-se-plus/debris-basket-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 21084,
+        "checksum": "sha256:d730a9e1733cb584eb7370102708de6cbdd6930992fb1ee9440770a358fe5130"
+      },
+      {
+        "id": "media-reviews-betta-se-plus-debris-basket-webp-640",
+        "src": "/media/reviews/betta-se-plus/debris-basket-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 54212,
+        "checksum": "sha256:944376163b423df086af12f47f6241430dbdafbe78d9f4c121f36000a5017f81"
+      },
+      {
+        "id": "media-reviews-betta-se-plus-debris-basket-webp-960",
+        "src": "/media/reviews/betta-se-plus/debris-basket-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 101876,
+        "checksum": "sha256:f8444a33e5bae05405e9781a504584401a4efd287c7ccac5a152edb7f0474565"
+      }
+    ]
+  },
+  {
     "source": "/media/products/dolphin-nautilus-cc-plus.webp",
     "sourceWidth": 1122,
     "sourceHeight": 1402,

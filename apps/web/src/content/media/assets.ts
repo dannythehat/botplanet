@@ -583,12 +583,24 @@ export const OWNER_PRODUCT_ARTWORK: MediaAssetRecord[] = OWNER_ARTWORK.map((a): 
  * Owner-created figures that illustrate a review, keyed to the section they
  * belong beside.
  *
- * THE RULE THAT DECIDES WHETHER ONE GETS REGISTERED. These creatives carry
- * headline text set into the image, and that text makes claims. A figure may
- * only appear on a review that agrees with it. Three of the seven supplied for
- * this review were held back for exactly that reason, and the reason is
- * recorded in REVIEW_FIGURES_WITHHELD below rather than left as a gap someone
- * later fills by accident.
+ * THE RULE, AS THE OWNER SET IT ON 4 AUGUST 2026. These creatives carry
+ * headline text set into the image, and that text makes claims. Where a claim
+ * does not match the manufacturer's own sources, THE DEFAULT IS TO PUBLISH THE
+ * FIGURE AND STATE THE CORRECTION IN ITS CAPTION — not to withhold it. A
+ * reader who sees a docking station and reads "no dock is included" underneath
+ * has been told the truth and kept the picture. A reader who sees neither has
+ * been given less.
+ *
+ * BRANDING IS NOT A REASON TO WITHHOLD, AND NEVER WAS. These are BotPlanet
+ * creatives. The BotPlanet mark appearing on the machine in them is the
+ * owner's own design decision about the owner's own artwork, and an earlier
+ * version of this file treated it as a misrepresentation. That was wrong and
+ * the objection is deleted rather than softened.
+ *
+ * REVIEW_FIGURES_WITHHELD is now only for a creative whose headline directly
+ * contradicts the review's central finding — where publishing it would state
+ * in pixels the opposite of what the page states in words, and no caption can
+ * hold both. That is a narrow case, and it is meant to stay narrow.
  *
  * Like the product creatives, the claims printed inside carry no evidence
  * weight: a specification still needs its own evidence record.
@@ -704,6 +716,52 @@ const REVIEW_FIGURES: ReviewFigure[] = [
     height: 1254,
     scene:
       "a phone running the iAquaLink app showing a two hour thirty floor and wall cycle and a full battery, beside the cleaner at a lit poolside",
+  },
+
+  /* ---- Betta SE Plus ---- */
+  {
+    slug: "hero",
+    productSlug: "betta-se-plus",
+    type: "product_in_use",
+    file: "hero.webp",
+    checksum: "sha256:5fb5ca3a267fb34f6b10e8c36a4d4f1405977fb052b1e1864e39c9601d475e83",
+    width: 1254,
+    height: 1254,
+    scene:
+      "the silver solar skimmer floating on a sunlit pool among fallen leaves, with its solar panel facing up",
+  },
+  {
+    slug: "twin-motors",
+    productSlug: "betta-se-plus",
+    type: "product_in_use",
+    file: "twin-motors.webp",
+    checksum: "sha256:f58d95ccb170f386881acc70c654d1fbadfeced3a52dbea1a181c69ba4072a0c",
+    width: 1254,
+    height: 1254,
+    scene:
+      "the skimmer at a poolside beside a wall-mounted charger and a free-standing solar panel, above three panels on motors, solar charging and shallow water",
+  },
+  {
+    slug: "sensors",
+    productSlug: "betta-se-plus",
+    type: "product_in_use",
+    file: "sensors.webp",
+    checksum: "sha256:406495e30ccf8e52f859c594adeaa8429f51eaad5fe01908463e2c7cf8bb1923",
+    width: 1254,
+    height: 1254,
+    scene:
+      "the skimmer on a dark pool with sensor arcs drawn around it, above three panels on obstacle detection, edge navigation and the UV-resistant shell",
+  },
+  {
+    slug: "debris-basket",
+    productSlug: "betta-se-plus",
+    type: "filtration_detail",
+    file: "debris-basket.webp",
+    checksum: "sha256:521af3f70232a084dada6b2f0ef73014162f198804494e9aac0cbb4dc42998ca",
+    width: 1254,
+    height: 1254,
+    scene:
+      "the skimmer with its top cover raised showing a basket full of leaves, above a three-step sequence ending with the basket being emptied into a bin",
   },
 ];
 

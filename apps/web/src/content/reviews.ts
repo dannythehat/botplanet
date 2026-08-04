@@ -466,6 +466,186 @@ export const REVIEWS: Record<string, ReviewContent> = {
       "TYPE EB37 is shared with the FREEDOM Plus, so check the SKU rather than the chassis code.",
     lastReviewed: "2026-08-04",
   },
+
+  "betta-se-plus": {
+    slug: "betta-se-plus",
+    categorySlug: "robotic-pool-cleaners",
+    eyebrow: "Robotic pool skimmer review",
+    title: "Betta SE Plus solar skimmer review",
+    seoTitle: "Betta SE Plus Solar Robotic Pool Skimmer Review | BotPlanet",
+    metaDescription:
+      "An honest review of the Betta SE Plus solar pool skimmer: 30 hours of runtime, a 200 micron " +
+      "basket, and the one thing it will never do — clean your floor.",
+    verdict:
+      "Not a pool cleaner — a skimmer, and the difference is the whole review. It floats, runs on " +
+      "sunlight, and takes leaves and pollen off the surface before they sink. It will never touch " +
+      "your floor, your walls or your waterline, and Betta says so plainly.",
+    bestFor:
+      "A pool under trees, especially alongside a floor robot: debris caught on the surface never " +
+      "sinks, never stains and never has to be vacuumed off the bottom later.",
+    notIdealFor:
+      "The floor or the waterline is your actual complaint, your pool is bigger than about " +
+      "40 by 60 ft, or it sits in permanent shade.",
+    image: {
+      src: "/media/reviews/betta-se-plus/hero.webp",
+      alt:
+        "BotPlanet artwork for the Betta SE Plus solar robotic pool skimmer, shown floating on a " +
+        "sunlit pool among fallen leaves.",
+    },
+    figures: [
+      {
+        afterHeading: "Runtime, and the number that sounds like a typo",
+        src: "/media/reviews/betta-se-plus/twin-motors.webp",
+        caption:
+          "Twin Salt Chlorine Tolerant motors and dual charging — solar, with a mains adapter for a bad week. The dock shown here is illustrative: Betta does not sell one, and the machine charges afloat or on the adapter.",
+      },
+      {
+        afterHeading: "Navigation, and what \"ultrasonic radar\" is doing here",
+        src: "/media/reviews/betta-se-plus/sensors.webp",
+        caption:
+          "Ultrasonic radar for obstacle detection and a UV-resistant shell — both Betta's own wording, and both matter more on a machine that lives in full sun.",
+      },
+      {
+        afterHeading: "Filtration, and the one number Betta does publish",
+        src: "/media/reviews/betta-se-plus/debris-basket.webp",
+        caption:
+          "The 200 micron basket lifts out by its handle. The docking station in this illustration is not part of the product — there is no dock to buy.",
+      },
+    ],
+    /* Seller's own footage, hosted on Amazon — the URL carries
+       amzn1.ive.seller.video. Share token stripped. */
+    video: {
+      url: "https://www.amazon.com/vdp/01ddc8879b6d4846ba5ea6935348ec77?aci=amzn1.ive.seller.video.01ddc8879b6d4846ba5ea6935348ec77&product=B0CVMQ3XBX",
+      title: "Betta Solar-Powered Smart Robotic Pool Skimmer",
+      channel: "Betta",
+      source: "seller",
+      note:
+        "Betta's own video, hosted on Amazon. Worth two minutes because a floating skimmer is hard to picture from a specification — you can see how it sits and how it turns. It is marketing rather than testing, and nothing on this page is evidenced by it.",
+    },
+    folds: [
+      /* Runtime deliberately NOT folded: 30 hours on a charge is one of the two
+         reasons anyone buys this machine, so hiding it behind a door would be
+         collapsing the argument rather than the detail. */
+      {
+        id: "filtration-and-the-one-number-betta-does-publish",
+        teaser: "200 microns — and why coarse is the right answer here.",
+      },
+      {
+        id: "navigation-and-what-ultrasonic-radar-is-doing-here",
+        teaser: "Obstacle detection, a UV-resistant shell, and a 3.5 inch minimum.",
+      },
+      {
+        id: "what-is-in-the-box-and-the-warranty",
+        teaser: "A one-year warranty stated twice — and no docking station.",
+      },
+      {
+        id: "what-we-cannot-tell-you",
+        teaser: "Seven things Betta does not publish, listed rather than glossed.",
+      },
+    ],
+    facts: [
+      { label: "Power", value: "Solar + adapter" },
+      { label: "Cleans", value: "Surface only" },
+      { label: "Max pool", value: "40 × 60 ft" },
+      { label: "Runtime", value: "30+ hours" },
+    ],
+    specGroups: [
+      {
+        heading: "Power and runtime",
+        rows: [
+          { label: "Power type", value: "Cordless, solar with dual charging" },
+          {
+            label: "Runtime",
+            value: "30+ hours continuous",
+            note: "A small motor moving a floating hull, not a heavy machine climbing a wall.",
+          },
+          { label: "Charge — solar", value: "5 to 6 hours in direct sunlight" },
+          {
+            label: "Charge — adapter",
+            value: "3.5 hours",
+            note: "Betta ships a mains adapter because solar alone does not survive a bad week.",
+          },
+          { label: "Battery capacity", value: null },
+          { label: "Docking station", value: "None — the machine charges afloat or on the adapter" },
+        ],
+      },
+      {
+        heading: "Pool compatibility",
+        rows: [
+          { label: "Installation", value: "Above-ground and in-ground" },
+          { label: "Max pool size", value: "40 × 60 ft, approx. 2,400 sq ft" },
+          {
+            label: "Minimum water depth",
+            value: "3.5 in",
+            note: "Relevant for a shallow tanning ledge.",
+          },
+          {
+            label: "Water chemistry",
+            value: "Fresh or salt up to 5,000 ppm",
+            note: "The twin motors are described by Betta as Salt Chlorine Tolerant.",
+          },
+        ],
+      },
+      {
+        heading: "Cleaning",
+        rows: [
+          {
+            label: "Surfaces",
+            value: "Pool surface only",
+            note: "Leaves, dust, pollen, insects and pet hair. Not the floor, not the walls, not the waterline.",
+          },
+          { label: "Modes", value: "Smart auto-cleaning, mode switching by remote" },
+          { label: "Navigation", value: "Ultrasonic radar obstacle detection" },
+          { label: "Shell", value: "UV-resistant coating" },
+          { label: "Suction rate", value: null },
+        ],
+      },
+      {
+        heading: "Filtration",
+        rows: [
+          { label: "Filter", value: "Fine-mesh debris basket with a top handle" },
+          {
+            label: "Micron rating",
+            value: "200 um",
+            note: "Coarse on purpose. This basket catches leaves and insects; a finer mesh would clog under a tree.",
+          },
+          { label: "Basket volume", value: null },
+        ],
+      },
+      {
+        heading: "Control and support",
+        rows: [
+          { label: "Remote", value: "Wireless remote included" },
+          {
+            label: "App",
+            value: null,
+            note: "Betta names a remote and never mentions an app either way, so 'no app' is our inference rather than their statement.",
+          },
+          { label: "Wi-Fi", value: null },
+          {
+            label: "Warranty",
+            value: "1 year",
+            note: "Stated on the product page and again in the manual — two sources agreeing.",
+          },
+        ],
+      },
+      {
+        heading: "Handling",
+        rows: [
+          { label: "Weight", value: null },
+          { label: "Dimensions", value: null },
+          { label: "In the box", value: null, note: "A remote is named; a full contents list is not published." },
+        ],
+      },
+    ],
+    skuNote:
+      "Specifications come from Betta's own product page and the Betta SE Plus user manual, " +
+      "accessed 31 July 2026, with the twin-motor, ultrasonic radar, UV-coating and 3.5 inch " +
+      "minimum-depth figures read from the manufacturer's Amazon listing on 4 August 2026. Betta " +
+      "prints no SKU or part number on either the product page or the manual. The Betta SE is a " +
+      "different machine with its own manual — check the listing names the SE Plus.",
+    lastReviewed: "2026-08-04",
+  },
 };
 
 export function reviewFor(slug: string | undefined): ReviewContent | undefined {
