@@ -19,9 +19,31 @@ import type { ProviderSkipReason } from "./amazon-provider";
 /** The monthly ceiling, set below the plan's 250 so discovery is never starved. */
 export const MONTHLY_CREDIT_CEILING = 200;
 
-/** Days between scheduled reads. */
-export const WEEKLY_INTERVAL_DAYS = 7;
+/**
+ * Days between scheduled reads.
+ *
+ * THE ORIGINAL SEVEN WAS ARITHMETIC FROM A CATALOGUE WE DO NOT HAVE. The note
+ * above reasons about "refreshing ten products daily is 300", and concludes
+ * weekly. But the register holds eight products and the month's actual spend
+ * on 4 August 2026 was EIGHT credits out of 200. The budget was never the
+ * constraint; the interval was, and it was set defensively against a cost that
+ * never materialised.
+ *
+ * The cost of that slack showed up on the live site: the Nautilus was read on
+ * 31 July at $749.00 and was still showing that figure on 4 August, when the
+ * listing said $849.00 — with the next scheduled read not due until the 7th.
+ * A price a reader acts on should not be able to drift for a week unnoticed.
+ *
+ * Three days caps the worst case at three and costs roughly 80 credits a
+ * month for the current catalogue. `monthlyCost` is asserted against the
+ * ceiling in the test suite, so growing the catalogue trips a test rather
+ * than quietly exhausting the allowance mid-month.
+ */
+export const CATALOGUE_INTERVAL_DAYS = 3;
 export const DAILY_INTERVAL_DAYS = 1;
+
+/** @deprecated Kept as an alias so existing callers and tests keep working. */
+export const WEEKLY_INTERVAL_DAYS = CATALOGUE_INTERVAL_DAYS;
 
 /**
  * The only four reasons a product may be read daily rather than weekly.
