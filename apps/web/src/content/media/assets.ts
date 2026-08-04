@@ -947,6 +947,52 @@ const REVIEW_FIGURES: ReviewFigure[] = [
     scene:
       "the cleaner lifted dripping from an infinity pool on the included hook and pole, with feature panels beneath",
   },
+
+  /* ---- Aiper Scuba S1 ---- */
+  {
+    slug: "hero",
+    productSlug: "aiper-scuba-s1",
+    type: "product_in_use",
+    file: "hero.webp",
+    checksum: "sha256:06956efa784e4feaf74788e81ca1ac640da5e2a03c466859abbbfa390f770168",
+    width: 1402,
+    height: 1122,
+    scene:
+      "the grey and black tracked cleaner at the edge of a night pool beside a phone showing the Aiper app with floor, wall, waterline and all modes and a running countdown",
+  },
+  {
+    slug: "four-zone",
+    productSlug: "aiper-scuba-s1",
+    type: "product_in_use",
+    file: "four-zone.webp",
+    checksum: "sha256:533aab1a96f58ab716af2a2aa99896767accb8afa0121bea680d9047ab444cc9",
+    width: 1254,
+    height: 1254,
+    scene:
+      "a daylight pool seen from above with the cleaner shown working four labelled zones — shallow areas, waterline, walls and floors — while a woman and a dog rest poolside",
+  },
+  {
+    slug: "filtration",
+    productSlug: "aiper-scuba-s1",
+    type: "filtration_detail",
+    file: "filtration.webp",
+    checksum: "sha256:556a3fbe627798de01c6467d7580ba911ee4cd3287b571ea89db85822ad16dc2",
+    width: 1254,
+    height: 1254,
+    scene:
+      "the dark 180 micron filter basket and the white 3 micron ultra-fine basket side by side underwater, with debris icons from leaves to algae beneath",
+  },
+  {
+    slug: "modes",
+    productSlug: "aiper-scuba-s1",
+    type: "app_screenshot",
+    file: "modes.webp",
+    checksum: "sha256:0a5ee1d05acf23f35cff63378456bc8280a0c1f0280240a7c167f292c5f61502",
+    width: 1254,
+    height: 1254,
+    scene:
+      "the cleaner on rippling night water beside five labelled mode buttons — wall, eco, auto, floor and schedule — above a weekly day picker",
+  },
 ];
 
 /**

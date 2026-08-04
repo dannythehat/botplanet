@@ -89,13 +89,19 @@ export const productRows: (typeof products.$inferInsert)[] = [
   {
     id: "prod-aiper-scuba-s1",
     slug: "aiper-scuba-s1",
+    /* cleans CORRECTED 4 August 2026 to include the waterline. Aiper's own
+       page states "4-Zone Full Coverage Cleaning — Shallow Areas, Waterline,
+       Walls, Floors", and the verification record has held that since 31
+       July. The seed and D1 said floor+walls, which is the Nautilus bug in
+       mirror image: BotMatch would fail to offer this machine to the one
+       buyer whose complaint is the tide-mark. Corrected in both. */
     brandId: "brand-aiper",
     categoryId: "cat-pool-cleaners",
     productClass: "full_cleaner",
     name: "Aiper Scuba S1",
     model: "Scuba S1",
     environments: ["above_ground", "in_ground"],
-    cleans: ["floor", "walls"],
+    cleans: ["floor", "walls", "waterline"],
     powerType: "cordless",
     priceTier: "mid",
     // Aiper states 1600 sq.ft (150m2), 50ft (15m) in length.

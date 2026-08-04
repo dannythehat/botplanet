@@ -139,6 +139,12 @@ export const CATEGORY_ANCHORS: Record<string, InternalAnchor[]> = {
       status: "live",
     },
     {
+      anchor: "Aiper Scuba S1",
+      href: "/robots/robotic-pool-cleaners/aiper-scuba-s1/",
+      why: "The mid-range all-rounder, and the page where the 12-inch shallow-ledge claim is actually discussed.",
+      status: "live",
+    },
+    {
       anchor: "Aiper Seagull SE",
       href: "/robots/robotic-pool-cleaners/aiper-seagull-se/",
       why: "The entry point. Named wherever a review tells a small above-ground pool owner they are on the wrong page.",

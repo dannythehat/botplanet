@@ -3,24 +3,24 @@
   "launchProducts": 12,
   "position": "No third-party product photograph is ingested. The Amazon Associates route is a potential lawful source, but the account's ownership and current approval are unverified, and obtaining Program Content lawfully would also require Creators API credentials that this environment does not hold; the programme forbids scraping, guessed URLs and unapproved caching. No launch-brand manufacturer publishes a press kit granting third-party image use. Until one of those changes, no product carries a photograph. Five products are shown in original BotPlanet creatives, which we own outright and which do show the machine but carry our branding and headline text set into the image — they illustrate, they are not evidence, and they never enter Product structured data. Every other product renders an original BotPlanet branded placeholder that names the exact model and does not depict it.",
   "totals": {
-    "assets": 74,
-    "productAssets": 49,
-    "originalAssets": 64,
+    "assets": 78,
+    "productAssets": 53,
+    "originalAssets": 68,
     "placeholders": 10,
-    "locallyStored": 74,
+    "locallyStored": 78,
     "remotelyServed": 0,
     "withdrawn": 0,
     "exactModelConfirmed": 12,
     "publicSafe": 12,
     "heroReady": 11,
     "fullSetReady": 0,
-    "derivatives": 169,
-    "altApproved": 60,
+    "derivatives": 181,
+    "altApproved": 64,
     "altDecorative": 14,
     "altMissing": 0,
     "altRejected": 0,
     "schemaProductEligible": 0,
-    "schemaOpenGraphEligible": 63
+    "schemaOpenGraphEligible": 67
   },
   "rows": [
     {
@@ -622,7 +622,12 @@
       "canonicalUrl": "https://botplanet.io/robots/robotic-pool-cleaners/aiper-scuba-s1/",
       "exactModel": "Aiper Scuba S1 Cordless Robotic Pool Cleaner",
       "heroAssetId": "art-aiper-scuba-s1",
-      "supportingAssetIds": [],
+      "supportingAssetIds": [
+        "fig-aiper-scuba-s1-hero",
+        "fig-aiper-scuba-s1-four-zone",
+        "fig-aiper-scuba-s1-filtration",
+        "fig-aiper-scuba-s1-modes"
+      ],
       "renderedAssetId": "art-aiper-scuba-s1",
       "renderedIsPlaceholder": false,
       "imageSource": "original_botplanet — BotPlanet",
@@ -659,7 +664,7 @@
         "rightsRecordComplete": true,
         "exactModelConfirmed": true,
         "heroReady": true,
-        "supportingImagesReady": false,
+        "supportingImagesReady": true,
         "responsiveVariantsReady": true,
         "altTextApproved": true,
         "schemaEligible": false,
@@ -668,7 +673,6 @@
       },
       "imageReadinessStatus": "public_safe_placeholder_only",
       "blockers": [
-        "no supporting product imagery",
         "no image eligible for Product structured data",
         "The CJ programme is live and fully readable, so this is no longer a permission problem. It is an upstream supply problem: Aiper's CJ Product Catalog contains zero products, and all twelve approved creatives are seasonal campaign banners and text links. Nothing in CJ depicts this model. The S1 and S1 Pro are separate models with no published SKUs, so only exact-S1 imagery may be attached and Scuba X1 media must never be mixed in."
       ]
