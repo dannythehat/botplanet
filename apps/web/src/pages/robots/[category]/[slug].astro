@@ -17,7 +17,7 @@ import { FOUNDER } from "../../../content/team";
 /* Review prose, loaded by slug. A product with a review renders the article;
    one without keeps the plain specification page, so adding a review is two
    files and no change here. */
-const REVIEW_PROSE = import.meta.glob<{ compiledContent: () => string }>("../../../reviews/*.md", { eager: true });
+const REVIEW_PROSE = import.meta.glob<{ compiledContent: () => string | Promise<string> }>("../../../reviews/*.md", { eager: true });
 
 const { category, slug } = Astro.params;
 const db = getDb(Astro.locals);
@@ -93,9 +93,23 @@ const crumbs = breadcrumbsFor(Astro.url.pathname, product.name);
 
 const review = reviewFor(product.slug);
 const proseModule = review ? REVIEW_PROSE[`../../../reviews/${product.slug}.md`] : undefined;
+
 /* A review entry with no prose file is a half-built page; render the plain
-   specification page rather than an article with a hole where the body goes. */
-const reviewHtml = proseModule ? proseModule.compiledContent() : null;
+   specification page rather than an article with a hole where the body goes.
+ *
+ * `await` because compiledContent() is async in Astro 5 — awaiting a plain
+ * string is harmless, so this is right either way. The try/catch is the real
+ * lesson: the first version threw here and the response simply stopped after
+ * the breadcrumbs. A blank page is far worse than a plain one, so a failure
+ * now falls back to the specification page and says so in the log. */
+let reviewHtml: string | null = null;
+if (proseModule) {
+  try {
+    reviewHtml = await proseModule.compiledContent();
+  } catch (err) {
+    console.error(`[review] could not compile prose for ${product.slug}; falling back to the plain page`, err);
+  }
+}
 const hasReview = Boolean(review && reviewHtml);
 
 /* Review + Article, and no rating anywhere in it — see reviewSchema for why a
