@@ -209,6 +209,17 @@ const bleed = productId ? Boolean(resolveImage(productId, "listing_card")?.bleed
     backdrop-filter: blur(8px);
   }
 
+  /* A blur costs the same whether it is 400px wide or 40px, and a grid page
+     puts two of these on every card. Below 900px they go opaque: over product
+     artwork at phone size the difference is not visible, and the saving is. */
+  @media (max-width: 899px) {
+    .pcard__class,
+    .pcard__save {
+      background: rgba(6, 6, 9, 0.9);
+      backdrop-filter: none;
+    }
+  }
+
   /* ---- Body ---- */
   .pcard__body {
     display: flex;

@@ -121,6 +121,14 @@ const { productCount, fromPrice } = Astro.props;
     .scene__subject { animation: none; }
   }
 
+  /* An animation that never ends keeps the compositor awake for as long as the
+     tab is open, whether or not the hero is still on screen. On a desktop that
+     is a rounding error; on a phone it is a share of the frame budget for a
+     10px drift nobody is looking at while they read. */
+  @media (max-width: 767px) {
+    .scene__subject { animation: none; }
+  }
+
   /* ---- Interface fragments ---- */
   .frag {
     position: absolute;
@@ -159,6 +167,11 @@ const { productCount, fromPrice } = Astro.props;
   @media (max-width: 900px) {
     .scene { aspect-ratio: 4 / 3; }
     .frag--c { display: none; }
+
+    /* Opaque instead of blurred. These sit over a dark gradient, so the blur
+       was reading almost nothing anyway — it was paying for a sample of the
+       layer beneath and producing a flat panel either way. */
+    .frag { background: rgba(8, 8, 12, 0.92); backdrop-filter: none; }
   }
 
   @media (max-width: 520px) {

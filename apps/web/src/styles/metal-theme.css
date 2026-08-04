@@ -33,13 +33,33 @@
   --shadow-lg: 0 34px 90px rgba(0, 0, 0, 0.72);
 }
 
-html,
-body {
+/* NO background-attachment: fixed, AND NO GRADIENT ON THE SCROLLING BODY.
+   Both used to be here. `fixed` stops the browser from scrolling the painted
+   layer, so every scroll frame repaints the full-page gradient — on a review
+   page 21,000px tall that was the single largest raster on the scroll path.
+   Dropping `fixed` alone would only trade it for a gradient stretched over
+   21,000px, which is barely better.
+
+   So the body is a flat fill (free to scroll) and every gradient moved into
+   the fixed pseudo-element below, which the compositor already keeps as its
+   own layer. Identical look, one layer instead of one repaint per frame. */
+html { background: #030405; }
+
+/* Deliberately transparent, not the same flat fill. A negative-z-index child
+   of <body> paints above the canvas but *below* body's own background box, so
+   giving body a background here would bury both pseudo-elements. */
+body { background: transparent; }
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -2;
   background:
     radial-gradient(circle at 18% -10%, rgba(218, 223, 229, 0.08), transparent 31rem),
     radial-gradient(circle at 85% 7%, rgba(112, 119, 129, 0.07), transparent 26rem),
     linear-gradient(180deg, #07090b 0%, #020304 42%, #050607 100%);
-  background-attachment: fixed;
 }
 
 body::before {
