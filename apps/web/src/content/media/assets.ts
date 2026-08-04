@@ -809,6 +809,52 @@ const REVIEW_FIGURES: ReviewFigure[] = [
     scene:
       "a hand lifting the filter cartridge out through the opened top lid of the machine at the poolside",
   },
+
+  /* ---- Aiper Scuba V3 AI Vision ---- */
+  {
+    slug: "hero",
+    productSlug: "aiper-scuba-v3-ai-vision",
+    type: "product_in_use",
+    file: "hero.webp",
+    checksum: "sha256:5eff3711d840b749d6b3d20b33dd7091e5f9f0f13b2081ff4ba267574c592fac",
+    width: 1254,
+    height: 1254,
+    scene:
+      "the black tracked cleaner with a teal vent standing on stone beside a night pool, next to a phone showing the Aiper app, above five feature panels",
+  },
+  {
+    slug: "ai-patrol",
+    productSlug: "aiper-scuba-v3-ai-vision",
+    type: "product_in_use",
+    file: "ai-patrol.webp",
+    checksum: "sha256:e6919910f0c44b2f42920ffe73ae88c02440fff4ac65313d7e9a828b1035e1c2",
+    width: 1254,
+    height: 1254,
+    scene:
+      "the cleaner head-on with three headlight beams sweeping a gridded pool floor, with leaves, sand, twigs and pebbles picked out in target frames around it",
+  },
+  {
+    slug: "carefree",
+    productSlug: "aiper-scuba-v3-ai-vision",
+    type: "app_screenshot",
+    file: "carefree.webp",
+    checksum: "sha256:9c01cb4b112ebb3150231576f454f7da96dd07732015a9bce21822340680976a",
+    width: 1254,
+    height: 1254,
+    scene:
+      "the cleaner at a daylight poolside above a cutaway pool diagram showing its cleaning path, beside a phone running the Aiper app in AI Navium mode",
+  },
+  {
+    slug: "filtration",
+    productSlug: "aiper-scuba-v3-ai-vision",
+    type: "filtration_detail",
+    file: "filtration.webp",
+    checksum: "sha256:fd5f8fd9bc3f627c73c2c6ad0e4f923387bec1661c3288c4bb98ba362b06bd9a",
+    width: 1254,
+    height: 1254,
+    scene:
+      "an exploded view of the white filter basket inside the dark debris basket, with the mesh layers fanned out and the 3 micron and 180 micron layers labelled",
+  },
 ];
 
 /**
@@ -979,6 +1025,20 @@ const HAS_OWNER_ARTWORK =
   " BotPlanet's own artwork now fills this product's card; that is a creative, not photography, and does not clear this blocker.";
 
 export const ACQUISITION_BLOCKERS: AcquisitionBlocker[] = [
+  {
+    productId: "prod-aiper-scuba-v3-ai-vision",
+    bestAvailableTier: "affiliate_media_feed" as const,
+    checked: [
+      "aiper.com/us/aiper-scuba-v3 — read 4 August 2026; product photography present, no media library or press-kit licence published",
+      "Amazon US listing B0GG97427D — read 4 August 2026; retailer listing, not a licensable media source",
+      "Aiper US affiliate programme — direct programme exists (hasDirectAffiliate: true in the brand record) but no media-feed credentials are held",
+    ],
+    blocker:
+      "NO LICENSED PHOTOGRAPHY ROUTE IS OPEN YET. Aiper runs a direct affiliate programme, which is the plausible lawful source for product imagery, but BotPlanet holds no approved membership or feed credentials for it. Aiper's own site publishes photography with no stated reuse licence, and the Amazon listing may not be scraped under Associates rules. The product currently renders owner-created BotPlanet creatives and a branded placeholder, not photography.",
+    unblockAction:
+      "Apply to Aiper's direct affiliate programme and request media-kit access for the Scuba V3. On approval, store the feed credentials as a Worker secret and ingest through the existing registry — matching on the exact name 'Scuba V3', because Aiper publishes no SKUs and the S1, X1 and X1 Pro Max separate only by name.",
+    owner: "manufacturer" as const,
+  },
   {
     productId: "prod-dolphin-proteus-dx4-plus",
     bestAvailableTier: "manufacturer_press_kit" as const,

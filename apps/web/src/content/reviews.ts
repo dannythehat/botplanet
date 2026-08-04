@@ -647,6 +647,170 @@ export const REVIEWS: Record<string, ReviewContent> = {
     lastReviewed: "2026-08-04",
   },
 
+  "aiper-scuba-v3-ai-vision": {
+    slug: "aiper-scuba-v3-ai-vision",
+    categorySlug: "robotic-pool-cleaners",
+    eyebrow: "Robotic pool cleaner review",
+    title: "Aiper Scuba V3 AI Vision review",
+    seoTitle: "Aiper Scuba V3 AI Vision Review | BotPlanet",
+    metaDescription:
+      "An honest review of the Aiper Scuba V3 AI Vision: what the camera actually does, what " +
+      "\"7 days on one charge\" really means, the 3 micron filter claim, and the privacy question " +
+      "nobody else is asking.",
+    verdict:
+      "The first robot in our catalogue that looks at your pool: a camera recognises debris and " +
+      "steers at it instead of sweeping blind. Cordless, 18.1 lb, waterline coverage, and the " +
+      "finest filter rating we list — with headline numbers that are Aiper's own benchmarks, and a " +
+      "camera in your water that deserves more published detail than it gets.",
+    bestFor:
+      "An in-ground pool that collects real debris — leaves, sand, twigs — where you want the " +
+      "robot deciding for itself where to work, and the lightest daily routine in our catalogue.",
+    notIdealFor:
+      "Your pool is above ground, you want a manufacturer-stated maximum pool length or warranty " +
+      "term, or a camera in the water is a line you would rather not cross.",
+    image: {
+      src: "/media/reviews/aiper-scuba-v3-ai-vision/hero.webp",
+      alt:
+        "BotPlanet artwork for the Aiper Scuba V3 AI Vision cordless robotic pool cleaner, shown " +
+        "beside a night pool with a phone running the Aiper app.",
+    },
+    figures: [
+      {
+        afterHeading: "What the camera actually does",
+        src: "/media/reviews/aiper-scuba-v3-ai-vision/ai-patrol.webp",
+        caption:
+          "The claims in this frame are Aiper's own: a 2 m — 6.6 ft — detection range, more than twenty debris types recognised, and \"up to 10×\" faster cleaning measured against an unnamed baseline. The first two are design specifications; the third is marketing.",
+      },
+      {
+        afterHeading: "What \"7 days on one charge\" actually means",
+        src: "/media/reviews/aiper-scuba-v3-ai-vision/carefree.webp",
+        caption:
+          "AI Navium mode plans a week of short cleans from one charge — that is the \"7-days runtime\" claim, and it is a scheduling feature, not 168 hours of running.",
+      },
+      {
+        afterHeading: "Filtration, and the finest number in our catalogue",
+        src: "/media/reviews/aiper-scuba-v3-ai-vision/filtration.webp",
+        caption:
+          "A 180 micron mesh for leaves and grit backed by a 3 micron layer for sand and pollen — Aiper's figures, and the finest published rating of anything we list.",
+      },
+    ],
+    folds: [
+      {
+        id: "filtration-and-the-finest-number-in-our-catalogue",
+        teaser: "3 microns — the finest figure we list, and what it does and does not prove.",
+      },
+      {
+        id: "weight-the-dock-and-daily-handling",
+        teaser: "18.1 lb, a wireless dock, and why the routine is genuinely one-handed.",
+      },
+      {
+        id: "the-name-trap",
+        teaser: "Cognitive AI on Aiper's site, AI Vision on Amazon — same machine, no SKU.",
+      },
+      {
+        id: "what-we-cannot-tell-you",
+        teaser: "Six things Aiper does not publish, including what the camera retains.",
+      },
+    ],
+    facts: [
+      { label: "Power", value: "Cordless battery" },
+      { label: "Cleans", value: "Floor, walls, waterline" },
+      { label: "Weight", value: "18.1 lb" },
+      { label: "Filter", value: "3 μm + 180 μm" },
+    ],
+    specGroups: [
+      {
+        heading: "Power and runtime",
+        rows: [
+          { label: "Power type", value: "Cordless lithium-ion" },
+          { label: "Battery weight", value: "955 g", note: "From the listing's details table — the pack, not the machine." },
+          {
+            label: "Runtime",
+            value: "~180 min (210 in eco)",
+            note: "Owner research, not re-read from Aiper's page. Treat as researched rather than verified.",
+          },
+          {
+            label: "Charge time",
+            value: "~5 hours",
+            note: "Owner research, same caveat.",
+          },
+          {
+            label: "\"7 days on one charge\"",
+            value: "A weekly plan, not 168 hours",
+            note: "AI Navium spreads short autonomous cleans across the week so one charge covers it. Aiper's claim, correctly understood.",
+          },
+          { label: "Charging", value: "Wireless contact dock" },
+        ],
+      },
+      {
+        heading: "Pool compatibility",
+        rows: [
+          { label: "Installation", value: "In-ground" },
+          {
+            label: "Max pool length",
+            value: null,
+            note: "Aiper publishes an area, not a length. Owner research holds roughly 1,614 sq ft; no length rating exists to quote.",
+          },
+        ],
+      },
+      {
+        heading: "Cleaning",
+        rows: [
+          { label: "Surfaces", value: "Floor, walls and waterline" },
+          { label: "Suction", value: "4,800 GPH", note: "Aiper's figure, with dual brushes." },
+          {
+            label: "Navigation",
+            value: "Camera — 2 m / 6.6 ft detection range",
+            note: "Single front-facing camera; Aiper says over twenty debris types recognised. Both are Aiper's design figures.",
+          },
+          {
+            label: "\"Up to 10× faster\"",
+            value: "Marketing benchmark",
+            note: "Measured against an unnamed baseline. No independent measurement exists.",
+          },
+          { label: "Night cleaning", value: "Yes — the robot carries its own lights" },
+          { label: "Waterline parking", value: "Yes, with an app alert when it is ready to lift" },
+        ],
+      },
+      {
+        heading: "Filtration",
+        rows: [
+          { label: "Filter", value: "Multi-layer basket" },
+          {
+            label: "Micron rating",
+            value: "3 μm fine layer + 180 μm debris mesh",
+            note: "The finest published figure in our catalogue. Manufacturer's rating, not a lab result.",
+          },
+        ],
+      },
+      {
+        heading: "Camera and privacy",
+        rows: [
+          {
+            label: "Data protection",
+            value: "TÜV-certified, per Aiper",
+            note: "A real third-party scheme, and the entirety of what is published. What is processed on-device versus sent to Aiper is not spelled out.",
+          },
+        ],
+      },
+      {
+        heading: "Handling",
+        rows: [
+          { label: "Weight", value: "18.1 lb / 8.2 kg", note: "The lightest full cleaner in our catalogue, and Aiper's page copy matches the listing table exactly." },
+          { label: "Dimensions (L×W×H)", value: "17.5 × 15 × 8.6 in" },
+          { label: "Warranty", value: null, note: "Aiper's site has a warranty process; no stated term for this machine was found." },
+        ],
+      },
+    ],
+    skuNote:
+      "Specifications describe the Aiper Scuba V3, Gray, ASIN B0GG97427D — the Blue B0GY8DDHTN is a " +
+      "colour variant, not a different specification. Sources: Aiper's own product page (which " +
+      "titles the machine 'Scuba V3 Cognitive AI') and the Amazon listing (which sells it as 'AI " +
+      "Vision'), both read 4 August 2026. Aiper publishes no SKU for any Scuba model, so check the " +
+      "name on the listing: the Scuba S1, X1 and X1 Pro Max are different machines.",
+    lastReviewed: "2026-08-04",
+  },
+
   "dolphin-proteus-dx4-plus": {
     slug: "dolphin-proteus-dx4-plus",
     categorySlug: "robotic-pool-cleaners",

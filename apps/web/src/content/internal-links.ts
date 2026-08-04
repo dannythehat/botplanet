@@ -138,6 +138,12 @@ export const CATEGORY_ANCHORS: Record<string, InternalAnchor[]> = {
       why: "Sun ledges and steps are the shapes cheaper robots skip, and the Proteus review is where that is actually discussed.",
       status: "live",
     },
+    {
+      anchor: "Aiper Scuba V3",
+      href: "/robots/robotic-pool-cleaners/aiper-scuba-v3-ai-vision/",
+      why: "The camera robot. Named wherever debris recognition or seeing-versus-sweeping comes up, which is its actual differentiator.",
+      status: "live",
+    },
 
     /* ---- Declared now, linked when the page ships. ----
        A planned anchor renders as plain text, so none of these can 404. The

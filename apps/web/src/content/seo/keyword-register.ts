@@ -223,6 +223,42 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
     ],
     researchedOn: RUN,
   },
+  {
+    path: "/robots/robotic-pool-cleaners/aiper-scuba-v3-ai-vision/",
+    primary: { term: "aiper scuba v3 review", volume: 0, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "aiper scuba v3 ai vision", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "aiper scuba v3", volume: 0, difficulty: 0, mustAppear: true },
+      // The two questions the page is actually built around.
+      { term: "aiper scuba v3 camera", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "aiper scuba v3 runtime", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "ai navium mode", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "aiper scuba v3 filter", volume: 0, difficulty: 0, mustAppear: true },
+    ],
+    cededTo: [
+      {
+        term: "robotic pool cleaner",
+        path: "/robots/robotic-pool-cleaners/",
+        why: "The category head term belongs to the hub, as on every review.",
+      },
+      {
+        term: "best robotic pool cleaner",
+        path: "/best-robots/robotic-pool-cleaners/",
+        why: "A comparison SERP. One review is not a best-of.",
+      },
+      {
+        term: "cordless robotic pool cleaner",
+        path: "/best-robots/robotic-pool-cleaners/cordless/",
+        why: "Same rule as the Polaris FREEDOM: that query wants a shortlist, and two of our own cordless reviews fighting each other for it would be worse than either winning.",
+      },
+      {
+        term: "aiper scuba x1 pro max",
+        path: "/robots/robotic-pool-cleaners/",
+        why: "A different Aiper at a different price, named on this page only as the machine with a real length rating. Goes to the hub until it has a review of its own.",
+      },
+    ],
+    researchedOn: RUN,
+  },
 ];
 
 export const keywordsFor = (path: string): PageKeywords | undefined =>

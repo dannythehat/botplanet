@@ -1239,6 +1239,130 @@
     ]
   },
   {
+    "source": "/media/reviews/aiper-scuba-v3-ai-vision/hero.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-aiper-scuba-v3-ai-vision-hero-webp-360",
+        "src": "/media/reviews/aiper-scuba-v3-ai-vision/hero-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 23250,
+        "checksum": "sha256:c575037050696cd02564c06b21b4de025c8fa23244b6daaa14ba22f5ba81e6ed"
+      },
+      {
+        "id": "media-reviews-aiper-scuba-v3-ai-vision-hero-webp-640",
+        "src": "/media/reviews/aiper-scuba-v3-ai-vision/hero-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 59686,
+        "checksum": "sha256:fe078e06a0c519ff01b8a2cd779cb90c2b61c5a0cea1750b2ad7467cfcf6c78c"
+      },
+      {
+        "id": "media-reviews-aiper-scuba-v3-ai-vision-hero-webp-960",
+        "src": "/media/reviews/aiper-scuba-v3-ai-vision/hero-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 115032,
+        "checksum": "sha256:1be28b7e22c8199454a888b33804fd630d53f17524eee981fd0d4dffd9f6ca20"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/aiper-scuba-v3-ai-vision/ai-patrol.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-aiper-scuba-v3-ai-vision-ai-patrol-webp-360",
+        "src": "/media/reviews/aiper-scuba-v3-ai-vision/ai-patrol-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 17162,
+        "checksum": "sha256:f28e595111a78f473cc37e04096484ef540bf1989298a23670140dad4c852c58"
+      },
+      {
+        "id": "media-reviews-aiper-scuba-v3-ai-vision-ai-patrol-webp-640",
+        "src": "/media/reviews/aiper-scuba-v3-ai-vision/ai-patrol-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 44680,
+        "checksum": "sha256:fb5fa7405fd4d44a68dc12282a4f571d9f654c1897f053d258fdc4e3f936262e"
+      },
+      {
+        "id": "media-reviews-aiper-scuba-v3-ai-vision-ai-patrol-webp-960",
+        "src": "/media/reviews/aiper-scuba-v3-ai-vision/ai-patrol-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 87110,
+        "checksum": "sha256:aa75da7777e0de49f4c57b2a87e691558ff7e6d2c904679ce4f76eaab7668ce5"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/aiper-scuba-v3-ai-vision/carefree.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-aiper-scuba-v3-ai-vision-carefree-webp-360",
+        "src": "/media/reviews/aiper-scuba-v3-ai-vision/carefree-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 21806,
+        "checksum": "sha256:49e2bce21167619cce9e23b5d8bf10869f8e806202a4634a6b4fd0da2e567caa"
+      },
+      {
+        "id": "media-reviews-aiper-scuba-v3-ai-vision-carefree-webp-640",
+        "src": "/media/reviews/aiper-scuba-v3-ai-vision/carefree-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 54848,
+        "checksum": "sha256:f4a37b928868fd4a38402cc088cbdd645795b9fb23098be68ccb3ccd46599d42"
+      },
+      {
+        "id": "media-reviews-aiper-scuba-v3-ai-vision-carefree-webp-960",
+        "src": "/media/reviews/aiper-scuba-v3-ai-vision/carefree-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 103518,
+        "checksum": "sha256:3161e163dd642e89f5b9988bb46d703c1c52e390f972f876b71297ff91c2586a"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/aiper-scuba-v3-ai-vision/filtration.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-aiper-scuba-v3-ai-vision-filtration-webp-360",
+        "src": "/media/reviews/aiper-scuba-v3-ai-vision/filtration-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 23756,
+        "checksum": "sha256:ff6efe0822177983a229e463b1c2ff1c856ff00d09ac6601106f77c5086ed586"
+      },
+      {
+        "id": "media-reviews-aiper-scuba-v3-ai-vision-filtration-webp-640",
+        "src": "/media/reviews/aiper-scuba-v3-ai-vision/filtration-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 64628,
+        "checksum": "sha256:743fc35c7ee0e43196712bd7f1c7c87213f7d9dc29ae2b2a4492c1bab028c9d7"
+      },
+      {
+        "id": "media-reviews-aiper-scuba-v3-ai-vision-filtration-webp-960",
+        "src": "/media/reviews/aiper-scuba-v3-ai-vision/filtration-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 133162,
+        "checksum": "sha256:b419adc92c53b56f8371f26652336fd446375ba9e8dee37a6e920209912f8411"
+      }
+    ]
+  },
+  {
     "source": "/media/products/dolphin-nautilus-cc-plus.webp",
     "sourceWidth": 1122,
     "sourceHeight": 1402,
