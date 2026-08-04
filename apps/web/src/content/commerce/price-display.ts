@@ -3,37 +3,39 @@
 
    ONE SWITCH, ONE REASON, AND A WAY BACK.
 
-   Turned OFF on 4 August 2026. The Nautilus page showed $749.00,
-   checked 31 July, sourced from the Amazon buy box via SerpApi and
-   attributed to the marketplace seller "The Pool Spot". The owner
-   reports the listing at closer to $1,800. Both figures cannot be
-   right, and the machine cannot tell which is: amazon.com serves
-   this environment a bot-mitigation page, so the number cannot be
-   re-read to settle it.
+   TURNED OFF, THEN BACK ON THE SAME DAY — 4 August 2026. The
+   history is kept because the reason it went off is the reason the
+   guards around it now exist.
 
-   That is the whole argument. A price nobody can currently verify
-   is not a price, it is a claim — and a wrong price is the single
-   most damaging thing this site can print, because it is the one
-   number a reader will act on without checking. Everything else on
-   a BotPlanet page is checkable in a minute; a price is believed.
+   OFF: the page showed $749.00, captured 31 July. The owner
+   reported the listing at closer to $1,800. Two numbers, no way to
+   tell which was right, and a wrong price is the single most
+   damaging thing this site can print — everything else on a
+   BotPlanet page is checkable in a minute; a price is believed.
 
-   WHAT IS STILL SHOWN. Everything else: the retailer, the seller,
-   stock, delivery, the check date, and a working link. The reader
-   is sent to the live listing to read the current price from the
-   only source that is definitionally correct — the page they will
-   buy on. That is a smaller claim, and a true one.
+   WHAT THE CHECK FOUND. Both figures were wrong for this product.
+   Read from amazon.com the same day, B09K4C9WGF was $849.00, In
+   Stock. Our stored figure was $100 stale. The owner's $1,800 was
+   amazon.co.uk showing B00Q8M0NWE — which turned out not to be a
+   regional listing at all but a SIBLING VARIANT, the same machine
+   without Wi-Fi, one of nine under parent B0HBR6VSXS, and $829.00
+   on amazon.com. See lib/providers/refresh-service.ts for the gate
+   that could not previously tell those nine apart.
 
-   WHAT THIS IS NOT. It is not a bug fix and it does not pretend to
-   be one. The underlying question — why the captured buy-box price
-   and the observed price disagree — is open, and turning the
-   display off does not close it. It stops the site asserting a
-   figure while it is open.
+   ON: a real refresh run through the production pipeline returned
+   $849.00 with Model Name "Nautilus CC Plus Wi-Fi" — matching the
+   manual read exactly. That is the bar for switching this back on
+   and it is the only bar: not "the number looks plausible" but
+   "the pipeline and an independent read of the listing agree".
 
-   HOW TO TURN IT BACK ON. Set SHOW_PRICES to true. Nothing else
-   changes: every freshness rule, check-date requirement and
-   publication gate is still in place underneath and starts
-   applying again the moment this flips. Do it once a capture has
-   been reconciled against the live listing.
+   The interval was cut from seven days to three at the same time,
+   because a week of drift is what let a $100 gap sit on the page
+   unnoticed.
+
+   HOW TO TURN IT OFF AGAIN. Set SHOW_PRICES to false. Every
+   freshness rule and publication gate keeps running underneath
+   either way, so nothing needs unpicking — the switch sits in
+   front of them, not instead of them.
    ============================================================ */
 
 /**
@@ -42,7 +44,7 @@
  * Offer schema, which would otherwise put the same number into Google's
  * index in machine-readable form.
  */
-export const SHOW_PRICES = false;
+export const SHOW_PRICES = true;
 
 /** Printed where a price would have been, so the space is not simply blank. */
 export const PRICE_WITHHELD_LABEL = "Check current price";

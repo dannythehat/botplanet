@@ -342,20 +342,25 @@ describe("price, stock and shipping normalisation", () => {
     expect(REPORT.totals.priceShowable).toBe(SHOW_PRICES ? checked.size : 0);
   });
 
-  it("the switch is the ONLY thing suppressing those prices", () => {
-    /* Guards against the switch masking a real regression. Every offer that
-       would be publishable is still fully evidenced — price, check date and a
-       current freshness state — so flipping SHOW_PRICES back on cannot
-       reveal a hole that opened while it was off. */
+  it("the switch is the only thing that ever suppresses an evidenced price", () => {
+    /* Works in both positions, so it keeps its meaning whichever way the
+       switch is set. Off: the switch must be the ONLY price blocker, which
+       stops it masking a real regression that would surface the moment
+       someone flips it. On: the switch must not appear as a blocker at all. */
     const evidenced = OFFERS.filter(
       (o) => o.basePriceMinor !== null && o.sourceCheckedDate !== null && CURRENT_PRICE_STATES.includes(o.freshness),
     );
     expect(evidenced.length).toBeGreaterThan(0);
+    const SWITCH = "price display is switched off site-wide — see content/commerce/price-display.ts";
     for (const o of evidenced) {
       const blockers = publicationFor(o).blockers;
-      expect(blockers).toContain("price display is switched off site-wide — see content/commerce/price-display.ts");
-      // Nothing ELSE is blocking the price on these.
-      expect(blockers.filter((b) => /price/.test(b) && !b.includes("switched off"))).toEqual([]);
+      if (SHOW_PRICES) {
+        expect(blockers).not.toContain(SWITCH);
+        expect(publicationFor(o).priceShowable).toBe(true);
+      } else {
+        expect(blockers).toContain(SWITCH);
+        expect(blockers.filter((b) => /price/.test(b) && !b.includes("switched off"))).toEqual([]);
+      }
     }
   });
 
