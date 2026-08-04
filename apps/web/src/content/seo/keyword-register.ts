@@ -336,6 +336,41 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
     ],
     researchedOn: RUN,
   },
+  {
+    path: "/robots/robotic-pool-cleaners/aiper-scuba-s1/",
+    primary: { term: "aiper scuba s1 review", volume: 0, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "aiper scuba s1", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "scuba s1", volume: 0, difficulty: 0, mustAppear: true },
+      // The claims this page is actually built to answer.
+      { term: "aiper scuba s1 waterline", volume: 0, difficulty: 0, mustAppear: false },
+      { term: "aiper scuba s1 runtime", volume: 0, difficulty: 0, mustAppear: false },
+      { term: "shallow ledge pool cleaner", volume: 0, difficulty: 0, mustAppear: false },
+    ],
+    cededTo: [
+      {
+        term: "robotic pool cleaner",
+        path: "/robots/robotic-pool-cleaners/",
+        why: "The category head term belongs to the hub, as on every review.",
+      },
+      {
+        term: "best robotic pool cleaner",
+        path: "/best-robots/robotic-pool-cleaners/",
+        why: "A comparison SERP. One review is not a best-of.",
+      },
+      {
+        term: "cordless robotic pool cleaner",
+        path: "/best-robots/robotic-pool-cleaners/cordless/",
+        why: "Five cordless reviews now. The shortlist page owns the head term so they do not fight each other for it.",
+      },
+      {
+        term: "aiper scuba v3 review",
+        path: "/robots/robotic-pool-cleaners/aiper-scuba-v3-ai-vision/",
+        why: "The V3 is named as the camera-equipped step up. Naming a sibling is not targeting its term.",
+      },
+    ],
+    researchedOn: RUN,
+  },
 ];
 
 export const keywordsFor = (path: string): PageKeywords | undefined =>

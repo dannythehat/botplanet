@@ -1611,6 +1611,130 @@
     ]
   },
   {
+    "source": "/media/reviews/aiper-scuba-s1/hero.webp",
+    "sourceWidth": 1402,
+    "sourceHeight": 1122,
+    "derivatives": [
+      {
+        "id": "media-reviews-aiper-scuba-s1-hero-webp-360",
+        "src": "/media/reviews/aiper-scuba-s1/hero-360w.webp",
+        "width": 360,
+        "height": 288,
+        "bytes": 16516,
+        "checksum": "sha256:c6aeb5f4c98bf2d54cd57e77ef3ddf23c4a51cec94c831cc9675f748872bea81"
+      },
+      {
+        "id": "media-reviews-aiper-scuba-s1-hero-webp-640",
+        "src": "/media/reviews/aiper-scuba-s1/hero-640w.webp",
+        "width": 640,
+        "height": 512,
+        "bytes": 45338,
+        "checksum": "sha256:39fb976dd834b84e123421e71b7cedfb2c4a1a1a5fbe1246d7a7587b251985dd"
+      },
+      {
+        "id": "media-reviews-aiper-scuba-s1-hero-webp-960",
+        "src": "/media/reviews/aiper-scuba-s1/hero-960w.webp",
+        "width": 960,
+        "height": 768,
+        "bytes": 89364,
+        "checksum": "sha256:6ac6407fe6f945d994f83a966eecd9b48bc8d5cae556925878243920f4c86ca6"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/aiper-scuba-s1/four-zone.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-aiper-scuba-s1-four-zone-webp-360",
+        "src": "/media/reviews/aiper-scuba-s1/four-zone-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 23978,
+        "checksum": "sha256:14606f536c713698cf5474f06a74ffda8eb8838bd41baf792240039335dd9abe"
+      },
+      {
+        "id": "media-reviews-aiper-scuba-s1-four-zone-webp-640",
+        "src": "/media/reviews/aiper-scuba-s1/four-zone-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 65508,
+        "checksum": "sha256:5da959abef24eef994185bea4b3fbf3bfc428d26e09b945b400b170a8f032868"
+      },
+      {
+        "id": "media-reviews-aiper-scuba-s1-four-zone-webp-960",
+        "src": "/media/reviews/aiper-scuba-s1/four-zone-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 134650,
+        "checksum": "sha256:c3d5cf0d8cf5af2201609ed7c844e71e2f69dfd835cc559f413f9b01c97ae2f8"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/aiper-scuba-s1/filtration.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-aiper-scuba-s1-filtration-webp-360",
+        "src": "/media/reviews/aiper-scuba-s1/filtration-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 23860,
+        "checksum": "sha256:cd5abbb0a90c39b3cccfcb59c8adbfaa87f9d0d69552bbbcea1fe09219f8ac76"
+      },
+      {
+        "id": "media-reviews-aiper-scuba-s1-filtration-webp-640",
+        "src": "/media/reviews/aiper-scuba-s1/filtration-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 67528,
+        "checksum": "sha256:c476ddfef492c4bc808866df348a39040a90639d15e3ca14cf887a2c07cad25a"
+      },
+      {
+        "id": "media-reviews-aiper-scuba-s1-filtration-webp-960",
+        "src": "/media/reviews/aiper-scuba-s1/filtration-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 143662,
+        "checksum": "sha256:2b8eddbda21a320258f0d4c37371dfaaf7487faea65352a508b254a6667fc5d8"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/aiper-scuba-s1/modes.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-aiper-scuba-s1-modes-webp-360",
+        "src": "/media/reviews/aiper-scuba-s1/modes-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 22366,
+        "checksum": "sha256:3b34760fddd225755563d9030e3d9a6e83c7eaa01fbe38ea4ea651a94d7b8c70"
+      },
+      {
+        "id": "media-reviews-aiper-scuba-s1-modes-webp-640",
+        "src": "/media/reviews/aiper-scuba-s1/modes-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 56038,
+        "checksum": "sha256:f4c569114e21603b6f005138f7e2f616d49a0917812c92ff42e76cf330d16955"
+      },
+      {
+        "id": "media-reviews-aiper-scuba-s1-modes-webp-960",
+        "src": "/media/reviews/aiper-scuba-s1/modes-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 106678,
+        "checksum": "sha256:0c019b3d3ab038b37aeb9e6f9cd297a3ac3beabded881ac07a2cf077fea816f5"
+      }
+    ]
+  },
+  {
     "source": "/media/products/dolphin-nautilus-cc-plus.webp",
     "sourceWidth": 1122,
     "sourceHeight": 1402,

@@ -1236,6 +1236,155 @@ export const REVIEWS: Record<string, ReviewContent> = {
       "Seagull SE.",
     lastReviewed: "2026-08-04",
   },
+
+  "aiper-scuba-s1": {
+    slug: "aiper-scuba-s1",
+    categorySlug: "robotic-pool-cleaners",
+    eyebrow: "Robotic pool cleaner review",
+    title: "Aiper Scuba S1 review",
+    seoTitle: "Aiper Scuba S1 Review | BotPlanet",
+    metaDescription:
+      "An honest review of the Aiper Scuba S1: four-zone cleaning including 12-inch shallow " +
+      "ledges, the runtime Aiper states twice differently, and the Amazon listing we refuse " +
+      "to link.",
+    verdict:
+      "Aiper's mid-range all-rounder: cordless, wall-climbing, waterline-scrubbing, with the " +
+      "flagships' 3-micron filtration and a shallow-ledge claim most robots cannot make. Held " +
+      "back only by its paperwork — Aiper's page disagrees with itself twice, and the sole Amazon " +
+      "listing fails our identity checks.",
+    bestFor:
+      "An in-ground pool up to 50 ft — especially one with a tanning ledge or shallow steps — " +
+      "where you want every wet surface handled at a mid-range price.",
+    notIdealFor:
+      "A pool longer than 50 ft, anyone who wants the surface skimmed, or anyone who wants a " +
+      "camera choosing where to clean.",
+    image: {
+      src: "/media/reviews/aiper-scuba-s1/hero.webp",
+      alt:
+        "BotPlanet artwork for the Aiper Scuba S1 cordless robotic pool cleaner, shown at the " +
+        "edge of a night pool beside a phone running the Aiper app.",
+    },
+    figures: [
+      {
+        afterHeading: "Four zones, including the one robots skip",
+        src: "/media/reviews/aiper-scuba-s1/four-zone.webp",
+        caption:
+          "Aiper's own four zones: shallow areas, waterline, walls and floors. The shallow claim comes with a number — as little as 12 inches of water — and it is the uncommon one.",
+      },
+      {
+        afterHeading: "Suction and filtration: the flagship parts, downsized",
+        src: "/media/reviews/aiper-scuba-s1/filtration.webp",
+        caption:
+          "The 180 micron basket in front of the 3 micron MicroMesh layer — Aiper's figures, the same arrangement as its flagships, in a 3.5 litre basket.",
+      },
+      {
+        afterHeading: "Five modes and the weekly plan",
+        src: "/media/reviews/aiper-scuba-s1/modes.webp",
+        caption:
+          "Wall, eco, auto, floor and schedule — the five modes on Aiper's page, with the weekly plan the schedule runs. A cordless schedule still depends on someone putting it back on charge.",
+      },
+    ],
+    folds: [
+      {
+        id: "suction-and-filtration-the-flagship-parts-downsized",
+        teaser: "4,200 GPH and the catalogue's finest filter rating, on its cheapest carrier.",
+      },
+      {
+        id: "five-modes-and-the-weekly-plan",
+        teaser: "Schedule, wall, floor, auto, eco — and the one manual step nobody mentions.",
+      },
+      {
+        id: "in-ground-or-above-ground-aipers-page-points-both-ways",
+        teaser: "The spec block says in-ground; the copy says both. Both sentences are Aiper's.",
+      },
+      {
+        id: "what-we-cannot-tell-you",
+        teaser: "Six gaps, including which of Aiper's two runtime figures is real.",
+      },
+    ],
+    facts: [
+      { label: "Cleans", value: "Floor, walls, waterline" },
+      { label: "Power", value: "Cordless battery" },
+      { label: "Max pool length", value: "50 ft" },
+      { label: "Filter", value: "3 μm + 180 μm" },
+    ],
+    specGroups: [
+      {
+        heading: "Power and runtime",
+        rows: [
+          { label: "Power type", value: "Cordless lithium-ion" },
+          {
+            label: "Runtime",
+            value: "150 or 180 minutes — Aiper states both",
+            note: "The spec block says up to 180; marketing copy on the same page says the full 150. Likely mode-dependent, but the page does not say so.",
+          },
+          { label: "Charge time", value: "3–4 hours", note: "A range, quoted as one." },
+          { label: "Charging", value: "Wall charger — no dock" },
+          { label: "Battery capacity", value: null, note: "Not published." },
+        ],
+      },
+      {
+        heading: "Pool compatibility",
+        rows: [
+          {
+            label: "Installation",
+            value: "In-ground (spec) / both (copy)",
+            note: "Aiper's specification block says in-ground; marketing copy on the same page says above-ground too. Both sentences are Aiper's.",
+          },
+          { label: "Max pool", value: "50 ft / 1,600 sq ft", note: "Aiper's stated ceiling." },
+          {
+            label: "Shallow areas",
+            value: "As little as 12 in of water",
+            note: "Aiper's own claim, and the uncommon one — most robots beach on a tanning ledge.",
+          },
+        ],
+      },
+      {
+        heading: "Cleaning",
+        rows: [
+          { label: "Surfaces", value: "Floor, walls, waterline and shallow areas", note: "Aiper's four-zone claim, from its own page." },
+          { label: "Suction", value: "4,200 GPH", note: "Aiper's figure." },
+          { label: "Navigation", value: "WavePath 2.0 planned paths", note: "No camera, no sonar — the middle option between the V3 and a random walk." },
+        ],
+      },
+      {
+        heading: "Filtration",
+        rows: [
+          { label: "Filter", value: "180 μm basket + 3 μm MicroMesh ultra-fine" },
+          { label: "Basket capacity", value: "3.5 L" },
+        ],
+      },
+      {
+        heading: "Control and support",
+        rows: [
+          { label: "App", value: "Modes, cleaning history, OTA updates" },
+          { label: "Modes", value: "Schedule, wall, floor, automatic, eco" },
+          { label: "Weekly plan", value: "45-minute sessions, up to every 48 hours", note: "Aiper's framing of the schedule." },
+          {
+            label: "Warranty",
+            value: null,
+            note: "No term stated on Aiper's product page. Our research holds two years; we cannot currently show a source.",
+          },
+        ],
+      },
+      {
+        heading: "Handling",
+        rows: [
+          { label: "Weight", value: null, note: "Not published — a pattern with Aiper." },
+          { label: "Dimensions", value: null },
+          { label: "In the box", value: "Cleaner, DC charger, manual, retrieval hook", note: "From Aiper's own page." },
+        ],
+      },
+    ],
+    skuNote:
+      "Specifications come from Aiper's own Scuba S1 product page, read 31 July 2026 and " +
+      "re-confirmed 4 August 2026. Aiper publishes no SKU. The sole new-condition Amazon listing " +
+      "is refused by our identity register: its model name says 'Scuba S1 2026', its part number " +
+      "says 'X5 Pro 2026', and its title claims 270 minutes — half again more than Aiper's own " +
+      "page. A renewed listing repeating the 270-minute claim is refused as refurbished stock. " +
+      "Check the details table, not the title, before buying anywhere.",
+    lastReviewed: "2026-08-04",
+  },
 };
 
 export function reviewFor(slug: string | undefined): ReviewContent | undefined {

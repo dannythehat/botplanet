@@ -430,6 +430,55 @@ export const SNAPSHOTS: Record<string, ProductSnapshot> = {
       { need: "You need the waterline scrubbed", test: { kind: "cleans", value: "waterline" } },
     ],
   },
+
+  "aiper-scuba-s1": {
+    slug: "aiper-scuba-s1",
+    priceBand: "mid",
+    priceBandWhy:
+      "The middle of Aiper's range and of ours: flagship filtration and four-zone coverage without the camera of the V3 or the skimming of the X1 Pro Max.",
+    shipping: "Sold direct by Aiper; Amazon availability is currently unreliable — see the review.",
+    shippingSpeed: "varies",
+    points: [
+      {
+        label: "Cleans",
+        value: "Floor, walls, waterline and shallow areas",
+        note: "Aiper's own four-zone claim, including ledges in as little as 12 inches of water.",
+      },
+      {
+        label: "Power",
+        value: "Cordless, wall charger",
+        note: "150 or 180 minutes — both figures are Aiper's, on one page. Charging is 3 to 4 hours.",
+      },
+      {
+        label: "Biggest pool it is rated for",
+        value: "50 ft / 1,600 sq ft",
+        note: "Aiper's stated ceiling.",
+      },
+      {
+        label: "Filter",
+        value: "3 μm + 180 μm, 3.5 L basket",
+        note: "The catalogue's finest published rating, on its cheapest machine.",
+      },
+      {
+        label: "Modes",
+        value: "Five, plus a weekly plan",
+        note: "Schedule, wall, floor, auto and eco from the app, with OTA updates.",
+      },
+      {
+        label: "Warranty",
+        value: null,
+        note: "No term stated on Aiper's product page.",
+      },
+    ],
+    suitsYouIf:
+      "You have an in-ground pool up to 50 ft — especially one with a tanning ledge or shallow steps — and want every wet surface handled at a mid-range price.",
+    ruleOutIf:
+      "Your pool runs longer than 50 ft, you want the surface skimmed, or you want a camera choosing where to clean.",
+    ruleOuts: [
+      { need: "Your pool runs longer than 50 ft", test: { kind: "maxLengthOver", feet: 50 } },
+      { need: "You want the water surface skimmed too", test: { kind: "cleans", value: "water_surface" } },
+    ],
+  },
 };
 
 export const snapshotFor = (slug: string | undefined): ProductSnapshot | undefined =>
