@@ -107,6 +107,7 @@ export const REVIEWS: Record<string, ReviewContent> = {
       url: "https://youtu.be/9cjD-Oiulag",
       title: "Dolphin Nautilus CC Plus Automatic Robotic Pool Vacuum Cleaner Review - Is It Worth It?",
       channel: "Shop with me!",
+      poster: "/media/reviews/dolphin-nautilus-cc-plus/video-poster.webp",
       note:
         "An independent owner's review — not ours, and not Maytronics'. We link it because watching the machine lifted out, opened and rinsed shows things a specification sheet cannot. It is one person's experience rather than our testing, and nothing in it has been used as evidence for any claim on this page.",
     },

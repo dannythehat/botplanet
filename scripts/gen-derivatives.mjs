@@ -103,6 +103,7 @@ const SOURCES = [
   "/media/pool/debris-silt.webp",
   "/media/pool/debris-algae.webp",
   "/media/reviews/dolphin-nautilus-cc-plus/hero.webp",
+  "/media/reviews/dolphin-nautilus-cc-plus/video-poster.webp",
   "/media/reviews/dolphin-nautilus-cc-plus/plug-and-play.webp",
   "/media/reviews/dolphin-nautilus-cc-plus/app-control.webp",
   "/media/reviews/dolphin-nautilus-cc-plus/filter-access.webp",
