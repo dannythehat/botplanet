@@ -157,6 +157,14 @@ export const REGIONAL_SKU_CONFLICTS: {
  * Returns the URL plus which marketplace was chosen, so the click event can
  * record it and the loss from unconfigured countries is measurable rather
  * than invisible.
+ *
+ * THE URL COMES BACK UNTAGGED, DELIBERATELY. lib/site.ts calls
+ * amazonDestination "the ONLY way an outbound Amazon URL is built", and that
+ * has to stay true or it stops being a guarantee and becomes a comment. The
+ * first version of this function returned a tagged URL, the caller wrapped it
+ * anyway, and production shipped `?tag=botplanet-20&tag=botplanet-20`. Under
+ * Earn Globally the tag is the same on every enabled store, so there is
+ * nothing this function needs to say about it.
  */
 export function marketplaceFor(
   productId: string,
@@ -164,7 +172,7 @@ export function marketplaceFor(
   country: string | null | undefined,
 ): { url: string; marketplace: string; localised: boolean } {
   const us = AMAZON_MARKETPLACES[0];
-  const usUrl = `https://${us.host}/dp/${usAsin}?tag=${us.tag}`;
+  const usUrl = `https://${us.host}/dp/${usAsin}`;
 
   const cc = (country ?? "US").toUpperCase();
   if (cc === "US") return { url: usUrl, marketplace: "US", localised: false };
@@ -182,9 +190,5 @@ export function marketplaceFor(
     return { url: usUrl, marketplace: "US", localised: false };
   }
 
-  return {
-    url: `https://${market.host}/dp/${asin}?tag=${market.tag}`,
-    marketplace: cc,
-    localised: true,
-  };
+  return { url: `https://${market.host}/dp/${asin}`, marketplace: cc, localised: true };
 }
