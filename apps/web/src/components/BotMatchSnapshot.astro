@@ -134,54 +134,59 @@ const speedLabel =
           plate has thickness rather than being a rectangle of colour;
        4. a warm-white specular highlight off-centre, so the light has a
           direction. */
+  /* BRUSHED ALUMINIUM, NOT PAPER.
+     The first version sat at 92% lightness — on a phone it read as a white
+     card dropped into a black page, which is the opposite of premium. Real
+     brushed aluminium is a MID-TONE with bright highlights cutting across it.
+     The tonal range below runs #8b939e to #f6f8fb, and that range is the whole
+     effect: without dark in it, metal is just paper.
+
+     Two gradient layers, not four. The first version stacked a conic sweep, a
+     repeating stripe and a radial highlight on a full-width element — three
+     expensive rasters repainting on every scroll frame. This gets the same
+     look from a linear sweep plus one fine grain, and `contain: paint` keeps
+     it off the scroll path. */
   .bp-snap__plate {
     position: relative;
     overflow: hidden;
+    contain: paint;
     padding: clamp(1.5rem, 4vw, 2.6rem);
-    border: 1px solid #7d8793;
+    border: 1px solid #6f7783;
     border-radius: 22px;
-    color: #0a0d11;
+    color: #10141a;
     background:
-      /* specular highlight */
-      radial-gradient(120% 80% at 22% -10%, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0) 55%),
-      /* brush grain */
       repeating-linear-gradient(
-        96deg,
-        rgba(255, 255, 255, 0.34) 0px,
-        rgba(255, 255, 255, 0.34) 1px,
-        rgba(120, 132, 148, 0.16) 2px,
-        rgba(120, 132, 148, 0.16) 3px
+        97deg,
+        rgba(255, 255, 255, 0.16) 0px,
+        rgba(255, 255, 255, 0.16) 1px,
+        rgba(58, 66, 78, 0.09) 2px,
+        rgba(58, 66, 78, 0.09) 3px
       ),
-      /* the sweep: hard stops, because metal has edges of light, not fades */
-      conic-gradient(
-        from 202deg at 50% 50%,
-        #eef2f7 0deg,
-        #cdd5df 42deg,
-        #9aa4b2 78deg,
-        #e6ebf2 128deg,
-        #b6bfcb 176deg,
-        #f4f7fa 214deg,
-        #a8b2c0 258deg,
-        #dde3ea 306deg,
-        #eef2f7 360deg
+      linear-gradient(
+        112deg,
+        #aab2bd 0%,
+        #f6f8fb 14%,
+        #b7bfc9 30%,
+        #8b939e 46%,
+        #eef1f6 62%,
+        #a3abb6 78%,
+        #cdd4dd 92%,
+        #9199a4 100%
       );
     box-shadow:
-      inset 0 2px 0 rgba(255, 255, 255, 0.95),
-      inset 0 -2px 0 rgba(0, 0, 0, 0.3),
-      inset 2px 0 0 rgba(255, 255, 255, 0.35),
-      inset -2px 0 0 rgba(0, 0, 0, 0.14),
-      0 30px 66px rgba(0, 0, 0, 0.55);
+      inset 0 2px 0 rgba(255, 255, 255, 0.9),
+      inset 0 -2px 0 rgba(0, 0, 0, 0.34),
+      0 24px 34px rgba(0, 0, 0, 0.55);
   }
 
-  /* A polished bevel just inside the edge — the line that separates a milled
-     plate from a printed rectangle. */
+  /* Polished bevel just inside the edge. */
   .bp-snap__plate::before {
     content: "";
     position: absolute;
     inset: 5px;
     border-radius: 17px;
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    box-shadow: inset 0 0 0 1px rgba(80, 92, 108, 0.22);
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    box-shadow: inset 0 0 0 1px rgba(40, 48, 60, 0.24);
     pointer-events: none;
   }
 
@@ -192,7 +197,7 @@ const speedLabel =
     font-weight: 700;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: #46505e;
+    color: #1f4f96;
   }
 
   .bp-snap h2 {
@@ -221,9 +226,9 @@ const speedLabel =
 
   .bp-snap__cell {
     padding: 1.05rem 1.15rem 1.15rem;
-    border: 1px solid rgba(10, 13, 17, 0.14);
+    border: 1px solid rgba(20, 28, 40, 0.2);
     border-radius: 14px;
-    background: rgba(255, 255, 255, 0.42);
+    background: rgba(255, 255, 255, 0.55);
   }
 
   .bp-snap__label {
@@ -233,7 +238,7 @@ const speedLabel =
     font-weight: 700;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: #4d5765;
+    color: #1f4f96;
   }
 
   .bp-snap__value {
@@ -251,7 +256,7 @@ const speedLabel =
   .bp-snap__tag {
     padding: 0.16rem 0.5rem;
     border-radius: 999px;
-    background: #0a0d11;
+    background: linear-gradient(180deg, #2f7fe4, #1a55b4);
     color: #eef1f6;
     font-family: var(--font-mono);
     font-size: 0.6rem;
@@ -269,7 +274,12 @@ const speedLabel =
     background: rgba(10, 13, 17, 0.16);
   }
 
-  .bp-snap__step[data-on="true"] { background: #0a0d11; }
+  /* Electric blue, the one colour that runs through every photograph on the
+     site. Grey bars on a grey plate said nothing. */
+  .bp-snap__step[data-on="true"] {
+    background: linear-gradient(180deg, #3d8ef0, #1b5fc4);
+    box-shadow: 0 1px 2px rgba(20, 60, 130, 0.5);
+  }
 
   .bp-snap__note {
     margin: 0.6rem 0 0;
@@ -304,7 +314,7 @@ const speedLabel =
     display: grid;
     gap: 0.15rem;
     padding: 0.85rem 1.1rem;
-    background: rgba(255, 255, 255, 0.46);
+    background: rgba(255, 255, 255, 0.58);
   }
 
   .bp-snap__plabel {
@@ -313,7 +323,7 @@ const speedLabel =
     font-weight: 700;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: #4d5765;
+    color: #1f4f96;
   }
 
   .bp-snap__pvalue {
@@ -347,7 +357,7 @@ const speedLabel =
     padding: 1rem 1.15rem;
     border-radius: 14px;
     border: 1px solid rgba(10, 13, 17, 0.14);
-    background: rgba(255, 255, 255, 0.46);
+    background: rgba(255, 255, 255, 0.58);
   }
 
   .bp-snap__call p { margin: 0; font-size: 0.95rem; line-height: 1.6; color: #262e3a; }
@@ -375,8 +385,8 @@ const speedLabel =
     min-height: 3.1rem;
     padding: 0 1.25rem;
     border-radius: 12px;
-    border: 1px solid #000;
-    background: linear-gradient(180deg, #1b212a 0%, #0a0d11 100%);
+    border: 1px solid rgba(20, 60, 130, .85);
+    background: linear-gradient(180deg, #2f7fe4 0%, #1a55b4 100%);
     color: #f2f5f9;
     font-weight: 700;
     font-size: 0.97rem;
