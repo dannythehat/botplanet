@@ -109,7 +109,13 @@ const others = linkable.filter((o) => o !== lead);
             {lead.shippingNote && <p class="bp-buy__shipnote">{lead.shippingNote}</p>}
 
             <a class="bp-buy__cta" href={`/go/${lead.redirectKey}`} rel="sponsored nofollow">
-              <span>View on {lead.retailerName}</span>
+              {/* "Check price on …", matching BuyStrip, which has always said
+                  it. The page carried both labels for the same action, and
+                  with no price printed above it "View on Amazon" also
+                  understates what the click is for: checking the price IS the
+                  reason to go. True whether or not prices are switched back
+                  on — ours is dated, theirs is live. */}
+              <span>Check price on {lead.retailerName}</span>
               <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
           </div>
