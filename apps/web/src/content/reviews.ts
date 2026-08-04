@@ -43,6 +43,14 @@ export interface ReviewContent {
    */
   figures?: ReviewFigureRef[];
   /**
+   * Sections that ship shut, named by heading id. See lib/collapsible-sections.
+   *
+   * The test is "does this section answer *should I buy it* or *why exactly*".
+   * The first kind never goes in this list. Nothing is removed from the page
+   * by being here — the words are still in the HTML and still indexed.
+   */
+  folds?: import("../lib/collapsible-sections").FoldSpec[];
+  /**
    * A YouTube video about this product. The section renders only when a real
    * watch URL is present — there is no "video coming soon" placeholder,
    * because an empty promise on a live page is worse than no section.
@@ -98,6 +106,36 @@ export const REVIEWS: Record<string, ReviewContent> = {
         src: "/media/reviews/dolphin-nautilus-cc-plus/app-control.webp",
         caption:
           "MyDolphin Plus handles scheduling and cycle selection. What it does not do is tell you the filter is full.",
+      },
+    ],
+    /* Six of the twelve sections ship shut. Every one of them answers "why
+       exactly" rather than "should I buy it" — the five that decide the
+       purchase (who it is for, who should not, the waterline finding, what it
+       cleans, filtration) and the verdict stay open, in that order. */
+    folds: [
+      {
+        id: "pool-size-and-the-cable-that-confuses-everyone",
+        teaser: "Why a 56 ft cable does not mean a 56 ft pool.",
+      },
+      {
+        id: "the-app",
+        teaser: "What MyDolphin Plus does, and the one thing it will not tell you.",
+      },
+      {
+        id: "weight-handling-and-getting-it-out",
+        teaser: "What 19 lb dry actually feels like coming out of the water.",
+      },
+      {
+        id: "what-is-in-the-box-and-the-warranty",
+        teaser: "Contents, the 2.5-year cover, and what it does not cover.",
+      },
+      {
+        id: "the-sku-trap",
+        teaser: "US and global models share a name and do not share a spec sheet.",
+      },
+      {
+        id: "what-we-cannot-tell-you",
+        teaser: "The limits of a review written without a pool to run it in.",
       },
     ],
     /* Title and channel came from YouTube's oEmbed endpoint on 3 August 2026,

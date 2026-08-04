@@ -4,16 +4,35 @@
 
    The real review lives on the DB-backed product page — Notion's
    rule is one canonical page per model — so this preview exists
-   only to show the layout without a database. */
+   only to show the layout without a database.
+
+   IT RENDERS <ReviewArticle>, NOT A COPY OF IT.
+
+   The first version of this file reimplemented the template: its
+   own component order, its own 90 lines of .bp-prose CSS. Within a
+   week the real page had a snapshot panel, a video section, buy
+   strips, folded sections and internal links, and this page had
+   none of them — while still being the page anyone opened to check
+   what the template looked like. A preview that can disagree with
+   the thing it previews is worse than no preview.
+
+   So: one component, the same one the product page mounts, fed
+   from the committed offer snapshot and the repo catalogue. If the
+   template changes, this changes with it or it does not build.
+   ============================================================ */
 export const prerender = true;
 
-import ReviewHeader from "../../components/ReviewHeader.astro";
-import SpecTable from "../../components/SpecTable.astro";
-import ArticleFooter from "../../components/ArticleFooter.astro";
-import BotMatchCta from "../../components/BotMatchCta.astro";
+import ReviewArticle from "../../components/ReviewArticle.astro";
 import { reviewFor } from "../../content/reviews";
-import { botMatchCtaFor } from "../../content/category-sections";
-import { Content as ReviewBody } from "../../reviews/dolphin-nautilus-cc-plus.md";
+import { buildOffers, publicationFor } from "../../lib/offer-truth";
+import { retailer } from "../../content/commerce/registry";
+import { usd, freshnessLabel } from "../../lib/format";
+import { PRODUCT_ID } from "../../content/products";
+/* Reached by path rather than through the package's exports map on purpose.
+   This page is temporary; widening @botplanet/db's public surface so a preview
+   can read the seed would outlive it. */
+import { productRows } from "../../../../../packages/db/seed/pool/catalogue";
+import { compiledContent } from "../../reviews/dolphin-nautilus-cc-plus.md";
 
 import "../../styles/tokens.css";
 import "../../styles/base.css";
@@ -22,8 +41,46 @@ import "../../styles/depth.css";
 import "../../styles/components.css";
 import "../../styles/metal-theme.css";
 
-const review = reviewFor("dolphin-nautilus-cc-plus")!;
-const bmCta = botMatchCtaFor("robotic-pool-cleaners")!;
+const SLUG = "dolphin-nautilus-cc-plus";
+const review = reviewFor(SLUG)!;
+const productId = PRODUCT_ID[SLUG];
+
+/* Async in Astro 5 — the product page learned that the hard way, by shipping
+   a page that stopped after the breadcrumbs. */
+const html = await compiledContent();
+
+/* The committed snapshot, with no live D1 row to beat it. Same publication
+   gates as production, so an offer too stale to show on the real page is too
+   stale to show here. Nothing is invented for the preview. */
+const offers = buildOffers(new Date(), { live: [] })
+  .filter((o) => o.productId === productId)
+  .map((o) => ({ offer: o, pub: publicationFor(o) }))
+  .filter((x) => x.pub.showable)
+  .map(({ offer, pub }) => ({
+    retailerName: retailer(offer.retailerId)?.name ?? offer.retailerId,
+    sellerIdentity: offer.sellerIdentity ?? null,
+    price: pub.showPrice && offer.priceCents != null ? usd(offer.priceCents) : null,
+    checkedDate: offer.checkedAt ? freshnessLabel(offer.checkedAt) : null,
+    stock: offer.availability ?? null,
+    shipping: offer.deliveryNote ?? null,
+    redirectKey: pub.showLink ? offer.redirectKey ?? null : null,
+    primary: offer.primary ?? false,
+  }));
+
+/* Catalogue facts only, read from the committed seed — which is the same data
+   the D1 rows were loaded from, so the alternatives shown here are the ones
+   the live page shows. findAlternatives still cannot see a price: the shape
+   passed in has no field for one. */
+const siblings = productRows
+  .filter((p) => p.categoryId === "cat-pool-cleaners" && p.status === "published")
+  .map((p) => ({
+    id: p.id!,
+    slug: p.slug!,
+    name: p.name!,
+    cleans: (p.cleans as string[]) ?? [],
+    powerType: p.powerType ?? null,
+    maxPoolLengthFt: p.maxPoolLengthFt ?? null,
+  }));
 ---
 
 <html lang="en">
@@ -35,117 +92,13 @@ const bmCta = botMatchCtaFor("robotic-pool-cleaners")!;
   </head>
   <body>
     <main class="wrap" style="padding-top:2.5rem;padding-bottom:5rem;">
-      <ReviewHeader
-        eyebrow={review.eyebrow}
-        title={review.title}
-        verdict={review.verdict}
-        bestFor={review.bestFor}
-        notIdealFor={review.notIdealFor}
-        image={review.image}
-        facts={review.facts}
+      <ReviewArticle
+        review={review}
+        html={html}
+        productName="Dolphin Nautilus CC Plus Wi-Fi"
+        offers={offers}
+        siblings={siblings}
       />
-
-      <article class="bp-prose">
-        <ReviewBody />
-      </article>
-
-      <SpecTable
-        id="specifications"
-        eyebrow="Specifications"
-        title="The full specification"
-        intro="Every figure below comes from the manufacturer's own product page for the exact SKU named underneath. Where a value is not published, it says so rather than borrowing a number from elsewhere."
-        groups={review.specGroups}
-        skuNote={review.skuNote}
-      />
-
-      <BotMatchCta
-        categorySlug="robotic-pool-cleaners"
-        headline={bmCta.headline}
-        body={bmCta.body}
-        points={bmCta.points}
-        ctaLabel={bmCta.ctaLabel}
-        note={bmCta.note}
-      />
-
-      <ArticleFooter lastReviewed={review.lastReviewed} />
     </main>
   </body>
 </html>
-
-<style is:global>
-  /* Long-form review prose. Measure is the whole point — anything
-     wider than about 70 characters gets tiring on a big screen. */
-  .bp-prose {
-    max-width: 70ch;
-    margin: 0 0 clamp(3rem, 7vw, 5rem);
-  }
-
-  .bp-prose h2 {
-    margin: clamp(2.5rem, 6vw, 3.5rem) 0 0;
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: clamp(1.45rem, 3.8vw, 1.9rem);
-    line-height: 1.18;
-    letter-spacing: -0.018em;
-    text-wrap: balance;
-    color: var(--cs-hi);
-  }
-
-  .bp-prose h3 {
-    margin: 2rem 0 0;
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: clamp(1.08rem, 2.4vw, 1.2rem);
-    line-height: 1.28;
-    color: var(--cs-hi);
-  }
-
-  .bp-prose p {
-    margin: 1.05rem 0 0;
-    font-size: 1.0625rem;
-    line-height: 1.72;
-    color: var(--text-secondary);
-  }
-
-  .bp-prose strong { color: var(--cs-hi); font-weight: 600; }
-  .bp-prose em { color: var(--cs-mid); }
-
-  .bp-prose ul { margin: 1.1rem 0 0; padding: 0; list-style: none; display: grid; gap: 0.6rem; }
-
-  .bp-prose li {
-    position: relative;
-    padding-left: 1.3rem;
-    font-size: 1.0625rem;
-    line-height: 1.66;
-    color: var(--text-secondary);
-  }
-
-  .bp-prose li::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0.62em;
-    width: 0.38rem;
-    height: 0.38rem;
-    transform: rotate(45deg);
-    background: var(--cs-sheen);
-  }
-
-  .bp-prose hr {
-    margin: clamp(2.5rem, 6vw, 3.5rem) 0 0;
-    border: 0;
-    height: 1px;
-    background: linear-gradient(90deg, var(--cs-line), transparent 70%);
-  }
-
-  .bp-prose blockquote {
-    margin: 1.5rem 0 0;
-    padding-left: 1.1rem;
-    border-left: 2px solid var(--cs-line);
-    color: var(--cs-mid);
-  }
-
-  @media (min-width: 900px) {
-    .bp-prose p, .bp-prose li { font-size: 1.1rem; }
-  }
-</style>

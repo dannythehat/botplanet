@@ -357,6 +357,19 @@ const isActive = (href: string) => href === activePath;
     transition: background-color var(--duration-base) var(--ease-out);
   }
 
+  /* A blur over a sticky bar is re-read from the page underneath on every
+     scroll frame, and on a phone that is the most expensive thing per frame
+     on the whole page. A translucent header is also the reason the bar looks
+     muddy over artwork. Below 900px it is simply opaque — cheaper AND
+     cleaner, which is not a trade-off worth thinking about. */
+  @media (max-width: 899px) {
+    header.site,
+    header.site[data-scrolled="true"] {
+      background: #060809;
+      backdrop-filter: none;
+    }
+  }
+
   /* Integrated with the page: no hard bar until content passes beneath it. */
   header.site[data-scrolled="true"] {
     background: color-mix(in srgb, var(--bg-base) 93%, transparent);

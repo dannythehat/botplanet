@@ -41,32 +41,120 @@ const show = headings.length >= 4;
 
 {show && (
   <nav class="bp-toc" aria-labelledby="toc-heading">
-    <p class="bp-toc__title" id="toc-heading">In this review</p>
-    <ol class="bp-toc__list">
-      {items.map((h, i) => (
-        <li>
-          <a href={`#${h.id}`}>
-            <span class="bp-toc__num">{String(i + 1).padStart(2, "0")}</span>
-            <span class="bp-toc__text">{h.text}</span>
-          </a>
-        </li>
-      ))}
-    </ol>
+    {/* SHUT ON A PHONE, OPEN ON A DESKTOP.
+        Fourteen rows is roughly a full phone screen of links standing
+        between the reader and the first sentence of the article — and it
+        is the same fourteen rows whether or not they wanted to navigate.
+        <details open> plus a media query that removes the disclosure
+        behaviour above 760px gives both without duplicating the markup or
+        shipping a script. */}
+    {/* Ships open. Without script — and on every desktop — a table of
+        contents that cannot be opened is worse than one that is always
+        shown, so the fallback is "shown" and the script only ever shuts it. */}
+    <details class="bp-toc__fold" open>
+      <summary class="bp-toc__sum">
+        <span class="bp-toc__title" id="toc-heading">In this review</span>
+        <span class="bp-toc__count">{items.length} sections</span>
+        <span class="bp-toc__chev" aria-hidden="true"></span>
+      </summary>
+      <ol class="bp-toc__list">
+        {items.map((h, i) => (
+          <li>
+            <a href={`#${h.id}`}>
+              <span class="bp-toc__num">{String(i + 1).padStart(2, "0")}</span>
+              <span class="bp-toc__text">{h.text}</span>
+            </a>
+          </li>
+        ))}
+      </ol>
+    </details>
   </nav>
 )}
+
+<script>
+  /* Shuts the list on a phone, where fourteen rows is a screen of links
+     standing between the reader and the article. With no script at all the
+     markup's own `open` stands, which is the right way round: an always-open
+     contents list is merely long, an always-shut one is broken.
+
+     `touched` stops the breakpoint from overruling a reader who worked the
+     control themselves — rotating a phone should not undo a tap. */
+  const narrow = window.matchMedia("(max-width: 759px)");
+  document.querySelectorAll<HTMLDetailsElement>(".bp-toc__fold").forEach((d) => {
+    let touched = false;
+    let mine = false;
+    /* `toggle` is queued, not synchronous, so a flag set around the
+       assignment would already be back to false by the time it fires. It is
+       cleared in the handler instead. */
+    d.addEventListener("toggle", () => {
+      if (mine) mine = false;
+      else touched = true;
+    });
+    const sync = () => {
+      if (touched || d.open !== narrow.matches) return;
+      mine = true;
+      d.open = !narrow.matches;
+    };
+    sync();
+    narrow.addEventListener("change", sync);
+  });
+</script>
 
 <style is:global>
   .bp-toc {
     margin: clamp(2rem, 5vw, 3rem) 0;
-    padding: clamp(1.2rem, 3vw, 1.7rem);
     border: 1px solid var(--cs-line-soft);
     border-radius: 18px;
     background: var(--cs-surface);
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
   }
 
+  .bp-toc__sum {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: clamp(1rem, 2.6vw, 1.2rem) clamp(1.2rem, 3vw, 1.7rem);
+    cursor: pointer;
+    list-style: none;
+    border-radius: 17px;
+  }
+
+  .bp-toc__sum::-webkit-details-marker { display: none; }
+  .bp-toc__sum:focus-visible { outline: var(--focus-ring, 2px solid #dfe4ec); outline-offset: 2px; }
+
+  .bp-toc__count {
+    margin-left: auto;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    color: var(--text-quaternary);
+  }
+
+  .bp-toc__chev {
+    position: relative;
+    width: 1.6rem;
+    height: 1.6rem;
+    flex: 0 0 auto;
+    border: 1px solid var(--cs-line-soft);
+    border-radius: 50%;
+    transition: transform 0.18s ease;
+  }
+
+  .bp-toc__chev::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 0.42rem;
+    height: 0.42rem;
+    border-right: 2px solid var(--cs-mid);
+    border-bottom: 2px solid var(--cs-mid);
+    transform: translateY(-2px) rotate(45deg);
+  }
+
+  .bp-toc__fold[open] .bp-toc__chev { transform: rotate(180deg); }
+
   .bp-toc__title {
-    margin: 0 0 0.9rem;
     font-family: var(--font-mono);
     font-size: 0.64rem;
     font-weight: 700;
@@ -82,7 +170,7 @@ const show = headings.length >= 4;
     display: grid;
     gap: 0.1rem;
     margin: 0;
-    padding: 0;
+    padding: 0 clamp(0.7rem, 2vw, 1.2rem) clamp(1rem, 2.4vw, 1.3rem);
     list-style: none;
     counter-reset: none;
   }
@@ -123,5 +211,15 @@ const show = headings.length >= 4;
 
   @media (min-width: 760px) {
     .bp-toc__list { grid-template-columns: 1fr 1fr; column-gap: 1.5rem; }
+
+    /* There is room for the list on a wide screen, so there is no reason to
+       make anyone ask for it. The control disappears rather than sitting
+       there permanently open, which would only read as broken. */
+    .bp-toc__sum { cursor: default; padding-bottom: 0.4rem; }
+    .bp-toc__chev, .bp-toc__count { display: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bp-toc__chev { transition: none; }
   }
 </style>

@@ -37,6 +37,7 @@ import BotMatchCta from "./BotMatchCta.astro";
 import ArticleFooter from "./ArticleFooter.astro";
 import { botMatchCtaFor } from "../content/category-sections";
 import { injectFigures } from "../lib/review-figures";
+import { foldSections } from "../lib/collapsible-sections";
 import { snapshotFor } from "../content/snapshots";
 import { findAlternatives } from "../lib/alternatives";
 import { applyInternalLinks } from "../lib/internal-linker";
@@ -63,7 +64,15 @@ const bmCta = botMatchCtaFor(review.categorySlug);
    caption, so the figures have to exist before it runs for that to mean
    anything. */
 const withFigures = injectFigures(html, review.figures, import.meta.env.DEV);
-const { html: body } = applyInternalLinks(withFigures, anchorsFor(review.categorySlug));
+const { html: linked } = applyInternalLinks(withFigures, anchorsFor(review.categorySlug));
+
+/* Folding runs last, on the finished HTML. It only moves markup around — it
+   does not rewrite text — so the linker and the figure injector never see the
+   <details> wrappers and cannot trip over them.
+
+   The contents list is built from `linked`, not from `body`: it needs every
+   heading in the article, including the ones that ship shut. */
+const { html: body } = foldSections(linked, review.folds, import.meta.env.DEV);
 
 /* Answers the rule-outs from the catalogue. Commission and price cannot
    reach findAlternatives — see the note at the top of lib/alternatives.ts. */
@@ -104,7 +113,7 @@ const alternatives =
     section nobody scrolls to may as well not exist. */}
 {review.video && <VideoSection video={review.video} productName={productName} />}
 
-<ArticleContents html={body} extra={[
+<ArticleContents html={linked} extra={[
   { id: "buy", text: "Where to buy" },
   { id: "specifications", text: "Full specification" },
 ]} />
@@ -149,6 +158,45 @@ const alternatives =
 )}
 
 <ArticleFooter lastReviewed={review.lastReviewed} />
+
+<script>
+  /* A contents link that lands on a shut door is worse than no link: the
+     heading is in the <summary>, so the jump resolves and the reader arrives
+     at a section that looks empty. Open it on the way. Also covers arriving
+     on the page with the fragment already in the URL, which is how anyone
+     following a link from search or from another page gets here. */
+  const openTarget = (hash: string) => {
+    if (!hash || hash.length < 2) return;
+    let el: Element | null = null;
+    try {
+      el = document.querySelector(hash);
+    } catch {
+      return; // a hash that is not a valid selector is not ours to handle
+    }
+    const fold = el?.closest("details.bp-fold");
+    if (fold instanceof HTMLDetailsElement) fold.open = true;
+  };
+
+  document.addEventListener("click", (e) => {
+    const a = (e.target as Element | null)?.closest?.("a[href^='#']");
+    if (a instanceof HTMLAnchorElement) openTarget(a.hash);
+  });
+
+  window.addEventListener("hashchange", () => openTarget(location.hash));
+
+  if (location.hash) {
+    openTarget(location.hash);
+    /* Opening changes the page height, so the browser's own scroll to the
+       fragment — which already happened — is now pointing at the wrong
+       place. Re-run it once the layout has settled. */
+    requestAnimationFrame(() => document.querySelector(location.hash)?.scrollIntoView());
+  }
+
+  /* Nothing here for find-in-page: Chrome expands a <details> to reveal a
+     match on its own, and no amount of script makes Safari or Firefox do the
+     same. Using the native element is what buys that behaviour — a div with
+     a click handler would have lost it. */
+</script>
 
 <style is:global>
   /* SCROLL COST.
@@ -275,6 +323,98 @@ const alternatives =
     padding-left: 1.1rem;
     border-left: 2px solid var(--cs-line);
     color: var(--cs-mid);
+  }
+
+  /* ---------- folded sections ---------- */
+
+  /* A shut section has to look like a door, not like a heading someone
+     forgot to write under. It gets a plate, a chevron and a teaser line —
+     three signals, because one is missed on a phone. */
+  .bp-prose .bp-fold {
+    margin: clamp(1.6rem, 4vw, 2.2rem) 0 0;
+    border: 1px solid var(--cs-line-soft);
+    border-radius: 16px;
+    background: linear-gradient(178deg, rgba(20, 25, 32, 0.72), rgba(10, 13, 17, 0.72));
+    scroll-margin-top: 5.5rem;
+  }
+
+  .bp-prose .bp-fold[open] {
+    border-color: var(--cs-line);
+    background: linear-gradient(178deg, rgba(20, 25, 32, 0.5), transparent 22%);
+  }
+
+  .bp-prose .bp-fold__sum {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 0.4rem 1rem;
+    padding: clamp(1rem, 2.6vw, 1.3rem) clamp(1.1rem, 3vw, 1.5rem);
+    cursor: pointer;
+    list-style: none;
+    border-radius: 15px;
+  }
+
+  /* Safari draws its own triangle unless this is said in its own dialect. */
+  .bp-prose .bp-fold__sum::-webkit-details-marker { display: none; }
+
+  .bp-prose .bp-fold__sum:hover { background: rgba(255, 255, 255, 0.03); }
+  .bp-prose .bp-fold__sum:focus-visible { outline: var(--focus-ring, 2px solid #dfe4ec); outline-offset: 2px; }
+
+  /* The milled rule above every other H2 would draw a line across the inside
+     of the plate. Inside a summary the plate edge already does that job. */
+  .bp-prose .bp-fold__h { margin: 0; font-size: clamp(1.2rem, 3.2vw, 1.5rem); }
+  .bp-prose .bp-fold__h::before { display: none; }
+
+  .bp-prose .bp-fold__teaser {
+    grid-column: 1;
+    margin-top: 0.3rem;
+    font-size: 0.92rem;
+    line-height: 1.5;
+    color: var(--text-tertiary);
+  }
+
+  .bp-prose .bp-fold[open] .bp-fold__teaser { display: none; }
+
+  .bp-prose .bp-fold__chev {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    width: 2rem;
+    height: 2rem;
+    flex: 0 0 auto;
+    border: 1px solid var(--cs-line);
+    border-radius: 50%;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.09), transparent),
+      var(--cs-surface);
+    position: relative;
+    transition: transform 0.18s ease, border-color 0.18s ease;
+  }
+
+  .bp-prose .bp-fold__chev::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-right: 2px solid var(--cs-hi);
+    border-bottom: 2px solid var(--cs-hi);
+    transform: translateY(-2px) rotate(45deg);
+  }
+
+  .bp-prose .bp-fold[open] .bp-fold__chev { transform: rotate(180deg); }
+  .bp-prose .bp-fold__sum:hover .bp-fold__chev { border-color: var(--cs-hi); }
+
+  .bp-prose .bp-fold__body {
+    padding: 0 clamp(1.1rem, 3vw, 1.5rem) clamp(1.2rem, 3vw, 1.6rem);
+  }
+
+  /* The first paragraph inside an opened fold already has the summary above
+     it; the standard top margin doubles the gap. */
+  .bp-prose .bp-fold__body > :first-child { margin-top: 0.4rem; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bp-prose .bp-fold__chev { transition: none; }
   }
 
   /* ---------- in-body figures ---------- */
