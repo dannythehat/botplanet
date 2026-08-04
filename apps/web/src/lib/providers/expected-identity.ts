@@ -27,9 +27,20 @@ export const EXPECTED_IDENTITIES: IdentityExpectation[] = [
     productId: "prod-dolphin-nautilus-cc-plus",
     asin: "B09K4C9WGF",
     brand: "Dolphin",
-    modelTokens: ["nautilus cc plus", "cc plus"],
-    // Maytronics ships CC, CC Pro and CC Supreme alongside CC Plus.
-    denyTokens: ["cc pro", "cc supreme", "nautilus ag", "eon"],
+    /* WI-FI IS PART OF THE MODEL, NOT A FEATURE OF IT.
+       "nautilus cc plus" alone matched B00Q8M0NWE — the non-Wi-Fi sibling in
+       the same variation family, $829 to our $849 — because Amazon's own
+       Model Name field for it reads exactly "Nautilus CC Plus". The token now
+       names the variant we actually hold. */
+    /* Both spellings. The normaliser turns punctuation into spaces, so "Wi-Fi"
+       becomes "wi fi" and "WiFi" becomes "wifi" — two different tokens, and
+       Amazon uses both across its own listings for this family. */
+    modelTokens: ["nautilus cc plus wi-fi", "cc plus wi-fi", "nautilus cc plus wifi", "cc plus wifi"],
+    /* Maytronics ships CC, CC Pro and CC Supreme alongside CC Plus, and the
+       variation family adds bundles that are a different SKU at a different
+       price — B0C2JHQVR7 is "CC Plus Wi-Fi + Caddy" at $898 and is rated for
+       50 ft where ours is rated for 40. */
+    denyTokens: ["cc pro", "cc supreme", "nautilus ag", "eon", "caddy", "cover", "pool-up"],
   },
   {
     productId: "prod-polaris-freedom",

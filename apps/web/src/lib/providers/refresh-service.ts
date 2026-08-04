@@ -140,6 +140,36 @@ export function matchIdentity(
 ): { confirmed: boolean; evidence: string } {
   const a = listing.attributes;
   const fields = [a.modelName, a.modelNumber, a.manufacturerPartNumber].filter(Boolean) as string[];
+
+  /*
+   * THE ASIN WE GOT BACK MUST BE THE ASIN WE ASKED FOR.
+   *
+   * Checked FIRST, before brand or model, because on a variation family it is
+   * the only field that separates the siblings reliably. B09K4C9WGF — the
+   * Nautilus CC Plus Wi-Fi we hold — turns out to be one of NINE size_name
+   * variants under parent B0HBR6VSXS, read from amazon.com on 4 August 2026:
+   *
+   *   B09K4C9WGF  Nautilus CC Plus Wi-Fi              $849.00   40 ft
+   *   B00Q8M0NWE  Nautilus CC Plus                    $829.00
+   *   B0C2JHQVR7  CC Plus Wi-Fi + Caddy               $898.00   50 ft
+   *   ...and six more
+   *
+   * Every one of those carries Brand "Dolphin" and a model name built from
+   * "Nautilus CC Plus". The old gate would have confirmed any of them as our
+   * product and published its price against a review of a different machine.
+   * A request for one ASIN that comes back as another is a redirect to a
+   * sibling, and no amount of string matching on the model name will catch it.
+   */
+  if (listing.asin && norm(listing.asin) !== norm(expected.asin)) {
+    return {
+      confirmed: false,
+      evidence:
+        `ASIN MISMATCH. Asked for ${expected.asin}, the listing returned ${listing.asin}. ` +
+        `On a variation family Amazon serves the parent or a sibling, which shares the brand and ` +
+        `the model name and does not share the price or the specification.`,
+    };
+  }
+
   const brandOk = norm(a.brandName).includes(norm(expected.brand)) || norm(expected.brand).includes(norm(a.brandName));
 
   if (!brandOk) {

@@ -136,13 +136,13 @@ export const REGIONAL_SKU_CONFLICTS: {
     asin: "B00Q8M0NWE",
     readOn: "2026-08-04",
     conflict:
-      "Amazon's own detail table gives Brand 'Dolphin' and Model Name 'Nautilus CC Plus', matching the " +
-      "US listing exactly. The title does not: the UK listing reads 'Ideal for In-Ground Pools up to 50 FT " +
-      "in Length' where the US listing (B09K4C9WGF) reads 40 FT, and the page also carries an 'up to 65 FT' " +
-      "claim elsewhere. A 40 ft rating is the single hardest limit in our review of this machine, so a " +
-      "listing that states 50 is not the same product for our purposes even though Amazon files it under " +
-      "the same model name. Not routed. Reading the UK listing was possible; reading the US one was not, " +
-      "because amazon.com serves this environment a bot-mitigation page.",
+      "NOT A REGIONAL VARIANT AT ALL — a DIFFERENT MODEL, and it exists on amazon.com too. Both listings " +
+      "were read on 4 August 2026. B00Q8M0NWE is one of nine size_name variants under parent B0HBR6VSXS, " +
+      "alongside the B09K4C9WGF we hold: Amazon labels ours 'Nautilus CC Plus Wi-Fi' and this one " +
+      "'Nautilus CC Plus' — the same machine WITHOUT Wi-Fi. On amazon.com it is $829.00 against our " +
+      "$849.00; on amazon.co.uk it is the listing the owner found at roughly £1,800, which is UK import " +
+      "pricing for a different variant rather than a contradiction of the US figure. Its UK title also " +
+      "claims 'up to 50 FT' where ours claims 40. Not routed, and not the product this review describes.",
   },
 ];
 
