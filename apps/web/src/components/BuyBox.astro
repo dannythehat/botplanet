@@ -51,6 +51,8 @@ interface Props {
   emptyNote?: string;
 }
 
+import { PRICE_WITHHELD_LABEL, PRICE_WITHHELD_NOTE } from "../content/commerce/price-display";
+
 const { productName, offers, image, emptyNote } = Astro.props;
 const linkable = offers.filter((o) => o.redirectKey);
 const lead = linkable.find((o) => o.primary) ?? linkable[0] ?? null;
@@ -91,7 +93,7 @@ const others = linkable.filter((o) => o !== lead);
             </p>
 
             <p class="bp-buy__price">
-              {lead.price ?? <span class="bp-buy__noprice">Check current price</span>}
+              {lead.price ?? <span class="bp-buy__noprice">{PRICE_WITHHELD_LABEL}</span>}
             </p>
 
             <ul class="bp-buy__meta">
@@ -103,6 +105,7 @@ const others = linkable.filter((o) => o !== lead);
               {lead.checkedDate && <li>Price checked {lead.checkedDate}</li>}
             </ul>
 
+            {!lead.price && <p class="bp-buy__shipnote">{PRICE_WITHHELD_NOTE}</p>}
             {lead.shippingNote && <p class="bp-buy__shipnote">{lead.shippingNote}</p>}
 
             <a class="bp-buy__cta" href={`/go/${lead.redirectKey}`} rel="sponsored nofollow">

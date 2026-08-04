@@ -12,9 +12,9 @@
     "searchOnly": 0,
     "showable": 9,
     "linkable": 9,
-    "priceShowable": 4,
+    "priceShowable": 0,
     "stockShowable": 4,
-    "schemaEligible": 4,
+    "schemaEligible": 0,
     "rejectedCandidates": 16,
     "destinationsRecorded": 12
   },
@@ -56,6 +56,7 @@
         "schemaEligible": false,
         "blockers": [
           "no price from an approved source",
+          "price display is switched off site-wide — see content/commerce/price-display.ts",
           "stock state unknown — the destination resolving is not proof of stock",
           "shipping not exposed by any checked source"
         ]
@@ -92,11 +93,13 @@
       "publication": {
         "showable": true,
         "linkable": true,
-        "priceShowable": true,
+        "priceShowable": false,
         "stockShowable": true,
         "shippingShowable": true,
-        "schemaEligible": true,
-        "blockers": []
+        "schemaEligible": false,
+        "blockers": [
+          "price display is switched off site-wide — see content/commerce/price-display.ts"
+        ]
       }
     },
     {
@@ -136,6 +139,7 @@
         "schemaEligible": false,
         "blockers": [
           "no price from an approved source",
+          "price display is switched off site-wide — see content/commerce/price-display.ts",
           "stock state unknown — the destination resolving is not proof of stock",
           "shipping not exposed by any checked source"
         ]
@@ -172,11 +176,13 @@
       "publication": {
         "showable": true,
         "linkable": true,
-        "priceShowable": true,
+        "priceShowable": false,
         "stockShowable": true,
         "shippingShowable": true,
-        "schemaEligible": true,
-        "blockers": []
+        "schemaEligible": false,
+        "blockers": [
+          "price display is switched off site-wide — see content/commerce/price-display.ts"
+        ]
       }
     },
     {
@@ -210,11 +216,13 @@
       "publication": {
         "showable": true,
         "linkable": true,
-        "priceShowable": true,
+        "priceShowable": false,
         "stockShowable": true,
         "shippingShowable": true,
-        "schemaEligible": true,
-        "blockers": []
+        "schemaEligible": false,
+        "blockers": [
+          "price display is switched off site-wide — see content/commerce/price-display.ts"
+        ]
       }
     },
     {
@@ -254,6 +262,7 @@
         "schemaEligible": false,
         "blockers": [
           "no price from an approved source",
+          "price display is switched off site-wide — see content/commerce/price-display.ts",
           "stock state unknown — the destination resolving is not proof of stock",
           "shipping not exposed by any checked source"
         ]
@@ -296,6 +305,7 @@
         "schemaEligible": false,
         "blockers": [
           "no price from an approved source",
+          "price display is switched off site-wide — see content/commerce/price-display.ts",
           "stock state unknown — the destination resolving is not proof of stock",
           "shipping not exposed by any checked source"
         ]
@@ -338,6 +348,7 @@
         "schemaEligible": false,
         "blockers": [
           "no price from an approved source",
+          "price display is switched off site-wide — see content/commerce/price-display.ts",
           "stock state unknown — the destination resolving is not proof of stock",
           "shipping not exposed by any checked source"
         ]
@@ -374,11 +385,13 @@
       "publication": {
         "showable": true,
         "linkable": true,
-        "priceShowable": true,
+        "priceShowable": false,
         "stockShowable": true,
         "shippingShowable": true,
-        "schemaEligible": true,
-        "blockers": []
+        "schemaEligible": false,
+        "blockers": [
+          "price display is switched off site-wide — see content/commerce/price-display.ts"
+        ]
       }
     }
   ]
