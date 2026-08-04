@@ -133,3 +133,36 @@ describe("anchors against the real review prose", () => {
     }
   });
 });
+
+describe("phrases that wrap across a line", () => {
+  /* Markdown keeps the author's line breaks inside a paragraph. A multi-word
+     anchor that happened to wrap in the source arrived as "Dolphin\nNautilus
+     CC Plus" and silently did not link — silently, because the page still
+     rendered perfectly and only the link was missing. Found on the live
+     Polaris review. The longer the anchor, the likelier it was to happen. */
+  it("links a multi-word phrase broken by a newline", () => {
+    const src = "<p>Unlike the corded Dolphin\nNautilus CC Plus, which does not.</p>";
+    const { html, applied } = applyInternalLinks(src, POOL);
+    expect(html).toContain('href="/robots/robotic-pool-cleaners/dolphin-nautilus-cc-plus/"');
+    expect(applied.some((a) => a.anchor.includes("Nautilus"))).toBe(true);
+  });
+
+  it("keeps the reader's own line break inside the link text", () => {
+    const { html } = applyInternalLinks("<p>the Dolphin\nNautilus CC Plus today</p>", POOL);
+    expect(html).toMatch(/>Dolphin\s+Nautilus CC Plus</);
+  });
+
+  it("still refuses to match across a word boundary it should not", () => {
+    // "compare" must not fire inside "comparefoo", newline handling or not.
+    const { html } = applyInternalLinks("<p>comparefoo and\ncomparebar</p>", POOL);
+    expect(html).not.toContain("<a ");
+  });
+
+  it("drops an anchor that points at the page being rendered", () => {
+    const src = "<p>The Polaris FREEDOM is cordless.</p>";
+    const self = "/robots/robotic-pool-cleaners/polaris-freedom/";
+    expect(applyInternalLinks(src, POOL, self).html).not.toContain("polaris-freedom");
+    // ...and still links it from any other page.
+    expect(applyInternalLinks(src, POOL).html).toContain("polaris-freedom");
+  });
+});
