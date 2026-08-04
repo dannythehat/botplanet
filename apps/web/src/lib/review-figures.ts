@@ -35,13 +35,30 @@ export interface ReviewFigureRef {
 const escapeHtml = (s: string) =>
   s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
-/** Heading text with tags and entities stripped, for comparison. */
+/**
+ * Heading text reduced to something two sources can agree on.
+ *
+ * SMART PUNCTUATION IS WHY THIS IS MORE THAN A trim().toLowerCase().
+ * Markdown runs typographic substitution, so a heading written as
+ *   ## Navigation, and what "ultrasonic radar" is doing here
+ * arrives as `what “ultrasonic radar” is doing`, with curly quotes. Comparing
+ * that against the straight quotes in content/reviews.ts fails, the figure is
+ * silently skipped, and the page renders perfectly with a picture missing —
+ * which is exactly what happened to the Betta review in production.
+ *
+ * Quotes, apostrophes, dashes and runs of whitespace are all flattened, so a
+ * heading and its reference only have to agree on the words.
+ */
 const plain = (s: string) =>
   s
     .replace(/<[^>]+>/g, "")
     .replace(/&amp;/g, "&")
-    .replace(/&#39;|&apos;/g, "'")
-    .replace(/&quot;/g, '"')
+    .replace(/&#39;|&apos;|&rsquo;|&lsquo;/g, "'")
+    .replace(/&quot;|&ldquo;|&rdquo;/g, '"')
+    .replace(/[‘’‚‛]/g, "'")
+    .replace(/[“”„‟]/g, '"')
+    .replace(/[‐-―]/g, "-")
+    .replace(/\s+/g, " ")
     .trim()
     .toLowerCase();
 

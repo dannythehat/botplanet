@@ -170,3 +170,54 @@ describe("review video", () => {
     }
   });
 });
+
+describe("headings that markdown has re-punctuated", () => {
+  /* Markdown runs typographic substitution. A heading written with straight
+     quotes arrives with curly ones, the reference no longer matches, and the
+     figure is silently dropped — the page still renders, just without the
+     picture. That is what happened to the Betta review in production. */
+  const FIG = [{ afterHeading: 'Navigation, and what "ultrasonic radar" is doing here', src: "/media/reviews/betta-se-plus/sensors.webp" }];
+
+  it("matches a heading whose quotes were curled", () => {
+    const html = '<h2 id="n">Navigation, and what “ultrasonic radar” is doing here</h2><p>body</p>';
+    // dev=true would throw if the heading did not match.
+    expect(() => injectFigures(html, FIG as never, true)).not.toThrow();
+  });
+
+  it("matches a heading whose apostrophe was curled", () => {
+    const ref = [{ afterHeading: "What Betta's own listing says", src: "/media/reviews/betta-se-plus/sensors.webp" }];
+    const html = "<h2 id=\"b\">What Betta’s own listing says</h2><p>body</p>";
+    expect(() => injectFigures(html, ref as never, true)).not.toThrow();
+  });
+
+  it("matches across an en dash written as a hyphen", () => {
+    const ref = [{ afterHeading: "Runtime - the real number", src: "/media/reviews/betta-se-plus/sensors.webp" }];
+    const html = '<h2 id="r">Runtime – the real number</h2><p>body</p>';
+    expect(() => injectFigures(html, ref as never, true)).not.toThrow();
+  });
+
+  it("still throws in dev for a heading that genuinely is not there", () => {
+    const ref = [{ afterHeading: "A heading nobody wrote", src: "/media/reviews/betta-se-plus/sensors.webp" }];
+    expect(() => injectFigures('<h2 id="a">Something else</h2>', ref as never, true)).toThrow(
+      /not in the prose/,
+    );
+  });
+});
+
+describe("every declared figure lands in its review", () => {
+  /* The production check the unit tests above cannot do: run the real figure
+     list against the real compiled headings for every review. A figure that
+     names a heading nobody wrote is a picture that never appears. */
+  it("names a heading that exists, for every figure of every review", () => {
+    for (const review of Object.values(REVIEWS)) {
+      const md = readFileSync(`apps/web/src/reviews/${review.slug}.md`, "utf8");
+      const headings = [...md.matchAll(/^##\s+(.+)$/gm)].map((m) =>
+        m[1].trim().replace(/[‘’]/g, "'").replace(/[“”]/g, '"').toLowerCase(),
+      );
+      for (const f of review.figures ?? []) {
+        const want = f.afterHeading.replace(/[‘’]/g, "'").replace(/[“”]/g, '"').toLowerCase();
+        expect(headings, `${review.slug}: no heading "${f.afterHeading}"`).toContain(want);
+      }
+    }
+  });
+});
