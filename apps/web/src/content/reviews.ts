@@ -1385,6 +1385,157 @@ export const REVIEWS: Record<string, ReviewContent> = {
       "Check the details table, not the title, before buying anywhere.",
     lastReviewed: "2026-08-04",
   },
+
+  "bublue-bubot-800p": {
+    slug: "bublue-bubot-800p",
+    categorySlug: "robotic-pool-cleaners",
+    eyebrow: "Robotic pool cleaner review",
+    title: "BuBlue Bubot 800P Gen2 review",
+    seoTitle: "BuBlue Bubot 800P Gen2 Review | BotPlanet",
+    metaDescription:
+      "An honest review of the BuBlue Bubot 800P Gen2: corded four-zone cleaning that never " +
+      "runs out of battery, the numbers BuBlue actually publishes, and what its shallow-water " +
+      "claim really means.",
+    verdict:
+      "The corded contrarian of the upper mid-range: unlimited mains power, floor-wall-waterline " +
+      "coverage plus steps, published figures many bigger brands withhold, and a stated one-year " +
+      "warranty for about $800. The soft spots are the brand's short track record and a " +
+      "shallow-water story that is avoidance, not cleaning.",
+    bestFor:
+      "A pool up to about 1,076 sq ft where you want every wet surface handled without owning " +
+      "a battery, from a young brand that shows its numbers.",
+    notIdealFor:
+      "A pool much over 1,000 sq ft, anyone who hates cables on principle, or anyone who wants " +
+      "a decade-old brand behind the warranty.",
+    image: {
+      src: "/media/reviews/bublue-bubot-800p/hero.webp",
+      alt:
+        "BotPlanet artwork for the BuBlue Bubot 800P Gen2 corded robotic pool cleaner, shown on " +
+        "a sunlit pool deck with size and cable-length callouts.",
+    },
+    figures: [
+      {
+        afterHeading: "Suction: the numbers BuBlue actually publishes",
+        src: "/media/reviews/bublue-bubot-800p/filtration.webp",
+        caption:
+          "Two 3-litre baskets behind 180-micron ultra-fine filtration — six litres in total. These figures are BuBlue's own, confirmed on its product page.",
+      },
+      {
+        afterHeading: "Four zones, and what \"shallow\" really means here",
+        src: "/media/reviews/bublue-bubot-800p/shallow.webp",
+        caption:
+          "Our artwork prints a 12-inch minimum depth. No source states one: BuBlue's own claim is that its sensors bypass shallow zones — avoidance, not cleaning. Treat the picture as illustration.",
+      },
+      {
+        afterHeading: "The app: path width, car mode and schedules",
+        src: "/media/reviews/bublue-bubot-800p/schedule.webp",
+        caption:
+          "Scheduled cleans booked from the app's calendar. Corded, so a schedule never fails because somebody forgot to put the robot back on charge.",
+      },
+    ],
+    folds: [
+      {
+        id: "the-app-path-width-car-mode-and-schedules",
+        teaser: "Path width, a remote-control car mode, and schedules that never meet a flat battery.",
+      },
+      {
+        id: "above-ground-or-in-ground-both-answers-exist",
+        teaser: "BuBlue's FAQ says above-ground; its materials list says in-ground. Both are BuBlue's.",
+      },
+      {
+        id: "warranty-support-and-the-strike-through-price",
+        teaser: "A real one-year warranty — and why the $1,099 'regular price' is theatre.",
+      },
+      {
+        id: "what-we-cannot-tell-you",
+        teaser: "Six gaps, including the cable length neither source states.",
+      },
+    ],
+    facts: [
+      { label: "Cleans", value: "Floor, walls, waterline" },
+      { label: "Power", value: "Corded mains" },
+      { label: "Max pool area", value: "1,076 sq ft" },
+      { label: "Filter", value: "180 μm, 2 × 3 L" },
+    ],
+    specGroups: [
+      {
+        heading: "Power and runtime",
+        rows: [
+          { label: "Power type", value: "Corded mains" },
+          { label: "Runtime", value: "Unlimited — no battery", note: "No cycle duration is published either." },
+          {
+            label: "Cable length",
+            value: "≈50 ft (our research)",
+            note: "Neither BuBlue's page nor the listing states it — and a cord length is not a pool rating.",
+          },
+          { label: "Motor", value: "150 W three-axis", note: "BuBlue's figure." },
+        ],
+      },
+      {
+        heading: "Pool compatibility",
+        rows: [
+          {
+            label: "Installation",
+            value: "Above-ground (FAQ) / in-ground materials",
+            note: "BuBlue's FAQ says ideal for above-ground; the same FAQ lists vinyl, fibreglass and concrete. Both sentences are BuBlue's.",
+          },
+          { label: "Max pool", value: "1,076 sq ft", note: "An area rating only — BuBlue publishes no length figure." },
+          {
+            label: "Shallow areas",
+            value: "Sensor bypass — avoidance",
+            note: "BuBlue claims its sensors bypass shallow zones. Cleaning them is not the claim, and no minimum depth is published.",
+          },
+        ],
+      },
+      {
+        heading: "Cleaning",
+        rows: [
+          { label: "Surfaces", value: "Floor, walls, waterline, plus steps and platforms", note: "From the listing title and BuBlue's page." },
+          { label: "Suction", value: "3,566 GPH", note: "BuBlue's pump figure, not an independent measurement." },
+          { label: "Brushes", value: "4 roller brushes, 2 suction ports", note: "BuBlue's Bluehole arrangement." },
+          { label: "Navigation", value: "Ultrasonic sensors, planned paths", note: "No camera, no sonar mapping." },
+        ],
+      },
+      {
+        heading: "Filtration",
+        rows: [
+          { label: "Filter", value: "180 μm ultra-fine" },
+          { label: "Basket capacity", value: "2 × 3 L (6 L total)" },
+        ],
+      },
+      {
+        heading: "Control and support",
+        rows: [
+          { label: "App", value: "Bluetooth / Wi-Fi — modes, schedules, path width, car mode, waterline return" },
+          { label: "Modes", value: "Wall, floor, eco, auto" },
+          {
+            label: "Warranty",
+            value: "1 year",
+            note: "Stated on BuBlue's own page, with a 30-day money-back guarantee and 24/7 support beside it.",
+          },
+        ],
+      },
+      {
+        heading: "Handling",
+        rows: [
+          { label: "Weight", value: null, note: "Not published by BuBlue or the listing." },
+          {
+            label: "Dimensions",
+            value: "19 × 18 × 9 in",
+            note: "From the Amazon listing's details table; our artwork prints slightly different figures.",
+          },
+          { label: "Retrieval", value: "One-tap return to the waterline from the app" },
+        ],
+      },
+    ],
+    skuNote:
+      "Specifications come from BuBlue's own product page, read 4 August 2026, and the Amazon " +
+      "listing's details table, machine-read 3 August 2026. The Model Number field reads " +
+      "'Bubot 800P gen2', which settles the 800P / 880P question outright — BuBlue sells a " +
+      "Bubot family with several near-identical names, so check the details table, not the " +
+      "title, before buying anywhere.",
+    lastReviewed: "2026-08-04",
+  },
 };
 
 export function reviewFor(slug: string | undefined): ReviewContent | undefined {

@@ -479,6 +479,55 @@ export const SNAPSHOTS: Record<string, ProductSnapshot> = {
       { need: "You want the water surface skimmed too", test: { kind: "cleans", value: "water_surface" } },
     ],
   },
+
+  "bublue-bubot-800p": {
+    slug: "bublue-bubot-800p",
+    priceBand: "upper_mid",
+    priceBandWhy:
+      "About $800 — level with the camera-equipped Scuba V3 and well under the flagships. What the money buys here is corded certainty and published figures, not a battery or a camera.",
+    shipping: "Prime-eligible on Amazon, so usually a day or two rather than a week.",
+    shippingSpeed: "fast",
+    points: [
+      {
+        label: "Cleans",
+        value: "Floor, walls, waterline, plus steps and platforms",
+        note: "The shallow-area claim is sensor avoidance, not cleaning — see the review.",
+      },
+      {
+        label: "Power",
+        value: "Corded mains",
+        note: "Unlimited runtime, nothing to charge, nothing to age. The cable is about 50 ft by our research — neither source states it.",
+      },
+      {
+        label: "Biggest pool it is rated for",
+        value: "1,076 sq ft",
+        note: "An area rating only. BuBlue publishes no length figure, and a cord length is not one.",
+      },
+      {
+        label: "Suction",
+        value: "3,566 GPH, 150 W motor",
+        note: "BuBlue's own figures — four roller brushes and two suction ports behind them.",
+      },
+      {
+        label: "Filter",
+        value: "180 μm, 2 × 3 L baskets",
+        note: "Six litres of basket in total, per BuBlue's page.",
+      },
+      {
+        label: "Warranty",
+        value: "1 year",
+        note: "Stated by BuBlue, with 30-day money-back and 24/7 support. The brand is young; the term is real.",
+      },
+    ],
+    suitsYouIf:
+      "Your pool is within about 1,076 sq ft and cable reach, and you want every wet surface handled with nothing to charge, from a brand that publishes its numbers.",
+    ruleOutIf:
+      "Your pool is much larger, you hate cables on principle, you want the surface skimmed, or you want a long-established brand behind the warranty.",
+    ruleOuts: [
+      { need: "You would rather have no cable at all", test: { kind: "power", value: "cordless" } },
+      { need: "You want the water surface skimmed too", test: { kind: "cleans", value: "water_surface" } },
+    ],
+  },
 };
 
 export const snapshotFor = (slug: string | undefined): ProductSnapshot | undefined =>

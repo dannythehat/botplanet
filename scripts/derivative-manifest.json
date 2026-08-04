@@ -1735,6 +1735,130 @@
     ]
   },
   {
+    "source": "/media/reviews/bublue-bubot-800p/hero.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-bublue-bubot-800p-hero-webp-360",
+        "src": "/media/reviews/bublue-bubot-800p/hero-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 21636,
+        "checksum": "sha256:15e7a5fb99b0184656538d11fafd9a99438dc7ccc59fdabaf5de09311a095585"
+      },
+      {
+        "id": "media-reviews-bublue-bubot-800p-hero-webp-640",
+        "src": "/media/reviews/bublue-bubot-800p/hero-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 55704,
+        "checksum": "sha256:a0aff64d75ec37bb5172227d19b814545b7e658ce590ba61001fefaf3b9d8002"
+      },
+      {
+        "id": "media-reviews-bublue-bubot-800p-hero-webp-960",
+        "src": "/media/reviews/bublue-bubot-800p/hero-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 104634,
+        "checksum": "sha256:8a8d95a0fce5a5c4cc806260a9a1933bb2b2a39c70a0ebdc4febf7f9cb545b80"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/bublue-bubot-800p/filtration.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-bublue-bubot-800p-filtration-webp-360",
+        "src": "/media/reviews/bublue-bubot-800p/filtration-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 25178,
+        "checksum": "sha256:7d7da5855d14e73b077bfcb01e9efcc819c563e5ca46f3b90d40e05ae56698c6"
+      },
+      {
+        "id": "media-reviews-bublue-bubot-800p-filtration-webp-640",
+        "src": "/media/reviews/bublue-bubot-800p/filtration-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 67102,
+        "checksum": "sha256:a5d60e9a74d40ad7bdf614491c50a1a4a4a85819812b260998f10ac6abc30fd0"
+      },
+      {
+        "id": "media-reviews-bublue-bubot-800p-filtration-webp-960",
+        "src": "/media/reviews/bublue-bubot-800p/filtration-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 137240,
+        "checksum": "sha256:257d64d9c2783256055c23c11581084f4951ed1d3342c4e69897b4b5d11f9158"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/bublue-bubot-800p/schedule.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-bublue-bubot-800p-schedule-webp-360",
+        "src": "/media/reviews/bublue-bubot-800p/schedule-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 23562,
+        "checksum": "sha256:97cc8c7c5867a332b89a887538c5881cd5bd644b9e4c260222a32a1c440f8ca9"
+      },
+      {
+        "id": "media-reviews-bublue-bubot-800p-schedule-webp-640",
+        "src": "/media/reviews/bublue-bubot-800p/schedule-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 60202,
+        "checksum": "sha256:435534d5cb6d89c93db7fb02210b1032458e4fa8e03aad5a25e20b638e55ee15"
+      },
+      {
+        "id": "media-reviews-bublue-bubot-800p-schedule-webp-960",
+        "src": "/media/reviews/bublue-bubot-800p/schedule-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 115286,
+        "checksum": "sha256:519f49d9e3083674359e0352092e099011080867fe539dae776563a1b86634bf"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/bublue-bubot-800p/shallow.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-bublue-bubot-800p-shallow-webp-360",
+        "src": "/media/reviews/bublue-bubot-800p/shallow-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 19516,
+        "checksum": "sha256:48161e250af4672b8868b0f6ad23068e7eeb391ef277a0c285c6413f4d3f5b84"
+      },
+      {
+        "id": "media-reviews-bublue-bubot-800p-shallow-webp-640",
+        "src": "/media/reviews/bublue-bubot-800p/shallow-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 50006,
+        "checksum": "sha256:79d09cba7cd41173106ec13bf06e2e13f9d1b3c8230b3f32ceaf1bfd80ccadb4"
+      },
+      {
+        "id": "media-reviews-bublue-bubot-800p-shallow-webp-960",
+        "src": "/media/reviews/bublue-bubot-800p/shallow-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 94416,
+        "checksum": "sha256:a2defc5abbf3513b0afd495f6a5be753920b228dc55f7b26f99b2b287728b7a1"
+      }
+    ]
+  },
+  {
     "source": "/media/products/dolphin-nautilus-cc-plus.webp",
     "sourceWidth": 1122,
     "sourceHeight": 1402,

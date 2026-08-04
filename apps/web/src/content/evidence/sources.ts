@@ -25,6 +25,10 @@ const HOST_RULES: HostRule[] = [
   { match: /(^|\.)wybotpool\.com$/i, type: "manufacturer_page", publisher: "WYBOT" },
   { match: /(^|\.)maytronics\.com$/i, type: "manufacturer_page", publisher: "Maytronics (Dolphin)" },
   { match: /(^|\.)polarispool\.com$/i, type: "manufacturer_page", publisher: "Polaris" },
+  // Added 4 August 2026. An earlier record tried bubluepool.com, which does
+  // not resolve — the real domain is bublue.com, and the wrong-domain error is
+  // owned in the Bubot 800P review rather than papered over.
+  { match: /(^|\.)bublue\.com$/i, type: "manufacturer_page", publisher: "BUBLUE" },
   { match: /(^|\.)premierrobotic\.com$/i, type: "retailer_listing", publisher: "Premier Robotic" },
   { match: /(^|\.)amazon\.com$/i, type: "retailer_listing", publisher: "Amazon" },
   { match: /(^|\.)lesliespool\.com$/i, type: "retailer_listing", publisher: "Leslie's Pool Supplies" },

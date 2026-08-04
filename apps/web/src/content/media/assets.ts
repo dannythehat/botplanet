@@ -993,6 +993,59 @@ const REVIEW_FIGURES: ReviewFigure[] = [
     scene:
       "the cleaner on rippling night water beside five labelled mode buttons — wall, eco, auto, floor and schedule — above a weekly day picker",
   },
+
+  /* ---- BuBlue Bubot 800P Gen2 ----
+     The hero prints 9.0 in / 18.3 in dimensions and a 49.21 ft cable, and the
+     shallow creative prints a 12 in minimum operational depth. The dimensions
+     differ slightly from the listing's 19 x 18 x 9, the cable figure is
+     research-only, and the depth claim has NO source at all — BuBlue's own
+     page claims shallow-zone AVOIDANCE, not shallow-zone cleaning. All four
+     publish per the owner's standing rule; the review and captions carry the
+     corrections. */
+  {
+    slug: "hero",
+    productSlug: "bublue-bubot-800p",
+    type: "product_in_use",
+    file: "hero.webp",
+    checksum: "sha256:6adf599e12464f147c001c4e87a64ae60d50c3d2a025143c6d59f7c095699e9a",
+    width: 1254,
+    height: 1254,
+    scene:
+      "the grey tracked cleaner on a sunlit pool deck under the words Your Pool's Reliable Partner, with size and cable-length callouts beside it",
+  },
+  {
+    slug: "filtration",
+    productSlug: "bublue-bubot-800p",
+    type: "filtration_detail",
+    file: "filtration.webp",
+    checksum: "sha256:001757383f5b1d173f54ed637d99b6a7d0e4d661952ce912a10af249f49604bb",
+    width: 1254,
+    height: 1254,
+    scene:
+      "the cleaner opened to show its two 3-litre filter baskets, with 180 micron ultra-fine filtration callouts around them",
+  },
+  {
+    slug: "schedule",
+    productSlug: "bublue-bubot-800p",
+    type: "app_screenshot",
+    file: "schedule.webp",
+    checksum: "sha256:71db4c4676e602ea576b232299712f16fecbcf34350f2072a6358408c0c87684",
+    width: 1254,
+    height: 1254,
+    scene:
+      "the cleaner working a pool floor beside a phone showing the app's weekly cleaning schedule calendar",
+  },
+  {
+    slug: "shallow",
+    productSlug: "bublue-bubot-800p",
+    type: "product_in_use",
+    file: "shallow.webp",
+    checksum: "sha256:6d15f822e8d99b2a8df804fc462c5b7043ef36846e76201a52db094b2c9bbed4",
+    width: 1254,
+    height: 1254,
+    scene:
+      "the cleaner on a shallow tanning platform in clear water, with a 12 inch depth callout beside it",
+  },
 ];
 
 /**
@@ -1215,13 +1268,19 @@ export const ACQUISITION_BLOCKERS: AcquisitionBlocker[] = [
     blocker: `${AMAZON_BLOCK.blocker} Maytronics ships several near-identical Nautilus CC variants; only part 99996409-PCI may be matched.${HAS_OWNER_ARTWORK}`,
   },
   {
+    /* This record held the Dolphin Premier until 3 August 2026 and its blocker
+       described that machine's candidate-under-review status. It now holds the
+       BuBlue Bubot 800P Gen2, so the blocker describes the BuBlue instead. */
     productId: "prod-dolphin-premier",
     ...AMAZON_BLOCK,
-    checked: [...AMAZON_BLOCK.checked, "maytronics.com press page — HTTP 404", "Maytronics manual portal for 'Dolphin Premier' — serves a Classic 5 / Top 5 document"],
-    blocker:
-      "This product is a candidate under review: no accepted manufacturer page, no accepted manual and no reliable model number. Even with an Amazon credential, no image may be ingested until the exact model identity is defensible — a generic Dolphin image is not acceptable, and there is no SKU to match one against.",
+    checked: [
+      ...AMAZON_BLOCK.checked,
+      "bublue.com/products/bublue-bubot-800p — read 4 August 2026; product photography present, no media library or press-kit licence published",
+      "Amazon US listing B0GTYX922J — machine-read 3 August 2026; retailer listing, not a licensable media source",
+    ],
+    blocker: `${AMAZON_BLOCK.blocker} BuBlue's own site publishes photography with no stated reuse licence, and no affiliate programme has been checked for the brand yet. BuBlue sells the Bubot family in 300P/500P/700P/800P/880P variants, so any incoming image must be matched to the 800P Gen2 exactly.${HAS_OWNER_ARTWORK}`,
     unblockAction:
-      "Establish the manufacturer page and part number for the Dolphin Premier first (Job 8 identity work), then ingest. Until then this product stays on the placeholder regardless of credentials.",
+      "Ask BuBlue directly for a media pack for the Bubot 800P Gen2, or check whether the brand runs an affiliate programme with a media feed. Until either exists, the product renders owner-created BotPlanet creatives.",
     owner: "manufacturer" as const,
   },
   {

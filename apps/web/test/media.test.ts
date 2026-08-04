@@ -174,10 +174,14 @@ describe("lawful sourcing", () => {
     }
   });
 
-  it("holds Dolphin Premier back on identity, not only on credentials", () => {
+  it("requires exact-variant matching for the BuBlue, not only credentials", () => {
+    /* This record held the Dolphin Premier, whose blocker was identity
+       outright. The BuBlue that replaced it has a confirmed identity; what
+       remains is that no licensed photography route exists and the Bubot
+       family's near-identical names demand exact matching. */
     const b = ACQUISITION_BLOCKERS.find((x) => x.productId === "prod-dolphin-premier")!;
-    expect(b.blocker).toContain("candidate under review");
-    expect(b.blocker).toContain("generic Dolphin image is not acceptable");
+    expect(b.blocker).toContain("800P Gen2");
+    expect(b.blocker).toContain("no stated reuse licence");
     expect(b.owner).toBe("manufacturer");
   });
 

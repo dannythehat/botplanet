@@ -105,33 +105,48 @@ export const RECONCILIATION: ReconciliationEntry[] = [
   },
   { productId: "prod-dolphin-nautilus-cc-plus", field: "appSupport", outcome: "agrees", note: "MyDolphin Plus and Wi-Fi are both stated officially." },
 
-  /* ---------------- Dolphin Premier ---------------- */
+  /* ---------------- BuBlue Bubot 800P Gen2 ----------------
+     This block reconciled the DOLPHIN PREMIER against its dealer page until
+     4 August 2026. The record now holds the BuBlue (see product-names.ts), the
+     editorial was rewritten for it, and every row below compares the BuBlue
+     editorial against the Amazon listing (read 3 August) and BuBlue's own
+     product page (found and read 4 August — an earlier record said no BuBlue
+     website existed, which was our wrong-domain error). */
   {
     productId: "prod-dolphin-premier",
     field: "poolSizeSuitability",
-    outcome: "conflicts",
-    unresolved: true,
-    note: "Stored 'up to ~50 ft'. The only checked source states 'up to 55 in long' — a figure of 55 with an implausible unit. Stored 50 matches neither the number nor the unit, and no corrected figure is invented, so nothing is published.",
+    outcome: "agrees",
+    note: "Stored '~1,076 sq ft'. BuBlue's own FAQ and the listing title both state 1,076 sq ft, as an area. The 50 ft cord is not a pool-length rating and is not stored as one.",
   },
-  { productId: "prod-dolphin-premier", field: "cableLengthFt", outcome: "agrees", note: "Stored 60 ft matches '60 feet thermoplastic rubber cable'." },
-  { productId: "prod-dolphin-premier", field: "runtimeMins", outcome: "agrees", note: "Stored 150 minutes matches '2.5 hours'." },
+  {
+    productId: "prod-dolphin-premier",
+    field: "cableLengthFt",
+    outcome: "unsupported",
+    note: "Stored null. The owner's research gives a 50 ft cord; neither BuBlue's page nor the listing states a length, so nothing is published.",
+  },
+  {
+    productId: "prod-dolphin-premier",
+    field: "runtimeMins",
+    outcome: "not_applicable",
+    note: "Mains-powered unit — it runs until the cycle ends, and no cycle duration is stated by either source.",
+  },
   { productId: "prod-dolphin-premier", field: "chargeTimeHrs", outcome: "not_applicable", note: "Mains-powered unit — there is no battery to charge." },
-  { productId: "prod-dolphin-premier", field: "filtration", outcome: "agrees", note: "Stored multi-media description matches the dealer's NanoFilters / cartridge / leaf-bag listing at 2 microns." },
+  { productId: "prod-dolphin-premier", field: "filtration", outcome: "agrees", note: "Stored dual 3 L baskets with 180-micron ultra-fine filtration matches BuBlue's own '180μm Ultra-Fine' and 2 x 3 L figures." },
   {
     productId: "prod-dolphin-premier",
     field: "navigation",
     outcome: "agrees_with_unverified_detail",
-    note: "SmartNav is stated by the source.",
-    unverifiedDetail: "'(no Wi-Fi)' is an inference — the source does not state the absence of Wi-Fi.",
+    note: "Ultrasonic sensors and app path control are stated — the listing bullets name the sensors, BuBlue's page the path-width control.",
+    unverifiedDetail: "'(no camera)' is an inference — neither source states the absence of a camera.",
   },
-  { productId: "prod-dolphin-premier", field: "weightLbs", outcome: "agrees", note: "Stored 22 lb matches '22 lbs.'." },
-  { productId: "prod-dolphin-premier", field: "warranty", outcome: "agrees", note: "Stored 3-year non-prorated matches '3 yr limited warranty -not pro-rated - not limited to hours/cycles'." },
   {
     productId: "prod-dolphin-premier",
-    field: "appSupport",
+    field: "weightLbs",
     outcome: "unsupported",
-    note: "Stored 'None — single-button plug-and-play'. The source is silent on app support; silence is not a manufacturer statement that there is none.",
+    note: "Stored null. Neither BuBlue's page nor the listing states a weight, so nothing is published.",
   },
+  { productId: "prod-dolphin-premier", field: "warranty", outcome: "agrees", note: "Stored 1 year with 30-day money-back matches BuBlue's own '1 Year Warranty' and 30-day money-back statements." },
+  { productId: "prod-dolphin-premier", field: "appSupport", outcome: "agrees", note: "Stored Bluetooth/Wi-Fi app with modes, schedules, path width, car mode and waterline return matches BuBlue's own feature list." },
 
   /* ---------------- Polaris FREEDOM ---------------- */
   {

@@ -327,6 +327,13 @@ const retiredDolphinPremier: ProductVerification = {
 const BUBOT_LISTING = "https://www.amazon.com/BUBLUE-Bubot-800P-Navigation-Scheduling/dp/B0GTYX922J";
 const BUBOT_LISTING_TITLE = "Amazon US listing (B0GTYX922J) — BUBLUE Bubot 800P Gen2";
 const BUBOT_READ = "2026-08-03";
+/* Found on 4 August 2026, one day after this record said BuBlue had no
+   reachable website. That statement was OUR error — the domain we tried was
+   bubluepool.com; the real one is bublue.com — and the review owns the
+   correction in print rather than burying it. */
+const BUBLUE_PAGE = "https://www.bublue.com/products/bublue-bubot-800p";
+const BUBLUE_PAGE_TITLE = "BuBlue's own product page for the Bubot 800P Gen2";
+const BUBLUE_READ = "2026-08-04";
 
 const dolphinPremier: ProductVerification = {
   productId: "prod-dolphin-premier",
@@ -336,14 +343,14 @@ const dolphinPremier: ProductVerification = {
     canonicalName: "BuBlue Bubot 800P Gen2",
     modelNumber: "Bubot 800P gen2",
     modelNumberSource: BUBOT_LISTING,
-    // BuBlue's own site was not reachable for a product page on the day of the
-    // check, so the retailer listing is the only source — and unusually, it
-    // read. That is why this is the one owner-supplied swap that reaches a
-    // machine-read identity rather than resting on the owner's word.
-    officialProductPageUrl: null,
+    // Identity was machine-read from the retailer listing on 3 August. On
+    // 4 August the manufacturer's own page was found as well — an earlier
+    // version of this record said BuBlue had no reachable website, which was
+    // our wrong-domain error, corrected the day the review was written.
+    officialProductPageUrl: BUBLUE_PAGE,
     manual: null,
     identityIssue:
-      "MODEL AND MANUFACTURER BOTH CHANGED ON 3 AUGUST 2026. This record held the Maytronics Dolphin Premier, which was withdrawn on 31 July for having no manufacturer page, a manual covering a different machine, and no Amazon US listing at all. The owner replaced it with the BuBlue Bubot 800P Gen2. Every observation the Dolphin record held was read from a Maytronics dealer's specification page and has been REMOVED rather than carried across — it describes a different machine from a different manufacturer. The owner's message named an '880P'; the Amazon listing and the owner's own artwork both say 800P, and the listing's Model Number field reads 'Bubot 800P gen2', so 800P is what is recorded. No manufacturer page for this model has been read, so beyond identity the specification is unverified.",
+      "MODEL AND MANUFACTURER BOTH CHANGED ON 3 AUGUST 2026. This record held the Maytronics Dolphin Premier, which was withdrawn on 31 July for having no manufacturer page, a manual covering a different machine, and no Amazon US listing at all. The owner replaced it with the BuBlue Bubot 800P Gen2. Every observation the Dolphin record held was read from a Maytronics dealer's specification page and has been REMOVED rather than carried across — it describes a different machine from a different manufacturer. The owner's message named an '880P'; the Amazon listing and the owner's own artwork both say 800P, and the listing's Model Number field reads 'Bubot 800P gen2', so 800P is what is recorded. On 4 August 2026 BuBlue's own product page was read as well — this record briefly said no BuBlue website existed, which was our wrong-domain error — and the specification now rests on manufacturer statements where the observations say so.",
   },
   sourceChecks: [
     {
@@ -352,6 +359,13 @@ const dolphinPremier: ProductVerification = {
       status: "ok",
       note:
         "Read successfully on 3 August 2026, which is rare for Amazon here. The details table published Brand 'BUBLUE', Manufacturer 'BUBLUE', Model Number 'Bubot 800P gen2', Power Source 'ac' and Product Dimensions 19\"L x 18\"W x 9\"H, and Amazon's own canonical URL reads /BUBLUE-Bubot-800P-Navigation-Scheduling/. Identity only: the buy box is not treated as a price source.",
+    },
+    {
+      url: BUBLUE_PAGE,
+      title: BUBLUE_PAGE_TITLE,
+      status: "ok",
+      note:
+        "Read 4 August 2026, correcting this record's earlier claim that BuBlue had no reachable website — the domain we had tried was wrong. The page states 180 μm Ultra-Fine filtration in dual 3 L baskets, 3,566 GPH from a 150 W three-axis motor, four roller brushes with two suction ports, TangleEase cable management, 'Smart Sensors Bypass Shallow Zones', app features (path width, car mode, one-tap waterline return, schedules), a 1 Year Warranty with 30-day money-back and 24/7 support, and an FAQ calling it ideal for above-ground pools up to 1,076 sq ft while listing vinyl, fiberglass and concrete. Priced $799.99 against a struck-through $1,099.",
     },
     {
       url: "https://www.premierrobotic.com/dolphin-premier-specs",
@@ -368,27 +382,28 @@ const dolphinPremier: ProductVerification = {
   ],
   /* The Dolphin Premier's observations are NOT here: they came from a
      Maytronics dealer page and describe a different manufacturer's machine.
-     What follows was read from the BuBlue's own listing on 3 August 2026, and
-     every line is marked retailer-stated — BuBlue's own site was not reachable
-     for a product page that day. */
+     The lines below were read from the retailer listing on 3 August 2026 and
+     from BuBlue's own product page on 4 August 2026 — the manufacturer page
+     was found a day after this record said no website existed, which was our
+     wrong-domain error. Each line names its source. */
   observations: [
     { field: "powerType", value: "ac (corded)", sourceUrl: BUBOT_LISTING, sourceTitle: BUBOT_LISTING_TITLE, observedOn: BUBOT_READ, note: "Retailer-stated." },
-    { field: "dimensions", value: '19"L x 18"W x 9"H', sourceUrl: BUBOT_LISTING, sourceTitle: BUBOT_LISTING_TITLE, observedOn: BUBOT_READ, note: "Retailer-stated." },
-    { field: "surfacesCleaned", value: "Floor, wall, waterline and shallow areas", sourceUrl: BUBOT_LISTING, sourceTitle: BUBOT_LISTING_TITLE, observedOn: BUBOT_READ, note: "Retailer-stated, from the listing title." },
-    { field: "poolSizeSuitability", value: "Pools up to 1,076 sq ft", sourceUrl: BUBOT_LISTING, sourceTitle: BUBOT_LISTING_TITLE, observedOn: BUBOT_READ, note: "Retailer-stated, as an AREA. The 50 ft power cord is not a pool-length rating and must not be used as one." },
-    { field: "navigation", value: "Smart navigation with app control and scheduling", sourceUrl: BUBOT_LISTING, sourceTitle: BUBOT_LISTING_TITLE, observedOn: BUBOT_READ, note: "Retailer-stated." },
-    { field: "appSupport", value: "App control and scheduling", sourceUrl: BUBOT_LISTING, sourceTitle: BUBOT_LISTING_TITLE, observedOn: BUBOT_READ, note: "Retailer-stated." },
+    { field: "dimensions", value: '19"L x 18"W x 9"H', sourceUrl: BUBOT_LISTING, sourceTitle: BUBOT_LISTING_TITLE, observedOn: BUBOT_READ, note: "Retailer-stated. The owner's artwork prints 18.3\" x 9.0\", close but not identical; the listing's details table is what is recorded." },
+    { field: "surfacesCleaned", value: "Floor, wall, waterline and shallow areas", sourceUrl: BUBOT_LISTING, sourceTitle: BUBOT_LISTING_TITLE, observedOn: BUBOT_READ, note: "Retailer-stated, from the listing title. BuBlue's own wording for the shallow claim is that its sensors 'bypass shallow zones' — avoidance, not cleaning — and no minimum operating depth is published anywhere." },
+    { field: "poolSizeSuitability", value: "Pools up to 1,076 sq ft", sourceUrl: BUBLUE_PAGE, sourceTitle: BUBLUE_PAGE_TITLE, observedOn: BUBLUE_READ, note: "Now manufacturer-stated — BuBlue's own FAQ carries the same 1,076 sq ft the listing title does, as an AREA. The 50 ft power cord is not a pool-length rating and must not be used as one." },
+    { field: "navigation", value: "Smart navigation with app control and scheduling", sourceUrl: BUBOT_LISTING, sourceTitle: BUBOT_LISTING_TITLE, observedOn: BUBOT_READ, note: "Retailer-stated; the listing's bullets name ultrasonic sensors." },
+    { field: "appSupport", value: "Bluetooth/Wi-Fi app: modes, schedules, path width, car mode, one-tap waterline return", sourceUrl: BUBLUE_PAGE, sourceTitle: BUBLUE_PAGE_TITLE, observedOn: BUBLUE_READ, note: "Manufacturer-stated feature list." },
+    { field: "filtration", value: "Dual 3 L baskets (6 L total), 180 μm Ultra-Fine", sourceUrl: BUBLUE_PAGE, sourceTitle: BUBLUE_PAGE_TITLE, observedOn: BUBLUE_READ, note: "Manufacturer-stated. The listing claims dual filtration with no fineness; BuBlue's page supplies both figures." },
+    { field: "filtrationMicrons", value: "180 μm", sourceUrl: BUBLUE_PAGE, sourceTitle: BUBLUE_PAGE_TITLE, observedOn: BUBLUE_READ, note: "Manufacturer-stated." },
+    { field: "poolTypes", value: "Above-ground and in-ground", sourceUrl: BUBLUE_PAGE, sourceTitle: BUBLUE_PAGE_TITLE, observedOn: BUBLUE_READ, note: "The two sources pull in different directions and BOTH readings are stored. BuBlue's FAQ calls it ideal for above-ground pools up to 1,076 sq ft; the same FAQ lists vinyl, fiberglass and concrete — an in-ground materials list — and the listing title says inground. The disagreement is recorded rather than resolved by picking one." },
+    { field: "suctionRate", value: "3,566 GPH from a 150 W three-axis motor; four roller brushes, two suction ports", sourceUrl: BUBLUE_PAGE, sourceTitle: BUBLUE_PAGE_TITLE, observedOn: BUBLUE_READ, note: "Manufacturer-stated pump figures, not an independent measurement." },
+    { field: "warranty", value: "1 year, with 30-day money-back and 24/7 support", sourceUrl: BUBLUE_PAGE, sourceTitle: BUBLUE_PAGE_TITLE, observedOn: BUBLUE_READ, note: "Manufacturer-stated. The listing states no term; BuBlue's own page does." },
   ],
   notPubliclyStated: [
-    { field: "officialProductPageUrl", checked: [BUBOT_LISTING], note: "bubluepool.com did not resolve on 3 August 2026. Everything recorded for this product is retailer-sourced and none of it is presented as manufacturer-stated." },
-    { field: "manualUrl", checked: [BUBOT_LISTING], note: "Not linked from the listing." },
-    { field: "runtimeMins", checked: [BUBOT_LISTING], note: "Corded, so it runs for as long as the cycle lasts; no cycle time is stated." },
-    { field: "cableLengthFt", checked: [BUBOT_LISTING], note: "The owner's research gives a 50 ft cord. Not confirmed from the listing read, and deliberately not stored as a pool-length rating." },
-    { field: "filtrationMicrons", checked: [BUBOT_LISTING], note: "Dual filtration is claimed; no fineness is stated." },
-    { field: "suctionRate", checked: [BUBOT_LISTING], note: "'Powerful suction' is claimed; no figure is given." },
-    { field: "weightLbs", checked: [BUBOT_LISTING], note: "Not stated." },
-    { field: "warranty", checked: [BUBOT_LISTING], note: "No term stated on the listing." },
-    { field: "poolTypes", checked: [BUBOT_LISTING], note: "CONFLICTED, and stored as both. The listing title says inground; the owner's research found BuBlue's own FAQ saying above-ground. Both are carried in the catalogue so neither reading hides the product, and the disagreement is recorded here rather than resolved by picking one." },
+    { field: "manualUrl", checked: [BUBOT_LISTING, BUBLUE_PAGE], note: "Not linked from the listing; no manual found on the product page read." },
+    { field: "runtimeMins", checked: [BUBOT_LISTING, BUBLUE_PAGE], note: "Corded, so it runs for as long as the cycle lasts; no cycle time is stated." },
+    { field: "cableLengthFt", checked: [BUBOT_LISTING, BUBLUE_PAGE], note: "The owner's research gives a 50 ft cord. Neither the listing nor BuBlue's page states it, and it is deliberately not stored as a pool-length rating." },
+    { field: "weightLbs", checked: [BUBOT_LISTING, BUBLUE_PAGE], note: "Not stated by either source." },
   ],
 };
 

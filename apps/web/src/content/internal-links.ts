@@ -162,6 +162,12 @@ export const CATEGORY_ANCHORS: Record<string, InternalAnchor[]> = {
       why: "The camera robot. Named wherever debris recognition or seeing-versus-sweeping comes up, which is its actual differentiator.",
       status: "live",
     },
+    {
+      anchor: "BuBlue Bubot 800P",
+      href: "/robots/robotic-pool-cleaners/bublue-bubot-800p/",
+      why: "The corded counter-argument in the upper mid-range. Named wherever a review weighs a battery against a cable, or reaches for the corded machine that still does the waterline.",
+      status: "live",
+    },
 
     /* ---- Declared now, linked when the page ships. ----
        A planned anchor renders as plain text, so none of these can 404. The
