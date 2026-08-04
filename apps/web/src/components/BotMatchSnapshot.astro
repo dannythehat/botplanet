@@ -1,0 +1,360 @@
+---
+/* ============================================================
+   BotPlanet — the BotMatch snapshot panel.
+
+   A brushed silver plate with black type, sitting in a dark page.
+   The inversion is the point: everything else on the site is light
+   text on dark, so the one panel that answers "is this for me?"
+   should be the one thing that looks like a printed card rather
+   than another section.
+
+   It carries the same summary BotMatch emails after a match, for
+   one product instead of one person: price tier, delivery route,
+   the handful of facts that decide suitability, and — always —
+   the sentence that rules the machine out.
+
+   TWO RULES IT KEEPS.
+
+   No price. Prices come from the offer engine with the date they
+   were checked. A figure set here would be stale a week later and
+   nobody would notice. The band is a tier, and tiers do not rot.
+
+   No missing value invented. A point with no value prints "Not
+   disclosed" in a dimmed style, because a blank cell reads as an
+   oversight and a guess reads as a fact.
+   ============================================================ */
+import { PRICE_BAND_LABEL, PRICE_BAND_STEP, type ProductSnapshot } from "../content/snapshots";
+
+interface Props {
+  snapshot: ProductSnapshot;
+  /** Product name, for the heading. */
+  productName: string;
+  categorySlug: string;
+}
+
+const { snapshot, productName, categorySlug } = Astro.props;
+
+const bandLabel = PRICE_BAND_LABEL[snapshot.priceBand];
+const bandStep = PRICE_BAND_STEP[snapshot.priceBand];
+const BANDS = ["entry", "mid", "upper_mid", "premium"] as const;
+
+const speedLabel =
+  snapshot.shippingSpeed === "fast"
+    ? "Fast"
+    : snapshot.shippingSpeed === "standard"
+      ? "Standard"
+      : "Varies by seller";
+---
+
+<section class="bp-snap" aria-labelledby="snapshot-heading">
+  <div class="bp-snap__plate">
+    <header class="bp-snap__head">
+      <p class="bp-snap__eyebrow">BotMatch snapshot</p>
+      <h2 id="snapshot-heading">{productName}, in short</h2>
+      <p class="bp-snap__lede">
+        The same summary BotMatch sends after a match — the things that decide whether this
+        machine suits your pool, before the detail.
+      </p>
+    </header>
+
+    <div class="bp-snap__grid">
+      <!-- Price tier -->
+      <div class="bp-snap__cell">
+        <p class="bp-snap__label">Price tier</p>
+        <p class="bp-snap__value">{bandLabel}</p>
+        <div class="bp-snap__scale" role="img" aria-label={`${bandLabel}: step ${bandStep} of 4`}>
+          {BANDS.map((b) => (
+            <span class="bp-snap__step" data-on={PRICE_BAND_STEP[b] <= bandStep ? "true" : "false"}></span>
+          ))}
+        </div>
+        <p class="bp-snap__note">{snapshot.priceBandWhy}</p>
+        <p class="bp-snap__micro">
+          We do not print a price here. Live prices sit under
+          <a href="#where-to-buy">current offers</a>, each with the date it was checked.
+        </p>
+      </div>
+
+      <!-- Delivery -->
+      <div class="bp-snap__cell">
+        <p class="bp-snap__label">Delivery</p>
+        <p class="bp-snap__value">
+          {speedLabel}
+          {snapshot.shippingSpeed === "fast" && <span class="bp-snap__tag">Prime</span>}
+        </p>
+        <p class="bp-snap__note">{snapshot.shipping}</p>
+      </div>
+    </div>
+
+    <ul class="bp-snap__points">
+      {snapshot.points.map((p) => (
+        <li class="bp-snap__point" data-known={p.value === null ? "false" : "true"}>
+          <span class="bp-snap__plabel">{p.label}</span>
+          <span class="bp-snap__pvalue">{p.value ?? "Not disclosed"}</span>
+          {p.note && <span class="bp-snap__pnote">{p.note}</span>}
+        </li>
+      ))}
+    </ul>
+
+    <div class="bp-snap__calls">
+      <div class="bp-snap__call bp-snap__call--yes">
+        <p class="bp-snap__calltitle">Suits you if</p>
+        <p>{snapshot.suitsYouIf}</p>
+      </div>
+      <div class="bp-snap__call bp-snap__call--no">
+        <p class="bp-snap__calltitle">Rule it out if</p>
+        <p>{snapshot.ruleOutIf}</p>
+      </div>
+    </div>
+
+    <a class="bp-snap__cta" href={`/botmatch/${categorySlug}/?start=quiz`}>
+      Match this against my pool
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
+</section>
+
+<style is:global>
+  .bp-snap {
+    margin: clamp(2.5rem, 6vw, 4rem) 0;
+  }
+
+  /* Brushed silver. Three gradients rather than one: a broad diagonal sweep
+     for the metal, a fine repeating stripe for the brushed grain, and a soft
+     top highlight so the plate reads as lit rather than flat. */
+  .bp-snap__plate {
+    position: relative;
+    overflow: hidden;
+    padding: clamp(1.5rem, 4vw, 2.6rem);
+    border: 1px solid #9aa3b0;
+    border-radius: 22px;
+    color: #0a0d11;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0) 40%),
+      repeating-linear-gradient(
+        102deg,
+        rgba(255, 255, 255, 0.5) 0px,
+        rgba(255, 255, 255, 0.5) 1px,
+        rgba(155, 165, 178, 0.14) 2px,
+        rgba(155, 165, 178, 0.14) 3px
+      ),
+      linear-gradient(122deg, #f2f5f9 0%, #d6dce5 26%, #b8c0cc 48%, #e8edf3 68%, #c3cad5 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.9),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.18),
+      0 26px 60px rgba(0, 0, 0, 0.5);
+  }
+
+  .bp-snap__eyebrow {
+    margin: 0 0 0.6rem;
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #46505e;
+  }
+
+  .bp-snap h2 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(1.4rem, 3.4vw, 1.95rem);
+    line-height: 1.14;
+    letter-spacing: -0.02em;
+    color: #080b0f;
+  }
+
+  .bp-snap__lede {
+    margin: 0.7rem 0 0;
+    max-width: 54ch;
+    font-size: 0.98rem;
+    line-height: 1.6;
+    color: #3c4553;
+  }
+
+  /* ---------- tier and delivery ---------- */
+  .bp-snap__grid {
+    display: grid;
+    gap: clamp(0.9rem, 2vw, 1.2rem);
+    margin-top: clamp(1.4rem, 3vw, 2rem);
+  }
+
+  .bp-snap__cell {
+    padding: 1.05rem 1.15rem 1.15rem;
+    border: 1px solid rgba(10, 13, 17, 0.14);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.42);
+  }
+
+  .bp-snap__label {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #4d5765;
+  }
+
+  .bp-snap__value {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin: 0.35rem 0 0;
+    font-family: var(--font-display);
+    font-size: 1.28rem;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    color: #080b0f;
+  }
+
+  .bp-snap__tag {
+    padding: 0.16rem 0.5rem;
+    border-radius: 999px;
+    background: #0a0d11;
+    color: #eef1f6;
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .bp-snap__scale { display: flex; gap: 4px; margin: 0.6rem 0 0; }
+
+  .bp-snap__step {
+    height: 5px;
+    flex: 1 1 0;
+    border-radius: 3px;
+    background: rgba(10, 13, 17, 0.16);
+  }
+
+  .bp-snap__step[data-on="true"] { background: #0a0d11; }
+
+  .bp-snap__note {
+    margin: 0.6rem 0 0;
+    font-size: 0.88rem;
+    line-height: 1.55;
+    color: #3c4553;
+  }
+
+  .bp-snap__micro {
+    margin: 0.55rem 0 0;
+    font-size: 0.78rem;
+    line-height: 1.5;
+    color: #5a6373;
+  }
+
+  .bp-snap__micro a { color: #0a0d11; text-decoration: underline; text-underline-offset: 2px; }
+
+  /* ---------- the deciding facts ---------- */
+  .bp-snap__points {
+    display: grid;
+    gap: 1px;
+    margin: clamp(1rem, 2.4vw, 1.4rem) 0 0;
+    padding: 0;
+    list-style: none;
+    border: 1px solid rgba(10, 13, 17, 0.14);
+    border-radius: 14px;
+    overflow: hidden;
+    background: rgba(10, 13, 17, 0.14);
+  }
+
+  .bp-snap__point {
+    display: grid;
+    gap: 0.15rem;
+    padding: 0.85rem 1.1rem;
+    background: rgba(255, 255, 255, 0.46);
+  }
+
+  .bp-snap__plabel {
+    font-family: var(--font-mono);
+    font-size: 0.63rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #4d5765;
+  }
+
+  .bp-snap__pvalue {
+    font-size: 1.02rem;
+    font-weight: 700;
+    color: #080b0f;
+  }
+
+  /* An undisclosed value is dimmed and italic — visibly not a number, so it
+     can never be skim-read as one. */
+  .bp-snap__point[data-known="false"] .bp-snap__pvalue {
+    font-weight: 600;
+    font-style: italic;
+    color: #6b7482;
+  }
+
+  .bp-snap__pnote {
+    font-size: 0.84rem;
+    line-height: 1.5;
+    color: #3c4553;
+  }
+
+  /* ---------- rule in, rule out ---------- */
+  .bp-snap__calls {
+    display: grid;
+    gap: 0.9rem;
+    margin: clamp(1rem, 2.4vw, 1.4rem) 0 0;
+  }
+
+  .bp-snap__call {
+    padding: 1rem 1.15rem;
+    border-radius: 14px;
+    border: 1px solid rgba(10, 13, 17, 0.14);
+    background: rgba(255, 255, 255, 0.46);
+  }
+
+  .bp-snap__call p { margin: 0; font-size: 0.95rem; line-height: 1.6; color: #262e3a; }
+
+  .bp-snap__calltitle {
+    margin: 0 0 0.35rem !important;
+    font-family: var(--font-mono);
+    font-size: 0.63rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .bp-snap__call--yes { border-left: 3px solid #1f7a3d; }
+  .bp-snap__call--yes .bp-snap__calltitle { color: #1f7a3d; }
+  .bp-snap__call--no { border-left: 3px solid #97331f; }
+  .bp-snap__call--no .bp-snap__calltitle { color: #97331f; }
+
+  /* ---------- action ---------- */
+  .bp-snap__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin: clamp(1.1rem, 2.6vw, 1.6rem) 0 0;
+    min-height: 3.1rem;
+    padding: 0 1.25rem;
+    border-radius: 12px;
+    border: 1px solid #000;
+    background: linear-gradient(180deg, #1b212a 0%, #0a0d11 100%);
+    color: #f2f5f9;
+    font-weight: 700;
+    font-size: 0.97rem;
+    text-decoration: none;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16), 0 8px 20px rgba(0, 0, 0, 0.32);
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+  }
+
+  .bp-snap__cta svg { width: 1.05rem; height: 1.05rem; }
+  .bp-snap__cta:hover { transform: translateY(-2px); box-shadow: inset 0 1px 0 rgba(255,255,255,.22), 0 14px 28px rgba(0,0,0,.4); }
+  .bp-snap__cta:focus-visible { outline: 2px solid #0a0d11; outline-offset: 3px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bp-snap__cta, .bp-snap__cta:hover { transform: none; transition: none; }
+  }
+
+  @media (min-width: 720px) {
+    .bp-snap__grid { grid-template-columns: 1.25fr 0.75fr; }
+    .bp-snap__points { grid-template-columns: 1fr 1fr; }
+    .bp-snap__calls { grid-template-columns: 1fr 1fr; }
+  }
+</style>

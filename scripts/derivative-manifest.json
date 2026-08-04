@@ -727,6 +727,130 @@
     ]
   },
   {
+    "source": "/media/reviews/dolphin-nautilus-cc-plus/hero.webp",
+    "sourceWidth": 1122,
+    "sourceHeight": 1402,
+    "derivatives": [
+      {
+        "id": "media-reviews-dolphin-nautilus-cc-plus-hero-webp-360",
+        "src": "/media/reviews/dolphin-nautilus-cc-plus/hero-360w.webp",
+        "width": 360,
+        "height": 450,
+        "bytes": 16294,
+        "checksum": "sha256:254132c36641a7863a5a699547f9aab67f586f1b4d2f953c28d5a90e119fcd8f"
+      },
+      {
+        "id": "media-reviews-dolphin-nautilus-cc-plus-hero-webp-640",
+        "src": "/media/reviews/dolphin-nautilus-cc-plus/hero-640w.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 40600,
+        "checksum": "sha256:c054c394bddc005bc7852a6fe0ac6d98a3516b4d718b276f3024926301287261"
+      },
+      {
+        "id": "media-reviews-dolphin-nautilus-cc-plus-hero-webp-960",
+        "src": "/media/reviews/dolphin-nautilus-cc-plus/hero-960w.webp",
+        "width": 960,
+        "height": 1200,
+        "bytes": 76196,
+        "checksum": "sha256:3c10c79fcc52592bab8dcabcc898a55c2a7e1de1ecdd74d8780f8497b26547e3"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/dolphin-nautilus-cc-plus/plug-and-play.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-dolphin-nautilus-cc-plus-plug-and-play-webp-360",
+        "src": "/media/reviews/dolphin-nautilus-cc-plus/plug-and-play-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 15862,
+        "checksum": "sha256:e4dc5360f43d685052ee5edf1c1367cfbc53ea62ea65915cd1660dd3aa696206"
+      },
+      {
+        "id": "media-reviews-dolphin-nautilus-cc-plus-plug-and-play-webp-640",
+        "src": "/media/reviews/dolphin-nautilus-cc-plus/plug-and-play-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 39314,
+        "checksum": "sha256:f68c321091f119a0c649cda62e59a16d267b51a07e11065dbe9203cd507e365a"
+      },
+      {
+        "id": "media-reviews-dolphin-nautilus-cc-plus-plug-and-play-webp-960",
+        "src": "/media/reviews/dolphin-nautilus-cc-plus/plug-and-play-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 76210,
+        "checksum": "sha256:81fe70cd14014e78c6e9480af1b10536eb369c338cda700c6cfbf3d3a701eaed"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/dolphin-nautilus-cc-plus/app-control.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-dolphin-nautilus-cc-plus-app-control-webp-360",
+        "src": "/media/reviews/dolphin-nautilus-cc-plus/app-control-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 18210,
+        "checksum": "sha256:ddcb3eab6948b9d8bf95041cfc2eb4040b6160934646dfee415305edbe4736e1"
+      },
+      {
+        "id": "media-reviews-dolphin-nautilus-cc-plus-app-control-webp-640",
+        "src": "/media/reviews/dolphin-nautilus-cc-plus/app-control-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 47370,
+        "checksum": "sha256:eea928a925ebcb6276f4aaa0321ba970a36a836118d4da3542e5a099f0b57fcf"
+      },
+      {
+        "id": "media-reviews-dolphin-nautilus-cc-plus-app-control-webp-960",
+        "src": "/media/reviews/dolphin-nautilus-cc-plus/app-control-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 92668,
+        "checksum": "sha256:0d2c0b257e5f83b1d3892ffbbaacfea0e5caf7dde3a058243efd9ff2c2d1be44"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/dolphin-nautilus-cc-plus/filter-access.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-dolphin-nautilus-cc-plus-filter-access-webp-360",
+        "src": "/media/reviews/dolphin-nautilus-cc-plus/filter-access-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 19354,
+        "checksum": "sha256:7450b4ee654cc600e549a47744f965ebd60326e5b139a961f46c8612f6e1bb89"
+      },
+      {
+        "id": "media-reviews-dolphin-nautilus-cc-plus-filter-access-webp-640",
+        "src": "/media/reviews/dolphin-nautilus-cc-plus/filter-access-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 50692,
+        "checksum": "sha256:9f9a85061c590fe66d13bc44404d8979a72e2964aa56fcdadc9263d22ab170f2"
+      },
+      {
+        "id": "media-reviews-dolphin-nautilus-cc-plus-filter-access-webp-960",
+        "src": "/media/reviews/dolphin-nautilus-cc-plus/filter-access-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 95998,
+        "checksum": "sha256:dd933540a9ddd89aafeac50a6141710aade9263016746e2eed8f1f2454475307"
+      }
+    ]
+  },
+  {
     "source": "/media/products/dolphin-nautilus-cc-plus.webp",
     "sourceWidth": 1122,
     "sourceHeight": 1402,

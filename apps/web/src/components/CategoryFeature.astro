@@ -197,6 +197,13 @@ const parts =
   .catfeat__media,
   .catfeat__copy { grid-area: 1 / 1; }
 
+  /* content-visibility lets the browser skip layout and paint for sections
+     that are nowhere near the viewport. With six full-bleed photographs down
+     one page that is the difference between scrolling and dragging.
+     contain-intrinsic-size keeps the scrollbar honest while a section is
+     skipped, so the page does not jump as you go. */
+  .catfeat { content-visibility: auto; contain-intrinsic-size: auto 40rem; }
+
   .catfeat__media { position: relative; z-index: 0; }
 
   .catfeat__media img {
@@ -306,11 +313,15 @@ const parts =
 
   .catfeat__btn--primary:hover { transform: translateY(-2px); box-shadow: inset 0 1px 0 rgba(255,255,255,.34), 0 16px 34px rgba(20, 74, 158, .52); }
 
+  /* No backdrop-filter here, deliberately. Six of these sit down the homepage,
+     and a blurred backdrop has to be re-sampled from the page behind it on
+     every frame — with a full-bleed photograph behind each one, that is what
+     made the page feel heavy to scroll. A slightly more opaque fill gets the
+     same look for nothing. */
   .catfeat__btn--ghost {
     color: #eaf0f8;
-    background: rgba(8, 13, 21, .62);
+    background: rgba(8, 13, 21, .78);
     border: 1px solid rgba(126, 160, 205, .42);
-    backdrop-filter: blur(4px);
   }
 
   .catfeat__btn--ghost:hover { border-color: rgba(170, 200, 240, .72); background: rgba(16, 26, 42, .74); }

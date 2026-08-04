@@ -271,6 +271,73 @@ export function articleSchema(a: ArticleInput) {
   };
 }
 
+export interface ReviewSchemaInput {
+  /** The exact model reviewed. */
+  itemName: string;
+  itemBrand?: string | null;
+  headline: string;
+  description: string;
+  path: string;
+  dateModified?: string;
+  authorName: string;
+  authorPath: string;
+  image?: string;
+  /** The verdict, in the review's own words. */
+  reviewBody: string;
+  positiveNotes?: string[];
+  negativeNotes?: string[];
+}
+
+/**
+ * A Review of a product, with no rating.
+ *
+ * NO reviewRating IS EMITTED, DELIBERATELY. Google's Review markup expects a
+ * score, and a score is exactly the thing BotPlanet has not earned: nothing
+ * here has been tested in a pool. Inventing 4.2/5 to unlock a star in the
+ * search result would be the single most rewarded lie available to this site.
+ * The markup describes what the review is and who wrote it; the stars stay off
+ * until there is testing behind them.
+ *
+ * positiveNotes / negativeNotes carry the "best for" and "not ideal for" lines,
+ * which are claims we can actually stand behind.
+ */
+export function reviewSchema(r: ReviewSchemaInput) {
+  const list = (items: string[] | undefined, name: string) =>
+    items && items.length
+      ? {
+          "@type": "ItemList",
+          name,
+          itemListElement: items.map((text, i) => ({
+            "@type": "ListItem",
+            position: i + 1,
+            name: text,
+          })),
+        }
+      : undefined;
+
+  return {
+    "@type": "Review",
+    "@id": `${absUrl(r.path)}#review`,
+    headline: r.headline,
+    description: r.description,
+    reviewBody: r.reviewBody,
+    mainEntityOfPage: absUrl(r.path),
+    ...(r.image ? { image: absUrl(r.image) } : {}),
+    ...(r.dateModified ? { dateModified: r.dateModified } : {}),
+    author: { "@type": "Person", name: r.authorName, url: absUrl(r.authorPath) },
+    publisher: { "@id": `${SITE_URL}/#organization` },
+    itemReviewed: {
+      "@type": "Product",
+      name: r.itemName,
+      ...(r.itemBrand ? { brand: { "@type": "Brand", name: r.itemBrand } } : {}),
+    },
+    ...(list(r.positiveNotes, "Best for") ? { positiveNotes: list(r.positiveNotes, "Best for") } : {}),
+    ...(list(r.negativeNotes, "Not ideal for")
+      ? { negativeNotes: list(r.negativeNotes, "Not ideal for") }
+      : {}),
+  };
+}
+
 export interface QA {
   q: string;
   a: string;

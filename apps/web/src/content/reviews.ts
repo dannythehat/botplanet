@@ -15,6 +15,7 @@
 
 import type { SpecGroup } from "../components/SpecTable.astro";
 import type { HeroImage } from "../components/CategoryHero.astro";
+import type { ReviewFigureRef } from "../lib/review-figures";
 
 export interface ReviewContent {
   /** Product slug — matches content/products.ts and the D1 row. */
@@ -32,6 +33,14 @@ export interface ReviewContent {
   image?: HeroImage;
   /** Four facts a buyer decides on. */
   facts: { label: string; value: string }[];
+  /**
+   * Figures placed inside the prose, each named by the heading it sits under.
+   *
+   * A figure may only be listed here if what is printed inside it agrees with
+   * the review. Three of the seven creatives supplied for the Nautilus were
+   * held back on that rule — see REVIEW_FIGURES_WITHHELD in media/assets.ts.
+   */
+  figures?: ReviewFigureRef[];
   specGroups: SpecGroup[];
   /** Which SKU the specifications describe. */
   skuNote: string;
@@ -59,11 +68,31 @@ export const REVIEWS: Record<string, ReviewContent> = {
       "The waterline is your actual complaint, your pool runs longer than 40 ft, or you want " +
       "a cordless machine.",
     image: {
-      src: "/media/products/dolphin-nautilus-cc-plus.webp",
+      src: "/media/reviews/dolphin-nautilus-cc-plus/hero.webp",
       alt:
         "BotPlanet artwork for the Dolphin Nautilus CC Plus Wi-Fi robotic pool cleaner, shown " +
-        "in black and blue with its swivel cable and the MyDolphin Plus app.",
+        "lifting out of dark water beside a phone running the Dolphin app.",
     },
+    figures: [
+      {
+        afterHeading: "What it actually cleans, and how",
+        src: "/media/reviews/dolphin-nautilus-cc-plus/plug-and-play.webp",
+        caption:
+          "Corded, so there is no charge cycle to plan around: the power supply sits by the pool and the robot runs whenever you tell it to.",
+      },
+      {
+        afterHeading: "Filtration and the maintenance reality",
+        src: "/media/reviews/dolphin-nautilus-cc-plus/filter-access.webp",
+        caption:
+          "The baskets lift out through the top, which is the difference between rinsing the filter and dreading it.",
+      },
+      {
+        afterHeading: "The app",
+        src: "/media/reviews/dolphin-nautilus-cc-plus/app-control.webp",
+        caption:
+          "MyDolphin Plus handles scheduling and cycle selection. What it does not do is tell you the filter is full.",
+      },
+    ],
     facts: [
       { label: "Power", value: "Corded mains" },
       { label: "Cleans", value: "Floor and walls" },
