@@ -174,6 +174,12 @@ export const CATEGORY_ANCHORS: Record<string, InternalAnchor[]> = {
       why: "The budget wall-climber. Named wherever a review tells a reader the full floor-wall-waterline job can be had for about $500.",
       status: "live",
     },
+    {
+      anchor: "AquaSense 2 Ultra",
+      href: "/robots/robotic-pool-cleaners/beatbot-aquasense-2-ultra/",
+      why: "The catalogue's ceiling: five jobs including clarification, and the 3-year full replacement warranty every warranty discussion ends up comparing against.",
+      status: "live",
+    },
 
     /* ---- Declared now, linked when the page ships. ----
        A planned anchor renders as plain text, so none of these can 404. The

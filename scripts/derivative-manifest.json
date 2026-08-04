@@ -1983,6 +1983,130 @@
     ]
   },
   {
+    "source": "/media/reviews/beatbot-aquasense-2-ultra/hero.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-beatbot-aquasense-2-ultra-hero-webp-360",
+        "src": "/media/reviews/beatbot-aquasense-2-ultra/hero-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 18600,
+        "checksum": "sha256:c09a1b1bdf0edd301e31fbc5118755f14386f1dc5898021fa768affe17788b56"
+      },
+      {
+        "id": "media-reviews-beatbot-aquasense-2-ultra-hero-webp-640",
+        "src": "/media/reviews/beatbot-aquasense-2-ultra/hero-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 47984,
+        "checksum": "sha256:95b123e4e613bea7b0826185c581dd93f5c598f371a0f366d647b1ca6dc4c73b"
+      },
+      {
+        "id": "media-reviews-beatbot-aquasense-2-ultra-hero-webp-960",
+        "src": "/media/reviews/beatbot-aquasense-2-ultra/hero-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 90360,
+        "checksum": "sha256:bea06f510fad680504a070629b98fb4c21967e9b7638808d0537e901ef0b357a"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/beatbot-aquasense-2-ultra/coverage.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-beatbot-aquasense-2-ultra-coverage-webp-360",
+        "src": "/media/reviews/beatbot-aquasense-2-ultra/coverage-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 20432,
+        "checksum": "sha256:40074a2250fada37f3cc333cc7b67a09714caf4f9eb5cf661717bd95237ffcf5"
+      },
+      {
+        "id": "media-reviews-beatbot-aquasense-2-ultra-coverage-webp-640",
+        "src": "/media/reviews/beatbot-aquasense-2-ultra/coverage-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 53988,
+        "checksum": "sha256:355041ec3ca2fffe31d81ab1be806544cf72cbf4307984409952fe12a2ac35f1"
+      },
+      {
+        "id": "media-reviews-beatbot-aquasense-2-ultra-coverage-webp-960",
+        "src": "/media/reviews/beatbot-aquasense-2-ultra/coverage-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 108040,
+        "checksum": "sha256:6d9c95fd2a2bfb68b500a4d6974ceadbbd800e4d501f5c40b3b7e0211347fede"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/beatbot-aquasense-2-ultra/navigation.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-beatbot-aquasense-2-ultra-navigation-webp-360",
+        "src": "/media/reviews/beatbot-aquasense-2-ultra/navigation-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 22720,
+        "checksum": "sha256:548c857c4fd6a6b65f8a13a13998b0e9e779711b1678d2b552c0e32024aaf887"
+      },
+      {
+        "id": "media-reviews-beatbot-aquasense-2-ultra-navigation-webp-640",
+        "src": "/media/reviews/beatbot-aquasense-2-ultra/navigation-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 59256,
+        "checksum": "sha256:6409f974ce473d08892dc6ddb712ed6d3f8865657d13cae609e3f3ce77160b8d"
+      },
+      {
+        "id": "media-reviews-beatbot-aquasense-2-ultra-navigation-webp-960",
+        "src": "/media/reviews/beatbot-aquasense-2-ultra/navigation-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 116410,
+        "checksum": "sha256:d13b7f48b31303ab085f7389e703ce4bb3cd6c5c70ea38c41b1170bbbd9c8fb1"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/beatbot-aquasense-2-ultra/battery.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-beatbot-aquasense-2-ultra-battery-webp-360",
+        "src": "/media/reviews/beatbot-aquasense-2-ultra/battery-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 21254,
+        "checksum": "sha256:a7505206bc030c0f21e3d58265d9cfb7f0d830c3a3308a29f03473c4d3793a15"
+      },
+      {
+        "id": "media-reviews-beatbot-aquasense-2-ultra-battery-webp-640",
+        "src": "/media/reviews/beatbot-aquasense-2-ultra/battery-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 53512,
+        "checksum": "sha256:71993cd21829bcfc0d0b5d3721a220523b5e8bb2ffc7c3eaf80ddfed56aae324"
+      },
+      {
+        "id": "media-reviews-beatbot-aquasense-2-ultra-battery-webp-960",
+        "src": "/media/reviews/beatbot-aquasense-2-ultra/battery-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 100864,
+        "checksum": "sha256:6a743a050acbacb586eaac32ba141d563a4cee0056a09d85fabb6d79c708919d"
+      }
+    ]
+  },
+  {
     "source": "/media/products/dolphin-nautilus-cc-plus.webp",
     "sourceWidth": 1122,
     "sourceHeight": 1402,

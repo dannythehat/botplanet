@@ -577,6 +577,55 @@ export const SNAPSHOTS: Record<string, ProductSnapshot> = {
       { need: "You would rather have mains power than a battery", test: { kind: "power", value: "corded" } },
     ],
   },
+
+  "beatbot-aquasense-2-ultra": {
+    slug: "beatbot-aquasense-2-ultra",
+    priceBand: "premium",
+    priceBandWhy:
+      "$2,299 from Beatbot's own store — the most expensive machine we cover. The premium buys the only five-job set in the catalogue and a 3-year full replacement warranty nothing else matches.",
+    shipping: "Sold on Amazon and direct from Beatbot's own store.",
+    shippingSpeed: "varies",
+    points: [
+      {
+        label: "Cleans",
+        value: "Floor, walls, waterline, water surface — plus clarification",
+        note: "Beatbot's 5-in-1. The clarifier doses the water as it drives; refills are a consumable.",
+      },
+      {
+        label: "Power",
+        value: "Cordless, wireless dock",
+        note: "13,400 mAh — up to 10 h skimming, 5 h floors, 5 h walls and waterline; 4.5 h to charge.",
+      },
+      {
+        label: "Biggest pool it is rated for",
+        value: "3,875 sq ft",
+        note: "Beatbot's lab-tested figure for floor cleaning in one full cycle.",
+      },
+      {
+        label: "Navigation",
+        value: "Camera + sensor pool mapping",
+        note: "HybridSense fusion with CleverNav path planning; inlets, drains and ladders read as obstacles.",
+      },
+      {
+        label: "Filter",
+        value: "Two-stage, down to 150 μm",
+        note: "Beatbot's stated fineness.",
+      },
+      {
+        label: "Warranty",
+        value: "3-year full replacement",
+        note: "Beatbot calls it the industry's first. The strongest term in our catalogue.",
+      },
+    ],
+    suitsYouIf:
+      "Your in-ground pool is large and complicated — sunk debris, walls, a waterline ring, floating leaves and summer cloudiness — and you want one machine for all of it with the longest warranty in the class.",
+    ruleOutIf:
+      "Your pool is modest or above-ground, you want skimming without flagship money, or a mid-range machine already covers your actual problems.",
+    ruleOuts: [
+      { need: "You would rather have mains power than a battery", test: { kind: "power", value: "corded" } },
+      { need: "You only need the surface skimmed, not the whole pool", test: { kind: "cleans", value: "water_surface" } },
+    ],
+  },
 };
 
 export const snapshotFor = (slug: string | undefined): ProductSnapshot | undefined =>

@@ -58,15 +58,20 @@ export const EXPECTED_IDENTITIES: IdentityExpectation[] = [
     denyTokens: ["se pro", "betta se 2", "betta plus"],
   },
   {
+    /* CORRECTED 4 August 2026. This entry still held B0DMN6NV6H — the listing
+       the destination register RETIRED on 3 August when the owner supplied
+       B0G7B6F5FZ — so every daily read since had been checking a listing the
+       buy button no longer pointed at. The same class of bug as the X1 Pro
+       Max's retired-ASIN entry. The new listing has never been machine-read
+       (bot-mitigation page on every direct attempt), so the first clean
+       provider read is what confirms it. */
     productId: "prod-beatbot-aquasense-2-ultra",
-    asin: "B0DMN6NV6H",
+    asin: "B0G7B6F5FZ",
     brand: "Beatbot",
     modelTokens: ["aquasense 2 ultra", "prcmds02"],
     // The Pro is the 4-in-1 in the same series; the Ultra adds clarification.
     denyTokens: ["aquasense 2 pro", "aquasense 2 plus", "iskim"],
-    // Identity is confirmed but the listing exposes no buy box, so it stays on
-    // the exception list until it does.
-    exception: "unresolved_identity",
+    exception: "recently_changed",
   },
   {
     productId: "prod-dolphin-e10",
@@ -87,9 +92,9 @@ export const EXPECTED_IDENTITIES: IdentityExpectation[] = [
     brand: "AIPER",
     modelTokens: ["seagull se", "zt2003"],
     denyTokens: ["seagull pro", "seagull plus", "seagull 1000", "scuba"],
-    /* Daily until the first clean read of the new ASIN confirms identity and
-       price, then back to the normal cadence. */
-    exception: "recently_changed",
+    /* Exception lifted 4 August 2026: the first clean read of this ASIN
+       confirmed identity and price ($159.99, in stock) the same day, which is
+       what the daily watch existed to see. Back to the normal cadence. */
   },
   {
     productId: "prod-aiper-scuba-x1",
@@ -123,9 +128,10 @@ export const EXPECTED_IDENTITIES: IdentityExpectation[] = [
        "800p" alone — it is a whole-token substring of the real name and would
        refuse the machine itself. */
     denyTokens: ["880p", "700p", "500p", "300p", "800p pro", "800p max"],
-    /* Daily until the first clean read confirms identity and price on this
-       newly adopted destination, then back to the normal cadence. */
-    exception: "recently_changed",
+    /* Exception lifted 4 August 2026, the day it was added: the refresh run
+       after the review deployed read the listing cleanly — identity confirmed
+       on the structured fields, $799.97, in stock. Back to the normal
+       cadence. */
   },
   {
     /* MOVED OFF AWAITING_DISCOVERY on 4 August 2026 — it had been stale there
@@ -142,7 +148,11 @@ export const EXPECTED_IDENTITIES: IdentityExpectation[] = [
        "2026 WYBOT C1" and read C1 PLUS in its identity fields. Deny is checked
        before matching, so "c1 plus" refuses before "c1" can confirm. */
     denyTokens: ["c1 plus", "c1 pro", "c1 max", "c2", "s2", "s3", "a1", "b1", "f1"],
-    exception: "recently_changed",
+    /* Exception lifted 4 August 2026, the day it was added: the refresh run
+       after the review deployed machine-read the listing at last — Brand
+       'WYBOT', Model Number 'OS7010C', Model Name 'C1', $399.99, in stock —
+       which also settled the model number the verification record had refused
+       to take from third-party manual libraries. Back to the normal cadence. */
   },
 ];
 

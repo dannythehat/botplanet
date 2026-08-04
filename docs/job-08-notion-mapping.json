@@ -4,12 +4,12 @@
   "fieldsInRegistry": 31,
   "totals": {
     "fieldRecords": 372,
-    "evidenceRecords": 199,
+    "evidenceRecords": 200,
     "stateCounts": {
-      "populated": 193,
+      "populated": 194,
       "unknown": 28,
       "not_applicable": 31,
-      "not_publicly_stated": 97,
+      "not_publicly_stated": 96,
       "conflicting": 1,
       "suppressed": 19,
       "pending_verification": 3
@@ -25,7 +25,7 @@
       "not_applicable": 11
     },
     "rawPercent": 57,
-    "weightedPercent": 64,
+    "weightedPercent": 65,
     "conflicts": 3,
     "unresolvedConflicts": 1
   },
@@ -37,35 +37,34 @@
       "path": "/robots/robotic-pool-cleaners/wybot-c1/",
       "canonicalName": "WYBOT C1 Cordless Robotic Pool Cleaner",
       "brand": "WYBOT",
-      "modelNumber": null,
+      "modelNumber": "OS7010C",
       "officialProductPage": "https://www.wybotpool.com/products/wybot-c1-cordless-robotic-pool-cleaner",
       "manualUrl": null,
       "manualDocumentId": null,
       "manualRevision": null,
-      "modelIdentityNote": "WYBOT sells C1, C1 Pro and C1 Max as separate models with separate manuals. The stored record is the base C1; no model number is published on the official page, so the three cannot be told apart by SKU here. Third-party manual libraries list 'OS7010C' for a C1, but that string was not found on wybotpool.com and is therefore not recorded as the model number.",
+      "modelIdentityNote": "WYBOT sells C1, C1 Pro and C1 Max as separate models with separate manuals, and wybotpool.com publishes no model number for any of them. The model number here comes from the Amazon listing's details table, machine-read on 4 August 2026 — until that read, the C1 could not be told apart from its siblings by SKU at all, which is why one earlier candidate titled 'C1' turned out to be a C1 PLUS.",
       "verificationDate": "2026-07-31",
-      "sourcesUsed": 1,
+      "sourcesUsed": 2,
       "sourcesUnreadable": [
         "https://www.amazon.com/WYBOT-Pool-Vacuum-Inground-Navigation/dp/B0G64JV6K4",
         "https://www.wybotpool.com/pages/user-manual"
       ],
-      "completenessRawPercent": 61,
-      "completenessWeightedPercent": 71,
+      "completenessRawPercent": 64,
+      "completenessWeightedPercent": 75,
       "fieldsApplicable": 28,
-      "fieldsPublishable": 17,
+      "fieldsPublishable": 18,
       "weightApplicable": 102,
-      "weightPublishable": 72,
+      "weightPublishable": 77,
       "fieldStates": {
-        "populated": 17,
+        "populated": 18,
         "unknown": 0,
         "not_applicable": 3,
-        "not_publicly_stated": 11,
+        "not_publicly_stated": 10,
         "conflicting": 0,
         "suppressed": 0,
         "pending_verification": 0
       },
       "fieldsNotPubliclyStated": [
-        "modelNumber",
         "manualUrl",
         "batteryCapacity",
         "maxDepthFt",
@@ -107,12 +106,12 @@
         {
           "gate": "weighted_completeness",
           "passed": true,
-          "detail": "weighted completeness 71% against a 65% floor"
+          "detail": "weighted completeness 75% against a 65% floor"
         },
         {
           "gate": "model_identity",
           "passed": true,
-          "detail": "identified by https://www.wybotpool.com/products/wybot-c1-cordless-robotic-pool-cleaner, model number not published by the maker, no manual accepted"
+          "detail": "identified by https://www.wybotpool.com/products/wybot-c1-cordless-robotic-pool-cleaner, with a published model number, no manual accepted"
         },
         {
           "gate": "no_material_conflict",

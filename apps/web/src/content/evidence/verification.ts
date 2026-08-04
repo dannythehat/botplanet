@@ -106,12 +106,18 @@ const wybotC1: ProductVerification = {
   identity: {
     brand: "WYBOT",
     canonicalName: "WYBOT C1 Cordless Robotic Pool Cleaner",
-    modelNumber: null,
-    modelNumberSource: null,
+    /* RESOLVED 4 August 2026 by the price checker's first clean read of the
+       owner-confirmed listing B0GYWJMNWK: the details table gives Brand
+       'WYBOT', Model Number 'OS7010C', Model Name 'C1'. This is the same
+       string third-party manual libraries had listed, which this record
+       refused to accept without a primary source — the listing's own
+       structured fields are that source. */
+    modelNumber: "OS7010C",
+    modelNumberSource: "https://www.amazon.com/WYBOT-C1-Cordless-Inground-Professional/dp/B0GYWJMNWK",
     officialProductPageUrl: WYBOT_PAGE,
     manual: null,
     identityIssue:
-      "WYBOT sells C1, C1 Pro and C1 Max as separate models with separate manuals. The stored record is the base C1; no model number is published on the official page, so the three cannot be told apart by SKU here. Third-party manual libraries list 'OS7010C' for a C1, but that string was not found on wybotpool.com and is therefore not recorded as the model number.",
+      "WYBOT sells C1, C1 Pro and C1 Max as separate models with separate manuals, and wybotpool.com publishes no model number for any of them. The model number here comes from the Amazon listing's details table, machine-read on 4 August 2026 — until that read, the C1 could not be told apart from its siblings by SKU at all, which is why one earlier candidate titled 'C1' turned out to be a C1 PLUS.",
   },
   sourceChecks: [
     {
@@ -129,10 +135,10 @@ const wybotC1: ProductVerification = {
     },
     {
       url: "https://www.amazon.com/WYBOT-C1-Cordless-Inground-Professional/dp/B0GYWJMNWK",
-      title: "Amazon US listing (WYBOT C1) — replacement supplied by the owner",
-      status: "not_rechecked",
+      title: "Amazon US listing (WYBOT C1) — current destination, machine-read",
+      status: "ok",
       note:
-        "ASIN B0GYWJMNWK. Supplied and confirmed by the owner on 3 August 2026 as the base C1. Not independently read: Amazon returns a bot-mitigation page to server-side requests. This matters more here than elsewhere — WYBOT publishes no model number and sells C1, C1 Pro and C1 Max under near-identical titles, so the owner's confirmation is the only thing separating them and no machine check stands behind it.",
+        "ASIN B0GYWJMNWK. Supplied and confirmed by the owner on 3 August 2026; direct server-side reads met Amazon's bot-mitigation page, so identity rested on the owner's word until 4 August, when the price checker's provider read the listing cleanly: Brand 'WYBOT', Model Number 'OS7010C', Model Name 'C1', $399.99, In Stock. The identity now stands on published fields — the machine check the 3 August note said was missing.",
     },
     {
       url: "https://www.wybotpool.com/pages/user-manual",
@@ -714,7 +720,13 @@ const beatbotAquasense2Ultra: ProductVerification = {
       "Beatbot sells AquaSense 2, AquaSense 2 Pro and AquaSense 2 Ultra with separate manuals and materially different capability. Only Ultra figures are recorded; no value is carried across from the Pro.",
   },
   sourceChecks: [
-    { url: BEATBOT_PAGE, title: BEATBOT_TITLE, status: "ok" },
+    {
+      url: BEATBOT_PAGE,
+      title: BEATBOT_TITLE,
+      status: "ok",
+      note:
+        "Re-read 4 August 2026 for the review build; every figure below re-confirmed, including up to 10 hours surface cleaning — the owner's battery creative prints 11, which no source states. The re-read added detail: CleverNav™ is Beatbot's own path-planning name alongside HybridSense® (the artwork's 'CleverNav' checks out); the platform capability is named Adaptive Multi-Platform Cleaning (the artwork's 'multizone mode' is not Beatbot's term); the clarifier is ClearWater™, described as 100% natural, with AquaRefine™ refill kits sold as accessories; charging is on a wireless dock; and Beatbot's own store lists $2,299 against a struck $3,150.",
+    },
     { url: BEATBOT_MANUAL_INDEX, title: "Beatbot official user-manual index", status: "ok" },
     {
       url: "https://www.amazon.com/Beatbot-AquaSense-Cordless-Cleaning-Clarification/dp/B0DMN6NV6H",
