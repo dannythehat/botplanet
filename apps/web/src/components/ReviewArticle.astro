@@ -27,12 +27,16 @@
    ============================================================ */
 import ReviewHeader from "./ReviewHeader.astro";
 import BotMatchSnapshot from "./BotMatchSnapshot.astro";
+import BuyBox from "./BuyBox.astro";
+import VideoSection from "./VideoSection.astro";
 import SpecTable from "./SpecTable.astro";
 import BotMatchCta from "./BotMatchCta.astro";
 import ArticleFooter from "./ArticleFooter.astro";
 import { botMatchCtaFor } from "../content/category-sections";
 import { injectFigures } from "../lib/review-figures";
 import { snapshotFor } from "../content/snapshots";
+import { applyInternalLinks } from "../lib/internal-linker";
+import { anchorsFor } from "../content/internal-links";
 import type { ReviewContent } from "../content/reviews";
 
 interface Props {
@@ -41,13 +45,19 @@ interface Props {
   html: string;
   /** Product name, for the snapshot heading. */
   productName: string;
+  /** Live offers, already filtered to what may be published. */
+  offers?: import("./BuyBox.astro").BuyOffer[];
 }
 
-const { review, html, productName } = Astro.props;
+const { review, html, productName, offers = [] } = Astro.props;
 const snapshot = snapshotFor(review.slug);
 const bmCta = botMatchCtaFor(review.categorySlug);
 
-const body = injectFigures(html, review.figures, import.meta.env.DEV);
+/* Figures first, then links: the linker refuses to work inside a figure or a
+   caption, so the figures have to exist before it runs for that to mean
+   anything. */
+const withFigures = injectFigures(html, review.figures, import.meta.env.DEV);
+const { html: body } = applyInternalLinks(withFigures, anchorsFor(review.categorySlug));
 ---
 
 <ReviewHeader
@@ -67,6 +77,13 @@ const body = injectFigures(html, review.figures, import.meta.env.DEV);
 )}
 
 <article class="bp-prose" set:html={body} />
+
+{/* The buy box sits after the reasoning and before the specification detail:
+    a reader who has decided does not have to scroll past a spec table to act,
+    and one who has not is not asked to buy before the argument is made. */}
+<BuyBox productName={productName} offers={offers} image={review.image ?? null} />
+
+{review.video && <VideoSection video={review.video} productName={productName} />}
 
 <SpecTable
   id="specifications"
@@ -99,6 +116,31 @@ const body = injectFigures(html, review.figures, import.meta.env.DEV);
     margin: 0 0 clamp(3rem, 7vw, 5rem);
   }
 
+  /* A milled rule above every section heading, so the article reads as a
+     stack of parts rather than one continuous column of text. Bright at the
+     left where the eye starts and fading out to the right — a full-width line
+     of even weight reads as a table border, not a divider. */
+  .bp-prose h2::before {
+    content: "";
+    display: block;
+    height: 2px;
+    width: min(100%, 30rem);
+    margin-bottom: clamp(1.4rem, 3vw, 2rem);
+    border-radius: 2px;
+    background: linear-gradient(
+      90deg,
+      rgba(246, 248, 252, 0.85) 0%,
+      rgba(200, 208, 222, 0.5) 18%,
+      rgba(160, 170, 186, 0.28) 40%,
+      rgba(140, 150, 166, 0.1) 68%,
+      transparent 100%
+    );
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
+  }
+
+  /* The first heading follows the snapshot plate, which already separates it. */
+  .bp-prose > h2:first-child::before { display: none; }
+
   .bp-prose h2 {
     margin: clamp(2.5rem, 6vw, 3.5rem) 0 0;
     font-family: var(--font-display);
@@ -125,6 +167,19 @@ const body = injectFigures(html, review.figures, import.meta.env.DEV);
     line-height: 1.72;
     color: var(--text-secondary);
   }
+
+  /* An internal link inside the prose: underlined on a metallic hairline so
+     it is visibly a link without shouting, and brightening on hover. */
+  .bp-prose__link {
+    color: var(--cs-hi);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(200, 208, 222, 0.42);
+    padding-bottom: 1px;
+    transition: border-color 0.18s ease, color 0.18s ease;
+  }
+
+  .bp-prose__link:hover { color: #fff; border-color: rgba(246, 248, 252, 0.9); }
+  .bp-prose__link:focus-visible { outline: var(--focus-ring, 2px solid #dfe4ec); outline-offset: 2px; }
 
   .bp-prose strong { color: var(--cs-hi); font-weight: 600; }
   .bp-prose em { color: var(--cs-mid); }

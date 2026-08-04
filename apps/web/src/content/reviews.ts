@@ -16,6 +16,7 @@
 import type { SpecGroup } from "../components/SpecTable.astro";
 import type { HeroImage } from "../components/CategoryHero.astro";
 import type { ReviewFigureRef } from "../lib/review-figures";
+import type { ReviewVideo } from "../components/VideoSection.astro";
 
 export interface ReviewContent {
   /** Product slug — matches content/products.ts and the D1 row. */
@@ -41,6 +42,12 @@ export interface ReviewContent {
    * held back on that rule — see REVIEW_FIGURES_WITHHELD in media/assets.ts.
    */
   figures?: ReviewFigureRef[];
+  /**
+   * A YouTube video about this product. The section renders only when a real
+   * watch URL is present — there is no "video coming soon" placeholder,
+   * because an empty promise on a live page is worse than no section.
+   */
+  video?: ReviewVideo;
   specGroups: SpecGroup[];
   /** Which SKU the specifications describe. */
   skuNote: string;
