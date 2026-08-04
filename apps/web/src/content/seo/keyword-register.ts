@@ -83,6 +83,40 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
     ],
     researchedOn: RUN,
   },
+  {
+    /* Review pages target the model name and the questions asked about it.
+       They must never chase the category head term: the hub owns that, and a
+       review competing for it would split the site against itself for a query
+       it cannot win. */
+    path: "/robots/robotic-pool-cleaners/dolphin-nautilus-cc-plus/",
+    primary: { term: "dolphin nautilus cc plus review", volume: 0, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "dolphin nautilus cc plus wi-fi", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "dolphin nautilus cc plus", volume: 0, difficulty: 0, mustAppear: true },
+      // The review's second section is built around this question, and it is
+      // the reason the page exists rather than a spec sheet.
+      { term: "does the dolphin nautilus cc plus clean the waterline", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "dolphin nautilus cc plus max pool size", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "dolphin nautilus cc plus filter", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "mydolphin plus app", volume: 0, difficulty: 0, mustAppear: true },
+    ],
+    cededTo: [
+      {
+        term: "robotic pool cleaner",
+        path: "/robots/robotic-pool-cleaners/",
+        why: "The category head term belongs to the hub. A single-model review ranking for it would be the wrong result for the searcher and would compete with our own page.",
+      },
+      {
+        term: "best robotic pool cleaner",
+        path: "/best-robots/robotic-pool-cleaners/",
+        why: "A comparison SERP. One review is not a best-of.",
+      },
+    ],
+    /* Volumes are zero because this run measured the category cluster, not
+       model-level terms. Recorded as 0 rather than guessed — a made-up volume
+       is worse than a blank, because it gets planned against. */
+    researchedOn: RUN,
+  },
 ];
 
 export const keywordsFor = (path: string): PageKeywords | undefined =>

@@ -576,6 +576,157 @@ export const OWNER_PRODUCT_ARTWORK: MediaAssetRecord[] = OWNER_ARTWORK.map((a): 
 });
 
 /* ------------------------------------------------------------------ */
+/* Review article figures                                             */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Owner-created figures that illustrate a review, keyed to the section they
+ * belong beside.
+ *
+ * THE RULE THAT DECIDES WHETHER ONE GETS REGISTERED. These creatives carry
+ * headline text set into the image, and that text makes claims. A figure may
+ * only appear on a review that agrees with it. Three of the seven supplied for
+ * this review were held back for exactly that reason, and the reason is
+ * recorded in REVIEW_FIGURES_WITHHELD below rather than left as a gap someone
+ * later fills by accident.
+ *
+ * Like the product creatives, the claims printed inside carry no evidence
+ * weight: a specification still needs its own evidence record.
+ */
+interface ReviewFigure {
+  slug: string;
+  /** Review this belongs to. */
+  productSlug: string;
+  /**
+   * What the figure actually is.
+   *
+   * Deliberately never `product_hero`: that type is what the card and the
+   * listing resolve to, and a second one per product would quietly outrank the
+   * product creative and skew the readiness report. A review figure is an
+   * extra view, not a replacement hero.
+   */
+  type: "product_in_use" | "app_screenshot" | "filtration_detail" | "included_accessories";
+  file: string;
+  checksum: string;
+  width: number;
+  height: number;
+  /** What the composition shows — becomes the alt text, minus the pitch. */
+  scene: string;
+}
+
+const REVIEW_FIGURES: ReviewFigure[] = [
+  {
+    slug: "hero",
+    productSlug: "dolphin-nautilus-cc-plus",
+    type: "product_in_use",
+    file: "hero.webp",
+    checksum: "sha256:5b07c200a41f5890ee6f1177aaa214620f890940af4bde0d5908983d2e010048",
+    width: 1122,
+    height: 1402,
+    scene:
+      "the black and blue cleaner lifting out of dark water beside a phone showing the Dolphin app, above three panels marked Wi-Fi control, wall climbing and top-load filter access",
+  },
+  {
+    slug: "plug-and-play",
+    productSlug: "dolphin-nautilus-cc-plus",
+    type: "product_in_use",
+    file: "plug-and-play.webp",
+    checksum: "sha256:627f2c1a22a08551ee965c451ed17bec7275f91a7e147082a39e2c31c630ed15",
+    width: 1254,
+    height: 1254,
+    scene:
+      "the cleaner beside its power supply at the edge of a lit pool at night, with a hand pressing the single button on the caddy",
+  },
+  {
+    slug: "app-control",
+    productSlug: "dolphin-nautilus-cc-plus",
+    type: "app_screenshot",
+    file: "app-control.webp",
+    checksum: "sha256:b909f05f0d7989c7d27d8b74b160534bc59f12e448bb77cccc47d9a0acc21531",
+    width: 1254,
+    height: 1254,
+    scene:
+      "the cleaner on wet stone beside a phone running the MyDolphin Plus app, showing a scheduled quick clean",
+  },
+  {
+    slug: "filter-access",
+    productSlug: "dolphin-nautilus-cc-plus",
+    type: "filtration_detail",
+    file: "filter-access.webp",
+    checksum: "sha256:8f9cc28e112d152edb838f5e04e74a3fae9d817a20b759bdf1a6fd47b227ff92",
+    width: 1254,
+    height: 1254,
+    scene:
+      "two hands lifting the filter baskets out through the top of the machine at the poolside",
+  },
+];
+
+/**
+ * Supplied, and deliberately not published.
+ *
+ * Each of these prints a claim the review refutes from the manufacturer's own
+ * technical sheet. Putting them on the page would state in pixels the opposite
+ * of what the page states in words — and the picture is what a reader believes.
+ */
+export const REVIEW_FIGURES_WITHHELD: {
+  productSlug: string;
+  supplied: string;
+  claim: string;
+  contradicts: string;
+}[] = [
+  {
+    productSlug: "dolphin-nautilus-cc-plus",
+    supplied: "Smart Navigation",
+    claim: "Full pool coverage — cleans floors, walls and waterline",
+    contradicts:
+      "Maytronics' technical sheet for part 99996409-PCI lists Waterline Scrubbing: No. The review's second section is about this exact claim.",
+  },
+  {
+    productSlug: "dolphin-nautilus-cc-plus",
+    supplied: "Wall Climbing Capability",
+    claim: "Total pool coverage — cleans floors, walls, and waterline thoroughly",
+    contradicts:
+      "Same sheet, same field. The headline of this creative is accurate; only the third bullet is not.",
+  },
+  {
+    productSlug: "dolphin-nautilus-cc-plus",
+    supplied: "Product Anatomy",
+    claim: "Active scrubbing brush — helps loosen dirt and debris",
+    contradicts:
+      "The same sheet lists Active Brush: No, and the review states 'Actively driven brush: No'. The brushes are passive and work as the robot moves.",
+  },
+];
+
+export const REVIEW_FIGURE_ASSETS: MediaAssetRecord[] = REVIEW_FIGURES.map((f): MediaAssetRecord => {
+  const productId = PRODUCT_ID[f.productSlug] ?? `prod-${f.productSlug}`;
+  const model = VERIFICATIONS.find((v) => v.productId === productId)?.identity.canonicalName ?? null;
+  return {
+    ...base(`fig-${f.productSlug}-${f.slug}`, "botplanet_original"),
+    productId,
+    purpose: `Review figure: ${f.slug}`,
+    exactModel: model,
+    type: f.type,
+    acquisitionMethod: "authored_in_house",
+    checksum: f.checksum,
+    width: f.width,
+    height: f.height,
+    src: `/media/reviews/${f.productSlug}/${f.file}`,
+    // Describes the frame and names the model. It does not repeat the sales
+    // claims printed in the artwork: a screen reader user gets the picture,
+    // not the pitch.
+    altText: `BotPlanet artwork for the ${model}: ${f.scene}.`,
+    altTextStatus: "approved",
+    schema: OWNER_ARTWORK_SCHEMA,
+    depictsRealProduct: true,
+    presentation: "bleed",
+    retrievedDate: "2026-08-03",
+    lastCheckedDate: "2026-08-03",
+    notes:
+      "Owner-created review figure, optimised from a PNG master to WebP with no crop, recolour or removal of in-image text. Published only because its printed claims agree with the review — see REVIEW_FIGURES_WITHHELD for the ones that do not.",
+  };
+});
+
+/* ------------------------------------------------------------------ */
 /* Branded product placeholders                                        */
 /* ------------------------------------------------------------------ */
 
@@ -628,6 +779,7 @@ export const PLACEHOLDER_ASSETS: MediaAssetRecord[] = manifest.map((m): MediaAss
 export const MEDIA_ASSETS: MediaAssetRecord[] = [
   ...ORIGINAL_ASSETS,
   ...OWNER_PRODUCT_ARTWORK,
+  ...REVIEW_FIGURE_ASSETS,
   ...PLACEHOLDER_ASSETS,
 ];
 
@@ -796,7 +948,12 @@ interface DerivativeManifestEntry {
 const DERIVATIVE_MANIFEST = DERIVATIVES_JSON as DerivativeManifestEntry[];
 
 export const DERIVATIVES: import("./types").Derivative[] = DERIVATIVE_MANIFEST.flatMap((entry) => {
-  const parent = [...ORIGINAL_ASSETS, ...OWNER_PRODUCT_ARTWORK].find((a) => a.src === entry.source);
+  // Every group that can own a raster. Leaving one out does not fail loudly —
+  // the derivative files still exist on disk, they just never reach a srcset,
+  // and the product silently drops out of responsive-variant readiness.
+  const parent = [...ORIGINAL_ASSETS, ...OWNER_PRODUCT_ARTWORK, ...REVIEW_FIGURE_ASSETS].find(
+    (a) => a.src === entry.source,
+  );
   if (!parent) return [];
   return entry.derivatives.map((d) => ({
     id: d.id,

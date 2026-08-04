@@ -529,8 +529,24 @@ describe("readiness states", () => {
     for (const p of REPORT.products) {
       const hasArtwork = ARTWORK_PRODUCT_IDS.has(p.productId);
       expect(p.missingTypes).toEqual(hasArtwork ? TARGET_TYPES.filter((t) => t !== "product_hero") : TARGET_TYPES);
-      expect(p.assets.length).toBe(hasArtwork ? 2 : 1);
+
+      /* Asset count is derived, not hard-coded. It used to assert a flat 2,
+         which was a stand-in for "nothing invented" — and it broke the moment
+         a product legitimately gained review figures. Counting the records
+         that actually exist keeps the real guarantee (every asset on the
+         report is one the registry holds) without failing on real additions. */
+      const held = MEDIA_ASSETS.filter((a) => a.productId === p.productId);
+      expect(p.assets.length).toBe(held.length);
+      expect(p.assets.length).toBeGreaterThanOrEqual(hasArtwork ? 2 : 1);
     }
+  });
+
+  it("keeps review figures out of the product hero slot", () => {
+    // A review figure is an extra view. Typed as a hero it would outrank the
+    // product creative in resolveImage and quietly change every card.
+    const figures = MEDIA_ASSETS.filter((a) => a.id.startsWith("fig-"));
+    expect(figures.length).toBeGreaterThan(0);
+    for (const f of figures) expect(f.type).not.toBe("product_hero");
   });
 });
 

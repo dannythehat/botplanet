@@ -1,0 +1,196 @@
+---
+/* ============================================================
+   BotPlanet — the review article.
+
+   ONE TEMPLATE, EVERY REVIEW. Adding a review is two files and
+   nothing else:
+
+     1. an entry in content/reviews.ts — verdict, key facts,
+        specification groups, and where the figures sit;
+     2. the prose in src/reviews/<slug>.md.
+
+   Everything on this page is assembled from those. No per-product
+   layout, no per-product component, and no copy of this file.
+
+   WHAT THE READER GETS, IN ORDER:
+     verdict and four key facts, so the answer comes first
+     → the prose, with figures placed under the headings they
+       belong to
+     → the full specification table, where an undisclosed value
+       says so rather than borrowing a number
+     → BotMatch, for the reader who wants the question answered
+       for their own pool rather than in general
+     → who wrote it and when it was last checked
+
+   The figures are injected into the compiled Markdown rather than
+   written into it — see lib/review-figures.ts for why.
+   ============================================================ */
+import ReviewHeader from "./ReviewHeader.astro";
+import BotMatchSnapshot from "./BotMatchSnapshot.astro";
+import SpecTable from "./SpecTable.astro";
+import BotMatchCta from "./BotMatchCta.astro";
+import ArticleFooter from "./ArticleFooter.astro";
+import { botMatchCtaFor } from "../content/category-sections";
+import { injectFigures } from "../lib/review-figures";
+import { snapshotFor } from "../content/snapshots";
+import type { ReviewContent } from "../content/reviews";
+
+interface Props {
+  review: ReviewContent;
+  /** Compiled Markdown for the prose, from the review's .md file. */
+  html: string;
+  /** Product name, for the snapshot heading. */
+  productName: string;
+}
+
+const { review, html, productName } = Astro.props;
+const snapshot = snapshotFor(review.slug);
+const bmCta = botMatchCtaFor(review.categorySlug);
+
+const body = injectFigures(html, review.figures, import.meta.env.DEV);
+---
+
+<ReviewHeader
+  eyebrow={review.eyebrow}
+  title={review.title}
+  verdict={review.verdict}
+  bestFor={review.bestFor}
+  notIdealFor={review.notIdealFor}
+  image={review.image}
+  facts={review.facts}
+/>
+
+{/* Before the long read, not after it: the reader who only wants the answer
+    gets it here, and the reader who wants the reasoning scrolls on. */}
+{snapshot && (
+  <BotMatchSnapshot snapshot={snapshot} productName={productName} categorySlug={review.categorySlug} />
+)}
+
+<article class="bp-prose" set:html={body} />
+
+<SpecTable
+  id="specifications"
+  eyebrow="Specifications"
+  title="The full specification"
+  intro="Every figure below comes from the manufacturer's own product page for the exact SKU named underneath. Where a value is not published, it says so rather than borrowing a number from elsewhere."
+  groups={review.specGroups}
+  skuNote={review.skuNote}
+/>
+
+{bmCta && (
+  <BotMatchCta
+    categorySlug={review.categorySlug}
+    headline={bmCta.headline}
+    body={bmCta.body}
+    points={bmCta.points}
+    ctaLabel={bmCta.ctaLabel}
+    note={bmCta.note}
+    image={bmCta.image}
+  />
+)}
+
+<ArticleFooter lastReviewed={review.lastReviewed} />
+
+<style is:global>
+  /* Long-form review prose. Measure is the whole point — anything
+     wider than about 70 characters gets tiring on a big screen. */
+  .bp-prose {
+    max-width: 70ch;
+    margin: 0 0 clamp(3rem, 7vw, 5rem);
+  }
+
+  .bp-prose h2 {
+    margin: clamp(2.5rem, 6vw, 3.5rem) 0 0;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.45rem, 3.8vw, 1.9rem);
+    line-height: 1.18;
+    letter-spacing: -0.018em;
+    text-wrap: balance;
+    color: var(--cs-hi);
+  }
+
+  .bp-prose h3 {
+    margin: 2rem 0 0;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.08rem, 2.4vw, 1.2rem);
+    line-height: 1.28;
+    color: var(--cs-hi);
+  }
+
+  .bp-prose p {
+    margin: 1.05rem 0 0;
+    font-size: 1.0625rem;
+    line-height: 1.72;
+    color: var(--text-secondary);
+  }
+
+  .bp-prose strong { color: var(--cs-hi); font-weight: 600; }
+  .bp-prose em { color: var(--cs-mid); }
+
+  .bp-prose ul { margin: 1.1rem 0 0; padding: 0; list-style: none; display: grid; gap: 0.6rem; }
+
+  .bp-prose li {
+    position: relative;
+    padding-left: 1.3rem;
+    font-size: 1.0625rem;
+    line-height: 1.66;
+    color: var(--text-secondary);
+  }
+
+  .bp-prose li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.62em;
+    width: 0.38rem;
+    height: 0.38rem;
+    transform: rotate(45deg);
+    background: var(--cs-sheen);
+  }
+
+  .bp-prose hr {
+    margin: clamp(2.5rem, 6vw, 3.5rem) 0 0;
+    border: 0;
+    height: 1px;
+    background: linear-gradient(90deg, var(--cs-line), transparent 70%);
+  }
+
+  .bp-prose blockquote {
+    margin: 1.5rem 0 0;
+    padding-left: 1.1rem;
+    border-left: 2px solid var(--cs-line);
+    color: var(--cs-mid);
+  }
+
+  /* ---------- in-body figures ---------- */
+
+  /* Framed like every other plate on the site, and allowed to run a little
+     wider than the text measure — the prose is set at 70ch for reading, and a
+     picture held to that width looks like an afterthought beside it. */
+  .bp-prose .bp-figure {
+    margin: clamp(1.6rem, 4vw, 2.2rem) 0 0;
+    width: min(100%, 44rem);
+    border: 1px solid var(--cs-line);
+    border-radius: 18px;
+    overflow: hidden;
+    background: var(--cs-surface);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 22px 50px rgba(0, 0, 0, 0.45);
+  }
+
+  .bp-prose .bp-figure img { display: block; width: 100%; height: auto; }
+
+  .bp-prose .bp-figure__cap {
+    margin: 0;
+    padding: 0.85rem 1.1rem 1rem;
+    border-top: 1px solid var(--cs-line-soft);
+    font-size: 0.88rem;
+    line-height: 1.55;
+    color: var(--text-tertiary);
+  }
+
+  @media (min-width: 900px) {
+    .bp-prose p, .bp-prose li { font-size: 1.1rem; }
+  }
+</style>

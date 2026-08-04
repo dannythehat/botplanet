@@ -9,6 +9,15 @@ import { retailer } from "../../../content/commerce/registry";
 import { catalogueStatusOf, CATALOGUE_WITHDRAWALS } from "../../../content/products";
 import { resolveSlug, removedRedirect } from "../../../content/product-names";
 import { latestAcceptedForProduct } from "../../../lib/providers/refresh-store";
+import ReviewArticle from "../../../components/ReviewArticle.astro";
+import { reviewFor } from "../../../content/reviews";
+import { reviewSchema, articleSchema, webPageSchema } from "../../../lib/seo";
+import { FOUNDER } from "../../../content/team";
+
+/* Review prose, loaded by slug. A product with a review renders the article;
+   one without keeps the plain specification page, so adding a review is two
+   files and no change here. */
+const REVIEW_PROSE = import.meta.glob<{ compiledContent: () => string }>("../../../reviews/*.md", { eager: true });
 
 const { category, slug } = Astro.params;
 const db = getDb(Astro.locals);
@@ -81,29 +90,89 @@ const evidence = await db
   .where(eq(schema.evidence.productId, product.id));
 
 const crumbs = breadcrumbsFor(Astro.url.pathname, product.name);
+
+const review = reviewFor(product.slug);
+const proseModule = review ? REVIEW_PROSE[`../../../reviews/${product.slug}.md`] : undefined;
+/* A review entry with no prose file is a half-built page; render the plain
+   specification page rather than an article with a hole where the body goes. */
+const reviewHtml = proseModule ? proseModule.compiledContent() : null;
+const hasReview = Boolean(review && reviewHtml);
+
+/* Review + Article, and no rating anywhere in it — see reviewSchema for why a
+   star is the one thing this site has not earned. */
+const reviewGraph = hasReview
+  ? [
+      webPageSchema({
+        path: Astro.url.pathname,
+        name: review!.title,
+        description: review!.metaDescription,
+      }),
+      reviewSchema({
+        itemName: product.name,
+        itemBrand: brand?.name ?? null,
+        headline: review!.title,
+        description: review!.metaDescription,
+        path: Astro.url.pathname,
+        dateModified: review!.lastReviewed,
+        authorName: FOUNDER.name,
+        authorPath: FOUNDER.path,
+        image: review!.image?.src,
+        reviewBody: review!.verdict,
+        positiveNotes: [review!.bestFor],
+        negativeNotes: [review!.notIdealFor],
+      }),
+      articleSchema({
+        headline: review!.title,
+        description: review!.metaDescription,
+        path: Astro.url.pathname,
+        dateModified: review!.lastReviewed,
+        authorName: FOUNDER.name,
+        authorPath: FOUNDER.path,
+        image: review!.image?.src,
+      }),
+    ]
+  : [];
 ---
 
-<Base title={`${product.name} — BotPlanet`} description={`${product.name}: specs, offers and suitability.`} breadcrumbs={crumbs}>
+<Base
+  title={hasReview ? review!.seoTitle : `${product.name} — BotPlanet`}
+  description={hasReview ? review!.metaDescription : `${product.name}: specs, offers and suitability.`}
+  ogImage={hasReview ? review!.image?.src : undefined}
+  ogType={hasReview ? "article" : undefined}
+  breadcrumbs={crumbs}
+  schema={reviewGraph}
+  narrow={hasReview}
+>
   <p class="muted"><a href={`/robots/${category}/`}>← {titleCase(category!)}</a></p>
-  <div class="row" style="justify-content:space-between; align-items:flex-start;">
-    <div>
-      <h1>{product.name}</h1>
-      <div class="row">
-        <span class="pill class">{titleCase(product.productClass)}</span>
-        <span class="pill">{titleCase(product.powerType)}</span>
-        <span class="pill">{(product.environments as string[]).map(titleCase).join(" / ")}</span>
-        <span class="pill">{brand?.name}</span>
+
+  {hasReview && <ReviewArticle review={review!} html={reviewHtml!} productName={product.name} />}
+
+  {/* The review supplies its own H1, verdict and key facts, so the plain
+      product header would be a second H1 saying the same thing in a weaker
+      voice. Products without a review still need it. */}
+  {!hasReview && (
+    <>
+      <div class="row" style="justify-content:space-between; align-items:flex-start;">
+        <div>
+          <h1>{product.name}</h1>
+          <div class="row">
+            <span class="pill class">{titleCase(product.productClass)}</span>
+            <span class="pill">{titleCase(product.powerType)}</span>
+            <span class="pill">{(product.environments as string[]).map(titleCase).join(" / ")}</span>
+            <span class="pill">{brand?.name}</span>
+          </div>
+        </div>
+        <a class="btn primary" href={`/botmatch/${category}/`}>Is this right for my pool?</a>
       </div>
-    </div>
-    <a class="btn primary" href={`/botmatch/${category}/`}>Is this right for my pool?</a>
-  </div>
 
-  <h2>Cleans</h2>
-  <div class="row">
-    {(product.cleans as string[]).map((c) => <span class="pill class">{titleCase(c)}</span>)}
-  </div>
+      <h2>Cleans</h2>
+      <div class="row">
+        {(product.cleans as string[]).map((c) => <span class="pill class">{titleCase(c)}</span>)}
+      </div>
+    </>
+  )}
 
-  <h2>Current offers</h2>
+  <h2 id="where-to-buy">Current offers</h2>
   {withdrawn ? (
     <p class="note">
       This robot is no longer part of the BotPlanet launch selection, so we do not link to a seller for it or
