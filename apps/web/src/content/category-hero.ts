@@ -69,6 +69,9 @@ export const CATEGORY_HERO: Record<string, CategoryHeroContent> = {
     image: {
       src: "/media/window/hero-desktop.webp",
       mobileSrc: "/media/window/hero-mobile.webp",
+      /* The mobile master is a 4:5 portrait — logo at the top, headline
+         beneath it. The default 3:2 slot cropped both away. */
+      mobileAspect: "4 / 5",
       alt:
         "A window cleaning robot gripping the glass wall of a modern home at dusk, water " +
         "spraying across the pane, with a warmly lit living room and a coastline visible " +
