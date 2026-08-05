@@ -17,7 +17,7 @@ is the honest status.
 | 7 | **HOBOT 2S** | `B097CM7P9L` | **owner-supplied link, 2026-08-05** | **$299.00** |
 | 8 | Cop Rose X5S | `B09D98W5KQ` | search result, 2026-08-05 | ~$160 |
 | 9 | **HOBOT 298** | `B07LF4HZ6C` | **owner-supplied link, 2026-08-05** | ~$250 |
-| 10 | Mamibot W120-T | — | awaiting owner | ~$229 |
+| 10 | **Mamibot W120-DP** | `B0DC6B81Z2` | search result, 2026-08-05 — **replaces the W120-T** | ~$229 |
 | 11 | HUTT W55 | — | awaiting owner | ~$200 |
 | 12 | Windowmate WM-01 | — | awaiting owner | ~$300 |
 
@@ -35,7 +35,16 @@ titled `C1` whose fields read `C1 PLUS`, an `X1` that was an `X1 Essential`,
 an `800P` the owner first called an `880P`.
 
 - **HOBOT 298** — 288, 388 and 268 also exist
-- **Mamibot W120-T** — a W120-DP also exists; the suffix is the whole difference
+- **Mamibot W120-DP ships in three colours** — Blue `B0DC6B81Z2`, Orange
+  `B0DC67MQ46`, Grey `B0DC67QH41`. That is a VARIANT FAMILY, and it is the
+  exact shape of the Dolphin Nautilus CC Plus problem: a request for one ASIN
+  can return a sibling's data. `matchIdentity` checks ASIN-returned equals
+  ASIN-requested *first*, before any name matching, precisely for this. Only
+  the Blue ASIN is recorded; the other two must never be substituted.
+- **Mamibot W120-T** — the listing exists (`B07L2X6LPT`) but the owner found
+  it unbuyable on 2026-08-05. A listing that exists is not a listing you can
+  buy from, which is why the check is "can the owner add it to a basket"
+  rather than "does the page load"
 - **HUTT W55** — W66 and DDC55 also exist
 - **WINBOT W2S** vs **W2S Omni** (`B0G5XYX1VH`) — different machines, different price
 - **WINBOT Mini** vs **Mini2** (`B0GJDHYRLR`)

@@ -57,7 +57,7 @@ mounting method, not only for volume.
 | 4 | ECOVACS WINBOT W3 Omni | `ecovacs-winbot-w3-omni` | 150 | $550 | Newest navigation, top of range |
 | 5 | ECOVACS WINBOT Mini | `ecovacs-winbot-mini` | — | $150 | Smallest and cheapest. Small panes, and the only one a renter would buy |
 | 6 | ECOVACS WINBOT W1 PRO | `ecovacs-winbot-w1-pro` | 100 | **$185** | The cheap way in. Corded, no frills |
-| 7 | Mamibot W120-T | `mamibot-w120-t` | 100 | $229 | Third brand, mid-price alternative |
+| 7 | Mamibot W120-DP | `mamibot-w120-dp` | 100 | $229 | Third brand, mid-price. 3,200 Pa, four nozzles, high-rise rated |
 | 8 | HOBOT 298 | `hobot-298` | 50 | $250 | Budget Hobot; ultrasonic spray |
 | 9 | ECOVACS WINBOT W2S | `ecovacs-winbot-w2s` | 50 | $330 | Slimmer W2 variant |
 | 10 | HOBOT 2S | `hobot-2s` | 50 | $299 | Mid Hobot, dual spray |
