@@ -18,7 +18,7 @@ is the honest status.
 | 8 | Cop Rose X5S | `B09D98W5KQ` | search result, 2026-08-05 | ~$160 |
 | 9 | **HOBOT 298** | `B07LF4HZ6C` | **owner-supplied link, 2026-08-05** | ~$250 |
 | 10 | **Mamibot W120-DP** | `B0DC6B81Z2` | search result, 2026-08-05 — **replaces the W120-T** | ~$229 |
-| 11 | HUTT W55 | — | awaiting owner | ~$200 |
+| 11 | **HUTT S55 Pro** | `B0GFW8TFML` | search result, 2026-08-05 — **replaces the W55** | TBC |
 | 12 | Windowmate WM-01 | — | awaiting owner | ~$300 |
 
 ## Dropped
@@ -45,6 +45,9 @@ an `800P` the owner first called an `880P`.
   it unbuyable on 2026-08-05. A listing that exists is not a listing you can
   buy from, which is why the check is "can the owner add it to a basket"
   rather than "does the page load"
-- **HUTT W55** — W66 and DDC55 also exist
+- **HUTT S55 Pro** — the model name INCLUDES "Pro". HUTT also ship the W55
+  (`B0CJ4RZZNY`), DDC55 and A1. Model tokens must be `s55 pro`; `s55` alone
+  must never be a deny token because it is a whole-token substring of the real
+  name — the mistake that made the Aiper X1 Pro Max refuse itself for a day
 - **WINBOT W2S** vs **W2S Omni** (`B0G5XYX1VH`) — different machines, different price
 - **WINBOT Mini** vs **Mini2** (`B0GJDHYRLR`)
