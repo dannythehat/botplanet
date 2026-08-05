@@ -1035,8 +1035,15 @@ const aiperScubaV3AiVision: ProductVerification = {
   identity: {
     brand: "AIPER",
     canonicalName: "AIPER Scuba V3 AI Vision",
-    modelNumber: null,
-    modelNumberSource: null,
+    /* RESOLVED 4 August 2026 by the price checker's first read of this
+       product. It had never been price checked at all — the audit that day
+       found it had no identity expectation — and the first pass returned what
+       no source had given us: Brand 'AIPER', Model Number 'PRN31', $849.00,
+       in stock. Aiper publishes no model number on its own product pages, so
+       this is the only SKU we have for any Aiper machine except the X1 Pro
+       Max, whose number came from its listing the same way. */
+    modelNumber: "PRN31",
+    modelNumberSource: "https://www.amazon.com/AIPER-Vision-Cordless-Robotic-Cleaner/dp/B0GG97427D",
     /* This key was written TWICE — null, then V3_PAGE — until the audit of
        4 August 2026. The later one won, so the record was correct by luck
        rather than by intent; the null was left behind from before Aiper's page
@@ -1044,15 +1051,15 @@ const aiperScubaV3AiVision: ProductVerification = {
     officialProductPageUrl: V3_PAGE,
     manual: null,
     identityIssue:
-      "Owner-supplied on 3 August 2026. Aiper's own page for this machine is titled 'Scuba V3 Cognitive AI Robotic Pool Cleaner' — the model is the SCUBA V3, and 'AI Vision' is a tier descriptor rather than part of the name. The stored canonical name keeps the owner's wording because that is what the listing and the artwork both say, but anyone matching on model name should match on 'Scuba V3'. Aiper sells Scuba SE, S1, S1 Pro, X1 Essential, X1 Pro, X1 Pro Max and V3 with no published model number, so the models separate only by page URL and product name. The Amazon listing itself was not read: it returned a bot-mitigation page on the day of the check.",
+      "Owner-supplied on 3 August 2026. Aiper's own page for this machine is titled 'Scuba V3 Cognitive AI Robotic Pool Cleaner' — the model is the SCUBA V3, and 'AI Vision' is a tier descriptor rather than part of the name. The stored canonical name keeps the owner's wording because that is what the listing and the artwork both say, but anyone matching on model name should match on 'Scuba V3'. Aiper sells Scuba SE, S1, S1 Pro, X1 Essential, X1 Pro, X1 Pro Max and V3 with no published model number, so the models separate only by page URL and product name — with one exception now: the listing's own Model Number field reads 'PRN31', machine-read on 4 August 2026, which is the only SKU any source has given for this machine.",
   },
   sourceChecks: [
     { url: V3_PAGE, title: V3_TITLE, status: "ok", note: "Read 3 August 2026. Titled 'Scuba V3 Cognitive AI Robotic Pool Cleaner'." },
     {
       url: "https://www.amazon.com/AIPER-Vision-Cordless-Robotic-Cleaner/dp/B0GG97427D",
-      title: "Amazon listing supplied by the owner",
-      status: "unreadable",
-      note: "Supplied and confirmed by the owner on 3 August 2026. Returned a bot-mitigation page to server-side reads that day, so nothing on it has been verified here.",
+      title: "Amazon listing supplied by the owner — machine-read 2026-08-04",
+      status: "ok",
+      note: "Supplied and confirmed by the owner on 3 August 2026, when direct server-side reads met a bot-mitigation page. Machine-read on 4 August 2026 through the price provider, which returned Brand 'AIPER', Model Number 'PRN31', $849.00 and In Stock — so identity now rests on published fields rather than on the owner's word.",
     },
   ],
   observations: [
