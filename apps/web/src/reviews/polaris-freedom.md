@@ -32,9 +32,14 @@ dedicated waterline-only mode.
 - **Your pool is deeper than 13 ft or shallower than 15 in.** Both limits come
   from the owner's manual and both are hard.
 - **You want the cheapest way to get a clean floor.** A corded machine does that
-  job for considerably less, forever, with no part that wears out on a calendar.
+  job for considerably less, forever, with no part that wears out on a calendar —
+  the Dolphin Nautilus CC Plus for floors and walls, the BuBlue Bubot 800P if you
+  want the waterline too.
 - **You keep equipment for a decade.** The battery is a consumable. Plan for
   replacing it, or buy corded.
+- **You want the same cordless convenience for less.** The WYBOT C1 covers floors,
+  walls and the waterline at around a third of this price; what you give up is the
+  bigger battery and the iAquaLink ecosystem.
 - **You will not put the charging dock somewhere with Wi-Fi.** The manual requires
   it. More on that below, because nobody mentions it before you buy.
 

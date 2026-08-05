@@ -31,9 +31,14 @@ to 5,000 ppm.
 
 - **You want the floor cleaned.** It does not go underwater. Betta's own listing
   says "designed for surface cleaning only". If the bottom of your pool is the
-  problem, buy a floor robot.
+  problem, buy a floor robot — the WYBOT C1 does floors, walls and the waterline
+  for about $500.
 - **You want the waterline scrubbed.** Also no. Nothing about this machine touches
-  a wall.
+  a wall. The Aiper Scuba S1 is the mid-range machine that does.
+- **You want one machine for the surface and everything else.** Two exist: the
+  Aiper Scuba X1 Pro Max vacuums and skims, and the Beatbot AquaSense 2 Ultra adds
+  waterline and clarification on top. Both cost several times this one, which is
+  the honest argument for buying a skimmer and a floor robot separately.
 - **Your pool is bigger than about 40 by 60 ft.** That is Betta's stated ceiling,
   roughly 2,400 sq ft.
 - **You have no sun.** Solar is the point. There is an adapter for cloudy spells,

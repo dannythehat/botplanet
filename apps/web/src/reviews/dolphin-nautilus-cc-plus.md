@@ -26,14 +26,18 @@ Three groups.
 
 **If you need the waterline cleaned**, this is not your robot. More on that below,
 because it is the single most likely reason someone buys this machine and ends up
-disappointed.
+disappointed. The WYBOT C1 does the waterline for less than this costs, and the
+BuBlue Bubot 800P does it on mains power like this one.
 
 **If you want cordless**, obviously — this is a mains-powered cleaner with a 56 ft
 cable and a poolside power supply. That is a feature, not a compromise, but it is a
-choice you should make deliberately.
+choice you should make deliberately. The Polaris FREEDOM is the cordless machine at
+this end of the market.
 
 **If your pool is longer than 40 ft**, the manufacturer's own guidance stops there.
 The cable is longer than that, which confuses people, and we will come back to why.
+The Aiper Scuba X1 Pro Max carries a 100 ft rating if your pool is genuinely that
+long.
 
 ---
 
