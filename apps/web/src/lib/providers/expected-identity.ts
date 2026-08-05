@@ -154,6 +154,32 @@ export const EXPECTED_IDENTITIES: IdentityExpectation[] = [
        which also settled the model number the verification record had refused
        to take from third-party manual libraries. Back to the normal cadence. */
   },
+  {
+    /* ADDED 4 August 2026 by the site audit. Both this and the Scuba V3 below
+       had an owner-confirmed ASIN, a published review and a buy button since
+       3 August, and neither had an entry here — so neither was ever price
+       checked, and the pages showed no price at all. Neither was on
+       AWAITING_DISCOVERY either, which is the list that would have made the
+       gap visible. The coverage test in offers.test.ts now closes that hole. */
+    productId: "prod-dolphin-proteus-dx4-plus",
+    asin: "B083YWJ5PQ",
+    brand: "Dolphin",
+    modelTokens: ["proteus dx4 plus", "dx4 plus"],
+    /* The DX4 and the DX4 Plus are different machines, so "dx4" alone can
+       never confirm — it is a whole-token substring of the real name and is
+       deliberately absent from both lists. The siblings are denied instead. */
+    denyTokens: ["dx3", "dx5", "s200", "s300", "nautilus", "escape", "caddy"],
+    exception: "recently_changed",
+  },
+  {
+    productId: "prod-aiper-scuba-v3-ai-vision",
+    asin: "B0GG97427D",
+    brand: "AIPER",
+    modelTokens: ["scuba v3", "v3 ai vision"],
+    // The X1 family and the S1 are the near neighbours; "v3 pro" is a sibling.
+    denyTokens: ["v3 pro", "scuba s1", "scuba x1", "x1 pro max", "seagull", "hydrocomm", "caddy"],
+    exception: "recently_changed",
+  },
 ];
 
 /** Products with no confirmed ASIN. They need discovery, not a refresh. */

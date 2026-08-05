@@ -991,12 +991,14 @@ const dolphinProteusDx4Plus: ProductVerification = {
   identity: {
     brand: "Maytronics",
     canonicalName: "Dolphin Proteus DX4 Plus",
-    modelNumber: null,
-    modelNumberSource: null,
-    officialProductPageUrl: null,
-    manual: null,
+    /* These two keys were each written TWICE — null, then the read value —
+       until the audit of 4 August 2026. The later pair won, so the record was
+       right by luck rather than by intent; the nulls were left behind from
+       before the listing was read. */
     modelNumber: "99996207-LESW",
     modelNumberSource: "https://www.amazon.com/dp/B083YWJ5PQ",
+    officialProductPageUrl: null,
+    manual: null,
     identityIssue:
       "Owner-supplied on 3 August 2026 and READ the same day, which upgraded this from the owner's word to published fields: Brand 'Dolphin', Manufacturer 'MAYTRONICS US, INC.', Model Name 'Proteus DX4 plus'. One thing conflicts and is recorded rather than resolved — the owner's research names SKU 99996290-DX4, while the listing's own Model Number field reads 99996207-LESW. Maytronics part numbers carry a market/retailer suffix, so both may be genuine for different channels; the listing's own figure is stored because that is the one that was read. Maytronics ships Proteus DX3, DX4 and DX4 Plus, and the title names the Plus.",
   },
@@ -1035,9 +1037,12 @@ const aiperScubaV3AiVision: ProductVerification = {
     canonicalName: "AIPER Scuba V3 AI Vision",
     modelNumber: null,
     modelNumberSource: null,
-    officialProductPageUrl: null,
-    manual: null,
+    /* This key was written TWICE — null, then V3_PAGE — until the audit of
+       4 August 2026. The later one won, so the record was correct by luck
+       rather than by intent; the null was left behind from before Aiper's page
+       was found. Both a duplicate-key warning and a fact about the product. */
     officialProductPageUrl: V3_PAGE,
+    manual: null,
     identityIssue:
       "Owner-supplied on 3 August 2026. Aiper's own page for this machine is titled 'Scuba V3 Cognitive AI Robotic Pool Cleaner' — the model is the SCUBA V3, and 'AI Vision' is a tier descriptor rather than part of the name. The stored canonical name keeps the owner's wording because that is what the listing and the artwork both say, but anyone matching on model name should match on 'Scuba V3'. Aiper sells Scuba SE, S1, S1 Pro, X1 Essential, X1 Pro, X1 Pro Max and V3 with no published model number, so the models separate only by page URL and product name. The Amazon listing itself was not read: it returned a bot-mitigation page on the day of the check.",
   },
