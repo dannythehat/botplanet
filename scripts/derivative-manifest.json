@@ -519,6 +519,76 @@
     ]
   },
   {
+    "source": "/media/window/hero-desktop.webp",
+    "sourceWidth": 1672,
+    "sourceHeight": 941,
+    "derivatives": [
+      {
+        "id": "media-window-hero-desktop-webp-360",
+        "src": "/media/window/hero-desktop-360w.webp",
+        "width": 360,
+        "height": 203,
+        "bytes": 9628,
+        "checksum": "sha256:7d8543469baa6108520c0a2d57d84ef87fb81fe485d9e73d7de0adfea0f2d2b3"
+      },
+      {
+        "id": "media-window-hero-desktop-webp-640",
+        "src": "/media/window/hero-desktop-640w.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 25704,
+        "checksum": "sha256:ca75653391962a33d4a9b8901959117411f168a5d44d53b2b9469709845b57cb"
+      },
+      {
+        "id": "media-window-hero-desktop-webp-960",
+        "src": "/media/window/hero-desktop-960w.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 52176,
+        "checksum": "sha256:e3175c8f115a2f532828c4eede50c7fa1621b38ab1d06689322b4ddf91ba5ace"
+      },
+      {
+        "id": "media-window-hero-desktop-webp-1440",
+        "src": "/media/window/hero-desktop-1440w.webp",
+        "width": 1440,
+        "height": 810,
+        "bytes": 86924,
+        "checksum": "sha256:fa899c171e7373874c2e78b97f7b4c57d3473c2d96cf17db740fc843fa426469"
+      }
+    ]
+  },
+  {
+    "source": "/media/window/hero-mobile.webp",
+    "sourceWidth": 1122,
+    "sourceHeight": 1402,
+    "derivatives": [
+      {
+        "id": "media-window-hero-mobile-webp-360",
+        "src": "/media/window/hero-mobile-360w.webp",
+        "width": 360,
+        "height": 450,
+        "bytes": 19438,
+        "checksum": "sha256:f54210cec9a6a257e22336cc8469c60f4113bcaa0aa802ad786baf33404943ba"
+      },
+      {
+        "id": "media-window-hero-mobile-webp-640",
+        "src": "/media/window/hero-mobile-640w.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 50118,
+        "checksum": "sha256:080da8962a8f5d1e3eb806fdf2e77ef6e28903956ada454cc9a03f8b6c922af8"
+      },
+      {
+        "id": "media-window-hero-mobile-webp-960",
+        "src": "/media/window/hero-mobile-960w.webp",
+        "width": 960,
+        "height": 1200,
+        "bytes": 98288,
+        "checksum": "sha256:ca997d44fb06c6e9f7cca091342af9de916215ef244e1b610a1c9094f9a8598b"
+      }
+    ]
+  },
+  {
     "source": "/media/pool/hero-desktop.webp",
     "sourceWidth": 1600,
     "sourceHeight": 900,

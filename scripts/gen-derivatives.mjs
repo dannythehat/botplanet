@@ -94,6 +94,8 @@ const SOURCES = [
   "/media/security-category/feature-mobile.webp",
   "/media/companion-category/feature-desktop.webp",
   "/media/companion-category/feature-mobile.webp",
+  "/media/window/hero-desktop.webp",
+  "/media/window/hero-mobile.webp",
   "/media/pool/hero-desktop.webp",
   "/media/pool/hero-mobile.webp",
   "/media/pool/pool-type-inground.webp",
