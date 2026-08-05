@@ -197,6 +197,53 @@ export const ROUTES: RouteDef[] = [
     summary: "Products you have saved on this device.",
   },
 
+  /* ---------------- Window-cleaning robots ----------------
+     Added 2026-08-05 when the category went live. The category page renders
+     from a dynamic route and a D1 row, so it worked before this entry existed
+     — but the registry is what the SITEMAP and the breadcrumbs read, so
+     without it the page was live and invisible to crawlers. A page nobody can
+     find is not published. */
+  {
+    path: "/robots/window-cleaning-robots/",
+    label: "Window-Cleaning Robots",
+    section: "shop",
+    parent: "/robots/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: "Explore",
+    inSitemap: true,
+    indexable: true,
+    category: "window-cleaning-robots",
+  },
+  {
+    path: "/compare/window-cleaning-robots/",
+    label: "Compare window cleaners",
+    breadcrumbLabel: "Window-Cleaning Robots",
+    section: "compare",
+    parent: "/compare/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: true,
+    indexable: true,
+    category: "window-cleaning-robots",
+  },
+  {
+    path: "/botmatch/window-cleaning-robots/",
+    label: "Find My Window Cleaning Robot",
+    breadcrumbLabel: "Find My Window Cleaning Robot",
+    section: "botmatch",
+    /* Parent is the category page, not "/botmatch/" — that path is only an
+       alias of the pool matcher and is not a route of its own. */
+    parent: "/robots/window-cleaning-robots/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: true,
+    indexable: true,
+    category: "window-cleaning-robots",
+  },
+
   /* ---------------- Category subtree ---------------- */
   {
     path: `/robots/${CAT}/`,

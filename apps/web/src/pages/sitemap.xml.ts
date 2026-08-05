@@ -3,6 +3,7 @@ import { and, eq } from "drizzle-orm";
 import { getDb, schema } from "../lib/db";
 import { SITE } from "../lib/site";
 import { productPath, sitemapRoutes } from "../content/routes";
+import { liveCategories } from "../content/nav";
 import { REVIEWS } from "../content/reviews";
 
 /**
@@ -16,14 +17,27 @@ export const GET: APIRoute = async ({ locals }) => {
   const db = getDb(locals);
   const base = `https://${SITE.domain}`;
 
-  const products = await db
-    .select({ slug: schema.products.slug })
+  /* Every live category, not just pool.
+     This query named "cat-pool-cleaners" outright until 5 August 2026, and
+     productPath() defaults to the launch category — so a second category's
+     products were invisible to crawlers AND would have been emitted under the
+     pool URL if they had not been. Joining categories and passing each
+     product's own slug fixes both halves. */
+  const rows = await db
+    .select({ slug: schema.products.slug, categorySlug: schema.categories.slug })
     .from(schema.products)
-    .where(and(eq(schema.products.categoryId, "cat-pool-cleaners"), eq(schema.products.status, "published")));
+    .innerJoin(schema.categories, eq(schema.products.categoryId, schema.categories.id))
+    .where(eq(schema.products.status, "published"));
+
+  const liveSlugs = new Set(liveCategories().map((c) => c.slug));
 
   const paths = [
     ...sitemapRoutes().map((r) => r.path),
-    ...products.map((p) => productPath(p.slug)),
+    /* A product page only exists where its category page does. A row for a
+       category still marked coming_soon would be a URL nobody can navigate to. */
+    ...rows
+      .filter((r) => liveSlugs.has(r.categorySlug))
+      .map((r) => productPath(r.slug, r.categorySlug)),
   ];
 
   // Defensive: the registry is tested, but never emit a duplicate.
