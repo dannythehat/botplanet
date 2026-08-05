@@ -4,12 +4,12 @@
   "fieldsInRegistry": 31,
   "totals": {
     "fieldRecords": 372,
-    "evidenceRecords": 200,
+    "evidenceRecords": 201,
     "stateCounts": {
-      "populated": 194,
+      "populated": 195,
       "unknown": 28,
       "not_applicable": 31,
-      "not_publicly_stated": 96,
+      "not_publicly_stated": 95,
       "conflicting": 1,
       "suppressed": 19,
       "pending_verification": 3
@@ -592,34 +592,31 @@
       "path": "/robots/robotic-pool-cleaners/aiper-scuba-v3-ai-vision/",
       "canonicalName": "AIPER Scuba V3 AI Vision",
       "brand": "AIPER",
-      "modelNumber": null,
+      "modelNumber": "PRN31",
       "officialProductPage": "https://aiper.com/us/aiper-scuba-v3",
       "manualUrl": null,
       "manualDocumentId": null,
       "manualRevision": null,
-      "modelIdentityNote": "Owner-supplied on 3 August 2026. Aiper's own page for this machine is titled 'Scuba V3 Cognitive AI Robotic Pool Cleaner' — the model is the SCUBA V3, and 'AI Vision' is a tier descriptor rather than part of the name. The stored canonical name keeps the owner's wording because that is what the listing and the artwork both say, but anyone matching on model name should match on 'Scuba V3'. Aiper sells Scuba SE, S1, S1 Pro, X1 Essential, X1 Pro, X1 Pro Max and V3 with no published model number, so the models separate only by page URL and product name. The Amazon listing itself was not read: it returned a bot-mitigation page on the day of the check.",
+      "modelIdentityNote": "Owner-supplied on 3 August 2026. Aiper's own page for this machine is titled 'Scuba V3 Cognitive AI Robotic Pool Cleaner' — the model is the SCUBA V3, and 'AI Vision' is a tier descriptor rather than part of the name. The stored canonical name keeps the owner's wording because that is what the listing and the artwork both say, but anyone matching on model name should match on 'Scuba V3'. Aiper sells Scuba SE, S1, S1 Pro, X1 Essential, X1 Pro, X1 Pro Max and V3 with no published model number, so the models separate only by page URL and product name — with one exception now: the listing's own Model Number field reads 'PRN31', machine-read on 4 August 2026, which is the only SKU any source has given for this machine.",
       "verificationDate": "2026-08-03",
-      "sourcesUsed": 1,
-      "sourcesUnreadable": [
-        "https://www.amazon.com/AIPER-Vision-Cordless-Robotic-Cleaner/dp/B0GG97427D"
-      ],
-      "completenessRawPercent": 29,
-      "completenessWeightedPercent": 35,
+      "sourcesUsed": 2,
+      "sourcesUnreadable": [],
+      "completenessRawPercent": 32,
+      "completenessWeightedPercent": 40,
       "fieldsApplicable": 28,
-      "fieldsPublishable": 8,
+      "fieldsPublishable": 9,
       "weightApplicable": 102,
-      "weightPublishable": 36,
+      "weightPublishable": 41,
       "fieldStates": {
-        "populated": 8,
+        "populated": 9,
         "unknown": 9,
         "not_applicable": 3,
-        "not_publicly_stated": 4,
+        "not_publicly_stated": 3,
         "conflicting": 0,
         "suppressed": 5,
         "pending_verification": 2
       },
       "fieldsNotPubliclyStated": [
-        "modelNumber",
         "manualUrl",
         "filtrationMicrons",
         "dimensions"
@@ -644,7 +641,7 @@
         "readyForBotMatch": false
       },
       "publicationBlockers": [
-        "weighted completeness 35% against a 65% floor",
+        "weighted completeness 40% against a 65% floor",
         "insufficient evidence coverage for review section(s): Where it fits, What it cleans, How it runs, Living with it",
         "review section(s) would rest on suppressed value(s): poolSizeSuitability, runtimeMins, weightLbs",
         "comparison field unavailable: poolSizeSuitability",
@@ -659,12 +656,12 @@
         {
           "gate": "weighted_completeness",
           "passed": false,
-          "detail": "weighted completeness 35% against a 65% floor"
+          "detail": "weighted completeness 40% against a 65% floor"
         },
         {
           "gate": "model_identity",
           "passed": true,
-          "detail": "identified by https://aiper.com/us/aiper-scuba-v3, model number not published by the maker, no manual accepted"
+          "detail": "identified by https://aiper.com/us/aiper-scuba-v3, with a published model number, no manual accepted"
         },
         {
           "gate": "no_material_conflict",
