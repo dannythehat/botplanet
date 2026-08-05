@@ -706,6 +706,123 @@
     ]
   },
   {
+    "source": "/media/window/soil-rain-spots.webp",
+    "sourceWidth": 1586,
+    "sourceHeight": 992,
+    "derivatives": [
+      {
+        "id": "media-window-soil-rain-spots-webp-360",
+        "src": "/media/window/soil-rain-spots-360w.webp",
+        "width": 360,
+        "height": 225,
+        "bytes": 20342,
+        "checksum": "sha256:9afdb0f9405885b4de2395ec151c6fce909a914867f64e8fb8eff629db49fc3a"
+      },
+      {
+        "id": "media-window-soil-rain-spots-webp-640",
+        "src": "/media/window/soil-rain-spots-640w.webp",
+        "width": 640,
+        "height": 400,
+        "bytes": 70410,
+        "checksum": "sha256:ce22dab1d825346b42316234fe156b8dfec0a6bc2c7346d67a4718eb7ea85be3"
+      },
+      {
+        "id": "media-window-soil-rain-spots-webp-960",
+        "src": "/media/window/soil-rain-spots-960w.webp",
+        "width": 960,
+        "height": 600,
+        "bytes": 165174,
+        "checksum": "sha256:40d9a216d5430bc5de7df3c3635cb4686b221445b2846f0d0a0bcef2e90ecf5f"
+      },
+      {
+        "id": "media-window-soil-rain-spots-webp-1440",
+        "src": "/media/window/soil-rain-spots-1440w.webp",
+        "width": 1440,
+        "height": 901,
+        "bytes": 291634,
+        "checksum": "sha256:66175d07cd3e6906a0cfd273820c4dbaa558080391f9f454c38b123768a1e53d"
+      }
+    ]
+  },
+  {
+    "source": "/media/window/soil-dust-film.webp",
+    "sourceWidth": 1586,
+    "sourceHeight": 992,
+    "derivatives": [
+      {
+        "id": "media-window-soil-dust-film-webp-360",
+        "src": "/media/window/soil-dust-film-360w.webp",
+        "width": 360,
+        "height": 225,
+        "bytes": 19894,
+        "checksum": "sha256:16055a8e55b5e2b667ed4bd260358bc2eb07c28100b6d416003576be4df4f82d"
+      },
+      {
+        "id": "media-window-soil-dust-film-webp-640",
+        "src": "/media/window/soil-dust-film-640w.webp",
+        "width": 640,
+        "height": 400,
+        "bytes": 71652,
+        "checksum": "sha256:4830e9ae58527df6dc1e05ac2e0963434f27df354ff80bce889f166afa7bee12"
+      },
+      {
+        "id": "media-window-soil-dust-film-webp-960",
+        "src": "/media/window/soil-dust-film-960w.webp",
+        "width": 960,
+        "height": 600,
+        "bytes": 172860,
+        "checksum": "sha256:e36ce1434e6355043752e2230eae59dbf42ce2633c002c46b1814f9547b66a9a"
+      },
+      {
+        "id": "media-window-soil-dust-film-webp-1440",
+        "src": "/media/window/soil-dust-film-1440w.webp",
+        "width": 1440,
+        "height": 901,
+        "bytes": 326388,
+        "checksum": "sha256:37fb84a10b86de7fb374a5451bf9b15ae94ff0a3c4e1a0865ba8f1bdfe5ebdfc"
+      }
+    ]
+  },
+  {
+    "source": "/media/window/soil-greasy-marks.webp",
+    "sourceWidth": 1586,
+    "sourceHeight": 992,
+    "derivatives": [
+      {
+        "id": "media-window-soil-greasy-marks-webp-360",
+        "src": "/media/window/soil-greasy-marks-360w.webp",
+        "width": 360,
+        "height": 225,
+        "bytes": 8674,
+        "checksum": "sha256:582975957cb558249eb2f41a205df44db502c8c1b5b1840ce74a014678919d6c"
+      },
+      {
+        "id": "media-window-soil-greasy-marks-webp-640",
+        "src": "/media/window/soil-greasy-marks-640w.webp",
+        "width": 640,
+        "height": 400,
+        "bytes": 27748,
+        "checksum": "sha256:7b4afee8636b1e4685fadfa5375288321d0562bd24d1170c2a9740adbd74da62"
+      },
+      {
+        "id": "media-window-soil-greasy-marks-webp-960",
+        "src": "/media/window/soil-greasy-marks-960w.webp",
+        "width": 960,
+        "height": 600,
+        "bytes": 64186,
+        "checksum": "sha256:f363a6c7f24b313b7e1145d7218a0ae9069489cdbc1897d94b0595bac08c134c"
+      },
+      {
+        "id": "media-window-soil-greasy-marks-webp-1440",
+        "src": "/media/window/soil-greasy-marks-1440w.webp",
+        "width": 1440,
+        "height": 901,
+        "bytes": 112156,
+        "checksum": "sha256:6b28382b9dc43e80838681a235e5f0d4662d4be1245a3bafb9070531dbbd3d0b"
+      }
+    ]
+  },
+  {
     "source": "/media/pool/hero-desktop.webp",
     "sourceWidth": 1600,
     "sourceHeight": 900,
