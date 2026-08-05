@@ -13,7 +13,7 @@ is the honest status.
 | 3 | ECOVACS WINBOT W3 Omni | `B0GJDQ59J1` | search result, 2026-08-05 | ~$550 |
 | 4 | ECOVACS WINBOT W1 PRO | `B0C2CQP8ZS` | search result, 2026-08-05 | ~$185 |
 | 5 | ECOVACS WINBOT W2S | `B0G5Y3NHTX` | search result, 2026-08-05 | ~$330 |
-| 6 | ECOVACS WINBOT Mini | `B0DR8W696Y` | search result, 2026-08-05 | TBC |
+| 6 | ECOVACS WINBOT Mini | `B0DR8W696Y` | search result, 2026-08-05 | TBC — **promoted to a review 2026-08-05**, replacing the dropped S7 Pro |
 | 7 | **HOBOT 2S** | `B097CM7P9L` | **owner-supplied link, 2026-08-05** | **$299.00** |
 | 8 | Cop Rose X5S | `B09D98W5KQ` | search result, 2026-08-05 | ~$160 |
 | 9 | **HOBOT 298** | `B07LF4HZ6C` | **owner-supplied link, 2026-08-05** | ~$250 |
@@ -25,7 +25,8 @@ is the honest status.
 
 | Product | Why |
 |---|---|
-| HOBOT S7 Pro | Owner checked 2026-08-05: **not available on Amazon US.** It was the highest-volume Hobot term (130/mo) but a review needs a buy button. Checking whether a plain "HOBOT S7" exists instead. |
+| HOBOT S7 Pro | Owner checked 2026-08-05: **not available on Amazon US.** It was the highest-volume Hobot term (130/mo), but a review needs a working buy button. |
+| HOBOT S7 (plain) | Owner checked 2026-08-05: **does not exist on Amazon US either.** HOBOT is represented by the 2S and the 298. The S7 volume is unreachable and the research map is adjusted rather than pretending otherwise. |
 
 ## Sibling traps to check on capture
 
