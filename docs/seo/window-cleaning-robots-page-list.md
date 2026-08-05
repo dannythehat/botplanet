@@ -61,7 +61,7 @@ mounting method, not only for volume.
 | 8 | HOBOT 298 | `hobot-298` | 50 | $250 | Budget Hobot; ultrasonic spray |
 | 9 | ECOVACS WINBOT W2S | `ecovacs-winbot-w2s` | 50 | $330 | Slimmer W2 variant |
 | 10 | HOBOT 2S | `hobot-2s` | 50 | $299 | Mid Hobot, dual spray |
-| 11 | HUTT W55 | `hutt-w55` | — | $200 | Fourth brand; large-pane specialist |
+| 11 | HUTT S55 Pro | `hutt-s55-pro` | — | TBC | Fourth brand. 6,500 Pa, and the one that claims **frameless and inclined glass** — the category's biggest exclusion |
 | 12 | Cop Rose X5S | `cop-rose-x5s` | — | $160 | Budget floor. Remote-control, no app |
 | 13 | Windowmate WM-01 | `windowmate-wm-01` | — | $300 | **MAGNETIC, not suction** — cleans both sides at once, works on windows that never open |
 
