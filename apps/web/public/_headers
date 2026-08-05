@@ -1,0 +1,57 @@
+# ============================================================
+# Cache headers for static assets.
+#
+# WHY THIS FILE EXISTS. Cloudflare Workers Assets serves everything with
+# `cache-control: public, max-age=0, must-revalidate` unless told otherwise.
+# That is the safe default and it is the wrong one for this site: every image,
+# font and stylesheet was being revalidated on every single page view. A
+# reader moving from one review to the next re-requested the logo, the
+# typeface and the shared CSS each time, and each request is a round trip to
+# an edge that already had the answer.
+#
+# The rule below is chosen per directory, by how safe it is to hold a stale
+# copy — not by one blanket number.
+#
+# Astro copies public/ into dist/, which is the assets directory in
+# wrangler.toml, so this file ships as dist/_headers.
+# ============================================================
+
+# Build output. Astro fingerprints these filenames with a content hash
+# (index.CYsGSFeW.css), so the URL changes whenever the bytes change and a
+# cached copy can never be wrong. This is the one case where `immutable` is
+# literally true.
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# The typeface. One file, and a font does not get edited — it gets replaced by
+# a differently named one. A year is safe.
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Product artwork, review figures and category imagery.
+#
+# NOT immutable, deliberately. These filenames are stable (hero.webp,
+# hero-640w.webp) and the owner does sometimes supply replacement artwork at
+# the same path — so a year-long cache would show months-old creative to
+# anyone who had already visited. Seven days with a day of
+# stale-while-revalidate keeps the round trips off the common path while
+# bounding how long a replaced image can linger.
+#
+# If artwork is replaced and must appear immediately, either ship it under a
+# new filename or purge the path in Cloudflare. Do not raise this number to
+# avoid doing that.
+/media/*
+  Cache-Control: public, max-age=604800, stale-while-revalidate=86400
+
+# The logo, in its several sizes. Same reasoning as media, shorter window: it
+# is on every page, so a stale one is more visible than a stale product shot.
+/logo/*
+  Cache-Control: public, max-age=86400, stale-while-revalidate=86400
+
+# Open Graph share images. Fetched by crawlers rather than readers, and a
+# stale share card is a real cost when a page's framing changes.
+/og/*
+  Cache-Control: public, max-age=86400, stale-while-revalidate=86400
+
+/favicon.svg
+  Cache-Control: public, max-age=604800
