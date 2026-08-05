@@ -16,7 +16,7 @@ is the honest status.
 | 6 | ECOVACS WINBOT Mini | `B0DR8W696Y` | search result, 2026-08-05 | TBC |
 | 7 | **HOBOT 2S** | `B097CM7P9L` | **owner-supplied link, 2026-08-05** | **$299.00** |
 | 8 | Cop Rose X5S | `B09D98W5KQ` | search result, 2026-08-05 | ~$160 |
-| 9 | HOBOT 298 | — | awaiting owner | ~$250 |
+| 9 | **HOBOT 298** | `B07LF4HZ6C` | **owner-supplied link, 2026-08-05** | ~$250 |
 | 10 | Mamibot W120-T | — | awaiting owner | ~$229 |
 | 11 | HUTT W55 | — | awaiting owner | ~$200 |
 | 12 | Windowmate WM-01 | — | awaiting owner | ~$300 |
