@@ -162,6 +162,16 @@ const offerSeeds: OfferSeed[] = [
   { id: "off-freedom-amazon", productId: "prod-polaris-freedom", retailerId: "ret-amazon", affiliateProgramId: "ap-amazon-us", priceUsd: 1399, warranty: "2-3 year", redirectKey: "pool-polaris-freedom-amazon" },
   { id: "off-betta-amazon", productId: "prod-betta-se-plus", retailerId: "ret-amazon", affiliateProgramId: "ap-amazon-us", priceUsd: 389, warranty: "2-year", redirectKey: "pool-betta-seplus-amazon" },
   { id: "off-e10-amazon", productId: "prod-dolphin-e10", retailerId: "ret-amazon", affiliateProgramId: "ap-amazon-us", priceUsd: 529, warranty: "2-year", redirectKey: "pool-dolphin-e10-amazon" },
+  /* ADDED 4 August 2026. Both products joined the catalogue on 3-4 August with
+     editorial, a review and a REDIRECT_KEYS entry, but nobody seeded an offer
+     for them — so their review pages rendered a buy button pointing at a
+     redirect key that had no row, and /go/ answered 404. A published review
+     with a dead buy button is the worst of both worlds: the reader trusts the
+     page and the click earns nothing. The audit that found this also added the
+     coverage test in apps/web/test/offers.test.ts, so a future product cannot
+     reach publication with no offer behind its button. */
+  { id: "off-proteus-amazon", productId: "prod-dolphin-proteus-dx4-plus", retailerId: "ret-amazon", affiliateProgramId: "ap-amazon-us", priceUsd: 899, warranty: "2-year", redirectKey: "pool-dolphin-proteus-dx4plus-amazon" },
+  { id: "off-scubav3-amazon", productId: "prod-aiper-scuba-v3-ai-vision", retailerId: "ret-amazon", affiliateProgramId: "ap-amazon-us", priceUsd: 849, warranty: "2-year", redirectKey: "pool-aiper-scubav3-amazon" },
 ];
 
 export const offerRows: (typeof offers.$inferInsert)[] = offerSeeds.map((o) => ({

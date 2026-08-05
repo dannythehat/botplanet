@@ -1274,6 +1274,47 @@ describe("scheduled refresh — wiring", () => {
     for (const id of AWAITING_DISCOVERY) {
       expect(EXPECTED_IDENTITIES.some((e) => e.productId === id)).toBe(false);
     }
+
+    /* THE COVERAGE HOLE THIS TEST DID NOT CLOSE UNTIL 4 AUGUST 2026.
+       Everything above checks the shape of the entries that exist, and that
+       the two lists do not overlap — but nothing asserted that every product
+       appears in ONE of them. The Proteus DX4 Plus and the Scuba V3 fell
+       straight through: published reviews, live buy buttons, owner-confirmed
+       ASINs, and no price check ever run against either, because neither was
+       on either list. A product is either checkable or awaiting discovery.
+       There is no third state, and silence is not one. */
+    for (const p of Object.values(ACTIVE_PRODUCTS)) {
+      const known =
+        EXPECTED_IDENTITIES.some((e) => e.productId === p.productId) ||
+        AWAITING_DISCOVERY.includes(p.productId);
+      expect(known, `${p.slug}: no identity expectation and not awaiting discovery`).toBe(true);
+    }
+  });
+
+  /**
+   * THE DEAD BUY BUTTON, AND THE TEST THAT WOULD HAVE CAUGHT IT.
+   *
+   * A review page renders its buy button from REDIRECT_KEYS. The redirect only
+   * resolves if a row with that key exists in D1, and D1's rows come from the
+   * seed. Nothing tied those two files together, so the Proteus DX4 Plus and
+   * the Scuba V3 shipped with buttons pointing at keys that had no offer
+   * behind them: /go/ answered 404 to every reader who clicked, for a day,
+   * on two published reviews.
+   *
+   * The seed is read as text rather than imported: this asserts the exact
+   * string a human has to type in two places, which is where the mistake
+   * actually happens.
+   */
+  it("gives every routed product a seeded offer behind its buy button", () => {
+    const seed = readFileSync("packages/db/seed/pool/commercial.ts", "utf8");
+    for (const p of Object.values(ACTIVE_PRODUCTS)) {
+      const key = REDIRECT_KEYS[p.productId];
+      expect(key, `${p.slug}: no redirect key`).toBeTruthy();
+      expect(
+        seed.includes(`redirectKey: "${key}"`),
+        `${p.slug}: buy button points at /go/${key}, which has no offer in the seed — the redirect will 404`,
+      ).toBe(true);
+    }
   });
 });
 
