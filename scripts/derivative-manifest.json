@@ -589,6 +589,123 @@
     ]
   },
   {
+    "source": "/media/window/glass-type-framed.webp",
+    "sourceWidth": 1586,
+    "sourceHeight": 992,
+    "derivatives": [
+      {
+        "id": "media-window-glass-type-framed-webp-360",
+        "src": "/media/window/glass-type-framed-360w.webp",
+        "width": 360,
+        "height": 225,
+        "bytes": 9496,
+        "checksum": "sha256:1c576e407f2acc2b0e12cebf0359a88eb57a0801d69a59a4a4e1cc8c7d1cd116"
+      },
+      {
+        "id": "media-window-glass-type-framed-webp-640",
+        "src": "/media/window/glass-type-framed-640w.webp",
+        "width": 640,
+        "height": 400,
+        "bytes": 22658,
+        "checksum": "sha256:fa8ab3a654591a60f37db175a8dd35ae613a0b75f3cab2f50dd230499a88fbb5"
+      },
+      {
+        "id": "media-window-glass-type-framed-webp-960",
+        "src": "/media/window/glass-type-framed-960w.webp",
+        "width": 960,
+        "height": 600,
+        "bytes": 44388,
+        "checksum": "sha256:5e474daf998c4ff2acc859fefdb8857bec4e581c898bc1eafefb8f3b56f59ca2"
+      },
+      {
+        "id": "media-window-glass-type-framed-webp-1440",
+        "src": "/media/window/glass-type-framed-1440w.webp",
+        "width": 1440,
+        "height": 901,
+        "bytes": 70588,
+        "checksum": "sha256:f66f173c1e2f7f889c89f3bdd71a49316677e769040d949313221c7e4b06b2b1"
+      }
+    ]
+  },
+  {
+    "source": "/media/window/glass-type-frameless.webp",
+    "sourceWidth": 1586,
+    "sourceHeight": 992,
+    "derivatives": [
+      {
+        "id": "media-window-glass-type-frameless-webp-360",
+        "src": "/media/window/glass-type-frameless-360w.webp",
+        "width": 360,
+        "height": 225,
+        "bytes": 8394,
+        "checksum": "sha256:b5f1a1ead09ff0822695c808abf6ce474fe8286545812cb2b445f70c20927ec7"
+      },
+      {
+        "id": "media-window-glass-type-frameless-webp-640",
+        "src": "/media/window/glass-type-frameless-640w.webp",
+        "width": 640,
+        "height": 400,
+        "bytes": 21326,
+        "checksum": "sha256:133af2b9471bfeee7cfb186d5299086f1fc52afd0080ee5ad8479c3cc1a000f2"
+      },
+      {
+        "id": "media-window-glass-type-frameless-webp-960",
+        "src": "/media/window/glass-type-frameless-960w.webp",
+        "width": 960,
+        "height": 600,
+        "bytes": 44674,
+        "checksum": "sha256:f9d8f655d25694d65cdfca586d74f9371b11811f76f3d1407f48cac26107f1d0"
+      },
+      {
+        "id": "media-window-glass-type-frameless-webp-1440",
+        "src": "/media/window/glass-type-frameless-1440w.webp",
+        "width": 1440,
+        "height": 901,
+        "bytes": 74474,
+        "checksum": "sha256:791b264c18ed0523a19f6328981026141202a4ce3b704f459f14f3b06d03ff50"
+      }
+    ]
+  },
+  {
+    "source": "/media/window/glass-type-high.webp",
+    "sourceWidth": 1586,
+    "sourceHeight": 992,
+    "derivatives": [
+      {
+        "id": "media-window-glass-type-high-webp-360",
+        "src": "/media/window/glass-type-high-360w.webp",
+        "width": 360,
+        "height": 225,
+        "bytes": 6078,
+        "checksum": "sha256:785bcc2661a4b61d2911e22cab49dc4491faf668cd89363e854200c5f334461a"
+      },
+      {
+        "id": "media-window-glass-type-high-webp-640",
+        "src": "/media/window/glass-type-high-640w.webp",
+        "width": 640,
+        "height": 400,
+        "bytes": 15648,
+        "checksum": "sha256:043bcdcd2c44178f10c8276d3fda97ceee431c26076394fb8f4c879984ca0139"
+      },
+      {
+        "id": "media-window-glass-type-high-webp-960",
+        "src": "/media/window/glass-type-high-960w.webp",
+        "width": 960,
+        "height": 600,
+        "bytes": 34498,
+        "checksum": "sha256:dad487a65bfc41216224d99bd5f48aaaadcfe527231c2240e5b92fd1715f112c"
+      },
+      {
+        "id": "media-window-glass-type-high-webp-1440",
+        "src": "/media/window/glass-type-high-1440w.webp",
+        "width": 1440,
+        "height": 901,
+        "bytes": 57048,
+        "checksum": "sha256:7eb1d00d4740cdcee8a670d62e34b326c5979173da7717ddce11189d6fcb4cfc"
+      }
+    ]
+  },
+  {
     "source": "/media/pool/hero-desktop.webp",
     "sourceWidth": 1600,
     "sourceHeight": 900,
