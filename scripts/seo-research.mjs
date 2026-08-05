@@ -1,20 +1,49 @@
 /**
- * US pool-page SEO research — one controlled DataForSEO batch.
+ * Capped DataForSEO research batch for ONE BotPlanet robot category.
  *
- * Scope: ONLY the 13 approved robotic-pool-cleaner pages (see
- * docs/seo/pool-research-plan.md). No future robot category is researched.
+ * REUSABLE BY DESIGN. This began as a pool-only script with its seeds typed
+ * into the file. It now takes a category and reads that category's seed
+ * inventory from docs/seo/seeds/<category>.json, because every page BotPlanet
+ * builds gets the same pre-build research treatment and a process that only
+ * works once is not a process. See docs/seo/PRE-BUILD-PROCESS.md.
+ *
+ *   SEO_CATEGORY=window-cleaning-robots node scripts/seo-research.mjs
+ *   node scripts/seo-research.mjs --category=window-cleaning-robots
  *
  * COST CONTROL: every DataForSEO response reports its own `cost`; this run
  * accumulates that figure and refuses to start any further request once
- * SAFETY_STOP is reached. HARD_CAP is $2.00 (owner ceiling); SAFETY_STOP
- * leaves headroom so an in-flight request can never breach the cap.
+ * SAFETY_STOP is reached. The cap defaults to $2.00 and may be lowered — never
+ * silently raised — with SEO_COST_CAP. SAFETY_STOP leaves headroom so an
+ * in-flight request can never breach the cap.
  *
  * SECURITY: the credential comes only from the DATAFORSEO_BASIC_AUTH
  * environment variable (GitHub repository secret in CI), used directly as the
  * pre-encoded Basic value — never decoded, rebuilt or logged. The output
  * artifact contains no request headers, only sanitised result fields.
  */
-import { mkdirSync, writeFileSync } from "node:fs";
+import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
+
+/* ---- Which category are we researching? ---------------------------- */
+const argCategory = process.argv.find((a) => a.startsWith("--category="))?.split("=")[1];
+const CATEGORY = (argCategory ?? process.env.SEO_CATEGORY ?? "").trim();
+if (!CATEGORY) {
+  console.error("No category given. Use --category=<slug> or SEO_CATEGORY=<slug>.");
+  console.error("Seed inventories live in docs/seo/seeds/<slug>.json");
+  process.exit(1);
+}
+if (!/^[a-z0-9-]+$/.test(CATEGORY)) {
+  console.error(`Category "${CATEGORY}" is not a plain slug. Refusing to build a path from it.`);
+  process.exit(1);
+}
+const SEED_FILE = `docs/seo/seeds/${CATEGORY}.json`;
+let seedDoc;
+try {
+  seedDoc = JSON.parse(readFileSync(SEED_FILE, "utf8"));
+} catch (e) {
+  console.error(`Cannot read ${SEED_FILE}: ${e.message}`);
+  console.error("Write the free seed inventory first — the paid run never invents its own seeds.");
+  process.exit(1);
+}
 
 if (!process.env.DATAFORSEO_BASIC_AUTH?.trim()) {
   console.error("DATAFORSEO_BASIC_AUTH is not set. Aborting before any paid call.");
@@ -22,8 +51,17 @@ if (!process.env.DATAFORSEO_BASIC_AUTH?.trim()) {
 }
 const AUTH = "Basic " + process.env.DATAFORSEO_BASIC_AUTH.trim();
 
-const HARD_CAP = 2.0;
-const SAFETY_STOP = 1.8;
+/* The owner ceiling. SEO_COST_CAP may LOWER it for a small run; a value above
+   the ceiling is refused rather than honoured, so a typo cannot authorise
+   spending nobody approved. */
+const CEILING = 2.0;
+const requestedCap = Number(process.env.SEO_COST_CAP ?? CEILING);
+if (!Number.isFinite(requestedCap) || requestedCap <= 0) {
+  console.error(`SEO_COST_CAP "${process.env.SEO_COST_CAP}" is not a positive number.`);
+  process.exit(1);
+}
+const HARD_CAP = Math.min(requestedCap, CEILING);
+const SAFETY_STOP = HARD_CAP * 0.9;
 const US = { location_code: 2840, language_code: "en" };
 const BASE = "https://api.dataforseo.com/v3";
 
@@ -62,95 +100,27 @@ async function call(path, tasks, label) {
 }
 
 /* ------------------------------------------------------------------ */
-/* Seeds — deduplicated free inventory for the 13 approved pages.      */
+/* Seeds — the category's free inventory, deduplicated at load.        */
 /* ------------------------------------------------------------------ */
 
-const LEADS = [
-  "robotic pool cleaner",
-  "best robotic pool cleaner",
-  "dolphin vs aiper pool cleaner",
-  "which robotic pool cleaner should i buy",
-  "dolphin nautilus cc plus review",
-  "polaris freedom review",
-  "betta se plus review",
-  "dolphin proteus dx4 review",
-  "aiper scuba v3 review",
-  "corded vs cordless robotic pool cleaner",
-  "are robotic pool cleaners worth it",
-  "do robotic pool cleaners climb walls",
-  "polaris freedom vs dolphin nautilus",
-];
+const LEADS = [...new Set(seedDoc.leads ?? [])];
+const SEEDS = [...new Set([...LEADS, ...(seedDoc.seeds ?? [])])];
+const SERP_QUERIES = [...new Set(seedDoc.serpQueries ?? [])];
 
-const SEEDS = [...new Set([
-  ...LEADS,
-  // category head + variants
-  "robot pool cleaner", "pool cleaning robot", "automatic pool cleaner robot", "pool robot",
-  "robotic pool vacuum", "pool vacuum robot", "electric pool cleaner", "pool cleaner machine",
-  "in ground pool robot", "above ground pool robot", "inground robotic pool cleaner",
-  // best-of / selection
-  "best robot pool cleaner", "top rated robotic pool cleaners", "best robotic pool cleaner 2026",
-  "best pool cleaning robot", "best robot pool cleaner for the money", "robotic pool cleaner reviews",
-  "best cordless robotic pool cleaner", "cordless robotic pool cleaner", "wireless robotic pool cleaner",
-  "best budget robotic pool cleaner", "cheap robotic pool cleaner", "robotic pool cleaner under 500",
-  "robotic pool cleaner under 1000",
-  "best robotic pool cleaner for above ground pools", "above ground pool robot cleaner",
-  "best robotic pool cleaner for inground pools", "best in ground pool cleaner robot",
-  "best robotic pool cleaner for large pools", "pool robot for large inground pool",
-  "best robotic pool cleaner for leaves", "pool robot for leaves and debris", "best pool cleaner heavy debris",
-  "wall climbing pool cleaner", "robotic pool cleaner that climbs walls", "waterline pool robot",
-  // model / review clusters
-  "dolphin nautilus cc plus", "dolphin nautilus cc plus wi-fi", "dolphin nautilus cc plus wifi",
-  "dolphin nautilus cc plus problems", "is the dolphin nautilus cc plus worth it", "nautilus cc plus vs cc",
-  "polaris freedom robotic pool cleaner", "polaris freedom cordless", "polaris freedom plus",
-  "polaris freedom battery life", "polaris freedom problems",
-  "betta se plus", "betta pool skimmer", "betta se plus solar skimmer", "betta robotic skimmer",
-  "betta se plus battery", "betta se plus saltwater", "solar pool skimmer", "solar pool skimmer review",
-  "robotic pool skimmer",
-  "dolphin proteus dx4 plus", "dolphin proteus dx4", "proteus dx4 pool cleaner", "dolphin proteus dx4 plus review",
-  "aiper scuba v3 ai vision", "aiper scuba v3", "aiper ai vision pool cleaner", "aiper scuba v3 ai vision review",
-  // comparisons
-  "aiper vs dolphin", "dolphin vs polaris robotic pool cleaner", "polaris vs dolphin pool cleaner",
-  "aiper vs beatbot", "wybot vs aiper", "dolphin nautilus cc plus vs polaris freedom",
-  "robotic pool cleaner comparison", "compare pool robots", "pool robot vs suction cleaner",
-  "pool robot vs pressure side cleaner", "robotic vs manual pool vacuum",
-  // botmatch / choose intent
-  "help me choose a pool cleaner", "what pool robot do i need", "pool cleaner quiz",
-  "how to choose a robotic pool cleaner",
-  // educational questions
-  "how do robotic pool cleaners work", "how does a pool robot work",
-  "are cordless pool robots better", "cordless pool cleaner pros and cons", "corded or cordless pool cleaner",
-  "robotic pool cleaner pros and cons", "is a pool robot worth the money", "do robotic pool cleaners really work",
-  "pool robot waterline cleaning", "do pool robots clean the waterline", "robotic pool cleaner walls",
-  "pool robot not climbing walls",
-  "how often should a robotic pool cleaner run", "how long to run pool robot",
-  "can you leave a robotic pool cleaner in the pool", "should i leave my pool robot in the pool",
-  "how long do robotic pool cleaners last", "robotic pool cleaner maintenance", "how to clean pool robot filter",
-  "do robotic cleaners pick up leaves", "pool robot for algae", "robotic pool cleaner for saltwater pool",
-  "robotic pool cleaner with app", "quietest robotic pool cleaner", "robotic pool cleaner for vinyl liner",
-  "robotic pool cleaner for fiberglass pool", "robotic pool cleaner for small pool",
-])];
-
-/** SERP pulls limited to queries that decide intent or a cannibalisation split. */
-const SERP_QUERIES = [
-  "robotic pool cleaner", "best robotic pool cleaner", "best cordless robotic pool cleaner",
-  "best robotic pool cleaner for above ground pools", "best robotic pool cleaner for large pools",
-  "best robotic pool cleaner for leaves", "best budget robotic pool cleaner",
-  "best robotic pool cleaner for inground pools", "wall climbing pool cleaner", "solar pool skimmer",
-  "dolphin nautilus cc plus review", "polaris freedom review", "betta se plus review",
-  "dolphin proteus dx4 review", "aiper scuba v3 review",
-  "dolphin vs aiper pool cleaner", "dolphin nautilus cc plus vs polaris freedom",
-  "corded vs cordless robotic pool cleaner", "are robotic pool cleaners worth it",
-  "do robotic pool cleaners climb walls", "which robotic pool cleaner should i buy",
-  "robotic pool cleaner comparison",
-];
+if (!SEEDS.length || !LEADS.length) {
+  console.error(`${SEED_FILE} has no leads or no seeds. Nothing to research.`);
+  process.exit(1);
+}
 
 /* ------------------------------------------------------------------ */
 /* Runs                                                                */
 /* ------------------------------------------------------------------ */
 
-const out = { generated: new Date().toISOString(), locale: US, seedsBeforeDedupe: null, seeds: SEEDS.length, volume: [], difficulty: [], related: [], serps: [] };
+const out = { category: CATEGORY, seedFile: SEED_FILE, generated: new Date().toISOString(), locale: US, seedsBeforeDedupe: null, seeds: SEEDS.length, volume: [], difficulty: [], related: [], serps: [] };
 
-console.log(`Seeds after dedupe: ${SEEDS.length}`);
+console.log(`Category: ${CATEGORY} (${SEED_FILE})`);
+console.log(`Seeds after dedupe: ${SEEDS.length} · leads ${LEADS.length} · SERP queries ${SERP_QUERIES.length}`);
+console.log(`Cost cap: $${HARD_CAP.toFixed(2)} (ceiling $${CEILING.toFixed(2)})`);
 
 // 1. Volume/CPC/competition + 12-month trend — ONE batched call.
 const vol = await call("/keywords_data/google_ads/search_volume/live", [{ ...US, keywords: SEEDS }], "search_volume");
@@ -220,10 +190,10 @@ for (const q of SERP_QUERIES) {
 out.costLog = costLog;
 out.totalCostUsd = Number(totalCost.toFixed(6));
 mkdirSync("research-output", { recursive: true });
-writeFileSync("research-output/seo-research-results.json", JSON.stringify(out, null, 2));
+writeFileSync(`research-output/${CATEGORY}-results.json`, JSON.stringify(out, null, 2));
 writeFileSync(
-  "research-output/cost-summary.json",
-  JSON.stringify({ hardCapUsd: HARD_CAP, totalCostUsd: out.totalCostUsd, batches: costLog }, null, 2),
+  `research-output/${CATEGORY}-cost-summary.json`,
+  JSON.stringify({ category: CATEGORY, hardCapUsd: HARD_CAP, totalCostUsd: out.totalCostUsd, batches: costLog }, null, 2),
 );
 console.log(`DONE. Total spend $${totalCost.toFixed(4)} of $${HARD_CAP.toFixed(2)} cap.`);
 if (totalCost > HARD_CAP) {

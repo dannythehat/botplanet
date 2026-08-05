@@ -1,0 +1,88 @@
+name: SEO Research
+
+# The paid keyword-research batch that every BotPlanet category runs BEFORE a
+# page is built. See docs/seo/PRE-BUILD-PROCESS.md for where this sits in the
+# sequence and what happens to the output.
+#
+# This workflow was originally written for the pool category, hardcoded to one
+# branch, and deleted after that run. It is permanent now: the research stage
+# is not a one-off, it is the gate every category passes through, and a gate
+# that has to be rebuilt from git history each time is a gate people skip.
+#
+# Credentials come exclusively from the GitHub repository secret and are never
+# printed. The script enforces the spend ceiling internally and refuses a cap
+# above it.
+#
+# Run it from the Actions tab: pick the category, optionally lower the cap.
+# Results arrive as a downloadable artifact — raw API responses never enter git.
+
+on:
+  workflow_dispatch:
+    inputs:
+      category:
+        description: "Category slug — must match docs/seo/seeds/<slug>.json"
+        required: true
+        type: string
+      cost_cap:
+        description: "Spend cap in USD. Lowers the $2.00 ceiling; cannot raise it."
+        required: false
+        default: "2.00"
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  # One paid run at a time, ever. Two concurrent runs would spend twice and
+  # neither would know about the other's cost.
+  group: seo-research
+  cancel-in-progress: false
+
+jobs:
+  research:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Confirm the seed inventory exists before spending anything
+        run: |
+          SEED="docs/seo/seeds/${{ inputs.category }}.json"
+          if [ ! -f "$SEED" ]; then
+            echo "No seed inventory at $SEED."
+            echo "The free seed list is written and reviewed BEFORE the paid run — see docs/seo/PRE-BUILD-PROCESS.md."
+            exit 1
+          fi
+          echo "Seed inventory: $SEED"
+
+      - name: Run capped DataForSEO batch
+        shell: bash
+        run: |
+          mkdir -p research-output
+          set -o pipefail
+          node scripts/seo-research.mjs 2>&1 | tee research-output/run.log
+          if grep -Eq 'HTTP (4|5)[0-9]{2}' research-output/run.log; then
+            echo 'DataForSEO returned an HTTP error. Research results are invalid.'
+            exit 1
+          fi
+        env:
+          DATAFORSEO_BASIC_AUTH: ${{ secrets.DATAFORSEO_BASIC_AUTH }}
+          SEO_CATEGORY: ${{ inputs.category }}
+          SEO_COST_CAP: ${{ inputs.cost_cap }}
+
+      - name: Report what it cost
+        if: always()
+        run: |
+          COST="research-output/${{ inputs.category }}-cost-summary.json"
+          [ -f "$COST" ] && cat "$COST" >> "$GITHUB_STEP_SUMMARY" || echo "No cost summary produced." >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload sanitised results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: seo-research-${{ inputs.category }}
+          path: research-output/
+          retention-days: 30
