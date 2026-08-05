@@ -25,6 +25,12 @@ budget on a decision nobody is making.
 
 What Stage 0 produces: the category slug, e.g. `window-cleaning-robots`.
 
+**Who chooses the keywords.** Claude does, always — owner decision of
+5 August 2026, which reversed an earlier rule forbidding it. The condition
+attached: every selection is evidence-backed, using real volume and real
+difficulty from the paid batch below, never a guess — and recorded in the
+keyword register and the Notion tracker where it can be checked.
+
 ---
 
 ## Stage 1 — Free seed inventory *(no money spent)*
