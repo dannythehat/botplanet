@@ -33,6 +33,51 @@ export interface CategoryHeroContent {
 }
 
 export const CATEGORY_HERO: Record<string, CategoryHeroContent> = {
+  /* Keyword evidence: DataForSEO run 30981257806, 2026-08-05, $0.2044.
+     "window cleaning robot" is 12,100/mo at KD 0-5 and Google groups four
+     other phrasings into it (robot window cleaner, robotic window cleaner,
+     window cleaner robot, window washing robot). "automatic window cleaner"
+     is a SEPARATE cluster worth 8,100 at KD 0, so it earns a place in the
+     subtitle rather than being treated as the same words.
+
+     This page also carries the "best" job — there is no separate best-of
+     page, because 6 of the top 10 results are identical between the two
+     terms and NYTimes ranks first for both with a single article. */
+  "window-cleaning-robots": {
+    eyebrow: "Robot category",
+    title: "Window Cleaning Robots: Compare Robot Window Cleaners",
+    /* 44 words, matching the shortened pool intro Danny approved rather than
+       the older 55-85 range. Primary term opens sentence one; the separate
+       8,100/mo cluster appears naturally in sentence two. */
+    subtitle:
+      "A window cleaning robot grips the glass, sprays and wipes its way across it, and " +
+      "does the panes you would rather not reach. An automatic window cleaner is not right " +
+      "for every window though — the frame, the height and the glass decide it, and we " +
+      "compare them on exactly that.",
+    seoTitle: "Window Cleaning Robots: Compare Robot Window Cleaners | BotPlanet",
+    metaDescription:
+      "Compare window cleaning robots by glass type, framed or frameless, suction power, " +
+      "safety tether and app control. Find the right robot window cleaner for your windows.",
+    primaryCta: { label: "Compare window robots", href: "#products" },
+    secondaryCta: { label: "Try Window BotMatch", href: "/botmatch/window-cleaning-robots/" },
+    /* Owner-created BotPlanet artwork, supplied 2026-08-05. Carries in-image
+       BotPlanet branding by the owner's design decision. The machine in the
+       artwork is badged AIPER, a pool-robot brand that makes no window robot
+       and appears nowhere in this catalogue; raised with the owner, who
+       confirmed it stands. Recorded so a future reader finds a decision
+       rather than assuming a mistake. */
+    image: {
+      src: "/media/window/hero-desktop.webp",
+      mobileSrc: "/media/window/hero-mobile.webp",
+      alt:
+        "A window cleaning robot gripping the glass wall of a modern home at dusk, water " +
+        "spraying across the pane, with a warmly lit living room and a coastline visible " +
+        "behind the glass.",
+      focal: "50% 50%",
+    },
+    imageLayout: "above",
+  },
+
   "robotic-pool-cleaners": {
     eyebrow: "Robot category",
     title: "Robotic Pool Cleaners: Compare Pool Robots for Every Pool Type",
