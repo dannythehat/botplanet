@@ -55,7 +55,7 @@ mounting method, not only for volume.
 | 2 | ECOVACS WINBOT W2 PRO Omni | `ecovacs-winbot-w2-pro-omni` | **1,120** | $499 | Flagship. Portable battery station — the one that works away from a socket |
 | 3 | ECOVACS WINBOT W2 PRO | `ecovacs-winbot-w2-pro` | 150 | $380 | Mid flagship, mains + battery |
 | 4 | ECOVACS WINBOT W3 Omni | `ecovacs-winbot-w3-omni` | 150 | $550 | Newest navigation, top of range |
-| 5 | HOBOT S7 Pro | `hobot-s7-pro` | 130 | $400 | The streak-free specialist; corners and frameless |
+| 5 | ECOVACS WINBOT Mini | `ecovacs-winbot-mini` | — | $150 | Smallest and cheapest. Small panes, and the only one a renter would buy |
 | 6 | ECOVACS WINBOT W1 PRO | `ecovacs-winbot-w1-pro` | 100 | **$185** | The cheap way in. Corded, no frills |
 | 7 | Mamibot W120-T | `mamibot-w120-t` | 100 | $229 | Third brand, mid-price alternative |
 | 8 | HOBOT 298 | `hobot-298` | 50 | $250 | Budget Hobot; ultrasonic spray |
@@ -64,6 +64,11 @@ mounting method, not only for volume.
 | 11 | HUTT W55 | `hutt-w55` | — | $200 | Fourth brand; large-pane specialist |
 | 12 | Cop Rose X5S | `cop-rose-x5s` | — | $160 | Budget floor. Remote-control, no app |
 | 13 | Windowmate WM-01 | `windowmate-wm-01` | — | $300 | **MAGNETIC, not suction** — cleans both sides at once, works on windows that never open |
+
+**HOBOT S7 Pro was here until 2026-08-05.** It carried the highest Hobot
+volume in the research (130/mo) and is not sold on Amazon US in any form —
+neither is a plain S7. A review needs a working buy button, so it is dropped
+and the WINBOT Mini takes the slot. HOBOT is represented by the 2S and 298.
 
 **Why the last three matter more than their volume suggests.** BotMatch is a
 rule-out engine: it needs a machine to offer when the reader's answer excludes
