@@ -23,6 +23,16 @@ export interface HeroImage {
   alt: string;
   /** Focal point when the image is cropped, e.g. "50% 40%". */
   focal?: string;
+  /**
+   * Aspect ratio for the narrow-screen crop, e.g. "4 / 5".
+   *
+   * Defaults to 3/2, which is what the pool artwork was composed for. A
+   * category whose mobile master is a different shape sets this instead of
+   * having its composition cropped: the window hero is a 4:5 portrait with the
+   * logo at the top and the headline beneath it, and a forced 3:2 slot cut
+   * both off. The artwork decides the slot, not the other way round.
+   */
+  mobileAspect?: string;
 }
 
 interface Props {
@@ -75,7 +85,11 @@ import { srcsetFor } from "../lib/srcset";
     </div>
 
     {hasImage && (
-      <figure class="chero__figure" data-hero-image>
+      <figure
+        class="chero__figure"
+        data-hero-image
+        style={image!.mobileAspect ? `--chero-mobile-aspect: ${image!.mobileAspect}` : undefined}
+      >
         <picture>
           {image!.mobileSrc && (
             <source media="(max-width: 719px)" srcset={srcsetFor(image!.mobileSrc) ?? image!.mobileSrc} sizes="100vw" />
@@ -256,7 +270,9 @@ import { srcsetFor } from "../lib/srcset";
   }
 
   .chero[data-layout="above"] .chero__figure img {
-    aspect-ratio: 3 / 2;
+    /* 3/2 is what the pool mobile master was composed for. A category whose
+       artwork is a different shape overrides it rather than being cropped. */
+    aspect-ratio: var(--chero-mobile-aspect, 3 / 2);
   }
 
   .chero[data-layout="above"] .chero__copy {
@@ -279,6 +295,7 @@ import { srcsetFor } from "../lib/srcset";
     }
 
     .chero[data-layout="above"] .chero__figure img {
+      /* Desktop always uses the wide master, so the mobile override stops here. */
       aspect-ratio: 16 / 9;
     }
 
