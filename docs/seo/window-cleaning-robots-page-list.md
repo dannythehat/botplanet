@@ -43,7 +43,7 @@ of the category page, not a separate URL. Combined, that single page targets
 
 ---
 
-## B. Product reviews (12)
+## B. Product reviews (11)
 
 Ordered by search demand. The right-hand column is the reason the product is
 in the catalogue at all — **BotMatch needs a distinct answer for each kind of
@@ -63,19 +63,28 @@ mounting method, not only for volume.
 | 10 | HOBOT 2S | `hobot-2s` | 50 | $299 | Mid Hobot, dual spray |
 | 11 | HUTT S55 Pro | `hutt-s55-pro` | — | TBC | Fourth brand. 6,500 Pa, and the one that claims **frameless and inclined glass** — the category's biggest exclusion |
 | 12 | Cop Rose X5S | `cop-rose-x5s` | — | $160 | Budget floor. Remote-control, no app |
-| 13 | Windowmate WM-01 | `windowmate-wm-01` | — | $300 | **MAGNETIC, not suction** — cleans both sides at once, works on windows that never open |
 
 **HOBOT S7 Pro was here until 2026-08-05.** It carried the highest Hobot
 volume in the research (130/mo) and is not sold on Amazon US in any form —
 neither is a plain S7. A review needs a working buy button, so it is dropped
 and the WINBOT Mini takes the slot. HOBOT is represented by the 2S and 298.
 
-**Why the last three matter more than their volume suggests.** BotMatch is a
-rule-out engine: it needs a machine to offer when the reader's answer excludes
-everything else. The Windowmate is the clearest case — it is a *different
-class* (magnetic, both sides at once), the way the Betta SE Plus is a skimmer
-rather than a pool cleaner. A reader with sealed double-glazing has no suction
-robot that fits, and right now BotMatch would have nothing to say to them.
+**Windowmate WM-01 was here until 2026-08-05** — the magnetic,
+both-sides-at-once machine, and the only non-suction product in the plan. It
+is not sold on Amazon US, and no magnetic window *robot* appears to be. Manual
+magnetic squeegees exist; they are not robots and were rejected rather than
+used to pad the list.
+
+**That leaves a real gap, and it is recorded rather than papered over:** a
+reader whose windows never open has no machine BotMatch can offer. If a
+magnetic robot reaches the US market it goes straight in.
+
+**Brand concentration, stated plainly.** Six of the eleven are ECOVACS. That
+is what the market looks like — ECOVACS owns this category the way Maytronics
+owns pool — but it means six reviews will reach similar verdicts, and the
+category page must not read as an ECOVACS catalogue. The Cop Rose and the
+HUTT are the cheap and the frameless answers respectively, and they carry
+more weight in BotMatch than their search volume suggests.
 
 ---
 
@@ -83,12 +92,12 @@ robot that fits, and right now BotMatch would have nothing to say to them.
 
 | # | Guide | URL | Primary keyword | Vol/mo | KD |
 |---|---|---|---|---|---|
-| 14 | Do window cleaning robots actually work? | `/guides/do-window-cleaning-robots-work/` | do window cleaning robots work | 130 | 0 |
-| 15 | Will a window cleaning robot fall? | `/guides/window-cleaning-robot-safety/` | window cleaning robot safety rope | — | — |
-| 16 | Frameless glass: which robots can, which can't | `/guides/window-robots-frameless-glass/` | window cleaning robot frameless | — | — |
-| 17 | Why window robots streak — and how to stop it | `/guides/window-cleaning-robot-streaks/` | do window cleaning robots leave streaks | — | — |
+| 13 | Do window cleaning robots actually work? | `/guides/do-window-cleaning-robots-work/` | do window cleaning robots work | 130 | 0 |
+| 14 | Will a window cleaning robot fall? | `/guides/window-cleaning-robot-safety/` | window cleaning robot safety rope | — | — |
+| 15 | Frameless glass: which robots can, which can't | `/guides/window-robots-frameless-glass/` | window cleaning robot frameless | — | — |
+| 16 | Why window robots streak — and how to stop it | `/guides/window-cleaning-robot-streaks/` | do window cleaning robots leave streaks | — | — |
 
-Guides 15–17 have no measurable volume as head terms, but every one of them
+Guides 14–16 have no measurable volume as head terms, but every one of them
 is in Google's **People Also Ask** on the commercial SERPs, and the question
 SERPs are dominated by Reddit — nobody is answering them properly. They are
 the category's real objections, and they feed the reviews.
@@ -99,7 +108,7 @@ the category's real objections, and they feed the reviews.
 
 | # | Page | URL | Notes |
 |---|---|---|---|
-| 18 | Compare window cleaning robots | `/compare/window-cleaning-robots/` | The interactive table, as with pool. `window cleaning robot comparison` as a *search term* is refused — 20/mo at KD 45 — but the tool page earns its place for readers. |
+| 17 | Compare window cleaning robots | `/compare/window-cleaning-robots/` | The interactive table, as with pool. `window cleaning robot comparison` as a *search term* is refused — 20/mo at KD 45 — but the tool page earns its place for readers. |
 
 ---
 
@@ -107,14 +116,14 @@ the category's real objections, and they feed the reviews.
 
 | # | Page | URL | Notes |
 |---|---|---|---|
-| 19 | Find My Window Cleaning Robot | `/botmatch/window-cleaning-robots/` | Its own question set. The deciding questions here are: does the window open, is the glass framed or frameless, is there a socket nearby, how high up, and is it indoors only? |
+| 18 | Find My Window Cleaning Robot | `/botmatch/window-cleaning-robots/` | Its own question set. The deciding questions here are: does the window open, is the glass framed or frameless, is there a socket nearby, how high up, and is it indoors only? |
 
 ---
 
-## Total: 19 pages — 17 content, 2 tools
+## Total: 18 pages — 16 content, 2 tools
 
 - **1 category page** (was 2 — the best-of is folded into it)
-- 12 reviews
+- 11 reviews
 - 4 guides
 - 1 comparison tool
 - 1 BotMatch tool
@@ -126,7 +135,7 @@ result. If the one-page rule is meant to cover those too, say so and they go.
 
 ## Artwork needed
 
-**Per review (12 × 4 = 48 images)** — same shape as the pool reviews:
+**Per review (11 × 4 = 44 images)** — same shape as the pool reviews:
 1. Hero — the machine on glass, model name visible
 2. A capability figure — suction/spray/pads, whatever that model's argument is
 3. An app or control figure
@@ -145,7 +154,7 @@ wants a wide feature image, as pool has.
 | `best budget window cleaning robot` | Same top-six SERP as the category page |
 | `best cordless window cleaning robot` | Same SERP; nearly every model is cordless-capable, so it is not a segment |
 | `best window cleaning robot for high rise` | Same SERP — becomes a section of the category page |
-| `best window cleaning robot for frameless glass` | Same SERP — becomes a section, and guide 16 |
+| `best window cleaning robot for frameless glass` | Same SERP — becomes a section, and guide 15 |
 | `winbot vs hobot` | No SERP returned at all |
 | `window cleaning robot comparison` (as a target) | 20/mo at KD 45 — hardest term in the set, least traffic |
 | `window cleaning robot amazon` | 590/mo at KD 0, but a page named after a retailer is thin. The category page absorbs it. |

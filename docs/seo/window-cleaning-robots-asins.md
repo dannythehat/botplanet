@@ -1,6 +1,6 @@
 # Window-cleaning robots — ASIN capture
 
-Working record for Stage 4. **Nothing here is verified identity yet**: an ASIN
+Working record for Stage 4. **Nothing here is verified identity yet** — all eleven are captured: an ASIN
 becomes trustworthy when the price provider machine-reads the listing and its
 Brand / Model Number fields match, exactly as happened with the WYBOT C1
 (`OS7010C`) and the Aiper Scuba V3 (`PRN31`). Until then the provenance column
@@ -18,14 +18,15 @@ is the honest status.
 | 8 | Cop Rose X5S | `B09D98W5KQ` | search result, 2026-08-05 | ~$160 |
 | 9 | **HOBOT 298** | `B07LF4HZ6C` | **owner-supplied link, 2026-08-05** | ~$250 |
 | 10 | **Mamibot W120-DP** | `B0DC6B81Z2` | search result, 2026-08-05 — **replaces the W120-T** | ~$229 |
-| 11 | **HUTT S55 Pro** | `B0GFW8TFML` | search result, 2026-08-05 — **replaces the W55** | TBC |
-| 12 | Windowmate WM-01 | — | awaiting owner | ~$300 |
+| 11 | **HUTT S55 Pro** | `B0GFW8TFML` | **owner-supplied link, 2026-08-05** — replaces the W55 | TBC |
+
 
 ## Dropped
 
 | Product | Why |
 |---|---|
 | HOBOT S7 Pro | Owner checked 2026-08-05: **not available on Amazon US.** It was the highest-volume Hobot term (130/mo), but a review needs a working buy button. |
+| Windowmate WM-01 | Owner checked 2026-08-05: **not sold on Amazon US.** This was the magnetic both-sides-at-once machine and the only non-suction product in the plan. No magnetic window ROBOT appears to be sold in the US at all. Manual magnetic squeegees exist and were rejected — they are not robots and do not belong on BotPlanet. **Recorded as a genuine catalogue gap:** a reader with sealed double-glazing has no machine we can offer, and if a magnetic robot reaches the US market it should be added. |
 | HOBOT S7 (plain) | Owner checked 2026-08-05: **does not exist on Amazon US either.** HOBOT is represented by the 2S and the 298. The S7 volume is unreachable and the research map is adjusted rather than pretending otherwise. |
 
 ## Sibling traps to check on capture
@@ -41,6 +42,8 @@ an `800P` the owner first called an `880P`.
   can return a sibling's data. `matchIdentity` checks ASIN-returned equals
   ASIN-requested *first*, before any name matching, precisely for this. Only
   the Blue ASIN is recorded; the other two must never be substituted.
+- **Windowmate / magnetic robots** — none on Amazon US. Do not substitute a
+  manual magnetic squeegee to fill the gap; it is not a robot.
 - **Mamibot W120-T** — the listing exists (`B07L2X6LPT`) but the owner found
   it unbuyable on 2026-08-05. A listing that exists is not a listing you can
   buy from, which is why the check is "can the owner add it to a basket"
