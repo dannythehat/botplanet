@@ -401,11 +401,21 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
       { term: "companion robot", volume: 4400, difficulty: 6, mustAppear: true },
       { term: "ai companion robot", volume: 1900, difficulty: 0, mustAppear: true },
       { term: "desktop companion robot", volume: 480, difficulty: 2, mustAppear: true },
-      { term: "robotic pet for elderly", volume: 390, difficulty: 0, mustAppear: true },
+      /* "robotic pet for elderly" (390) WAS A SECONDARY HERE until 6 August
+         2026, when /guides/robotic-pets-for-elderly/ was built and took it as
+         a primary. Left in both places it would have put two of our own pages
+         into one result set for a query only one of them can win. The hub
+         still covers eldercare as one of its three audiences — it just stops
+         chasing the term. Moved to cededTo below. */
       { term: "robot friend", volume: 1000, difficulty: 0, mustAppear: true },
       { term: "robot pets for adults", volume: 480, difficulty: 10, mustAppear: false },
     ],
     cededTo: [
+      {
+        term: "robotic pet for elderly",
+        path: "/guides/robotic-pets-for-elderly/",
+        why: "About 1,090/mo across four eldercare phrasings, all at KD 0, and a genuinely different reader — somebody buying for another person, often at a distance. The hub separates the three audiences; the guide answers the hardest of them properly.",
+      },
       {
         term: "pet camera robot",
         path: "/robots/pet-camera-robots/",
@@ -1202,6 +1212,123 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
       },
     ],
     researchedOn: RUN,
+  },
+
+  /* ---- The four standalone guides, live 6 August 2026. ----
+     Three lawn, one companion, and none of them ranks a product — there is
+     nothing in either catalogue yet. Every row below was written from the
+     research runs named at the bottom of it, before the page was written,
+     which is the order BLUEPRINT §7 requires and the order that was not
+     followed on 6 August when fifteen pages went up without it. */
+  {
+    path: "/guides/wire-free-robot-lawn-mower/",
+    /* 720/mo at KD 0 on the exact phrase, ~1,670 across the family. It is a
+       URL rather than a section of the hub on measured evidence: 2/10 shared
+       domains with "robot lawn mower". A different SERP, not a different
+       phrasing of the same one. */
+    primary: { term: "wire free robot lawn mower", volume: 720, difficulty: 0, mustAppear: true },
+    secondary: [
+      /* THE HYPHENATED FORM IS DECLARED SEPARATELY ON PURPOSE. Google reads
+         "wire free" and "wire-free" as the same thing; this register does
+         not, because it matches literal strings against rendered copy. The
+         page is written in the hyphenated form a reader expects and carries
+         the unhyphenated phrase once, so both are asserted rather than one
+         being assumed. */
+      { term: "wire-free robot lawn mower", volume: 720, difficulty: 0, mustAppear: true },
+      { term: "robot lawn mower without perimeter wire", volume: 210, difficulty: 0, mustAppear: true },
+      { term: "gps robot lawn mower", volume: 590, difficulty: 48, mustAppear: true },
+      { term: "lidar robot lawn mower", volume: 90, difficulty: 0, mustAppear: true },
+      { term: "robot lawn mower without boundary wire", volume: 20, difficulty: 0, mustAppear: true },
+    ],
+    cededTo: [
+      {
+        term: "robot lawn mower",
+        path: "/robots/robotic-lawn-mowers/",
+        why: "The 74,000 head term belongs to the hub. This guide takes one buying constraint off it rather than the category, and the hub links here from its navigation section.",
+      },
+    ],
+    researchedOn: RUN_LAWN,
+  },
+  {
+    path: "/guides/cheap-robot-lawn-mower/",
+    /* 390/mo at KD 11, and the closest call of the three lawn guides: 4/10
+       shared domains with "best robot lawn mower". Recorded as the first to
+       fold back into the hub if it underperforms. */
+    primary: { term: "cheap robot lawn mower", volume: 390, difficulty: 11, mustAppear: true },
+    secondary: [
+      { term: "best budget robot lawn mower", volume: 0, difficulty: 0, mustAppear: true },
+      /* THE PRICE CLUSTER MOVED HERE, 6 August 2026. The long-tail assignment
+         pass put "robot lawn mower price" (1,900) and "robotic lawn mower
+         price" (1,600) on the wire-free guide, which was wrong — a
+         price-first searcher wants the cheap end explained, not a lesson in
+         satellite navigation. Between them they are ten times this page's own
+         primary, and they are the reason it earns a URL comfortably. */
+      { term: "robot lawn mower price", volume: 1900, difficulty: 0, mustAppear: true },
+      { term: "robotic lawn mower price", volume: 1600, difficulty: 0, mustAppear: true },
+    ],
+    cededTo: [
+      {
+        term: "robot lawn mower",
+        path: "/robots/robotic-lawn-mowers/",
+        why: "Head term, owned by the hub. This page takes the budget constraint and the price question, and hands anybody still choosing a category back to it.",
+      },
+    ],
+    researchedOn: RUN_LAWN,
+  },
+  {
+    path: "/guides/robot-lawn-mower-for-hills/",
+    /* 200/mo — the smallest of the three and the one with the cleanest
+       evidence. 7/10 shared domains with "do robot lawn mowers work on
+       hills", 3/10 with "best robot lawn mower". The two hills queries are
+       one page and that page is not the hub. */
+    primary: { term: "best robot lawn mower for hills", volume: 200, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "do robot lawn mowers work on hills", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "slope", volume: 200, difficulty: 0, mustAppear: true },
+      { term: "gradient", volume: 0, difficulty: 0, mustAppear: true },
+      /* Not required in copy: the phrasing only exists as a query, and forcing
+         it into a sentence would produce the kind of writing this site bans. */
+      { term: "robot lawn mower slope", volume: 0, difficulty: 0, mustAppear: false },
+    ],
+    cededTo: [
+      {
+        term: "robot lawn mower",
+        path: "/robots/robotic-lawn-mowers/",
+        why: "Head term, owned by the hub. Slope is a constraint the hub names in its terrain section and this page answers in full.",
+      },
+      {
+        term: "cheap robot lawn mower",
+        path: "/guides/cheap-robot-lawn-mower/",
+        why: "The budget end of this market has no answer to a gradient, so this page names that and sends the reader whose lawn turns out flat to the page that does serve them.",
+      },
+    ],
+    researchedOn: RUN_LAWN,
+  },
+  {
+    path: "/guides/robotic-pets-for-elderly/",
+    /* ~1,090/mo across four phrasings, every one at KD 0. Taken off the
+       companion hub, which carried "robotic pet for elderly" as a secondary
+       until this page existed. */
+    primary: { term: "robotic pet for elderly", volume: 390, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "elderly care robot", volume: 390, difficulty: 0, mustAppear: true },
+      { term: "robotic pet for dementia", volume: 170, difficulty: 0, mustAppear: true },
+      { term: "companion robot for elderly", volume: 140, difficulty: 0, mustAppear: true },
+      { term: "robotic pets for elderly", volume: 390, difficulty: 0, mustAppear: true },
+    ],
+    cededTo: [
+      {
+        term: "robot pet",
+        path: "/robots/companion-robots/",
+        why: "The 8,100 head term belongs to the hub. This guide takes the care-setting intent, which measured as a different reader with a different question rather than a narrower version of the same one.",
+      },
+      {
+        term: "pet camera robot",
+        path: "/robots/pet-camera-robots/",
+        why: "Named on this page because 'checking in from a distance' is one of the three motivations readers arrive with, and it is the one a companion robot answers worst. Naming the honest alternative is not targeting its term.",
+      },
+    ],
+    researchedOn: RUN_COMPANION,
   },
 ];
 

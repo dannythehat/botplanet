@@ -541,6 +541,274 @@ export const EDITORIAL: Record<string, EditorialContent> = {
     ],
     lastReviewed: "2026-08-06",
   },
+
+  /* ==================================================================
+     LAWN AND COMPANION GUIDES — the first pages on this site published
+     for categories with NO PRODUCTS IN THE CATALOGUE.
+
+     That is deliberate and it is the reason all four carry `picks: []`.
+     A guide that ranks machines nobody here has checked is a guide
+     repeating other people's shortlists, and the one thing this site
+     sells is that it does not do that. Each of these answers the
+     decision, names what we cannot yet tell the reader, and hands them
+     to the hub. When lawn and companion products enter the catalogue,
+     the ranked lists arrive here and the "what we cannot tell you"
+     sections come out.
+
+     All four were planned before they were written: keywords, links,
+     images and schema are in content/seo/page-plan.ts, per BLUEPRINT
+     §7. None of them has artwork yet, which page-plan.test.ts prints
+     on every run so the gap cannot be forgotten.
+     ================================================================== */
+
+  /* ------------------------------------------------------------------
+     720/mo at KD 0 on the exact phrase, ~1,670 across the wire-free,
+     RTK, GPS and LiDAR phrasings. It is a page rather than a section of
+     the hub because it shares only 2/10 domains with "robot lawn mower"
+     — a genuinely separate SERP, measured rather than assumed.
+     ------------------------------------------------------------------ */
+  "/guides/wire-free-robot-lawn-mower/": {
+    path: "/guides/wire-free-robot-lawn-mower/",
+    categorySlug: "robotic-lawn-mowers",
+    eyebrow: "Guide",
+    title: "Wire-free robot lawn mowers: RTK, vision or LiDAR",
+    seoTitle: "Wire-Free Robot Lawn Mower: Which System Suits Your Garden",
+    metaDescription:
+      "Three navigation technologies are sold under one label, and tree cover decides between them. " +
+      "When wire-free is worth the money, and when a buried cable is still the better buy.",
+    standfirst:
+      "Wire-free is worth paying for when your lawn is going to change, and worth skipping when it is not. " +
+      "The three systems sold under that label behave differently under trees, which is the thing that actually decides it.",
+    prose: "wire-free-robot-lawn-mower",
+    picks: [],
+    comparisonSlugs: [],
+    faq: [
+      {
+        q: "Is there a robot lawn mower without boundary wire?",
+        a:
+          "Several, and they use one of three systems. RTK satellite pairs a receiver on the mower with a fixed antenna on the house " +
+          "and holds a line to a few centimetres. Camera-based machines read the edge of the grass visually. LiDAR builds a laser map " +
+          "of solid objects around it. Satellite systems need a clear view of the sky; the other two do not.",
+      },
+      {
+        q: "Do wire-free robot mowers work under trees?",
+        a:
+          "Camera and LiDAR systems do. Satellite systems, which is most of what is sold, lose accuracy under a canopy and will " +
+          "usually stop and report an error rather than mow blind. If mature trees cover much of the lawn, a boundary wire is more " +
+          "dependable than an RTK machine costing several times as much.",
+      },
+      {
+        q: "How accurate is RTK on a robot mower?",
+        a:
+          "A few centimetres with a clear sky, which is close enough to mow to a border without a physical edge. Manufacturers publish " +
+          "that figure and not the one that matters more: what happens when the fix degrades. Expect a machine that halts rather than " +
+          "one that wanders, and expect to fetch it.",
+      },
+      {
+        q: "Is wire-free worth the extra money?",
+        a:
+          "If you rearrange your garden, or it splits into separate zones, yes — moving a boundary becomes a line you drag on a phone " +
+          "instead of an afternoon with a pegging tool. For a small rectangle you have no plans to change, no. The cut is identical " +
+          "either way, because navigation decides where the machine goes rather than what it does to the grass.",
+      },
+      {
+        q: "Can I add wire-free navigation to a wired mower?",
+        a:
+          "No. The navigation system is designed into the machine, and no manufacturer sells an upgrade. Buying a wired mower is a " +
+          "decision about the next several years of that lawn, which is why the tree question is worth settling before you order.",
+      },
+    ],
+    lastReviewed: "2026-08-06",
+  },
+
+  /* ------------------------------------------------------------------
+     390/mo at KD 11 on the exact phrase, and it carries the price
+     cluster: "robot lawn mower price" (1,900) and "robotic lawn mower
+     price" (1,600) sit here rather than on the hub, because a
+     price-first searcher wants the cheap end explained, not a category
+     overview. The closest call of the three lawn guides — 4/10 shared
+     domains with "best robot lawn mower" — and the first to fold back
+     into the hub if it underperforms.
+     ------------------------------------------------------------------ */
+  "/guides/cheap-robot-lawn-mower/": {
+    path: "/guides/cheap-robot-lawn-mower/",
+    categorySlug: "robotic-lawn-mowers",
+    eyebrow: "Guide",
+    title: "Cheap robot lawn mowers: what you give up, and what you do not",
+    seoTitle: "Cheap Robot Lawn Mower: What the Low End Actually Costs You",
+    metaDescription:
+      "The expensive part of this category is navigation, not cutting. What a budget machine gives up, " +
+      "what it does not, and the point below which a low price stops being a bargain.",
+    standfirst:
+      "The cheapest sensible machine is small, wired and single-zone, and the saving is real — because every mower " +
+      "in this category cuts to much the same standard. What you give up is area, zones and slope.",
+    prose: "cheap-robot-lawn-mower",
+    picks: [],
+    comparisonSlugs: [],
+    faq: [
+      {
+        q: "How much is a cheap robot lawn mower?",
+        a:
+          "Entry machines are a small fraction of what a wire-free model costs, and the gap is navigation rather than cutting quality. " +
+          "We do not print figures in guides, because this category discounts hard in late summer and any number written here is wrong " +
+          "by the time you read it. Prices sit on product pages with the date they were checked beside them.",
+      },
+      {
+        q: "What is the catch with a budget robot mower?",
+        a:
+          "Three things, consistently. You lay a boundary wire around the lawn yourself. You get one zone, so a front and back lawn " +
+          "split by a driveway means carrying the machine. And you get a modest slope rating, which is the one limit you cannot work " +
+          "around. None of those affect the cut.",
+      },
+      {
+        q: "Do cheap robot mowers cut as well as expensive ones?",
+        a:
+          "Yes, on grass they can keep up with. Every machine here takes a few millimetres off frequently and mulches the clippings " +
+          "back, and a lawn kept at one height looks better than one cut weekly regardless of price. What you pay for is area, terrain " +
+          "and how the mower knows where the lawn ends.",
+      },
+      {
+        q: "How long do budget robot mowers last?",
+        a:
+          "Compare the warranty, because it is the only commitment anybody makes. Blades are a consumable on every machine at every " +
+          "price, so check the manufacturer publishes a parts listing before buying — a mower you cannot re-blade is disposable, and " +
+          "that is a bigger risk at the bottom of the market than any battery.",
+      },
+      {
+        q: "Is a cheap robot mower better than a push mower?",
+        a:
+          "For a small flat lawn you would otherwise cut weekly, yes, and the argument is time rather than quality. For a lawn you " +
+          "enjoy mowing, or one with a bank in it, no. The budget end of this market has no answer to a slope and buying one anyway " +
+          "is the most common regret in the category.",
+      },
+    ],
+    lastReviewed: "2026-08-06",
+  },
+
+  /* ------------------------------------------------------------------
+     200/mo, the smallest of the three, and the one with the clearest
+     reason to exist: "best robot lawn mower for hills" shares 7/10
+     domains with "do robot lawn mowers work on hills" and only 3/10
+     with "best robot lawn mower". The two hills queries are one page,
+     and that page is not the hub.
+     ------------------------------------------------------------------ */
+  "/guides/robot-lawn-mower-for-hills/": {
+    path: "/guides/robot-lawn-mower-for-hills/",
+    categorySlug: "robotic-lawn-mowers",
+    eyebrow: "Guide",
+    title: "The best robot lawn mower for hills starts with your gradient",
+    seoTitle: "Best Robot Lawn Mower for Hills: Measure the Slope First",
+    metaDescription:
+      "Gradient is the one constraint you cannot work around. How to measure yours, what actually makes a " +
+      "machine climb, and the lawns where the honest answer is no robot at all.",
+    standfirst:
+      "Measure the gradient before you shop for anything else. Area you can compromise on and navigation you can choose, " +
+      "but a machine that cannot hold your bank will never learn to.",
+    prose: "robot-lawn-mower-for-hills",
+    picks: [],
+    comparisonSlugs: [],
+    faq: [
+      {
+        q: "What slope can a robot lawn mower handle?",
+        a:
+          "Ratings run from modest gradients at the budget end to around 45 per cent on machines built for it, and the figure is " +
+          "always measured on dry grass. Wet grass carries roughly two-thirds of the traction, so buy at least ten percentage points " +
+          "of headroom above the steepest metre of your lawn rather than above its average.",
+      },
+      {
+        q: "How do I measure the slope of my lawn?",
+        a:
+          "Run a straight plank up the bank, put a spirit level on it, and measure the drop at one end against the plank's length. " +
+          "Rise divided by run, times a hundred, gives you per cent. A phone inclinometer laid on the same plank does it faster. " +
+          "Check which unit a manufacturer quotes, because 35 degrees and 35 per cent are different hills.",
+      },
+      {
+        q: "Do robot lawn mowers work on hills at all?",
+        a:
+          "On a bank you can walk across comfortably, yes. Above roughly 50 per cent on any part of the lawn, nothing in this " +
+          "category is a safe bet and a strimmer on a pole is the honest tool. A terraced garden with retaining walls between levels " +
+          "is a multi-zone problem before it is a gradient one.",
+      },
+      {
+        q: "What makes a robot mower climb better?",
+        a:
+          "Wheel tread and diameter, weight over the driven wheels, and whether all four wheels drive. The first is visible in a " +
+          "photograph, which makes it the easiest thing to check before you buy. Light machines with smooth tyres slip regardless of " +
+          "what the specification claims.",
+      },
+      {
+        q: "Why does my robot mower scalp the lawn on the slope?",
+        a:
+          "The deck rides differently going downhill and a low cutting height takes the crown off the bank. Setting the height about " +
+          "ten millimetres above what you use on the flat fixes most of it. Bald patches where the wheels sit are a different problem " +
+          "— that is slip, and it means the machine is at or past its gradient limit.",
+      },
+    ],
+    lastReviewed: "2026-08-06",
+  },
+
+  /* ------------------------------------------------------------------
+     ~1,090/mo across four phrasings, every one at KD 0, and a genuinely
+     different reader from the hub's: somebody buying for another person,
+     often at a distance, sometimes for a care setting. The hub cedes
+     "robotic pet for elderly" here rather than keeping it as a
+     secondary, because two of our own pages in one result set is a
+     result only one of them can win.
+     ------------------------------------------------------------------ */
+  "/guides/robotic-pets-for-elderly/": {
+    path: "/guides/robotic-pets-for-elderly/",
+    categorySlug: "companion-robots",
+    eyebrow: "Guide",
+    title: "Robotic pets for elderly relatives: choosing one honestly",
+    seoTitle: "Robotic Pet for Elderly Relatives: How to Choose One",
+    metaDescription:
+      "Three different products are sold to this buyer and they answer three different problems. " +
+      "What the research actually supports, what to check, and when the answer is not to buy at all.",
+    standfirst:
+      "Buy the simplest machine that fixes the one thing you are actually trying to fix, and buy it for a person rather than " +
+      "for a diagnosis. Three quite different products are sold to this reader, and picking the wrong one is the usual mistake.",
+    prose: "robotic-pets-for-elderly",
+    picks: [],
+    comparisonSlugs: [],
+    faq: [
+      {
+        q: "Do robotic pets help people with dementia?",
+        a:
+          "The evidence supports a modest, real effect: studies in care settings report less agitation, better mood and more social " +
+          "interaction. It is measured mostly on wards rather than in a house where somebody lives alone, and it says a person with " +
+          "something to stroke is calmer than a person with nothing — a smaller claim than the marketing makes, and a useful one.",
+      },
+      {
+        q: "What is the best robotic pet for an elderly person?",
+        a:
+          "Usually the simplest one. Battery-powered, fur-covered, responds to touch, with no screen, no app and nothing to log into. " +
+          "A machine that has to be understood before it can be enjoyed has already failed this reader. We do not name models here " +
+          "because none has been through our checking process yet.",
+      },
+      {
+        q: "Is a robotic pet or a care robot better for an older relative?",
+        a:
+          "They solve different problems. A robotic animal answers loneliness and agitation. A care robot with a screen and a voice " +
+          "answers communication and reminders, and only works if the person will talk to a machine at all. If your real motivation is " +
+          "checking in from a distance, buy a monitoring device and call it that.",
+      },
+      {
+        q: "What should I check before buying one?",
+        a:
+          "Weight in the lap, replaceable batteries rather than a charging dock somebody has to remember, sound that turns genuinely " +
+          "low, no account or home network required, and a cover that comes off to be washed. Then ask what happens to the machine if " +
+          "the company behind it stops trading, because several here are services as much as products.",
+      },
+      {
+        q: "Can a robotic pet upset someone?",
+        a:
+          "Yes, and it is worth taking seriously. Handing an adult a toy animal implies something about how you see them. Give it " +
+          "without ceremony and give it a name rather than a purpose. If the person has said they do not want one, that settles it — " +
+          "no specification outweighs it.",
+      },
+    ],
+    lastReviewed: "2026-08-06",
+  },
 };
 
 export function editorialFor(path: string | undefined): EditorialContent | undefined {

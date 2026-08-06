@@ -382,11 +382,17 @@ const HUB_SEEDS: HubSeed[] = [
       { term: "acre", volume: 2060, difficulty: 4 },
       { term: "boundary wire", volume: 1670, difficulty: 0 },
     ],
-    ceded: [],
-    refused: [
-      { term: "wire free robot lawn mower", volume: 0, why: "Planned as its own guide rather than chased here; the hub explains boundary wire as a decision without competing for the buying term." },
-      { term: "best robot lawn mower for hills", volume: 0, why: "Planned as a guide. Slope is the category's hardest exclusion and deserves its own answer, not a hub paragraph." },
+    /* THESE THREE WERE `refused` UNTIL 6 AUGUST 2026, described as "planned as
+       a guide". That was the wrong field: a refused term goes to no page of
+       ours, and these were always going somewhere. The guides exist now, so
+       they are ceded — which the cannibalisation test can actually check,
+       because it verifies the named page really does target the term. */
+    ceded: [
+      { term: "wire free robot lawn mower", toPath: "/guides/wire-free-robot-lawn-mower/", why: "≈1,670/mo across the wire-free, RTK, GPS and LiDAR phrasings, and 2/10 shared domains with this page. A separate SERP, so it earns a URL rather than a section here." },
+      { term: "best robot lawn mower for hills", toPath: "/guides/robot-lawn-mower-for-hills/", why: "Shares 7/10 domains with 'do robot lawn mowers work on hills' and only 3/10 with 'best robot lawn mower'. The two hills queries are one page and that page is not this one." },
+      { term: "cheap robot lawn mower", toPath: "/guides/cheap-robot-lawn-mower/", why: "390/mo at KD 11 plus the price cluster, and 4/10 shared domains with 'best robot lawn mower'. The closest call in the category, and the first guide to fold back in here if it underperforms." },
     ],
+    refused: [],
     products: [],
     productsNote: "No products seeded. Research lists 17 review candidates — the largest catalogue on the site — none sourced yet.",
     cards: ["Small yards", "Quarter acre to an acre", "An acre and up"],
@@ -471,10 +477,14 @@ const HUB_SEEDS: HubSeed[] = [
       { term: "robotic pet", volume: 8100, difficulty: 0 },
       { term: "companion robot", volume: 4400, difficulty: 6 },
       { term: "ai companion robot", volume: 1900, difficulty: 0 },
-      { term: "robotic pet for elderly", volume: 390, difficulty: 0 },
     ],
     ceded: [
       { term: "pet camera robot", toPath: "/robots/pet-camera-robots/", why: "Measured as a separate category: discount amazon and reddit and the two share no domain at all, and their seasons run opposite ways." },
+      /* Was a SECONDARY here until 6 August 2026, when the guide was built.
+         Left in both places it would have put two of our own pages into one
+         result set for a query only one of them can win. The hub still covers
+         eldercare as one of its three audiences; it stops chasing the term. */
+      { term: "robotic pet for elderly", toPath: "/guides/robotic-pets-for-elderly/", why: "≈1,090/mo across four eldercare phrasings at KD 0, and a different reader — somebody buying for another person, often at a distance. The hub separates the three audiences; the guide answers the hardest of them properly." },
     ],
     refused: [
       { term: "robot dog", volume: 90500, why: "Huge, and the SERP is $1,600 Unitree developer quadrupeds beside Target children's toys. Two markets, neither ours." },
@@ -802,10 +812,14 @@ const LAWN_GUIDES: PagePlan[] = [
     path: "/guides/wire-free-robot-lawn-mower/",
     category: "robotic-lawn-mowers",
     type: "guide",
-    status: "researched",
+    status: "built",
     intent: "Find a mower I do not have to bury a wire around the garden for.",
     primary: { term: "wire free robot lawn mower", volume: 720, difficulty: 0 },
     secondary: [
+      /* The hyphenated form is declared separately because the keyword
+         register matches literal strings against rendered copy and Google
+         does not. Both are asserted rather than one being assumed. */
+      { term: "wire-free robot lawn mower", volume: 720, difficulty: 0 },
       { term: "robot lawn mower without perimeter wire", volume: 210, difficulty: 0 },
       { term: "gps robot lawn mower", volume: 590, difficulty: 48 },
       { term: "lidar robot lawn mower", volume: 90, difficulty: 0 },
@@ -815,50 +829,84 @@ const LAWN_GUIDES: PagePlan[] = [
       { term: "robot lawn mower", toPath: "/robots/robotic-lawn-mowers/", why: "The 74,000 head term belongs to the hub. This guide takes one buying constraint off it, not the category." },
     ],
     products: [],
-    productsNote: "Product not sourced. The guide needs at least three wire-free mowers before it can recommend anything.",
-    linksOut: ["/robots/robotic-lawn-mowers/", "/botmatch/robotic-lawn-mowers/"],
+    productsNote: "Product not sourced. The guide needs at least three wire-free mowers before it can recommend anything, and it says so on the page rather than padding around the gap.",
+    linksOut: [
+      "/robots/robotic-lawn-mowers/",
+      "/guides/cheap-robot-lawn-mower/",
+      "/guides/robot-lawn-mower-for-hills/",
+      "/compare/robotic-lawn-mowers/",
+      "/review-methodology/",
+    ],
     images: [{ slot: "hero", shows: "A mower crossing an unmarked lawn boundary, no wire visible", supplied: false }],
-    schema: ["Article", "ItemList", "FAQPage", "BreadcrumbList"],
+    /* No ItemList: the page ranks nothing, so emitting one would describe a
+       list that is not on the page. It comes back with the products. */
+    schema: ["Article", "FAQPage", "BreadcrumbList"],
     research: "31073327230 + 31074893036 · 2026-08-06",
-    evidence: "≈1,670/mo combined across eight phrasings at KD 0-48, and boundary wire is the single biggest objection in the category.",
+    evidence: "≈1,670/mo combined across eight phrasings at KD 0-48, and boundary wire is the single biggest objection in the category. 2/10 shared domains with the hub's head term — a separate SERP, measured rather than assumed.",
   },
   {
     path: "/guides/robot-lawn-mower-for-hills/",
     category: "robotic-lawn-mowers",
     type: "guide",
-    status: "researched",
+    status: "built",
     intent: "Find a mower that will actually climb my slope.",
     primary: { term: "best robot lawn mower for hills", volume: 200, difficulty: 0 },
-    secondary: [{ term: "robot lawn mower slope", volume: 0, difficulty: 0 }],
+    secondary: [
+      { term: "do robot lawn mowers work on hills", volume: 0, difficulty: 0 },
+      { term: "slope", volume: 200, difficulty: 0 },
+      { term: "gradient", volume: 0, difficulty: 0 },
+      { term: "robot lawn mower slope", volume: 0, difficulty: 0 },
+    ],
     ceded: [
-      { term: "robot lawn mower", toPath: "/robots/robotic-lawn-mowers/", why: "Head term belongs to the hub. Slope is a constraint the hub explains and this guide answers with products." },
+      { term: "robot lawn mower", toPath: "/robots/robotic-lawn-mowers/", why: "Head term belongs to the hub. Slope is a constraint the hub names in its terrain section and this guide answers in full." },
+      { term: "cheap robot lawn mower", toPath: "/guides/cheap-robot-lawn-mower/", why: "The budget end has no answer to a gradient. This page says so and sends the reader whose lawn turns out flat to the page that does serve them." },
     ],
     products: [],
-    productsNote: "Product not sourced.",
-    linksOut: ["/robots/robotic-lawn-mowers/", "/botmatch/robotic-lawn-mowers/"],
+    productsNote: "Product not sourced. Becomes a shortlist ordered by stated gradient, with the source named beside each figure, once mowers enter the catalogue.",
+    linksOut: [
+      "/robots/robotic-lawn-mowers/",
+      "/guides/wire-free-robot-lawn-mower/",
+      "/guides/cheap-robot-lawn-mower/",
+      "/compare/robotic-lawn-mowers/",
+      "/review-methodology/",
+    ],
     images: [{ slot: "hero", shows: "A mower working across a visibly steep bank", supplied: false }],
-    schema: ["Article", "ItemList", "FAQPage", "BreadcrumbList"],
+    schema: ["Article", "FAQPage", "BreadcrumbList"],
     research: "31073327230 + 31074893036 · 2026-08-06",
-    evidence: "Small volume, but slope is the category's hardest exclusion — a mower that cannot climb it is returned, not lived with.",
+    evidence: "Small volume, but slope is the category's hardest exclusion — a mower that cannot climb it is returned, not lived with. 7/10 shared domains with 'do robot lawn mowers work on hills' and 3/10 with 'best robot lawn mower': the two hills queries are one page, and it is not the hub.",
   },
   {
     path: "/guides/cheap-robot-lawn-mower/",
     category: "robotic-lawn-mowers",
     type: "guide",
-    status: "researched",
+    status: "built",
     intent: "Find the cheapest robot mower that is not a waste of money.",
     primary: { term: "cheap robot lawn mower", volume: 390, difficulty: 11 },
-    secondary: [{ term: "best budget robot lawn mower", volume: 0, difficulty: 0 }],
+    secondary: [
+      { term: "best budget robot lawn mower", volume: 0, difficulty: 0 },
+      /* Moved off the wire-free guide, where the long-tail assignment pass had
+         put them. A price-first searcher wants the cheap end explained, not a
+         lesson in satellite navigation. Between them they are ten times this
+         page's own primary. */
+      { term: "robot lawn mower price", volume: 1900, difficulty: 0 },
+      { term: "robotic lawn mower price", volume: 1600, difficulty: 0 },
+    ],
     ceded: [
-      { term: "robot lawn mower", toPath: "/robots/robotic-lawn-mowers/", why: "Head term belongs to the hub." },
+      { term: "robot lawn mower", toPath: "/robots/robotic-lawn-mowers/", why: "Head term belongs to the hub, which explains the category. This page takes the budget constraint and the price question only." },
     ],
     products: [],
-    productsNote: "Product not sourced.",
-    linksOut: ["/robots/robotic-lawn-mowers/", "/botmatch/robotic-lawn-mowers/"],
+    productsNote: "Product not sourced. No figure is printed here either way — this category discounts hard in late summer, so prices live on product pages with the date they were read.",
+    linksOut: [
+      "/robots/robotic-lawn-mowers/",
+      "/guides/wire-free-robot-lawn-mower/",
+      "/guides/robot-lawn-mower-for-hills/",
+      "/compare/robotic-lawn-mowers/",
+      "/review-methodology/",
+    ],
     images: [{ slot: "hero", shows: "An entry-level mower on an ordinary suburban lawn", supplied: false }],
-    schema: ["Article", "ItemList", "FAQPage", "BreadcrumbList"],
+    schema: ["Article", "FAQPage", "BreadcrumbList"],
     research: "31073327230 + 31074893036 · 2026-08-06",
-    evidence: "390/mo at KD 11. The hub cedes it explicitly, so this page has to exist for that ruling to mean anything.",
+    evidence: "390/mo at KD 11 on its own name, ~3,890 with the price cluster it carries. 4/10 shared domains with 'best robot lawn mower' — the closest call of the three lawn guides, and the first to fold back into the hub if it underperforms.",
   },
 ];
 
@@ -867,24 +915,32 @@ const COMPANION_GUIDE: PagePlan = {
   path: "/guides/robotic-pets-for-elderly/",
   category: "companion-robots",
   type: "guide",
-  status: "researched",
+  status: "built",
   intent: "Find a robot pet for an older relative, possibly one living with dementia.",
   primary: { term: "robotic pet for elderly", volume: 390, difficulty: 0 },
   secondary: [
     { term: "elderly care robot", volume: 390, difficulty: 0 },
     { term: "robotic pet for dementia", volume: 170, difficulty: 0 },
     { term: "companion robot for elderly", volume: 140, difficulty: 0 },
+    { term: "robotic pets for elderly", volume: 390, difficulty: 0 },
   ],
   ceded: [
     { term: "robot pet", toPath: "/robots/companion-robots/", why: "The 8,100 head term belongs to the hub. This guide takes the care-setting intent, which is a different reader with a different question." },
+    { term: "pet camera robot", toPath: "/robots/pet-camera-robots/", why: "Named here because 'checking in from a distance' is one of the three motivations readers arrive with, and the one a companion robot answers worst. Naming the honest alternative is not targeting its term." },
   ],
   products: [],
-  productsNote: "Product not sourced. Joy for All and Tombot Jennie are the obvious candidates and neither is in the catalogue.",
-  linksOut: ["/robots/companion-robots/", "/botmatch/companion-robots/"],
+  productsNote: "Product not sourced. Joy for All and Tombot Jennie are the obvious candidates and neither is in the catalogue. The page names no model at all rather than borrowing somebody else's shortlist.",
+  linksOut: [
+    "/robots/companion-robots/",
+    "/robots/pet-camera-robots/",
+    "/compare/companion-robots/",
+    "/review-methodology/",
+  ],
   images: [{ slot: "hero", shows: "An older person with a robotic pet, warm and unpatronising", supplied: false }],
-  schema: ["Article", "ItemList", "FAQPage", "BreadcrumbList"],
+  /* No ItemList: nothing is ranked on this page yet. */
+  schema: ["Article", "FAQPage", "BreadcrumbList"],
   research: "31081889310 · 2026-08-06",
-  evidence: "≈1,090/mo combined across four phrasings, all KD 0, and a genuinely distinct reader from the hub's.",
+  evidence: "≈1,090/mo combined across four phrasings, all KD 0, and a genuinely distinct reader from the hub's. The hub gave the term up to build it — it was a secondary on /robots/companion-robots/ until 6 August 2026.",
 };
 
 /* Two pool pages the SECOND run proved, 6 August 2026, $0.1795.

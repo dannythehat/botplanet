@@ -226,6 +226,91 @@ export const CATEGORY_ANCHORS: Record<string, InternalAnchor[]> = {
     },
   ],
 
+  /* ------------------------------------------------------------------
+     LAWN. Added 6 August 2026 with the three lawn guides — the category
+     had a live hub and no anchor set at all, so nothing written for it
+     could link anywhere.
+
+     ORDERING IS LOAD-BEARING HERE and this is the list where it bites.
+     The linker takes the FIRST anchor that matches a phrase, so "robot
+     lawn mower" sitting above "cheap robot lawn mower" would swallow
+     every one of the guide anchors and send the whole category to the
+     hub. The three guide phrases are listed first, longest first, and
+     the head term last. internal-links.test.ts checks this, but it is
+     worth understanding rather than obeying.
+     ------------------------------------------------------------------ */
+  "robotic-lawn-mowers": [
+    {
+      anchor: "best robot lawn mower for hills",
+      href: "/guides/robot-lawn-mower-for-hills/",
+      why: "Slope is the category's one hard exclusion and every lawn page mentions it. A reader meeting the phrase should reach the page that measures it rather than a paragraph that names it.",
+      status: "live",
+    },
+    {
+      anchor: "wire free robot lawn mower",
+      href: "/guides/wire-free-robot-lawn-mower/",
+      why: "≈1,670/mo across the wire-free family and the biggest single objection buyers raise. The guide is the page that owns the term, so the phrase belongs to it wherever it appears.",
+      status: "live",
+    },
+    {
+      anchor: "cheap robot lawn mower",
+      href: "/guides/cheap-robot-lawn-mower/",
+      why: "The budget question comes up on every page in this category, usually as an aside. The guide is where it is answered, including the point below which a low price stops being a bargain.",
+      status: "live",
+    },
+    {
+      anchor: "robot lawn mower",
+      href: "/robots/robotic-lawn-mowers/",
+      why: "The 74,000/mo head term and the hub that owns it. Listed after the guide phrases deliberately, so it cannot swallow them — it is the fallback, not the first choice.",
+      status: "live",
+    },
+    {
+      anchor: "boundary wire",
+      href: "/robots/robotic-lawn-mowers/#navigation",
+      why: "The fork that decides both price and installation, explained in one place on the hub. Every lawn page mentions the wire; only one of them should have to explain it.",
+      status: "live",
+    },
+    {
+      anchor: "acre",
+      href: "/robots/robotic-lawn-mowers/#yard-size",
+      why: "Area is the first hard constraint and the acreage cluster is worth ~2,060/mo. The yard-size section is where the stated maximum is explained against a real lawn.",
+      status: "live",
+    },
+    {
+      anchor: "slope",
+      href: "/robots/robotic-lawn-mowers/#terrain",
+      why: "The terrain section separates gradient, tree cover and split gardens. A page mentioning a slope in passing should be able to reach the reasoning without repeating it.",
+      status: "live",
+    },
+    {
+      anchor: "mulch",
+      href: "/robots/robotic-lawn-mowers/#cutting",
+      why: "Mulching rather than collecting is the single biggest surprise for a first-time buyer, and the cutting section is the only place it is explained properly.",
+      status: "live",
+    },
+    {
+      anchor: "compare",
+      href: "/compare/robotic-lawn-mowers/",
+      why: "The comparison table is the honest next step once area, terrain and navigation have narrowed the field to two or three machines.",
+      status: "live",
+    },
+    {
+      anchor: "review methodology",
+      href: "/review-methodology/",
+      why: "Every guide in this category says what it cannot yet tell the reader. The page explaining how we check things has to be one click from that sentence.",
+      status: "live",
+    },
+    {
+      /* Planned, not live: /botmatch/robotic-lawn-mowers/ is coming_soon until
+         the catalogue has mowers. The question set and scoring config already
+         exist; it would just recommend nothing. */
+      anchor: "BotMatch",
+      href: "/botmatch/robotic-lawn-mowers/",
+      why: "The lawn question set asks about area, tree cover, slopes and zones — the exact axes these guides argue over. Planned until there are mowers behind it.",
+      status: "planned",
+    },
+  ],
+
   /* The cross-link between these two categories matters more than most,
      because they were one category until 6 August 2026 and to a reader they
      still look like one shelf. Somebody who lands on companion robots wanting
@@ -240,8 +325,13 @@ export const CATEGORY_ANCHORS: Record<string, InternalAnchor[]> = {
     },
     {
       anchor: "robotic pet for elderly",
-      href: "/robots/companion-robots/#who-for",
-      why: "The who-it-is-for section is where the three audiences are separated, and eldercare is the one with genuinely different products behind it. First mention should reach the explanation.",
+      /* REPOINTED 6 August 2026, from /robots/companion-robots/#who-for to the
+         guide. The hub section separates three audiences in a paragraph each;
+         the guide answers this one properly, and it is now the page targeting
+         the term. An anchor that sends the phrase somewhere weaker than the
+         page built for it is a wasted signal. */
+      href: "/guides/robotic-pets-for-elderly/",
+      why: "Eldercare is the audience with genuinely different products behind it, and the guide is the page that owns the term. Any companion review or article using the phrase should reach the page built for it rather than a paragraph on the hub.",
       status: "live",
     },
     {
@@ -254,6 +344,16 @@ export const CATEGORY_ANCHORS: Record<string, InternalAnchor[]> = {
       anchor: "desktop companion robot",
       href: "/robots/companion-robots/#desk-or-floor",
       why: "The desk-or-floor fork is the category's real split and this is the phrase a reader searching for the desk half would use.",
+      status: "live",
+    },
+    {
+      /* Added 6 August 2026 with the eldercare guide, which needed a route
+         back to the hub in its own words. Safe below the longer anchors: the
+         literal string "robot pet" appears in none of them — "robotic pet for
+         elderly" is "robotic", not "robot ". */
+      anchor: "robot pet",
+      href: "/robots/companion-robots/",
+      why: "The category's own head term at 8,100/mo. Any page in this family that uses the phrase in passing should reach the hub that owns it, and the guides use it constantly.",
       status: "live",
     },
     {

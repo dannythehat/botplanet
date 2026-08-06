@@ -811,6 +811,72 @@ export const ROUTES: RouteDef[] = [
     indexable: true,
     summary: "The terms that apply when you use BotPlanet.",
   },
+
+  /* ---------------- Standalone guides, 6 August 2026 ----------------
+     The first pages published for categories with NOTHING IN THE
+     CATALOGUE. Each answers a decision rather than ranking machines,
+     and each says in its own words what it cannot yet tell the reader.
+
+     PARENTED TO /guides/ RATHER THAN TO A CATEGORY GUIDE HUB, for the
+     same reason the pool worth-it guide is: the URL carries no category
+     segment, so a breadcrumb claiming one would not match the path the
+     reader actually walked. The category is still recorded below, which
+     is what joins them to the right internal-link anchor set.
+
+     Full plans — keywords, links, images, schema — in
+     content/seo/page-plan.ts. None has artwork yet. */
+  {
+    path: "/guides/wire-free-robot-lawn-mower/",
+    label: "Wire-free robot lawn mowers",
+    section: "guides",
+    parent: "/guides/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: true,
+    indexable: true,
+    category: "robotic-lawn-mowers",
+    summary: "RTK, vision or LiDAR — and when a buried cable is still the better buy.",
+  },
+  {
+    path: "/guides/cheap-robot-lawn-mower/",
+    label: "Cheap robot lawn mowers",
+    section: "guides",
+    parent: "/guides/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: true,
+    indexable: true,
+    category: "robotic-lawn-mowers",
+    summary: "What the budget end gives up, what it does not, and where a low price stops being a bargain.",
+  },
+  {
+    path: "/guides/robot-lawn-mower-for-hills/",
+    label: "Robot lawn mowers for hills",
+    section: "guides",
+    parent: "/guides/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: true,
+    indexable: true,
+    category: "robotic-lawn-mowers",
+    summary: "Measure the gradient first: it is the one constraint you cannot work around.",
+  },
+  {
+    path: "/guides/robotic-pets-for-elderly/",
+    label: "Robotic pets for elderly relatives",
+    section: "guides",
+    parent: "/guides/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: true,
+    indexable: true,
+    category: "companion-robots",
+    summary: "Three different products are sold to this buyer, and they answer three different problems.",
+  },
 ];
 
 /* ------------------------------------------------------------------ */

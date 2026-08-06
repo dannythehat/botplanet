@@ -217,6 +217,24 @@ clearest new-page findings in the whole harvest.
 
 ## Robotic lawn mowers
 
+> **Corrected 6 August 2026, when the three lawn guides were built.** This pass
+> put the entire lawn long tail on `/guides/wire-free-robot-lawn-mower/`,
+> including two clusters that do not belong to it:
+>
+> - **The price cluster** — "robot lawn mower price" (1,900) and "robotic lawn
+>   mower price" (1,600) — moved to `/guides/cheap-robot-lawn-mower/`. A
+>   price-first searcher wants the cheap end explained, not a lesson in
+>   satellite navigation. Between them they are ten times that page's own
+>   primary and they are the reason it earns a URL comfortably.
+> - **The brand and head terms** — "robot lawn mower husqvarna" (14,800),
+>   "husqvarna robot mower" (14,800), "robot lawn mower reviews" (2,400) and the
+>   acreage terms — belong to the hub and to future reviews, not to a guide
+>   about boundary wires. They were never targeted on the built page.
+>
+> The authority is `apps/web/src/content/seo/keyword-register.ts`, which is
+> asserted against rendered copy on every test run. This document is a record of
+> a harvest, not of what the pages target.
+
 ### `/guides/wire-free-robot-lawn-mower/` — 21 terms, 38,240/mo
 
 | Long-tail | Vol | KD |
