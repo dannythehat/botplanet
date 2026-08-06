@@ -2,7 +2,7 @@
   "name": "botplanet",
   "version": "0.0.0",
   "private": true,
-  "description": "BotPlanet — global robot shopping & recommendation platform (US-first). Foundation: data model, migrations, deterministic BotMatch scoring. No frontend yet.",
+  "description": "BotPlanet \u2014 global robot shopping & recommendation platform (US-first). Foundation: data model, migrations, deterministic BotMatch scoring. No frontend yet.",
   "type": "module",
   "workspaces": [
     "packages/*",
@@ -18,7 +18,9 @@
     "test:watch": "vitest",
     "db:generate": "cd packages/db && drizzle-kit generate",
     "gen:media-mapping": "tsx scripts/gen-media-mapping.ts",
-    "gen:derivatives": "node scripts/gen-derivatives.mjs"
+    "gen:derivatives": "node scripts/gen-derivatives.mjs",
+    "ext": "node scripts/extension-points.mjs",
+    "ext:write": "node scripts/extension-points.mjs --write"
   },
   "devDependencies": {
     "@types/node": "^22.10.0",

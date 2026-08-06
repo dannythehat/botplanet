@@ -35,6 +35,11 @@ if (!/^[a-z0-9-]+$/.test(CATEGORY)) {
   console.error(`Category "${CATEGORY}" is not a plain slug. Refusing to build a path from it.`);
   process.exit(1);
 }
+/* @extension-point per-category | required | No seed inventory means no paid
+   research run — the workflow refuses to spend before the free seed list
+   exists. Nothing downstream is buildable without it: no volumes, no
+   difficulty, no cannibalisation rulings, so no page map.
+   @extension-check path:docs/seo/seeds/{slug}.json */
 const SEED_FILE = `docs/seo/seeds/${CATEGORY}.json`;
 let seedDoc;
 try {

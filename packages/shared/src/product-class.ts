@@ -17,6 +17,14 @@
  * the same reason a surface skimmer cannot: its class is not in the pool
  * matcher's eligible list.
  */
+/* @extension-point shared-vocab | required | Four vocabularies live in this
+   file — PRODUCT_CLASSES, CLEANING_SURFACES, ENVIRONMENTS and POWER_TYPES —
+   and a new category almost always needs values in the first three BEFORE
+   anything else is built. A product that cannot be described honestly gets
+   described dishonestly: window robots were nearly typed as pool cleaners on
+   floors, and a catalogue row that lies is worse than no row.
+   PRODUCT_CLASSES is also the gate that stops one category's robots winning
+   another category's recommendation. */
 export const PRODUCT_CLASSES = [
   "full_cleaner", // floor / walls / waterline robotic pool cleaner
   "surface_skimmer", // floating-debris skimmer (distinct class)

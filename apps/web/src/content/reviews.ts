@@ -62,6 +62,10 @@ export interface ReviewContent {
   lastReviewed: string;
 }
 
+/* @extension-point per-product | optional | No review page for the product, and
+   no card in the homepage review grid, which is built from this record so new
+   reviews appear automatically. A catalogued product with no review still
+   works — it just never gets the page that ranks. */
 export const REVIEWS: Record<string, ReviewContent> = {
   "dolphin-nautilus-cc-plus": {
     slug: "dolphin-nautilus-cc-plus",

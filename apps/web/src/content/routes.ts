@@ -56,6 +56,11 @@ const CAT = LAUNCH_CATEGORY;
 /**
  * The registry. Order matters only for navigation surfaces; lookup is by path.
  */
+/* @extension-point per-category | required | Three routes per category — the
+   hub, /compare/ and /botmatch/. The pages still render without them, because
+   they come from dynamic routes and a D1 row, but this registry is what the
+   SITEMAP and the breadcrumbs read. A page no crawler can find is not
+   published. This is exactly what was missed when window went live. */
 export const ROUTES: RouteDef[] = [
   /* ---------------- Core ---------------- */
   {

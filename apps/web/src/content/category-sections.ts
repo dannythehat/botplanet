@@ -37,6 +37,12 @@ export interface DecisionSectionContent {
   cards: DecisionCard[];
 }
 
+/* @extension-point per-category | required | Nine records live in this file —
+   DECISION, COVERAGE, SPLIT, MATRIX, CHECK, PRICE, VERDICT, FAQ and
+   BOTMATCH_CTA — and each is looked up independently. A missing record drops
+   its section silently; a category with none renders a hero, a product grid
+   and nothing in between. FAQ also feeds the FAQPage schema, so an absent
+   record means no FAQ rich result. */
 export const DECISION_SECTION: Record<string, DecisionSectionContent> = {
   /* Yard size carries the acreage keyword cluster — roughly 2,060/mo across
      "best robot lawn mower for 1 acre" (880, KD 4), "robot lawn mower 1 acre"

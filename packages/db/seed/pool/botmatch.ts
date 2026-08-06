@@ -8,6 +8,11 @@
  */
 import type { questionnaires, scoringConfigs } from "../../src/schema/botmatch.js";
 
+/* @extension-point per-category | required | Two arrays in this file, one row
+   each per category. scoringConfigRows is the one that matters at runtime —
+   without it /api/botmatch returns 501 and the funnel recommends nothing.
+   questionnaireRows exists because scoring_configs has a foreign key to it, so
+   a config without a questionnaire row is a database that cannot be rebuilt. */
 export const questionnaireRows: (typeof questionnaires.$inferInsert)[] = [
   {
     id: "q-pool-v1",

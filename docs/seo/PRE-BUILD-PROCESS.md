@@ -120,6 +120,12 @@ buy button must have an offer behind it.
 
 ## Stage 5 — Build
 
+**Start here:** `node scripts/extension-points.mjs <category-slug>` prints what
+this category still has outstanding and what happens if each is skipped. The
+list is generated from tags in the code rather than written by hand, so it
+cannot go stale the way a checklist does — `docs/EXTENSION-POINTS.md` has the
+full map, including the per-product and per-brand lists walked at Stage 4.
+
 Only now: artwork, prose, figures, schema, internal links. The keyword
 register entry is written **with** the page, not after it, because
 `keywords.test.ts` reads the real copy and fails the build if a page has
@@ -205,6 +211,7 @@ them once there are products to recommend.
 | Identity + price checking | `apps/web/src/lib/providers/expected-identity.ts` |
 | Offers behind buy buttons | `packages/db/seed/pool/commercial.ts` |
 | Tracking | Notion — Content & SEO Control Register |
+| **Everything that changes per category / product / brand** | `docs/EXTENSION-POINTS.md` — generated from tags in the code |
 
 ## The three questions that catch most mistakes
 

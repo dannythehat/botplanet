@@ -53,6 +53,10 @@ export interface InternalAnchor {
  * Order matters: the linker takes the first match it finds for each anchor,
  * and an earlier entry wins a phrase that two entries could both claim.
  */
+/* @extension-point per-category | optional | The category's pages stop
+   cross-linking to each other, which costs internal PageRank and leaves a
+   reader at the bottom of a review with nowhere to go. internal-links.test.ts
+   checks the anchors that DO exist resolve; it cannot check for absence. */
 export const CATEGORY_ANCHORS: Record<string, InternalAnchor[]> = {
   "robotic-pool-cleaners": [
     {

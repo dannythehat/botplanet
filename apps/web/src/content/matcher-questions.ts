@@ -441,6 +441,10 @@ const LAWN_QUESTIONS: MatcherQuestion[] = [
  * A category absent from this map has no BotMatch. That is the correct
  * outcome, not a gap to paper over with another category's questions.
  */
+/* @extension-point per-category | required | BotMatch returns 404 for the
+   category. That is deliberate and must stay that way: a category never
+   inherits another category's questions. MATCHER_TASKS_BY_CATEGORY and
+   MATCHER_DEFAULTS in this file are keyed the same way. */
 export const MATCHER_QUESTIONS_BY_CATEGORY: Record<string, MatcherQuestion[]> = {
   "robotic-pool-cleaners": POOL_QUESTIONS,
   "window-cleaning-robots": WINDOW_QUESTIONS,

@@ -36,6 +36,11 @@ export const retailerMarketRows: (typeof retailerMarkets.$inferInsert)[] = retai
  * Affiliate programmes (provisional). Commission in basis points is PRIVATE.
  * Sources verified 2026-07-29; rates/cookies change frequently.
  */
+/* @extension-point per-retailer | required | retailerRows above and this array
+   grow together as affiliate programmes are approved — Amazon US first, then
+   the rest. A retailer with no programme row can still be shown, but its
+   offers carry no commission basis and no approval state, so the offer ranker
+   cannot treat it as purchasable. */
 export const affiliateProgramRows: (typeof affiliatePrograms.$inferInsert)[] = [
   {
     id: "ap-amazon-us",
@@ -174,6 +179,11 @@ const offerSeeds: OfferSeed[] = [
   { id: "off-scubav3-amazon", productId: "prod-aiper-scuba-v3-ai-vision", retailerId: "ret-amazon", affiliateProgramId: "ap-amazon-us", priceUsd: 849, warranty: "2-year", redirectKey: "pool-aiper-scubav3-amazon" },
 ];
 
+/* @extension-point per-product | required | Both arrays below are built from
+   offerSeeds. No seed means the buy button resolves to nothing and /go/<key>
+   returns 404 — which is exactly what happened to the Proteus DX4 Plus and the
+   Scuba V3 for a day. offers.test.ts now fails the build for this, so the
+   failure is loud rather than silent. */
 export const offerRows: (typeof offers.$inferInsert)[] = offerSeeds.map((o) => ({
   id: o.id,
   productId: o.productId,

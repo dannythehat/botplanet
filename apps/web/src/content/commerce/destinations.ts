@@ -305,6 +305,12 @@ export const destinationFor = (productId: string, retailerId = "ret-amazon"): Pr
  * button looks like a broken site rather than an absent offer. The key is a
  * fact about D1, so it is recorded here and asserted against production.
  */
+/* @extension-point per-product | required | Three records here decide whether a
+   reader can buy: DESTINATIONS (which retailer and which ASIN), IDENTITY_CHECKS
+   (that the ASIN is the right machine and not a sibling model) and REDIRECT_KEYS
+   (the /go/ key the button points at). A REDIRECT_KEYS entry with no matching
+   offer seed is a 404 on the buy button — the single most damaging failure on
+   the site, and the one offers.test.ts now guards. */
 export const REDIRECT_KEYS: Record<string, string> = {
   "prod-aiper-scuba-s1": "pool-aiper-scubas1-amazon",
   "prod-aiper-scuba-x1": "pool-aiper-scubax1-amazon",

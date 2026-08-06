@@ -28,6 +28,10 @@ export interface CategoryDef {
 /** The launch category slug — matches the live D1 route + attribution. */
 export const LAUNCH_CATEGORY = "robotic-pool-cleaners";
 
+/* @extension-point per-category | required | The category is invisible: absent
+   from the header mega-menu, the mobile drawer, the footer and the /robots
+   index, and excluded from the sitemap because liveCategories() drives it.
+   The launch state here is also what marks a category coming_soon or hidden. */
 export const CATEGORIES: CategoryDef[] = [
   { slug: LAUNCH_CATEGORY, name: "Robotic Pool Cleaners", jtbd: "Clean my pool", short: "Cordless & corded robots that scrub the floor, walls and waterline.", launch: "live", order: 1 },
   { slug: "robotic-lawn-mowers", name: "Robotic Lawn Mowers", jtbd: "Cut my lawn", short: "Robot mowers that cut a little every day, on a wire or without one.", launch: "live", order: 3 },

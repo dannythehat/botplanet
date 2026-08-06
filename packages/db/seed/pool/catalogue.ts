@@ -40,12 +40,20 @@ export const marketRows: (typeof markets.$inferInsert)[] = [
  * When a second catalogue is seeded properly, this array should move out to
  * packages/db/seed/categories.ts and stop pretending to be pool-specific.
  */
+/* @extension-point per-category | required | A database rebuilt from this seed
+   has no row for the category, so its page 404s with "Category not found".
+   Window and lawn were both created directly against D1 and missing here until
+   6 August 2026 — a latent bug nobody would find until the next rebuild. */
 export const categoryRows: (typeof categories.$inferInsert)[] = [
   { id: "cat-pool-cleaners", slug: "robotic-pool-cleaners", name: "Robotic Pool Cleaners", parentId: null },
   { id: "cat-window-cleaners", slug: "window-cleaning-robots", name: "Window-Cleaning Robots", parentId: null },
   { id: "cat-lawn-mowers", slug: "robotic-lawn-mowers", name: "Robotic Lawn Mowers", parentId: null },
 ];
 
+/* @extension-point per-brand | required | A product row references its brand by
+   foreign key, so a missing brand row fails the insert outright. Cheap to add
+   and the one place hasDirectAffiliate is recorded, which decides whether we
+   monetise the brand directly or only through retailers. */
 export const brandRows: (typeof brands.$inferInsert)[] = [
   { id: "brand-beatbot", slug: "beatbot", name: "Beatbot", maker: "Beatbot", hasDirectAffiliate: true },
   { id: "brand-dolphin", slug: "dolphin", name: "Dolphin", maker: "Maytronics", hasDirectAffiliate: false, notes: "No direct consumer affiliate programme found; monetise via retailers." },
@@ -60,6 +68,11 @@ export const brandRows: (typeof brands.$inferInsert)[] = [
  * 10 launch products. 9 confirmed + Dolphin E10 (status "proposed").
  * `status`: published = confirmed for launch draft; proposed = pending review.
  */
+/* @extension-point per-product | required | The product does not exist: no
+   catalogue row, no card on the category page, no comparison row, and nothing
+   for BotMatch to score. This is also where productClass, environments,
+   cleans, powerType and priceTier are set — the five fields the scoring engine
+   actually reads, so a wrong value here is a wrong recommendation. */
 export const productRows: (typeof products.$inferInsert)[] = [
   {
     id: "prod-beatbot-aquasense-2-ultra",

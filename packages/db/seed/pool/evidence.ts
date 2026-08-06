@@ -6,6 +6,10 @@
  */
 import type { evidence } from "../../src/schema/catalogue.js";
 
+/* @extension-point per-product | optional | The product ships with no cited
+   source behind its specification claims. It renders, but every figure on the
+   page is then unattributed, which is the thing the review methodology
+   promises we do not do. */
 export const evidenceRows: (typeof evidence.$inferInsert)[] = [
   {
     id: "ev-ultra-surface-skim",

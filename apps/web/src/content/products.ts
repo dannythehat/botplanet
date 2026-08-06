@@ -784,6 +784,11 @@ const RAW: Record<string, Omit<ProductEditorial, "productId">> = {
  * These MUST match D1 `products.id` exactly (see packages/db/seed/pool/catalogue.ts).
  * The slug is only a route identifier and may change; the productId must not.
  */
+/* @extension-point per-product | required | Four records in this file are keyed
+   by product slug: PRODUCT_ID, PRODUCTS (the editorial copy), CATALOGUE_STATUS
+   and CATALOGUE_WITHDRAWALS. Without a PRODUCTS entry the product has no
+   editorial voice at all — no summary, no who-it-is-for, no rule-outs — and
+   the card falls back to bare catalogue fields. */
 export const PRODUCT_ID: Record<string, string> = {
   "beatbot-aquasense-2-ultra": "prod-beatbot-aquasense-2-ultra",
   "aiper-scuba-x1-pro-max": "prod-aiper-scuba-x1",

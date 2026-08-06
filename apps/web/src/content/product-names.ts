@@ -29,6 +29,9 @@ export interface RetiredSlug {
   reason: string;
 }
 
+/* @extension-point per-product | optional | Only needed when a product's slug
+   changes or the product is dropped. Without an entry the old URL 404s instead
+   of redirecting, and every link and ranking it had is thrown away. */
 export const RETIRED_SLUGS: Record<string, RetiredSlug> = {
   /* Both of these point at the FINAL destination, not at each other. The
      record moved twice in one day — X1 → X1 Pro → X1 Pro Max — and a chain of
