@@ -70,6 +70,13 @@ const SAFETY_STOP = HARD_CAP * 0.9;
 const US = { location_code: 2840, language_code: "en" };
 const BASE = "https://api.dataforseo.com/v3";
 
+/* The run's wall-clock ceiling. Twelve minutes is roughly twice the slowest
+   healthy run recorded (companion, 4m28s of paid batch) and a third of the
+   worst observed hang. Past it the batch stops calling and reports what it
+   bought. */
+const RUN_BUDGET_MS = 12 * 60 * 1000;
+const DEADLINE_AT = Date.now() + RUN_BUDGET_MS;
+
 let totalCost = 0;
 const costLog = [];
 
@@ -78,19 +85,36 @@ async function call(path, tasks, label) {
     console.log(`SKIPPED ${label} — cost ${totalCost.toFixed(4)} at safety stop (cap ${HARD_CAP})`);
     return null;
   }
+  /* A WALL-CLOCK BUDGET FOR THE WHOLE RUN, not just per request.
+     The per-call timeout below was added on 6 August 2026 and it was not
+     enough. The grill run the same afternoon sat in the paid batch for over
+     half an hour, because bounding each call at 90s still allows a pathological
+     run to spend 90s × (12 related-keyword retries + 20 SERPs) before it gives
+     up. Every one of those calls is individually "within timeout" while the
+     job as a whole is plainly dead.
+     So the run now has a deadline. Past it, remaining calls are skipped and
+     the batch finishes with what it has — which is written after every phase
+     and printed by the digest, so a slow run still produces usable research
+     instead of a job somebody eventually cancels. */
+  if (Date.now() > DEADLINE_AT) {
+    console.error(`SKIPPED ${label} — run deadline of ${RUN_BUDGET_MS / 60000} minutes reached.`);
+    return null;
+  }
   /* A request timeout, because there was none until 6 August 2026 and a run
      hung for over twenty minutes on a single live SERP call with no way to
      tell a slow call from a dead one. An unbounded fetch in CI does not fail,
      it just runs until the job limit — and since results were only written at
-     the very end, a hang lost every dollar already spent. 90s is generous for
-     a live SERP; anything past it is not coming back. */
+     the very end, a hang lost every dollar already spent.
+     Cut from 90s to 45s the same day: no successful DataForSEO call in six
+     categories has taken more than a few seconds, so 90s was not generosity,
+     it was half a minute of extra waiting per dead call. */
   let res;
   try {
     res = await fetch(`${BASE}${path}`, {
       method: "POST",
       headers: { Authorization: AUTH, "Content-Type": "application/json" },
       body: JSON.stringify(tasks),
-      signal: AbortSignal.timeout(90_000),
+      signal: AbortSignal.timeout(45_000),
     });
   } catch (e) {
     console.error(`${label}: request failed or timed out (${e.name}). Continuing with what we have.`);
@@ -269,7 +293,25 @@ let rel = relTasks.length
   : null;
 if (rel && rel.tasks_error > 0 && rel.tasks_count <= 1) rel = null;
 if (!rel) {
-  for (const task of relTasks) {
+  /* The fallback is CAPPED at four leads since 6 August 2026, and the cap is
+     the fix for the grill run's half-hour hang.
+
+     Retrying every lead individually meant up to fourteen more requests, each
+     able to burn the full per-call timeout, on the one phase of the batch that
+     has repeatedly returned almost nothing: companion robots got usable
+     related keywords for one lead of fourteen, and litter boxes got none at
+     all until the volume call was repaired. Spending the largest share of the
+     run's wall clock on its least productive phase is the wrong trade.
+     Four is enough to tell whether the endpoint is working at all. If it is,
+     the batch call will normally have worked anyway. */
+  const RELATED_FALLBACK_LIMIT = 4;
+  const retries = relTasks.slice(0, RELATED_FALLBACK_LIMIT);
+  if (relTasks.length > retries.length) {
+    console.error(
+      `related_keywords: batch failed; retrying only the first ${retries.length} of ${relTasks.length} leads individually.`,
+    );
+  }
+  for (const task of retries) {
     const single = await call("/dataforseo_labs/google/related_keywords/live", [task], `related:${task.keyword}`);
     if (single) collectRelated(single);
   }
