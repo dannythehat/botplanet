@@ -1291,7 +1291,7 @@ export const SPLIT_SECTION: Record<string, SplitSectionContent> = {
      "wire free robot lawn mower" (720, KD 0), "gps robot lawn mower" (590),
      "robot lawn mower without perimeter wire" (210, KD 0), "lidar robot lawn
      mower" (90), plus the RTK and no-perimeter-wire long tails. The dedicated
-     guide at /guides/robot-lawn-mower-without-boundary-wire/ goes deeper; this
+     guide at /guides/wire-free-robot-lawn-mower/ goes deeper; this
      panel is the decision itself. */
   "robotic-lawn-mowers": {
     id: "navigation",

@@ -217,7 +217,7 @@ clearest new-page findings in the whole harvest.
 
 ## Robotic lawn mowers
 
-### `/guides/robot-lawn-mower-without-boundary-wire/` — 21 terms, 38,240/mo
+### `/guides/wire-free-robot-lawn-mower/` — 21 terms, 38,240/mo
 
 | Long-tail | Vol | KD |
 |---|---|---|

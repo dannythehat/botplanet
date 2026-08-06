@@ -500,7 +500,7 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
     cededTo: [
       {
         term: "wire free robot lawn mower",
-        path: "/guides/robot-lawn-mower-without-boundary-wire/",
+        path: "/guides/wire-free-robot-lawn-mower/",
         why: "About 1,670/mo across the wire-free, RTK, GPS and LiDAR phrasings, and 2/10 shared with this page. A genuinely separate SERP, so it earns its own guide rather than a section here.",
       },
       {
@@ -510,7 +510,7 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
       },
       {
         term: "best budget robot lawn mower",
-        path: "/guides/best-budget-robot-lawn-mower/",
+        path: "/guides/cheap-robot-lawn-mower/",
         why: "A fully distinct SERP with no overlap flag against anything, 4/10 against 'best robot lawn mower'. The closest call in the category and the first guide to fold back in if it underperforms.",
       },
     ],

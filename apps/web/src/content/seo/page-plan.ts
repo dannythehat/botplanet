@@ -744,7 +744,7 @@ const COMPANION_REVIEWS = plannedReviews("companion-robots", "31081889310 · 202
   { slug: "loona", term: "loona robot", volume: 5400 },
   { slug: "sony-aibo", term: "sony aibo", volume: 3600 },
   { slug: "tombot-jennie", term: "tombot jennie", volume: 2400 },
-  { slug: "joy-for-all", term: "joy for all companion pet", volume: 1900 },
+  { slug: "joy-for-all-companion-pets", term: "joy for all companion pet", volume: 1900 },
   { slug: "casio-moflin", term: "casio moflin", volume: 1300 },
 ]);
 
@@ -799,7 +799,7 @@ const LAWN_REVIEWS = plannedReviews("robotic-lawn-mowers", "31073327230 + 310748
    cannibalisation test already depends on them existing. */
 const LAWN_GUIDES: PagePlan[] = [
   {
-    path: "/guides/robot-lawn-mower-without-boundary-wire/",
+    path: "/guides/wire-free-robot-lawn-mower/",
     category: "robotic-lawn-mowers",
     type: "guide",
     status: "researched",
@@ -842,7 +842,7 @@ const LAWN_GUIDES: PagePlan[] = [
     evidence: "Small volume, but slope is the category's hardest exclusion — a mower that cannot climb it is returned, not lived with.",
   },
   {
-    path: "/guides/best-budget-robot-lawn-mower/",
+    path: "/guides/cheap-robot-lawn-mower/",
     category: "robotic-lawn-mowers",
     type: "guide",
     status: "researched",
@@ -864,7 +864,7 @@ const LAWN_GUIDES: PagePlan[] = [
 
 /* Companion — the seniors guide, ruled as page 3 of that category's map. */
 const COMPANION_GUIDE: PagePlan = {
-  path: "/guides/robot-pets-for-seniors/",
+  path: "/guides/robotic-pets-for-elderly/",
   category: "companion-robots",
   type: "guide",
   status: "researched",
@@ -913,7 +913,7 @@ const POOL_ROUND_TWO: PagePlan[] = [
     evidence: "2,400/mo at KD 0 with a $4.30 CPC. The 1 August run measured above-ground at 140 and merged it — this phrasing was simply not in that seed list. Second-strongest commercial term in the category after cordless, and four catalogue machines already qualify.",
   },
   {
-    path: "/best-robots/robotic-pool-cleaners/solar-skimmers/",
+    path: "/best-robots/robotic-pool-cleaners/solar-powered-skimmers/",
     category: "robotic-pool-cleaners",
     type: "best-of",
     status: "planned",

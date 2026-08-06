@@ -191,3 +191,69 @@ describe("the plan and the keyword register agree", () => {
     },
   );
 });
+
+/**
+ * THE URL CARRIES THE KEYWORD.
+ *
+ * Added 6 August 2026 after `/best-robots/robotic-pool-cleaners/above-ground/`
+ * was written for the query "robotic pool cleaner for above ground pool". The
+ * slug was a dangling adjective — "cordless" describes the machine, so it
+ * stands alone; "above-ground" describes the POOL, so on its own it says the
+ * wrong thing about what the page lists. Renamed to `above-ground-pools`.
+ *
+ * This is basic and it should not have needed catching by eye, so it is
+ * checked now. The rule is not "the slug equals the keyword" — that produces
+ * ugly stuffed URLs. It is "every distinctive word of the primary keyword
+ * appears somewhere in the path", which the category and section segments
+ * usually satisfy for free.
+ */
+describe("the URL carries the primary keyword", () => {
+  const STOP = new Set([
+    "the","a","for","and","of","best","my","should","i","buy","vs","with",
+    "to","in","on","is","it","are","do","robot","robots","robotic",
+  ]);
+  const words = (s: string) =>
+    s.toLowerCase().replace(/[^a-z0-9 ]/g, " ").split(/\s+/).filter((w) => w && !STOP.has(w));
+
+  /**
+   * A review's slug is the MODEL NAME and deliberately omits "review" — that
+   * is the convention every review site uses and Google matches the model, not
+   * the suffix. Bolting `-review` onto eleven URLs would be worse than the gap.
+   */
+  /**
+   * ONE LIVE URL IS KNOWINGLY EXEMPT AND IT IS AN OPEN OWNER DECISION.
+   *
+   * /robots/companion-robots/ targets "robot pet" — 8,100/mo at KD 0 — because
+   * "companion robot" is only 4,400 and its SERP returns Wikipedia, Chinese
+   * tech-news outlets and humanoid-launch stories rather than shopping. The
+   * keyword choice is right and the URL carries the weaker term.
+   *
+   * It is NOT quietly fixed here because that URL is live, indexed, in the
+   * sitemap, in D1 as a category slug, in the nav and in every internal link
+   * pointing at the category. Renaming it is a redirect exercise with real
+   * risk, and it is the owner's call rather than a builder's tidy-up.
+   *
+   * Listed rather than pattern-matched, so a second one cannot join it by
+   * accident.
+   */
+  const LIVE_URL_DECISIONS = new Set(["/robots/companion-robots/"]);
+
+  const exempt = (p: (typeof PAGE_PLAN)[number], missing: string[]) =>
+    LIVE_URL_DECISIONS.has(p.path) ||
+    (p.type === "review" && missing.every((m) => m === "review")) ||
+    // A version number cannot survive slugification: "botley 2.0" -> botley-2.
+    missing.every((m) => /^\d+$/.test(m));
+
+  it.each(
+    PAGE_PLAN.filter((p) => p.type !== "compare" && p.type !== "botmatch").map((p) => p.path),
+  )("%s", (path) => {
+    const p = planFor(path)!;
+    const kw = words(p.primary.term);
+    if (!kw.length) return;
+    const missing = kw.filter((w) => !path.toLowerCase().includes(w));
+    if (!missing.length || exempt(p, missing)) return;
+    throw new Error(
+      `URL omits "${missing.join('", "')}" from its primary keyword "${p.primary.term}" (${p.primary.volume}/mo)`,
+    );
+  });
+});
