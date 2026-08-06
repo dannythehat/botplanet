@@ -73,11 +73,24 @@ async function call(path, tasks, label) {
     console.log(`SKIPPED ${label} — cost ${totalCost.toFixed(4)} at safety stop (cap ${HARD_CAP})`);
     return null;
   }
-  const res = await fetch(`${BASE}${path}`, {
-    method: "POST",
-    headers: { Authorization: AUTH, "Content-Type": "application/json" },
-    body: JSON.stringify(tasks),
-  });
+  /* A request timeout, because there was none until 6 August 2026 and a run
+     hung for over twenty minutes on a single live SERP call with no way to
+     tell a slow call from a dead one. An unbounded fetch in CI does not fail,
+     it just runs until the job limit — and since results were only written at
+     the very end, a hang lost every dollar already spent. 90s is generous for
+     a live SERP; anything past it is not coming back. */
+  let res;
+  try {
+    res = await fetch(`${BASE}${path}`, {
+      method: "POST",
+      headers: { Authorization: AUTH, "Content-Type": "application/json" },
+      body: JSON.stringify(tasks),
+      signal: AbortSignal.timeout(90_000),
+    });
+  } catch (e) {
+    console.error(`${label}: request failed or timed out (${e.name}). Continuing with what we have.`);
+    return null;
+  }
   if (res.status === 401) {
     console.error(`${label}: HTTP 401 — authentication rejected. Failing immediately; no further calls.`);
     process.exit(1);
@@ -116,6 +129,20 @@ if (!SEEDS.length || !LEADS.length) {
 /* Runs                                                                */
 /* ------------------------------------------------------------------ */
 
+/* Written after every phase, not just at the end. A run that dies half way
+   through has still bought real data, and throwing it away means paying for
+   it twice. */
+function saveProgress() {
+  try {
+    mkdirSync("research-output", { recursive: true });
+    out.costLog = costLog;
+    out.totalCostUsd = Number(totalCost.toFixed(6));
+    writeFileSync(`research-output/${CATEGORY}-results.json`, JSON.stringify(out, null, 2));
+  } catch (e) {
+    console.error(`Could not write progress: ${e.message}`);
+  }
+}
+
 const out = { category: CATEGORY, seedFile: SEED_FILE, generated: new Date().toISOString(), locale: US, seedsBeforeDedupe: null, seeds: SEEDS.length, volume: [], difficulty: [], related: [], serps: [] };
 
 console.log(`Category: ${CATEGORY} (${SEED_FILE})`);
@@ -134,6 +161,8 @@ for (const t of vol?.tasks ?? []) {
   }
 }
 
+saveProgress();
+
 // 2. Keyword difficulty — ONE batched call.
 const kd = await call("/dataforseo_labs/google/bulk_keyword_difficulty/live", [{ ...US, keywords: SEEDS }], "bulk_kd");
 for (const t of kd?.tasks ?? []) {
@@ -141,6 +170,8 @@ for (const t of kd?.tasks ?? []) {
     for (const item of r.items ?? []) out.difficulty.push({ keyword: item.keyword, kd: item.keyword_difficulty ?? null });
   }
 }
+
+saveProgress();
 
 // 3. Related keywords for the lead terms — batched tasks, shallow depth.
 const relTasks = LEADS.map((keyword) => ({ ...US, keyword, depth: 1, limit: 20 }));
@@ -172,6 +203,8 @@ function collectRelated(json) {
   }
 }
 
+saveProgress();
+
 // 4. Live US SERPs for decisive queries only — intent, result types, PAA, competitors.
 for (const q of SERP_QUERIES) {
   const serp = await call("/serp/google/organic/live/advanced", [{ ...US, keyword: q, device: "desktop", depth: 20 }], `serp:${q}`);
@@ -181,6 +214,7 @@ for (const q of SERP_QUERIES) {
   const paa = items.filter((i) => i.type === "people_also_ask").flatMap((i) => (i.items ?? []).map((x) => x.title)).slice(0, 8);
   const features = [...new Set(items.map((i) => i.type))].filter((t) => t !== "organic");
   out.serps.push({ query: q, features, organic, paa });
+  saveProgress();
 }
 
 /* ------------------------------------------------------------------ */
