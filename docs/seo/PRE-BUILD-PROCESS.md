@@ -127,6 +127,57 @@ stopped containing the term it was built to rank for.
 
 ---
 
+## Stage 5b — BotMatch is part of the build, not a later job
+
+> ### EVERY CATEGORY GETS ITS OWN BOTMATCH QUESTIONS. THEY ARE INDEPENDENT OF ONE ANOTHER.
+>
+> A question set is never shared, reused, inherited, defaulted to, or borrowed
+> from another category because it is "close enough". A category with no
+> questions of its own gets **no questionnaire at all** — never somebody
+> else's.
+>
+> This is not a question to ask. It is settled. **Owner ruling, 6 August 2026.**
+
+The window category went live on 5 August 2026 pointing at the only question
+set that existed, which was the pool one. For a day, a reader who wanted their
+*windows* cleaned was asked whether their *pool* was in-ground and how many
+feet long it was, under a heading that read "Find the right window-cleaning
+robots for your pool". Nothing flagged it, because there was nothing for it to
+be inconsistent with.
+
+**Four pieces ship together, per category:**
+
+| Piece | Where | What it decides |
+|---|---|---|
+| Question set | `apps/web/src/content/matcher-questions.ts`, keyed by slug | What the reader is asked, and in what order |
+| Analysing sequence | Same file, `MATCHER_TASKS_BY_CATEGORY` | The lines shown while it thinks — each must name something the engine genuinely does |
+| Scoring config | D1 `scoring_configs`, one row per category (`sc-window-v1`, `sc-lawn-v1`) | Weights, hard exclusions, eligible product classes |
+| Landing copy | `apps/web/src/components/PoolMatcher.astro` | The heading and the "what we match on" line |
+
+**Order the questions by how much each narrows the field**, which is not the
+order a spec sheet uses. Lawn asks about overhead tree cover second — ahead of
+slopes and budget — because it has almost no search volume and is the single
+most likely reason the purchase disappoints. BotMatch asks what decides the
+purchase, not what gets searched.
+
+**A scoring config is never shared either.** One row per category, no
+fallback: `/api/botmatch` returns an error rather than judging a category's
+products by another category's weights. Scoring the eleven window robots
+against the pool config excluded every one of them as `class_not_eligible` and
+returned nothing — silently, because the funnel is built to survive a scoring
+failure.
+
+**Enforced by `apps/web/test/matcher-questions.test.ts`**, which fails the
+build if two categories share a question array, if a non-pool set mentions a
+pool, if a non-window set mentions glass, if a non-lawn set mentions a lawn,
+or if an unknown category is handed somebody else's questions.
+
+**A matcher with no products is not advertised.** The questions can be right
+and the category still not ready. Build the questions with the page; link to
+them once there are products to recommend.
+
+---
+
 ## Stage 6 — Verify live, then log
 
 - Page serves, images serve, folds render.
@@ -149,13 +200,18 @@ stopped containing the term it was built to rank for.
 | Research workflow | Actions tab → "SEO Research" |
 | Findings + page map | `docs/seo/<category>-research-findings.md` |
 | Keyword register (asserted by tests) | `apps/web/src/content/seo/keyword-register.ts` |
+| BotMatch questions, per category (asserted by tests) | `apps/web/src/content/matcher-questions.ts` |
+| BotMatch scoring config, per category | D1 `scoring_configs`, seeded from `packages/db/seed/pool/botmatch.ts` |
 | Identity + price checking | `apps/web/src/lib/providers/expected-identity.ts` |
 | Offers behind buy buttons | `packages/db/seed/pool/commercial.ts` |
 | Tracking | Notion — Content & SEO Control Register |
 
-## The two questions that catch most mistakes
+## The three questions that catch most mistakes
 
 1. **Does this page take a term another page already owns?** If yes, one of
    them is wrong — decide which, and write the ruling down.
 2. **If a reader clicked buy right now, where would they land?** Check it.
    Do not reason about it.
+3. **If a reader started BotMatch on this category right now, what would it
+   ask them?** Read the actual questions. A category that has not been given
+   its own set is a category that will ask about somebody else's product.

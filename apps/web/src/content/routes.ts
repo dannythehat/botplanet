@@ -235,18 +235,15 @@ export const ROUTES: RouteDef[] = [
     /* Parent is the category page, not "/botmatch/" — that path is only an
        alias of the pool matcher and is not a route of its own. */
     parent: "/robots/robotic-lawn-mowers/",
-    /* NOT in the sitemap and NOT indexable, deliberately.
+    /* The lawn question set now exists — lawn area, tree cover, slopes and
+       zones, budget, exactly the axes §7 of the research says decide this
+       purchase — and it scores against the lawn config sc-lawn-v1.
 
-       The route resolves and the funnel renders, but content/matcher-questions.ts
-       holds ONE question set and it is the pool one — pool type, pool length in
-       feet, debris on the waterline. A lawn visitor reaching this page is asked
-       whether their pool is in-ground. Publishing that would be advertising a
-       tool that does not exist yet.
-
-       It flips to live the moment a lawn question set lands: yard area, slope
-       percentage, tree cover, zones, boundary wire, budget. Those six are what
-       the keyword research says decide the purchase — see §7 of
-       docs/seo/robotic-lawn-mowers-research-findings.md. */
+       Still "coming_soon" for a different and smaller reason: there are no
+       lawn products in the catalogue yet, so the funnel would ask seven good
+       questions and then have nothing to recommend. It flips to live with the
+       first published lawn product. Not in the sitemap either way, same as
+       pool and window: the page renders noindex. */
     status: "coming_soon",
     navSurface: "none",
     footerGroup: null,
@@ -297,8 +294,11 @@ export const ROUTES: RouteDef[] = [
     status: "live",
     navSurface: "none",
     footerGroup: null,
-    inSitemap: true,
-    indexable: true,
+    /* Live and working — it has its own question set and scores against the
+       eleven real window robots. Out of the sitemap for the same reason pool
+       is: the page renders noindex, so listing it contradicted itself. */
+    inSitemap: false,
+    indexable: false,
     category: "window-cleaning-robots",
   },
 
@@ -382,8 +382,15 @@ export const ROUTES: RouteDef[] = [
     status: "live",
     navSurface: "none",
     footerGroup: "BotMatch",
-    inSitemap: true,
-    indexable: true,
+    /* Out of the sitemap since 6 August 2026. The page itself has always
+       rendered <meta robots="noindex"> — see pages/botmatch/[category].astro —
+       so listing it in the sitemap was submitting a URL for indexing while
+       telling the crawler not to index it. Two contradictory signals about the
+       same page, and the registry was the one that was wrong: a matcher is a
+       tool, and the category page is what should rank. Found while giving lawn
+       and window their own questionnaires. */
+    inSitemap: false,
+    indexable: false,
     category: CAT,
     // Generic BotMatch entries must never exist as pages; they land here.
     aliases: ["/find-my-robot/", "/botmatch/", "/find-my-robot/pool-cleaners/"],

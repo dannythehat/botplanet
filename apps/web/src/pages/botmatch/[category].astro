@@ -4,6 +4,7 @@ import { getDb, schema } from "../../lib/db";
 import { eq } from "drizzle-orm";
 import { breadcrumbsFor } from "../../lib/routing";
 import PoolMatcher from "../../components/PoolMatcher.astro";
+import { questionsFor, tasksFor } from "../../content/matcher-questions";
 
 const { category } = Astro.params;
 const db = getDb(Astro.locals);
@@ -11,6 +12,17 @@ const cat = (
   await db.select().from(schema.categories).where(eq(schema.categories.slug, category!)).limit(1)
 )[0];
 if (!cat) return new Response("Category not found", { status: 404 });
+
+/* No question set, no funnel. A category without its own questions must NOT
+   fall back to another category's — that is how the window matcher spent
+   5 August asking people about their swimming pool. 404 is the honest answer:
+   this questionnaire does not exist yet. */
+const questions = questionsFor(cat.slug);
+const tasks = tasksFor(cat.slug);
+if (!questions || !tasks) {
+  return new Response("No questionnaire for this category yet", { status: 404 });
+}
+
 const crumbs = breadcrumbsFor(Astro.url.pathname);
 ---
 
@@ -20,5 +32,10 @@ const crumbs = breadcrumbsFor(Astro.url.pathname);
   breadcrumbs={crumbs}
   noindex
 >
-  <PoolMatcher categorySlug={cat.slug} categoryName={cat.name} />
+  <PoolMatcher
+    categorySlug={cat.slug}
+    categoryName={cat.name}
+    questions={questions}
+    tasks={tasks}
+  />
 </Base>

@@ -15,37 +15,58 @@
    Nothing in here needs to change.
    ============================================================ */
 
-import { MATCHER_QUESTIONS, MATCHER_TASKS, ANALYSE_MS } from "../content/matcher-questions";
+import { ANALYSE_MS, type MatcherQuestion } from "../content/matcher-questions";
 
 interface Props {
   categorySlug: string;
   categoryName: string;
+  /* Questions and tasks are PASSED IN, not imported. The component used to
+     import one global array, which is how every category ended up sharing the
+     pool questionnaire. Making them required props means a caller cannot
+     render this funnel without deciding, explicitly, which category's
+     questions it is rendering. */
+  questions: MatcherQuestion[];
+  tasks: string[];
 }
-const { categorySlug, categoryName } = Astro.props;
+const { categorySlug, categoryName, questions, tasks } = Astro.props;
 
-/* The landing copy used to say "for your pool" and "Pool type, size,
-   coverage, power and budget" for EVERY category, because pool was the only
-   one when this was written. That went live on a window URL on 5 August 2026,
-   where the page read "Find the right window-cleaning robots for your pool".
-   Wrong on its face, and found while wiring up lawn.
+/* Landing copy, per category.
 
-   The wording is now category-aware. Pool keeps the specific line it had;
-   anything else gets copy that is true.
+   This block said "for your pool" and "Pool type, size, coverage, power and
+   budget" for EVERY category until 6 August 2026, because pool was the only
+   one when it was written. It went live on a window URL on 5 August reading
+   "Find the right window-cleaning robots for your pool".
 
-   WHAT THIS DOES NOT FIX: the QUESTIONS are still the pool set — pool type,
-   pool length, debris. A window or lawn visitor is asked about their pool. A
-   per-category question set is the real fix and is a separate job; until it
-   lands, a category's BotMatch is not finished and should not be advertised
-   or indexed. See docs/seo/robotic-lawn-mowers-research-findings.md §7. */
-const isPool = categorySlug === "robotic-pool-cleaners";
-const audience = isPool ? "for your pool" : "for you";
-const criteria = isPool
-  ? "Pool type, size, coverage, power and budget — nothing else."
-  : "What you need it to do, where it has to work, and your budget — nothing else.";
+   Every line here now names what the category's own questions actually ask.
+   A category added later without an entry gets wording that is general but
+   still true, never another category's specifics.
+
+   The question count is counted, not typed. It said "Eight short questions"
+   while the funnel asked seven. */
+const COPY: Record<string, { audience: string; criteria: string }> = {
+  "robotic-pool-cleaners": {
+    audience: "for your pool",
+    criteria: "Pool type, size, coverage, power and budget — nothing else.",
+  },
+  "window-cleaning-robots": {
+    audience: "for your windows",
+    criteria: "Framed or frameless, which glass, power and budget — nothing else.",
+  },
+  "robotic-lawn-mowers": {
+    audience: "for your lawn",
+    criteria: "Lawn size, tree cover, slopes, zones and budget — nothing else.",
+  },
+};
+const copy = COPY[categorySlug] ?? {
+  audience: "for you",
+  criteria: "What you need it to do, where it has to work, and your budget — nothing else.",
+};
+const COUNT_WORDS = ["no", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"];
+const countWord = COUNT_WORDS[questions.length] ?? String(questions.length);
 
 const payload = JSON.stringify({
-  questions: MATCHER_QUESTIONS,
-  tasks: MATCHER_TASKS,
+  questions,
+  tasks,
   analyseMs: ANALYSE_MS,
   categorySlug,
 });
@@ -60,16 +81,16 @@ const payload = JSON.stringify({
   <!-- 1. landing -->
   <section class="bp-mm__stage" data-stage="landing">
     <span class="bp-mm__eyebrow">BotMatch</span>
-    <h1 class="bp-mm__title">Find the right {categoryName.toLowerCase()} {audience}</h1>
+    <h1 class="bp-mm__title">Find the right {categoryName.toLowerCase()} {copy.audience}</h1>
     <p class="bp-mm__lead">
-      Eight short questions, about a minute. No account, nothing to install. We match you
+      {countWord} short questions, about a minute. No account, nothing to install. We match you
       against the robots we have actually researched — and the part that picks your robot
       cannot see prices or commission at all.
     </p>
 
     <ul class="bp-mm__steps">
-      <li><strong>Answer eight questions</strong><span>Plain English. Tap what sounds like you.</span></li>
-      <li><strong>We match on suitability</strong><span>{criteria}</span></li>
+      <li><strong>Answer {questions.length} questions</strong><span>Plain English. Tap what sounds like you.</span></li>
+      <li><strong>We match on suitability</strong><span>{copy.criteria}</span></li>
       <li><strong>We send your result</strong><span>Your match, why it won, and what it does not do well.</span></li>
     </ul>
 
