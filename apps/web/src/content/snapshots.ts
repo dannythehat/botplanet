@@ -710,6 +710,118 @@ export const SNAPSHOTS: Record<string, ProductSnapshot> = {
     ruleOutIf:
       "You have large panes, you want scheduling or mapping, or you are working above the first floor and want a published power-off hold rather than a claim without a number.",
   },
+
+  "ecovacs-winbot-mini": {
+    slug: "ecovacs-winbot-mini",
+    priceBand: "budget",
+    priceBandWhy: "The cheapest WINBOT, and the one whose suction figure embarrasses machines costing three times as much.",
+    shipping: "Prime-eligible on Amazon, so usually a day or two rather than a week.",
+    shippingSpeed: "fast",
+    points: [
+      { label: "Max suction", value: "7,500 Pa", note: "Higher than the W2 PRO Omni's 5,500 and the W2 PRO's 5,300." },
+      { label: "Size", value: "215 × 215 × 55 mm", note: "Against 271 mm square for the W2 machines. It fits panes they cannot." },
+      { label: "Power-off hold", value: "30 minutes", note: "The same figure ECOVACS publishes for its flagships." },
+      { label: "Cleaning modes", value: "3", note: "Seven on the W2 PRO. This is where the money goes, not into grip." },
+    ],
+    suitsYouIf: "Your panes are small — glazing bars, a bathroom, a cottage window — or you need the machine to live in a drawer between uses.",
+    ruleOutIf: "Your glass is large, where three modes and WIN-SLAM 3.0 navigation are the real limitation rather than the suction figure.",
+  },
+
+  "ecovacs-winbot-w2s": {
+    slug: "ecovacs-winbot-w2s",
+    priceBand: "mid",
+    priceBandWhy: "Priced with the W2 PRO and differentiated by edge hardware rather than by grip or navigation.",
+    shipping: "Prime-eligible on Amazon, so usually a day or two rather than a week.",
+    shippingSpeed: "fast",
+    points: [
+      { label: "Edges", value: "TruEdge scrubbers", note: "The reason to pick it over the W2 PRO, and unmeasured by anyone independent." },
+      { label: "Max suction", value: null, note: "ECOVACS publishes a figure for every other WINBOT and none for this one." },
+      { label: "Navigation", value: "WIN-SLAM 4.0", note: "Same generation as the W2 PRO." },
+      { label: "Spray nozzles", value: "3", note: "Half the W2 PRO's six; the scrubbers do more of the work." },
+    ],
+    suitsYouIf: "The border of the pane is what bothers you — the strip a cloth reaches last and a circular path reaches worst.",
+    ruleOutIf: "You want the better-documented machine, because ECOVACS publishes suction, tank, weight and dimensions for the W2 PRO and none of them for this one.",
+  },
+
+  "hutt-s55-pro": {
+    slug: "hutt-s55-pro",
+    priceBand: "mid",
+    priceBandWhy: "Mid-range money for a capability nothing else in the catalogue offers at any price.",
+    shipping: "Amazon listing; delivery route unconfirmed.",
+    shippingSpeed: "varies",
+    points: [
+      { label: "Sloped glass", value: "Claimed", note: "The only machine here that offers it. Retailer-stated, not confirmed by HUTT." },
+      { label: "Max suction", value: "6,500 Pa", note: "Retailer-stated. Above every ECOVACS except the W3 Omni." },
+      { label: "Water tank", value: "80 ml", note: "Joint largest here, alongside the W3 Omni." },
+      { label: "Power-off hold", value: null, note: "Not published — and on a machine that may go on a roof, the figure we would most want." },
+    ],
+    suitsYouIf: "You have sloped glass — a conservatory roof, a slanted skylight — and you have confirmed the rating with HUTT before buying.",
+    ruleOutIf: "Your windows are ordinary and vertical, in which case you are paying for an unusual capability from the least-verified maker in the catalogue.",
+  },
+
+  "mamibot-w120-dp": {
+    slug: "mamibot-w120-dp",
+    priceBand: "mid",
+    priceBandWhy: "Sits mid-range and competes on being an alternative to a range that owns six of the eleven machines here.",
+    shipping: "Prime-eligible on Amazon, so usually a day or two rather than a week.",
+    shippingSpeed: "fast",
+    points: [
+      { label: "Spray nozzles", value: "4", note: "Ahead of the W1 PRO's dual cross nozzle and the W2S's three." },
+      { label: "Max suction", value: "3,200 Pa", note: "Retailer-stated, and the lower end of what is claimed in this catalogue." },
+      { label: "Water tank", value: "60 ml", note: "Matches every ECOVACS except the W3 Omni." },
+      { label: "Power-off hold", value: null, note: "Not published, which is what the high-rise wording would need behind it." },
+    ],
+    suitsYouIf: "You want a machine that is not an ECOVACS, your windows are ordinary, and a four-nozzle spray spread matters more to you than a headline suction figure.",
+    ruleOutIf: "You are buying specifically for the high-rise rating, because the figure that would justify that wording is not published anywhere we could find.",
+  },
+
+  "hobot-2s": {
+    slug: "hobot-2s",
+    priceBand: "mid",
+    priceBandWhy: "Mid-range, and priced against the W2 family it cannot be compared to on numbers.",
+    shipping: "Prime-eligible on Amazon, so usually a day or two rather than a week.",
+    shippingSpeed: "fast",
+    points: [
+      { label: "Water tanks", value: "2, replaceable", note: "Swap rather than refill. The clearest practical advantage on this page." },
+      { label: "Spray", value: "Ultrasonic atomiser", note: "A finer film than pumped nozzles, on a theory nobody has measured." },
+      { label: "Max suction", value: null, note: "Not published. Grip is the whole safety story on a window robot." },
+      { label: "Power-off hold", value: null, note: "Not published. ECOVACS states 30 minutes across its range." },
+    ],
+    suitsYouIf: "You have enough glass that refilling a 60 ml tank mid-clean is the part of the job you actually resent.",
+    ruleOutIf: "You want to compare it properly against a WINBOT, which you cannot — the suction and hold figures that would let you are not published.",
+  },
+
+  "hobot-298": {
+    slug: "hobot-298",
+    priceBand: "budget",
+    priceBandWhy: "The cheaper HOBOT, sitting near the WINBOT W1 PRO on price and well behind it on published detail.",
+    shipping: "Prime-eligible on Amazon, so usually a day or two rather than a week.",
+    shippingSpeed: "fast",
+    points: [
+      { label: "Spray", value: "Ultrasonic atomiser", note: "The same idea as the 2S, without its two replaceable tanks." },
+      { label: "Max suction", value: null, note: "Not published." },
+      { label: "Power-off hold", value: null, note: "Not published." },
+      { label: "Track record", value: "Years on sale", note: "Worth something on its own: it has not been quietly withdrawn." },
+    ],
+    suitsYouIf: "You want ultrasonic spray cheaply and are content to buy on a long-standing brand's reputation rather than on published figures.",
+    ruleOutIf: "This is your first window robot, because the WINBOT W1 PRO costs about the same and publishes everything this machine does not.",
+  },
+
+  "cop-rose-x5s": {
+    slug: "cop-rose-x5s",
+    priceBand: "budget",
+    priceBandWhy: "The cheapest machine in the catalogue, and the only one with no app to pay for.",
+    shipping: "Prime-eligible on Amazon, so usually a day or two rather than a week.",
+    shippingSpeed: "fast",
+    points: [
+      { label: "Control", value: "Remote, no app", note: "Nothing to pair, nothing to update, nothing to stop working if an app is retired." },
+      { label: "Glass types", value: "Framed only", note: "The only machine here not rated for frameless glass. This decides it outright." },
+      { label: "Max suction", value: null, note: "Not published." },
+      { label: "Power-off hold", value: null, note: "Not published, on the cheapest machine here." },
+    ],
+    suitsYouIf: "Your windows are framed, your budget is tight, and you would rather have a remote in a drawer than another app on your phone.",
+    ruleOutIf: "Your glass is frameless — it does not claim it, and that is not a matter of judgement or a specification worth arguing with.",
+  },
 };
 
 export const snapshotFor = (slug: string | undefined): ProductSnapshot | undefined =>

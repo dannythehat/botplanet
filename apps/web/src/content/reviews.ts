@@ -2049,6 +2049,297 @@ export const REVIEWS: Record<string, ReviewContent> = {
       "Figures read from ecovacs.com/us on 5 August 2026. ECOVACS publishes no moving-suction figure and no power-off duration for this model; both are printed as undisclosed rather than estimated from the rest of the range.",
     lastReviewed: "2026-08-06",
   },
+
+  "ecovacs-winbot-mini": {
+    slug: "ecovacs-winbot-mini",
+    categorySlug: "window-cleaning-robots",
+    eyebrow: "Window robot review",
+    title: "ECOVACS WINBOT Mini review",
+    seoTitle: "ECOVACS WINBOT Mini Review — The Cheapest Grips Hardest",
+    metaDescription:
+      "7,500 Pa from the cheapest WINBOT — more than the W2 PRO Omni and the W2 PRO. What the extra money in this range actually buys, and who the Mini is right for.",
+    verdict:
+      "The cheapest WINBOT out-grips the two above it: 7,500 Pa against 5,500 on the W2 PRO Omni and 5,300 on the W2 PRO. What the money buys higher up the range is nozzles, modes and navigation — not the ability to hold glass.",
+    bestFor:
+      "Small panes, glazing bars, bathroom and cottage windows, and anyone who needs the machine to live in a drawer.",
+    notIdealFor:
+      "Large glass, where three modes and WIN-SLAM 3.0 are the limitation, or anyone who wants scheduling.",
+    facts: [
+      { label: "Max suction", value: "7,500 Pa" },
+      { label: "Moving suction", value: "3,200 Pa" },
+      { label: "Size", value: "215 × 215 × 55 mm" },
+      { label: "Weight", value: "1.3 kg ±0.1" },
+    ],
+    specGroups: [
+      { heading: "Cleaning", rows: [
+        { label: "Maximum suction", value: "7,500 Pa" },
+        { label: "Suction while moving", value: "3,200 Pa" },
+        { label: "Water tank", value: "60 ml" },
+        { label: "Spray nozzles", value: "4" },
+        { label: "Cleaning modes", value: "3" },
+      ]},
+      { heading: "Navigation and safety", rows: [
+        { label: "Navigation", value: "WIN-SLAM 3.0" },
+        { label: "Protection stages", value: "9" },
+        { label: "Power-off hold", value: "30 minutes" },
+        { label: "Glass types", value: "Framed and frameless" },
+      ]},
+      { heading: "Physical", rows: [
+        { label: "Robot weight", value: "1.3 kg ±0.1" },
+        { label: "Robot size", value: "215 × 215 × 55 mm" },
+        { label: "Warranty", value: null },
+      ]},
+    ],
+    skuNote:
+      "Figures read from ecovacs.com/us on 5 August 2026. ECOVACS publishes no warranty term on any WINBOT page we read — that gap runs across the whole range, not just this model.",
+    lastReviewed: "2026-08-06",
+  },
+
+  "ecovacs-winbot-w2s": {
+    slug: "ecovacs-winbot-w2s",
+    categorySlug: "window-cleaning-robots",
+    eyebrow: "Window robot review",
+    title: "ECOVACS WINBOT W2S review",
+    seoTitle: "ECOVACS WINBOT W2S Review — TruEdge, and What ECOVACS Won't Say",
+    metaDescription:
+      "The W2 with different edge hardware, and the only WINBOT whose suction ECOVACS does not publish. Who should buy it over the W2 PRO, and who should not.",
+    verdict:
+      "The W2 with TruEdge scrubbers instead of six nozzles, aimed squarely at the border of the pane where a circular path reaches worst. It is also the one WINBOT whose suction, tank and weight ECOVACS does not publish.",
+    bestFor:
+      "Anyone whose real complaint is the edges rather than the middle of the glass.",
+    notIdealFor:
+      "Anyone comparing on documented specifications, anyone with no socket near the window, or anyone with small panes.",
+    facts: [
+      { label: "Edges", value: "TruEdge scrubbers" },
+      { label: "Navigation", value: "WIN-SLAM 4.0" },
+      { label: "Protection stages", value: "10" },
+      { label: "Spray nozzles", value: "3" },
+    ],
+    specGroups: [
+      { heading: "Cleaning", rows: [
+        { label: "Maximum suction", value: null },
+        { label: "Suction while moving", value: null },
+        { label: "Water tank", value: null },
+        { label: "Spray nozzles", value: "3" },
+        { label: "Edge system", value: "TruEdge scrubbers" },
+      ]},
+      { heading: "Navigation and safety", rows: [
+        { label: "Navigation", value: "WIN-SLAM 4.0" },
+        { label: "Protection stages", value: "10" },
+        { label: "Glass types", value: "Framed and frameless" },
+      ]},
+      { heading: "Physical", rows: [
+        { label: "Robot weight", value: null },
+        { label: "Robot size", value: null },
+      ]},
+    ],
+    skuNote:
+      "ECOVACS publishes maximum and moving suction for every other WINBOT we hold and neither for the W2S. Undisclosed values are printed as such rather than inferred from the similarly-named W2 PRO.",
+    lastReviewed: "2026-08-06",
+  },
+
+  "hutt-s55-pro": {
+    slug: "hutt-s55-pro",
+    categorySlug: "window-cleaning-robots",
+    eyebrow: "Window robot review",
+    title: "HUTT S55 Pro review",
+    seoTitle: "HUTT S55 Pro Review — The Only One Claiming Sloped Glass",
+    metaDescription:
+      "The only window robot here that claims inclined glass, 6,500 Pa stated and an 80 ml tank — and a specification we could not verify with the manufacturer. Read the gaps first.",
+    verdict:
+      "The only machine in our catalogue claiming sloped glass, which is the whole reason it is here. Strong stated numbers — 6,500 Pa, an 80 ml tank, a HydroJet pump — and not one of them confirmed by HUTT's own published page.",
+    bestFor:
+      "Conservatory roofs, sloping skylights and slanted gable windows, where nothing else here offers to work at all.",
+    notIdealFor:
+      "Ordinary vertical windows, or anyone who wants manufacturer-confirmed figures before spending.",
+    facts: [
+      { label: "Sloped glass", value: "Claimed" },
+      { label: "Max suction", value: "6,500 Pa (stated)" },
+      { label: "Water tank", value: "80 ml" },
+      { label: "Verified", value: "No" },
+    ],
+    specGroups: [
+      { heading: "Cleaning", rows: [
+        { label: "Maximum suction", value: "6,500 Pa (retailer-stated)" },
+        { label: "Water tank", value: "80 ml (retailer-stated)" },
+        { label: "Spray system", value: "HydroJet pump" },
+      ]},
+      { heading: "Navigation and safety", rows: [
+        { label: "Navigation", value: "SLAM 4.0 (retailer-stated)" },
+        { label: "Glass types", value: "Framed, frameless and sloped (retailer-stated)" },
+        { label: "Power-off hold", value: null },
+      ]},
+      { heading: "Physical", rows: [
+        { label: "Robot weight", value: null },
+        { label: "Warranty", value: null },
+      ]},
+    ],
+    skuNote:
+      "NOTHING HERE IS MANUFACTURER-VERIFIED. Every figure is retailer-stated; we could not find a HUTT product page publishing them. The sloped-glass rating is the reason this product is in the catalogue and it rests on a retail listing — confirm it with HUTT before buying for a conservatory roof.",
+    lastReviewed: "2026-08-06",
+  },
+
+  "mamibot-w120-dp": {
+    slug: "mamibot-w120-dp",
+    categorySlug: "window-cleaning-robots",
+    eyebrow: "Window robot review",
+    title: "Mamibot W120-DP review",
+    seoTitle: "Mamibot W120-DP Review — The Non-ECOVACS Option",
+    metaDescription:
+      "Four nozzles, a 60 ml tank and 3,200 Pa stated, from the third brand in the catalogue. What the high-rise rating does and does not tell you.",
+    verdict:
+      "A reasonable mid-price alternative in a catalogue six-elevenths owned by ECOVACS, with a proper four-nozzle spray spread. The high-rise wording is positioning rather than a specification — the figure that would justify it is not published.",
+    bestFor:
+      "Anyone who wants a machine that is not an ECOVACS, on ordinary framed or frameless windows.",
+    notIdealFor:
+      "Anyone comparing on stated suction, anyone with sloped glass, or anyone needing to work away from a socket.",
+    facts: [
+      { label: "Max suction", value: "3,200 Pa (stated)" },
+      { label: "Spray nozzles", value: "4" },
+      { label: "Water tank", value: "60 ml" },
+      { label: "Verified", value: "No" },
+    ],
+    specGroups: [
+      { heading: "Cleaning", rows: [
+        { label: "Maximum suction", value: "3,200 Pa (retailer-stated)" },
+        { label: "Water tank", value: "60 ml (retailer-stated)" },
+        { label: "Spray nozzles", value: "4" },
+      ]},
+      { heading: "Navigation and safety", rows: [
+        { label: "Glass types", value: "Framed and frameless" },
+        { label: "Power-off hold", value: null },
+      ]},
+      { heading: "Physical", rows: [
+        { label: "Robot weight", value: null },
+        { label: "Warranty", value: null },
+      ]},
+    ],
+    skuNote:
+      "Retailer-stated throughout; no Mamibot page publishing these figures was found. The ASIN replaced a different Mamibot model in our records on 5 August 2026 and has not been identity-verified.",
+    lastReviewed: "2026-08-06",
+  },
+
+  "hobot-2s": {
+    slug: "hobot-2s",
+    categorySlug: "window-cleaning-robots",
+    eyebrow: "Window robot review",
+    title: "HOBOT 2S review",
+    seoTitle: "HOBOT 2S Review — Two Tanks, and No Published Suction",
+    metaDescription:
+      "Ultrasonic spray and two replaceable water tanks, which is a real advantage nothing else here offers. Also no published suction figure at all — what that means.",
+    verdict:
+      "Two replaceable water tanks and an ultrasonic atomiser instead of pumped nozzles. The tanks are a concrete advantage nothing else here offers; the spray advantage is a claim nobody has measured, and HOBOT publishes no suction figure at all.",
+    bestFor:
+      "A house with enough glass that refilling is the part you resent.",
+    notIdealFor:
+      "Anyone choosing on documented specifications, anyone with sloped glass, or a first-time buyer who wants to compare properly.",
+    facts: [
+      { label: "Spray", value: "Ultrasonic" },
+      { label: "Water tanks", value: "2, replaceable" },
+      { label: "Max suction", value: "Not published" },
+      { label: "Verified", value: "No" },
+    ],
+    specGroups: [
+      { heading: "Cleaning", rows: [
+        { label: "Maximum suction", value: null },
+        { label: "Spray system", value: "Ultrasonic atomiser" },
+        { label: "Water tanks", value: "2, replaceable (retailer-stated)" },
+      ]},
+      { heading: "Navigation and safety", rows: [
+        { label: "Navigation", value: "AI route planning (no version published)" },
+        { label: "Glass types", value: "Framed and frameless" },
+        { label: "Power-off hold", value: null },
+      ]},
+      { heading: "Physical", rows: [
+        { label: "Robot weight", value: null },
+        { label: "Warranty", value: null },
+      ]},
+    ],
+    skuNote:
+      "Retailer-stated throughout; no HOBOT page publishing these figures was found. Owner-supplied ASIN from 5 August 2026, not identity-verified.",
+    lastReviewed: "2026-08-06",
+  },
+
+  "hobot-298": {
+    slug: "hobot-298",
+    categorySlug: "window-cleaning-robots",
+    eyebrow: "Window robot review",
+    title: "HOBOT 298 review",
+    seoTitle: "HOBOT 298 Review — Ultrasonic Spray, and Very Little Else Published",
+    metaDescription:
+      "The cheaper HOBOT and the machine we know least about in the whole catalogue. What it offers, and why we would point a first-time buyer elsewhere.",
+    verdict:
+      "The cheaper HOBOT, using the same ultrasonic spray as the 2S without its two replaceable tanks. It is the machine we know least about in this catalogue, and this review is short because padding it would misrepresent that.",
+    bestFor:
+      "Someone who wants ultrasonic spray cheaply and is comfortable buying on a long-standing brand's reputation rather than on published figures.",
+    notIdealFor:
+      "Almost anyone buying their first window robot — at a similar price the WINBOT W1 PRO publishes everything this one does not.",
+    facts: [
+      { label: "Spray", value: "Ultrasonic" },
+      { label: "Max suction", value: "Not published" },
+      { label: "Power-off hold", value: "Not published" },
+      { label: "Verified", value: "No" },
+    ],
+    specGroups: [
+      { heading: "Cleaning", rows: [
+        { label: "Maximum suction", value: null },
+        { label: "Spray system", value: "Ultrasonic atomiser" },
+        { label: "Water tank", value: null },
+      ]},
+      { heading: "Navigation and safety", rows: [
+        { label: "Navigation", value: null },
+        { label: "Glass types", value: "Framed and frameless" },
+        { label: "Power-off hold", value: null },
+      ]},
+      { heading: "Physical", rows: [
+        { label: "Robot weight", value: null },
+        { label: "Warranty", value: null },
+      ]},
+    ],
+    skuNote:
+      "No manufacturer-verified specification of any kind was found for this model. Owner-supplied ASIN from 5 August 2026, not identity-verified. Almost every row above is undisclosed, and that is the honest state of what is published.",
+    lastReviewed: "2026-08-06",
+  },
+
+  "cop-rose-x5s": {
+    slug: "cop-rose-x5s",
+    categorySlug: "window-cleaning-robots",
+    eyebrow: "Window robot review",
+    title: "Cop Rose X5S review",
+    seoTitle: "Cop Rose X5S Review — No App, and Framed Glass Only",
+    metaDescription:
+      "The cheapest machine here and the only one with a remote instead of an app. Also the only one not rated for frameless glass — which decides it for some buyers outright.",
+    verdict:
+      "The cheapest machine in the catalogue and the only one with no app at all — a remote control instead, which for the right buyer is the feature rather than the compromise. It is also the only one rated for framed glass only.",
+    bestFor:
+      "Framed windows, a tight budget, and anyone who actively does not want another app on their phone.",
+    notIdealFor:
+      "Frameless glass, which it does not claim at all. Also anyone wanting scheduling, mapping or a cleaning history.",
+    facts: [
+      { label: "Control", value: "Remote, no app" },
+      { label: "Glass types", value: "Framed only" },
+      { label: "Max suction", value: "Not published" },
+      { label: "Verified", value: "No" },
+    ],
+    specGroups: [
+      { heading: "Cleaning", rows: [
+        { label: "Maximum suction", value: null },
+        { label: "Water tank", value: null },
+      ]},
+      { heading: "Navigation and safety", rows: [
+        { label: "Control", value: "Remote control, no app" },
+        { label: "Glass types", value: "Framed only" },
+        { label: "Power-off hold", value: null },
+      ]},
+      { heading: "Physical", rows: [
+        { label: "Robot weight", value: null },
+        { label: "Warranty", value: null },
+      ]},
+    ],
+    skuNote:
+      "Retailer-stated throughout; no manufacturer page publishing these figures was found. The framed-glass-only rating is the one specification that decides this purchase outright, and it is the one we are most confident in — it is what the product is sold as.",
+    lastReviewed: "2026-08-06",
+  },
 };
 
 export function reviewFor(slug: string | undefined): ReviewContent | undefined {
