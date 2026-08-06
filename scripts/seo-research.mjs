@@ -286,38 +286,46 @@ for (const t of kd?.tasks ?? []) {
 
 saveProgress();
 
-// 3. Related keywords for the lead terms — batched tasks, shallow depth.
-const relTasks = SERP_ONLY || VOLUME_ONLY ? [] : LEADS.map((keyword) => ({ ...US, keyword, depth: 1, limit: 20 }));
-let rel = relTasks.length
-  ? await call("/dataforseo_labs/google/related_keywords/live", relTasks, "related_keywords(batch)")
-  : null;
-if (rel && rel.tasks_error > 0 && rel.tasks_count <= 1) rel = null;
-if (!rel) {
-  /* The fallback is CAPPED at four leads since 6 August 2026, and the cap is
-     the fix for the grill run's half-hour hang.
+/* 3. Related keywords — THE LONG-TAIL HARVEST, and it has never worked
+   properly until now.
 
-     Retrying every lead individually meant up to fourteen more requests, each
-     able to burn the full per-call timeout, on the one phase of the batch that
-     has repeatedly returned almost nothing: companion robots got usable
-     related keywords for one lead of fourteen, and litter boxes got none at
-     all until the volume call was repaired. Spending the largest share of the
-     run's wall clock on its least productive phase is the wrong trade.
-     Four is enough to tell whether the endpoint is working at all. If it is,
-     the batch call will normally have worked anyway. */
-  const RELATED_FALLBACK_LIMIT = 4;
-  const retries = relTasks.slice(0, RELATED_FALLBACK_LIMIT);
-  if (relTasks.length > retries.length) {
-    console.error(
-      `related_keywords: batch failed; retrying only the first ${retries.length} of ${relTasks.length} leads individually.`,
-    );
+   `/dataforseo_labs/google/related_keywords/live` ACCEPTS EXACTLY ONE TASK PER
+   REQUEST. It always has. The script sent every lead in a single batched
+   request, which the API rejected every single time with
+
+     40000 "You can set only one task at a time"
+
+   and then fell back to retrying just the first four leads individually. So
+   every run since this script was written harvested at most four leads' worth
+   of long-tails and threw the rest away, and the earlier diagnosis — that the
+   endpoint "has repeatedly returned almost nothing" — was measuring the bug
+   rather than the endpoint. Companion robots getting usable related keywords
+   for one lead of fourteen was this, not DataForSEO.
+
+   Fixed by doing what the API asks: one task, one request, every lead. At
+   roughly $0.001 a call, a fourteen-lead category costs about a penny and a
+   half for the entire long-tail set.
+
+   The wall-clock worry behind the old cap is handled where it belongs — the
+   run budget is checked between calls, so a slow endpoint stops the phase
+   instead of the phase being permanently crippled to guard against one. */
+const relTasks = SERP_ONLY || VOLUME_ONLY ? [] : LEADS.map((keyword) => ({ ...US, keyword, depth: 1, limit: 40 }));
+let relatedOk = 0;
+for (const task of relTasks) {
+  if (Date.now() > DEADLINE_AT) {
+    console.error(`related_keywords: run budget reached; stopped after ${relatedOk} of ${relTasks.length} leads.`);
+    break;
   }
-  for (const task of retries) {
-    const single = await call("/dataforseo_labs/google/related_keywords/live", [task], `related:${task.keyword}`);
-    if (single) collectRelated(single);
+  const single = await call("/dataforseo_labs/google/related_keywords/live", [task], `related:${task.keyword}`);
+  if (single) {
+    collectRelated(single);
+    relatedOk++;
   }
-} else {
-  collectRelated(rel);
 }
+if (relTasks.length) {
+  console.error(`related_keywords: ${relatedOk} of ${relTasks.length} leads harvested, ${out.related.length} long-tail terms.`);
+}
+
 function collectRelated(json) {
   for (const t of json.tasks ?? []) {
     const seedKw = t.data?.keyword;
