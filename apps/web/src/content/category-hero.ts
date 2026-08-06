@@ -36,6 +36,56 @@ export interface CategoryHeroContent {
    generic heading: no H1 of its own, no <title>, no meta description, no OG
    image and no CollectionPage schema. It renders, so nothing complains. */
 export const CATEGORY_HERO: Record<string, CategoryHeroContent> = {
+  /* Page 009, and the largest category BotPlanet has taken on. Keyword
+     evidence: DataForSEO run 31090094137, 2026-08-06, $0.2229. Full working in
+     docs/seo/robot-vacuums-research-findings.md.
+
+     ONE URL CARRIES EVERYTHING, which was not the expected answer. Measured
+     against "robot vacuum": robot vacuum and mop shares 7 top-ten domains,
+     self emptying robot vacuum 7, best robot vacuum 6, best robot vacuum and
+     mop 6, robot mop 6, best robot vacuum for large house 6, best self
+     emptying 5, robot vacuum for carpet 5, best robot vacuum for pet hair 5.
+     Mopping and self-emptying were the two most likely page splits in the
+     category and both came back firmly inside the hub.
+
+     THE PAGE IS NAMED FOR THE HEAD TERM AND BUILT ON THE EASY PHRASINGS, and
+     the gap here is the widest on the site. "robot vacuum" is 135,000/mo at
+     KD 25 against the most defended SERP we have faced — Wirecutter, PCMag,
+     RTINGS, The Verge, Consumer Reports and vacuumwars all rank. But Google
+     groups phrasings loosely here and the difficulty moves enormously:
+       robot vacuum and mop     40,500  KD 29
+       robot vacuum that mops   40,500  KD  8   <- same volume, a quarter the difficulty
+       robot mop                12,100  KD 34
+       mopping robot            12,100  KD  7   <- same again
+       best robot vacuum for pet hair 18,100 KD 8
+     Those four are what the copy is written to take.
+
+     THE BRAND IS BIGGER THAN THE BEST-OF TERM. "roborock" is 110,000/mo, well
+     above "best robot vacuum" at 60,500, and Roborock's own site ranks on the
+     head term. Third category running where a manufacturer owns more demand
+     than the category's commercial query. Secondary mention, not the H1.
+
+     Seasonality is mild and entirely retail: 201,000 in November against
+     110,000 for most of the year. That is Black Friday, not a season. */
+  "robot-vacuums": {
+    eyebrow: "Robot category",
+    /* 44 words. Head term opens sentence one; the mop phrasing the page is
+       built to win lands in sentence two. */
+    title: "Robot Vacuums and Mops: Compare What Actually Cleans Your Floors",
+    subtitle:
+      "A robot vacuum is the one household robot most people meet first, and the range runs from " +
+      "under two hundred dollars to well over a thousand. A robot vacuum that mops is now the " +
+      "default rather than the upgrade — so the real question is what your floors are, and what " +
+      "the extra money genuinely buys.",
+    seoTitle: "Robot Vacuums & Mops: Compare Robot Vacuums | BotPlanet",
+    metaDescription:
+      "Compare robot vacuums and mops by floor type, mop lifting, self-emptying, pet hair, " +
+      "obstacle avoidance and price. Find the right robot vacuum for your home.",
+    primaryCta: { label: "Compare robot vacuums", href: "#products" },
+    secondaryCta: { label: "Does it work on carpet?", href: "#floors" },
+    imageLayout: "above",
+  },
+
   /* Page 006. Keyword evidence: DataForSEO run 31092662805, 2026-08-06.
      Full working in docs/seo/grill-cleaning-robots-research-findings.md.
 

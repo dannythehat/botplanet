@@ -93,6 +93,15 @@ export const BOTMATCH_JOURNEYS: Record<string, BotMatchJourney> = {
     href: routes.botmatch("grill-cleaning-robots"),
     accent: true,
   },
+  "robot-vacuums": {
+    category: "robot-vacuums",
+    ctaLabel: "Find My Robot Vacuum",
+    journeyTitle: "Find your robot vacuum",
+    explanation:
+      "Tell us what is on your floors and whether there is an animal in the house, and get one clear recommendation.",
+    href: routes.botmatch("robot-vacuums"),
+    accent: true,
+  },
 };
 
 /** The journey for a category, or null when that category has none yet. */

@@ -59,6 +59,8 @@ const RUN_COMPANION = "2026-08-06";
 const RUN_LITTER = "2026-08-06";
 /** Grill cleaners: run 31092662805, 2026-08-06. */
 const RUN_GRILL = "2026-08-06";
+/** Robot vacuums: run 31090094137, 2026-08-06, $0.2229. */
+const RUN_VACUUM = "2026-08-06";
 
 /* @extension-point per-category | required | Also per-page and per-product —
    every published URL needs a row. Without one, keywords.test.ts cannot assert
@@ -98,6 +100,76 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
        separate best-of page would have competed with this one for the same
        result set. */
     researchedOn: RUN_WINDOW,
+  },
+  {
+    path: "/robots/robot-vacuums/",
+    /* Page 009 and the largest category on the site. Run 31090094137.
+
+       ONE URL CARRIES EVERYTHING, which was not the expected answer — mopping
+       and self-emptying were the two likeliest page splits and both measured
+       firmly inside the hub. Against "robot vacuum": robot vacuum and mop 7
+       shared top-ten domains, self emptying robot vacuum 7, best robot vacuum
+       6, best robot vacuum and mop 6, robot mop 6, best for large house 6,
+       best self emptying 5, for carpet 5, best for pet hair 5.
+
+       THE DIFFICULTY GAP BETWEEN PHRASINGS IS THE WIDEST ON THE SITE, and it
+       is what the copy is built around:
+         robot vacuum and mop     40,500  KD 29
+         robot vacuum that mops   40,500  KD  8
+         robot mop                12,100  KD 34
+         mopping robot            12,100  KD  7
+       Identical volume, a quarter of the difficulty. Google clusters these
+       phrasings and reports the group volume against each, so targeting the
+       easy phrasing costs nothing and buys the same traffic.
+
+       This is also the most defended SERP BotPlanet has faced: Wirecutter,
+       PCMag, RTINGS, The Verge, Consumer Reports and vacuumwars all rank on
+       the head term. KD 25 understates that. The page is named for the head
+       and expects to earn it through the easier cluster first.
+
+       "roborock" at 110,000 is a third consecutive category where a brand
+       outweighs the commercial term — it beats "best robot vacuum" at 60,500.
+       Secondary mention, not a target. */
+    primary: { term: "robot vacuum", volume: 135000, difficulty: 25, mustAppear: true },
+    secondary: [
+      { term: "robot vacuum and mop", volume: 40500, difficulty: 29, mustAppear: true },
+      { term: "robot vacuum that mops", volume: 40500, difficulty: 8, mustAppear: true },
+      { term: "robot vacuum cleaner", volume: 135000, difficulty: 36, mustAppear: true },
+      { term: "robot vacuums", volume: 135000, difficulty: 25, mustAppear: true },
+      { term: "self emptying", volume: 12100, difficulty: 14, mustAppear: true },
+      { term: "pet hair", volume: 18100, difficulty: 8, mustAppear: true },
+      { term: "carpet", volume: 2900, difficulty: 3, mustAppear: true },
+      { term: "hard floors", volume: 1900, difficulty: 7, mustAppear: true },
+      { term: "roborock", volume: 110000, difficulty: 54, mustAppear: false },
+    ],
+    cededTo: [
+      {
+        term: "roborock",
+        path: "",
+        why: "110,000/mo — more than 'best robot vacuum' at 60,500 — and refused as a target rather than ceded. Roborock's own site ranks on the head term and holds the brand query outright. Third category running where a manufacturer owns more demand than the category's commercial query, and the same ruling applies: a comparison site does not take a brand term off its owner.",
+      },
+      {
+        term: "irobot roomba",
+        path: "",
+        why: "27,100/mo, same ruling. iRobot ranks its own site on the head term. These belong to review pages when the catalogue exists, not to the hub.",
+      },
+      {
+        term: "best robot vacuum for hardwood floors",
+        path: "/robots/robot-vacuums/#floors",
+        why: "2,400/mo and 4 shared domains with the head term, but 5 with 'best robot vacuum' — same family as the best-of cluster the hub already carries. Section, not a guide.",
+      },
+      {
+        term: "best budget robot vacuum",
+        path: "/robots/robot-vacuums/#cost",
+        why: "2,900/mo and 7 shared top-ten domains with 'best robot vacuum'. Firmly the same result set. The price section carries it.",
+      },
+    ],
+    /* NOTE: "best robot vacuum" (60,500) is NOT ceded — this page carries it,
+       on 6 shared domains with the head term. Nor are "robot mop" (12,100) or
+       "self emptying robot vacuum" (12,100), at 6 and 7 shared respectively.
+       All three were candidate second URLs before the run and all three are
+       one page after it. */
+    researchedOn: RUN_VACUUM,
   },
   {
     path: "/robots/grill-cleaning-robots/",

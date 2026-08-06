@@ -56,6 +56,12 @@ export const PRODUCT_CLASSES = [
      covers that works on a surface food touches, which is why its brush
      material is a hard exclusion rather than a preference. */
   "grill_cleaner", // robotic grill / BBQ grate cleaner
+  /* Robot vacuums. The largest category on the site and the last class added.
+     Kept distinct from window_cleaner and lawn_mower for the obvious reason,
+     and from grill_cleaner because a floor robot must never be offered to
+     somebody asking about a barbecue however similar "cleans a surface" looks
+     in a database column. */
+  "robot_vacuum", // floor vacuum, with or without a mop
 ] as const;
 
 export type ProductClass = (typeof PRODUCT_CLASSES)[number];
@@ -121,6 +127,15 @@ export const CLEANING_SURFACES = [
   "hot_grill_safe", // rated to run on a warm grill, which is when grease shifts
   "grease_removal", // shifts baked-on grease rather than only loose char
   "timer_control", // set a duration and walk away rather than watching it
+  /* Robot vacuums. Vacuuming is the category, so it is not listed — every
+     machine here vacuums. These five are what actually separate a $200 machine
+     from a $1,500 one, and mop_lifting is the one that decides whether a
+     vacuum-mop is usable in a house with carpet at all. */
+  "mopping", // wet-mops as well as vacuums
+  "mop_lifting", // raises the pads over carpet instead of dragging them across it
+  "self_emptying", // empties itself into a base rather than a bin you empty
+  "obstacle_avoidance", // recognises and avoids cables, socks and worse
+  "multi_floor_mapping", // remembers more than one storey
 ] as const;
 export type CleaningSurface = (typeof CLEANING_SURFACES)[number];
 
@@ -183,6 +198,15 @@ export const ENVIRONMENTS = [
   "porcelain_grates", // coated — nylon only, or the coating goes
   "cast_iron_grates", // bare cast iron — takes a harder brush
   "stainless_grates", // stainless steel bars
+  /* Robot vacuums. The environment is the FLOOR, and deep pile is the genuine
+     exclusion. A vacuum-mop whose pads do not lift will drag a wet pad across
+     carpet, and a machine without the clearance and torque for deep pile will
+     beach on it. Both are predictable before purchase and neither is fixable
+     with a setting, which is what makes this the right axis for the category's
+     one hard rule-out. */
+  "hard_floors", // wood, tile, laminate, vinyl
+  "low_pile_carpet", // ordinary fitted carpet and thin rugs
+  "deep_pile_carpet", // deep or shag pile — clearance, torque and wet pads all bite
 ] as const;
 export type Environment = (typeof ENVIRONMENTS)[number];
 

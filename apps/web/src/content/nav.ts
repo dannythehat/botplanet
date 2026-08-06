@@ -35,7 +35,7 @@ export const LAUNCH_CATEGORY = "robotic-pool-cleaners";
 export const CATEGORIES: CategoryDef[] = [
   { slug: LAUNCH_CATEGORY, name: "Robotic Pool Cleaners", jtbd: "Clean my pool", short: "Cordless & corded robots that scrub the floor, walls and waterline.", launch: "live", order: 1 },
   { slug: "robotic-lawn-mowers", name: "Robotic Lawn Mowers", jtbd: "Cut my lawn", short: "Robot mowers that cut a little every day, on a wire or without one.", launch: "live", order: 3 },
-  { slug: "robot-vacuums", name: "Robot Vacuums & Mops", jtbd: "Vacuum my floors", short: "Self-emptying vacuum-and-mop robots for the whole home.", launch: "coming_soon", order: 4 },
+  { slug: "robot-vacuums", name: "Robot Vacuums & Mops", jtbd: "Vacuum my floors", short: "Self-emptying vacuum-and-mop robots for the whole home.", launch: "live", order: 4 },
   { slug: "window-cleaning-robots", name: "Window-Cleaning Robots", jtbd: "Clean my windows", short: "Robots that grip glass and clean windows and glass doors.", launch: "live", order: 2 },
   /* Companion and pet-camera are TWO categories, and that is the finding of
      the research run of 6 August 2026 rather than a filing preference. Their

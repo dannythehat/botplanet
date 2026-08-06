@@ -108,6 +108,17 @@ export const questionnaireRows: (typeof questionnaires.$inferInsert)[] = [
       set: "GRILL_QUESTIONS",
     },
   },
+  {
+    id: "q-vacuum-v1",
+    categoryId: "cat-robot-vacuums",
+    version: 1,
+    status: "draft",
+    schemaJson: {
+      version: 1,
+      source: "apps/web/src/content/matcher-questions.ts",
+      set: "VACUUM_QUESTIONS",
+    },
+  },
 ];
 
 export const scoringConfigRows: (typeof scoringConfigs.$inferInsert)[] = [
@@ -378,6 +389,47 @@ export const scoringConfigRows: (typeof scoringConfigs.$inferInsert)[] = [
         grease: ["grill_cleaner"],
         bristle_safety: ["grill_cleaner"],
         convenience: ["grill_cleaner"],
+      },
+    },
+    tiebreakTolerancesJson: {
+      totalPricePctWithin: 1,
+      deliveryDaysWithin: 1,
+      requireSameWarrantyBand: true,
+    },
+    status: "draft",
+  },
+
+  /* Robot vacuums and mops.
+
+     environmentMismatch is ON and the environment is the FLOOR. A vacuum-mop
+     whose pads do not lift is refused for a carpeted house rather than ranked
+     lower, because "mostly suitable" there means a wet pad dragged across a
+     rug on a schedule. Deep pile is the same ruling for a different reason:
+     clearance and torque decide whether the machine cleans or beaches.
+
+     cleansCoverage carries 55 because the capability list is doing real work
+     in this category — mopping, mop lifting, self-emptying, obstacle avoidance
+     and multi-floor mapping are genuinely separable and they are most of what
+     separates a $250 machine from a $1,000 one. Suction, which is the number
+     every listing leads with, is not modelled at all: above a modest threshold
+     it does not discriminate, and pretending otherwise would let a spec-sheet
+     figure outrank the things that decide satisfaction.
+
+     poolSize and power are zero. Makers publish a coverage area but it assumes
+     hard floor and one storey, which makes it closer to marketing than a
+     constraint; and every machine charges from a base. */
+  {
+    id: "sc-vacuum-v1",
+    questionnaireId: "q-vacuum-v1",
+    version: 1,
+    weightsJson: { cleansCoverage: 55, power: 0, priceTier: 45, poolSize: 0 },
+    hardExclusionsJson: { environmentMismatch: true, poolTooLong: false },
+    classEligibilityJson: {
+      default: ["robot_vacuum"],
+      byPrimaryNeed: {
+        pet_hair: ["robot_vacuum"],
+        long_hair: ["robot_vacuum"],
+        general: ["robot_vacuum"],
       },
     },
     tiebreakTolerancesJson: {

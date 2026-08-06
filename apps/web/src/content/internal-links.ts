@@ -58,6 +58,51 @@ export interface InternalAnchor {
    reader at the bottom of a review with nowhere to go. internal-links.test.ts
    checks the anchors that DO exist resolve; it cannot check for absence. */
 export const CATEGORY_ANCHORS: Record<string, InternalAnchor[]> = {
+  "robot-vacuums": [
+    {
+      anchor: "mop lifting",
+      href: "/robots/robot-vacuums/#floors",
+      why: "The specification that decides whether a vacuum-mop works in a house with any carpet at all, and the one buried deepest in the spec sheets. Every product page will mention it; the reasoning belongs in one place.",
+      status: "live",
+    },
+    {
+      anchor: "pet hair",
+      href: "/robots/robot-vacuums/#pet-hair",
+      why: "The biggest single reason people buy one, and the section explaining why brush design matters more than suction.",
+      status: "live",
+    },
+    {
+      anchor: "self emptying",
+      href: "/robots/robot-vacuums/#pet-hair",
+      why: "Explained where it matters most rather than in the price ladder — in a pet household it is the clearest quality-of-life upgrade in the category.",
+      status: "live",
+    },
+    {
+      anchor: "obstacle avoidance",
+      href: "/robots/robot-vacuums/#before-you-buy",
+      why: "Most of the price gap between a cheap machine and an expensive one, and the checklist is where the honest question about your own floor sits.",
+      status: "live",
+    },
+    {
+      anchor: "compare",
+      href: "/compare/robot-vacuums/",
+      why: "The comparison table is the honest next step once floor type has narrowed the field.",
+      status: "live",
+    },
+    {
+      anchor: "review methodology",
+      href: "/review-methodology/",
+      why: "Any claim about how we check things should be one click from the page that says how we check things.",
+      status: "live",
+    },
+    {
+      anchor: "BotMatch",
+      href: "/botmatch/robot-vacuums/",
+      why: "Planned until the catalogue has products. The funnel's first question is the floor-type exclusion, which is the most useful thing it does.",
+      status: "planned",
+    },
+  ],
+
   "grill-cleaning-robots": [
     {
       anchor: "porcelain",

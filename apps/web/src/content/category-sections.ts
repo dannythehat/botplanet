@@ -44,6 +44,53 @@ export interface DecisionSectionContent {
    and nothing in between. FAQ also feeds the FAQPage schema, so an absent
    record means no FAQ rich result. */
 export const DECISION_SECTION: Record<string, DecisionSectionContent> = {
+  /* Carries the #floors anchor from the hero's second CTA, and the floor-type
+     clusters that measured inside the hub: "robot vacuum for carpet" (2,900,
+     5 shared domains), "best robot vacuum for carpet" (1,900), "best robot
+     vacuum for hardwood floors" (2,400) and "robot vacuum for hardwood floors"
+     (1,900). Sections, not guides. */
+  "robot-vacuums": {
+    id: "floors",
+    eyebrow: "Your floors",
+    title: "Choose a robot vacuum for what is actually on your floors",
+    /* 80 words. */
+    intro:
+      "This decides more than price does, and it is the question the specification sheet " +
+      "answers least clearly. Almost every robot sold now mops as well as vacuums, which is " +
+      "excellent on hard floors and a problem on carpet — a wet pad dragged across a rug is " +
+      "worse than no clean at all. What separates the machines is whether the pads lift out of " +
+      "the way, and how far they lift.",
+    cards: [
+      {
+        title: "Mostly hard floors",
+        bestFor: "Wood, tile, laminate, vinyl — apartments and newer houses.",
+        points: [
+          "The easy case, and where a robot vacuum that mops earns its money properly.",
+          "Mop pressure and how often the base rinses the pads matter more than suction here.",
+          "Suction figures are the most oversold number in the category. On hard floors almost anything modern is enough.",
+        ],
+      },
+      {
+        title: "A mix of hard floor and carpet",
+        bestFor: "Most family homes, and the case the whole category is designed around.",
+        points: [
+          "Mop lifting is the specification that matters, and the height it lifts to is what separates a good machine from a frustrating one.",
+          "A low lift clears a thin rug and not much else. Deep pile needs the machine to lift high or avoid carpet entirely.",
+          "Check it can identify carpet at all — the ones that cannot will mop your rug on a schedule.",
+        ],
+      },
+      {
+        title: "Deep or shag pile throughout",
+        bestFor: "Older houses, bedrooms, anywhere soft underfoot.",
+        points: [
+          "This is where machines get stuck rather than clean badly, and clearance and wheel torque decide it.",
+          "Consider a vacuum-only machine. Removing the mop removes the problem and usually the price premium with it.",
+          "Deep pile also eats battery, so a robot rated for your square footage on tile will not reach it on carpet.",
+        ],
+      },
+    ],
+  },
+
   /* Grate material is the first fork and the only hard exclusion in the
      category. It is also the one thing a listing will not tell you clearly,
      and getting it wrong does permanent damage rather than a bad clean. */
@@ -431,6 +478,56 @@ export interface CoverageSectionContent {
 }
 
 export const COVERAGE_SECTION: Record<string, CoverageSectionContent> = {
+  /* Carries the pet-hair cluster, which is the biggest reachable opportunity
+     in the category: "best robot vacuum for pet hair" is 18,100/mo at KD 8 and
+     shares 5 top-ten domains with the head term. A guide would have competed
+     with the hub. */
+  "robot-vacuums": {
+    id: "pet-hair",
+    eyebrow: "Pets and hair",
+    title: "Pet hair, tangles and the brush that decides it",
+    intro:
+      "More people buy a robot vacuum because of an animal than for any other single reason, and " +
+      "the machines differ enormously at it. The thing that separates them is not suction — it " +
+      "is what happens to long hair once it is inside, and whether you end up cutting it off a " +
+      "brush roll with scissors every fortnight.",
+    rows: [
+      {
+        title: "The brush roll, and tangling",
+        whoFor: "Anyone with a long-haired animal or long hair themselves",
+        body:
+          "A traditional bristle brush wraps hair around itself and keeps it. Rubber or " +
+          "anti-tangle designs let it pass through to the bin, and the better ones add a comb " +
+          "that cuts hair as it feeds. This is the single most useful difference between machines " +
+          "in the category and it is buried in the specifications rather than on the box. If you " +
+          "have a shedding dog or a long-haired cat, treat it as the first filter and suction as " +
+          "the second.",
+      },
+      {
+        title: "What a self emptying base actually solves",
+        whoFor: "Multi-pet households",
+        body:
+          "A robot bin is small, and an animal fills it fast. Self-emptying moves the job from " +
+          "every day or two to roughly every two months, which is the difference between a " +
+          "machine you maintain and one you forget about. That is a real quality-of-life change " +
+          "and it is why the feature is worth its price premium here more than anywhere else. " +
+          "The bags are a consumable, and they are not cheap — price a year of them before " +
+          "comparing.",
+      },
+      {
+        title: "The thing no robot handles",
+        whoFor: "Everyone, before they spend",
+        body:
+          "Pet accidents. Every serious manufacturer now claims obstacle avoidance that " +
+          "recognises this specific hazard, and the claims are better than they were, but none " +
+          "is perfect and the failure mode is genuinely awful — a robot that drives through mess " +
+          "spreads it across every floor it can reach. If your animal has accidents, run the " +
+          "machine while you are home rather than on a schedule, and treat avoidance as a " +
+          "reduction in risk rather than a guarantee.",
+      },
+    ],
+  },
+
   /* The bristle-safety case, which is the honest commercial argument for this
      entire category. It is a section rather than a target: "bristle free grill
      brush" is 5,400/mo but shares only 2 domains with the head term, so it is
@@ -830,6 +927,50 @@ export interface SplitSectionContent {
 }
 
 export const SPLIT_SECTION: Record<string, SplitSectionContent> = {
+  /* The mop question, which was expected to be a separate page and measured
+     firmly inside the hub: "robot vacuum and mop" shares 7 top-ten domains
+     with the head term and "robot mop" shares 6. Google treats them as one
+     result set, so this is the fork and not a URL. */
+  "robot-vacuums": {
+    id: "vacuum-or-mop",
+    eyebrow: "The fork",
+    title: "Vacuum only, or a robot vacuum that mops",
+    intro:
+      "Mopping went from a premium feature to the default in about three years, and the category " +
+      "has not been honest about what that means. A robot vacuum and mop is two machines sharing a " +
+      "chassis, and the compromise falls on whichever job your house needs most. Decide which " +
+      "you are actually buying before you compare a single model.",
+    panels: [
+      {
+        label: "VACUUM ONLY",
+        title: "When the mop is dead weight",
+        points: [
+          "Carpet throughout. A mop you can never use is a water tank taking up bin space.",
+          "Simpler machine, fewer consumables, nothing to refill and no dirty water to empty.",
+          "Considerably cheaper for the same suction and the same navigation.",
+          "Deep pile in particular — losing the mop often means losing the clearance problem too.",
+        ],
+        tradeOff:
+          "Hard floors still need mopping and you will still be doing it. If half your ground " +
+          "floor is tile, this is a false economy.",
+      },
+      {
+        label: "VACUUM AND MOP",
+        title: "When the mop is the point",
+        points: [
+          "Mostly hard floors, where a damp pass every day keeps them genuinely clean rather than swept.",
+          "The good ones wash and dry their own pads at the base, which is what stops a mop becoming a chore.",
+          "Mop lifting means a mixed house works — the machine raises the pads for carpet and drops them for tile.",
+          "This is where the engineering money goes now, so the best navigation tends to arrive here first.",
+        ],
+        tradeOff:
+          "More to fill, empty, clean and eventually replace. The base station is large and needs " +
+          "a permanent home. And a machine that cannot lift its pads high enough will damp your " +
+          "rugs every time it runs.",
+      },
+    ],
+  },
+
   /* The comparison every buyer is actually making, and the one the category
      usually avoids. "grill brush" is 33,100/mo against the robot term's 5,400
      — six times the demand — and shares only two universal domains, so the
@@ -1162,6 +1303,52 @@ export interface MatrixSectionContent {
 }
 
 export const MATRIX_SECTION: Record<string, MatrixSectionContent> = {
+  "robot-vacuums": {
+    id: "expectations",
+    eyebrow: "What to expect",
+    title: "What a robot vacuum replaces, and what it does not",
+    intro:
+      "This is the most owned robot in the world, so the gap between the promise and the " +
+      "experience is well documented. Being straight about it is more useful than another " +
+      "feature list: a robot vacuum cleaner changes how often your floors are clean, not " +
+      "whether you ever clean them yourself.",
+    columns: ["What it genuinely does", "Where it falls short"],
+    rows: [
+      {
+        label: "Everyday floor dust",
+        cells: [
+          "The job it is built for and it is excellent at it. Daily running keeps floors at a level that weekly vacuuming never reaches, because the dirt never accumulates.",
+          "Almost nothing. This is the case that sells the category and it delivers.",
+        ],
+      },
+      {
+        label: "Edges and corners",
+        cells: [
+          "Side brushes flick debris into the path, and machines with extending arms genuinely reach further into corners than they used to.",
+          "Still the weakest part. Every one of them leaves a margin along skirting boards and in tight corners, and no amount of money fixes it entirely.",
+        ],
+      },
+      {
+        label: "Mopping hard floors",
+        cells: [
+          "A damp pass every day beats a proper mop once a month for how the floor actually looks and feels.",
+          "It is a damp wipe, not a scrub. Dried-on spills need a person, and a pad that is not washed at the base just moves dirt around.",
+        ],
+      },
+      {
+        label: "Being left alone",
+        cells: [
+          "Modern mapping and obstacle avoidance mean a tidy house genuinely runs unattended for months.",
+          "An untidy house does not. Cables, socks, toys and pet accidents all end runs, and the machine that copes with clutter is the expensive one.",
+        ],
+      },
+    ],
+    note:
+      "None of these does stairs, and none replaces a real vacuum for a deep clean or for the " +
+      "sofa. Think of it as keeping the floor at a standard rather than as removing vacuuming " +
+      "from your life.",
+  },
+
   "grill-cleaning-robots": {
     id: "what-it-cleans",
     eyebrow: "What to expect",
@@ -1529,6 +1716,61 @@ export interface CheckSectionContent {
 }
 
 export const CHECK_SECTION: Record<string, CheckSectionContent> = {
+  "robot-vacuums": {
+    id: "before-you-buy",
+    eyebrow: "Before you buy",
+    title: "Five things to check before you buy",
+    intro:
+      "Suction in pascals is the number every listing shouts and it is close to meaningless " +
+      "above a modest threshold. What decides whether you are happy in a year is the brush, the " +
+      "pads, the clutter in your house and what the consumables cost.",
+    boxLabel: "Check these before buying",
+    items: [
+      {
+        title: "How high the mop pads lift",
+        body:
+          "If you have any carpet at all, this is the specification that decides everything. A " +
+          "low lift clears a thin rug and nothing more. Machines that lift high, or that remove " +
+          "the pads at the base before doing carpet, are the ones that work in a mixed house.",
+        ask: "How many millimetres do the pads lift, and will that clear my thickest rug?",
+      },
+      {
+        title: "The brush roll, if there is hair in your house",
+        body:
+          "Anti-tangle brush designs let long hair pass into the bin; traditional bristles wrap " +
+          "it and hold it. This is the difference between never thinking about the machine and " +
+          "cutting hair off it with scissors every fortnight.",
+        ask: "Is the main brush anti-tangle, and does it have a cutting comb?",
+      },
+      {
+        title: "What the consumables cost per year",
+        body:
+          "Filters, side brushes, mop pads and — if it empties itself — bags. None is expensive " +
+          "alone and together they are not trivial. A cheap machine with proprietary bags can " +
+          "cost more over three years than a dearer one that takes standard parts.",
+        ask: "What does a year of filters, brushes, pads and bags cost?",
+      },
+      {
+        title: "Whether your house is tidy enough for it",
+        body:
+          "The honest question nobody asks. Obstacle avoidance has improved enormously and it is " +
+          "still the thing that ends most runs. A house with cables, shoes and toys on the floor " +
+          "needs the good camera-based avoidance, which is most of the price gap between a $250 " +
+          "machine and a $900 one.",
+        ask: "Would I tidy the floor before running it, honestly?",
+      },
+      {
+        title: "Where the base station is going to live",
+        body:
+          "A self-emptying, self-washing base is a piece of furniture. It needs a socket, a " +
+          "permanent spot with clearance around it, and on the mopping models a place you do not " +
+          "mind hearing it dry pads. People underestimate this and then keep the robot in a " +
+          "cupboard, which defeats it.",
+        ask: "Where exactly is it going, and is there a socket there?",
+      },
+    ],
+  },
+
   "grill-cleaning-robots": {
     id: "before-you-buy",
     eyebrow: "Before you buy",
@@ -1942,6 +2184,56 @@ export interface PriceSectionContent {
 }
 
 export const PRICE_SECTION: Record<string, PriceSectionContent> = {
+  /* Carries the budget cluster, which measured inside the hub via the "best"
+     term: "best budget robot vacuum" (2,900) and "best cheap robot vacuum"
+     (2,900) each share 7 top-ten domains with "best robot vacuum", and "cheap
+     robot vacuum" is 4,400 at KD 7. Section, not a guide. */
+  "robot-vacuums": {
+    id: "cost",
+    eyebrow: "Cost",
+    title: "How much should you spend on a robot vacuum?",
+    intro:
+      "The widest useful range of any category here, and unusually the cheap end is genuinely " +
+      "good. A modern budget machine cleans floors about as well as a flagship — what the money " +
+      "buys is navigation, tangle handling and how little you have to think about it. Decide how " +
+      "much of your attention you are buying back.",
+    rungs: [
+      {
+        label: "Entry",
+        what:
+          "Vacuum only or a token mop, basic navigation, a bin you empty yourself. Cleans a " +
+          "small tidy flat perfectly well. Expect to rescue it occasionally and to empty it " +
+          "every couple of runs.",
+      },
+      {
+        label: "Mid",
+        what:
+          "Proper LiDAR mapping, no-go zones, real mop pads that lift, and usually a " +
+          "self-emptying base. This is the sweet spot for most homes and where the jump in " +
+          "day-to-day experience is largest.",
+      },
+      {
+        label: "Upper",
+        what:
+          "Camera-based obstacle avoidance that genuinely recognises cables and pet mess, " +
+          "anti-tangle brushes and a base that washes and dries the pads. The step that buys " +
+          "unattended running in a house that is not spotless.",
+      },
+      {
+        label: "Top",
+        what:
+          "Extending arms for corners, hot-water pad washing, mop pads that detach for carpet, " +
+          "multi-floor mapping. Real engineering, but diminishing — the floors are not much " +
+          "cleaner than the tier below.",
+      },
+    ],
+    note:
+      "Every price on BotPlanet carries the date it was checked. Consumables are stated " +
+      "separately, because a machine with proprietary bags and pads is not as cheap as its " +
+      "sticker suggests. This category discounts hard in November, and that is worth waiting " +
+      "for.",
+  },
+
   /* No dollar figures — catalogue empty, and a band printed from memory is
      what the review methodology forbids. */
   "grill-cleaning-robots": {
@@ -2281,6 +2573,34 @@ export interface VerdictSectionContent {
 }
 
 export const VERDICT_SECTION: Record<string, VerdictSectionContent> = {
+  "robot-vacuums": {
+    id: "worth-it",
+    eyebrow: "The verdict",
+    title: "Are robot vacuums worth it?",
+    intro:
+      "The most-owned robot in the world, so the answer is better evidenced here than anywhere " +
+      "else on this site — and it is more qualified than the category would like.",
+    verdict:
+      "For hard floors, a tidy house and anyone who would otherwise vacuum weekly, yes, clearly. " +
+      "For a cluttered house or deep pile throughout, buy carefully or not at all.",
+    body:
+      "The thing a robot vacuum actually changes is frequency. Floors cleaned every day never " +
+      "reach the state that weekly vacuuming is trying to fix, so the house feels cleaner even " +
+      "though the machine is worse than your upright at any single pass. That effect is real, it " +
+      "is why people who own one rarely go back, and it is worth the money. What it does not do " +
+      "is remove vacuuming from your life — the stairs, the sofa, the corners and the deep clean " +
+      "are all still yours. The failure cases are predictable rather than mysterious: clutter " +
+      "ends runs, deep pile strands machines, and a mop that cannot lift high enough will damp " +
+      "your rugs on a schedule. Every one of those is knowable before you spend, which is what " +
+      "this page is for.",
+    against:
+      "A house with deep pile throughout, unless you buy vacuum-only and check the clearance. A " +
+      "floor that habitually has cables, toys or shoes on it, unless you go up to proper " +
+      "camera-based avoidance. Anyone expecting it to replace a real vacuum rather than reduce " +
+      "how often you reach for one. And anyone buying in October — this category discounts hard " +
+      "in November.",
+  },
+
   /* Carries the #worth-it anchor from the hero's second CTA, and that placement
      is evidence-led: "Do the grill bots really work?" and "Does a Grillbot
      really work?" both appear verbatim in Google's People Also Ask across
@@ -2521,6 +2841,68 @@ export interface FaqSectionContent {
 }
 
 export const FAQ_SECTION: Record<string, FaqSectionContent> = {
+  "robot-vacuums": {
+    id: "faqs",
+    eyebrow: "Questions",
+    title: "Robot vacuum FAQs",
+    intro: "The questions people actually ask before buying, answered plainly.",
+    items: [
+      {
+        q: "Do robot vacuums work on carpet?",
+        a:
+          "On low pile, yes, and well. On deep or shag pile it depends on clearance and wheel " +
+          "torque, and the failure is getting stuck rather than cleaning badly. The bigger issue " +
+          "is the mop: a vacuum-mop whose pads do not lift high enough will drag a wet pad across " +
+          "your rug every run. If you have deep pile throughout, look at how high the pads lift, " +
+          "or buy a vacuum-only machine and remove the problem.",
+      },
+      {
+        q: "Which robot vacuum is worth buying?",
+        a:
+          "There is no single answer and any page giving you one has skipped the question that " +
+          "matters — what is on your floors. Mostly hard floors point to a mopping machine with " +
+          "good pad washing. A mix points to whichever lifts its pads highest. Deep pile points " +
+          "to vacuum-only. Pets point to the anti-tangle brush before anything else. Start there " +
+          "and the shortlist is three machines rather than forty.",
+      },
+      {
+        q: "Is self-emptying worth the extra money?",
+        a:
+          "In a house with pets or long hair, yes — it is the clearest quality-of-life upgrade in " +
+          "the category, moving bin duty from every couple of days to roughly every two months. " +
+          "In a small flat with hard floors and no animals it is a convenience rather than a " +
+          "transformation. Either way, price the bags: they are a consumable and often " +
+          "proprietary.",
+      },
+      {
+        q: "How well do they actually avoid things?",
+        a:
+          "Far better than three years ago and still not perfectly. Cheap machines bump and turn, " +
+          "which means cables and socks end runs. Camera-based avoidance on the upper tiers " +
+          "genuinely recognises common hazards, and that difference is most of the price gap " +
+          "between a $250 machine and a $900 one. Treat every avoidance claim as a reduction in " +
+          "risk, not a guarantee — particularly the one about pet accidents.",
+      },
+      {
+        q: "How long do robot vacuums last?",
+        a:
+          "The machine generally outlives its battery, which is the part that ages with every " +
+          "charge cycle. Brushes, filters and mop pads are consumables replaced through the " +
+          "year. Before buying, check whether the battery is a serviceable part and whether the " +
+          "maker still sells spares for models a few years old — that is the difference between " +
+          "a repair and a replacement, and it varies enormously by brand.",
+      },
+      {
+        q: "Do I still need a normal vacuum?",
+        a:
+          "Yes. Nothing here does stairs, and none of them does upholstery, car interiors or a " +
+          "proper deep clean. What changes is how often you reach for the upright: for many " +
+          "households it goes from weekly to monthly. Buying a robot to throw away your vacuum " +
+          "is the single commonest way to be disappointed by one.",
+      },
+    ],
+  },
+
   /* Taken from the People Also Ask boxes across run 31092662805. The "does it
      really work" question appeared on three separate SERPs in three phrasings,
      which is why it leads. */
@@ -3053,6 +3435,16 @@ export const BOTMATCH_CTA: Record<string, BotMatchCtaContent> = {
 
      Restored for lawn at the same time, whose question set landed on 6 August
      and whose panel had been waiting in a comment ever since. */
+  "robot-vacuums": {
+    headline: "Find your robot vacuum",
+    body:
+      "Tell us what is on your floors, whether there is an animal in the house and how tidy you " +
+      "keep it. In about 30 seconds we will match you with the right robot vacuum — and tell you " +
+      "which ones to rule out.",
+    points: ["About 30 seconds", "Five plain questions", "No account needed"],
+    ctaLabel: "Start 30-second match",
+    note: "Free. We email the result and keep it on a page you can return to.",
+  },
   "grill-cleaning-robots": {
     headline: "Find your grill cleaner",
     body:

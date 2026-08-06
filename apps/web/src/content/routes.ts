@@ -348,6 +348,49 @@ export const ROUTES: RouteDef[] = [
     category: "pet-camera-robots",
   },
 
+  /* ---------------- Robot vacuums and mops ----------------
+     Page 009, and the biggest category on the site at 135,000/mo. One URL
+     carries all of it: mop and self-emptying both measured 6-7 shared domains
+     with the head term. Flipped from coming_soon to live with this build. */
+  {
+    path: "/robots/robot-vacuums/",
+    label: "Robot Vacuums & Mops",
+    section: "shop",
+    parent: "/robots/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: "Explore",
+    inSitemap: true,
+    indexable: true,
+    category: "robot-vacuums",
+  },
+  {
+    path: "/compare/robot-vacuums/",
+    label: "Compare robot vacuums",
+    breadcrumbLabel: "Robot Vacuums & Mops",
+    section: "compare",
+    parent: "/compare/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: true,
+    indexable: true,
+    category: "robot-vacuums",
+  },
+  {
+    path: "/botmatch/robot-vacuums/",
+    label: "Find My Robot Vacuum",
+    breadcrumbLabel: "Find My Robot Vacuum",
+    parent: "/robots/robot-vacuums/",
+    section: "botmatch",
+    status: "coming_soon",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: false,
+    indexable: false,
+    category: "robot-vacuums",
+  },
+
   /* ---------------- Grill-cleaning robots ----------------
      Page 006. The category survived the run that was designed to kill it —
      see the keyword register for the grill-brush control that cleared it. */

@@ -42,8 +42,12 @@ const LAWN_WORDS = /\blawn|grass|mow|acre|yard|boundary wire\b/i;
    is not a leak, it is the single most important question that category has.
    The animal is not what makes pet cameras distinctive; two categories on this
    site are sold to cat owners. What is distinctive is the machine's own
-   constraints, so the guard is those. */
-const PET_CAMERA_WORDS = /\bstairs?\b|\bcarpet|\bpatrol|\btreats?\b/i;
+   constraints, so the guard is those.
+
+   "carpet" has now gone the same way, for the same reason: robot vacuums ask
+   what is on your floors, and that is the most important question that
+   category has. Two categories caring about carpet is not a leak. */
+const PET_CAMERA_WORDS = /\bstairs?\b|\bpatrol|\btreats?\b/i;
 /* Companion words that must never appear outside the companion set. Kept to
    terms only this category uses — "monthly fee" is deliberately NOT here,
    because pet cameras charge for cloud recording and asking about it there is
@@ -56,6 +60,10 @@ const COMPANION_WORDS = /\bconversation\b|\bdesk\b/i;
 const LITTER_BOX_WORDS = /\blitter\b|\brefill/i;
 /* Grill words that must never appear outside the grill set. */
 const GRILL_WORDS = /\bgrate|\bgrill|\bbarbecue|\bbristle|\bcook\b/i;
+/* Vacuum words that must never appear outside the vacuum set. "carpet" is NOT
+   here — pet cameras legitimately ask about flooring, and that question is
+   theirs by right rather than borrowed. */
+const VACUUM_WORDS = /\bmop|\bvacuum|\bsuction|\bshag\b/i;
 
 /** Every string a reader could see in a question set. */
 function visibleText(slug: string): string {
@@ -145,6 +153,13 @@ describe("every category's questions are its own", () => {
     }
   });
 
+  it("asks nobody outside robot vacuums about mopping or suction", () => {
+    for (const slug of CATEGORIES) {
+      if (slug === "robot-vacuums") continue;
+      expect(visibleText(slug), `${slug} mentions a vacuum concern`).not.toMatch(VACUUM_WORDS);
+    }
+  });
+
   it("gives each category its own analysing sequence, of the same length as pool's", () => {
     for (const slug of CATEGORIES) {
       const tasks = MATCHER_TASKS_BY_CATEGORY[slug];
@@ -154,10 +169,14 @@ describe("every category's questions are its own", () => {
   });
 
   it("never returns another category's questions for an unknown slug", () => {
-    expect(questionsFor("robot-vacuums")).toBeNull();
+    /* Was "robot-vacuums" until 6 August 2026, when that category went live
+       and the guard started failing because somebody had done the right thing.
+       "solar-panel-robots" is a reserved, hidden slug with no questions — the
+       exact case this needs to assert. */
+    expect(questionsFor("solar-panel-robots")).toBeNull();
     expect(questionsFor("")).toBeNull();
     expect(questionsFor(undefined)).toBeNull();
-    expect(tasksFor("robot-vacuums")).toBeNull();
+    expect(tasksFor("solar-panel-robots")).toBeNull();
   });
 });
 
@@ -221,7 +240,7 @@ describe("folding answers into the scoring shape", () => {
   });
 
   it("returns an empty fragment for a category with no questions", () => {
-    expect(toScoringAnswers("robot-vacuums", { environment: "In-ground" })).toEqual({});
+    expect(toScoringAnswers("solar-panel-robots", { environment: "In-ground" })).toEqual({});
   });
 
   it("folds a real window answer set into engine inputs", () => {

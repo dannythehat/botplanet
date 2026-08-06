@@ -492,6 +492,119 @@ describe("grill cleaning robot matcher", () => {
   });
 });
 
+/* ---------------- Robot vacuums ---------------- */
+
+/** Mirrors the seed scoring config sc-vacuum-v1. */
+const VACUUM_CONFIG_V1: ScoringConfig = {
+  version: 1,
+  weights: { cleansCoverage: 55, power: 0, priceTier: 45, poolSize: 0 },
+  /* ON, and the environment is the FLOOR. A mop that will not lift is refused
+     for a carpeted house rather than ranked lower. */
+  hardExclusions: { environmentMismatch: true, poolTooLong: false },
+  classEligibility: {
+    default: ["robot_vacuum"],
+    byPrimaryNeed: {
+      pet_hair: ["robot_vacuum"],
+      long_hair: ["robot_vacuum"],
+      general: ["robot_vacuum"],
+    },
+  },
+  tiebreakTolerances: {
+    totalPricePctWithin: 1,
+    deliveryDaysWithin: 1,
+    requireSameWarrantyBand: true,
+  },
+};
+
+/** Mops, pads do not lift: hard floors only. */
+const MOP_NO_LIFT: SuitabilityCandidate = {
+  productId: "prod-vac-mop-nolift",
+  productClass: "robot_vacuum",
+  environments: ["hard_floors"],
+  cleans: ["mopping"],
+  powerType: "corded",
+  priceTier: "budget",
+  maxPoolLengthFt: null,
+  maxPoolAreaSqFt: null,
+};
+
+/** Mops and lifts the pads: works on a mixed floor. */
+const MOP_WITH_LIFT: SuitabilityCandidate = {
+  productId: "prod-vac-mop-lift",
+  productClass: "robot_vacuum",
+  environments: ["hard_floors", "low_pile_carpet"],
+  cleans: ["mopping", "mop_lifting", "self_emptying", "obstacle_avoidance"],
+  powerType: "corded",
+  priceTier: "premium",
+  maxPoolLengthFt: null,
+  maxPoolAreaSqFt: null,
+};
+
+/** Vacuum only, built for deep pile. */
+const DEEP_PILE_VAC: SuitabilityCandidate = {
+  productId: "prod-vac-deep",
+  productClass: "robot_vacuum",
+  environments: ["hard_floors", "low_pile_carpet", "deep_pile_carpet"],
+  cleans: ["self_emptying", "obstacle_avoidance"],
+  powerType: "corded",
+  priceTier: "mid",
+  maxPoolLengthFt: null,
+  maxPoolAreaSqFt: null,
+};
+
+const VAC_ALL = [MOP_NO_LIFT, MOP_WITH_LIFT, DEEP_PILE_VAC, DESK_COMPANION, NYLON_GRILL_BOT];
+
+describe("robot vacuum matcher", () => {
+  const hardFloors: PoolAnswers = {
+    environment: "hard_floors",
+    primary_need: "general",
+    desired_cleans: ["mopping"],
+    power_pref: "no_pref",
+    budget_tier: "budget",
+    pool_length_ft: null,
+    pool_area_sqft: null,
+  };
+
+  it("recommends a mopping machine for hard floors on a budget", () => {
+    const result = scoreProducts(hardFloors, VAC_ALL, VACUUM_CONFIG_V1);
+    const winner = result.ranked.find((r) => !r.excluded)!;
+    expect(winner.productId).toBe("prod-vac-mop-nolift");
+  });
+
+  it("EXCLUDES a mop that cannot lift once there is carpet", () => {
+    /* The category's hard exclusion. A machine whose pads do not lift is not
+       "second best" in a house with rugs — it damps them on a schedule. */
+    const mixed: PoolAnswers = {
+      ...hardFloors,
+      environment: "low_pile_carpet",
+      desired_cleans: ["mopping", "mop_lifting"],
+      budget_tier: "no_pref",
+    };
+    const result = scoreProducts(mixed, VAC_ALL, VACUUM_CONFIG_V1);
+    const noLift = result.ranked.find((r) => r.productId === "prod-vac-mop-nolift")!;
+    const lift = result.ranked.find((r) => r.productId === "prod-vac-mop-lift")!;
+    expect(noLift.excluded).toBe(true);
+    expect(noLift.exclusionReason).toBe("environment_mismatch");
+    expect(lift.excluded).toBe(false);
+  });
+
+  it("leaves only the deep-pile machine when the house is all shag", () => {
+    const deep: PoolAnswers = { ...hardFloors, environment: "deep_pile_carpet", budget_tier: "no_pref" };
+    const result = scoreProducts(deep, VAC_ALL, VACUUM_CONFIG_V1);
+    const winner = result.ranked.find((r) => !r.excluded)!;
+    expect(winner.productId).toBe("prod-vac-deep");
+  });
+
+  it("EXCLUDES every other category's machine", () => {
+    const result = scoreProducts(hardFloors, VAC_ALL, VACUUM_CONFIG_V1);
+    for (const id of ["prod-desk-companion", "prod-grill-nylon"]) {
+      const r = result.ranked.find((x) => x.productId === id)!;
+      expect(r.excluded).toBe(true);
+      expect(r.exclusionReason).toBe("class_not_eligible");
+    }
+  });
+});
+
 describe("the two configs cannot be confused for one another", () => {
   it("gives the two categories different weights and different exclusions", () => {
     expect(COMPANION_CONFIG_V1.weights).not.toEqual(PET_CAMERA_CONFIG_V1.weights);
@@ -518,6 +631,7 @@ describe("the two configs cannot be confused for one another", () => {
       PET_CAMERA_CONFIG_V1,
       LITTER_BOX_CONFIG_V1,
       GRILL_CONFIG_V1,
+      VACUUM_CONFIG_V1,
     ];
     const seen = new Set<string>();
     for (const cfg of configs) {

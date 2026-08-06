@@ -970,6 +970,144 @@ const GRILL_QUESTIONS: MatcherQuestion[] = [
 ];
 
 /* ============================================================
+   Robot vacuums and mops
+
+   FLOOR TYPE IS FIRST and it is the hard exclusion. A vacuum-mop
+   whose pads do not lift will drag a wet pad across carpet, and
+   a machine without the clearance for deep pile beaches on it.
+   Both are predictable before purchase and neither is fixable
+   with a setting.
+
+   HAIR IS SECOND, ahead of budget, because it is the single
+   biggest reason people buy one and because the brush design
+   that solves it is buried in the specifications rather than on
+   the box. "best robot vacuum for pet hair" is 18,100/mo — the
+   biggest reachable term in the category after the head — but it
+   is asked here because it decides the purchase, not because it
+   ranks.
+
+   CLUTTER IS THIRD, and it is the question the category never
+   asks. Obstacle avoidance is most of the price gap between a
+   $250 machine and a $900 one, and the honest input is not a
+   specification, it is how tidy the reader's floor actually is.
+
+   Power is not asked — they all charge from a base — so
+   MATCHER_DEFAULTS keeps the engine's power factor neutral.
+   ============================================================ */
+
+const VACUUM_QUESTIONS: MatcherQuestion[] = [
+  {
+    id: "environment",
+    kicker: "Your floors",
+    q: "What is on most of your floors?",
+    options: [
+      {
+        label: "Mostly hard floors",
+        hint: "Wood, tile, laminate, vinyl",
+        scores: { environment: "hard_floors", desired_cleans: ["mopping"] },
+      },
+      {
+        label: "A mix of hard floor and carpet",
+        hint: "The pads have to lift out of the way",
+        scores: { environment: "low_pile_carpet", desired_cleans: ["mopping", "mop_lifting"] },
+      },
+      {
+        label: "Deep or shag pile throughout",
+        hint: "A mop is dead weight here, and clearance matters",
+        scores: { environment: "deep_pile_carpet" },
+      },
+    ],
+  },
+  {
+    id: "primary_need",
+    kicker: "Hair",
+    q: "Is there an animal in the house, or long hair?",
+    options: [
+      {
+        label: "Yes — a shedding animal",
+        scores: { primary_need: "pet_hair", desired_cleans: ["self_emptying", "obstacle_avoidance"] },
+      },
+      {
+        label: "Long human hair, no animals",
+        scores: { primary_need: "long_hair", desired_cleans: ["self_emptying"] },
+      },
+      {
+        label: "Neither",
+        scores: { primary_need: "general", desired_cleans: ["mopping"] },
+      },
+    ],
+  },
+  {
+    id: "clutter",
+    kicker: "Your floor, honestly",
+    q: "Is there usually stuff on the floor?",
+    options: [
+      {
+        label: "It is generally clear",
+        hint: "Cheaper navigation will cope",
+      },
+      {
+        label: "Cables, shoes, the odd toy",
+        hint: "This is what the expensive avoidance is for",
+        scores: { desired_cleans: ["obstacle_avoidance"] },
+      },
+      {
+        label: "Children live here",
+        scores: { desired_cleans: ["obstacle_avoidance"] },
+      },
+    ],
+  },
+  {
+    id: "emptying",
+    kicker: "Maintenance",
+    q: "Would you rather it emptied itself?",
+    options: [
+      {
+        label: "Yes — I do not want to think about it",
+        scores: { desired_cleans: ["self_emptying"] },
+      },
+      { label: "I do not mind emptying a bin" },
+      { label: "Not sure what that means" },
+    ],
+  },
+  {
+    id: "budget_tier",
+    kicker: "Your budget",
+    q: "Roughly what are you looking to spend?",
+    options: [
+      { label: "Under $300", scores: { budget_tier: "budget" } },
+      { label: "$300 – $600", scores: { budget_tier: "mid" } },
+      { label: "$600 – $1,000", scores: { budget_tier: "premium" } },
+      { label: "Over $1,000", scores: { budget_tier: "ultra" } },
+      { label: "Show me the range", scores: { budget_tier: "no_pref" } },
+    ],
+  },
+
+  /* ---- profile questions: recorded, never scored ---- */
+  {
+    id: "home_size",
+    kicker: "Your home",
+    q: "How much ground does it have to cover?",
+    options: [
+      { label: "An apartment or one floor" },
+      { label: "A typical house" },
+      { label: "A large house, several storeys" },
+    ],
+  },
+  {
+    id: "main_worry",
+    kicker: "Your concern",
+    q: "What worries you most about buying one?",
+    options: [
+      { label: "It will get stuck constantly" },
+      { label: "It will not clean properly" },
+      { label: "Hair wrapping round the brush" },
+      { label: "Paying for features I will not use" },
+    ],
+  },
+];
+
+/* ============================================================
    The registry
    ============================================================ */
 
@@ -991,6 +1129,7 @@ export const MATCHER_QUESTIONS_BY_CATEGORY: Record<string, MatcherQuestion[]> = 
   "pet-camera-robots": PET_CAMERA_QUESTIONS,
   "self-cleaning-litter-boxes": LITTER_BOX_QUESTIONS,
   "grill-cleaning-robots": GRILL_QUESTIONS,
+  "robot-vacuums": VACUUM_QUESTIONS,
 };
 
 /**
@@ -1014,6 +1153,7 @@ export const MATCHER_DEFAULTS: Record<string, ScoreFragment> = {
   "pet-camera-robots": { power_pref: "no_pref", pool_length_ft: null, pool_area_sqft: null },
   "self-cleaning-litter-boxes": { power_pref: "no_pref", pool_length_ft: null, pool_area_sqft: null },
   "grill-cleaning-robots": { power_pref: "no_pref", pool_length_ft: null, pool_area_sqft: null },
+  "robot-vacuums": { power_pref: "no_pref", pool_length_ft: null, pool_area_sqft: null },
 };
 
 /**
@@ -1075,6 +1215,14 @@ export const MATCHER_TASKS_BY_CATEGORY: Record<string, string[]> = {
     "Checking the machine can drive on bars spaced like yours",
     "Weighing how often you cook against what one would save you",
     "Comparing the machine honestly against a good hand brush",
+    "Ranking on suitability — before any retailer is considered",
+  ],
+  "robot-vacuums": [
+    "Reading what is on your floors",
+    "Ruling out machines whose pads would sit on your carpet",
+    "Checking brush design against the hair in your house",
+    "Matching obstacle avoidance to how clear your floor really is",
+    "Weighing what each one costs to run, not just to buy",
     "Ranking on suitability — before any retailer is considered",
   ],
 };
