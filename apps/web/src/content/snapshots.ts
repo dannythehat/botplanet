@@ -629,6 +629,87 @@ export const SNAPSHOTS: Record<string, ProductSnapshot> = {
       { need: "You only need the surface skimmed, not the whole pool", test: { kind: "cleans", value: "water_surface" } },
     ],
   },
+
+  /* ---------------- WINDOW-CLEANING ROBOTS ----------------
+     ruleOuts use the pool-shaped tests, and only where a test can actually be
+     run against a window product's stored fields. `cleans` works — sloped
+     glass is a real capability value on the HUTT. `maxLengthOver` does not
+     apply to a window robot at all, so it is absent rather than faked. */
+  "ecovacs-winbot-w2-pro-omni": {
+    slug: "ecovacs-winbot-w2-pro-omni",
+    priceBand: "premium",
+    priceBandWhy:
+      "The top of the W2 line, and the premium over the plain W2 PRO is the battery station rather than anything that touches the glass.",
+    shipping: "Prime-eligible on Amazon, so usually a day or two rather than a week.",
+    shippingSpeed: "fast",
+    points: [
+      { label: "Power", value: "Cordless via station", note: "The only machine here that works away from a socket." },
+      { label: "Max suction", value: "5,500 Pa ±500", note: "2,800 Pa while moving, which is the figure that decides grip in motion." },
+      { label: "Power-off hold", value: "30 minutes", note: "Long enough to fetch it. Not long enough to leave the house." },
+      { label: "Glass", value: "Framed and frameless", note: "Sensor-based edge detection rather than a physical stop." },
+    ],
+    suitsYouIf:
+      "You have windows a cable will not reach — a stairwell, a conservatory, a room where the socket is behind a wardrobe — and those are the panes that never get cleaned.",
+    ruleOutIf:
+      "Every window you own has a socket beneath it, in which case you are paying several hundred dollars for a battery station you will never once use.",
+  },
+
+  "ecovacs-winbot-w3-omni": {
+    slug: "ecovacs-winbot-w3-omni",
+    priceBand: "premium",
+    priceBandWhy:
+      "The most expensive window robot we hold, and the only one with WIN-SLAM 5.0 and an 80 ml tank.",
+    shipping: "Prime-eligible on Amazon, so usually a day or two rather than a week.",
+    shippingSpeed: "fast",
+    points: [
+      { label: "Max suction", value: "10,000 Pa", note: "Nearly double the W2 line. Margin rather than a cleaner pane." },
+      { label: "Moving suction", value: "3,300 Pa ±100", note: "The highest in the catalogue, and the number that matters on big glass." },
+      { label: "Water tank", value: "80 ml ±5", note: "A third more than every other WINBOT — a third fewer refill trips." },
+      { label: "Robot weight", value: null, note: "ECOVACS publishes none for this model, unlike the rest of the range." },
+    ],
+    suitsYouIf:
+      "Your windows are genuinely large — sliding doors, picture windows, a wall of glass — and you want the strongest grip and the biggest tank available.",
+    ruleOutIf:
+      "Your windows are the size most windows are, in which case the W2 PRO cleans them just as well and the extra suction buys you nothing you can see.",
+  },
+
+  "ecovacs-winbot-w2-pro": {
+    slug: "ecovacs-winbot-w2-pro",
+    priceBand: "mid",
+    priceBandWhy:
+      "Sits below the two Omni machines and well above the entry models. You are paying for WIN-SLAM 4.0 and six nozzles, not for a battery.",
+    shipping: "Prime-eligible on Amazon, so usually a day or two rather than a week.",
+    shippingSpeed: "fast",
+    points: [
+      { label: "Max suction", value: "5,300 Pa ±500", note: "Overlaps the W2 PRO Omni's 5,500 ±500 almost entirely." },
+      { label: "Protection stages", value: "10", note: "Two fewer than the Omni models. ECOVACS does not publish which two." },
+      { label: "Weight", value: "1.8 kg ±0.1", note: "The heaviest WINBOT, which matters when you lift it overhead." },
+      { label: "Glass", value: "Framed and frameless", note: "Unlike the Cop Rose X5S, which is framed only." },
+    ],
+    suitsYouIf:
+      "You have ordinary windows with power near them and want flagship glass performance without paying for a battery station.",
+    ruleOutIf:
+      "The windows you actually want cleaned are the ones with no socket nearby, which is the one problem this machine cannot solve at any price.",
+  },
+
+  "ecovacs-winbot-w1-pro": {
+    slug: "ecovacs-winbot-w1-pro",
+    priceBand: "budget",
+    priceBandWhy:
+      "The cheapest ECOVACS, and priced as an entry machine rather than a discounted flagship.",
+    shipping: "Prime-eligible on Amazon, so usually a day or two rather than a week.",
+    shippingSpeed: "fast",
+    points: [
+      { label: "Max suction", value: "2,800 Pa", note: "Roughly half the W2 PRO. The lowest maximum of any WINBOT." },
+      { label: "Cleaning modes", value: "3", note: "Seven on the W2 PRO, eight on the W3 Omni." },
+      { label: "Power-off hold", value: null, note: "Claimed by ECOVACS without a duration. Every sibling model gets 30 minutes printed." },
+      { label: "Spray", value: "Dual cross nozzle", note: "Against six nozzles higher up the range. Spread is most of what stops streaking." },
+    ],
+    suitsYouIf:
+      "You want to find out whether a window robot changes your Saturday, on ordinary framed windows you can reach, without spending flagship money to answer the question.",
+    ruleOutIf:
+      "You have large panes, you want scheduling or mapping, or you are working above the first floor and want a published power-off hold rather than a claim without a number.",
+  },
 };
 
 export const snapshotFor = (slug: string | undefined): ProductSnapshot | undefined =>

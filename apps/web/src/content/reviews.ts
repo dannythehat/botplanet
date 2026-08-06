@@ -1823,6 +1823,232 @@ export const REVIEWS: Record<string, ReviewContent> = {
       "table names the 2 Ultra before buying anywhere.",
     lastReviewed: "2026-08-04",
   },
+
+  /* ---------------- WINDOW-CLEANING ROBOTS ----------------
+     Built 6 August 2026. The category had eleven published products, verified
+     manufacturer specifications and captured ASINs since 5 August, and not one
+     review — eleven buy buttons with no page to press them from.
+
+     ONE THING IS TRUE OF EVERY REVIEW BELOW and is stated in each of them: no
+     window ASIN has been identity-verified yet. All eleven were captured from
+     Amazon search results rather than machine-read for Brand and Model Number
+     the way the WYBOT C1 and the Aiper Scuba V3 were. That is a real gap, it
+     is named on every page, and it is the reason no window review prints a
+     price in its prose — the buy box handles price, with its check date, and
+     the offer-truth engine decides whether it may be shown at all. */
+  "ecovacs-winbot-w2-pro-omni": {
+    slug: "ecovacs-winbot-w2-pro-omni",
+    categorySlug: "window-cleaning-robots",
+    eyebrow: "Window robot review",
+    title: "ECOVACS WINBOT W2 PRO Omni review",
+    seoTitle: "ECOVACS WINBOT W2 PRO Omni Review — The Cordless One",
+    metaDescription:
+      "The only window robot here that works away from a socket. What the battery station buys, what it does not, and why the W2 PRO is the better buy for most houses.",
+    verdict:
+      "The only machine in our catalogue that cleans a window nowhere near a plug. That is the whole product — on glass it is a good mid-range robot whose suction is inside the same tolerance range as the cheaper W2 PRO.",
+    bestFor:
+      "Windows a cable will not reach: stairwell landings, conservatories, rooms where the nearest socket is behind furniture.",
+    notIdealFor:
+      "Every window you own has a socket under it, your panes are small, or your glass is sloped.",
+    facts: [
+      { label: "Power", value: "Cordless via station" },
+      { label: "Max suction", value: "5,500 Pa ±500" },
+      { label: "Power-off hold", value: "30 min" },
+      { label: "Glass", value: "Framed and frameless" },
+    ],
+    specGroups: [
+      {
+        heading: "Cleaning",
+        rows: [
+          { label: "Maximum suction", value: "5,500 Pa ±500" },
+          { label: "Suction while moving", value: "2,800 Pa" },
+          { label: "Water tank", value: "60 ml ±5" },
+          { label: "Spray nozzles", value: "6" },
+          { label: "Cleaning modes", value: "7" },
+        ],
+      },
+      {
+        heading: "Navigation and safety",
+        rows: [
+          { label: "Navigation", value: "WIN-SLAM 4.0" },
+          { label: "Protection stages", value: "12" },
+          { label: "Power-off hold", value: "30 minutes" },
+          { label: "Glass types", value: "Framed and frameless" },
+        ],
+      },
+      {
+        heading: "Physical",
+        rows: [
+          { label: "Robot weight", value: "1.6 kg ±0.1" },
+          { label: "Station weight", value: "5.5 kg" },
+          { label: "Robot size", value: "271 × 271 × 77 mm" },
+          { label: "Station battery life", value: null },
+        ],
+      },
+    ],
+    skuNote:
+      "Figures read from ecovacs.com/us on 5 August 2026. ECOVACS sells the W2 PRO, the W2 PRO Omni and the W2S under names differing by one word — check the listing's details table names the W2 PRO Omni before buying.",
+    lastReviewed: "2026-08-06",
+  },
+
+  "ecovacs-winbot-w3-omni": {
+    slug: "ecovacs-winbot-w3-omni",
+    categorySlug: "window-cleaning-robots",
+    eyebrow: "Window robot review",
+    title: "ECOVACS WINBOT W3 Omni review",
+    seoTitle: "ECOVACS WINBOT W3 Omni Review — 10,000 Pa, and Who Needs It",
+    metaDescription:
+      "The strongest window robot ECOVACS publishes numbers for, and the wrong purchase for most houses. What 10,000 Pa and an 80 ml tank actually buy you.",
+    verdict:
+      "The best specification in the catalogue and the wrong machine for ordinary windows. 10,000 Pa maximum, 3,300 Pa ±100 moving, WIN-SLAM 5.0 and the only 80 ml tank here — bought for large panes, wasted on normal ones.",
+    bestFor:
+      "Big glass: sliding doors, picture windows, a wall of it — where a robot travels far and a missed patch shows.",
+    notIdealFor:
+      "Ordinary domestic windows, small panes, or sloped glass, which the W3 does not claim at all.",
+    facts: [
+      { label: "Max suction", value: "10,000 Pa" },
+      { label: "Moving suction", value: "3,300 Pa ±100" },
+      { label: "Water tank", value: "80 ml ±5" },
+      { label: "Navigation", value: "WIN-SLAM 5.0" },
+    ],
+    specGroups: [
+      {
+        heading: "Cleaning",
+        rows: [
+          { label: "Maximum suction", value: "10,000 Pa" },
+          { label: "Suction while moving", value: "3,300 Pa ±100" },
+          { label: "Water tank", value: "80 ml ±5" },
+          { label: "Spray nozzles", value: "6" },
+          { label: "Cleaning modes", value: "8" },
+        ],
+      },
+      {
+        heading: "Navigation and safety",
+        rows: [
+          { label: "Navigation", value: "WIN-SLAM 5.0" },
+          { label: "Protection stages", value: "12" },
+          { label: "Power-off hold", value: "30+ minutes" },
+          { label: "Glass types", value: "Framed and frameless" },
+        ],
+      },
+      {
+        heading: "Physical",
+        rows: [
+          { label: "Robot weight", value: null },
+          { label: "Robot size", value: null },
+        ],
+      },
+    ],
+    skuNote:
+      "Figures read from ecovacs.com/us on 5 August 2026. ECOVACS publishes no weight or dimensions for the W3 Omni on the page we read, and both are printed as undisclosed rather than borrowed from a sibling model.",
+    lastReviewed: "2026-08-06",
+  },
+
+  "ecovacs-winbot-w2-pro": {
+    slug: "ecovacs-winbot-w2-pro",
+    categorySlug: "window-cleaning-robots",
+    eyebrow: "Window robot review",
+    title: "ECOVACS WINBOT W2 PRO review",
+    seoTitle: "ECOVACS WINBOT W2 PRO Review — The One Most People Should Buy",
+    metaDescription:
+      "The flagship without the battery station, and on glass the difference is inside ECOVACS's own tolerance. Why this is the default WINBOT and when the Omni is worth the premium.",
+    verdict:
+      "The WINBOT most people should buy: the same navigation, nozzles, tank and modes as the flagship, with suction inside an overlapping tolerance range, minus a 5.5 kg battery station most houses will never need.",
+    bestFor:
+      "Ordinary framed or frameless windows with a socket somewhere near them.",
+    notIdealFor:
+      "Windows nowhere near power, small panes where the Mini fits better, or sloped glass.",
+    facts: [
+      { label: "Max suction", value: "5,300 Pa ±500" },
+      { label: "Moving suction", value: "2,800 Pa" },
+      { label: "Protection stages", value: "10" },
+      { label: "Weight", value: "1.8 kg ±0.1" },
+    ],
+    specGroups: [
+      {
+        heading: "Cleaning",
+        rows: [
+          { label: "Maximum suction", value: "5,300 Pa ±500" },
+          { label: "Suction while moving", value: "2,800 Pa" },
+          { label: "Water tank", value: "60 ml ±5" },
+          { label: "Spray nozzles", value: "6" },
+          { label: "Cleaning modes", value: "7" },
+        ],
+      },
+      {
+        heading: "Navigation and safety",
+        rows: [
+          { label: "Navigation", value: "WIN-SLAM 4.0" },
+          { label: "Protection stages", value: "10" },
+          { label: "Power-off hold", value: "30 minutes" },
+          { label: "Glass types", value: "Framed and frameless" },
+        ],
+      },
+      {
+        heading: "Physical",
+        rows: [
+          { label: "Robot weight", value: "1.8 kg ±0.1" },
+          { label: "Robot size", value: "271 × 271 × 77.5 mm" },
+        ],
+      },
+    ],
+    skuNote:
+      "Figures read from ecovacs.com/us on 5 August 2026. Three machines share this name family — check the listing's details table names the plain W2 PRO rather than the Omni or the W2S.",
+    lastReviewed: "2026-08-06",
+  },
+
+  "ecovacs-winbot-w1-pro": {
+    slug: "ecovacs-winbot-w1-pro",
+    categorySlug: "window-cleaning-robots",
+    eyebrow: "Window robot review",
+    title: "ECOVACS WINBOT W1 PRO review",
+    seoTitle: "ECOVACS WINBOT W1 PRO Review — The Cheap Way In",
+    metaDescription:
+      "Half the suction of the W2 PRO, three modes instead of seven, and a power-off hold ECOVACS declines to put a number on. Who the entry WINBOT is genuinely right for.",
+    verdict:
+      "The cheapest way into a brand with a real service operation behind it, and honest about being the entry model: 2,800 Pa, three modes, a dual cross nozzle, and the only WINBOT whose power-off hold is claimed without a published duration.",
+    bestFor:
+      "Finding out whether you want one of these at all, and ordinary framed windows on the lower floors.",
+    notIdealFor:
+      "Large panes, anyone who wants scheduling or mapping, or anyone above the first floor who wants the longest published safety margin.",
+    facts: [
+      { label: "Max suction", value: "2,800 Pa" },
+      { label: "Cleaning modes", value: "3" },
+      { label: "Protection", value: "8-tier" },
+      { label: "Power-off hold", value: "Stated, no figure" },
+    ],
+    specGroups: [
+      {
+        heading: "Cleaning",
+        rows: [
+          { label: "Maximum suction", value: "2,800 Pa" },
+          { label: "Suction while moving", value: null },
+          { label: "Water tank", value: "60 ml" },
+          { label: "Spray nozzles", value: "Dual cross nozzle" },
+          { label: "Cleaning modes", value: "3" },
+        ],
+      },
+      {
+        heading: "Navigation and safety",
+        rows: [
+          { label: "Navigation", value: "WIN-SLAM 3.0" },
+          { label: "Protection", value: "8-tier" },
+          { label: "Power-off hold", value: null },
+          { label: "Glass types", value: "Framed and frameless" },
+        ],
+      },
+      {
+        heading: "Physical",
+        rows: [
+          { label: "Robot weight", value: "1.53 kg" },
+          { label: "Robot size", value: "270 × 270 × 77.5 mm" },
+        ],
+      },
+    ],
+    skuNote:
+      "Figures read from ecovacs.com/us on 5 August 2026. ECOVACS publishes no moving-suction figure and no power-off duration for this model; both are printed as undisclosed rather than estimated from the rest of the range.",
+    lastReviewed: "2026-08-06",
+  },
 };
 
 export function reviewFor(slug: string | undefined): ReviewContent | undefined {

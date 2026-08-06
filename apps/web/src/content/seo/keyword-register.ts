@@ -625,6 +625,89 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
     ],
     researchedOn: RUN,
   },
+  /* ---- WINDOW REVIEWS, live 6 August 2026. ----
+     Volumes are from the window run (30981257806, 5 August 2026, $0.2044) and
+     are model-level rather than the category cluster, which is why they are
+     small and real rather than zero. Every one of these cedes the category
+     head term to the hub: the window hub carries the "best" job itself on
+     measured evidence — 6 of the top 10 are identical between "window cleaning
+     robot" and "best window cleaning robot", and NYTimes ranks #1 for both
+     with one article — so there is no best-of page for a review to compete
+     with either. */
+  {
+    path: "/robots/window-cleaning-robots/ecovacs-winbot-w2-pro-omni/",
+    primary: { term: "winbot w2 pro omni", volume: 1120, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "ecovacs winbot w2 pro omni", volume: 1120, difficulty: 0, mustAppear: true },
+      { term: "battery station", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "frameless", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "power-off hold", volume: 0, difficulty: 0, mustAppear: true },
+    ],
+    cededTo: [
+      {
+        term: "window cleaning robot",
+        path: "/robots/window-cleaning-robots/",
+        why: "The 22,900 category cluster belongs to the hub, which carries the best-of job itself. A single-model review ranking for it would be the wrong result for the searcher and would compete with our own stronger page.",
+      },
+    ],
+    researchedOn: RUN_WINDOW,
+  },
+  {
+    path: "/robots/window-cleaning-robots/ecovacs-winbot-w3-omni/",
+    primary: { term: "winbot w3 omni", volume: 150, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "ecovacs winbot w3 omni", volume: 150, difficulty: 0, mustAppear: true },
+      { term: "10,000 pa", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "win-slam 5.0", volume: 0, difficulty: 0, mustAppear: true },
+    ],
+    cededTo: [
+      {
+        term: "window cleaning robot",
+        path: "/robots/window-cleaning-robots/",
+        why: "Category head term, owned by the hub. One review is not a category page and should not try to be.",
+      },
+    ],
+    researchedOn: RUN_WINDOW,
+  },
+  {
+    path: "/robots/window-cleaning-robots/ecovacs-winbot-w2-pro/",
+    primary: { term: "winbot w2 pro", volume: 150, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "ecovacs winbot w2 pro", volume: 150, difficulty: 0, mustAppear: true },
+      { term: "protection stages", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "frameless", volume: 0, difficulty: 0, mustAppear: true },
+    ],
+    cededTo: [
+      {
+        term: "window cleaning robot",
+        path: "/robots/window-cleaning-robots/",
+        why: "Category head term, owned by the hub.",
+      },
+      {
+        term: "winbot w2 pro omni",
+        path: "/robots/window-cleaning-robots/ecovacs-winbot-w2-pro-omni/",
+        why: "The Omni has its own review and eight times the volume. This page names it constantly as the comparison, and must not outrank it for its own model name.",
+      },
+    ],
+    researchedOn: RUN_WINDOW,
+  },
+  {
+    path: "/robots/window-cleaning-robots/ecovacs-winbot-w1-pro/",
+    primary: { term: "winbot w1 pro", volume: 100, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "ecovacs winbot w1 pro", volume: 100, difficulty: 0, mustAppear: true },
+      { term: "streaking", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "8-tier", volume: 0, difficulty: 0, mustAppear: true },
+    ],
+    cededTo: [
+      {
+        term: "window cleaning robot",
+        path: "/robots/window-cleaning-robots/",
+        why: "Category head term, owned by the hub.",
+      },
+    ],
+    researchedOn: RUN_WINDOW,
+  },
   {
     path: "/compare/robotic-pool-cleaners/",
     /* Page 4 of the pool map, and the last one on it that was still a stub —

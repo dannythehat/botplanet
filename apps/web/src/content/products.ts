@@ -804,6 +804,30 @@ export const PRODUCT_ID: Record<string, string> = {
   "dolphin-e10": "prod-dolphin-e10",
   "dolphin-proteus-dx4-plus": "prod-dolphin-proteus-dx4-plus",
   "aiper-scuba-v3-ai-vision": "prod-aiper-scuba-v3-ai-vision",
+
+  /* WINDOW-CLEANING ROBOTS. Added 6 August 2026 with the review set.
+
+     These eleven have been published in D1 since 5 August with verified
+     manufacturer specifications, and the repo did not know they existed —
+     every map in this file was pool-only. The visible symptom was that the
+     internal-link anchor test could not confirm a window product was active,
+     because as far as the repo was concerned there was no such product.
+
+     Slug-to-ID only, deliberately. The editorial copy for these lives in
+     content/reviews.ts and src/reviews/*.md, which is where the window
+     category was built; PRODUCTS below is pool-era editorial that predates
+     the review template and is not worth duplicating for a second category. */
+  "ecovacs-winbot-w2-pro-omni": "prod-ecovacs-winbot-w2-pro-omni",
+  "ecovacs-winbot-w3-omni": "prod-ecovacs-winbot-w3-omni",
+  "ecovacs-winbot-w2-pro": "prod-ecovacs-winbot-w2-pro",
+  "ecovacs-winbot-w2s": "prod-ecovacs-winbot-w2s",
+  "ecovacs-winbot-w1-pro": "prod-ecovacs-winbot-w1-pro",
+  "ecovacs-winbot-mini": "prod-ecovacs-winbot-mini",
+  "hutt-s55-pro": "prod-hutt-s55-pro",
+  "mamibot-w120-dp": "prod-mamibot-w120-dp",
+  "hobot-2s": "prod-hobot-2s",
+  "hobot-298": "prod-hobot-298",
+  "cop-rose-x5s": "prod-cop-rose-x5s",
 };
 
 /** Editorial records with the stable productId attached, keyed by slug (route id). */

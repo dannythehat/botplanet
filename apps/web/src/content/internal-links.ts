@@ -318,6 +318,140 @@ export const CATEGORY_ANCHORS: Record<string, InternalAnchor[]> = {
     },
   ],
 
+  /* WINDOW-CLEANING ROBOTS. Added 6 August 2026 with the review set — the
+     category had eleven published products and no anchors at all, so eleven
+     reviews would have shipped linking to nothing and passing no signal to
+     each other or to the hub.
+
+     The order matters here more than it does for pool. "frameless glass" must
+     sit above "frameless", and both above "glass", or the shorter anchor
+     swallows the longer one and sends a reader asking the category's hardest
+     question to a general page. editorial.test.ts enforces longest-first. */
+  "window-cleaning-robots": [
+    {
+      anchor: "frameless glass",
+      href: "/robots/window-cleaning-robots/#glass-type",
+      why: "The category's biggest exclusion and the question most likely to make a purchase wrong. A robot that cannot hold an unframed edge is not a cheaper robot, it is the wrong one, and the hub is where that is explained rather than repeated in eleven reviews.",
+      status: "live",
+    },
+    {
+      anchor: "safety rope",
+      href: "/robots/window-cleaning-robots/#safety",
+      why: "Every reader above the ground floor asks the same question — what happens when the power cuts — and the answer belongs in one place the reviews can point at.",
+      status: "live",
+    },
+    {
+      anchor: "power-off protection",
+      href: "/robots/window-cleaning-robots/#safety",
+      why: "The mechanism behind the rope answer: how long the machine holds the glass with no mains. Named wherever a review quotes a hold time.",
+      status: "live",
+    },
+    {
+      anchor: "streaking",
+      href: "/robots/window-cleaning-robots/#results",
+      why: "The most common complaint about this whole category, and the one thing a spec sheet cannot predict. Reviews reach it constantly; the explanation lives on the hub.",
+      status: "live",
+    },
+    {
+      anchor: "does the window open",
+      href: "/botmatch/window-cleaning-robots/",
+      why: "The first question BotMatch asks and the one that eliminates half the catalogue for some readers. Named in prose exactly where a reader realises it applies to them.",
+      status: "live",
+    },
+    {
+      anchor: "compare",
+      href: "/compare/window-cleaning-robots/",
+      why: "The comparison table is the honest next step for a reader who has decided one model is close but wants it beside the others.",
+      status: "live",
+    },
+    {
+      anchor: "BotMatch",
+      href: "/botmatch/window-cleaning-robots/",
+      why: "Named where the reader is being told their glass decides the answer, which is exactly the moment the tool is useful.",
+      status: "live",
+    },
+    {
+      anchor: "review methodology",
+      href: "/review-methodology/",
+      why: "Any claim about how we check things should be one click from the page that says how we check things.",
+      status: "live",
+    },
+    {
+      anchor: "editorial policy",
+      href: "/editorial-policy/",
+      why: "Wherever a page says commission did not pick the winner, the reader should be able to check that claim in one click.",
+      status: "live",
+    },
+
+    /* ---- The eleven machines. ---- */
+    {
+      anchor: "WINBOT W2 PRO Omni",
+      href: "/robots/window-cleaning-robots/ecovacs-winbot-w2-pro-omni/",
+      why: "The flagship and the only one with a portable battery station. Named wherever a review reaches the point that there is no socket by the window.",
+      status: "live",
+    },
+    {
+      anchor: "WINBOT W3 Omni",
+      href: "/robots/window-cleaning-robots/ecovacs-winbot-w3-omni/",
+      why: "The top of the range and the highest stated suction in the catalogue. Named wherever a review says a bigger pane needs a stronger machine.",
+      status: "live",
+    },
+    {
+      anchor: "WINBOT W2 PRO",
+      href: "/robots/window-cleaning-robots/ecovacs-winbot-w2-pro/",
+      why: "The mid flagship without the station. The machine most readers should compare the Omni against before paying for the battery.",
+      status: "live",
+    },
+    {
+      anchor: "WINBOT W2S",
+      href: "/robots/window-cleaning-robots/ecovacs-winbot-w2s/",
+      why: "The slimmer W2 variant with TruEdge scrubbers. Named wherever edge coverage is the point at issue.",
+      status: "live",
+    },
+    {
+      anchor: "WINBOT W1 PRO",
+      href: "/robots/window-cleaning-robots/ecovacs-winbot-w1-pro/",
+      why: "The cheap way into ECOVACS. Named wherever a review tells a reader they are being sold more machine than their windows need.",
+      status: "live",
+    },
+    {
+      anchor: "WINBOT Mini",
+      href: "/robots/window-cleaning-robots/ecovacs-winbot-mini/",
+      why: "The smallest and cheapest, and the only one a renter would sensibly buy. The answer to small panes and to storage.",
+      status: "live",
+    },
+    {
+      anchor: "HUTT S55 Pro",
+      href: "/robots/window-cleaning-robots/hutt-s55-pro/",
+      why: "The only machine in the catalogue claiming sloped glass, which is the category's hardest exclusion. Named wherever a review rules a reader out on glass angle.",
+      status: "live",
+    },
+    {
+      anchor: "Mamibot W120-DP",
+      href: "/robots/window-cleaning-robots/mamibot-w120-dp/",
+      why: "The third brand and the high-rise rating. Named wherever a review discusses working above the ground floor.",
+      status: "live",
+    },
+    {
+      anchor: "HOBOT 2S",
+      href: "/robots/window-cleaning-robots/hobot-2s/",
+      why: "Dual replaceable tanks and ultrasonic spray. Named wherever refilling mid-clean is the complaint.",
+      status: "live",
+    },
+    {
+      anchor: "HOBOT 298",
+      href: "/robots/window-cleaning-robots/hobot-298/",
+      why: "The budget HOBOT. Named wherever ultrasonic spray is being weighed against a pump.",
+      status: "live",
+    },
+    {
+      anchor: "Cop Rose X5S",
+      href: "/robots/window-cleaning-robots/cop-rose-x5s/",
+      why: "Remote control and no app at all, which for some readers is the feature rather than the compromise. The cheapest machine in the catalogue.",
+      status: "live",
+    },
+  ],
+
   "robotic-pool-cleaners": [
     {
       anchor: "waterline",
