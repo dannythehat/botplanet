@@ -4,7 +4,8 @@ import ProductCard from "../../../components/ProductCard.astro";
 import { journeyFor } from "../../../content/journeys";
 import { getDb, schema } from "../../../lib/db";
 import { usd, titleCase } from "../../../lib/format";
-import { and, eq, inArray } from "drizzle-orm";
+import { cataloguePrices, checkedNote } from "../../../lib/catalogue-prices";
+import { and, eq } from "drizzle-orm";
 import { breadcrumbsFor } from "../../../lib/routing";
 import { collectionPageSchema, imageObjectSchema, faqPageSchema, itemListSchema } from "../../../lib/seo";
 import CategoryHero from "../../../components/CategoryHero.astro";
@@ -40,17 +41,13 @@ const products = await db
   .from(schema.products)
   .where(and(eq(schema.products.categoryId, cat.id), eq(schema.products.status, "published")));
 
-const ids = products.map((p) => p.id);
-const offers = ids.length
-  ? await db.select().from(schema.offers).where(inArray(schema.offers.productId, ids))
-  : [];
-
-function minPrice(productId: string): number | null {
-  const prices = offers
-    .filter((o) => o.productId === productId && o.basePriceMinor != null)
-    .map((o) => o.basePriceMinor as number);
-  return prices.length ? Math.min(...prices) : null;
-}
+/* PRICES COME FROM THE CHECKER, NOT FROM THE SEEDED OFFER ROWS.
+   This used to read `offers.base_price_minor` and print the lowest — a figure
+   with no check date and no freshness gate. On 6 August 2026 that was found
+   publishing the retired Dolphin Premier's $1,299 against the BuBlue Bubot,
+   which the checker had read at $799.97 two days earlier: the record had
+   changed product, the offer row had not. See lib/catalogue-prices.ts. */
+const prices = await cataloguePrices(Astro.locals.runtime.env.DB);
 const crumbs = breadcrumbsFor(Astro.url.pathname);
 
 const hero = heroFor(category);
@@ -286,8 +283,8 @@ const pageSchema = hero
           name={p.name}
           classification={titleCase(p.productClass)}
           meta={[titleCase(p.powerType), ...(p.environments as string[]).slice(0, 2).map(titleCase)]}
-          price={minPrice(p.id) != null ? `from ${usd(minPrice(p.id))}` : null}
-          priceNote="Snapshot price · confirm at retailer"
+          price={prices.get(p.id) ? usd(prices.get(p.id)!.priceMinor) : null}
+          priceNote={prices.get(p.id) ? checkedNote(prices.get(p.id)!.checkedDate) : undefined}
           productId={p.id}
           variant={i}
           saveId={p.id}
