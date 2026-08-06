@@ -894,7 +894,7 @@ const POOL_ROUND_TWO: PagePlan[] = [
     path: "/best-robots/robotic-pool-cleaners/above-ground-pools/",
     category: "robotic-pool-cleaners",
     type: "best-of",
-    status: "researched",
+    status: "built",
     intent: "Find a cleaner that will not wreck my vinyl liner.",
     primary: { term: "robotic pool cleaner for above ground pool", volume: 2400, difficulty: 0 },
     secondary: [

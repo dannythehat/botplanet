@@ -639,6 +639,29 @@ export const ROUTES: RouteDef[] = [
     summary: "The seven cordless machines ranked, and the honest case for buying corded instead.",
   },
   {
+    /* Not on the 1 August map. The second pool run measured "robotic pool
+       cleaner for above ground pool" at 2,400/mo, KD 0 — the first run saw
+       above-ground at 140 and folded it into the best-of, which was right on
+       the number it had.
+
+       A page rather than a section because the above-ground rating is a
+       COMPATIBILITY claim, not a performance one: six of our ten cleaners are
+       not rated for a vinyl liner at all, so this reader is choosing from a
+       different shortlist. */
+    path: `/best-robots/${CAT}/above-ground-pools/`,
+    label: "Best above-ground pool cleaners",
+    breadcrumbLabel: "Above-ground pools",
+    section: "best",
+    parent: `/best-robots/${CAT}/`,
+    status: "live",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: true,
+    indexable: true,
+    category: CAT,
+    summary: "The four machines rated for a vinyl liner, and why the other six are not.",
+  },
+  {
     path: `/guides/${CAT}/`,
     label: "Pool cleaner guides",
     breadcrumbLabel: "Robotic Pool Cleaners",

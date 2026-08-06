@@ -709,6 +709,47 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
     researchedOn: RUN_WINDOW,
   },
   {
+    path: "/best-robots/robotic-pool-cleaners/above-ground-pools/",
+    /* Proved by the SECOND pool run, 6 August 2026. The 1 August run measured
+       above-ground at 140 and merged it into the best-of as a section — right
+       on the number it had, and this phrasing was not in that seed list.
+
+       At 2,400 with zero difficulty and a $4.30 CPC it is the second-strongest
+       commercial term in the category after cordless, and the only new page
+       from that run that could be built the same day: four catalogue machines
+       are already rated for a vinyl liner. */
+    primary: { term: "robotic pool cleaner for above ground pool", volume: 2400, difficulty: 0, mustAppear: true },
+    secondary: [
+      /* The hyphenated plural is how the phrase is actually written in a
+         heading, and Google treats it as the same query. Declared so the page
+         can say its own name without the cannibalisation guard reading the
+         parent's ceded term inside it. */
+      { term: "robotic pool cleaners for above-ground pools", volume: 2400, difficulty: 0, mustAppear: true },
+      { term: "above ground", volume: 2400, difficulty: 0, mustAppear: true },
+      { term: "vinyl", volume: 20, difficulty: 0, mustAppear: true },
+      { term: "liner", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "small pool", volume: 260, difficulty: 0, mustAppear: true },
+    ],
+    cededTo: [
+      {
+        term: "best robotic pool cleaner",
+        path: "/best-robots/robotic-pool-cleaners/",
+        why: "The general ranking belongs to the parent page, which carries above-ground as one section among nine. This page takes the segment term only, and the two are not competing for the same result set.",
+      },
+      {
+        term: "robotic pool cleaner",
+        path: "/robots/robotic-pool-cleaners/",
+        why: "The 40,500 category head term belongs to the hub. A segment page reaching for it would put two of our own pages into one result.",
+      },
+      {
+        term: "cordless robotic pool cleaner",
+        path: "/best-robots/robotic-pool-cleaners/cordless/",
+        why: "Three of the four machines here are cordless and the page says so, but the 22,200/mo commercial term belongs to the page built for it.",
+      },
+    ],
+    researchedOn: RUN,
+  },
+  {
     path: "/compare/robotic-pool-cleaners/",
     /* Page 4 of the pool map, and the last one on it that was still a stub —
        a bare table with an H1 over it, no register row and a price column.
