@@ -1,5 +1,28 @@
 # Security Robots — structural findings (free SERP reconnaissance)
 
+> ## RULING, 6 August 2026 — owner decision
+>
+> **There is no security-robots category.** The section is not built, and the
+> one cluster in it with real commercial demand — roaming pet-camera and
+> home-monitoring robots — is **merged into companion robots**.
+>
+> The evidence for that sits below and is worth keeping: `security robot`
+> returns Boston Dynamics, Knightscope, a USPTO patent and an arXiv paper;
+> `best home security robot` returns Adobe Stock twice in the top eight;
+> `pet camera robot` returns Amazon, Enabot, Walmart and six publisher
+> roundups. Same machines. Only one of the two queries converts.
+>
+> **Seed inventory moved** to `docs/seo/seeds/companion-robots.json`, which
+> carries the whole pet-camera and home-monitoring cluster forward.
+> `docs/seo/seeds/security-robots.json` is retired and deleted — nothing was
+> ever spent against it.
+>
+> **What the paid run must still settle**, now against companion rather than
+> security: whether pet cameras and desk companions are one query family or
+> two. They are the same shelf to us. They may be different SERPs to Google,
+> and if they are, that is a second URL — decided by measurement, as always.
+
+
 **Date:** 2026-08-06 · **Cost: $0.00** · Stage 1.5, between the seed inventory
 and the paid run.
 
