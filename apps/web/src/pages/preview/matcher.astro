@@ -4,6 +4,9 @@
 export const prerender = true;
 
 import PoolMatcher from "../../components/PoolMatcher.astro";
+import { questionsFor, tasksFor } from "../../content/matcher-questions";
+
+const SLUG = "robotic-pool-cleaners";
 
 import "../../styles/tokens.css";
 import "../../styles/base.css";
@@ -22,7 +25,12 @@ import "../../styles/metal-theme.css";
   </head>
   <body>
     <main class="wrap" style="padding-top:2.5rem;padding-bottom:5rem;">
-      <PoolMatcher categorySlug="robotic-pool-cleaners" categoryName="Robotic Pool Cleaners" />
+      <PoolMatcher
+        categorySlug={SLUG}
+        categoryName="Robotic Pool Cleaners"
+        questions={questionsFor(SLUG)!}
+        tasks={tasksFor(SLUG)!}
+      />
     </main>
   </body>
 </html>

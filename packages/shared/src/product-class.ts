@@ -23,6 +23,7 @@ export const PRODUCT_CLASSES = [
   "pressure_side", // pressure-side cleaner (booster-pump)
   "suction_side", // suction-side cleaner
   "window_cleaner", // glass-climbing window robot — NOT a pool machine
+  "lawn_mower", // robotic lawn mower — not a cleaner of anything
 ] as const;
 
 export type ProductClass = (typeof PRODUCT_CLASSES)[number];
@@ -46,6 +47,14 @@ export const CLEANING_SURFACES = [
   "glass_interior",
   "glass_exterior",
   "glass_sloped",
+  // Lawn. A mower cleans nothing, so the name of this list is wrong for it —
+  // what the column really holds is "capabilities the customer can ask for and
+  // the product either has or has not". Renaming the list would touch a stored
+  // D1 column across three categories, so the honest move is to say so here
+  // rather than to leave a reader wondering why a mower has a cleaning surface.
+  "grass_flat", // ordinary level lawn — every mower does this
+  "grass_slopes", // banks and inclines past a gentle grade
+  "grass_zones", // separate lawns the machine reaches on its own
 ] as const;
 export type CleaningSurface = (typeof CLEANING_SURFACES)[number];
 
@@ -67,6 +76,14 @@ export const ENVIRONMENTS = [
   // Glass
   "framed_glass",
   "frameless_glass",
+  // Lawn. The equivalent make-or-break is not the shape of the garden, it is
+  // whether the machine can see the sky. A mower that positions itself by
+  // satellite is defeated by a canopy of mature trees, and no setting fixes
+  // it; a boundary wire, LiDAR or camera system does not care. So the
+  // environment axis for lawn is overhead cover, and it is a hard exclusion
+  // for the same reason frameless glass is.
+  "open_sky", // clear view overhead — satellite positioning works
+  "tree_cover", // canopy or a tall building nearby — it does not
 ] as const;
 export type Environment = (typeof ENVIRONMENTS)[number];
 

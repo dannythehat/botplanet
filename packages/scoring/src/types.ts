@@ -1,21 +1,45 @@
 import type {
   CleaningSurface,
-  PoolEnvironment,
+  Environment,
   PowerType,
   ProductClass,
 } from "@botplanet/shared";
 
-/** Customer answers to the pool questionnaire. */
-export interface PoolAnswers {
-  environment: PoolEnvironment;
-  primary_need: "floor_debris" | "full_clean" | "surface_debris";
+/**
+ * Customer answers to a BotMatch questionnaire.
+ *
+ * ONE SHAPE, MANY CATEGORIES. Every category has its own questions — see
+ * apps/web/src/content/matcher-questions.ts, where the sets are independent by
+ * rule — but they all fold down to these axes, because these are the axes the
+ * deterministic scorer knows how to weigh.
+ *
+ * `primary_need` is a plain string rather than the pool union it was until
+ * 6 August 2026. It is a key into the config's `classEligibility.byPrimaryNeed`
+ * map, and every category names its own needs: a pool reader picks
+ * "full_clean", a window reader picks "exterior_glass", a lawn reader picks
+ * "large_lawn". Typing it as the pool values made it impossible to add a
+ * category without editing the engine.
+ *
+ * The two size fields keep their pool names because they are stored D1 columns
+ * and a rename is a migration, not an edit. They are read generically:
+ * `pool_area_sqft` is the field a lawn reader's acreage lands in, and it is
+ * compared against the mower's rated area. Worth renaming when something else
+ * forces a migration on those columns.
+ */
+export interface MatchAnswers {
+  environment: Environment;
+  primary_need: string;
   desired_cleans: CleaningSurface[];
   power_pref: PowerType | "no_pref";
   budget_tier: "budget" | "mid" | "premium" | "ultra" | "no_pref";
+  /** Longest run, where a maker publishes a length. Lawn never uses this. */
   pool_length_ft: number | null;
-  /** Surface area, when the reader gives it instead of a length. */
+  /** Area, where the reader gives one instead. Lawn always uses this. */
   pool_area_sqft?: number | null;
 }
+
+/** @deprecated Use MatchAnswers — kept so existing imports keep compiling. */
+export type PoolAnswers = MatchAnswers;
 
 /**
  * A product as seen by the SUITABILITY scorer.
@@ -29,7 +53,7 @@ export interface PoolAnswers {
 export interface SuitabilityCandidate {
   productId: string;
   productClass: ProductClass;
-  environments: PoolEnvironment[];
+  environments: Environment[];
   cleans: CleaningSurface[];
   powerType: PowerType;
   priceTier: "budget" | "mid" | "premium" | "ultra";

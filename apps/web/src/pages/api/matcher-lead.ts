@@ -15,7 +15,7 @@
    ============================================================ */
 
 import type { APIRoute } from "astro";
-import { MATCHER_QUESTIONS } from "../../content/matcher-questions";
+import { questionsFor } from "../../content/matcher-questions";
 import { SITE } from "../../lib/site";
 
 export const prerender = false;
@@ -31,23 +31,62 @@ const json = (data: unknown, status = 200) =>
 const esc = (s: string) =>
   s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
-/** Answers in question order, with their labels — for the team email. */
-function orderedAnswers(answers: Record<string, string>) {
-  return MATCHER_QUESTIONS.filter((q) => answers[q.id]).map((q) => ({
-    question: q.q,
-    answer: answers[q.id],
-  }));
+/**
+ * Answers in question order, with their labels — for the team email.
+ *
+ * Reads the CATEGORY'S OWN question set. It read one global array until
+ * 6 August 2026, which meant a window lead's email was rendered against pool
+ * questions and silently dropped every answer whose id the pool set did not
+ * contain. An unknown category falls back to the raw ids rather than losing
+ * the lead's answers, because a slightly ugly email beats a missing one.
+ */
+function orderedAnswers(categorySlug: string | undefined, answers: Record<string, string>) {
+  const questions = questionsFor(categorySlug);
+  if (!questions) {
+    return Object.entries(answers).map(([id, answer]) => ({ question: id, answer }));
+  }
+  return questions
+    .filter((q) => answers[q.id])
+    .map((q) => ({ question: q.q, answer: answers[q.id]! }));
 }
 
-/** Weaves the person's own answers back into a sentence. */
-function reflect(a: Record<string, string>): string {
-  const bits: string[] = [];
-  if (a.environment) bits.push(`you have ${a.environment.toLowerCase()} pool`);
-  if (a.pool_length) bits.push(`it runs ${a.pool_length.toLowerCase()}`);
-  if (a.primary_need) bits.push(`the job is ${a.primary_need.toLowerCase()}`);
-  if (a.power_pref) bits.push(`you'd prefer ${a.power_pref.toLowerCase()}`);
-  if (!bits.length) return "";
-  return bits.length > 1 ? `${bits.slice(0, -1).join(", ")} and ${bits[bits.length - 1]}` : bits[0];
+/**
+ * Weaves the person's own answers back into a sentence.
+ *
+ * Per category, because "you have in-ground pool" is nonsense in a window
+ * lead's email. Each category names the three or four answers worth echoing
+ * back; anything else is left out rather than guessed at.
+ */
+function reflect(categorySlug: string | undefined, a: Record<string, string>): string {
+  const lower = (s: string) => s.toLowerCase();
+  let bits: (string | null)[] = [];
+
+  if (categorySlug === "window-cleaning-robots") {
+    bits = [
+      a.environment ? `your glass is ${lower(a.environment)}` : null,
+      a.primary_need ? `the windows that matter are ${lower(a.primary_need)}` : null,
+      a.window_height ? `they are ${lower(a.window_height)}` : null,
+      a.power_pref ? `on power, ${lower(a.power_pref)}` : null,
+    ];
+  } else if (categorySlug === "robotic-lawn-mowers") {
+    bits = [
+      a.lawn_size ? `the lawn is ${lower(a.lawn_size)}` : null,
+      a.environment ? `it is ${lower(a.environment)}` : null,
+      a.primary_need ? `the ground is ${lower(a.primary_need)}` : null,
+      a.boundary_pref ? `on a boundary wire, ${lower(a.boundary_pref)}` : null,
+    ];
+  } else {
+    bits = [
+      a.environment ? `you have ${lower(a.environment)} pool` : null,
+      a.pool_length ? `it runs ${lower(a.pool_length)}` : null,
+      a.primary_need ? `the job is ${lower(a.primary_need)}` : null,
+      a.power_pref ? `you'd prefer ${lower(a.power_pref)}` : null,
+    ];
+  }
+
+  const kept = bits.filter((b): b is string => Boolean(b));
+  if (!kept.length) return "";
+  return kept.length > 1 ? `${kept.slice(0, -1).join(", ")} and ${kept[kept.length - 1]}` : kept[0]!;
 }
 
 interface LeadBody {
@@ -67,11 +106,28 @@ interface LeadBody {
 
 function renderReply(opts: {
   name: string;
+  categorySlug: string | undefined;
   answers: Record<string, string>;
   productName: string | null;
   resultUrl: string | null;
 }) {
-  const r = reflect(opts.answers);
+  const r = reflect(opts.categorySlug, opts.answers);
+  /* What the suitability scorer can actually see, named per category. The
+     integrity claim in this email has to describe the real inputs, and for a
+     window lead "pool type, size, coverage" describes nothing that happened. */
+  const seen =
+    opts.categorySlug === "window-cleaning-robots"
+      ? "framed or frameless glass, which glass you need reached, power and budget band"
+      : opts.categorySlug === "robotic-lawn-mowers"
+        ? "lawn size, tree cover, slopes, separate zones and budget band"
+        : "pool type, size, coverage, power and budget band";
+  /* "your pool" in the sign-off, or the right noun for the category. */
+  const theirs =
+    opts.categorySlug === "window-cleaning-robots"
+      ? "your windows"
+      : opts.categorySlug === "robotic-lawn-mowers"
+        ? "your lawn"
+        : "your pool";
   const p = (t: string) =>
     `<p style="margin:0 0 15px;color:#1f2430;font-size:15px;line-height:1.55;">${t}</p>`;
 
@@ -81,7 +137,7 @@ function renderReply(opts: {
 
   const pick = opts.productName
     ? `Based on that, the robot that fits you best right now is <strong>${esc(opts.productName)}</strong>.`
-    : `Your answers narrow it down, but I want to check a couple of things before naming one — reply and tell me a bit more about your pool.`;
+    : `Your answers narrow it down, but I want to check a couple of things before naming one — reply and tell me a bit more.`;
 
   const link = opts.resultUrl
     ? p(
@@ -100,11 +156,11 @@ function renderReply(opts: {
     ${link}
     ${p(
       `One thing worth knowing about how we pick: the part of BotMatch that chooses <em>which robot</em> ` +
-        `suits you cannot see prices, retailers or commission at all. It only sees pool type, size, coverage, ` +
-        `power and budget band. Commission is only ever used to break a tie between shops selling the same ` +
+        `suits you cannot see prices, retailers or commission at all. It only sees ${seen}. ` +
+        `Commission is only ever used to break a tie between shops selling the same ` +
         `machine on the same terms — never to decide the machine.`,
     )}
-    ${p(`If anything about your pool doesn't fit what I've said, just reply — it comes straight to me.`)}
+    ${p(`If anything about ${theirs} doesn't fit what I've said, just reply — it comes straight to me.`)}
     ${p(`Danny<br>BotPlanet`)}
     <p style="margin:18px 0 0;color:#9aa0ad;font-size:11px;line-height:1.5;">
       You're getting this because you asked for a recommendation through BotMatch. BotPlanet earns a
@@ -130,7 +186,7 @@ function renderReply(opts: {
     `How we pick: the part of BotMatch that chooses which robot suits you cannot see prices, retailers or`,
     `commission. Commission only ever breaks a tie between shops selling the same machine on the same terms.`,
     ``,
-    `If anything doesn't fit your pool, just reply — it comes straight to me.`,
+    `If anything doesn't fit ${theirs}, just reply — it comes straight to me.`,
     ``,
     `Danny`,
     `BotPlanet`,
@@ -206,7 +262,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
   /* ---- notify + reply ---- */
   const apiKey = env?.RESEND_API_KEY as string | undefined;
   if (apiKey) {
-    const rows = orderedAnswers(answers)
+    const rows = orderedAnswers(body.categorySlug, answers)
       .map((a) => `<tr><td style="padding:4px 10px 4px 0;color:#666">${esc(a.question)}</td><td style="padding:4px 0"><strong>${esc(a.answer)}</strong></td></tr>`)
       .join("");
 
@@ -230,6 +286,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
     const delayMin = 50 + Math.floor(Math.random() * 31);
     const { subject, html, text } = renderReply({
       name: firstName,
+      categorySlug: body.categorySlug,
       answers,
       productName: body.productName ?? null,
       resultUrl,

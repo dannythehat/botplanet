@@ -13,6 +13,19 @@ import { loadScoringConfig } from "../../lib/scoring-config";
 
 const freshnessRank = (c: string | null) => (c === "live" ? 2 : c === "recently_verified" ? 1 : 0);
 
+/**
+ * Which stored scoring config each category is judged by.
+ *
+ * Deliberately an explicit map rather than a derived string: adding a category
+ * should require someone to look at the weights and decide they are right, not
+ * inherit whatever a naming convention happens to resolve to.
+ */
+const SCORING_CONFIG_BY_CATEGORY: Record<string, string> = {
+  "robotic-pool-cleaners": "sc-pool-v1",
+  "window-cleaning-robots": "sc-window-v1",
+  "robotic-lawn-mowers": "sc-lawn-v1",
+};
+
 export const POST: APIRoute = async ({ request, locals }) => {
   const db = getDb(locals);
   let body: { category?: string; answers?: PoolAnswers };
@@ -34,7 +47,20 @@ export const POST: APIRoute = async ({ request, locals }) => {
     .from(schema.products)
     .where(and(eq(schema.products.categoryId, cat.id), eq(schema.products.status, "published")));
 
-  const config = await loadScoringConfig(db, "sc-pool-v1");
+  /* One config per category, and NO fallback.
+     This read "sc-pool-v1" for every category until 6 August 2026. The pool
+     config's class eligibility lists only full_cleaner and surface_skimmer, so
+     scoring a window robot against it excluded all eleven as
+     `class_not_eligible` and returned nothing — a matcher that always failed,
+     silently, because the funnel is built to survive a scoring failure.
+     A category without its own config gets an error, not somebody else's
+     weights. Config ids follow the category slug so a new category cannot
+     accidentally inherit one. */
+  const configId = SCORING_CONFIG_BY_CATEGORY[cat.slug];
+  if (!configId) {
+    return json({ error: "No scoring config for this category yet" }, 501);
+  }
+  const config = await loadScoringConfig(db, configId);
   if (!config) return json({ error: "Scoring config unavailable" }, 500);
 
   const candidates: SuitabilityCandidate[] = products.map((p) => ({
