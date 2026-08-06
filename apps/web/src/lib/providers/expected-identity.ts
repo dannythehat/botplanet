@@ -22,6 +22,11 @@ export interface IdentityExpectation {
   exception?: ExceptionReason;
 }
 
+/* @extension-point per-product | required | The price checker does not know the
+   product exists, so its page shows no price and never will — silently. Two
+   products sat like this for days. A product must be here OR explicitly listed
+   as awaiting discovery; offers.test.ts fails the build if it is neither. This
+   is also what catches a retailer swapping the listing for a sibling model. */
 export const EXPECTED_IDENTITIES: IdentityExpectation[] = [
   {
     productId: "prod-dolphin-nautilus-cc-plus",

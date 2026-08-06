@@ -32,6 +32,9 @@ export interface CategoryHeroContent {
   imageLayout?: "above" | "beside";
 }
 
+/* @extension-point per-category | required | The page falls back to a bare
+   generic heading: no H1 of its own, no <title>, no meta description, no OG
+   image and no CollectionPage schema. It renders, so nothing complains. */
 export const CATEGORY_HERO: Record<string, CategoryHeroContent> = {
   /* Keyword evidence: DataForSEO runs 31073327230 and 31074893036,
      2026-08-06, $0.22428 combined. Full working in

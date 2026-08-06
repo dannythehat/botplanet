@@ -57,6 +57,10 @@ function orderedAnswers(categorySlug: string | undefined, answers: Record<string
  * lead's email. Each category names the three or four answers worth echoing
  * back; anything else is left out rather than guessed at.
  */
+/* @extension-point per-category | optional | The lead email falls through to
+   the pool wording and tells a window or lawn buyer what we understood about
+   their "pool". The `seen` and `theirs` maps in renderReply below are the same
+   decision and need the same entry. */
 function reflect(categorySlug: string | undefined, a: Record<string, string>): string {
   const lower = (s: string) => s.toLowerCase();
   let bits: (string | null)[] = [];
@@ -75,13 +79,19 @@ function reflect(categorySlug: string | undefined, a: Record<string, string>): s
       a.primary_need ? `the ground is ${lower(a.primary_need)}` : null,
       a.boundary_pref ? `on a boundary wire, ${lower(a.boundary_pref)}` : null,
     ];
-  } else {
+  } else if (categorySlug === "robotic-pool-cleaners") {
     bits = [
       a.environment ? `you have ${lower(a.environment)} pool` : null,
       a.pool_length ? `it runs ${lower(a.pool_length)}` : null,
       a.primary_need ? `the job is ${lower(a.primary_need)}` : null,
       a.power_pref ? `you'd prefer ${lower(a.power_pref)}` : null,
     ];
+  } else {
+    /* A category with no entry above gets no reflection rather than pool's.
+       Pool used to be the fallback, which is how a window lead would have been
+       told what we understood about their pool. The opening paragraph reads
+       fine without it — renderReply has a second version for exactly this. */
+    bits = [];
   }
 
   const kept = bits.filter((b): b is string => Boolean(b));
@@ -115,19 +125,20 @@ function renderReply(opts: {
   /* What the suitability scorer can actually see, named per category. The
      integrity claim in this email has to describe the real inputs, and for a
      window lead "pool type, size, coverage" describes nothing that happened. */
-  const seen =
-    opts.categorySlug === "window-cleaning-robots"
-      ? "framed or frameless glass, which glass you need reached, power and budget band"
-      : opts.categorySlug === "robotic-lawn-mowers"
-        ? "lawn size, tree cover, slopes, separate zones and budget band"
-        : "pool type, size, coverage, power and budget band";
+  const SEEN: Record<string, string> = {
+    "robotic-pool-cleaners": "pool type, size, coverage, power and budget band",
+    "window-cleaning-robots":
+      "framed or frameless glass, which glass you need reached, power and budget band",
+    "robotic-lawn-mowers": "lawn size, tree cover, slopes, separate zones and budget band",
+  };
+  const seen = SEEN[opts.categorySlug ?? ""] ?? "what you told us and your budget band";
   /* "your pool" in the sign-off, or the right noun for the category. */
-  const theirs =
-    opts.categorySlug === "window-cleaning-robots"
-      ? "your windows"
-      : opts.categorySlug === "robotic-lawn-mowers"
-        ? "your lawn"
-        : "your pool";
+  const THEIRS: Record<string, string> = {
+    "robotic-pool-cleaners": "your pool",
+    "window-cleaning-robots": "your windows",
+    "robotic-lawn-mowers": "your lawn",
+  };
+  const theirs = THEIRS[opts.categorySlug ?? ""] ?? "what you told us";
   const p = (t: string) =>
     `<p style="margin:0 0 15px;color:#1f2430;font-size:15px;line-height:1.55;">${t}</p>`;
 

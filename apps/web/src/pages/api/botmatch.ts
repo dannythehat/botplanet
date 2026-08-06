@@ -20,6 +20,11 @@ const freshnessRank = (c: string | null) => (c === "live" ? 2 : c === "recently_
  * should require someone to look at the weights and decide they are right, not
  * inherit whatever a naming convention happens to resolve to.
  */
+/* @extension-point per-category | required | /api/botmatch returns 501 and the
+   funnel produces no recommendation. There is deliberately NO fallback: judging
+   one category's products by another category's weights excluded all eleven
+   window robots as class_not_eligible and returned nothing, silently, for a
+   day. The D1 scoring_configs row has to exist too. */
 const SCORING_CONFIG_BY_CATEGORY: Record<string, string> = {
   "robotic-pool-cleaners": "sc-pool-v1",
   "window-cleaning-robots": "sc-window-v1",

@@ -49,8 +49,99 @@ export interface PageKeywords {
 }
 
 const RUN = "2026-08-01";
+/** Window research: run 30981257806, 2026-08-05, $0.2044. */
+const RUN_WINDOW = "2026-08-05";
+/** Lawn research: runs 31073327230 + 31074893036, 2026-08-06, $0.22428. */
+const RUN_LAWN = "2026-08-06";
 
+/* @extension-point per-category | required | Also per-page and per-product —
+   every published URL needs a row. Without one, keywords.test.ts cannot assert
+   the page still contains the term it was built to rank for, so the page can
+   silently drift off its keyword. This register is also what the Notion
+   Content & SEO Control Register mirrors. */
 export const KEYWORD_REGISTER: PageKeywords[] = [
+  /* Window and lawn hubs were missing from this register until 6 August 2026 —
+     both pages were live, neither had a row, so keywords.test.ts was asserting
+     nothing about either. Found by scripts/extension-points.mjs, which is the
+     entire reason that script exists. */
+  {
+    path: "/robots/window-cleaning-robots/",
+    /* Google groups "robot window cleaner", "robotic window cleaner", "window
+       cleaner robot" and "window washing robot" into this one cluster, so the
+       12,100 is the cluster's, not this phrasing's alone. */
+    primary: { term: "window cleaning robot", volume: 12100, difficulty: 5, mustAppear: true },
+    secondary: [
+      /* A genuinely separate cluster with its own volume and its own KD, not a
+         variant of the primary. It earns a place in the intro copy. */
+      { term: "automatic window cleaner", volume: 8100, difficulty: 0, mustAppear: true },
+      { term: "robot window cleaner", volume: 12100, difficulty: 5, mustAppear: true },
+      { term: "window cleaning robots", volume: 12100, difficulty: 5, mustAppear: true },
+      { term: "frameless", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "safety tether", volume: 0, difficulty: 0, mustAppear: false },
+    ],
+    cededTo: [
+      {
+        term: "window cleaning robot comparison",
+        path: "/compare/window-cleaning-robots/",
+        why: "20/mo at KD 45 — the hardest term in the category and the least traffic in it. Refused as a ranking target entirely; the comparison tool exists for readers, not for this query.",
+      },
+    ],
+    /* NOTE: "best window cleaning robot" is deliberately NOT ceded. It is
+       carried by this page. Six of the top ten results are identical between
+       the two terms and NYTimes ranks first for both with one article, so a
+       separate best-of page would have competed with this one for the same
+       result set. */
+    researchedOn: RUN_WINDOW,
+  },
+  {
+    path: "/robots/robotic-lawn-mowers/",
+    /* Google Ads reports the close-variant GROUP volume against every member,
+       so "robotic lawn mower", "robotic lawnmower", "lawn mowing robot" and
+       "robot grass cutter" all read 74,000 too. It is 74,000 for the family,
+       not 74,000 each. Measured overlap between the first two phrasings: 8/10.
+
+       KD 36 is the easiest of the five phrasings and by far the hardest head
+       term BotPlanet has taken on — pool is 14, window is 0-5. Half of this
+       SERP's top ten is manufacturer sites, so the page is written to win the
+       "best" cluster below at KD 8 while being named for the head term. */
+    primary: { term: "robot lawn mower", volume: 74000, difficulty: 36, mustAppear: true },
+    secondary: [
+      { term: "robot mower", volume: 22200, difficulty: 32, mustAppear: true },
+      { term: "robotic lawn mower", volume: 74000, difficulty: 39, mustAppear: true },
+      { term: "robot lawn mowers", volume: 74000, difficulty: 36, mustAppear: true },
+      /* The acreage cluster, ~2,060/mo combined. It lives here rather than in
+         a guide: "best robot lawn mower for 1 acre" shares 6/10 domains with
+         "best robot lawn mower", so a guide would have competed with this
+         page. Measured in the top-up run, not assumed. */
+      { term: "acre", volume: 2060, difficulty: 4, mustAppear: true },
+      { term: "boundary wire", volume: 1670, difficulty: 0, mustAppear: true },
+      { term: "slope", volume: 200, difficulty: 0, mustAppear: true },
+    ],
+    cededTo: [
+      {
+        term: "wire free robot lawn mower",
+        path: "/guides/robot-lawn-mower-without-boundary-wire/",
+        why: "About 1,670/mo across the wire-free, RTK, GPS and LiDAR phrasings, and 2/10 shared with this page. A genuinely separate SERP, so it earns its own guide rather than a section here.",
+      },
+      {
+        term: "best robot lawn mower for hills",
+        path: "/guides/robot-lawn-mower-for-hills/",
+        why: "Shares 7/10 domains with 'do robot lawn mowers work on hills' and only 3/10 with 'best robot lawn mower', so the two hills queries are one page and that page is not this one.",
+      },
+      {
+        term: "best budget robot lawn mower",
+        path: "/guides/best-budget-robot-lawn-mower/",
+        why: "A fully distinct SERP with no overlap flag against anything, 4/10 against 'best robot lawn mower'. The closest call in the category and the first guide to fold back in if it underperforms.",
+      },
+    ],
+    /* NOTE: "best robot lawn mower" is NOT ceded, and unlike window that is a
+       policy decision rather than an evidence-led one. Hub and best-of share
+       only 2/10 domains here — the head term returns manufacturers, the best
+       term returns pure editorial. One URL per category is the owner ruling of
+       5 August 2026, so this page carries both jobs; the cost is recorded in
+       docs/seo/robotic-lawn-mowers-research-findings.md rather than glossed. */
+    researchedOn: RUN_LAWN,
+  },
   {
     path: "/robots/robotic-pool-cleaners/",
     // Google groups "robotic pool cleaner", "robot pool cleaner" and "pool

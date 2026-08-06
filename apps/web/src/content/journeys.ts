@@ -39,6 +39,10 @@ export interface BotMatchJourney {
  *   "robot-vacuums":          ctaLabel "Help Me Pick a Robot Vacuum"
  * They are intentionally NOT defined yet — each is built in its own job.
  */
+/* @extension-point per-category | optional | The shell's BotMatch button keeps
+   pointing at the launch category's journey, so a reader on a lawn page is
+   offered "Find My Pool Cleaner". Cosmetic but wrong, and visible in the
+   header on every page of the category. */
 export const BOTMATCH_JOURNEYS: Record<string, BotMatchJourney> = {
   [LAUNCH_CATEGORY]: {
     category: LAUNCH_CATEGORY,

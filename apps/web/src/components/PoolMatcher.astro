@@ -43,6 +43,10 @@ const { categorySlug, categoryName, questions, tasks } = Astro.props;
 
    The question count is counted, not typed. It said "Eight short questions"
    while the funnel asked seven. */
+/* @extension-point per-category | optional | The funnel falls back to general
+   wording — "for you", and a criteria line that does not name the category's
+   real inputs. True, but flat, and it wastes the one line that tells a reader
+   we understand their problem. */
 const COPY: Record<string, { audience: string; criteria: string }> = {
   "robotic-pool-cleaners": {
     audience: "for your pool",

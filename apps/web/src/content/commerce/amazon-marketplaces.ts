@@ -83,6 +83,11 @@ export const EARN_GLOBALLY_READ_ON = "2026-08-04";
  * The stores Amazon operates that a US-catalogue reader plausibly lands on.
  * Presence here is NOT permission to rewrite the host — see `marketplaceFor`.
  */
+/* @extension-point per-retailer | optional | Needed only when we sell into a
+   second Amazon marketplace. Each has its own tracking tag and its own ASINs —
+   REGIONAL_ASIN below — because the same machine has different identifiers per
+   country, and reusing a US ASIN abroad sends a reader to the wrong listing or
+   to nothing. */
 export const AMAZON_MARKETPLACES: AmazonMarketplace[] = [
   { country: "US", host: "www.amazon.com", tag: US_TAG },
 

@@ -12,15 +12,25 @@ import {
   faqSectionFor,
 } from "../src/content/category-sections";
 import { ROUTES } from "../src/content/routes";
+import { liveCategories } from "../src/content/nav";
+
+/** Every category hub the register knows about, derived rather than typed. */
+const HUB_SLUGS = KEYWORD_REGISTER.map((k) => k.path)
+  .map((p) => /^\/robots\/([^/]+)\/$/.exec(p)?.[1])
+  .filter((s): s is string => Boolean(s));
 
 /**
- * Everything the pool hub actually says, assembled the way the page assembles
+ * Everything a category hub actually says, assembled the way the page assembles
  * it. Reading the content modules rather than a rendered string keeps this
  * fast, and it is the same source the page renders from — so a term that
  * disappears from the copy disappears from here too.
+ *
+ * Took a hardcoded pool slug until 6 August 2026, which meant the window hub
+ * went live on 5 August with nothing asserting anything about its keywords,
+ * and the lawn hub followed it. Every hub in the register is checked now, so a
+ * category added later is covered the moment it has a row.
  */
-function poolHubCopy(): string {
-  const slug = "robotic-pool-cleaners";
+function hubCopy(slug: string): string {
   const hero = heroFor(slug)!;
   const sections = [
     decisionSectionFor(slug),
@@ -67,19 +77,31 @@ describe("keyword register", () => {
    * drops the term the page was built around, this fails on the same commit
    * rather than in a rank report three months later.
    */
-  it("still contains every term the pool hub is built around", () => {
-    const copy = poolHubCopy();
-    const missing = requiredTerms("/robots/robotic-pool-cleaners/").filter((t) => !copy.includes(t));
+  it.each(HUB_SLUGS)("still contains every term the %s hub is built around", (slug) => {
+    const copy = hubCopy(slug);
+    const missing = requiredTerms(`/robots/${slug}/`).filter((t) => !copy.includes(t));
     expect(missing).toEqual([]);
   });
 
-  it("does not chase a term it has ceded to another page", () => {
+  it.each(HUB_SLUGS)("%s does not chase a term it has ceded to another page", (slug) => {
     // Appearing once in passing is fine and often unavoidable. Leading with it
     // is not: the H1 and the meta description are what the SERP competes on.
-    const hero = heroFor("robotic-pool-cleaners")!;
+    const hero = heroFor(slug)!;
     const front = `${hero.title} ${hero.seoTitle} ${hero.metaDescription}`.toLowerCase();
-    for (const c of keywordsFor("/robots/robotic-pool-cleaners/")!.cededTo ?? []) {
+    for (const c of keywordsFor(`/robots/${slug}/`)!.cededTo ?? []) {
       expect(front).not.toContain(c.term);
+    }
+  });
+
+  /**
+   * The gap that let two live hubs go unguarded: a category page can exist
+   * with no register row at all, and every assertion above then vacuously
+   * passes because there is nothing to assert against.
+   */
+  it("has a register row for every live category hub", () => {
+    for (const cat of liveCategories()) {
+      expect(keywordsFor(`/robots/${cat.slug}/`), `${cat.slug} has no keyword register row`)
+        .toBeDefined();
     }
   });
 });

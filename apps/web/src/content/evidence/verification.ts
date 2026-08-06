@@ -1085,6 +1085,10 @@ const aiperScubaV3AiVision: ProductVerification = {
 /** Retired records. Real evidence about products no longer in the catalogue. */
 export const RETIRED_VERIFICATIONS: ProductVerification[] = [retiredDolphinPremier];
 
+/* @extension-point per-product | required | The product has no dated record of
+   what was actually read on the retailer's page — price, stock, seller,
+   returns, and the model number that proves identity. Without it nothing on
+   the page can carry the "checked on" date the methodology promises. */
 export const VERIFICATIONS: ProductVerification[] = [
   wybotC1,
   nautilusCcPlus,

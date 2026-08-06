@@ -76,6 +76,13 @@ async function derive(src) {
 
 /* Every owner-created raster on the site. Vector placeholders are excluded by
    construction: an SVG serves every width from one file. */
+/* @extension-point per-category | optional | Artwork for a new category has to
+   be added to this list and the script re-run, or every image on the page is
+   served at full authored size to a phone that needs a fraction of it. Also
+   per-product: each review's four images belong here.
+   Cannot be auto-checked — media directories are named for the subject
+   ("pool", "window", "lawn-category"), not for the category slug.
+   @extension-check manual */
 const SOURCES = [
   "/media/home/hero-desktop.webp",
   "/media/home/hero-mobile.webp",

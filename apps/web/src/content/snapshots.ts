@@ -86,6 +86,9 @@ export interface RuleOut {
     | { kind: "power"; value: string };
 }
 
+/* @extension-point per-product | optional | No price history and no rule-outs
+   for the product. The page still renders; it just cannot say whether today's
+   price is good, which is most of why somebody reads a comparison site. */
 export const SNAPSHOTS: Record<string, ProductSnapshot> = {
   "dolphin-nautilus-cc-plus": {
     slug: "dolphin-nautilus-cc-plus",

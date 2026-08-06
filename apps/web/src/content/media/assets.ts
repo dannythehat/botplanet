@@ -78,6 +78,11 @@ const base = (id: string, basisKey: string) => {
 /* Original BotPlanet artwork                                          */
 /* ------------------------------------------------------------------ */
 
+/* @extension-point per-product | required | Every image on the site needs a
+   record here stating who made it and on what rights basis. An image without
+   one fails media.test.ts and does not ship — deliberately, because publishing
+   a picture we cannot prove we may use is the one mistake that costs money
+   rather than traffic. */
 export const ORIGINAL_ASSETS: MediaAssetRecord[] = [
   {
     ...base("og-botplanet-default", "botplanet_original"),
