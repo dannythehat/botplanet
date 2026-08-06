@@ -294,7 +294,7 @@ clearest new-page findings in the whole harvest.
 | suction pool cleaner | 1,000 | — |
 | how to use automatic pool vacuum | 30 | — |
 
-### `/best-robots/robotic-pool-cleaners/above-ground/` — 1 terms, 1,900/mo
+### `/best-robots/robotic-pool-cleaners/above-ground-pools/` — 1 terms, 1,900/mo
 
 | Long-tail | Vol | KD |
 |---|---|---|

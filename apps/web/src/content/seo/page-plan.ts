@@ -891,7 +891,7 @@ const COMPANION_GUIDE: PagePlan = {
    docs/seo/robotic-pool-cleaners-guides-findings.md */
 const POOL_ROUND_TWO: PagePlan[] = [
   {
-    path: "/best-robots/robotic-pool-cleaners/above-ground/",
+    path: "/best-robots/robotic-pool-cleaners/above-ground-pools/",
     category: "robotic-pool-cleaners",
     type: "best-of",
     status: "researched",
