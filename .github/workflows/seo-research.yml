@@ -13,7 +13,28 @@ name: SEO Research
 # printed. The script enforces the spend ceiling internally and refuses a cap
 # above it.
 #
-# Run it from the Actions tab: pick the category, optionally lower the cap.
+# TWO WAYS TO RUN IT.
+#
+#   1. Actions tab -> "SEO Research" -> pick the category, optionally lower the
+#      cap. The normal route for a human.
+#
+#   2. Push a tag named `seo-research-<slug>`, e.g.
+#      `seo-research-security-robots`. The slug is read from the tag name.
+#
+# The tag route exists because workflow_dispatch requires the `actions: write`
+# permission, and not every credential that can push code has it. On 6 August
+# 2026 that left the research stage unrunnable by the only party trying to run
+# it, with the seed file committed and waiting. Pushing a tag needs only the
+# `contents` permission that writing the seed file already required.
+#
+# It is deliberately a TAG rather than a branch or path push. A tag is an
+# explicit act nobody performs by accident, it names exactly what was
+# researched, and it leaves a permanent marker of when. A push trigger on the
+# seeds directory would have spent money every time somebody fixed a typo.
+#
+# The $2.00 ceiling lives inside the script and cannot be raised by either
+# route. Concurrency below still permits only one paid run at a time.
+#
 # Results arrive as a downloadable artifact — raw API responses never enter git.
 
 on:
@@ -28,6 +49,9 @@ on:
         required: false
         default: "2.00"
         type: string
+  push:
+    tags:
+      - "seo-research-*"
 
 permissions:
   contents: read
@@ -48,9 +72,33 @@ jobs:
         with:
           node-version: "20"
 
+      # One place decides the category and the cap, whichever route fired.
+      # A tag run always uses the full ceiling — there is nowhere to type a
+      # lower one, and the script refuses anything above it regardless.
+      - name: Resolve the run's inputs
+        id: cfg
+        shell: bash
+        run: |
+          if [ "${{ github.event_name }}" = "push" ]; then
+            CATEGORY="${GITHUB_REF_NAME#seo-research-}"
+            CAP="2.00"
+            echo "Triggered by tag ${GITHUB_REF_NAME}"
+          else
+            CATEGORY="${{ inputs.category }}"
+            CAP="${{ inputs.cost_cap }}"
+            echo "Triggered manually"
+          fi
+          if ! printf '%s' "$CATEGORY" | grep -Eq '^[a-z0-9-]+$'; then
+            echo "Category \"$CATEGORY\" is not a plain slug. Refusing to build a path from it."
+            exit 1
+          fi
+          echo "category=$CATEGORY" >> "$GITHUB_OUTPUT"
+          echo "cost_cap=$CAP" >> "$GITHUB_OUTPUT"
+          echo "Category: $CATEGORY, cap \$$CAP"
+
       - name: Confirm the seed inventory exists before spending anything
         run: |
-          SEED="docs/seo/seeds/${{ inputs.category }}.json"
+          SEED="docs/seo/seeds/${{ steps.cfg.outputs.category }}.json"
           if [ ! -f "$SEED" ]; then
             echo "No seed inventory at $SEED."
             echo "The free seed list is written and reviewed BEFORE the paid run — see docs/seo/PRE-BUILD-PROCESS.md."
@@ -70,19 +118,19 @@ jobs:
           fi
         env:
           DATAFORSEO_BASIC_AUTH: ${{ secrets.DATAFORSEO_BASIC_AUTH }}
-          SEO_CATEGORY: ${{ inputs.category }}
-          SEO_COST_CAP: ${{ inputs.cost_cap }}
+          SEO_CATEGORY: ${{ steps.cfg.outputs.category }}
+          SEO_COST_CAP: ${{ steps.cfg.outputs.cost_cap }}
 
       - name: Report what it cost
         if: always()
         run: |
-          COST="research-output/${{ inputs.category }}-cost-summary.json"
+          COST="research-output/${{ steps.cfg.outputs.category }}-cost-summary.json"
           [ -f "$COST" ] && cat "$COST" >> "$GITHUB_STEP_SUMMARY" || echo "No cost summary produced." >> "$GITHUB_STEP_SUMMARY"
 
       - name: Upload sanitised results
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: seo-research-${{ inputs.category }}
+          name: seo-research-${{ steps.cfg.outputs.category }}
           path: research-output/
           retention-days: 30
