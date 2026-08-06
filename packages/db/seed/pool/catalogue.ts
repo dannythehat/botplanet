@@ -26,8 +26,24 @@ export const marketRows: (typeof markets.$inferInsert)[] = [
   },
 ];
 
+/**
+ * Every category on the site, not just the pool one.
+ *
+ * The file is shelved under seed/pool/ because pool was the only catalogue
+ * when it was written, but a category row is reference data with no products
+ * attached and no pool in it. Window went live on 5 August 2026 and lawn on
+ * 6 August, and both rows were created directly against D1 — which meant a
+ * bootstrap from this seed produced a database where two of the three live
+ * category pages 404'd. That was a latent bug, and it is fixed here rather
+ * than left for whoever next rebuilds the database from scratch.
+ *
+ * When a second catalogue is seeded properly, this array should move out to
+ * packages/db/seed/categories.ts and stop pretending to be pool-specific.
+ */
 export const categoryRows: (typeof categories.$inferInsert)[] = [
   { id: "cat-pool-cleaners", slug: "robotic-pool-cleaners", name: "Robotic Pool Cleaners", parentId: null },
+  { id: "cat-window-cleaners", slug: "window-cleaning-robots", name: "Window-Cleaning Robots", parentId: null },
+  { id: "cat-lawn-mowers", slug: "robotic-lawn-mowers", name: "Robotic Lawn Mowers", parentId: null },
 ];
 
 export const brandRows: (typeof brands.$inferInsert)[] = [

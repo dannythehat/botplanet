@@ -38,6 +38,57 @@ export interface DecisionSectionContent {
 }
 
 export const DECISION_SECTION: Record<string, DecisionSectionContent> = {
+  /* Yard size carries the acreage keyword cluster — roughly 2,060/mo across
+     "best robot lawn mower for 1 acre" (880, KD 4), "robot lawn mower 1 acre"
+     (720), "robot lawn mower for 2 acres" (210) and "best robot lawn mower for
+     small yard" (70).
+
+     That cluster was planned as its own guide until the follow-up SERP run of
+     6 August 2026 measured "best robot lawn mower for 1 acre" at 6/10 shared
+     domains with "best robot lawn mower". Same result set, so a guide would
+     have competed with this page. It lives here instead — which is also where
+     it belongs, since acreage is the first question BotMatch asks. */
+  "robotic-lawn-mowers": {
+    id: "yard-size",
+    eyebrow: "Yard size",
+    title: "Choose a robot lawn mower for your yard size",
+    /* 78 words. */
+    intro:
+      "Area is the hardest constraint in this category and the first one to check. Every " +
+      "machine states a maximum it can maintain, and that figure assumes it mows most days — " +
+      "a mower rated for an acre does not cut an acre in an afternoon, it keeps an acre tidy " +
+      "over a week. Buy one rated close to your actual lawn and it runs constantly to keep up. " +
+      "Buy with headroom and it works less to do more.",
+    cards: [
+      {
+        title: "Small yards",
+        bestFor: "Courtyards, townhouse gardens, anything under about a quarter acre.",
+        points: [
+          "The cheapest machines are genuinely enough here, and a boundary wire is a one-afternoon job on a small perimeter.",
+          "Watch the minimum rather than the maximum: a very small lawn can confuse a mower built to cover ground.",
+          "Narrow passages between lawn areas are the usual failure — check the stated minimum width.",
+        ],
+      },
+      {
+        title: "Quarter acre to an acre",
+        bestFor: "The typical American back yard, often in more than one piece.",
+        points: [
+          "The most competitive part of the market, and where wire-free navigation starts to pay for itself.",
+          "Multiple zones matter more than raw area — a front lawn and a back lawn are two jobs, not one.",
+          "Check whether the mower can cross a driveway or path on its own, or whether you carry it.",
+        ],
+      },
+      {
+        title: "An acre and up",
+        bestFor: "Large properties, paddocks, anything measured in acres rather than feet.",
+        points: [
+          "Battery and charge-return behaviour decide this, not cutting width — the machine spends real time driving back to base.",
+          "All-wheel drive and larger wheels stop being a luxury once the ground is uneven.",
+          "This is where the price climbs steeply, and where a second smaller mower sometimes beats one big one.",
+        ],
+      },
+    ],
+  },
   "window-cleaning-robots": {
     id: "glass-type",
     eyebrow: "Glass type",
@@ -186,6 +237,49 @@ export interface CoverageSectionContent {
 }
 
 export const COVERAGE_SECTION: Record<string, CoverageSectionContent> = {
+  "robotic-lawn-mowers": {
+    id: "terrain",
+    eyebrow: "Your ground",
+    title: "Slopes, trees and awkward ground: where can it actually mow?",
+    intro:
+      "Area is the constraint people check. Terrain is the one that catches them out. A slope " +
+      "past what the wheels can hold, a canopy of mature trees over the lawn, or a garden split " +
+      "into pieces by a driveway will each rule out machines that the acreage figure said were " +
+      "fine. Work out which of these three you have before comparing anything else.",
+    rows: [
+      {
+        title: "Slopes and banks",
+        whoFor: "Anything you would think twice about pushing a mower up",
+        body:
+          "Slope is stated as a percentage, not degrees, and the gap between models is wide. " +
+          "The figure is also a maximum in ideal conditions — wet grass, a slope that steepens " +
+          "at the top, or a turn taken across the fall line are all harder than the number " +
+          "suggests. Measure your steepest section rather than your average, and treat the " +
+          "manufacturer's figure as a ceiling you should stay under.",
+      },
+      {
+        title: "Tree cover and satellite signal",
+        whoFor: "Mature gardens, anything under a canopy or beside a tall building",
+        body:
+          "This is the question with almost no search volume behind it and the highest chance " +
+          "of ruining the purchase. A wire-free mower that navigates by satellite needs a clear " +
+          "view of the sky, and a canopy of mature trees is exactly what it does not have. " +
+          "Vision and LiDAR machines do not care about sky; a boundary wire does not either. If " +
+          "your lawn is shaded by trees, satellite navigation is the wrong technology and no " +
+          "amount of money fixes it.",
+      },
+      {
+        title: "Separate zones and narrow passages",
+        whoFor: "Front and back lawns, gardens split by a path or driveway",
+        body:
+          "Most yards are not one shape. A mower has to be told each area exists, get to it, " +
+          "and find its way home from it. Some cross a path on their own; some need carrying; " +
+          "some handle a gap only above a stated minimum width. This is also where obstacle " +
+          "avoidance earns its keep — trampolines, dog toys and garden hose are what a mower " +
+          "meets in a real yard, not the clean lawn in the photograph.",
+      },
+    ],
+  },
   "window-cleaning-robots": {
     id: "coverage",
     eyebrow: "Where it works",
@@ -302,6 +396,52 @@ export interface SplitSectionContent {
 }
 
 export const SPLIT_SECTION: Record<string, SplitSectionContent> = {
+  /* The category's biggest genuine fork, and roughly 1,670/mo of search:
+     "wire free robot lawn mower" (720, KD 0), "gps robot lawn mower" (590),
+     "robot lawn mower without perimeter wire" (210, KD 0), "lidar robot lawn
+     mower" (90), plus the RTK and no-perimeter-wire long tails. The dedicated
+     guide at /guides/robot-lawn-mower-without-boundary-wire/ goes deeper; this
+     panel is the decision itself. */
+  "robotic-lawn-mowers": {
+    id: "navigation",
+    eyebrow: "Navigation",
+    title: "Boundary wire or wire-free",
+    intro:
+      "This is the fork that decides both the price and the installation. A boundary wire is a " +
+      "cable pinned around the edge of the lawn that tells the mower where the lawn stops. " +
+      "Wire-free machines replace it with satellite positioning, cameras or LiDAR and a map you " +
+      "draw on a phone. Neither is simply better — the wire is cheap and dependable, the map is " +
+      "flexible and expensive, and tree cover can decide it for you.",
+    panels: [
+      {
+        label: "BOUNDARY WIRE",
+        title: "When the wire is the right answer",
+        points: [
+          "It works under trees, beside buildings and anywhere satellite signal does not reach.",
+          "It is the cheapest way into the category by a wide margin.",
+          "Once it is down it does not drift, lose signal or need re-mapping.",
+          "Small and simple lawns are laid out in an afternoon.",
+        ],
+        tradeOff:
+          "You are digging or pinning a cable around the whole perimeter, and changing the " +
+          "garden later means moving it. A cut wire is a repair job, and strimmers cut wires.",
+      },
+      {
+        label: "WIRE-FREE",
+        title: "When wire-free earns the money",
+        points: [
+          "No cable to lay, and the boundary is a line you drag on a phone.",
+          "Changing a border or adding a flower bed takes a minute rather than an afternoon.",
+          "Separate zones are easier to define, and the mower knows which is which.",
+          "Systems using LiDAR or cameras rather than satellites also work under a canopy.",
+        ],
+        tradeOff:
+          "Satellite-based systems need a clear view of the sky, so mature trees or a tall " +
+          "building beside the lawn can break them. They cost considerably more, and the " +
+          "antenna needs somewhere with a clear outlook to live.",
+      },
+    ],
+  },
   "window-cleaning-robots": {
     id: "power",
     eyebrow: "Power",
@@ -407,6 +547,44 @@ export interface MatrixSectionContent {
 }
 
 export const MATRIX_SECTION: Record<string, MatrixSectionContent> = {
+  "robotic-lawn-mowers": {
+    id: "cutting",
+    eyebrow: "The cut",
+    title: "What a robot mower actually does to your lawn",
+    intro:
+      "A robot mower does not mow the way you do. It takes a few millimetres off, every day, " +
+      "and drops the clippings back as mulch instead of collecting them. On grass that is " +
+      "already short that produces a better lawn than weekly cutting. On grass that has got " +
+      "away from you it produces a mess, and that difference explains most of the " +
+      "disappointment in this category.",
+    columns: ["What it does well", "Where it falls short"],
+    rows: [
+      {
+        label: "Everyday growth",
+        cells: [
+          "The job it is built for. Little and often keeps the lawn at one height instead of cycling between shaggy and scalped, and the fine clippings feed the grass rather than sitting on it.",
+          "Almost nothing — this is the best case, and the reason to own one. You stop noticing the lawn, which is the point.",
+        ],
+      },
+      {
+        label: "Long or wet grass",
+        cells: [
+          "Some machines cope with a fortnight's growth and a heavy dew; most have a rain sensor and simply wait.",
+          "This is the weak point. Long grass clogs and gets flattened rather than cut, and wet clippings clump on the lawn. After a holiday you may need to mow it yourself once before handing it back.",
+        ],
+      },
+      {
+        label: "Edges and borders",
+        cells: [
+          "A few models cut close to a hard edge, and some drive a wheel along the border to get nearer.",
+          "Every one of them leaves a margin at a wall, a fence or a flower bed. Expect to strim the edges yourself — a robot mower removes the mowing, not the gardening.",
+        ],
+      },
+    ],
+    note:
+      "None of these collect clippings. If you need the grass taken away rather than mulched " +
+      "back in, this is the wrong category of machine, not the wrong model.",
+  },
   "window-cleaning-robots": {
     id: "dirt",
     eyebrow: "What it removes",
@@ -551,6 +729,59 @@ export interface CheckSectionContent {
 }
 
 export const CHECK_SECTION: Record<string, CheckSectionContent> = {
+  "robotic-lawn-mowers": {
+    id: "before-you-buy",
+    eyebrow: "Before you buy",
+    title: "Five things to check before you buy",
+    intro:
+      "Cutting width is the specification every listing leads with and it decides almost " +
+      "nothing. What decides it is whether the machine can physically cover your ground, what " +
+      "it does when it cannot, and what it costs to keep running once the novelty wears off.",
+    boxLabel: "Check these before buying",
+    items: [
+      {
+        title: "The maximum area, against your actual lawn",
+        body:
+          "Every mower states a maximum area it can maintain. Buy one rated close to your lawn " +
+          "and it runs almost constantly to keep up, which wears it out and means you hear it " +
+          "all the time. Headroom is worth paying for.",
+        ask: "Is the stated maximum comfortably above my lawn, not roughly equal to it?",
+      },
+      {
+        title: "The slope figure, against your steepest part",
+        body:
+          "Slope is quoted as a percentage in ideal conditions. Wet grass and a turn across the " +
+          "fall line are both worse than the number. A mower that cannot hold your bank will " +
+          "either refuse it or slide, and neither is recoverable with a setting.",
+        ask: "What percentage is my steepest section, and does the machine beat it with room to spare?",
+      },
+      {
+        title: "Whether satellite navigation will work in your garden",
+        body:
+          "A wire-free mower that positions itself by satellite needs a clear view of the sky. " +
+          "Mature trees, a tall building or a narrow side passage can all break it. Vision, " +
+          "LiDAR and boundary-wire systems do not care about sky.",
+        ask: "Is my lawn open overhead, or is it under trees?",
+      },
+      {
+        title: "How it handles more than one lawn",
+        body:
+          "Front and back are two jobs. Some machines cross a path unaided, some need lifting, " +
+          "and some need a stated minimum gap to get through at all. This is the most common " +
+          "gap between what a mower promises and what it does in a real garden.",
+        ask: "Can it get from one lawn to the other on its own?",
+      },
+      {
+        title: "Blades, batteries and what happens if it is stolen",
+        body:
+          "Blades are consumables and get changed several times a season. The battery is the " +
+          "part that decides the machine's life, and it is replaceable on some models and not " +
+          "others. A mower also sits outside on its own, which is why theft protection and a " +
+          "PIN lock are standard rather than a gimmick.",
+        ask: "What do blades cost, is the battery replaceable, and what stops someone walking off with it?",
+      },
+    ],
+  },
   "window-cleaning-robots": {
     id: "before-you-buy",
     eyebrow: "Before you buy",
@@ -688,6 +919,57 @@ export interface PriceSectionContent {
 }
 
 export const PRICE_SECTION: Record<string, PriceSectionContent> = {
+  /* No dollar figures. The catalogue for this category is not verified yet —
+     the page was built ahead of its products on the owner's instruction of
+     6 August 2026 — and a band printed from memory rather than from a checked
+     retail price is exactly the thing the review methodology forbids. The
+     rungs describe what each step up buys, which answers the question
+     honestly. Figures go in when the products do. */
+  "robotic-lawn-mowers": {
+    id: "cost",
+    eyebrow: "Cost",
+    title: "How much does a robot lawn mower cost?",
+    intro:
+      "This is the widest price range of any robot category we cover, and the spread is not " +
+      "about cutting quality — every machine here cuts grass perfectly well. What you pay for " +
+      "is area, terrain and how the mower knows where the lawn ends. A small flat lawn with a " +
+      "boundary wire is a fraction of the cost of an acre of sloping ground navigated without " +
+      "one. What follows is what each step up actually buys.",
+    rungs: [
+      {
+        label: "Entry",
+        what:
+          "A boundary wire, a modest maximum area and a gentle slope limit. Genuinely enough " +
+          "for a small, flat, single lawn — and the wire is a one-afternoon job on a short " +
+          "perimeter.",
+      },
+      {
+        label: "Mid",
+        what:
+          "More area, a steeper slope rating, proper app control and scheduling. Wire-free " +
+          "navigation starts appearing here, usually satellite-based, which is where the jump " +
+          "in price comes from rather than from any change to the cut.",
+      },
+      {
+        label: "Upper",
+        what:
+          "Wire-free as standard, obstacle avoidance that recognises what it is looking at, " +
+          "multiple zones handled properly, and enough battery to cover ground without living " +
+          "on the charging base.",
+      },
+      {
+        label: "Top",
+        what:
+          "Acres rather than square feet, all-wheel drive for slopes and rough ground, and the " +
+          "navigation systems that work under tree cover. Diminishing returns unless your land " +
+          "genuinely needs them.",
+      },
+    ],
+    note:
+      "Every price on BotPlanet carries the date it was checked and names whether it came from " +
+      "the retailer or a marketplace seller. Where we have not checked recently, we say " +
+      "\"Check current price\" rather than guess.",
+  },
   "window-cleaning-robots": {
     id: "cost",
     eyebrow: "Cost",
@@ -792,6 +1074,37 @@ export interface VerdictSectionContent {
 }
 
 export const VERDICT_SECTION: Record<string, VerdictSectionContent> = {
+  /* This section owns "are robot lawn mowers worth it" (210/mo, KD 18). It is
+     a section rather than a guide because the term shares 5/10 domains with
+     both head phrasings — the same threshold that folded the window best-of.
+     The separate guide at /guides/robot-lawn-mower-disadvantages/ answers
+     "what goes wrong", which is a different question and a different SERP. */
+  "robotic-lawn-mowers": {
+    id: "worth-it",
+    eyebrow: "The verdict",
+    title: "Are robot lawn mowers worth it?",
+    intro:
+      "The most-asked question in the category, and the answer turns on your ground rather " +
+      "than on the machines.",
+    verdict:
+      "For an open lawn you would otherwise mow every week through the season, yes. For a " +
+      "small yard, a shaded one, or one you enjoy mowing, no.",
+    body:
+      "A robot mower does not cut better than you do. It cuts more often, which is a different " +
+      "thing and produces a better lawn almost by accident — grass kept at one height is " +
+      "thicker than grass that swings between shaggy and scalped, and the clippings go back in " +
+      "as feed rather than into a bag. What you are really buying is the disappearance of a " +
+      "weekly chore for six months of the year, plus the noise going away. Against that, it is " +
+      "a machine living outdoors on its own. It needs blades, it will eventually need a " +
+      "battery, it will get stuck on something, and it will not touch your edges. Judged as " +
+      "one job removed from every weekend, the money makes sense. Judged as a better mower, it " +
+      "does not.",
+    against:
+      "A small lawn you can cut in fifteen minutes, a garden shaded by mature trees where " +
+      "satellite navigation will not work, ground steeper than the machines can hold, or a " +
+      "lawn cut by a service you are happy with. In those cases the money buys a problem " +
+      "rather than a solution.",
+  },
   "window-cleaning-robots": {
     id: "worth-it",
     eyebrow: "The verdict",
@@ -869,6 +1182,83 @@ export interface FaqSectionContent {
 }
 
 export const FAQ_SECTION: Record<string, FaqSectionContent> = {
+  /* Every question below is one Google actually surfaces. Taken from the
+     People Also Ask boxes across the 24 SERPs in runs 31073327230 and
+     31074893036, ranked by how often each appeared:
+
+       negatives / disadvantages  13 appearances  (the loudest by a distance)
+       lifespan                    6
+       hills and slopes            5
+       dog mess                    2
+       cost                        2  (incl. the Husqvarna brand SERP)
+       time to cut an acre         1
+
+     These items also generate the FAQPage schema, so the structured data
+     cannot claim a question the page does not show. */
+  "robotic-lawn-mowers": {
+    id: "faqs",
+    eyebrow: "Questions",
+    title: "Robot lawn mower FAQs",
+    intro:
+      "The questions people actually ask before buying, answered plainly. Anything needing a " +
+      "longer answer gets its own guide rather than a paragraph here.",
+    items: [
+      {
+        q: "What are the disadvantages of a robot lawn mower?",
+        a:
+          "Four, honestly. They do not cut edges, so you still strim. They mulch rather than " +
+          "collect, so if you need clippings taken away this is the wrong machine. They " +
+          "struggle with grass that has got long, which makes coming back from a holiday " +
+          "awkward. And they are one more thing to maintain — blades several times a season, a " +
+          "battery eventually, and the occasional rescue from somewhere it should not have " +
+          "gone. None of that is a reason not to buy one; all of it is worth knowing first.",
+      },
+      {
+        q: "Can a robot lawn mower go uphill?",
+        a:
+          "Up to a stated percentage, and the range across models is wide. The figure assumes " +
+          "dry grass and a straight climb — a wet slope, or a turn taken across the fall line, " +
+          "is harder than the number suggests. Measure your steepest section rather than your " +
+          "average and pick a machine that beats it with room to spare.",
+      },
+      {
+        q: "How long do robot lawn mowers last?",
+        a:
+          "The mower itself is generally good for many seasons; the battery is what ages. It is " +
+          "the part that wears with every charge cycle, and whether it can be replaced " +
+          "separately varies by model. Blades are a consumable and get changed several times a " +
+          "season. Before you buy, check that the battery is a serviceable part rather than a " +
+          "sealed one, because that is the difference between a repair and a replacement.",
+      },
+      {
+        q: "Do robot lawn mowers work under trees?",
+        a:
+          "It depends entirely on how the machine navigates. A boundary wire does not care " +
+          "about tree cover at all, and neither do vision or LiDAR systems. A wire-free mower " +
+          "positioning itself by satellite does — it needs a clear view of the sky, and a " +
+          "canopy of mature trees is exactly what it does not have. This is the question with " +
+          "the least search volume behind it and the highest chance of ruining the purchase.",
+      },
+      {
+        q: "How do robot lawn mowers deal with dog mess?",
+        a:
+          "Badly, and there is no polite version of this answer. A mower that drives through it " +
+          "will spread it across the lawn and into its own underside. The better machines use " +
+          "cameras to recognise and avoid obstacles, which includes this one, but the reliable " +
+          "answer is still to check the lawn before a scheduled run — the same as you would " +
+          "before mowing it yourself.",
+      },
+      {
+        q: "How much does a robot lawn mower cost?",
+        a:
+          "The widest price range of any robot category we cover. The spread is not about how " +
+          "well they cut — every one of them cuts grass properly — it is about how much ground " +
+          "the machine covers, how steep it can go, and whether it needs a boundary wire. A " +
+          "small flat lawn on a wire is a fraction of the cost of an acre of slopes navigated " +
+          "without one.",
+      },
+    ],
+  },
   "window-cleaning-robots": {
     id: "faqs",
     eyebrow: "Questions",
@@ -1014,6 +1404,20 @@ export interface BotMatchCtaContent {
 }
 
 export const BOTMATCH_CTA: Record<string, BotMatchCtaContent> = {
+  /* NO "robotic-lawn-mowers" ENTRY, and that is deliberate.
+
+     The panel's button goes to /botmatch/<slug>/?start=quiz, and for lawn that
+     drops the reader straight into the pool questionnaire — content/matcher-
+     questions.ts holds one question set and it asks about pool type, pool
+     length and waterline debris. A panel promising "tell us how big the lawn
+     is" that then asks about a pool is worse than no panel.
+
+     The copy is written and waiting. Restore it here when the lawn question
+     set lands:
+       headline "Find your robot mower"
+       body     tell us the lawn size, the slope and whether it sits under trees
+       image    /media/lawn-category/feature-desktop.webp (text-free, optimised)
+     Deciding questions are in §7 of the research findings. */
   "window-cleaning-robots": {
     headline: "Find your window robot",
     body:

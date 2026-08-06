@@ -1,10 +1,11 @@
 # US Robotic-Lawn-Mower SEO Research — Findings and Proposed Keyword Map
 
-**Run:** GitHub Actions 31073327230 · **Completed:** 2026-08-06 05:23 UTC
-**Spend: $0.21628 of the $2.00 cap** · Locale: US (2840) / en / Google desktop.
+**Main run:** GitHub Actions 31073327230 · 2026-08-06 05:23 UTC · **$0.21628**
+**Top-up run:** 31074893036 · 2026-08-06 05:42 UTC · **$0.008** (see §9)
+**Total spend: $0.22428 of the $2.00 cap** · Locale: US (2840) / en / desktop.
 110 keywords priced (from the 123-term inventory in
 `docs/seo/seeds/robotic-lawn-mowers.json`, 13 deduped), 13 related-keyword
-leads, 22 live SERPs, 25 API batches.
+leads, **24 live SERPs**, 27 API batches.
 
 **Status: PROPOSED. Nothing is built until Danny signs off.**
 Products and ASINs are Stage 4 — this document is Stage 2/3 only, per
@@ -159,8 +160,9 @@ market telling us the buyers are here.
 | best robot lawn mower for large yard | 0 | — | **7/10** with `robot lawn mower comparison` |
 | how do robot lawn mowers work | 210 | 7 | **5/10** with both head phrasings, 5/10 with comparison |
 | are robot lawn mowers worth it | 210 | 18 | **5/10** with both head phrasings |
+| **the acreage cluster** *(1 acre, 2 acres, half acre, small yard)* | **≈2,060** | 2–20 | **6/10** with `best robot lawn mower` — see §9b |
 
-All five become **anchored sections of the category page**, not guides. The
+All six become **anchored sections of the category page**, not guides. The
 "how do they work" and "worth it" rulings follow the same ≥5 threshold that
 merged the window best-of — applied consistently, even though both read like
 natural standalone guide topics.
@@ -212,6 +214,13 @@ the whole category.**
 14,800/mo at KD 0–7 is easier than anything in the pool catalogue and carries
 more traffic than the entire window category. Three reviews: **430X, 415X,
 115H.**
+
+**The top-up run (§9a) confirms both halves of this.** `husqvarna automower`
+↔ `husqvarna automower review` share **5/10**, so one review page owns the
+whole 14,800 rather than the 140 the review term suggested — the largest
+single keyword any planned BotPlanet page would carry. And Amazon ranks the
+**430X** at position 6 on that SERP, which settles the availability question
+for the flagship. **Build the 430X first.**
 
 **Segway Navimow — ≈6,200/mo**
 
@@ -308,8 +317,7 @@ robot lawn mowers safe for pets` came back 5/10, shared on facebook, reddit
 and three manufacturer domains. Two unrelated questions both landing on forum
 threads is noise, not shared intent. No merge.)*
 
-### G2 — What size yard: 1 acre, 2 acres and up
-**`/guides/robot-lawn-mower-acreage/`**
+### ~~G2 — What size yard~~ — **KILLED by the top-up run. This is a hub section.**
 
 | Term | Vol/mo | KD |
 |---|---|---|
@@ -321,17 +329,20 @@ threads is noise, not shared intent. No merge.)*
 | best robot lawn mower for half acre | 10 | — |
 | **Combined** | **≈2,060** | **2–20** |
 
-**Highest-volume guide in the tier, at KD 2–11.**
+This was proposed as the highest-volume guide in the tier. The follow-up SERP
+run (§9) says it cannot be one: **`best robot lawn mower for 1 acre` shares
+6/10 domains with `best robot lawn mower`** — amazon, cnet, homedepot,
+reddit, youtube, zdnet. It is 5/10 with `robot lawn mower comparison` too.
 
-**Important boundary:** this guide is keyed on **acreage**, not on "large
-yard". `best robot lawn mower for large yard` shares **7/10** with `robot
-lawn mower comparison`, which puts it in the hub's decision cluster. The
-guide must not use "large yard" in its title, H1 or slug.
+Google is serving the same result set. An acreage guide would have competed
+with our own category page for it, which is precisely the failure the
+threshold exists to catch.
 
-*Caveat, stated because it is a real gap: we bought a SERP for "best robot
-lawn mower for large yard" but not for "best robot lawn mower for 1 acre".
-The acreage terms are therefore untested against the hub. If Danny wants that
-certainty it is one more SERP call at $0.004.*
+**The ≈2,060/mo goes to the category page as a yard-size section** — which is
+where it belongs anyway, since acreage is the first question BotMatch asks.
+
+*(The original draft of this section flagged the acreage terms as untested and
+priced the answer at $0.004. That call was worth making.)*
 
 ### G3 — Budget robot mowers
 **`/guides/best-budget-robot-lawn-mower/`**
@@ -346,6 +357,12 @@ certainty it is one more SERP call at $0.004.*
 `best budget robot lawn mower` came back a **fully distinct SERP** — no
 overlap flag with anything. Confirmed independently: 1/10 with the hub, 4/10
 with `best robot lawn mower`. Both under threshold. Safe.
+
+**But it is the closest call in the set, and worth saying so.** The top-up run
+found budget shares **6/10** with `best robot lawn mower for 1 acre` — the
+term that just got killed for being 6/10 with the hub. Chained overlap is not
+the test and the direct measurement is 4/10, so budget keeps its page. If it
+underperforms, this is the first guide to fold in.
 
 *Not included:* `robot lawn mower price` (1,900/mo) is **KD 48** — the hardest
 term in the entire category outside the head cluster, and worth less than the
@@ -453,6 +470,7 @@ them. Build it last.
 | `which robot lawn mower should i buy` | 6/10 with comparison, 6/10 with best → hub section |
 | `robot lawn mower comparison` (90/mo, KD 17) | 7/10 with large-yard, 6/10 with best and with which-should-i-buy → hub section. The `/compare/` tool page stays; it is a tool, not a keyword target |
 | A separate "do they work on hills" explainer | **7/10** with `best robot lawn mower for hills` → merged into G4 |
+| A separate acreage / yard-size guide (≈2,060/mo) | **6/10** with `best robot lawn mower` → hub section. See §9b |
 | `robot lawn mower vs regular mower` | 0/mo. Distinct SERP, no demand. A hub section at most |
 | `are robot lawn mowers safe for pets` / `for children` | 0/mo either. Section inside G5 |
 | `robot lawn mower theft protection` | 0/mo. Section inside G5 |
@@ -467,19 +485,21 @@ them. Build it last.
 |---|---|
 | Category page | 1 |
 | Product reviews | 17 |
-| Buying guides | 7 |
-| Comparison tool (`/compare/robotic-lawn-mowers/`) | 1 |
-| BotMatch tool (`/botmatch/robotic-lawn-mowers/`) | 1 |
-| **Total** | **27** |
+| Buying guides | 6 *(was 7 — acreage folded into the hub)* |
+| **Total to build** | **24** |
 
-Against window's 18 and pool's 21. The extra weight is all in reviews, which
-is deliberate — Danny's instruction of 5 August: *"Add as many diverse
-products as possible - so our bot selector has plenty of options."*
+`/compare/robotic-lawn-mowers/` and `/botmatch/robotic-lawn-mowers/` are not
+counted. They already exist for every category in the route registry and come
+into being the moment the category goes live — no build work, no keywords of
+their own.
 
-**Artwork required:** 17 reviews × 4 images = 68, plus 1 hero + 1 feature for
-the category page and 1 hero per guide = **77 images.** That is the largest
-single artwork ask so far and worth knowing before we start, not halfway
-through.
+The weight is all in reviews, which is deliberate — Danny's instruction of
+5 August: *"Add as many diverse products as possible - so our bot selector has
+plenty of options."*
+
+**Artwork required:** 17 reviews × 4 images = 68, plus 2 for the category page
+and 1 per guide = **76 images.** The largest single artwork ask so far, and
+worth knowing before we start rather than halfway through.
 
 ---
 
@@ -503,16 +523,74 @@ not what gets searched.
 
 ---
 
-## 8. Data gaps, stated rather than hidden
+## 8. Data gaps
 
-- **Acreage terms were never SERP-tested** (§G2). One call, $0.004, if wanted.
-- **No SERP for `husqvarna automower`** — the 14,800/mo, KD 0–7 term that is
-  the biggest opportunity in the category. We tested `husqvarna automower
-  review` (140/mo) instead. Worth one call before committing to three
-  Husqvarna reviews.
-- **Amazon US availability is unverified for all 17 products.** Husqvarna is
-  the specific risk.
-- **`robot lawn mower husqvarna` at 14,800/mo, KD 0** was discovered in
-  related keywords, not seeded. It is the same demand as `husqvarna
-  automower`, phrased so that it reads as a category-page long-tail. Watch it
-  — it may belong to the hub rather than to a review.
+Two of the three below were closed by the top-up run in §9. What remains:
+
+- **Amazon US availability is unverified for 16 of the 17 products.** The
+  Husqvarna Automower 430X is now confirmed — Amazon ranks #6 for `husqvarna
+  automower` with that exact model. The rest are Stage 4.
+
+---
+
+## 9. Top-up SERP run — 2026-08-06, $0.008
+
+Run 31074893036, two live SERPs, no volume or difficulty re-bought (see the
+`serpOnly` mode added to `scripts/seo-research.mjs`). Both questions came from
+this document's own gap list and both answers changed the plan.
+
+### 9a. `husqvarna automower` — the brand term belongs to a review, not a hub
+
+| Pos | Domain | Result |
+|---|---|---|
+| 1 | husqvarna.com | Robot Lawn Mowers \| Husqvarna US |
+| 2 | roboticmowerservices.com | Automower & Sunseeker model list |
+| 4 | reddit.com | "How good are the new Husqvarna automowers…" |
+| **6** | **amazon.com** | **Husqvarna Automower 430X Robotic Lawn Mower** |
+| 10 | medium.com | An Honest Review of the Husqvarna AutoMower |
+| 13 | husqvarna.com | Parts and support, Automower 550 |
+| 14 | toolsinaction.com | Automower 430XH Review — "why I wouldn't…" |
+| 15, 16 | youtube.com | Automower channel + "3 years with Husqvarna Automower" |
+
+**Three findings:**
+
+1. **`husqvarna automower` ↔ `husqvarna automower review` = 5/10.** One page,
+   not two. A single Husqvarna Automower review can carry **14,800/mo**, not
+   the 140/mo I costed it at. That is the largest single keyword any planned
+   BotPlanet page would own.
+2. **It does not touch the category page.** No overlap flag against either
+   head phrasing. The Husqvarna review is structurally safe.
+3. **The 430X is on Amazon US** — Amazon ranks #6 with that exact model.
+   The availability risk flagged in §3 is answered for the flagship. That
+   makes the 430X the review to build first.
+
+Note what is winnable here: medium.com, toolsinaction.com and a Reddit thread
+all rank in the top 16. **Two of the top results are complaints** — "why I
+wouldn't recommend", "Red flags & Frustration: 3 years with". A review that
+takes the negatives seriously fits this SERP; a puff piece does not.
+
+PAA on this SERP: life expectancy, "Is a Husqvarna Automower good?", cost, and
+**"What are the disadvantages of a robotic mower?"** — the disadvantages
+question appearing yet again, now on a brand SERP.
+
+### 9b. `best robot lawn mower for 1 acre` — the acreage guide is dead
+
+| Compared with | Shared |
+|---|---|
+| **best robot lawn mower** | **6/10** — amazon, cnet, homedepot, reddit, youtube, zdnet |
+| best budget robot lawn mower | 6/10 |
+| robot lawn mower comparison | 5/10 |
+| which robot lawn mower should i buy | 4/10 |
+| best robot lawn mower for hills | 4/10 |
+
+Over the threshold against the hub's own "best" cluster. **The ≈2,060/mo
+acreage terms become a category-page section** (§G2), not a guide.
+
+This is the top-up earning its $0.004: without it we would have built a
+2,060/mo guide that competed with our own category page and lost.
+
+The SERP also carries an **AI overview**, `discussions_and_forums` and
+`perspectives` — three features the other lawn SERPs did not show. Two
+Facebook threads rank in the top 18. Google is treating acreage as a question
+people argue about rather than one a buying guide settles, which is a second,
+independent reason not to give it a commercial page.
