@@ -57,8 +57,20 @@ export function scoreProducts(
     if (!eligible.includes(c.productClass)) {
       return exclude(c.productId, "class_not_eligible");
     }
-    if (config.hardExclusions.environmentMismatch && !c.environments.includes(answers.environment)) {
-      return exclude(c.productId, "environment_mismatch");
+    if (config.hardExclusions.environmentMismatch) {
+      /* No environment supplied while the exclusion is ON means the config
+         gates on an axis its questionnaire never asked about. The safe
+         direction is to fail closed, and that is what happens — but it would
+         exclude the entire catalogue while looking exactly like a genuine
+         mismatch, which is the shape of the bug that left the window matcher
+         silently returning nothing for a day. It gets its own reason so the
+         audit row says "misconfigured" rather than "unsuitable". */
+      if (!answers.environment) {
+        return exclude(c.productId, "environment_unknown");
+      }
+      if (!c.environments.includes(answers.environment)) {
+        return exclude(c.productId, "environment_mismatch");
+      }
     }
     const size = poolSizeFit(answers, c, config);
     if (size.excluded) return exclude(c.productId, size.reason!);

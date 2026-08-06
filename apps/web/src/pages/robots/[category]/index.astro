@@ -62,7 +62,17 @@ const check = checkSectionFor(category);
 const price = priceSectionFor(category);
 const verdict = verdictSectionFor(category);
 const faq = faqSectionFor(category);
-const bmCta = botMatchCtaFor(category);
+/* A matcher with no products is not advertised — PRE-BUILD-PROCESS.md Stage 5b.
+   The rule used to be enforced by deleting the panel's copy out of
+   category-sections.ts, which meant turning it back on was a rewrite and
+   depended on somebody remembering. The copy now stays written and the gate
+   sits here, on the thing that is actually true: this category's count of
+   published products. Zero products, no panel. First product, panel appears —
+   no flag to flip and no second deploy.
+
+   The review page renders the same panel unconditionally, and that is correct:
+   a review existing means a product exists. */
+const bmCta = products.length > 0 ? botMatchCtaFor(category) : undefined;
 
 /* Built from the catalogue rather than written out, so a product that changes
    model cannot leave a stale row behind. */

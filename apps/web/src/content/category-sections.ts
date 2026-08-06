@@ -2207,15 +2207,58 @@ export interface BotMatchCtaContent {
 }
 
 export const BOTMATCH_CTA: Record<string, BotMatchCtaContent> = {
-  /* NO "companion-robots" OR "pet-camera-robots" ENTRY, and unlike lawn the
-     reason is not a missing question set. Both categories have their own
-     questions and their own scoring config (sc-companion-v1, sc-petcam-v1).
-     What they do not have is products.
+  /* THE PANELS BELOW ARE WRITTEN AND WAITING, NOT SWITCHED OFF BY HAND.
+     Changed 6 August 2026.
 
      "A matcher with no products is not advertised" — PRE-BUILD-PROCESS.md
-     Stage 5b. A panel promising a recommendation in thirty seconds that then
-     returns an empty list is worse than no panel. Add both entries when the
-     first product lands in each catalogue. */
+     Stage 5b — used to be enforced by leaving the record out of this file.
+     That worked and it was fragile: the copy lived in a comment, restoring it
+     was a rewrite rather than a flip, and it depended on somebody remembering
+     months later. Lawn sat like that for exactly that reason.
+
+     The gate now lives where the truth is. The category page reads its own
+     published-product count and renders this panel only when there is
+     something to recommend; the review page renders it unconditionally,
+     because a review existing means a product exists. So the copy is written,
+     reviewed and version-controlled today, and the panel turns itself on the
+     moment the first product lands — no second deploy, nothing to remember.
+
+     Restored for lawn at the same time, whose question set landed on 6 August
+     and whose panel had been waiting in a comment ever since. */
+  "companion-robots": {
+    headline: "Find your robot pet",
+    body:
+      "Tell us who it is for, whether a monthly fee is acceptable, and whether you want " +
+      "something that moves. In about 30 seconds we will match you with the right companion " +
+      "robot — and tell you which ones to rule out.",
+    points: ["About 30 seconds", "Five plain questions", "No account needed"],
+    ctaLabel: "Start 30-second match",
+    note: "Free. We email the result and keep it on a page you can return to.",
+  },
+  "pet-camera-robots": {
+    headline: "Find your pet camera robot",
+    body:
+      "Tell us whether there are stairs between the rooms that matter, what is on your floors " +
+      "and what you actually need to do from your phone. In about 30 seconds we will match you " +
+      "with the right robot — or tell you a fixed camera is the better buy.",
+    points: ["About 30 seconds", "Five plain questions", "No account needed"],
+    ctaLabel: "Start 30-second match",
+    note: "Free. We email the result and keep it on a page you can return to.",
+  },
+  "robotic-lawn-mowers": {
+    headline: "Find your robot mower",
+    body:
+      "Tell us the lawn size, the slope and whether it sits under trees. In about 30 seconds we " +
+      "will match you with the right robot mower — and tell you which ones to rule out.",
+    points: ["About 30 seconds", "Four plain questions", "No account needed"],
+    ctaLabel: "Start 30-second match",
+    image: {
+      src: "/media/lawn-category/feature-desktop.webp",
+      alt: "",
+      focal: "72% center",
+    },
+    note: "Free. We email the result and keep it on a page you can return to.",
+  },
   /* NO "robotic-lawn-mowers" ENTRY, and that is deliberate.
 
      The panel's button goes to /botmatch/<slug>/?start=quiz, and for lawn that
