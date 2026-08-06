@@ -32,3 +32,6 @@ packages/**/test/**/*.d.ts
 
 # SEO research raw API cache — never committed
 docs/seo/cache/
+
+# Raw DataForSEO responses never enter git — PRE-BUILD-PROCESS.md Stage 2.
+research-output/

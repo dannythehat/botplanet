@@ -615,28 +615,50 @@ export const CATEGORY_ANCHORS: Record<string, InternalAnchor[]> = {
        A planned anchor renders as plain text, so none of these can 404. The
        wiring is done, and each becomes a real link the day its target exists —
        rather than being remembered, or not, months later. */
+    /* REFUSED 6 August 2026, by measurement. These four anchors were declared
+       months ago pointing at guide URLs nobody had ever priced. The second pool
+       run priced them:
+
+         robotic pool cleaner battery        no measurable volume
+         robotic pool cleaner filter         no measurable volume
+         what size robotic pool cleaner      no measurable volume
+         robotic pool cleaner warranty       no measurable volume
+
+       And the SERPs are worse than the volumes. Every one of these questions
+       returns Reddit, Facebook, troublefreepool and Quora — one undifferentiated
+       forum result set, not editorial. "how to clean pool robot filter" shares
+       SIX top-ten domains with "aiper vs dolphin".
+
+       Kept as entries rather than deleted so the refusal is auditable and
+       nobody re-proposes them. `status: "planned"` already renders nothing.
+       Evidence: docs/seo/robotic-pool-cleaners-guides-findings.md
+
+       Warranty demand IS real but it is brand-shaped, not category-shaped —
+       aiper warranty 320 at KD 3, dolphin pool cleaner warranty 110, beatbot
+       warranty 70 — and it belongs in the review pages, which already carry
+       warranty sections. */
     {
       anchor: "battery",
       href: "/guides/robotic-pool-cleaner-batteries/",
-      why: "Every cordless review reaches the same paragraph about cells degrading. That belongs in one guide the reviews point at, not repeated five times. Planned.",
+      why: "REFUSED 6 Aug 2026: no measurable volume, SERP is Reddit and Facebook. Every cordless review reaches the same paragraph about cells degrading. That belongs in one guide the reviews point at, not repeated five times. Planned.",
       status: "planned",
     },
     {
       anchor: "filter",
       href: "/guides/robotic-pool-cleaner-filters/",
-      why: "Micron ratings, canister capacity and how often you really rinse. Recurs in every review and is explained properly in none of them yet. Planned.",
+      why: "REFUSED 6 Aug 2026: 'how to clean pool robot filter' is 10/mo and shares 6 domains with 'aiper vs dolphin'. Micron ratings, canister capacity and how often you really rinse. Recurs in every review and is explained properly in none of them yet. Planned.",
       status: "planned",
     },
     {
       anchor: "pool size",
       href: "/guides/what-size-robotic-pool-cleaner/",
-      why: "The single most common rule-out on this site is pool length. Planned as the page that explains how the ratings are arrived at and how much to trust them.",
+      why: "REFUSED 6 Aug 2026: no measurable volume on any size phrasing. The single most common rule-out on this site is pool length. Planned as the page that explains how the ratings are arrived at and how much to trust them.",
       status: "planned",
     },
     {
       anchor: "warranty",
       href: "/guides/robotic-pool-cleaner-warranties/",
-      why: "Two reviews so far have hit a manufacturer that will not state a term. Planned as the page that records who publishes what.",
+      why: "REFUSED 6 Aug 2026: no category volume; demand is brand-shaped and lives in the reviews. Two reviews so far have hit a manufacturer that will not state a term. Planned as the page that records who publishes what.",
       status: "planned",
     },
   ],

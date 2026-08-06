@@ -887,7 +887,60 @@ const COMPANION_GUIDE: PagePlan = {
   evidence: "≈1,090/mo combined across four phrasings, all KD 0, and a genuinely distinct reader from the hub's.",
 };
 
+/* Two pool pages the SECOND run proved, 6 August 2026, $0.1795.
+   docs/seo/robotic-pool-cleaners-guides-findings.md */
+const POOL_ROUND_TWO: PagePlan[] = [
+  {
+    path: "/best-robots/robotic-pool-cleaners/above-ground/",
+    category: "robotic-pool-cleaners",
+    type: "best-of",
+    status: "researched",
+    intent: "Find a cleaner that will not wreck my vinyl liner.",
+    primary: { term: "robotic pool cleaner for above ground pool", volume: 2400, difficulty: 0 },
+    secondary: [
+      { term: "robotic pool cleaner for small pool", volume: 260, difficulty: 0 },
+      { term: "robotic pool cleaner for vinyl liner", volume: 20, difficulty: 0 },
+    ],
+    ceded: [
+      { term: "best robotic pool cleaner", toPath: "/best-robots/robotic-pool-cleaners/", why: "The general ranking belongs to the parent, which carries above-ground as a section today. This page takes the segment term only." },
+      { term: "robotic pool cleaner", toPath: "/robots/robotic-pool-cleaners/", why: "Category head term, owned by the hub." },
+    ],
+    products: ["aiper-seagull-se", "aiper-scuba-s1", "wybot-c1", "bublue-bubot-800p"],
+    linksOut: ["/robots/robotic-pool-cleaners/", "/best-robots/robotic-pool-cleaners/", "/botmatch/robotic-pool-cleaners/"],
+    images: [{ slot: "hero", shows: "A cleaner working the floor of an above-ground vinyl pool", supplied: false }],
+    schema: ["Article", "ItemList", "FAQPage", "BreadcrumbList"],
+    research: "local run · 2026-08-06 · $0.1795",
+    evidence: "2,400/mo at KD 0 with a $4.30 CPC. The 1 August run measured above-ground at 140 and merged it — this phrasing was simply not in that seed list. Second-strongest commercial term in the category after cordless, and four catalogue machines already qualify.",
+  },
+  {
+    path: "/best-robots/robotic-pool-cleaners/solar-skimmers/",
+    category: "robotic-pool-cleaners",
+    type: "best-of",
+    status: "planned",
+    intent: "Stop leaves sinking before a floor robot has to deal with them.",
+    primary: { term: "solar powered pool skimmer", volume: 6600, difficulty: 0 },
+    secondary: [
+      { term: "solar pool skimmer", volume: 6600, difficulty: 9 },
+      { term: "robotic pool skimmer", volume: 2900, difficulty: 24 },
+      { term: "automatic pool skimmer", volume: 1600, difficulty: 0 },
+      { term: "best solar pool skimmer", volume: 320, difficulty: 0 },
+      { term: "pool surface skimmer robot", volume: 210, difficulty: 0 },
+    ],
+    ceded: [
+      { term: "robotic pool cleaner", toPath: "/robots/robotic-pool-cleaners/", why: "A skimmer is a different product class from a cleaner and the hub is where that distinction is drawn." },
+    ],
+    products: ["betta-se-plus"],
+    productsNote: "BLOCKED ON A SECOND SKIMMER. We hold exactly one, and a one-product segment page is thin whatever the volume. Ruling 7 of the 1 August run deferred this on the same gate and the gate has not moved — what changed is that the keyword case is now the strongest in the category that we cannot act on.",
+    linksOut: ["/robots/robotic-pool-cleaners/", "/robots/robotic-pool-cleaners/betta-se-plus/", "/best-robots/robotic-pool-cleaners/"],
+    images: [{ slot: "hero", shows: "A solar skimmer floating on a leaf-strewn surface, trees overhead", supplied: false }],
+    schema: ["Article", "ItemList", "FAQPage", "BreadcrumbList"],
+    research: "local run · 2026-08-06 · $0.1795",
+    evidence: "~11,600/mo combined across six phrasings, and 'solar powered pool skimmer' is the same 6,600 as 'solar pool skimmer' at KD 0 instead of 9 — the easy-phrasing trick the vacuum category also turned on.",
+  },
+];
+
 export const PAGE_PLAN: PagePlan[] = [
+  ...POOL_ROUND_TWO,
   ...POOL,
   ...POOL_REVIEWS,
   ...HUBS,
