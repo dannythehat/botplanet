@@ -89,7 +89,7 @@ export const CATEGORY_HERO: Record<string, CategoryHeroContent> = {
        text-only rather than blocking the page — the category was built before
        its images on the owner's instruction of 6 August 2026 ("we will do
        pages first, then add products afterwards"). The masters needed are
-       listed in docs/seo/robotic-lawn-mowers-page-list.md. Do NOT reuse
+       listed in docs/seo/robotic-lawn-mowers-research-findings.md §10. Do NOT reuse
        /media/lawn-category/feature-desktop.webp here: it is the homepage
        teaser, composed with a dark left gutter for overlaid text, and it
        already appears further down this page in the BotMatch panel. */
