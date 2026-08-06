@@ -626,6 +626,39 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
     researchedOn: RUN,
   },
   {
+    path: "/compare/robotic-pool-cleaners/",
+    /* Page 4 of the pool map, and the last one on it that was still a stub —
+       a bare table with an H1 over it, no register row and a price column.
+
+       ONE HUB, NOT NINE PAIR PAGES. The 1 August run measured "aiper vs
+       dolphin" at 110 and "dolphin vs polaris" at 30, and the exact model-pair
+       phrases at no measurable volume at all. Ruling 3: brand-vs-brand intent
+       is owned by one hub with a section per pair, and pair URLs return only
+       if demand appears. Nine pages built on 140 searches between them would
+       be nine thin pages competing with each other. */
+    primary: { term: "aiper vs dolphin", volume: 110, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "dolphin vs polaris", volume: 30, difficulty: 0, mustAppear: true },
+      { term: "robotic pool cleaner comparison", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "compare", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "warranty", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "skimmer", volume: 0, difficulty: 0, mustAppear: true },
+    ],
+    cededTo: [
+      {
+        term: "best robotic pool cleaner",
+        path: "/best-robots/robotic-pool-cleaners/",
+        why: "A comparison hub answers 'which brand', a best-of answers 'which one'. They are different queries with different SERPs, and a hub that also reached for the ranking would put two of our pages into one result set.",
+      },
+      {
+        term: "cordless robotic pool cleaner",
+        path: "/best-robots/robotic-pool-cleaners/cordless/",
+        why: "Corded versus cordless is the axis this page is built on, but the 22,200/mo commercial term belongs to the page that ranks cordless machines rather than to the one that explains the difference.",
+      },
+    ],
+    researchedOn: RUN,
+  },
+  {
     path: "/guides/are-robotic-pool-cleaners-worth-it/",
     /* 40/mo on the exact phrase, which would not justify a URL on its own.
        What justifies it: "Is a robot pool cleaner worth it?" is the NUMBER

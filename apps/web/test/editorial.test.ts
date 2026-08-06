@@ -20,6 +20,7 @@ import { keywordsFor, requiredTerms } from "../src/content/seo/keyword-register"
 import { anchorsFor, liveAnchorsFor } from "../src/content/internal-links";
 import { applyInternalLinks } from "../src/lib/internal-linker";
 import { productEditorial, catalogueStatusOf } from "../src/content/products";
+import { COMPARE_PAGES } from "../src/content/compare-page";
 
 const ARTICLES = fileURLToPath(new URL("../src/articles/", import.meta.url));
 const ALL = Object.values(EDITORIAL);
@@ -237,5 +238,88 @@ describe("editorial pages", () => {
     for (const b of pool.filter((p) => p.path.startsWith("/best-robots/"))) {
       expect(b.picks.length, `${b.path} ranks nothing`).toBeGreaterThan(2);
     }
+  });
+});
+
+/**
+ * The comparison hub is the same kind of page as a best-of — an argument
+ * joined to the catalogue — so it gets the same guarantees. It lives in its
+ * own module because a comparison page has pairs rather than ranked picks and
+ * has to keep working for a category that has no comparison research at all.
+ */
+describe("comparison hubs", () => {
+  const CMP = Object.values(COMPARE_PAGES);
+  const comparePath = (slug: string) => `/compare/${slug}/`;
+
+  const compareCopy = (slug: string): string => {
+    const c = COMPARE_PAGES[slug];
+    return [
+      c.title,
+      c.seoTitle,
+      c.metaDescription,
+      c.standfirst,
+      ...c.pairs.flatMap((p) => [p.heading, p.verdict, p.body, ...p.picks.map((x) => x.why)]),
+      ...c.faq.flatMap((f) => [f.q, f.a]),
+      proseOf(c.prose),
+    ]
+      .join(" ")
+      .toLowerCase();
+  };
+
+  it.each(CMP.map((c) => c.categorySlug))("%s has a live, indexable compare route", (slug) => {
+    const route = ROUTES.find((r) => r.path === comparePath(slug));
+    expect(route, `${comparePath(slug)} has no route registry entry`).toBeDefined();
+    expect(route!.status).toBe("live");
+    expect(route!.indexable).toBe(true);
+    expect(route!.inSitemap).toBe(true);
+  });
+
+  it.each(CMP.map((c) => c.categorySlug))("%s comparison prints no price", (slug) => {
+    const copy = compareCopy(slug);
+    expect(copy).not.toMatch(/\$\s?\d/);
+    expect(copy).not.toMatch(/\d[\d,]*\s*dollars/);
+  });
+
+  it.each(CMP.map((c) => c.categorySlug))("%s names only catalogue products", (slug) => {
+    for (const pair of COMPARE_PAGES[slug].pairs) {
+      for (const pick of pair.picks) {
+        expect(productEditorial(pick.slug), `${pick.slug} has no product record`).toBeDefined();
+        expect(catalogueStatusOf(pick.slug), `${pick.slug} is not live`).toBe("active");
+      }
+    }
+  });
+
+  it.each(CMP.map((c) => c.categorySlug))("%s gives every matchup a verdict", (slug) => {
+    for (const pair of COMPARE_PAGES[slug].pairs) {
+      // The answer comes before the reasoning, on every page on this site.
+      expect(pair.verdict.length, `${pair.heading} has no verdict`).toBeGreaterThan(25);
+      expect(pair.body.length).toBeGreaterThan(80);
+      expect(pair.picks.length).toBeGreaterThan(0);
+      expect(pair.id).toMatch(/^[a-z0-9-]+$/);
+    }
+    const ids = COMPARE_PAGES[slug].pairs.map((p) => p.id);
+    expect(new Set(ids).size, "two matchups share an anchor id").toBe(ids.length);
+  });
+
+  it.each(CMP.map((c) => c.categorySlug))("%s still contains every term it targets", (slug) => {
+    expect(requiredTerms(comparePath(slug)).filter((t) => !compareCopy(slug).includes(t))).toEqual([]);
+  });
+
+  it.each(CMP.map((c) => c.categorySlug))("%s does not chase a term it has ceded", (slug) => {
+    const c = COMPARE_PAGES[slug];
+    const k = keywordsFor(comparePath(slug))!;
+    const own = [k.primary, ...k.secondary].map((t) => t.term).sort((x, y) => y.length - x.length);
+    let front = `${c.title} ${c.seoTitle} ${c.metaDescription}`.toLowerCase();
+    for (const term of own) front = front.split(term).join(" ");
+    for (const ceded of k.cededTo ?? []) {
+      expect(front, `${comparePath(slug)} leads with a term it ceded`).not.toContain(ceded.term);
+    }
+  });
+
+  it.each(CMP.map((c) => c.categorySlug))("%s links out of its prose", (slug) => {
+    const c = COMPARE_PAGES[slug];
+    const { applied } = applyInternalLinks(proseOf(c.prose), anchorsFor(slug), comparePath(slug));
+    expect(applied.length, `${comparePath(slug)} links to nothing`).toBeGreaterThanOrEqual(5);
+    for (const link of applied) expect(link.href.split("#")[0]).not.toBe(comparePath(slug));
   });
 });
