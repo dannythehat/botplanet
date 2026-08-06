@@ -57,17 +57,30 @@ jobs:
     # that never changes is as likely to be lying as the job is to be dead, and
     # the job log settles it. Prefer the log.
     #
-# RAISED FROM 15 TO 40 ON 6 AUGUST 2026, and not because a batch got slower.
-    # `timeout-minutes` counts from when the job is CREATED, not from when a
-    # runner picks it up. Run 31120094738 sat in GitHub's hosted-runner queue
-    # for the full fifteen minutes and was cancelled without ever starting —
-    # runner_id 0, runner_name empty, no step ever ran. It spent nothing and
-    # produced nothing, and the failure looked exactly like a hang.
+# RAISED FROM 15 TO 40 ON 6 AUGUST 2026, and the reason given at the time
+    # was WRONG. Correcting it here rather than deleting it, because the wrong
+    # diagnosis is the useful part.
     #
-    # Forty minutes bounds a genuine hang while surviving a busy queue. The
-    # real ceilings are inside the script and always were: a $2.00 cost cap it
-    # refuses to exceed, and a twelve-minute wall-clock deadline on the run
-    # itself. This is the outermost of three, so it can afford to be generous.
+    # What was claimed: that `timeout-minutes` counts from job creation, so a
+    # queued job burns its own timeout. What actually happened: runs
+    # 31120094738 and 31121016884 were BOTH cancelled at exactly 15:01, both
+    # with runner_id 0 and runner_name empty, and NEITHER produced a log at all
+    # — the logs endpoint 404s, which it does not do for a job that started.
+    # The second of those ran against a commit that already carried
+    # timeout-minutes: 40, and it died at fifteen minutes anyway.
+    #
+    # So the ceiling is not ours. No hosted runner was ever assigned. That is a
+    # GitHub-side availability or entitlement problem — Actions minutes, plan
+    # limits or runner capacity — and no change to this file will fix it.
+    #
+    # DO NOT KEEP RE-TRIGGERING. Two runs have already been burned proving the
+    # same point, and a third proves nothing. Check runner availability for the
+    # repository first.
+    #
+    # Forty minutes stays because it is right on its own merits: it bounds a
+    # genuine hang while surviving a busy queue, and the real ceilings are
+    # inside the script anyway — a $2.00 cost cap it refuses to exceed, and a
+    # twelve-minute wall-clock deadline on the run itself.
     #
     # The slowest healthy batch observed is about four and a half minutes.
     #
