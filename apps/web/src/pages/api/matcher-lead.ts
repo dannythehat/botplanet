@@ -93,6 +93,13 @@ function reflect(categorySlug: string | undefined, a: Record<string, string>): s
       a.flooring ? `the floors are ${lower(a.flooring)}` : null,
       a.autonomy ? `you'd like it to ${lower(a.autonomy)}` : null,
     ];
+  } else if (categorySlug === "self-cleaning-litter-boxes") {
+    bits = [
+      a.environment ? `your cat is ${lower(a.environment)}` : null,
+      a.primary_need ? `there ${a.primary_need === "One" ? "is" : "are"} ${lower(a.primary_need)}` : null,
+      a.litter_pref ? `on the maker's own refills, ${lower(a.litter_pref)}` : null,
+      a.tracking ? `on health tracking, ${lower(a.tracking)}` : null,
+    ];
   } else if (categorySlug === "robotic-pool-cleaners") {
     bits = [
       a.environment ? `you have ${lower(a.environment)} pool` : null,
@@ -148,6 +155,8 @@ function renderReply(opts: {
       "who it is for, whether it moves, how much it talks and your budget band",
     "pet-camera-robots":
       "whether there are stairs, what is on your floors, what you need it to do and your budget band",
+    "self-cleaning-litter-boxes":
+      "your cat's size, how many cats, which litter you will use and your budget band",
   };
   const seen = SEEN[opts.categorySlug ?? ""] ?? "what you told us and your budget band";
   /* "your pool" in the sign-off, or the right noun for the category. */
@@ -157,6 +166,7 @@ function renderReply(opts: {
     "robotic-lawn-mowers": "your lawn",
     "companion-robots": "who this is for",
     "pet-camera-robots": "your home",
+    "self-cleaning-litter-boxes": "your cat",
   };
   const theirs = THEIRS[opts.categorySlug ?? ""] ?? "what you told us";
   const p = (t: string) =>

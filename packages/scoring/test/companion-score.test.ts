@@ -279,6 +279,128 @@ describe("pet camera robot matcher", () => {
   });
 });
 
+/* ---------------- Self-cleaning litter boxes ----------------
+   Added with page 004. Same purpose as the two above: the catalogue is empty,
+   so a broken config would look exactly like a correct one. */
+
+/** Mirrors the seed scoring config sc-litterbox-v1. */
+const LITTER_BOX_CONFIG_V1: ScoringConfig = {
+  version: 1,
+  weights: { cleansCoverage: 55, power: 0, priceTier: 45, poolSize: 0 },
+  /* ON, and here the "environment" is the CAT. It is the only exclusion on the
+     site that exists for safety rather than fit. */
+  hardExclusions: { environmentMismatch: true, poolTooLong: false },
+  classEligibility: {
+    default: ["litter_box"],
+    byPrimaryNeed: {
+      single_cat: ["litter_box"],
+      two_cats: ["litter_box"],
+      many_cats: ["litter_box"],
+    },
+  },
+  tiebreakTolerances: {
+    totalPricePctWithin: 1,
+    deliveryDaysWithin: 1,
+    requireSameWarrantyBand: true,
+  },
+};
+
+/** A box rated for ordinary and large cats, but NOT for kittens. */
+const BIG_BOX: SuitabilityCandidate = {
+  productId: "prod-litter-big",
+  productClass: "litter_box",
+  environments: ["average_cat", "large_cat"],
+  cleans: ["odor_sealing", "multi_cat_capacity", "health_monitoring", "app_control"],
+  powerType: "corded",
+  priceTier: "premium",
+  maxPoolLengthFt: null,
+  maxPoolAreaSqFt: null,
+};
+
+/** A small, cheap box: ordinary cats only. */
+const SMALL_BOX: SuitabilityCandidate = {
+  productId: "prod-litter-small",
+  productClass: "litter_box",
+  environments: ["average_cat"],
+  cleans: ["odor_sealing"],
+  powerType: "corded",
+  priceTier: "budget",
+  maxPoolLengthFt: null,
+  maxPoolAreaSqFt: null,
+};
+
+const LITTER_ALL = [BIG_BOX, SMALL_BOX, DESK_COMPANION, PET_CAMERA];
+
+describe("self-cleaning litter box matcher", () => {
+  const averageCat: PoolAnswers = {
+    environment: "average_cat",
+    primary_need: "single_cat",
+    desired_cleans: ["odor_sealing"],
+    power_pref: "no_pref",
+    budget_tier: "budget",
+    pool_length_ft: null,
+    pool_area_sqft: null,
+  };
+
+  it("recommends a litter box for an ordinary cat", () => {
+    const result = scoreProducts(averageCat, LITTER_ALL, LITTER_BOX_CONFIG_V1);
+    const winner = result.ranked.find((r) => !r.excluded)!;
+    expect(winner).toBeDefined();
+    expect(winner.productId).toBe("prod-litter-small");
+  });
+
+  it("EXCLUDES a pet camera and a companion robot from a litter recommendation", () => {
+    const result = scoreProducts(averageCat, LITTER_ALL, LITTER_BOX_CONFIG_V1);
+    for (const id of ["prod-pet-camera", "prod-desk-companion"]) {
+      const r = result.ranked.find((x) => x.productId === id)!;
+      expect(r.excluded).toBe(true);
+      expect(r.exclusionReason).toBe("class_not_eligible");
+    }
+  });
+
+  it("RECOMMENDS NOTHING for a kitten, which is the correct answer", () => {
+    /* The safety exclusion, and the one case on this site where an empty
+       result is the right result. These machines detect their occupant by
+       weight; below the sensor minimum the box does not know it is occupied.
+       No machine in the fixture lists `kitten`, so every one is refused —
+       and "use an ordinary tray until it has grown" is a better outcome than
+       a recommendation that cannot be made safely. */
+    const kitten: PoolAnswers = { ...averageCat, environment: "kitten" };
+    const result = scoreProducts(kitten, LITTER_ALL, LITTER_BOX_CONFIG_V1);
+    const boxes = result.ranked.filter((r) => r.productId.startsWith("prod-litter"));
+    expect(boxes.length).toBeGreaterThan(0);
+    for (const b of boxes) {
+      expect(b.excluded).toBe(true);
+      expect(b.exclusionReason).toBe("environment_mismatch");
+    }
+    expect(result.ranked.find((r) => !r.excluded)).toBeUndefined();
+  });
+
+  it("EXCLUDES a box a large cat cannot turn around in", () => {
+    const bigCat: PoolAnswers = { ...averageCat, environment: "large_cat" };
+    const result = scoreProducts(bigCat, LITTER_ALL, LITTER_BOX_CONFIG_V1);
+    const small = result.ranked.find((r) => r.productId === "prod-litter-small")!;
+    const big = result.ranked.find((r) => r.productId === "prod-litter-big")!;
+    expect(small.excluded).toBe(true);
+    expect(small.exclusionReason).toBe("environment_mismatch");
+    expect(big.excluded).toBe(false);
+  });
+
+  it("prefers the multi-cat machine when there are three cats", () => {
+    const threeCats: PoolAnswers = {
+      ...averageCat,
+      primary_need: "many_cats",
+      desired_cleans: ["odor_sealing", "multi_cat_capacity", "health_monitoring"],
+      budget_tier: "premium",
+    };
+    const result = scoreProducts(threeCats, LITTER_ALL, LITTER_BOX_CONFIG_V1);
+    const big = result.ranked.find((r) => r.productId === "prod-litter-big")!;
+    const small = result.ranked.find((r) => r.productId === "prod-litter-small")!;
+    expect(big.excluded).toBe(false);
+    expect(big.score).toBeGreaterThan(small.score);
+  });
+});
+
 describe("the two configs cannot be confused for one another", () => {
   it("gives the two categories different weights and different exclusions", () => {
     expect(COMPANION_CONFIG_V1.weights).not.toEqual(PET_CAMERA_CONFIG_V1.weights);
@@ -290,6 +412,13 @@ describe("the two configs cannot be confused for one another", () => {
     const a = new Set(COMPANION_CONFIG_V1.classEligibility.default);
     const shared = PET_CAMERA_CONFIG_V1.classEligibility.default.filter((c) => a.has(c));
     expect(shared).toEqual([]);
+  });
+
+  it("keeps litter boxes separate from both", () => {
+    const litter = new Set(LITTER_BOX_CONFIG_V1.classEligibility.default);
+    for (const cfg of [COMPANION_CONFIG_V1, PET_CAMERA_CONFIG_V1]) {
+      expect(cfg.classEligibility.default.filter((c) => litter.has(c))).toEqual([]);
+    }
   });
 
   it("names a config that gates on an environment its questions never ask for", () => {

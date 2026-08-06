@@ -32,15 +32,28 @@ const GLASS_WORDS = /\bglass|window|pane|frameless|squeegee|streak\b/i;
 /** Lawn words that must never appear outside the lawn set. */
 const LAWN_WORDS = /\blawn|grass|mow|acre|yard|boundary wire\b/i;
 /* Pet-camera words that must never appear outside the pet-camera set.
+
    "stairs" is bounded on BOTH sides deliberately: the window set offers
    "stairwell" as a place a robot has to work, which is a legitimate use of a
-   different word and not a leak. */
-const PET_CAMERA_WORDS = /\bstairs?\b|\bcarpet|\bpatrol|\btreats?\b|\bdog\b|\bcat\b/i;
+   different word and not a leak.
+
+   "cat" and "dog" were in this list and have been REMOVED. They caught the
+   litter-box set on 6 August 2026, which asks how big your cat is — and that
+   is not a leak, it is the single most important question that category has.
+   The animal is not what makes pet cameras distinctive; two categories on this
+   site are sold to cat owners. What is distinctive is the machine's own
+   constraints, so the guard is those. */
+const PET_CAMERA_WORDS = /\bstairs?\b|\bcarpet|\bpatrol|\btreats?\b/i;
 /* Companion words that must never appear outside the companion set. Kept to
    terms only this category uses — "monthly fee" is deliberately NOT here,
    because pet cameras charge for cloud recording and asking about it there is
    correct rather than borrowed. */
 const COMPANION_WORDS = /\bconversation\b|\bdesk\b/i;
+/* Litter-box words that must never appear outside the litter-box set. The cat
+   words are deliberately NOT here — pet cameras legitimately ask about cats,
+   and asking a pet-camera buyer about their cat is correct rather than
+   borrowed. These four are specific to the litter category. */
+const LITTER_BOX_WORDS = /\blitter\b|\brefill/i;
 
 /** Every string a reader could see in a question set. */
 function visibleText(slug: string): string {
@@ -110,6 +123,15 @@ describe("every category's questions are its own", () => {
       if (slug === "companion-robots") continue;
       expect(visibleText(slug), `${slug} mentions a companion concern`).not.toMatch(
         COMPANION_WORDS,
+      );
+    }
+  });
+
+  it("asks nobody outside litter boxes about litter or refills", () => {
+    for (const slug of CATEGORIES) {
+      if (slug === "self-cleaning-litter-boxes") continue;
+      expect(visibleText(slug), `${slug} mentions a litter concern`).not.toMatch(
+        LITTER_BOX_WORDS,
       );
     }
   });

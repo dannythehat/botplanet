@@ -44,6 +44,7 @@ export const CATEGORIES: CategoryDef[] = [
      peaks at Christmas, pet cameras peak in July when people go away. */
   { slug: "companion-robots", name: "Companion Robots & Robot Pets", jtbd: "Keep me company", short: "Robot pets and desk companions built for company rather than chores.", launch: "live", order: 6 },
   { slug: "pet-camera-robots", name: "Pet Camera Robots", jtbd: "Watch my pet", short: "Cameras on wheels that drive around the house while you are out.", launch: "live", order: 7 },
+  { slug: "self-cleaning-litter-boxes", name: "Self-Cleaning Litter Boxes", jtbd: "Stop scooping", short: "Automatic litter boxes that sift and seal the waste themselves.", launch: "live", order: 8 },
   { slug: "solar-panel-robots", name: "Solar-Panel Cleaning Robots", jtbd: "Clean solar panels", short: "Automated cleaners that keep rooftop and ground arrays producing.", launch: "hidden", order: 5 },
 ];
 

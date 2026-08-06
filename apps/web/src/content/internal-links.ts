@@ -58,6 +58,51 @@ export interface InternalAnchor {
    reader at the bottom of a review with nowhere to go. internal-links.test.ts
    checks the anchors that DO exist resolve; it cannot check for absence. */
 export const CATEGORY_ANCHORS: Record<string, InternalAnchor[]> = {
+  "self-cleaning-litter-boxes": [
+    {
+      anchor: "safety",
+      href: "/robots/self-cleaning-litter-boxes/#safety",
+      why: "The most important section on the page and the only one readers arrive already worried about. Google surfaced the vet question on six of the twenty-three SERPs bought for this category, so any page mentioning safety should reach the explanation in one click.",
+      status: "live",
+    },
+    {
+      anchor: "clumping litter",
+      href: "/robots/self-cleaning-litter-boxes/#litter-type",
+      why: "The fork that decides three-year running cost, and the phrase recurs across the prose. A reader meeting it on a product page should be able to reach the reasoning.",
+      status: "live",
+    },
+    {
+      anchor: "large cat",
+      href: "/robots/self-cleaning-litter-boxes/#cat-size",
+      why: "Chamber size is a hard rule-out and the cat-size section is where the three groups are separated. First mention should reach it.",
+      status: "live",
+    },
+    {
+      anchor: "multiple cats",
+      href: "/robots/self-cleaning-litter-boxes/#what-it-fixes",
+      why: "The strongest commercial case in the category, and the section that also states the one-box-per-cat-plus-one rule the machine does not repeal.",
+      status: "live",
+    },
+    {
+      anchor: "compare",
+      href: "/compare/self-cleaning-litter-boxes/",
+      why: "The comparison table is the honest next step once cat size and litter type have narrowed the field.",
+      status: "live",
+    },
+    {
+      anchor: "review methodology",
+      href: "/review-methodology/",
+      why: "Any claim about how we check things should be one click from the page that says how we check things.",
+      status: "live",
+    },
+    {
+      anchor: "BotMatch",
+      href: "/botmatch/self-cleaning-litter-boxes/",
+      why: "Planned until the catalogue has products. The funnel's first question is the cat-size exclusion, which is the most useful thing it does.",
+      status: "planned",
+    },
+  ],
+
   /* The cross-link between these two categories matters more than most,
      because they were one category until 6 August 2026 and to a reader they
      still look like one shelf. Somebody who lands on companion robots wanting

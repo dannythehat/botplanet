@@ -45,6 +45,12 @@ export const PRODUCT_CLASSES = [
      cheaper. */
   "companion_robot", // robot pet or desk companion — company, not a chore
   "pet_camera_robot", // roaming indoor camera on wheels — watching, not company
+  /* Self-cleaning litter boxes. A separate class from the pet-camera robots
+     above despite both being sold to cat owners: one sifts waste and never
+     moves, the other drives around and has no waste function at all. Nothing
+     in either catalogue should ever be able to win the other's
+     recommendation. */
+  "litter_box", // self-cleaning / automatic cat litter box
 ] as const;
 
 export type ProductClass = (typeof PRODUCT_CLASSES)[number];
@@ -95,6 +101,14 @@ export const CLEANING_SURFACES = [
   "two_way_audio", // talk to the room and hear it back
   "treat_dispensing", // throws or drops treats on command
   "roams_home", // drives itself around rather than sitting in one place
+  /* Self-cleaning litter boxes. Every machine in the category scoops — that is
+     the category — so scooping is not listed here: a capability every product
+     has cannot discriminate between them and would score identically for all.
+     These four genuinely differ machine to machine. */
+  "odor_sealing", // sealed waste drawer or carbon filtration, not just a lid
+  "health_monitoring", // logs weight and visit frequency — the vet-useful one
+  "multi_cat_capacity", // rated for more than one cat rather than merely tolerating it
+  "app_control", // phone app and notifications rather than a panel of buttons
 ] as const;
 export type CleaningSurface = (typeof CLEANING_SURFACES)[number];
 
@@ -136,6 +150,18 @@ export const ENVIRONMENTS = [
      off rather than inventing a distinction to fill the field. */
   "single_storey", // one floor, or one floor you care about — a wheeled robot covers it
   "multi_storey", // stairs between the rooms that matter — it does not
+  /* Self-cleaning litter boxes. The environment here is the CAT, not the room,
+     and it is the category's genuine hard exclusion — the one where getting it
+     wrong is a safety question rather than a disappointment.
+     These machines detect their occupant by weight and start a cycle once the
+     cat leaves. A kitten under the sensor's threshold may not register at all.
+     A large cat may register perfectly and still not physically fit the
+     chamber. Both are real, both rule specific machines out, and neither is
+     fixable with a setting — which is why the matcher asks about it second and
+     the scoring config excludes on it. */
+  "kitten", // under the weight a sensor reliably detects
+  "average_cat", // the size every machine in the category is designed around
+  "large_cat", // Maine Coon and up — chamber size, not sensor, is the limit
 ] as const;
 export type Environment = (typeof ENVIRONMENTS)[number];
 

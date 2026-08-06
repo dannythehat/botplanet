@@ -44,6 +44,54 @@ export interface DecisionSectionContent {
    and nothing in between. FAQ also feeds the FAQPage schema, so an absent
    record means no FAQ rich result. */
 export const DECISION_SECTION: Record<string, DecisionSectionContent> = {
+  /* Cat size is the first fork and the only hard exclusion in the category.
+     It carries the "for large cats" cluster — "self cleaning litter box for
+     large cats" (880) plus "best self cleaning litter box for large cats"
+     (260) and "for maine coon" (70) — which lives here rather than in a guide
+     because it measured 6 shared top-ten domains with the head term. */
+  "self-cleaning-litter-boxes": {
+    id: "cat-size",
+    eyebrow: "Your cat",
+    title: "Choose an automatic litter box for the cat you actually have",
+    /* 79 words. */
+    intro:
+      "Nothing else matters until this is settled, and it is the one decision here where being " +
+      "wrong is a safety question rather than a disappointment. A self cleaning cat litter box " +
+      "finds its " +
+      "occupant by weight and starts a cycle once the cat steps out. A kitten too light to " +
+      "register may not be detected at all. A large cat may register perfectly and still not " +
+      "fit the chamber. Neither is fixable with a setting.",
+    cards: [
+      {
+        title: "An average adult cat",
+        bestFor: "Roughly eight to fifteen pounds — most cats, most households.",
+        points: [
+          "Every machine in the category is designed around this cat, so the whole catalogue is open to you.",
+          "Judge on drawer capacity, odour sealing and running cost instead, because fit is not the constraint.",
+          "This is also where the cheapest machines stop being a compromise and start being a sensible buy.",
+        ],
+      },
+      {
+        title: "A large or long cat",
+        bestFor: "Maine Coons, Ragdolls, Bengals — anything over about fifteen pounds.",
+        points: [
+          "Chamber size rules machines out, not the weight sensor. A cat that will not turn around inside will not use it twice.",
+          "Look for the internal dimensions rather than the external footprint. Manufacturers publish the second far more readily.",
+          "Globe-style boxes are the usual problem: the opening is round, and a long cat has to duck.",
+        ],
+      },
+      {
+        title: "A kitten, or a very small cat",
+        bestFor: "Under about five pounds, and anything still growing.",
+        points: [
+          "Most weight sensors have a minimum below which the cat is not detected — the machine does not know it is occupied.",
+          "Manufacturers commonly state a minimum age or weight before use. Where they do, we quote it; where they will not, we say so.",
+          "A plain open tray until the kitten is grown is the right answer more often than a cheaper automatic box is.",
+        ],
+      },
+    ],
+  },
+
   /* Who it is for is the first fork in this category and the only one that
      genuinely rules machines out. It is also where the research found three
      separate query families rather than one: "robot pet" (8,100) for adults,
@@ -338,6 +386,80 @@ export interface CoverageSectionContent {
 }
 
 export const COVERAGE_SECTION: Record<string, CoverageSectionContent> = {
+  /* The safety section, and it carries the #safety anchor the hero's second
+     CTA points at. This is the most important section on the page and the
+     evidence for that is unusually direct.
+
+     "Do vets recommend self-cleaning litter boxes?" — or a near-identical
+     phrasing — appears in Google's People Also Ask box on SIX of the 23 SERPs
+     bought for this category. Nothing else in the run repeats like that. And
+     "are self cleaning litter boxes safe" returns peta.org at position four
+     with "3 Reasons Not to Buy a Self-Cleaning Litter Box", classactcats.com
+     with "The Problem With Robotic And Self Cleaning Litter Boxes", and a
+     Facebook post that is a safety warning. Its PAA asks outright: "Have any
+     cats been injured by a Litter-Robot?"
+
+     It is a SECTION rather than a page. The term is only 110/mo, which does
+     not support a URL, and it shares four domains with the head term. But it
+     is where BotPlanet's whole position — the site that tells you when not to
+     buy — either means something or does not.
+
+     A NOTE ON WHAT THIS SECTION DOES NOT DO. It does not repeat specific
+     injury allegations against named products. Those are contested, some are
+     litigated, and BotPlanet has verified none of them. What it does instead
+     is explain the mechanism, name the cats at risk, and tell the reader
+     exactly what to check — which is more useful than an anecdote and does not
+     require us to assert something we cannot stand behind. */
+  "self-cleaning-litter-boxes": {
+    id: "safety",
+    eyebrow: "The question everyone asks",
+    title: "Are self-cleaning litter boxes safe?",
+    intro:
+      "Ask Google about any automatic litter box and it offers you the same question back: do " +
+      "vets recommend these. It came up in the People Also Ask box on six of the twenty-three " +
+      "searches we ran for this category, and PETA ranks on the first page for whether they are " +
+      "safe at all. That is not a fringe worry to be reassured away in a sentence, so here is " +
+      "the mechanism and what to check.",
+    rows: [
+      {
+        title: "How the machine knows a cat is inside",
+        whoFor: "Every buyer, before comparing anything else",
+        body:
+          "All of these work the same way: a weight sensor detects the cat, a timer starts when " +
+          "the cat leaves, and the cycle runs a few minutes later. The safety of the whole " +
+          "category rests on that sensor being right. It is reliable for a cat of ordinary " +
+          "size. It is less reliable at the bottom of its range, which is why almost every " +
+          "manufacturer states a minimum weight and why kittens are the group to be careful " +
+          "with. Ask what the stated minimum is, and whether there is a secondary sensor — " +
+          "infrared or a physical interrupt — rather than weight alone.",
+      },
+      {
+        title: "Who should not buy one, plainly",
+        whoFor: "Kittens, very small cats, and nervous or unwell cats",
+        body:
+          "A kitten below the sensor threshold is the clear rule-out, and the answer is an " +
+          "ordinary tray until it has grown. So is a cat that is frightened of the machine: one " +
+          "that will not use it does not have a litter box, it has an ornament, and a cat that " +
+          "stops using a box is a health problem before it is a cleaning one. Cats with " +
+          "mobility problems or in the middle of a urinary issue are worth a word with a vet " +
+          "first, because these boxes hide the evidence you would otherwise notice — which is " +
+          "exactly what the health-tracking models are trying to solve.",
+      },
+      {
+        title: "What we will and will not tell you",
+        whoFor: "Anyone who has read the alarming version online",
+        body:
+          "There are widely circulated accounts of cats being hurt in these machines, some of " +
+          "them attached to named products and some of them in litigation. We have verified " +
+          "none of them, so we will not repeat them as fact or as a comparison point — that " +
+          "would be trading on somebody's worst day for a click. What we will do is state each " +
+          "machine's stated minimum weight, what sensors it actually uses, and whether the " +
+          "manufacturer publishes that at all. Where a maker will not say, that silence is the " +
+          "finding and we print it.",
+      },
+    ],
+  },
+
   /* This section is the reason the category page exists, and it carries the
      #support-risk anchor the hero's second CTA points at.
 
@@ -609,6 +731,55 @@ export interface SplitSectionContent {
 }
 
 export const SPLIT_SECTION: Record<string, SplitSectionContent> = {
+  /* The category's real fork, and the one the listings hide. "what litter to
+     use in a self cleaning litter box" measured 7 shared top-ten domains with
+     the head term, so it belongs here rather than in a guide — and it is
+     really a question about which machine you bought, because the machine
+     decides the litter and the litter decides the running cost. */
+  "self-cleaning-litter-boxes": {
+    id: "litter-type",
+    eyebrow: "The fork",
+    title: "Clumping litter, or the maker's own trays",
+    intro:
+      "Two business models share this shelf and the product pages rarely make it obvious. Every " +
+      "robotic litter box falls into one of them. One kind takes ordinary clumping litter from " +
+      "any shop and rakes the clumps into a drawer. " +
+      "The other takes a proprietary tray of crystal litter that you replace as a unit. They " +
+      "cost similar money on the day and quite different money over three years, so work out " +
+      "which one you are buying before you compare anything else.",
+    panels: [
+      {
+        label: "CLUMPING",
+        title: "When ordinary clumping litter is right",
+        points: [
+          "Any clumping clay litter from any shop, so you are never locked to one supplier or one price.",
+          "Running cost is just litter — the thing you were buying anyway.",
+          "Most cats already use clumping litter, so there is no transition to manage.",
+          "This is the majority of the category, including every machine at the top of it.",
+        ],
+        tradeOff:
+          "You handle the drawer, and the drawer smells. It also demands a genuinely clumping " +
+          "litter — cheap non-clumping clay turns to sludge and jams the rake, which is the " +
+          "most common cause of a machine that has stopped working.",
+      },
+      {
+        label: "PROPRIETARY TRAY",
+        title: "When a sealed tray system earns it",
+        points: [
+          "The least hands-on option in the category — you lift out a tray and put a new one in.",
+          "Crystal litter controls odour well and tracks less through the house.",
+          "Nothing to scoop, empty or wash, which is the whole reason some people buy these.",
+          "Genuinely good for anyone who cannot face the drawer.",
+        ],
+        tradeOff:
+          "You are buying refills from one company forever, and that is the actual price of the " +
+          "product. Work out the annual refill cost before the sticker price — over three years " +
+          "it can exceed the machine. Some cats also dislike crystal litter, and a cat that " +
+          "will not use the box makes the running cost academic.",
+      },
+    ],
+  },
+
   /* The category's real fork. "desktop companion robot" is 480/mo at KD 2 and
      "robot pet" is 8,100 — the same shelf to a buyer, two genuinely different
      machines, and the choice most likely to be got wrong because the product
@@ -847,6 +1018,56 @@ export interface MatrixSectionContent {
 }
 
 export const MATRIX_SECTION: Record<string, MatrixSectionContent> = {
+  /* Carries the multi-cat cluster — "self cleaning litter box for multiple
+     cats" (1,300) and "best self cleaning litter box for multiple cats" (880).
+     Both measured 6 shared top-ten domains with the head term, so a guide
+     would have competed with this page. */
+  "self-cleaning-litter-boxes": {
+    id: "what-it-fixes",
+    eyebrow: "What to expect",
+    title: "What an automatic litter box actually fixes",
+    intro:
+      "The promise is that you never scoop again. The truth is narrower and better stated up " +
+      "front: the daily job goes away and a weekly one replaces it. That is a real improvement " +
+      "and worth the money for a lot of households. It is not the same as the box looking after " +
+      "itself.",
+    columns: ["What it genuinely does", "Where it falls short"],
+    rows: [
+      {
+        label: "The daily scoop",
+        cells: [
+          "Gone, and this is the reason to own one. Waste is sifted within minutes and sealed away, so the box is clean when the cat next uses it rather than clean when you next remember.",
+          "You still empty the drawer, and the drawer is worse than a day's scooping because it is several days of it at once. Call it weekly rather than never.",
+        ],
+      },
+      {
+        label: "Smell",
+        cells: [
+          "Much better than an open tray. Removing waste quickly is what actually controls odour, and a sealed drawer with a carbon filter holds what is left.",
+          "Filters are a consumable and stop working quietly. A machine that has begun to smell usually needs its filter changed and its chamber washed, not replacing.",
+        ],
+      },
+      {
+        label: "More than one cat",
+        cells: [
+          "The strongest case in the category. Two cats fill a tray twice as fast, so removing waste after every visit is worth roughly twice as much.",
+          "It does not repeal the vet's rule of one box per cat plus one. A single automatic box for three cats is a queue, and queues are how litter-box problems start.",
+        ],
+      },
+      {
+        label: "Knowing your cat is well",
+        cells: [
+          "The better machines log weight and how often each cat visits, which is genuinely useful — visit frequency is an early signal for urinary trouble.",
+          "It is a log, not a diagnosis, and it is also the feature most often behind an app account. An automatic box also hides the output you would otherwise glance at.",
+        ],
+      },
+    ],
+    note:
+      "An automatic cat litter box does not remove the box from the room, and none of them stops " +
+      "litter being tracked across the floor. If those are the problems you are trying to solve, " +
+      "this is the wrong category rather than the wrong model.",
+  },
+
   "companion-robots": {
     id: "expectations",
     eyebrow: "What to expect",
@@ -1120,6 +1341,61 @@ export interface CheckSectionContent {
 }
 
 export const CHECK_SECTION: Record<string, CheckSectionContent> = {
+  "self-cleaning-litter-boxes": {
+    id: "before-you-buy",
+    eyebrow: "Before you buy",
+    title: "Five things to check before you buy",
+    intro:
+      "Capacity is the number the listings lead with and it decides very little — every machine " +
+      "here holds several days. What decides it is whether your cat fits, whether your cat will " +
+      "use it, and what it costs to keep running once the novelty of not scooping has worn off.",
+    boxLabel: "Check these before buying",
+    items: [
+      {
+        title: "The minimum weight, against your cat",
+        body:
+          "The weight sensor is the safety system, and it has a floor. Below it the machine may " +
+          "not register that it is occupied. For an adult cat this is academic; for a kitten it " +
+          "is the whole decision, and it is why an ordinary tray is the right answer until the " +
+          "kitten has grown.",
+        ask: "What is the stated minimum weight, and is my cat comfortably above it?",
+      },
+      {
+        title: "The inside of the chamber, not the outside of the box",
+        body:
+          "Manufacturers publish external dimensions readily and internal ones reluctantly. A " +
+          "large cat needs room to turn around, and a globe-shaped opening is narrower than the " +
+          "box around it suggests. A cat that has to duck will use it once.",
+        ask: "What are the internal dimensions, and will a long cat turn around in there?",
+      },
+      {
+        title: "What litter it takes, and what that costs a year",
+        body:
+          "Either it takes ordinary clumping litter from any shop, or it takes the maker's own " +
+          "trays forever. The second is a subscription with a machine attached. Work out three " +
+          "years of refills and add it to the price before comparing anything.",
+        ask: "Can I buy the litter anywhere, or only from them?",
+      },
+      {
+        title: "Whether the app is a convenience or a requirement",
+        body:
+          "Some of these are perfectly usable from a panel of buttons and the app is a bonus. " +
+          "Others put scheduling, cycle settings and the waste-level alert behind an account, so " +
+          "a dead phone or a dropped connection becomes a litter problem.",
+        ask: "Does it work fully without wifi and without an account?",
+      },
+      {
+        title: "How you clean the machine itself",
+        body:
+          "The one nobody thinks about until month three. Waste gets past the rake, the chamber " +
+          "needs washing, and how easily it comes apart decides whether that happens monthly or " +
+          "never. A machine that cannot be stripped and hosed is one you will eventually replace " +
+          "rather than clean.",
+        ask: "Does it come apart, and can the parts that get dirty be washed?",
+      },
+    ],
+  },
+
   "companion-robots": {
     id: "before-you-buy",
     eyebrow: "Before you buy",
@@ -1425,6 +1701,58 @@ export interface PriceSectionContent {
 }
 
 export const PRICE_SECTION: Record<string, PriceSectionContent> = {
+  /* No dollar figures — the catalogue is empty and a band printed from memory
+     is what the review methodology forbids. Carries the budget cluster:
+     "cheap self cleaning litter box" (590) and "best budget self cleaning
+     litter box" (140), which measured 6 and 4 shared domains with the head
+     term respectively. Sections, not a guide. */
+  "self-cleaning-litter-boxes": {
+    id: "cost",
+    eyebrow: "Cost",
+    title: "How much does a self-cleaning litter box cost?",
+    intro:
+      "A wide range, and the sticker price is only half the question. The best automatic litter " +
+      "box for your house is rarely the cheapest one on the day. This is the one category " +
+      "BotPlanet covers where running cost can overtake the machine, because some of these only " +
+      "take the maker's own refill trays. Work out three years before you compare two boxes. " +
+      "What follows is what each step up actually buys.",
+    rungs: [
+      {
+        label: "Entry",
+        what:
+          "An open-top or simple enclosed box that rakes clumping litter into a drawer. No app, " +
+          "no sensors beyond the one that keeps it safe, no health logging. Genuinely enough " +
+          "for one ordinary adult cat, and the cheapest way out of daily scooping.",
+      },
+      {
+        label: "Mid",
+        what:
+          "A larger sealed drawer, proper carbon filtration and an app that tells you when it is " +
+          "full. This is where multi-cat capacity becomes real rather than tolerated, and where " +
+          "most households should be looking.",
+      },
+      {
+        label: "Upper",
+        what:
+          "Per-cat recognition and weight logging, a bigger chamber that suits a large cat, and " +
+          "the build quality that decides whether it is still working in year four. The health " +
+          "tracking is the clearest thing the extra money buys.",
+      },
+      {
+        label: "Top",
+        what:
+          "Flagship territory: the largest chambers, the best odour sealing, self-washing in one " +
+          "or two cases, and the longest warranties in the category. Diminishing returns unless " +
+          "you have several cats or a very large one.",
+      },
+    ],
+    note:
+      "Every price on BotPlanet carries the date it was checked and names whether it came from " +
+      "the retailer or a marketplace seller. Refill and consumable costs are stated separately " +
+      "from the machine, because a cheap box that only takes one company's trays is not a cheap " +
+      "box.",
+  },
+
   /* No dollar figures in either block below. The catalogue for both categories
      is empty — the pages were built ahead of their products on the owner's
      instruction of 6 August 2026 — and a band printed from memory rather than
@@ -1672,6 +2000,40 @@ export interface VerdictSectionContent {
 }
 
 export const VERDICT_SECTION: Record<string, VerdictSectionContent> = {
+  /* Owns "are self cleaning litter boxes worth it" — 320/mo, KD 5, and a SERP
+     with Forbes, NYTimes, Lifehacker, PetMD and classactcats.com on it. A
+     section rather than a guide: it shares 5 domains with the head term, which
+     is the one-URL threshold, and 320/mo does not support a second URL in a
+     category this consolidated. */
+  "self-cleaning-litter-boxes": {
+    id: "worth-it",
+    eyebrow: "The verdict",
+    title: "Are self-cleaning litter boxes worth it?",
+    intro:
+      "The question this category attracts most after the safety one. The best self cleaning " +
+      "litter box on the market is still the wrong purchase for some households, and the answer " +
+      "turns on how many cats you have rather than on how good the machines are.",
+    verdict:
+      "For two or more adult cats, or for anyone who genuinely dreads the daily job, yes. For " +
+      "one cat and a tolerable routine, the money is hard to justify.",
+    body:
+      "What you are buying is the removal of a small daily chore, replaced by a larger weekly " +
+      "one. That trade is worth real money to some people and nothing at all to others, and no " +
+      "specification tells you which you are. The case gets stronger fast with a second cat: " +
+      "twice the waste means the box is unpleasant twice as quickly, so clearing it within " +
+      "minutes rather than at the end of the day is worth roughly twice as much. It also gets " +
+      "stronger if anyone in the house cannot easily bend to a tray. Against that, these are " +
+      "expensive, they are large, they are one more thing with a motor and an app, and the " +
+      "cheapest ones are not the bargain they look like once you have priced three years of the " +
+      "only litter they accept. And a cat that refuses to use it turns the whole thing into a " +
+      "large ornament, which is a risk no review can price for you.",
+    against:
+      "A kitten, or any cat below the machine's stated minimum weight. A nervous cat, or one " +
+      "already having litter-box trouble — this is the wrong moment to change anything. A " +
+      "single cat and a routine you do not mind. And anyone hoping it will stop litter being " +
+      "tracked across the floor, because it will not.",
+  },
+
   /* Owns "are companion robots worth it". The term returned no volume data at
      all — below Google Ads' reporting floor — but it has a real SERP with
      Forbes, IEEE Spectrum, a PMC paper on dementia care and several buying
@@ -1844,6 +2206,90 @@ export interface FaqSectionContent {
 }
 
 export const FAQ_SECTION: Record<string, FaqSectionContent> = {
+  /* Every question below is one Google actually surfaces, taken from the
+     People Also Ask boxes across the 23 SERPs in run 31090590604 and ranked by
+     how often each appeared:
+
+       do vets recommend these        6 appearances  (by a distance the loudest)
+       disadvantages / downsides      5
+       is it worth it                 4
+       what litter can I use          3
+       is there a cheaper alternative 2
+       can a kitten use one           2
+
+     Six appearances for the vet question is the strongest single signal in any
+     BotPlanet research run so far, and it is answered first. */
+  "self-cleaning-litter-boxes": {
+    id: "faqs",
+    eyebrow: "Questions",
+    title: "Self-cleaning litter box FAQs",
+    intro:
+      "The questions people actually ask before buying, answered plainly.",
+    items: [
+      {
+        q: "Do vets recommend self-cleaning litter boxes?",
+        a:
+          "This is the most-asked question in the category by a distance — it appeared in " +
+          "Google's People Also Ask box on six of the twenty-three searches we ran. The honest " +
+          "answer is that there is no single veterinary position for or against. What comes up " +
+          "consistently in veterinary writing is narrower and more useful: keep to one box per " +
+          "cat plus one whether they are automatic or not; do not switch a cat that is already " +
+          "having litter-box trouble; and be aware that a box which clears itself also clears " +
+          "the evidence you would otherwise notice, which matters because changes in urine " +
+          "output are an early warning sign. That last point is why per-cat weight and visit " +
+          "logging is a genuinely useful feature rather than a gimmick.",
+      },
+      {
+        q: "What are the disadvantages of a self-cleaning litter box?",
+        a:
+          "Five, honestly. They are expensive. They are big, and they need a socket, so where " +
+          "the box goes is no longer entirely your choice. You still empty a drawer, so the job " +
+          "becomes weekly rather than disappearing. Some only take the maker's own litter, which " +
+          "is a running cost most buyers do not price in. And a cat that is frightened of the " +
+          "mechanism will simply stop using it, which is a worse problem than the one you were " +
+          "solving.",
+      },
+      {
+        q: "Can a kitten use a self-cleaning litter box?",
+        a:
+          "Usually not safely, and this is the clearest rule-out in the category. These machines " +
+          "detect their occupant by weight, and below the sensor's minimum the box does not know " +
+          "the cat is there. Most manufacturers state a minimum weight or age; where they do, we " +
+          "quote it on the product page, and where they refuse to publish one we say that " +
+          "instead. Until the kitten is grown, an ordinary open tray is the right answer.",
+      },
+      {
+        q: "Can I use regular cat litter in a self-cleaning litter box?",
+        a:
+          "It depends entirely on which machine you bought, and it is worth knowing before you " +
+          "buy rather than after. Most take ordinary clumping clay litter from any shop. A " +
+          "minority take only the maker's own crystal trays, which is a subscription in all but " +
+          "name. Even among the ordinary ones, the litter has to genuinely clump — cheap " +
+          "non-clumping clay turns to sludge and jams the rake, and that is the single most " +
+          "common reason one of these stops working.",
+      },
+      {
+        q: "Is there a cheaper alternative to the well-known brands?",
+        a:
+          "Yes, and the gap has narrowed a lot. The category's best-known name is also its most " +
+          "expensive, and it earns some of that in chamber size, build and warranty. But there " +
+          "is now a real middle market doing the same job — sift, seal, notify — for " +
+          "considerably less. The honest test is not the price but the three-year cost: check " +
+          "what litter it takes, what the filters cost and how long the warranty runs, then " +
+          "compare.",
+      },
+      {
+        q: "How many cats can share one automatic litter box?",
+        a:
+          "Mechanically, most are rated for two or three. Practically, the veterinary guidance " +
+          "of one box per cat plus one does not stop applying because the box empties itself. " +
+          "An automatic box handles the waste from multiple cats well; what it cannot do is be " +
+          "in two places at once, and cats queueing for a single box is how litter-box problems " +
+          "begin. Two cats, one good machine is fine. Three cats and one machine is optimistic.",
+      },
+    ],
+  },
+
   /* Every question below is one Google actually surfaces, taken verbatim or
      near-verbatim from the People Also Ask boxes across the 23 SERPs in run
      31081889310. The subscription question is here because it appeared on
@@ -2225,6 +2671,16 @@ export const BOTMATCH_CTA: Record<string, BotMatchCtaContent> = {
 
      Restored for lawn at the same time, whose question set landed on 6 August
      and whose panel had been waiting in a comment ever since. */
+  "self-cleaning-litter-boxes": {
+    headline: "Find your litter box",
+    body:
+      "Tell us how big your cat is, how many you have and whether you will buy the maker's own " +
+      "litter. In about 30 seconds we will match you with the right automatic litter box — and " +
+      "tell you plainly if your cat is too small for one.",
+    points: ["About 30 seconds", "Five plain questions", "No account needed"],
+    ctaLabel: "Start 30-second match",
+    note: "Free. We email the result and keep it on a page you can return to.",
+  },
   "companion-robots": {
     headline: "Find your robot pet",
     body:

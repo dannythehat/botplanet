@@ -55,6 +55,7 @@ export const categoryRows: (typeof categories.$inferInsert)[] = [
      backfilled later the way window and lawn were. */
   { id: "cat-companion-robots", slug: "companion-robots", name: "Companion Robots & Robot Pets", parentId: null },
   { id: "cat-pet-camera-robots", slug: "pet-camera-robots", name: "Pet Camera Robots", parentId: null },
+  { id: "cat-litter-boxes", slug: "self-cleaning-litter-boxes", name: "Self-Cleaning Litter Boxes", parentId: null },
 ];
 
 /* @extension-point per-brand | required | A product row references its brand by

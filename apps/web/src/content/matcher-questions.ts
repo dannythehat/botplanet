@@ -708,6 +708,145 @@ const PET_CAMERA_QUESTIONS: MatcherQuestion[] = [
 ];
 
 /* ============================================================
+   Self-cleaning litter boxes
+
+   Ordered by how much each question narrows the field.
+
+   CAT SIZE IS FIRST and it is the only hard exclusion in the
+   category. These machines detect their occupant by weight; a
+   kitten below the sensor's minimum may not register at all, and
+   a large cat may register perfectly and still not fit the
+   chamber. Neither is fixable with a setting, and one of them is
+   a safety question rather than a disappointment — which is why
+   the scoring config excludes on it and why the funnel is
+   willing to end with "not yet, use an ordinary tray".
+
+   LITTER TYPE IS SECOND, ahead of budget, because it decides the
+   three-year cost more than the sticker price does. A machine
+   that only takes the maker's own trays is a subscription with a
+   box attached, and a buyer who will not accept that has ruled
+   out a whole half of the market before they have looked at one.
+
+   Power is not asked — they all plug in — so MATCHER_DEFAULTS
+   keeps the engine's power factor neutral rather than scoring it
+   zero for every candidate.
+   ============================================================ */
+
+const LITTER_BOX_QUESTIONS: MatcherQuestion[] = [
+  {
+    id: "environment",
+    kicker: "Your cat",
+    q: "How big is your cat?",
+    options: [
+      {
+        label: "An average adult",
+        hint: "Roughly 8–15 lb — most cats",
+        scores: { environment: "average_cat" },
+      },
+      {
+        label: "Large or long",
+        hint: "Over about 15 lb, or a Maine Coon sort of shape",
+        scores: { environment: "large_cat" },
+      },
+      {
+        label: "A kitten, or very small",
+        hint: "Under about 5 lb — we may tell you to wait",
+        scores: { environment: "kitten" },
+      },
+    ],
+  },
+  {
+    id: "litter_pref",
+    kicker: "Running cost",
+    q: "Would you buy the manufacturer's own litter refills?",
+    options: [
+      {
+        label: "No — ordinary litter from any shop",
+        hint: "Rules out the sealed-tray systems",
+      },
+      { label: "Yes, if it means less handling" },
+      { label: "Don't mind, show me both" },
+    ],
+  },
+  {
+    id: "primary_need",
+    kicker: "Your household",
+    q: "How many cats will use it?",
+    options: [
+      {
+        label: "One",
+        scores: { primary_need: "single_cat", desired_cleans: ["odor_sealing"] },
+      },
+      {
+        label: "Two",
+        scores: {
+          primary_need: "two_cats",
+          desired_cleans: ["odor_sealing", "multi_cat_capacity"],
+        },
+      },
+      {
+        label: "Three or more",
+        hint: "You will likely need more than one box",
+        scores: {
+          primary_need: "many_cats",
+          desired_cleans: ["odor_sealing", "multi_cat_capacity", "health_monitoring"],
+        },
+      },
+    ],
+  },
+  {
+    id: "tracking",
+    kicker: "Health",
+    q: "Do you want it to track each cat's visits and weight?",
+    options: [
+      {
+        label: "Yes — that's useful to me",
+        hint: "Visit frequency is an early warning sign",
+        scores: { desired_cleans: ["health_monitoring", "app_control"] },
+      },
+      { label: "No — I just want it emptied", scores: { desired_cleans: ["odor_sealing"] } },
+      { label: "Nice to have, not decisive" },
+    ],
+  },
+  {
+    id: "budget_tier",
+    kicker: "Your budget",
+    q: "Roughly what are you looking to spend?",
+    options: [
+      { label: "Under $200", scores: { budget_tier: "budget" } },
+      { label: "$200 – $400", scores: { budget_tier: "mid" } },
+      { label: "$400 – $700", scores: { budget_tier: "premium" } },
+      { label: "Over $700", scores: { budget_tier: "ultra" } },
+      { label: "Show me the range", scores: { budget_tier: "no_pref" } },
+    ],
+  },
+
+  /* ---- profile questions: recorded, never scored ---- */
+  {
+    id: "main_worry",
+    kicker: "Your concern",
+    q: "What worries you most about buying one?",
+    options: [
+      { label: "Whether it's safe" },
+      { label: "Whether my cat will use it" },
+      { label: "The smell" },
+      { label: "What it costs to run" },
+    ],
+  },
+  {
+    id: "timeline",
+    kicker: "Your timing",
+    q: "When are you looking to buy?",
+    options: [
+      { label: "This week" },
+      { label: "This month" },
+      { label: "Still deciding" },
+      { label: "Just researching" },
+    ],
+  },
+];
+
+/* ============================================================
    The registry
    ============================================================ */
 
@@ -727,6 +866,7 @@ export const MATCHER_QUESTIONS_BY_CATEGORY: Record<string, MatcherQuestion[]> = 
   "robotic-lawn-mowers": LAWN_QUESTIONS,
   "companion-robots": COMPANION_QUESTIONS,
   "pet-camera-robots": PET_CAMERA_QUESTIONS,
+  "self-cleaning-litter-boxes": LITTER_BOX_QUESTIONS,
 };
 
 /**
@@ -748,6 +888,7 @@ export const MATCHER_DEFAULTS: Record<string, ScoreFragment> = {
      no "how big is your robot pet" question and there should not be. */
   "companion-robots": { power_pref: "no_pref", pool_length_ft: null, pool_area_sqft: null },
   "pet-camera-robots": { power_pref: "no_pref", pool_length_ft: null, pool_area_sqft: null },
+  "self-cleaning-litter-boxes": { power_pref: "no_pref", pool_length_ft: null, pool_area_sqft: null },
 };
 
 /**
@@ -793,6 +934,14 @@ export const MATCHER_TASKS_BY_CATEGORY: Record<string, string[]> = {
     "Checking which ones cope with what is on your floors",
     "Matching patrol, audio and treat handling to what you need",
     "Weighing what each one costs against your budget",
+    "Ranking on suitability — before any retailer is considered",
+  ],
+  "self-cleaning-litter-boxes": [
+    "Reading your cat's size and your household",
+    "Ruling out machines whose weight sensor your cat sits below",
+    "Checking which chambers a large cat can actually turn around in",
+    "Matching litter type and multi-cat capacity to what you told us",
+    "Weighing what each one costs to run, not just to buy",
     "Ranking on suitability — before any retailer is considered",
   ],
 };

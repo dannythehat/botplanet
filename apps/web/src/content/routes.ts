@@ -348,6 +348,52 @@ export const ROUTES: RouteDef[] = [
     category: "pet-camera-robots",
   },
 
+  /* ---------------- Self-cleaning litter boxes ----------------
+     Page 004 of the owner-locked ten. One URL carries the entire commercial
+     category: every buying phrasing measured 5-9 shared top-ten domains
+     against the head term. See the keyword register for the table. */
+  {
+    path: "/robots/self-cleaning-litter-boxes/",
+    label: "Self-Cleaning Litter Boxes",
+    section: "shop",
+    parent: "/robots/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: "Explore",
+    inSitemap: true,
+    indexable: true,
+    category: "self-cleaning-litter-boxes",
+  },
+  {
+    path: "/compare/self-cleaning-litter-boxes/",
+    label: "Compare self-cleaning litter boxes",
+    breadcrumbLabel: "Self-Cleaning Litter Boxes",
+    section: "compare",
+    parent: "/compare/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: true,
+    indexable: true,
+    category: "self-cleaning-litter-boxes",
+  },
+  {
+    path: "/botmatch/self-cleaning-litter-boxes/",
+    label: "Find My Litter Box",
+    breadcrumbLabel: "Find My Litter Box",
+    parent: "/robots/self-cleaning-litter-boxes/",
+    section: "botmatch",
+    /* Its own questions and its own config, sc-litterbox-v1. coming_soon only
+       because the catalogue is empty — the funnel asks the right questions and
+       has nothing to recommend yet. */
+    status: "coming_soon",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: false,
+    indexable: false,
+    category: "self-cleaning-litter-boxes",
+  },
+
   /* ---------------- Window-cleaning robots ----------------
      Added 2026-08-05 when the category went live. The category page renders
      from a dynamic route and a D1 row, so it worked before this entry existed

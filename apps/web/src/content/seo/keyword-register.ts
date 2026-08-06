@@ -55,6 +55,8 @@ const RUN_WINDOW = "2026-08-05";
 const RUN_LAWN = "2026-08-06";
 /** Companion + pet camera research: run 31081889310, 2026-08-06, $0.2224. */
 const RUN_COMPANION = "2026-08-06";
+/** Litter boxes: runs 31090590604 + 31091110791, 2026-08-06, $0.2405 combined. */
+const RUN_LITTER = "2026-08-06";
 
 /* @extension-point per-category | required | Also per-page and per-product —
    every published URL needs a row. Without one, keywords.test.ts cannot assert
@@ -94,6 +96,71 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
        separate best-of page would have competed with this one for the same
        result set. */
     researchedOn: RUN_WINDOW,
+  },
+  {
+    path: "/robots/self-cleaning-litter-boxes/",
+    /* Page 004. Runs 31090590604 (SERPs) + 31091110791 (volume repair).
+
+       THE HEAD TERM IS THE PRIMARY AND THE "AUTOMATIC" PHRASINGS ARE THE PLAN.
+       "self cleaning litter box" is 110,000/mo at KD 46 — the hardest head
+       term on the site, against pool's 14 and window's 0-5. The same family's
+       automatic phrasings are far more winnable for nearly the same traffic:
+       automatic litter box 90,500 at KD 26, automatic cat litter box 49,500 at
+       KD 11, best automatic litter box 22,200 at KD 8. The page is named for
+       the category and written to take the easy half, exactly as lawn was.
+
+       THE BRAND OUTWEIGHS THE CATEGORY, which has not happened before on this
+       site. "litter robot" is 165,000/mo — 50% above the category term — and
+       Whisker holds positions one and two with litter-robot.com and
+       whisker.com. It shares 6 top-ten domains with the head term so it is the
+       same family, and it is recorded as a secondary because the page will
+       legitimately be about these machines. It is not a term a comparison site
+       takes off its owner, and nothing here pretends otherwise. */
+    primary: { term: "self cleaning litter box", volume: 110000, difficulty: 46, mustAppear: true },
+    secondary: [
+      { term: "automatic litter box", volume: 90500, difficulty: 26, mustAppear: true },
+      { term: "self cleaning cat litter box", volume: 110000, difficulty: 46, mustAppear: true },
+      { term: "automatic cat litter box", volume: 49500, difficulty: 11, mustAppear: true },
+      { term: "best automatic litter box", volume: 22200, difficulty: 8, mustAppear: true },
+      { term: "robotic litter box", volume: 14800, difficulty: 19, mustAppear: true },
+      { term: "best self cleaning litter box", volume: 9900, difficulty: 21, mustAppear: true },
+      { term: "litter robot", volume: 165000, difficulty: 22, mustAppear: false },
+      { term: "multiple cats", volume: 1300, difficulty: 26, mustAppear: true },
+      { term: "large cat", volume: 880, difficulty: 18, mustAppear: true },
+    ],
+    cededTo: [
+      {
+        term: "litter robot 4",
+        path: "",
+        why: "74,000/mo and refused as a page target rather than ceded. It is a single product from a single manufacturer who holds the top two positions with their own domains. It earns a review page when the catalogue exists; it is not a term this hub chases.",
+      },
+      {
+        term: "are self cleaning litter boxes safe",
+        path: "/robots/self-cleaning-litter-boxes/#safety",
+        why: "A genuinely separate SERP — peta.org, classactcats.com and petful.com rank, and only four domains are shared with the head term. But it is 110/mo, which does not support a URL, so it is the most prominent section on the hub instead. Editorially it is the most important thing on the page: 'Do vets recommend self-cleaning litter boxes?' appeared in the People Also Ask box on six of the twenty-three SERPs bought.",
+      },
+      {
+        term: "best self cleaning litter box for multiple cats",
+        path: "/robots/self-cleaning-litter-boxes/#what-it-fixes",
+        why: "880/mo and 6 shared top-ten domains with the head term. A guide would have competed with this page for the same result set, so it is a section.",
+      },
+      {
+        term: "best self cleaning litter box for large cats",
+        path: "/robots/self-cleaning-litter-boxes/#cat-size",
+        why: "260/mo and 6 shared domains with the head term. Section, not a guide — and it belongs beside the kitten weight-sensor question because both are the same axis.",
+      },
+      {
+        term: "best budget self cleaning litter box",
+        path: "/robots/self-cleaning-litter-boxes/#cost",
+        why: "140/mo, and 'cheap self cleaning litter box' at 590 shares 6 domains with the head term. One price section carries both; neither justifies a URL.",
+      },
+    ],
+    /* NOTE: no separate best-of page. "best self cleaning litter box" shares 7
+       top-ten domains with the head term and "best automatic litter box"
+       shares 6, so unlike lawn the one-URL rule costs nothing here — Google is
+       already serving one result set. This is the most consolidated category
+       BotPlanet has researched: every commercial phrasing measured 5-9. */
+    researchedOn: RUN_LITTER,
   },
   {
     path: "/robots/companion-robots/",

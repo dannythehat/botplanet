@@ -86,6 +86,17 @@ export const questionnaireRows: (typeof questionnaires.$inferInsert)[] = [
       set: "PET_CAMERA_QUESTIONS",
     },
   },
+  {
+    id: "q-litterbox-v1",
+    categoryId: "cat-litter-boxes",
+    version: 1,
+    status: "draft",
+    schemaJson: {
+      version: 1,
+      source: "apps/web/src/content/matcher-questions.ts",
+      set: "LITTER_BOX_QUESTIONS",
+    },
+  },
 ];
 
 export const scoringConfigRows: (typeof scoringConfigs.$inferInsert)[] = [
@@ -268,6 +279,54 @@ export const scoringConfigRows: (typeof scoringConfigs.$inferInsert)[] = [
         watch_cat: ["pet_camera_robot"],
         interact: ["pet_camera_robot"],
         watch_home: ["pet_camera_robot"],
+      },
+    },
+    tiebreakTolerancesJson: {
+      totalPricePctWithin: 1,
+      deliveryDaysWithin: 1,
+      requireSameWarrantyBand: true,
+    },
+    status: "draft",
+  },
+
+  /* Self-cleaning litter boxes.
+
+     environmentMismatch is ON, and here the "environment" is the CAT rather
+     than the room. It is the only hard exclusion in the category and the only
+     one on the whole site that exists for safety rather than for fit: these
+     machines find their occupant by weight, and a kitten below the sensor
+     minimum may not register at all. A machine that does not list `kitten`
+     among its environments is refused for a kitten household rather than
+     ranked lower, and the funnel is expected to return nothing at all for
+     some of those readers. "Use an ordinary tray until it has grown" is the
+     correct recommendation, and no recommendation is closer to it than a
+     wrong one.
+
+     Chamber size rides the same axis: a machine a large cat cannot turn
+     around in does not list `large_cat`, and is excluded rather than
+     discounted, because a cat that will not use a box has not been sold a
+     compromise — it has been sold nothing.
+
+     poolSize and power are both ZERO. There is no size axis a maker publishes
+     and every machine plugs into the wall, so neither can discriminate.
+
+     priceTier carries an unusually high 45. In this category the sticker
+     price is genuinely misleading — a cheap box that only takes the maker's
+     own refill trays costs more over three years than an expensive one that
+     takes supermarket litter — so budget fit is weighted close to capability
+     rather than treated as a tiebreak. */
+  {
+    id: "sc-litterbox-v1",
+    questionnaireId: "q-litterbox-v1",
+    version: 1,
+    weightsJson: { cleansCoverage: 55, power: 0, priceTier: 45, poolSize: 0 },
+    hardExclusionsJson: { environmentMismatch: true, poolTooLong: false },
+    classEligibilityJson: {
+      default: ["litter_box"],
+      byPrimaryNeed: {
+        single_cat: ["litter_box"],
+        two_cats: ["litter_box"],
+        many_cats: ["litter_box"],
       },
     },
     tiebreakTolerancesJson: {

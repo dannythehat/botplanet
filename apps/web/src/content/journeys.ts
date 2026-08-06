@@ -75,6 +75,15 @@ export const BOTMATCH_JOURNEYS: Record<string, BotMatchJourney> = {
     href: routes.botmatch("pet-camera-robots"),
     accent: true,
   },
+  "self-cleaning-litter-boxes": {
+    category: "self-cleaning-litter-boxes",
+    ctaLabel: "Find My Litter Box",
+    journeyTitle: "Find your self-cleaning litter box",
+    explanation:
+      "Tell us your cat's size and how many you have, and get one clear recommendation.",
+    href: routes.botmatch("self-cleaning-litter-boxes"),
+    accent: true,
+  },
 };
 
 /** The journey for a category, or null when that category has none yet. */

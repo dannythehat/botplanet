@@ -36,6 +36,60 @@ export interface CategoryHeroContent {
    generic heading: no H1 of its own, no <title>, no meta description, no OG
    image and no CollectionPage schema. It renders, so nothing complains. */
 export const CATEGORY_HERO: Record<string, CategoryHeroContent> = {
+  /* Page 004 of the owner-locked ten. Keyword evidence: DataForSEO runs
+     31090590604 (SERPs) and 31091110791 (volume repair), 2026-08-06, $0.2405
+     combined. Full working in
+     docs/seo/self-cleaning-litter-boxes-research-findings.md.
+
+     ONE URL CARRIES THE WHOLE COMMERCIAL CATEGORY, and for once the data made
+     that easy rather than being a policy call. Measured against
+     "self cleaning litter box": automatic litter box 9 shared top-ten domains,
+     self cleaning cat litter box 8, best self cleaning litter box 7, smart
+     litter box 7, best automatic litter box 6, for multiple cats 6, for large
+     cats 6, cheap 6. Google serves substantially one result set for all of it.
+
+     THE PAGE IS NAMED FOR THE HEAD TERM AND WRITTEN TO WIN THE "AUTOMATIC"
+     ONE. "self cleaning litter box" is 110,000/mo at KD 46 — the hardest head
+     term BotPlanet has taken on. The same family's "automatic" phrasings are
+     materially easier for nearly the same traffic: automatic litter box
+     90,500 at KD 26, automatic cat litter box 49,500 at KD 11, and best
+     automatic litter box 22,200 at KD 8. That last one is the single best
+     opportunity in the category and it is what the copy is built to take.
+
+     THE BRAND IS BIGGER THAN THE CATEGORY. "litter robot" is 165,000/mo —
+     50% more than the category term — and Whisker holds positions one and two
+     with its own two domains. It shares 6 domains with the head term so it is
+     the same family, but it is not a term a comparison site wins. It is a
+     secondary mention here and a review page for the product; it is not the
+     H1 and never will be. */
+  "self-cleaning-litter-boxes": {
+    eyebrow: "Robot category",
+    /* 46 words. Head term opens sentence one; the "automatic" phrasing the
+       page is actually built to win lands in sentence two. */
+    title: "Self-Cleaning Litter Boxes: Compare Automatic Litter Boxes",
+    subtitle:
+      "A self cleaning litter box sifts the waste into a sealed drawer a few minutes after your " +
+      "cat leaves, so the job goes from daily to roughly weekly. An automatic litter box is not " +
+      "right for every cat though — size, age and nerve decide it, and one of those is a safety " +
+      "question rather than a preference.",
+    seoTitle: "Self-Cleaning Litter Boxes: Compare Automatic Litter Boxes | BotPlanet",
+    metaDescription:
+      "Compare self-cleaning litter boxes by cat size, multi-cat capacity, odour sealing, litter " +
+      "type and running cost — including which cats they are not safe for.",
+    primaryCta: { label: "Compare litter boxes", href: "#products" },
+    /* Straight to the safety section rather than to BotMatch, which is
+       coming_soon until the catalogue has products. This is also the honest
+       CTA: "Do vets recommend self-cleaning litter boxes?" appears in Google's
+       People Also Ask on SIX of the 23 SERPs bought for this category, and
+       PETA ranks fourth for "are self cleaning litter boxes safe". The
+       question in the reader's head is whether this thing is safe, not which
+       model is prettiest. */
+    secondaryCta: { label: "Are they safe?", href: "#safety" },
+    /* No hero artwork yet — pages first, images after, per the owner's
+       instruction of 6 August 2026. */
+    imageLayout: "above",
+  },
+
   /* Keyword evidence: DataForSEO run 31081889310, 2026-08-06, $0.2224. Full
      working in docs/seo/companion-robots-research-findings.md.
 
