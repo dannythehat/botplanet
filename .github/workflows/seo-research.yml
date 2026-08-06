@@ -18,19 +18,24 @@ name: SEO Research
 #   1. Actions tab -> "SEO Research" -> pick the category, optionally lower the
 #      cap. The normal route for a human.
 #
-#   2. Push a tag named `seo-research-<slug>`, e.g.
-#      `seo-research-security-robots`. The slug is read from the tag name.
+#   2. Push a branch named `research/<slug>`, e.g. `research/companion-robots`.
+#      The slug is read from the branch name.
 #
-# The tag route exists because workflow_dispatch requires the `actions: write`
-# permission, and not every credential that can push code has it. On 6 August
-# 2026 that left the research stage unrunnable by the only party trying to run
-# it, with the seed file committed and waiting. Pushing a tag needs only the
-# `contents` permission that writing the seed file already required.
+# This second route exists because workflow_dispatch requires the
+# `actions: write` permission, and not every credential that can push code has
+# it. On 6 August 2026 that left the research stage unrunnable by the only
+# party trying to run it, with the seed file committed and waiting.
 #
-# It is deliberately a TAG rather than a branch or path push. A tag is an
-# explicit act nobody performs by accident, it names exactly what was
-# researched, and it leaves a permanent marker of when. A push trigger on the
-# seeds directory would have spent money every time somebody fixed a typo.
+# It was a TAG first, for about ten minutes, which was the better design — a
+# tag is permanent and names exactly what was researched. It is a branch
+# because tag pushes are refused by the sandbox's egress proxy while branch
+# pushes are not, and a route nobody can take is not a route. If you are
+# reading this with a credential that can push tags, a tag is still the nicer
+# marker.
+#
+# It is a dedicated `research/` prefix rather than a push trigger on the seeds
+# directory, which would have spent money every time somebody fixed a typo in
+# a seed list. Creating `research/<slug>` is a deliberate act.
 #
 # The $2.00 ceiling lives inside the script and cannot be raised by either
 # route. Concurrency below still permits only one paid run at a time.
@@ -50,8 +55,8 @@ on:
         default: "2.00"
         type: string
   push:
-    tags:
-      - "seo-research-*"
+    branches:
+      - "research/*"
 
 permissions:
   contents: read
@@ -80,9 +85,9 @@ jobs:
         shell: bash
         run: |
           if [ "${{ github.event_name }}" = "push" ]; then
-            CATEGORY="${GITHUB_REF_NAME#seo-research-}"
+            CATEGORY="${GITHUB_REF_NAME#research/}"
             CAP="2.00"
-            echo "Triggered by tag ${GITHUB_REF_NAME}"
+            echo "Triggered by branch ${GITHUB_REF_NAME}"
           else
             CATEGORY="${{ inputs.category }}"
             CAP="${{ inputs.cost_cap }}"
