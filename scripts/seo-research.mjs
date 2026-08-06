@@ -120,7 +120,19 @@ const LEADS = [...new Set(seedDoc.leads ?? [])];
 const SEEDS = [...new Set([...LEADS, ...(seedDoc.seeds ?? [])])];
 const SERP_QUERIES = [...new Set(seedDoc.serpQueries ?? [])];
 
-if (!SEEDS.length || !LEADS.length) {
+/* A follow-up run that only wants SERPs.
+   Analysing a finished run always turns up a term whose SERP we did not buy —
+   the lawn research left two, and answering them the normal way meant paying
+   $0.115 for volume and difficulty we already had. A SERP is $0.004. This flag
+   skips phases 1-3 so a top-up costs what it should. */
+const SERP_ONLY = seedDoc.serpOnly === true;
+
+if (SERP_ONLY) {
+  if (!SERP_QUERIES.length) {
+    console.error(`${SEED_FILE} is serpOnly but lists no serpQueries. Nothing to research.`);
+    process.exit(1);
+  }
+} else if (!SEEDS.length || !LEADS.length) {
   console.error(`${SEED_FILE} has no leads or no seeds. Nothing to research.`);
   process.exit(1);
 }
@@ -150,7 +162,9 @@ console.log(`Seeds after dedupe: ${SEEDS.length} · leads ${LEADS.length} · SER
 console.log(`Cost cap: $${HARD_CAP.toFixed(2)} (ceiling $${CEILING.toFixed(2)})`);
 
 // 1. Volume/CPC/competition + 12-month trend — ONE batched call.
-const vol = await call("/keywords_data/google_ads/search_volume/live", [{ ...US, keywords: SEEDS }], "search_volume");
+const vol = SERP_ONLY
+  ? null
+  : await call("/keywords_data/google_ads/search_volume/live", [{ ...US, keywords: SEEDS }], "search_volume");
 for (const t of vol?.tasks ?? []) {
   for (const r of t.result ?? []) {
     out.volume.push({
@@ -164,7 +178,9 @@ for (const t of vol?.tasks ?? []) {
 saveProgress();
 
 // 2. Keyword difficulty — ONE batched call.
-const kd = await call("/dataforseo_labs/google/bulk_keyword_difficulty/live", [{ ...US, keywords: SEEDS }], "bulk_kd");
+const kd = SERP_ONLY
+  ? null
+  : await call("/dataforseo_labs/google/bulk_keyword_difficulty/live", [{ ...US, keywords: SEEDS }], "bulk_kd");
 for (const t of kd?.tasks ?? []) {
   for (const r of t.result ?? []) {
     for (const item of r.items ?? []) out.difficulty.push({ keyword: item.keyword, kd: item.keyword_difficulty ?? null });
@@ -174,8 +190,10 @@ for (const t of kd?.tasks ?? []) {
 saveProgress();
 
 // 3. Related keywords for the lead terms — batched tasks, shallow depth.
-const relTasks = LEADS.map((keyword) => ({ ...US, keyword, depth: 1, limit: 20 }));
-let rel = await call("/dataforseo_labs/google/related_keywords/live", relTasks, "related_keywords(batch)");
+const relTasks = SERP_ONLY ? [] : LEADS.map((keyword) => ({ ...US, keyword, depth: 1, limit: 20 }));
+let rel = relTasks.length
+  ? await call("/dataforseo_labs/google/related_keywords/live", relTasks, "related_keywords(batch)")
+  : null;
 if (rel && rel.tasks_error > 0 && rel.tasks_count <= 1) rel = null;
 if (!rel) {
   for (const task of relTasks) {
