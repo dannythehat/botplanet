@@ -59,7 +59,12 @@ on:
       - "research/*"
 
 permissions:
-  contents: read
+  # Write, so a branch-triggered run can commit its own results back to that
+  # branch. Downloading the artifact needs the `actions: read` permission, which
+  # the credential driving these runs does not have — so results that only exist
+  # as an artifact are results nobody can collect. Committing them to the
+  # throwaway research/* branch makes them fetchable with plain git.
+  contents: write
 
 concurrency:
   # One paid run at a time, ever. Two concurrent runs would spend twice and
@@ -139,3 +144,32 @@ jobs:
           name: seo-research-${{ steps.cfg.outputs.category }}
           path: research-output/
           retention-days: 30
+
+      # Branch runs also commit the results, because an artifact can only be
+      # downloaded with the `actions: read` permission and the whole reason the
+      # branch trigger exists is a credential that has no Actions access at all.
+      #
+      # This is the SANITISED output the script writes — volumes, difficulty,
+      # related keywords, and the organic domains and PAA questions per SERP.
+      # Raw API responses are still never written anywhere, by either route.
+      #
+      # It lands only on the throwaway research/* branch, never on main. The
+      # branch is deleted once the findings are written; the findings document
+      # is what gets merged.
+      - name: Commit the results to the research branch
+        if: always() && github.event_name == 'push'
+        shell: bash
+        run: |
+          if [ ! -d research-output ] || [ -z "$(ls -A research-output)" ]; then
+            echo "Nothing to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -f research-output/
+          git commit -q -m "Research results: ${{ steps.cfg.outputs.category }}" || {
+            echo "No change to commit."
+            exit 0
+          }
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+          echo "Committed to ${GITHUB_REF_NAME}"
