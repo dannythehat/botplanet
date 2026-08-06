@@ -64,6 +64,28 @@ export const questionnaireRows: (typeof questionnaires.$inferInsert)[] = [
       set: "LAWN_QUESTIONS",
     },
   },
+  {
+    id: "q-companion-v1",
+    categoryId: "cat-companion-robots",
+    version: 1,
+    status: "draft",
+    schemaJson: {
+      version: 1,
+      source: "apps/web/src/content/matcher-questions.ts",
+      set: "COMPANION_QUESTIONS",
+    },
+  },
+  {
+    id: "q-petcam-v1",
+    categoryId: "cat-pet-camera-robots",
+    version: 1,
+    status: "draft",
+    schemaJson: {
+      version: 1,
+      source: "apps/web/src/content/matcher-questions.ts",
+      set: "PET_CAMERA_QUESTIONS",
+    },
+  },
 ];
 
 export const scoringConfigRows: (typeof scoringConfigs.$inferInsert)[] = [
@@ -166,6 +188,86 @@ export const scoringConfigRows: (typeof scoringConfigs.$inferInsert)[] = [
         slopes: ["lawn_mower"],
         multi_zone: ["lawn_mower"],
         slopes_and_zones: ["lawn_mower"],
+      },
+    },
+    tiebreakTolerancesJson: {
+      totalPricePctWithin: 1,
+      deliveryDaysWithin: 1,
+      requireSameWarrantyBand: true,
+    },
+    status: "draft",
+  },
+
+  /* Companion robots.
+
+     environmentMismatch is OFF, and it is the first config on the site to turn
+     it off deliberately rather than because the data is thin. Pool has a hard
+     exclusion (above-ground vs in-ground), window has one (frameless glass),
+     lawn has one (tree cover). Companion robots genuinely do not: nothing
+     about a room stops a robot pet working. Inventing an environment axis to
+     fill the field would mean excluding candidates on a distinction that does
+     not exist, which is worse than having no exclusion at all.
+
+     poolSize weight is ZERO for the same honesty reason as window — there is
+     no size axis in this category and no maker publishes one.
+
+     cleansCoverage carries the most weight because the capability list here
+     is doing the real work. Companionship, conversation, play and learning
+     content are genuinely separable — a Qoobo has companionship and no
+     conversation at all, a desk robot converses and never moves — and the
+     class gate plus this weighting is what stops a child's learning robot
+     winning a recommendation made for someone with dementia. */
+  {
+    id: "sc-companion-v1",
+    questionnaireId: "q-companion-v1",
+    version: 1,
+    weightsJson: { cleansCoverage: 60, power: 0, priceTier: 40, poolSize: 0 },
+    hardExclusionsJson: { environmentMismatch: false, poolTooLong: false },
+    classEligibilityJson: {
+      /* A pet camera robot is NEVER eligible here, and vice versa. The two
+         categories are separate on measured SERP evidence, and the class gate
+         is what keeps that ruling true at runtime rather than only in a
+         document somebody can edit. */
+      default: ["companion_robot"],
+      byPrimaryNeed: {
+        adult_company: ["companion_robot"],
+        child: ["companion_robot"],
+        older_adult: ["companion_robot"],
+        household: ["companion_robot"],
+      },
+    },
+    tiebreakTolerancesJson: {
+      totalPricePctWithin: 1,
+      deliveryDaysWithin: 1,
+      requireSameWarrantyBand: true,
+    },
+    status: "draft",
+  },
+
+  /* Pet camera robots.
+
+     environmentMismatch is ON, and it is the whole point of this config.
+     Every roaming pet camera on the US market is wheeled and none of them
+     climbs stairs, so a multi-storey household where the pet lives on the
+     other floor is a household the product cannot serve. That is as absolute
+     as frameless glass or a tree canopy, and it is the most common reason one
+     of these disappoints — so the engine refuses rather than recommends.
+
+     poolSize is zero: no maker publishes a coverage area for these, and a
+     patrol-time figure is not a size. power is zero: they all dock. */
+  {
+    id: "sc-petcam-v1",
+    questionnaireId: "q-petcam-v1",
+    version: 1,
+    weightsJson: { cleansCoverage: 55, power: 0, priceTier: 45, poolSize: 0 },
+    hardExclusionsJson: { environmentMismatch: true, poolTooLong: false },
+    classEligibilityJson: {
+      default: ["pet_camera_robot"],
+      byPrimaryNeed: {
+        watch_dog: ["pet_camera_robot"],
+        watch_cat: ["pet_camera_robot"],
+        interact: ["pet_camera_robot"],
+        watch_home: ["pet_camera_robot"],
       },
     },
     tiebreakTolerancesJson: {

@@ -48,6 +48,13 @@ export const categoryRows: (typeof categories.$inferInsert)[] = [
   { id: "cat-pool-cleaners", slug: "robotic-pool-cleaners", name: "Robotic Pool Cleaners", parentId: null },
   { id: "cat-window-cleaners", slug: "window-cleaning-robots", name: "Window-Cleaning Robots", parentId: null },
   { id: "cat-lawn-mowers", slug: "robotic-lawn-mowers", name: "Robotic Lawn Mowers", parentId: null },
+  /* Two rows, not one. Companion robots and pet-camera robots are separate
+     categories on measured SERP evidence — see
+     docs/seo/companion-robots-research-findings.md. Seeded here at the same
+     time the pages were built, rather than being created against D1 first and
+     backfilled later the way window and lawn were. */
+  { id: "cat-companion-robots", slug: "companion-robots", name: "Companion Robots & Robot Pets", parentId: null },
+  { id: "cat-pet-camera-robots", slug: "pet-camera-robots", name: "Pet Camera Robots", parentId: null },
 ];
 
 /* @extension-point per-brand | required | A product row references its brand by

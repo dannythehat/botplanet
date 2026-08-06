@@ -432,6 +432,282 @@ const LAWN_QUESTIONS: MatcherQuestion[] = [
 ];
 
 /* ============================================================
+   Companion robots
+
+   Ordered by how much each question narrows the field, which
+   here is not the order a spec sheet would use.
+
+   WHO IT IS FOR comes first and it is doing most of the work.
+   An adult's desk companion, a child's learning robot and a
+   machine for someone living with dementia are three different
+   products with almost no overlap, and getting this wrong is the
+   expensive mistake in the category.
+
+   SUBSCRIPTION comes second, ahead of budget, and that is
+   deliberate. It has barely any search volume — "companion robot
+   subscription fee" returned no data at all — but Google's own
+   People Also Ask surfaces the subscription question on THREE
+   separate products in this category. It is what buyers are
+   actually afraid of, and BotMatch asks what decides the
+   purchase rather than what gets searched.
+
+   Environment is NOT asked. Nothing about a room rules out a
+   robot pet, so rather than invent a distinction to fill the
+   field, the companion scoring config turns the environment
+   exclusion off. Power is not asked either — every machine here
+   charges from a dock or a cable and the axis cannot
+   discriminate, so MATCHER_DEFAULTS keeps it neutral.
+   ============================================================ */
+
+const COMPANION_QUESTIONS: MatcherQuestion[] = [
+  {
+    id: "primary_need",
+    kicker: "Who it's for",
+    q: "Who is going to live with it?",
+    options: [
+      {
+        label: "Me, or another adult",
+        hint: "Company at a desk or around the house",
+        scores: { primary_need: "adult_company", desired_cleans: ["companionship", "conversation"] },
+      },
+      {
+        label: "A child",
+        hint: "Roughly five to ten",
+        scores: { primary_need: "child", desired_cleans: ["play_interaction", "learning_content"] },
+      },
+      {
+        label: "An older relative",
+        hint: "Living alone, or living with dementia",
+        scores: { primary_need: "older_adult", desired_cleans: ["companionship", "play_interaction"] },
+      },
+      {
+        label: "A whole household",
+        hint: "Something everyone interacts with",
+        scores: {
+          primary_need: "household",
+          desired_cleans: ["companionship", "conversation", "play_interaction"],
+        },
+      },
+    ],
+  },
+  {
+    id: "subscription_tolerance",
+    kicker: "Ongoing cost",
+    q: "Are you willing to pay a monthly fee to keep it talking?",
+    options: [
+      { label: "No — one payment only", hint: "Rules out most conversational machines" },
+      { label: "A small one, if it earns it" },
+      { label: "Yes, if the conversation is genuinely good" },
+      { label: "I didn't know that was a thing" },
+    ],
+  },
+  {
+    id: "movement",
+    kicker: "How it behaves",
+    q: "Should it stay put, or move around?",
+    options: [
+      {
+        label: "Stays on a desk or table",
+        hint: "Expressive, reacts to you, nothing underfoot",
+        scores: { desired_cleans: ["companionship", "conversation"] },
+      },
+      {
+        label: "Moves around the room",
+        hint: "Behaves more like an animal — and costs more",
+        scores: { desired_cleans: ["companionship", "play_interaction"] },
+      },
+      { label: "Don't mind either way" },
+    ],
+  },
+  {
+    id: "talking",
+    kicker: "Conversation",
+    q: "How much should it actually talk?",
+    options: [
+      {
+        label: "Proper conversation",
+        hint: "Answers questions, holds a thread",
+        scores: { desired_cleans: ["conversation"] },
+      },
+      {
+        label: "Sounds and reactions are enough",
+        hint: "No speech — often the more durable choice",
+        scores: { desired_cleans: ["companionship"] },
+      },
+      { label: "Somewhere in between" },
+    ],
+  },
+  {
+    id: "budget_tier",
+    kicker: "Your budget",
+    q: "Roughly what are you looking to spend?",
+    options: [
+      { label: "Under $150", scores: { budget_tier: "budget" } },
+      { label: "$150 – $400", scores: { budget_tier: "mid" } },
+      { label: "$400 – $1,000", scores: { budget_tier: "premium" } },
+      { label: "Over $1,000", scores: { budget_tier: "ultra" } },
+      { label: "Show me the range", scores: { budget_tier: "no_pref" } },
+    ],
+  },
+
+  /* ---- profile questions: recorded, never scored ---- */
+  {
+    id: "main_worry",
+    kicker: "Your concern",
+    q: "What worries you most about buying one?",
+    options: [
+      { label: "It'll be boring after a fortnight" },
+      { label: "The company will shut down" },
+      { label: "The monthly fees" },
+      { label: "What it's listening to" },
+    ],
+  },
+  {
+    id: "timeline",
+    kicker: "Your timing",
+    q: "When are you looking to buy?",
+    options: [
+      { label: "This week" },
+      { label: "This month" },
+      { label: "It's a present, for later" },
+      { label: "Just researching" },
+    ],
+  },
+];
+
+/* ============================================================
+   Pet camera robots
+
+   A separate set from companion robots because they are a
+   separate category — measured, not assumed: the two head SERPs
+   share only Amazon, Reddit and YouTube.
+
+   STAIRS is asked second and it is the only hard exclusion in
+   the category. Every one of these machines is wheeled and none
+   of them climbs, so a household where the pet lives upstairs
+   and the dock lives downstairs is a household where the product
+   does not work. That is the frameless-glass of this category:
+   absolute, cheap to ask about, and the most common reason one
+   of these disappoints.
+
+   Power is not asked — they all charge from a dock — so
+   MATCHER_DEFAULTS keeps the engine's power factor neutral
+   rather than scoring it zero for every candidate.
+   ============================================================ */
+
+const PET_CAMERA_QUESTIONS: MatcherQuestion[] = [
+  {
+    id: "primary_need",
+    kicker: "What you need",
+    q: "What are you mainly trying to do?",
+    options: [
+      {
+        label: "Check on a dog while I'm out",
+        scores: { primary_need: "watch_dog", desired_cleans: ["remote_video", "roams_home"] },
+      },
+      {
+        label: "Check on a cat",
+        scores: { primary_need: "watch_cat", desired_cleans: ["remote_video", "roams_home"] },
+      },
+      {
+        label: "Talk to them and give treats",
+        hint: "Interaction, not just watching",
+        scores: {
+          primary_need: "interact",
+          desired_cleans: ["remote_video", "two_way_audio", "treat_dispensing"],
+        },
+      },
+      {
+        label: "Look around the house generally",
+        scores: { primary_need: "watch_home", desired_cleans: ["remote_video", "roams_home"] },
+      },
+    ],
+  },
+  {
+    id: "environment",
+    kicker: "Your layout",
+    q: "Is there a staircase between the rooms that matter?",
+    options: [
+      {
+        label: "No — one level",
+        hint: "Or one level is all I need covered",
+        scores: { environment: "single_storey" },
+      },
+      {
+        label: "Yes — they follow me up and down",
+        hint: "None of these climb. We'll say so rather than sell you one.",
+        scores: { environment: "multi_storey" },
+      },
+    ],
+  },
+  {
+    id: "flooring",
+    kicker: "Your floors",
+    q: "What is underfoot in most of the rooms it would cover?",
+    options: [
+      { label: "Hard floors", hint: "Wood, tile, laminate" },
+      { label: "Low carpet or rugs" },
+      { label: "Thick carpet throughout", hint: "Small wheels struggle badly here" },
+      { label: "A mix" },
+    ],
+  },
+  {
+    id: "autonomy",
+    kicker: "How it works",
+    q: "Should it patrol on its own, or would you drive it?",
+    options: [
+      {
+        label: "Patrol and follow on its own",
+        hint: "Works when you're not watching — costs more",
+        scores: { desired_cleans: ["roams_home", "remote_video"] },
+      },
+      {
+        label: "I'll drive it from my phone",
+        hint: "Cheaper, and fine if you check in a couple of times a day",
+        scores: { desired_cleans: ["remote_video", "two_way_audio"] },
+      },
+      { label: "Not sure yet" },
+    ],
+  },
+  {
+    id: "budget_tier",
+    kicker: "Your budget",
+    q: "Roughly what are you looking to spend?",
+    options: [
+      { label: "Under $150", scores: { budget_tier: "budget" } },
+      { label: "$150 – $300", scores: { budget_tier: "mid" } },
+      { label: "$300 – $600", scores: { budget_tier: "premium" } },
+      { label: "Over $600", scores: { budget_tier: "ultra" } },
+      { label: "Show me the range", scores: { budget_tier: "no_pref" } },
+    ],
+  },
+
+  /* ---- profile questions: recorded, never scored ---- */
+  {
+    id: "recording_pref",
+    kicker: "Recordings",
+    q: "Do you need it to record, or is live viewing enough?",
+    options: [
+      { label: "Live viewing is enough" },
+      { label: "I want recordings, without a monthly fee" },
+      { label: "Happy to pay for cloud recording" },
+      { label: "Not sure" },
+    ],
+  },
+  {
+    id: "main_worry",
+    kicker: "Your concern",
+    q: "What worries you most about buying one?",
+    options: [
+      { label: "It'll get stuck and I'll come home to a dead robot" },
+      { label: "My pet will be frightened of it" },
+      { label: "Security — it's a camera on the internet" },
+      { label: "Paying too much for a novelty" },
+    ],
+  },
+];
+
+/* ============================================================
    The registry
    ============================================================ */
 
@@ -449,6 +725,8 @@ export const MATCHER_QUESTIONS_BY_CATEGORY: Record<string, MatcherQuestion[]> = 
   "robotic-pool-cleaners": POOL_QUESTIONS,
   "window-cleaning-robots": WINDOW_QUESTIONS,
   "robotic-lawn-mowers": LAWN_QUESTIONS,
+  "companion-robots": COMPANION_QUESTIONS,
+  "pet-camera-robots": PET_CAMERA_QUESTIONS,
 };
 
 /**
@@ -462,6 +740,14 @@ export const MATCHER_QUESTIONS_BY_CATEGORY: Record<string, MatcherQuestion[]> = 
  */
 export const MATCHER_DEFAULTS: Record<string, ScoreFragment> = {
   "robotic-lawn-mowers": { power_pref: "no_pref", pool_length_ft: null },
+  /* Neither companion category asks about power — every machine in both
+     charges from a dock or a cable, so the axis cannot discriminate. Without a
+     default the engine would compare every candidate against `undefined` and
+     score them all zero on power: a silent, uniform penalty that looks like
+     nothing at all. The size fields are nulled for the same reason — there is
+     no "how big is your robot pet" question and there should not be. */
+  "companion-robots": { power_pref: "no_pref", pool_length_ft: null, pool_area_sqft: null },
+  "pet-camera-robots": { power_pref: "no_pref", pool_length_ft: null, pool_area_sqft: null },
 };
 
 /**
@@ -490,6 +776,22 @@ export const MATCHER_TASKS_BY_CATEGORY: Record<string, string[]> = {
     "Ruling out machines rated for less ground than you have",
     "Checking whether satellite navigation works in your garden",
     "Matching slope and separate-zone handling to your ground",
+    "Weighing what each one costs against your budget",
+    "Ranking on suitability — before any retailer is considered",
+  ],
+  "companion-robots": [
+    "Reading who this is actually for",
+    "Ruling out machines built for a different age group",
+    "Checking which ones still work without a monthly fee",
+    "Matching movement and conversation to what you asked for",
+    "Weighing what each one costs against your budget",
+    "Ranking on suitability — before any retailer is considered",
+  ],
+  "pet-camera-robots": [
+    "Reading your home's layout",
+    "Ruling out wheeled machines where there are stairs to climb",
+    "Checking which ones cope with what is on your floors",
+    "Matching patrol, audio and treat handling to what you need",
     "Weighing what each one costs against your budget",
     "Ranking on suitability — before any retailer is considered",
   ],

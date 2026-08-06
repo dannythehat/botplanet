@@ -31,6 +31,16 @@ const POOL_WORDS = /\bpool|waterline|above-ground|in-ground|skimmer|chlorine|dec
 const GLASS_WORDS = /\bglass|window|pane|frameless|squeegee|streak\b/i;
 /** Lawn words that must never appear outside the lawn set. */
 const LAWN_WORDS = /\blawn|grass|mow|acre|yard|boundary wire\b/i;
+/* Pet-camera words that must never appear outside the pet-camera set.
+   "stairs" is bounded on BOTH sides deliberately: the window set offers
+   "stairwell" as a place a robot has to work, which is a legitimate use of a
+   different word and not a leak. */
+const PET_CAMERA_WORDS = /\bstairs?\b|\bcarpet|\bpatrol|\btreats?\b|\bdog\b|\bcat\b/i;
+/* Companion words that must never appear outside the companion set. Kept to
+   terms only this category uses — "monthly fee" is deliberately NOT here,
+   because pet cameras charge for cloud recording and asking about it there is
+   correct rather than borrowed. */
+const COMPANION_WORDS = /\bconversation\b|\bdesk\b/i;
 
 /** Every string a reader could see in a question set. */
 function visibleText(slug: string): string {
@@ -41,12 +51,16 @@ function visibleText(slug: string): string {
 }
 
 describe("every category's questions are its own", () => {
-  it("has a set for each of pool, window and lawn", () => {
-    expect(CATEGORIES.sort()).toEqual([
-      "robotic-lawn-mowers",
-      "robotic-pool-cleaners",
-      "window-cleaning-robots",
-    ]);
+  /* Derived from the nav registry rather than hardcoded, since 6 August 2026.
+     The list was a literal until companion robots and pet camera robots went
+     live, at which point it failed for the one reason a guard must never fail:
+     somebody did the right thing. What the rule actually says is "every live
+     category has its own set", so that is what this now asserts — and it still
+     catches the original bug, because a category launched without questions
+     fails here rather than silently inheriting another category's. */
+  it("has a set for every live category, and none for anything else", () => {
+    const live = liveCategories().map((c) => c.slug).sort();
+    expect(CATEGORIES.sort()).toEqual(live);
   });
 
   it("never shares an array instance between two categories", () => {
@@ -79,6 +93,24 @@ describe("every category's questions are its own", () => {
     for (const slug of CATEGORIES) {
       if (slug === "robotic-lawn-mowers") continue;
       expect(visibleText(slug), `${slug} mentions a lawn`).not.toMatch(LAWN_WORDS);
+    }
+  });
+
+  it("asks nobody outside pet cameras about their stairs, carpet or dog", () => {
+    for (const slug of CATEGORIES) {
+      if (slug === "pet-camera-robots") continue;
+      expect(visibleText(slug), `${slug} mentions a pet camera concern`).not.toMatch(
+        PET_CAMERA_WORDS,
+      );
+    }
+  });
+
+  it("asks nobody outside companion robots about conversation or a desk", () => {
+    for (const slug of CATEGORIES) {
+      if (slug === "companion-robots") continue;
+      expect(visibleText(slug), `${slug} mentions a companion concern`).not.toMatch(
+        COMPANION_WORDS,
+      );
     }
   });
 

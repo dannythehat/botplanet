@@ -53,6 +53,8 @@ const RUN = "2026-08-01";
 const RUN_WINDOW = "2026-08-05";
 /** Lawn research: runs 31073327230 + 31074893036, 2026-08-06, $0.22428. */
 const RUN_LAWN = "2026-08-06";
+/** Companion + pet camera research: run 31081889310, 2026-08-06, $0.2224. */
+const RUN_COMPANION = "2026-08-06";
 
 /* @extension-point per-category | required | Also per-page and per-product —
    every published URL needs a row. Without one, keywords.test.ts cannot assert
@@ -92,6 +94,104 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
        separate best-of page would have competed with this one for the same
        result set. */
     researchedOn: RUN_WINDOW,
+  },
+  {
+    path: "/robots/companion-robots/",
+    /* THE PRIMARY IS NOT THE CATEGORY NAME, and this is the entry that records
+       why. "companion robot" is 4,400/mo and looks like the obvious head term.
+       Its SERP is Wikipedia, globaltimes.cn, sixthtone.com, a New Atlas
+       humanoid launch story and two Reddit threads about UBTECH — a news SERP,
+       not a shopping one. It is also intent-contaminated: the related-keyword
+       pull returned "companion robot woman" (390) and "ai companion robot for
+       adults" (320).
+
+       "robot pet" is 8,100 at KD 0 and returns Enabot, Living.AI, Amazon's
+       Loona listing, Elephant Robotics and us.aibo.com. Twice the volume, a
+       clean product SERP, every result a machine we would stock.
+
+       KD figures in this category are unreliable and are recorded as measured
+       rather than smoothed. The bulk difficulty call returned 6 for "companion
+       robot" and 47 for "companion robots" — two terms Google Ads clusters at
+       the identical 4,400 volume, so it is serving substantially the same
+       SERP. Both cannot be right. Treat these as bands and let SERP
+       composition decide difficulty. */
+    primary: { term: "robot pet", volume: 8100, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "robotic pet", volume: 8100, difficulty: 0, mustAppear: true },
+      { term: "companion robot", volume: 4400, difficulty: 6, mustAppear: true },
+      { term: "ai companion robot", volume: 1900, difficulty: 0, mustAppear: true },
+      { term: "desktop companion robot", volume: 480, difficulty: 2, mustAppear: true },
+      { term: "robotic pet for elderly", volume: 390, difficulty: 0, mustAppear: true },
+      { term: "robot friend", volume: 1000, difficulty: 0, mustAppear: true },
+      { term: "robot pets for adults", volume: 480, difficulty: 10, mustAppear: false },
+    ],
+    cededTo: [
+      {
+        term: "pet camera robot",
+        path: "/robots/pet-camera-robots/",
+        why: "Two shared top-ten domains with 'companion robot' — amazon.com and reddit.com, both of which appear on nearly every query in this space. Discount them and the overlap is zero: no publisher, no manufacturer, no retailer in common. Meanwhile 'pet camera robot' shares six with 'robot pet camera'. Separate SERPs, separate page.",
+      },
+      {
+        term: "robot dog",
+        path: "",
+        why: "90,500/mo and refused outright rather than ceded to anything. The SERP is $1,600 Unitree developer quadrupeds at one end and Target's children's toys at the other, with an industrial inspection story in the middle. 'robotic puppy' runs 49,500 in November against 1,900 in June — a 26x swing that is the signature of a Christmas toy, not a household robot. Nothing BotMatch could score.",
+      },
+      {
+        term: "ai robot for kids",
+        path: "",
+        why: "A separate family — one shared domain with 'companion robot'. Refused as a sub-hub because it is a toy and parenting space, consistent with the earlier ruling that BotPlanet compares robots doing a household job. The 'who is it for' section covers children as a buying decision without chasing the term.",
+      },
+    ],
+    /* NOTE: "best companion robot" is NOT ceded — this page carries it. It is
+       110/mo and shares three domains with the head term, all universal
+       (reddit, amazon, youtube). "best robot pet" is 140 and "best ai
+       companion robot" is 30. There is no best-of demand in this category
+       worth a second URL, so the one-URL rule costs nothing here, unlike lawn
+       where it was a genuine trade-off. */
+    researchedOn: RUN_COMPANION,
+  },
+  {
+    path: "/robots/pet-camera-robots/",
+    /* A separate page from companion robots on measured evidence, recorded in
+       the cededTo entry above and in the hero comment.
+
+       THE PAGE DELIBERATELY DOES NOT TARGET "best pet camera robot". It is
+       10/mo and Google reads it as "best pet camera", serving PCMag,
+       NYTimes/Wirecutter, Furbo and Wired — the static-camera market. Only two
+       of its ten results are robot-specific. Adding "robot" to that query does
+       not buy a different SERP, it buys Wirecutter as a competitor for ten
+       searches a month. The unmodified term is the whole opportunity.
+
+       Seasonality is the inverse of everything else on the site: this term
+       peaks in July at 1,000 and troughs in April at 140. People buy one
+       before going away, not as a present. */
+    primary: { term: "pet camera robot", volume: 480, difficulty: 9, mustAppear: true },
+    secondary: [
+      { term: "robot pet camera", volume: 140, difficulty: 0, mustAppear: true },
+      { term: "pet monitoring robot", volume: 170, difficulty: 6, mustAppear: true },
+      { term: "home monitoring robot", volume: 170, difficulty: 0, mustAppear: true },
+      { term: "moving pet camera", volume: 40, difficulty: 20, mustAppear: true },
+      { term: "robot camera for pets", volume: 140, difficulty: 1, mustAppear: true },
+      { term: "rolling pet camera", volume: 50, difficulty: 0, mustAppear: false },
+    ],
+    cededTo: [
+      {
+        term: "robot pet",
+        path: "/robots/companion-robots/",
+        why: "The companion hub's primary term at 8,100/mo. Three shared domains with 'pet camera robot' and the two families are separate — this page must not chase it.",
+      },
+      {
+        term: "best pet camera robot",
+        path: "",
+        why: "Refused, not ceded. 10/mo, and the SERP is the static pet-camera market: PCMag, Wirecutter, Furbo, Wired. Targeting it means competing with Wirecutter for ten searches a month.",
+      },
+      {
+        term: "home security robot",
+        path: "",
+        why: "Refused. This was the surviving cluster from the cancelled security-robots category, and 'home monitoring robot' at 170/mo still returns six security-framed results in ten, including SMP Robotics, a B2B outdoor patrol vendor. The term is kept as a secondary and a section heading; it is deliberately not in the URL or the H1.",
+      },
+    ],
+    researchedOn: RUN_COMPANION,
   },
   {
     path: "/robots/robotic-lawn-mowers/",

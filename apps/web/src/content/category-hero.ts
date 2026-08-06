@@ -36,6 +36,99 @@ export interface CategoryHeroContent {
    generic heading: no H1 of its own, no <title>, no meta description, no OG
    image and no CollectionPage schema. It renders, so nothing complains. */
 export const CATEGORY_HERO: Record<string, CategoryHeroContent> = {
+  /* Keyword evidence: DataForSEO run 31081889310, 2026-08-06, $0.2224. Full
+     working in docs/seo/companion-robots-research-findings.md.
+
+     THE H1 IS NOT THE CATEGORY NAME, and that is deliberate.
+
+     "companion robot" is 4,400/mo and looks like the obvious head term. Its
+     SERP is not a shopping SERP: Wikipedia, globaltimes.cn, sixthtone.com, a
+     New Atlas piece on the world's first mass-produced humanoid, and two
+     Reddit threads about a UBTECH launch. Three Chinese tech-news outlets in a
+     top ten. It is also intent-contaminated — the related-keyword pull
+     returned "companion robot woman" (390) and "ai companion robot for adults"
+     (320), and the "ai companion robot" SERP carries a Facebook post reading
+     "It's an endless love. It will never betray you."
+
+     "robot pet" is 8,100/mo at KD 0 and returns Enabot, Living.AI, Amazon's
+     Loona listing, Elephant Robotics and us.aibo.com. Twice the volume, a
+     clean product SERP, and every result is a machine we would stock.
+
+     So the page is named for the category and written on "robot pet".
+     "companion robot" is served as a secondary term in the body, which is
+     where a contaminated head term belongs.
+
+     The two head terms share 4 domains — reddit, youtube, amazon, wikipedia,
+     all universal — which is below the one-URL threshold. The COMMERCIAL
+     variants converge though: "best companion robot" vs "best robot pet"
+     share 5, including keyirobot.com and robotshop.com. Buyers land in the
+     same place; only the news-driven head term wanders off. One hub. */
+  "companion-robots": {
+    eyebrow: "Robot category",
+    /* 46 words. Primary term opens sentence one. The category name lands in
+       sentence two so the page still reads as what it is called. */
+    title: "Companion Robots and Robot Pets: Compare What They Actually Do",
+    subtitle:
+      "A robot pet is bought for company rather than to do a job, which makes it the hardest " +
+      "kind of robot to compare honestly. A companion robot that charms one person bores " +
+      "another, and the specification sheet will not tell you which. We compare them on the " +
+      "things that decide it — who it is for, whether it talks back, and what happens when the " +
+      "company behind it stops answering.",
+    seoTitle: "Companion Robots & Robot Pets: Compare | BotPlanet",
+    metaDescription:
+      "Compare robot pets and companion robots by who they are for, conversation, movement, " +
+      "subscription cost and support risk. Find the right companion robot.",
+    primaryCta: { label: "Compare robot pets", href: "#products" },
+    /* Not BotMatch. /botmatch/companion-robots/ has its own question set and
+       its own scoring config, but no products to recommend yet, so it is
+       coming_soon — advertising it would promise a tool that returns nothing.
+       The second CTA goes to the section carrying this category's real risk
+       instead. Swap it to BotMatch with the first published product. */
+    secondaryCta: { label: "What happens if support ends?", href: "#support-risk" },
+    /* No hero artwork yet — pages first, images after, per the owner's
+       instruction of 6 August 2026. The hero renders text-only rather than
+       blocking the page. */
+    imageLayout: "above",
+  },
+
+  /* Keyword evidence: same run, 31081889310.
+
+     A SEPARATE PAGE FROM COMPANION ROBOTS, and the evidence is not close.
+     "companion robot" and "pet camera robot" share exactly two top-ten
+     domains, amazon.com and reddit.com, both of which appear on nearly every
+     query in this space. Discount them and the overlap is zero — no
+     publisher, no manufacturer, no retailer in common. Meanwhile "pet camera
+     robot" and "robot pet camera" share six, four of them distinctive:
+     store.enabot.com, wired.com, ebay.com, walmart.com.
+
+     The seasonality says the same thing independently. Everything companion
+     peaks in November and December. "pet camera robot" peaks in JULY at 1,000
+     and troughs in April at 140 — people buy one before going away, not as a
+     present.
+
+     THE PAGE DOES NOT TARGET "best pet camera robot". It is 10/mo and Google
+     reads it as "best pet camera", serving PCMag, Wirecutter, Furbo and Wired
+     — the static-camera market. Adding "robot" to that query buys Wirecutter
+     as a competitor for ten searches a month. The unmodified term is the
+     whole opportunity. */
+  "pet-camera-robots": {
+    eyebrow: "Robot category",
+    /* 44 words. */
+    title: "Pet Camera Robots: Cameras That Drive Around the House",
+    subtitle:
+      "A pet camera robot is a camera on wheels that goes to your dog instead of waiting for " +
+      "your dog to walk past it. That is the whole argument for one over a fixed camera, and " +
+      "whether it holds depends on your floors, your stairs and how much your pet actually " +
+      "moves around while you are out.",
+    seoTitle: "Pet Camera Robots: Compare Moving Pet Cameras | BotPlanet",
+    metaDescription:
+      "Compare pet camera robots by video quality, two-way audio, treat dispensing, floor type " +
+      "and battery life. Find the right moving pet camera for your home.",
+    primaryCta: { label: "Compare pet camera robots", href: "#products" },
+    secondaryCta: { label: "Robot or fixed camera?", href: "#versus-fixed" },
+    imageLayout: "above",
+  },
+
   /* Keyword evidence: DataForSEO runs 31073327230 and 31074893036,
      2026-08-06, $0.22428 combined. Full working in
      docs/seo/robotic-lawn-mowers-research-findings.md.

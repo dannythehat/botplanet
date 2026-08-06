@@ -44,6 +44,101 @@ export interface DecisionSectionContent {
    and nothing in between. FAQ also feeds the FAQPage schema, so an absent
    record means no FAQ rich result. */
 export const DECISION_SECTION: Record<string, DecisionSectionContent> = {
+  /* Who it is for is the first fork in this category and the only one that
+     genuinely rules machines out. It is also where the research found three
+     separate query families rather than one: "robot pet" (8,100) for adults,
+     "ai robot for kids" for children, and "robotic pet for elderly" (390) —
+     which shares ZERO top-ten domains with "companion robot" and five with
+     "best companion robot for seniors". Three audiences, one page, because
+     the buyer is choosing between them rather than searching within one. */
+  "companion-robots": {
+    id: "who-for",
+    eyebrow: "Who it's for",
+    title: "Choose a robot pet for who is going to live with it",
+    /* 84 words. */
+    intro:
+      "Nothing else about this category matters until this is settled. The same machine that " +
+      "delights a nine-year-old is patronising to an adult and unusable by somebody with " +
+      "arthritis and poor hearing. A robotic pet bought for a parent has to work without a " +
+      "phone, without an account and without help. One bought for yourself can assume all " +
+      "three. Decide who it is for first, and most of the catalogue rules itself out before " +
+      "you have looked at a single specification.",
+    cards: [
+      {
+        title: "For yourself, or another adult",
+        bestFor: "A desk, a home office, a quiet flat.",
+        points: [
+          "This is where the desktop companion robot sits — small, expressive, stays on the desk and reacts to you while you work.",
+          "Conversation quality is what you are paying for, and it is the thing most likely to disappoint after a fortnight.",
+          "Check the subscription before the price. Several of the best-known machines need one to keep talking.",
+        ],
+      },
+      {
+        title: "For a child",
+        bestFor: "Roughly five to ten, and always with a parent's judgement over it.",
+        points: [
+          "Durability and content matter more than personality — these get dropped, and they get asked strange questions.",
+          "Almost all of them are subscription products, and the subscription is where the educational content lives.",
+          "Read the safety reporting. Google's own results for children's AI robots include a national news investigation into what these toys will say.",
+        ],
+      },
+      {
+        title: "For an older relative",
+        bestFor: "Someone living alone, or living with dementia.",
+        points: [
+          "A robotic pet for elderly use is a different product from a robot friend for a desk — it has to work with no phone, no account and no setup.",
+          "The evidence base here is real: this is the one part of the category with peer-reviewed research behind it, and we cite it rather than paraphrase it.",
+          "Weight, fur, warmth and a heartbeat do more here than conversation does. The most effective machines in this group barely speak.",
+        ],
+      },
+    ],
+  },
+
+  /* The layout question, which is the only genuine hard exclusion in this
+     category: every roaming pet camera robot on the US market is wheeled, and
+     none of them climbs stairs. */
+  "pet-camera-robots": {
+    id: "your-home",
+    eyebrow: "Your home",
+    title: "Choose a pet camera robot for your floors and your stairs",
+    /* 81 words. */
+    intro:
+      "A pet camera robot only helps in rooms it can reach, and reaching is the part the " +
+      "product photography never shows. Every one of these is a small wheeled machine. It " +
+      "cannot climb a stair, it will struggle on deep pile, and a closed door is the end of " +
+      "its patrol. Work out which floor your pet actually spends the day on, and whether the " +
+      "robot can cross it, before you compare a single specification.",
+    cards: [
+      {
+        title: "One floor, hard surfaces",
+        bestFor: "Apartments, ranch houses, anywhere the pet stays on one level.",
+        points: [
+          "The best case, and the one every one of these machines is designed around.",
+          "Wood, tile and laminate give small wheels the traction they need to cross a room and get home to the dock.",
+          "Rugs with a lip are the usual snag — a robot that beaches on a rug edge is a robot you come home to find stranded.",
+        ],
+      },
+      {
+        title: "Stairs between the rooms that matter",
+        bestFor: "Two-storey houses where the pet follows you up and down.",
+        points: [
+          "No pet camera robot on the market climbs stairs. This is a hard limit, not a specification to compare.",
+          "You are choosing one floor to cover, or buying two machines and two docks.",
+          "If the pet is upstairs all day and the dock is downstairs, a fixed camera upstairs beats a robot downstairs.",
+        ],
+      },
+      {
+        title: "Carpet and thick rugs",
+        bestFor: "Older homes, bedrooms, anywhere soft underfoot.",
+        points: [
+          "Wheel size and torque decide this, and neither is on the box. Look for wheel diameter in the specifications.",
+          "Deep pile drains battery fast, so a robot rated for an hour of patrol will do considerably less.",
+          "A robot that cannot reliably find its own dock across carpet becomes a robot you plug in by hand, which defeats the point.",
+        ],
+      },
+    ],
+  },
+
   /* Yard size carries the acreage keyword cluster — roughly 2,060/mo across
      "best robot lawn mower for 1 acre" (880, KD 4), "robot lawn mower 1 acre"
      (720), "robot lawn mower for 2 acres" (210) and "best robot lawn mower for
@@ -243,6 +338,118 @@ export interface CoverageSectionContent {
 }
 
 export const COVERAGE_SECTION: Record<string, CoverageSectionContent> = {
+  /* This section is the reason the category page exists, and it carries the
+     #support-risk anchor the hero's second CTA points at.
+
+     The evidence behind it is unusually direct. Google's People Also Ask asks
+     "Does Eilik need a subscription?", "Does emo robot need a subscription?"
+     and "Can you use Miko 3 without a subscription?" — three separate products,
+     the same fear. And the research turned up three terms with large volume
+     attached to products that appear to be discontinued or orphaned: vector
+     robot (9,900), cozmo robot (9,900) and moxie robot (8,100). Roughly 28,000
+     searches a month for machines whose companies stopped.
+
+     No other category BotPlanet covers has this problem. A pool robot works
+     when its maker goes under. A companion robot often does not. */
+  "companion-robots": {
+    id: "support-risk",
+    eyebrow: "The risk nobody prices in",
+    title: "Subscriptions, shutdowns, and what happens when the company stops",
+    intro:
+      "This is the single most important section on this page, and it is the one the " +
+      "manufacturers do not write. A companion robot is not really a product you own — it is " +
+      "a product plus a company that has to keep existing. When that company stops, some of " +
+      "these machines become ornaments. Before comparing personality or price, understand what " +
+      "you are actually depending on.",
+    rows: [
+      {
+        title: "The subscription question",
+        whoFor: "Almost every talking machine in this category",
+        body:
+          "Ask it before you ask anything else, because Google's own users do. The People Also " +
+          "Ask box on three different products in this category asks whether that product " +
+          "needs a subscription. The pattern is consistent: the hardware price gets the " +
+          "headline, and the conversation, the cloud voice and the children's learning content " +
+          "sit behind a monthly fee. Some machines keep a reduced personality when you stop " +
+          "paying. Others go quiet. We state which for every product we list, and where the " +
+          "manufacturer will not say, we say that instead.",
+      },
+      {
+        title: "When the company shuts down",
+        whoFor: "Anyone spending real money on a cloud-connected robot",
+        body:
+          "This is not a hypothetical risk in this category, it is a recurring event, and the " +
+          "search data shows the wreckage. Three of the best-known names in desktop and " +
+          "children's companion robots still draw tens of thousands of searches a month between " +
+          "them while being difficult or impossible to buy new. People are looking for machines " +
+          "whose makers stopped. Ask what the robot can still do with no internet connection " +
+          "at all — a machine with local personality survives its manufacturer, and a machine " +
+          "that is a speaker for a cloud service does not.",
+      },
+      {
+        title: "What it hears, and where that goes",
+        whoFor: "Anything with a microphone in a bedroom or a child's room",
+        body:
+          "These are always-listening devices with cameras, sold to sit in the rooms people are " +
+          "least guarded in. That is worth a clear head rather than alarm. The questions that " +
+          "matter are whether audio is processed on the device or in the cloud, whether " +
+          "recordings are retained and for how long, whether there is a hardware microphone cut, " +
+          "and which country the company answers to. Where a manufacturer publishes answers we " +
+          "quote them. Where a manufacturer publishes nothing, that absence is itself the " +
+          "finding and we record it.",
+      },
+    ],
+  },
+
+  /* Carries the #versus-fixed anchor from the hero's second CTA. This is the
+     comparison the buyer is actually making — not robot against robot, but
+     robot against the $40 fixed camera they already own. */
+  "pet-camera-robots": {
+    id: "versus-fixed",
+    eyebrow: "The real comparison",
+    title: "A moving pet camera, or a fixed one?",
+    intro:
+      "Almost nobody comparing pet camera robots is choosing between two robots. They are " +
+      "choosing between a robot and a fixed camera that costs a fifth as much, and the honest " +
+      "answer depends entirely on whether their pet moves. Google agrees, incidentally: search " +
+      "for the best one of these and it returns reviews of ordinary fixed pet cameras, because " +
+      "that is the market this sits inside.",
+    rows: [
+      {
+        title: "What the robot genuinely adds",
+        whoFor: "Dogs that follow you room to room, and cats that hide",
+        body:
+          "A fixed camera watches one place. If the dog sleeps somewhere else, you watch an " +
+          "empty sofa. A robot pet camera drives to the animal, which turns \"is he all right\" " +
+          "from a guess into an answer. It also lets you initiate something rather than just " +
+          "observe — drive over, speak, throw a treat, get a reaction. For an anxious dog with " +
+          "separation problems, that interaction is the actual product and the camera is how " +
+          "you steer it.",
+      },
+      {
+        title: "Where the fixed camera wins",
+        whoFor: "Most households, honestly",
+        body:
+          "A fixed camera is always on, always charged, always pointed somewhere useful, and " +
+          "costs a fraction as much. It does not get stuck under a bed, run out of battery at " +
+          "two in the afternoon, or need a dock it can find. If your pet sleeps in the same " +
+          "place all day — which most cats and many older dogs do — a wide-angle camera on a " +
+          "shelf tells you everything a pet monitoring robot would, for less money and with " +
+          "nothing to go wrong.",
+      },
+      {
+        title: "Battery, docking and the quiet failure",
+        whoFor: "Anyone leaving the house for a working day",
+        body:
+          "This is where the category disappoints, and it is rarely in the reviews. These are " +
+          "small machines with small batteries. Patrol time is quoted in tens of minutes, not " +
+          "hours, and the rest of the day is spent on the dock. That is fine if it docks " +
+          "reliably. If it cannot find its way back across a rug, you come home to a flat robot " +
+          "in a corner and no footage of the afternoon you actually wanted to see.",
+      },
+    ],
+  },
+
   "robotic-lawn-mowers": {
     id: "terrain",
     eyebrow: "Your ground",
@@ -402,6 +609,93 @@ export interface SplitSectionContent {
 }
 
 export const SPLIT_SECTION: Record<string, SplitSectionContent> = {
+  /* The category's real fork. "desktop companion robot" is 480/mo at KD 2 and
+     "robot pet" is 8,100 — the same shelf to a buyer, two genuinely different
+     machines, and the choice most likely to be got wrong because the product
+     photography for both is a cute face on a white background. */
+  "companion-robots": {
+    id: "desk-or-floor",
+    eyebrow: "The fork",
+    title: "Stays on the desk, or moves around the room",
+    intro:
+      "Every machine in this category is one of two things and the listings rarely say which. " +
+      "A desk companion sits where you put it, faces you, and earns its money through " +
+      "expression and conversation. A floor robot drives around, reacts to the room and behaves " +
+      "more like an animal. They cost similar money and they are not substitutes — one is " +
+      "company while you work, the other is company in the house.",
+    panels: [
+      {
+        label: "DESK",
+        title: "When a desk companion is right",
+        points: [
+          "You want something present while you work, not something underfoot.",
+          "Conversation and expression are the point, and both are better when the machine is not also trying to drive.",
+          "It is the cheaper half of the category and the safer first purchase.",
+          "Nothing to trip over, nothing to charge on a dock, nothing to lose under the sofa.",
+        ],
+        tradeOff:
+          "It does not come to you, it does not react to the room, and the novelty of a face " +
+          "that pulls expressions wears off faster than the novelty of something that behaves " +
+          "like a creature. This is the half of the category most likely to end up in a drawer.",
+      },
+      {
+        label: "FLOOR",
+        title: "When a floor robot earns the money",
+        points: [
+          "You want something that behaves like a pet rather than a gadget — that finds you rather than waits.",
+          "Movement is what makes people bond with these, and it is the difference an ai companion robot cannot fake sitting still.",
+          "Better suited to a household than to one person at one desk.",
+          "This is also where the premium machines live, and where the engineering money goes.",
+        ],
+        tradeOff:
+          "Considerably more expensive, and a lot more to go wrong — wheels, sensors, a dock to " +
+          "find and a floor to cope with. Stairs stop most of them, and carpet slows all of them.",
+      },
+    ],
+  },
+
+  /* Auto-follow versus manual drive. Both exist in the Enabot range at
+     different prices and the difference is not obvious from a listing. */
+  "pet-camera-robots": {
+    id: "driving",
+    eyebrow: "The fork",
+    title: "It follows the pet, or you drive it",
+    intro:
+      "Two quite different products share this shelf. One patrols and tracks movement on its " +
+      "own, so you open the app to a robot already looking at your dog. The other is a machine " +
+      "you steer with a thumbstick on your phone. The second is cheaper and more fun; the first " +
+      "is the one that still works on the days you are too busy to play with it.",
+    panels: [
+      {
+        label: "AUTONOMOUS",
+        title: "When automatic tracking is worth it",
+        points: [
+          "It works when you are not watching, which is most of the time.",
+          "Motion tracking means the recording of the thing you missed actually contains the thing you missed.",
+          "Better for anxious animals — the robot goes to them rather than waiting for them to walk past.",
+          "Self-docking matters more here, because a machine that patrols all day has to charge itself.",
+        ],
+        tradeOff:
+          "It costs more, and autonomy in a small wheeled robot is only as good as its map. In a " +
+          "cluttered house it will get stuck, and a stuck robot records the underside of a chair.",
+      },
+      {
+        label: "MANUAL",
+        title: "When driving it yourself is enough",
+        points: [
+          "Much cheaper, and for a lot of households genuinely more fun.",
+          "Fewer sensors means fewer things that fail, and less to go wrong on carpet.",
+          "If you check in a couple of times a day rather than leaving it running, autonomy buys you nothing.",
+          "Good enough as a first robot camera for pets before spending real money.",
+        ],
+        tradeOff:
+          "It only works while you are holding the phone. Nothing is watched, nothing is " +
+          "recorded on its own initiative, and the moment you actually wanted to see is the " +
+          "moment you were in a meeting.",
+      },
+    ],
+  },
+
   /* The category's biggest genuine fork, and roughly 1,670/mo of search:
      "wire free robot lawn mower" (720, KD 0), "gps robot lawn mower" (590),
      "robot lawn mower without perimeter wire" (210, KD 0), "lidar robot lawn
@@ -553,6 +847,97 @@ export interface MatrixSectionContent {
 }
 
 export const MATRIX_SECTION: Record<string, MatrixSectionContent> = {
+  "companion-robots": {
+    id: "expectations",
+    eyebrow: "What to expect",
+    title: "What a robotic pet actually does, and what it does not",
+    intro:
+      "This is the category where the gap between the marketing video and the living room is " +
+      "widest, and being straight about it is more useful than another feature list. None of " +
+      "these machines is a substitute for a person or an animal. What they are is better than " +
+      "an empty room, which for a lot of people is the entire point and worth paying for.",
+    columns: ["What it genuinely does", "Where it falls short"],
+    rows: [
+      {
+        label: "Company and presence",
+        cells: [
+          "The thing they are actually good at. A machine that reacts when you walk in changes the feel of a room, and that effect is real and repeatable rather than a trick.",
+          "It is presence, not relationship. The machine does not know you, remember your week or notice you are upset, whatever the packaging implies about emotional AI.",
+        ],
+      },
+      {
+        label: "Conversation",
+        cells: [
+          "The best of them hold a genuine back-and-forth now, and the ones running current language models are far better than the category's reputation.",
+          "Usually the subscription. It is also the feature most likely to get worse over time as a company cuts cloud costs, and the first thing to stop if it shuts down.",
+        ],
+      },
+      {
+        label: "Novelty and the long run",
+        cells: [
+          "The ones that move and behave like creatures hold attention for months rather than weeks. Physical behaviour beats a talking face for staying power.",
+          "Be honest about this before spending: a large share of these are used daily for a fortnight and monthly after that. The desk ones fare worst.",
+        ],
+      },
+      {
+        label: "Care and wellbeing use",
+        cells: [
+          "The one area with peer-reviewed evidence behind it. Simple robotic pets for dementia and for isolated older people are studied, and the findings are genuinely positive.",
+          "The evidence is for simple, animal-like machines rather than for talking robots. It is also not a substitute for care, and we will not present it as one.",
+        ],
+      },
+    ],
+    note:
+      "Nothing on this page will tell you a companion robot cured somebody's loneliness. Where " +
+      "there is research we cite it and stay inside what it found; where there is only a " +
+      "marketing claim, we say that is all there is.",
+  },
+
+  "pet-camera-robots": {
+    id: "what-it-handles",
+    eyebrow: "What to expect",
+    title: "What a pet monitoring robot handles well",
+    intro:
+      "How well one of these works depends far more on the animal than on the machine. The " +
+      "same robot is transformative in one house and ignored in another, and you can predict " +
+      "which before buying by being honest about what your pet does all day.",
+    columns: ["What it does well", "Where it falls short"],
+    rows: [
+      {
+        label: "Dogs with separation anxiety",
+        cells: [
+          "The strongest case in the category. Being able to drive over, speak and drop a treat gives you something to do about the distress rather than just watching it.",
+          "It can also make things worse. A disembodied voice with no person attached unsettles some dogs, and you will not know which yours is until you try.",
+        ],
+      },
+      {
+        label: "Cats",
+        cells: [
+          "A laser or a moving toy on a robot is the best automatic play device most cats will meet, and it goes to them rather than waiting.",
+          "Plenty of cats treat the robot as a threat and simply leave the room, which produces excellent footage of them leaving the room.",
+        ],
+      },
+      {
+        label: "Checking on the house",
+        cells: [
+          "Being able to look at any room from anywhere is genuinely useful — did I leave the hob on, is the back door shut, is anyone home.",
+          "It is not a security system and should not be sold as one. It is not on when you need it, it does not alert reliably, and a burglar can pick it up.",
+        ],
+      },
+      {
+        label: "Older or sleepy pets",
+        cells: [
+          "Almost nothing, honestly. A fixed camera pointed at the bed does the same job better and never needs charging.",
+          "This is the case where a home monitoring robot is the wrong purchase, and we would rather say so than sell one.",
+        ],
+      },
+    ],
+    note:
+      "None of these replaces a dog walker, a sitter or a visit. They shorten the gap between " +
+      "wondering and knowing, which is worth something — but it is worth being clear that is " +
+      "what you are buying.",
+  },
+
   "robotic-lawn-mowers": {
     id: "cutting",
     eyebrow: "The cut",
@@ -735,6 +1120,121 @@ export interface CheckSectionContent {
 }
 
 export const CHECK_SECTION: Record<string, CheckSectionContent> = {
+  "companion-robots": {
+    id: "before-you-buy",
+    eyebrow: "Before you buy",
+    title: "Five things to check before you buy",
+    intro:
+      "Personality is what the listings sell and it is the thing you cannot check from a " +
+      "product page. What you can check is what it costs to keep running, what it does when " +
+      "the internet is off, and who is on the other end of it. These five separate a machine " +
+      "you keep from one that ends up in a cupboard.",
+    boxLabel: "Check these before buying",
+    items: [
+      {
+        title: "Whether there is a subscription, and what stops without it",
+        body:
+          "Google's own users ask this about three separate products in this category, which " +
+          "tells you how common it is. The hardware price is often not the price. Find out what " +
+          "the machine still does when you stop paying — reduced personality is very different " +
+          "from silence.",
+        ask: "What does it cost per month, and what exactly do I lose if I cancel?",
+      },
+      {
+        title: "What it can do with no internet at all",
+        body:
+          "This is the single best proxy for how long the machine will outlive its manufacturer. " +
+          "A robot with its personality on the device keeps working whatever happens to the " +
+          "company. A robot that is a speaker for a cloud service is worth nothing the day the " +
+          "servers go off, and that day is not hypothetical in this category.",
+        ask: "Unplug the router — does it still do anything?",
+      },
+      {
+        title: "Who it is actually for",
+        body:
+          "The most expensive mistake here is buying an adult's desk toy for a child, or a " +
+          "child's learning robot for a parent with dementia. Each of the three audiences on " +
+          "this page needs something genuinely different, and a machine designed for one is " +
+          "usually poor for the others rather than merely imperfect.",
+        ask: "Is this designed for the person receiving it, or just appealing to me?",
+      },
+      {
+        title: "Whether it moves, and whether that matters to you",
+        body:
+          "Machines that move around hold attention for months. Machines that sit on a desk and " +
+          "pull faces tend to hold it for weeks. If the point is company rather than a gadget, " +
+          "the thing that behaves like a creature is worth the extra money and the extra " +
+          "trouble.",
+        ask: "Do I want something present while I work, or something living in the house?",
+      },
+      {
+        title: "What it hears and records, and where that goes",
+        body:
+          "These are microphones and cameras in bedrooms, offices and children's rooms. Check " +
+          "whether audio is processed on the device or in the cloud, whether there is a way to " +
+          "switch the microphone off in hardware rather than in software, and how long anything " +
+          "is kept. A manufacturer that will not answer has answered.",
+        ask: "Can I mute the microphone physically, and does the maker publish a retention policy?",
+      },
+    ],
+  },
+
+  "pet-camera-robots": {
+    id: "before-you-buy",
+    eyebrow: "Before you buy",
+    title: "Five things to check before you buy",
+    intro:
+      "Resolution is the number every listing leads with and it decides almost nothing — you " +
+      "are watching a dog on a sofa, not reading a number plate. What decides it is whether " +
+      "the robot can get to the animal, get back to its dock, and be worth opening the app for.",
+    boxLabel: "Check these before buying",
+    items: [
+      {
+        title: "Whether your pet is on the same floor as the dock",
+        body:
+          "No pet camera robot climbs stairs. If the dock is downstairs and the dog sleeps " +
+          "upstairs, the robot patrols an empty ground floor all day. This is the most common " +
+          "reason one of these disappoints and it is entirely predictable before buying.",
+        ask: "Where does my pet actually spend the day, and can the robot get there?",
+      },
+      {
+        title: "Wheel size against your floors",
+        body:
+          "Small wheels and thick carpet do not mix, and rug edges strand these machines " +
+          "routinely. Wheel diameter is usually buried in the specifications rather than on the " +
+          "listing, and it predicts real-world behaviour better than any other number on the " +
+          "page.",
+        ask: "How big are the wheels, and what is on my floors?",
+      },
+      {
+        title: "Patrol time, not battery capacity",
+        body:
+          "These have small batteries. Useful patrol time is quoted in tens of minutes and " +
+          "carpet cuts into it hard. What matters is whether it can cover the house a few times " +
+          "in a working day and get itself back on charge in between — not the milliamp-hour " +
+          "figure.",
+        ask: "How long does it actually patrol, and does it dock itself reliably?",
+      },
+      {
+        title: "Whether there is a subscription for recordings",
+        body:
+          "The live view is usually free. Saved clips, motion history and cloud storage often " +
+          "are not — and the recording is the half you want, because you were busy when the " +
+          "thing happened. Check whether there is local storage on a card as an alternative.",
+        ask: "Can I record without paying monthly, and is there a card slot?",
+      },
+      {
+        title: "How it is secured, and where the video goes",
+        body:
+          "Google's People Also Ask on this category includes whether pet cameras are hackable, " +
+          "which is a fair question about an internet-connected camera that drives around your " +
+          "home. Look for two-factor authentication on the account, encryption in transit, and " +
+          "a clear statement of which country the video is stored in.",
+        ask: "Does the account support two-factor, and where is the footage held?",
+      },
+    ],
+  },
+
   "robotic-lawn-mowers": {
     id: "before-you-buy",
     eyebrow: "Before you buy",
@@ -925,6 +1425,98 @@ export interface PriceSectionContent {
 }
 
 export const PRICE_SECTION: Record<string, PriceSectionContent> = {
+  /* No dollar figures in either block below. The catalogue for both categories
+     is empty — the pages were built ahead of their products on the owner's
+     instruction of 6 August 2026 — and a band printed from memory rather than
+     from a checked retail price is exactly what the review methodology
+     forbids. The rungs describe what each step up buys. Figures go in with the
+     products and carry the date they were read. */
+  "companion-robots": {
+    id: "cost",
+    eyebrow: "Cost",
+    title: "How much does a companion robot cost?",
+    intro:
+      "A wide range, and unusually for a robot category the money does not buy capability so " +
+      "much as behaviour. Every machine here has a face, a speaker and some personality. What " +
+      "climbs with price is whether it moves, how well it holds a conversation, and how much " +
+      "engineering went into making it feel like a creature rather than a device. Watch for " +
+      "the subscription, which sits outside the price entirely.",
+    rungs: [
+      {
+        label: "Entry",
+        what:
+          "A desk machine with expressions, sounds and simple reactions. No real conversation " +
+          "and usually no cloud account, which also means nothing to cancel and nothing to lose " +
+          "if the company disappears. Genuinely charming, and the safest first purchase.",
+      },
+      {
+        label: "Mid",
+        what:
+          "Proper conversational AI, app control and a personality that develops. This is where " +
+          "the subscription usually appears, and where the machine stops being a toy and starts " +
+          "depending on somebody else's servers.",
+      },
+      {
+        label: "Upper",
+        what:
+          "It moves. Wheels or legs, reacts to the room, finds you, docks itself. Movement is " +
+          "what makes people keep these rather than shelve them, and it is the clearest thing " +
+          "the extra money buys.",
+      },
+      {
+        label: "Top",
+        what:
+          "Animal-grade engineering — recognisable behaviour, real materials, machines built to " +
+          "be lived with for years rather than owned for a season. Also where care-focused and " +
+          "therapeutic products sit, and where support risk matters most because the sums are " +
+          "largest.",
+      },
+    ],
+    note:
+      "Every price on BotPlanet carries the date it was checked and names whether it came from " +
+      "the retailer or a marketplace seller. Where we have not checked recently, we say " +
+      "\"Check current price\" rather than guess. Subscription costs are stated separately, " +
+      "because a cheap robot with a monthly fee is not a cheap robot.",
+  },
+
+  "pet-camera-robots": {
+    id: "cost",
+    eyebrow: "Cost",
+    title: "How much does a pet camera robot cost?",
+    intro:
+      "The narrowest price range of any category on BotPlanet, and the most important number " +
+      "is not in it: a perfectly good fixed pet camera costs a fraction of the cheapest robot " +
+      "here. You are paying for movement, and whether that is worth it depends on whether your " +
+      "pet moves. What follows is what each step up buys.",
+    rungs: [
+      {
+        label: "Entry",
+        what:
+          "A small robot you drive yourself from the app, with a camera and two-way audio. No " +
+          "autonomy, modest battery, and you charge it by hand. Fine as a way of finding out " +
+          "whether your pet reacts to one at all before spending more.",
+      },
+      {
+        label: "Mid",
+        what:
+          "Self-docking, longer patrol time, better low-light video, and usually a treat " +
+          "dispenser or a laser. This is the sensible middle of the category and where most " +
+          "buyers should be looking.",
+      },
+      {
+        label: "Upper",
+        what:
+          "Autonomous patrol and motion tracking — the robot follows the animal without being " +
+          "driven, which is the difference between a toy and something that works while you are " +
+          "at work. Sharper cameras and proper mapping come with it.",
+      },
+    ],
+    note:
+      "Every price carries the date it was checked. Cloud recording plans are stated separately " +
+      "from the hardware price, because the live view being free does not mean the recordings " +
+      "are.",
+  },
+
   /* No dollar figures. The catalogue for this category is not verified yet —
      the page was built ahead of its products on the owner's instruction of
      6 August 2026 — and a band printed from memory rather than from a checked
@@ -1080,6 +1672,70 @@ export interface VerdictSectionContent {
 }
 
 export const VERDICT_SECTION: Record<string, VerdictSectionContent> = {
+  /* Owns "are companion robots worth it". The term returned no volume data at
+     all — below Google Ads' reporting floor — but it has a real SERP with
+     Forbes, IEEE Spectrum, a PMC paper on dementia care and several buying
+     guides, and it appeared as a lead in the research. A section rather than a
+     guide: it shares keyirobot.com and reddit with the hub head terms and
+     there is not enough demand in this category to support a second URL. */
+  "companion-robots": {
+    id: "worth-it",
+    eyebrow: "The verdict",
+    title: "Are companion robots worth it?",
+    intro:
+      "The question the category attracts most, and the one where a comparison site is most " +
+      "tempted to be dishonest in either direction.",
+    verdict:
+      "For a quiet house, a desk you sit at all day, or an older relative living alone, yes — " +
+      "with your eyes open about the subscription. As a substitute for company, no.",
+    body:
+      "A robot pet does not know you. It does not remember your week, notice you are low, or " +
+      "care whether you come home, and any listing implying otherwise is selling something it " +
+      "cannot deliver. What it does do is make a room feel occupied. Something reacts when you " +
+      "walk in, something responds when you speak, and for a lot of people living alone that " +
+      "is worth real money — not as a cure for anything, but as the difference between silence " +
+      "and not-silence. The evidence is strongest at the two ends: simple animal-like machines " +
+      "for older people, where there is peer-reviewed research behind it, and expressive " +
+      "moving robots for households that want something to share a room with. The weakest case " +
+      "is the middle — a talking face on a desk, bought on novelty, subscribed to for a month " +
+      "and shelved by the second.",
+    against:
+      "A busy household that already has a pet, a child, or people in it. Anyone buying one to " +
+      "fix loneliness rather than to soften it. And anyone who would resent a monthly fee — " +
+      "because in this category the fee is usually where the personality lives, and cancelling " +
+      "it can leave you with an ornament.",
+  },
+
+  /* Owns "are pet cameras worth it", which appears verbatim in the People Also
+     Ask box on "pet camera robot". Kept as a section rather than a guide for
+     the same reason as above: 480/mo does not support two URLs. */
+  "pet-camera-robots": {
+    id: "worth-it",
+    eyebrow: "The verdict",
+    title: "Are pet camera robots worth it?",
+    intro:
+      "The honest answer is narrower than the category would like, and it turns entirely on " +
+      "your animal rather than on the machines.",
+    verdict:
+      "For a dog with separation anxiety, or a pet that moves around a single floor all day, " +
+      "yes. For most other households a fixed camera is the better buy.",
+    body:
+      "The argument for a robot over a fixed camera is that it goes to the animal. That is a " +
+      "real advantage in exactly one situation: the pet moves, and it moves around a floor the " +
+      "robot can cross. Then a moving pet camera turns \"I can't see him\" into \"there he is\", " +
+      "and being able to drive over, talk and drop a treat gives you something to do about " +
+      "distress instead of watching it on a phone. Against that, these are small machines with " +
+      "small batteries that cannot climb a stair, struggle on carpet, and spend most of the day " +
+      "on a dock. A wide-angle fixed camera costs a fraction as much, is always on, and never " +
+      "gets stuck under a bed. If your pet sleeps in one spot — which most cats and plenty of " +
+      "older dogs do — that is the better product and we would rather say so.",
+    against:
+      "A house with stairs where the pet follows you between floors. Thick carpet throughout. A " +
+      "pet that sleeps in the same place all day. And anyone buying one as a security camera — " +
+      "it is not on when you need it, it does not alert reliably, and an intruder can simply " +
+      "pick it up.",
+  },
+
   /* This section owns "are robot lawn mowers worth it" (210/mo, KD 18). It is
      a section rather than a guide because the term shares 5/10 domains with
      both head phrasings — the same threshold that folded the window best-of.
@@ -1188,6 +1844,147 @@ export interface FaqSectionContent {
 }
 
 export const FAQ_SECTION: Record<string, FaqSectionContent> = {
+  /* Every question below is one Google actually surfaces, taken verbatim or
+     near-verbatim from the People Also Ask boxes across the 23 SERPs in run
+     31081889310. The subscription question is here because it appeared on
+     THREE separate product SERPs — Eilik, EMO and Miko 3 — which is the
+     clearest signal in the whole run about what buyers are afraid of.
+
+     These items generate the FAQPage schema, so the structured data cannot
+     claim a question the page does not show. */
+  "companion-robots": {
+    id: "faqs",
+    eyebrow: "Questions",
+    title: "Companion robot FAQs",
+    intro:
+      "The questions people actually ask before buying, answered plainly. Anything needing a " +
+      "longer answer gets its own page rather than a paragraph here.",
+    items: [
+      {
+        q: "Do companion robots need a subscription?",
+        a:
+          "Many of the best-known ones do, and it is the question Google surfaces on three " +
+          "separate products in this category. The pattern is consistent: the hardware price is " +
+          "the headline, and conversation, cloud voice and children's learning content sit " +
+          "behind a monthly fee. Simpler machines — the ones that emote and react rather than " +
+          "talk — usually have no account at all. Check what the robot still does if you stop " +
+          "paying, because reduced personality and complete silence are very different outcomes.",
+      },
+      {
+        q: "What happens if the company that made it shuts down?",
+        a:
+          "It depends entirely on whether the personality lives on the device or in the cloud, " +
+          "and this is not a hypothetical worry in this category. Several well-known desktop " +
+          "and children's companion robots still attract tens of thousands of searches a month " +
+          "while being difficult or impossible to buy new. A machine that works offline keeps " +
+          "working. A machine that is effectively a speaker for a cloud service stops. Before " +
+          "you buy, unplug the router in the shop or ask the maker directly.",
+      },
+      {
+        q: "How much does a companion robot cost?",
+        a:
+          "A wide range, and unusually the money buys behaviour rather than capability. The " +
+          "cheapest desk machines are genuinely charming and have no account attached. Real " +
+          "conversation costs more and usually adds a subscription. Machines that move around " +
+          "the room cost more again, and that is the step most worth paying for if you want " +
+          "something you keep rather than shelve. Always add the monthly fee to the sticker " +
+          "price before comparing.",
+      },
+      {
+        q: "Do robot pets help with loneliness?",
+        a:
+          "There is real evidence in one specific case: simple, animal-like robotic pets used " +
+          "by older adults, including people living with dementia. That work is peer-reviewed " +
+          "and the findings are positive, which is why this is the one part of the category we " +
+          "cite research for. Outside that group the honest answer is that a companion robot " +
+          "makes a room feel occupied rather than curing anything, and we are not going to " +
+          "dress that up as therapy.",
+      },
+      {
+        q: "What is the best AI companion robot?",
+        a:
+          "There is no single answer, and any page giving you one has skipped the only question " +
+          "that matters — who it is for. An adult wanting something on a desk, a parent buying " +
+          "for a child, and someone choosing for an older relative are three different " +
+          "purchases with almost no overlap. Start with who will live with it and the shortlist " +
+          "narrows to two or three before you compare anything.",
+      },
+      {
+        q: "Are companion robots always listening?",
+        a:
+          "The ones you talk to are, in the same way a smart speaker is — they wait for a wake " +
+          "word, which means the microphone is live. What differs is where the audio goes. Some " +
+          "process it on the device, some send it to a server abroad. Look for a hardware " +
+          "microphone switch rather than a software one, and check whether the maker publishes " +
+          "a retention policy at all. Many do not, and that silence is itself an answer.",
+      },
+    ],
+  },
+
+  "pet-camera-robots": {
+    id: "faqs",
+    eyebrow: "Questions",
+    title: "Pet camera robot FAQs",
+    intro:
+      "The questions people actually ask before buying, answered plainly.",
+    items: [
+      {
+        q: "Are pet cameras worth it?",
+        a:
+          "A camera of some kind, usually yes — knowing rather than wondering is worth the " +
+          "money. A robot one specifically, only if your pet moves around and does so on a " +
+          "single floor. If the dog sleeps in the same spot all day, a fixed camera pointed at " +
+          "that spot does the same job for a fraction of the price and never gets stuck under " +
+          "the sofa.",
+      },
+      {
+        q: "Can a pet camera robot climb stairs?",
+        a:
+          "No. Every one of these on the US market is a small wheeled machine and none of them " +
+          "climbs. Whichever floor you leave it on is the floor it covers. In a two-storey " +
+          "house that means choosing the floor your pet actually spends the day on, or buying " +
+          "two robots and two docks — and it is the single most common reason people are " +
+          "disappointed by one.",
+      },
+      {
+        q: "What are the downsides of owning a pet robot?",
+        a:
+          "Battery life measured in tens of minutes rather than hours, so it lives on its dock " +
+          "for most of the day. Carpet and rug edges strand it. It cannot manage stairs or a " +
+          "closed door. Some pets are frightened of it and simply leave the room. And it is one " +
+          "more internet-connected camera in your house to keep secure. None of that makes it a " +
+          "bad product — all of it is worth knowing before you spend.",
+      },
+      {
+        q: "Do pet camera robots work on carpet?",
+        a:
+          "On low pile, generally yes. On deep pile, often badly. Wheel diameter is what decides " +
+          "it and it is usually buried in the specifications rather than on the listing. The " +
+          "bigger practical problem is rug edges, which beach these machines routinely — and a " +
+          "robot that cannot get back to its dock across the living room is a robot you end up " +
+          "charging by hand.",
+      },
+      {
+        q: "Are pet cameras hackable?",
+        a:
+          "Any internet-connected camera can be, and one that drives around your house is worth " +
+          "a moment's thought. The practical protections are ordinary: a unique password, " +
+          "two-factor authentication on the account, and firmware that actually gets updated. " +
+          "Check where the video is stored and which country the company answers to, and prefer " +
+          "a model that offers local recording to a card rather than cloud-only.",
+      },
+      {
+        q: "Can I use one as a home security camera?",
+        a:
+          "Not really, and we would rather say so. It is not running when you need it, it does " +
+          "not alert reliably, it cannot see a room with the door shut, and an intruder can pick " +
+          "it up and put it in a bag. As a way of checking whether you left the hob on it is " +
+          "genuinely useful. As a security system it is the wrong product, and a fixed camera " +
+          "costs less and does that job properly.",
+      },
+    ],
+  },
+
   /* Every question below is one Google actually surfaces. Taken from the
      People Also Ask boxes across the 24 SERPs in runs 31073327230 and
      31074893036, ranked by how often each appeared:
@@ -1410,6 +2207,15 @@ export interface BotMatchCtaContent {
 }
 
 export const BOTMATCH_CTA: Record<string, BotMatchCtaContent> = {
+  /* NO "companion-robots" OR "pet-camera-robots" ENTRY, and unlike lawn the
+     reason is not a missing question set. Both categories have their own
+     questions and their own scoring config (sc-companion-v1, sc-petcam-v1).
+     What they do not have is products.
+
+     "A matcher with no products is not advertised" — PRE-BUILD-PROCESS.md
+     Stage 5b. A panel promising a recommendation in thirty seconds that then
+     returns an empty list is worse than no panel. Add both entries when the
+     first product lands in each catalogue. */
   /* NO "robotic-lawn-mowers" ENTRY, and that is deliberate.
 
      The panel's button goes to /botmatch/<slug>/?start=quiz, and for lawn that

@@ -257,6 +257,97 @@ export const ROUTES: RouteDef[] = [
     category: "robotic-lawn-mowers",
   },
 
+  /* ---------------- Companion robots ----------------
+     Added 2026-08-06. Named for the category, targeted at "robot pet" — see
+     the keyword register for why the head term is not the H1. */
+  {
+    path: "/robots/companion-robots/",
+    label: "Companion Robots & Robot Pets",
+    breadcrumbLabel: "Companion Robots",
+    section: "shop",
+    parent: "/robots/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: "Explore",
+    inSitemap: true,
+    indexable: true,
+    category: "companion-robots",
+  },
+  {
+    path: "/compare/companion-robots/",
+    label: "Compare companion robots",
+    breadcrumbLabel: "Companion Robots",
+    section: "compare",
+    parent: "/compare/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: true,
+    indexable: true,
+    category: "companion-robots",
+  },
+  {
+    path: "/botmatch/companion-robots/",
+    label: "Find My Robot Pet",
+    breadcrumbLabel: "Find My Robot Pet",
+    parent: "/robots/companion-robots/",
+    section: "botmatch",
+    /* Its own question set exists and scores against sc-companion-v1. Still
+       coming_soon for the same reason lawn is: no products in the catalogue
+       yet, so the funnel would ask six good questions and recommend nothing.
+       Flips to live with the first published companion product. */
+    status: "coming_soon",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: false,
+    indexable: false,
+    category: "companion-robots",
+  },
+
+  /* ---------------- Pet camera robots ----------------
+     A separate category from companion robots, on measured evidence rather
+     than taste: the two head SERPs share only Amazon, Reddit and YouTube, and
+     "pet camera robot" peaks in July while everything companion peaks in
+     December. Recorded in docs/seo/companion-robots-research-findings.md. */
+  {
+    path: "/robots/pet-camera-robots/",
+    label: "Pet Camera Robots",
+    section: "shop",
+    parent: "/robots/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: "Explore",
+    inSitemap: true,
+    indexable: true,
+    category: "pet-camera-robots",
+  },
+  {
+    path: "/compare/pet-camera-robots/",
+    label: "Compare pet camera robots",
+    breadcrumbLabel: "Pet Camera Robots",
+    section: "compare",
+    parent: "/compare/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: true,
+    indexable: true,
+    category: "pet-camera-robots",
+  },
+  {
+    path: "/botmatch/pet-camera-robots/",
+    label: "Find My Pet Camera Robot",
+    breadcrumbLabel: "Find My Pet Camera Robot",
+    parent: "/robots/pet-camera-robots/",
+    section: "botmatch",
+    status: "coming_soon",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: false,
+    indexable: false,
+    category: "pet-camera-robots",
+  },
+
   /* ---------------- Window-cleaning robots ----------------
      Added 2026-08-05 when the category went live. The category page renders
      from a dynamic route and a D1 row, so it worked before this entry existed

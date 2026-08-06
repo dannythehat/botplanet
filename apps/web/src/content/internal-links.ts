@@ -58,6 +58,98 @@ export interface InternalAnchor {
    reader at the bottom of a review with nowhere to go. internal-links.test.ts
    checks the anchors that DO exist resolve; it cannot check for absence. */
 export const CATEGORY_ANCHORS: Record<string, InternalAnchor[]> = {
+  /* The cross-link between these two categories matters more than most,
+     because they were one category until 6 August 2026 and to a reader they
+     still look like one shelf. Somebody who lands on companion robots wanting
+     to watch their dog has arrived in the wrong place, and the fastest honest
+     fix is a link rather than a paragraph explaining the SERP evidence. */
+  "companion-robots": [
+    {
+      anchor: "pet camera robot",
+      href: "/robots/pet-camera-robots/",
+      why: "The phrase appears in the hub's own prose where the two categories are distinguished. A reader who used that phrase to get here wants the other page, and this is the shortest route to it.",
+      status: "live",
+    },
+    {
+      anchor: "robotic pet for elderly",
+      href: "/robots/companion-robots/#who-for",
+      why: "The who-it-is-for section is where the three audiences are separated, and eldercare is the one with genuinely different products behind it. First mention should reach the explanation.",
+      status: "live",
+    },
+    {
+      anchor: "subscription",
+      href: "/robots/companion-robots/#support-risk",
+      why: "The support-risk section is the only place on the site that explains what a companion-robot subscription actually gates. Every product page will mention the word; the reasoning belongs in one place.",
+      status: "live",
+    },
+    {
+      anchor: "desktop companion robot",
+      href: "/robots/companion-robots/#desk-or-floor",
+      why: "The desk-or-floor fork is the category's real split and this is the phrase a reader searching for the desk half would use.",
+      status: "live",
+    },
+    {
+      anchor: "compare",
+      href: "/compare/companion-robots/",
+      why: "The comparison table is the honest next step for a reader who has narrowed it to two machines.",
+      status: "live",
+    },
+    {
+      anchor: "review methodology",
+      href: "/review-methodology/",
+      why: "Any claim about how we check things should be one click from the page that says how we check things.",
+      status: "live",
+    },
+    {
+      /* Planned rather than live: /botmatch/companion-robots/ is coming_soon
+         until the catalogue has products to recommend. The anchor is recorded
+         now so it becomes a real link the day the funnel is worth using. */
+      anchor: "BotMatch",
+      href: "/botmatch/companion-robots/",
+      why: "Named in the prose where the reader is told who it is for decides the answer, which is exactly when the tool helps. Planned until there are products behind it.",
+      status: "planned",
+    },
+  ],
+
+  "pet-camera-robots": [
+    {
+      anchor: "robot pet",
+      href: "/robots/companion-robots/",
+      why: "The mirror of the companion hub's link to this page. A reader here for company rather than monitoring is one click from the right category instead of reading about wheel diameter.",
+      status: "live",
+    },
+    {
+      anchor: "fixed camera",
+      href: "/robots/pet-camera-robots/#versus-fixed",
+      why: "The comparison every buyer in this category is actually making. The phrase recurs throughout the prose and the reasoning sits in one section.",
+      status: "live",
+    },
+    {
+      anchor: "stairs",
+      href: "/robots/pet-camera-robots/#your-home",
+      why: "The category's one hard exclusion. Any page mentioning stairs should be able to reach the section explaining that none of these climb them.",
+      status: "live",
+    },
+    {
+      anchor: "compare",
+      href: "/compare/pet-camera-robots/",
+      why: "The comparison table is the honest next step once a reader has confirmed the layout works.",
+      status: "live",
+    },
+    {
+      anchor: "review methodology",
+      href: "/review-methodology/",
+      why: "Any claim about how we check things should be one click from the page that says how we check things.",
+      status: "live",
+    },
+    {
+      anchor: "BotMatch",
+      href: "/botmatch/pet-camera-robots/",
+      why: "Planned until the catalogue has products. The funnel's first question is the stairs exclusion, which is the most useful thing it does.",
+      status: "planned",
+    },
+  ],
+
   "robotic-pool-cleaners": [
     {
       anchor: "waterline",

@@ -32,6 +32,19 @@ export const PRODUCT_CLASSES = [
   "suction_side", // suction-side cleaner
   "window_cleaner", // glass-climbing window robot — NOT a pool machine
   "lawn_mower", // robotic lawn mower — not a cleaner of anything
+  /* Companion robots and pet-camera robots are TWO classes, not one, and the
+     split is the whole reason they are two pages. The research of 6 August
+     2026 measured their SERPs sharing only Amazon, Reddit and YouTube — the
+     three domains that appear on nearly every query in the space — and no
+     publisher, manufacturer or retailer in common at all.
+
+     The class gate is what stops that ruling being undone quietly later. A
+     desk companion has no camera and cannot be recommended to somebody who
+     asked to watch their dog; a roaming pet camera has no personality and
+     must not win a "keep me company" recommendation because it happens to be
+     cheaper. */
+  "companion_robot", // robot pet or desk companion — company, not a chore
+  "pet_camera_robot", // roaming indoor camera on wheels — watching, not company
 ] as const;
 
 export type ProductClass = (typeof PRODUCT_CLASSES)[number];
@@ -63,6 +76,25 @@ export const CLEANING_SURFACES = [
   "grass_flat", // ordinary level lawn — every mower does this
   "grass_slopes", // banks and inclines past a gentle grade
   "grass_zones", // separate lawns the machine reaches on its own
+  /* Companion robots. The list's name is wrong for these too — nothing here
+     cleans anything — but the column stores "things the customer can ask for
+     and the product either does or does not", which is exactly what these are.
+     Renaming the column across four categories is not worth the churn; saying
+     so plainly here is.
+     These four are genuinely separable. A Qoobo has companionship and no
+     conversation at all. An EMO converses and never leaves the desk. Miko
+     teaches. Treating them as one "is a companion" flag would let any of them
+     win any of the others' recommendations. */
+  "companionship", // presence and personality — the reason to own one
+  "conversation", // holds a spoken exchange, not just voice commands
+  "play_interaction", // responds physically — moves, plays, reacts to touch
+  "learning_content", // structured educational material, mostly for children
+  /* Pet-camera robots. Kept separate from the companion capabilities above so
+     the two classes cannot be described in each other's words. */
+  "remote_video", // live video you can watch from your phone
+  "two_way_audio", // talk to the room and hear it back
+  "treat_dispensing", // throws or drops treats on command
+  "roams_home", // drives itself around rather than sitting in one place
 ] as const;
 export type CleaningSurface = (typeof CLEANING_SURFACES)[number];
 
@@ -92,6 +124,18 @@ export const ENVIRONMENTS = [
   // for the same reason frameless glass is.
   "open_sky", // clear view overhead — satellite positioning works
   "tree_cover", // canopy or a tall building nearby — it does not
+  /* Pet-camera robots. The make-or-break here is stairs, and it is as absolute
+     as frameless glass or a tree canopy: every roaming pet camera on the US
+     market is a wheeled machine, and none of them climbs. In a house with
+     bedrooms upstairs the robot patrols whichever floor you leave it on and
+     nothing else — which is fine if you know it, and the most common
+     disappointment if you do not.
+
+     Companion robots do not use this axis. Nothing about a room rules out a
+     robot pet, so the companion scoring config turns the environment exclusion
+     off rather than inventing a distinction to fill the field. */
+  "single_storey", // one floor, or one floor you care about — a wheeled robot covers it
+  "multi_storey", // stairs between the rooms that matter — it does not
 ] as const;
 export type Environment = (typeof ENVIRONMENTS)[number];
 
