@@ -36,6 +36,61 @@ export interface CategoryHeroContent {
    generic heading: no H1 of its own, no <title>, no meta description, no OG
    image and no CollectionPage schema. It renders, so nothing complains. */
 export const CATEGORY_HERO: Record<string, CategoryHeroContent> = {
+  /* Page 010, the last of the owner-locked ten. Keyword evidence: run
+     31094454463, 2026-08-06, $0.1462, plus a SERP top-up. Full working in
+     docs/seo/educational-coding-robots-research-findings.md, INCLUDING three
+     questions this page is built without an answer to — they are named there
+     rather than glossed.
+
+     THE PAGE IS NAMED FOR THE DEMAND, NOT THE TOPIC. Notion calls the category
+     "educational and coding robots", and the SERPs say those are two different
+     things:
+
+       coding robot        1,300/mo  KD 21  makeblock, sphero, botzees,
+                                            learningresources, reddit,
+                                            stemeducationguide, techgearlab
+       educational robot     720/mo  KD  2  robotshop, ez-robot, WIKIPEDIA,
+                                            robot-advance, standardbots,
+                                            "Robots for Colleges & Universities"
+
+     They share 4 top-ten domains. The coding SERP is parents and retailers.
+     The educational SERP is institutional procurement and an encyclopedia
+     entry — the same shape that ended the security-robots category. So the
+     page is built on the coding family and "educational robot" is a secondary
+     term it will pick up rather than chase.
+
+     WITHIN THE CODING FAMILY THE ONE-URL RULE IS EMPHATIC: coding robot vs
+     best coding robots for kids shares 8 top-ten domains, coding robot vs
+     coding robots for kids 7, coding robots for kids vs best coding robots for
+     kids 7. One page, no best-of.
+
+     THE HEAD TERM IS SMALL AND THE PRODUCTS ARE HUGE, which is the reverse of
+     every other category here: vex iq 18,100, ozobot 14,800, lego mindstorms
+     9,900, lego education spike prime 5,400, sphero bolt 4,400, bee bot 4,400.
+     The hub will never carry this category on its own — the reviews are the
+     business, and the hub exists to route a parent to the right one.
+
+     Christmas category: coding robot peaks at 2,900 in December against 720 in
+     June, and stem toys runs 18,100 in December against 4,400 in January. */
+  "educational-coding-robots": {
+    eyebrow: "Robot category",
+    /* 47 words. Head term opens sentence one. The age point — the category's
+       hard exclusion and its real failure mode — is sentence two. */
+    title: "Coding Robots for Kids: Which One Suits Which Age",
+    subtitle:
+      "A coding robot teaches programming by making something physical happen, which works far " +
+      "better than a screen for most children. Age is the whole decision: a button-driven floor " +
+      "robot bores a twelve-year-old within a day, and a build-it-yourself kit defeats a " +
+      "five-year-old. Both end up in a cupboard, which is what failure looks like here.",
+    seoTitle: "Coding Robots for Kids: Compare by Age | BotPlanet",
+    metaDescription:
+      "Compare coding robots for kids by age, screen-free or app-based, block or text coding, " +
+      "and how long a child keeps using one. Find the right first coding robot.",
+    primaryCta: { label: "Compare coding robots", href: "#products" },
+    secondaryCta: { label: "Which age needs what?", href: "#age" },
+    imageLayout: "above",
+  },
+
   /* Page 009, and the largest category BotPlanet has taken on. Keyword
      evidence: DataForSEO run 31090094137, 2026-08-06, $0.2229. Full working in
      docs/seo/robot-vacuums-research-findings.md.

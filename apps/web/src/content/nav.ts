@@ -46,6 +46,7 @@ export const CATEGORIES: CategoryDef[] = [
   { slug: "pet-camera-robots", name: "Pet Camera Robots", jtbd: "Watch my pet", short: "Cameras on wheels that drive around the house while you are out.", launch: "live", order: 7 },
   { slug: "self-cleaning-litter-boxes", name: "Self-Cleaning Litter Boxes", jtbd: "Stop scooping", short: "Automatic litter boxes that sift and seal the waste themselves.", launch: "live", order: 8 },
   { slug: "grill-cleaning-robots", name: "Grill-Cleaning Robots", jtbd: "Clean my grill", short: "Robots that scrub the barbecue grates so you do not have to.", launch: "live", order: 9 },
+  { slug: "educational-coding-robots", name: "Coding Robots for Kids", jtbd: "Teach my kid to code", short: "Robots children program themselves, from screen-free floor bots up.", launch: "live", order: 10 },
   { slug: "solar-panel-robots", name: "Solar-Panel Cleaning Robots", jtbd: "Clean solar panels", short: "Automated cleaners that keep rooftop and ground arrays producing.", launch: "hidden", order: 5 },
 ];
 

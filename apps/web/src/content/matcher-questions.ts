@@ -1108,6 +1108,131 @@ const VACUUM_QUESTIONS: MatcherQuestion[] = [
 ];
 
 /* ============================================================
+   Educational and coding robots
+
+   AGE IS FIRST and it is the hard exclusion — the only one on
+   this site that cuts in BOTH directions. Every other category
+   fails by a machine not being capable enough. This one fails
+   equally by being too capable: a build-it-yourself kit given to
+   a five-year-old is abandoned exactly as reliably as a
+   button-driven floor robot given to a teenager. An unused robot
+   is the failure mode here, not a poor result.
+
+   THE TABLET QUESTION IS SECOND, ahead of budget, because it is
+   a household constraint rather than a preference. In a house
+   with one shared device an app-based robot is negotiated for
+   rather than picked up, and that is the difference between
+   daily use and a drawer.
+
+   AND THE FUNNEL ASKS WHETHER THE CHILD ACTUALLY WANTED ONE.
+   That question sells nothing and it is the most useful one
+   here: no robot in this category creates interest that was not
+   already there, and the honest recommendation for an unasked-for
+   purchase is the cheap screen-free one rather than the
+   flagship kit.
+   ============================================================ */
+
+const CODING_QUESTIONS: MatcherQuestion[] = [
+  {
+    id: "environment",
+    kicker: "Their age",
+    q: "How old is the child?",
+    options: [
+      {
+        label: "Four to seven",
+        hint: "Screen-free, no reading required",
+        scores: { environment: "age_4_7", desired_cleans: ["screen_free"] },
+      },
+      {
+        label: "Eight to twelve",
+        hint: "Block coding, some building",
+        scores: { environment: "age_8_12", desired_cleans: ["block_coding"] },
+      },
+      {
+        label: "Thirteen or older",
+        hint: "Real languages, real construction",
+        scores: {
+          environment: "age_13_plus",
+          desired_cleans: ["text_coding", "build_it_yourself"],
+        },
+      },
+    ],
+  },
+  {
+    id: "device",
+    kicker: "Your household",
+    q: "Is there a tablet or phone they can use freely?",
+    options: [
+      { label: "Yes, their own" },
+      { label: "A shared one, sometimes" },
+      {
+        label: "No — it needs to work without one",
+        hint: "Rules out everything with block coding",
+        scores: { desired_cleans: ["screen_free"] },
+      },
+    ],
+  },
+  {
+    id: "primary_need",
+    kicker: "What you want from it",
+    q: "What are you hoping it does?",
+    options: [
+      {
+        label: "Introduce the idea of programming",
+        scores: { primary_need: "first_steps", desired_cleans: ["screen_free"] },
+      },
+      {
+        label: "Build on coding they already do",
+        scores: { primary_need: "progression", desired_cleans: ["block_coding", "text_coding"] },
+      },
+      {
+        label: "Something to build as well as program",
+        scores: { primary_need: "building", desired_cleans: ["build_it_yourself"] },
+      },
+      {
+        label: "Keep them off a screen for once",
+        scores: { primary_need: "screen_free_play", desired_cleans: ["screen_free"] },
+      },
+    ],
+  },
+  {
+    id: "asked_for_it",
+    kicker: "Honestly",
+    q: "Have they actually asked for one?",
+    options: [
+      { label: "Yes, specifically" },
+      { label: "They like this sort of thing" },
+      { label: "No — it is my idea", hint: "We will point you at the cheap one first" },
+    ],
+  },
+  {
+    id: "budget_tier",
+    kicker: "Your budget",
+    q: "Roughly what are you looking to spend?",
+    options: [
+      { label: "Under $60", scores: { budget_tier: "budget" } },
+      { label: "$60 – $150", scores: { budget_tier: "mid" } },
+      { label: "$150 – $350", scores: { budget_tier: "premium" } },
+      { label: "Over $350", scores: { budget_tier: "ultra" } },
+      { label: "Show me the range", scores: { budget_tier: "no_pref" } },
+    ],
+  },
+
+  /* ---- profile questions: recorded, never scored ---- */
+  {
+    id: "main_worry",
+    kicker: "Your concern",
+    q: "What worries you most about buying one?",
+    options: [
+      { label: "It will be used twice and forgotten" },
+      { label: "It will be too hard" },
+      { label: "It will be too babyish" },
+      { label: "Paying a lot for a toy" },
+    ],
+  },
+];
+
+/* ============================================================
    The registry
    ============================================================ */
 
@@ -1130,6 +1255,7 @@ export const MATCHER_QUESTIONS_BY_CATEGORY: Record<string, MatcherQuestion[]> = 
   "self-cleaning-litter-boxes": LITTER_BOX_QUESTIONS,
   "grill-cleaning-robots": GRILL_QUESTIONS,
   "robot-vacuums": VACUUM_QUESTIONS,
+  "educational-coding-robots": CODING_QUESTIONS,
 };
 
 /**
@@ -1154,6 +1280,7 @@ export const MATCHER_DEFAULTS: Record<string, ScoreFragment> = {
   "self-cleaning-litter-boxes": { power_pref: "no_pref", pool_length_ft: null, pool_area_sqft: null },
   "grill-cleaning-robots": { power_pref: "no_pref", pool_length_ft: null, pool_area_sqft: null },
   "robot-vacuums": { power_pref: "no_pref", pool_length_ft: null, pool_area_sqft: null },
+  "educational-coding-robots": { power_pref: "no_pref", pool_length_ft: null, pool_area_sqft: null },
 };
 
 /**
@@ -1223,6 +1350,14 @@ export const MATCHER_TASKS_BY_CATEGORY: Record<string, string[]> = {
     "Checking brush design against the hair in your house",
     "Matching obstacle avoidance to how clear your floor really is",
     "Weighing what each one costs to run, not just to buy",
+    "Ranking on suitability — before any retailer is considered",
+  ],
+  "educational-coding-robots": [
+    "Reading the age you gave us",
+    "Ruling out machines that would bore them or defeat them",
+    "Checking which ones work without a tablet",
+    "Looking at what happens when the built-in challenges run out",
+    "Weighing what each one costs against how sure you are",
     "Ranking on suitability — before any retailer is considered",
   ],
 };

@@ -64,6 +64,10 @@ const GRILL_WORDS = /\bgrate|\bgrill|\bbarbecue|\bbristle|\bcook\b/i;
    here — pet cameras legitimately ask about flooring, and that question is
    theirs by right rather than borrowed. */
 const VACUUM_WORDS = /\bmop|\bvacuum|\bsuction|\bshag\b/i;
+/* Coding words that must never appear outside the coding set. "child" is not
+   here — litter boxes and pet cameras both legitimately ask about households
+   with children. These are specific to the category. */
+const CODING_WORDS = /\bcoding\b|\bprogramm|\btablet\b/i;
 
 /** Every string a reader could see in a question set. */
 function visibleText(slug: string): string {
@@ -157,6 +161,13 @@ describe("every category's questions are its own", () => {
     for (const slug of CATEGORIES) {
       if (slug === "robot-vacuums") continue;
       expect(visibleText(slug), `${slug} mentions a vacuum concern`).not.toMatch(VACUUM_WORDS);
+    }
+  });
+
+  it("asks nobody outside coding robots about coding or tablets", () => {
+    for (const slug of CATEGORIES) {
+      if (slug === "educational-coding-robots") continue;
+      expect(visibleText(slug), `${slug} mentions a coding concern`).not.toMatch(CODING_WORDS);
     }
   });
 

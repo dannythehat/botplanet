@@ -61,6 +61,8 @@ const RUN_LITTER = "2026-08-06";
 const RUN_GRILL = "2026-08-06";
 /** Robot vacuums: run 31090094137, 2026-08-06, $0.2229. */
 const RUN_VACUUM = "2026-08-06";
+/** Coding robots: runs 31094454463 + 31094682067 (SERP top-up), 2026-08-06. */
+const RUN_CODING = "2026-08-06";
 
 /* @extension-point per-category | required | Also per-page and per-product —
    every published URL needs a row. Without one, keywords.test.ts cannot assert
@@ -100,6 +102,78 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
        separate best-of page would have competed with this one for the same
        result set. */
     researchedOn: RUN_WINDOW,
+  },
+  {
+    path: "/robots/educational-coding-robots/",
+    /* Page 010, the last of the locked ten. Runs 31094454463 + 31094682067.
+
+       NAMED FOR THE DEMAND, NOT THE TOPIC. Notion calls this "educational and
+       coding robots" and the SERPs say those are two different things sharing
+       four domains:
+         coding robot      1,300  KD 21  makeblock, sphero, botzees,
+                                         learningresources, stemeducationguide
+         educational robot   720  KD  2  robotshop, ez-robot, WIKIPEDIA,
+                                         standardbots, "Robots for Colleges"
+       One is parents and retailers, the other is institutional procurement and
+       an encyclopedia entry — the shape that ended security robots. The page
+       is built on the coding family; "educational robot" is picked up, not
+       chased.
+
+       THE AGE VARIANTS ARE ONE PAGE, which was the open question. coding
+       robots for toddlers vs coding robots for teens shares SIX top-ten
+       domains. The two ends of the age range return the same result set, so
+       the split lives in sections rather than URLs.
+
+       THE STEM-TOY SWALLOW DID NOT HAPPEN. This was the grill-brush risk
+       again and it cleared: stem toys (8,100) shares 2 domains with
+       programmable robot, 4 with robot kit for kids, 1 with coding robots for
+       toddlers. It is internally cohesive at 6 with best stem toys for kids —
+       a separate family that belongs to toy retailers.
+
+       THE HEAD TERM IS SMALL AND THE PRODUCTS ARE ENORMOUS, the reverse of
+       every other category here: vex iq 18,100, ozobot 14,800, lego mindstorms
+       9,900, lego education spike prime 5,400, sphero bolt 4,400, bee bot
+       4,400. The hub cannot carry this category alone. The reviews are the
+       business and the hub exists to route a parent to the right one. */
+    primary: { term: "coding robot", volume: 1300, difficulty: 21, mustAppear: true },
+    secondary: [
+      { term: "coding robots for kids", volume: 1300, difficulty: 21, mustAppear: true },
+      { term: "robotics kit", volume: 5400, difficulty: 0, mustAppear: true },
+      { term: "programmable robot", volume: 590, difficulty: 29, mustAppear: true },
+      { term: "stem robot", volume: 1000, difficulty: 0, mustAppear: true },
+      { term: "educational robot", volume: 720, difficulty: 2, mustAppear: true },
+      { term: "screen-free", volume: 140, difficulty: 0, mustAppear: true },
+      { term: "block coding", volume: 0, difficulty: 0, mustAppear: true },
+    ],
+    cededTo: [
+      {
+        term: "stem toys",
+        path: "",
+        why: "8,100/mo and refused rather than ceded. It shares 2 top-ten domains with 'programmable robot' and 1 with 'coding robots for toddlers', while sharing 6 with 'best stem toys for kids' — a cohesive family of its own belonging to toy retailers and Wirecutter. Six times our head term, and not our SERP.",
+      },
+      {
+        term: "ai robot for kids",
+        path: "",
+        why: "Refused here as well as on the companion hub, and this run is what settles it. It shares exactly ONE top-ten domain — amazon.com — with every single term in this category, and one with companion robots too. It belongs to neither page and to no page BotPlanet currently plans. Recorded so the refusal is not re-opened by someone assuming it must live somewhere.",
+      },
+      {
+        term: "vex iq",
+        path: "",
+        why: "18,100/mo — fourteen times this page's head term — and a single manufacturer's product line sold largely through schools and competition programmes. Review territory at most; not a term the hub chases.",
+      },
+      {
+        term: "lego mindstorms",
+        path: "",
+        why: "9,900/mo for a product LEGO retired. The demand is real and largely nostalgic or second-hand, which is not a market BotPlanet can serve with an affiliate link.",
+      },
+    ],
+    /* NOTE: the age variants are NOT ceded — this page carries all of them.
+       "coding robots for toddlers" and "coding robots for teens" share 6
+       top-ten domains with each other, and 5 each with "programmable robot".
+       "coding robots for schools" also sits inside the consumer family at 5
+       shared, rather than being the separate B2B silo the run was testing
+       for — though at 10/mo it is a section sentence, not a strategy. */
+    researchedOn: RUN_CODING,
   },
   {
     path: "/robots/robot-vacuums/",

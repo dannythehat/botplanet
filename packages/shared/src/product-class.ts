@@ -62,6 +62,10 @@ export const PRODUCT_CLASSES = [
      somebody asking about a barbecue however similar "cleans a surface" looks
      in a database column. */
   "robot_vacuum", // floor vacuum, with or without a mop
+  /* Educational and coding robots. The last class of the locked ten, and the
+     only one bought to be outgrown: every other robot on this site is judged
+     on how well it does a job, this one on whether a child keeps using it. */
+  "educational_robot", // coding and STEM robot, kit or pre-built
 ] as const;
 
 export type ProductClass = (typeof PRODUCT_CLASSES)[number];
@@ -136,6 +140,14 @@ export const CLEANING_SURFACES = [
   "self_emptying", // empties itself into a base rather than a bin you empty
   "obstacle_avoidance", // recognises and avoids cables, socks and worse
   "multi_floor_mapping", // remembers more than one storey
+  /* Educational and coding robots. "Teaches coding" is the category, so it is
+     not listed — every machine here claims it. These four separate them, and
+     the first is the one that decides whether a five-year-old can use it
+     without a parent's tablet. */
+  "screen_free", // programmed by buttons or cards, no phone or tablet needed
+  "block_coding", // Scratch-style drag-and-drop, the usual middle step
+  "text_coding", // real Python or JavaScript, where it stops being a toy
+  "build_it_yourself", // assembled from parts rather than arriving finished
 ] as const;
 export type CleaningSurface = (typeof CLEANING_SURFACES)[number];
 
@@ -207,6 +219,16 @@ export const ENVIRONMENTS = [
   "hard_floors", // wood, tile, laminate, vinyl
   "low_pile_carpet", // ordinary fitted carpet and thin rugs
   "deep_pile_carpet", // deep or shag pile — clearance, torque and wet pads all bite
+  /* Educational and coding robots. The environment is the CHILD'S AGE, and it
+     is a genuine hard exclusion in both directions — the only axis on the site
+     where being too capable is as disqualifying as being not capable enough.
+     A button-driven floor robot bores a twelve-year-old within a day. A VEX
+     kit defeats a five-year-old and gets abandoned. Neither is fixable, and an
+     abandoned robot is the category's actual failure mode rather than a bad
+     clean. */
+  "age_4_7", // pre-reading — screen-free, physical, no typing
+  "age_8_12", // block coding, some building
+  "age_13_plus", // text languages and real construction
 ] as const;
 export type Environment = (typeof ENVIRONMENTS)[number];
 

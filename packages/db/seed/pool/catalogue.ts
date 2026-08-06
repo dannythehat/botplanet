@@ -58,6 +58,7 @@ export const categoryRows: (typeof categories.$inferInsert)[] = [
   { id: "cat-litter-boxes", slug: "self-cleaning-litter-boxes", name: "Self-Cleaning Litter Boxes", parentId: null },
   { id: "cat-grill-cleaners", slug: "grill-cleaning-robots", name: "Grill-Cleaning Robots", parentId: null },
   { id: "cat-robot-vacuums", slug: "robot-vacuums", name: "Robot Vacuums & Mops", parentId: null },
+  { id: "cat-coding-robots", slug: "educational-coding-robots", name: "Coding Robots for Kids", parentId: null },
 ];
 
 /* @extension-point per-brand | required | A product row references its brand by

@@ -58,6 +58,45 @@ export interface InternalAnchor {
    reader at the bottom of a review with nowhere to go. internal-links.test.ts
    checks the anchors that DO exist resolve; it cannot check for absence. */
 export const CATEGORY_ANCHORS: Record<string, InternalAnchor[]> = {
+  "educational-coding-robots": [
+    {
+      anchor: "screen-free",
+      href: "/robots/educational-coding-robots/#screen-or-app",
+      why: "The category's first real fork and a parenting decision as much as a technical one. The phrase recurs across the prose and the reasoning belongs in one place.",
+      status: "live",
+    },
+    {
+      anchor: "block coding",
+      href: "/robots/educational-coding-robots/#age",
+      why: "The middle step between buttons and real code, and the thing that decides which age band a machine actually serves.",
+      status: "live",
+    },
+    {
+      anchor: "month six",
+      href: "/robots/educational-coding-robots/#does-it-teach",
+      why: "The single most useful question to ask about any robot in this category, and the section that answers it. Worth reaching from any product page.",
+      status: "live",
+    },
+    {
+      anchor: "compare",
+      href: "/compare/educational-coding-robots/",
+      why: "The comparison table is the next step once the age band has narrowed the field.",
+      status: "live",
+    },
+    {
+      anchor: "review methodology",
+      href: "/review-methodology/",
+      why: "Any claim about how we check things should be one click from the page that says how we check things.",
+      status: "live",
+    },
+    {
+      anchor: "BotMatch",
+      href: "/botmatch/educational-coding-robots/",
+      why: "Planned until the catalogue has products. The funnel's first question is the age exclusion, and it is willing to answer 'buy the cheap one first'.",
+      status: "planned",
+    },
+  ],
+
   "robot-vacuums": [
     {
       anchor: "mop lifting",

@@ -102,6 +102,15 @@ export const BOTMATCH_JOURNEYS: Record<string, BotMatchJourney> = {
     href: routes.botmatch("robot-vacuums"),
     accent: true,
   },
+  "educational-coding-robots": {
+    category: "educational-coding-robots",
+    ctaLabel: "Find My Coding Robot",
+    journeyTitle: "Find their first coding robot",
+    explanation:
+      "Tell us how old they are and whether a tablet is available, and get one clear recommendation.",
+    href: routes.botmatch("educational-coding-robots"),
+    accent: true,
+  },
 };
 
 /** The journey for a category, or null when that category has none yet. */

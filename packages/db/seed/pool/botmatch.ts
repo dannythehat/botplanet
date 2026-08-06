@@ -119,6 +119,17 @@ export const questionnaireRows: (typeof questionnaires.$inferInsert)[] = [
       set: "VACUUM_QUESTIONS",
     },
   },
+  {
+    id: "q-coding-v1",
+    categoryId: "cat-coding-robots",
+    version: 1,
+    status: "draft",
+    schemaJson: {
+      version: 1,
+      source: "apps/web/src/content/matcher-questions.ts",
+      set: "CODING_QUESTIONS",
+    },
+  },
 ];
 
 export const scoringConfigRows: (typeof scoringConfigs.$inferInsert)[] = [
@@ -430,6 +441,49 @@ export const scoringConfigRows: (typeof scoringConfigs.$inferInsert)[] = [
         pet_hair: ["robot_vacuum"],
         long_hair: ["robot_vacuum"],
         general: ["robot_vacuum"],
+      },
+    },
+    tiebreakTolerancesJson: {
+      totalPricePctWithin: 1,
+      deliveryDaysWithin: 1,
+      requireSameWarrantyBand: true,
+    },
+    status: "draft",
+  },
+
+  /* Educational and coding robots. The last of the ten.
+
+     environmentMismatch is ON and the environment is the CHILD'S AGE. It is
+     the only exclusion on this site that cuts in both directions: a
+     build-it-yourself kit is refused for a five-year-old exactly as firmly as
+     a button-driven floor robot is refused for a teenager. Every other
+     category's exclusion protects against a machine that cannot do the job.
+     This one also protects against a machine that is too much, because an
+     abandoned robot is this category's failure and it is caused as often by
+     buying up as by buying down.
+
+     cleansCoverage carries 60, the highest on the site, because the
+     capability list here IS the product: screen-free, block coding, text
+     coding and build-it-yourself are what separate these machines, and they
+     map almost directly onto the age band. Price is a weaker signal than
+     usual — the cheapest robot is genuinely the right answer for a large
+     share of buyers, so a high price weight would actively mislead.
+
+     poolSize and power are zero: there is no size axis and they all take
+     batteries or a USB cable. */
+  {
+    id: "sc-coding-v1",
+    questionnaireId: "q-coding-v1",
+    version: 1,
+    weightsJson: { cleansCoverage: 60, power: 0, priceTier: 40, poolSize: 0 },
+    hardExclusionsJson: { environmentMismatch: true, poolTooLong: false },
+    classEligibilityJson: {
+      default: ["educational_robot"],
+      byPrimaryNeed: {
+        first_steps: ["educational_robot"],
+        progression: ["educational_robot"],
+        building: ["educational_robot"],
+        screen_free_play: ["educational_robot"],
       },
     },
     tiebreakTolerancesJson: {

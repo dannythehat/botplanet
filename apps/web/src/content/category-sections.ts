@@ -44,6 +44,54 @@ export interface DecisionSectionContent {
    and nothing in between. FAQ also feeds the FAQPage schema, so an absent
    record means no FAQ rich result. */
 export const DECISION_SECTION: Record<string, DecisionSectionContent> = {
+  /* Carries the #age anchor from the hero's second CTA. Age is the category's
+     hard exclusion and its real failure mode — the measured age long-tails
+     are small (coding robots for 5 year olds 210, for 10 year olds 110, for 8
+     year olds 90) but the decision is the whole purchase, which is exactly
+     the lawn tree-cover situation again: BotMatch asks what decides the buy,
+     not what gets searched. */
+  "educational-coding-robots": {
+    id: "age",
+    eyebrow: "Their age",
+    title: "Choose a coding robot for the age they are now",
+    /* 78 words. */
+    intro:
+      "This is the whole decision and it cuts both ways, which is unusual. Every other robot on " +
+      "this site fails by being not quite good enough. These fail by being wrong for the child " +
+      "in either direction — too simple and it is boring by the second afternoon, too complex " +
+      "and it never gets finished. An abandoned robot is the failure mode here, not a bad " +
+      "result, so buy for the child you have rather than the one you are hoping for.",
+    cards: [
+      {
+        title: "Four to seven",
+        bestFor: "Pre-readers and early readers.",
+        points: [
+          "Screen-free is the thing to look for — programmed with buttons or cards, no tablet, no account, no parent needed after the first go.",
+          "The sequence is the lesson at this age. Press four arrows, watch it drive the route, work out why it went wrong. That is programming.",
+          "Cheapest tier in the category by a distance, and the one most likely to be shared with a sibling.",
+        ],
+      },
+      {
+        title: "Eight to twelve",
+        bestFor: "The age the whole category is designed around.",
+        points: [
+          "Block coding — the drag-and-drop Scratch style — is the middle step, and this is where most machines sit.",
+          "Look for something that grows: a robot that starts with blocks and later accepts typed code buys years rather than months.",
+          "Building becomes part of the appeal here. A kit assembled from parts holds attention longer than a finished robot does.",
+        ],
+      },
+      {
+        title: "Thirteen and up",
+        bestFor: "Teenagers, and adults who want the same thing.",
+        points: [
+          "Real languages — Python or JavaScript — rather than blocks, or the robot is a toy within a week.",
+          "This is where the competition kits live, and where a school or club is often the reason for the purchase rather than the child.",
+          "Also where the price steps up hard, and where a general-purpose robotics kit beats anything sold as a children's toy.",
+        ],
+      },
+    ],
+  },
+
   /* Carries the #floors anchor from the hero's second CTA, and the floor-type
      clusters that measured inside the hub: "robot vacuum for carpet" (2,900,
      5 shared domains), "best robot vacuum for carpet" (1,900), "best robot
@@ -478,6 +526,51 @@ export interface CoverageSectionContent {
 }
 
 export const COVERAGE_SECTION: Record<string, CoverageSectionContent> = {
+  "educational-coding-robots": {
+    id: "does-it-teach",
+    eyebrow: "The honest question",
+    title: "Do coding robots actually teach coding?",
+    intro:
+      "Parents buy an educational robot hoping for a skill and often get a toy, and the " +
+      "difference is mostly down to what happens after the first fortnight. Being straight about " +
+      "that is more useful than repeating a manufacturer's curriculum claim.",
+    rows: [
+      {
+        title: "What they genuinely teach",
+        whoFor: "Every age band",
+        body:
+          "Sequence, cause and effect, and debugging — which is most of what programming " +
+          "actually is. A child who works out why the robot turned left instead of right is " +
+          "doing the same thing a developer does all day, and doing it with their hands rather " +
+          "than on a screen. That transfer is real and it is well supported. What none of them " +
+          "teaches is a language a child will still be using in five years, and no listing " +
+          "should imply otherwise.",
+      },
+      {
+        title: "Why most of them stop being used",
+        whoFor: "Anyone about to spend three figures",
+        body:
+          "The honest answer is that the challenges run out. A robot with a fixed set of " +
+          "activities is finished when the child has done them, and that is usually weeks " +
+          "rather than years. The ones that survive have either an open building system, a " +
+          "community making new projects, or a route from blocks into real code — something " +
+          "that makes the next thing harder than the last. Ask what a child does with it in " +
+          "month six, because month one takes care of itself.",
+      },
+      {
+        title: "The parent's part",
+        whoFor: "Realistically, all of them",
+        body:
+          "The machines that get used are the ones an adult sits down with a few times early " +
+          "on. That is not a flaw in the products, it is how the age group works, and any " +
+          "review implying a robot will teach a child to code unattended is selling something. " +
+          "If nobody in the house has half an hour a week for it, buy the simplest screen-free " +
+          "one and treat it as a toy that happens to teach sequencing — which is a perfectly " +
+          "good outcome.",
+      },
+    ],
+  },
+
   /* Carries the pet-hair cluster, which is the biggest reachable opportunity
      in the category: "best robot vacuum for pet hair" is 18,100/mo at KD 8 and
      shares 5 top-ten domains with the head term. A guide would have competed
@@ -927,6 +1020,48 @@ export interface SplitSectionContent {
 }
 
 export const SPLIT_SECTION: Record<string, SplitSectionContent> = {
+  "educational-coding-robots": {
+    id: "screen-or-app",
+    eyebrow: "The fork",
+    title: "Screen-free, or programmed from a tablet",
+    intro:
+      "The first real fork, and it is a parenting decision as much as a technical one. Some " +
+      "programmable robot designs are driven by pressing buttons on the robot itself or laying " +
+      "out cards on the " +
+      "floor. The rest need a tablet or phone. Both teach the same ideas; they put a screen in " +
+      "very different places.",
+    panels: [
+      {
+        label: "SCREEN-FREE",
+        title: "When no tablet is the point",
+        points: [
+          "Works for a pre-reader, with no account, no app store and no parent unlocking anything.",
+          "The child looks at the robot rather than at a screen, which is the whole reason many families buy one.",
+          "Nothing to update, nothing to lose compatibility, and it still works in five years when the app would have been discontinued.",
+          "Cheapest way in, and genuinely the right answer under about seven.",
+        ],
+        tradeOff:
+          "The ceiling is low. Button sequences run out of depth quickly, and there is no route " +
+          "from here to real code — the child moves on to a different robot rather than growing " +
+          "into this one.",
+      },
+      {
+        label: "APP-BASED",
+        title: "When the tablet earns its place",
+        points: [
+          "Block coding needs a screen, and block coding is the step that leads somewhere.",
+          "Far more depth: sensors, loops, conditionals and projects other people have written.",
+          "The machines that later accept Python or JavaScript are all in this half.",
+          "Usually free updates and new challenges, which is what keeps one in use past month three.",
+        ],
+        tradeOff:
+          "It is another reason for a tablet to be out, and the app is a dependency you do not " +
+          "control. When the manufacturer stops updating it, the robot's useful life ends with " +
+          "it — check how old the current app is before buying.",
+      },
+    ],
+  },
+
   /* The mop question, which was expected to be a separate page and measured
      firmly inside the hub: "robot vacuum and mop" shares 7 top-ten domains
      with the head term and "robot mop" shares 6. Google treats them as one
@@ -1303,6 +1438,50 @@ export interface MatrixSectionContent {
 }
 
 export const MATRIX_SECTION: Record<string, MatrixSectionContent> = {
+  "educational-coding-robots": {
+    id: "expectations",
+    eyebrow: "What to expect",
+    title: "What a coding robot is good at, and what it is not",
+    intro:
+      "Every stem robot is sold on a learning outcome, which makes this the hardest category on " +
+      "the site to write about honestly. Here is what these machines actually do, judged as " +
+      "things a child uses rather than as a curriculum.",
+    columns: ["What it genuinely does", "Where it falls short"],
+    rows: [
+      {
+        label: "Getting a child started",
+        cells: [
+          "Excellent. A physical thing that moves when you tell it to is far more compelling than a screen, and the first session almost always goes well.",
+          "Nothing. This is the case that sells the category and it delivers every time.",
+        ],
+      },
+      {
+        label: "Holding attention past a month",
+        cells: [
+          "The open-ended ones manage it — building systems, community projects, a path from blocks to typed code.",
+          "The fixed-challenge ones do not. When the built-in activities are done, the robot is done, and that is most of the category.",
+        ],
+      },
+      {
+        label: "Teaching real programming",
+        cells: [
+          "Sequence, loops, conditionals and debugging all transfer directly, and doing them physically makes them stick.",
+          "No child comes out of this able to write software. It is the foundation under the skill, not the skill, and any claim otherwise is marketing.",
+        ],
+      },
+      {
+        label: "Being used without an adult",
+        cells: [
+          "The screen-free ones, genuinely — a five-year-old can pick one up and get going alone.",
+          "Almost everything else. The app-based machines need setting up, and the kits need building. Budget parent time or budget for disappointment.",
+        ],
+      },
+    ],
+    note:
+      "The most useful question to ask about any robot on this page is what a child does with it " +
+      "in month six. Month one takes care of itself.",
+  },
+
   "robot-vacuums": {
     id: "expectations",
     eyebrow: "What to expect",
@@ -1716,6 +1895,60 @@ export interface CheckSectionContent {
 }
 
 export const CHECK_SECTION: Record<string, CheckSectionContent> = {
+  "educational-coding-robots": {
+    id: "before-you-buy",
+    eyebrow: "Before you buy",
+    title: "Five things to check before you buy",
+    intro:
+      "The stated age range on the box is the specification most likely to mislead you, because " +
+      "it is set wide to sell to more people. What decides whether this gets used is the child, " +
+      "the app, and what happens when the built-in challenges run out.",
+    boxLabel: "Check these before buying",
+    items: [
+      {
+        title: "The real age band, not the printed one",
+        body:
+          "Boxes say things like 4-12, and no product genuinely serves both ends of that. Look " +
+          "at how it is programmed: buttons and cards means young, block coding means middle, " +
+          "typed languages means teenager. That tells you more than the number.",
+        ask: "How is it actually programmed, and does that match a child who cannot read yet?",
+      },
+      {
+        title: "Whether it needs a tablet, and whose",
+        body:
+          "App-based robots need a device to be free whenever the child wants to use one. In a " +
+          "house with one shared tablet, that is the difference between a robot in daily use and " +
+          "a robot in a drawer.",
+        ask: "Whose device does this live on, and will it be available?",
+      },
+      {
+        title: "What happens when the challenges run out",
+        body:
+          "The single best predictor of whether it is still used at Christmas. A fixed set of " +
+          "activities is finished in weeks. An open building system, an active community or a " +
+          "path from blocks into real code is what buys years.",
+        ask: "What does a child do with this in month six?",
+      },
+      {
+        title: "How old the app is",
+        body:
+          "An app-dependent robot lives exactly as long as its app is maintained. Check the last " +
+          "update date in the store before buying — a robot whose app has not been touched in " +
+          "two years is a robot on borrowed time, whatever the box says.",
+        ask: "When was the app last updated?",
+      },
+      {
+        title: "Whether it is really for the child",
+        body:
+          "The uncomfortable one. A lot of these are bought by an adult who wants their child to " +
+          "like coding, and the child never asked. That is not a reason not to buy one, but it " +
+          "is a reason to buy the cheap screen-free option first and see what happens rather " +
+          "than the flagship kit.",
+        ask: "Has anyone actually asked them?",
+      },
+    ],
+  },
+
   "robot-vacuums": {
     id: "before-you-buy",
     eyebrow: "Before you buy",
@@ -2184,6 +2417,49 @@ export interface PriceSectionContent {
 }
 
 export const PRICE_SECTION: Record<string, PriceSectionContent> = {
+  "educational-coding-robots": {
+    id: "cost",
+    eyebrow: "Cost",
+    title: "How much should a first coding robot cost?",
+    intro:
+      "A wide range, and the honest advice runs against the money: for a first robot, the cheap " +
+      "end is usually right. A child who takes to it will tell you within a fortnight, and that " +
+      "is a much better basis for spending real money than a hopeful guess in a shop. What " +
+      "follows is what each step up buys.",
+    rungs: [
+      {
+        label: "Entry",
+        what:
+          "A screen-free floor robot programmed with buttons or cards. No app, no account, " +
+          "nothing to update. The right first purchase for anyone under about seven and the " +
+          "right test purchase for almost everyone else.",
+      },
+      {
+        label: "Mid",
+        what:
+          "Block coding through an app, sensors to react to the world, and a set of built-in " +
+          "challenges. This is the bulk of the category and where most eight to twelve year " +
+          "olds should be.",
+      },
+      {
+        label: "Upper",
+        what:
+          "A building system rather than a finished robot, and usually a route from blocks into " +
+          "Python or JavaScript. The step that buys years instead of months, and the one worth " +
+          "paying for once a child has shown interest.",
+      },
+      {
+        label: "Top",
+        what:
+          "Competition-grade kits, the ones schools and clubs use. Serious construction and real " +
+          "code. Genuinely excellent and completely wasted on a child who has not asked for it.",
+      },
+    ],
+    note:
+      "Every price on BotPlanet carries the date it was checked. This category discounts hard in " +
+      "November and December, which is also when most of it is bought.",
+  },
+
   /* Carries the budget cluster, which measured inside the hub via the "best"
      term: "best budget robot vacuum" (2,900) and "best cheap robot vacuum"
      (2,900) each share 7 top-ten domains with "best robot vacuum", and "cheap
@@ -2573,6 +2849,33 @@ export interface VerdictSectionContent {
 }
 
 export const VERDICT_SECTION: Record<string, VerdictSectionContent> = {
+  "educational-coding-robots": {
+    id: "worth-it",
+    eyebrow: "The verdict",
+    title: "Are coding robots worth it?",
+    intro:
+      "The last category of the ten and the one where the honest answer is least like the " +
+      "marketing.",
+    verdict:
+      "As a way into programming for a child who is curious, yes — and start cheap. As a way to " +
+      "make a child interested in coding who is not, no.",
+    body:
+      "What these do well is turn an abstract idea into something physical. A child who tells a " +
+      "robot to go forward four and turn right, and then watches it hit the sofa, has learned " +
+      "more about programming in ten seconds than an hour of screen tutorial gives them. That " +
+      "effect is genuine at every age band. Where the category disappoints is duration: most of " +
+      "these have a fixed set of challenges, and when those run out the robot is finished. The " +
+      "ones worth real money are the ones with somewhere to go — a building system, a community, " +
+      "or a path from coloured blocks into typed code. The other thing worth saying plainly is " +
+      "that no robot here creates interest that was not already there. Buying the flagship kit " +
+      "for a child who has never mentioned coding is a way to own an expensive box.",
+    against:
+      "A child who has not asked. Buy the cheapest screen-free one and see. A house with one " +
+      "shared tablet and an app-based robot, which will not get used. And anyone expecting a " +
+      "measurable school outcome — this is a foundation, not a curriculum, whatever the box " +
+      "says.",
+  },
+
   "robot-vacuums": {
     id: "worth-it",
     eyebrow: "The verdict",
@@ -2841,6 +3144,75 @@ export interface FaqSectionContent {
 }
 
 export const FAQ_SECTION: Record<string, FaqSectionContent> = {
+  /* From the People Also Ask boxes on the five SERPs that completed in run
+     31094454463. One question appeared on two separate SERPs and is
+     deliberately NOT answered here: "What is the AI robot for ADHD kids?",
+     alongside "Is coding good for kids with ADHD?". There is real demand
+     behind it and BotPlanet has no basis for answering a clinical question
+     about a child's condition. Naming it as unanswered is the honest move; a
+     confident paragraph would not be. */
+  "educational-coding-robots": {
+    id: "faqs",
+    eyebrow: "Questions",
+    title: "Coding robot FAQs",
+    intro: "The questions people actually ask before buying, answered plainly.",
+    items: [
+      {
+        q: "What is the best coding robot for kids?",
+        a:
+          "There is no single answer and the age band decides almost all of it. Under seven, a " +
+          "screen-free robot programmed with buttons or cards. Eight to twelve, block coding " +
+          "through an app, ideally one that later accepts typed code. Thirteen and up, a real " +
+          "building kit and a real language. A page that names one winner for all ages has " +
+          "skipped the only question that matters.",
+      },
+      {
+        q: "What is a good coding robot for a seven-year-old?",
+        a:
+          "Seven sits exactly on the boundary, which makes it the hardest age to buy for. A " +
+          "confident reader who already likes puzzles will get more out of a block-coding robot " +
+          "and grow into it. A child who is still finding reading hard will do better with a " +
+          "screen-free one and will not feel behind. If you are unsure, the screen-free option " +
+          "is the safer mistake — it gets used, it is cheap, and it is easy to hand down.",
+      },
+      {
+        q: "Do coding robots actually teach coding?",
+        a:
+          "They teach the foundations — sequence, loops, conditionals and debugging — and doing " +
+          "those physically makes them stick better than a screen does. What they do not do is " +
+          "leave a child able to write software, and no product here should imply otherwise. " +
+          "Treat it as the thing that makes the idea of programming concrete, which is genuinely " +
+          "valuable and is not the same as a skill.",
+      },
+      {
+        q: "How long will a child actually use one?",
+        a:
+          "Longer than you fear for the good ones, shorter than you hope for the rest. The " +
+          "predictor is what happens when the built-in challenges are finished: a robot with a " +
+          "fixed set of activities is done in weeks, while one with an open building system, an " +
+          "active community or a route into real code keeps going for years. Ask what month six " +
+          "looks like before you buy.",
+      },
+      {
+        q: "Does it need a tablet?",
+        a:
+          "Depends entirely which half of the category you are in. Screen-free robots are " +
+          "programmed with buttons or cards and need nothing else, which is why they suit young " +
+          "children. Everything with block coding needs a phone or tablet. In a house with one " +
+          "shared device that is a real constraint — it decides whether the robot is picked up " +
+          "on a whim or negotiated for.",
+      },
+      {
+        q: "Is a robotics kit better than a finished robot?",
+        a:
+          "For an older child, usually yes. Building it is half the learning and a kit that can " +
+          "be rebuilt into something else has a much longer life than a robot with a fixed " +
+          "shape. For a younger child it is the wrong way round: a kit that takes an adult two " +
+          "hours to assemble is an adult's project, and the child is watching.",
+      },
+    ],
+  },
+
   "robot-vacuums": {
     id: "faqs",
     eyebrow: "Questions",
@@ -3435,6 +3807,16 @@ export const BOTMATCH_CTA: Record<string, BotMatchCtaContent> = {
 
      Restored for lawn at the same time, whose question set landed on 6 August
      and whose panel had been waiting in a comment ever since. */
+  "educational-coding-robots": {
+    headline: "Find their first coding robot",
+    body:
+      "Tell us how old they are, whether a tablet is available and whether they have actually " +
+      "asked for one. In about 30 seconds we will match you with the right coding robot — and " +
+      "say when the cheap one is the better buy.",
+    points: ["About 30 seconds", "Five plain questions", "No account needed"],
+    ctaLabel: "Start 30-second match",
+    note: "Free. We email the result and keep it on a page you can return to.",
+  },
   "robot-vacuums": {
     headline: "Find your robot vacuum",
     body:

@@ -605,6 +605,113 @@ describe("robot vacuum matcher", () => {
   });
 });
 
+/* ---------------- Educational and coding robots ---------------- */
+
+/** Mirrors the seed scoring config sc-coding-v1. */
+const CODING_CONFIG_V1: ScoringConfig = {
+  version: 1,
+  weights: { cleansCoverage: 60, power: 0, priceTier: 40, poolSize: 0 },
+  /* ON, and the environment is the CHILD'S AGE — the only exclusion on this
+     site that cuts in both directions. */
+  hardExclusions: { environmentMismatch: true, poolTooLong: false },
+  classEligibility: {
+    default: ["educational_robot"],
+    byPrimaryNeed: {
+      first_steps: ["educational_robot"],
+      progression: ["educational_robot"],
+      building: ["educational_robot"],
+      screen_free_play: ["educational_robot"],
+    },
+  },
+  tiebreakTolerances: {
+    totalPricePctWithin: 1,
+    deliveryDaysWithin: 1,
+    requireSameWarrantyBand: true,
+  },
+};
+
+/** Button-driven floor robot: young children only. */
+const FLOOR_BOT: SuitabilityCandidate = {
+  productId: "prod-code-floorbot",
+  productClass: "educational_robot",
+  environments: ["age_4_7"],
+  cleans: ["screen_free"],
+  powerType: "cordless",
+  priceTier: "budget",
+  maxPoolLengthFt: null,
+  maxPoolAreaSqFt: null,
+};
+
+/** Block coding, middle band. */
+const BLOCK_BOT: SuitabilityCandidate = {
+  productId: "prod-code-blockbot",
+  productClass: "educational_robot",
+  environments: ["age_8_12"],
+  cleans: ["block_coding"],
+  powerType: "cordless",
+  priceTier: "mid",
+  maxPoolLengthFt: null,
+  maxPoolAreaSqFt: null,
+};
+
+const CODE_ALL = [FLOOR_BOT, BLOCK_BOT, DESK_COMPANION, NYLON_GRILL_BOT];
+
+describe("coding robot matcher", () => {
+  const youngChild: PoolAnswers = {
+    environment: "age_4_7",
+    primary_need: "first_steps",
+    desired_cleans: ["screen_free"],
+    power_pref: "no_pref",
+    budget_tier: "budget",
+    pool_length_ft: null,
+    pool_area_sqft: null,
+  };
+
+  it("recommends the screen-free robot for a five-year-old", () => {
+    const result = scoreProducts(youngChild, CODE_ALL, CODING_CONFIG_V1);
+    const winner = result.ranked.find((r) => !r.excluded)!;
+    expect(winner.productId).toBe("prod-code-floorbot");
+  });
+
+  it("EXCLUDES the block-coding robot for a five-year-old", () => {
+    const result = scoreProducts(youngChild, CODE_ALL, CODING_CONFIG_V1);
+    const block = result.ranked.find((r) => r.productId === "prod-code-blockbot")!;
+    expect(block.excluded).toBe(true);
+    expect(block.exclusionReason).toBe("environment_mismatch");
+  });
+
+  it("EXCLUDES THE SIMPLE ROBOT FOR AN OLDER CHILD, which is the point", () => {
+    /* The exclusion that makes this category different. Everywhere else on
+       this site a machine fails by being not capable enough. Here, giving a
+       twelve-year-old a button-driven floor robot is as certain a failure as
+       giving a five-year-old a build-it-yourself kit — it is boring by the
+       second afternoon and it goes in a cupboard. The engine refuses it
+       rather than ranking it second. */
+    const olderChild: PoolAnswers = {
+      ...youngChild,
+      environment: "age_8_12",
+      primary_need: "progression",
+      desired_cleans: ["block_coding"],
+      budget_tier: "no_pref",
+    };
+    const result = scoreProducts(olderChild, CODE_ALL, CODING_CONFIG_V1);
+    const floor = result.ranked.find((r) => r.productId === "prod-code-floorbot")!;
+    const block = result.ranked.find((r) => r.productId === "prod-code-blockbot")!;
+    expect(floor.excluded).toBe(true);
+    expect(floor.exclusionReason).toBe("environment_mismatch");
+    expect(block.excluded).toBe(false);
+  });
+
+  it("EXCLUDES every other category's machine", () => {
+    const result = scoreProducts(youngChild, CODE_ALL, CODING_CONFIG_V1);
+    for (const id of ["prod-desk-companion", "prod-grill-nylon"]) {
+      const r = result.ranked.find((x) => x.productId === id)!;
+      expect(r.excluded).toBe(true);
+      expect(r.exclusionReason).toBe("class_not_eligible");
+    }
+  });
+});
+
 describe("the two configs cannot be confused for one another", () => {
   it("gives the two categories different weights and different exclusions", () => {
     expect(COMPANION_CONFIG_V1.weights).not.toEqual(PET_CAMERA_CONFIG_V1.weights);
@@ -632,6 +739,7 @@ describe("the two configs cannot be confused for one another", () => {
       LITTER_BOX_CONFIG_V1,
       GRILL_CONFIG_V1,
       VACUUM_CONFIG_V1,
+      CODING_CONFIG_V1,
     ];
     const seen = new Set<string>();
     for (const cfg of configs) {

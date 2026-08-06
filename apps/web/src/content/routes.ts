@@ -348,6 +348,49 @@ export const ROUTES: RouteDef[] = [
     category: "pet-camera-robots",
   },
 
+  /* ---------------- Educational and coding robots ----------------
+     Page 010, the last of the locked ten. Named for the demand rather than
+     the topic: "coding robot" is a consumer SERP, "educational robot" is an
+     institutional one. See the keyword register. */
+  {
+    path: "/robots/educational-coding-robots/",
+    label: "Coding Robots for Kids",
+    section: "shop",
+    parent: "/robots/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: "Explore",
+    inSitemap: true,
+    indexable: true,
+    category: "educational-coding-robots",
+  },
+  {
+    path: "/compare/educational-coding-robots/",
+    label: "Compare coding robots",
+    breadcrumbLabel: "Coding Robots for Kids",
+    section: "compare",
+    parent: "/compare/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: true,
+    indexable: true,
+    category: "educational-coding-robots",
+  },
+  {
+    path: "/botmatch/educational-coding-robots/",
+    label: "Find My Coding Robot",
+    breadcrumbLabel: "Find My Coding Robot",
+    parent: "/robots/educational-coding-robots/",
+    section: "botmatch",
+    status: "coming_soon",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: false,
+    indexable: false,
+    category: "educational-coding-robots",
+  },
+
   /* ---------------- Robot vacuums and mops ----------------
      Page 009, and the biggest category on the site at 135,000/mo. One URL
      carries all of it: mop and self-emptying both measured 6-7 shared domains
