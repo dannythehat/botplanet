@@ -32,6 +32,7 @@ const SCORING_CONFIG_BY_CATEGORY: Record<string, string> = {
   "companion-robots": "sc-companion-v1",
   "pet-camera-robots": "sc-petcam-v1",
   "self-cleaning-litter-boxes": "sc-litterbox-v1",
+  "grill-cleaning-robots": "sc-grill-v1",
 };
 
 export const POST: APIRoute = async ({ request, locals }) => {

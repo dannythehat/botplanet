@@ -51,6 +51,11 @@ export const PRODUCT_CLASSES = [
      in either catalogue should ever be able to win the other's
      recommendation. */
   "litter_box", // self-cleaning / automatic cat litter box
+  /* Grill-cleaning robots. A separate class from everything above for the
+     obvious reason and one less obvious one: it is the only machine BotPlanet
+     covers that works on a surface food touches, which is why its brush
+     material is a hard exclusion rather than a preference. */
+  "grill_cleaner", // robotic grill / BBQ grate cleaner
 ] as const;
 
 export type ProductClass = (typeof PRODUCT_CLASSES)[number];
@@ -109,6 +114,13 @@ export const CLEANING_SURFACES = [
   "health_monitoring", // logs weight and visit frequency — the vet-useful one
   "multi_cat_capacity", // rated for more than one cat rather than merely tolerating it
   "app_control", // phone app and notifications rather than a panel of buttons
+  /* Grill-cleaning robots. Scrubbing is the category, so it is not listed —
+     every machine here scrubs and a universal capability cannot discriminate.
+     These four do differ, and the first is the category's whole sales pitch. */
+  "bristle_free", // no loose wire bristles to end up in food
+  "hot_grill_safe", // rated to run on a warm grill, which is when grease shifts
+  "grease_removal", // shifts baked-on grease rather than only loose char
+  "timer_control", // set a duration and walk away rather than watching it
 ] as const;
 export type CleaningSurface = (typeof CLEANING_SURFACES)[number];
 
@@ -162,6 +174,15 @@ export const ENVIRONMENTS = [
   "kitten", // under the weight a sensor reliably detects
   "average_cat", // the size every machine in the category is designed around
   "large_cat", // Maine Coon and up — chamber size, not sensor, is the limit
+  /* Grill-cleaning robots. The environment is the GRATE, and it is a genuine
+     hard exclusion rather than a fit preference: a steel or brass brush run
+     across porcelain-coated grates strips the coating, and once it is gone the
+     cast iron underneath rusts. That damage is permanent and it is done by
+     using the right machine with the wrong brush, so the matcher asks the
+     grate first and the config refuses on it. */
+  "porcelain_grates", // coated — nylon only, or the coating goes
+  "cast_iron_grates", // bare cast iron — takes a harder brush
+  "stainless_grates", // stainless steel bars
 ] as const;
 export type Environment = (typeof ENVIRONMENTS)[number];
 

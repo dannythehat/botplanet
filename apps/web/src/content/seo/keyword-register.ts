@@ -57,6 +57,8 @@ const RUN_LAWN = "2026-08-06";
 const RUN_COMPANION = "2026-08-06";
 /** Litter boxes: runs 31090590604 + 31091110791, 2026-08-06, $0.2405 combined. */
 const RUN_LITTER = "2026-08-06";
+/** Grill cleaners: run 31092662805, 2026-08-06. */
+const RUN_GRILL = "2026-08-06";
 
 /* @extension-point per-category | required | Also per-page and per-product —
    every published URL needs a row. Without one, keywords.test.ts cannot assert
@@ -96,6 +98,71 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
        separate best-of page would have competed with this one for the same
        result set. */
     researchedOn: RUN_WINDOW,
+  },
+  {
+    path: "/robots/grill-cleaning-robots/",
+    /* Page 006. Run 31092662805.
+
+       THIS PAGE EXISTS BECAUSE A RUN DESIGNED TO KILL IT FAILED. Grillbot is
+       close to the only robotic grill cleaner with US retail presence, which
+       is where security robots stood before it was cancelled, so the budget
+       went on proving demand rather than assuming it.
+
+       The head term is 5,400/mo at KD 0 and returns grillbots.com, Amazon
+       twice, Walmart, Consumer Reports and Food & Wine — retail and real
+       editorial. Nothing like the Adobe Stock result that killed security.
+
+       THE GRILL-BRUSH SWALLOW WAS THE REAL RISK AND IT DID NOT HAPPEN.
+       "grill cleaning robot" shares TWO top-ten domains with "grill brush"
+       (33,100/mo) — amazon.com and reddit.com, both universal. Discount them
+       and the overlap is zero. Same against best grill brush, bristle free
+       grill brush and safest grill brush: 2, 2, 2. The brush market is a
+       different SERP and this page is not in it, which is the right outcome
+       even though it means walking away from six times the traffic.
+
+       Google groups the phrasings hard: robotic grill cleaner, robot grill
+       cleaner and grill cleaning robots all read 5,400 too. That is 5,400 for
+       the family, not each.
+
+       SEASONALITY IS THE SHARPEST ON THE SITE — 18,100 in June against 720 in
+       February, a 25x swing. The page must be indexed before spring or it
+       misses the year. */
+    primary: { term: "grill cleaning robot", volume: 5400, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "robotic grill cleaner", volume: 5400, difficulty: 0, mustAppear: true },
+      { term: "automatic grill cleaner", volume: 1900, difficulty: 0, mustAppear: true },
+      { term: "grill cleaning robots", volume: 5400, difficulty: 0, mustAppear: true },
+      { term: "bbq cleaning robot", volume: 170, difficulty: 1, mustAppear: false },
+      { term: "grillbot", volume: 18100, difficulty: 11, mustAppear: false },
+      { term: "porcelain", volume: 90, difficulty: 0, mustAppear: true },
+      { term: "cast iron", volume: 480, difficulty: 0, mustAppear: true },
+    ],
+    cededTo: [
+      {
+        term: "grill brush",
+        path: "",
+        why: "33,100/mo — six times this page's head term — and refused outright rather than ceded. It shares two top-ten domains with the robot term, both of which appear on nearly every query in the space. It is the manual-tool market, BotPlanet compares robots, and chasing it would mean competing with every brush manufacturer on the internet for traffic that does not want a robot.",
+      },
+      {
+        term: "bristle free grill brush",
+        path: "/robots/grill-cleaning-robots/#bristles",
+        why: "5,400/mo and tempting, because bristle safety is the honest argument for this whole category. But it shares only 2 domains with the head term — it is a brush SERP owned by brush makers. It is the page's most important section and not a term the page targets.",
+      },
+      {
+        term: "grillbot review",
+        path: "",
+        why: "5,400/mo at KD 0, and it belongs to a review page rather than the hub. It shares 8 top-ten domains with 'does grillbot work', which is the same page again, and 5 with the hub — same family, different job.",
+      },
+      {
+        term: "how to clean grill grates",
+        path: "",
+        why: "6,600/mo and one shared domain with the head term. A cooking-content SERP, not a shopping one. Refused.",
+      },
+    ],
+    /* NOTE: "best grill cleaning robot" is NOT ceded — this page carries it.
+       It is 10/mo and shares 5 domains with the head term, so a best-of page
+       would be a second URL for a term nobody searches. */
+    researchedOn: RUN_GRILL,
   },
   {
     path: "/robots/self-cleaning-litter-boxes/",

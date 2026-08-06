@@ -44,6 +44,51 @@ export interface DecisionSectionContent {
    and nothing in between. FAQ also feeds the FAQPage schema, so an absent
    record means no FAQ rich result. */
 export const DECISION_SECTION: Record<string, DecisionSectionContent> = {
+  /* Grate material is the first fork and the only hard exclusion in the
+     category. It is also the one thing a listing will not tell you clearly,
+     and getting it wrong does permanent damage rather than a bad clean. */
+  "grill-cleaning-robots": {
+    id: "grate-type",
+    eyebrow: "Your grates",
+    title: "Choose a grill cleaning robot for what your grates are made of",
+    /* 77 words. */
+    intro:
+      "Settle this before anything else, because the wrong brush does damage a better machine " +
+      "cannot undo. These robots clean with replaceable brush heads in nylon, brass or steel, " +
+      "and the material has to suit the grate. Run something hard across a porcelain-coated " +
+      "grate and the coating comes off in strips. Underneath is bare cast iron, and bare cast " +
+      "iron rusts. That is a new set of grates, not a bad afternoon.",
+    cards: [
+      {
+        title: "Porcelain-coated grates",
+        bestFor: "Most mid-range gas barbecues sold in the last decade.",
+        points: [
+          "Nylon brushes only. Brass and steel both strip the enamel, and once it is gone it does not come back.",
+          "Nylon also means working on a warm grill rather than a hot one — the bristles soften and deform in real heat.",
+          "If you cannot tell what your grates are, assume porcelain. It is the commonest and the least forgiving.",
+        ],
+      },
+      {
+        title: "Bare cast iron",
+        bestFor: "Heavy grates on charcoal kettles and better gas grills.",
+        points: [
+          "Brass is the sensible default: hard enough to shift carbon, soft enough not to score the iron.",
+          "Cast iron wants a light oil after cleaning, and no robot does that part. Budget two minutes by hand.",
+          "This is where an automatic grill cleaner earns most — baked-on cast iron is the job people put off.",
+        ],
+      },
+      {
+        title: "Stainless steel bars",
+        bestFor: "Premium gas grills and most flat-top griddles.",
+        points: [
+          "Takes the hardest brushes, so a steel head is fine and works fastest here.",
+          "Stainless scratches visibly even when nothing is harmed, so expect the finish to dull with use.",
+          "Griddle tops are a different problem: they are flat, and these machines are built to sit on bars.",
+        ],
+      },
+    ],
+  },
+
   /* Cat size is the first fork and the only hard exclusion in the category.
      It carries the "for large cats" cluster — "self cleaning litter box for
      large cats" (880) plus "best self cleaning litter box for large cats"
@@ -386,6 +431,60 @@ export interface CoverageSectionContent {
 }
 
 export const COVERAGE_SECTION: Record<string, CoverageSectionContent> = {
+  /* The bristle-safety case, which is the honest commercial argument for this
+     entire category. It is a section rather than a target: "bristle free grill
+     brush" is 5,400/mo but shares only 2 domains with the head term, so it is
+     a different SERP belonging to brush manufacturers.
+
+     One figure worth recording: "wire grill brush danger" carries a CPC of
+     $18.08 on 260 searches. That is the highest cost-per-click measured in any
+     BotPlanet category by a factor of three, and it is not retail money — it
+     is the shape of a term advertisers bid on because somebody was injured. */
+  "grill-cleaning-robots": {
+    id: "bristles",
+    eyebrow: "The real argument",
+    title: "Wire bristles, and why these machines exist at all",
+    intro:
+      "The strongest case for a robot on your barbecue has nothing to do with saving effort. " +
+      "Ordinary wire grill brushes shed bristles, the bristles stick to the grate, and the grate " +
+      "touches food. It is a documented and genuinely serious injury, and it is the reason a " +
+      "bristle-free machine has a market at all. It is also an argument that applies to a " +
+      "twelve-dollar brush just as well, which is the part the marketing skips.",
+    rows: [
+      {
+        title: "What actually goes wrong",
+        whoFor: "Anyone still using a wire brush on a hot grate",
+        body:
+          "A worn wire brush loses individual bristles. One lands on the bars, gets cooked onto " +
+          "the next thing you grill, and is swallowed. Emergency departments see these, they are " +
+          "hard to find on a scan, and the treatment is not trivial. The risk goes up as the " +
+          "brush ages, which is exactly when people stop thinking about it. Google prices this " +
+          "worry at eighteen dollars a click, which tells you who is bidding.",
+      },
+      {
+        title: "What a robot changes, honestly",
+        whoFor: "Buyers comparing a robot against the brush they own",
+        body:
+          "These machines use replaceable brush heads that are held in a housing rather than a " +
+          "hand-held head that flexes and sheds. That is a real reduction in risk and it is fair " +
+          "to say so. What is not fair is implying it is the only way to get there: a bristle-free " +
+          "scraper, a wooden paddle or a coil-style brush all remove the same hazard for a " +
+          "fraction of the money. Buy the robot because you want the job done for you, not " +
+          "because you think it is the only safe option.",
+      },
+      {
+        title: "Checking the heads, which nobody does",
+        whoFor: "Anyone who owns one already",
+        body:
+          "The brush heads are consumables and they wear. A worn head on a robot is the same " +
+          "hazard as a worn brush in your hand, and it is easier to ignore because the machine " +
+          "does the work out of sight. Look at them every few cooks, replace them on the " +
+          "manufacturer's schedule rather than when they look bad, and check the grate before " +
+          "food goes on it. That last habit is worth keeping whatever you clean with.",
+      },
+    ],
+  },
+
   /* The safety section, and it carries the #safety anchor the hero's second
      CTA points at. This is the most important section on the page and the
      evidence for that is unusually direct.
@@ -731,6 +830,51 @@ export interface SplitSectionContent {
 }
 
 export const SPLIT_SECTION: Record<string, SplitSectionContent> = {
+  /* The comparison every buyer is actually making, and the one the category
+     usually avoids. "grill brush" is 33,100/mo against the robot term's 5,400
+     — six times the demand — and shares only two universal domains, so the
+     brush market is a different SERP we are not chasing. It is still the thing
+     on the other side of the decision, so the page argues it out. */
+  "grill-cleaning-robots": {
+    id: "robot-or-brush",
+    eyebrow: "The fork",
+    title: "A robot, or a good brush and four minutes",
+    intro:
+      "Almost nobody choosing a grill cleaning robot is choosing between two robots. They are " +
+      "choosing between a robot and a brush that costs a fifteenth as much and is already in " +
+      "the garage. That comparison deserves a straight answer rather than a feature list, so " +
+      "here it is from both sides.",
+    panels: [
+      {
+        label: "ROBOT",
+        title: "When the machine is worth it",
+        points: [
+          "You genuinely do not clean the grill, and a machine that does it unattended is better than a brush you never pick up.",
+          "You cook often enough that four minutes of scrubbing after every session actually adds up.",
+          "You want the grate done while you carry food inside, rather than standing over a cooling barbecue.",
+          "The brush heads are held in a housing rather than a flexing hand-held head, which is a real reduction in the loose-bristle risk.",
+        ],
+        tradeOff:
+          "It is expensive for what it does, it needs charging, and it only reaches the top of " +
+          "the bars. It does not touch the sides, the lid, the burners or the grease tray, and " +
+          "those are the parts that actually make a barbecue unpleasant.",
+      },
+      {
+        label: "BRUSH",
+        title: "When a brush is the better buy",
+        points: [
+          "It is faster. Four minutes with a decent bristle-free scraper beats a ten-minute unattended cycle you have to set up.",
+          "It gets the edges, the corners and the bars the robot drives over rather than into.",
+          "Nothing to charge, nothing to store, nothing to break, and no brush heads to buy.",
+          "A bristle-free design removes the safety argument entirely for about a fifteenth of the price.",
+        ],
+        tradeOff:
+          "You have to do it, and you have to do it while the grill is still warm, which is " +
+          "exactly when you would rather be eating. That is the whole reason the robot exists.",
+      },
+    ],
+  },
+
   /* The category's real fork, and the one the listings hide. "what litter to
      use in a self cleaning litter box" measured 7 shared top-ten domains with
      the head term, so it belongs here rather than in a guide — and it is
@@ -1018,6 +1162,50 @@ export interface MatrixSectionContent {
 }
 
 export const MATRIX_SECTION: Record<string, MatrixSectionContent> = {
+  "grill-cleaning-robots": {
+    id: "what-it-cleans",
+    eyebrow: "What to expect",
+    title: "What a robotic grill cleaner actually reaches",
+    intro:
+      "This is the section that decides whether you are happy with one, and it is the section " +
+      "the product photography works hardest to avoid. These machines sit on the cooking grate " +
+      "and drive around the top of the bars. That is the whole of their world.",
+    columns: ["What it does well", "Where it falls short"],
+    rows: [
+      {
+        label: "The top of the bars",
+        cells: [
+          "The job it is built for, and it does it properly. Loose char and last night's residue come off the upper surface without you standing there.",
+          "Almost nothing — this is the best case. It is also a smaller share of cleaning a barbecue than you think.",
+        ],
+      },
+      {
+        label: "Baked-on grease",
+        cells: [
+          "Works far better on a warm grill than a cold one, because warmth softens grease. A long cycle on a still-warm grate shifts a lot.",
+          "On a cold grill it mostly polishes. Nylon brushes in particular need heat to work, and heat is what nylon likes least — that tension is real and unresolved.",
+        ],
+      },
+      {
+        label: "Sides, edges and the far corners",
+        cells: [
+          "Some machines are shaped to run right to the edge of the grate and the better ones cover it fairly.",
+          "The perimeter is where these are weakest. Bars at the edge get driven along rather than across, and corners get missed.",
+        ],
+      },
+      {
+        label: "Everything below the grate",
+        cells: [
+          "Nothing. It never goes there.",
+          "The flavour bars, the burners, the grease tray and the inside of the lid are all untouched, and they are most of what makes an old barbecue unpleasant.",
+        ],
+      },
+    ],
+    note:
+      "A grill cleaning robot cleans the cooking surface. Deep-cleaning the barbecue is still a " +
+      "job you do a couple of times a season, by hand, and no machine on this page changes that.",
+  },
+
   /* Carries the multi-cat cluster — "self cleaning litter box for multiple
      cats" (1,300) and "best self cleaning litter box for multiple cats" (880).
      Both measured 6 shared top-ten domains with the head term, so a guide
@@ -1341,6 +1529,59 @@ export interface CheckSectionContent {
 }
 
 export const CHECK_SECTION: Record<string, CheckSectionContent> = {
+  "grill-cleaning-robots": {
+    id: "before-you-buy",
+    eyebrow: "Before you buy",
+    title: "Five things to check before you buy",
+    intro:
+      "Cycle length is the specification the box leads with and it decides nothing — you are " +
+      "not standing there. What decides it is whether the brushes suit your grates, whether the " +
+      "machine physically fits, and what the consumables cost once the novelty has worn off.",
+    boxLabel: "Check these before buying",
+    items: [
+      {
+        title: "Brush material against your grate material",
+        body:
+          "Nylon for porcelain-coated grates, brass or steel for bare cast iron and stainless. " +
+          "Getting this wrong strips enamel permanently, and the machines ship with one type in " +
+          "the box while the others are sold separately.",
+        ask: "What are my grates made of, and does the right head come with it or cost extra?",
+      },
+      {
+        title: "Whether it fits your grill, and sits flat",
+        body:
+          "These need a broadly flat cooking surface with bars close enough together to drive " +
+          "on. Very wide-spaced bars, heavily curved grates and most flat-top griddles are " +
+          "either awkward or outright unsuitable.",
+        ask: "How wide are the gaps between my bars, and is the grate flat?",
+      },
+      {
+        title: "How hot it may be run",
+        body:
+          "Grease shifts when it is warm, so the useful cycle is on a grill that has just been " +
+          "used. Every machine has a maximum temperature and nylon heads have the lowest. Run it " +
+          "too hot and the brushes deform in one cycle.",
+        ask: "What temperature is it rated to, and how long do I have to wait after cooking?",
+      },
+      {
+        title: "What the brush heads cost, and how long they last",
+        body:
+          "Heads are consumables, they are the safety-critical part, and they are proprietary. " +
+          "Work out the annual cost at your cooking frequency before you buy, because it is not " +
+          "small relative to the machine.",
+        ask: "What does a set of replacement heads cost, and how many cooks do they last?",
+      },
+      {
+        title: "Battery, charging and where it lives",
+        body:
+          "It is a battery device that lives near a barbecue, which is outdoors, damp and hot in " +
+          "turn. Check whether the battery is replaceable, how it charges, and whether the maker " +
+          "expects it to be stored inside over winter.",
+        ask: "Is the battery replaceable, and does it have to come indoors between cooks?",
+      },
+    ],
+  },
+
   "self-cleaning-litter-boxes": {
     id: "before-you-buy",
     eyebrow: "Before you buy",
@@ -1701,6 +1942,46 @@ export interface PriceSectionContent {
 }
 
 export const PRICE_SECTION: Record<string, PriceSectionContent> = {
+  /* No dollar figures — catalogue empty, and a band printed from memory is
+     what the review methodology forbids. */
+  "grill-cleaning-robots": {
+    id: "cost",
+    eyebrow: "Cost",
+    title: "How much does a grill cleaning robot cost?",
+    intro:
+      "The narrowest range of any category on BotPlanet, because there is very little to choose " +
+      "between. The number that matters is not on the box: a good bristle-free brush does the " +
+      "core of this job for a fraction of the price, so the real question is what the machine " +
+      "adds over that. What follows is what each step up actually buys.",
+    rungs: [
+      {
+        label: "Entry",
+        what:
+          "The base machine with one set of brush heads, usually nylon. A timer, a battery and " +
+          "not much else. This is the whole product for most buyers, and the steps above it are " +
+          "narrower than the price gap suggests.",
+      },
+      {
+        label: "Mid",
+        what:
+          "Extra brush sets in different materials, so the same machine suits more than one " +
+          "grate type, plus longer runtime. Buying the bundle is usually cheaper than buying the " +
+          "heads separately later, which is the one real saving in the category.",
+      },
+      {
+        label: "Upper",
+        what:
+          "Better build for outdoor life, longer warranty and higher heat tolerance — which is " +
+          "the specification that decides whether you can run it when grease actually shifts. " +
+          "Worth it if you cook often; hard to justify if you do not.",
+      },
+    ],
+    note:
+      "Every price on BotPlanet carries the date it was checked. Replacement brush heads are " +
+      "stated separately from the machine, because they are consumable, proprietary and the " +
+      "part that keeps the machine safe.",
+  },
+
   /* No dollar figures — the catalogue is empty and a band printed from memory
      is what the review methodology forbids. Carries the budget cluster:
      "cheap self cleaning litter box" (590) and "best budget self cleaning
@@ -2000,6 +2281,40 @@ export interface VerdictSectionContent {
 }
 
 export const VERDICT_SECTION: Record<string, VerdictSectionContent> = {
+  /* Carries the #worth-it anchor from the hero's second CTA, and that placement
+     is evidence-led: "Do the grill bots really work?" and "Does a Grillbot
+     really work?" both appear verbatim in Google's People Also Ask across
+     these SERPs. The doubt is the query. A skeptical Reddit thread — "glad I
+     googled before impulse buying" — ranks in the top ten for the head term
+     itself. */
+  "grill-cleaning-robots": {
+    id: "worth-it",
+    eyebrow: "The verdict",
+    title: "Do grill cleaning robots actually work?",
+    intro:
+      "Google asks this back at you on three separate searches in this category, in almost " +
+      "those words, and a skeptical Reddit thread ranks on the first page for the category term " +
+      "itself. So it deserves a straight answer.",
+    verdict:
+      "Yes, they work — on the top of the bars, on a warm grill, with the right brushes. Whether " +
+      "that is worth the money depends entirely on whether you would otherwise clean it at all.",
+    body:
+      "The machine does what it says. Put it on a still-warm grate, set the timer, and it will " +
+      "scrub the cooking surface unattended and do a decent job of it. The disappointment, when " +
+      "it comes, is almost never that it failed — it is that people expected a clean barbecue " +
+      "and got a clean grate. It does not touch the burners, the flavour bars, the grease tray " +
+      "or the lid, and those are most of what makes an old grill unpleasant. Judged against " +
+      "four minutes with a decent bristle-free brush, it is expensive and slower. Judged against " +
+      "the grill you have not cleaned since August, it is transformative, because the machine " +
+      "will actually do it and you will not. Be honest about which of those two people you are, " +
+      "and the decision makes itself.",
+    against:
+      "Anyone who already cleans their grill after cooking — a brush is faster and reaches more. " +
+      "Flat-top griddles and grates with widely spaced bars, which these cannot drive on. And " +
+      "anyone buying it purely for bristle safety, because a bristle-free brush removes that " +
+      "risk for a fraction of the price.",
+  },
+
   /* Owns "are self cleaning litter boxes worth it" — 320/mo, KD 5, and a SERP
      with Forbes, NYTimes, Lifehacker, PetMD and classactcats.com on it. A
      section rather than a guide: it shares 5 domains with the head term, which
@@ -2206,6 +2521,73 @@ export interface FaqSectionContent {
 }
 
 export const FAQ_SECTION: Record<string, FaqSectionContent> = {
+  /* Taken from the People Also Ask boxes across run 31092662805. The "does it
+     really work" question appeared on three separate SERPs in three phrasings,
+     which is why it leads. */
+  "grill-cleaning-robots": {
+    id: "faqs",
+    eyebrow: "Questions",
+    title: "Grill cleaning robot FAQs",
+    intro: "The questions people actually ask before buying, answered plainly.",
+    items: [
+      {
+        q: "Do grill cleaning robots really work?",
+        a:
+          "Yes, within a narrower job than most buyers picture. On a still-warm grate with the " +
+          "right brush heads, one of these will scrub the top of the bars unattended and leave " +
+          "the cooking surface genuinely clean. What it will not do is clean the barbecue — the " +
+          "burners, the grease tray, the sides and the lid are all untouched. Almost every " +
+          "disappointed review is really about that gap rather than about the scrubbing.",
+      },
+      {
+        q: "Can it damage my grates?",
+        a:
+          "Yes, if you use the wrong brush material, and this is the one mistake that is not " +
+          "recoverable. Brass and steel heads strip the enamel off porcelain-coated grates, and " +
+          "the bare cast iron underneath then rusts. Nylon is the safe choice for coated grates. " +
+          "If you are not certain what yours are made of, assume porcelain — it is both the " +
+          "commonest and the least forgiving.",
+      },
+      {
+        q: "Does it work on a hot grill?",
+        a:
+          "Warm, not hot. Grease softens with heat, so a warm grate cleans far better than a " +
+          "cold one, and running the machine straight after cooking is the sensible habit. But " +
+          "every model has a temperature ceiling and nylon heads have the lowest of the lot — " +
+          "run them on a properly hot grill and they deform in a single cycle. Check the stated " +
+          "maximum and wait for it.",
+      },
+      {
+        q: "Is it safer than a wire brush?",
+        a:
+          "On the specific risk of loose bristles in food, yes — the heads are held in a housing " +
+          "rather than a flexing hand-held head, and that shedding is a documented and serious " +
+          "injury. But it is not the only way to remove that risk. A bristle-free scraper or a " +
+          "coil brush does the same thing for a fifteenth of the price. Buy the robot because " +
+          "you want the job done for you, not because you have been told it is the only safe " +
+          "option.",
+      },
+      {
+        q: "Will it fit my barbecue?",
+        a:
+          "Usually, if the cooking surface is broadly flat and the bars are close enough " +
+          "together to drive on. Very widely spaced bars, heavily curved grates and flat-top " +
+          "griddles are all awkward to unsuitable — a griddle in particular is the wrong shape " +
+          "for a machine designed to sit on bars. Measure the gap between your bars before you " +
+          "buy anything.",
+      },
+      {
+        q: "How long do the brush heads last?",
+        a:
+          "They are consumables and they are the safety-critical part, so treat the " +
+          "manufacturer's replacement schedule as a floor rather than a suggestion. A worn head " +
+          "on a robot carries the same shedding risk as a worn brush in your hand, and it is " +
+          "easier to miss because the machine works out of sight. Price a year of heads at your " +
+          "cooking frequency before buying — it is not trivial against the cost of the machine.",
+      },
+    ],
+  },
+
   /* Every question below is one Google actually surfaces, taken from the
      People Also Ask boxes across the 23 SERPs in run 31090590604 and ranked by
      how often each appeared:
@@ -2671,6 +3053,16 @@ export const BOTMATCH_CTA: Record<string, BotMatchCtaContent> = {
 
      Restored for lawn at the same time, whose question set landed on 6 August
      and whose panel had been waiting in a comment ever since. */
+  "grill-cleaning-robots": {
+    headline: "Find your grill cleaner",
+    body:
+      "Tell us what your grates are made of, how wide the bars are and how often you cook. In " +
+      "about 30 seconds we will match you with the right machine — or tell you a brush is the " +
+      "better buy.",
+    points: ["About 30 seconds", "Five plain questions", "No account needed"],
+    ctaLabel: "Start 30-second match",
+    note: "Free. We email the result and keep it on a page you can return to.",
+  },
   "self-cleaning-litter-boxes": {
     headline: "Find your litter box",
     body:

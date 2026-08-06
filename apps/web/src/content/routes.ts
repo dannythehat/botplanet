@@ -348,6 +348,48 @@ export const ROUTES: RouteDef[] = [
     category: "pet-camera-robots",
   },
 
+  /* ---------------- Grill-cleaning robots ----------------
+     Page 006. The category survived the run that was designed to kill it —
+     see the keyword register for the grill-brush control that cleared it. */
+  {
+    path: "/robots/grill-cleaning-robots/",
+    label: "Grill-Cleaning Robots",
+    section: "shop",
+    parent: "/robots/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: "Explore",
+    inSitemap: true,
+    indexable: true,
+    category: "grill-cleaning-robots",
+  },
+  {
+    path: "/compare/grill-cleaning-robots/",
+    label: "Compare grill-cleaning robots",
+    breadcrumbLabel: "Grill-Cleaning Robots",
+    section: "compare",
+    parent: "/compare/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: true,
+    indexable: true,
+    category: "grill-cleaning-robots",
+  },
+  {
+    path: "/botmatch/grill-cleaning-robots/",
+    label: "Find My Grill Cleaner",
+    breadcrumbLabel: "Find My Grill Cleaner",
+    parent: "/robots/grill-cleaning-robots/",
+    section: "botmatch",
+    status: "coming_soon",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: false,
+    indexable: false,
+    category: "grill-cleaning-robots",
+  },
+
   /* ---------------- Self-cleaning litter boxes ----------------
      Page 004 of the owner-locked ten. One URL carries the entire commercial
      category: every buying phrasing measured 5-9 shared top-ten domains

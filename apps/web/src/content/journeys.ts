@@ -84,6 +84,15 @@ export const BOTMATCH_JOURNEYS: Record<string, BotMatchJourney> = {
     href: routes.botmatch("self-cleaning-litter-boxes"),
     accent: true,
   },
+  "grill-cleaning-robots": {
+    category: "grill-cleaning-robots",
+    ctaLabel: "Find My Grill Cleaner",
+    journeyTitle: "Find your grill cleaning robot",
+    explanation:
+      "Tell us what your grates are made of and how often you cook, and get one clear answer.",
+    href: routes.botmatch("grill-cleaning-robots"),
+    accent: true,
+  },
 };
 
 /** The journey for a category, or null when that category has none yet. */

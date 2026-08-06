@@ -401,6 +401,97 @@ describe("self-cleaning litter box matcher", () => {
   });
 });
 
+/* ---------------- Grill-cleaning robots ---------------- */
+
+/** Mirrors the seed scoring config sc-grill-v1. */
+const GRILL_CONFIG_V1: ScoringConfig = {
+  version: 1,
+  weights: { cleansCoverage: 50, power: 0, priceTier: 50, poolSize: 0 },
+  /* ON, and the environment is the GRATE. Brass across porcelain strips the
+     enamel permanently. */
+  hardExclusions: { environmentMismatch: true, poolTooLong: false },
+  classEligibility: {
+    default: ["grill_cleaner"],
+    byPrimaryNeed: {
+      avoidance: ["grill_cleaner"],
+      grease: ["grill_cleaner"],
+      bristle_safety: ["grill_cleaner"],
+      convenience: ["grill_cleaner"],
+    },
+  },
+  tiebreakTolerances: {
+    totalPricePctWithin: 1,
+    deliveryDaysWithin: 1,
+    requireSameWarrantyBand: true,
+  },
+};
+
+/** Nylon-headed: safe on coated grates. */
+const NYLON_GRILL_BOT: SuitabilityCandidate = {
+  productId: "prod-grill-nylon",
+  productClass: "grill_cleaner",
+  environments: ["porcelain_grates", "cast_iron_grates", "stainless_grates"],
+  cleans: ["bristle_free", "timer_control"],
+  powerType: "cordless",
+  priceTier: "mid",
+  maxPoolLengthFt: null,
+  maxPoolAreaSqFt: null,
+};
+
+/** Brass-headed: must never be offered for porcelain. */
+const BRASS_GRILL_BOT: SuitabilityCandidate = {
+  productId: "prod-grill-brass",
+  productClass: "grill_cleaner",
+  environments: ["cast_iron_grates", "stainless_grates"],
+  cleans: ["bristle_free", "timer_control", "grease_removal", "hot_grill_safe"],
+  powerType: "cordless",
+  priceTier: "mid",
+  maxPoolLengthFt: null,
+  maxPoolAreaSqFt: null,
+};
+
+const GRILL_ALL = [NYLON_GRILL_BOT, BRASS_GRILL_BOT, DESK_COMPANION, PET_CAMERA];
+
+describe("grill cleaning robot matcher", () => {
+  const castIron: PoolAnswers = {
+    environment: "cast_iron_grates",
+    primary_need: "grease",
+    desired_cleans: ["grease_removal", "hot_grill_safe"],
+    power_pref: "no_pref",
+    budget_tier: "mid",
+    pool_length_ft: null,
+    pool_area_sqft: null,
+  };
+
+  it("recommends the harder brush for baked-on grease on cast iron", () => {
+    const result = scoreProducts(castIron, GRILL_ALL, GRILL_CONFIG_V1);
+    const winner = result.ranked.find((r) => !r.excluded)!;
+    expect(winner.productId).toBe("prod-grill-brass");
+  });
+
+  it("EXCLUDES the brass machine for porcelain-coated grates", () => {
+    /* The ruling that matters. Brass across enamel strips it, the cast iron
+       underneath rusts, and it is not recoverable — so the engine refuses
+       rather than ranking it second. */
+    const porcelain: PoolAnswers = { ...castIron, environment: "porcelain_grates" };
+    const result = scoreProducts(porcelain, GRILL_ALL, GRILL_CONFIG_V1);
+    const brass = result.ranked.find((r) => r.productId === "prod-grill-brass")!;
+    const nylon = result.ranked.find((r) => r.productId === "prod-grill-nylon")!;
+    expect(brass.excluded).toBe(true);
+    expect(brass.exclusionReason).toBe("environment_mismatch");
+    expect(nylon.excluded).toBe(false);
+  });
+
+  it("EXCLUDES every other category's machine", () => {
+    const result = scoreProducts(castIron, GRILL_ALL, GRILL_CONFIG_V1);
+    for (const id of ["prod-desk-companion", "prod-pet-camera"]) {
+      const r = result.ranked.find((x) => x.productId === id)!;
+      expect(r.excluded).toBe(true);
+      expect(r.exclusionReason).toBe("class_not_eligible");
+    }
+  });
+});
+
 describe("the two configs cannot be confused for one another", () => {
   it("gives the two categories different weights and different exclusions", () => {
     expect(COMPANION_CONFIG_V1.weights).not.toEqual(PET_CAMERA_CONFIG_V1.weights);
@@ -418,6 +509,22 @@ describe("the two configs cannot be confused for one another", () => {
     const litter = new Set(LITTER_BOX_CONFIG_V1.classEligibility.default);
     for (const cfg of [COMPANION_CONFIG_V1, PET_CAMERA_CONFIG_V1]) {
       expect(cfg.classEligibility.default.filter((c) => litter.has(c))).toEqual([]);
+    }
+  });
+
+  it("gives no two categories the same eligible class", () => {
+    const configs = [
+      COMPANION_CONFIG_V1,
+      PET_CAMERA_CONFIG_V1,
+      LITTER_BOX_CONFIG_V1,
+      GRILL_CONFIG_V1,
+    ];
+    const seen = new Set<string>();
+    for (const cfg of configs) {
+      for (const cls of cfg.classEligibility.default) {
+        expect(seen.has(cls), `${cls} is eligible in more than one category`).toBe(false);
+        seen.add(cls);
+      }
     }
   });
 

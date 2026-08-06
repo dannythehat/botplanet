@@ -54,6 +54,8 @@ const COMPANION_WORDS = /\bconversation\b|\bdesk\b/i;
    and asking a pet-camera buyer about their cat is correct rather than
    borrowed. These four are specific to the litter category. */
 const LITTER_BOX_WORDS = /\blitter\b|\brefill/i;
+/* Grill words that must never appear outside the grill set. */
+const GRILL_WORDS = /\bgrate|\bgrill|\bbarbecue|\bbristle|\bcook\b/i;
 
 /** Every string a reader could see in a question set. */
 function visibleText(slug: string): string {
@@ -133,6 +135,13 @@ describe("every category's questions are its own", () => {
       expect(visibleText(slug), `${slug} mentions a litter concern`).not.toMatch(
         LITTER_BOX_WORDS,
       );
+    }
+  });
+
+  it("asks nobody outside grill cleaners about grates or bristles", () => {
+    for (const slug of CATEGORIES) {
+      if (slug === "grill-cleaning-robots") continue;
+      expect(visibleText(slug), `${slug} mentions a grill concern`).not.toMatch(GRILL_WORDS);
     }
   });
 

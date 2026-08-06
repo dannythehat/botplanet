@@ -36,6 +36,60 @@ export interface CategoryHeroContent {
    generic heading: no H1 of its own, no <title>, no meta description, no OG
    image and no CollectionPage schema. It renders, so nothing complains. */
 export const CATEGORY_HERO: Record<string, CategoryHeroContent> = {
+  /* Page 006. Keyword evidence: DataForSEO run 31092662805, 2026-08-06.
+     Full working in docs/seo/grill-cleaning-robots-research-findings.md.
+
+     THIS RUN WAS DESIGNED TO KILL THE CATEGORY AND FAILED TO. Grillbot is
+     close to the only robotic grill cleaner with US retail presence, which is
+     the position security robots was in before it was cancelled, so the SERP
+     budget went on proving demand rather than assuming it. Three tests:
+
+     1. Is the category term a shopping SERP? Yes. "grill cleaning robot" is
+        5,400/mo at KD 0 and returns grillbots.com, Amazon twice, Walmart,
+        Consumer Reports and Food & Wine. Real retail and real editorial —
+        nothing like the Adobe Stock result that ended security robots.
+
+     2. Does the manual grill-brush market swallow it? NO, and this was the
+        real risk. "grill cleaning robot" shares TWO top-ten domains with
+        "grill brush" — amazon.com and reddit.com, both universal. Discount
+        them and the overlap is zero. The 33,100/mo brush market is a
+        different SERP and BotPlanet is not in it.
+
+     3. Does the brand own the category? Partly. "grillbot" is 18,100/mo, more
+        than three times the category term, and it shares 5 domains so it is
+        the same family. Grillbot's own site holds the top slot. Secondary
+        term, not the H1 — same ruling as Litter-Robot.
+
+     THE CATEGORY IS ONE PRODUCT, AND THE PAGE SAYS SO. Every commercial
+     variant returns the same machine. Pretending to compare a field that does
+     not exist would be the dishonest move, so the page is built to answer
+     "does this thing actually work" — which is what the People Also Ask box
+     asks on three of the SERPs, in those words.
+
+     SEASONALITY IS THE SHARPEST ON THE SITE: 18,100 in June against 720 in
+     February. A 25x swing. This page has to be live and indexed by spring. */
+  "grill-cleaning-robots": {
+    eyebrow: "Robot category",
+    /* 45 words. Head term opens sentence one. The honest framing — one real
+       product — is sentence three rather than buried. */
+    title: "Grill-Cleaning Robots: Does an Automatic Grill Cleaner Work?",
+    subtitle:
+      "A grill cleaning robot sits on the grates, drives itself around and scrubs while you do " +
+      "something else. It is a small category — one product dominates it — so this page is less " +
+      "about which robotic grill cleaner to pick and more about whether one belongs on your " +
+      "barbecue at all, and what it will not do.",
+    seoTitle: "Grill-Cleaning Robots: Does an Automatic Grill Cleaner Work? | BotPlanet",
+    metaDescription:
+      "Does a grill cleaning robot actually work? We compare robotic grill cleaners on grate " +
+      "type, brush material, grease and safety — and say when a brush is the better buy.",
+    primaryCta: { label: "Compare grill robots", href: "#products" },
+    /* Straight to the verdict, not the product grid. "Do the grill bots really
+       work?" and "Does a Grillbot really work?" both appear in Google's People
+       Also Ask on this category. The doubt IS the query. */
+    secondaryCta: { label: "Does it actually work?", href: "#worth-it" },
+    imageLayout: "above",
+  },
+
   /* Page 004 of the owner-locked ten. Keyword evidence: DataForSEO runs
      31090590604 (SERPs) and 31091110791 (volume repair), 2026-08-06, $0.2405
      combined. Full working in

@@ -97,6 +97,17 @@ export const questionnaireRows: (typeof questionnaires.$inferInsert)[] = [
       set: "LITTER_BOX_QUESTIONS",
     },
   },
+  {
+    id: "q-grill-v1",
+    categoryId: "cat-grill-cleaners",
+    version: 1,
+    status: "draft",
+    schemaJson: {
+      version: 1,
+      source: "apps/web/src/content/matcher-questions.ts",
+      set: "GRILL_QUESTIONS",
+    },
+  },
 ];
 
 export const scoringConfigRows: (typeof scoringConfigs.$inferInsert)[] = [
@@ -327,6 +338,46 @@ export const scoringConfigRows: (typeof scoringConfigs.$inferInsert)[] = [
         single_cat: ["litter_box"],
         two_cats: ["litter_box"],
         many_cats: ["litter_box"],
+      },
+    },
+    tiebreakTolerancesJson: {
+      totalPricePctWithin: 1,
+      deliveryDaysWithin: 1,
+      requireSameWarrantyBand: true,
+    },
+    status: "draft",
+  },
+
+  /* Grill-cleaning robots.
+
+     environmentMismatch is ON and the environment is the GRATE. Brass or steel
+     brushes across porcelain-coated grates strip the enamel, and the bare cast
+     iron underneath then rusts — permanent damage caused by the right machine
+     carrying the wrong head. A product whose brush material does not suit the
+     reader's grate is refused rather than discounted, because "mostly right"
+     here means a new set of grates.
+
+     priceTier is the highest weight on the site at 50, and that is a
+     deliberate statement about a one-product category. There is very little to
+     choose between machines on capability, so what the matcher can usefully do
+     is tell somebody whether the spend fits what they actually need — which
+     for an infrequent cook is often "it does not, buy a brush".
+
+     poolSize and power are zero: no maker publishes a grate-area rating, and
+     every machine is battery-powered. */
+  {
+    id: "sc-grill-v1",
+    questionnaireId: "q-grill-v1",
+    version: 1,
+    weightsJson: { cleansCoverage: 50, power: 0, priceTier: 50, poolSize: 0 },
+    hardExclusionsJson: { environmentMismatch: true, poolTooLong: false },
+    classEligibilityJson: {
+      default: ["grill_cleaner"],
+      byPrimaryNeed: {
+        avoidance: ["grill_cleaner"],
+        grease: ["grill_cleaner"],
+        bristle_safety: ["grill_cleaner"],
+        convenience: ["grill_cleaner"],
       },
     },
     tiebreakTolerancesJson: {

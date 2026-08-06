@@ -847,6 +847,129 @@ const LITTER_BOX_QUESTIONS: MatcherQuestion[] = [
 ];
 
 /* ============================================================
+   Grill-cleaning robots
+
+   GRATE MATERIAL IS FIRST and it is the only hard exclusion.
+   Brass or steel across porcelain-coated grates strips the
+   enamel, and the bare cast iron underneath then rusts. That is
+   permanent damage done by the right machine with the wrong
+   brush, so the config refuses on it rather than ranking it
+   lower.
+
+   BAR SPACING IS SECOND, ahead of budget, because it decides
+   whether the machine can physically drive at all. It has no
+   search volume worth naming and it is the most likely reason
+   one of these is returned.
+
+   The funnel is also willing to end with "buy a brush". This is
+   the smallest category on the site, one product dominates it,
+   and for someone who already cleans their grill after cooking a
+   fifteen-dollar bristle-free brush is the better purchase. A
+   matcher that cannot say that is a sales page.
+
+   Power is not asked — they are all battery — so
+   MATCHER_DEFAULTS keeps the engine's power factor neutral.
+   ============================================================ */
+
+const GRILL_QUESTIONS: MatcherQuestion[] = [
+  {
+    id: "environment",
+    kicker: "Your grates",
+    q: "What are your cooking grates made of?",
+    options: [
+      {
+        label: "Porcelain-coated",
+        hint: "Shiny black or grey coating — nylon brushes only",
+        scores: { environment: "porcelain_grates" },
+      },
+      {
+        label: "Bare cast iron",
+        hint: "Heavy, matt, needs oiling",
+        scores: { environment: "cast_iron_grates" },
+      },
+      {
+        label: "Stainless steel bars",
+        scores: { environment: "stainless_grates" },
+      },
+      {
+        label: "Not sure",
+        hint: "We will assume coated, which is the safe answer",
+        scores: { environment: "porcelain_grates" },
+      },
+    ],
+  },
+  {
+    id: "bar_spacing",
+    kicker: "Your grill",
+    q: "How close together are the bars?",
+    options: [
+      { label: "Close — a standard gas grill grate" },
+      { label: "Widely spaced", hint: "A machine may not drive across them" },
+      { label: "It is a flat-top griddle", hint: "These are built for bars, not flat tops" },
+      { label: "Not sure" },
+    ],
+  },
+  {
+    id: "primary_need",
+    kicker: "Your problem",
+    q: "What are you actually trying to fix?",
+    options: [
+      {
+        label: "I never get round to cleaning it",
+        scores: { primary_need: "avoidance", desired_cleans: ["timer_control", "grease_removal"] },
+      },
+      {
+        label: "Baked-on grease",
+        scores: { primary_need: "grease", desired_cleans: ["grease_removal", "hot_grill_safe"] },
+      },
+      {
+        label: "Worried about wire bristles in food",
+        scores: { primary_need: "bristle_safety", desired_cleans: ["bristle_free"] },
+      },
+      {
+        label: "I just want it done while I do something else",
+        scores: { primary_need: "convenience", desired_cleans: ["timer_control"] },
+      },
+    ],
+  },
+  {
+    id: "frequency",
+    kicker: "How often",
+    q: "How often do you cook on it?",
+    options: [
+      { label: "Several times a week" },
+      { label: "Most weekends" },
+      { label: "A few times a season", hint: "A brush may serve you better" },
+    ],
+  },
+  {
+    id: "budget_tier",
+    kicker: "Your budget",
+    q: "Roughly what are you looking to spend?",
+    options: [
+      { label: "Under $100", scores: { budget_tier: "budget" } },
+      { label: "$100 – $150", scores: { budget_tier: "mid" } },
+      { label: "$150 – $250", scores: { budget_tier: "premium" } },
+      { label: "Over $250", scores: { budget_tier: "ultra" } },
+      { label: "Show me the range", scores: { budget_tier: "no_pref" } },
+    ],
+  },
+
+  /* ---- profile questions: recorded, never scored ---- */
+  {
+    id: "main_worry",
+    kicker: "Your concern",
+    q: "What worries you most about buying one?",
+    options: [
+      { label: "That it will not really work" },
+      { label: "That it will damage the grates" },
+      { label: "The cost of replacement heads" },
+      { label: "That a brush would do the same job" },
+    ],
+  },
+];
+
+/* ============================================================
    The registry
    ============================================================ */
 
@@ -867,6 +990,7 @@ export const MATCHER_QUESTIONS_BY_CATEGORY: Record<string, MatcherQuestion[]> = 
   "companion-robots": COMPANION_QUESTIONS,
   "pet-camera-robots": PET_CAMERA_QUESTIONS,
   "self-cleaning-litter-boxes": LITTER_BOX_QUESTIONS,
+  "grill-cleaning-robots": GRILL_QUESTIONS,
 };
 
 /**
@@ -889,6 +1013,7 @@ export const MATCHER_DEFAULTS: Record<string, ScoreFragment> = {
   "companion-robots": { power_pref: "no_pref", pool_length_ft: null, pool_area_sqft: null },
   "pet-camera-robots": { power_pref: "no_pref", pool_length_ft: null, pool_area_sqft: null },
   "self-cleaning-litter-boxes": { power_pref: "no_pref", pool_length_ft: null, pool_area_sqft: null },
+  "grill-cleaning-robots": { power_pref: "no_pref", pool_length_ft: null, pool_area_sqft: null },
 };
 
 /**
@@ -942,6 +1067,14 @@ export const MATCHER_TASKS_BY_CATEGORY: Record<string, string[]> = {
     "Checking which chambers a large cat can actually turn around in",
     "Matching litter type and multi-cat capacity to what you told us",
     "Weighing what each one costs to run, not just to buy",
+    "Ranking on suitability — before any retailer is considered",
+  ],
+  "grill-cleaning-robots": [
+    "Reading what your grates are made of",
+    "Ruling out brush materials that would strip your coating",
+    "Checking the machine can drive on bars spaced like yours",
+    "Weighing how often you cook against what one would save you",
+    "Comparing the machine honestly against a good hand brush",
     "Ranking on suitability — before any retailer is considered",
   ],
 };

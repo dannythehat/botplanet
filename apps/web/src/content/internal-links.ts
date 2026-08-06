@@ -58,6 +58,45 @@ export interface InternalAnchor {
    reader at the bottom of a review with nowhere to go. internal-links.test.ts
    checks the anchors that DO exist resolve; it cannot check for absence. */
 export const CATEGORY_ANCHORS: Record<string, InternalAnchor[]> = {
+  "grill-cleaning-robots": [
+    {
+      anchor: "porcelain",
+      href: "/robots/grill-cleaning-robots/#grate-type",
+      why: "The only hard exclusion in the category and the one mistake that is not recoverable. Any page mentioning porcelain grates should reach the section explaining why brass strips them.",
+      status: "live",
+    },
+    {
+      anchor: "wire bristles",
+      href: "/robots/grill-cleaning-robots/#bristles",
+      why: "The honest commercial argument for the whole category, and the one a reader is most likely to have arrived worried about.",
+      status: "live",
+    },
+    {
+      anchor: "brush",
+      href: "/robots/grill-cleaning-robots/#robot-or-brush",
+      why: "The comparison every buyer here is actually making. The word recurs throughout the prose and the reasoning belongs in one place.",
+      status: "live",
+    },
+    {
+      anchor: "compare",
+      href: "/compare/grill-cleaning-robots/",
+      why: "The comparison table is the next step once grate type has been settled.",
+      status: "live",
+    },
+    {
+      anchor: "review methodology",
+      href: "/review-methodology/",
+      why: "Any claim about how we check things should be one click from the page that says how we check things.",
+      status: "live",
+    },
+    {
+      anchor: "BotMatch",
+      href: "/botmatch/grill-cleaning-robots/",
+      why: "Planned until the catalogue has products. The funnel's first question is the grate-material exclusion, and it is willing to answer 'buy a brush'.",
+      status: "planned",
+    },
+  ],
+
   "self-cleaning-litter-boxes": [
     {
       anchor: "safety",
