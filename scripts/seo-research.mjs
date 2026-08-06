@@ -114,6 +114,29 @@ async function call(path, tasks, label) {
   costLog.push({ label, path, tasks: tasks.length, cost, runningTotal: Number(totalCost.toFixed(6)) });
   console.log(`${label}: ${tasks.length} task(s), cost $${cost.toFixed(4)}, total $${totalCost.toFixed(4)}, api ${json.status_code}`);
   if (json.status_code !== 20000) console.error(`${label}: API status ${json.status_code} ${json.status_message}`);
+
+  /* PER-TASK STATUS, because the envelope lies.
+     On 6 August 2026 the litter-box run reported `api 20000` for its
+     search_volume call, cost $0.0000, and returned NOTHING — no volume, no
+     CPC, no seasonality for any of 106 seeds. DataForSEO had rejected the
+     task, not the request, and the top-level status stayed 20000 because the
+     REQUEST was fine. The run went green and the single most important call of
+     the batch bought nothing at all.
+     A batch that returns no rows is a failed batch whatever the envelope says,
+     so it is now said out loud, per task, with the reason. */
+  let emptyTasks = 0;
+  for (const t of json.tasks ?? []) {
+    if (t.status_code !== undefined && t.status_code !== 20000) {
+      console.error(`${label}: TASK FAILED ${t.status_code} ${t.status_message ?? ""}`.trim());
+      emptyTasks++;
+    } else if (!t.result || t.result.length === 0) {
+      console.error(`${label}: TASK RETURNED NO RESULT (status ${t.status_code ?? "?"})`);
+      emptyTasks++;
+    }
+  }
+  if (emptyTasks) {
+    console.error(`${label}: ${emptyTasks} of ${json.tasks?.length ?? 0} task(s) produced nothing.`);
+  }
   return json;
 }
 
@@ -122,8 +145,43 @@ async function call(path, tasks, label) {
 /* ------------------------------------------------------------------ */
 
 const LEADS = [...new Set(seedDoc.leads ?? [])];
-const SEEDS = [...new Set([...LEADS, ...(seedDoc.seeds ?? [])])];
+const ALL_SEEDS = [...new Set([...LEADS, ...(seedDoc.seeds ?? [])])];
 const SERP_QUERIES = [...new Set(seedDoc.serpQueries ?? [])];
+
+/* GOOGLE ADS REJECTS A KEYWORD OVER TEN WORDS, AND IT REJECTS THE WHOLE TASK
+   WITH IT — not the offending keyword, the entire batch.
+
+   That is how the litter-box run of 6 August 2026 priced nothing. Two seeds
+   ran to eleven and twelve words ("how to get a cat to use a self cleaning
+   litter box"), so all 106 keywords came back empty while the response stayed
+   status 20000 and cost $0.0000. Every other phase worked, the workflow went
+   green, and the volume table was blank.
+
+   Filtering here rather than failing: the other hundred-odd keywords are fine
+   and worth buying, so the run proceeds without the ones Google will not
+   price, and says exactly which they were. The same terms stay eligible for
+   SERPs and related keywords, which have no such limit. */
+const GOOGLE_ADS_MAX_WORDS = 10;
+const GOOGLE_ADS_MAX_CHARS = 80;
+const oversized = ALL_SEEDS.filter(
+  (k) => k.split(/\s+/).length > GOOGLE_ADS_MAX_WORDS || k.length > GOOGLE_ADS_MAX_CHARS,
+);
+const SEEDS = ALL_SEEDS.filter((k) => !oversized.includes(k));
+if (oversized.length) {
+  console.error(
+    `${oversized.length} seed(s) exceed Google Ads' limits (${GOOGLE_ADS_MAX_WORDS} words / ${GOOGLE_ADS_MAX_CHARS} chars) and are EXCLUDED from volume and difficulty:`,
+  );
+  for (const k of oversized) console.error(`  [${k.split(/\s+/).length} words] ${k}`);
+  console.error("Shorten them in the seed file if their volume matters. They still work as SERP queries.");
+}
+
+/* A follow-up run that only wants volume and difficulty.
+   The mirror of serpOnly below, and it exists because of the same litter-box
+   run: the SERPs and related keywords were bought successfully and only the
+   pricing failed. Re-running the whole batch to recover it would have paid
+   twice for 23 live SERPs. This flag skips phases 3 and 4 so a repair costs
+   what it should. */
+const VOLUME_ONLY = seedDoc.volumeOnly === true;
 
 /* A follow-up run that only wants SERPs.
    Analysing a finished run always turns up a term whose SERP we did not buy —
@@ -132,9 +190,19 @@ const SERP_QUERIES = [...new Set(seedDoc.serpQueries ?? [])];
    skips phases 1-3 so a top-up costs what it should. */
 const SERP_ONLY = seedDoc.serpOnly === true;
 
+if (SERP_ONLY && VOLUME_ONLY) {
+  console.error(`${SEED_FILE} sets both serpOnly and volumeOnly. Pick one — together they buy nothing.`);
+  process.exit(1);
+}
+
 if (SERP_ONLY) {
   if (!SERP_QUERIES.length) {
     console.error(`${SEED_FILE} is serpOnly but lists no serpQueries. Nothing to research.`);
+    process.exit(1);
+  }
+} else if (VOLUME_ONLY) {
+  if (!SEEDS.length) {
+    console.error(`${SEED_FILE} is volumeOnly but lists no priceable seeds. Nothing to research.`);
     process.exit(1);
   }
 } else if (!SEEDS.length || !LEADS.length) {
@@ -195,7 +263,7 @@ for (const t of kd?.tasks ?? []) {
 saveProgress();
 
 // 3. Related keywords for the lead terms — batched tasks, shallow depth.
-const relTasks = SERP_ONLY ? [] : LEADS.map((keyword) => ({ ...US, keyword, depth: 1, limit: 20 }));
+const relTasks = SERP_ONLY || VOLUME_ONLY ? [] : LEADS.map((keyword) => ({ ...US, keyword, depth: 1, limit: 20 }));
 let rel = relTasks.length
   ? await call("/dataforseo_labs/google/related_keywords/live", relTasks, "related_keywords(batch)")
   : null;
@@ -229,7 +297,7 @@ function collectRelated(json) {
 saveProgress();
 
 // 4. Live US SERPs for decisive queries only — intent, result types, PAA, competitors.
-for (const q of SERP_QUERIES) {
+for (const q of VOLUME_ONLY ? [] : SERP_QUERIES) {
   const serp = await call("/serp/google/organic/live/advanced", [{ ...US, keyword: q, device: "desktop", depth: 20 }], `serp:${q}`);
   const items = serp?.tasks?.[0]?.result?.[0]?.items ?? [];
   const organic = items.filter((i) => i.type === "organic").slice(0, 10)

@@ -41,11 +41,28 @@ const n = (v) => (v === null || v === undefined ? "-" : String(v));
 console.log(`\n===== DIGEST ${CATEGORY} =====`);
 console.log(`generated ${doc.generated} · seeds ${doc.seeds} · spend $${doc.totalCostUsd}`);
 
-/* --- volume / CPC / competition / KD, richest first ----------------- */
+/* --- volume / CPC / competition / KD, richest first -----------------
+   Difficulty is printed even when the volume call returned nothing. The
+   litter-box run of 6 August 2026 bought KD successfully for $0.0247 and lost
+   its volume task to a rejected keyword — and because this table was driven
+   off the volume rows alone, the difficulty we had paid for was invisible.
+   Data that was bought gets shown. */
 const rows = [...(doc.volume ?? [])].sort((a, b) => (b.volume ?? -1) - (a.volume ?? -1));
+const pricedKeywords = new Set(rows.map((r) => r.keyword));
 console.log(`\n----- VOLUME (${rows.length}) : keyword | vol | cpc | competition | kd -----`);
+if (!rows.length) {
+  console.log("(none — the search_volume task returned no rows. Check the TASK FAILED lines above.)");
+}
 for (const r of rows) {
   console.log(`${r.keyword}\t${n(r.volume)}\t${n(r.cpc)}\t${n(r.competition)}\t${n(kdByKeyword.get(r.keyword))}`);
+}
+
+const kdOnly = (doc.difficulty ?? []).filter((d) => !pricedKeywords.has(d.keyword));
+if (kdOnly.length) {
+  console.log(`\n----- DIFFICULTY WITHOUT VOLUME (${kdOnly.length}) : keyword | kd -----`);
+  for (const d of [...kdOnly].sort((a, b) => (b.kd ?? -1) - (a.kd ?? -1))) {
+    console.log(`${d.keyword}\t${n(d.kd)}`);
+  }
 }
 
 /* --- seasonality, for anything big enough for a curve to mean anything */

@@ -1,7 +1,9 @@
 {
-  "category": "self-cleaning-litter-boxes",
-  "note": "Page 004 of the owner-locked ten. Free seed inventory built 2026-08-06 from the live US retail landscape (Whisker Litter-Robot, PetSafe ScoopFree, PETKIT, Casa Leo / Smarty Pear, CatGenie, Neakasa, PETLIBRO, Popur, ChillX, LitterMaid, Instachew) and the decisions this category actually turns on. Two things make it different from every category BotPlanet has researched so far. First, ONE BRAND MAY OWN THE CATEGORY TERM: 'litter robot' is a Whisker trademark that is used generically, so the run has to establish whether the brand term outranks the category term and whether a comparison site can hold either. Second, this is the first category where SAFETY is a genuine buying objection rather than a reassurance section — cats have been hurt in these machines and the internet knows it — so the informational cluster around safety may be worth as much as the commercial one. The serpQueries list is weighted at both. Nothing here is a page until the paid batch says so.",
+  "category": "self-cleaning-litter-boxes-volume",
+  "note": "VOLUME-ONLY REPAIR RUN for page 004. The main run 31090590604 on 6 August 2026 bought its 23 live SERPs and its related keywords successfully and priced NOTHING: two seeds ran to eleven and twelve words, Google Ads rejected the whole search_volume task over them, and the response came back status 20000 at $0.0000 with no rows. Difficulty survived; volume, CPC, competition and every seasonality curve did not. This file re-buys only what was lost. It does not re-buy the SERPs, which are already paid for and correct — that is what volumeOnly is for. The two offending seeds are shortened in the main inventory; the terms below are its corrected seed list verbatim.",
   "researchedOn": null,
+  "volumeOnly": true,
+  "repairs": "run 31090590604",
   "leads": [
     "self cleaning litter box",
     "automatic litter box",
@@ -124,29 +126,5 @@
     "which self cleaning litter box should i buy",
     "what to look for in an automatic litter box"
   ],
-  "serpQueries": [
-    "self cleaning litter box",
-    "automatic litter box",
-    "self cleaning cat litter box",
-    "best self cleaning litter box",
-    "best automatic litter box",
-    "smart litter box",
-    "litter robot",
-    "litter robot 4 review",
-    "petsafe scoopfree",
-    "petkit purobot ultra",
-    "casa leo leos loo too",
-    "neakasa m1",
-    "best self cleaning litter box for multiple cats",
-    "best self cleaning litter box for large cats",
-    "best budget self cleaning litter box",
-    "cheap self cleaning litter box",
-    "are self cleaning litter boxes safe",
-    "are self cleaning litter boxes worth it",
-    "do cats like self cleaning litter boxes",
-    "how do self cleaning litter boxes work",
-    "litter robot vs petsafe",
-    "what litter to use in a self cleaning litter box",
-    "self cleaning litter box for kittens"
-  ]
+  "serpQueries": []
 }
