@@ -41,6 +41,28 @@ concurrency:
 jobs:
   research:
     runs-on: ubuntu-latest
+    # A JOB-LEVEL CEILING, kept as a genuine safety net — but read the
+    # correction below before trusting any story about runs "hanging".
+    #
+    # THE HANGS ON 6 AUGUST 2026 WERE NOT REAL. Two runs, grill and education,
+    # were cancelled by hand after appearing stuck for tens of minutes. The
+    # logs show both were progressing normally the whole time: live SERP calls
+    # completing every 7-16 seconds, fifteen of twenty done on one and five of
+    # twenty on the other when the cancel landed. What was actually broken was
+    # the observation — the GitHub jobs API kept serving a cached snapshot with
+    # `started_at` frozen and no step advancing, and that was read as evidence
+    # of a wedge instead of as a stale response.
+    #
+    # The lesson is about diagnosis rather than timeouts: a status endpoint
+    # that never changes is as likely to be lying as the job is to be dead, and
+    # the job log settles it. Prefer the log.
+    #
+    # Fifteen minutes still earns its place — it bounds a genuine hang if one
+    # ever happens, and it is well clear of the slowest healthy batch observed
+    # (about four and a half minutes). It is safe because the digest, cost
+    # summary and artifact upload all run under `if: always()`, which is how
+    # both cancelled runs kept the data they had already paid for.
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
 
