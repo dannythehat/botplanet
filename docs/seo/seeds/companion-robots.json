@@ -1,7 +1,7 @@
 {
   "category": "companion-robots",
   "note": "Free seed inventory built 2026-08-06 from the live US retail landscape (Enabot, KEYi Loona, Energize Lab Eilik, Living.AI EMO, Ropet, Casio Moflin, Groove X Lovot, Sony Aibo, Digital Dream Labs Vector, Miko, Intuition Robotics ElliQ, Ageless Innovation Joy for All, Tombot, Yukai Qoobo) and the decisions this category actually turns on: whether the machine is bought for company, for care, for a child, or to watch a pet while nobody is home. Security robots was cancelled as a category on 6 August 2026 (owner ruling); its one viable cluster — roaming pet-camera and home-monitoring robots — is seeded here, which is why 'home monitoring robot' and 'indoor patrol robot' appear in a companion inventory. The structural question this run must settle is whether 'pet camera robot' and 'companion robot' are one query family or two; the serpQueries list is weighted to answer it. Nothing here is a page until the paid batch says so.",
-  "researchedOn": null,
+  "researchedOn": "2026-08-06",
   "leads": [
     "companion robot",
     "best companion robot",
@@ -30,7 +30,6 @@
     "emotional support robot",
     "therapy robot",
     "robot friend",
-
     "best companion robot",
     "best companion robots 2026",
     "best ai companion robot",
@@ -48,7 +47,6 @@
     "cheap companion robot",
     "companion robot under 500",
     "companion robot under 1000",
-
     "robot pet",
     "robotic pet",
     "robot pets for adults",
@@ -63,7 +61,6 @@
     "animatronic pet",
     "robot cat that purrs",
     "robot pet that acts real",
-
     "pet camera robot",
     "robot pet camera",
     "moving pet camera",
@@ -76,7 +73,6 @@
     "robot that follows your pet",
     "treat dispensing robot camera",
     "pet camera that moves around the house",
-
     "companion robot for elderly",
     "companion robot for seniors",
     "robot companion for dementia",
@@ -85,14 +81,12 @@
     "companion pet for alzheimers",
     "robotic companion for old people",
     "senior companion robot with reminders",
-
     "ai robot for kids",
     "robot companion for kids",
     "educational robot for kids",
     "ai learning robot for children",
     "robot for autistic child",
     "ai robot toy",
-
     "enabot ebo x",
     "enabot ebo se",
     "enabot ebo air",
@@ -132,7 +126,6 @@
     "unitree go2",
     "moxie robot",
     "amazon astro robot",
-
     "loona vs eilik",
     "emo vs eilik",
     "vector vs cozmo",
@@ -141,7 +134,6 @@
     "miko vs moxie",
     "robot pet vs real pet",
     "companion robot comparison",
-
     "do companion robots help with loneliness",
     "are companion robots worth it",
     "do robot pets help dementia",
@@ -157,7 +149,6 @@
     "can a robot pet climb stairs",
     "do pet camera robots work on carpet",
     "how loud is a companion robot",
-
     "companion robot for anxiety",
     "companion robot for autism",
     "robot companion for single people",
@@ -165,7 +156,6 @@
     "companion robot that talks",
     "ai robot that talks back",
     "robot for elderly living alone",
-
     "how to choose a companion robot",
     "which companion robot should i buy",
     "what is the best ai companion robot"
