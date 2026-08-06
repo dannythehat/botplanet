@@ -533,6 +533,31 @@ Two of the three below were closed by the top-up run in §9. What remains:
 
 ---
 
+## 10. Artwork the category page is waiting on
+
+The page is live and complete without these — the hero renders text-only and
+every card slot is optional, by design. But it is the only live category page
+with no photography, and it looks it.
+
+**Two masters, in priority order:**
+
+| # | File | Size | What it is |
+|---|---|---|---|
+| 1 | `/media/lawn/hero-desktop.webp` | ~1670 × 940 (16:9) | A robot mower working a lawn at dusk, house lit behind. Same treatment as the pool and window heroes — cinematic, BotPlanet branding in-image if wanted, no product logos we cannot verify. |
+| 2 | `/media/lawn/hero-mobile.webp` | 4:5 portrait, ~1120 × 1400 | The mobile crop. **Author it as its own 4:5 composition, not a crop of the desktop file** — the window hero was cropped and lost its headline. `mobileAspect` in `category-hero.ts` takes whatever ratio the master actually is. |
+
+**Six optional section images**, same shape as pool and window (3 decision
+cards at ~1586 × 992, 3 matrix rows at ~1586 × 992):
+
+- `glass-type` equivalent → `/media/lawn/yard-small.webp`, `yard-medium.webp`, `yard-large.webp` — a courtyard lawn, a typical back yard, an acre of open ground
+- `soil` equivalent → `/media/lawn/cut-everyday.webp`, `cut-long-grass.webp`, `cut-edges.webp` — an evenly kept lawn, grass that has got away, a mower's margin at a wall
+
+Add each new file to the `SOURCES` array in `scripts/gen-derivatives.mjs` and
+run it. Never upscale — the script refuses widths above the source, and a
+1586-wide master is correct at 1586.
+
+---
+
 ## 9. Top-up SERP run — 2026-08-06, $0.008
 
 Run 31074893036, two live SERPs, no volume or difficulty re-bought (see the
