@@ -73,6 +73,17 @@ jobs:
           SEO_CATEGORY: ${{ inputs.category }}
           SEO_COST_CAP: ${{ inputs.cost_cap }}
 
+      # The results are in the artifact, which is the right place to store them
+      # and a bad place to read them from. Whoever has to turn this run into a
+      # keyword map may not be able to download an artifact, and re-running the
+      # batch to see the numbers again means paying for them twice. This prints
+      # the decision-grade fields into the job log. It spends nothing, and it
+      # never fails the run — a digest error must not lose a paid result.
+      - name: Print the digest into the log
+        if: always()
+        continue-on-error: true
+        run: node scripts/seo-research-digest.mjs --category=${{ inputs.category }}
+
       - name: Report what it cost
         if: always()
         run: |
