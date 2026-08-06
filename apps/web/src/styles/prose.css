@@ -1,0 +1,127 @@
+/* ============================================================
+   Long-form article prose.
+
+   Shared by ReviewArticle.astro and EditorialArticle.astro. Both
+   render compiled Markdown in the same voice on the same grid, and
+   when these rules lived in each component as an `is:global` block
+   they were two copies of the same forty lines — which is two
+   copies until somebody edits one of them.
+
+   Component-specific decoration stays in the component: the
+   collapsible-section plates and in-body figures belong to the
+   review template and are not here.
+   ============================================================ */
+
+.bp-prose {
+  max-width: 70ch;
+  margin: 0 0 clamp(3rem, 7vw, 5rem);
+}
+
+/* A milled rule above every section heading, so the article reads as a stack
+   of parts rather than one continuous column of text. Bright at the left where
+   the eye starts and fading out to the right — a full-width line of even
+   weight reads as a table border, not a divider. */
+.bp-prose h2::before {
+  content: "";
+  display: block;
+  height: 2px;
+  width: min(100%, 30rem);
+  margin-bottom: clamp(1.4rem, 3vw, 2rem);
+  border-radius: 2px;
+  background: linear-gradient(
+    90deg,
+    rgba(246, 248, 252, 0.9) 0%,
+    rgba(61, 142, 240, 0.55) 7%,
+    rgba(200, 208, 222, 0.5) 20%,
+    rgba(160, 170, 186, 0.28) 42%,
+    rgba(140, 150, 166, 0.1) 68%,
+    transparent 100%
+  );
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
+}
+
+/* The first heading follows whatever plate opened the page, which already
+   separates it. */
+.bp-prose > h2:first-child::before { display: none; }
+
+.bp-prose h2 {
+  margin: clamp(2.5rem, 6vw, 3.5rem) 0 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.45rem, 3.8vw, 1.9rem);
+  line-height: 1.18;
+  letter-spacing: -0.018em;
+  text-wrap: balance;
+  color: var(--cs-hi);
+}
+
+.bp-prose h3 {
+  margin: 2rem 0 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.08rem, 2.4vw, 1.2rem);
+  line-height: 1.28;
+  color: var(--cs-hi);
+}
+
+.bp-prose p {
+  margin: 1.05rem 0 0;
+  font-size: 1.0625rem;
+  line-height: 1.72;
+  color: var(--text-secondary);
+}
+
+/* An internal link inside the prose: underlined on a metallic hairline so it
+   is visibly a link without shouting, and brightening on hover. */
+.bp-prose__link {
+  color: var(--cs-hi);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(200, 208, 222, 0.42);
+  padding-bottom: 1px;
+  transition: border-color 0.18s ease, color 0.18s ease;
+}
+
+.bp-prose__link:hover { color: #fff; border-color: rgba(246, 248, 252, 0.9); }
+.bp-prose__link:focus-visible { outline: var(--focus-ring, 2px solid #dfe4ec); outline-offset: 2px; }
+
+.bp-prose strong { color: var(--cs-hi); font-weight: 600; }
+.bp-prose em { color: var(--cs-mid); }
+
+.bp-prose ul { margin: 1.1rem 0 0; padding: 0; list-style: none; display: grid; gap: 0.6rem; }
+
+.bp-prose li {
+  position: relative;
+  padding-left: 1.3rem;
+  font-size: 1.0625rem;
+  line-height: 1.66;
+  color: var(--text-secondary);
+}
+
+.bp-prose li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 0.38rem;
+  height: 0.38rem;
+  transform: rotate(45deg);
+  background: var(--cs-sheen);
+}
+
+.bp-prose hr {
+  margin: clamp(2.5rem, 6vw, 3.5rem) 0 0;
+  border: 0;
+  height: 1px;
+  background: linear-gradient(90deg, var(--cs-line), transparent 70%);
+}
+
+.bp-prose blockquote {
+  margin: 1.5rem 0 0;
+  padding-left: 1.1rem;
+  border-left: 2px solid var(--cs-line);
+  color: var(--cs-mid);
+}
+
+@media (min-width: 900px) {
+  .bp-prose p, .bp-prose li { font-size: 1.1rem; }
+}

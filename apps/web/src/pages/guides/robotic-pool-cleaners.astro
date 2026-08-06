@@ -1,18 +1,94 @@
 ---
+/**
+ * Guides hub — robotic pool cleaners.
+ *
+ * It lists the guides that exist and says nothing about the ones that do not.
+ * A guides hub padded with "coming soon" cards promises eight articles and
+ * delivers one, and every crawl of it says the same thing.
+ *
+ * The list is built from the editorial registry rather than typed here, so a
+ * guide published later appears without this file being touched — and a guide
+ * withdrawn cannot leave a dead card behind.
+ */
 import Base from "../../layouts/Base.astro";
-import RoutePlaceholder from "../../components/RoutePlaceholder.astro";
-import { routeFor } from "../../content/routes";
+import { editorialForCategory } from "../../content/editorial";
 import { breadcrumbsFor } from "../../lib/routing";
+import { itemListSchema, webPageSchema } from "../../lib/seo";
 
-const route = routeFor("/guides/robotic-pool-cleaners/")!;
-const crumbs = breadcrumbsFor("/guides/robotic-pool-cleaners/");
+const PATH = "/guides/robotic-pool-cleaners/";
+const crumbs = breadcrumbsFor(PATH);
+
+/* Guides only — the best-of pages live under /best-robots/ and are linked at
+   the foot of this page rather than mixed into the list. A reader who came for
+   an explanation is not the reader who came for a ranking. */
+const guides = editorialForCategory("robotic-pool-cleaners").filter((e) =>
+  e.path.startsWith("/guides/"),
+);
+
+const pageSchema = [
+  webPageSchema({
+    path: PATH,
+    name: "Robotic pool cleaner guides",
+    description:
+      "Plain explanations of how robotic pool cleaners work and what actually matters when choosing one.",
+  }),
+  guides.length
+    ? itemListSchema(
+        guides.map((g) => ({ name: g.title, path: g.path })),
+        "Robotic pool cleaner guides",
+      )
+    : null,
+];
 ---
+
 <Base
-  title={`${route.label} — BotPlanet`}
-  description={route.summary ?? route.label}
-  noindex={!route.indexable}
+  title="Robotic Pool Cleaner Guides — How They Work and What Matters"
+  description="Plain explanations of how robotic pool cleaners work, what actually decides which one suits your pool, and whether one is worth buying at all."
   breadcrumbs={crumbs}
-  narrow={true}
+  schema={pageSchema}
 >
-  <RoutePlaceholder title="Robotic pool cleaner guides" summary="How robotic pool cleaners work, what actually matters when choosing one, and how to keep one running." owner="Job 19 owns educational content" />
+  <div class="section-head">
+    <span class="rule-accent" aria-hidden="true"></span>
+    <span class="eyebrow">Guides</span>
+    <h1 class="mt-0">Robotic pool cleaner guides</h1>
+    <p>
+      How these machines work, what separates one from another, and the questions worth asking
+      before you spend anything. Rankings live on the
+      <a href="/best-robots/robotic-pool-cleaners/">best robotic pool cleaner</a> page; these
+      explain the reasoning behind them.
+    </p>
+  </div>
+
+  {guides.length === 0 ? (
+    <div class="empty">
+      <p class="empty__title">No guides published yet</p>
+      <p>Published guides appear here automatically.</p>
+    </div>
+  ) : (
+    <div class="grid grid--2">
+      {guides.map((g) => (
+        <a class="card card--interactive" href={g.path}>
+          <span class="pill pill--strong">Guide</span>
+          <h2 class="g-title">{g.title}</h2>
+          <p>{g.standfirst}</p>
+        </a>
+      ))}
+    </div>
+  )}
+
+  <div class="section-head" style="margin-top: clamp(2.5rem, 6vw, 4rem);">
+    <h2>Looking for a recommendation instead?</h2>
+    <p>
+      The <a href="/best-robots/robotic-pool-cleaners/">best robotic pool cleaner</a> page ranks
+      nine machines by the job each does best, and the
+      <a href="/best-robots/robotic-pool-cleaners/cordless/">cordless robotic pool cleaner</a>
+      page does the same for the seven that run on a battery. If you would rather answer questions
+      than read a ranking, <a href="/botmatch/robotic-pool-cleaners/">BotMatch</a> asks eight about
+      your pool and scores the whole catalogue against them.
+    </p>
+  </div>
 </Base>
+
+<style>
+  .g-title { font-size: var(--type-card); margin: 0; }
+</style>

@@ -325,6 +325,21 @@ export const CATEGORY_ANCHORS: Record<string, InternalAnchor[]> = {
       why: "The hub's coverage section is where floor / wall / waterline are separated as distinct capabilities. This review's central argument depends on that distinction, so the first mention should be able to reach the explanation.",
       status: "live",
     },
+    /* THESE TWO MUST STAY ABOVE THE BARE "cordless" ENTRY. The linker takes
+       the first match it finds for a phrase, and "cordless" would otherwise
+       swallow the leading word of both and send the reader to the hub. */
+    {
+      anchor: "cordless robotic pool cleaner",
+      href: "/best-robots/robotic-pool-cleaners/cordless/",
+      why: "22,200/mo at KD 0 and a page of its own on measured SERP evidence. Wherever the full phrase appears in prose, it should reach the page that ranks them.",
+      status: "live",
+    },
+    {
+      anchor: "cordless page",
+      href: "/best-robots/robotic-pool-cleaners/cordless/",
+      why: "How the cordless best-of gets named in running text — 'the full argument sits on the cordless page'. The natural phrase, rather than the keyword bolted on.",
+      status: "live",
+    },
     {
       anchor: "cordless",
       href: "/robots/robotic-pool-cleaners/",
@@ -445,22 +460,27 @@ export const CATEGORY_ANCHORS: Record<string, InternalAnchor[]> = {
       status: "live",
     },
 
-    /* ---- Declared now, linked when the page ships. ----
-       A planned anchor renders as plain text, so none of these can 404. The
-       wiring is done, and each becomes a real link the day its target exists —
-       rather than being remembered, or not, months later. */
+    /* Both went live on 6 August 2026 when their pages shipped. They were
+       written as `planned` months earlier and became real links by changing
+       one word — which is the whole point of declaring an anchor before its
+       destination exists. */
     {
       anchor: "best robotic pool cleaner",
       href: "/best-robots/robotic-pool-cleaners/",
-      why: "Recorded for when the best-of page carries real picks. Not linked yet — the page exists but has no ranked content behind it.",
-      status: "planned",
+      why: "The ranked best-of. Every review and guide reaches a point where the reader wants the field rather than one machine, and that is where this goes.",
+      status: "live",
     },
     {
       anchor: "worth it",
       href: "/guides/are-robotic-pool-cleaners-worth-it/",
-      why: "The is-it-worth-it guide owns that query. Planned: the page returns 404 today.",
-      status: "planned",
+      why: "The is-it-worth-it guide owns that query, and it is the number one People Also Ask entry on the category head term. Wherever a page hedges on whether the money is justified, this answers it.",
+      status: "live",
     },
+
+    /* ---- Declared now, linked when the page ships. ----
+       A planned anchor renders as plain text, so none of these can 404. The
+       wiring is done, and each becomes a real link the day its target exists —
+       rather than being remembered, or not, months later. */
     {
       anchor: "battery",
       href: "/guides/robotic-pool-cleaner-batteries/",

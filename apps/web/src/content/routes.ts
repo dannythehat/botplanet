@@ -600,20 +600,43 @@ export const ROUTES: RouteDef[] = [
     category: CAT,
     aliases: ["/compare/pool-cleaners/"],
   },
+  /* LIVE SINCE 6 AUGUST 2026. These three carried `coming_soon` and a
+     RoutePlaceholder from launch, which was correct while they were empty and
+     became wrong the day they were written. All three are ruled CREATE in
+     docs/seo/pool-research-findings.md — nothing here exists because a site
+     "should have" a best-of page. */
   {
     path: `/best-robots/${CAT}/`,
     label: "Best robotic pool cleaners",
     breadcrumbLabel: "Robotic Pool Cleaners",
     section: "best",
     parent: "/best-robots/",
-    status: "coming_soon",
+    status: "live",
     navSurface: "none",
     footerGroup: null,
-    inSitemap: false,
-    indexable: false,
+    inSitemap: true,
+    indexable: true,
     category: CAT,
     aliases: [`/best/${CAT}/`],
-    summary: "Our best-of picks for robotic pool cleaners.",
+    summary: "Nine robotic pool cleaners ranked by the job each does best, with who each one is wrong for.",
+  },
+  {
+    /* The single biggest wedge in the pool dataset: 22,200/mo at KD 0, more
+       than three times the "best robotic pool cleaner" cluster. A child of the
+       best-of page rather than a sibling, because it is the cordless subset of
+       the same argument and the breadcrumb should say so. */
+    path: `/best-robots/${CAT}/cordless/`,
+    label: "Best cordless robotic pool cleaners",
+    breadcrumbLabel: "Cordless",
+    section: "best",
+    parent: `/best-robots/${CAT}/`,
+    status: "live",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: true,
+    indexable: true,
+    category: CAT,
+    summary: "The seven cordless machines ranked, and the honest case for buying corded instead.",
   },
   {
     path: `/guides/${CAT}/`,
@@ -621,13 +644,31 @@ export const ROUTES: RouteDef[] = [
     breadcrumbLabel: "Robotic Pool Cleaners",
     section: "guides",
     parent: "/guides/",
-    status: "coming_soon",
+    status: "live",
     navSurface: "none",
     footerGroup: null,
-    inSitemap: false,
-    indexable: false,
+    inSitemap: true,
+    indexable: true,
     category: CAT,
-    summary: "Buying and care guides for robotic pool cleaners.",
+    summary: "How robotic pool cleaners work and what actually decides which one suits your pool.",
+  },
+  {
+    /* Only 40/mo on the exact phrase. It is here because "Is a robot pool
+       cleaner worth it?" is the number one People Also Ask entry on the
+       40,500 head term — a snippet play, not a volume play. Parented to the
+       guides index rather than to the category's guide hub: the URL has no
+       category segment, and a breadcrumb that claims one would not match it. */
+    path: "/guides/are-robotic-pool-cleaners-worth-it/",
+    label: "Are robotic pool cleaners worth it?",
+    section: "guides",
+    parent: "/guides/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: true,
+    indexable: true,
+    category: CAT,
+    summary: "For most in-ground pools yes, and for four specific situations no.",
   },
   {
     path: `/deals/${CAT}/`,

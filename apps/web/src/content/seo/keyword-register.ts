@@ -554,6 +554,105 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
     ],
     researchedOn: RUN,
   },
+
+  /* ---- The three pool sub-pages, live 6 August 2026. ----
+     All three were ruled CREATE by the 1 August run and then sat as
+     placeholders for five days. Each row below records what the page was
+     actually built to take, so keywords.test.ts has something to assert
+     against and a later rank report has a baseline. */
+  {
+    path: "/best-robots/robotic-pool-cleaners/",
+    /* Google reports "best robotic pool cleaner", "best robot pool cleaner",
+       "top rated robotic pool cleaner" AND "best robotic pool cleaner for
+       inground pools" as one grouped cluster at 6,600, and the SERPs overlap
+       on thepoolnerd / poolbots / Amazon. That is why there is no inground
+       best-of page: it is this page, with an inground section. Above-ground
+       (140), large pools (70), leaves (20) and budget (50) are sections for
+       the same reason — nowhere near a URL between them. */
+    primary: { term: "best robotic pool cleaner", volume: 6600, difficulty: 13, mustAppear: true },
+    secondary: [
+      { term: "best robot pool cleaner", volume: 6600, difficulty: 13, mustAppear: true },
+      { term: "best robotic pool cleaners", volume: 6600, difficulty: 13, mustAppear: true },
+      { term: "above-ground", volume: 140, difficulty: 0, mustAppear: true },
+      { term: "waterline", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "wall", volume: 0, difficulty: 0, mustAppear: true },
+    ],
+    cededTo: [
+      {
+        term: "cordless robotic pool cleaner",
+        path: "/best-robots/robotic-pool-cleaners/cordless/",
+        why: "22,200/mo at KD 0 — three times this page's cluster at a fraction of the difficulty, and its own list SERP. This page names cordless machines and explains the trade, but the term belongs to the child page.",
+      },
+      {
+        term: "robotic pool cleaner",
+        path: "/robots/robotic-pool-cleaners/",
+        why: "The 40,500 head term is the hub's. A best-of that also chased it would put two of our own pages into the same result set for a query only one of them can win.",
+      },
+      {
+        term: "are robotic pool cleaners worth it",
+        path: "/guides/are-robotic-pool-cleaners-worth-it/",
+        why: "The guide owns the question and the People Also Ask slot behind it. A ranked list is the wrong page shape for that query.",
+      },
+    ],
+    researchedOn: RUN,
+  },
+  {
+    path: "/best-robots/robotic-pool-cleaners/cordless/",
+    /* The single biggest wedge in the pool dataset. 22,200/mo at KD ZERO —
+       larger than the entire best-of cluster and easier than anything else
+       researched for this category. It is a page rather than a section
+       because the SERP is list content in its own right: thepoolnerd,
+       poolbots, Beatbot, Amazon and Reddit, not the hub's manufacturers. */
+    primary: { term: "cordless robotic pool cleaner", volume: 22200, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "cordless robotic pool cleaners", volume: 22200, difficulty: 0, mustAppear: true },
+      { term: "cordless pool cleaner", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "battery", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "runtime", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "corded", volume: 0, difficulty: 0, mustAppear: true },
+    ],
+    cededTo: [
+      {
+        term: "best robotic pool cleaner",
+        path: "/best-robots/robotic-pool-cleaners/",
+        why: "The parent page carries the general ranking, including the three corded machines this page argues for but does not rank. Chasing it here would split one argument across two URLs competing for one result.",
+      },
+      {
+        term: "robotic pool cleaner",
+        path: "/robots/robotic-pool-cleaners/",
+        why: "The category head term belongs to the hub, which explains corded versus cordless as a decision rather than ranking one side of it.",
+      },
+    ],
+    researchedOn: RUN,
+  },
+  {
+    path: "/guides/are-robotic-pool-cleaners-worth-it/",
+    /* 40/mo on the exact phrase, which would not justify a URL on its own.
+       What justifies it: "Is a robot pool cleaner worth it?" is the NUMBER
+       ONE People Also Ask entry on the 40,500 head term. This is a snippet
+       and AI-overview play, and the answer has to be a real one — including
+       the four cases where the answer is no — or it earns nothing. */
+    primary: { term: "are robotic pool cleaners worth it", volume: 40, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "is a robot pool cleaner worth it", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "suction cleaner", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "pressure cleaner", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "how long do robotic pool cleaners last", volume: 0, difficulty: 0, mustAppear: true },
+    ],
+    cededTo: [
+      {
+        term: "best robotic pool cleaner",
+        path: "/best-robots/robotic-pool-cleaners/",
+        why: "A guide that ranks products is a best-of wearing a hat. This page answers whether to buy at all and hands the reader to the page that answers which one.",
+      },
+      {
+        term: "robotic pool cleaner",
+        path: "/robots/robotic-pool-cleaners/",
+        why: "The head term is the hub's. This guide takes one question off it, not the category.",
+      },
+    ],
+    researchedOn: RUN,
+  },
   {
     /* Review pages target the model name and the questions asked about it.
        They must never chase the category head term: the hub owns that, and a
