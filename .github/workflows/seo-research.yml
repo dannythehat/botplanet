@@ -57,12 +57,24 @@ jobs:
     # that never changes is as likely to be lying as the job is to be dead, and
     # the job log settles it. Prefer the log.
     #
-    # Fifteen minutes still earns its place — it bounds a genuine hang if one
-    # ever happens, and it is well clear of the slowest healthy batch observed
-    # (about four and a half minutes). It is safe because the digest, cost
-    # summary and artifact upload all run under `if: always()`, which is how
-    # both cancelled runs kept the data they had already paid for.
-    timeout-minutes: 15
+# RAISED FROM 15 TO 40 ON 6 AUGUST 2026, and not because a batch got slower.
+    # `timeout-minutes` counts from when the job is CREATED, not from when a
+    # runner picks it up. Run 31120094738 sat in GitHub's hosted-runner queue
+    # for the full fifteen minutes and was cancelled without ever starting —
+    # runner_id 0, runner_name empty, no step ever ran. It spent nothing and
+    # produced nothing, and the failure looked exactly like a hang.
+    #
+    # Forty minutes bounds a genuine hang while surviving a busy queue. The
+    # real ceilings are inside the script and always were: a $2.00 cost cap it
+    # refuses to exceed, and a twelve-minute wall-clock deadline on the run
+    # itself. This is the outermost of three, so it can afford to be generous.
+    #
+    # The slowest healthy batch observed is about four and a half minutes.
+    #
+    # It is safe because the digest, cost summary and artifact upload all run
+    # under `if: always()`, which is how two earlier cancelled runs kept the
+    # data they had already paid for.
+    timeout-minutes: 40
     steps:
       - uses: actions/checkout@v4
 
