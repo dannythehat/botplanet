@@ -654,6 +654,239 @@ const WINDOW_BOTMATCH: PagePlan = {
   evidence: "Not an SEO target by design — the page renders noindex. It exists as the conversion tool.",
 };
 
+/* ------------------------------------------------------------------
+   PLANNED PAGES — researched, not built.
+
+   Every keyword below was PAID FOR ALREADY. These are the review and guide
+   candidates each category's research run named, with the volumes it measured,
+   lifted out of the findings documents and into code where a test can see them.
+   No new DataForSEO spend was needed and none was possible: runs 31120094738
+   and 31121016884 were both killed at fifteen minutes with no runner ever
+   assigned, so research is blocked until that is resolved.
+
+   STATUS IS `researched`, NOT `ready`. Every one of these still needs the two
+   things the blueprint requires before a builder touches it: a product sourced
+   and verified, and artwork assigned per section. Nothing here is buildable
+   tonight and the status says so.
+
+   REVIEWS ARE TITLED WITH THE BARE PRODUCT NAME, not "X review". Measured, not
+   assumed: the companion run found the bare name takes 10-100x the searches of
+   the review phrasing.
+   ------------------------------------------------------------------ */
+
+interface PlannedSeed {
+  slug: string;
+  term: string;
+  volume: number;
+  difficulty?: number;
+  note?: string;
+}
+
+function plannedReviews(category: string, research: string, seeds: PlannedSeed[]): PagePlan[] {
+  return seeds.map((x) => ({
+    path: `/robots/${category}/${x.slug}/`,
+    category,
+    type: "review" as const,
+    status: "researched" as const,
+    intent: "Decide whether this specific machine is the right one for me.",
+    primary: { term: x.term, volume: x.volume, difficulty: x.difficulty ?? 0 },
+    secondary: [{ term: `${x.term} review`, volume: 0, difficulty: 0 }],
+    ceded: [],
+    products: [],
+    productsNote: x.note ?? "Product not sourced. No catalogue row, no ASIN, no verified specification yet.",
+    linksOut: [`/robots/${category}/`, `/compare/${category}/`, `/botmatch/${category}/`],
+    images: [
+      { slot: "hero", shows: `${x.term} lead artwork`, supplied: false },
+      { slot: "figure-1", shows: "Feature story 1", supplied: false },
+      { slot: "figure-2", shows: "Feature story 2", supplied: false },
+      { slot: "product-card", shows: "Catalogue card for listings and the hub grid", supplied: false },
+    ],
+    schema: ["Review", "Article", "WebPage", "BreadcrumbList"],
+    research,
+    evidence: `${x.volume.toLocaleString("en-US")}/mo on the bare product name. Model terms are the cheapest real traffic in every category researched so far.`,
+  }));
+}
+
+/* Robot vacuums — the largest demand on the site and an empty catalogue. */
+const VACUUM_REVIEWS = plannedReviews("robot-vacuums", "31090094137 · 2026-08-06", [
+  { slug: "eufy-s1-pro", term: "eufy s1 pro", volume: 33100 },
+  { slug: "roborock-s8-maxv-ultra", term: "roborock s8 maxv ultra", volume: 9900 },
+  { slug: "eufy-x10-pro-omni", term: "eufy x10 pro omni", volume: 8100 },
+  { slug: "shark-powerdetect", term: "shark powerdetect", volume: 8100 },
+  { slug: "shark-matrix", term: "shark matrix robot vacuum", volume: 8100 },
+  { slug: "roborock-qrevo", term: "roborock qrevo", volume: 6600 },
+  { slug: "dreame-x50-ultra", term: "dreame x50 ultra", volume: 6600 },
+  { slug: "dreame-x40-ultra", term: "dreame x40 ultra", volume: 4400 },
+  { slug: "ecovacs-deebot", term: "ecovacs deebot", volume: 3600 },
+  { slug: "roborock-saros-10", term: "roborock saros 10", volume: 2900 },
+  { slug: "roomba-max-705", term: "roomba max 705", volume: 2900 },
+]);
+
+/* Litter boxes. Litter-Robot 4 at 74,000 is the single biggest review
+   opportunity anywhere on the site. */
+const LITTER_REVIEWS = plannedReviews("self-cleaning-litter-boxes", "31090590604 + 31091110791 · 2026-08-06", [
+  { slug: "litter-robot-4", term: "litter robot 4", volume: 74000, note: "Product not sourced. THE BIGGEST SINGLE REVIEW OPPORTUNITY ON THE SITE — and the brand term itself (165,000) is refused, so this review is how the category reaches Whisker demand honestly." },
+  { slug: "casa-leo", term: "casa leo", volume: 6600 },
+  { slug: "neakasa-m1", term: "neakasa m1", volume: 3600 },
+  { slug: "catgenie", term: "catgenie", volume: 2900 },
+  { slug: "petkit-puramax-2", term: "petkit puramax 2", volume: 1900 },
+  { slug: "petsafe-scoopfree", term: "petsafe scoopfree", volume: 1600 },
+  { slug: "leos-loo-too", term: "leos loo too", volume: 1000 },
+  { slug: "petkit-pura-x", term: "petkit pura x", volume: 590 },
+  { slug: "popur-x5", term: "popur x5", volume: 590 },
+  { slug: "petkit-purobot-ultra", term: "petkit purobot ultra", volume: 390 },
+]);
+
+/* Companion robots. */
+const COMPANION_REVIEWS = plannedReviews("companion-robots", "31081889310 · 2026-08-06", [
+  { slug: "living-ai-emo", term: "emo robot", volume: 18100 },
+  { slug: "eilik", term: "eilik robot", volume: 8100 },
+  { slug: "loona", term: "loona robot", volume: 5400 },
+  { slug: "sony-aibo", term: "sony aibo", volume: 3600 },
+  { slug: "tombot-jennie", term: "tombot jennie", volume: 2400 },
+  { slug: "joy-for-all", term: "joy for all companion pet", volume: 1900 },
+  { slug: "casio-moflin", term: "casio moflin", volume: 1300 },
+]);
+
+/* Pet camera robots — the Enabot line, which is the roaming-camera family
+   rather than the companion one. */
+const PETCAM_REVIEWS = plannedReviews("pet-camera-robots", "31081889310 · 2026-08-06", [
+  { slug: "enabot-ebo-air", term: "enabot ebo air", volume: 1000 },
+  { slug: "enabot-ebo-x", term: "enabot ebo x", volume: 260 },
+  { slug: "enabot-ebo-se", term: "enabot ebo se", volume: 260 },
+]);
+
+/* Coding robots. The reverse of every other category: the products are 4x to
+   14x the head term, so the reviews are the business and the hub only routes. */
+const CODING_REVIEWS = plannedReviews("educational-coding-robots", "31094454463 + 31094682067 · 2026-08-06", [
+  { slug: "ozobot", term: "ozobot", volume: 14800, difficulty: 36 },
+  { slug: "sphero-bolt", term: "sphero bolt", volume: 4400, difficulty: 32 },
+  { slug: "bee-bot", term: "bee bot", volume: 4400, difficulty: 6 },
+  { slug: "lego-spike-essential", term: "lego spike essential", volume: 3600, difficulty: 11 },
+  { slug: "sphero-mini", term: "sphero mini", volume: 2900, difficulty: 15 },
+  { slug: "vex-go", term: "vex go", volume: 2900, difficulty: 8 },
+  { slug: "sphero-indi", term: "sphero indi", volume: 1600, difficulty: 1 },
+  { slug: "ozobot-evo", term: "ozobot evo", volume: 1300, difficulty: 5 },
+  { slug: "makeblock-mbot", term: "makeblock mbot", volume: 880, difficulty: 29 },
+  { slug: "sphero-rvr", term: "sphero rvr", volume: 720, difficulty: 5 },
+  { slug: "botley-2", term: "botley 2.0", volume: 720, difficulty: 0 },
+  { slug: "code-and-go-robot-mouse", term: "code and go robot mouse", volume: 590, difficulty: 0 },
+]);
+
+/* Grill. One product dominates, so one review matters. */
+const GRILL_REVIEWS = plannedReviews("grill-cleaning-robots", "31092662805 · 2026-08-06", [
+  { slug: "grillbot", term: "grillbot", volume: 18100, difficulty: 11, note: "Product not sourced. The brand term is REFUSED for the hub at 18,100 — three times the category term — and this review is the honest way to reach that demand." },
+]);
+
+/* Lawn. Seventeen review candidates were named; these are the ones with a
+   measured figure behind them. */
+const LAWN_REVIEWS = plannedReviews("robotic-lawn-mowers", "31073327230 + 31074893036 · 2026-08-06", [
+  { slug: "husqvarna-automower", term: "husqvarna automower", volume: 14800, difficulty: 7 },
+  { slug: "segway-navimow", term: "segway navimow", volume: 4400, difficulty: 39 },
+  { slug: "mammotion-luba-2", term: "mammotion luba 2", volume: 2900, difficulty: 0 },
+  { slug: "mammotion-luba-3", term: "mammotion luba 3", volume: 1600, difficulty: 0 },
+  { slug: "mammotion-yuka", term: "mammotion yuka", volume: 720, difficulty: 9 },
+  { slug: "husqvarna-automower-115h", term: "husqvarna automower 115h", volume: 590, difficulty: 0 },
+  { slug: "segway-navimow-i110n", term: "segway navimow i110n", volume: 480, difficulty: 12 },
+  { slug: "segway-navimow-x430", term: "segway navimow x430", volume: 480, difficulty: 0 },
+  { slug: "segway-navimow-i105n", term: "segway navimow i105n", volume: 320, difficulty: 8 },
+  { slug: "husqvarna-automower-430x", term: "husqvarna automower 430x", volume: 260, difficulty: 0 },
+  { slug: "husqvarna-automower-415x", term: "husqvarna automower 415x", volume: 170, difficulty: 0 },
+  { slug: "segway-navimow-x330", term: "segway navimow x330", volume: 170, difficulty: 0 },
+]);
+
+/* Lawn buying guides. These are the three the hub explicitly cedes to, so the
+   cannibalisation test already depends on them existing. */
+const LAWN_GUIDES: PagePlan[] = [
+  {
+    path: "/guides/robot-lawn-mower-without-boundary-wire/",
+    category: "robotic-lawn-mowers",
+    type: "guide",
+    status: "researched",
+    intent: "Find a mower I do not have to bury a wire around the garden for.",
+    primary: { term: "wire free robot lawn mower", volume: 720, difficulty: 0 },
+    secondary: [
+      { term: "robot lawn mower without perimeter wire", volume: 210, difficulty: 0 },
+      { term: "gps robot lawn mower", volume: 590, difficulty: 48 },
+      { term: "lidar robot lawn mower", volume: 90, difficulty: 0 },
+      { term: "robot lawn mower without boundary wire", volume: 20, difficulty: 0 },
+    ],
+    ceded: [
+      { term: "robot lawn mower", toPath: "/robots/robotic-lawn-mowers/", why: "The 74,000 head term belongs to the hub. This guide takes one buying constraint off it, not the category." },
+    ],
+    products: [],
+    productsNote: "Product not sourced. The guide needs at least three wire-free mowers before it can recommend anything.",
+    linksOut: ["/robots/robotic-lawn-mowers/", "/botmatch/robotic-lawn-mowers/"],
+    images: [{ slot: "hero", shows: "A mower crossing an unmarked lawn boundary, no wire visible", supplied: false }],
+    schema: ["Article", "ItemList", "FAQPage", "BreadcrumbList"],
+    research: "31073327230 + 31074893036 · 2026-08-06",
+    evidence: "≈1,670/mo combined across eight phrasings at KD 0-48, and boundary wire is the single biggest objection in the category.",
+  },
+  {
+    path: "/guides/robot-lawn-mower-for-hills/",
+    category: "robotic-lawn-mowers",
+    type: "guide",
+    status: "researched",
+    intent: "Find a mower that will actually climb my slope.",
+    primary: { term: "best robot lawn mower for hills", volume: 200, difficulty: 0 },
+    secondary: [{ term: "robot lawn mower slope", volume: 0, difficulty: 0 }],
+    ceded: [
+      { term: "robot lawn mower", toPath: "/robots/robotic-lawn-mowers/", why: "Head term belongs to the hub. Slope is a constraint the hub explains and this guide answers with products." },
+    ],
+    products: [],
+    productsNote: "Product not sourced.",
+    linksOut: ["/robots/robotic-lawn-mowers/", "/botmatch/robotic-lawn-mowers/"],
+    images: [{ slot: "hero", shows: "A mower working across a visibly steep bank", supplied: false }],
+    schema: ["Article", "ItemList", "FAQPage", "BreadcrumbList"],
+    research: "31073327230 + 31074893036 · 2026-08-06",
+    evidence: "Small volume, but slope is the category's hardest exclusion — a mower that cannot climb it is returned, not lived with.",
+  },
+  {
+    path: "/guides/best-budget-robot-lawn-mower/",
+    category: "robotic-lawn-mowers",
+    type: "guide",
+    status: "researched",
+    intent: "Find the cheapest robot mower that is not a waste of money.",
+    primary: { term: "cheap robot lawn mower", volume: 390, difficulty: 11 },
+    secondary: [{ term: "best budget robot lawn mower", volume: 0, difficulty: 0 }],
+    ceded: [
+      { term: "robot lawn mower", toPath: "/robots/robotic-lawn-mowers/", why: "Head term belongs to the hub." },
+    ],
+    products: [],
+    productsNote: "Product not sourced.",
+    linksOut: ["/robots/robotic-lawn-mowers/", "/botmatch/robotic-lawn-mowers/"],
+    images: [{ slot: "hero", shows: "An entry-level mower on an ordinary suburban lawn", supplied: false }],
+    schema: ["Article", "ItemList", "FAQPage", "BreadcrumbList"],
+    research: "31073327230 + 31074893036 · 2026-08-06",
+    evidence: "390/mo at KD 11. The hub cedes it explicitly, so this page has to exist for that ruling to mean anything.",
+  },
+];
+
+/* Companion — the seniors guide, ruled as page 3 of that category's map. */
+const COMPANION_GUIDE: PagePlan = {
+  path: "/guides/robot-pets-for-seniors/",
+  category: "companion-robots",
+  type: "guide",
+  status: "researched",
+  intent: "Find a robot pet for an older relative, possibly one living with dementia.",
+  primary: { term: "robotic pet for elderly", volume: 390, difficulty: 0 },
+  secondary: [
+    { term: "elderly care robot", volume: 390, difficulty: 0 },
+    { term: "robotic pet for dementia", volume: 170, difficulty: 0 },
+    { term: "companion robot for elderly", volume: 140, difficulty: 0 },
+  ],
+  ceded: [
+    { term: "robot pet", toPath: "/robots/companion-robots/", why: "The 8,100 head term belongs to the hub. This guide takes the care-setting intent, which is a different reader with a different question." },
+  ],
+  products: [],
+  productsNote: "Product not sourced. Joy for All and Tombot Jennie are the obvious candidates and neither is in the catalogue.",
+  linksOut: ["/robots/companion-robots/", "/botmatch/companion-robots/"],
+  images: [{ slot: "hero", shows: "An older person with a robotic pet, warm and unpatronising", supplied: false }],
+  schema: ["Article", "ItemList", "FAQPage", "BreadcrumbList"],
+  research: "31081889310 · 2026-08-06",
+  evidence: "≈1,090/mo combined across four phrasings, all KD 0, and a genuinely distinct reader from the hub's.",
+};
+
 export const PAGE_PLAN: PagePlan[] = [
   ...POOL,
   ...POOL_REVIEWS,
@@ -661,6 +894,15 @@ export const PAGE_PLAN: PagePlan[] = [
   ...COMPARES,
   ...WINDOW_REVIEWS,
   WINDOW_BOTMATCH,
+  ...VACUUM_REVIEWS,
+  ...LITTER_REVIEWS,
+  ...COMPANION_REVIEWS,
+  ...PETCAM_REVIEWS,
+  ...CODING_REVIEWS,
+  ...GRILL_REVIEWS,
+  ...LAWN_REVIEWS,
+  ...LAWN_GUIDES,
+  COMPANION_GUIDE,
 ];
 
 export const planFor = (path: string): PagePlan | undefined =>
