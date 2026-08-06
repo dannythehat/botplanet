@@ -197,6 +197,64 @@ export const ROUTES: RouteDef[] = [
     summary: "Products you have saved on this device.",
   },
 
+  /* ---------------- Robotic lawn mowers ----------------
+     Added 2026-08-06 when the category page was built. Same reason the window
+     block exists: the page renders from a dynamic route and a D1 row, so it
+     works without an entry here — but this registry is what the SITEMAP and
+     the breadcrumbs read, and a page no crawler can find is not published. */
+  {
+    path: "/robots/robotic-lawn-mowers/",
+    label: "Robotic Lawn Mowers",
+    section: "shop",
+    parent: "/robots/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: "Explore",
+    inSitemap: true,
+    indexable: true,
+    category: "robotic-lawn-mowers",
+  },
+  {
+    path: "/compare/robotic-lawn-mowers/",
+    label: "Compare robot mowers",
+    breadcrumbLabel: "Robotic Lawn Mowers",
+    section: "compare",
+    parent: "/compare/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: true,
+    indexable: true,
+    category: "robotic-lawn-mowers",
+  },
+  {
+    path: "/botmatch/robotic-lawn-mowers/",
+    label: "Find My Robot Lawn Mower",
+    breadcrumbLabel: "Find My Robot Lawn Mower",
+    section: "botmatch",
+    /* Parent is the category page, not "/botmatch/" — that path is only an
+       alias of the pool matcher and is not a route of its own. */
+    parent: "/robots/robotic-lawn-mowers/",
+    /* NOT in the sitemap and NOT indexable, deliberately.
+
+       The route resolves and the funnel renders, but content/matcher-questions.ts
+       holds ONE question set and it is the pool one — pool type, pool length in
+       feet, debris on the waterline. A lawn visitor reaching this page is asked
+       whether their pool is in-ground. Publishing that would be advertising a
+       tool that does not exist yet.
+
+       It flips to live the moment a lawn question set lands: yard area, slope
+       percentage, tree cover, zones, boundary wire, budget. Those six are what
+       the keyword research says decide the purchase — see §7 of
+       docs/seo/robotic-lawn-mowers-research-findings.md. */
+    status: "coming_soon",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: false,
+    indexable: false,
+    category: "robotic-lawn-mowers",
+  },
+
   /* ---------------- Window-cleaning robots ----------------
      Added 2026-08-05 when the category went live. The category page renders
      from a dynamic route and a D1 row, so it worked before this entry existed

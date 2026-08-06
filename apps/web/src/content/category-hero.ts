@@ -33,6 +33,69 @@ export interface CategoryHeroContent {
 }
 
 export const CATEGORY_HERO: Record<string, CategoryHeroContent> = {
+  /* Keyword evidence: DataForSEO runs 31073327230 and 31074893036,
+     2026-08-06, $0.22428 combined. Full working in
+     docs/seo/robotic-lawn-mowers-research-findings.md.
+
+     "robot lawn mower" is 74,000/mo and Google groups four other phrasings
+     into it (robotic lawn mower, robotic lawnmower, lawn mowing robot, robot
+     grass cutter) — the measured overlap between the first two is 8/10.
+     "robot mower" is a SEPARATE cluster at 22,200 and earns its place in the
+     H1 rather than being treated as the same words.
+
+     TWO THINGS THIS PAGE IS BUILT AROUND, both from the research:
+
+     1. The head term is KD 36-54 and half its top ten is manufacturer sites
+        — husqvarna.com, worx.com, navimow.com, mammotion.com, yarbo.com. A
+        comparison site does not win that SERP. "best robot lawn mower" is
+        KD 8 and returns nothing but editorial. So the copy is written to win
+        the "best" cluster (~13,400/mo) while the head term is what the page
+        is named for.
+
+     2. Unlike window, hub and best-of are NOT the same SERP here — 2/10
+        shared, against window's 6/10. The one-URL rule still applies (owner
+        ruling, 5 August 2026), so this page carries the "best" job too, but
+        the merge is a policy decision rather than something the data asked
+        for. Recorded so a future reader does not mistake it for evidence.
+
+     The acreage cluster (~2,060/mo: 1 acre, 2 acres, half acre, small yard)
+     lives in the yard-size section below, NOT in a guide — "best robot lawn
+     mower for 1 acre" shares 6/10 with "best robot lawn mower". */
+  "robotic-lawn-mowers": {
+    eyebrow: "Robot category",
+    /* 41 words. Primary term opens sentence one; the separate 22,200/mo
+       "robot mower" cluster lands naturally in sentence two, and yard size —
+       the biggest long-tail cluster and the first BotMatch question — is the
+       thing the last sentence promises. */
+    title: "Robotic Lawn Mowers: Compare Robot Mowers for Every Yard Size",
+    subtitle:
+      "A robot lawn mower cuts a little every day instead of a lot once a week, which is why " +
+      "a lawn it looks after stays even rather than recovering between mows. Not every robot " +
+      "mower suits every yard though — size, slope and tree cover rule machines out fast, and " +
+      "we compare them on exactly that.",
+    seoTitle: "Robotic Lawn Mowers: Compare Robot Mowers | BotPlanet",
+    metaDescription:
+      "Compare robotic lawn mowers by yard size, slope, boundary wire or wire-free RTK " +
+      "navigation, zones and price. Find the right robot mower for your lawn.",
+    primaryCta: { label: "Compare robot mowers", href: "#products" },
+    /* No BotMatch CTA yet, unlike pool and window. /botmatch/robotic-lawn-mowers/
+       resolves, but the questionnaire is still the pool question set — it would
+       ask a lawn buyer how long their pool is. Sending readers there would be
+       advertising a tool that does not exist. The second CTA goes to the
+       decision this category actually turns on instead. Swap it back to
+       BotMatch when the lawn question set lands. */
+    secondaryCta: { label: "Wire or wire-free?", href: "#navigation" },
+    /* No hero artwork yet. The interface allows it and the hero renders
+       text-only rather than blocking the page — the category was built before
+       its images on the owner's instruction of 6 August 2026 ("we will do
+       pages first, then add products afterwards"). The masters needed are
+       listed in docs/seo/robotic-lawn-mowers-page-list.md. Do NOT reuse
+       /media/lawn-category/feature-desktop.webp here: it is the homepage
+       teaser, composed with a dark left gutter for overlaid text, and it
+       already appears further down this page in the BotMatch panel. */
+    imageLayout: "above",
+  },
+
   /* Keyword evidence: DataForSEO run 30981257806, 2026-08-05, $0.2044.
      "window cleaning robot" is 12,100/mo at KD 0-5 and Google groups four
      other phrasings into it (robot window cleaner, robotic window cleaner,

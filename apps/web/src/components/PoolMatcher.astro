@@ -23,6 +23,26 @@ interface Props {
 }
 const { categorySlug, categoryName } = Astro.props;
 
+/* The landing copy used to say "for your pool" and "Pool type, size,
+   coverage, power and budget" for EVERY category, because pool was the only
+   one when this was written. That went live on a window URL on 5 August 2026,
+   where the page read "Find the right window-cleaning robots for your pool".
+   Wrong on its face, and found while wiring up lawn.
+
+   The wording is now category-aware. Pool keeps the specific line it had;
+   anything else gets copy that is true.
+
+   WHAT THIS DOES NOT FIX: the QUESTIONS are still the pool set — pool type,
+   pool length, debris. A window or lawn visitor is asked about their pool. A
+   per-category question set is the real fix and is a separate job; until it
+   lands, a category's BotMatch is not finished and should not be advertised
+   or indexed. See docs/seo/robotic-lawn-mowers-page-list.md. */
+const isPool = categorySlug === "robotic-pool-cleaners";
+const audience = isPool ? "for your pool" : "for you";
+const criteria = isPool
+  ? "Pool type, size, coverage, power and budget — nothing else."
+  : "What you need it to do, where it has to work, and your budget — nothing else.";
+
 const payload = JSON.stringify({
   questions: MATCHER_QUESTIONS,
   tasks: MATCHER_TASKS,
@@ -40,7 +60,7 @@ const payload = JSON.stringify({
   <!-- 1. landing -->
   <section class="bp-mm__stage" data-stage="landing">
     <span class="bp-mm__eyebrow">BotMatch</span>
-    <h1 class="bp-mm__title">Find the right {categoryName.toLowerCase()} for your pool</h1>
+    <h1 class="bp-mm__title">Find the right {categoryName.toLowerCase()} {audience}</h1>
     <p class="bp-mm__lead">
       Eight short questions, about a minute. No account, nothing to install. We match you
       against the robots we have actually researched — and the part that picks your robot
@@ -49,7 +69,7 @@ const payload = JSON.stringify({
 
     <ul class="bp-mm__steps">
       <li><strong>Answer eight questions</strong><span>Plain English. Tap what sounds like you.</span></li>
-      <li><strong>We match on suitability</strong><span>Pool type, size, coverage, power and budget — nothing else.</span></li>
+      <li><strong>We match on suitability</strong><span>{criteria}</span></li>
       <li><strong>We send your result</strong><span>Your match, why it won, and what it does not do well.</span></li>
     </ul>
 

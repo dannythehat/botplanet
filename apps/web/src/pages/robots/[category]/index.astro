@@ -102,7 +102,14 @@ const jumpTargets = [
    model here is desk research plus dated manual checks. */
 const LAST_REVIEWED = "2026-08-03";
 const trustItems = [
-  { value: `${products.length}`, label: `${cat.name.toLowerCase()} researched` },
+  /* A category whose catalogue is not seeded yet would otherwise open with
+     "0 robotic lawn mowers researched", which reads as a broken page rather
+     than an honest one. Pages are built before their products on the owner's
+     instruction of 6 August 2026, so this case is expected, not an error —
+     the strip says what is actually true instead of counting to zero. */
+  products.length
+    ? { value: `${products.length}`, label: `${cat.name.toLowerCase()} researched` }
+    : { value: "Research first", label: "Keywords and market mapped before any product goes live" },
   { value: "Suitability first", label: "Commission never picks your robot", href: "/editorial-policy/" },
   { value: "Dated", label: "Every price carries the date it was checked" },
   { value: "3 Aug 2026", label: "Last reviewed", href: "/review-methodology/" },
