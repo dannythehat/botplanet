@@ -12,7 +12,7 @@
  * equivalent approved offers, and even then it is read from D1's private column
  * by the caller and passed in; this module never sees a rate.
  */
-import { PRODUCTS, catalogueStatusOf } from "../content/products";
+import { CATALOGUE, activeCatalogue, catalogueStatusOf } from "../content/products";
 import { buildReport } from "./evidence-report";
 import { WARRANTY_NOT_CONFIRMED } from "./warranty";
 import { DESTINATIONS, REDIRECT_KEYS, REJECTED_CANDIDATES, destinationFor } from "../content/commerce/destinations";
@@ -154,7 +154,35 @@ export function buildOffers(today = new Date(AS_AT), opts: BuildOptions = {}): O
   const report = buildReport(new Date(AS_AT));
   const offers: Offer[] = [];
 
-  for (const p of Object.values(PRODUCTS)) {
+  /*
+   * THE CATALOGUE IS PRODUCT_ID, NOT PRODUCTS. Corrected 6 August 2026.
+   *
+   * This loop read `PRODUCTS`, which is pool-era editorial keyed by slug —
+   * summary, who-it-is-for, rule-outs. Every pool machine has a record there,
+   * and NO window machine does: the window category was built on reviews.ts
+   * and src/reviews/*.md instead, which is a different and perfectly good
+   * shape for editorial.
+   *
+   * The consequence was invisible and total. Eleven window reviews went live
+   * on 5 August with a "Buy" heading on every page, and buildOffers could not
+   * produce a single offer for any of them, because none of the eleven was in
+   * the map this loop iterates. Checked on botplanet.io: every window review
+   * returns 200, shows a Buy section, and contains zero prices and zero /go/
+   * links. The pool review beside it carries both. A third of the published
+   * site was ranking and could not earn a penny.
+   *
+   * Nothing failed, either. `ACTIVE_PRODUCTS` derives from `PRODUCTS` too, so
+   * every guard in offers.test.ts that iterates it — including the two written
+   * specifically to catch a product with no offer behind its buy button —
+   * skipped all eleven and passed. A test that iterates the same incomplete
+   * list as the code it checks agrees with it perfectly and proves nothing.
+   *
+   * PRODUCT_ID is the right source: it is the slug-to-D1 join map that every
+   * category has to appear in, whatever shape its editorial takes. Editorial
+   * is looked up per product below and is genuinely optional — a product
+   * without pool-style copy still has a price, a destination and a buy button.
+   */
+  for (const p of CATALOGUE) {
     // A product withdrawn from the active catalogue carries no offer at all.
     // It keeps its page and its evidence; what it loses is the ability to be
     // sold, which is the whole meaning of the withdrawal.
@@ -459,7 +487,10 @@ export interface OfferIssue {
 
 export function validateOffers(offers = buildOffers()): OfferIssue[] {
   const issues: OfferIssue[] = [];
-  const productIds = new Set(Object.values(PRODUCTS).map((p) => p.productId));
+  /* Same correction as buildOffers: the catalogue is PRODUCT_ID, not the
+     pool-era editorial map. Validating against PRODUCTS declared all eleven
+     window offers "unknown product" the moment they existed. */
+  const productIds = new Set(CATALOGUE.map((p) => p.productId));
   const retailerIds = new Set(RETAILERS.map((r) => r.id));
   const programmeIds = new Set(PROGRAMMES.map((p) => p.id));
   const seenIds = new Set<string>();
@@ -526,8 +557,7 @@ export function validateOffers(offers = buildOffers()): OfferIssue[] {
   }
 
   // Every product should be reachable somehow, even if only by a fallback click.
-  for (const p of Object.values(PRODUCTS)) {
-    if (catalogueStatusOf(p.productId) !== "active") continue;
+  for (const p of activeCatalogue()) {
     if (!offers.some((o) => o.productId === p.productId)) {
       issues.push({ severity: "warning", rule: "product_has_route", detail: "no offer or fallback route", productId: p.productId });
     }
@@ -544,7 +574,7 @@ export function offerReport(today = new Date(AS_AT)) {
   const offers = buildOffers(today);
   const issues = validateOffers(offers);
 
-  const products = Object.values(PRODUCTS).map((p) => {
+  const products = CATALOGUE.map((p) => {
     const mine = offers.filter((o) => o.productId === p.productId);
     const pref = preferredOffer(p.productId, offers);
     const pubs = mine.map((o) => ({ offer: o, pub: publicationFor(o) }));

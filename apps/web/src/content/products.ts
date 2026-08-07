@@ -910,6 +910,64 @@ export const ACTIVE_PRODUCTS: Record<string, ProductEditorial> = Object.fromEntr
   Object.entries(PRODUCTS).filter(([, p]) => catalogueStatusOf(p.productId) === "active"),
 );
 
+/**
+ * THE CATALOGUE. Every product that has a page, whatever shape its editorial
+ * takes.
+ *
+ * Added 6 August 2026 to fix a failure that was total and completely silent.
+ * `PRODUCTS` above is pool-era editorial keyed by slug, and the offer engine,
+ * the offer validator, the offer report and the product-offer mapping all
+ * treated it as "the catalogue". No window machine is in it — that category
+ * was built on reviews.ts and src/reviews/*.md, which is a different and
+ * perfectly good shape — so eleven published reviews with a Buy heading could
+ * not produce a single offer between them, and no test noticed, because the
+ * tests iterated the same map as the code.
+ *
+ * PRODUCT_ID is the real catalogue: it is the slug-to-D1 join every product
+ * must appear in to exist at all. Editorial is optional and looked up per
+ * product; the category comes from CATEGORY_OF below because productPath()
+ * needs it and a product URL built on the wrong category is a 404.
+ */
+const CATEGORY_OF: Record<string, string> = Object.fromEntries(
+  Object.keys(PRODUCT_ID).map((slug) => [
+    slug,
+    /* Window is the only category whose products live outside PRODUCTS. When a
+       third shape arrives this becomes a lookup rather than a branch — but a
+       branch that names its one exception is honest, and a lookup table
+       covering one case would only hide it. */
+    slug.startsWith("ecovacs-winbot") ||
+    slug.startsWith("hobot-") ||
+    slug === "hutt-s55-pro" ||
+    slug === "mamibot-w120-dp" ||
+    slug === "cop-rose-x5s"
+      ? "window-cleaning-robots"
+      : "robotic-pool-cleaners",
+  ]),
+);
+
+export interface CatalogueProduct {
+  /** Route identifier. */
+  slug: string;
+  /** Stable D1 join key. */
+  productId: string;
+  categorySlug: string;
+  /** Pool-era editorial, where it exists. Genuinely optional. */
+  editorial: ProductEditorial | undefined;
+}
+
+export const CATALOGUE: CatalogueProduct[] = Object.entries(PRODUCT_ID).map(
+  ([slug, productId]) => ({
+    slug,
+    productId,
+    categorySlug: CATEGORY_OF[slug],
+    editorial: PRODUCTS[slug],
+  }),
+);
+
+/** The catalogue, minus anything withdrawn from sale. */
+export const activeCatalogue = (): CatalogueProduct[] =>
+  CATALOGUE.filter((p) => catalogueStatusOf(p.productId) === "active");
+
 /** Lookup by route slug. */
 export const productEditorial = (slug: string): ProductEditorial | undefined => PRODUCTS[slug];
 /** Lookup by stable canonical productId (the D1 join key). */

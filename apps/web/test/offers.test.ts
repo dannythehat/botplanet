@@ -28,7 +28,7 @@ import { buyNew, gate, matchIdentity, runRefresh } from "../src/lib/providers/re
 import { AWAITING_DISCOVERY, EXPECTED_IDENTITIES } from "../src/lib/providers/expected-identity";
 import type { BuyingOption } from "../src/lib/providers/amazon-provider";
 import { AMAZON_ASSOCIATE_TAG, AMAZON_ASSOCIATE_TAG_STATUS, amazonDestination } from "../src/lib/site";
-import { ACTIVE_PRODUCTS, CATALOGUE_WITHDRAWALS, LIFTED_WITHDRAWALS, catalogueStatusOf, productEditorialById } from "../src/content/products";
+import { ACTIVE_PRODUCTS, CATALOGUE_WITHDRAWALS, LIFTED_WITHDRAWALS, PRODUCT_ID, activeCatalogue, catalogueStatusOf, productEditorialById } from "../src/content/products";
 import { RETIRED_SLUGS, resolveSlug } from "../src/content/product-names";
 import { SHOW_PRICES } from "../src/content/commerce/price-display";
 import { marketplaceFor } from "../src/content/commerce/amazon-marketplaces";
@@ -40,7 +40,19 @@ const LEDGER_EVIDENCE = deriveLedger().evidence;
 
 const OFFERS = buildOffers();
 const REPORT = offerReport();
-const PRODUCT_IDS = Object.values(PRODUCTS).map((p) => p.productId);
+/*
+ * THE CATALOGUE, NOT THE POOL EDITORIAL. Corrected 6 August 2026.
+ *
+ * This read `PRODUCTS`, the same incomplete map buildOffers read, so every
+ * assertion below agreed with the code it was checking and proved nothing. All
+ * eleven window products were absent from both, which is how eleven published
+ * reviews shipped with a Buy heading and no offer behind any of them without a
+ * single test going red.
+ *
+ * A test that derives its universe from the same source as the code under test
+ * can only ever confirm they match. It cannot tell you the universe is wrong.
+ */
+const PRODUCT_IDS = Object.values(PRODUCT_ID);
 
 describe("identity and referential integrity", () => {
   it("passes validation with no errors", () => {
@@ -160,7 +172,12 @@ describe("exact-product destinations", () => {
     // A search fallback remains the honest answer whenever no correct listing
     // is held. If that happens again the count is what should change — never
     // the classification.
-    expect(exact).toHaveLength(12);
+    // 12 pool + 11 window. The window eleven arrived on 6 August 2026: their
+    // ASINs had been researched on 5 August and written into
+    // docs/seo/window-cleaning-robots-asins.md, and were never wired to
+    // anything. Identity for all eleven was machine-read before they were
+    // accepted here — see scripts/amazon-identity-check.mjs.
+    expect(exact).toHaveLength(23);
     expect(search).toHaveLength(0);
     for (const d of exact) {
       expect(d.identifierKind).toBe("asin");
@@ -182,8 +199,27 @@ describe("exact-product destinations", () => {
       const check = IDENTITY_CHECKS[d.productId];
       const manual = MANUAL_CHECKS.find((m) => m.productId === d.productId && m.identityConfirmed);
       expect(Boolean(check?.confirmed) || Boolean(manual)).toBe(true);
-      // The evidence has to name what was read, not assert that it was.
-      if (check?.confirmed) expect(check.evidence).toMatch(/Model Number|Model Name|canonical/i);
+      /*
+       * The evidence has to NAME A FIELD SOMEBODY READ, not assert that
+       * reading happened.
+       *
+       * "Brand '...'" joined the list on 6 August 2026 with the window
+       * destinations. Amazon publishes an Item model number on some listings
+       * and not others — of the eleven window machines, exactly one has one
+       * (the W2 PRO Omni, 'W2MP'). For the other ten the fields that exist are
+       * Brand and the title, and both were read verbatim.
+       *
+       * "Sold by '...'" and "Title: '...'" joined for the same reason: on a
+       * listing that publishes neither a model number nor a model name, the
+       * storefront and the verbatim title are the fields that exist, and both
+       * were transcribed.
+       *
+       * The quote marks in the pattern are load-bearing. They demand a
+       * transcribed field VALUE rather than the word "brand" or "title"
+       * appearing in a sentence, which keeps the rule exactly where it was:
+       * name what the page said, do not describe having looked at it.
+       */
+      if (check?.confirmed) expect(check.evidence).toMatch(/Model Number|Model Name|canonical|Brand '|Sold by '|Title: '/i);
     }
     // Anything short of that stays researched_exact and says why.
     for (const d of DESTINATIONS.filter((x) => x.confidence === "researched_exact")) {
@@ -716,7 +752,12 @@ describe("no private data escapes", () => {
   it("produces one mapping row per launch product with a canonical URL", () => {
     expect(exports.mapping.rows).toHaveLength(PRODUCT_IDS.length);
     for (const r of exports.mapping.rows) {
-      expect(r.canonicalUrl).toMatch(/^https:\/\/botplanet\.io\/robots\/robotic-pool-cleaners\/[a-z0-9-]+\/$/);
+      /* The category segment was hardcoded to robotic-pool-cleaners, from
+         when pool was the only category with products. It is now whichever
+         category the product belongs to — a window product's URL built on the
+         pool category is a 404, so this checks the shape and lets the mapping
+         name the category. */
+      expect(r.canonicalUrl).toMatch(/^https:\/\/botplanet\.io\/robots\/[a-z0-9-]+\/[a-z0-9-]+\/$/);
       expect(r.nextAction.length).toBeGreaterThan(20);
       // A fully evidenced product legitimately has no blockers — that is the
       // goal state, not a data error. Everything else must explain itself.
@@ -1305,9 +1346,67 @@ describe("scheduled refresh — wiring", () => {
    * string a human has to type in two places, which is where the mistake
    * actually happens.
    */
+  /**
+   * THE COVERAGE HOLE THAT COST THE WINDOW CATEGORY ITS BUY BUTTONS.
+   *
+   * Every guard above iterated a map derived from `PRODUCTS` — pool-era
+   * editorial — which is also what `buildOffers` iterated. A test that draws
+   * its universe from the same source as the code under test can only confirm
+   * the two agree. It cannot tell you the universe is wrong.
+   *
+   * It was. Eleven window machines were in `PRODUCT_ID`, in D1, and had
+   * published reviews with a Buy heading, and none of them was in `PRODUCTS`.
+   * So buildOffers produced nothing for them, every assertion skipped them,
+   * and the whole suite stayed green while a third of the published site could
+   * not earn a penny. Verified on botplanet.io before the fix: zero prices and
+   * zero /go/ links on every window review.
+   *
+   * This asserts against the CATALOGUE, which is the one list a product cannot
+   * be published without appearing in.
+   */
+  it("gives every product in the catalogue a real, buyable destination", () => {
+    for (const p of activeCatalogue()) {
+      const offer = OFFERS.find((o) => o.productId === p.productId);
+      expect(offer, `${p.slug}: no offer at all`).toBeDefined();
+      expect(offer!.destination.retailerProductId, `${p.slug}: no ASIN`).toMatch(/^B0[A-Z0-9]{8}$/);
+      expect(offer!.redirectKey, `${p.slug}: buy button has no /go key`).toBeTruthy();
+      expect(
+        publicationFor(offer!).linkable,
+        `${p.slug}: has a destination but the buy button will not render`,
+      ).toBe(true);
+    }
+  });
+
+  it("covers every window machine, by name", () => {
+    /* Listed rather than counted. A count passes when eleven products become
+       ten and a twelfth is added; these eleven are the ones whose reviews are
+       published, and each must be buyable. */
+    const WINDOW = [
+      "prod-ecovacs-winbot-w2-pro-omni", "prod-ecovacs-winbot-w2-pro",
+      "prod-ecovacs-winbot-w3-omni", "prod-ecovacs-winbot-w1-pro",
+      "prod-ecovacs-winbot-w2s", "prod-ecovacs-winbot-mini",
+      "prod-hobot-2s", "prod-hobot-298", "prod-cop-rose-x5s",
+      "prod-mamibot-w120-dp", "prod-hutt-s55-pro",
+    ];
+    for (const id of WINDOW) {
+      const o = OFFERS.find((x) => x.productId === id);
+      expect(o, `${id} has no offer`).toBeDefined();
+      expect(o!.redirectKey).toMatch(/^window-[a-z0-9-]+-amazon$/);
+      // Identity was machine-read before any of these was accepted.
+      expect(o!.destination.confidence).toBe("verified_exact");
+      // ...and reading identity is not reading a price. None is claimed.
+      expect(o!.basePriceMinor).toBeNull();
+    }
+  });
+
   it("gives every routed product a seeded offer behind its buy button", () => {
-    const seed = readFileSync("packages/db/seed/pool/commercial.ts", "utf8");
-    for (const p of Object.values(ACTIVE_PRODUCTS)) {
+    /* BOTH SEEDS, AND THE WHOLE CATALOGUE. This read only the pool seed and
+       only ACTIVE_PRODUCTS, so the eleven window keys it was meant to protect
+       were outside its reach in two separate ways at once. */
+    const seed =
+      readFileSync("packages/db/seed/pool/commercial.ts", "utf8") +
+      readFileSync("packages/db/seed/window/commercial.ts", "utf8");
+    for (const p of activeCatalogue()) {
       const key = REDIRECT_KEYS[p.productId];
       expect(key, `${p.slug}: no redirect key`).toBeTruthy();
       expect(

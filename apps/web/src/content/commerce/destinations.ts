@@ -236,7 +236,179 @@ const NO_AMAZON_DESTINATION = [
   // the Pro Max, whose listing names itself in its own details table.
 ];
 
+/* ==================================================================
+   WINDOW-CLEANING ROBOTS — added 6 August 2026.
+
+   ELEVEN PUBLISHED REVIEWS THAT COULD NOT BE BOUGHT FROM. The window
+   category went live on 5 August with reviews, specifications and a
+   "Buy" heading on every page, and no destination, no redirect key and
+   no offer behind any of them. Checked on botplanet.io the same day:
+   every window review returns 200, shows a Buy section, and contains
+   zero prices and zero /go/ links. The pool review beside it carries
+   both. A third of the published site was ranking and could not earn.
+
+   The ASINs were not missing either. They had been researched on
+   5 August and written up in docs/seo/window-cleaning-robots-asins.md,
+   including the sibling traps — and never wired to anything.
+
+   IDENTITY IS MACHINE-READ, not inherited from that document. All
+   eleven listings were read on 6 August 2026 by
+   scripts/amazon-identity-check.mjs: title, Brand, Item model number,
+   the availability block, and the ASIN Amazon actually served against
+   the ASIN requested. That last check is what protects the Mamibot,
+   which ships as a three-colour variant family.
+
+   exactModel IS WRITTEN OUT HERE rather than read from VERIFICATIONS.
+   The verification ledger is pool-only, so model() would have returned
+   the productId string as the "exact model" for all eleven — a lookup
+   that silently degrades is worse than one that is absent, so these
+   name themselves.
+   ================================================================== */
+interface WindowDestination {
+  productId: string;
+  asin: string;
+  exactModel: string;
+  /**
+   * What the listing's own fields said, verbatim, on the day it was read.
+   *
+   * This is copied into IDENTITY_CHECKS below rather than living only on the
+   * destination. The distinction matters: offers.test.ts asserts that anything
+   * claiming `verified_exact` has an IDENTITY_CHECK naming a field somebody
+   * actually read. Evidence that sits only in a destination's notes satisfies
+   * nobody's guard, which is how you end up with eleven confident-looking
+   * records that no test has ever examined.
+   */
+  evidence: string;
+}
+
+const WINDOW_CHECK_DATE = "2026-08-06";
+
+const WINDOW_ASINS: WindowDestination[] = [
+  {
+    productId: "prod-ecovacs-winbot-w2-pro-omni",
+    asin: "B0DR8Y4VF9",
+    exactModel: "ECOVACS WINBOT W2 PRO Omni",
+    evidence:
+      "Brand 'ECOVACS', Item model number 'W2MP', availability block reads 'In Stock'. Title: 'ECOVACS WINBOT W2 PRO Omni Portable Window Cleaning Robot with Multi-Functional Station, Charging While Working, Intelligent Cleaning with Triple Nozzle Water Sprayer, 12-Level Protection'. The title names the Omni in full, which is what separates it from the plain W2 PRO below — the two are different machines at different prices and this pair is the category's most likely confusion.",
+  },
+  {
+    productId: "prod-ecovacs-winbot-w2-pro",
+    asin: "B0DSKC7QT7",
+    exactModel: "ECOVACS WINBOT W2 PRO",
+    evidence:
+      "Title: 'ECOVACS WINBOT W2 PRO Window Cleaning Robot, 3 Nozzles Water Sprayer, 10-Level Protection, Win-SLAM 4.0 Path Planning, Steady-Climbing, Edge Detection'. Brand 'ECOVACS'. No 'Omni' anywhere in the title or fields, and the Omni is denied explicitly, so this cannot be its sibling. Item model number is not published on this listing.",
+  },
+  {
+    productId: "prod-ecovacs-winbot-w3-omni",
+    asin: "B0GJDQ59J1",
+    exactModel: "ECOVACS WINBOT W3 Omni",
+    evidence:
+      "Brand 'ECOVACS', availability 'In Stock'. Title: 'ECOVACS WINBOT W3 Omni Robot Window Cleaner with Auto-Clean & Multi-Functional Station, Win-SLAM 5.0 Smart Navigation'. Win-SLAM 5.0 is the generation marker that separates the W3 from the W2 family, which ships 4.0.",
+  },
+  {
+    productId: "prod-ecovacs-winbot-w1-pro",
+    asin: "B0C2CQP8ZS",
+    exactModel: "ECOVACS WINBOT W1 PRO",
+    evidence:
+      "Brand 'ECOVACS'. Title: 'ECOVACS Winbot W1 Pro Window Cleaning Robot, Intelligent Cleaning with Dual Cross Water Spray Technology, Win SLAM 3.0 Path Planning, 2800Pa Suction'. Win SLAM 3.0 and 2800Pa are the W1 Pro's own figures and match no other machine in the range.",
+  },
+  {
+    productId: "prod-ecovacs-winbot-w2s",
+    asin: "B0G5Y3NHTX",
+    exactModel: "ECOVACS WINBOT W2S",
+    evidence:
+      "Brand 'ECOVACS', availability 'In Stock'. Title: 'ECOVACS WINBOT W2S Window Cleaning Robot, Intelligent Edge-to-Edge Cleaning with TruEdge Scrubbers, 3 Water Nozzles, 10-Level Safety System'. The W2S Omni (B0G5XYX1VH) is a different machine at a different price; 'omni' is a deny token here, so it refuses before 'w2s' can confirm.",
+  },
+  {
+    productId: "prod-ecovacs-winbot-mini",
+    asin: "B0DR8W696Y",
+    exactModel: "ECOVACS WINBOT Mini",
+    evidence:
+      "Brand 'ECOVACS', availability 'In Stock'. Title: 'ECOVACS WINBOT Mini Window Cleaning Robot - Compact Design, Dual Nozzles with Ultrasonic Spray, 9-Stage Protection System'. The Mini2 (B0GJDHYRLR) is denied by its own token, which matters because 'mini' is a whole-token substring of 'mini2' in the other direction.",
+  },
+  {
+    productId: "prod-hobot-2s",
+    asin: "B097CM7P9L",
+    exactModel: "HOBOT-2S",
+    evidence:
+      "Sold by 'Home Robot LLC', availability 'In Stock'. Title: 'HOBOT-2S Window Cleaning Automatic Robot with Ultrasonic Water Spray, Intelligent Cleaning, AI Smart Route Plan, Dual Replaceable Water Tanks'. The hyphenated 'HOBOT-2S' is the manufacturer's own model style and distinguishes it from the 298, 288, 388 and 268, all of which are denied.",
+  },
+  {
+    productId: "prod-hobot-298",
+    asin: "B07LF4HZ6C",
+    exactModel: "HOBOT-298",
+    evidence:
+      "Brand 'HOBOT', sold by 'Home Robot LLC', availability 'In Stock'. Title: 'HOBOT-298 Window Cleaning Automatic Robot with Ultrasonic Water Spray, Intelligent Cleaning, AI Smart Route Plan, Replaceable Water Tank'. Single water tank against the 2S's dual, which is the visible difference between the two.",
+  },
+  {
+    productId: "prod-cop-rose-x5s",
+    asin: "B09D98W5KQ",
+    exactModel: "Cop Rose X5S",
+    evidence:
+      "Brand 'Cop Rose'. Title: 'Cop Rose X5S Window Cleaner Robot Smart Robotic Window Cleaner with Auto Water Spray Vacuum Robotic Robot by Remote Controller Washer for High Windows'. Brand field and title agree on X5S.",
+  },
+  {
+    productId: "prod-mamibot-w120-dp",
+    asin: "B0DC6B81Z2",
+    exactModel: "Mamibot W120-DP (Blue)",
+    evidence:
+      "Brand 'Mamibot', sold by 'Mamibot store', availability 'In Stock'. Title: 'Mamibot W120-DP Window Cleaning Robot, 7000Pa Strong Suction, 10 Cleaning Modes, 4-Spray Water Jet, Smart Edge Detection, App & Remote Control'. THIS IS A VARIANT FAMILY — Orange B0DC67MQ46 and Grey B0DC67QH41 are the same model in other colours — so the check that matters is that Amazon served B0DC6B81Z2 when B0DC6B81Z2 was requested. It did. The W120-T is a different machine the owner found unbuyable on 5 August and it is denied by name.",
+  },
+  {
+    productId: "prod-hutt-s55-pro",
+    asin: "B0GFW8TFML",
+    exactModel: "HUTT S55 Pro",
+    evidence:
+      "Brand 'HUTT', sold by 'HUTT US Store', availability 'In Stock'. Title: 'HUTT S55 Pro Window Cleaning Robot, 3D Floating Pads, Up to 6500Pa Suction, HydroJet Pump Spray, SLAM 4.0 Navigation, 80ml Water Tank, 6 x Cloths'. The model name INCLUDES 'Pro'. 's55' is deliberately NOT a deny token — it is a whole-token substring of this machine's own name, and denying it is the mistake that made the Aiper X1 Pro Max refuse itself for a day. The W55 (B0CJ4RZZNY), DDC55 and A1 are denied instead.",
+  },
+];
+
+/**
+ * The window identity checks, DERIVED from WINDOW_ASINS rather than typed out
+ * a second time.
+ *
+ * The pool entries above are hand-written because each was read on a different
+ * day by a different route — some machine-read, some owner-confirmed, two
+ * retired and kept. These eleven were all read in one pass by one script on one
+ * day, so writing them twice would only create somewhere for the two copies to
+ * drift apart.
+ */
+for (const w of WINDOW_ASINS) {
+  IDENTITY_CHECKS[w.productId] = {
+    asin: w.asin,
+    confirmed: true,
+    evidence: w.evidence,
+    checkedOn: WINDOW_CHECK_DATE,
+  };
+}
+
 export const DESTINATIONS: ProductDestination[] = [
+  ...WINDOW_ASINS.map(
+    ({ productId, asin, exactModel, evidence }): ProductDestination => ({
+      productId,
+      retailerId: "ret-amazon",
+      market: "us",
+      retailerProductId: asin,
+      identifierKind: "asin",
+      exactModel,
+      destinationUrl: `https://www.amazon.com/dp/${asin}`,
+      /* verified_exact on a machine read of the listing's own fields, which is
+         the same bar the pool destinations clear. NO PRICE IS CLAIMED HERE and
+         none was taken from the read: the buy-box block is absent from the
+         markup Amazon serves a non-browser client, so the dollar figures that
+         ARE present belong to other sellers, variants and comparison widgets.
+         One of these listings read $15.99, which is an accessory rather than a
+         window robot — proof the caution is warranted rather than theoretical.
+         Price comes from the refresh service, with the date it was read. */
+      confidence: "verified_exact" as const,
+      sourceReference: `ASIN from docs/seo/window-cleaning-robots-asins.md (captured 2026-08-05), identity machine-read by scripts/amazon-identity-check.mjs on ${WINDOW_CHECK_DATE}: https://www.amazon.com/dp/${asin}`,
+      sourceCheckedDate: WINDOW_CHECK_DATE,
+      sellerIdentity: null,
+      sellerModel: "unknown",
+      notes: evidence,
+    }),
+  ),
+  /* eslint-disable-next-line -- pool destinations follow */
   ...AMAZON_ASINS.map(
     ({ productId, asin, sourceUrl }): ProductDestination => ({
       productId,
@@ -324,6 +496,24 @@ export const REDIRECT_KEYS: Record<string, string> = {
   "prod-dolphin-proteus-dx4-plus": "pool-dolphin-proteus-dx4plus-amazon",
   "prod-polaris-freedom": "pool-polaris-freedom-amazon",
   "prod-wybot-c1": "pool-wybot-c1-amazon",
+
+  /* WINDOW, 6 August 2026. These eleven follow the `window-<model>-amazon`
+     pattern rather than being copied out of D1, because unlike the pool keys
+     they have never existed in D1 — they are created with the seed rows in
+     packages/db/seed/window/commercial.ts in this same change. The pool keys
+     above are recorded rather than derived precisely because they predate this
+     convention and do not follow it. */
+  "prod-ecovacs-winbot-w2-pro-omni": "window-winbot-w2-pro-omni-amazon",
+  "prod-ecovacs-winbot-w2-pro": "window-winbot-w2-pro-amazon",
+  "prod-ecovacs-winbot-w3-omni": "window-winbot-w3-omni-amazon",
+  "prod-ecovacs-winbot-w1-pro": "window-winbot-w1-pro-amazon",
+  "prod-ecovacs-winbot-w2s": "window-winbot-w2s-amazon",
+  "prod-ecovacs-winbot-mini": "window-winbot-mini-amazon",
+  "prod-hobot-2s": "window-hobot-2s-amazon",
+  "prod-hobot-298": "window-hobot-298-amazon",
+  "prod-cop-rose-x5s": "window-cop-rose-x5s-amazon",
+  "prod-mamibot-w120-dp": "window-mamibot-w120dp-amazon",
+  "prod-hutt-s55-pro": "window-hutt-s55-pro-amazon",
 };
 
 /* ------------------------------------------------------------------ */
