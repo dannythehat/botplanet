@@ -963,6 +963,74 @@ export const EDITORIAL: Record<string, EditorialContent> = {
     ],
     lastReviewed: "2026-08-07",
   },
+
+  /* ------------------------------------------------------------------
+     Page 9 of the window map, and the last of it. Three query families
+     merged into one page — "do window cleaning robots work" (90), "how
+     do..." (40) and "are... worth it" (30) — because there is one intent
+     behind all three: somebody who has seen these advertised and does
+     not believe them yet.
+
+     NO PICKS, AND FOR THE POOL GUIDE'S REASON RATHER THAN THE LAWN
+     GUIDES'. There are eleven machines in this catalogue and they are
+     ranked on the best-of. A guide that also named a winner would split
+     one argument across two URLs competing for one result.
+
+     THE ANSWER HAS TO CONTAIN A REAL NO. The SERP is Reddit and forums:
+     people asking each other whether these are a gimmick. A page that
+     answers "yes, absolutely!" loses to a thread where somebody says
+     the edges are rubbish — because the edges ARE rubbish, and that is
+     the finding this page leads with.
+     ------------------------------------------------------------------ */
+  "/guides/do-window-cleaning-robots-work/": {
+    path: "/guides/do-window-cleaning-robots-work/",
+    categorySlug: "window-cleaning-robots",
+    eyebrow: "Guide",
+    title: "Do window cleaning robots work?",
+    seoTitle: "Do Window Cleaning Robots Work? The Honest Answer",
+    metaDescription:
+      "Yes in the middle of the pane, and no at the edges. How they hold on, what stops them falling, " +
+      "and the four situations where we would tell you not to buy one at all.",
+    standfirst:
+      "Yes in the middle of the pane, no at the edges — and that one sentence is the whole honest review of this category. " +
+      "Whether it is worth it comes down to how much glass you own.",
+    prose: "do-window-cleaning-robots-work",
+    picks: [],
+    comparisonSlugs: [],
+    faq: [
+      {
+        q: "How do window cleaning robots work?",
+        a:
+          "A fan pulls air out from underneath the machine, which lowers the pressure inside and lets the atmosphere press it against the glass. It is suction, not magnetism or adhesive. Two pads underneath do the cleaning, wet by a fine spray, while the machine drives itself over the pane in a pattern.",
+      },
+      {
+        q: "Are window cleaning robots worth it?",
+        a:
+          "For a house with a lot of glass, yes — but not because the finish is better. It is that the windows get cleaned at all. Glass done often at ninety per cent looks considerably better than glass done perfectly twice a year. For a flat with four windows, buy a squeegee: the setup takes longer than the job.",
+      },
+      {
+        q: "Do they leave streaks?",
+        a:
+          "In direct sun, yes, because the spray dries before the pad reaches it — the same reason you are told not to wash a car in sunlight. Clean on an overcast day or out of direct light and most complaints about streaking go away. What does not go away is the last centimetre against the frame.",
+      },
+      {
+        q: "Will it fall off my window?",
+        a:
+          "It should not, and two systems exist so it does not. An internal battery keeps the fan turning after a power cut — the number to compare is how many minutes it holds, and many makers do not publish it. The second is a physical safety rope, which ships with every machine and should be anchored on every window above the ground floor, every time.",
+      },
+      {
+        q: "Can they clean the outside of upstairs windows?",
+        a:
+          "Only if the window opens inwards far enough for you to place the machine on the outer face and attach the rope. These clean one side at a time. Nothing we hold does both faces at once, and no magnetic robot that would is currently sold in the US — a genuine gap in the market rather than in our catalogue.",
+      },
+      {
+        q: "Do they work on frameless glass?",
+        a:
+          "Most of the machines we hold do, and some do not. A robot that navigates by feeling for a frame will drive off the edge of a pane that has none, so where a maker does not claim frameless glass explicitly, treat the silence as the answer rather than an oversight.",
+      },
+    ],
+    lastReviewed: "2026-08-07",
+  },
 };
 
 export function editorialFor(path: string | undefined): EditorialContent | undefined {
