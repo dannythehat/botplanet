@@ -497,23 +497,34 @@ export const REDIRECT_KEYS: Record<string, string> = {
   "prod-polaris-freedom": "pool-polaris-freedom-amazon",
   "prod-wybot-c1": "pool-wybot-c1-amazon",
 
-  /* WINDOW, 6 August 2026. These eleven follow the `window-<model>-amazon`
-     pattern rather than being copied out of D1, because unlike the pool keys
-     they have never existed in D1 — they are created with the seed rows in
-     packages/db/seed/window/commercial.ts in this same change. The pool keys
-     above are recorded rather than derived precisely because they predate this
-     convention and do not follow it. */
-  "prod-ecovacs-winbot-w2-pro-omni": "window-winbot-w2-pro-omni-amazon",
-  "prod-ecovacs-winbot-w2-pro": "window-winbot-w2-pro-amazon",
-  "prod-ecovacs-winbot-w3-omni": "window-winbot-w3-omni-amazon",
-  "prod-ecovacs-winbot-w1-pro": "window-winbot-w1-pro-amazon",
-  "prod-ecovacs-winbot-w2s": "window-winbot-w2s-amazon",
-  "prod-ecovacs-winbot-mini": "window-winbot-mini-amazon",
-  "prod-hobot-2s": "window-hobot-2s-amazon",
-  "prod-hobot-298": "window-hobot-298-amazon",
-  "prod-cop-rose-x5s": "window-cop-rose-x5s-amazon",
-  "prod-mamibot-w120-dp": "window-mamibot-w120dp-amazon",
-  "prod-hutt-s55-pro": "window-hutt-s55-pro-amazon",
+  /* WINDOW. READ OUT OF PRODUCTION D1 ON 6 AUGUST 2026, NOT DERIVED.
+     
+     These were briefly written as `window-winbot-w2-pro-omni-amazon` and so
+     on, invented to a tidy pattern on the assumption that no window rows
+     existed yet. They did. All eleven offers and all eleven redirect links
+     have been in D1 since 5 August, active and wired to ap-amazon-us — the
+     buy buttons were missing because buildOffers could not see the products,
+     not because the commercial rows were absent.
+     
+     The real keys are `win-`, abbreviate the model (`w2proomni`, `w120dp`,
+     `s55pro`) and are not reconstructible from any slug. Shipping the derived
+     ones would have put eleven buy buttons on a 404 — the exact failure the
+     note above this map records for the pool keys, repeated on a category
+     twice the size. The lesson did not transfer because it was written as
+     prose about pool rather than as a rule about keys.
+     
+     A key is a fact about D1. It is read from D1 or it is wrong. */
+  "prod-ecovacs-winbot-w2-pro-omni": "win-ecovacs-w2proomni-amazon",
+  "prod-ecovacs-winbot-w2-pro": "win-ecovacs-w2pro-amazon",
+  "prod-ecovacs-winbot-w3-omni": "win-ecovacs-w3omni-amazon",
+  "prod-ecovacs-winbot-w1-pro": "win-ecovacs-w1pro-amazon",
+  "prod-ecovacs-winbot-w2s": "win-ecovacs-w2s-amazon",
+  "prod-ecovacs-winbot-mini": "win-ecovacs-mini-amazon",
+  "prod-hobot-2s": "win-hobot-2s-amazon",
+  "prod-hobot-298": "win-hobot-298-amazon",
+  "prod-cop-rose-x5s": "win-coprose-x5s-amazon",
+  "prod-mamibot-w120-dp": "win-mamibot-w120dp-amazon",
+  "prod-hutt-s55-pro": "win-hutt-s55pro-amazon",
 };
 
 /* ------------------------------------------------------------------ */

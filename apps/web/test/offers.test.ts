@@ -1391,11 +1391,17 @@ describe("scheduled refresh — wiring", () => {
     for (const id of WINDOW) {
       const o = OFFERS.find((x) => x.productId === id);
       expect(o, `${id} has no offer`).toBeDefined();
-      expect(o!.redirectKey).toMatch(/^window-[a-z0-9-]+-amazon$/);
+      /* `win-`, not `window-`. The keys are read out of D1 and abbreviate the
+         model; a derived key 404s. Checked against production 6 August 2026. */
+      expect(o!.redirectKey).toMatch(/^win-[a-z0-9-]+-amazon$/);
       // Identity was machine-read before any of these was accepted.
       expect(o!.destination.confidence).toBe("verified_exact");
-      // ...and reading identity is not reading a price. None is claimed.
-      expect(o!.basePriceMinor).toBeNull();
+      /* Identity is not price. D1 holds 5 August research ESTIMATES for ten
+         of these — round numbers like 49900 — stored as snapshot/indicative so
+         the freshness gate can never publish them. Assert the gate, not the
+         column: the number may exist, and it must never reach a reader until
+         the refresh service reads a real one. */
+      expect(publicationFor(o!).priceShowable).toBe(false);
     }
   });
 

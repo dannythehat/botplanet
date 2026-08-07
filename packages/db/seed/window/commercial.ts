@@ -1,70 +1,74 @@
 /**
- * Window-category commercial seed.
+ * Window-category commercial seed — A MIRROR OF PRODUCTION D1, NOT A PROPOSAL.
  *
- * WHY THIS FILE EXISTS. Eleven window reviews went live on 5 August 2026 with
- * a "Buy" heading on every page and nothing behind it: no destination, no
- * redirect key, no offer. Checked on botplanet.io — every window review
- * returns 200, shows a Buy section, and contains zero prices and zero /go/
- * links, while the pool review beside it carries both. This file is one of the
- * four things that had to exist for a reader to be able to buy.
+ * READ THIS BEFORE EDITING. Every row below already exists in the production
+ * database and has since 5 August 2026. This file was written on 6 August as
+ * new data to load, which was wrong twice over: the offers were already there,
+ * and the redirect keys invented for them (`window-winbot-w2-pro-omni-amazon`
+ * and friends) do not match the real ones (`win-ecovacs-w2proomni-amazon`).
+ * Loading it would have created eleven duplicate offers for the same eleven
+ * products and pointed every buy button at a key that answers 404.
  *
- * A redirect key with no row behind it is a 404 on the buy button, which is
- * the single most damaging failure on this site — the reader trusts the page,
- * clicks, and lands on nothing. offers.test.ts reads this file as TEXT and
- * fails if any REDIRECT_KEYS entry has no matching `redirectKey:` here, so the
- * two cannot drift apart.
+ * The rows here were read back out of D1 on 6 August 2026 and transcribed
+ * verbatim. Its job is to be a faithful FALLBACK if D1 is unavailable, and to
+ * give offers.test.ts a text to check the redirect keys against — the test
+ * that exists because a buy button pointing at a key with no row behind it is
+ * the most damaging failure this site can ship.
  *
- * Same rules as the pool seed:
- *  - NO affiliate destination URLs and NO tracking parameters are stored here.
- *  - Commission lives at PROGRAMME level and is private.
- *  - Every price is a dated SNAPSHOT, never live truth.
+ * WHY THE WINDOW REVIEWS SHOWED NO BUY BUTTON, since it was never this file:
+ * `buildOffers()` iterated the pool-era editorial map, which contains no window
+ * product, so the engine produced no offer for any of them however complete
+ * the database was. Fixed in lib/offer-truth.ts by reading the catalogue.
  *
- * ON THE PRICES BELOW, WHICH ARE DELIBERATELY ABSENT. The pool seed carries a
- * figure per offer from its research pass. These carry null, and that is not
- * laziness. The identity read of 6 August could see each listing's Brand,
- * model number and title, but Amazon omits the buy-box block (`priceToPay`)
- * from the markup it serves a non-browser client — so the dollar figures that
- * ARE in the page belong to other sellers, variants and comparison widgets.
- * One of these eleven read $15.99, which is an accessory rather than a window
- * robot. Publishing that would have been worse than publishing nothing.
+ * WHY THEY SHOW NO PRICE, which is correct and unchanged: the figures below are
+ * `snapshot` / `indicative` research estimates from 5 August — round numbers
+ * like 49900 and 16000, not observed transactions. The freshness gate refuses
+ * to publish a snapshot as a current price, which is the whole point of it. A
+ * real price arrives from the refresh service with the date it was read. The
+ * buy button does not wait for one.
  *
- * A price appears when the refresh service reads one, with the date it was
- * read beside it. The buy button does not wait for it: a working link to the
- * right product earns; a price is a courtesy to the reader.
+ * Standing rules, unchanged: no affiliate destination URLs and no tracking
+ * parameters in the seed; commission lives at programme level and is private.
  */
 import type { offers, redirectLinks } from "../../src/schema/commercial.js";
 
 const USD = "USD";
 
 interface WindowOfferSeed {
+  /** D1 `offers.id`, verbatim. */
   id: string;
   productId: string;
   /** ASIN, identity-confirmed 2026-08-06 — see commerce/destinations.ts. */
   asin: string;
+  /** D1 `offers.redirect_key`, verbatim. NEVER derive this. */
   redirectKey: string;
+  /**
+   * Research estimate in minor units, as stored. Null where the 5 August pass
+   * could not establish one. These never reach a reader: `snapshot` +
+   * `indicative` cannot pass the freshness gate.
+   */
+  snapshotMinor: number | null;
 }
 
-/**
- * One Amazon US offer per window product. Amazon only: the window category has
- * no other approved retailer, and an offer for an unapproved seller is exactly
- * what the offer engine refuses to construct.
- */
 const offerSeeds: WindowOfferSeed[] = [
-  { id: "off-winbot-w2-pro-omni-amazon", productId: "prod-ecovacs-winbot-w2-pro-omni", asin: "B0DR8Y4VF9", redirectKey: "window-winbot-w2-pro-omni-amazon" },
-  { id: "off-winbot-w2-pro-amazon", productId: "prod-ecovacs-winbot-w2-pro", asin: "B0DSKC7QT7", redirectKey: "window-winbot-w2-pro-amazon" },
-  { id: "off-winbot-w3-omni-amazon", productId: "prod-ecovacs-winbot-w3-omni", asin: "B0GJDQ59J1", redirectKey: "window-winbot-w3-omni-amazon" },
-  { id: "off-winbot-w1-pro-amazon", productId: "prod-ecovacs-winbot-w1-pro", asin: "B0C2CQP8ZS", redirectKey: "window-winbot-w1-pro-amazon" },
-  { id: "off-winbot-w2s-amazon", productId: "prod-ecovacs-winbot-w2s", asin: "B0G5Y3NHTX", redirectKey: "window-winbot-w2s-amazon" },
-  { id: "off-winbot-mini-amazon", productId: "prod-ecovacs-winbot-mini", asin: "B0DR8W696Y", redirectKey: "window-winbot-mini-amazon" },
-  { id: "off-hobot-2s-amazon", productId: "prod-hobot-2s", asin: "B097CM7P9L", redirectKey: "window-hobot-2s-amazon" },
-  { id: "off-hobot-298-amazon", productId: "prod-hobot-298", asin: "B07LF4HZ6C", redirectKey: "window-hobot-298-amazon" },
-  { id: "off-cop-rose-x5s-amazon", productId: "prod-cop-rose-x5s", asin: "B09D98W5KQ", redirectKey: "window-cop-rose-x5s-amazon" },
+  { id: "off-winbot-w2proomni-amazon", productId: "prod-ecovacs-winbot-w2-pro-omni", asin: "B0DR8Y4VF9", redirectKey: "win-ecovacs-w2proomni-amazon", snapshotMinor: 49900 },
+  { id: "off-winbot-w2pro-amazon", productId: "prod-ecovacs-winbot-w2-pro", asin: "B0DSKC7QT7", redirectKey: "win-ecovacs-w2pro-amazon", snapshotMinor: 38000 },
+  { id: "off-winbot-w3omni-amazon", productId: "prod-ecovacs-winbot-w3-omni", asin: "B0GJDQ59J1", redirectKey: "win-ecovacs-w3omni-amazon", snapshotMinor: 55000 },
+  { id: "off-winbot-w1pro-amazon", productId: "prod-ecovacs-winbot-w1-pro", asin: "B0C2CQP8ZS", redirectKey: "win-ecovacs-w1pro-amazon", snapshotMinor: 18500 },
+  { id: "off-winbot-w2s-amazon", productId: "prod-ecovacs-winbot-w2s", asin: "B0G5Y3NHTX", redirectKey: "win-ecovacs-w2s-amazon", snapshotMinor: 33000 },
+  { id: "off-winbot-mini-amazon", productId: "prod-ecovacs-winbot-mini", asin: "B0DR8W696Y", redirectKey: "win-ecovacs-mini-amazon", snapshotMinor: 15000 },
+  { id: "off-hobot-2s-amazon", productId: "prod-hobot-2s", asin: "B097CM7P9L", redirectKey: "win-hobot-2s-amazon", snapshotMinor: 29900 },
+  { id: "off-hobot-298-amazon", productId: "prod-hobot-298", asin: "B07LF4HZ6C", redirectKey: "win-hobot-298-amazon", snapshotMinor: 25000 },
+  { id: "off-coprose-x5s-amazon", productId: "prod-cop-rose-x5s", asin: "B09D98W5KQ", redirectKey: "win-coprose-x5s-amazon", snapshotMinor: 16000 },
   /* Blue only. Orange B0DC67MQ46 and Grey B0DC67QH41 are the same model in
      other colours and must never be substituted — a request for one ASIN in a
-     variant family can be answered with a sibling's data, which is exactly
-     what the ASIN-equality check in the refresh service exists to catch. */
-  { id: "off-mamibot-w120dp-amazon", productId: "prod-mamibot-w120-dp", asin: "B0DC6B81Z2", redirectKey: "window-mamibot-w120dp-amazon" },
-  { id: "off-hutt-s55-pro-amazon", productId: "prod-hutt-s55-pro", asin: "B0GFW8TFML", redirectKey: "window-hutt-s55-pro-amazon" },
+     variant family can be answered with a sibling's data, which is what the
+     ASIN-equality check in the refresh service exists to catch. */
+  { id: "off-mamibot-w120dp-amazon", productId: "prod-mamibot-w120-dp", asin: "B0DC6B81Z2", redirectKey: "win-mamibot-w120dp-amazon", snapshotMinor: 22900 },
+  /* Null in D1 and null here. The 5 August pass recorded this one as TBC and
+     nothing has replaced it — an estimate invented now to fill the column
+     would be the only fabricated number in the file. */
+  { id: "off-hutt-s55pro-amazon", productId: "prod-hutt-s55-pro", asin: "B0GFW8TFML", redirectKey: "win-hutt-s55pro-amazon", snapshotMinor: null },
 ];
 
 export const offerRows: (typeof offers.$inferInsert)[] = offerSeeds.map((o) => ({
@@ -74,19 +78,18 @@ export const offerRows: (typeof offers.$inferInsert)[] = offerSeeds.map((o) => (
   marketId: "us",
   affiliateProgramId: "ap-amazon-us",
   currencyCode: USD,
-  // Null, on purpose. See the note at the top of this file.
-  basePriceMinor: null,
+  basePriceMinor: o.snapshotMinor,
   deliveryPriceMinor: null,
   totalLandedMinor: null,
   stockStatus: "unknown",
   deliveryMinDays: null,
   deliveryMaxDays: null,
-  // ECOVACS publishes no warranty term on any WINBOT page we read, and that
-  // gap runs across the whole range. Claiming one here would invent it.
+  /* ECOVACS publishes no warranty term on any WINBOT page we read, and that
+     gap runs across the whole range rather than one model. Null, as in D1. */
   warrantySummary: null,
   returnsUrl: null,
   redirectKey: o.redirectKey,
-  affiliateDestinationUrl: null, // never stored in seed
+  affiliateDestinationUrl: null,
   commissionValueBp: null,
   source: "manual",
   freshnessClass: "indicative",
@@ -99,6 +102,6 @@ export const offerRows: (typeof offers.$inferInsert)[] = offerSeeds.map((o) => (
 export const redirectLinkRows: (typeof redirectLinks.$inferInsert)[] = offerSeeds.map((o) => ({
   key: o.redirectKey,
   offerId: o.id,
-  // Amazon Associates US is the one approved programme, so these go live.
+  // All eleven are active in D1.
   active: true,
 }));
