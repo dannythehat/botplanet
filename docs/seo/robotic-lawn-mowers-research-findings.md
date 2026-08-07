@@ -619,3 +619,74 @@ The SERP also carries an **AI overview**, `discussions_and_forums` and
 Facebook threads rank in the top 18. Google is treating acreage as a question
 people argue about rather than one a buying guide settles, which is a second,
 independent reason not to give it a commercial page.
+
+---
+
+## Stage 4 amendment — 7 August 2026: 17 reviews cut to 10
+
+**The proposed 17 had the same fault the window category shipped with, and it
+was caught before anything was built rather than after.**
+
+Six of the seventeen were near-identical siblings inside one range, separated
+by mowing area and nothing else:
+
+| Pair | What actually differs |
+|---|---|
+| Husqvarna Automower 430X / 415X | area |
+| Segway Navimow i110N / i105N | area |
+| Segway Navimow X430 / X330 | area |
+| Eufy E18 / E15 | area |
+| ECOVACS GOAT O1000 / A2000 | area |
+| Mammotion LUBA 2 AWD / LUBA 3 | consecutive generations |
+
+Four Navimow pages and three Automower pages is a manufacturer's catalogue,
+not a comparison site. It is also the exact failure the window build made — six
+WINBOTs where the plan allowed three — which cost a merge, three redirects and
+a wasted set of artwork on 7 August. The owner's instruction is explicit: no
+duplicates, no different versions of the same thing.
+
+### The ruling: one machine per PROPOSITION, not per model number
+
+Selection is by what the hub itself says decides this category — boundary wire
+versus wire-free, then navigation type, then area — rather than by SKU.
+
+| # | Product | Vol/mo | The proposition it answers |
+|---|---|---|---|
+| 1 | Husqvarna Automower 430X | 14,800 | Wire · large yard · premium |
+| 2 | Mammotion LUBA 2 AWD | ~4,500 | Wire-free RTK · AWD · steep slopes |
+| 3 | Mammotion YUKA | 720 | Wire-free RTK · collects clippings |
+| 4 | Husqvarna Automower 115H | 590 | Wire · small yard · budget |
+| 5 | Eufy E18 | 590 | Wire-free · mid yard · cheapest wire-free |
+| 6 | Segway Navimow i110N | 480 | Wire-free RTK · quarter acre |
+| 7 | Segway Navimow X430 | 480 | Wire-free RTK **+ vision** · 1.2 acre |
+| 8 | Worx Landroid Vision | 260 | **Camera only** — no RTK, no wire |
+| 9 | Greenworks Optimow | 260 | Wire · mid yard · second wired brand |
+| 10 | ECOVACS GOAT O1000 | 210 | **LiDAR + vision** — the only one |
+
+**Ten reviews, seven brands, maximum two per brand** (was four). Navigation
+spread: 3 wired, 4 RTK, 1 RTK+vision, 1 camera-only, 1 LiDAR — every branch of
+the hub's own decision tree has exactly one machine behind it, which is also
+what BotMatch needs to score against.
+
+**LUBA 3 is folded into the LUBA 2 review** rather than dropped, the way the
+W3 Omni folded into the W2 PRO Omni. It is 1,600/mo and a real question — is
+the newer generation worth it — but it is a section, not a page. The combined
+figure above reflects both.
+
+**EcoFlow Blade (320) is dropped, not merged.** Its differentiator is a lawn
+sweeper, which the YUKA already answers at more than twice the volume. Two
+pages for one proposition is the thing this amendment exists to prevent.
+
+**Any of the six can return** if a measured SERP shows its own result set. The
+cut is on duplication, not on quality, and nothing here says these are bad
+machines.
+
+### Still blocking: none of the ten is confirmed buyable
+
+Stage 4 requires a live Amazon US ASIN per product before any becomes a page.
+Automated discovery on 7 August was rate-limited by Amazon after roughly twenty
+searches — it answered with a 2.3 KB page carrying no results, which the first
+run wrongly reported as "no listings" for all seventeen. `scripts/amazon-
+discover.mjs` now retries and treats a short body as a throttle rather than an
+empty shelf. **Husqvarna remains the known risk**: it sells heavily through
+dealers and Lowe's, and it carries the largest cluster in the category.
