@@ -690,3 +690,42 @@ run wrongly reported as "no listings" for all seventeen. `scripts/amazon-
 discover.mjs` now retries and treats a short body as a throttle rather than an
 empty shelf. **Husqvarna remains the known risk**: it sells heavily through
 dealers and Lowe's, and it carries the largest cluster in the category.
+
+### Stage 4 discovery run, 7 August 2026 — candidates only, none verified
+
+Twelve of seventeen returned a candidate ASIN. **Reading the titles shows at
+least four are the wrong machine**, which is the entire reason discovery and
+identity are separate steps on this site.
+
+| Product | ASIN | Listing says | Read |
+|---|---|---|---|
+| Husqvarna Automower 430X | B09WNF4V5G | "Automower 430X … GPS Assisted Navigation" | **plausible** |
+| Mammotion LUBA 2 AWD | B0DWRKVXD7 | "LUBA 2 AWD 5000HX … 1.25 Acres" | plausible, but 5000HX is one of three capacity variants |
+| Mammotion LUBA 3 | B0GKNQKJJQ | "LUBA 3 AWD 3000H, 0.75 Acre" | plausible |
+| Segway Navimow i110N | B0CX7T6BR3 | "Navimow i110N … 1/4 Acre RTK+Vision" | **plausible** |
+| Segway Navimow X430 | B0G8Y8CNH7 | "Navimow X430 … 1 Acre, 4WD, 84% Slopes" | **plausible** |
+| Worx Landroid Vision | B0GN8KK8XW | "… WR320 \| Landroid Vision Cloud" | plausible — WR320 is the Vision's SKU |
+| ECOVACS GOAT O1000 | B0GJ4F8MLF | "Goat O1000 **LiDAR PRO**" | variant, not the base O1000 |
+| ECOVACS GOAT A2000 | B0GGZQTY2N | "Goat A2000 **LiDAR PRO**" | variant |
+| Eufy E15 | B0DRVYDXWX | "Robot Lawn Mower E15 … Pure Vision" | plausible |
+| **Mammotion YUKA** | B0DT39TB3R | "**YUKA mini 2** 1000H" | **WRONG — sibling model** |
+| **Segway Navimow i105N** | B0G814F6Z4 | "Navimow **i206 AWD** … New i105N" | **WRONG — i206 listing** |
+| **EcoFlow Blade** | B0DTVF4QGY | "**Husqvarna Automower 420iQ**" | **WRONG — different manufacturer** |
+
+**The EcoFlow Blade result is the instructive one.** The matcher required the
+token `blade`, which appears in almost every mower listing as a component. A
+generic word is not a model identifier, and the match returned a Husqvarna.
+Any target whose model name is an ordinary noun needs a brand token too.
+
+Five returned no match at all: **Eufy E18, Husqvarna Automower 115H,
+Greenworks Optimow, Husqvarna Automower 415X, Segway Navimow X330.** Four of
+those five searches returned an ECOVACS Goat listing as the top result, which
+is Amazon answering a query it has no good match for — not evidence the
+product is unavailable. It needs a hand check before anything is concluded.
+
+**Effect on the ten-product plan: three of the ten have no usable candidate**
+(YUKA wrong, 115H unmatched, Optimow unmatched) and one more (E18) unmatched
+with its sibling E15 found instead. Nothing is dropped on this evidence — a
+failed automated search is not a finding — but no lawn product may become a
+page until its ASIN is machine-read and its identity confirmed, exactly as the
+eleven window products were on 6 August.
