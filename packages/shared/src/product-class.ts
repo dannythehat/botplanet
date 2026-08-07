@@ -32,6 +32,40 @@ export const PRODUCT_CLASSES = [
   "suction_side", // suction-side cleaner
   "window_cleaner", // glass-climbing window robot — NOT a pool machine
   "lawn_mower", // robotic lawn mower — not a cleaner of anything
+  /* Companion robots and pet-camera robots are TWO classes, not one, and the
+     split is the whole reason they are two pages. The research of 6 August
+     2026 measured their SERPs sharing only Amazon, Reddit and YouTube — the
+     three domains that appear on nearly every query in the space — and no
+     publisher, manufacturer or retailer in common at all.
+
+     The class gate is what stops that ruling being undone quietly later. A
+     desk companion has no camera and cannot be recommended to somebody who
+     asked to watch their dog; a roaming pet camera has no personality and
+     must not win a "keep me company" recommendation because it happens to be
+     cheaper. */
+  "companion_robot", // robot pet or desk companion — company, not a chore
+  "pet_camera_robot", // roaming indoor camera on wheels — watching, not company
+  /* Self-cleaning litter boxes. A separate class from the pet-camera robots
+     above despite both being sold to cat owners: one sifts waste and never
+     moves, the other drives around and has no waste function at all. Nothing
+     in either catalogue should ever be able to win the other's
+     recommendation. */
+  "litter_box", // self-cleaning / automatic cat litter box
+  /* Grill-cleaning robots. A separate class from everything above for the
+     obvious reason and one less obvious one: it is the only machine BotPlanet
+     covers that works on a surface food touches, which is why its brush
+     material is a hard exclusion rather than a preference. */
+  "grill_cleaner", // robotic grill / BBQ grate cleaner
+  /* Robot vacuums. The largest category on the site and the last class added.
+     Kept distinct from window_cleaner and lawn_mower for the obvious reason,
+     and from grill_cleaner because a floor robot must never be offered to
+     somebody asking about a barbecue however similar "cleans a surface" looks
+     in a database column. */
+  "robot_vacuum", // floor vacuum, with or without a mop
+  /* Educational and coding robots. The last class of the locked ten, and the
+     only one bought to be outgrown: every other robot on this site is judged
+     on how well it does a job, this one on whether a child keeps using it. */
+  "educational_robot", // coding and STEM robot, kit or pre-built
 ] as const;
 
 export type ProductClass = (typeof PRODUCT_CLASSES)[number];
@@ -63,6 +97,57 @@ export const CLEANING_SURFACES = [
   "grass_flat", // ordinary level lawn — every mower does this
   "grass_slopes", // banks and inclines past a gentle grade
   "grass_zones", // separate lawns the machine reaches on its own
+  /* Companion robots. The list's name is wrong for these too — nothing here
+     cleans anything — but the column stores "things the customer can ask for
+     and the product either does or does not", which is exactly what these are.
+     Renaming the column across four categories is not worth the churn; saying
+     so plainly here is.
+     These four are genuinely separable. A Qoobo has companionship and no
+     conversation at all. An EMO converses and never leaves the desk. Miko
+     teaches. Treating them as one "is a companion" flag would let any of them
+     win any of the others' recommendations. */
+  "companionship", // presence and personality — the reason to own one
+  "conversation", // holds a spoken exchange, not just voice commands
+  "play_interaction", // responds physically — moves, plays, reacts to touch
+  "learning_content", // structured educational material, mostly for children
+  /* Pet-camera robots. Kept separate from the companion capabilities above so
+     the two classes cannot be described in each other's words. */
+  "remote_video", // live video you can watch from your phone
+  "two_way_audio", // talk to the room and hear it back
+  "treat_dispensing", // throws or drops treats on command
+  "roams_home", // drives itself around rather than sitting in one place
+  /* Self-cleaning litter boxes. Every machine in the category scoops — that is
+     the category — so scooping is not listed here: a capability every product
+     has cannot discriminate between them and would score identically for all.
+     These four genuinely differ machine to machine. */
+  "odor_sealing", // sealed waste drawer or carbon filtration, not just a lid
+  "health_monitoring", // logs weight and visit frequency — the vet-useful one
+  "multi_cat_capacity", // rated for more than one cat rather than merely tolerating it
+  "app_control", // phone app and notifications rather than a panel of buttons
+  /* Grill-cleaning robots. Scrubbing is the category, so it is not listed —
+     every machine here scrubs and a universal capability cannot discriminate.
+     These four do differ, and the first is the category's whole sales pitch. */
+  "bristle_free", // no loose wire bristles to end up in food
+  "hot_grill_safe", // rated to run on a warm grill, which is when grease shifts
+  "grease_removal", // shifts baked-on grease rather than only loose char
+  "timer_control", // set a duration and walk away rather than watching it
+  /* Robot vacuums. Vacuuming is the category, so it is not listed — every
+     machine here vacuums. These five are what actually separate a $200 machine
+     from a $1,500 one, and mop_lifting is the one that decides whether a
+     vacuum-mop is usable in a house with carpet at all. */
+  "mopping", // wet-mops as well as vacuums
+  "mop_lifting", // raises the pads over carpet instead of dragging them across it
+  "self_emptying", // empties itself into a base rather than a bin you empty
+  "obstacle_avoidance", // recognises and avoids cables, socks and worse
+  "multi_floor_mapping", // remembers more than one storey
+  /* Educational and coding robots. "Teaches coding" is the category, so it is
+     not listed — every machine here claims it. These four separate them, and
+     the first is the one that decides whether a five-year-old can use it
+     without a parent's tablet. */
+  "screen_free", // programmed by buttons or cards, no phone or tablet needed
+  "block_coding", // Scratch-style drag-and-drop, the usual middle step
+  "text_coding", // real Python or JavaScript, where it stops being a toy
+  "build_it_yourself", // assembled from parts rather than arriving finished
 ] as const;
 export type CleaningSurface = (typeof CLEANING_SURFACES)[number];
 
@@ -92,6 +177,58 @@ export const ENVIRONMENTS = [
   // for the same reason frameless glass is.
   "open_sky", // clear view overhead — satellite positioning works
   "tree_cover", // canopy or a tall building nearby — it does not
+  /* Pet-camera robots. The make-or-break here is stairs, and it is as absolute
+     as frameless glass or a tree canopy: every roaming pet camera on the US
+     market is a wheeled machine, and none of them climbs. In a house with
+     bedrooms upstairs the robot patrols whichever floor you leave it on and
+     nothing else — which is fine if you know it, and the most common
+     disappointment if you do not.
+
+     Companion robots do not use this axis. Nothing about a room rules out a
+     robot pet, so the companion scoring config turns the environment exclusion
+     off rather than inventing a distinction to fill the field. */
+  "single_storey", // one floor, or one floor you care about — a wheeled robot covers it
+  "multi_storey", // stairs between the rooms that matter — it does not
+  /* Self-cleaning litter boxes. The environment here is the CAT, not the room,
+     and it is the category's genuine hard exclusion — the one where getting it
+     wrong is a safety question rather than a disappointment.
+     These machines detect their occupant by weight and start a cycle once the
+     cat leaves. A kitten under the sensor's threshold may not register at all.
+     A large cat may register perfectly and still not physically fit the
+     chamber. Both are real, both rule specific machines out, and neither is
+     fixable with a setting — which is why the matcher asks about it second and
+     the scoring config excludes on it. */
+  "kitten", // under the weight a sensor reliably detects
+  "average_cat", // the size every machine in the category is designed around
+  "large_cat", // Maine Coon and up — chamber size, not sensor, is the limit
+  /* Grill-cleaning robots. The environment is the GRATE, and it is a genuine
+     hard exclusion rather than a fit preference: a steel or brass brush run
+     across porcelain-coated grates strips the coating, and once it is gone the
+     cast iron underneath rusts. That damage is permanent and it is done by
+     using the right machine with the wrong brush, so the matcher asks the
+     grate first and the config refuses on it. */
+  "porcelain_grates", // coated — nylon only, or the coating goes
+  "cast_iron_grates", // bare cast iron — takes a harder brush
+  "stainless_grates", // stainless steel bars
+  /* Robot vacuums. The environment is the FLOOR, and deep pile is the genuine
+     exclusion. A vacuum-mop whose pads do not lift will drag a wet pad across
+     carpet, and a machine without the clearance and torque for deep pile will
+     beach on it. Both are predictable before purchase and neither is fixable
+     with a setting, which is what makes this the right axis for the category's
+     one hard rule-out. */
+  "hard_floors", // wood, tile, laminate, vinyl
+  "low_pile_carpet", // ordinary fitted carpet and thin rugs
+  "deep_pile_carpet", // deep or shag pile — clearance, torque and wet pads all bite
+  /* Educational and coding robots. The environment is the CHILD'S AGE, and it
+     is a genuine hard exclusion in both directions — the only axis on the site
+     where being too capable is as disqualifying as being not capable enough.
+     A button-driven floor robot bores a twelve-year-old within a day. A VEX
+     kit defeats a five-year-old and gets abandoned. Neither is fixable, and an
+     abandoned robot is the category's actual failure mode rather than a bad
+     clean. */
+  "age_4_7", // pre-reading — screen-free, physical, no typing
+  "age_8_12", // block coding, some building
+  "age_13_plus", // text languages and real construction
 ] as const;
 export type Environment = (typeof ENVIRONMENTS)[number];
 

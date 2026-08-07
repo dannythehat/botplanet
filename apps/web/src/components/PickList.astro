@@ -1,0 +1,264 @@
+---
+/* ============================================================
+   BotPlanet — the ranked pick list.
+
+   The body of a best-of page. One plate per recommendation:
+   the award, the product, why it wins that award, and who
+   should not buy it.
+
+   THREE THINGS THIS COMPONENT REFUSES TO DO.
+
+   1. NO PRICE. There is no prop for one. A ranked list is read
+      months after it is written and a figure typed into it is
+      a figure nobody re-checked. Price lives on the review and
+      in the buy box, printed beside the date it was read.
+
+   2. NO SCORE. Awards are jobs, not marks out of ten. A number
+      implies the machines were measured against each other on
+      one axis, and they were not — a floor-only above-ground
+      robot and a 3,875 sq ft flagship are not competing.
+
+   3. NO PICK WITHOUT A RULE-OUT. `wrongFor` is required by the
+      type. An award with nobody it is wrong for is an advert,
+      and this component would rather fail to compile than
+      render one.
+
+   The rank number is presentational only: the order comes from
+   the content file, which declares it deliberately.
+   ============================================================ */
+
+import SectionHead from "./SectionHead.astro";
+import type { EditorialPick } from "../content/editorial";
+
+export interface RenderedPick extends EditorialPick {
+  /** Product display name, from the catalogue rather than retyped. */
+  name: string;
+  /** Canonical review URL. */
+  href: string;
+  /** Price band label from the catalogue, e.g. "Mid". Never a figure. */
+  band: string;
+  /** What it cleans, e.g. "Floor · Walls · Waterline". */
+  cleans: string;
+  /** "Cordless", "Corded", "Solar". */
+  power: string;
+  /** "Up to 50 ft", "Up to 1,615 sq ft", or the not-disclosed wording. */
+  poolSize: string;
+}
+
+interface Props {
+  id?: string;
+  eyebrow?: string;
+  title: string;
+  intro: string;
+  picks: RenderedPick[];
+}
+
+const { id, eyebrow, title, intro, picks } = Astro.props;
+---
+
+<section class="bp-picks" id={id}>
+  <SectionHead eyebrow={eyebrow} title={title} intro={intro} />
+
+  <ol class="bp-picks__list">
+    {picks.map((p, i) => (
+      <li class="bp-picks__item">
+        <div class="bp-picks__head">
+          <span class="bp-picks__rank" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
+          <div>
+            <p class="bp-picks__award">{p.award}</p>
+            <h3 class="bp-picks__name">
+              <a href={p.href}>{p.name}</a>
+            </h3>
+          </div>
+        </div>
+
+        <dl class="bp-picks__facts">
+          <div><dt>Cleans</dt><dd>{p.cleans}</dd></div>
+          <div><dt>Power</dt><dd>{p.power}</dd></div>
+          <div><dt>Rated for</dt><dd>{p.poolSize}</dd></div>
+          <div><dt>Price band</dt><dd>{p.band}</dd></div>
+        </dl>
+
+        <p class="bp-picks__why">{p.why}</p>
+
+        <p class="bp-picks__against">
+          <span class="bp-picks__against-label">Not for you if</span>
+          {p.wrongFor}
+        </p>
+
+        <a class="bp-picks__more" href={p.href}>
+          Read the full {p.name} review
+          <span aria-hidden="true">→</span>
+        </a>
+      </li>
+    ))}
+  </ol>
+
+  <p class="bp-picks__note">
+    Ordered by job, not by score, and never by what a product pays — see our
+    <a href="/editorial-policy/">editorial policy</a>. Prices are not printed here on purpose:
+    each review carries the current price with the date it was checked.
+  </p>
+</section>
+
+<style>
+  .bp-picks {
+    margin: clamp(3rem, 7vw, 5rem) 0;
+  }
+
+  .bp-picks__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: clamp(1rem, 2.4vw, 1.4rem);
+  }
+
+  .bp-picks__item {
+    padding: clamp(1.25rem, 3vw, 1.75rem);
+    border: 1px solid var(--cs-line-soft);
+    border-radius: 18px;
+    background: linear-gradient(178deg, rgba(20, 25, 32, 0.72), rgba(10, 13, 17, 0.72));
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+
+  /* The top pick reads as the top pick without a badge shouting it. */
+  .bp-picks__item:first-child {
+    border-color: var(--cs-line);
+    box-shadow: inset 2px 0 0 rgba(61, 142, 240, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  }
+
+  .bp-picks__head {
+    display: flex;
+    align-items: baseline;
+    gap: clamp(0.75rem, 2vw, 1.1rem);
+  }
+
+  .bp-picks__rank {
+    flex: none;
+    font-family: var(--font-mono);
+    font-size: clamp(1.3rem, 3.4vw, 1.75rem);
+    font-weight: 600;
+    line-height: 1;
+    color: transparent;
+    background: var(--cs-sheen);
+    -webkit-background-clip: text;
+    background-clip: text;
+    opacity: 0.75;
+  }
+
+  .bp-picks__award {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+  }
+
+  .bp-picks__name {
+    margin: 0.3rem 0 0;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.2rem, 3.2vw, 1.5rem);
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+  }
+
+  .bp-picks__name a {
+    color: var(--cs-hi);
+    text-decoration: none;
+  }
+
+  .bp-picks__name a:hover { color: #fff; }
+  .bp-picks__name a:focus-visible { outline: var(--focus-ring, 2px solid #dfe4ec); outline-offset: 3px; }
+
+  /* Four catalogue facts, so the plate answers "does it fit my pool" before
+     the prose asks the reader to take anything on trust. */
+  .bp-picks__facts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+    gap: 0.75rem 1.25rem;
+    margin: clamp(1rem, 2.6vw, 1.3rem) 0 0;
+    padding: 0.9rem 0 0;
+    border-top: 1px solid var(--cs-line-soft);
+  }
+
+  .bp-picks__facts dt {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+  }
+
+  .bp-picks__facts dd {
+    margin: 0.28rem 0 0;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    color: var(--cs-hi);
+  }
+
+  .bp-picks__why {
+    margin: clamp(1rem, 2.6vw, 1.3rem) 0 0;
+    font-size: 1.0625rem;
+    line-height: 1.68;
+    color: var(--text-secondary);
+  }
+
+  /* The rule-out is styled to be read, not buried. A best-of page that hides
+     its caveats in small grey type is doing the thing it claims not to. */
+  .bp-picks__against {
+    margin: 1rem 0 0;
+    padding: 0.85rem 1rem;
+    border-left: 2px solid rgba(61, 142, 240, 0.45);
+    border-radius: 0 10px 10px 0;
+    background: rgba(255, 255, 255, 0.025);
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+  }
+
+  .bp-picks__against-label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--cs-hi);
+    margin-bottom: 0.32rem;
+  }
+
+  .bp-picks__more {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin-top: 1.1rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--cs-hi);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(200, 208, 222, 0.4);
+    padding-bottom: 2px;
+  }
+
+  .bp-picks__more:hover { color: #fff; border-color: rgba(246, 248, 252, 0.9); }
+  .bp-picks__more:focus-visible { outline: var(--focus-ring, 2px solid #dfe4ec); outline-offset: 3px; }
+
+  .bp-picks__note {
+    margin: clamp(1.25rem, 3vw, 1.6rem) 0 0;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--text-tertiary);
+    max-width: 68ch;
+  }
+
+  .bp-picks__note a { color: var(--cs-mid); }
+
+  @media (min-width: 900px) {
+    .bp-picks__why { font-size: 1.1rem; }
+  }
+</style>

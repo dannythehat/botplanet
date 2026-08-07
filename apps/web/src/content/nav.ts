@@ -35,8 +35,18 @@ export const LAUNCH_CATEGORY = "robotic-pool-cleaners";
 export const CATEGORIES: CategoryDef[] = [
   { slug: LAUNCH_CATEGORY, name: "Robotic Pool Cleaners", jtbd: "Clean my pool", short: "Cordless & corded robots that scrub the floor, walls and waterline.", launch: "live", order: 1 },
   { slug: "robotic-lawn-mowers", name: "Robotic Lawn Mowers", jtbd: "Cut my lawn", short: "Robot mowers that cut a little every day, on a wire or without one.", launch: "live", order: 3 },
-  { slug: "robot-vacuums", name: "Robot Vacuums & Mops", jtbd: "Vacuum my floors", short: "Self-emptying vacuum-and-mop robots for the whole home.", launch: "coming_soon", order: 4 },
+  { slug: "robot-vacuums", name: "Robot Vacuums & Mops", jtbd: "Vacuum my floors", short: "Self-emptying vacuum-and-mop robots for the whole home.", launch: "live", order: 4 },
   { slug: "window-cleaning-robots", name: "Window-Cleaning Robots", jtbd: "Clean my windows", short: "Robots that grip glass and clean windows and glass doors.", launch: "live", order: 2 },
+  /* Companion and pet-camera are TWO categories, and that is the finding of
+     the research run of 6 August 2026 rather than a filing preference. Their
+     SERPs share only Amazon, Reddit and YouTube — no publisher, manufacturer
+     or retailer in common — and their seasons run opposite ways: companion
+     peaks at Christmas, pet cameras peak in July when people go away. */
+  { slug: "companion-robots", name: "Companion Robots & Robot Pets", jtbd: "Keep me company", short: "Robot pets and desk companions built for company rather than chores.", launch: "live", order: 6 },
+  { slug: "pet-camera-robots", name: "Pet Camera Robots", jtbd: "Watch my pet", short: "Cameras on wheels that drive around the house while you are out.", launch: "live", order: 7 },
+  { slug: "self-cleaning-litter-boxes", name: "Self-Cleaning Litter Boxes", jtbd: "Stop scooping", short: "Automatic litter boxes that sift and seal the waste themselves.", launch: "live", order: 8 },
+  { slug: "grill-cleaning-robots", name: "Grill-Cleaning Robots", jtbd: "Clean my grill", short: "Robots that scrub the barbecue grates so you do not have to.", launch: "live", order: 9 },
+  { slug: "educational-coding-robots", name: "Coding Robots for Kids", jtbd: "Teach my kid to code", short: "Robots children program themselves, from screen-free floor bots up.", launch: "live", order: 10 },
   { slug: "solar-panel-robots", name: "Solar-Panel Cleaning Robots", jtbd: "Clean solar panels", short: "Automated cleaners that keep rooftop and ground arrays producing.", launch: "hidden", order: 5 },
 ];
 

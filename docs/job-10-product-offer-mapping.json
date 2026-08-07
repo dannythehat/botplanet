@@ -1,7 +1,135 @@
 {
   "generatedFor": "2026-07-31",
-  "launchProducts": 12,
+  "launchProducts": 23,
   "rows": [
+    {
+      "productId": "prod-beatbot-aquasense-2-ultra",
+      "canonicalUrl": "https://botplanet.io/robots/robotic-pool-cleaners/beatbot-aquasense-2-ultra/",
+      "verifiedOffers": 1,
+      "preferredOfferId": "offer-prod-beatbot-aquasense-2-ultra-ret-amazon",
+      "preferredOfferAudit": [
+        "1 offer(s) exist for this product",
+        "1 from an approved retailer",
+        "ranked by exact-match confidence, then stock, then delivered price",
+        "chosen: offer-prod-beatbot-aquasense-2-ultra-ret-amazon (researched_exact)"
+      ],
+      "commissionUsedAsTieBreak": false,
+      "retailer": "ret-amazon",
+      "exactProductIdentifier": "B0G7B6F5FZ",
+      "identifierKind": "asin",
+      "market": "us",
+      "priceState": "not_published",
+      "stockState": "unknown",
+      "deliveryState": "not_exposed_by_source",
+      "warrantyRoute": "Beatbot states a warranty of 3-year full replacement.",
+      "lastChecked": "2026-07-31",
+      "freshness": "indicative",
+      "affiliateProgramme": "prog-amazon-us",
+      "goPath": "/go/pool-beatbot-ultra-amazon",
+      "schemaEligible": false,
+      "blockers": [
+        "no current price from an approved source",
+        "stock state unknown",
+        "not eligible for Offer structured data"
+      ],
+      "nextAction": "Obtain price and availability through the Amazon Creators API so the offer can carry a current price and enter Offer schema."
+    },
+    {
+      "productId": "prod-aiper-scuba-x1",
+      "canonicalUrl": "https://botplanet.io/robots/robotic-pool-cleaners/aiper-scuba-x1-pro-max/",
+      "verifiedOffers": 1,
+      "preferredOfferId": "offer-prod-aiper-scuba-x1-ret-amazon",
+      "preferredOfferAudit": [
+        "1 offer(s) exist for this product",
+        "1 from an approved retailer",
+        "ranked by exact-match confidence, then stock, then delivered price",
+        "chosen: offer-prod-aiper-scuba-x1-ret-amazon (verified_exact)"
+      ],
+      "commissionUsedAsTieBreak": false,
+      "retailer": "ret-amazon",
+      "exactProductIdentifier": "B0GMPWMS2H",
+      "identifierKind": "asin",
+      "market": "us",
+      "priceState": "not_published",
+      "stockState": "unknown",
+      "deliveryState": "not_exposed_by_source",
+      "warrantyRoute": "Manufacturer warranty term not confirmed",
+      "lastChecked": "2026-07-31",
+      "freshness": "indicative",
+      "affiliateProgramme": "prog-amazon-us",
+      "goPath": "/go/pool-aiper-scubax1-amazon",
+      "schemaEligible": false,
+      "blockers": [
+        "no current price from an approved source",
+        "stock state unknown",
+        "not eligible for Offer structured data"
+      ],
+      "nextAction": "Obtain price and availability through the Amazon Creators API so the offer can carry a current price and enter Offer schema."
+    },
+    {
+      "productId": "prod-aiper-scuba-s1",
+      "canonicalUrl": "https://botplanet.io/robots/robotic-pool-cleaners/aiper-scuba-s1/",
+      "verifiedOffers": 1,
+      "preferredOfferId": "offer-prod-aiper-scuba-s1-ret-amazon",
+      "preferredOfferAudit": [
+        "1 offer(s) exist for this product",
+        "1 from an approved retailer",
+        "ranked by exact-match confidence, then stock, then delivered price",
+        "chosen: offer-prod-aiper-scuba-s1-ret-amazon (verified_exact)"
+      ],
+      "commissionUsedAsTieBreak": false,
+      "retailer": "ret-amazon",
+      "exactProductIdentifier": "B0FJ818NNZ",
+      "identifierKind": "asin",
+      "market": "us",
+      "priceState": "not_published",
+      "stockState": "unknown",
+      "deliveryState": "not_exposed_by_source",
+      "warrantyRoute": "Manufacturer warranty term not confirmed",
+      "lastChecked": "2026-07-31",
+      "freshness": "indicative",
+      "affiliateProgramme": "prog-amazon-us",
+      "goPath": "/go/pool-aiper-scubas1-amazon",
+      "schemaEligible": false,
+      "blockers": [
+        "no current price from an approved source",
+        "stock state unknown",
+        "not eligible for Offer structured data"
+      ],
+      "nextAction": "Obtain price and availability through the Amazon Creators API so the offer can carry a current price and enter Offer schema."
+    },
+    {
+      "productId": "prod-aiper-seagull-se",
+      "canonicalUrl": "https://botplanet.io/robots/robotic-pool-cleaners/aiper-seagull-se/",
+      "verifiedOffers": 1,
+      "preferredOfferId": "offer-prod-aiper-seagull-se-ret-amazon",
+      "preferredOfferAudit": [
+        "1 offer(s) exist for this product",
+        "1 from an approved retailer",
+        "ranked by exact-match confidence, then stock, then delivered price",
+        "chosen: offer-prod-aiper-seagull-se-ret-amazon (researched_exact)"
+      ],
+      "commissionUsedAsTieBreak": false,
+      "retailer": "ret-amazon",
+      "exactProductIdentifier": "B0DJ6MV81N",
+      "identifierKind": "asin",
+      "market": "us",
+      "priceState": "not_published",
+      "stockState": "unknown",
+      "deliveryState": "not_exposed_by_source",
+      "warrantyRoute": "Manufacturer warranty term not confirmed",
+      "lastChecked": "2026-07-31",
+      "freshness": "indicative",
+      "affiliateProgramme": "prog-amazon-us",
+      "goPath": "/go/pool-aiper-seagull-amazon",
+      "schemaEligible": false,
+      "blockers": [
+        "no current price from an approved source",
+        "stock state unknown",
+        "not eligible for Offer structured data"
+      ],
+      "nextAction": "Obtain price and availability through the Amazon Creators API so the offer can carry a current price and enter Offer schema."
+    },
     {
       "productId": "prod-wybot-c1",
       "canonicalUrl": "https://botplanet.io/robots/robotic-pool-cleaners/wybot-c1/",
@@ -151,34 +279,31 @@
       "nextAction": "Obtain price and availability through the Amazon Creators API so the offer can carry a current price and enter Offer schema."
     },
     {
-      "productId": "prod-aiper-scuba-v3-ai-vision",
-      "canonicalUrl": "https://botplanet.io/robots/robotic-pool-cleaners/aiper-scuba-v3-ai-vision/",
-      "verifiedOffers": 1,
-      "preferredOfferId": "offer-prod-aiper-scuba-v3-ai-vision-ret-amazon",
+      "productId": "prod-dolphin-e10",
+      "canonicalUrl": "https://botplanet.io/robots/robotic-pool-cleaners/dolphin-e10/",
+      "verifiedOffers": 0,
+      "preferredOfferId": null,
       "preferredOfferAudit": [
-        "1 offer(s) exist for this product",
-        "1 from an approved retailer",
-        "ranked by exact-match confidence, then stock, then delivered price",
-        "chosen: offer-prod-aiper-scuba-v3-ai-vision-ret-amazon (researched_exact)"
+        "0 offer(s) exist for this product",
+        "0 from an approved retailer",
+        "no approved offer — nothing is featured"
       ],
       "commissionUsedAsTieBreak": false,
-      "retailer": "ret-amazon",
-      "exactProductIdentifier": "B0GG97427D",
+      "retailer": null,
+      "exactProductIdentifier": "B0GV15VY1N",
       "identifierKind": "asin",
       "market": "us",
       "priceState": "not_published",
       "stockState": "unknown",
-      "deliveryState": "not_exposed_by_source",
-      "warrantyRoute": "Manufacturer warranty term not confirmed",
-      "lastChecked": "2026-07-31",
-      "freshness": "indicative",
-      "affiliateProgramme": "prog-amazon-us",
-      "goPath": "/go/pool-aiper-scubav3-amazon",
+      "deliveryState": "unknown",
+      "warrantyRoute": null,
+      "lastChecked": null,
+      "freshness": "unknown",
+      "affiliateProgramme": null,
+      "goPath": null,
       "schemaEligible": false,
       "blockers": [
-        "no current price from an approved source",
-        "stock state unknown",
-        "not eligible for Offer structured data"
+        "no approved offer"
       ],
       "nextAction": "Obtain price and availability through the Amazon Creators API so the offer can carry a current price and enter Offer schema."
     },
@@ -215,80 +340,19 @@
       "nextAction": "Obtain price and availability through the Amazon Creators API so the offer can carry a current price and enter Offer schema."
     },
     {
-      "productId": "prod-dolphin-e10",
-      "canonicalUrl": "https://botplanet.io/robots/robotic-pool-cleaners/dolphin-e10/",
-      "verifiedOffers": 0,
-      "preferredOfferId": null,
-      "preferredOfferAudit": [
-        "0 offer(s) exist for this product",
-        "0 from an approved retailer",
-        "no approved offer — nothing is featured"
-      ],
-      "commissionUsedAsTieBreak": false,
-      "retailer": null,
-      "exactProductIdentifier": "B0GV15VY1N",
-      "identifierKind": "asin",
-      "market": "us",
-      "priceState": "not_published",
-      "stockState": "unknown",
-      "deliveryState": "unknown",
-      "warrantyRoute": null,
-      "lastChecked": null,
-      "freshness": "unknown",
-      "affiliateProgramme": null,
-      "goPath": null,
-      "schemaEligible": false,
-      "blockers": [
-        "no approved offer"
-      ],
-      "nextAction": "Obtain price and availability through the Amazon Creators API so the offer can carry a current price and enter Offer schema."
-    },
-    {
-      "productId": "prod-beatbot-aquasense-2-ultra",
-      "canonicalUrl": "https://botplanet.io/robots/robotic-pool-cleaners/beatbot-aquasense-2-ultra/",
+      "productId": "prod-aiper-scuba-v3-ai-vision",
+      "canonicalUrl": "https://botplanet.io/robots/robotic-pool-cleaners/aiper-scuba-v3-ai-vision/",
       "verifiedOffers": 1,
-      "preferredOfferId": "offer-prod-beatbot-aquasense-2-ultra-ret-amazon",
+      "preferredOfferId": "offer-prod-aiper-scuba-v3-ai-vision-ret-amazon",
       "preferredOfferAudit": [
         "1 offer(s) exist for this product",
         "1 from an approved retailer",
         "ranked by exact-match confidence, then stock, then delivered price",
-        "chosen: offer-prod-beatbot-aquasense-2-ultra-ret-amazon (researched_exact)"
+        "chosen: offer-prod-aiper-scuba-v3-ai-vision-ret-amazon (researched_exact)"
       ],
       "commissionUsedAsTieBreak": false,
       "retailer": "ret-amazon",
-      "exactProductIdentifier": "B0G7B6F5FZ",
-      "identifierKind": "asin",
-      "market": "us",
-      "priceState": "not_published",
-      "stockState": "unknown",
-      "deliveryState": "not_exposed_by_source",
-      "warrantyRoute": "Beatbot states a warranty of 3-year full replacement.",
-      "lastChecked": "2026-07-31",
-      "freshness": "indicative",
-      "affiliateProgramme": "prog-amazon-us",
-      "goPath": "/go/pool-beatbot-ultra-amazon",
-      "schemaEligible": false,
-      "blockers": [
-        "no current price from an approved source",
-        "stock state unknown",
-        "not eligible for Offer structured data"
-      ],
-      "nextAction": "Obtain price and availability through the Amazon Creators API so the offer can carry a current price and enter Offer schema."
-    },
-    {
-      "productId": "prod-aiper-scuba-x1",
-      "canonicalUrl": "https://botplanet.io/robots/robotic-pool-cleaners/aiper-scuba-x1-pro-max/",
-      "verifiedOffers": 1,
-      "preferredOfferId": "offer-prod-aiper-scuba-x1-ret-amazon",
-      "preferredOfferAudit": [
-        "1 offer(s) exist for this product",
-        "1 from an approved retailer",
-        "ranked by exact-match confidence, then stock, then delivered price",
-        "chosen: offer-prod-aiper-scuba-x1-ret-amazon (verified_exact)"
-      ],
-      "commissionUsedAsTieBreak": false,
-      "retailer": "ret-amazon",
-      "exactProductIdentifier": "B0GMPWMS2H",
+      "exactProductIdentifier": "B0GG97427D",
       "identifierKind": "asin",
       "market": "us",
       "priceState": "not_published",
@@ -298,7 +362,7 @@
       "lastChecked": "2026-07-31",
       "freshness": "indicative",
       "affiliateProgramme": "prog-amazon-us",
-      "goPath": "/go/pool-aiper-scubax1-amazon",
+      "goPath": "/go/pool-aiper-scubav3-amazon",
       "schemaEligible": false,
       "blockers": [
         "no current price from an approved source",
@@ -308,19 +372,19 @@
       "nextAction": "Obtain price and availability through the Amazon Creators API so the offer can carry a current price and enter Offer schema."
     },
     {
-      "productId": "prod-aiper-scuba-s1",
-      "canonicalUrl": "https://botplanet.io/robots/robotic-pool-cleaners/aiper-scuba-s1/",
+      "productId": "prod-ecovacs-winbot-w2-pro-omni",
+      "canonicalUrl": "https://botplanet.io/robots/window-cleaning-robots/ecovacs-winbot-w2-pro-omni/",
       "verifiedOffers": 1,
-      "preferredOfferId": "offer-prod-aiper-scuba-s1-ret-amazon",
+      "preferredOfferId": "offer-prod-ecovacs-winbot-w2-pro-omni-ret-amazon",
       "preferredOfferAudit": [
         "1 offer(s) exist for this product",
         "1 from an approved retailer",
         "ranked by exact-match confidence, then stock, then delivered price",
-        "chosen: offer-prod-aiper-scuba-s1-ret-amazon (verified_exact)"
+        "chosen: offer-prod-ecovacs-winbot-w2-pro-omni-ret-amazon (verified_exact)"
       ],
       "commissionUsedAsTieBreak": false,
       "retailer": "ret-amazon",
-      "exactProductIdentifier": "B0FJ818NNZ",
+      "exactProductIdentifier": "B0DR8Y4VF9",
       "identifierKind": "asin",
       "market": "us",
       "priceState": "not_published",
@@ -330,7 +394,7 @@
       "lastChecked": "2026-07-31",
       "freshness": "indicative",
       "affiliateProgramme": "prog-amazon-us",
-      "goPath": "/go/pool-aiper-scubas1-amazon",
+      "goPath": "/go/win-ecovacs-w2proomni-amazon",
       "schemaEligible": false,
       "blockers": [
         "no current price from an approved source",
@@ -340,19 +404,19 @@
       "nextAction": "Obtain price and availability through the Amazon Creators API so the offer can carry a current price and enter Offer schema."
     },
     {
-      "productId": "prod-aiper-seagull-se",
-      "canonicalUrl": "https://botplanet.io/robots/robotic-pool-cleaners/aiper-seagull-se/",
+      "productId": "prod-ecovacs-winbot-w3-omni",
+      "canonicalUrl": "https://botplanet.io/robots/window-cleaning-robots/ecovacs-winbot-w3-omni/",
       "verifiedOffers": 1,
-      "preferredOfferId": "offer-prod-aiper-seagull-se-ret-amazon",
+      "preferredOfferId": "offer-prod-ecovacs-winbot-w3-omni-ret-amazon",
       "preferredOfferAudit": [
         "1 offer(s) exist for this product",
         "1 from an approved retailer",
         "ranked by exact-match confidence, then stock, then delivered price",
-        "chosen: offer-prod-aiper-seagull-se-ret-amazon (researched_exact)"
+        "chosen: offer-prod-ecovacs-winbot-w3-omni-ret-amazon (verified_exact)"
       ],
       "commissionUsedAsTieBreak": false,
       "retailer": "ret-amazon",
-      "exactProductIdentifier": "B0DJ6MV81N",
+      "exactProductIdentifier": "B0GJDQ59J1",
       "identifierKind": "asin",
       "market": "us",
       "priceState": "not_published",
@@ -362,7 +426,295 @@
       "lastChecked": "2026-07-31",
       "freshness": "indicative",
       "affiliateProgramme": "prog-amazon-us",
-      "goPath": "/go/pool-aiper-seagull-amazon",
+      "goPath": "/go/win-ecovacs-w3omni-amazon",
+      "schemaEligible": false,
+      "blockers": [
+        "no current price from an approved source",
+        "stock state unknown",
+        "not eligible for Offer structured data"
+      ],
+      "nextAction": "Obtain price and availability through the Amazon Creators API so the offer can carry a current price and enter Offer schema."
+    },
+    {
+      "productId": "prod-ecovacs-winbot-w2-pro",
+      "canonicalUrl": "https://botplanet.io/robots/window-cleaning-robots/ecovacs-winbot-w2-pro/",
+      "verifiedOffers": 1,
+      "preferredOfferId": "offer-prod-ecovacs-winbot-w2-pro-ret-amazon",
+      "preferredOfferAudit": [
+        "1 offer(s) exist for this product",
+        "1 from an approved retailer",
+        "ranked by exact-match confidence, then stock, then delivered price",
+        "chosen: offer-prod-ecovacs-winbot-w2-pro-ret-amazon (verified_exact)"
+      ],
+      "commissionUsedAsTieBreak": false,
+      "retailer": "ret-amazon",
+      "exactProductIdentifier": "B0DSKC7QT7",
+      "identifierKind": "asin",
+      "market": "us",
+      "priceState": "not_published",
+      "stockState": "unknown",
+      "deliveryState": "not_exposed_by_source",
+      "warrantyRoute": "Manufacturer warranty term not confirmed",
+      "lastChecked": "2026-07-31",
+      "freshness": "indicative",
+      "affiliateProgramme": "prog-amazon-us",
+      "goPath": "/go/win-ecovacs-w2pro-amazon",
+      "schemaEligible": false,
+      "blockers": [
+        "no current price from an approved source",
+        "stock state unknown",
+        "not eligible for Offer structured data"
+      ],
+      "nextAction": "Obtain price and availability through the Amazon Creators API so the offer can carry a current price and enter Offer schema."
+    },
+    {
+      "productId": "prod-ecovacs-winbot-w2s",
+      "canonicalUrl": "https://botplanet.io/robots/window-cleaning-robots/ecovacs-winbot-w2s/",
+      "verifiedOffers": 1,
+      "preferredOfferId": "offer-prod-ecovacs-winbot-w2s-ret-amazon",
+      "preferredOfferAudit": [
+        "1 offer(s) exist for this product",
+        "1 from an approved retailer",
+        "ranked by exact-match confidence, then stock, then delivered price",
+        "chosen: offer-prod-ecovacs-winbot-w2s-ret-amazon (verified_exact)"
+      ],
+      "commissionUsedAsTieBreak": false,
+      "retailer": "ret-amazon",
+      "exactProductIdentifier": "B0G5Y3NHTX",
+      "identifierKind": "asin",
+      "market": "us",
+      "priceState": "not_published",
+      "stockState": "unknown",
+      "deliveryState": "not_exposed_by_source",
+      "warrantyRoute": "Manufacturer warranty term not confirmed",
+      "lastChecked": "2026-07-31",
+      "freshness": "indicative",
+      "affiliateProgramme": "prog-amazon-us",
+      "goPath": "/go/win-ecovacs-w2s-amazon",
+      "schemaEligible": false,
+      "blockers": [
+        "no current price from an approved source",
+        "stock state unknown",
+        "not eligible for Offer structured data"
+      ],
+      "nextAction": "Obtain price and availability through the Amazon Creators API so the offer can carry a current price and enter Offer schema."
+    },
+    {
+      "productId": "prod-ecovacs-winbot-w1-pro",
+      "canonicalUrl": "https://botplanet.io/robots/window-cleaning-robots/ecovacs-winbot-w1-pro/",
+      "verifiedOffers": 1,
+      "preferredOfferId": "offer-prod-ecovacs-winbot-w1-pro-ret-amazon",
+      "preferredOfferAudit": [
+        "1 offer(s) exist for this product",
+        "1 from an approved retailer",
+        "ranked by exact-match confidence, then stock, then delivered price",
+        "chosen: offer-prod-ecovacs-winbot-w1-pro-ret-amazon (verified_exact)"
+      ],
+      "commissionUsedAsTieBreak": false,
+      "retailer": "ret-amazon",
+      "exactProductIdentifier": "B0C2CQP8ZS",
+      "identifierKind": "asin",
+      "market": "us",
+      "priceState": "not_published",
+      "stockState": "unknown",
+      "deliveryState": "not_exposed_by_source",
+      "warrantyRoute": "Manufacturer warranty term not confirmed",
+      "lastChecked": "2026-07-31",
+      "freshness": "indicative",
+      "affiliateProgramme": "prog-amazon-us",
+      "goPath": "/go/win-ecovacs-w1pro-amazon",
+      "schemaEligible": false,
+      "blockers": [
+        "no current price from an approved source",
+        "stock state unknown",
+        "not eligible for Offer structured data"
+      ],
+      "nextAction": "Obtain price and availability through the Amazon Creators API so the offer can carry a current price and enter Offer schema."
+    },
+    {
+      "productId": "prod-ecovacs-winbot-mini",
+      "canonicalUrl": "https://botplanet.io/robots/window-cleaning-robots/ecovacs-winbot-mini/",
+      "verifiedOffers": 1,
+      "preferredOfferId": "offer-prod-ecovacs-winbot-mini-ret-amazon",
+      "preferredOfferAudit": [
+        "1 offer(s) exist for this product",
+        "1 from an approved retailer",
+        "ranked by exact-match confidence, then stock, then delivered price",
+        "chosen: offer-prod-ecovacs-winbot-mini-ret-amazon (verified_exact)"
+      ],
+      "commissionUsedAsTieBreak": false,
+      "retailer": "ret-amazon",
+      "exactProductIdentifier": "B0DR8W696Y",
+      "identifierKind": "asin",
+      "market": "us",
+      "priceState": "not_published",
+      "stockState": "unknown",
+      "deliveryState": "not_exposed_by_source",
+      "warrantyRoute": "Manufacturer warranty term not confirmed",
+      "lastChecked": "2026-07-31",
+      "freshness": "indicative",
+      "affiliateProgramme": "prog-amazon-us",
+      "goPath": "/go/win-ecovacs-mini-amazon",
+      "schemaEligible": false,
+      "blockers": [
+        "no current price from an approved source",
+        "stock state unknown",
+        "not eligible for Offer structured data"
+      ],
+      "nextAction": "Obtain price and availability through the Amazon Creators API so the offer can carry a current price and enter Offer schema."
+    },
+    {
+      "productId": "prod-hutt-s55-pro",
+      "canonicalUrl": "https://botplanet.io/robots/window-cleaning-robots/hutt-s55-pro/",
+      "verifiedOffers": 1,
+      "preferredOfferId": "offer-prod-hutt-s55-pro-ret-amazon",
+      "preferredOfferAudit": [
+        "1 offer(s) exist for this product",
+        "1 from an approved retailer",
+        "ranked by exact-match confidence, then stock, then delivered price",
+        "chosen: offer-prod-hutt-s55-pro-ret-amazon (verified_exact)"
+      ],
+      "commissionUsedAsTieBreak": false,
+      "retailer": "ret-amazon",
+      "exactProductIdentifier": "B0GFW8TFML",
+      "identifierKind": "asin",
+      "market": "us",
+      "priceState": "not_published",
+      "stockState": "unknown",
+      "deliveryState": "not_exposed_by_source",
+      "warrantyRoute": "Manufacturer warranty term not confirmed",
+      "lastChecked": "2026-07-31",
+      "freshness": "indicative",
+      "affiliateProgramme": "prog-amazon-us",
+      "goPath": "/go/win-hutt-s55pro-amazon",
+      "schemaEligible": false,
+      "blockers": [
+        "no current price from an approved source",
+        "stock state unknown",
+        "not eligible for Offer structured data"
+      ],
+      "nextAction": "Obtain price and availability through the Amazon Creators API so the offer can carry a current price and enter Offer schema."
+    },
+    {
+      "productId": "prod-mamibot-w120-dp",
+      "canonicalUrl": "https://botplanet.io/robots/window-cleaning-robots/mamibot-w120-dp/",
+      "verifiedOffers": 1,
+      "preferredOfferId": "offer-prod-mamibot-w120-dp-ret-amazon",
+      "preferredOfferAudit": [
+        "1 offer(s) exist for this product",
+        "1 from an approved retailer",
+        "ranked by exact-match confidence, then stock, then delivered price",
+        "chosen: offer-prod-mamibot-w120-dp-ret-amazon (verified_exact)"
+      ],
+      "commissionUsedAsTieBreak": false,
+      "retailer": "ret-amazon",
+      "exactProductIdentifier": "B0DC6B81Z2",
+      "identifierKind": "asin",
+      "market": "us",
+      "priceState": "not_published",
+      "stockState": "unknown",
+      "deliveryState": "not_exposed_by_source",
+      "warrantyRoute": "Manufacturer warranty term not confirmed",
+      "lastChecked": "2026-07-31",
+      "freshness": "indicative",
+      "affiliateProgramme": "prog-amazon-us",
+      "goPath": "/go/win-mamibot-w120dp-amazon",
+      "schemaEligible": false,
+      "blockers": [
+        "no current price from an approved source",
+        "stock state unknown",
+        "not eligible for Offer structured data"
+      ],
+      "nextAction": "Obtain price and availability through the Amazon Creators API so the offer can carry a current price and enter Offer schema."
+    },
+    {
+      "productId": "prod-hobot-2s",
+      "canonicalUrl": "https://botplanet.io/robots/window-cleaning-robots/hobot-2s/",
+      "verifiedOffers": 1,
+      "preferredOfferId": "offer-prod-hobot-2s-ret-amazon",
+      "preferredOfferAudit": [
+        "1 offer(s) exist for this product",
+        "1 from an approved retailer",
+        "ranked by exact-match confidence, then stock, then delivered price",
+        "chosen: offer-prod-hobot-2s-ret-amazon (verified_exact)"
+      ],
+      "commissionUsedAsTieBreak": false,
+      "retailer": "ret-amazon",
+      "exactProductIdentifier": "B097CM7P9L",
+      "identifierKind": "asin",
+      "market": "us",
+      "priceState": "not_published",
+      "stockState": "unknown",
+      "deliveryState": "not_exposed_by_source",
+      "warrantyRoute": "Manufacturer warranty term not confirmed",
+      "lastChecked": "2026-07-31",
+      "freshness": "indicative",
+      "affiliateProgramme": "prog-amazon-us",
+      "goPath": "/go/win-hobot-2s-amazon",
+      "schemaEligible": false,
+      "blockers": [
+        "no current price from an approved source",
+        "stock state unknown",
+        "not eligible for Offer structured data"
+      ],
+      "nextAction": "Obtain price and availability through the Amazon Creators API so the offer can carry a current price and enter Offer schema."
+    },
+    {
+      "productId": "prod-hobot-298",
+      "canonicalUrl": "https://botplanet.io/robots/window-cleaning-robots/hobot-298/",
+      "verifiedOffers": 1,
+      "preferredOfferId": "offer-prod-hobot-298-ret-amazon",
+      "preferredOfferAudit": [
+        "1 offer(s) exist for this product",
+        "1 from an approved retailer",
+        "ranked by exact-match confidence, then stock, then delivered price",
+        "chosen: offer-prod-hobot-298-ret-amazon (verified_exact)"
+      ],
+      "commissionUsedAsTieBreak": false,
+      "retailer": "ret-amazon",
+      "exactProductIdentifier": "B07LF4HZ6C",
+      "identifierKind": "asin",
+      "market": "us",
+      "priceState": "not_published",
+      "stockState": "unknown",
+      "deliveryState": "not_exposed_by_source",
+      "warrantyRoute": "Manufacturer warranty term not confirmed",
+      "lastChecked": "2026-07-31",
+      "freshness": "indicative",
+      "affiliateProgramme": "prog-amazon-us",
+      "goPath": "/go/win-hobot-298-amazon",
+      "schemaEligible": false,
+      "blockers": [
+        "no current price from an approved source",
+        "stock state unknown",
+        "not eligible for Offer structured data"
+      ],
+      "nextAction": "Obtain price and availability through the Amazon Creators API so the offer can carry a current price and enter Offer schema."
+    },
+    {
+      "productId": "prod-cop-rose-x5s",
+      "canonicalUrl": "https://botplanet.io/robots/window-cleaning-robots/cop-rose-x5s/",
+      "verifiedOffers": 1,
+      "preferredOfferId": "offer-prod-cop-rose-x5s-ret-amazon",
+      "preferredOfferAudit": [
+        "1 offer(s) exist for this product",
+        "1 from an approved retailer",
+        "ranked by exact-match confidence, then stock, then delivered price",
+        "chosen: offer-prod-cop-rose-x5s-ret-amazon (verified_exact)"
+      ],
+      "commissionUsedAsTieBreak": false,
+      "retailer": "ret-amazon",
+      "exactProductIdentifier": "B09D98W5KQ",
+      "identifierKind": "asin",
+      "market": "us",
+      "priceState": "not_published",
+      "stockState": "unknown",
+      "deliveryState": "not_exposed_by_source",
+      "warrantyRoute": "Manufacturer warranty term not confirmed",
+      "lastChecked": "2026-07-31",
+      "freshness": "indicative",
+      "affiliateProgramme": "prog-amazon-us",
+      "goPath": "/go/win-coprose-x5s-amazon",
       "schemaEligible": false,
       "blockers": [
         "no current price from an approved source",

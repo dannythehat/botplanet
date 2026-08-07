@@ -4,7 +4,7 @@ import { applyInternalLinks } from "../src/lib/internal-linker";
 import { CATEGORY_ANCHORS, anchorsFor, liveAnchorsFor } from "../src/content/internal-links";
 import { REVIEWS } from "../src/content/reviews";
 import { ROUTES } from "../src/content/routes";
-import { productEditorial, catalogueStatusOf } from "../src/content/products";
+import { productEditorial, catalogueStatusOf, PRODUCT_ID } from "../src/content/products";
 
 const POOL = anchorsFor("robotic-pool-cleaners");
 
@@ -76,9 +76,24 @@ describe("the anchor plan itself", () => {
    * point at a product only if that product is still active.
    */
   const productSlug = (path: string) => /^\/robots\/[a-z0-9-]+\/([a-z0-9-]+)\/$/.exec(path)?.[1];
+
+  /**
+   * Does the repo know this slug is a real, sellable product?
+   *
+   * WIDENED 6 August 2026, when the window reviews shipped. This used to
+   * require a PRODUCTS entry — the pool-era editorial map — and every window
+   * product failed it despite being published in D1 with verified
+   * specifications since 5 August. The test was asserting "has pool-style
+   * editorial", not "is an active product", and the two stopped being the same
+   * thing the moment a second category arrived whose editorial lives in
+   * reviews.ts instead.
+   *
+   * PRODUCT_ID is the right existence check: it is the slug-to-D1 join map
+   * every category has to appear in, whatever shape its editorial takes.
+   */
   const activeProduct = (slug: string) => {
-    const p = productEditorial(slug);
-    return Boolean(p && catalogueStatusOf(p.productId) === "active");
+    const productId = PRODUCT_ID[slug] ?? productEditorial(slug)?.productId;
+    return Boolean(productId && catalogueStatusOf(productId) === "active");
   };
 
   it("points every live anchor at a path the route registry knows", () => {

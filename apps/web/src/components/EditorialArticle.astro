@@ -1,0 +1,145 @@
+---
+/* ============================================================
+   BotPlanet — the editorial article.
+
+   ONE TEMPLATE FOR EVERY BEST-OF AND EVERY GUIDE, the same way
+   ReviewArticle.astro is one template for every review. Adding
+   an editorial page is two files: a record in content/editorial.ts
+   and the prose in src/articles/<slug>.md.
+
+   ORDER, AND WHY IT IS THIS ORDER:
+
+     H1 and the standfirst — the answer, before the reasoning
+     → the ranked picks, for the reader who came for a shortlist
+       and is not going to read nine hundred words to get one
+     → the prose, where the picks are justified and the caveats
+       live
+     → the comparison table, generated from the catalogue
+     → BotMatch, for the reader who wants it decided for their
+       own pool rather than in general
+     → FAQ, which also feeds the FAQPage schema
+     → who checked it and when
+
+   A GUIDE HAS NO PICKS and passes an empty array; the section
+   disappears and the prose moves up. That is why one component
+   covers both page types rather than two that drift apart.
+
+   The prose is run through the internal linker before it renders,
+   so a product named in a sentence becomes a link to that product
+   without anything being inserted into the writing. See
+   content/internal-links.ts for the rules.
+   ============================================================ */
+
+import PickList from "./PickList.astro";
+import type { RenderedPick } from "./PickList.astro";
+import ComparisonTable from "./ComparisonTable.astro";
+import type { ComparisonRow } from "./ComparisonTable.astro";
+import ArticleContents from "./ArticleContents.astro";
+import BotMatchCta from "./BotMatchCta.astro";
+import FaqList from "./FaqList.astro";
+import ArticleFooter from "./ArticleFooter.astro";
+import { botMatchCtaFor } from "../content/category-sections";
+import { applyInternalLinks } from "../lib/internal-linker";
+import { anchorsFor } from "../content/internal-links";
+import type { EditorialContent } from "../content/editorial";
+import "../styles/prose.css";
+
+interface Props {
+  article: EditorialContent;
+  /** Compiled Markdown for the prose. */
+  html: string;
+  picks: RenderedPick[];
+  comparison: ComparisonRow[];
+}
+
+const { article, html, picks, comparison } = Astro.props;
+const bmCta = botMatchCtaFor(article.categorySlug);
+
+/* Self-path passed so the page cannot link its own URL: the cordless best-of
+   names "cordless robotic pool cleaner" repeatedly, and that phrase is an
+   anchor pointing here. */
+const { html: body } = applyInternalLinks(html, anchorsFor(article.categorySlug), article.path);
+---
+
+<header class="bp-ed__head">
+  <span class="eyebrow">{article.eyebrow}</span>
+  <h1 class="bp-ed__h1">{article.title}</h1>
+  <p class="bp-ed__stand">{article.standfirst}</p>
+</header>
+
+{picks.length > 0 && (
+  <PickList
+    id="picks"
+    eyebrow="The shortlist"
+    title="The picks, and who each one is wrong for"
+    intro="Every entry names the job it wins and the buyer it does not suit. Facts in each panel come from the catalogue record, not from the copy above it — where a manufacturer has not published a figure, the panel says so."
+    picks={picks}
+  />
+)}
+
+<ArticleContents html={body} extra={comparison.length > 1 ? [{ id: "compare", text: "Compare them side by side" }] : []} />
+
+<article class="bp-prose" set:html={body} />
+
+{comparison.length > 1 && (
+  <ComparisonTable
+    id="compare"
+    eyebrow="Side by side"
+    title="Compare them side by side"
+    intro={`All ${comparison.length} machines on this page on the four things that decide whether one fits your pool. Where a manufacturer does not publish a figure the cell says so rather than guessing.`}
+    rows={comparison}
+    note="Ordered by price band, then alphabetically — not by what we earn, and not in the ranked order above. Pool size is shown as a maximum length where the maker publishes one, and as a maximum area where it publishes that instead; the two are not interchangeable."
+  />
+)}
+
+{bmCta && (
+  <BotMatchCta
+    categorySlug={article.categorySlug}
+    headline={bmCta.headline}
+    body={bmCta.body}
+    points={bmCta.points}
+    ctaLabel={bmCta.ctaLabel}
+    note={bmCta.note}
+    image={bmCta.image}
+  />
+)}
+
+{article.faq.length > 0 && (
+  <FaqList
+    id="faq"
+    eyebrow="Questions"
+    title="Questions people actually ask"
+    intro="The questions this page gets asked, answered in a sentence or two each. Anything that needs more than that has its own page."
+    items={article.faq}
+  />
+)}
+
+<ArticleFooter lastReviewed={article.lastReviewed} />
+
+<style>
+  .bp-ed__head {
+    max-width: 62ch;
+    margin: 0 0 clamp(2rem, 5vw, 3rem);
+  }
+
+  .bp-ed__h1 {
+    margin: 0.9rem 0 0;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2rem, 5.6vw, 3.1rem);
+    line-height: 1.06;
+    letter-spacing: -0.024em;
+    text-wrap: balance;
+    background: linear-gradient(172deg, #ffffff 4%, #e4e9f1 44%, #a2aab8 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .bp-ed__stand {
+    margin: 1.2rem 0 0;
+    font-size: clamp(1.05rem, 2.4vw, 1.25rem);
+    line-height: 1.6;
+    color: var(--text-secondary);
+  }
+</style>

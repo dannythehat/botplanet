@@ -257,6 +257,271 @@ export const ROUTES: RouteDef[] = [
     category: "robotic-lawn-mowers",
   },
 
+  /* ---------------- Companion robots ----------------
+     Added 2026-08-06. Named for the category, targeted at "robot pet" — see
+     the keyword register for why the head term is not the H1. */
+  {
+    path: "/robots/companion-robots/",
+    label: "Companion Robots & Robot Pets",
+    breadcrumbLabel: "Companion Robots",
+    section: "shop",
+    parent: "/robots/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: "Explore",
+    inSitemap: true,
+    indexable: true,
+    category: "companion-robots",
+  },
+  {
+    path: "/compare/companion-robots/",
+    label: "Compare companion robots",
+    breadcrumbLabel: "Companion Robots",
+    section: "compare",
+    parent: "/compare/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: true,
+    indexable: true,
+    category: "companion-robots",
+  },
+  {
+    path: "/botmatch/companion-robots/",
+    label: "Find My Robot Pet",
+    breadcrumbLabel: "Find My Robot Pet",
+    parent: "/robots/companion-robots/",
+    section: "botmatch",
+    /* Its own question set exists and scores against sc-companion-v1. Still
+       coming_soon for the same reason lawn is: no products in the catalogue
+       yet, so the funnel would ask six good questions and recommend nothing.
+       Flips to live with the first published companion product. */
+    status: "coming_soon",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: false,
+    indexable: false,
+    category: "companion-robots",
+  },
+
+  /* ---------------- Pet camera robots ----------------
+     A separate category from companion robots, on measured evidence rather
+     than taste: the two head SERPs share only Amazon, Reddit and YouTube, and
+     "pet camera robot" peaks in July while everything companion peaks in
+     December. Recorded in docs/seo/companion-robots-research-findings.md. */
+  {
+    path: "/robots/pet-camera-robots/",
+    label: "Pet Camera Robots",
+    section: "shop",
+    parent: "/robots/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: "Explore",
+    inSitemap: true,
+    indexable: true,
+    category: "pet-camera-robots",
+  },
+  {
+    path: "/compare/pet-camera-robots/",
+    label: "Compare pet camera robots",
+    breadcrumbLabel: "Pet Camera Robots",
+    section: "compare",
+    parent: "/compare/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: true,
+    indexable: true,
+    category: "pet-camera-robots",
+  },
+  {
+    path: "/botmatch/pet-camera-robots/",
+    label: "Find My Pet Camera Robot",
+    breadcrumbLabel: "Find My Pet Camera Robot",
+    parent: "/robots/pet-camera-robots/",
+    section: "botmatch",
+    status: "coming_soon",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: false,
+    indexable: false,
+    category: "pet-camera-robots",
+  },
+
+  /* ---------------- Educational and coding robots ----------------
+     Page 010, the last of the locked ten. Named for the demand rather than
+     the topic: "coding robot" is a consumer SERP, "educational robot" is an
+     institutional one. See the keyword register. */
+  {
+    path: "/robots/educational-coding-robots/",
+    label: "Coding Robots for Kids",
+    section: "shop",
+    parent: "/robots/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: "Explore",
+    inSitemap: true,
+    indexable: true,
+    category: "educational-coding-robots",
+  },
+  {
+    path: "/compare/educational-coding-robots/",
+    label: "Compare coding robots",
+    breadcrumbLabel: "Coding Robots for Kids",
+    section: "compare",
+    parent: "/compare/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: true,
+    indexable: true,
+    category: "educational-coding-robots",
+  },
+  {
+    path: "/botmatch/educational-coding-robots/",
+    label: "Find My Coding Robot",
+    breadcrumbLabel: "Find My Coding Robot",
+    parent: "/robots/educational-coding-robots/",
+    section: "botmatch",
+    status: "coming_soon",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: false,
+    indexable: false,
+    category: "educational-coding-robots",
+  },
+
+  /* ---------------- Robot vacuums and mops ----------------
+     Page 009, and the biggest category on the site at 135,000/mo. One URL
+     carries all of it: mop and self-emptying both measured 6-7 shared domains
+     with the head term. Flipped from coming_soon to live with this build. */
+  {
+    path: "/robots/robot-vacuums/",
+    label: "Robot Vacuums & Mops",
+    section: "shop",
+    parent: "/robots/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: "Explore",
+    inSitemap: true,
+    indexable: true,
+    category: "robot-vacuums",
+  },
+  {
+    path: "/compare/robot-vacuums/",
+    label: "Compare robot vacuums",
+    breadcrumbLabel: "Robot Vacuums & Mops",
+    section: "compare",
+    parent: "/compare/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: true,
+    indexable: true,
+    category: "robot-vacuums",
+  },
+  {
+    path: "/botmatch/robot-vacuums/",
+    label: "Find My Robot Vacuum",
+    breadcrumbLabel: "Find My Robot Vacuum",
+    parent: "/robots/robot-vacuums/",
+    section: "botmatch",
+    status: "coming_soon",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: false,
+    indexable: false,
+    category: "robot-vacuums",
+  },
+
+  /* ---------------- Grill-cleaning robots ----------------
+     Page 006. The category survived the run that was designed to kill it —
+     see the keyword register for the grill-brush control that cleared it. */
+  {
+    path: "/robots/grill-cleaning-robots/",
+    label: "Grill-Cleaning Robots",
+    section: "shop",
+    parent: "/robots/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: "Explore",
+    inSitemap: true,
+    indexable: true,
+    category: "grill-cleaning-robots",
+  },
+  {
+    path: "/compare/grill-cleaning-robots/",
+    label: "Compare grill-cleaning robots",
+    breadcrumbLabel: "Grill-Cleaning Robots",
+    section: "compare",
+    parent: "/compare/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: true,
+    indexable: true,
+    category: "grill-cleaning-robots",
+  },
+  {
+    path: "/botmatch/grill-cleaning-robots/",
+    label: "Find My Grill Cleaner",
+    breadcrumbLabel: "Find My Grill Cleaner",
+    parent: "/robots/grill-cleaning-robots/",
+    section: "botmatch",
+    status: "coming_soon",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: false,
+    indexable: false,
+    category: "grill-cleaning-robots",
+  },
+
+  /* ---------------- Self-cleaning litter boxes ----------------
+     Page 004 of the owner-locked ten. One URL carries the entire commercial
+     category: every buying phrasing measured 5-9 shared top-ten domains
+     against the head term. See the keyword register for the table. */
+  {
+    path: "/robots/self-cleaning-litter-boxes/",
+    label: "Self-Cleaning Litter Boxes",
+    section: "shop",
+    parent: "/robots/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: "Explore",
+    inSitemap: true,
+    indexable: true,
+    category: "self-cleaning-litter-boxes",
+  },
+  {
+    path: "/compare/self-cleaning-litter-boxes/",
+    label: "Compare self-cleaning litter boxes",
+    breadcrumbLabel: "Self-Cleaning Litter Boxes",
+    section: "compare",
+    parent: "/compare/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: true,
+    indexable: true,
+    category: "self-cleaning-litter-boxes",
+  },
+  {
+    path: "/botmatch/self-cleaning-litter-boxes/",
+    label: "Find My Litter Box",
+    breadcrumbLabel: "Find My Litter Box",
+    parent: "/robots/self-cleaning-litter-boxes/",
+    section: "botmatch",
+    /* Its own questions and its own config, sc-litterbox-v1. coming_soon only
+       because the catalogue is empty — the funnel asks the right questions and
+       has nothing to recommend yet. */
+    status: "coming_soon",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: false,
+    indexable: false,
+    category: "self-cleaning-litter-boxes",
+  },
+
   /* ---------------- Window-cleaning robots ----------------
      Added 2026-08-05 when the category went live. The category page renders
      from a dynamic route and a D1 row, so it worked before this entry existed
@@ -335,20 +600,66 @@ export const ROUTES: RouteDef[] = [
     category: CAT,
     aliases: ["/compare/pool-cleaners/"],
   },
+  /* LIVE SINCE 6 AUGUST 2026. These three carried `coming_soon` and a
+     RoutePlaceholder from launch, which was correct while they were empty and
+     became wrong the day they were written. All three are ruled CREATE in
+     docs/seo/pool-research-findings.md — nothing here exists because a site
+     "should have" a best-of page. */
   {
     path: `/best-robots/${CAT}/`,
     label: "Best robotic pool cleaners",
     breadcrumbLabel: "Robotic Pool Cleaners",
     section: "best",
     parent: "/best-robots/",
-    status: "coming_soon",
+    status: "live",
     navSurface: "none",
     footerGroup: null,
-    inSitemap: false,
-    indexable: false,
+    inSitemap: true,
+    indexable: true,
     category: CAT,
     aliases: [`/best/${CAT}/`],
-    summary: "Our best-of picks for robotic pool cleaners.",
+    summary: "Nine robotic pool cleaners ranked by the job each does best, with who each one is wrong for.",
+  },
+  {
+    /* The single biggest wedge in the pool dataset: 22,200/mo at KD 0, more
+       than three times the "best robotic pool cleaner" cluster. A child of the
+       best-of page rather than a sibling, because it is the cordless subset of
+       the same argument and the breadcrumb should say so. */
+    path: `/best-robots/${CAT}/cordless/`,
+    label: "Best cordless robotic pool cleaners",
+    breadcrumbLabel: "Cordless",
+    section: "best",
+    parent: `/best-robots/${CAT}/`,
+    status: "live",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: true,
+    indexable: true,
+    category: CAT,
+    summary: "The seven cordless machines ranked, and the honest case for buying corded instead.",
+  },
+  {
+    /* Not on the 1 August map. The second pool run measured "robotic pool
+       cleaner for above ground pool" at 2,400/mo, KD 0 — the first run saw
+       above-ground at 140 and folded it into the best-of, which was right on
+       the number it had.
+
+       A page rather than a section because the above-ground rating is a
+       COMPATIBILITY claim, not a performance one: six of our ten cleaners are
+       not rated for a vinyl liner at all, so this reader is choosing from a
+       different shortlist. */
+    path: `/best-robots/${CAT}/above-ground-pools/`,
+    label: "Best above-ground pool cleaners",
+    breadcrumbLabel: "Above-ground pools",
+    section: "best",
+    parent: `/best-robots/${CAT}/`,
+    status: "live",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: true,
+    indexable: true,
+    category: CAT,
+    summary: "The four machines rated for a vinyl liner, and why the other six are not.",
   },
   {
     path: `/guides/${CAT}/`,
@@ -356,13 +667,31 @@ export const ROUTES: RouteDef[] = [
     breadcrumbLabel: "Robotic Pool Cleaners",
     section: "guides",
     parent: "/guides/",
-    status: "coming_soon",
+    status: "live",
     navSurface: "none",
     footerGroup: null,
-    inSitemap: false,
-    indexable: false,
+    inSitemap: true,
+    indexable: true,
     category: CAT,
-    summary: "Buying and care guides for robotic pool cleaners.",
+    summary: "How robotic pool cleaners work and what actually decides which one suits your pool.",
+  },
+  {
+    /* Only 40/mo on the exact phrase. It is here because "Is a robot pool
+       cleaner worth it?" is the number one People Also Ask entry on the
+       40,500 head term — a snippet play, not a volume play. Parented to the
+       guides index rather than to the category's guide hub: the URL has no
+       category segment, and a breadcrumb that claims one would not match it. */
+    path: "/guides/are-robotic-pool-cleaners-worth-it/",
+    label: "Are robotic pool cleaners worth it?",
+    section: "guides",
+    parent: "/guides/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: true,
+    indexable: true,
+    category: CAT,
+    summary: "For most in-ground pools yes, and for four specific situations no.",
   },
   {
     path: `/deals/${CAT}/`,
@@ -481,6 +810,72 @@ export const ROUTES: RouteDef[] = [
     inSitemap: true,
     indexable: true,
     summary: "The terms that apply when you use BotPlanet.",
+  },
+
+  /* ---------------- Standalone guides, 6 August 2026 ----------------
+     The first pages published for categories with NOTHING IN THE
+     CATALOGUE. Each answers a decision rather than ranking machines,
+     and each says in its own words what it cannot yet tell the reader.
+
+     PARENTED TO /guides/ RATHER THAN TO A CATEGORY GUIDE HUB, for the
+     same reason the pool worth-it guide is: the URL carries no category
+     segment, so a breadcrumb claiming one would not match the path the
+     reader actually walked. The category is still recorded below, which
+     is what joins them to the right internal-link anchor set.
+
+     Full plans — keywords, links, images, schema — in
+     content/seo/page-plan.ts. None has artwork yet. */
+  {
+    path: "/guides/wire-free-robot-lawn-mower/",
+    label: "Wire-free robot lawn mowers",
+    section: "guides",
+    parent: "/guides/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: true,
+    indexable: true,
+    category: "robotic-lawn-mowers",
+    summary: "RTK, vision or LiDAR — and when a buried cable is still the better buy.",
+  },
+  {
+    path: "/guides/cheap-robot-lawn-mower/",
+    label: "Cheap robot lawn mowers",
+    section: "guides",
+    parent: "/guides/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: true,
+    indexable: true,
+    category: "robotic-lawn-mowers",
+    summary: "What the budget end gives up, what it does not, and where a low price stops being a bargain.",
+  },
+  {
+    path: "/guides/robot-lawn-mower-for-hills/",
+    label: "Robot lawn mowers for hills",
+    section: "guides",
+    parent: "/guides/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: true,
+    indexable: true,
+    category: "robotic-lawn-mowers",
+    summary: "Measure the gradient first: it is the one constraint you cannot work around.",
+  },
+  {
+    path: "/guides/robotic-pets-for-elderly/",
+    label: "Robotic pets for elderly relatives",
+    section: "guides",
+    parent: "/guides/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: true,
+    indexable: true,
+    category: "companion-robots",
+    summary: "Three different products are sold to this buyer, and they answer three different problems.",
   },
 ];
 

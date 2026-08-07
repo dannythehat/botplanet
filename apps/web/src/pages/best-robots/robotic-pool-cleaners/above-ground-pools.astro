@@ -1,0 +1,62 @@
+---
+/**
+ * Best-of guide — robotic pool cleaners for above-ground pools.
+ *
+ * NOT ON THE 1 AUGUST MAP. The second pool run of 6 August measured "robotic
+ * pool cleaner for above ground pool" at 2,400/mo, KD 0, $4.30 CPC. The first
+ * run saw above-ground at 140 and folded it into the best-of as a section,
+ * which was the right call on the number it had — that phrasing was simply not
+ * in the seed list.
+ *
+ * WHY IT IS A PAGE AND NOT A SECTION. The above-ground rating is a
+ * COMPATIBILITY claim rather than a performance one: the liner is soft vinyl
+ * and the wall meets the floor in a curve rather than a corner, so a machine
+ * built to grip plaster can damage it. Six of the ten cleaners we hold are not
+ * rated for it at all. A reader with an above-ground pool is not choosing from
+ * the same shortlist as everyone else, and a section cannot carry that.
+ *
+ * THE SLUG IS `above-ground-pools`, NOT `above-ground`. "Cordless" describes
+ * the machine, so /cordless/ stands alone. "Above-ground" describes the POOL,
+ * so on its own it says the wrong thing about what the page lists — and the
+ * query it serves is "robotic pool cleaner for above ground POOL".
+ */
+import Base from "../../../layouts/Base.astro";
+import EditorialArticle from "../../../components/EditorialArticle.astro";
+import { editorialFor } from "../../../content/editorial";
+import { buildEditorialPage } from "../../../lib/editorial-page";
+import { breadcrumbsFor } from "../../../lib/routing";
+import { articleSchema, faqPageSchema, itemListSchema } from "../../../lib/seo";
+import { FOUNDER } from "../../../content/team";
+
+const PATH = "/best-robots/robotic-pool-cleaners/above-ground-pools/";
+const article = editorialFor(PATH)!;
+const { html, picks, comparison } = await buildEditorialPage(
+  article,
+  Astro.locals,
+  import.meta.env.DEV,
+);
+
+const crumbs = breadcrumbsFor(PATH);
+
+const pageSchema = [
+  articleSchema({
+    headline: article.title,
+    description: article.metaDescription,
+    path: PATH,
+    dateModified: article.lastReviewed,
+    authorName: FOUNDER.name,
+    authorPath: FOUNDER.path,
+  }),
+  picks.length ? itemListSchema(picks.map((p) => ({ name: p.name, path: p.href })), article.title) : null,
+  faqPageSchema(article.faq, PATH),
+];
+---
+
+<Base
+  title={article.seoTitle}
+  description={article.metaDescription}
+  breadcrumbs={crumbs}
+  schema={pageSchema}
+>
+  <EditorialArticle article={article} html={html} picks={picks} comparison={comparison} />
+</Base>

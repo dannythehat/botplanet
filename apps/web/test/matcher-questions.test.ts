@@ -31,6 +31,43 @@ const POOL_WORDS = /\bpool|waterline|above-ground|in-ground|skimmer|chlorine|dec
 const GLASS_WORDS = /\bglass|window|pane|frameless|squeegee|streak\b/i;
 /** Lawn words that must never appear outside the lawn set. */
 const LAWN_WORDS = /\blawn|grass|mow|acre|yard|boundary wire\b/i;
+/* Pet-camera words that must never appear outside the pet-camera set.
+
+   "stairs" is bounded on BOTH sides deliberately: the window set offers
+   "stairwell" as a place a robot has to work, which is a legitimate use of a
+   different word and not a leak.
+
+   "cat" and "dog" were in this list and have been REMOVED. They caught the
+   litter-box set on 6 August 2026, which asks how big your cat is — and that
+   is not a leak, it is the single most important question that category has.
+   The animal is not what makes pet cameras distinctive; two categories on this
+   site are sold to cat owners. What is distinctive is the machine's own
+   constraints, so the guard is those.
+
+   "carpet" has now gone the same way, for the same reason: robot vacuums ask
+   what is on your floors, and that is the most important question that
+   category has. Two categories caring about carpet is not a leak. */
+const PET_CAMERA_WORDS = /\bstairs?\b|\bpatrol|\btreats?\b/i;
+/* Companion words that must never appear outside the companion set. Kept to
+   terms only this category uses — "monthly fee" is deliberately NOT here,
+   because pet cameras charge for cloud recording and asking about it there is
+   correct rather than borrowed. */
+const COMPANION_WORDS = /\bconversation\b|\bdesk\b/i;
+/* Litter-box words that must never appear outside the litter-box set. The cat
+   words are deliberately NOT here — pet cameras legitimately ask about cats,
+   and asking a pet-camera buyer about their cat is correct rather than
+   borrowed. These four are specific to the litter category. */
+const LITTER_BOX_WORDS = /\blitter\b|\brefill/i;
+/* Grill words that must never appear outside the grill set. */
+const GRILL_WORDS = /\bgrate|\bgrill|\bbarbecue|\bbristle|\bcook\b/i;
+/* Vacuum words that must never appear outside the vacuum set. "carpet" is NOT
+   here — pet cameras legitimately ask about flooring, and that question is
+   theirs by right rather than borrowed. */
+const VACUUM_WORDS = /\bmop|\bvacuum|\bsuction|\bshag\b/i;
+/* Coding words that must never appear outside the coding set. "child" is not
+   here — litter boxes and pet cameras both legitimately ask about households
+   with children. These are specific to the category. */
+const CODING_WORDS = /\bcoding\b|\bprogramm|\btablet\b/i;
 
 /** Every string a reader could see in a question set. */
 function visibleText(slug: string): string {
@@ -41,12 +78,16 @@ function visibleText(slug: string): string {
 }
 
 describe("every category's questions are its own", () => {
-  it("has a set for each of pool, window and lawn", () => {
-    expect(CATEGORIES.sort()).toEqual([
-      "robotic-lawn-mowers",
-      "robotic-pool-cleaners",
-      "window-cleaning-robots",
-    ]);
+  /* Derived from the nav registry rather than hardcoded, since 6 August 2026.
+     The list was a literal until companion robots and pet camera robots went
+     live, at which point it failed for the one reason a guard must never fail:
+     somebody did the right thing. What the rule actually says is "every live
+     category has its own set", so that is what this now asserts — and it still
+     catches the original bug, because a category launched without questions
+     fails here rather than silently inheriting another category's. */
+  it("has a set for every live category, and none for anything else", () => {
+    const live = liveCategories().map((c) => c.slug).sort();
+    expect(CATEGORIES.sort()).toEqual(live);
   });
 
   it("never shares an array instance between two categories", () => {
@@ -82,6 +123,54 @@ describe("every category's questions are its own", () => {
     }
   });
 
+  it("asks nobody outside pet cameras about their stairs, carpet or dog", () => {
+    for (const slug of CATEGORIES) {
+      if (slug === "pet-camera-robots") continue;
+      expect(visibleText(slug), `${slug} mentions a pet camera concern`).not.toMatch(
+        PET_CAMERA_WORDS,
+      );
+    }
+  });
+
+  it("asks nobody outside companion robots about conversation or a desk", () => {
+    for (const slug of CATEGORIES) {
+      if (slug === "companion-robots") continue;
+      expect(visibleText(slug), `${slug} mentions a companion concern`).not.toMatch(
+        COMPANION_WORDS,
+      );
+    }
+  });
+
+  it("asks nobody outside litter boxes about litter or refills", () => {
+    for (const slug of CATEGORIES) {
+      if (slug === "self-cleaning-litter-boxes") continue;
+      expect(visibleText(slug), `${slug} mentions a litter concern`).not.toMatch(
+        LITTER_BOX_WORDS,
+      );
+    }
+  });
+
+  it("asks nobody outside grill cleaners about grates or bristles", () => {
+    for (const slug of CATEGORIES) {
+      if (slug === "grill-cleaning-robots") continue;
+      expect(visibleText(slug), `${slug} mentions a grill concern`).not.toMatch(GRILL_WORDS);
+    }
+  });
+
+  it("asks nobody outside robot vacuums about mopping or suction", () => {
+    for (const slug of CATEGORIES) {
+      if (slug === "robot-vacuums") continue;
+      expect(visibleText(slug), `${slug} mentions a vacuum concern`).not.toMatch(VACUUM_WORDS);
+    }
+  });
+
+  it("asks nobody outside coding robots about coding or tablets", () => {
+    for (const slug of CATEGORIES) {
+      if (slug === "educational-coding-robots") continue;
+      expect(visibleText(slug), `${slug} mentions a coding concern`).not.toMatch(CODING_WORDS);
+    }
+  });
+
   it("gives each category its own analysing sequence, of the same length as pool's", () => {
     for (const slug of CATEGORIES) {
       const tasks = MATCHER_TASKS_BY_CATEGORY[slug];
@@ -91,10 +180,14 @@ describe("every category's questions are its own", () => {
   });
 
   it("never returns another category's questions for an unknown slug", () => {
-    expect(questionsFor("robot-vacuums")).toBeNull();
+    /* Was "robot-vacuums" until 6 August 2026, when that category went live
+       and the guard started failing because somebody had done the right thing.
+       "solar-panel-robots" is a reserved, hidden slug with no questions — the
+       exact case this needs to assert. */
+    expect(questionsFor("solar-panel-robots")).toBeNull();
     expect(questionsFor("")).toBeNull();
     expect(questionsFor(undefined)).toBeNull();
-    expect(tasksFor("robot-vacuums")).toBeNull();
+    expect(tasksFor("solar-panel-robots")).toBeNull();
   });
 });
 
@@ -158,7 +251,7 @@ describe("folding answers into the scoring shape", () => {
   });
 
   it("returns an empty fragment for a category with no questions", () => {
-    expect(toScoringAnswers("robot-vacuums", { environment: "In-ground" })).toEqual({});
+    expect(toScoringAnswers("solar-panel-robots", { environment: "In-ground" })).toEqual({});
   });
 
   it("folds a real window answer set into engine inputs", () => {

@@ -144,15 +144,30 @@ interface OfferSeed {
 /** One representative provisional US offer per product (some products get two, to
  *  demonstrate product/offer separation). Prices are 2026-07-29 snapshots. */
 const offerSeeds: OfferSeed[] = [
-  { id: "off-ultra-beatbot", productId: "prod-beatbot-aquasense-2-ultra", retailerId: "ret-beatbot-store", affiliateProgramId: "ap-beatbot-direct", priceUsd: 2499, warranty: "3-year full replacement", redirectKey: "pool-beatbot-ultra-beatbot" },
-  { id: "off-ultra-amazon", productId: "prod-beatbot-aquasense-2-ultra", retailerId: "ret-amazon", affiliateProgramId: "ap-amazon-us", priceUsd: 2499, warranty: "3-year", redirectKey: "pool-beatbot-ultra-amazon" },
+  /* CORRECTED 6 August 2026: 2499 -> 2299. The checker read $2,299.00 from
+     Beatbot Tech on 6 August (ASIN B0G7B6F5FZ, identity confirmed) and the
+     published review has said $2,299 since it shipped. The 2499 was the only
+     place on the site still saying otherwise. */
+  { id: "off-ultra-beatbot", productId: "prod-beatbot-aquasense-2-ultra", retailerId: "ret-beatbot-store", affiliateProgramId: "ap-beatbot-direct", priceUsd: 2299, warranty: "3-year full replacement", redirectKey: "pool-beatbot-ultra-beatbot" },
+  { id: "off-ultra-amazon", productId: "prod-beatbot-aquasense-2-ultra", retailerId: "ret-amazon", affiliateProgramId: "ap-amazon-us", priceUsd: 2299, warranty: "3-year", redirectKey: "pool-beatbot-ultra-amazon" },
   { id: "off-scubax1-aiper", productId: "prod-aiper-scuba-x1", retailerId: "ret-aiper-store", affiliateProgramId: "ap-aiper-cj", priceUsd: 1299, warranty: "2-year", redirectKey: "pool-aiper-scubax1-aiper" },
   { id: "off-scubas1-aiper", productId: "prod-aiper-scuba-s1", retailerId: "ret-aiper-store", affiliateProgramId: "ap-aiper-cj", priceUsd: 498, warranty: "2-year", redirectKey: "pool-aiper-scubas1-aiper" },
   { id: "off-seagull-amazon", productId: "prod-aiper-seagull-se", retailerId: "ret-amazon", affiliateProgramId: "ap-amazon-us", priceUsd: 150, warranty: "1-2 year", redirectKey: "pool-aiper-seagull-amazon" },
   { id: "off-wybotc1-wybot", productId: "prod-wybot-c1", retailerId: "ret-wybot-store", affiliateProgramId: "ap-wybot-impact", priceUsd: 419, warranty: "2-year", redirectKey: "pool-wybot-c1-wybot" },
   { id: "off-ccplus-dohenys", productId: "prod-dolphin-nautilus-cc-plus", retailerId: "ret-dohenys", affiliateProgramId: "ap-dohenys-pepperjam", priceUsd: 699, warranty: "2-3 year", redirectKey: "pool-dolphin-ccplus-dohenys" },
   { id: "off-ccplus-amazon", productId: "prod-dolphin-nautilus-cc-plus", retailerId: "ret-amazon", affiliateProgramId: "ap-amazon-us", priceUsd: 699, warranty: "2-3 year", redirectKey: "pool-dolphin-ccplus-amazon" },
-  { id: "off-premier-leslies", productId: "prod-dolphin-premier", retailerId: "ret-leslies", affiliateProgramId: "ap-leslies-flexoffers", priceUsd: 1299, warranty: "3-year", redirectKey: "pool-dolphin-premier-leslies" },
+  /* CORRECTED 6 August 2026. THIS RECORD STOPPED HOLDING A DOLPHIN ON 3
+     AUGUST and these two rows did not follow it. The 1299 and the 3-year term
+     were the Maytronics Dolphin Premier's; the record now holds a BuBlue Bubot
+     800P Gen2, which the checker read at $799.97 from Klarvue on 4 August
+     (ASIN B0GTYX922J, identity confirmed by Brand/Model Number) and which
+     BuBlue warrants for one year, not three.
+
+     Found on 6 August because the category hub was printing $1,299 on the
+     Bubot's card — it read these rows directly, with no freshness gate. That
+     path is gone (see lib/catalogue-prices.ts), but a wrong number left in the
+     fallback is still a wrong number waiting for the next reader. */
+  { id: "off-premier-leslies", productId: "prod-dolphin-premier", retailerId: "ret-leslies", affiliateProgramId: "ap-leslies-flexoffers", priceUsd: 799.97, warranty: "1-year", redirectKey: "pool-dolphin-premier-leslies" },
   { id: "off-freedom-intheswim", productId: "prod-polaris-freedom", retailerId: "ret-intheswim", affiliateProgramId: null, priceUsd: 1399, warranty: "2-3 year", redirectKey: "pool-polaris-freedom-intheswim" },
   { id: "off-betta-leslies", productId: "prod-betta-se-plus", retailerId: "ret-leslies", affiliateProgramId: "ap-leslies-flexoffers", priceUsd: 389, warranty: "2-year", redirectKey: "pool-betta-seplus-leslies" },
   { id: "off-e10-walmart", productId: "prod-dolphin-e10", retailerId: "ret-walmart", affiliateProgramId: null, priceUsd: 529, warranty: "2-year", redirectKey: "pool-dolphin-e10-walmart" },
@@ -163,7 +178,7 @@ const offerSeeds: OfferSeed[] = [
   { id: "off-scubax1-amazon", productId: "prod-aiper-scuba-x1", retailerId: "ret-amazon", affiliateProgramId: "ap-amazon-us", priceUsd: 1299, warranty: "2-year", redirectKey: "pool-aiper-scubax1-amazon" },
   { id: "off-scubas1-amazon", productId: "prod-aiper-scuba-s1", retailerId: "ret-amazon", affiliateProgramId: "ap-amazon-us", priceUsd: 498, warranty: "2-year", redirectKey: "pool-aiper-scubas1-amazon" },
   { id: "off-wybotc1-amazon", productId: "prod-wybot-c1", retailerId: "ret-amazon", affiliateProgramId: "ap-amazon-us", priceUsd: 419, warranty: "2-year", redirectKey: "pool-wybot-c1-amazon" },
-  { id: "off-premier-amazon", productId: "prod-dolphin-premier", retailerId: "ret-amazon", affiliateProgramId: "ap-amazon-us", priceUsd: 1299, warranty: "3-year", redirectKey: "pool-dolphin-premier-amazon" },
+  { id: "off-premier-amazon", productId: "prod-dolphin-premier", retailerId: "ret-amazon", affiliateProgramId: "ap-amazon-us", priceUsd: 799.97, warranty: "1-year", redirectKey: "pool-dolphin-premier-amazon" },
   { id: "off-freedom-amazon", productId: "prod-polaris-freedom", retailerId: "ret-amazon", affiliateProgramId: "ap-amazon-us", priceUsd: 1399, warranty: "2-3 year", redirectKey: "pool-polaris-freedom-amazon" },
   { id: "off-betta-amazon", productId: "prod-betta-se-plus", retailerId: "ret-amazon", affiliateProgramId: "ap-amazon-us", priceUsd: 389, warranty: "2-year", redirectKey: "pool-betta-seplus-amazon" },
   { id: "off-e10-amazon", productId: "prod-dolphin-e10", retailerId: "ret-amazon", affiliateProgramId: "ap-amazon-us", priceUsd: 529, warranty: "2-year", redirectKey: "pool-dolphin-e10-amazon" },

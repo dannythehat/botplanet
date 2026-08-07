@@ -79,6 +79,48 @@ function reflect(categorySlug: string | undefined, a: Record<string, string>): s
       a.primary_need ? `the ground is ${lower(a.primary_need)}` : null,
       a.boundary_pref ? `on a boundary wire, ${lower(a.boundary_pref)}` : null,
     ];
+  } else if (categorySlug === "companion-robots") {
+    bits = [
+      a.primary_need ? `it's ${lower(a.primary_need)}` : null,
+      a.subscription_tolerance ? `on a monthly fee, ${lower(a.subscription_tolerance)}` : null,
+      a.movement ? `you'd like something that ${lower(a.movement)}` : null,
+      a.talking ? `on talking, ${lower(a.talking)}` : null,
+    ];
+  } else if (categorySlug === "pet-camera-robots") {
+    bits = [
+      a.primary_need ? `you mainly want to ${lower(a.primary_need)}` : null,
+      a.environment ? `on stairs, ${lower(a.environment)}` : null,
+      a.flooring ? `the floors are ${lower(a.flooring)}` : null,
+      a.autonomy ? `you'd like it to ${lower(a.autonomy)}` : null,
+    ];
+  } else if (categorySlug === "self-cleaning-litter-boxes") {
+    bits = [
+      a.environment ? `your cat is ${lower(a.environment)}` : null,
+      a.primary_need ? `there ${a.primary_need === "One" ? "is" : "are"} ${lower(a.primary_need)}` : null,
+      a.litter_pref ? `on the maker's own refills, ${lower(a.litter_pref)}` : null,
+      a.tracking ? `on health tracking, ${lower(a.tracking)}` : null,
+    ];
+  } else if (categorySlug === "grill-cleaning-robots") {
+    bits = [
+      a.environment ? `your grates are ${lower(a.environment)}` : null,
+      a.bar_spacing ? `the bars are ${lower(a.bar_spacing)}` : null,
+      a.primary_need ? `the problem is ${lower(a.primary_need)}` : null,
+      a.frequency ? `you cook ${lower(a.frequency)}` : null,
+    ];
+  } else if (categorySlug === "robot-vacuums") {
+    bits = [
+      a.environment ? `your floors are ${lower(a.environment)}` : null,
+      a.primary_need ? `on hair, ${lower(a.primary_need)}` : null,
+      a.clutter ? `the floor is usually ${lower(a.clutter)}` : null,
+      a.emptying ? `on emptying, ${lower(a.emptying)}` : null,
+    ];
+  } else if (categorySlug === "educational-coding-robots") {
+    bits = [
+      a.environment ? `they are ${lower(a.environment)}` : null,
+      a.device ? `on a tablet, ${lower(a.device)}` : null,
+      a.primary_need ? `you want it to ${lower(a.primary_need)}` : null,
+      a.asked_for_it ? `and ${lower(a.asked_for_it)}` : null,
+    ];
   } else if (categorySlug === "robotic-pool-cleaners") {
     bits = [
       a.environment ? `you have ${lower(a.environment)} pool` : null,
@@ -130,6 +172,18 @@ function renderReply(opts: {
     "window-cleaning-robots":
       "framed or frameless glass, which glass you need reached, power and budget band",
     "robotic-lawn-mowers": "lawn size, tree cover, slopes, separate zones and budget band",
+    "companion-robots":
+      "who it is for, whether it moves, how much it talks and your budget band",
+    "pet-camera-robots":
+      "whether there are stairs, what is on your floors, what you need it to do and your budget band",
+    "self-cleaning-litter-boxes":
+      "your cat's size, how many cats, which litter you will use and your budget band",
+    "grill-cleaning-robots":
+      "what your grates are made of, how the bars are spaced, how often you cook and your budget band",
+    "robot-vacuums":
+      "what is on your floors, whether there is hair in the house, how clear the floor is and your budget band",
+    "educational-coding-robots":
+      "the child's age, whether a tablet is free, what you want from it and your budget band",
   };
   const seen = SEEN[opts.categorySlug ?? ""] ?? "what you told us and your budget band";
   /* "your pool" in the sign-off, or the right noun for the category. */
@@ -137,6 +191,12 @@ function renderReply(opts: {
     "robotic-pool-cleaners": "your pool",
     "window-cleaning-robots": "your windows",
     "robotic-lawn-mowers": "your lawn",
+    "companion-robots": "who this is for",
+    "pet-camera-robots": "your home",
+    "self-cleaning-litter-boxes": "your cat",
+    "grill-cleaning-robots": "your grill",
+    "robot-vacuums": "your floors",
+    "educational-coding-robots": "the child",
   };
   const theirs = THEIRS[opts.categorySlug ?? ""] ?? "what you told us";
   const p = (t: string) =>

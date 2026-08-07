@@ -53,6 +53,64 @@ export const BOTMATCH_JOURNEYS: Record<string, BotMatchJourney> = {
     href: routes.botmatch(LAUNCH_CATEGORY),
     accent: true,
   },
+  /* Both added 6 August 2026 with their categories. Without an entry the
+     shell's BotMatch button keeps saying "Find My Pool Cleaner" on every page
+     of these two categories, which is cosmetic but visibly wrong in the header
+     of every page a reader sees. */
+  "companion-robots": {
+    category: "companion-robots",
+    ctaLabel: "Find My Robot Pet",
+    journeyTitle: "Find your robot pet",
+    explanation:
+      "Tell us who it is for and whether a monthly fee is acceptable, and get one clear recommendation.",
+    href: routes.botmatch("companion-robots"),
+    accent: true,
+  },
+  "pet-camera-robots": {
+    category: "pet-camera-robots",
+    ctaLabel: "Find My Pet Camera Robot",
+    journeyTitle: "Find your pet camera robot",
+    explanation:
+      "Tell us about your stairs, your floors and your pet, and get one clear recommendation.",
+    href: routes.botmatch("pet-camera-robots"),
+    accent: true,
+  },
+  "self-cleaning-litter-boxes": {
+    category: "self-cleaning-litter-boxes",
+    ctaLabel: "Find My Litter Box",
+    journeyTitle: "Find your self-cleaning litter box",
+    explanation:
+      "Tell us your cat's size and how many you have, and get one clear recommendation.",
+    href: routes.botmatch("self-cleaning-litter-boxes"),
+    accent: true,
+  },
+  "grill-cleaning-robots": {
+    category: "grill-cleaning-robots",
+    ctaLabel: "Find My Grill Cleaner",
+    journeyTitle: "Find your grill cleaning robot",
+    explanation:
+      "Tell us what your grates are made of and how often you cook, and get one clear answer.",
+    href: routes.botmatch("grill-cleaning-robots"),
+    accent: true,
+  },
+  "robot-vacuums": {
+    category: "robot-vacuums",
+    ctaLabel: "Find My Robot Vacuum",
+    journeyTitle: "Find your robot vacuum",
+    explanation:
+      "Tell us what is on your floors and whether there is an animal in the house, and get one clear recommendation.",
+    href: routes.botmatch("robot-vacuums"),
+    accent: true,
+  },
+  "educational-coding-robots": {
+    category: "educational-coding-robots",
+    ctaLabel: "Find My Coding Robot",
+    journeyTitle: "Find their first coding robot",
+    explanation:
+      "Tell us how old they are and whether a tablet is available, and get one clear recommendation.",
+    href: routes.botmatch("educational-coding-robots"),
+    accent: true,
+  },
 };
 
 /** The journey for a category, or null when that category has none yet. */

@@ -58,11 +58,520 @@ export interface InternalAnchor {
    reader at the bottom of a review with nowhere to go. internal-links.test.ts
    checks the anchors that DO exist resolve; it cannot check for absence. */
 export const CATEGORY_ANCHORS: Record<string, InternalAnchor[]> = {
+  "educational-coding-robots": [
+    {
+      anchor: "screen-free",
+      href: "/robots/educational-coding-robots/#screen-or-app",
+      why: "The category's first real fork and a parenting decision as much as a technical one. The phrase recurs across the prose and the reasoning belongs in one place.",
+      status: "live",
+    },
+    {
+      anchor: "block coding",
+      href: "/robots/educational-coding-robots/#age",
+      why: "The middle step between buttons and real code, and the thing that decides which age band a machine actually serves.",
+      status: "live",
+    },
+    {
+      anchor: "month six",
+      href: "/robots/educational-coding-robots/#does-it-teach",
+      why: "The single most useful question to ask about any robot in this category, and the section that answers it. Worth reaching from any product page.",
+      status: "live",
+    },
+    {
+      anchor: "compare",
+      href: "/compare/educational-coding-robots/",
+      why: "The comparison table is the next step once the age band has narrowed the field.",
+      status: "live",
+    },
+    {
+      anchor: "review methodology",
+      href: "/review-methodology/",
+      why: "Any claim about how we check things should be one click from the page that says how we check things.",
+      status: "live",
+    },
+    {
+      anchor: "BotMatch",
+      href: "/botmatch/educational-coding-robots/",
+      why: "Planned until the catalogue has products. The funnel's first question is the age exclusion, and it is willing to answer 'buy the cheap one first'.",
+      status: "planned",
+    },
+  ],
+
+  "robot-vacuums": [
+    {
+      anchor: "mop lifting",
+      href: "/robots/robot-vacuums/#floors",
+      why: "The specification that decides whether a vacuum-mop works in a house with any carpet at all, and the one buried deepest in the spec sheets. Every product page will mention it; the reasoning belongs in one place.",
+      status: "live",
+    },
+    {
+      anchor: "pet hair",
+      href: "/robots/robot-vacuums/#pet-hair",
+      why: "The biggest single reason people buy one, and the section explaining why brush design matters more than suction.",
+      status: "live",
+    },
+    {
+      anchor: "self emptying",
+      href: "/robots/robot-vacuums/#pet-hair",
+      why: "Explained where it matters most rather than in the price ladder — in a pet household it is the clearest quality-of-life upgrade in the category.",
+      status: "live",
+    },
+    {
+      anchor: "obstacle avoidance",
+      href: "/robots/robot-vacuums/#before-you-buy",
+      why: "Most of the price gap between a cheap machine and an expensive one, and the checklist is where the honest question about your own floor sits.",
+      status: "live",
+    },
+    {
+      anchor: "compare",
+      href: "/compare/robot-vacuums/",
+      why: "The comparison table is the honest next step once floor type has narrowed the field.",
+      status: "live",
+    },
+    {
+      anchor: "review methodology",
+      href: "/review-methodology/",
+      why: "Any claim about how we check things should be one click from the page that says how we check things.",
+      status: "live",
+    },
+    {
+      anchor: "BotMatch",
+      href: "/botmatch/robot-vacuums/",
+      why: "Planned until the catalogue has products. The funnel's first question is the floor-type exclusion, which is the most useful thing it does.",
+      status: "planned",
+    },
+  ],
+
+  "grill-cleaning-robots": [
+    {
+      anchor: "porcelain",
+      href: "/robots/grill-cleaning-robots/#grate-type",
+      why: "The only hard exclusion in the category and the one mistake that is not recoverable. Any page mentioning porcelain grates should reach the section explaining why brass strips them.",
+      status: "live",
+    },
+    {
+      anchor: "wire bristles",
+      href: "/robots/grill-cleaning-robots/#bristles",
+      why: "The honest commercial argument for the whole category, and the one a reader is most likely to have arrived worried about.",
+      status: "live",
+    },
+    {
+      anchor: "brush",
+      href: "/robots/grill-cleaning-robots/#robot-or-brush",
+      why: "The comparison every buyer here is actually making. The word recurs throughout the prose and the reasoning belongs in one place.",
+      status: "live",
+    },
+    {
+      anchor: "compare",
+      href: "/compare/grill-cleaning-robots/",
+      why: "The comparison table is the next step once grate type has been settled.",
+      status: "live",
+    },
+    {
+      anchor: "review methodology",
+      href: "/review-methodology/",
+      why: "Any claim about how we check things should be one click from the page that says how we check things.",
+      status: "live",
+    },
+    {
+      anchor: "BotMatch",
+      href: "/botmatch/grill-cleaning-robots/",
+      why: "Planned until the catalogue has products. The funnel's first question is the grate-material exclusion, and it is willing to answer 'buy a brush'.",
+      status: "planned",
+    },
+  ],
+
+  "self-cleaning-litter-boxes": [
+    {
+      anchor: "safety",
+      href: "/robots/self-cleaning-litter-boxes/#safety",
+      why: "The most important section on the page and the only one readers arrive already worried about. Google surfaced the vet question on six of the twenty-three SERPs bought for this category, so any page mentioning safety should reach the explanation in one click.",
+      status: "live",
+    },
+    {
+      anchor: "clumping litter",
+      href: "/robots/self-cleaning-litter-boxes/#litter-type",
+      why: "The fork that decides three-year running cost, and the phrase recurs across the prose. A reader meeting it on a product page should be able to reach the reasoning.",
+      status: "live",
+    },
+    {
+      anchor: "large cat",
+      href: "/robots/self-cleaning-litter-boxes/#cat-size",
+      why: "Chamber size is a hard rule-out and the cat-size section is where the three groups are separated. First mention should reach it.",
+      status: "live",
+    },
+    {
+      anchor: "multiple cats",
+      href: "/robots/self-cleaning-litter-boxes/#what-it-fixes",
+      why: "The strongest commercial case in the category, and the section that also states the one-box-per-cat-plus-one rule the machine does not repeal.",
+      status: "live",
+    },
+    {
+      anchor: "compare",
+      href: "/compare/self-cleaning-litter-boxes/",
+      why: "The comparison table is the honest next step once cat size and litter type have narrowed the field.",
+      status: "live",
+    },
+    {
+      anchor: "review methodology",
+      href: "/review-methodology/",
+      why: "Any claim about how we check things should be one click from the page that says how we check things.",
+      status: "live",
+    },
+    {
+      anchor: "BotMatch",
+      href: "/botmatch/self-cleaning-litter-boxes/",
+      why: "Planned until the catalogue has products. The funnel's first question is the cat-size exclusion, which is the most useful thing it does.",
+      status: "planned",
+    },
+  ],
+
+  /* ------------------------------------------------------------------
+     LAWN. Added 6 August 2026 with the three lawn guides — the category
+     had a live hub and no anchor set at all, so nothing written for it
+     could link anywhere.
+
+     ORDERING IS LOAD-BEARING HERE and this is the list where it bites.
+     The linker takes the FIRST anchor that matches a phrase, so "robot
+     lawn mower" sitting above "cheap robot lawn mower" would swallow
+     every one of the guide anchors and send the whole category to the
+     hub. The three guide phrases are listed first, longest first, and
+     the head term last. internal-links.test.ts checks this, but it is
+     worth understanding rather than obeying.
+     ------------------------------------------------------------------ */
+  "robotic-lawn-mowers": [
+    {
+      anchor: "best robot lawn mower for hills",
+      href: "/guides/robot-lawn-mower-for-hills/",
+      why: "Slope is the category's one hard exclusion and every lawn page mentions it. A reader meeting the phrase should reach the page that measures it rather than a paragraph that names it.",
+      status: "live",
+    },
+    {
+      anchor: "wire free robot lawn mower",
+      href: "/guides/wire-free-robot-lawn-mower/",
+      why: "≈1,670/mo across the wire-free family and the biggest single objection buyers raise. The guide is the page that owns the term, so the phrase belongs to it wherever it appears.",
+      status: "live",
+    },
+    {
+      anchor: "cheap robot lawn mower",
+      href: "/guides/cheap-robot-lawn-mower/",
+      why: "The budget question comes up on every page in this category, usually as an aside. The guide is where it is answered, including the point below which a low price stops being a bargain.",
+      status: "live",
+    },
+    {
+      anchor: "robot lawn mower",
+      href: "/robots/robotic-lawn-mowers/",
+      why: "The 74,000/mo head term and the hub that owns it. Listed after the guide phrases deliberately, so it cannot swallow them — it is the fallback, not the first choice.",
+      status: "live",
+    },
+    {
+      anchor: "boundary wire",
+      href: "/robots/robotic-lawn-mowers/#navigation",
+      why: "The fork that decides both price and installation, explained in one place on the hub. Every lawn page mentions the wire; only one of them should have to explain it.",
+      status: "live",
+    },
+    {
+      anchor: "acre",
+      href: "/robots/robotic-lawn-mowers/#yard-size",
+      why: "Area is the first hard constraint and the acreage cluster is worth ~2,060/mo. The yard-size section is where the stated maximum is explained against a real lawn.",
+      status: "live",
+    },
+    {
+      anchor: "slope",
+      href: "/robots/robotic-lawn-mowers/#terrain",
+      why: "The terrain section separates gradient, tree cover and split gardens. A page mentioning a slope in passing should be able to reach the reasoning without repeating it.",
+      status: "live",
+    },
+    {
+      anchor: "mulch",
+      href: "/robots/robotic-lawn-mowers/#cutting",
+      why: "Mulching rather than collecting is the single biggest surprise for a first-time buyer, and the cutting section is the only place it is explained properly.",
+      status: "live",
+    },
+    {
+      anchor: "compare",
+      href: "/compare/robotic-lawn-mowers/",
+      why: "The comparison table is the honest next step once area, terrain and navigation have narrowed the field to two or three machines.",
+      status: "live",
+    },
+    {
+      anchor: "review methodology",
+      href: "/review-methodology/",
+      why: "Every guide in this category says what it cannot yet tell the reader. The page explaining how we check things has to be one click from that sentence.",
+      status: "live",
+    },
+    {
+      /* Planned, not live: /botmatch/robotic-lawn-mowers/ is coming_soon until
+         the catalogue has mowers. The question set and scoring config already
+         exist; it would just recommend nothing. */
+      anchor: "BotMatch",
+      href: "/botmatch/robotic-lawn-mowers/",
+      why: "The lawn question set asks about area, tree cover, slopes and zones — the exact axes these guides argue over. Planned until there are mowers behind it.",
+      status: "planned",
+    },
+  ],
+
+  /* The cross-link between these two categories matters more than most,
+     because they were one category until 6 August 2026 and to a reader they
+     still look like one shelf. Somebody who lands on companion robots wanting
+     to watch their dog has arrived in the wrong place, and the fastest honest
+     fix is a link rather than a paragraph explaining the SERP evidence. */
+  "companion-robots": [
+    {
+      anchor: "pet camera robot",
+      href: "/robots/pet-camera-robots/",
+      why: "The phrase appears in the hub's own prose where the two categories are distinguished. A reader who used that phrase to get here wants the other page, and this is the shortest route to it.",
+      status: "live",
+    },
+    {
+      anchor: "robotic pet for elderly",
+      /* REPOINTED 6 August 2026, from /robots/companion-robots/#who-for to the
+         guide. The hub section separates three audiences in a paragraph each;
+         the guide answers this one properly, and it is now the page targeting
+         the term. An anchor that sends the phrase somewhere weaker than the
+         page built for it is a wasted signal. */
+      href: "/guides/robotic-pets-for-elderly/",
+      why: "Eldercare is the audience with genuinely different products behind it, and the guide is the page that owns the term. Any companion review or article using the phrase should reach the page built for it rather than a paragraph on the hub.",
+      status: "live",
+    },
+    {
+      anchor: "subscription",
+      href: "/robots/companion-robots/#support-risk",
+      why: "The support-risk section is the only place on the site that explains what a companion-robot subscription actually gates. Every product page will mention the word; the reasoning belongs in one place.",
+      status: "live",
+    },
+    {
+      anchor: "desktop companion robot",
+      href: "/robots/companion-robots/#desk-or-floor",
+      why: "The desk-or-floor fork is the category's real split and this is the phrase a reader searching for the desk half would use.",
+      status: "live",
+    },
+    {
+      /* Added 6 August 2026 with the eldercare guide, which needed a route
+         back to the hub in its own words. Safe below the longer anchors: the
+         literal string "robot pet" appears in none of them — "robotic pet for
+         elderly" is "robotic", not "robot ". */
+      anchor: "robot pet",
+      href: "/robots/companion-robots/",
+      why: "The category's own head term at 8,100/mo. Any page in this family that uses the phrase in passing should reach the hub that owns it, and the guides use it constantly.",
+      status: "live",
+    },
+    {
+      anchor: "compare",
+      href: "/compare/companion-robots/",
+      why: "The comparison table is the honest next step for a reader who has narrowed it to two machines.",
+      status: "live",
+    },
+    {
+      anchor: "review methodology",
+      href: "/review-methodology/",
+      why: "Any claim about how we check things should be one click from the page that says how we check things.",
+      status: "live",
+    },
+    {
+      /* Planned rather than live: /botmatch/companion-robots/ is coming_soon
+         until the catalogue has products to recommend. The anchor is recorded
+         now so it becomes a real link the day the funnel is worth using. */
+      anchor: "BotMatch",
+      href: "/botmatch/companion-robots/",
+      why: "Named in the prose where the reader is told who it is for decides the answer, which is exactly when the tool helps. Planned until there are products behind it.",
+      status: "planned",
+    },
+  ],
+
+  "pet-camera-robots": [
+    {
+      anchor: "robot pet",
+      href: "/robots/companion-robots/",
+      why: "The mirror of the companion hub's link to this page. A reader here for company rather than monitoring is one click from the right category instead of reading about wheel diameter.",
+      status: "live",
+    },
+    {
+      anchor: "fixed camera",
+      href: "/robots/pet-camera-robots/#versus-fixed",
+      why: "The comparison every buyer in this category is actually making. The phrase recurs throughout the prose and the reasoning sits in one section.",
+      status: "live",
+    },
+    {
+      anchor: "stairs",
+      href: "/robots/pet-camera-robots/#your-home",
+      why: "The category's one hard exclusion. Any page mentioning stairs should be able to reach the section explaining that none of these climb them.",
+      status: "live",
+    },
+    {
+      anchor: "compare",
+      href: "/compare/pet-camera-robots/",
+      why: "The comparison table is the honest next step once a reader has confirmed the layout works.",
+      status: "live",
+    },
+    {
+      anchor: "review methodology",
+      href: "/review-methodology/",
+      why: "Any claim about how we check things should be one click from the page that says how we check things.",
+      status: "live",
+    },
+    {
+      anchor: "BotMatch",
+      href: "/botmatch/pet-camera-robots/",
+      why: "Planned until the catalogue has products. The funnel's first question is the stairs exclusion, which is the most useful thing it does.",
+      status: "planned",
+    },
+  ],
+
+  /* WINDOW-CLEANING ROBOTS. Added 6 August 2026 with the review set — the
+     category had eleven published products and no anchors at all, so eleven
+     reviews would have shipped linking to nothing and passing no signal to
+     each other or to the hub.
+
+     The order matters here more than it does for pool. "frameless glass" must
+     sit above "frameless", and both above "glass", or the shorter anchor
+     swallows the longer one and sends a reader asking the category's hardest
+     question to a general page. editorial.test.ts enforces longest-first. */
+  "window-cleaning-robots": [
+    {
+      anchor: "frameless glass",
+      href: "/robots/window-cleaning-robots/#glass-type",
+      why: "The category's biggest exclusion and the question most likely to make a purchase wrong. A robot that cannot hold an unframed edge is not a cheaper robot, it is the wrong one, and the hub is where that is explained rather than repeated in eleven reviews.",
+      status: "live",
+    },
+    {
+      anchor: "safety rope",
+      href: "/robots/window-cleaning-robots/#safety",
+      why: "Every reader above the ground floor asks the same question — what happens when the power cuts — and the answer belongs in one place the reviews can point at.",
+      status: "live",
+    },
+    {
+      anchor: "power-off protection",
+      href: "/robots/window-cleaning-robots/#safety",
+      why: "The mechanism behind the rope answer: how long the machine holds the glass with no mains. Named wherever a review quotes a hold time.",
+      status: "live",
+    },
+    {
+      anchor: "streaking",
+      href: "/robots/window-cleaning-robots/#results",
+      why: "The most common complaint about this whole category, and the one thing a spec sheet cannot predict. Reviews reach it constantly; the explanation lives on the hub.",
+      status: "live",
+    },
+    {
+      anchor: "does the window open",
+      href: "/botmatch/window-cleaning-robots/",
+      why: "The first question BotMatch asks and the one that eliminates half the catalogue for some readers. Named in prose exactly where a reader realises it applies to them.",
+      status: "live",
+    },
+    {
+      anchor: "compare",
+      href: "/compare/window-cleaning-robots/",
+      why: "The comparison table is the honest next step for a reader who has decided one model is close but wants it beside the others.",
+      status: "live",
+    },
+    {
+      anchor: "BotMatch",
+      href: "/botmatch/window-cleaning-robots/",
+      why: "Named where the reader is being told their glass decides the answer, which is exactly the moment the tool is useful.",
+      status: "live",
+    },
+    {
+      anchor: "review methodology",
+      href: "/review-methodology/",
+      why: "Any claim about how we check things should be one click from the page that says how we check things.",
+      status: "live",
+    },
+    {
+      anchor: "editorial policy",
+      href: "/editorial-policy/",
+      why: "Wherever a page says commission did not pick the winner, the reader should be able to check that claim in one click.",
+      status: "live",
+    },
+
+    /* ---- The eleven machines. ---- */
+    {
+      anchor: "WINBOT W2 PRO Omni",
+      href: "/robots/window-cleaning-robots/ecovacs-winbot-w2-pro-omni/",
+      why: "The flagship and the only one with a portable battery station. Named wherever a review reaches the point that there is no socket by the window.",
+      status: "live",
+    },
+    {
+      anchor: "WINBOT W3 Omni",
+      href: "/robots/window-cleaning-robots/ecovacs-winbot-w3-omni/",
+      why: "The top of the range and the highest stated suction in the catalogue. Named wherever a review says a bigger pane needs a stronger machine.",
+      status: "live",
+    },
+    {
+      anchor: "WINBOT W2 PRO",
+      href: "/robots/window-cleaning-robots/ecovacs-winbot-w2-pro/",
+      why: "The mid flagship without the station. The machine most readers should compare the Omni against before paying for the battery.",
+      status: "live",
+    },
+    {
+      anchor: "WINBOT W2S",
+      href: "/robots/window-cleaning-robots/ecovacs-winbot-w2s/",
+      why: "The slimmer W2 variant with TruEdge scrubbers. Named wherever edge coverage is the point at issue.",
+      status: "live",
+    },
+    {
+      anchor: "WINBOT W1 PRO",
+      href: "/robots/window-cleaning-robots/ecovacs-winbot-w1-pro/",
+      why: "The cheap way into ECOVACS. Named wherever a review tells a reader they are being sold more machine than their windows need.",
+      status: "live",
+    },
+    {
+      anchor: "WINBOT Mini",
+      href: "/robots/window-cleaning-robots/ecovacs-winbot-mini/",
+      why: "The smallest and cheapest, and the only one a renter would sensibly buy. The answer to small panes and to storage.",
+      status: "live",
+    },
+    {
+      anchor: "HUTT S55 Pro",
+      href: "/robots/window-cleaning-robots/hutt-s55-pro/",
+      why: "The only machine in the catalogue claiming sloped glass, which is the category's hardest exclusion. Named wherever a review rules a reader out on glass angle.",
+      status: "live",
+    },
+    {
+      anchor: "Mamibot W120-DP",
+      href: "/robots/window-cleaning-robots/mamibot-w120-dp/",
+      why: "The third brand and the high-rise rating. Named wherever a review discusses working above the ground floor.",
+      status: "live",
+    },
+    {
+      anchor: "HOBOT 2S",
+      href: "/robots/window-cleaning-robots/hobot-2s/",
+      why: "Dual replaceable tanks and ultrasonic spray. Named wherever refilling mid-clean is the complaint.",
+      status: "live",
+    },
+    {
+      anchor: "HOBOT 298",
+      href: "/robots/window-cleaning-robots/hobot-298/",
+      why: "The budget HOBOT. Named wherever ultrasonic spray is being weighed against a pump.",
+      status: "live",
+    },
+    {
+      anchor: "Cop Rose X5S",
+      href: "/robots/window-cleaning-robots/cop-rose-x5s/",
+      why: "Remote control and no app at all, which for some readers is the feature rather than the compromise. The cheapest machine in the catalogue.",
+      status: "live",
+    },
+  ],
+
   "robotic-pool-cleaners": [
     {
       anchor: "waterline",
       href: "/robots/robotic-pool-cleaners/#coverage",
       why: "The hub's coverage section is where floor / wall / waterline are separated as distinct capabilities. This review's central argument depends on that distinction, so the first mention should be able to reach the explanation.",
+      status: "live",
+    },
+    /* THESE TWO MUST STAY ABOVE THE BARE "cordless" ENTRY. The linker takes
+       the first match it finds for a phrase, and "cordless" would otherwise
+       swallow the leading word of both and send the reader to the hub. */
+    {
+      anchor: "cordless robotic pool cleaner",
+      href: "/best-robots/robotic-pool-cleaners/cordless/",
+      why: "22,200/mo at KD 0 and a page of its own on measured SERP evidence. Wherever the full phrase appears in prose, it should reach the page that ranks them.",
+      status: "live",
+    },
+    {
+      anchor: "cordless page",
+      href: "/best-robots/robotic-pool-cleaners/cordless/",
+      why: "How the cordless best-of gets named in running text — 'the full argument sits on the cordless page'. The natural phrase, rather than the keyword bolted on.",
       status: "live",
     },
     {
@@ -185,44 +694,71 @@ export const CATEGORY_ANCHORS: Record<string, InternalAnchor[]> = {
       status: "live",
     },
 
-    /* ---- Declared now, linked when the page ships. ----
-       A planned anchor renders as plain text, so none of these can 404. The
-       wiring is done, and each becomes a real link the day its target exists —
-       rather than being remembered, or not, months later. */
+    /* Both went live on 6 August 2026 when their pages shipped. They were
+       written as `planned` months earlier and became real links by changing
+       one word — which is the whole point of declaring an anchor before its
+       destination exists. */
     {
       anchor: "best robotic pool cleaner",
       href: "/best-robots/robotic-pool-cleaners/",
-      why: "Recorded for when the best-of page carries real picks. Not linked yet — the page exists but has no ranked content behind it.",
-      status: "planned",
+      why: "The ranked best-of. Every review and guide reaches a point where the reader wants the field rather than one machine, and that is where this goes.",
+      status: "live",
     },
     {
       anchor: "worth it",
       href: "/guides/are-robotic-pool-cleaners-worth-it/",
-      why: "The is-it-worth-it guide owns that query. Planned: the page returns 404 today.",
-      status: "planned",
+      why: "The is-it-worth-it guide owns that query, and it is the number one People Also Ask entry on the category head term. Wherever a page hedges on whether the money is justified, this answers it.",
+      status: "live",
     },
+
+    /* ---- Declared now, linked when the page ships. ----
+       A planned anchor renders as plain text, so none of these can 404. The
+       wiring is done, and each becomes a real link the day its target exists —
+       rather than being remembered, or not, months later. */
+    /* REFUSED 6 August 2026, by measurement. These four anchors were declared
+       months ago pointing at guide URLs nobody had ever priced. The second pool
+       run priced them:
+
+         robotic pool cleaner battery        no measurable volume
+         robotic pool cleaner filter         no measurable volume
+         what size robotic pool cleaner      no measurable volume
+         robotic pool cleaner warranty       no measurable volume
+
+       And the SERPs are worse than the volumes. Every one of these questions
+       returns Reddit, Facebook, troublefreepool and Quora — one undifferentiated
+       forum result set, not editorial. "how to clean pool robot filter" shares
+       SIX top-ten domains with "aiper vs dolphin".
+
+       Kept as entries rather than deleted so the refusal is auditable and
+       nobody re-proposes them. `status: "planned"` already renders nothing.
+       Evidence: docs/seo/robotic-pool-cleaners-guides-findings.md
+
+       Warranty demand IS real but it is brand-shaped, not category-shaped —
+       aiper warranty 320 at KD 3, dolphin pool cleaner warranty 110, beatbot
+       warranty 70 — and it belongs in the review pages, which already carry
+       warranty sections. */
     {
       anchor: "battery",
       href: "/guides/robotic-pool-cleaner-batteries/",
-      why: "Every cordless review reaches the same paragraph about cells degrading. That belongs in one guide the reviews point at, not repeated five times. Planned.",
+      why: "REFUSED 6 Aug 2026: no measurable volume, SERP is Reddit and Facebook. Every cordless review reaches the same paragraph about cells degrading. That belongs in one guide the reviews point at, not repeated five times. Planned.",
       status: "planned",
     },
     {
       anchor: "filter",
       href: "/guides/robotic-pool-cleaner-filters/",
-      why: "Micron ratings, canister capacity and how often you really rinse. Recurs in every review and is explained properly in none of them yet. Planned.",
+      why: "REFUSED 6 Aug 2026: 'how to clean pool robot filter' is 10/mo and shares 6 domains with 'aiper vs dolphin'. Micron ratings, canister capacity and how often you really rinse. Recurs in every review and is explained properly in none of them yet. Planned.",
       status: "planned",
     },
     {
       anchor: "pool size",
       href: "/guides/what-size-robotic-pool-cleaner/",
-      why: "The single most common rule-out on this site is pool length. Planned as the page that explains how the ratings are arrived at and how much to trust them.",
+      why: "REFUSED 6 Aug 2026: no measurable volume on any size phrasing. The single most common rule-out on this site is pool length. Planned as the page that explains how the ratings are arrived at and how much to trust them.",
       status: "planned",
     },
     {
       anchor: "warranty",
       href: "/guides/robotic-pool-cleaner-warranties/",
-      why: "Two reviews so far have hit a manufacturer that will not state a term. Planned as the page that records who publishes what.",
+      why: "REFUSED 6 Aug 2026: no category volume; demand is brand-shaped and lives in the reviews. Two reviews so far have hit a manufacturer that will not state a term. Planned as the page that records who publishes what.",
       status: "planned",
     },
   ],

@@ -293,7 +293,7 @@ HOBOT S7 Pro in the window build.
 Seven guides. Each one is checked against the hub and against the others.
 
 ### G1 — Wire-free navigation: RTK, GPS and LiDAR vs boundary wire
-**`/guides/robot-lawn-mower-without-boundary-wire/`**
+**`/guides/wire-free-robot-lawn-mower/`**
 
 | Term | Vol/mo | KD |
 |---|---|---|
@@ -345,7 +345,7 @@ where it belongs anyway, since acreage is the first question BotMatch asks.
 priced the answer at $0.004. That call was worth making.)*
 
 ### G3 — Budget robot mowers
-**`/guides/best-budget-robot-lawn-mower/`**
+**`/guides/cheap-robot-lawn-mower/`**
 
 | Term | Vol/mo | KD |
 |---|---|---|

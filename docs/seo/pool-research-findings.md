@@ -74,11 +74,23 @@ May–July; expectations for pre-Christmas organic volume must reflect that.
 
 ## Final map — 11 pages ready for briefs (was 13 proposed)
 
+**Build state, 6 August 2026.** Pages 2, 3 and 11 were built on this date and are
+live, indexable and in the sitemap. They had existed as `coming_soon`
+RoutePlaceholders since launch — the ruling was made on 1 August and the pages
+were empty for five days, which is the gap this row exists to close. Page 3 is the
+one that mattered: 22,200/mo at KD 0 was sitting behind a placeholder.
+
+Content lives in `apps/web/src/content/editorial.ts` (structured) and
+`apps/web/src/articles/*.md` (prose), guarded by `apps/web/test/editorial.test.ts`.
+No price figure appears on any of the three, by design and by test — a ranked list
+is read months after it is written, and price belongs on the review beside the date
+it was checked.
+
 | # | Page | Canonical URL | Lead keyword (vol / KD) |
 |---|---|---|---|
 | 1 | Category hub | `/robots/robotic-pool-cleaners/` | robotic pool cleaner (40,500 / 14) |
-| 2 | Best-of guide | `/best-robots/robotic-pool-cleaners/` | best robotic pool cleaner (6,600 / 13) — incl. inground/above-ground/large/leaves/budget sections |
-| 3 | **Cordless best-of** *(new)* | `/best-robots/robotic-pool-cleaners/cordless/` | cordless robotic pool cleaner (22,200 / 0) |
+| 2 | Best-of guide **— BUILT** | `/best-robots/robotic-pool-cleaners/` | best robotic pool cleaner (6,600 / 13) — incl. inground/above-ground/large/leaves/budget sections |
+| 3 | **Cordless best-of — BUILT** | `/best-robots/robotic-pool-cleaners/cordless/` | cordless robotic pool cleaner (22,200 / 0) |
 | 4 | Comparison hub | `/compare/robotic-pool-cleaners/` | aiper vs dolphin (110 / 0) + brand pairs as sections |
 | 5 | BotMatch landing | `/botmatch/robotic-pool-cleaners/` | conversion tool — no SEO target |
 | 6 | Review: Dolphin Nautilus CC Plus | `/robots/robotic-pool-cleaners/dolphin-nautilus-cc-plus/` | dolphin nautilus cc plus (5,400 / 0) |
@@ -86,7 +98,12 @@ May–July; expectations for pre-Christmas organic volume must reflect that.
 | 8 | Review: Betta SE Plus | `/robots/robotic-pool-cleaners/betta-se-plus/` | betta pool skimmer (3,600 / 0) |
 | 9 | Review: Dolphin Proteus DX4 Plus | `/robots/robotic-pool-cleaners/dolphin-proteus-dx4-plus/` | dolphin proteus dx4 (390 / 0) |
 | 10 | Review: Aiper Scuba V3 AI Vision | `/robots/robotic-pool-cleaners/aiper-scuba-v3-ai-vision/` | aiper scuba v3 (1,000 / 14) |
-| 11 | Guide: Are robotic pool cleaners worth it? | `/guides/are-robotic-pool-cleaners-worth-it/` | are robotic pool cleaners worth it (40 / 0 + head-term PAA #1) |
+| 11 | Guide: Are robotic pool cleaners worth it? **— BUILT** | `/guides/are-robotic-pool-cleaners-worth-it/` | are robotic pool cleaners worth it (40 / 0 + head-term PAA #1) |
+
+Also built on 6 August: `/guides/robotic-pool-cleaners/`, the category's guides
+index. Not a research ruling and not targeting a keyword — it was a placeholder
+promising articles that did not exist, and it now lists the ones that do, built
+from the editorial registry so it cannot go stale.
 
 Merged/rejected (recorded in the register, not built): inground best-of →
 page 2; corded-vs-cordless guide → pages 1+3; climb-walls guide → page 1;
