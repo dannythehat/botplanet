@@ -617,6 +617,9 @@ const WINDOW_REVIEW_SEEDS: [string, string, number][] = [
   ["cop-rose-x5s", "cop rose x5s", 0],
 ];
 
+/** Product slugs whose artwork has arrived. A flip is one line. */
+const SUPPLIED_ARTWORK = new Set(["ecovacs-winbot-w2-pro-omni"]);
+
 const WINDOW_REVIEWS: PagePlan[] = WINDOW_REVIEW_SEEDS.map(([slug, term, volume]) => ({
   path: `/robots/window-cleaning-robots/${slug}/`,
   category: "window-cleaning-robots",
@@ -630,11 +633,15 @@ const WINDOW_REVIEWS: PagePlan[] = WINDOW_REVIEW_SEEDS.map(([slug, term, volume]
   ],
   products: [slug],
   linksOut: ["/robots/window-cleaning-robots/", "/compare/window-cleaning-robots/", "/botmatch/window-cleaning-robots/"],
+  /* SUPPLIED FLIPS PER PRODUCT, 7 August 2026. The W2 PRO Omni is the first
+     window product with artwork — four files supplied through the Notion
+     image-request page. The other ten are still waiting, and
+     page-plan.test.ts prints the outstanding list on every run. */
   images: [
-    { slot: "hero", shows: `${slug} lead artwork`, supplied: false },
-    { slot: "figure-1", shows: "Feature story 1", supplied: false },
-    { slot: "figure-2", shows: "Feature story 2", supplied: false },
-    { slot: "product-card", shows: "Catalogue card image for listings and the hub grid", supplied: false },
+    { slot: "hero", shows: `${slug} lead artwork`, supplied: SUPPLIED_ARTWORK.has(slug) },
+    { slot: "figure-1", shows: "Feature story 1", supplied: SUPPLIED_ARTWORK.has(slug) },
+    { slot: "figure-2", shows: "Feature story 2", supplied: SUPPLIED_ARTWORK.has(slug) },
+    { slot: "product-card", shows: "Catalogue card image for listings and the hub grid", supplied: SUPPLIED_ARTWORK.has(slug) },
   ],
   schema: ["Review", "Article", "WebPage", "BreadcrumbList"],
   research: "30981257806 · 2026-08-05",

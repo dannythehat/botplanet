@@ -63,11 +63,11 @@ const rows: Row[] = [
  * only ever get shorter; a new page cannot join it, because a new page has no
  * lock to respect.
  */
-const AWAITING_OWNER_APPROVAL = new Set([
-  "/robots/grill-cleaning-robots/",
-  "/robots/window-cleaning-robots/",
-  "/robots/robotic-pool-cleaners/",
-  "/robots/self-cleaning-litter-boxes/",
+const AWAITING_OWNER_APPROVAL = new Set<string>([
+  /* All four were approved and shortened by the owner on 7 August 2026, the
+     day after this list was written. It is deliberately left in place and
+     empty: the mechanism is the point, and the next locked page that breaches
+     the limit needs somewhere to sit that is visible rather than silent. */
 ]);
 
 const checked = rows.filter((r) => !AWAITING_OWNER_APPROVAL.has(r.id));

@@ -161,6 +161,12 @@ const SOURCES = [
   "/media/reviews/beatbot-aquasense-2-ultra/coverage.webp",
   "/media/reviews/beatbot-aquasense-2-ultra/navigation.webp",
   "/media/reviews/beatbot-aquasense-2-ultra/battery.webp",
+  /* Window creatives, 7 August 2026 — the first artwork on this site for a
+     product outside the pool catalogue. */
+  "/media/products/ecovacs-winbot-w2-pro-omni.webp",
+  "/media/reviews/ecovacs-winbot-w2-pro-omni/cleaning-modes.webp",
+  "/media/reviews/ecovacs-winbot-w2-pro-omni/all-from-inside.webp",
+  "/media/reviews/ecovacs-winbot-w2-pro-omni/three-nozzle-spray.webp",
   "/media/products/dolphin-nautilus-cc-plus.webp",
   "/media/products/polaris-freedom.webp",
   "/media/products/betta-se-plus.webp",

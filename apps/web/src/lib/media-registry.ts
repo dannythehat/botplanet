@@ -7,7 +7,7 @@
  * That is what makes a takedown a one-line data change instead of a hunt
  * through every template.
  */
-import { PRODUCTS } from "../content/products";
+import { PRODUCTS, PRODUCT_ID } from "../content/products";
 import { VERIFICATIONS } from "../content/evidence/verification";
 import { ACQUISITION_BLOCKERS, DERIVATIVES, MEDIA_ASSETS } from "../content/media/assets";
 import { RIGHTS_BASES } from "../content/media/rights";
@@ -157,7 +157,15 @@ export function readinessFor(productId: string, assets = MEDIA_ASSETS): ImageRea
     mine.length > 0 && mine.every((a) => a.rightsBasis.length > 20 && a.acquisitionMethod !== "not_yet_acquired" && a.allowedPlacements.length > 0);
 
   const expected = VERIFICATIONS.find((v) => v.productId === productId)?.identity.canonicalName ?? null;
-  const exactModelConfirmed = depicting.length === 0 || depicting.every((a) => a.exactModel !== null && a.exactModel === expected);
+  /* Where a verification record exists it remains the authority. Window
+     products are verified through reviews.ts instead, so `expected` is null
+     for them and the check becomes "names a model at all" — which is what
+     catches the null that would otherwise reach alt text. */
+  const exactModelConfirmed =
+    depicting.length === 0 ||
+    depicting.every((a) =>
+      expected === null ? a.exactModel !== null : a.exactModel !== null && a.exactModel === expected,
+    );
 
   const heroReady = live.some((a) => a.type === "product_hero");
   const supportingImagesReady = live.filter((a) => SUPPORTING_TYPES.includes(a.type)).length >= 1;
@@ -218,9 +226,15 @@ export function validateMedia(assets = MEDIA_ASSETS): MediaIssue[] {
    * round — the identity check is what protects the image, and that lives in
    * the verification registry.
    */
+  /* PRODUCT_ID added 7 August 2026. The two sources below are both pool-era —
+     PRODUCTS is the pool editorial map and VERIFICATIONS the pool ledger — so
+     the first window creative was rejected as artwork "for an unknown product"
+     while that product was live in D1, published, and selling. PRODUCT_ID is
+     the slug-to-D1 join every category appears in. */
   const productIds = new Set([
     ...Object.values(PRODUCTS).map((p) => p.productId),
     ...VERIFICATIONS.map((v) => v.productId),
+    ...Object.values(PRODUCT_ID),
   ]);
   const basisTexts = new Set(RIGHTS_BASES.map((r) => r.text));
   const seen = new Set<string>();

@@ -547,13 +547,70 @@ const OWNER_ARTWORK: OwnerArtwork[] = [
     scene:
       "the black cordless cleaner on its charging dock beside a lit resort pool, with callouts for camera navigation, wireless charging, weight, filtration and floor, wall and waterline cleaning",
   },
+  {
+    /* THE FIRST WINDOW CREATIVE, 7 August 2026, and the first artwork on this
+       site for a product outside the pool catalogue.
+
+       PROVENANCE, RECORDED AS IT WAS GIVEN. Supplied by the owner through the
+       Notion image-request page and confirmed by the owner as their own work
+       when I queried it. Two of the four files in that batch carry ECOVACS
+       branding and typography rather than BotPlanet's; the owner's answer was
+       that all four are theirs, and the registry records what the owner
+       states. This note exists so the basis of that claim is legible later
+       rather than inferred from a tier name. */
+    slug: "ecovacs-winbot-w2-pro-omni",
+    file: "ecovacs-winbot-w2-pro-omni.webp",
+    checksum: "sha256:edaa447e38423f59ad0b7dd991d7c3a334fe44ca82dbdba6870dd8d98baf8fc5",
+    width: 1254,
+    height: 1254,
+    scene:
+      "the white square robot on a floor-to-ceiling window above a lit terrace at dusk, its cable running down to the portable station on the floor, with callouts for intelligent window cleaning, the power station, the safety tether and edge detection",
+  },
 ];
+
+/**
+ * The exact model an asset depicts.
+ *
+ * The verification ledger is the first source and stays the first source: a
+ * model name taken from a file name can quietly move artwork onto a sibling
+ * product, which is the failure this lookup was written to prevent.
+ *
+ * THE FALLBACK EXISTS BECAUSE THE LEDGER IS POOL-ONLY. Window products are
+ * verified through reviews.ts instead, so every window asset resolved to
+ * `null` and would have shipped alt text reading "BotPlanet artwork for the
+ * null". Caught on 7 August 2026 when the first window creatives arrived.
+ * The catalogue name is a weaker source than a verification record and it is
+ * used only when there is no verification record at all.
+ */
+const modelFor = (productId: string, slug: string): string | null =>
+  VERIFICATIONS.find((v) => v.productId === productId)?.identity.canonicalName ??
+  CATALOGUE_NAMES[slug] ??
+  null;
+
+/**
+ * Names for products whose editorial lives in reviews.ts rather than in the
+ * verification ledger. Kept explicit rather than derived from a review title,
+ * because a title is copy and copy gets rewritten.
+ */
+const CATALOGUE_NAMES: Record<string, string> = {
+  "ecovacs-winbot-w2-pro-omni": "ECOVACS WINBOT W2 PRO Omni",
+  "ecovacs-winbot-w3-omni": "ECOVACS WINBOT W3 Omni",
+  "ecovacs-winbot-w2-pro": "ECOVACS WINBOT W2 PRO",
+  "ecovacs-winbot-w2s": "ECOVACS WINBOT W2S",
+  "ecovacs-winbot-w1-pro": "ECOVACS WINBOT W1 PRO",
+  "ecovacs-winbot-mini": "ECOVACS WINBOT Mini",
+  "hobot-2s": "HOBOT-2S",
+  "hobot-298": "HOBOT-298",
+  "hutt-s55-pro": "HUTT S55 Pro",
+  "mamibot-w120-dp": "Mamibot W120-DP",
+  "cop-rose-x5s": "Cop Rose X5S",
+};
 
 export const OWNER_PRODUCT_ARTWORK: MediaAssetRecord[] = OWNER_ARTWORK.map((a): MediaAssetRecord => {
   const productId = PRODUCT_ID[a.slug] ?? `prod-${a.slug}`;
   // The model name comes from the verification record, never from the file
   // name, so a renamed file can never quietly move artwork onto a sibling model.
-  const model = VERIFICATIONS.find((v) => v.productId === productId)?.identity.canonicalName ?? null;
+  const model = modelFor(productId, a.slug);
   return {
     ...base(`art-${a.slug}`, "botplanet_original"),
     productId,
@@ -1155,6 +1212,42 @@ const REVIEW_FIGURES: ReviewFigure[] = [
     scene:
       "the cleaner afloat in an infinity pool at dusk beneath runtime badges for surface, floor and wall cleaning, above a battery outline and a coverage figure",
   },
+  {
+    /* The three W2 PRO Omni review figures, 7 August 2026. Same provenance
+       note as the product creative above: owner-supplied, owner-confirmed as
+       their own work. */
+    slug: "cleaning-modes",
+    productSlug: "ecovacs-winbot-w2-pro-omni",
+    type: "product_in_use",
+    file: "cleaning-modes.webp",
+    checksum: "sha256:9f759bafd6d9860c35e264b96a8bce79ac04513ef17f0e3bd7b756c2e4d3bea4",
+    width: 1254,
+    height: 1254,
+    scene:
+      "the robot working a window above a city skyline at dusk while a person watches from an armchair with the app open, above panels for six cleaning modes, button control, folded storage and app control",
+  },
+  {
+    slug: "all-from-inside",
+    productSlug: "ecovacs-winbot-w2-pro-omni",
+    type: "product_in_use",
+    file: "all-from-inside.webp",
+    checksum: "sha256:11b91fa5f72f37a1aa862cc6d23ad9134036dc9024cf601f04fd75fb512f948f",
+    width: 1536,
+    height: 1024,
+    scene:
+      "the robot part-way down a rain-streaked picture window over a mountain valley, its cable running to the station on the floor beside a plug socket, with three greyed panels showing the manual alternatives it replaces",
+  },
+  {
+    slug: "three-nozzle-spray",
+    productSlug: "ecovacs-winbot-w2-pro-omni",
+    type: "filtration_detail",
+    file: "three-nozzle-spray.webp",
+    checksum: "sha256:52c5c4e8fccd860f8e3efaea37e5152c80f10dbea11effad30a985fdd7310c93",
+    width: 1536,
+    height: 1024,
+    scene:
+      "the robot mid-pane on a window over a lake, spray fanning across the glass above it, with three detail insets showing the nozzle spray, the underside pad and the drive wheels",
+  },
 ];
 
 /**
@@ -1209,7 +1302,7 @@ export const REVIEW_FIGURES_WITHHELD: {
 
 export const REVIEW_FIGURE_ASSETS: MediaAssetRecord[] = REVIEW_FIGURES.map((f): MediaAssetRecord => {
   const productId = PRODUCT_ID[f.productSlug] ?? `prod-${f.productSlug}`;
-  const model = VERIFICATIONS.find((v) => v.productId === productId)?.identity.canonicalName ?? null;
+  const model = modelFor(productId, f.productSlug);
   return {
     ...base(`fig-${f.productSlug}-${f.slug}`, "botplanet_original"),
     productId,

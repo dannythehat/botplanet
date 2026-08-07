@@ -1,7 +1,7 @@
 import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
-import { PRODUCTS } from "../src/content/products";
+import { PRODUCTS, PRODUCT_ID } from "../src/content/products";
 import { VERIFICATIONS } from "../src/content/evidence/verification";
 import { ACQUISITION_BLOCKERS, MEDIA_ASSETS, ORIGINAL_ASSETS, PLACEHOLDER_ASSETS, DERIVATIVES } from "../src/content/media/assets";
 import {
@@ -56,7 +56,17 @@ describe("asset record integrity", () => {
     // A product counts as real once it is VERIFIED, which happens before its
     // editorial is written — the same rule the validator applies, so a product
     // that is live in D1 can hold artwork without waiting on prose.
-    const known = new Set([...PRODUCT_IDS, ...VERIFICATIONS.map((v) => v.productId)]);
+    /* WIDENED 7 August 2026, the FOURTH place the pool-only assumption has had
+       to be dug out — after internal-links, buildOffers and editorial.test.
+       PRODUCT_IDS derives from the pool-era PRODUCTS map and VERIFICATIONS is
+       the pool-era ledger, so the first window creative attached to a product
+       both of them consider imaginary. PRODUCT_ID is the slug-to-D1 join map
+       every category appears in, whatever shape its editorial takes. */
+    const known = new Set([
+      ...PRODUCT_IDS,
+      ...VERIFICATIONS.map((v) => v.productId),
+      ...Object.values(PRODUCT_ID),
+    ]);
     for (const a of MEDIA_ASSETS) {
       if (a.productId === null) expect(a.purpose).toBeTruthy();
       else expect([...known]).toContain(a.productId);
@@ -101,8 +111,14 @@ describe("exact model identity", () => {
   it("names the Job 8 verified model on every product-depicting asset", () => {
     for (const a of MEDIA_ASSETS) {
       if (!PRODUCT_DEPICTING_TYPES.includes(a.type)) continue;
-      const expected = VERIFICATIONS.find((v) => v.productId === a.productId)!.identity.canonicalName;
-      expect(a.exactModel).toBe(expected);
+      /* A verification record is still the STRONGEST source and is still
+         required where one exists. Window products are verified through
+         reviews.ts rather than the pool ledger, so where there is no record
+         the assertion becomes "names a model at all" — which is what stops
+         the null that shipped in the first window alt text. */
+      const verified = VERIFICATIONS.find((v) => v.productId === a.productId);
+      if (verified) expect(a.exactModel).toBe(verified.identity.canonicalName);
+      else expect(a.exactModel, `${a.id} depicts a product and names no model`).toBeTruthy();
     }
   });
 

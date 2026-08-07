@@ -183,10 +183,10 @@ export const CATEGORY_HERO: Record<string, CategoryHeroContent> = {
       "something else. It is a small category — one product dominates it — so this page is less " +
       "about which robotic grill cleaner to pick and more about whether one belongs on your " +
       "barbecue at all, and what it will not do.",
-    seoTitle: "Grill-Cleaning Robots: Does an Automatic Grill Cleaner Work? | BotPlanet",
+    seoTitle: "Grill-Cleaning Robots: Does an Automatic Grill Cleaner Work?",
     metaDescription:
       "Does a grill cleaning robot actually work? We compare robotic grill cleaners on grate " +
-      "type, brush material, grease and safety — and say when a brush is the better buy.",
+      "type, brush material and safety — and say when a brush is the better buy.",
     primaryCta: { label: "Compare grill robots", href: "#products" },
     /* Straight to the verdict, not the product grid. "Do the grill bots really
        work?" and "Does a Grillbot really work?" both appear in Google's People
@@ -231,7 +231,7 @@ export const CATEGORY_HERO: Record<string, CategoryHeroContent> = {
       "cat leaves, so the job goes from daily to roughly weekly. An automatic litter box is not " +
       "right for every cat though — size, age and nerve decide it, and one of those is a safety " +
       "question rather than a preference.",
-    seoTitle: "Self-Cleaning Litter Boxes: Compare Automatic Litter Boxes | BotPlanet",
+    seoTitle: "Self-Cleaning Litter Boxes: Compare Automatic Litter Boxes",
     metaDescription:
       "Compare self-cleaning litter boxes by cat size, multi-cat capacity, odour sealing, litter " +
       "type and running cost — including which cats they are not safe for.",
@@ -426,10 +426,10 @@ export const CATEGORY_HERO: Record<string, CategoryHeroContent> = {
       "does the panes you would rather not reach. An automatic window cleaner is not right " +
       "for every window though — the frame, the height and the glass decide it, and we " +
       "compare them on exactly that.",
-    seoTitle: "Window Cleaning Robots: Compare Robot Window Cleaners | BotPlanet",
+    seoTitle: "Window Cleaning Robots: Compare Robot Window Cleaners",
     metaDescription:
-      "Compare window cleaning robots by glass type, framed or frameless, suction power, " +
-      "safety tether and app control. Find the right robot window cleaner for your windows.",
+      "Compare window cleaning robots by glass type, framed or frameless, suction and " +
+      "safety tether. Find the right robot window cleaner for your windows.",
     primaryCta: { label: "Compare window robots", href: "#products" },
     secondaryCta: { label: "Try Window BotMatch", href: "/botmatch/window-cleaning-robots/" },
     /* Owner-created BotPlanet artwork, supplied 2026-08-05. Carries in-image
@@ -468,7 +468,7 @@ export const CATEGORY_HERO: Record<string, CategoryHeroContent> = {
     seoTitle: "Robotic Pool Cleaners: Compare Pool Robots | BotPlanet",
     metaDescription:
       "Compare robotic pool cleaners by pool type, floor, wall and waterline coverage, corded " +
-      "or cordless power, filtration and smart controls. Find the right pool robot.",
+      "or cordless power and filtration. Find the right pool robot.",
     primaryCta: { label: "Compare pool robots", href: "#products" },
     secondaryCta: { label: "Try Pool BotMatch", href: "/botmatch/robotic-pool-cleaners/" },
 

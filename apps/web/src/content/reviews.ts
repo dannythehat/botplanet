@@ -1838,6 +1838,45 @@ export const REVIEWS: Record<string, ReviewContent> = {
      the offer-truth engine decides whether it may be shown at all. */
   "ecovacs-winbot-w2-pro-omni": {
     slug: "ecovacs-winbot-w2-pro-omni",
+    /* FIRST WINDOW REVIEW WITH ARTWORK, 7 August 2026. Four owner-supplied
+       creatives arrived through the Notion image-request page; this is the
+       wiring that puts them on the page. The lead image is the product
+       creative — the same file the catalogue card and the hub grid resolve to
+       — so a reader meets the machine once and consistently.
+
+       Captions carry the corrections. Two of these creatives print
+       manufacturer claim copy ("Powerful Suction", "Industry-first
+       Three-nozzle Spray") that this review does not accept at face value,
+       and the standing rule is to publish the picture and state the
+       correction underneath rather than withhold it. A reader who sees the
+       claim and reads the qualification has been told the truth and kept the
+       picture. */
+    image: {
+      src: "/media/products/ecovacs-winbot-w2-pro-omni.webp",
+      alt:
+        "BotPlanet artwork for the ECOVACS WINBOT W2 PRO Omni window cleaning robot, shown on a " +
+        "floor-to-ceiling window at dusk with its portable power station on the floor below.",
+    },
+    figures: [
+      {
+        afterHeading: "The battery station is the product",
+        src: "/media/reviews/ecovacs-winbot-w2-pro-omni/all-from-inside.webp",
+        caption:
+          "The station is the whole reason to buy this model rather than the plain W2 PRO: the robot works a window with no socket beneath it. Note the cable still running to the wall in this artwork — the station powers the robot, it does not make the system wireless.",
+      },
+      {
+        afterHeading: "Safety, and the number to actually read",
+        src: "/media/reviews/ecovacs-winbot-w2-pro-omni/three-nozzle-spray.webp",
+        caption:
+          "Three nozzles spread water across the pane ahead of the pads. ECOVACS calls the arrangement industry-first; we have not verified that claim against any other maker's range and it carries no weight in our rating either way.",
+      },
+      {
+        afterHeading: "Frameless glass",
+        src: "/media/reviews/ecovacs-winbot-w2-pro-omni/cleaning-modes.webp",
+        caption:
+          "Six cleaning modes, one of them edge-specific — which matters most on frameless glass, where the machine has no frame to feel for and the border is where every robot in this category does its worst work.",
+      },
+    ],
     categorySlug: "window-cleaning-robots",
     eyebrow: "Window robot review",
     title: "ECOVACS WINBOT W2 PRO Omni review",
