@@ -2473,6 +2473,37 @@
     ]
   },
   {
+    "source": "/media/reviews/ecovacs-winbot-w2-pro-omni/winbot-on.webp",
+    "sourceWidth": 1122,
+    "sourceHeight": 1402,
+    "derivatives": [
+      {
+        "id": "media-reviews-ecovacs-winbot-w2-pro-omni-winbot-on-webp-360",
+        "src": "/media/reviews/ecovacs-winbot-w2-pro-omni/winbot-on-360w.webp",
+        "width": 360,
+        "height": 450,
+        "bytes": 20364,
+        "checksum": "sha256:fb7931538376475933543c52e66bacf4c9338ce3d3aed800f7f55d0ddde118f9"
+      },
+      {
+        "id": "media-reviews-ecovacs-winbot-w2-pro-omni-winbot-on-webp-640",
+        "src": "/media/reviews/ecovacs-winbot-w2-pro-omni/winbot-on-640w.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 55202,
+        "checksum": "sha256:5aa0f4c069cf5572bed21ede86167f4187d67a651c12681088e876ad0dd9d5bb"
+      },
+      {
+        "id": "media-reviews-ecovacs-winbot-w2-pro-omni-winbot-on-webp-960",
+        "src": "/media/reviews/ecovacs-winbot-w2-pro-omni/winbot-on-960w.webp",
+        "width": 960,
+        "height": 1200,
+        "bytes": 106982,
+        "checksum": "sha256:ba04a0ec8f02d326b3c66d8ccfa9281a84a30db3b07c2247a9ba4532e99fe3fe"
+      }
+    ]
+  },
+  {
     "source": "/media/reviews/ecovacs-winbot-w2-pro-omni/all-from-inside.webp",
     "sourceWidth": 1536,
     "sourceHeight": 1024,

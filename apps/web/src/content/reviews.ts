@@ -1859,6 +1859,12 @@ export const REVIEWS: Record<string, ReviewContent> = {
     },
     figures: [
       {
+        afterHeading: "Who this is for",
+        src: "/media/reviews/ecovacs-winbot-w2-pro-omni/winbot-on.webp",
+        caption:
+          "The station on the floor is what this model is for: the robot works a window with no socket under it. The \u201cWorld\u2019s No.1\u201d badge in this artwork is ECOVACS\u2019 own claim, sourced to its internal data and AVC statistics to March 2024 \u2014 we have not verified it and it carries no weight in our rating.",
+      },
+      {
         afterHeading: "The battery station is the product",
         src: "/media/reviews/ecovacs-winbot-w2-pro-omni/all-from-inside.webp",
         caption:

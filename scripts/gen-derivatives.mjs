@@ -165,6 +165,7 @@ const SOURCES = [
      product outside the pool catalogue. */
   "/media/products/ecovacs-winbot-w2-pro-omni.webp",
   "/media/reviews/ecovacs-winbot-w2-pro-omni/cleaning-modes.webp",
+  "/media/reviews/ecovacs-winbot-w2-pro-omni/winbot-on.webp",
   "/media/reviews/ecovacs-winbot-w2-pro-omni/all-from-inside.webp",
   "/media/reviews/ecovacs-winbot-w2-pro-omni/three-nozzle-spray.webp",
   "/media/products/dolphin-nautilus-cc-plus.webp",

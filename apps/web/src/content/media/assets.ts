@@ -1213,6 +1213,24 @@ const REVIEW_FIGURES: ReviewFigure[] = [
       "the cleaner afloat in an infinity pool at dusk beneath runtime badges for surface, floor and wall cleaning, above a battery outline and a coverage figure",
   },
   {
+    /* MISFILED AND MOVED, 7 August 2026. This arrived under the plain W2 PRO
+       heading in Notion. It shows a portable power station on the floor and
+       lists "PORTABLE POWER STATION" in its own footer — both are the OMNI's
+       defining feature, and the plain W2 PRO does not ship with one. Publishing
+       it on the W2 PRO review would have shown a reader a station while the
+       words underneath said the machine does not include it. Caught because
+       the owner asked whether two products had ended up sharing artwork. */
+    slug: "winbot-on",
+    productSlug: "ecovacs-winbot-w2-pro-omni",
+    type: "product_in_use",
+    file: "winbot-on.webp",
+    checksum: "sha256:ea1395185c4f426b49f323493b620d288149298c82e43560f1cb08361df8b2cb",
+    width: 1122,
+    height: 1402,
+    scene:
+      "the robot mid-pane on a floor-to-ceiling window over a city skyline while a person sits watching from an armchair, the power station on the floor to the left, above three greyed panels showing the manual alternatives",
+  },
+  {
     /* The three W2 PRO Omni review figures, 7 August 2026. Same provenance
        note as the product creative above: owner-supplied, owner-confirmed as
        their own work. */
