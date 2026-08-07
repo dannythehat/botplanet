@@ -812,6 +812,25 @@ export const ROUTES: RouteDef[] = [
     summary: "The terms that apply when you use BotPlanet.",
   },
 
+  {
+    /* Page 2 of the window map, ruled CREATE 5 August 2026 and built on the
+       7th — after the eleven reviews under it were given working buy buttons.
+       1,300/mo at KD 0-3. Parented to the category hub, which owns the head
+       term this page deliberately does not chase. */
+    path: "/best-robots/window-cleaning-robots/",
+    label: "Best window cleaning robots",
+    breadcrumbLabel: "Window Cleaning Robots",
+    section: "best",
+    parent: "/robots/window-cleaning-robots/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: true,
+    indexable: true,
+    category: "window-cleaning-robots",
+    summary: "Nine ranked by the job each does best, and the two we hold and do not recommend.",
+  },
+
   /* ---------------- Standalone guides, 6 August 2026 ----------------
      The first pages published for categories with NOTHING IN THE
      CATALOGUE. Each answers a decision rather than ranking machines,

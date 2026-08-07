@@ -1330,6 +1330,33 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
     ],
     researchedOn: RUN_COMPANION,
   },
+  {
+    path: "/best-robots/window-cleaning-robots/",
+    /* Page 2 of the window map, ruled CREATE on 5 August 2026 and built on
+       7 August — after the eleven reviews beneath it were given working buy
+       buttons. A shortlist funnelling into pages nobody can buy from is an
+       ornament, which is why it waited. 1,300/mo at KD 0-3, $3.20 CPC. */
+    primary: { term: "best window cleaning robot", volume: 1300, difficulty: 3, mustAppear: true },
+    secondary: [
+      { term: "best robot window cleaner", volume: 1300, difficulty: 3, mustAppear: true },
+      { term: "window cleaning robot reviews", volume: 1000, difficulty: 7, mustAppear: true },
+      { term: "best window cleaning robot 2026", volume: 210, difficulty: 0, mustAppear: true },
+      /* Both are SECTIONS here rather than pages: each returns the same SERP
+         as the general best-of, so a separate URL would cannibalise this one.
+         Frameless leads the page because it is the exclusion that disqualifies
+         machines outright. */
+      { term: "frameless", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "high rise", volume: 0, difficulty: 0, mustAppear: true },
+    ],
+    cededTo: [
+      {
+        term: "window cleaning robot",
+        path: "/robots/window-cleaning-robots/",
+        why: "The 12,100 head term belongs to the hub, which explains how these machines work. This page takes the commercial half of the category and does not compete for the explanation.",
+      },
+    ],
+    researchedOn: RUN_WINDOW,
+  },
 ];
 
 export const keywordsFor = (path: string): PageKeywords | undefined =>

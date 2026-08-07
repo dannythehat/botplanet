@@ -644,6 +644,58 @@ const WINDOW_REVIEWS: PagePlan[] = WINDOW_REVIEW_SEEDS.map(([slug, term, volume]
 }));
 
 /* Window BotMatch — live, noindex, competes for nothing. */
+/* The window best-of. Page 2 of the window map from the very first run, ruled
+   CREATE on 5 August 2026 and then never built while eleven reviews under it
+   went live. Written 7 August, after the buy buttons on those reviews were
+   made to work — a shortlist that funnels into pages nobody can buy from is
+   an ornament. */
+const WINDOW_BEST: PagePlan = {
+  path: "/best-robots/window-cleaning-robots/",
+  category: "window-cleaning-robots",
+  type: "best-of",
+  status: "built",
+  intent: "Tell me which window robot to buy, and which one is wrong for my glass.",
+  primary: { term: "best window cleaning robot", volume: 1300, difficulty: 3 },
+  secondary: [
+    { term: "best robot window cleaner", volume: 1300, difficulty: 3 },
+    { term: "window cleaning robot reviews", volume: 1000, difficulty: 7 },
+    { term: "best window cleaning robot 2026", volume: 210, difficulty: 0 },
+    { term: "frameless", volume: 0, difficulty: 0 },
+    { term: "high rise", volume: 0, difficulty: 0 },
+  ],
+  ceded: [
+    { term: "window cleaning robot", toPath: "/robots/window-cleaning-robots/", why: "The 12,100 head term is the hub's. This page takes the commercial half of the category and leaves the explanation of how the machines work where it already sits." },
+  ],
+  refused: [
+    { term: "best budget window cleaning robot", volume: 0, why: "SERP identical to the general best-of. A second page would cannibalise this one for a segment that is a paragraph, not a market." },
+    { term: "best cordless window cleaning robot", volume: 0, why: "Nearly every machine here runs a cable for power and a battery for the fall. Cordless is not a segment in this category, so the term describes nothing to rank for." },
+    { term: "best window cleaning robot for high rise", volume: 0, why: "Same SERP as the general best-of, so it is a SECTION here. It is also the claim most makers write and fewest support with a number." },
+    { term: "best window cleaning robot for frameless glass", volume: 0, why: "Same SERP again, and the honest exclusion most models fail. Carried as a section because a reader with frameless glass needs it before anything else on the page." },
+  ],
+  products: [
+    "ecovacs-winbot-w2-pro",
+    "ecovacs-winbot-w2-pro-omni",
+    "ecovacs-winbot-w3-omni",
+    "ecovacs-winbot-w2s",
+    "ecovacs-winbot-mini",
+    "hutt-s55-pro",
+    "hobot-2s",
+    "cop-rose-x5s",
+    "mamibot-w120-dp",
+  ],
+  productsNote: "Nine ranked out of eleven held. The WINBOT W1 PRO and the HOBOT-298 are named on the page and deliberately given no award — both are beaten on price and on published evidence by machines already on the list, and an award invented so every product has one is an advert.",
+  linksOut: [
+    "/robots/window-cleaning-robots/",
+    "/compare/window-cleaning-robots/",
+    "/botmatch/window-cleaning-robots/",
+    "/review-methodology/",
+  ],
+  images: [{ slot: "hero", shows: "A window robot mid-pane on a large clean window, tether visible", supplied: false }],
+  schema: ["Article", "ItemList", "FAQPage", "BreadcrumbList"],
+  research: "30981257806 · 2026-08-05 · $0.2044",
+  evidence: "1,300/mo at KD 0-3 with a $3.20 CPC, and the one CREATE ruling from the window run that was never acted on. Eleven reviews already sit under it with working Amazon buy buttons, so it is the shortest path from a commercial query to a click that earns.",
+};
+
 const WINDOW_BOTMATCH: PagePlan = {
   path: "/botmatch/window-cleaning-robots/",
   category: "window-cleaning-robots",
@@ -1003,6 +1055,7 @@ export const PAGE_PLAN: PagePlan[] = [
   ...COMPARES,
   ...WINDOW_REVIEWS,
   WINDOW_BOTMATCH,
+  WINDOW_BEST,
   ...VACUUM_REVIEWS,
   ...LITTER_REVIEWS,
   ...COMPANION_REVIEWS,

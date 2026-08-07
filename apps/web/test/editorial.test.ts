@@ -19,7 +19,7 @@ import { ROUTES } from "../src/content/routes";
 import { keywordsFor, requiredTerms } from "../src/content/seo/keyword-register";
 import { anchorsFor, liveAnchorsFor } from "../src/content/internal-links";
 import { applyInternalLinks } from "../src/lib/internal-linker";
-import { productEditorial, catalogueStatusOf } from "../src/content/products";
+import { productEditorial, catalogueStatusOf, PRODUCT_ID } from "../src/content/products";
 import { COMPARE_PAGES } from "../src/content/compare-page";
 
 const ARTICLES = fileURLToPath(new URL("../src/articles/", import.meta.url));
@@ -110,12 +110,31 @@ describe("editorial pages", () => {
     }
   });
 
+  /**
+   * WIDENED 7 August 2026, and this is the THIRD place the same assumption has
+   * had to be dug out.
+   *
+   * It required a `productEditorial` entry, which reads PRODUCTS — the
+   * pool-era editorial map. No window product is in it: that category was
+   * built on reviews.ts, which did not exist when PRODUCTS was written. So the
+   * assertion was "has pool-style editorial", not "is a product we can sell",
+   * and the two stopped being the same thing the moment a second category
+   * arrived with a different editorial shape.
+   *
+   * The same fix was applied to internal-links.test.ts on 6 August and to
+   * buildOffers on the 7th, where it was costing real money — eleven ranking
+   * reviews with no buy button. Written here as the general rule so the next
+   * category does not pay for it again: PRODUCT_ID is the slug-to-D1 join map
+   * every category must appear in, whatever shape its words take. That is the
+   * existence check. Editorial style is not.
+   */
   it.each(ALL.map((a) => a.path))("%s only names products still in the catalogue", (path) => {
     for (const slug of EDITORIAL[path].comparisonSlugs) {
-      expect(productEditorial(slug), `${slug} has no product record`).toBeDefined();
+      const productId = PRODUCT_ID[slug] ?? productEditorial(slug)?.productId;
+      expect(productId, `${slug} is in no catalogue map`).toBeDefined();
       // An archived or withdrawn product loses its page, so an award pointing
       // at one is an award pointing at a redirect.
-      expect(catalogueStatusOf(slug), `${slug} is not a live catalogue entry`).toBe("active");
+      expect(catalogueStatusOf(productId!), `${slug} is not a live catalogue entry`).toBe("active");
     }
   });
 
