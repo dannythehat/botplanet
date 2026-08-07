@@ -649,6 +649,43 @@ const WINDOW_REVIEWS: PagePlan[] = WINDOW_REVIEW_SEEDS.map(([slug, term, volume]
    went live. Written 7 August, after the buy buttons on those reviews were
    made to work — a shortlist that funnels into pages nobody can buy from is
    an ornament. */
+/* Page 9 of the window map. THREE QUERY FAMILIES, ONE PAGE — "do window
+   cleaning robots work" (90), "how do window cleaning robots work" (40) and
+   "are window cleaning robots worth it" (30). One intent behind all three: a
+   reader who has seen these advertised and does not believe them yet. The SERP
+   is Reddit and forums, which is exactly where a plainly-written answer with a
+   real "no" in it can win against marketing copy. */
+const WINDOW_WORKS_GUIDE: PagePlan = {
+  path: "/guides/do-window-cleaning-robots-work/",
+  category: "window-cleaning-robots",
+  type: "guide",
+  status: "built",
+  intent: "Tell me whether these actually work before I spend anything.",
+  primary: { term: "do window cleaning robots work", volume: 130, difficulty: 0 },
+  secondary: [
+    { term: "how do window cleaning robots work", volume: 40, difficulty: 0 },
+    { term: "are window cleaning robots worth it", volume: 30, difficulty: 0 },
+    { term: "suction", volume: 0, difficulty: 0 },
+    { term: "streaking", volume: 0, difficulty: 0 },
+  ],
+  ceded: [
+    { term: "window cleaning robot", toPath: "/robots/window-cleaning-robots/", why: "The 12,100 head term is the hub's. This guide answers the scepticism question and hands the reader on rather than re-explaining the category." },
+    { term: "best window cleaning robot", toPath: "/best-robots/window-cleaning-robots/", why: "A guide that ranks machines is a best-of wearing a hat, and it would compete with the page built for that query. This one answers whether to buy at all." },
+  ],
+  products: [],
+  productsNote: "No picks by design. The eleven machines are ranked on the best-of; naming a winner here would split one argument across two URLs competing for one result.",
+  linksOut: [
+    "/robots/window-cleaning-robots/",
+    "/best-robots/window-cleaning-robots/",
+    "/botmatch/window-cleaning-robots/",
+    "/review-methodology/",
+  ],
+  images: [{ slot: "hero", shows: "A half-cleaned window, robot mid-pane, the difference visible", supplied: false }],
+  schema: ["Article", "FAQPage", "BreadcrumbList"],
+  research: "30981257806 · 2026-08-05 · $0.2044",
+  evidence: "130/mo combined across three phrasings at KD 0, and the last unbuilt page on the window map. A Reddit-and-forums SERP rewards an honest answer, and this category has a real one — they work in the middle of the pane and disappoint at the edge.",
+};
+
 const WINDOW_BEST: PagePlan = {
   path: "/best-robots/window-cleaning-robots/",
   category: "window-cleaning-robots",
@@ -1056,6 +1093,7 @@ export const PAGE_PLAN: PagePlan[] = [
   ...WINDOW_REVIEWS,
   WINDOW_BOTMATCH,
   WINDOW_BEST,
+  WINDOW_WORKS_GUIDE,
   ...VACUUM_REVIEWS,
   ...LITTER_REVIEWS,
   ...COMPANION_REVIEWS,

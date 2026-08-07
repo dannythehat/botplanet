@@ -459,6 +459,17 @@ export const CATEGORY_ANCHORS: Record<string, InternalAnchor[]> = {
       status: "live",
     },
     {
+      /* ADDED 7 August 2026 with the "do they work" guide, which named the
+         shortlist in its own words and had nowhere to send the reader — the
+         window anchor set predates the best-of page by two days. This is the
+         commercial destination in a category whose reviews now earn, so it is
+         the most valuable link in the list. */
+      anchor: "ranked shortlist",
+      href: "/best-robots/window-cleaning-robots/",
+      why: "The best-of is the page that turns a reader who has decided to buy into a reader choosing which one. Any window page reaching that moment should be one click from it.",
+      status: "live",
+    },
+    {
       anchor: "compare",
       href: "/compare/window-cleaning-robots/",
       why: "The comparison table is the honest next step for a reader who has decided one model is close but wants it beside the others.",

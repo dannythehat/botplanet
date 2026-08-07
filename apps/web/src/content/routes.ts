@@ -831,6 +831,23 @@ export const ROUTES: RouteDef[] = [
     summary: "Nine ranked by the job each does best, and the two we hold and do not recommend.",
   },
 
+  {
+    /* Page 9 of the window map and the last of it. Parented to /guides/ like
+       the pool worth-it guide: the URL carries no category segment, so a
+       breadcrumb claiming one would not match the path the reader walked. */
+    path: "/guides/do-window-cleaning-robots-work/",
+    label: "Do window cleaning robots work?",
+    section: "guides",
+    parent: "/guides/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: true,
+    indexable: true,
+    category: "window-cleaning-robots",
+    summary: "Yes in the middle of the pane, no at the edges — and when not to buy one at all.",
+  },
+
   /* ---------------- Standalone guides, 6 August 2026 ----------------
      The first pages published for categories with NOTHING IN THE
      CATALOGUE. Each answers a decision rather than ranking machines,

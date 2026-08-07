@@ -1357,6 +1357,36 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
     ],
     researchedOn: RUN_WINDOW,
   },
+  {
+    path: "/guides/do-window-cleaning-robots-work/",
+    /* THREE QUERY FAMILIES MERGED INTO ONE PAGE: "do window cleaning robots
+       work" (90), "how do window cleaning robots work" (40) and "are window
+       cleaning robots worth it" (30). One intent behind all three — a reader
+       who has seen these advertised and does not believe them yet. Splitting
+       them across three URLs would be three thin pages competing for one
+       answer. The SERP is Reddit and forums, which is where an honest answer
+       with a real "no" in it beats marketing copy. */
+    primary: { term: "do window cleaning robots work", volume: 130, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "how do window cleaning robots work", volume: 40, difficulty: 0, mustAppear: true },
+      { term: "are window cleaning robots worth it", volume: 30, difficulty: 0, mustAppear: true },
+      { term: "suction", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "streaking", volume: 0, difficulty: 0, mustAppear: true },
+    ],
+    cededTo: [
+      {
+        term: "best window cleaning robot",
+        path: "/best-robots/window-cleaning-robots/",
+        why: "A guide that ranks machines is a best-of wearing a hat. This page answers whether to buy at all and hands the reader to the page that answers which one.",
+      },
+      {
+        term: "window cleaning robot",
+        path: "/robots/window-cleaning-robots/",
+        why: "The 12,100 head term belongs to the hub. This guide takes one question off it rather than re-explaining the category.",
+      },
+    ],
+    researchedOn: RUN_WINDOW,
+  },
 ];
 
 export const keywordsFor = (path: string): PageKeywords | undefined =>
