@@ -605,11 +605,8 @@ const COMPARES: PagePlan[] = HUB_SEEDS.map((h) => ({
 
 const WINDOW_REVIEW_SEEDS: [string, string, number][] = [
   ["ecovacs-winbot-w2-pro-omni", "winbot w2 pro omni", 1120],
-  ["ecovacs-winbot-w3-omni", "winbot w3 omni", 150],
   ["ecovacs-winbot-w2-pro", "winbot w2 pro", 150],
-  ["ecovacs-winbot-w2s", "winbot w2s", 50],
   ["ecovacs-winbot-w1-pro", "winbot w1 pro", 100],
-  ["ecovacs-winbot-mini", "winbot mini", 0],
   ["hutt-s55-pro", "hutt s55 pro", 0],
   ["mamibot-w120-dp", "mamibot w120", 100],
   ["hobot-2s", "hobot 2s", 50],
@@ -618,6 +615,9 @@ const WINDOW_REVIEW_SEEDS: [string, string, number][] = [
 ];
 
 /** Product slugs whose artwork has arrived. A flip is one line. */
+/* MERGED 7 August 2026: the W3 Omni, W2S and Mini left the seed list above.
+   They were never in the 5 August plan, which capped WINBOTs at three, and
+   their URLs now 301 to their nearest sibling. See RETIRED_SLUGS. */
 const SUPPLIED_ARTWORK = new Set(["ecovacs-winbot-w2-pro-omni"]);
 
 const WINDOW_REVIEWS: PagePlan[] = WINDOW_REVIEW_SEEDS.map(([slug, term, volume]) => ({

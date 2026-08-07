@@ -513,7 +513,7 @@ export const CATEGORY_ANCHORS: Record<string, InternalAnchor[]> = {
     },
     {
       anchor: "WINBOT W3 Omni",
-      href: "/robots/window-cleaning-robots/ecovacs-winbot-w3-omni/",
+      href: "/robots/window-cleaning-robots/ecovacs-winbot-w2-pro-omni/",
       why: "The top of the range and the highest stated suction in the catalogue. Named wherever a review says a bigger pane needs a stronger machine.",
       status: "live",
     },
@@ -525,7 +525,7 @@ export const CATEGORY_ANCHORS: Record<string, InternalAnchor[]> = {
     },
     {
       anchor: "WINBOT W2S",
-      href: "/robots/window-cleaning-robots/ecovacs-winbot-w2s/",
+      href: "/robots/window-cleaning-robots/ecovacs-winbot-w2-pro/",
       why: "The slimmer W2 variant with TruEdge scrubbers. Named wherever edge coverage is the point at issue.",
       status: "live",
     },
@@ -537,7 +537,7 @@ export const CATEGORY_ANCHORS: Record<string, InternalAnchor[]> = {
     },
     {
       anchor: "WINBOT Mini",
-      href: "/robots/window-cleaning-robots/ecovacs-winbot-mini/",
+      href: "/robots/window-cleaning-robots/ecovacs-winbot-w2-pro/",
       why: "The smallest and cheapest, and the only one a renter would sensibly buy. The answer to small panes and to storage.",
       status: "live",
     },

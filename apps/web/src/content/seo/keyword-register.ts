@@ -663,23 +663,6 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
     researchedOn: RUN_WINDOW,
   },
   {
-    path: "/robots/window-cleaning-robots/ecovacs-winbot-w3-omni/",
-    primary: { term: "winbot w3 omni", volume: 150, difficulty: 0, mustAppear: true },
-    secondary: [
-      { term: "ecovacs winbot w3 omni", volume: 150, difficulty: 0, mustAppear: true },
-      { term: "10,000 pa", volume: 0, difficulty: 0, mustAppear: true },
-      { term: "win-slam 5.0", volume: 0, difficulty: 0, mustAppear: true },
-    ],
-    cededTo: [
-      {
-        term: "window cleaning robot",
-        path: "/robots/window-cleaning-robots/",
-        why: "Category head term, owned by the hub. One review is not a category page and should not try to be.",
-      },
-    ],
-    researchedOn: RUN_WINDOW,
-  },
-  {
     path: "/robots/window-cleaning-robots/ecovacs-winbot-w2-pro/",
     primary: { term: "winbot w2 pro", volume: 150, difficulty: 0, mustAppear: true },
     secondary: [

@@ -4,6 +4,7 @@ import { getDb, schema } from "../lib/db";
 import { SITE } from "../lib/site";
 import { productPath, sitemapRoutes } from "../content/routes";
 import { liveCategories } from "../content/nav";
+import { RETIRED_SLUGS } from "../content/product-names";
 import { REVIEWS } from "../content/reviews";
 
 /**
@@ -35,8 +36,14 @@ export const GET: APIRoute = async ({ locals }) => {
     ...sitemapRoutes().map((r) => r.path),
     /* A product page only exists where its category page does. A row for a
        category still marked coming_soon would be a URL nobody can navigate to. */
+    /* AND ONLY WHERE THE URL IS STILL ITS OWN PAGE. A retired slug is still
+       `published` in D1 — the row keeps its offers and its evidence — but the
+       URL now 301s to a parent. Listing a redirect in a sitemap asks Google to
+       crawl a URL in order to be told to go somewhere else, which spends
+       crawl budget to gain nothing. Found on 7 August 2026, when merging three
+       WINBOTs left all three in the sitemap. */
     ...rows
-      .filter((r) => liveSlugs.has(r.categorySlug))
+      .filter((r) => liveSlugs.has(r.categorySlug) && !(r.slug in RETIRED_SLUGS))
       .map((r) => productPath(r.slug, r.categorySlug)),
   ];
 

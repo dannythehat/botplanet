@@ -1,6 +1,7 @@
 ---
 import Base from "../../../layouts/Base.astro";
 import ProductCard from "../../../components/ProductCard.astro";
+import { RETIRED_SLUGS } from "../../../content/product-names";
 import { journeyFor } from "../../../content/journeys";
 import { getDb, schema } from "../../../lib/db";
 import { usd, titleCase } from "../../../lib/format";
@@ -36,10 +37,23 @@ if (!cat) return new Response("Category not found", { status: 404 });
 
 const journey = journeyFor(category);
 
-const products = await db
+/* A RETIRED SLUG IS STILL PUBLISHED IN D1 AND MUST NOT APPEAR HERE.
+   Merging the three surplus WINBOTs on 7 August 2026 left their D1 rows exactly
+   where they were — deliberately, because the rows carry the offers and the
+   evidence, and deleting them would throw both away. But the grid reads D1
+   directly, so all eleven kept rendering and three of the cards linked to a URL
+   that 301s straight back out again. An internal link to a redirect is a link
+   that leaks its own signal.
+
+   Filtered against RETIRED_SLUGS rather than by unpublishing in production:
+   the redirect map is versioned, reviewable and already the single source of
+   truth for which URLs are no longer their own page. A production write would
+   put that fact somewhere no test can see it. */
+const rows = await db
   .select()
   .from(schema.products)
   .where(and(eq(schema.products.categoryId, cat.id), eq(schema.products.status, "published")));
+const products = rows.filter((p) => !(p.slug in RETIRED_SLUGS));
 
 /* PRICES COME FROM THE CHECKER, NOT FROM THE SEEDED OFFER ROWS.
    This used to read `offers.base_price_minor` and print the lowest — a figure

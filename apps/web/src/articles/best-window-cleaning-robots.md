@@ -33,19 +33,13 @@ catalogue that cleans a window nowhere near a plug, and that is the entire
 product. On glass it is a good mid-range robot. Off the tether of a wall
 socket, it is the only one.
 
-**Big glass.** Sliding doors, picture windows, a whole wall of it. The WINBOT
-W3 Omni has the strongest specification here and the longest reach, and on
-ordinary-sized windows the extra suction buys you nothing you can see.
-
-**The edges are your complaint.** Every robot in this category cleans the
-middle of a pane well and the border worst, because a circular path reaches a
-corner last and least. The WINBOT W2S swaps the nozzle array for edge scrubbers
-and aims squarely at that. The trade is documentation: ECOVACS publishes
-suction, tank and weight for the W2 PRO and none of them for this one.
-
-**Small panes and glazing bars.** The WINBOT Mini is the cheapest in the range
-and out-grips two machines above it. On large glass its three modes and older
-navigation are the real limit, not its suction.
+**Big glass, edges, or small panes.** All three are answered inside the same
+range rather than by a different machine, and they are covered on the two WINBOT
+reviews above rather than given pages of their own. The W3 Omni is the station
+machine for a wall of glass; the W2S trades the nozzle array for edge scrubbers
+and publishes almost no figures; the Mini is the small-pane model, and it
+out-grips both of the models above it. None of the three changes the answer for
+an ordinary window, which is why this list does not rank them separately.
 
 **Sloped or roof glass.** The HUTT S55 Pro is the only machine here that offers
 to work on slanted glass at all — conservatory roofs, skylights, gable windows.
@@ -62,7 +56,7 @@ and the only one with no app at all — a remote control instead, which for the
 right buyer is the feature rather than the compromise. It does not claim
 frameless glass, and that rules it out for a lot of modern windows.
 
-**Anything but an ECOVACS.** Six of the eleven machines here are one brand,
+**Anything but an ECOVACS.** Three of the eight machines here are one brand,
 which is a real concern if you would rather not bet a house on one maker's
 service operation. The Mamibot W120-DP is the mid-price alternative, with a
 proper four-nozzle spread.
@@ -70,7 +64,7 @@ proper four-nozzle spread.
 ## Two we hold and do not recommend
 
 The WINBOT W1 PRO is a competent entry machine that has been overtaken inside
-its own range: the Mini costs less and grips harder. Buy it only if you
+its own range: the Mini variant costs less and grips harder. Buy it only if you
 specifically want the larger body.
 
 The HOBOT 298 is the machine we know least about. Its own maker publishes almost
@@ -114,8 +108,8 @@ loud — closer to a vacuum than to an appliance you can ignore in the next room
 ## How to choose in one minute
 
 Frameless glass narrows the field first. No socket nearby narrows it to one.
-After that it is pane size: large glass wants the W3, small panes and glazing
-bars want the Mini, and everything in between is the W2 PRO.
+After that it is pane size: large glass wants the W3 Omni variant, small panes
+want the Mini, and everything in between is the W2 PRO itself.
 
 If you would rather answer questions than read a ranking, BotMatch asks about
 your glass, your sockets and whether the window opens, then scores the whole

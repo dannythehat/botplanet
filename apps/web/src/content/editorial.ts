@@ -836,7 +836,7 @@ export const EDITORIAL: Record<string, EditorialContent> = {
     title: "The best window cleaning robot for your glass, ranked",
     seoTitle: "Best Window Cleaning Robot 2026: Which One Suits Your Glass",
     metaDescription:
-      "Nine ranked by the job each does best, plus the two we hold and do not recommend. " +
+      "Six ranked by the job each does best, plus the two we hold and do not recommend. " +
       "Frameless glass and a nearby socket decide this before any specification does.",
     standfirst:
       "Two questions settle this category and both are about your windows: is the glass frameless, and is there a socket near the ones you actually want cleaned. " +
@@ -858,30 +858,6 @@ export const EDITORIAL: Record<string, EditorialContent> = {
           "The only machine in this catalogue that cleans a window nowhere near a plug, which is the whole product rather than a feature of it. Stairwell landings, conservatories, the window behind the sofa — the ones that stay dirty because the cable will not reach.",
         wrongFor:
           "Every window you own has a socket beneath it, in which case you are paying a large premium for a battery station you will never once use.",
-      },
-      {
-        productSlug: "ecovacs-winbot-w3-omni",
-        award: "Best for large panes",
-        why:
-          "The strongest specification we hold and the newest navigation, bought for distance rather than for cleaning power. On sliding doors and picture windows a robot travels far and a missed patch shows, which is exactly where the extra reach earns its keep.",
-        wrongFor:
-          "Your windows are the size most windows are, in which case the W2 PRO cleans them just as well and the extra suction buys nothing you can see.",
-      },
-      {
-        productSlug: "ecovacs-winbot-w2s",
-        award: "Best for edges and borders",
-        why:
-          "Swaps the nozzle array for edge scrubbers and aims at the border of the pane, which is where a circular cleaning path reaches last and least. If your complaint is the frame rather than the middle, this is the machine built for it.",
-        wrongFor:
-          "You want the better-documented machine: ECOVACS publishes suction, tank and weight for the W2 PRO and none of them for this one.",
-      },
-      {
-        productSlug: "ecovacs-winbot-mini",
-        award: "Best for small panes",
-        why:
-          "The cheapest in the range and it out-grips two machines above it, which makes it the honest answer for glazing bars, bathroom windows and anywhere the machine has to live in a drawer.",
-        wrongFor:
-          "Your glass is large, where the three cleaning modes and the older navigation are the real limitation rather than the suction figure.",
       },
       {
         productSlug: "hutt-s55-pro",
@@ -919,9 +895,6 @@ export const EDITORIAL: Record<string, EditorialContent> = {
     comparisonSlugs: [
       "ecovacs-winbot-w2-pro",
       "ecovacs-winbot-w2-pro-omni",
-      "ecovacs-winbot-w3-omni",
-      "ecovacs-winbot-w2s",
-      "ecovacs-winbot-mini",
       "ecovacs-winbot-w1-pro",
       "hutt-s55-pro",
       "hobot-2s",

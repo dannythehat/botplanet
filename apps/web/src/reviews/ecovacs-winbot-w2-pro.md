@@ -78,6 +78,29 @@ suction.
 **Which two protection stages it lacks.** Asked and not answered by the
 published specification.
 
+## The two variants in the same family
+
+ECOVACS sells this machine in three forms without a station, and the differences
+are narrower than the model numbers suggest.
+
+**The W2S** replaces the six-nozzle array with edge scrubbers, aimed at the
+border of the pane where every robot in this category does its worst work. It is
+the right instinct. The problem is that ECOVACS publishes no suction figure, no
+tank capacity and no weight for it, so there is nothing to compare against the
+numbers it does publish for this machine. If the edges are genuinely your
+complaint it is worth looking at; if you want to know what you are buying before
+you buy it, this one is documented and that one is not.
+
+**The Mini** is the small-pane machine, and it out-grips both of the models above
+it — a fact ECOVACS does not advertise, because it inverts the price ladder. On
+glazing bars, bathroom windows and anywhere the machine has to live in a drawer,
+it is the better tool. On large glass its three cleaning modes and older
+navigation are the real limit, not its grip.
+
+Neither has its own page here. Both are variants of the machine on this page
+rather than separate propositions, and a review that repeated this one three
+times with different numbers missing would serve nobody.
+
 ## The verdict
 
 The default. Same glass performance as the flagship on every figure that

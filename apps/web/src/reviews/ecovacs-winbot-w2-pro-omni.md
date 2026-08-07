@@ -86,6 +86,27 @@ publishes no cycle count and no replacement path we could find. On a machine
 whose entire premium is that battery, that absence matters more than it would
 elsewhere, and it is the single biggest open question about this purchase.
 
+## The W3 Omni, and whether it is worth the step up
+
+ECOVACS sells a second station machine above this one, and it is the only real
+alternative to it.
+
+The W3 Omni is the same proposition — a robot that cleans a window nowhere near
+a plug — with a newer navigation generation and more suction. On ordinary
+windows neither changes anything you can see. What they buy is distance: on
+sliding doors, picture windows or a whole wall of glass, the machine travels
+further before it turns, and a missed patch on a big pane shows in a way it does
+not on a small one.
+
+So the honest split is by pane size rather than by specification. Large glass and
+a socket problem: the W3. A socket problem on ordinary windows: this one, and
+keep the difference.
+
+We cannot tell you how much of the extra suction reaches the glass. ECOVACS
+publishes a maximum figure and a moving figure for both machines, and the two
+ranges overlap once tolerance is applied — which is the same reason this review
+does not lean on the number for the W2 PRO Omni either.
+
 ## The verdict
 
 Buy it for the windows without sockets. That is a real problem, this is the only
