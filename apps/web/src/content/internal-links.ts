@@ -459,6 +459,16 @@ export const CATEGORY_ANCHORS: Record<string, InternalAnchor[]> = {
       status: "live",
     },
     {
+      /* ADDED 7 August 2026 by the same inbound-link audit that found the pool
+         orphan. The guide had exactly one internal link — the guides index —
+         because nothing in the category used a phrase that pointed at it. The
+         best-of now says the sentence, and the sentence is the link. */
+      anchor: "whether window cleaning robots work",
+      href: "/guides/do-window-cleaning-robots-work/",
+      why: "The scepticism question, and the page that answers it with a real no. A reader still deciding whether to buy at all is on the wrong page when they are reading a ranking, and this is the shortest route to the right one.",
+      status: "live",
+    },
+    {
       /* ADDED 7 August 2026 with the "do they work" guide, which named the
          shortlist in its own words and had nowhere to send the reader — the
          window anchor set predates the best-of page by two days. This is the
@@ -589,6 +599,26 @@ export const CATEGORY_ANCHORS: Record<string, InternalAnchor[]> = {
       anchor: "cordless",
       href: "/robots/robotic-pool-cleaners/",
       why: "Corded versus cordless is a hub-level decision. The review only says this machine is corded; the reasoning belongs on the hub.",
+      status: "live",
+    },
+    {
+      /* ADDED 7 August 2026 by an inbound-link audit that found
+         /best-robots/robotic-pool-cleaners/above-ground-pools/ ORPHANED —
+         zero internal links, on a 2,400/mo page, five days after it shipped.
+
+         The cause is the entry directly below. Nine pool pages contain the
+         phrase "above-ground pool", and the shorter "above-ground" anchor was
+         matching first and sending every one of them to a section of the hub
+         instead of to the page built for the term. That is precisely the
+         swallowing the ordering test in internal-links.test.ts exists to
+         catch — but that test only checks the order of anchors that EXIST,
+         and it cannot flag the one that was never written.
+
+         Listed above "above-ground" so the longer, more specific phrase wins,
+         which is the rule for this whole file. */
+      anchor: "above-ground pool",
+      href: "/best-robots/robotic-pool-cleaners/above-ground-pools/",
+      why: "2,400/mo at KD 0 and the second-strongest commercial term in the category. Nine pool pages use this exact phrase; each one should reach the shortlist built for it rather than a paragraph on the hub.",
       status: "live",
     },
     {

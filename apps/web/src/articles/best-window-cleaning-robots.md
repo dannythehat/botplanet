@@ -104,7 +104,8 @@ Streaking at the very edge of the pane, and none of the marketing mentions it.
 The pattern is consistent across brands and price points: the middle comes up
 well, the border comes up worst, and the last centimetre against the frame is
 where a cloth still beats a robot. Buy one to stop doing the whole window, not
-to stop doing windows.
+to stop doing windows. If you have not settled whether window cleaning robots
+work at all, that question has its own page and a blunter answer than this one.
 
 Two more honest limits. These clean one side of the glass, so the outside of an
 upstairs window is only reachable if the window opens inwards. And they are
