@@ -194,3 +194,54 @@ describe("phrases that wrap across a line", () => {
     expect(applyInternalLinks(src, POOL).html).toContain("polaris-freedom");
   });
 });
+
+describe("a product anchor points at the product it names", () => {
+  /**
+   * THE REGRESSION THIS EXISTS FOR, found by crawling the live site on
+   * 8 August 2026 rather than by any test here.
+   *
+   * Three WINBOTs were merged into siblings on 7 August and their anchors were
+   * repointed with them — correct at the time. When the merge was reversed the
+   * next day and each got its page back, this file was not touched, so
+   * "WINBOT W3 Omni" went on sending the W3 Omni's own name to the W2 PRO
+   * Omni's page. Every existing check passed: the href was a real path, the
+   * route was live, the product was active. It was simply the wrong machine.
+   *
+   * The rule that catches it: an anchor naming a product must appear in that
+   * product's own review title. "WINBOT W3 Omni" is not a substring of
+   * "ECOVACS WINBOT W2 PRO Omni review", so the bad link fails here.
+   */
+  const norm = (x: string) => x.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+  const slugOf = (path: string) => /^\/robots\/[a-z-]+\/([a-z0-9-]+)\/$/.exec(path)?.[1] ?? null;
+  const isEditorial = (path: string) => Boolean(EDITORIAL[path]);
+
+  it("never sends a product's name to a different product's page", () => {
+    /* Only anchors that NAME a machine are judged. "iAquaLink" and "sun ledge"
+       point at product pages and name a feature, not a product; they are left
+       alone. The failure this catches is narrower and worse — an anchor that
+       matches some OTHER product's title and not the one it points at. */
+    const titles = Object.entries(REVIEWS).map(([slug, r]) => ({
+      slug,
+      hay: `${norm(r.title)} ${norm(slug)}`,
+    }));
+    const wrong: string[] = [];
+
+    for (const [cat, list] of Object.entries(CATEGORY_ANCHORS)) {
+      for (const a of list.filter((x) => x.status === "live")) {
+        const path = a.href.split("#")[0];
+        const slug = slugOf(path);
+        if (!slug || isEditorial(path)) continue;
+
+        const key = norm(a.anchor);
+        const target = titles.find((t) => t.slug === slug);
+        if (!target || target.hay.includes(key)) continue;
+
+        const elsewhere = titles.filter((t) => t.hay.includes(key)).map((t) => t.slug);
+        if (elsewhere.length) {
+          wrong.push(`${cat}: "${a.anchor}" → ${slug}, but it names ${elsewhere.join(" / ")}`);
+        }
+      }
+    }
+    expect(wrong).toEqual([]);
+  });
+});

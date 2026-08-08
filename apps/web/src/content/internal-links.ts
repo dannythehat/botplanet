@@ -412,6 +412,12 @@ export const CATEGORY_ANCHORS: Record<string, InternalAnchor[]> = {
       status: "live",
     },
     {
+      anchor: "robotic pets for elderly",
+      href: "/guides/robotic-pets-for-elderly/",
+      why: "The plural is the form the prose uses \u2014 the Joy For All review says 'our robotic pets for elderly guide' and the singular anchor below could not match it. The guide had one inbound link.",
+      status: "live",
+    },
+    {
       anchor: "robotic pet for elderly",
       /* REPOINTED 6 August 2026, from /robots/companion-robots/#who-for to the
          guide. The hub section separates three audiences in a paragraph each;
@@ -637,8 +643,12 @@ export const CATEGORY_ANCHORS: Record<string, InternalAnchor[]> = {
       status: "live",
     },
     {
+      /* REPOINTED 8 August 2026. This sent the W3 Omni's own name to the
+         W2 PRO Omni's page — correct while the two were merged, and a link to
+         the wrong machine from the moment the W3 got its page back. The
+         unmerge did not touch this file and the crawl is what caught it. */
       anchor: "WINBOT W3 Omni",
-      href: "/robots/window-cleaning-robots/ecovacs-winbot-w2-pro-omni/",
+      href: "/robots/window-cleaning-robots/ecovacs-winbot-w3-omni/",
       why: "The top of the range and the highest stated suction in the catalogue. Named wherever a review says a bigger pane needs a stronger machine.",
       status: "live",
     },
@@ -649,8 +659,9 @@ export const CATEGORY_ANCHORS: Record<string, InternalAnchor[]> = {
       status: "live",
     },
     {
+      /* REPOINTED 8 August 2026, with the W3 Omni above. */
       anchor: "WINBOT W2S",
-      href: "/robots/window-cleaning-robots/ecovacs-winbot-w2-pro/",
+      href: "/robots/window-cleaning-robots/ecovacs-winbot-w2s/",
       why: "The slimmer W2 variant with TruEdge scrubbers. Named wherever edge coverage is the point at issue.",
       status: "live",
     },
@@ -661,8 +672,9 @@ export const CATEGORY_ANCHORS: Record<string, InternalAnchor[]> = {
       status: "live",
     },
     {
+      /* REPOINTED 8 August 2026, with the W3 Omni above. */
       anchor: "WINBOT Mini",
-      href: "/robots/window-cleaning-robots/ecovacs-winbot-w2-pro/",
+      href: "/robots/window-cleaning-robots/ecovacs-winbot-mini/",
       why: "The smallest and cheapest, and the only one a renter would sensibly buy. The answer to small panes and to storage.",
       status: "live",
     },
@@ -694,6 +706,41 @@ export const CATEGORY_ANCHORS: Record<string, InternalAnchor[]> = {
       anchor: "Cop Rose X5S",
       href: "/robots/window-cleaning-robots/cop-rose-x5s/",
       why: "Remote control and no app at all, which for some readers is the feature rather than the compromise. The cheapest machine in the catalogue.",
+      status: "live",
+    },
+    /* SHORT FORMS, added 8 August 2026 from a count of how the prose actually
+       reads rather than how the model is named on the box. "W3 Omni" appears
+       fifteen times against one "WINBOT W3 Omni"; "the Mini" thirteen times
+       against six. The long forms above take the first mention on a page and
+       these take the next, and every one lands on the same review.
+
+       Safe within this category and nowhere else: every "Mini" in window prose
+       is the WINBOT Mini, and the anchor list is per-category so it cannot
+       reach the Sphero Mini. */
+    {
+      anchor: "W3 Omni",
+      href: "/robots/window-cleaning-robots/ecovacs-winbot-w3-omni/",
+      why: "The form every review uses after the first mention, fifteen times across the category and linking nowhere until now.",
+      status: "live",
+    },
+    {
+      anchor: "W2S",
+      href: "/robots/window-cleaning-robots/ecovacs-winbot-w2s/",
+      why: "The W2 PRO review compares itself to the W2S by this name and could not reach it.",
+      status: "live",
+    },
+    {
+      anchor: "Mini",
+      href: "/robots/window-cleaning-robots/ecovacs-winbot-mini/",
+      why: "Four reviews rule themselves out for small panes and name the Mini as the answer. Unambiguous inside this category, where every Mini is this machine.",
+      status: "live",
+    },
+    {
+      /* Below "ranked shortlist" on purpose, so the fuller phrase takes a
+         mention before the bare one does. */
+      anchor: "shortlist",
+      href: "/best-robots/window-cleaning-robots/",
+      why: "The commercial page for the category had two inbound links and none from a review. A reader at the end of one machine's page wanting the ranked list is the most obvious journey on the site and it was not linked.",
       status: "live",
     },
   ],
