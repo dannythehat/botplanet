@@ -926,6 +926,8 @@ const COMPANION_REVIEWS: PagePlan[] = [
   {
     ...companionReviewShell("miko 3"),
     path: "/robots/companion-robots/miko-3/",
+    /* BUILT 8 August 2026, second in the category. */
+    status: "built" as const,
     primary: { term: "miko 3", volume: 4400, difficulty: 3 },
     secondary: [
       { term: "miko robot", volume: 8100, difficulty: 10 },
@@ -950,8 +952,8 @@ const COMPANION_REVIEWS: PagePlan[] = [
       { term: "miko mini", volume: 5400, why: "Checked 8 August 2026: the only Amazon US listing is a carrying case for it. A 5,400/mo KD 0 term with nothing behind it is a page that costs money and earns none. Compared against on the Miko 3 review instead." },
       { term: "ai robot for kids", volume: 0, why: "Shares two of ten domains with 'miko 3'. The existing ruling that this term belongs to no BotPlanet page holds, and the measurement confirms Miko does not drag this category into a parenting SERP." },
     ],
-    products: [],
-    productsNote: "Amazon US B0GV37M678 confirmed 8 August 2026 — $299, in stock. A SECOND listing, B0GV2L2PDL, exists for the same machine; which one holds the live buy box must be settled before this page publishes.",
+    products: ["miko-3"],
+    productsNote: "Catalogued as prod-miko-3, 8 August 2026. Amazon US B0GV37M678 — $299, in stock. THE SECOND LISTING WAS NOT A DUPLICATE: B0GV2L2PDL carries a byte-identical title ending \'| Blue\', serves its own ASIN and is also in stock at $299. Two colours of one machine. Red is the one held. Specifications read from miko.ai/products/miko-3 the same day.",
     evidence: "4,400/mo at KD 3, with 'miko robot' at 8,100/KD 10 behind it. 'miko 3' and 'miko 3 review' share SIX of ten domains, so one page takes both. Cheapest large opportunity in the category and it was not in the plan at all.",
   },
   {

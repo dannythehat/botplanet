@@ -382,6 +382,13 @@ const COMPANION_ASINS: WindowDestination[] = [
     evidence:
       "Title: 'Casio Moflin AI Smart Companion Robot - Silver | AI-powered interactive companion; emotional evolution; MofLife app compatible; stress relief'. Served ASIN equals the one requested, and the availability block reads 'In Stock' with $429 showing on 8 August 2026. THE DETAILS TABLE IS ABSENT FROM THIS LISTING — no Brand row, no Item model number, nothing the other reads could quote, so identity rests on the title naming Casio, Moflin and the colourway together. That is weaker than the window eleven and is recorded as weaker. A VARIANT FAMILY: Casio sells Silver and Gold; this ASIN is the Silver, and the served-ASIN equality check is what stops the Gold's data being accepted in its place.",
   },
+  {
+    productId: "prod-miko-3",
+    asin: "B0GV37M678",
+    exactModel: "Miko 3 (Red)",
+    evidence:
+      "Title: 'Miko 3 AI Robot for Kids - Smart Educational & STEAM Learning Robot with Interactive Apps, Games, Stories & Activities for Girls & Boys Ages 5-10 | Red'. Served ASIN equals the one requested; availability reads 'In Stock' at $299 on 8 August 2026. A VARIANT FAMILY, AND THE SECOND ASIN WAS NEARLY RECORDED AS A DUPLICATE: B0GV2L2PDL carries a byte-identical title ending '| Blue', serves its own ASIN, and is also in stock at $299. Two listings for one machine in two colours, not two machines and not a stale row. Red is the one held; the served-ASIN equality check is what stops Blue's data being accepted in its place. Miko also sells a Mini and a Max, and neither name appears anywhere in this listing.",
+  },
 ];
 
 for (const c of COMPANION_ASINS) {
@@ -594,6 +601,7 @@ export const REDIRECT_KEYS: Record<string, string> = {
      were inserted first, then recorded here, so the map still describes the
      database rather than a naming convention somebody hoped was followed. */
   "prod-moflin": "comp-casio-moflin-amazon",
+  "prod-miko-3": "comp-miko-3-amazon",
 };
 
 /* ------------------------------------------------------------------ */

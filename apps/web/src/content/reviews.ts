@@ -2331,6 +2331,83 @@ export const REVIEWS: Record<string, ReviewContent> = {
       "Every figure read from casio.com/us/moflin/ on 8 August 2026, where Casio publishes a full specification table. Casio sells Silver and Gold; the ASIN behind our buy button is the Silver, and the two differ in colour only. Casio notes its specifications may change without notice.",
     lastReviewed: "2026-08-08",
   },
+
+  /* Miko 3. Specifications from miko.ai/products/miko-3, read 8 August 2026,
+     where Miko publishes dimensions, weight, battery and language support in
+     its own FAQ. The subscription tiers below are read from the same page's
+     comparison table rather than summarised from memory — "does miko 3 require
+     a subscription" is Google's first suggestion for its prefix, and the
+     honest answer is longer than yes or no. */
+  "miko-3": {
+    slug: "miko-3",
+    categorySlug: "companion-robots",
+    eyebrow: "Companion robot review",
+    title: "Miko 3 review",
+    seoTitle: "Miko 3 Review — What You Get Without Miko Max",
+    metaDescription:
+      "A $299 learning robot for ages 5 to 10. What Miko 3 does out of the box, what " +
+      "the Miko Max subscription unlocks, and how it compares with the Mini.",
+    verdict:
+      "The most capable robot a five-year-old can actually talk to, and the one product in this category built around a child rather than adapted for one. It works without paying anything further, but several of the headline apps are limited or locked until you do, and the buying decision is really about that.",
+    bestFor:
+      "A child roughly five to ten who will talk to it, in a house with reliable Wi-Fi and a parent willing to use the companion app.",
+    notIdealFor:
+      "Under-fives, anyone over about ten, a home without Wi-Fi, or a buyer who wants everything the marketing shows without a recurring charge.",
+    facts: [
+      { label: "Age range", value: "5 to 10" },
+      { label: "Battery", value: "6–7 h play, 4 h charge" },
+      { label: "Languages", value: "8" },
+      { label: "Subscription", value: "Optional — from $8.25/mo" },
+    ],
+    specGroups: [
+      {
+        heading: "What it is",
+        rows: [
+          { label: "Age range", value: "5 to 10 (Miko's own rating)" },
+          { label: "Moves", value: "Yes — drives on wheels" },
+          { label: "Wake word", value: "“Hey Miko”" },
+          { label: "Languages", value: "8 — English, Spanish (Europe), Spanish (Latin America), Mandarin, Italian, German, French, Arabic" },
+          { label: "Recognition", value: "Face and voice" },
+          { label: "Connection", value: "Wi-Fi required — it does nothing offline" },
+        ],
+      },
+      {
+        heading: "Hardware",
+        rows: [
+          { label: "Display", value: "Wide-angle high-resolution IPS" },
+          { label: "Camera", value: "Wide-angle HD" },
+          { label: "Microphones", value: "Dual MEMS" },
+          { label: "Sensors", value: "Time-of-flight range, odometric" },
+          { label: "Size", value: "6.3 × 5.5 × 8.67 in" },
+          { label: "Weight", value: "2 lb" },
+          { label: "Colours", value: "Red, Blue" },
+        ],
+      },
+      {
+        heading: "Power",
+        rows: [
+          { label: "Play time", value: "About 6 to 7 hours, depending on use" },
+          { label: "Charge time", value: "About 4 hours with the 15 W adapter" },
+          { label: "Sleep mode", value: "Yes — Miko recommends it to preserve the battery" },
+        ],
+      },
+      {
+        heading: "Subscription and ownership",
+        rows: [
+          { label: "Works without a subscription", value: "Yes — but with several apps limited or locked" },
+          { label: "Miko Max price", value: "From $8.25/month, or $99 a year" },
+          { label: "Locked without Max", value: "iHeart Music, DaVinci Games & Shows, Lingo Kids parental controls" },
+          { label: "Limited without Max", value: "Learning buddy, Story Maker, Disney, Mattel Shows, progress reports, parental controls" },
+          { label: "Free either way", value: "Spell Bee, Dance Master, app locking" },
+          { label: "Certification", value: "kidSAFE+ COPPA" },
+          { label: "Warranty", value: "1 year; 30-day returns" },
+        ],
+      },
+    ],
+    skuNote:
+      "Specifications and subscription tiers read from miko.ai/products/miko-3 on 8 August 2026. Miko sells the 3 in Red and Blue as separate Amazon listings at the same price; our buy button points at the Red. The Mini and the Max are different machines, not colours.",
+    lastReviewed: "2026-08-08",
+  },
 };
 
 export function reviewFor(slug: string | undefined): ReviewContent | undefined {

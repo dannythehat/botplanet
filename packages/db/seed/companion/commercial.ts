@@ -44,6 +44,12 @@ const offerSeeds: CompanionOfferSeed[] = [
      trap the Mamibot W120-DP colours carry in the window seed. The
      ASIN-equality check in the refresh service is what catches it. */
   { id: "off-moflin-amazon", productId: "prod-moflin", asin: "B0GPHNLWP3", redirectKey: "comp-casio-moflin-amazon", snapshotMinor: 42900 },
+  /* Red only, and the Blue is the reason this comment exists. B0GV2L2PDL
+     carries a byte-identical title ending "| Blue", serves its own ASIN and is
+     also in stock at $299 — it looked like a duplicate row for one machine and
+     is in fact the second colour. Recording the wrong one would not have
+     broken anything visibly, which is exactly why it was worth reading both. */
+  { id: "off-miko-3-amazon", productId: "prod-miko-3", asin: "B0GV37M678", redirectKey: "comp-miko-3-amazon", snapshotMinor: 29900 },
 ];
 
 export const offerRows: (typeof offers.$inferInsert)[] = offerSeeds.map((o) => ({

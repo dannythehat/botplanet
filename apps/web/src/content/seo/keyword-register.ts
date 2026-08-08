@@ -680,6 +680,38 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
     ],
     researchedOn: "2026-08-08",
   },
+  /* Miko 3. The cheapest large opportunity measured in this category:
+     "miko robot" is 8,100 at KD 10 and "miko 3" 4,400 at KD 3, against
+     Vector's 9,900 at KD 23 and Eilik's 8,100 at KD 29.
+
+     "miko mini" (5,400, KD 0) is NOT taken here and is not ceded to another
+     page either — it is refused. The only Amazon US listing for the Mini is a
+     carrying case, so the term has nothing to sell behind it. It is compared
+     against in the copy and linked nowhere. */
+  {
+    path: "/robots/companion-robots/miko-3/",
+    primary: { term: "miko 3", volume: 4400, difficulty: 3, mustAppear: true },
+    secondary: [
+      { term: "miko robot", volume: 8100, difficulty: 10, mustAppear: true },
+      { term: "miko max", volume: 170, difficulty: 0, mustAppear: true },
+      { term: "miko 3 price", volume: 110, difficulty: 0, mustAppear: false },
+      { term: "miko mini", volume: 5400, difficulty: 0, mustAppear: true },
+      /* The question the search data says people arrive with, and the one this
+         page is structured around. Answered from Miko's own comparison table
+         rather than as a yes or a no. */
+      { term: "subscription", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "ages 5", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "Wi-Fi", volume: 0, difficulty: 0, mustAppear: true },
+    ],
+    cededTo: [
+      {
+        term: "robot pet",
+        path: "/robots/companion-robots/",
+        why: "The 8,100 head term belongs to the hub. Miko is a teacher with a face rather than a robot pet, and ranking this page for that term would answer the wrong question for the reader who typed it.",
+      },
+    ],
+    researchedOn: "2026-08-08",
+  },
   {
     path: "/robots/window-cleaning-robots/ecovacs-winbot-w2-pro-omni/",
     primary: { term: "winbot w2 pro omni", volume: 1120, difficulty: 0, mustAppear: true },

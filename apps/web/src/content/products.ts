@@ -833,6 +833,7 @@ export const PRODUCT_ID: Record<string, string> = {
      category. Slug-to-ID only, as with window above: the editorial lives in
      content/reviews.ts and src/reviews/*.md. */
   "moflin": "prod-moflin",
+  "miko-3": "prod-miko-3",
 };
 
 /** Editorial records with the stable productId attached, keyed by slug (route id). */
