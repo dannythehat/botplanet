@@ -28,6 +28,7 @@
 
 import type { FaqItem } from "../components/FaqList.astro";
 import type { HeroImage } from "../components/CategoryHero.astro";
+import type { ReviewFigureRef } from "../lib/review-figures";
 
 /** One ranked recommendation. */
 export interface EditorialPick {
@@ -72,6 +73,17 @@ export interface EditorialContent {
   image?: HeroImage;
   /** Markdown file basename in src/articles/, without the extension. */
   prose: string;
+  /**
+   * Pictures placed inside the prose, each under a heading that exists in it.
+   *
+   * The same mechanism reviews use, and it is here for the same reason: a
+   * best-of or a guide that runs nine hundred words with one hero at the top
+   * is a wall of text, and the argument in the middle is where a picture
+   * actually earns its place. A figure naming a heading nobody wrote is
+   * dropped silently in production and throws in dev, so a typo fails loudly
+   * rather than leaving a page quietly short of a picture.
+   */
+  figures?: ReviewFigureRef[];
   /**
    * Ranked picks. Empty for a guide, which recommends nothing directly and
    * sends the reader to a page that does.

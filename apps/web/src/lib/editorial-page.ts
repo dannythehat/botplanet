@@ -25,6 +25,7 @@ import { comparisonRows, type ComparableProduct } from "../content/comparison";
 import type { ComparisonRow } from "../components/ComparisonTable.astro";
 import type { RenderedPick } from "../components/PickList.astro";
 import type { EditorialContent } from "../content/editorial";
+import { injectFigures } from "./review-figures";
 
 /* Compiled at build time, the same way review prose is. Eager, because there
    are three of them and a lazy import would buy nothing. */
@@ -51,7 +52,10 @@ export async function buildEditorialPage(
         `An editorial record without its Markdown is a half-built page, not a page with a gap.`,
     );
   }
-  const html = await mod.compiledContent();
+  /* Figures go in before the internal linker runs, the same order the review
+     path uses: the linker works on prose text and must not be handed an image
+     tag to chew on. */
+  const html = injectFigures(await mod.compiledContent(), article.figures, dev);
 
   const db = getDb(locals);
   const cat = (
