@@ -1020,6 +1020,8 @@ const COMPANION_REVIEWS: PagePlan[] = [
   {
     ...companionReviewShell("loona"),
     path: "/robots/companion-robots/loona/",
+    /* BUILT 8 August 2026, fifth in the category. */
+    status: "built" as const,
     primary: { term: "loona robot", volume: 5400, difficulty: 18 },
     secondary: [
       { term: "loona robot dog", volume: 1000, difficulty: 4 },
@@ -1040,8 +1042,8 @@ const COMPANION_REVIEWS: PagePlan[] = [
     ceded: [
       { term: "emo robot", toPath: "/robots/companion-robots/living-ai-emo/", why: "The PAA on this SERP asks 'Which robot is better, Emo or Loona?', so it is answered here — but the term itself belongs to the EMO page rather than being fought over by two of ours." },
     ],
-    products: [],
-    productsNote: "Amazon US B0DCF53PCH confirmed 8 August 2026 — $499, in stock. Loona's ACCESSORIES outrank the machine on Amazon; the first discovery pass returned a toy ball as the product.",
+    products: ["loona"],
+    productsNote: "Catalogued as prod-loona, 8 August 2026. Amazon US B0DCF53PCH at $499, 4.1 stars from 1,234 ratings. Specifications are KEYi\'s own listing copy and Q&A because keyirobot.com is JavaScript-rendered and could not be machine-read — which is also why the absence of a subscription is recorded as none published rather than none exists.",
     evidence: "5,400/mo. Shares FIVE of ten domains with 'loona robot price'. keyirobot.com is KEYi's own content marketing and ranks across this whole category including on products it does not make.",
   },
   {

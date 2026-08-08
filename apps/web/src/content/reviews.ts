@@ -2553,6 +2553,74 @@ export const REVIEWS: Record<string, ReviewContent> = {
       "Hardware figures from store.energizelab.com/products/eilik and range pricing from the same store, both read 8 August 2026. Our buy button points at the base Eilik on Amazon (B0C2C9LJNQ) at $139.99, matching the maker's own price. The DQ has its own Amazon listing and is not sold here.",
     lastReviewed: "2026-08-08",
   },
+
+  /* Loona. KEYi's own site is JavaScript-rendered and could not be
+     machine-read, so every figure here comes from the Amazon listing's copy
+     and its Q&A — KEYi's own words, on the page we send buyers to.
+
+     THE BATTERY IS THE STORY AT THIS PRICE. 1,350 mAh gives 1.5 hours of
+     play against 2.5 hours to charge, so a $499 robot spends longer on its
+     dock than off it. The maker's own top bullet is about having fixed the
+     charging, which is a candid thing to lead with and worth repeating
+     rather than hiding. */
+  loona: {
+    slug: "loona",
+    categorySlug: "companion-robots",
+    eyebrow: "Companion robot review",
+    title: "Loona Petbot review",
+    seoTitle: "Loona Robot Review — 90 Minutes of Play for $499",
+    metaDescription:
+      "The most capable robot pet you can buy, and it charges longer than it plays. " +
+      "What $499 gets you, what the camera adds, and the battery nobody mentions.",
+    verdict:
+      "The most capable machine in this category and the hardest to justify on paper. Loona sees, recognises faces and gestures, follows you, talks back, plays fetch and doubles as a home camera — for 90 minutes, after which it needs 2.5 hours on its dock.",
+    bestFor:
+      "Someone who wants the closest thing to a robot pet that exists, uses it in sessions rather than all day, and will get value from the camera as well as the character.",
+    notIdealFor:
+      "Anyone wanting constant presence, anyone on a budget, or anyone buying primarily to watch a pet — a dedicated pet camera does that job for a fraction of this.",
+    facts: [
+      { label: "Battery", value: "1.5 h play, 2.5 h charge" },
+      { label: "Camera", value: "HD RGB — doubles as home monitor" },
+      { label: "Voice", value: "Amazon Lex + ChatGPT-4o" },
+      { label: "Dock", value: "Included, auto-returns" },
+    ],
+    specGroups: [
+      {
+        heading: "Power — read this first",
+        rows: [
+          { label: "Battery", value: "1,350 mAh" },
+          { label: "Continuous playtime", value: "Up to 1.5 hours" },
+          { label: "Charge time", value: "About 2.5 hours" },
+          { label: "Auto-return to dock", value: "Yes — preset routes per room" },
+          { label: "Dock", value: "Included" },
+        ],
+      },
+      {
+        heading: "What it can do",
+        rows: [
+          { label: "Camera", value: "HD RGB" },
+          { label: "Recognition", value: "Faces and hand gestures" },
+          { label: "Follows you", value: "Yes" },
+          { label: "Voice", value: "Amazon Lex with ChatGPT-4o" },
+          { label: "Play", value: "Chases laser pens, fetches balls, app games and quizzes" },
+          { label: "Home monitoring", value: "Yes — camera and speaker, viewed from the app" },
+        ],
+      },
+      {
+        heading: "Practical",
+        rows: [
+          { label: "Weight", value: "1.1 kg" },
+          { label: "Connection", value: "Wi-Fi, and mobile hotspot since the V28 update" },
+          { label: "Subscription", value: "None published" },
+          { label: "Lighting", value: "Needs a well-lit room — the camera does the work" },
+          { label: "Noise", value: "Quiet rooms and clear speech improve voice recognition" },
+        ],
+      },
+    ],
+    skuNote:
+      "Figures from the Amazon listing B0DCF53PCH and its Q&A, read 8 August 2026 — KEYi's own copy on the page we link to. keyirobot.com is JavaScript-rendered and could not be machine-read, so the absence of a subscription is recorded as none published rather than none exists. Rated 4.1 from 1,234 ratings on the day it was read.",
+    lastReviewed: "2026-08-08",
+  },
 };
 
 export function reviewFor(slug: string | undefined): ReviewContent | undefined {

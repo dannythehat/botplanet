@@ -62,6 +62,7 @@ const offerSeeds: CompanionOfferSeed[] = [
      price under the Eilik's name. If the DQ is ever sold here it gets its own
      catalogue row. */
   { id: "off-eilik-amazon", productId: "prod-eilik", asin: "B0C2C9LJNQ", redirectKey: "comp-eilik-amazon", snapshotMinor: 13999 },
+  { id: "off-loona-amazon", productId: "prod-loona", asin: "B0DCF53PCH", redirectKey: "comp-loona-amazon", snapshotMinor: 49900 },
 ];
 
 export const offerRows: (typeof offers.$inferInsert)[] = offerSeeds.map((o) => ({

@@ -390,6 +390,13 @@ const COMPANION_ASINS: WindowDestination[] = [
       "Title: 'Miko 3 AI Robot for Kids - Smart Educational & STEAM Learning Robot with Interactive Apps, Games, Stories & Activities for Girls & Boys Ages 5-10 | Red'. Served ASIN equals the one requested; availability reads 'In Stock' at $299 on 8 August 2026. A VARIANT FAMILY, AND THE SECOND ASIN WAS NEARLY RECORDED AS A DUPLICATE: B0GV2L2PDL carries a byte-identical title ending '| Blue', serves its own ASIN, and is also in stock at $299. Two listings for one machine in two colours, not two machines and not a stale row. Red is the one held; the served-ASIN equality check is what stops Blue's data being accepted in its place. Miko also sells a Mini and a Max, and neither name appears anywhere in this listing.",
   },
   {
+    productId: "prod-loona",
+    asin: "B0DCF53PCH",
+    exactModel: "Loona Petbot (KEYi Tech)",
+    evidence:
+      "Title: 'Loona Robot Pet Dog ChatGPT-4o Smart AI-Powered Companion Voice & Gesture Control, Real-Time Interaction Robotics Toys for Kids, Home Monitoring - Includes Charging Dock'. Served ASIN equals the one requested; $499, In Stock, 4.1 stars from 1,234 ratings on 8 August 2026. THIS PRODUCT WAS NEARLY MISSED TWICE, both times by tooling rather than by absence. The first discovery pass returned 'Play Ball for Loona Pet Robot' as the candidate, because an accessory carries every token of the product it attaches to. The identity check then REFUSED this listing on a deny token of my own writing, 'charging dock :', which matched Amazon's own ' : Toys & Games' title suffix on a listing whose name ends 'Includes Charging Dock'. Both faults are fixed in the scripts; this entry exists because a refusal was read rather than believed.",
+  },
+  {
     productId: "prod-eilik",
     asin: "B0C2C9LJNQ",
     exactModel: "Eilik (Energize Lab)",
@@ -618,6 +625,7 @@ export const REDIRECT_KEYS: Record<string, string> = {
   "prod-miko-3": "comp-miko-3-amazon",
   "prod-vector-2": "comp-anki-vector2-amazon",
   "prod-eilik": "comp-eilik-amazon",
+  "prod-loona": "comp-loona-amazon",
 };
 
 /* ------------------------------------------------------------------ */

@@ -743,6 +743,40 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
     ],
     researchedOn: "2026-08-08",
   },
+  /* Loona. 5,400/mo at KD 18. "loona robot" shares FIVE of ten top-ten domains
+     with "loona robot price", so one page takes both.
+
+     keyirobot.com is KEYi's own content marketing and appears in nine of the
+     twenty-two SERPs measured for this category — including on Vector and Joy
+     For All, which it does not make. It is the site to beat here and it is
+     also the maker of this product. */
+  {
+    path: "/robots/companion-robots/loona/",
+    primary: { term: "loona robot", volume: 5400, difficulty: 18, mustAppear: true },
+    secondary: [
+      { term: "loona robot dog", volume: 1000, difficulty: 4, mustAppear: true },
+      { term: "keyi", volume: 170, difficulty: 0, mustAppear: true },
+      { term: "loona petbot", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "loona robot price", volume: 90, difficulty: 0, mustAppear: false },
+      { term: "loona robot accessories", volume: 70, difficulty: 0, mustAppear: true },
+      { term: "subscription", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "battery", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "home monitor", volume: 0, difficulty: 0, mustAppear: true },
+    ],
+    cededTo: [
+      {
+        term: "emo robot",
+        path: "/robots/companion-robots/living-ai-emo/",
+        why: "Google's answer box on this SERP asks which robot is better, Emo or Loona, so the comparison belongs here — but the 18,100/mo term belongs to the EMO page rather than being contested by two of ours.",
+      },
+      {
+        term: "pet camera robot",
+        path: "/robots/pet-camera-robots/",
+        why: "Loona genuinely carries a camera and doubles as a home monitor, and the review says so. The roaming-camera intent is still a different reader with a different budget, and that category page owns it — this page names it as the better answer for anyone whose main goal is watching a pet.",
+      },
+    ],
+    researchedOn: "2026-08-08",
+  },
   /* Eilik. 8,100/mo at KD 29 — the hardest primary in this category, and the
      page carries "eilik robot review" and "eilik price" with it: both share
      FIVE of ten top-ten domains with the head term.
