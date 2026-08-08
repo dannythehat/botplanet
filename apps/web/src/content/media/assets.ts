@@ -1446,6 +1446,19 @@ const OWNER_ARTWORK: OwnerArtwork[] = [
      them, in the review prose and in the figure captions, rather than by
      dropping the artwork. */
   {
+    /* UNMERGED 8 August 2026. These six files were set aside on the first pass
+       because the W3 Omni 301'd to the W2 PRO Omni and artwork naming a product
+       with no page cannot be published. The product has its page back, so the
+       artwork is back with it. */
+    slug: "ecovacs-winbot-w3-omni",
+    file: "ecovacs-winbot-w3-omni.webp",
+    checksum: "sha256:008a91e00b4f369d14cdff6d608985e87abb51769533709d59a631f9a21f0e5d",
+    width: 1254,
+    height: 1254,
+    scene:
+      "the white square robot on a floor-to-ceiling window at dusk with its cable running down to the round-doored station on the floor, beside callouts for the three-nozzle spray, water pressure, spray coverage, the safety system and path planning",
+  },
+  {
     slug: "ecovacs-winbot-w2-pro",
     file: "ecovacs-winbot-w2-pro.webp",
     checksum: "sha256:89a4278a350b924a7963af5718ba6f790cdd93ea0fea7ba18681b593df42e8b0",
@@ -2442,6 +2455,62 @@ const REVIEW_FIGURES: ReviewFigure[] = [
     height: 1402,
     scene:
       "the robot in a white bathroom labelled against glass, windows, a smooth bath surround and a countertop",
+  },
+  /* WINBOT W3 Omni, unmerged 8 August 2026. */
+  {
+    slug: "hero",
+    productSlug: "ecovacs-winbot-w3-omni",
+    type: "product_in_use",
+    file: "hero.webp",
+    checksum: "sha256:586e627812d5e67fb0dd0d212872cb9810148ef98365b89c600347f98a497107",
+    width: 1536,
+    height: 1024,
+    scene:
+      "the robot spraying a wide arc across a tall window with a city view, its station on the floor beside it, above a strip naming reliable performance, premium build, smart design and support",
+  },
+  {
+    slug: "three-nozzle-spray",
+    productSlug: "ecovacs-winbot-w3-omni",
+    type: "product_detail",
+    file: "three-nozzle-spray.webp",
+    checksum: "sha256:186d9dc5e87b01d082499657d480271c2ee311bf8fe1a9c071b60da9415af66a",
+    width: 1536,
+    height: 1024,
+    scene:
+      "the robot spraying from its side across dark glass at dusk, beside figures for water pressure and spray coverage and a comparison with a narrower-spraying machine",
+  },
+  {
+    slug: "model-comparison",
+    productSlug: "ecovacs-winbot-w3-omni",
+    type: "product_detail",
+    file: "model-comparison.webp",
+    checksum: "sha256:81acf25c77cc91417665c5266925d80eaa477890d41b35538fb31ab26571ef10",
+    width: 1254,
+    height: 1254,
+    scene:
+      "a two-column comparison of the W3 Omni against the W2S Omni on pad washing, navigation generation, battery life, working area, maximum suction, minimum window size and incline rating",
+  },
+  {
+    slug: "path-planning",
+    productSlug: "ecovacs-winbot-w3-omni",
+    type: "product_detail",
+    file: "path-planning.webp",
+    checksum: "sha256:55b9fb3311fb1ce0efea3d85a92983986e9025455ee43a3c05285a19545d1f2d",
+    width: 1086,
+    height: 1448,
+    scene:
+      "the robot on a tall window above a city with its station below, beside panels for cleaning speed, obstacle detection accuracy and route planning",
+  },
+  {
+    slug: "twelve-tier",
+    productSlug: "ecovacs-winbot-w3-omni",
+    type: "product_detail",
+    file: "twelve-tier.webp",
+    checksum: "sha256:d713cced692d4c40e8eb580a8296faf039460c0a382f092f66c4b5bc6eda285e",
+    width: 1254,
+    height: 1254,
+    scene:
+      "the underside of the robot showing its wiping pad and corner rollers, beside a twelve-part list of protection features including power-off protection, an emergency lockout and an optocoupler sensor",
   },
 ];
 

@@ -5974,5 +5974,207 @@
         "checksum": "sha256:c28dd341c693766c97f8336d1d62269e760f8d2b6d056684c92cde136f254ac7"
       }
     ]
+  },
+  {
+    "source": "/media/products/ecovacs-winbot-w3-omni.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-products-ecovacs-winbot-w3-omni-webp-360",
+        "src": "/media/products/ecovacs-winbot-w3-omni-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 18110,
+        "checksum": "sha256:141a87e6a3aeed7c35b1f1ac0cd98bd65699af264ad98324024f1f7cd5958d2a"
+      },
+      {
+        "id": "media-products-ecovacs-winbot-w3-omni-webp-640",
+        "src": "/media/products/ecovacs-winbot-w3-omni-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 43600,
+        "checksum": "sha256:0575058d11d535897c581cd18b2abb68e5bdfade007496add428b892db52ea7b"
+      },
+      {
+        "id": "media-products-ecovacs-winbot-w3-omni-webp-960",
+        "src": "/media/products/ecovacs-winbot-w3-omni-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 80604,
+        "checksum": "sha256:12f914b2c9cda191cc68c2662bd2f2d2562089c18ced55c3e9622e9a729063e9"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/ecovacs-winbot-w3-omni/hero.webp",
+    "sourceWidth": 1536,
+    "sourceHeight": 1024,
+    "derivatives": [
+      {
+        "id": "media-reviews-ecovacs-winbot-w3-omni-hero-webp-360",
+        "src": "/media/reviews/ecovacs-winbot-w3-omni/hero-360w.webp",
+        "width": 360,
+        "height": 240,
+        "bytes": 9790,
+        "checksum": "sha256:4fd4ac0feb6337d10d51a882d31ce4ee0178dac0f436572bdec08a4578e3a790"
+      },
+      {
+        "id": "media-reviews-ecovacs-winbot-w3-omni-hero-webp-640",
+        "src": "/media/reviews/ecovacs-winbot-w3-omni/hero-640w.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 26156,
+        "checksum": "sha256:34fd73770d46718b3518412e5fde1be0b337610aa408f4186830c7d43fbed97e"
+      },
+      {
+        "id": "media-reviews-ecovacs-winbot-w3-omni-hero-webp-960",
+        "src": "/media/reviews/ecovacs-winbot-w3-omni/hero-960w.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 52550,
+        "checksum": "sha256:bca3645db254a5bf88a0990fff2aa3b172cb39c11468382655ba883463bd292f"
+      },
+      {
+        "id": "media-reviews-ecovacs-winbot-w3-omni-hero-webp-1440",
+        "src": "/media/reviews/ecovacs-winbot-w3-omni/hero-1440w.webp",
+        "width": 1440,
+        "height": 960,
+        "bytes": 89376,
+        "checksum": "sha256:9635f016adb486254451fb10b5fdd835b40b146719545c5ff4a2df0af61b38eb"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/ecovacs-winbot-w3-omni/three-nozzle-spray.webp",
+    "sourceWidth": 1536,
+    "sourceHeight": 1024,
+    "derivatives": [
+      {
+        "id": "media-reviews-ecovacs-winbot-w3-omni-three-nozzle-spray-webp-360",
+        "src": "/media/reviews/ecovacs-winbot-w3-omni/three-nozzle-spray-360w.webp",
+        "width": 360,
+        "height": 240,
+        "bytes": 11444,
+        "checksum": "sha256:b33881e4e0ab59f94861482933f1e4ac590b923701899a199b104a0ad3efe1d4"
+      },
+      {
+        "id": "media-reviews-ecovacs-winbot-w3-omni-three-nozzle-spray-webp-640",
+        "src": "/media/reviews/ecovacs-winbot-w3-omni/three-nozzle-spray-640w.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 31478,
+        "checksum": "sha256:b4150715d6924f8aad72fa2657df568aecee357a62a37be72559c8a2cbcb5869"
+      },
+      {
+        "id": "media-reviews-ecovacs-winbot-w3-omni-three-nozzle-spray-webp-960",
+        "src": "/media/reviews/ecovacs-winbot-w3-omni/three-nozzle-spray-960w.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 70122,
+        "checksum": "sha256:597451d2d24fd489deb8ccdc9acce948b691c31fb70b813e955bad26cdc5dad2"
+      },
+      {
+        "id": "media-reviews-ecovacs-winbot-w3-omni-three-nozzle-spray-webp-1440",
+        "src": "/media/reviews/ecovacs-winbot-w3-omni/three-nozzle-spray-1440w.webp",
+        "width": 1440,
+        "height": 960,
+        "bytes": 125530,
+        "checksum": "sha256:54b5dec24a077a54c37df5dd1eaccb549b8b6da55de6db66e6332c3e4f52a617"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/ecovacs-winbot-w3-omni/model-comparison.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-ecovacs-winbot-w3-omni-model-comparison-webp-360",
+        "src": "/media/reviews/ecovacs-winbot-w3-omni/model-comparison-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 16950,
+        "checksum": "sha256:e6a210a67b32e65fdd7c440057ba4c746789712066c22ad15d55e13e29eabb39"
+      },
+      {
+        "id": "media-reviews-ecovacs-winbot-w3-omni-model-comparison-webp-640",
+        "src": "/media/reviews/ecovacs-winbot-w3-omni/model-comparison-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 41632,
+        "checksum": "sha256:8eef0579d6c31bf1bcfcfdd1104d07ac8fca19cb3f66d7c2a3577abb6c5d8343"
+      },
+      {
+        "id": "media-reviews-ecovacs-winbot-w3-omni-model-comparison-webp-960",
+        "src": "/media/reviews/ecovacs-winbot-w3-omni/model-comparison-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 80316,
+        "checksum": "sha256:3529c95e30842ab0a2eb62bbb128af42e22dc2ea5da3485196920c50802e0b8a"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/ecovacs-winbot-w3-omni/path-planning.webp",
+    "sourceWidth": 1086,
+    "sourceHeight": 1448,
+    "derivatives": [
+      {
+        "id": "media-reviews-ecovacs-winbot-w3-omni-path-planning-webp-360",
+        "src": "/media/reviews/ecovacs-winbot-w3-omni/path-planning-360w.webp",
+        "width": 360,
+        "height": 480,
+        "bytes": 19314,
+        "checksum": "sha256:482cc3af91045d8152fa3a45fef690aa5e3464989d7f16f022e2914beb7b0fdd"
+      },
+      {
+        "id": "media-reviews-ecovacs-winbot-w3-omni-path-planning-webp-640",
+        "src": "/media/reviews/ecovacs-winbot-w3-omni/path-planning-640w.webp",
+        "width": 640,
+        "height": 853,
+        "bytes": 48280,
+        "checksum": "sha256:9d8ee65d63da82a5b5593b7d47f78c3b9f394477db36234fe6b124b83a1bb828"
+      },
+      {
+        "id": "media-reviews-ecovacs-winbot-w3-omni-path-planning-webp-960",
+        "src": "/media/reviews/ecovacs-winbot-w3-omni/path-planning-960w.webp",
+        "width": 960,
+        "height": 1280,
+        "bytes": 92064,
+        "checksum": "sha256:cd83550fb749ca276b22efc3a06105c945826ae7af1610ce7f4a4007046739ae"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/ecovacs-winbot-w3-omni/twelve-tier.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-ecovacs-winbot-w3-omni-twelve-tier-webp-360",
+        "src": "/media/reviews/ecovacs-winbot-w3-omni/twelve-tier-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 20700,
+        "checksum": "sha256:52054894991652c59f1deb47117cd2b60ce0b4b67007f40ca2dbd8f83d136289"
+      },
+      {
+        "id": "media-reviews-ecovacs-winbot-w3-omni-twelve-tier-webp-640",
+        "src": "/media/reviews/ecovacs-winbot-w3-omni/twelve-tier-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 54274,
+        "checksum": "sha256:910c10ecba8f5e810301dd186acc501dd7c5425e0ed6c962e46631d48a177f69"
+      },
+      {
+        "id": "media-reviews-ecovacs-winbot-w3-omni-twelve-tier-webp-960",
+        "src": "/media/reviews/ecovacs-winbot-w3-omni/twelve-tier-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 107406,
+        "checksum": "sha256:dcf922c962eed5847f81da02be46606cfee1e7787a3774859e453d4146aaeea4"
+      }
+    ]
   }
 ]

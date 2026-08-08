@@ -3471,6 +3471,204 @@ export const REVIEWS: Record<string, ReviewContent> = {
     lastReviewed: "2026-08-08",
   },
 
+
+  /* THE THREE WINBOTS UNMERGED, 8 August 2026, at the owner's direction.
+
+     They were folded into siblings on 7 August because the 5 August window
+     research capped the category at three WINBOTs — "a category of one brand
+     is a worse page for a reader and a worse hedge for us" — and eleven
+     reviews had been built the next day ignoring it.
+
+     WHAT THE MERGE MISSED. All three stayed published in D1 with live Amazon
+     offers, so the 301s left three sellable products that no page could reach.
+     A redirect is the right answer for a product that no longer exists; these
+     exist, they are in stock, and they are on the best-of page's ranked list.
+     The concentration argument still stands and is now a reason to keep
+     writing about other brands, not a reason to hide three buy buttons. */
+  "ecovacs-winbot-w3-omni": {
+    slug: "ecovacs-winbot-w3-omni",
+    categorySlug: "window-cleaning-robots",
+    eyebrow: "Window robot review",
+    title: "ECOVACS WINBOT W3 Omni review",
+    seoTitle: "ECOVACS WINBOT W3 Omni Review — The Strongest Grip Here",
+    metaDescription:
+      "10,000 Pa maximum and 3,300 Pa moving, on a $550 window robot with an 80 ml tank. Who the extra suction is actually for, and who should buy the W2 PRO Omni instead.",
+    verdict:
+      "The strongest grip in this catalogue and the biggest tank, on the most expensive window robot we hold. Both are real and both are margin rather than a cleaner pane \u2014 which makes this a machine for genuinely large glass and nobody else.",
+    bestFor:
+      "Sliding doors, picture windows and walls of glass, in a household where the window that needs cleaning has no socket under it.",
+    notIdealFor:
+      "Windows the size most windows are. The W2 PRO Omni does the same job with the same station for less, and small panes need the Mini instead.",
+    facts: [
+      { label: "Max suction", value: "10,000 Pa" },
+      { label: "Moving suction", value: "3,300 Pa \u00b1100" },
+      { label: "Water tank", value: "80 ml \u00b15" },
+      { label: "Navigation", value: "WIN-SLAM 5.0" },
+    ],
+    specGroups: [
+      {
+        heading: "Grip",
+        rows: [
+          { label: "Maximum suction", value: "10,000 Pa \u2014 nearly double the W2 line" },
+          { label: "Moving suction", value: "3,300 Pa \u00b1100, the highest figure in this catalogue" },
+          { label: "Why moving matters", value: "It is the number that decides whether a robot holds while it travels" },
+        ],
+      },
+      {
+        heading: "Water and route",
+        rows: [
+          { label: "Tank", value: "80 ml \u00b15 \u2014 a third more than every other WINBOT" },
+          { label: "Navigation", value: "WIN-SLAM 5.0, the newest generation ECOVACS ships" },
+          { label: "Cleaning modes", value: "8" },
+          { label: "Station", value: "Yes \u2014 the same proposition as the W2 PRO Omni" },
+        ],
+      },
+      {
+        heading: "What is missing",
+        rows: [
+          { label: "Weight", value: "Not published \u2014 alone in the range, and you lift this overhead" },
+        ],
+      },
+    ],
+    skuNote:
+      "Amazon US B0GJDQ59J1 at $550. ECOVACS sells the W2 PRO Omni, the W3 Omni and the W2 PRO under names close enough to confuse; the station and the suction figures are what separate this one.",
+    image: {
+      src: "/media/products/ecovacs-winbot-w3-omni.webp",
+      alt:
+        "BotPlanet artwork for the ECOVACS WINBOT W3 Omni window cleaning robot, shown on a " +
+        "floor-to-ceiling window at dusk with its station on the floor below.",
+    },
+    figures: [
+      {
+        afterHeading: "Who this is for",
+        src: "/media/reviews/ecovacs-winbot-w3-omni/hero.webp",
+        caption:
+          "The station on the floor is what this shares with the W2 PRO Omni. Everything above it \u2014 the suction, the tank, the navigation generation \u2014 is what the extra $220 buys.",
+      },
+      {
+        afterHeading: "Who should look elsewhere",
+        src: "/media/reviews/ecovacs-winbot-w3-omni/model-comparison.webp",
+        caption:
+          "ECOVACS\u2019 own comparison, and the most useful thing in this artwork: 110 minutes of battery, a 90 m\u00b2 working area, a 30 \u00d7 40 cm minimum window and the \u00b190\u00b0 incline rating that puts it on skylights. Note the machine on the right is the W2S Omni, a station model we do not hold \u2014 not the stationless W2S reviewed elsewhere on this site.",
+      },
+      {
+        afterHeading: "The tank is the underrated part",
+        src: "/media/reviews/ecovacs-winbot-w3-omni/three-nozzle-spray.webp",
+        caption:
+          "Three nozzles across the pane ahead of the pads. The percentages here are ECOVACS\u2019 own and are measured against its cheapest model, the W1 PRO, rather than against any rival.",
+      },
+      {
+        afterHeading: "WIN-SLAM 5.0, and what a navigation generation is worth",
+        src: "/media/reviews/ecovacs-winbot-w3-omni/path-planning.webp",
+        caption:
+          "16 cm/s and 1 mm of obstacle detection, both ECOVACS\u2019 figures. Speed is what a newer navigation generation actually buys \u2014 a shorter cycle, not a cleaner pane.",
+      },
+      {
+        afterHeading: "Twelve tiers, and the one number to actually read",
+        src: "/media/reviews/ecovacs-winbot-w3-omni/twelve-tier.webp",
+        caption:
+          "A correction to the picture: the 8,000 Pa printed in tier one is not this machine\u2019s figure. ECOVACS rates the W3 Omni at 10,000 Pa maximum, and 8,000 is what its own comparison above gives the W2S Omni. The twelve tiers are right; the suction number in this panel is not.",
+      },
+    ],
+    lastReviewed: "2026-08-08",
+  },
+
+  "ecovacs-winbot-w2s": {
+    slug: "ecovacs-winbot-w2s",
+    categorySlug: "window-cleaning-robots",
+    eyebrow: "Window robot review",
+    title: "ECOVACS WINBOT W2S review",
+    seoTitle: "ECOVACS WINBOT W2S Review — Edge Scrubbers, No Published Suction",
+    metaDescription:
+      "TruEdge scrubbers instead of six spray nozzles, at $330. Why the edge is a real complaint, and why ECOVACS publishing no suction figure is the reason to hesitate.",
+    verdict:
+      "One specific bet: that the border of the pane bothers you more than the middle. If it does, this is the only machine here built for that. If it does not, ECOVACS publishes less about this model than any other WINBOT and that is the reason to walk past it.",
+    bestFor:
+      "Somebody whose actual complaint is a rim of haze at the frame \u2014 the strip a cloth reaches last and a circular path reaches worst.",
+    notIdealFor:
+      "Anyone who wants to compare it properly, because you cannot. No published suction, tank, weight or dimensions, all of which the W2 PRO publishes at the same money.",
+    facts: [
+      { label: "Edges", value: "TruEdge scrubbers" },
+      { label: "Max suction", value: "Not published" },
+      { label: "Navigation", value: "WIN-SLAM 4.0" },
+      { label: "Spray nozzles", value: "3" },
+    ],
+    specGroups: [
+      {
+        heading: "The trade it makes",
+        rows: [
+          { label: "Edge hardware", value: "TruEdge scrubbers \u2014 the reason to pick it over the W2 PRO" },
+          { label: "Spray nozzles", value: "3, against the W2 PRO's 6" },
+          { label: "Navigation", value: "WIN-SLAM 4.0, the same generation as the W2 PRO" },
+          { label: "Independent testing", value: "None we could find, for TruEdge or against it" },
+        ],
+      },
+      {
+        heading: "What ECOVACS does not publish",
+        rows: [
+          { label: "Maximum suction", value: "Published for every other WINBOT, absent here" },
+          { label: "Moving suction", value: "Absent" },
+          { label: "Weight", value: "Absent" },
+          { label: "Tank capacity", value: "Absent" },
+        ],
+      },
+    ],
+    skuNote:
+      "Amazon US B0G5Y3NHTX at $330. The W2S and the W2 PRO are one character apart in the model name and the same price bracket; the scrubbers are the only visible difference.",
+    lastReviewed: "2026-08-08",
+  },
+
+  "ecovacs-winbot-mini": {
+    slug: "ecovacs-winbot-mini",
+    categorySlug: "window-cleaning-robots",
+    eyebrow: "Window robot review",
+    title: "ECOVACS WINBOT Mini review",
+    seoTitle: "ECOVACS WINBOT Mini Review — Small Panes, Odd Suction Figure",
+    metaDescription:
+      "7,500 Pa on the cheapest WINBOT at $150 \u2014 higher than machines costing three times as much. What that number really means, and why size is the actual reason to buy it.",
+    verdict:
+      "The machine for a window every other robot here is too big for, at the lowest price in the range. Its headline suction beats the flagships and that comparison is not what it looks like \u2014 buy it for the size, and take the grip as a bonus.",
+    bestFor:
+      "Small panes \u2014 glazing bars, a bathroom, a cottage casement \u2014 and a household with nowhere to store a robot between uses.",
+    notIdealFor:
+      "Large glass, where three cleaning modes and two-generations-old navigation are the real limitation rather than the suction figure.",
+    facts: [
+      { label: "Max suction", value: "7,500 Pa" },
+      { label: "Size", value: "215 \u00d7 215 \u00d7 55 mm" },
+      { label: "Power-off hold", value: "30 minutes" },
+      { label: "Cleaning modes", value: "3" },
+    ],
+    specGroups: [
+      {
+        heading: "Size, which is the real argument",
+        rows: [
+          { label: "Dimensions", value: "215 \u00d7 215 \u00d7 55 mm, against 271 mm square for the W2 machines" },
+          { label: "Fits", value: "Panes the rest of this catalogue cannot enter" },
+          { label: "Storage", value: "Goes in a drawer" },
+        ],
+      },
+      {
+        heading: "The suction figure, in context",
+        rows: [
+          { label: "Maximum", value: "7,500 Pa \u2014 above the W2 PRO Omni's 5,500 and the W2 PRO's 5,300" },
+          { label: "Moving", value: "Not published, and it is the figure that would settle the comparison" },
+          { label: "Why it is not a ranking", value: "A smaller, lighter robot needs less force to hold the same glass" },
+        ],
+      },
+      {
+        heading: "Safety and route",
+        rows: [
+          { label: "Power-off hold", value: "30 minutes \u2014 the same figure ECOVACS prints for its flagships" },
+          { label: "Navigation", value: "WIN-SLAM 3.0, two generations behind the W2 machines" },
+          { label: "Cleaning modes", value: "3, against 7 on the W2 PRO" },
+        ],
+      },
+    ],
+    skuNote:
+      "Amazon US B0DR8W696Y at $150. The Mini is the only WINBOT small enough for divided panes, and its dimensions are what identify it rather than the name.",
+    lastReviewed: "2026-08-08",
+  },
+
 };
 
 export function reviewFor(slug: string | undefined): ReviewContent | undefined {

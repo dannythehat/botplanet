@@ -605,7 +605,10 @@ const COMPARES: PagePlan[] = HUB_SEEDS.map((h) => ({
 
 const WINDOW_REVIEW_SEEDS: [string, string, number][] = [
   ["ecovacs-winbot-w2-pro-omni", "winbot w2 pro omni", 1120],
+  ["ecovacs-winbot-w3-omni", "winbot w3 omni", 150],
   ["ecovacs-winbot-w2-pro", "winbot w2 pro", 150],
+  ["ecovacs-winbot-w2s", "winbot w2s", 50],
+  ["ecovacs-winbot-mini", "winbot mini", 0],
   ["ecovacs-winbot-w1-pro", "winbot w1 pro", 100],
   ["hutt-s55-pro", "hutt s55 pro", 0],
   ["mamibot-w120-dp", "mamibot w120", 100],
@@ -615,10 +618,26 @@ const WINDOW_REVIEW_SEEDS: [string, string, number][] = [
 ];
 
 /** Product slugs whose artwork has arrived. A flip is one line. */
-/* MERGED 7 August 2026: the W3 Omni, W2S and Mini left the seed list above.
-   They were never in the 5 August plan, which capped WINBOTs at three, and
-   their URLs now 301 to their nearest sibling. See RETIRED_SLUGS. */
-const SUPPLIED_ARTWORK = new Set(["ecovacs-winbot-w2-pro-omni"]);
+/* UNMERGED 8 August 2026. The W3 Omni, W2S and Mini were folded into siblings
+   on 7 August because the 5 August research capped WINBOTs at three — and all
+   three stayed published in D1 with live Amazon offers, so the 301s left three
+   sellable products no page could reach. They are back, with their own
+   reviews. The concentration argument is a reason to write about other brands,
+   not a reason to hide a buy button.
+
+   The W2S and the Mini have no artwork yet and are the only two window
+   products without it; page-plan.test.ts prints the outstanding list. */
+const SUPPLIED_ARTWORK = new Set([
+  "ecovacs-winbot-w2-pro-omni",
+  "ecovacs-winbot-w3-omni",
+  "ecovacs-winbot-w2-pro",
+  "ecovacs-winbot-w1-pro",
+  "hutt-s55-pro",
+  "mamibot-w120-dp",
+  "hobot-2s",
+  "hobot-298",
+  "cop-rose-x5s",
+]);
 
 const WINDOW_REVIEWS: PagePlan[] = WINDOW_REVIEW_SEEDS.map(([slug, term, volume]) => ({
   path: `/robots/window-cleaning-robots/${slug}/`,

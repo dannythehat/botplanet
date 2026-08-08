@@ -33,52 +33,27 @@ export interface RetiredSlug {
    changes or the product is dropped. Without an entry the old URL 404s instead
    of redirecting, and every link and ranking it had is thrown away. */
 export const RETIRED_SLUGS: Record<string, RetiredSlug> = {
-  /* THE THREE WINBOTS MERGED ON 7 AUGUST 2026, and the reason is a plan that
-     was written and then ignored.
+  /* THE THREE WINBOTS WERE MERGED HERE ON 7 AUGUST 2026 AND UNMERGED ON
+     8 AUGUST, at the owner's direction. Their entries are gone, so
+     /ecovacs-winbot-w3-omni/, /ecovacs-winbot-w2s/ and /ecovacs-winbot-mini/
+     serve their own reviews again rather than 301ing to a sibling.
 
-     The window research of 5 August specified SIX reviews across THREE brands
-     and said so in writing: "Volume alone would argue for four WINBOTs, but a
-     category of one brand is a worse page for a reader and a worse hedge for
-     us." It capped WINBOTs at three. Eleven reviews were built on 6 August —
-     the same day, and the same failure, as the fifteen pages that shipped with
-     no build pack — and six of them were WINBOTs.
+     WHY THE MERGE WAS WRONG, recorded because the reasoning for it was sound
+     and the outcome still was not. The 5 August research capped the category
+     at three WINBOTs on a real argument: "a category of one brand is a worse
+     page for a reader and a worse hedge for us." Eleven reviews were built the
+     next day ignoring that, six of them WINBOTs, and the merge was the
+     correction.
 
-     These three were never in that plan. Between them they are worth 200
-     searches a month, and they are the reason six near-identical white squares
-     each needed their own artwork: a creative for one is indistinguishable
-     from a creative for another, and one was in fact filed against the wrong
-     machine before this merge.
+     What it missed is that all three stayed PUBLISHED in D1 with live Amazon
+     offers. A redirect is the right answer for a product that no longer
+     exists. These exist, they are in stock, and they sit on the best-of page's
+     ranked list — so the 301s left three sellable products that no page on the
+     site could reach. Brand concentration is a reason to write about other
+     brands. It is not a reason to hide a buy button.
 
-     EACH GOES TO ITS NEAREST SIBLING IN ONE HOP, never to another retired URL.
-     The station is what decides the pairing, because it is the only difference
-     visible in a photograph: station machines go to the Omni, stationless
-     machines go to the plain W2 PRO. Each parent review gains a section naming
-     the variant and saying what it changes, so the redirect lands on an answer
-     rather than on a near-miss. */
-  "ecovacs-winbot-w3-omni": {
-    to: "ecovacs-winbot-w2-pro-omni",
-    wasNamed: "ECOVACS WINBOT W3 Omni",
-    isNamed: "ECOVACS WINBOT W2 PRO Omni",
-    changedOn: "2026-08-07",
-    reason:
-      "150/mo, and never in the 5 August plan. The W3 Omni is the same proposition as the W2 PRO Omni — a station machine for windows with no socket — with a newer navigation generation and more suction, neither of which changes the buying decision for ordinary glass. The Omni review now carries a section naming the W3 and stating exactly what the extra money buys, which is more use than a second near-identical page.",
-  },
-  "ecovacs-winbot-w2s": {
-    to: "ecovacs-winbot-w2-pro",
-    wasNamed: "ECOVACS WINBOT W2S",
-    isNamed: "ECOVACS WINBOT W2 PRO",
-    changedOn: "2026-08-07",
-    reason:
-      "50/mo, and never in the plan. The W2S is the W2 with edge scrubbers in place of the nozzle array, and ECOVACS publishes neither suction, tank nor weight for it — so the page it had could not compare it to anything. Folded into the W2 PRO review as the edge variant, where the comparison it needs actually exists.",
-  },
-  "ecovacs-winbot-mini": {
-    to: "ecovacs-winbot-w2-pro",
-    wasNamed: "ECOVACS WINBOT Mini",
-    isNamed: "ECOVACS WINBOT W2 PRO",
-    changedOn: "2026-08-07",
-    reason:
-      "No measurable volume on the model name, and never in the plan. The Mini is the small-pane machine in the same stationless family, and its one genuine argument — it out-grips two models above it — is a sentence in the W2 PRO review rather than a page of its own. The 301 goes to the W2 PRO because that is the machine a Mini searcher is choosing against.",
-  },
+     The parent reviews keep their variant sections. They now route to these
+     pages instead of standing in for them. */
   /* Both of these point at the FINAL destination, not at each other. The
      record moved twice in one day — X1 → X1 Pro → X1 Pro Max — and a chain of
      301s is a chain of chances to lose a visitor. Each retired URL gets there

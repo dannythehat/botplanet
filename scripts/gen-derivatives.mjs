@@ -265,6 +265,13 @@ const SOURCES = [
   "/media/hubs/grill/card-cast-iron.webp",
   "/media/hubs/grill/card-stainless.webp",
   "/media/hubs/grill/lead-clean-bars.webp",
+  /* WINBOT W3 Omni, unmerged 8 August 2026. */
+  "/media/products/ecovacs-winbot-w3-omni.webp",
+  "/media/reviews/ecovacs-winbot-w3-omni/hero.webp",
+  "/media/reviews/ecovacs-winbot-w3-omni/three-nozzle-spray.webp",
+  "/media/reviews/ecovacs-winbot-w3-omni/model-comparison.webp",
+  "/media/reviews/ecovacs-winbot-w3-omni/path-planning.webp",
+  "/media/reviews/ecovacs-winbot-w3-omni/twelve-tier.webp",
 ];
 
 const run = async () => {
