@@ -531,6 +531,77 @@ const OWNER_ARTWORK: OwnerArtwork[] = [
     scene:
       "the white square robot on a floor-to-ceiling window above a lit terrace at dusk, its cable running down to the portable station on the floor, with callouts for intelligent window cleaning, the power station, the safety tether and edge detection",
   },
+  /* The remaining seven window products, 8 August 2026. Every one of these is
+     the card slot only — the figures that go inside each review are in
+     REVIEW_FIGURES below. Two of the seven print a number this site does not
+     accept: the W2 PRO card says twelve-stage protection where ECOVACS gives
+     this model ten, and the Cop Rose card says app control on a machine our
+     review describes as remote-only. Both are corrected where a reader meets
+     them, in the review prose and in the figure captions, rather than by
+     dropping the artwork. */
+  {
+    slug: "ecovacs-winbot-w2-pro",
+    file: "ecovacs-winbot-w2-pro.webp",
+    checksum: "sha256:89a4278a350b924a7963af5718ba6f790cdd93ea0fea7ba18681b593df42e8b0",
+    width: 1122,
+    height: 1402,
+    scene:
+      "the white square robot high on a city window at dusk with spray leaving its side, beside callouts for thorough cleaning, a twelve-stage safety system, intelligent navigation, quiet running and app control",
+  },
+  {
+    slug: "ecovacs-winbot-w1-pro",
+    file: "ecovacs-winbot-w1-pro.webp",
+    checksum: "sha256:eaa1d90ec06849b50370ab4713c8fee10a9a061c6125873f22077b724b9a03d9",
+    width: 1122,
+    height: 1402,
+    scene:
+      "the white and tan robot stood on a dark plinth with its twin cables hanging, beside callouts for safety, efficiency, innovation and quality and a strip naming the tether, suction, path planning and edge detection",
+  },
+  {
+    slug: "hobot-2s",
+    file: "hobot-2s.webp",
+    checksum: "sha256:1bf7399c4de19153b220b3b49ce839c5d396daeee4fcde5b2999ab2482b5bbf7",
+    width: 1122,
+    height: 1402,
+    scene:
+      "a person reaching up to press the button on the white robot held to a floor-to-ceiling window at night, spray leaving both sides, above callouts for one-touch start, dual spray and simple controls",
+  },
+  {
+    slug: "hobot-298",
+    file: "hobot-298.webp",
+    checksum: "sha256:f9f0d81b886b0e9f9a63c3a385168b2133ee494046657f6bc4fd43e306272859",
+    width: 1448,
+    height: 1086,
+    scene:
+      "the white robot with its blue-capped tank held to a tall window at night above a lit city, in a dark room with a sofa behind",
+  },
+  {
+    slug: "hutt-s55-pro",
+    file: "hutt-s55-pro.webp",
+    checksum: "sha256:22c120b75a7ea193ae7ec3186e7817eade5d14c844d1cda8664a4a2f98350524",
+    width: 1448,
+    height: 1086,
+    scene:
+      "the white peanut-shaped robot with a blue water tank held to a night window, its remote control and three spare pad sets beside it, above badges reading 3800Pa and an 80ml tank",
+  },
+  {
+    slug: "mamibot-w120-dp",
+    file: "mamibot-w120-dp.webp",
+    checksum: "sha256:05ab496196958adac627bf4329c5caac2eb8019bdbf29d7ae849ca090593d81d",
+    width: 1254,
+    height: 1254,
+    scene:
+      "the white robot with an orange handle strap held to a floor-to-ceiling window with spray leaving both sides, beside callouts for spray coverage, 55N suction, path planning and streak-free results",
+  },
+  {
+    slug: "cop-rose-x5s",
+    file: "cop-rose-x5s.webp",
+    checksum: "sha256:7761480e6a7b2f032605aa2078b3c807bf43dc66715957d083de5443423a85a7",
+    width: 1254,
+    height: 1254,
+    scene:
+      "the white and green robot angled against a night city window with spray beneath it, its remote control and a phone running the app alongside, beside callouts for app and remote control, spray, edge-to-edge cleaning and suction",
+  },
 ];
 
 /**
@@ -641,7 +712,12 @@ interface ReviewFigure {
    * product creative and skew the readiness report. A review figure is an
    * extra view, not a replacement hero.
    */
-  type: "product_in_use" | "app_screenshot" | "filtration_detail" | "included_accessories";
+  type:
+    | "product_in_use"
+    | "product_detail"
+    | "app_screenshot"
+    | "filtration_detail"
+    | "included_accessories";
   file: string;
   checksum: string;
   width: number;
@@ -1228,6 +1304,239 @@ const REVIEW_FIGURES: ReviewFigure[] = [
     scene:
       "the robot mid-pane on a window over a lake, spray fanning across the glass above it, with three detail insets showing the nozzle spray, the underside pad and the drive wheels",
   },
+  /* The other seven window products, 8 August 2026. Same batch as the cards
+     above. */
+  {
+    slug: "three-nozzle-spray",
+    productSlug: "ecovacs-winbot-w2-pro",
+    type: "product_in_use",
+    file: "three-nozzle-spray.webp",
+    checksum: "sha256:ae5ba5750f49bde05a47b5a2624c72bf01e8e8d13a02d01b3ba71ee409f2efb9",
+    width: 1086,
+    height: 1448,
+    scene:
+      "the robot spraying a wide arc across dark glass with its pump drawn in cutaway, beside figures for water pressure and spray coverage, above a comparison with a narrower-spraying machine",
+  },
+  {
+    slug: "cleaning-modes",
+    productSlug: "ecovacs-winbot-w2-pro",
+    type: "app_screenshot",
+    file: "cleaning-modes.webp",
+    checksum: "sha256:bab54041cf9df0ace74338fb75f7e263a0205f86f4cd788b0143b18db5f69b7e",
+    width: 1169,
+    height: 1346,
+    scene:
+      "the robot on a city window beside a numbered list of seven cleaning modes, with a phone running the WINBOT app below it",
+  },
+  {
+    slug: "hero",
+    productSlug: "ecovacs-winbot-w1-pro",
+    type: "product_in_use",
+    file: "hero.webp",
+    checksum: "sha256:9e5eb146963328dad87d18dbb79d939a0407b49d592616d03413afe8b938f8fb",
+    width: 1586,
+    height: 992,
+    scene:
+      "the white and tan robot on rain-streaked glass at dusk with a lit house behind it",
+  },
+  {
+    slug: "eight-tier",
+    productSlug: "ecovacs-winbot-w1-pro",
+    type: "product_detail",
+    file: "eight-tier.webp",
+    checksum: "sha256:399974ffc0cf6e7ba3f2d7ba2b904b2b62fa718ac0b477bcb6564be2c0ef1380",
+    width: 1122,
+    height: 1402,
+    scene:
+      "the robot centred in a ring of blue arrows marked 2800 Pa, ringed by eight labelled protections including a carabiner, an optocoupler sensor and a thirty-minute blackout hold",
+  },
+  {
+    slug: "cross-spray",
+    productSlug: "ecovacs-winbot-w1-pro",
+    type: "product_detail",
+    file: "cross-spray.webp",
+    checksum: "sha256:f692f9faccc740df56402866cefef034fa288aefc24bb7c144d77aea46c06a51",
+    width: 1086,
+    height: 1448,
+    scene:
+      "the robot on a night window beside three panels naming a 60 ml reservoir, a cross auto-spray pattern and cleaning solution",
+  },
+  {
+    slug: "app-control",
+    productSlug: "ecovacs-winbot-w1-pro",
+    type: "app_screenshot",
+    file: "app-control.webp",
+    checksum: "sha256:a8b3d6d4af79e7ce416ad087a135a8b864e4dc24ddf0024b1302874d5087131d",
+    width: 1024,
+    height: 1536,
+    scene:
+      "the robot on glass beside a phone showing a remote-control pad and a zigzag route, with panels for two water levels, three cleaning modes and maintenance reminders",
+  },
+  {
+    slug: "hero",
+    productSlug: "hobot-2s",
+    type: "product_in_use",
+    file: "hero.webp",
+    checksum: "sha256:4264294faa09fa6977db2af964c95ffa0c2017802105a36797aa0d541b63e7c6",
+    width: 1672,
+    height: 941,
+    scene:
+      "the white robot on a night window spraying from both sides, above a strip reading dual spray, sparkling clean and safe and reliable",
+  },
+  {
+    slug: "spray-module",
+    productSlug: "hobot-2s",
+    type: "included_accessories",
+    file: "spray-module.webp",
+    checksum: "sha256:1b3ddf44a1ec149cccc52a64d0e6fb82ac1e6514e177673d0cebe48a4c782172",
+    width: 1448,
+    height: 1086,
+    scene:
+      "the robot with its spray module lifted away on guide lines, beside panels naming tool-free removal, a large refill cap, the dual spray system and washable microfibre pads",
+  },
+  {
+    slug: "app-control",
+    productSlug: "hobot-2s",
+    type: "app_screenshot",
+    file: "app-control.webp",
+    checksum: "sha256:7e1d19a01767f385867fe4fc248e772bcf9a983d2247d9dacd0f2d079d127413",
+    width: 1086,
+    height: 1448,
+    scene:
+      "the robot spraying on a night window above a phone running the HOBOT 2-S remote control, with the spray module shown separately below",
+  },
+  {
+    slug: "holding-force",
+    productSlug: "hobot-298",
+    type: "product_detail",
+    file: "holding-force.webp",
+    checksum: "sha256:6a46a63586c447f9d564eb7d74af1a62ac59edc29421b92fff82dbf4c55b02de",
+    width: 1122,
+    height: 1402,
+    scene:
+      "the robot lifted off the glass on blue arrows beside a panel reading up to 6 kg holding force, above notes on stable grip, dust pickup and built-in safety",
+  },
+  {
+    slug: "edge-detection",
+    productSlug: "hobot-298",
+    type: "product_detail",
+    file: "edge-detection.webp",
+    checksum: "sha256:29365f55bbaad542f2f55f93dfe8b3e787a947fd052a8417ea7f31cbeedebf70",
+    width: 1254,
+    height: 1254,
+    scene:
+      "the robot on wet glass with detection arcs at its edge, beside the underside of the machine showing its yellow border pad and grey centre pad",
+  },
+  {
+    slug: "bluetooth-remote",
+    productSlug: "hobot-298",
+    type: "app_screenshot",
+    file: "bluetooth-remote.webp",
+    checksum: "sha256:43c3ac6dc32a777e95b95373474c2f8572d9bf51720158423f08dc61ce026ff2",
+    width: 1254,
+    height: 1254,
+    scene:
+      "a hand holding a phone running the HOBOT remote control over Bluetooth, beside the robot on a night window",
+  },
+  {
+    slug: "every-surface",
+    productSlug: "hutt-s55-pro",
+    type: "product_in_use",
+    file: "every-surface.webp",
+    checksum: "sha256:245c44007b82a7867e21262c900fcbf21a7fb51d348508bd98fbdb2cddffb86d",
+    width: 1254,
+    height: 1254,
+    scene:
+      "the robot shown four times over — on a window, a bathroom mirror, tiled wall and a shower screen — under the heading adaptive cleaning for every surface",
+  },
+  {
+    slug: "adaptive-suction",
+    productSlug: "hutt-s55-pro",
+    type: "product_detail",
+    file: "adaptive-suction.webp",
+    checksum: "sha256:8ce85299ecf04e39b93a9134eb5f33c2dd1a23cc52ef0c935e6c1c245bbbadfb",
+    width: 1254,
+    height: 1254,
+    scene:
+      "the robot exploded into its fan stack on the left under an adaptive suction panel reading 2000 to 6500 Pa, and its water tank and 120-degree spray fan on the right",
+  },
+  {
+    slug: "safety-backup",
+    productSlug: "hutt-s55-pro",
+    type: "product_detail",
+    file: "safety-backup.webp",
+    checksum: "sha256:5701175cbfc2912714bee4acb84b6986700eedb78e7089e167e47cd41b40f5ed",
+    width: 1254,
+    height: 1254,
+    scene:
+      "the robot on a high window with its safety rope running to an anchor, beside a panel reading thirty-minute emergency backup battery",
+  },
+  {
+    slug: "one-click",
+    productSlug: "hutt-s55-pro",
+    type: "product_in_use",
+    file: "one-click.webp",
+    checksum: "sha256:f637ca8991670ad504b128acc9d3d3504d54350ad597edb5badd15196dddeca4",
+    width: 1254,
+    height: 1254,
+    scene:
+      "a hand holding the robot's remote in a bright room, beside four numbered panels for one-click control, SLAM 4.0 navigation, automatic return and edge detection",
+  },
+  {
+    slug: "corner-clean",
+    productSlug: "mamibot-w120-dp",
+    type: "product_detail",
+    file: "corner-clean.webp",
+    checksum: "sha256:f4258c0b20cb75c151a74025ace30e4d52879c744b4913b4b3f9feb5ff85384f",
+    width: 1254,
+    height: 1254,
+    scene:
+      "the robot seen from beneath with its four corner sensors lit, beside figures for 1 mm edge clearance, area coverage and rotation, above a comparison of edges left dirty and edges cleaned",
+  },
+  {
+    slug: "eight-in-one",
+    productSlug: "mamibot-w120-dp",
+    type: "product_detail",
+    file: "eight-in-one.webp",
+    checksum: "sha256:13b9d7200f5618140ab785f34d72462e2713c25246a946418d557e48b7d325b9",
+    width: 1254,
+    height: 1254,
+    scene:
+      "the robot on a window overlooking a lake beside a list of eight features including suction compensation, optocoupler sensors, power-outage protection and voice prompts",
+  },
+  {
+    slug: "dual-control",
+    productSlug: "mamibot-w120-dp",
+    type: "app_screenshot",
+    file: "dual-control.webp",
+    checksum: "sha256:7ab4656bc854662184472b0b18fd547974270bb6fa93ba9764bc942a7e5ff26f",
+    width: 1254,
+    height: 1254,
+    scene:
+      "the robot shown on a small framed window and on frameless glass, beside a phone running the W120-DP app and a note that the smallest window it takes is 60 by 40 centimetres",
+  },
+  {
+    slug: "spray-suction",
+    productSlug: "cop-rose-x5s",
+    type: "product_detail",
+    file: "spray-suction.webp",
+    checksum: "sha256:16da615228827cbdd1b8cd05667ded33504f84ad5f7c3773dd07b3cd1647bf84",
+    width: 1254,
+    height: 1254,
+    scene:
+      "the robot on rain-streaked glass beside panels for an atomised water spray and suction quoted at up to 4000 Pa",
+  },
+  {
+    slug: "multiple-surfaces",
+    productSlug: "cop-rose-x5s",
+    type: "product_in_use",
+    file: "multiple-surfaces.webp",
+    checksum: "sha256:d59d66f1d13514b938544912720e40231ef585a329a79e1a86c95cda5cdb5f50",
+    width: 1122,
+    height: 1402,
+    scene:
+      "the robot in a white bathroom labelled against glass, windows, a smooth bath surround and a countertop",
+  },
 ];
 
 /**
@@ -1278,6 +1587,7 @@ export const REVIEW_FIGURES_WITHHELD: {
     contradicts:
       "Polaris publishes TWO retrieval methods, not three: 'FREEDOM climbs to the waterline at end-of-cycle for lightweight removal... Or use the manual retrieval hook (included) and a standard pole.' The climb is automatic at the end of a cycle — no tap. Tapping the machine to summon it is not a feature Polaris describes anywhere. The push-notification panel on this creative IS accurate; it is presented as a third retrieval method, which it is not.",
   },
+
 ];
 
 export const REVIEW_FIGURE_ASSETS: MediaAssetRecord[] = REVIEW_FIGURES.map((f): MediaAssetRecord => {

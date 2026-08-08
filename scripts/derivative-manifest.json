@@ -2921,5 +2921,913 @@
         "checksum": "sha256:782e4fc0ce07510edc583f7aa5910ab592257c07bb34ccc5f1d9ca6294ce72a9"
       }
     ]
+  },
+  {
+    "source": "/media/products/ecovacs-winbot-w2-pro.webp",
+    "sourceWidth": 1122,
+    "sourceHeight": 1402,
+    "derivatives": [
+      {
+        "id": "media-products-ecovacs-winbot-w2-pro-webp-360",
+        "src": "/media/products/ecovacs-winbot-w2-pro-360w.webp",
+        "width": 360,
+        "height": 450,
+        "bytes": 17190,
+        "checksum": "sha256:ae5a1dddca7c1ba22469c5937928c869fc1846581882499bf8282e5fc0075d33"
+      },
+      {
+        "id": "media-products-ecovacs-winbot-w2-pro-webp-640",
+        "src": "/media/products/ecovacs-winbot-w2-pro-640w.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 45012,
+        "checksum": "sha256:4772b7246effe55b00c7e3a9062deed272f70a631b325b294274577d45d4ed17"
+      },
+      {
+        "id": "media-products-ecovacs-winbot-w2-pro-webp-960",
+        "src": "/media/products/ecovacs-winbot-w2-pro-960w.webp",
+        "width": 960,
+        "height": 1200,
+        "bytes": 84716,
+        "checksum": "sha256:04e85f21363cba2e77a3c475fafb4dadce1674cd00e2e71148119d60c86fb8f7"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/ecovacs-winbot-w2-pro/three-nozzle-spray.webp",
+    "sourceWidth": 1086,
+    "sourceHeight": 1448,
+    "derivatives": [
+      {
+        "id": "media-reviews-ecovacs-winbot-w2-pro-three-nozzle-spray-webp-360",
+        "src": "/media/reviews/ecovacs-winbot-w2-pro/three-nozzle-spray-360w.webp",
+        "width": 360,
+        "height": 480,
+        "bytes": 16750,
+        "checksum": "sha256:812157ea7f8993334ccf2b28eec1862a28ebb60c4f4e3b7bd7b776678f9da767"
+      },
+      {
+        "id": "media-reviews-ecovacs-winbot-w2-pro-three-nozzle-spray-webp-640",
+        "src": "/media/reviews/ecovacs-winbot-w2-pro/three-nozzle-spray-640w.webp",
+        "width": 640,
+        "height": 853,
+        "bytes": 45830,
+        "checksum": "sha256:0f15800e8180d9158f3b1e01bc95b3034208c2ecaf0f73ea7989b07c140653b4"
+      },
+      {
+        "id": "media-reviews-ecovacs-winbot-w2-pro-three-nozzle-spray-webp-960",
+        "src": "/media/reviews/ecovacs-winbot-w2-pro/three-nozzle-spray-960w.webp",
+        "width": 960,
+        "height": 1280,
+        "bytes": 96096,
+        "checksum": "sha256:14d2b504733ff4db6a7d03998adabea2b8b04aa60bccfcdfcdfdb924c9cb0429"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/ecovacs-winbot-w2-pro/cleaning-modes.webp",
+    "sourceWidth": 1169,
+    "sourceHeight": 1346,
+    "derivatives": [
+      {
+        "id": "media-reviews-ecovacs-winbot-w2-pro-cleaning-modes-webp-360",
+        "src": "/media/reviews/ecovacs-winbot-w2-pro/cleaning-modes-360w.webp",
+        "width": 360,
+        "height": 415,
+        "bytes": 19164,
+        "checksum": "sha256:a844f2f40b1625e251e90c4d278a794f8a30259f562ddcd79b661060177f617a"
+      },
+      {
+        "id": "media-reviews-ecovacs-winbot-w2-pro-cleaning-modes-webp-640",
+        "src": "/media/reviews/ecovacs-winbot-w2-pro/cleaning-modes-640w.webp",
+        "width": 640,
+        "height": 737,
+        "bytes": 49872,
+        "checksum": "sha256:e5b00afc3fc71cb6223f0d5a7f0ef70de09f60bc6f0a5a28e1cbbaef33110383"
+      },
+      {
+        "id": "media-reviews-ecovacs-winbot-w2-pro-cleaning-modes-webp-960",
+        "src": "/media/reviews/ecovacs-winbot-w2-pro/cleaning-modes-960w.webp",
+        "width": 960,
+        "height": 1105,
+        "bytes": 93258,
+        "checksum": "sha256:4bb2705f0a7c2a65119e2b019d95564fab8d3cf372432365d3f8e714a83a55f0"
+      }
+    ]
+  },
+  {
+    "source": "/media/products/ecovacs-winbot-w1-pro.webp",
+    "sourceWidth": 1122,
+    "sourceHeight": 1402,
+    "derivatives": [
+      {
+        "id": "media-products-ecovacs-winbot-w1-pro-webp-360",
+        "src": "/media/products/ecovacs-winbot-w1-pro-360w.webp",
+        "width": 360,
+        "height": 450,
+        "bytes": 12380,
+        "checksum": "sha256:cd96e8022fc2612ce0866a8d369bf43c774f8679c827354a31d3ec50da13fca5"
+      },
+      {
+        "id": "media-products-ecovacs-winbot-w1-pro-webp-640",
+        "src": "/media/products/ecovacs-winbot-w1-pro-640w.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 31156,
+        "checksum": "sha256:b85ef9fd12c88146470a009c12dc23b4637b1b7b06f316264d1aefea7be2b7db"
+      },
+      {
+        "id": "media-products-ecovacs-winbot-w1-pro-webp-960",
+        "src": "/media/products/ecovacs-winbot-w1-pro-960w.webp",
+        "width": 960,
+        "height": 1200,
+        "bytes": 60496,
+        "checksum": "sha256:6a95af67a1c7d0c327591b8342da2dc36ea370f252662c217ca760642a8f5c00"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/ecovacs-winbot-w1-pro/hero.webp",
+    "sourceWidth": 1586,
+    "sourceHeight": 992,
+    "derivatives": [
+      {
+        "id": "media-reviews-ecovacs-winbot-w1-pro-hero-webp-360",
+        "src": "/media/reviews/ecovacs-winbot-w1-pro/hero-360w.webp",
+        "width": 360,
+        "height": 225,
+        "bytes": 7718,
+        "checksum": "sha256:3f0c037c0e20fa7d1a8f681e0add3fe10eac2414325e9b1f3ffe30b023b971da"
+      },
+      {
+        "id": "media-reviews-ecovacs-winbot-w1-pro-hero-webp-640",
+        "src": "/media/reviews/ecovacs-winbot-w1-pro/hero-640w.webp",
+        "width": 640,
+        "height": 400,
+        "bytes": 19670,
+        "checksum": "sha256:8ec9684946bb1223763ab158915c3d53c1cf30b64335011a5f78634729afa10e"
+      },
+      {
+        "id": "media-reviews-ecovacs-winbot-w1-pro-hero-webp-960",
+        "src": "/media/reviews/ecovacs-winbot-w1-pro/hero-960w.webp",
+        "width": 960,
+        "height": 600,
+        "bytes": 41068,
+        "checksum": "sha256:2aaa4042385bd6191f3e0baded805a8d232875894e2436923c761d1d7c1acccf"
+      },
+      {
+        "id": "media-reviews-ecovacs-winbot-w1-pro-hero-webp-1440",
+        "src": "/media/reviews/ecovacs-winbot-w1-pro/hero-1440w.webp",
+        "width": 1440,
+        "height": 901,
+        "bytes": 72070,
+        "checksum": "sha256:9f3e42eb3bb64aaf7cb1dea593d6e2427372525edd553ba892aec8465e7f1c47"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/ecovacs-winbot-w1-pro/eight-tier.webp",
+    "sourceWidth": 1122,
+    "sourceHeight": 1402,
+    "derivatives": [
+      {
+        "id": "media-reviews-ecovacs-winbot-w1-pro-eight-tier-webp-360",
+        "src": "/media/reviews/ecovacs-winbot-w1-pro/eight-tier-360w.webp",
+        "width": 360,
+        "height": 450,
+        "bytes": 20374,
+        "checksum": "sha256:df5686daa7b538f3cc604763f1933be64e0c6f40bb58c05f92cfe327b0631d67"
+      },
+      {
+        "id": "media-reviews-ecovacs-winbot-w1-pro-eight-tier-webp-640",
+        "src": "/media/reviews/ecovacs-winbot-w1-pro/eight-tier-640w.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 50412,
+        "checksum": "sha256:5debe9e0b399207a8f663c4d3a21c000c7496e7b72a823c39c8f740b28e85280"
+      },
+      {
+        "id": "media-reviews-ecovacs-winbot-w1-pro-eight-tier-webp-960",
+        "src": "/media/reviews/ecovacs-winbot-w1-pro/eight-tier-960w.webp",
+        "width": 960,
+        "height": 1200,
+        "bytes": 97146,
+        "checksum": "sha256:0033f43703dacd2f523ba3fdf88a16736787fdb4c4abe13dd564073dc8cfbf25"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/ecovacs-winbot-w1-pro/cross-spray.webp",
+    "sourceWidth": 1086,
+    "sourceHeight": 1448,
+    "derivatives": [
+      {
+        "id": "media-reviews-ecovacs-winbot-w1-pro-cross-spray-webp-360",
+        "src": "/media/reviews/ecovacs-winbot-w1-pro/cross-spray-360w.webp",
+        "width": 360,
+        "height": 480,
+        "bytes": 11786,
+        "checksum": "sha256:9dbdd79615855ea025599b22cffcf54d9409f5905837723a7a3116124379ca8a"
+      },
+      {
+        "id": "media-reviews-ecovacs-winbot-w1-pro-cross-spray-webp-640",
+        "src": "/media/reviews/ecovacs-winbot-w1-pro/cross-spray-640w.webp",
+        "width": 640,
+        "height": 853,
+        "bytes": 28524,
+        "checksum": "sha256:fe4aafb898a45e1d406e921054941f071f287168f166960f3da673832c21cc0c"
+      },
+      {
+        "id": "media-reviews-ecovacs-winbot-w1-pro-cross-spray-webp-960",
+        "src": "/media/reviews/ecovacs-winbot-w1-pro/cross-spray-960w.webp",
+        "width": 960,
+        "height": 1280,
+        "bytes": 54646,
+        "checksum": "sha256:eeed3ee79f7113cab528a1bbdd6286511721ce411127e058d313099295b4f4f7"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/ecovacs-winbot-w1-pro/app-control.webp",
+    "sourceWidth": 1024,
+    "sourceHeight": 1536,
+    "derivatives": [
+      {
+        "id": "media-reviews-ecovacs-winbot-w1-pro-app-control-webp-360",
+        "src": "/media/reviews/ecovacs-winbot-w1-pro/app-control-360w.webp",
+        "width": 360,
+        "height": 540,
+        "bytes": 18776,
+        "checksum": "sha256:2d9ef60088f15ce7180130f6a8f9b4c9092be911ecf64e3b45281600c1ad51e7"
+      },
+      {
+        "id": "media-reviews-ecovacs-winbot-w1-pro-app-control-webp-640",
+        "src": "/media/reviews/ecovacs-winbot-w1-pro/app-control-640w.webp",
+        "width": 640,
+        "height": 960,
+        "bytes": 47276,
+        "checksum": "sha256:d322374faf37cf3cac233656ee7d586f05696a29af41790a98358cb3c90f5764"
+      },
+      {
+        "id": "media-reviews-ecovacs-winbot-w1-pro-app-control-webp-960",
+        "src": "/media/reviews/ecovacs-winbot-w1-pro/app-control-960w.webp",
+        "width": 960,
+        "height": 1440,
+        "bytes": 89982,
+        "checksum": "sha256:9000db78a1f273e2528bf4a5bac245995258f1341c6af008213e7101e2fdf0c1"
+      }
+    ]
+  },
+  {
+    "source": "/media/products/hobot-2s.webp",
+    "sourceWidth": 1122,
+    "sourceHeight": 1402,
+    "derivatives": [
+      {
+        "id": "media-products-hobot-2s-webp-360",
+        "src": "/media/products/hobot-2s-360w.webp",
+        "width": 360,
+        "height": 450,
+        "bytes": 14772,
+        "checksum": "sha256:0e498b651bbbe72d8ecb83289dc5813ab199402bb1d245369d6f8ff461130bd4"
+      },
+      {
+        "id": "media-products-hobot-2s-webp-640",
+        "src": "/media/products/hobot-2s-640w.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 37632,
+        "checksum": "sha256:fd8e679ef47309c4dbcd559d3d17b5f372e1ecbca3614b7760c5f1d283e5f820"
+      },
+      {
+        "id": "media-products-hobot-2s-webp-960",
+        "src": "/media/products/hobot-2s-960w.webp",
+        "width": 960,
+        "height": 1200,
+        "bytes": 73272,
+        "checksum": "sha256:6c71e81f18f4134583624945a5edc9a45dd4825be1d081a44fc6c014658ac3e0"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/hobot-2s/hero.webp",
+    "sourceWidth": 1672,
+    "sourceHeight": 941,
+    "derivatives": [
+      {
+        "id": "media-reviews-hobot-2s-hero-webp-360",
+        "src": "/media/reviews/hobot-2s/hero-360w.webp",
+        "width": 360,
+        "height": 203,
+        "bytes": 9088,
+        "checksum": "sha256:1fdd66e1b4ab4a22120be0c03535e81e1f1a99f35ccb3646a32155c20ed6ccdb"
+      },
+      {
+        "id": "media-reviews-hobot-2s-hero-webp-640",
+        "src": "/media/reviews/hobot-2s/hero-640w.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 22922,
+        "checksum": "sha256:ca02a1f4dd504e566830708e35a4396279608af4c20f1e5b430203a27104105c"
+      },
+      {
+        "id": "media-reviews-hobot-2s-hero-webp-960",
+        "src": "/media/reviews/hobot-2s/hero-960w.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 46080,
+        "checksum": "sha256:6a35d5fe733ef5ddea96e697389f548f5e503265b7b15daa85377dc203040eb0"
+      },
+      {
+        "id": "media-reviews-hobot-2s-hero-webp-1440",
+        "src": "/media/reviews/hobot-2s/hero-1440w.webp",
+        "width": 1440,
+        "height": 810,
+        "bytes": 75548,
+        "checksum": "sha256:35e9a2fbee3c522a9a20e7ee886fab036529ff79d7cb491a9308f3b681419b6a"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/hobot-2s/spray-module.webp",
+    "sourceWidth": 1448,
+    "sourceHeight": 1086,
+    "derivatives": [
+      {
+        "id": "media-reviews-hobot-2s-spray-module-webp-360",
+        "src": "/media/reviews/hobot-2s/spray-module-360w.webp",
+        "width": 360,
+        "height": 270,
+        "bytes": 13040,
+        "checksum": "sha256:9ba6a2744777c5ee377db0ce15daa39da1ab16765c4b334adf4c4f9b052c45ea"
+      },
+      {
+        "id": "media-reviews-hobot-2s-spray-module-webp-640",
+        "src": "/media/reviews/hobot-2s/spray-module-640w.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 33864,
+        "checksum": "sha256:705f7571d47ddba0ce54c173502823fcba8520a0f113cbdd69e9f9d9b37bc2fb"
+      },
+      {
+        "id": "media-reviews-hobot-2s-spray-module-webp-960",
+        "src": "/media/reviews/hobot-2s/spray-module-960w.webp",
+        "width": 960,
+        "height": 720,
+        "bytes": 68710,
+        "checksum": "sha256:2c6c2fff9b21fcc6c89aa2306615a1eef64668f418ef7ec10fdfbcdde50aa10a"
+      },
+      {
+        "id": "media-reviews-hobot-2s-spray-module-webp-1440",
+        "src": "/media/reviews/hobot-2s/spray-module-1440w.webp",
+        "width": 1440,
+        "height": 1080,
+        "bytes": 112842,
+        "checksum": "sha256:8bc131f72c79c1ad34001b81a9d8d5d3eb2e73248a239f45ced655601d2f02c1"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/hobot-2s/app-control.webp",
+    "sourceWidth": 1086,
+    "sourceHeight": 1448,
+    "derivatives": [
+      {
+        "id": "media-reviews-hobot-2s-app-control-webp-360",
+        "src": "/media/reviews/hobot-2s/app-control-360w.webp",
+        "width": 360,
+        "height": 480,
+        "bytes": 18870,
+        "checksum": "sha256:076eadee8598c95c1230cf357a1496b1a3cad9301f910566ed4891ac862ede18"
+      },
+      {
+        "id": "media-reviews-hobot-2s-app-control-webp-640",
+        "src": "/media/reviews/hobot-2s/app-control-640w.webp",
+        "width": 640,
+        "height": 853,
+        "bytes": 45088,
+        "checksum": "sha256:99a252ea514799c0820b6f349c7f8a9f587c919c52f3ec840d2a0394de3f5ad2"
+      },
+      {
+        "id": "media-reviews-hobot-2s-app-control-webp-960",
+        "src": "/media/reviews/hobot-2s/app-control-960w.webp",
+        "width": 960,
+        "height": 1280,
+        "bytes": 82322,
+        "checksum": "sha256:1230ef29790a356f4f2300ac12927f33bf2394efa4b696c5af2dfd7df16cfd5b"
+      }
+    ]
+  },
+  {
+    "source": "/media/products/hobot-298.webp",
+    "sourceWidth": 1448,
+    "sourceHeight": 1086,
+    "derivatives": [
+      {
+        "id": "media-products-hobot-298-webp-360",
+        "src": "/media/products/hobot-298-360w.webp",
+        "width": 360,
+        "height": 270,
+        "bytes": 11350,
+        "checksum": "sha256:897835068b17edcc96ae73b0c907e967bb71d00b5c1c18d1d825439eecb68aaf"
+      },
+      {
+        "id": "media-products-hobot-298-webp-640",
+        "src": "/media/products/hobot-298-640w.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 29668,
+        "checksum": "sha256:ddf8746a49409196d3fe9873e8046c40da8f437eb41332cb553395831d6b9417"
+      },
+      {
+        "id": "media-products-hobot-298-webp-960",
+        "src": "/media/products/hobot-298-960w.webp",
+        "width": 960,
+        "height": 720,
+        "bytes": 60790,
+        "checksum": "sha256:0bc69b800f9e61df20d9e602c7ab23db52d86e5c5084d9a818488b7b0eb9069b"
+      },
+      {
+        "id": "media-products-hobot-298-webp-1440",
+        "src": "/media/products/hobot-298-1440w.webp",
+        "width": 1440,
+        "height": 1080,
+        "bytes": 101150,
+        "checksum": "sha256:cf2bc16c13b998c328bc26dd72f155e21c3b384e15e828d3f965a8924d2d2df5"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/hobot-298/holding-force.webp",
+    "sourceWidth": 1122,
+    "sourceHeight": 1402,
+    "derivatives": [
+      {
+        "id": "media-reviews-hobot-298-holding-force-webp-360",
+        "src": "/media/reviews/hobot-298/holding-force-360w.webp",
+        "width": 360,
+        "height": 450,
+        "bytes": 15000,
+        "checksum": "sha256:b9d9c1ac2a63ab26aa0713f3a506af79b06a74e617225ab03e8b96a7fca01e3b"
+      },
+      {
+        "id": "media-reviews-hobot-298-holding-force-webp-640",
+        "src": "/media/reviews/hobot-298/holding-force-640w.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 39052,
+        "checksum": "sha256:cec72927a6a0db5ce7f103c2397c5fe813340edd3a141ef3431f6f38a535d164"
+      },
+      {
+        "id": "media-reviews-hobot-298-holding-force-webp-960",
+        "src": "/media/reviews/hobot-298/holding-force-960w.webp",
+        "width": 960,
+        "height": 1200,
+        "bytes": 76472,
+        "checksum": "sha256:d4abda867c394b8a2bfb5460c5734f14abf48d59c4ceddfd20f8b5c2bc678683"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/hobot-298/edge-detection.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-hobot-298-edge-detection-webp-360",
+        "src": "/media/reviews/hobot-298/edge-detection-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 17376,
+        "checksum": "sha256:e4f20452b5b3474c0060064293f90632cbdd25a39f562dc953532ed002e0e74b"
+      },
+      {
+        "id": "media-reviews-hobot-298-edge-detection-webp-640",
+        "src": "/media/reviews/hobot-298/edge-detection-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 50012,
+        "checksum": "sha256:d86126c7ce506beee266c578e704853193a0e3c34ad9dab738e457bcdffc224a"
+      },
+      {
+        "id": "media-reviews-hobot-298-edge-detection-webp-960",
+        "src": "/media/reviews/hobot-298/edge-detection-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 104112,
+        "checksum": "sha256:e7e6787e2dad6070061e83a5bcd16880af8a42c2cabfba6b027b2a04c1b99618"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/hobot-298/bluetooth-remote.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-hobot-298-bluetooth-remote-webp-360",
+        "src": "/media/reviews/hobot-298/bluetooth-remote-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 15526,
+        "checksum": "sha256:15b0198623d5bd7d1c07cbe6c5a05cc6c2f397e8c5f733c668c5f18fc625a5e3"
+      },
+      {
+        "id": "media-reviews-hobot-298-bluetooth-remote-webp-640",
+        "src": "/media/reviews/hobot-298/bluetooth-remote-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 38292,
+        "checksum": "sha256:06e519455c8f9c475e625baf801cb8548efb6680f85a83731ec85effc3f54dcc"
+      },
+      {
+        "id": "media-reviews-hobot-298-bluetooth-remote-webp-960",
+        "src": "/media/reviews/hobot-298/bluetooth-remote-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 74958,
+        "checksum": "sha256:2d979a57318ca3dbc0b8d5b2827e86e8645debd0587b3cd8515b709314994d52"
+      }
+    ]
+  },
+  {
+    "source": "/media/products/hutt-s55-pro.webp",
+    "sourceWidth": 1448,
+    "sourceHeight": 1086,
+    "derivatives": [
+      {
+        "id": "media-products-hutt-s55-pro-webp-360",
+        "src": "/media/products/hutt-s55-pro-360w.webp",
+        "width": 360,
+        "height": 270,
+        "bytes": 13368,
+        "checksum": "sha256:dde6759c7c0e4bf8c3e6bd7ffc99c960b10168c85f91c72620cd2210be67109b"
+      },
+      {
+        "id": "media-products-hutt-s55-pro-webp-640",
+        "src": "/media/products/hutt-s55-pro-640w.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 35568,
+        "checksum": "sha256:2ef35fbea3eedb1bf88f938795091ed2d17cb7fa33881d9f6b941de15e826e3c"
+      },
+      {
+        "id": "media-products-hutt-s55-pro-webp-960",
+        "src": "/media/products/hutt-s55-pro-960w.webp",
+        "width": 960,
+        "height": 720,
+        "bytes": 74498,
+        "checksum": "sha256:78ef7cf1c4759d78e7f9af28e611cf36076968c14b7a6ca7d768af5e55f1550c"
+      },
+      {
+        "id": "media-products-hutt-s55-pro-webp-1440",
+        "src": "/media/products/hutt-s55-pro-1440w.webp",
+        "width": 1440,
+        "height": 1080,
+        "bytes": 123900,
+        "checksum": "sha256:09d4f17be8f235ad95387370ac03a939ae15d0128f5ac9fa93421a303132481a"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/hutt-s55-pro/every-surface.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-hutt-s55-pro-every-surface-webp-360",
+        "src": "/media/reviews/hutt-s55-pro/every-surface-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 17446,
+        "checksum": "sha256:8324153fe6de14e6c2396c087bf3d689ff81f9b101a47322bde6eba9303cfa22"
+      },
+      {
+        "id": "media-reviews-hutt-s55-pro-every-surface-webp-640",
+        "src": "/media/reviews/hutt-s55-pro/every-surface-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 41476,
+        "checksum": "sha256:967468c1d2c18a2c8d484e9a211c21260b2eaf5ebb88946d356721d19c81140f"
+      },
+      {
+        "id": "media-reviews-hutt-s55-pro-every-surface-webp-960",
+        "src": "/media/reviews/hutt-s55-pro/every-surface-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 76492,
+        "checksum": "sha256:03f7d4e09de71b5ad651cb5452654ac089c4e87deb5cacbbfbcbc2bbae796e9b"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/hutt-s55-pro/adaptive-suction.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-hutt-s55-pro-adaptive-suction-webp-360",
+        "src": "/media/reviews/hutt-s55-pro/adaptive-suction-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 20400,
+        "checksum": "sha256:2a0bbd81296275bce7064d4f10e5400565e67080c0d99b919eed63a2cf84705e"
+      },
+      {
+        "id": "media-reviews-hutt-s55-pro-adaptive-suction-webp-640",
+        "src": "/media/reviews/hutt-s55-pro/adaptive-suction-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 55620,
+        "checksum": "sha256:00cac877d2b7513905b63c5bfa5c73423e8b2af3f1a7dfc0f1ccc6dfc2f3059f"
+      },
+      {
+        "id": "media-reviews-hutt-s55-pro-adaptive-suction-webp-960",
+        "src": "/media/reviews/hutt-s55-pro/adaptive-suction-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 115358,
+        "checksum": "sha256:c6fd9fcb36b70a9ad90aee2dd4bbd6ade2e5e750ad682fc38b46622fb491bb67"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/hutt-s55-pro/safety-backup.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-hutt-s55-pro-safety-backup-webp-360",
+        "src": "/media/reviews/hutt-s55-pro/safety-backup-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 16716,
+        "checksum": "sha256:cc2463e5f582c9330e769b1849a08b56dff92cea84feea731ff759a3e81e9e75"
+      },
+      {
+        "id": "media-reviews-hutt-s55-pro-safety-backup-webp-640",
+        "src": "/media/reviews/hutt-s55-pro/safety-backup-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 40814,
+        "checksum": "sha256:24e537d2e35492552c35bcc201b0190dcf871deafaf8d6022790e23d06d01d68"
+      },
+      {
+        "id": "media-reviews-hutt-s55-pro-safety-backup-webp-960",
+        "src": "/media/reviews/hutt-s55-pro/safety-backup-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 76664,
+        "checksum": "sha256:f22abffe9e9c88f2bf2429be0308529a3db1d03bd87e512e1252a58542cf25f0"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/hutt-s55-pro/one-click.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-hutt-s55-pro-one-click-webp-360",
+        "src": "/media/reviews/hutt-s55-pro/one-click-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 18502,
+        "checksum": "sha256:99f7a75025ae0555a18acdeb81d9b5e559b048d134b546bd7deb2e127615994d"
+      },
+      {
+        "id": "media-reviews-hutt-s55-pro-one-click-webp-640",
+        "src": "/media/reviews/hutt-s55-pro/one-click-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 44106,
+        "checksum": "sha256:89521dc8b6d01a5a5dc600dabca0ee758bcf8524b43266de4aa3949049ceb405"
+      },
+      {
+        "id": "media-reviews-hutt-s55-pro-one-click-webp-960",
+        "src": "/media/reviews/hutt-s55-pro/one-click-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 82414,
+        "checksum": "sha256:73c903edf940a7d7ade979e435e9ac82d29381032df89a7f5a7c9eeee8eea761"
+      }
+    ]
+  },
+  {
+    "source": "/media/products/mamibot-w120-dp.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-products-mamibot-w120-dp-webp-360",
+        "src": "/media/products/mamibot-w120-dp-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 15438,
+        "checksum": "sha256:cb7ff87c99db96b880baea506156b09c4d65e3ba1343e293b1b67d29f433526a"
+      },
+      {
+        "id": "media-products-mamibot-w120-dp-webp-640",
+        "src": "/media/products/mamibot-w120-dp-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 39908,
+        "checksum": "sha256:0878f1ebd5d512f779905ca61eb08836790b1b38b90298bde0fbf2b3eaed71b9"
+      },
+      {
+        "id": "media-products-mamibot-w120-dp-webp-960",
+        "src": "/media/products/mamibot-w120-dp-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 81666,
+        "checksum": "sha256:6bfafef906fb6e0f1473774db4b5600edfbf6fca606d08f27a0d62c61bb3af21"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/mamibot-w120-dp/corner-clean.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-mamibot-w120-dp-corner-clean-webp-360",
+        "src": "/media/reviews/mamibot-w120-dp/corner-clean-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 17970,
+        "checksum": "sha256:1adfd5fc07092300b55dffdcb36348193d56810f93b4d6856914cf683394adcf"
+      },
+      {
+        "id": "media-reviews-mamibot-w120-dp-corner-clean-webp-640",
+        "src": "/media/reviews/mamibot-w120-dp/corner-clean-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 46616,
+        "checksum": "sha256:aed0597d9b189fc8d4a0ddceed6f9931e904ccf8e2246a58063e3a249bc9c644"
+      },
+      {
+        "id": "media-reviews-mamibot-w120-dp-corner-clean-webp-960",
+        "src": "/media/reviews/mamibot-w120-dp/corner-clean-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 93958,
+        "checksum": "sha256:79e81c29a4c331e5ed6bbd0208dad16d3bfeb668f0a7691b0b46891777c646eb"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/mamibot-w120-dp/eight-in-one.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-mamibot-w120-dp-eight-in-one-webp-360",
+        "src": "/media/reviews/mamibot-w120-dp/eight-in-one-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 13122,
+        "checksum": "sha256:a63c9b07d19c4b08e0e90d84fc7d0e1aae5898f76cf52c92cb4515dee554d1d8"
+      },
+      {
+        "id": "media-reviews-mamibot-w120-dp-eight-in-one-webp-640",
+        "src": "/media/reviews/mamibot-w120-dp/eight-in-one-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 30758,
+        "checksum": "sha256:7b6f6d8e2910efc7026c9ec8a0cca5a247935e613ebdc8e8404aaaf828163079"
+      },
+      {
+        "id": "media-reviews-mamibot-w120-dp-eight-in-one-webp-960",
+        "src": "/media/reviews/mamibot-w120-dp/eight-in-one-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 57456,
+        "checksum": "sha256:d10c679dd17f68313f1245a8060e18de54b576452b10ecee820ea8fd9d8daa12"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/mamibot-w120-dp/dual-control.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-mamibot-w120-dp-dual-control-webp-360",
+        "src": "/media/reviews/mamibot-w120-dp/dual-control-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 13560,
+        "checksum": "sha256:8ce1efdd91b1c470d87080ee15228e220a6050a85c7c127da7f1465469f30668"
+      },
+      {
+        "id": "media-reviews-mamibot-w120-dp-dual-control-webp-640",
+        "src": "/media/reviews/mamibot-w120-dp/dual-control-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 32884,
+        "checksum": "sha256:5a3909f82986d001780e4823893382aca654ee451b091b1351ee6fde1b5169e8"
+      },
+      {
+        "id": "media-reviews-mamibot-w120-dp-dual-control-webp-960",
+        "src": "/media/reviews/mamibot-w120-dp/dual-control-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 62498,
+        "checksum": "sha256:4815f09a72e3d6dc3561b3fae27a93bea696436d00560932ad6ea3d96d339259"
+      }
+    ]
+  },
+  {
+    "source": "/media/products/cop-rose-x5s.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-products-cop-rose-x5s-webp-360",
+        "src": "/media/products/cop-rose-x5s-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 18114,
+        "checksum": "sha256:4336de9354af639d347b3a79fdfc1885305b77e7458e527bdea46b2f217bb336"
+      },
+      {
+        "id": "media-products-cop-rose-x5s-webp-640",
+        "src": "/media/products/cop-rose-x5s-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 47234,
+        "checksum": "sha256:38ac080abcaf0016c8f93a12b30e43ecfd2626e668694d0fab13e2f31d2292e2"
+      },
+      {
+        "id": "media-products-cop-rose-x5s-webp-960",
+        "src": "/media/products/cop-rose-x5s-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 95636,
+        "checksum": "sha256:a1270666e7976a2ddd28d53b5e5b88b70fa2aed3e8eded139cb8cc12a25a72b0"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/cop-rose-x5s/spray-suction.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-cop-rose-x5s-spray-suction-webp-360",
+        "src": "/media/reviews/cop-rose-x5s/spray-suction-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 21834,
+        "checksum": "sha256:92528f76ba31674157f92eddddb32bf7dc116319cbc0a3846a576650f5dcd737"
+      },
+      {
+        "id": "media-reviews-cop-rose-x5s-spray-suction-webp-640",
+        "src": "/media/reviews/cop-rose-x5s/spray-suction-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 57270,
+        "checksum": "sha256:e16a8131444960992dbdd795c31e2916340269c13bc91ad329d3501ac1450e16"
+      },
+      {
+        "id": "media-reviews-cop-rose-x5s-spray-suction-webp-960",
+        "src": "/media/reviews/cop-rose-x5s/spray-suction-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 113096,
+        "checksum": "sha256:50177d1b998a4f60909270f5cab8ca254d4cfd2ed7906b96fa338eeddc13d23a"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/cop-rose-x5s/multiple-surfaces.webp",
+    "sourceWidth": 1122,
+    "sourceHeight": 1402,
+    "derivatives": [
+      {
+        "id": "media-reviews-cop-rose-x5s-multiple-surfaces-webp-360",
+        "src": "/media/reviews/cop-rose-x5s/multiple-surfaces-360w.webp",
+        "width": 360,
+        "height": 450,
+        "bytes": 12334,
+        "checksum": "sha256:3e923fa408cf2bd35e429a7bff965d4287ff278b109dfcf4c5985f5424673ff7"
+      },
+      {
+        "id": "media-reviews-cop-rose-x5s-multiple-surfaces-webp-640",
+        "src": "/media/reviews/cop-rose-x5s/multiple-surfaces-640w.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 28794,
+        "checksum": "sha256:aab85e3f8a404c413a0ee86cfffd4809fa36852d3401149513d99e1332f79b72"
+      },
+      {
+        "id": "media-reviews-cop-rose-x5s-multiple-surfaces-webp-960",
+        "src": "/media/reviews/cop-rose-x5s/multiple-surfaces-960w.webp",
+        "width": 960,
+        "height": 1200,
+        "bytes": 53582,
+        "checksum": "sha256:8c8b990a0575dc6a76dd3e0a37415f33a96aa75da26cd2aed9e078bd03294114"
+      }
+    ]
   }
 ]

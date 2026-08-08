@@ -38,7 +38,12 @@ protection stages and this machine ten.
 
 We cannot tell you which two are missing — ECOVACS publishes the count and not
 the breakdown — so treat it as a difference on paper rather than a known
-weakness. The power-off hold is the same 30 minutes across all three, and that
+weakness.
+
+The product artwork on this page prints **twelve**, and it is wrong. We are
+leaving the picture up and saying so here rather than quietly swapping it,
+because the number a buyer sees on a card is the number they carry into the
+comparison, and the honest correction belongs next to it. The power-off hold is the same 30 minutes across all three, and that
 is the figure that decides what happens when your power actually goes.
 
 Above the ground floor you attach the safety rope regardless. No stage count

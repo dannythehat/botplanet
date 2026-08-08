@@ -1987,6 +1987,26 @@ export const REVIEWS: Record<string, ReviewContent> = {
     ],
     skuNote:
       "Figures read from ecovacs.com/us on 5 August 2026. Three machines share this name family — check the listing's details table names the plain W2 PRO rather than the Omni or the W2S.",
+    image: {
+      src: "/media/products/ecovacs-winbot-w2-pro.webp",
+      alt:
+        "BotPlanet artwork for the ECOVACS WINBOT W2 PRO window cleaning robot, shown high " +
+        "on a city window at dusk with spray leaving its side.",
+    },
+    figures: [
+      {
+        afterHeading: "Who this is for",
+        src: "/media/reviews/ecovacs-winbot-w2-pro/three-nozzle-spray.webp",
+        caption:
+          "Spread is most of what separates a clean pane from a streaked one, and this is where the W2 PRO earns its money. The percentages printed here are ECOVACS\u2019 own and are measured against its cheaper W1 PRO rather than against any rival.",
+      },
+      {
+        afterHeading: "Ten stages, not twelve",
+        src: "/media/reviews/ecovacs-winbot-w2-pro/cleaning-modes.webp",
+        caption:
+          "Seven modes, one of them edge-specific. Note the phone in this artwork: the app screen reads WINBOT W2S, a sibling model, not the W2 PRO \u2014 the app is shared across the range and the screenshot was not reshot for this machine.",
+      },
+    ],
     lastReviewed: "2026-08-06",
   },
 
@@ -2040,6 +2060,38 @@ export const REVIEWS: Record<string, ReviewContent> = {
     ],
     skuNote:
       "Figures read from ecovacs.com/us on 5 August 2026. ECOVACS publishes no moving-suction figure and no power-off duration for this model; both are printed as undisclosed rather than estimated from the rest of the range.",
+    image: {
+      src: "/media/products/ecovacs-winbot-w1-pro.webp",
+      alt:
+        "BotPlanet artwork for the ECOVACS WINBOT W1 PRO window cleaning robot, shown on a " +
+        "dark plinth with its twin cables hanging.",
+    },
+    figures: [
+      {
+        afterHeading: "Who this is for",
+        src: "/media/reviews/ecovacs-winbot-w1-pro/hero.webp",
+        caption:
+          "The entry machine in the WINBOT range, on ordinary rain-streaked glass rather than a tower block \u2014 which is the window it is actually for.",
+      },
+      {
+        afterHeading: "Half the suction, and what that actually costs you",
+        src: "/media/reviews/ecovacs-winbot-w1-pro/eight-tier.webp",
+        caption:
+          "2,800 Pa is the number ECOVACS publishes and this artwork prints it. Read the ring of eight protections beside it and note what is not there: a duration for the power-off hold. Every sibling model gets a published 30 minutes; this one gets the claim without the figure.",
+      },
+      {
+        afterHeading: "Streaking",
+        src: "/media/reviews/ecovacs-winbot-w1-pro/cross-spray.webp",
+        caption:
+          "A 60 ml tank and the dual cross nozzle. Fewer nozzles put the water down in a narrower pattern, and pattern is most of what decides whether a pane dries clean or streaked.",
+      },
+      {
+        afterHeading: "Who should look elsewhere",
+        src: "/media/reviews/ecovacs-winbot-w1-pro/app-control.webp",
+        caption:
+          "Three modes and two water levels, which is the whole app. If you want scheduling or mapping, this is the machine to walk past.",
+      },
+    ],
     lastReviewed: "2026-08-06",
   },
 
@@ -2083,6 +2135,38 @@ export const REVIEWS: Record<string, ReviewContent> = {
     ],
     skuNote:
       "NOTHING HERE IS MANUFACTURER-VERIFIED. Every figure is retailer-stated; we could not find a HUTT product page publishing them. The sloped-glass rating is the reason this product is in the catalogue and it rests on a retail listing — confirm it with HUTT before buying for a conservatory roof.",
+    image: {
+      src: "/media/products/hutt-s55-pro.webp",
+      alt:
+        "BotPlanet artwork for the HUTT S55 Pro window cleaning robot, shown on a night " +
+        "window with its remote control and spare pads beside it.",
+    },
+    figures: [
+      {
+        afterHeading: "Who this is for",
+        src: "/media/reviews/hutt-s55-pro/every-surface.webp",
+        caption:
+          "HUTT sells this as a machine for glass, mirrors, tile and shower screens rather than windows alone. The sloped-glass case below is the unusual one; this is the ordinary one.",
+      },
+      {
+        afterHeading: "The sloped-glass claim, and how much weight to put on it",
+        src: "/media/reviews/hutt-s55-pro/safety-backup.webp",
+        caption:
+          "Thirty minutes of backup battery, and the rope actually attached to an anchor. On angled glass the rope is not a formality \u2014 a machine that loses grip on a slope has somewhere to slide.",
+      },
+      {
+        afterHeading: "The pump, and why it is not the same as spray nozzles",
+        src: "/media/reviews/hutt-s55-pro/adaptive-suction.webp",
+        caption:
+          "The pump and the 120-degree fan on the right, the fan stack on the left. Note the suction here reads 2,000\u20136,500 Pa as an adaptive range, while the card artwork for this same machine prints 3,800 Pa. HUTT publishes 6,500 as the maximum and that is the figure this review uses; the two creatives do not agree with each other.",
+      },
+      {
+        afterHeading: "Who should look elsewhere",
+        src: "/media/reviews/hutt-s55-pro/one-click.webp",
+        caption:
+          "A remote, not an app. SLAM 4.0 is the navigation generation HUTT claims, and there is no phone in this system at all.",
+      },
+    ],
     lastReviewed: "2026-08-06",
   },
 
@@ -2123,6 +2207,32 @@ export const REVIEWS: Record<string, ReviewContent> = {
     ],
     skuNote:
       "Retailer-stated throughout; no Mamibot page publishing these figures was found. The ASIN replaced a different Mamibot model in our records on 5 August 2026 and has not been identity-verified.",
+    image: {
+      src: "/media/products/mamibot-w120-dp.webp",
+      alt:
+        "BotPlanet artwork for the Mamibot W120-DP window cleaning robot, shown on a " +
+        "floor-to-ceiling window with spray leaving both sides.",
+    },
+    figures: [
+      {
+        afterHeading: "Who this is for",
+        src: "/media/reviews/mamibot-w120-dp/corner-clean.webp",
+        caption:
+          "The four corner sensors, and the edge claim they support. 1 mm of edge clearance is Mamibot\u2019s figure, and the comparison panel underneath is Mamibot comparing itself with unnamed machines.",
+      },
+      {
+        afterHeading: "The high-rise claim",
+        src: "/media/reviews/mamibot-w120-dp/eight-in-one.webp",
+        caption:
+          "The item to read in this list is power-outage protection. On a high window that is the specification that decides what happens in a cut, and it is the one the cheaper machines in this catalogue leave out.",
+      },
+      {
+        afterHeading: "Who should look elsewhere",
+        src: "/media/reviews/mamibot-w120-dp/dual-control.webp",
+        caption:
+          "The useful number here is the smallest window it takes: 60 by 40 centimetres. Measure before you buy \u2014 a lot of older houses have panes smaller than that.",
+      },
+    ],
     lastReviewed: "2026-08-06",
   },
 
@@ -2164,6 +2274,32 @@ export const REVIEWS: Record<string, ReviewContent> = {
     ],
     skuNote:
       "Retailer-stated throughout; no HOBOT page publishing these figures was found. Owner-supplied ASIN from 5 August 2026, not identity-verified.",
+    image: {
+      src: "/media/products/hobot-2s.webp",
+      alt:
+        "BotPlanet artwork for the HOBOT-2S window cleaning robot, shown held to a " +
+        "floor-to-ceiling window at night with spray leaving both sides.",
+    },
+    figures: [
+      {
+        afterHeading: "Who this is for",
+        src: "/media/reviews/hobot-2s/hero.webp",
+        caption:
+          "Twin tanks spraying from both sides at once, which is the one thing this machine does that the cheaper 298 does not.",
+      },
+      {
+        afterHeading: "Ultrasonic spray, honestly assessed",
+        src: "/media/reviews/hobot-2s/spray-module.webp",
+        caption:
+          "The spray module lifts out without a tool, which matters more than it sounds: the tank and nozzles are the part that clogs, and a module you can rinse is the difference between maintenance and a dead robot.",
+      },
+      {
+        afterHeading: "AI route planning",
+        src: "/media/reviews/hobot-2s/app-control.webp",
+        caption:
+          "The app is a remote control with three modes and two water levels. Useful, and some way short of the mapping the phrase \u201croute planning\u201d suggests.",
+      },
+    ],
     lastReviewed: "2026-08-06",
   },
 
@@ -2205,6 +2341,32 @@ export const REVIEWS: Record<string, ReviewContent> = {
     ],
     skuNote:
       "No manufacturer-verified specification of any kind was found for this model. Owner-supplied ASIN from 5 August 2026, not identity-verified. Almost every row above is undisclosed, and that is the honest state of what is published.",
+    image: {
+      src: "/media/products/hobot-298.webp",
+      alt:
+        "BotPlanet artwork for the HOBOT-298 window cleaning robot, shown on a tall window " +
+        "at night above a lit city.",
+    },
+    figures: [
+      {
+        afterHeading: "Who this is for",
+        src: "/media/reviews/hobot-298/holding-force.webp",
+        caption:
+          "This artwork prints a number the rest of HOBOT\u2019s material does not: up to 6 kg of holding force. That is not a suction figure in pascals and the two do not convert, so it does not close the gap named below \u2014 but it is more than we could find anywhere else, and it is HOBOT\u2019s claim rather than a measurement of ours.",
+      },
+      {
+        afterHeading: "Ultrasonic spray at the cheap end",
+        src: "/media/reviews/hobot-298/edge-detection.webp",
+        caption:
+          "The underside, and the reason the edge matters: a yellow border pad around a grey centre pad. The border is the part doing the work at the frame, where every robot in this category is at its worst.",
+      },
+      {
+        afterHeading: "Who should look elsewhere",
+        src: "/media/reviews/hobot-298/bluetooth-remote.webp",
+        caption:
+          "The control is Bluetooth, not Wi-Fi. That means it works from the same room and nowhere else \u2014 no scheduling, no starting it from the office.",
+      },
+    ],
     lastReviewed: "2026-08-06",
   },
 
@@ -2245,6 +2407,26 @@ export const REVIEWS: Record<string, ReviewContent> = {
     ],
     skuNote:
       "Retailer-stated throughout; no manufacturer page publishing these figures was found. The framed-glass-only rating is the one specification that decides this purchase outright, and it is the one we are most confident in — it is what the product is sold as.",
+    image: {
+      src: "/media/products/cop-rose-x5s.webp",
+      alt:
+        "BotPlanet artwork for the Cop Rose X5S window cleaning robot, shown angled " +
+        "against a night city window with its remote control and a phone alongside.",
+    },
+    figures: [
+      {
+        afterHeading: "Who this is for",
+        src: "/media/reviews/cop-rose-x5s/spray-suction.webp",
+        caption:
+          "An atomised spray and a suction figure of up to 4,000 Pa, both Cop Rose\u2019s own. At this price the spray is the part that separates it from a machine that drags a dry cloth around.",
+      },
+      {
+        afterHeading: "No app is a genuine trade, both ways",
+        src: "/media/reviews/cop-rose-x5s/multiple-surfaces.webp",
+        caption:
+          "A correction we owe you: the artwork for this machine shows both a remote and a phone app, and the section above was written on the basis that it ships remote-only. We have not been able to settle which is right from the listing. Treat the app as unconfirmed rather than absent, and if it matters to your decision, check the box contents before you buy.",
+      },
+    ],
     lastReviewed: "2026-08-06",
   },
 
