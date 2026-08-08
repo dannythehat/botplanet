@@ -30,6 +30,16 @@ import { spawnSync } from "node:child_process";
 
 const BASE = (process.argv[2] ?? "https://botplanet.io").replace(/\/$/, "");
 const PROD_HOST = "botplanet.io";
+/**
+ * Auditing a preview is the point of the base-URL argument, and a preview is
+ * SUPPOSED to be noindex — Base.astro serves noindex on any host that is not
+ * botplanet.io so a workers.dev copy never competes for indexing. The first
+ * run against a preview reported all 79 URLs as noindex failures, which was
+ * this script not knowing that rule rather than the site breaking it. The
+ * canonical checks still run: a preview's canonicals point at production,
+ * which is exactly what they should do and worth confirming.
+ */
+const AUDITING_PRODUCTION = new URL(BASE).host === PROD_HOST;
 
 /* Paths that are legitimately not in the registry and not products. /go/ is an
    affiliate redirect and is disallowed in robots.txt; anchors and query strings
@@ -85,7 +95,7 @@ const get = async (url, method = "GET") => {
 };
 
 const main = async () => {
-  console.log(`Auditing ${BASE}\n`);
+  console.log(`Auditing ${BASE}${AUDITING_PRODUCTION ? "" : " (preview — noindex is expected and not checked)"}\n`);
   const { live, all, aliases } = registryPaths();
   const liveRoutes = new Set(live);
   const knownRoutes = new Set(all);
@@ -123,7 +133,9 @@ const main = async () => {
     }
 
     const robots = r.body.match(/<meta name="robots" content="([^"]*)"/)?.[1] ?? "";
-    if (/noindex/.test(robots)) fail("noindex_in_sitemap", path, `robots is "${robots}"`);
+    if (AUDITING_PRODUCTION && /noindex/.test(robots)) {
+      fail("noindex_in_sitemap", path, `robots is "${robots}"`);
+    }
 
     const og = r.body.match(/<meta property="og:image" content="([^"]+)"/)?.[1];
     if (!og) fail("og_image_missing", path, "no og:image");
