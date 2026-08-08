@@ -50,7 +50,32 @@ describe("internal link anchors", () => {
     const { html } = applyInternalLinks("<p>a semi-cordless-ish machine</p>", POOL);
     expect(html).not.toContain("<a ");
     const g = applyInternalLinks("<p>an above-ground pool</p>", POOL);
-    expect(g.html).toContain(">above-ground</a>");
+    expect(g.html).toContain("above-ground");
+    expect(g.html).toContain("<a ");
+  });
+
+  it("gives an overlap to the longer phrase and never nests the shorter one", () => {
+    /* THE BUG THIS LOCKS OUT, and this test previously asserted it.
+       "above-ground pool" and "above-ground" are both live anchors. The old
+       linker rewrote the string in a loop, so the second one matched inside
+       the first one's freshly inserted <a> and emitted <a ...><a ...> — invalid
+       HTML that eight live pages were carrying. The longer, more specific
+       phrase should win the overlap outright. */
+    const { html, applied } = applyInternalLinks("<p>an above-ground pool</p>", POOL);
+    expect(html).not.toMatch(/<a\b[^>]*>[^<]*<a\b/);
+    expect(applied).toHaveLength(1);
+    expect(applied[0].anchor).toBe("above-ground pool");
+  });
+
+  it("emits no nested anchor for any category, on prose built to provoke one", () => {
+    for (const cat of Object.keys(CATEGORY_ANCHORS)) {
+      const live = liveAnchorsFor(cat);
+      if (live.length < 2) continue;
+      // One paragraph containing every anchor phrase this category declares.
+      const run = `<p>${live.map((a) => a.anchor).join(" and also ")}</p>`;
+      const { html } = applyInternalLinks(run, anchorsFor(cat));
+      expect(html, cat).not.toMatch(/<a\b[^>]*>[^<]*<a\b/);
+    }
   });
 
   it("renders nothing for a planned anchor, so no link points at a 404", () => {
