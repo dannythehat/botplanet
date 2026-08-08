@@ -2958,6 +2958,275 @@ export const REVIEWS: Record<string, ReviewContent> = {
       "Read from the Amazon listing B0GMQW1HX6 on 8 August 2026. The ROLA Mini (B0DDC9DZKK, $139) shares the ROLA name and has no treat dispenser, which is the only reason to buy this model.",
     lastReviewed: "2026-08-08",
   },
+  /* ============================================================
+     EDUCATIONAL AND CODING ROBOTS, 8 August 2026. Five of twelve.
+
+     THE OTHER SEVEN ARE NOT HERE ON PURPOSE. Five had the wrong
+     ASIN or the wrong product behind them and two cannot be
+     bought at all. The pattern is one thing: this category sells
+     to schools as much as to parents. The Bee-Bot candidate is a
+     $691 six-robot class pack against a 4,400/mo consumer term;
+     SPIKE Essential is a $597 education SKU; VEX GO has the best
+     difficulty score in the category and no Amazon listing
+     because VEX sells it through schools.
+
+     The brand terms were measured and refused the same day —
+     sphero 27,100, ozobot 14,800, vex robotics 33,100 — because
+     their SERPs are the manufacturer's own site, its app, its
+     coding IDE, Wikipedia and classroom distributors. Enabot's
+     brand SERP had an editorial gap; these do not.
+     ============================================================ */
+  "sphero-bolt": {
+    slug: "sphero-bolt",
+    categorySlug: "educational-coding-robots",
+    eyebrow: "Coding robot review",
+    title: "Sphero BOLT review",
+    seoTitle: "Sphero BOLT Review — The One That Grows With Them",
+    metaDescription:
+      "A $179 coding ball that starts with drawing and ends in Python. Whether BOLT is worth three times a Sphero Mini, and who outgrows it.",
+    verdict:
+      "The one robot here a child does not outgrow in a year. BOLT starts with drawing a path on a screen and ends with real Python, and the LED matrix is what makes the middle step — block coding — feel like it produces something rather than just moving a ball.",
+    bestFor:
+      "A child around eight to thirteen who will still be interested in a year, and a household happy to spend once rather than replace.",
+    notIdealFor:
+      "Under-eights, and anybody who wants to find out cheaply whether their child likes coding. The Mini does that for a quarter of the price.",
+    facts: [
+      { label: "Ages", value: "8+" },
+      { label: "Code in", value: "Draw, Blocks, Python, JavaScript" },
+      { label: "Play time", value: "4+ hours" },
+      { label: "Waterproof", value: "Yes" },
+    ],
+    specGroups: [
+      {
+        heading: "What makes it the BOLT",
+        rows: [
+          { label: "Code three ways", value: "Draw, Blocks, and text in Python or JavaScript" },
+          { label: "LED matrix", value: "Programmable — displays movement, messages and data" },
+          { label: "Sensors", value: "Programmable, used to detect and respond" },
+          { label: "App", value: "Sphero Edu" },
+          { label: "Charging", value: "Inductive" },
+        ],
+      },
+      {
+        heading: "Physical",
+        rows: [
+          { label: "Diameter", value: "2.87 in" },
+          { label: "Weight", value: "1.1 lb" },
+          { label: "Battery", value: "Lithium-ion polymer" },
+          { label: "Play time", value: "4+ hours" },
+          { label: "Waterproof", value: "Yes" },
+        ],
+      },
+      {
+        heading: "Ages",
+        rows: [
+          { label: "Manufacturer rating", value: "8+, elementary through high school" },
+          { label: "Where it stops", value: "It does not — the text-coding step keeps going" },
+        ],
+      },
+    ],
+    skuNote:
+      "Read from the Amazon listing B07DLM5DL7 on 8 August 2026. Sphero sells BOLT, BOLT+, Mini, indi, RVR and SPRK+, and the details table's Sub Brand row is what identifies this one.",
+    lastReviewed: "2026-08-08",
+  },
+
+  "sphero-mini": {
+    slug: "sphero-mini",
+    categorySlug: "educational-coding-robots",
+    eyebrow: "Coding robot review",
+    title: "Sphero Mini review",
+    seoTitle: "Sphero Mini Review — The Cheap Way to Find Out",
+    metaDescription:
+      "A $50 coding ball the size of a ping-pong ball, running the same app as the $179 BOLT. What the one-hour battery costs you.",
+    verdict:
+      "The cheapest honest way to find out whether a child likes coding. It runs the same Sphero Edu app as the BOLT — the same drawing, blocks and text — in a ball the size of a ping-pong ball, and it lasts about an hour between charges.",
+    bestFor:
+      "A first coding robot, a stocking present, or a household not yet sure the interest is real.",
+    notIdealFor:
+      "Anyone who wants it to last an afternoon. One hour of play is the specification and it is the thing people are surprised by.",
+    facts: [
+      { label: "Size", value: "1.57 in — a ping-pong ball" },
+      { label: "Play time", value: "About 1 hour" },
+      { label: "Same app as BOLT", value: "Yes" },
+      { label: "Doubles as", value: "A game controller" },
+    ],
+    specGroups: [
+      {
+        heading: "What it does",
+        rows: [
+          { label: "Coding", value: "Draw, blocks, and text — the same Sphero Edu app as the BOLT" },
+          { label: "Sensors", value: "Gyroscope and accelerometer" },
+          { label: "Lights", value: "Programmable LED" },
+          { label: "Drive modes", value: "Joystick, Slingshot and others in Sphero Play" },
+          { label: "Games", value: "Works as a controller for arcade games in the app" },
+        ],
+      },
+      {
+        heading: "Physical",
+        rows: [
+          { label: "Diameter", value: "1.57 in" },
+          { label: "Weight", value: "0.11 kg" },
+          { label: "Battery", value: "Rechargeable, about 1 hour of play" },
+          { label: "Shell", value: "Opens for charging" },
+        ],
+      },
+      {
+        heading: "Ages",
+        rows: [
+          { label: "Manufacturer rating", value: "8+" },
+        ],
+      },
+    ],
+    skuNote:
+      "Read from the Amazon listing B072B6QVVW on 8 August 2026. The productTitle element did not render on our read, so identity rests on the details table — Sub Brand 'Mini', Colour 'Blue' — rather than on the title. Sphero sells the Mini in several colours and this ASIN is the Blue.",
+    lastReviewed: "2026-08-08",
+  },
+
+  "sphero-indi": {
+    slug: "sphero-indi",
+    categorySlug: "educational-coding-robots",
+    eyebrow: "Coding robot review",
+    title: "Sphero indi review",
+    seoTitle: "Sphero indi Review — Coding With No Screen At All",
+    metaDescription:
+      "A $100 robot a four-year-old programs with coloured cards and no screen. What indi teaches, and the age it stops working.",
+    verdict:
+      "The one product here that teaches programming without a screen. A four-year-old lays coloured cards on the floor, indi drives over them and does what each colour says, and that is a program — cause, effect and sequence, with nothing to log into.",
+    bestFor:
+      "Four to seven, and any household that would rather not add another screen to the day.",
+    notIdealFor:
+      "Anyone over about seven. The colour-card idea has a ceiling and Sphero says so — its own age field stops at 144 months.",
+    facts: [
+      { label: "Ages", value: "4 to about 7" },
+      { label: "Screen", value: "Not required" },
+      { label: "Programming", value: "Coloured cards" },
+      { label: "App", value: "Optional" },
+    ],
+    specGroups: [
+      {
+        heading: "How it works",
+        rows: [
+          { label: "Screenless mode", value: "Coloured cards laid on the floor, no device needed" },
+          { label: "App mode", value: "Optional simplified drag-and-drop" },
+          { label: "What it teaches", value: "Cause and effect, pattern recognition, colours, directions" },
+          { label: "Play", value: "Children build mazes for it to navigate" },
+        ],
+      },
+      {
+        heading: "Physical",
+        rows: [
+          { label: "Weight", value: "0.56 kg" },
+          { label: "Material", value: "Plastic and silicone" },
+          { label: "Customising", value: "Stickers included" },
+        ],
+      },
+      {
+        heading: "Ages",
+        rows: [
+          { label: "Manufacturer rating", value: "4+" },
+          { label: "Manufacturer age field", value: "48 to 144 months" },
+          { label: "The ceiling", value: "Real, and the reason to buy something else at eight" },
+        ],
+      },
+    ],
+    skuNote:
+      "Read from the Amazon listing B094X6TV5V on 8 August 2026. Sphero also sells indi as a classroom pack; the details table's colour row identifies this as the At-Home Learning Kit.",
+    lastReviewed: "2026-08-08",
+  },
+
+  "ozobot-evo": {
+    slug: "ozobot-evo",
+    categorySlug: "educational-coding-robots",
+    eyebrow: "Coding robot review",
+    title: "Ozobot Evo review",
+    seoTitle: "Ozobot Evo Review — 700 Lessons and a Marker Pen",
+    metaDescription:
+      "A $175 coding robot that reads lines drawn in felt-tip. What the Evo Entry Kit includes, and why it is built for a classroom.",
+    verdict:
+      "A robot that follows lines you draw and obeys colour codes written in marker pen, with a block-coding app behind it carrying five skill levels and over 700 free lessons. It is built for a classroom and it works at a kitchen table.",
+    bestFor:
+      "Five to eleven, and any adult who wants a lesson plan rather than a toy — teacher or parent.",
+    notIdealFor:
+      "Anyone who wants the child to reach real text programming. Evo's ceiling is Blockly; the Sphero BOLT is where you go for Python.",
+    facts: [
+      { label: "Ages", value: "5 to 11" },
+      { label: "Programming", value: "Marker-pen colour codes, then Blockly" },
+      { label: "Lessons", value: "700+ free" },
+      { label: "Skill levels", value: "Five" },
+    ],
+    specGroups: [
+      {
+        heading: "How it works",
+        rows: [
+          { label: "Screen-free start", value: "Colour codes drawn on paper in the supplied markers" },
+          { label: "Then", value: "Ozobot Blockly, five skill levels from beginner to master" },
+          { label: "Lessons", value: "Over 700 free, covering STEAM, computer science and core subjects" },
+          { label: "Kit", value: "Evo Entry Kit — robot, markers and accessories" },
+        ],
+      },
+      {
+        heading: "Physical",
+        rows: [
+          { label: "Kit size", value: "8.5 × 6.5 × 1.8 in" },
+          { label: "Weight", value: "0.44 kg" },
+          { label: "Build", value: "Durable, sold as classroom-ready" },
+        ],
+      },
+      {
+        heading: "Ages",
+        rows: [
+          { label: "Title and maker", value: "5 to 11" },
+          { label: "Amazon's category field", value: "Reads 'Toddler', which is wrong — believe the title" },
+        ],
+      },
+    ],
+    skuNote:
+      "Read from the Amazon listing B0CSR53WXV on 8 August 2026. Amazon's Age Range Description field reads 'Toddler', contradicting both the listing title and Ozobot's own rating; the title is believed and this page uses 5 to 11.",
+    lastReviewed: "2026-08-08",
+  },
+
+  "makeblock-mbot": {
+    slug: "makeblock-mbot",
+    categorySlug: "educational-coding-robots",
+    eyebrow: "Coding robot review",
+    title: "Makeblock mBot review",
+    seoTitle: "Makeblock mBot Review — Build It, Then Code It",
+    metaDescription:
+      "A $69 robot a child assembles in about 15 minutes and then programs in Scratch. The cheapest way into real electronics.",
+    verdict:
+      "The only one here that arrives in pieces, and that is the point. A child builds it in about a quarter of an hour, learns what the parts do while doing it, and then programs the result in Scratch. Nothing else at this price teaches the hardware as well as the code.",
+    bestFor:
+      "Eight to twelve, and a child who likes taking things apart as much as making them work.",
+    notIdealFor:
+      "Anyone who wants it working out of the box, and anyone who would find a loose bag of components stressful rather than inviting.",
+    facts: [
+      { label: "Ages", value: "8 to 12" },
+      { label: "Build time", value: "About 15 minutes" },
+      { label: "Coding", value: "Scratch" },
+      { label: "Arrives", value: "In pieces" },
+    ],
+    specGroups: [
+      {
+        heading: "What makes it different",
+        rows: [
+          { label: "Assembly", value: "Built from parts in about 15 minutes" },
+          { label: "Teaches", value: "Electronics, machinery and robotics components, not only code" },
+          { label: "Coding", value: "Scratch-based, drag and drop" },
+          { label: "Level", value: "Entry — designed as a first robotics kit" },
+        ],
+      },
+      {
+        heading: "Ages",
+        rows: [
+          { label: "Manufacturer rating", value: "8 to 12" },
+        ],
+      },
+    ],
+    skuNote:
+      "Read from the Amazon listing B00SK5RUQY on 8 August 2026. Makeblock also sells the mBot2, the mBot Ranger and the mBot Ultimate; none of those names appears in this listing's title. The productTitle element did not render on our second read, so this rests on the search-result title and the served-ASIN equality check.",
+    lastReviewed: "2026-08-08",
+  },
+
 };
 
 export function reviewFor(slug: string | undefined): ReviewContent | undefined {

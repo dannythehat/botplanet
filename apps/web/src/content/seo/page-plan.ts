@@ -1301,20 +1301,158 @@ const ENABOT_RANGE: PagePlan = {
    education SKU, and VEX GO — 2,900/mo at KD 8, the best difficulty in the
    category — has no Amazon listing because VEX sells it through the education
    channel. A consumer comparison site can answer the parent buying one robot.
-   It cannot answer a procurement query. */
+   It cannot answer a procurement query.
+
+   THE FIVE CLEAN ONES WERE THEN MEASURED SEPARATELY, 8 August 2026 ($0.1596),
+   seeds/coding-robots-products.json, because three of them are Sphero and the
+   one-URL rule had never been tested inside a single brand. If "sphero bolt"
+   and "sphero mini" return the same result set then these are sections of one
+   page, not three reviews, and writing three would have been the exact mistake
+   this process exists to catch.
+
+   THEY ARE THREE PAGES. bolt × mini shares FOUR of ten domains — sphero.com,
+   amazon.com, help.sphero.com, youtube.com. Discount the universal two and the
+   remainder is the manufacturer's own site and its help centre. Third-party
+   editorial overlap is ZERO. bolt × indi shares three, of which one survives
+   the discount. indi × mbot shares three and only geyerinstructional.com, a
+   classroom supplier, survives.
+
+   THE FINDING THAT MATTERS MORE: not one independent review site ranks in the
+   top ten for ANY of the four product terms measured. The slots are the
+   manufacturer, its education arm, its help centre, YouTube, and school and
+   library suppliers — geyerinstructional, schoolspecialty, gocivilairpatrol,
+   a university libguide, a Utah .gov. The single real publisher anywhere is
+   theisaacstandard.com at 14 for mBot. The brand SERPs had no editorial gap
+   because they are navigational; the PRODUCT SERPs have nothing but gap. That
+   is the reverse of the brand ruling above and it is why the reviews are the
+   business in this category. */
+const CODING_RESEARCH = "local 2026-08-08 · $0.1596 · seeds/coding-robots-products.json";
+
+const codingShell = (slug: string) => ({
+  category: "educational-coding-robots",
+  type: "review" as const,
+  status: "built" as const,
+  intent: "Decide whether this specific machine is the right one for me.",
+  linksOut: ["/robots/educational-coding-robots/", "/compare/educational-coding-robots/"],
+  images: [
+    { slot: "hero", shows: `${slug} lead artwork`, supplied: false },
+    { slot: "figure-1", shows: "Feature story 1", supplied: false },
+    { slot: "figure-2", shows: "Feature story 2", supplied: false },
+    { slot: "product-card", shows: "Catalogue card for listings and the hub grid", supplied: false },
+  ],
+  schema: ["Review", "Article", "WebPage", "BreadcrumbList"],
+  research: CODING_RESEARCH,
+});
+
+const CODING_BUILT: PagePlan[] = [
+  {
+    ...codingShell("sphero bolt"),
+    path: "/robots/educational-coding-robots/sphero-bolt/",
+    primary: { term: "sphero bolt", volume: 4400, difficulty: 32 },
+    secondary: [
+      { term: "sphero bolt plus", volume: 480, difficulty: 10 },
+      { term: "sphero bolt review", volume: 20, difficulty: 0 },
+      { term: "sphero bolt vs mini", volume: 10, difficulty: 0 },
+      { term: "sphero bolt python", volume: 10, difficulty: 0 },
+    ],
+    ceded: [
+      { term: "sphero mini", toPath: "/robots/educational-coding-robots/sphero-mini/", why: "The cheaper robot owns its own name at 2,900/mo. This page names it constantly because it is the thing a reader is choosing against, and routes rather than competes — the two SERPs share no third-party editorial domain at all." },
+      { term: "coding robot", toPath: "/robots/educational-coding-robots/", why: "The category head term belongs to the hub, whose job is routing a parent to the right age band. This page answers one machine." },
+    ],
+    products: ["sphero-bolt"],
+    productsNote: "Catalogued as prod-sphero-bolt, 8 August 2026. Amazon US B07DLM5DL7 at $179. The details table's Sub Brand row is what separates this from the BOLT+, BOLT Power Pack and SPRK+ listings that share the name.",
+    evidence: "4,400/mo at KD 32 — the second-largest product term in the category and the hardest of the five built, because Sphero's own site holds five of the ten slots. The page is built on the one question none of those slots answers: BOLT or Mini, and whether the text-coding step is worth $129. 'sphero bolt plus' at 480/KD 10 is carried here rather than given a page because there is no verified ASIN behind the BOLT+ and a page with nothing to sell is a page that recommends nothing.",
+  },
+  {
+    ...codingShell("sphero mini"),
+    path: "/robots/educational-coding-robots/sphero-mini/",
+    primary: { term: "sphero mini", volume: 2900, difficulty: 15 },
+    secondary: [
+      { term: "sphero mini review", volume: 20, difficulty: 0 },
+      { term: "sphero play", volume: 0, difficulty: 0 },
+      { term: "sphero edu", volume: 0, difficulty: 0 },
+    ],
+    ceded: [
+      { term: "sphero bolt", toPath: "/robots/educational-coding-robots/sphero-bolt/", why: "The BOLT owns its own name at 4,400/mo. This page's argument is that the Mini is the cheap way to find out first, which requires naming the BOLT and then handing the reader to it." },
+    ],
+    refused: [
+      /* 390/mo at KD 0 and a $6.17 CPC, which is a commercial term for
+         something. It is not clear it is this product: "sphero mini golf" may
+         be an activity kit or may be minigolf with the brand attached, and
+         nothing in the SERP settles it. A term nobody has identified is not a
+         term to build copy around. */
+      { term: "sphero mini golf", volume: 390, why: "390/mo at KD 0 with a $6.17 CPC — the highest cost-per-click measured in this category, which usually means a real buyer. We could not establish from the results whether it means a Sphero accessory kit or minigolf with a brand name in front of it. Refused until identified rather than guessed at." },
+    ],
+    products: ["sphero-mini"],
+    productsNote: "Catalogued as prod-sphero-mini, 8 August 2026. Amazon US B072B6QVVW at $50, the Blue. The productTitle element did not render on our read, so identity rests on the details table — Sub Brand 'Mini', Colour 'Blue' — and on the served-ASIN equality check. Sphero sells other colours as separate listings at prices we have not read.",
+    evidence: "2,900/mo at KD 15, the softest of the three Sphero terms, on the cheapest real product in the category. Its SERP shares four domains with the BOLT's and the two that survive the universal discount are sphero.com and help.sphero.com — the manufacturer, twice. No independent review ranks for either term, which is the whole opportunity.",
+  },
+  {
+    ...codingShell("sphero indi"),
+    path: "/robots/educational-coding-robots/sphero-indi/",
+    primary: { term: "sphero indi", volume: 1600, difficulty: 1 },
+    secondary: [
+      { term: "screen-free", volume: 140, difficulty: 0 },
+      { term: "sphero indi at home learning kit", volume: 30, difficulty: 0 },
+      { term: "sphero indi review", volume: 10, difficulty: 11 },
+    ],
+    ceded: [],
+    refused: [
+      { term: "coding robot for 4 year old", volume: 0, why: "Measured at ZERO on 8 August 2026. It is the obvious phrase for this product and the obvious phrase for an age page, and nobody searches it. Recorded rather than dropped so the idea is not re-proposed on intuition — the age fork lives in a hub section because that is where the demand actually is." },
+    ],
+    products: ["sphero-indi"],
+    productsNote: "Catalogued as prod-sphero-indi, 8 August 2026. Amazon US B094X6TV5V at $100, the At-Home Learning Kit. Sphero also sells an indi Class Pack with code mats and literacy cards — a different product at a different price, named on the page and not sold from this row.",
+    evidence: "1,600/mo at KD 1, the easiest term of the five and the only screen-free product with a buy button behind it. Its SERP is sphero.com twice, Amazon, edu.sphero.com, a school instructional supplier, a Civil Air Patrol page and a Utah state .gov — procurement all the way down, with nothing written for the parent of a four-year-old.",
+  },
+  {
+    ...codingShell("ozobot evo"),
+    path: "/robots/educational-coding-robots/ozobot-evo/",
+    primary: { term: "ozobot evo", volume: 1300, difficulty: 5 },
+    secondary: [
+      { term: "ozobot color codes", volume: 720, difficulty: 0 },
+      { term: "ozobot evo vs bit", volume: 40, difficulty: 0 },
+      { term: "ozobot evo review", volume: 10, difficulty: 1 },
+      { term: "block coding", volume: 0, difficulty: 0 },
+    ],
+    ceded: [],
+    refused: [
+      { term: "ozobot", volume: 14800, why: "14,800/mo at KD 36 and refused outright on 8 August 2026, not handed to another page. A bare Ozobot search on Amazon returns the Evo, which is what a brand term looks like rather than a product; the SERP is ozobot.com, the ozoblockly coding IDE, and demco.com and teq.com — library and classroom distributors. Every slot is the manufacturer, its software or its procurement channel. There is no editorial position to take, which is exactly the test Enabot passed at KD 4 and this fails at 36." },
+    ],
+    products: ["ozobot-evo"],
+    productsNote: "Catalogued as prod-ozobot-evo, 8 August 2026. Amazon US B0CSR53WXV at $175, the Evo Entry Kit. The listing's own Age Range Description field reads 'Toddler', contradicting both its title and Ozobot's rating of 5 to 11; the page names the contradiction and uses the title.",
+    evidence: "1,300/mo at KD 5, and it carries 'ozobot color codes' at another 720/KD 0 because the colour codes are how the robot is programmed rather than an accessory — a reader searching the codes is a reader deciding whether the method suits their child. Combined that is over 2,000/mo at single-digit difficulty against a SERP with no independent review on it.",
+  },
+  {
+    ...codingShell("makeblock mbot"),
+    path: "/robots/educational-coding-robots/makeblock-mbot/",
+    primary: { term: "makeblock mbot", volume: 880, difficulty: 29 },
+    secondary: [
+      { term: "mbot2", volume: 720, difficulty: 0 },
+      { term: "mbot ranger", volume: 320, difficulty: 0 },
+      { term: "scratch coding robot", volume: 260, difficulty: 8 },
+      { term: "makeblock mbot review", volume: 10, difficulty: 0 },
+    ],
+    ceded: [],
+    refused: [
+      { term: "makeblock", volume: 3600, why: "3,600/mo at KD 17 on the bare brand, refused alongside Sphero, Ozobot and VEX on 8 August 2026 for the same reason. The 'makeblock mbot' results alone carry makeblock.com four times — the product page, mBot2, the brand page and the education arm — plus two school suppliers. A brand page here would be competing with the manufacturer for its own name and offering a reader nothing the manufacturer does not already say." },
+    ],
+    products: ["makeblock-mbot"],
+    productsNote: "Catalogued as prod-makeblock-mbot, 8 August 2026. Amazon US B00SK5RUQY at $69. Makeblock also sells the mBot2, the mBot Ranger and the mBot Ultimate; none of those names appears in this listing's title. The productTitle element did not render on our second read, so identity rests on the search-result title and the served-ASIN equality check.",
+    evidence: "880/mo at KD 29 on the model name, and 1,040 more on 'mbot2' and 'mbot ranger' at KD 0 — a family question the page answers rather than a set of pages, because we sell one of the three and saying so is the useful part. 'scratch coding robot' at 260/KD 8 lands here because this is the only Scratch-native machine in the catalogue.",
+  },
+];
+
+/* The seven that are NOT built, and why each one is not. Left as planned rather
+   than deleted, because a plan that quietly loses its failures is a plan that
+   re-proposes them next quarter. */
 const CODING_REVIEWS = plannedReviews("educational-coding-robots", "31094454463 + 31094682067 · 2026-08-06", [
-  { slug: "ozobot", term: "ozobot", volume: 14800, difficulty: 36 },
-  { slug: "sphero-bolt", term: "sphero bolt", volume: 4400, difficulty: 32 },
-  { slug: "bee-bot", term: "bee bot", volume: 4400, difficulty: 6 },
-  { slug: "lego-spike-essential", term: "lego spike essential", volume: 3600, difficulty: 11 },
-  { slug: "sphero-mini", term: "sphero mini", volume: 2900, difficulty: 15 },
-  { slug: "vex-go", term: "vex go", volume: 2900, difficulty: 8 },
-  { slug: "sphero-indi", term: "sphero indi", volume: 1600, difficulty: 1 },
-  { slug: "ozobot-evo", term: "ozobot evo", volume: 1300, difficulty: 5 },
-  { slug: "makeblock-mbot", term: "makeblock mbot", volume: 880, difficulty: 29 },
-  { slug: "sphero-rvr", term: "sphero rvr", volume: 720, difficulty: 5 },
-  { slug: "botley-2", term: "botley 2.0", volume: 720, difficulty: 0 },
-  { slug: "code-and-go-robot-mouse", term: "code and go robot mouse", volume: 590, difficulty: 0 },
+  { slug: "ozobot", term: "ozobot", volume: 14800, difficulty: 36, note: "NOT A PRODUCT. A bare Amazon search for 'ozobot' returns the Evo, and the brand SERP is ozobot.com, the ozoblockly IDE and two classroom distributors. Filed as a review by the original plan; it is a brand term and the Evo review carries what is addressable." },
+  { slug: "bee-bot", term: "bee bot", volume: 4400, difficulty: 6, note: "WRONG PRODUCT BEHIND THE TERM. The candidate ASIN B0F6759THL is a 'Coding Robot Class Pack — 6 Bee-Bot' at $691. The term is a parent buying one robot at KD 6; a classroom six-pack is not that purchase. Blocked on a single-unit listing." },
+  { slug: "lego-spike-essential", term: "lego spike essential", volume: 3600, difficulty: 11, note: "EDUCATION SKU AT $597, and the listing served a different ASIN than requested. Same failure as Bee-Bot: a classroom kit against a consumer term." },
+  { slug: "vex-go", term: "vex go", volume: 2900, difficulty: 8, note: "NO AMAZON US LISTING. The best difficulty score in the category and nothing to sell — a search returns a HEXBUG toy. VEX sells GO through the education channel, which its brand SERP confirms. Blocked on a retail listing anywhere." },
+  { slug: "sphero-rvr", term: "sphero rvr", volume: 720, difficulty: 5, note: "THE CANDIDATE IS THE WRONG MACHINE. B0BLF8CLQF is titled 'Sphero RVR+', a different and dearer model at $339. Either the RVR is discontinued and this term should point at the RVR+, or the correct ASIN has not been found. Not settled, so not written." },
+  { slug: "botley-2", term: "botley 2.0", volume: 720, difficulty: 0, note: "Serves a different ASIN than requested — an Activity Set parent listing. Probably resolvable, not resolved." },
+  { slug: "code-and-go-robot-mouse", term: "code and go robot mouse", volume: 590, difficulty: 0, note: "Serves a different ASIN than requested — an Activity Set parent listing. Probably resolvable, not resolved." },
 ]);
 
 /* Grill. One product dominates, so one review matters. */
@@ -1577,6 +1715,7 @@ export const PAGE_PLAN: PagePlan[] = [
   ...COMPANION_REVIEWS,
   ...PETCAM_REVIEWS,
   ENABOT_RANGE,
+  ...CODING_BUILT,
   ...CODING_REVIEWS,
   ...GRILL_REVIEWS,
   ...LAWN_REVIEWS,

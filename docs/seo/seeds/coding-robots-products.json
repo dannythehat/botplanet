@@ -1,0 +1,32 @@
+{
+  "category": "coding-robots-products",
+  "note": "Run 8 August 2026, after the buyability pass cleared five of twelve planned coding reviews. The five primaries are already measured from run 31094454463 — sphero bolt 4,400/KD 32, sphero mini 2,900/KD 15, sphero indi 1,600/KD 1, ozobot evo 1,300/KD 5, makeblock mbot 880/KD 29 — and are not re-bought. What is NOT measured is the modifier tail and, more importantly, whether three Sphero reviews are three pages or one. Sphero sells BOLT, Mini, indi, RVR and SPRK+ under a brand whose own SERP is navigational, and if 'sphero bolt' and 'sphero mini' return the same result set then the one-URL rule says these are sections of a single page rather than separate reviews. That question has to be settled with domains before three pages are written. The SERP budget is spent on the three Sphero terms plus mBot; 'ozobot evo' was bought in the brand run on the same day and is not bought twice.",
+  "researchedOn": "2026-08-08",
+  "leads": ["sphero bolt", "sphero mini", "ozobot evo"],
+  "seeds": [
+    "sphero bolt review",
+    "sphero bolt plus",
+    "sphero bolt vs mini",
+    "sphero bolt python",
+    "sphero mini review",
+    "sphero mini golf",
+    "sphero indi review",
+    "sphero indi at home learning kit",
+    "screen free coding robot",
+    "coding robot for 4 year old",
+    "ozobot evo review",
+    "ozobot evo vs bit",
+    "ozobot color codes",
+    "makeblock mbot review",
+    "mbot2",
+    "mbot ranger",
+    "robot kit you build yourself",
+    "scratch coding robot"
+  ],
+  "serpQueries": [
+    "sphero bolt",
+    "sphero mini",
+    "sphero indi",
+    "makeblock mbot"
+  ]
+}

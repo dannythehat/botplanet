@@ -389,6 +389,48 @@ const COMPANION_ASINS: WindowDestination[] = [
     evidence:
       "Title: 'Miko 3 AI Robot for Kids - Smart Educational & STEAM Learning Robot with Interactive Apps, Games, Stories & Activities for Girls & Boys Ages 5-10 | Red'. Served ASIN equals the one requested; availability reads 'In Stock' at $299 on 8 August 2026. A VARIANT FAMILY, AND THE SECOND ASIN WAS NEARLY RECORDED AS A DUPLICATE: B0GV2L2PDL carries a byte-identical title ending '| Blue', serves its own ASIN, and is also in stock at $299. Two listings for one machine in two colours, not two machines and not a stale row. Red is the one held; the served-ASIN equality check is what stops Blue's data being accepted in its place. Miko also sells a Mini and a Max, and neither name appears anywhere in this listing.",
   },
+  /* EDUCATIONAL AND CODING ROBOTS, 8 August 2026. Five of the twelve planned.
+     The other seven are not here on purpose: five had the wrong ASIN or the
+     wrong product behind them — a $691 six-robot class pack for the Bee-Bot, a
+     $597 education SKU for SPIKE Essential, an RVR+ where the RVR was asked
+     for — and two cannot be bought at all. This category sells to schools as
+     much as to parents, and the failures are all the school side of it.
+     See docs/seo/coding-robots-findings.md. */
+  {
+    productId: "prod-sphero-bolt",
+    asin: "B07DLM5DL7",
+    exactModel: "Sphero BOLT",
+    evidence:
+      "Title: 'Sphero Bolt Coding Robot Ball, Ages 8+ | Beginner to Advanced Programming, Draw, Blocks, Javascript, or Python, Programmable Sensors & LED Matrix'. Served ASIN equals the one requested; $179, In Stock, 8 August 2026. Details give Sub Brand 'BOLT', Age Range Description 'Ages 8+ for elementary, middle and high school', Item Dimensions 2.87 x 2.87 x 2.87 inches, Item Weight 1.1 pounds, Battery Description 'Lithium-Ion Polymer'. Sphero sells BOLT, BOLT+, Mini, indi, RVR and SPRK+ and every one of them matches a bare 'sphero'; the Sub Brand row is what pins this to the BOLT.",
+  },
+  {
+    productId: "prod-sphero-mini",
+    asin: "B072B6QVVW",
+    exactModel: "Sphero Mini (Blue)",
+    evidence:
+      "Details give Sub Brand 'Mini', Colour 'Blue', Item Dimensions 1.57 x 1.57 x 1.57 inches, Item Weight 0.11 kg, Age Range Description '96 months to 1200 months', Battery Description 'Rechargeable battery, 1 hour play'. Served ASIN equals the one requested; $50, In Stock. A VARIANT FAMILY: Sphero sells the Mini in several colours and this ASIN is the Blue. The productTitle element did not render on the read, so identity rests on the details table rather than the title — weaker than the BOLT above and recorded as such.",
+  },
+  {
+    productId: "prod-sphero-indi",
+    asin: "B094X6TV5V",
+    exactModel: "Sphero indi At-Home Learning Kit",
+    evidence:
+      "Title: 'sphero Indi At-Home Learning Kit Screenless Coding Robot | Ages 4+'. Served ASIN equals the one requested; $100, In Stock. Details give Age Range Description '4+', Manufacturer Minimum Age 48 months and Maximum 144 months, Item Weight 0.56 kg, Material Type 'Plastic, Silicone', Colour 'At Home Learning Starter Kit'. THE KIT MATTERS: Sphero also sells indi as a classroom pack, and the colour row is what identifies this as the at-home one.",
+  },
+  {
+    productId: "prod-ozobot-evo",
+    asin: "B0CSR53WXV",
+    exactModel: "Ozobot Evo Entry Kit",
+    evidence:
+      "Title: 'Ozobot Evo Coding Robot Kit | Ages 5-11 | STEM Coding for Kids & Teachers'. Served ASIN equals the one requested; $175, In Stock. Details give Set Name 'Evo Entry Kit', Item Dimensions 8.5 x 6.5 x 1.8 inches, Item Weight 0.44 kg, Educational Objective 'Coding Skills, STEM'. NOTE ON THE AGE FIELD: Amazon's Age Range Description reads 'Toddler', which contradicts the title's 'Ages 5-11' and Ozobot's own rating. The title and the manufacturer age months (up to 1188) are believed over the category label, and the page uses 5-11.",
+  },
+  {
+    productId: "prod-makeblock-mbot",
+    asin: "B00SK5RUQY",
+    exactModel: "Makeblock mBot",
+    evidence:
+      "Title: 'Makeblock mBot STEM Coding Toys Robotics for Kids Ages 8-12 | Learn to Code with Scratch'. Served ASIN equals the one requested; $69, In Stock. Makeblock also sells the mBot2, the mBot Ranger and the mBot Ultimate, and none of those names appears in this title. The productTitle element did not render on the second read, so this rests on the search-result title and the served-ASIN equality rather than a details table.",
+  },
   /* PET CAMERA ROBOTS, 8 August 2026. Read listing by listing rather than by
      search, and the reason is in the third entry below: the discovery script's
      candidate for the EBO SE was B0CGV82XTT, whose title reads "Rocon Ebo SE"
@@ -672,6 +714,11 @@ export const REDIRECT_KEYS: Record<string, string> = {
   "prod-enabot-ebo-air-2": "petcam-enabot-eboair2-amazon",
   "prod-enabot-ebo-se": "petcam-enabot-ebose-amazon",
   "prod-enabot-rola-petpal": "petcam-enabot-rolapetpal-amazon",
+  "prod-sphero-bolt": "code-sphero-bolt-amazon",
+  "prod-sphero-mini": "code-sphero-mini-amazon",
+  "prod-sphero-indi": "code-sphero-indi-amazon",
+  "prod-ozobot-evo": "code-ozobot-evo-amazon",
+  "prod-makeblock-mbot": "code-makeblock-mbot-amazon",
 };
 
 /* ------------------------------------------------------------------ */

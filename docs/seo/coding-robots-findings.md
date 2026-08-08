@@ -126,6 +126,70 @@ and several of these listings are aimed at the procurement query.
 
 ---
 
+## Second run: are three Sphero reviews three pages or one?
+
+`seeds/coding-robots-products.json`, 21 seeds, 4 SERPs, **$0.1596**.
+
+The five clean products include three Spheros, and the one-URL rule had never
+been tested *inside* a brand. If `sphero bolt` and `sphero mini` return the same
+result set they are sections of one page, and writing three would have been the
+exact mistake this process exists to catch.
+
+### They are three pages
+
+| Pair | Shared | After discounting amazon/youtube | Third-party editorial |
+|---|---|---|---|
+| sphero bolt × sphero mini | 4 | 2 (sphero.com, help.sphero.com) | **0** |
+| sphero bolt × sphero indi | 3 | 1 (sphero.com) | **0** |
+| sphero indi × makeblock mbot | 3 | 1 (geyerinstructional.com) | **0** |
+
+Everything surviving the discount is either the manufacturer's own property or a
+classroom supplier. Separate pages, with the evidence recorded.
+
+### The finding that matters more
+
+**Not one independent review site ranks in the top ten for any of the four
+product terms measured.** The slots are sphero.com, edu.sphero.com,
+help.sphero.com, makeblock.com, Amazon, YouTube, and school and library
+suppliers — geyerinstructional, schoolspecialty, gocivilairpatrol, a Lakehead
+University libguide, a Utah state `.gov`. The single real publisher anywhere is
+**theisaacstandard.com at position 14** for mBot.
+
+The brand SERPs had no editorial gap because they are navigational. The
+**product SERPs are nothing but gap.** That is the reverse of the brand ruling
+above, and it is why the reviews are the business in this category.
+
+### The tail
+
+| Term | Vol | KD | Goes to |
+|---|---|---|---|
+| ozobot color codes | 720 | 0 | Ozobot Evo — the codes *are* the programming method |
+| mbot2 | 720 | 0 | Makeblock mBot, as the family question |
+| sphero bolt plus | 480 | 10 | Sphero BOLT, carried not built — no verified ASIN |
+| sphero mini golf | 390 | 0 | **Refused.** $6.17 CPC, highest measured here, and nothing in the SERP settles whether it means a Sphero kit or minigolf |
+| mbot ranger | 320 | 0 | Makeblock mBot |
+| scratch coding robot | 260 | 8 | Makeblock mBot — the only Scratch-native machine in the catalogue |
+| screen free coding robot | 140 | 0 | Sphero indi |
+| coding robot for 4 year old | **0** | — | Nowhere. The obvious phrase for an age page, and nobody searches it |
+
+`sphero bolt` is dominated by the **BOLT+** — three sphero.com results plus a
+help page titled "BOLT vs BOLT+". The review has to handle that or it does not
+match intent.
+
+---
+
+## Built
+
+- `/robots/educational-coding-robots/sphero-bolt/` — `sphero bolt`, 4,400/KD 32
+- `/robots/educational-coding-robots/sphero-mini/` — `sphero mini`, 2,900/KD 15
+- `/robots/educational-coding-robots/sphero-indi/` — `sphero indi`, 1,600/KD 1
+- `/robots/educational-coding-robots/ozobot-evo/` — `ozobot evo`, 1,300/KD 5, plus `ozobot color codes` at 720
+- `/robots/educational-coding-robots/makeblock-mbot/` — `makeblock mbot`, 880/KD 29, plus 1,040 on the family names
+
+About **11,300/month** across the five and their carried terms.
+
+---
+
 ## Seasonality: school year, not Christmas
 
 `vex robotics` peaks in **September at 49,500** and troughs in July at 18,100.

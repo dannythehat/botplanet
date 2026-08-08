@@ -844,6 +844,14 @@ export const PRODUCT_ID: Record<string, string> = {
   "enabot-ebo-air-2": "prod-enabot-ebo-air-2",
   "enabot-ebo-se": "prod-enabot-ebo-se",
   "enabot-rola-petpal": "prod-enabot-rola-petpal",
+
+  /* EDUCATIONAL AND CODING ROBOTS. Added 8 August 2026 — the five of twelve
+     whose listings survived a read. */
+  "sphero-bolt": "prod-sphero-bolt",
+  "sphero-mini": "prod-sphero-mini",
+  "sphero-indi": "prod-sphero-indi",
+  "ozobot-evo": "prod-ozobot-evo",
+  "makeblock-mbot": "prod-makeblock-mbot",
 };
 
 /** Editorial records with the stable productId attached, keyed by slug (route id). */
@@ -976,6 +984,8 @@ const WINDOW_SLUGS = new Set([
   "cop-rose-x5s",
 ]);
 
+const CODING_SLUGS = new Set(["sphero-bolt", "sphero-mini", "sphero-indi", "ozobot-evo", "makeblock-mbot"]);
+
 const PETCAM_SLUGS = new Set(["enabot-ebo-air-2", "enabot-ebo-se", "enabot-rola-petpal"]);
 
 const COMPANION_SLUGS = new Set([
@@ -1001,7 +1011,9 @@ const CATEGORY_OF: Record<string, string> = Object.fromEntries(
         ? "companion-robots"
         : PETCAM_SLUGS.has(slug)
           ? "pet-camera-robots"
-          : "robotic-pool-cleaners",
+          : CODING_SLUGS.has(slug)
+            ? "educational-coding-robots"
+            : "robotic-pool-cleaners",
   ]),
 );
 
