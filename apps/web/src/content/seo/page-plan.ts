@@ -1077,6 +1077,22 @@ const COMPANION_REVIEWS: PagePlan[] = [
     evidence: "1,300/mo at KD 6 and about 1,600 across the cluster. THE SOFTEST SERP IN THE CATEGORY: one real review in the top ten. Also the highest CPCs — 'ropet where to buy' at $10.95 against 'moflin review' at $0.26. Flat seasonality, 880 in July to 1,900 in December, so it is the one companion page with no Christmas deadline.",
   },
   {
+    ...companionReviewShell("joy for all companion pets"),
+    path: "/robots/companion-robots/joy-for-all-companion-pets/",
+    primary: { term: "joy for all companion pets", volume: 880, difficulty: 8 },
+    secondary: [
+      { term: "robotic cat for elderly", volume: 320, difficulty: 0 },
+      { term: "joy for all cat", volume: 260, difficulty: 0 },
+      { term: "companion pet cat", volume: 210, difficulty: 0 },
+    ],
+    ceded: [
+      { term: "robotic pet for elderly", toPath: "/guides/robotic-pets-for-elderly/", why: "The guide owns the eldercare term and this product is its top pick. The review answers one machine; the guide answers the decision, and sending the decision-stage reader to the review would drop them past the comparison they came for." },
+    ],
+    products: ["joy-for-all-companion-pets"],
+    productsNote: "Catalogued as prod-joy-for-all-companion-pets, 8 August 2026. Amazon US B017JQQ00Q at $159, sold by Ageless Innovation LLC, 4.5 stars from 12,307 ratings. Part number B7594 pins this to the Silver with White Mitts; the cat sells in several colourways and there is a dog as well.",
+    evidence: "THE PAGE WAS ALREADY LIVE AND ALREADY SELLING. Published in D1, carrying a working buy button, and the top pick on the eldercare guide \u2014 with no review record, so it rendered from the catalogue fallback with a heading reading \"Cleans\" over a robotic cat. This entry exists because that was found in an image audit rather than by a test.",
+  },
+  {
     ...companionReviewShell("emo robot"),
     path: "/robots/companion-robots/living-ai-emo/",
     /* BUILT 8 August 2026, sixth and last in the category. */

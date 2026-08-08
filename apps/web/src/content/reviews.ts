@@ -3409,6 +3409,68 @@ export const REVIEWS: Record<string, ReviewContent> = {
     lastReviewed: "2026-08-08",
   },
 
+
+  /* JOY FOR ALL, added 8 August 2026. This product was LIVE, PUBLISHED, CARRYING
+     A WORKING BUY BUTTON and recommended as the top pick on the eldercare guide
+     — with no review record at all. The page rendered from the catalogue
+     fallback, which meant a robotic cat with a heading reading "Cleans" and no
+     prose beneath it. Found by auditing image coverage, not by a test, because
+     every test here checks that a review is correct rather than that one
+     exists. */
+  "joy-for-all-companion-pets": {
+    slug: "joy-for-all-companion-pets",
+    categorySlug: "companion-robots",
+    eyebrow: "Companion robot review",
+    title: "Joy For All Companion Pet Cat review",
+    seoTitle: "Joy For All Companion Pet Cat Review — Batteries, Not Wi-Fi",
+    metaDescription:
+      "A $159 robotic cat with four C batteries, no app and no account. Why the least technological product here is the one most likely to get used.",
+    verdict:
+      "The least technological thing on this site and the one most likely to be used every day by the person it was bought for. No app, no account, no dock — four C batteries and a purr you feel through the fur. Designed for one reader and honest about it.",
+    bestFor:
+      "An older person, especially one living with memory loss, and the relative buying from a distance who will not be there to fix anything.",
+    notIdealFor:
+      "Anyone who would find a pretend cat patronising — a real reaction worth asking about first — and anyone expecting conversation or a personality that develops.",
+    facts: [
+      { label: "Power", value: "4 x C batteries, included" },
+      { label: "App", value: "None" },
+      { label: "Weight", value: "1 kg" },
+      { label: "Amazon rating", value: "4.5 from 12,307" },
+    ],
+    specGroups: [
+      {
+        heading: "What it does",
+        rows: [
+          { label: "Responds to", value: "Touch and movement" },
+          { label: "Movement", value: "Head and paw" },
+          { label: "Sound", value: "Meows, and a purr you feel rather than hear" },
+          { label: "Learning", value: "None \u2014 it responds the same way every time, deliberately" },
+        ],
+      },
+      {
+        heading: "Physical",
+        rows: [
+          { label: "Dimensions", value: "15.24 x 9.02 x 10.12 in" },
+          { label: "Weight", value: "1 kg" },
+          { label: "Material", value: "Synthetic fur over plastic" },
+          { label: "Batteries", value: "4 x 1.5V C alkaline, included" },
+        ],
+      },
+      {
+        heading: "What it does not have",
+        rows: [
+          { label: "App", value: "None" },
+          { label: "Account or Wi-Fi", value: "None" },
+          { label: "Subscription", value: "None, so nothing can be withdrawn later" },
+          { label: "Charging dock", value: "None \u2014 batteries are the design decision" },
+        ],
+      },
+    ],
+    skuNote:
+      "Read from the Amazon listing B017JQQ00Q on 8 August 2026, sold by Ageless Innovation LLC at $159. A VARIANT FAMILY: the cat is sold in several colourways and there is a dog as well, so Manufacturer Part Number 'B7594' and Included Components 'Silver Cat' are what pin this to the Silver with White Mitts.",
+    lastReviewed: "2026-08-08",
+  },
+
 };
 
 export function reviewFor(slug: string | undefined): ReviewContent | undefined {
