@@ -5,6 +5,7 @@ import { CATEGORY_ANCHORS, anchorsFor, liveAnchorsFor } from "../src/content/int
 import { REVIEWS } from "../src/content/reviews";
 import { ROUTES } from "../src/content/routes";
 import { productEditorial, catalogueStatusOf, PRODUCT_ID } from "../src/content/products";
+import { EDITORIAL } from "../src/content/editorial";
 
 const POOL = anchorsFor("robotic-pool-cleaners");
 
@@ -96,13 +97,24 @@ describe("the anchor plan itself", () => {
     return Boolean(productId && catalogueStatusOf(productId) === "active");
   };
 
+  /**
+   * Not every page under /robots/<category>/ is a product.
+   *
+   * The Enabot range page lives at /robots/pet-camera-robots/enabot/ because
+   * that is where a reader searching the brand expects it, and it is editorial
+   * — no catalogue row, no buy button, 9,900/mo. Both checks below read a path
+   * in that shape as a product slug and refused the first anchor pointing at
+   * it, which is the right instinct and the wrong answer.
+   */
+  const editorialPath = (path: string) => Boolean(EDITORIAL[path]);
+
   it("points every live anchor at a path the route registry knows", () => {
     const known = new Set(ROUTES.map((r) => r.path));
     for (const [cat, list] of Object.entries(CATEGORY_ANCHORS)) {
       for (const a of list.filter((x) => x.status === "live")) {
         const path = a.href.split("#")[0];
         const slug = productSlug(path);
-        const ok = slug ? activeProduct(slug) : known.has(path);
+        const ok = editorialPath(path) || (slug ? activeProduct(slug) : known.has(path));
         expect(ok, `${cat}: ${a.anchor} → ${path}`).toBe(true);
       }
     }
@@ -114,6 +126,7 @@ describe("the anchor plan itself", () => {
       for (const a of list.filter((x) => x.status === "live")) {
         const path = a.href.split("#")[0];
         const slug = productSlug(path);
+        if (editorialPath(path)) continue;
         if (slug) {
           /* A withdrawn product keeps its record and loses its page, so an
              anchor pointing at one would be a live link to a redirect. */

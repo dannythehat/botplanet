@@ -62,6 +62,12 @@ and the talking without the treats.
 has **no treat dispenser**. The dispenser is the only reason to pay $179, so
 check the model name before ordering.
 
+## Where this sits in the range
+
+This is the only Enabot with a treat dispenser and the largest of the seven the
+company sells. The Enabot range page covers the rest, including the ROLA Mini
+that shares this one's name and does not share its dispenser.
+
 ## What we cannot tell you
 
 **What the Interactive Module costs or does.** Sold separately and not priced

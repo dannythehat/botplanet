@@ -61,6 +61,12 @@ not Enabot.
 Check the seller reads **Enabot Official Store** before you order. Our buy
 button points at the Enabot listing.
 
+## Where this sits in the range
+
+The SE is the cheapest and smallest of seven machines Enabot sells. The Enabot
+range page puts all of them in order with what each one adds, which is the
+faster way to check you are not buying the wrong end of the line.
+
 ## What we cannot tell you
 
 **Battery runtime.** 2,500 mAh published, no duration anywhere we could read.

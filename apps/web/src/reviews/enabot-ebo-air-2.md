@@ -86,6 +86,13 @@ paying $210 for resolution and a chatbot.
 on a schedule, and a robot you have to open an app to use gets used less than
 you imagine.
 
+## Where this sits in the range
+
+Enabot sells seven machines and three of them are on this site. If you are not
+yet sure the Air 2 is the one, the Enabot range page sets all seven side by
+side and says which to buy — it is the shorter route than reading three
+reviews.
+
 ## What we cannot tell you
 
 **Battery runtime.** Enabot publishes the capacity — 2,500 mAh — and no

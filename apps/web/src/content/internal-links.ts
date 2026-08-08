@@ -59,6 +59,38 @@ export interface InternalAnchor {
    checks the anchors that DO exist resolve; it cannot check for absence. */
 export const CATEGORY_ANCHORS: Record<string, InternalAnchor[]> = {
   "educational-coding-robots": [
+    /* Product anchors \u2014 see the note on companion-robots above. */
+    {
+      anchor: "Sphero BOLT",
+      href: "/robots/educational-coding-robots/sphero-bolt/",
+      why: "The machine every other coding review points at for text programming. Also catches 'Sphero BOLT+', which this review is the one that covers.",
+      status: "live",
+    },
+    {
+      anchor: "Sphero Mini",
+      href: "/robots/educational-coding-robots/sphero-mini/",
+      why: "The cheap-way-to-find-out argument, which the BOLT review makes and could not link.",
+      status: "live",
+    },
+    {
+      anchor: "Sphero indi",
+      href: "/robots/educational-coding-robots/sphero-indi/",
+      why: "The screen-free answer, named by every review that rules itself out for under-eights.",
+      status: "live",
+    },
+    {
+      anchor: "Ozobot Evo",
+      href: "/robots/educational-coding-robots/ozobot-evo/",
+      why: "The lesson-library machine, and the comparison the mBot review draws on price.",
+      status: "live",
+    },
+    {
+      anchor: "Makeblock mBot",
+      href: "/robots/educational-coding-robots/makeblock-mbot/",
+      why: "Anchored on the full name rather than bare 'mBot' so it cannot be confused with the mBot2 in a reader's mind, though both land here.",
+      status: "live",
+    },
+
     {
       anchor: "screen-free",
       href: "/robots/educational-coding-robots/#screen-or-app",
@@ -317,6 +349,62 @@ export const CATEGORY_ANCHORS: Record<string, InternalAnchor[]> = {
      to watch their dog has arrived in the wrong place, and the fastest honest
      fix is a link rather than a paragraph explaining the SERP evidence. */
   "companion-robots": [
+    /* PRODUCT ANCHORS, added 8 August 2026 after a crawl of all 81 live pages built the real inbound-link graph. Pool declares 14 product anchors and its flagship review has FIFTEEN inbound links; window declares 11 and its flagship has nine. Every category without product anchors had exactly TWO inbound links per review \u2014 its hub and its comparison table \u2014 and no review linked to a sibling. The prose already names siblings constantly; nothing here required a word of it to be rewritten. One anchor per product, shortest unambiguous form: where a longer variant exists (BOLT+, Air 2 Plus, mBot Ranger) the review being linked is the one that covers it, so a match inside the longer name lands on the right page rather than the wrong one. */
+    {
+      anchor: "Moflin",
+      href: "/robots/companion-robots/moflin/",
+      why: "The only robot here that develops over weeks, and the comparison every other companion review reaches for. Sixteen mentions across seven pages linked nowhere before this.",
+      status: "live",
+    },
+    {
+      anchor: "Miko 3",
+      href: "/robots/companion-robots/miko-3/",
+      why: "The child-facing machine in the category, and the one a reader comparing on age needs to reach.",
+      status: "live",
+    },
+    {
+      anchor: "Vector 2.0",
+      href: "/robots/companion-robots/vector-2/",
+      why: "Named rather than bare 'Vector', which is an ordinary English word and would link things that are not this robot.",
+      status: "live",
+    },
+    {
+      anchor: "Eilik",
+      href: "/robots/companion-robots/eilik/",
+      why: "The desk robot the EMO review cedes its term to, so the phrase should carry the reader there.",
+      status: "live",
+    },
+    {
+      anchor: "Loona",
+      href: "/robots/companion-robots/loona/",
+      why: "The most expensive machine in the category and the one the price argument on every other page is measured against.",
+      status: "live",
+    },
+    {
+      anchor: "Ropet",
+      href: "/robots/companion-robots/ropet/",
+      why: "The washable-fur machine, which is the answer whenever another review raises allergies.",
+      status: "live",
+    },
+    {
+      anchor: "Joy For All",
+      href: "/robots/companion-robots/joy-for-all-companion-pets/",
+      why: "The eldercare pick. Its guide names it repeatedly and, until this, none of those mentions was a link.",
+      status: "live",
+    },
+    {
+      /* PLANNED, not live, and the anchor test is what caught it. EMO has no
+         offer, so living-ai-emo is deliberately absent from PRODUCT_ID and the
+         registry refuses to send a live anchor at a page with nothing to sell.
+         The page itself is live and targets 18,100/mo as the segment's
+         comparison anchor; the moment EMO has a buy button this becomes one
+         line. */
+      anchor: "EMO",
+      href: "/robots/companion-robots/living-ai-emo/",
+      why: "Google's comparison anchor for the whole desktop segment. Planned rather than live because the product has no offer behind it, and an anchor pointing at a page that cannot sell is a link the registry will not make.",
+      status: "planned",
+    },
+
     {
       anchor: "pet camera robot",
       href: "/robots/pet-camera-robots/",
@@ -380,6 +468,43 @@ export const CATEGORY_ANCHORS: Record<string, InternalAnchor[]> = {
   ],
 
   "pet-camera-robots": [
+    /* Product anchors \u2014 see the note on companion-robots above. */
+    {
+      anchor: "EBO Air 2",
+      href: "/robots/pet-camera-robots/enabot-ebo-air-2/",
+      why: "Twenty mentions across three pages linked nowhere. Also catches 'EBO Air 2 Plus' and the discontinued 'EBO Air', both of which this review carries.",
+      status: "live",
+    },
+    {
+      /* Below "EBO Air 2" on purpose. That anchor consumes the first full
+         mention; this one catches the bare "the Air 2" the reviews use
+         thereafter. It also matches inside "Air 2 Plus", which is correct —
+         the Air 2 review is the page that covers the Plus. "Air 2S" is
+         blocked by the word boundary, since S is a word character. */
+      anchor: "Air 2",
+      href: "/robots/pet-camera-robots/enabot-ebo-air-2/",
+      why: "The form the prose actually uses after the first mention. Twenty mentions of this machine across three pages linked nowhere before the crawl found it.",
+      status: "live",
+    },
+    {
+      anchor: "EBO SE",
+      href: "/robots/pet-camera-robots/enabot-ebo-se/",
+      why: "The under-furniture machine, which is the size comparison the other two reviews keep making.",
+      status: "live",
+    },
+    {
+      anchor: "ROLA PetPal",
+      href: "/robots/pet-camera-robots/enabot-rola-petpal/",
+      why: "The treat-dispenser machine. 'ROLA Mini' is deliberately NOT anchored: it is a different model we do not hold.",
+      status: "live",
+    },
+    {
+      anchor: "Enabot range",
+      href: "/robots/pet-camera-robots/enabot/",
+      why: "THE PAGE HAD ZERO INBOUND LINKS. 9,900/mo, the largest single term in the category, and nothing on the site pointed at it. Each single-model review now routes to it in its own words.",
+      status: "live",
+    },
+
     {
       anchor: "robot pet",
       href: "/robots/companion-robots/",
