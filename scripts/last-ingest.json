@@ -1,90 +1,354 @@
 [
   {
-    "to": "/media/editorial/best-robotic-pool-cleaners.webp",
-    "checksum": "sha256:66bb0120fe367561c6cd13b428450ad410e77998fc9c46b99d9fbc2c2d294ef1",
+    "to": "/media/hubs/vacuums/hero.webp",
+    "checksum": "sha256:84bf605be5db42f2e8bef4646f78cbabb421b81fc56c44621e3ddb44d7d0dec2",
+    "width": 1672,
+    "height": 941,
+    "bytes": 92448,
+    "saved": 1609256
+  },
+  {
+    "to": "/media/hubs/vacuums/card-hard-floor.webp",
+    "checksum": "sha256:4e4cb309259c86eb6e36f3497e27e3096d9ed7c586fbe15186c51aa6b71b367d",
     "width": 1536,
     "height": 1024,
-    "bytes": 231382,
-    "saved": 1886097
+    "bytes": 175372,
+    "saved": 2171144
   },
   {
-    "to": "/media/editorial/best-cordless-pool-cleaners.webp",
-    "checksum": "sha256:333edf0e824763633cd5d68b72603e5f4253c2e8df84ec717828e8dbf1126f23",
-    "width": 1672,
-    "height": 941,
-    "bytes": 195886,
-    "saved": 1854125
+    "to": "/media/hubs/vacuums/card-mixed.webp",
+    "checksum": "sha256:8c567d1cc4b492ea87981eb1c5af23c0be6a9e25728b68a4b0aa0efe2ed513ad",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 243278,
+    "saved": 2376523
   },
   {
-    "to": "/media/editorial/above-ground-pool-cleaners.webp",
-    "checksum": "sha256:41bc95085631de1fc836e13c19bf11989e1edb562c470e6e23d773c945b30ce1",
-    "width": 1672,
-    "height": 941,
-    "bytes": 261458,
-    "saved": 2063846
+    "to": "/media/hubs/vacuums/card-shag.webp",
+    "checksum": "sha256:9065da95d0119000816ae49418e3274de86a2261734e95131f26fb6e3771ecb7",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 351072,
+    "saved": 2649429
   },
   {
-    "to": "/media/editorial/pool-cleaner-comparison.webp",
-    "checksum": "sha256:f70e68e4f4d2ff2803ac986a6dbeb994adcc43c519397fbfb475f8a2d93b29b0",
-    "width": 1672,
-    "height": 941,
-    "bytes": 190578,
-    "saved": 1814659
+    "to": "/media/hubs/vacuums/row-crumbs.webp",
+    "checksum": "sha256:be68b1dfcc17abef8ec30e43ce4f9d0d5b8152b491633fb892657213b69774f7",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 183400,
+    "saved": 2106968
   },
   {
-    "to": "/media/editorial/are-pool-cleaners-worth-it.webp",
-    "checksum": "sha256:8bd3033072c7d71a19e7afca42665528c788b80191467924f6d93383e1abe8d6",
-    "width": 1672,
-    "height": 941,
-    "bytes": 116178,
-    "saved": 1654335
+    "to": "/media/hubs/vacuums/row-dock.webp",
+    "checksum": "sha256:2a1d721a68387900f67dd8ce5a071a6bd0ea0721d5b0e0a3a56344093d07ea19",
+    "width": 1448,
+    "height": 1086,
+    "bytes": 110142,
+    "saved": 1763554
   },
   {
-    "to": "/media/editorial/wire-free-mowers.webp",
-    "checksum": "sha256:02521697030d9e7884e93d8932252bf173dca70ba623d230184e948712abd401",
-    "width": 1672,
-    "height": 941,
-    "bytes": 285662,
-    "saved": 2059635
+    "to": "/media/hubs/vacuums/row-corner.webp",
+    "checksum": "sha256:ca5ee52783f77eb574d8e771a94e21855ae805d523753f3d654c7294f5de10f4",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 167896,
+    "saved": 2195210
   },
   {
-    "to": "/media/editorial/cheap-mowers.webp",
-    "checksum": "sha256:8bcc7f67ac56c9e10e7e2fed14524d77f4cd2f50f38214697d396d0f3f872578",
-    "width": 1672,
-    "height": 941,
-    "bytes": 286220,
-    "saved": 2120624
+    "to": "/media/hubs/vacuums/lead-mopped.webp",
+    "checksum": "sha256:6277db13c0a6d6d62601cd0a8683155d3e1e9edde18b999f3e6d52ee6c32db3b",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 139378,
+    "saved": 2019429
   },
   {
-    "to": "/media/editorial/mowers-for-hills.webp",
-    "checksum": "sha256:b066ccca07dee9b3969bc64b881781702713a4dd2f1ccef50fa8b5088faeabe4",
+    "to": "/media/hubs/lawn/hero.webp",
+    "checksum": "sha256:d1efb0977f4aa6b61cae090af9498b38f2554d24074ec583433352be5dc95c2e",
     "width": 1672,
     "height": 941,
-    "bytes": 332268,
-    "saved": 2179856
+    "bytes": 229014,
+    "saved": 1896705
   },
   {
-    "to": "/media/editorial/robotic-pets-for-elderly.webp",
-    "checksum": "sha256:6d628e8b65a6cf95487e30c793548f18ab1c9c7fbe9a33eb64668b89eba5d9dd",
-    "width": 1672,
-    "height": 941,
-    "bytes": 151990,
-    "saved": 1820275
+    "to": "/media/hubs/lawn/card-small.webp",
+    "checksum": "sha256:056fff22b1d9e120531499b441f2f3fe9993f2a32977a2fae286e55f8923ed8c",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 466076,
+    "saved": 2730136
   },
   {
-    "to": "/media/editorial/best-window-robots.webp",
-    "checksum": "sha256:15fe6fec178252181eb0391d07faf2f5f9a6708c1938784f2408a0a0be81ad41",
-    "width": 1672,
-    "height": 941,
-    "bytes": 131738,
-    "saved": 1725327
+    "to": "/media/hubs/lawn/card-medium.webp",
+    "checksum": "sha256:aea843b3b889c15ce268b697a694fb443e5ed7801106df4e76a96d9a219f48fb",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 646480,
+    "saved": 2975837
   },
   {
-    "to": "/media/editorial/do-window-robots-work.webp",
-    "checksum": "sha256:f11f917bd012ab9e0f2fb552b8d6d7e0407a3a7c56259101aa36c63973e5223f",
+    "to": "/media/hubs/lawn/card-large.webp",
+    "checksum": "sha256:ca09c1dab76e3183dbcdde8ce76ba9df48969ea2f7dcbea755f6d1ec9a41d026",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 459028,
+    "saved": 2604650
+  },
+  {
+    "to": "/media/hubs/lawn/row-cut.webp",
+    "checksum": "sha256:4700e6adddda55df7e5c63213dcdb237e406050d46dd3f3d7eaf5e837593c29d",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 304944,
+    "saved": 2264156
+  },
+  {
+    "to": "/media/hubs/lawn/row-dew.webp",
+    "checksum": "sha256:707db6f41345b9a3a4143349006d1de65add37c21b08f873fcdf5c1bbf779cb6",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 371292,
+    "saved": 2445447
+  },
+  {
+    "to": "/media/hubs/lawn/row-border.webp",
+    "checksum": "sha256:9267c5b81d69bf5032374b29ce760a2a8d6cc94fdec15b600489595e3dadde82",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 452416,
+    "saved": 2596417
+  },
+  {
+    "to": "/media/hubs/litter/hero.webp",
+    "checksum": "sha256:4a2230abd057a2bad20a0a8b171b9e8d0a810be96bedb9f496bc14b020956bf3",
     "width": 1672,
     "height": 941,
-    "bytes": 179898,
-    "saved": 1838966
+    "bytes": 119874,
+    "saved": 1715940
+  },
+  {
+    "to": "/media/hubs/litter/card-average.webp",
+    "checksum": "sha256:c6c8eafc5e52224f83fce8dc1984bbe1fdd3ea5a1b6abdf0cc75b0f2e0cca778",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 273902,
+    "saved": 2388806
+  },
+  {
+    "to": "/media/hubs/litter/card-large.webp",
+    "checksum": "sha256:2bdf646dbc7084025ae5eb201bbfc3d150bea644ac1698bbc774ac36c740ecff",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 214784,
+    "saved": 2259444
+  },
+  {
+    "to": "/media/hubs/litter/card-kitten.webp",
+    "checksum": "sha256:9e9121acb61ecab44726f16583e7c95805e29444f8cb8daec6cede05cc3d3247",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 113472,
+    "saved": 1979994
+  },
+  {
+    "to": "/media/hubs/litter/row-scoop.webp",
+    "checksum": "sha256:cc1302ac540be07b912e1665f700f17df351b334e1de15e3dfc1bc48d8ec1872",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 124952,
+    "saved": 2051546
+  },
+  {
+    "to": "/media/hubs/litter/row-two-cats.webp",
+    "checksum": "sha256:d87976829a0c5085c3ffff6a1da0b1ee8ad934c08d12e64d271b95e0af90d7c5",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 127056,
+    "saved": 1986085
+  },
+  {
+    "to": "/media/hubs/litter/row-stretch.webp",
+    "checksum": "sha256:3e693b7b31e293263d31e765ad3f275621d8199ed7a3b034a3df931603f6e696",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 148488,
+    "saved": 2076859
+  },
+  {
+    "to": "/media/hubs/litter/lead-drawer.webp",
+    "checksum": "sha256:1f2a9bd71ced177bae0a27bce6140919f5e022db6502cc36126b8799ca2c3f75",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 118870,
+    "saved": 2014900
+  },
+  {
+    "to": "/media/hubs/companion/hero.webp",
+    "checksum": "sha256:fc6fbaadbf49846fa91cd5abac1d4d3a0348c04573e881de89a677cb29a58fd1",
+    "width": 1672,
+    "height": 941,
+    "bytes": 60274,
+    "saved": 1321296
+  },
+  {
+    "to": "/media/hubs/companion/card-desk.webp",
+    "checksum": "sha256:ec3aefc36e568a33d17a90e98cba3c265254e7d53c0c3c4f638b818d034cf2c1",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 83702,
+    "saved": 1734570
+  },
+  {
+    "to": "/media/hubs/companion/card-child.webp",
+    "checksum": "sha256:c407aae4bd0db6fa618ef044690896d70682996d279277a78cd29d13f0016e58",
+    "width": 1672,
+    "height": 941,
+    "bytes": 102184,
+    "saved": 1559626
+  },
+  {
+    "to": "/media/hubs/companion/card-older.webp",
+    "checksum": "sha256:e15a6b6d51834591154a3b1b93a300c60fa5cf8ee64ec05a792d00d2c7391e29",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 154184,
+    "saved": 1944849
+  },
+  {
+    "to": "/media/hubs/companion/row-alone.webp",
+    "checksum": "sha256:8b93f22bc9e31d44eb2d41d9b8d048f63b9b7b6a7521fe544e1af2350b3a2d7d",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 72292,
+    "saved": 1765287
+  },
+  {
+    "to": "/media/hubs/companion/row-shelf.webp",
+    "checksum": "sha256:375aef9809cfa9335e10656f0e7a683eba42507818e11d204b1eaeb4b5d0afde",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 120076,
+    "saved": 1823714
+  },
+  {
+    "to": "/media/hubs/companion/row-speech.webp",
+    "checksum": "sha256:184a0909f24e08843ed6336ef4331ddd30bdf0dd1bda561d468acaab0984ae46",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 92084,
+    "saved": 1865512
+  },
+  {
+    "to": "/media/hubs/companion/lead-lap.webp",
+    "checksum": "sha256:812b6d4e508ccaf457f7d0099edb1f50d9a8af73890f5a036526001b9f21823c",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 182696,
+    "saved": 2115091
+  },
+  {
+    "to": "/media/hubs/coding/hero.webp",
+    "checksum": "sha256:5d54464c6922db0dd044148ac7a1263dd4c8f367bf62c4dd49e477cb65451f4d",
+    "width": 1672,
+    "height": 941,
+    "bytes": 80156,
+    "saved": 1562373
+  },
+  {
+    "to": "/media/hubs/coding/card-young.webp",
+    "checksum": "sha256:25db6fea688aa3bec2b98e1c70953564f3b4a0cdb0940ea60ddfb3d8d2e6dd11",
+    "width": 1448,
+    "height": 1086,
+    "bytes": 114356,
+    "saved": 1637449
+  },
+  {
+    "to": "/media/hubs/coding/card-middle.webp",
+    "checksum": "sha256:f21dbf9f7d44e7040fb7a3e8ffa36ef1e03cd6eecb5df967e4f3b033b472bc43",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 116964,
+    "saved": 1900719
+  },
+  {
+    "to": "/media/hubs/coding/card-teen.webp",
+    "checksum": "sha256:b7a0968c06943186b548cea78399d3726ec3d8882f76c91416d2c07706171b6b",
+    "width": 1448,
+    "height": 1086,
+    "bytes": 208828,
+    "saved": 2051931
+  },
+  {
+    "to": "/media/hubs/coding/row-code.webp",
+    "checksum": "sha256:758f0719b9ddd292d88860ca55f205f1648181471f0817624e0dfabf78c15dc5",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 145264,
+    "saved": 1863771
+  },
+  {
+    "to": "/media/hubs/coding/row-shelf.webp",
+    "checksum": "sha256:b516dc5729ab81317a7ad6f131211de641061751a237ea853507697d44f827e9",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 158354,
+    "saved": 1989255
+  },
+  {
+    "to": "/media/hubs/coding/row-button.webp",
+    "checksum": "sha256:68202ef7150e274311cf61610640b36f9ca621fc421304585564c104f925f7f3",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 101032,
+    "saved": 1880396
+  },
+  {
+    "to": "/media/hubs/coding/lead-track.webp",
+    "checksum": "sha256:e1ea4f7da369b7f8dd8384daa4be3d0360af3a7c190c7abd71eb139f143a2337",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 95924,
+    "saved": 1839991
+  },
+  {
+    "to": "/media/hubs/grill/hero.webp",
+    "checksum": "sha256:b3cd4f982a91e4a1d00980c64a4cee7ffe50de6f4202591bddb8f4df57ace073",
+    "width": 1672,
+    "height": 941,
+    "bytes": 129852,
+    "saved": 1670007
+  },
+  {
+    "to": "/media/hubs/grill/card-porcelain.webp",
+    "checksum": "sha256:8b44fcf5d2422d11bba747663135aec8889f57f655d5eb16f889cffe6545ed52",
+    "width": 1448,
+    "height": 1086,
+    "bytes": 103966,
+    "saved": 1917296
+  },
+  {
+    "to": "/media/hubs/grill/card-cast-iron.webp",
+    "checksum": "sha256:23c23d60b8757052de463289d7398aa0e10aaa16a7f48d3c4f6a0b2803a2f683",
+    "width": 1448,
+    "height": 1086,
+    "bytes": 166046,
+    "saved": 1984677
+  },
+  {
+    "to": "/media/hubs/grill/card-stainless.webp",
+    "checksum": "sha256:599df3b01cc9157cf031a3034d9fcadbf377509c8052c42d565967e46eb0ad71",
+    "width": 1448,
+    "height": 1086,
+    "bytes": 205460,
+    "saved": 2128938
+  },
+  {
+    "to": "/media/hubs/grill/lead-clean-bars.webp",
+    "checksum": "sha256:2cadc5b89f166a047c10ed3da949e5fc5259f643240fd67514abc8d5c1afae35",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 251350,
+    "saved": 2550007
   }
 ]

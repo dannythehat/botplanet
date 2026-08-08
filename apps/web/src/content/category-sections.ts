@@ -70,6 +70,11 @@ export const DECISION_SECTION: Record<string, DecisionSectionContent> = {
           "The sequence is the lesson at this age. Press four arrows, watch it drive the route, work out why it went wrong. That is programming.",
           "Cheapest tier in the category by a distance, and the one most likely to be shared with a sibling.",
         ],
+        image: {
+          src: "/media/hubs/coding/card-young.webp",
+          alt:
+            "A chunky button-driven toy robot on a table with big directional controls and a set of arrow cards.",
+        },
       },
       {
         title: "Eight to twelve",
@@ -79,6 +84,11 @@ export const DECISION_SECTION: Record<string, DecisionSectionContent> = {
           "Look for something that grows: a robot that starts with blocks and later accepts typed code buys years rather than months.",
           "Building becomes part of the appeal here. A kit assembled from parts holds attention longer than a finished robot does.",
         ],
+        image: {
+          src: "/media/hubs/coding/card-middle.webp",
+          alt:
+            "A child pressing the top of a small coding robot beside a set of arrow cards, a printed track and two coding books.",
+        },
       },
       {
         title: "Thirteen and up",
@@ -88,6 +98,11 @@ export const DECISION_SECTION: Record<string, DecisionSectionContent> = {
           "This is where the competition kits live, and where a school or club is often the reason for the purchase rather than the child.",
           "Also where the price steps up hard, and where a general-purpose robotics kit beats anything sold as a children's toy.",
         ],
+        image: {
+          src: "/media/hubs/coding/card-teen.webp",
+          alt:
+            "An exposed circuit-board robot kit with jumper wires being assembled at a desk beside a breadboard and laptop.",
+        },
       },
     ],
   },
@@ -117,6 +132,11 @@ export const DECISION_SECTION: Record<string, DecisionSectionContent> = {
           "Mop pressure and how often the base rinses the pads matter more than suction here.",
           "Suction figures are the most oversold number in the category. On hard floors almost anything modern is enough.",
         ],
+        image: {
+          src: "/media/hubs/vacuums/card-hard-floor.webp",
+          alt:
+            "A wide expanse of pale oak flooring running to garden doors, no rug anywhere in the room.",
+        },
       },
       {
         title: "A mix of hard floor and carpet",
@@ -126,6 +146,11 @@ export const DECISION_SECTION: Record<string, DecisionSectionContent> = {
           "A low lift clears a thin rug and not much else. Deep pile needs the machine to lift high or avoid carpet entirely.",
           "Check it can identify carpet at all — the ones that cannot will mop your rug on a schedule.",
         ],
+        image: {
+          src: "/media/hubs/vacuums/card-mixed.webp",
+          alt:
+            "The boundary where oak flooring meets a large flat-weave rug, both surfaces in frame.",
+        },
       },
       {
         title: "Deep or shag pile throughout",
@@ -135,6 +160,11 @@ export const DECISION_SECTION: Record<string, DecisionSectionContent> = {
           "Consider a vacuum-only machine. Removing the mop removes the problem and usually the price premium with it.",
           "Deep pile also eats battery, so a robot rated for your square footage on tile will not reach it on carpet.",
         ],
+        image: {
+          src: "/media/hubs/vacuums/card-shag.webp",
+          alt:
+            "Deep cream shag pile close up, the fibres catching low sunlight.",
+        },
       },
     ],
   },
@@ -162,6 +192,11 @@ export const DECISION_SECTION: Record<string, DecisionSectionContent> = {
           "Nylon also means working on a warm grill rather than a hot one — the bristles soften and deform in real heat.",
           "If you cannot tell what your grates are, assume porcelain. It is the commonest and the least forgiving.",
         ],
+        image: {
+          src: "/media/hubs/grill/card-porcelain.webp",
+          alt:
+            "Porcelain-coated grill grates close up, the enamel glossy and dark.",
+        },
       },
       {
         title: "Bare cast iron",
@@ -171,6 +206,11 @@ export const DECISION_SECTION: Record<string, DecisionSectionContent> = {
           "Cast iron wants a light oil after cleaning, and no robot does that part. Budget two minutes by hand.",
           "This is where an automatic grill cleaner earns most — baked-on cast iron is the job people put off.",
         ],
+        image: {
+          src: "/media/hubs/grill/card-cast-iron.webp",
+          alt:
+            "Bare cast iron grill grates close up, matte black and seasoned.",
+        },
       },
       {
         title: "Stainless steel bars",
@@ -180,6 +220,11 @@ export const DECISION_SECTION: Record<string, DecisionSectionContent> = {
           "Stainless scratches visibly even when nothing is harmed, so expect the finish to dull with use.",
           "Griddle tops are a different problem: they are flat, and these machines are built to sit on bars.",
         ],
+        image: {
+          src: "/media/hubs/grill/card-stainless.webp",
+          alt:
+            "Stainless steel grill bars close up, bright and reflective.",
+        },
       },
     ],
   },
@@ -210,6 +255,11 @@ export const DECISION_SECTION: Record<string, DecisionSectionContent> = {
           "Judge on drawer capacity, odour sealing and running cost instead, because fit is not the constraint.",
           "This is also where the cheapest machines stop being a compromise and start being a sensible buy.",
         ],
+        image: {
+          src: "/media/hubs/litter/card-average.webp",
+          alt:
+            "An average adult tabby standing side on beside a self-cleaning litter box.",
+        },
       },
       {
         title: "A large or long cat",
@@ -219,6 +269,11 @@ export const DECISION_SECTION: Record<string, DecisionSectionContent> = {
           "Look for the internal dimensions rather than the external footprint. Manufacturers publish the second far more readily.",
           "Globe-style boxes are the usual problem: the opening is round, and a long cat has to duck.",
         ],
+        image: {
+          src: "/media/hubs/litter/card-large.webp",
+          alt:
+            "A large long-bodied Maine Coon type cat standing side on against a plain wall for scale.",
+        },
       },
       {
         title: "A kitten, or a very small cat",
@@ -228,6 +283,11 @@ export const DECISION_SECTION: Record<string, DecisionSectionContent> = {
           "Manufacturers commonly state a minimum age or weight before use. Where they do, we quote it; where they will not, we say so.",
           "A plain open tray until the kitten is grown is the right answer more often than a cheaper automatic box is.",
         ],
+        image: {
+          src: "/media/hubs/litter/card-kitten.webp",
+          alt:
+            "A small tabby kitten sitting alone on a wide floor, tiny against the door frame beside it.",
+        },
       },
     ],
   },
@@ -260,6 +320,11 @@ export const DECISION_SECTION: Record<string, DecisionSectionContent> = {
           "Conversation quality is what you are paying for, and it is the thing most likely to disappoint after a fortnight.",
           "Check the subscription before the price. Several of the best-known machines need one to keep talking.",
         ],
+        image: {
+          src: "/media/hubs/companion/card-desk.webp",
+          alt:
+            "A companion robot beside the keyboard on an adult's home desk, a monitor and lamp behind.",
+        },
       },
       {
         title: "For a child",
@@ -269,6 +334,11 @@ export const DECISION_SECTION: Record<string, DecisionSectionContent> = {
           "Almost all of them are subscription products, and the subscription is where the educational content lives.",
           "Read the safety reporting. Google's own results for children's AI robots include a national news investigation into what these toys will say.",
         ],
+        image: {
+          src: "/media/hubs/companion/card-child.webp",
+          alt:
+            "A companion robot on a child's bedroom rug at child height, wooden blocks scattered around it.",
+        },
       },
       {
         title: "For an older relative",
@@ -278,6 +348,11 @@ export const DECISION_SECTION: Record<string, DecisionSectionContent> = {
           "The evidence base here is real: this is the one part of the category with peer-reviewed research behind it, and we cite it rather than paraphrase it.",
           "Weight, fur, warmth and a heartbeat do more here than conversation does. The most effective machines in this group barely speak.",
         ],
+        image: {
+          src: "/media/hubs/companion/card-older.webp",
+          alt:
+            "A companion robot on the side table beside a wing-backed armchair in a warm traditional sitting room.",
+        },
       },
     ],
   },
@@ -357,6 +432,11 @@ export const DECISION_SECTION: Record<string, DecisionSectionContent> = {
           "Watch the minimum rather than the maximum: a very small lawn can confuse a mower built to cover ground.",
           "Narrow passages between lawn areas are the usual failure — check the stated minimum width.",
         ],
+        image: {
+          src: "/media/hubs/lawn/card-small.webp",
+          alt:
+            "A small enclosed suburban back lawn between fences, with a patio along one side.",
+        },
       },
       {
         title: "Quarter acre to an acre",
@@ -366,6 +446,11 @@ export const DECISION_SECTION: Record<string, DecisionSectionContent> = {
           "Multiple zones matter more than raw area — a front lawn and a back lawn are two jobs, not one.",
           "Check whether the mower can cross a driveway or path on its own, or whether you carry it.",
         ],
+        image: {
+          src: "/media/hubs/lawn/card-medium.webp",
+          alt:
+            "A larger garden lawn with curved planted borders and mature trees.",
+        },
       },
       {
         title: "An acre and up",
@@ -375,6 +460,11 @@ export const DECISION_SECTION: Record<string, DecisionSectionContent> = {
           "All-wheel drive and larger wheels stop being a luxury once the ground is uneven.",
           "This is where the price climbs steeply, and where a second smaller mower sometimes beats one big one.",
         ],
+        image: {
+          src: "/media/hubs/lawn/card-large.webp",
+          alt:
+            "A wide open expanse of mown grass running to a treeline.",
+        },
       },
     ],
   },
@@ -534,6 +624,11 @@ export const COVERAGE_SECTION: Record<string, CoverageSectionContent> = {
       "Parents buy an educational robot hoping for a skill and often get a toy, and the " +
       "difference is mostly down to what happens after the first fortnight. Being straight about " +
       "that is more useful than repeating a manufacturer's curriculum claim.",
+    image: {
+      src: "/media/hubs/coding/lead-track.webp",
+      alt:
+        "A coding robot part-way along a black line printed on a paper track.",
+    },
     rows: [
       {
         title: "What they genuinely teach",
@@ -545,6 +640,11 @@ export const COVERAGE_SECTION: Record<string, CoverageSectionContent> = {
           "than on a screen. That transfer is real and it is well supported. What none of them " +
           "teaches is a language a child will still be using in five years, and no listing " +
           "should imply otherwise.",
+        image: {
+          src: "/media/hubs/coding/row-code.webp",
+          alt:
+            "A laptop showing real typed Python beside the coding robot it controls.",
+        },
       },
       {
         title: "Why most of them stop being used",
@@ -556,6 +656,11 @@ export const COVERAGE_SECTION: Record<string, CoverageSectionContent> = {
           "community making new projects, or a route from blocks into real code — something " +
           "that makes the next thing harder than the last. Ask what a child does with it in " +
           "month six, because month one takes care of itself.",
+        image: {
+          src: "/media/hubs/coding/row-shelf.webp",
+          alt:
+            "A part-used coding robot on a shelf beside its closed box.",
+        },
       },
       {
         title: "The parent's part",
@@ -567,6 +672,11 @@ export const COVERAGE_SECTION: Record<string, CoverageSectionContent> = {
           "If nobody in the house has half an hour a week for it, buy the simplest screen-free " +
           "one and treat it as a toy that happens to teach sequencing — which is a perfectly " +
           "good outcome.",
+        image: {
+          src: "/media/hubs/coding/row-button.webp",
+          alt:
+            "A child's hand pressing the single large button on a coding robot.",
+        },
       },
     ],
   },
@@ -584,6 +694,11 @@ export const COVERAGE_SECTION: Record<string, CoverageSectionContent> = {
       "the machines differ enormously at it. The thing that separates them is not suction — it " +
       "is what happens to long hair once it is inside, and whether you end up cutting it off a " +
       "brush roll with scissors every fortnight.",
+    image: {
+      src: "/media/hubs/vacuums/lead-mopped.webp",
+      alt:
+        "A damp mopped stripe drying across pale tile.",
+    },
     rows: [
       {
         title: "The brush roll, and tangling",
@@ -595,6 +710,11 @@ export const COVERAGE_SECTION: Record<string, CoverageSectionContent> = {
           "in the category and it is buried in the specifications rather than on the box. If you " +
           "have a shedding dog or a long-haired cat, treat it as the first filter and suction as " +
           "the second.",
+        image: {
+          src: "/media/hubs/vacuums/row-crumbs.webp",
+          alt:
+            "Crumbs and grit scattered across a hard floor in raking light.",
+        },
       },
       {
         title: "What a self emptying base actually solves",
@@ -606,6 +726,11 @@ export const COVERAGE_SECTION: Record<string, CoverageSectionContent> = {
           "and it is why the feature is worth its price premium here more than anywhere else. " +
           "The bags are a consumable, and they are not cheap — price a year of them before " +
           "comparing.",
+        image: {
+          src: "/media/hubs/vacuums/row-dock.webp",
+          alt:
+            "A robot vacuum reversing onto its dock against the wall of an otherwise empty room.",
+        },
       },
       {
         title: "The thing no robot handles",
@@ -617,6 +742,11 @@ export const COVERAGE_SECTION: Record<string, CoverageSectionContent> = {
           "spreads it across every floor it can reach. If your animal has accidents, run the " +
           "machine while you are home rather than on a schedule, and treat avoidance as a " +
           "reduction in risk rather than a guarantee.",
+        image: {
+          src: "/media/hubs/vacuums/row-corner.webp",
+          alt:
+            "The corner where two skirting boards meet, clean and empty.",
+        },
       },
     ],
   },
@@ -640,6 +770,11 @@ export const COVERAGE_SECTION: Record<string, CoverageSectionContent> = {
       "touches food. It is a documented and genuinely serious injury, and it is the reason a " +
       "bristle-free machine has a market at all. It is also an argument that applies to a " +
       "twelve-dollar brush just as well, which is the part the marketing skips.",
+    image: {
+      src: "/media/hubs/grill/lead-clean-bars.webp",
+      alt:
+        "The clean top surface of a set of grill bars, evenly lit.",
+    },
     rows: [
       {
         title: "What actually goes wrong",
@@ -709,6 +844,11 @@ export const COVERAGE_SECTION: Record<string, CoverageSectionContent> = {
       "searches we ran for this category, and PETA ranks on the first page for whether they are " +
       "safe at all. That is not a fringe worry to be reassured away in a sentence, so here is " +
       "the mechanism and what to check.",
+    image: {
+      src: "/media/hubs/litter/lead-drawer.webp",
+      alt:
+        "The closed waste drawer of a self-cleaning litter box, sealed shut.",
+    },
     rows: [
       {
         title: "How the machine knows a cat is inside",
@@ -721,6 +861,11 @@ export const COVERAGE_SECTION: Record<string, CoverageSectionContent> = {
           "manufacturer states a minimum weight and why kittens are the group to be careful " +
           "with. Ask what the stated minimum is, and whether there is a secondary sensor — " +
           "infrared or a physical interrupt — rather than weight alone.",
+        image: {
+          src: "/media/hubs/litter/row-stretch.webp",
+          alt:
+            "A tabby cat mid-stretch on a tiled floor, alert and well, a litter box behind.",
+        },
       },
       {
         title: "Who should not buy one, plainly",
@@ -733,6 +878,11 @@ export const COVERAGE_SECTION: Record<string, CoverageSectionContent> = {
           "mobility problems or in the middle of a urinary issue are worth a word with a vet " +
           "first, because these boxes hide the evidence you would otherwise notice — which is " +
           "exactly what the health-tracking models are trying to solve.",
+        image: {
+          src: "/media/hubs/litter/row-two-cats.webp",
+          alt:
+            "Two cats in the same room, one lying on a mat and one walking, neither at the litter box behind them.",
+        },
       },
       {
         title: "What we will and will not tell you",
@@ -745,6 +895,11 @@ export const COVERAGE_SECTION: Record<string, CoverageSectionContent> = {
           "machine's stated minimum weight, what sensors it actually uses, and whether the " +
           "manufacturer publishes that at all. Where a maker will not say, that silence is the " +
           "finding and we print it.",
+        image: {
+          src: "/media/hubs/litter/row-scoop.webp",
+          alt:
+            "A plastic scoop resting on the rim of an open litter tray.",
+        },
       },
     ],
   },
@@ -772,6 +927,11 @@ export const COVERAGE_SECTION: Record<string, CoverageSectionContent> = {
       "a product plus a company that has to keep existing. When that company stops, some of " +
       "these machines become ornaments. Before comparing personality or price, understand what " +
       "you are actually depending on.",
+    image: {
+      src: "/media/hubs/companion/lead-lap.webp",
+      alt:
+        "An older person's hands resting on a companion robot held in their lap.",
+    },
     rows: [
       {
         title: "The subscription question",
@@ -784,6 +944,11 @@ export const COVERAGE_SECTION: Record<string, CoverageSectionContent> = {
           "sit behind a monthly fee. Some machines keep a reduced personality when you stop " +
           "paying. Others go quiet. We state which for every product we list, and where the " +
           "manufacturer will not say, we say that instead.",
+        image: {
+          src: "/media/hubs/companion/row-alone.webp",
+          alt:
+            "A companion robot alone on a wooden floor in a quiet lit room.",
+        },
       },
       {
         title: "When the company shuts down",
@@ -796,6 +961,11 @@ export const COVERAGE_SECTION: Record<string, CoverageSectionContent> = {
           "whose makers stopped. Ask what the robot can still do with no internet connection " +
           "at all — a machine with local personality survives its manufacturer, and a machine " +
           "that is a speaker for a cloud service does not.",
+        image: {
+          src: "/media/hubs/companion/row-shelf.webp",
+          alt:
+            "A companion robot settled on a bookshelf among books and a framed picture.",
+        },
       },
       {
         title: "What it hears, and where that goes",
@@ -808,6 +978,11 @@ export const COVERAGE_SECTION: Record<string, CoverageSectionContent> = {
           "and which country the company answers to. Where a manufacturer publishes answers we " +
           "quote them. Where a manufacturer publishes nothing, that absence is itself the " +
           "finding and we record it.",
+        image: {
+          src: "/media/hubs/companion/row-speech.webp",
+          alt:
+            "A companion robot with its light ring active and a speech bubble beside it.",
+        },
       },
     ],
   },
@@ -880,6 +1055,11 @@ export const COVERAGE_SECTION: Record<string, CoverageSectionContent> = {
           "at the top, or a turn taken across the fall line are all harder than the number " +
           "suggests. Measure your steepest section rather than your average, and treat the " +
           "manufacturer's figure as a ceiling you should stay under.",
+        image: {
+          src: "/media/hubs/lawn/row-cut.webp",
+          alt:
+            "Freshly cut lawn seen close up, the blade tips even across the frame.",
+        },
       },
       {
         title: "Tree cover and satellite signal",
@@ -891,6 +1071,11 @@ export const COVERAGE_SECTION: Record<string, CoverageSectionContent> = {
           "Vision and LiDAR machines do not care about sky; a boundary wire does not either. If " +
           "your lawn is shaded by trees, satellite navigation is the wrong technology and no " +
           "amount of money fixes it.",
+        image: {
+          src: "/media/hubs/lawn/row-dew.webp",
+          alt:
+            "Long grass heavy with dew in low morning sun.",
+        },
       },
       {
         title: "Separate zones and narrow passages",
@@ -901,6 +1086,11 @@ export const COVERAGE_SECTION: Record<string, CoverageSectionContent> = {
           "some handle a gap only above a stated minimum width. This is also where obstacle " +
           "avoidance earns its keep — trampolines, dog toys and garden hose are what a mower " +
           "meets in a real yard, not the clean lawn in the photograph.",
+        image: {
+          src: "/media/hubs/lawn/row-border.webp",
+          alt:
+            "The edge where a lawn meets a planted border and a paved path.",
+        },
       },
     ],
   },

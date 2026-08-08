@@ -86,9 +86,14 @@ export const CATEGORY_HERO: Record<string, CategoryHeroContent> = {
     metaDescription:
       "Compare coding robots for kids by age, screen-free or app-based, block or text coding, " +
       "and how long a child keeps using one. Find the right first coding robot.",
+    image: {
+      src: "/media/hubs/coding/hero.webp",
+      alt:
+        "A small coding robot on a kitchen table with a child's hands reaching towards it in daylight.",
+    },
+    imageLayout: "above",
     primaryCta: { label: "Compare coding robots", href: "#products" },
     secondaryCta: { label: "Which age needs what?", href: "#age" },
-    imageLayout: "above",
   },
 
   /* Page 009, and the largest category BotPlanet has taken on. Keyword
@@ -136,9 +141,14 @@ export const CATEGORY_HERO: Record<string, CategoryHeroContent> = {
     metaDescription:
       "Compare robot vacuums and mops by floor type, mop lifting, self-emptying, pet hair, " +
       "obstacle avoidance and price. Find the right robot vacuum for your home.",
+    image: {
+      src: "/media/hubs/vacuums/hero.webp",
+      alt:
+        "A round black robot vacuum crossing a sunlit open-plan living room, shot low at skirting height with a sofa and dining table behind.",
+    },
+    imageLayout: "above",
     primaryCta: { label: "Compare robot vacuums", href: "#products" },
     secondaryCta: { label: "Does it work on carpet?", href: "#floors" },
-    imageLayout: "above",
   },
 
   /* Page 006. Keyword evidence: DataForSEO run 31092662805, 2026-08-06.
@@ -187,12 +197,17 @@ export const CATEGORY_HERO: Record<string, CategoryHeroContent> = {
     metaDescription:
       "Does a grill cleaning robot actually work? We compare robotic grill cleaners on grate " +
       "type, brush material and safety — and say when a brush is the better buy.",
+    image: {
+      src: "/media/hubs/grill/hero.webp",
+      alt:
+        "A grill-cleaning robot working across the bars of an open barbecue on a patio at dusk, smoke rising around it.",
+    },
+    imageLayout: "above",
     primaryCta: { label: "Compare grill robots", href: "#products" },
     /* Straight to the verdict, not the product grid. "Do the grill bots really
        work?" and "Does a Grillbot really work?" both appear in Google's People
        Also Ask on this category. The doubt IS the query. */
     secondaryCta: { label: "Does it actually work?", href: "#worth-it" },
-    imageLayout: "above",
   },
 
   /* Page 004 of the owner-locked ten. Keyword evidence: DataForSEO runs
@@ -235,6 +250,12 @@ export const CATEGORY_HERO: Record<string, CategoryHeroContent> = {
     metaDescription:
       "Compare self-cleaning litter boxes by cat size, multi-cat capacity, odour sealing, litter " +
       "type and running cost — including which cats they are not safe for.",
+    image: {
+      src: "/media/hubs/litter/hero.webp",
+      alt:
+        "A self-cleaning litter box in the corner of a clean utility room, a long-haired cat walking away from it.",
+    },
+    imageLayout: "above",
     primaryCta: { label: "Compare litter boxes", href: "#products" },
     /* Straight to the safety section rather than to BotMatch, which is
        coming_soon until the catalogue has products. This is also the honest
@@ -246,7 +267,6 @@ export const CATEGORY_HERO: Record<string, CategoryHeroContent> = {
     secondaryCta: { label: "Are they safe?", href: "#safety" },
     /* No hero artwork yet — pages first, images after, per the owner's
        instruction of 6 August 2026. */
-    imageLayout: "above",
   },
 
   /* Keyword evidence: DataForSEO run 31081889310, 2026-08-06, $0.2224. Full
@@ -291,6 +311,12 @@ export const CATEGORY_HERO: Record<string, CategoryHeroContent> = {
     metaDescription:
       "Compare robot pets and companion robots by who they are for, conversation, movement, " +
       "subscription cost and support risk. Find the right companion robot.",
+    image: {
+      src: "/media/hubs/companion/hero.webp",
+      alt:
+        "A small white companion robot on a side table in a warm lamp-lit living room in the evening.",
+    },
+    imageLayout: "above",
     primaryCta: { label: "Compare robot pets", href: "#products" },
     /* Not BotMatch. /botmatch/companion-robots/ has its own question set and
        its own scoring config, but no products to recommend yet, so it is
@@ -301,7 +327,6 @@ export const CATEGORY_HERO: Record<string, CategoryHeroContent> = {
     /* No hero artwork yet — pages first, images after, per the owner's
        instruction of 6 August 2026. The hero renders text-only rather than
        blocking the page. */
-    imageLayout: "above",
   },
 
   /* Keyword evidence: same run, 31081889310.
@@ -386,6 +411,12 @@ export const CATEGORY_HERO: Record<string, CategoryHeroContent> = {
     metaDescription:
       "Compare robotic lawn mowers by yard size, slope, boundary wire or wire-free RTK " +
       "navigation, zones and price. Find the right robot mower for your lawn.",
+    image: {
+      src: "/media/hubs/lawn/hero.webp",
+      alt:
+        "A robot mower on a striped lawn at sunset with a lit stone house behind it.",
+    },
+    imageLayout: "above",
     primaryCta: { label: "Compare robot mowers", href: "#products" },
     /* No BotMatch CTA yet, unlike pool and window. /botmatch/robotic-lawn-mowers/
        resolves, but the questionnaire is still the pool question set — it would
@@ -402,7 +433,6 @@ export const CATEGORY_HERO: Record<string, CategoryHeroContent> = {
        /media/lawn-category/feature-desktop.webp here: it is the homepage
        teaser, composed with a dark left gutter for overlaid text, and it
        already appears further down this page in the BotMatch panel. */
-    imageLayout: "above",
   },
 
   /* Keyword evidence: DataForSEO run 30981257806, 2026-08-05, $0.2044.

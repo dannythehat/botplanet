@@ -4258,5 +4258,1721 @@
         "checksum": "sha256:fabead4db9e291e33ce80a2cbc202269dbb426df23a5cd3edf8e0b2bafdf4fcb"
       }
     ]
+  },
+  {
+    "source": "/media/hubs/vacuums/hero.webp",
+    "sourceWidth": 1672,
+    "sourceHeight": 941,
+    "derivatives": [
+      {
+        "id": "media-hubs-vacuums-hero-webp-360",
+        "src": "/media/hubs/vacuums/hero-360w.webp",
+        "width": 360,
+        "height": 203,
+        "bytes": 6058,
+        "checksum": "sha256:3998f9e65465e3b3a9016bed7e7c79ca0cb7c97083cd9c1e60b1b66b562095e7"
+      },
+      {
+        "id": "media-hubs-vacuums-hero-webp-640",
+        "src": "/media/hubs/vacuums/hero-640w.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 14130,
+        "checksum": "sha256:7471ec87005dc6735458055608f522b027f4970ed48abfa90cf178a08e656591"
+      },
+      {
+        "id": "media-hubs-vacuums-hero-webp-960",
+        "src": "/media/hubs/vacuums/hero-960w.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 27768,
+        "checksum": "sha256:afb26603dc52d7ef7d80487403372ecbe38d8aa6be0c1997b0663fae4903d76b"
+      },
+      {
+        "id": "media-hubs-vacuums-hero-webp-1440",
+        "src": "/media/hubs/vacuums/hero-1440w.webp",
+        "width": 1440,
+        "height": 810,
+        "bytes": 46528,
+        "checksum": "sha256:89a6bd1f6649d00844cccbe5abd414fa22e01861f6c0197183c5f41f9a768dbf"
+      }
+    ]
+  },
+  {
+    "source": "/media/hubs/vacuums/card-hard-floor.webp",
+    "sourceWidth": 1536,
+    "sourceHeight": 1024,
+    "derivatives": [
+      {
+        "id": "media-hubs-vacuums-card-hard-floor-webp-360",
+        "src": "/media/hubs/vacuums/card-hard-floor-360w.webp",
+        "width": 360,
+        "height": 240,
+        "bytes": 8546,
+        "checksum": "sha256:a0395801476e9343cf1800c5cc8e874a422116dfad3d077e92bf2aca7095bebd"
+      },
+      {
+        "id": "media-hubs-vacuums-card-hard-floor-webp-640",
+        "src": "/media/hubs/vacuums/card-hard-floor-640w.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 23596,
+        "checksum": "sha256:dae76e931c3b95ef2d7336b855bfb352bde9a820bb949f2fe74592d95971c498"
+      },
+      {
+        "id": "media-hubs-vacuums-card-hard-floor-webp-960",
+        "src": "/media/hubs/vacuums/card-hard-floor-960w.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 52896,
+        "checksum": "sha256:f2f096784ebb116496ae051fbe2d1f7f3f8c28fb94746bc52d46cf2ea0d4f1ec"
+      },
+      {
+        "id": "media-hubs-vacuums-card-hard-floor-webp-1440",
+        "src": "/media/hubs/vacuums/card-hard-floor-1440w.webp",
+        "width": 1440,
+        "height": 960,
+        "bytes": 89224,
+        "checksum": "sha256:09b5a8f2ccb9a9967e20c42d62bdd767f3deb6d02d6e08576525d8b8e59e5e8c"
+      }
+    ]
+  },
+  {
+    "source": "/media/hubs/vacuums/card-mixed.webp",
+    "sourceWidth": 1536,
+    "sourceHeight": 1024,
+    "derivatives": [
+      {
+        "id": "media-hubs-vacuums-card-mixed-webp-360",
+        "src": "/media/hubs/vacuums/card-mixed-360w.webp",
+        "width": 360,
+        "height": 240,
+        "bytes": 10672,
+        "checksum": "sha256:ca61096a5907ceda8b56483e1c3444051a0ca493e47e7d2710239c93e187fae7"
+      },
+      {
+        "id": "media-hubs-vacuums-card-mixed-webp-640",
+        "src": "/media/hubs/vacuums/card-mixed-640w.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 34036,
+        "checksum": "sha256:df6d30aeb9a46c0e45677daf14d8397f4a6d717c5726037c309492a7589fbed2"
+      },
+      {
+        "id": "media-hubs-vacuums-card-mixed-webp-960",
+        "src": "/media/hubs/vacuums/card-mixed-960w.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 79522,
+        "checksum": "sha256:1f8c2b61635f5543fd7c706b954abea915d9856e1cadb15f82cdeb595698d4dd"
+      },
+      {
+        "id": "media-hubs-vacuums-card-mixed-webp-1440",
+        "src": "/media/hubs/vacuums/card-mixed-1440w.webp",
+        "width": 1440,
+        "height": 960,
+        "bytes": 138268,
+        "checksum": "sha256:331d0d1aaea5a55abb3ac0b616f5ac24401e40443c0ed81e7bf152518472064b"
+      }
+    ]
+  },
+  {
+    "source": "/media/hubs/vacuums/card-shag.webp",
+    "sourceWidth": 1536,
+    "sourceHeight": 1024,
+    "derivatives": [
+      {
+        "id": "media-hubs-vacuums-card-shag-webp-360",
+        "src": "/media/hubs/vacuums/card-shag-360w.webp",
+        "width": 360,
+        "height": 240,
+        "bytes": 21920,
+        "checksum": "sha256:eca01dc97aef7111e209227f04b5a34dace4c46ef5da9cbb7bbc766c840350b0"
+      },
+      {
+        "id": "media-hubs-vacuums-card-shag-webp-640",
+        "src": "/media/hubs/vacuums/card-shag-640w.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 60752,
+        "checksum": "sha256:6cfbcb7360c44202678f0bc559d7bdfe8a190be819916ede642ae1e326648a3b"
+      },
+      {
+        "id": "media-hubs-vacuums-card-shag-webp-960",
+        "src": "/media/hubs/vacuums/card-shag-960w.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 126682,
+        "checksum": "sha256:93a503e9ef8f983e0513f0483020094561fa68fcf44c41ffa2f200845bc20849"
+      },
+      {
+        "id": "media-hubs-vacuums-card-shag-webp-1440",
+        "src": "/media/hubs/vacuums/card-shag-1440w.webp",
+        "width": 1440,
+        "height": 960,
+        "bytes": 207116,
+        "checksum": "sha256:8af3923dd7095a73d1ac076ace2120540b5c2e62f920d306efc37c96f3f10cf7"
+      }
+    ]
+  },
+  {
+    "source": "/media/hubs/vacuums/row-crumbs.webp",
+    "sourceWidth": 1536,
+    "sourceHeight": 1024,
+    "derivatives": [
+      {
+        "id": "media-hubs-vacuums-row-crumbs-webp-360",
+        "src": "/media/hubs/vacuums/row-crumbs-360w.webp",
+        "width": 360,
+        "height": 240,
+        "bytes": 9216,
+        "checksum": "sha256:4b4f540cfcbb25fa018b103916b66a24b68f5601351b5816ace21185aa4959ed"
+      },
+      {
+        "id": "media-hubs-vacuums-row-crumbs-webp-640",
+        "src": "/media/hubs/vacuums/row-crumbs-640w.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 27560,
+        "checksum": "sha256:64d94d84ceef9b4cdb24afb8152752c27189342b88dff41e143772af40e706f4"
+      },
+      {
+        "id": "media-hubs-vacuums-row-crumbs-webp-960",
+        "src": "/media/hubs/vacuums/row-crumbs-960w.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 60220,
+        "checksum": "sha256:046584d578fc6d913fadd83eb0132ae4f943b6a8492251e90db01e4465103276"
+      },
+      {
+        "id": "media-hubs-vacuums-row-crumbs-webp-1440",
+        "src": "/media/hubs/vacuums/row-crumbs-1440w.webp",
+        "width": 1440,
+        "height": 960,
+        "bytes": 105206,
+        "checksum": "sha256:ee7776a62436c858b58bdf336f8e47e973a8427c3ef1186e771abccf1e6147d5"
+      }
+    ]
+  },
+  {
+    "source": "/media/hubs/vacuums/row-dock.webp",
+    "sourceWidth": 1448,
+    "sourceHeight": 1086,
+    "derivatives": [
+      {
+        "id": "media-hubs-vacuums-row-dock-webp-360",
+        "src": "/media/hubs/vacuums/row-dock-360w.webp",
+        "width": 360,
+        "height": 270,
+        "bytes": 5544,
+        "checksum": "sha256:483b3b6b87e27837ac4ec594dade7107da09af9ce6245b619cc8f9b5bacb4519"
+      },
+      {
+        "id": "media-hubs-vacuums-row-dock-webp-640",
+        "src": "/media/hubs/vacuums/row-dock-640w.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 14752,
+        "checksum": "sha256:45bc0dc4b8a239df3c50992a20b3addfeffd7197e9b543fe10422aa0df88c668"
+      },
+      {
+        "id": "media-hubs-vacuums-row-dock-webp-960",
+        "src": "/media/hubs/vacuums/row-dock-960w.webp",
+        "width": 960,
+        "height": 720,
+        "bytes": 30492,
+        "checksum": "sha256:032599283fc4df0471ae10cad8f3fe3b889f1d4ac93f2f7f32193efdd70662c6"
+      },
+      {
+        "id": "media-hubs-vacuums-row-dock-webp-1440",
+        "src": "/media/hubs/vacuums/row-dock-1440w.webp",
+        "width": 1440,
+        "height": 1080,
+        "bytes": 53140,
+        "checksum": "sha256:8086ff431cb6d1a650e0fc01304508f17b68a53b454e8714b1ede94d586890d8"
+      }
+    ]
+  },
+  {
+    "source": "/media/hubs/vacuums/row-corner.webp",
+    "sourceWidth": 1536,
+    "sourceHeight": 1024,
+    "derivatives": [
+      {
+        "id": "media-hubs-vacuums-row-corner-webp-360",
+        "src": "/media/hubs/vacuums/row-corner-360w.webp",
+        "width": 360,
+        "height": 240,
+        "bytes": 5104,
+        "checksum": "sha256:5c0795e247d4b216cc0ae1af298071d30882b649cee450c4725bc2e573385aed"
+      },
+      {
+        "id": "media-hubs-vacuums-row-corner-webp-640",
+        "src": "/media/hubs/vacuums/row-corner-640w.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 16526,
+        "checksum": "sha256:dd1701ac81f32342ec4a8ba570d39e3861b48fbda4ebb8605631eb4ebcdf6639"
+      },
+      {
+        "id": "media-hubs-vacuums-row-corner-webp-960",
+        "src": "/media/hubs/vacuums/row-corner-960w.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 41560,
+        "checksum": "sha256:a0ccb7e619982c1c01a36925194e0e685eb5e32c058f50c7a1d5361df90f5541"
+      },
+      {
+        "id": "media-hubs-vacuums-row-corner-webp-1440",
+        "src": "/media/hubs/vacuums/row-corner-1440w.webp",
+        "width": 1440,
+        "height": 960,
+        "bytes": 79946,
+        "checksum": "sha256:e99fe5c602eca46f198bb19689b70ad30117e134a583904fb924131d8d3f6d82"
+      }
+    ]
+  },
+  {
+    "source": "/media/hubs/vacuums/lead-mopped.webp",
+    "sourceWidth": 1536,
+    "sourceHeight": 1024,
+    "derivatives": [
+      {
+        "id": "media-hubs-vacuums-lead-mopped-webp-360",
+        "src": "/media/hubs/vacuums/lead-mopped-360w.webp",
+        "width": 360,
+        "height": 240,
+        "bytes": 4822,
+        "checksum": "sha256:4cbf1b1d0fd0e21302564d27e53c48d5830484727125b65588313d988f0a387c"
+      },
+      {
+        "id": "media-hubs-vacuums-lead-mopped-webp-640",
+        "src": "/media/hubs/vacuums/lead-mopped-640w.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 15504,
+        "checksum": "sha256:6eaf05e325c1454f0f8ca5ae0786def82424281b9fa4da0d9b914381adbcf9d5"
+      },
+      {
+        "id": "media-hubs-vacuums-lead-mopped-webp-960",
+        "src": "/media/hubs/vacuums/lead-mopped-960w.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 39050,
+        "checksum": "sha256:1f7147a282da20a13e4b3e7624171db67f322f1ade9a6113c266caa75028d0c3"
+      },
+      {
+        "id": "media-hubs-vacuums-lead-mopped-webp-1440",
+        "src": "/media/hubs/vacuums/lead-mopped-1440w.webp",
+        "width": 1440,
+        "height": 960,
+        "bytes": 68624,
+        "checksum": "sha256:cf698f458ddc84e6aedcdc6f61300fa860f3ad6319ea023ef0b6026846047662"
+      }
+    ]
+  },
+  {
+    "source": "/media/hubs/lawn/hero.webp",
+    "sourceWidth": 1672,
+    "sourceHeight": 941,
+    "derivatives": [
+      {
+        "id": "media-hubs-lawn-hero-webp-360",
+        "src": "/media/hubs/lawn/hero-360w.webp",
+        "width": 360,
+        "height": 203,
+        "bytes": 10062,
+        "checksum": "sha256:5b9f866da490d88ac553d45633327d0001cfac59c7c00ace4a21ed5f7c066ccb"
+      },
+      {
+        "id": "media-hubs-lawn-hero-webp-640",
+        "src": "/media/hubs/lawn/hero-640w.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 29482,
+        "checksum": "sha256:f93066e4e60327b1513b7fc6037f27795e1d9fa77d41093da325970dfeddd8b4"
+      },
+      {
+        "id": "media-hubs-lawn-hero-webp-960",
+        "src": "/media/hubs/lawn/hero-960w.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 65710,
+        "checksum": "sha256:1bfc11852e9afce0921b3c0e0380a06ef9633a3f0e7d024612ebd70c85b84cb8"
+      },
+      {
+        "id": "media-hubs-lawn-hero-webp-1440",
+        "src": "/media/hubs/lawn/hero-1440w.webp",
+        "width": 1440,
+        "height": 810,
+        "bytes": 115086,
+        "checksum": "sha256:0f8621418d34f665d7009ad4712e94abe4ca39e18caffdfbfdb808d1d7df2377"
+      }
+    ]
+  },
+  {
+    "source": "/media/hubs/lawn/card-small.webp",
+    "sourceWidth": 1536,
+    "sourceHeight": 1024,
+    "derivatives": [
+      {
+        "id": "media-hubs-lawn-card-small-webp-360",
+        "src": "/media/hubs/lawn/card-small-360w.webp",
+        "width": 360,
+        "height": 240,
+        "bytes": 14382,
+        "checksum": "sha256:27b7412c8af9fd3b74588cdf4603cca5ba18f787866caa6f174bc35cfe674df7"
+      },
+      {
+        "id": "media-hubs-lawn-card-small-webp-640",
+        "src": "/media/hubs/lawn/card-small-640w.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 52520,
+        "checksum": "sha256:8cc3caa315ba1994f9e2ca57bf46557ac4b64365d3df70de510ecc19015a2111"
+      },
+      {
+        "id": "media-hubs-lawn-card-small-webp-960",
+        "src": "/media/hubs/lawn/card-small-960w.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 132454,
+        "checksum": "sha256:f9141554d9fd948d1cbba6449c23c529496464a74ef15e3574cdb4cdb9573afc"
+      },
+      {
+        "id": "media-hubs-lawn-card-small-webp-1440",
+        "src": "/media/hubs/lawn/card-small-1440w.webp",
+        "width": 1440,
+        "height": 960,
+        "bytes": 253350,
+        "checksum": "sha256:6df7a7bbfc90fd37d1e457e5fcf4ef52a29e2859682af3abce87616076972ac5"
+      }
+    ]
+  },
+  {
+    "source": "/media/hubs/lawn/card-medium.webp",
+    "sourceWidth": 1536,
+    "sourceHeight": 1024,
+    "derivatives": [
+      {
+        "id": "media-hubs-lawn-card-medium-webp-360",
+        "src": "/media/hubs/lawn/card-medium-360w.webp",
+        "width": 360,
+        "height": 240,
+        "bytes": 21866,
+        "checksum": "sha256:1621050c30e61d0558ea5319fc830241e88fe7492b6557cc8468a8cdc7e9610b"
+      },
+      {
+        "id": "media-hubs-lawn-card-medium-webp-640",
+        "src": "/media/hubs/lawn/card-medium-640w.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 79366,
+        "checksum": "sha256:7467e822bd538301ff855ef8a0388c9ebc57e059c31f7c69bbf2c1b822687a9b"
+      },
+      {
+        "id": "media-hubs-lawn-card-medium-webp-960",
+        "src": "/media/hubs/lawn/card-medium-960w.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 194526,
+        "checksum": "sha256:e602e7a56617319e9100014883b1d54305ed77b755f238653491a0a1d9aae0bc"
+      },
+      {
+        "id": "media-hubs-lawn-card-medium-webp-1440",
+        "src": "/media/hubs/lawn/card-medium-1440w.webp",
+        "width": 1440,
+        "height": 960,
+        "bytes": 378224,
+        "checksum": "sha256:0e31ad9f8b5903002334bf4ba8e9e3a49e94ccf01a1ae3ef1861e3e26575e126"
+      }
+    ]
+  },
+  {
+    "source": "/media/hubs/lawn/card-large.webp",
+    "sourceWidth": 1536,
+    "sourceHeight": 1024,
+    "derivatives": [
+      {
+        "id": "media-hubs-lawn-card-large-webp-360",
+        "src": "/media/hubs/lawn/card-large-360w.webp",
+        "width": 360,
+        "height": 240,
+        "bytes": 14666,
+        "checksum": "sha256:85c32cd998dbc73faaea4645e0592f18fb490bab8c23162ee73e5f0d15c7f10f"
+      },
+      {
+        "id": "media-hubs-lawn-card-large-webp-640",
+        "src": "/media/hubs/lawn/card-large-640w.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 52074,
+        "checksum": "sha256:e27d4defd3f4c93032ab3daa2b32d6bd88116c870c931d1bb187aa3ce7e78a08"
+      },
+      {
+        "id": "media-hubs-lawn-card-large-webp-960",
+        "src": "/media/hubs/lawn/card-large-960w.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 127354,
+        "checksum": "sha256:f8068b33eef6bcb96369382e7af155eab68f8071db3c0b21e459f30d25f8230d"
+      },
+      {
+        "id": "media-hubs-lawn-card-large-webp-1440",
+        "src": "/media/hubs/lawn/card-large-1440w.webp",
+        "width": 1440,
+        "height": 960,
+        "bytes": 248088,
+        "checksum": "sha256:841e441d0b166900dff1273ad5fca860eaa0e8f416fa67752546413cfbfd472a"
+      }
+    ]
+  },
+  {
+    "source": "/media/hubs/lawn/row-cut.webp",
+    "sourceWidth": 1536,
+    "sourceHeight": 1024,
+    "derivatives": [
+      {
+        "id": "media-hubs-lawn-row-cut-webp-360",
+        "src": "/media/hubs/lawn/row-cut-360w.webp",
+        "width": 360,
+        "height": 240,
+        "bytes": 24004,
+        "checksum": "sha256:7c80163d27f2daff5ba7b26126e1d3225ce3e65b9de00776430aac197e1fcec9"
+      },
+      {
+        "id": "media-hubs-lawn-row-cut-webp-640",
+        "src": "/media/hubs/lawn/row-cut-640w.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 61966,
+        "checksum": "sha256:e94f91f857e5c84559a5f1357def19ccb905c69caef57ced1b35b92133d357af"
+      },
+      {
+        "id": "media-hubs-lawn-row-cut-webp-960",
+        "src": "/media/hubs/lawn/row-cut-960w.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 120578,
+        "checksum": "sha256:790f114c997e00fcf473ec2a5e91355831953c1f9cfaa5ec5d03d1ea8df0c588"
+      },
+      {
+        "id": "media-hubs-lawn-row-cut-webp-1440",
+        "src": "/media/hubs/lawn/row-cut-1440w.webp",
+        "width": 1440,
+        "height": 960,
+        "bytes": 197494,
+        "checksum": "sha256:e18184a7d96b9bc5d846e2a09e0358ce7ef1da215d55999b62298aa8675b2402"
+      }
+    ]
+  },
+  {
+    "source": "/media/hubs/lawn/row-dew.webp",
+    "sourceWidth": 1536,
+    "sourceHeight": 1024,
+    "derivatives": [
+      {
+        "id": "media-hubs-lawn-row-dew-webp-360",
+        "src": "/media/hubs/lawn/row-dew-360w.webp",
+        "width": 360,
+        "height": 240,
+        "bytes": 25300,
+        "checksum": "sha256:9cc27216d9e77d07e6572e2aeaab0a37c2b31f7f1b50cd4eee340217bd25d572"
+      },
+      {
+        "id": "media-hubs-lawn-row-dew-webp-640",
+        "src": "/media/hubs/lawn/row-dew-640w.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 70676,
+        "checksum": "sha256:9b43544e98b60d15512ad7a0262aebe56a706b1f136b4da93f2c45c20e91a549"
+      },
+      {
+        "id": "media-hubs-lawn-row-dew-webp-960",
+        "src": "/media/hubs/lawn/row-dew-960w.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 144682,
+        "checksum": "sha256:212f4472bcb203e17ffb2550a3935d409e6c29a8051ebb46d3601135d443c0c1"
+      },
+      {
+        "id": "media-hubs-lawn-row-dew-webp-1440",
+        "src": "/media/hubs/lawn/row-dew-1440w.webp",
+        "width": 1440,
+        "height": 960,
+        "bytes": 235678,
+        "checksum": "sha256:5f7cb15e58cd17bc7a1cda597aa32a4d2433e216b37e7672abbe47d83ae3e4ae"
+      }
+    ]
+  },
+  {
+    "source": "/media/hubs/lawn/row-border.webp",
+    "sourceWidth": 1536,
+    "sourceHeight": 1024,
+    "derivatives": [
+      {
+        "id": "media-hubs-lawn-row-border-webp-360",
+        "src": "/media/hubs/lawn/row-border-360w.webp",
+        "width": 360,
+        "height": 240,
+        "bytes": 26324,
+        "checksum": "sha256:8c63137d072da04f9333d4891188d714d30bf43ca39293701e342b10e1fadaae"
+      },
+      {
+        "id": "media-hubs-lawn-row-border-webp-640",
+        "src": "/media/hubs/lawn/row-border-640w.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 77176,
+        "checksum": "sha256:a9b34e3547186ed644e31b0e72a4e7ff81078dd06de692cc0456a8a087cb72b5"
+      },
+      {
+        "id": "media-hubs-lawn-row-border-webp-960",
+        "src": "/media/hubs/lawn/row-border-960w.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 166200,
+        "checksum": "sha256:52874241d26d7e34ad48e213e111aa772259554ad05b8ee2a79439860f58a603"
+      },
+      {
+        "id": "media-hubs-lawn-row-border-webp-1440",
+        "src": "/media/hubs/lawn/row-border-1440w.webp",
+        "width": 1440,
+        "height": 960,
+        "bytes": 285332,
+        "checksum": "sha256:61bed2b96820cfc4fd4434ef926b1224efbfd05b8cc58713e386bd5286697f78"
+      }
+    ]
+  },
+  {
+    "source": "/media/hubs/litter/hero.webp",
+    "sourceWidth": 1672,
+    "sourceHeight": 941,
+    "derivatives": [
+      {
+        "id": "media-hubs-litter-hero-webp-360",
+        "src": "/media/hubs/litter/hero-360w.webp",
+        "width": 360,
+        "height": 203,
+        "bytes": 5666,
+        "checksum": "sha256:fa06523a846de0083e1cc7afd5cb60ac2f4d7bae601b29a36a50cbba5af1ed1f"
+      },
+      {
+        "id": "media-hubs-litter-hero-webp-640",
+        "src": "/media/hubs/litter/hero-640w.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 15688,
+        "checksum": "sha256:9493fbe236ad081f021c286884a9d04c07495e3843255e5a004b1ab81fd3e110"
+      },
+      {
+        "id": "media-hubs-litter-hero-webp-960",
+        "src": "/media/hubs/litter/hero-960w.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 34854,
+        "checksum": "sha256:cdcb6dd1b8942ab9923017c8c9be4f99d7f0d5f8ac1c6750cd4b1fcb256106bb"
+      },
+      {
+        "id": "media-hubs-litter-hero-webp-1440",
+        "src": "/media/hubs/litter/hero-1440w.webp",
+        "width": 1440,
+        "height": 810,
+        "bytes": 59776,
+        "checksum": "sha256:b044120defdb360d0d6a344d436b5464c7f4215cf8b0c3860c75049ec6e94df9"
+      }
+    ]
+  },
+  {
+    "source": "/media/hubs/litter/card-average.webp",
+    "sourceWidth": 1536,
+    "sourceHeight": 1024,
+    "derivatives": [
+      {
+        "id": "media-hubs-litter-card-average-webp-360",
+        "src": "/media/hubs/litter/card-average-360w.webp",
+        "width": 360,
+        "height": 240,
+        "bytes": 14178,
+        "checksum": "sha256:1fedd7cf559226b6ac99eddcff3ed6e35a6e9c4c85f9842e1bb239e37de12aba"
+      },
+      {
+        "id": "media-hubs-litter-card-average-webp-640",
+        "src": "/media/hubs/litter/card-average-640w.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 40190,
+        "checksum": "sha256:81697ffa4e2e1fadc7180ebdabfb9f17ffb94f39460339a99eb65d948f91410a"
+      },
+      {
+        "id": "media-hubs-litter-card-average-webp-960",
+        "src": "/media/hubs/litter/card-average-960w.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 88516,
+        "checksum": "sha256:2d78bea9596a001f2fe7d4edeb0c7df5e7ec08ac236a892fc3a63587c6b71eba"
+      },
+      {
+        "id": "media-hubs-litter-card-average-webp-1440",
+        "src": "/media/hubs/litter/card-average-1440w.webp",
+        "width": 1440,
+        "height": 960,
+        "bytes": 156380,
+        "checksum": "sha256:ec55fe974d0b58b17d806006f15bd5e5c41208883babfb92caa46f5bce27fb9a"
+      }
+    ]
+  },
+  {
+    "source": "/media/hubs/litter/card-large.webp",
+    "sourceWidth": 1536,
+    "sourceHeight": 1024,
+    "derivatives": [
+      {
+        "id": "media-hubs-litter-card-large-webp-360",
+        "src": "/media/hubs/litter/card-large-360w.webp",
+        "width": 360,
+        "height": 240,
+        "bytes": 8810,
+        "checksum": "sha256:fbca177ea79c7ee673335197e15382732a519725438238b9a0615cdce9b547c4"
+      },
+      {
+        "id": "media-hubs-litter-card-large-webp-640",
+        "src": "/media/hubs/litter/card-large-640w.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 25172,
+        "checksum": "sha256:b8ff34a49833271ea67f10d0d6fa13802b7a6d46302389bf83454137da2be8be"
+      },
+      {
+        "id": "media-hubs-litter-card-large-webp-960",
+        "src": "/media/hubs/litter/card-large-960w.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 59014,
+        "checksum": "sha256:7efe73f0daed07ce36b147e5ccda0b55b6c5d60ac51097a15ec840703d6fe7d5"
+      },
+      {
+        "id": "media-hubs-litter-card-large-webp-1440",
+        "src": "/media/hubs/litter/card-large-1440w.webp",
+        "width": 1440,
+        "height": 960,
+        "bytes": 109684,
+        "checksum": "sha256:82c46e30fbf3e6b2b9cee6a0fcd03b6fb7408c89c9bf32dca1a08378e1dba9c5"
+      }
+    ]
+  },
+  {
+    "source": "/media/hubs/litter/card-kitten.webp",
+    "sourceWidth": 1536,
+    "sourceHeight": 1024,
+    "derivatives": [
+      {
+        "id": "media-hubs-litter-card-kitten-webp-360",
+        "src": "/media/hubs/litter/card-kitten-360w.webp",
+        "width": 360,
+        "height": 240,
+        "bytes": 5062,
+        "checksum": "sha256:e0e3c4ed9c0e713ebc2022b55bfd081aa2058c054ce958ea5731c11cbce6d27b"
+      },
+      {
+        "id": "media-hubs-litter-card-kitten-webp-640",
+        "src": "/media/hubs/litter/card-kitten-640w.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 12860,
+        "checksum": "sha256:9901176b1fc68a9d5545182007a9f0be488a4d8f2e8ed2791412dd781774fc5e"
+      },
+      {
+        "id": "media-hubs-litter-card-kitten-webp-960",
+        "src": "/media/hubs/litter/card-kitten-960w.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 28898,
+        "checksum": "sha256:e408cdc2262c3aef31c9443b333f648b08f2a79af12824f4f64fc5448a3e1c25"
+      },
+      {
+        "id": "media-hubs-litter-card-kitten-webp-1440",
+        "src": "/media/hubs/litter/card-kitten-1440w.webp",
+        "width": 1440,
+        "height": 960,
+        "bytes": 49354,
+        "checksum": "sha256:971b275d453436d126dd9bddb14796fa8f4c299b2b5931aa34821807e596d7a4"
+      }
+    ]
+  },
+  {
+    "source": "/media/hubs/litter/row-scoop.webp",
+    "sourceWidth": 1536,
+    "sourceHeight": 1024,
+    "derivatives": [
+      {
+        "id": "media-hubs-litter-row-scoop-webp-360",
+        "src": "/media/hubs/litter/row-scoop-360w.webp",
+        "width": 360,
+        "height": 240,
+        "bytes": 7550,
+        "checksum": "sha256:20771037e0de06c1168753a3efc97316c5166f27843dcb5be1565de606eefc30"
+      },
+      {
+        "id": "media-hubs-litter-row-scoop-webp-640",
+        "src": "/media/hubs/litter/row-scoop-640w.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 19672,
+        "checksum": "sha256:68795e9dfc25a36523b500270224c615a045c2a47a8ae17d2226b93b5e4922f9"
+      },
+      {
+        "id": "media-hubs-litter-row-scoop-webp-960",
+        "src": "/media/hubs/litter/row-scoop-960w.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 41060,
+        "checksum": "sha256:d821e4e91b97ea56a42783446ce432212052034f93b104fe3a3a4109beac542e"
+      },
+      {
+        "id": "media-hubs-litter-row-scoop-webp-1440",
+        "src": "/media/hubs/litter/row-scoop-1440w.webp",
+        "width": 1440,
+        "height": 960,
+        "bytes": 65518,
+        "checksum": "sha256:e51fac8af4cdbcfaba06f901d997ef06c26a5d8fc14a2696e82efdaf7462f5a7"
+      }
+    ]
+  },
+  {
+    "source": "/media/hubs/litter/row-two-cats.webp",
+    "sourceWidth": 1536,
+    "sourceHeight": 1024,
+    "derivatives": [
+      {
+        "id": "media-hubs-litter-row-two-cats-webp-360",
+        "src": "/media/hubs/litter/row-two-cats-360w.webp",
+        "width": 360,
+        "height": 240,
+        "bytes": 6846,
+        "checksum": "sha256:014201528098e52470ea465441457bcfe64fed63029b5899b571ff3b05232c97"
+      },
+      {
+        "id": "media-hubs-litter-row-two-cats-webp-640",
+        "src": "/media/hubs/litter/row-two-cats-640w.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 17552,
+        "checksum": "sha256:d326683a26b4759d52b77d2825509b3b31b8f271276fc0129b274205e3e82a37"
+      },
+      {
+        "id": "media-hubs-litter-row-two-cats-webp-960",
+        "src": "/media/hubs/litter/row-two-cats-960w.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 37600,
+        "checksum": "sha256:2ae24cc747bd445e1a673eaa2d54300af0fb2428431ec59c2ab22bbda3648a6a"
+      },
+      {
+        "id": "media-hubs-litter-row-two-cats-webp-1440",
+        "src": "/media/hubs/litter/row-two-cats-1440w.webp",
+        "width": 1440,
+        "height": 960,
+        "bytes": 63006,
+        "checksum": "sha256:a094083708495f6312bcdc85bce3fde30f21058215dcdd7e30ac98328a4ed863"
+      }
+    ]
+  },
+  {
+    "source": "/media/hubs/litter/row-stretch.webp",
+    "sourceWidth": 1536,
+    "sourceHeight": 1024,
+    "derivatives": [
+      {
+        "id": "media-hubs-litter-row-stretch-webp-360",
+        "src": "/media/hubs/litter/row-stretch-360w.webp",
+        "width": 360,
+        "height": 240,
+        "bytes": 8450,
+        "checksum": "sha256:62a873a908eab6274b298ca5768e1d54fbfe5ff50b4c8efa49c2d1764c35eced"
+      },
+      {
+        "id": "media-hubs-litter-row-stretch-webp-640",
+        "src": "/media/hubs/litter/row-stretch-640w.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 22048,
+        "checksum": "sha256:304bacda4a10c8814fdb0aa86d3e06be92900c17a6cf5652cf775840a7b432fb"
+      },
+      {
+        "id": "media-hubs-litter-row-stretch-webp-960",
+        "src": "/media/hubs/litter/row-stretch-960w.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 47080,
+        "checksum": "sha256:0fe74b43b1e24ae0bcbfe8b91b971b1ccd133a2b8d8e5a996ae69f5762a245a4"
+      },
+      {
+        "id": "media-hubs-litter-row-stretch-webp-1440",
+        "src": "/media/hubs/litter/row-stretch-1440w.webp",
+        "width": 1440,
+        "height": 960,
+        "bytes": 80638,
+        "checksum": "sha256:3d1e74d00118bf4eef7ad396648ed73df0b4f34624a0e230fe9afe14bd0e2f18"
+      }
+    ]
+  },
+  {
+    "source": "/media/hubs/litter/lead-drawer.webp",
+    "sourceWidth": 1536,
+    "sourceHeight": 1024,
+    "derivatives": [
+      {
+        "id": "media-hubs-litter-lead-drawer-webp-360",
+        "src": "/media/hubs/litter/lead-drawer-360w.webp",
+        "width": 360,
+        "height": 240,
+        "bytes": 5590,
+        "checksum": "sha256:35f85cb122548bb07de2ec733b78d926adb80122ccd1a31dbe20fb4c190b10df"
+      },
+      {
+        "id": "media-hubs-litter-lead-drawer-webp-640",
+        "src": "/media/hubs/litter/lead-drawer-640w.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 15068,
+        "checksum": "sha256:65dbc68323ec8547f734fc8655b0e6efb63d19c2b900792270e028e65073660b"
+      },
+      {
+        "id": "media-hubs-litter-lead-drawer-webp-960",
+        "src": "/media/hubs/litter/lead-drawer-960w.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 33994,
+        "checksum": "sha256:53bb6ab39c6766bf80b023d33333415017624a20cff8071c717a6b80ead3df56"
+      },
+      {
+        "id": "media-hubs-litter-lead-drawer-webp-1440",
+        "src": "/media/hubs/litter/lead-drawer-1440w.webp",
+        "width": 1440,
+        "height": 960,
+        "bytes": 59914,
+        "checksum": "sha256:d13b42b881900f1bceee9b3ba3120da628c9193b01c16674147b1678d15054cd"
+      }
+    ]
+  },
+  {
+    "source": "/media/hubs/companion/hero.webp",
+    "sourceWidth": 1672,
+    "sourceHeight": 941,
+    "derivatives": [
+      {
+        "id": "media-hubs-companion-hero-webp-360",
+        "src": "/media/hubs/companion/hero-360w.webp",
+        "width": 360,
+        "height": 203,
+        "bytes": 4172,
+        "checksum": "sha256:d1920cf38122b6ad264f83f519f5cef89af62daeb7b71ff53b0506c12b6610c1"
+      },
+      {
+        "id": "media-hubs-companion-hero-webp-640",
+        "src": "/media/hubs/companion/hero-640w.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 9808,
+        "checksum": "sha256:911c1808f78c783c0adbbb39d503de5531f3770cf7a1ebdb275952c09f20756e"
+      },
+      {
+        "id": "media-hubs-companion-hero-webp-960",
+        "src": "/media/hubs/companion/hero-960w.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 20082,
+        "checksum": "sha256:486ae81e7eaaefaeb44bf1c41ed474315603cd36f994f62b9f2dd96d0be0b3ac"
+      },
+      {
+        "id": "media-hubs-companion-hero-webp-1440",
+        "src": "/media/hubs/companion/hero-1440w.webp",
+        "width": 1440,
+        "height": 810,
+        "bytes": 31824,
+        "checksum": "sha256:f0def304b05312ad1894c625880b7ace8538e0bc47ccd3552bdd9e120caefb8c"
+      }
+    ]
+  },
+  {
+    "source": "/media/hubs/companion/card-desk.webp",
+    "sourceWidth": 1536,
+    "sourceHeight": 1024,
+    "derivatives": [
+      {
+        "id": "media-hubs-companion-card-desk-webp-360",
+        "src": "/media/hubs/companion/card-desk-360w.webp",
+        "width": 360,
+        "height": 240,
+        "bytes": 6622,
+        "checksum": "sha256:5fc40a568f6526efb5a5d664437c2ab4d7d223b5e289b21fc41a65e73b3dfaa1"
+      },
+      {
+        "id": "media-hubs-companion-card-desk-webp-640",
+        "src": "/media/hubs/companion/card-desk-640w.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 15984,
+        "checksum": "sha256:69e4791b2976f3b3d37dea84164cb07f33bc20eeada20db7d2212b83bfd1e098"
+      },
+      {
+        "id": "media-hubs-companion-card-desk-webp-960",
+        "src": "/media/hubs/companion/card-desk-960w.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 30282,
+        "checksum": "sha256:acecab869d26feec96508bfa1e33e8fd3b30e2b9c56d747d13c6d79c295e2221"
+      },
+      {
+        "id": "media-hubs-companion-card-desk-webp-1440",
+        "src": "/media/hubs/companion/card-desk-1440w.webp",
+        "width": 1440,
+        "height": 960,
+        "bytes": 48984,
+        "checksum": "sha256:b12f9b80318bb8ca2f6b84a54580892ac0cd45fbdd74b115993f0b757e162cc8"
+      }
+    ]
+  },
+  {
+    "source": "/media/hubs/companion/card-child.webp",
+    "sourceWidth": 1672,
+    "sourceHeight": 941,
+    "derivatives": [
+      {
+        "id": "media-hubs-companion-card-child-webp-360",
+        "src": "/media/hubs/companion/card-child-360w.webp",
+        "width": 360,
+        "height": 203,
+        "bytes": 8170,
+        "checksum": "sha256:ccb30915e0de77090cfd2cee116d4336313e71bcc17460778a4de462eef2ec7d"
+      },
+      {
+        "id": "media-hubs-companion-card-child-webp-640",
+        "src": "/media/hubs/companion/card-child-640w.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 18658,
+        "checksum": "sha256:bce5a03d2323cfd8c096bbbc5a096e039b4a876434cb3e26259da57435f8aa71"
+      },
+      {
+        "id": "media-hubs-companion-card-child-webp-960",
+        "src": "/media/hubs/companion/card-child-960w.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 36452,
+        "checksum": "sha256:9975b1772fff09cf3e3b508d180dcf4c42d8607e7064d325f9de35956c995427"
+      },
+      {
+        "id": "media-hubs-companion-card-child-webp-1440",
+        "src": "/media/hubs/companion/card-child-1440w.webp",
+        "width": 1440,
+        "height": 810,
+        "bytes": 57836,
+        "checksum": "sha256:e5e645ea9903958d5dac1c795b0552e7ac9744a29ec219d3a719dcf824c6aef9"
+      }
+    ]
+  },
+  {
+    "source": "/media/hubs/companion/card-older.webp",
+    "sourceWidth": 1536,
+    "sourceHeight": 1024,
+    "derivatives": [
+      {
+        "id": "media-hubs-companion-card-older-webp-360",
+        "src": "/media/hubs/companion/card-older-360w.webp",
+        "width": 360,
+        "height": 240,
+        "bytes": 11922,
+        "checksum": "sha256:75ebc5c0a14f3232834b36636bd90d336826139fb50f04ba98a224164bcda893"
+      },
+      {
+        "id": "media-hubs-companion-card-older-webp-640",
+        "src": "/media/hubs/companion/card-older-640w.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 29064,
+        "checksum": "sha256:5ec839efd84feb5860f6fbd9850c0b8f8ab30a6997690f1a02906d4def655896"
+      },
+      {
+        "id": "media-hubs-companion-card-older-webp-960",
+        "src": "/media/hubs/companion/card-older-960w.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 57768,
+        "checksum": "sha256:d30960a14a3bc8c8d96dfcf57a91bc4cb7aec1e18808c3a91d34e66b1b965ef1"
+      },
+      {
+        "id": "media-hubs-companion-card-older-webp-1440",
+        "src": "/media/hubs/companion/card-older-1440w.webp",
+        "width": 1440,
+        "height": 960,
+        "bytes": 90230,
+        "checksum": "sha256:b066319dc5c6cfe417667664ff247b41e344022b978c44e8729f0c3866c54005"
+      }
+    ]
+  },
+  {
+    "source": "/media/hubs/companion/row-alone.webp",
+    "sourceWidth": 1536,
+    "sourceHeight": 1024,
+    "derivatives": [
+      {
+        "id": "media-hubs-companion-row-alone-webp-360",
+        "src": "/media/hubs/companion/row-alone-360w.webp",
+        "width": 360,
+        "height": 240,
+        "bytes": 4134,
+        "checksum": "sha256:911ad74a22b548ece2660fe4b301875251087de298f4773bec7fb490e3aa6962"
+      },
+      {
+        "id": "media-hubs-companion-row-alone-webp-640",
+        "src": "/media/hubs/companion/row-alone-640w.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 10262,
+        "checksum": "sha256:7c8a9ad2c02c1d171eb49e4187bc2939fa302f7f1117384bca6a6a5f2684b616"
+      },
+      {
+        "id": "media-hubs-companion-row-alone-webp-960",
+        "src": "/media/hubs/companion/row-alone-960w.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 22114,
+        "checksum": "sha256:e38d2f0e39b1c6d07da2feb4dd8b8d8f1d8dd027430f2e01b80d3e42bee0ecd6"
+      },
+      {
+        "id": "media-hubs-companion-row-alone-webp-1440",
+        "src": "/media/hubs/companion/row-alone-1440w.webp",
+        "width": 1440,
+        "height": 960,
+        "bytes": 36384,
+        "checksum": "sha256:40e648ecb67b6643222387261d67563f1e59327936bb9bbfb93085cd2e3887c1"
+      }
+    ]
+  },
+  {
+    "source": "/media/hubs/companion/row-shelf.webp",
+    "sourceWidth": 1536,
+    "sourceHeight": 1024,
+    "derivatives": [
+      {
+        "id": "media-hubs-companion-row-shelf-webp-360",
+        "src": "/media/hubs/companion/row-shelf-360w.webp",
+        "width": 360,
+        "height": 240,
+        "bytes": 8306,
+        "checksum": "sha256:4d509c2cb609ec1bd2eba90128db7e7daaa6b09212fca4f3ceb163f0fe16a758"
+      },
+      {
+        "id": "media-hubs-companion-row-shelf-webp-640",
+        "src": "/media/hubs/companion/row-shelf-640w.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 21094,
+        "checksum": "sha256:2dbb0d2115449e0a31fd4c0fe0922173cf1b7e3a231159822b6d23b5908cac68"
+      },
+      {
+        "id": "media-hubs-companion-row-shelf-webp-960",
+        "src": "/media/hubs/companion/row-shelf-960w.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 42040,
+        "checksum": "sha256:ba06580d174b5717ce9380914e63a7b683d9ccb8470b8d0b993fd7ba2e9a4785"
+      },
+      {
+        "id": "media-hubs-companion-row-shelf-webp-1440",
+        "src": "/media/hubs/companion/row-shelf-1440w.webp",
+        "width": 1440,
+        "height": 960,
+        "bytes": 66258,
+        "checksum": "sha256:4b01d30c2e5ac708018341465d2b8e0e1a907078f77ceb541dc5faccc278e445"
+      }
+    ]
+  },
+  {
+    "source": "/media/hubs/companion/row-speech.webp",
+    "sourceWidth": 1536,
+    "sourceHeight": 1024,
+    "derivatives": [
+      {
+        "id": "media-hubs-companion-row-speech-webp-360",
+        "src": "/media/hubs/companion/row-speech-360w.webp",
+        "width": 360,
+        "height": 240,
+        "bytes": 6150,
+        "checksum": "sha256:fc4cd270ebe397fe84804226a0996bdb4b0c506841b0ef2ab6463de2bf611bcb"
+      },
+      {
+        "id": "media-hubs-companion-row-speech-webp-640",
+        "src": "/media/hubs/companion/row-speech-640w.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 14888,
+        "checksum": "sha256:91004f1643bb03d8c0ddcc24dc514ad49b22a31b1e59df299a1a9dfc62095960"
+      },
+      {
+        "id": "media-hubs-companion-row-speech-webp-960",
+        "src": "/media/hubs/companion/row-speech-960w.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 30542,
+        "checksum": "sha256:2d36f7190455217c06775e35c06e3eac434e5e245e6713fb269aec5a466a655d"
+      },
+      {
+        "id": "media-hubs-companion-row-speech-webp-1440",
+        "src": "/media/hubs/companion/row-speech-1440w.webp",
+        "width": 1440,
+        "height": 960,
+        "bytes": 49790,
+        "checksum": "sha256:6c6bfd670c38d7c0c09925be21272bd025c9d109ee1f8cca710ea8bf965a5ede"
+      }
+    ]
+  },
+  {
+    "source": "/media/hubs/companion/lead-lap.webp",
+    "sourceWidth": 1536,
+    "sourceHeight": 1024,
+    "derivatives": [
+      {
+        "id": "media-hubs-companion-lead-lap-webp-360",
+        "src": "/media/hubs/companion/lead-lap-360w.webp",
+        "width": 360,
+        "height": 240,
+        "bytes": 10754,
+        "checksum": "sha256:30ab6a102ca6ae5e8523b1c0c866af2d327f956efdb0b27f53a791fedeff662d"
+      },
+      {
+        "id": "media-hubs-companion-lead-lap-webp-640",
+        "src": "/media/hubs/companion/lead-lap-640w.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 29192,
+        "checksum": "sha256:313a98e4e9569d43126ad07b9bf9b26845bab4aa48cf5a471d71f9af78651dae"
+      },
+      {
+        "id": "media-hubs-companion-lead-lap-webp-960",
+        "src": "/media/hubs/companion/lead-lap-960w.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 61870,
+        "checksum": "sha256:5cd56c6318a03a448c20e55ddfb5694419b7551d7208415063a46d11a56884d2"
+      },
+      {
+        "id": "media-hubs-companion-lead-lap-webp-1440",
+        "src": "/media/hubs/companion/lead-lap-1440w.webp",
+        "width": 1440,
+        "height": 960,
+        "bytes": 100204,
+        "checksum": "sha256:054603e2b6003541da30e97d9446c44d2bb6acacc980547c6518098ea0bd0e49"
+      }
+    ]
+  },
+  {
+    "source": "/media/hubs/coding/hero.webp",
+    "sourceWidth": 1672,
+    "sourceHeight": 941,
+    "derivatives": [
+      {
+        "id": "media-hubs-coding-hero-webp-360",
+        "src": "/media/hubs/coding/hero-360w.webp",
+        "width": 360,
+        "height": 203,
+        "bytes": 6416,
+        "checksum": "sha256:c3d0e3eca6cd991ae30e5dd280d4b1967afb743481a0753ac2a696cb5e2b4679"
+      },
+      {
+        "id": "media-hubs-coding-hero-webp-640",
+        "src": "/media/hubs/coding/hero-640w.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 14880,
+        "checksum": "sha256:1c4f44a24e89e06d1e837196456c765d2abec5194a16cfffcbd357c1eac48b5a"
+      },
+      {
+        "id": "media-hubs-coding-hero-webp-960",
+        "src": "/media/hubs/coding/hero-960w.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 28606,
+        "checksum": "sha256:6fba2bef72eb6bdf65d38d215f6ccef01628d73f2804af2fe0b1e22f7e6b2a62"
+      },
+      {
+        "id": "media-hubs-coding-hero-webp-1440",
+        "src": "/media/hubs/coding/hero-1440w.webp",
+        "width": 1440,
+        "height": 810,
+        "bytes": 46078,
+        "checksum": "sha256:0f88dee5f88ff91d595195d40cb93aa1e468bde79447f96cab9a55188d7209cb"
+      }
+    ]
+  },
+  {
+    "source": "/media/hubs/coding/card-young.webp",
+    "sourceWidth": 1448,
+    "sourceHeight": 1086,
+    "derivatives": [
+      {
+        "id": "media-hubs-coding-card-young-webp-360",
+        "src": "/media/hubs/coding/card-young-360w.webp",
+        "width": 360,
+        "height": 270,
+        "bytes": 10464,
+        "checksum": "sha256:cb4f0f52c8e7b8ec8f86cedda6d2854b5d60ec4fe6745bdc41bacc02edebba39"
+      },
+      {
+        "id": "media-hubs-coding-card-young-webp-640",
+        "src": "/media/hubs/coding/card-young-640w.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 24042,
+        "checksum": "sha256:5e25c2fe8e296b37a42b5c5fc4482a510d5b1c13d20eebd5113eabf5fe806a00"
+      },
+      {
+        "id": "media-hubs-coding-card-young-webp-960",
+        "src": "/media/hubs/coding/card-young-960w.webp",
+        "width": 960,
+        "height": 720,
+        "bytes": 46164,
+        "checksum": "sha256:e6dccf4cee6a96b9e5ba65c8b6012328815b059ee1dc4a3362687c47cae2ac26"
+      },
+      {
+        "id": "media-hubs-coding-card-young-webp-1440",
+        "src": "/media/hubs/coding/card-young-1440w.webp",
+        "width": 1440,
+        "height": 1080,
+        "bytes": 71900,
+        "checksum": "sha256:30cdab5f511ef58999f7b6ba5450038d883974080949a20c2f41024be7982a93"
+      }
+    ]
+  },
+  {
+    "source": "/media/hubs/coding/card-middle.webp",
+    "sourceWidth": 1536,
+    "sourceHeight": 1024,
+    "derivatives": [
+      {
+        "id": "media-hubs-coding-card-middle-webp-360",
+        "src": "/media/hubs/coding/card-middle-360w.webp",
+        "width": 360,
+        "height": 240,
+        "bytes": 10216,
+        "checksum": "sha256:938c72a2c061f48b52ac48c88f500ba29f2926deee2c65a5e431d271c9d6a1db"
+      },
+      {
+        "id": "media-hubs-coding-card-middle-webp-640",
+        "src": "/media/hubs/coding/card-middle-640w.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 22782,
+        "checksum": "sha256:8a53c34b7c2e934bf2c233cc7fc4178b26b59d6ceac4a56d2226456476679893"
+      },
+      {
+        "id": "media-hubs-coding-card-middle-webp-960",
+        "src": "/media/hubs/coding/card-middle-960w.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 44270,
+        "checksum": "sha256:c8dd4b29c42de002a049589efe318b569a954ec3c475346dfff09a6a6a379895"
+      },
+      {
+        "id": "media-hubs-coding-card-middle-webp-1440",
+        "src": "/media/hubs/coding/card-middle-1440w.webp",
+        "width": 1440,
+        "height": 960,
+        "bytes": 69156,
+        "checksum": "sha256:6d93ccc74f362f37372ad4cfcdd2704b822b547b169060622204c3a5d67c1c7d"
+      }
+    ]
+  },
+  {
+    "source": "/media/hubs/coding/card-teen.webp",
+    "sourceWidth": 1448,
+    "sourceHeight": 1086,
+    "derivatives": [
+      {
+        "id": "media-hubs-coding-card-teen-webp-360",
+        "src": "/media/hubs/coding/card-teen-360w.webp",
+        "width": 360,
+        "height": 270,
+        "bytes": 16276,
+        "checksum": "sha256:d638b88aca5c8d2273356666419f4d092c6912ae0124d74d0aeb7c6b9034e0a3"
+      },
+      {
+        "id": "media-hubs-coding-card-teen-webp-640",
+        "src": "/media/hubs/coding/card-teen-640w.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 40714,
+        "checksum": "sha256:63f4471d7e649fbc9792478cf98e280ed44e959fd3362679c943ca4a87d07daf"
+      },
+      {
+        "id": "media-hubs-coding-card-teen-webp-960",
+        "src": "/media/hubs/coding/card-teen-960w.webp",
+        "width": 960,
+        "height": 720,
+        "bytes": 82750,
+        "checksum": "sha256:cf9bdd8a1ab6e492fd8780e8144c45d422b7cd41150cf936a5e545ba8287e289"
+      },
+      {
+        "id": "media-hubs-coding-card-teen-webp-1440",
+        "src": "/media/hubs/coding/card-teen-1440w.webp",
+        "width": 1440,
+        "height": 1080,
+        "bytes": 133902,
+        "checksum": "sha256:ba14477e62fa405966d0da7ee65089282bac8749bc7155b27d73f444ce40b53b"
+      }
+    ]
+  },
+  {
+    "source": "/media/hubs/coding/row-code.webp",
+    "sourceWidth": 1536,
+    "sourceHeight": 1024,
+    "derivatives": [
+      {
+        "id": "media-hubs-coding-row-code-webp-360",
+        "src": "/media/hubs/coding/row-code-360w.webp",
+        "width": 360,
+        "height": 240,
+        "bytes": 10298,
+        "checksum": "sha256:146de2f204c21bb903b3d428804e308f80e230e55358b829d94dc22bcf9ce186"
+      },
+      {
+        "id": "media-hubs-coding-row-code-webp-640",
+        "src": "/media/hubs/coding/row-code-640w.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 26968,
+        "checksum": "sha256:ff8ac1a737637f423c10d9b1f24208bd0484020c3f80f72d5b1178fe0d5c9929"
+      },
+      {
+        "id": "media-hubs-coding-row-code-webp-960",
+        "src": "/media/hubs/coding/row-code-960w.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 54164,
+        "checksum": "sha256:92fbb703d2d62783102aad5d21d83c4b9043b14daac56ec32d6f9c38ba84921b"
+      },
+      {
+        "id": "media-hubs-coding-row-code-webp-1440",
+        "src": "/media/hubs/coding/row-code-1440w.webp",
+        "width": 1440,
+        "height": 960,
+        "bytes": 89030,
+        "checksum": "sha256:49f812b2614e7fc748f9b0d91577fbfb51be3a270278e97c68ad78f32a5f329b"
+      }
+    ]
+  },
+  {
+    "source": "/media/hubs/coding/row-shelf.webp",
+    "sourceWidth": 1536,
+    "sourceHeight": 1024,
+    "derivatives": [
+      {
+        "id": "media-hubs-coding-row-shelf-webp-360",
+        "src": "/media/hubs/coding/row-shelf-360w.webp",
+        "width": 360,
+        "height": 240,
+        "bytes": 11154,
+        "checksum": "sha256:f672e46c447590aea078c253454132207d5782f0d10a583f5a727fec14b5c163"
+      },
+      {
+        "id": "media-hubs-coding-row-shelf-webp-640",
+        "src": "/media/hubs/coding/row-shelf-640w.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 28244,
+        "checksum": "sha256:d57f08195bf2bfceac1a87f26471f71764b6ce75e67aae369be07f101669e214"
+      },
+      {
+        "id": "media-hubs-coding-row-shelf-webp-960",
+        "src": "/media/hubs/coding/row-shelf-960w.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 55912,
+        "checksum": "sha256:47c16877030d85f44e962999372efb8bc7f5b0cfbc028fe189b0a8cb54bd21a7"
+      },
+      {
+        "id": "media-hubs-coding-row-shelf-webp-1440",
+        "src": "/media/hubs/coding/row-shelf-1440w.webp",
+        "width": 1440,
+        "height": 960,
+        "bytes": 91450,
+        "checksum": "sha256:e51131d6e43669d8df229d6e5ba9de984a88f98723aa280dbfc55220ddeeb0ad"
+      }
+    ]
+  },
+  {
+    "source": "/media/hubs/coding/row-button.webp",
+    "sourceWidth": 1536,
+    "sourceHeight": 1024,
+    "derivatives": [
+      {
+        "id": "media-hubs-coding-row-button-webp-360",
+        "src": "/media/hubs/coding/row-button-360w.webp",
+        "width": 360,
+        "height": 240,
+        "bytes": 7040,
+        "checksum": "sha256:4c1f0346c3a3d65892d29262a441b6586c84d51522ea206f929071ff2baee7f0"
+      },
+      {
+        "id": "media-hubs-coding-row-button-webp-640",
+        "src": "/media/hubs/coding/row-button-640w.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 17186,
+        "checksum": "sha256:431fb5cd7fb0b33044d589b69a7dd4cdeef197a000b12569c9b5621cdbe4f32a"
+      },
+      {
+        "id": "media-hubs-coding-row-button-webp-960",
+        "src": "/media/hubs/coding/row-button-960w.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 35180,
+        "checksum": "sha256:1fa000bd09e893bf44798ce53d2dfc3035a527a34f5c7b04e0b82a99fddeebea"
+      },
+      {
+        "id": "media-hubs-coding-row-button-webp-1440",
+        "src": "/media/hubs/coding/row-button-1440w.webp",
+        "width": 1440,
+        "height": 960,
+        "bytes": 57350,
+        "checksum": "sha256:8a4779a08b53abcb6f3f5314147ea6b009ecfc1ac9411365bfa7ffd25df73eac"
+      }
+    ]
+  },
+  {
+    "source": "/media/hubs/coding/lead-track.webp",
+    "sourceWidth": 1536,
+    "sourceHeight": 1024,
+    "derivatives": [
+      {
+        "id": "media-hubs-coding-lead-track-webp-360",
+        "src": "/media/hubs/coding/lead-track-360w.webp",
+        "width": 360,
+        "height": 240,
+        "bytes": 8928,
+        "checksum": "sha256:0f74ef1575913840c587b7c31b1d554cb058d36ebf17fc9443163724ebfd7520"
+      },
+      {
+        "id": "media-hubs-coding-lead-track-webp-640",
+        "src": "/media/hubs/coding/lead-track-640w.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 19938,
+        "checksum": "sha256:a7279a41cf8f77519693f471dccd76449992320f1e487b95d910cc7781969b35"
+      },
+      {
+        "id": "media-hubs-coding-lead-track-webp-960",
+        "src": "/media/hubs/coding/lead-track-960w.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 36962,
+        "checksum": "sha256:f5d60c8c4dd1f3f183a7957dad9ea22eacce1b7b4eb76200d732ecde4d8dd341"
+      },
+      {
+        "id": "media-hubs-coding-lead-track-webp-1440",
+        "src": "/media/hubs/coding/lead-track-1440w.webp",
+        "width": 1440,
+        "height": 960,
+        "bytes": 59078,
+        "checksum": "sha256:71856f72e493c9f4d7cffd24d49df32740ffb760bc26baa4bc2e622d41900ced"
+      }
+    ]
+  },
+  {
+    "source": "/media/hubs/grill/hero.webp",
+    "sourceWidth": 1672,
+    "sourceHeight": 941,
+    "derivatives": [
+      {
+        "id": "media-hubs-grill-hero-webp-360",
+        "src": "/media/hubs/grill/hero-360w.webp",
+        "width": 360,
+        "height": 203,
+        "bytes": 7836,
+        "checksum": "sha256:d14ead0a521f435598e5d84ab0ba27ad62744df652963125db34ca4d9e00077e"
+      },
+      {
+        "id": "media-hubs-grill-hero-webp-640",
+        "src": "/media/hubs/grill/hero-640w.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 20602,
+        "checksum": "sha256:dc861370baf7c110210f3ffc8bf94f200ccaef25c2b8d04130f3604c721d3bf7"
+      },
+      {
+        "id": "media-hubs-grill-hero-webp-960",
+        "src": "/media/hubs/grill/hero-960w.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 42322,
+        "checksum": "sha256:fd7765fc9e9a62945a2a12688449bb39edb521841bc3f1234c042fbcba936468"
+      },
+      {
+        "id": "media-hubs-grill-hero-webp-1440",
+        "src": "/media/hubs/grill/hero-1440w.webp",
+        "width": 1440,
+        "height": 810,
+        "bytes": 68714,
+        "checksum": "sha256:e344bbf8e872b75cdbd6086c4c45ef9bf0aab6f83d1abe4cabbdca26ea1a02e3"
+      }
+    ]
+  },
+  {
+    "source": "/media/hubs/grill/card-porcelain.webp",
+    "sourceWidth": 1448,
+    "sourceHeight": 1086,
+    "derivatives": [
+      {
+        "id": "media-hubs-grill-card-porcelain-webp-360",
+        "src": "/media/hubs/grill/card-porcelain-360w.webp",
+        "width": 360,
+        "height": 270,
+        "bytes": 10522,
+        "checksum": "sha256:f7920e33819db3e134a3cd9e9b0ca0406f28d0b1496cccd35dee71aa0a749af6"
+      },
+      {
+        "id": "media-hubs-grill-card-porcelain-webp-640",
+        "src": "/media/hubs/grill/card-porcelain-640w.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 23680,
+        "checksum": "sha256:eb02b574efdc80966ca36726d06043f960fb651c5311a5b958d036757462fc23"
+      },
+      {
+        "id": "media-hubs-grill-card-porcelain-webp-960",
+        "src": "/media/hubs/grill/card-porcelain-960w.webp",
+        "width": 960,
+        "height": 720,
+        "bytes": 44164,
+        "checksum": "sha256:cdf43ad9b8cfd646efd4a5e270a1ca98e4fe713273ee1e56b0f6b57045117d7a"
+      },
+      {
+        "id": "media-hubs-grill-card-porcelain-webp-1440",
+        "src": "/media/hubs/grill/card-porcelain-1440w.webp",
+        "width": 1440,
+        "height": 1080,
+        "bytes": 70738,
+        "checksum": "sha256:66ea7225b36610345667d559cb800a508bda2df7651520606a1315d8926bb64b"
+      }
+    ]
+  },
+  {
+    "source": "/media/hubs/grill/card-cast-iron.webp",
+    "sourceWidth": 1448,
+    "sourceHeight": 1086,
+    "derivatives": [
+      {
+        "id": "media-hubs-grill-card-cast-iron-webp-360",
+        "src": "/media/hubs/grill/card-cast-iron-360w.webp",
+        "width": 360,
+        "height": 270,
+        "bytes": 10932,
+        "checksum": "sha256:907cff6f4701c64b7888af27c53d947784809076a35401a5222f4e70b0252c0c"
+      },
+      {
+        "id": "media-hubs-grill-card-cast-iron-webp-640",
+        "src": "/media/hubs/grill/card-cast-iron-640w.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 30262,
+        "checksum": "sha256:892b7424d2fe246812597f201c784786910c910b2094c76713050055fb06604d"
+      },
+      {
+        "id": "media-hubs-grill-card-cast-iron-webp-960",
+        "src": "/media/hubs/grill/card-cast-iron-960w.webp",
+        "width": 960,
+        "height": 720,
+        "bytes": 63974,
+        "checksum": "sha256:0f62ebf102d49e35e334dc80e572f9fe91f198a70db5aa02b654158cf3a6f934"
+      },
+      {
+        "id": "media-hubs-grill-card-cast-iron-webp-1440",
+        "src": "/media/hubs/grill/card-cast-iron-1440w.webp",
+        "width": 1440,
+        "height": 1080,
+        "bytes": 106796,
+        "checksum": "sha256:5df72184529b497cecaf9286d544bb5c169910d1b74ca3bf4cdedf9fc843a99c"
+      }
+    ]
+  },
+  {
+    "source": "/media/hubs/grill/card-stainless.webp",
+    "sourceWidth": 1448,
+    "sourceHeight": 1086,
+    "derivatives": [
+      {
+        "id": "media-hubs-grill-card-stainless-webp-360",
+        "src": "/media/hubs/grill/card-stainless-360w.webp",
+        "width": 360,
+        "height": 270,
+        "bytes": 19854,
+        "checksum": "sha256:4c8ed282d780e36eda26abd1c2ad6060aaf0b5307277b9b9dfce14237a67da58"
+      },
+      {
+        "id": "media-hubs-grill-card-stainless-webp-640",
+        "src": "/media/hubs/grill/card-stainless-640w.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 46174,
+        "checksum": "sha256:ee156090038e6b7c985c0c7be4674d1bdb12d16efd9c32037cff343eee59becf"
+      },
+      {
+        "id": "media-hubs-grill-card-stainless-webp-960",
+        "src": "/media/hubs/grill/card-stainless-960w.webp",
+        "width": 960,
+        "height": 720,
+        "bytes": 89666,
+        "checksum": "sha256:6568ac12b3f5ec8af9849b08a7b8f6d8741a2b25c95dba8d8418a580c09187f8"
+      },
+      {
+        "id": "media-hubs-grill-card-stainless-webp-1440",
+        "src": "/media/hubs/grill/card-stainless-1440w.webp",
+        "width": 1440,
+        "height": 1080,
+        "bytes": 141942,
+        "checksum": "sha256:1b98ab38228e45aa4a8ed41ab67af3c8b69a217a086f69229bc5901fa727b249"
+      }
+    ]
+  },
+  {
+    "source": "/media/hubs/grill/lead-clean-bars.webp",
+    "sourceWidth": 1536,
+    "sourceHeight": 1024,
+    "derivatives": [
+      {
+        "id": "media-hubs-grill-lead-clean-bars-webp-360",
+        "src": "/media/hubs/grill/lead-clean-bars-360w.webp",
+        "width": 360,
+        "height": 240,
+        "bytes": 22022,
+        "checksum": "sha256:e89bc47ba821e0bfe1976c814646f21fb87818a86202552db254a25278dd98d4"
+      },
+      {
+        "id": "media-hubs-grill-lead-clean-bars-webp-640",
+        "src": "/media/hubs/grill/lead-clean-bars-640w.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 53442,
+        "checksum": "sha256:51a22f5ef294112030ff33dff288f5fca62940a5dcfe77c38be33751a871b442"
+      },
+      {
+        "id": "media-hubs-grill-lead-clean-bars-webp-960",
+        "src": "/media/hubs/grill/lead-clean-bars-960w.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 102116,
+        "checksum": "sha256:daf0b8cad809473db677cdf6a46daee4a99bb3aa15e6c993b08d50c7ce4dcdf3"
+      },
+      {
+        "id": "media-hubs-grill-lead-clean-bars-webp-1440",
+        "src": "/media/hubs/grill/lead-clean-bars-1440w.webp",
+        "width": 1440,
+        "height": 960,
+        "bytes": 165252,
+        "checksum": "sha256:c28dd341c693766c97f8336d1d62269e760f8d2b6d056684c92cde136f254ac7"
+      }
+    ]
   }
 ]
