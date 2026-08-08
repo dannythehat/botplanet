@@ -7,7 +7,14 @@ import {
   resolveRedirect,
   safeQuery,
 } from "../src/lib/routing";
-import { REDIRECTS, ROUTES, sitemapRoutes } from "../src/content/routes";
+import {
+  CATEGORIES,
+  REDIRECTS,
+  ROUTES,
+  builtBestOfCategories,
+  categoryRoutes,
+  sitemapRoutes,
+} from "../src/content/routes";
 import { COMPARE_PAGES, comparePageIsSubstantive } from "../src/content/compare-page";
 
 describe("normalisePath — locked URL standards", () => {
@@ -174,6 +181,34 @@ describe("sitemap inclusion rules", () => {
   it("never lists a path that is itself a redirect source", () => {
     const aliases = new Set(REDIRECTS.map((r) => normalisePath(r.from)));
     for (const r of sitemapRoutes()) expect(aliases.has(r.path)).toBe(false);
+  });
+});
+
+/**
+ * The /best-robots/ index links a card per category, and it linked wherever the
+ * CATEGORY was live rather than wherever the PAGE was written — seven cards
+ * onto a 404. This asserts the fact the page now reads instead.
+ */
+describe("builtBestOfCategories", () => {
+  it("names only categories whose best-of URL is a registered live route", () => {
+    const live = new Set(ROUTES.filter((r) => r.status === "live").map((r) => r.path));
+    const built = builtBestOfCategories();
+    expect(built.size).toBeGreaterThan(0);
+    for (const slug of built) {
+      expect(live.has(categoryRoutes(slug).best), `/best-robots/${slug}/ is not a live route`).toBe(
+        true,
+      );
+    }
+  });
+
+  it("leaves out a live category with no best-of page written", () => {
+    const built = builtBestOfCategories();
+    const liveCats = CATEGORIES.filter((c) => c.launch === "live").map((c) => c.slug);
+    const unwritten = liveCats.filter((s) => !built.has(s));
+    const live = new Set(ROUTES.filter((r) => r.status === "live").map((r) => r.path));
+    for (const slug of unwritten) {
+      expect(live.has(categoryRoutes(slug).best), `${slug} would link at a 404`).toBe(false);
+    }
   });
 });
 

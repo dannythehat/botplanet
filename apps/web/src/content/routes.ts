@@ -962,6 +962,22 @@ export const footerGroups = (): { title: string; links: RouteDef[] }[] => {
 /** Canonical, indexable paths for the XML sitemap. */
 export const sitemapRoutes = () => ROUTES.filter((r) => r.inSitemap && r.indexable && r.status !== "hidden");
 
+/**
+ * The categories whose best-of page has actually been written.
+ *
+ * /best-robots/ used to decide this from the category's launch state, which is
+ * a different fact entirely: nine categories are live and two best-of pages
+ * exist, so seven cards linked at a 404. /best-robots/[slug].astro deliberately
+ * returns 404 for an unwritten slug rather than filling the URL shape with a
+ * thin page, so the registry is the only thing that knows.
+ */
+export const builtBestOfCategories = (): Set<string> =>
+  new Set(
+    ROUTES.filter((r) => r.section === "best" && r.status === "live" && r.category).map(
+      (r) => r.category as string,
+    ),
+  );
+
 /** Category-scoped section paths, generated rather than hard-coded. */
 export const categoryRoutes = (slug: string) => ({
   hub: categoryPaths.category(slug),
