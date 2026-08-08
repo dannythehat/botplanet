@@ -51,7 +51,10 @@ the office. Watching is passive; feeding is not.
 ## Who should look elsewhere
 
 **Cat owners, mostly.** Cats hide in low places, this is a tall robot, and
-treat-dispensing motivates a dog far more reliably than a cat.
+treat-dispensing motivates a dog far more reliably than a cat. If you own a cat
+and what you actually want automated is the tray rather than the watching, a
+self-cleaning litter box is the machine that solves your problem and this is
+not.
 
 **Anyone whose pet is upstairs.** Wheels, again.
 

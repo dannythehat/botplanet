@@ -70,7 +70,9 @@ buyable.** The only Cozmo listing on Amazon US is a $19 replacement battery.
 
 Both robots came from the same company and Digital Dream Labs owns both lines.
 If you want one of the two, Vector is the one you can buy, and that settles it
-without either machine having to win on merit.
+without either machine having to win on merit. Our Cozmo review sets out why —
+a store page with no stock and no ship date, and a state Attorney General suing
+the seller over prepaid orders that were never delivered.
 
 ## Who this is for
 
@@ -109,7 +111,10 @@ it. This is the question readers most want answered and the one the maker is
 quietest about.
 
 **How long the servers stay up.** They have outlived one owner. Nobody can
-promise more than that.
+promise more than that, and the reason to take the question seriously is Moxie:
+an $800 companion robot whose maker ceased trading, whose servers went off, and
+whose owners mostly got no refund. Vector is not in that position today. It is
+in the same architecture.
 
 **What it costs today.** The Amazon price moved from $199.99 to $184 within a
 single morning while this review was being written, which is why the figure on

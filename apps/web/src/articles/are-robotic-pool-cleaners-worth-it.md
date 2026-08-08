@@ -90,3 +90,8 @@ and names who should not buy each one. If you would rather answer questions than
 read a ranking, BotMatch asks eight about the pool itself and scores the whole
 catalogue against your answers — and it cannot see what anything pays us, which
 is deliberate and explained in our editorial policy.
+
+The same arithmetic decides the other machines out there. A robot vacuum earns
+its place on the same test — how often the job comes round, and how much you
+resent doing it — and so does a grill-cleaning robot, which is the one people
+buy for the chore they put off longest.

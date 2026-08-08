@@ -394,6 +394,12 @@ export const CATEGORY_ANCHORS: Record<string, InternalAnchor[]> = {
     },
 
     {
+      anchor: "Cozmo",
+      href: "/robots/educational-coding-robots/cozmo/",
+      why: "Cross-category on purpose. Cozmo is filed under coding robots and the Vector review is where a reader actually asks about it — the two machines came from the same company and share the same fate. The anchor has to live in this list to fire on that page.",
+      status: "live",
+    },
+    {
       anchor: "Moxie",
       href: "/robots/companion-robots/moxie/",
       why: "The cautionary tale this category needs a link to. Any review that raises what happens when the servers go off should be able to point at the machine it actually happened to.",
@@ -413,8 +419,8 @@ export const CATEGORY_ANCHORS: Record<string, InternalAnchor[]> = {
          line. */
       anchor: "EMO",
       href: "/robots/companion-robots/living-ai-emo/",
-      why: "Google's comparison anchor for the whole desktop segment. Planned rather than live because the product has no offer behind it, and an anchor pointing at a page that cannot sell is a link the registry will not make.",
-      status: "planned",
+      why: "Google's comparison anchor for the whole desktop segment. Live since 8 August 2026: it was held back on the reasoning that an anchor must not point at a page that cannot sell, and that reasoning was wrong. A rule-out page is a destination — EMO's explains that Amazon returns imitations, which is the single most useful thing a reader searching the name can be told.",
+      status: "live",
     },
 
     {
@@ -486,6 +492,12 @@ export const CATEGORY_ANCHORS: Record<string, InternalAnchor[]> = {
   ],
 
   "pet-camera-robots": [
+    {
+      anchor: "self-cleaning litter box",
+      href: "/robots/self-cleaning-litter-boxes/",
+      why: "The ROLA PetPal review rules itself out for cat owners, and this is the machine that serves the reader it just turned away. Same household, different chore.",
+      status: "live",
+    },
     /* Product anchors \u2014 see the note on companion-robots above. */
     {
       anchor: "EBO Air 2",
@@ -758,6 +770,24 @@ export const CATEGORY_ANCHORS: Record<string, InternalAnchor[]> = {
   ],
 
   "robotic-pool-cleaners": [
+    /* CROSS-CATEGORY, ADDED 8 AUGUST 2026 in the internal-link pass. Three
+       hubs were sitting on two contextual inbound links each because nothing
+       outside their own category ever mentioned them. These fire on prose that
+       already existed — "robot vacuum" appears in the Scuba X1 Pro Max review
+       and in the worth-it guide — rather than on sentences written to carry a
+       link. */
+    {
+      anchor: "robot vacuum",
+      href: "/robots/robot-vacuums/",
+      why: "The comparison a pool buyer makes unprompted: the same question about whether a robot is worth it, asked about the floor indoors. Fires on copy that was already there.",
+      status: "live",
+    },
+    {
+      anchor: "grill-cleaning robot",
+      href: "/robots/grill-cleaning-robots/",
+      why: "The other outdoor chore robot, and the one with the same buying logic — how often the job comes round against how much you resent it.",
+      status: "live",
+    },
     {
       anchor: "waterline",
       href: "/robots/robotic-pool-cleaners/#coverage",
