@@ -194,7 +194,12 @@ describe("exact-product destinations", () => {
     // Moflin joined on 8 August 2026, the first companion product with
     // anything to sell. Five of that category's better-known names have no
     // Amazon US listing at all, so this count will grow slowly and should.
-    expect(exact).toHaveLength(38);
+    //
+    // 49 from 8 August 2026: the eleven litter boxes and lawn mowers came off
+    // OFFER_SETUP_PENDING and were wired. That state emptied the same day it
+    // was created, which is the only good outcome for it — a product waiting
+    // there is a published review nobody can buy from.
+    expect(exact).toHaveLength(49);
     expect(search).toHaveLength(0);
     for (const d of exact) {
       expect(d.identifierKind).toBe("asin");
@@ -1561,7 +1566,7 @@ describe("scheduled refresh — wiring", () => {
        fails loudly for any routed product whose key is absent from the text it
        reads — which is exactly the behaviour wanted. Read the directory rather
        than the list if a fourth category makes this tedious. */
-    const seed = ["pool", "window", "companion", "petcam", "coding"]
+    const seed = ["pool", "window", "companion", "petcam", "coding", "litter", "lawn"]
       .map((c) => readFileSync(`packages/db/seed/${c}/commercial.ts`, "utf8"))
       .join("\n");
     for (const p of sellable()) {
@@ -1706,8 +1711,17 @@ describe("the refresh cadence fits inside the allowance", () => {
     expect(worst).toBeLessThan(MONTHLY_CREDIT_CEILING);
   });
 
+  /* FOUR FROM 8 AUGUST 2026, AND THE NUMBER ABOVE IS WHY. Twenty-two products
+     on a three-day cadence is 220 credits before a single exception, against a
+     ceiling of 200 — twenty products is the most three days can fund and the
+     register passed it when litter and lawn were wired. Four days at one daily
+     exception costs 188 and keeps the whole catalogue on one cadence.
+
+     The bound still has to be a bound. A cap that drifts upward every time the
+     catalogue grows is not a cap, so this stays at four: the next product that
+     does not fit is a reason to look at the plan, not at this line. */
   it("caps how stale a published price can get", () => {
-    expect(CATALOGUE_INTERVAL_DAYS).toBeLessThanOrEqual(3);
+    expect(CATALOGUE_INTERVAL_DAYS).toBeLessThanOrEqual(4);
     expect(CATALOGUE_INTERVAL_DAYS).toBeGreaterThan(DAILY_INTERVAL_DAYS);
   });
 

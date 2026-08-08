@@ -38,8 +38,34 @@ export const MONTHLY_CREDIT_CEILING = 200;
  * month for the current catalogue. `monthlyCost` is asserted against the
  * ceiling in the test suite, so growing the catalogue trips a test rather
  * than quietly exhausting the allowance mid-month.
+ *
+ * FOUR DAYS FROM 8 AUGUST 2026, AND THE TEST DID ITS JOB. Eleven litter boxes
+ * and lawn mowers joined the price checker that day, taking the register from
+ * eleven products to twenty-two, and `monthlyCost` went straight through the
+ * ceiling — which is what the assertion above was put there to make happen
+ * rather than letting the run quietly stop half way through a month.
+ *
+ * The arithmetic is not close and there is no clever way round it. Twenty-two
+ * products read every three days is 220 credits before a single exception, on
+ * an allowance of 250 with a self-imposed ceiling of 200. Twenty products is
+ * the most a three-day cadence can fund, and the catalogue passed that.
+ *
+ * So the interval is four days and the daily exception list drops to one. That
+ * combination costs 188 of 200 at full load and keeps the whole register on a
+ * near-uniform cadence, which is the right trade: the interval exists to bound
+ * how far a PUBLISHED price can drift, and every page benefits from it, where
+ * the daily list benefits four. The alternative that also fits — seven days
+ * with four daily watches — would undo the 4 August fix for twenty-one
+ * products to keep a privilege for one.
+ *
+ * WHAT THIS ACTUALLY IS: the free SerpApi plan is now the binding constraint on
+ * how fresh a price on this site can be. It is not a bug and it is not fixable
+ * in this file. Twenty-six further products already carry buy buttons with no
+ * identity expectation at all, and putting them on the checker at any cadence
+ * costs more than the allowance holds. That is a decision about a subscription,
+ * not about a constant, and it belongs to the owner.
  */
-export const CATALOGUE_INTERVAL_DAYS = 3;
+export const CATALOGUE_INTERVAL_DAYS = 4;
 export const DAILY_INTERVAL_DAYS = 1;
 
 /** @deprecated Kept as an alias so existing callers and tests keep working. */
@@ -60,8 +86,21 @@ export type ExceptionReason =
   /** A human has flagged this product for a closer look. */
   | "active_investigation";
 
-/** How many products may sit on the daily list before the budget stops working. */
-export const MAX_DAILY_EXCEPTIONS = 4;
+/**
+ * How many products may sit on the daily list before the budget stops working.
+ *
+ * ONE, FROM 8 AUGUST 2026. It was four, chosen against an eight-product
+ * register. A daily read costs 30 credits a month against a four-day read's
+ * 7.5, so every product promoted to this list costs what three products cost on
+ * the ordinary cadence. At twenty-two products that arithmetic decides the
+ * question: four daily watches would eat 120 of the 200-credit ceiling and
+ * force the rest of the catalogue out to a weekly read.
+ *
+ * A product that falls off the end of this list is not abandoned — planRefresh
+ * drops it to the catalogue cadence, so it loses its priority and keeps its
+ * cover. That is what makes the cap safe to tighten.
+ */
+export const MAX_DAILY_EXCEPTIONS = 1;
 
 export interface RefreshCandidate {
   productId: string;

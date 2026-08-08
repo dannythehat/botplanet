@@ -504,6 +504,124 @@ for (const c of COMPANION_ASINS) {
   };
 }
 
+const LITTER_LAWN_CHECK_DATE = "2026-08-08";
+
+/**
+ * SELF-CLEANING LITTER BOXES AND ROBOTIC LAWN MOWERS — the offers, 8 August 2026.
+ *
+ * These eleven were published on 8 August with identity confirmed and no
+ * commercial wiring at all: `OFFER_SETUP_PENDING`, which says out loud that a
+ * product is verified and has no buy route yet. That state has a thirty-day
+ * shelf life and it is being spent here rather than allowed to run.
+ *
+ * IDENTITY WAS READ AGAIN BEFORE ANY BUTTON WAS WIRED, not inherited from
+ * docs/seo/litter-lawn-verification-2026-08-08.md. The earlier pass proved
+ * these ASINs are the right machines; this pass exists because publishing a
+ * page and sending a buyer somewhere are different promises, and the second one
+ * gets its own read. All eleven were re-read through the SerpApi product engine
+ * on 8 August: every listing served the ASIN that was requested, every title
+ * names its own model, and every price came back identical to the earlier read.
+ *
+ * ONE CORRECTION TO THAT DOCUMENT, and it matters commercially. It records "the
+ * product engine did not return a stock field for any of the ten". It does —
+ * the field is `stock`, not `availability`, and all eleven returned one on both
+ * passes. The wording is transcribed below for each. No offer publishes a stock
+ * claim from this, because a destination read is not the offer engine's own
+ * refresh; it goes to the price checker as an expectation and the first
+ * accepted observation is what a page will ever quote.
+ */
+const LITTER_ASINS: WindowDestination[] = [
+  {
+    productId: "prod-litter-robot-4",
+    asin: "B0BH6MD3DJ",
+    exactModel: "Litter-Robot 4 with Step & Fence (Whisker, Black)",
+    evidence:
+      "Title: 'Litter-Robot 4 with Step & Fence by Whisker, Black | Automatic, Self-Cleaning Cat Litter Box, Helps Reduce Litter Box Odors, Never Scoop Again, Includes 1 Year of WhiskerCare'. Served ASIN equals the one requested. Storefront 'Visit the Whisker Store', 4.3 stars from 178 ratings, $699.00 and stock wording 'Only 15 left in stock - order soon.' on 8 August 2026. THE BUNDLES OUTRANK THE MACHINE IN SEARCH and this is the machine: B0FFDNZSHT and B0FFF2Y8R9 are $749 supply bundles, B0FFF4MYRT is a $799 accessory bundle, and all three carry the Litter-Robot 4 name. A VARIANT FAMILY as well — the listing publishes Color and Size dimensions — so the served-ASIN equality check is what stops a sibling's data being accepted for this one.",
+  },
+  {
+    productId: "prod-petkit-purobot-max-pro-2",
+    asin: "B0DM83CLW3",
+    exactModel: "PETKIT Purobot Max Pro 2",
+    evidence:
+      "Title: 'PETKIT Purobot Max Pro 2 AI-Camera Automatic Cat Litter Box Large Opening | Cat's Facial Recognition 210° Wide Angle, 5G Wifi App Control Self Cleaning Litter Box, Odor-Free & Integration Safety'. Served ASIN equals the one requested; $509.99, stock wording 'In Stock', 4.0 stars from 45 ratings on 8 August 2026. The model name is written out in full including the '2', which is the whole point: the brief asked for a 'PuroBot Max Pro' and that is the previous generation. A separate Purobot Max 3 (B0F1YMM29X, $399.99) is a different tier rather than this one's successor, so buying on the numeral alone gets the wrong machine in either direction. This listing publishes no storefront row and no details table, so identity rests on the title and the served ASIN.",
+  },
+  {
+    productId: "prod-casa-leo-loo-too",
+    asin: "B09LL9S99B",
+    exactModel: "Casa Leo, Leo's Loo Too",
+    evidence:
+      "Title: 'Casa Leo Automatic Self-Cleaning Cat Litter Box | with Leo’s Loo Too Wi-Fi App & Voice Control, App Weight Tracking, UV Odor Control, Safety Sensors, 30dB Quiet'. Served ASIN equals the one requested; $599.00, stock wording 'Only 17 left in stock - order soon.', 4.0 stars from 411 ratings, Amazon's Choice badge, 8 August 2026. THE STOREFRONT READS 'Visit the Smarty Pear Store' RATHER THAN CASA LEO, which looks wrong and is not: Smarty Pear is the maker that built Leo's Loo Too and Casa Leo is the brand it sells under. Both names appear on the one listing and neither is a reseller wearing the product's name. A Color variant dimension is published, so the served-ASIN check is doing real work here too.",
+  },
+  {
+    productId: "prod-petsafe-scoopfree-crystal-pro",
+    asin: "B0DR3JP2FZ",
+    exactModel: "PetSafe ScoopFree Crystal Pro",
+    evidence:
+      "Title: 'PetSafe ScoopFree Crystal Pro Self-Cleaning Litter Box | Up to 30 Days Hands-Free Automatic Cleaning, Advanced Odor Control, Health Counter Display, LED Indicators, Removable Rake'. Served ASIN equals the one requested. Storefront 'Visit the PetSafe Store', $229.99, stock wording 'In Stock', 3.1 stars from 183 ratings on 8 August 2026. THE CLOSEST TRAP ON THE WHOLE SITE SITS FOUR CENTS AWAY: B07X3XFB6K is the ScoopFree Crystal Pro *Legacy* Front-Entry at $229.95, PetSafe's own word for the previous generation printed in its own title, and its B07 prefix dates it years before this B0D one. 'legacy' is therefore a deny token and 'crystal pro' alone can never confirm — it is a whole-token substring of the Legacy's name as well as of this one. Crystal Pro Legacy uncovered (B07WZPJ2LW, $142.49) and Crystal Classic (B0CFRY7VYN, $99) are the other two live SKUs and are denied by name.",
+  },
+];
+
+const LAWN_ASINS: WindowDestination[] = [
+  {
+    productId: "prod-navimow-i110n",
+    asin: "B0CX7T6BR3",
+    exactModel: "Segway Navimow i110N",
+    evidence:
+      "Title: 'Segway Navimow i110N Robot Lawn Mower Perimeter Wire Free 1/4 Acre RTK+Vision Robotic Lawnmower, AI-Assisted Mapping, Virtual Boundary, APP Control, 58dB(A) Quiet, Multi-Zone Management'. Served ASIN equals the one requested. Storefront 'Visit the NAVIMOW Store', $1,099.00, stock wording 'In Stock', 4.4 stars from 498 ratings on 8 August 2026. THE KITTED VERSIONS ARE SEPARATE ASINS AT HIGHER PRICES and are denied: B0D7HG4319 is the i110N with the Rough Terrain Kit at $1,168.30 and B0CZ3R3SJH is the i110N with Garage S at $1,298. Both are genuinely this mower plus hardware, which is exactly why the destination has to name a SKU rather than search the model — a bundle is not a cheaper or dearer version of the same purchase, it is a different one. The i206 AWD (B0G814F6Z4, $999) is a different machine in the refreshed i2 line.",
+  },
+  {
+    productId: "prod-luba-3-awd-1500h",
+    asin: "B0GKNYZPC3",
+    exactModel: "Mammotion LUBA 3 AWD 1500H",
+    evidence:
+      "Title: 'Mammotion LUBA 3 AWD 1500H Robot Lawn Mower, 0.37 Acre, 2.2\"-4.0\" Cutting | 360° LiDAR+Dual-Camera AI Vision, 4300 sq.ft/h, AWD for 80% Slopes, 15 Multi-Zone Management'. Served ASIN equals the one requested. Storefront 'Visit the Mammotion Store', $2,399.00, stock wording 'Only 1 left in stock - order soon.', 3.9 stars from 20 ratings on 8 August 2026. THE SIZE IS THE MODEL: 1500H and 3000H are 0.37 and 0.75 acre and both are published here as separate products, so '3000h' is a deny token and '1500h' is what confirms. The Luba 2 the brief named is superseded by Mammotion's own page and is not sold under this record.",
+  },
+  {
+    productId: "prod-luba-3-awd-3000h",
+    asin: "B0GKNQKJJQ",
+    exactModel: "Mammotion LUBA 3 AWD 3000H",
+    evidence:
+      "Title: 'Mammotion LUBA 3 AWD 3000H Robot Lawn Mower, 0.75 Acre, 2.2\"-4.0\" Cutting | 360° LiDAR+NetRTK+AI Vision, 5400 sq.ft/h, AWD for 80% Slopes, 30 Multi-Zone Management'. Served ASIN equals the one requested. Storefront 'Visit the Mammotion Store', $2,799.00, stock wording 'In Stock', 3.9 stars from 22 ratings on 8 August 2026. NOTE THE NAVIGATION DIFFERENCE the titles publish and the specs did not: the 3000H reads 'LiDAR+NetRTK+AI Vision' where the 1500H reads 'LiDAR+Dual-Camera AI Vision'. The garage bundles B0GKM8JZDF and B0H1R9RJ3F sell this mower at $3,008 and are denied — same machine, different purchase.",
+  },
+  {
+    productId: "prod-automower-410iq",
+    asin: "B0DTV7TR6W",
+    exactModel: "Husqvarna Automower 410iQ",
+    evidence:
+      "Title: 'Husqvarna 410iQ ½ Acre Wire-Free, 45% Slope, app Based, Robot Lawn Mower | Wire-free robot mower with EPOS®, app-set virtual zones, handles 45% slopes, all lawns, up to ½ acre, 4-year warranty'. Served ASIN equals the one requested; $2,499.99, stock wording 'Only 7 left in stock (more on the way).', 3.9 stars from 68 ratings on 8 August 2026. THIS IS THE LISTING THE SEARCH ROW HIDES: search truncates the front of the title and the brand token disappears, which is why every ASIN here was re-read through the product engine rather than judged from a search result. The 420iQ (B0DTVF4QGY, $3,144.37) is the larger sibling and is denied, as is the bundle B0GP91BFFB. Two prices were in circulation for this mower — $1,550 in a round-up and $2,499.99 on Amazon — and the figure recorded is the one read from the listing itself.",
+  },
+  {
+    productId: "prod-worx-landroid-vision-wr320",
+    asin: "B0GN8KK8XW",
+    exactModel: "WORX WR320 Landroid Vision Cloud",
+    evidence:
+      "Title: 'WORX Robot Lawn Mower for 1/2 Acre, No Perimeter Wire, WR320 | Landroid Vision Cloud with AI Obstacle Avoidance, RTK Cloud Navigation, Auto Mapping, App Control, 30% Slope'. Served ASIN equals the one requested; $1,022.54, stock wording 'In Stock', 4.4 stars from 70 ratings on 8 August 2026. 'LANDROID VISION' IS A FAMILY, NOT A MODEL, which is why the SKU is in the name we publish: WO7144 is the 1/4 acre at $999.99, WR342 the 4WD 1/2 acre at $2,069.99 and WR344 the 4WD 1 acre at $2,646.18. All four are live, all four answer to 'Landroid Vision', and three of them are denied here by their own SKU. The listing publishes Style and Size variant dimensions, so the served-ASIN equality check is load-bearing.",
+  },
+  {
+    productId: "prod-eufy-e15",
+    asin: "B0DRVYDXWX",
+    exactModel: "eufy Robot Lawn Mower E15",
+    evidence:
+      "Title: 'eufy Robot Lawn Mower E15, Auto Mapping, Pure Vision Navigation | Wire Free RTK Free, Multi-Zone Management, AI Obstacle Avoidance, APP Control, 18° Slope, Cut Height 1\"-3\"'. Served ASIN equals the one requested; $1,199.99, stock wording 'In Stock', 4.4 stars from 100 ratings on 8 August 2026. The E15 and the E18 are the two machines in this line and the numeral is the whole difference between them, so 'e18' is denied and 'e15' confirms. This listing publishes no brand row, so identity rests on the title — which names eufy first — and on the served ASIN.",
+  },
+  {
+    productId: "prod-dreame-a3-awd-1000",
+    asin: "B0H3V799KT",
+    exactModel: "DREAME A3 AWD 1000",
+    evidence:
+      "Title: '(Latest Upgrade) DREAME A3 AWD 1000 Robot Lawn Mower, 360° 3D LiDAR & AI Dual Vision Smart Robotic Mower for 0.25 Acre, 80% Slopes & 45min Fast Charge for Homeowners with Large/Steep Lawns'. Served ASIN equals the one requested; $1,599.99, stock wording 'In Stock', 3.8 stars from 13 ratings on 8 August 2026. THREE ASINS SELL THIS MODEL AT THIS PRICE AND ONLY ONE OF THEM IS THE BARE MACHINE ON ITS OWN LISTING. All three were read on 8 August. B0H761SNFG is titled '... A3 AWD 1000 + Cleaning Set+Blade Set' — the bundle, and it says so. B0H46DDHKC is the bare machine again at the same $1,599.99. Those two publish a 'Set name' variant dimension and share a rating count of 42, so they are two set choices under one parent, and a request for either can be answered with the other's data. THIS ASIN PUBLISHES NO VARIANTS AT ALL and carries its own 13 ratings, which is what makes it the safe destination as well as the correct one: there is no sibling set for the listing to substitute. The A3 AWD Pro / LiDAR 3500 (B0GR8TQHV9, $2,699.99) is the larger machine and is denied.",
+  },
+];
+
+for (const p of [...LITTER_ASINS, ...LAWN_ASINS]) {
+  IDENTITY_CHECKS[p.productId] = {
+    asin: p.asin,
+    confirmed: true,
+    evidence: p.evidence,
+    checkedOn: LITTER_LAWN_CHECK_DATE,
+  };
+}
+
 /**
  * The window identity checks, DERIVED from WINDOW_ASINS rather than typed out
  * a second time.
@@ -524,6 +642,30 @@ for (const w of WINDOW_ASINS) {
 }
 
 export const DESTINATIONS: ProductDestination[] = [
+  ...[...LITTER_ASINS, ...LAWN_ASINS].map(
+    ({ productId, asin, exactModel, evidence }): ProductDestination => ({
+      productId,
+      retailerId: "ret-amazon",
+      market: "us",
+      retailerProductId: asin,
+      identifierKind: "asin",
+      exactModel,
+      destinationUrl: `https://www.amazon.com/dp/${asin}`,
+      /* verified_exact, and on the same bar as the window eleven: the listing
+         served the ASIN that was requested and its own title names the model.
+         Every one of these was read twice — once to decide whether to publish
+         the product at all, and again before a buy button was wired to it. The
+         second read is not ceremony. A page that says "this is the current
+         model" and a button that says "buy this one" are different promises,
+         and only the second one can send somebody's money to the wrong place. */
+      confidence: "verified_exact" as const,
+      sourceReference: `ASIN from docs/seo/litter-lawn-verification-2026-08-08.md, identity re-read through the SerpApi product engine on ${LITTER_LAWN_CHECK_DATE} before the offer was wired: https://www.amazon.com/dp/${asin}`,
+      sourceCheckedDate: LITTER_LAWN_CHECK_DATE,
+      sellerIdentity: null,
+      sellerModel: "unknown",
+      notes: evidence,
+    }),
+  ),
   ...COMPANION_ASINS.map(
     ({ productId, asin, exactModel, evidence }): ProductDestination => ({
       productId,
@@ -719,6 +861,29 @@ export const REDIRECT_KEYS: Record<string, string> = {
   "prod-sphero-indi": "code-sphero-indi-amazon",
   "prod-ozobot-evo": "code-ozobot-evo-amazon",
   "prod-makeblock-mbot": "code-makeblock-mbot-amazon",
+
+  /* LITTER AND LAWN. Written into D1 on 8 August 2026 by this job, in the same
+     order the companion keys were: the offer row and the redirect_links row go
+     into production FIRST, then the key is recorded here. That way this map
+     keeps describing the database rather than a naming convention somebody
+     hoped was followed — which is the mistake that nearly put eleven window
+     buy buttons on a 404.
+
+     The prefixes follow the house pattern (`pool-`, `win-`, `comp-`,
+     `petcam-`, `code-`), brand then compressed model then `-amazon`. Two
+     Mammotions differ only by the size in the middle, which is the whole
+     difference between the machines as well. */
+  "prod-litter-robot-4": "litter-whisker-lr4-amazon",
+  "prod-petkit-purobot-max-pro-2": "litter-petkit-purobotmaxpro2-amazon",
+  "prod-casa-leo-loo-too": "litter-casaleo-lootoo-amazon",
+  "prod-petsafe-scoopfree-crystal-pro": "litter-petsafe-crystalpro-amazon",
+  "prod-navimow-i110n": "lawn-segway-i110n-amazon",
+  "prod-luba-3-awd-1500h": "lawn-mammotion-luba3-1500h-amazon",
+  "prod-luba-3-awd-3000h": "lawn-mammotion-luba3-3000h-amazon",
+  "prod-automower-410iq": "lawn-husqvarna-410iq-amazon",
+  "prod-worx-landroid-vision-wr320": "lawn-worx-wr320-amazon",
+  "prod-eufy-e15": "lawn-eufy-e15-amazon",
+  "prod-dreame-a3-awd-1000": "lawn-dreame-a3awd1000-amazon",
 };
 
 /* ------------------------------------------------------------------ */

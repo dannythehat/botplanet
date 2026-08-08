@@ -936,22 +936,27 @@ export interface OfferSetupPending {
 
 export const OFFER_SETUP_PENDING_DAYS = 30;
 
-export const OFFER_SETUP_PENDING: Record<string, OfferSetupPending> = {
-  /* Ten products verified on 8 August 2026 against Amazon US through the
-     SerpAPI product engine and against each manufacturer's current lineup.
-     Identity confirmed; nobody has built the commercial wiring. */
-  "prod-litter-robot-4": { reason: "Identity confirmed at B0BH6MD3DJ, $699 read 8 August 2026. Whisker's affiliate programme has not been applied for and no destination is wired.", since: "2026-08-08" },
-  "prod-petkit-purobot-max-pro-2": { reason: "Identity confirmed at B0DM83CLW3, $509.99 read 8 August 2026. PETKIT sells through Amazon and direct; neither route is wired.", since: "2026-08-08" },
-  "prod-casa-leo-loo-too": { reason: "Identity confirmed at B09LL9S99B, $599 read 8 August 2026. No affiliate relationship with Casa Leo.", since: "2026-08-08" },
-  "prod-petsafe-scoopfree-crystal-pro": { reason: "Identity confirmed at B0DR3JP2FZ, $229.99 read 8 August 2026. The Legacy SKU sits four cents away and the destination must not be wired until the ASIN is pinned in DESTINATIONS.", since: "2026-08-08" },
-  "prod-navimow-i110n": { reason: "Identity confirmed at B0CX7T6BR3, $1,099 read 8 August 2026. Segway's US programme is unapplied.", since: "2026-08-08" },
-  "prod-luba-3-awd-1500h": { reason: "Identity confirmed at B0GKNYZPC3, $2,399 read 8 August 2026. Replaces the Luba 2 the brief named; no destination wired.", since: "2026-08-08" },
-  "prod-luba-3-awd-3000h": { reason: "Identity confirmed at B0GKNQKJJQ, $2,799 read 8 August 2026. No destination wired.", since: "2026-08-08" },
-  "prod-automower-410iq": { reason: "Identity confirmed at B0DTV7TR6W, $2,499.99 read 8 August 2026. Husqvarna sells through dealers as well as Amazon and the right destination is a decision, not a default.", since: "2026-08-08" },
-  "prod-worx-landroid-vision-wr320": { reason: "Identity confirmed at B0GN8KK8XW, $1,022.54 read 8 August 2026. Four Landroid Vision SKUs are live and the destination must name this one explicitly.", since: "2026-08-08" },
-  "prod-eufy-e15": { reason: "Identity confirmed at B0DRVYDXWX, $1,199.99 read 8 August 2026. Anker's programme is unapplied.", since: "2026-08-08" },
-  "prod-dreame-a3-awd-1000": { reason: "Identity confirmed at B0H3V799KT, $1,599.99 read 8 August 2026. Three ASINs carry this model at the same price and one of them is a bundle, so the destination must name this one rather than search the model.", since: "2026-08-08" },
-};
+/**
+ * EMPTY, AND THE DAY IT EMPTIED IS THE POINT.
+ *
+ * Eleven products entered this state on 8 August 2026 and all eleven left it
+ * the same day, wired to Amazon US with a pinned ASIN, a /go key and a seeded
+ * offer each. Nothing was carried forward and nothing was quietly re-dated.
+ *
+ * The eleven reasons that used to sit here have not been deleted — they are in
+ * git, and the wiring that answers each of them is recorded beside the ASIN it
+ * pins in commerce/destinations.ts. Two of those reasons turned out to be
+ * wrong about the obstacle, which is worth keeping in mind the next time
+ * something lands here: "Whisker's affiliate programme has not been applied
+ * for" and "Anker's programme is unapplied" both described a direct
+ * relationship nobody needs. Every one of these sells on Amazon US, where
+ * BotPlanet already has a programme, so the work was pinning a SKU rather than
+ * signing an agreement.
+ *
+ * The map stays, and so does its shelf life. This is the state a verified
+ * product waits in, and an empty one is the only good state for it to be in.
+ */
+export const OFFER_SETUP_PENDING: Record<string, OfferSetupPending> = {};
 
 /** Days a product has been waiting, against the day given. */
 export const pendingAgeDays = (since: string, today: string): number =>

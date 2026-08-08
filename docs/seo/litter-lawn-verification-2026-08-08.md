@@ -166,3 +166,94 @@ record and is judged on its own.
 
 The A3 AWD 1000 looks like a good candidate. It should be proposed, not smuggled
 in under an old name.
+
+---
+
+# Second addendum, 8 August 2026 — the offers, and a correction to this file
+
+All eleven products (the ten above plus the Dreame A3 AWD 1000, verified and
+admitted later the same day) came off `OFFER_SETUP_PENDING` and were wired to
+Amazon US. That state emptied on the day it was created, which is the only good
+outcome for it: a product sitting there is a published review nobody can buy
+from.
+
+## The correction, because it changes what we can say
+
+**This file says the product engine returned no stock field for any of the ten.
+It does.** The field is `stock`, not `availability`, and the earlier pass read
+the wrong one. Both reads on 8 August returned stock wording for all eleven:
+
+| Product | Stock wording read |
+|---|---|
+| Litter-Robot 4 | Only 15 left in stock - order soon. |
+| PETKIT Purobot Max Pro 2 | In Stock |
+| Casa Leo Leo's Loo Too | Only 17 left in stock - order soon. |
+| PetSafe ScoopFree Crystal Pro | In Stock |
+| Segway Navimow i110N | In Stock |
+| Mammotion LUBA 3 AWD 1500H | Only 1 left in stock - order soon. |
+| Mammotion LUBA 3 AWD 3000H | In Stock |
+| Husqvarna Automower 410iQ | Only 7 left in stock (more on the way). |
+| WORX Landroid Vision Cloud WR320 | In Stock |
+| eufy Robot Lawn Mower E15 | In Stock |
+| DREAME A3 AWD 1000 | In Stock |
+
+**No page publishes any of it, and the reason is not caution.** That is evidence
+about a listing gathered while checking identity, not an observation of an offer
+made by the refresh service on a recorded date. `stock_status` on all eleven
+offer rows is `unknown` and stays there until the scheduled refresh reads one.
+The distinction is the same one that keeps prices off these pages.
+
+## Identity was read a second time, before any button was wired
+
+Every ASIN was re-read through the product engine on 8 August, after the
+products were published and before an offer existed. All eleven served the ASIN
+requested; all eleven publish a brand row and a model number that names them;
+every price came back identical to the first read. Publishing a page and taking
+somebody's click are different promises, and the second one got its own read.
+
+**None of these eleven listings publishes a model NAME.** All eleven publish a
+model NUMBER, and `matchIdentity` reads the details table rather than the title
+— so the price checker's tokens are numbers. Written out because a deny list of
+readable product names would have looked thorough here and fired on nothing.
+
+## The sibling reads, which is where the money was
+
+| Ours | Model number | The sibling that nearly passed | Its number |
+|---|---|---|---|
+| Litter-Robot 4 | LR4-0301-00-CA | Supply bundle B0FFDNZSHT, $749 | **LR4-0301-00-CA** — identical |
+| PetSafe Crystal Pro | PAL00-18017 | Crystal Pro *Legacy* B07X3XFB6K, $229.95 | PAL00-16806 |
+| Casa Leo | 3746 | V2 colourway B0HB41VTJX / bundle B0H5HZXT4C, $699 | V2-Avocado Green / V2B-Pink |
+| PETKIT Max Pro 2 | T5-2 | Purobot Max 3 B0F1YMM29X, $399.99 | PuraMax 2 |
+| Navimow i110N | i110N | Garage S bundle B0CZ3R3SJH, $1,298 | **i110N** — identical |
+| Husqvarna 410iQ | 970727401 | 420iQ B0DTVF4QGY, $3,144.37 | 970727501 |
+| DREAME A3 AWD 1000 | MXXA7300 | Cleaning+blade bundle B0H761SNFG, $1,599.99 | MXXA7300+Bundle C |
+
+**Two of those publish our exact model number.** The Litter-Robot 4 supply
+bundle and the Navimow Garage S are indistinguishable from the bare machines on
+every field the matcher reads. Nothing in a details table separates a $1,099
+mower from a $1,298 mower plus a garage. What separates them is the check that
+the ASIN served equals the ASIN requested, which runs before brand and before
+model — for those two products it is not a backstop, it is the guard.
+
+## Dreame, pinned to the bare machine
+
+Three ASINs sell the A3 AWD 1000 at $1,599.99 and all three were read.
+B0H761SNFG bundles a cleaning and blade set and says so in its title and its
+model number. B0H46DDHKC is the bare machine again; it and the bundle publish a
+"Set name" variant dimension and share a rating count of 42, so they are two set
+choices under one parent and either can be served in place of the other.
+**B0H3V799KT publishes no variants at all and carries its own 13 ratings** — the
+bare machine on a listing with no sibling set to substitute. That is the
+destination.
+
+## What is still not published
+
+**No price on any of the eleven.** Prices were read from every listing and none
+of them is in the seed or the database. `base_price_minor` is NULL on all eleven
+rows. The window and companion seeds carry research figures held as
+snapshot/indicative where the freshness gate cannot publish them; that is safe
+and it is still a number in a price field no pipeline checked. The first
+observation the refresh service accepts fills these, with the date it read them.
+Until then every page says "Check current price", which is true.
+
+**No reviews.** Still waiting on artwork, per the owner's instruction.

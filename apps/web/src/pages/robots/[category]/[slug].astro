@@ -14,6 +14,7 @@ import { reviewFor } from "../../../content/reviews";
 import { availabilityFor, reviewSchema, articleSchema, webPageSchema } from "../../../lib/seo";
 import { FOUNDER } from "../../../content/team";
 import { deliveryLine, deliveryNote } from "../../../lib/delivery-wording";
+import { PRICE_WITHHELD_LABEL } from "../../../content/commerce/price-display";
 
 /* Today, as a date rather than an instant, resolved once for the whole render
    so two offers on one page cannot straddle midnight and disagree. */
@@ -283,9 +284,17 @@ const reviewGraph = hasReview
     </p>
   ) : (
     <>
+      {/* THE SENTENCE HAS TO SURVIVE A TABLE WITH NO PRICES IN IT. Eleven
+          litter boxes and lawn mowers were wired to Amazon on 8 August 2026
+          with a pinned ASIN each and no price at all — nothing has been
+          through the refresh service yet — and "every price below carries the
+          date it was checked" reads as an excuse on a table whose price column
+          is empty. It is a promise about the prices that ARE printed, so it is
+          only made when one is. */}
       <p class="note">
-        Every price below carries the date it was checked. Offer selection favours suitability and freshness, never
-        commission.
+        {engineOffers.some(({ pub, offer }) => pub.priceShowable && offer.basePriceMinor !== null)
+          ? "Every price below carries the date it was checked. Offer selection favours suitability and freshness, never commission."
+          : "The link below goes to the exact listing for this model, and nobody has checked its price on a recorded date yet — so this page shows none. Offer selection favours suitability and freshness, never commission."}
       </p>
       <table>
         <thead>
@@ -301,7 +310,11 @@ const reviewGraph = hasReview
                 )}
               </td>
               <td class="price" style="font-size:16px;">
-                {pub.priceShowable && offer.basePriceMinor !== null ? usd(offer.basePriceMinor) : <span class="muted">not confirmed</span>}
+                {/* "Check current price", the same words the buy box uses and
+                    the price ladder uses, rather than "not confirmed". They
+                    describe the same state and only one of them tells the
+                    reader what to do about it. */}
+                {pub.priceShowable && offer.basePriceMinor !== null ? usd(offer.basePriceMinor) : <span class="muted">{PRICE_WITHHELD_LABEL}</span>}
               </td>
               <td class="muted">{pub.stockShowable ? titleCase(offer.stock.state.replace(/_/g, " ")) : "—"}</td>
               <td class="muted">{(pub.shippingShowable && deliveryLine(offer.shipping.sourceWording, offer.sourceCheckedDate, TODAY)) || "—"}</td>
@@ -311,7 +324,9 @@ const reviewGraph = hasReview
               </td>
               <td>
                 {pub.linkable && offer.redirectKey ? (
-                  <a class="btn" href={`/go/${offer.redirectKey}`} rel="sponsored nofollow">View offer</a>
+                  <a class="btn" href={`/go/${offer.redirectKey}`} rel="sponsored nofollow">
+                    Check price on {retailer(offer.retailerId)?.displayName ?? "the retailer"}
+                  </a>
                 ) : null}
               </td>
             </tr>
