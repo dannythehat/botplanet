@@ -20,7 +20,8 @@
     "gen:media-mapping": "tsx scripts/gen-media-mapping.ts",
     "gen:derivatives": "node scripts/gen-derivatives.mjs",
     "ext": "node scripts/extension-points.mjs",
-    "ext:write": "node scripts/extension-points.mjs --write"
+    "ext:write": "node scripts/extension-points.mjs --write",
+    "audit:links": "node scripts/audit-links.mjs"
   },
   "devDependencies": {
     "@types/node": "^22.10.0",

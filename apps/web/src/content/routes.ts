@@ -255,7 +255,7 @@ export const ROUTES: RouteDef[] = [
        questions and then have nothing to recommend. It flips to live with the
        first published lawn product. Not in the sitemap either way, same as
        pool and window: the page renders noindex. */
-    status: "coming_soon",
+    status: "live",
     navSurface: "none",
     footerGroup: null,
     inSitemap: false,
@@ -302,7 +302,7 @@ export const ROUTES: RouteDef[] = [
        coming_soon for the same reason lawn is: no products in the catalogue
        yet, so the funnel would ask six good questions and recommend nothing.
        Flips to live with the first published companion product. */
-    status: "coming_soon",
+    status: "live",
     navSurface: "none",
     footerGroup: null,
     inSitemap: false,
@@ -346,7 +346,7 @@ export const ROUTES: RouteDef[] = [
     breadcrumbLabel: "Find My Pet Camera Robot",
     parent: "/robots/pet-camera-robots/",
     section: "botmatch",
-    status: "coming_soon",
+    status: "live",
     navSurface: "none",
     footerGroup: null,
     inSitemap: false,
@@ -389,7 +389,7 @@ export const ROUTES: RouteDef[] = [
     breadcrumbLabel: "Find My Coding Robot",
     parent: "/robots/educational-coding-robots/",
     section: "botmatch",
-    status: "coming_soon",
+    status: "live",
     navSurface: "none",
     footerGroup: null,
     inSitemap: false,
@@ -432,7 +432,7 @@ export const ROUTES: RouteDef[] = [
     breadcrumbLabel: "Find My Robot Vacuum",
     parent: "/robots/robot-vacuums/",
     section: "botmatch",
-    status: "coming_soon",
+    status: "live",
     navSurface: "none",
     footerGroup: null,
     inSitemap: false,
@@ -474,7 +474,7 @@ export const ROUTES: RouteDef[] = [
     breadcrumbLabel: "Find My Grill Cleaner",
     parent: "/robots/grill-cleaning-robots/",
     section: "botmatch",
-    status: "coming_soon",
+    status: "live",
     navSurface: "none",
     footerGroup: null,
     inSitemap: false,
@@ -520,7 +520,7 @@ export const ROUTES: RouteDef[] = [
     /* Its own questions and its own config, sc-litterbox-v1. coming_soon only
        because the catalogue is empty — the funnel asks the right questions and
        has nothing to recommend yet. */
-    status: "coming_soon",
+    status: "live",
     navSurface: "none",
     footerGroup: null,
     inSitemap: false,
