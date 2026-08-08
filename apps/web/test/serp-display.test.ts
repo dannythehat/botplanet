@@ -22,6 +22,7 @@ import { EDITORIAL } from "../src/content/editorial";
 import { CATEGORY_HERO } from "../src/content/category-hero";
 import { REVIEWS } from "../src/content/reviews";
 import { COMPARE_PAGES } from "../src/content/compare-page";
+import { PRODUCTION_HOST, buildMeta } from "../src/lib/seo";
 
 /** Google truncates around here. Beyond it, the words are written for nobody. */
 const MAX_DESCRIPTION = 160;
@@ -149,5 +150,40 @@ describe("what the search result shows", () => {
       console.warn(`\n[serp-display] ${over.length} owner-locked hub(s) over the display limit:\n${over.join("\n")}`);
     }
     expect(Array.isArray(over)).toBe(true);
+  });
+});
+
+/**
+ * THE ROBOTS DIRECTIVE, WHICH IS TWO DECISIONS AND NOT ONE.
+ *
+ * `noindex` says do not rank this page. `nofollow` says do not use any link on
+ * it. Sending them together on the production domain throws away the
+ * breadcrumbs, the header and the footer of a page that is genuinely linked and
+ * genuinely crawlable — /botmatch/<category>/ sits on every category hub and
+ * links back into the catalogue.
+ *
+ * A preview host is the one case where the full stop is right: nothing on
+ * workers.dev should be crawled at all, because every URL on it duplicates one
+ * on botplanet.io.
+ */
+describe("robots directives", () => {
+  const meta = (noindex: boolean, host: string) =>
+    buildMeta({ title: "t", description: "d", path: "/x/", noindex }, host).robots;
+
+  it("keeps crawling through a page it declines to index", () => {
+    expect(meta(true, PRODUCTION_HOST)).toBe("noindex, follow");
+  });
+
+  it("indexes and follows by default", () => {
+    expect(meta(false, PRODUCTION_HOST)).toBe("index, follow");
+  });
+
+  it("stops a preview host dead, indexable or not", () => {
+    expect(meta(false, "botplanet-web.dannythehat2.workers.dev")).toBe("noindex, nofollow");
+    expect(meta(true, "botplanet-web.dannythehat2.workers.dev")).toBe("noindex, nofollow");
+  });
+
+  it("reads the production host with a port on it", () => {
+    expect(meta(false, `${PRODUCTION_HOST}:8787`)).toBe("index, follow");
   });
 });

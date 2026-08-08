@@ -55,6 +55,25 @@ export function isPreviewHost(host: string | undefined | null): boolean {
 export function buildMeta(input: MetaInput, host?: string | null): ResolvedMeta {
   const preview = isPreviewHost(host);
   const noindex = input.noindex || preview;
+  /**
+   * NOINDEX AND NOFOLLOW ARE DIFFERENT DECISIONS AND WERE BEING MADE TOGETHER.
+   *
+   * Every noindexed page on the production domain was also sending `nofollow`,
+   * which tells a crawler to discard every link on the page — the breadcrumbs,
+   * the header, the whole footer. That is right for a preview host, where the
+   * point is to keep the duplicate out of the index entirely. It is wrong for a
+   * real, linked page we simply do not want ranked: /botmatch/<category>/ is
+   * reachable from every category hub and links back into the catalogue, and
+   * `nofollow` was throwing those away.
+   *
+   * So: a page we choose not to index still gets crawled through, and only a
+   * host that should not be crawled at all gets the full stop.
+   */
+  const robots = preview
+    ? "noindex, nofollow"
+    : noindex
+      ? "noindex, follow"
+      : "index, follow";
   const image = absUrl(input.ogImage ?? OG_IMAGE_DEFAULT);
   return {
     title: input.title,
@@ -66,7 +85,7 @@ export function buildMeta(input: MetaInput, host?: string | null): ResolvedMeta 
     ogImage: image,
     ogUrl: absUrl(input.path),
     twitterCard: "summary_large_image",
-    robots: noindex ? "noindex, nofollow" : "index, follow",
+    robots,
   };
 }
 
