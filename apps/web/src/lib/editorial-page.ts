@@ -113,6 +113,10 @@ export async function buildEditorialPage(
       cleans: row.cleans,
       power: row.power,
       poolSize: row.poolSize,
+      /* So the card can label its own facts. A companion robot does not clean
+         anything and has no pool-size rating; without this the pick prints
+         "Cleans: companionship" and "Rated for: Not disclosed". */
+      categorySlug: article.categorySlug,
     });
   }
 

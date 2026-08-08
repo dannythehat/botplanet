@@ -43,6 +43,18 @@ export interface RenderedPick extends EditorialPick {
   power: string;
   /** "Up to 50 ft", "Up to 1,615 sq ft", or the not-disclosed wording. */
   poolSize: string;
+  /**
+   * The product's category, used only to label the facts honestly.
+   *
+   * ADDED 8 August 2026 BECAUSE THIS CARD SHIPPED WRONG. The seniors guide
+   * rendered "Cleans: companionship · play interaction" and "Rated for: Not
+   * disclosed" for a robotic cat. Neither is a defect in the data — the
+   * capability column genuinely holds companionship, and a robot pet genuinely
+   * has no pool-size rating. Both are pool-era LABELS printed over a category
+   * that does not use them, and "Not disclosed" is the worse of the two: it
+   * implies a manufacturer withheld a figure that does not exist.
+   */
+  categorySlug?: string;
 }
 
 interface Props {
@@ -54,6 +66,22 @@ interface Props {
 }
 
 const { id, eyebrow, title, intro, picks } = Astro.props;
+
+/* Categories where nothing is cleaned. The list is explicit rather than a
+   default-else so that adding a category forces a decision about its label
+   instead of inheriting "Cleans" by silence. */
+const DOES_NOT_CLEAN = new Set(["companion-robots", "pet-camera-robots", "educational-coding-robots"]);
+const doesLabel = (p: RenderedPick): string =>
+  p.categorySlug && DOES_NOT_CLEAN.has(p.categorySlug) ? "Does" : "Cleans";
+
+/* "Rated for" is the pool-size axis. A category that does not use it drops the
+   row entirely rather than printing "Not disclosed", which reads as a
+   manufacturer withholding a figure rather than as a field that does not
+   apply. */
+const ratedFor = (p: RenderedPick): string | null => {
+  if (p.categorySlug && DOES_NOT_CLEAN.has(p.categorySlug)) return null;
+  return /not disclosed/i.test(p.poolSize) ? p.poolSize : p.poolSize;
+};
 ---
 
 <section class="bp-picks" id={id}>
@@ -73,9 +101,9 @@ const { id, eyebrow, title, intro, picks } = Astro.props;
         </div>
 
         <dl class="bp-picks__facts">
-          <div><dt>Cleans</dt><dd>{p.cleans}</dd></div>
+          <div><dt>{doesLabel(p)}</dt><dd>{p.cleans}</dd></div>
           <div><dt>Power</dt><dd>{p.power}</dd></div>
-          <div><dt>Rated for</dt><dd>{p.poolSize}</dd></div>
+          {ratedFor(p) && <div><dt>Rated for</dt><dd>{ratedFor(p)}</dd></div>}
           <div><dt>Price band</dt><dd>{p.band}</dd></div>
         </dl>
 
