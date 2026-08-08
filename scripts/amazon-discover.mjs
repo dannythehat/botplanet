@@ -144,6 +144,35 @@ const PETCAM = [
   { slug: "petcube", name: "Petcube", query: "Petcube pet camera", must: ["petcube"], deny: [] },
 ];
 
+/**
+ * Educational and coding robots. The twelve the page plan carries, researched
+ * 6 August 2026 and never checked against a shop.
+ *
+ * THIS CATEGORY IS THE MOST LIKELY OF ALL OF THEM TO HAVE MOVED. Sphero
+ * discontinued consumer lines and pivoted to education; Wonder Workshop's Dash
+ * and Botley have changed hands; LEGO retires SPIKE and MINDSTORMS sets on its
+ * own schedule. Two categories in a row have turned up stale model lists, and
+ * this one has twelve names on it.
+ *
+ * DENY LISTS ARE HEAVY HERE because the ranges are dense: Sphero alone sells
+ * BOLT, BOLT+, Mini, Indi, RVR and SPRK+, and every one of them will match a
+ * bare "sphero".
+ */
+const CODING = [
+  { slug: "ozobot", name: "Ozobot", query: "Ozobot coding robot", must: ["ozobot"], deny: ["evo", "bit ", "sticker", "marker set"] },
+  { slug: "sphero-bolt", name: "Sphero BOLT", query: "Sphero BOLT coding robot ball", must: ["bolt"], deny: ["mini", "indi", "rvr", "sprk", "bolt+"] },
+  { slug: "bee-bot", name: "Bee-Bot", query: "Bee-Bot programmable floor robot", must: ["bee-bot", "bee bot"], deny: ["blue-bot", "blue bot"] },
+  { slug: "lego-spike-essential", name: "LEGO SPIKE Essential", query: "LEGO Education SPIKE Essential set", must: ["spike essential"], deny: ["spike prime", "mindstorms"] },
+  { slug: "sphero-mini", name: "Sphero Mini", query: "Sphero Mini app controlled robot ball", must: ["sphero mini"], deny: ["bolt", "indi", "rvr", "sprk"] },
+  { slug: "vex-go", name: "VEX GO", query: "VEX GO robotics kit", must: ["vex go"], deny: ["vex iq", "vex v5", "vex 123"] },
+  { slug: "sphero-indi", name: "Sphero indi", query: "Sphero indi coding robot car", must: ["indi"], deny: ["bolt", "mini", "rvr", "sprk"] },
+  { slug: "ozobot-evo", name: "Ozobot Evo", query: "Ozobot Evo coding robot", must: ["evo"], deny: ["bit ", "sticker"] },
+  { slug: "makeblock-mbot", name: "Makeblock mBot", query: "Makeblock mBot coding robot kit", must: ["mbot"], deny: ["mbot2", "mbot 2", "ranger", "ultimate"] },
+  { slug: "sphero-rvr", name: "Sphero RVR", query: "Sphero RVR programmable rover", must: ["rvr"], deny: ["bolt", "mini", "indi", "sprk"] },
+  { slug: "botley-2", name: "Botley 2.0", query: "Botley 2.0 coding robot Learning Resources", must: ["botley"], deny: [] },
+  { slug: "code-and-go-robot-mouse", name: "Code & Go Robot Mouse", query: "Code and Go Robot Mouse Learning Resources", must: ["robot mouse"], deny: [] },
+];
+
 /** Which set to run. `--set companion` or default to the lawn seventeen. */
 const SET = process.argv.includes("--set") ? process.argv[process.argv.indexOf("--set") + 1] : "lawn";
 
@@ -232,7 +261,7 @@ function judge(target, results) {
 }
 
 const results = [];
-const SETS = { petcam: PETCAM, companion: COMPANION, "companion-legacy": COMPANION_LEGACY, "companion-open": COMPANION_OPEN, lawn: TARGETS };
+const SETS = { coding: CODING, petcam: PETCAM, companion: COMPANION, "companion-legacy": COMPANION_LEGACY, "companion-open": COMPANION_OPEN, lawn: TARGETS };
 const ALL = SETS[SET] ?? TARGETS;
 /* `--only slug,slug` re-runs part of a set. The companion run on 8 August 2026
    stopped after eight of nine without writing its JSON, and re-searching the

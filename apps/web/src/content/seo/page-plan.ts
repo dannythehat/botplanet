@@ -1275,7 +1275,33 @@ const ENABOT_RANGE: PagePlan = {
 };
 
 /* Coding robots. The reverse of every other category: the products are 4x to
-   14x the head term, so the reviews are the business and the hub only routes. */
+   14x the head term, so the reviews are the business and the hub only routes.
+
+   BRAND TERMS MEASURED AND REFUSED, 8 August 2026 ($0.1662).
+   docs/seo/coding-robots-findings.md
+
+   After Enabot turned out to be a brand with a category attached — 9,900/mo at
+   KD 4, with an editorial gap on its SERP — this category looked like the same
+   shape and larger: sphero 27,100, vex robotics 33,100, ozobot 14,800,
+   makeblock 3,600, and SIX Sphero products in the plan with no brand term
+   anywhere near it.
+
+   IT IS NOT THE SAME SHAPE. "sphero" returns sphero.com, YouTube, the Sphero
+   Edu app on two stores, WIKIPEDIA, and one retail result. "ozobot" returns
+   ozobot.com, the ozoblockly coding IDE, and demco.com and teq.com — library
+   and classroom suppliers. Both are navigational or procurement queries rather
+   than shopping ones, and they measure KD 26, 36 and 62 against Enabot's 4.
+   There is no editorial gap because the query is not editorial.
+
+   BUYABILITY, read listing by listing the same day: five are clean (Sphero
+   BOLT, Mini and indi, Ozobot Evo, Makeblock mBot), five have the wrong ASIN
+   or the wrong product behind them, and two cannot be bought at all. The
+   pattern in the failures is one thing: THIS CATEGORY SELLS TO SCHOOLS. The
+   Bee-Bot candidate is a $691 six-robot class pack, SPIKE Essential is a $597
+   education SKU, and VEX GO — 2,900/mo at KD 8, the best difficulty in the
+   category — has no Amazon listing because VEX sells it through the education
+   channel. A consumer comparison site can answer the parent buying one robot.
+   It cannot answer a procurement query. */
 const CODING_REVIEWS = plannedReviews("educational-coding-robots", "31094454463 + 31094682067 · 2026-08-06", [
   { slug: "ozobot", term: "ozobot", volume: 14800, difficulty: 36 },
   { slug: "sphero-bolt", term: "sphero bolt", volume: 4400, difficulty: 32 },
