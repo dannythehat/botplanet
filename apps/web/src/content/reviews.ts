@@ -2247,6 +2247,90 @@ export const REVIEWS: Record<string, ReviewContent> = {
       "Retailer-stated throughout; no manufacturer page publishing these figures was found. The framed-glass-only rating is the one specification that decides this purchase outright, and it is the one we are most confident in — it is what the product is sold as.",
     lastReviewed: "2026-08-06",
   },
+
+  /* ============================================================
+     COMPANION ROBOTS — first review in the category, 8 August 2026.
+
+     EVERY FIGURE BELOW COMES FROM casio.com/us/moflin/, read on
+     8 August 2026. Casio publishes a full specification table for
+     this product, which is more than most makers in this category
+     do, so nothing here is null and nothing is borrowed.
+
+     The specification settles the question the search data says
+     people actually arrive with. "does moflin walk" and "can
+     moflin walk" are both Google's first suggestion for their
+     prefix; the answer is in the Movement row, which reads two
+     axes, head rotation and tilt. It has no legs and no wheels.
+     Casio does not hide this — it is simply the last thing anyone
+     reads, and it is the first thing this page says.
+     ============================================================ */
+  moflin: {
+    slug: "moflin",
+    categorySlug: "companion-robots",
+    eyebrow: "Companion robot review",
+    title: "Casio Moflin review",
+    seoTitle: "Moflin Review — What a $429 AI Pet Actually Does",
+    metaDescription:
+      "A $429 robot pet with no legs, no speech and two axes of movement. What Moflin " +
+      "actually does, what Casio publishes, and who it is genuinely for.",
+    verdict:
+      "A 260-gram ball of fur that moves its head, makes sounds and learns to respond to how you handle it. It does not walk, does not talk and does nothing useful, and every one of those is a design decision rather than a shortfall. Whether that is worth $429 depends entirely on whether you want a pet or a gadget.",
+    bestFor:
+      "Someone who wants something to look after in a home where a real animal is not possible — a rented flat, an allergy, a care setting, a schedule that will not carry a dog.",
+    notIdealFor:
+      "Anyone expecting it to move around the room, hold a conversation, run an app on a screen or do a job. It does none of those and is not sold as though it does.",
+    facts: [
+      { label: "Movement", value: "2 axes — head only" },
+      { label: "Weight", value: "260 g" },
+      { label: "Battery life", value: "5 h, 3.5 h to charge" },
+      { label: "Subscription", value: "None" },
+    ],
+    specGroups: [
+      {
+        heading: "What it does",
+        rows: [
+          { label: "Movement", value: "2 axes (head rotation and tilt)" },
+          { label: "Walks or rolls", value: "No — it has no legs and no wheels" },
+          { label: "Speech", value: "No — sounds only, no words" },
+          { label: "Audio", value: "1 speaker, 1 microphone" },
+          { label: "Sensors", value: "Microphone, illuminance, touch, accelerometer/gyroscope" },
+          { label: "App", value: "MofLife — naming, journal, volume, battery, updates" },
+        ],
+      },
+      {
+        heading: "Power",
+        rows: [
+          { label: "Battery", value: "Li-ion 3.7 V, 1,200 mAh" },
+          { label: "Runtime", value: "About 5 hours at 25 °C / 77 °F" },
+          { label: "Charge time", value: "About 3 hours 30 minutes" },
+          { label: "Power consumption", value: "About 4.7 W" },
+          { label: "Charging", value: "In its bed, and it still responds while charging" },
+        ],
+      },
+      {
+        heading: "Physical",
+        rows: [
+          { label: "Size", value: "130 × 90 × 180 mm" },
+          { label: "Size in its bed", value: "140 × 120 × 190 mm" },
+          { label: "Weight", value: "About 260 g" },
+          { label: "Bed size", value: "140 × 100 × 190 mm, about 280 g" },
+          { label: "Colours", value: "Silver, Gold" },
+        ],
+      },
+      {
+        heading: "Ownership",
+        rows: [
+          { label: "Subscription", value: "None published for the US" },
+          { label: "Warranty", value: "One year from the day it arrives" },
+          { label: "In the box", value: "Moflin, bed, AC adapter, startup guide" },
+          { label: "Fur care", value: "Soft brush; damp cloth if it gets dirty" },
+        ],
+      },
+    ],
+    skuNote:
+      "Every figure read from casio.com/us/moflin/ on 8 August 2026, where Casio publishes a full specification table. Casio sells Silver and Gold; the ASIN behind our buy button is the Silver, and the two differ in colour only. Casio notes its specifications may change without notice.",
+    lastReviewed: "2026-08-08",
+  },
 };
 
 export function reviewFor(slug: string | undefined): ReviewContent | undefined {

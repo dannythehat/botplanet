@@ -896,6 +896,9 @@ const COMPANION_REVIEWS: PagePlan[] = [
   {
     ...companionReviewShell("moflin"),
     path: "/robots/companion-robots/moflin/",
+    /* BUILT 8 August 2026 — the first companion review, and the only page in
+       this category with a September deadline rather than a December one. */
+    status: "built" as const,
     /* TITLED "MOFLIN", NOT "CASIO MOFLIN". The old plan carried the branded
        form at 1,300 and KD 24. The bare name is 6,600 at KD 12 — five times
        the traffic at half the difficulty. */
@@ -916,8 +919,8 @@ const COMPANION_REVIEWS: PagePlan[] = [
     refused: [
       { term: "sony aibo", volume: 3600, why: "Named on this page because searchers ask for 'moflin vs aibo' at suggest position 1, and refused as a target because aibo has no Amazon US listing. Naming the honest comparison is not claiming its term." },
     ],
-    products: [],
-    productsNote: "Amazon US B0GPHNLWP3 confirmed 8 August 2026 — $429, in stock, identity read from the listing. No catalogue row or verified specification yet.",
+    products: ["moflin"],
+    productsNote: "Catalogued as prod-moflin, 8 August 2026. Amazon US B0GPHNLWP3 — identity read from the listing title, which is weaker evidence than the window eleven had because this listing publishes no details table; recorded as researched_exact rather than verified_exact for that reason. Specifications read from casio.com/us/moflin/ the same day, where Casio publishes a full table.",
     evidence: "6,600/mo at KD 12 on the bare name. The ONLY product in this category that does not peak at Christmas: 720 in July, 14,800 in September. That peak is the deadline, which is why it is page one of six.",
   },
   {

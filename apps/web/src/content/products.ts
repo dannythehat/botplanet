@@ -828,6 +828,11 @@ export const PRODUCT_ID: Record<string, string> = {
   "hobot-2s": "prod-hobot-2s",
   "hobot-298": "prod-hobot-298",
   "cop-rose-x5s": "prod-cop-rose-x5s",
+
+  /* COMPANION ROBOTS. Added 8 August 2026 with the first review in the
+     category. Slug-to-ID only, as with window above: the editorial lives in
+     content/reviews.ts and src/reviews/*.md. */
+  "moflin": "prod-moflin",
 };
 
 /** Editorial records with the stable productId attached, keyed by slug (route id). */

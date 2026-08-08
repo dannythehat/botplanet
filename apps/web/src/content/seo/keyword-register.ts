@@ -644,6 +644,42 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
      robot" and "best window cleaning robot", and NYTimes ranks #1 for both
      with one article — so there is no best-of page for a review to compete
      with either. */
+  /* COMPANION ROBOTS — first review in the category, 8 August 2026.
+     Run: local batch on seeds/companion-products.json, $0.3321.
+     Plan: docs/seo/companion-products-build-plan.md
+
+     PRIMARY IS THE BARE NAME. The old plan targeted "casio moflin" at 1,300
+     and KD 24; the measured run puts "moflin" at 6,600 and KD 12. Five times
+     the traffic at half the difficulty, and the branded form is carried as a
+     secondary rather than lost. */
+  {
+    path: "/robots/companion-robots/moflin/",
+    primary: { term: "moflin", volume: 6600, difficulty: 12, mustAppear: true },
+    secondary: [
+      { term: "casio moflin", volume: 1300, difficulty: 24, mustAppear: true },
+      { term: "moflin pet", volume: 1000, difficulty: 25, mustAppear: false },
+      { term: "moflin price", volume: 40, difficulty: 17, mustAppear: false },
+      /* The two questions the search data says people actually arrive with.
+         Both are Google's first suggestion for their prefix and both are
+         answered by Casio's own Movement row, which reads two axes. */
+      { term: "walk", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "subscription", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "battery", volume: 0, difficulty: 0, mustAppear: true },
+    ],
+    cededTo: [
+      {
+        term: "robot pet",
+        path: "/robots/companion-robots/",
+        why: "The 8,100 head term belongs to the hub, which does the routing for the whole category. A single-product review ranking for it would answer the wrong question and would compete with our own stronger page.",
+      },
+      {
+        term: "robotic pet for elderly",
+        path: "/guides/robotic-pets-for-elderly/",
+        why: "This review names the care-setting use because it is one of the honest reasons to buy a Moflin, but the elderly-care intent is a different reader with a different question and the guide already owns it.",
+      },
+    ],
+    researchedOn: "2026-08-08",
+  },
   {
     path: "/robots/window-cleaning-robots/ecovacs-winbot-w2-pro-omni/",
     primary: { term: "winbot w2 pro omni", volume: 1120, difficulty: 0, mustAppear: true },

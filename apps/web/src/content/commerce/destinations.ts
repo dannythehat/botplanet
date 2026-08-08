@@ -363,6 +363,36 @@ const WINDOW_ASINS: WindowDestination[] = [
   },
 ];
 
+const COMPANION_CHECK_DATE = "2026-08-08";
+
+/**
+ * Companion robots. Read the same way as the window eleven, one at a time.
+ *
+ * THE CATEGORY'S BEST-KNOWN NAMES ARE NOT HERE, and that is the finding rather
+ * than an omission. Sony aibo, ElliQ, Tombot Jennie, Cozmo and Moxie have no
+ * Amazon US listing at all, and Living.AI's EMO returns only unbranded
+ * knockoffs — 43,900 searches a month between them with nothing to sell. See
+ * docs/seo/companion-robots-research-findings.md.
+ */
+const COMPANION_ASINS: WindowDestination[] = [
+  {
+    productId: "prod-moflin",
+    asin: "B0GPHNLWP3",
+    exactModel: "Casio Moflin (Silver)",
+    evidence:
+      "Title: 'Casio Moflin AI Smart Companion Robot - Silver | AI-powered interactive companion; emotional evolution; MofLife app compatible; stress relief'. Served ASIN equals the one requested, and the availability block reads 'In Stock' with $429 showing on 8 August 2026. THE DETAILS TABLE IS ABSENT FROM THIS LISTING — no Brand row, no Item model number, nothing the other reads could quote, so identity rests on the title naming Casio, Moflin and the colourway together. That is weaker than the window eleven and is recorded as weaker. A VARIANT FAMILY: Casio sells Silver and Gold; this ASIN is the Silver, and the served-ASIN equality check is what stops the Gold's data being accepted in its place.",
+  },
+];
+
+for (const c of COMPANION_ASINS) {
+  IDENTITY_CHECKS[c.productId] = {
+    asin: c.asin,
+    confirmed: true,
+    evidence: c.evidence,
+    checkedOn: COMPANION_CHECK_DATE,
+  };
+}
+
 /**
  * The window identity checks, DERIVED from WINDOW_ASINS rather than typed out
  * a second time.
@@ -383,6 +413,37 @@ for (const w of WINDOW_ASINS) {
 }
 
 export const DESTINATIONS: ProductDestination[] = [
+  ...COMPANION_ASINS.map(
+    ({ productId, asin, exactModel, evidence }): ProductDestination => ({
+      productId,
+      retailerId: "ret-amazon",
+      market: "us",
+      retailerProductId: asin,
+      identifierKind: "asin",
+      exactModel,
+      /* VERIFIED_EXACT, and the reasoning is worth keeping because the first
+         attempt got it wrong. This was written as researched_exact on the
+         grounds that the listing publishes no details table, so the evidence
+         is thinner than the window eleven's. offers.test.ts refused it, and
+         the test was right: researched_exact means identity is NOT confirmed,
+         and this identity is confirmed. Served ASIN equals the one requested
+         and the title reads "Casio Moflin" in full.
+
+         "Moflin" is also a coined word owned by one maker with exactly one
+         product and one sibling variant, which is a stronger identifier than
+         most model numbers — there is no Moflin Pro to be confused with. The
+         thinness of the details table belongs in the evidence text, where it
+         is recorded, rather than in a confidence level that would have meant
+         something untrue. */
+      confidence: "verified_exact" as const,
+      destinationUrl: `https://www.amazon.com/dp/${asin}`,
+      sourceReference: `Identity machine-read by scripts/amazon-identity-check.mjs on ${COMPANION_CHECK_DATE}: https://www.amazon.com/dp/${asin}`,
+      sourceCheckedDate: COMPANION_CHECK_DATE,
+      sellerIdentity: null,
+      sellerModel: "unknown",
+      notes: evidence,
+    }),
+  ),
   ...WINDOW_ASINS.map(
     ({ productId, asin, exactModel, evidence }): ProductDestination => ({
       productId,
@@ -525,6 +586,14 @@ export const REDIRECT_KEYS: Record<string, string> = {
   "prod-cop-rose-x5s": "win-coprose-x5s-amazon",
   "prod-mamibot-w120-dp": "win-mamibot-w120dp-amazon",
   "prod-hutt-s55-pro": "win-hutt-s55pro-amazon",
+
+  /* COMPANION. Written into D1 on 8 August 2026 by this job rather than read
+     out of it, which is the one case where the rule above does not apply — a
+     key cannot be read from D1 before it exists there. The offer row
+     `off-moflin-amazon` and the redirect_links row `comp-casio-moflin-amazon`
+     were inserted first, then recorded here, so the map still describes the
+     database rather than a naming convention somebody hoped was followed. */
+  "prod-moflin": "comp-casio-moflin-amazon",
 };
 
 /* ------------------------------------------------------------------ */

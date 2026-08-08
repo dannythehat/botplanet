@@ -172,12 +172,16 @@ describe("exact-product destinations", () => {
     // A search fallback remains the honest answer whenever no correct listing
     // is held. If that happens again the count is what should change — never
     // the classification.
-    // 12 pool + 11 window. The window eleven arrived on 6 August 2026: their
-    // ASINs had been researched on 5 August and written into
+    // 12 pool + 11 window + 1 companion. The window eleven arrived on 6 August
+    // 2026: their ASINs had been researched on 5 August and written into
     // docs/seo/window-cleaning-robots-asins.md, and were never wired to
     // anything. Identity for all eleven was machine-read before they were
     // accepted here — see scripts/amazon-identity-check.mjs.
-    expect(exact).toHaveLength(23);
+    //
+    // Moflin joined on 8 August 2026, the first companion product with
+    // anything to sell. Five of that category's better-known names have no
+    // Amazon US listing at all, so this count will grow slowly and should.
+    expect(exact).toHaveLength(24);
     expect(search).toHaveLength(0);
     for (const d of exact) {
       expect(d.identifierKind).toBe("asin");
@@ -1406,12 +1410,18 @@ describe("scheduled refresh — wiring", () => {
   });
 
   it("gives every routed product a seeded offer behind its buy button", () => {
-    /* BOTH SEEDS, AND THE WHOLE CATALOGUE. This read only the pool seed and
+    /* EVERY SEED, AND THE WHOLE CATALOGUE. This read only the pool seed and
        only ACTIVE_PRODUCTS, so the eleven window keys it was meant to protect
-       were outside its reach in two separate ways at once. */
-    const seed =
-      readFileSync("packages/db/seed/pool/commercial.ts", "utf8") +
-      readFileSync("packages/db/seed/window/commercial.ts", "utf8");
+       were outside its reach in two separate ways at once.
+
+       A CATEGORY ADDED HERE IS A CATEGORY ADDED TO THIS LIST. Companion joined
+       on 8 August 2026 and the omission surfaced immediately, because the test
+       fails loudly for any routed product whose key is absent from the text it
+       reads — which is exactly the behaviour wanted. Read the directory rather
+       than the list if a fourth category makes this tedious. */
+    const seed = ["pool", "window", "companion"]
+      .map((c) => readFileSync(`packages/db/seed/${c}/commercial.ts`, "utf8"))
+      .join("\n");
     for (const p of activeCatalogue()) {
       const key = REDIRECT_KEYS[p.productId];
       expect(key, `${p.slug}: no redirect key`).toBeTruthy();
