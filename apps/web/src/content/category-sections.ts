@@ -4066,7 +4066,8 @@ export const BOTMATCH_CTA: Record<string, BotMatchCtaContent> = {
     ctaLabel: "Start 30-second match",
     image: {
       src: "/media/lawn-category/feature-desktop.webp",
-      alt: "",
+      alt:
+        "A robot lawn mower on a striped lawn, shown beside the BotMatch questions that narrow the choice.",
       focal: "72% center",
     },
     note: "Free. We email the result and keep it on a page you can return to.",
@@ -4095,7 +4096,8 @@ export const BOTMATCH_CTA: Record<string, BotMatchCtaContent> = {
     ctaLabel: "Start 30-second match",
     image: {
       src: "/media/window-category/feature-desktop.webp",
-      alt: "",
+      alt:
+        "A window cleaning robot on glass, shown beside the BotMatch questions that narrow the choice.",
       focal: "72% center",
     },
     note: "Free. We email the result and keep it on a page you can return to.",
@@ -4116,7 +4118,8 @@ export const BOTMATCH_CTA: Record<string, BotMatchCtaContent> = {
     ctaLabel: "Start 30-second match",
     image: {
       src: "/media/pool-category/feature-desktop.webp",
-      alt: "",
+      alt:
+        "A robotic pool cleaner working a lit pool, shown beside the BotMatch questions that narrow the choice.",
       focal: "78% center",
     },
     note: "Free. We email your result and save it to a page you can come back to.",

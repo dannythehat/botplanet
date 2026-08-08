@@ -79,7 +79,7 @@ import { srcsetFor } from "../lib/srcset";
       <figure class="bp-bmcta__figure">
         <picture>
           {image!.mobileSrc && <source media="(max-width: 719px)" srcset={srcsetFor(image!.mobileSrc) ?? image!.mobileSrc} sizes="100vw" />}
-          <img src={image!.src} srcset={srcsetFor(image!.src)} sizes="(min-width: 900px) 560px, 100vw" alt={image!.alt} loading="lazy" decoding="async"
+          <img src={image!.src} srcset={srcsetFor(image!.src)} sizes="(min-width: 900px) 560px, 100vw" alt={image!.alt ?? ""} loading="lazy" decoding="async"
                style={image!.focal ? `object-position: ${image!.focal}` : undefined} />
         </picture>
       </figure>
