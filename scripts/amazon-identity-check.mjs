@@ -29,7 +29,7 @@
  * send buyers to, not a crawl.
  */
 
-import { writeFileSync } from "node:fs";
+import { readFileSync, writeFileSync } from "node:fs";
 
 const UA =
   "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36";
@@ -256,8 +256,24 @@ function judge(target, read) {
   return { verdict: "confirmed", why: `Matched on: ${matched.join(", ")}` };
 }
 
+/**
+ * `--targets file.json` checks a set other than the window eleven above.
+ *
+ * The file is an array of the same shape as TARGETS: productId, name, asin,
+ * brand, modelTokens, denyTokens. The tokens are the whole point of this
+ * script and are not derivable from a discovery run, so they are written by
+ * hand per set — an auto-generated token list would confirm whatever it was
+ * given, which is the opposite of what this is for.
+ */
+const targetsFile = process.argv.includes("--targets")
+  ? process.argv[process.argv.indexOf("--targets") + 1]
+  : null;
+const RUN = targetsFile
+  ? JSON.parse(readFileSync(targetsFile, "utf8"))
+  : TARGETS;
+
 const results = [];
-for (const t of TARGETS) {
+for (const t of RUN) {
   process.stderr.write(`reading ${t.asin} (${t.name})… `);
   let read = null;
   let error = null;

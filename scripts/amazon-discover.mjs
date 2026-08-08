@@ -56,6 +56,58 @@ const TARGETS = [
   { slug: "ecovacs-goat-a2000", name: "ECOVACS GOAT A2000", query: "ECOVACS GOAT A2000 robot lawn mower", must: ["o1000", "a2000"], deny: ["o500", "o800"] },
 ];
 
+
+/**
+ * Companion robots. Seven from the page plan, plus ELLIQ and Miko 3 which the
+ * plan does not carry — ELLIQ is the largest unassigned long-tail in the
+ * category at 3,600/mo, and Miko was ruled in scope by the owner on 7 August
+ * 2026 after a Search Console click arrived on "miko ai robot".
+ *
+ * SEVERAL OF THESE ARE EXPECTED TO FAIL, which is the point of running it.
+ * ElliQ sells direct with a subscription, Tombot takes deposits on a waitlist,
+ * Aibo has been through a US discontinuation, and Moflin is a Casio Japan
+ * product. A category whose best-known names are not on Amazon is a category
+ * whose review plan needs to know that before anything is written.
+ *
+ * EVERY `must` CARRIES A BRAND OR A FULL MODEL NAME. The lawn run required the
+ * token "blade" for the EcoFlow Blade and matched a Husqvarna Automower —
+ * "blade" is a mower component. A generic noun is not an identifier.
+ */
+const COMPANION = [
+  /* BRAND TOKEN ONLY. The first pass allowed "emo robot" and matched an
+     unbranded "AI Desktop Robot – Humanoid Emo Robot for Office Desk" — the
+     same class of error as requiring "blade" for the EcoFlow Blade. "emo" is
+     what the category is called; "Living.AI" is who makes the one we mean. */
+  { slug: "living-ai-emo", name: "Living.AI EMO", query: "Living.AI EMO robot pet desktop companion", must: ["living.ai", "living ai"], deny: ["emotn", "emoji"] },
+  { slug: "eilik", name: "Eilik", query: "Eilik desktop robot companion", must: ["eilik"], deny: [] },
+  { slug: "loona", name: "Loona Petbot", query: "Loona robot pet dog KEYi", must: ["loona"], deny: [] },
+  { slug: "sony-aibo", name: "Sony aibo", query: "Sony aibo robot dog", must: ["aibo"], deny: [] },
+  { slug: "tombot-jennie", name: "Tombot Jennie", query: "Tombot Jennie robotic dog", must: ["tombot", "jennie"], deny: [] },
+  { slug: "joy-for-all-companion-pets", name: "Joy For All Companion Pet", query: "Joy For All Companion Pet cat", must: ["joy for all"], deny: [] },
+  { slug: "casio-moflin", name: "Casio Moflin", query: "Casio Moflin robot pet", must: ["moflin"], deny: [] },
+  { slug: "elliq", name: "ElliQ", query: "ElliQ companion robot for seniors", must: ["elliq"], deny: [] },
+  { slug: "miko-3", name: "Miko 3", query: "Miko 3 AI robot for kids", must: ["miko 3", "miko3"], deny: ["screen protector", "case for", "film", "pack)"] },
+];
+
+/**
+ * The three the companion research parked under "check before planning these
+ * reviews — probably discontinued". Combined they are 27,900/mo, more than the
+ * whole planned companion review set below EMO, and the research never resolved
+ * them. Anki went bankrupt in 2019 and Digital Dream Labs bought the Vector and
+ * Cozmo lines; Embodied shut Moxie down in December 2024 and the units were
+ * bricked. So the expected answer is "Vector and Cozmo yes, Moxie no" — but an
+ * expectation is not a reading, which is why they get searched rather than
+ * assumed.
+ */
+const COMPANION_LEGACY = [
+  { slug: "anki-vector", name: "Vector 2.0", query: "Vector 2.0 robot Digital Dream Labs", must: ["vector 2.0", "vector robot", "anki vector"], deny: ["accessor", "cable", "sticker"] },
+  { slug: "anki-cozmo", name: "Cozmo", query: "Cozmo robot Digital Dream Labs", must: ["cozmo"], deny: ["accessor", "sticker"] },
+  { slug: "embodied-moxie", name: "Moxie", query: "Moxie robot Embodied", must: ["moxie robot", "embodied moxie"], deny: ["moxie girlz", "doll"] },
+];
+
+/** Which set to run. `--set companion` or default to the lawn seventeen. */
+const SET = process.argv.includes("--set") ? process.argv[process.argv.indexOf("--set") + 1] : "lawn";
+
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 /* RETRIES, BECAUSE A THROTTLE LOOKS LIKE AN EMPTY SHELF. Seventeen searches
    at 2.5s tripped Amazon's rate limiting on 7 August 2026 and it answered with
@@ -108,9 +160,28 @@ function parseResults(html) {
   return out;
 }
 
+/**
+ * ACCESSORIES MATCH EVERY TOKEN OF THE PRODUCT THEY ATTACH TO.
+ *
+ * The companion run on 8 August 2026 returned "Play Ball for Loona Pet Robot"
+ * as the Loona candidate. It contains "loona", it is not denied by any sibling
+ * model, and it is a £12 ball. Per-target deny lists cannot catch this, because
+ * the disqualifier is not a competing model — it is the word "for".
+ *
+ * These are matched against the whole title. A real product listing can say
+ * "replacement filters included"; almost none of them open with "Case for".
+ */
+const ACCESSORY_DENY = [
+  "case for", "cover for", "stand for", "dock for", "charger for", "cable for",
+  "skin for", "sticker", "decal", "screen protector", "play ball for",
+  "toy for loona", "accessories for", "accessory for", "replacement parts",
+  "carrying case", "protective film", "mount for", "adapter for",
+];
+
 function judge(target, results) {
   for (const r of results) {
     const t = (r.title ?? "").toLowerCase();
+    if (ACCESSORY_DENY.some((d) => t.includes(d))) continue;
     if (target.deny.some((d) => t.includes(d))) continue;
     if (target.must.some((x) => t.includes(x))) return { ...r, verdict: "candidate" };
   }
@@ -118,7 +189,16 @@ function judge(target, results) {
 }
 
 const results = [];
-for (const t of TARGETS) {
+const ALL = SET === "companion" ? COMPANION : SET === "companion-legacy" ? COMPANION_LEGACY : TARGETS;
+/* `--only slug,slug` re-runs part of a set. The companion run on 8 August 2026
+   stopped after eight of nine without writing its JSON, and re-searching the
+   seven that had already answered would have burned another rate-limit budget
+   to learn nothing. Resuming a partial run is cheaper than repeating it. */
+const ONLY = process.argv.includes("--only")
+  ? new Set(process.argv[process.argv.indexOf("--only") + 1].split(","))
+  : null;
+const RUN = ONLY ? ALL.filter((t) => ONLY.has(t.slug)) : ALL;
+for (const t of RUN) {
   process.stderr.write(`searching ${t.name}… `);
   let picked = { asin: null, title: null, verdict: "error" };
   try {
@@ -141,4 +221,4 @@ results.forEach((r, i) =>
   console.log(`| ${i + 1} | ${r.name} | ${r.asin ?? "—"} | ${r.verdict} | ${(r.title ?? "—").slice(0, 80)} |`),
 );
 const ok = results.filter((r) => r.verdict === "candidate").length;
-console.log(`\n${ok} of ${results.length} have a candidate ASIN. Identity still unverified — run amazon-identity-check.mjs next.`);
+console.log(`\n[${SET}] ${ok} of ${results.length} have a candidate ASIN. Identity still unverified — run amazon-identity-check.mjs next.`);
