@@ -743,6 +743,46 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
     ],
     researchedOn: "2026-08-08",
   },
+  /* The Enabot range page. 9,900/mo at KD 4 on the brand, against 480 for
+     "pet camera robot" which the hub owns — this category is a brand with a
+     category attached rather than the other way round.
+
+     Its SERP shares THREE domains with the hub's and all three are amazon,
+     instagram and reddit; discount the universal ones, as this register
+     already does elsewhere, and the overlap is zero. Measured separately on
+     8 August 2026 because assigning a category's largest term without looking
+     at its results is the guessing this process exists to stop. */
+  {
+    path: "/robots/pet-camera-robots/enabot/",
+    primary: { term: "enabot", volume: 9900, difficulty: 4, mustAppear: true },
+    secondary: [
+      { term: "enabot robot", volume: 1600, difficulty: 10, mustAppear: true },
+      { term: "enabot ebo", volume: 1000, difficulty: 10, mustAppear: true },
+      { term: "enabot rola mini", volume: 480, difficulty: 10, mustAppear: true },
+      { term: "enabot pet camera", volume: 260, difficulty: 3, mustAppear: false },
+      { term: "enabot review", volume: 110, difficulty: 0, mustAppear: false },
+      { term: "subscription", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "stairs", volume: 0, difficulty: 0, mustAppear: true },
+    ],
+    cededTo: [
+      {
+        term: "ebo air 2",
+        path: "/robots/pet-camera-robots/enabot-ebo-air-2/",
+        why: "The single-model review owns it at 2,400/mo. Five shared domains is the threshold and four of those five are amazon, instagram, reddit and facebook, so this page routes to that one rather than competing with it.",
+      },
+      {
+        term: "ebo se",
+        path: "/robots/pet-camera-robots/enabot-ebo-se/",
+        why: "The SE review owns its own name. This page's job is telling a reader which of the seven to read about, not reviewing each of them a second time.",
+      },
+      {
+        term: "pet camera robot",
+        path: "/robots/pet-camera-robots/",
+        why: "The category head term belongs to the hub. The two SERPs share only amazon, instagram and reddit — discount those and the overlap is zero, which is the whole reason this is a separate page rather than a rewrite of the hub.",
+      },
+    ],
+    researchedOn: "2026-08-08",
+  },
   /* Ropet. 1,300/mo at KD 6 — the smallest primary in this category and the
      softest SERP in it: position 1 is Ropet's own site and there is exactly one
      real review in the top ten. The CPCs are the highest measured here,

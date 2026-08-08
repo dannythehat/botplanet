@@ -1236,8 +1236,11 @@ const PETCAM_REVIEWS: PagePlan[] = [
 const ENABOT_RANGE: PagePlan = {
   path: "/robots/pet-camera-robots/enabot/",
   category: "pet-camera-robots",
-  type: "review",
-  status: "researched",
+  /* best-of rather than review: it ranks three machines and names four more,
+     which is what the type means here. It is not a review of a product,
+     because "enabot" is not a product. */
+  type: "best-of",
+  status: "built",
   intent: "Work out which Enabot to buy, out of seven machines whose names do not explain themselves.",
   primary: { term: "enabot", volume: 9900, difficulty: 4 },
   secondary: [
@@ -1254,8 +1257,8 @@ const ENABOT_RANGE: PagePlan = {
     { term: "ebo se", toPath: "/robots/pet-camera-robots/enabot-ebo-se/", why: "The SE review owns its own name. This page's job is telling somebody which of the seven to read about, not reviewing each of them again." },
     { term: "pet camera robot", toPath: "/robots/pet-camera-robots/", why: "The category head term belongs to the hub, and the two SERPs share only amazon, instagram and reddit — discount those and the overlap is zero, which is why this is a separate page rather than a rewrite of the hub." },
   ],
-  products: [],
-  productsNote: "Reviews the range rather than one machine: SE $119, ROLA Mini $139, Air 2 $149, ROLA PetPal $179, EBO Mini $199, Air 2S $299, Air 2 Plus $359. Three of the seven are catalogued and reviewed; the other four are named and priced here without a catalogue row each, which is the honest shape for a range page.",
+  products: ["enabot-ebo-air-2", "enabot-ebo-se", "enabot-rola-petpal"],
+  productsNote: "Ranks the three catalogued machines and names the other four with prices: SE $119, ROLA Mini $139, Air 2 $149, ROLA PetPal $179, EBO Mini $199, Air 2S $299, Air 2 Plus $359. Three of the seven are catalogued and reviewed; the other four are named and priced here without a catalogue row each, which is the honest shape for a range page.",
   linksOut: [
     "/robots/pet-camera-robots/",
     "/robots/pet-camera-robots/enabot-ebo-air-2/",

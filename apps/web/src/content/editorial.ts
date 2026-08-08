@@ -865,6 +865,101 @@ export const EDITORIAL: Record<string, EditorialContent> = {
      award invented so that every product has one is an advert. They
      stay in comparisonSlugs so the table still shows all eleven.
      ================================================================== */
+  /* THE ENABOT RANGE PAGE. Not a category best-of and not a single review —
+     one manufacturer's seven machines, explained.
+
+     "enabot" measures 9,900/mo at KD 4 against 480 for "pet camera robot",
+     which the hub owns. Its SERP shares three domains with the hub and all
+     three are amazon, instagram and reddit; discount the universal ones and
+     the overlap is zero. Against the Air 2 review it shares five, four of
+     which are amazon, instagram, reddit and facebook. Separate page on both
+     counts. See docs/seo/pet-camera-robots-findings.md.
+
+     THE GAP IS SPECIFIC: every editorial slot on that SERP reviews ONE model.
+     Nobody has written the page that explains the range. */
+  "/robots/pet-camera-robots/enabot/": {
+    path: "/robots/pet-camera-robots/enabot/",
+    categorySlug: "pet-camera-robots",
+    eyebrow: "Range guide",
+    title: "Enabot: which of the seven is the one to buy",
+    seoTitle: "Enabot Review 2026: Which EBO Should You Actually Buy",
+    metaDescription:
+      "Enabot sells seven driving pet cameras and the names do not " +
+      "explain themselves. What each one adds, and the three worth buying.",
+    standfirst:
+      "Enabot is effectively the whole driving-pet-camera market in the US, and it sells seven machines whose names give almost nothing away. " +
+      "The short version: the Air 2 is the one to buy, the SE is the one that fits under furniture, and everything above the PetPal is buying resolution rather than a better robot.",
+    prose: "enabot-range",
+    picks: [
+      {
+        productSlug: "enabot-ebo-air-2",
+        award: "The one to buy",
+        why:
+          "2K, night vision, tracked wheels that cross rugs and thresholds, two-way talk, and it drives itself back to the dock when the battery is low. " +
+          "It sits in the middle of the range and gives up nothing that matters — the three models above it buy resolution and a chatbot, not a better robot.",
+        wrongFor:
+          "A house where the animal is upstairs, or anyone who wants the treat dispenser. It has wheels, and nothing in this category climbs.",
+      },
+      {
+        productSlug: "enabot-ebo-se",
+        award: "Best cheap one, and the one that fits under things",
+        why:
+          "3.5 inches tall, which is the only measurement that matters when the cat is under the sofa. 1080p instead of 2K and no emoticon face; everything else survives the saving, " +
+          "including the 360-degree view, the night vision and the self-docking.",
+        wrongFor:
+          "Anyone watching on a large screen, where 1080p driven around a dim room runs out of pixels.",
+      },
+      {
+        productSlug: "enabot-rola-petpal",
+        award: "Best for dogs",
+        why:
+          "The only machine here that drives to the animal and then gives it a treat. Furbo throws from a shelf and every other Enabot drives without treats; this does both, at 2.5K, for less than the mid-range models above it.",
+        wrongFor:
+          "Cats, mostly — it is three times the footprint of the Air 2 and cannot follow them under furniture.",
+      },
+    ],
+    comparisonSlugs: ["enabot-ebo-air-2", "enabot-ebo-se", "enabot-rola-petpal"],
+    faq: [
+      {
+        q: "Which Enabot should I buy?",
+        a:
+          "The EBO Air 2 for most people: 2K, night vision, tracked wheels and self-docking, with nothing important missing. Buy the EBO SE instead if your pet hides under " +
+          "furniture, because it is the only one low enough to follow. Buy the ROLA PetPal if you want to give a dog a treat from the app.",
+      },
+      {
+        q: "Do Enabot robots need a subscription?",
+        a:
+          "No. We read every current listing on 8 August 2026 and none of them carries one, and the ROLA PetPal's own Q&A answers the question outright. That is unusual in this market — " +
+          "Furbo and Petcube both sell monthly plans for features Enabot includes.",
+      },
+      {
+        q: "What is the difference between the EBO Air 2, the Air 2S and the Air 2 Plus?",
+        a:
+          "Resolution and software. The Air 2 is 2K, the Air 2S is 2.5K, and the Air 2 Plus is 3K with a GPT and Gemini chat mode. All three drive identically. " +
+          "You are paying more than twice the price of the entry model for a sharper picture and a chatbot, not for a robot that gets to more places.",
+      },
+      {
+        q: "Can an Enabot climb stairs?",
+        a:
+          "No, and neither can anything else sold in this category. Every driving pet camera on the US market is a wheeled machine. It patrols whichever floor you leave it on, which is " +
+          "fine when you know it and the most common disappointment when you do not.",
+      },
+      {
+        q: "What happened to the EBO Air and the EBO X?",
+        a:
+          "Both are discontinued. We checked every Enabot listing on Amazon US on 8 August 2026 and found neither. The EBO Air was replaced by the Air 2, which is why searches for the " +
+          "old model now return Air 2 results.",
+      },
+      {
+        q: "Is the ROLA Mini the same as the ROLA PetPal?",
+        a:
+          "No, and the shared name is the trap. The ROLA Mini is cheaper and has no treat dispenser. The dispenser is the only reason to pay the difference for the PetPal, so check the full model " +
+          "name before ordering.",
+      },
+    ],
+    lastReviewed: "2026-08-08",
+  },
+
   "/best-robots/window-cleaning-robots/": {
     path: "/best-robots/window-cleaning-robots/",
     categorySlug: "window-cleaning-robots",

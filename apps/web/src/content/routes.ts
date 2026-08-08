@@ -817,6 +817,26 @@ export const ROUTES: RouteDef[] = [
        7th — after the eleven reviews under it were given working buy buttons.
        1,300/mo at KD 0-3. Parented to the category hub, which owns the head
        term this page deliberately does not chase. */
+    /* The Enabot range page. A STATIC ROUTE INSIDE THE PRODUCT ROUTE'S SPACE:
+       /robots/<category>/<slug>/ is normally a product, and "enabot" is not
+       one. Astro gives the static file precedence, so the dynamic route never
+       sees it. Parented to the pet-camera hub, whose head term it does not
+       chase — 9,900/mo on the brand against 480 on the category. */
+    path: "/robots/pet-camera-robots/enabot/",
+    label: "Enabot range",
+    breadcrumbLabel: "Enabot",
+    section: "robots",
+    parent: "/robots/pet-camera-robots/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: true,
+    indexable: true,
+    category: "pet-camera-robots",
+    summary: "Seven driving pet cameras, and which of them is the one to buy.",
+  },
+
+  {
     path: "/best-robots/window-cleaning-robots/",
     label: "Best window cleaning robots",
     breadcrumbLabel: "Window Cleaning Robots",
