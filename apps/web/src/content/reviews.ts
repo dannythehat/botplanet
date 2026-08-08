@@ -2621,6 +2621,76 @@ export const REVIEWS: Record<string, ReviewContent> = {
       "Figures from the Amazon listing B0DCF53PCH and its Q&A, read 8 August 2026 — KEYi's own copy on the page we link to. keyirobot.com is JavaScript-rendered and could not be machine-read, so the absence of a subscription is recorded as none published rather than none exists. Rated 4.1 from 1,234 ratings on the day it was read.",
     lastReviewed: "2026-08-08",
   },
+
+  /* Living.AI EMO — THE ONE PAGE IN THIS CATEGORY WITH NOTHING TO SELL.
+     18,100/mo, the largest single term BotPlanet holds in companion robots,
+     and no Amazon US listing behind it. Two searches on 8 August 2026 returned
+     only unbranded EMOPET-style knockoffs with the Living.AI brand token
+     absent from both.
+
+     It is built anyway because Google uses EMO as the comparison anchor for
+     the whole desktop segment — its own answer box asks "Which is better,
+     Eilik or Emo?" on Eilik's results and "Which robot is better, Emo or
+     Loona?" on Loona's. A page that ranks for 18,100 and routes to machines a
+     reader can actually buy is worth more than a gap where the anchor should
+     be. There is no buy button and the page says why in its first section. */
+  "living-ai-emo": {
+    slug: "living-ai-emo",
+    categorySlug: "companion-robots",
+    eyebrow: "Companion robot review",
+    title: "Living.AI EMO review",
+    seoTitle: "EMO Robot Review — And Why Amazon Sells Fakes",
+    metaDescription:
+      "EMO is not sold on Amazon in the US, and searching for it returns copies. What " +
+      "the real Living.AI EMO does, and what to buy instead if you want it now.",
+    verdict:
+      "The desktop robot everything else in this category gets compared against, and the hardest one to actually buy. Living.AI sells EMO directly and does not list it on Amazon in the US, so searching for it there returns imitations rather than the product.",
+    bestFor:
+      "Someone who wants the original, is willing to order from Living.AI directly, and will check what arrives against the real specification.",
+    notIdealFor:
+      "Anyone wanting it tomorrow from a familiar retailer with a familiar returns process. That is a different robot, and there are two good ones.",
+    facts: [
+      { label: "On Amazon US", value: "No — copies only" },
+      { label: "Sold by", value: "Living.AI, direct" },
+      { label: "Sees", value: "HD camera, face recognition" },
+      { label: "Hears", value: "4-microphone array" },
+    ],
+    specGroups: [
+      {
+        heading: "Buying it — read this first",
+        rows: [
+          { label: "Amazon US listing", value: "None found, 8 August 2026, across two searches" },
+          { label: "What Amazon returns instead", value: "EMOPET and similar unbranded desk robots" },
+          { label: "Brand token to look for", value: "Living.AI — absent from every top result we read" },
+          { label: "Official channel", value: "living.ai, direct" },
+          { label: "BotPlanet buy button", value: "None — we do not send buyers to a copy" },
+        ],
+      },
+      {
+        heading: "What the real EMO does",
+        rows: [
+          { label: "Form", value: "Bipedal desktop robot — it walks on two legs" },
+          { label: "Sensors", value: "More than 10 internal sensors" },
+          { label: "Vision", value: "HD camera with face recognition, remembers family members" },
+          { label: "Hearing", value: "4-microphone array with sound source location" },
+          { label: "Processing", value: "Neural network processor with on-board AI models" },
+          { label: "Charging", value: "Its skateboard is a wireless charger, and charges a phone too" },
+          { label: "Updates", value: "Over the air" },
+        ],
+      },
+      {
+        heading: "Accessories, at Living.AI's own prices",
+        rows: [
+          { label: "Home Station", value: "$99.00" },
+          { label: "EMO Clothes (Corgi)", value: "$19.00" },
+          { label: "EMO Smart Light", value: "$15.00" },
+        ],
+      },
+    ],
+    skuNote:
+      "Capability and accessory pricing read from living.ai on 8 August 2026. No price is quoted for EMO itself because we hold no verified offer for it — Living.AI sells direct and there is no Amazon US listing to check against. Amazon was searched twice on the same day; both passes returned imitations.",
+    lastReviewed: "2026-08-08",
+  },
 };
 
 export function reviewFor(slug: string | undefined): ReviewContent | undefined {

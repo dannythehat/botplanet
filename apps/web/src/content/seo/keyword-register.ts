@@ -743,6 +743,34 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
     ],
     researchedOn: "2026-08-08",
   },
+  /* Living.AI EMO — 18,100/mo at KD 21, the largest single term BotPlanet
+     holds in this category, and NO BUY BUTTON. Two Amazon searches on
+     8 August 2026 returned only unbranded EMOPET-style knockoffs.
+
+     It is targeted anyway because Google uses EMO as the comparison anchor for
+     the whole desktop segment, and both the Eilik and Loona reviews cede the
+     term here rather than contest it. A page that ranks for 18,100 and routes
+     to machines a reader can actually buy beats a gap where the anchor should
+     be. */
+  {
+    path: "/robots/companion-robots/living-ai-emo/",
+    primary: { term: "emo robot", volume: 18100, difficulty: 21, mustAppear: true },
+    secondary: [
+      { term: "living.ai", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "robot pet emo", volume: 70, difficulty: 11, mustAppear: false },
+      { term: "eilik vs emo", volume: 20, difficulty: 0, mustAppear: false },
+      { term: "skateboard", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "face recognition", volume: 0, difficulty: 0, mustAppear: true },
+    ],
+    cededTo: [
+      {
+        term: "robot pet",
+        path: "/robots/companion-robots/",
+        why: "The 8,100 head term belongs to the hub, which routes the whole category. This page has no offer behind it and exists to send readers on, so competing with the hub for its own term would be doubly pointless.",
+      },
+    ],
+    researchedOn: "2026-08-08",
+  },
   /* Loona. 5,400/mo at KD 18. "loona robot" shares FIVE of ten top-ten domains
      with "loona robot price", so one page takes both.
 

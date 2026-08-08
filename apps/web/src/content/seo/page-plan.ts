@@ -1049,6 +1049,8 @@ const COMPANION_REVIEWS: PagePlan[] = [
   {
     ...companionReviewShell("emo robot"),
     path: "/robots/companion-robots/living-ai-emo/",
+    /* BUILT 8 August 2026, sixth and last in the category. */
+    status: "built" as const,
     /* KEPT DESPITE HAVING NOTHING TO SELL. Two separate Amazon searches on
        8 August returned only unbranded "EMOPET" knockoffs — Living.AI does not
        list in the US. It stays because it is the comparison anchor for the
