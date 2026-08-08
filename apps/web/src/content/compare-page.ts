@@ -24,6 +24,7 @@
    ============================================================ */
 
 import type { FaqItem } from "../components/FaqList.astro";
+import type { HeroImage } from "../components/CategoryHero.astro";
 
 /** One brand-versus-brand section. Never its own URL. */
 export interface BrandPair {
@@ -48,6 +49,8 @@ export interface ComparePageContent {
   seoTitle: string;
   metaDescription: string;
   standfirst: string;
+  /** Optional page hero. A scene, not a product shot. */
+  image?: HeroImage;
   /** Markdown basename in src/articles/. */
   prose: string;
   pairs: BrandPair[];
@@ -66,6 +69,12 @@ export const COMPARE_PAGES: Record<string, ComparePageContent> = {
     standfirst:
       "Most of these matchups come down to one thing, and it is not cleaning power. Aiper builds cordless machines and Dolphin builds corded ones, " +
       "and almost everything people mean by 'which brand is better' follows from that single fact.",
+    image: {
+      src: "/media/editorial/pool-cleaner-comparison.webp",
+      alt:
+        "Two unbranded robotic pool cleaners side by side on wet poolside stone at sunset, evenly lit with neither favoured.",
+      focal: "50% 60%",
+    },
     prose: "robotic-pool-cleaners-compared",
     pairs: [
       {

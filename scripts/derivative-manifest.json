@@ -3829,5 +3829,434 @@
         "checksum": "sha256:8c8b990a0575dc6a76dd3e0a37415f33a96aa75da26cd2aed9e078bd03294114"
       }
     ]
+  },
+  {
+    "source": "/media/editorial/best-robotic-pool-cleaners.webp",
+    "sourceWidth": 1536,
+    "sourceHeight": 1024,
+    "derivatives": [
+      {
+        "id": "media-editorial-best-robotic-pool-cleaners-webp-360",
+        "src": "/media/editorial/best-robotic-pool-cleaners-360w.webp",
+        "width": 360,
+        "height": 240,
+        "bytes": 12970,
+        "checksum": "sha256:d1429608dafd40f5dab9ff2acfc62f9f2dab34ec9a69a7304606df67017a81fa"
+      },
+      {
+        "id": "media-editorial-best-robotic-pool-cleaners-webp-640",
+        "src": "/media/editorial/best-robotic-pool-cleaners-640w.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 36036,
+        "checksum": "sha256:c20a7fc5d627c052aa4aa56556131c67188ccc7ee5ec8b351b64f03ce39632e9"
+      },
+      {
+        "id": "media-editorial-best-robotic-pool-cleaners-webp-960",
+        "src": "/media/editorial/best-robotic-pool-cleaners-960w.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 77588,
+        "checksum": "sha256:bdfa49d94342c8ab142e09d548b7e88d3df1b143a299ac4b53af9f84ed65976b"
+      },
+      {
+        "id": "media-editorial-best-robotic-pool-cleaners-webp-1440",
+        "src": "/media/editorial/best-robotic-pool-cleaners-1440w.webp",
+        "width": 1440,
+        "height": 960,
+        "bytes": 129694,
+        "checksum": "sha256:72b689c103e04cffea692d02a289c8145ed6d01db4e8e2a0928d5bbd99937714"
+      }
+    ]
+  },
+  {
+    "source": "/media/editorial/best-cordless-pool-cleaners.webp",
+    "sourceWidth": 1672,
+    "sourceHeight": 941,
+    "derivatives": [
+      {
+        "id": "media-editorial-best-cordless-pool-cleaners-webp-360",
+        "src": "/media/editorial/best-cordless-pool-cleaners-360w.webp",
+        "width": 360,
+        "height": 203,
+        "bytes": 9826,
+        "checksum": "sha256:bbb8c28555220690c5d9f49b5f85134f367da23ccdb0b58ca029e368bf7a1c41"
+      },
+      {
+        "id": "media-editorial-best-cordless-pool-cleaners-webp-640",
+        "src": "/media/editorial/best-cordless-pool-cleaners-640w.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 28380,
+        "checksum": "sha256:a644dcb2913dd2fa01f052140639173f9751c085427a3eefab7ee91b4215dc47"
+      },
+      {
+        "id": "media-editorial-best-cordless-pool-cleaners-webp-960",
+        "src": "/media/editorial/best-cordless-pool-cleaners-960w.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 61382,
+        "checksum": "sha256:4bc9f29961f279e4b025cf7c2a73b4fa79c563f932384cb68a6733734071c64e"
+      },
+      {
+        "id": "media-editorial-best-cordless-pool-cleaners-webp-1440",
+        "src": "/media/editorial/best-cordless-pool-cleaners-1440w.webp",
+        "width": 1440,
+        "height": 810,
+        "bytes": 104254,
+        "checksum": "sha256:479594d919cc32b9c94dc7a6f2c87ae2ae419f77e9e831416476960a0042dbc1"
+      }
+    ]
+  },
+  {
+    "source": "/media/editorial/above-ground-pool-cleaners.webp",
+    "sourceWidth": 1672,
+    "sourceHeight": 941,
+    "derivatives": [
+      {
+        "id": "media-editorial-above-ground-pool-cleaners-webp-360",
+        "src": "/media/editorial/above-ground-pool-cleaners-360w.webp",
+        "width": 360,
+        "height": 203,
+        "bytes": 12086,
+        "checksum": "sha256:44ca04c88ff5fa63234f34c916e9ac060bb77af1e2bc55a6f82bbaa48ca2217d"
+      },
+      {
+        "id": "media-editorial-above-ground-pool-cleaners-webp-640",
+        "src": "/media/editorial/above-ground-pool-cleaners-640w.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 36662,
+        "checksum": "sha256:c094aa40f2417b784873dcee6acc74a6b5711d995a3be54284b2c8ddf5db1636"
+      },
+      {
+        "id": "media-editorial-above-ground-pool-cleaners-webp-960",
+        "src": "/media/editorial/above-ground-pool-cleaners-960w.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 77922,
+        "checksum": "sha256:23404fceb9d14dac916f87d0517cef39ee22924e98a4ab998425d2c86707b3fb"
+      },
+      {
+        "id": "media-editorial-above-ground-pool-cleaners-webp-1440",
+        "src": "/media/editorial/above-ground-pool-cleaners-1440w.webp",
+        "width": 1440,
+        "height": 810,
+        "bytes": 136072,
+        "checksum": "sha256:723af27dc72183c2955611b3b974ed9f804e710b5f9d42e2a1d12191fc9b4ddb"
+      }
+    ]
+  },
+  {
+    "source": "/media/editorial/pool-cleaner-comparison.webp",
+    "sourceWidth": 1672,
+    "sourceHeight": 941,
+    "derivatives": [
+      {
+        "id": "media-editorial-pool-cleaner-comparison-webp-360",
+        "src": "/media/editorial/pool-cleaner-comparison-360w.webp",
+        "width": 360,
+        "height": 203,
+        "bytes": 10494,
+        "checksum": "sha256:cb8387bd60c73e7abd1df58805eb24aa1133b7c2bfa0512b1482185717ccfa2c"
+      },
+      {
+        "id": "media-editorial-pool-cleaner-comparison-webp-640",
+        "src": "/media/editorial/pool-cleaner-comparison-640w.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 27942,
+        "checksum": "sha256:d24650de289a08bd00b78da335a5690774303b8f23f63535cdacb1cb11b17b99"
+      },
+      {
+        "id": "media-editorial-pool-cleaner-comparison-webp-960",
+        "src": "/media/editorial/pool-cleaner-comparison-960w.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 59042,
+        "checksum": "sha256:58139aea38c586d0739510902dd58401b1b6955b6736af4260629ee09e99f727"
+      },
+      {
+        "id": "media-editorial-pool-cleaner-comparison-webp-1440",
+        "src": "/media/editorial/pool-cleaner-comparison-1440w.webp",
+        "width": 1440,
+        "height": 810,
+        "bytes": 101630,
+        "checksum": "sha256:449f4b63c36bbdfd2e5124b201266391ff3d0d8600c0e8734627f8a119b79e9e"
+      }
+    ]
+  },
+  {
+    "source": "/media/editorial/are-pool-cleaners-worth-it.webp",
+    "sourceWidth": 1672,
+    "sourceHeight": 941,
+    "derivatives": [
+      {
+        "id": "media-editorial-are-pool-cleaners-worth-it-webp-360",
+        "src": "/media/editorial/are-pool-cleaners-worth-it-360w.webp",
+        "width": 360,
+        "height": 203,
+        "bytes": 7894,
+        "checksum": "sha256:1e2dd504806bf3da685f6bbb55a7f61d67bed8a7b88c38557b38f4d8d78f242e"
+      },
+      {
+        "id": "media-editorial-are-pool-cleaners-worth-it-webp-640",
+        "src": "/media/editorial/are-pool-cleaners-worth-it-640w.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 19278,
+        "checksum": "sha256:2c7658d0de2f10869915c2efd1496a4004ca11e3491a6e652c3c9ef6c8315f04"
+      },
+      {
+        "id": "media-editorial-are-pool-cleaners-worth-it-webp-960",
+        "src": "/media/editorial/are-pool-cleaners-worth-it-960w.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 38336,
+        "checksum": "sha256:2e82d1ef09fa562ef1c21792b133ee711098286b9b23dd8a01994851e686a7c7"
+      },
+      {
+        "id": "media-editorial-are-pool-cleaners-worth-it-webp-1440",
+        "src": "/media/editorial/are-pool-cleaners-worth-it-1440w.webp",
+        "width": 1440,
+        "height": 810,
+        "bytes": 63028,
+        "checksum": "sha256:de2f513fd8010867abedcb75db15e734e57c767160da78d46deff02eed36740d"
+      }
+    ]
+  },
+  {
+    "source": "/media/editorial/wire-free-mowers.webp",
+    "sourceWidth": 1672,
+    "sourceHeight": 941,
+    "derivatives": [
+      {
+        "id": "media-editorial-wire-free-mowers-webp-360",
+        "src": "/media/editorial/wire-free-mowers-360w.webp",
+        "width": 360,
+        "height": 203,
+        "bytes": 15110,
+        "checksum": "sha256:a33cc103846aede31ad6197072036252f0a019eac2ba723e5d011be71f62e27b"
+      },
+      {
+        "id": "media-editorial-wire-free-mowers-webp-640",
+        "src": "/media/editorial/wire-free-mowers-640w.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 42814,
+        "checksum": "sha256:2522fb7df332d0bff264f25715707f8248d2f97abf87ff575680002e795589c5"
+      },
+      {
+        "id": "media-editorial-wire-free-mowers-webp-960",
+        "src": "/media/editorial/wire-free-mowers-960w.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 91786,
+        "checksum": "sha256:c1908a7fb4ece76836cbe08ee77696e2a3ee3ba3e1bfc4bf1a7288e7670a5148"
+      },
+      {
+        "id": "media-editorial-wire-free-mowers-webp-1440",
+        "src": "/media/editorial/wire-free-mowers-1440w.webp",
+        "width": 1440,
+        "height": 810,
+        "bytes": 159076,
+        "checksum": "sha256:fe3b88c7957ba120500932d5b49d3c1358bb8cba941d6c3332755bdb24ae6dbf"
+      }
+    ]
+  },
+  {
+    "source": "/media/editorial/cheap-mowers.webp",
+    "sourceWidth": 1672,
+    "sourceHeight": 941,
+    "derivatives": [
+      {
+        "id": "media-editorial-cheap-mowers-webp-360",
+        "src": "/media/editorial/cheap-mowers-360w.webp",
+        "width": 360,
+        "height": 203,
+        "bytes": 14152,
+        "checksum": "sha256:c13ee552064fe64596ccf5d4cf22f400b47306948e7b052e2a603771f1c3ca28"
+      },
+      {
+        "id": "media-editorial-cheap-mowers-webp-640",
+        "src": "/media/editorial/cheap-mowers-640w.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 42138,
+        "checksum": "sha256:17a3a2f0fff734d049074b5578391ff1441e090d324444f5651cb3ece447fd4f"
+      },
+      {
+        "id": "media-editorial-cheap-mowers-webp-960",
+        "src": "/media/editorial/cheap-mowers-960w.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 90548,
+        "checksum": "sha256:d36bb64bea4b03c5d3a753b6b618c96cb6a9aeb159ecea8fe0520ae1bbe1938f"
+      },
+      {
+        "id": "media-editorial-cheap-mowers-webp-1440",
+        "src": "/media/editorial/cheap-mowers-1440w.webp",
+        "width": 1440,
+        "height": 810,
+        "bytes": 156798,
+        "checksum": "sha256:062806d976ea28d37dcf6b2c3cb453c381ef60f0d151ebb6c4868d627076cabb"
+      }
+    ]
+  },
+  {
+    "source": "/media/editorial/mowers-for-hills.webp",
+    "sourceWidth": 1672,
+    "sourceHeight": 941,
+    "derivatives": [
+      {
+        "id": "media-editorial-mowers-for-hills-webp-360",
+        "src": "/media/editorial/mowers-for-hills-360w.webp",
+        "width": 360,
+        "height": 203,
+        "bytes": 14006,
+        "checksum": "sha256:39fe2e7dfc641cd87695a631493e9b128f350dce1a7e053a4417d6397d98e45e"
+      },
+      {
+        "id": "media-editorial-mowers-for-hills-webp-640",
+        "src": "/media/editorial/mowers-for-hills-640w.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 43988,
+        "checksum": "sha256:3d9856d6195241f274b7e6406b6c1676137fc7284fdf4aebdb06cd903710243a"
+      },
+      {
+        "id": "media-editorial-mowers-for-hills-webp-960",
+        "src": "/media/editorial/mowers-for-hills-960w.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 100984,
+        "checksum": "sha256:12f1e05a53df735d7c8a4b1545acd933c1b5a93ed1f2555dc25772fc5dd50e71"
+      },
+      {
+        "id": "media-editorial-mowers-for-hills-webp-1440",
+        "src": "/media/editorial/mowers-for-hills-1440w.webp",
+        "width": 1440,
+        "height": 810,
+        "bytes": 178498,
+        "checksum": "sha256:10f72256a7a1496deeae07a381107e43414eea89d9ba09dafc6da0c38921ca51"
+      }
+    ]
+  },
+  {
+    "source": "/media/editorial/robotic-pets-for-elderly.webp",
+    "sourceWidth": 1672,
+    "sourceHeight": 941,
+    "derivatives": [
+      {
+        "id": "media-editorial-robotic-pets-for-elderly-webp-360",
+        "src": "/media/editorial/robotic-pets-for-elderly-360w.webp",
+        "width": 360,
+        "height": 203,
+        "bytes": 7898,
+        "checksum": "sha256:76de7ab34b6d560a8217f0c9867142b39bd3142bc198d452b81e2fc7800f774a"
+      },
+      {
+        "id": "media-editorial-robotic-pets-for-elderly-webp-640",
+        "src": "/media/editorial/robotic-pets-for-elderly-640w.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 20408,
+        "checksum": "sha256:8471456066b15744aad0802afcd87f710b0c1f35a8a44d4fb88604556f1df69a"
+      },
+      {
+        "id": "media-editorial-robotic-pets-for-elderly-webp-960",
+        "src": "/media/editorial/robotic-pets-for-elderly-960w.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 44452,
+        "checksum": "sha256:c3b8ac5ff286d2657c0c970ec75bc7dc185a18f9c09ac141b4c4143dae00c32a"
+      },
+      {
+        "id": "media-editorial-robotic-pets-for-elderly-webp-1440",
+        "src": "/media/editorial/robotic-pets-for-elderly-1440w.webp",
+        "width": 1440,
+        "height": 810,
+        "bytes": 74890,
+        "checksum": "sha256:b339ec06e3b31b81f56ecd7c0c9b13782df15509dccf2d13e6a192d1acfe28f6"
+      }
+    ]
+  },
+  {
+    "source": "/media/editorial/best-window-robots.webp",
+    "sourceWidth": 1672,
+    "sourceHeight": 941,
+    "derivatives": [
+      {
+        "id": "media-editorial-best-window-robots-webp-360",
+        "src": "/media/editorial/best-window-robots-360w.webp",
+        "width": 360,
+        "height": 203,
+        "bytes": 7956,
+        "checksum": "sha256:123738f4c37b2800820cc14022512847bff20910fdd452eb160b42ac96d93395"
+      },
+      {
+        "id": "media-editorial-best-window-robots-webp-640",
+        "src": "/media/editorial/best-window-robots-640w.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 20860,
+        "checksum": "sha256:8b3aba3bec01fb36d4f07f6aca3497f78cef26672c26f0faefae6a81e9cd56be"
+      },
+      {
+        "id": "media-editorial-best-window-robots-webp-960",
+        "src": "/media/editorial/best-window-robots-960w.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 42838,
+        "checksum": "sha256:e7dd04ae8d03284a0af911beaca45d4e17cbe56b9561463e6fd03e16a4bcfb9a"
+      },
+      {
+        "id": "media-editorial-best-window-robots-webp-1440",
+        "src": "/media/editorial/best-window-robots-1440w.webp",
+        "width": 1440,
+        "height": 810,
+        "bytes": 71166,
+        "checksum": "sha256:9c21159696eee7bc6845bcb3af49a1bed28c7dba62c85ce00019ce3574e634eb"
+      }
+    ]
+  },
+  {
+    "source": "/media/editorial/do-window-robots-work.webp",
+    "sourceWidth": 1672,
+    "sourceHeight": 941,
+    "derivatives": [
+      {
+        "id": "media-editorial-do-window-robots-work-webp-360",
+        "src": "/media/editorial/do-window-robots-work-360w.webp",
+        "width": 360,
+        "height": 203,
+        "bytes": 7472,
+        "checksum": "sha256:e095874eeaf85152bd413813ae5a7a4df69d4c8f982694ef5217297d4ed22775"
+      },
+      {
+        "id": "media-editorial-do-window-robots-work-webp-640",
+        "src": "/media/editorial/do-window-robots-work-640w.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 21860,
+        "checksum": "sha256:3ede804bf8edfd964e18c9eed45f2efcd0e49ea83809440f40cd23c97ce0f816"
+      },
+      {
+        "id": "media-editorial-do-window-robots-work-webp-960",
+        "src": "/media/editorial/do-window-robots-work-960w.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 50390,
+        "checksum": "sha256:5f495fd331db67b80f73f3651b2263e5b39e070a24ca6e83e7890fee4c85cad3"
+      },
+      {
+        "id": "media-editorial-do-window-robots-work-webp-1440",
+        "src": "/media/editorial/do-window-robots-work-1440w.webp",
+        "width": 1440,
+        "height": 810,
+        "bytes": 88944,
+        "checksum": "sha256:fabead4db9e291e33ce80a2cbc202269dbb426df23a5cd3edf8e0b2bafdf4fcb"
+      }
+    ]
   }
 ]

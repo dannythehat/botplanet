@@ -39,6 +39,7 @@ import BotMatchCta from "./BotMatchCta.astro";
 import FaqList from "./FaqList.astro";
 import ArticleFooter from "./ArticleFooter.astro";
 import { botMatchCtaFor } from "../content/category-sections";
+import { srcsetFor } from "../lib/srcset";
 import { applyInternalLinks } from "../lib/internal-linker";
 import { anchorsFor } from "../content/internal-links";
 import type { EditorialContent } from "../content/editorial";
@@ -66,6 +67,23 @@ const { html: body } = applyInternalLinks(html, anchorsFor(article.categorySlug)
   <h1 class="bp-ed__h1">{article.title}</h1>
   <p class="bp-ed__stand">{article.standfirst}</p>
 </header>
+
+{article.image?.src && (
+  <figure class="bp-ed__hero">
+    <img
+      src={article.image.src}
+      srcset={srcsetFor(article.image.src)}
+      sizes="(min-width: 1100px) 1040px, 100vw"
+      alt={article.image.alt}
+      style={article.image.focal ? `object-position: ${article.image.focal}` : undefined}
+      width="1672"
+      height="941"
+      loading="eager"
+      fetchpriority="high"
+      decoding="async"
+    />
+  </figure>
+)}
 
 {picks.length > 0 && (
   <PickList
@@ -117,6 +135,22 @@ const { html: body } = applyInternalLinks(html, anchorsFor(article.categorySlug)
 <ArticleFooter lastReviewed={article.lastReviewed} />
 
 <style>
+  /* The hero sits between the standfirst and the picks: the reader gets the
+     answer in text first, then the scene. Eager and high-priority because it
+     is above the fold and it is the LCP element on every page that has one. */
+  .bp-ed__hero {
+    margin: 0 0 var(--space-7);
+    border-radius: var(--radius-lg, 14px);
+    overflow: hidden;
+  }
+  .bp-ed__hero img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1672 / 941;
+    object-fit: cover;
+  }
+
   .bp-ed__head {
     max-width: 62ch;
     margin: 0 0 clamp(2rem, 5vw, 3rem);

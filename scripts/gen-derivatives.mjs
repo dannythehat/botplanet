@@ -208,6 +208,18 @@ const SOURCES = [
   "/media/products/cop-rose-x5s.webp",
   "/media/reviews/cop-rose-x5s/spray-suction.webp",
   "/media/reviews/cop-rose-x5s/multiple-surfaces.webp",
+  /* Editorial page heroes, 8 August 2026. */
+  "/media/editorial/best-robotic-pool-cleaners.webp",
+  "/media/editorial/best-cordless-pool-cleaners.webp",
+  "/media/editorial/above-ground-pool-cleaners.webp",
+  "/media/editorial/pool-cleaner-comparison.webp",
+  "/media/editorial/are-pool-cleaners-worth-it.webp",
+  "/media/editorial/wire-free-mowers.webp",
+  "/media/editorial/cheap-mowers.webp",
+  "/media/editorial/mowers-for-hills.webp",
+  "/media/editorial/robotic-pets-for-elderly.webp",
+  "/media/editorial/best-window-robots.webp",
+  "/media/editorial/do-window-robots-work.webp",
 ];
 
 const run = async () => {

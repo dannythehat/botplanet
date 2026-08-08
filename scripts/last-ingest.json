@@ -1,226 +1,90 @@
 [
   {
-    "to": "/media/products/ecovacs-winbot-w2-pro.webp",
-    "checksum": "sha256:89a4278a350b924a7963af5718ba6f790cdd93ea0fea7ba18681b593df42e8b0",
-    "width": 1122,
-    "height": 1402,
-    "bytes": 150172,
-    "saved": 1719520
+    "to": "/media/editorial/best-robotic-pool-cleaners.webp",
+    "checksum": "sha256:66bb0120fe367561c6cd13b428450ad410e77998fc9c46b99d9fbc2c2d294ef1",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 231382,
+    "saved": 1886097
   },
   {
-    "to": "/media/reviews/ecovacs-winbot-w2-pro/three-nozzle-spray.webp",
-    "checksum": "sha256:ae5ba5750f49bde05a47b5a2624c72bf01e8e8d13a02d01b3ba71ee409f2efb9",
-    "width": 1086,
-    "height": 1448,
-    "bytes": 178172,
-    "saved": 1855648
-  },
-  {
-    "to": "/media/reviews/ecovacs-winbot-w2-pro/cleaning-modes.webp",
-    "checksum": "sha256:bab54041cf9df0ace74338fb75f7e263a0205f86f4cd788b0143b18db5f69b7e",
-    "width": 1169,
-    "height": 1346,
-    "bytes": 179292,
-    "saved": 1662672
-  },
-  {
-    "to": "/media/products/ecovacs-winbot-w1-pro.webp",
-    "checksum": "sha256:eaa1d90ec06849b50370ab4713c8fee10a9a061c6125873f22077b724b9a03d9",
-    "width": 1122,
-    "height": 1402,
-    "bytes": 113010,
-    "saved": 1648874
-  },
-  {
-    "to": "/media/reviews/ecovacs-winbot-w1-pro/hero.webp",
-    "checksum": "sha256:9e5eb146963328dad87d18dbb79d939a0407b49d592616d03413afe8b938f8fb",
-    "width": 1586,
-    "height": 992,
-    "bytes": 125850,
-    "saved": 1554893
-  },
-  {
-    "to": "/media/reviews/ecovacs-winbot-w1-pro/eight-tier.webp",
-    "checksum": "sha256:399974ffc0cf6e7ba3f2d7ba2b904b2b62fa718ac0b477bcb6564be2c0ef1380",
-    "width": 1122,
-    "height": 1402,
-    "bytes": 174526,
-    "saved": 1784746
-  },
-  {
-    "to": "/media/reviews/ecovacs-winbot-w1-pro/cross-spray.webp",
-    "checksum": "sha256:f692f9faccc740df56402866cefef034fa288aefc24bb7c144d77aea46c06a51",
-    "width": 1086,
-    "height": 1448,
-    "bytes": 93490,
-    "saved": 1530900
-  },
-  {
-    "to": "/media/reviews/ecovacs-winbot-w1-pro/app-control.webp",
-    "checksum": "sha256:a8b3d6d4af79e7ce416ad087a135a8b864e4dc24ddf0024b1302874d5087131d",
-    "width": 1024,
-    "height": 1536,
-    "bytes": 150742,
-    "saved": 1764258
-  },
-  {
-    "to": "/media/products/hobot-2s.webp",
-    "checksum": "sha256:1bf7399c4de19153b220b3b49ce839c5d396daeee4fcde5b2999ab2482b5bbf7",
-    "width": 1122,
-    "height": 1402,
-    "bytes": 134030,
-    "saved": 1678853
-  },
-  {
-    "to": "/media/reviews/hobot-2s/hero.webp",
-    "checksum": "sha256:4264294faa09fa6977db2af964c95ffa0c2017802105a36797aa0d541b63e7c6",
+    "to": "/media/editorial/best-cordless-pool-cleaners.webp",
+    "checksum": "sha256:333edf0e824763633cd5d68b72603e5f4253c2e8df84ec717828e8dbf1126f23",
     "width": 1672,
     "height": 941,
-    "bytes": 133650,
-    "saved": 1514230
+    "bytes": 195886,
+    "saved": 1854125
   },
   {
-    "to": "/media/reviews/hobot-2s/spray-module.webp",
-    "checksum": "sha256:1b3ddf44a1ec149cccc52a64d0e6fb82ac1e6514e177673d0cebe48a4c782172",
-    "width": 1448,
-    "height": 1086,
-    "bytes": 174940,
-    "saved": 1738480
+    "to": "/media/editorial/above-ground-pool-cleaners.webp",
+    "checksum": "sha256:41bc95085631de1fc836e13c19bf11989e1edb562c470e6e23d773c945b30ce1",
+    "width": 1672,
+    "height": 941,
+    "bytes": 261458,
+    "saved": 2063846
   },
   {
-    "to": "/media/reviews/hobot-2s/app-control.webp",
-    "checksum": "sha256:7e1d19a01767f385867fe4fc248e772bcf9a983d2247d9dacd0f2d079d127413",
-    "width": 1086,
-    "height": 1448,
-    "bytes": 140756,
-    "saved": 1615560
+    "to": "/media/editorial/pool-cleaner-comparison.webp",
+    "checksum": "sha256:f70e68e4f4d2ff2803ac986a6dbeb994adcc43c519397fbfb475f8a2d93b29b0",
+    "width": 1672,
+    "height": 941,
+    "bytes": 190578,
+    "saved": 1814659
   },
   {
-    "to": "/media/products/hobot-298.webp",
-    "checksum": "sha256:f9f0d81b886b0e9f9a63c3a385168b2133ee494046657f6bc4fd43e306272859",
-    "width": 1448,
-    "height": 1086,
-    "bytes": 154532,
-    "saved": 1682131
+    "to": "/media/editorial/are-pool-cleaners-worth-it.webp",
+    "checksum": "sha256:8bd3033072c7d71a19e7afca42665528c788b80191467924f6d93383e1abe8d6",
+    "width": 1672,
+    "height": 941,
+    "bytes": 116178,
+    "saved": 1654335
   },
   {
-    "to": "/media/reviews/hobot-298/holding-force.webp",
-    "checksum": "sha256:6a46a63586c447f9d564eb7d74af1a62ac59edc29421b92fff82dbf4c55b02de",
-    "width": 1122,
-    "height": 1402,
-    "bytes": 141118,
-    "saved": 1669864
+    "to": "/media/editorial/wire-free-mowers.webp",
+    "checksum": "sha256:02521697030d9e7884e93d8932252bf173dca70ba623d230184e948712abd401",
+    "width": 1672,
+    "height": 941,
+    "bytes": 285662,
+    "saved": 2059635
   },
   {
-    "to": "/media/reviews/hobot-298/edge-detection.webp",
-    "checksum": "sha256:29365f55bbaad542f2f55f93dfe8b3e787a947fd052a8417ea7f31cbeedebf70",
-    "width": 1254,
-    "height": 1254,
-    "bytes": 223698,
-    "saved": 1921550
+    "to": "/media/editorial/cheap-mowers.webp",
+    "checksum": "sha256:8bcc7f67ac56c9e10e7e2fed14524d77f4cd2f50f38214697d396d0f3f872578",
+    "width": 1672,
+    "height": 941,
+    "bytes": 286220,
+    "saved": 2120624
   },
   {
-    "to": "/media/reviews/hobot-298/bluetooth-remote.webp",
-    "checksum": "sha256:43c3ac6dc32a777e95b95373474c2f8572d9bf51720158423f08dc61ce026ff2",
-    "width": 1254,
-    "height": 1254,
-    "bytes": 154028,
-    "saved": 1673747
+    "to": "/media/editorial/mowers-for-hills.webp",
+    "checksum": "sha256:b066ccca07dee9b3969bc64b881781702713a4dd2f1ccef50fa8b5088faeabe4",
+    "width": 1672,
+    "height": 941,
+    "bytes": 332268,
+    "saved": 2179856
   },
   {
-    "to": "/media/products/hutt-s55-pro.webp",
-    "checksum": "sha256:22c120b75a7ea193ae7ec3186e7817eade5d14c844d1cda8664a4a2f98350524",
-    "width": 1448,
-    "height": 1086,
-    "bytes": 191910,
-    "saved": 1826518
+    "to": "/media/editorial/robotic-pets-for-elderly.webp",
+    "checksum": "sha256:6d628e8b65a6cf95487e30c793548f18ab1c9c7fbe9a33eb64668b89eba5d9dd",
+    "width": 1672,
+    "height": 941,
+    "bytes": 151990,
+    "saved": 1820275
   },
   {
-    "to": "/media/reviews/hutt-s55-pro/every-surface.webp",
-    "checksum": "sha256:245c44007b82a7867e21262c900fcbf21a7fb51d348508bd98fbdb2cddffb86d",
-    "width": 1254,
-    "height": 1254,
-    "bytes": 158298,
-    "saved": 1829051
+    "to": "/media/editorial/best-window-robots.webp",
+    "checksum": "sha256:15fe6fec178252181eb0391d07faf2f5f9a6708c1938784f2408a0a0be81ad41",
+    "width": 1672,
+    "height": 941,
+    "bytes": 131738,
+    "saved": 1725327
   },
   {
-    "to": "/media/reviews/hutt-s55-pro/adaptive-suction.webp",
-    "checksum": "sha256:8ce85299ecf04e39b93a9134eb5f33c2dd1a23cc52ef0c935e6c1c245bbbadfb",
-    "width": 1254,
-    "height": 1254,
-    "bytes": 248924,
-    "saved": 2011708
-  },
-  {
-    "to": "/media/reviews/hutt-s55-pro/safety-backup.webp",
-    "checksum": "sha256:5701175cbfc2912714bee4acb84b6986700eedb78e7089e167e47cd41b40f5ed",
-    "width": 1254,
-    "height": 1254,
-    "bytes": 158390,
-    "saved": 1749197
-  },
-  {
-    "to": "/media/reviews/hutt-s55-pro/one-click.webp",
-    "checksum": "sha256:f637ca8991670ad504b128acc9d3d3504d54350ad597edb5badd15196dddeca4",
-    "width": 1254,
-    "height": 1254,
-    "bytes": 176002,
-    "saved": 1874017
-  },
-  {
-    "to": "/media/products/mamibot-w120-dp.webp",
-    "checksum": "sha256:05ab496196958adac627bf4329c5caac2eb8019bdbf29d7ae849ca090593d81d",
-    "width": 1254,
-    "height": 1254,
-    "bytes": 182486,
-    "saved": 1842136
-  },
-  {
-    "to": "/media/reviews/mamibot-w120-dp/corner-clean.webp",
-    "checksum": "sha256:f4258c0b20cb75c151a74025ace30e4d52879c744b4913b4b3f9feb5ff85384f",
-    "width": 1254,
-    "height": 1254,
-    "bytes": 203768,
-    "saved": 1842583
-  },
-  {
-    "to": "/media/reviews/mamibot-w120-dp/eight-in-one.webp",
-    "checksum": "sha256:13b9d7200f5618140ab785f34d72462e2713c25246a946418d557e48b7d325b9",
-    "width": 1254,
-    "height": 1254,
-    "bytes": 130562,
-    "saved": 1738148
-  },
-  {
-    "to": "/media/reviews/mamibot-w120-dp/dual-control.webp",
-    "checksum": "sha256:7ab4656bc854662184472b0b18fd547974270bb6fa93ba9764bc942a7e5ff26f",
-    "width": 1254,
-    "height": 1254,
-    "bytes": 127998,
-    "saved": 1758744
-  },
-  {
-    "to": "/media/products/cop-rose-x5s.webp",
-    "checksum": "sha256:7761480e6a7b2f032605aa2078b3c807bf43dc66715957d083de5443423a85a7",
-    "width": 1254,
-    "height": 1254,
-    "bytes": 212914,
-    "saved": 1916689
-  },
-  {
-    "to": "/media/reviews/cop-rose-x5s/spray-suction.webp",
-    "checksum": "sha256:16da615228827cbdd1b8cd05667ded33504f84ad5f7c3773dd07b3cd1647bf84",
-    "width": 1254,
-    "height": 1254,
-    "bytes": 242352,
-    "saved": 1941774
-  },
-  {
-    "to": "/media/reviews/cop-rose-x5s/multiple-surfaces.webp",
-    "checksum": "sha256:d59d66f1d13514b938544912720e40231ef585a329a79e1a86c95cda5cdb5f50",
-    "width": 1122,
-    "height": 1402,
-    "bytes": 98374,
-    "saved": 1636115
+    "to": "/media/editorial/do-window-robots-work.webp",
+    "checksum": "sha256:f11f917bd012ab9e0f2fb552b8d6d7e0407a3a7c56259101aa36c63973e5223f",
+    "width": 1672,
+    "height": 941,
+    "bytes": 179898,
+    "saved": 1838966
   }
 ]

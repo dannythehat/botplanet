@@ -27,6 +27,7 @@
    ============================================================ */
 
 import type { FaqItem } from "../components/FaqList.astro";
+import type { HeroImage } from "../components/CategoryHero.astro";
 
 /** One ranked recommendation. */
 export interface EditorialPick {
@@ -59,6 +60,16 @@ export interface EditorialContent {
   metaDescription: string;
   /** The standfirst under the H1 — the answer before the reasoning. */
   standfirst: string;
+  /**
+   * The page hero. Optional, because a page is complete without one and
+   * nothing should wait on artwork to ship.
+   *
+   * These are scenes, not product shots: a best-of page's hero shows the job,
+   * not a machine we are about to rank. That distinction is why they live
+   * here rather than resolving through the product registry — the picture
+   * belongs to the page, not to any one thing on it.
+   */
+  image?: HeroImage;
   /** Markdown file basename in src/articles/, without the extension. */
   prose: string;
   /**
@@ -108,6 +119,12 @@ export const EDITORIAL: Record<string, EditorialContent> = {
     standfirst:
       "There is no single best robotic pool cleaner, and any list that gives you one has decided your pool for you. " +
       "These nine are ranked by the job they do best, and each one says plainly who should not buy it.",
+    image: {
+      src: "/media/editorial/best-robotic-pool-cleaners.webp",
+      alt:
+        "A tracked robotic pool cleaner working the floor of a large lit in-ground pool at dusk, a modern house glowing behind it.",
+      focal: "50% 60%",
+    },
     prose: "best-robotic-pool-cleaners",
     picks: [
       {
@@ -267,6 +284,12 @@ export const EDITORIAL: Record<string, EditorialContent> = {
     standfirst:
       "Cordless means no cable to untangle and no float to position — and one component that is guaranteed to be worse in five years " +
       "than it is today. These seven are ranked by pool, and the last section makes the case for not buying one at all.",
+    image: {
+      src: "/media/editorial/best-cordless-pool-cleaners.webp",
+      alt:
+        "A hand lifting a tracked pool cleaner clear of a lit pool at night, water streaming off it and no cable anywhere in the frame.",
+      focal: "55% 50%",
+    },
     prose: "best-cordless-robotic-pool-cleaners",
     picks: [
       {
@@ -403,6 +426,12 @@ export const EDITORIAL: Record<string, EditorialContent> = {
     standfirst:
       "Most robots are not rated for an above-ground pool, and that is about the liner and the curved join rather than about power. " +
       "Four of the ten cleaners we hold qualify. This is all four, and what actually separates them.",
+    image: {
+      src: "/media/editorial/above-ground-pool-cleaners.webp",
+      alt:
+        "A white pool cleaner at the foot of the curved vinyl-liner wall of an above-ground pool in afternoon light, garden furniture behind.",
+      focal: "50% 55%",
+    },
     prose: "best-above-ground-pool-cleaners",
     picks: [
       {
@@ -499,6 +528,12 @@ export const EDITORIAL: Record<string, EditorialContent> = {
     standfirst:
       "For most in-ground pools, yes: the machine buys back an hour a week and it will still be doing it in three years. " +
       "For four specific situations it is the wrong purchase, and those are worth reading before the ones where it is right.",
+    image: {
+      src: "/media/editorial/are-pool-cleaners-worth-it.webp",
+      alt:
+        "A still, spotless infinity pool at sunrise with a robotic cleaner at rest on the step, the job already done.",
+      focal: "60% 55%",
+    },
     prose: "are-robotic-pool-cleaners-worth-it",
     picks: [],
     comparisonSlugs: [],
@@ -579,6 +614,12 @@ export const EDITORIAL: Record<string, EditorialContent> = {
     standfirst:
       "Wire-free is worth paying for when your lawn is going to change, and worth skipping when it is not. " +
       "The three systems sold under that label behave differently under trees, which is the thing that actually decides it.",
+    image: {
+      src: "/media/editorial/wire-free-mowers.webp",
+      alt:
+        "A robot mower at the edge of a flower bed on unmarked lawn with no boundary wire visible anywhere, an antenna on a post behind.",
+      focal: "50% 60%",
+    },
     prose: "wire-free-robot-lawn-mower",
     picks: [],
     comparisonSlugs: [],
@@ -642,6 +683,12 @@ export const EDITORIAL: Record<string, EditorialContent> = {
     standfirst:
       "The cheapest sensible machine is small, wired and single-zone, and the saving is real — because every mower " +
       "in this category cuts to much the same standard. What you give up is area, zones and slope.",
+    image: {
+      src: "/media/editorial/cheap-mowers.webp",
+      alt:
+        "A small plain robot mower on an ordinary suburban back lawn beside a pebbledashed house and a wooden bench, deliberately unglamorous.",
+      focal: "50% 60%",
+    },
     prose: "cheap-robot-lawn-mower",
     picks: [],
     comparisonSlugs: [],
@@ -704,6 +751,12 @@ export const EDITORIAL: Record<string, EditorialContent> = {
     standfirst:
       "Measure the gradient before you shop for anything else. Area you can compromise on and navigation you can choose, " +
       "but a machine that cannot hold your bank will never learn to.",
+    image: {
+      src: "/media/editorial/mowers-for-hills.webp",
+      alt:
+        "A robot mower part-way up a visibly steep grass bank shot from below so the gradient reads, a house at the top and woodland beyond.",
+      focal: "50% 50%",
+    },
     prose: "robot-lawn-mower-for-hills",
     picks: [],
     comparisonSlugs: [],
@@ -767,6 +820,12 @@ export const EDITORIAL: Record<string, EditorialContent> = {
     standfirst:
       "Buy the simplest machine that fixes the one thing you are actually trying to fix, and buy it for a person rather than " +
       "for a diagnosis. Three quite different products are sold to this reader, and picking the wrong one is the usual mistake.",
+    image: {
+      src: "/media/editorial/robotic-pets-for-elderly.webp",
+      alt:
+        "An older person's hands resting on a white robotic cat curled in their lap in a warm lamp-lit sitting room, no face in frame.",
+      focal: "50% 50%",
+    },
     prose: "robotic-pets-for-elderly",
     /* THE ONE GUIDE ON THIS SITE THAT CARRIES A PICK, and the exception is
        deliberate rather than drift. The convention above — guides recommend
@@ -972,6 +1031,12 @@ export const EDITORIAL: Record<string, EditorialContent> = {
     standfirst:
       "Two questions settle this category and both are about your windows: is the glass frameless, and is there a socket near the ones you actually want cleaned. " +
       "Answer those and the list below shortens to about three.",
+    image: {
+      src: "/media/editorial/best-window-robots.webp",
+      alt:
+        "A window cleaning robot part-way down a tall pane with its safety tether running up out of frame, a city skyline and river beyond.",
+      focal: "50% 45%",
+    },
     prose: "best-window-cleaning-robots",
     picks: [
       {
@@ -1098,6 +1163,12 @@ export const EDITORIAL: Record<string, EditorialContent> = {
     standfirst:
       "Yes in the middle of the pane, no at the edges — and that one sentence is the whole honest review of this category. " +
       "Whether it is worth it comes down to how much glass you own.",
+    image: {
+      src: "/media/editorial/do-window-robots-work.webp",
+      alt:
+        "A wide window half cleaned, the left side still hazy with rain marks and dust and the right side clear onto a city skyline, the robot sitting on the boundary between them.",
+      focal: "50% 50%",
+    },
     prose: "do-window-cleaning-robots-work",
     picks: [],
     comparisonSlugs: [],
