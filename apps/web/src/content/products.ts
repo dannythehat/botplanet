@@ -837,6 +837,7 @@ export const PRODUCT_ID: Record<string, string> = {
   "vector-2": "prod-vector-2",
   "eilik": "prod-eilik",
   "loona": "prod-loona",
+  "joy-for-all-companion-pets": "prod-joy-for-all-companion-pets",
 };
 
 /** Editorial records with the stable productId attached, keyed by slug (route id). */
@@ -969,7 +970,18 @@ const WINDOW_SLUGS = new Set([
   "cop-rose-x5s",
 ]);
 
-const COMPANION_SLUGS = new Set(["moflin", "miko-3", "vector-2", "eilik", "loona"]);
+const COMPANION_SLUGS = new Set([
+  "moflin",
+  "miko-3",
+  "vector-2",
+  "eilik",
+  "loona",
+  /* No review page of its own, deliberately: it shares five of ten top-ten
+     domains with /guides/robotic-pets-for-elderly/, which is live, so that
+     guide carries the product instead. It still needs a category here, because
+     the catalogue row and its spec page exist either way. */
+  "joy-for-all-companion-pets",
+]);
 
 const CATEGORY_OF: Record<string, string> = Object.fromEntries(
   Object.keys(PRODUCT_ID).map((slug) => [

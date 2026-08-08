@@ -390,6 +390,13 @@ const COMPANION_ASINS: WindowDestination[] = [
       "Title: 'Miko 3 AI Robot for Kids - Smart Educational & STEAM Learning Robot with Interactive Apps, Games, Stories & Activities for Girls & Boys Ages 5-10 | Red'. Served ASIN equals the one requested; availability reads 'In Stock' at $299 on 8 August 2026. A VARIANT FAMILY, AND THE SECOND ASIN WAS NEARLY RECORDED AS A DUPLICATE: B0GV2L2PDL carries a byte-identical title ending '| Blue', serves its own ASIN, and is also in stock at $299. Two listings for one machine in two colours, not two machines and not a stale row. Red is the one held; the served-ASIN equality check is what stops Blue's data being accepted in its place. Miko also sells a Mini and a Max, and neither name appears anywhere in this listing.",
   },
   {
+    productId: "prod-joy-for-all-companion-pets",
+    asin: "B017JQQ00Q",
+    exactModel: "Joy For All Companion Pet Cat, B7594 (Silver with White Mitts)",
+    evidence:
+      "Details table gives Manufacturer 'Joy For All', Manufacturer Part Number 'B7594', Included Components 'Silver Cat', Age Range Description 'Seniors', Supported Battery Types '4 x 1.5V C Alkaline Batteries', Material Type 'Synthetic fur (plastic)', Item Weight 1 kg, Item Dimensions 15.24 x 9.02 x 10.12 inches. Sold by 'Ageless Innovation LLC', In Stock at $159 on 8 August 2026, 4.5 stars from 12,307 ratings. Served ASIN equals the one requested. A VARIANT FAMILY: Ageless Innovation sells the cat in several colourways and a dog as well, so the part number and the Included Components row are what pin this to the Silver with White Mitts.",
+  },
+  {
     productId: "prod-loona",
     asin: "B0DCF53PCH",
     exactModel: "Loona Petbot (KEYi Tech)",
@@ -626,6 +633,7 @@ export const REDIRECT_KEYS: Record<string, string> = {
   "prod-vector-2": "comp-anki-vector2-amazon",
   "prod-eilik": "comp-eilik-amazon",
   "prod-loona": "comp-loona-amazon",
+  "prod-joy-for-all-companion-pets": "comp-joyforall-cat-amazon",
 };
 
 /* ------------------------------------------------------------------ */

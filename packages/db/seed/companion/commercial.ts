@@ -63,6 +63,10 @@ const offerSeeds: CompanionOfferSeed[] = [
      catalogue row. */
   { id: "off-eilik-amazon", productId: "prod-eilik", asin: "B0C2C9LJNQ", redirectKey: "comp-eilik-amazon", snapshotMinor: 13999 },
   { id: "off-loona-amazon", productId: "prod-loona", asin: "B0DCF53PCH", redirectKey: "comp-loona-amazon", snapshotMinor: 49900 },
+  /* The only product on this site whose buy button lives on a GUIDE rather
+     than on a review of its own. See the ruling in
+     docs/seo/companion-products-build-plan.md. */
+  { id: "off-joyforall-cat-amazon", productId: "prod-joy-for-all-companion-pets", asin: "B017JQQ00Q", redirectKey: "comp-joyforall-cat-amazon", snapshotMinor: 15900 },
 ];
 
 export const offerRows: (typeof offers.$inferInsert)[] = offerSeeds.map((o) => ({

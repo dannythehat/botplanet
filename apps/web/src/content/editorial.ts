@@ -768,8 +768,43 @@ export const EDITORIAL: Record<string, EditorialContent> = {
       "Buy the simplest machine that fixes the one thing you are actually trying to fix, and buy it for a person rather than " +
       "for a diagnosis. Three quite different products are sold to this reader, and picking the wrong one is the usual mistake.",
     prose: "robotic-pets-for-elderly",
-    picks: [],
-    comparisonSlugs: [],
+    /* THE ONE GUIDE ON THIS SITE THAT CARRIES A PICK, and the exception is
+       deliberate rather than drift. The convention above — guides recommend
+       nothing and send the reader to a page that does — assumes such a page
+       exists. Here it does not, and cannot: "joy for all companion pet" shares
+       FIVE of ten top-ten domains with this page's own primary term, so the
+       Joy For All review that was planned was cancelled rather than deferred.
+       Building it would have put two BotPlanet pages into one result set.
+
+       This page was written in August waiting for exactly this product. Its
+       own note read "Joy for All and Tombot Jennie are the obvious candidates
+       and neither is in the catalogue". Tombot takes waitlist deposits and
+       cannot be sold. Joy For All can, and now is.
+       See docs/seo/companion-products-build-plan.md. */
+    picks: [
+      {
+        productSlug: "joy-for-all-companion-pets",
+        award: "The one to buy for most people",
+        why:
+          "It answers this page's own checklist better than anything else sold to this reader. Four C batteries, included, and no " +
+          "charging dock for anybody to remember. No app, no account, no home network. Synthetic fur over a 1 kg body that sits in a " +
+          "lap, and sensors that respond to motion and touch with head and paw movements, meows and a purr you can feel. Ageless " +
+          "Innovation has been selling these to care settings for years, and 12,307 Amazon ratings averaging 4.5 is the largest body " +
+          "of real feedback on any product in this category.",
+        wrongFor:
+          "Somebody who would find a pretend cat patronising rather than comforting — which is a real reaction and worth asking about " +
+          "first. Also anyone hoping for conversation, reminders or a way to check in from a distance: this machine does none of those " +
+          "and is better for it.",
+      },
+    ],
+    /* One slug, matching the one pick. The comparison table on a page with a
+       single recommendation is a specification card rather than a comparison,
+       and that is the honest shape here: there is nothing else in the
+       catalogue sold to this reader. Miko, Vector, Eilik and Loona are all in
+       companion robots and none of them belongs on a page about buying for an
+       older relative — declaring the list rather than filtering the category
+       is what stops them appearing. */
+    comparisonSlugs: ["joy-for-all-companion-pets"],
     faq: [
       {
         q: "Do robotic pets help people with dementia?",
@@ -782,8 +817,9 @@ export const EDITORIAL: Record<string, EditorialContent> = {
         q: "What is the best robotic pet for an elderly person?",
         a:
           "Usually the simplest one. Battery-powered, fur-covered, responds to touch, with no screen, no app and nothing to log into. " +
-          "A machine that has to be understood before it can be enjoyed has already failed this reader. We do not name models here " +
-          "because none has been through our checking process yet.",
+          "A machine that has to be understood before it can be enjoyed has already failed this reader. On that test the Joy For All " +
+          "Companion Pet Cat is the one we recommend: four C batteries rather than a dock, no app and no account, and fur over a " +
+          "one-kilogram body that sits in a lap.",
       },
       {
         q: "Is a robotic pet or a care robot better for an older relative?",
