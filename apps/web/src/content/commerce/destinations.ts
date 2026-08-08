@@ -363,6 +363,71 @@ const WINDOW_ASINS: WindowDestination[] = [
   },
 ];
 
+const COMPANION_CHECK_DATE = "2026-08-08";
+
+/**
+ * Companion robots. Read the same way as the window eleven, one at a time.
+ *
+ * THE CATEGORY'S BEST-KNOWN NAMES ARE NOT HERE, and that is the finding rather
+ * than an omission. Sony aibo, ElliQ, Tombot Jennie, Cozmo and Moxie have no
+ * Amazon US listing at all, and Living.AI's EMO returns only unbranded
+ * knockoffs — 43,900 searches a month between them with nothing to sell. See
+ * docs/seo/companion-robots-research-findings.md.
+ */
+const COMPANION_ASINS: WindowDestination[] = [
+  {
+    productId: "prod-moflin",
+    asin: "B0GPHNLWP3",
+    exactModel: "Casio Moflin (Silver)",
+    evidence:
+      "Title: 'Casio Moflin AI Smart Companion Robot - Silver | AI-powered interactive companion; emotional evolution; MofLife app compatible; stress relief'. Served ASIN equals the one requested, and the availability block reads 'In Stock' with $429 showing on 8 August 2026. THE DETAILS TABLE IS ABSENT FROM THIS LISTING — no Brand row, no Item model number, nothing the other reads could quote, so identity rests on the title naming Casio, Moflin and the colourway together. That is weaker than the window eleven and is recorded as weaker. A VARIANT FAMILY: Casio sells Silver and Gold; this ASIN is the Silver, and the served-ASIN equality check is what stops the Gold's data being accepted in its place.",
+  },
+  {
+    productId: "prod-miko-3",
+    asin: "B0GV37M678",
+    exactModel: "Miko 3 (Red)",
+    evidence:
+      "Title: 'Miko 3 AI Robot for Kids - Smart Educational & STEAM Learning Robot with Interactive Apps, Games, Stories & Activities for Girls & Boys Ages 5-10 | Red'. Served ASIN equals the one requested; availability reads 'In Stock' at $299 on 8 August 2026. A VARIANT FAMILY, AND THE SECOND ASIN WAS NEARLY RECORDED AS A DUPLICATE: B0GV2L2PDL carries a byte-identical title ending '| Blue', serves its own ASIN, and is also in stock at $299. Two listings for one machine in two colours, not two machines and not a stale row. Red is the one held; the served-ASIN equality check is what stops Blue's data being accepted in its place. Miko also sells a Mini and a Max, and neither name appears anywhere in this listing.",
+  },
+  {
+    productId: "prod-joy-for-all-companion-pets",
+    asin: "B017JQQ00Q",
+    exactModel: "Joy For All Companion Pet Cat, B7594 (Silver with White Mitts)",
+    evidence:
+      "Details table gives Manufacturer 'Joy For All', Manufacturer Part Number 'B7594', Included Components 'Silver Cat', Age Range Description 'Seniors', Supported Battery Types '4 x 1.5V C Alkaline Batteries', Material Type 'Synthetic fur (plastic)', Item Weight 1 kg, Item Dimensions 15.24 x 9.02 x 10.12 inches. Sold by 'Ageless Innovation LLC', In Stock at $159 on 8 August 2026, 4.5 stars from 12,307 ratings. Served ASIN equals the one requested. A VARIANT FAMILY: Ageless Innovation sells the cat in several colourways and a dog as well, so the part number and the Included Components row are what pin this to the Silver with White Mitts.",
+  },
+  {
+    productId: "prod-loona",
+    asin: "B0DCF53PCH",
+    exactModel: "Loona Petbot (KEYi Tech)",
+    evidence:
+      "Title: 'Loona Robot Pet Dog ChatGPT-4o Smart AI-Powered Companion Voice & Gesture Control, Real-Time Interaction Robotics Toys for Kids, Home Monitoring - Includes Charging Dock'. Served ASIN equals the one requested; $499, In Stock, 4.1 stars from 1,234 ratings on 8 August 2026. THIS PRODUCT WAS NEARLY MISSED TWICE, both times by tooling rather than by absence. The first discovery pass returned 'Play Ball for Loona Pet Robot' as the candidate, because an accessory carries every token of the product it attaches to. The identity check then REFUSED this listing on a deny token of my own writing, 'charging dock :', which matched Amazon's own ' : Toys & Games' title suffix on a listing whose name ends 'Includes Charging Dock'. Both faults are fixed in the scripts; this entry exists because a refusal was read rather than believed.",
+  },
+  {
+    productId: "prod-eilik",
+    asin: "B0C2C9LJNQ",
+    exactModel: "Eilik (Energize Lab)",
+    evidence:
+      "Title: 'ENERGIZE LAB Eilik - Your Desktop Companion Full of Personality with Expressive Animations & Reactions, Touch-Response...'. Served ASIN equals the one requested; $139.99, in stock, 8 August 2026 — the same figure Energize Lab's own store shows. THE RANGE IS THE TRAP HERE, not a sibling model number. Energize Lab sells Eilik ($139.99), Eilik DQ ($199.98), the Eilik AI Station ($99), Panxer ($119.90) and Eiliko ($59.90), and Amazon lists most of them under the same brand with near-identical artwork. This ASIN is the base Eilik: the title names no DQ, no Station and no Panxer, and Eiliko is a different product with its own name.",
+  },
+  {
+    productId: "prod-vector-2",
+    asin: "B07G3ZNK4Y",
+    exactModel: "Anki Vector 2.0 (Black)",
+    evidence:
+      "Title: 'Anki Vector 2.0 AI ChatGPT Connected Robot Companion - Smart Autonomous Home Robot with Face Recognition and Voice Conversations - ChatGPT Subscription Required (Black)'. Sold by the Digital Dream Labs Store; 4.0 stars from 11,120 ratings. Served ASIN equals the one requested. Details table gives Item Dimensions 3.93 x 2.36 x 2.73 inches and Power Source battery. THE LISTING STATES THE SUBSCRIPTION REQUIREMENT IN ITS OWN TITLE, which is unusually honest for this category and is the fact the review is built on. PRICE MOVED WHILE THIS WAS BEING BUILT: $199.99 read at 02:07 and $184 at 03:15 on 8 August 2026, both from this ASIN. Neither is published — it is the clearest demonstration on this site of why a price comes from the refresh service with the date it was read rather than from a note somebody typed once.",
+  },
+];
+
+for (const c of COMPANION_ASINS) {
+  IDENTITY_CHECKS[c.productId] = {
+    asin: c.asin,
+    confirmed: true,
+    evidence: c.evidence,
+    checkedOn: COMPANION_CHECK_DATE,
+  };
+}
+
 /**
  * The window identity checks, DERIVED from WINDOW_ASINS rather than typed out
  * a second time.
@@ -383,6 +448,37 @@ for (const w of WINDOW_ASINS) {
 }
 
 export const DESTINATIONS: ProductDestination[] = [
+  ...COMPANION_ASINS.map(
+    ({ productId, asin, exactModel, evidence }): ProductDestination => ({
+      productId,
+      retailerId: "ret-amazon",
+      market: "us",
+      retailerProductId: asin,
+      identifierKind: "asin",
+      exactModel,
+      /* VERIFIED_EXACT, and the reasoning is worth keeping because the first
+         attempt got it wrong. This was written as researched_exact on the
+         grounds that the listing publishes no details table, so the evidence
+         is thinner than the window eleven's. offers.test.ts refused it, and
+         the test was right: researched_exact means identity is NOT confirmed,
+         and this identity is confirmed. Served ASIN equals the one requested
+         and the title reads "Casio Moflin" in full.
+
+         "Moflin" is also a coined word owned by one maker with exactly one
+         product and one sibling variant, which is a stronger identifier than
+         most model numbers — there is no Moflin Pro to be confused with. The
+         thinness of the details table belongs in the evidence text, where it
+         is recorded, rather than in a confidence level that would have meant
+         something untrue. */
+      confidence: "verified_exact" as const,
+      destinationUrl: `https://www.amazon.com/dp/${asin}`,
+      sourceReference: `Identity machine-read by scripts/amazon-identity-check.mjs on ${COMPANION_CHECK_DATE}: https://www.amazon.com/dp/${asin}`,
+      sourceCheckedDate: COMPANION_CHECK_DATE,
+      sellerIdentity: null,
+      sellerModel: "unknown",
+      notes: evidence,
+    }),
+  ),
   ...WINDOW_ASINS.map(
     ({ productId, asin, exactModel, evidence }): ProductDestination => ({
       productId,
@@ -525,6 +621,19 @@ export const REDIRECT_KEYS: Record<string, string> = {
   "prod-cop-rose-x5s": "win-coprose-x5s-amazon",
   "prod-mamibot-w120-dp": "win-mamibot-w120dp-amazon",
   "prod-hutt-s55-pro": "win-hutt-s55pro-amazon",
+
+  /* COMPANION. Written into D1 on 8 August 2026 by this job rather than read
+     out of it, which is the one case where the rule above does not apply — a
+     key cannot be read from D1 before it exists there. The offer row
+     `off-moflin-amazon` and the redirect_links row `comp-casio-moflin-amazon`
+     were inserted first, then recorded here, so the map still describes the
+     database rather than a naming convention somebody hoped was followed. */
+  "prod-moflin": "comp-casio-moflin-amazon",
+  "prod-miko-3": "comp-miko-3-amazon",
+  "prod-vector-2": "comp-anki-vector2-amazon",
+  "prod-eilik": "comp-eilik-amazon",
+  "prod-loona": "comp-loona-amazon",
+  "prod-joy-for-all-companion-pets": "comp-joyforall-cat-amazon",
 };
 
 /* ------------------------------------------------------------------ */

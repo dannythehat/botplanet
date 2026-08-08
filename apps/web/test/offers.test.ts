@@ -1,5 +1,6 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
+import { PAGE_PLAN } from "../src/content/seo/page-plan";
 import { PRODUCTS } from "../src/content/products";
 import { DESTINATIONS, IDENTITY_CHECKS, REDIRECT_KEYS, REJECTED_CANDIDATES, destinationFor } from "../src/content/commerce/destinations";
 import { NOT_RELATIONSHIPS, PROGRAMMES, RETAILERS, approvedUsRetailers, programme, retailer, usableUsProgrammes } from "../src/content/commerce/registry";
@@ -172,12 +173,16 @@ describe("exact-product destinations", () => {
     // A search fallback remains the honest answer whenever no correct listing
     // is held. If that happens again the count is what should change — never
     // the classification.
-    // 12 pool + 11 window. The window eleven arrived on 6 August 2026: their
-    // ASINs had been researched on 5 August and written into
+    // 12 pool + 11 window + 1 companion. The window eleven arrived on 6 August
+    // 2026: their ASINs had been researched on 5 August and written into
     // docs/seo/window-cleaning-robots-asins.md, and were never wired to
     // anything. Identity for all eleven was machine-read before they were
     // accepted here — see scripts/amazon-identity-check.mjs.
-    expect(exact).toHaveLength(23);
+    //
+    // Moflin joined on 8 August 2026, the first companion product with
+    // anything to sell. Five of that category's better-known names have no
+    // Amazon US listing at all, so this count will grow slowly and should.
+    expect(exact).toHaveLength(29);
     expect(search).toHaveLength(0);
     for (const d of exact) {
       expect(d.identifierKind).toBe("asin");
@@ -758,6 +763,24 @@ describe("no private data escapes", () => {
          pool category is a 404, so this checks the shape and lets the mapping
          name the category. */
       expect(r.canonicalUrl).toMatch(/^https:\/\/botplanet\.io\/robots\/[a-z0-9-]+\/[a-z0-9-]+\/$/);
+      /* A SHAPE A WRONG ANSWER SATISFIES IS NOT A GATE. The assertion above
+         passed happily on 8 August 2026 while every companion product carried
+         a canonical URL of /robots/robotic-pool-cleaners/<slug>/ — five 404s
+         in the export whose entire job is telling an affiliate network where
+         our products live. The category segment must be the product's OWN
+         category, checked against the page plan rather than against a
+         pattern. */
+      const slug = r.canonicalUrl.replace(/\/$/, "").split("/").pop()!;
+      const category = r.canonicalUrl.split("/robots/")[1]!.split("/")[0]!;
+      /* Matched by SLUG across the whole plan, not by the URL we are checking
+         — asking planFor() for the URL would only confirm the URL agrees with
+         itself. A product with no planned review page is skipped rather than
+         failed: the withdrawn Dolphin E10 keeps a catalogue row and has no
+         page, which is correct and not a category error. */
+      const plan = PAGE_PLAN.find((p) => p.type === "review" && p.path.endsWith(`/${slug}/`));
+      if (plan) {
+        expect(plan.category, `${slug} is filed under ${category} but its page is in ${plan.category}`).toBe(category);
+      }
       expect(r.nextAction.length).toBeGreaterThan(20);
       // A fully evidenced product legitimately has no blockers — that is the
       // goal state, not a data error. Everything else must explain itself.
@@ -1406,12 +1429,18 @@ describe("scheduled refresh — wiring", () => {
   });
 
   it("gives every routed product a seeded offer behind its buy button", () => {
-    /* BOTH SEEDS, AND THE WHOLE CATALOGUE. This read only the pool seed and
+    /* EVERY SEED, AND THE WHOLE CATALOGUE. This read only the pool seed and
        only ACTIVE_PRODUCTS, so the eleven window keys it was meant to protect
-       were outside its reach in two separate ways at once. */
-    const seed =
-      readFileSync("packages/db/seed/pool/commercial.ts", "utf8") +
-      readFileSync("packages/db/seed/window/commercial.ts", "utf8");
+       were outside its reach in two separate ways at once.
+
+       A CATEGORY ADDED HERE IS A CATEGORY ADDED TO THIS LIST. Companion joined
+       on 8 August 2026 and the omission surfaced immediately, because the test
+       fails loudly for any routed product whose key is absent from the text it
+       reads — which is exactly the behaviour wanted. Read the directory rather
+       than the list if a fourth category makes this tedious. */
+    const seed = ["pool", "window", "companion"]
+      .map((c) => readFileSync(`packages/db/seed/${c}/commercial.ts`, "utf8"))
+      .join("\n");
     for (const p of activeCatalogue()) {
       const key = REDIRECT_KEYS[p.productId];
       expect(key, `${p.slug}: no redirect key`).toBeTruthy();

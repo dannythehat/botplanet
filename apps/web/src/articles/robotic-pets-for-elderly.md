@@ -97,16 +97,34 @@ specification.
 
 ## What we cannot tell you yet
 
-Which model to buy.
+Whether the person will find it charming or patronising.
 
-BotPlanet has no companion robots in its catalogue at the time of writing, so
-there is no ranking here and there will not be a borrowed one. Every product we
-publish is checked against the manufacturer's own documentation before it goes
-up, which our review methodology sets out, and none of these machines has been
-through that process yet. The obvious candidates are well known and easy to find
-for yourself; what is not easy to find is an honest account of which of them
-still work when the maker stops answering the phone, and that is the work worth
-waiting for.
+That is the one thing no specification answers and the one that decides whether
+a robotic pet gets used or put in a cupboard. Some people take to a pretend
+animal immediately. Others find being handed one insulting, and they are not
+wrong to. Ask, if you can ask. If you cannot, weigh how the person has reacted
+to being helped before.
+
+## Which one we recommend, and why it is this one
+
+The Joy For All Companion Pet Cat.
+
+It is the cheapest thing recommended anywhere on this site for this reader, and it wins on this page's own checklist rather than on features. It runs on four C
+batteries, supplied in the box, so there is no dock for anybody to remember and
+no cable to trip over. There is no app, no account and no home network. It
+weighs a kilogram, is covered in short synthetic fur, and its sensors respond to
+motion and touch with head and paw movements, meows and a purr you can feel
+through the fur.
+
+Ageless Innovation has been selling these into care settings for years, and the
+Amazon listing carries 12,307 ratings averaging 4.5 — the largest body of real
+feedback on anything in this category by a wide margin. The manufacturer's own
+age-range field reads "Seniors", which is unusual honesty in a product that
+could easily have been sold as a toy.
+
+It does not talk, does not remind anybody of anything and cannot be checked from
+a phone. If those matter, this is the wrong machine and the next section says
+what to do instead.
 
 ## What to do next
 

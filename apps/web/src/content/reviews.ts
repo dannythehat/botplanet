@@ -2247,6 +2247,450 @@ export const REVIEWS: Record<string, ReviewContent> = {
       "Retailer-stated throughout; no manufacturer page publishing these figures was found. The framed-glass-only rating is the one specification that decides this purchase outright, and it is the one we are most confident in — it is what the product is sold as.",
     lastReviewed: "2026-08-06",
   },
+
+  /* ============================================================
+     COMPANION ROBOTS — first review in the category, 8 August 2026.
+
+     EVERY FIGURE BELOW COMES FROM casio.com/us/moflin/, read on
+     8 August 2026. Casio publishes a full specification table for
+     this product, which is more than most makers in this category
+     do, so nothing here is null and nothing is borrowed.
+
+     The specification settles the question the search data says
+     people actually arrive with. "does moflin walk" and "can
+     moflin walk" are both Google's first suggestion for their
+     prefix; the answer is in the Movement row, which reads two
+     axes, head rotation and tilt. It has no legs and no wheels.
+     Casio does not hide this — it is simply the last thing anyone
+     reads, and it is the first thing this page says.
+     ============================================================ */
+  moflin: {
+    slug: "moflin",
+    categorySlug: "companion-robots",
+    eyebrow: "Companion robot review",
+    title: "Casio Moflin review",
+    seoTitle: "Moflin Review — What a $429 AI Pet Actually Does",
+    metaDescription:
+      "A $429 robot pet with no legs, no speech and two axes of movement. What Moflin " +
+      "actually does, what Casio publishes, and who it is genuinely for.",
+    verdict:
+      "A 260-gram ball of fur that moves its head, makes sounds and learns to respond to how you handle it. It does not walk, does not talk and does nothing useful, and every one of those is a design decision rather than a shortfall. Whether that is worth $429 depends entirely on whether you want a pet or a gadget.",
+    bestFor:
+      "Someone who wants something to look after in a home where a real animal is not possible — a rented flat, an allergy, a care setting, a schedule that will not carry a dog.",
+    notIdealFor:
+      "Anyone expecting it to move around the room, hold a conversation, run an app on a screen or do a job. It does none of those and is not sold as though it does.",
+    facts: [
+      { label: "Movement", value: "2 axes — head only" },
+      { label: "Weight", value: "260 g" },
+      { label: "Battery life", value: "5 h, 3.5 h to charge" },
+      { label: "Subscription", value: "None" },
+    ],
+    specGroups: [
+      {
+        heading: "What it does",
+        rows: [
+          { label: "Movement", value: "2 axes (head rotation and tilt)" },
+          { label: "Walks or rolls", value: "No — it has no legs and no wheels" },
+          { label: "Speech", value: "No — sounds only, no words" },
+          { label: "Audio", value: "1 speaker, 1 microphone" },
+          { label: "Sensors", value: "Microphone, illuminance, touch, accelerometer/gyroscope" },
+          { label: "App", value: "MofLife — naming, journal, volume, battery, updates" },
+        ],
+      },
+      {
+        heading: "Power",
+        rows: [
+          { label: "Battery", value: "Li-ion 3.7 V, 1,200 mAh" },
+          { label: "Runtime", value: "About 5 hours at 25 °C / 77 °F" },
+          { label: "Charge time", value: "About 3 hours 30 minutes" },
+          { label: "Power consumption", value: "About 4.7 W" },
+          { label: "Charging", value: "In its bed, and it still responds while charging" },
+        ],
+      },
+      {
+        heading: "Physical",
+        rows: [
+          { label: "Size", value: "130 × 90 × 180 mm" },
+          { label: "Size in its bed", value: "140 × 120 × 190 mm" },
+          { label: "Weight", value: "About 260 g" },
+          { label: "Bed size", value: "140 × 100 × 190 mm, about 280 g" },
+          { label: "Colours", value: "Silver, Gold" },
+        ],
+      },
+      {
+        heading: "Ownership",
+        rows: [
+          { label: "Subscription", value: "None published for the US" },
+          { label: "Warranty", value: "One year from the day it arrives" },
+          { label: "In the box", value: "Moflin, bed, AC adapter, startup guide" },
+          { label: "Fur care", value: "Soft brush; damp cloth if it gets dirty" },
+        ],
+      },
+    ],
+    skuNote:
+      "Every figure read from casio.com/us/moflin/ on 8 August 2026, where Casio publishes a full specification table. Casio sells Silver and Gold; the ASIN behind our buy button is the Silver, and the two differ in colour only. Casio notes its specifications may change without notice.",
+    lastReviewed: "2026-08-08",
+  },
+
+  /* Miko 3. Specifications from miko.ai/products/miko-3, read 8 August 2026,
+     where Miko publishes dimensions, weight, battery and language support in
+     its own FAQ. The subscription tiers below are read from the same page's
+     comparison table rather than summarised from memory — "does miko 3 require
+     a subscription" is Google's first suggestion for its prefix, and the
+     honest answer is longer than yes or no. */
+  "miko-3": {
+    slug: "miko-3",
+    categorySlug: "companion-robots",
+    eyebrow: "Companion robot review",
+    title: "Miko 3 review",
+    seoTitle: "Miko 3 Review — What You Get Without Miko Max",
+    metaDescription:
+      "A $299 learning robot for ages 5 to 10. What Miko 3 does out of the box, what " +
+      "the Miko Max subscription unlocks, and how it compares with the Mini.",
+    verdict:
+      "The most capable robot a five-year-old can actually talk to, and the one product in this category built around a child rather than adapted for one. It works without paying anything further, but several of the headline apps are limited or locked until you do, and the buying decision is really about that.",
+    bestFor:
+      "A child roughly five to ten who will talk to it, in a house with reliable Wi-Fi and a parent willing to use the companion app.",
+    notIdealFor:
+      "Under-fives, anyone over about ten, a home without Wi-Fi, or a buyer who wants everything the marketing shows without a recurring charge.",
+    facts: [
+      { label: "Age range", value: "5 to 10" },
+      { label: "Battery", value: "6–7 h play, 4 h charge" },
+      { label: "Languages", value: "8" },
+      { label: "Subscription", value: "Optional — from $8.25/mo" },
+    ],
+    specGroups: [
+      {
+        heading: "What it is",
+        rows: [
+          { label: "Age range", value: "5 to 10 (Miko's own rating)" },
+          { label: "Moves", value: "Yes — drives on wheels" },
+          { label: "Wake word", value: "“Hey Miko”" },
+          { label: "Languages", value: "8 — English, Spanish (Europe), Spanish (Latin America), Mandarin, Italian, German, French, Arabic" },
+          { label: "Recognition", value: "Face and voice" },
+          { label: "Connection", value: "Wi-Fi required — it does nothing offline" },
+        ],
+      },
+      {
+        heading: "Hardware",
+        rows: [
+          { label: "Display", value: "Wide-angle high-resolution IPS" },
+          { label: "Camera", value: "Wide-angle HD" },
+          { label: "Microphones", value: "Dual MEMS" },
+          { label: "Sensors", value: "Time-of-flight range, odometric" },
+          { label: "Size", value: "6.3 × 5.5 × 8.67 in" },
+          { label: "Weight", value: "2 lb" },
+          { label: "Colours", value: "Red, Blue" },
+        ],
+      },
+      {
+        heading: "Power",
+        rows: [
+          { label: "Play time", value: "About 6 to 7 hours, depending on use" },
+          { label: "Charge time", value: "About 4 hours with the 15 W adapter" },
+          { label: "Sleep mode", value: "Yes — Miko recommends it to preserve the battery" },
+        ],
+      },
+      {
+        heading: "Subscription and ownership",
+        rows: [
+          { label: "Works without a subscription", value: "Yes — but with several apps limited or locked" },
+          { label: "Miko Max price", value: "From $8.25/month, or $99 a year" },
+          { label: "Locked without Max", value: "iHeart Music, DaVinci Games & Shows, Lingo Kids parental controls" },
+          { label: "Limited without Max", value: "Learning buddy, Story Maker, Disney, Mattel Shows, progress reports, parental controls" },
+          { label: "Free either way", value: "Spell Bee, Dance Master, app locking" },
+          { label: "Certification", value: "kidSAFE+ COPPA" },
+          { label: "Warranty", value: "1 year; 30-day returns" },
+        ],
+      },
+    ],
+    skuNote:
+      "Specifications and subscription tiers read from miko.ai/products/miko-3 on 8 August 2026. Miko sells the 3 in Red and Blue as separate Amazon listings at the same price; our buy button points at the Red. The Mini and the Max are different machines, not colours.",
+    lastReviewed: "2026-08-08",
+  },
+
+  /* Vector 2.0. The measured SERPs put ten first-position terms behind this
+     product and every one of them is a doubt — still supported, still works,
+     still being made, why discontinued, problems, alternative. The PAA on
+     three separate Vector SERPs asks whether it is discontinued and whether it
+     needs a subscription.
+
+     So the specification table below leads with the company and the
+     subscription rather than the hardware. Subscription pricing read from
+     anki.bot/pages/vector-subscription on 8 August 2026; dimensions and the
+     Wi-Fi restriction from the Amazon listing the same day. */
+  "vector-2": {
+    slug: "vector-2",
+    categorySlug: "companion-robots",
+    eyebrow: "Companion robot review",
+    title: "Anki Vector 2.0 review",
+    seoTitle: "Vector Robot Review — Is It Still Supported in 2026?",
+    metaDescription:
+      "Anki went under in 2019 and Vector is still on sale. Who owns it now, what the " +
+      "$11.99 subscription covers, and whether the robot works without one.",
+    verdict:
+      "A palm-sized robot with more character than anything else at the price, sold by the third company to own it, and dependent on a subscription that costs more per year than some of its competitors cost outright. Buy it for what it is now, not for what Anki promised in 2018.",
+    bestFor:
+      "Someone who wants a desk robot with genuine personality and has read the subscription terms before ordering rather than after.",
+    notIdealFor:
+      "Anyone who wants a one-off purchase, anyone who needs it to work reliably for years, or anyone buying on the strength of the original 2018 reviews.",
+    facts: [
+      { label: "Sold by", value: "ANKI, LLC" },
+      { label: "Subscription", value: "$11.99/mo or $99.99/yr" },
+      { label: "Wi-Fi", value: "2.4 GHz only" },
+      { label: "Size", value: "3.93 × 2.36 × 2.73 in" },
+    ],
+    specGroups: [
+      {
+        heading: "Who makes it now",
+        rows: [
+          { label: "Original maker", value: "Anki Inc. — ceased trading 2019" },
+          { label: "Sold today by", value: "ANKI, LLC, formerly Digital Dream Labs" },
+          { label: "Amazon storefront", value: "Digital Dream Labs Store" },
+          { label: "Developer route", value: "OSKR — Anki's open-source path for Vector" },
+        ],
+      },
+      {
+        heading: "The subscription",
+        rows: [
+          { label: "Required for cloud features", value: "Yes — the Amazon listing states it in its own title" },
+          { label: "Monthly", value: "$11.99" },
+          { label: "Annual", value: "$99.99" },
+          { label: "Managed through", value: "Stratus, keyed to the robot's 8-character serial" },
+          { label: "Activation delay", value: "Up to 36 hours" },
+          { label: "What works unsubscribed", value: "Anki publishes no feature-by-feature comparison" },
+        ],
+      },
+      {
+        heading: "Hardware",
+        rows: [
+          { label: "Size", value: "3.93 × 2.36 × 2.73 in" },
+          { label: "Weight", value: "5.6 oz (listing figure)" },
+          { label: "Power", value: "Battery, returns to its own charger" },
+          { label: "Wi-Fi", value: "2.4 GHz only — it will not see a 5 GHz network" },
+          { label: "Recognition", value: "Face and voice" },
+          { label: "Setup", value: "Chrome web setup, or the iOS and Android apps" },
+        ],
+      },
+    ],
+    skuNote:
+      "Subscription pricing and terms read from anki.bot/pages/vector-subscription on 8 August 2026; dimensions, Wi-Fi restriction and seller from the Amazon listing the same day. The listing price moved from $199.99 to $184 within one morning, which is why no price is quoted here — the figure on the page comes from the refresh service with the date it was read.",
+    lastReviewed: "2026-08-08",
+  },
+
+  /* Eilik. Energize Lab publishes a proper anatomy table, so every hardware
+     figure below is theirs rather than a retailer's.
+
+     TWO NUMBERS DECIDE THIS PRODUCT and neither appears in the marketing: the
+     battery runs 1.5 hours, and the warranty is 90 days against a year from
+     Casio and Miko. Both are on the maker's own page and both are in the facts
+     strip rather than buried in a table. */
+  eilik: {
+    slug: "eilik",
+    categorySlug: "companion-robots",
+    eyebrow: "Companion robot review",
+    title: "Eilik review",
+    seoTitle: "Eilik Review — The 1.5-Hour Battery Nobody Mentions",
+    metaDescription:
+      "A $139.99 desk robot with real character, a 90-day warranty and 90 minutes of " +
+      "battery. What Eilik does, what the DQ adds, and whether two is better.",
+    verdict:
+      "The most personality per dollar in this category and the shortest battery life in it. Eilik is a desk toy that reacts to being touched and to another Eilik, with no subscription and no cloud account, and it runs for about ninety minutes between charges.",
+    bestFor:
+      "A desk, a bedroom shelf, or a gift for someone who wants something with character and does not want an account, an app subscription or a microphone in the room.",
+    notIdealFor:
+      "Anyone expecting conversation, anyone who wants it to run all day, or anyone who needs more than 90 days of warranty cover at this price.",
+    facts: [
+      { label: "Battery", value: "1.5 h use, 1 h charge" },
+      { label: "Warranty", value: "90 days" },
+      { label: "Subscription", value: "None" },
+      { label: "Weight", value: "230 g" },
+    ],
+    specGroups: [
+      {
+        heading: "Anatomy",
+        rows: [
+          { label: "Size", value: "108 × 105 × 133 mm (4.3 × 4.1 × 5.2 in)" },
+          { label: "Weight", value: "230 g (8 oz)" },
+          { label: "Servos", value: "EM3 × 4" },
+          { label: "Display", value: "1.54 in, 128 × 64 OLED" },
+          { label: "Speaker", value: "3 W" },
+          { label: "Material", value: "High-strength polycarbonate" },
+          { label: "Port", value: "USB Type-C" },
+        ],
+      },
+      {
+        heading: "Power — read this before buying",
+        rows: [
+          { label: "Battery", value: "450 mAh" },
+          { label: "Runtime", value: "1.5 hours" },
+          { label: "Charge time", value: "1 hour" },
+          { label: "Input", value: "5 V 1 A" },
+        ],
+      },
+      {
+        heading: "Ownership",
+        rows: [
+          { label: "Subscription", value: "None — updates are free through the app" },
+          { label: "Warranty", value: "90 days" },
+          { label: "Account required", value: "No" },
+          { label: "Maker", value: "Shenzhen Zhuneng Technology Co., Ltd. (Energize Lab)" },
+        ],
+      },
+      {
+        heading: "The rest of the range, at Energize Lab's own prices",
+        rows: [
+          { label: "Eilik", value: "$139.99" },
+          { label: "Eilik DQ (Desert Quester)", value: "$199.98 — same hardware, desert colourway, exclusive game and weapon kit" },
+          { label: "Eilik AI Station", value: "$99" },
+          { label: "Panxer", value: "$119.90 — a vehicle for Eilik, not a robot" },
+          { label: "Eiliko", value: "$59.90 — a different, smaller product" },
+          { label: "Eilik × 2", value: "$269.98" },
+        ],
+      },
+    ],
+    skuNote:
+      "Hardware figures from store.energizelab.com/products/eilik and range pricing from the same store, both read 8 August 2026. Our buy button points at the base Eilik on Amazon (B0C2C9LJNQ) at $139.99, matching the maker's own price. The DQ has its own Amazon listing and is not sold here.",
+    lastReviewed: "2026-08-08",
+  },
+
+  /* Loona. KEYi's own site is JavaScript-rendered and could not be
+     machine-read, so every figure here comes from the Amazon listing's copy
+     and its Q&A — KEYi's own words, on the page we send buyers to.
+
+     THE BATTERY IS THE STORY AT THIS PRICE. 1,350 mAh gives 1.5 hours of
+     play against 2.5 hours to charge, so a $499 robot spends longer on its
+     dock than off it. The maker's own top bullet is about having fixed the
+     charging, which is a candid thing to lead with and worth repeating
+     rather than hiding. */
+  loona: {
+    slug: "loona",
+    categorySlug: "companion-robots",
+    eyebrow: "Companion robot review",
+    title: "Loona Petbot review",
+    seoTitle: "Loona Robot Review — 90 Minutes of Play for $499",
+    metaDescription:
+      "The most capable robot pet you can buy, and it charges longer than it plays. " +
+      "What $499 gets you, what the camera adds, and the battery nobody mentions.",
+    verdict:
+      "The most capable machine in this category and the hardest to justify on paper. Loona sees, recognises faces and gestures, follows you, talks back, plays fetch and doubles as a home camera — for 90 minutes, after which it needs 2.5 hours on its dock.",
+    bestFor:
+      "Someone who wants the closest thing to a robot pet that exists, uses it in sessions rather than all day, and will get value from the camera as well as the character.",
+    notIdealFor:
+      "Anyone wanting constant presence, anyone on a budget, or anyone buying primarily to watch a pet — a dedicated pet camera does that job for a fraction of this.",
+    facts: [
+      { label: "Battery", value: "1.5 h play, 2.5 h charge" },
+      { label: "Camera", value: "HD RGB — doubles as home monitor" },
+      { label: "Voice", value: "Amazon Lex + ChatGPT-4o" },
+      { label: "Dock", value: "Included, auto-returns" },
+    ],
+    specGroups: [
+      {
+        heading: "Power — read this first",
+        rows: [
+          { label: "Battery", value: "1,350 mAh" },
+          { label: "Continuous playtime", value: "Up to 1.5 hours" },
+          { label: "Charge time", value: "About 2.5 hours" },
+          { label: "Auto-return to dock", value: "Yes — preset routes per room" },
+          { label: "Dock", value: "Included" },
+        ],
+      },
+      {
+        heading: "What it can do",
+        rows: [
+          { label: "Camera", value: "HD RGB" },
+          { label: "Recognition", value: "Faces and hand gestures" },
+          { label: "Follows you", value: "Yes" },
+          { label: "Voice", value: "Amazon Lex with ChatGPT-4o" },
+          { label: "Play", value: "Chases laser pens, fetches balls, app games and quizzes" },
+          { label: "Home monitoring", value: "Yes — camera and speaker, viewed from the app" },
+        ],
+      },
+      {
+        heading: "Practical",
+        rows: [
+          { label: "Weight", value: "1.1 kg" },
+          { label: "Connection", value: "Wi-Fi, and mobile hotspot since the V28 update" },
+          { label: "Subscription", value: "None published" },
+          { label: "Lighting", value: "Needs a well-lit room — the camera does the work" },
+          { label: "Noise", value: "Quiet rooms and clear speech improve voice recognition" },
+        ],
+      },
+    ],
+    skuNote:
+      "Figures from the Amazon listing B0DCF53PCH and its Q&A, read 8 August 2026 — KEYi's own copy on the page we link to. keyirobot.com is JavaScript-rendered and could not be machine-read, so the absence of a subscription is recorded as none published rather than none exists. Rated 4.1 from 1,234 ratings on the day it was read.",
+    lastReviewed: "2026-08-08",
+  },
+
+  /* Living.AI EMO — THE ONE PAGE IN THIS CATEGORY WITH NOTHING TO SELL.
+     18,100/mo, the largest single term BotPlanet holds in companion robots,
+     and no Amazon US listing behind it. Two searches on 8 August 2026 returned
+     only unbranded EMOPET-style knockoffs with the Living.AI brand token
+     absent from both.
+
+     It is built anyway because Google uses EMO as the comparison anchor for
+     the whole desktop segment — its own answer box asks "Which is better,
+     Eilik or Emo?" on Eilik's results and "Which robot is better, Emo or
+     Loona?" on Loona's. A page that ranks for 18,100 and routes to machines a
+     reader can actually buy is worth more than a gap where the anchor should
+     be. There is no buy button and the page says why in its first section. */
+  "living-ai-emo": {
+    slug: "living-ai-emo",
+    categorySlug: "companion-robots",
+    eyebrow: "Companion robot review",
+    title: "Living.AI EMO review",
+    seoTitle: "EMO Robot Review — And Why Amazon Sells Fakes",
+    metaDescription:
+      "EMO is not sold on Amazon in the US, and searching for it returns copies. What " +
+      "the real Living.AI EMO does, and what to buy instead if you want it now.",
+    verdict:
+      "The desktop robot everything else in this category gets compared against, and the hardest one to actually buy. Living.AI sells EMO directly and does not list it on Amazon in the US, so searching for it there returns imitations rather than the product.",
+    bestFor:
+      "Someone who wants the original, is willing to order from Living.AI directly, and will check what arrives against the real specification.",
+    notIdealFor:
+      "Anyone wanting it tomorrow from a familiar retailer with a familiar returns process. That is a different robot, and there are two good ones.",
+    facts: [
+      { label: "On Amazon US", value: "No — copies only" },
+      { label: "Sold by", value: "Living.AI, direct" },
+      { label: "Sees", value: "HD camera, face recognition" },
+      { label: "Hears", value: "4-microphone array" },
+    ],
+    specGroups: [
+      {
+        heading: "Buying it — read this first",
+        rows: [
+          { label: "Amazon US listing", value: "None found, 8 August 2026, across two searches" },
+          { label: "What Amazon returns instead", value: "EMOPET and similar unbranded desk robots" },
+          { label: "Brand token to look for", value: "Living.AI — absent from every top result we read" },
+          { label: "Official channel", value: "living.ai, direct" },
+          { label: "BotPlanet buy button", value: "None — we do not send buyers to a copy" },
+        ],
+      },
+      {
+        heading: "What the real EMO does",
+        rows: [
+          { label: "Form", value: "Bipedal desktop robot — it walks on two legs" },
+          { label: "Sensors", value: "More than 10 internal sensors" },
+          { label: "Vision", value: "HD camera with face recognition, remembers family members" },
+          { label: "Hearing", value: "4-microphone array with sound source location" },
+          { label: "Processing", value: "Neural network processor with on-board AI models" },
+          { label: "Charging", value: "Its skateboard is a wireless charger, and charges a phone too" },
+          { label: "Updates", value: "Over the air" },
+        ],
+      },
+      {
+        heading: "Accessories, at Living.AI's own prices",
+        rows: [
+          { label: "Home Station", value: "$99.00" },
+          { label: "EMO Clothes (Corgi)", value: "$19.00" },
+          { label: "EMO Smart Light", value: "$15.00" },
+        ],
+      },
+    ],
+    skuNote:
+      "Capability and accessory pricing read from living.ai on 8 August 2026. No price is quoted for EMO itself because we hold no verified offer for it — Living.AI sells direct and there is no Amazon US listing to check against. Amazon was searched twice on the same day; both passes returned imitations.",
+    lastReviewed: "2026-08-08",
+  },
 };
 
 export function reviewFor(slug: string | undefined): ReviewContent | undefined {

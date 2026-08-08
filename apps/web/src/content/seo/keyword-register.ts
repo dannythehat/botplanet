@@ -644,6 +644,201 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
      robot" and "best window cleaning robot", and NYTimes ranks #1 for both
      with one article — so there is no best-of page for a review to compete
      with either. */
+  /* COMPANION ROBOTS — first review in the category, 8 August 2026.
+     Run: local batch on seeds/companion-products.json, $0.3321.
+     Plan: docs/seo/companion-products-build-plan.md
+
+     PRIMARY IS THE BARE NAME. The old plan targeted "casio moflin" at 1,300
+     and KD 24; the measured run puts "moflin" at 6,600 and KD 12. Five times
+     the traffic at half the difficulty, and the branded form is carried as a
+     secondary rather than lost. */
+  {
+    path: "/robots/companion-robots/moflin/",
+    primary: { term: "moflin", volume: 6600, difficulty: 12, mustAppear: true },
+    secondary: [
+      { term: "casio moflin", volume: 1300, difficulty: 24, mustAppear: true },
+      { term: "moflin pet", volume: 1000, difficulty: 25, mustAppear: false },
+      { term: "moflin price", volume: 40, difficulty: 17, mustAppear: false },
+      /* The two questions the search data says people actually arrive with.
+         Both are Google's first suggestion for their prefix and both are
+         answered by Casio's own Movement row, which reads two axes. */
+      { term: "walk", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "subscription", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "battery", volume: 0, difficulty: 0, mustAppear: true },
+    ],
+    cededTo: [
+      {
+        term: "robot pet",
+        path: "/robots/companion-robots/",
+        why: "The 8,100 head term belongs to the hub, which does the routing for the whole category. A single-product review ranking for it would answer the wrong question and would compete with our own stronger page.",
+      },
+      {
+        term: "robotic pet for elderly",
+        path: "/guides/robotic-pets-for-elderly/",
+        why: "This review names the care-setting use because it is one of the honest reasons to buy a Moflin, but the elderly-care intent is a different reader with a different question and the guide already owns it.",
+      },
+    ],
+    researchedOn: "2026-08-08",
+  },
+  /* Miko 3. The cheapest large opportunity measured in this category:
+     "miko robot" is 8,100 at KD 10 and "miko 3" 4,400 at KD 3, against
+     Vector's 9,900 at KD 23 and Eilik's 8,100 at KD 29.
+
+     "miko mini" (5,400, KD 0) is NOT taken here and is not ceded to another
+     page either — it is refused. The only Amazon US listing for the Mini is a
+     carrying case, so the term has nothing to sell behind it. It is compared
+     against in the copy and linked nowhere. */
+  {
+    path: "/robots/companion-robots/miko-3/",
+    primary: { term: "miko 3", volume: 4400, difficulty: 3, mustAppear: true },
+    secondary: [
+      { term: "miko robot", volume: 8100, difficulty: 10, mustAppear: true },
+      { term: "miko max", volume: 170, difficulty: 0, mustAppear: true },
+      { term: "miko 3 price", volume: 110, difficulty: 0, mustAppear: false },
+      { term: "miko mini", volume: 5400, difficulty: 0, mustAppear: true },
+      /* The question the search data says people arrive with, and the one this
+         page is structured around. Answered from Miko's own comparison table
+         rather than as a yes or a no. */
+      { term: "subscription", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "ages 5", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "Wi-Fi", volume: 0, difficulty: 0, mustAppear: true },
+    ],
+    cededTo: [
+      {
+        term: "robot pet",
+        path: "/robots/companion-robots/",
+        why: "The 8,100 head term belongs to the hub. Miko is a teacher with a face rather than a robot pet, and ranking this page for that term would answer the wrong question for the reader who typed it.",
+      },
+    ],
+    researchedOn: "2026-08-08",
+  },
+  /* Vector 2.0. 9,900/mo, and the SERP evidence says the page is about the
+     company rather than the robot: "vector robot" shares SIX of ten domains
+     with "is vector robot still supported" and FIVE with "vector robot price",
+     so one page takes all three.
+
+     "cozmo robot" is REFUSED rather than ceded — 9,900/mo whose only Amazon US
+     listing is a $19 battery. Answered as a comparison section here because
+     "vector robot vs cozmo" ranks, and this is the machine that wins it by
+     default. */
+  {
+    path: "/robots/companion-robots/vector-2/",
+    primary: { term: "vector robot", volume: 9900, difficulty: 23, mustAppear: true },
+    secondary: [
+      { term: "anki vector", volume: 1000, difficulty: 23, mustAppear: true },
+      { term: "vector 2.0", volume: 1300, difficulty: 0, mustAppear: true },
+      { term: "digital dream labs", volume: 30, difficulty: 19, mustAppear: true },
+      { term: "vector robot vs cozmo", volume: 20, difficulty: 3, mustAppear: false },
+      { term: "subscription", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "discontinued", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "still work", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "OSKR", volume: 0, difficulty: 0, mustAppear: true },
+    ],
+    cededTo: [
+      {
+        term: "robot pet",
+        path: "/robots/companion-robots/",
+        why: "The 8,100 head term belongs to the hub. Vector is a gadget with character rather than a robot pet, and the review says so plainly while pointing the reader who wanted a pet at Moflin instead.",
+      },
+    ],
+    researchedOn: "2026-08-08",
+  },
+  /* Living.AI EMO — 18,100/mo at KD 21, the largest single term BotPlanet
+     holds in this category, and NO BUY BUTTON. Two Amazon searches on
+     8 August 2026 returned only unbranded EMOPET-style knockoffs.
+
+     It is targeted anyway because Google uses EMO as the comparison anchor for
+     the whole desktop segment, and both the Eilik and Loona reviews cede the
+     term here rather than contest it. A page that ranks for 18,100 and routes
+     to machines a reader can actually buy beats a gap where the anchor should
+     be. */
+  {
+    path: "/robots/companion-robots/living-ai-emo/",
+    primary: { term: "emo robot", volume: 18100, difficulty: 21, mustAppear: true },
+    secondary: [
+      { term: "living.ai", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "robot pet emo", volume: 70, difficulty: 11, mustAppear: false },
+      { term: "eilik vs emo", volume: 20, difficulty: 0, mustAppear: false },
+      { term: "skateboard", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "face recognition", volume: 0, difficulty: 0, mustAppear: true },
+    ],
+    cededTo: [
+      {
+        term: "robot pet",
+        path: "/robots/companion-robots/",
+        why: "The 8,100 head term belongs to the hub, which routes the whole category. This page has no offer behind it and exists to send readers on, so competing with the hub for its own term would be doubly pointless.",
+      },
+    ],
+    researchedOn: "2026-08-08",
+  },
+  /* Loona. 5,400/mo at KD 18. "loona robot" shares FIVE of ten top-ten domains
+     with "loona robot price", so one page takes both.
+
+     keyirobot.com is KEYi's own content marketing and appears in nine of the
+     twenty-two SERPs measured for this category — including on Vector and Joy
+     For All, which it does not make. It is the site to beat here and it is
+     also the maker of this product. */
+  {
+    path: "/robots/companion-robots/loona/",
+    primary: { term: "loona robot", volume: 5400, difficulty: 18, mustAppear: true },
+    secondary: [
+      { term: "loona robot dog", volume: 1000, difficulty: 4, mustAppear: true },
+      { term: "keyi", volume: 170, difficulty: 0, mustAppear: true },
+      { term: "loona petbot", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "loona robot price", volume: 90, difficulty: 0, mustAppear: false },
+      { term: "loona robot accessories", volume: 70, difficulty: 0, mustAppear: true },
+      { term: "subscription", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "battery", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "home monitor", volume: 0, difficulty: 0, mustAppear: true },
+    ],
+    cededTo: [
+      {
+        term: "emo robot",
+        path: "/robots/companion-robots/living-ai-emo/",
+        why: "Google's answer box on this SERP asks which robot is better, Emo or Loona, so the comparison belongs here — but the 18,100/mo term belongs to the EMO page rather than being contested by two of ours.",
+      },
+      {
+        term: "pet camera robot",
+        path: "/robots/pet-camera-robots/",
+        why: "Loona genuinely carries a camera and doubles as a home monitor, and the review says so. The roaming-camera intent is still a different reader with a different budget, and that category page owns it — this page names it as the better answer for anyone whose main goal is watching a pet.",
+      },
+    ],
+    researchedOn: "2026-08-08",
+  },
+  /* Eilik. 8,100/mo at KD 29 — the hardest primary in this category, and the
+     page carries "eilik robot review" and "eilik price" with it: both share
+     FIVE of ten top-ten domains with the head term.
+
+     "eilik ai station" is a secondary rather than its own page. It measures
+     260/mo at KD 0 and it is the answer to the biggest gap in the base
+     product, so it belongs in the review that raises the gap. */
+  {
+    path: "/robots/companion-robots/eilik/",
+    primary: { term: "eilik robot", volume: 8100, difficulty: 29, mustAppear: true },
+    secondary: [
+      { term: "eilik", volume: 3600, difficulty: 29, mustAppear: true },
+      { term: "energize lab", volume: 590, difficulty: 34, mustAppear: true },
+      { term: "eilik ai station", volume: 260, difficulty: 0, mustAppear: true },
+      { term: "eilik price", volume: 30, difficulty: 0, mustAppear: false },
+      { term: "two eilik robots", volume: 10, difficulty: 0, mustAppear: true },
+      { term: "battery", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "warranty", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "Eiliko", volume: 0, difficulty: 0, mustAppear: true },
+    ],
+    cededTo: [
+      {
+        term: "emo robot",
+        path: "/robots/companion-robots/living-ai-emo/",
+        why: "Google's own answer box on this SERP asks which is better, Eilik or Emo, so the comparison is answered here — but the 18,100/mo term belongs to the EMO page rather than being fought over by two of ours.",
+      },
+      {
+        term: "robot pet",
+        path: "/robots/companion-robots/",
+        why: "The 8,100 head term belongs to the hub. Eilik is expressive and not warm, and this review says so plainly while sending the reader who wanted a pet to Moflin instead.",
+      },
+    ],
+    researchedOn: "2026-08-08",
+  },
   {
     path: "/robots/window-cleaning-robots/ecovacs-winbot-w2-pro-omni/",
     primary: { term: "winbot w2 pro omni", volume: 1120, difficulty: 0, mustAppear: true },
