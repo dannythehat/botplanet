@@ -5196,6 +5196,169 @@
     ]
   },
   {
+    "source": "/media/hubs/companion/tile.webp",
+    "sourceWidth": 1200,
+    "sourceHeight": 900,
+    "derivatives": [
+      {
+        "id": "media-hubs-companion-tile-webp-360",
+        "src": "/media/hubs/companion/tile-360w.webp",
+        "width": 360,
+        "height": 270,
+        "bytes": 7798,
+        "checksum": "sha256:32ec02e90df3e5df3219bf4a5701262827cda9fffd2b016d8c87ab8da53955c1"
+      },
+      {
+        "id": "media-hubs-companion-tile-webp-640",
+        "src": "/media/hubs/companion/tile-640w.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 18682,
+        "checksum": "sha256:759de88941b0ed0782632b42d99a5f8ebf55fb8f0e4ea1e1fe8a1443a2c44085"
+      },
+      {
+        "id": "media-hubs-companion-tile-webp-960",
+        "src": "/media/hubs/companion/tile-960w.webp",
+        "width": 960,
+        "height": 720,
+        "bytes": 35174,
+        "checksum": "sha256:2f02ea03d59d43d66843dfee1ec1aff8ffc4f23662e83ad7aba5ea03c118e803"
+      }
+    ]
+  },
+  {
+    "source": "/media/hubs/petcam/hero.webp",
+    "sourceWidth": 1490,
+    "sourceHeight": 1434,
+    "derivatives": [
+      {
+        "id": "media-hubs-petcam-hero-webp-360",
+        "src": "/media/hubs/petcam/hero-360w.webp",
+        "width": 360,
+        "height": 346,
+        "bytes": 7482,
+        "checksum": "sha256:0c5b1775d392f8f739a6be382437ce1e17397ebc6587b49ccabefaa9abaca3ff"
+      },
+      {
+        "id": "media-hubs-petcam-hero-webp-640",
+        "src": "/media/hubs/petcam/hero-640w.webp",
+        "width": 640,
+        "height": 616,
+        "bytes": 17280,
+        "checksum": "sha256:bd4a93b97bd2786829d1d9a8ebe77519469161b2e34b57dae9868eb76b05702e"
+      },
+      {
+        "id": "media-hubs-petcam-hero-webp-960",
+        "src": "/media/hubs/petcam/hero-960w.webp",
+        "width": 960,
+        "height": 924,
+        "bytes": 34452,
+        "checksum": "sha256:8263cf4bdc2156c9c2c008c2c89bf5b8d41e2a1323d0ef5c4d139bfc4016abcc"
+      },
+      {
+        "id": "media-hubs-petcam-hero-webp-1440",
+        "src": "/media/hubs/petcam/hero-1440w.webp",
+        "width": 1440,
+        "height": 1386,
+        "bytes": 55614,
+        "checksum": "sha256:206339df958fcedd24224788362a7577dbfac189002d9bb52e95fb0aaaa7b6ee"
+      }
+    ]
+  },
+  {
+    "source": "/media/hubs/petcam/tile.webp",
+    "sourceWidth": 1401,
+    "sourceHeight": 934,
+    "derivatives": [
+      {
+        "id": "media-hubs-petcam-tile-webp-360",
+        "src": "/media/hubs/petcam/tile-360w.webp",
+        "width": 360,
+        "height": 240,
+        "bytes": 4822,
+        "checksum": "sha256:84ce310f8155c8b881eb4c90e9623937bde8333a70e4e0f69a5e5300bd728e87"
+      },
+      {
+        "id": "media-hubs-petcam-tile-webp-640",
+        "src": "/media/hubs/petcam/tile-640w.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 10698,
+        "checksum": "sha256:43651032db3c31d166bb4833c17d8995afa17adabfd096031652de43b716d7bb"
+      },
+      {
+        "id": "media-hubs-petcam-tile-webp-960",
+        "src": "/media/hubs/petcam/tile-960w.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 19656,
+        "checksum": "sha256:83c567d749d08a981baa0cee8e5f5474eef3901279a8910d578936511251a5c2"
+      }
+    ]
+  },
+  {
+    "source": "/media/hubs/pool/tile.webp",
+    "sourceWidth": 2048,
+    "sourceHeight": 1368,
+    "derivatives": [
+      {
+        "id": "media-hubs-pool-tile-webp-360",
+        "src": "/media/hubs/pool/tile-360w.webp",
+        "width": 360,
+        "height": 240,
+        "bytes": 8476,
+        "checksum": "sha256:0d33cac8ffc72382b308d041e655932e9e3eba39384c252de5fc370ef0f5bb90"
+      },
+      {
+        "id": "media-hubs-pool-tile-webp-640",
+        "src": "/media/hubs/pool/tile-640w.webp",
+        "width": 640,
+        "height": 428,
+        "bytes": 19038,
+        "checksum": "sha256:822d32e0c9cbae3fd90ccd3d85127c5b323ecbf1092b21bcaae2cb13dee79147"
+      },
+      {
+        "id": "media-hubs-pool-tile-webp-960",
+        "src": "/media/hubs/pool/tile-960w.webp",
+        "width": 960,
+        "height": 641,
+        "bytes": 36158,
+        "checksum": "sha256:abc0adc8fab565915e2d83cb26eb1d0c630d27eea189ec1acd71dcd42b6479ba"
+      },
+      {
+        "id": "media-hubs-pool-tile-webp-1440",
+        "src": "/media/hubs/pool/tile-1440w.webp",
+        "width": 1440,
+        "height": 962,
+        "bytes": 58562,
+        "checksum": "sha256:325bb63b6ad3eb93feb40900b6226a1ed80c708c7898f6920cc9d92081c3d084"
+      }
+    ]
+  },
+  {
+    "source": "/media/hubs/grill/tile.webp",
+    "sourceWidth": 730,
+    "sourceHeight": 409,
+    "derivatives": [
+      {
+        "id": "media-hubs-grill-tile-webp-360",
+        "src": "/media/hubs/grill/tile-360w.webp",
+        "width": 360,
+        "height": 202,
+        "bytes": 17702,
+        "checksum": "sha256:45da852edd056a87307cf6b9576adb05a67b6df493d83c8ca8f58632df7cffdd"
+      },
+      {
+        "id": "media-hubs-grill-tile-webp-640",
+        "src": "/media/hubs/grill/tile-640w.webp",
+        "width": 640,
+        "height": 359,
+        "bytes": 41738,
+        "checksum": "sha256:9201393914269f4eeef290082388ecd2c5637611b2c9adc309634380dacfe5ce"
+      }
+    ]
+  },
+  {
     "source": "/media/hubs/companion/card-desk.webp",
     "sourceWidth": 1536,
     "sourceHeight": 1024,

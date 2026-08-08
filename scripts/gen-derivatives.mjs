@@ -245,6 +245,14 @@ const SOURCES = [
   "/media/hubs/litter/row-stretch.webp",
   "/media/hubs/litter/lead-drawer.webp",
   "/media/hubs/companion/hero.webp",
+  /* Homepage directory tiles, supplied 8 August 2026. Separate files from the
+     hub heroes because they are photographs of real machines rather than
+     BotPlanet artwork, and the two are not interchangeable. */
+  "/media/hubs/companion/tile.webp",
+  "/media/hubs/petcam/hero.webp",
+  "/media/hubs/petcam/tile.webp",
+  "/media/hubs/pool/tile.webp",
+  "/media/hubs/grill/tile.webp",
   "/media/hubs/companion/card-desk.webp",
   "/media/hubs/companion/card-child.webp",
   "/media/hubs/companion/card-older.webp",

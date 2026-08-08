@@ -1,50 +1,10 @@
 [
   {
-    "to": "/media/products/ecovacs-winbot-w3-omni.webp",
-    "checksum": "sha256:008a91e00b4f369d14cdff6d608985e87abb51769533709d59a631f9a21f0e5d",
-    "width": 1254,
-    "height": 1254,
-    "bytes": 164876,
-    "saved": 1742827
-  },
-  {
-    "to": "/media/reviews/ecovacs-winbot-w3-omni/hero.webp",
-    "checksum": "sha256:586e627812d5e67fb0dd0d212872cb9810148ef98365b89c600347f98a497107",
-    "width": 1536,
-    "height": 1024,
-    "bytes": 147976,
-    "saved": 1850507
-  },
-  {
-    "to": "/media/reviews/ecovacs-winbot-w3-omni/three-nozzle-spray.webp",
-    "checksum": "sha256:186d9dc5e87b01d082499657d480271c2ee311bf8fe1a9c071b60da9415af66a",
-    "width": 1536,
-    "height": 1024,
-    "bytes": 217472,
-    "saved": 2033146
-  },
-  {
-    "to": "/media/reviews/ecovacs-winbot-w3-omni/model-comparison.webp",
-    "checksum": "sha256:81acf25c77cc91417665c5266925d80eaa477890d41b35538fb31ab26571ef10",
-    "width": 1254,
-    "height": 1254,
-    "bytes": 176364,
-    "saved": 1922532
-  },
-  {
-    "to": "/media/reviews/ecovacs-winbot-w3-omni/path-planning.webp",
-    "checksum": "sha256:55b9fb3311fb1ce0efea3d85a92983986e9025455ee43a3c05285a19545d1f2d",
-    "width": 1086,
-    "height": 1448,
-    "bytes": 161160,
-    "saved": 1678301
-  },
-  {
-    "to": "/media/reviews/ecovacs-winbot-w3-omni/twelve-tier.webp",
-    "checksum": "sha256:d713cced692d4c40e8eb580a8296faf039460c0a382f092f66c4b5bc6eda285e",
-    "width": 1254,
-    "height": 1254,
-    "bytes": 224084,
-    "saved": 1917010
+    "to": "/media/hubs/grill/tile.webp",
+    "checksum": "sha256:fa002513051f5cc5c9f773ae6ad65466a2178f1a660ba853a06bb9da8dd1ea01",
+    "width": 730,
+    "height": 409,
+    "bytes": 81900,
+    "saved": -14084
   }
 ]

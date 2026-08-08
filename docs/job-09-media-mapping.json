@@ -1,23 +1,23 @@
 {
   "launchProducts": 12,
   "totals": {
-    "assets": 184,
-    "productAssets": 104,
-    "depictions": 94,
-    "illustrations": 79,
+    "assets": 189,
+    "productAssets": 106,
+    "depictions": 98,
+    "illustrations": 80,
     "placeholders": 11,
     "withdrawn": 0,
     "exactModelConfirmed": 12,
     "publicSafe": 12,
     "heroReady": 11,
     "fullSetReady": 11,
-    "derivatives": 563,
-    "altApproved": 170,
+    "derivatives": 579,
+    "altApproved": 175,
     "altDecorative": 14,
     "altMissing": 0,
     "altRejected": 0,
     "schemaProductEligible": 94,
-    "schemaOpenGraphEligible": 184
+    "schemaOpenGraphEligible": 189
   },
   "rows": [
     {

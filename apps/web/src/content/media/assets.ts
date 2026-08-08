@@ -451,6 +451,111 @@ export const ORIGINAL_ASSETS: MediaAssetRecord[] = [
     schema: ORIGINAL_SCHEMA,
     depictsRealProduct: false,
   },
+  /* ------------------------------------------------------------------
+     HOMEPAGE DIRECTORY TILES — supplied by the owner on 8 August 2026.
+
+     These six are photographs of real machines, which is what separates them
+     from the rest of this file: everything else under /media/hubs/ is BotPlanet
+     artwork illustrating a category. Four of them show a product BotPlanet
+     sells, so they name it. Two show a machine that is not in the catalogue at
+     all, and they say so rather than being filed as generic artwork — a
+     category tile is allowed to show a machine we do not list, but the register
+     has to know which is which or the next person to reach for one of these
+     will use it as a product photo.
+
+     None of them is Product-schema eligible even where the model is named,
+     because a tile on the homepage is not that product's photograph.
+     ------------------------------------------------------------------ */
+  {
+    ...base("hub-petcam-hero", "depiction"),
+    productId: "prod-enabot-rola-petpal",
+    purpose: "pet camera hub — homepage tile and hub hero",
+    exactModel: "Enabot ROLA PetPal",
+    type: "category_hero",
+    checksum: "sha256:77bdb4d00af3ca346dc1c6ae4b7d50e37ecf98f3095ecd940746ff7428a57957",
+    width: 1490,
+    height: 1434,
+    src: "/media/hubs/petcam/hero.webp",
+    altText:
+      "The Enabot ROLA PetPal pet camera robot beside its charging dock, with a phone showing the live view of a kitten.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: true,
+  },
+  {
+    /* The same photograph cropped to the tile. The master is nearly square and
+       includes a phone showing the live view; a 3:2 window centred on it cuts
+       the phone in half, which reads as a rendering fault rather than a crop.
+       This one keeps the robot, both wheels and the dock, and drops the phone
+       cleanly. The master stays for surfaces wide enough to show all of it. */
+    ...base("hub-petcam-tile", "depiction"),
+    productId: "prod-enabot-rola-petpal",
+    purpose: "pet camera hub — homepage tile",
+    exactModel: "Enabot ROLA PetPal",
+    type: "category_hero",
+    checksum: "sha256:8f2143365ca76569b50e6632e51de0d922c67378aee1f52172948502edaadb55",
+    width: 1401,
+    height: 934,
+    src: "/media/hubs/petcam/tile.webp",
+    altText:
+      "The Enabot ROLA PetPal pet camera robot on its wheels beside its white charging dock.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: true,
+  },
+  {
+    ...base("hub-pool-tile", "depiction"),
+    /* NOT IN THE CATALOGUE. The machine in this frame is an InverX-badged
+       tracked cleaner and BotPlanet lists no InverX. It illustrates the
+       category and must never be attached to one of the ten pool products. */
+    productId: null,
+    purpose: "pool hub — homepage tile",
+    exactModel: "InverX tracked pool cleaner (not a BotPlanet catalogue model)",
+    type: "category_hero",
+    checksum: "sha256:69137944a21ab1ed96cfda187bc0d916879d8c6f483b30c7d36e1ebeffca8094",
+    width: 2048,
+    height: 1368,
+    src: "/media/hubs/pool/tile.webp",
+    altText:
+      "A tracked robotic pool cleaner resting on a white cover at the edge of a sunlit blue pool.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: true,
+  },
+  {
+    ...base("hub-companion-tile", "illustration"),
+    productId: null,
+    purpose: "companion hub — homepage tile",
+    exactModel: null,
+    type: "category_hero",
+    checksum: "sha256:81cdc6400370b9841a8f6ca7b933d2ba3b713c2dacf2a89afa4615e1c13eddfb",
+    width: 1200,
+    height: 900,
+    src: "/media/hubs/companion/tile.webp",
+    altText:
+      "Four rendered companion robots standing together against a pale background, including a robot dog.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+  },
+  {
+    ...base("hub-grill-tile", "depiction"),
+    /* NOT IN THE CATALOGUE either — the grill category has no published
+       products yet, so there is nothing for this to be attached to. */
+    productId: null,
+    purpose: "grill hub — homepage tile",
+    exactModel: "Grillbot automatic grill brush (not a BotPlanet catalogue model)",
+    type: "category_hero",
+    checksum: "sha256:fa002513051f5cc5c9f773ae6ad65466a2178f1a660ba853a06bb9da8dd1ea01",
+    width: 730,
+    height: 409,
+    src: "/media/hubs/grill/tile.webp",
+    altText:
+      "A red grill-cleaning robot sitting on stainless steel grill grates between a pair of tongs and a spatula.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: true,
+  },
   {
     ...base("hub-companion-hero", "illustration"),
     productId: null,

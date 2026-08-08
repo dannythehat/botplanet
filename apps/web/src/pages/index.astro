@@ -138,16 +138,15 @@ const companionFeatureImage = {
  * a 3:2 tile loses the sides — centre-cropping the vacuums frame walks the
  * robot straight out of it.
  *
- * PET CAMERA ROBOTS HAS NO ARTWORK AT ALL. It is the one hub that has never
- * had any (the image register calls it "0 of 8, nothing uploaded yet"), so its
- * tile renders the empty plate below rather than borrowing another category's
- * picture or a product shot standing in for a category.
+ * FIVE OF THESE ARE THE OWNER'S OWN PHOTOGRAPHS, supplied 8 August 2026, and
+ * they replaced BotPlanet artwork on pool, companion, grill and pet camera.
+ * Pet camera had nothing at all until they arrived — it was the one hub that
+ * had never had any artwork, and its tile was rendering an empty plate.
  */
 const TILE_ART: Record<string, { src: string; focal?: string; alt: string }> = {
   "robotic-pool-cleaners": {
-    src: "/media/pool-category/feature-desktop.webp",
-    focal: "82% center",
-    alt: "A robotic pool cleaner on the floor of a lit in-ground pool at night, a house beyond it.",
+    src: "/media/hubs/pool/tile.webp",
+    alt: "A tracked robotic pool cleaner resting on a white cover at the edge of a sunlit blue pool.",
   },
   "window-cleaning-robots": {
     src: "/media/window-category/feature-desktop.webp",
@@ -164,9 +163,8 @@ const TILE_ART: Record<string, { src: string; focal?: string; alt: string }> = {
     alt: "A round robot vacuum crossing the wood floor of a sunlit open-plan living room.",
   },
   "companion-robots": {
-    src: "/media/hubs/companion/hero.webp",
-    focal: "40% center",
-    alt: "A small companion robot on a side table beside a lit lamp in a dark sitting room.",
+    src: "/media/hubs/companion/tile.webp",
+    alt: "Four rendered companion robots standing together against a pale background, including a robot dog.",
   },
   "self-cleaning-litter-boxes": {
     src: "/media/hubs/litter/hero.webp",
@@ -174,9 +172,16 @@ const TILE_ART: Record<string, { src: string; focal?: string; alt: string }> = {
     alt: "A long-haired tabby walking towards a white self-cleaning litter box in a utility room.",
   },
   "grill-cleaning-robots": {
-    src: "/media/hubs/grill/hero.webp",
-    focal: "40% center",
-    alt: "A grill-cleaning robot crawling the grates of an open barbecue, smoke rising, a patio at dusk.",
+    src: "/media/hubs/grill/tile.webp",
+    alt: "A red grill-cleaning robot sitting on stainless steel grill grates between a pair of tongs and a spatula.",
+  },
+  "pet-camera-robots": {
+    /* The tile crop, not the master. The supplied file is nearly square and
+       carries a phone showing the live view; a 3:2 window centred on it cuts
+       the phone in half, which reads as a rendering fault. See the note on
+       hub-petcam-tile in the media register. */
+    src: "/media/hubs/petcam/tile.webp",
+    alt: "A pet camera robot on its wheels beside its white charging dock.",
   },
   "educational-coding-robots": {
     src: "/media/hubs/coding/hero.webp",
