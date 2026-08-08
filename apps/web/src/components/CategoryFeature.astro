@@ -10,8 +10,17 @@
    button drawn into a JPEG is a picture of a button — it cannot be
    focused, cannot be tabbed to, and does nothing when clicked. Every
    line and every destination here is real HTML sitting beside the
-   artwork, which is why the artwork is registered as decorative with
-   empty alt text: it repeats nothing and it names nothing.
+   artwork.
+
+   THE ARTWORK IS NOT DECORATIVE, THOUGH, AND USED TO SAY IT WAS.
+   `alt=""` was hard-coded here on the reasoning that the copy beside
+   the picture already says everything. That is true of the words and
+   false of the picture: these are composed photographs of a machine
+   doing the job, they are what a reader looking for "robot mower on a
+   lawn" would want, and an empty alt hides them from image search and
+   describes nothing to anyone using a screen reader. `alt` is now
+   required, and it describes the photograph rather than repeating the
+   heading next to it.
 
    LAYOUT. The artwork is composed with one side deliberately dark
    and empty. `side` says which side that is, and the copy goes
@@ -50,6 +59,8 @@ interface Props {
     height: number;
     /** Horizontal focus for the desktop crop, e.g. "82% center". */
     focal?: string;
+    /** Describes the photograph. Required — see the note above. */
+    alt: string;
   };
   primary: FeatureLink;
   secondary?: FeatureLink;
@@ -103,7 +114,7 @@ const parts =
             sizes="(min-width: 1400px) 1320px, 100vw"
             width={image.width}
             height={image.height}
-            alt=""
+            alt={image.alt}
             loading="lazy"
             decoding="async"
             style={image.focal ? `--catfeat-focal: ${image.focal}` : undefined}

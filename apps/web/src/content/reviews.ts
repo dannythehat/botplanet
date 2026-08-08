@@ -72,7 +72,7 @@ export const REVIEWS: Record<string, ReviewContent> = {
     categorySlug: "robotic-pool-cleaners",
     eyebrow: "Robotic pool cleaner review",
     title: "Dolphin Nautilus CC Plus Wi-Fi review",
-    seoTitle: "Dolphin Nautilus CC Plus Wi-Fi Review | BotPlanet",
+    seoTitle: "Dolphin Nautilus CC Plus Wi-Fi Review — The 40 ft Limit",
     metaDescription:
       "What the Nautilus CC Plus cleans, what it leaves alone, the 40 ft pool limit, and the US and global SKU difference worth checking before you order.",
     verdict:
@@ -475,7 +475,7 @@ export const REVIEWS: Record<string, ReviewContent> = {
     categorySlug: "robotic-pool-cleaners",
     eyebrow: "Robotic pool skimmer review",
     title: "Betta SE Plus solar skimmer review",
-    seoTitle: "Betta SE Plus Solar Robotic Pool Skimmer Review | BotPlanet",
+    seoTitle: "Betta SE Plus Review — Skims the Surface, Nothing Else",
     metaDescription:
       "An honest review of the Betta SE Plus solar pool skimmer: 30 hours of runtime, a 200 micron " +
       "basket, and the one thing it will never do — clean your floor.",
@@ -655,7 +655,7 @@ export const REVIEWS: Record<string, ReviewContent> = {
     categorySlug: "robotic-pool-cleaners",
     eyebrow: "Robotic pool cleaner review",
     title: "Aiper Scuba V3 AI Vision review",
-    seoTitle: "Aiper Scuba V3 AI Vision Review | BotPlanet",
+    seoTitle: "Aiper Scuba V3 AI Vision Review — What the Camera Sees",
     metaDescription:
       "What the camera actually does, what seven days on one charge really means, the 3-micron filter claim, and the privacy question nobody else is asking.",
     verdict:
@@ -825,7 +825,7 @@ export const REVIEWS: Record<string, ReviewContent> = {
     categorySlug: "robotic-pool-cleaners",
     eyebrow: "Robotic pool cleaner review",
     title: "Dolphin Proteus DX4 Plus review",
-    seoTitle: "Dolphin Proteus DX4 Plus Review | BotPlanet",
+    seoTitle: "Dolphin Proteus DX4 Plus Review — The 33 ft Catch",
     metaDescription:
       "The 33 ft limit that catches people out, the sibling rated for 50 ft, and why we are careful about the waterline claim on this particular machine.",
     verdict:
@@ -971,7 +971,7 @@ export const REVIEWS: Record<string, ReviewContent> = {
     categorySlug: "robotic-pool-cleaners",
     eyebrow: "Robotic pool cleaner review",
     title: "Aiper Scuba X1 Pro Max review",
-    seoTitle: "Aiper Scuba X1 Pro Max Review | BotPlanet",
+    seoTitle: "Aiper Scuba X1 Pro Max Review — It Skims the Surface Too",
     metaDescription:
       "The only robot here that skims the surface as well as the floor. The 8,500 GPH claim, the three-year warranty, and the bundle that fooled our records.",
     verdict:
@@ -1131,7 +1131,7 @@ export const REVIEWS: Record<string, ReviewContent> = {
     categorySlug: "robotic-pool-cleaners",
     eyebrow: "Robotic pool cleaner review",
     title: "Aiper Seagull SE review",
-    seoTitle: "Aiper Seagull SE Review | BotPlanet",
+    seoTitle: "Aiper Seagull SE Review — Floor Only, 90 Minutes",
     metaDescription:
       "Ninety minutes of floor-only cleaning for a small above-ground pool, the sparsest spec sheet we cover, and the Amazon listing that died mid-review.",
     verdict:
@@ -1270,7 +1270,7 @@ export const REVIEWS: Record<string, ReviewContent> = {
     categorySlug: "robotic-pool-cleaners",
     eyebrow: "Robotic pool cleaner review",
     title: "Aiper Scuba S1 review",
-    seoTitle: "Aiper Scuba S1 Review | BotPlanet",
+    seoTitle: "Aiper Scuba S1 Review — The Runtime Aiper States Twice",
     metaDescription:
       "Four-zone cleaning including 12-inch shallow ledges, a runtime Aiper states two different ways, and the Amazon listing we refuse to link to.",
     verdict:
@@ -1425,7 +1425,7 @@ export const REVIEWS: Record<string, ReviewContent> = {
     categorySlug: "robotic-pool-cleaners",
     eyebrow: "Robotic pool cleaner review",
     title: "BuBlue Bubot 800P Gen2 review",
-    seoTitle: "BuBlue Bubot 800P Gen2 Review | BotPlanet",
+    seoTitle: "BuBlue Bubot 800P Gen2 Review — Corded, So It Never Quits",
     metaDescription:
       "Corded four-zone cleaning that never runs out of battery. What BuBlue actually publishes, and what its shallow-water claim really means in a pool.",
     verdict:
@@ -1582,7 +1582,7 @@ export const REVIEWS: Record<string, ReviewContent> = {
     categorySlug: "robotic-pool-cleaners",
     eyebrow: "Robotic pool cleaner review",
     title: "WYBOT C1 review",
-    seoTitle: "WYBOT C1 Review | BotPlanet",
+    seoTitle: "WYBOT C1 Review — Waterline Cleaning at the Budget End",
     metaDescription:
       "Floor, wall and waterline cleaning at the budget end, and a weekly timer that splits one charge into four cleans. Plus the listing history to know.",
     verdict:
@@ -1730,7 +1730,7 @@ export const REVIEWS: Record<string, ReviewContent> = {
     categorySlug: "robotic-pool-cleaners",
     eyebrow: "Robotic pool cleaner review",
     title: "Beatbot AquaSense 2 Ultra review",
-    seoTitle: "Beatbot AquaSense 2 Ultra Review | BotPlanet",
+    seoTitle: "Beatbot AquaSense 2 Ultra Review — Five Jobs, One Robot",
     metaDescription:
       "Five jobs in one machine, including surface skimming and clarification, a camera that maps your pool, and a three-year warranty that changes the sums.",
     verdict:

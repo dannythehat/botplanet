@@ -166,8 +166,21 @@ const offerSeeds: OfferSeed[] = [
      Found on 6 August because the category hub was printing $1,299 on the
      Bubot's card — it read these rows directly, with no freshness gate. That
      path is gone (see lib/catalogue-prices.ts), but a wrong number left in the
-     fallback is still a wrong number waiting for the next reader. */
-  { id: "off-premier-leslies", productId: "prod-dolphin-premier", retailerId: "ret-leslies", affiliateProgramId: "ap-leslies-flexoffers", priceUsd: 799.97, warranty: "1-year", redirectKey: "pool-dolphin-premier-leslies" },
+     fallback is still a wrong number waiting for the next reader.
+
+     RENAMED 8 August 2026. The figures were corrected on the 6th and the NAMES
+     were not: `off-premier-*` and `pool-dolphin-premier-*` still said Dolphin
+     Premier on rows selling a BuBlue Bubot. An identifier is read by a person
+     — in the D1 console, in a click report, in an affiliate dashboard — and one
+     that names the wrong manufacturer is a trap laid for whoever reads it next.
+
+     `prod-dolphin-premier` deliberately does NOT change with them. That is the
+     stable record ID the product swap of 3 August was built on, it is
+     referenced from content/products.ts and content/commerce/destinations.ts,
+     and renaming a primary key to make it read nicely is how foreign keys get
+     broken. The comment above it says what it holds; that is the right fix for
+     a key, and a rename is the right fix for a label. */
+  { id: "off-bubot800p-leslies", productId: "prod-dolphin-premier", retailerId: "ret-leslies", affiliateProgramId: "ap-leslies-flexoffers", priceUsd: 799.97, warranty: "1-year", redirectKey: "pool-bublue-bubot800p-leslies" },
   { id: "off-freedom-intheswim", productId: "prod-polaris-freedom", retailerId: "ret-intheswim", affiliateProgramId: null, priceUsd: 1399, warranty: "2-3 year", redirectKey: "pool-polaris-freedom-intheswim" },
   { id: "off-betta-leslies", productId: "prod-betta-se-plus", retailerId: "ret-leslies", affiliateProgramId: "ap-leslies-flexoffers", priceUsd: 389, warranty: "2-year", redirectKey: "pool-betta-seplus-leslies" },
   { id: "off-e10-walmart", productId: "prod-dolphin-e10", retailerId: "ret-walmart", affiliateProgramId: null, priceUsd: 529, warranty: "2-year", redirectKey: "pool-dolphin-e10-walmart" },
@@ -178,7 +191,7 @@ const offerSeeds: OfferSeed[] = [
   { id: "off-scubax1-amazon", productId: "prod-aiper-scuba-x1", retailerId: "ret-amazon", affiliateProgramId: "ap-amazon-us", priceUsd: 1299, warranty: "2-year", redirectKey: "pool-aiper-scubax1-amazon" },
   { id: "off-scubas1-amazon", productId: "prod-aiper-scuba-s1", retailerId: "ret-amazon", affiliateProgramId: "ap-amazon-us", priceUsd: 498, warranty: "2-year", redirectKey: "pool-aiper-scubas1-amazon" },
   { id: "off-wybotc1-amazon", productId: "prod-wybot-c1", retailerId: "ret-amazon", affiliateProgramId: "ap-amazon-us", priceUsd: 419, warranty: "2-year", redirectKey: "pool-wybot-c1-amazon" },
-  { id: "off-premier-amazon", productId: "prod-dolphin-premier", retailerId: "ret-amazon", affiliateProgramId: "ap-amazon-us", priceUsd: 799.97, warranty: "1-year", redirectKey: "pool-dolphin-premier-amazon" },
+  { id: "off-bubot800p-amazon", productId: "prod-dolphin-premier", retailerId: "ret-amazon", affiliateProgramId: "ap-amazon-us", priceUsd: 799.97, warranty: "1-year", redirectKey: "pool-bublue-bubot800p-amazon" },
   { id: "off-freedom-amazon", productId: "prod-polaris-freedom", retailerId: "ret-amazon", affiliateProgramId: "ap-amazon-us", priceUsd: 1399, warranty: "2-3 year", redirectKey: "pool-polaris-freedom-amazon" },
   { id: "off-betta-amazon", productId: "prod-betta-se-plus", retailerId: "ret-amazon", affiliateProgramId: "ap-amazon-us", priceUsd: 389, warranty: "2-year", redirectKey: "pool-betta-seplus-amazon" },
   { id: "off-e10-amazon", productId: "prod-dolphin-e10", retailerId: "ret-amazon", affiliateProgramId: "ap-amazon-us", priceUsd: 529, warranty: "2-year", redirectKey: "pool-dolphin-e10-amazon" },

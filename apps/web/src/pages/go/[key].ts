@@ -29,9 +29,42 @@ const RETAILER_HOME: Record<string, string> = {
   "ret-wybot-store": "https://www.wybotpool.com",
 };
 
+/**
+ * Redirect keys that have been renamed, and where they now live.
+ *
+ * A /go/ key is pasted into emails, saved in browsers and sat in the click
+ * history, so renaming one without a forwarding address turns every one of
+ * those into a 404 on a buy button — the single most damaging failure the site
+ * has. The Bubot's two keys said "dolphin-premier" because the record they hang
+ * off still carries that stable ID, and the machine there has been a BuBlue
+ * since 3 August 2026 (see migration 0006).
+ *
+ * 301 rather than 302, because these old keys are never coming back.
+ *
+ * The forwarding map has to ship BEFORE migration 0007 deletes the old rows,
+ * and 0006 leaves both pairs alive in the meantime — so there is no moment at
+ * which either key 404s. That ordering is the whole reason the rename is two
+ * migrations rather than one.
+ */
+const RENAMED_KEYS: Record<string, string> = {
+  "pool-dolphin-premier-amazon": "pool-bublue-bubot800p-amazon",
+  "pool-dolphin-premier-leslies": "pool-bublue-bubot800p-leslies",
+};
+
 export const GET: APIRoute = async ({ params, locals, request }) => {
   const db = getDb(locals);
   const key = params.key!;
+
+  /* Forward before touching the database. During the overlap the old row still
+     exists and would resolve on its own; once 0007 removes it, a lookup here
+     would 404. Checking the map first makes the behaviour the same either way. */
+  const renamed = RENAMED_KEYS[key];
+  if (renamed) {
+    return new Response(null, {
+      status: 301,
+      headers: { Location: `/go/${renamed}`, "cache-control": "no-store" },
+    });
+  }
 
   const link = (
     await db.select().from(schema.redirectLinks).where(eq(schema.redirectLinks.key, key)).limit(1)

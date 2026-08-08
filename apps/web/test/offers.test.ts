@@ -21,6 +21,7 @@ import {
 } from "../src/lib/offer-truth";
 import { buildOfferInventory, buildProductOfferMapping, buildProgrammeInventory, buildRejectedCandidates, buildRetailerInventory } from "../src/lib/commerce-mapping";
 import { isSafeAffiliateDestination } from "@botplanet/shared";
+import { pool as poolSeed } from "@botplanet/db/seed";
 import { SUPERSEDED_REFUSALS } from "../src/content/commerce/destinations";
 import { SerpApiAmazonProvider, SERPAPI_SECRET_REF, priceToMinor, toAttributes, toBuyingOptions } from "../src/lib/providers/serpapi-amazon";
 import { CATALOGUE_INTERVAL_DAYS, DAILY_INTERVAL_DAYS, MAX_DAILY_EXCEPTIONS, MONTHLY_CREDIT_CEILING, monthlyCost, planRefresh, type ExceptionReason } from "../src/lib/providers/refresh-policy";
@@ -1595,5 +1596,59 @@ describe("the refresh cadence fits inside the allowance", () => {
     );
     expect(decisions[0].due).toBe(true);
     expect(decisions[0].skipped).toBeNull();
+  });
+});
+
+/**
+ * RENAMED /go/ KEYS MUST STILL RESOLVE.
+ *
+ * A /go/ key is pasted into emails, saved in browsers and recorded in the click
+ * table. Renaming one without a forwarding address turns every one of those
+ * into a 404 on a buy button, which is the single most damaging failure this
+ * site has — the reader trusts the page and the click earns nothing.
+ *
+ * Two were renamed on 8 August 2026: the Bubot's keys still said
+ * "dolphin-premier" because the stable record ID they hang off does, and the
+ * machine on that record has been a BuBlue since 3 August.
+ */
+describe("renamed redirect keys", () => {
+  const src = readFileSync(
+    new URL("../src/pages/go/[key].ts", import.meta.url),
+    "utf8",
+  );
+  const block = /const RENAMED_KEYS: Record<string, string> = \{([\s\S]*?)\n\};/.exec(src)?.[1] ?? "";
+  const renamed = Object.fromEntries(
+    [...block.matchAll(/"([^"]+)":\s*"([^"]+)"/g)].map((m) => [m[1], m[2]]),
+  );
+  /* THE SEED, NOT THE TRUTH ENGINE. `/go/` looks a key up in redirect_links,
+     which the seed writes for every offer row. buildOffers() is a narrower set:
+     it suppresses the Leslie's row because BotPlanet has no relationship with
+     that retailer, so the key exists and resolves while the offer is not shown.
+     Asserting against the engine would have called a working link broken. */
+  const seededKeys = new Set(poolSeed.redirectLinkRows.map((r) => r.key));
+
+  it("forwards the Bubot's two legacy keys", () => {
+    expect(renamed["pool-dolphin-premier-amazon"]).toBe("pool-bublue-bubot800p-amazon");
+    expect(renamed["pool-dolphin-premier-leslies"]).toBe("pool-bublue-bubot800p-leslies");
+  });
+
+  it("sends every legacy key to a key an offer actually has", () => {
+    expect(Object.keys(renamed).length).toBeGreaterThan(0);
+    for (const [from, to] of Object.entries(renamed)) {
+      expect(seededKeys.has(to), `${from} forwards to ${to}, which has no redirect_links row`).toBe(true);
+    }
+  });
+
+  /* A key cannot be both retired and current: the route checks the forwarding
+     map first, so a live key listed there would redirect to itself forever. */
+  it("never forwards a key that is still in use", () => {
+    for (const from of Object.keys(renamed)) {
+      expect(seededKeys.has(from), `${from} is both live and retired`).toBe(false);
+    }
+  });
+
+  it("leaves no retired key in REDIRECT_KEYS", () => {
+    const pointed = new Set(Object.values(REDIRECT_KEYS));
+    for (const from of Object.keys(renamed)) expect(pointed.has(from)).toBe(false);
   });
 });

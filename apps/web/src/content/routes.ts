@@ -15,7 +15,13 @@
  * supersedes the older `/find-my-robot` proposal. The divergence is recorded
  * in the handoff for ChatGPT to ratify.
  */
-import { CATEGORIES, LAUNCH_CATEGORY, routes as categoryPaths, type LaunchState } from "./nav";
+import {
+  CATEGORIES,
+  LAUNCH_CATEGORY,
+  liveCategories,
+  routes as categoryPaths,
+  type LaunchState,
+} from "./nav";
 
 export type RouteStatus = LaunchState;
 
@@ -1005,4 +1011,4 @@ export const REDIRECTS: { from: string; to: string }[] = ROUTES.flatMap((r) =>
 );
 
 /** Categories, re-exported so consumers need only one import. */
-export { CATEGORIES, LAUNCH_CATEGORY };
+export { CATEGORIES, LAUNCH_CATEGORY, liveCategories };
