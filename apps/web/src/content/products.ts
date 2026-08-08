@@ -854,7 +854,14 @@ export const PRODUCT_ID: Record<string, string> = {
   "makeblock-mbot": "prod-makeblock-mbot",
   /* Rule-out reviews. Real D1 rows and real pages, so they belong in the join
      map like anything else — what they do not have is an offer, and that is
-     declared in NO_OFFER_BY_DESIGN below rather than by being left out here. */
+     declared in NO_OFFER_BY_DESIGN below rather than by being left out here.
+
+     EMO JOINED THEM ON 8 AUGUST 2026. It had been absent from this map since
+     it shipped, which is how its page passed the catalogue tests: not by
+     declaring that we refuse the sale, but by not being visible to the check
+     at all. That is the same outcome reached two different ways, and only one
+     of them survives somebody reading the file in six months. */
+  "living-ai-emo": "prod-living-ai-emo",
   "cozmo": "prod-cozmo",
   "moxie": "prod-moxie",
 };
@@ -879,6 +886,8 @@ export const PRODUCT_ID: Record<string, string> = {
  * work yet". It is a statement that we refuse the sale.
  */
 export const NO_OFFER_BY_DESIGN: Record<string, string> = {
+  "prod-living-ai-emo":
+    "Living.AI sells EMO direct and does not list it on Amazon US. Searching for it there returns imitations — EMOPET and unbranded desk robots — with the Living.AI brand token absent from every top result we read on 8 August 2026. There is no destination we could send a buyer to that we are confident sells the real product, so we send them nowhere.",
   "prod-cozmo":
     "Digital Dream Labs is under suit by the Pennsylvania Attorney General over about 14,000 prepaid orders that went undelivered, and its store lists Cozmo 2.0 with no stock and no ship date. We will not route a buyer into that.",
   "prod-moxie":
@@ -1032,6 +1041,7 @@ const COMPANION_SLUGS = new Set([
   "joy-for-all-companion-pets",
   "ropet",
   "moxie",
+  "living-ai-emo",
 ]);
 
 const CATEGORY_OF: Record<string, string> = Object.fromEntries(

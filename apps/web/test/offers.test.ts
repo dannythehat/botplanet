@@ -1,7 +1,8 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { PAGE_PLAN } from "../src/content/seo/page-plan";
-import { NO_OFFER_BY_DESIGN, PRODUCTS } from "../src/content/products";
+import { NO_OFFER_BY_DESIGN, PRODUCTS, PRODUCT_ID } from "../src/content/products";
+import { REVIEWS } from "../src/content/reviews";
 import { DESTINATIONS, IDENTITY_CHECKS, REDIRECT_KEYS, REJECTED_CANDIDATES, destinationFor } from "../src/content/commerce/destinations";
 import { NOT_RELATIONSHIPS, PROGRAMMES, RETAILERS, approvedUsRetailers, programme, retailer, usableUsProgrammes } from "../src/content/commerce/registry";
 import { MANUAL_CHECKS } from "../src/content/commerce/manual-checks";
@@ -717,6 +718,28 @@ describe("/go redirect", () => {
       expect(REDIRECT_KEYS[id], `${id} is declared unsellable but has a /go key`).toBeUndefined();
       expect(OFFERS.find((o) => o.productId === id), `${id} is declared unsellable but has an offer`).toBeUndefined();
     }
+  });
+
+  /**
+   * THE ONE THAT MAKES THE OTHERS MEAN SOMETHING.
+   *
+   * Every published review either sells the product or declares that we refuse
+   * to. There is no third state, and until 8 August 2026 there was: Living.AI
+   * EMO had a page, a D1 row and no offer, and it passed every catalogue check
+   * by being absent from PRODUCT_ID rather than by saying so. That is a silent
+   * exclusion, and the problem with one is not that it is wrong — EMO genuinely
+   * should not have a buy button — but that it is indistinguishable from an
+   * oversight. A product that quietly never got its commercial work done looks
+   * exactly the same.
+   *
+   * This closes it: a review page must resolve to a slug this map knows, and
+   * that slug must then be sellable or refused in writing.
+   */
+  it("leaves no published review outside both the catalogue and the refusal list", () => {
+    const silent = Object.values(REVIEWS)
+      .map((r) => r.slug)
+      .filter((slug) => !(slug in PRODUCT_ID));
+    expect(silent, "reviewed products missing from PRODUCT_ID — sellable or refused, never neither").toEqual([]);
   });
 
   it("gives every refused product a written reason", () => {
