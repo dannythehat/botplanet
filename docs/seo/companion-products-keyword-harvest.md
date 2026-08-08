@@ -16,6 +16,14 @@ with `node scripts/free-keyword-harvest.mjs`).
 
 ---
 
+> **SUPERSEDED IN PART, 8 August 2026.** The paid run
+> (`companion-products-research-findings.md`) measured these terms hours later.
+> Where the two disagree, the measured file wins. The subscription section
+> immediately below is the main casualty: those terms total about 150 searches
+> a month, so they are a paragraph on each review rather than the guide page
+> claimed here. Everything about term *shape* — colours, accessories, doubts,
+> comparisons — held up.
+
 ## The finding that changes the plan: subscription fear
 
 Twenty-plus terms, across every product that has one, and Google ranks most of
