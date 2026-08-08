@@ -1047,6 +1047,36 @@ const COMPANION_REVIEWS: PagePlan[] = [
     evidence: "5,400/mo. Shares FIVE of ten domains with 'loona robot price'. keyirobot.com is KEYi's own content marketing and ranks across this whole category including on products it does not make.",
   },
   {
+    ...companionReviewShell("ropet"),
+    path: "/robots/companion-robots/ropet/",
+    /* RESEARCHED 8 August 2026, not built. Found because searchers named it
+       themselves in "moflin vs ropet" — nothing in the plan knew it existed,
+       and it is the only buyable companion product this site had no measured
+       volume for. Round two fixed that: docs/seo/companion-round-two-findings.md */
+    primary: { term: "ropet", volume: 1300, difficulty: 6 },
+    secondary: [
+      { term: "ropet robot", volume: 140, difficulty: 0 },
+      { term: "ropet ai robot", volume: 50, difficulty: 1 },
+      { term: "ropet kamomo", volume: 20, difficulty: 0 },
+      { term: "ropet accessories", volume: 20, difficulty: 0 },
+      { term: "ropet reviews", volume: 10, difficulty: 12 },
+      { term: "ropet where to buy", volume: 10, difficulty: 0 },
+      { term: "ropet price", volume: 10, difficulty: 0 },
+    ],
+    ceded: [],
+    refused: [
+      /* 2,900/mo of annual average that is really 27,100 in one November and
+         zero for four months of the year, on a product whose SERP is
+         Trustpilot, r/ScamsEtc and "Don't Buy AI Puppies". Recorded here with
+         the figures so nobody re-opens it when the number spikes again. */
+      { term: "froplay dog reviews", volume: 2900, why: "An advertising spike rather than demand: 0 in August, 27,100 in November, 40 by June. The SERP is Trustpilot, a scam subreddit and 'Is the robot dog a scam?'. Ranking for scam-check traffic on a product we cannot verify, do not sell and would not recommend is the wrong 2,900." },
+      { term: "loona deskmate", volume: 880, why: "A crowdfunding launch curve — zero until January 2026, 3,600 in March, 590 by June — with no retail listing behind it. Gated on availability rather than on volume; KEYi will ship it and the Loona review already gives us the brand." },
+    ],
+    products: [],
+    productsNote: "Amazon US B0GTPZ4N4M confirmed 8 August 2026 — 'ropet KAMOMO Companion Interactive Robot Pet', $299, in stock. No catalogue row yet. Positioned as allergy-free, and the distinguishing feature is interchangeable fur, which Amazon sells separately.",
+    evidence: "1,300/mo at KD 6 and about 1,600 across the cluster. THE SOFTEST SERP IN THE CATEGORY: one real review in the top ten. Also the highest CPCs — 'ropet where to buy' at $10.95 against 'moflin review' at $0.26. Flat seasonality, 880 in July to 1,900 in December, so it is the one companion page with no Christmas deadline.",
+  },
+  {
     ...companionReviewShell("emo robot"),
     path: "/robots/companion-robots/living-ai-emo/",
     /* BUILT 8 August 2026, sixth and last in the category. */
