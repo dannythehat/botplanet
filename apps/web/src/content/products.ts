@@ -852,6 +852,37 @@ export const PRODUCT_ID: Record<string, string> = {
   "sphero-indi": "prod-sphero-indi",
   "ozobot-evo": "prod-ozobot-evo",
   "makeblock-mbot": "prod-makeblock-mbot",
+  /* Rule-out reviews. Real D1 rows and real pages, so they belong in the join
+     map like anything else — what they do not have is an offer, and that is
+     declared in NO_OFFER_BY_DESIGN below rather than by being left out here. */
+  "cozmo": "prod-cozmo",
+  "moxie": "prod-moxie",
+};
+
+/**
+ * Products that will never have an offer, and are not waiting for one.
+ *
+ * THE DISTINCTION THIS DRAWS. "No offer yet" is a gap and the catalogue tests
+ * are right to fail on it — a published review with a buy button pointing at
+ * nothing is the worst failure this site has. "No offer, ever" is an editorial
+ * decision, and it needs saying out loud rather than being smuggled past those
+ * tests by leaving the product out of PRODUCT_ID.
+ *
+ * Both entries here are rule-out reviews: pages that own a large search term
+ * and spend it telling the reader to buy something else. Cozmo's seller is
+ * under suit by a state Attorney General over roughly 14,000 prepaid orders
+ * that were never delivered. Moxie's maker ceased trading and the robots
+ * stopped working. Neither page carries a buy button, so the rule about buy
+ * buttons has nothing to say about them.
+ *
+ * Adding a slug here is not a shortcut for "we have not done the commercial
+ * work yet". It is a statement that we refuse the sale.
+ */
+export const NO_OFFER_BY_DESIGN: Record<string, string> = {
+  "prod-cozmo":
+    "Digital Dream Labs is under suit by the Pennsylvania Attorney General over about 14,000 prepaid orders that went undelivered, and its store lists Cozmo 2.0 with no stock and no ship date. We will not route a buyer into that.",
+  "prod-moxie":
+    "Embodied ceased operations and Moxie stopped working when its servers went off. There is no new stock, and a used unit may never function. There is nothing here we would sell.",
 };
 
 /** Editorial records with the stable productId attached, keyed by slug (route id). */
@@ -984,7 +1015,7 @@ const WINDOW_SLUGS = new Set([
   "cop-rose-x5s",
 ]);
 
-const CODING_SLUGS = new Set(["sphero-bolt", "sphero-mini", "sphero-indi", "ozobot-evo", "makeblock-mbot"]);
+const CODING_SLUGS = new Set(["sphero-bolt", "sphero-mini", "sphero-indi", "ozobot-evo", "makeblock-mbot", "cozmo"]);
 
 const PETCAM_SLUGS = new Set(["enabot-ebo-air-2", "enabot-ebo-se", "enabot-rola-petpal"]);
 
@@ -1000,6 +1031,7 @@ const COMPANION_SLUGS = new Set([
      the catalogue row and its spec page exist either way. */
   "joy-for-all-companion-pets",
   "ropet",
+  "moxie",
 ]);
 
 const CATEGORY_OF: Record<string, string> = Object.fromEntries(

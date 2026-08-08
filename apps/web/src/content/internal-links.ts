@@ -90,6 +90,12 @@ export const CATEGORY_ANCHORS: Record<string, InternalAnchor[]> = {
       why: "Anchored on the full name rather than bare 'mBot' so it cannot be confused with the mBot2 in a reader's mind, though both land here.",
       status: "live",
     },
+    {
+      anchor: "Cozmo",
+      href: "/robots/educational-coding-robots/cozmo/",
+      why: "The rule-out. Every coding review that reaches for a famous example reaches for this one, and the page it lands on is the one explaining why you cannot buy it. Bare 'Cozmo' rather than 'Cozmo 2.0' because both the Anki original and the relaunch are the same question for a reader.",
+      status: "live",
+    },
 
     {
       anchor: "screen-free",
@@ -386,7 +392,13 @@ export const CATEGORY_ANCHORS: Record<string, InternalAnchor[]> = {
       why: "The washable-fur machine, which is the answer whenever another review raises allergies.",
       status: "live",
     },
+
     {
+      anchor: "Moxie",
+      href: "/robots/companion-robots/moxie/",
+      why: "The cautionary tale this category needs a link to. Any review that raises what happens when the servers go off should be able to point at the machine it actually happened to.",
+      status: "live",
+    },    {
       anchor: "Joy For All",
       href: "/robots/companion-robots/joy-for-all-companion-pets/",
       why: "The eldercare pick. Its guide names it repeatedly and, until this, none of those mentions was a link.",

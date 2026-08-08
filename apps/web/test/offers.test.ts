@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { PAGE_PLAN } from "../src/content/seo/page-plan";
-import { PRODUCTS } from "../src/content/products";
+import { NO_OFFER_BY_DESIGN, PRODUCTS } from "../src/content/products";
 import { DESTINATIONS, IDENTITY_CHECKS, REDIRECT_KEYS, REJECTED_CANDIDATES, destinationFor } from "../src/content/commerce/destinations";
 import { NOT_RELATIONSHIPS, PROGRAMMES, RETAILERS, approvedUsRetailers, programme, retailer, usableUsProgrammes } from "../src/content/commerce/registry";
 import { MANUAL_CHECKS } from "../src/content/commerce/manual-checks";
@@ -704,8 +704,25 @@ describe("/go redirect", () => {
   });
 
   it("records a key for every launch product", () => {
-    for (const id of PRODUCT_IDS) expect(REDIRECT_KEYS[id]).toBeTruthy();
-    expect(new Set(Object.values(REDIRECT_KEYS)).size).toBe(PRODUCT_IDS.length);
+    const sellableIds = PRODUCT_IDS.filter((id) => !(id in NO_OFFER_BY_DESIGN));
+    for (const id of sellableIds) expect(REDIRECT_KEYS[id]).toBeTruthy();
+    expect(new Set(Object.values(REDIRECT_KEYS)).size).toBe(sellableIds.length);
+  });
+
+  /* The other direction, and the one that stops the exemption becoming a
+     loophole: a product we have declared unsellable must not have a /go key or
+     an offer sitting behind it anyway. */
+  it("gives a refused product no buy route at all", () => {
+    for (const id of Object.keys(NO_OFFER_BY_DESIGN)) {
+      expect(REDIRECT_KEYS[id], `${id} is declared unsellable but has a /go key`).toBeUndefined();
+      expect(OFFERS.find((o) => o.productId === id), `${id} is declared unsellable but has an offer`).toBeUndefined();
+    }
+  });
+
+  it("gives every refused product a written reason", () => {
+    for (const [id, why] of Object.entries(NO_OFFER_BY_DESIGN)) {
+      expect(why.length, `${id} is refused with no reason recorded`).toBeGreaterThan(60);
+    }
   });
 
   it("carries no questionnaire answer into an outbound URL", () => {
@@ -1388,8 +1405,15 @@ describe("scheduled refresh — wiring", () => {
    * This asserts against the CATALOGUE, which is the one list a product cannot
    * be published without appearing in.
    */
+  /* NO_OFFER_BY_DESIGN is subtracted from all three of these, and only from
+     these. The rule is "a buy button must lead somewhere real"; a page with no
+     buy button is outside it. The declaration lives in content/products.ts with
+     a written reason per product, so skipping one here costs an explicit
+     editorial statement rather than a quiet omission. */
+  const sellable = () => activeCatalogue().filter((p) => !(p.productId in NO_OFFER_BY_DESIGN));
+
   it("gives every product in the catalogue a real, buyable destination", () => {
-    for (const p of activeCatalogue()) {
+    for (const p of sellable()) {
       const offer = OFFERS.find((o) => o.productId === p.productId);
       expect(offer, `${p.slug}: no offer at all`).toBeDefined();
       expect(offer!.destination.retailerProductId, `${p.slug}: no ASIN`).toMatch(/^B0[A-Z0-9]{8}$/);
@@ -1442,7 +1466,7 @@ describe("scheduled refresh — wiring", () => {
     const seed = ["pool", "window", "companion", "petcam", "coding"]
       .map((c) => readFileSync(`packages/db/seed/${c}/commercial.ts`, "utf8"))
       .join("\n");
-    for (const p of activeCatalogue()) {
+    for (const p of sellable()) {
       const key = REDIRECT_KEYS[p.productId];
       expect(key, `${p.slug}: no redirect key`).toBeTruthy();
       expect(

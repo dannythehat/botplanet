@@ -1066,6 +1066,25 @@ const COMPANION_REVIEWS: PagePlan[] = [
     evidence: "5,400/mo. Shares FIVE of ten domains with 'loona robot price'. keyirobot.com is KEYi's own content marketing and ranks across this whole category including on products it does not make.",
   },
   {
+    ...companionReviewShell("moxie"),
+    status: "built" as const,
+    path: "/robots/companion-robots/moxie/",
+    primary: { term: "moxie robot", volume: 8100, difficulty: 0 },
+    secondary: [
+      { term: "embodied moxie", volume: 0, difficulty: 0 },
+      { term: "moxie robot shut down", volume: 0, difficulty: 0 },
+      { term: "openmoxie", volume: 0, difficulty: 0 },
+      { term: "moxie robot for sale", volume: 0, difficulty: 0 },
+    ],
+    ceded: [],
+    refused: [
+      { term: "buy moxie robot", volume: 0, why: "There is nothing to sell and nothing we would sell if there were. The product is discontinued, the servers are off and a used unit may never work. Owning a buying term for a robot that does not function would be a lie told for traffic." },
+    ],
+    products: [],
+    productsNote: "prod-moxie is a D1 row with no offer and no /go key, added in migration 0008 and deliberately absent from PRODUCT_ID. The resale market is real and we are not routing anybody into it: a used Moxie may or may not join the community server and the seller cannot tell you which.",
+    evidence: "8,100/mo and a search population that is largely people asking what happened, plus a resale market operating on a product that no longer works out of the box. The page that answers 'what happened and can I still use one' is the page nobody has written, and it is the honest use of the term.",
+  },
+  {
     ...companionReviewShell("ropet"),
     path: "/robots/companion-robots/ropet/",
     /* RESEARCHED 8 August 2026, not built. Found because searchers named it
@@ -1421,6 +1440,30 @@ const CODING_BUILT: PagePlan[] = [
     products: ["sphero-mini"],
     productsNote: "Catalogued as prod-sphero-mini, 8 August 2026. Amazon US B072B6QVVW at $50, the Blue. The productTitle element did not render on our read, so identity rests on the details table — Sub Brand 'Mini', Colour 'Blue' — and on the served-ASIN equality check. Sphero sells other colours as separate listings at prices we have not read.",
     evidence: "2,900/mo at KD 15, the softest of the three Sphero terms, on the cheapest real product in the category. Its SERP shares four domains with the BOLT's and the two that survive the universal discount are sphero.com and help.sphero.com — the manufacturer, twice. No independent review ranks for either term, which is the whole opportunity.",
+  },
+  /* ------------------------------------------------------------------
+     RULE-OUT REVIEWS, 8 August 2026. Two large terms owned by pages that
+     recommend something else. Neither has products, an offer or a buy button
+     and neither is getting one — `products: []` here is the plan, not a gap
+     waiting to be filled.
+     ------------------------------------------------------------------ */
+  {
+    ...codingShell("cozmo"),
+    path: "/robots/educational-coding-robots/cozmo/",
+    primary: { term: "cozmo robot", volume: 9900, difficulty: 0 },
+    secondary: [
+      { term: "anki cozmo", volume: 0, difficulty: 0 },
+      { term: "cozmo 2.0", volume: 0, difficulty: 0 },
+      { term: "digital dream labs", volume: 0, difficulty: 0 },
+      { term: "cozmo robot review", volume: 0, difficulty: 0 },
+    ],
+    ceded: [],
+    refused: [
+      { term: "buy cozmo robot", volume: 0, why: "Refused on purpose rather than for want of demand. The page exists to say the seller is under suit by a state Attorney General over roughly 14,000 prepaid orders that went undelivered; ranking for the buying intent and then honouring it would be the one thing this site is built not to do. The transactional term can go unowned." },
+    ],
+    products: [],
+    productsNote: "prod-cozmo is a D1 row with no offer and no /go key, added in migration 0008 and deliberately absent from PRODUCT_ID so the catalogue tests do not demand a buyable destination for it. Same shape as prod-living-ai-emo. There is no buy button on this page and there is not going to be one.",
+    evidence: "9,900/mo for the bare name and the demand is entirely nostalgic — Anki stopped trading in 2019 and the machine has not been reliably purchasable since. What ranks for it is old reviews of a discontinued robot and a store page with no stock. Nobody is writing the page that answers the actual question, which is whether you can buy one today and from whom.",
   },
   {
     ...codingShell("sphero indi"),

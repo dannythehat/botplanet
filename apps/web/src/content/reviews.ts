@@ -2954,6 +2954,123 @@ export const REVIEWS: Record<string, ReviewContent> = {
      Loona?" on Loona's. A page that ranks for 18,100 and routes to machines a
      reader can actually buy is worth more than a gap where the anchor should
      be. There is no buy button and the page says why in its first section. */
+  /* ------------------------------------------------------------------
+     TWO RULE-OUT REVIEWS, 8 August 2026. Neither carries an offer and
+     neither may be given one.
+
+     The site's position is that it tells you when not to buy. These are the
+     purest form of that: pages that own a large search term and spend it
+     sending the reader somewhere else. Cozmo is 9,900/mo and Moxie 8,100/mo,
+     and the honest answer to both is "no, buy one of these instead".
+
+     `video` is absent on both on purpose. Every clip of a working Cozmo or
+     Moxie shows a machine doing something it will not do for a buyer today,
+     which is the opposite of what these pages are for.
+     ------------------------------------------------------------------ */
+  "cozmo": {
+    slug: "cozmo",
+    categorySlug: "educational-coding-robots",
+    eyebrow: "Coding robot review",
+    title: "Cozmo review",
+    seoTitle: "Cozmo Robot Review — Why You Cannot Buy One",
+    metaDescription:
+      "Cozmo is listed at $399.99 with no stock and no ship date, and Pennsylvania is " +
+      "suing the seller over 14,000 unfulfilled orders. What to buy instead.",
+    verdict:
+      "A good robot from a company you should not send money to. Digital Dream Labs lists Cozmo 2.0 at $399.99 with no stock and no ship date, and the Pennsylvania Attorney General sued the company and its chief executive in September 2024 over roughly 14,000 prepaid orders that were never fulfilled.",
+    bestFor:
+      "Nobody, at this price and from this seller. If you want the character, a second-hand original bought from a person is the only route we would not argue with.",
+    notIdealFor:
+      "Anyone about to pre-order. The store takes money, publishes no ship date, and its operator is under suit for exactly that.",
+    facts: [
+      { label: "Listed price", value: "$399.99" },
+      { label: "Stock", value: "Sold Out, no ship date" },
+      { label: "BotPlanet buy button", value: "None — deliberately" },
+      { label: "BBB rating", value: "F, not accredited" },
+    ],
+    specGroups: [
+      {
+        heading: "Buying it — read this first",
+        rows: [
+          { label: "Seller", value: "Digital Dream Labs" },
+          { label: "Store state, 8 August 2026", value: "COMING SOON, button reads Sold Out" },
+          { label: "Ship date offered", value: "None" },
+          { label: "Attorney General suit", value: "Pennsylvania, filed 18 September 2024" },
+          { label: "Orders alleged unfulfilled", value: "About 14,000, November 2020 to January 2024" },
+          { label: "Sales alleged", value: "More than $4 million, $147 to $655 per robot" },
+          { label: "BBB", value: "F, not accredited, 71 complaints unanswered" },
+        ],
+      },
+      {
+        heading: "What we could not verify",
+        rows: [
+          { label: "Receivership over the digital assets", value: "Reported 9 July 2026, case GD-25-013191 — not confirmed at the court by us" },
+          { label: "Outcome of the suit", value: "No judgment or settlement found on the public record, 8 August 2026" },
+          { label: "Restock", value: "No date published anywhere we could find" },
+          { label: "Old Anki cloud endpoints", value: "No response from any of the four when we tested them, 8 August 2026" },
+        ],
+      },
+    ],
+    skuNote:
+      "Price and stock read from Digital Dream Labs' own store on 8 August 2026. The lawsuit figures are from the Pennsylvania Attorney General's filing of 18 September 2024 as reported at the time; the BBB rating and complaint counts are from the company's BBB profile, read the same day. No price is published on this page as an offer because we hold none and will not hold one.",
+    lastReviewed: "2026-08-08",
+  },
+  "moxie": {
+    slug: "moxie",
+    categorySlug: "companion-robots",
+    eyebrow: "Companion robot review",
+    title: "Moxie review",
+    seoTitle: "Moxie Robot Review — It Stopped Working in 2025",
+    metaDescription:
+      "Embodied shut down and Moxie's servers went off, mostly without refunds. What a " +
+      "used one can and cannot do on the community server, and what to buy instead.",
+    verdict:
+      "An $800 child's companion that stopped working when its maker ceased operations, with no refund for most owners. What survives runs on OpenMoxie — a community server you host yourself, with an OpenAI bill attached and some of the original content missing.",
+    bestFor:
+      "Somebody who wants a project, already owns one, and is willing to run a local server for it. As a purchase for a child, nobody.",
+    notIdealFor:
+      "A parent buying a used one at $200 to $400 expecting the robot from the advert. It may never speak, and the seller cannot tell you whether it will.",
+    facts: [
+      { label: "Sold new at", value: "$799" },
+      { label: "Servers", value: "Off — reported 30 January 2025" },
+      { label: "Refunds", value: "Not for most owners" },
+      { label: "BotPlanet buy button", value: "None — deliberately" },
+    ],
+    specGroups: [
+      {
+        heading: "What happened",
+        rows: [
+          { label: "Maker", value: "Embodied — ceased operations" },
+          { label: "Announced", value: "Late 2024, owners told the robot would stop working" },
+          { label: "Shutdown date", value: "Reported as 30 January 2025" },
+          { label: "Refunds", value: "Declined for most; a narrow window around the closure announcement" },
+          { label: "Payment plans", value: "Owners told it was out of the company's hands" },
+        ],
+      },
+      {
+        heading: "What OpenMoxie asks of you",
+        rows: [
+          { label: "Who runs it", value: "Volunteers — not Embodied, not any successor" },
+          { label: "Hardware", value: "A PC, Mac, Linux box or Raspberry Pi 5 on the same network" },
+          { label: "Ongoing cost", value: "An OpenAI account with credits — speech and conversation bill to you" },
+          { label: "Also needed", value: "Docker" },
+          { label: "Content that works", value: "Daily Missions, Reading, Wild Workout" },
+          { label: "Content missing", value: "Ocean Explorer, Animal Faces, Story Maker" },
+        ],
+      },
+      {
+        heading: "What we could not verify",
+        rows: [
+          { label: "Embodied's own refund wording", value: "Its closing FAQ returned 403 to us on 8 August 2026" },
+          { label: "Pre-shutdown update requirement", value: "Reported, but not stated in OpenMoxie's own README where we looked" },
+          { label: "Whether a given used unit can be recovered", value: "No way to check before buying" },
+        ],
+      },
+    ],
+    skuNote:
+      "Read on 8 August 2026. The shutdown date, the refund position and the original $799 price come from contemporaneous reporting; Embodied's own closing FAQ would not open for us and we have said so rather than quoting it second-hand as though we had. The OpenMoxie requirements are from the project's own repository. No price is published as an offer because we hold none and will not hold one.",
+    lastReviewed: "2026-08-08",
+  },
   "living-ai-emo": {
     slug: "living-ai-emo",
     categorySlug: "companion-robots",

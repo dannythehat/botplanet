@@ -1,6 +1,6 @@
 {
   "generatedFor": "2026-07-31",
-  "launchProducts": 38,
+  "launchProducts": 40,
   "rows": [
     {
       "productId": "prod-beatbot-aquasense-2-ultra",
@@ -1200,6 +1200,64 @@
         "no current price from an approved source",
         "stock state unknown",
         "not eligible for Offer structured data"
+      ],
+      "nextAction": "Obtain price and availability through the Amazon Creators API so the offer can carry a current price and enter Offer schema."
+    },
+    {
+      "productId": "prod-cozmo",
+      "canonicalUrl": "https://botplanet.io/robots/educational-coding-robots/cozmo/",
+      "verifiedOffers": 0,
+      "preferredOfferId": null,
+      "preferredOfferAudit": [
+        "0 offer(s) exist for this product",
+        "0 from an approved retailer",
+        "no approved offer — nothing is featured"
+      ],
+      "commissionUsedAsTieBreak": false,
+      "retailer": null,
+      "exactProductIdentifier": null,
+      "identifierKind": null,
+      "market": "us",
+      "priceState": "not_published",
+      "stockState": "unknown",
+      "deliveryState": "unknown",
+      "warrantyRoute": null,
+      "lastChecked": null,
+      "freshness": "unknown",
+      "affiliateProgramme": null,
+      "goPath": null,
+      "schemaEligible": false,
+      "blockers": [
+        "no approved offer"
+      ],
+      "nextAction": "Obtain price and availability through the Amazon Creators API so the offer can carry a current price and enter Offer schema."
+    },
+    {
+      "productId": "prod-moxie",
+      "canonicalUrl": "https://botplanet.io/robots/companion-robots/moxie/",
+      "verifiedOffers": 0,
+      "preferredOfferId": null,
+      "preferredOfferAudit": [
+        "0 offer(s) exist for this product",
+        "0 from an approved retailer",
+        "no approved offer — nothing is featured"
+      ],
+      "commissionUsedAsTieBreak": false,
+      "retailer": null,
+      "exactProductIdentifier": null,
+      "identifierKind": null,
+      "market": "us",
+      "priceState": "not_published",
+      "stockState": "unknown",
+      "deliveryState": "unknown",
+      "warrantyRoute": null,
+      "lastChecked": null,
+      "freshness": "unknown",
+      "affiliateProgramme": null,
+      "goPath": null,
+      "schemaEligible": false,
+      "blockers": [
+        "no approved offer"
       ],
       "nextAction": "Obtain price and availability through the Amazon Creators API so the offer can carry a current price and enter Offer schema."
     }

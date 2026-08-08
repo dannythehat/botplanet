@@ -663,6 +663,60 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
      and KD 24; the measured run puts "moflin" at 6,600 and KD 12. Five times
      the traffic at half the difficulty, and the branded form is carried as a
      secondary rather than lost. */
+  /* ------------------------------------------------------------------
+     RULE-OUT REVIEWS, 8 August 2026. Both own a large branded term and spend
+     it recommending something else. Neither cedes its own name to anything,
+     because no other page on this site is trying to rank for a robot we will
+     not sell — the ceding here runs the other way, from the category head
+     terms, which stay with the hubs.
+     ------------------------------------------------------------------ */
+  {
+    path: "/robots/educational-coding-robots/cozmo/",
+    primary: { term: "cozmo robot", volume: 9900, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "digital dream labs", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "anki", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "vector", volume: 0, difficulty: 0, mustAppear: true },
+      /* The three facts the verdict rests on. If a rewrite drops any of them
+         the page has stopped being a rule-out and become a product page for
+         something nobody can buy. */
+      { term: "attorney general", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "sold out", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "refunds", volume: 0, difficulty: 0, mustAppear: true },
+    ],
+    cededTo: [
+      {
+        term: "coding robots for kids",
+        path: "/robots/educational-coding-robots/",
+        why: "The category head term belongs to the hub, which routes to machines that can actually be bought. This page exists to move a reader off one name and onto three of those, and ranking it for the category would put a dead product at the top of the funnel.",
+      },
+    ],
+    researchedOn: RUN,
+  },
+  {
+    path: "/robots/companion-robots/moxie/",
+    primary: { term: "moxie robot", volume: 8100, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "embodied", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "openmoxie", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "servers", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "refunds", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "used", volume: 0, difficulty: 0, mustAppear: true },
+    ],
+    cededTo: [
+      {
+        term: "robot pet",
+        path: "/robots/companion-robots/",
+        why: "The 8,100 head term belongs to the hub. This page answers one question about one discontinued machine and then sends the reader there.",
+      },
+      {
+        term: "robotic pet for elderly",
+        path: "/guides/robotic-pets-for-elderly/",
+        why: "Moxie was sold for children rather than for elderly care, and the evidence question the guide answers is a different reader's. Named on this page as an onward route, not competed for.",
+      },
+    ],
+    researchedOn: RUN,
+  },
   {
     path: "/robots/companion-robots/moflin/",
     primary: { term: "moflin", volume: 6600, difficulty: 12, mustAppear: true },
