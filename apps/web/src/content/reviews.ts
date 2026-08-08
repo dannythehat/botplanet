@@ -716,6 +716,14 @@ export const REVIEWS: Record<string, ReviewContent> = {
         teaser: "Six things Aiper does not publish, including what the camera retains.",
       },
     ],
+    video: {
+      url: "https://youtu.be/DKs34wPDPCM",
+      title: "I Think Aiper Just Changed Pool Cleaning Forever (Scuba V3 Review)",
+      channel: "Deanin' It Yourself",
+      source: "independent",
+      note:
+        "Independent, and enthusiastic — read the title as the reviewer's verdict rather than ours. It is worth watching for the AI navigation running in a real pool, which is the claim this machine is sold on and the one hardest to judge from a page.",
+    },
     facts: [
       { label: "Power", value: "Cordless battery" },
       { label: "Cleans", value: "Floor, walls, waterline" },
@@ -1487,6 +1495,14 @@ export const REVIEWS: Record<string, ReviewContent> = {
         teaser: "Six gaps, including the cable length neither source states.",
       },
     ],
+    video: {
+      url: "https://youtu.be/Zax9PjIHMjY",
+      title: "BUBLUE Bubot 800P Gen2 Robotic Pool Cleaner Review | Powerful Suction & AI Pool Mapping",
+      channel: "Legendary Tech",
+      source: "independent",
+      note:
+        "Independent, and it names the Gen2 explicitly \u2014 which matters, because BuBlue sells a 300P, a 500P and an 800P and the generation is what our catalogue row is pinned to. Not our testing.",
+    },
     facts: [
       { label: "Cleans", value: "Floor, walls, waterline" },
       { label: "Power", value: "Corded mains" },
@@ -2007,6 +2023,14 @@ export const REVIEWS: Record<string, ReviewContent> = {
       "Ordinary framed or frameless windows with a socket somewhere near them.",
     notIdealFor:
       "Windows nowhere near power, small panes where the Mini fits better, or sloped glass.",
+    video: {
+      url: "https://youtu.be/YbzVEMWzrnk",
+      title: "ECOVACS WINBOT W2 PRO Review: Is This Smart Window Cleaner Worth the Investment?",
+      channel: "Reviewsinside",
+      source: "independent",
+      note:
+        "Independent, not ECOVACS'. Its title names the plain W2 PRO rather than the Omni, which is the machine this page sells \u2014 but the two are constantly confused in search results, so check for a station on the floor before you take anything in it as applying here. If there is one, you are watching the Omni.",
+    },
     facts: [
       { label: "Max suction", value: "5,300 Pa ±500" },
       { label: "Moving suction", value: "2,800 Pa" },
@@ -2080,6 +2104,14 @@ export const REVIEWS: Record<string, ReviewContent> = {
       "Finding out whether you want one of these at all, and ordinary framed windows on the lower floors.",
     notIdealFor:
       "Large panes, anyone who wants scheduling or mapping, or anyone above the first floor who wants the longest published safety margin.",
+    video: {
+      url: "https://youtu.be/T7vKpUNeD9M",
+      title: "Uncovering the Truth about Ecovacs Winbot W1 Pro: An Extreme Review!",
+      channel: "TDSheridan Lab",
+      source: "independent",
+      note:
+        "Independent, not ECOVACS'. It puts the entry machine on large shop windows, which is precisely the job this review says it is not for — watch it as the stress test rather than the recommendation.",
+    },
     facts: [
       { label: "Max suction", value: "2,800 Pa" },
       { label: "Cleaning modes", value: "3" },
@@ -2240,6 +2272,14 @@ export const REVIEWS: Record<string, ReviewContent> = {
       "Anyone who wants a machine that is not an ECOVACS, on ordinary framed or frameless windows.",
     notIdealFor:
       "Anyone comparing on stated suction, anyone with sloped glass, or anyone needing to work away from a socket.",
+    video: {
+      url: "https://youtu.be/crSOj6S8KD4",
+      title: "Mamibot iGLASSBOT W120-DP Test for Cleaning Sticky Glue on Glass",
+      channel: "William Will",
+      source: "independent",
+      note:
+        "Independent, and worth watching because it tests something nobody else does: dried adhesive rather than dust. Mamibot publishes little about this machine, and footage of it failing or coping is more use than another spec sheet.",
+    },
     facts: [
       { label: "Max suction", value: "3,200 Pa (stated)" },
       { label: "Spray nozzles", value: "4" },
@@ -2381,6 +2421,14 @@ export const REVIEWS: Record<string, ReviewContent> = {
       "Someone who wants ultrasonic spray cheaply and is comfortable buying on a long-standing brand's reputation rather than on published figures.",
     notIdealFor:
       "Almost anyone buying their first window robot — at a similar price the WINBOT W1 PRO publishes everything this one does not.",
+    video: {
+      url: "https://youtu.be/YOphx_t0fmk",
+      title: "HOBOT 298 Review (Cleaning Factory Windows)",
+      channel: "Robot My Life",
+      source: "independent",
+      note:
+        "Independent, not HOBOT's, and shot on high dusty factory glass rather than a clean showroom pane. HOBOT publishes no suction figure for this model, so watching it hold and travel is the only evidence available.",
+    },
     facts: [
       { label: "Spray", value: "Ultrasonic" },
       { label: "Max suction", value: "Not published" },
@@ -3691,6 +3739,14 @@ export const REVIEWS: Record<string, ReviewContent> = {
       "Sliding doors, picture windows and walls of glass, in a household where the window that needs cleaning has no socket under it.",
     notIdealFor:
       "Windows the size most windows are. The W2 PRO Omni does the same job with the same station for less, and small panes need the Mini instead.",
+    video: {
+      url: "https://youtu.be/lQFuYnfe8Vw",
+      title: "ECOVACS Winbot W3 Omni Window Robot - Full Review & Test",
+      channel: "ModernDayReviews",
+      source: "independent",
+      note:
+        "Independent, not ECOVACS'. It runs the machine and shows the station washing its own pads, which is the feature the price rests on. Check it is the W3 Omni you are watching and not the W2S Omni — the two look alike and are different machines.",
+    },
     facts: [
       { label: "Max suction", value: "10,000 Pa" },
       { label: "Moving suction", value: "3,300 Pa \u00b1100" },
