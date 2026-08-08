@@ -809,7 +809,8 @@ export const ROUTES: RouteDef[] = [
     footerGroup: "Trust & legal",
     inSitemap: true,
     indexable: true,
-    summary: "The terms that apply when you use BotPlanet.",
+    summary:
+      "The terms that apply when you use BotPlanet, including what our recommendations are and are not, and how affiliate links affect what you read here.",
   },
 
   {

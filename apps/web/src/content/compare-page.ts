@@ -65,7 +65,7 @@ export const COMPARE_PAGES: Record<string, ComparePageContent> = {
     title: "Robotic pool cleaners compared, brand by brand",
     seoTitle: "Aiper vs Dolphin vs Polaris — Pool Cleaners Compared",
     metaDescription:
-      "Aiper against Dolphin, Dolphin against Polaris, and the flagship and budget matchups underneath. Every machine we hold in one table, with the brand differences that actually decide it.",
+      "Aiper against Dolphin, Dolphin against Polaris, and the matchups underneath. Every machine we hold in one table, with the differences that decide it.",
     standfirst:
       "Most of these matchups come down to one thing, and it is not cleaning power. Aiper builds cordless machines and Dolphin builds corded ones, " +
       "and almost everything people mean by 'which brand is better' follows from that single fact.",

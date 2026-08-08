@@ -20,6 +20,8 @@
 import { describe, expect, it } from "vitest";
 import { EDITORIAL } from "../src/content/editorial";
 import { CATEGORY_HERO } from "../src/content/category-hero";
+import { REVIEWS } from "../src/content/reviews";
+import { COMPARE_PAGES } from "../src/content/compare-page";
 
 /** Google truncates around here. Beyond it, the words are written for nobody. */
 const MAX_DESCRIPTION = 160;
@@ -47,6 +49,29 @@ const rows: Row[] = [
     id: `/robots/${slug}/`,
     seoTitle: h.seoTitle,
     metaDescription: h.metaDescription,
+  })),
+  /* REVIEWS AND COMPARE PAGES WERE NOT CHECKED UNTIL 8 August 2026, and the
+     reviews are the largest page type on the site by a distance.
+
+     The rule below was written for editorial pages and hubs and simply never
+     extended, so a crawl of all 81 live pages found NINETEEN of thirty-nine
+     review and compare records outside these limits — four titles truncating
+     in the result and eighteen descriptions running past 160 characters, one
+     of them to 212. Ten of the descriptions opened with the same wasted
+     twenty-eight characters, "An honest review of the <product>:", before
+     saying anything a searcher could use.
+
+     A limit that covers the small page types and not the big one is not a
+     limit. */
+  ...Object.entries(REVIEWS).map(([slug, r]) => ({
+    id: `review:${slug}`,
+    seoTitle: r.seoTitle,
+    metaDescription: r.metaDescription,
+  })),
+  ...Object.entries(COMPARE_PAGES).map(([slug, c]) => ({
+    id: `/compare/${slug}/`,
+    seoTitle: c.seoTitle,
+    metaDescription: c.metaDescription,
   })),
 ];
 

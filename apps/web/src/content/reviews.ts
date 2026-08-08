@@ -74,8 +74,7 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "Dolphin Nautilus CC Plus Wi-Fi review",
     seoTitle: "Dolphin Nautilus CC Plus Wi-Fi Review | BotPlanet",
     metaDescription:
-      "An honest review of the Dolphin Nautilus CC Plus Wi-Fi: what it cleans, what it does " +
-      "not, the 40 ft pool limit, and the US and global SKU differences worth checking first.",
+      "What the Nautilus CC Plus cleans, what it leaves alone, the 40 ft pool limit, and the US and global SKU difference worth checking before you order.",
     verdict:
       "A corded floor-and-wall cleaner that does a specific job reliably and does not pretend " +
       "to do more. It plugs in, runs a two-hour cycle, climbs the walls, and never needs " +
@@ -266,10 +265,10 @@ export const REVIEWS: Record<string, ReviewContent> = {
     categorySlug: "robotic-pool-cleaners",
     eyebrow: "Robotic pool cleaner review",
     title: "Polaris FREEDOM cordless review",
-    seoTitle: "Polaris FREEDOM Cordless Robotic Pool Cleaner Review | BotPlanet",
+    seoTitle:
+      "Polaris FREEDOM Review — Cordless, and the Runtime Catch",
     metaDescription:
-      "An honest review of the Polaris FREEDOM: what it cleans, the 2.5-hour runtime, the battery " +
-      "you are really buying, and why the 50 ft pool limit appears only in marketing artwork.",
+      "Cordless, 2.5 hours of runtime, and a 50 ft pool limit that appears only in marketing artwork. What the battery really buys, and who should skip it.",
     verdict:
       "A genuinely cordless in-ground cleaner that does the floor, the walls and the waterline, runs " +
       "two and a half hours on a charge, and parks itself on a dock. You are paying a premium for a " +
@@ -658,9 +657,7 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "Aiper Scuba V3 AI Vision review",
     seoTitle: "Aiper Scuba V3 AI Vision Review | BotPlanet",
     metaDescription:
-      "An honest review of the Aiper Scuba V3 AI Vision: what the camera actually does, what " +
-      "\"7 days on one charge\" really means, the 3 micron filter claim, and the privacy question " +
-      "nobody else is asking.",
+      "What the camera actually does, what seven days on one charge really means, the 3-micron filter claim, and the privacy question nobody else is asking.",
     verdict:
       "The first robot in our catalogue that looks at your pool: a camera recognises debris and " +
       "steers at it instead of sweeping blind. Cordless, 18.1 lb, waterline coverage, and the " +
@@ -830,8 +827,7 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "Dolphin Proteus DX4 Plus review",
     seoTitle: "Dolphin Proteus DX4 Plus Review | BotPlanet",
     metaDescription:
-      "An honest review of the Dolphin Proteus DX4 Plus: the 33 ft limit that catches people out, " +
-      "the sibling rated for 50, and why we are careful about the waterline claim.",
+      "The 33 ft limit that catches people out, the sibling rated for 50 ft, and why we are careful about the waterline claim on this particular machine.",
     verdict:
       "A corded Maytronics machine that climbs walls, does the sun ledges and — per Maytronics' own " +
       "listing copy — the waterline too. Rated for pools up to 33 ft, which is shorter than people " +
@@ -977,9 +973,7 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "Aiper Scuba X1 Pro Max review",
     seoTitle: "Aiper Scuba X1 Pro Max Review | BotPlanet",
     metaDescription:
-      "An honest review of the Aiper Scuba X1 Pro Max: the only robot we cover that skims the " +
-      "surface as well as the floor, the 8,500 GPH claim, the 3-year warranty, and the bundle trap " +
-      "that once fooled our own records.",
+      "The only robot here that skims the surface as well as the floor. The 8,500 GPH claim, the three-year warranty, and the bundle that fooled our records.",
     verdict:
       "The most expensive machine we cover and the only one that honestly claims all four jobs — " +
       "surface, waterline, walls and floor — with ultrasonic mapping, 8,500 GPH of claimed suction " +
@@ -1139,9 +1133,7 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "Aiper Seagull SE review",
     seoTitle: "Aiper Seagull SE Review | BotPlanet",
     metaDescription:
-      "An honest review of the Aiper Seagull SE: 90 minutes of floor-only cleaning for a small " +
-      "above-ground pool, the sparsest spec sheet we cover, and the Amazon listing that died " +
-      "while we wrote it.",
+      "Ninety minutes of floor-only cleaning for a small above-ground pool, the sparsest spec sheet we cover, and the Amazon listing that died mid-review.",
     verdict:
       "The cheapest machine we cover and the most honest thing in the budget end of the market: " +
       "a cordless vacuum that does the floor of a small above-ground pool for ninety minutes and " +
@@ -1280,9 +1272,7 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "Aiper Scuba S1 review",
     seoTitle: "Aiper Scuba S1 Review | BotPlanet",
     metaDescription:
-      "An honest review of the Aiper Scuba S1: four-zone cleaning including 12-inch shallow " +
-      "ledges, the runtime Aiper states twice differently, and the Amazon listing we refuse " +
-      "to link.",
+      "Four-zone cleaning including 12-inch shallow ledges, a runtime Aiper states two different ways, and the Amazon listing we refuse to link to.",
     verdict:
       "Aiper's mid-range all-rounder: cordless, wall-climbing, waterline-scrubbing, with the " +
       "flagships' 3-micron filtration and a shallow-ledge claim most robots cannot make. Held " +
@@ -1437,9 +1427,7 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "BuBlue Bubot 800P Gen2 review",
     seoTitle: "BuBlue Bubot 800P Gen2 Review | BotPlanet",
     metaDescription:
-      "An honest review of the BuBlue Bubot 800P Gen2: corded four-zone cleaning that never " +
-      "runs out of battery, the numbers BuBlue actually publishes, and what its shallow-water " +
-      "claim really means.",
+      "Corded four-zone cleaning that never runs out of battery. What BuBlue actually publishes, and what its shallow-water claim really means in a pool.",
     verdict:
       "The corded contrarian of the upper mid-range: unlimited mains power, floor-wall-waterline " +
       "coverage plus steps, published figures many bigger brands withhold, and a stated one-year " +
@@ -1596,9 +1584,7 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "WYBOT C1 review",
     seoTitle: "WYBOT C1 Review | BotPlanet",
     metaDescription:
-      "An honest review of the WYBOT C1: floor, wall and waterline cleaning for about $500, " +
-      "the weekly cycle timer that splits one charge into four cleans, and the Amazon " +
-      "listing history you should know about.",
+      "Floor, wall and waterline cleaning at the budget end, and a weekly timer that splits one charge into four cleans. Plus the listing history to know.",
     verdict:
       "The best budget case in our catalogue for a pool with walls worth climbing: " +
       "floor-wall-waterline coverage, a genuinely useful weekly cycle timer and a stated " +
@@ -1746,9 +1732,7 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "Beatbot AquaSense 2 Ultra review",
     seoTitle: "Beatbot AquaSense 2 Ultra Review | BotPlanet",
     metaDescription:
-      "An honest review of the Beatbot AquaSense 2 Ultra: five jobs in one machine including " +
-      "surface skimming and water clarification, the camera that maps your pool, and the " +
-      "3-year warranty that changes the arithmetic.",
+      "Five jobs in one machine, including surface skimming and clarification, a camera that maps your pool, and a three-year warranty that changes the sums.",
     verdict:
       "The ceiling of our catalogue: floor, walls, waterline, surface skimming and a " +
       "clarification system nobody else attempts, behind a pool-mapping camera stack and an " +
@@ -2014,9 +1998,10 @@ export const REVIEWS: Record<string, ReviewContent> = {
     categorySlug: "window-cleaning-robots",
     eyebrow: "Window robot review",
     title: "ECOVACS WINBOT W2 PRO review",
-    seoTitle: "ECOVACS WINBOT W2 PRO Review — The One Most People Should Buy",
+    seoTitle:
+      "ECOVACS WINBOT W2 PRO Review — The Default WINBOT",
     metaDescription:
-      "The flagship without the battery station, and on glass the difference is inside ECOVACS's own tolerance. Why this is the default WINBOT and when the Omni is worth the premium.",
+      "The flagship without the battery station, and on glass the difference sits inside ECOVACS's own tolerance. When the Omni is worth the premium.",
     verdict:
       "The WINBOT most people should buy: the same navigation, nozzles, tank and modes as the flagship, with suction inside an overlapping tolerance range, minus a 5.5 kg battery station most houses will never need.",
     bestFor:
@@ -2097,7 +2082,7 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "ECOVACS WINBOT W1 PRO review",
     seoTitle: "ECOVACS WINBOT W1 PRO Review — The Cheap Way In",
     metaDescription:
-      "Half the suction of the W2 PRO, three modes instead of seven, and a power-off hold ECOVACS declines to put a number on. Who the entry WINBOT is genuinely right for.",
+      "Half the suction of the W2 PRO, three modes instead of seven, and a power-off hold ECOVACS will not put a number on. Who it is genuinely right for.",
     verdict:
       "The cheapest way into a brand with a real service operation behind it, and honest about being the entry model: 2,800 Pa, three modes, a dual cross nozzle, and the only WINBOT whose power-off hold is claimed without a published duration.",
     bestFor:
@@ -2192,7 +2177,7 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "HUTT S55 Pro review",
     seoTitle: "HUTT S55 Pro Review — The Only One Claiming Sloped Glass",
     metaDescription:
-      "The only window robot here that claims inclined glass, 6,500 Pa stated and an 80 ml tank — and a specification we could not verify with the manufacturer. Read the gaps first.",
+      "The only window robot here claiming inclined glass: 6,500 Pa stated, an 80 ml tank, and a specification we could not verify. Read the gaps first.",
     verdict:
       "The only machine in our catalogue claiming sloped glass, which is the whole reason it is here. Strong stated numbers — 6,500 Pa, an 80 ml tank, a HydroJet pump — and not one of them confirmed by HUTT's own published page.",
     bestFor:
@@ -2412,7 +2397,8 @@ export const REVIEWS: Record<string, ReviewContent> = {
     categorySlug: "window-cleaning-robots",
     eyebrow: "Window robot review",
     title: "HOBOT 298 review",
-    seoTitle: "HOBOT 298 Review — Ultrasonic Spray, and Very Little Else Published",
+    seoTitle:
+      "HOBOT 298 Review — Ultrasonic Spray, Few Published Specs",
     metaDescription:
       "The cheaper HOBOT and the machine we know least about in the whole catalogue. What it offers, and why we would point a first-time buyer elsewhere.",
     verdict:
@@ -2489,7 +2475,7 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "Cop Rose X5S review",
     seoTitle: "Cop Rose X5S Review — No App, and Framed Glass Only",
     metaDescription:
-      "The cheapest machine here and the only one with a remote instead of an app. Also the only one not rated for frameless glass — which decides it for some buyers outright.",
+      "The cheapest machine here, and the only one with a remote instead of an app. Also the only one not rated for frameless glass, which decides it.",
     verdict:
       "The cheapest machine in the catalogue and the only one with no app at all — a remote control instead, which for the right buyer is the feature rather than the compromise. It is also the only one rated for framed glass only.",
     bestFor:
@@ -3732,7 +3718,7 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "ECOVACS WINBOT W3 Omni review",
     seoTitle: "ECOVACS WINBOT W3 Omni Review — The Strongest Grip Here",
     metaDescription:
-      "10,000 Pa maximum and 3,300 Pa moving, on a $550 window robot with an 80 ml tank. Who the extra suction is actually for, and who should buy the W2 PRO Omni instead.",
+      "10,000 Pa maximum and 3,300 Pa moving, on the dearest window robot we hold. Who the extra suction is for, and who should buy the W2 PRO Omni.",
     verdict:
       "The strongest grip in this catalogue and the biggest tank, on the most expensive window robot we hold. Both are real and both are margin rather than a cleaner pane \u2014 which makes this a machine for genuinely large glass and nobody else.",
     bestFor:
@@ -3826,9 +3812,10 @@ export const REVIEWS: Record<string, ReviewContent> = {
     categorySlug: "window-cleaning-robots",
     eyebrow: "Window robot review",
     title: "ECOVACS WINBOT W2S review",
-    seoTitle: "ECOVACS WINBOT W2S Review — Edge Scrubbers, No Published Suction",
+    seoTitle:
+      "WINBOT W2S Review — Edge Scrubbers, No Published Suction",
     metaDescription:
-      "TruEdge scrubbers instead of six spray nozzles, at $330. Why the edge is a real complaint, and why ECOVACS publishing no suction figure is the reason to hesitate.",
+      "TruEdge scrubbers instead of six spray nozzles. Why the edge is a real complaint, and why no published suction figure is the reason to hesitate.",
     verdict:
       "One specific bet: that the border of the pane bothers you more than the middle. If it does, this is the only machine here built for that. If it does not, ECOVACS publishes less about this model than any other WINBOT and that is the reason to walk past it.",
     bestFor:
@@ -3873,7 +3860,7 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "ECOVACS WINBOT Mini review",
     seoTitle: "ECOVACS WINBOT Mini Review — Small Panes, Odd Suction Figure",
     metaDescription:
-      "7,500 Pa on the cheapest WINBOT at $150 \u2014 higher than machines costing three times as much. What that number really means, and why size is the actual reason to buy it.",
+      "7,500 Pa on the cheapest WINBOT, higher than machines costing three times as much. What that number means, and why size is the real reason to buy.",
     verdict:
       "The machine for a window every other robot here is too big for, at the lowest price in the range. Its headline suction beats the flagships and that comparison is not what it looks like \u2014 buy it for the size, and take the grip as a bonus.",
     bestFor:
