@@ -725,7 +725,7 @@
     },
     {
       "productId": "prod-moflin",
-      "canonicalUrl": "https://botplanet.io/robots/robotic-pool-cleaners/moflin/",
+      "canonicalUrl": "https://botplanet.io/robots/companion-robots/moflin/",
       "verifiedOffers": 1,
       "preferredOfferId": "offer-prod-moflin-ret-amazon",
       "preferredOfferAudit": [
@@ -757,7 +757,7 @@
     },
     {
       "productId": "prod-miko-3",
-      "canonicalUrl": "https://botplanet.io/robots/robotic-pool-cleaners/miko-3/",
+      "canonicalUrl": "https://botplanet.io/robots/companion-robots/miko-3/",
       "verifiedOffers": 1,
       "preferredOfferId": "offer-prod-miko-3-ret-amazon",
       "preferredOfferAudit": [
@@ -789,7 +789,7 @@
     },
     {
       "productId": "prod-vector-2",
-      "canonicalUrl": "https://botplanet.io/robots/robotic-pool-cleaners/vector-2/",
+      "canonicalUrl": "https://botplanet.io/robots/companion-robots/vector-2/",
       "verifiedOffers": 1,
       "preferredOfferId": "offer-prod-vector-2-ret-amazon",
       "preferredOfferAudit": [
@@ -821,7 +821,7 @@
     },
     {
       "productId": "prod-eilik",
-      "canonicalUrl": "https://botplanet.io/robots/robotic-pool-cleaners/eilik/",
+      "canonicalUrl": "https://botplanet.io/robots/companion-robots/eilik/",
       "verifiedOffers": 1,
       "preferredOfferId": "offer-prod-eilik-ret-amazon",
       "preferredOfferAudit": [
@@ -853,7 +853,7 @@
     },
     {
       "productId": "prod-loona",
-      "canonicalUrl": "https://botplanet.io/robots/robotic-pool-cleaners/loona/",
+      "canonicalUrl": "https://botplanet.io/robots/companion-robots/loona/",
       "verifiedOffers": 1,
       "preferredOfferId": "offer-prod-loona-ret-amazon",
       "preferredOfferAudit": [

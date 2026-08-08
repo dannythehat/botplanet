@@ -1,5 +1,6 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
+import { PAGE_PLAN } from "../src/content/seo/page-plan";
 import { PRODUCTS } from "../src/content/products";
 import { DESTINATIONS, IDENTITY_CHECKS, REDIRECT_KEYS, REJECTED_CANDIDATES, destinationFor } from "../src/content/commerce/destinations";
 import { NOT_RELATIONSHIPS, PROGRAMMES, RETAILERS, approvedUsRetailers, programme, retailer, usableUsProgrammes } from "../src/content/commerce/registry";
@@ -762,6 +763,24 @@ describe("no private data escapes", () => {
          pool category is a 404, so this checks the shape and lets the mapping
          name the category. */
       expect(r.canonicalUrl).toMatch(/^https:\/\/botplanet\.io\/robots\/[a-z0-9-]+\/[a-z0-9-]+\/$/);
+      /* A SHAPE A WRONG ANSWER SATISFIES IS NOT A GATE. The assertion above
+         passed happily on 8 August 2026 while every companion product carried
+         a canonical URL of /robots/robotic-pool-cleaners/<slug>/ — five 404s
+         in the export whose entire job is telling an affiliate network where
+         our products live. The category segment must be the product's OWN
+         category, checked against the page plan rather than against a
+         pattern. */
+      const slug = r.canonicalUrl.replace(/\/$/, "").split("/").pop()!;
+      const category = r.canonicalUrl.split("/robots/")[1]!.split("/")[0]!;
+      /* Matched by SLUG across the whole plan, not by the URL we are checking
+         — asking planFor() for the URL would only confirm the URL agrees with
+         itself. A product with no planned review page is skipped rather than
+         failed: the withdrawn Dolphin E10 keeps a catalogue row and has no
+         page, which is correct and not a category error. */
+      const plan = PAGE_PLAN.find((p) => p.type === "review" && p.path.endsWith(`/${slug}/`));
+      if (plan) {
+        expect(plan.category, `${slug} is filed under ${category} but its page is in ${plan.category}`).toBe(category);
+      }
       expect(r.nextAction.length).toBeGreaterThan(20);
       // A fully evidenced product legitimately has no blockers — that is the
       // goal state, not a data error. Everything else must explain itself.

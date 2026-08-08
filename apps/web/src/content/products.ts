@@ -937,20 +937,48 @@ export const ACTIVE_PRODUCTS: Record<string, ProductEditorial> = Object.fromEntr
  * product; the category comes from CATEGORY_OF below because productPath()
  * needs it and a product URL built on the wrong category is a 404.
  */
+/* THE THIRD SHAPE ARRIVED, AND THE BRANCH THAT LIVED HERE WAS WRONG ABOUT IT.
+   This was a two-way branch: window slugs by prefix, everything else pool. Its
+   own comment said "when a third shape arrives this becomes a lookup rather
+   than a branch". Companion robots arrived on 8 August 2026 and the branch
+   silently filed all five under robotic-pool-cleaners, so the product-offer
+   mapping published canonical URLs like
+   /robots/robotic-pool-cleaners/moflin/ — five 404s, in an export whose whole
+   job is telling an affiliate network where our products live.
+
+   NO TEST CAUGHT IT because the assertion checked the SHAPE of the URL
+   (/robots/<something>/<something>/) rather than whether the category was the
+   product's own. A pattern that a wrong answer satisfies is not a gate. The
+   replacement assertion lives in offers.test.ts and compares each product's
+   category against the page plan's entry for its review path.
+
+   Explicit sets from here on. A product added without a category listed here
+   lands in `pool` by default and the new test fails loudly, which is the
+   behaviour wanted. */
+const WINDOW_SLUGS = new Set([
+  "ecovacs-winbot-w2-pro-omni",
+  "ecovacs-winbot-w3-omni",
+  "ecovacs-winbot-w2-pro",
+  "ecovacs-winbot-w2s",
+  "ecovacs-winbot-w1-pro",
+  "ecovacs-winbot-mini",
+  "hutt-s55-pro",
+  "mamibot-w120-dp",
+  "hobot-2s",
+  "hobot-298",
+  "cop-rose-x5s",
+]);
+
+const COMPANION_SLUGS = new Set(["moflin", "miko-3", "vector-2", "eilik", "loona"]);
+
 const CATEGORY_OF: Record<string, string> = Object.fromEntries(
   Object.keys(PRODUCT_ID).map((slug) => [
     slug,
-    /* Window is the only category whose products live outside PRODUCTS. When a
-       third shape arrives this becomes a lookup rather than a branch — but a
-       branch that names its one exception is honest, and a lookup table
-       covering one case would only hide it. */
-    slug.startsWith("ecovacs-winbot") ||
-    slug.startsWith("hobot-") ||
-    slug === "hutt-s55-pro" ||
-    slug === "mamibot-w120-dp" ||
-    slug === "cop-rose-x5s"
+    WINDOW_SLUGS.has(slug)
       ? "window-cleaning-robots"
-      : "robotic-pool-cleaners",
+      : COMPANION_SLUGS.has(slug)
+        ? "companion-robots"
+        : "robotic-pool-cleaners",
   ]),
 );
 
