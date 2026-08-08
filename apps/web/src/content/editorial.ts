@@ -378,6 +378,33 @@ export const EDITORIAL: Record<string, EditorialContent> = {
       "beatbot-aquasense-2-ultra",
     ],
     faq: [
+      /* THESE TWO ANSWER FROM THE PAGE AND NOWHERE ELSE. FAQ schema is only
+         honest where the answer is visible in the article, and both of these
+         are lifted from the recall section above. The model numbers are in
+         them deliberately: "Aiper recall" without a model number is the exact
+         shape of the question that sends somebody to the wrong conclusion. */
+      {
+        q: "Which Aiper pool cleaners were recalled?",
+        a:
+          "Two. The Aiper Elite Pro, model GS100, on 24 August 2023 (CPSC recall 23-784), and the Aiper Seagull Pro, model " +
+          "ZT6001, on 20 March 2025 (CPSC recall 25-187). Both were charging faults — a battery that could overheat when the " +
+          "cord was used without its adapter, and an adapter that could overheat on its own. The CPSC recall database holds no " +
+          "other Aiper recall.",
+      },
+      {
+        q: "Is the Aiper Seagull SE part of the recall?",
+        a:
+          "No. The recalled machine is the Seagull Pro, model ZT6001, which is a different and more expensive product. The names " +
+          "are one word apart and that is the whole confusion. The Scuba S1, Scuba V3 AI Vision and Scuba X1 Pro Max are not " +
+          "recalled either, and the Scuba S1 is the machine Aiper had to ship to recalled Seagull Pro owners as the remedy.",
+      },
+      {
+        q: "How should you store a cordless pool robot over winter?",
+        a:
+          "At roughly half charge, indoors, and topped back up every couple of months. Aiper's own instruction is 40-60 percent " +
+          "every two months in a cool, well-ventilated place, and never to charge in direct sunlight. A cell left full in a hot " +
+          "shed for nine months is being stored in the worst way available to it.",
+      },
       {
         q: "Are cordless robotic pool cleaners any good?",
         a:

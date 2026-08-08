@@ -57,6 +57,80 @@ answer to this problem anyone in the catalogue offers. Aiper does not publish a
 warranty term for the Aiper Scuba V3 at all, and that absence is worth noticing
 on a machine whose whole premium is its electronics.
 
+## Two Aiper machines were recalled. Neither is on this page
+
+Search "Aiper fire" and you will find the story told without model numbers,
+which is the one detail that decides whether it applies to you. Here it is with
+them.
+
+**Aiper Elite Pro, model GS100. Recalled 24 August 2023, CPSC recall 23-784.**
+About 22,000 sold in the United States. The Commission's wording: "When the
+charging cord is plugged into the device without the adapter and/or directly
+into the charging port on the machine, the battery can overheat and short
+circuit, posing burn and fire hazards." Seventeen reports of overheating, one
+minor fingertip burn that needed no treatment. Owners were given a free Seagull
+Pro.
+
+**Aiper Seagull Pro, model ZT6001. Recalled 20 March 2025, CPSC recall 25-187.**
+About 32,660 sold in the United States and 2,530 in Canada. This one is not the
+cell: "The recalled pool vacuum cleaner has a large current adapter that can
+overheat, posing burn and fire hazards." Nineteen reports of melting, smoking or
+fire while charging, five of them with property damage, no injuries. Aiper
+states the affected batch numbers begin SN 61. Owners were given a free Scuba S1.
+
+Read those two together and the shape of the problem is charging, not swimming.
+Both hazards live in the mains side of the machine — one in a cord plugged in
+without its adapter, one in the adapter itself. Neither describes a robot
+igniting in a pool.
+
+### The four Aiper machines we review, each stated plainly
+
+The CPSC recall database holds two Aiper recalls and no others. Neither names
+any of these:
+
+- **Aiper Seagull SE** — not recalled. Read this one twice, because the machine
+  that *was* recalled is the Seagull **Pro**, and the names are one word apart.
+  Different model, different price, different product.
+- **Aiper Scuba S1** — not recalled, and it is the machine Aiper was required to
+  ship to recalled Seagull Pro owners as the remedy.
+- **Aiper Scuba V3 AI Vision** — not recalled.
+- **Aiper Scuba X1 Pro Max** — not recalled.
+
+### What we could not verify
+
+Whether owners have filed fire or overheating reports against those four
+machines. The Commission publishes its recall database in full and we have read
+it; consumer incident reports are held on SaferProducts.gov and are not
+available to us as a count per model. So "no recall" is a fact we can stand
+behind, and "no incidents" is a claim we are not making. If you want to check
+before buying, SaferProducts.gov takes a model name and is free.
+
+## A pool is not what ages the cell. The garage is
+
+The recalls point at charging, and so does the manufacturer's own storage
+advice. Aiper tells owners to "never charge your device in direct sunlight",
+to store the machine "in a cool, well-ventilated area", and to charge it to
+40-60 percent every two months while it is put away rather than leaving it full
+or flat.
+
+That last instruction is the interesting one, because it is Aiper describing the
+failure mode nobody markets against. A lithium cell held at a high state of
+charge in a hot place ages faster than one held mid-charge in a cool one, and a
+robot that spends nine months in a sealed box in a sunlit shed at 100 percent is
+being stored in the worst way available. The swim is the easy part of its year:
+water carries heat away.
+
+What to do about it, in three lines. Charge it indoors, on the adapter that came
+with it, never in the sun. Put it away at roughly half charge and top it back to
+half every couple of months. Bring it inside for the winter rather than leaving
+it in the shed.
+
+**What we have not done is measure any of this.** We have not tested cell
+longevity on a single machine in this catalogue, and no manufacturer here
+publishes a cycle-life figure — not a number of charges, not a capacity-after-N
+-cycles curve, nothing. The warranty term is the only number anybody commits to,
+which is why it does so much work in the section above.
+
 ## When to buy corded instead
 
 Three cases, plainly.
@@ -70,6 +144,11 @@ Three cases, plainly.
 - **The pool's shape is the problem, not the cable.** Steps and a sun ledge are
   what a machine skips, and the Dolphin Proteus DX4 Plus is the one here built
   for them.
+- **You do not want a large battery charging in your garage.** Both Aiper
+  recalls were charging faults, and a corded machine has no charge cycle to get
+  wrong. If that risk is the one that bothers you — and for some owners it is
+  the whole decision — the Dolphin Nautilus CC Plus and the BuBlue Bubot 800P
+  run on mains power and store with nothing in them.
 
 None of that makes cordless the wrong purchase. It makes "cordless" a preference
 you are paying for rather than an upgrade you are receiving, and that is a much

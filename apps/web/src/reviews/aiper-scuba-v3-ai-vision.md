@@ -152,6 +152,27 @@ Everything on this page describes the Gray V3, ASIN B0GG97427D.
 
 ---
 
+## Not recalled, and what that does and does not mean
+
+Two Aiper machines have been recalled: the Elite Pro, model GS100, in August 2023,
+and the Seagull Pro, model ZT6001, in March 2025. The CPSC recall database holds
+no others, and the Scuba V3 AI Vision is not among them.
+
+Both faults were charging faults. One was a battery that could overheat when the
+cord was plugged in without its adapter; the other was the adapter itself. Neither
+describes a robot failing in the pool, which is the version of the story that
+travels.
+
+The limit of what we can say: no recall is checkable and checked. Whether owners
+have filed incident reports against this model is held on SaferProducts.gov and is
+not available to us as a per-model count, so we are not claiming a clean sheet —
+only that the recall database is clean.
+
+Given this is the model whose entire premium is its electronics, and given Aiper
+publishes no warranty term for it at all, the storage advice matters more here
+than on the cheap machines: half charge, indoors, topped up every couple of
+months, never charging in the sun.
+
 ## What we cannot tell you
 
 Written from published sources and no pool:

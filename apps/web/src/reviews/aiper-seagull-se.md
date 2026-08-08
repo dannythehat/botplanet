@@ -134,6 +134,25 @@ about what a refurbished unit will do.
 
 ---
 
+## The recall that was not this machine
+
+Aiper has had two products recalled and neither is this one. The relevant one for
+you is the **Seagull Pro, model ZT6001**, recalled on 20 March 2025 as CPSC recall
+25-187 for an adapter that could overheat — 19 reports of melting, smoking or fire
+while charging, five with property damage.
+
+Seagull **Pro**, not Seagull **SE**. One word, two products, several hundred
+dollars apart. If you searched "Aiper Seagull recall" and landed here worried, the
+answer is that this machine is not in it.
+
+The other recall was the Elite Pro, model GS100, in August 2023. Also not this
+machine.
+
+What we will not tell you is that nobody has ever had a problem with a Seagull SE.
+The CPSC publishes its recall database in full and we have read it; individual
+consumer reports live on SaferProducts.gov and are not available to us as a count
+per model. No recall is a fact. No incidents is not a claim we can make.
+
 ## What we cannot tell you
 
 Written from published sources and no pool. For this machine the list is long,

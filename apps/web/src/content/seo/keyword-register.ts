@@ -620,6 +620,17 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
       { term: "battery", volume: 0, difficulty: 0, mustAppear: true },
       { term: "runtime", volume: 0, difficulty: 0, mustAppear: true },
       { term: "corded", volume: 0, difficulty: 0, mustAppear: true },
+      /* THE SAFETY CLUSTER, ADDED 8 AUGUST 2026 WITH THE RECALL SECTION.
+         Not from a paid run — these are terms the page now answers because it
+         carries the CPSC record for both Aiper recalls with model numbers, and
+         a register row that does not name them would let the section drift out
+         again unnoticed. Volumes are 0 rather than invented; the batched
+         refresh can price them. */
+      { term: "recall", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "aiper seagull pro", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "aiper elite pro", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "cpsc", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "overheat", volume: 0, difficulty: 0, mustAppear: true },
     ],
     cededTo: [
       {
