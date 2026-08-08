@@ -843,16 +843,225 @@ const LITTER_REVIEWS = plannedReviews("self-cleaning-litter-boxes", "31090590604
   { slug: "petkit-purobot-ultra", term: "petkit purobot ultra", volume: 390 },
 ]);
 
-/* Companion robots. */
-const COMPANION_REVIEWS = plannedReviews("companion-robots", "31081889310 · 2026-08-06", [
-  { slug: "living-ai-emo", term: "emo robot", volume: 18100 },
-  { slug: "eilik", term: "eilik robot", volume: 8100 },
-  { slug: "loona", term: "loona robot", volume: 5400 },
-  { slug: "sony-aibo", term: "sony aibo", volume: 3600 },
-  { slug: "tombot-jennie", term: "tombot jennie", volume: 2400 },
-  { slug: "joy-for-all-companion-pets", term: "joy for all companion pet", volume: 1900 },
-  { slug: "casio-moflin", term: "casio moflin", volume: 1300 },
-]);
+/* ------------------------------------------------------------------
+   COMPANION ROBOTS — REPLANNED 8 August 2026 from measured data.
+   Research: local run on docs/seo/seeds/companion-products.json,
+   133 seeds, 22 SERPs, $0.3321.
+   Plan: docs/seo/companion-products-build-plan.md
+   Buyability: docs/seo/companion-robots-research-findings.md
+
+   THE 6 AUGUST PLAN NAMED SEVEN REVIEWS AND FOUR OF THEM COULD NOT
+   CARRY A BUY BUTTON. Amazon US was checked product by product on
+   8 August: Sony aibo, Tombot Jennie, ElliQ, Cozmo and Moxie have
+   no listing at all, and Living.AI EMO returns only unbranded
+   knockoffs. That is 43,900 searches a month this site cannot
+   monetise, and it was planned as if it could.
+
+   Three products replace them, all with a confirmed ASIN read from
+   the listing's own fields: Vector 2.0, Miko 3 and — retitled —
+   Moflin. Joy For All is deleted as a review and handed to the
+   seniors guide, which shares five of its top-ten domains and was
+   already built waiting for exactly this product.
+
+   ORDER IS THE CALENDAR, NOT THE VOLUME. Everything here except
+   Moflin peaks in December: `miko robot` runs 2,400 in June and
+   40,500 in December. Moflin peaks in SEPTEMBER at 14,800, which
+   is why it is first despite not being the biggest.
+   ------------------------------------------------------------------ */
+
+const COMPANION_RESEARCH = "local 2026-08-08 · $0.3321 · seeds/companion-products.json";
+
+/** Shared by every companion review: same slots, same schema, same exits. */
+const companionReviewShell = (slug: string) => ({
+  category: "companion-robots",
+  type: "review" as const,
+  status: "researched" as const,
+  intent: "Decide whether this specific machine is the right one for me.",
+  linksOut: [
+    "/robots/companion-robots/",
+    "/compare/companion-robots/",
+    "/botmatch/companion-robots/",
+  ],
+  images: [
+    { slot: "hero", shows: `${slug} lead artwork`, supplied: false },
+    { slot: "figure-1", shows: "Feature story 1", supplied: false },
+    { slot: "figure-2", shows: "Feature story 2", supplied: false },
+    { slot: "product-card", shows: "Catalogue card for listings and the hub grid", supplied: false },
+  ],
+  schema: ["Review", "Article", "WebPage", "BreadcrumbList"],
+  research: COMPANION_RESEARCH,
+});
+
+const COMPANION_REVIEWS: PagePlan[] = [
+  {
+    ...companionReviewShell("moflin"),
+    path: "/robots/companion-robots/moflin/",
+    /* TITLED "MOFLIN", NOT "CASIO MOFLIN". The old plan carried the branded
+       form at 1,300 and KD 24. The bare name is 6,600 at KD 12 — five times
+       the traffic at half the difficulty. */
+    primary: { term: "moflin", volume: 6600, difficulty: 12 },
+    secondary: [
+      { term: "casio moflin", volume: 1300, difficulty: 24 },
+      { term: "moflin pet", volume: 1000, difficulty: 25 },
+      { term: "moflin review", volume: 140, difficulty: 6 },
+      { term: "casio moflin review", volume: 40, difficulty: 0 },
+      { term: "moflin price", volume: 40, difficulty: 17 },
+      { term: "casio moflin price", volume: 40, difficulty: 0 },
+      { term: "buy moflin", volume: 20, difficulty: 5 },
+      { term: "moflin for sale", volume: 20, difficulty: 9 },
+      { term: "is moflin worth it", volume: 10, difficulty: 0 },
+      { term: "moflin battery life", volume: 10, difficulty: 0 },
+    ],
+    ceded: [],
+    refused: [
+      { term: "sony aibo", volume: 3600, why: "Named on this page because searchers ask for 'moflin vs aibo' at suggest position 1, and refused as a target because aibo has no Amazon US listing. Naming the honest comparison is not claiming its term." },
+    ],
+    products: [],
+    productsNote: "Amazon US B0GPHNLWP3 confirmed 8 August 2026 — $429, in stock, identity read from the listing. No catalogue row or verified specification yet.",
+    evidence: "6,600/mo at KD 12 on the bare name. The ONLY product in this category that does not peak at Christmas: 720 in July, 14,800 in September. That peak is the deadline, which is why it is page one of six.",
+  },
+  {
+    ...companionReviewShell("miko 3"),
+    path: "/robots/companion-robots/miko-3/",
+    primary: { term: "miko 3", volume: 4400, difficulty: 3 },
+    secondary: [
+      { term: "miko robot", volume: 8100, difficulty: 10 },
+      { term: "miko 3 review", volume: 320, difficulty: 0 },
+      { term: "miko robot review", volume: 210, difficulty: 0 },
+      { term: "miko max", volume: 170, difficulty: 0 },
+      { term: "miko 3 price", volume: 110, difficulty: 0 },
+      { term: "miko 3 vs miko mini", volume: 110, difficulty: 0 },
+      { term: "miko max subscription cost", volume: 70, difficulty: 0 },
+      { term: "miko 3 amazon", volume: 50, difficulty: 3 },
+      { term: "miko robot age range", volume: 30, difficulty: 0 },
+      { term: "miko robot subscription", volume: 20, difficulty: 0 },
+      { term: "is miko robot worth it", volume: 20, difficulty: 0 },
+      { term: "miko 3 vs miko max", volume: 10, difficulty: 0 },
+    ],
+    ceded: [],
+    refused: [
+      /* 5,400/mo AT KD 0 THAT CANNOT BE SOLD. The only Amazon US listing for
+         the Mini is "LTGEM Case Compatible with Miko Mini" — a case for a
+         product is not the product, the same pattern as Cozmo's $19 battery.
+         This page compares against the Mini and sends nobody anywhere. */
+      { term: "miko mini", volume: 5400, why: "Checked 8 August 2026: the only Amazon US listing is a carrying case for it. A 5,400/mo KD 0 term with nothing behind it is a page that costs money and earns none. Compared against on the Miko 3 review instead." },
+      { term: "ai robot for kids", volume: 0, why: "Shares two of ten domains with 'miko 3'. The existing ruling that this term belongs to no BotPlanet page holds, and the measurement confirms Miko does not drag this category into a parenting SERP." },
+    ],
+    products: [],
+    productsNote: "Amazon US B0GV37M678 confirmed 8 August 2026 — $299, in stock. A SECOND listing, B0GV2L2PDL, exists for the same machine; which one holds the live buy box must be settled before this page publishes.",
+    evidence: "4,400/mo at KD 3, with 'miko robot' at 8,100/KD 10 behind it. 'miko 3' and 'miko 3 review' share SIX of ten domains, so one page takes both. Cheapest large opportunity in the category and it was not in the plan at all.",
+  },
+  {
+    ...companionReviewShell("vector 2.0"),
+    path: "/robots/companion-robots/vector-2/",
+    primary: { term: "vector robot", volume: 9900, difficulty: 23 },
+    secondary: [
+      { term: "vector 2.0", volume: 1300, difficulty: 0 },
+      { term: "anki vector", volume: 1000, difficulty: 23 },
+      { term: "anki vector robot", volume: 720, difficulty: 23 },
+      { term: "vector robot price", volume: 480, difficulty: 4 },
+      { term: "vector robot app", volume: 210, difficulty: 9 },
+      { term: "vector robot for sale", volume: 110, difficulty: 5 },
+      { term: "vector robot amazon", volume: 110, difficulty: 4 },
+      { term: "vector 2.0 robot", volume: 90, difficulty: 13 },
+      { term: "vector robot cube", volume: 70, difficulty: 0 },
+      { term: "vector robot subscription", volume: 50, difficulty: 6 },
+      { term: "vector robot accessories", volume: 50, difficulty: 0 },
+      { term: "digital dream labs vector", volume: 30, difficulty: 19 },
+      { term: "vector robot review", volume: 30, difficulty: 5 },
+      { term: "vector robot vs cozmo", volume: 20, difficulty: 3 },
+      { term: "is vector robot still supported", volume: 10, difficulty: 0 },
+      { term: "vector robot alternative", volume: 10, difficulty: 0 },
+    ],
+    ceded: [],
+    refused: [
+      { term: "cozmo robot", volume: 9900, why: "9,900/mo and the only Amazon US listing is a $19 battery for it. Answered as a comparison section on this page, because 'vector robot vs cozmo' ranks and this is the machine that wins it by default." },
+    ],
+    products: [],
+    productsNote: "Amazon US B07G3ZNK4Y confirmed 8 August 2026 — $199.99, in stock. Anki was liquidated in 2019 and Digital Dream Labs holds the line; the service history is the page, not a footnote.",
+    evidence: "9,900/mo. 'vector robot' shares SIX of ten domains with 'is vector robot still supported' and FIVE with 'vector robot price' — one page takes all three. Every Vector SERP's PAA asks whether it is discontinued or still works.",
+  },
+  {
+    ...companionReviewShell("eilik"),
+    path: "/robots/companion-robots/eilik/",
+    primary: { term: "eilik robot", volume: 8100, difficulty: 29 },
+    secondary: [
+      { term: "eilik", volume: 3600, difficulty: 29 },
+      { term: "energize lab eilik", volume: 590, difficulty: 34 },
+      { term: "eilik robot price", volume: 390, difficulty: 7 },
+      { term: "eilik robot amazon", volume: 390, difficulty: 1 },
+      { term: "eilik ai station", volume: 260, difficulty: 0 },
+      { term: "eilik robot review", volume: 110, difficulty: 1 },
+      { term: "eilik robot keychain", volume: 90, difficulty: 5 },
+      { term: "eilik desktop robot", volume: 50, difficulty: 29 },
+      { term: "eilik price", volume: 30, difficulty: 0 },
+      { term: "eilik robot for sale", volume: 30, difficulty: 26 },
+      { term: "eilik vs emo", volume: 20, difficulty: 0 },
+      { term: "is eilik worth it", volume: 10, difficulty: 0 },
+      { term: "two eilik robots", volume: 10, difficulty: 0 },
+      { term: "eilik battery life", volume: 10, difficulty: 0 },
+    ],
+    ceded: [
+      { term: "emo robot", toPath: "/robots/companion-robots/living-ai-emo/", why: "Google's own PAA on this SERP asks 'Which is better, Eilik or Emo?', so the comparison has to be answered here — but the 18,100/mo term belongs to the EMO page, which is the only page that should rank for it." },
+    ],
+    products: [],
+    productsNote: "TWO offers confirmed 8 August 2026: Eilik B0C2C9LJNQ at $139.99 and Eilik DQ B0DBVM5BCY at $199.98. The AI Station (B0FL2D6W4R) and Panxer (B0DL6B8Q4D) are also live and unpriced here.",
+    evidence: "8,100/mo. Shares FIVE of ten domains with both 'eilik robot review' and 'eilik price', so one page takes all three. Eilik is a RANGE — DQ, AI Station, Panxer, Eiliko — and both engines complete the head term with seven colour variants at position 1.",
+  },
+  {
+    ...companionReviewShell("loona"),
+    path: "/robots/companion-robots/loona/",
+    primary: { term: "loona robot", volume: 5400, difficulty: 18 },
+    secondary: [
+      { term: "loona robot dog", volume: 1000, difficulty: 4 },
+      { term: "loona robot amazon", volume: 260, difficulty: 0 },
+      { term: "keyi tech loona", volume: 170, difficulty: 0 },
+      { term: "loona robot review", volume: 110, difficulty: 2 },
+      { term: "loona robot price", volume: 90, difficulty: 0 },
+      { term: "loona robot accessories", volume: 70, difficulty: 0 },
+      { term: "keyi loona", volume: 50, difficulty: 0 },
+      { term: "loona robot where to buy", volume: 40, difficulty: 0 },
+      { term: "loona robot for sale", volume: 30, difficulty: 0 },
+      { term: "is loona robot worth it", volume: 30, difficulty: 2 },
+      { term: "loona petbot review", volume: 20, difficulty: 24 },
+      { term: "buy loona robot", volume: 20, difficulty: 33 },
+      { term: "loona robot subscription", volume: 10, difficulty: 0 },
+      { term: "loona robot battery life", volume: 10, difficulty: 0 },
+    ],
+    ceded: [
+      { term: "emo robot", toPath: "/robots/companion-robots/living-ai-emo/", why: "The PAA on this SERP asks 'Which robot is better, Emo or Loona?', so it is answered here — but the term itself belongs to the EMO page rather than being fought over by two of ours." },
+    ],
+    products: [],
+    productsNote: "Amazon US B0DCF53PCH confirmed 8 August 2026 — $499, in stock. Loona's ACCESSORIES outrank the machine on Amazon; the first discovery pass returned a toy ball as the product.",
+    evidence: "5,400/mo. Shares FIVE of ten domains with 'loona robot price'. keyirobot.com is KEYi's own content marketing and ranks across this whole category including on products it does not make.",
+  },
+  {
+    ...companionReviewShell("emo robot"),
+    path: "/robots/companion-robots/living-ai-emo/",
+    /* KEPT DESPITE HAVING NOTHING TO SELL. Two separate Amazon searches on
+       8 August returned only unbranded "EMOPET" knockoffs — Living.AI does not
+       list in the US. It stays because it is the comparison anchor for the
+       entire desktop segment: Google's PAA asks "Which is better, Eilik or
+       Emo?" on Eilik's SERP and "Which robot is better, Emo or Loona?" on
+       Loona's. A page that ranks for 18,100 and routes to machines that can be
+       bought is worth more than a gap where the anchor should be. */
+    primary: { term: "emo robot", volume: 18100, difficulty: 21 },
+    secondary: [
+      { term: "robot pet emo", volume: 70, difficulty: 11 },
+      { term: "eilik vs emo", volume: 20, difficulty: 0 },
+    ],
+    ceded: [],
+    products: [],
+    productsNote: "NO OFFER AND NONE EXPECTED. Amazon US searched twice on 8 August 2026; only unbranded EMOPET-style knockoffs returned, with the brand token 'Living.AI' absent from both. This page carries no buy button and routes internally instead.",
+    linksOut: [
+      "/robots/companion-robots/",
+      "/robots/companion-robots/eilik/",
+      "/robots/companion-robots/loona/",
+      "/compare/companion-robots/",
+    ],
+    evidence: "18,100/mo at KD 21, the largest single term in the category, and the comparison anchor Google itself uses in the PAA on both the Eilik and Loona SERPs. Unmonetisable and still worth ranking for.",
+  },
+];
 
 /* Pet camera robots — the Enabot line, which is the roaming-camera family
    rather than the companion one. */
@@ -1019,13 +1228,46 @@ const COMPANION_GUIDE: PagePlan = {
     { term: "robotic pet for dementia", volume: 170, difficulty: 0 },
     { term: "companion robot for elderly", volume: 140, difficulty: 0 },
     { term: "robotic pets for elderly", volume: 390, difficulty: 0 },
+    /* ADDED 8 August 2026. "joy for all companion pet" shares FIVE of ten
+       top-ten domains with this page's primary — joyforall.com, alzstore.com,
+       reddit.com, keyirobot.com, amazon.com — which is the threshold. The Joy
+       For All review that was planned separately is CANCELLED rather than
+       deferred, because building it would put two BotPlanet pages into one
+       result set. This page was already built waiting for the product:
+       "Joy for All and Tombot Jennie are the obvious candidates and neither
+       is in the catalogue." Tombot cannot be sold. Joy For All can.
+       About 6,500/mo of KD 0-10 traffic onto a page currently ranking for 390. */
+    { term: "joy for all companion pet", volume: 1900, difficulty: 0 },
+    { term: "joy for all companion pets", volume: 1900, difficulty: 0 },
+    { term: "robot cat realistic", volume: 1000, difficulty: 10 },
+    { term: "joy for all companion cat", volume: 1000, difficulty: 0 },
+    { term: "joy for all cat", volume: 590, difficulty: 0 },
+    { term: "joy for all dog", volume: 390, difficulty: 0 },
+    { term: "robotic cat for elderly", volume: 320, difficulty: 2 },
+    { term: "joy for all orange tabby cat", volume: 210, difficulty: 0 },
+    { term: "free robotic pets for seniors", volume: 170, difficulty: 0 },
+    { term: "interactive robotic cat toy", volume: 170, difficulty: 0 },
+    { term: "best robotic cat for seniors", volume: 110, difficulty: 1 },
+    { term: "dementia cat toy", volume: 110, difficulty: 0 },
+    { term: "joy for all golden pup", volume: 70, difficulty: 0 },
+    { term: "ageless innovation joy for all", volume: 50, difficulty: 5 },
   ],
   ceded: [
     { term: "robot pet", toPath: "/robots/companion-robots/", why: "The 8,100 head term belongs to the hub. This guide takes the care-setting intent, which is a different reader with a different question." },
     { term: "pet camera robot", toPath: "/robots/pet-camera-robots/", why: "Named here because 'checking in from a distance' is one of the three motivations readers arrive with, and the one a companion robot answers worst. Naming the honest alternative is not targeting its term." },
   ],
-  products: [],
-  productsNote: "Product not sourced. Joy for All and Tombot Jennie are the obvious candidates and neither is in the catalogue. The page names no model at all rather than borrowing somebody else's shortlist.",
+  refused: [
+    /* THE TERM THAT LOOKS OBVIOUS AND IS POISON. "robotic cat" is swamped by
+       two unrelated families: robotic cataract surgery ("is robotic cataract
+       surgery better", "does medicare cover robotic cataract surgery") and
+       "robotic cat litter box", which is BotPlanet's OWN self-cleaning litter
+       box category. Targeting it here would cannibalise a category we already
+       own with a term that mostly means eye surgery. */
+    { term: "robotic cat", volume: 0, why: "Swamped by robotic cataract surgery and by 'robotic cat litter box', which belongs to BotPlanet's own self-cleaning litter box category. Refused outright rather than ceded, because no page of ours should chase it." },
+    { term: "tombot jennie", volume: 2400, why: "The other obvious product for this page and it cannot be bought — Tombot takes waitlist deposits rather than selling. Named in the copy as an honest alternative, targeted nowhere." },
+  ],
+  products: ["joy-for-all-companion-pets"],
+  productsNote: "Amazon US B017JQQ00Q confirmed 8 August 2026 — $159.99, in stock, identity read from the listing. This page was built in August waiting for exactly this product; the separately planned Joy For All review is cancelled, not deferred, because the two share five of ten top-ten domains. Catalogue row and verified specification still to come.",
   linksOut: [
     "/robots/companion-robots/",
     "/robots/pet-camera-robots/",

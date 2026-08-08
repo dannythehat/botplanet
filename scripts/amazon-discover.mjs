@@ -105,6 +105,23 @@ const COMPANION_LEGACY = [
   { slug: "embodied-moxie", name: "Moxie", query: "Moxie robot Embodied", must: ["moxie robot", "embodied moxie"], deny: ["moxie girlz", "doll"] },
 ];
 
+/**
+ * The four the measured research left open on 8 August 2026.
+ *
+ * Miko Mini (5,400/mo, KD 0) and Miko 4 (260/mo, KD 0) came out of the paid
+ * run as a range around the Miko 3 we already confirmed — a review cannot
+ * place a product inside a range it has not established exists. Ropet was
+ * named by searchers themselves in "moflin vs ropet". The Eilik DQ was
+ * completed at position 1 by both Google and Amazon and I could not identify
+ * it, which is the whole reason it is here rather than in a page.
+ */
+const COMPANION_OPEN = [
+  { slug: "miko-mini", name: "Miko Mini", query: "Miko Mini robot for kids", must: ["miko mini"], deny: ["miko 3", "miko 4", "screen protector"] },
+  { slug: "miko-4", name: "Miko 4", query: "Miko 4 AI robot for kids", must: ["miko 4"], deny: ["miko 3", "miko mini", "screen protector"] },
+  { slug: "ropet", name: "Ropet", query: "Ropet AI robot pet companion", must: ["ropet"], deny: ["rope", "ropes"] },
+  { slug: "eilik-dq", name: "Eilik DQ", query: "Eilik DQ robot Energize Lab", must: ["dq"], deny: [] },
+];
+
 /** Which set to run. `--set companion` or default to the lawn seventeen. */
 const SET = process.argv.includes("--set") ? process.argv[process.argv.indexOf("--set") + 1] : "lawn";
 
@@ -193,7 +210,8 @@ function judge(target, results) {
 }
 
 const results = [];
-const ALL = SET === "companion" ? COMPANION : SET === "companion-legacy" ? COMPANION_LEGACY : TARGETS;
+const SETS = { companion: COMPANION, "companion-legacy": COMPANION_LEGACY, "companion-open": COMPANION_OPEN, lawn: TARGETS };
+const ALL = SETS[SET] ?? TARGETS;
 /* `--only slug,slug` re-runs part of a set. The companion run on 8 August 2026
    stopped after eight of nine without writing its JSON, and re-searching the
    seven that had already answered would have burned another rate-limit budget
