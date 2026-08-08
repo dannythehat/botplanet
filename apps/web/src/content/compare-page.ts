@@ -192,3 +192,21 @@ export const COMPARE_PAGES: Record<string, ComparePageContent> = {
 
 export const comparePageFor = (slug: string | undefined): ComparePageContent | undefined =>
   slug ? COMPARE_PAGES[slug] : undefined;
+
+/**
+ * Whether /compare/<slug>/ has earned a place in the index.
+ *
+ * A comparison page is worth crawling when it has something to compare — two
+ * or more published machines — or an argument to read. Four live categories
+ * have no products yet, and their compare pages were shipping a heading, a
+ * standfirst and an empty state: about sixty words, indexable, and listed in
+ * the sitemap. That is a comparison table with nothing in it. It competes with
+ * the category hub, which does have content, and a run of near-identical
+ * sixty-word URLs is how a site teaches a crawler to expect stubs.
+ *
+ * Read from the catalogue rather than a hand-typed flag on each route, so the
+ * page indexes itself the moment a second product is published and nobody has
+ * to remember to flip anything.
+ */
+export const comparePageIsSubstantive = (slug: string, publishedProducts: number): boolean =>
+  publishedProducts > 1 || comparePageFor(slug) !== undefined;

@@ -21,6 +21,7 @@ import Base from "../../layouts/Base.astro";
 import { getDb, schema } from "../../lib/db";
 import { and, eq } from "drizzle-orm";
 import { breadcrumbsFor } from "../../lib/routing";
+import { categoryRoutes } from "../../content/routes";
 import ComparisonTable from "../../components/ComparisonTable.astro";
 import BrandPairs from "../../components/BrandPairs.astro";
 import type { RenderedPair } from "../../components/BrandPairs.astro";
@@ -29,7 +30,7 @@ import BotMatchCta from "../../components/BotMatchCta.astro";
 import FaqList from "../../components/FaqList.astro";
 import ArticleFooter from "../../components/ArticleFooter.astro";
 import { comparisonRows, type ComparableProduct } from "../../content/comparison";
-import { comparePageFor } from "../../content/compare-page";
+import { comparePageFor, comparePageIsSubstantive } from "../../content/compare-page";
 import { botMatchCtaFor } from "../../content/category-sections";
 import { srcsetFor } from "../../lib/srcset";
 import { applyInternalLinks } from "../../lib/internal-linker";
@@ -135,6 +136,12 @@ const pageSchema = article
     ];
 
 const bmCta = products.length > 0 ? botMatchCtaFor(cat.slug) : undefined;
+
+/* Indexability is read from the catalogue, not from the route registry — see
+   comparePageIsSubstantive(). A category with nothing published gets the empty
+   state and a noindex, and starts asking to be indexed on its own the moment a
+   second machine goes live. */
+const substantive = comparePageIsSubstantive(cat.slug, products.length);
 ---
 
 <Base
@@ -145,6 +152,7 @@ const bmCta = products.length > 0 ? botMatchCtaFor(cat.slug) : undefined;
   }
   breadcrumbs={crumbs}
   schema={pageSchema}
+  noindex={!substantive}
 >
   {article ? (
     <header class="bp-cmp-head">
@@ -233,7 +241,11 @@ const bmCta = products.length > 0 ? botMatchCtaFor(cat.slug) : undefined;
   {products.length === 0 && (
     <div class="empty">
       <p class="empty__title">No products published in this category yet</p>
-      <p>Published products appear here automatically.</p>
+      <p>
+        Published products appear here automatically. In the meantime,{" "}
+        <a href={categoryRoutes(cat.slug).hub}>{cat.name.toLowerCase()}</a> has what we know about
+        the category so far.
+      </p>
     </div>
   )}
 

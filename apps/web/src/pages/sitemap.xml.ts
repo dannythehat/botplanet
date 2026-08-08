@@ -6,6 +6,7 @@ import { productPath, sitemapRoutes } from "../content/routes";
 import { liveCategories } from "../content/nav";
 import { RETIRED_SLUGS } from "../content/product-names";
 import { REVIEWS } from "../content/reviews";
+import { comparePageIsSubstantive } from "../content/compare-page";
 
 /**
  * XML sitemap generated from the route registry plus published products.
@@ -32,8 +33,26 @@ export const GET: APIRoute = async ({ locals }) => {
 
   const liveSlugs = new Set(liveCategories().map((c) => c.slug));
 
+  /* How many published machines each category actually holds, which is what
+     decides whether its comparison page is a page. */
+  const published = new Map<string, number>();
+  for (const r of rows) published.set(r.categorySlug, (published.get(r.categorySlug) ?? 0) + 1);
+
   const paths = [
-    ...sitemapRoutes().map((r) => r.path),
+    /* THE COMPARE ROUTES ARE FILTERED AGAINST THE CATALOGUE, not against their
+       own registry flags. A route file cannot know how many products are
+       published, so four live-but-empty categories were listing a comparison
+       page of about sixty words — a table with nothing in it. The same rule
+       runs on the page itself, which noindexes under the same condition, so the
+       two never disagree. Found 8 August 2026 in the sitewide SEO pass. */
+    ...sitemapRoutes()
+      .filter(
+        (r) =>
+          r.section !== "compare" ||
+          !r.category ||
+          comparePageIsSubstantive(r.category, published.get(r.category) ?? 0),
+      )
+      .map((r) => r.path),
     /* A product page only exists where its category page does. A row for a
        category still marked coming_soon would be a URL nobody can navigate to. */
     /* AND ONLY WHERE THE URL IS STILL ITS OWN PAGE. A retired slug is still

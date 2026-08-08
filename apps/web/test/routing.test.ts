@@ -8,6 +8,7 @@ import {
   safeQuery,
 } from "../src/lib/routing";
 import { REDIRECTS, ROUTES, sitemapRoutes } from "../src/content/routes";
+import { COMPARE_PAGES, comparePageIsSubstantive } from "../src/content/compare-page";
 
 describe("normalisePath — locked URL standards", () => {
   it("lowercases, collapses slashes and enforces one trailing slash", () => {
@@ -173,6 +174,35 @@ describe("sitemap inclusion rules", () => {
   it("never lists a path that is itself a redirect source", () => {
     const aliases = new Set(REDIRECTS.map((r) => normalisePath(r.from)));
     for (const r of sitemapRoutes()) expect(aliases.has(r.path)).toBe(false);
+  });
+});
+
+describe("comparePageIsSubstantive", () => {
+  const compareRoutes = () => sitemapRoutes().filter((r) => r.section === "compare" && r.category);
+
+  it("keeps out a comparison of nothing, and of one machine", () => {
+    expect(comparePageIsSubstantive("robot-vacuums", 0)).toBe(false);
+    expect(comparePageIsSubstantive("robot-vacuums", 1)).toBe(false);
+  });
+
+  it("lets a category in as soon as it has two published machines", () => {
+    expect(comparePageIsSubstantive("robot-vacuums", 2)).toBe(true);
+  });
+
+  it("keeps a category with written comparison research whatever the count", () => {
+    for (const slug of Object.keys(COMPARE_PAGES)) {
+      expect(comparePageIsSubstantive(slug, 0)).toBe(true);
+    }
+  });
+
+  /* Every compare route in the registry is category-scoped except the hub, and
+     the hub carries no `category` — so nothing may slip past the filter for
+     want of one. */
+  it("gives every registry compare route but the hub a category to judge", () => {
+    const compare = sitemapRoutes().filter((r) => r.section === "compare");
+    const withoutCategory = compare.filter((r) => !r.category).map((r) => r.path);
+    expect(withoutCategory).toEqual(["/compare/"]);
+    expect(compareRoutes().length).toBeGreaterThan(0);
   });
 });
 
