@@ -1128,11 +1128,22 @@ const COMPANION_REVIEWS: PagePlan[] = [
    Air 2 review. The two share SIX of ten top-ten domains, so the
    Air 2 page carries the old term rather than a redirect.
 
-   THE BIGGEST TERM IN THE CATEGORY IS THE BRAND. "enabot" is
-   9,900/mo at KD 4, against 480 for "pet camera robot", which the
-   hub owns. Its own SERP was NOT measured in this run and it is
-   assigned nowhere until it is. Recorded as an open question
-   rather than quietly given to a page.
+   THE BIGGEST TERM IN THE CATEGORY IS THE BRAND, AND IT NOW HAS
+   ITS OWN PAGE PLANNED. "enabot" is 9,900/mo at KD 4 against 480
+   for "pet camera robot". Its SERP was measured separately on
+   8 August ($0.1356) because assigning the largest term in a
+   category without looking at its results is the guessing this
+   process exists to stop.
+
+   It belongs to neither existing page. Against the hub it shares
+   THREE domains and all three are amazon, instagram and reddit —
+   discount the universal ones, as the hub's own register already
+   does, and the overlap is zero. Against the Air 2 review it
+   shares five, which is the threshold, but four of those five are
+   amazon, instagram, reddit and facebook; only cnet.com is a real
+   publisher. Meaningful overlap of one.
+
+   So it gets a range page. See ENABOT_RANGE below.
    ------------------------------------------------------------------ */
 
 const PETCAM_RESEARCH = "local 2026-08-08 · $0.2230 · seeds/pet-camera-robots-products.json";
@@ -1214,6 +1225,51 @@ const PETCAM_REVIEWS: PagePlan[] = [
     evidence: "The only machine on this site that combines a treat dispenser with a camera that moves — Furbo throws from a shelf, every other Enabot drives without treats. 'enabot rola mini' at 480/KD 10 is carried here because the two are one product family and the Mini is the thing a buyer is choosing against.",
   },
 ];
+
+/* The Enabot range page. RESEARCHED 8 August 2026, not built.
+
+   Every editorial slot on the "enabot" SERP is a review of ONE model — a
+   YouTube review of the Air 2 Plus, a YouTube review of the ROLA Mini, CNET on
+   the Air 2. Nobody has written the page that explains the range: which of the
+   seven machines to buy, and what the $240 between the SE and the Air 2 Plus
+   actually buys. That gap is the page. */
+const ENABOT_RANGE: PagePlan = {
+  path: "/robots/pet-camera-robots/enabot/",
+  category: "pet-camera-robots",
+  type: "review",
+  status: "researched",
+  intent: "Work out which Enabot to buy, out of seven machines whose names do not explain themselves.",
+  primary: { term: "enabot", volume: 9900, difficulty: 4 },
+  secondary: [
+    { term: "enabot robot", volume: 1600, difficulty: 10 },
+    { term: "enabot ebo", volume: 1000, difficulty: 10 },
+    { term: "enabot pet camera", volume: 260, difficulty: 3 },
+    { term: "enabot review", volume: 110, difficulty: 0 },
+    { term: "enabot rola mini", volume: 480, difficulty: 10 },
+    { term: "enabot ebo mini", volume: 10, difficulty: 0 },
+    { term: "enabot app", volume: 50, difficulty: 13 },
+  ],
+  ceded: [
+    { term: "ebo air 2", toPath: "/robots/pet-camera-robots/enabot-ebo-air-2/", why: "The single-model review owns it at 2,400/mo. This page routes to it rather than competing — five shared domains is the threshold, and four of those five are amazon, instagram, reddit and facebook." },
+    { term: "ebo se", toPath: "/robots/pet-camera-robots/enabot-ebo-se/", why: "The SE review owns its own name. This page's job is telling somebody which of the seven to read about, not reviewing each of them again." },
+    { term: "pet camera robot", toPath: "/robots/pet-camera-robots/", why: "The category head term belongs to the hub, and the two SERPs share only amazon, instagram and reddit — discount those and the overlap is zero, which is why this is a separate page rather than a rewrite of the hub." },
+  ],
+  products: [],
+  productsNote: "Reviews the range rather than one machine: SE $119, ROLA Mini $139, Air 2 $149, ROLA PetPal $179, EBO Mini $199, Air 2S $299, Air 2 Plus $359. Three of the seven are catalogued and reviewed; the other four are named and priced here without a catalogue row each, which is the honest shape for a range page.",
+  linksOut: [
+    "/robots/pet-camera-robots/",
+    "/robots/pet-camera-robots/enabot-ebo-air-2/",
+    "/robots/pet-camera-robots/enabot-ebo-se/",
+    "/robots/pet-camera-robots/enabot-rola-petpal/",
+  ],
+  images: [
+    { slot: "hero", shows: "The Enabot range together, several models at one scale", supplied: false },
+    { slot: "figure-1", shows: "Size comparison — the SE against the ROLA PetPal", supplied: false },
+  ],
+  schema: ["Article", "WebPage", "BreadcrumbList"],
+  research: "local 2026-08-08 · $0.1356 · seeds/enabot-brand.json",
+  evidence: "About 12,900/mo across brand terms at KD 4-10, against 480 on the category head term. This is not a category with a leading brand in it, it is a brand with a category attached. Every editorial slot on its SERP reviews a single model; nobody has written the range.",
+};
 
 /* Coding robots. The reverse of every other category: the products are 4x to
    14x the head term, so the reviews are the business and the hub only routes. */
@@ -1491,6 +1547,7 @@ export const PAGE_PLAN: PagePlan[] = [
   ...LITTER_REVIEWS,
   ...COMPANION_REVIEWS,
   ...PETCAM_REVIEWS,
+  ENABOT_RANGE,
   ...CODING_REVIEWS,
   ...GRILL_REVIEWS,
   ...LAWN_REVIEWS,
