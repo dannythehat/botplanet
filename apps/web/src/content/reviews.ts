@@ -874,6 +874,14 @@ export const REVIEWS: Record<string, ReviewContent> = {
         teaser: "Six gaps, and the reason there are more than usual.",
       },
     ],
+    video: {
+      url: "https://youtu.be/31780W8v1Tc",
+      title: "Maytronics Proteus DX4 Robot Pool Cleaner Honest Review - Before You Buy!!!",
+      channel: "Rubintech",
+      source: "independent",
+      note:
+        "Independent, not Maytronics'. A before-you-buy review rather than an unboxing, which suits a machine whose argument is reliability rather than features.",
+    },
     facts: [
       { label: "Power", value: "Corded mains" },
       { label: "Cleans", value: "Floor, walls, ledges" },
@@ -1019,6 +1027,14 @@ export const REVIEWS: Record<string, ReviewContent> = {
         teaser: "Five gaps, including the machine's own weight and the 40-sensor figure.",
       },
     ],
+    video: {
+      url: "https://youtu.be/6sjzrLttXR0",
+      title: "Aiper Scuba X1 Pro Max Review: The $2,000+ Pool Robot That STILL Falls Short",
+      channel: "The Pool Nerd",
+      source: "independent",
+      note:
+        "Independent, negative, and linked on purpose. This is one of the most expensive machines we list and the strongest published argument against it should be one click away rather than buried. Nothing in it has been used as evidence for a claim on this page.",
+    },
     facts: [
       { label: "Cleans", value: "Surface to floor" },
       { label: "Suction", value: "8,500 GPH" },
@@ -1169,6 +1185,14 @@ export const REVIEWS: Record<string, ReviewContent> = {
         teaser: "Six gaps, most of them because Aiper publishes almost nothing.",
       },
     ],
+    video: {
+      url: "https://youtu.be/LcwUL8iIojI",
+      title: "Back and (Not) Better than Ever? Aiper Seagull SE Robotic Pool Cleaner Review",
+      channel: "PoolPad",
+      source: "independent",
+      note:
+        "An independent review, and a sceptical one. It makes the point our own page does: this is a floor-only machine with no rotating brush, and the review is worth watching precisely because it does not assume the newer model is the better one.",
+    },
     facts: [
       { label: "Power", value: "Cordless battery" },
       { label: "Cleans", value: "Floor only" },
@@ -1306,6 +1330,14 @@ export const REVIEWS: Record<string, ReviewContent> = {
         teaser: "Six gaps, including which of Aiper's two runtime figures is real.",
       },
     ],
+    video: {
+      url: "https://youtu.be/BPgwv0olFKI",
+      title: "Aiper Scuba S1 Review: The TRUTH After 30 Days | 5 Point Test & Final Score",
+      channel: "Clear Water Chronicles",
+      source: "independent",
+      note:
+        "Independent, not ours and not Aiper's. Thirty days and a five-point test rather than a first impression, which on a cordless machine is the only kind of review worth reading — the battery is the specification that decays.",
+    },
     facts: [
       { label: "Cleans", value: "Floor, walls, waterline" },
       { label: "Power", value: "Cordless battery" },
@@ -1607,6 +1639,14 @@ export const REVIEWS: Record<string, ReviewContent> = {
         teaser: "Six gaps, including three numbers printed on our own artwork.",
       },
     ],
+    video: {
+      url: "https://youtu.be/aJMA-8lp73c",
+      title: "Pool Cleaner Suction Power Rankings — WYBOT C1 Tested",
+      channel: "Clear Water Chronicles",
+      source: "independent",
+      note:
+        "Independent, and it measures rather than describes — suction ranked against other machines. Not our testing, and the closest thing to a controlled comparison we could find for this model.",
+    },
     facts: [
       { label: "Cleans", value: "Floor, walls, waterline" },
       { label: "Power", value: "Cordless battery" },
@@ -1749,6 +1789,14 @@ export const REVIEWS: Record<string, ReviewContent> = {
         teaser: "Six gaps, including a live Amazon price and what clarification does to your chemistry.",
       },
     ],
+    video: {
+      url: "https://youtu.be/CicRheJU5GI",
+      title: "I Tested the Beatbot AquaSense 2 Ultra — Here's Why It's Not Worth $3,000",
+      channel: "The Pool Nerd",
+      source: "independent",
+      note:
+        "An independent negative review, deliberately chosen. This is the most expensive machine on the site and the case against it deserves to be one click away rather than buried. Watch it before you spend, not after.",
+    },
     facts: [
       { label: "Cleans", value: "Floor, walls, waterline, surface" },
       { label: "Power", value: "Cordless battery" },
@@ -1895,6 +1943,14 @@ export const REVIEWS: Record<string, ReviewContent> = {
       "Windows a cable will not reach: stairwell landings, conservatories, rooms where the nearest socket is behind furniture.",
     notIdealFor:
       "Every window you own has a socket under it, your panes are small, or your glass is sloped.",
+    video: {
+      url: "https://youtu.be/XYQdVSKq8no",
+      title: "Can a robot clean my windows? I TESTED the Ecovacs Winbot W2 PRO OMNI",
+      channel: "Tech It Before You Wreck It",
+      source: "independent",
+      note:
+        "Independent, not ECOVACS'. It runs the machine on real domestic glass rather than a showroom pane, and shows the station in use, which is the whole reason to buy this model over the plain W2 PRO.",
+    },
     facts: [
       { label: "Power", value: "Cordless via station" },
       { label: "Max suction", value: "5,500 Pa ±500" },
@@ -2250,6 +2306,14 @@ export const REVIEWS: Record<string, ReviewContent> = {
       "A house with enough glass that refilling is the part you resent.",
     notIdealFor:
       "Anyone choosing on documented specifications, anyone with sloped glass, or a first-time buyer who wants to compare properly.",
+    video: {
+      url: "https://youtu.be/0YXMTqhWIbc",
+      title: "Hobot 2S Review and Test | Top Robotic Window Cleaner",
+      channel: "Little Robot Shop",
+      source: "independent",
+      note:
+        "Independent, not HOBOT's. It covers the remote, the app and an actual test run — useful because HOBOT publishes no suction figure and watching it hold glass is the only evidence available.",
+    },
     facts: [
       { label: "Spray", value: "Ultrasonic" },
       { label: "Water tanks", value: "2, replaceable" },
@@ -2543,6 +2607,14 @@ export const REVIEWS: Record<string, ReviewContent> = {
       "A child roughly five to ten who will talk to it, in a house with reliable Wi-Fi and a parent willing to use the companion app.",
     notIdealFor:
       "Under-fives, anyone over about ten, a home without Wi-Fi, or a buyer who wants everything the marketing shows without a recurring charge.",
+    video: {
+      url: "https://youtu.be/V845fMB5jhE",
+      title: "Miko 3: Best Robot For Kids? (FULL REVIEW)",
+      channel: "Eric's Tech World",
+      source: "independent",
+      note:
+        "Independent, not Miko's. It tests the AI conversation and the content platform, which is where this product either earns its subscription or does not.",
+    },
     facts: [
       { label: "Age range", value: "5 to 10" },
       { label: "Battery", value: "6–7 h play, 4 h charge" },
@@ -2624,6 +2696,14 @@ export const REVIEWS: Record<string, ReviewContent> = {
       "Someone who wants a desk robot with genuine personality and has read the subscription terms before ordering rather than after.",
     notIdealFor:
       "Anyone who wants a one-off purchase, anyone who needs it to work reliably for years, or anyone buying on the strength of the original 2018 reviews.",
+    video: {
+      url: "https://youtu.be/L_53CyT-eAc",
+      title: "Vector 2.0 Review! Your Smart AI Robot Sidekick",
+      channel: "Bens Stuff",
+      source: "independent",
+      note:
+        "An independent review, not Digital Dream Labs'. It shows the arm and the cube working, which is the thing Vector has that nothing else in this category does.",
+    },
     facts: [
       { label: "Sold by", value: "ANKI, LLC" },
       { label: "Subscription", value: "$11.99/mo or $99.99/yr" },
@@ -2690,6 +2770,14 @@ export const REVIEWS: Record<string, ReviewContent> = {
       "A desk, a bedroom shelf, or a gift for someone who wants something with character and does not want an account, an app subscription or a microphone in the room.",
     notIdealFor:
       "Anyone expecting conversation, anyone who wants it to run all day, or anyone who needs more than 90 days of warranty cover at this price.",
+    video: {
+      url: "https://youtu.be/4GoQHnFB8Sc",
+      title: "Eilik Desktop Robot: CUTE OR SCARY? (Unbox & Review)",
+      channel: "Eric's Tech World",
+      source: "independent",
+      note:
+        "Independent, not ours. The title asks the right question: Eilik's face is a screen and some people find that endearing and some find it unsettling. Watch it before you spend $139.99, because that reaction is not something a specification can tell you.",
+    },
     facts: [
       { label: "Battery", value: "1.5 h use, 1 h charge" },
       { label: "Warranty", value: "90 days" },
@@ -2768,6 +2856,14 @@ export const REVIEWS: Record<string, ReviewContent> = {
       "Someone who wants the closest thing to a robot pet that exists, uses it in sessions rather than all day, and will get value from the camera as well as the character.",
     notIdealFor:
       "Anyone wanting constant presence, anyone on a budget, or anyone buying primarily to watch a pet — a dedicated pet camera does that job for a fraction of this.",
+    video: {
+      url: "https://youtu.be/ELE_sfFj3zU",
+      title: "Loona Robot: Still Worth Buying In 2026? (UPDATED REVIEW)",
+      channel: "Eric's Tech World",
+      source: "independent",
+      note:
+        "Independent, and it asks the only question that matters at $499 — whether the thing is still in use rather than whether it is impressive on day one. Updated rather than a launch review.",
+    },
     facts: [
       { label: "Battery", value: "1.5 h play, 2.5 h charge" },
       { label: "Camera", value: "HD RGB — doubles as home monitor" },
@@ -2839,6 +2935,14 @@ export const REVIEWS: Record<string, ReviewContent> = {
       "Someone who wants the original, is willing to order from Living.AI directly, and will check what arrives against the real specification.",
     notIdealFor:
       "Anyone wanting it tomorrow from a familiar retailer with a familiar returns process. That is a different robot, and there are two good ones.",
+    video: {
+      url: "https://youtu.be/sXz2JPeYBCw",
+      title: "EMO Robot 1 Year Review - Desktop Pet",
+      channel: "The Nice City",
+      source: "independent",
+      note:
+        "A year of ownership, independent and unaffiliated. This page exists because EMO is the term everybody searches and nobody here can sell it — so the most useful thing we can give you is somebody who has lived with one for twelve months rather than twelve minutes.",
+    },
     facts: [
       { label: "On Amazon US", value: "No — copies only" },
       { label: "Sold by", value: "Living.AI, direct" },
@@ -2905,6 +3009,14 @@ export const REVIEWS: Record<string, ReviewContent> = {
       "Someone who wants a warm, furry companion, cannot have an animal because of allergies or a tenancy, and is willing to spend three weeks earning the conversation.",
     notIdealFor:
       "Anyone who wants it talking on day one, anyone who wants something with a long track record, or anyone who would resent buying fur separately.",
+    video: {
+      url: "https://youtu.be/Hl_SFV3NNLw",
+      title: "Ropet Is FINALLY Here! | Full Pet Robot Test + Review",
+      channel: "Eric's Tech World",
+      source: "independent",
+      note:
+        "Independent, not Ropet's. A shipped-unit test rather than Kickstarter footage, which matters on a product this new — most of what is online for Ropet is still the campaign film.",
+    },
     facts: [
       { label: "AI conversation", value: "After ~20–25 days" },
       { label: "Fur", value: "Removable and swappable" },
@@ -3124,6 +3236,14 @@ export const REVIEWS: Record<string, ReviewContent> = {
       "A dog you want to reward rather than just watch, on one floor, without a monthly fee.",
     notIdealFor:
       "Cats, mostly. And anyone who wants the smallest possible robot — this one is twice the size of the Air 2.",
+    video: {
+      url: "https://youtu.be/PDVgZGxRfXg",
+      title: "2024 Enabot ROLA PetPal Unboxing, Set Up, Testing and Full App Tutorial",
+      channel: "BearBear Cammy",
+      source: "independent",
+      note:
+        "Independent, and the reason to watch it is the treat dispenser working — the one thing this machine has that no other robot in the category does. It is a tutorial as much as a review.",
+    },
     facts: [
       { label: "Treat dispenser", value: "Built in" },
       { label: "Camera", value: "2.5K, night vision" },
@@ -3495,6 +3615,14 @@ export const REVIEWS: Record<string, ReviewContent> = {
       "An older person, especially one living with memory loss, and the relative buying from a distance who will not be there to fix anything.",
     notIdealFor:
       "Anyone who would find a pretend cat patronising — a real reaction worth asking about first — and anyone expecting conversation or a personality that develops.",
+    video: {
+      url: "https://youtu.be/TnO9hDWjUYM",
+      title: "Joy for All Companion Pets Review (Tabby Cat): Therapeutic Pet for People Living With Dementia",
+      channel: "Bambu Care",
+      source: "independent",
+      note:
+        "Independent, and framed for the reader this product is actually sold to. It is a dementia-care review rather than a gadget review, which is the right lens — and it is somebody else's assessment, not ours, and not clinical evidence.",
+    },
     facts: [
       { label: "Power", value: "4 x C batteries, included" },
       { label: "App", value: "None" },
