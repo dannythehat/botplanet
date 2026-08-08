@@ -959,6 +959,8 @@ const COMPANION_REVIEWS: PagePlan[] = [
   {
     ...companionReviewShell("vector 2.0"),
     path: "/robots/companion-robots/vector-2/",
+    /* BUILT 8 August 2026, third in the category. */
+    status: "built" as const,
     primary: { term: "vector robot", volume: 9900, difficulty: 23 },
     secondary: [
       { term: "vector 2.0", volume: 1300, difficulty: 0 },
@@ -982,8 +984,8 @@ const COMPANION_REVIEWS: PagePlan[] = [
     refused: [
       { term: "cozmo robot", volume: 9900, why: "9,900/mo and the only Amazon US listing is a $19 battery for it. Answered as a comparison section on this page, because 'vector robot vs cozmo' ranks and this is the machine that wins it by default." },
     ],
-    products: [],
-    productsNote: "Amazon US B07G3ZNK4Y confirmed 8 August 2026 — $199.99, in stock. Anki was liquidated in 2019 and Digital Dream Labs holds the line; the service history is the page, not a footnote.",
+    products: ["vector-2"],
+    productsNote: "Catalogued as prod-vector-2, 8 August 2026. Amazon US B07G3ZNK4Y, sold by the Digital Dream Labs Store, whose listing title states 'ChatGPT Subscription Required' outright. Subscription pricing — $11.99/month, $99.99/year — read from anki.bot the same day. The listing price moved from $199.99 to $184 within one morning, which is why none is recorded here.",
     evidence: "9,900/mo. 'vector robot' shares SIX of ten domains with 'is vector robot still supported' and FIVE with 'vector robot price' — one page takes all three. Every Vector SERP's PAA asks whether it is discontinued or still works.",
   },
   {

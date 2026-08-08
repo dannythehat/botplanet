@@ -389,6 +389,13 @@ const COMPANION_ASINS: WindowDestination[] = [
     evidence:
       "Title: 'Miko 3 AI Robot for Kids - Smart Educational & STEAM Learning Robot with Interactive Apps, Games, Stories & Activities for Girls & Boys Ages 5-10 | Red'. Served ASIN equals the one requested; availability reads 'In Stock' at $299 on 8 August 2026. A VARIANT FAMILY, AND THE SECOND ASIN WAS NEARLY RECORDED AS A DUPLICATE: B0GV2L2PDL carries a byte-identical title ending '| Blue', serves its own ASIN, and is also in stock at $299. Two listings for one machine in two colours, not two machines and not a stale row. Red is the one held; the served-ASIN equality check is what stops Blue's data being accepted in its place. Miko also sells a Mini and a Max, and neither name appears anywhere in this listing.",
   },
+  {
+    productId: "prod-vector-2",
+    asin: "B07G3ZNK4Y",
+    exactModel: "Anki Vector 2.0 (Black)",
+    evidence:
+      "Title: 'Anki Vector 2.0 AI ChatGPT Connected Robot Companion - Smart Autonomous Home Robot with Face Recognition and Voice Conversations - ChatGPT Subscription Required (Black)'. Sold by the Digital Dream Labs Store; 4.0 stars from 11,120 ratings. Served ASIN equals the one requested. Details table gives Item Dimensions 3.93 x 2.36 x 2.73 inches and Power Source battery. THE LISTING STATES THE SUBSCRIPTION REQUIREMENT IN ITS OWN TITLE, which is unusually honest for this category and is the fact the review is built on. PRICE MOVED WHILE THIS WAS BEING BUILT: $199.99 read at 02:07 and $184 at 03:15 on 8 August 2026, both from this ASIN. Neither is published — it is the clearest demonstration on this site of why a price comes from the refresh service with the date it was read rather than from a note somebody typed once.",
+  },
 ];
 
 for (const c of COMPANION_ASINS) {
@@ -602,6 +609,7 @@ export const REDIRECT_KEYS: Record<string, string> = {
      database rather than a naming convention somebody hoped was followed. */
   "prod-moflin": "comp-casio-moflin-amazon",
   "prod-miko-3": "comp-miko-3-amazon",
+  "prod-vector-2": "comp-anki-vector2-amazon",
 };
 
 /* ------------------------------------------------------------------ */

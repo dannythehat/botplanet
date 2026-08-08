@@ -2408,6 +2408,75 @@ export const REVIEWS: Record<string, ReviewContent> = {
       "Specifications and subscription tiers read from miko.ai/products/miko-3 on 8 August 2026. Miko sells the 3 in Red and Blue as separate Amazon listings at the same price; our buy button points at the Red. The Mini and the Max are different machines, not colours.",
     lastReviewed: "2026-08-08",
   },
+
+  /* Vector 2.0. The measured SERPs put ten first-position terms behind this
+     product and every one of them is a doubt — still supported, still works,
+     still being made, why discontinued, problems, alternative. The PAA on
+     three separate Vector SERPs asks whether it is discontinued and whether it
+     needs a subscription.
+
+     So the specification table below leads with the company and the
+     subscription rather than the hardware. Subscription pricing read from
+     anki.bot/pages/vector-subscription on 8 August 2026; dimensions and the
+     Wi-Fi restriction from the Amazon listing the same day. */
+  "vector-2": {
+    slug: "vector-2",
+    categorySlug: "companion-robots",
+    eyebrow: "Companion robot review",
+    title: "Anki Vector 2.0 review",
+    seoTitle: "Vector Robot Review — Is It Still Supported in 2026?",
+    metaDescription:
+      "Anki went under in 2019 and Vector is still on sale. Who owns it now, what the " +
+      "$11.99 subscription covers, and whether the robot works without one.",
+    verdict:
+      "A palm-sized robot with more character than anything else at the price, sold by the third company to own it, and dependent on a subscription that costs more per year than some of its competitors cost outright. Buy it for what it is now, not for what Anki promised in 2018.",
+    bestFor:
+      "Someone who wants a desk robot with genuine personality and has read the subscription terms before ordering rather than after.",
+    notIdealFor:
+      "Anyone who wants a one-off purchase, anyone who needs it to work reliably for years, or anyone buying on the strength of the original 2018 reviews.",
+    facts: [
+      { label: "Sold by", value: "ANKI, LLC" },
+      { label: "Subscription", value: "$11.99/mo or $99.99/yr" },
+      { label: "Wi-Fi", value: "2.4 GHz only" },
+      { label: "Size", value: "3.93 × 2.36 × 2.73 in" },
+    ],
+    specGroups: [
+      {
+        heading: "Who makes it now",
+        rows: [
+          { label: "Original maker", value: "Anki Inc. — ceased trading 2019" },
+          { label: "Sold today by", value: "ANKI, LLC, formerly Digital Dream Labs" },
+          { label: "Amazon storefront", value: "Digital Dream Labs Store" },
+          { label: "Developer route", value: "OSKR — Anki's open-source path for Vector" },
+        ],
+      },
+      {
+        heading: "The subscription",
+        rows: [
+          { label: "Required for cloud features", value: "Yes — the Amazon listing states it in its own title" },
+          { label: "Monthly", value: "$11.99" },
+          { label: "Annual", value: "$99.99" },
+          { label: "Managed through", value: "Stratus, keyed to the robot's 8-character serial" },
+          { label: "Activation delay", value: "Up to 36 hours" },
+          { label: "What works unsubscribed", value: "Anki publishes no feature-by-feature comparison" },
+        ],
+      },
+      {
+        heading: "Hardware",
+        rows: [
+          { label: "Size", value: "3.93 × 2.36 × 2.73 in" },
+          { label: "Weight", value: "5.6 oz (listing figure)" },
+          { label: "Power", value: "Battery, returns to its own charger" },
+          { label: "Wi-Fi", value: "2.4 GHz only — it will not see a 5 GHz network" },
+          { label: "Recognition", value: "Face and voice" },
+          { label: "Setup", value: "Chrome web setup, or the iOS and Android apps" },
+        ],
+      },
+    ],
+    skuNote:
+      "Subscription pricing and terms read from anki.bot/pages/vector-subscription on 8 August 2026; dimensions, Wi-Fi restriction and seller from the Amazon listing the same day. The listing price moved from $199.99 to $184 within one morning, which is why no price is quoted here — the figure on the page comes from the refresh service with the date it was read.",
+    lastReviewed: "2026-08-08",
+  },
 };
 
 export function reviewFor(slug: string | undefined): ReviewContent | undefined {

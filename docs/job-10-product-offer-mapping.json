@@ -1,6 +1,6 @@
 {
   "generatedFor": "2026-07-31",
-  "launchProducts": 25,
+  "launchProducts": 26,
   "rows": [
     {
       "productId": "prod-beatbot-aquasense-2-ultra",
@@ -779,6 +779,38 @@
       "freshness": "indicative",
       "affiliateProgramme": "prog-amazon-us",
       "goPath": "/go/comp-miko-3-amazon",
+      "schemaEligible": false,
+      "blockers": [
+        "no current price from an approved source",
+        "stock state unknown",
+        "not eligible for Offer structured data"
+      ],
+      "nextAction": "Obtain price and availability through the Amazon Creators API so the offer can carry a current price and enter Offer schema."
+    },
+    {
+      "productId": "prod-vector-2",
+      "canonicalUrl": "https://botplanet.io/robots/robotic-pool-cleaners/vector-2/",
+      "verifiedOffers": 1,
+      "preferredOfferId": "offer-prod-vector-2-ret-amazon",
+      "preferredOfferAudit": [
+        "1 offer(s) exist for this product",
+        "1 from an approved retailer",
+        "ranked by exact-match confidence, then stock, then delivered price",
+        "chosen: offer-prod-vector-2-ret-amazon (verified_exact)"
+      ],
+      "commissionUsedAsTieBreak": false,
+      "retailer": "ret-amazon",
+      "exactProductIdentifier": "B07G3ZNK4Y",
+      "identifierKind": "asin",
+      "market": "us",
+      "priceState": "not_published",
+      "stockState": "unknown",
+      "deliveryState": "not_exposed_by_source",
+      "warrantyRoute": "Manufacturer warranty term not confirmed",
+      "lastChecked": "2026-07-31",
+      "freshness": "indicative",
+      "affiliateProgramme": "prog-amazon-us",
+      "goPath": "/go/comp-anki-vector2-amazon",
       "schemaEligible": false,
       "blockers": [
         "no current price from an approved source",

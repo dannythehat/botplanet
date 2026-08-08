@@ -50,6 +50,11 @@ const offerSeeds: CompanionOfferSeed[] = [
      is in fact the second colour. Recording the wrong one would not have
      broken anything visibly, which is exactly why it was worth reading both. */
   { id: "off-miko-3-amazon", productId: "prod-miko-3", asin: "B0GV37M678", redirectKey: "comp-miko-3-amazon", snapshotMinor: 29900 },
+  /* 18400 is the figure showing at 03:15 on 8 August 2026. The same ASIN read
+     $199.99 an hour earlier the same morning. Both are honest reads and
+     neither is published — snapshot plus indicative cannot pass the freshness
+     gate, which is the whole reason this column is safe to hold at all. */
+  { id: "off-vector-2-amazon", productId: "prod-vector-2", asin: "B07G3ZNK4Y", redirectKey: "comp-anki-vector2-amazon", snapshotMinor: 18400 },
 ];
 
 export const offerRows: (typeof offers.$inferInsert)[] = offerSeeds.map((o) => ({

@@ -712,6 +712,37 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
     ],
     researchedOn: "2026-08-08",
   },
+  /* Vector 2.0. 9,900/mo, and the SERP evidence says the page is about the
+     company rather than the robot: "vector robot" shares SIX of ten domains
+     with "is vector robot still supported" and FIVE with "vector robot price",
+     so one page takes all three.
+
+     "cozmo robot" is REFUSED rather than ceded — 9,900/mo whose only Amazon US
+     listing is a $19 battery. Answered as a comparison section here because
+     "vector robot vs cozmo" ranks, and this is the machine that wins it by
+     default. */
+  {
+    path: "/robots/companion-robots/vector-2/",
+    primary: { term: "vector robot", volume: 9900, difficulty: 23, mustAppear: true },
+    secondary: [
+      { term: "anki vector", volume: 1000, difficulty: 23, mustAppear: true },
+      { term: "vector 2.0", volume: 1300, difficulty: 0, mustAppear: true },
+      { term: "digital dream labs", volume: 30, difficulty: 19, mustAppear: true },
+      { term: "vector robot vs cozmo", volume: 20, difficulty: 3, mustAppear: false },
+      { term: "subscription", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "discontinued", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "still work", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "OSKR", volume: 0, difficulty: 0, mustAppear: true },
+    ],
+    cededTo: [
+      {
+        term: "robot pet",
+        path: "/robots/companion-robots/",
+        why: "The 8,100 head term belongs to the hub. Vector is a gadget with character rather than a robot pet, and the review says so plainly while pointing the reader who wanted a pet at Moflin instead.",
+      },
+    ],
+    researchedOn: "2026-08-08",
+  },
   {
     path: "/robots/window-cleaning-robots/ecovacs-winbot-w2-pro-omni/",
     primary: { term: "winbot w2 pro omni", volume: 1120, difficulty: 0, mustAppear: true },
