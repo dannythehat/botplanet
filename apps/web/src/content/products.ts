@@ -835,6 +835,7 @@ export const PRODUCT_ID: Record<string, string> = {
   "moflin": "prod-moflin",
   "miko-3": "prod-miko-3",
   "vector-2": "prod-vector-2",
+  "eilik": "prod-eilik",
 };
 
 /** Editorial records with the stable productId attached, keyed by slug (route id). */

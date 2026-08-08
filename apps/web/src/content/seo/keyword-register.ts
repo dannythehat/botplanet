@@ -743,6 +743,40 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
     ],
     researchedOn: "2026-08-08",
   },
+  /* Eilik. 8,100/mo at KD 29 — the hardest primary in this category, and the
+     page carries "eilik robot review" and "eilik price" with it: both share
+     FIVE of ten top-ten domains with the head term.
+
+     "eilik ai station" is a secondary rather than its own page. It measures
+     260/mo at KD 0 and it is the answer to the biggest gap in the base
+     product, so it belongs in the review that raises the gap. */
+  {
+    path: "/robots/companion-robots/eilik/",
+    primary: { term: "eilik robot", volume: 8100, difficulty: 29, mustAppear: true },
+    secondary: [
+      { term: "eilik", volume: 3600, difficulty: 29, mustAppear: true },
+      { term: "energize lab", volume: 590, difficulty: 34, mustAppear: true },
+      { term: "eilik ai station", volume: 260, difficulty: 0, mustAppear: true },
+      { term: "eilik price", volume: 30, difficulty: 0, mustAppear: false },
+      { term: "two eilik robots", volume: 10, difficulty: 0, mustAppear: true },
+      { term: "battery", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "warranty", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "Eiliko", volume: 0, difficulty: 0, mustAppear: true },
+    ],
+    cededTo: [
+      {
+        term: "emo robot",
+        path: "/robots/companion-robots/living-ai-emo/",
+        why: "Google's own answer box on this SERP asks which is better, Eilik or Emo, so the comparison is answered here — but the 18,100/mo term belongs to the EMO page rather than being fought over by two of ours.",
+      },
+      {
+        term: "robot pet",
+        path: "/robots/companion-robots/",
+        why: "The 8,100 head term belongs to the hub. Eilik is expressive and not warm, and this review says so plainly while sending the reader who wanted a pet to Moflin instead.",
+      },
+    ],
+    researchedOn: "2026-08-08",
+  },
   {
     path: "/robots/window-cleaning-robots/ecovacs-winbot-w2-pro-omni/",
     primary: { term: "winbot w2 pro omni", volume: 1120, difficulty: 0, mustAppear: true },

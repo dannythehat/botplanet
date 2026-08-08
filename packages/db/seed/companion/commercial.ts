@@ -55,6 +55,13 @@ const offerSeeds: CompanionOfferSeed[] = [
      neither is published — snapshot plus indicative cannot pass the freshness
      gate, which is the whole reason this column is safe to hold at all. */
   { id: "off-vector-2-amazon", productId: "prod-vector-2", asin: "B07G3ZNK4Y", redirectKey: "comp-anki-vector2-amazon", snapshotMinor: 18400 },
+  /* The BASE Eilik. Energize Lab sells five things in this range and the DQ at
+     $199.98 has its own confirmed ASIN (B0DBVM5BCY) which is deliberately NOT
+     seeded: it is the same hardware in a desert colourway with an exclusive
+     game, and giving one product row two Amazon offers would print the DQ's
+     price under the Eilik's name. If the DQ is ever sold here it gets its own
+     catalogue row. */
+  { id: "off-eilik-amazon", productId: "prod-eilik", asin: "B0C2C9LJNQ", redirectKey: "comp-eilik-amazon", snapshotMinor: 13999 },
 ];
 
 export const offerRows: (typeof offers.$inferInsert)[] = offerSeeds.map((o) => ({

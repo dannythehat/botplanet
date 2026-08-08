@@ -390,6 +390,13 @@ const COMPANION_ASINS: WindowDestination[] = [
       "Title: 'Miko 3 AI Robot for Kids - Smart Educational & STEAM Learning Robot with Interactive Apps, Games, Stories & Activities for Girls & Boys Ages 5-10 | Red'. Served ASIN equals the one requested; availability reads 'In Stock' at $299 on 8 August 2026. A VARIANT FAMILY, AND THE SECOND ASIN WAS NEARLY RECORDED AS A DUPLICATE: B0GV2L2PDL carries a byte-identical title ending '| Blue', serves its own ASIN, and is also in stock at $299. Two listings for one machine in two colours, not two machines and not a stale row. Red is the one held; the served-ASIN equality check is what stops Blue's data being accepted in its place. Miko also sells a Mini and a Max, and neither name appears anywhere in this listing.",
   },
   {
+    productId: "prod-eilik",
+    asin: "B0C2C9LJNQ",
+    exactModel: "Eilik (Energize Lab)",
+    evidence:
+      "Title: 'ENERGIZE LAB Eilik - Your Desktop Companion Full of Personality with Expressive Animations & Reactions, Touch-Response...'. Served ASIN equals the one requested; $139.99, in stock, 8 August 2026 — the same figure Energize Lab's own store shows. THE RANGE IS THE TRAP HERE, not a sibling model number. Energize Lab sells Eilik ($139.99), Eilik DQ ($199.98), the Eilik AI Station ($99), Panxer ($119.90) and Eiliko ($59.90), and Amazon lists most of them under the same brand with near-identical artwork. This ASIN is the base Eilik: the title names no DQ, no Station and no Panxer, and Eiliko is a different product with its own name.",
+  },
+  {
     productId: "prod-vector-2",
     asin: "B07G3ZNK4Y",
     exactModel: "Anki Vector 2.0 (Black)",
@@ -610,6 +617,7 @@ export const REDIRECT_KEYS: Record<string, string> = {
   "prod-moflin": "comp-casio-moflin-amazon",
   "prod-miko-3": "comp-miko-3-amazon",
   "prod-vector-2": "comp-anki-vector2-amazon",
+  "prod-eilik": "comp-eilik-amazon",
 };
 
 /* ------------------------------------------------------------------ */

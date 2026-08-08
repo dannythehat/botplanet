@@ -991,6 +991,8 @@ const COMPANION_REVIEWS: PagePlan[] = [
   {
     ...companionReviewShell("eilik"),
     path: "/robots/companion-robots/eilik/",
+    /* BUILT 8 August 2026, fourth in the category. */
+    status: "built" as const,
     primary: { term: "eilik robot", volume: 8100, difficulty: 29 },
     secondary: [
       { term: "eilik", volume: 3600, difficulty: 29 },
@@ -1011,8 +1013,8 @@ const COMPANION_REVIEWS: PagePlan[] = [
     ceded: [
       { term: "emo robot", toPath: "/robots/companion-robots/living-ai-emo/", why: "Google's own PAA on this SERP asks 'Which is better, Eilik or Emo?', so the comparison has to be answered here — but the 18,100/mo term belongs to the EMO page, which is the only page that should rank for it." },
     ],
-    products: [],
-    productsNote: "TWO offers confirmed 8 August 2026: Eilik B0C2C9LJNQ at $139.99 and Eilik DQ B0DBVM5BCY at $199.98. The AI Station (B0FL2D6W4R) and Panxer (B0DL6B8Q4D) are also live and unpriced here.",
+    products: ["eilik"],
+    productsNote: "Catalogued as prod-eilik, 8 August 2026 — the BASE Eilik, B0C2C9LJNQ at $139.99, matching Energize Lab's own price. The DQ (B0DBVM5BCY, $199.98) turned out to be the Desert Quester: identical hardware in a desert colourway with an exclusive game and a weapon kit. It is described on the page and deliberately NOT seeded as a second offer, because one product row carrying two Amazon offers would print the DQ's price under the Eilik's name.",
     evidence: "8,100/mo. Shares FIVE of ten domains with both 'eilik robot review' and 'eilik price', so one page takes all three. Eilik is a RANGE — DQ, AI Station, Panxer, Eiliko — and both engines complete the head term with seven colour variants at position 1.",
   },
   {

@@ -2477,6 +2477,82 @@ export const REVIEWS: Record<string, ReviewContent> = {
       "Subscription pricing and terms read from anki.bot/pages/vector-subscription on 8 August 2026; dimensions, Wi-Fi restriction and seller from the Amazon listing the same day. The listing price moved from $199.99 to $184 within one morning, which is why no price is quoted here — the figure on the page comes from the refresh service with the date it was read.",
     lastReviewed: "2026-08-08",
   },
+
+  /* Eilik. Energize Lab publishes a proper anatomy table, so every hardware
+     figure below is theirs rather than a retailer's.
+
+     TWO NUMBERS DECIDE THIS PRODUCT and neither appears in the marketing: the
+     battery runs 1.5 hours, and the warranty is 90 days against a year from
+     Casio and Miko. Both are on the maker's own page and both are in the facts
+     strip rather than buried in a table. */
+  eilik: {
+    slug: "eilik",
+    categorySlug: "companion-robots",
+    eyebrow: "Companion robot review",
+    title: "Eilik review",
+    seoTitle: "Eilik Review — The 1.5-Hour Battery Nobody Mentions",
+    metaDescription:
+      "A $139.99 desk robot with real character, a 90-day warranty and 90 minutes of " +
+      "battery. What Eilik does, what the DQ adds, and whether two is better.",
+    verdict:
+      "The most personality per dollar in this category and the shortest battery life in it. Eilik is a desk toy that reacts to being touched and to another Eilik, with no subscription and no cloud account, and it runs for about ninety minutes between charges.",
+    bestFor:
+      "A desk, a bedroom shelf, or a gift for someone who wants something with character and does not want an account, an app subscription or a microphone in the room.",
+    notIdealFor:
+      "Anyone expecting conversation, anyone who wants it to run all day, or anyone who needs more than 90 days of warranty cover at this price.",
+    facts: [
+      { label: "Battery", value: "1.5 h use, 1 h charge" },
+      { label: "Warranty", value: "90 days" },
+      { label: "Subscription", value: "None" },
+      { label: "Weight", value: "230 g" },
+    ],
+    specGroups: [
+      {
+        heading: "Anatomy",
+        rows: [
+          { label: "Size", value: "108 × 105 × 133 mm (4.3 × 4.1 × 5.2 in)" },
+          { label: "Weight", value: "230 g (8 oz)" },
+          { label: "Servos", value: "EM3 × 4" },
+          { label: "Display", value: "1.54 in, 128 × 64 OLED" },
+          { label: "Speaker", value: "3 W" },
+          { label: "Material", value: "High-strength polycarbonate" },
+          { label: "Port", value: "USB Type-C" },
+        ],
+      },
+      {
+        heading: "Power — read this before buying",
+        rows: [
+          { label: "Battery", value: "450 mAh" },
+          { label: "Runtime", value: "1.5 hours" },
+          { label: "Charge time", value: "1 hour" },
+          { label: "Input", value: "5 V 1 A" },
+        ],
+      },
+      {
+        heading: "Ownership",
+        rows: [
+          { label: "Subscription", value: "None — updates are free through the app" },
+          { label: "Warranty", value: "90 days" },
+          { label: "Account required", value: "No" },
+          { label: "Maker", value: "Shenzhen Zhuneng Technology Co., Ltd. (Energize Lab)" },
+        ],
+      },
+      {
+        heading: "The rest of the range, at Energize Lab's own prices",
+        rows: [
+          { label: "Eilik", value: "$139.99" },
+          { label: "Eilik DQ (Desert Quester)", value: "$199.98 — same hardware, desert colourway, exclusive game and weapon kit" },
+          { label: "Eilik AI Station", value: "$99" },
+          { label: "Panxer", value: "$119.90 — a vehicle for Eilik, not a robot" },
+          { label: "Eiliko", value: "$59.90 — a different, smaller product" },
+          { label: "Eilik × 2", value: "$269.98" },
+        ],
+      },
+    ],
+    skuNote:
+      "Hardware figures from store.energizelab.com/products/eilik and range pricing from the same store, both read 8 August 2026. Our buy button points at the base Eilik on Amazon (B0C2C9LJNQ) at $139.99, matching the maker's own price. The DQ has its own Amazon listing and is not sold here.",
+    lastReviewed: "2026-08-08",
+  },
 };
 
 export function reviewFor(slug: string | undefined): ReviewContent | undefined {
