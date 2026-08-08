@@ -118,6 +118,73 @@ const companionFeatureImage = {
  * /robots/ index and the sitemap read, which means a category is on this page
  * the day it goes live and cannot be on it a day before.
  */
+/**
+ * Artwork for the directory tiles, one per category.
+ *
+ * TWO RULES DECIDED EVERY CHOICE HERE, AND ONE OF THEM RULED OUT THE OBVIOUS
+ * PICKS. Nothing with a word painted into it, and nothing that is not the
+ * category's best frame.
+ *
+ * The obvious files were each hub's own `hero`, and for pool and window those
+ * are the two on the site with type burnt in: /media/pool/hero-desktop.webp
+ * carries the BotPlanet wordmark, and /media/window/hero-desktop.webp carries
+ * the wordmark plus a "Window Cleaning Robots / Crystal-clear views" headline.
+ * A headline drawn into a JPEG is invisible to Google, silent to a screen
+ * reader and impossible to translate, and at tile size it would be unreadable
+ * anyway. Those two use their category feature file instead, which is the same
+ * subject shot clean.
+ *
+ * `focal` is where the subject actually sits, because a 16:9 master cropped to
+ * a 3:2 tile loses the sides — centre-cropping the vacuums frame walks the
+ * robot straight out of it.
+ *
+ * PET CAMERA ROBOTS HAS NO ARTWORK AT ALL. It is the one hub that has never
+ * had any (the image register calls it "0 of 8, nothing uploaded yet"), so its
+ * tile renders the empty plate below rather than borrowing another category's
+ * picture or a product shot standing in for a category.
+ */
+const TILE_ART: Record<string, { src: string; focal?: string; alt: string }> = {
+  "robotic-pool-cleaners": {
+    src: "/media/pool-category/feature-desktop.webp",
+    focal: "82% center",
+    alt: "A robotic pool cleaner on the floor of a lit in-ground pool at night, a house beyond it.",
+  },
+  "window-cleaning-robots": {
+    src: "/media/window-category/feature-desktop.webp",
+    focal: "24% center",
+    alt: "A window-cleaning robot gripping the glass of a hillside house at dusk, the view beyond.",
+  },
+  "robotic-lawn-mowers": {
+    src: "/media/hubs/lawn/hero.webp",
+    alt: "A robot mower on a striped lawn at sunset, a lit stone house behind it.",
+  },
+  "robot-vacuums": {
+    src: "/media/hubs/vacuums/hero.webp",
+    focal: "70% center",
+    alt: "A round robot vacuum crossing the wood floor of a sunlit open-plan living room.",
+  },
+  "companion-robots": {
+    src: "/media/hubs/companion/hero.webp",
+    focal: "40% center",
+    alt: "A small companion robot on a side table beside a lit lamp in a dark sitting room.",
+  },
+  "self-cleaning-litter-boxes": {
+    src: "/media/hubs/litter/hero.webp",
+    focal: "60% center",
+    alt: "A long-haired tabby walking towards a white self-cleaning litter box in a utility room.",
+  },
+  "grill-cleaning-robots": {
+    src: "/media/hubs/grill/hero.webp",
+    focal: "40% center",
+    alt: "A grill-cleaning robot crawling the grates of an open barbecue, smoke rising, a patio at dusk.",
+  },
+  "educational-coding-robots": {
+    src: "/media/hubs/coding/hero.webp",
+    focal: "60% center",
+    alt: "A child's hands beside a small tracked coding robot on a kitchen table, parts laid out around it.",
+  },
+};
+
 const categories = liveCategories()
   .slice()
   .sort((a, b) => a.order - b.order)
@@ -127,6 +194,7 @@ const categories = liveCategories()
     jtbd: c.jtbd,
     href: categoryRoutes(c.slug).hub,
     code: String(i + 1).padStart(2, "0"),
+    art: TILE_ART[c.slug] ?? null,
   }));
 
 /* The homepage is a directory of categories, and until now its markup said so
@@ -228,11 +296,29 @@ const homeSchema = [
       <ul class="worlds__grid">
         {categories.map((c) => (
           <li>
-            <a class="card card--interactive" href={c.href}>
-              <span class="worlds__code" aria-hidden="true">{c.code}</span>
-              <h3 class="worlds__name">{c.name}</h3>
-              <p class="worlds__body">{c.description}</p>
-              <span class="worlds__jtbd">{c.jtbd}</span>
+            <a class="card card--interactive worlds__card" href={c.href}>
+              {c.art ? (
+                <img
+                  class="worlds__img"
+                  src={c.art.src}
+                  srcset={srcsetFor(c.art.src)}
+                  sizes="(min-width: 900px) 33vw, (min-width: 520px) 50vw, 100vw"
+                  alt={c.art.alt}
+                  loading="lazy"
+                  decoding="async"
+                  style={c.art.focal ? `object-position: ${c.art.focal}` : undefined}
+                />
+              ) : (
+                /* An empty plate, not a stand-in. Borrowing another category's
+                   photograph would be the one thing worse than having none. */
+                <span class="worlds__img worlds__img--none" aria-hidden="true"></span>
+              )}
+              <span class="worlds__text">
+                <span class="worlds__code" aria-hidden="true">{c.code}</span>
+                <h3 class="worlds__name">{c.name}</h3>
+                <p class="worlds__body">{c.description}</p>
+                <span class="worlds__jtbd">{c.jtbd}</span>
+              </span>
             </a>
           </li>
         ))}
@@ -608,7 +694,18 @@ const homeSchema = [
      divide evenly by three, which is the whole reason for the column count. */
   .worlds__grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; }
   .worlds__grid > li { display: flex; }
-  .worlds__grid .card { display: flex; flex-direction: column; width: 100%; text-decoration: none; }
+  /* The card's own padding is overridden: the picture goes edge to edge and
+     the copy carries the inset, which is what stops a photograph floating in
+     a box inside a box. */
+  .worlds__grid .worlds__card { display: flex; flex-direction: column; width: 100%; padding: 0; overflow: hidden; text-decoration: none; }
+  .worlds__img {
+    display: block; width: 100%; aspect-ratio: 3 / 2; object-fit: cover; object-position: center;
+    border-bottom: 1px solid rgba(200,208,222,.14);
+  }
+  /* The plate for a category with no artwork yet. Deliberately empty: it holds
+     the grid's rhythm without pretending to be a photograph of anything. */
+  .worlds__img--none { background: linear-gradient(158deg, #191d23 0%, #0d1015 58%, #101419 100%); }
+  .worlds__text { display: flex; flex-direction: column; flex: 1; padding: 16px 18px 18px; }
   .worlds__code { font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: .16em; color: var(--text-tertiary); }
   .worlds__name { margin: 10px 0 0; font-family: var(--font-display); font-size: 19px; letter-spacing: -.02em; line-height: 1.25; color: #f1f3f6; }
   .worlds__body { margin: 9px 0 0; font-size: 14px; line-height: 1.55; color: var(--text-secondary); }
