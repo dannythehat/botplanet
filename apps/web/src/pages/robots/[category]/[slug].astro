@@ -11,7 +11,7 @@ import { resolveSlug, removedRedirect } from "../../../content/product-names";
 import { latestAcceptedForProduct } from "../../../lib/providers/refresh-store";
 import ReviewArticle from "../../../components/ReviewArticle.astro";
 import { reviewFor } from "../../../content/reviews";
-import { reviewSchema, articleSchema, webPageSchema } from "../../../lib/seo";
+import { availabilityFor, reviewSchema, articleSchema, webPageSchema } from "../../../lib/seo";
 import { FOUNDER } from "../../../content/team";
 import { deliveryLine, deliveryNote } from "../../../lib/delivery-wording";
 
@@ -147,6 +147,23 @@ const reviewGraph = hasReview
       reviewSchema({
         itemName: product.name,
         itemBrand: brand?.name ?? null,
+        itemSlug: product.slug,
+        /* THE SAME GATE THE VISIBLE PRICE USES, not a second one. An offer
+           reaches the markup on exactly the condition the card above prints
+           its price: `pub.priceShowable`. The offer URL is this page, which is
+           where the offer is actually published — /go/ is disallowed in
+           robots.txt and pointing structured data at it would ask a crawler to
+           fetch a URL it has been told not to. */
+        offers: engineOffers
+          .filter(({ pub, offer }) => pub.priceShowable && offer.basePriceMinor !== null)
+          .map(({ offer, pub }) => ({
+            priceMinor: offer.basePriceMinor,
+            currency: offer.currency ?? "USD",
+            availability: pub.stockShowable
+              ? (availabilityFor(offer.stock.state) ?? undefined)
+              : undefined,
+            url: Astro.url.pathname,
+          })),
         headline: review!.title,
         description: review!.metaDescription,
         path: Astro.url.pathname,

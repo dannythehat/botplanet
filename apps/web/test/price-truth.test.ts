@@ -24,6 +24,7 @@ import { pool } from "@botplanet/db/seed";
 
 const { productRows, categoryRows, brandRows, offerRows } = pool;
 import { cataloguePrices, checkedNote } from "../src/lib/catalogue-prices";
+import { availabilityFor, productSchema, reviewSchema } from "../src/lib/seo";
 
 const PAGES = fileURLToPath(new URL("../src/pages/", import.meta.url));
 const read = (rel: string) => readFileSync(`${PAGES}${rel}`, "utf8");
@@ -128,5 +129,108 @@ describe("one price path", () => {
     expect(checkedNote("2026-08-04")).toBe("Checked 4 Aug 2026 · confirm at retailer");
     // A malformed date must not render "Checked Invalid Date".
     expect(checkedNote("not-a-date")).toBe("Checked at the retailer");
+  });
+});
+
+/**
+ * FAULT 4, found 8 August 2026 in the sitewide SEO audit and fixed the same
+ * day. Every review page emitted `itemReviewed: { name, brand }` and nothing
+ * else — no sku, no image, no URL, no offer. productSchema() had existed since
+ * launch to say all of it and nothing had ever called it, so 38 shopping pages
+ * described what they sold to a search engine as a bare string.
+ *
+ * The reason it needs a price test rather than an SEO one: the fix puts a
+ * price into markup, which is the one place the site is strictest. Structured
+ * data saying $329 while the page says the price is not current is the same
+ * untruth told to a machine instead of a reader, and it is worth more to the
+ * site than any rich result. So the page passes an offer here on EXACTLY the
+ * condition it prints one — publicationFor(offer).priceShowable — and these
+ * assertions cover what the builder does with what it is given.
+ */
+describe("product markup carries no price the page would not print", () => {
+  const build = (offers: Parameters<typeof productSchema>[0]["offers"]) =>
+    productSchema({
+      name: "HOBOT 2S",
+      slug: "hobot-2s",
+      path: "/robots/window-cleaning-robots/hobot-2s/",
+      brand: "HOBOT",
+      description: "d",
+      offers,
+    });
+
+  it("emits no offers node at all when nothing is publishable", () => {
+    expect(build([]).offers).toBeUndefined();
+    expect(build([{ priceMinor: null, url: "/x/" }]).offers).toBeUndefined();
+  });
+
+  it("emits the price it was given, in major units, to two places", () => {
+    const o = build([{ priceMinor: 32900, url: "/x/" }]).offers as Record<string, unknown>;
+    expect(o.price).toBe("329.00");
+    expect(o.priceCurrency).toBe("USD");
+  });
+
+  /**
+   * Availability used to default to InStock, which invents the fact the offer
+   * engine keeps a separate gate for. A price can be current while the stock
+   * state is unknown, and saying InStock there is a claim nobody checked.
+   */
+  it("omits availability rather than assuming InStock", () => {
+    const o = build([{ priceMinor: 32900, url: "/x/" }]).offers as Record<string, unknown>;
+    expect(o.availability).toBeUndefined();
+    const known = build([{ priceMinor: 32900, url: "/x/", availability: "InStock" }])
+      .offers as Record<string, unknown>;
+    expect(known.availability).toBe("https://schema.org/InStock");
+  });
+
+  it("maps every stock state the engine can produce, and refuses the ones it cannot", () => {
+    expect(availabilityFor("in_stock")).toBe("InStock");
+    expect(availabilityFor("low_stock")).toBe("LimitedAvailability");
+    expect(availabilityFor("preorder")).toBe("PreOrder");
+    expect(availabilityFor("backorder")).toBe("BackOrder");
+    expect(availabilityFor("temporarily_unavailable")).toBe("OutOfStock");
+    expect(availabilityFor("unavailable")).toBe("OutOfStock");
+    // Neither of these is a state anybody read off a listing.
+    expect(availabilityFor("unknown")).toBeNull();
+    expect(availabilityFor("seller_specific")).toBeNull();
+  });
+
+  it("never writes an empty sku or brand", () => {
+    const bare = productSchema({ name: "X", slug: "", path: "/p/", brand: "", description: "", offers: [] });
+    expect("sku" in bare).toBe(false);
+    expect("brand" in bare).toBe(false);
+    expect("description" in bare).toBe(false);
+    expect(bare.url).toBe("https://botplanet.io/p/");
+  });
+
+  /**
+   * The gate itself. The page must not have a second, looser condition for the
+   * markup than for the visible card — one flag, read once, used twice.
+   */
+  it("gates the review page's markup on priceShowable", () => {
+    const src = read("robots/[category]/[slug].astro");
+    expect(src).toMatch(/offers:\s*engineOffers[\s\S]{0,200}pub\.priceShowable/);
+  });
+
+  it("gives the review a full Product to review", () => {
+    const r = reviewSchema({
+      itemName: "HOBOT 2S",
+      itemBrand: "HOBOT",
+      itemSlug: "hobot-2s",
+      headline: "h",
+      description: "d",
+      path: "/robots/window-cleaning-robots/hobot-2s/",
+      authorName: "Danny",
+      authorPath: "/about/",
+      reviewBody: "v",
+      offers: [{ priceMinor: 32900, url: "/robots/window-cleaning-robots/hobot-2s/" }],
+    });
+    const item = r.itemReviewed as Record<string, unknown>;
+    expect(item["@type"]).toBe("Product");
+    expect(item.sku).toBe("hobot-2s");
+    expect(item.url).toBe("https://botplanet.io/robots/window-cleaning-robots/hobot-2s/");
+    expect((item.offers as Record<string, unknown>).price).toBe("329.00");
+    // Still no rating anywhere — that one is not ours to emit.
+    expect(JSON.stringify(r)).not.toContain("reviewRating");
+    expect(JSON.stringify(r)).not.toContain("aggregateRating");
   });
 });
