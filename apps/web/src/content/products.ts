@@ -838,6 +838,7 @@ export const PRODUCT_ID: Record<string, string> = {
   "eilik": "prod-eilik",
   "loona": "prod-loona",
   "joy-for-all-companion-pets": "prod-joy-for-all-companion-pets",
+  "ropet": "prod-ropet",
 };
 
 /** Editorial records with the stable productId attached, keyed by slug (route id). */
@@ -981,6 +982,7 @@ const COMPANION_SLUGS = new Set([
      guide carries the product instead. It still needs a category here, because
      the catalogue row and its spec page exist either way. */
   "joy-for-all-companion-pets",
+  "ropet",
 ]);
 
 const CATEGORY_OF: Record<string, string> = Object.fromEntries(

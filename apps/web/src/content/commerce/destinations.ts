@@ -390,6 +390,13 @@ const COMPANION_ASINS: WindowDestination[] = [
       "Title: 'Miko 3 AI Robot for Kids - Smart Educational & STEAM Learning Robot with Interactive Apps, Games, Stories & Activities for Girls & Boys Ages 5-10 | Red'. Served ASIN equals the one requested; availability reads 'In Stock' at $299 on 8 August 2026. A VARIANT FAMILY, AND THE SECOND ASIN WAS NEARLY RECORDED AS A DUPLICATE: B0GV2L2PDL carries a byte-identical title ending '| Blue', serves its own ASIN, and is also in stock at $299. Two listings for one machine in two colours, not two machines and not a stale row. Red is the one held; the served-ASIN equality check is what stops Blue's data being accepted in its place. Miko also sells a Mini and a Max, and neither name appears anywhere in this listing.",
   },
   {
+    productId: "prod-ropet",
+    asin: "B0GTPZ4N4M",
+    exactModel: "Ropet KAMOMO pro",
+    evidence:
+      "Details table gives Brand Name 'ropet', Model Name 'ropet KAMOMO pro', Manufacturer 'ropet', Manufacturer Part Number 'pro', Included Components 'ropet KAMOMO', Age Range Description 'over 3 years old', Item Dimensions 9.92 x 5.91 x 5.91 inches, Item Weight 1.3 pounds. Title: 'KAMOMO Companion Interactive Robot Pet, Emotional Support for Kids and Adults, AI Desk Robots, Anxiety Relief Comfort Gift'. Sold by 'ropet' and shipped by Amazon, In Stock at $299 on 8 August 2026. A NEW PRODUCT AND THE RATING COUNT SAYS SO: 4.1 stars from 47 ratings, against 12,307 for the Joy For All cat. The listing is the Pro configuration — its packing list names the charging base, which the maker sells separately at ropetai.com — so the ASIN is the bundle rather than the bare robot.",
+  },
+  {
     productId: "prod-joy-for-all-companion-pets",
     asin: "B017JQQ00Q",
     exactModel: "Joy For All Companion Pet Cat, B7594 (Silver with White Mitts)",
@@ -634,6 +641,7 @@ export const REDIRECT_KEYS: Record<string, string> = {
   "prod-eilik": "comp-eilik-amazon",
   "prod-loona": "comp-loona-amazon",
   "prod-joy-for-all-companion-pets": "comp-joyforall-cat-amazon",
+  "prod-ropet": "comp-ropet-kamomo-amazon",
 };
 
 /* ------------------------------------------------------------------ */

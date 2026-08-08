@@ -67,6 +67,11 @@ const offerSeeds: CompanionOfferSeed[] = [
      than on a review of its own. See the ruling in
      docs/seo/companion-products-build-plan.md. */
   { id: "off-joyforall-cat-amazon", productId: "prod-joy-for-all-companion-pets", asin: "B017JQQ00Q", redirectKey: "comp-joyforall-cat-amazon", snapshotMinor: 15900 },
+  /* The Pro configuration, which is what this ASIN sells: its packing list
+     names the charging base the maker sells separately. Amazon at $299 is also
+     UNDER Ropet's own $339 bundle price, which is unusual and worth re-reading
+     rather than assuming it holds. */
+  { id: "off-ropet-amazon", productId: "prod-ropet", asin: "B0GTPZ4N4M", redirectKey: "comp-ropet-kamomo-amazon", snapshotMinor: 29900 },
 ];
 
 export const offerRows: (typeof offers.$inferInsert)[] = offerSeeds.map((o) => ({

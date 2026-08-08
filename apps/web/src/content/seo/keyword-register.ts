@@ -743,6 +743,35 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
     ],
     researchedOn: "2026-08-08",
   },
+  /* Ropet. 1,300/mo at KD 6 — the smallest primary in this category and the
+     softest SERP in it: position 1 is Ropet's own site and there is exactly one
+     real review in the top ten. The CPCs are the highest measured here,
+     "ropet where to buy" at $10.95 against "moflin review" at $0.26.
+
+     "ropet" and "ropet robot" share EIGHT of ten top-ten domains, so one page
+     takes both. "ropet vs moflin" shares only two, and both are social — the
+     comparison searchers make themselves is a section here, not a page. */
+  {
+    path: "/robots/companion-robots/ropet/",
+    primary: { term: "ropet", volume: 1300, difficulty: 6, mustAppear: true },
+    secondary: [
+      { term: "ropet robot", volume: 140, difficulty: 0, mustAppear: true },
+      { term: "ropet kamomo", volume: 20, difficulty: 0, mustAppear: true },
+      { term: "ropet accessories", volume: 20, difficulty: 0, mustAppear: false },
+      { term: "ropet reviews", volume: 10, difficulty: 12, mustAppear: false },
+      { term: "ropet fur", volume: 10, difficulty: 0, mustAppear: true },
+      { term: "allerg", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "offline", volume: 0, difficulty: 0, mustAppear: true },
+    ],
+    cededTo: [
+      {
+        term: "robot pet",
+        path: "/robots/companion-robots/",
+        why: "The 8,100 head term belongs to the hub, which routes the category. Ropet is a strong candidate for the reader who arrives on it, and the hub is the page that should make that introduction rather than this one competing for it.",
+      },
+    ],
+    researchedOn: "2026-08-08",
+  },
   /* Living.AI EMO — 18,100/mo at KD 21, the largest single term BotPlanet
      holds in this category, and NO BUY BUTTON. Two Amazon searches on
      8 August 2026 returned only unbranded EMOPET-style knockoffs.

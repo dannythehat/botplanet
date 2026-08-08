@@ -2691,6 +2691,79 @@ export const REVIEWS: Record<string, ReviewContent> = {
       "Capability and accessory pricing read from living.ai on 8 August 2026. No price is quoted for EMO itself because we hold no verified offer for it — Living.AI sells direct and there is no Amazon US listing to check against. Amazon was searched twice on the same day; both passes returned imitations.",
     lastReviewed: "2026-08-08",
   },
+
+  /* Ropet KAMOMO. The last companion product built, and the only one found
+     because searchers named it themselves — "moflin vs ropet" turned up in a
+     free harvest and nothing in the plan knew the product existed.
+
+     TWO FACTS THE MARKETING DOES NOT LEAD WITH, both from the maker's own
+     listing: the AI conversation is gated behind roughly 20 to 25 days of
+     bonding, and Amazon sells the Pro bundle for $40 less than Ropet's own
+     store. Both are on the page. */
+  ropet: {
+    slug: "ropet",
+    categorySlug: "companion-robots",
+    eyebrow: "Companion robot review",
+    title: "Ropet KAMOMO review",
+    seoTitle: "Ropet Review — The AI Pet That Makes You Wait",
+    metaDescription:
+      "A $299 robot pet with swappable fur and no allergies, whose conversation " +
+      "unlocks after three weeks of bonding. What Ropet does, and what it withholds.",
+    verdict:
+      "A furry desk pet built around a deliberate delay: it learns you first and talks later, with the AI conversation arriving after roughly three weeks of daily handling. The fur comes off and swaps, most of it runs offline, and it costs $130 less than a Moflin.",
+    bestFor:
+      "Someone who wants a warm, furry companion, cannot have an animal because of allergies or a tenancy, and is willing to spend three weeks earning the conversation.",
+    notIdealFor:
+      "Anyone who wants it talking on day one, anyone who wants something with a long track record, or anyone who would resent buying fur separately.",
+    facts: [
+      { label: "AI conversation", value: "After ~20–25 days" },
+      { label: "Fur", value: "Removable and swappable" },
+      { label: "Offline", value: "Most features, local chips" },
+      { label: "Warranty", value: "1 year" },
+    ],
+    specGroups: [
+      {
+        heading: "The three-week wait",
+        rows: [
+          { label: "AI conversation unlocks", value: "After around 20 to 25 days of bonding" },
+          { label: "Before that", value: "Responds to voice, touch and gestures" },
+          { label: "Long-term memory", value: "Yes — recognises its owner and adapts" },
+          { label: "AI Diary", value: "Captures photos and records daily activity" },
+        ],
+      },
+      {
+        heading: "Privacy, which is the unusual part",
+        rows: [
+          { label: "Offline operation", value: "Most features, using local processing chips" },
+          { label: "Maker's claim", value: "No account needed for the core experience" },
+          { label: "Subscription", value: "None published" },
+        ],
+      },
+      {
+        heading: "Physical",
+        rows: [
+          { label: "Size", value: "9.92 × 5.91 × 5.91 in" },
+          { label: "Weight", value: "1.3 lb" },
+          { label: "Battery", value: "Rechargeable, included" },
+          { label: "In the box", value: "KAMOMO, charging base, USB-C cable, manual" },
+          { label: "Fur", value: "Removable — sold separately in other colours" },
+          { label: "Age rating", value: "Over 3 years" },
+        ],
+      },
+      {
+        heading: "What the extras cost, at Ropet's own prices",
+        rows: [
+          { label: "Berry Blush Bunny Fur", value: "$39.00" },
+          { label: "Panda fur and sleeping mask", value: "$28.00" },
+          { label: "Pro bundle, direct from Ropet", value: "$339.00" },
+          { label: "Warranty and returns", value: "1 year; 30 days" },
+        ],
+      },
+    ],
+    skuNote:
+      "Hardware and packing list from the Amazon listing B0GTPZ4N4M, accessory and bundle pricing from ropetai.com, both read 8 August 2026. The listing is the Pro configuration — its own packing list names the charging base Ropet sells separately. A NEW PRODUCT: 4.1 stars from 47 ratings, against 12,307 on the Joy For All cat.",
+    lastReviewed: "2026-08-08",
+  },
 };
 
 export function reviewFor(slug: string | undefined): ReviewContent | undefined {

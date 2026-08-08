@@ -1072,8 +1072,8 @@ const COMPANION_REVIEWS: PagePlan[] = [
       { term: "froplay dog reviews", volume: 2900, why: "An advertising spike rather than demand: 0 in August, 27,100 in November, 40 by June. The SERP is Trustpilot, a scam subreddit and 'Is the robot dog a scam?'. Ranking for scam-check traffic on a product we cannot verify, do not sell and would not recommend is the wrong 2,900." },
       { term: "loona deskmate", volume: 880, why: "A crowdfunding launch curve — zero until January 2026, 3,600 in March, 590 by June — with no retail listing behind it. Gated on availability rather than on volume; KEYi will ship it and the Loona review already gives us the brand." },
     ],
-    products: [],
-    productsNote: "Amazon US B0GTPZ4N4M confirmed 8 August 2026 — 'ropet KAMOMO Companion Interactive Robot Pet', $299, in stock. No catalogue row yet. Positioned as allergy-free, and the distinguishing feature is interchangeable fur, which Amazon sells separately.",
+    products: ["ropet"],
+    productsNote: "Catalogued as prod-ropet, 8 August 2026. Amazon US B0GTPZ4N4M, Model Name 'ropet KAMOMO pro', $299, in stock — the PRO configuration, whose own packing list names the charging base Ropet sells separately, and $40 UNDER the maker's own bundle price on the day it was read. A new product: 4.1 stars from 47 ratings against 12,307 on the Joy For All cat.",
     evidence: "1,300/mo at KD 6 and about 1,600 across the cluster. THE SOFTEST SERP IN THE CATEGORY: one real review in the top ten. Also the highest CPCs — 'ropet where to buy' at $10.95 against 'moflin review' at $0.26. Flat seasonality, 880 in July to 1,900 in December, so it is the one companion page with no Christmas deadline.",
   },
   {
