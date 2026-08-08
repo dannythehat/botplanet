@@ -839,6 +839,11 @@ export const PRODUCT_ID: Record<string, string> = {
   "loona": "prod-loona",
   "joy-for-all-companion-pets": "prod-joy-for-all-companion-pets",
   "ropet": "prod-ropet",
+
+  /* PET CAMERA ROBOTS. Added 8 August 2026. */
+  "enabot-ebo-air-2": "prod-enabot-ebo-air-2",
+  "enabot-ebo-se": "prod-enabot-ebo-se",
+  "enabot-rola-petpal": "prod-enabot-rola-petpal",
 };
 
 /** Editorial records with the stable productId attached, keyed by slug (route id). */
@@ -971,6 +976,8 @@ const WINDOW_SLUGS = new Set([
   "cop-rose-x5s",
 ]);
 
+const PETCAM_SLUGS = new Set(["enabot-ebo-air-2", "enabot-ebo-se", "enabot-rola-petpal"]);
+
 const COMPANION_SLUGS = new Set([
   "moflin",
   "miko-3",
@@ -992,7 +999,9 @@ const CATEGORY_OF: Record<string, string> = Object.fromEntries(
       ? "window-cleaning-robots"
       : COMPANION_SLUGS.has(slug)
         ? "companion-robots"
-        : "robotic-pool-cleaners",
+        : PETCAM_SLUGS.has(slug)
+          ? "pet-camera-robots"
+          : "robotic-pool-cleaners",
   ]),
 );
 

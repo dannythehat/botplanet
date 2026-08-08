@@ -1,6 +1,6 @@
 {
   "generatedFor": "2026-07-31",
-  "launchProducts": 30,
+  "launchProducts": 33,
   "rows": [
     {
       "productId": "prod-beatbot-aquasense-2-ultra",
@@ -939,6 +939,102 @@
       "freshness": "indicative",
       "affiliateProgramme": "prog-amazon-us",
       "goPath": "/go/comp-ropet-kamomo-amazon",
+      "schemaEligible": false,
+      "blockers": [
+        "no current price from an approved source",
+        "stock state unknown",
+        "not eligible for Offer structured data"
+      ],
+      "nextAction": "Obtain price and availability through the Amazon Creators API so the offer can carry a current price and enter Offer schema."
+    },
+    {
+      "productId": "prod-enabot-ebo-air-2",
+      "canonicalUrl": "https://botplanet.io/robots/pet-camera-robots/enabot-ebo-air-2/",
+      "verifiedOffers": 1,
+      "preferredOfferId": "offer-prod-enabot-ebo-air-2-ret-amazon",
+      "preferredOfferAudit": [
+        "1 offer(s) exist for this product",
+        "1 from an approved retailer",
+        "ranked by exact-match confidence, then stock, then delivered price",
+        "chosen: offer-prod-enabot-ebo-air-2-ret-amazon (verified_exact)"
+      ],
+      "commissionUsedAsTieBreak": false,
+      "retailer": "ret-amazon",
+      "exactProductIdentifier": "B0DZHDF7MD",
+      "identifierKind": "asin",
+      "market": "us",
+      "priceState": "not_published",
+      "stockState": "unknown",
+      "deliveryState": "not_exposed_by_source",
+      "warrantyRoute": "Manufacturer warranty term not confirmed",
+      "lastChecked": "2026-07-31",
+      "freshness": "indicative",
+      "affiliateProgramme": "prog-amazon-us",
+      "goPath": "/go/petcam-enabot-eboair2-amazon",
+      "schemaEligible": false,
+      "blockers": [
+        "no current price from an approved source",
+        "stock state unknown",
+        "not eligible for Offer structured data"
+      ],
+      "nextAction": "Obtain price and availability through the Amazon Creators API so the offer can carry a current price and enter Offer schema."
+    },
+    {
+      "productId": "prod-enabot-ebo-se",
+      "canonicalUrl": "https://botplanet.io/robots/pet-camera-robots/enabot-ebo-se/",
+      "verifiedOffers": 1,
+      "preferredOfferId": "offer-prod-enabot-ebo-se-ret-amazon",
+      "preferredOfferAudit": [
+        "1 offer(s) exist for this product",
+        "1 from an approved retailer",
+        "ranked by exact-match confidence, then stock, then delivered price",
+        "chosen: offer-prod-enabot-ebo-se-ret-amazon (verified_exact)"
+      ],
+      "commissionUsedAsTieBreak": false,
+      "retailer": "ret-amazon",
+      "exactProductIdentifier": "B09R6V3CJM",
+      "identifierKind": "asin",
+      "market": "us",
+      "priceState": "not_published",
+      "stockState": "unknown",
+      "deliveryState": "not_exposed_by_source",
+      "warrantyRoute": "Manufacturer warranty term not confirmed",
+      "lastChecked": "2026-07-31",
+      "freshness": "indicative",
+      "affiliateProgramme": "prog-amazon-us",
+      "goPath": "/go/petcam-enabot-ebose-amazon",
+      "schemaEligible": false,
+      "blockers": [
+        "no current price from an approved source",
+        "stock state unknown",
+        "not eligible for Offer structured data"
+      ],
+      "nextAction": "Obtain price and availability through the Amazon Creators API so the offer can carry a current price and enter Offer schema."
+    },
+    {
+      "productId": "prod-enabot-rola-petpal",
+      "canonicalUrl": "https://botplanet.io/robots/pet-camera-robots/enabot-rola-petpal/",
+      "verifiedOffers": 1,
+      "preferredOfferId": "offer-prod-enabot-rola-petpal-ret-amazon",
+      "preferredOfferAudit": [
+        "1 offer(s) exist for this product",
+        "1 from an approved retailer",
+        "ranked by exact-match confidence, then stock, then delivered price",
+        "chosen: offer-prod-enabot-rola-petpal-ret-amazon (verified_exact)"
+      ],
+      "commissionUsedAsTieBreak": false,
+      "retailer": "ret-amazon",
+      "exactProductIdentifier": "B0GMQW1HX6",
+      "identifierKind": "asin",
+      "market": "us",
+      "priceState": "not_published",
+      "stockState": "unknown",
+      "deliveryState": "not_exposed_by_source",
+      "warrantyRoute": "Manufacturer warranty term not confirmed",
+      "lastChecked": "2026-07-31",
+      "freshness": "indicative",
+      "affiliateProgramme": "prog-amazon-us",
+      "goPath": "/go/petcam-enabot-rolapetpal-amazon",
       "schemaEligible": false,
       "blockers": [
         "no current price from an approved source",

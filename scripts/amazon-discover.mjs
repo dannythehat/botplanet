@@ -122,6 +122,28 @@ const COMPANION_OPEN = [
   { slug: "eilik-dq", name: "Eilik DQ", query: "Eilik DQ robot Energize Lab", must: ["dq"], deny: [] },
 ];
 
+/**
+ * Pet camera robots. The plan carries three Enabot models and nothing else,
+ * which is the thing to test rather than assume: a category with exactly one
+ * manufacturer is either a genuine monopoly or a research gap, and the two
+ * look identical from a keyword list.
+ *
+ * The EBO Air 2 and the Catpal are Enabot's newer machines and are in neither
+ * the research nor the plan. Rocki and Petcube are here as controls — Petcube
+ * in particular is the market leader in pet cameras and does NOT roam, so if
+ * it matches, the search is drifting out of the robot category and into static
+ * cameras, which the hub already refused to chase.
+ */
+const PETCAM = [
+  { slug: "enabot-ebo-air", name: "Enabot EBO Air", query: "Enabot EBO Air pet camera robot", must: ["ebo air"], deny: ["ebo x", "ebo se", "catpal", "air 2"] },
+  { slug: "enabot-ebo-air-2", name: "Enabot EBO Air 2", query: "Enabot EBO Air 2 robot", must: ["ebo air 2", "air 2"], deny: ["ebo x", "ebo se", "catpal"] },
+  { slug: "enabot-ebo-x", name: "Enabot EBO X", query: "Enabot EBO X family robot", must: ["ebo x"], deny: ["ebo air", "ebo se", "catpal"] },
+  { slug: "enabot-ebo-se", name: "Enabot EBO SE", query: "Enabot EBO SE cat camera robot", must: ["ebo se"], deny: ["ebo x", "ebo air", "catpal"] },
+  { slug: "enabot-catpal", name: "Enabot CatPal", query: "Enabot CatPal robot", must: ["catpal"], deny: [] },
+  { slug: "rocki", name: "Rocki", query: "Rocki pet companion robot camera", must: ["rocki"], deny: ["rock", "rocket"] },
+  { slug: "petcube", name: "Petcube", query: "Petcube pet camera", must: ["petcube"], deny: [] },
+];
+
 /** Which set to run. `--set companion` or default to the lawn seventeen. */
 const SET = process.argv.includes("--set") ? process.argv[process.argv.indexOf("--set") + 1] : "lawn";
 
@@ -210,7 +232,7 @@ function judge(target, results) {
 }
 
 const results = [];
-const SETS = { companion: COMPANION, "companion-legacy": COMPANION_LEGACY, "companion-open": COMPANION_OPEN, lawn: TARGETS };
+const SETS = { petcam: PETCAM, companion: COMPANION, "companion-legacy": COMPANION_LEGACY, "companion-open": COMPANION_OPEN, lawn: TARGETS };
 const ALL = SETS[SET] ?? TARGETS;
 /* `--only slug,slug` re-runs part of a set. The companion run on 8 August 2026
    stopped after eight of nine without writing its JSON, and re-searching the

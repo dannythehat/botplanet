@@ -389,6 +389,33 @@ const COMPANION_ASINS: WindowDestination[] = [
     evidence:
       "Title: 'Miko 3 AI Robot for Kids - Smart Educational & STEAM Learning Robot with Interactive Apps, Games, Stories & Activities for Girls & Boys Ages 5-10 | Red'. Served ASIN equals the one requested; availability reads 'In Stock' at $299 on 8 August 2026. A VARIANT FAMILY, AND THE SECOND ASIN WAS NEARLY RECORDED AS A DUPLICATE: B0GV2L2PDL carries a byte-identical title ending '| Blue', serves its own ASIN, and is also in stock at $299. Two listings for one machine in two colours, not two machines and not a stale row. Red is the one held; the served-ASIN equality check is what stops Blue's data being accepted in its place. Miko also sells a Mini and a Max, and neither name appears anywhere in this listing.",
   },
+  /* PET CAMERA ROBOTS, 8 August 2026. Read listing by listing rather than by
+     search, and the reason is in the third entry below: the discovery script's
+     candidate for the EBO SE was B0CGV82XTT, whose title reads "Rocon Ebo SE"
+     and which serves an ASIN other than the one requested. A reseller listing
+     wearing the product's name, caught only because every listing here was
+     opened individually. */
+  {
+    productId: "prod-enabot-ebo-air-2",
+    asin: "B0DZHDF7MD",
+    exactModel: "Enabot EBO Air 2",
+    evidence:
+      "Title: 'Enabot EBO Air 2 Mobile Pet Camera Robot: 2K FamilyBot with Two-Way Talk'. Served ASIN equals the one requested. Sold by 'Enabot Official Store', shipped by Amazon, In Stock at $149.99 on 8 August 2026. Details give Video Capture Resolution '1296p, 2k', Item Dimensions 3.74 x 3.74 x 3.51 inches, Item Weight 0.74 kg. A VARIANT FAMILY: B0DZHG7Y6T and B0DZHG4LZK carry identical titles at the same price and serve their own ASINs — colours of one machine. The Air 2S (B0FWK8BCXD, 2.5K, $299) and Air 2 Plus (B0FD9VNX5Y, 3K with GPT and Gemini, $359) are DIFFERENT machines in the same family and are named on the page rather than sold as this one.",
+  },
+  {
+    productId: "prod-enabot-ebo-se",
+    asin: "B09R6V3CJM",
+    exactModel: "Enabot EBO SE",
+    evidence:
+      "Title: 'Enabot EBO SE Home Robot Camera: 1080P Mobile FamilyBot Pet Companion'. Served ASIN equals the one requested. Sold by 'Enabot Official Store', In Stock at $119.99 on 8 August 2026. Details give Field Of View '360 degrees', resolution 1080p, Item Dimensions 3.8 x 3.8 x 3.5 inches. THIS IS NOT B0CGV82XTT, which the discovery pass proposed: that listing is titled 'Rocon Ebo SE Pet Robot Camera', serves a different ASIN than the one requested, and is a reseller rather than Enabot. Same price, same product name, wrong seller — exactly the substitution the served-ASIN check exists to refuse.",
+  },
+  {
+    productId: "prod-enabot-rola-petpal",
+    asin: "B0GMQW1HX6",
+    exactModel: "Enabot ROLA PetPal",
+    evidence:
+      "Title: 'Enabot EBO ROLA PetPal Mobile 2.5K Pet Camera Robot with Treat Dispenser'. Sold by 'Enabot Official Store' at $179.99 on 8 August 2026, 4.0 stars from 26 ratings. Details give Special Feature '2-Way Audio, 2.5K Resolution Camera, Auto-Recharge, Mobile Pet Camera Robot with Treat Dispenser, Modular Design' and Item Dimensions 9.02 x 9.02 x 10 inches. The listing's own Q&A answers the subscription question outright: 'Do I need a subscription to use ROLA PetPal? No.' A SIBLING SHARES THE ROLA NAME: the ROLA Mini (B0DDC9DZKK, $139) has no treat dispenser, and the dispenser is the whole reason this model exists.",
+  },
   {
     productId: "prod-ropet",
     asin: "B0GTPZ4N4M",
@@ -642,6 +669,9 @@ export const REDIRECT_KEYS: Record<string, string> = {
   "prod-loona": "comp-loona-amazon",
   "prod-joy-for-all-companion-pets": "comp-joyforall-cat-amazon",
   "prod-ropet": "comp-ropet-kamomo-amazon",
+  "prod-enabot-ebo-air-2": "petcam-enabot-eboair2-amazon",
+  "prod-enabot-ebo-se": "petcam-enabot-ebose-amazon",
+  "prod-enabot-rola-petpal": "petcam-enabot-rolapetpal-amazon",
 };
 
 /* ------------------------------------------------------------------ */

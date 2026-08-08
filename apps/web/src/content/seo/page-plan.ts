@@ -1108,11 +1108,112 @@ const COMPANION_REVIEWS: PagePlan[] = [
 
 /* Pet camera robots — the Enabot line, which is the roaming-camera family
    rather than the companion one. */
-const PETCAM_REVIEWS = plannedReviews("pet-camera-robots", "31081889310 · 2026-08-06", [
-  { slug: "enabot-ebo-air", term: "enabot ebo air", volume: 1000 },
-  { slug: "enabot-ebo-x", term: "enabot ebo x", volume: 260 },
-  { slug: "enabot-ebo-se", term: "enabot ebo se", volume: 260 },
-]);
+/* ------------------------------------------------------------------
+   PET CAMERA ROBOTS — REPLANNED 8 August 2026 from measured data.
+   Research: local run on seeds/pet-camera-robots-products.json,
+   49 seeds, 10 SERPs, $0.2230.
+   Findings: docs/seo/pet-camera-robots-findings.md
+
+   THE PLAN NAMED THREE MODELS AND TWO OF THEM ARE DISCONTINUED.
+   The 6 August research proposed EBO Air (1,000/mo), EBO X (260)
+   and EBO SE (260). A listing-by-listing read of Amazon US on
+   8 August found neither the Air nor the X on sale anywhere.
+   Enabot now sells seven machines: SE $119, ROLA Mini $139,
+   Air 2 $149, ROLA PetPal $179, EBO Mini $199, Air 2S $299 and
+   Air 2 Plus $359.
+
+   THE OLD TERM STILL HAS DEMAND AND GOOGLE HAS ALREADY MOVED IT.
+   "enabot ebo air" measures 1,000/mo at KD 0 and its SERP serves
+   Air 2 results — Enabot's store, the Air 2 on Amazon, CNET's
+   Air 2 review. The two share SIX of ten top-ten domains, so the
+   Air 2 page carries the old term rather than a redirect.
+
+   THE BIGGEST TERM IN THE CATEGORY IS THE BRAND. "enabot" is
+   9,900/mo at KD 4, against 480 for "pet camera robot", which the
+   hub owns. Its own SERP was NOT measured in this run and it is
+   assigned nowhere until it is. Recorded as an open question
+   rather than quietly given to a page.
+   ------------------------------------------------------------------ */
+
+const PETCAM_RESEARCH = "local 2026-08-08 · $0.2230 · seeds/pet-camera-robots-products.json";
+
+const petcamShell = (slug: string) => ({
+  category: "pet-camera-robots",
+  type: "review" as const,
+  status: "built" as const,
+  intent: "Decide whether this specific machine is the right one for me.",
+  linksOut: ["/robots/pet-camera-robots/", "/robots/companion-robots/"],
+  images: [
+    { slot: "hero", shows: `${slug} lead artwork`, supplied: false },
+    { slot: "figure-1", shows: "Feature story 1", supplied: false },
+    { slot: "figure-2", shows: "Feature story 2", supplied: false },
+    { slot: "product-card", shows: "Catalogue card for listings and the hub grid", supplied: false },
+  ],
+  schema: ["Review", "Article", "WebPage", "BreadcrumbList"],
+  research: PETCAM_RESEARCH,
+});
+
+const PETCAM_REVIEWS: PagePlan[] = [
+  {
+    ...petcamShell("enabot ebo air 2"),
+    path: "/robots/pet-camera-robots/enabot-ebo-air-2/",
+    primary: { term: "ebo air 2", volume: 2400, difficulty: 0 },
+    secondary: [
+      { term: "enabot ebo air", volume: 1000, difficulty: 0 },
+      { term: "ebo air 2 plus", volume: 1000, difficulty: 0 },
+      { term: "enabot ebo air 2", volume: 390, difficulty: 2 },
+      { term: "enabot ebo air 2 plus", volume: 210, difficulty: 2 },
+      { term: "ebo air 2s", volume: 50, difficulty: 2 },
+      { term: "enabot ebo air review", volume: 20, difficulty: 0 },
+      { term: "enabot ebo mini", volume: 10, difficulty: 0 },
+      { term: "enabot ebo air 2s", volume: 10, difficulty: 0 },
+    ],
+    ceded: [],
+    refused: [
+      { term: "ebo x", volume: 260, why: "KD 42, the hardest term in the category, on a model Enabot no longer sells. 'enabot ebo x' at 260 and KD 0 is the same dead product from the other direction. Neither is worth a page and neither has anything to sell behind it." },
+    ],
+    products: ["enabot-ebo-air-2"],
+    productsNote: "Catalogued as prod-enabot-ebo-air-2, 8 August 2026. Amazon US B0DZHDF7MD at $149.99, sold by Enabot Official Store. Three ASINs carry this title at this price — the other two are colours. The Air 2S and Air 2 Plus are different machines and are named on the page rather than sold from this row.",
+    evidence: "2,400/mo at KD 0 on 'ebo air 2', and it inherits the discontinued 'enabot ebo air' at 1,000 because the two share SIX of ten top-ten domains — Google has already merged the old model's term into the current range. Air 2 and Air 2 Plus share EIGHT, so one page covers the family.",
+  },
+  {
+    ...petcamShell("enabot ebo se"),
+    path: "/robots/pet-camera-robots/enabot-ebo-se/",
+    primary: { term: "ebo se", volume: 390, difficulty: 0 },
+    secondary: [
+      { term: "enabot ebo se", volume: 260, difficulty: 0 },
+      { term: "enabot ebo se review", volume: 20, difficulty: 0 },
+    ],
+    ceded: [],
+    products: ["enabot-ebo-se"],
+    productsNote: "Catalogued as prod-enabot-ebo-se, 8 August 2026. Amazon US B09R6V3CJM at $119.99, sold by Enabot Official Store. NOT B0CGV82XTT: that listing carries the same product name at the same price under the seller 'Rocon' and serves a different ASIN. The page warns buyers to check the seller.",
+    evidence: "650/mo across 'ebo se' and 'enabot ebo se', both KD 0. Shares only FOUR of ten domains with the Air family, so it is a separate SERP and a separate page. It is also the only model in the range low enough to get under furniture, which is where cats are.",
+  },
+  {
+    ...petcamShell("enabot rola petpal"),
+    path: "/robots/pet-camera-robots/enabot-rola-petpal/",
+    primary: { term: "rola petpal", volume: 140, difficulty: 0 },
+    secondary: [
+      { term: "enabot rola mini", volume: 480, difficulty: 10 },
+      { term: "enabot rola petpal", volume: 50, difficulty: 0 },
+      { term: "enabot ebo rola", volume: 40, difficulty: 15 },
+      { term: "ebo rola", volume: 20, difficulty: 0 },
+    ],
+    ceded: [],
+    refused: [
+      /* 720/mo AND THE WRONG MARKET. The SERP is Furbo, Closer Pets, Petcube,
+         Wired and Petco — static treat cameras. It shares ONE domain with
+         "enabot rola petpal", and that domain is amazon.com. Adding a robot to
+         that query does not buy a different result set, it buys Furbo as a
+         competitor. The same ruling the hub already made about "best pet
+         camera robot". */
+      { term: "pet camera with treat dispenser", volume: 720, why: "Shares ONE top-ten domain with 'enabot rola petpal', and it is amazon.com. The SERP is Furbo, Closer Pets, Petcube, Wired and Petco — the static treat-camera market, which this site does not compete in. The dispenser is described on the page; the term is refused." },
+    ],
+    products: ["enabot-rola-petpal"],
+    productsNote: "Catalogued as prod-enabot-rola-petpal, 8 August 2026. Amazon US B0GMQW1HX6 at $179.99, 4.0 stars from 26 ratings. The ROLA Mini (B0DDC9DZKK, $139) shares the ROLA name and has NO treat dispenser, which is the only reason to pay the difference.",
+    evidence: "The only machine on this site that combines a treat dispenser with a camera that moves — Furbo throws from a shelf, every other Enabot drives without treats. 'enabot rola mini' at 480/KD 10 is carried here because the two are one product family and the Mini is the thing a buyer is choosing against.",
+  },
+];
 
 /* Coding robots. The reverse of every other category: the products are 4x to
    14x the head term, so the reviews are the business and the hub only routes. */

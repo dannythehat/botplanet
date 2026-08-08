@@ -2764,6 +2764,200 @@ export const REVIEWS: Record<string, ReviewContent> = {
       "Hardware and packing list from the Amazon listing B0GTPZ4N4M, accessory and bundle pricing from ropetai.com, both read 8 August 2026. The listing is the Pro configuration — its own packing list names the charging base Ropet sells separately. A NEW PRODUCT: 4.1 stars from 47 ratings, against 12,307 on the Joy For All cat.",
     lastReviewed: "2026-08-08",
   },
+
+  /* ============================================================
+     PET CAMERA ROBOTS, 8 August 2026.
+
+     THE PAGE PLAN'S MODEL LIST WAS STALE AND THE RESEARCH FOUND
+     IT. Three reviews were planned on 6 August — EBO Air at
+     1,000/mo, EBO X at 260, EBO SE at 260 — and a listing-by-
+     listing read of Amazon on 8 August found neither the Air nor
+     the X on sale. Enabot now sells seven machines. Two of the
+     three planned pages were for products nobody can buy.
+
+     "enabot ebo air" still measures 1,000/mo at KD 0, and its
+     SERP already serves Air 2 results — Enabot's own store, the
+     Air 2 on Amazon, CNET's Air 2 review. Google merged the old
+     term into the current range, so the Air 2 page carries it
+     rather than a redirect doing the work.
+     ============================================================ */
+  "enabot-ebo-air-2": {
+    slug: "enabot-ebo-air-2",
+    categorySlug: "pet-camera-robots",
+    eyebrow: "Pet camera robot review",
+    title: "Enabot EBO Air 2 review",
+    seoTitle: "Enabot EBO Air 2 Review — And Which One to Buy",
+    metaDescription:
+      "A $149 camera that drives itself around your house. What the Air 2 does, how it " +
+      "differs from the 2S and the Plus, and why the original Air is gone.",
+    verdict:
+      "A 2K camera on tracked wheels that you drive from your phone and that parks itself when the battery runs low. At $149 it is the one to buy in Enabot's range, and the more expensive models buy resolution and chat rather than a better robot.",
+    bestFor:
+      "One floor of a house, a pet you want to find rather than merely watch, and anybody who refuses to pay a monthly fee for a camera.",
+    notIdealFor:
+      "A house where the animal is upstairs. It has wheels, not legs, and no camera robot on the US market climbs stairs.",
+    facts: [
+      { label: "Camera", value: "2K, night vision" },
+      { label: "Drive", value: "Tracked wheels, from the app" },
+      { label: "Charging", value: "Auto-returns to dock" },
+      { label: "Subscription", value: "None" },
+    ],
+    specGroups: [
+      {
+        heading: "What it does",
+        rows: [
+          { label: "Resolution", value: "2K (1296p)" },
+          { label: "Night vision", value: "Yes" },
+          { label: "Two-way talk", value: "Yes" },
+          { label: "Movement", value: "Tracked wheels, driven from the app" },
+          { label: "Auto-recharge", value: "Returns to its dock when the battery is low" },
+          { label: "Display", value: "Custom emoticon face" },
+        ],
+      },
+      {
+        heading: "Physical",
+        rows: [
+          { label: "Size", value: "3.74 × 3.74 × 3.51 in" },
+          { label: "Weight", value: "0.74 kg" },
+          { label: "Battery", value: "2,500 mAh" },
+          { label: "Stairs", value: "No — one floor only" },
+        ],
+      },
+      {
+        heading: "The rest of the range, and what the money buys",
+        rows: [
+          { label: "EBO SE", value: "$119 — 1080p, no emoticon face" },
+          { label: "EBO ROLA Mini", value: "$139 — 2K" },
+          { label: "EBO Air 2 (this one)", value: "$149 — 2K" },
+          { label: "ROLA PetPal", value: "$179 — 2.5K, treat dispenser" },
+          { label: "EBO Mini", value: "$199 — 2K" },
+          { label: "EBO Air 2S", value: "$299 — 2.5K" },
+          { label: "EBO Air 2 Plus", value: "$359 — 3K, GPT and Gemini chat" },
+        ],
+      },
+      {
+        heading: "Ownership",
+        rows: [
+          { label: "Subscription", value: "None on any Enabot model we read" },
+          { label: "Sold by", value: "Enabot Official Store, shipped by Amazon" },
+          { label: "Setup", value: "Charge, install the app, scan a QR code" },
+        ],
+      },
+    ],
+    skuNote:
+      "Read from the Amazon listing B0DZHDF7MD and Enabot's own comparison table on 8 August 2026. Three ASINs carry this title at this price — B0DZHG7Y6T and B0DZHG4LZK are the other colours. The Air 2S and Air 2 Plus are different machines, not colours. The original EBO Air is no longer listed.",
+    lastReviewed: "2026-08-08",
+  },
+
+  "enabot-ebo-se": {
+    slug: "enabot-ebo-se",
+    categorySlug: "pet-camera-robots",
+    eyebrow: "Pet camera robot review",
+    title: "Enabot EBO SE review",
+    seoTitle: "Enabot EBO SE Review — The $119 One That Fits Under",
+    metaDescription:
+      "The cheapest driving pet camera Enabot sells. 1080p, 360-degree view, no " +
+      "subscription, and small enough to go under the sofa. What you give up.",
+    verdict:
+      "The entry point, and the one that gets under furniture. 1080p instead of 2K and no emoticon face, but it drives, talks, sees in the dark and docks itself for $30 less than the Air 2.",
+    bestFor:
+      "A first one, a cat that hides under things, or anybody who wants to find out whether a driving camera is useful before spending more.",
+    notIdealFor:
+      "Anyone who will be annoyed by 1080p on a large screen, or who wants the treat dispenser.",
+    facts: [
+      { label: "Camera", value: "1080p, night vision" },
+      { label: "View", value: "360 degrees" },
+      { label: "Charging", value: "Auto-returns to dock" },
+      { label: "Subscription", value: "None" },
+    ],
+    specGroups: [
+      {
+        heading: "What it does",
+        rows: [
+          { label: "Resolution", value: "1080p" },
+          { label: "Field of view", value: "360 degrees" },
+          { label: "Night vision", value: "Yes" },
+          { label: "Two-way talk", value: "Yes" },
+          { label: "Movement", value: "Driven from the app; low enough for under furniture" },
+          { label: "Auto-recharge", value: "Returns to its dock when low" },
+        ],
+      },
+      {
+        heading: "Physical",
+        rows: [
+          { label: "Size", value: "3.8 × 3.8 × 3.5 in" },
+          { label: "Battery", value: "2,500 mAh" },
+          { label: "Stairs", value: "No — one floor only" },
+        ],
+      },
+      {
+        heading: "Ownership",
+        rows: [
+          { label: "Subscription", value: "None" },
+          { label: "Sold by", value: "Enabot Official Store, shipped by Amazon" },
+        ],
+      },
+    ],
+    skuNote:
+      "Read from the Amazon listing B09R6V3CJM on 8 August 2026. NOT B0CGV82XTT, which carries the same product name at the same price under the seller name 'Rocon' and serves a different ASIN — check the seller reads Enabot Official Store before ordering.",
+    lastReviewed: "2026-08-08",
+  },
+
+  "enabot-rola-petpal": {
+    slug: "enabot-rola-petpal",
+    categorySlug: "pet-camera-robots",
+    eyebrow: "Pet camera robot review",
+    title: "Enabot ROLA PetPal review",
+    seoTitle: "Enabot ROLA PetPal Review — Treats On Wheels",
+    metaDescription:
+      "The only pet camera robot that drives to your dog and gives it a treat. What the " +
+      "dispenser adds over a Furbo, and what the modular design costs.",
+    verdict:
+      "The one machine that combines a treat dispenser with a camera that moves. Furbo throws treats from a shelf and Enabot's other models drive without treats — this does both, at 2.5K, for $179.",
+    bestFor:
+      "A dog you want to reward rather than just watch, on one floor, without a monthly fee.",
+    notIdealFor:
+      "Cats, mostly. And anyone who wants the smallest possible robot — this one is twice the size of the Air 2.",
+    facts: [
+      { label: "Treat dispenser", value: "Built in" },
+      { label: "Camera", value: "2.5K, night vision" },
+      { label: "Modules", value: "Interactive Module sold separately" },
+      { label: "Subscription", value: "None" },
+    ],
+    specGroups: [
+      {
+        heading: "What it does",
+        rows: [
+          { label: "Treat dispenser", value: "Built in, triggered from the app" },
+          { label: "Resolution", value: "2.5K" },
+          { label: "Night vision", value: "Yes" },
+          { label: "Two-way talk", value: "Yes" },
+          { label: "Movement", value: "Manually driven from the app" },
+          { label: "Auto-recharge", value: "Auto-docks when low" },
+          { label: "Modular", value: "Optional Interactive Module, sold separately" },
+        ],
+      },
+      {
+        heading: "Physical",
+        rows: [
+          { label: "Size", value: "9.02 × 9.02 × 10 in" },
+          { label: "Against the Air 2", value: "Roughly three times the footprint" },
+          { label: "Stairs", value: "No — one floor only" },
+        ],
+      },
+      {
+        heading: "Ownership",
+        rows: [
+          { label: "Subscription", value: "None — the listing answers this outright" },
+          { label: "Sold by", value: "Enabot Official Store, shipped by Amazon" },
+          { label: "Ratings", value: "4.0 from 26, so it is new" },
+        ],
+      },
+    ],
+    skuNote:
+      "Read from the Amazon listing B0GMQW1HX6 on 8 August 2026. The ROLA Mini (B0DDC9DZKK, $139) shares the ROLA name and has no treat dispenser, which is the only reason to buy this model.",
+    lastReviewed: "2026-08-08",
+  },
 };
 
 export function reviewFor(slug: string | undefined): ReviewContent | undefined {

@@ -182,7 +182,7 @@ describe("exact-product destinations", () => {
     // Moflin joined on 8 August 2026, the first companion product with
     // anything to sell. Five of that category's better-known names have no
     // Amazon US listing at all, so this count will grow slowly and should.
-    expect(exact).toHaveLength(30);
+    expect(exact).toHaveLength(33);
     expect(search).toHaveLength(0);
     for (const d of exact) {
       expect(d.identifierKind).toBe("asin");
@@ -1438,7 +1438,7 @@ describe("scheduled refresh — wiring", () => {
        fails loudly for any routed product whose key is absent from the text it
        reads — which is exactly the behaviour wanted. Read the directory rather
        than the list if a fourth category makes this tedious. */
-    const seed = ["pool", "window", "companion"]
+    const seed = ["pool", "window", "companion", "petcam"]
       .map((c) => readFileSync(`packages/db/seed/${c}/commercial.ts`, "utf8"))
       .join("\n");
     for (const p of activeCatalogue()) {
