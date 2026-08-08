@@ -864,6 +864,21 @@ export const PRODUCT_ID: Record<string, string> = {
   "living-ai-emo": "prod-living-ai-emo",
   "cozmo": "prod-cozmo",
   "moxie": "prod-moxie",
+
+  /* First products for litter boxes and lawn mowers, 8 August 2026. All ten
+     are OFFER_SETUP_PENDING: verified, published, not yet wired to sell. The
+     verification record — including the three the brief named wrongly and the
+     one refused outright — is docs/seo/litter-lawn-verification-2026-08-08.md. */
+  "litter-robot-4": "prod-litter-robot-4",
+  "petkit-purobot-max-pro-2": "prod-petkit-purobot-max-pro-2",
+  "casa-leo-loo-too": "prod-casa-leo-loo-too",
+  "petsafe-scoopfree-crystal-pro": "prod-petsafe-scoopfree-crystal-pro",
+  "segway-navimow-i110n": "prod-navimow-i110n",
+  "mammotion-luba-3-awd-1500h": "prod-luba-3-awd-1500h",
+  "mammotion-luba-3-awd-3000h": "prod-luba-3-awd-3000h",
+  "husqvarna-automower-410iq": "prod-automower-410iq",
+  "worx-landroid-vision-wr320": "prod-worx-landroid-vision-wr320",
+  "eufy-e15": "prod-eufy-e15",
 };
 
 /**
@@ -885,6 +900,65 @@ export const PRODUCT_ID: Record<string, string> = {
  * Adding a slug here is not a shortcut for "we have not done the commercial
  * work yet". It is a statement that we refuse the sale.
  */
+/**
+ * OFFER_SETUP_PENDING — verified and published, not yet wired to sell.
+ *
+ * THE THIRD STATE, AND THE ONE THE OTHER TWO KEPT PRETENDING NOT TO NEED.
+ * A product used to be either sellable or refused. Ten litter boxes and lawn
+ * mowers verified on 8 August 2026 are neither: their identity is confirmed at
+ * the retailer and the manufacturer, they belong in the hub tables and the
+ * matcher, and nobody has built their commercial wiring yet. Filing them under
+ * NO_OFFER_BY_DESIGN would say we refuse the sale, which is false. Leaving them
+ * out of PRODUCT_ID would be the silent exclusion this file spent a day
+ * removing.
+ *
+ * WHAT IT MEANS ON THE PAGE. No /go link. No price. No availability or stock
+ * claim anywhere — a product in this state has an unknown stock state by
+ * definition, and the buy box says "Check current price" rather than inventing
+ * one.
+ *
+ * WHY IT EXPIRES. Every state like this is a silent exclusion waiting to
+ * happen: it starts as a note and becomes the place products go to be
+ * forgotten. So it has a date and a shelf life. A product sitting here more
+ * than THIRTY DAYS fails the build, and the fix is to wire the offer, refuse
+ * the sale in writing, or take the product down. There is no fourth option and
+ * there is no extending the clock quietly.
+ */
+export interface OfferSetupPending {
+  /** Why the offer is not wired yet. Not "TODO". */
+  reason: string;
+  /** ISO date the product entered this state. The clock starts here. */
+  since: string;
+}
+
+export const OFFER_SETUP_PENDING_DAYS = 30;
+
+export const OFFER_SETUP_PENDING: Record<string, OfferSetupPending> = {
+  /* Ten products verified on 8 August 2026 against Amazon US through the
+     SerpAPI product engine and against each manufacturer's current lineup.
+     Identity confirmed; nobody has built the commercial wiring. */
+  "prod-litter-robot-4": { reason: "Identity confirmed at B0BH6MD3DJ, $699 read 8 August 2026. Whisker's affiliate programme has not been applied for and no destination is wired.", since: "2026-08-08" },
+  "prod-petkit-purobot-max-pro-2": { reason: "Identity confirmed at B0DM83CLW3, $509.99 read 8 August 2026. PETKIT sells through Amazon and direct; neither route is wired.", since: "2026-08-08" },
+  "prod-casa-leo-loo-too": { reason: "Identity confirmed at B09LL9S99B, $599 read 8 August 2026. No affiliate relationship with Casa Leo.", since: "2026-08-08" },
+  "prod-petsafe-scoopfree-crystal-pro": { reason: "Identity confirmed at B0DR3JP2FZ, $229.99 read 8 August 2026. The Legacy SKU sits four cents away and the destination must not be wired until the ASIN is pinned in DESTINATIONS.", since: "2026-08-08" },
+  "prod-navimow-i110n": { reason: "Identity confirmed at B0CX7T6BR3, $1,099 read 8 August 2026. Segway's US programme is unapplied.", since: "2026-08-08" },
+  "prod-luba-3-awd-1500h": { reason: "Identity confirmed at B0GKNYZPC3, $2,399 read 8 August 2026. Replaces the Luba 2 the brief named; no destination wired.", since: "2026-08-08" },
+  "prod-luba-3-awd-3000h": { reason: "Identity confirmed at B0GKNQKJJQ, $2,799 read 8 August 2026. No destination wired.", since: "2026-08-08" },
+  "prod-automower-410iq": { reason: "Identity confirmed at B0DTV7TR6W, $2,499.99 read 8 August 2026. Husqvarna sells through dealers as well as Amazon and the right destination is a decision, not a default.", since: "2026-08-08" },
+  "prod-worx-landroid-vision-wr320": { reason: "Identity confirmed at B0GN8KK8XW, $1,022.54 read 8 August 2026. Four Landroid Vision SKUs are live and the destination must name this one explicitly.", since: "2026-08-08" },
+  "prod-eufy-e15": { reason: "Identity confirmed at B0DRVYDXWX, $1,199.99 read 8 August 2026. Anker's programme is unapplied.", since: "2026-08-08" },
+};
+
+/** Days a product has been waiting, against the day given. */
+export const pendingAgeDays = (since: string, today: string): number =>
+  Math.floor((Date.parse(today) - Date.parse(since)) / 86_400_000);
+
+/** Products that have outstayed the shelf life, as of `today`. */
+export const overduePendingOffers = (today: string): string[] =>
+  Object.entries(OFFER_SETUP_PENDING)
+    .filter(([, v]) => pendingAgeDays(v.since, today) > OFFER_SETUP_PENDING_DAYS)
+    .map(([id]) => id);
+
 export const NO_OFFER_BY_DESIGN: Record<string, string> = {
   "prod-living-ai-emo":
     "Living.AI sells EMO direct and does not list it on Amazon US. Searching for it there returns imitations — EMOPET and unbranded desk robots — with the Living.AI brand token absent from every top result we read on 8 August 2026. There is no destination we could send a buyer to that we are confident sells the real product, so we send them nowhere.",
@@ -1026,6 +1100,19 @@ const WINDOW_SLUGS = new Set([
 
 const CODING_SLUGS = new Set(["sphero-bolt", "sphero-mini", "sphero-indi", "ozobot-evo", "makeblock-mbot", "cozmo"]);
 
+/* The launch category, named rather than assumed. CATEGORY_OF falls through to
+   pool, so this is what makes "fell through" distinguishable from "is a pool
+   cleaner" — see the test of the same name in offers.test.ts. */
+export const POOL_SLUGS = new Set([
+  "beatbot-aquasense-2-ultra", "aiper-scuba-x1-pro-max", "aiper-scuba-s1", "aiper-seagull-se",
+  "wybot-c1", "dolphin-nautilus-cc-plus", "bublue-bubot-800p", "polaris-freedom",
+  "betta-se-plus", "dolphin-e10", "dolphin-proteus-dx4-plus", "aiper-scuba-v3-ai-vision",
+]);
+
+const LITTER_SLUGS = new Set(["litter-robot-4", "petkit-purobot-max-pro-2", "casa-leo-loo-too", "petsafe-scoopfree-crystal-pro"]);
+
+const LAWN_SLUGS = new Set(["segway-navimow-i110n", "mammotion-luba-3-awd-1500h", "mammotion-luba-3-awd-3000h", "husqvarna-automower-410iq", "worx-landroid-vision-wr320", "eufy-e15"]);
+
 const PETCAM_SLUGS = new Set(["enabot-ebo-air-2", "enabot-ebo-se", "enabot-rola-petpal"]);
 
 const COMPANION_SLUGS = new Set([
@@ -1055,7 +1142,16 @@ const CATEGORY_OF: Record<string, string> = Object.fromEntries(
           ? "pet-camera-robots"
           : CODING_SLUGS.has(slug)
             ? "educational-coding-robots"
-            : "robotic-pool-cleaners",
+            : LITTER_SLUGS.has(slug)
+              ? "self-cleaning-litter-boxes"
+              : LAWN_SLUGS.has(slug)
+                ? "robotic-lawn-mowers"
+                : /* THE DEFAULT IS POOL AND THAT IS A TRAP. A slug in no set
+                     above lands in the launch category silently, which is how
+                     ten litter boxes and lawn mowers were briefly filed as pool
+                     cleaners on 8 August 2026. The test below asserts every
+                     slug is claimed by a set rather than falling through. */
+                  "robotic-pool-cleaners",
   ]),
 );
 

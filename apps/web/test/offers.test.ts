@@ -1,7 +1,17 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { PAGE_PLAN } from "../src/content/seo/page-plan";
-import { NO_OFFER_BY_DESIGN, PRODUCTS, PRODUCT_ID } from "../src/content/products";
+import {
+  CATALOGUE,
+  NO_OFFER_BY_DESIGN,
+  OFFER_SETUP_PENDING,
+  OFFER_SETUP_PENDING_DAYS,
+  PRODUCTS,
+  PRODUCT_ID,
+  POOL_SLUGS,
+  overduePendingOffers,
+  pendingAgeDays,
+} from "../src/content/products";
 import { REVIEWS } from "../src/content/reviews";
 import { DESTINATIONS, IDENTITY_CHECKS, REDIRECT_KEYS, REJECTED_CANDIDATES, destinationFor } from "../src/content/commerce/destinations";
 import { NOT_RELATIONSHIPS, PROGRAMMES, RETAILERS, approvedUsRetailers, programme, retailer, usableUsProgrammes } from "../src/content/commerce/registry";
@@ -705,7 +715,9 @@ describe("/go redirect", () => {
   });
 
   it("records a key for every launch product", () => {
-    const sellableIds = PRODUCT_IDS.filter((id) => !(id in NO_OFFER_BY_DESIGN));
+    const sellableIds = PRODUCT_IDS.filter(
+      (id) => !(id in NO_OFFER_BY_DESIGN) && !(id in OFFER_SETUP_PENDING),
+    );
     for (const id of sellableIds) expect(REDIRECT_KEYS[id]).toBeTruthy();
     expect(new Set(Object.values(REDIRECT_KEYS)).size).toBe(sellableIds.length);
   });
@@ -740,6 +752,66 @@ describe("/go redirect", () => {
       .map((r) => r.slug)
       .filter((slug) => !(slug in PRODUCT_ID));
     expect(silent, "reviewed products missing from PRODUCT_ID — sellable or refused, never neither").toEqual([]);
+  });
+
+  /**
+   * OFFER_SETUP_PENDING HAS A SHELF LIFE, AND THIS IS IT.
+   *
+   * Every "we'll wire it up later" state becomes the place products go to be
+   * forgotten. This one is dated and expires: thirty days after a product
+   * enters it, the build fails, and the only ways out are to wire the offer,
+   * refuse the sale in writing, or take the product down.
+   *
+   * The date is read from the system clock on purpose. A fixture would make
+   * this test pass forever, which is precisely the failure it exists to
+   * prevent.
+   */
+  it("fails once a pending product has waited longer than the shelf life", () => {
+    const today = new Date().toISOString().slice(0, 10);
+    const overdue = overduePendingOffers(today).map(
+      (id) => `${id} (since ${OFFER_SETUP_PENDING[id]!.since}, ${pendingAgeDays(OFFER_SETUP_PENDING[id]!.since, today)} days)`,
+    );
+    expect(
+      overdue,
+      `these have been OFFER_SETUP_PENDING more than ${OFFER_SETUP_PENDING_DAYS} days — wire the offer, refuse the sale in NO_OFFER_BY_DESIGN, or unpublish`,
+    ).toEqual([]);
+  });
+
+  it("gives every pending product a written reason and a real date", () => {
+    for (const [id, v] of Object.entries(OFFER_SETUP_PENDING)) {
+      expect(v.reason.length, `${id} is pending with no reason recorded`).toBeGreaterThan(40);
+      expect(v.since, `${id} has no valid since date`).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+      expect(Number.isNaN(Date.parse(v.since)), `${id}: since is not a date`).toBe(false);
+    }
+  });
+
+  /* The two states are mutually exclusive by definition: one says we refuse
+     the sale, the other says we have not built it yet. A product in both is a
+     product nobody has decided about. */
+  it("never puts a product in both pending and refused", () => {
+    const both = Object.keys(OFFER_SETUP_PENDING).filter((id) => id in NO_OFFER_BY_DESIGN);
+    expect(both, "declared both refused and pending").toEqual([]);
+  });
+
+  /* A pending product makes no commercial claim anywhere. */
+  it("gives a pending product no offer and no /go key", () => {
+    for (const id of Object.keys(OFFER_SETUP_PENDING)) {
+      expect(REDIRECT_KEYS[id], `${id} is pending but has a /go key`).toBeUndefined();
+      expect(OFFERS.find((o) => o.productId === id), `${id} is pending but has an offer`).toBeUndefined();
+    }
+  });
+
+  /**
+   * CATEGORY_OF defaults to the launch category, so a slug claimed by no set
+   * is filed as a pool cleaner in silence. That is not hypothetical: ten litter
+   * boxes and lawn mowers were briefly pool cleaners on 8 August 2026 because a
+   * ternary edit did not take, and nothing failed.
+   */
+  it("files no product in the launch category by accident", () => {
+    const pool = CATALOGUE.filter((p) => p.categorySlug === "robotic-pool-cleaners").map((p) => p.slug);
+    const known = new Set(POOL_SLUGS);
+    const strays = pool.filter((slug) => !known.has(slug));
+    expect(strays, "these fell through CATEGORY_OF into the launch category").toEqual([]);
   });
 
   it("gives every refused product a written reason", () => {
@@ -1433,7 +1505,10 @@ describe("scheduled refresh — wiring", () => {
      buy button is outside it. The declaration lives in content/products.ts with
      a written reason per product, so skipping one here costs an explicit
      editorial statement rather than a quiet omission. */
-  const sellable = () => activeCatalogue().filter((p) => !(p.productId in NO_OFFER_BY_DESIGN));
+  const sellable = () =>
+    activeCatalogue().filter(
+      (p) => !(p.productId in NO_OFFER_BY_DESIGN) && !(p.productId in OFFER_SETUP_PENDING),
+    );
 
   it("gives every product in the catalogue a real, buyable destination", () => {
     for (const p of sellable()) {

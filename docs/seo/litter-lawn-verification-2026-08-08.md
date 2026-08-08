@@ -104,3 +104,65 @@ commercial wiring is not built. Publishing a product row and publishing a buy
 button are separate decisions and only the first is ready.
 
 **No reviews.** Those wait for artwork, per the owner's instruction.
+
+---
+
+# Addendum, 8 August 2026 — the SKUs actually published
+
+Ten products entered the catalogue on this date as `OFFER_SETUP_PENDING`:
+identity verified, published, offers not wired. No price, no /go link and no
+stock claim renders for any of them.
+
+## The PetSafe decision, recorded because it was close
+
+Four ScoopFree Crystal SKUs are live and two of them are $229.95 and $229.99 —
+four cents apart. Published: **ScoopFree Crystal Pro, B0DR3JP2FZ, $229.99**.
+
+Both $229 SKUs are PetSafe-branded and confirmed at the product engine. The one
+we did not take is **B07X3XFB6K, ScoopFree Crystal Pro *Legacy*, Front-Entry**.
+"Legacy" is PetSafe's own word for the previous generation, printed in its own
+title, and B07X3XFB6K's ASIN prefix (B07) dates it to several years before
+B0DR3JP2FZ's (B0D). Same price, older machine. A buyer sorting by price cannot
+tell these apart, which is the reason this paragraph exists.
+
+Also not published: Crystal Pro Legacy uncovered (B07WZPJ2LW, $142.49) and
+Crystal Classic (B0CFRY7VYN, $99). Both are real and buyable; neither is the
+current generation, and one product per model line is the rule.
+
+## The full published set
+
+| Category | Name published | ASIN verified | Read price | Band |
+|---|---|---|---|---|
+| Litter | Litter-Robot 4 | B0BH6MD3DJ | $699 | premium |
+| Litter | PETKIT Purobot Max Pro 2 | B0DM83CLW3 | $509.99 | premium |
+| Litter | Casa Leo Leo's Loo Too | B09LL9S99B | $599 | premium |
+| Litter | PetSafe ScoopFree Crystal Pro | B0DR3JP2FZ | $229.99 | mid |
+| Lawn | Segway Navimow i110N | B0CX7T6BR3 | $1,099 | mid |
+| Lawn | Mammotion LUBA 3 AWD 1500H | B0GKNYZPC3 | $2,399 | premium |
+| Lawn | Mammotion LUBA 3 AWD 3000H | B0GKNQKJJQ | $2,799 | premium |
+| Lawn | Husqvarna Automower 410iQ | B0DTV7TR6W | $2,499.99 | premium |
+| Lawn | WORX Landroid Vision Cloud WR320 | B0GN8KK8XW | $1,022.54 | mid |
+| Lawn | eufy Robot Lawn Mower E15 | B0DRVYDXWX | $1,199.99 | mid |
+
+Ten products from ten candidates, with three renamed and one substituted:
+Luba 2 became LUBA 3 AWD (published in both sizes, because 0.37 and 0.75 acre
+are different buyers), Dreame A1 became **nothing** — see below — PuroBot Max
+Pro became Max Pro 2, and ScoopFree Crystal became Crystal Pro.
+
+## Refused: Dreame
+
+**Dreame A1 is not published, and no Dreame is published in its place.** The A1
+does not exist in the current US range; the line is now A3 AWD 1000
+(B0H3V799KT, $1,599.99) and A3 AWD Pro (B0GR8TQHV9, $2,699.99).
+
+The brief said to publish the ten with corrected names, and for Mammotion the
+correction is unambiguous — the maker's own page says the Luba 2 was upgraded to
+the Luba 3, so the successor is named by the manufacturer. Dreame is not the
+same case. An A3 is not a renamed A1; it is a different machine two generations
+along with LiDAR the A1 did not have, at a price the brief never named. Putting
+it in because the brand matches is substituting a product nobody asked for, and
+this catalogue has a rule against exactly that: a successor becomes its own
+record and is judged on its own.
+
+The A3 AWD 1000 looks like a good candidate. It should be proposed, not smuggled
+in under an old name.

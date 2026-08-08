@@ -245,6 +245,7 @@ const pageSchema = hero
 
   {compareRows.length > 1 && (
     <ComparisonTable
+      categorySlug={cat.slug}
       id="compare"
       eyebrow="Side by side"
       title={`Compare every ${cat.name.toLowerCase().replace(/s$/, "")}`}

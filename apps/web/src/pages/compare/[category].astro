@@ -195,6 +195,7 @@ const substantive = comparePageIsSubstantive(cat.slug, products.length);
 
   {rows.length > 1 && (
     <ComparisonTable
+      categorySlug={cat.slug}
       id="table"
       eyebrow="Side by side"
       title={`Every ${cat.name.toLowerCase().replace(/s$/, "")} we hold`}

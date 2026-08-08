@@ -1,6 +1,6 @@
 {
   "generatedFor": "2026-07-31",
-  "launchProducts": 41,
+  "launchProducts": 51,
   "rows": [
     {
       "productId": "prod-beatbot-aquasense-2-ultra",
@@ -1264,6 +1264,296 @@
     {
       "productId": "prod-moxie",
       "canonicalUrl": "https://botplanet.io/robots/companion-robots/moxie/",
+      "verifiedOffers": 0,
+      "preferredOfferId": null,
+      "preferredOfferAudit": [
+        "0 offer(s) exist for this product",
+        "0 from an approved retailer",
+        "no approved offer — nothing is featured"
+      ],
+      "commissionUsedAsTieBreak": false,
+      "retailer": null,
+      "exactProductIdentifier": null,
+      "identifierKind": null,
+      "market": "us",
+      "priceState": "not_published",
+      "stockState": "unknown",
+      "deliveryState": "unknown",
+      "warrantyRoute": null,
+      "lastChecked": null,
+      "freshness": "unknown",
+      "affiliateProgramme": null,
+      "goPath": null,
+      "schemaEligible": false,
+      "blockers": [
+        "no approved offer"
+      ],
+      "nextAction": "Obtain price and availability through the Amazon Creators API so the offer can carry a current price and enter Offer schema."
+    },
+    {
+      "productId": "prod-litter-robot-4",
+      "canonicalUrl": "https://botplanet.io/robots/self-cleaning-litter-boxes/litter-robot-4/",
+      "verifiedOffers": 0,
+      "preferredOfferId": null,
+      "preferredOfferAudit": [
+        "0 offer(s) exist for this product",
+        "0 from an approved retailer",
+        "no approved offer — nothing is featured"
+      ],
+      "commissionUsedAsTieBreak": false,
+      "retailer": null,
+      "exactProductIdentifier": null,
+      "identifierKind": null,
+      "market": "us",
+      "priceState": "not_published",
+      "stockState": "unknown",
+      "deliveryState": "unknown",
+      "warrantyRoute": null,
+      "lastChecked": null,
+      "freshness": "unknown",
+      "affiliateProgramme": null,
+      "goPath": null,
+      "schemaEligible": false,
+      "blockers": [
+        "no approved offer"
+      ],
+      "nextAction": "Obtain price and availability through the Amazon Creators API so the offer can carry a current price and enter Offer schema."
+    },
+    {
+      "productId": "prod-petkit-purobot-max-pro-2",
+      "canonicalUrl": "https://botplanet.io/robots/self-cleaning-litter-boxes/petkit-purobot-max-pro-2/",
+      "verifiedOffers": 0,
+      "preferredOfferId": null,
+      "preferredOfferAudit": [
+        "0 offer(s) exist for this product",
+        "0 from an approved retailer",
+        "no approved offer — nothing is featured"
+      ],
+      "commissionUsedAsTieBreak": false,
+      "retailer": null,
+      "exactProductIdentifier": null,
+      "identifierKind": null,
+      "market": "us",
+      "priceState": "not_published",
+      "stockState": "unknown",
+      "deliveryState": "unknown",
+      "warrantyRoute": null,
+      "lastChecked": null,
+      "freshness": "unknown",
+      "affiliateProgramme": null,
+      "goPath": null,
+      "schemaEligible": false,
+      "blockers": [
+        "no approved offer"
+      ],
+      "nextAction": "Obtain price and availability through the Amazon Creators API so the offer can carry a current price and enter Offer schema."
+    },
+    {
+      "productId": "prod-casa-leo-loo-too",
+      "canonicalUrl": "https://botplanet.io/robots/self-cleaning-litter-boxes/casa-leo-loo-too/",
+      "verifiedOffers": 0,
+      "preferredOfferId": null,
+      "preferredOfferAudit": [
+        "0 offer(s) exist for this product",
+        "0 from an approved retailer",
+        "no approved offer — nothing is featured"
+      ],
+      "commissionUsedAsTieBreak": false,
+      "retailer": null,
+      "exactProductIdentifier": null,
+      "identifierKind": null,
+      "market": "us",
+      "priceState": "not_published",
+      "stockState": "unknown",
+      "deliveryState": "unknown",
+      "warrantyRoute": null,
+      "lastChecked": null,
+      "freshness": "unknown",
+      "affiliateProgramme": null,
+      "goPath": null,
+      "schemaEligible": false,
+      "blockers": [
+        "no approved offer"
+      ],
+      "nextAction": "Obtain price and availability through the Amazon Creators API so the offer can carry a current price and enter Offer schema."
+    },
+    {
+      "productId": "prod-petsafe-scoopfree-crystal-pro",
+      "canonicalUrl": "https://botplanet.io/robots/self-cleaning-litter-boxes/petsafe-scoopfree-crystal-pro/",
+      "verifiedOffers": 0,
+      "preferredOfferId": null,
+      "preferredOfferAudit": [
+        "0 offer(s) exist for this product",
+        "0 from an approved retailer",
+        "no approved offer — nothing is featured"
+      ],
+      "commissionUsedAsTieBreak": false,
+      "retailer": null,
+      "exactProductIdentifier": null,
+      "identifierKind": null,
+      "market": "us",
+      "priceState": "not_published",
+      "stockState": "unknown",
+      "deliveryState": "unknown",
+      "warrantyRoute": null,
+      "lastChecked": null,
+      "freshness": "unknown",
+      "affiliateProgramme": null,
+      "goPath": null,
+      "schemaEligible": false,
+      "blockers": [
+        "no approved offer"
+      ],
+      "nextAction": "Obtain price and availability through the Amazon Creators API so the offer can carry a current price and enter Offer schema."
+    },
+    {
+      "productId": "prod-navimow-i110n",
+      "canonicalUrl": "https://botplanet.io/robots/robotic-lawn-mowers/segway-navimow-i110n/",
+      "verifiedOffers": 0,
+      "preferredOfferId": null,
+      "preferredOfferAudit": [
+        "0 offer(s) exist for this product",
+        "0 from an approved retailer",
+        "no approved offer — nothing is featured"
+      ],
+      "commissionUsedAsTieBreak": false,
+      "retailer": null,
+      "exactProductIdentifier": null,
+      "identifierKind": null,
+      "market": "us",
+      "priceState": "not_published",
+      "stockState": "unknown",
+      "deliveryState": "unknown",
+      "warrantyRoute": null,
+      "lastChecked": null,
+      "freshness": "unknown",
+      "affiliateProgramme": null,
+      "goPath": null,
+      "schemaEligible": false,
+      "blockers": [
+        "no approved offer"
+      ],
+      "nextAction": "Obtain price and availability through the Amazon Creators API so the offer can carry a current price and enter Offer schema."
+    },
+    {
+      "productId": "prod-luba-3-awd-1500h",
+      "canonicalUrl": "https://botplanet.io/robots/robotic-lawn-mowers/mammotion-luba-3-awd-1500h/",
+      "verifiedOffers": 0,
+      "preferredOfferId": null,
+      "preferredOfferAudit": [
+        "0 offer(s) exist for this product",
+        "0 from an approved retailer",
+        "no approved offer — nothing is featured"
+      ],
+      "commissionUsedAsTieBreak": false,
+      "retailer": null,
+      "exactProductIdentifier": null,
+      "identifierKind": null,
+      "market": "us",
+      "priceState": "not_published",
+      "stockState": "unknown",
+      "deliveryState": "unknown",
+      "warrantyRoute": null,
+      "lastChecked": null,
+      "freshness": "unknown",
+      "affiliateProgramme": null,
+      "goPath": null,
+      "schemaEligible": false,
+      "blockers": [
+        "no approved offer"
+      ],
+      "nextAction": "Obtain price and availability through the Amazon Creators API so the offer can carry a current price and enter Offer schema."
+    },
+    {
+      "productId": "prod-luba-3-awd-3000h",
+      "canonicalUrl": "https://botplanet.io/robots/robotic-lawn-mowers/mammotion-luba-3-awd-3000h/",
+      "verifiedOffers": 0,
+      "preferredOfferId": null,
+      "preferredOfferAudit": [
+        "0 offer(s) exist for this product",
+        "0 from an approved retailer",
+        "no approved offer — nothing is featured"
+      ],
+      "commissionUsedAsTieBreak": false,
+      "retailer": null,
+      "exactProductIdentifier": null,
+      "identifierKind": null,
+      "market": "us",
+      "priceState": "not_published",
+      "stockState": "unknown",
+      "deliveryState": "unknown",
+      "warrantyRoute": null,
+      "lastChecked": null,
+      "freshness": "unknown",
+      "affiliateProgramme": null,
+      "goPath": null,
+      "schemaEligible": false,
+      "blockers": [
+        "no approved offer"
+      ],
+      "nextAction": "Obtain price and availability through the Amazon Creators API so the offer can carry a current price and enter Offer schema."
+    },
+    {
+      "productId": "prod-automower-410iq",
+      "canonicalUrl": "https://botplanet.io/robots/robotic-lawn-mowers/husqvarna-automower-410iq/",
+      "verifiedOffers": 0,
+      "preferredOfferId": null,
+      "preferredOfferAudit": [
+        "0 offer(s) exist for this product",
+        "0 from an approved retailer",
+        "no approved offer — nothing is featured"
+      ],
+      "commissionUsedAsTieBreak": false,
+      "retailer": null,
+      "exactProductIdentifier": null,
+      "identifierKind": null,
+      "market": "us",
+      "priceState": "not_published",
+      "stockState": "unknown",
+      "deliveryState": "unknown",
+      "warrantyRoute": null,
+      "lastChecked": null,
+      "freshness": "unknown",
+      "affiliateProgramme": null,
+      "goPath": null,
+      "schemaEligible": false,
+      "blockers": [
+        "no approved offer"
+      ],
+      "nextAction": "Obtain price and availability through the Amazon Creators API so the offer can carry a current price and enter Offer schema."
+    },
+    {
+      "productId": "prod-worx-landroid-vision-wr320",
+      "canonicalUrl": "https://botplanet.io/robots/robotic-lawn-mowers/worx-landroid-vision-wr320/",
+      "verifiedOffers": 0,
+      "preferredOfferId": null,
+      "preferredOfferAudit": [
+        "0 offer(s) exist for this product",
+        "0 from an approved retailer",
+        "no approved offer — nothing is featured"
+      ],
+      "commissionUsedAsTieBreak": false,
+      "retailer": null,
+      "exactProductIdentifier": null,
+      "identifierKind": null,
+      "market": "us",
+      "priceState": "not_published",
+      "stockState": "unknown",
+      "deliveryState": "unknown",
+      "warrantyRoute": null,
+      "lastChecked": null,
+      "freshness": "unknown",
+      "affiliateProgramme": null,
+      "goPath": null,
+      "schemaEligible": false,
+      "blockers": [
+        "no approved offer"
+      ],
+      "nextAction": "Obtain price and availability through the Amazon Creators API so the offer can carry a current price and enter Offer schema."
+    },
+    {
+      "productId": "prod-eufy-e15",
+      "canonicalUrl": "https://botplanet.io/robots/robotic-lawn-mowers/eufy-e15/",
       "verifiedOffers": 0,
       "preferredOfferId": null,
       "preferredOfferAudit": [

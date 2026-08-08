@@ -6,7 +6,7 @@ import { and, eq } from "drizzle-orm";
 import { breadcrumbsFor } from "../../../lib/routing";
 import { buildOffers, publicationFor } from "../../../lib/offer-truth";
 import { retailer } from "../../../content/commerce/registry";
-import { catalogueStatusOf, CATALOGUE_WITHDRAWALS } from "../../../content/products";
+import { catalogueStatusOf, CATALOGUE_WITHDRAWALS, OFFER_SETUP_PENDING } from "../../../content/products";
 import { resolveSlug, removedRedirect } from "../../../content/product-names";
 import { latestAcceptedForProduct } from "../../../lib/providers/refresh-store";
 import ReviewArticle from "../../../components/ReviewArticle.astro";
@@ -87,6 +87,10 @@ const engineOffers = buildOffers(new Date(), { live: live ? [live] : [] })
   .filter((x) => x.pub.showable);
 
 const withdrawn = catalogueStatusOf(product.id) !== "active";
+/* Verified and published, commercial wiring not built. See OFFER_SETUP_PENDING
+   in content/products.ts — it is dated and expires, and the build fails once a
+   product has sat in it for more than thirty days. */
+const offerSetupPending = product.id in OFFER_SETUP_PENDING;
 const withdrawal = CATALOGUE_WITHDRAWALS[product.id] ?? null;
 
 const evidence = await db
@@ -260,6 +264,17 @@ const reviewGraph = hasReview
       This robot is no longer part of the BotPlanet launch selection, so we do not link to a seller for it or
       recommend it. Its record stays published because the research behind it is still worth reading.
       {withdrawal && <span class="muted"> {withdrawal.reason}</span>}
+    </p>
+  ) : offerSetupPending ? (
+    /* OFFER_SETUP_PENDING. Verified and published, not yet wired to sell.
+       "Check current price" and nothing else: no figure, no /go link, and no
+       availability, because the identity check returned no stock field and a
+       product in this state makes no commercial claim at all. */
+    <p class="note">
+      <strong>Check current price.</strong> We have confirmed this is the current model and which listing is
+      the right one, and we have not finished setting up the link to buy it. Rather than send you somewhere we
+      have not checked, or print a price nobody read today, this page says so. Come back or search the model
+      name above.
     </p>
   ) : engineOffers.length === 0 ? (
     <p class="note">

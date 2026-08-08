@@ -53,11 +53,39 @@ interface Props {
   intro: string;
   rows: ComparisonRow[];
   note?: string;
+  /** Category slug, so the first two columns can be named for the category. */
+  categorySlug?: string;
 }
 
-const { id, eyebrow, title, intro, rows, note } = Astro.props;
+const { id, eyebrow, title, intro, rows, note, categorySlug } = Astro.props;
 
-const COLUMNS = ["Pool size", "Pool type", "Cleans", "Power", "Price band"];
+/**
+ * THE FIRST TWO COLUMNS WERE CALLED "Pool size" AND "Pool type" ON EVERY PAGE.
+ *
+ * That was fine while pool was the only category and wrong from the day window
+ * shipped on 5 August 2026. Found on 8 August when the first lawn mowers went
+ * in and the table offered a robot mower's "Pool size" — but window, companion,
+ * coding and pet camera hubs had been doing it for three days already, in
+ * production, on the two columns a reader looks at first.
+ *
+ * The cells are generic — a size figure and a list of environments — so only
+ * the labels were ever pool-specific. `data-label` matters as much as the
+ * header: it is what the stacked mobile layout prints beside each value.
+ */
+const HEADINGS: Record<string, [string, string]> = {
+  "robotic-pool-cleaners": ["Pool size", "Pool type"],
+  "window-cleaning-robots": ["Reach", "Glass type"],
+  "robotic-lawn-mowers": ["Lawn size", "Ground"],
+  "robot-vacuums": ["Floor area", "Floor type"],
+  "self-cleaning-litter-boxes": ["Capacity", "Cat size"],
+  "grill-cleaning-robots": ["Grill size", "Grate type"],
+  "companion-robots": ["Size", "Suits"],
+  "pet-camera-robots": ["Range", "Suits"],
+  "educational-coding-robots": ["Age range", "Suits"],
+};
+const [sizeLabel, typeLabel] = HEADINGS[categorySlug ?? ""] ?? ["Size", "Suits"];
+
+const COLUMNS = [sizeLabel, typeLabel, "Cleans", "Power", "Price band"];
 ---
 
 <section class="bp-cmp" id={id}>
@@ -88,11 +116,11 @@ const COLUMNS = ["Pool size", "Pool type", "Cleans", "Power", "Price band"];
               </a>
             </th>
 
-            <td data-label="Pool size">
+            <td data-label={sizeLabel}>
               <span class:list={["bp-cmp__figure", r.poolSize === NOT_DISCLOSED && "is-unknown"]}>{r.poolSize}</span>
             </td>
 
-            <td data-label="Pool type">
+            <td data-label={typeLabel}>
               <span class="bp-cmp__tags">
                 {r.environments.split(" · ").map((v) => <span class="bp-cmp__tag">{v}</span>)}
               </span>
