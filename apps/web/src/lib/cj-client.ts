@@ -346,7 +346,7 @@ export async function fetchAiperCreatives(
 /**
  * CJ exposes advertiser terms through the joined-programme record. Until the
  * client can authenticate, every term stays "not confirmed through API" and the
- * conservative rights basis applies — the system never widens a permission by
+ * conservative terms applies — the system never widens a permission by
  * assuming what a programme probably allows.
  */
 export async function fetchProgrammeTerms(

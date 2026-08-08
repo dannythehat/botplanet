@@ -15,7 +15,7 @@
  *    never offer a size that does not exist;
  *  - never change aspect ratio. Height is derived, not chosen;
  *  - never touch a file that is not ours. It reads the media registry and skips
- *    anything whose rights basis does not permit proportional resizing.
+ *    anything whose asset record does not permit proportional resizing.
  *
  * Run: node scripts/gen-derivatives.mjs
  * Output: apps/web/public/media/** plus scripts/derivative-manifest.json

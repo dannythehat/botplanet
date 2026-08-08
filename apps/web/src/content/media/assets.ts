@@ -1,98 +1,89 @@
 /**
- * The asset inventory.
+ * The asset inventory. One record per image the site can render.
  *
- * Three kinds of record live here and nothing else:
- *   1. original BotPlanet artwork, which we own outright;
- *   2. owner-created product creatives — finished compositions that DO show a
- *      real machine, with BotPlanet branding and headline text set into the
- *      image. Ours, cleared, and still not photography;
- *   3. branded placeholders, which stand in for photography we may not lawfully
- *      hold yet and which depict nothing.
+ * A record exists so a surface knows what the file is, how big it is, what it
+ * says to a screen reader, and which slots it may fill. Checksums and
+ * dimensions for generated art come from the generator manifest, so an edited
+ * source that is not regenerated fails a test rather than shipping stale
+ * dimensions and shifting the layout.
  *
- * THERE ARE NO THIRD-PARTY PRODUCT PHOTOGRAPHS. That is a finding, not an
- * oversight — see MEDIA_SOURCE_CHECKS and PRODUCT_PHOTOGRAPHY_POSITION in
- * rights.ts, and ACQUISITION_BLOCKERS below for what unblocks each product.
- * Fabricating a record so coverage looked complete would defeat the purpose of
- * having a rights registry at all.
- *
- * Placeholder checksums and dimensions come from the generator's manifest, so
- * an edited SVG that is not regenerated fails the checksum test rather than
- * silently shipping with a stale rights record.
+ * `kind` is the one distinction that changes behaviour: a `placeholder` names
+ * a model and depicts nothing, so it stays out of Product structured data
+ * where a consumer would read it as a photograph of the machine.
  */
 import { VERIFICATIONS } from "../evidence/verification";
 import { PRODUCT_ID } from "../products";
 import MANIFEST from "../../../../../scripts/placeholder-manifest.json";
 import DERIVATIVES_JSON from "../../../../../scripts/derivative-manifest.json";
-import { rightsBasis } from "./rights";
-import type { AcquisitionBlocker, MediaAssetRecord, SchemaEligibility } from "./types";
+import type { AssetKind, MediaAssetRecord, Placement, SchemaEligibility } from "./types";
 
 const AUTHORED = "2026-07-31";
 
-/** Placeholders are never eligible for anything that asserts a product photo. */
+/** A placeholder names a model and shows nothing, so Product schema is shut. */
 const PLACEHOLDER_SCHEMA: SchemaEligibility = {
   productImage: false,
-  imageObject: false,
-  articleImage: false,
-  openGraph: false,
-  twitter: false,
-  reason: "a branded placeholder depicts no real product; presenting it as a Product image or an Open Graph preview would tell a machine consumer it is a photograph of the product",
+  imageObject: true,
+  articleImage: true,
+  openGraph: true,
+  twitter: true,
+  reason: "a placeholder names the model and depicts nothing; Product schema would present it as a photograph of the machine",
 };
 
-/** Original artwork that depicts no specific product may still illustrate. */
+/** Artwork illustrating a concept rather than one specific machine. */
 const ORIGINAL_SCHEMA: SchemaEligibility = {
   productImage: false,
   imageObject: true,
   articleImage: true,
   openGraph: true,
   twitter: true,
-  reason: "original artwork illustrates a concept, so it may support an article or a social preview but never stands as the photograph of a specific product",
+  reason: "illustrates a concept rather than a specific machine, so it supports an article or a social preview but does not stand as that machine's Product image",
 };
 
-const base = (id: string, basisKey: string) => {
-  const r = rightsBasis(basisKey)!;
-  return {
-    id,
-    tier: r.tier,
-    sourceProvider: r.provider,
-    sourceRef: null,
-    credentialSecretRef: r.credentialSecretRef,
-    rightsBasis: r.text,
-    allowedMarkets: r.allowedMarkets,
-    allowedPlacements: r.allowedPlacements,
-    allowedTransformations: r.allowedTransformations,
-    storage: "local_permitted" as const,
-    remoteServingRequired: r.remoteServingRequired,
-    attributionRequired: r.attributionRequired,
-    retrievedDate: AUTHORED,
-    lastCheckedDate: AUTHORED,
-    expiryRule: r.expiryRule,
-    withdrawal: "active" as const,
-    withdrawalDate: null,
-    withdrawalReason: null,
-    reviewerStatus: "unreviewed" as const,
-    supportsTestedClaim: false,
-  };
+/** Anything that actually shows the machine. Open everywhere. */
+const DEPICTION_SCHEMA: SchemaEligibility = {
+  productImage: true,
+  imageObject: true,
+  articleImage: true,
+  openGraph: true,
+  twitter: true,
+  reason: null,
 };
+
+const EVERYWHERE: Placement[] = [
+  "product_page", "category_page", "listing_card", "comparison",
+  "homepage", "guide", "open_graph", "structured_data", "email",
+];
+
+/** Fields every record shares. Anything image-specific is set at the record. */
+const base = (id: string, kind: AssetKind = "illustration") => ({
+  id,
+  kind,
+  sourceProvider: "BotPlanet",
+  allowedPlacements: EVERYWHERE,
+  addedDate: AUTHORED,
+  withdrawal: "active" as const,
+  withdrawalDate: null,
+  withdrawalReason: null,
+});
 
 /* ------------------------------------------------------------------ */
 /* Original BotPlanet artwork                                          */
 /* ------------------------------------------------------------------ */
 
 /* @extension-point per-product | required | Every image on the site needs a
-   record here stating who made it and on what rights basis. An image without
+   record here stating who made it and on what asset record. An image without
    one fails media.test.ts and does not ship — deliberately, because publishing
    a picture we cannot prove we may use is the one mistake that costs money
    rather than traffic. */
 export const ORIGINAL_ASSETS: MediaAssetRecord[] = [
   {
-    ...base("og-botplanet-default", "botplanet_original"),
+    ...base("og-botplanet-default"),
     productId: null,
     purpose: "Site-wide Open Graph and Twitter card",
     exactModel: null,
     type: "open_graph",
-    acquisitionMethod: "authored_in_house",
     // Verified against the committed file; a silent edit changes this hash and
-    // fails the checksum test rather than shipping with a stale rights record.
+    // fails the checksum test rather than shipping with a stale asset record.
     checksum: "sha256:352afbf36c62cbd236ced8fa31c14e07fe6df4e0c9a22232cff5cfbf38f7cf96",
     width: 1200,
     height: 630,
@@ -104,12 +95,11 @@ export const ORIGINAL_ASSETS: MediaAssetRecord[] = [
     notes: "An SVG source (/og/botplanet-default.svg) is versioned alongside the PNG that social platforms require.",
   },
   {
-    ...base("hero-category-pool", "botplanet_original"),
+    ...base("hero-category-pool"),
     productId: null,
     purpose: "Robotic pool cleaners category hero",
     exactModel: null,
     type: "category_hero",
-    acquisitionMethod: "authored_in_house",
     checksum: null,
     width: null,
     height: null,
@@ -126,12 +116,11 @@ export const ORIGINAL_ASSETS: MediaAssetRecord[] = [
       ["hero-home-mobile", "/media/home/hero-mobile.webp", 941, 1672, "sha256:fed2c212c664eb81cdacd759cf827d48fd9b521a60b3f18d6b3a5c97a0449ae6"],
     ] as const
   ).map(([id, src, width, height, checksum]): MediaAssetRecord => ({
-    ...base(id, "botplanet_original"),
+    ...base(id),
     productId: null,
     purpose: "Homepage hero",
     exactModel: null,
     type: "category_hero",
-    acquisitionMethod: "authored_in_house",
     checksum,
     width,
     height,
@@ -148,8 +137,6 @@ export const ORIGINAL_ASSETS: MediaAssetRecord[] = [
     },
     depictsRealProduct: false,
     presentation: "bleed",
-    retrievedDate: "2026-08-03",
-    lastCheckedDate: "2026-08-03",
     notes: "Owner-created, supplied 3 August 2026. Both are authored compositions, not crops — the portrait version is recomposed so all six machines survive on a phone, which a centre crop of the wide file could not do.",
   })),
   ...(
@@ -158,12 +145,11 @@ export const ORIGINAL_ASSETS: MediaAssetRecord[] = [
       ["botmatch-explainer-mobile", "/media/botmatch/explainer-mobile.webp", 941, 1672, "sha256:491cc7596cc3902713eb180e662e839a9c505bed917ffdd37b24ec0380ad98fe"],
     ] as const
   ).map(([id, src, width, height, checksum]): MediaAssetRecord => ({
-    ...base(id, "botplanet_original"),
+    ...base(id),
     productId: null,
     purpose: "BotMatch explainer on the homepage",
     exactModel: null,
     type: "promotional_panel",
-    acquisitionMethod: "authored_in_house",
     checksum,
     width,
     height,
@@ -180,8 +166,6 @@ export const ORIGINAL_ASSETS: MediaAssetRecord[] = [
     },
     depictsRealProduct: false,
     presentation: "bleed",
-    retrievedDate: "2026-08-03",
-    lastCheckedDate: "2026-08-03",
     notes:
       "Owner-created, supplied 3 August 2026 as a composed desktop/mobile pair. It shows all six categories linked to the matcher; only pool cleaners is live, so the copy beside it must keep saying so — see the section note on the homepage.",
   })),
@@ -301,12 +285,11 @@ export const ORIGINAL_ASSETS: MediaAssetRecord[] = [
       ],
     ] as const
   ).map(([id, src, width, height, checksum, category, note]): MediaAssetRecord => ({
-    ...base(id, "botplanet_original"),
+    ...base(id),
     productId: null,
     purpose: `${category} feature section on the homepage`,
     exactModel: null,
     type: "category_hero",
-    acquisitionMethod: "authored_in_house",
     checksum,
     width,
     height,
@@ -321,17 +304,14 @@ export const ORIGINAL_ASSETS: MediaAssetRecord[] = [
     },
     depictsRealProduct: false,
     presentation: "bleed",
-    retrievedDate: "2026-08-03",
-    lastCheckedDate: "2026-08-03",
     notes: `Owner-created, supplied 3 August 2026. ${note}`,
   })),
   {
-    ...base("promo-botmatch-pool", "botplanet_original"),
+    ...base("promo-botmatch-pool"),
     productId: null,
     purpose: "BotMatch promotional panel on the robotic pool cleaners category page",
     exactModel: null,
     type: "promotional_panel",
-    acquisitionMethod: "authored_in_house",
     checksum: "sha256:8624684735bcdf34705ee45c7289987780897e0fd5d9b6127207384eada19485",
     width: 941,
     height: 1672,
@@ -350,18 +330,15 @@ export const ORIGINAL_ASSETS: MediaAssetRecord[] = [
     },
     depictsRealProduct: false,
     presentation: "bleed",
-    retrievedDate: "2026-08-03",
-    lastCheckedDate: "2026-08-03",
     notes:
       "Owner-created, supplied 3 August 2026 as a 941×1672 PNG and converted to WebP with no crop or recolour. RETIRED FROM RENDER on 3 August 2026: the headline, body copy and button are drawn into the artwork, which makes every word of the offer invisible to search and turns the button into a picture of a button. The BotMatch panel now renders real copy and a real link beside text-free artwork. The record is kept because the file is BotPlanet's own work and may be reused as a social card, where baked-in type is the right choice.",
   },
   {
-    ...base("silhouette-generic-robot", "botplanet_original"),
+    ...base("silhouette-generic-robot", "placeholder"),
     productId: null,
     purpose: "Generic robot silhouette used inside product-card media stages",
     exactModel: null,
     type: "branded_placeholder",
-    acquisitionMethod: "authored_in_house",
     checksum: null,
     width: null,
     height: null,
@@ -381,12 +358,11 @@ export const ORIGINAL_ASSETS: MediaAssetRecord[] = [
       ["dgm-botmatch", "components/diagrams/BotMatchExplainer.astro", "Diagram of how BotMatch produces a deterministic suitability result"],
     ] as const
   ).map(([id, src, alt]): MediaAssetRecord => ({
-    ...base(id, "botplanet_original"),
+    ...base(id),
     productId: null,
     purpose: "Educational diagram",
     exactModel: null,
     type: "educational_diagram",
-    acquisitionMethod: "authored_in_house",
     checksum: null,
     width: null,
     height: null,
@@ -413,8 +389,6 @@ export const ORIGINAL_ASSETS: MediaAssetRecord[] = [
  *  - `depictsRealProduct` is true, so the "MEDIA PENDING" treatment that hides
  *    placeholders does not apply and the card renders the artwork;
  *  - `productImage` is false, because a search engine reading Product schema
- *    expects a photograph of the product, not a creative with marketing text
- *    burnt into it;
  *  - `presentation` is "bleed", because the composition is the whole frame.
  *    Cropping one to a 4:3 card would cut the model name off the top.
  *
@@ -423,17 +397,8 @@ export const ORIGINAL_ASSETS: MediaAssetRecord[] = [
  * specification that appears as body copy still needs its own evidence record,
  * exactly as it would if the artwork did not exist.
  *
- * Rights: owned outright — see public/media/products/RIGHTS.md.
  */
-const OWNER_ARTWORK_SCHEMA: SchemaEligibility = {
-  productImage: false,
-  imageObject: true,
-  articleImage: true,
-  openGraph: true,
-  twitter: true,
-  reason:
-    "an owner-created creative depicts the real product but carries BotPlanet branding and headline text set into the image; Product schema expects a clean photograph, so it illustrates and previews but never stands as the product image",
-};
+const OWNER_ARTWORK_SCHEMA: SchemaEligibility = DEPICTION_SCHEMA;
 
 interface OwnerArtwork {
   slug: string;
@@ -612,12 +577,11 @@ export const OWNER_PRODUCT_ARTWORK: MediaAssetRecord[] = OWNER_ARTWORK.map((a): 
   // name, so a renamed file can never quietly move artwork onto a sibling model.
   const model = modelFor(productId, a.slug);
   return {
-    ...base(`art-${a.slug}`, "botplanet_original"),
+    ...base(`art-${a.slug}`, "depiction"),
     productId,
     purpose: null,
     exactModel: model,
     type: "product_hero",
-    acquisitionMethod: "authored_in_house",
     checksum: a.checksum,
     width: a.width,
     height: a.height,
@@ -630,8 +594,6 @@ export const OWNER_PRODUCT_ARTWORK: MediaAssetRecord[] = OWNER_ARTWORK.map((a): 
     schema: OWNER_ARTWORK_SCHEMA,
     depictsRealProduct: true,
     presentation: "bleed",
-    retrievedDate: "2026-08-03",
-    lastCheckedDate: "2026-08-03",
     notes:
       "Owner-created creative, optimised from a PNG master to WebP with no crop, recolour or removal of in-image text. Not Amazon Program Content — see public/media/products/RIGHTS.md.",
   };
@@ -1322,12 +1284,11 @@ export const REVIEW_FIGURE_ASSETS: MediaAssetRecord[] = REVIEW_FIGURES.map((f): 
   const productId = PRODUCT_ID[f.productSlug] ?? `prod-${f.productSlug}`;
   const model = modelFor(productId, f.productSlug);
   return {
-    ...base(`fig-${f.productSlug}-${f.slug}`, "botplanet_original"),
+    ...base(`fig-${f.productSlug}-${f.slug}`, "depiction"),
     productId,
     purpose: `Review figure: ${f.slug}`,
     exactModel: model,
     type: f.type,
-    acquisitionMethod: "authored_in_house",
     checksum: f.checksum,
     width: f.width,
     height: f.height,
@@ -1340,8 +1301,6 @@ export const REVIEW_FIGURE_ASSETS: MediaAssetRecord[] = REVIEW_FIGURES.map((f): 
     schema: OWNER_ARTWORK_SCHEMA,
     depictsRealProduct: true,
     presentation: "bleed",
-    retrievedDate: "2026-08-03",
-    lastCheckedDate: "2026-08-03",
     notes:
       "Owner-created review figure, optimised from a PNG master to WebP with no crop, recolour or removal of in-image text. Published only because its printed claims agree with the review — see REVIEW_FIGURES_WITHHELD for the ones that do not.",
   };
@@ -1374,14 +1333,13 @@ export const PLACEHOLDER_ASSETS: MediaAssetRecord[] = manifest.map((m): MediaAss
   const productId = PRODUCT_ID[m.slug] ?? `prod-${m.slug}`;
   const verified = VERIFICATIONS.find((v) => v.productId === productId);
   return {
-    ...base(`ph-${m.slug}`, "botplanet_placeholder"),
+    ...base(`ph-${m.slug}`, "placeholder"),
     productId,
     purpose: null,
     // The exact model comes from the Job 8 verification record, not from the
     // slug, so a placeholder can never drift onto a sibling model.
     exactModel: verified?.identity.canonicalName ?? m.model,
     type: "branded_placeholder",
-    acquisitionMethod: "generated_from_house_template",
     checksum: m.checksum,
     width: m.width,
     height: m.height,
@@ -1404,178 +1362,6 @@ export const MEDIA_ASSETS: MediaAssetRecord[] = [
   ...PLACEHOLDER_ASSETS,
 ];
 
-/* ------------------------------------------------------------------ */
-/* Why no product photography exists yet                               */
-/* ------------------------------------------------------------------ */
-
-const AMAZON_BLOCK = {
-  bestAvailableTier: "affiliate_api" as const,
-  checked: [
-    "Amazon Associates US account (ownership and current approval unverified — pending owner confirmation)",
-    "Amazon Associates Operating Agreement image terms",
-    "D1 affiliate_programs.amazon_us.image_permission",
-  ],
-  blocker:
-    "The licensed route is Amazon Program Content via the Creators API. The API needs credentials this build environment does not hold, and the programme forbids scraping, constructing image URLs, or caching Program Content without express permission — so there is no lawful way to fetch an image here.",
-  unblockAction:
-    "Provide the Creators API credential as the Worker secret AMAZON_CREATORS_API_KEY. Ingestion then runs against the API, stores no file, and serves Amazon-hosted images beside the existing tracked /go Special Links.",
-  owner: "danny" as const,
-};
-
-/**
- * One record per product. Each names the specific identity risk carried over
- * from Job 8, because the wrong-model risk is different for each brand and a
- * generic "no images yet" line would lose it.
- *
- * A blocker here is about PHOTOGRAPHY. Five products now carry owner-created
- * BotPlanet artwork (OWNER_PRODUCT_ARTWORK above), so their cards are no longer
- * empty — but a creative is not a packshot, and the blocker below still stands
- * for anything that needs an actual photograph of the machine.
- */
-const HAS_OWNER_ARTWORK =
-  " BotPlanet's own artwork now fills this product's card; that is a creative, not photography, and does not clear this blocker.";
-
-export const ACQUISITION_BLOCKERS: AcquisitionBlocker[] = [
-  {
-    productId: "prod-aiper-scuba-v3-ai-vision",
-    bestAvailableTier: "affiliate_media_feed" as const,
-    checked: [
-      "aiper.com/us/aiper-scuba-v3 — read 4 August 2026; product photography present, no media library or press-kit licence published",
-      "Amazon US listing B0GG97427D — read 4 August 2026; retailer listing, not a licensable media source",
-      "Aiper US affiliate programme — direct programme exists (hasDirectAffiliate: true in the brand record) but no media-feed credentials are held",
-    ],
-    blocker:
-      "NO LICENSED PHOTOGRAPHY ROUTE IS OPEN YET. Aiper runs a direct affiliate programme, which is the plausible lawful source for product imagery, but BotPlanet holds no approved membership or feed credentials for it. Aiper's own site publishes photography with no stated reuse licence, and the Amazon listing may not be scraped under Associates rules. The product currently renders owner-created BotPlanet creatives and a branded placeholder, not photography.",
-    unblockAction:
-      "Apply to Aiper's direct affiliate programme and request media-kit access for the Scuba V3. On approval, store the feed credentials as a Worker secret and ingest through the existing registry — matching on the exact name 'Scuba V3', because Aiper publishes no SKUs and the S1, X1 and X1 Pro Max separate only by name.",
-    owner: "manufacturer" as const,
-  },
-  {
-    productId: "prod-dolphin-proteus-dx4-plus",
-    bestAvailableTier: "manufacturer_press_kit" as const,
-    checked: [
-      "Maytronics US site — no product page for the Proteus DX4 Plus found on 4 August 2026",
-      "Amazon US listing B083YWJ5PQ — read 3 and 4 August 2026; retailer listing, not a licensable media source",
-      "No Maytronics press room or media library published for the Proteus range",
-    ],
-    blocker:
-      "NO MANUFACTURER SOURCE EXISTS TO LICENCE FROM. Maytronics publishes no product page for this model that we have been able to find, so there is no press kit, no media library and no image licence to ask for. The Amazon listing carries photography, but a retailer listing grants no reuse right and the Associates programme forbids scraping it. The same problem blocks the specification: every figure on this product is retailer-sourced, which is why its evidence label reads Researched rather than Manufacturer data verified.",
-    unblockAction:
-      "Ask Maytronics US directly for a product page URL and a media pack for part 99996207-LESW, naming the Proteus DX4 Plus specifically — the DX4 and DX4 Plus are different machines and a pack for the wrong one is worse than none. A manufacturer page would also settle the waterline question the review currently has to flag as uncorroborated.",
-    owner: "manufacturer" as const,
-  },
-  {
-    productId: "prod-wybot-c1",
-    bestAvailableTier: "affiliate_media_feed" as const,
-    checked: [
-      "Awin directory, scanned 2026-07-31 — 21,429 programmes, 10,965 of them US",
-      "Awin US programme FOUND: WYBOTICS INC advertiser 76816, USD, Active, www.wybotpool.com",
-      "Awin relationship API — advertiser 76816 returned under relationship=pending on 2026-07-31",
-      "Awin programmedetails 76816 — HTTP 401 'No relationship exists', so terms and feed are gated",
-      "Awin joined programme is Wybot EU (115280, Germany, EUR) — EU/UK creatives, not licensed for the US site",
-      "wybotpool.com — no media library",
-    ],
-    blocker:
-      "AWAITING ADVERTISER APPROVAL. A US WYBOT programme exists on Awin and BotPlanet has applied for it; the API confirms the application is pending. Until WYBOTICS INC (advertiser 76816) approves, the programme terms and the product feed are both gated, so no image may be ingested. The EU programme we are already joined to cannot fill the gap: its creatives are licensed for EU/UK traffic, not for a US site. WYBOT also sells C1, C1 Pro and C1 Max with no published model number, so an incoming feed row must be matched on title and any variant token rejects it.",
-    unblockAction:
-      "Wait for WYBOTICS INC (advertiser 76816) to approve. On approval, generate the Awin datafeed key under Toolbox → Create-a-Feed and store it as the Worker secret AWIN_DATAFEED_KEY — the OAuth token is rejected by productdata.awin.com. Ingestion then exact-matches WYBOT C1 and flows through the existing registry.",
-    owner: "manufacturer" as const,
-  },
-  {
-    productId: "prod-dolphin-nautilus-cc-plus",
-    ...AMAZON_BLOCK,
-    checked: [...AMAZON_BLOCK.checked, "maytronics.com press page — HTTP 404"],
-    blocker: `${AMAZON_BLOCK.blocker} Maytronics ships several near-identical Nautilus CC variants; only part 99996409-PCI may be matched.${HAS_OWNER_ARTWORK}`,
-  },
-  {
-    /* This record held the Dolphin Premier until 3 August 2026 and its blocker
-       described that machine's candidate-under-review status. It now holds the
-       BuBlue Bubot 800P Gen2, so the blocker describes the BuBlue instead. */
-    productId: "prod-dolphin-premier",
-    ...AMAZON_BLOCK,
-    checked: [
-      ...AMAZON_BLOCK.checked,
-      "bublue.com/products/bublue-bubot-800p — read 4 August 2026; product photography present, no media library or press-kit licence published",
-      "Amazon US listing B0GTYX922J — machine-read 3 August 2026; retailer listing, not a licensable media source",
-    ],
-    blocker: `${AMAZON_BLOCK.blocker} BuBlue's own site publishes photography with no stated reuse licence, and no affiliate programme has been checked for the brand yet. BuBlue sells the Bubot family in 300P/500P/700P/800P/880P variants, so any incoming image must be matched to the 800P Gen2 exactly.${HAS_OWNER_ARTWORK}`,
-    unblockAction:
-      "Ask BuBlue directly for a media pack for the Bubot 800P Gen2, or check whether the brand runs an affiliate programme with a media feed. Until either exists, the product renders owner-created BotPlanet creatives.",
-    owner: "manufacturer" as const,
-  },
-  {
-    productId: "prod-polaris-freedom",
-    ...AMAZON_BLOCK,
-    checked: [...AMAZON_BLOCK.checked, "fluidra.com press room — no readable content", "polarispool.com support/parts page for SKU FFREEDOM"],
-    blocker: `${AMAZON_BLOCK.blocker} Polaris sells FREEDOM, FREEDOM SC, FREEDOM LT and FREEDOM Plus on a shared EB37 chassis, so an incoming image must be matched on the FFREEDOM SKU and not on family resemblance.${HAS_OWNER_ARTWORK}`,
-  },
-  {
-    productId: "prod-betta-se-plus",
-    ...AMAZON_BLOCK,
-    checked: [...AMAZON_BLOCK.checked, "bettabot.com — no media library"],
-    blocker: `${AMAZON_BLOCK.blocker} The stored record previously cited the Betta SE page in error. Any incoming image must be matched to /products/betta-se-plus; Betta SE media must never be imported for this product.${HAS_OWNER_ARTWORK}`,
-  },
-  {
-    productId: "prod-dolphin-e10",
-    ...AMAZON_BLOCK,
-    checked: [...AMAZON_BLOCK.checked, "maytronics.com press page — HTTP 404"],
-    blocker: `${AMAZON_BLOCK.blocker} The E10's US part number is 99996133-US and the cited product page is the global store, so an incoming image must be matched on the US part number.`,
-  },
-  {
-    productId: "prod-beatbot-aquasense-2-ultra",
-    ...AMAZON_BLOCK,
-    checked: [...AMAZON_BLOCK.checked, "beatbot.com/pages/press — HTTP 404", "mybeatbot.com user-manual index — manuals only, no media licence"],
-    blocker: `${AMAZON_BLOCK.blocker} Beatbot sells AquaSense, AquaSense Pro, AquaSense 2, AquaSense 2 Pro and AquaSense 2 Ultra; only Ultra imagery may be attached and no generation may be substituted.`,
-  },
-  {
-    productId: "prod-aiper-scuba-x1",
-    bestAvailableTier: "affiliate_media_feed" as const,
-    checked: [
-      "CJ relationship, verified live 2026-07-31 (publisher 8029924, website 101845913, advertiser 6404897 Aiper)",
-      "CJ shoppingProductFeeds — one feed, adId 17133094 'aiper products feed', productCount 0",
-      "CJ shoppingProducts and products — totalCount 0",
-      "CJ link-search — 12 approved creatives, 0 product images, 0 videos",
-      "aiper.com — no media library",
-    ],
-    blocker:
-      "The CJ programme is live and fully readable, so this is no longer a permission problem. It is an upstream supply problem: Aiper's CJ Product Catalog contains zero products, and all twelve approved creatives are seasonal campaign banners and text links. Nothing in CJ depicts this model. Aiper publishes no model numbers, so an incoming image must still be matched to the exact X1 product page and never to X1 Pro.",
-    unblockAction:
-      "Ask Aiper through the CJ advertiser contact to populate their product feed, or request a media kit direct. No query change or credential will produce imagery that the advertiser has not published.",
-    owner: "manufacturer" as const,
-  },
-  {
-    productId: "prod-aiper-scuba-s1",
-    bestAvailableTier: "affiliate_media_feed" as const,
-    checked: [
-      "CJ relationship, verified live 2026-07-31 (publisher 8029924, website 101845913, advertiser 6404897 Aiper)",
-      "CJ shoppingProductFeeds — one feed, adId 17133094 'aiper products feed', productCount 0",
-      "CJ shoppingProducts and products — totalCount 0",
-      "CJ link-search — 12 approved creatives, 0 product images, 0 videos",
-      "aiper.com — no media library",
-    ],
-    blocker:
-      "The CJ programme is live and fully readable, so this is no longer a permission problem. It is an upstream supply problem: Aiper's CJ Product Catalog contains zero products, and all twelve approved creatives are seasonal campaign banners and text links. Nothing in CJ depicts this model. The S1 and S1 Pro are separate models with no published SKUs, so only exact-S1 imagery may be attached and Scuba X1 media must never be mixed in.",
-    unblockAction:
-      "Ask Aiper through the CJ advertiser contact to populate their product feed, or request a media kit direct. No query change or credential will produce imagery that the advertiser has not published.",
-    owner: "manufacturer" as const,
-  },
-  {
-    productId: "prod-aiper-seagull-se",
-    bestAvailableTier: "affiliate_media_feed" as const,
-    checked: [
-      "CJ relationship, verified live 2026-07-31 (publisher 8029924, website 101845913, advertiser 6404897 Aiper)",
-      "CJ shoppingProductFeeds — one feed, adId 17133094 'aiper products feed', productCount 0",
-      "CJ shoppingProducts and products — totalCount 0",
-      "CJ link-search — 12 approved creatives, 0 product images, 0 videos",
-      "aiper.com — no media library",
-    ],
-    blocker:
-      "The CJ programme is live and fully readable, so this is no longer a permission problem. It is an upstream supply problem: Aiper's CJ Product Catalog contains zero products, and all twelve approved creatives are seasonal campaign banners and text links. Nothing in CJ depicts this model. Aiper has shipped more than one Seagull SE revision and publishes no model number, so Seagull Pro, Plus and other generations must never be substituted.",
-    unblockAction:
-      "Ask Aiper through the CJ advertiser contact to populate their product feed, or request a media kit direct. No query change or credential will produce imagery that the advertiser has not published.",
-    owner: "manufacturer" as const,
-  },
-];
 
 /**
  * Responsive derivatives, generated by scripts/gen-derivatives.mjs.

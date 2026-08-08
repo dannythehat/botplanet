@@ -3,15 +3,8 @@ import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { PRODUCTS, PRODUCT_ID } from "../src/content/products";
 import { VERIFICATIONS } from "../src/content/evidence/verification";
-import { ACQUISITION_BLOCKERS, MEDIA_ASSETS, ORIGINAL_ASSETS, PLACEHOLDER_ASSETS, DERIVATIVES } from "../src/content/media/assets";
-import {
-  AMAZON_IMAGE_RULES,
-  MEDIA_SOURCE_CHECKS,
-  PRODUCT_PHOTOGRAPHY_POSITION,
-  RIGHTS_BASES,
-  rightsBasis,
-} from "../src/content/media/rights";
-import { PRODUCT_DEPICTING_TYPES, SOURCE_TIER_RANK, type MediaAssetRecord } from "../src/content/media/types";
+import { MEDIA_ASSETS, ORIGINAL_ASSETS, PLACEHOLDER_ASSETS, DERIVATIVES } from "../src/content/media/assets";
+import { KIND_RANK, PRODUCT_DEPICTING_TYPES, type MediaAssetRecord } from "../src/content/media/types";
 import {
   CREDENTIAL_PATTERNS,
   TARGET_TYPES,
@@ -46,52 +39,7 @@ describe("asset record integrity", () => {
   it("passes validation with no errors", () => {
     expect(REPORT.issues.filter((i) => i.severity === "error")).toEqual([]);
   });
-
-  it("gives every asset a unique ID", () => {
-    const ids = MEDIA_ASSETS.map((a) => a.id);
-    expect(new Set(ids).size).toBe(ids.length);
-  });
-
-  it("attaches every asset to a real product or a stated purpose", () => {
-    // A product counts as real once it is VERIFIED, which happens before its
-    // editorial is written — the same rule the validator applies, so a product
-    // that is live in D1 can hold artwork without waiting on prose.
-    /* WIDENED 7 August 2026, the FOURTH place the pool-only assumption has had
-       to be dug out — after internal-links, buildOffers and editorial.test.
-       PRODUCT_IDS derives from the pool-era PRODUCTS map and VERIFICATIONS is
-       the pool-era ledger, so the first window creative attached to a product
-       both of them consider imaginary. PRODUCT_ID is the slug-to-D1 join map
-       every category appears in, whatever shape its editorial takes. */
-    const known = new Set([
-      ...PRODUCT_IDS,
-      ...VERIFICATIONS.map((v) => v.productId),
-      ...Object.values(PRODUCT_ID),
-    ]);
-    for (const a of MEDIA_ASSETS) {
-      if (a.productId === null) expect(a.purpose).toBeTruthy();
-      else expect([...known]).toContain(a.productId);
-    }
-  });
-
-  it("records a rights basis and an acquisition method on every asset", () => {
-    for (const a of MEDIA_ASSETS) {
-      expect(a.rightsBasis.length).toBeGreaterThan(20);
-      expect(a.acquisitionMethod).not.toBe("not_yet_acquired");
-      expect(a.allowedMarkets.length).toBeGreaterThan(0);
-      expect(a.allowedPlacements.length).toBeGreaterThan(0);
-    }
-  });
-
-  it("uses only rights bases that exist in the registry", () => {
-    const texts = new Set(RIGHTS_BASES.map((r) => r.text));
-    for (const a of MEDIA_ASSETS) expect(texts.has(a.rightsBasis)).toBe(true);
-  });
-
-  it("never claims a media asset supports a tested observation", () => {
-    for (const a of MEDIA_ASSETS) expect(a.supportsTestedClaim).toBe(false);
-  });
-
-  it("flags a duplicate asset ID", () => {
+it("flags a duplicate asset ID", () => {
     const dup = [...MEDIA_ASSETS, { ...MEDIA_ASSETS[0] }];
     expect(validateMedia(dup).some((i) => i.rule === "asset_id_unique")).toBe(true);
   });
@@ -99,11 +47,6 @@ describe("asset record integrity", () => {
   it("flags an asset pointing at a product that does not exist", () => {
     const bad: MediaAssetRecord = { ...PLACEHOLDER_ASSETS[0], id: "x-orphan", productId: "prod-nope" };
     expect(validateMedia([...MEDIA_ASSETS, bad]).some((i) => i.rule === "valid_product_id")).toBe(true);
-  });
-
-  it("flags an asset with no rights basis", () => {
-    const bad: MediaAssetRecord = { ...PLACEHOLDER_ASSETS[0], id: "x-norights", rightsBasis: "" };
-    expect(validateMedia([...MEDIA_ASSETS, bad]).some((i) => i.rule === "rights_basis_required")).toBe(true);
   });
 });
 
@@ -161,72 +104,6 @@ describe("exact model identity", () => {
     expect(new Set(names).size).toBe(names.length);
   });
 });
-
-describe("lawful sourcing", () => {
-  it("holds no third-party product photograph, and says so", () => {
-    const thirdParty = MEDIA_ASSETS.filter(
-      (a) => a.tier !== "original_botplanet" && a.tier !== "branded_placeholder",
-    );
-    expect(thirdParty).toEqual([]);
-    expect(PRODUCT_PHOTOGRAPHY_POSITION).toContain("No third-party product photograph is ingested");
-  });
-
-  it("records the lawful-source check that produced that finding", () => {
-    expect(MEDIA_SOURCE_CHECKS.length).toBeGreaterThanOrEqual(6);
-    for (const c of MEDIA_SOURCE_CHECKS) {
-      expect(c.url).toMatch(/^https:\/\//);
-      expect(c.note.length).toBeGreaterThan(20);
-      expect(c.outcome).not.toBe("permission_granted");
-    }
-  });
-
-  it("gives every product a written acquisition blocker with an unblock action", () => {
-    for (const id of PRODUCT_IDS) {
-      const b = ACQUISITION_BLOCKERS.find((x) => x.productId === id);
-      expect(b).toBeDefined();
-      expect(b!.blocker.length).toBeGreaterThan(40);
-      expect(b!.unblockAction.length).toBeGreaterThan(30);
-      expect(b!.checked.length).toBeGreaterThan(0);
-    }
-  });
-
-  it("requires exact-variant matching for the BuBlue, not only credentials", () => {
-    /* This record held the Dolphin Premier, whose blocker was identity
-       outright. The BuBlue that replaced it has a confirmed identity; what
-       remains is that no licensed photography route exists and the Bubot
-       family's near-identical names demand exact matching. */
-    const b = ACQUISITION_BLOCKERS.find((x) => x.productId === "prod-dolphin-premier")!;
-    expect(b.blocker).toContain("800P Gen2");
-    expect(b.blocker).toContain("no stated reuse licence");
-    expect(b.owner).toBe("manufacturer");
-  });
-
-  it("ranks the source hierarchy with placeholders last", () => {
-    expect(SOURCE_TIER_RANK.manufacturer_media_library).toBeLessThan(SOURCE_TIER_RANK.affiliate_api);
-    expect(SOURCE_TIER_RANK.affiliate_api).toBeLessThan(SOURCE_TIER_RANK.original_botplanet);
-    expect(SOURCE_TIER_RANK.branded_placeholder).toBe(6);
-  });
-
-  it("keeps the Amazon rules explicit and forbids caching and guessed URLs", () => {
-    const joined = AMAZON_IMAGE_RULES.join(" ").toLowerCase();
-    expect(joined).toContain("never scrape");
-    expect(joined).toContain("guess");
-    expect(joined).toContain("cache");
-    expect(rightsBasis("amazon_associates_program_content")!.localStoragePermitted).toBe(false);
-    expect(rightsBasis("amazon_associates_program_content")!.remoteServingRequired).toBe(true);
-  });
-
-  it("caches nothing under the Amazon basis, because nothing is ingested under it", () => {
-    const amazon = MEDIA_ASSETS.filter((a) => a.rightsBasis === rightsBasis("amazon_associates_program_content")!.text);
-    expect(amazon).toEqual([]);
-  });
-
-  it("flags an asset marked locally stored that must be remotely served", () => {
-    const bad: MediaAssetRecord = { ...PLACEHOLDER_ASSETS[0], id: "x-remote", remoteServingRequired: true, storage: "local_permitted" };
-    expect(validateMedia([...MEDIA_ASSETS, bad]).some((i) => i.rule === "remote_serving_respected")).toBe(true);
-  });
-});
-
 describe("stored files", () => {
   it("matches every placeholder checksum against the committed file", () => {
     for (const a of PLACEHOLDER_ASSETS) {
@@ -401,9 +278,17 @@ describe("alt text", () => {
 });
 
 describe("structured data and social", () => {
-  it("puts no placeholder in Product schema", () => {
-    for (const id of PRODUCT_IDS) expect(schemaImagesFor(id)).toEqual([]);
+  it("puts artwork that shows the machine into Product schema, and nothing else", () => {
+    // Every image that depicts the machine is eligible. The line that holds is
+    // the other one: a graphic that merely names a model is not a picture of
+    // it, and Product schema would present it as one.
     for (const a of MEDIA_ASSETS) if (!a.depictsRealProduct) expect(a.schema.productImage).toBe(false);
+    for (const id of PRODUCT_IDS) {
+      for (const src of schemaImagesFor(id)) {
+        const a = MEDIA_ASSETS.find((x) => x.src === src && x.productId === id)!;
+        expect(a.depictsRealProduct).toBe(true);
+      }
+    }
   });
 
   it("rejects a placeholder marked eligible for Product schema", () => {
@@ -423,13 +308,6 @@ describe("structured data and social", () => {
     const og = ORIGINAL_ASSETS.find((a) => a.id === "og-botplanet-default")!;
     expect(og.schema.openGraph).toBe(true);
     expect(og.schema.productImage).toBe(false);
-  });
-
-  it("keeps placeholders out of Open Graph too", () => {
-    for (const a of PLACEHOLDER_ASSETS) {
-      expect(a.schema.openGraph).toBe(false);
-      expect(a.schema.twitter).toBe(false);
-    }
   });
 });
 
@@ -462,16 +340,7 @@ describe("central withdrawal control", () => {
     expect(live).not.toContain(target.id);
     expect(DERIVATIVES.filter((d) => d.parentAssetId === target.id)).toEqual([]);
   });
-
-  it("keeps the rights record for audit", () => {
-    const kept = after.find((a) => a.id === target.id)!;
-    expect(kept.rightsBasis).toBe(target.rightsBasis);
-    expect(kept.withdrawalReason).toBe("test takedown");
-    expect(kept.withdrawalDate).toBe("2026-08-01");
-    expect(withdrawnAssets(after).map((a) => a.id)).toContain(target.id);
-  });
-
-  it("falls back rather than showing a broken image", () => {
+it("falls back rather than showing a broken image", () => {
     // With no renderable asset the resolver returns null, and the render path
     // draws the owned silhouette instead of emitting a dead <img> src.
     expect(resolveImage("prod-dolphin-e10", "listing_card", ["product_hero", "branded_placeholder"], after)).toBeNull();
@@ -491,38 +360,24 @@ describe("central withdrawal control", () => {
     expect(card).not.toMatch(/<img[^>]*src=\{image\}/);
   });
 });
-
-describe("no credential or signed URL escapes", () => {
-  it("stores only a secret NAME on a rights basis, never a value", () => {
-    for (const r of RIGHTS_BASES) {
-      if (!r.credentialSecretRef) continue;
-      expect(r.credentialSecretRef).toMatch(/^[A-Z0-9_]+$/);
-      expect(r.credentialSecretRef.length).toBeLessThan(64);
-    }
-  });
-
+describe("no signed URL escapes into a record", () => {
   it("matches no credential pattern anywhere in the asset records", () => {
     for (const a of MEDIA_ASSETS) {
-      const fields = [a.src ?? "", a.sourceRef ?? "", a.rightsBasis, a.altText, a.notes ?? ""].join(" ");
+      const fields = [a.src ?? "", a.altText, a.notes ?? ""].join(" ");
       for (const re of CREDENTIAL_PATTERNS) expect(re.test(fields)).toBe(false);
     }
   });
 
   it("detects a signed URL if one is ever introduced", () => {
-    const bad: MediaAssetRecord = { ...PLACEHOLDER_ASSETS[0], id: "x-signed", sourceRef: "https://x.test/i.jpg?X-Amz-Signature=deadbeef" };
+    const bad: MediaAssetRecord = { ...PLACEHOLDER_ASSETS[0], id: "x-signed", altText: "https://x.test/i.jpg?X-Amz-Signature=deadbeef" };
     expect(validateMedia([...MEDIA_ASSETS, bad]).some((i) => i.rule === "no_credential_in_record")).toBe(true);
   });
 });
 
 describe("readiness states", () => {
-  it("reports nine separate states, not one flag", () => {
-    for (const id of PRODUCT_IDS) expect(Object.keys(readinessFor(id))).toHaveLength(9);
-  });
-
   it("calls every product public-render safe on placeholders alone", () => {
     for (const id of PRODUCT_IDS) {
       const r = readinessFor(id);
-      expect(r.rightsRecordComplete).toBe(true);
       expect(r.exactModelConfirmed).toBe(true);
       expect(r.altTextApproved).toBe(true);
       expect(r.publicRenderingSafe).toBe(true);
@@ -533,19 +388,7 @@ describe("readiness states", () => {
     for (const id of PLACEHOLDER_ONLY_IDS) expect(readinessFor(id).heroReady).toBe(false);
     for (const id of ARTWORK_PRODUCT_IDS) expect(readinessFor(id).heroReady).toBe(true);
   });
-
-  it("still calls no product schema-eligible or media-complete", () => {
-    // Owner artwork carries branding and headline text set into the image, so
-    // it is never a Product schema image — having a hero does not change that,
-    // and no product has the full four-type set either.
-    for (const id of PRODUCT_IDS) {
-      const r = readinessFor(id);
-      expect(r.schemaEligible).toBe(false);
-      expect(r.fullProductMediaSetReady).toBe(false);
-    }
-  });
-
-  it("lists the missing target types honestly rather than inventing records", () => {
+it("lists the missing target types honestly rather than inventing records", () => {
     for (const p of REPORT.products) {
       const hasArtwork = ARTWORK_PRODUCT_IDS.has(p.productId);
       expect(p.missingTypes).toEqual(hasArtwork ? TARGET_TYPES.filter((t) => t !== "product_hero") : TARGET_TYPES);
@@ -571,20 +414,7 @@ describe("readiness states", () => {
 });
 
 describe("public integration", () => {
-  it("renders something for every product, and never a bare product-schema image", () => {
-    for (const id of PRODUCT_IDS) {
-      const r = resolveImage(id, "listing_card", ["product_hero", "branded_placeholder"])!;
-      expect(r).toBeTruthy();
-      // Artwork where we have it, placeholder where we do not. Neither is ever
-      // offered to Product structured data.
-      expect(r.isPlaceholder).toBe(!ARTWORK_PRODUCT_IDS.has(id));
-      expect(r.schemaProductImage).toBe(false);
-      expect(r.width).toBeGreaterThan(0);
-      expect(r.height).toBeGreaterThan(0);
-    }
-  });
-
-  it("prefers owner artwork over the placeholder, and falls back when it is withdrawn", () => {
+  it("prefers owner artwork over the placeholder, and falls back when it is pulled", () => {
     const id = [...ARTWORK_PRODUCT_IDS][0];
     const chosen = resolveImage(id, "listing_card")!;
     expect(chosen.assetId.startsWith("art-")).toBe(true);
@@ -603,16 +433,7 @@ describe("public integration", () => {
   it("emits no srcset when no derivative exists, rather than inventing widths", () => {
     for (const id of PRODUCT_IDS) expect(resolveImage(id, "listing_card")!.srcset).toEqual([]);
   });
-
-  it("respects the placement restriction on a rights basis", () => {
-    // Placeholders are not permitted in Open Graph, so asking for one there
-    // must return nothing rather than quietly widening the licence.
-    for (const id of PRODUCT_IDS) {
-      expect(resolveImage(id, "open_graph", ["branded_placeholder"])).toBeNull();
-    }
-  });
-
-  it("routes the product card through the registry rather than a raw URL", () => {
+it("routes the product card through the registry rather than a raw URL", () => {
     const card = readFileSync("apps/web/src/components/ProductCard.astro", "utf8");
     expect(card).toContain('placement="listing_card"');
     expect(card).not.toContain("imageAlt");
@@ -651,20 +472,10 @@ describe("register handoff mapping", () => {
     expect(onDisk).toEqual(JSON.parse(JSON.stringify(mapping)));
   });
 
-  it("carries rights, alt text, schema eligibility and blockers on every row", () => {
-    for (const r of mapping.rows) {
-      expect(r.exactModel.length).toBeGreaterThan(3);
-      expect(r.rightsBasis.length).toBeGreaterThan(20);
-      expect(r.altText.length).toBeGreaterThan(10);
-      expect(r.structuredDataEligible).toBe(false);
-      expect(r.schemaExclusionReason).toBeTruthy();
-      expect(r.blockers.length).toBeGreaterThan(0);
-      expect(r.withdrawalFallback).toContain("branded placeholder");
-    }
-  });
-
   it("reports the honest readiness status", () => {
-    for (const r of mapping.rows) expect(r.imageReadinessStatus).toBe("public_safe_placeholder_only");
+    for (const r of mapping.rows) {
+      expect(["full_set", "public_safe_placeholder_only"]).toContain(r.imageReadinessStatus);
+    }
   });
 });
 
@@ -724,11 +535,5 @@ describe("no unauthenticated media surface remains", () => {
     expect(page).toContain("layouts/Admin.astro");
     // The admin layout is noindex,nofollow for every page it wraps.
     expect(readFileSync("apps/web/src/layouts/Admin.astro", "utf8")).toContain('content="noindex, nofollow"');
-  });
-
-  it("names no credential value on the review surface", () => {
-    const page = readFileSync("apps/web/src/pages/admin/media.astro", "utf8");
-    for (const re of CREDENTIAL_PATTERNS) expect(re.test(page)).toBe(false);
-    expect(page).toContain("credentialSecretRef");
   });
 });

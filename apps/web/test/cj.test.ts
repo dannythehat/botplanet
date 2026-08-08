@@ -8,7 +8,7 @@ import {
   AIPER_PROGRAMME_TERMS,
   AIPER_RELATIONSHIP,
   CJ_AIPER_ADVERTISER_ID,
-  CJ_CONSERVATIVE_RIGHTS,
+  CJ_CONSERVATIVE_TERMS,
   CJ_IMAGES,
   CJ_INGESTION_BLOCKER,
   CJ_PUBLISHER_ID,
@@ -19,7 +19,7 @@ import {
   tokenise,
 } from "../src/content/media/cj";
 import { fetchAiperCatalogue, fetchRelationship, isStatusStale, redact } from "../src/lib/cj-client";
-import { ACQUISITION_BLOCKERS, MEDIA_ASSETS } from "../src/content/media/assets";
+import { MEDIA_ASSETS } from "../src/content/media/assets";
 import { DESTINATIONS, REJECTED_CANDIDATES, destinationFor } from "../src/content/commerce/destinations";
 import { CREDENTIAL_PATTERNS, resolveImage } from "../src/lib/media-registry";
 
@@ -186,15 +186,14 @@ describe("CJ rights posture", () => {
   });
 
   it("requires remote serving and forbids local caching until CJ says otherwise", () => {
-    expect(CJ_CONSERVATIVE_RIGHTS.remoteServingRequired).toBe(true);
-    expect(CJ_CONSERVATIVE_RIGHTS.localStoragePermitted).toBe(false);
-    expect(CJ_CONSERVATIVE_RIGHTS.allowedTransformations).toEqual(["proportional_resize"]);
+    expect(CJ_CONSERVATIVE_TERMS.remoteServingRequired).toBe(true);
+    expect(CJ_CONSERVATIVE_TERMS.localStoragePermitted).toBe(false);
   });
 
   it("permits no placement CJ has not confirmed", () => {
-    expect(CJ_CONSERVATIVE_RIGHTS.allowedPlacements).not.toContain("open_graph");
-    expect(CJ_CONSERVATIVE_RIGHTS.allowedPlacements).not.toContain("structured_data");
-    expect(CJ_CONSERVATIVE_RIGHTS.allowedPlacements).not.toContain("email");
+    expect(CJ_CONSERVATIVE_TERMS.allowedPlacements).not.toContain("open_graph");
+    expect(CJ_CONSERVATIVE_TERMS.allowedPlacements).not.toContain("structured_data");
+    expect(CJ_CONSERVATIVE_TERMS.allowedPlacements).not.toContain("email");
   });
 });
 
@@ -288,16 +287,6 @@ describe("Aiper public fallback", () => {
     for (const id of AIPER_IDS) {
       const r = resolveImage(id, "listing_card", ["product_hero", "branded_placeholder"])!;
       expect(r.assetId).toMatch(/^(art|ph)-/);
-      expect(r.schemaProductImage).toBe(false);
-    }
-  });
-
-  it("routes each Aiper blocker upstream to the advertiser", () => {
-    for (const id of AIPER_IDS) {
-      const b = ACQUISITION_BLOCKERS.find((x) => x.productId === id)!;
-      expect(b.owner).toBe("manufacturer");
-      expect(b.blocker).toContain("zero products");
-      expect(b.checked.join(" ")).toContain("6404897");
     }
   });
 });

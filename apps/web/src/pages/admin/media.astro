@@ -1,15 +1,10 @@
 ---
 /**
  * Internal media review. Behind the admin gate and noindex, because it exposes
- * rights bases, acquisition blockers and coverage gaps that would be misread as
- * product judgements — and because a rights record is an internal document.
- *
- * It names no credential. Where a route needs authentication, the record shows
- * the Worker secret's NAME and nothing else.
+ * coverage gaps that would be misread as product judgements.
  */
 import Admin from "../../layouts/Admin.astro";
 import { mediaReport } from "../../lib/media-registry";
-import { MEDIA_SOURCE_CHECKS, MEDIA_SOURCE_CHECK_DATE, PRODUCT_PHOTOGRAPHY_POSITION, AMAZON_IMAGE_RULES, RIGHTS_BASES } from "../../content/media/rights";
 import { TARGET_TYPES } from "../../lib/media-registry";
 import { productPath } from "../../content/routes";
 
@@ -18,7 +13,6 @@ const errors = issues.filter((i) => i.severity === "error");
 const warnings = issues.filter((i) => i.severity === "warning");
 
 const READINESS_LABEL: Record<string, string> = {
-  rightsRecordComplete: "Rights record",
   exactModelConfirmed: "Exact model",
   heroReady: "Hero",
   supportingImagesReady: "Supporting",
@@ -33,75 +27,22 @@ const readinessOf = (p: (typeof products)[number], key: string): boolean =>
   Boolean((p.readiness as unknown as Record<string, boolean>)[key]);
 ---
 
-<Admin title="Media library and rights" section="media">
+<Admin title="Media library" section="media">
   <p class="sub">
-    Every image BotPlanet can show, the permission it rests on, and what stops the rest. Lawful-source check run on
-    <strong>{MEDIA_SOURCE_CHECK_DATE}</strong>.
+    Every image BotPlanet can show, what it depicts, and which slots are still empty.
   </p>
 
   <div class="grid">
     <div class="card"><div class="muted">Assets</div><div class="big">{totals.assets}</div><div class="muted">{totals.productAssets} attached to a product</div></div>
-    <div class="card"><div class="muted">Public safe</div><div class="big">{totals.publicSafe}/{products.length}</div><div class="muted">products render something lawful today</div></div>
-    <div class="card"><div class="muted">Photographs held</div><div class="big" style="color:var(--warn)">0</div><div class="muted">{totals.placeholders} branded placeholders standing in</div></div>
+    <div class="card"><div class="muted">Renderable</div><div class="big">{totals.publicSafe}/{products.length}</div><div class="muted">products render something today</div></div>
+    <div class="card"><div class="muted">Show the machine</div><div class="big">{totals.depictions}</div><div class="muted">{totals.placeholders} placeholders standing in</div></div>
     <div class="card"><div class="muted">Validation errors</div><div class="big" style={errors.length ? "color:var(--bad)" : "color:var(--ok)"}>{errors.length}</div><div class="muted">{warnings.length} warnings</div></div>
-  </div>
-
-  <h2>Where product photography stands</h2>
-  <div class="banner">{PRODUCT_PHOTOGRAPHY_POSITION}</div>
-
-  <h2>Lawful-source check</h2>
-  <div class="card">
-    <table>
-      <thead><tr><th>Brand</th><th>Checked</th><th>Outcome</th><th>Note</th></tr></thead>
-      <tbody>
-        {MEDIA_SOURCE_CHECKS.map((c) => (
-          <tr>
-            <td>{c.brand}</td>
-            <td class="mono" style="font-size:11px">{c.url}</td>
-            <td><span class="tag warn">{c.outcome.replace(/_/g, " ")}</span></td>
-            <td class="muted" style="font-size:12px">{c.note}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  </div>
-
-  <h2>Rights bases</h2>
-  <div class="card">
-    <table>
-      <thead><tr><th>Key</th><th>Tier</th><th>Storage</th><th>Credential</th><th>Permission</th></tr></thead>
-      <tbody>
-        {RIGHTS_BASES.map((r) => (
-          <tr>
-            <td class="mono" style="font-size:12px">{r.key}</td>
-            <td>{r.tier.replace(/_/g, " ")}</td>
-            <td>
-              {r.localStoragePermitted ? <span class="tag ok">local permitted</span> : <span class="tag warn">remote required</span>}
-            </td>
-            <td class="mono" style="font-size:11px">{r.credentialSecretRef ?? "—"}</td>
-            <td class="muted" style="font-size:12px">{r.text}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-    <p class="muted" style="font-size:12px;margin-bottom:0">
-      Only the secret's name appears above. No key, token or signed URL is stored in this repository or rendered
-      into any page.
-    </p>
-  </div>
-
-  <h2>Amazon Program Content rules</h2>
-  <div class="card">
-    <ul style="margin:0;padding-left:18px;line-height:1.8">
-      {AMAZON_IMAGE_RULES.map((r) => <li class="muted">{r}</li>)}
-    </ul>
   </div>
 
   <h2>Product coverage</h2>
   <div class="card">
     <p class="muted" style="margin-top:0">
-      Target types for an image-complete product: {TARGET_TYPES.map((t) => t.replace(/_/g, " ")).join(", ")}. A target is
-      not permission to use a weak or unlawful image.
+      Target types for an image-complete product: {TARGET_TYPES.map((t) => t.replace(/_/g, " ")).join(", ")}.
     </p>
     <table>
       <thead>
@@ -135,29 +76,11 @@ const readinessOf = (p: (typeof products)[number], key: string): boolean =>
     </table>
   </div>
 
-  <h2>Acquisition blockers</h2>
-  <div class="card">
-    <table>
-      <thead><tr><th>Product</th><th>Best tier available</th><th>Blocker</th><th>What unblocks it</th><th>Owner</th></tr></thead>
-      <tbody>
-        {products.map((p) => (
-          <tr>
-            <td>{p.exactModel}</td>
-            <td class="mono" style="font-size:11px">{p.blocker?.bestAvailableTier.replace(/_/g, " ") ?? "—"}</td>
-            <td class="muted" style="font-size:12px">{p.blocker?.blocker ?? "—"}</td>
-            <td class="muted" style="font-size:12px">{p.blocker?.unblockAction ?? "—"}</td>
-            <td><span class="tag">{p.blocker?.owner ?? "—"}</span></td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  </div>
-
   <h2>Asset inventory</h2>
   <div class="card">
     <table>
       <thead>
-        <tr><th>Asset</th><th>Product</th><th>Type</th><th>Tier</th><th>Storage</th><th>Alt</th><th>Product schema</th><th>Status</th></tr>
+        <tr><th>Asset</th><th>Product</th><th>Type</th><th>Kind</th><th>Alt</th><th>Product schema</th><th>Status</th></tr>
       </thead>
       <tbody>
         {products.flatMap((p) => p.assets).concat(...[]).map((a) => (
@@ -165,8 +88,7 @@ const readinessOf = (p: (typeof products)[number], key: string): boolean =>
             <td class="mono" style="font-size:11px">{a.id}</td>
             <td class="mono" style="font-size:11px">{a.productId ?? a.purpose}</td>
             <td>{a.type.replace(/_/g, " ")}</td>
-            <td class="muted" style="font-size:11px">{a.tier.replace(/_/g, " ")}</td>
-            <td class="muted" style="font-size:11px">{a.remoteServingRequired ? "remote required" : a.storage.replace(/_/g, " ")}</td>
+            <td class="muted" style="font-size:11px">{a.kind}</td>
             <td>{a.altTextStatus === "approved" ? <span class="tag ok">approved</span> : <span class="tag">{a.altTextStatus}</span>}</td>
             <td>{a.schema.productImage ? <span class="tag ok">eligible</span> : <span class="tag warn">no</span>}</td>
             <td>{a.withdrawal === "active" ? <span class="tag ok">active</span> : <span class="tag bad">{a.withdrawal}</span>}</td>

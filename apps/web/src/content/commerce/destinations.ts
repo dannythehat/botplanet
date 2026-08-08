@@ -847,7 +847,7 @@ export const REJECTED_CANDIDATES: RejectedCandidate[] = [
     retailerId: "ret-wybot-store",
     candidate: "Awin WYBOTICS INC programme 76816 product feed",
     reason:
-      "The correct US programme, but the application is pending. Awin gates the feed behind 'No relationship exists', so there is no lawful row to build an offer from yet.",
+      "The correct US programme, but the application is pending. Awin gates the feed behind 'No relationship exists', so there is no row to build an offer from yet.",
     rule: "search_not_offer",
   },
   ...(

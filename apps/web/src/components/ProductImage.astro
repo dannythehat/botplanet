@@ -3,7 +3,7 @@
  * THE single render path for product imagery.
  *
  * Every surface goes through here rather than being handed a URL, because a
- * component that receives a `src` can render an image the rights registry has
+ * component that receives a `src` can render an image the asset registry has
  * withdrawn. This one asks the registry each time, so a takedown recorded in one
  * data file empties every card, hero and thumbnail on the next request without
  * a template being touched.
