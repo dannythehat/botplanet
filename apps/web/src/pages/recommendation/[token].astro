@@ -30,13 +30,58 @@ const alternatives = scores
   .sort((a, b) => b.suitabilityScore - a.suitabilityScore)
   .slice(0, 3);
 
-const explanation = (rec.explanationJson as { text?: string } | null)?.text ?? "";
-const catSlug = "robotic-pool-cleaners";
+const explanationJson = rec.explanationJson as { text?: string; equivalent?: string[] } | null;
+const explanation = explanationJson?.text ?? "";
+
+/**
+ * THE TIED GROUP, WHEN THERE IS ONE.
+ *
+ * `chosenProductId` is null and `equivalent` holds two or more product ids when
+ * the matcher could not separate the top of the ranking on recorded data. That
+ * is a real result, not a failure, and it renders as a group rather than
+ * falling through to "no perfect match" — which would be wrong in the opposite
+ * direction, since these all fit.
+ */
+const equivalent = (explanationJson?.equivalent ?? [])
+  .map((id) => productById(id))
+  .filter((p): p is NonNullable<typeof p> => Boolean(p))
+  .sort((a, b) => a.name.localeCompare(b.name));
+/**
+ * THE CATEGORY, READ FROM THE PRODUCTS RATHER THAN ASSUMED.
+ *
+ * This was hard-coded to "robotic-pool-cleaners" from when pool was the only
+ * category with a matcher. There are nine now, so a litter-box result was
+ * linking at /robots/robotic-pool-cleaners/litter-robot-4/ and sending "start
+ * over" to the pool questions. Taken from whichever products this
+ * recommendation actually names.
+ */
+const categories = await db.select().from(schema.categories);
+const catSlugOf = (p: { categoryId: string } | undefined) =>
+  categories.find((c) => c.id === p?.categoryId)?.slug ?? "robotic-pool-cleaners";
+const catSlug = catSlugOf(chosen ?? equivalent[0]);
+const hrefFor = (p: { categoryId: string; slug: string }) => `/robots/${catSlugOf(p)}/${p.slug}/`;
 ---
 
 <Base title="Your BotPlanet recommendation" description="Your personalised, suitability-first robot recommendation.">
   <p class="muted">Your personalised recommendation · saved at this link</p>
-  {chosen ? (
+  {equivalent.length > 1 ? (
+    <>
+      <div class="hero">
+        <span class="pill class">Equivalent on current data</span>
+        <h1 style="margin-top:10px;">{equivalent.length} machines, and we cannot separate them</h1>
+        <p style="font-size:17px;">{explanation}</p>
+        <ul style="margin:18px 0 0; padding-left:18px;">
+          {equivalent.map((p) => (
+            <li style="margin:6px 0;"><a href={hrefFor(p)}>{p.name}</a></li>
+          ))}
+        </ul>
+        <p class="muted" style="margin-top:16px;">
+          Naming one of these as the winner would mean picking it out of a tie, and we would rather tell you the
+          truth about what we know. When the attributes that separate them are recorded, this answer gets sharper.
+        </p>
+      </div>
+    </>
+  ) : chosen ? (
     <>
       <div class="hero">
         <span class="pill class">BotPlanet recommends</span>
@@ -49,7 +94,7 @@ const catSlug = "robotic-pool-cleaners";
             {chosenOffer.redirectKey && (
               <a class="btn primary" href={`/go/${chosenOffer.redirectKey}`} rel="sponsored nofollow">See current offer</a>
             )}
-            <a class="btn" href={`/robots/${catSlug}/${chosen.slug}/`}>Full details</a>
+            <a class="btn" href={hrefFor(chosen)}>Full details</a>
           </div>
         )}
       </div>
@@ -61,7 +106,7 @@ const catSlug = "robotic-pool-cleaners";
             {alternatives.map((a) => {
               const p = productById(a.productId);
               return p ? (
-                <a class="card" href={`/robots/${catSlug}/${p.slug}/`}>
+                <a class="card" href={hrefFor(p)}>
                   <span class="pill">Suitability {a.suitabilityScore}/100</span>
                   <h3>{p.name}</h3>
                   <span class="muted">View details →</span>

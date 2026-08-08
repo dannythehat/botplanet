@@ -163,3 +163,43 @@ function exclude(productId: string, reason: string): ProductScore {
 function round2(n: number): number {
   return Math.round(n * 100) / 100;
 }
+
+/**
+ * The top of the ranking, and everything tied with it.
+ *
+ * WHY THIS EXISTS. `ranked.find((r) => !r.excluded)` returns the first
+ * non-excluded product, and the sort breaks ties on productId — so three
+ * products with identical recorded attributes produce a confident single
+ * winner chosen, in effect, alphabetically. The reader is told a machine won a
+ * comparison that never happened.
+ *
+ * That is not hypothetical. On 8 August 2026 the first four self-cleaning
+ * litter boxes went in with the same `environments` and `cleans` on three of
+ * them, because the attributes that separate them — capacity, litter type, cat
+ * weight limits — are not recorded yet. Every answer combination returned Casa
+ * Leo, and Casa Leo is simply first alphabetically among the tied three.
+ *
+ * A tie is a real answer. It means the data cannot separate these machines, and
+ * saying so is more useful than a coin toss dressed as a recommendation.
+ *
+ * Scores are compared at two decimal places, which is the precision the
+ * breakdown is rounded to. Comparing raw floats would call 84.0000001 and
+ * 84.0000002 different products and defeat the whole purpose.
+ */
+export function topGroup(ranked: ProductScore[]): ProductScore[] {
+  const live = ranked.filter((r) => !r.excluded);
+  if (!live.length) return [];
+  const best = Math.round(live[0]!.score * 100);
+  return live.filter((r) => Math.round(r.score * 100) === best);
+}
+
+/**
+ * True when the matcher cannot honestly name one machine.
+ *
+ * The caller must not reduce this to a single product: no "first of the tied",
+ * no secondary sort, no tie-break on price or commission. If the recorded data
+ * does not separate them, nothing downstream is entitled to.
+ */
+export function isIndistinguishable(ranked: ProductScore[]): boolean {
+  return topGroup(ranked).length > 1;
+}

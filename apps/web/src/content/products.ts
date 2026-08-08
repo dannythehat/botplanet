@@ -879,6 +879,9 @@ export const PRODUCT_ID: Record<string, string> = {
   "husqvarna-automower-410iq": "prod-automower-410iq",
   "worx-landroid-vision-wr320": "prod-worx-landroid-vision-wr320",
   "eufy-e15": "prod-eufy-e15",
+  /* Refused on 8 August as "Dreame A1", which does not exist; verified and
+     admitted the same day under its real name. See migration 0010. */
+  "dreame-a3-awd-1000": "prod-dreame-a3-awd-1000",
 };
 
 /**
@@ -947,6 +950,7 @@ export const OFFER_SETUP_PENDING: Record<string, OfferSetupPending> = {
   "prod-automower-410iq": { reason: "Identity confirmed at B0DTV7TR6W, $2,499.99 read 8 August 2026. Husqvarna sells through dealers as well as Amazon and the right destination is a decision, not a default.", since: "2026-08-08" },
   "prod-worx-landroid-vision-wr320": { reason: "Identity confirmed at B0GN8KK8XW, $1,022.54 read 8 August 2026. Four Landroid Vision SKUs are live and the destination must name this one explicitly.", since: "2026-08-08" },
   "prod-eufy-e15": { reason: "Identity confirmed at B0DRVYDXWX, $1,199.99 read 8 August 2026. Anker's programme is unapplied.", since: "2026-08-08" },
+  "prod-dreame-a3-awd-1000": { reason: "Identity confirmed at B0H3V799KT, $1,599.99 read 8 August 2026. Three ASINs carry this model at the same price and one of them is a bundle, so the destination must name this one rather than search the model.", since: "2026-08-08" },
 };
 
 /** Days a product has been waiting, against the day given. */
@@ -1111,7 +1115,7 @@ export const POOL_SLUGS = new Set([
 
 const LITTER_SLUGS = new Set(["litter-robot-4", "petkit-purobot-max-pro-2", "casa-leo-loo-too", "petsafe-scoopfree-crystal-pro"]);
 
-const LAWN_SLUGS = new Set(["segway-navimow-i110n", "mammotion-luba-3-awd-1500h", "mammotion-luba-3-awd-3000h", "husqvarna-automower-410iq", "worx-landroid-vision-wr320", "eufy-e15"]);
+const LAWN_SLUGS = new Set(["segway-navimow-i110n", "mammotion-luba-3-awd-1500h", "mammotion-luba-3-awd-3000h", "husqvarna-automower-410iq", "worx-landroid-vision-wr320", "eufy-e15", "dreame-a3-awd-1000"]);
 
 const PETCAM_SLUGS = new Set(["enabot-ebo-air-2", "enabot-ebo-se", "enabot-rola-petpal"]);
 

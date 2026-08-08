@@ -6,6 +6,9 @@ import type { ProductScore, ProductScoringResult } from "./types.js";
  * shown to the customer always reflects fit, not commission.
  */
 export function explainWinner(result: ProductScoringResult): string {
+  /* Takes the first non-excluded row, which is only safe because the caller
+     has already established there is no tie. Do not reach for this to name a
+     winner: use topGroup() and handle a group of more than one honestly. */
   const winner = result.ranked.find((r) => !r.excluded);
   if (!winner) return "No suitable product matched your answers.";
   const reasons = topReasons(winner);

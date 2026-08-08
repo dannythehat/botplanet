@@ -2,6 +2,7 @@ import type { APIRoute } from "astro";
 import { and, eq, inArray } from "drizzle-orm";
 import {
   scoreProducts,
+  topGroup,
   rankOffers,
   explainWinner,
   type OfferCandidate,
@@ -88,7 +89,25 @@ export const POST: APIRoute = async ({ request, locals }) => {
   }));
 
   const result = scoreProducts(answers, candidates, config);
-  const winner = result.ranked.find((r) => !r.excluded) ?? null;
+
+  /**
+   * A TIE IS AN ANSWER, AND IT USED TO BE HIDDEN.
+   *
+   * This was `result.ranked.find((r) => !r.excluded)` — the first non-excluded
+   * product. The sort breaks ties on productId, so a group of machines the
+   * recorded data cannot separate produced a confident single winner chosen
+   * alphabetically, and the reader was told it won a comparison that never
+   * happened.
+   *
+   * Now: if the top score is shared, nothing is chosen. `chosenProductId` stays
+   * null in the recommendation, because no product was chosen, and the group is
+   * returned as equivalent. Do not add a tie-break here — not price, not
+   * freshness, and above all not commission. If the data cannot separate them,
+   * nothing downstream is entitled to.
+   */
+  const top = topGroup(result.ranked);
+  const tied = top.length > 1;
+  const winner = tied ? null : (top[0] ?? null);
 
   // Offer ranking for the chosen product (commission tie-break only).
   let chosenOfferId: string | null = null;
@@ -134,7 +153,15 @@ export const POST: APIRoute = async ({ request, locals }) => {
     inputsJson: answers,
     chosenProductId: winner?.productId ?? null,
     chosenOfferId,
-    explanationJson: { text: explainWinner(result) },
+    explanationJson: tied
+      ? {
+          text:
+            `On the questions you answered, ${top.length} of these score identically on everything we have recorded. ` +
+            `That is the honest answer rather than a winner picked out of a tie: we do not yet hold the attributes ` +
+            `that would separate them.`,
+          equivalent: top.map((t) => t.productId),
+        }
+      : { text: explainWinner(result) },
   });
   if (result.ranked.length) {
     await db.insert(schema.recommendationScores).values(
@@ -156,7 +183,16 @@ export const POST: APIRoute = async ({ request, locals }) => {
     ? (products.find((p) => p.id === winner.productId)?.name ?? null)
     : null;
 
-  return json({ token, productName: winnerName });
+  /* Named so the funnel can say what it could not separate. Sorted by name
+     rather than by score, because they have the same score — presenting them
+     in score order would imply an order that does not exist. */
+  const equivalent = tied
+    ? top
+        .map((t) => products.find((p) => p.id === t.productId)?.name ?? t.productId)
+        .sort((a, b) => a.localeCompare(b))
+    : [];
+
+  return json({ token, productName: winnerName, equivalent });
 };
 
 function json(data: unknown, status = 200): Response {
