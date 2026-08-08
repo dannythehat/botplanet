@@ -176,6 +176,10 @@ const ACCESSORY_DENY = [
   "skin for", "sticker", "decal", "screen protector", "play ball for",
   "toy for loona", "accessories for", "accessory for", "replacement parts",
   "carrying case", "protective film", "mount for", "adapter for",
+  /* "Digital Dream Labs Battery for Vector or Cozmo", $19, was the only thing
+     Amazon US stocks for Cozmo. A spare part for a product is evidence the
+     product exists somewhere, not evidence you can buy it here. */
+  "battery for", "batteries for",
 ];
 
 function judge(target, results) {
