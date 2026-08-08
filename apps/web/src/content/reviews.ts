@@ -2461,6 +2461,14 @@ export const REVIEWS: Record<string, ReviewContent> = {
       "Someone who wants something to look after in a home where a real animal is not possible — a rented flat, an allergy, a care setting, a schedule that will not carry a dog.",
     notIdealFor:
       "Anyone expecting it to move around the room, hold a conversation, run an app on a screen or do a job. It does none of those and is not sold as though it does.",
+    video: {
+      url: "https://youtu.be/gIdDClL4cu0",
+      title: "Moflin Robot Unboxing and Review",
+      channel: "Silvolf",
+      source: "independent",
+      note:
+        "An independent owner's video, not Casio's and not ours. Moflin has no face and no screen, so the whole product is texture and movement \u2014 this is the closest you will get to handling one before you buy.",
+    },
     facts: [
       { label: "Movement", value: "2 axes — head only" },
       { label: "Weight", value: "260 g" },
@@ -2978,6 +2986,14 @@ export const REVIEWS: Record<string, ReviewContent> = {
       "One floor of a house, a pet you want to find rather than merely watch, and anybody who refuses to pay a monthly fee for a camera.",
     notIdealFor:
       "A house where the animal is upstairs. It has wheels, not legs, and no camera robot on the US market climbs stairs.",
+    video: {
+      url: "https://youtu.be/F_E07zmdL0o",
+      title: "EBO Air 2 Review: My Cats HATED it",
+      channel: "Alex Kidman",
+      source: "independent",
+      note:
+        "We are linking a negative review on purpose. It is independent, not ours. The premise of a pet camera robot is that your animal tolerates it, and this reviewer's cats did not \u2014 a real outcome nobody selling these will show you. Watch it as the downside case rather than as the verdict.",
+    },
     facts: [
       { label: "Camera", value: "2K, night vision" },
       { label: "Drive", value: "Tracked wheels, from the app" },
@@ -3046,6 +3062,14 @@ export const REVIEWS: Record<string, ReviewContent> = {
       "A first one, a cat that hides under things, or anybody who wants to find out whether a driving camera is useful before spending more.",
     notIdealFor:
       "Anyone who will be annoyed by 1080p on a large screen, or who wants the treat dispenser.",
+    video: {
+      url: "https://youtu.be/s9yYa6VhL-g",
+      title: "Enabot Ebo SE: Worth Buying in 2025? | 6-Month Review",
+      channel: "Pepper Projectz",
+      source: "independent",
+      note:
+        "Six months of use rather than a first impression, which is the only kind of footage that says anything useful about a battery robot. Independent, and not ours.",
+    },
     facts: [
       { label: "Camera", value: "1080p, night vision" },
       { label: "View", value: "360 degrees" },
@@ -3172,6 +3196,14 @@ export const REVIEWS: Record<string, ReviewContent> = {
       "A child around eight to thirteen who will still be interested in a year, and a household happy to spend once rather than replace.",
     notIdealFor:
       "Under-eights, and anybody who wants to find out cheaply whether their child likes coding. The Mini does that for a quarter of the price.",
+    video: {
+      url: "https://youtu.be/GM9uVo42-FI",
+      title: "Robot Review: Five Activities with Sphero Bolt",
+      channel: "STEM with Mr N",
+      source: "independent",
+      note:
+        "An independent teacher running five real activities rather than an unboxing, and not ours. It shows what a lesson with this robot actually looks like, which is the thing a parent cannot judge from a box. Note it is the original BOLT and not the BOLT+ \u2014 the two are easy to confuse in search results, and this one matches what we sell.",
+    },
     facts: [
       { label: "Ages", value: "8+" },
       { label: "Code in", value: "Draw, Blocks, Python, JavaScript" },
@@ -3226,6 +3258,14 @@ export const REVIEWS: Record<string, ReviewContent> = {
       "A first coding robot, a stocking present, or a household not yet sure the interest is real.",
     notIdealFor:
       "Anyone who wants it to last an afternoon. One hour of play is the specification and it is the thing people are surprised by.",
+    video: {
+      url: "https://youtu.be/Qu_TKpfSK20",
+      title: "Sphero Mini Review: Big Fun in a Tiny Robot!",
+      channel: "Everything STEM",
+      source: "independent",
+      note:
+        "Independent, and useful mostly for scale \u2014 the Mini is a ping-pong ball and no photograph conveys that as well as watching somebody hold one. It does not run the battery down, which is this machine's real limitation.",
+    },
     facts: [
       { label: "Size", value: "1.57 in — a ping-pong ball" },
       { label: "Play time", value: "About 1 hour" },
@@ -3278,6 +3318,14 @@ export const REVIEWS: Record<string, ReviewContent> = {
       "Four to seven, and any household that would rather not add another screen to the day.",
     notIdealFor:
       "Anyone over about seven. The colour-card idea has a ceiling and Sphero says so — its own age field stops at 144 months.",
+    video: {
+      url: "https://youtu.be/eW3Q33CK55A",
+      title: "Unboxing My New Sphero indi Robot | Screenless Coding for Kids",
+      channel: "The Snuggle Cailey",
+      source: "independent",
+      note:
+        "An independent owner's unboxing rather than Sphero's own film, and that is deliberate: the manufacturer's video is a polished classroom advert, and what a buyer needs to see is the colour cards going down on an ordinary floor.",
+    },
     facts: [
       { label: "Ages", value: "4 to about 7" },
       { label: "Screen", value: "Not required" },
@@ -3330,6 +3378,14 @@ export const REVIEWS: Record<string, ReviewContent> = {
       "Five to eleven, and any adult who wants a lesson plan rather than a toy — teacher or parent.",
     notIdealFor:
       "Anyone who wants the child to reach real text programming. Evo's ceiling is Blockly; the Sphero BOLT is where you go for Python.",
+    video: {
+      url: "https://youtu.be/opGHngaF7_s",
+      title: "Ozobot Evo Review",
+      channel: "Andru Edwards",
+      source: "independent",
+      note:
+        "Independent, and it shows the marker-pen colour codes working \u2014 the part of this product people do not believe until they see it. It does not go into the Blockly editor, where the older half of the age range spends its time.",
+    },
     facts: [
       { label: "Ages", value: "5 to 11" },
       { label: "Programming", value: "Marker-pen colour codes, then Blockly" },
@@ -3381,6 +3437,14 @@ export const REVIEWS: Record<string, ReviewContent> = {
       "Eight to twelve, and a child who likes taking things apart as much as making them work.",
     notIdealFor:
       "Anyone who wants it working out of the box, and anyone who would find a loose bag of components stressful rather than inviting.",
+    video: {
+      url: "https://youtu.be/vbukZVWeLnY",
+      title: "Makeblock mBot Educational Robot Kit STEM Coding Toy Review Build & Play",
+      channel: "The Young Prince and The Railroad",
+      source: "independent",
+      note:
+        "Independent, not ours. The build is the whole argument for this robot and this video shows it start to finish, with a child doing it. Watch it before you buy: if the loose parts look like a bad evening rather than a good one, that is your answer.",
+    },
     facts: [
       { label: "Ages", value: "8 to 12" },
       { label: "Build time", value: "About 15 minutes" },
