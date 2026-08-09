@@ -3395,6 +3395,12 @@ export const REVIEWS: Record<string, ReviewContent> = {
     slug: "enabot-ebo-air-2",
     figures: [
       {
+        afterHeading: "Where this sits in the range",
+        src: "/media/petcam/range/hero.webp",
+        caption:
+          "The four Enabot machines at the same scale: the Air 2, the SE, the ROLA Mini and the ROLA PetPal, smallest to largest.",
+      },
+      {
         afterHeading: "What $149 gets you",
         src: "/media/petcam/ebo-air-2/figure-1.webp",
         caption:
@@ -3502,6 +3508,12 @@ export const REVIEWS: Record<string, ReviewContent> = {
     slug: "enabot-ebo-se",
     figures: [
       {
+        afterHeading: "The size is the actual argument",
+        src: "/media/petcam/range/size-chart.webp",
+        caption:
+          "Enabot's own size chart. It gives the SE as 3.1 inches wide where Enabot's own listing says 3.8 — the figures on the chart are the maker's and we have measured neither.",
+      },
+      {
         afterHeading: "What you give up against the Air 2",
         src: "/media/petcam/ebo-se/figure-1.webp",
         caption:
@@ -3588,6 +3600,12 @@ export const REVIEWS: Record<string, ReviewContent> = {
   "enabot-rola-petpal": {
     slug: "enabot-rola-petpal",
     figures: [
+      {
+        afterHeading: "Where this sits in the range",
+        src: "/media/petcam/range/hero.webp",
+        caption:
+          "The whole Enabot line at one scale. The PetPal is the big one, and the size is most of what separates it.",
+      },
       {
         afterHeading: "Treats that come to the animal",
         src: "/media/petcam/rola-petpal/figure-1.webp",

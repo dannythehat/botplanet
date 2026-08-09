@@ -26,6 +26,7 @@ import PriceLadder from "../../../components/PriceLadder.astro";
 import VerdictPanel from "../../../components/VerdictPanel.astro";
 import FaqList from "../../../components/FaqList.astro";
 import { decisionSectionFor, coverageSectionFor, splitSectionFor, matrixSectionFor, checkSectionFor, priceSectionFor, verdictSectionFor, faqSectionFor, botMatchCtaFor } from "../../../content/category-sections";
+import { MEDIA_ASSETS } from "../../../content/media/assets";
 
 const { category } = Astro.params;
 const db = getDb(Astro.locals);
@@ -139,19 +140,38 @@ const trustItems = [
 /* Schema is built from the images this page actually renders, so every
    ImageObject has visible content behind it. Product, Review and
    AggregateRating are deliberately absent from a category hub. */
+/* DIMENSIONS COME FROM THE REGISTRY, NOT FROM THE SURFACE. These were
+   hardcoded per slot — 1600x900 for a hero, 800x500 for a card — which is the
+   size the layout renders at rather than the size of the file. An ImageObject
+   states the dimensions of the image, so a consumer given 800x500 for a file
+   that is 1448x1086 has been told something untrue about an asset it can
+   fetch and measure. The registry knows; ask it, and fall back to the slot
+   default only for a path it does not hold. */
+const dims = (path: string, w: number, h: number) => {
+  const a = MEDIA_ASSETS.find((x) => x.src === path);
+  return { width: a?.width ?? w, height: a?.height ?? h };
+};
+
 const editorialImages = [
   hero?.image?.src
-    ? { path: hero.image.src, caption: hero.image.alt, width: 1600, height: 900 }
+    ? { path: hero.image.src, caption: hero.image.alt, ...dims(hero.image.src, 1600, 900) }
     : null,
   ...(decision?.cards ?? [])
     .filter((c) => c.image?.src)
-    .map((c) => ({ path: c.image!.src, caption: c.image!.alt, width: 800, height: 500 })),
+    .map((c) => ({ path: c.image!.src, caption: c.image!.alt, ...dims(c.image!.src, 800, 500) })),
   coverage?.image?.src
-    ? { path: coverage.image.src, caption: coverage.image.alt, width: 1600, height: 900 }
+    ? { path: coverage.image.src, caption: coverage.image.alt, ...dims(coverage.image.src, 1600, 900) }
     : null,
+  /* The coverage ROWS were missing entirely. Both the grill hub and the pet
+     camera hub carry a thumbnail per row as of 9 August 2026, and every one of
+     them rendered on the page with no ImageObject behind it — the schema said
+     the page had four pictures when it had seven. */
+  ...(coverage?.rows ?? [])
+    .filter((r) => r.image?.src)
+    .map((r) => ({ path: r.image!.src, caption: r.image!.alt, ...dims(r.image!.src, 700, 467) })),
   ...(matrix?.rows ?? [])
     .filter((r) => r.image?.src)
-    .map((r) => ({ path: r.image!.src, caption: r.image!.alt, width: 700, height: 467 })),
+    .map((r) => ({ path: r.image!.src, caption: r.image!.alt, ...dims(r.image!.src, 700, 467) })),
 ].filter(Boolean) as { path: string; caption: string; width: number; height: number }[];
 
 const pageSchema = hero

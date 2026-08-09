@@ -866,6 +866,20 @@ export const EDITORIAL: Record<string, EditorialContent> = {
       focal: "50% 50%",
     },
     prose: "robotic-pets-for-elderly",
+    figures: [
+      {
+        afterHeading: "The three things being sold",
+        src: "/media/companion/joy-for-all/panel-overview.webp",
+        caption:
+          "The Joy For All cat, which is the simplest of the three and the one this page ends up recommending. The line describing it is Ageless Innovation's own marketing wording.",
+      },
+      {
+        afterHeading: "Which one we recommend, and why it is this one",
+        src: "/media/companion/joy-for-all/card.webp",
+        caption:
+          "Silver with white mitts, the colourway we hold. The comfort and mood claims printed on this artwork are Ageless Innovation's own, supplied with it — this page recommends the cat on the evidence set out above, not on those panels.",
+      },
+    ],
     /* THE ONE GUIDE ON THIS SITE THAT CARRIES A PICK, and the exception is
        deliberate rather than drift. The convention above — guides recommend
        nothing and send the reader to a page that does — assumes such a page
