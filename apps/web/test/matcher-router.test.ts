@@ -194,6 +194,44 @@ describe("no scoring logic moved into the funnel", () => {
     expect(code).not.toMatch(/equivalent\s*\[\s*0\s*\]/);
   });
 
+  /**
+   * THE ONE THAT WOULD HAVE CAUGHT A DEAD FUNNEL.
+   *
+   * `q()` is `root.querySelector(s)!` — a non-null assertion, so TypeScript is
+   * satisfied and the browser gets null. The universal rewrite rebuilt the
+   * landing stage into two branches and the start button went with the copy it
+   * had been sitting under; the script still bound it, unguarded, on the first
+   * line of its wiring. The island threw before rendering anything, and EVERY
+   * BotMatch funnel on the site sat behind a landing page with no way forward.
+   *
+   * Nothing in this file caught it. The markup was valid, the router was
+   * correct, the API was fine, and every assertion here passed — because they
+   * all read the file as text and none of them asked whether the script's hooks
+   * are things the page actually contains. This one does.
+   *
+   * Every hook is static markup today. If a genuinely runtime-created element
+   * ever needs `q()`, the honest fix is to guard that call, not to soften this.
+   */
+  it("binds no hook the markup does not contain", () => {
+    const markup = island.slice(0, island.indexOf("<script>"));
+    const hooks = [...script.matchAll(/q(?:<[^>]*>)?\("\[(data-[a-z-]+)\]"\)/g)].map((m) => m[1]);
+
+    expect(hooks.length, "no q() hooks found — has the island been rewritten?").toBeGreaterThan(8);
+    const missing = [...new Set(hooks)].filter((h) => !markup.includes(h));
+    expect(
+      missing,
+      "the script queries these and the markup renders none of them, so the island throws on load and the whole funnel is dead",
+    ).toEqual([]);
+  });
+
+  it("keeps a way out of the landing stage", () => {
+    /* Belt and braces on the specific element that broke. The landing stage is
+       the first thing every reader sees and it has exactly one control. */
+    const markup = island.slice(0, island.indexOf("<script>"));
+    const landing = markup.slice(markup.indexOf('data-stage="landing"'), markup.indexOf('data-stage="choose"'));
+    expect(landing, "the landing stage has no start button").toContain("data-start");
+  });
+
   it("keeps each category's answers apart", () => {
     /* Two question sets share ids — `budget` is `budget` in all nine — so one
        flat answers object would let a lawn answer overwrite a pool one. */

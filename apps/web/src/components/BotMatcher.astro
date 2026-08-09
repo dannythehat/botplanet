@@ -172,6 +172,21 @@ const payload = JSON.stringify({
       </>
     )}
 
+    {/* THE BUTTON THAT STARTS THE WHOLE THING, and the one the universal
+        rewrite deleted. The landing stage was rebuilt into two branches — one
+        category or nine — and the CTA under the old single-category copy went
+        with the copy. The script still bound it, unguarded, on the first line
+        of its wiring block, so the island threw before it rendered anything and
+        EVERY funnel on the site sat dead behind a landing page with no way
+        forward. Nothing caught it: the tests read the file as text, and the
+        markup was valid. It took a browser.
+
+        Two labels, because in "choose" mode the next thing the reader sees is
+        the job list rather than a question, and "it takes a minute" is a promise
+        about a questionnaire they have not chosen yet. */}
+    <button class="btn btn--accent bp-mm__cta" type="button" data-start>
+      {only ? "Start — it takes a minute" : "Start — say what you need done"}
+    </button>
     <p class="bp-mm__note">Free. No account needed.</p>
   </section>
 
