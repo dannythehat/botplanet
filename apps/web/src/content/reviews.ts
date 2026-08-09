@@ -2546,6 +2546,11 @@ export const REVIEWS: Record<string, ReviewContent> = {
      ============================================================ */
   moflin: {
     slug: "moflin",
+    image: {
+      src: "/media/companion/moflin/hero.webp",
+      alt:
+        "Moflin held in two cupped hands in a lamplit living room. The supplied artwork carries Casio's own promotional panels; the wording on them is the maker's, not a BotPlanet finding.",
+    },
     categorySlug: "companion-robots",
     eyebrow: "Companion robot review",
     title: "Casio Moflin review",
@@ -2628,6 +2633,11 @@ export const REVIEWS: Record<string, ReviewContent> = {
      honest answer is longer than yes or no. */
   "miko-3": {
     slug: "miko-3",
+    image: {
+      src: "/media/companion/miko-3/hero.webp",
+      alt:
+        "A red Miko 3 on a rug with its screen face lit, a child sitting in front of it. The supplied artwork carries Miko's own promotional wording, which is the maker's rather than ours.",
+    },
     categorySlug: "companion-robots",
     eyebrow: "Companion robot review",
     title: "Miko 3 review",
@@ -2717,6 +2727,11 @@ export const REVIEWS: Record<string, ReviewContent> = {
      Wi-Fi restriction from the Amazon listing the same day. */
   "vector-2": {
     slug: "vector-2",
+    image: {
+      src: "/media/companion/vector-2/hero.webp",
+      alt:
+        "Anki Vector on a dark desk at night with its screen face lit green and its cube beside it. The panel text in the supplied artwork is promotional copy rather than a BotPlanet finding.",
+    },
     categorySlug: "companion-robots",
     eyebrow: "Companion robot review",
     title: "Anki Vector 2.0 review",
@@ -2791,6 +2806,11 @@ export const REVIEWS: Record<string, ReviewContent> = {
      strip rather than buried in a table. */
   eilik: {
     slug: "eilik",
+    image: {
+      src: "/media/companion/eilik/hero.webp",
+      alt:
+        "Two Eiliks on a wooden desk turned towards each other, one white with pink trim and one orange, both screen faces lit.",
+    },
     categorySlug: "companion-robots",
     eyebrow: "Companion robot review",
     title: "Eilik review",
@@ -2877,6 +2897,11 @@ export const REVIEWS: Record<string, ReviewContent> = {
      rather than hiding. */
   loona: {
     slug: "loona",
+    image: {
+      src: "/media/companion/loona/hero.webp",
+      alt:
+        "Loona on a wooden floor with its ears up and screen face lit, a real dog lying a few feet behind it.",
+    },
     categorySlug: "companion-robots",
     eyebrow: "Companion robot review",
     title: "Loona Petbot review",
@@ -3073,6 +3098,11 @@ export const REVIEWS: Record<string, ReviewContent> = {
   },
   "living-ai-emo": {
     slug: "living-ai-emo",
+    image: {
+      src: "/media/companion/emo/hero.webp",
+      alt:
+        "EMO standing on its charging base on a desk with its screen face lit cyan and headphones round its head. The feature wording in the supplied artwork is promotional copy, not a BotPlanet finding.",
+    },
     categorySlug: "companion-robots",
     eyebrow: "Companion robot review",
     title: "Living.AI EMO review",
@@ -3147,6 +3177,11 @@ export const REVIEWS: Record<string, ReviewContent> = {
      store. Both are on the page. */
   ropet: {
     slug: "ropet",
+    image: {
+      src: "/media/companion/ropet/hero.webp",
+      alt:
+        "Ropet on a desk under a hand resting on its head, a round white robot in a cream fur cover with large blue eyes. The feature panels are Ropet's own marketing wording.",
+    },
     categorySlug: "companion-robots",
     eyebrow: "Companion robot review",
     title: "Ropet KAMOMO review",
@@ -3236,6 +3271,11 @@ export const REVIEWS: Record<string, ReviewContent> = {
      ============================================================ */
   "enabot-ebo-air-2": {
     slug: "enabot-ebo-air-2",
+    image: {
+      src: "/media/petcam/ebo-air-2/hero.webp",
+      alt:
+        "The Enabot EBO Air 2 on a rug with a heart lit on its face, beside night-vision and daylight views of the same dog. The specifications printed in the artwork are Enabot's own figures.",
+    },
     categorySlug: "pet-camera-robots",
     eyebrow: "Pet camera robot review",
     title: "Enabot EBO Air 2 review",
@@ -3312,6 +3352,11 @@ export const REVIEWS: Record<string, ReviewContent> = {
 
   "enabot-ebo-se": {
     slug: "enabot-ebo-se",
+    image: {
+      src: "/media/petcam/ebo-se/hero.webp",
+      alt:
+        "The Enabot EBO SE on a dark wooden floor with a blue heart lit on its face. The panel wording in the artwork is Enabot's own marketing copy.",
+    },
     categorySlug: "pet-camera-robots",
     eyebrow: "Pet camera robot review",
     title: "Enabot EBO SE review",
@@ -3374,6 +3419,11 @@ export const REVIEWS: Record<string, ReviewContent> = {
 
   "enabot-rola-petpal": {
     slug: "enabot-rola-petpal",
+    image: {
+      src: "/media/petcam/rola-petpal/hero.webp",
+      alt:
+        "A golden retriever taking a treat from the open hopper of the ROLA PetPal on a kitchen floor.",
+    },
     categorySlug: "pet-camera-robots",
     eyebrow: "Pet camera robot review",
     title: "Enabot ROLA PetPal review",
