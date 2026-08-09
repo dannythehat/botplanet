@@ -2777,6 +2777,16 @@ export const PLACEHOLDER_ASSETS: MediaAssetRecord[] = manifest.map((m): MediaAss
  * docs/seo/notion-upload-audit-2026-08-09.md.
  */
 export const AUGUST_UPLOAD_ASSETS: MediaAssetRecord[] = [
+  /* FIVE PRODUCTS RESOLVED NO LISTING CARD, found on 9 August 2026 by asking
+     the registry rather than by looking at a page. resolveImage(id,
+     "listing_card") returns the first `product_hero` for a product, and these
+     five had their card art typed `product_in_use` or `product_detail` — true
+     descriptions of the picture, and the wrong answer to "what does the grid
+     show for this machine". Their hub cards were falling through to nothing.
+
+     Retyped rather than duplicated: a second record per product is exactly
+     what the note above REVIEW_FIGURES warns about, because it outranks the
+     product creative. Nothing is outranked here — there was no creative. */
 
   /* ==================================================================
      THE SEVEN HELD BACK ON 9 AUGUST, PUBLISHED BY OWNER DECISION.
@@ -3473,7 +3483,7 @@ export const AUGUST_UPLOAD_ASSETS: MediaAssetRecord[] = [
     productId: "prod-living-ai-emo",
     purpose: "EMO — listing card",
     exactModel: "Living.AI EMO",
-    type: "product_in_use",
+    type: "product_hero",
     checksum: "sha256:2f6097c008da08c4af127ea9ff25c865a292fbc4a903588911b5641bedfaa994",
     width: 1254,
     height: 1254,
@@ -3537,7 +3547,7 @@ export const AUGUST_UPLOAD_ASSETS: MediaAssetRecord[] = [
     productId: "prod-ropet",
     purpose: "Ropet review — asleep on charge",
     exactModel: "Ropet KAMOMO pro",
-    type: "product_detail",
+    type: "product_hero",
     checksum: "sha256:d32800ce20dd505f1aaa757ea7028c74d472e52e94a6cf46f7ec58c315271d59",
     width: 1254,
     height: 1254,
@@ -3617,7 +3627,7 @@ export const AUGUST_UPLOAD_ASSETS: MediaAssetRecord[] = [
     productId: "prod-enabot-ebo-air-2",
     purpose: "EBO Air 2 — listing card",
     exactModel: "Enabot EBO Air 2",
-    type: "product_in_use",
+    type: "product_hero",
     checksum: "sha256:b9db425e72471b4acf35d0ce104a66334d77300cee2b158b05a6b316f21dfb23",
     width: 1254,
     height: 1254,
@@ -3681,7 +3691,7 @@ export const AUGUST_UPLOAD_ASSETS: MediaAssetRecord[] = [
     productId: "prod-enabot-ebo-se",
     purpose: "EBO SE — listing card",
     exactModel: "Enabot EBO SE",
-    type: "product_in_use",
+    type: "product_hero",
     checksum: "sha256:4268e8a79300b32ed01d88f026ecd2ad9ba861b4fcd8fe4e163f7fac4913c232",
     width: 1254,
     height: 1254,
@@ -3713,7 +3723,7 @@ export const AUGUST_UPLOAD_ASSETS: MediaAssetRecord[] = [
     productId: "prod-enabot-rola-petpal",
     purpose: "ROLA PetPal review — the dispenser",
     exactModel: "Enabot ROLA PetPal",
-    type: "product_detail",
+    type: "product_hero",
     checksum: "sha256:f395c82c3fb55ce4d0b46ab460f60ca2072c18cc4ed06065fe6780c08af5fc5b",
     width: 1254,
     height: 1254,
