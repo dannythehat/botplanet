@@ -22,7 +22,8 @@ import EditorialArticle from "../../components/EditorialArticle.astro";
 import { editorialFor } from "../../content/editorial";
 import { buildEditorialPage } from "../../lib/editorial-page";
 import { breadcrumbsFor } from "../../lib/routing";
-import { articleSchema, faqPageSchema } from "../../lib/seo";
+import { articleSchema, faqPageSchema, imageObjectSchema } from "../../lib/seo";
+import { MEDIA_ASSETS } from "../../content/media/assets";
 import { FOUNDER } from "../../content/team";
 
 const PATH = "/guides/robotic-pets-for-elderly/";
@@ -35,6 +36,20 @@ const { html, picks, comparison } = await buildEditorialPage(
 
 const crumbs = breadcrumbsFor(PATH, article.title);
 
+/* THE LEAD IMAGE IS THE og:image, and it was not. This page has carried its
+   own artwork since it was built and the social preview still fell back to
+   the site default — every share of it showed the BotPlanet logo instead of
+   the picture at the top of the page. Article schema had no image either. */
+const lead = article.image?.src ?? null;
+
+/* An ImageObject per picture this page renders: the lead, then each figure
+   the injector places. Built from the same list, so nothing is claimed in
+   markup that a reader cannot see. */
+const renderedImages = [lead, ...(article.figures ?? []).map((f) => f.src)]
+  .filter((src): src is string => Boolean(src))
+  .map((src) => MEDIA_ASSETS.find((a) => a.src === src))
+  .filter((a): a is NonNullable<typeof a> => Boolean(a?.width) && Boolean(a?.height));
+
 const pageSchema = [
   articleSchema({
     headline: article.title,
@@ -43,7 +58,11 @@ const pageSchema = [
     dateModified: article.lastReviewed,
     authorName: FOUNDER.name,
     authorPath: FOUNDER.path,
+    image: lead ?? undefined,
   }),
+  ...renderedImages.map((a) =>
+    imageObjectSchema({ path: a.src, caption: a.altText ?? "", width: a.width!, height: a.height! }),
+  ),
   faqPageSchema(article.faq, PATH),
 ];
 ---
@@ -53,6 +72,8 @@ const pageSchema = [
   description={article.metaDescription}
   breadcrumbs={crumbs}
   schema={pageSchema}
+  ogImage={lead ?? undefined}
+  ogType="article"
 >
   <EditorialArticle article={article} html={html} picks={picks} comparison={comparison} />
 </Base>
