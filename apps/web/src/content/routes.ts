@@ -225,6 +225,32 @@ export const ROUTES: RouteDef[] = [
     indexable: true,
     category: "robotic-lawn-mowers",
   },
+  /* THE FIRST PRODUCT-VERSUS-PRODUCT PAGE, 9 August 2026.
+
+     Every other /compare/ route is a category — one page holding a whole
+     range side by side. This one is two named machines, and it exists
+     because Google's own People Also Ask carries the question in almost
+     these words: "Which is better, Eilik or Emo?". The 6 August rule says
+     the URL follows the phrasing people actually use, so the term is
+     "eilik vs emo" and Eilik leads, in that order, because that is the
+     order the question is asked in.
+
+     It sits at a STATIC path so it wins against /compare/[category].astro,
+     which would otherwise try to resolve "eilik-vs-emo" as a category and
+     return a 404. */
+  {
+    path: "/compare/eilik-vs-emo/",
+    label: "Eilik vs EMO",
+    breadcrumbLabel: "Eilik vs EMO",
+    section: "compare",
+    parent: "/compare/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: true,
+    indexable: true,
+    category: "companion-robots",
+  },
   {
     path: "/compare/robotic-lawn-mowers/",
     label: "Compare robot mowers",

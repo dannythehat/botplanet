@@ -193,6 +193,39 @@ const POOL: PagePlan[] = [
     research: "30691679570 · 2026-08-01",
     evidence: "22,200/mo at KD 0 — biggest wedge in the dataset. SERP is list content in its own right.",
   },
+  /* THE FIRST PRODUCT-VERSUS-PRODUCT PAGE. Every other compare entry is a
+     category holding a range side by side; this one is two named machines,
+     because Google's People Also Ask carries the question in almost these
+     words — "Which is better, Eilik or Emo?" — and a category page answers
+     something else.
+
+     THE TERM ORDER FOLLOWS THE QUESTION. Eilik leads because that is how the
+     PAA asks it, and because Eilik is the one this site can actually route a
+     buyer to. EMO's Amazon listings are a different brand's, which is the
+     page's own finding and the reason it exists in this shape rather than as
+     a two-buy-button comparison. */
+  {
+    path: "/compare/eilik-vs-emo/",
+    category: "companion-robots",
+    type: "compare" as const,
+    status: "built" as const,
+    intent: "Which of these two desk robots should I buy?",
+    primary: { term: "eilik vs emo", volume: 320, difficulty: 4 },
+    secondary: [
+      { term: "emo vs eilik", volume: 210, difficulty: 4 },
+      { term: "which is better eilik or emo", volume: 90, difficulty: 0 },
+    ],
+    ceded: [
+      { term: "eilik", toPath: "/robots/companion-robots/eilik/", why: "The model term belongs to the review, which carries the specification and the buy route." },
+      { term: "emo robot", toPath: "/robots/companion-robots/living-ai-emo/", why: "Same reason, and the EMO review carries the counterfeit finding in full." },
+    ],
+    products: ["eilik", "living-ai-emo"],
+    linksOut: ["/robots/companion-robots/eilik/", "/robots/companion-robots/living-ai-emo/", "/robots/companion-robots/"],
+    images: [{ slot: "hero", shows: "Eilik and EMO side by side under the question itself", supplied: true }],
+    schema: ["Article", "WebPage", "FAQPage", "ImageObject", "BreadcrumbList"],
+    research: "PAA capture · 2026-08-09",
+    evidence: "Google's own People Also Ask asks 'Which is better, Eilik or Emo?'. The pair phrase is small but the intent is unambiguous and neither review can answer it without becoming a comparison.",
+  },
   {
     path: "/compare/robotic-pool-cleaners/",
     category: "robotic-pool-cleaners",
