@@ -380,6 +380,11 @@ export const DECISION_SECTION: Record<string, DecisionSectionContent> = {
           "Wood, tile and laminate give small wheels the traction they need to cross a room and get home to the dock.",
           "Rugs with a lip are the usual snag — a robot that beaches on a rug edge is a robot you come home to find stranded.",
         ],
+        image: {
+          src: "/media/hubs/petcam/card-hallway.webp",
+          alt:
+            "A domestic hallway of bare wooden boards running away from the camera towards a lit doorway.",
+        },
       },
       {
         title: "Stairs between the rooms that matter",
@@ -389,6 +394,11 @@ export const DECISION_SECTION: Record<string, DecisionSectionContent> = {
           "You are choosing one floor to cover, or buying two machines and two docks.",
           "If the pet is upstairs all day and the dock is downstairs, a fixed camera upstairs beats a robot downstairs.",
         ],
+        image: {
+          src: "/media/hubs/petcam/card-staircase.webp",
+          alt:
+            "A wooden staircase seen from floor level at the bottom step, rising away from the camera.",
+        },
       },
       {
         title: "Carpet and thick rugs",
@@ -398,6 +408,11 @@ export const DECISION_SECTION: Record<string, DecisionSectionContent> = {
           "Deep pile drains battery fast, so a robot rated for an hour of patrol will do considerably less.",
           "A robot that cannot reliably find its own dock across carpet becomes a robot you plug in by hand, which defeats the point.",
         ],
+        image: {
+          src: "/media/hubs/petcam/card-deep-pile-rug.webp",
+          alt:
+            "The cut edge of a thick cream rug meeting a pale wooden floor, the pile standing well clear of the boards.",
+        },
       },
     ],
   },
@@ -778,6 +793,11 @@ export const COVERAGE_SECTION: Record<string, CoverageSectionContent> = {
     rows: [
       {
         title: "What actually goes wrong",
+        image: {
+          src: "/media/hubs/grill/row-baked-on-grease.webp",
+          alt:
+            "The inside corner of a barbecue firebox under the grate, coated in thick black baked-on grease with the bars running across it.",
+        },
         whoFor: "Anyone still using a wire brush on a hot grate",
         body:
           "A worn wire brush loses individual bristles. One lands on the bars, gets cooked onto " +
@@ -788,6 +808,11 @@ export const COVERAGE_SECTION: Record<string, CoverageSectionContent> = {
       },
       {
         title: "What a robot changes, honestly",
+        image: {
+          src: "/media/hubs/grill/row-far-corner.webp",
+          alt:
+            "The far corner of an open barbecue in sunlight, where the grill bars end and meet the side wall of the firebox.",
+        },
         whoFor: "Buyers comparing a robot against the brush they own",
         body:
           "These machines use replaceable brush heads that are held in a housing rather than a " +
@@ -799,6 +824,11 @@ export const COVERAGE_SECTION: Record<string, CoverageSectionContent> = {
       },
       {
         title: "Checking the heads, which nobody does",
+        image: {
+          src: "/media/hubs/grill/row-under-grate.webp",
+          alt:
+            "The space below a lifted grill grate, showing the drip tray beneath it streaked with burnt-on fat.",
+        },
         whoFor: "Anyone who owns one already",
         body:
           "The brush heads are consumables and they wear. A worn head on a robot is the same " +
@@ -1000,9 +1030,19 @@ export const COVERAGE_SECTION: Record<string, CoverageSectionContent> = {
       "answer depends entirely on whether their pet moves. Google agrees, incidentally: search " +
       "for the best one of these and it returns reviews of ordinary fixed pet cameras, because " +
       "that is the market this sits inside.",
+    image: {
+      src: "/media/hubs/petcam/row-empty-room.webp",
+      alt:
+        "An empty living room in the middle of the afternoon, sofa and armchair unoccupied and daylight coming through tall windows.",
+    },
     rows: [
       {
         title: "What the robot genuinely adds",
+        image: {
+          src: "/media/hubs/petcam/row-cat-watching.webp",
+          alt:
+            "A tabby and white cat crouched flat on a wooden floor, eyes fixed on a small grey ball just in front of it.",
+        },
         whoFor: "Dogs that follow you room to room, and cats that hide",
         body:
           "A fixed camera watches one place. If the dog sleeps somewhere else, you watch an " +
@@ -1014,6 +1054,11 @@ export const COVERAGE_SECTION: Record<string, CoverageSectionContent> = {
       },
       {
         title: "Where the fixed camera wins",
+        image: {
+          src: "/media/hubs/petcam/row-dog-by-door.webp",
+          alt:
+            "A cockapoo sitting alone on a wooden floor beside a closed black front door, looking towards the camera.",
+        },
         whoFor: "Most households, honestly",
         body:
           "A fixed camera is always on, always charged, always pointed somewhere useful, and " +
@@ -1025,6 +1070,11 @@ export const COVERAGE_SECTION: Record<string, CoverageSectionContent> = {
       },
       {
         title: "Battery, docking and the quiet failure",
+        image: {
+          src: "/media/hubs/petcam/row-older-dog.webp",
+          alt:
+            "An elderly yellow labrador asleep in a padded bed beside a window, head resting on the rim.",
+        },
         whoFor: "Anyone leaving the house for a working day",
         body:
           "This is where the category disappoints, and it is rarely in the reviews. These are " +

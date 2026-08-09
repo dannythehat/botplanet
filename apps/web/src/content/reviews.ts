@@ -2546,6 +2546,20 @@ export const REVIEWS: Record<string, ReviewContent> = {
      ============================================================ */
   moflin: {
     slug: "moflin",
+    figures: [
+      {
+        afterHeading: "What Moflin actually does",
+        src: "/media/companion/moflin/figure-2.webp",
+        caption:
+          "Stroking its back is the whole interaction. There are no legs, no wheels and no screen — the response to touch is what you are buying.",
+      },
+      {
+        afterHeading: "Battery life, and what happens when it runs out",
+        src: "/media/companion/moflin/figure-1.webp",
+        caption:
+          "It sleeps in the nest to charge. The panel wording in this artwork is Casio's own promotional copy rather than a BotPlanet finding.",
+      },
+    ],
     image: {
       src: "/media/companion/moflin/hero.webp",
       alt:
@@ -2633,6 +2647,20 @@ export const REVIEWS: Record<string, ReviewContent> = {
      honest answer is longer than yes or no. */
   "miko-3": {
     slug: "miko-3",
+    figures: [
+      {
+        afterHeading: "What it does out of the box",
+        src: "/media/companion/miko-3/figure-1.webp",
+        caption:
+          "The face is a screen, and the screen is the product. Everything Miko does happens on it.",
+      },
+      {
+        afterHeading: "Buying one, and which colour",
+        src: "/media/companion/miko-3/figure-2.webp",
+        caption:
+          "Red and blue are two Amazon listings at the same $299. The colour is the only difference between them.",
+      },
+    ],
     image: {
       src: "/media/companion/miko-3/hero.webp",
       alt:
@@ -2727,6 +2755,20 @@ export const REVIEWS: Record<string, ReviewContent> = {
      Wi-Fi restriction from the Amazon listing the same day. */
   "vector-2": {
     slug: "vector-2",
+    figures: [
+      {
+        afterHeading: "What you are actually getting",
+        src: "/media/companion/vector-2/figure-2.webp",
+        caption:
+          "It is 3.93 inches long. Everyone expects something bigger, and the hand is the only honest way to show it.",
+      },
+      {
+        afterHeading: "Who this is for",
+        src: "/media/companion/vector-2/figure-1.webp",
+        caption:
+          "Its life is measured in returns to the dock. If a desk robot that mostly sits on a charger is not the appeal, this is not the one.",
+      },
+    ],
     image: {
       src: "/media/companion/vector-2/hero.webp",
       alt:
@@ -2806,6 +2848,26 @@ export const REVIEWS: Record<string, ReviewContent> = {
      strip rather than buried in a table. */
   eilik: {
     slug: "eilik",
+    figures: [
+      {
+        afterHeading: "What it actually does",
+        src: "/media/companion/eilik/range.webp",
+        caption:
+          "The whole family in one frame: the AI Station dome, the DQ, the Panxer and Eiliko, plus the colourways. Energize Lab sells a range, not a product.",
+      },
+      {
+        afterHeading: "The range, and what the DQ actually is",
+        src: "/media/companion/eilik/figure-2.webp",
+        caption:
+          "The DQ beside a standard Eilik at the same scale. Same hardware, desert colourway, $60 more.",
+      },
+      {
+        afterHeading: "Colours",
+        src: "/media/companion/eilik/figure-1.webp",
+        caption:
+          "Four of the colourways side by side. The trim is the only thing that changes.",
+      },
+    ],
     image: {
       src: "/media/companion/eilik/hero.webp",
       alt:
@@ -2897,6 +2959,26 @@ export const REVIEWS: Record<string, ReviewContent> = {
      rather than hiding. */
   loona: {
     slug: "loona",
+    figures: [
+      {
+        afterHeading: "What $499 actually buys",
+        src: "/media/companion/loona/figure-1.webp",
+        caption:
+          "The face is a screen and the expressions are the product. This is one frame of a range that does not sit still.",
+      },
+      {
+        afterHeading: "Why Loona costs what it costs",
+        src: "/media/companion/loona/range.webp",
+        caption:
+          "The descriptive wording set into this artwork is promotional copy supplied with it, not a BotPlanet finding.",
+      },
+      {
+        afterHeading: "The accessory problem, and one warning about buying",
+        src: "/media/companion/loona/figure-2.webp",
+        caption:
+          "What arrives in the box, laid out. The maker's feature wording is printed on this artwork and is theirs rather than ours.",
+      },
+    ],
     image: {
       src: "/media/companion/loona/hero.webp",
       alt:
@@ -3098,6 +3180,26 @@ export const REVIEWS: Record<string, ReviewContent> = {
   },
   "living-ai-emo": {
     slug: "living-ai-emo",
+    figures: [
+      {
+        afterHeading: "What the real EMO actually is",
+        src: "/media/companion/emo/figure-1.webp",
+        caption:
+          "The genuine article on its charging base. The feature wording set into this artwork is promotional copy, not a BotPlanet finding.",
+      },
+      {
+        afterHeading: "Accessories",
+        src: "/media/companion/emo/figure-2.webp",
+        caption:
+          "The charging base, the ball, the mat and the rest, laid out together.",
+      },
+      {
+        afterHeading: "Who should hold out for the real thing",
+        src: "/media/companion/emo/card.webp",
+        caption:
+          "What owning one looks like. Buy it from Living.AI directly — the Amazon listings under this name are a different brand.",
+      },
+    ],
     image: {
       src: "/media/companion/emo/hero.webp",
       alt:
@@ -3177,6 +3279,26 @@ export const REVIEWS: Record<string, ReviewContent> = {
      store. Both are on the page. */
   ropet: {
     slug: "ropet",
+    figures: [
+      {
+        afterHeading: "What it does while you wait, and after",
+        src: "/media/companion/ropet/figure-2.webp",
+        caption:
+          "Asleep on its base on a bedside table. This is what it does for most of the day.",
+      },
+      {
+        afterHeading: "The fur is the point",
+        src: "/media/companion/ropet/figure-1.webp",
+        caption:
+          "The five plush covers and the eye colours. The names and the claims on this chart are Ropet's own marketing wording.",
+      },
+      {
+        afterHeading: "What we cannot tell you",
+        src: "/media/companion/ropet/panel-diary-privacy.webp",
+        caption:
+          "Ropet's own privacy panel, supplied with the artwork. Every claim on it — encryption, no data sharing, camera off by default — is the maker's, and BotPlanet has tested none of them.",
+      },
+    ],
     image: {
       src: "/media/companion/ropet/hero.webp",
       alt:
@@ -3271,6 +3393,32 @@ export const REVIEWS: Record<string, ReviewContent> = {
      ============================================================ */
   "enabot-ebo-air-2": {
     slug: "enabot-ebo-air-2",
+    figures: [
+      {
+        afterHeading: "What $149 gets you",
+        src: "/media/petcam/ebo-air-2/figure-1.webp",
+        caption:
+          "The Air 2 at rest on a rug, which is where a robot like this spends most of its time.",
+      },
+      {
+        afterHeading: "The range, and what the extra money actually buys",
+        src: "/media/petcam/ebo-air-2/figure-2.webp",
+        caption:
+          "Tracks over a rug edge, and the return to the dock. Both panels carry Enabot's own feature wording.",
+      },
+      {
+        afterHeading: "Who this is for",
+        src: "/media/petcam/ebo-air-2/card.webp",
+        caption:
+          "Small enough to be ignored by the animals it is watching.",
+      },
+      {
+        afterHeading: "What we cannot tell you",
+        src: "/media/petcam/ebo-air-2/panel-overview.webp",
+        caption:
+          "Enabot's own overview panel. It prints 1080p; Enabot's own listing records this camera as 2K. The figure on the artwork is the maker's and we have not measured either.",
+      },
+    ],
     image: {
       src: "/media/petcam/ebo-air-2/hero.webp",
       alt:
@@ -3352,6 +3500,26 @@ export const REVIEWS: Record<string, ReviewContent> = {
 
   "enabot-ebo-se": {
     slug: "enabot-ebo-se",
+    figures: [
+      {
+        afterHeading: "What you give up against the Air 2",
+        src: "/media/petcam/ebo-se/figure-1.webp",
+        caption:
+          "The SE and the Air 2 in the same frame at the same scale. The size difference is the buying argument between them.",
+      },
+      {
+        afterHeading: "Who this is for",
+        src: "/media/petcam/ebo-se/figure-2.webp",
+        caption:
+          "In a dark room with the lights off, which is when a pet camera earns its keep.",
+      },
+      {
+        afterHeading: "Where this sits in the range",
+        src: "/media/petcam/ebo-se/card.webp",
+        caption:
+          "The smallest of the four, and the one that goes where the cat went.",
+      },
+    ],
     image: {
       src: "/media/petcam/ebo-se/hero.webp",
       alt:
@@ -3419,6 +3587,32 @@ export const REVIEWS: Record<string, ReviewContent> = {
 
   "enabot-rola-petpal": {
     slug: "enabot-rola-petpal",
+    figures: [
+      {
+        afterHeading: "Treats that come to the animal",
+        src: "/media/petcam/rola-petpal/figure-1.webp",
+        caption:
+          "The hopper, open. Nothing else in this category carries one.",
+      },
+      {
+        afterHeading: "The rest of it",
+        src: "/media/petcam/rola-petpal/panel-summary.webp",
+        caption:
+          "Enabot's own summary sheet, supplied with the artwork. The size and night-vision claims on it are the maker's wording.",
+      },
+      {
+        afterHeading: "It is much bigger than the others",
+        src: "/media/petcam/rola-petpal/figure-2.webp",
+        caption:
+          "The PetPal beside the Air 2 at the same scale. Buyers do not expect the difference.",
+      },
+      {
+        afterHeading: "What we cannot tell you",
+        src: "/media/petcam/rola-petpal/panel-overview.webp",
+        caption:
+          "Enabot's own overview panel. It prints 1080p; Enabot's own listing records 2.5K. The figure is the maker's and we have not measured it.",
+      },
+    ],
     image: {
       src: "/media/petcam/rola-petpal/hero.webp",
       alt:

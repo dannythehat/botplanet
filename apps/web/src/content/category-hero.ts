@@ -364,6 +364,15 @@ export const CATEGORY_HERO: Record<string, CategoryHeroContent> = {
       "and battery life. Find the right moving pet camera for your home.",
     primaryCta: { label: "Compare pet camera robots", href: "#products" },
     secondaryCta: { label: "Robot or fixed camera?", href: "#versus-fixed" },
+    /* The hub's first hero, supplied 9 August 2026. The picture carries the
+       words "Best Pet Camera Robots" set into it — that is the artwork's own
+       headline rather than this page's H1, and the alt text says so rather
+       than describing a picture with no words on it. */
+    image: {
+      src: "/media/hubs/petcam/hero-2026-08.webp",
+      alt:
+        "A white and black rolling pet camera robot on a hallway floor, a golden retriever standing in the doorway behind it. The picture carries the words Best Pet Camera Robots.",
+    },
     imageLayout: "above",
   },
 
