@@ -19,6 +19,27 @@ That is the single most useful thing this page can tell you, so it is the first
 thing on it. **We carry no buy button for EMO**, because the only thing we
 could send you to is something else wearing its name.
 
+On 9 August 2026 we checked one specific listing rather than a search, because
+a reader sent it to us: `amazon.com/dp/B0DG8JPL6J`. It fails on three separate
+counts, and any one of them would have been enough.
+
+**Its own fields name a different brand.** The details table gives the brand as
+EMOPET and the manufacturer as EMOPET. The storefront above the buy box reads
+"Visit the EMOPET Store". Living.AI is not written anywhere on the page.
+
+**It costs more than the maker charges.** The listing asks $419.00. Living.AI's
+own store sells the EMO Go Home — which is what this listing's model number
+says it is — for $369.00. A legitimate reseller does not usually sit fifty
+dollars above the manufacturer.
+
+**The maker will not vouch for Amazon at all.** Living.AI staff, posting on
+Living.AI's own forum, describe the official store as the only legitimate place
+to buy EMO, and say plainly that they cannot confirm Living.AI is the seller
+behind an Amazon listing.
+
+A second listing, B0DDT2MT9K, carries almost the same EMOPET title. This is a
+brand running several of these, not one stray reseller.
+
 If you want the genuine article, Living.AI sells it directly at living.ai. Order
 from there, and check the box says Living.AI before you accept it.
 
