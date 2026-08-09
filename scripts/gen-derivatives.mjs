@@ -337,6 +337,17 @@ const SOURCES = [
   "/media/petcam/rola-petpal/figure-1.webp",
   "/media/petcam/rola-petpal/figure-2.webp",
   "/media/petcam/range/hero.webp",
+  /* The four panels the owner directed be published on 9 August 2026,
+     plus the two range cards and the ROLA summary sheet. Held back on
+     the day; the decision to publish them is recorded in the Command
+     Centre and the figures on them are attributed in their captions. */
+  "/media/petcam/ebo-air-2/panel-overview.webp",
+  "/media/petcam/rola-petpal/panel-overview.webp",
+  "/media/petcam/rola-petpal/panel-summary.webp",
+  "/media/petcam/range/size-chart.webp",
+  "/media/companion/ropet/panel-diary-privacy.webp",
+  "/media/companion/loona/range.webp",
+  "/media/companion/joy-for-all/panel-overview.webp",
 ];
 
 const run = async () => {

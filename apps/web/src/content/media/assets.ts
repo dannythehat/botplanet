@@ -2777,6 +2777,137 @@ export const PLACEHOLDER_ASSETS: MediaAssetRecord[] = manifest.map((m): MediaAss
  * docs/seo/notion-upload-audit-2026-08-09.md.
  */
 export const AUGUST_UPLOAD_ASSETS: MediaAssetRecord[] = [
+
+  /* ==================================================================
+     THE SEVEN HELD BACK ON 9 AUGUST, PUBLISHED BY OWNER DECISION.
+
+     Four of these were withheld on the day: two panels printing 1080p
+     for cameras Enabot's own listing records at 2K and 2.5K, a size
+     chart printing 3.1 inches for a robot the same listing gives as
+     3.8, and a Ropet panel asserting encryption and data handling.
+     The owner's ruling of 9 August is that his artwork is published,
+     and that where a file carries a maker's figure or claim the
+     caption attributes it to the maker. That is what the alt text
+     below does, in every case, naming the conflicting figure rather
+     than leaving a reader to assume the number is ours.
+
+     All seven are promotional_panel on ORIGINAL_SCHEMA, so none of
+     them can enter Product structured data. A disputed figure may
+     appear on a page with its owner named; it may not be handed to a
+     search engine as this machine's photograph.
+     ================================================================== */
+  {
+    ...base("ebo-air-2-panel-overview", "illustration"),
+    productId: "prod-enabot-ebo-air-2",
+    purpose: "EBO Air 2 review — maker's overview panel",
+    exactModel: "Enabot EBO Air 2",
+    type: "promotional_panel",
+    checksum: "sha256:f2fe7242524d5970893e124b4cc2c30fd906f797a501e4f7debdec4494fd5a64",
+    width: 1448,
+    height: 1086,
+    src: "/media/petcam/ebo-air-2/panel-overview.webp",
+    altText:
+      "The Enabot EBO Air 2 on a dark surface beside panels of Enabot's own feature copy. The panel reads 1080p HD video; Enabot's own listing records this camera as 2K, and the figure on the artwork is the maker's wording rather than a BotPlanet measurement.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+  },
+  {
+    ...base("rola-petpal-panel-overview", "illustration"),
+    productId: "prod-enabot-rola-petpal",
+    purpose: "ROLA PetPal review — maker's overview panel",
+    exactModel: "Enabot ROLA PetPal",
+    type: "promotional_panel",
+    checksum: "sha256:9357276c7df64416ec7254fd4183ababc88fa2fb3a56570155be2016366467ab",
+    width: 1254,
+    height: 1254,
+    src: "/media/petcam/rola-petpal/panel-overview.webp",
+    altText:
+      "The ROLA PetPal with its treat hopper open beside a phone showing a cat on camera, under Enabot's own feature list. The panel reads 1080p HD pet camera; Enabot's own listing records 2.5K, and the figure on the artwork is the maker's rather than a BotPlanet measurement.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+  },
+  {
+    ...base("rola-petpal-panel-summary", "illustration"),
+    productId: "prod-enabot-rola-petpal",
+    purpose: "ROLA PetPal review — maker's summary sheet",
+    exactModel: "Enabot ROLA PetPal",
+    type: "promotional_panel",
+    checksum: "sha256:4ebdd3288c816158d49fe8f5996676470bf4ecc5e1bdab9805214098a1a6fff3",
+    width: 1402,
+    height: 1122,
+    src: "/media/petcam/rola-petpal/panel-summary.webp",
+    altText:
+      "A four-panel sheet: a dog taking a treat, the open dispenser, the PetPal beside the much smaller Air 2, and the PetPal lighting a raccoon at night. The size and night-vision claims on it are Enabot's own wording.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+  },
+  {
+    ...base("petcam-range-size-chart", "illustration"),
+    productId: "prod-enabot-rola-petpal",
+    purpose: "Enabot range page — maker's size chart",
+    exactModel: "Enabot ROLA PetPal",
+    type: "promotional_panel",
+    checksum: "sha256:c778c8247ca91edf42e91f06b7358e0bf8be0b6aab3d7cf357fe4f6cf6493ad5",
+    width: 1536,
+    height: 1024,
+    src: "/media/petcam/range/size-chart.webp",
+    altText:
+      "A size comparison of the Enabot SE against the ROLA PetPal with dimensions printed beside each. The figures are the maker's; Enabot's own listing gives the SE as 3.8 inches wide where this chart reads 3.1.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+  },
+  {
+    ...base("ropet-panel-diary-privacy", "illustration"),
+    productId: "prod-ropet",
+    purpose: "Ropet review — maker's diary and privacy panel",
+    exactModel: "Ropet KAMOMO pro",
+    type: "promotional_panel",
+    checksum: "sha256:2c96546d12d6b6cf451292d8de8d06cfdb2be9b91e906aa2018d0f3dc2a61306",
+    width: 1254,
+    height: 1254,
+    src: "/media/companion/ropet/panel-diary-privacy.webp",
+    altText:
+      "A panel showing Ropet's diary feature beside four claims about data handling — encryption, no data sharing, camera off by default and secure design. Every one of those is Ropet's own marketing wording, supplied with the artwork, and none has been tested by BotPlanet.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+  },
+  {
+    ...base("loona-range", "illustration"),
+    productId: "prod-loona",
+    purpose: "Loona review — maker's overview card",
+    exactModel: "Loona Petbot (KEYi Tech)",
+    type: "promotional_panel",
+    checksum: "sha256:e2d587736cbf948ab05b945030b0ab41f301c7338c065e9052635cc184ff5447",
+    width: 1448,
+    height: 1086,
+    src: "/media/companion/loona/range.webp",
+    altText:
+      "Loona on a dark table under a headline naming it an AI companion robot. The descriptive wording set into the artwork is promotional copy rather than a BotPlanet finding.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+  },
+  {
+    ...base("joy-for-all-panel-overview", "illustration"),
+    productId: "prod-joy-for-all-companion-pets",
+    purpose: "Robotic pets for elderly relatives — maker's overview card",
+    exactModel: "Joy For All Companion Pet Cat, B7594 (Silver with White Mitts)",
+    type: "promotional_panel",
+    checksum: "sha256:fd4b8c7eb80fad8268992ba64dfca93ea2ae562d1a17bee0b5ecfdf04c260a00",
+    width: 1448,
+    height: 1086,
+    src: "/media/companion/joy-for-all/panel-overview.webp",
+    altText:
+      "The Joy For All companion cat on a blanket with an older couple behind it, under a line describing it as designed to bring comfort and companionship. That description is Ageless Innovation's own marketing wording, not a BotPlanet finding.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+  },
   {
     ...base("hub-grill-row-baked-on-grease", "illustration"),
     productId: null,

@@ -8222,5 +8222,254 @@
         "checksum": "sha256:9eae149d3c02cf602cfd2a7e74bcf051bfe15614eed385daeb1ad7473e0e81ea"
       }
     ]
+  },
+  {
+    "source": "/media/petcam/ebo-air-2/panel-overview.webp",
+    "sourceWidth": 1448,
+    "sourceHeight": 1086,
+    "derivatives": [
+      {
+        "id": "media-petcam-ebo-air-2-panel-overview-webp-360",
+        "src": "/media/petcam/ebo-air-2/panel-overview-360w.webp",
+        "width": 360,
+        "height": 270,
+        "bytes": 11572,
+        "checksum": "sha256:25010c4eebcfcac4becc430576d7996f407008b0834fffb3ba9d5868045b73cc"
+      },
+      {
+        "id": "media-petcam-ebo-air-2-panel-overview-webp-640",
+        "src": "/media/petcam/ebo-air-2/panel-overview-640w.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 29006,
+        "checksum": "sha256:0e0f44bd74285f298be30742d4a9f7ab182fcaf72157c50e2cdb11e169cf7a27"
+      },
+      {
+        "id": "media-petcam-ebo-air-2-panel-overview-webp-960",
+        "src": "/media/petcam/ebo-air-2/panel-overview-960w.webp",
+        "width": 960,
+        "height": 720,
+        "bytes": 55320,
+        "checksum": "sha256:75ef26a6e7a7698684f28ef6e014f528699c1457f232098c62b2539ac944bfbc"
+      },
+      {
+        "id": "media-petcam-ebo-air-2-panel-overview-webp-1440",
+        "src": "/media/petcam/ebo-air-2/panel-overview-1440w.webp",
+        "width": 1440,
+        "height": 1080,
+        "bytes": 88132,
+        "checksum": "sha256:af527b4e1203addb3c34d0c99849bb3e75cfb0c17b48591481acc924909de88d"
+      }
+    ]
+  },
+  {
+    "source": "/media/petcam/rola-petpal/panel-overview.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-petcam-rola-petpal-panel-overview-webp-360",
+        "src": "/media/petcam/rola-petpal/panel-overview-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 14154,
+        "checksum": "sha256:c83271cd936938b6e2811455053c47d3b58b0a07be480f0567526318114e5717"
+      },
+      {
+        "id": "media-petcam-rola-petpal-panel-overview-webp-640",
+        "src": "/media/petcam/rola-petpal/panel-overview-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 34168,
+        "checksum": "sha256:056ff617648c95b7723d8041186818bb28918d5ca3a1c98e9b233169c8ec09ff"
+      },
+      {
+        "id": "media-petcam-rola-petpal-panel-overview-webp-960",
+        "src": "/media/petcam/rola-petpal/panel-overview-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 65044,
+        "checksum": "sha256:010e7043c1208fa551c6ed9443c293874b5413c914b1dfe72ad48aadbfffbfff"
+      }
+    ]
+  },
+  {
+    "source": "/media/petcam/rola-petpal/panel-summary.webp",
+    "sourceWidth": 1402,
+    "sourceHeight": 1122,
+    "derivatives": [
+      {
+        "id": "media-petcam-rola-petpal-panel-summary-webp-360",
+        "src": "/media/petcam/rola-petpal/panel-summary-360w.webp",
+        "width": 360,
+        "height": 288,
+        "bytes": 12948,
+        "checksum": "sha256:434f51a3bd76203babe386b16bc99cd55746972a3a8e2541f9228000683dadff"
+      },
+      {
+        "id": "media-petcam-rola-petpal-panel-summary-webp-640",
+        "src": "/media/petcam/rola-petpal/panel-summary-640w.webp",
+        "width": 640,
+        "height": 512,
+        "bytes": 31668,
+        "checksum": "sha256:b91c5cb0920659f96d18dc2291c16291b0137dd1d29bf807098967065d36d996"
+      },
+      {
+        "id": "media-petcam-rola-petpal-panel-summary-webp-960",
+        "src": "/media/petcam/rola-petpal/panel-summary-960w.webp",
+        "width": 960,
+        "height": 768,
+        "bytes": 62052,
+        "checksum": "sha256:32f0160c1a4f66d958a368b05107362ebf077f9a8eb9b78593922348de2be7b5"
+      }
+    ]
+  },
+  {
+    "source": "/media/petcam/range/size-chart.webp",
+    "sourceWidth": 1536,
+    "sourceHeight": 1024,
+    "derivatives": [
+      {
+        "id": "media-petcam-range-size-chart-webp-360",
+        "src": "/media/petcam/range/size-chart-360w.webp",
+        "width": 360,
+        "height": 240,
+        "bytes": 5328,
+        "checksum": "sha256:cc8136806a2a00cc049c0401c162434f353640d93dd33e9945bbee73b8ee6040"
+      },
+      {
+        "id": "media-petcam-range-size-chart-webp-640",
+        "src": "/media/petcam/range/size-chart-640w.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 12538,
+        "checksum": "sha256:fcdff6477825558935cae9c7d8de1f80b3add66de025b42dca4b3562f13342ce"
+      },
+      {
+        "id": "media-petcam-range-size-chart-webp-960",
+        "src": "/media/petcam/range/size-chart-960w.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 25420,
+        "checksum": "sha256:a50c8f89b84514d014a8a9c4c7b7fb74ad750a044aada3c30a6fcc1fc0cbecb6"
+      },
+      {
+        "id": "media-petcam-range-size-chart-webp-1440",
+        "src": "/media/petcam/range/size-chart-1440w.webp",
+        "width": 1440,
+        "height": 960,
+        "bytes": 41440,
+        "checksum": "sha256:8cdd3dca2c5db94df458237780ea4dab9bee8f07151b04d59eea4304ce5985cf"
+      }
+    ]
+  },
+  {
+    "source": "/media/companion/ropet/panel-diary-privacy.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-companion-ropet-panel-diary-privacy-webp-360",
+        "src": "/media/companion/ropet/panel-diary-privacy-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 22210,
+        "checksum": "sha256:2e5ac833bdda32d37931425860e5242a2a3fe7abf1795cbbb6c29b9be86b39d9"
+      },
+      {
+        "id": "media-companion-ropet-panel-diary-privacy-webp-640",
+        "src": "/media/companion/ropet/panel-diary-privacy-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 59522,
+        "checksum": "sha256:559b8efb45686277e02795f85e0f16cfec60b8e50834dabbae5b3f1cf3ece73f"
+      },
+      {
+        "id": "media-companion-ropet-panel-diary-privacy-webp-960",
+        "src": "/media/companion/ropet/panel-diary-privacy-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 119966,
+        "checksum": "sha256:5eef503e5ab414063adf0e985001955b65cb2d073a5c5b0a031b8578fe6c978e"
+      }
+    ]
+  },
+  {
+    "source": "/media/companion/loona/range.webp",
+    "sourceWidth": 1448,
+    "sourceHeight": 1086,
+    "derivatives": [
+      {
+        "id": "media-companion-loona-range-webp-360",
+        "src": "/media/companion/loona/range-360w.webp",
+        "width": 360,
+        "height": 270,
+        "bytes": 9196,
+        "checksum": "sha256:7422f280f1f1f1375a2735f868d86a82a629bdbfdc89c6bfd07d32876f4209e8"
+      },
+      {
+        "id": "media-companion-loona-range-webp-640",
+        "src": "/media/companion/loona/range-640w.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 22518,
+        "checksum": "sha256:44d2f15dc0b7d08840fd0fdd20cfdf76bfaa0bf516b0dd1cf1f31649c8104615"
+      },
+      {
+        "id": "media-companion-loona-range-webp-960",
+        "src": "/media/companion/loona/range-960w.webp",
+        "width": 960,
+        "height": 720,
+        "bytes": 43112,
+        "checksum": "sha256:de39b244794c51c9061ec1092043c1f89fd8fe5524565f03f1653d8feb1b25a0"
+      },
+      {
+        "id": "media-companion-loona-range-webp-1440",
+        "src": "/media/companion/loona/range-1440w.webp",
+        "width": 1440,
+        "height": 1080,
+        "bytes": 68194,
+        "checksum": "sha256:0b25a096826f278cb7e14e090fade275350eaed751dc00cfc3de783f2ce82d06"
+      }
+    ]
+  },
+  {
+    "source": "/media/companion/joy-for-all/panel-overview.webp",
+    "sourceWidth": 1448,
+    "sourceHeight": 1086,
+    "derivatives": [
+      {
+        "id": "media-companion-joy-for-all-panel-overview-webp-360",
+        "src": "/media/companion/joy-for-all/panel-overview-360w.webp",
+        "width": 360,
+        "height": 270,
+        "bytes": 10916,
+        "checksum": "sha256:da8c318632a0f131f4274c60b805a1d6197f885ad86825e55496094b18dd6b3a"
+      },
+      {
+        "id": "media-companion-joy-for-all-panel-overview-webp-640",
+        "src": "/media/companion/joy-for-all/panel-overview-640w.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 29006,
+        "checksum": "sha256:133212694660c1fa0dc247cc101cad5cd8b73c3c1dce3ef4722d81c54526f48b"
+      },
+      {
+        "id": "media-companion-joy-for-all-panel-overview-webp-960",
+        "src": "/media/companion/joy-for-all/panel-overview-960w.webp",
+        "width": 960,
+        "height": 720,
+        "bytes": 58404,
+        "checksum": "sha256:206beb1a843b0e83267c0b8865544b650d1de20cb822d43955fe88e39359ec0c"
+      },
+      {
+        "id": "media-companion-joy-for-all-panel-overview-webp-1440",
+        "src": "/media/companion/joy-for-all/panel-overview-1440w.webp",
+        "width": 1440,
+        "height": 1080,
+        "bytes": 93766,
+        "checksum": "sha256:f708c4f1d5cf8b8417a486868c604dfdbd15e14ee7f0ce01963d03ef91241c8b"
+      }
+    ]
   }
 ]
