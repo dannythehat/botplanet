@@ -41,10 +41,17 @@ export const AMAZON_ASSOCIATE_TAG_STATUS =
 /**
  * The ONLY way an outbound Amazon URL is built. Appends the tag when there is a
  * verified one and leaves the URL clean when there is not.
+ *
+ * THE TAG IS NOW PER-MARKET, and the second argument is how. Under Earn
+ * Globally `botplanet-20` is credited on ten stores and on none of the others,
+ * so a click routed to amazon.com.au or amazon.co.jp must go out CLEAN rather
+ * than carrying a tag that store will not honour. Pass the tag the marketplace
+ * router returned; omit the argument and the US tag is used, which is the old
+ * behaviour and correct for every US click.
  */
-export function amazonDestination(url: string): string {
-  if (!AMAZON_ASSOCIATE_TAG) return url;
-  return `${url}${url.includes("?") ? "&" : "?"}tag=${AMAZON_ASSOCIATE_TAG}`;
+export function amazonDestination(url: string, tag: string | null = AMAZON_ASSOCIATE_TAG): string {
+  if (!tag) return url;
+  return `${url}${url.includes("?") ? "&" : "?"}tag=${tag}`;
 }
 
 /** Trust pages shown in the footer. */

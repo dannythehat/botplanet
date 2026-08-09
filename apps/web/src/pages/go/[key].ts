@@ -95,13 +95,27 @@ export const GET: APIRoute = async ({ params, locals, request }) => {
     // itself rather than on a search page the customer has to work through.
     const exact = destinationFor(offer.productId, "ret-amazon");
     if (exact?.retailerProductId && exact.identifierKind === "asin") {
-      /* Localised where we can do it safely, US otherwise — the rule and the
-         reason are in content/commerce/amazon-marketplaces.ts. Cloudflare
-         gives the country on the request, so this costs nothing. */
-      const routed = marketplaceFor(offer.productId, exact.retailerProductId, country);
-      destination = amazonDestination(routed.url);
+      /* THE NAME IS READ BEFORE THE ROUTE IS BUILT, and that is the whole
+         change of 9 August 2026. A non-US visitor with no verified regional
+         ASIN is sent to their own store's SEARCH for this product's name,
+         because an ASIN is not a global identifier — ours for the Miko 3
+         resolves to a different maker's robot on amazon.co.uk. A name cannot
+         collide that way. See content/commerce/amazon-marketplaces.ts. */
+      const named = (
+        await db
+          .select({ name: schema.products.name })
+          .from(schema.products)
+          .where(eq(schema.products.id, offer.productId))
+          .limit(1)
+      )[0];
+      const routed = marketplaceFor(offer.productId, exact.retailerProductId, country, named?.name ?? null);
+      destination = amazonDestination(routed.url, routed.tag);
       marketplace = routed.marketplace;
-      destinationKind = "offer_destination";
+      /* Recorded distinctly so a search fallback is never counted as a product
+         click. Three of the four kinds are not "we sent them to the product". */
+      destinationKind = routed.kind === "regional_search" || routed.kind === "us_search"
+        ? "amazon_search"
+        : "offer_destination";
     } else {
       // No ASIN was ever captured for this product. A search link is an honest
       // fallback — a real tracked click to an imprecise place — and it is

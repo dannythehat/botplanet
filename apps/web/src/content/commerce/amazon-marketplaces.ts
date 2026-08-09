@@ -49,11 +49,33 @@
    does not describe, which is precisely the SKU trap the review
    itself warns about.
 
-   So an unconfigured country keeps the US destination. The reader
-   may still be bounced by Amazon, but they are bounced FROM THE
-   RIGHT PRODUCT rather than delivered to the wrong one. That is a
-   worse experience and an honest one, and it is the correct
-   trade until a row below is filled in properly.
+   THAT LAST PARAGRAPH USED TO SAY THE OPPOSITE, AND IT WAS WRONG.
+
+   It read: "an unconfigured country keeps the US destination. The
+   reader may still be bounced by Amazon, but they are bounced FROM
+   THE RIGHT PRODUCT rather than delivered to the wrong one."
+
+   The owner disproved it from Burnley on 9 August 2026. Our Miko 3
+   link carries the US ASIN B0GV37M678. Followed from the UK it did
+   not land on a Miko 3 and it did not 404 — it produced a LOOI
+   robot, a different machine from a different maker. AN ASIN IS NOT
+   A GLOBAL IDENTIFIER. The same ten characters address different
+   products on different stores, so a bare US ASIN followed from
+   abroad is not "the right product, possibly bounced". It is a
+   coin toss, and the losing side is a buy button that recommends
+   somebody else's robot under our name.
+
+   THE RULE NOW, FOR ANY NON-US CLICK:
+
+     - a VERIFIED regional ASIN → that store's product page;
+     - otherwise → that store's SEARCH for the product's exact
+       name. A name cannot collide the way an identifier can. It is
+       visibly a search rather than a product page, which is the
+       honest shape for "we know what you want and not where it
+       lives here".
+
+   A bare US ASIN is never emitted to a non-US visitor again. The
+   test in test/offers.test.ts asserts it.
    ============================================================ */
 
 export interface AmazonMarketplace {
@@ -136,6 +158,21 @@ export const REGIONAL_SKU_CONFLICTS: {
   conflict: string;
 }[] = [
   {
+    productId: "prod-miko-3",
+    country: "GB",
+    asin: "B0GV37M678",
+    readOn: "2026-08-09",
+    conflict:
+      "THE CLICK THAT PROVED AN ASIN IS NOT GLOBAL. This is our US ASIN, and the owner following our own " +
+      "link from the UK reached a LOOI robot — a different machine from a different maker — rather than a " +
+      "Miko 3 or a 404. Checked the same day through the product engine against amazon.co.uk: the ASIN " +
+      "returns no product at all there, so what a browser resolves it to is Amazon's redirect rather than a " +
+      "listing we could ever verify. THERE IS ALSO NO GENUINE MIKO 3 ON amazon.co.uk: a search returns a " +
+      "screen protector captioned 'Compatible for Miko 3' and a run of unrelated £20 toy robots. So there " +
+      "is no regional ASIN to add, and GB clicks for this product now go to a UK search for the product " +
+      "name — which finds nothing good either, but says so instead of selling a stranger's robot.",
+  },
+  {
     productId: "prod-dolphin-nautilus-cc-plus",
     country: "GB",
     asin: "B00Q8M0NWE",
@@ -175,25 +212,89 @@ export function marketplaceFor(
   productId: string,
   usAsin: string,
   country: string | null | undefined,
-): { url: string; marketplace: string; localised: boolean } {
+  /**
+   * The product's catalogue name, used to build the search fallback.
+   *
+   * OPTIONAL ONLY SO EXISTING CALLERS COMPILE. Without it a non-US click has
+   * nothing to search for, so it falls back to the US product page — the very
+   * behaviour this function exists to stop. The /go route always passes it;
+   * `searchFallbackAvailable` below is what a test can assert on.
+   */
+  productName?: string | null,
+): {
+  url: string;
+  marketplace: string;
+  localised: boolean;
+  /** What kind of destination was built, for the click record. */
+  kind: "us_asin" | "regional_asin" | "regional_search" | "us_search";
+  /** The tag to attach, or null where this store earns us nothing. */
+  tag: string | null;
+} {
   const us = AMAZON_MARKETPLACES[0];
   const usUrl = `https://${us.host}/dp/${usAsin}`;
 
   const cc = (country ?? "US").toUpperCase();
-  if (cc === "US") return { url: usUrl, marketplace: "US", localised: false };
+
+  /* US IS UNCHANGED, and deliberately first. Everything below this line is
+     about a visitor Amazon is going to redirect; a US visitor is not. */
+  if (cc === "US") {
+    return { url: usUrl, marketplace: "US", localised: false, kind: "us_asin", tag: us.tag };
+  }
 
   const market = AMAZON_MARKETPLACES.find((m) => m.country === cc);
   const asin = REGIONAL_ASIN[`${productId}:${cc}`];
 
-  /* Both conditions, or neither.
-       - No verified regional ASIN: keep the amazon.com link and let Amazon's
-         own Earn Globally redirect handle it. Guessing that the US ASIN also
-         exists on the local store is how you ship a 404.
-       - No tag: the store is not enabled, so a localised link would earn
-         nothing where the amazon.com one might still be picked up. */
-  if (!market?.tag || !asin) {
-    return { url: usUrl, marketplace: "US", localised: false };
+  /* 1. A verified regional ASIN is the only thing that earns a product page.
+        A row in REGIONAL_ASIN is a claim that somebody read the regional
+        listing and found the same machine — see the rule at the top. */
+  if (market && asin) {
+    return {
+      url: `https://${market.host}/dp/${asin}`,
+      marketplace: cc,
+      localised: true,
+      kind: "regional_asin",
+      tag: market.tag,
+    };
   }
 
-  return { url: `https://${market.host}/dp/${asin}`, marketplace: cc, localised: true };
+  /* 2. Otherwise, a SEARCH on the store the visitor is actually on.
+        A NAME CANNOT COLLIDE THE WAY AN IDENTIFIER CAN. B0GV37M678 is a Miko 3
+        here and something else on amazon.co.uk; "Miko 3" is "Miko 3"
+        everywhere. The visitor lands on a search page, which looks like what
+        it is, instead of on a product page that looks like the one they asked
+        for and is not. */
+  const name = (productName ?? "").trim();
+  if (market && name) {
+    return {
+      url: `https://${market.host}/s?k=${encodeURIComponent(name)}`,
+      marketplace: cc,
+      localised: true,
+      kind: "regional_search",
+      tag: market.tag,
+    };
+  }
+
+  /* 3. A country we do not have a store for, or a product with no name to
+        search. Still never a bare US ASIN: amazon.com's own search takes the
+        name and Amazon redirects the visitor to their local store with the
+        query intact. */
+  if (name) {
+    return {
+      url: `https://${us.host}/s?k=${encodeURIComponent(name)}`,
+      marketplace: market?.country ?? "US",
+      localised: false,
+      kind: "us_search",
+      tag: market ? market.tag : us.tag,
+    };
+  }
+
+  /* 4. No name and no store. This is a data gap rather than a routing
+        decision — the caller could not tell us what the product is called —
+        and the US product page is the least-wrong answer left. It is reachable
+        only if a caller omits `productName`, which /go never does. */
+  return { url: usUrl, marketplace: "US", localised: false, kind: "us_asin", tag: us.tag };
 }
+
+/** True when this product can be searched for by name on a non-US store. */
+export const searchFallbackAvailable = (productName: string | null | undefined): boolean =>
+  Boolean((productName ?? "").trim());

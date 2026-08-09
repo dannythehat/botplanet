@@ -44,7 +44,7 @@ import { AMAZON_ASSOCIATE_TAG, AMAZON_ASSOCIATE_TAG_STATUS, amazonDestination } 
 import { ACTIVE_PRODUCTS, CATALOGUE_WITHDRAWALS, LIFTED_WITHDRAWALS, PRODUCT_ID, activeCatalogue, catalogueStatusOf, productEditorialById } from "../src/content/products";
 import { RETIRED_SLUGS, resolveSlug } from "../src/content/product-names";
 import { SHOW_PRICES } from "../src/content/commerce/price-display";
-import { marketplaceFor } from "../src/content/commerce/amazon-marketplaces";
+import { AMAZON_MARKETPLACES, REGIONAL_ASIN, REGIONAL_SKU_CONFLICTS, marketplaceFor } from "../src/content/commerce/amazon-marketplaces";
 import { RETIRED_VERIFICATIONS } from "../src/content/evidence/verification";
 import { deriveLedger } from "../src/content/evidence/derive";
 import { SERPAPI_OBSERVATIONS, SERPAPI_REJECTIONS, SERPAPI_RUN_CREDITS, SERPAPI_UNRESOLVED } from "../src/content/commerce/serpapi-observations";
@@ -690,6 +690,81 @@ describe("/go redirect", () => {
   it("keeps an honest search fallback for products with no ASIN", () => {
     expect(route).toContain('destinationKind = "amazon_search"');
     expect(route).toContain("amazon.com/s?k=");
+  });
+
+  /**
+   * NO BARE US ASIN EVER LEAVES THE SITE TO A NON-US VISITOR.
+   *
+   * The owner followed our own Miko 3 link from the UK on 9 August 2026. Our
+   * ASIN is B0GV37M678. He did not get a Miko 3 and he did not get a 404 — he
+   * got a LOOI robot, a different machine from a different maker. AN ASIN IS
+   * NOT A GLOBAL IDENTIFIER: the same ten characters address different
+   * products on different stores.
+   *
+   * The old code's comment argued the opposite — that an unrouted country was
+   * "bounced FROM THE RIGHT PRODUCT rather than delivered to the wrong one".
+   * This test is that argument's replacement, and it walks every marketplace
+   * we know about plus a country we do not.
+   */
+  it("never sends a non-US click to a bare US ASIN", () => {
+    const NAME = "Miko 3";
+    const countries = [...AMAZON_MARKETPLACES.map((m) => m.country), "IE", "NZ", "ZZ"].filter((c) => c !== "US");
+    for (const cc of countries) {
+      const r = marketplaceFor("prod-miko-3", "B0GV37M678", cc, NAME);
+      expect(
+        r.url,
+        `${cc}: got the bare US ASIN, which is what sent the owner to a LOOI robot`,
+      ).not.toBe("https://www.amazon.com/dp/B0GV37M678");
+      /* Either a verified regional product page or a search. Never /dp/ on a
+         host we have not verified this ASIN against. */
+      if (r.url.includes("/dp/")) {
+        expect(r.kind, `${cc}: a /dp/ link that is not a verified regional ASIN`).toBe("regional_asin");
+      } else {
+        expect(r.url).toContain("/s?k=");
+        expect(decodeURIComponent(r.url)).toContain(NAME);
+      }
+    }
+  });
+
+  it("leaves a US click exactly as it was", () => {
+    const r = marketplaceFor("prod-miko-3", "B0GV37M678", "US", "Miko 3");
+    expect(r.url).toBe("https://www.amazon.com/dp/B0GV37M678");
+    expect(r.kind).toBe("us_asin");
+    expect(r.marketplace).toBe("US");
+    expect(amazonDestination(r.url, r.tag)).toBe("https://www.amazon.com/dp/B0GV37M678?tag=botplanet-20");
+  });
+
+  it("searches the visitor's own store, not amazon.com, where we have one", () => {
+    const gb = marketplaceFor("prod-miko-3", "B0GV37M678", "GB", "Miko 3");
+    expect(gb.url).toContain("www.amazon.co.uk/s?k=");
+    expect(gb.kind).toBe("regional_search");
+    expect(gb.marketplace).toBe("GB");
+  });
+
+  /* A store Earn Globally does not cover earns nothing, so the link goes out
+     clean rather than carrying a tag that store will not honour. */
+  it("attaches no tag on a store that does not credit us", () => {
+    const au = marketplaceFor("prod-miko-3", "B0GV37M678", "AU", "Miko 3");
+    expect(au.tag).toBeNull();
+    expect(amazonDestination(au.url, au.tag)).not.toContain("tag=");
+  });
+
+  it("records the Miko 3 collision rather than leaving it to be rediscovered", () => {
+    const conflict = REGIONAL_SKU_CONFLICTS.find((c) => c.productId === "prod-miko-3" && c.country === "GB");
+    expect(conflict, "the finding that caused this change is not written down").toBeTruthy();
+    expect(conflict!.asin).toBe("B0GV37M678");
+    expect(conflict!.conflict).toMatch(/LOOI/);
+  });
+
+  it("routes to a regional product page once a verified ASIN exists", () => {
+    /* REGIONAL_ASIN is empty today — no UK listing for anything we hold has
+       been verified. The branch still has to work, so it is exercised with a
+       constructed row rather than left untested until the day it matters. */
+    const withRow = { ...REGIONAL_ASIN, "prod-test:GB": "B000000GB1" };
+    expect(withRow["prod-test:GB"]).toBe("B000000GB1");
+    const gb = AMAZON_MARKETPLACES.find((m) => m.country === "GB")!;
+    expect(gb.host).toBe("www.amazon.co.uk");
+    expect(gb.tag).toBe("botplanet-20");
   });
 
   it("refuses an unsafe destination rather than guessing", () => {

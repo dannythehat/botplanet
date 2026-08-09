@@ -131,3 +131,39 @@ that decision governs every future round, not this one.
 - EMO: the `card` slot, which asked for EMO with a boxer dog in a garden.
 - Pet camera hub: row3 and row4 at full resolution.
 - ROLA PetPal: the `card` slot.
+
+---
+
+# International Associates tags — a revenue item, not a bug
+
+Recorded 9 August 2026, alongside the cross-marketplace `/go/` fix.
+
+**Non-US clicks currently earn nothing on a product page, by design.** Under
+Amazon's Earn Globally the tag `botplanet-20` is credited on ten stores — US,
+UK, Canada, France, Germany, Italy, Netherlands, Poland, Spain, Sweden — but
+only when Amazon itself performs the redirect from an `amazon.com` link. From
+today a non-US visitor with no verified regional ASIN is sent to their own
+store's **search** for the product name instead, because an ASIN is not a
+global identifier and the previous behaviour put a UK reader in front of a
+different maker's robot.
+
+That trade is right for the reader and it does cost something: a search landing
+converts worse than a product page, and Australia and Japan are not covered by
+Earn Globally at all, so those links now go out untagged rather than carrying a
+tag their store will not honour.
+
+**The revenue item.** Two things would recover it, in this order:
+
+1. **Regional ASINs.** Each verified row in `REGIONAL_ASIN` turns one market's
+   search fallback back into a product page. The bar is deliberately high — the
+   regional listing has to be the same machine, not merely the same model name,
+   and the Dolphin Nautilus CC Plus is the standing example of how that goes
+   wrong. This costs research time and no money.
+2. **Native Associates accounts for amazon.co.uk and the EU stores.** These are
+   separate programmes with their own tags and their own approval. They would
+   pay on a direct regional link rather than relying on Amazon's redirect, and
+   they are the only route to earning in Australia and Japan at all.
+
+Neither is urgent while the catalogue is US-first. Both become material the
+moment a category ranks in the UK, which the window and companion clusters
+plausibly will.
