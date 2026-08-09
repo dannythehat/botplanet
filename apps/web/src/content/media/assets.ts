@@ -3768,6 +3768,388 @@ export const AUGUST_UPLOAD_ASSETS: MediaAssetRecord[] = [
   },
 ];
 
+
+/* ------------------------------------------------------------------ */
+/* Educational and coding robots, 9 August 2026                        */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Five products, twenty-two files, every one of them opened.
+ *
+ * THIS ROUND CAME FROM TWO DIFFERENT PLACES and it shows. The three Sphero
+ * sets are generated art of the usual size and quality. Ozobot and Makeblock
+ * arrive as small JPEGs from the makers' own press kits — 500x300 in one case
+ * — so their derivative ladders stop short. The generator refuses to upscale,
+ * which is why nothing here claims a width it does not have.
+ *
+ * TWO SUPPLIED FIGURES DISAGREE WITH THIS SITE AND BOTH ARE PUBLISHED, with
+ * the disagreement named in the caption rather than smoothed over:
+ *
+ *   - The Ozobot card heads itself "Evo Entry Kit, Ages 4+". This review uses
+ *     5 to 11, which is what Ozobot's own product title says and what its
+ *     manufacturer age months support. Amazon's category field for the same
+ *     listing reads "Toddler". Three sources, three answers; the caption says
+ *     whose "4+" it is.
+ *   - The Makeblock three-panel figure is captioned "electroics" by the maker.
+ *     The typo is rendered into the file and cannot be edited out of a WebP,
+ *     so the alt text says the label is misspelt in the supplied artwork
+ *     rather than repeating it as though we had written it.
+ */
+export const CODING_UPLOAD_ASSETS: MediaAssetRecord[] = [
+  {
+    ...base("sphero-bolt-hero", "illustration"),
+    productId: "prod-sphero-bolt",
+    purpose: "Sphero BOLT review — lead",
+    exactModel: "Sphero BOLT",
+    type: "promotional_panel",
+    checksum: "sha256:f0d78c640d2cddaec14457950be2c03bd13afbacf4f182751f831f5d2a70a7c9",
+    width: 1536,
+    height: 1024,
+    src: "/media/coding/sphero-bolt/hero.webp",
+    altText:
+      "A clear Sphero BOLT on a wooden floor with its blue LED matrix lit, a child's hand reaching for it. Sphero's own name and the words programmable robotic ball are set into the artwork.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+  },
+  {
+    ...base("sphero-bolt-figure-1", "depiction"),
+    productId: "prod-sphero-bolt",
+    purpose: "Sphero BOLT review — inside the ball",
+    exactModel: "Sphero BOLT",
+    type: "product_detail",
+    checksum: "sha256:d9cc90703d1aa1b3ae78d1ec79cd990fbe9d85829fe28cfe3637158361836cc1",
+    width: 1254,
+    height: 1254,
+    src: "/media/coding/sphero-bolt/figure-1.webp",
+    altText:
+      "Close on the BOLT through its clear shell: the 8 by 8 blue LED matrix, the drive wheels either side and the circuit board beneath.",
+    altTextStatus: "approved",
+    schema: DEPICTION_SCHEMA,
+    depictsRealProduct: true,
+  },
+  {
+    ...base("sphero-bolt-figure-2", "depiction"),
+    productId: "prod-sphero-bolt",
+    purpose: "Sphero BOLT review — coding it",
+    exactModel: "Sphero BOLT",
+    type: "product_in_use",
+    checksum: "sha256:72eb2ca84498198729ff0ed2c1bdf15e7b0d4b172c6ca71aba12584c6553b6c4",
+    width: 1536,
+    height: 1024,
+    src: "/media/coding/sphero-bolt/figure-2.webp",
+    altText:
+      "A BOLT beside an open laptop showing JavaScript that connects to the ball, sets its LED matrix and rolls it.",
+    altTextStatus: "approved",
+    schema: DEPICTION_SCHEMA,
+    depictsRealProduct: true,
+  },
+  {
+    ...base("sphero-bolt-card", "depiction"),
+    productId: "prod-sphero-bolt",
+    purpose: "Sphero BOLT — listing card",
+    exactModel: "Sphero BOLT",
+    type: "product_hero",
+    checksum: "sha256:602e7b6d70dea52ec5ed102ed58a6276f144e837bec6ac026cd40ac6b2f78de6",
+    width: 1536,
+    height: 1024,
+    src: "/media/coding/sphero-bolt/card.webp",
+    altText:
+      "A Sphero BOLT sitting on its black charging base against a plain pale background, matrix lit blue.",
+    altTextStatus: "approved",
+    schema: DEPICTION_SCHEMA,
+    depictsRealProduct: true,
+  },
+  {
+    ...base("sphero-mini-hero", "illustration"),
+    productId: "prod-sphero-mini",
+    purpose: "Sphero Mini review — lead",
+    exactModel: "Sphero Mini (Blue)",
+    type: "promotional_panel",
+    checksum: "sha256:08913966118f84eaa75b46fa1a22e9de78291416c1f2cfb0370037e69fc3fb42",
+    width: 1254,
+    height: 1254,
+    src: "/media/coding/sphero-mini/hero.webp",
+    altText:
+      "A blue and white Sphero Mini beside a phone running its driving app, with cone-shaped obstacles behind. The panel wording describing it is promotional copy rather than a BotPlanet finding.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+  },
+  {
+    ...base("sphero-mini-figure-1", "depiction"),
+    productId: "prod-sphero-mini",
+    purpose: "Sphero Mini review — beside the BOLT",
+    exactModel: "Sphero Mini (Blue)",
+    type: "product_detail",
+    checksum: "sha256:23da0d663615edd7fae92ec68b5bcb2055e859954e13c723b3167e458bd22c99",
+    width: 1536,
+    height: 1024,
+    src: "/media/coding/sphero-mini/figure-1.webp",
+    altText:
+      "A Sphero Mini next to a Sphero BOLT on the same surface, the Mini roughly half the diameter of the BOLT.",
+    altTextStatus: "approved",
+    schema: DEPICTION_SCHEMA,
+    depictsRealProduct: true,
+  },
+  {
+    ...base("sphero-mini-figure-2", "depiction"),
+    productId: "prod-sphero-mini",
+    purpose: "Sphero Mini review — charging",
+    exactModel: "Sphero Mini (Blue)",
+    type: "product_detail",
+    checksum: "sha256:fa69bb411b32d2310bb679a9269ca62361fca5479c7b5a99f3aa407f89340e97",
+    width: 1536,
+    height: 1024,
+    src: "/media/coding/sphero-mini/figure-2.webp",
+    altText:
+      "A Sphero Mini with its blue top shell lifted off, a charging cable plugged into the clear body and a green indicator lit.",
+    altTextStatus: "approved",
+    schema: DEPICTION_SCHEMA,
+    depictsRealProduct: true,
+  },
+  {
+    ...base("sphero-mini-card", "depiction"),
+    productId: "prod-sphero-mini",
+    purpose: "Sphero Mini — listing card",
+    exactModel: "Sphero Mini (Blue)",
+    type: "product_hero",
+    checksum: "sha256:7da2797634c65323fa6748ddfc5bbaff502a2d1d3aef2c598f4043705dc02300",
+    width: 1536,
+    height: 1024,
+    src: "/media/coding/sphero-mini/card.webp",
+    altText:
+      "A blue and white Sphero Mini on a garden table with a tabby cat lying beside it, watching it.",
+    altTextStatus: "approved",
+    schema: DEPICTION_SCHEMA,
+    depictsRealProduct: true,
+  },
+  {
+    ...base("sphero-indi-panel-overview", "illustration"),
+    productId: "prod-sphero-indi",
+    purpose: "Sphero indi review — overview panel",
+    exactModel: "Sphero indi At-Home Learning Kit",
+    type: "promotional_panel",
+    checksum: "sha256:f4b9d39730bab6be4a97c607eb2e6efc5ea0b5a8122492e4b6fe2727612ad1b9",
+    width: 1254,
+    height: 1254,
+    src: "/media/coding/sphero-indi/panel-overview.webp",
+    altText:
+      "A blue Sphero indi car above four colour cards marked drive, spin, sound and wait. The line calling it a beginner coding robot that teaches real skills is promotional copy, not a BotPlanet finding.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+  },
+  {
+    ...base("sphero-indi-hero", "depiction"),
+    productId: "prod-sphero-indi",
+    purpose: "Sphero indi review — lead",
+    exactModel: "Sphero indi At-Home Learning Kit",
+    type: "product_in_use",
+    checksum: "sha256:2d246789807231e1e9a5196439d35c93ffd37d2c188f01623753f6e1687c4dc5",
+    width: 1254,
+    height: 1254,
+    src: "/media/coding/sphero-indi/hero.webp",
+    altText:
+      "A young child kneeling on a wooden floor laying a green colour card in front of a blue indi car, with a track of red, blue and green cards already down.",
+    altTextStatus: "approved",
+    schema: DEPICTION_SCHEMA,
+    depictsRealProduct: true,
+  },
+  {
+    ...base("sphero-indi-figure-1", "depiction"),
+    productId: "prod-sphero-indi",
+    purpose: "Sphero indi review — the colour cards",
+    exactModel: "Sphero indi At-Home Learning Kit",
+    type: "product_detail",
+    checksum: "sha256:cbae2a87ef541a555baeebaa8064ab70d95915e496b39dd25337203383edfc35",
+    width: 1536,
+    height: 1024,
+    src: "/media/coding/sphero-indi/figure-1.webp",
+    altText:
+      "A blue indi car standing on a blue card, with purple, green, red and yellow cards laid in a line beside it, each printed with an arrow.",
+    altTextStatus: "approved",
+    schema: DEPICTION_SCHEMA,
+    depictsRealProduct: true,
+  },
+  {
+    ...base("sphero-indi-figure-2", "depiction"),
+    productId: "prod-sphero-indi",
+    purpose: "Sphero indi review — a course built from books",
+    exactModel: "Sphero indi At-Home Learning Kit",
+    type: "product_in_use",
+    checksum: "sha256:aee95af1e12caf2229595de93a04ff8fbffd8c5d76f2841796b0be0bf59df2ff",
+    width: 1254,
+    height: 1254,
+    src: "/media/coding/sphero-indi/figure-2.webp",
+    altText:
+      "A child lying on a floor watching an indi car drive through a maze built from stacked books and wooden blocks.",
+    altTextStatus: "approved",
+    schema: DEPICTION_SCHEMA,
+    depictsRealProduct: true,
+  },
+  {
+    ...base("sphero-indi-card", "depiction"),
+    productId: "prod-sphero-indi",
+    purpose: "Sphero indi — listing card",
+    exactModel: "Sphero indi At-Home Learning Kit",
+    type: "product_hero",
+    checksum: "sha256:45ed7e79cdb00d8e68e65c072f781ee674f82f0dd3024915b4f7d2184bf0f2b5",
+    width: 1254,
+    height: 1254,
+    src: "/media/coding/sphero-indi/card.webp",
+    altText:
+      "A blue Sphero indi car alone on a weathered wooden table outdoors, its two round white eyes lit.",
+    altTextStatus: "approved",
+    schema: DEPICTION_SCHEMA,
+    depictsRealProduct: true,
+  },
+  {
+    ...base("ozobot-evo-hero", "illustration"),
+    productId: "prod-ozobot-evo",
+    purpose: "Ozobot Evo review — lead",
+    exactModel: "Ozobot Evo Entry Kit",
+    type: "included_accessories",
+    checksum: "sha256:df0e47a9634bdb49e67f9d93d6d64cb1ddb6bbea0aa5f50b7fdadddbd80a4284",
+    width: 1676,
+    height: 1357,
+    src: "/media/coding/ozobot-evo/hero.webp",
+    altText:
+      "The Ozobot Evo Entry Kit as it ships: the retail box, a zipped case, a pack of washable colour-code markers, a Meet Evo booklet and the small white robot itself.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+  },
+  {
+    ...base("ozobot-evo-figure-1", "illustration"),
+    productId: "prod-ozobot-evo",
+    purpose: "Ozobot Evo review — colour codes",
+    exactModel: "Ozobot Evo Entry Kit",
+    type: "promotional_panel",
+    checksum: "sha256:6423cdab88bb432fa427684999520208da8ce507f78892a5add8ca109d092d92",
+    width: 1080,
+    height: 1130,
+    src: "/media/coding/ozobot-evo/figure-1.webp",
+    altText:
+      "An Evo crossing a hand-drawn line on paper where a band of colours has been marked, with the words screen-free coding and colour codes set into the picture. That wording is Ozobot's own.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+  },
+  {
+    ...base("ozobot-evo-figure-2", "illustration"),
+    productId: "prod-ozobot-evo",
+    purpose: "Ozobot Evo review — block coding",
+    exactModel: "Ozobot Evo Entry Kit",
+    type: "app_screenshot",
+    checksum: "sha256:08fe7821eb6bca06d23c05535a8cb234c69e95624a284e6e02dce6ae667d939e",
+    width: 1855,
+    height: 1289,
+    src: "/media/coding/ozobot-evo/figure-2.webp",
+    altText:
+      "A laptop screen showing an OzoBlockly program of stacked colour blocks, with a hand holding an Evo against the screen to load it.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+  },
+  {
+    ...base("ozobot-evo-card", "depiction"),
+    productId: "prod-ozobot-evo",
+    purpose: "Ozobot Evo — listing card",
+    exactModel: "Ozobot Evo Entry Kit",
+    type: "product_hero",
+    checksum: "sha256:6e4a7cd8ae0d495df6a990b505aa14b7c60a9455c3ac3e99843915b159851cfc",
+    width: 1080,
+    height: 1130,
+    src: "/media/coding/ozobot-evo/card.webp",
+    altText:
+      "A hand holding the small white Evo beside its Entry Kit box and case. The heading calling it the Evo Entry Kit for ages 4 and up is Ozobot's own wording; this review uses the 5 to 11 range Ozobot's title and age fields give.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: true,
+  },
+  {
+    ...base("makeblock-mbot-panel-app", "illustration"),
+    productId: "prod-makeblock-mbot",
+    purpose: "Makeblock mBot review — the app",
+    exactModel: "Makeblock mBot",
+    type: "promotional_panel",
+    checksum: "sha256:3e82f45a099b5ce2dbac3c1f9d5467da89fbe547298ffc686733d0c7052332e8",
+    width: 500,
+    height: 300,
+    src: "/media/coding/makeblock-mbot/panel-app.webp",
+    altText:
+      "A blue mBot on a desk beside two hands holding a phone running the Makeblock app. Supplied with the maker's own press images.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+  },
+  {
+    ...base("makeblock-mbot-hero", "depiction"),
+    productId: "prod-makeblock-mbot",
+    purpose: "Makeblock mBot review — lead",
+    exactModel: "Makeblock mBot",
+    type: "product_detail",
+    checksum: "sha256:eab590b597ebb176c7b666bcd1eba735db85b4ebe832767e5023988fb1fe2768",
+    width: 773,
+    height: 400,
+    src: "/media/coding/makeblock-mbot/hero.webp",
+    altText:
+      "A blue mBot on a plain blue background with several of its parts floating away from it: a bracket, a perforated plate, a yellow flag and a blue beam.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: true,
+  },
+  {
+    ...base("makeblock-mbot-figure-1", "depiction"),
+    productId: "prod-makeblock-mbot",
+    purpose: "Makeblock mBot review — assembled",
+    exactModel: "Makeblock mBot",
+    type: "product_detail",
+    checksum: "sha256:eb4efe53e49adbe1e9f28628fbb87d6463044e8cb96dd414ee5d8bda76863eda",
+    width: 1024,
+    height: 768,
+    src: "/media/coding/makeblock-mbot/figure-1.webp",
+    altText:
+      "An assembled blue mBot standing on a green cutting mat with its instruction booklet propped behind it, ultrasonic sensor facing the camera.",
+    altTextStatus: "approved",
+    schema: DEPICTION_SCHEMA,
+    depictsRealProduct: true,
+  },
+  {
+    ...base("makeblock-mbot-figure-2", "illustration"),
+    productId: "prod-makeblock-mbot",
+    purpose: "Makeblock mBot review — the three things it teaches",
+    exactModel: "Makeblock mBot",
+    type: "promotional_panel",
+    checksum: "sha256:62ce5ab166e6128098ff34fb81ba278caed30d60145e38f1c074af864669812a",
+    width: 1500,
+    height: 1500,
+    src: "/media/coding/makeblock-mbot/figure-2.webp",
+    altText:
+      "Three panels from the maker labelled robotics, electroics and coding: the mBot pushing a cone, its board with components laid out, and a child coding it on a laptop. The middle label is misspelt in the supplied artwork.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+  },
+  {
+    ...base("makeblock-mbot-card", "depiction"),
+    productId: "prod-makeblock-mbot",
+    purpose: "Makeblock mBot — listing card",
+    exactModel: "Makeblock mBot",
+    type: "product_hero",
+    checksum: "sha256:a6f40610fff33794189c90c5e6729eb3b65657ebda6dd3f85ddcca769eb433fe",
+    width: 1000,
+    height: 1000,
+    src: "/media/coding/makeblock-mbot/card.webp",
+    altText:
+      "A blue Makeblock mBot photographed head-on against white, its two ultrasonic sensors reading as eyes above a printed smile.",
+    altTextStatus: "approved",
+    schema: DEPICTION_SCHEMA,
+    depictsRealProduct: true,
+  },
+];
+
 /* Owner artwork sits ahead of the placeholders so a product that has both
    resolves to the artwork; the placeholder stays as the fallback if the
    artwork is ever withdrawn. */
@@ -3775,6 +4157,7 @@ export const MEDIA_ASSETS: MediaAssetRecord[] = [
   ...ORIGINAL_ASSETS,
   ...OWNER_PRODUCT_ARTWORK,
   ...AUGUST_UPLOAD_ASSETS,
+  ...CODING_UPLOAD_ASSETS,
   ...REVIEW_FIGURE_ASSETS,
   ...PLACEHOLDER_ASSETS,
 ];
@@ -3809,7 +4192,7 @@ export const DERIVATIVES: import("./types").Derivative[] = DERIVATIVE_MANIFEST.f
   // Every group that can own a raster. Leaving one out does not fail loudly —
   // the derivative files still exist on disk, they just never reach a srcset,
   // and the product silently drops out of responsive-variant readiness.
-  const parent = [...ORIGINAL_ASSETS, ...OWNER_PRODUCT_ARTWORK, ...AUGUST_UPLOAD_ASSETS, ...REVIEW_FIGURE_ASSETS].find(
+  const parent = [...ORIGINAL_ASSETS, ...OWNER_PRODUCT_ARTWORK, ...AUGUST_UPLOAD_ASSETS, ...CODING_UPLOAD_ASSETS, ...REVIEW_FIGURE_ASSETS].find(
     (a) => a.src === entry.source,
   );
   if (!parent) return [];

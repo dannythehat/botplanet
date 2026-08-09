@@ -8471,5 +8471,743 @@
         "checksum": "sha256:f708c4f1d5cf8b8417a486868c604dfdbd15e14ee7f0ce01963d03ef91241c8b"
       }
     ]
+  },
+  {
+    "source": "/media/coding/sphero-bolt/hero.webp",
+    "sourceWidth": 1536,
+    "sourceHeight": 1024,
+    "derivatives": [
+      {
+        "id": "media-coding-sphero-bolt-hero-webp-360",
+        "src": "/media/coding/sphero-bolt/hero-360w.webp",
+        "width": 360,
+        "height": 240,
+        "bytes": 11748,
+        "checksum": "sha256:3e14c219912fe8cdd575fc3bcd21ad0b9e4a22d05ed43c50e4b7b3a2b76b6ccb"
+      },
+      {
+        "id": "media-coding-sphero-bolt-hero-webp-640",
+        "src": "/media/coding/sphero-bolt/hero-640w.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 30460,
+        "checksum": "sha256:ef17c2a00e0d7a27c20172884964cb253cbfdf8f638d2d4ed0bc5e049c3876b5"
+      },
+      {
+        "id": "media-coding-sphero-bolt-hero-webp-960",
+        "src": "/media/coding/sphero-bolt/hero-960w.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 63308,
+        "checksum": "sha256:035e18af0839a278c7574d93b364e4ff1262b96269712780f498371f2cd663c4"
+      },
+      {
+        "id": "media-coding-sphero-bolt-hero-webp-1440",
+        "src": "/media/coding/sphero-bolt/hero-1440w.webp",
+        "width": 1440,
+        "height": 960,
+        "bytes": 104682,
+        "checksum": "sha256:76bfead0b1a08cf4ca90ccede3ea846d489e8c5711cdaea5a954fb6a0841c201"
+      }
+    ]
+  },
+  {
+    "source": "/media/coding/sphero-bolt/figure-1.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-coding-sphero-bolt-figure-1-webp-360",
+        "src": "/media/coding/sphero-bolt/figure-1-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 17732,
+        "checksum": "sha256:ae6249bf725ec87fe9db5c244167bca5b68e5ec5472378234e44e980b4a054c4"
+      },
+      {
+        "id": "media-coding-sphero-bolt-figure-1-webp-640",
+        "src": "/media/coding/sphero-bolt/figure-1-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 42808,
+        "checksum": "sha256:692c5e20669f0f660c385a81ecf978844e42d98cc04c253e975116b466a25d8f"
+      },
+      {
+        "id": "media-coding-sphero-bolt-figure-1-webp-960",
+        "src": "/media/coding/sphero-bolt/figure-1-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 82188,
+        "checksum": "sha256:8295b4f87f23ba1acb0674979375586931b29deec866937c60e8f7b409c79b78"
+      }
+    ]
+  },
+  {
+    "source": "/media/coding/sphero-bolt/figure-2.webp",
+    "sourceWidth": 1536,
+    "sourceHeight": 1024,
+    "derivatives": [
+      {
+        "id": "media-coding-sphero-bolt-figure-2-webp-360",
+        "src": "/media/coding/sphero-bolt/figure-2-360w.webp",
+        "width": 360,
+        "height": 240,
+        "bytes": 8620,
+        "checksum": "sha256:c10f280c6e277bcd9f0c3c65dba2ab90c24e3c9a89944688177ae19a904604de"
+      },
+      {
+        "id": "media-coding-sphero-bolt-figure-2-webp-640",
+        "src": "/media/coding/sphero-bolt/figure-2-640w.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 24084,
+        "checksum": "sha256:c0afb6abf95c7e36555cbef22918a6c98abc63533e6cc760b79f755d27ef8f25"
+      },
+      {
+        "id": "media-coding-sphero-bolt-figure-2-webp-960",
+        "src": "/media/coding/sphero-bolt/figure-2-960w.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 49868,
+        "checksum": "sha256:6dfad5482bcdf35b1c23248d8c9ecc67f39a55fce7268fd1cc2b3f35f113cf38"
+      },
+      {
+        "id": "media-coding-sphero-bolt-figure-2-webp-1440",
+        "src": "/media/coding/sphero-bolt/figure-2-1440w.webp",
+        "width": 1440,
+        "height": 960,
+        "bytes": 84252,
+        "checksum": "sha256:889775ddec5403c2d2fc78c9677ea3890d92adc887d17666256061b1b3404b95"
+      }
+    ]
+  },
+  {
+    "source": "/media/coding/sphero-bolt/card.webp",
+    "sourceWidth": 1536,
+    "sourceHeight": 1024,
+    "derivatives": [
+      {
+        "id": "media-coding-sphero-bolt-card-webp-360",
+        "src": "/media/coding/sphero-bolt/card-360w.webp",
+        "width": 360,
+        "height": 240,
+        "bytes": 5620,
+        "checksum": "sha256:cdf259c5f15ee200f1e1cba352c1dcf82bb47a58d884663f1211d4ae00a4e822"
+      },
+      {
+        "id": "media-coding-sphero-bolt-card-webp-640",
+        "src": "/media/coding/sphero-bolt/card-640w.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 14474,
+        "checksum": "sha256:5dbc31a3ce87884825ceacb2037b47d726a51e6bb8e0d01c4d78267b4bc21334"
+      },
+      {
+        "id": "media-coding-sphero-bolt-card-webp-960",
+        "src": "/media/coding/sphero-bolt/card-960w.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 30492,
+        "checksum": "sha256:bc0ea68991b5b56815dc32737f4cdc4fbda75ca27ad04f89092ea71df53fd95d"
+      },
+      {
+        "id": "media-coding-sphero-bolt-card-webp-1440",
+        "src": "/media/coding/sphero-bolt/card-1440w.webp",
+        "width": 1440,
+        "height": 960,
+        "bytes": 51640,
+        "checksum": "sha256:ab55ca5d4b0953e257f61d019f37d9dbf0b216800482ae2b8255691ea9cf1ae6"
+      }
+    ]
+  },
+  {
+    "source": "/media/coding/sphero-mini/hero.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-coding-sphero-mini-hero-webp-360",
+        "src": "/media/coding/sphero-mini/hero-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 12752,
+        "checksum": "sha256:5ea527fc3df66bb17c9a087f57ea36dc45e13773014710075671d9d220054433"
+      },
+      {
+        "id": "media-coding-sphero-mini-hero-webp-640",
+        "src": "/media/coding/sphero-mini/hero-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 31294,
+        "checksum": "sha256:56514af60185b17d03c0cc3cb1bd840d060004602777a6fa7cc13fb18dcc7d77"
+      },
+      {
+        "id": "media-coding-sphero-mini-hero-webp-960",
+        "src": "/media/coding/sphero-mini/hero-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 58464,
+        "checksum": "sha256:4ba0fa88dd435ad6c65cbd025839597b202f96be1d3cc66c62e5db3565eb9eeb"
+      }
+    ]
+  },
+  {
+    "source": "/media/coding/sphero-mini/figure-1.webp",
+    "sourceWidth": 1536,
+    "sourceHeight": 1024,
+    "derivatives": [
+      {
+        "id": "media-coding-sphero-mini-figure-1-webp-360",
+        "src": "/media/coding/sphero-mini/figure-1-360w.webp",
+        "width": 360,
+        "height": 240,
+        "bytes": 8490,
+        "checksum": "sha256:717cbe2c65c277a227f38c71e9aa2e11cba96bb69fc232c729a0d94fab8101b7"
+      },
+      {
+        "id": "media-coding-sphero-mini-figure-1-webp-640",
+        "src": "/media/coding/sphero-mini/figure-1-640w.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 23272,
+        "checksum": "sha256:099cfdaf3bcbc1d6d761dcde87112cd0a8b03a5d0cf72ae4da4cbbc0622f6e91"
+      },
+      {
+        "id": "media-coding-sphero-mini-figure-1-webp-960",
+        "src": "/media/coding/sphero-mini/figure-1-960w.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 51638,
+        "checksum": "sha256:8e63473036e83f27147ae1e6082d89299b71219dda2cedf6ce03f89a979921e4"
+      },
+      {
+        "id": "media-coding-sphero-mini-figure-1-webp-1440",
+        "src": "/media/coding/sphero-mini/figure-1-1440w.webp",
+        "width": 1440,
+        "height": 960,
+        "bytes": 87616,
+        "checksum": "sha256:1969aec3b25a2a4db0ab14935a03090850bcc89080b5d1515e6ed998ecd8a10a"
+      }
+    ]
+  },
+  {
+    "source": "/media/coding/sphero-mini/figure-2.webp",
+    "sourceWidth": 1536,
+    "sourceHeight": 1024,
+    "derivatives": [
+      {
+        "id": "media-coding-sphero-mini-figure-2-webp-360",
+        "src": "/media/coding/sphero-mini/figure-2-360w.webp",
+        "width": 360,
+        "height": 240,
+        "bytes": 5440,
+        "checksum": "sha256:745b5df0ed587bd81e1df534806c6607cd7ad645bb3adc0f284576f6e486413f"
+      },
+      {
+        "id": "media-coding-sphero-mini-figure-2-webp-640",
+        "src": "/media/coding/sphero-mini/figure-2-640w.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 15246,
+        "checksum": "sha256:40d8f77c272134310f0660d3a6c27959e1926f5dc19bae7b4c3b316118fef7cf"
+      },
+      {
+        "id": "media-coding-sphero-mini-figure-2-webp-960",
+        "src": "/media/coding/sphero-mini/figure-2-960w.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 33942,
+        "checksum": "sha256:e9f78a90e3d5d50889d7f782f871c99f57b37d4dac2b3dee306251ba73e51317"
+      },
+      {
+        "id": "media-coding-sphero-mini-figure-2-webp-1440",
+        "src": "/media/coding/sphero-mini/figure-2-1440w.webp",
+        "width": 1440,
+        "height": 960,
+        "bytes": 58004,
+        "checksum": "sha256:fd9220cde9f3b01e090f3d3858c6a12b6788e6e92ef68f86f599a4b2546f12db"
+      }
+    ]
+  },
+  {
+    "source": "/media/coding/sphero-mini/card.webp",
+    "sourceWidth": 1536,
+    "sourceHeight": 1024,
+    "derivatives": [
+      {
+        "id": "media-coding-sphero-mini-card-webp-360",
+        "src": "/media/coding/sphero-mini/card-360w.webp",
+        "width": 360,
+        "height": 240,
+        "bytes": 14160,
+        "checksum": "sha256:525976885118c40b9e10126d92b20c727a829d4b4ef6c31a8276f7b37a5ff740"
+      },
+      {
+        "id": "media-coding-sphero-mini-card-webp-640",
+        "src": "/media/coding/sphero-mini/card-640w.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 37954,
+        "checksum": "sha256:b1cfac43a2a36e49b14a914fa35df4712a29673802bbe4289e3ba71e2bef0bb2"
+      },
+      {
+        "id": "media-coding-sphero-mini-card-webp-960",
+        "src": "/media/coding/sphero-mini/card-960w.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 80046,
+        "checksum": "sha256:f160d18b199c9b78d01c7d9ffac07aff172087de4b15d46fff14e44b3dfba500"
+      },
+      {
+        "id": "media-coding-sphero-mini-card-webp-1440",
+        "src": "/media/coding/sphero-mini/card-1440w.webp",
+        "width": 1440,
+        "height": 960,
+        "bytes": 135062,
+        "checksum": "sha256:b0fa62e15b06dbd4c547562ae552c74a7e0cb2c472783f8b407c5bfd4a260c26"
+      }
+    ]
+  },
+  {
+    "source": "/media/coding/sphero-indi/panel-overview.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-coding-sphero-indi-panel-overview-webp-360",
+        "src": "/media/coding/sphero-indi/panel-overview-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 17118,
+        "checksum": "sha256:537d3e0e65506d5e36e729db23d014c2cfb0d159190330e89d4abd5d42a8fe70"
+      },
+      {
+        "id": "media-coding-sphero-indi-panel-overview-webp-640",
+        "src": "/media/coding/sphero-indi/panel-overview-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 41468,
+        "checksum": "sha256:a597562286ac327dbc32b1b93caac5325c373a4b648f08aa2d7c8897bf0419fc"
+      },
+      {
+        "id": "media-coding-sphero-indi-panel-overview-webp-960",
+        "src": "/media/coding/sphero-indi/panel-overview-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 80148,
+        "checksum": "sha256:bdc208a5af0891fb563e787145b08f5a40e8dbec8386ce693047bb4c560f6c0a"
+      }
+    ]
+  },
+  {
+    "source": "/media/coding/sphero-indi/hero.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-coding-sphero-indi-hero-webp-360",
+        "src": "/media/coding/sphero-indi/hero-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 14284,
+        "checksum": "sha256:85dd2838537342c1fb1227574b76c1464cc8bb8d53379936807f50a45b1e70b4"
+      },
+      {
+        "id": "media-coding-sphero-indi-hero-webp-640",
+        "src": "/media/coding/sphero-indi/hero-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 33864,
+        "checksum": "sha256:95ffa12e3531427d5c51b3f826f4dbcebeffe751b65d83aab6b286f74c28219a"
+      },
+      {
+        "id": "media-coding-sphero-indi-hero-webp-960",
+        "src": "/media/coding/sphero-indi/hero-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 66486,
+        "checksum": "sha256:50a6f431f7d4cce24f7964609342cb6bc412af5f086ae520fd5b8a7da0478b80"
+      }
+    ]
+  },
+  {
+    "source": "/media/coding/sphero-indi/figure-1.webp",
+    "sourceWidth": 1536,
+    "sourceHeight": 1024,
+    "derivatives": [
+      {
+        "id": "media-coding-sphero-indi-figure-1-webp-360",
+        "src": "/media/coding/sphero-indi/figure-1-360w.webp",
+        "width": 360,
+        "height": 240,
+        "bytes": 8754,
+        "checksum": "sha256:05218e8d42c8d9c172c87ecbdbb0ca880b2a966509bcb39d05cfc3659a390400"
+      },
+      {
+        "id": "media-coding-sphero-indi-figure-1-webp-640",
+        "src": "/media/coding/sphero-indi/figure-1-640w.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 22096,
+        "checksum": "sha256:77ed5cc450da13b602a6214c3bccfd7217356a64db4f1a9a13fc31b546aef6e2"
+      },
+      {
+        "id": "media-coding-sphero-indi-figure-1-webp-960",
+        "src": "/media/coding/sphero-indi/figure-1-960w.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 45234,
+        "checksum": "sha256:cdbb48786b51cd89087950d61f279bde2824c47aa8fb4c911b6e9ae1e156e8ac"
+      },
+      {
+        "id": "media-coding-sphero-indi-figure-1-webp-1440",
+        "src": "/media/coding/sphero-indi/figure-1-1440w.webp",
+        "width": 1440,
+        "height": 960,
+        "bytes": 73644,
+        "checksum": "sha256:02d3d262ebab04dedb8d8445bf22fcdea3e0fb7bbb40ab40583340277525e260"
+      }
+    ]
+  },
+  {
+    "source": "/media/coding/sphero-indi/figure-2.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-coding-sphero-indi-figure-2-webp-360",
+        "src": "/media/coding/sphero-indi/figure-2-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 14594,
+        "checksum": "sha256:88140b99b2c78332211a7c7dd6de7403336b8d2a6020dda487e96ef1d54cfdc4"
+      },
+      {
+        "id": "media-coding-sphero-indi-figure-2-webp-640",
+        "src": "/media/coding/sphero-indi/figure-2-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 33900,
+        "checksum": "sha256:bcef64970cd2e30b7c5672ac8ea7a1db678ed91b75e3fd3bb4f4b4fd7d6579b5"
+      },
+      {
+        "id": "media-coding-sphero-indi-figure-2-webp-960",
+        "src": "/media/coding/sphero-indi/figure-2-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 65168,
+        "checksum": "sha256:173165f3bbd7908147e79dc4934081c2eb8dae657e34058794f837ad69e63cab"
+      }
+    ]
+  },
+  {
+    "source": "/media/coding/sphero-indi/card.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-coding-sphero-indi-card-webp-360",
+        "src": "/media/coding/sphero-indi/card-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 13746,
+        "checksum": "sha256:476c96796be065c5da1db07c5016cad047cc58c06004f986bdccd6433df22b35"
+      },
+      {
+        "id": "media-coding-sphero-indi-card-webp-640",
+        "src": "/media/coding/sphero-indi/card-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 33194,
+        "checksum": "sha256:410c13399cb2f017d35689aa09dcdfa44c4ba64b0e327d5b8e7ba4c0546d8fe3"
+      },
+      {
+        "id": "media-coding-sphero-indi-card-webp-960",
+        "src": "/media/coding/sphero-indi/card-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 63220,
+        "checksum": "sha256:759a624dd6fa87c9acca1c60c445550610fba6daeac8e12c8d4211efb9b656c1"
+      }
+    ]
+  },
+  {
+    "source": "/media/coding/ozobot-evo/hero.webp",
+    "sourceWidth": 1676,
+    "sourceHeight": 1357,
+    "derivatives": [
+      {
+        "id": "media-coding-ozobot-evo-hero-webp-360",
+        "src": "/media/coding/ozobot-evo/hero-360w.webp",
+        "width": 360,
+        "height": 291,
+        "bytes": 12932,
+        "checksum": "sha256:006881471ed61f652381f414a2f54781de5865b3da8fd0144cbca5ced8575768"
+      },
+      {
+        "id": "media-coding-ozobot-evo-hero-webp-640",
+        "src": "/media/coding/ozobot-evo/hero-640w.webp",
+        "width": 640,
+        "height": 518,
+        "bytes": 33144,
+        "checksum": "sha256:8d5fa8fdf07d0e8784ee90f1cfb831ff467391287bb9b096055161aa7681cb36"
+      },
+      {
+        "id": "media-coding-ozobot-evo-hero-webp-960",
+        "src": "/media/coding/ozobot-evo/hero-960w.webp",
+        "width": 960,
+        "height": 777,
+        "bytes": 64384,
+        "checksum": "sha256:be2348a694288cb7df7fcfc7bdf1eaefca99f6c334f7ab6f20dc7f03478a011f"
+      },
+      {
+        "id": "media-coding-ozobot-evo-hero-webp-1440",
+        "src": "/media/coding/ozobot-evo/hero-1440w.webp",
+        "width": 1440,
+        "height": 1166,
+        "bytes": 107902,
+        "checksum": "sha256:6b9f0beaac12879c9ca1ddd4979e0e31618e4a2841f1f8f045264098c307b6cc"
+      }
+    ]
+  },
+  {
+    "source": "/media/coding/ozobot-evo/figure-1.webp",
+    "sourceWidth": 1080,
+    "sourceHeight": 1130,
+    "derivatives": [
+      {
+        "id": "media-coding-ozobot-evo-figure-1-webp-360",
+        "src": "/media/coding/ozobot-evo/figure-1-360w.webp",
+        "width": 360,
+        "height": 377,
+        "bytes": 8130,
+        "checksum": "sha256:d1f86ab69fe35cd79908b2035bd3259c946db7b58baf347e11b61995438510b2"
+      },
+      {
+        "id": "media-coding-ozobot-evo-figure-1-webp-640",
+        "src": "/media/coding/ozobot-evo/figure-1-640w.webp",
+        "width": 640,
+        "height": 670,
+        "bytes": 18334,
+        "checksum": "sha256:8d1f240623b3db854f0c343f4688614e17090be6196636e08a6907c419dc5c8f"
+      },
+      {
+        "id": "media-coding-ozobot-evo-figure-1-webp-960",
+        "src": "/media/coding/ozobot-evo/figure-1-960w.webp",
+        "width": 960,
+        "height": 1004,
+        "bytes": 33522,
+        "checksum": "sha256:20746d1d76450bc145502217010bf93f77e361b51272b60c021f51e3e8a90a89"
+      }
+    ]
+  },
+  {
+    "source": "/media/coding/ozobot-evo/figure-2.webp",
+    "sourceWidth": 1855,
+    "sourceHeight": 1289,
+    "derivatives": [
+      {
+        "id": "media-coding-ozobot-evo-figure-2-webp-360",
+        "src": "/media/coding/ozobot-evo/figure-2-360w.webp",
+        "width": 360,
+        "height": 250,
+        "bytes": 9018,
+        "checksum": "sha256:b7ad1feebb8febc40a32c9e31482bf12c0a6423d691ed6c37bd8c5567046bd57"
+      },
+      {
+        "id": "media-coding-ozobot-evo-figure-2-webp-640",
+        "src": "/media/coding/ozobot-evo/figure-2-640w.webp",
+        "width": 640,
+        "height": 445,
+        "bytes": 26678,
+        "checksum": "sha256:685b90876cce8ba8b69c776126a2b0524d419ca83718c1bae7086052ff1e9949"
+      },
+      {
+        "id": "media-coding-ozobot-evo-figure-2-webp-960",
+        "src": "/media/coding/ozobot-evo/figure-2-960w.webp",
+        "width": 960,
+        "height": 667,
+        "bytes": 58720,
+        "checksum": "sha256:45e222c774a8d341d6aad531da3d1fbc045e190fd3167b41e09bff09264a7397"
+      },
+      {
+        "id": "media-coding-ozobot-evo-figure-2-webp-1440",
+        "src": "/media/coding/ozobot-evo/figure-2-1440w.webp",
+        "width": 1440,
+        "height": 1001,
+        "bytes": 104664,
+        "checksum": "sha256:0da0fc8037fbcddd82f8b8a94ac9f5217c8acd29206b1809c134b9d8b9e9f919"
+      }
+    ]
+  },
+  {
+    "source": "/media/coding/ozobot-evo/card.webp",
+    "sourceWidth": 1080,
+    "sourceHeight": 1130,
+    "derivatives": [
+      {
+        "id": "media-coding-ozobot-evo-card-webp-360",
+        "src": "/media/coding/ozobot-evo/card-360w.webp",
+        "width": 360,
+        "height": 377,
+        "bytes": 19132,
+        "checksum": "sha256:b087f7ce0fa1644e9c10167e43a980e4270abb5a19914caf6929b82106a9b980"
+      },
+      {
+        "id": "media-coding-ozobot-evo-card-webp-640",
+        "src": "/media/coding/ozobot-evo/card-640w.webp",
+        "width": 640,
+        "height": 670,
+        "bytes": 46258,
+        "checksum": "sha256:b0c46e306567273ab9a03c4711285cb67c5c9ed1487e350b23c5757103eecb54"
+      },
+      {
+        "id": "media-coding-ozobot-evo-card-webp-960",
+        "src": "/media/coding/ozobot-evo/card-960w.webp",
+        "width": 960,
+        "height": 1004,
+        "bytes": 85528,
+        "checksum": "sha256:e2529d732391bd1f00f9b125df20e72381d1025f2bac4caebbc4252601cbf536"
+      }
+    ]
+  },
+  {
+    "source": "/media/coding/makeblock-mbot/panel-app.webp",
+    "sourceWidth": 500,
+    "sourceHeight": 300,
+    "derivatives": [
+      {
+        "id": "media-coding-makeblock-mbot-panel-app-webp-360",
+        "src": "/media/coding/makeblock-mbot/panel-app-360w.webp",
+        "width": 360,
+        "height": 216,
+        "bytes": 7974,
+        "checksum": "sha256:3a78523fd3a5800404a3c9329e8e71dc48ee268252905b292f36f2c79fdc0d0d"
+      }
+    ]
+  },
+  {
+    "source": "/media/coding/makeblock-mbot/hero.webp",
+    "sourceWidth": 773,
+    "sourceHeight": 400,
+    "derivatives": [
+      {
+        "id": "media-coding-makeblock-mbot-hero-webp-360",
+        "src": "/media/coding/makeblock-mbot/hero-360w.webp",
+        "width": 360,
+        "height": 186,
+        "bytes": 5350,
+        "checksum": "sha256:ebcdc15f7b49e207c5be4dc211972063988a742d352237328c817591414c6057"
+      },
+      {
+        "id": "media-coding-makeblock-mbot-hero-webp-640",
+        "src": "/media/coding/makeblock-mbot/hero-640w.webp",
+        "width": 640,
+        "height": 331,
+        "bytes": 12858,
+        "checksum": "sha256:01f7dd476b6c4514ef8c3d4f009c00581b3cf95ac252295e4f77bfc56505302e"
+      }
+    ]
+  },
+  {
+    "source": "/media/coding/makeblock-mbot/figure-1.webp",
+    "sourceWidth": 1024,
+    "sourceHeight": 768,
+    "derivatives": [
+      {
+        "id": "media-coding-makeblock-mbot-figure-1-webp-360",
+        "src": "/media/coding/makeblock-mbot/figure-1-360w.webp",
+        "width": 360,
+        "height": 270,
+        "bytes": 11556,
+        "checksum": "sha256:e3080eb7f21f25beef94524f73f01d078eeb073f91a6414a9b7c1a2181f1e6cd"
+      },
+      {
+        "id": "media-coding-makeblock-mbot-figure-1-webp-640",
+        "src": "/media/coding/makeblock-mbot/figure-1-640w.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 29672,
+        "checksum": "sha256:b48b0247eca6d7364363e79d6a673e95e78774f39f0817ca45ec0823cf37cba7"
+      },
+      {
+        "id": "media-coding-makeblock-mbot-figure-1-webp-960",
+        "src": "/media/coding/makeblock-mbot/figure-1-960w.webp",
+        "width": 960,
+        "height": 720,
+        "bytes": 59510,
+        "checksum": "sha256:adf71d9bd36cd266bfd6eaf619bdffc621dba763a4c889d476abf283e3228d94"
+      }
+    ]
+  },
+  {
+    "source": "/media/coding/makeblock-mbot/figure-2.webp",
+    "sourceWidth": 1500,
+    "sourceHeight": 1500,
+    "derivatives": [
+      {
+        "id": "media-coding-makeblock-mbot-figure-2-webp-360",
+        "src": "/media/coding/makeblock-mbot/figure-2-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 23396,
+        "checksum": "sha256:b0f73ebf483f6269aa661549069cd71affe6e02878e36e0ade4b557fdcbbbd9c"
+      },
+      {
+        "id": "media-coding-makeblock-mbot-figure-2-webp-640",
+        "src": "/media/coding/makeblock-mbot/figure-2-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 62664,
+        "checksum": "sha256:3516b862d16aa1a76e19d4261bcf48cc2105f870dc3e7df95f786d05a5a96495"
+      },
+      {
+        "id": "media-coding-makeblock-mbot-figure-2-webp-960",
+        "src": "/media/coding/makeblock-mbot/figure-2-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 129618,
+        "checksum": "sha256:079d696f8612a160615e206e81f2e08a5728c05c7d15b0260626f486896c51bf"
+      },
+      {
+        "id": "media-coding-makeblock-mbot-figure-2-webp-1440",
+        "src": "/media/coding/makeblock-mbot/figure-2-1440w.webp",
+        "width": 1440,
+        "height": 1440,
+        "bytes": 221308,
+        "checksum": "sha256:85424761b2f886047590101c5661e564025f9f601815c2a4e574a5a9636cc0c5"
+      }
+    ]
+  },
+  {
+    "source": "/media/coding/makeblock-mbot/card.webp",
+    "sourceWidth": 1000,
+    "sourceHeight": 1000,
+    "derivatives": [
+      {
+        "id": "media-coding-makeblock-mbot-card-webp-360",
+        "src": "/media/coding/makeblock-mbot/card-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 10364,
+        "checksum": "sha256:12f50602b7e4e33f42abf41de62c04a5bd2ef9fec21f202dd7d630b63232ec09"
+      },
+      {
+        "id": "media-coding-makeblock-mbot-card-webp-640",
+        "src": "/media/coding/makeblock-mbot/card-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 23550,
+        "checksum": "sha256:90b816a4f458265044847dabafab03d5c1b85363fdd5077cc87673a4b81cb05f"
+      },
+      {
+        "id": "media-coding-makeblock-mbot-card-webp-960",
+        "src": "/media/coding/makeblock-mbot/card-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 42988,
+        "checksum": "sha256:3136de6b0ae239b75ad22701ed325d88a75a949587821a2140230339d9abbd86"
+      }
+    ]
   }
 ]

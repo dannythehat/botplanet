@@ -348,6 +348,33 @@ const SOURCES = [
   "/media/companion/ropet/panel-diary-privacy.webp",
   "/media/companion/loona/range.webp",
   "/media/companion/joy-for-all/panel-overview.webp",
+  /* Educational and coding robots, supplied 9 August 2026. Five products,
+     twenty-two files. Two of them arrive as small JPEGs from the makers'
+     own press kits rather than as generated art, so their derivative
+     ladders stop short — the generator refuses to upscale, which is the
+     right answer and the reason nothing here claims a width it lacks. */
+  "/media/coding/sphero-bolt/hero.webp",
+  "/media/coding/sphero-bolt/figure-1.webp",
+  "/media/coding/sphero-bolt/figure-2.webp",
+  "/media/coding/sphero-bolt/card.webp",
+  "/media/coding/sphero-mini/hero.webp",
+  "/media/coding/sphero-mini/figure-1.webp",
+  "/media/coding/sphero-mini/figure-2.webp",
+  "/media/coding/sphero-mini/card.webp",
+  "/media/coding/sphero-indi/panel-overview.webp",
+  "/media/coding/sphero-indi/hero.webp",
+  "/media/coding/sphero-indi/figure-1.webp",
+  "/media/coding/sphero-indi/figure-2.webp",
+  "/media/coding/sphero-indi/card.webp",
+  "/media/coding/ozobot-evo/hero.webp",
+  "/media/coding/ozobot-evo/figure-1.webp",
+  "/media/coding/ozobot-evo/figure-2.webp",
+  "/media/coding/ozobot-evo/card.webp",
+  "/media/coding/makeblock-mbot/panel-app.webp",
+  "/media/coding/makeblock-mbot/hero.webp",
+  "/media/coding/makeblock-mbot/figure-1.webp",
+  "/media/coding/makeblock-mbot/figure-2.webp",
+  "/media/coding/makeblock-mbot/card.webp",
 ];
 
 const run = async () => {

@@ -1,58 +1,178 @@
 [
   {
-    "to": "/media/petcam/ebo-air-2/panel-overview.webp",
-    "checksum": "sha256:f2fe7242524d5970893e124b4cc2c30fd906f797a501e4f7debdec4494fd5a64",
-    "width": 1448,
-    "height": 1086,
-    "bytes": 128330,
-    "saved": 1491445
-  },
-  {
-    "to": "/media/petcam/rola-petpal/panel-overview.webp",
-    "checksum": "sha256:9357276c7df64416ec7254fd4183ababc88fa2fb3a56570155be2016366467ab",
-    "width": 1254,
-    "height": 1254,
-    "bytes": 132744,
-    "saved": 1616561
-  },
-  {
-    "to": "/media/petcam/rola-petpal/panel-summary.webp",
-    "checksum": "sha256:4ebdd3288c816158d49fe8f5996676470bf4ecc5e1bdab9805214098a1a6fff3",
-    "width": 1402,
-    "height": 1122,
-    "bytes": 147942,
-    "saved": 1795796
-  },
-  {
-    "to": "/media/petcam/range/size-chart.webp",
-    "checksum": "sha256:c778c8247ca91edf42e91f06b7358e0bf8be0b6aab3d7cf357fe4f6cf6493ad5",
+    "to": "/media/coding/sphero-bolt/hero.webp",
+    "checksum": "sha256:f0d78c640d2cddaec14457950be2c03bd13afbacf4f182751f831f5d2a70a7c9",
     "width": 1536,
     "height": 1024,
-    "bytes": 71470,
-    "saved": 1706453
+    "bytes": 175292,
+    "saved": 1985434
   },
   {
-    "to": "/media/companion/ropet/panel-diary-privacy.webp",
-    "checksum": "sha256:2c96546d12d6b6cf451292d8de8d06cfdb2be9b91e906aa2018d0f3dc2a61306",
+    "to": "/media/coding/sphero-bolt/figure-1.webp",
+    "checksum": "sha256:d9cc90703d1aa1b3ae78d1ec79cd990fbe9d85829fe28cfe3637158361836cc1",
     "width": 1254,
     "height": 1254,
-    "bytes": 257866,
-    "saved": 1920062
+    "bytes": 168350,
+    "saved": 1835451
   },
   {
-    "to": "/media/companion/loona/range.webp",
-    "checksum": "sha256:e2d587736cbf948ab05b945030b0ab41f301c7338c065e9052635cc184ff5447",
-    "width": 1448,
-    "height": 1086,
-    "bytes": 106322,
-    "saved": 1464858
+    "to": "/media/coding/sphero-bolt/figure-2.webp",
+    "checksum": "sha256:72eb2ca84498198729ff0ed2c1bdf15e7b0d4b172c6ca71aba12584c6553b6c4",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 143350,
+    "saved": 1918123
   },
   {
-    "to": "/media/companion/joy-for-all/panel-overview.webp",
-    "checksum": "sha256:fd4b8c7eb80fad8268992ba64dfca93ea2ae562d1a17bee0b5ecfdf04c260a00",
-    "width": 1448,
-    "height": 1086,
-    "bytes": 144430,
-    "saved": 1775275
+    "to": "/media/coding/sphero-bolt/card.webp",
+    "checksum": "sha256:602e7b6d70dea52ec5ed102ed58a6276f144e837bec6ac026cd40ac6b2f78de6",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 97148,
+    "saved": 1964141
+  },
+  {
+    "to": "/media/coding/sphero-mini/hero.webp",
+    "checksum": "sha256:08913966118f84eaa75b46fa1a22e9de78291416c1f2cfb0370037e69fc3fb42",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 123350,
+    "saved": 1566316
+  },
+  {
+    "to": "/media/coding/sphero-mini/figure-1.webp",
+    "checksum": "sha256:23da0d663615edd7fae92ec68b5bcb2055e859954e13c723b3167e458bd22c99",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 163358,
+    "saved": 1996764
+  },
+  {
+    "to": "/media/coding/sphero-mini/figure-2.webp",
+    "checksum": "sha256:fa69bb411b32d2310bb679a9269ca62361fca5479c7b5a99f3aa407f89340e97",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 105980,
+    "saved": 1841094
+  },
+  {
+    "to": "/media/coding/sphero-mini/card.webp",
+    "checksum": "sha256:7da2797634c65323fa6748ddfc5bbaff502a2d1d3aef2c598f4043705dc02300",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 229308,
+    "saved": 2312051
+  },
+  {
+    "to": "/media/coding/sphero-indi/panel-overview.webp",
+    "checksum": "sha256:f4b9d39730bab6be4a97c607eb2e6efc5ea0b5a8122492e4b6fe2727612ad1b9",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 177958,
+    "saved": 1851823
+  },
+  {
+    "to": "/media/coding/sphero-indi/hero.webp",
+    "checksum": "sha256:2d246789807231e1e9a5196439d35c93ffd37d2c188f01623753f6e1687c4dc5",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 147028,
+    "saved": 1783144
+  },
+  {
+    "to": "/media/coding/sphero-indi/figure-1.webp",
+    "checksum": "sha256:cbae2a87ef541a555baeebaa8064ab70d95915e496b39dd25337203383edfc35",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 128712,
+    "saved": 1940875
+  },
+  {
+    "to": "/media/coding/sphero-indi/figure-2.webp",
+    "checksum": "sha256:aee95af1e12caf2229595de93a04ff8fbffd8c5d76f2841796b0be0bf59df2ff",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 142254,
+    "saved": 1834954
+  },
+  {
+    "to": "/media/coding/sphero-indi/card.webp",
+    "checksum": "sha256:45ed7e79cdb00d8e68e65c072f781ee674f82f0dd3024915b4f7d2184bf0f2b5",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 131946,
+    "saved": 1797790
+  },
+  {
+    "to": "/media/coding/ozobot-evo/hero.webp",
+    "checksum": "sha256:df0e47a9634bdb49e67f9d93d6d64cb1ddb6bbea0aa5f50b7fdadddbd80a4284",
+    "width": 1676,
+    "height": 1357,
+    "bytes": 186046,
+    "saved": 3166
+  },
+  {
+    "to": "/media/coding/ozobot-evo/figure-1.webp",
+    "checksum": "sha256:6423cdab88bb432fa427684999520208da8ce507f78892a5add8ca109d092d92",
+    "width": 1080,
+    "height": 1130,
+    "bytes": 62074,
+    "saved": 46472
+  },
+  {
+    "to": "/media/coding/ozobot-evo/figure-2.webp",
+    "checksum": "sha256:08fe7821eb6bca06d23c05535a8cb234c69e95624a284e6e02dce6ae667d939e",
+    "width": 1855,
+    "height": 1289,
+    "bytes": 303836,
+    "saved": 332665
+  },
+  {
+    "to": "/media/coding/ozobot-evo/card.webp",
+    "checksum": "sha256:6e4a7cd8ae0d495df6a990b505aa14b7c60a9455c3ac3e99843915b159851cfc",
+    "width": 1080,
+    "height": 1130,
+    "bytes": 143594,
+    "saved": -5940
+  },
+  {
+    "to": "/media/coding/makeblock-mbot/panel-app.webp",
+    "checksum": "sha256:3e82f45a099b5ce2dbac3c1f9d5467da89fbe547298ffc686733d0c7052332e8",
+    "width": 500,
+    "height": 300,
+    "bytes": 25148,
+    "saved": 12541
+  },
+  {
+    "to": "/media/coding/makeblock-mbot/hero.webp",
+    "checksum": "sha256:eab590b597ebb176c7b666bcd1eba735db85b4ebe832767e5023988fb1fe2768",
+    "width": 773,
+    "height": 400,
+    "bytes": 31200,
+    "saved": 203500
+  },
+  {
+    "to": "/media/coding/makeblock-mbot/figure-1.webp",
+    "checksum": "sha256:eb4efe53e49adbe1e9f28628fbb87d6463044e8cb96dd414ee5d8bda76863eda",
+    "width": 1024,
+    "height": 768,
+    "bytes": 100922,
+    "saved": 3144
+  },
+  {
+    "to": "/media/coding/makeblock-mbot/figure-2.webp",
+    "checksum": "sha256:62ce5ab166e6128098ff34fb81ba278caed30d60145e38f1c074af864669812a",
+    "width": 1500,
+    "height": 1500,
+    "bytes": 332624,
+    "saved": -32473
+  },
+  {
+    "to": "/media/coding/makeblock-mbot/card.webp",
+    "checksum": "sha256:a6f40610fff33794189c90c5e6729eb3b65657ebda6dd3f85ddcca769eb433fe",
+    "width": 1000,
+    "height": 1000,
+    "bytes": 69200,
+    "saved": 35931
   }
 ]

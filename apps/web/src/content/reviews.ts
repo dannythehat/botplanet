@@ -3717,6 +3717,31 @@ export const REVIEWS: Record<string, ReviewContent> = {
      ============================================================ */
   "sphero-bolt": {
     slug: "sphero-bolt",
+    image: {
+      src: "/media/coding/sphero-bolt/hero.webp",
+      alt:
+        "A clear Sphero BOLT on a wooden floor with its blue LED matrix lit, a child's hand reaching for it. Sphero's own name and the words programmable robotic ball are set into the artwork.",
+    },
+    figures: [
+      {
+        afterHeading: "The LED matrix is what makes block coding feel like something",
+        src: "/media/coding/sphero-bolt/figure-1.webp",
+        caption:
+          "The matrix and the drive gear, seen through the shell. It is the one part of this robot that shows you what your program did.",
+      },
+      {
+        afterHeading: "Three ways to code it, and the third one is the point",
+        src: "/media/coding/sphero-bolt/figure-2.webp",
+        caption:
+          "The third way: real JavaScript against the same ball, in a text editor rather than a block canvas.",
+      },
+      {
+        afterHeading: "Four hours, and it charges without a socket",
+        src: "/media/coding/sphero-bolt/card.webp",
+        caption:
+          "It charges by induction on the base, so there is no port to break and nothing to plug in.",
+      },
+    ],
     categorySlug: "educational-coding-robots",
     eyebrow: "Coding robot review",
     title: "Sphero BOLT review",
@@ -3779,6 +3804,31 @@ export const REVIEWS: Record<string, ReviewContent> = {
 
   "sphero-mini": {
     slug: "sphero-mini",
+    image: {
+      src: "/media/coding/sphero-mini/hero.webp",
+      alt:
+        "A blue and white Sphero Mini beside a phone running its driving app. The panel wording describing it is promotional copy rather than a BotPlanet finding.",
+    },
+    figures: [
+      {
+        afterHeading: "The size cuts both ways",
+        src: "/media/coding/sphero-mini/figure-1.webp",
+        caption:
+          "The Mini beside a BOLT at the same scale. Roughly half the diameter, and a quarter of the price.",
+      },
+      {
+        afterHeading: "One hour, and that is the thing people are annoyed by",
+        src: "/media/coding/sphero-mini/figure-2.webp",
+        caption:
+          "The shell lifts off to reach the charging port. An hour of play against about an hour on the cable.",
+      },
+      {
+        afterHeading: "Who this is for",
+        src: "/media/coding/sphero-mini/card.webp",
+        caption:
+          "Small enough to be a desk object and a cat toy at once, which is most of its appeal.",
+      },
+    ],
     categorySlug: "educational-coding-robots",
     eyebrow: "Coding robot review",
     title: "Sphero Mini review",
@@ -3839,6 +3889,37 @@ export const REVIEWS: Record<string, ReviewContent> = {
 
   "sphero-indi": {
     slug: "sphero-indi",
+    image: {
+      src: "/media/coding/sphero-indi/hero.webp",
+      alt:
+        "A young child kneeling on a wooden floor laying a green colour card in front of a blue indi car, with a track of cards already down.",
+    },
+    figures: [
+      {
+        afterHeading: "How a card becomes a program",
+        src: "/media/coding/sphero-indi/figure-1.webp",
+        caption:
+          "Each colour is an instruction. The car reads the card it drives over and does what the colour says.",
+      },
+      {
+        afterHeading: "Screen-free is the actual product",
+        src: "/media/coding/sphero-indi/panel-overview.webp",
+        caption:
+          "The four base instructions — drive, spin, sound, wait. The line calling it a robot that teaches real skills is promotional copy rather than our finding.",
+      },
+      {
+        afterHeading: "What it teaches, honestly stated",
+        src: "/media/coding/sphero-indi/figure-2.webp",
+        caption:
+          "A course built from books and blocks. The floor is the canvas, which is the whole idea and also the limit.",
+      },
+      {
+        afterHeading: "Who this is for",
+        src: "/media/coding/sphero-indi/card.webp",
+        caption:
+          "No screen, no app required, and nothing to read. That is the age range it fits.",
+      },
+    ],
     categorySlug: "educational-coding-robots",
     eyebrow: "Coding robot review",
     title: "Sphero indi review",
@@ -3899,6 +3980,31 @@ export const REVIEWS: Record<string, ReviewContent> = {
 
   "ozobot-evo": {
     slug: "ozobot-evo",
+    image: {
+      src: "/media/coding/ozobot-evo/hero.webp",
+      alt:
+        "The Ozobot Evo Entry Kit as it ships: the retail box, a zipped case, a pack of washable colour-code markers, a Meet Evo booklet and the small white robot.",
+    },
+    figures: [
+      {
+        afterHeading: "Colour codes on paper, then a block editor",
+        src: "/media/coding/ozobot-evo/figure-1.webp",
+        caption:
+          "A drawn line with a colour code in it. The words on this picture are Ozobot's own marketing wording.",
+      },
+      {
+        afterHeading: "The 700 lessons are the reason to buy it over a toy",
+        src: "/media/coding/ozobot-evo/figure-2.webp",
+        caption:
+          "The block editor, and the way a program gets loaded — the robot is held against the screen and reads it as flashing light.",
+      },
+      {
+        afterHeading: "Amazon says \"Toddler\" and Amazon is wrong",
+        src: "/media/coding/ozobot-evo/card.webp",
+        caption:
+          "The kit as it ships. Its own heading says ages 4 and up; this page uses 5 to 11, which is what Ozobot's product title and age fields say. Amazon's category label reads Toddler. Three sources, three answers.",
+      },
+    ],
     categorySlug: "educational-coding-robots",
     eyebrow: "Coding robot review",
     title: "Ozobot Evo review",
@@ -3958,6 +4064,37 @@ export const REVIEWS: Record<string, ReviewContent> = {
 
   "makeblock-mbot": {
     slug: "makeblock-mbot",
+    image: {
+      src: "/media/coding/makeblock-mbot/hero.webp",
+      alt:
+        "A blue mBot on a plain background with several of its parts floating away from it: a bracket, a perforated plate, a yellow flag and a blue beam.",
+    },
+    figures: [
+      {
+        afterHeading: "Fifteen minutes with a screwdriver",
+        src: "/media/coding/makeblock-mbot/figure-1.webp",
+        caption:
+          "Assembled, with the booklet behind it. This is what fifteen minutes gets you.",
+      },
+      {
+        afterHeading: "What the build teaches that the code does not",
+        src: "/media/coding/makeblock-mbot/figure-2.webp",
+        caption:
+          "The maker's own three-panel summary. The middle label is misspelt in the supplied artwork; the word is electronics.",
+      },
+      {
+        afterHeading: "Then it is block coding, in Scratch",
+        src: "/media/coding/makeblock-mbot/panel-app.webp",
+        caption:
+          "Driving it from the phone app, which is where most owners start before the Scratch editor.",
+      },
+      {
+        afterHeading: "mBot2, mBot Ranger, and which one this is",
+        src: "/media/coding/makeblock-mbot/card.webp",
+        caption:
+          "The original mBot, head-on. Two ultrasonic sensors above a printed smile is how you tell it from the mBot2.",
+      },
+    ],
     categorySlug: "educational-coding-robots",
     eyebrow: "Coding robot review",
     title: "Makeblock mBot review",
