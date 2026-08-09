@@ -238,6 +238,29 @@ export const ROUTES: RouteDef[] = [
      It sits at a STATIC path so it wins against /compare/[category].astro,
      which would otherwise try to resolve "eilik-vs-emo" as a category and
      return a 404. */
+  /* THE UNIVERSAL FINDER, 9 August 2026, and the first BotMatch route that
+     is indexable.
+
+     The nine per-category funnels are noindex: a questionnaire has nothing to
+     rank and the result pages are private by design. This one is different
+     because it carries the argument rather than just the form — how a robot
+     gets picked, and the fact that the scorer cannot see price or commission.
+     That is the claim worth being findable for.
+
+     Its own children stay noindex. /botmatch/<category>/ and
+     /recommendation/<token>/ are unchanged. */
+  {
+    path: "/botmatch/",
+    label: "Find your robot",
+    breadcrumbLabel: "BotMatch",
+    section: "botmatch",
+    parent: "/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: true,
+    indexable: true,
+  },
   {
     path: "/compare/eilik-vs-emo/",
     label: "Eilik vs EMO",
@@ -758,8 +781,16 @@ export const ROUTES: RouteDef[] = [
     inSitemap: false,
     indexable: false,
     category: CAT,
-    // Generic BotMatch entries must never exist as pages; they land here.
-    aliases: ["/find-my-robot/", "/botmatch/", "/find-my-robot/pool-cleaners/"],
+    /* "/botmatch/" LEFT THIS LIST ON 9 AUGUST 2026 AND THAT IS THE POINT OF
+       THE WHOLE CHANGE. It was an alias onto the pool funnel, written when
+       pool was the only category with questions — so every reader who typed
+       the obvious URL, or followed a generic link, was asked about their
+       swimming pool whatever they had come for. It is now a real page that
+       asks what job they want done first.
+
+       The other two stay: /find-my-robot/ and its pool variant are legacy
+       paths that were only ever the pool matcher. */
+    aliases: ["/find-my-robot/", "/find-my-robot/pool-cleaners/"],
   },
 
   /* ---------------- Company / trust ---------------- */

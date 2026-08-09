@@ -40,12 +40,22 @@ describe("normalisePath — locked URL standards", () => {
 });
 
 describe("resolveRedirect", () => {
-  it("sends generic BotMatch entries to the category journey", () => {
-    for (const p of ["/find-my-robot/", "/botmatch/", "/find-my-robot/pool-cleaners/"]) {
+  /* "/botmatch/" IS NO LONGER ONE OF THESE, and the change is the point of the
+     universal finder. It used to redirect onto the pool funnel, so anyone who
+     typed the obvious URL was asked about their swimming pool whatever they
+     had come for. It is a real page now, and it asks what job they want done
+     before it asks anything else. The two legacy paths still forward, because
+     they were only ever the pool matcher. */
+  it("sends legacy BotMatch entries to the category journey", () => {
+    for (const p of ["/find-my-robot/", "/find-my-robot/pool-cleaners/"]) {
       const r = resolveRedirect(p);
       expect(r?.to).toBe("/botmatch/robotic-pool-cleaners/");
       expect(r?.status).toBe(301);
     }
+  });
+
+  it("no longer sends /botmatch/ to the pool funnel", () => {
+    expect(resolveRedirect("/botmatch/")).toBeNull();
   });
 
   it("redirects the old /best/ section to /best-robots/", () => {

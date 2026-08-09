@@ -1,9 +1,10 @@
 ---
 import Base from "../../layouts/Base.astro";
 import { getDb, schema } from "../../lib/db";
-import { eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 import { breadcrumbsFor } from "../../lib/routing";
-import PoolMatcher from "../../components/PoolMatcher.astro";
+import BotMatcher from "../../components/BotMatcher.astro";
+import { canMatch, emptyStateFor } from "../../content/matcher-router";
 import { questionsFor, tasksFor } from "../../content/matcher-questions";
 
 const { category } = Astro.params;
@@ -23,6 +24,14 @@ if (!questions || !tasks) {
   return new Response("No questionnaire for this category yet", { status: 404 });
 }
 
+/* The published count decides whether this funnel may pick anything at all.
+   Same rule as the universal entry, read from the same place — a category
+   cannot be matchable on one route and not on the other. */
+const published = await db
+  .select({ id: schema.products.id })
+  .from(schema.products)
+  .where(and(eq(schema.products.categoryId, cat.id), eq(schema.products.status, "published")));
+
 const crumbs = breadcrumbsFor(Astro.url.pathname);
 ---
 
@@ -32,10 +41,18 @@ const crumbs = breadcrumbsFor(Astro.url.pathname);
   breadcrumbs={crumbs}
   noindex
 >
-  <PoolMatcher
-    categorySlug={cat.slug}
-    categoryName={cat.name}
-    questions={questions}
-    tasks={tasks}
+  <BotMatcher
+    mode="single"
+    categories={[
+      {
+        slug: cat.slug,
+        name: cat.name,
+        questions,
+        tasks,
+        matchable: canMatch(published.length),
+        emptyState: emptyStateFor(cat.name, published.length),
+        hubHref: `/robots/${cat.slug}/`,
+      },
+    ]}
   />
 </Base>

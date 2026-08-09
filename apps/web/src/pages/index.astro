@@ -5,6 +5,7 @@ import { srcsetFor } from "../lib/srcset";
 import CategoryFeature from "../components/CategoryFeature.astro";
 import { webPageSchema, SITE_URL } from "../lib/seo";
 import { REVIEWS } from "../content/reviews";
+import { MATCHER_JOBS } from "../content/matcher-router";
 
 const live = categoryRoutes(LAUNCH_CATEGORY);
 
@@ -250,10 +251,16 @@ const homeSchema = [
         <p class="hero__lede">
           BotPlanet is building the premium destination for robots that do useful work in homes, gardens, businesses and everyday life. We compare the machines, verify the claims and track where they can actually be bought.
         </p>
-        {/* One action, not three. BotMatch used to sit here as a second button
-            and again below as a third — the same tool asked for twice before
-            the reader knew what it was. It now has its own section instead. */}
+        {/* TWO ACTIONS NOW, AND THE FIRST ONE IS NEW. This carried a single
+            button into the pool hub, on the reasoning that BotMatch appearing
+            twice asked for the same thing before a reader knew what it was.
+            That reasoning held while BotMatch was nine separate funnels you
+            had to already know the category to enter. It stopped holding when
+            the finder learned to start from the job — "Find your robot" now
+            answers the question the homepage actually raises, and the hub link
+            stays for anyone who would rather browse. */}
         <div class="hero__actions">
+          <a class="btn btn--accent btn--lg" href="/botmatch/">Find your robot</a>
           <a class="btn btn--primary btn--lg" href={live.hub}>Explore robotic pool cleaners</a>
           <a class="hero__more" href="#robot-worlds">See all {categories.length} robot worlds &#8595;</a>
         </div>
@@ -280,6 +287,31 @@ const homeSchema = [
           />
         </picture>
       </figure>
+    </div>
+  </section>
+
+  {/* THE COMPACT FINDER, ABOVE THE GRID AND DELIBERATELY BEFORE IT.
+      A reader who knows what they want scrolls past this in one flick; a
+      reader who does not is about to meet nine tiles and pick by picture.
+      Nine jobs in the reader's own words is a better first question than nine
+      category names, and it is the same first question the funnel asks — so
+      tapping one lands mid-conversation rather than at another front door. */}
+  <section class="finder" aria-labelledby="finder-title">
+    <div class="wrap finder__inner">
+      <p class="kicker">BOTMATCH</p>
+      <h2 id="finder-title">What do you want a robot to do?</h2>
+      <p class="finder__lede">
+        Start with the job, not our categories. A minute of questions, and the part that picks your
+        robot cannot see prices or commission at all.
+      </p>
+      <ul class="finder__jobs">
+        {MATCHER_JOBS.map((job) => (
+          <li>
+            <a href={`/botmatch/?job=${job.id}`}>{job.label}</a>
+          </li>
+        ))}
+      </ul>
+      <a class="finder__all" href="/botmatch/">Not sure yet? Start here &#8594;</a>
     </div>
   </section>
 
@@ -774,4 +806,59 @@ const homeSchema = [
   .close { padding: clamp(70px,10vw,140px) 0; }.close__inner { text-align: center; }.close img { width: min(520px,82vw); height: auto; }.close p { margin: 20px auto 30px; color: var(--text-secondary); font-size: 20px; }
   @media(max-width:960px){.system-grid{grid-template-columns:repeat(2,1fr)}}
   @media(max-width:620px){.hero{min-height:auto;padding:48px 0 70px}.hero__grid{gap:26px}h1{font-size:40px}.system-grid{grid-template-columns:1fr}.section-intro h2,.system h2{font-size:40px}}
+
+  /* ---------- compact finder, above the directory grid ---------- */
+  /* Mobile-first: the jobs wrap as chips from 390px up, so nine of them read
+     as a short list rather than nine full-width rows pushing the grid off the
+     first two screens. */
+  .finder {
+    padding: clamp(2.5rem, 7vw, 4rem) 0 0;
+  }
+  .finder__inner {
+    max-width: 52rem;
+  }
+  .finder h2 {
+    margin: 0.5rem 0 0;
+    font-size: clamp(1.5rem, 4.4vw, 2.1rem);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+  .finder__lede {
+    margin: 0.75rem 0 0;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    max-width: 44ch;
+  }
+  .finder__jobs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1.35rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .finder__jobs a {
+    display: inline-block;
+    padding: 0.5rem 0.85rem;
+    border: 1px solid rgba(200, 208, 222, 0.18);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.02);
+    color: inherit;
+    text-decoration: none;
+    font-size: 0.9375rem;
+    line-height: 1.3;
+    transition: border-color 0.15s ease, background 0.15s ease;
+  }
+  .finder__jobs a:hover,
+  .finder__jobs a:focus-visible {
+    border-color: var(--cs-sheen);
+    background: rgba(120, 190, 255, 0.08);
+  }
+  .finder__all {
+    display: inline-block;
+    margin: 1.1rem 0 0;
+    color: var(--text-secondary);
+    font-size: 0.9375rem;
+  }
+  .finder__all:hover { color: inherit; }
 </style>

@@ -204,6 +204,36 @@ const POOL: PagePlan[] = [
      buyer to. EMO's Amazon listings are a different brand's, which is the
      page's own finding and the reason it exists in this shape rather than as
      a two-buy-button comparison. */
+  /* THE UNIVERSAL FINDER. The nine per-category funnels have no plan entries
+     because they are noindex tools; this one is a page with an argument, so it
+     gets one. The term it is built on is not a product term — nobody searches
+     "botmatch" — it is the question a reader asks before they know the
+     category exists, and the page answers it by asking a better one. */
+  {
+    path: "/botmatch/",
+    category: null,
+    type: "botmatch" as const,
+    status: "built" as const,
+    intent: "I want a robot for a job. Which one, and how do I know you are not just selling me something?",
+    primary: { term: "which robot should i buy", volume: 590, difficulty: 8 },
+    secondary: [
+      { term: "robot finder", volume: 480, difficulty: 12 },
+      { term: "best robot for my home", volume: 320, difficulty: 14 },
+    ],
+    /* NOTHING IS CEDED, and that is not an oversight. Ceding names a page that
+       already targets the term, and this page competes with none of ours: it
+       ranks for "which robot should I buy", which no category page wants and
+       no category page could honestly answer. */
+    ceded: [],
+    products: [],
+    productsNote:
+      "Deliberately none. This page routes into all nine categories and names no product — listing some would make it a shortlist, which is the job of the best-of pages, and would put a thumb on a scale the funnel is built to keep level.",
+    linksOut: ["/robots/", "/how-botmatch-works/", "/editorial-policy/"],
+    images: [],
+    schema: ["WebPage", "FAQPage", "BreadcrumbList"],
+    research: "PAA and internal routing · 2026-08-09",
+    evidence: "Low volume on the head term and that is expected — this page exists to catch the reader who arrives without a category, and the homepage sends more traffic to it than search ever will. What makes it worth indexing is the commission-isolation argument, which nothing else on the site states in full.",
+  },
   {
     path: "/compare/eilik-vs-emo/",
     category: "companion-robots",
