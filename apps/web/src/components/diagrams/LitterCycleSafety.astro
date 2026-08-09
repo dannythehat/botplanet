@@ -1,0 +1,107 @@
+---
+/**
+ * Original BotPlanet explainer — how an automatic litter box knows it is empty.
+ *
+ * THE ONE DECISION ON THIS HUB WHERE BEING WRONG IS A SAFETY QUESTION rather
+ * than a disappointment, in the hub's own words. The machine finds its occupant
+ * by weight and will not cycle while that weight is present; it cycles after the
+ * cat steps out and a delay has passed. Everything a buyer needs to worry about
+ * follows from that one sentence, and the two failure modes it implies are the
+ * reason this hub opens on the cat rather than on the product:
+ *
+ *   – a cat too light to cross the sensor's minimum is not detected at all, so
+ *     the interlock never engages. That is the kitten case.
+ *   – a cat heavy enough to be detected perfectly can still be too long for the
+ *     chamber. The sensor is satisfied and the cat is not. That is the Maine
+ *     Coon case, and no setting fixes either one.
+ *
+ * Drawn as the cycle plus the two places it breaks, because the interlock is a
+ * SEQUENCE and prose has to hold four states in a reader's head at once to
+ * describe it.
+ *
+ * NO WEIGHT AND NO DELAY IS PRINTED. Both are per-machine figures — some makers
+ * publish a minimum, some publish an age instead, and several publish neither —
+ * and inventing a number to complete a drawing would be exactly the failure this
+ * site exists not to commit. Where a maker states a minimum, the review quotes
+ * it; where a maker will not, the review says so. Conceptual: no product is
+ * depicted.
+ */
+---
+<figure class="dgm">
+  <svg viewBox="0 0 640 320" width="100%" role="img"
+    aria-label="How an automatic litter box decides it is safe to cycle: a weight sensor detects the cat and locks the cycle out, the cat leaves, a delay runs, and only then does the box clean. Two failure modes are marked — a cat below the sensor's minimum is never detected, and a cat that is detected can still be too large for the chamber.">
+    <rect x="0" y="0" width="640" height="320" rx="14" fill="var(--panel)" stroke="var(--border)"/>
+
+    <text x="24" y="34" font-size="15" font-weight="700" fill="#f5f5f7">How it knows it is safe to cycle</text>
+    <text x="24" y="54" font-size="11.5" fill="#c9c9d1">By weight, and by waiting. Both parts have to work for either to.</text>
+
+    <!-- ============ the cycle, four states ============ -->
+    <g>
+      <rect x="24" y="78" width="132" height="70" rx="10" fill="var(--panel-2)" stroke="#4fd1c5"/>
+      <text x="90" y="104" font-size="12" font-weight="700" fill="#4fd1c5" text-anchor="middle">Cat steps in</text>
+      <text x="90" y="122" font-size="10.5" fill="#c9c9d1" text-anchor="middle">Weight sensor</text>
+      <text x="90" y="136" font-size="10.5" fill="#c9c9d1" text-anchor="middle">registers an occupant</text>
+    </g>
+    <path d="M156 113 L184 113" stroke="#c9c9d1" stroke-width="2" marker-end="url(#lcs)"/>
+
+    <g>
+      <rect x="188" y="78" width="132" height="70" rx="10" fill="var(--panel-2)" stroke="#4fd1c5"/>
+      <text x="254" y="104" font-size="12" font-weight="700" fill="#4fd1c5" text-anchor="middle">Cycle locked out</text>
+      <text x="254" y="122" font-size="10.5" fill="#c9c9d1" text-anchor="middle">Nothing turns while</text>
+      <text x="254" y="136" font-size="10.5" fill="#c9c9d1" text-anchor="middle">the weight is there</text>
+    </g>
+    <path d="M320 113 L348 113" stroke="#c9c9d1" stroke-width="2" marker-end="url(#lcs)"/>
+
+    <g>
+      <rect x="352" y="78" width="132" height="70" rx="10" fill="var(--panel-2)" stroke="var(--border-2)"/>
+      <text x="418" y="104" font-size="12" font-weight="700" fill="#f5f5f7" text-anchor="middle">Cat leaves</text>
+      <text x="418" y="122" font-size="10.5" fill="#c9c9d1" text-anchor="middle">A delay runs before</text>
+      <text x="418" y="136" font-size="10.5" fill="#c9c9d1" text-anchor="middle">anything moves</text>
+    </g>
+    <path d="M484 113 L512 113" stroke="#c9c9d1" stroke-width="2" marker-end="url(#lcs)"/>
+
+    <g>
+      <rect x="516" y="78" width="100" height="70" rx="10" fill="var(--panel-2)" stroke="var(--border-2)"/>
+      <text x="566" y="110" font-size="12" font-weight="700" fill="#f5f5f7" text-anchor="middle">It cleans</text>
+      <text x="566" y="130" font-size="10.5" fill="#c9c9d1" text-anchor="middle">Waste to the drawer</text>
+    </g>
+
+    <!-- ============ where it breaks ============ -->
+    <text x="24" y="192" font-size="12.5" font-weight="700" fill="#ff8f6b">The two places this fails, and neither is a setting</text>
+
+    <g>
+      <rect x="24" y="204" width="290" height="94" rx="8" fill="var(--panel-2)" stroke="#ff8f6b"/>
+      <text x="40" y="228" font-size="12" font-weight="700" fill="#ff8f6b">Too light to register</text>
+      <text x="40" y="248" font-size="11" fill="#c9c9d1">Below the sensor&#8217;s minimum the machine</text>
+      <text x="40" y="263" font-size="11" fill="#c9c9d1">does not know it is occupied, so step two</text>
+      <text x="40" y="278" font-size="11" fill="#c9c9d1">never happens. This is the kitten case — a</text>
+      <text x="40" y="293" font-size="11" fill="#c9c9d1">plain tray until they are grown.</text>
+    </g>
+
+    <g>
+      <rect x="326" y="204" width="290" height="94" rx="8" fill="var(--panel-2)" stroke="#f0b429"/>
+      <text x="342" y="228" font-size="12" font-weight="700" fill="#f0b429">Detected, and still does not fit</text>
+      <text x="342" y="248" font-size="11" fill="#c9c9d1">The sensor is satisfied and the cat is not.</text>
+      <text x="342" y="263" font-size="11" fill="#c9c9d1">Chamber size rules machines out for a large</text>
+      <text x="342" y="278" font-size="11" fill="#c9c9d1">cat — check the internal dimensions, which</text>
+      <text x="342" y="293" font-size="11" fill="#c9c9d1">makers publish far less readily.</text>
+    </g>
+
+    <defs>
+      <marker id="lcs" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+        <path d="M0 0 L7 3.5 L0 7 Z" fill="#c9c9d1"/>
+      </marker>
+    </defs>
+  </svg>
+  <figcaption class="note">
+    Every machine here works this way, so the question is not whether it has a safety interlock but
+    whether your cat is inside the range that interlock can see — and whether the chamber fits a cat
+    the sensor is perfectly happy with. Where a maker states a minimum weight or age we quote it;
+    where a maker will not, we say so.
+  </figcaption>
+</figure>
+<style>
+  .dgm { margin: 1.75rem 0; }
+  .dgm svg { max-width: 640px; display: block; }
+  .dgm .note { margin-top: 8px; }
+</style>

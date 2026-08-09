@@ -13,6 +13,7 @@
  */
 import Base from "../../../layouts/Base.astro";
 import EditorialArticle from "../../../components/EditorialArticle.astro";
+import PoolSizeShape from "../../../components/diagrams/PoolSizeShape.astro";
 import { editorialFor } from "../../../content/editorial";
 import { buildEditorialPage } from "../../../lib/editorial-page";
 import { breadcrumbsFor } from "../../../lib/routing";
@@ -52,5 +53,26 @@ const pageSchema = [
   breadcrumbs={crumbs}
   schema={pageSchema}
 >
-  <EditorialArticle article={article} html={html} picks={picks} comparison={comparison} />
+  <EditorialArticle
+    article={article}
+    html={html}
+    picks={picks}
+    comparison={comparison}
+    splitAt={["big-pools-the-number-that-decides-it"]}
+  >
+    {/* Eight sections of prose between the picks and the table, and this is the
+        one that changes subject — from what a machine does to whether it will
+        reach the end of your pool. Placed before the section explaining that a
+        maximum length and a maximum area are not interchangeable.
+
+        THE DRAWING CARRIES NO PRODUCT AND NO RATING. The specific figures — 100
+        ft for the Scuba X1 Pro Max, 33 for the Proteus DX4 Plus — stay in the
+        prose beside the maker who published them, where a changed spec changes
+        one sentence rather than an image nobody re-reads.
+
+        Corded vs cordless is deliberately NOT drawn here. That figure lives on
+        the cordless page, which is the argument's own URL; running it on both
+        would show the same reader the same picture twice on one journey. */}
+    <PoolSizeShape slot="diagram-1" />
+  </EditorialArticle>
 </Base>

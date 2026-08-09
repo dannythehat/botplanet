@@ -27,6 +27,7 @@ import VerdictPanel from "../../../components/VerdictPanel.astro";
 import FaqList from "../../../components/FaqList.astro";
 import { decisionSectionFor, coverageSectionFor, splitSectionFor, matrixSectionFor, checkSectionFor, priceSectionFor, verdictSectionFor, faqSectionFor, botMatchCtaFor } from "../../../content/category-sections";
 import { MEDIA_ASSETS } from "../../../content/media/assets";
+import HubDiagram from "../../../components/diagrams/HubDiagram.astro";
 
 const { category } = Astro.params;
 const db = getDb(Astro.locals);
@@ -243,6 +244,18 @@ const pageSchema = hero
       cards={decision.cards}
     />
   )}
+
+  {/* THE HUB'S ONE DRAWING, directly under the decision it belongs to.
+      The decision section states the constraint that rules machines out — the
+      cat's weight against the chamber, the yard's area against a weekly rating,
+      the pane's border against a path that turns before the frame — and each of
+      those is a mechanism the reader has to picture before the three cards mean
+      anything. Categories with no entry render nothing; see HubDiagram.astro.
+
+      It sits between the cards and the coverage rows rather than at the top,
+      because the hero is already an image and two pictures before any text is a
+      brochure. */}
+  <HubDiagram category={cat.slug} />
 
   {coverage && (
     <CoverageRows

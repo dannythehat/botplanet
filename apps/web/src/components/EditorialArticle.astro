@@ -49,17 +49,53 @@ interface Props {
   article: EditorialContent;
   /** Compiled Markdown for the prose. */
   html: string;
+  /**
+   * Heading ids to split the prose at, so a diagram can sit inside the article
+   * rather than after it.
+   *
+   * WHY A SPLIT RATHER THAN THE FIGURE INJECTOR. lib/review-figures.ts builds
+   * an <img> tag and glues it into the compiled HTML string, which works for a
+   * file and cannot work for a component — an Astro component is not a string
+   * and cannot be interpolated into one. So the prose is cut at the heading and
+   * the page fills a named slot between the halves. The diagram stays a
+   * component: versioned, themeable, and with LABELS THAT REMAIN EDITABLE,
+   * which is the whole argument for drawing these rather than commissioning
+   * them as artwork with the words baked in.
+   */
+  splitAt?: string[];
   picks: RenderedPick[];
   comparison: ComparisonRow[];
 }
 
-const { article, html, picks, comparison } = Astro.props;
+const { article, html, picks, comparison, splitAt = [] } = Astro.props;
 const bmCta = botMatchCtaFor(article.categorySlug);
 
 /* Self-path passed so the page cannot link its own URL: the cordless best-of
    names "cordless robotic pool cleaner" repeatedly, and that phrase is an
    anchor pointing here. */
 const { html: body } = applyInternalLinks(html, anchorsFor(article.categorySlug), article.path);
+
+/* Cut the compiled prose immediately before each named heading, in document
+   order. A heading id that is not present yields no cut and no slot, so a
+   diagram declared against a heading somebody renamed disappears rather than
+   landing in the wrong section — the same failure mode the figure injector
+   guards, and the same answer. */
+/* NUMBERED SLOTS, because Astro requires a slot name to be a static string.
+   The page passes its diagrams in the same order as `splitAt`, and three is
+   the ceiling — a guide wanting a fourth diagram is a guide that should be
+   two pages. */
+const parts: { html: string; slot: number | null }[] = [];
+{
+  let rest = body;
+  for (const id of splitAt) {
+    const marker = `<h2 id="${id}"`;
+    const at = rest.indexOf(marker);
+    if (at === -1) continue;
+    parts.push({ html: rest.slice(0, at), slot: parts.length + 1 });
+    rest = rest.slice(at);
+  }
+  parts.push({ html: rest, slot: null });
+}
 ---
 
 <header class="bp-ed__head">
@@ -97,7 +133,16 @@ const { html: body } = applyInternalLinks(html, anchorsFor(article.categorySlug)
 
 <ArticleContents html={body} extra={comparison.length > 1 ? [{ id: "compare", text: "Compare them side by side" }] : []} />
 
-<article class="bp-prose" set:html={body} />
+<article class="bp-prose">
+  {parts.map((part) => (
+    <>
+      <Fragment set:html={part.html} />
+      {part.slot === 1 && <slot name="diagram-1" />}
+      {part.slot === 2 && <slot name="diagram-2" />}
+      {part.slot === 3 && <slot name="diagram-3" />}
+    </>
+  ))}
+</article>
 
 {comparison.length > 1 && (
   <ComparisonTable

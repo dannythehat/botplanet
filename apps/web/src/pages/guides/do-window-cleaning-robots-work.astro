@@ -20,6 +20,7 @@
  */
 import Base from "../../layouts/Base.astro";
 import EditorialArticle from "../../components/EditorialArticle.astro";
+import WindowAdhesion from "../../components/diagrams/WindowAdhesion.astro";
 import { editorialFor } from "../../content/editorial";
 import { buildEditorialPage } from "../../lib/editorial-page";
 import { breadcrumbsFor } from "../../lib/routing";
@@ -55,5 +56,18 @@ const pageSchema = [
   breadcrumbs={crumbs}
   schema={pageSchema}
 >
-  <EditorialArticle article={article} html={html} picks={picks} comparison={comparison} />
+  <EditorialArticle
+    article={article}
+    html={html}
+    picks={picks}
+    comparison={comparison}
+    splitAt={["how-they-actually-stay-on-the-glass"]}
+  >
+    {/* Two of this page's three merged queries are "how do they work" and
+        "are they worth it", and the answer to the second depends entirely on
+        believing the first. The reader who cannot picture the seal assumes the
+        tether is holding the robot up; the drawing puts the three defences in
+        their real order before the prose explains any of them. */}
+    <WindowAdhesion slot="diagram-1" />
+  </EditorialArticle>
 </Base>

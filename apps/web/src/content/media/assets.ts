@@ -1362,11 +1362,26 @@ export const ORIGINAL_ASSETS: MediaAssetRecord[] = [
   },
   ...(
     [
-      ["dgm-pool-zones", "components/PoolDiagram.astro", "Pool cross-section showing floor, wall, waterline and water-surface cleaning zones"],
+      /* dgm-pool-zones (components/PoolDiagram.astro) WAS HERE and was removed
+         on 9 August 2026 with the component. It drew the same pool cross-section
+         as dgm-coverage below, less well and with its styling inlined instead of
+         using the shared .dgm idiom — two records for one idea, and the older of
+         the two rendered on no page. Keeping a registry entry for a picture the
+         site does not publish makes MEDIA_ASSETS lie about what BotPlanet shows,
+         which is the one thing this file is for. */
       ["dgm-coverage", "components/diagrams/CoverageZones.astro", "Pool cross-section highlighting floor, wall and waterline cleaning zones"],
       ["dgm-corded-cordless", "components/diagrams/CordedVsCordless.astro", "Diagram comparing corded and cordless robotic pool cleaners"],
       ["dgm-size-shape", "components/diagrams/PoolSizeShape.astro", "Diagram showing how pool size and shape affect robot suitability"],
       ["dgm-botmatch", "components/diagrams/BotMatchExplainer.astro", "Diagram of how BotMatch produces a deterministic suitability result"],
+      /* Added 9 August 2026, the day the four above were found rendering on no
+         page at all. Every entry in this block now has exactly one home, and
+         test/diagrams.test.ts fails if a new one is registered without one. */
+      ["dgm-slope", "components/diagrams/SlopePercentDegrees.astro", "Right-angled triangle showing that a slope rated at 45 percent is about 24 degrees, with the equivalent degrees for the ratings mowers are sold on"],
+      ["dgm-window-adhesion", "components/diagrams/WindowAdhesion.astro", "Cross-section of a window-cleaning robot on glass showing the vacuum seal, the battery backup and the safety line, in the order they hold it up"],
+      ["dgm-boundary", "components/diagrams/BoundaryMethods.astro", "The same garden bounded three ways — buried wire, satellite RTK and camera vision — with what each method needs and where each one fails"],
+      ["dgm-window-edges", "components/diagrams/WindowEdgeReach.astro", "A window pane showing the centre a robot cleans well, the border band that gets least contact because the machine turns before the frame, and the corners that get least of all"],
+      ["dgm-mowing-cadence", "components/diagrams/MowingCadence.astro", "Two weeks of grass height compared: one long cut on one day against a short cut on most days, showing that a mower's area rating is a weekly figure"],
+      ["dgm-litter-cycle", "components/diagrams/LitterCycleSafety.astro", "The interlock cycle of an automatic litter box, with the two failure modes marked: a cat below the sensor's minimum, and a cat detected perfectly that still does not fit the chamber"],
     ] as const
   ).map(([id, src, alt]): MediaAssetRecord => ({
     ...base(id),

@@ -15,6 +15,7 @@
  */
 import Base from "../../../layouts/Base.astro";
 import EditorialArticle from "../../../components/EditorialArticle.astro";
+import CordedVsCordless from "../../../components/diagrams/CordedVsCordless.astro";
 import { editorialFor } from "../../../content/editorial";
 import { buildEditorialPage } from "../../../lib/editorial-page";
 import { breadcrumbsFor } from "../../../lib/routing";
@@ -51,5 +52,23 @@ const pageSchema = [
   breadcrumbs={crumbs}
   schema={pageSchema}
 >
-  <EditorialArticle article={article} html={html} picks={picks} comparison={comparison} />
+  <EditorialArticle
+    article={article}
+    html={html}
+    picks={picks}
+    comparison={comparison}
+    splitAt={["when-to-buy-corded-instead"]}
+  >
+    {/* THE HONEST SECTION ON A PAGE THAT EXISTS TO SELL THE OTHER THING. This
+        page opens by saying cordless buys handling and not better cleaning, and
+        it is here that it tells a reader to go and buy a cable instead. The
+        trade is genuinely two-sided — no cable to snag against a runtime that
+        ends and a cell that ages — and a two-sided trade is what this drawing
+        is: neither side is the winner, and neither column is longer.
+
+        Placed on this page rather than on the parent best-of, which is the
+        broader argument. A reader who walks hub to page should not meet the
+        same picture twice. */}
+    <CordedVsCordless slot="diagram-1" />
+  </EditorialArticle>
 </Base>

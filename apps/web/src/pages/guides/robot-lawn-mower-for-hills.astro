@@ -17,6 +17,7 @@
  */
 import Base from "../../layouts/Base.astro";
 import EditorialArticle from "../../components/EditorialArticle.astro";
+import SlopePercentDegrees from "../../components/diagrams/SlopePercentDegrees.astro";
 import { editorialFor } from "../../content/editorial";
 import { buildEditorialPage } from "../../lib/editorial-page";
 import { breadcrumbsFor } from "../../lib/routing";
@@ -52,5 +53,17 @@ const pageSchema = [
   breadcrumbs={crumbs}
   schema={pageSchema}
 >
-  <EditorialArticle article={article} html={html} picks={picks} comparison={comparison} />
+  <EditorialArticle
+    article={article}
+    html={html}
+    picks={picks}
+    comparison={comparison}
+    splitAt={["work-out-your-actual-gradient-first"]}
+  >
+    {/* THE ONE ERROR THIS PAGE EXISTS TO CATCH, drawn immediately before the
+        section that asks the reader to go and measure. Every mower here is
+        rated in percent and almost everybody reads it as degrees, so the
+        conversion has to arrive before the instruction rather than after it. */}
+    <SlopePercentDegrees slot="diagram-1" />
+  </EditorialArticle>
 </Base>

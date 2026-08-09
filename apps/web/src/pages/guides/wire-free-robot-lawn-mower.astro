@@ -16,6 +16,7 @@
  */
 import Base from "../../layouts/Base.astro";
 import EditorialArticle from "../../components/EditorialArticle.astro";
+import BoundaryMethods from "../../components/diagrams/BoundaryMethods.astro";
 import { editorialFor } from "../../content/editorial";
 import { buildEditorialPage } from "../../lib/editorial-page";
 import { breadcrumbsFor } from "../../lib/routing";
@@ -51,5 +52,18 @@ const pageSchema = [
   breadcrumbs={crumbs}
   schema={pageSchema}
 >
-  <EditorialArticle article={article} html={html} picks={picks} comparison={comparison} />
+  <EditorialArticle
+    article={article}
+    html={html}
+    picks={picks}
+    comparison={comparison}
+    splitAt={["three-technologies-one-label"]}
+  >
+    {/* "Wire-free" is a marketing word covering two technologies that fail in
+        opposite gardens — satellite dies under trees, vision dies at dusk and
+        at a soft lawn edge. The section says so in prose; the drawing shows the
+        same garden three times so the difference is in the method, not the
+        plot, which is what the reader has to hold to make the choice. */}
+    <BoundaryMethods slot="diagram-1" />
+  </EditorialArticle>
 </Base>

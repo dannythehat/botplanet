@@ -13,6 +13,7 @@
  */
 import Base from "../../layouts/Base.astro";
 import EditorialArticle from "../../components/EditorialArticle.astro";
+import CoverageZones from "../../components/diagrams/CoverageZones.astro";
 import { editorialFor } from "../../content/editorial";
 import { buildEditorialPage } from "../../lib/editorial-page";
 import { breadcrumbsFor } from "../../lib/routing";
@@ -48,5 +49,18 @@ const pageSchema = [
   breadcrumbs={crumbs}
   schema={pageSchema}
 >
-  <EditorialArticle article={article} html={html} picks={picks} comparison={comparison} />
+  <EditorialArticle
+    article={article}
+    html={html}
+    picks={picks}
+    comparison={comparison}
+    splitAt={["robot-suction-or-pressure"]}
+  >
+    {/* The section below distinguishes three product classes and ends on the
+        point that decides most purchases: the waterline is robot-only, and not
+        every robot does it. That is a claim about WHERE a machine cleans, which
+        is a picture rather than a sentence. Placed before the classes so the
+        reader has the zones in mind while reading what each class can reach. */}
+    <CoverageZones slot="diagram-1" />
+  </EditorialArticle>
 </Base>
