@@ -6339,5 +6339,1888 @@
         "checksum": "sha256:dcf922c962eed5847f81da02be46606cfee1e7787a3774859e453d4146aaeea4"
       }
     ]
+  },
+  {
+    "source": "/media/hubs/grill/row-baked-on-grease.webp",
+    "sourceWidth": 1536,
+    "sourceHeight": 1024,
+    "derivatives": [
+      {
+        "id": "media-hubs-grill-row-baked-on-grease-webp-360",
+        "src": "/media/hubs/grill/row-baked-on-grease-360w.webp",
+        "width": 360,
+        "height": 240,
+        "bytes": 20086,
+        "checksum": "sha256:8f91dcff02ec31aae5efef74bd79e94b2c12a0f71466fb2fa38082baa167dc17"
+      },
+      {
+        "id": "media-hubs-grill-row-baked-on-grease-webp-640",
+        "src": "/media/hubs/grill/row-baked-on-grease-640w.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 68606,
+        "checksum": "sha256:59075296cba9ae5ba06082b3df6daf54c06037608c964a296502d87aaa5f8aed"
+      },
+      {
+        "id": "media-hubs-grill-row-baked-on-grease-webp-960",
+        "src": "/media/hubs/grill/row-baked-on-grease-960w.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 159562,
+        "checksum": "sha256:08dd8c324a0e92d8da916cf4db0da61a4ba3fe7bbbd1aa0e3a079f4216aeec5a"
+      },
+      {
+        "id": "media-hubs-grill-row-baked-on-grease-webp-1440",
+        "src": "/media/hubs/grill/row-baked-on-grease-1440w.webp",
+        "width": 1440,
+        "height": 960,
+        "bytes": 285930,
+        "checksum": "sha256:5382d34ed6f288eebf1d41d4a718b603117b7b66c04eddcc435ad2f9a3fda337"
+      }
+    ]
+  },
+  {
+    "source": "/media/hubs/grill/row-far-corner.webp",
+    "sourceWidth": 1536,
+    "sourceHeight": 1024,
+    "derivatives": [
+      {
+        "id": "media-hubs-grill-row-far-corner-webp-360",
+        "src": "/media/hubs/grill/row-far-corner-360w.webp",
+        "width": 360,
+        "height": 240,
+        "bytes": 12514,
+        "checksum": "sha256:d5e46e57ada3e57c061dac44dbe66b17a75402a0e6bc197975720d5848381e85"
+      },
+      {
+        "id": "media-hubs-grill-row-far-corner-webp-640",
+        "src": "/media/hubs/grill/row-far-corner-640w.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 33422,
+        "checksum": "sha256:3ebfc9dd27ca7d2c962c96859e2216774bc775a08a70c9a73eb4c282e3df4849"
+      },
+      {
+        "id": "media-hubs-grill-row-far-corner-webp-960",
+        "src": "/media/hubs/grill/row-far-corner-960w.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 69672,
+        "checksum": "sha256:f95ba093e830f1425ed92c942996d379e7f1d8e9c13f0d344847649e31aa090d"
+      },
+      {
+        "id": "media-hubs-grill-row-far-corner-webp-1440",
+        "src": "/media/hubs/grill/row-far-corner-1440w.webp",
+        "width": 1440,
+        "height": 960,
+        "bytes": 114340,
+        "checksum": "sha256:869108ec48c3e75e70eec1c40a73a36306e0c9e3d0efedd3010f19a4e3289d75"
+      }
+    ]
+  },
+  {
+    "source": "/media/hubs/grill/row-under-grate.webp",
+    "sourceWidth": 1536,
+    "sourceHeight": 1024,
+    "derivatives": [
+      {
+        "id": "media-hubs-grill-row-under-grate-webp-360",
+        "src": "/media/hubs/grill/row-under-grate-360w.webp",
+        "width": 360,
+        "height": 240,
+        "bytes": 10962,
+        "checksum": "sha256:490afc14521fd3fbcdf317bb4ff9ac2fe6b59d9a455f425598ae60d94458e5e9"
+      },
+      {
+        "id": "media-hubs-grill-row-under-grate-webp-640",
+        "src": "/media/hubs/grill/row-under-grate-640w.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 34900,
+        "checksum": "sha256:2cea323bda57115983d3b3084f995ed3aae363f9358a2078ee53e8b26755e0c3"
+      },
+      {
+        "id": "media-hubs-grill-row-under-grate-webp-960",
+        "src": "/media/hubs/grill/row-under-grate-960w.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 76466,
+        "checksum": "sha256:362d1fe3d25e30bda90b67511aee45d0df4719cb878c05d0b016fa44eca5316e"
+      },
+      {
+        "id": "media-hubs-grill-row-under-grate-webp-1440",
+        "src": "/media/hubs/grill/row-under-grate-1440w.webp",
+        "width": 1440,
+        "height": 960,
+        "bytes": 131910,
+        "checksum": "sha256:bb6bd2eb4e84573dd9ebbe4d8cf96847aef74d2f4dd16797f5934b1f91f64a72"
+      }
+    ]
+  },
+  {
+    "source": "/media/hubs/petcam/hero-2026-08.webp",
+    "sourceWidth": 1448,
+    "sourceHeight": 1086,
+    "derivatives": [
+      {
+        "id": "media-hubs-petcam-hero-2026-08-webp-360",
+        "src": "/media/hubs/petcam/hero-2026-08-360w.webp",
+        "width": 360,
+        "height": 270,
+        "bytes": 13810,
+        "checksum": "sha256:fc72ac80d37e4483316525ba5a6fdbdba7920cbac0e0a6e6d209b297aa448944"
+      },
+      {
+        "id": "media-hubs-petcam-hero-2026-08-webp-640",
+        "src": "/media/hubs/petcam/hero-2026-08-640w.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 35582,
+        "checksum": "sha256:e55434d6301d6afba19ef92a0a5bf3eadcdec3270db0c4f037cb1a03bed63a67"
+      },
+      {
+        "id": "media-hubs-petcam-hero-2026-08-webp-960",
+        "src": "/media/hubs/petcam/hero-2026-08-960w.webp",
+        "width": 960,
+        "height": 720,
+        "bytes": 71074,
+        "checksum": "sha256:8838b7c201b13b4aefb397c55de087b0082c6d520760278df32826dd6bee0887"
+      },
+      {
+        "id": "media-hubs-petcam-hero-2026-08-webp-1440",
+        "src": "/media/hubs/petcam/hero-2026-08-1440w.webp",
+        "width": 1440,
+        "height": 1080,
+        "bytes": 117164,
+        "checksum": "sha256:c90bafdeec812e0bf4f73cfd01fe0a2799db9492f8fb4284521ed58567ee664e"
+      }
+    ]
+  },
+  {
+    "source": "/media/hubs/petcam/card-hallway.webp",
+    "sourceWidth": 1448,
+    "sourceHeight": 1086,
+    "derivatives": [
+      {
+        "id": "media-hubs-petcam-card-hallway-webp-360",
+        "src": "/media/hubs/petcam/card-hallway-360w.webp",
+        "width": 360,
+        "height": 270,
+        "bytes": 6882,
+        "checksum": "sha256:93d1f57ff541715607365e9bb1ad1f32e07332546918b3066ea8b6d29aa3017e"
+      },
+      {
+        "id": "media-hubs-petcam-card-hallway-webp-640",
+        "src": "/media/hubs/petcam/card-hallway-640w.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 16532,
+        "checksum": "sha256:2a2f1c1d51d964dfdb0841f128691fbf6244c8f6d3e1f9c85e668d6aaf53c33e"
+      },
+      {
+        "id": "media-hubs-petcam-card-hallway-webp-960",
+        "src": "/media/hubs/petcam/card-hallway-960w.webp",
+        "width": 960,
+        "height": 720,
+        "bytes": 33434,
+        "checksum": "sha256:bd2eaf0746cbcf6f7fb2c16d214ac72da7d6db2e793adf6c1a6689e9ca6aac9f"
+      },
+      {
+        "id": "media-hubs-petcam-card-hallway-webp-1440",
+        "src": "/media/hubs/petcam/card-hallway-1440w.webp",
+        "width": 1440,
+        "height": 1080,
+        "bytes": 54492,
+        "checksum": "sha256:cb1154ff3652bb13f1acea61eee2d067ec2f75b4582939008e45f3a317df40dd"
+      }
+    ]
+  },
+  {
+    "source": "/media/hubs/petcam/card-staircase.webp",
+    "sourceWidth": 1448,
+    "sourceHeight": 1086,
+    "derivatives": [
+      {
+        "id": "media-hubs-petcam-card-staircase-webp-360",
+        "src": "/media/hubs/petcam/card-staircase-360w.webp",
+        "width": 360,
+        "height": 270,
+        "bytes": 5842,
+        "checksum": "sha256:47d5b6052a16b2e9065579cbbcea48a32f7b40e886b9000b62d9a24cdfd9cbff"
+      },
+      {
+        "id": "media-hubs-petcam-card-staircase-webp-640",
+        "src": "/media/hubs/petcam/card-staircase-640w.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 15228,
+        "checksum": "sha256:d3aa09ab87d3062884bb6545a71e8ea38c0e720e29df7ab565564b0491b2c549"
+      },
+      {
+        "id": "media-hubs-petcam-card-staircase-webp-960",
+        "src": "/media/hubs/petcam/card-staircase-960w.webp",
+        "width": 960,
+        "height": 720,
+        "bytes": 34688,
+        "checksum": "sha256:6ce2bb348a8b5ca6ba6785362c04cbf22ede9ed5cea4746a9ae743de5bb6dcb0"
+      },
+      {
+        "id": "media-hubs-petcam-card-staircase-webp-1440",
+        "src": "/media/hubs/petcam/card-staircase-1440w.webp",
+        "width": 1440,
+        "height": 1080,
+        "bytes": 60116,
+        "checksum": "sha256:d336003e3e9fc219706eba45997473ec1ccdbcd9ff8e73b3e8aeb220c2522636"
+      }
+    ]
+  },
+  {
+    "source": "/media/hubs/petcam/card-deep-pile-rug.webp",
+    "sourceWidth": 1448,
+    "sourceHeight": 1086,
+    "derivatives": [
+      {
+        "id": "media-hubs-petcam-card-deep-pile-rug-webp-360",
+        "src": "/media/hubs/petcam/card-deep-pile-rug-360w.webp",
+        "width": 360,
+        "height": 270,
+        "bytes": 11796,
+        "checksum": "sha256:cd1575a42d23714672a801ae90786c1ecad3b7be12b3029277b277dbfb4f6859"
+      },
+      {
+        "id": "media-hubs-petcam-card-deep-pile-rug-webp-640",
+        "src": "/media/hubs/petcam/card-deep-pile-rug-640w.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 31682,
+        "checksum": "sha256:a4405265190203a1600c96531445b08e5733af88b7a63fd17685103045e0f152"
+      },
+      {
+        "id": "media-hubs-petcam-card-deep-pile-rug-webp-960",
+        "src": "/media/hubs/petcam/card-deep-pile-rug-960w.webp",
+        "width": 960,
+        "height": 720,
+        "bytes": 65944,
+        "checksum": "sha256:e8ae2b3225a65cc8a6094027d3ac3eb5bac6f80ca082f2b63bd9f4c04428ac3d"
+      },
+      {
+        "id": "media-hubs-petcam-card-deep-pile-rug-webp-1440",
+        "src": "/media/hubs/petcam/card-deep-pile-rug-1440w.webp",
+        "width": 1440,
+        "height": 1080,
+        "bytes": 109020,
+        "checksum": "sha256:3e478954a228caab9577a6fc773bdcf2fe0d08d19078ff898f5975a30ded28dd"
+      }
+    ]
+  },
+  {
+    "source": "/media/hubs/petcam/row-dog-by-door.webp",
+    "sourceWidth": 1448,
+    "sourceHeight": 1086,
+    "derivatives": [
+      {
+        "id": "media-hubs-petcam-row-dog-by-door-webp-360",
+        "src": "/media/hubs/petcam/row-dog-by-door-360w.webp",
+        "width": 360,
+        "height": 270,
+        "bytes": 7882,
+        "checksum": "sha256:160e96d495f8947629df05e42ca463de53b111f12f1db6f800bc2bddee726e68"
+      },
+      {
+        "id": "media-hubs-petcam-row-dog-by-door-webp-640",
+        "src": "/media/hubs/petcam/row-dog-by-door-640w.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 19966,
+        "checksum": "sha256:3670db6ad84bfb14adf11738c95a0694ed5b7065ddeb953cad7c2f9a9637d740"
+      },
+      {
+        "id": "media-hubs-petcam-row-dog-by-door-webp-960",
+        "src": "/media/hubs/petcam/row-dog-by-door-960w.webp",
+        "width": 960,
+        "height": 720,
+        "bytes": 42512,
+        "checksum": "sha256:6198b4dd6c279dd9bf006b2f8d423b6ec98da93ebf14eb29980106c177ad91c0"
+      },
+      {
+        "id": "media-hubs-petcam-row-dog-by-door-webp-1440",
+        "src": "/media/hubs/petcam/row-dog-by-door-1440w.webp",
+        "width": 1440,
+        "height": 1080,
+        "bytes": 68736,
+        "checksum": "sha256:30660a6b7d31ecef89bb153d49ec96b7a6ed5a650f839363a474d11c9ce5e708"
+      }
+    ]
+  },
+  {
+    "source": "/media/hubs/petcam/row-cat-watching.webp",
+    "sourceWidth": 1448,
+    "sourceHeight": 1086,
+    "derivatives": [
+      {
+        "id": "media-hubs-petcam-row-cat-watching-webp-360",
+        "src": "/media/hubs/petcam/row-cat-watching-360w.webp",
+        "width": 360,
+        "height": 270,
+        "bytes": 5876,
+        "checksum": "sha256:d3a7f3aebd190924c14866327b859185d97215db63813a799aedf1004e75bbae"
+      },
+      {
+        "id": "media-hubs-petcam-row-cat-watching-webp-640",
+        "src": "/media/hubs/petcam/row-cat-watching-640w.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 14468,
+        "checksum": "sha256:ed8f46cf1a55f2a64dc9934177d15d1acdf81714d6a1448e58fee35d49bbeb90"
+      },
+      {
+        "id": "media-hubs-petcam-row-cat-watching-webp-960",
+        "src": "/media/hubs/petcam/row-cat-watching-960w.webp",
+        "width": 960,
+        "height": 720,
+        "bytes": 29798,
+        "checksum": "sha256:ec79ed20264b5b9efb78660c2c2f3e31d823ebbf939025ddc5ea10300e1469cc"
+      },
+      {
+        "id": "media-hubs-petcam-row-cat-watching-webp-1440",
+        "src": "/media/hubs/petcam/row-cat-watching-1440w.webp",
+        "width": 1440,
+        "height": 1080,
+        "bytes": 50432,
+        "checksum": "sha256:6fd5d6980b337a8febb5ac6c1a4db037fc01d0511c1a775fc0b72893473c8ff4"
+      }
+    ]
+  },
+  {
+    "source": "/media/hubs/petcam/row-empty-room.webp",
+    "sourceWidth": 768,
+    "sourceHeight": 432,
+    "derivatives": [
+      {
+        "id": "media-hubs-petcam-row-empty-room-webp-360",
+        "src": "/media/hubs/petcam/row-empty-room-360w.webp",
+        "width": 360,
+        "height": 203,
+        "bytes": 6602,
+        "checksum": "sha256:b3b1b6fd2b15c6015df261c3bd51d8397e2087067cd1642f7d57a354e9f22000"
+      },
+      {
+        "id": "media-hubs-petcam-row-empty-room-webp-640",
+        "src": "/media/hubs/petcam/row-empty-room-640w.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 15786,
+        "checksum": "sha256:b1fb19e716250c2c6939dbe8d90ed352459aee8153762091f693a9aedddfbbf2"
+      }
+    ]
+  },
+  {
+    "source": "/media/hubs/petcam/row-older-dog.webp",
+    "sourceWidth": 612,
+    "sourceHeight": 407,
+    "derivatives": [
+      {
+        "id": "media-hubs-petcam-row-older-dog-webp-360",
+        "src": "/media/hubs/petcam/row-older-dog-360w.webp",
+        "width": 360,
+        "height": 239,
+        "bytes": 6220,
+        "checksum": "sha256:4d7b7e5e15e51d46f1c1c447c5483adb1f3f1076e514963f78a9888971d42748"
+      }
+    ]
+  },
+  {
+    "source": "/media/companion/moflin/hero.webp",
+    "sourceWidth": 1448,
+    "sourceHeight": 1086,
+    "derivatives": [
+      {
+        "id": "media-companion-moflin-hero-webp-360",
+        "src": "/media/companion/moflin/hero-360w.webp",
+        "width": 360,
+        "height": 270,
+        "bytes": 10144,
+        "checksum": "sha256:80aa8f55bfb085cf7f3804afc1202b77d62cc2d7d88614b080134cc7cf322273"
+      },
+      {
+        "id": "media-companion-moflin-hero-webp-640",
+        "src": "/media/companion/moflin/hero-640w.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 25782,
+        "checksum": "sha256:52946f86027f72158f635b4b1bc4b616aa9624d013b64e8716d6627d880f139a"
+      },
+      {
+        "id": "media-companion-moflin-hero-webp-960",
+        "src": "/media/companion/moflin/hero-960w.webp",
+        "width": 960,
+        "height": 720,
+        "bytes": 52310,
+        "checksum": "sha256:103569690ec1a60cd21d01a4ab85a735bbf39614cddbeb1cce4d2812742d91d7"
+      },
+      {
+        "id": "media-companion-moflin-hero-webp-1440",
+        "src": "/media/companion/moflin/hero-1440w.webp",
+        "width": 1440,
+        "height": 1080,
+        "bytes": 83368,
+        "checksum": "sha256:d4e7d5bc28ee2813039a767a7c5b64373e419353f2e310d48990556237ddda7c"
+      }
+    ]
+  },
+  {
+    "source": "/media/companion/moflin/figure-1.webp",
+    "sourceWidth": 1448,
+    "sourceHeight": 1086,
+    "derivatives": [
+      {
+        "id": "media-companion-moflin-figure-1-webp-360",
+        "src": "/media/companion/moflin/figure-1-360w.webp",
+        "width": 360,
+        "height": 270,
+        "bytes": 10138,
+        "checksum": "sha256:6b19fee01ed4d8729b74c389e6bd024550c008b0b16d5dd7c1f3d0dd42ad156b"
+      },
+      {
+        "id": "media-companion-moflin-figure-1-webp-640",
+        "src": "/media/companion/moflin/figure-1-640w.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 25736,
+        "checksum": "sha256:1c372b186c873419e22078eceb1e5345e3739b841bd885d980033c042280c5c0"
+      },
+      {
+        "id": "media-companion-moflin-figure-1-webp-960",
+        "src": "/media/companion/moflin/figure-1-960w.webp",
+        "width": 960,
+        "height": 720,
+        "bytes": 50694,
+        "checksum": "sha256:f948b48706a4db4c1b443efcbde469bb076574e272e2449b0286a3187e84f621"
+      },
+      {
+        "id": "media-companion-moflin-figure-1-webp-1440",
+        "src": "/media/companion/moflin/figure-1-1440w.webp",
+        "width": 1440,
+        "height": 1080,
+        "bytes": 82166,
+        "checksum": "sha256:188817b468b35a661a020b43c298189f3635d6b07e14a6105165775b734f64a3"
+      }
+    ]
+  },
+  {
+    "source": "/media/companion/moflin/figure-2.webp",
+    "sourceWidth": 1448,
+    "sourceHeight": 1086,
+    "derivatives": [
+      {
+        "id": "media-companion-moflin-figure-2-webp-360",
+        "src": "/media/companion/moflin/figure-2-360w.webp",
+        "width": 360,
+        "height": 270,
+        "bytes": 11226,
+        "checksum": "sha256:cdc449425854b3d36dc141f42567dab4afb09acbce0b618a4a2e91b20f980a41"
+      },
+      {
+        "id": "media-companion-moflin-figure-2-webp-640",
+        "src": "/media/companion/moflin/figure-2-640w.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 30014,
+        "checksum": "sha256:fa16feb8695820ad9e9cfc6d23af88895c92a464aa5d99ebf7dc8c76cd38cbae"
+      },
+      {
+        "id": "media-companion-moflin-figure-2-webp-960",
+        "src": "/media/companion/moflin/figure-2-960w.webp",
+        "width": 960,
+        "height": 720,
+        "bytes": 61734,
+        "checksum": "sha256:21ba4c4fbd960419e540e636cbfcb653054317d693e14bb7e6eaa89ef513fcd4"
+      },
+      {
+        "id": "media-companion-moflin-figure-2-webp-1440",
+        "src": "/media/companion/moflin/figure-2-1440w.webp",
+        "width": 1440,
+        "height": 1080,
+        "bytes": 100456,
+        "checksum": "sha256:b5af08963987dba2601df2334654f3591367ab9824d5b1b8fce6091e22e758ae"
+      }
+    ]
+  },
+  {
+    "source": "/media/companion/moflin/card.webp",
+    "sourceWidth": 1448,
+    "sourceHeight": 1086,
+    "derivatives": [
+      {
+        "id": "media-companion-moflin-card-webp-360",
+        "src": "/media/companion/moflin/card-360w.webp",
+        "width": 360,
+        "height": 270,
+        "bytes": 7070,
+        "checksum": "sha256:d8e212a05288bd7b39e39e23d219cd3f01b499dbbacfcb4ebd9e5be7ad74da4f"
+      },
+      {
+        "id": "media-companion-moflin-card-webp-640",
+        "src": "/media/companion/moflin/card-640w.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 18454,
+        "checksum": "sha256:c8b632b5dd8fdcac0a9007fc0a2a677c1b8d5896392b8552b0a65118beb69f15"
+      },
+      {
+        "id": "media-companion-moflin-card-webp-960",
+        "src": "/media/companion/moflin/card-960w.webp",
+        "width": 960,
+        "height": 720,
+        "bytes": 38668,
+        "checksum": "sha256:969d68982baf6f0e85f12312e5310dcccd37252ce8ea1bba8bdf47e4ddc1bfe5"
+      },
+      {
+        "id": "media-companion-moflin-card-webp-1440",
+        "src": "/media/companion/moflin/card-1440w.webp",
+        "width": 1440,
+        "height": 1080,
+        "bytes": 66456,
+        "checksum": "sha256:67da8bfe139ce335f411ebb268f2bd12aaa81d1c57e7b219424e9d8ce085e5af"
+      }
+    ]
+  },
+  {
+    "source": "/media/companion/miko-3/hero.webp",
+    "sourceWidth": 1448,
+    "sourceHeight": 1086,
+    "derivatives": [
+      {
+        "id": "media-companion-miko-3-hero-webp-360",
+        "src": "/media/companion/miko-3/hero-360w.webp",
+        "width": 360,
+        "height": 270,
+        "bytes": 10850,
+        "checksum": "sha256:56de92ce526ed31c81b760f8c240f458c9cbffa1b8fd364fd2126b1747538b26"
+      },
+      {
+        "id": "media-companion-miko-3-hero-webp-640",
+        "src": "/media/companion/miko-3/hero-640w.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 27862,
+        "checksum": "sha256:a22c3e85f65003acd8d29dfbd81acf9c8089f568d2e4ecacf6d5c6859c0db617"
+      },
+      {
+        "id": "media-companion-miko-3-hero-webp-960",
+        "src": "/media/companion/miko-3/hero-960w.webp",
+        "width": 960,
+        "height": 720,
+        "bytes": 55768,
+        "checksum": "sha256:cf3e36e6b334ba751fa3cba5dd434f78b6c67fed7cfab2e6767d089e25a3a1a8"
+      },
+      {
+        "id": "media-companion-miko-3-hero-webp-1440",
+        "src": "/media/companion/miko-3/hero-1440w.webp",
+        "width": 1440,
+        "height": 1080,
+        "bytes": 89140,
+        "checksum": "sha256:1501526d1c5e4887a3779230a949149af16c9a432f0261efc0870cd8bd7bcbe8"
+      }
+    ]
+  },
+  {
+    "source": "/media/companion/miko-3/figure-1.webp",
+    "sourceWidth": 1448,
+    "sourceHeight": 1086,
+    "derivatives": [
+      {
+        "id": "media-companion-miko-3-figure-1-webp-360",
+        "src": "/media/companion/miko-3/figure-1-360w.webp",
+        "width": 360,
+        "height": 270,
+        "bytes": 8572,
+        "checksum": "sha256:0428cb416ada22856f7a0f8c165ea22906ce0f8a6d3bfc899f62e90b6908bf62"
+      },
+      {
+        "id": "media-companion-miko-3-figure-1-webp-640",
+        "src": "/media/companion/miko-3/figure-1-640w.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 20434,
+        "checksum": "sha256:fd3f2d3855e6eee65e6026609ce19863d60137e297f76a1016f1361a412609f5"
+      },
+      {
+        "id": "media-companion-miko-3-figure-1-webp-960",
+        "src": "/media/companion/miko-3/figure-1-960w.webp",
+        "width": 960,
+        "height": 720,
+        "bytes": 40156,
+        "checksum": "sha256:997b8b861034c01239d07ce5a4815c763fa17e08b9dd217055d4c403530e0ac6"
+      },
+      {
+        "id": "media-companion-miko-3-figure-1-webp-1440",
+        "src": "/media/companion/miko-3/figure-1-1440w.webp",
+        "width": 1440,
+        "height": 1080,
+        "bytes": 63832,
+        "checksum": "sha256:46687336a99891ddf414e833d971e3e09230d688dce1e858ab5cbd5448b9eeed"
+      }
+    ]
+  },
+  {
+    "source": "/media/companion/miko-3/figure-2.webp",
+    "sourceWidth": 1448,
+    "sourceHeight": 1086,
+    "derivatives": [
+      {
+        "id": "media-companion-miko-3-figure-2-webp-360",
+        "src": "/media/companion/miko-3/figure-2-360w.webp",
+        "width": 360,
+        "height": 270,
+        "bytes": 11130,
+        "checksum": "sha256:d8b77404032926c5777b5bca90f26776da893eb2fc17cad48d309dea3a88bcaf"
+      },
+      {
+        "id": "media-companion-miko-3-figure-2-webp-640",
+        "src": "/media/companion/miko-3/figure-2-640w.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 29068,
+        "checksum": "sha256:5b20c3a2dc92f694afcf5cd8363252ffcd54a3f9325cead096a9c1b27e55d9cf"
+      },
+      {
+        "id": "media-companion-miko-3-figure-2-webp-960",
+        "src": "/media/companion/miko-3/figure-2-960w.webp",
+        "width": 960,
+        "height": 720,
+        "bytes": 60398,
+        "checksum": "sha256:a2639ec3c1c9b6d0ee1f055c3c108b3fdc4e18d54c16f556bae60e30a6b32ab6"
+      },
+      {
+        "id": "media-companion-miko-3-figure-2-webp-1440",
+        "src": "/media/companion/miko-3/figure-2-1440w.webp",
+        "width": 1440,
+        "height": 1080,
+        "bytes": 95408,
+        "checksum": "sha256:7c72985aeea27945dd6926f3635dd95a0f04c07dfd2a1505684b38e646236d9b"
+      }
+    ]
+  },
+  {
+    "source": "/media/companion/miko-3/card.webp",
+    "sourceWidth": 1448,
+    "sourceHeight": 1086,
+    "derivatives": [
+      {
+        "id": "media-companion-miko-3-card-webp-360",
+        "src": "/media/companion/miko-3/card-360w.webp",
+        "width": 360,
+        "height": 270,
+        "bytes": 14564,
+        "checksum": "sha256:47458cf9eed61853be744d43ae562106996e44be6ba434d76b3b8a10f12be55b"
+      },
+      {
+        "id": "media-companion-miko-3-card-webp-640",
+        "src": "/media/companion/miko-3/card-640w.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 35502,
+        "checksum": "sha256:cc3ea19945b375ef512899c1f4870699b21166221630c6d282ee20620a84b060"
+      },
+      {
+        "id": "media-companion-miko-3-card-webp-960",
+        "src": "/media/companion/miko-3/card-960w.webp",
+        "width": 960,
+        "height": 720,
+        "bytes": 67242,
+        "checksum": "sha256:0ac7d09b5f5735c8d71878c70dbd94f7fe036aa2606b0285c8de034bb70689b5"
+      },
+      {
+        "id": "media-companion-miko-3-card-webp-1440",
+        "src": "/media/companion/miko-3/card-1440w.webp",
+        "width": 1440,
+        "height": 1080,
+        "bytes": 105480,
+        "checksum": "sha256:35ae9dd7b239d5756fd44ebac854cf6703a2138974ce0a5227e44cc3f672f5e6"
+      }
+    ]
+  },
+  {
+    "source": "/media/companion/vector-2/hero.webp",
+    "sourceWidth": 1448,
+    "sourceHeight": 1086,
+    "derivatives": [
+      {
+        "id": "media-companion-vector-2-hero-webp-360",
+        "src": "/media/companion/vector-2/hero-360w.webp",
+        "width": 360,
+        "height": 270,
+        "bytes": 8470,
+        "checksum": "sha256:08e0a00ac5da906f8cfbf91833ba748a5700adf3c8575b758df2e14e19abdc3a"
+      },
+      {
+        "id": "media-companion-vector-2-hero-webp-640",
+        "src": "/media/companion/vector-2/hero-640w.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 20678,
+        "checksum": "sha256:b4b478b303a51c40f61e3e05233b1e0de45ece608ee33a27d37a6bc29444bd26"
+      },
+      {
+        "id": "media-companion-vector-2-hero-webp-960",
+        "src": "/media/companion/vector-2/hero-960w.webp",
+        "width": 960,
+        "height": 720,
+        "bytes": 41294,
+        "checksum": "sha256:825ddfb106e928c478860185e9dc7e11523a0319790c2fc339432700da743782"
+      },
+      {
+        "id": "media-companion-vector-2-hero-webp-1440",
+        "src": "/media/companion/vector-2/hero-1440w.webp",
+        "width": 1440,
+        "height": 1080,
+        "bytes": 65834,
+        "checksum": "sha256:90ccd7bdf0090bb8a489668816ece3dc770d5209654c7568a92ab96dd3e99f78"
+      }
+    ]
+  },
+  {
+    "source": "/media/companion/vector-2/figure-1.webp",
+    "sourceWidth": 1448,
+    "sourceHeight": 1086,
+    "derivatives": [
+      {
+        "id": "media-companion-vector-2-figure-1-webp-360",
+        "src": "/media/companion/vector-2/figure-1-360w.webp",
+        "width": 360,
+        "height": 270,
+        "bytes": 6822,
+        "checksum": "sha256:e1fdb8100dc88a404ab2d9ce118d28246a00016342d245cb0acf204ec6d0f32f"
+      },
+      {
+        "id": "media-companion-vector-2-figure-1-webp-640",
+        "src": "/media/companion/vector-2/figure-1-640w.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 16582,
+        "checksum": "sha256:5cbbb73211d2bdedf129901b6e6a07c5b0235649bdc684c6d1089b3257c08bdb"
+      },
+      {
+        "id": "media-companion-vector-2-figure-1-webp-960",
+        "src": "/media/companion/vector-2/figure-1-960w.webp",
+        "width": 960,
+        "height": 720,
+        "bytes": 32914,
+        "checksum": "sha256:f9342cee061ab919be92c6efc3baea09d0cbdacf8d62046939e6e4ef57acbf9b"
+      },
+      {
+        "id": "media-companion-vector-2-figure-1-webp-1440",
+        "src": "/media/companion/vector-2/figure-1-1440w.webp",
+        "width": 1440,
+        "height": 1080,
+        "bytes": 54408,
+        "checksum": "sha256:5961bab2bd41baa64745f24fd8e3643fb6ded0f04d0eec927f0c55e875759be1"
+      }
+    ]
+  },
+  {
+    "source": "/media/companion/vector-2/figure-2.webp",
+    "sourceWidth": 1448,
+    "sourceHeight": 1086,
+    "derivatives": [
+      {
+        "id": "media-companion-vector-2-figure-2-webp-360",
+        "src": "/media/companion/vector-2/figure-2-360w.webp",
+        "width": 360,
+        "height": 270,
+        "bytes": 5162,
+        "checksum": "sha256:9141b04a52e62a2a3e6217acef96dac757dea89a303308e799a5302f29344f44"
+      },
+      {
+        "id": "media-companion-vector-2-figure-2-webp-640",
+        "src": "/media/companion/vector-2/figure-2-640w.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 12974,
+        "checksum": "sha256:55213b1b5dc274149a5659660bfcb8280a467ab7a1725991c0c43451f6f5f67f"
+      },
+      {
+        "id": "media-companion-vector-2-figure-2-webp-960",
+        "src": "/media/companion/vector-2/figure-2-960w.webp",
+        "width": 960,
+        "height": 720,
+        "bytes": 27688,
+        "checksum": "sha256:d7478dbc001b847368d1b0edca44007e6a29ec7087d92190f8b32d8a5f6cd336"
+      },
+      {
+        "id": "media-companion-vector-2-figure-2-webp-1440",
+        "src": "/media/companion/vector-2/figure-2-1440w.webp",
+        "width": 1440,
+        "height": 1080,
+        "bytes": 46400,
+        "checksum": "sha256:35ea48c915f36f1c6176dff1a9be09ff23a0f9a3d97cf8a6c3419dd75aa56bc6"
+      }
+    ]
+  },
+  {
+    "source": "/media/companion/vector-2/card.webp",
+    "sourceWidth": 1448,
+    "sourceHeight": 1086,
+    "derivatives": [
+      {
+        "id": "media-companion-vector-2-card-webp-360",
+        "src": "/media/companion/vector-2/card-360w.webp",
+        "width": 360,
+        "height": 270,
+        "bytes": 9734,
+        "checksum": "sha256:9e3d6b464ecd4327f6a8d96d746ff537444cffe75d62313b6b24d66b40f7199f"
+      },
+      {
+        "id": "media-companion-vector-2-card-webp-640",
+        "src": "/media/companion/vector-2/card-640w.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 24508,
+        "checksum": "sha256:d396a79b962d97d63138610de6e3367674a0e861d8ff27b349f3f3161a94bf06"
+      },
+      {
+        "id": "media-companion-vector-2-card-webp-960",
+        "src": "/media/companion/vector-2/card-960w.webp",
+        "width": 960,
+        "height": 720,
+        "bytes": 52200,
+        "checksum": "sha256:afa819f252aa101531d030c98489aa209fe1d1dc1483c35e2271e4d7a5d37a11"
+      },
+      {
+        "id": "media-companion-vector-2-card-webp-1440",
+        "src": "/media/companion/vector-2/card-1440w.webp",
+        "width": 1440,
+        "height": 1080,
+        "bytes": 88234,
+        "checksum": "sha256:db62e0523e0fc084946e01cca2c741150524fed2a11db155f9dd37ec84e0e5b5"
+      }
+    ]
+  },
+  {
+    "source": "/media/companion/eilik/hero.webp",
+    "sourceWidth": 1448,
+    "sourceHeight": 1086,
+    "derivatives": [
+      {
+        "id": "media-companion-eilik-hero-webp-360",
+        "src": "/media/companion/eilik/hero-360w.webp",
+        "width": 360,
+        "height": 270,
+        "bytes": 9132,
+        "checksum": "sha256:4e61a40086f0e6edee593e8212c36dc1eaa960dab51eba3a0be226ac036d02a0"
+      },
+      {
+        "id": "media-companion-eilik-hero-webp-640",
+        "src": "/media/companion/eilik/hero-640w.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 20140,
+        "checksum": "sha256:2ca34e08d56ef71109125e50d9df112d558dd8eceb5bed3faf4ee99468fdd29d"
+      },
+      {
+        "id": "media-companion-eilik-hero-webp-960",
+        "src": "/media/companion/eilik/hero-960w.webp",
+        "width": 960,
+        "height": 720,
+        "bytes": 36956,
+        "checksum": "sha256:2e127a8d5ef31601bab3cfb1c22985c79213801972009adb4402c12685266ad0"
+      },
+      {
+        "id": "media-companion-eilik-hero-webp-1440",
+        "src": "/media/companion/eilik/hero-1440w.webp",
+        "width": 1440,
+        "height": 1080,
+        "bytes": 58698,
+        "checksum": "sha256:1a34122d6006c135d7c130f953c740fdea7178336c24a29c9dfc9db6536b6bb7"
+      }
+    ]
+  },
+  {
+    "source": "/media/companion/eilik/figure-1.webp",
+    "sourceWidth": 1448,
+    "sourceHeight": 1086,
+    "derivatives": [
+      {
+        "id": "media-companion-eilik-figure-1-webp-360",
+        "src": "/media/companion/eilik/figure-1-360w.webp",
+        "width": 360,
+        "height": 270,
+        "bytes": 5646,
+        "checksum": "sha256:cb95255724cb8193674442c4088faaf118de8853ff1df4594aeed269fce955b8"
+      },
+      {
+        "id": "media-companion-eilik-figure-1-webp-640",
+        "src": "/media/companion/eilik/figure-1-640w.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 12804,
+        "checksum": "sha256:a3056e45f2c00b784df8f7c0fd4f4b058dae6294578d63fcd150788636b7d19a"
+      },
+      {
+        "id": "media-companion-eilik-figure-1-webp-960",
+        "src": "/media/companion/eilik/figure-1-960w.webp",
+        "width": 960,
+        "height": 720,
+        "bytes": 24800,
+        "checksum": "sha256:06bc6f9a177b9260603dd4208ef6c81af5b77b383551e783ae05302e31e9db0e"
+      },
+      {
+        "id": "media-companion-eilik-figure-1-webp-1440",
+        "src": "/media/companion/eilik/figure-1-1440w.webp",
+        "width": 1440,
+        "height": 1080,
+        "bytes": 39124,
+        "checksum": "sha256:520fe93ee9b324cea379dbedb4fbce23bf17713ecf4ceca82ab6a5fee6ee7633"
+      }
+    ]
+  },
+  {
+    "source": "/media/companion/eilik/figure-2.webp",
+    "sourceWidth": 1448,
+    "sourceHeight": 1086,
+    "derivatives": [
+      {
+        "id": "media-companion-eilik-figure-2-webp-360",
+        "src": "/media/companion/eilik/figure-2-360w.webp",
+        "width": 360,
+        "height": 270,
+        "bytes": 10592,
+        "checksum": "sha256:f0b847fd6ee9fc85494e0a92c2b331665c745f81ebcac9762233837b7bdf232f"
+      },
+      {
+        "id": "media-companion-eilik-figure-2-webp-640",
+        "src": "/media/companion/eilik/figure-2-640w.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 24526,
+        "checksum": "sha256:1260591a266dde8a48564936b22b7f4efa1feff5067e23002be273943f77d46b"
+      },
+      {
+        "id": "media-companion-eilik-figure-2-webp-960",
+        "src": "/media/companion/eilik/figure-2-960w.webp",
+        "width": 960,
+        "height": 720,
+        "bytes": 46696,
+        "checksum": "sha256:5675fd0bc083a9aa0667a1d493c0d3da2d9518980bba8bf40c449e852b9bf94e"
+      },
+      {
+        "id": "media-companion-eilik-figure-2-webp-1440",
+        "src": "/media/companion/eilik/figure-2-1440w.webp",
+        "width": 1440,
+        "height": 1080,
+        "bytes": 73218,
+        "checksum": "sha256:2773a2c4ba402c3397aad1fc57e8ea9a039f1bc7bd825968d03108d5da8e0ca5"
+      }
+    ]
+  },
+  {
+    "source": "/media/companion/eilik/card.webp",
+    "sourceWidth": 1086,
+    "sourceHeight": 1448,
+    "derivatives": [
+      {
+        "id": "media-companion-eilik-card-webp-360",
+        "src": "/media/companion/eilik/card-360w.webp",
+        "width": 360,
+        "height": 480,
+        "bytes": 15592,
+        "checksum": "sha256:454e588466bd926972bac6773e8685001770949fc4ecc4d53ac68495f3233eb7"
+      },
+      {
+        "id": "media-companion-eilik-card-webp-640",
+        "src": "/media/companion/eilik/card-640w.webp",
+        "width": 640,
+        "height": 853,
+        "bytes": 33878,
+        "checksum": "sha256:a9039443ae5f3d3a5328b5d51f2d27b6eb9600326bb2e4a30b3c11b4f1153ca9"
+      },
+      {
+        "id": "media-companion-eilik-card-webp-960",
+        "src": "/media/companion/eilik/card-960w.webp",
+        "width": 960,
+        "height": 1280,
+        "bytes": 61936,
+        "checksum": "sha256:6a012e20a13c9b328eca2c3abd61f5eb2d5bbab6c6995c5ae483bd19937aa2e8"
+      }
+    ]
+  },
+  {
+    "source": "/media/companion/eilik/range.webp",
+    "sourceWidth": 1448,
+    "sourceHeight": 1086,
+    "derivatives": [
+      {
+        "id": "media-companion-eilik-range-webp-360",
+        "src": "/media/companion/eilik/range-360w.webp",
+        "width": 360,
+        "height": 270,
+        "bytes": 15482,
+        "checksum": "sha256:e44da60f3f078b309a08039ccff771a469f12de87483e0f4b10a3324e5ef8d16"
+      },
+      {
+        "id": "media-companion-eilik-range-webp-640",
+        "src": "/media/companion/eilik/range-640w.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 38478,
+        "checksum": "sha256:ee7a1cb2158ec267d4b4c5b68c9b4f465709cd5e52a759fc8bd578bfeab09b09"
+      },
+      {
+        "id": "media-companion-eilik-range-webp-960",
+        "src": "/media/companion/eilik/range-960w.webp",
+        "width": 960,
+        "height": 720,
+        "bytes": 73458,
+        "checksum": "sha256:c12411e30cbb9742c16672b3736605f10f4a355ae9c21f4698d3e6d3d6b74bb7"
+      },
+      {
+        "id": "media-companion-eilik-range-webp-1440",
+        "src": "/media/companion/eilik/range-1440w.webp",
+        "width": 1440,
+        "height": 1080,
+        "bytes": 118234,
+        "checksum": "sha256:d7b52585ad6412f5f987d4e5e861b09932a066456a19783eefeddee824d09601"
+      }
+    ]
+  },
+  {
+    "source": "/media/companion/loona/hero.webp",
+    "sourceWidth": 1448,
+    "sourceHeight": 1086,
+    "derivatives": [
+      {
+        "id": "media-companion-loona-hero-webp-360",
+        "src": "/media/companion/loona/hero-360w.webp",
+        "width": 360,
+        "height": 270,
+        "bytes": 10020,
+        "checksum": "sha256:1a12f0598521dd551b9459c80811ace160d9695d030ebb37fc2bb3b20faec6f8"
+      },
+      {
+        "id": "media-companion-loona-hero-webp-640",
+        "src": "/media/companion/loona/hero-640w.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 23128,
+        "checksum": "sha256:784564768136cdf10284d2bbae72a8e0b75ea8a88970c1f04d3f9b962f2b62e0"
+      },
+      {
+        "id": "media-companion-loona-hero-webp-960",
+        "src": "/media/companion/loona/hero-960w.webp",
+        "width": 960,
+        "height": 720,
+        "bytes": 45748,
+        "checksum": "sha256:92a2cec05af7ed2bbb688aa1d6113217c35d0c18a9623477d16c9fb29f95aa49"
+      },
+      {
+        "id": "media-companion-loona-hero-webp-1440",
+        "src": "/media/companion/loona/hero-1440w.webp",
+        "width": 1440,
+        "height": 1080,
+        "bytes": 71420,
+        "checksum": "sha256:6f359f3dea9cf30821f4ba6c42dc47b82a503ff6999eed978b052f08214d14d3"
+      }
+    ]
+  },
+  {
+    "source": "/media/companion/loona/figure-1.webp",
+    "sourceWidth": 1448,
+    "sourceHeight": 1086,
+    "derivatives": [
+      {
+        "id": "media-companion-loona-figure-1-webp-360",
+        "src": "/media/companion/loona/figure-1-360w.webp",
+        "width": 360,
+        "height": 270,
+        "bytes": 6172,
+        "checksum": "sha256:8ca79582b71566162e24149467a52b04d8394605e53d94e4ffb8c52380bf8360"
+      },
+      {
+        "id": "media-companion-loona-figure-1-webp-640",
+        "src": "/media/companion/loona/figure-1-640w.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 13438,
+        "checksum": "sha256:53417ae0616d1848a63aca21556e72f47c55f56bd81e1c8539220f14ced5a448"
+      },
+      {
+        "id": "media-companion-loona-figure-1-webp-960",
+        "src": "/media/companion/loona/figure-1-960w.webp",
+        "width": 960,
+        "height": 720,
+        "bytes": 24670,
+        "checksum": "sha256:a8040fa33ce5eea847a6f57006233b629444570cff8eaf4ce928478362213210"
+      },
+      {
+        "id": "media-companion-loona-figure-1-webp-1440",
+        "src": "/media/companion/loona/figure-1-1440w.webp",
+        "width": 1440,
+        "height": 1080,
+        "bytes": 39010,
+        "checksum": "sha256:8ab184016b0eccff001feee7795c0deb62e3240e4003ade39987d4734558a4a7"
+      }
+    ]
+  },
+  {
+    "source": "/media/companion/loona/figure-2.webp",
+    "sourceWidth": 1536,
+    "sourceHeight": 1024,
+    "derivatives": [
+      {
+        "id": "media-companion-loona-figure-2-webp-360",
+        "src": "/media/companion/loona/figure-2-360w.webp",
+        "width": 360,
+        "height": 240,
+        "bytes": 11688,
+        "checksum": "sha256:8d353ce5f8ffba84959ea0917059e4c2685779d792585d570f6a99ae13e1538c"
+      },
+      {
+        "id": "media-companion-loona-figure-2-webp-640",
+        "src": "/media/companion/loona/figure-2-640w.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 28348,
+        "checksum": "sha256:806bfec857f2677683482e561b3eadf6ddd89fc7259a0e543cd2b185e377b39f"
+      },
+      {
+        "id": "media-companion-loona-figure-2-webp-960",
+        "src": "/media/companion/loona/figure-2-960w.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 55512,
+        "checksum": "sha256:111f196c768f9ff4d30972157253d53b81c50404d3cb9e4f74062c24f4216fdc"
+      },
+      {
+        "id": "media-companion-loona-figure-2-webp-1440",
+        "src": "/media/companion/loona/figure-2-1440w.webp",
+        "width": 1440,
+        "height": 960,
+        "bytes": 89220,
+        "checksum": "sha256:8683f02502bd959f8ebc1122831cc99cbd05614622b77f77a6ae207b77be5f6b"
+      }
+    ]
+  },
+  {
+    "source": "/media/companion/loona/card.webp",
+    "sourceWidth": 1448,
+    "sourceHeight": 1086,
+    "derivatives": [
+      {
+        "id": "media-companion-loona-card-webp-360",
+        "src": "/media/companion/loona/card-360w.webp",
+        "width": 360,
+        "height": 270,
+        "bytes": 9362,
+        "checksum": "sha256:b1ea0fa4df1782af065c6d056317740c02f59aa054e44b7f78113b2d1ba7abc0"
+      },
+      {
+        "id": "media-companion-loona-card-webp-640",
+        "src": "/media/companion/loona/card-640w.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 22940,
+        "checksum": "sha256:e951f8e96a3b8d3f9500818114a01a5133582aa4302552046a65a109fbedb91a"
+      },
+      {
+        "id": "media-companion-loona-card-webp-960",
+        "src": "/media/companion/loona/card-960w.webp",
+        "width": 960,
+        "height": 720,
+        "bytes": 46654,
+        "checksum": "sha256:c5bac60bb512cfdafb43f6ceb5ae6712a71d758202058f16d290ab92a91a6d4a"
+      },
+      {
+        "id": "media-companion-loona-card-webp-1440",
+        "src": "/media/companion/loona/card-1440w.webp",
+        "width": 1440,
+        "height": 1080,
+        "bytes": 74280,
+        "checksum": "sha256:0976f4d62eff9484161bd9bf8f2639fdcecc26f0aefb219346b9b48bf26c4ebd"
+      }
+    ]
+  },
+  {
+    "source": "/media/companion/emo/hero.webp",
+    "sourceWidth": 1448,
+    "sourceHeight": 1086,
+    "derivatives": [
+      {
+        "id": "media-companion-emo-hero-webp-360",
+        "src": "/media/companion/emo/hero-360w.webp",
+        "width": 360,
+        "height": 270,
+        "bytes": 10674,
+        "checksum": "sha256:92718c02f71965e8dcf610e321148cbc2ad9d13040b2df3defa1059d6ce1fbcf"
+      },
+      {
+        "id": "media-companion-emo-hero-webp-640",
+        "src": "/media/companion/emo/hero-640w.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 25732,
+        "checksum": "sha256:409e73ce422209e80a5dd39ee3fb4aa179268dc465ce53be972b426fb5ce26c6"
+      },
+      {
+        "id": "media-companion-emo-hero-webp-960",
+        "src": "/media/companion/emo/hero-960w.webp",
+        "width": 960,
+        "height": 720,
+        "bytes": 50186,
+        "checksum": "sha256:e796bf0e618577fd3d316822b6e16cc4260942f8b7952699369e6446a64b52d6"
+      },
+      {
+        "id": "media-companion-emo-hero-webp-1440",
+        "src": "/media/companion/emo/hero-1440w.webp",
+        "width": 1440,
+        "height": 1080,
+        "bytes": 80042,
+        "checksum": "sha256:f0cfd8e323f7196fb7a3028b8a8e4218e4e14c809d687819c5c6e87b20111401"
+      }
+    ]
+  },
+  {
+    "source": "/media/companion/emo/figure-1.webp",
+    "sourceWidth": 1402,
+    "sourceHeight": 1122,
+    "derivatives": [
+      {
+        "id": "media-companion-emo-figure-1-webp-360",
+        "src": "/media/companion/emo/figure-1-360w.webp",
+        "width": 360,
+        "height": 288,
+        "bytes": 10430,
+        "checksum": "sha256:fa0c5d0143dcd3bf38b9194e2b73f711a3cdb078d331b5ed3ed2757bb4510836"
+      },
+      {
+        "id": "media-companion-emo-figure-1-webp-640",
+        "src": "/media/companion/emo/figure-1-640w.webp",
+        "width": 640,
+        "height": 512,
+        "bytes": 25170,
+        "checksum": "sha256:e3598c401479918817bf81d1b73583b487137f145ad92b7ef50df0278c365aaa"
+      },
+      {
+        "id": "media-companion-emo-figure-1-webp-960",
+        "src": "/media/companion/emo/figure-1-960w.webp",
+        "width": 960,
+        "height": 768,
+        "bytes": 50704,
+        "checksum": "sha256:4e35b609e864f0f8fa727cc3c585742e263e6770cc237c7768f4840f36a107c2"
+      }
+    ]
+  },
+  {
+    "source": "/media/companion/emo/figure-2.webp",
+    "sourceWidth": 1536,
+    "sourceHeight": 1024,
+    "derivatives": [
+      {
+        "id": "media-companion-emo-figure-2-webp-360",
+        "src": "/media/companion/emo/figure-2-360w.webp",
+        "width": 360,
+        "height": 240,
+        "bytes": 4232,
+        "checksum": "sha256:edd0c76477d459b0cced961e280a6cab736cb5bf2ad93c7ee8fc2a4e064375b6"
+      },
+      {
+        "id": "media-companion-emo-figure-2-webp-640",
+        "src": "/media/companion/emo/figure-2-640w.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 10260,
+        "checksum": "sha256:1db703d71eb86fd8028b8f4b89e39ecef373b9e6aaa9f2a751223ed87e4b77bf"
+      },
+      {
+        "id": "media-companion-emo-figure-2-webp-960",
+        "src": "/media/companion/emo/figure-2-960w.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 21636,
+        "checksum": "sha256:f47034d62e12439aac6f5a122e0a8db5244b049417c99a5f0513000c7a902415"
+      },
+      {
+        "id": "media-companion-emo-figure-2-webp-1440",
+        "src": "/media/companion/emo/figure-2-1440w.webp",
+        "width": 1440,
+        "height": 960,
+        "bytes": 38834,
+        "checksum": "sha256:3fd1bf3a4e984a19722108c9732c733ae682a1ffdb394655581994192e4d213b"
+      }
+    ]
+  },
+  {
+    "source": "/media/companion/emo/card.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-companion-emo-card-webp-360",
+        "src": "/media/companion/emo/card-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 15424,
+        "checksum": "sha256:b5c4892936b3b85928524cdaef9617daffd08eb83554399cc4133a05f391f8ff"
+      },
+      {
+        "id": "media-companion-emo-card-webp-640",
+        "src": "/media/companion/emo/card-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 35116,
+        "checksum": "sha256:922b725022d62004d81040490c16da4bd2635c8640774e322c84c2d16d7276c4"
+      },
+      {
+        "id": "media-companion-emo-card-webp-960",
+        "src": "/media/companion/emo/card-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 66238,
+        "checksum": "sha256:2ec452121844331689b23c9c1c097d682aadccff7ecf334b1f2fab1bc8d70ec7"
+      }
+    ]
+  },
+  {
+    "source": "/media/companion/emo-vs-eilik/hero.webp",
+    "sourceWidth": 1536,
+    "sourceHeight": 1024,
+    "derivatives": [
+      {
+        "id": "media-companion-emo-vs-eilik-hero-webp-360",
+        "src": "/media/companion/emo-vs-eilik/hero-360w.webp",
+        "width": 360,
+        "height": 240,
+        "bytes": 10512,
+        "checksum": "sha256:e4359433622d144d9f210ed6f6e900f5268159aec6d7412750e8c2389eb1e15c"
+      },
+      {
+        "id": "media-companion-emo-vs-eilik-hero-webp-640",
+        "src": "/media/companion/emo-vs-eilik/hero-640w.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 23424,
+        "checksum": "sha256:2a283690258b7bfda4c462e869547a52c6c76bd0c0020fff4c4590275093542f"
+      },
+      {
+        "id": "media-companion-emo-vs-eilik-hero-webp-960",
+        "src": "/media/companion/emo-vs-eilik/hero-960w.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 44044,
+        "checksum": "sha256:4a64ce063208af527dfd177959065c2c9a099eab0ddedf8bac0093dc6a913c0c"
+      },
+      {
+        "id": "media-companion-emo-vs-eilik-hero-webp-1440",
+        "src": "/media/companion/emo-vs-eilik/hero-1440w.webp",
+        "width": 1440,
+        "height": 960,
+        "bytes": 69006,
+        "checksum": "sha256:bc7e0af951049f9bf5fb2f2560db9ed0d7e2935dbc00e51a87ed10599c376c9d"
+      }
+    ]
+  },
+  {
+    "source": "/media/companion/ropet/hero.webp",
+    "sourceWidth": 1399,
+    "sourceHeight": 1124,
+    "derivatives": [
+      {
+        "id": "media-companion-ropet-hero-webp-360",
+        "src": "/media/companion/ropet/hero-360w.webp",
+        "width": 360,
+        "height": 289,
+        "bytes": 11946,
+        "checksum": "sha256:3a0ae1c096857a3b66bb379d43c7fb437b3cb0a670ce45879e6cb254f604cbd0"
+      },
+      {
+        "id": "media-companion-ropet-hero-webp-640",
+        "src": "/media/companion/ropet/hero-640w.webp",
+        "width": 640,
+        "height": 514,
+        "bytes": 30148,
+        "checksum": "sha256:4de0e34688ee5a82028cc59c000eda715fc0a824ffd296e44c5e24f29511a183"
+      },
+      {
+        "id": "media-companion-ropet-hero-webp-960",
+        "src": "/media/companion/ropet/hero-960w.webp",
+        "width": 960,
+        "height": 771,
+        "bytes": 60230,
+        "checksum": "sha256:37b981eaffa72b40ab183a97b15889e5392c700eacc15e18cbec44b45be3681b"
+      }
+    ]
+  },
+  {
+    "source": "/media/companion/ropet/figure-1.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-companion-ropet-figure-1-webp-360",
+        "src": "/media/companion/ropet/figure-1-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 23850,
+        "checksum": "sha256:140d173157c0f48cf59fa8fe67fcdea353f68cea6182356fbea6084b7f13ba81"
+      },
+      {
+        "id": "media-companion-ropet-figure-1-webp-640",
+        "src": "/media/companion/ropet/figure-1-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 62254,
+        "checksum": "sha256:5c83d48cc74cce6d9c3a281b0c0c60f8ce89be0fcdec0b1128f5be5c72a82c39"
+      },
+      {
+        "id": "media-companion-ropet-figure-1-webp-960",
+        "src": "/media/companion/ropet/figure-1-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 124142,
+        "checksum": "sha256:282f9fdd3ed320f7090f45368f1527548265f699ba1deb37f0c08d5496bdccf9"
+      }
+    ]
+  },
+  {
+    "source": "/media/companion/ropet/figure-2.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-companion-ropet-figure-2-webp-360",
+        "src": "/media/companion/ropet/figure-2-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 7146,
+        "checksum": "sha256:feb0b59086d6ed4c32b3c5ce60a210f00291d0bc13d252dc2ed2c15161ac0c46"
+      },
+      {
+        "id": "media-companion-ropet-figure-2-webp-640",
+        "src": "/media/companion/ropet/figure-2-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 18198,
+        "checksum": "sha256:953a56dbc1e41f718029b131550e26c5cfc509b0020c2bcdfb20ee3d2613883b"
+      },
+      {
+        "id": "media-companion-ropet-figure-2-webp-960",
+        "src": "/media/companion/ropet/figure-2-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 39166,
+        "checksum": "sha256:bc014b7d405ebb9270e088db4bddf2db90dbb3525c22d9814520c41dd33b6bf1"
+      }
+    ]
+  },
+  {
+    "source": "/media/companion/joy-for-all/card.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-companion-joy-for-all-card-webp-360",
+        "src": "/media/companion/joy-for-all/card-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 18702,
+        "checksum": "sha256:06781ab51fedc9c529dce21edc903cf187b7becab54abb425b759918652cc18c"
+      },
+      {
+        "id": "media-companion-joy-for-all-card-webp-640",
+        "src": "/media/companion/joy-for-all/card-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 51406,
+        "checksum": "sha256:083a1272b2b6de3f79c5e3531b043ea4c07f8764a07c11986d950ca4bdb6a37e"
+      },
+      {
+        "id": "media-companion-joy-for-all-card-webp-960",
+        "src": "/media/companion/joy-for-all/card-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 102038,
+        "checksum": "sha256:5b9e033f99e4f2f42b1653905152835fe913f7b7373eb316d45e19e647db20a9"
+      }
+    ]
+  },
+  {
+    "source": "/media/petcam/ebo-air-2/hero.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-petcam-ebo-air-2-hero-webp-360",
+        "src": "/media/petcam/ebo-air-2/hero-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 12236,
+        "checksum": "sha256:d84475a307bfbe87988937687e14db8a4cea96641087cf65cb2feb418d6ad88a"
+      },
+      {
+        "id": "media-petcam-ebo-air-2-hero-webp-640",
+        "src": "/media/petcam/ebo-air-2/hero-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 30226,
+        "checksum": "sha256:770811c0dcff8caf27627e3a98675fca080a458216ca2ff830c3c652663fc0cb"
+      },
+      {
+        "id": "media-petcam-ebo-air-2-hero-webp-960",
+        "src": "/media/petcam/ebo-air-2/hero-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 58992,
+        "checksum": "sha256:c277c7dc46e5da04015f4442ca9bec71fa1929eb819d4ef4fabedb622cf5415d"
+      }
+    ]
+  },
+  {
+    "source": "/media/petcam/ebo-air-2/figure-1.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-petcam-ebo-air-2-figure-1-webp-360",
+        "src": "/media/petcam/ebo-air-2/figure-1-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 12672,
+        "checksum": "sha256:1899f80c5a132e5f35e1b6f5166354823e606306f314e45a23ea8aa5243d80fd"
+      },
+      {
+        "id": "media-petcam-ebo-air-2-figure-1-webp-640",
+        "src": "/media/petcam/ebo-air-2/figure-1-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 30698,
+        "checksum": "sha256:faa36d7bdd84b7c334f800e85e772a26f929ba848e0769f41fa70da899b170d9"
+      },
+      {
+        "id": "media-petcam-ebo-air-2-figure-1-webp-960",
+        "src": "/media/petcam/ebo-air-2/figure-1-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 58238,
+        "checksum": "sha256:880e36a03439e8a146d636edf223a3cbb728cb73e31fd2d937a9bb05d3bab353"
+      }
+    ]
+  },
+  {
+    "source": "/media/petcam/ebo-air-2/figure-2.webp",
+    "sourceWidth": 1402,
+    "sourceHeight": 1122,
+    "derivatives": [
+      {
+        "id": "media-petcam-ebo-air-2-figure-2-webp-360",
+        "src": "/media/petcam/ebo-air-2/figure-2-360w.webp",
+        "width": 360,
+        "height": 288,
+        "bytes": 12118,
+        "checksum": "sha256:e0bd029e3115dadc04e1af99ac9b541e3ce64b3bcb29ae73719f83aead154f45"
+      },
+      {
+        "id": "media-petcam-ebo-air-2-figure-2-webp-640",
+        "src": "/media/petcam/ebo-air-2/figure-2-640w.webp",
+        "width": 640,
+        "height": 512,
+        "bytes": 30968,
+        "checksum": "sha256:b7b6a0903dff47cb2c5bb88da78a0490127eee58d5b4567082add07ce4c3738a"
+      },
+      {
+        "id": "media-petcam-ebo-air-2-figure-2-webp-960",
+        "src": "/media/petcam/ebo-air-2/figure-2-960w.webp",
+        "width": 960,
+        "height": 768,
+        "bytes": 59962,
+        "checksum": "sha256:5c8314d9d506405424474e5f1a02cda983ffb509c4465d97ce1bec614dcd5fbc"
+      }
+    ]
+  },
+  {
+    "source": "/media/petcam/ebo-air-2/card.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-petcam-ebo-air-2-card-webp-360",
+        "src": "/media/petcam/ebo-air-2/card-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 13640,
+        "checksum": "sha256:f7a1fd088433960bb21cc3677efd69bd13f8fdf33bc2de51a63d032a5b82fab0"
+      },
+      {
+        "id": "media-petcam-ebo-air-2-card-webp-640",
+        "src": "/media/petcam/ebo-air-2/card-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 33282,
+        "checksum": "sha256:27befdb25ce3c0dce42bba7d465755b4717874cc9965f353c60525d81ca1744e"
+      },
+      {
+        "id": "media-petcam-ebo-air-2-card-webp-960",
+        "src": "/media/petcam/ebo-air-2/card-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 64242,
+        "checksum": "sha256:3dcf737dc528b8197e7e09281640150f0dc7a6750419d6d5f7cf3ac664c84b5c"
+      }
+    ]
+  },
+  {
+    "source": "/media/petcam/ebo-se/hero.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-petcam-ebo-se-hero-webp-360",
+        "src": "/media/petcam/ebo-se/hero-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 12092,
+        "checksum": "sha256:28a429bb07a943e90ef96e384c22ef441551db2ec50f3d772e04ae4034f9cdb0"
+      },
+      {
+        "id": "media-petcam-ebo-se-hero-webp-640",
+        "src": "/media/petcam/ebo-se/hero-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 32400,
+        "checksum": "sha256:6f4ce972fb3d2402763daaa35433228fad3ba5a05dbdf1958a8f4fae8589c363"
+      },
+      {
+        "id": "media-petcam-ebo-se-hero-webp-960",
+        "src": "/media/petcam/ebo-se/hero-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 63966,
+        "checksum": "sha256:7cf71652e7eb7108ad6e47fe000199137b393c424f86a59c903728d09c7cf160"
+      }
+    ]
+  },
+  {
+    "source": "/media/petcam/ebo-se/figure-1.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-petcam-ebo-se-figure-1-webp-360",
+        "src": "/media/petcam/ebo-se/figure-1-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 8852,
+        "checksum": "sha256:2de664afc8c689dbd66983d9eb51f8082bab62140b8d1d52a0e22aa00517b243"
+      },
+      {
+        "id": "media-petcam-ebo-se-figure-1-webp-640",
+        "src": "/media/petcam/ebo-se/figure-1-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 20888,
+        "checksum": "sha256:2b8404ed585e4e6c6b2a2dc0f92a0096745c2c488424e96efadb305104f4d94a"
+      },
+      {
+        "id": "media-petcam-ebo-se-figure-1-webp-960",
+        "src": "/media/petcam/ebo-se/figure-1-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 40496,
+        "checksum": "sha256:6e8f11c2b4eb3aab00edd4f4fe92c0d714061cd0eb0097a4b55225b95281276c"
+      }
+    ]
+  },
+  {
+    "source": "/media/petcam/ebo-se/figure-2.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-petcam-ebo-se-figure-2-webp-360",
+        "src": "/media/petcam/ebo-se/figure-2-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 4312,
+        "checksum": "sha256:a1e8921d5a8764107fa469cfb199de26f2de17b2ae398ff941058d43481b231f"
+      },
+      {
+        "id": "media-petcam-ebo-se-figure-2-webp-640",
+        "src": "/media/petcam/ebo-se/figure-2-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 10112,
+        "checksum": "sha256:db80501a64a914c5737173e198b9a3aa9131260423d9573c58e2f0352e4de29b"
+      },
+      {
+        "id": "media-petcam-ebo-se-figure-2-webp-960",
+        "src": "/media/petcam/ebo-se/figure-2-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 19524,
+        "checksum": "sha256:81ec7e0a3d658e86d11e6d52ae05a6955a6bd9c85987a5f2f275dea8e4a1a2f8"
+      }
+    ]
+  },
+  {
+    "source": "/media/petcam/ebo-se/card.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-petcam-ebo-se-card-webp-360",
+        "src": "/media/petcam/ebo-se/card-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 15124,
+        "checksum": "sha256:b0f3f14d4f89c4a7d220293aa63614c71c32af84f6f65ab24d16d90212faf96f"
+      },
+      {
+        "id": "media-petcam-ebo-se-card-webp-640",
+        "src": "/media/petcam/ebo-se/card-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 35914,
+        "checksum": "sha256:933238a642334a6856cf56f992767ea8660e38046c74f3478b5043edf5136cc6"
+      },
+      {
+        "id": "media-petcam-ebo-se-card-webp-960",
+        "src": "/media/petcam/ebo-se/card-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 70014,
+        "checksum": "sha256:8851fda403a68c0bd2fd5a7158ff0782a835f3ac1a777af109b1ee24f1742118"
+      }
+    ]
+  },
+  {
+    "source": "/media/petcam/rola-petpal/hero.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-petcam-rola-petpal-hero-webp-360",
+        "src": "/media/petcam/rola-petpal/hero-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 14744,
+        "checksum": "sha256:2cdc59589dd7a3d035a47eae04dfc31a500b9e37c8185e859a4cedc7492c5238"
+      },
+      {
+        "id": "media-petcam-rola-petpal-hero-webp-640",
+        "src": "/media/petcam/rola-petpal/hero-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 38358,
+        "checksum": "sha256:481a5b6881dd639fe432be7d8d3152c806359d307ed7b18e0c49e3ee014b943e"
+      },
+      {
+        "id": "media-petcam-rola-petpal-hero-webp-960",
+        "src": "/media/petcam/rola-petpal/hero-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 82098,
+        "checksum": "sha256:6f3085718ca3785fd03d9c13dd1b1e4e6afcce86bf3cd7245dfaaa714d88a608"
+      }
+    ]
+  },
+  {
+    "source": "/media/petcam/rola-petpal/figure-1.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-petcam-rola-petpal-figure-1-webp-360",
+        "src": "/media/petcam/rola-petpal/figure-1-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 9272,
+        "checksum": "sha256:64bb0993f10470285107a5c965a8fbc2fdcb13f08d6d3f1379e490df0761fad4"
+      },
+      {
+        "id": "media-petcam-rola-petpal-figure-1-webp-640",
+        "src": "/media/petcam/rola-petpal/figure-1-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 22246,
+        "checksum": "sha256:ac3a86725dff71326ca14e3b28de0a6e6331ca0f62740a40ca81d4d12c5c6faa"
+      },
+      {
+        "id": "media-petcam-rola-petpal-figure-1-webp-960",
+        "src": "/media/petcam/rola-petpal/figure-1-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 46430,
+        "checksum": "sha256:fb33fdc9afba3f69c13873a523dc7022a1e8b7ec2e584eb94d987695b715be76"
+      }
+    ]
+  },
+  {
+    "source": "/media/petcam/rola-petpal/figure-2.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-petcam-rola-petpal-figure-2-webp-360",
+        "src": "/media/petcam/rola-petpal/figure-2-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 7798,
+        "checksum": "sha256:b4050314a72adccea6345f2914eab279a2feb23e960b52c6f70a988b88c03964"
+      },
+      {
+        "id": "media-petcam-rola-petpal-figure-2-webp-640",
+        "src": "/media/petcam/rola-petpal/figure-2-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 20036,
+        "checksum": "sha256:4ead25308f9e51e063c83be013ec1789b8ead32e1ff3938110dd05b1b4affc19"
+      },
+      {
+        "id": "media-petcam-rola-petpal-figure-2-webp-960",
+        "src": "/media/petcam/rola-petpal/figure-2-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 39324,
+        "checksum": "sha256:a4a422ebb9cf181632a0f0bf372447c47f1a466a12986a20a7cb3c0fecb5c4a2"
+      }
+    ]
+  },
+  {
+    "source": "/media/petcam/range/hero.webp",
+    "sourceWidth": 1672,
+    "sourceHeight": 941,
+    "derivatives": [
+      {
+        "id": "media-petcam-range-hero-webp-360",
+        "src": "/media/petcam/range/hero-360w.webp",
+        "width": 360,
+        "height": 203,
+        "bytes": 4646,
+        "checksum": "sha256:d079a250a5f2f204e7edf2006ba8cf64ede51c64d8af1a81633e38f5d9618891"
+      },
+      {
+        "id": "media-petcam-range-hero-webp-640",
+        "src": "/media/petcam/range/hero-640w.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 10686,
+        "checksum": "sha256:f41859b15863b1aa2f592c0bba1da0d736964e1d33ccd0a08b8c0c7c6c47db81"
+      },
+      {
+        "id": "media-petcam-range-hero-webp-960",
+        "src": "/media/petcam/range/hero-960w.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 21054,
+        "checksum": "sha256:8f16ba59f3447cd0b16d497a51e211320b0fa0c51f6d5021b318b76d618d05d5"
+      },
+      {
+        "id": "media-petcam-range-hero-webp-1440",
+        "src": "/media/petcam/range/hero-1440w.webp",
+        "width": 1440,
+        "height": 810,
+        "bytes": 35184,
+        "checksum": "sha256:9eae149d3c02cf602cfd2a7e74bcf051bfe15614eed385daeb1ad7473e0e81ea"
+      }
+    ]
   }
 ]

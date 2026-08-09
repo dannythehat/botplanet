@@ -1,10 +1,426 @@
 [
   {
-    "to": "/media/hubs/grill/tile.webp",
-    "checksum": "sha256:fa002513051f5cc5c9f773ae6ad65466a2178f1a660ba853a06bb9da8dd1ea01",
-    "width": 730,
-    "height": 409,
-    "bytes": 81900,
-    "saved": -14084
+    "to": "/media/hubs/grill/row-baked-on-grease.webp",
+    "checksum": "sha256:425eb4e11859eccc53ff181ac8beeb91e76b7bddc31b21b0c838e6278c510a51",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 478280,
+    "saved": 2799842
+  },
+  {
+    "to": "/media/hubs/grill/row-far-corner.webp",
+    "checksum": "sha256:c38647c0f1419af93c41b274153ed2088cd701e469643c7efb4236591569ee1f",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 194460,
+    "saved": 2130057
+  },
+  {
+    "to": "/media/hubs/grill/row-under-grate.webp",
+    "checksum": "sha256:c88dbf7a813ee5454410d733f3dea3cd094619d6ebd74468edb1ff6ba94b09d8",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 231710,
+    "saved": 2072322
+  },
+  {
+    "to": "/media/hubs/petcam/hero-2026-08.webp",
+    "checksum": "sha256:7abd1f855290076dde49ec7c21344942ddec24feedab49dbf43d494089d4969f",
+    "width": 1448,
+    "height": 1086,
+    "bytes": 182164,
+    "saved": 1836347
+  },
+  {
+    "to": "/media/hubs/petcam/card-hallway.webp",
+    "checksum": "sha256:a33701c4bf17434e80bf37d79b6d85c4e1113f2536ff31a475afe5da4546191f",
+    "width": 1448,
+    "height": 1086,
+    "bytes": 89414,
+    "saved": 1679779
+  },
+  {
+    "to": "/media/hubs/petcam/card-staircase.webp",
+    "checksum": "sha256:29cb360aa35a96221913b0fde1f750b674e64f3aaccaba2350a993c36ca9d2c1",
+    "width": 1448,
+    "height": 1086,
+    "bytes": 116814,
+    "saved": 1842038
+  },
+  {
+    "to": "/media/hubs/petcam/card-deep-pile-rug.webp",
+    "checksum": "sha256:2b9651933f1f538037fbe9e22a3530bb38a46f55f6a72a77bf2545ec997d4d2f",
+    "width": 1448,
+    "height": 1086,
+    "bytes": 169054,
+    "saved": 1874150
+  },
+  {
+    "to": "/media/hubs/petcam/row-dog-by-door.webp",
+    "checksum": "sha256:741b1620fd38b3383f41a224d978cb33d84e6e057e596e057bded0035e628eb0",
+    "width": 1448,
+    "height": 1086,
+    "bytes": 115944,
+    "saved": 1789910
+  },
+  {
+    "to": "/media/hubs/petcam/row-cat-watching.webp",
+    "checksum": "sha256:58529ce72eb7a69793f302cc53ea401bacb595d72ca10a148fb36fdec9227d4e",
+    "width": 1448,
+    "height": 1086,
+    "bytes": 81148,
+    "saved": 1679354
+  },
+  {
+    "to": "/media/hubs/petcam/row-empty-room.webp",
+    "checksum": "sha256:066a59f4bde029de41567a19ea81e7e37ddcb669eca861c5ed620a991ad40cbe",
+    "width": 768,
+    "height": 432,
+    "bytes": 34180,
+    "saved": -556
+  },
+  {
+    "to": "/media/hubs/petcam/row-older-dog.webp",
+    "checksum": "sha256:7a0a0f95f495d6d627a7712e9e5eaf497835beda98b4d15f83e07f7808b6bd84",
+    "width": 612,
+    "height": 407,
+    "bytes": 23386,
+    "saved": 5173
+  },
+  {
+    "to": "/media/companion/moflin/hero.webp",
+    "checksum": "sha256:3b9aba6752cf286620741a6babaab26419aedf6c05341d855ce1832339d1ce35",
+    "width": 1448,
+    "height": 1086,
+    "bytes": 130360,
+    "saved": 1660955
+  },
+  {
+    "to": "/media/companion/moflin/figure-1.webp",
+    "checksum": "sha256:64a4377b1a4f0ab40b20ba83fcc351708dd5c0ed03bae06d4d21a46bdb17f12c",
+    "width": 1448,
+    "height": 1086,
+    "bytes": 125938,
+    "saved": 1562806
+  },
+  {
+    "to": "/media/companion/moflin/figure-2.webp",
+    "checksum": "sha256:5aaedee12ef9baeb5cb6ae73cdf3a0028120a2a2818d2261f724ccbe9a4a89ec",
+    "width": 1448,
+    "height": 1086,
+    "bytes": 157424,
+    "saved": 1885564
+  },
+  {
+    "to": "/media/companion/moflin/card.webp",
+    "checksum": "sha256:264ecd48865ab29f252c929008502c83494cdd7ccb17f634a49f03f5399007dd",
+    "width": 1448,
+    "height": 1086,
+    "bytes": 104012,
+    "saved": 1769247
+  },
+  {
+    "to": "/media/companion/miko-3/hero.webp",
+    "checksum": "sha256:52821841ceee367b5978cc3223f23bc1d04225e2794821b9d2ae8df7da82b71c",
+    "width": 1448,
+    "height": 1086,
+    "bytes": 139604,
+    "saved": 1655594
+  },
+  {
+    "to": "/media/companion/miko-3/figure-1.webp",
+    "checksum": "sha256:0dc6de7c9d9101da55a8dcc635ab7c3efc12cc7209da58b0dc6a102e0d650721",
+    "width": 1448,
+    "height": 1086,
+    "bytes": 97830,
+    "saved": 1592233
+  },
+  {
+    "to": "/media/companion/miko-3/figure-2.webp",
+    "checksum": "sha256:1df4d8a570e2ea92c35d6ca3079d44a6be33a47e8b2884c9657866ad0b3f6603",
+    "width": 1448,
+    "height": 1086,
+    "bytes": 151412,
+    "saved": 1643262
+  },
+  {
+    "to": "/media/companion/miko-3/card.webp",
+    "checksum": "sha256:eb975316436c6f063000f902fdf2b4762adf1a34dde32d25c5c8bc8769fc0582",
+    "width": 1448,
+    "height": 1086,
+    "bytes": 158066,
+    "saved": 1809529
+  },
+  {
+    "to": "/media/companion/vector-2/hero.webp",
+    "checksum": "sha256:7f2cb6a2e681f3c046b73f819b763ab99ab09d42bc96efb528d82a458f93e58e",
+    "width": 1448,
+    "height": 1086,
+    "bytes": 100778,
+    "saved": 1478851
+  },
+  {
+    "to": "/media/companion/vector-2/figure-1.webp",
+    "checksum": "sha256:9b2125e63c3bb2e7af476f7ccdf513ed60d1a5f42448c2328ad2fb3195e544c4",
+    "width": 1448,
+    "height": 1086,
+    "bytes": 84210,
+    "saved": 1475381
+  },
+  {
+    "to": "/media/companion/vector-2/figure-2.webp",
+    "checksum": "sha256:adc326fef24943cf1699a83ca6fed2aa7a1fb844b23887557f325b1f842f37de",
+    "width": 1448,
+    "height": 1086,
+    "bytes": 74448,
+    "saved": 1705008
+  },
+  {
+    "to": "/media/companion/vector-2/card.webp",
+    "checksum": "sha256:9ec7b7e055a65c41ef051e5d5b67efcb16619d9d79a38b3326e3bb6348ee7cbd",
+    "width": 1448,
+    "height": 1086,
+    "bytes": 154696,
+    "saved": 1863241
+  },
+  {
+    "to": "/media/companion/eilik/hero.webp",
+    "checksum": "sha256:5b2427c949f141804ca665df1646cd2774c3d1fc29e0ce78648998db6f26c220",
+    "width": 1448,
+    "height": 1086,
+    "bytes": 89652,
+    "saved": 1574641
+  },
+  {
+    "to": "/media/companion/eilik/figure-1.webp",
+    "checksum": "sha256:fef6849dde0eb067858b6377e7f4524e0292e7d6ca16ebdf0bb1dcb0915412ad",
+    "width": 1448,
+    "height": 1086,
+    "bytes": 62842,
+    "saved": 1414818
+  },
+  {
+    "to": "/media/companion/eilik/figure-2.webp",
+    "checksum": "sha256:4cbe8efa8a594b5eb2d1911c29c4c161fc297e2b3f94fd3fefad9932ba3c9068",
+    "width": 1448,
+    "height": 1086,
+    "bytes": 110984,
+    "saved": 1678138
+  },
+  {
+    "to": "/media/companion/eilik/card.webp",
+    "checksum": "sha256:c474ee1ebe953aad8e3850642c02de4587b279df6b9fb92e7721220d30cc851d",
+    "width": 1086,
+    "height": 1448,
+    "bytes": 102412,
+    "saved": 1625430
+  },
+  {
+    "to": "/media/companion/eilik/range.webp",
+    "checksum": "sha256:4d7c86a5e95954c48d42f2936d61aeb7b87ffa50624fff5504840994bdc421e6",
+    "width": 1448,
+    "height": 1086,
+    "bytes": 179230,
+    "saved": 1743612
+  },
+  {
+    "to": "/media/companion/loona/hero.webp",
+    "checksum": "sha256:2e71196b69b43781ac53e5cf17bfcb82e5e93777b2fae5ee92a8330c6b28f88f",
+    "width": 1448,
+    "height": 1086,
+    "bytes": 111912,
+    "saved": 1720407
+  },
+  {
+    "to": "/media/companion/loona/figure-1.webp",
+    "checksum": "sha256:d09d49167e7b2672da6bf6a6d3f5da248c5211bed518da5409c1cffb698557f5",
+    "width": 1448,
+    "height": 1086,
+    "bytes": 56070,
+    "saved": 1483019
+  },
+  {
+    "to": "/media/companion/loona/figure-2.webp",
+    "checksum": "sha256:1d2c9b31de9e5c7b3d6d161b01ffa324305f0f072420e8dddf424ba373beb435",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 149504,
+    "saved": 1867177
+  },
+  {
+    "to": "/media/companion/loona/card.webp",
+    "checksum": "sha256:124da98dda146a1119d216ad9e39f1c9081228b2f10169fbe10a3be8143d2a4f",
+    "width": 1448,
+    "height": 1086,
+    "bytes": 114166,
+    "saved": 1770108
+  },
+  {
+    "to": "/media/companion/emo/hero.webp",
+    "checksum": "sha256:2821d1263a23257a1a63b2d5369366b6a6b23b5472342f0252dae362fc9f67ad",
+    "width": 1448,
+    "height": 1086,
+    "bytes": 117834,
+    "saved": 1505337
+  },
+  {
+    "to": "/media/companion/emo/figure-1.webp",
+    "checksum": "sha256:0eaa20fa83d12be0efbf955249034a5187f5a9eddfcc3cac5ef97cf0ea8e4408",
+    "width": 1402,
+    "height": 1122,
+    "bytes": 120168,
+    "saved": 1648002
+  },
+  {
+    "to": "/media/companion/emo/figure-2.webp",
+    "checksum": "sha256:15c80069bbedeb2dbcaeb01f6faf4a304eb5764d9fb889ecbc5f09c8674cae68",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 94260,
+    "saved": 1926854
+  },
+  {
+    "to": "/media/companion/emo/card.webp",
+    "checksum": "sha256:2f6097c008da08c4af127ea9ff25c865a292fbc4a903588911b5641bedfaa994",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 145394,
+    "saved": 1897713
+  },
+  {
+    "to": "/media/companion/emo-vs-eilik/hero.webp",
+    "checksum": "sha256:5e6045ef735b85e650d8b02e104a1ed3845fd08a21c01b55d760ce9765873c89",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 111274,
+    "saved": 1708077
+  },
+  {
+    "to": "/media/companion/ropet/hero.webp",
+    "checksum": "sha256:6b1c4e78cc5be208f3712bfe6ae1fef424373e0833db99e0a173faab40051bc2",
+    "width": 1399,
+    "height": 1124,
+    "bytes": 148904,
+    "saved": 1719307
+  },
+  {
+    "to": "/media/companion/ropet/figure-1.webp",
+    "checksum": "sha256:43004ee49f342533df5e84cd3021db268e831df7b759e63f315e209675cf98f8",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 262016,
+    "saved": 2079495
+  },
+  {
+    "to": "/media/companion/ropet/figure-2.webp",
+    "checksum": "sha256:d32800ce20dd505f1aaa757ea7028c74d472e52e94a6cf46f7ec58c315271d59",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 106492,
+    "saved": 1787334
+  },
+  {
+    "to": "/media/companion/joy-for-all/card.webp",
+    "checksum": "sha256:f06043fefd8d3303273ed5fdd95cb04b3340d7bfb1058468e7dc3e0942b3b4f2",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 220776,
+    "saved": 1949301
+  },
+  {
+    "to": "/media/petcam/ebo-air-2/hero.webp",
+    "checksum": "sha256:ac2553eae7a6bb183fc49a7c5e8d33238669ab3c163acf77fac2e6a087904599",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 124492,
+    "saved": 1681804
+  },
+  {
+    "to": "/media/petcam/ebo-air-2/figure-1.webp",
+    "checksum": "sha256:93ae4c831a8cee3b6ffe8fb478216b653850e06b6e531e1ad8e8ba8937833606",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 120488,
+    "saved": 1751039
+  },
+  {
+    "to": "/media/petcam/ebo-air-2/figure-2.webp",
+    "checksum": "sha256:fe31d00d9324fcbbdc5c4f63da1602c36b02db90e2e420fda8d2103233fc0c24",
+    "width": 1402,
+    "height": 1122,
+    "bytes": 140700,
+    "saved": 1615076
+  },
+  {
+    "to": "/media/petcam/ebo-air-2/card.webp",
+    "checksum": "sha256:b9db425e72471b4acf35d0ce104a66334d77300cee2b158b05a6b316f21dfb23",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 135416,
+    "saved": 1783654
+  },
+  {
+    "to": "/media/petcam/ebo-se/hero.webp",
+    "checksum": "sha256:3f1e0449a6b486a127892647e167269a2b4f193294c9db0f1861a5757cce4fb4",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 140968,
+    "saved": 1624867
+  },
+  {
+    "to": "/media/petcam/ebo-se/figure-1.webp",
+    "checksum": "sha256:3ad9f329eb74d3712dd7eadb170623090578e04b43f35bd7799a2cfc44a5d243",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 92246,
+    "saved": 1532428
+  },
+  {
+    "to": "/media/petcam/ebo-se/figure-2.webp",
+    "checksum": "sha256:c1c496e60d0289b3a374f689e9474d3467801b871f22c11a3f44dc2ec15cbfb2",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 43732,
+    "saved": 1460742
+  },
+  {
+    "to": "/media/petcam/ebo-se/card.webp",
+    "checksum": "sha256:4268e8a79300b32ed01d88f026ecd2ad9ba861b4fcd8fe4e163f7fac4913c232",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 151118,
+    "saved": 1884241
+  },
+  {
+    "to": "/media/petcam/rola-petpal/hero.webp",
+    "checksum": "sha256:0da7d2b01d05c68d14e9d1eabe419f79b0d3e4a9bebbc2a70d6e7a37476d010d",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 191028,
+    "saved": 1943293
+  },
+  {
+    "to": "/media/petcam/rola-petpal/figure-1.webp",
+    "checksum": "sha256:f395c82c3fb55ce4d0b46ab460f60ca2072c18cc4ed06065fe6780c08af5fc5b",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 102730,
+    "saved": 1674110
+  },
+  {
+    "to": "/media/petcam/rola-petpal/figure-2.webp",
+    "checksum": "sha256:fab14dc1e0ddc34370baca1cfe87572d5812df4c3552436a7059871c5b8a308e",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 88080,
+    "saved": 1681273
+  },
+  {
+    "to": "/media/petcam/range/hero.webp",
+    "checksum": "sha256:ef4e280739a414ddd9b05c59d1febc766b16dbd32406cf684d9805a30a9e6ec1",
+    "width": 1672,
+    "height": 941,
+    "bytes": 62928,
+    "saved": 1211832
   }
 ]
