@@ -372,9 +372,17 @@ const homeSchema = [
     <div class="wrap botmatch__grid">
       <div class="botmatch__intro">
         <p class="kicker">BOTMATCH</p>
-        <h2>One matcher per robot world. Each one asks what its own job needs.</h2>
+        {/* WRITTEN AT THE READER, NOT AT THE ARCHITECTURE. This led with "One
+            matcher per robot world. Each one asks what its own job needs." —
+            a true sentence about how the system is built and a useless one to
+            somebody who wants a gift for a seven-year-old. The three examples
+            below are not invented: each is a question a live matcher actually
+            asks. Coding asks whether the child has asked for one; pool asks
+            about length and a sun ledge; litter says outright when a cat is
+            too small for every machine in the category. */}
+        <h2>Tell us the job. We will tell you the robot — or tell you not to buy one.</h2>
         <p class="large">
-          Specifications only matter once you translate them into your home. BotMatch does that translation — a handful of plain questions about the space a machine has to work in, and a shortlist of the ones that actually suit it, with the ones to rule out and why. Every category gets its own, because the questions that decide a mower are not the questions that decide a pool robot or a window cleaner.
+          A coding robot for a seven-year-old who has not asked for one. A pool cleaner for a 50 ft pool with a sun ledge. A litter box for a cat that may be too small for any of them. Answer a handful of plain questions about the job rather than the machine, and BotMatch searches every robot we have researched across {categories.length} categories — then emails you the shortlist, what each pick was matched on, and the ones we ruled out for you.
         </p>
       </div>
 
@@ -429,10 +437,15 @@ const homeSchema = [
           What BotMatch cannot see is what we earn. Commission is not available to the part of the system that chooses your robot — that is enforced in the code, not promised in a policy.
         </p>
 
+        {/* THE BUTTONS WERE THE WRONG WAY ROUND, AND THE SECOND ONE WAS STALE.
+            The primary sent a reader who had just been told what BotMatch does
+            to a page explaining what BotMatch does; the quiet one offered the
+            POOL matcher only, which was right while BotMatch was nine separate
+            funnels and wrong from the day it started asking for the job first.
+            Starting it is the action this section is for. */}
         <div class="botmatch__actions">
-          <a class="btn btn--primary btn--lg" href="/how-botmatch-works/">How BotMatch works</a>
-          <a class="btn btn--quiet btn--lg" href={`/botmatch/${LAUNCH_CATEGORY}/`}>Try the pool matcher</a>
-          
+          <a class="btn btn--primary btn--lg" href="/botmatch/">Start — say what you need done</a>
+          <a class="btn btn--quiet btn--lg" href="/how-botmatch-works/">How BotMatch works</a>
         </div>
       </div>
     </div>
