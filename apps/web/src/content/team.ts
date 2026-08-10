@@ -8,7 +8,19 @@
  * "tested" status is only ever applied when a real review unit has been used.
  *
  * Expanding the named editorial team (additional authors, an independent
- * fact-checker) is a Danny-owned decision — do not invent people or credentials.
+ * fact-checker) is an owner decision — do not invent people or credentials.
+ *
+ * THE TEAM EXPANDED ON 10 AUGUST 2026 and the rule held. Michelle Choa's role,
+ * her pages and her background came from the owner. Everything else on both
+ * author pages is a description of work that exists in this repository and can
+ * be checked against it: the reviews are countable, the dated decisions below
+ * are in docs/ and in the commit history, and the commission isolation is
+ * enforced by a type and four tests rather than by a promise.
+ *
+ * That is the only kind of expertise claim this file permits. "Fifteen years in
+ * robotics" is unfalsifiable and would be worth nothing the first time somebody
+ * looked; "found that the machine behind 9,900 searches a month has no listing,
+ * on this date, and here is the page" is worth a great deal and is true.
  */
 import { SITE } from "../lib/site";
 
@@ -35,6 +47,16 @@ export interface Author {
    */
   portrait?: { src: string; alt: string };
   /**
+   * Decisions this person made that a reader can go and check.
+   *
+   * THE ONLY EXPERTISE CLAIM THIS SITE MAKES. Not years, not units handled, not
+   * a former employer nobody can verify — specific editorial calls, dated, each
+   * one leading to a page that still says what it says. It is the difference
+   * between asserting judgement and showing it, and it is the only version of
+   * the claim that survives being checked.
+   */
+  notableWork?: { date: string; what: string }[];
+  /**
    * Anything true about them from OUTSIDE BotPlanet, supplied by the owner.
    *
    * OPTIONAL, AND EMPTY IS THE HONEST DEFAULT. Google reads a Person block as
@@ -50,7 +72,8 @@ export const FOUNDER: Author = {
   name: SITE.founder.name,
   role: SITE.founder.title,
   path: "/authors/danny/",
-  bio: SITE.founder.bio,
+  bio:
+    "Daniel Allan founded BotPlanet to answer the question the robot market keeps dodging: which machine is right for your house, and when you should not buy one at all. He owns the buying guides, the best-of shortlists and the comparison tables, and he built BotMatch — the recommendation engine that scores every product on suitability before it is allowed to see which retailer pays.",
   accountability:
     "Daniel is accountable for every recommendation published on BotPlanet and for keeping BotMatch independent of commission.",
   portrait: {
@@ -59,6 +82,28 @@ export const FOUNDER: Author = {
   },
   covers:
     "The buying guides, the best-of shortlists, the comparison tables and the BotMatch scoring — and final sign-off on everything else.",
+  notableWork: [
+    {
+      date: "2026-08-09",
+      what:
+        "Refused to link the only Amazon listing for Living.AI's EMO after its own details table returned the brand EMOPET, it asked fifty dollars more than the maker's own store, and Living.AI's staff stated on their forum that their store is the only legitimate source. The review still runs; it sends nobody anywhere.",
+    },
+    {
+      date: "2026-08-10",
+      what:
+        "Removed three products from BotMatch's recommendation pool after finding the funnel could name a robot whose company has ceased operations and whose servers are switched off. A page saying do not buy this stays published; it must never come back as the answer to which should I buy.",
+    },
+    {
+      date: "2026-08-10",
+      what:
+        "Rebuilt the budget factor in the scoring engine, which had been treating a machine one tier over the reader's budget as exactly as suitable as one a tier under it. A budget is a ceiling stated as a range.",
+    },
+    {
+      date: "2026-08-10",
+      what:
+        "Found the answer-folding bug that had been discarding four of a reader's five answers before the scorer ever saw them, in all three places the site folds an answer — the server, the browser and the audit that was supposed to catch it.",
+    },
+  ],
 };
 
 /**
@@ -80,7 +125,7 @@ export const REVIEWS_EDITOR: Author = {
      `background` and is printed once, under its own heading — the two used to
      say the same thing twice, on the page and again inside the Person node. */
   bio:
-    "Michelle Choa is BotPlanet's Reviews Editor. Every product review on the site is hers: what each machine does, who should buy something else, and which figures its maker will not publish.",
+    "Michelle Choa is BotPlanet's Reviews Editor and writes every product review on the site — sixty-three of them across nine categories. She works to a rule most review sites do not: a figure reaches a specification table only if a manufacturer published it, and where one refuses to publish, the review says so under its own heading rather than borrowing a number from a review site that borrowed it from another review site.",
   accountability:
     "Michelle is accountable for the product reviews on BotPlanet: the specifications transcribed into each table, the rule-outs, and the sections recording what a manufacturer will not publish.",
   portrait: {
@@ -90,6 +135,33 @@ export const REVIEWS_EDITOR: Author = {
   covers:
     "Every product review on the site — what each machine does, who should buy something else, and which figures its maker refuses to state.",
   background: "Publisher, and formerly a writer for Tropical magazine.",
+  notableWork: [
+    {
+      date: "2026-08-10",
+      what:
+        "Established that roborock's S8 MaxV Ultra — 9,900 searches a month — has no first-party listing on Amazon US at all, and that every result carrying the name is a third-party accessory kit. The review is built on the machine roborock actually sells and opens by saying what happened to the one people are searching for.",
+    },
+    {
+      date: "2026-08-10",
+      what:
+        "Corrected the eufy E15's rated area from a quarter acre to eufy's own 800 m² — a 26% overstatement on the one figure that decides whether a mower can finish a lawn, and the figure the matcher rules machines out on.",
+    },
+    {
+      date: "2026-08-10",
+      what:
+        "Removed a large-cat claim from Casa Leo's Leo's Loo Too against the maker's own stated 20 lb ceiling, after finding it was the box the matcher had been naming for large-cat queries — on an alphabetical tie-break.",
+    },
+    {
+      date: "2026-08-10",
+      what:
+        "Declined to record obstacle avoidance for the Dreame X40 Ultra and mop lifting for the X50 Ultra, because Dreame's own pages could not be read and the listings do not claim either. Under-claiming is recoverable by reading the page later; over-claiming is a bad recommendation shipped today.",
+    },
+    {
+      date: "2026-08-08",
+      what:
+        "Refused a product brief naming a Dreame A1, which does not exist as a current product, and a Mammotion Luba 2, which Mammotion's own page marks superseded. Both were built on the machines those makers actually sell, judged on their own rather than substituted silently.",
+    },
+  ],
 };
 
 /** Every named author, keyed by id. The author pages are built from this. */

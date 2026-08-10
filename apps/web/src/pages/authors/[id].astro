@@ -44,6 +44,15 @@ const written = Object.values(REVIEWS)
     a.category === b.category ? a.title.localeCompare(b.title) : a.category.localeCompare(b.category),
   );
 
+const readable = (iso: string) =>
+  new Date(`${iso}T00:00:00Z`).toLocaleDateString("en-GB", {
+    day: "numeric", month: "long", year: "numeric", timeZone: "UTC",
+  });
+
+/* Newest first. A record of judgement reads as a record when the most recent
+   call is at the top; oldest-first reads as a CV. */
+const work = [...(author.notableWork ?? [])].sort((a, b) => b.date.localeCompare(a.date));
+
 const title = `${author.name} — ${author.role} at BotPlanet`;
 const description = `${author.name} is ${author.role} at BotPlanet. ${author.accountability}`.slice(0, 158);
 
@@ -92,11 +101,45 @@ const schema = [
   <h2>What they are accountable for</h2>
   <p style="max-width:680px;">{author.accountability}</p>
 
+  {work.length > 0 && (
+    <>
+      <h2>Calls on the record</h2>
+      {/* THE ONLY EXPERTISE CLAIM THIS SITE MAKES, and the reason it is a list
+          of dated decisions rather than a paragraph about experience. Every one
+          of these leads to a page that still says what it says, so a reader who
+          doubts it can go and check — which is the whole difference between
+          showing judgement and asserting it. */}
+      <p class="muted" style="max-width:680px;">
+        Specific decisions, dated, each one still live on the page it changed. We publish these
+        instead of a career summary because a reader can check them.
+      </p>
+      <ul style="max-width:720px; line-height:1.7;">
+        {work.map((w) => (
+          <li style="margin-bottom:12px;">
+            <span class="muted" style="font-size:13px;">{readable(w.date)}</span><br />
+            {w.what}
+          </li>
+        ))}
+      </ul>
+    </>
+  )}
+
   <h2>How the work is done</h2>
   <p style="max-width:680px;">{EDITORIAL.method}</p>
-  <p class="muted">
+  <p class="muted" style="max-width:680px;">
     The full method is on the <a href="/review-methodology/">review methodology</a> page, and how the
     site earns its money is on the <a href="/affiliate-disclosure/">affiliate disclosure</a>.
+  </p>
+
+  <h2>What we do not claim</h2>
+  {/* The honesty rule from content/team.ts, said to the reader rather than
+      only to the next developer. An author page that lists strengths and no
+      limits is the shape of every fabricated one. */}
+  <p style="max-width:680px;">
+    Nothing on this site has been tested in a pool, on a lawn or on a window. Where a review
+    describes how a machine behaves, it is describing what its manufacturer publishes, what a
+    retailer listing states on a dated read, or what owners report — each labelled. No page here
+    carries a star rating, because a score is the one thing we have not earned.
   </p>
 
   {written.length > 0 && (
