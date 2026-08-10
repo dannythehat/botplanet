@@ -2119,7 +2119,7 @@ export const REVIEWS: Record<string, ReviewContent> = {
         rows: [
           { label: "Navigation", value: "WIN-SLAM 3.0" },
           { label: "Protection", value: "8-tier" },
-          { label: "Power-off hold", value: null },
+          { label: "Power-off hold", value: "No — a carabiner and tether, not a battery", note: "ECOVACS lists \"power-off protection: Yes\" and its own safety copy explains it as arresting a fall with a safety carabiner and tether. No backup battery and no stated duration: it stops holding when the socket does. The only machine of the eleven without a UPS." },
           { label: "Glass types", value: "Framed and frameless" },
         ],
       },
@@ -2199,7 +2199,7 @@ export const REVIEWS: Record<string, ReviewContent> = {
       { heading: "Navigation and safety", rows: [
         { label: "Navigation", value: "SLAM 4.0 (retailer-stated)" },
         { label: "Glass types", value: "Framed, frameless and sloped (retailer-stated)" },
-        { label: "Power-off hold", value: null },
+        { label: "Power-off hold", value: "Yes — emergency backup battery", note: "HUTT publishes the battery and a 148 kg safety rope for this SKU but no duration. The 25 and 30 minute figures in circulation attach to other HUTT models and are not carried across." },
       ]},
       { heading: "Physical", rows: [
         { label: "Robot weight", value: null },
@@ -2279,7 +2279,7 @@ export const REVIEWS: Record<string, ReviewContent> = {
       ]},
       { heading: "Navigation and safety", rows: [
         { label: "Glass types", value: "Framed and frameless" },
-        { label: "Power-off hold", value: null },
+        { label: "Power-off hold", value: "20–30 minutes on the UPS", note: "Mamibot's manual: when the UPS is fully charged it supports the W120-DP to stay on the working surface for 20–30 minutes." },
       ]},
       { heading: "Physical", rows: [
         { label: "Robot weight", value: null },
@@ -2354,7 +2354,7 @@ export const REVIEWS: Record<string, ReviewContent> = {
       { heading: "Navigation and safety", rows: [
         { label: "Navigation", value: "AI route planning (no version published)" },
         { label: "Glass types", value: "Framed and frameless" },
-        { label: "Power-off hold", value: null },
+        { label: "Power-off hold", value: "20 minutes on the embedded UPS, with an audio alert" },
       ]},
       { heading: "Physical", rows: [
         { label: "Robot weight", value: null },
@@ -2430,7 +2430,7 @@ export const REVIEWS: Record<string, ReviewContent> = {
       { heading: "Navigation and safety", rows: [
         { label: "Navigation", value: null },
         { label: "Glass types", value: "Framed and frameless" },
-        { label: "Power-off hold", value: null },
+        { label: "Power-off hold", value: "20 minutes on the embedded UPS, with an alerting sound" },
       ]},
       { heading: "Physical", rows: [
         { label: "Robot weight", value: null },
@@ -2496,7 +2496,7 @@ export const REVIEWS: Record<string, ReviewContent> = {
       { heading: "Navigation and safety", rows: [
         { label: "Control", value: "Remote control, no app" },
         { label: "Glass types", value: "Framed only" },
-        { label: "Power-off hold", value: null },
+        { label: "Power-off hold", value: "About 20 minutes on the UPS, with a warning sound", note: "Cop Rose describes a UPS electrical storage device: the robot keeps adsorption, will not move forward, and issues a warning sound." },
       ]},
       { heading: "Physical", rows: [
         { label: "Robot weight", value: null },
@@ -4262,6 +4262,11 @@ export const REVIEWS: Record<string, ReviewContent> = {
           { label: "Maximum suction", value: "10,000 Pa \u2014 nearly double the W2 line" },
           { label: "Moving suction", value: "3,300 Pa \u00b1100, the highest figure in this catalogue" },
           { label: "Why moving matters", value: "It is the number that decides whether a robot holds while it travels" },
+          {
+            label: "Power-off hold",
+            value: "It does not need the mains at all — 130 min on its own battery",
+            note: "The only machine here that answers the power-cut question by not depending on a socket. Its station is portable and it carries a two-in-one power and safety cable, three-layer composite, rated to 100 kg, plus a 1 m safety rope at the station base. Our catalogue filed it as CORDED until 10 August 2026, which meant it scored zero for readers who said there is no socket near the windows — the exact problem it is built to solve.",
+          },
         ],
       },
       {
@@ -4352,6 +4357,7 @@ export const REVIEWS: Record<string, ReviewContent> = {
           { label: "Spray nozzles", value: "3, against the W2 PRO's 6" },
           { label: "Navigation", value: "WIN-SLAM 4.0, the same generation as the W2 PRO" },
           { label: "Independent testing", value: "None we could find, for TruEdge or against it" },
+          { label: "Power-off hold", value: "30 minutes", note: "ECOVACS: maintains suction for 30 minutes if power is lost — the same figure as the W2 PRO." },
         ],
       },
       {

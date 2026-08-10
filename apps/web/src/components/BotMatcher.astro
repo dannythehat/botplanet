@@ -429,6 +429,18 @@ const payload = JSON.stringify({
        engine expects. Profile-only questions carry no fragment, so they cannot
        reach the scorer even by accident. Per category, because the fragments
        are only meaningful against that category's own stored config. */
+    /* `desired_cleans` UNIONS. EVERYTHING ELSE IS LAST-WINS.
+
+       This was `Object.assign` until 10 August 2026, which meant the last
+       question to mention `desired_cleans` threw away every capability the
+       reader had asked for before it. A vacuum reader who said hard floors,
+       shedding animal, cluttered floor and yes-empty-itself reached the scorer
+       wanting ONE capability, and four of their five answers had been
+       collected for nothing.
+
+       It must stay identical to mergeScores() in content/matcher-questions.ts,
+       which is the server-side twin. Two folders that disagree would mean the
+       page scored one thing and the tests asserted another. */
     function toScoringAnswers(cat: Cat): Record<string, unknown> {
       const out: Record<string, unknown> = {};
       const given = answersByCat[cat.slug] ?? {};
@@ -436,7 +448,15 @@ const payload = JSON.stringify({
         const chosen = given[question.id];
         if (!chosen) continue;
         const opt = question.options.find((o) => o.label === chosen);
-        if (opt?.scores) Object.assign(out, opt.scores);
+        if (!opt?.scores) continue;
+        for (const [key, value] of Object.entries(opt.scores)) {
+          if (key === "desired_cleans" && Array.isArray(value)) {
+            const prior = (out.desired_cleans as string[] | undefined) ?? [];
+            out.desired_cleans = [...new Set([...prior, ...(value as string[])])];
+          } else {
+            out[key] = value;
+          }
+        }
       }
       return out;
     }

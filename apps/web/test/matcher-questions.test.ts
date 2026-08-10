@@ -260,10 +260,17 @@ describe("folding answers into the scoring shape", () => {
       primary_need: "Outside, above ground level",
       power_pref: "Yes, near enough",
       budget_tier: "$200 – $350",
-      window_height: "Higher than that", // profile-only
+      /* SCORED FROM 10 AUGUST 2026 and it used to be profile-only. A reader
+         with windows above the ground floor has told us the machine has to
+         hold on when the mains cuts, which ten of the eleven robots do and one
+         does not. The KEY still must not reach the scorer — only the fragment
+         it maps to. */
+      window_height: "Higher than that",
     });
     expect(folded.environment).toBe("frameless_glass");
-    expect(folded.desired_cleans).toEqual(["glass_exterior"]);
+    /* A UNION, NOT A REPLACEMENT. Two questions contribute capabilities here
+       and until 10 August 2026 the second silently discarded the first. */
+    expect(folded.desired_cleans).toEqual(["glass_exterior", "power_off_hold"]);
     expect(folded.power_pref).toBe("corded");
     expect(folded.budget_tier).toBe("mid");
     // Profile answers must never reach the scorer.
@@ -306,5 +313,79 @@ describe("no live category is left pointing at the wrong questionnaire", () => {
       if (qs === null) continue; // no BotMatch — the honest outcome
       expect(MATCHER_QUESTIONS_BY_CATEGORY[cat.slug], cat.slug).toBe(qs);
     }
+  });
+});
+
+/**
+ * THE MERGE, WHICH WAS THE LARGEST SCORING BUG THIS SITE HAS HAD.
+ *
+ * `toScoringAnswers` folded each chosen option's fragment with Object.assign
+ * until 10 August 2026, so the LAST question to mention `desired_cleans` threw
+ * away every capability the reader had asked for before it. Four of a vacuum
+ * reader's five scored answers were being collected and discarded.
+ *
+ * It is also most of the reason the matchers tied: cleansCoverage is
+ * covered-over-desired, a desired set of one item is satisfied by almost every
+ * product in a category, the factor saturates at 1.0 for all of them and the
+ * ranking collapses onto price tier alone.
+ */
+describe("capabilities accumulate across questions", () => {
+  it("unions desired_cleans from every scored answer rather than keeping the last", () => {
+    const folded = toScoringAnswers("robot-vacuums", {
+      environment: "A mix of hard floor and carpet", // mopping, mop_lifting
+      primary_need: "Yes — a shedding animal", // self_emptying, obstacle_avoidance
+      clutter: "Children live here", // obstacle_avoidance
+      emptying: "Yes — I do not want to think about it", // self_emptying
+      home_size: "A large house, several storeys", // multi_floor_mapping
+      budget_tier: "$300 – $600",
+    });
+
+    expect(folded.desired_cleans).toEqual(
+      expect.arrayContaining([
+        "mopping",
+        "mop_lifting",
+        "self_emptying",
+        "obstacle_avoidance",
+        "multi_floor_mapping",
+      ]),
+    );
+    expect(folded.desired_cleans).toHaveLength(5);
+  });
+
+  it("does not repeat a capability two answers both asked for", () => {
+    const folded = toScoringAnswers("robot-vacuums", {
+      primary_need: "Yes — a shedding animal", // self_emptying, obstacle_avoidance
+      clutter: "Cables, shoes, the odd toy", // obstacle_avoidance again
+    });
+    const counts = new Map<string, number>();
+    for (const c of folded.desired_cleans ?? []) counts.set(c, (counts.get(c) ?? 0) + 1);
+    expect([...counts.values()].every((n) => n === 1)).toBe(true);
+  });
+
+  /* Two environments is not a thing the scorer can hold, so the scalar fields
+     stay last-wins and a union there would be wrong. */
+  it("keeps every non-capability field last-wins", () => {
+    const folded = toScoringAnswers("robot-vacuums", {
+      environment: "Mostly hard floors",
+      budget_tier: "Over $1,000",
+    });
+    expect(folded.environment).toBe("hard_floors");
+    expect(folded.budget_tier).toBe("ultra");
+  });
+
+  /* The litter funnel's refill question and the window funnel's height
+     question were both added as scored on 10 August. Neither is the last
+     scored question in its set, so both would have been silently dropped
+     under the old fold — which is how the bug stayed invisible. */
+  it("keeps a mid-questionnaire capability that a later question would have overwritten", () => {
+    const litter = toScoringAnswers("self-cleaning-litter-boxes", {
+      environment: "An average adult",
+      litter_pref: "No — ordinary litter from any shop", // any_litter
+      primary_need: "Two", // odor_sealing, multi_cat_capacity
+      tracking: "Yes — that's useful to me", // health_monitoring, app_control
+    });
+    expect(litter.desired_cleans).toContain("any_litter");
+    expect(litter.desired_cleans).toContain("odor_sealing");
+    expect(litter.desired_cleans).toContain("health_monitoring");
   });
 });

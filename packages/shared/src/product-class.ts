@@ -89,6 +89,19 @@ export const CLEANING_SURFACES = [
   "glass_interior",
   "glass_exterior",
   "glass_sloped",
+  /* Added 10 August 2026. What happens when the mains power cuts while the
+     machine is stuck to a third-floor window is the question that stops people
+     buying in this category, and until now nothing recorded the answer.
+
+     TEN OF THE ELEVEN HOLD AND ONE DOES NOT, which is not the split we
+     expected and is the reason this is worth recording rather than assuming.
+     ECOVACS, HOBOT, HUTT, Mamibot and Cop Rose all ship a UPS or a backup
+     battery — 20 to 30 minutes, most with an audible alert. The WINBOT W1 PRO
+     lists "power-off protection: Yes" and means a carabiner and a tether: no
+     battery, no duration, and a machine that stops holding the moment the
+     socket does. That is a rule-out for exterior glass above the ground floor
+     and it was invisible. */
+  "power_off_hold", // a UPS or backup battery keeps it stuck to the glass in a power cut
   // Lawn. A mower cleans nothing, so the name of this list is wrong for it —
   // what the column really holds is "capabilities the customer can ask for and
   // the product either has or has not". Renaming the list would touch a stored

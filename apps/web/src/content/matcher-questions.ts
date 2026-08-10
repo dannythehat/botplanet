@@ -255,14 +255,40 @@ const WINDOW_QUESTIONS: MatcherQuestion[] = [
 
   /* ---- profile questions: recorded, never scored ---- */
   {
+    /**
+     * SCORED FROM 10 AUGUST 2026, AND IT WAS THE THIRD QUESTION ON THIS SITE
+     * ASKING SOMETHING NOTHING READ. A reader who says the windows are above
+     * the ground floor has told us the one thing that decides safety here: if
+     * the mains cuts while the machine is on the glass, does it hold?
+     *
+     * Ten of the eleven robots in the catalogue do — a UPS or backup battery
+     * good for twenty to thirty minutes, most with an audible alert. The
+     * WINBOT W1 PRO does not; ECOVACS lists "power-off protection: Yes" and
+     * means a carabiner and a tether. So this rules out exactly one machine,
+     * which is a small effect and the correct one: a reader with third-floor
+     * windows should not be handed the only model that stops holding when the
+     * socket does.
+     *
+     * GROUND FLOOR IS NOT SCORED, deliberately. A robot that falls off a
+     * ground-floor window lands on the lawn. The whole reason this axis exists
+     * is height, and applying it to somebody who told us they have none would
+     * rule out a machine on a risk they do not carry.
+     */
     id: "window_height",
     kicker: "Your height",
     q: "How high up are the windows that matter?",
     options: [
-      { label: "Ground floor" },
-      { label: "First or second floor" },
-      { label: "Higher than that" },
-      { label: "A mix" },
+      { label: "Ground floor", hint: "Nothing here has far to fall" },
+      {
+        label: "First or second floor",
+        scores: { desired_cleans: ["power_off_hold"] },
+      },
+      {
+        label: "Higher than that",
+        hint: "The machine has to hold on when the power cuts",
+        scores: { desired_cleans: ["power_off_hold"] },
+      },
+      { label: "A mix", scores: { desired_cleans: ["power_off_hold"] } },
     ],
   },
   {
@@ -1432,7 +1458,44 @@ export function toScoringAnswers(
     if (!chosen) continue;
     const opt = q.options.find((o) => o.label === chosen);
     if (!opt?.scores) continue;
-    Object.assign(out, opt.scores);
+    mergeScores(out, opt.scores);
+  }
+  return out;
+}
+
+/**
+ * Fold one option's fragment into the answer set.
+ *
+ * `desired_cleans` IS A UNION AND EVERY OTHER FIELD IS LAST-WINS, and getting
+ * that wrong was the largest scoring bug this site has had.
+ *
+ * Until 10 August 2026 this was `Object.assign`, which meant the LAST question
+ * to mention `desired_cleans` silently threw away every capability the reader
+ * had asked for before it. A vacuum reader who said hard floors (mopping),
+ * shedding animal (self-emptying, obstacle avoidance), cluttered floor
+ * (obstacle avoidance) and yes-empty-itself (self-emptying) arrived at the
+ * scorer wanting ONE capability — whichever the last scored question named —
+ * and the four questions before it had been answered for nothing.
+ *
+ * That is also most of the reason the matchers tied. `cleansCoverage` is
+ * covered-over-desired, so a desired set of one item is satisfied completely by
+ * almost every product in a category, the factor saturates at 1.0 for
+ * everything, and the ranking collapses onto price tier alone. Six categories
+ * were deciding two answer sets out of three or worse, and the engine was being
+ * handed a question the reader never asked.
+ *
+ * The other fields are genuinely last-wins: a category asks about environment,
+ * budget and power once each, so there is nothing to merge and a union would be
+ * wrong — two environments is not a thing the scorer can hold.
+ */
+export function mergeScores(out: ScoreFragment, add: ScoreFragment): ScoreFragment {
+  for (const [key, value] of Object.entries(add) as [keyof ScoreFragment, unknown][]) {
+    if (key === "desired_cleans" && Array.isArray(value)) {
+      const seen = new Set([...(out.desired_cleans ?? []), ...(value as CleaningSurface[])]);
+      out.desired_cleans = [...seen];
+    } else {
+      (out as Record<string, unknown>)[key] = value;
+    }
   }
   return out;
 }

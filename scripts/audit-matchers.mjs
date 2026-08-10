@@ -37,12 +37,24 @@ const r = spawnSync("npx", ["tsx", "-e", `
          matcher looks broken when it is only undecided. A matcher that can
          never separate its catalogue whatever it is asked is a different
          thing, and that is what needs finding. */
+      /* desired_cleans UNIONS; everything else is last-wins. Identical to
+         mergeScores() in content/matcher-questions.ts and to the fold in
+         BotMatcher.astro, because an audit that folds answers differently from
+         the page is measuring a site nobody visits. This script spread the
+         fragments until 10 August 2026, which is the same bug the page had. */
       const profile = (pick) => {
-        let a = { ...(q.MATCHER_DEFAULTS?.[cat.slug] ?? {}) };
+        const a = { ...(q.MATCHER_DEFAULTS?.[cat.slug] ?? {}) };
         for (const question of qs) {
           const opts = question.options ?? [];
           const o = opts[pick(opts.length)];
-          if (o?.scores) a = { ...a, ...o.scores };
+          if (!o?.scores) continue;
+          for (const [key, value] of Object.entries(o.scores)) {
+            if (key === "desired_cleans" && Array.isArray(value)) {
+              a.desired_cleans = [...new Set([...(a.desired_cleans ?? []), ...value])];
+            } else {
+              a[key] = value;
+            }
+          }
         }
         return a;
       };
