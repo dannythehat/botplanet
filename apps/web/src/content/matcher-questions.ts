@@ -755,6 +755,20 @@ const LITTER_BOX_QUESTIONS: MatcherQuestion[] = [
       },
     ],
   },
+  /**
+   * THIS QUESTION PROMISED A RULE-OUT AND DELIVERED NOTHING UNTIL 10 AUGUST
+   * 2026. Its own hint says "Rules out the sealed-tray systems" and no option
+   * carried a `scores` object, so the answer was recorded and never read —
+   * there was no capability for it to land on. `any_litter` exists now, and
+   * it is the sharpest difference in this category: three of the four boxes
+   * take ordinary clumping litter from any shop, and the PetSafe works only
+   * with PetSafe's own crystal trays for the life of the machine.
+   *
+   * The other two answers stay unscored on purpose. "Yes, if it means less
+   * handling" is a willingness, not a requirement, and turning it into a
+   * preference for the locked system would push a permanent running cost onto
+   * somebody who merely said they would tolerate one.
+   */
   {
     id: "litter_pref",
     kicker: "Running cost",
@@ -763,6 +777,7 @@ const LITTER_BOX_QUESTIONS: MatcherQuestion[] = [
       {
         label: "No — ordinary litter from any shop",
         hint: "Rules out the sealed-tray systems",
+        scores: { desired_cleans: ["any_litter"] },
       },
       { label: "Yes, if it means less handling" },
       { label: "Don't mind, show me both" },

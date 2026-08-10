@@ -124,6 +124,15 @@ export const CLEANING_SURFACES = [
   "health_monitoring", // logs weight and visit frequency — the vet-useful one
   "multi_cat_capacity", // rated for more than one cat rather than merely tolerating it
   "app_control", // phone app and notifications rather than a panel of buttons
+  /* Added 10 August 2026. The funnel has ALWAYS asked "would you buy the
+     manufacturer's own litter refills?", with a hint reading "Rules out the
+     sealed-tray systems", and nothing read the answer — there was no value for
+     it to land on. A running cost the reader is locked into for the life of
+     the machine is exactly the kind of thing this site exists to say out loud,
+     and it is the sharpest difference in the category: three of the four boxes
+     take ordinary clumping litter from any shop, and the fourth works only
+     with the maker's own crystal trays. */
+  "any_litter", // takes ordinary litter from any shop, not the maker's own trays
   /* Grill-cleaning robots. Scrubbing is the category, so it is not listed —
      every machine here scrubs and a universal capability cannot discriminate.
      These four do differ, and the first is the category's whole sales pitch. */
