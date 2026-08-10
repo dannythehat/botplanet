@@ -215,13 +215,19 @@ const hrefFor = (p: { categoryId: string; slug: string }) => `/robots/${catSlugO
   }
   .rec-hero__art :global(img) { display: block; width: 100%; height: auto; }
 
+  /* NO FORCED SQUARE, AND NO CROP.
+     This was aspect-ratio 1/1 with object-fit: cover, which is right for
+     photographs and wrong for everything this site actually holds: the
+     artwork is wide composed panels with the product's NAME set into the
+     pixels, so cropping to a square sliced the name off — "SCUBA X1 PRO MAX"
+     rendered as "CUBA X1 O MAX". The picture is shown whole, at whatever
+     shape it is. */
   .rec-alt__art {
     display: block;
-    aspect-ratio: 1 / 1;
     border-radius: 10px;
     overflow: hidden;
     margin-bottom: 10px;
     background: var(--panel, #0d1017);
   }
-  .rec-alt__art :global(img) { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .rec-alt__art :global(img) { width: 100%; height: auto; display: block; }
 </style>
