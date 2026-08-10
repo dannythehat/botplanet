@@ -72,7 +72,7 @@ export const REVIEWS: Record<string, ReviewContent> = {
     categorySlug: "robotic-pool-cleaners",
     eyebrow: "Robotic pool cleaner review",
     title: "Dolphin Nautilus CC Plus Wi-Fi review",
-    seoTitle: "Dolphin Nautilus CC Plus Wi-Fi Review — The 40 ft Limit",
+    seoTitle: "Dolphin Nautilus CC Plus Review — Wi-Fi, and the 40 ft Limit",
     metaDescription:
       "What the Nautilus CC Plus cleans, what it leaves alone, the 40 ft pool limit, and the US and global SKU difference worth checking before you order.",
     verdict:
@@ -655,7 +655,7 @@ export const REVIEWS: Record<string, ReviewContent> = {
     categorySlug: "robotic-pool-cleaners",
     eyebrow: "Robotic pool cleaner review",
     title: "Aiper Scuba V3 AI Vision review",
-    seoTitle: "Aiper Scuba V3 AI Vision Review — What the Camera Sees",
+    seoTitle: "Aiper Scuba V3 Review — AI Vision, and What the Camera Sees",
     metaDescription:
       "What the camera actually does, what seven days on one charge really means, the 3-micron filter claim, and the privacy question nobody else is asking.",
     verdict:
@@ -1425,7 +1425,7 @@ export const REVIEWS: Record<string, ReviewContent> = {
     categorySlug: "robotic-pool-cleaners",
     eyebrow: "Robotic pool cleaner review",
     title: "BuBlue Bubot 800P Gen2 review",
-    seoTitle: "BuBlue Bubot 800P Gen2 Review — Corded, So It Never Quits",
+    seoTitle: "BuBlue Bubot 800P Review — Gen2, Corded, So It Never Quits",
     metaDescription:
       "Corded four-zone cleaning that never runs out of battery. What BuBlue actually publishes, and what its shallow-water claim really means in a pool.",
     verdict:
@@ -2570,7 +2570,7 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "Casio Moflin review",
     seoTitle: "Moflin Review — What a $429 AI Pet Actually Does",
     metaDescription:
-      "A $429 robot pet with no legs, no speech and two axes of movement. What Moflin " +
+      "A $429 companion robot with no legs, no speech and two axes of movement. What Moflin " +
       "actually does, what Casio publishes, and who it is genuinely for.",
     verdict:
       "A 260-gram ball of fur that moves its head, makes sounds and learns to respond to how you handle it. It does not walk, does not talk and does nothing useful, and every one of those is a design decision rather than a shortfall. Whether that is worth $429 depends entirely on whether you want a pet or a gadget.",
@@ -2776,7 +2776,7 @@ export const REVIEWS: Record<string, ReviewContent> = {
     },
     categorySlug: "companion-robots",
     eyebrow: "Companion robot review",
-    title: "Anki Vector 2.0 review",
+    title: "Anki Vector 2.0 robot review",
     seoTitle: "Vector Robot Review — Is It Still Supported in 2026?",
     metaDescription:
       "Anki went under in 2019 and Vector is still on sale. Who owns it now, what the " +
@@ -2875,8 +2875,8 @@ export const REVIEWS: Record<string, ReviewContent> = {
     },
     categorySlug: "companion-robots",
     eyebrow: "Companion robot review",
-    title: "Eilik review",
-    seoTitle: "Eilik Review — The 1.5-Hour Battery Nobody Mentions",
+    title: "Eilik robot review",
+    seoTitle: "Eilik Robot Review — The 1.5-Hour Battery Nobody Mentions",
     metaDescription:
       "A $139.99 desk robot with real character, a 90-day warranty and 90 minutes of " +
       "battery. What Eilik does, what the DQ adds, and whether two is better.",
@@ -2986,7 +2986,7 @@ export const REVIEWS: Record<string, ReviewContent> = {
     },
     categorySlug: "companion-robots",
     eyebrow: "Companion robot review",
-    title: "Loona Petbot review",
+    title: "Loona robot review",
     seoTitle: "Loona Robot Review — 90 Minutes of Play for $499",
     metaDescription:
       "The most capable robot pet you can buy, and it charges longer than it plays. " +
@@ -3078,7 +3078,7 @@ export const REVIEWS: Record<string, ReviewContent> = {
     slug: "cozmo",
     categorySlug: "educational-coding-robots",
     eyebrow: "Coding robot review",
-    title: "Cozmo review",
+    title: "Cozmo robot review",
     seoTitle: "Cozmo Robot Review — Why You Cannot Buy One",
     metaDescription:
       "Cozmo is listed at $399.99 with no stock and no ship date, and Pennsylvania is " +
@@ -3126,7 +3126,7 @@ export const REVIEWS: Record<string, ReviewContent> = {
     slug: "moxie",
     categorySlug: "companion-robots",
     eyebrow: "Companion robot review",
-    title: "Moxie review",
+    title: "Moxie robot review",
     seoTitle: "Moxie Robot Review — It Stopped Working in 2025",
     metaDescription:
       "Embodied shut down and Moxie's servers went off, mostly without refunds. What a " +
@@ -3207,7 +3207,7 @@ export const REVIEWS: Record<string, ReviewContent> = {
     },
     categorySlug: "companion-robots",
     eyebrow: "Companion robot review",
-    title: "Living.AI EMO review",
+    title: "Living.AI EMO robot review",
     seoTitle: "EMO Robot Review — And Why Amazon Sells Fakes",
     metaDescription:
       "EMO is not sold on Amazon in the US, and searching for it returns copies. What " +
@@ -3309,7 +3309,7 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "Ropet KAMOMO review",
     seoTitle: "Ropet Review — The AI Pet That Makes You Wait",
     metaDescription:
-      "A $299 robot pet with swappable fur and no allergies, whose conversation " +
+      "A $299 companion robot with swappable fur and no allergies, whose conversation " +
       "unlocks after three weeks of bonding. What Ropet does, and what it withholds.",
     verdict:
       "A furry desk pet built around a deliberate delay: it learns you first and talks later, with the AI conversation arriving after roughly three weeks of daily handling. The fur comes off and swaps, most of it runs offline, and it costs $130 less than a Moflin.",

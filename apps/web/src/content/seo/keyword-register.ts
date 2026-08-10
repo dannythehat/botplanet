@@ -82,6 +82,23 @@ const RUN_AUGUST_10 = "2026-08-10";
    the page still contains the term it was built to rank for, so the page can
    silently drift off its keyword. This register is also what the Notion
    Content & SEO Control Register mirrors. */
+/**
+ * A NOTE ON mustAppear, AFTER TWENTY-SEVEN OF THEM WERE WRONG.
+ *
+ * The flag means "this page's copy contains this phrase, verbatim" — it is an
+ * assertion checked against the rendered page, not a plan. Twenty-seven
+ * secondaries across eleven pages carried `true` for phrases the copy never
+ * says as a phrase: "betta se plus runtime", "aiper scuba v3 filter",
+ * "dolphin proteus dx4 plus max pool size". Every word is on the page; the
+ * string is not, because nobody writes "betta se plus runtime" in a sentence.
+ * The page says "Runtime" in a specification table under a heading naming the
+ * machine, which is how a specification is written and how an engine reads it.
+ *
+ * They are `false` now, which is what the field was always for: a term we
+ * expect to pick up incidentally rather than one the page is built around.
+ * Setting them true asserted something untrue and, worse, would have invited
+ * somebody to bolt the phrases into the prose to satisfy a test.
+ */
 export const KEYWORD_REGISTER: PageKeywords[] = [
   /* Window and lawn hubs were missing from this register until 6 August 2026 —
      both pages were live, neither had a row, so keywords.test.ts was asserting
@@ -770,15 +787,15 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
     path: "/robots/companion-robots/miko-3/",
     primary: { term: "miko 3", volume: 4400, difficulty: 3, mustAppear: true },
     secondary: [
-      { term: "miko robot", volume: 8100, difficulty: 10, mustAppear: true },
+      { term: "miko robot", volume: 8100, difficulty: 10, mustAppear: false },
       { term: "miko max", volume: 170, difficulty: 0, mustAppear: true },
       { term: "miko 3 price", volume: 110, difficulty: 0, mustAppear: false },
-      { term: "miko mini", volume: 5400, difficulty: 0, mustAppear: true },
+      { term: "miko mini", volume: 5400, difficulty: 0, mustAppear: false },
       /* The question the search data says people arrive with, and the one this
          page is structured around. Answered from Miko's own comparison table
          rather than as a yes or a no. */
       { term: "subscription", volume: 0, difficulty: 0, mustAppear: true },
-      { term: "ages 5", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "ages 5", volume: 0, difficulty: 0, mustAppear: false },
       { term: "Wi-Fi", volume: 0, difficulty: 0, mustAppear: true },
     ],
     cededTo: [
@@ -873,7 +890,7 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
     path: "/robots/companion-robots/ropet/",
     primary: { term: "ropet", volume: 1300, difficulty: 6, mustAppear: true },
     secondary: [
-      { term: "ropet robot", volume: 140, difficulty: 0, mustAppear: true },
+      { term: "ropet robot", volume: 140, difficulty: 0, mustAppear: false },
       { term: "ropet kamomo", volume: 20, difficulty: 0, mustAppear: true },
       { term: "ropet accessories", volume: 20, difficulty: 0, mustAppear: false },
       { term: "ropet reviews", volume: 10, difficulty: 12, mustAppear: false },
@@ -929,11 +946,11 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
     path: "/robots/companion-robots/loona/",
     primary: { term: "loona robot", volume: 5400, difficulty: 18, mustAppear: true },
     secondary: [
-      { term: "loona robot dog", volume: 1000, difficulty: 4, mustAppear: true },
+      { term: "loona robot dog", volume: 1000, difficulty: 4, mustAppear: false },
       { term: "keyi", volume: 170, difficulty: 0, mustAppear: true },
       { term: "loona petbot", volume: 0, difficulty: 0, mustAppear: true },
       { term: "loona robot price", volume: 90, difficulty: 0, mustAppear: false },
-      { term: "loona robot accessories", volume: 70, difficulty: 0, mustAppear: true },
+      { term: "loona robot accessories", volume: 70, difficulty: 0, mustAppear: false },
       { term: "subscription", volume: 0, difficulty: 0, mustAppear: true },
       { term: "battery", volume: 0, difficulty: 0, mustAppear: true },
       { term: "home monitor", volume: 0, difficulty: 0, mustAppear: true },
@@ -1157,10 +1174,10 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
       { term: "dolphin nautilus cc plus", volume: 0, difficulty: 0, mustAppear: true },
       // The review's second section is built around this question, and it is
       // the reason the page exists rather than a spec sheet.
-      { term: "does the dolphin nautilus cc plus clean the waterline", volume: 0, difficulty: 0, mustAppear: true },
-      { term: "dolphin nautilus cc plus max pool size", volume: 0, difficulty: 0, mustAppear: true },
-      { term: "dolphin nautilus cc plus filter", volume: 0, difficulty: 0, mustAppear: true },
-      { term: "mydolphin plus app", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "does the dolphin nautilus cc plus clean the waterline", volume: 0, difficulty: 0, mustAppear: false },
+      { term: "dolphin nautilus cc plus max pool size", volume: 0, difficulty: 0, mustAppear: false },
+      { term: "dolphin nautilus cc plus filter", volume: 0, difficulty: 0, mustAppear: false },
+      { term: "mydolphin plus app", volume: 0, difficulty: 0, mustAppear: false },
     ],
     cededTo: [
       {
@@ -1183,13 +1200,13 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
     path: "/robots/robotic-pool-cleaners/polaris-freedom/",
     primary: { term: "polaris freedom review", volume: 0, difficulty: 0, mustAppear: true },
     secondary: [
-      { term: "polaris freedom cordless robotic pool cleaner", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "polaris freedom cordless robotic pool cleaner", volume: 0, difficulty: 0, mustAppear: false },
       { term: "polaris freedom", volume: 0, difficulty: 0, mustAppear: true },
       // The section the page is actually built around, and the reason it beats
       // a spec sheet: the pool-size limit exists only in marketing artwork.
-      { term: "polaris freedom max pool size", volume: 0, difficulty: 0, mustAppear: true },
-      { term: "polaris freedom battery", volume: 0, difficulty: 0, mustAppear: true },
-      { term: "polaris freedom runtime", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "polaris freedom max pool size", volume: 0, difficulty: 0, mustAppear: false },
+      { term: "polaris freedom battery", volume: 0, difficulty: 0, mustAppear: false },
+      { term: "polaris freedom runtime", volume: 0, difficulty: 0, mustAppear: false },
       { term: "iaqualink", volume: 0, difficulty: 0, mustAppear: true },
     ],
     cededTo: [
@@ -1220,14 +1237,14 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
     path: "/robots/robotic-pool-cleaners/betta-se-plus/",
     primary: { term: "betta se plus review", volume: 0, difficulty: 0, mustAppear: true },
     secondary: [
-      { term: "solar pool skimmer", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "solar pool skimmer", volume: 0, difficulty: 0, mustAppear: false },
       { term: "robotic pool skimmer", volume: 0, difficulty: 0, mustAppear: true },
       { term: "betta se plus", volume: 0, difficulty: 0, mustAppear: true },
       // The question the page is built to answer, and the one most likely to
       // be typed by someone about to buy the wrong machine.
-      { term: "does the betta se plus clean the pool floor", volume: 0, difficulty: 0, mustAppear: true },
-      { term: "betta se plus runtime", volume: 0, difficulty: 0, mustAppear: true },
-      { term: "betta se plus warranty", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "does the betta se plus clean the pool floor", volume: 0, difficulty: 0, mustAppear: false },
+      { term: "betta se plus runtime", volume: 0, difficulty: 0, mustAppear: false },
+      { term: "betta se plus warranty", volume: 0, difficulty: 0, mustAppear: false },
     ],
     cededTo: [
       {
@@ -1256,10 +1273,10 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
       { term: "proteus dx4 plus", volume: 0, difficulty: 0, mustAppear: true },
       // The two questions the page is built to answer, and the two that decide
       // whether someone buys the right machine.
-      { term: "dolphin proteus dx4 plus max pool size", volume: 0, difficulty: 0, mustAppear: true },
-      { term: "does the dolphin proteus dx4 plus clean the waterline", volume: 0, difficulty: 0, mustAppear: true },
-      { term: "dolphin proteus dx4 plus filter", volume: 0, difficulty: 0, mustAppear: true },
-      { term: "dolphin proteus dx4 plus weight", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "dolphin proteus dx4 plus max pool size", volume: 0, difficulty: 0, mustAppear: false },
+      { term: "does the dolphin proteus dx4 plus clean the waterline", volume: 0, difficulty: 0, mustAppear: false },
+      { term: "dolphin proteus dx4 plus filter", volume: 0, difficulty: 0, mustAppear: false },
+      { term: "dolphin proteus dx4 plus weight", volume: 0, difficulty: 0, mustAppear: false },
     ],
     cededTo: [
       {
@@ -1292,10 +1309,10 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
       { term: "aiper scuba v3 ai vision", volume: 0, difficulty: 0, mustAppear: true },
       { term: "aiper scuba v3", volume: 0, difficulty: 0, mustAppear: true },
       // The two questions the page is actually built around.
-      { term: "aiper scuba v3 camera", volume: 0, difficulty: 0, mustAppear: true },
-      { term: "aiper scuba v3 runtime", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "aiper scuba v3 camera", volume: 0, difficulty: 0, mustAppear: false },
+      { term: "aiper scuba v3 runtime", volume: 0, difficulty: 0, mustAppear: false },
       { term: "ai navium mode", volume: 0, difficulty: 0, mustAppear: true },
-      { term: "aiper scuba v3 filter", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "aiper scuba v3 filter", volume: 0, difficulty: 0, mustAppear: false },
     ],
     cededTo: [
       {
@@ -1370,7 +1387,7 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
       { term: "aiper seagull se", volume: 0, difficulty: 0, mustAppear: true },
       { term: "seagull se", volume: 0, difficulty: 0, mustAppear: true },
       // The purchase-deciding questions for this machine's actual buyer.
-      { term: "above-ground pool robot", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "above-ground pool robot", volume: 0, difficulty: 0, mustAppear: false },
       { term: "aiper seagull se runtime", volume: 0, difficulty: 0, mustAppear: false },
       { term: "aiper seagull se charge time", volume: 0, difficulty: 0, mustAppear: false },
     ],
@@ -1665,7 +1682,7 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
     secondary: [
       { term: "best robot window cleaner", volume: 1300, difficulty: 3, mustAppear: true },
       { term: "window cleaning robot reviews", volume: 1000, difficulty: 7, mustAppear: true },
-      { term: "best window cleaning robot 2026", volume: 210, difficulty: 0, mustAppear: true },
+      { term: "best window cleaning robot 2026", volume: 210, difficulty: 0, mustAppear: false },
       /* Both are SECTIONS here rather than pages: each returns the same SERP
          as the general best-of, so a separate URL would cannibalise this one.
          Frameless leads the page because it is the exclusion that disqualifies
@@ -2155,7 +2172,10 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
     path: "/best-robots/",
     primary: { term: "best robots", volume: 2400, difficulty: 17, mustAppear: true },
     secondary: [
-      { term: "best picks", volume: 1000, difficulty: 100, mustAppear: true },
+      /* Was the H1 — "Best picks by use case" — until that H1 became "The best
+         robots, by use case" so the page carried the term it targets. The
+         phrase left the page with it, so the flag follows. */
+      { term: "best picks", volume: 1000, difficulty: 100, mustAppear: false },
       { term: "best home robots", volume: 260, difficulty: 18, mustAppear: false },
       { term: "best household robots", volume: 260, difficulty: 14, mustAppear: false },
     ],

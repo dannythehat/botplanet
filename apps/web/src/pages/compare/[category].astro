@@ -142,13 +142,42 @@ const bmCta = products.length > 0 ? botMatchCtaFor(cat.slug) : undefined;
    state and a noindex, and starts asking to be indexed on its own the moment a
    second machine goes live. */
 const substantive = comparePageIsSubstantive(cat.slug, products.length);
+/**
+ * What this page calls its category, which is not always the category's name.
+ *
+ * TWO REASONS IT DIFFERS. "Self-Cleaning Litter Boxes" singularised by
+ * chopping a trailing "s" gives "self-cleaning litter boxe", which shipped in
+ * the meta description. And "Companion Robots & Robot Pets" contains "robot
+ * pet" — the 8,100/mo head term this page cedes to the hub — so a comparison
+ * table led with the phrase it had agreed not to compete for.
+ *
+ * The category keeps its name everywhere else. This is only what the
+ * comparison page calls it.
+ */
+const COMPARE_NAME: Record<string, { plural: string; singular: string }> = {
+  "companion-robots": { plural: "companion robots", singular: "companion robot" },
+  "self-cleaning-litter-boxes": { plural: "self-cleaning litter boxes", singular: "self-cleaning litter box" },
+  "robot-vacuums": { plural: "robot vacuums", singular: "robot vacuum" },
+};
+const namePlural = COMPARE_NAME[cat.slug]?.plural ?? cat.name.toLowerCase();
+const nameSingular =
+  COMPARE_NAME[cat.slug]?.singular ?? cat.name.toLowerCase().replace(/s$/, "");
+
 ---
 
 <Base
-  title={article?.seoTitle ?? `Compare ${cat.name} — BotPlanet`}
+  title={article?.seoTitle ?? `Compare ${namePlural} — every model, one table`}
   description={
     article?.metaDescription ??
-    `Every ${cat.name.toLowerCase().replace(/s$/, "")} we hold, side by side on what it cleans, the pool it is rated for and how it is powered.`
+    /* WAS A POOL SENTENCE ON EVERY CATEGORY. The fallback read "…side by
+       side on what it cleans, THE POOL IT IS RATED FOR and how it is
+       powered", which the companion, coding, litter, lawn and pet-camera
+       comparison pages were all serving to Google. A robot pet is not rated
+       for a pool. Same failure as the ComparisonTable column headings, which
+       said "Pool size" on every category until 8 August: pool was the first
+       category and its vocabulary got left in the shared template. This one
+       names only what every category actually has. */
+    `Every ${nameSingular} we hold, side by side on the same columns: what it is rated for, what it does, how it is powered and where its price sits.`
   }
   breadcrumbs={crumbs}
   schema={pageSchema}
@@ -159,6 +188,9 @@ const substantive = comparePageIsSubstantive(cat.slug, products.length);
       <span class="eyebrow">{article.eyebrow}</span>
       <h1 class="bp-cmp-head__h1">{article.title}</h1>
       <p class="bp-cmp-head__stand">{article.standfirst}</p>
+      <p class="bp-cmp-head__index">
+        <a href="/compare/">Every comparison table BotPlanet publishes</a>
+      </p>
       {article.image?.src && (
         <figure class="bp-cmp-head__hero">
           <img
@@ -179,11 +211,15 @@ const substantive = comparePageIsSubstantive(cat.slug, products.length);
   ) : (
     <header class="bp-cmp-head">
       <span class="eyebrow">Compare</span>
-      <h1 class="bp-cmp-head__h1">Compare {cat.name.toLowerCase()}</h1>
+      <h1 class="bp-cmp-head__h1">Compare {namePlural}</h1>
       <p class="bp-cmp-head__stand">
-        Every {cat.name.toLowerCase().replace(/s$/, "")} we hold, side by side on what it cleans, the
-        space it is rated for and how it is powered. No prices here — those live on each review with
-        the date they were checked.
+        Every {nameSingular} we hold, side by side on what it is rated for, what it does and how it
+        is powered. No prices here — those live on each review with the date they were checked.
+      </p>
+      {/* The index, linked from the prose. /compare/ was reachable only from
+          the menu, which a crawler treats as furniture. */}
+      <p class="bp-cmp-head__index">
+        <a href="/compare/">Every comparison table BotPlanet publishes</a>
       </p>
     </header>
   )}
@@ -285,6 +321,9 @@ const substantive = comparePageIsSubstantive(cat.slug, products.length);
     aspect-ratio: 1672 / 941;
     object-fit: cover;
   }
+
+  .bp-cmp-head__index { margin: 0.6rem 0 0; font-size: 0.92rem; }
+  .bp-cmp-head__index a { font-weight: 600; }
 
   .bp-cmp-head__stand {
     margin: 1.2rem 0 0;

@@ -4024,6 +4024,18 @@ export interface BotMatchCtaContent {
   body: string;
   points: string[];
   ctaLabel: string;
+  /**
+   * The label used inside an article — a review or a guide — where the panel
+   * sits at the foot of two thousand words.
+   *
+   * WHY A SECOND LABEL AT ALL. Every category used the same "Start 30-second
+   * match" everywhere, which put eight to thirteen links on identical anchor
+   * text into each matcher: the only thing a crawler learned from all of them
+   * was that something takes thirty seconds. Naming the category is better
+   * copy on both surfaces and gives the two contexts different words, which is
+   * what body links look like when a person writes them.
+   */
+  ctaLabelInArticle?: string;
   note?: string;
   image?: HeroImage;
 }
@@ -4054,7 +4066,8 @@ export const BOTMATCH_CTA: Record<string, BotMatchCtaContent> = {
       "asked for one. In about 30 seconds we will match you with the right coding robot — and " +
       "say when the cheap one is the better buy.",
     points: ["About 30 seconds", "Five plain questions", "No account needed"],
-    ctaLabel: "Start 30-second match",
+    ctaLabel: "Start the coding-robot matcher",
+    ctaLabelInArticle: "Match me with a coding robot",
     note: "Free. We email the result and keep it on a page you can return to.",
   },
   "robot-vacuums": {
@@ -4064,7 +4077,8 @@ export const BOTMATCH_CTA: Record<string, BotMatchCtaContent> = {
       "keep it. In about 30 seconds we will match you with the right robot vacuum — and tell you " +
       "which ones to rule out.",
     points: ["About 30 seconds", "Five plain questions", "No account needed"],
-    ctaLabel: "Start 30-second match",
+    ctaLabel: "Start the vacuum matcher",
+    ctaLabelInArticle: "Match me with a robot vacuum",
     note: "Free. We email the result and keep it on a page you can return to.",
   },
   "grill-cleaning-robots": {
@@ -4074,7 +4088,8 @@ export const BOTMATCH_CTA: Record<string, BotMatchCtaContent> = {
       "about 30 seconds we will match you with the right machine — or tell you a brush is the " +
       "better buy.",
     points: ["About 30 seconds", "Five plain questions", "No account needed"],
-    ctaLabel: "Start 30-second match",
+    ctaLabel: "Start the grill-cleaner matcher",
+    ctaLabelInArticle: "Match me with a grill cleaner",
     note: "Free. We email the result and keep it on a page you can return to.",
   },
   "self-cleaning-litter-boxes": {
@@ -4084,7 +4099,8 @@ export const BOTMATCH_CTA: Record<string, BotMatchCtaContent> = {
       "litter. In about 30 seconds we will match you with the right automatic litter box — and " +
       "tell you plainly if your cat is too small for one.",
     points: ["About 30 seconds", "Five plain questions", "No account needed"],
-    ctaLabel: "Start 30-second match",
+    ctaLabel: "Start the litter-box matcher",
+    ctaLabelInArticle: "Match me with a litter box",
     note: "Free. We email the result and keep it on a page you can return to.",
   },
   "companion-robots": {
@@ -4094,7 +4110,8 @@ export const BOTMATCH_CTA: Record<string, BotMatchCtaContent> = {
       "something that moves. In about 30 seconds we will match you with the right companion " +
       "robot — and tell you which ones to rule out.",
     points: ["About 30 seconds", "Five plain questions", "No account needed"],
-    ctaLabel: "Start 30-second match",
+    ctaLabel: "Start the companion matcher",
+    ctaLabelInArticle: "Match me with a companion robot",
     note: "Free. We email the result and keep it on a page you can return to.",
   },
   "pet-camera-robots": {
@@ -4104,7 +4121,8 @@ export const BOTMATCH_CTA: Record<string, BotMatchCtaContent> = {
       "and what you actually need to do from your phone. In about 30 seconds we will match you " +
       "with the right robot — or tell you a fixed camera is the better buy.",
     points: ["About 30 seconds", "Five plain questions", "No account needed"],
-    ctaLabel: "Start 30-second match",
+    ctaLabel: "Start the pet-camera matcher",
+    ctaLabelInArticle: "Match me with a pet camera robot",
     note: "Free. We email the result and keep it on a page you can return to.",
   },
   "robotic-lawn-mowers": {
@@ -4113,7 +4131,8 @@ export const BOTMATCH_CTA: Record<string, BotMatchCtaContent> = {
       "Tell us the lawn size, the slope and whether it sits under trees. In about 30 seconds we " +
       "will match you with the right robot mower — and tell you which ones to rule out.",
     points: ["About 30 seconds", "Four plain questions", "No account needed"],
-    ctaLabel: "Start 30-second match",
+    ctaLabel: "Start the mower matcher",
+    ctaLabelInArticle: "Match me with a robot mower",
     image: {
       src: "/media/lawn-category/feature-desktop.webp",
       alt:
@@ -4143,7 +4162,8 @@ export const BOTMATCH_CTA: Record<string, BotMatchCtaContent> = {
       "a socket nearby. In about 30 seconds we will match you with the right window cleaning " +
       "robot — and tell you which ones to rule out.",
     points: ["About 30 seconds", "A handful of plain questions", "No account needed"],
-    ctaLabel: "Start 30-second match",
+    ctaLabel: "Start the window matcher",
+    ctaLabelInArticle: "Match me with a window robot",
     image: {
       src: "/media/window-category/feature-desktop.webp",
       alt:
@@ -4165,7 +4185,8 @@ export const BOTMATCH_CTA: Record<string, BotMatchCtaContent> = {
       "Tell us your budget, pool size or priorities like fast shipping. In about 30 seconds " +
       "we will match you with the right robotic pool cleaner — and tell you which ones to rule out.",
     points: ["About 30 seconds", "Eight plain questions", "No account needed"],
-    ctaLabel: "Start 30-second match",
+    ctaLabel: "Start the pool matcher",
+    ctaLabelInArticle: "Match me with a pool robot",
     image: {
       src: "/media/pool-category/feature-desktop.webp",
       alt:

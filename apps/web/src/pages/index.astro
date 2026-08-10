@@ -238,7 +238,7 @@ const homeSchema = [
 ---
 
 <Base
-  title="BotPlanet — the world of real-world robots"
+  title="Home Robots Compared on the Evidence — BotPlanet"
   description="Compare real-world robots for the US — pool cleaners, window robots, companion pets and coding robots. Evidence, honest rule-outs, and what we could not verify."
   bleed={true}
   schema={homeSchema}
@@ -247,7 +247,7 @@ const homeSchema = [
     <div class="wrap hero__grid">
       <div class="hero__copy">
         <p class="hero__marker">THE WORLD OF REAL-WORLD ROBOTS</p>
-        <h1>Robots are leaving the lab.<br /><span>We help you choose the right ones.</span></h1>
+        <h1>Home robots are leaving the lab.<br /><span>We help you choose the right ones.</span></h1>
         <p class="hero__lede">
           BotPlanet is building the premium destination for robots that do useful work in homes, gardens, businesses and everyday life. We compare the machines, verify the claims and track where they can actually be bought.
         </p>
@@ -463,6 +463,18 @@ const homeSchema = [
           Each review names its sources, records what the manufacturer will not state, and
           says plainly who should buy something else. Prices are checked automatically and
           dated on the page.
+        </p>
+        {/* THE THREE INDEXES, LINKED FROM THE PROSE RATHER THAN ONLY THE MENU.
+            /robots/, /best-robots/, /compare/ and /guides/ were reachable only
+            through nav chrome — which a crawler weights as template furniture
+            and a reader on a phone never opens. Named here by what each one is
+            for, because "browse" tells nobody which of the four they want. */}
+        <p class="reviews__ways">
+          Four ways in: <a href="/robots/">the robot categories</a> if you know what kind of
+          machine you want, <a href="/best-robots/">the best robots by use case</a> if you
+          know the job but not the machine, <a href="/compare/">the comparison tables</a> if
+          you already have a shortlist, and <a href="/guides/">the robot guides</a> for the
+          questions that come before any of it.
         </p>
       </div>
 

@@ -416,7 +416,7 @@ export const CATEGORY_HERO: Record<string, CategoryHeroContent> = {
       "a lawn it looks after stays even rather than recovering between mows. Not every robot " +
       "mower suits every yard though — size, slope and tree cover rule machines out fast, and " +
       "we compare them on exactly that.",
-    seoTitle: "Robotic Lawn Mowers: Compare Robot Mowers | BotPlanet",
+    seoTitle: "Robot Lawn Mowers: Compare Every Model | BotPlanet",
     metaDescription:
       "Compare robotic lawn mowers by yard size, slope, boundary wire or wire-free RTK " +
       "navigation, zones and price. Find the right robot mower for your lawn.",

@@ -1,6 +1,7 @@
 ---
 import Base from "../../../layouts/Base.astro";
 import { getDb, schema } from "../../../lib/db";
+import { productMetaDescription } from "../../../lib/product-meta";
 import { usd, freshnessLabel, titleCase } from "../../../lib/format";
 import { and, eq } from "drizzle-orm";
 import { breadcrumbsFor } from "../../../lib/routing";
@@ -220,7 +221,13 @@ const reviewGraph = hasReview
 
 <Base
   title={hasReview ? review!.seoTitle : `${product.name} — BotPlanet`}
-  description={hasReview ? review!.metaDescription : `${product.name}: specs, offers and suitability.`}
+  description={hasReview ? review!.metaDescription : productMetaDescription({
+    name: product.name,
+    productClass: product.productClass,
+    powerType: product.powerType,
+    environments: product.environments as string[],
+    cleans: product.cleans as string[],
+  })}
   ogImage={hasReview ? review!.image?.src : undefined}
   ogType={hasReview ? "article" : undefined}
   breadcrumbs={crumbs}

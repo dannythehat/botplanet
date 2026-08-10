@@ -62,7 +62,9 @@ export const COMPARE_PAGES: Record<string, ComparePageContent> = {
   "robotic-pool-cleaners": {
     categorySlug: "robotic-pool-cleaners",
     eyebrow: "Compare",
-    title: "Robotic pool cleaners compared, brand by brand",
+    /* The brands are named in the H1 because "aiper vs dolphin" is what this
+       page is targeted at and what a reader arrives having typed. */
+    title: "Robotic pool cleaners compared: Aiper vs Dolphin, brand by brand",
     seoTitle: "Aiper vs Dolphin vs Polaris — Pool Cleaners Compared",
     metaDescription:
       "Aiper against Dolphin, Dolphin against Polaris, and the matchups underneath. Every machine we hold in one table, with the differences that decide it.",

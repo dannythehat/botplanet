@@ -161,7 +161,7 @@ const parts: { html: string; slot: number | null }[] = [];
     headline={bmCta.headline}
     body={bmCta.body}
     points={bmCta.points}
-    ctaLabel={bmCta.ctaLabel}
+    ctaLabel={bmCta.ctaLabelInArticle ?? bmCta.ctaLabel}
     note={bmCta.note}
     image={bmCta.image}
   />
@@ -177,9 +177,25 @@ const parts: { html: string; slot: number | null }[] = [];
   />
 )}
 
+{/* THE INDEX, LINKED FROM THE WRITING RATHER THAN ONLY FROM THE MENU. Every
+    guide and every best-of page hung off an index that no page's body copy
+    pointed at — a crawler discounts nav chrome, and a reader who has just
+    finished two thousand words is exactly the person who wants the next one.
+    Named by what it holds, not "back to index". */}
+<p class="bp-ed__index">
+  {article.path.startsWith("/guides/") ? (
+    <a href="/guides/">Every robot guide we have published</a>
+  ) : (
+    <a href="/best-robots/">Every best-of list, by the job you need doing</a>
+  )}
+</p>
+
 <ArticleFooter lastReviewed={article.lastReviewed} />
 
 <style>
+  .bp-ed__index { margin: 1.5rem 0 0; font-size: 0.94rem; }
+  .bp-ed__index a { font-weight: 600; }
+
   /* The hero sits between the standfirst and the picks: the reader gets the
      answer in text first, then the scene. Eager and high-priority because it
      is above the fold and it is the LCP element on every page that has one. */
