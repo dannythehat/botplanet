@@ -4420,6 +4420,81 @@ export const REVIEWS: Record<string, ReviewContent> = {
     lastReviewed: "2026-08-08",
   },
 
+  "grillbot": {
+    slug: "grillbot",
+    /* No artwork supplied yet. The review ships without a lead image rather
+       than waiting for one: 18,100/mo at KD 11 is the reason this category
+       exists, and an unillustrated page that answers the query beats a
+       finished page that does not exist. */
+    image: undefined,
+    figures: [],
+    categorySlug: "grill-cleaning-robots",
+    eyebrow: "Grill-cleaning robot review",
+    title: "Grillbot review",
+    seoTitle: "Grillbot Review — What $130 of Not Scrubbing Buys",
+    metaDescription:
+      "Grillbot sits on the grates and scrubs while you do something else. What it " +
+      "cleans, what Grillbot will not publish, and why a $15 brush kills the same risk.",
+    verdict:
+      "The only robotic grill cleaner with real US retail presence, and it does exactly one thing: it scrubs the grates on its own while you are not standing there. Three motors, three brush heads, an LCD timer and auto shut-off, hot grill or cold. It is maintenance between proper cleans rather than a substitute for one, and if wire bristles are your only worry a $15 bristle-free brush removes the same risk for a fraction of the money.",
+    bestFor:
+      "Somebody who grills often enough that scrubbing has become the reason they put it off, and would rather pay once than keep not doing it.",
+    notIdealFor:
+      "Anyone buying purely to avoid wire bristles — a bristle-free brush does that for about $15 — and anyone expecting a deep clean rather than upkeep between them.",
+    facts: [
+      { label: "Price", value: "$129.99, read 10 August 2026" },
+      { label: "Brush heads", value: "Nylon, brass, stainless steel" },
+      { label: "Runs on", value: "Hot or cold grills" },
+      { label: "Warranty", value: "1 year" },
+    ],
+    specGroups: [
+      {
+        heading: "How it works",
+        rows: [
+          { label: "Operation", value: "Sits on the grates, one button, runs to a timer" },
+          { label: "Motors", value: "Three" },
+          { label: "Timer", value: "Built-in LCD timer with auto shut-off" },
+          { label: "Grill temperature", value: "Hot or cold grills" },
+          { label: "Steering", value: "Adjusts speed and direction as it runs" },
+        ],
+      },
+      {
+        heading: "Brushes",
+        rows: [
+          { label: "Heads supplied", value: "Three" },
+          { label: "Nylon", value: "Softest and longest-lasting; Grillbot's default recommendation" },
+          { label: "Brass", value: "For porcelain and stainless steel grates" },
+          { label: "Stainless steel", value: "For cast iron and expanded steel grates" },
+          { label: "Loose wire bristles", value: "None" },
+          { label: "Dishwasher safe", value: "Yes" },
+        ],
+      },
+      {
+        heading: "Power and support",
+        rows: [
+          { label: "Power", value: "Cordless, rechargeable battery" },
+          { label: "Runtime", value: null },
+          { label: "Upgraded battery", value: "Up to 8 hours — sold separately, not the supplied cell" },
+          { label: "Replacement battery", value: "$22.95 from Grillbot" },
+          { label: "Replacement charger", value: "$12.95 from Grillbot" },
+          { label: "Warranty", value: "1 year; 3-year extension sold separately at $26.95" },
+        ],
+      },
+      {
+        heading: "Not published",
+        rows: [
+          { label: "Cycle length", value: null },
+          { label: "Weight", value: null },
+          { label: "Dimensions", value: null },
+          { label: "Grill size range", value: null },
+        ],
+      },
+    ],
+    skuNote:
+      "Grillbot in red without a case, ASIN B00HFDFSAC, $129.99 read on 10 August 2026. Four ASINs share one review pool — red and black, each with and without a carry case — so a link that does not force a variant can land on the $139.99 bundle.",
+    lastReviewed: "2026-08-10",
+  },
+
 };
 
 export function reviewFor(slug: string | undefined): ReviewContent | undefined {

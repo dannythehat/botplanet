@@ -171,6 +171,28 @@ function categoryCompare(r: ReviewContent): AlsoLink | null {
   };
 }
 
+/**
+ * The category hub, offered only when nothing else could be.
+ *
+ * A CATEGORY'S FIRST REVIEW HAS NO SIBLINGS, which is obvious in hindsight and
+ * was not handled: Grillbot arrived on 10 August as the only grill review, so
+ * there was no head-to-head and no nearest sibling, and the block fell to a
+ * single link. The hub is the honest thing to offer a reader in that position —
+ * it explains the category rather than pretending a comparison exists — and it
+ * is deliberately LAST, so it never displaces a real product comparison on any
+ * page that has one.
+ */
+function categoryHub(r: ReviewContent): AlsoLink | null {
+  const path = `/robots/${r.categorySlug}/`;
+  const route = ROUTES.find((x) => x.path === path && x.status === "live");
+  if (!route) return null;
+  return {
+    href: path,
+    title: route.title ?? "The category explained",
+    because: "What to look for before picking a model, and who should not buy one at all.",
+  };
+}
+
 export function alsoCompared(r: ReviewContent): AlsoLink[] {
   const out: AlsoLink[] = [];
   const seen = new Set<string>();
@@ -179,6 +201,11 @@ export function alsoCompared(r: ReviewContent): AlsoLink[] {
       seen.add(link.href);
       out.push(link);
     }
+  }
+  /* Only when the product comparisons could not fill the block. */
+  if (out.length < 2) {
+    const hub = categoryHub(r);
+    if (hub && !seen.has(hub.href)) out.push(hub);
   }
   return out.slice(0, 3);
 }

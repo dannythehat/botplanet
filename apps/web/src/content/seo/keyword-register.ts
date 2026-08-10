@@ -2303,6 +2303,28 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
       "Terms of use exist to be readable when somebody needs them. The 74,000 is the generic word and is not a robot-shopping query; nothing here is aimed at winning it.",
     researchedOn: RUN_AUGUST_10,
   },
+  {
+    path: "/robots/grill-cleaning-robots/grillbot/",
+    /* 18,100/mo at KD 11 — the highest-volume term BotPlanet targets outside
+       the pool and vacuum head terms, and the reason this category was kept
+       after the 6 August run was designed to kill it. The brand outranks the
+       category it belongs to: `grillbot` 18,100 against `grill cleaning robot`
+       5,400, the same shape Litter-Robot has in litter. */
+    primary: { term: "grillbot", volume: 18100, difficulty: 11, mustAppear: true },
+    secondary: [
+      { term: "grillbot review", volume: 5400, difficulty: 0, mustAppear: true },
+      { term: "does grillbot work", volume: 210, difficulty: 0, mustAppear: false },
+      { term: "grillbot price", volume: 0, difficulty: 0, mustAppear: false },
+    ],
+    cededTo: [
+      {
+        term: "grill cleaning robot",
+        path: "/robots/grill-cleaning-robots/",
+        why: "The category head term belongs to the hub, which explains what these machines do and who should buy a brush instead. This page answers one machine.",
+      },
+    ],
+    researchedOn: RUN_GRILL,
+  },
 ];
 
 export const keywordsFor = (path: string): PageKeywords | undefined =>

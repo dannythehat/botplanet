@@ -24,6 +24,7 @@ import ArticleFooter from "../../../components/ArticleFooter.astro";
 import BotMatchCta from "../../../components/BotMatchCta.astro";
 import BotFinderCard from "../../../components/BotFinderCard.astro";
 import { finderCardFor } from "../../../content/finder-cards";
+import { canMatch } from "../../../content/matcher-router";
 import PriceLadder from "../../../components/PriceLadder.astro";
 import VerdictPanel from "../../../components/VerdictPanel.astro";
 import FaqList from "../../../components/FaqList.astro";
@@ -93,10 +94,18 @@ const faq = faqSectionFor(category);
    PRE-BUILD-PROCESS.md Stage 5b — and the finder card walked straight past
    that rule when it was added: the grill hub shipped a "Find my grill bot"
    button pointing at a matcher that holds zero products and can therefore
-   answer nobody. Verified by scripts/audit-matchers.mjs, which drives every
-   matcher and found grill and vacuums returning nothing under any answers. */
-const finderCard = products.length > 0 ? finderCardFor(cat.slug) : undefined;
-const bmCta = products.length > 0 ? botMatchCtaFor(category) : undefined;
+   answer nobody.
+
+   AND THE THRESHOLD IS canMatch, NOT "more than nothing". The first version of
+   this gate read products.length > 0, which was right until grill gained its
+   first product and promptly advertised a matcher that still could not run —
+   MIN_PRODUCTS_FOR_A_MATCH is 2, because scoring a questionnaire against a
+   single product and announcing it as the match tells a reader a comparison
+   happened when nothing was compared. One source of truth for "can this
+   category answer anybody", used by the card, the written panel and the
+   matcher page alike. */
+const finderCard = canMatch(products.length) ? finderCardFor(cat.slug) : undefined;
+const bmCta = canMatch(products.length) ? botMatchCtaFor(category) : undefined;
 
 /* Built from the catalogue rather than written out, so a product that changes
    model cannot leave a stale row behind. */

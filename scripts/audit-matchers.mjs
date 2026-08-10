@@ -85,6 +85,12 @@ async function checkPage(url) {
   const res = await fetch(url);
   if (!res.ok) return { ok: false, why: `HTTP ${res.status}` };
   const html = await res.text();
+  /* The UI's own gate, read off the page it renders. THE API DOES NOT ENFORCE
+     IT: /api/botmatch will happily score a category holding one product and
+     name a winner, while the funnel refuses to ask the questions at all. After
+     Grillbot landed this audit reported grill as "decides 3/3", which is true
+     of the API and false of anything a reader can reach. */
+  const gated = /matchable&#34;:false|matchable&quot;:false|matchable":false/.test(html);
   const hasMatcher = /class="[^"]*bp-mm/.test(html);
   const hasStart = /data-start|data-submit|bp-mm__cta/.test(html);
   const hasQuestion = /data-stage|bp-mm__q|data-question/.test(html);
@@ -93,7 +99,7 @@ async function checkPage(url) {
     hasQuestion ? null : "no questions rendered",
     hasStart ? null : "NO BUTTON TO PRESS",
   ].filter(Boolean);
-  return { ok: missing.length === 0, why: missing.join(", ") };
+  return { ok: missing.length === 0, why: missing.join(", "), gated };
 }
 
 for (const [slug, info] of Object.entries(CATS)) {
@@ -145,7 +151,7 @@ for (const [slug, info] of Object.entries(CATS)) {
     .join("  ");
   console.log(
     `${note ? "none" : ok ? "ok  " : "FAIL"}  ${slug.padEnd(28)} ${String(info.questionCount).padStart(2)}q  ` +
-    `page:${page.ok ? "renders" : page.why}  ` +
+    `page:${page.ok ? (page.gated ? "renders, MATCHER GATED OFF" : "renders") : page.why}  ` +
     (note
       ? `nothing published — funnel shows its empty state, questions skipped`
       : `decides ${decided.length}/3   ${detail}`),

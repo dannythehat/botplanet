@@ -863,6 +863,12 @@ export const PRODUCT_ID: Record<string, string> = {
      of them survives somebody reading the file in six months. */
   "living-ai-emo": "prod-living-ai-emo",
   "cozmo": "prod-cozmo",
+  /* Grillbot, added 10 August 2026 with the first grill-cleaning product. It
+     is OFFER_SETUP_PENDING — identity verified, no commercial wiring — and it
+     is in this map so it cannot be a SILENT exclusion: a review page must
+     resolve to a slug here and then be sellable or refused in writing, which
+     is the rule EMO's missing buy button taught. */
+  "grillbot": "prod-grillbot",
   "moxie": "prod-moxie",
 
   /* First products for litter boxes and lawn mowers, 8 August 2026. All ten
@@ -956,7 +962,15 @@ export const OFFER_SETUP_PENDING_DAYS = 30;
  * The map stays, and so does its shelf life. This is the state a verified
  * product waits in, and an empty one is the only good state for it to be in.
  */
-export const OFFER_SETUP_PENDING: Record<string, OfferSetupPending> = {};
+export const OFFER_SETUP_PENDING: Record<string, OfferSetupPending> = {
+  /* Re-opened on 10 August 2026 for the first grill-cleaning product. The
+     shelf life above applies to it exactly as it did to the eleven. */
+  "prod-grillbot": {
+    reason:
+      "Identity is confirmed through Amazon's own brand field on 10 August 2026 and the ASIN family is mapped, but the listing itself served a bot check rather than a product page when read directly — so the pinned ASIN rests on dated third-party evidence rather than a page we read. A buy button is a different promise from a published page, and this one waits for a first-party read of B00HFDFSAC before it is wired.",
+    since: "2026-08-10",
+  },
+};
 
 /** Days a product has been waiting, against the day given. */
 export const pendingAgeDays = (since: string, today: string): number =>
@@ -1140,6 +1154,11 @@ const COMPANION_SLUGS = new Set([
   "living-ai-emo",
 ]);
 
+/* Grill, from 10 August 2026. One slug so far; a set for the same reason every
+   other category has one — the fall-through below files an unclaimed slug as a
+   pool cleaner. */
+const GRILL_SLUGS = new Set(["grillbot"]);
+
 const CATEGORY_OF: Record<string, string> = Object.fromEntries(
   Object.keys(PRODUCT_ID).map((slug) => [
     slug,
@@ -1155,6 +1174,8 @@ const CATEGORY_OF: Record<string, string> = Object.fromEntries(
               ? "self-cleaning-litter-boxes"
               : LAWN_SLUGS.has(slug)
                 ? "robotic-lawn-mowers"
+                : GRILL_SLUGS.has(slug)
+                  ? "grill-cleaning-robots"
                 : /* THE DEFAULT IS POOL AND THAT IS A TRAP. A slug in no set
                      above lands in the launch category silently, which is how
                      ten litter boxes and lawn mowers were briefly filed as pool

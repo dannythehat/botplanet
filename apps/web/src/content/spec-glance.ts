@@ -49,6 +49,18 @@ export const GLANCE_FIELDS: Record<string, GlanceField[]> = {
   /* Power type and installation are filled on all eleven; surfaces and
      navigation on ten. Pool size is the fourth question every reader asks and
      the one the manufacturers name four different ways. */
+  /* Grill, added with the category's first product on 10 August 2026. Grillbot
+     publishes a thin sheet — the four fields below are what it actually states,
+     and the box needs three filled rows to show at all, so a maker who
+     publishes less than this gets no box rather than a padded one. */
+  "grill-cleaning-robots": [
+    { label: "Brush heads", match: ["Heads supplied", "Brush heads"] },
+    { label: "Grill temperature", match: ["Grill temperature"] },
+    { label: "Timer", match: ["Timer"] },
+    { label: "Warranty", match: ["Warranty"] },
+    { label: "Power", match: ["Power"] },
+  ],
+
   "robotic-pool-cleaners": [
     { label: "Power", match: ["Power type"] },
     { label: "Cleans", match: ["Surfaces"] },
