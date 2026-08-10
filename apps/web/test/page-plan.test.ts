@@ -238,8 +238,32 @@ describe("the URL carries the primary keyword", () => {
    */
   const LIVE_URL_DECISIONS = new Set(["/robots/companion-robots/"]);
 
+  /**
+   * URLS THAT DELIBERATELY DO NOT CARRY THEIR TERM, BECAUSE THE TERM NAMES A
+   * MACHINE THAT IS NOT ON THE SHELF.
+   *
+   * "roborock s8 maxv ultra" is 9,900/mo and there is no first-party listing
+   * for it on Amazon US — checked 10 August 2026, and every result carrying
+   * that exact string in its title was a third-party accessory kit. What
+   * roborock sells in its place is the S8 Max Ultra, so that is what the
+   * product record, the page title and the URL say.
+   *
+   * The alternative is a URL reading `roborock-s8-maxv-ultra` on a page about
+   * a machine that does not carry the name. That is worth more to a ranking
+   * algorithm and less to the person who arrives, and this site resolves that
+   * trade in the reader's favour. The page still targets the term, still
+   * contains it, and opens by explaining what happened to it.
+   *
+   * Listed rather than pattern-matched, so a second one cannot join it by
+   * accident. Remove the entry if roborock ever lists the machine again.
+   */
+  const TERM_NAMES_A_MISSING_PRODUCT = new Set([
+    "/robots/robot-vacuums/roborock-s8-max-ultra/",
+  ]);
+
   const exempt = (p: (typeof PAGE_PLAN)[number], missing: string[]) =>
     LIVE_URL_DECISIONS.has(p.path) ||
+    TERM_NAMES_A_MISSING_PRODUCT.has(p.path) ||
     (p.type === "review" && missing.every((m) => m === "review")) ||
     // A version number cannot survive slugification: "botley 2.0" -> botley-2.
     missing.every((m) => /^\d+$/.test(m));

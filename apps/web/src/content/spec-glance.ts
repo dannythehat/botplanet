@@ -61,6 +61,24 @@ export const GLANCE_FIELDS: Record<string, GlanceField[]> = {
     { label: "Power", match: ["Power"] },
   ],
 
+  /* Robot vacuums, added with the category's first eleven products on 10
+     August 2026. Every slot here is a CAPABILITY rather than a measurement,
+     which is the opposite of every other category on this site — and it is
+     deliberate. Suction is the number every listing leads with and it does not
+     discriminate above a modest threshold: 8,000 Pa and 30,000 Pa machines sit
+     next to each other in this set at the same price. Whether the mop lifts
+     off carpet, whether it empties itself and whether it can see a cable are
+     what actually separate them, so those lead and the Pascal figure comes
+     last. */
+  "robot-vacuums": [
+    { label: "Mops", match: ["Mops"] },
+    { label: "Mop lifting", match: ["Mop lifting"] },
+    { label: "Self-emptying", match: ["Self-emptying"] },
+    { label: "Obstacle avoidance", match: ["Obstacle avoidance"] },
+    { label: "Deep or shag pile", match: ["Deep or shag pile"] },
+    { label: "Suction", match: ["Suction"] },
+  ],
+
   "robotic-pool-cleaners": [
     { label: "Power", match: ["Power type"] },
     { label: "Cleans", match: ["Surfaces"] },

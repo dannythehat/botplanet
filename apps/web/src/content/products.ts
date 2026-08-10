@@ -888,6 +888,32 @@ export const PRODUCT_ID: Record<string, string> = {
   /* Refused on 8 August as "Dreame A1", which does not exist; verified and
      admitted the same day under its real name. See migration 0010. */
   "dreame-a3-awd-1000": "prod-dreame-a3-awd-1000",
+
+  /* ROBOT VACUUMS, added 10 August 2026. The category with the most search
+     demand on the site and, until migration 0013, no catalogue at all.
+
+     TWO SLUGS DO NOT MATCH THE TERM THEY WERE PLANNED UNDER, and that is
+     deliberate rather than a typo. `roborock-s8-max-ultra` was planned as the
+     S8 MaxV Ultra, which has no first-party listing on Amazon US — every
+     result carrying that string is a third-party accessory kit — so the
+     product is built under the name the machine actually has. And
+     `eufy-omni-s1-pro` is the eufy S1 Pro of the plan, listed under eufy's own
+     "Omni S1 Pro" title. The full record is
+     docs/commerce/robot-vacuums-identity.md.
+
+     All eleven are OFFER_SETUP_PENDING: verified, published, not yet wired to
+     sell. */
+  "eufy-x10-pro-omni": "prod-eufy-x10-pro-omni",
+  "eufy-omni-s1-pro": "prod-eufy-omni-s1-pro",
+  "roborock-s8-max-ultra": "prod-roborock-s8-max-ultra",
+  "roborock-saros-10": "prod-roborock-saros-10",
+  "roborock-qrevo-s5v": "prod-roborock-qrevo-s5v",
+  "dreame-x40-ultra": "prod-dreame-x40-ultra",
+  "dreame-x50-ultra": "prod-dreame-x50-ultra",
+  "ecovacs-deebot-t90-pro-omni": "prod-ecovacs-deebot-t90-pro-omni",
+  "shark-powerdetect-av2820s": "prod-shark-powerdetect-av2820s",
+  "shark-matrix-plus-ur2650ws": "prod-shark-matrix-plus-ur2650ws",
+  "roomba-max-705": "prod-roomba-max-705",
 };
 
 /**
@@ -968,6 +994,71 @@ export const OFFER_SETUP_PENDING: Record<string, OfferSetupPending> = {
   "prod-grillbot": {
     reason:
       "Identity is confirmed through Amazon's own brand field on 10 August 2026 and the ASIN family is mapped, but the listing itself served a bot check rather than a product page when read directly — so the pinned ASIN rests on dated third-party evidence rather than a page we read. A buy button is a different promise from a published page, and this one waits for a first-party read of B00HFDFSAC before it is wired.",
+    since: "2026-08-10",
+  },
+
+  /* THE ELEVEN ROBOT VACUUMS, 10 August 2026.
+     Identity is verified for all eleven — pinned ASIN, price and rating read
+     off each listing's own page the same day, recorded in
+     docs/commerce/robot-vacuums-identity.md. What none of them has is a
+     retailer destination, and this category is the one where wiring one
+     carelessly costs the most: four of the eleven sit in variation families or
+     one word away from a differently-priced sibling, and a bare /dp/ link on
+     any of them can land a reader on a machine that does not do what the page
+     they came from said it does. */
+  "prod-eufy-x10-pro-omni": {
+    reason:
+      "Verified at $449.99 on 10 August 2026, and it is a two-colour variation family: B0CPFBBHP4 black and B0DG5G9HQM white share one price and one review pool. A link without th=1&psc=1 lands on whichever child Amazon prefers. Waits for a pinned-variant destination.",
+    since: "2026-08-10",
+  },
+  "prod-eufy-omni-s1-pro": {
+    reason:
+      "The Amazon SEARCH row for B0CTY6VT8Y returns no price at all, which normally means no buy-box winner; the listing read on 10 August 2026 returns $919.58. It is also the lowest-rated machine in the category at 3.2 stars, and eufy's own line has moved to the Omni S2 and the C28. We are willing to publish a page about it because 33,100 people a month search the term. We are not willing to send a buyer at a price that may be a third-party seller's until the buy box is confirmed.",
+    since: "2026-08-10",
+  },
+  "prod-roborock-s8-max-ultra": {
+    reason:
+      "Verified at $949.99 on 10 August 2026 against both the listing and roborock's own product page. It carries the traffic for a term — roborock S8 MaxV Ultra — that names a DIFFERENT machine, and the reader arriving on that term has to understand the substitution before a buy button is the right thing to show them.",
+    since: "2026-08-10",
+  },
+  "prod-roborock-saros-10": {
+    reason:
+      "Verified at $1,299.99 on 10 August 2026 against both the listing and roborock's own page. A second ASIN for the same model, B0DLH45139, carries no price and 94 ratings; the pinned one must be held against that sibling before a destination is wired.",
+    since: "2026-08-10",
+  },
+  "prod-roborock-qrevo-s5v": {
+    reason:
+      "Verified at $499.98 on 10 August 2026. B0DSP8J476 and B0FX4SZ4KB are the same machine at the same price sharing one review pool, so this needs a pinned-variant destination rather than a bare /dp/ link. It also stands in for the family term roborock Qrevo, which covers four machines from $499.98 to $879.99.",
+    since: "2026-08-10",
+  },
+  "prod-dreame-x40-ultra": {
+    reason:
+      "Verified at $599.99 on 10 August 2026 from the Amazon listing. Dreame's own product page returned 404 or truncated content to a direct fetch, so the capability record here is thinner than the rest of the category — no obstacle avoidance is claimed because nothing we read claims it. The maker page gets read before this is wired.",
+    since: "2026-08-10",
+  },
+  "prod-dreame-x50-ultra": {
+    reason:
+      "Verified at $999.99 on 10 August 2026 from the Amazon listing, with the $989.99 Complete bundle held out as a different product. Dreame's own page returned 404 to a direct fetch, so no mop lifting is recorded — the listing claims obstacle crossing, which is step climbing and not the same claim. The maker page gets read before this is wired.",
+    since: "2026-08-10",
+  },
+  "prod-ecovacs-deebot-t90-pro-omni": {
+    reason:
+      "Verified at $599 on 10 August 2026 against both the listing and ECOVACS' own page. It stands in for the family term ecovacs deebot, which covers four current machines from $349 to $1,499.99, so the destination has to be right about which DEEBOT the reader is being sent to.",
+    since: "2026-08-10",
+  },
+  "prod-shark-powerdetect-av2820s": {
+    reason:
+      "Verified at $549.99 on 10 August 2026. This SKU is the self-empty VACUUM and its sibling RV2820ZE at $599.99 is the vacuum-and-mop; the two are fifty dollars and one word apart. A destination that lands a reader on the wrong one sells them a mop they did not want or denies them one they did.",
+    since: "2026-08-10",
+  },
+  "prod-shark-matrix-plus-ur2650ws": {
+    reason:
+      "Verified at $279.99 on 10 August 2026, with the largest review pool of the eleven at 35,917. The Matrix name covers four Shark machines across two different lines at $278.34 to $420.39, and this is the only one of them at the budget tier — so the destination must pin this SKU rather than the family.",
+    since: "2026-08-10",
+  },
+  "prod-roomba-max-705": {
+    reason:
+      "Verified at $499 on 10 August 2026. B0DWG15XKQ at $799 is the Roomba Max 705 COMBO — a different machine with a mop and an AutoWash dock, with its own review pool of 4,800. Three hundred dollars and one word apart is the worst kind of near-miss to wire in a hurry.",
     since: "2026-08-10",
   },
 };
@@ -1159,6 +1250,26 @@ const COMPANION_SLUGS = new Set([
    pool cleaner. */
 const GRILL_SLUGS = new Set(["grillbot"]);
 
+/* Robot vacuums, from 10 August 2026. Eleven at once, which makes this the
+   largest single set in the map — and the one where a missing entry would be
+   least visible, because the fall-through below files an unclaimed slug as a
+   pool cleaner and a robot vacuum reads plausibly enough in a pool grid to
+   survive a glance. The test that asserts every slug is claimed is what stops
+   that, not this comment. */
+const VACUUM_SLUGS = new Set([
+  "eufy-x10-pro-omni",
+  "eufy-omni-s1-pro",
+  "roborock-s8-max-ultra",
+  "roborock-saros-10",
+  "roborock-qrevo-s5v",
+  "dreame-x40-ultra",
+  "dreame-x50-ultra",
+  "ecovacs-deebot-t90-pro-omni",
+  "shark-powerdetect-av2820s",
+  "shark-matrix-plus-ur2650ws",
+  "roomba-max-705",
+]);
+
 const CATEGORY_OF: Record<string, string> = Object.fromEntries(
   Object.keys(PRODUCT_ID).map((slug) => [
     slug,
@@ -1176,6 +1287,8 @@ const CATEGORY_OF: Record<string, string> = Object.fromEntries(
                 ? "robotic-lawn-mowers"
                 : GRILL_SLUGS.has(slug)
                   ? "grill-cleaning-robots"
+                : VACUUM_SLUGS.has(slug)
+                  ? "robot-vacuums"
                 : /* THE DEFAULT IS POOL AND THAT IS A TRAP. A slug in no set
                      above lands in the launch category silently, which is how
                      ten litter boxes and lawn mowers were briefly filed as pool

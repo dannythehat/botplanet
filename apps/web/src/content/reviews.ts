@@ -4495,6 +4495,682 @@ export const REVIEWS: Record<string, ReviewContent> = {
     lastReviewed: "2026-08-10",
   },
 
+  /* ============================================================
+     ROBOT VACUUMS — the first eleven, 10 August 2026.
+
+     NO ARTWORK YET for any of them. They ship unillustrated for
+     the same reason Grillbot did: the category has 135,000/mo on
+     its head term and no catalogue at all, and a page that answers
+     the query beats a finished page that does not exist.
+
+     THE SPEC LABELS ARE DELIBERATELY IDENTICAL ACROSS ALL ELEVEN.
+     Every other category on this site follows whatever each maker
+     publishes, which is right for a full table and useless for a
+     grid — the glance projection then needs six aliases per slot to
+     find the same fact. Eleven products landing at once was the
+     chance to name the fields once, so "Mops", "Mop lifting",
+     "Self-emptying", "Obstacle avoidance" and "Deep or shag pile"
+     read the same on every page in the category and the glance
+     projection needs no aliases at all.
+
+     A null HERE IS A READING, NOT A JUDGEMENT. Where a maker's page
+     could not be read — dreame twice, eufy's S1 Pro, both Sharks —
+     the capability is null and the review says so in its own words.
+     Under-claiming is recoverable by reading the page later;
+     over-claiming is a bad recommendation shipped today.
+     ============================================================ */
+
+  "eufy-x10-pro-omni": {
+    slug: "eufy-x10-pro-omni",
+    image: undefined,
+    figures: [],
+    categorySlug: "robot-vacuums",
+    eyebrow: "Robot vacuum review",
+    title: "eufy X10 Pro Omni review",
+    seoTitle: "eufy X10 Pro Omni Review — 12mm of Lift for $450",
+    metaDescription:
+      "Vacuums, mops, lifts the pads 12mm off carpet and empties itself, for $449.99. " +
+      "What the lift really clears, and why 8,000 Pa is the wrong number to compare on.",
+    verdict:
+      "The machine most people asking about robot vacuums should look at first. It vacuums, it mops, the pads lift 12mm onto carpet, it empties itself into the tower and it looks at the floor with a camera. At $449.99 with 39,206 ratings at 4.6 stars behind it, nothing else in the category offers that combination of capability, price and evidence.",
+    bestFor:
+      "Hard floor and ordinary carpet, one machine to do both, and no interest in emptying a bin.",
+    notIdealFor:
+      "Deep or shag pile throughout — 12mm does not clear it, and no machine at this price does.",
+    facts: [
+      { label: "Price", value: "$449.99, read 10 August 2026" },
+      { label: "Rating", value: "4.6 from 39,206 ratings" },
+      { label: "Mop lift", value: "12mm" },
+      { label: "Dock", value: "Self-emptying, mop washing and drying" },
+    ],
+    specGroups: [
+      {
+        heading: "What it does",
+        rows: [
+          { label: "Mops", value: "Yes — dual spinning pads" },
+          { label: "Mop lifting", value: "12mm auto-lift" },
+          { label: "Self-emptying", value: "Yes, into the tower" },
+          { label: "Obstacle avoidance", value: "AI obstacle avoidance" },
+          { label: "Multi-floor mapping", value: "Yes" },
+          { label: "Suction", value: "8,000 Pa" },
+        ],
+      },
+      {
+        heading: "Floors",
+        rows: [
+          { label: "Hard floors", value: "Yes" },
+          { label: "Low-pile carpet", value: "Yes — carpet detection, pads lift" },
+          { label: "Deep or shag pile", value: null },
+        ],
+      },
+      {
+        heading: "Not published",
+        rows: [
+          { label: "Runtime", value: null },
+          { label: "Bin capacity", value: null },
+          { label: "Water tank", value: null },
+          { label: "Noise", value: null },
+          { label: "Dimensions", value: null },
+        ],
+      },
+    ],
+    skuNote:
+      "eufy X10 Pro Omni, ASIN B0CPFBBHP4, $449.99 read on 10 August 2026. B0DG5G9HQM is the same machine in white at the same price sharing one review pool, so any link needs th=1&psc=1.",
+    lastReviewed: "2026-08-10",
+  },
+
+  "eufy-omni-s1-pro": {
+    slug: "eufy-omni-s1-pro",
+    image: undefined,
+    figures: [],
+    categorySlug: "robot-vacuums",
+    eyebrow: "Robot vacuum review",
+    title: "eufy Omni S1 Pro review",
+    seoTitle: "eufy S1 Pro Review — Read the Price Twice",
+    metaDescription:
+      "The biggest search term in robot vacuums, and the lowest-rated machine we hold. " +
+      "No price in the search row, 3.2 stars, and eufy's own range has moved on.",
+    verdict:
+      "A self-washing roller mop on a machine the rest of eufy's range has overtaken. It is rated 3.2 from 776 ratings, the lowest of the eleven vacuums we catalogue by a distance, its Amazon search row carries no price at all, and at $919.58 it sits between a better-rated flagship and a cheaper machine using its own headline technology. The roller is a good idea. This is not the machine to buy it on.",
+    bestFor:
+      "Hard floors throughout, wanting a self-washing roller mop, having checked the seller and the price on the day.",
+    notIdealFor:
+      "Any house with carpet — no mop-lift or carpet claim appears anywhere on the listing — and anyone who would rather spend less for a higher-rated machine.",
+    facts: [
+      { label: "Price", value: "$919.58, read 10 August 2026" },
+      { label: "Rating", value: "3.2 from 776 ratings" },
+      { label: "In search", value: "No price shown" },
+      { label: "Mop", value: "Self-washing roller" },
+    ],
+    specGroups: [
+      {
+        heading: "What it does",
+        rows: [
+          { label: "Mops", value: "Yes — self-washing roller" },
+          { label: "Mop lifting", value: null },
+          { label: "Self-emptying", value: "Yes, into the base" },
+          { label: "Obstacle avoidance", value: "Stated on the listing, not detailed" },
+          { label: "Multi-floor mapping", value: null },
+          { label: "Suction", value: "8,000 Pa" },
+        ],
+      },
+      {
+        heading: "Floors",
+        rows: [
+          { label: "Hard floors", value: "Yes" },
+          { label: "Low-pile carpet", value: null },
+          { label: "Deep or shag pile", value: null },
+        ],
+      },
+      {
+        heading: "Not published",
+        rows: [
+          { label: "Runtime", value: null },
+          { label: "Bin capacity", value: null },
+          { label: "Water tank", value: null },
+          { label: "Noise", value: null },
+          { label: "Dimensions", value: null },
+          { label: "What Eco-Clean Ozone does", value: null },
+        ],
+      },
+    ],
+    skuNote:
+      "eufy Robot Vacuum Omni S1 Pro, ASIN B0CTY6VT8Y. The Amazon search row returns no price; the listing read on 10 August 2026 returns $919.58. eufy's own page returned 404 to a direct fetch the same day.",
+    lastReviewed: "2026-08-10",
+  },
+
+  "roborock-s8-max-ultra": {
+    slug: "roborock-s8-max-ultra",
+    image: undefined,
+    figures: [],
+    categorySlug: "robot-vacuums",
+    eyebrow: "Robot vacuum review",
+    title: "roborock S8 Max Ultra review",
+    seoTitle: "roborock S8 Max Ultra Review — and the Missing MaxV",
+    metaDescription:
+      "The S8 MaxV Ultra has no Amazon US listing — only accessory kits. This is what " +
+      "roborock sells instead: 20mm of mop lift, structured-light seeing, $949.99.",
+    verdict:
+      "Twenty millimetres of mop lift, the largest figure of the eleven vacuums we catalogue, with structured-light obstacle avoidance and a dock that empties mid-clean. It also carries the traffic for a term that names a different machine: the S8 MaxV Ultra has no first-party listing on Amazon US at all. At $949.99 the extra over a $449.99 eufy buys lift height, a better dock and better seeing.",
+    bestFor:
+      "Hard floor and rugs, where getting the wet pads properly out of the way is the deciding factor.",
+    notIdealFor:
+      "Deep or shag pile — roborock makes no high-pile claim for this machine — and anyone whose house is mostly hard floor and would not notice the extra $500.",
+    facts: [
+      { label: "Price", value: "$949.99, read 10 August 2026" },
+      { label: "Rating", value: "4.5 from 1,227 ratings" },
+      { label: "Mop lift", value: "20mm" },
+      { label: "Dock interval", value: "Up to 7 weeks" },
+    ],
+    specGroups: [
+      {
+        heading: "What it does",
+        rows: [
+          { label: "Mops", value: "Yes — dual pads, FlexiArm side reach" },
+          { label: "Mop lifting", value: "20mm auto-lift" },
+          { label: "Self-emptying", value: "Yes, during and after a clean" },
+          { label: "Obstacle avoidance", value: "Reactive 3D, structured light" },
+          { label: "Multi-floor mapping", value: "Yes" },
+          { label: "Suction", value: "8,000 Pa" },
+        ],
+      },
+      {
+        heading: "Floors",
+        rows: [
+          { label: "Hard floors", value: "Yes" },
+          { label: "Low-pile carpet", value: "Yes — Carpet Boost+, pads lift 20mm" },
+          { label: "Deep or shag pile", value: null },
+        ],
+      },
+      {
+        heading: "Not published",
+        rows: [
+          { label: "Runtime", value: null },
+          { label: "Bin capacity", value: null },
+          { label: "Water tank", value: null },
+          { label: "Noise", value: null },
+          { label: "Dimensions", value: null },
+        ],
+      },
+    ],
+    skuNote:
+      "roborock S8 Max Ultra with Refill & Drainage System, ASIN B0D9B9LK9F, $949.99 read on 10 August 2026. This is NOT the S8 MaxV Ultra, which has no first-party Amazon US listing — every result carrying that string is a third-party accessory kit.",
+    lastReviewed: "2026-08-10",
+  },
+
+  "roborock-saros-10": {
+    slug: "roborock-saros-10",
+    image: undefined,
+    figures: [],
+    categorySlug: "robot-vacuums",
+    eyebrow: "Robot vacuum review",
+    title: "roborock Saros 10 review",
+    seoTitle: "roborock Saros 10 Review — The Only Deep-Pile Answer",
+    metaDescription:
+      "The one machine we catalogue whose maker makes a high-pile carpet claim: the chassis " +
+      "lifts 10mm and the mop detaches. $1,299.99, and almost nobody needs it.",
+    verdict:
+      "The only robot vacuum in our catalogue whose manufacturer says anything about deep pile. The chassis lifts 10mm on high-pile carpet and the mop detaches entirely in vacuum-only modes, which is different engineering from raising a pad. At $1,299.99 it is the most expensive machine here by $350, and for a house of hard floor and ordinary carpet it does nothing a $449.99 machine does not.",
+    bestFor:
+      "Deep or shag pile carpet, or low furniture a taller robot cannot get under at 3.14 inches.",
+    notIdealFor:
+      "Hard floor and ordinary carpet, where a machine at a third of the price does the same work.",
+    facts: [
+      { label: "Price", value: "$1,299.99, read 10 August 2026" },
+      { label: "Rating", value: "4.5 from 4,428 ratings" },
+      { label: "Height", value: "3.14 inches" },
+      { label: "High pile", value: "Chassis lifts 10mm" },
+    ],
+    specGroups: [
+      {
+        heading: "What it does",
+        rows: [
+          { label: "Mops", value: "Yes — hot water washing at the dock" },
+          { label: "Mop lifting", value: "Detaches entirely in vacuum-only modes" },
+          { label: "Self-emptying", value: "Yes, RockDock Ultra with bags" },
+          { label: "Obstacle avoidance", value: "ReactiveAI 3.0 — structured light, RGB camera, VertiBeam" },
+          { label: "Multi-floor mapping", value: "Yes" },
+          { label: "Suction", value: "22,000 Pa" },
+        ],
+      },
+      {
+        heading: "Floors",
+        rows: [
+          { label: "Hard floors", value: "Yes" },
+          { label: "Low-pile carpet", value: "Yes" },
+          { label: "Deep or shag pile", value: "Yes — chassis elevates up to 0.39 in (10mm)" },
+        ],
+      },
+      {
+        heading: "Not published",
+        rows: [
+          { label: "Runtime", value: null },
+          { label: "Bin capacity", value: null },
+          { label: "Water tank", value: null },
+          { label: "Noise", value: null },
+          { label: "Weight", value: null },
+        ],
+      },
+    ],
+    skuNote:
+      "roborock Saros 10, ASIN B0DLH247PS, $1,299.99 read on 10 August 2026. A second listing for the same model, B0DLH45139, carries no price and 94 ratings; it is not the one pinned.",
+    lastReviewed: "2026-08-10",
+  },
+
+  "roborock-qrevo-s5v": {
+    slug: "roborock-qrevo-s5v",
+    image: undefined,
+    figures: [],
+    categorySlug: "robot-vacuums",
+    eyebrow: "Robot vacuum review",
+    title: "roborock Qrevo S5V review",
+    seoTitle: "roborock Qrevo S5V Review — Which Qrevo You Get",
+    metaDescription:
+      "Qrevo is four machines from $499.98 to $879.99. The S5V is the cheapest: 10mm mop " +
+      "lift, FlexiArm edge reach, self-emptying dock, and two ASINs you have to pin.",
+    verdict:
+      "The cheapest entry to roborock's Qrevo line, with the FlexiArm edge reach that is the range's real argument and 10mm of mop lift. Fifty dollars more than the eufy X10 Pro Omni for the same four capabilities, a better edge reach and a review pool a twentieth the size. The trap is the name: Qrevo covers four machines across a $380 spread.",
+    bestFor:
+      "Hard floor and ordinary carpet, where the strip of dust along the skirting board is the complaint.",
+    notIdealFor:
+      "Deep or shag pile, and anyone who would rather have 39,206 ratings behind their purchase than 1,625.",
+    facts: [
+      { label: "Price", value: "$499.98, read 10 August 2026" },
+      { label: "Rating", value: "4.3 from 1,625 ratings" },
+      { label: "Mop lift", value: "10mm" },
+      { label: "Family", value: "Four Qrevo machines, $499.98 to $879.99" },
+    ],
+    specGroups: [
+      {
+        heading: "What it does",
+        rows: [
+          { label: "Mops", value: "Yes — FlexiArm edge mopping" },
+          { label: "Mop lifting", value: "10mm mop lifting" },
+          { label: "Self-emptying", value: "Yes, with mop washing and drying" },
+          { label: "Obstacle avoidance", value: "Smart obstacle avoidance" },
+          { label: "Multi-floor mapping", value: null },
+          { label: "Suction", value: "12,000 Pa" },
+        ],
+      },
+      {
+        heading: "Floors",
+        rows: [
+          { label: "Hard floors", value: "Yes" },
+          { label: "Low-pile carpet", value: "Yes — pads lift 10mm" },
+          { label: "Deep or shag pile", value: null },
+        ],
+      },
+      {
+        heading: "Not published",
+        rows: [
+          { label: "Runtime", value: null },
+          { label: "Bin capacity", value: null },
+          { label: "Water tank", value: null },
+          { label: "Noise", value: null },
+          { label: "Dimensions", value: null },
+        ],
+      },
+    ],
+    skuNote:
+      "roborock Qrevo S5V, ASIN B0DSP8J476, $499.98 read on 10 August 2026. B0FX4SZ4KB is the same machine at the same price sharing one review pool, so any link needs th=1&psc=1 — and the family it sits in spans $380.",
+    lastReviewed: "2026-08-10",
+  },
+
+  "dreame-x40-ultra": {
+    slug: "dreame-x40-ultra",
+    image: undefined,
+    figures: [],
+    categorySlug: "robot-vacuums",
+    eyebrow: "Robot vacuum review",
+    title: "Dreame X40 Ultra review",
+    seoTitle: "Dreame X40 Ultra Review — A Gap We Could Not Close",
+    metaDescription:
+      "Liftable mop, extending side brush, a dock that refills itself, $599.99. And no " +
+      "obstacle-avoidance claim anywhere we could read, which is why we record none.",
+    verdict:
+      "A full sheet for six hundred dollars — a mop that lifts and detaches, a side brush that extends into corners, a washboard that scrubs the pads at 158°F, and a dock that empties the bin and refills the tank. What is missing is any obstacle-avoidance claim on the only page we could read, and dreame's own pages returned 404 to every URL we tried, so our record shows none.",
+    bestFor:
+      "A clear floor, hard surfaces and ordinary carpet, and a specific irritation about corners or dirty mop pads.",
+    notIdealFor:
+      "A cluttered floor. Until dreame's own page can be read, no obstacle avoidance is recorded and this is not the machine to buy on that basis.",
+    facts: [
+      { label: "Price", value: "$599.99, read 10 August 2026" },
+      { label: "Rating", value: "4.4 from 901 ratings" },
+      { label: "Mop", value: "Removable and liftable" },
+      { label: "Dock", value: "Auto-empty and auto-refill" },
+    ],
+    specGroups: [
+      {
+        heading: "What it does",
+        rows: [
+          { label: "Mops", value: "Yes — removable and liftable" },
+          { label: "Mop lifting", value: "Liftable mop and liftable brushes" },
+          { label: "Self-emptying", value: "Yes, with auto water refill" },
+          { label: "Obstacle avoidance", value: null },
+          { label: "Multi-floor mapping", value: null },
+          { label: "Suction", value: "12,000 Pa" },
+        ],
+      },
+      {
+        heading: "Floors",
+        rows: [
+          { label: "Hard floors", value: "Yes" },
+          { label: "Low-pile carpet", value: "Yes — mop lifts and detaches" },
+          { label: "Deep or shag pile", value: null },
+        ],
+      },
+      {
+        heading: "Not published",
+        rows: [
+          { label: "Runtime", value: null },
+          { label: "Bin capacity", value: null },
+          { label: "Water tank", value: null },
+          { label: "Noise", value: null },
+          { label: "Dimensions", value: null },
+        ],
+      },
+    ],
+    skuNote:
+      "Dreame X40 Ultra, ASIN B0CXDXKSXP, $599.99 read on 10 August 2026. B0DZHNSL1H is a second listing at $594.99 with a separate review pool of 101; we did not establish what separates them. Dreame's own product pages returned 404 or truncated content to a direct fetch.",
+    lastReviewed: "2026-08-10",
+  },
+
+  "dreame-x50-ultra": {
+    slug: "dreame-x50-ultra",
+    image: undefined,
+    figures: [],
+    categorySlug: "robot-vacuums",
+    eyebrow: "Robot vacuum review",
+    title: "Dreame X50 Ultra review",
+    seoTitle: "Dreame X50 Ultra Review — It Climbs, But Does It Lift?",
+    metaDescription:
+      "6cm of obstacle crossing is the only claim like it we catalogue. Crossing is not " +
+      "mop lifting, dreame's own page would not load, and we record what we read.",
+    verdict:
+      "The only machine we catalogue claiming to climb a 6cm step, which makes it the answer for a house with a raised threshold the robot has to get over. It claims obstacle avoidance and 20,000 Pa. It does not claim mop lifting anywhere we could read — obstacle crossing is step climbing and not the same thing — so our record shows none, and at $999.99 that is a gap worth closing before you buy.",
+    bestFor:
+      "A level change the robot must cross, on mostly hard floor, with dreame's dock and detangling brush.",
+    notIdealFor:
+      "Carpet, where no lift figure is published — the roborock S8 Max Ultra is $50 less and publishes 20mm.",
+    facts: [
+      { label: "Price", value: "$999.99, read 10 August 2026" },
+      { label: "Rating", value: "4.5 from 815 ratings" },
+      { label: "Obstacle crossing", value: "2.36 in (6cm)" },
+      { label: "Suction", value: "20,000 Pa" },
+    ],
+    specGroups: [
+      {
+        heading: "What it does",
+        rows: [
+          { label: "Mops", value: "Yes — mop self-cleaning at the dock" },
+          { label: "Mop lifting", value: null },
+          { label: "Self-emptying", value: "Yes, auto-empty base" },
+          { label: "Obstacle avoidance", value: "Obstacle avoidance and 360° navigation" },
+          { label: "Multi-floor mapping", value: null },
+          { label: "Step climbing", value: "2.36 in (6cm)" },
+        ],
+      },
+      {
+        heading: "Floors",
+        rows: [
+          { label: "Hard floors", value: "Yes" },
+          { label: "Low-pile carpet", value: "Yes — detangling brush, carpet crossing" },
+          { label: "Deep or shag pile", value: null },
+        ],
+      },
+      {
+        heading: "Not published",
+        rows: [
+          { label: "Runtime", value: null },
+          { label: "Bin capacity", value: null },
+          { label: "Water tank", value: null },
+          { label: "Noise", value: null },
+          { label: "Dimensions", value: null },
+        ],
+      },
+    ],
+    skuNote:
+      "Dreame X50 Ultra, ASIN B0DM5J52GC, $999.99 read on 10 August 2026. B0F3J51GW5 and B0F3HZFZBL at $989.99 are the Complete bundle and were not pinned. Dreame's own product page returned 404 to a direct fetch.",
+    lastReviewed: "2026-08-10",
+  },
+
+  "ecovacs-deebot-t90-pro-omni": {
+    slug: "ecovacs-deebot-t90-pro-omni",
+    image: undefined,
+    figures: [],
+    categorySlug: "robot-vacuums",
+    eyebrow: "Robot vacuum review",
+    title: "ECOVACS DEEBOT T90 PRO Omni review",
+    seoTitle: "DEEBOT T90 PRO Omni Review — Roller Mop, 15mm Lift",
+    metaDescription:
+      "A mop roller that cleans itself as it runs, lifting 15mm on carpet, with a dock rated " +
+      "at 90 days. And 30,000 Pa, which is the number not to buy it for.",
+    verdict:
+      "A self-cleaning mop roller that stays wet with clean water for a whole run, lifting 15mm onto carpet, with AIVI 3D obstacle recognition and a dock ECOVACS rates at ninety days. The 30,000 Pa on the front of the box is close to meaningless; the roller, the lift and the dock interval are what six hundred dollars actually buys, and the capability record here is one of the fullest we hold.",
+    bestFor:
+      "A large hard floor with ordinary carpet, where a mop that stops being clean halfway round is the complaint.",
+    notIdealFor:
+      "Deep or shag pile, and anyone who would rather save $150 and take the eufy X10 Pro Omni for the same four capabilities.",
+    facts: [
+      { label: "Price", value: "$599.00, read 10 August 2026" },
+      { label: "Rating", value: "4.4 from 395 ratings" },
+      { label: "Mop lift", value: "15mm" },
+      { label: "Dock interval", value: "Up to 90 days" },
+    ],
+    specGroups: [
+      {
+        heading: "What it does",
+        rows: [
+          { label: "Mops", value: "Yes — TruEdge self-cleaning OZMO roller" },
+          { label: "Mop lifting", value: "15mm automatic lift on carpet" },
+          { label: "Self-emptying", value: "Yes, up to 90 days" },
+          { label: "Obstacle avoidance", value: "AIVI 3D 4.0 with structured light" },
+          { label: "Multi-floor mapping", value: "Yes" },
+          { label: "Suction", value: "30,000 Pa" },
+        ],
+      },
+      {
+        heading: "Floors",
+        rows: [
+          { label: "Hard floors", value: "Yes" },
+          { label: "Low-pile carpet", value: "Yes — Triple Lift Carpet Care" },
+          { label: "Deep or shag pile", value: null },
+        ],
+      },
+      {
+        heading: "Not published",
+        rows: [
+          { label: "Runtime", value: null },
+          { label: "Bin capacity", value: null },
+          { label: "Water tank", value: null },
+          { label: "Noise", value: null },
+          { label: "Dimensions", value: null },
+          { label: "What YIKO does offline", value: null },
+        ],
+      },
+    ],
+    skuNote:
+      "ECOVACS DEEBOT T90 PRO Omni, ASIN B0GJ5S4V78, $599.00 read on 10 August 2026. The DEEBOT name covers four current machines from $349 to $1,499.99; this is the one Amazon returns first for the family term.",
+    lastReviewed: "2026-08-10",
+  },
+
+  "shark-powerdetect-av2820s": {
+    slug: "shark-powerdetect-av2820s",
+    image: undefined,
+    figures: [],
+    categorySlug: "robot-vacuums",
+    eyebrow: "Robot vacuum review",
+    title: "Shark PowerDetect AV2820S review",
+    seoTitle: "Shark PowerDetect AV2820S Review — It Does Not Mop",
+    metaDescription:
+      "The self-empty vacuum, not the vacuum-and-mop sharing its name fifty dollars away. " +
+      "3D object detection, a 30-day HEPA base, $549.99, and no water tank.",
+    verdict:
+      "A vacuum, and only a vacuum. The near-identically named PowerDetect NeverTouch Pro fifty dollars away is the one that mops, and nothing on either listing will stop you buying the wrong one. What this machine has is 3D object detection — the capability that separates driving round a charging cable from eating it — plus four kinds of floor sensing and a base rated at thirty days.",
+    bestFor:
+      "Carpet through most of the house, wanting vacuuming done properly and no mop to manage.",
+    notIdealFor:
+      "Hard floors where you wanted mopping — the eufy X10 Pro Omni mops and costs $100 less.",
+    facts: [
+      { label: "Price", value: "$549.99, read 10 August 2026" },
+      { label: "Rating", value: "4.4 from 3,648 ratings" },
+      { label: "Mops", value: "No — vacuum only" },
+      { label: "Base", value: "30-day HEPA self-empty" },
+    ],
+    specGroups: [
+      {
+        heading: "What it does",
+        rows: [
+          { label: "Mops", value: "No — vacuum only" },
+          { label: "Mop lifting", value: null },
+          { label: "Self-emptying", value: "Yes, 30-day HEPA base" },
+          { label: "Obstacle avoidance", value: "360° LiDAR plus 3D object detection" },
+          { label: "Multi-floor mapping", value: "Yes" },
+          { label: "Suction", value: null },
+        ],
+      },
+      {
+        heading: "Floors",
+        rows: [
+          { label: "Hard floors", value: "Yes — FloorDetect" },
+          { label: "Low-pile carpet", value: "Yes — FloorDetect, DirtDetect" },
+          { label: "Deep or shag pile", value: null },
+        ],
+      },
+      {
+        heading: "Not published",
+        rows: [
+          { label: "Runtime", value: null },
+          { label: "Bin capacity", value: null },
+          { label: "Noise", value: null },
+          { label: "Dimensions", value: null },
+          { label: "Weight", value: null },
+        ],
+      },
+    ],
+    skuNote:
+      "Shark PowerDetect Self-Empty Robot Vacuum AV2820S, ASIN B0CDJFHM4J, $549.99 read on 10 August 2026. The RV2820ZE at $599.99 is the vacuum AND mop; the RV3020XE at $849.99 is the UV Reveal. Shark's own product page redirected to a corporate landing page.",
+    lastReviewed: "2026-08-10",
+  },
+
+  "shark-matrix-plus-ur2650ws": {
+    slug: "shark-matrix-plus-ur2650ws",
+    image: undefined,
+    figures: [],
+    categorySlug: "robot-vacuums",
+    eyebrow: "Robot vacuum review",
+    title: "Shark Matrix Plus UR2650WS review",
+    seoTitle: "Shark Matrix Plus Review — $280, 35,917 Ratings",
+    metaDescription:
+      "The cheapest good robot vacuum with a self-emptying base, and the two things $280 " +
+      "costs you: the mop pad does not lift, and LiDAR maps rather than sees.",
+    verdict:
+      "Thirty-five thousand nine hundred and seventeen ratings at 4.6 stars for $279.99, which no other machine in this catalogue comes near on either figure. Two things are missing and they are the two the dearer machines sell: the mop pad attaches by hand and never lifts, and 360° LiDAR maps the room without recognising anything in it. On a clear floor, neither may cost you anything.",
+    bestFor:
+      "A clear floor and a modest budget, with a self-cleaning brushroll for hair and a base you empty monthly.",
+    notIdealFor:
+      "A cluttered floor — LiDAR maps, it does not see — and a carpeted house where nobody will remember to take the pad off.",
+    facts: [
+      { label: "Price", value: "$279.99, read 10 August 2026" },
+      { label: "Rating", value: "4.6 from 35,917 ratings" },
+      { label: "Mop", value: "Sonic, pad fitted by hand" },
+      { label: "Base", value: "30-day HEPA self-empty" },
+    ],
+    specGroups: [
+      {
+        heading: "What it does",
+        rows: [
+          { label: "Mops", value: "Yes — sonic mopping, pad fitted by hand" },
+          { label: "Mop lifting", value: null },
+          { label: "Self-emptying", value: "Yes, 30-day HEPA base" },
+          { label: "Obstacle avoidance", value: null },
+          { label: "Multi-floor mapping", value: "Yes — 360° LiDAR mapping" },
+          { label: "Suction", value: null },
+        ],
+      },
+      {
+        heading: "Floors",
+        rows: [
+          { label: "Hard floors", value: "Yes" },
+          { label: "Low-pile carpet", value: "Yes — self-cleaning brushroll" },
+          { label: "Deep or shag pile", value: null },
+        ],
+      },
+      {
+        heading: "Not published",
+        rows: [
+          { label: "Runtime", value: null },
+          { label: "Bin capacity", value: null },
+          { label: "Water tank", value: null },
+          { label: "Noise", value: null },
+          { label: "Dimensions", value: null },
+        ],
+      },
+    ],
+    skuNote:
+      "Shark Matrix Plus Robot Vacuum and Mop UR2650WS, ASIN B0FDX7GFQX, $279.99 read on 10 August 2026. The AI Ultra AV2501S and AV2511AE at about $420 also carry the Matrix name and are a different line. Shark's own product page redirected to a corporate landing page.",
+    lastReviewed: "2026-08-10",
+  },
+
+  "roomba-max-705": {
+    slug: "roomba-max-705",
+    image: undefined,
+    figures: [],
+    categorySlug: "robot-vacuums",
+    eyebrow: "Robot vacuum review",
+    title: "iRobot Roomba Max 705 review",
+    seoTitle: "Roomba Max 705 Review — Two Machines, One Name",
+    metaDescription:
+      "The $499 vacuum and the $799 Combo share a name and one extra word. The cheaper one " +
+      "is rated 4.3 against the Combo's 3.6, and it does not mop.",
+    verdict:
+      "Rubber anti-tangle brushes, LiDAR navigation, anti-fall detection and a dock that empties itself, for $499. It does not mop, and the machine that does — the Roomba Max 705 Combo, one word and three hundred dollars away — is rated 3.6 against this one's 4.3 by a review pool six times the size. The brushes are the reason to choose this over a Shark at the same money.",
+    bestFor:
+      "A shedding animal, hard floor and carpet, and no interest in a robot that mops.",
+    notIdealFor:
+      "Anyone who wanted mopping — the eufy X10 Pro Omni is cheaper than both Roombas and lifts its pads onto carpet.",
+    facts: [
+      { label: "Price", value: "$499.00, read 10 August 2026" },
+      { label: "Rating", value: "4.3 from 741 ratings" },
+      { label: "Mops", value: "No — vacuum only" },
+      { label: "Brushes", value: "Dual rubber, anti-tangle" },
+    ],
+    specGroups: [
+      {
+        heading: "What it does",
+        rows: [
+          { label: "Mops", value: "No — vacuum only" },
+          { label: "Mop lifting", value: null },
+          { label: "Self-emptying", value: "Yes, AutoEmpty Dock" },
+          { label: "Obstacle avoidance", value: "Obstacle and anti-fall detection, LiDAR navigation" },
+          { label: "Multi-floor mapping", value: "Yes" },
+          { label: "Suction", value: null },
+        ],
+      },
+      {
+        heading: "Floors",
+        rows: [
+          { label: "Hard floors", value: "Yes" },
+          { label: "Low-pile carpet", value: "Yes — dual rubber anti-tangle brushes" },
+          { label: "Deep or shag pile", value: null },
+        ],
+      },
+      {
+        heading: "Not published",
+        rows: [
+          { label: "Suction figure", value: null },
+          { label: "Runtime", value: null },
+          { label: "Bin capacity", value: null },
+          { label: "Noise", value: null },
+          { label: "Dimensions", value: null },
+        ],
+      },
+    ],
+    skuNote:
+      "iRobot Roomba Max 705 Robot Vacuum with AutoEmpty Dock, ASIN B0DWG3C3ZF, $499.00 read on 10 August 2026. B0DWG15XKQ at $799 is the Max 705 COMBO — a different machine with a mop and an AutoWash dock, rated 3.6 from 4,800 ratings.",
+    lastReviewed: "2026-08-10",
+  },
+
 };
 
 export function reviewFor(slug: string | undefined): ReviewContent | undefined {

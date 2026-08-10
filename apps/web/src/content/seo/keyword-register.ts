@@ -2325,6 +2325,237 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
     ],
     researchedOn: RUN_GRILL,
   },
+
+  /* ==================================================================
+     ROBOT VACUUM REVIEWS — eleven pages, 94,300/mo, built 10 August 2026.
+
+     ALL ELEVEN ARE KD 0 AND THE HUB THEY SIT UNDER IS KD 25 AGAINST
+     Wirecutter, PCMag, RTINGS, The Verge, Consumer Reports and
+     vacuumwars. That is the argument for building the reviews first: the
+     model terms are the cheapest real traffic in the category and they
+     add up to more than two thirds of the head term's volume between
+     them, on a SERP nobody is defending.
+
+     THE HEAD TERMS ARE CEDED BY ALL ELEVEN, uniformly. `robot vacuum`
+     belongs to the hub and `best robot vacuum` to the hub's best-of
+     section; a single review is not a comparison and must not compete
+     with the page that is one. The per-page cessions below only record
+     what is specific to that machine.
+
+     FOUR PRIMARIES ARE FAMILY NAMES AND THE PAGE SAYS SO. `shark
+     powerdetect`, `shark matrix robot vacuum`, `roborock qrevo` and
+     `ecovacs deebot` each cover three or four current machines, so each
+     of those four pages opens by naming the family and pinning one SKU.
+     Targeting a family term with a page about one machine is only honest
+     if the page tells the reader that is what happened, and these do.
+
+     AND ONE PRIMARY NAMES A MACHINE THAT IS NOT FOR SALE. `roborock s8
+     maxv ultra`, 9,900/mo, has no first-party Amazon US listing — every
+     result carrying the string is a third-party accessory kit, checked
+     10 August 2026. The page is built on the S8 Max Ultra that stands in
+     its place and the term stays as the primary, because the demand is
+     real and the useful answer is "here is what happened to it".
+     ================================================================== */
+  {
+    path: "/robots/robot-vacuums/eufy-omni-s1-pro/",
+    /* 33,100/mo — the largest product term in the category and the third
+       largest on the site. eufy lists the machine as the Omni S1 Pro, so
+       the page carries both namings and the slug follows eufy. */
+    primary: { term: "eufy s1 pro", volume: 33100, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "eufy omni s1 pro", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "roller mop", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "hard floors", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "eufy s1 pro price", volume: 0, difficulty: 0, mustAppear: false },
+      { term: "eufy s1 pro review", volume: 0, difficulty: 0, mustAppear: false },
+    ],
+    cededTo: [
+      { term: "robot vacuum", path: "/robots/robot-vacuums/", why: "The category head term belongs to the hub, as on every review in this category." },
+      { term: "eufy x10 pro omni", path: "/robots/robot-vacuums/eufy-x10-pro-omni/", why: "The X10 is named as the cheaper and better-rated alternative from the same brand. Naming a sibling is not targeting its term." },
+    ],
+    researchedOn: RUN_VACUUM,
+  },
+  {
+    path: "/robots/robot-vacuums/roborock-s8-max-ultra/",
+    /* 9,900/mo for a machine with no Amazon US listing. The page keeps the
+       term and answers it under the name the shelf actually uses — see the
+       block above and docs/commerce/robot-vacuums-identity.md. */
+    primary: { term: "roborock s8 maxv ultra", volume: 9900, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "roborock s8 max ultra", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "mop lift", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "obstacle avoidance", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "s8 maxv ultra discontinued", volume: 0, difficulty: 0, mustAppear: false },
+    ],
+    cededTo: [
+      { term: "robot vacuum", path: "/robots/robot-vacuums/", why: "The category head term belongs to the hub, as on every review in this category." },
+      { term: "roborock saros 10", path: "/robots/robot-vacuums/roborock-saros-10/", why: "The Saros is named as the deep-pile answer this machine is not. Naming a sibling is not targeting its term." },
+    ],
+    researchedOn: RUN_VACUUM,
+  },
+  {
+    path: "/robots/robot-vacuums/eufy-x10-pro-omni/",
+    /* 8,100/mo, and the machine this category recommends by default:
+       39,206 ratings at 4.6 for $449.99. */
+    primary: { term: "eufy x10 pro omni", volume: 8100, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "mop lifting", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "self-emptying", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "carpet", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "eufy x10 pro omni review", volume: 0, difficulty: 0, mustAppear: false },
+      { term: "eufy x10 vs c28", volume: 0, difficulty: 0, mustAppear: false },
+    ],
+    cededTo: [
+      { term: "robot vacuum", path: "/robots/robot-vacuums/", why: "The category head term belongs to the hub, as on every review in this category." },
+    ],
+    researchedOn: RUN_VACUUM,
+  },
+  {
+    path: "/robots/robot-vacuums/shark-powerdetect-av2820s/",
+    /* 8,100/mo on a FAMILY name covering three machines from $549.99 to
+       $849.99. The page pins the AV2820S and opens by separating it from
+       the RV2820ZE, which is fifty dollars away and mops. */
+    primary: { term: "shark powerdetect", volume: 8100, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "av2820s", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "object detection", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "pet hair", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "shark powerdetect nevertouch pro", volume: 0, difficulty: 0, mustAppear: false },
+    ],
+    cededTo: [
+      { term: "robot vacuum", path: "/robots/robot-vacuums/", why: "The category head term belongs to the hub, as on every review in this category." },
+      { term: "shark matrix robot vacuum", path: "/robots/robot-vacuums/shark-matrix-plus-ur2650ws/", why: "Shark's other line, at half the price and with a different argument. Two Shark reviews must not fight each other for one brand's traffic." },
+    ],
+    researchedOn: RUN_VACUUM,
+  },
+  {
+    path: "/robots/robot-vacuums/shark-matrix-plus-ur2650ws/",
+    /* 8,100/mo on a family name covering TWO Shark lines — Matrix Plus and
+       AI Ultra — mixed together in one result set. The page pins the
+       UR2650WS, which carries 35,917 ratings, the largest pool of the
+       eleven by an order of magnitude. */
+    primary: { term: "shark matrix robot vacuum", volume: 8100, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "ur2650ws", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "self-emptying", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "sonic mopping", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "shark matrix plus review", volume: 0, difficulty: 0, mustAppear: false },
+    ],
+    cededTo: [
+      { term: "robot vacuum", path: "/robots/robot-vacuums/", why: "The category head term belongs to the hub, as on every review in this category." },
+      { term: "shark powerdetect", path: "/robots/robot-vacuums/shark-powerdetect-av2820s/", why: "Shark's dearer line with object detection. Two Shark reviews must not fight each other for one brand's traffic." },
+    ],
+    researchedOn: RUN_VACUUM,
+  },
+  {
+    path: "/robots/robot-vacuums/roborock-qrevo-s5v/",
+    /* 6,600/mo on a family name covering four machines across a $380
+       spread. The page pins the S5V, the cheapest of them and the one
+       Amazon returns first. */
+    primary: { term: "roborock qrevo", volume: 6600, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "qrevo s5v", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "flexiarm", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "mop lifting", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "roborock qrevo comparison", volume: 0, difficulty: 0, mustAppear: false },
+    ],
+    cededTo: [
+      { term: "robot vacuum", path: "/robots/robot-vacuums/", why: "The category head term belongs to the hub, as on every review in this category." },
+      { term: "roborock", path: "", why: "110,000/mo and refused as a target across the whole site, not ceded to a page. Roborock's own site ranks its brand query outright and a comparison site does not take a brand term off its owner." },
+    ],
+    researchedOn: RUN_VACUUM,
+  },
+  {
+    path: "/robots/robot-vacuums/dreame-x50-ultra/",
+    /* 6,600/mo. The only machine in the catalogue claiming to climb a 6cm
+       step, and the page's job is to separate that claim from mop
+       lifting, which dreame does not publish anywhere we could read. */
+    primary: { term: "dreame x50 ultra", volume: 6600, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "obstacle crossing", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "obstacle avoidance", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "dreame x50 ultra review", volume: 0, difficulty: 0, mustAppear: false },
+      { term: "dreame x50 ultra complete", volume: 0, difficulty: 0, mustAppear: false },
+    ],
+    cededTo: [
+      { term: "robot vacuum", path: "/robots/robot-vacuums/", why: "The category head term belongs to the hub, as on every review in this category." },
+      { term: "dreame x40 ultra", path: "/robots/robot-vacuums/dreame-x40-ultra/", why: "The cheaper dreame with its own gap in the record. Naming a sibling is not targeting its term." },
+    ],
+    researchedOn: RUN_VACUUM,
+  },
+  {
+    path: "/robots/robot-vacuums/dreame-x40-ultra/",
+    /* 4,400/mo. The page leads with the gap rather than the specification:
+       dreame's own pages returned 404 or truncated content, so no obstacle
+       avoidance is recorded and the review says why. */
+    primary: { term: "dreame x40 ultra", volume: 4400, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "liftable mop", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "auto-empty", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "dreame x40 ultra review", volume: 0, difficulty: 0, mustAppear: false },
+      { term: "dreame x40 vs x50", volume: 0, difficulty: 0, mustAppear: false },
+    ],
+    cededTo: [
+      { term: "robot vacuum", path: "/robots/robot-vacuums/", why: "The category head term belongs to the hub, as on every review in this category." },
+      { term: "dreame x50 ultra", path: "/robots/robot-vacuums/dreame-x50-ultra/", why: "The dearer dreame. Naming a sibling is not targeting its term." },
+    ],
+    researchedOn: RUN_VACUUM,
+  },
+  {
+    path: "/robots/robot-vacuums/ecovacs-deebot-t90-pro-omni/",
+    /* 3,600/mo on a family name covering four current machines from $349
+       to $1,499.99. Pinned to the T90 PRO Omni, which is what Amazon
+       returns first for the family term. */
+    primary: { term: "ecovacs deebot", volume: 3600, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "t90 pro omni", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "mop roller", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "pet hair", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "deebot t90 pro omni review", volume: 0, difficulty: 0, mustAppear: false },
+    ],
+    cededTo: [
+      { term: "robot vacuum", path: "/robots/robot-vacuums/", why: "The category head term belongs to the hub, as on every review in this category." },
+      { term: "window cleaning robot", path: "/robots/window-cleaning-robots/", why: "ECOVACS is also the WINBOT brand and that category is eleven reviews deep. A floor robot must not draw glass traffic." },
+    ],
+    researchedOn: RUN_VACUUM,
+  },
+  {
+    path: "/robots/robot-vacuums/roborock-saros-10/",
+    /* 2,900/mo, and the only machine in the whole catalogue whose maker
+       makes a high-pile carpet claim. That single fact is what the page is
+       for and it is the one recommendation here nothing else can serve. */
+    primary: { term: "roborock saros 10", volume: 2900, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "high-pile carpet", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "obstacle avoidance", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "roborock saros 10 review", volume: 0, difficulty: 0, mustAppear: false },
+      { term: "robot vacuum for shag carpet", volume: 0, difficulty: 0, mustAppear: false },
+    ],
+    cededTo: [
+      { term: "robot vacuum", path: "/robots/robot-vacuums/", why: "The category head term belongs to the hub, as on every review in this category." },
+      { term: "roborock s8 maxv ultra", path: "/robots/robot-vacuums/roborock-s8-max-ultra/", why: "That term's traffic is answered by the page built on the machine roborock sells in its place. Naming a sibling is not targeting its term." },
+    ],
+    researchedOn: RUN_VACUUM,
+  },
+  {
+    path: "/robots/robot-vacuums/roomba-max-705/",
+    /* 2,900/mo on a name TWO machines share — the $499 vacuum and the $799
+       Combo, one word and three hundred dollars apart, with the cheaper one
+       rated seven tenths of a star higher. The page exists to separate
+       them before somebody buys the wrong one. */
+    primary: { term: "roomba max 705", volume: 2900, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "roomba max 705 combo", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "anti-tangle", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "pet hair", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "roomba max 705 review", volume: 0, difficulty: 0, mustAppear: false },
+    ],
+    cededTo: [
+      { term: "robot vacuum", path: "/robots/robot-vacuums/", why: "The category head term belongs to the hub, as on every review in this category." },
+      { term: "irobot roomba", path: "", why: "27,100/mo and refused as a target rather than ceded to a page, on the same ruling as roborock: iRobot ranks its own site on its own brand query and a comparison site does not take that off its owner." },
+    ],
+    researchedOn: RUN_VACUUM,
+  },
 ];
 
 export const keywordsFor = (path: string): PageKeywords | undefined =>

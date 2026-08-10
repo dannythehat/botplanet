@@ -896,6 +896,18 @@ interface PlannedSeed {
   volume: number;
   difficulty?: number;
   note?: string;
+  /**
+   * True once the page exists.
+   *
+   * ADDED 10 AUGUST 2026 with the eleven robot vacuums, and the reason is that
+   * this helper was written to describe pages that did NOT exist yet — it
+   * hardcoded `researched` for everything it produced. When a whole category
+   * got built out of one of these lists, the plan went on describing eleven
+   * live pages as candidates, and every test keyed on `status === "built"`
+   * quietly skipped them. A flag per seed keeps one list per category instead
+   * of splitting it in two and losing the volumes that justified each page.
+   */
+  built?: boolean;
 }
 
 function plannedReviews(category: string, research: string, seeds: PlannedSeed[]): PagePlan[] {
@@ -903,7 +915,7 @@ function plannedReviews(category: string, research: string, seeds: PlannedSeed[]
     path: `/robots/${category}/${x.slug}/`,
     category,
     type: "review" as const,
-    status: "researched" as const,
+    status: (x.built ? "built" : "researched") as const,
     intent: "Decide whether this specific machine is the right one for me.",
     primary: { term: x.term, volume: x.volume, difficulty: x.difficulty ?? 0 },
     secondary: [{ term: `${x.term} review`, volume: 0, difficulty: 0 }],
@@ -923,19 +935,34 @@ function plannedReviews(category: string, research: string, seeds: PlannedSeed[]
   }));
 }
 
-/* Robot vacuums — the largest demand on the site and an empty catalogue. */
+/* Robot vacuums — the largest demand on the site and, until 10 August 2026, an
+   empty catalogue. All eleven are now built.
+
+   SIX OF THE ELEVEN SLUGS ARE NOT THE SLUG THE TERM WOULD SUGGEST, and every
+   one of those six is deliberate. Four of the researched terms are FAMILY
+   NAMES rather than models — `shark powerdetect`, `shark matrix robot vacuum`,
+   `roborock qrevo` and `ecovacs deebot` each cover three or four current
+   machines across price spreads up to $1,150 — so each page is built on one
+   pinned SKU and named for it. `roborock s8 maxv ultra` names a machine with
+   NO first-party Amazon US listing at all, so the page is built on the S8 Max
+   Ultra that stands in its place. And `eufy s1 pro` is listed by eufy itself
+   as the Omni S1 Pro.
+
+   The TERM column below is unchanged in every case. The term is what people
+   search and it is still what the page targets; the slug is what the machine
+   is called. Full record: docs/commerce/robot-vacuums-identity.md. */
 const VACUUM_REVIEWS = plannedReviews("robot-vacuums", "31090094137 · 2026-08-06", [
-  { slug: "eufy-s1-pro", term: "eufy s1 pro", volume: 33100 },
-  { slug: "roborock-s8-maxv-ultra", term: "roborock s8 maxv ultra", volume: 9900 },
-  { slug: "eufy-x10-pro-omni", term: "eufy x10 pro omni", volume: 8100 },
-  { slug: "shark-powerdetect", term: "shark powerdetect", volume: 8100 },
-  { slug: "shark-matrix", term: "shark matrix robot vacuum", volume: 8100 },
-  { slug: "roborock-qrevo", term: "roborock qrevo", volume: 6600 },
-  { slug: "dreame-x50-ultra", term: "dreame x50 ultra", volume: 6600 },
-  { slug: "dreame-x40-ultra", term: "dreame x40 ultra", volume: 4400 },
-  { slug: "ecovacs-deebot", term: "ecovacs deebot", volume: 3600 },
-  { slug: "roborock-saros-10", term: "roborock saros 10", volume: 2900 },
-  { slug: "roomba-max-705", term: "roomba max 705", volume: 2900 },
+  { slug: "eufy-omni-s1-pro", term: "eufy s1 pro", volume: 33100, built: true, note: "Built 10 August 2026. eufy lists it as the Omni S1 Pro, hence the slug. The Amazon search row carries no price and the rating is 3.2 — both on the page." },
+  { slug: "roborock-s8-max-ultra", term: "roborock s8 maxv ultra", volume: 9900, built: true, note: "Built 10 August 2026 as the S8 Max Ultra. The MaxV Ultra has NO first-party Amazon US listing — every result carrying that string is a third-party accessory kit — so the page answers the term under the name the machine on the shelf actually has." },
+  { slug: "eufy-x10-pro-omni", term: "eufy x10 pro omni", volume: 8100, built: true, note: "Built 10 August 2026. B0CPFBBHP4, $449.99." },
+  { slug: "shark-powerdetect-av2820s", term: "shark powerdetect", volume: 8100, built: true, note: "Built 10 August 2026 on the AV2820S. PowerDetect covers three machines from $549.99 to $849.99, and the AV2820S is the vacuum while the RV2820ZE is the vacuum-and-mop." },
+  { slug: "shark-matrix-plus-ur2650ws", term: "shark matrix robot vacuum", volume: 8100, built: true, note: "Built 10 August 2026 on the UR2650WS. Matrix names two Shark lines; this is the $279.99 one with 35,917 ratings." },
+  { slug: "roborock-qrevo-s5v", term: "roborock qrevo", volume: 6600, built: true, note: "Built 10 August 2026 on the S5V. Qrevo covers four machines from $499.98 to $879.99." },
+  { slug: "dreame-x50-ultra", term: "dreame x50 ultra", volume: 6600, built: true, note: "Built 10 August 2026. B0DM5J52GC, $999.99." },
+  { slug: "dreame-x40-ultra", term: "dreame x40 ultra", volume: 4400, built: true, note: "Built 10 August 2026. B0CXDXKSXP, $599.99." },
+  { slug: "ecovacs-deebot-t90-pro-omni", term: "ecovacs deebot", volume: 3600, built: true, note: "Built 10 August 2026 on the T90 PRO Omni. DEEBOT covers four current machines from $349 to $1,499.99." },
+  { slug: "roborock-saros-10", term: "roborock saros 10", volume: 2900, built: true, note: "Built 10 August 2026. B0DLH247PS, $1,299.99 — the only machine in the catalogue with a maker's high-pile claim." },
+  { slug: "roomba-max-705", term: "roomba max 705", volume: 2900, built: true, note: "Built 10 August 2026 on the vacuum-only B0DWG3C3ZF. The $799 Combo is a different machine sharing the name." },
 ]);
 
 /* Litter boxes. Litter-Robot 4 at 74,000 is the single biggest review

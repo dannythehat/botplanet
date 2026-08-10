@@ -175,8 +175,8 @@ export const CATEGORY_ANCHORS: Record<string, InternalAnchor[]> = {
     {
       anchor: "BotMatch",
       href: "/botmatch/robot-vacuums/",
-      why: "Planned until the catalogue has products. The funnel's first question is the floor-type exclusion, which is the most useful thing it does.",
-      status: "planned",
+      why: "Live from 10 August 2026, when the catalogue's first eleven products landed and the funnel stopped being a questionnaire with nothing behind it. Its first question is the floor-type exclusion, which is the most useful thing it does.",
+      status: "live",
     },
   ],
 
