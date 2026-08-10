@@ -332,7 +332,8 @@ describe("no live category is left pointing at the wrong questionnaire", () => {
 describe("capabilities accumulate across questions", () => {
   it("unions desired_cleans from every scored answer rather than keeping the last", () => {
     const folded = toScoringAnswers("robot-vacuums", {
-      environment: "A mix of hard floor and carpet", // mopping, mop_lifting
+      environment: "A mix of hard floor and carpet", // environment only
+      mopping: "Yes — and the pads must lift off carpet", // mopping, mop_lifting
       primary_need: "Yes — a shedding animal", // self_emptying, obstacle_avoidance
       clutter: "Children live here", // obstacle_avoidance
       emptying: "Yes — I do not want to think about it", // self_emptying
@@ -387,5 +388,53 @@ describe("capabilities accumulate across questions", () => {
     expect(litter.desired_cleans).toContain("any_litter");
     expect(litter.desired_cleans).toContain("odor_sealing");
     expect(litter.desired_cleans).toContain("health_monitoring");
+  });
+});
+
+/**
+ * A QUESTION THE FUNNEL ANSWERED FOR THE READER, WRONGLY.
+ *
+ * The vacuum floor question added `mopping` to every hard-floor and mixed-floor
+ * answer until 10 August 2026, so anybody without deep pile throughout was
+ * deemed to want a mop whether they said so or not. Two of the eleven machines
+ * in that catalogue do not mop, and a sweep of all 1,215 answer sets found
+ * neither could be the answer to any question a reader was able to ask.
+ */
+describe("wanting a mop is a decision, not a consequence of your floors", () => {
+  it("does not ask for mopping when the reader only said what their floors are", () => {
+    const folded = toScoringAnswers("robot-vacuums", {
+      environment: "Mostly hard floors",
+    });
+    expect(folded.environment).toBe("hard_floors");
+    expect(folded.desired_cleans ?? []).not.toContain("mopping");
+  });
+
+  it("lets a reader ask for a vacuum that does not mop at all", () => {
+    const folded = toScoringAnswers("robot-vacuums", {
+      environment: "A mix of hard floor and carpet",
+      mopping: "No — vacuum only",
+      primary_need: "Yes — a shedding animal",
+    });
+    expect(folded.desired_cleans ?? []).not.toContain("mopping");
+    expect(folded.desired_cleans ?? []).not.toContain("mop_lifting");
+    expect(folded.desired_cleans).toContain("self_emptying");
+  });
+
+  it("asks for mop lifting only when the reader asks for it", () => {
+    const plain = toScoringAnswers("robot-vacuums", { mopping: "Yes" });
+    expect(plain.desired_cleans).toEqual(["mopping"]);
+
+    const lifting = toScoringAnswers("robot-vacuums", {
+      mopping: "Yes — and the pads must lift off carpet",
+    });
+    expect(lifting.desired_cleans).toEqual(["mopping", "mop_lifting"]);
+  });
+
+  /* "No pets and no long hair" says nothing whatever about wanting a mop, and
+     it used to say `mopping`. */
+  it("does not read a mop into an answer about hair", () => {
+    const folded = toScoringAnswers("robot-vacuums", { primary_need: "Neither" });
+    expect(folded.primary_need).toBe("general");
+    expect(folded.desired_cleans ?? []).not.toContain("mopping");
   });
 });

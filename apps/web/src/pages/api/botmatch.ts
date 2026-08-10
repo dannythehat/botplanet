@@ -11,6 +11,7 @@ import {
 } from "@botplanet/scoring";
 import { getDb, schema } from "../../lib/db";
 import { loadScoringConfig } from "../../lib/scoring-config";
+import { NO_OFFER_BY_DESIGN, catalogueStatusOf } from "../../content/products";
 
 const freshnessRank = (c: string | null) => (c === "live" ? 2 : c === "recently_verified" ? 1 : 0);
 
@@ -54,10 +55,42 @@ export const POST: APIRoute = async ({ request, locals }) => {
   )[0];
   if (!cat) return json({ error: "Unknown category" }, 404);
 
-  const products = await db
+  const published = await db
     .select()
     .from(schema.products)
     .where(and(eq(schema.products.categoryId, cat.id), eq(schema.products.status, "published")));
+
+  /**
+   * PUBLISHED IS NOT THE SAME AS RECOMMENDABLE, AND THIS ROUTE TREATED THEM AS
+   * THE SAME UNTIL 10 AUGUST 2026.
+   *
+   * On that date a companion query returned "Embodied Moxie" as one of three
+   * equivalents. Embodied ceased operations, Moxie stopped working when its
+   * servers went off, and this site's own catalogue records that we will never
+   * sell one. Living.AI EMO was beside it, whose only Amazon listing we
+   * determined to be a counterfeit under a different brand. The funnel was
+   * recommending a robot that does not switch on and a listing we had already
+   * refused in writing.
+   *
+   * The rule-out reviews are PUBLISHED on purpose — a page saying "do not buy
+   * this, and here is why" is some of the most useful writing here, and it has
+   * to stay in the grid and in search. What it must never do is come back as
+   * the answer to "which one should I buy". Those are opposite jobs and the
+   * `published` flag cannot tell them apart.
+   *
+   * Two states, and only one of them is excluded:
+   *
+   *   OFFER_SETUP_PENDING — verified, no retailer wiring YET. Grillbot and the
+   *   eleven robot vacuums are here. They stay in the pool, because "we cannot
+   *   sell you this today" is not "this is the wrong machine for you".
+   *
+   *   NO_OFFER_BY_DESIGN — we will never send a buyer here. Excluded.
+   *
+   * Withdrawn products go too, for the same reason.
+   */
+  const products = published.filter(
+    (p) => !NO_OFFER_BY_DESIGN[p.id] && catalogueStatusOf(p.id) === "active",
+  );
 
   /* One config per category, and NO fallback.
      This read "sc-pool-v1" for every category until 6 August 2026. The pool

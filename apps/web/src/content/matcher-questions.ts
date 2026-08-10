@@ -1045,17 +1045,60 @@ const VACUUM_QUESTIONS: MatcherQuestion[] = [
       {
         label: "Mostly hard floors",
         hint: "Wood, tile, laminate, vinyl",
-        scores: { environment: "hard_floors", desired_cleans: ["mopping"] },
+        scores: { environment: "hard_floors" },
       },
       {
         label: "A mix of hard floor and carpet",
-        hint: "The pads have to lift out of the way",
-        scores: { environment: "low_pile_carpet", desired_cleans: ["mopping", "mop_lifting"] },
+        hint: "Whether the pads lift becomes the deciding question",
+        scores: { environment: "low_pile_carpet" },
       },
       {
         label: "Deep or shag pile throughout",
-        hint: "A mop is dead weight here, and clearance matters",
+        hint: "Clearance matters, and a mop is dead weight here",
         scores: { environment: "deep_pile_carpet" },
+      },
+    ],
+  },
+
+  /**
+   * THIS QUESTION WAS MISSING AND THE FUNNEL ANSWERED IT ON THE READER'S
+   * BEHALF, WRONGLY, UNTIL 10 AUGUST 2026.
+   *
+   * The floor question used to add `mopping` to every hard-floor and mixed-floor
+   * answer, so anybody who did not have deep pile throughout was deemed to want
+   * a mop whether they said so or not. Two of the eleven machines in the
+   * catalogue do not mop at all — the Shark PowerDetect AV2820S and the Roomba
+   * Max 705 — and a coverage sweep of all 1,215 answer sets on 10 August found
+   * that NEITHER OF THEM COULD BE THE ANSWER TO ANY QUESTION A READER WAS ABLE
+   * TO ASK. Two published products, two reviews, two cards in the grid, and the
+   * funnel could never name them.
+   *
+   * Wanting a mop is a decision, not a consequence of having wooden floors.
+   * Plenty of people have a steam mop they like, or hard floors they wet-clean
+   * by hand and would rather the robot just vacuumed properly.
+   *
+   * `mop_lifting` moved here too, and it is asked as its own answer rather than
+   * inferred from carpet — because the machine only needs to lift pads if it is
+   * carrying pads, and a reader who wants no mop should not be scored against a
+   * capability that exists to manage one.
+   */
+  {
+    id: "mopping",
+    kicker: "Mopping",
+    q: "Do you want it to mop as well as vacuum?",
+    options: [
+      {
+        label: "Yes",
+        scores: { desired_cleans: ["mopping"] },
+      },
+      {
+        label: "Yes — and the pads must lift off carpet",
+        hint: "Otherwise it drags a wet pad across your rugs on a schedule",
+        scores: { desired_cleans: ["mopping", "mop_lifting"] },
+      },
+      {
+        label: "No — vacuum only",
+        hint: "Two machines here do exactly that, and cost less for it",
       },
     ],
   },
@@ -1073,8 +1116,11 @@ const VACUUM_QUESTIONS: MatcherQuestion[] = [
         scores: { primary_need: "long_hair", desired_cleans: ["self_emptying"] },
       },
       {
+        /* Scores a primary_need and no capability. It used to add `mopping`,
+           which is the same assumption the floor question was making: "no pets
+           and no long hair" says nothing whatever about wanting a mop. */
         label: "Neither",
-        scores: { primary_need: "general", desired_cleans: ["mopping"] },
+        scores: { primary_need: "general" },
       },
     ],
   },
