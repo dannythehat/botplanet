@@ -5500,6 +5500,495 @@ export const REVIEWS: Record<string, ReviewContent> = {
     lastReviewed: "2026-08-10",
   },
 
+  /* ============================================================
+     ROBOTIC LAWN MOWERS — the first seven, 10 August 2026.
+
+     RATED AREA LEADS EVERY TABLE because it is the only hard
+     rule-out in the category: the lawn config EXCLUDES a machine
+     rated for less ground than the reader has rather than ranking
+     it lower, which is the right treatment for a mower that
+     cannot finish. It is also the field the catalogue had wrong —
+     the eufy E15 was recorded at 10,890 sq ft, a quarter acre
+     rounded rather than converted, against eufy's own 800 m² which
+     is 8,611. The correction is in migration 0015 and it is the
+     first thing the E15's own review says.
+
+     SLOPE IS THE NUMBER THE CAPABILITY FLAG HIDES. Three of the
+     seven carry `grass_slopes` and behind that single yes sit
+     45%, 80% and 80%; the four without it are at 30%, 30% and 18
+     degrees. Every review prints the figure, because "handles
+     slopes" covering both 45% and 80% is a shared word doing the
+     work of a measurement.
+
+     NAVIGATION IS THE THIRD AXIS AND IT IS BINARY IN PRACTICE.
+     All seven are wire-free. Three find themselves by satellite
+     and are defeated by a mature canopy with no setting that
+     fixes it; four navigate by camera or LiDAR and are not. The
+     `open_sky` / `tree_cover` environment pair already carries
+     that as a rule-out — these rows say which system each machine
+     actually uses, which is the first thing a buyer under trees
+     asks.
+
+     Every figure read from the maker's own pages on 10 August
+     2026. Identity was verified 8 August; the record including
+     the two products the brief named wrongly is
+     docs/seo/litter-lawn-verification-2026-08-08.md.
+     ============================================================ */
+
+  "husqvarna-automower-410iq": {
+    slug: "husqvarna-automower-410iq",
+    image: undefined,
+    figures: [],
+    categorySlug: "robotic-lawn-mowers",
+    eyebrow: "Robotic lawn mower review",
+    title: "Husqvarna Automower 410iQ review",
+    seoTitle: "Husqvarna Automower 410iQ Review — Two Area Figures",
+    metaDescription:
+      "The only maker here that publishes a rated area twice: half an acre if your lawn is " +
+      "a sensible shape, a quarter if it is not. Plus a four-year warranty.",
+    verdict:
+      "The only mower in this catalogue whose maker publishes two working-area figures — half an acre systematically, a quarter acre in irregular patterns — which is the most honest line on any lawn spec sheet we read. It is also the only one that can fall back to a physical boundary wire when satellites disappoint, and the only one with a four-year warranty. At $2,499.99 it is dear, and 45% is half the slope the all-wheel-drive machines manage.",
+    bestFor:
+      "An awkwardly shaped half acre, where a virtual boundary might not hold and a physical one is the fallback.",
+    notIdealFor:
+      "A steep bank — 45% inside the area and 15% at the boundary, against 80% for the AWD machines — and any budget the WORX at $1,022.54 would satisfy.",
+    facts: [
+      { label: "Price", value: "$2,499.99, read 8 August 2026" },
+      { label: "Rated area", value: "0.5 acre systematically, 0.25 acre in irregular patterns, ±20%" },
+      { label: "Max slope", value: "45% inside the area, 15% at the boundary" },
+      { label: "Warranty", value: "4 years" },
+    ],
+    specGroups: [
+      {
+        heading: "Your lawn",
+        rows: [
+          {
+            label: "Rated area",
+            value: "0.5 acre systematically, 0.25 acre in irregular patterns, ±20%",
+            note: "The only maker of the seven to publish two figures for two lawn shapes.",
+          },
+          { label: "Max slope", value: "45% inside the area, 15% at the boundary" },
+          { label: "Navigation", value: "EPOS — multiple satellites plus the national cellular network, centimetre accurate" },
+          { label: "Boundary", value: "Physical wire or virtual — the only machine here offering both" },
+        ],
+      },
+      {
+        heading: "Cutting",
+        rows: [
+          { label: "Cutting width", value: "9.4 in" },
+          { label: "Blades", value: "3 pivoting razor blades" },
+          { label: "Cutting height", value: "1–4 in, electric adjustment" },
+        ],
+      },
+      {
+        heading: "Running it",
+        rows: [
+          { label: "Battery", value: "5 Ah Li-Ion" },
+          { label: "Typical mowing time", value: "84 min per charge" },
+          { label: "Charge time", value: "108 min" },
+          { label: "Noise", value: "62 dB(A)" },
+          { label: "Obstacles", value: "Onboard radar, plus lift and tilt sensors" },
+          { label: "Warranty", value: "4 years" },
+        ],
+      },
+      {
+        heading: "Not published",
+        rows: [
+          { label: "IP rating", value: null },
+          { label: "Weight", value: null },
+          { label: "Separate zones", value: null },
+        ],
+      },
+    ],
+    skuNote:
+      "Husqvarna Automower 410 iQ, ASIN B0DTV7TR6W, $2,499.99 read on 8 August 2026. Two prices were in circulation — $1,550 in a round-up and $2,499.99 on Amazon — and the Amazon figure is the one read directly. The 420iQ at $3,144.37 is the larger sibling. Specifications read from husqvarna.com on 10 August 2026.",
+    lastReviewed: "2026-08-10",
+  },
+
+  "mammotion-luba-3-awd-1500h": {
+    slug: "mammotion-luba-3-awd-1500h",
+    image: undefined,
+    figures: [],
+    categorySlug: "robotic-lawn-mowers",
+    eyebrow: "Robotic lawn mower review",
+    title: "Mammotion LUBA 3 AWD 1500H review",
+    seoTitle: "Mammotion LUBA 3 AWD 1500H Review — 80% Slopes",
+    metaDescription:
+      "All four wheels driven, 38.6 degrees, and LiDAR rather than satellites — so it works " +
+      "under trees too. $2,399 for 0.37 acre, and the acre is not the point.",
+    verdict:
+      "Eighty per cent slopes on all-wheel drive, which is roughly double what most of this category manages, with 360-degree LiDAR and AI vision instead of satellite positioning — the pairing that matters, because steep gardens are often wooded gardens. At $2,399 for 0.37 of an acre it is a lot of money for not much ground, and the ground is not the point. On a flat lawn it is dead weight you are financing.",
+    bestFor:
+      "A genuine bank under 16,117 sq ft, especially with tree cover that would defeat a satellite-positioned machine.",
+    notIdealFor:
+      "A flat lawn, where the WORX covers half an acre for $1,022.54 — and anything over 0.37 acre, which the 3000H handles for $400 more.",
+    facts: [
+      { label: "Price", value: "$2,399, read 8 August 2026" },
+      { label: "Rated area", value: "0.37 acre (16,117 sq ft)" },
+      { label: "Max slope", value: "80% (38.6°), all-wheel drive" },
+      { label: "Runtime", value: "215 min on up to 15 Ah" },
+    ],
+    specGroups: [
+      {
+        heading: "Your lawn",
+        rows: [
+          { label: "Rated area", value: "0.37 acre (16,117 sq ft)" },
+          { label: "Max slope", value: "80% (38.6°), all-wheel drive" },
+          { label: "Navigation", value: "360° LiDAR plus AI vision — not satellite, so a canopy does not defeat it" },
+          { label: "Drive", value: "All-wheel" },
+        ],
+      },
+      {
+        heading: "Cutting",
+        rows: [
+          {
+            label: "Cutting height",
+            value: "Standard 1.0–2.7 in; High version 2.2–4.0 in",
+            note: "The H is a cutting height, not a trim level. Warm-season grasses are cut at three inches and up, above the standard version's ceiling.",
+          },
+          { label: "Cutting width", value: null },
+        ],
+      },
+      {
+        heading: "Running it",
+        rows: [
+          { label: "Battery", value: "Up to 15 Ah" },
+          { label: "Runtime", value: "215 min per charge" },
+        ],
+      },
+      {
+        heading: "Not published",
+        rows: [
+          { label: "Noise", value: null },
+          { label: "IP rating", value: null },
+          { label: "Weight", value: null },
+          { label: "Warranty", value: null },
+          { label: "Separate zones", value: null },
+        ],
+      },
+    ],
+    skuNote:
+      "Mammotion LUBA 3 AWD 1500H, ASIN B0GKNYZPC3, $2,399 read on 8 August 2026. The brief named a LUBA 2, and Mammotion's own US page for that machine is titled “2025 Model | Upgraded to 2026 LUBA 3” — so most of the internet's LUBA reviews are of a model its maker has marked superseded. The 15.7 in cutting width in circulation belongs to the LUBA 2 series and is NOT carried across. Specifications read from us.mammotion.com on 10 August 2026.",
+    lastReviewed: "2026-08-10",
+  },
+
+  "mammotion-luba-3-awd-3000h": {
+    slug: "mammotion-luba-3-awd-3000h",
+    image: undefined,
+    figures: [],
+    categorySlug: "robotic-lawn-mowers",
+    eyebrow: "Robotic lawn mower review",
+    title: "Mammotion LUBA 3 AWD 3000H review",
+    seoTitle: "Mammotion LUBA 3 AWD 3000H Review — Big and Steep",
+    metaDescription:
+      "Three quarters of an acre on 80% slopes, $400 above the 1500H for twice the ground. " +
+      "The only machine here that covers that much and still climbs a bank.",
+    verdict:
+      "Three quarters of an acre on eighty per cent slopes — the only machine in this catalogue that covers that much ground and still climbs a bank. Four hundred dollars over the 1500H for twice the area makes it the better buy of the two more often than the price suggests, and everything else about them is identical. On a lawn under a third of an acre it is more machine than the garden needs, in size, weight, noise and money.",
+    bestFor:
+      "A third to three quarters of an acre with real slopes, and possibly trees — nothing else here fits that description.",
+    notIdealFor:
+      "A small garden, where the Dreame A3 AWD 1000 climbs the same 80% for $1,200 less — and any flat lawn at all.",
+    facts: [
+      { label: "Price", value: "$2,799, read 8 August 2026" },
+      { label: "Rated area", value: "0.75 acre (32,670 sq ft)" },
+      { label: "Max slope", value: "80% (38.6°), all-wheel drive" },
+      { label: "Runtime", value: "215 min on up to 15 Ah" },
+    ],
+    specGroups: [
+      {
+        heading: "Your lawn",
+        rows: [
+          { label: "Rated area", value: "0.75 acre (32,670 sq ft)" },
+          { label: "Max slope", value: "80% (38.6°), all-wheel drive" },
+          { label: "Navigation", value: "360° LiDAR plus AI vision — not satellite, so a canopy does not defeat it" },
+          { label: "Drive", value: "All-wheel" },
+        ],
+      },
+      {
+        heading: "Cutting",
+        rows: [
+          {
+            label: "Cutting height",
+            value: "Standard 1.0–2.7 in; High version 2.2–4.0 in",
+            note: "The H is a cutting height, not a trim level. Warm-season grasses are cut at three inches and up, above the standard version's ceiling.",
+          },
+          { label: "Cutting width", value: null },
+        ],
+      },
+      {
+        heading: "Running it",
+        rows: [
+          { label: "Battery", value: "Up to 15 Ah" },
+          { label: "Runtime", value: "215 min per charge" },
+        ],
+      },
+      {
+        heading: "Not published",
+        rows: [
+          { label: "Noise", value: null },
+          { label: "IP rating", value: null },
+          { label: "Weight", value: null },
+          { label: "Warranty", value: null },
+          { label: "Separate zones", value: null },
+        ],
+      },
+    ],
+    skuNote:
+      "Mammotion LUBA 3 AWD 3000H, $2,799, part of the LUBA 3 AWD series verified on 8 August 2026 alongside the 1500H at ASIN B0GKNYZPC3. The 15.7 in cutting width in circulation belongs to the superseded LUBA 2 series and is NOT carried across. Specifications read from us.mammotion.com on 10 August 2026.",
+    lastReviewed: "2026-08-10",
+  },
+
+  "dreame-a3-awd-1000": {
+    slug: "dreame-a3-awd-1000",
+    image: undefined,
+    figures: [],
+    categorySlug: "robotic-lawn-mowers",
+    eyebrow: "Robotic lawn mower review",
+    title: "Dreame A3 AWD 1000 review",
+    seoTitle: "Dreame A3 AWD 1000 Review — 80% Slopes for $1,600",
+    metaDescription:
+      "The cheapest way to climb a bank here, on LiDAR rather than satellites. A quarter " +
+      "acre is the ceiling, and the product the brief asked for does not exist.",
+    verdict:
+      "Eighty per cent slopes for $1,599.99, which is eight hundred dollars less than the only other machine here that climbs like this. It navigates on 360-degree 3D LiDAR and binocular vision rather than satellites, so a canopy does not defeat it, and it cuts from 1.2 to 3.9 inches — a wider range than anything else at its price. The ceiling is a quarter acre, and on flat ground the all-wheel drive is the whole reason for the premium.",
+    bestFor:
+      "A steep quarter acre, possibly under trees, without paying Mammotion money.",
+    notIdealFor:
+      "More than 10,764 sq ft, and any flat lawn — the Segway covers a quarter acre for $500 less.",
+    facts: [
+      { label: "Price", value: "$1,599.99, read 8 August 2026" },
+      { label: "Rated area", value: "1,000 m² (0.25 acre)" },
+      { label: "Max slope", value: "80% (38.7°), all-wheel drive" },
+      { label: "Cutting height", value: "1.2–3.9 in" },
+    ],
+    specGroups: [
+      {
+        heading: "Your lawn",
+        rows: [
+          { label: "Rated area", value: "1,000 m² (0.25 acre)" },
+          { label: "Max slope", value: "80% (38.7°), all-wheel drive" },
+          { label: "Navigation", value: "OmniSense 3.0 — 360° 3D LiDAR plus binocular AI vision" },
+          { label: "Drive", value: "All-wheel" },
+        ],
+      },
+      {
+        heading: "Cutting",
+        rows: [
+          { label: "Cutting height", value: "1.2–3.9 in" },
+          { label: "Edge trim", value: "EdgeMaster, to within 1.91 in of a fence line" },
+          { label: "Obstacle crossing", value: "2.17 in" },
+          { label: "Cutting width", value: null },
+        ],
+      },
+      {
+        heading: "Not published",
+        rows: [
+          { label: "Battery", value: null },
+          { label: "Runtime", value: null },
+          { label: "Noise", value: null },
+          { label: "IP rating", value: null },
+          { label: "Weight", value: null },
+          { label: "Warranty", value: null },
+        ],
+      },
+    ],
+    skuNote:
+      "DREAME A3 AWD 1000, ASIN B0H3V799KT, $1,599.99 read on 8 August 2026. The brief named a “Dreame A1” and six passes across search and product lookups returned no such current product; this is the machine Dreame actually sells, judged on its own rather than substituted silently. The A3 AWD Pro at $2,699.99 is the larger sibling, and its 15.8 in dual-blade cutting width is NOT carried across to this model. Specifications read from dreametech.com on 10 August 2026.",
+    lastReviewed: "2026-08-10",
+  },
+
+  "worx-landroid-vision-wr320": {
+    slug: "worx-landroid-vision-wr320",
+    image: undefined,
+    figures: [],
+    categorySlug: "robotic-lawn-mowers",
+    eyebrow: "Robotic lawn mower review",
+    title: "WORX Landroid Vision WR320 review",
+    seoTitle: "WORX Landroid Vision WR320 Review — Half an Acre, $1,023",
+    metaDescription:
+      "Camera navigation, no antenna, half an acre — for forty per cent of what the " +
+      "Husqvarna rated for the same ground costs. And no published runtime at all.",
+    verdict:
+      "Half an acre for $1,022.54, navigated by camera rather than satellite, which is the right technology for a garden with trees and the reason this is comfortably the best value in the catalogue for a flat lawn. What WORX does not publish is anything about the battery — no capacity, no runtime, no charge time — on a machine rated for a lot of ground, and at thirty per cent it is not a slope mower.",
+    bestFor:
+      "A flat half acre with trees, at a price no other machine here comes near for that area.",
+    notIdealFor:
+      "Any real slope past 30%, and anyone who wants published runtime figures and a warranty length before spending outdoors.",
+    facts: [
+      { label: "Price", value: "$1,022.54, read 8 August 2026" },
+      { label: "Rated area", value: "1/2 acre (21,780 sq ft)" },
+      { label: "Max slope", value: "30% (17°)" },
+      { label: "Navigation", value: "Vision AI plus RTK Cloud — no on-site antenna" },
+    ],
+    specGroups: [
+      {
+        heading: "Your lawn",
+        rows: [
+          { label: "Rated area", value: "1/2 acre (21,780 sq ft)" },
+          { label: "Max slope", value: "30% (17°)" },
+          { label: "Navigation", value: "Vision AI plus RTK Cloud — no on-site antenna" },
+          { label: "Camera", value: "High dynamic range full HD wide angle with auto white balance" },
+        ],
+      },
+      {
+        heading: "Cutting",
+        rows: [
+          { label: "Cutting width", value: "8.7 in" },
+          { label: "Cutting height", value: "1.57–3.54 in, electronic adjustment" },
+        ],
+      },
+      {
+        heading: "Not published",
+        rows: [
+          { label: "Battery", value: null },
+          { label: "Runtime", value: null },
+          { label: "Charge time", value: null },
+          { label: "Noise", value: null },
+          { label: "IP rating", value: null },
+          { label: "Weight", value: null },
+          { label: "Warranty", value: null },
+        ],
+      },
+    ],
+    skuNote:
+      "WORX WR320, Landroid Vision Cloud 1/2 acre, ASIN B0GN8KK8XW, $1,022.54 read on 8 August 2026. Landroid Vision is a family of at least four live US models: this WR320 2WD half acre, the WO7144 quarter acre at $999.99 — twenty-three dollars apart — the WR342 4WD half acre at $2,069.99 and the WR344 4WD one acre at $2,646.18. Specifications read from worx.com on 10 August 2026.",
+    lastReviewed: "2026-08-10",
+  },
+
+  "segway-navimow-i110n": {
+    slug: "segway-navimow-i110n",
+    image: undefined,
+    figures: [],
+    categorySlug: "robotic-lawn-mowers",
+    eyebrow: "Robotic lawn mower review",
+    title: "Segway Navimow i110N review",
+    seoTitle: "Segway Navimow i110N Review — The Data Is Included",
+    metaDescription:
+      "Network RTK with no antenna to mount and no subscription — Segway provides the " +
+      "cellular data free. A quarter acre for $1,099, and useless under trees.",
+    verdict:
+      "Network RTK with no local antenna to mount, and Segway states the access is included at no extra cost with the cellular data provided free — which removes both the afternoon of installation and the question of what happens when the free year ends. At $1,099 for a quarter acre that is a clean proposition. It is also satellite-positioned, so a mature canopy is a hard failure rather than a degradation.",
+    bestFor:
+      "An open quarter acre with a clear view of the sky, and no appetite for mounting an antenna.",
+    notIdealFor:
+      "A lawn under mature trees, where satellite positioning fails outright — and anyone who cuts below two inches.",
+    facts: [
+      { label: "Price", value: "$1,099, read 8 August 2026" },
+      { label: "Rated area", value: "1/4 acre (10,890 sq ft)" },
+      { label: "Max slope", value: "30% (17°)" },
+      { label: "Navigation", value: "Network RTK with no local antenna, plus VisionFence" },
+    ],
+    specGroups: [
+      {
+        heading: "Your lawn",
+        rows: [
+          { label: "Rated area", value: "1/4 acre (10,890 sq ft)" },
+          { label: "Max slope", value: "30% (17°)" },
+          {
+            label: "Navigation",
+            value: "Network RTK with no local antenna, plus VisionFence",
+            note: "Segway states Network RTK access is included at no extra cost and the required cellular data is provided free of charge.",
+          },
+          { label: "Obstacles", value: "VisionFence identifies over 150 objects across animals, tools and everyday obstacles" },
+        ],
+      },
+      {
+        heading: "Cutting",
+        rows: [
+          {
+            label: "Cutting height",
+            value: "2–3.6 in, adjusted by hand",
+            note: "Two inches is a high floor. A lawn you like cut short may be below this machine's lowest setting.",
+          },
+          { label: "Cutting width", value: null },
+        ],
+      },
+      {
+        heading: "Not published",
+        rows: [
+          { label: "Battery", value: null },
+          { label: "Runtime", value: null },
+          { label: "Noise", value: null },
+          { label: "IP rating", value: null },
+          { label: "Weight", value: null },
+          { label: "Warranty", value: null },
+        ],
+      },
+    ],
+    skuNote:
+      "Segway Navimow i110N, ASIN B0CX7T6BR3, $1,099 read on 8 August 2026. The range refreshed at CES 2026 — the i2 AWD series from $999 and the X4 series from $2,499 are the new generation, with the i105N and i110N remaining on sale beneath them. Specifications read from navimow.segway.com on 10 August 2026.",
+    lastReviewed: "2026-08-10",
+  },
+
+  "eufy-e15": {
+    slug: "eufy-e15",
+    image: undefined,
+    figures: [],
+    categorySlug: "robotic-lawn-mowers",
+    eyebrow: "Robotic lawn mower review",
+    title: "eufy Robot Lawn Mower E15 review",
+    /* The register's primary is the full `eufy robot lawn mower e15`, which is
+       how eufy names it and how the 390/mo searches read, so the title carries
+       all five words even though it costs most of the line. */
+    seoTitle: "eufy Robot Lawn Mower E15 Review — We Had This Wrong",
+    metaDescription:
+      "Our catalogue said a quarter acre. eufy says 800 m², which is 8,611 sq ft — " +
+      "26% less grass, on a figure that rules machines out rather than ranking them.",
+    verdict:
+      "Camera-only navigation with no wires, no antenna and no satellites, which is the shortest setup in the category and the right technology for a garden with trees. Everything else about it is at the modest end: eight-inch cut, three-inch ceiling, eighteen degrees of slope and 800 square metres. At $1,199.99 the WORX Landroid Vision covers two and a half times the ground for $177 less using the same kind of navigation, and that is a hard comparison to win.",
+    bestFor:
+      "A small flat lawn under trees, where nothing needs mounting and satellite positioning would fail.",
+    notIdealFor:
+      "More than 8,611 sq ft, any slope past 18°, or a lawn cut above three inches.",
+    facts: [
+      { label: "Price", value: "$1,199.99, read 8 August 2026" },
+      {
+        label: "Rated area",
+        value: "800 m² (8,611 sq ft)",
+      },
+      { label: "Max slope", value: "18°" },
+      { label: "Navigation", value: "Pure vision FSD — no wires, no RTK station" },
+    ],
+    specGroups: [
+      {
+        heading: "Your lawn",
+        rows: [
+          {
+            label: "Rated area",
+            value: "800 m² (8,611 sq ft)",
+            note: "Our catalogue recorded 10,890 sq ft — a quarter acre rounded rather than converted — until 10 August 2026. Corrected to eufy's own figure.",
+          },
+          { label: "Max slope", value: "18°" },
+          { label: "Navigation", value: "Pure vision FSD — high-precision cameras and algorithms, no wires and no RTK station" },
+          { label: "Camera field of view", value: "96° horizontal, 80° vertical" },
+        ],
+      },
+      {
+        heading: "Cutting",
+        rows: [
+          { label: "Cutting width", value: "8 in (203 mm)" },
+          { label: "Cutting height", value: "1–3 in (25–75 mm)" },
+        ],
+      },
+      {
+        heading: "Not published",
+        rows: [
+          { label: "Battery", value: null },
+          { label: "Runtime", value: null },
+          { label: "Charge time", value: null },
+          { label: "Noise", value: null },
+          { label: "IP rating", value: null },
+          { label: "Weight", value: null },
+          { label: "Warranty", value: null },
+        ],
+      },
+    ],
+    skuNote:
+      "eufy Robot Lawn Mower E15, ASIN B0DRVYDXWX, $1,199.99 read on 8 August 2026. There is an E18 in the same family and we did not verify it — every figure here is the E15's. Specifications read from eufy.com on 10 August 2026.",
+    lastReviewed: "2026-08-10",
+  },
+
 };
 
 export function reviewFor(slug: string | undefined): ReviewContent | undefined {

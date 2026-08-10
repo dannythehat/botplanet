@@ -1680,6 +1680,26 @@ const GRILL_REVIEWS = plannedReviews("grill-cleaning-robots", "31092662805 · 20
 
 /* Lawn. Seventeen review candidates were named; these are the ones with a
    measured figure behind them. */
+/* The seven mowers built on 10 August 2026, taking their terms from the
+   keyword register rows measured against the product URLs themselves rather
+   than from the 6 August category seeds below.
+
+   NONE OF THESE SEVEN WAS IN THE SEED SET UNDER ITS OWN NAME. That run
+   measured family and brand terms — `husqvarna automower` at 14,800, `segway
+   navimow` at 4,400, `mammotion luba 3` at 1,600 — and the machines actually
+   verified on 8 August are specific SKUs beneath them. The family rows stay
+   below as researched candidates, because a family term is a real page
+   somebody could build; these rows are the products that exist. */
+const LAWN_BUILT = plannedReviews("robotic-lawn-mowers", "31073327230 + 31074893036 · 2026-08-06", [
+  { slug: "husqvarna-automower-410iq", term: "husqvarna automower 410iq", volume: 110, built: true, note: "Built 10 August 2026. The only mower here publishing two rated-area figures, and the only one offering a physical boundary wire as a fallback." },
+  { slug: "segway-navimow-i110n", term: "segway navimow i110n", volume: 480, difficulty: 12, built: true, note: "Built 10 August 2026. Network RTK with the cellular data included — and satellite-positioned, so a canopy is a hard failure." },
+  { slug: "eufy-e15", term: "eufy robot lawn mower e15", volume: 390, difficulty: 11, built: true, note: "Built 10 August 2026. Its rated area was recorded 26% too high until that day — 10,890 sq ft against eufy's own 800 m². Corrected in migration 0015 and stated on the page." },
+  { slug: "worx-landroid-vision-wr320", term: "worx landroid vision", volume: 260, built: true, note: "Built 10 August 2026 on the WR320. Landroid Vision is a family of at least four live US models and the quarter-acre one is $23 away." },
+  { slug: "dreame-a3-awd-1000", term: "dreame a3 awd", volume: 170, built: true, note: "Built 10 August 2026. The brief named a Dreame A1, which does not exist as a current product; this is the machine Dreame sells, judged on its own." },
+  { slug: "mammotion-luba-3-awd-3000h", term: "mammotion luba 3 awd 3000h", volume: 40, built: true, note: "Built 10 August 2026. The only machine in the catalogue covering three quarters of an acre while still climbing 80%." },
+  { slug: "mammotion-luba-3-awd-1500h", term: "mammotion luba 3 awd 1500h", volume: 30, built: true, note: "Built 10 August 2026. Low volume on the exact SKU; it carries `mammotion luba 3` (1,600) and `luba 3 awd` (1,000) as secondaries in the register." },
+]);
+
 const LAWN_REVIEWS = plannedReviews("robotic-lawn-mowers", "31073327230 + 31074893036 · 2026-08-06", [
   { slug: "husqvarna-automower", term: "husqvarna automower", volume: 14800, difficulty: 7 },
   { slug: "segway-navimow", term: "segway navimow", volume: 4400, difficulty: 39 },
@@ -1687,7 +1707,11 @@ const LAWN_REVIEWS = plannedReviews("robotic-lawn-mowers", "31073327230 + 310748
   { slug: "mammotion-luba-3", term: "mammotion luba 3", volume: 1600, difficulty: 0 },
   { slug: "mammotion-yuka", term: "mammotion yuka", volume: 720, difficulty: 9 },
   { slug: "husqvarna-automower-115h", term: "husqvarna automower 115h", volume: 590, difficulty: 0 },
-  { slug: "segway-navimow-i110n", term: "segway navimow i110n", volume: 480, difficulty: 12 },
+  /* `segway-navimow-i110n` moved to LAWN_BUILT above on 10 August 2026. It was
+     the one seed in this list that named a machine we actually verified, and
+     leaving it here as well gave two plan rows the same path and the same
+     primary term — which is precisely the cannibalisation this file exists to
+     prevent, committed by the file itself. */
   { slug: "segway-navimow-x430", term: "segway navimow x430", volume: 480, difficulty: 0 },
   { slug: "segway-navimow-i105n", term: "segway navimow i105n", volume: 320, difficulty: 8 },
   { slug: "husqvarna-automower-430x", term: "husqvarna automower 430x", volume: 260, difficulty: 0 },
@@ -1936,6 +1960,7 @@ export const PAGE_PLAN: PagePlan[] = [
   ...CODING_BUILT,
   ...CODING_REVIEWS,
   ...GRILL_REVIEWS,
+  ...LAWN_BUILT,
   ...LAWN_REVIEWS,
   ...LAWN_GUIDES,
   COMPANION_GUIDE,

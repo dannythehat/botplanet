@@ -79,6 +79,29 @@ export const GLANCE_FIELDS: Record<string, GlanceField[]> = {
     { label: "Suction", match: ["Suction"] },
   ],
 
+  /* Robotic lawn mowers, added with the category's first seven reviews on 10
+     August 2026. RATED AREA LEADS because it is the only hard rule-out in the
+     category — the lawn config excludes a machine rated for less ground than
+     the reader has, rather than ranking it lower — and because one of these
+     seven had its figure recorded 26% too high until this morning.
+
+     SLOPE IS SECOND AND IT IS THE FIGURE THE CAPABILITY FLAG HIDES. Three of
+     the seven carry `grass_slopes` and behind that single yes sit 45%, 80% and
+     80%; the four without it sit at 30%, 30% and 18 degrees. A reader with a
+     bank needs the number, not the flag.
+
+     NAVIGATION IS THIRD because every mower here is wire-free and they get
+     there three different ways — satellite RTK, camera vision, or both — and
+     which one a buyer needs is decided entirely by whether they have trees. */
+  "robotic-lawn-mowers": [
+    { label: "Rated for", match: ["Rated area"] },
+    { label: "Max slope", match: ["Max slope"] },
+    { label: "Navigation", match: ["Navigation"] },
+    { label: "Cutting height", match: ["Cutting height"] },
+    { label: "Cutting width", match: ["Cutting width"] },
+    { label: "Warranty", match: ["Warranty"] },
+  ],
+
   /* Self-cleaning litter boxes, added with the category's first four reviews on
      10 August 2026. CAT WEIGHT LEADS because it is the category's only genuine
      safety question — a kitten under the sensor's threshold may not register at
