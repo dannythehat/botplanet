@@ -1,0 +1,100 @@
+---
+/* ============================================================
+   BotPlanet — readers also compared.
+
+   NOT THE ALTERNATIVES BLOCK. Alternatives fires on this review's
+   own rule-outs and answers "this machine is wrong for you, so
+   what is right" — it can, correctly, return nothing. This is for
+   the reader who has not been ruled out and is simply still
+   deciding, which is most of them.
+
+   EVERY LINK IS CHOSEN FROM THIS PRODUCT'S FACTS. A block that
+   linked the hub and the compare page on all forty reviews would
+   be navigation furniture; readers learn to skip it in two pages
+   and it passes no signal worth having. The sibling here shares a
+   recorded characteristic with the machine being read about, and
+   the block says which one.
+
+   IT NEVER POINTS AT A PRODUCT WE REFUSE TO SELL as "the closest
+   thing we hold" — see lib/also-compared.ts.
+   ============================================================ */
+import type { AlsoLink } from "../lib/also-compared";
+
+interface Props {
+  links: AlsoLink[];
+  productName: string;
+}
+
+const { links, productName } = Astro.props;
+---
+
+{links.length > 0 && (
+  <section class="bp-also" aria-labelledby="also-heading">
+    <h2 id="also-heading" class="bp-also__h">Readers deciding on the {productName} also compared</h2>
+    <ul class="bp-also__list">
+      {links.map((l) => (
+        <li>
+          <a href={l.href}>
+            <span class="bp-also__title">{l.title}</span>
+            <span class="bp-also__why">{l.because}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+)}
+
+<style>
+  .bp-also {
+    margin: var(--space-7, 2.5rem) 0;
+    padding: clamp(1.1rem, 3vw, 1.5rem);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg, 14px);
+    background: var(--panel);
+  }
+
+  .bp-also__h {
+    margin: 0 0 1rem;
+    font-size: clamp(1rem, 2.3vw, 1.15rem);
+    letter-spacing: -0.01em;
+  }
+
+  .bp-also__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0.7rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .bp-also__list a {
+    display: block;
+    height: 100%;
+    padding: 0.75rem 0.85rem;
+    border: 1px solid var(--border-2);
+    border-radius: 10px;
+    background: var(--panel-2, var(--panel));
+    text-decoration: none;
+  }
+
+  .bp-also__list a:hover,
+  .bp-also__list a:focus-visible {
+    border-color: var(--accent, #7c93ff);
+  }
+
+  .bp-also__title {
+    display: block;
+    font-weight: 650;
+    font-size: 0.92rem;
+    line-height: 1.35;
+  }
+
+  .bp-also__why {
+    display: block;
+    margin-top: 0.35rem;
+    font-size: 0.8rem;
+    line-height: 1.45;
+    color: var(--text-secondary);
+  }
+</style>

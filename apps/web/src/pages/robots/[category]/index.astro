@@ -28,6 +28,7 @@ import FaqList from "../../../components/FaqList.astro";
 import { decisionSectionFor, coverageSectionFor, splitSectionFor, matrixSectionFor, checkSectionFor, priceSectionFor, verdictSectionFor, faqSectionFor, botMatchCtaFor } from "../../../content/category-sections";
 import { MEDIA_ASSETS } from "../../../content/media/assets";
 import HubDiagram from "../../../components/diagrams/HubDiagram.astro";
+import HubTable from "../../../components/HubTable.astro";
 
 const { category } = Astro.params;
 const db = getDb(Astro.locals);
@@ -275,6 +276,13 @@ const pageSchema = hero
   {matrix && (
     <MatrixTable id={matrix.id} eyebrow={matrix.eyebrow} title={matrix.title} intro={matrix.intro} columns={matrix.columns} rows={matrix.rows} note={matrix.note} />
   )}
+
+  {/* BEFORE the generic comparison grid, deliberately. The grid compares the
+      whole catalogue on four fixed columns; this answers the one question the
+      category actually turns on — which of six near-identically named WINBOTs,
+      or which robot pet does what — and a reader who gets that answer first
+      reads the grid better. Categories with no entry render nothing. */}
+  <HubTable category={cat.slug} />
 
   {compareRows.length > 1 && (
     <ComparisonTable

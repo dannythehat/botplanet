@@ -21,6 +21,8 @@
 import Base from "../../layouts/Base.astro";
 import EditorialArticle from "../../components/EditorialArticle.astro";
 import WindowAdhesion from "../../components/diagrams/WindowAdhesion.astro";
+import DecisionTable from "../../components/DecisionTable.astro";
+import { windowGlassTable } from "../../content/decision-tables";
 import { editorialFor } from "../../content/editorial";
 import { buildEditorialPage } from "../../lib/editorial-page";
 import { breadcrumbsFor } from "../../lib/routing";
@@ -70,4 +72,10 @@ const pageSchema = [
         their real order before the prose explains any of them. */}
     <WindowAdhesion slot="diagram-1" />
   </EditorialArticle>
+
+  {/* The page's blunt answer is "yes in the middle, no at the edges". A reader
+      who accepts that immediately needs the next thing: whether any of them
+      will work on THEIR glass, which is the constraint that rules machines out
+      before any other. The last row names the three whose makers do not say. */}
+  <DecisionTable table={windowGlassTable()} eyebrow="If the answer is yes" />
 </Base>

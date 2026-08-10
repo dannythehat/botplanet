@@ -33,6 +33,9 @@ import ArticleContents from "./ArticleContents.astro";
 import Alternatives from "./Alternatives.astro";
 import VideoSection from "./VideoSection.astro";
 import SpecTable from "./SpecTable.astro";
+import SpecGlance from "./SpecGlance.astro";
+import AlsoCompared from "./AlsoCompared.astro";
+import { alsoCompared } from "../lib/also-compared";
 import BotMatchCta from "./BotMatchCta.astro";
 import ArticleFooter from "./ArticleFooter.astro";
 import { botMatchCtaFor } from "../content/category-sections";
@@ -118,7 +121,21 @@ const alternatives =
     section nobody scrolls to may as well not exist. */}
 {review.video && <VideoSection video={review.video} productName={productName} />}
 
+{/* ABOVE THE PROSE, BELOW THE ANSWER. A reader who arrived from a search
+    result comparing three machines wants the four or five figures that rule
+    this one in or out, and wants them before two thousand words start. Set
+    after the verdict and snapshot so the box never arrives before the answer
+    it supports; set before the contents so it is not something to scroll back
+    for. Introduces no fact — see SpecGlance.astro. */}
+<SpecGlance
+  categorySlug={review.categorySlug}
+  groups={review.specGroups}
+  skuNote={review.skuNote}
+  lastReviewed={review.lastReviewed}
+/>
+
 <ArticleContents html={linked} extra={[
+  { id: "glance-heading", text: "The specification at a glance" },
   { id: "buy", text: "Where to buy" },
   { id: "specifications", text: "Full specification" },
 ]} />
@@ -135,6 +152,12 @@ const alternatives =
 )}
 
 <Alternatives matches={alternatives} categorySlug={review.categorySlug} productName={productName} />
+
+{/* AFTER Alternatives, and the order matters. Alternatives answers the reader
+    this machine is WRONG for and must not be crowded; this catches the reader
+    who was not ruled out and is simply still deciding. Reversing them would
+    offer a lateral browse to somebody who has just been told no. */}
+<AlsoCompared links={alsoCompared(review)} productName={productName} />
 
 {/* The buy box sits after the reasoning and before the specification detail:
     a reader who has decided does not have to scroll past a spec table to act,

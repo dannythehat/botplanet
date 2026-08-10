@@ -14,6 +14,8 @@
 import Base from "../../layouts/Base.astro";
 import EditorialArticle from "../../components/EditorialArticle.astro";
 import CoverageZones from "../../components/diagrams/CoverageZones.astro";
+import DecisionTable from "../../components/DecisionTable.astro";
+import { poolCordedCordlessTable } from "../../content/decision-tables";
 import { editorialFor } from "../../content/editorial";
 import { buildEditorialPage } from "../../lib/editorial-page";
 import { breadcrumbsFor } from "../../lib/routing";
@@ -63,4 +65,10 @@ const pageSchema = [
         reader has the zones in mind while reading what each class can reach. */}
     <CoverageZones slot="diagram-1" />
   </EditorialArticle>
+
+  {/* AFTER THE ARGUMENT, NOT INSIDE IT. The prose answers "is one worth it";
+      this answers "then which kind", which is the next question and a
+      different one. Placed below so a reader who has not yet decided is not
+      handed a shortlist before the case is made. */}
+  <DecisionTable table={poolCordedCordlessTable()} eyebrow="If you have decided" />
 </Base>
