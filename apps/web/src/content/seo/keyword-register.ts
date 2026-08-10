@@ -44,6 +44,22 @@ export interface PageKeywords {
   secondary: KeywordTarget[];
   /** Terms deliberately NOT targeted here, and where they went instead. */
   cededTo?: { term: string; path: string; why: string }[];
+  /**
+   * Set when the page needs a row but is not competing for anything, with the
+   * reason. The row still records the real term and its real volume.
+   *
+   * WHY THIS IS A FIELD AND NOT A COMMENT. /privacy/ is built around the words
+   * "privacy policy" and the bare word "privacy" is 110,000 a month; /terms/ is
+   * 74,000. Both figures are true and both are worthless: nobody typing them
+   * wants a robot shop, and a page that tried to win them would be a privacy
+   * policy written for a search engine. A comment saying so is documentation
+   * and this file's whole point is that it asserts rather than documents — so
+   * the audit reads this flag and stops applying SERP economics to a page that
+   * is not in a SERP fight. Without it, the next person to open a rank report
+   * sees 110,000 next to a page we rank nowhere for and starts optimising a
+   * legal document.
+   */
+  notRanking?: string;
   /** Research run these figures came from. */
   researchedOn: string;
 }
@@ -2273,6 +2289,8 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
     secondary: [
       { term: "privacy policy", volume: 27100, difficulty: 100, mustAppear: false },
     ],
+    notRanking:
+      "A privacy policy exists so a reader can check what we collect, and to satisfy the law. The 110,000 belongs to the bare English word and to nobody in particular; we do not compete for it and should not.",
     researchedOn: RUN_AUGUST_10,
   },
   {
@@ -2281,6 +2299,8 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
     secondary: [
       { term: "terms of use", volume: 2900, difficulty: 44, mustAppear: false },
     ],
+    notRanking:
+      "Terms of use exist to be readable when somebody needs them. The 74,000 is the generic word and is not a robot-shopping query; nothing here is aimed at winning it.",
     researchedOn: RUN_AUGUST_10,
   },
 ];

@@ -21,7 +21,8 @@
  *     4. no two pages claim the same primary term (cannibalisation);
  *     5. no two pages share a title or a meta description;
  *     6. exactly one H1;
- *     7. title and meta description lengths that survive a SERP.
+ *     7. title and meta description lengths that survive a SERP — skipped on
+ *        a page the register marks `notRanking`, which is not in a SERP fight.
  *
  *   JUMP LINKS
  *     8. every #fragment resolves to an id that exists on the target page,
@@ -94,17 +95,35 @@ function loadRegister() {
 /* Fetching and parsing                                                */
 /* ------------------------------------------------------------------ */
 
+/**
+ * A 503 FROM OUR OWN CRAWLER IS NOT A BROKEN PAGE, and the first version of
+ * this reported it as one. Fetching ninety-four URLs eight at a time trips the
+ * edge's rate limiting, and the run came back with twenty-two "sitemap URL
+ * returned 503" failures on pages that were serving fine to a browser — plus a
+ * false orphan and a false thin-inbound, because a page that failed to load
+ * contributed none of its outbound links to the graph. A checker whose own
+ * load generates its findings is worse than no checker: it teaches you to
+ * ignore the red.
+ *
+ * So 429 and 503 are retried with backoff rather than recorded, and only a
+ * status that survives every attempt is reported.
+ */
+const RETRYABLE = new Set([408, 425, 429, 500, 502, 503, 504]);
+
 async function get(url) {
-  for (let attempt = 0; attempt < 4; attempt++) {
+  let last = { status: 0, body: "", finalUrl: url };
+  for (let attempt = 0; attempt < 5; attempt++) {
     try {
       const res = await fetch(url, { redirect: "follow" });
       const body = await res.text();
-      return { status: res.status, body, finalUrl: res.url };
+      last = { status: res.status, body, finalUrl: res.url };
+      if (!RETRYABLE.has(res.status)) return last;
     } catch (err) {
-      if (attempt === 3) return { status: 0, body: "", finalUrl: url, err: String(err) };
-      await new Promise((r) => setTimeout(r, 400 * 2 ** attempt));
+      last = { status: 0, body: "", finalUrl: url, err: String(err) };
     }
+    if (attempt < 4) await new Promise((r) => setTimeout(r, 600 * 2 ** attempt));
   }
+  return last;
 }
 
 const tag = (html, re) => (re.exec(html) ?? [])[1]?.trim();
@@ -298,11 +317,12 @@ if (paths.length === 0) {
 
 say(`sitemap: ${paths.length} URLs`);
 
-/* Fetched in small batches: politeness, and a 94-way fan-out at once gets
-   throttled and produces failures that look like site faults. */
+/* Four at a time, not eight. Politeness, and a 94-way fan-out at once gets
+   throttled and produces failures that look like site faults — see the note on
+   get() above, which is that mistake written down. */
 const pages = new Map();
-for (let i = 0; i < paths.length; i += 8) {
-  const chunk = paths.slice(i, i + 8);
+for (let i = 0; i < paths.length; i += 4) {
+  const chunk = paths.slice(i, i + 4);
   const got = await Promise.all(chunk.map((p) => get(`${BASE}${p}`)));
   chunk.forEach((p, j) => {
     if (got[j].status !== 200) {
@@ -336,6 +356,12 @@ for (const [path, page] of pages) {
       "indexable page with no keyword register row",
       "add a row to apps/web/src/content/seo/keyword-register.ts naming the term this page is built around",
     );
+  } else if (reg.notRanking) {
+    /* A page the register marks as not competing. Structural checks still run
+       below — one H1, unique title, working jump links — because those are
+       about the page being well-formed. The SERP economics do not, because
+       there is no SERP to be economical about. */
+    add("NOTE", "not_a_ranking_target", path, reg.notRanking, "no action — the register says so on purpose");
   } else {
     const primary = reg.primary.term;
     const h1 = page.h1s[0] ?? "";
@@ -418,6 +444,8 @@ for (const [path, page] of pages) {
         roughly 60 characters; descriptions around 155-160. */
   if (!page.title) {
     add("FAIL", "no_title", path, "page has no title tag", "add one");
+  } else if (reg?.notRanking) {
+    /* no length opinion on a page that is not competing */
   } else if (page.title.length > 65) {
     add("WARN", "title_too_long", path, `title is ${page.title.length} chars and will truncate: "${page.title}"`, "cut to 60 or fewer, front-loading the term");
   } else if (page.title.length < 20) {
@@ -426,6 +454,8 @@ for (const [path, page] of pages) {
 
   if (!page.description) {
     add("FAIL", "no_description", path, "page has no meta description", "add one — Google will otherwise invent a snippet from the copy");
+  } else if (reg?.notRanking) {
+    /* as above */
   } else if (page.description.length > 165) {
     add("WARN", "description_too_long", path, `meta description is ${page.description.length} chars and will truncate`, "cut to 155 or fewer");
   } else if (page.description.length < 70) {
