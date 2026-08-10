@@ -1,5 +1,160 @@
 [
   {
+    "source": "media/botmatch/finder-universal.webp",
+    "sourceWidth": 1122,
+    "sourceHeight": 1402,
+    "derivatives": [
+      {
+        "id": "media-botmatch-finder-universal-webp-360",
+        "src": "media/botmatch/finder-universal-360w.webp",
+        "width": 360,
+        "height": 450,
+        "bytes": 29912,
+        "checksum": "sha256:0b1f987be90377e28eb4e5e54a056dbfce417a47f01dfd517994d3381ca35eed"
+      },
+      {
+        "id": "media-botmatch-finder-universal-webp-640",
+        "src": "media/botmatch/finder-universal-640w.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 81600,
+        "checksum": "sha256:c4275a5d10ba831cb29a2c8a384d6779b938b7d268d906c0ca2f33a92a91f118"
+      },
+      {
+        "id": "media-botmatch-finder-universal-webp-960",
+        "src": "media/botmatch/finder-universal-960w.webp",
+        "width": 960,
+        "height": 1200,
+        "bytes": 170094,
+        "checksum": "sha256:2e5dd3f1695bfebaea20100e876f2a4f5a66acf88a4d21f25292a1137fd30f1a"
+      }
+    ]
+  },
+  {
+    "source": "media/botmatch/finder-pool.webp",
+    "sourceWidth": 1122,
+    "sourceHeight": 1402,
+    "derivatives": [
+      {
+        "id": "media-botmatch-finder-pool-webp-360",
+        "src": "media/botmatch/finder-pool-360w.webp",
+        "width": 360,
+        "height": 450,
+        "bytes": 31954,
+        "checksum": "sha256:4d67fc484686b6c859ab483d1a5dff0a4a3deb665478a81c8a80d9951ed40a7d"
+      },
+      {
+        "id": "media-botmatch-finder-pool-webp-640",
+        "src": "media/botmatch/finder-pool-640w.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 89632,
+        "checksum": "sha256:d674a5f6e0d60dec6a72774da28c0707ea11ca1726e39e447038bba49141a56f"
+      },
+      {
+        "id": "media-botmatch-finder-pool-webp-960",
+        "src": "media/botmatch/finder-pool-960w.webp",
+        "width": 960,
+        "height": 1200,
+        "bytes": 184838,
+        "checksum": "sha256:c2460a970109a8bb3c2a5dcec49c2788e5617746d4f08a6bff12a0bf032808f1"
+      }
+    ]
+  },
+  {
+    "source": "media/botmatch/finder-grill.webp",
+    "sourceWidth": 1122,
+    "sourceHeight": 1402,
+    "derivatives": [
+      {
+        "id": "media-botmatch-finder-grill-webp-360",
+        "src": "media/botmatch/finder-grill-360w.webp",
+        "width": 360,
+        "height": 450,
+        "bytes": 30578,
+        "checksum": "sha256:d1d089e7401f69a43f6b0add48914d6b18a2b3ada0876fe00a5e4e6022b7162a"
+      },
+      {
+        "id": "media-botmatch-finder-grill-webp-640",
+        "src": "media/botmatch/finder-grill-640w.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 81360,
+        "checksum": "sha256:23df975f19f66b64e857b964bb5a2d96e6e0b2c4a407f468b16344670cde438c"
+      },
+      {
+        "id": "media-botmatch-finder-grill-webp-960",
+        "src": "media/botmatch/finder-grill-960w.webp",
+        "width": 960,
+        "height": 1200,
+        "bytes": 165020,
+        "checksum": "sha256:fa4897962205414ee432e05da259a47cafd90f2f903e60779188d91c811e75d1"
+      }
+    ]
+  },
+  {
+    "source": "media/botmatch/finder-litter.webp",
+    "sourceWidth": 1024,
+    "sourceHeight": 1536,
+    "derivatives": [
+      {
+        "id": "media-botmatch-finder-litter-webp-360",
+        "src": "media/botmatch/finder-litter-360w.webp",
+        "width": 360,
+        "height": 540,
+        "bytes": 26378,
+        "checksum": "sha256:a562286da7e0182027858ff411296880b07c27686e2206f1e76f694e18f88fe5"
+      },
+      {
+        "id": "media-botmatch-finder-litter-webp-640",
+        "src": "media/botmatch/finder-litter-640w.webp",
+        "width": 640,
+        "height": 960,
+        "bytes": 68992,
+        "checksum": "sha256:b4e6d0c0a8b1181871fac84d4b44a216d7c9ad7154f560d837b2e033883a7281"
+      },
+      {
+        "id": "media-botmatch-finder-litter-webp-960",
+        "src": "media/botmatch/finder-litter-960w.webp",
+        "width": 960,
+        "height": 1440,
+        "bytes": 134784,
+        "checksum": "sha256:8f7568ab768d12ef956ee7dadd71c548d847f918db371c33a69c86886d16fe21"
+      }
+    ]
+  },
+  {
+    "source": "media/botmatch/finder-window.webp",
+    "sourceWidth": 1122,
+    "sourceHeight": 1402,
+    "derivatives": [
+      {
+        "id": "media-botmatch-finder-window-webp-360",
+        "src": "media/botmatch/finder-window-360w.webp",
+        "width": 360,
+        "height": 450,
+        "bytes": 26868,
+        "checksum": "sha256:4b0aec00d801b3f38a3fa96884f7ce62c17bac98622ef0780f6ff99b095f7fe0"
+      },
+      {
+        "id": "media-botmatch-finder-window-webp-640",
+        "src": "media/botmatch/finder-window-640w.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 77404,
+        "checksum": "sha256:fd6a58be928bb55abb98f2f59b9014ed0fceec3822c64fe705a34490e5cca235"
+      },
+      {
+        "id": "media-botmatch-finder-window-webp-960",
+        "src": "media/botmatch/finder-window-960w.webp",
+        "width": 960,
+        "height": 1200,
+        "bytes": 159508,
+        "checksum": "sha256:025423d32efa9d47680abcd79741274efc5605b1e9902efffd96b3898ab0303b"
+      }
+    ]
+  },
+  {
     "source": "/media/litter/litter-robot-4/card.webp",
     "sourceWidth": 1254,
     "sourceHeight": 1254,

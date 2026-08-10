@@ -84,6 +84,11 @@ async function derive(src) {
    ("pool", "window", "lawn-category"), not for the category slug.
    @extension-check manual */
 const SOURCES = [
+  "media/botmatch/finder-universal.webp",
+  "media/botmatch/finder-pool.webp",
+  "media/botmatch/finder-grill.webp",
+  "media/botmatch/finder-litter.webp",
+  "media/botmatch/finder-window.webp",
   /* TIER-1 LISTING CARDS, 10 August 2026. Sixteen products were live with an
      empty grid slot; these are the files that fill them. Added here as well as
      to the media registry, because this list is hand-maintained and a card

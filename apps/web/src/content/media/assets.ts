@@ -2794,6 +2794,109 @@ export const PLACEHOLDER_ASSETS: MediaAssetRecord[] = manifest.map((m): MediaAss
 export const AUGUST_UPLOAD_ASSETS: MediaAssetRecord[] = [
 
 /* ============================================================
+   BOT FINDER CARDS — supplied 10 August 2026.
+
+   A COMPOSED ADVERTISEMENT, NOT A PRODUCT PICTURE. Each carries
+   its own headline, logo and frame in the pixels and leaves one
+   rectangle at the bottom EMPTY for a real HTML button — see
+   components/BotFinderCard.astro and content/finder-cards.ts.
+
+   `promotional_panel`, and deliberately not anything in the
+   listing-card fallback chain. These must never resolve as a
+   product's photograph: the universal card shows eight machines at
+   once and the window card shows four, so any product they
+   "depicted" would be the wrong one. ORIGINAL_SCHEMA and
+   depictsRealProduct: false keep them out of Product structured
+   data for the same reason.
+
+   THE ALT TEXT IS LOAD-BEARING HERE, more than anywhere else on
+   the site. Every word of the pitch is pixels; without alt text
+   these pages say nothing about them to a screen reader or a
+   crawler.
+   ============================================================ */
+
+  {
+    ...base("finder-card-universal", "illustration"),
+    productId: null,
+    purpose: "Homepage — universal Bot Finder card",
+    exactModel: null,
+    type: "promotional_panel",
+    checksum: "sha256:1f1d8496751531ca8e326dabbb82de7607a6a064f67a82d4cef14b04bd50c7c1",
+    width: 1122,
+    height: 1402,
+    src: "/media/botmatch/finder-universal.webp",
+    altText:
+      "A BotPlanet card headed \u201cFind your perfect bot \u2014 universal bot finder\u201d, showing a line-up of home robots together in one room: a window-cleaning robot on glass, a companion robot, a furry robot pet, a coding robot in a clear ball, a pet camera robot, a robot vacuum, a robot lawn mower on grass and a pool cleaner in water.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+  },
+  {
+    ...base("finder-card-litter", "illustration"),
+    productId: null,
+    purpose: "Litter hub — Bot Finder card",
+    exactModel: null,
+    type: "promotional_panel",
+    checksum: "sha256:733af8b394f30515d9c6b2b62f9d7ac94e0ad9de13e27d269b68dec6a1614d53",
+    width: 1024,
+    height: 1536,
+    src: "/media/botmatch/finder-litter.webp",
+    altText:
+      "A BotPlanet card headed \u201cCat litter bots \u2014 smart picks, happier cats\u201d, showing five self-cleaning litter boxes in a dark utility room with four cats around them, one sitting inside a globe-shaped unit, with labels reading self-scooping picks, open-entry options, odor-control designs and multi-cat homes, and a line reading \u201cFind your perfect cat litter robot in 60 seconds\u201d.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+  },
+  {
+    ...base("finder-card-grill", "illustration"),
+    productId: null,
+    purpose: "Grill hub — Bot Finder card",
+    exactModel: null,
+    type: "promotional_panel",
+    checksum: "sha256:05eba6b19391ab003cab6468bee64c65d41606d87cd57da7c35ce02d289906aa",
+    width: 1122,
+    height: 1402,
+    src: "/media/botmatch/finder-grill.webp",
+    altText:
+      "A BotPlanet card headed \u201cGrill cleaning bots \u2014 smart picks, cleaner grills\u201d, showing four grill-cleaning robots with brush rollers working across the grates of a large open stainless barbecue at dusk, a fire pit behind, with labels reading brush rollers, open-lid cleaning, patio-ready picks and easy-maintenance bots.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+  },
+  {
+    ...base("finder-card-pool", "illustration"),
+    productId: null,
+    purpose: "Pool hub — Bot Finder card",
+    exactModel: null,
+    type: "promotional_panel",
+    checksum: "sha256:49f03df93a6ae9d127291580260007f5bd481b2e901837780b5916b1f083a048",
+    width: 1122,
+    height: 1402,
+    src: "/media/botmatch/finder-pool.webp",
+    altText:
+      "A BotPlanet card headed \u201cPool cleaning bots \u2014 smart picks, cleaner pools\u201d, showing six pool-cleaning robots around a lit night-time pool: two on the deck, three in the water throwing spray, and one climbing a tiled wall, with labels reading cordless picks, wall climbers, skimmer bots and app-ready models.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+  },
+  {
+    ...base("finder-card-window", "illustration"),
+    productId: null,
+    purpose: "Window hub — Bot Finder card",
+    exactModel: null,
+    type: "promotional_panel",
+    checksum: "sha256:3d665f2b48a114298b658c7bd7404f33a8d6938c48e2349d3e464a84bdaf3d78",
+    width: 1122,
+    height: 1402,
+    src: "/media/botmatch/finder-window.webp",
+    altText:
+      "A BotPlanet card headed \u201cWindow cleaning bots \u2014 smart picks, clearer views\u201d, showing four window-cleaning robots working on a tall city window at dusk, one spraying, each on a safety cord, with labels reading spray models, vacuum hold and app-ready picks.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+  },
+
+/* ============================================================
    TIER-1 LISTING CARDS — supplied 10 August 2026.
 
    SIXTEEN PRODUCTS WERE LIVE WITH AN EMPTY SPACE WHERE THEIR

@@ -1,5 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
+import BotFinderCard from "../components/BotFinderCard.astro";
+import { finderCardFor } from "../content/finder-cards";
 import { LAUNCH_CATEGORY, categoryRoutes, liveCategories, productPath } from "../content/routes";
 import { srcsetFor } from "../lib/srcset";
 import CategoryFeature from "../components/CategoryFeature.astro";
@@ -31,7 +33,13 @@ const reviews = Object.values(REVIEWS)
   }))
   .sort((a, b) => a.title.localeCompare(b.title));
 
-/* BotMatch section artwork, supplied as a composed desktop/mobile pair. */
+/* The universal Bot Finder card. Replaces the old explainer illustration,
+   which drew six category tiles into the pixels — one of them "Security",
+   a category cancelled on 6 August, still being advertised four days later.
+   This one draws no category names at all. */
+const finderCard = finderCardFor("universal")!;
+
+/* Retained only so the old pair is not silently orphaned in the registry. */
 const matcherImage = {
   src: "/media/botmatch/explainer-desktop.webp",
   mobileSrc: "/media/botmatch/explainer-mobile.webp",
@@ -386,29 +394,17 @@ const homeSchema = [
         </p>
       </div>
 
-      {matcherImage && (
-        <figure class="botmatch__art">
-          <picture>
-            <source
-              media="(max-width: 720px)"
-              srcset={srcsetFor(matcherImage.mobileSrc)}
-              sizes="100vw"
-              width={matcherImage.mobileWidth}
-              height={matcherImage.mobileHeight}
-            />
-            <img
-              src={matcherImage.src}
-              srcset={srcsetFor(matcherImage.src)}
-              sizes="(min-width: 1000px) 46vw, 100vw"
-              width={matcherImage.width}
-              height={matcherImage.height}
-              alt={matcherImage.alt}
-              loading="lazy"
-              decoding="async"
-            />
-          </picture>
-        </figure>
-      )}
+      <div class="botmatch__art">
+        <BotFinderCard
+          src={finderCard.src}
+          alt={finderCard.alt}
+          label={finderCard.label}
+          href="/botmatch/"
+          width={finderCard.width}
+          height={finderCard.height}
+          cta={finderCard.cta}
+        />
+      </div>
 
       <div class="botmatch__detail">
         <ol class="botmatch__steps">

@@ -22,6 +22,8 @@ import JumpLinks from "../../../components/JumpLinks.astro";
 import TrustStrip from "../../../components/TrustStrip.astro";
 import ArticleFooter from "../../../components/ArticleFooter.astro";
 import BotMatchCta from "../../../components/BotMatchCta.astro";
+import BotFinderCard from "../../../components/BotFinderCard.astro";
+import { finderCardFor } from "../../../content/finder-cards";
 import PriceLadder from "../../../components/PriceLadder.astro";
 import VerdictPanel from "../../../components/VerdictPanel.astro";
 import FaqList from "../../../components/FaqList.astro";
@@ -86,6 +88,7 @@ const faq = faqSectionFor(category);
 
    The review page renders the same panel unconditionally, and that is correct:
    a review existing means a product exists. */
+const finderCard = finderCardFor(cat.slug);
 const bmCta = products.length > 0 ? botMatchCtaFor(category) : undefined;
 
 /* Built from the catalogue rather than written out, so a product that changes
@@ -300,7 +303,24 @@ const pageSchema = hero
     <CheckList id={check.id} eyebrow={check.eyebrow} title={check.title} intro={check.intro} boxLabel={check.boxLabel} items={check.items} />
   )}
 
-  {bmCta && (
+  {/* A composed Bot Finder card where one exists for this category, and the
+      written panel everywhere else. NOT BOTH: the card carries the same pitch
+      in its own pixels, so showing the two together would say everything
+      twice. Eight categories still have no artwork and keep the panel, which
+      is why both paths stay. */}
+  {finderCard ? (
+    <div class="bp-hub-finder">
+      <BotFinderCard
+        src={finderCard.src}
+        alt={finderCard.alt}
+        label={finderCard.label}
+        href={`/botmatch/${cat.slug}/`}
+        width={finderCard.width}
+        height={finderCard.height}
+        cta={finderCard.cta}
+      />
+    </div>
+  ) : bmCta ? (
     <BotMatchCta
       categorySlug={cat.slug}
       headline={bmCta.headline}
@@ -310,7 +330,7 @@ const pageSchema = hero
       note={bmCta.note}
       image={bmCta.image}
     />
-  )}
+  ) : null}
 
   {price && (
     <PriceLadder id={price.id} eyebrow={price.eyebrow} title={price.title} intro={price.intro} rungs={price.rungs} note={price.note} />
