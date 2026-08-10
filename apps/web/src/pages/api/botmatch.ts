@@ -141,6 +141,8 @@ export const POST: APIRoute = async ({ request, locals }) => {
   const top = topGroup(result.ranked);
   const tied = top.length > 1;
   const winner = tied ? null : (top[0] ?? null);
+  /** How many machines survived the hard exclusions at all. */
+  const eligibleCount = result.ranked.filter((r) => !r.excluded).length;
 
   // Offer ranking for the chosen product (commission tie-break only).
   let chosenOfferId: string | null = null;
@@ -188,10 +190,10 @@ export const POST: APIRoute = async ({ request, locals }) => {
     chosenOfferId,
     explanationJson: tied
       ? {
-          text:
-            `On the questions you answered, ${top.length} of these score identically on everything we have recorded. ` +
-            `That is the honest answer rather than a winner picked out of a tie: we do not yet hold the attributes ` +
-            `that would separate them.`,
+          text: tieExplanation(top.length, eligibleCount),
+          /* Stored rather than re-derived on the page, because the page reads a
+             saved recommendation and does not have the eligible count. */
+          kind: top.length >= eligibleCount ? "whole_range" : "indistinguishable",
           equivalent: top.map((t) => t.productId),
         }
       : { text: explainWinner(result) },
@@ -227,6 +229,40 @@ export const POST: APIRoute = async ({ request, locals }) => {
 
   return json({ token, productName: winnerName, equivalent });
 };
+
+/**
+ * A TIE HAS TWO CAUSES AND ONLY ONE OF THEM IS OUR FAULT.
+ *
+ * Until 10 August 2026 every tie was explained the same way — "we do not yet
+ * hold the attributes that would separate them" — and for the most common tie
+ * on this site that is not true, it is modest to the point of being wrong.
+ *
+ * A sweep of all 480 window answer sets found the worst tie, eleven machines
+ * out of eleven, comes from a reader who answered "not sure" on power, "show me
+ * the range" on budget and "ground floor" on height. They ruled nothing out.
+ * The whole shelf tying is the CORRECT answer to "show me everything", and
+ * blaming our data for it tells the reader we know less than we do while
+ * hiding what they could do about it — which is answer a question differently.
+ *
+ * The two are told apart by whether the tied group is the entire eligible pool.
+ * Everything tied means nothing was ruled out. A subset tied means we narrowed
+ * the field and then ran out of recorded difference, which is the case the
+ * original sentence was written for and where it is exactly right.
+ */
+export function tieExplanation(tiedCount: number, eligibleCount: number): string {
+  if (tiedCount >= eligibleCount) {
+    return (
+      `You told us you are open on the things that would narrow this down, so here is the whole range — ` +
+      `all ${tiedCount} of them fit what you asked for. Go back and give a budget, a power arrangement or ` +
+      `a firmer answer on where they have to work, and we can cut this down.`
+    );
+  }
+  return (
+    `We narrowed it to ${tiedCount} and stopped. On the questions you answered these score identically on ` +
+    `everything we have recorded, so naming one would mean picking it out of a tie. We do not yet hold the ` +
+    `attributes that would separate them.`
+  );
+}
 
 function json(data: unknown, status = 200): Response {
   return new Response(JSON.stringify(data), {

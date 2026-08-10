@@ -68,8 +68,28 @@ const maskEmail = (e: string) => {
   return `${shown}${"•".repeat(Math.max(1, user.length - shown.length))}@${domain}`;
 };
 
-const explanationJson = rec.explanationJson as { text?: string; equivalent?: string[] } | null;
+const explanationJson = rec.explanationJson as {
+  text?: string;
+  kind?: "whole_range" | "indistinguishable";
+  equivalent?: string[];
+} | null;
 const explanation = explanationJson?.text ?? "";
+/**
+ * WHOSE FAULT THE TIE IS.
+ *
+ * `whole_range` means every eligible machine tied, which happens when the
+ * reader answers "not sure" on power and "show me the range" on budget — they
+ * ruled nothing out and the honest reply is "here is everything". Telling that
+ * reader we cannot separate the machines is modest to the point of being wrong,
+ * and it hides the one thing they could do about it.
+ *
+ * `indistinguishable` means we narrowed the field and then ran out of recorded
+ * difference, which is the case the original copy was written for.
+ *
+ * Recommendations saved before 10 August 2026 carry no `kind`. They fall back
+ * to the honest-about-our-data wording, which is what they were written under.
+ */
+const tieIsWholeRange = explanationJson?.kind === "whole_range";
 
 /**
  * THE TIED GROUP, WHEN THERE IS ONE.
@@ -105,8 +125,12 @@ const hrefFor = (p: { categoryId: string; slug: string }) => `/robots/${catSlugO
   {equivalent.length > 1 ? (
     <>
       <div class="hero">
-        <span class="pill class">Equivalent on current data</span>
-        <h1 style="margin-top:10px;">{equivalent.length} machines, and we cannot separate them</h1>
+        <span class="pill class">{tieIsWholeRange ? "The whole range" : "Equivalent on current data"}</span>
+        <h1 style="margin-top:10px;">
+          {tieIsWholeRange
+            ? `All ${equivalent.length} of them fit what you asked for`
+            : `${equivalent.length} machines, and we cannot separate them`}
+        </h1>
         <p style="font-size:17px;">{explanation}</p>
         {/* A tie is still an answer, and the reader still has to choose. A bare
             list of names asks them to do that blind. */}
@@ -127,8 +151,9 @@ const hrefFor = (p: { categoryId: string; slug: string }) => `/robots/${catSlugO
           ))}
         </div>
         <p class="muted" style="margin-top:16px;">
-          Naming one of these as the winner would mean picking it out of a tie, and we would rather tell you the
-          truth about what we know. When the attributes that separate them are recorded, this answer gets sharper.
+          {tieIsWholeRange
+            ? "Nothing here has been ruled out, because nothing you told us rules anything out. Answer again with a budget or a firmer constraint and this gets a great deal shorter."
+            : "Naming one of these as the winner would mean picking it out of a tie, and we would rather tell you the truth about what we know. When the attributes that separate them are recorded, this answer gets sharper."}
         </p>
       </div>
     </>

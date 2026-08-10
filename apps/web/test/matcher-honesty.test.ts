@@ -21,6 +21,7 @@ import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
 import { isIndistinguishable, scoreProducts, topGroup } from "@botplanet/scoring";
+import { tieExplanation } from "../src/pages/api/botmatch";
 import type { PoolAnswers, SuitabilityCandidate } from "@botplanet/scoring";
 
 const API = readFileSync(
@@ -138,5 +139,38 @@ describe("a category whose products share attributes ties rather than ranks", ()
     const { ranked } = scoreProducts(answers, LITTER, CONFIG);
     expect(topGroup(ranked).length).toBeGreaterThan(1);
     expect(ranked[0]!.productId).toBe("prod-casa-leo-loo-too");
+  });
+});
+
+/**
+ * A TIE HAS TWO CAUSES AND ONLY ONE OF THEM IS OUR FAULT.
+ *
+ * Every tie was explained the same way until 10 August 2026 — "we do not yet
+ * hold the attributes that would separate them" — and for the most common tie
+ * on this site that is not modesty, it is wrong. A sweep of all 480 window
+ * answer sets found the worst tie, eleven of eleven, comes from a reader who
+ * answered "not sure" on power and "show me the range" on budget. They ruled
+ * nothing out, and the whole shelf tying is the correct reply to that.
+ */
+describe("a tie says whose fault it is", () => {
+  it("tells a reader who ruled nothing out that they ruled nothing out", () => {
+    const text = tieExplanation(11, 11);
+    expect(text).toMatch(/whole range|open on/i);
+    expect(text).not.toMatch(/do not yet hold/i);
+    // And it says what to do about it, which is the point.
+    expect(text).toMatch(/budget|narrow|cut this down/i);
+  });
+
+  it("still blames our data when we narrowed the field and ran out", () => {
+    const text = tieExplanation(3, 11);
+    expect(text).toMatch(/do not yet hold/i);
+    expect(text).not.toMatch(/whole range/i);
+  });
+
+  /* The boundary is "everything eligible tied", not "everything published" —
+     a category where half the shelf is ruled out by a hard exclusion and the
+     survivors all tie is still a whole-range answer for that reader. */
+  it("treats a tie among every SURVIVING machine as the whole range", () => {
+    expect(tieExplanation(4, 4)).toMatch(/whole range|open on/i);
   });
 });
