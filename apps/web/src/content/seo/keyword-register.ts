@@ -2158,6 +2158,39 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
     researchedOn: RUN_AUGUST_10,
   },
   {
+    path: "/compare/robot-vacuums/",
+    /* Added 10 August 2026 with the category's first eleven products. The page
+       has been indexable and register-less since the compare tree shipped,
+       which the SEO audit reports as a page nobody has decided the purpose of
+       — correctly, because until there was a catalogue there was nothing in
+       the table to decide about.
+
+       THE HEAD TERM IS THE HUB'S and this page must not reach for it. A reader
+       typing "robot vacuum" wants the category explained; a reader arriving
+       here wants eleven machines on the same columns. Different queries,
+       different pages, and the 135,000/mo one belongs to the page written for
+       it. */
+    primary: { term: "compare robot vacuums", volume: 0, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "robot vacuum comparison", volume: 0, difficulty: 0, mustAppear: false },
+      { term: "mop lifting", volume: 0, difficulty: 0, mustAppear: false },
+      { term: "self-emptying", volume: 0, difficulty: 0, mustAppear: false },
+    ],
+    cededTo: [
+      {
+        term: "robot vacuum",
+        path: "/robots/robot-vacuums/",
+        why: "The 135,000/mo head term is the hub's, and it is the most defended SERP on the site — Wirecutter, PCMag, RTINGS, The Verge, Consumer Reports and vacuumwars all rank on it. One page reaches for that, and it is the one written to explain the category rather than tabulate it.",
+      },
+      {
+        term: "best robot vacuum",
+        path: "/robots/robot-vacuums/",
+        why: "60,500/mo, carried by the hub on 6 shared top-ten domains with the head term. A table of every model is not a ranking and must not compete with the page that makes one.",
+      },
+    ],
+    researchedOn: RUN_VACUUM,
+  },
+  {
     path: "/compare/eilik-vs-emo/",
     primary: { term: "eilik vs emo", volume: 20, difficulty: 0, mustAppear: true },
     secondary: [
@@ -2552,8 +2585,14 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
     ],
     cededTo: [
       { term: "robot vacuum", path: "/robots/robot-vacuums/", why: "The category head term belongs to the hub, as on every review in this category." },
-      { term: "irobot roomba", path: "", why: "27,100/mo and refused as a target rather than ceded to a page, on the same ruling as roborock: iRobot ranks its own site on its own brand query and a comparison site does not take that off its owner." },
     ],
+    /* "irobot roomba" (27,100/mo) IS REFUSED SITE-WIDE and that refusal is
+       recorded on the hub row, not here. It cannot be recorded here: the
+       machine's name is the iRobot Roomba Max 705, so the brand is in the H1
+       of any honest review of it, and a cession this page structurally cannot
+       honour is a rule that only ever produces a false alarm. The refusal that
+       matters — not building a page aimed at the bare brand query — holds
+       either way. */
     researchedOn: RUN_VACUUM,
   },
 ];

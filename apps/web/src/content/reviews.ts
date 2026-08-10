@@ -4588,7 +4588,7 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "eufy Omni S1 Pro review",
     seoTitle: "eufy S1 Pro Review — Read the Price Twice",
     metaDescription:
-      "The biggest search term in robot vacuums, and the lowest-rated machine we hold. " +
+      "The biggest search term in the category, and the lowest-rated machine we hold. " +
       "No price in the search row, 3.2 stars, and eufy's own range has moved on.",
     verdict:
       "A self-washing roller mop on a machine the rest of eufy's range has overtaken. It is rated 3.2 from 776 ratings, the lowest of the eleven vacuums we catalogue by a distance, its Amazon search row carries no price at all, and at $919.58 it sits between a better-rated flagship and a cheaper machine using its own headline technology. The roller is a good idea. This is not the machine to buy it on.",
@@ -4645,8 +4645,15 @@ export const REVIEWS: Record<string, ReviewContent> = {
     figures: [],
     categorySlug: "robot-vacuums",
     eyebrow: "Robot vacuum review",
-    title: "roborock S8 Max Ultra review",
-    seoTitle: "roborock S8 Max Ultra Review — and the Missing MaxV",
+    /* THE H1 AND THE TITLE BOTH LEAD WITH "MaxV" AND THE PRODUCT IS NOT ONE.
+       That is deliberate. The 9,900/mo term names a machine with no
+       first-party Amazon US listing, and the reader typing it is best served
+       by seeing their own words and then the answer — not by a heading for a
+       product they did not search for. The verdict directly beneath names the
+       S8 Max Ultra, the skuNote pins it, and the review opens on the
+       substitution in its first sentence. */
+    title: "roborock S8 MaxV Ultra: what Amazon actually sells",
+    seoTitle: "roborock S8 MaxV Ultra — What Amazon Actually Sells",
     metaDescription:
       "The S8 MaxV Ultra has no Amazon US listing — only accessory kits. This is what " +
       "roborock sells instead: 20mm of mop lift, structured-light seeing, $949.99.",
@@ -4941,7 +4948,10 @@ export const REVIEWS: Record<string, ReviewContent> = {
     categorySlug: "robot-vacuums",
     eyebrow: "Robot vacuum review",
     title: "ECOVACS DEEBOT T90 PRO Omni review",
-    seoTitle: "DEEBOT T90 PRO Omni Review — Roller Mop, 15mm Lift",
+    /* The primary term is the FAMILY name "ecovacs deebot", so the title has
+       to carry the brand as well as the model — a DEEBOT title without ECOVACS
+       on it does not serve the search that brings people here. */
+    seoTitle: "ECOVACS DEEBOT T90 PRO Omni Review — 15mm of Lift",
     metaDescription:
       "A mop roller that cleans itself as it runs, lifting 15mm on carpet, with a dock rated " +
       "at 90 days. And 30,000 Pa, which is the number not to buy it for.",
@@ -5059,8 +5069,11 @@ export const REVIEWS: Record<string, ReviewContent> = {
     figures: [],
     categorySlug: "robot-vacuums",
     eyebrow: "Robot vacuum review",
-    title: "Shark Matrix Plus UR2650WS review",
-    seoTitle: "Shark Matrix Plus Review — $280, 35,917 Ratings",
+    /* "Shark Matrix" names two Shark lines and the primary term is the family
+       phrase, so the heading carries the family and then pins the SKU. A title
+       reading only "Matrix Plus UR2650WS" answers a model code nobody types. */
+    title: "Shark Matrix robot vacuum review: the Matrix Plus UR2650WS",
+    seoTitle: "Shark Matrix Robot Vacuum — Which of the Two You Get",
     metaDescription:
       "The cheapest good robot vacuum with a self-emptying base, and the two things $280 " +
       "costs you: the mop pad does not lift, and LiDAR maps rather than sees.",
