@@ -1083,7 +1083,19 @@ const VACUUM_QUESTIONS: MatcherQuestion[] = [
     ],
   },
 
-  /* ---- profile questions: recorded, never scored ---- */
+  /**
+   * ONE ANSWER HERE IS SCORED AND THE OTHER TWO ARE NOT.
+   *
+   * This question sat under "recorded, never scored" until 10 August 2026,
+   * which threw away the one thing it tells us that the catalogue can answer.
+   * `multi_floor_mapping` is a recorded capability — the Qrevo S5V does not
+   * have it and the X10 Pro Omni does — and a reader who says the house has
+   * several storeys has told us they need it. Nothing else in the funnel asks.
+   *
+   * "A typical house" is deliberately NOT scored. It is ambiguous about
+   * storeys in a way "several storeys" is not, and guessing on the reader's
+   * behalf would rule out a machine on an answer they did not give.
+   */
   {
     id: "home_size",
     kicker: "Your home",
@@ -1091,9 +1103,15 @@ const VACUUM_QUESTIONS: MatcherQuestion[] = [
     options: [
       { label: "An apartment or one floor" },
       { label: "A typical house" },
-      { label: "A large house, several storeys" },
+      {
+        label: "A large house, several storeys",
+        hint: "It has to remember more than one map",
+        scores: { desired_cleans: ["multi_floor_mapping"] },
+      },
     ],
   },
+
+  /* ---- profile questions: recorded, never scored ---- */
   {
     id: "main_worry",
     kicker: "Your concern",

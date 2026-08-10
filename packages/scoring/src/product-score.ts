@@ -26,14 +26,44 @@ function powerMatch(answers: PoolAnswers, c: SuitabilityCandidate): number {
   return c.powerType === answers.power_pref ? 1 : 0;
 }
 
-/** Graded budget fit: 1 at the exact tier, decaying by tier distance. */
+/**
+ * How far under budget a tier may sit before it stops being a bonus.
+ *
+ * CHEAPER IS NEARLY FREE. A reader who says "$300 to $600" and is shown a $280
+ * machine that does everything they asked for has been served, not
+ * disappointed, so a tier below the stated band is barely penalised at all.
+ * It is not free, because a tier gap usually means a different class of
+ * machine, and "cheaper and does everything" is a claim worth being slightly
+ * sceptical of.
+ */
+const UNDER_BUDGET_STEP = 0.15;
+
+/**
+ * How far over budget a tier may sit before it stops being an answer.
+ *
+ * OVER IS NOT THE SAME AS UNDER, and treating them the same was the largest
+ * scoring bug on this site. `1 - distance / 3` scored a $280 machine and a
+ * $950 machine IDENTICALLY for somebody who said $300 to $600 — one tier away
+ * in each direction, same number — which is not what the reader said and not
+ * what they meant. A budget is a ceiling stated as a range.
+ *
+ * Two tiers over is close to disqualifying and three is worthless: somebody
+ * who said "under $300" is not served by a $1,300 machine, however well it
+ * scores on capability.
+ */
+const OVER_BUDGET_STEP = 0.4;
+
+/**
+ * Graded budget fit: 1 at the stated tier, gently down below it, steeply above.
+ */
 function priceTierMatch(answers: PoolAnswers, c: SuitabilityCandidate): number {
   if (answers.budget_tier === "no_pref") return 1;
   const want = PRICE_TIER_ORDER.indexOf(answers.budget_tier);
   const have = PRICE_TIER_ORDER.indexOf(c.priceTier);
   if (want < 0 || have < 0) return 0.5;
   const distance = Math.abs(want - have);
-  return Math.max(0, 1 - distance / (PRICE_TIER_ORDER.length - 1));
+  const step = have > want ? OVER_BUDGET_STEP : UNDER_BUDGET_STEP;
+  return Math.max(0, 1 - distance * step);
 }
 
 /**
@@ -133,6 +163,70 @@ export function scoreProducts(
  */
 const UNKNOWN_FIT = 0.6;
 
+/**
+ * How well a machine's rated size suits the ground it was given.
+ *
+ * "IT FITS" WAS SCORED AS ONE NUMBER AND THAT IS WHY LAWN NEVER DECIDED.
+ * Until 10 August 2026 any machine whose published rating covered the reader's
+ * ground scored a flat 1. So for somebody with a small yard — 5,000 sq ft —
+ * the eufy E15 rated for 10,890 and the Mammotion Luba 3000H rated for 32,670
+ * scored IDENTICALLY on the axis that carries 45% of the lawn weight, which is
+ * most of the reason that matcher returned a three-way tie under every answer
+ * set anybody tried. Six times the ground is not the same answer as twice it.
+ *
+ * The curve has three parts and each is a claim about machines rather than a
+ * shape chosen to spread the numbers out:
+ *
+ *   AT OR JUST OVER THE RATING — a discount, not full marks. Published area
+ *   ratings are the manufacturer's own and they are optimistic; they assume an
+ *   open rectangle, no obstacles and a full charge. A mower rated for exactly
+ *   the ground it is given will be finishing on the last day of its cycle for
+ *   the whole season, and the first wet fortnight puts it behind.
+ *
+ *   COMFORTABLE HEADROOM — full marks. This is what a right-sized machine
+ *   looks like.
+ *
+ *   GROSSLY OVER-RATED — a declining discount. A machine built for six times
+ *   the ground is a machine for a different garden, and it is being paid for
+ *   in size, weight, noise and money. It is still a real answer, so the
+ *   discount has a floor: never excluded, never preferred.
+ */
+const RATING_MARGINAL = 1.25;
+/**
+ * Where comfortable headroom stops and over-buying starts.
+ *
+ * THIS BOUNDARY IS A JUDGEMENT AND IT IS WORTH SAYING SO. Double the rating is
+ * the headroom that absorbs a wet fortnight and a growth spurt; triple is
+ * buying for a garden you do not have, in size, weight, noise and money. It
+ * was set at 3 first and moved to 2 after driving the lawn matcher, which is
+ * fitting a constant to an outcome — so the defence has to be the sentence
+ * above rather than the fact that it separated two mowers.
+ */
+const RATING_COMFORTABLE = 2;
+const OVERSIZE_STEP = 0.1;
+const OVERSIZE_FLOOR = 0.65;
+/** At-the-limit machines rank below right-sized ones without being ruled out. */
+const MARGINAL_FIT = 0.85;
+/**
+ * Rated for LESS than the reader has, on a config that does not exclude for it.
+ *
+ * Reachable only where `hardExclusions.poolTooLong` is off, which is every
+ * category that does not treat size as a rule-out. It must not land on
+ * MARGINAL_FIT: "rated for less than you have" and "rated for exactly what you
+ * have" are different findings and the first is worse.
+ */
+const UNDERSIZED_FIT = 0.35;
+
+/** Grade a published rating against what the reader actually has. */
+function ratingFit(rated: number, needed: number): number {
+  if (needed <= 0) return 1;
+  const headroom = rated / needed;
+  if (headroom < 1) return UNDERSIZED_FIT;
+  if (headroom < RATING_MARGINAL) return MARGINAL_FIT;
+  if (headroom <= RATING_COMFORTABLE) return 1;
+  return Math.max(OVERSIZE_FLOOR, 1 - (headroom - RATING_COMFORTABLE) * OVERSIZE_STEP);
+}
+
 function poolSizeFit(
   answers: PoolAnswers,
   c: SuitabilityCandidate,
@@ -142,7 +236,7 @@ function poolSizeFit(
     if (config.hardExclusions.poolTooLong && c.maxPoolLengthFt < answers.pool_length_ft) {
       return { excluded: true, reason: "pool_too_long", factor: 0 };
     }
-    return { excluded: false, factor: 1 };
+    return { excluded: false, factor: ratingFit(c.maxPoolLengthFt, answers.pool_length_ft) };
   }
 
   const area = answers.pool_area_sqft ?? null;
@@ -150,7 +244,7 @@ function poolSizeFit(
     if (config.hardExclusions.poolTooLong && c.maxPoolAreaSqFt < area) {
       return { excluded: true, reason: "pool_too_large", factor: 0 };
     }
-    return { excluded: false, factor: 1 };
+    return { excluded: false, factor: ratingFit(c.maxPoolAreaSqFt, area) };
   }
 
   return { excluded: false, factor: UNKNOWN_FIT };
