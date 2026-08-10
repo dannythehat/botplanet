@@ -79,6 +79,25 @@ export const GLANCE_FIELDS: Record<string, GlanceField[]> = {
     { label: "Suction", match: ["Suction"] },
   ],
 
+  /* Self-cleaning litter boxes, added with the category's first four reviews on
+     10 August 2026. CAT WEIGHT LEADS because it is the category's only genuine
+     safety question — a kitten under the sensor's threshold may not register at
+     all — and because reading the four ranges side by side is what tells a
+     reader with a Maine Coon or a kitten that this is not a field of
+     interchangeable machines. Entry size is second for the same reason and is
+     the figure two of the four makers do not publish, which is itself worth
+     seeing. Litter is third: it is the running cost you are locked into for the
+     life of the box, and it is the only slot where one of the four answers
+     differently from the rest. */
+  "self-cleaning-litter-boxes": [
+    { label: "Cat weight", match: ["Cat weight"] },
+    { label: "Entry", match: ["Entry size"] },
+    { label: "Litter", match: ["Litter"] },
+    { label: "Hands off for", match: ["Waste interval"] },
+    { label: "App", match: ["App"] },
+    { label: "Warranty", match: ["Warranty"] },
+  ],
+
   "robotic-pool-cleaners": [
     { label: "Power", match: ["Power type"] },
     { label: "Cleans", match: ["Surfaces"] },

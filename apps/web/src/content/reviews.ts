@@ -5184,6 +5184,322 @@ export const REVIEWS: Record<string, ReviewContent> = {
     lastReviewed: "2026-08-10",
   },
 
+  /* ============================================================
+     SELF-CLEANING LITTER BOXES — the first four, 10 August 2026.
+
+     THE CATEGORY HAD FOUR PUBLISHED PRODUCTS AND NO PAGES since
+     8 August, while `litter robot 4` alone is 74,000/mo — the
+     largest single review term on the site. No artwork yet; they
+     ship unillustrated for the same reason Grillbot and the
+     vacuums did.
+
+     CAT WEIGHT LEADS EVERY TABLE because it is the only genuine
+     safety question in the category. A kitten under the sensor's
+     threshold does not register, and a cycle starting with a
+     kitten inside is what the threshold exists to prevent. The
+     four ranges are 3–25, 3.3–22, 1–20 and not published, and
+     reading them side by side is most of the value of these
+     pages.
+
+     ENTRY SIZE IS SECOND AND TWO MAKERS DO NOT PUBLISH IT. It is
+     the specification that decides whether a cat walks in or
+     refuses, the failure mode of this category is a cat using the
+     rug instead, and the absence is recorded rather than filled.
+
+     Every figure here was read from the maker's own page on 10
+     August 2026 — the record with quotes and sources is
+     docs/commerce/litter-box-attributes.md. Ratings are from each
+     ASIN's own Amazon listing the same day.
+     ============================================================ */
+
+  "litter-robot-4": {
+    slug: "litter-robot-4",
+    image: undefined,
+    figures: [],
+    categorySlug: "self-cleaning-litter-boxes",
+    eyebrow: "Self-cleaning litter box review",
+    title: "Litter-Robot 4 review",
+    seoTitle: "Litter-Robot 4 Review — The Entry Size Nobody Compares",
+    metaDescription:
+      "Takes cats 3 to 25 lb through the widest door in the category. What $699 buys, " +
+      "which part of the health tracking is paid for, and who should buy elsewhere.",
+    verdict:
+      "The biggest opening in the category, at 15.75 inches square, and the widest stated cat weight range at 3 to 25 lb. It takes ordinary clumping clay from any shop, which is the running-cost difference that matters against the sealed-tray systems. What the pitch does not make obvious is that the health tracking shows seven days free and gates two years of history behind Whisker+ — the tracking is real, the long view is the paid product.",
+    bestFor:
+      "A large cat, ordinary clumping clay, and $699 — the widest door here and the widest weight range.",
+    notIdealFor:
+      "A kitten under 3 lb, which the weight sensor cannot detect, and anyone committed to walnut, paper or any non-clumping litter.",
+    facts: [
+      { label: "Price", value: "$699, read 8 August 2026" },
+      { label: "Rating", value: "4.4 from 156 ratings" },
+      { label: "Cat weight", value: "3–25 lb" },
+      { label: "Entry size", value: "15.75 × 15.75 in" },
+    ],
+    specGroups: [
+      {
+        heading: "Your cat",
+        rows: [
+          { label: "Cat weight", value: "3–25 lb" },
+          { label: "Entry size", value: "15.75 × 15.75 in" },
+          { label: "Interior height", value: "Globe 16.5 in" },
+          { label: "Kittens", value: "No — 3 lb is the stated minimum" },
+        ],
+      },
+      {
+        heading: "Running it",
+        rows: [
+          { label: "Litter", value: "Standard clumping clay, any shop" },
+          { label: "Litter not compatible", value: "Plant-based and non-clumping" },
+          { label: "Waste interval", value: "As low as once every 8 days, depending on cats" },
+          { label: "Waste drawer volume", value: null },
+        ],
+      },
+      {
+        heading: "App and support",
+        rows: [
+          { label: "App", value: "Whisker app — not required to run the box" },
+          { label: "Free history", value: "7 days of visits and individual cat weights" },
+          { label: "Paid history", value: "Up to 2 years with a Whisker+ subscription" },
+          { label: "Warranty", value: "1 year; 3 years for $100" },
+        ],
+      },
+      {
+        heading: "Not published",
+        rows: [
+          { label: "Noise", value: null },
+          { label: "Cycle time", value: null },
+          { label: "Unit weight", value: null },
+        ],
+      },
+    ],
+    skuNote:
+      "Litter-Robot 4 with Step & Fence by Whisker, ASIN B0BH6MD3DJ, $699 read on 8 August 2026, rating read 10 August. The bundles outrank the bare unit in Amazon's own results — a $749 supply bundle above it and a $799 accessory bundle beside it. Specifications read from litter-robot.com on 10 August 2026.",
+    lastReviewed: "2026-08-10",
+  },
+
+  "petkit-purobot-max-pro-2": {
+    slug: "petkit-purobot-max-pro-2",
+    image: undefined,
+    figures: [],
+    categorySlug: "self-cleaning-litter-boxes",
+    eyebrow: "Self-cleaning litter box review",
+    title: "PETKIT Purobot Max Pro 2 review",
+    seoTitle: "PETKIT Purobot Max Pro 2 Review — It Knows Which Cat",
+    metaDescription:
+      "Facial recognition for up to 15 cats, urine pH from the clump, two-year warranty, " +
+      "$509.99. And a door five inches narrower than the box it undercuts.",
+    verdict:
+      "The only litter box here that knows which cat just used it — 210-degree camera, facial recognition for up to fifteen animals, individual health profiles and clump analysis for urine pH. In a two-cat house that is the difference between a smeared visit log and an early warning that actually arrives. The catch is the door: 10.51 inches wide against the Litter-Robot's 15.75, on a machine called Max.",
+    bestFor:
+      "Two or more similar-sized cats, where knowing which animal is off is the whole point.",
+    notIdealFor:
+      "A big cat — the 22 lb ceiling is close to the Litter-Robot's 25, but the entrance is five inches narrower — and any kitten under 3.3 lb.",
+    facts: [
+      { label: "Price", value: "$509.99, read 8 August 2026" },
+      { label: "Rating", value: "4.0 from 45 ratings" },
+      { label: "Cat weight", value: "3.3–22 lb" },
+      { label: "Recognises", value: "Up to 15 cats by face and weight" },
+    ],
+    specGroups: [
+      {
+        heading: "Your cat",
+        rows: [
+          { label: "Cat weight", value: "3.3–22 lb" },
+          { label: "Entry size", value: "10.51 × 10.74 in, 10.03 in high" },
+          { label: "Interior", value: "76 L cylinder" },
+          { label: "Kittens", value: "No — 3.3 lb is the stated minimum" },
+        ],
+      },
+      {
+        heading: "Running it",
+        rows: [
+          { label: "Litter", value: "99% of clumping litters — clay, tofu or mixed" },
+          { label: "Litter particle limit", value: "Under 12 mm long and 3 mm across" },
+          { label: "Sifters supplied", value: "Two — one for tofu and mixed, one for bentonite and clay" },
+          { label: "Waste interval", value: "17 days" },
+          { label: "Waste drawer volume", value: "8 L" },
+        ],
+      },
+      {
+        heading: "What the camera does",
+        rows: [
+          { label: "Recognition", value: "Up to 15 cats by face and weight, with individual health profiles" },
+          { label: "Camera", value: "210° wide angle" },
+          { label: "Health tracking", value: "Urine pH from clump analysis, soft-stool instances, yowling detection" },
+          { label: "App", value: "5G Wi-Fi — live monitoring works with no subscription" },
+          { label: "Free playback", value: "30 days of video" },
+          { label: "Paid playback", value: "Extended recording needs PETKIT Care+, monthly" },
+        ],
+      },
+      {
+        heading: "Safety and support",
+        rows: [
+          { label: "Safety sensors", value: "12, plus proximity detection" },
+          { label: "Anti-pinch", value: "Patented design keeps the entrance open at all times" },
+          { label: "Warranty", value: "2 years" },
+          { label: "Unit weight", value: "24.25 lb" },
+          { label: "Model", value: "P9904" },
+        ],
+      },
+      {
+        heading: "Not published",
+        rows: [
+          { label: "Noise", value: null },
+          { label: "Cycle time", value: null },
+        ],
+      },
+    ],
+    skuNote:
+      "PETKIT Purobot Max Pro 2, ASIN B0DM83CLW3, $509.99 read on 8 August 2026, rating read 10 August. The brief that named this product called it the Purobot Max Pro, which is the previous generation; a Purobot Max 3 also sells at $399.99 and is a different tier rather than this machine's successor. Specifications read from petkit.com on 10 August 2026.",
+    lastReviewed: "2026-08-10",
+  },
+
+  "casa-leo-loo-too": {
+    slug: "casa-leo-loo-too",
+    image: undefined,
+    figures: [],
+    categorySlug: "self-cleaning-litter-boxes",
+    eyebrow: "Self-cleaning litter box review",
+    title: "Casa Leo Leo's Loo Too review",
+    seoTitle: "Casa Leo Leo's Loo Too Review — The Only Kitten Box",
+    metaDescription:
+      "Works with cats as light as 1 lb, where every rival gives up around three. Also " +
+      "the lowest ceiling here at 20 lb — and we had that wrong until today.",
+    verdict:
+      "The only automatic litter box in our catalogue that detects a cat under three pounds — Casa Leo states it works with cats as light as 1 lb, where Whisker's minimum is 3 and PETKIT's is 3.3. That makes it the answer for a kitten and nothing else is. It is also the lowest ceiling of the four at 20 lb, and the only one that does not publish its entry size, which is the figure that decides whether a big cat uses it.",
+    bestFor:
+      "A kitten or a small adult cat, on clay-clumping litter, with the largest waste drawer here at 9.5 L.",
+    notIdealFor:
+      "A cat heading past 20 lb — Casa Leo's own stated ceiling — and anyone who will not use 100% clay-clumping litter, which voids the warranty and the trial.",
+    facts: [
+      { label: "Price", value: "$599, read 8 August 2026" },
+      { label: "Rating", value: "4.0 from 411 ratings" },
+      { label: "Cat weight", value: "1–20 lb" },
+      { label: "Waste drawer volume", value: "9.5 L" },
+    ],
+    specGroups: [
+      {
+        heading: "Your cat",
+        rows: [
+          { label: "Cat weight", value: "1–20 lb" },
+          {
+            label: "Kittens",
+            value: "Yes — the only box here that detects under 3 lb",
+            note: "Casa Leo's words: our system works with cats as light as 1 lb.",
+          },
+          {
+            label: "Large cats",
+            value: "No — 20 lb is the stated ceiling",
+            note: "Our catalogue marked this box large-cat suitable until 10 August 2026. Corrected against Casa Leo's own figure.",
+          },
+          { label: "Entry size", value: null },
+        ],
+      },
+      {
+        heading: "Running it",
+        rows: [
+          { label: "Litter", value: "100% clay-clumping only, any brand" },
+          {
+            label: "Litter not compatible",
+            value: "Anything else",
+            note: "Casa Leo states other litters void the warranty and the 90-day trial.",
+          },
+          { label: "Waste drawer volume", value: "9.5 L" },
+          { label: "Waste interval", value: null },
+          { label: "Noise", value: "About 30 dB" },
+        ],
+      },
+      {
+        heading: "App and support",
+        rows: [
+          { label: "App", value: "Wi-Fi app and voice control, with weight tracking per visit" },
+          { label: "Odour control", value: "UV" },
+          { label: "Subscription", value: null },
+          { label: "Warranty", value: "1 year; 3-year extension sold separately" },
+        ],
+      },
+      {
+        heading: "Not published",
+        rows: [
+          { label: "Interior diameter", value: null },
+          { label: "Overall dimensions", value: null },
+          { label: "Cycle time", value: null },
+        ],
+      },
+    ],
+    skuNote:
+      "Casa Leo, Leo's Loo Too, ASIN B09LL9S99B, $599 read on 8 August 2026, rating read 10 August. Specifications read from casaleopet.com on 10 August 2026 — casaleo.com timed out entirely.",
+    lastReviewed: "2026-08-10",
+  },
+
+  "petsafe-scoopfree-crystal-pro": {
+    slug: "petsafe-scoopfree-crystal-pro",
+    image: undefined,
+    figures: [],
+    categorySlug: "self-cleaning-litter-boxes",
+    eyebrow: "Self-cleaning litter box review",
+    title: "PetSafe ScoopFree Crystal Pro review",
+    seoTitle: "PetSafe ScoopFree Crystal Pro Review — 3.1 Stars",
+    metaDescription:
+      "A third the price of the boxes beside it, thirty days hands-free, and rated a full " +
+      "star below all three. Plus a tray you are tied to for as long as you own it.",
+    verdict:
+      "Thirty days untouched is the longest interval of the four boxes here and a real advantage, and $229.99 is a third of what the others cost. Two things go with that: it works only with PetSafe's own crystal trays for the life of the machine, and it is rated 3.1 stars from 184 ratings against 4.4, 4.0 and 4.0 for the rest. A comparison site that prints the price and omits the score is not doing the job.",
+    bestFor:
+      "Somebody whose real goal is a month of not thinking about it, who is content to buy one brand's trays.",
+    notIdealFor:
+      "Anyone who wants ordinary litter from any shop, or a per-cat health history — there is no app and no Wi-Fi at all.",
+    facts: [
+      { label: "Price", value: "$229.99, read 8 August 2026" },
+      { label: "Rating", value: "3.1 from 184 ratings" },
+      { label: "Waste interval", value: "Up to 30 days" },
+      { label: "Litter", value: "PetSafe crystal trays only" },
+    ],
+    specGroups: [
+      {
+        heading: "Your cat",
+        rows: [
+          { label: "Cat weight", value: null, note: "PetSafe publishes a limit for the Crystal CLASSIC, a different and cheaper machine. That figure is not carried across." },
+          { label: "Entry size", value: null },
+          { label: "Dimensions", value: "28.2 × 20.4 × 16 in" },
+        ],
+      },
+      {
+        heading: "Running it",
+        rows: [
+          {
+            label: "Litter",
+            value: "PetSafe crystal trays only",
+            note: "PetSafe's words: only compatible with official PetSafe ScoopFree Disposable Crystal Litter Trays or Reusable Litter Trays.",
+          },
+          { label: "Waste interval", value: "Up to 30 days" },
+          { label: "How it works", value: "A rake sweeps a flat tray — no rotating globe or drum" },
+          { label: "Crystal litter", value: "Dehydrates solid waste, 99% dust free, does not stick to paws" },
+          { label: "Tray price", value: null },
+        ],
+      },
+      {
+        heading: "What it tracks",
+        rows: [
+          { label: "App", value: "None — no Wi-Fi" },
+          { label: "Health tracking", value: "A digital display counter of visits on the unit" },
+          { label: "Alerts", value: "LED indicators, including a light when the tray needs replacing" },
+        ],
+      },
+      {
+        heading: "Not published",
+        rows: [
+          { label: "Warranty", value: null },
+          { label: "Noise", value: null },
+          { label: "Cycle time", value: null },
+        ],
+      },
+    ],
+    skuNote:
+      "PetSafe ScoopFree Crystal Pro, ASIN B0DR3JP2FZ, $229.99 read on 8 August 2026, rating read 10 August. ScoopFree Crystal is a family of four live SKUs: this Crystal Pro at $229.99, a Crystal Pro LEGACY front-entry at $229.95 — five cents apart and a previous generation — a Legacy uncovered at $142.49 and a Crystal Classic at $99. Specifications read from petsafe.com on 10 August 2026.",
+    lastReviewed: "2026-08-10",
+  },
+
 };
 
 export function reviewFor(slug: string | undefined): ReviewContent | undefined {

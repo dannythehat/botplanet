@@ -966,15 +966,37 @@ const VACUUM_REVIEWS = plannedReviews("robot-vacuums", "31090094137 · 2026-08-0
 ]);
 
 /* Litter boxes. Litter-Robot 4 at 74,000 is the single biggest review
-   opportunity anywhere on the site. */
+   opportunity anywhere on the site, and it was built on 10 August 2026 along
+   with the other three products the category holds.
+
+   TWO OF THE RESEARCHED SLUGS NAMED THE SAME MACHINE. `casa-leo` (6,600) and
+   `leos-loo-too` (1,000) are the brand and the model of one product — Casa Leo
+   makes Leo's Loo Too and little else — so they are one page carrying both
+   terms rather than two pages competing for one product's traffic. The 1,000
+   is folded into that row's secondary set, not lost.
+
+   AND THE FOUR BUILT ROWS TAKE THEIR TERMS FROM THE KEYWORD REGISTER, NOT
+   FROM THIS FILE'S OWN SEEDS. The 6 August seeds were category-level guesses
+   at what each page would target; the register rows were measured on 10 August
+   against the exact product URLs, and they are both narrower and more recent.
+   Where the two disagreed the register won — `litter-robot 4` rather than
+   `litter robot 4`, `leos loo too` (1,000, the model) rather than `casa leo`
+   (6,600, the bare brand), `petsafe scoopfree crystal pro` (480) rather than
+   the family term, and `petkit purobot max pro 2` (390), which was not in the
+   seed set at all because the run measured the PuraMax 2, the Pura X and the
+   Purobot Ultra and the machine we verified is a fourth product.
+
+   The seed volumes those rows used to carry are not lost — they are the family
+   and brand terms, and they sit in each register row's secondary set where
+   they belong. */
 const LITTER_REVIEWS = plannedReviews("self-cleaning-litter-boxes", "31090590604 + 31091110791 · 2026-08-06", [
-  { slug: "litter-robot-4", term: "litter robot 4", volume: 74000, note: "Product not sourced. THE BIGGEST SINGLE REVIEW OPPORTUNITY ON THE SITE — and the brand term itself (165,000) is refused, so this review is how the category reaches Whisker demand honestly." },
-  { slug: "casa-leo", term: "casa leo", volume: 6600 },
+  { slug: "litter-robot-4", term: "litter-robot 4", volume: 74000, difficulty: 15, built: true, note: "Built 10 August 2026. THE BIGGEST SINGLE REVIEW OPPORTUNITY ON THE SITE — and the brand term itself (165,000) is refused, so this review is how the category reaches Whisker demand honestly." },
+  { slug: "casa-leo-loo-too", term: "leos loo too", volume: 1000, built: true, note: "Built 10 August 2026. The model term rather than the bare brand `casa leo` (6,600), on the site's standing ruling that a comparison site does not take a brand query off its owner." },
   { slug: "neakasa-m1", term: "neakasa m1", volume: 3600 },
   { slug: "catgenie", term: "catgenie", volume: 2900 },
   { slug: "petkit-puramax-2", term: "petkit puramax 2", volume: 1900 },
-  { slug: "petsafe-scoopfree", term: "petsafe scoopfree", volume: 1600 },
-  { slug: "leos-loo-too", term: "leos loo too", volume: 1000 },
+  { slug: "petsafe-scoopfree-crystal-pro", term: "petsafe scoopfree crystal pro", volume: 480, built: true, note: "Built 10 August 2026 on the Crystal Pro. ScoopFree Crystal is a family of four live SKUs and two of them are within five cents of each other, one a previous generation." },
+  { slug: "petkit-purobot-max-pro-2", term: "petkit purobot max pro 2", volume: 390, built: true, note: "Built 10 August 2026. Not in the 6 August seed set — that run measured the PuraMax 2, the Pura X and the Purobot Ultra, and this is a fourth machine. Volume from the 10 August register run against the product URL itself." },
   { slug: "petkit-pura-x", term: "petkit pura x", volume: 590 },
   { slug: "popur-x5", term: "popur x5", volume: 590 },
   { slug: "petkit-purobot-ultra", term: "petkit purobot ultra", volume: 390 },
