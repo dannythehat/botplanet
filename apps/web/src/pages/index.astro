@@ -7,9 +7,25 @@ import { srcsetFor } from "../lib/srcset";
 import CategoryFeature from "../components/CategoryFeature.astro";
 import { webPageSchema, SITE_URL } from "../lib/seo";
 import { REVIEWS } from "../content/reviews";
+import { PRODUCT_ID } from "../content/products";
+import { CATEGORIES as NAV_CATEGORIES } from "../content/nav";
+import ProductImage from "../components/ProductImage.astro";
 import { MATCHER_JOBS } from "../content/matcher-router";
 
 const live = categoryRoutes(LAUNCH_CATEGORY);
+
+/**
+ * NAMES THE BIGGEST CATEGORIES, WHICH IT DID NOT.
+ *
+ * This read "pool cleaners, window robots, companion pets and coding robots"
+ * until 10 August 2026 — four of nine, and the four it omitted included the two
+ * largest terms the site targets: `robot vacuum` at 135,000/mo and `robot lawn
+ * mower` at 74,000. The meta description is the sentence that earns the click
+ * in the result, and it was advertising the smaller half of the catalogue.
+ */
+const META_DESCRIPTION =
+  "Compare real-world home robots for the US — vacuums, mowers, pool cleaners, " +
+  "window robots, litter boxes and more. Evidence, honest rule-outs, and the gaps.";
 
 /**
  * The reviews, listed on the homepage.
@@ -20,18 +36,48 @@ const live = categoryRoutes(LAUNCH_CATEGORY);
  * passed no authority to any of them. Reading REVIEWS rather than a hand-typed
  * list means a review that ships tomorrow appears here the same day, and one
  * that is renamed cannot leave a dead link behind.
+ *
+ * EVERY REVIEW, NOT EVERY POOL REVIEW.
+ *
+ * This filtered on `categorySlug === LAUNCH_CATEGORY` until 10 August 2026,
+ * which was right on the day it was written — pool was the only category with
+ * reviews — and quietly wrong from the moment the second one shipped. By the
+ * time it was found the site had fifty-one reviews across eight categories and
+ * the homepage linked eleven of them, all pool. The kicker above the grid read
+ * "EVERY MODEL WE HAVE REVIEWED" while the filter denied it.
+ *
+ * That is the same failure the comment below this one describes, one level up:
+ * the strongest page on the site passing its authority to a tenth of the work.
+ * Twenty-two of those reviews were written on 10 August alone and none of them
+ * had a route from the front door.
+ *
+ * ARTWORK COMES FROM THE REGISTRY RATHER THAN THE REVIEW RECORD. The pool
+ * eleven each carry an `image`; the reviews built since do not yet, and a grid
+ * that reads `r.image.src` would have crashed the homepage the moment the
+ * filter came off. ProductImage asks the media registry per card and falls
+ * through to the owned silhouette, which is the same path the listing cards
+ * and the recommendation page already take — so a takedown recorded in one
+ * data file empties this grid too, and nothing here can render a broken image.
  */
+const CATEGORY_NAME = new Map(NAV_CATEGORIES.map((c) => [c.slug, c.name]));
+
 const reviews = Object.values(REVIEWS)
-  .filter((r) => r.categorySlug === LAUNCH_CATEGORY)
   .map((r) => ({
     slug: r.slug,
+    productId: PRODUCT_ID[r.slug] ?? `prod-${r.slug}`,
     title: r.title.replace(/ review$/i, ""),
     href: productPath(r.slug, r.categorySlug),
+    categorySlug: r.categorySlug,
+    categoryName: CATEGORY_NAME.get(r.categorySlug) ?? r.categorySlug,
     bestFor: r.facts?.find((f) => f.label === "Cleans")?.value ?? null,
-    price: r.facts?.find((f) => f.label.startsWith("Max"))?.value ?? null,
-    image: r.image,
   }))
-  .sort((a, b) => a.title.localeCompare(b.title));
+  /* Category first so the grid reads as a catalogue rather than an alphabet,
+     and so the nine categories are visibly nine rather than one long list. */
+  .sort((a, b) =>
+    a.categoryName === b.categoryName
+      ? a.title.localeCompare(b.title)
+      : a.categoryName.localeCompare(b.categoryName),
+  );
 
 /* The universal Bot Finder card. Replaces the old explainer illustration,
    which drew six category tiles into the pixels — one of them "Security",
@@ -247,7 +293,7 @@ const homeSchema = [
 
 <Base
   title="Home Robots Compared on the Evidence — BotPlanet"
-  description="Compare real-world robots for the US — pool cleaners, window robots, companion pets and coding robots. Evidence, honest rule-outs, and what we could not verify."
+  description={META_DESCRIPTION}
   bleed={true}
   schema={homeSchema}
 >
@@ -463,7 +509,7 @@ const homeSchema = [
   {/* Every review, named and linked. The homepage used to send all of its
       traffic to the hub and let the reader find the work from there; a list of
       real model names is both the better click and the better signal. */}
-  <section class="reviews" id="pool-reviews">
+  <section class="reviews" id="reviews">
     <div class="wrap">
       <div class="section-intro section-intro--compact">
         <p class="kicker">EVERY MODEL WE HAVE REVIEWED</p>
@@ -491,17 +537,14 @@ const homeSchema = [
         {reviews.map((r) => (
           <li class="reviews__item">
             <a href={r.href}>
-              <img
-                src={r.image.src}
-                srcset={srcsetFor(r.image.src)}
+              <ProductImage
+                productId={r.productId}
+                placement="listing_card"
+                types={["product_hero", "product_alternate_view", "branded_placeholder"]}
                 sizes="(min-width: 900px) 22vw, 45vw"
-                width="1254"
-                height="1254"
-                alt={r.image.alt}
-                loading="lazy"
-                decoding="async"
               />
               <div class="reviews__body">
+                <p class="reviews__cat">{r.categoryName}</p>
                 <h3>{r.title}</h3>
                 {r.bestFor && <p class="reviews__meta">{r.bestFor}</p>}
               </div>
@@ -742,6 +785,7 @@ const homeSchema = [
   .reviews__item img { display: block; width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover; }
   .reviews__body { padding: 16px 18px 18px; }
   .reviews__body h3 { margin: 0; font-size: 16px; letter-spacing: -.01em; color: #f1f3f6; line-height: 1.3; }
+  .reviews__cat { margin: 0 0 4px; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--text-tertiary); }
   .reviews__meta { margin: 7px 0 0; font-size: 13px; line-height: 1.5; color: var(--text-tertiary); }
   .reviews__actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 28px; }
   @media (max-width: 900px) { .reviews__grid { grid-template-columns: repeat(2, minmax(0,1fr)); } }
