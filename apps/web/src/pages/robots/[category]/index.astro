@@ -327,7 +327,12 @@ const pageSchema = hero
   <ArticleFooter lastReviewed={LAST_REVIEWED} />
 
   {products.length === 0 ? (
-    <div class="empty">
+    /* Carries id="products" so the hero's own "Compare …" button lands here
+       rather than nowhere. Every hub hero points at #products; on a category
+       with nothing published the id existed on no element, so the button was
+       dead on the grill and vacuum hubs. Landing on "none yet" is the honest
+       answer to the question the button asks. */
+    <div class="empty" id="products">
       <p class="empty__title">No products published in this category yet</p>
       <p>Published products appear here automatically.</p>
     </div>

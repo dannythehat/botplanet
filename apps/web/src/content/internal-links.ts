@@ -591,19 +591,28 @@ export const CATEGORY_ANCHORS: Record<string, InternalAnchor[]> = {
     },
     {
       anchor: "safety rope",
-      href: "/robots/window-cleaning-robots/#safety",
+      /* #power, not #safety. The window hub has no #safety section — that id
+         belongs to the LITTER hub, and this link had been landing readers at
+         the top of the window hub since it was written. The section that
+         actually answers "what happens when the power cuts" is #power: "That
+         backup is the safety system: if the power fails, the machine holds the
+         glass rather than falling." */
+      href: "/robots/window-cleaning-robots/#power",
       why: "Every reader above the ground floor asks the same question — what happens when the power cuts — and the answer belongs in one place the reviews can point at.",
       status: "live",
     },
     {
       anchor: "power-off protection",
-      href: "/robots/window-cleaning-robots/#safety",
+      href: "/robots/window-cleaning-robots/#power",
       why: "The mechanism behind the rope answer: how long the machine holds the glass with no mains. Named wherever a review quotes a hold time.",
       status: "live",
     },
     {
       anchor: "streaking",
-      href: "/robots/window-cleaning-robots/#results",
+      /* #dirt, not #results — same fault as the two above. There is no
+         #results section on this hub. #dirt is where smearing is explained:
+         "a machine that sprays water alone will smear it". */
+      href: "/robots/window-cleaning-robots/#dirt",
       why: "The most common complaint about this whole category, and the one thing a spec sheet cannot predict. Reviews reach it constantly; the explanation lives on the hub.",
       status: "live",
     },

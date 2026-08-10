@@ -34,6 +34,7 @@ import Alternatives from "./Alternatives.astro";
 import VideoSection from "./VideoSection.astro";
 import SpecTable from "./SpecTable.astro";
 import SpecGlance from "./SpecGlance.astro";
+import { buildGlance } from "../lib/spec-glance";
 import AlsoCompared from "./AlsoCompared.astro";
 import { alsoCompared } from "../lib/also-compared";
 import BotMatchCta from "./BotMatchCta.astro";
@@ -134,8 +135,16 @@ const alternatives =
   lastReviewed={review.lastReviewed}
 />
 
+{/* THE CONTENTS MAY ONLY LIST SECTIONS THAT EXIST. SpecGlance renders itself
+    only when it has enough recorded fields to be worth a box — see
+    lib/spec-glance.ts, MIN_GLANCE_ROWS — and this list named it unconditionally,
+    so on the five reviews where the maker publishes too little the contents
+    offered "The specification at a glance" and the jump went nowhere. The same
+    test decides both, from the same call, so they cannot disagree again. */}
 <ArticleContents html={linked} extra={[
-  { id: "glance-heading", text: "The specification at a glance" },
+  ...(buildGlance(review.categorySlug, review.specGroups).worthShowing
+    ? [{ id: "glance-heading", text: "The specification at a glance" }]
+    : []),
   { id: "buy", text: "Where to buy" },
   { id: "specifications", text: "Full specification" },
 ]} />

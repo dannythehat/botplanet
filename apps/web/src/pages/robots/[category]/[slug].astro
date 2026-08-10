@@ -284,7 +284,12 @@ const reviewGraph = hasReview
       a review still need somewhere to show their offers. */}
   {!hasReview && (
     <>
-      <h2 id="where-to-buy">Current offers</h2>
+      {/* id="buy", matching BuyBox.astro, because these two are alternatives
+          for the SAME section and callers link to it without knowing which
+          one rendered. They did not match until now: BotMatchSnapshot linked
+          "current offers" to #where-to-buy on every page, and on the 22 pages
+          that have a review the id was #buy, so the link went nowhere. */}
+      <h2 id="buy">Current offers</h2>
       {withdrawn ? (
     <p class="note">
       This robot is no longer part of the BotPlanet launch selection, so we do not link to a seller for it or
