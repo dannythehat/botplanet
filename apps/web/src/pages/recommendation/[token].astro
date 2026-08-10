@@ -1,5 +1,6 @@
 ---
 import Base from "../../layouts/Base.astro";
+import ProductImage from "../../components/ProductImage.astro";
 import { getDb, schema } from "../../lib/db";
 import { usd, freshnessLabel } from "../../lib/format";
 import { eq } from "drizzle-orm";
@@ -70,11 +71,24 @@ const hrefFor = (p: { categoryId: string; slug: string }) => `/robots/${catSlugO
         <span class="pill class">Equivalent on current data</span>
         <h1 style="margin-top:10px;">{equivalent.length} machines, and we cannot separate them</h1>
         <p style="font-size:17px;">{explanation}</p>
-        <ul style="margin:18px 0 0; padding-left:18px;">
+        {/* A tie is still an answer, and the reader still has to choose. A bare
+            list of names asks them to do that blind. */}
+        <div class="grid" style="margin-top:18px;">
           {equivalent.map((p) => (
-            <li style="margin:6px 0;"><a href={hrefFor(p)}>{p.name}</a></li>
+            <a class="card rec-alt" href={hrefFor(p)}>
+              <span class="rec-alt__art">
+                <ProductImage
+                  productId={p.id}
+                  placement="listing_card"
+                  types={["product_hero", "product_alternate_view", "branded_placeholder"]}
+                  sizes="(min-width: 900px) 260px, 45vw"
+                />
+              </span>
+              <h3>{p.name}</h3>
+              <span class="muted">View details →</span>
+            </a>
           ))}
-        </ul>
+        </div>
         <p class="muted" style="margin-top:16px;">
           Naming one of these as the winner would mean picking it out of a tie, and we would rather tell you the
           truth about what we know. When the attributes that separate them are recorded, this answer gets sharper.
@@ -83,7 +97,22 @@ const hrefFor = (p: { categoryId: string; slug: string }) => `/robots/${catSlugO
     </>
   ) : chosen ? (
     <>
+      {/* THE PAGE THE EMAIL SENDS PEOPLE TO HAD NO PICTURE OF ANYTHING.
+          A reader who has answered five questions, been emailed a link and
+          clicked it is the most committed visitor this site gets, and they
+          arrived at a page of text with a price on it. Every one of these
+          machines has artwork in the media registry — the same resolver the
+          listing cards use, so a withdrawn asset empties this too. */}
       <div class="hero">
+        <div class="rec-hero__art">
+          <ProductImage
+            productId={chosen.id}
+            placement="listing_card"
+            types={["product_hero", "product_alternate_view", "branded_placeholder"]}
+            sizes="(min-width: 900px) 420px, 90vw"
+            priority
+          />
+        </div>
         <span class="pill class">BotPlanet recommends</span>
         <h1 style="margin-top:10px;">{chosen.name}</h1>
         <p style="font-size:17px;">{explanation}</p>
@@ -106,7 +135,15 @@ const hrefFor = (p: { categoryId: string; slug: string }) => `/robots/${catSlugO
             {alternatives.map((a) => {
               const p = productById(a.productId);
               return p ? (
-                <a class="card" href={hrefFor(p)}>
+                <a class="card rec-alt" href={hrefFor(p)}>
+                  <span class="rec-alt__art">
+                    <ProductImage
+                      productId={p.id}
+                      placement="listing_card"
+                      types={["product_hero", "product_alternate_view", "branded_placeholder"]}
+                      sizes="(min-width: 900px) 260px, 45vw"
+                    />
+                  </span>
                   <span class="pill">Suitability {a.suitabilityScore}/100</span>
                   <h3>{p.name}</h3>
                   <span class="muted">View details →</span>
@@ -167,3 +204,24 @@ const hrefFor = (p: { categoryId: string; slug: string }) => `/robots/${catSlugO
   </p>
   <p style="margin-top:16px;"><a class="btn" href={`/botmatch/${catSlug}/`}>Start over</a></p>
 </Base>
+
+<style>
+  .rec-hero__art {
+    max-width: 420px;
+    margin: 0 0 18px;
+    border-radius: 14px;
+    overflow: hidden;
+    background: var(--panel, #0d1017);
+  }
+  .rec-hero__art :global(img) { display: block; width: 100%; height: auto; }
+
+  .rec-alt__art {
+    display: block;
+    aspect-ratio: 1 / 1;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 10px;
+    background: var(--panel, #0d1017);
+  }
+  .rec-alt__art :global(img) { width: 100%; height: 100%; object-fit: cover; display: block; }
+</style>
