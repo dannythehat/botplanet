@@ -1,5 +1,502 @@
 [
   {
+    "source": "/media/litter/litter-robot-4/card.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-litter-litter-robot-4-card-webp-360",
+        "src": "/media/litter/litter-robot-4/card-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 11488,
+        "checksum": "sha256:4d30c4ed7f94692bfd32b2fc8e5f1ed91901c3b37065c2e26d893cf285a806bd"
+      },
+      {
+        "id": "media-litter-litter-robot-4-card-webp-640",
+        "src": "/media/litter/litter-robot-4/card-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 28818,
+        "checksum": "sha256:167e5cd0094b33c9744e52e062e3e9128ec09e88bdee10fe4748509aae7d1ac5"
+      },
+      {
+        "id": "media-litter-litter-robot-4-card-webp-960",
+        "src": "/media/litter/litter-robot-4/card-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 57360,
+        "checksum": "sha256:90ad96972b3f6a13f1343e4949a59ac8e53e5b9565bd6e0df7f2be7644c89d12"
+      }
+    ]
+  },
+  {
+    "source": "/media/litter/petkit-purobot-max-pro-2/card.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-litter-petkit-purobot-max-pro-2-card-webp-360",
+        "src": "/media/litter/petkit-purobot-max-pro-2/card-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 12526,
+        "checksum": "sha256:94b2fd28261040cb6738e00fe59cb83e5a2ed8096a6d8c642a3162584190c2e0"
+      },
+      {
+        "id": "media-litter-petkit-purobot-max-pro-2-card-webp-640",
+        "src": "/media/litter/petkit-purobot-max-pro-2/card-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 30122,
+        "checksum": "sha256:0d23781fbaad0be867997dd1442db9372ae7477d8517e3396ef84fbf1ed2ee45"
+      },
+      {
+        "id": "media-litter-petkit-purobot-max-pro-2-card-webp-960",
+        "src": "/media/litter/petkit-purobot-max-pro-2/card-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 59106,
+        "checksum": "sha256:87a65d919b202712e408716f21bd065c7078686ee988bbd9dd4622220e359576"
+      }
+    ]
+  },
+  {
+    "source": "/media/litter/casa-leo-loo-too/card.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-litter-casa-leo-loo-too-card-webp-360",
+        "src": "/media/litter/casa-leo-loo-too/card-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 13808,
+        "checksum": "sha256:af6c6328de6cf6970bb1bc20141da7e8a7ff81063b06c89c1d67881cafdf79ca"
+      },
+      {
+        "id": "media-litter-casa-leo-loo-too-card-webp-640",
+        "src": "/media/litter/casa-leo-loo-too/card-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 32796,
+        "checksum": "sha256:8dd09e2d5dbea7318a25eb00a3eb1d198d1bc7e4de2fc4c5129da6e79d4eb4e6"
+      },
+      {
+        "id": "media-litter-casa-leo-loo-too-card-webp-960",
+        "src": "/media/litter/casa-leo-loo-too/card-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 63552,
+        "checksum": "sha256:c738c27e6174bc377e8a6f94b5bcf39782b08662d4e698ce061630fad7a53f5f"
+      }
+    ]
+  },
+  {
+    "source": "/media/litter/petsafe-scoopfree-crystal-pro/card.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-litter-petsafe-scoopfree-crystal-pro-card-webp-360",
+        "src": "/media/litter/petsafe-scoopfree-crystal-pro/card-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 14568,
+        "checksum": "sha256:94e59f53502476729fde54d37c95d150c5341c20629a35fc4ed1661f9d0a49ad"
+      },
+      {
+        "id": "media-litter-petsafe-scoopfree-crystal-pro-card-webp-640",
+        "src": "/media/litter/petsafe-scoopfree-crystal-pro/card-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 35106,
+        "checksum": "sha256:834f9bb6572507ff047c279e12dd9f5b3aad600d347edd776747f178f8a8ec7e"
+      },
+      {
+        "id": "media-litter-petsafe-scoopfree-crystal-pro-card-webp-960",
+        "src": "/media/litter/petsafe-scoopfree-crystal-pro/card-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 68228,
+        "checksum": "sha256:4248fa0f33ee2027a87831b1f877b9ca9c4218c88a88b833b41a249d39bc4ffa"
+      }
+    ]
+  },
+  {
+    "source": "/media/lawn/segway-navimow-i110n/card.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-lawn-segway-navimow-i110n-card-webp-360",
+        "src": "/media/lawn/segway-navimow-i110n/card-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 24426,
+        "checksum": "sha256:6b151b9f48311a733e3d83a255932dea82a8a567d3c16fd4eac65dc7b6e7a819"
+      },
+      {
+        "id": "media-lawn-segway-navimow-i110n-card-webp-640",
+        "src": "/media/lawn/segway-navimow-i110n/card-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 68600,
+        "checksum": "sha256:ace99f68f491ae4876a8316aa45a7368fefc0c837d0852f1af156286ac5ecd2e"
+      },
+      {
+        "id": "media-lawn-segway-navimow-i110n-card-webp-960",
+        "src": "/media/lawn/segway-navimow-i110n/card-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 142100,
+        "checksum": "sha256:43560c534602e9c98ddef55833ca53951109fdaac44009362268c098ce4f804f"
+      }
+    ]
+  },
+  {
+    "source": "/media/lawn/mammotion-luba-3-awd-1500h/card.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-lawn-mammotion-luba-3-awd-1500h-card-webp-360",
+        "src": "/media/lawn/mammotion-luba-3-awd-1500h/card-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 21338,
+        "checksum": "sha256:839fa62a04fa2aadcb7eedb5931f38a3bd870a353545ef4182f25fe41da4cbf3"
+      },
+      {
+        "id": "media-lawn-mammotion-luba-3-awd-1500h-card-webp-640",
+        "src": "/media/lawn/mammotion-luba-3-awd-1500h/card-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 55514,
+        "checksum": "sha256:a507240280dce80fe9c4827ff4541ec4eee5b26e26ae0323cb8d1f2f5a2194d9"
+      },
+      {
+        "id": "media-lawn-mammotion-luba-3-awd-1500h-card-webp-960",
+        "src": "/media/lawn/mammotion-luba-3-awd-1500h/card-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 110812,
+        "checksum": "sha256:0e95e1b033707a08b77acba24ea8873bdefd495845f3dd3345528199e4e4e41d"
+      }
+    ]
+  },
+  {
+    "source": "/media/lawn/mammotion-luba-3-awd-3000h/card.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-lawn-mammotion-luba-3-awd-3000h-card-webp-360",
+        "src": "/media/lawn/mammotion-luba-3-awd-3000h/card-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 16506,
+        "checksum": "sha256:7b9468962102d7b8519e7280297c33396f96fd0202d8c92b14c1b1227013165d"
+      },
+      {
+        "id": "media-lawn-mammotion-luba-3-awd-3000h-card-webp-640",
+        "src": "/media/lawn/mammotion-luba-3-awd-3000h/card-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 47956,
+        "checksum": "sha256:aac0bec88dc91e10763a7ab86a8d852a04c36098d5e7110ac2c3ecafc8304362"
+      },
+      {
+        "id": "media-lawn-mammotion-luba-3-awd-3000h-card-webp-960",
+        "src": "/media/lawn/mammotion-luba-3-awd-3000h/card-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 100760,
+        "checksum": "sha256:84ed72334ab35171e0b167a925479c2989015324250bd4a1493b8998820dda67"
+      }
+    ]
+  },
+  {
+    "source": "/media/lawn/husqvarna-automower-410iq/card.webp",
+    "sourceWidth": 1536,
+    "sourceHeight": 1024,
+    "derivatives": [
+      {
+        "id": "media-lawn-husqvarna-automower-410iq-card-webp-360",
+        "src": "/media/lawn/husqvarna-automower-410iq/card-360w.webp",
+        "width": 360,
+        "height": 240,
+        "bytes": 16526,
+        "checksum": "sha256:c726aa7ddbc04aa462f1926f2afb086dfc190b12890af52fa3875359906a8138"
+      },
+      {
+        "id": "media-lawn-husqvarna-automower-410iq-card-webp-640",
+        "src": "/media/lawn/husqvarna-automower-410iq/card-640w.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 43122,
+        "checksum": "sha256:9b7c9e2a1bf174a019e224ecdf32d32e09ebb352a9a7cacc0ed8c83288f5eb22"
+      },
+      {
+        "id": "media-lawn-husqvarna-automower-410iq-card-webp-960",
+        "src": "/media/lawn/husqvarna-automower-410iq/card-960w.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 87128,
+        "checksum": "sha256:ff54eac0ff4a02e2822782733d569ca9fe6b0968b45e7e33a2446563235235fd"
+      },
+      {
+        "id": "media-lawn-husqvarna-automower-410iq-card-webp-1440",
+        "src": "/media/lawn/husqvarna-automower-410iq/card-1440w.webp",
+        "width": 1440,
+        "height": 960,
+        "bytes": 142150,
+        "checksum": "sha256:5cff812dd630bd619cd66f83bd1c6e4d2f8d464c0553fe1a849fa758da92e3f3"
+      }
+    ]
+  },
+  {
+    "source": "/media/lawn/worx-landroid-vision-wr320/card.webp",
+    "sourceWidth": 1536,
+    "sourceHeight": 1024,
+    "derivatives": [
+      {
+        "id": "media-lawn-worx-landroid-vision-wr320-card-webp-360",
+        "src": "/media/lawn/worx-landroid-vision-wr320/card-360w.webp",
+        "width": 360,
+        "height": 240,
+        "bytes": 19490,
+        "checksum": "sha256:e827f835957245afea40ffa410dbea60195c8b4c62dadb0bdbeb22f61601d31e"
+      },
+      {
+        "id": "media-lawn-worx-landroid-vision-wr320-card-webp-640",
+        "src": "/media/lawn/worx-landroid-vision-wr320/card-640w.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 52208,
+        "checksum": "sha256:bcc596d41624648025bb341a2e755a62fa9de2610df4b9c45599b0d7e6b8db40"
+      },
+      {
+        "id": "media-lawn-worx-landroid-vision-wr320-card-webp-960",
+        "src": "/media/lawn/worx-landroid-vision-wr320/card-960w.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 108362,
+        "checksum": "sha256:65078f7bb86449b77103971ce1effe14f6f1f47a2d118212ba2d5375093a2db4"
+      },
+      {
+        "id": "media-lawn-worx-landroid-vision-wr320-card-webp-1440",
+        "src": "/media/lawn/worx-landroid-vision-wr320/card-1440w.webp",
+        "width": 1440,
+        "height": 960,
+        "bytes": 181816,
+        "checksum": "sha256:f5519cba8d46307f2027cb443c752762dd66d576831c29c76b4017b1893028e1"
+      }
+    ]
+  },
+  {
+    "source": "/media/lawn/eufy-e15/card.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-lawn-eufy-e15-card-webp-360",
+        "src": "/media/lawn/eufy-e15/card-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 15496,
+        "checksum": "sha256:1e7d4df2f130fb1b4b2025c0d5ab2d314e51e643d75224b3449c5b5b952b19a1"
+      },
+      {
+        "id": "media-lawn-eufy-e15-card-webp-640",
+        "src": "/media/lawn/eufy-e15/card-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 38824,
+        "checksum": "sha256:9ae045af19af2a09ffac944b81b72ff7f68818bf31b89151bde6751e1a4f1442"
+      },
+      {
+        "id": "media-lawn-eufy-e15-card-webp-960",
+        "src": "/media/lawn/eufy-e15/card-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 74894,
+        "checksum": "sha256:30f45ca59f4dfbba76cd600002b72b5aa3f4584341906b0f8d1f84862627b531"
+      }
+    ]
+  },
+  {
+    "source": "/media/lawn/dreame-a3-awd-1000/card.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-lawn-dreame-a3-awd-1000-card-webp-360",
+        "src": "/media/lawn/dreame-a3-awd-1000/card-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 19720,
+        "checksum": "sha256:0ac3b4afbf777033d44d4076ae11ad2d217563218dd892afb7e7ceb875fbbc22"
+      },
+      {
+        "id": "media-lawn-dreame-a3-awd-1000-card-webp-640",
+        "src": "/media/lawn/dreame-a3-awd-1000/card-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 51606,
+        "checksum": "sha256:c795d51cb7da44ebdc0f4e6c3750cb9c6c132c260a56def73a9404a633a880ca"
+      },
+      {
+        "id": "media-lawn-dreame-a3-awd-1000-card-webp-960",
+        "src": "/media/lawn/dreame-a3-awd-1000/card-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 106690,
+        "checksum": "sha256:eb79e920a4bbcea21627bc9042dd8efd3bdf1ac114a3b56463312008e52024ee"
+      }
+    ]
+  },
+  {
+    "source": "/media/window/ecovacs-winbot-w2s/card.webp",
+    "sourceWidth": 1402,
+    "sourceHeight": 1122,
+    "derivatives": [
+      {
+        "id": "media-window-ecovacs-winbot-w2s-card-webp-360",
+        "src": "/media/window/ecovacs-winbot-w2s/card-360w.webp",
+        "width": 360,
+        "height": 288,
+        "bytes": 14144,
+        "checksum": "sha256:8124baa5362397c15ce59d6efffcdf5101e8905b934dbea79da763a820925971"
+      },
+      {
+        "id": "media-window-ecovacs-winbot-w2s-card-webp-640",
+        "src": "/media/window/ecovacs-winbot-w2s/card-640w.webp",
+        "width": 640,
+        "height": 512,
+        "bytes": 40574,
+        "checksum": "sha256:cc29a0bf19caf5527ea24424d45a6d5ef86e91efad5b14f3721c8e22a183f515"
+      },
+      {
+        "id": "media-window-ecovacs-winbot-w2s-card-webp-960",
+        "src": "/media/window/ecovacs-winbot-w2s/card-960w.webp",
+        "width": 960,
+        "height": 768,
+        "bytes": 80766,
+        "checksum": "sha256:bfbc164ddc2733b2c6d4394525977ace706f323521ab23cc10020b8ec5654989"
+      }
+    ]
+  },
+  {
+    "source": "/media/window/ecovacs-winbot-mini/card.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-window-ecovacs-winbot-mini-card-webp-360",
+        "src": "/media/window/ecovacs-winbot-mini/card-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 8640,
+        "checksum": "sha256:6fcf1e24801763c7e857474f0582a0f255fd629ba2e9785442149d73995351f8"
+      },
+      {
+        "id": "media-window-ecovacs-winbot-mini-card-webp-640",
+        "src": "/media/window/ecovacs-winbot-mini/card-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 21850,
+        "checksum": "sha256:7b2330877e4415a2eb09446b7942bd159b18917475f657c22e5204ee0addb161"
+      },
+      {
+        "id": "media-window-ecovacs-winbot-mini-card-webp-960",
+        "src": "/media/window/ecovacs-winbot-mini/card-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 44280,
+        "checksum": "sha256:21a0249a806feb82e2baf5f631da7650a9f1a08cb993ebda44b0387edbb57cd9"
+      }
+    ]
+  },
+  {
+    "source": "/media/coding/cozmo/card.webp",
+    "sourceWidth": 1536,
+    "sourceHeight": 1024,
+    "derivatives": [
+      {
+        "id": "media-coding-cozmo-card-webp-360",
+        "src": "/media/coding/cozmo/card-360w.webp",
+        "width": 360,
+        "height": 240,
+        "bytes": 5002,
+        "checksum": "sha256:9bcab01c660fc6a79e70f0012bc46d1062fb53d1d802b85cf6a9c68a48683958"
+      },
+      {
+        "id": "media-coding-cozmo-card-webp-640",
+        "src": "/media/coding/cozmo/card-640w.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 11490,
+        "checksum": "sha256:7166f383f36f24119e05a6d3035d2224b39d819e91889db2e6b42a795507372f"
+      },
+      {
+        "id": "media-coding-cozmo-card-webp-960",
+        "src": "/media/coding/cozmo/card-960w.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 21694,
+        "checksum": "sha256:445181cb3791fa49e6fbb5d75925febe37996ff9c560e34309db96d629ba511d"
+      },
+      {
+        "id": "media-coding-cozmo-card-webp-1440",
+        "src": "/media/coding/cozmo/card-1440w.webp",
+        "width": 1440,
+        "height": 960,
+        "bytes": 34382,
+        "checksum": "sha256:55da33e997a4840d95f6ca538fbe5efaa10b4445f30d64da2179b61a7cc22344"
+      }
+    ]
+  },
+  {
+    "source": "/media/companion/moxie/card.webp",
+    "sourceWidth": 1536,
+    "sourceHeight": 1024,
+    "derivatives": [
+      {
+        "id": "media-companion-moxie-card-webp-360",
+        "src": "/media/companion/moxie/card-360w.webp",
+        "width": 360,
+        "height": 240,
+        "bytes": 3502,
+        "checksum": "sha256:00d94bee9aa578e19fe55e977627e6b9ffae73674dc0a03913f94592b7cec60c"
+      },
+      {
+        "id": "media-companion-moxie-card-webp-640",
+        "src": "/media/companion/moxie/card-640w.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 8378,
+        "checksum": "sha256:693928dc91cde8b74b41ae83ada6f090494815128faaa3a35d6796d43f650a4f"
+      },
+      {
+        "id": "media-companion-moxie-card-webp-960",
+        "src": "/media/companion/moxie/card-960w.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 16774,
+        "checksum": "sha256:f7900e61eb38013ed12f78237ab95e2aae9f69f1b6979a265f64a8fe8f38928c"
+      },
+      {
+        "id": "media-companion-moxie-card-webp-1440",
+        "src": "/media/companion/moxie/card-1440w.webp",
+        "width": 1440,
+        "height": 960,
+        "bytes": 29240,
+        "checksum": "sha256:1209e028bbddea528dd812cf81240e2108a9a36abc7898cd3666a2d4553ef631"
+      }
+    ]
+  },
+  {
     "source": "/media/home/hero-desktop.webp",
     "sourceWidth": 1672,
     "sourceHeight": 941,
@@ -7814,32 +8311,40 @@
   },
   {
     "source": "/media/companion/joy-for-all/card.webp",
-    "sourceWidth": 1254,
-    "sourceHeight": 1254,
+    "sourceWidth": 1536,
+    "sourceHeight": 1024,
     "derivatives": [
       {
         "id": "media-companion-joy-for-all-card-webp-360",
         "src": "/media/companion/joy-for-all/card-360w.webp",
         "width": 360,
-        "height": 360,
-        "bytes": 18702,
-        "checksum": "sha256:06781ab51fedc9c529dce21edc903cf187b7becab54abb425b759918652cc18c"
+        "height": 240,
+        "bytes": 3738,
+        "checksum": "sha256:84c11565c0f0c23ef56752b5cbe44f4b282c197df68b17e41061c3462364d9f8"
       },
       {
         "id": "media-companion-joy-for-all-card-webp-640",
         "src": "/media/companion/joy-for-all/card-640w.webp",
         "width": 640,
-        "height": 640,
-        "bytes": 51406,
-        "checksum": "sha256:083a1272b2b6de3f79c5e3531b043ea4c07f8764a07c11986d950ca4bdb6a37e"
+        "height": 427,
+        "bytes": 10344,
+        "checksum": "sha256:c8cf4c27526a429e84b3544eaf4aa74df4e9843824cd162aad61dc9643a04f7c"
       },
       {
         "id": "media-companion-joy-for-all-card-webp-960",
         "src": "/media/companion/joy-for-all/card-960w.webp",
         "width": 960,
+        "height": 640,
+        "bytes": 24620,
+        "checksum": "sha256:0862266b7a258bfb7321192e318dccf9100b4bd73f24a7abb74c02914e8bedd3"
+      },
+      {
+        "id": "media-companion-joy-for-all-card-webp-1440",
+        "src": "/media/companion/joy-for-all/card-1440w.webp",
+        "width": 1440,
         "height": 960,
-        "bytes": 102038,
-        "checksum": "sha256:5b9e033f99e4f2f42b1653905152835fe913f7b7373eb316d45e19e647db20a9"
+        "bytes": 43950,
+        "checksum": "sha256:edd39a1d43063d5c50207497a692fbdcbb779458a4901cd7184db6e9a5fe0601"
       }
     ]
   },

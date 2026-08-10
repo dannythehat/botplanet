@@ -1,178 +1,130 @@
 [
   {
-    "to": "/media/coding/sphero-bolt/hero.webp",
-    "checksum": "sha256:f0d78c640d2cddaec14457950be2c03bd13afbacf4f182751f831f5d2a70a7c9",
-    "width": 1536,
-    "height": 1024,
-    "bytes": 175292,
-    "saved": 1985434
-  },
-  {
-    "to": "/media/coding/sphero-bolt/figure-1.webp",
-    "checksum": "sha256:d9cc90703d1aa1b3ae78d1ec79cd990fbe9d85829fe28cfe3637158361836cc1",
+    "to": "media/litter/litter-robot-4/card.webp",
+    "checksum": "sha256:47c50cf6bc7ac7b4b3a99225bfe0d8c61ee770445538c31104d6f9684a3b2648",
     "width": 1254,
     "height": 1254,
-    "bytes": 168350,
-    "saved": 1835451
+    "bytes": 123926,
+    "saved": 1614206
   },
   {
-    "to": "/media/coding/sphero-bolt/figure-2.webp",
-    "checksum": "sha256:72eb2ca84498198729ff0ed2c1bdf15e7b0d4b172c6ca71aba12584c6553b6c4",
-    "width": 1536,
-    "height": 1024,
-    "bytes": 143350,
-    "saved": 1918123
-  },
-  {
-    "to": "/media/coding/sphero-bolt/card.webp",
-    "checksum": "sha256:602e7b6d70dea52ec5ed102ed58a6276f144e837bec6ac026cd40ac6b2f78de6",
-    "width": 1536,
-    "height": 1024,
-    "bytes": 97148,
-    "saved": 1964141
-  },
-  {
-    "to": "/media/coding/sphero-mini/hero.webp",
-    "checksum": "sha256:08913966118f84eaa75b46fa1a22e9de78291416c1f2cfb0370037e69fc3fb42",
+    "to": "media/litter/petkit-purobot-max-pro-2/card.webp",
+    "checksum": "sha256:fe0d8be86d345b68b261872d732e93bbbecc8c5d9efc11c3e23dea5b4da2cac6",
     "width": 1254,
     "height": 1254,
-    "bytes": 123350,
-    "saved": 1566316
+    "bytes": 129262,
+    "saved": 1688466
   },
   {
-    "to": "/media/coding/sphero-mini/figure-1.webp",
-    "checksum": "sha256:23da0d663615edd7fae92ec68b5bcb2055e859954e13c723b3167e458bd22c99",
-    "width": 1536,
-    "height": 1024,
-    "bytes": 163358,
-    "saved": 1996764
-  },
-  {
-    "to": "/media/coding/sphero-mini/figure-2.webp",
-    "checksum": "sha256:fa69bb411b32d2310bb679a9269ca62361fca5479c7b5a99f3aa407f89340e97",
-    "width": 1536,
-    "height": 1024,
-    "bytes": 105980,
-    "saved": 1841094
-  },
-  {
-    "to": "/media/coding/sphero-mini/card.webp",
-    "checksum": "sha256:7da2797634c65323fa6748ddfc5bbaff502a2d1d3aef2c598f4043705dc02300",
-    "width": 1536,
-    "height": 1024,
-    "bytes": 229308,
-    "saved": 2312051
-  },
-  {
-    "to": "/media/coding/sphero-indi/panel-overview.webp",
-    "checksum": "sha256:f4b9d39730bab6be4a97c607eb2e6efc5ea0b5a8122492e4b6fe2727612ad1b9",
+    "to": "media/litter/casa-leo-loo-too/card.webp",
+    "checksum": "sha256:cd14a15eafc3f56159c374eb26bbe98c1a9edc1847726bec73b9ccb622be03fd",
     "width": 1254,
     "height": 1254,
-    "bytes": 177958,
-    "saved": 1851823
+    "bytes": 140436,
+    "saved": 1795378
   },
   {
-    "to": "/media/coding/sphero-indi/hero.webp",
-    "checksum": "sha256:2d246789807231e1e9a5196439d35c93ffd37d2c188f01623753f6e1687c4dc5",
+    "to": "media/litter/petsafe-scoopfree-crystal-pro/card.webp",
+    "checksum": "sha256:c4a4fea95cdda056aa6d1482ad16ef3b6c7e320a4244b6ef240051903c68c194",
     "width": 1254,
     "height": 1254,
-    "bytes": 147028,
-    "saved": 1783144
+    "bytes": 150498,
+    "saved": 1724281
   },
   {
-    "to": "/media/coding/sphero-indi/figure-1.webp",
-    "checksum": "sha256:cbae2a87ef541a555baeebaa8064ab70d95915e496b39dd25337203383edfc35",
+    "to": "media/lawn/segway-navimow-i110n/card.webp",
+    "checksum": "sha256:6bce3c8ca9faefc713bce3cc432c6b7ed3261928fff293a094be175a82a56977",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 321118,
+    "saved": 2115951
+  },
+  {
+    "to": "media/lawn/mammotion-luba-3-awd-1500h/card.webp",
+    "checksum": "sha256:96e1b03e712792b8cfaccb355952090f81e78a3904c331723a9af61331f6cdbb",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 230966,
+    "saved": 1904375
+  },
+  {
+    "to": "media/lawn/mammotion-luba-3-awd-3000h/card.webp",
+    "checksum": "sha256:3a04fca85c6891b0b0cdb01bd37a1a9fb05f47c84cdafe3b29a640869c604f8b",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 237326,
+    "saved": 1995556
+  },
+  {
+    "to": "media/lawn/husqvarna-automower-410iq/card.webp",
+    "checksum": "sha256:bbb46f33126378081a9005851d9589157011b757e50b1a590cb10b658f104250",
     "width": 1536,
     "height": 1024,
-    "bytes": 128712,
-    "saved": 1940875
+    "bytes": 229470,
+    "saved": 1961348
   },
   {
-    "to": "/media/coding/sphero-indi/figure-2.webp",
-    "checksum": "sha256:aee95af1e12caf2229595de93a04ff8fbffd8c5d76f2841796b0be0bf59df2ff",
+    "to": "media/lawn/worx-landroid-vision-wr320/card.webp",
+    "checksum": "sha256:8f9b017305318ae186d369188f480f8305715484899b7ce206fd3bb668d9f43d",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 295904,
+    "saved": 2029819
+  },
+  {
+    "to": "media/lawn/eufy-e15/card.webp",
+    "checksum": "sha256:a94a50ac9f0a14d04b8ec540280444345f77cce6f15938496b1aa525d65c0fc1",
     "width": 1254,
     "height": 1254,
-    "bytes": 142254,
-    "saved": 1834954
+    "bytes": 157248,
+    "saved": 1755906
   },
   {
-    "to": "/media/coding/sphero-indi/card.webp",
-    "checksum": "sha256:45ed7e79cdb00d8e68e65c072f781ee674f82f0dd3024915b4f7d2184bf0f2b5",
+    "to": "media/lawn/dreame-a3-awd-1000/card.webp",
+    "checksum": "sha256:267cd1ad4cdc503e097901fc0d559c0c5ca7f2494c2d94f53bc4e2941df661f1",
     "width": 1254,
     "height": 1254,
-    "bytes": 131946,
-    "saved": 1797790
+    "bytes": 225294,
+    "saved": 1815030
   },
   {
-    "to": "/media/coding/ozobot-evo/hero.webp",
-    "checksum": "sha256:df0e47a9634bdb49e67f9d93d6d64cb1ddb6bbea0aa5f50b7fdadddbd80a4284",
-    "width": 1676,
-    "height": 1357,
-    "bytes": 186046,
-    "saved": 3166
+    "to": "media/window/ecovacs-winbot-w2s/card.webp",
+    "checksum": "sha256:dc264f77e1a8fbabbd40bdcd8632ba78e54d5d9f360f07c2e056ed228757b3f8",
+    "width": 1402,
+    "height": 1122,
+    "bytes": 187316,
+    "saved": 1795466
   },
   {
-    "to": "/media/coding/ozobot-evo/figure-1.webp",
-    "checksum": "sha256:6423cdab88bb432fa427684999520208da8ce507f78892a5add8ca109d092d92",
-    "width": 1080,
-    "height": 1130,
-    "bytes": 62074,
-    "saved": 46472
+    "to": "media/window/ecovacs-winbot-mini/card.webp",
+    "checksum": "sha256:793a7f0fe268424e8f326c2eba6278adf36cba4fbcbb038040f1bbc5f419859c",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 114188,
+    "saved": 1636700
   },
   {
-    "to": "/media/coding/ozobot-evo/figure-2.webp",
-    "checksum": "sha256:08fe7821eb6bca06d23c05535a8cb234c69e95624a284e6e02dce6ae667d939e",
-    "width": 1855,
-    "height": 1289,
-    "bytes": 303836,
-    "saved": 332665
+    "to": "media/companion/joy-for-all/card.webp",
+    "checksum": "sha256:dc015febbb9a41e1d681a84a19cdc8659802824035e2a2e7df06cbf9f4cbb79e",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 86232,
+    "saved": 1515995
   },
   {
-    "to": "/media/coding/ozobot-evo/card.webp",
-    "checksum": "sha256:6e4a7cd8ae0d495df6a990b505aa14b7c60a9455c3ac3e99843915b159851cfc",
-    "width": 1080,
-    "height": 1130,
-    "bytes": 143594,
-    "saved": -5940
+    "to": "media/coding/cozmo/card.webp",
+    "checksum": "sha256:42eca1e2e25da8c22f4454f48d210018c4f32349dcec883c1554086f1d437614",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 56706,
+    "saved": 1407712
   },
   {
-    "to": "/media/coding/makeblock-mbot/panel-app.webp",
-    "checksum": "sha256:3e82f45a099b5ce2dbac3c1f9d5467da89fbe547298ffc686733d0c7052332e8",
-    "width": 500,
-    "height": 300,
-    "bytes": 25148,
-    "saved": 12541
-  },
-  {
-    "to": "/media/coding/makeblock-mbot/hero.webp",
-    "checksum": "sha256:eab590b597ebb176c7b666bcd1eba735db85b4ebe832767e5023988fb1fe2768",
-    "width": 773,
-    "height": 400,
-    "bytes": 31200,
-    "saved": 203500
-  },
-  {
-    "to": "/media/coding/makeblock-mbot/figure-1.webp",
-    "checksum": "sha256:eb4efe53e49adbe1e9f28628fbb87d6463044e8cb96dd414ee5d8bda76863eda",
-    "width": 1024,
-    "height": 768,
-    "bytes": 100922,
-    "saved": 3144
-  },
-  {
-    "to": "/media/coding/makeblock-mbot/figure-2.webp",
-    "checksum": "sha256:62ce5ab166e6128098ff34fb81ba278caed30d60145e38f1c074af864669812a",
-    "width": 1500,
-    "height": 1500,
-    "bytes": 332624,
-    "saved": -32473
-  },
-  {
-    "to": "/media/coding/makeblock-mbot/card.webp",
-    "checksum": "sha256:a6f40610fff33794189c90c5e6729eb3b65657ebda6dd3f85ddcca769eb433fe",
-    "width": 1000,
-    "height": 1000,
-    "bytes": 69200,
-    "saved": 35931
+    "to": "media/companion/moxie/card.webp",
+    "checksum": "sha256:dbc31ef02bce63d499c82973d70bc2043506e0da8ced297c0546078afa5c1b28",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 55556,
+    "saved": 1460511
   }
 ]

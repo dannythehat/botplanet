@@ -2792,6 +2792,280 @@ export const PLACEHOLDER_ASSETS: MediaAssetRecord[] = manifest.map((m): MediaAss
  * docs/seo/notion-upload-audit-2026-08-09.md.
  */
 export const AUGUST_UPLOAD_ASSETS: MediaAssetRecord[] = [
+
+/* ============================================================
+   TIER-1 LISTING CARDS — supplied 10 August 2026.
+
+   SIXTEEN PRODUCTS WERE LIVE WITH AN EMPTY SPACE WHERE THEIR
+   PICTURE GOES. These fill every one of them.
+
+   TYPED `branded_placeholder`, NOT `product_hero`, AND THE
+   DISTINCTION IS DELIBERATE. Fourteen of the sixteen are branded
+   BotPlanet panels with the product's NAME set into the pixels and
+   a styled surround. That is exactly what this type exists for: a
+   BotPlanet-authored image standing in the card slot. It resolves
+   the listing card — see lib/media-registry.ts, which falls back
+   through `product_hero` then `branded_placeholder` — so every
+   empty slot fills, while `depictsRealProduct: false` and
+   ORIGINAL_SCHEMA keep them out of Product structured data, where
+   an AI-rendered panel has no business claiming to be the
+   manufacturer's product image.
+
+   TWO ARE PLAIN AND ARE TYPED AS DEPICTIONS: Cozmo and Moxie
+   arrived as clean product shots on white with no text, which is
+   what a card should be.
+
+   ONE HONEST RESERVATION, RECORDED RATHER THAN ACTED ON. A card is
+   served at 360px in a grid, and a product name set into the
+   picture is an illegible smear at that size — the same reason the
+   Joy For All slot was left empty on 9 August. The owner decision
+   of 9 August is that all supplied artwork is used and set-aside is
+   not an outcome available here, so these ship. The fix, if it is
+   ever wanted, is a re-render without the name: Cozmo and Moxie
+   below show exactly what that looks like.
+   ============================================================ */
+
+  {
+    ...base("litter-robot-4-card", "illustration"),
+    productId: "prod-litter-robot-4",
+    purpose: "Litter-Robot 4 — listing card",
+    exactModel: "Litter-Robot 4",
+    type: "branded_placeholder",
+    checksum: "sha256:47c50cf6bc7ac7b4b3a99225bfe0d8c61ee770445538c31104d6f9684a3b2648",
+    width: 1254,
+    height: 1254,
+    src: "/media/litter/litter-robot-4/card.webp",
+    altText:
+      "A BotPlanet card for the Litter-Robot 4: the tall black globe-and-base unit in a dark utility room with a tabby cat standing beside it, with the model name and the BotPlanet logo set into the image.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+  },
+  {
+    ...base("petkit-purobot-max-pro-2-card", "illustration"),
+    productId: "prod-petkit-purobot-max-pro-2",
+    purpose: "PETKIT Purobot Max Pro 2 — listing card",
+    exactModel: "PETKIT Purobot Max Pro 2",
+    type: "branded_placeholder",
+    checksum: "sha256:fe0d8be86d345b68b261872d732e93bbbecc8c5d9efc11c3e23dea5b4da2cac6",
+    width: 1254,
+    height: 1254,
+    src: "/media/litter/petkit-purobot-max-pro-2/card.webp",
+    altText:
+      "A BotPlanet card for the PETKIT Purobot Max Pro 2: the drum unit with its wide opening facing the camera, with the model name and the BotPlanet logo set into the image.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+  },
+  {
+    ...base("casa-leo-loo-too-card", "illustration"),
+    productId: "prod-casa-leo-loo-too",
+    purpose: "Casa Leo Leo’s Loo Too — listing card",
+    exactModel: "Casa Leo Leo’s Loo Too",
+    type: "branded_placeholder",
+    checksum: "sha256:cd14a15eafc3f56159c374eb26bbe98c1a9edc1847726bec73b9ccb622be03fd",
+    width: 1254,
+    height: 1254,
+    src: "/media/litter/casa-leo-loo-too/card.webp",
+    altText:
+      "A BotPlanet card for the Casa Leo Leo’s Loo Too: the domed unit on a plain floor, with the model name and the BotPlanet logo set into the image.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+  },
+  {
+    ...base("petsafe-scoopfree-crystal-pro-card", "illustration"),
+    productId: "prod-petsafe-scoopfree-crystal-pro",
+    purpose: "PetSafe ScoopFree Crystal Pro — listing card",
+    exactModel: "PetSafe ScoopFree Crystal Pro",
+    type: "branded_placeholder",
+    checksum: "sha256:c4a4fea95cdda056aa6d1482ad16ef3b6c7e320a4244b6ef240051903c68c194",
+    width: 1254,
+    height: 1254,
+    src: "/media/litter/petsafe-scoopfree-crystal-pro/card.webp",
+    altText:
+      "A BotPlanet card for the PetSafe ScoopFree Crystal Pro: the white flat-tray unit with a hooded cover and a cat standing on the tray, with the model name and the BotPlanet logo set into the image.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+  },
+  {
+    ...base("segway-navimow-i110n-card", "illustration"),
+    productId: "prod-navimow-i110n",
+    purpose: "Segway Navimow i110N — listing card",
+    exactModel: "Segway Navimow i110N",
+    type: "branded_placeholder",
+    checksum: "sha256:6bce3c8ca9faefc713bce3cc432c6b7ed3261928fff293a094be175a82a56977",
+    width: 1254,
+    height: 1254,
+    src: "/media/lawn/segway-navimow-i110n/card.webp",
+    altText:
+      "A BotPlanet card for the Segway Navimow i110N: the mower on cut grass with no dock in frame, with the model name and the BotPlanet logo set into the image.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+  },
+  {
+    ...base("mammotion-luba-3-awd-1500h-card", "illustration"),
+    productId: "prod-luba-3-awd-1500h",
+    purpose: "Mammotion LUBA 3 AWD 1500H — listing card",
+    exactModel: "Mammotion LUBA 3 AWD 1500H",
+    type: "branded_placeholder",
+    checksum: "sha256:96e1b03e712792b8cfaccb355952090f81e78a3904c331723a9af61331f6cdbb",
+    width: 1254,
+    height: 1254,
+    src: "/media/lawn/mammotion-luba-3-awd-1500h/card.webp",
+    altText:
+      "A BotPlanet card for the Mammotion LUBA 3 AWD 1500H: the white and orange all-wheel-drive mower on a lawn with all four wheels visible, with the model name and the BotPlanet logo set into the image.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+  },
+  {
+    ...base("mammotion-luba-3-awd-3000h-card", "illustration"),
+    productId: "prod-luba-3-awd-3000h",
+    purpose: "Mammotion LUBA 3 AWD 3000H — listing card",
+    exactModel: "Mammotion LUBA 3 AWD 3000H",
+    type: "branded_placeholder",
+    checksum: "sha256:3a04fca85c6891b0b0cdb01bd37a1a9fb05f47c84cdafe3b29a640869c604f8b",
+    width: 1254,
+    height: 1254,
+    src: "/media/lawn/mammotion-luba-3-awd-3000h/card.webp",
+    altText:
+      "A BotPlanet card for the Mammotion LUBA 3 AWD 3000H: the all-wheel-drive mower on a lawn, same angle as the 1500H, with the model name and the BotPlanet logo set into the image.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+  },
+  {
+    ...base("husqvarna-automower-410iq-card", "illustration"),
+    productId: "prod-automower-410iq",
+    purpose: "Husqvarna Automower 410iQ — listing card",
+    exactModel: "Husqvarna Automower 410iQ",
+    type: "branded_placeholder",
+    checksum: "sha256:bbb46f33126378081a9005851d9589157011b757e50b1a590cb10b658f104250",
+    width: 1536,
+    height: 1024,
+    src: "/media/lawn/husqvarna-automower-410iq/card.webp",
+    altText:
+      "A BotPlanet card for the Husqvarna Automower 410iQ: the mower on grass with no boundary wire in shot, with the model name and the BotPlanet logo set into the image.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+  },
+  {
+    ...base("worx-landroid-vision-wr320-card", "illustration"),
+    productId: "prod-worx-landroid-vision-wr320",
+    purpose: "WORX Landroid Vision Cloud WR320 — listing card",
+    exactModel: "WORX Landroid Vision Cloud WR320",
+    type: "branded_placeholder",
+    checksum: "sha256:8f9b017305318ae186d369188f480f8305715484899b7ce206fd3bb668d9f43d",
+    width: 1536,
+    height: 1024,
+    src: "/media/lawn/worx-landroid-vision-wr320/card.webp",
+    altText:
+      "A BotPlanet card for the WORX Landroid Vision Cloud WR320: the orange-bodied mower on grass, with the model name and the BotPlanet logo set into the image.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+  },
+  {
+    ...base("eufy-e15-card", "illustration"),
+    productId: "prod-eufy-e15",
+    purpose: "eufy Robot Lawn Mower E15 — listing card",
+    exactModel: "eufy Robot Lawn Mower E15",
+    type: "branded_placeholder",
+    checksum: "sha256:a94a50ac9f0a14d04b8ec540280444345f77cce6f15938496b1aa525d65c0fc1",
+    width: 1254,
+    height: 1254,
+    src: "/media/lawn/eufy-e15/card.webp",
+    altText:
+      "A BotPlanet card for the eufy Robot Lawn Mower E15: the mower on grass with its front camera housing visible, with the model name and the BotPlanet logo set into the image.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+  },
+  {
+    ...base("dreame-a3-awd-1000-card", "illustration"),
+    productId: "prod-dreame-a3-awd-1000",
+    purpose: "DREAME A3 AWD 1000 — listing card",
+    exactModel: "DREAME A3 AWD 1000",
+    type: "branded_placeholder",
+    checksum: "sha256:267cd1ad4cdc503e097901fc0d559c0c5ca7f2494c2d94f53bc4e2941df661f1",
+    width: 1254,
+    height: 1254,
+    src: "/media/lawn/dreame-a3-awd-1000/card.webp",
+    altText:
+      "A BotPlanet card for the DREAME A3 AWD 1000: the mower on grass with the LiDAR turret on top, with the model name and the BotPlanet logo set into the image.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+  },
+  {
+    ...base("ecovacs-winbot-w2s-card", "illustration"),
+    productId: "prod-ecovacs-winbot-w2s",
+    purpose: "ECOVACS WINBOT W2S — listing card",
+    exactModel: "ECOVACS WINBOT W2S",
+    type: "branded_placeholder",
+    checksum: "sha256:dc264f77e1a8fbabbd40bdcd8632ba78e54d5d9f360f07c2e056ed228757b3f8",
+    width: 1402,
+    height: 1122,
+    src: "/media/window/ecovacs-winbot-w2s/card.webp",
+    altText:
+      "A BotPlanet card for the ECOVACS WINBOT W2S: the window robot alone on clear glass with no station in frame, with the model name and the BotPlanet logo set into the image.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+  },
+  {
+    ...base("ecovacs-winbot-mini-card", "illustration"),
+    productId: "prod-ecovacs-winbot-mini",
+    purpose: "ECOVACS WINBOT Mini — listing card",
+    exactModel: "ECOVACS WINBOT Mini",
+    type: "branded_placeholder",
+    checksum: "sha256:793a7f0fe268424e8f326c2eba6278adf36cba4fbcbb038040f1bbc5f419859c",
+    width: 1254,
+    height: 1254,
+    src: "/media/window/ecovacs-winbot-mini/card.webp",
+    altText:
+      "A BotPlanet card for the ECOVACS WINBOT Mini: the small window robot alone on a plain background, with the model name and the BotPlanet logo set into the image.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+  },
+  {
+    ...base("cozmo-card", "depiction"),
+    productId: "prod-cozmo",
+    purpose: "Cozmo — listing card",
+    exactModel: "Cozmo",
+    type: "product_hero",
+    checksum: "sha256:42eca1e2e25da8c22f4454f48d210018c4f32349dcec883c1554086f1d437614",
+    width: 1536,
+    height: 1024,
+    src: "/media/coding/cozmo/card.webp",
+    altText:
+      "A clean studio shot of the small white and red tracked robot alone on a plain white background.",
+    altTextStatus: "approved",
+    schema: DEPICTION_SCHEMA,
+    depictsRealProduct: true,
+  },
+  {
+    ...base("moxie-card", "depiction"),
+    productId: "prod-moxie",
+    purpose: "Moxie — listing card",
+    exactModel: "Moxie",
+    type: "product_hero",
+    checksum: "sha256:dbc31ef02bce63d499c82973d70bc2043506e0da8ced297c0546078afa5c1b28",
+    width: 1536,
+    height: 1024,
+    src: "/media/companion/moxie/card.webp",
+    altText:
+      "A clean studio shot of the robot alone on a plain background.",
+    altTextStatus: "approved",
+    schema: DEPICTION_SCHEMA,
+    depictsRealProduct: true,
+  },
+
   /* FIVE PRODUCTS RESOLVED NO LISTING CARD, found on 9 August 2026 by asking
      the registry rather than by looking at a page. resolveImage(id,
      "listing_card") returns the first `product_hero` for a product, and these
@@ -3578,10 +3852,17 @@ export const AUGUST_UPLOAD_ASSETS: MediaAssetRecord[] = [
     productId: "prod-joy-for-all-companion-pets",
     purpose: "Robotic pets for elderly relatives — Joy For All card",
     exactModel: "Joy For All Companion Pet Cat, B7594 (Silver with White Mitts)",
-    type: "promotional_panel",
-    checksum: "sha256:f06043fefd8d3303273ed5fdd95cb04b3340d7bfb1058468e7dc3e0942b3b4f2",
-    width: 1254,
-    height: 1254,
+    /* `branded_placeholder`, not `promotional_panel`, and that one word is what
+       fills the slot. The listing card resolves through product_hero then
+       branded_placeholder — see lib/media-registry.ts — and a promotional panel
+       is in neither chain, so this card sat in the register with its artwork on
+       disk and the grid space still blank. Same file, same schema, same
+       depictsRealProduct: false; only the type it is filed under, now matching
+       the fourteen cards it arrived beside. */
+    type: "branded_placeholder",
+    checksum: "sha256:dc015febbb9a41e1d681a84a19cdc8659802824035e2a2e7df06cbf9f4cbb79e",
+    width: 1536,
+    height: 1024,
     src: "/media/companion/joy-for-all/card.webp",
     altText:
       "The Joy For All companion cat in silver with white mitts, lying with its paws forward, beside two inset photographs of older people holding one.",

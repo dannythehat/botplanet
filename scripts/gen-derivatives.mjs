@@ -84,6 +84,26 @@ async function derive(src) {
    ("pool", "window", "lawn-category"), not for the category slug.
    @extension-check manual */
 const SOURCES = [
+  /* TIER-1 LISTING CARDS, 10 August 2026. Sixteen products were live with an
+     empty grid slot; these are the files that fill them. Added here as well as
+     to the media registry, because this list is hand-maintained and a card
+     missing from it is served at full authored size to a phone that needs
+     360px of it — a 200KB image where 10KB would do. */
+  "/media/litter/litter-robot-4/card.webp",
+  "/media/litter/petkit-purobot-max-pro-2/card.webp",
+  "/media/litter/casa-leo-loo-too/card.webp",
+  "/media/litter/petsafe-scoopfree-crystal-pro/card.webp",
+  "/media/lawn/segway-navimow-i110n/card.webp",
+  "/media/lawn/mammotion-luba-3-awd-1500h/card.webp",
+  "/media/lawn/mammotion-luba-3-awd-3000h/card.webp",
+  "/media/lawn/husqvarna-automower-410iq/card.webp",
+  "/media/lawn/worx-landroid-vision-wr320/card.webp",
+  "/media/lawn/eufy-e15/card.webp",
+  "/media/lawn/dreame-a3-awd-1000/card.webp",
+  "/media/window/ecovacs-winbot-w2s/card.webp",
+  "/media/window/ecovacs-winbot-mini/card.webp",
+  "/media/coding/cozmo/card.webp",
+  "/media/companion/moxie/card.webp",
   "/media/home/hero-desktop.webp",
   "/media/home/hero-mobile.webp",
   "/media/botmatch/explainer-desktop.webp",
