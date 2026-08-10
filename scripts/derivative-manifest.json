@@ -124,6 +124,68 @@
     ]
   },
   {
+    "source": "media/botmatch/finder-companion.webp",
+    "sourceWidth": 1024,
+    "sourceHeight": 1536,
+    "derivatives": [
+      {
+        "id": "media-botmatch-finder-companion-webp-360",
+        "src": "media/botmatch/finder-companion-360w.webp",
+        "width": 360,
+        "height": 540,
+        "bytes": 27760,
+        "checksum": "sha256:dd2b7ab469acce27d9124605b4dfffb1896194273a3e1ffb18dc43faa939782b"
+      },
+      {
+        "id": "media-botmatch-finder-companion-webp-640",
+        "src": "media/botmatch/finder-companion-640w.webp",
+        "width": 640,
+        "height": 960,
+        "bytes": 69314,
+        "checksum": "sha256:4748784d63ebfffea02c65dfafc4d4a7de5d9b964bcfda83177ab07d72ae1680"
+      },
+      {
+        "id": "media-botmatch-finder-companion-webp-960",
+        "src": "media/botmatch/finder-companion-960w.webp",
+        "width": 960,
+        "height": 1440,
+        "bytes": 129820,
+        "checksum": "sha256:f8bade14d01d7edcd16a7fd2f2dcf176593537df6e401ccd98a58f2153625987"
+      }
+    ]
+  },
+  {
+    "source": "media/botmatch/finder-petcam.webp",
+    "sourceWidth": 1122,
+    "sourceHeight": 1402,
+    "derivatives": [
+      {
+        "id": "media-botmatch-finder-petcam-webp-360",
+        "src": "media/botmatch/finder-petcam-360w.webp",
+        "width": 360,
+        "height": 450,
+        "bytes": 32896,
+        "checksum": "sha256:22268c078ccbb14bbc66b9044390c2e2dbe36b9c5e01eb19145762fe614e3bdf"
+      },
+      {
+        "id": "media-botmatch-finder-petcam-webp-640",
+        "src": "media/botmatch/finder-petcam-640w.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 81846,
+        "checksum": "sha256:31be7e03da42e6f967b5452440e3ecf18643a4168c46e46729b91bcb2b6c6834"
+      },
+      {
+        "id": "media-botmatch-finder-petcam-webp-960",
+        "src": "media/botmatch/finder-petcam-960w.webp",
+        "width": 960,
+        "height": 1200,
+        "bytes": 159398,
+        "checksum": "sha256:3fc60f79ddd4cd669113d974afc4565842be94776806558b6180e6763476d5d6"
+      }
+    ]
+  },
+  {
     "source": "media/botmatch/finder-window.webp",
     "sourceWidth": 1122,
     "sourceHeight": 1402,

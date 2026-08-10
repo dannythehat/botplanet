@@ -2832,6 +2832,43 @@ export const AUGUST_UPLOAD_ASSETS: MediaAssetRecord[] = [
     depictsRealProduct: false,
   },
   {
+    ...base("finder-card-petcam", "illustration"),
+    productId: null,
+    purpose: "Pet camera hub — Bot Finder card",
+    exactModel: null,
+    type: "promotional_panel",
+    checksum: "sha256:89e43f1765387df96ca21ae515f11172173caa6f3ebf1a2215d97e2fd468c7a0",
+    width: 1122,
+    height: 1402,
+    src: "/media/botmatch/finder-petcam.webp",
+    altText:
+      "A BotPlanet card headed \u201cAnimal photography bots\u201d, showing four wheeled pet camera robots on a lit platform, with photographs above of a dog leaping over a pool, a child playing with a puppy beside one, and a cat watching another, and labels reading pet monitoring, playful interaction, night viewing and home-friendly design.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+  },
+  {
+    ...base("finder-card-companion", "illustration"),
+    productId: null,
+    purpose: "Companion hub — Bot Finder card",
+    exactModel: null,
+    type: "promotional_panel",
+    checksum: "sha256:5d46626dcba4047fd15a3b23fd417aecd61b2594175856d422f73db4ab035581",
+    width: 1024,
+    height: 1536,
+    src: "/media/botmatch/finder-companion.webp",
+    /* The machines in this one are RENDERED LIKENESSES, close enough to name —
+       one carries the word "Eilik" on its chest. depictsRealProduct stays
+       false and the record stays out of Product schema for exactly that
+       reason: a drawing that resembles a product is not that product's
+       photograph, and must never stand as one. */
+    altText:
+      "A BotPlanet card headed \u201cCompanion robots \u2014 smart picks, real personality\u201d, showing five desk and pet companion robots together on a rug in a dark living room, with labels reading expressive personalities, desk buddies, pet-like companions and family-friendly picks, and a line reading \u201cFind your perfect companion robot in 60 seconds\u201d.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+  },
+  {
     ...base("finder-card-litter", "illustration"),
     productId: null,
     purpose: "Litter hub — Bot Finder card",

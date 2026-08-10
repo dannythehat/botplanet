@@ -1,10 +1,10 @@
 {
   "launchProducts": 12,
   "totals": {
-    "assets": 296,
+    "assets": 298,
     "productAssets": 190,
     "depictions": 139,
-    "illustrations": 146,
+    "illustrations": 148,
     "placeholders": 11,
     "withdrawn": 0,
     "exactModelConfirmed": 12,
@@ -12,12 +12,12 @@
     "heroReady": 11,
     "fullSetReady": 11,
     "derivatives": 916,
-    "altApproved": 282,
+    "altApproved": 284,
     "altDecorative": 14,
     "altMissing": 0,
     "altRejected": 0,
     "schemaProductEligible": 125,
-    "schemaOpenGraphEligible": 296
+    "schemaOpenGraphEligible": 298
   },
   "rows": [
     {

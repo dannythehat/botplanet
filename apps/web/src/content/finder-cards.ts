@@ -126,6 +126,38 @@ export const FINDER_CARDS: Record<string, FinderCard> = {
       "open-entry options, odor-control designs and multi-cat homes, and a line reading " +
       "\u201cFind your perfect cat litter robot in 60 seconds\u201d.",
   },
+
+  "companion-robots": {
+    key: "companion-robots",
+    src: "/media/botmatch/finder-companion.webp",
+    width: 1024,
+    height: 1536,
+    label: "Find my companion",
+    /* Frame band y 1302–1450 of 1536. */
+    cta: { centreY: "89.58%", width: "76%", height: "6.9%" },
+    alt:
+      "A BotPlanet card headed \u201cCompanion robots \u2014 smart picks, real personality\u201d, " +
+      "showing five desk and pet companion robots together on a rug in a dark living room, " +
+      "with labels reading expressive personalities, desk buddies, pet-like companions and " +
+      "family-friendly picks, and a line reading \u201cFind your perfect companion robot in " +
+      "60 seconds\u201d.",
+  },
+
+  "pet-camera-robots": {
+    key: "pet-camera-robots",
+    src: "/media/botmatch/finder-petcam.webp",
+    width: 1122,
+    height: 1402,
+    label: "Find my pet cam bot",
+    /* Frame band y 1221–1301 — the shallowest of the set, and the reason the
+       button height is a per-card number rather than a constant. */
+    cta: { centreY: "89.94%", width: "72%", height: "4.3%" },
+    alt:
+      "A BotPlanet card headed \u201cAnimal photography bots\u201d, showing four wheeled pet " +
+      "camera robots on a lit platform, with photographs above of a dog leaping over a pool, " +
+      "a child playing with a puppy beside one, and a cat watching another, and labels " +
+      "reading pet monitoring, playful interaction, night viewing and home-friendly design.",
+  },
 };
 
 /** The card for a category, or undefined when that category has no artwork yet. */
