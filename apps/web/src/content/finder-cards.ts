@@ -158,6 +158,49 @@ export const FINDER_CARDS: Record<string, FinderCard> = {
       "a child playing with a puppy beside one, and a cat watching another, and labels " +
       "reading pet monitoring, playful interaction, night viewing and home-friendly design.",
   },
+
+  "educational-coding-robots": {
+    key: "educational-coding-robots",
+    src: "/media/botmatch/finder-coding.webp",
+    width: 1122,
+    height: 1402,
+    label: "Find my coding bot",
+    cta: { centreY: "88.77%", width: "76.3%", height: "8%" },
+    alt:
+      "A BotPlanet card headed \u201cEducational robots \u2014 smart picks, STEM made fun\u201d, " +
+      "showing three children playing with coding robots at a table: a floor bot on a printed " +
+      "map with direction cards, a light-up robot in a clear ball, and a build kit with a " +
+      "tablet showing block code, with labels reading screen-free coding, programmable robots, " +
+      "STEM build kits and ages 4 to teen.",
+  },
+
+  "robot-vacuums": {
+    key: "robot-vacuums",
+    src: "/media/botmatch/finder-vacuum.webp",
+    width: 1024,
+    height: 1536,
+    label: "Find my floor bot",
+    cta: { centreY: "92.61%", width: "77.4%", height: "7.3%" },
+    alt:
+      "A BotPlanet card headed \u201cFloor cleaning bots \u2014 smart picks, cleaner floors\u201d, " +
+      "showing four robot vacuums across a home: one docking at a self-empty tower, one mopping " +
+      "tile, and two on a rug beside a golden retriever, with labels reading vacuum and mop, " +
+      "self-empty docks, pet hair ready, and hard floor plus carpet.",
+  },
+
+  "robotic-lawn-mowers": {
+    key: "robotic-lawn-mowers",
+    src: "/media/botmatch/finder-lawn.webp",
+    width: 1122,
+    height: 1402,
+    label: "Find my mower",
+    cta: { centreY: "92.37%", width: "77.8%", height: "7.5%" },
+    alt:
+      "A BotPlanet card headed \u201cRobotic lawn mowers \u2014 smart picks, better lawns\u201d, " +
+      "showing four robot mowers cutting striped lawns beside flower borders, one passing a " +
+      "rabbit, with labels reading wire-free picks, small garden fits, pet and wildlife aware, " +
+      "and steep slope ready.",
+  },
 };
 
 /** The card for a category, or undefined when that category has no artwork yet. */

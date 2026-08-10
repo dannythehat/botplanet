@@ -332,13 +332,34 @@ export const POST: APIRoute = async ({ request, locals }) => {
 
   /* ---- notify + reply ---- */
   const apiKey = env?.RESEND_API_KEY as string | undefined;
+  /**
+   * BOTH SENDS ARE HANDED TO waitUntil, AND THAT IS NOT A TIDY-UP.
+   *
+   * They were `void fetch(...)`. A Worker is entitled to be torn down the
+   * moment its handler returns a Response, and a promise nobody registered is
+   * exactly what gets torn down with it — so the reader saw "Check your inbox",
+   * the endpoint answered {ok:true}, and whether the mail ever left was down to
+   * whether the runtime happened to still be alive. Silent, intermittent, and
+   * invisible to every test we have, because the failure is in the platform's
+   * lifecycle rather than in this code's logic.
+   *
+   * waitUntil is the contract for "finish this before you kill me". Where the
+   * runtime does not expose it, the sends are awaited instead: a slightly
+   * slower response is worth more than a lead that quietly never arrives.
+   */
+  const ctx = (locals as App.Locals).runtime?.ctx as
+    | { waitUntil?: (p: Promise<unknown>) => void }
+    | undefined;
+  const keepAlive = (p: Promise<unknown>) =>
+    typeof ctx?.waitUntil === "function" ? ctx.waitUntil(p) : p;
+
   if (apiKey) {
     const rows = orderedAnswers(body.categorySlug, answers)
       .map((a) => `<tr><td style="padding:4px 10px 4px 0;color:#666">${esc(a.question)}</td><td style="padding:4px 0"><strong>${esc(a.answer)}</strong></td></tr>`)
       .join("");
 
     // Team notification, immediately.
-    void fetch("https://api.resend.com/emails", {
+    const teamSend = fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: { Authorization: `Bearer ${apiKey}`, "content-type": "application/json" },
       body: JSON.stringify({
@@ -352,6 +373,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
                <table style="font:14px system-ui;border-collapse:collapse">${rows}</table>`,
       }),
     }).catch(() => {});
+    keepAlive(teamSend);
 
     // Personal reply, scheduled 50–80 minutes out so it does not read as a robot.
     const delayMin = 50 + Math.floor(Math.random() * 31);
@@ -362,7 +384,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
       productName: body.productName ?? null,
       resultUrl,
     });
-    void fetch("https://api.resend.com/emails", {
+    const replySend = fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: { Authorization: `Bearer ${apiKey}`, "content-type": "application/json" },
       body: JSON.stringify({
@@ -377,6 +399,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
         },
       }),
     }).catch(() => {});
+    keepAlive(replySend);
   }
 
   return json({ ok: true });

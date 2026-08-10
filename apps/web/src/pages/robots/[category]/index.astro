@@ -88,7 +88,14 @@ const faq = faqSectionFor(category);
 
    The review page renders the same panel unconditionally, and that is correct:
    a review existing means a product exists. */
-const finderCard = finderCardFor(cat.slug);
+/* GATED ON HAVING SOMETHING TO RECOMMEND, exactly as the written panel below
+   already was. "A matcher with no products is not advertised" —
+   PRE-BUILD-PROCESS.md Stage 5b — and the finder card walked straight past
+   that rule when it was added: the grill hub shipped a "Find my grill bot"
+   button pointing at a matcher that holds zero products and can therefore
+   answer nobody. Verified by scripts/audit-matchers.mjs, which drives every
+   matcher and found grill and vacuums returning nothing under any answers. */
+const finderCard = products.length > 0 ? finderCardFor(cat.slug) : undefined;
 const bmCta = products.length > 0 ? botMatchCtaFor(category) : undefined;
 
 /* Built from the catalogue rather than written out, so a product that changes

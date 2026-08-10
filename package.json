@@ -22,7 +22,8 @@
     "ext": "node scripts/extension-points.mjs",
     "ext:write": "node scripts/extension-points.mjs --write",
     "audit:links": "node scripts/audit-links.mjs",
-    "audit:seo": "node scripts/audit-seo.mjs"
+    "audit:seo": "node scripts/audit-seo.mjs",
+    "audit:matchers": "node scripts/audit-matchers.mjs"
   },
   "devDependencies": {
     "@types/node": "^22.10.0",

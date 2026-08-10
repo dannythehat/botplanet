@@ -186,6 +186,99 @@
     ]
   },
   {
+    "source": "media/botmatch/finder-coding.webp",
+    "sourceWidth": 1122,
+    "sourceHeight": 1402,
+    "derivatives": [
+      {
+        "id": "media-botmatch-finder-coding-webp-360",
+        "src": "media/botmatch/finder-coding-360w.webp",
+        "width": 360,
+        "height": 450,
+        "bytes": 28262,
+        "checksum": "sha256:83615ba11acc12f9ae2d157c479297755f1c9d3f2c481f1a7f72f59dfd9f5ce5"
+      },
+      {
+        "id": "media-botmatch-finder-coding-webp-640",
+        "src": "media/botmatch/finder-coding-640w.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 70662,
+        "checksum": "sha256:364bdc95824b2dcd4e29c48a5a3707040f43440db91e8aba4ce71639960f9271"
+      },
+      {
+        "id": "media-botmatch-finder-coding-webp-960",
+        "src": "media/botmatch/finder-coding-960w.webp",
+        "width": 960,
+        "height": 1200,
+        "bytes": 135200,
+        "checksum": "sha256:e9a1640558e241285928994cea93e4ba2480c48bf2f4616b3a7234612f4c142a"
+      }
+    ]
+  },
+  {
+    "source": "media/botmatch/finder-vacuum.webp",
+    "sourceWidth": 1024,
+    "sourceHeight": 1536,
+    "derivatives": [
+      {
+        "id": "media-botmatch-finder-vacuum-webp-360",
+        "src": "media/botmatch/finder-vacuum-360w.webp",
+        "width": 360,
+        "height": 540,
+        "bytes": 28414,
+        "checksum": "sha256:2e76399d9b11bd66c38c8bfd5265a654356e65fe4fcdb80ecf5cb1ce1ef3fbff"
+      },
+      {
+        "id": "media-botmatch-finder-vacuum-webp-640",
+        "src": "media/botmatch/finder-vacuum-640w.webp",
+        "width": 640,
+        "height": 960,
+        "bytes": 74510,
+        "checksum": "sha256:fdf15fb75b1f5d446bacb20dd7527978cb65d2da9a6d14704a0c954368593fd9"
+      },
+      {
+        "id": "media-botmatch-finder-vacuum-webp-960",
+        "src": "media/botmatch/finder-vacuum-960w.webp",
+        "width": 960,
+        "height": 1440,
+        "bytes": 142186,
+        "checksum": "sha256:25cd334c9e57772f9e092bca715088f6189d44334e394349b8771064155d157b"
+      }
+    ]
+  },
+  {
+    "source": "media/botmatch/finder-lawn.webp",
+    "sourceWidth": 1122,
+    "sourceHeight": 1402,
+    "derivatives": [
+      {
+        "id": "media-botmatch-finder-lawn-webp-360",
+        "src": "media/botmatch/finder-lawn-360w.webp",
+        "width": 360,
+        "height": 450,
+        "bytes": 33316,
+        "checksum": "sha256:a026a982fd55880e0692c29bd54187f38c52a8f345eee307b0ebae3b07699da9"
+      },
+      {
+        "id": "media-botmatch-finder-lawn-webp-640",
+        "src": "media/botmatch/finder-lawn-640w.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 92970,
+        "checksum": "sha256:9024cdca95ec2f8f4deee39ebdadb21de360ff4ebe2e233ea11744fb52cec3f1"
+      },
+      {
+        "id": "media-botmatch-finder-lawn-webp-960",
+        "src": "media/botmatch/finder-lawn-960w.webp",
+        "width": 960,
+        "height": 1200,
+        "bytes": 185132,
+        "checksum": "sha256:d3abca63129daa050138580a0a192c7d0a308f652114746d505ca5a0d3c19506"
+      }
+    ]
+  },
+  {
     "source": "media/botmatch/finder-window.webp",
     "sourceWidth": 1122,
     "sourceHeight": 1402,

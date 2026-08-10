@@ -90,6 +90,9 @@ const SOURCES = [
   "media/botmatch/finder-litter.webp",
   "media/botmatch/finder-companion.webp",
   "media/botmatch/finder-petcam.webp",
+  "media/botmatch/finder-coding.webp",
+  "media/botmatch/finder-vacuum.webp",
+  "media/botmatch/finder-lawn.webp",
   "media/botmatch/finder-window.webp",
   /* TIER-1 LISTING CARDS, 10 August 2026. Sixteen products were live with an
      empty grid slot; these are the files that fill them. Added here as well as

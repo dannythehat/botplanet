@@ -1,10 +1,26 @@
 [
   {
-    "to": "media/botmatch/finder-petcam.webp",
-    "checksum": "sha256:89e43f1765387df96ca21ae515f11172173caa6f3ebf1a2215d97e2fd468c7a0",
+    "to": "media/botmatch/finder-coding.webp",
+    "checksum": "sha256:8681fe53980aec1bf43f05c5c76b4486fcf890419f78bdab434d4e96559d5a57",
     "width": 1122,
     "height": 1402,
-    "bytes": 282188,
-    "saved": 1976055
+    "bytes": 248334,
+    "saved": 1884940
+  },
+  {
+    "to": "media/botmatch/finder-vacuum.webp",
+    "checksum": "sha256:662dcc72c4586887677d1e582f0289ec7fb842d8cbfe802ad7d67fd9011ef898",
+    "width": 1024,
+    "height": 1536,
+    "bytes": 242096,
+    "saved": 1966379
+  },
+  {
+    "to": "media/botmatch/finder-lawn.webp",
+    "checksum": "sha256:af68de91fac11957301eb7fe8abc3e4a370ebdb197ea840de5e2cf9583927f32",
+    "width": 1122,
+    "height": 1402,
+    "bytes": 337788,
+    "saved": 2085930
   }
 ]
