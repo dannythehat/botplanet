@@ -353,6 +353,24 @@ export const POST: APIRoute = async ({ request, locals }) => {
   const keepAlive = (p: Promise<unknown>) =>
     typeof ctx?.waitUntil === "function" ? ctx.waitUntil(p) : p;
 
+  /**
+   * A REJECTED SEND USED TO VANISH. Both calls ended `.catch(() => {})`, so a
+   * bad key, an unverified sending domain or a malformed payload produced
+   * exactly the same silence as a delivered email — and the endpoint returned
+   * {ok:true} either way. Resend answers 4xx with a JSON body naming the
+   * reason; that reason is worth more than the empty catch that hid it.
+   */
+  const report = (what: string) => async (res: Response) => {
+    if (!res.ok) {
+      const detail = await res.text().catch(() => "");
+      console.error(`resend ${what} failed: HTTP ${res.status} ${detail.slice(0, 400)}`);
+    }
+    return res;
+  };
+  const reportFailure = (what: string) => (e: unknown) => {
+    console.error(`resend ${what} threw: ${String(e).slice(0, 300)}`);
+  };
+
   if (apiKey) {
     const rows = orderedAnswers(body.categorySlug, answers)
       .map((a) => `<tr><td style="padding:4px 10px 4px 0;color:#666">${esc(a.question)}</td><td style="padding:4px 0"><strong>${esc(a.answer)}</strong></td></tr>`)
@@ -372,11 +390,14 @@ export const POST: APIRoute = async ({ request, locals }) => {
                }</p>
                <table style="font:14px system-ui;border-collapse:collapse">${rows}</table>`,
       }),
-    }).catch(() => {});
+    }).then(report("team notification")).catch(reportFailure("team notification"));
     keepAlive(teamSend);
 
-    // Personal reply, scheduled 50–80 minutes out so it does not read as a robot.
-    const delayMin = 50 + Math.floor(Math.random() * 31);
+    /* REPLIES IMMEDIATELY. This used to schedule the reader's own email 50 to
+       80 minutes out, on the theory that an instant answer reads as a robot.
+       It reads as nothing at all: the page says "check your inbox", the inbox
+       is empty for an hour, and the reader has closed the tab and forgotten
+       us. They asked a question and pressed a button; the answer goes now. */
     const { subject, html, text } = renderReply({
       name: firstName,
       categorySlug: body.categorySlug,
@@ -393,12 +414,11 @@ export const POST: APIRoute = async ({ request, locals }) => {
         subject,
         html,
         text,
-        scheduled_at: new Date(Date.now() + delayMin * 60_000).toISOString(),
         headers: {
           "List-Unsubscribe": `<mailto:${SITE.emailFrom.replace(/.*<|>.*/g, "")}?subject=unsubscribe>`,
         },
       }),
-    }).catch(() => {});
+    }).then(report("reader reply")).catch(reportFailure("reader reply"));
     keepAlive(replySend);
   }
 
