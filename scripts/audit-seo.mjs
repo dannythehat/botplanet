@@ -148,6 +148,7 @@ const strip = (html) => decode(html.replace(/<[^>]*>/g, " ")).replace(/\s+/g, " 
 function norm(s) {
   return decode(s)
     .toLowerCase()
+    .replace(/['’]/g, "")
     .replace(/[‐-―]/g, "-")
     .replace(/[^a-z0-9]+/g, " ")
     .replace(/(\w)s\b/g, "$1")

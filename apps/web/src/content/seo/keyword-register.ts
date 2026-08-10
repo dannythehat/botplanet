@@ -63,6 +63,19 @@ const RUN_GRILL = "2026-08-06";
 const RUN_VACUUM = "2026-08-06";
 /** Coding robots: runs 31094454463 + 31094682067 (SERP top-up), 2026-08-06. */
 const RUN_CODING = "2026-08-06";
+/**
+ * The fifty-page fill, 2026-08-10. DataForSEO Google Ads live search volume
+ * plus Labs bulk keyword difficulty, United States, English, $0.54 all in.
+ * 419 constructed candidates measured, 4,980 more discovered from the seeds,
+ * and the winners re-measured for difficulty.
+ *
+ * WHY IT HAPPENED. scripts/audit-seo.mjs found fifty indexable pages with no
+ * row here at all — every litter, lawn and window review, every compare page,
+ * the homepage, and the whole utility tree. A page with no row is a page this
+ * file asserts nothing about, so its copy could drift off its term and no test
+ * would notice. Fifty of ninety-four were in that state.
+ */
+const RUN_AUGUST_10 = "2026-08-10";
 
 /* @extension-point per-category | required | Also per-page and per-product —
    every published URL needs a row. Without one, keywords.test.ts cannot assert
@@ -1698,6 +1711,557 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
       },
     ],
     researchedOn: RUN_WINDOW,
+  },
+
+  /* ============================================================
+     THE 10 AUGUST FILL — fifty pages that had no row.
+
+     EVERY PRIMARY BELOW IS A TERM THE PAGE ALREADY CONTAINS, with
+     one exception named at the bottom. That was a constraint, not
+     an outcome: where the highest-volume candidate was not in the
+     copy, the row takes the best term the page actually says and
+     records the bigger one as a secondary with mustAppear:false.
+
+     The alternative would have been to point fifty rows at terms
+     the pages do not use and call the result a keyword strategy.
+     It would have read better and asserted nothing.
+
+     WHICH IS WHY SO MANY SECONDARIES ARE mustAppear:false. That
+     flag is not a wish. It means "we expect to pick this up
+     incidentally"; setting it true for a phrase the copy never
+     says would break the one test this file exists to power. Each
+     false is a sentence somebody could write, not a fact anybody
+     has asserted.
+
+     THE COMPARE PAGES ALL CEDE THEIR CATEGORY HEAD TERM. "robot
+     lawn mower" is 74,000 a month and belongs to the hub; a
+     comparison table that chased it would be competing with its
+     own category page for the same reader. Each takes the
+     comparison query instead, which is smaller and is what the
+     page actually is.
+
+     TWO ROWS RECORD A NUMBER NOBODY SHOULD ACT ON. /privacy/ and
+     /terms/ carry the volumes of the bare English words "privacy"
+     (110,000) and "terms" (74,000). Those figures are real and
+     they are not an opportunity — nobody typing them wants a robot
+     shop, and BotPlanet neither competes for them nor should. The
+     rows exist so the pages are not mistaken for unassigned ones,
+     which is the only job they have here.
+
+     ONE PRIMARY IS mustAppear:false, and it is the homepage.
+     "home robots" is 6,600 a month at KD 30 and is the right
+     target for the front page; the front page does not currently
+     contain the phrase. Recorded as the target with the flag
+     telling the truth about today, rather than quietly retargeting
+     the homepage at something weaker to keep a test green.
+     ============================================================ */
+  {
+    path: "/robots/self-cleaning-litter-boxes/litter-robot-4/",
+    primary: { term: "litter-robot 4", volume: 74000, difficulty: 15, mustAppear: true },
+    secondary: [
+      { term: "litter-robot 4 review", volume: 1000, difficulty: 19, mustAppear: false },
+      { term: "litter-robot 4 manual", volume: 590, difficulty: 1, mustAppear: false },
+      { term: "litter-robot 4 price", volume: 320, difficulty: 0, mustAppear: false },
+      { term: "litter-robot 4 app", volume: 170, difficulty: 1, mustAppear: false },
+      { term: "self cleaning litter box", volume: 110000, difficulty: 46, mustAppear: true },
+    ],
+    researchedOn: RUN_AUGUST_10,
+  },
+  {
+    path: "/robots/self-cleaning-litter-boxes/petkit-purobot-max-pro-2/",
+    primary: { term: "petkit purobot max pro 2", volume: 390, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "purobot max pro 2", volume: 260, difficulty: 0, mustAppear: true },
+      { term: "petkit purobot max pro 2 review", volume: 20, difficulty: 0, mustAppear: false },
+    ],
+    researchedOn: RUN_AUGUST_10,
+  },
+  {
+    path: "/robots/self-cleaning-litter-boxes/petsafe-scoopfree-crystal-pro/",
+    primary: { term: "petsafe scoopfree crystal pro", volume: 480, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "scoopfree crystal pro", volume: 170, difficulty: 0, mustAppear: true },
+    ],
+    researchedOn: RUN_AUGUST_10,
+  },
+  {
+    path: "/robots/self-cleaning-litter-boxes/casa-leo-loo-too/",
+    primary: { term: "leos loo too", volume: 1000, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "casa leo litter box", volume: 390, difficulty: 0, mustAppear: false },
+      { term: "leos loo too review", volume: 10, difficulty: 0, mustAppear: false },
+    ],
+    researchedOn: RUN_AUGUST_10,
+  },
+  {
+    path: "/robots/robotic-lawn-mowers/segway-navimow-i110n/",
+    primary: { term: "segway navimow i110n", volume: 480, difficulty: 12, mustAppear: true },
+    secondary: [
+      { term: "navimow i110n", volume: 170, difficulty: 13, mustAppear: true },
+      { term: "segway navimow i110n review", volume: 40, difficulty: 8, mustAppear: false },
+      { term: "navimow i110n review", volume: 20, difficulty: 0, mustAppear: false },
+    ],
+    researchedOn: RUN_AUGUST_10,
+  },
+  {
+    path: "/robots/robotic-lawn-mowers/eufy-e15/",
+    primary: { term: "eufy robot lawn mower e15", volume: 390, difficulty: 11, mustAppear: true },
+    secondary: [
+      { term: "eufy e15 robot lawn mower", volume: 390, difficulty: 0, mustAppear: false },
+      { term: "eufy robot lawn mower e15 review", volume: 30, difficulty: 0, mustAppear: false },
+    ],
+    researchedOn: RUN_AUGUST_10,
+  },
+  {
+    path: "/robots/robotic-lawn-mowers/mammotion-luba-3-awd-1500h/",
+    primary: { term: "mammotion luba 3 awd 1500h", volume: 30, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "luba 3 awd 1500h", volume: 20, difficulty: 0, mustAppear: true },
+      { term: "mammotion luba 3", volume: 1600, difficulty: 0, mustAppear: true },
+      { term: "luba 3 awd", volume: 1000, difficulty: 0, mustAppear: true },
+    ],
+    researchedOn: RUN_AUGUST_10,
+  },
+  {
+    path: "/robots/robotic-lawn-mowers/mammotion-luba-3-awd-3000h/",
+    primary: { term: "mammotion luba 3 awd 3000h", volume: 40, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "luba 3 awd 3000h", volume: 30, difficulty: 0, mustAppear: true },
+      { term: "mammotion luba 3", volume: 1600, difficulty: 0, mustAppear: true },
+      { term: "luba 3 awd", volume: 1000, difficulty: 0, mustAppear: true },
+    ],
+    researchedOn: RUN_AUGUST_10,
+  },
+  {
+    path: "/robots/robotic-lawn-mowers/husqvarna-automower-410iq/",
+    primary: { term: "husqvarna automower 410iq", volume: 110, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "husqvarna 410iq", volume: 210, difficulty: 0, mustAppear: false },
+      { term: "automower 410iq", volume: 10, difficulty: 0, mustAppear: true },
+    ],
+    researchedOn: RUN_AUGUST_10,
+  },
+  {
+    path: "/robots/robotic-lawn-mowers/worx-landroid-vision-wr320/",
+    primary: { term: "worx landroid vision", volume: 260, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "landroid vision", volume: 50, difficulty: 0, mustAppear: true },
+    ],
+    researchedOn: RUN_AUGUST_10,
+  },
+  {
+    path: "/robots/robotic-lawn-mowers/dreame-a3-awd-1000/",
+    primary: { term: "dreame a3 awd", volume: 170, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "dreame a3 awd 1000", volume: 20, difficulty: 0, mustAppear: true },
+      { term: "dreame robot lawn mower", volume: 90, difficulty: 0, mustAppear: false },
+    ],
+    researchedOn: RUN_AUGUST_10,
+  },
+  {
+    path: "/robots/window-cleaning-robots/ecovacs-winbot-mini/",
+    primary: { term: "winbot mini", volume: 260, difficulty: 5, mustAppear: true },
+    secondary: [
+      { term: "ecovacs winbot mini", volume: 210, difficulty: 0, mustAppear: true },
+      { term: "ecovacs winbot mini review", volume: 40, difficulty: 2, mustAppear: true },
+      { term: "winbot mini review", volume: 40, difficulty: 2, mustAppear: true },
+    ],
+    researchedOn: RUN_AUGUST_10,
+  },
+  {
+    path: "/robots/window-cleaning-robots/ecovacs-winbot-w3-omni/",
+    primary: { term: "winbot w3 omni", volume: 110, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "ecovacs winbot w3 omni", volume: 70, difficulty: 1, mustAppear: true },
+      { term: "winbot w3 omni review", volume: 10, difficulty: 0, mustAppear: true },
+    ],
+    researchedOn: RUN_AUGUST_10,
+  },
+  {
+    path: "/robots/window-cleaning-robots/ecovacs-winbot-w2s/",
+    primary: { term: "winbot w2s", volume: 70, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "ecovacs winbot w2s", volume: 40, difficulty: 0, mustAppear: true },
+      { term: "ecovacs winbot w2s review", volume: 10, difficulty: 0, mustAppear: true },
+    ],
+    researchedOn: RUN_AUGUST_10,
+  },
+  {
+    path: "/robots/window-cleaning-robots/hobot-298/",
+    primary: { term: "hobot 298", volume: 50, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "hobot 298 review", volume: 10, difficulty: 53, mustAppear: true },
+      { term: "hobot 298 price", volume: 10, difficulty: 0, mustAppear: false },
+      { term: "hobot 298 manual", volume: 10, difficulty: 0, mustAppear: false },
+    ],
+    researchedOn: RUN_AUGUST_10,
+  },
+  {
+    path: "/robots/window-cleaning-robots/hobot-2s/",
+    primary: { term: "hobot 2s", volume: 40, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "hobot 2s review", volume: 10, difficulty: 0, mustAppear: true },
+      { term: "hobot 2s price", volume: 10, difficulty: 0, mustAppear: false },
+    ],
+    researchedOn: RUN_AUGUST_10,
+  },
+  {
+    path: "/robots/window-cleaning-robots/hutt-s55-pro/",
+    primary: { term: "hutt s55 pro", volume: 10, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "hutt window cleaning robot", volume: 70, difficulty: 0, mustAppear: false },
+    ],
+    researchedOn: RUN_AUGUST_10,
+  },
+  {
+    path: "/robots/window-cleaning-robots/mamibot-w120-dp/",
+    /* "mamibot w120", not "mamibot w120-dp": the shorter form is what the plan
+       named on 5 August and it measures higher (20 against 10). The H1 reads
+       "Mamibot W120-DP review", which contains it. */
+    primary: { term: "mamibot w120", volume: 20, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "mamibot w120-dp", volume: 10, difficulty: 0, mustAppear: true },
+    ],
+    researchedOn: RUN_AUGUST_10,
+  },
+  {
+    path: "/robots/window-cleaning-robots/cop-rose-x5s/",
+    primary: { term: "cop rose x5s", volume: 0, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "cop rose window cleaning robot", volume: 10, difficulty: 0, mustAppear: false },
+      { term: "cop rose robot", volume: 10, difficulty: 0, mustAppear: false },
+    ],
+    researchedOn: RUN_AUGUST_10,
+  },
+  {
+    path: "/robots/educational-coding-robots/sphero-bolt/",
+    primary: { term: "sphero bolt", volume: 4400, difficulty: 32, mustAppear: true },
+    secondary: [
+      { term: "sphero bolt app", volume: 210, difficulty: 48, mustAppear: false },
+      { term: "sphero bolt price", volume: 70, difficulty: 21, mustAppear: false },
+      { term: "sphero bolt review", volume: 20, difficulty: 0, mustAppear: true },
+      { term: "sphero bolt coding robot", volume: 170, difficulty: 24, mustAppear: false },
+    ],
+    researchedOn: RUN_AUGUST_10,
+  },
+  {
+    path: "/robots/educational-coding-robots/sphero-mini/",
+    primary: { term: "sphero mini", volume: 2900, difficulty: 15, mustAppear: true },
+    secondary: [
+      { term: "sphero mini app", volume: 320, difficulty: 48, mustAppear: false },
+      { term: "sphero mini price", volume: 70, difficulty: 3, mustAppear: false },
+      { term: "sphero mini review", volume: 20, difficulty: 0, mustAppear: true },
+    ],
+    researchedOn: RUN_AUGUST_10,
+  },
+  {
+    path: "/robots/educational-coding-robots/sphero-indi/",
+    primary: { term: "sphero indi", volume: 1600, difficulty: 1, mustAppear: true },
+    secondary: [
+      { term: "sphero indi app", volume: 40, difficulty: 50, mustAppear: false },
+      { term: "sphero indi review", volume: 10, difficulty: 11, mustAppear: true },
+    ],
+    researchedOn: RUN_AUGUST_10,
+  },
+  {
+    path: "/robots/educational-coding-robots/ozobot-evo/",
+    primary: { term: "ozobot evo", volume: 1300, difficulty: 5, mustAppear: true },
+    secondary: [
+      { term: "ozobot evo app", volume: 140, difficulty: 6, mustAppear: false },
+      { term: "ozobot evo price", volume: 30, difficulty: 0, mustAppear: false },
+      { term: "ozobot evo review", volume: 10, difficulty: 1, mustAppear: true },
+      { term: "ozobot evo coding robot", volume: 70, difficulty: 4, mustAppear: false },
+    ],
+    researchedOn: RUN_AUGUST_10,
+  },
+  {
+    path: "/robots/educational-coding-robots/makeblock-mbot/",
+    primary: { term: "makeblock mbot", volume: 880, difficulty: 29, mustAppear: true },
+    secondary: [
+      { term: "mbot", volume: 5400, difficulty: 23, mustAppear: true },
+      { term: "makeblock mbot app", volume: 20, difficulty: 0, mustAppear: false },
+      { term: "makeblock mbot review", volume: 10, difficulty: 0, mustAppear: true },
+    ],
+    researchedOn: RUN_AUGUST_10,
+  },
+  {
+    path: "/robots/pet-camera-robots/enabot-ebo-air-2/",
+    primary: { term: "ebo air 2", volume: 2400, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "enabot ebo air 2", volume: 390, difficulty: 2, mustAppear: true },
+      { term: "ebo air 2 review", volume: 30, difficulty: 0, mustAppear: true },
+      { term: "enabot ebo air 2 review", volume: 10, difficulty: 0, mustAppear: true },
+    ],
+    researchedOn: RUN_AUGUST_10,
+  },
+  {
+    path: "/robots/pet-camera-robots/enabot-ebo-se/",
+    primary: { term: "ebo se", volume: 390, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "enabot ebo se", volume: 260, difficulty: 0, mustAppear: true },
+      { term: "enabot ebo se review", volume: 20, difficulty: 0, mustAppear: true },
+    ],
+    researchedOn: RUN_AUGUST_10,
+  },
+  {
+    path: "/robots/pet-camera-robots/enabot-rola-petpal/",
+    primary: { term: "rola petpal", volume: 140, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "enabot rola petpal", volume: 50, difficulty: 0, mustAppear: true },
+      { term: "rola petpal review", volume: 10, difficulty: 0, mustAppear: true },
+    ],
+    researchedOn: RUN_AUGUST_10,
+  },
+  {
+    path: "/robots/companion-robots/joy-for-all-companion-pets/",
+    primary: { term: "joy for all companion pet", volume: 1900, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "joy for all companion pet cat", volume: 1000, difficulty: 0, mustAppear: true },
+      { term: "joy for all cat", volume: 590, difficulty: 0, mustAppear: false },
+    ],
+    researchedOn: RUN_AUGUST_10,
+  },
+  {
+    path: "/compare/robotic-lawn-mowers/",
+    primary: { term: "compare robotic lawn mowers", volume: 90, difficulty: 39, mustAppear: true },
+    secondary: [
+      { term: "robotic lawn mower comparison", volume: 90, difficulty: 15, mustAppear: false },
+      { term: "robot lawn mower comparison", volume: 90, difficulty: 17, mustAppear: false },
+      { term: "best robot lawn mower", volume: 5400, difficulty: 8, mustAppear: false },
+      { term: "robotic lawn mowers reviews", volume: 2400, difficulty: 38, mustAppear: false },
+    ],
+    cededTo: [
+      {
+        term: "robot lawn mower",
+        path: "/robots/robotic-lawn-mowers/",
+        why: "The 74,000 head term is the hub's. This page is the table of every model, which is a different job and a different query.",
+      },
+    ],
+    researchedOn: RUN_AUGUST_10,
+  },
+  {
+    path: "/compare/self-cleaning-litter-boxes/",
+    primary: { term: "compare self cleaning litter boxes", volume: 30, difficulty: 37, mustAppear: true },
+    secondary: [
+      { term: "self cleaning litter box comparison", volume: 30, difficulty: 7, mustAppear: false },
+      { term: "best self cleaning litter box", volume: 9900, difficulty: 21, mustAppear: false },
+      { term: "litter box comparison", volume: 10, difficulty: 0, mustAppear: false },
+    ],
+    cededTo: [
+      {
+        term: "self cleaning litter box",
+        path: "/robots/self-cleaning-litter-boxes/",
+        why: "The 110,000 head term is the hub's. A comparison table answers a narrower question and should not fight the page that answers the broad one.",
+      },
+    ],
+    researchedOn: RUN_AUGUST_10,
+  },
+  {
+    path: "/compare/window-cleaning-robots/",
+    primary: { term: "compare window cleaning robots", volume: 0, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "window cleaning robot comparison", volume: 20, difficulty: 45, mustAppear: false },
+      { term: "best window cleaning robots", volume: 1300, difficulty: 0, mustAppear: false },
+    ],
+    cededTo: [
+      {
+        term: "window cleaning robot",
+        path: "/robots/window-cleaning-robots/",
+        why: "The hub owns the head term and the reader who types it wants the category explained, not a table of every model in it.",
+      },
+      {
+        term: "best window cleaning robot",
+        path: "/best-robots/window-cleaning-robots/",
+        why: "The ranked list is a separate page that already targets this term, and two of our own pages competing for it helps neither.",
+      },
+    ],
+    researchedOn: RUN_AUGUST_10,
+  },
+  {
+    path: "/compare/companion-robots/",
+    primary: { term: "compare companion robots", volume: 0, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "best companion robots", volume: 110, difficulty: 0, mustAppear: false },
+    ],
+    cededTo: [
+      {
+        term: "robot pet",
+        path: "/robots/companion-robots/",
+        why: "The hub owns the head term and the reader who types it wants the category explained, not a table of every model in it.",
+      },
+    ],
+    researchedOn: RUN_AUGUST_10,
+  },
+  {
+    path: "/compare/pet-camera-robots/",
+    primary: { term: "compare pet camera robots", volume: 0, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "best pet camera robot", volume: 10, difficulty: 0, mustAppear: false },
+      { term: "robot pet camera", volume: 140, difficulty: 0, mustAppear: false },
+    ],
+    cededTo: [
+      {
+        term: "pet camera robot",
+        path: "/robots/pet-camera-robots/",
+        why: "The hub owns the head term and the reader who types it wants the category explained, not a table of every model in it.",
+      },
+    ],
+    researchedOn: RUN_AUGUST_10,
+  },
+  {
+    path: "/compare/educational-coding-robots/",
+    primary: { term: "compare coding robots", volume: 0, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "coding robots for kids", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "stem robots for kids", volume: 0, difficulty: 0, mustAppear: false },
+    ],
+    cededTo: [
+      {
+        term: "coding robot",
+        path: "/robots/educational-coding-robots/",
+        why: "The hub owns the head term and the reader who types it wants the category explained, not a table of every model in it.",
+      },
+    ],
+    researchedOn: RUN_AUGUST_10,
+  },
+  {
+    path: "/compare/eilik-vs-emo/",
+    primary: { term: "eilik vs emo", volume: 20, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "emo vs eilik", volume: 10, difficulty: 0, mustAppear: false },
+      { term: "eilik or emo", volume: 10, difficulty: 0, mustAppear: true },
+      { term: "desk robot", volume: 1300, difficulty: 2, mustAppear: true },
+    ],
+    researchedOn: RUN_AUGUST_10,
+  },
+  {
+    path: "/",
+    primary: { term: "home robots", volume: 6600, difficulty: 30, mustAppear: false },
+    secondary: [
+      { term: "home robot", volume: 6600, difficulty: 53, mustAppear: false },
+      { term: "robots for the home", volume: 6600, difficulty: 53, mustAppear: false },
+      { term: "best robots", volume: 2400, difficulty: 17, mustAppear: false },
+    ],
+    cededTo: [
+      {
+        term: "robotic pool cleaner",
+        path: "/robots/robotic-pool-cleaners/",
+        why: "Every category head term belongs to its hub. A homepage that chases one of them competes with its own page.",
+      },
+    ],
+    researchedOn: RUN_AUGUST_10,
+  },
+  {
+    path: "/best-robots/",
+    primary: { term: "best robots", volume: 2400, difficulty: 17, mustAppear: true },
+    secondary: [
+      { term: "best picks", volume: 1000, difficulty: 100, mustAppear: true },
+      { term: "best home robots", volume: 260, difficulty: 18, mustAppear: false },
+      { term: "best household robots", volume: 260, difficulty: 14, mustAppear: false },
+    ],
+    cededTo: [
+      {
+        term: "best robotic pool cleaner",
+        path: "/best-robots/robotic-pool-cleaners/",
+        why: "The per-category best-of pages own their own terms; this index points at them.",
+      },
+    ],
+    researchedOn: RUN_AUGUST_10,
+  },
+  {
+    path: "/robots/",
+    primary: { term: "robot categories", volume: 20, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "types of robots", volume: 1900, difficulty: 21, mustAppear: false },
+    ],
+    researchedOn: RUN_AUGUST_10,
+  },
+  {
+    path: "/guides/",
+    primary: { term: "robot guides", volume: 320, difficulty: 28, mustAppear: true },
+    secondary: [
+      { term: "robot buying guide", volume: 10, difficulty: 0, mustAppear: false },
+    ],
+    researchedOn: RUN_AUGUST_10,
+  },
+  {
+    path: "/compare/",
+    primary: { term: "compare robots", volume: 10, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "robot comparison", volume: 10, difficulty: 0, mustAppear: false },
+    ],
+    researchedOn: RUN_AUGUST_10,
+  },
+  {
+    path: "/botmatch/",
+    primary: { term: "find your robot", volume: 0, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "robot quiz", volume: 90, difficulty: 0, mustAppear: false },
+      { term: "which robot", volume: 30, difficulty: 89, mustAppear: false },
+    ],
+    researchedOn: RUN_AUGUST_10,
+  },
+  {
+    path: "/guides/robotic-pool-cleaners/",
+    primary: { term: "robotic pool cleaner guides", volume: 0, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "robotic pool cleaner buying guide", volume: 10, difficulty: 0, mustAppear: false },
+    ],
+    researchedOn: RUN_AUGUST_10,
+  },
+  {
+    path: "/about/",
+    primary: { term: "botplanet", volume: 10, difficulty: 0, mustAppear: true },
+    secondary: [],
+    researchedOn: RUN_AUGUST_10,
+  },
+  {
+    path: "/affiliate-disclosure/",
+    primary: { term: "affiliate disclosure", volume: 170, difficulty: 19, mustAppear: true },
+    secondary: [],
+    researchedOn: RUN_AUGUST_10,
+  },
+  {
+    path: "/editorial-policy/",
+    primary: { term: "editorial policy", volume: 70, difficulty: 23, mustAppear: true },
+    secondary: [],
+    researchedOn: RUN_AUGUST_10,
+  },
+  {
+    path: "/review-methodology/",
+    primary: { term: "testing methodology", volume: 390, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "how we test robots", volume: 0, difficulty: 0, mustAppear: false },
+    ],
+    researchedOn: RUN_AUGUST_10,
+  },
+  {
+    path: "/how-botmatch-works/",
+    primary: { term: "how botmatch works", volume: 0, difficulty: 0, mustAppear: true },
+    secondary: [],
+    researchedOn: RUN_AUGUST_10,
+  },
+  {
+    path: "/contact/",
+    primary: { term: "contact botplanet", volume: 0, difficulty: 0, mustAppear: true },
+    secondary: [],
+    researchedOn: RUN_AUGUST_10,
+  },
+  {
+    path: "/privacy/",
+    primary: { term: "privacy", volume: 110000, difficulty: 63, mustAppear: true },
+    secondary: [
+      { term: "privacy policy", volume: 27100, difficulty: 100, mustAppear: false },
+    ],
+    researchedOn: RUN_AUGUST_10,
+  },
+  {
+    path: "/terms/",
+    primary: { term: "terms", volume: 74000, difficulty: 20, mustAppear: true },
+    secondary: [
+      { term: "terms of use", volume: 2900, difficulty: 44, mustAppear: false },
+    ],
+    researchedOn: RUN_AUGUST_10,
   },
 ];
 

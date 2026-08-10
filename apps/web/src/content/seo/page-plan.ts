@@ -636,13 +636,41 @@ const HUBS: PagePlan[] = HUB_SEEDS.map((h) => ({
    because they are generated from the catalogue. Only pool has comparison
    research behind it; the rest render the honest table and target nothing,
    which is why their primary is the page's own name rather than a keyword. */
+/**
+ * What each comparison page is actually called, and what that is worth.
+ *
+ * MEASURED 10 AUGUST 2026, and it changed two things this generator had wrong.
+ * The term was built from the slug, which is right for six categories and
+ * wrong for coding: the slug is "educational-coding-robots" and the page says
+ * "Compare coding robots for kids", so the generated term appeared nowhere on
+ * the page it described. And the volume was hardcoded to 0 on the assumption
+ * that nobody searches for a comparison — "compare robotic lawn mowers" is 90
+ * a month and "compare self cleaning litter boxes" is 30. Small, real, and
+ * theirs: the head terms still go to the hubs below.
+ */
+const COMPARE_MEASURED: Record<string, { term?: string; volume: number; difficulty: number }> = {
+  "robotic-lawn-mowers": { volume: 90, difficulty: 15 },
+  "self-cleaning-litter-boxes": { volume: 30, difficulty: 7 },
+  "window-cleaning-robots": { volume: 0, difficulty: 0 },
+  "companion-robots": { volume: 0, difficulty: 0 },
+  "pet-camera-robots": { volume: 0, difficulty: 0 },
+  "educational-coding-robots": { term: "compare coding robots", volume: 0, difficulty: 0 },
+  "robotic-pool-cleaners": { volume: 0, difficulty: 0 },
+  "robot-vacuums": { volume: 0, difficulty: 0 },
+  "grill-cleaning-robots": { volume: 0, difficulty: 0 },
+};
+
 const COMPARES: PagePlan[] = HUB_SEEDS.map((h) => ({
   path: `/compare/${h.slug}/`,
   category: h.slug,
   type: "compare",
   status: "built",
   intent: "Put every machine in the category side by side on the facts that decide it.",
-  primary: { term: `compare ${h.slug.replace(/-/g, " ")}`, volume: 0, difficulty: 0 },
+  primary: {
+    term: COMPARE_MEASURED[h.slug]?.term ?? `compare ${h.slug.replace(/-/g, " ")}`,
+    volume: COMPARE_MEASURED[h.slug]?.volume ?? 0,
+    difficulty: COMPARE_MEASURED[h.slug]?.difficulty ?? 0,
+  },
   secondary: [],
   ceded: [
     { term: h.primary.term, toPath: `/robots/${h.slug}/`, why: "The category head term belongs to the hub. A comparison table is a tool for a reader who has already arrived, not a page that competes for the category." },
