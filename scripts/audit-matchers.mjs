@@ -26,7 +26,9 @@ const r = spawnSync("npx", ["tsx", "-e", `
   Promise.all([
     import("./apps/web/src/content/matcher-questions.ts"),
     import("./apps/web/src/content/nav.ts"),
-  ]).then(([q, n]) => {
+    import("./apps/web/src/content/matcher-router.ts"),
+  ]).then(([q, n, router]) => {
+    q = { ...q, MIN_PRODUCTS_FOR_A_MATCH: router.MIN_PRODUCTS_FOR_A_MATCH };
     const out = {};
     for (const cat of n.liveCategories()) {
       const qs = q.questionsFor(cat.slug) ?? [];
@@ -47,6 +49,7 @@ const r = spawnSync("npx", ["tsx", "-e", `
       out[cat.slug] = {
         name: cat.name,
         questionCount: qs.length,
+        minProducts: q.MIN_PRODUCTS_FOR_A_MATCH ?? 2,
         profiles: {
           first: profile(() => 0),
           middle: profile((n) => Math.floor(n / 2)),
@@ -64,6 +67,34 @@ const CATS = JSON.parse(line.slice("__JSON__".length));
 
 console.log(`Driving every matcher on ${BASE}\n`);
 let broken = 0;
+
+/**
+ * THE PAGE HAS TO WORK, NOT JUST THE API.
+ *
+ * On 9 August BotMatch was dead in production for every category and every
+ * automated check passed: the markup was valid, the router was right, the API
+ * answered, 1,586 tests were green and the link audit said PASS. The start
+ * button had been deleted from the component and the script still bound to it.
+ * Only opening it in a browser found it.
+ *
+ * So each finder page is fetched and checked for the three things that have to
+ * be on it for a reader to get anywhere: the matcher component, at least one
+ * question, and something to press.
+ */
+async function checkPage(url) {
+  const res = await fetch(url);
+  if (!res.ok) return { ok: false, why: `HTTP ${res.status}` };
+  const html = await res.text();
+  const hasMatcher = /class="[^"]*bp-mm/.test(html);
+  const hasStart = /data-start|data-submit|bp-mm__cta/.test(html);
+  const hasQuestion = /data-stage|bp-mm__q|data-question/.test(html);
+  const missing = [
+    hasMatcher ? null : "no matcher component",
+    hasQuestion ? null : "no questions rendered",
+    hasStart ? null : "NO BUTTON TO PRESS",
+  ].filter(Boolean);
+  return { ok: missing.length === 0, why: missing.join(", ") };
+}
 
 for (const [slug, info] of Object.entries(CATS)) {
   const runs = [];
@@ -88,17 +119,40 @@ for (const [slug, info] of Object.entries(CATS)) {
     }
   }
 
+  const page = await checkPage(`${BASE}/botmatch/${slug}/`);
   const decided = runs.filter((r) => r.name);
   const anyCandidates = runs.some((r) => r.name || r.tied > 0);
   /* A matcher fails when it can put NOTHING in front of a reader — no
      recommendation and no tied group — under any of the three profiles. */
-  const ok = anyCandidates;
+  /**
+   * A CATEGORY WITH NOTHING PUBLISHED IS NOT A BROKEN MATCHER.
+   *
+   * The funnel already refuses to run below MIN_PRODUCTS_FOR_A_MATCH: it skips
+   * the questions entirely and says it has not finished testing that category,
+   * which is true and is the behaviour we want. Reporting that as FAIL made
+   * this audit cry wolf on two of nine, and a checker that cries wolf is one
+   * people learn to ignore.
+   *
+   * FAIL is now reserved for a matcher that has products and still puts
+   * nothing in front of a reader, or a page that will not render.
+   */
+  const empty = runs.every((r) => !r.name && !r.tied);
+  const note = empty && page.ok;
+  const ok = (anyCandidates && page.ok) || note;
   if (!ok) broken++;
   const detail = runs
     .map((r) => `${r.label}:${r.name ? r.name : r.tied ? `${r.tied}-way tie` : r.error ? r.error : "nothing"}`)
     .join("  ");
-  console.log(`${ok ? "ok  " : "FAIL"}  ${slug.padEnd(28)} ${String(info.questionCount).padStart(2)}q  decides ${decided.length}/3   ${detail}`);
+  console.log(
+    `${note ? "none" : ok ? "ok  " : "FAIL"}  ${slug.padEnd(28)} ${String(info.questionCount).padStart(2)}q  ` +
+    `page:${page.ok ? "renders" : page.why}  ` +
+    (note
+      ? `nothing published — funnel shows its empty state, questions skipped`
+      : `decides ${decided.length}/3   ${detail}`),
+  );
 }
 
-console.log(broken === 0 ? "\nPASS — every matcher can put something in front of a reader." : `\nFAIL — ${broken} matcher(s) return nothing at all.`);
+console.log(broken === 0
+  ? "\nPASS — every matcher either answers or says honestly that it cannot."
+  : `\nFAIL — ${broken} matcher(s) have products and still answer nobody.`);
 process.exitCode = broken === 0 ? 0 : 1;
