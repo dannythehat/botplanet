@@ -62,7 +62,25 @@ function orderedAnswers(categorySlug: string | undefined, answers: Record<string
    their "pool". The `seen` and `theirs` maps in renderReply below are the same
    decision and need the same entry. */
 function reflect(categorySlug: string | undefined, a: Record<string, string>): string {
-  const lower = (s: string) => s.toLowerCase();
+  /**
+   * NEVER PRINT A DATABASE TOKEN AT A READER.
+   *
+   * The browser sends the option's own label — "In-ground", "Everything —
+   * floor, walls and waterline" — and this only lowercases it. But the
+   * endpoint is a public POST and the answers are free-form, so anything that
+   * submits the SCORING values instead sends `in_ground`, `full_clean`,
+   * `above_ground`. Those went straight into the sentence: "you have in_ground
+   * pool, the job is full_clean". Seen in a real inbox.
+   *
+   * A value that looks like a token — snake_case, no spaces — is turned back
+   * into words rather than printed raw. It cannot fix a bad integration, but
+   * it stops one reading like a database dump.
+   */
+  const lower = (s: string) => {
+    const t = s.trim();
+    const looksLikeToken = /^[a-z0-9]+(?:_[a-z0-9]+)+$/.test(t);
+    return (looksLikeToken ? t.replace(/_/g, " ") : t).toLowerCase();
+  };
   let bits: (string | null)[] = [];
 
   if (categorySlug === "window-cleaning-robots") {
@@ -294,7 +312,11 @@ export const POST: APIRoute = async ({ request, locals }) => {
   const answers = (body.answers && typeof body.answers === "object" ? body.answers : {}) as Record<string, string>;
   const env = (locals as App.Locals).runtime?.env as Record<string, unknown> | undefined;
   const origin = new URL(request.url).origin;
-  const resultUrl = body.resultToken ? `${origin}/recommendation/${body.resultToken}` : null;
+  /* WITH THE TRAILING SLASH. The site canonicalises to it, so this link was
+     answering 301 before it answered 200 — an extra hop on the one link the
+     email exists to deliver, and one more thing between a reader and their
+     result. */
+  const resultUrl = body.resultToken ? `${origin}/recommendation/${body.resultToken}/` : null;
 
   /* ---- store ---- */
   const id = crypto.randomUUID();
