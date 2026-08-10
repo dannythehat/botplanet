@@ -168,6 +168,46 @@ export const ROUTES: RouteDef[] = [
       "Commercial cleaning, inspection and service robots. A separate track — no affiliate links and no BotMatch.",
   },
   {
+    /* The masthead. It exists because "we tell you when not to buy" is worth
+       exactly what a reader's willingness to believe somebody is behind it is
+       worth, and until 10 August 2026 the answer was a name in a schema block
+       nobody sees. */
+    path: "/authors/",
+    label: "Who writes this",
+    breadcrumbLabel: "Authors",
+    section: "company",
+    parent: "/",
+    status: "live",
+    navSurface: "utility",
+    footerGroup: "Company",
+    inSitemap: true,
+    indexable: true,
+  },
+  {
+    path: "/authors/danny/",
+    label: "Daniel Allan",
+    breadcrumbLabel: "Daniel Allan",
+    section: "company",
+    parent: "/authors/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: true,
+    indexable: true,
+  },
+  {
+    path: "/authors/michelle-choa/",
+    label: "Michelle Choa",
+    breadcrumbLabel: "Michelle Choa",
+    section: "company",
+    parent: "/authors/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: true,
+    indexable: true,
+  },
+  {
     path: "/about/",
     label: "About",
     breadcrumbLabel: "About BotPlanet",

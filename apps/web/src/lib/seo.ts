@@ -276,6 +276,21 @@ export interface PersonInput {
   description?: string;
 }
 
+/**
+ * A named author, as a thing rather than a string.
+ *
+ * WHY THE @id MATTERS. Reviews carried `author: { "@type": "Person", name, url }`
+ * inline, which tells a crawler a name. A Person node with a stable @id at a URL
+ * that resolves lets the sixty-three reviews one person wrote point at ONE
+ * entity rather than sixty-three strings that happen to match — which is the
+ * whole mechanism behind an author being recognised as an author.
+ *
+ * THERE IS NO `award`, `alumniOf` OR `knowsAbout` HERE, deliberately. Those are
+ * the fields that turn an author box into a fabricated CV, and this site does
+ * not hold the facts to fill them. Everything emitted comes from
+ * content/team.ts, where the rule is that nothing about a real person is
+ * invented.
+ */
 export function personSchema(p: PersonInput) {
   return {
     "@type": "Person",

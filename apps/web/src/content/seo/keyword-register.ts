@@ -2311,6 +2311,37 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
     researchedOn: RUN_AUGUST_10,
   },
   {
+    /* THE MASTHEAD IS NOT A RANKING TARGET AND IS WORTH MORE THAN ONE.
+       Author pages are an E-E-A-T surface: their job is to be the thing a
+       Person node in every review resolves to, so that sixty-three reviews
+       point at one entity rather than at a repeated string. Nobody searches
+       for them and we do not want them to. */
+    path: "/authors/",
+    primary: { term: "who writes botplanet", volume: 0, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "editorial team", volume: 0, difficulty: 0, mustAppear: false },
+    ],
+    notRanking:
+      "A masthead exists so a reader can find out who is telling them not to buy something, and so the Person node in every review has a URL that resolves. Neither job is a search query, and competing for one would be inventing demand that is not there.",
+    researchedOn: RUN_AUGUST_10,
+  },
+  {
+    path: "/authors/danny/",
+    primary: { term: "daniel allan botplanet", volume: 0, difficulty: 0, mustAppear: true },
+    secondary: [],
+    notRanking:
+      "An author page ranks for the author's own name or for nothing, and that is the correct outcome. It exists to be the entity the founder's byline resolves to on the guides, the best-of shortlists and the comparison tables.",
+    researchedOn: RUN_AUGUST_10,
+  },
+  {
+    path: "/authors/michelle-choa/",
+    primary: { term: "michelle choa botplanet", volume: 0, difficulty: 0, mustAppear: true },
+    secondary: [],
+    notRanking:
+      "As above. It exists to be the entity the Reviews Editor's byline resolves to across all sixty-three product reviews, which is the whole mechanism behind an author being recognised as one.",
+    researchedOn: RUN_AUGUST_10,
+  },
+  {
     path: "/contact/",
     primary: { term: "contact botplanet", volume: 0, difficulty: 0, mustAppear: true },
     secondary: [],

@@ -13,7 +13,8 @@ import { latestAcceptedForProduct } from "../../../lib/providers/refresh-store";
 import ReviewArticle from "../../../components/ReviewArticle.astro";
 import { reviewFor } from "../../../content/reviews";
 import { availabilityFor, reviewSchema, articleSchema, imageObjectSchema, webPageSchema } from "../../../lib/seo";
-import { FOUNDER } from "../../../content/team";
+import { FOUNDER, authorForReview } from "../../../content/team";
+import AuthorBox from "../../../components/AuthorBox.astro";
 import { deliveryLine, deliveryNote } from "../../../lib/delivery-wording";
 import { PRICE_WITHHELD_LABEL } from "../../../content/commerce/price-display";
 import { MEDIA_ASSETS } from "../../../content/media/assets";
@@ -144,6 +145,11 @@ const siblings = hasReview
 
 /* Review + Article, and no rating anywhere in it — see reviewSchema for why a
    star is the one thing this site has not earned. */
+/* Who wrote it. Reviews default to the Reviews Editor — see authorForReview —
+   and the byline, the box and the structured data all read the same function,
+   so a page cannot credit one person to a reader and another to a crawler. */
+const reviewAuthor = hasReview ? authorForReview(review!.authorId) : FOUNDER;
+
 const reviewGraph = hasReview
   ? [
       webPageSchema({
@@ -175,8 +181,8 @@ const reviewGraph = hasReview
         description: review!.metaDescription,
         path: Astro.url.pathname,
         dateModified: review!.lastReviewed,
-        authorName: FOUNDER.name,
-        authorPath: FOUNDER.path,
+        authorName: reviewAuthor.name,
+        authorPath: reviewAuthor.path,
         image: review!.image?.src,
         reviewBody: review!.verdict,
         positiveNotes: [review!.bestFor],
@@ -187,8 +193,8 @@ const reviewGraph = hasReview
         description: review!.metaDescription,
         path: Astro.url.pathname,
         dateModified: review!.lastReviewed,
-        authorName: FOUNDER.name,
-        authorPath: FOUNDER.path,
+        authorName: reviewAuthor.name,
+        authorPath: reviewAuthor.path,
         image: review!.image?.src,
       }),
       /* AN ImageObject PER PICTURE THE PAGE ACTUALLY RENDERS.
@@ -383,5 +389,18 @@ const reviewGraph = hasReview
       ))}
     </>
   )}
+  {/* WHO WROTE THIS, ON THE PAGE AND NOT ONLY IN THE MARKUP. Every review here
+      named an author in its structured data and nobody in its HTML, so a
+      crawler knew who stood behind the rule-outs and a reader did not. It sits
+      last because it is the signature on the work rather than an introduction
+      to it. */}
+  {hasReview && (
+    <AuthorBox
+      author={reviewAuthor}
+      reviewed={review!.lastReviewed}
+      signedOffBy={FOUNDER}
+    />
+  )}
+
   <p class="note" style="margin-top:24px;">Affiliate disclosure: BotPlanet may earn a commission from retailer links. This never affects which product is recommended.</p>
 </Base>

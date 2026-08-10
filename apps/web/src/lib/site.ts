@@ -1,6 +1,6 @@
 /**
  * Central site / brand / EEAT config. Founder + business fields are placeholders
- * until confirmed — search for "TODO:founder" to fill in.
+ * The founder was confirmed on 10 August 2026; the TODO that stood here is done.
  */
 export const SITE = {
   name: "BotPlanet",
@@ -12,9 +12,12 @@ export const SITE = {
    * This is the single source for structured data and any rendered use.
    */
   tagline: "Shop the planet’s real-world robots with clearer comparisons, evidence and category-specific guidance.",
-  // TODO:founder — replace with the real accountable editorial owner.
+  /* Confirmed by the owner on 10 August 2026 — the TODO that stood here since
+     launch is answered. The byline is the full name because a byline is an
+     accountability statement and "Danny" is what the emails sign off as, not
+     what a reader can hold anybody to. */
   founder: {
-    name: "Danny",
+    name: "Daniel Allan",
     title: "Founder & Editorial Owner",
     bio: "Founder of BotPlanet. Reviews and recommendations here are written to help you buy the right robot, with independence from commission.",
   },

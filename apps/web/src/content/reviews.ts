@@ -60,6 +60,17 @@ export interface ReviewContent {
   /** Which SKU the specifications describe. */
   skuNote: string;
   lastReviewed: string;
+  /**
+   * Who wrote it, by id from content/team.ts.
+   *
+   * OPTIONAL, AND THE DEFAULT IS THE EDITORIAL AUTHOR. Every review carried the
+   * founder's name in its structured data and nothing on the page until 10
+   * August 2026, when a second named editor joined and the byline stopped being
+   * a constant. A review with no `authorId` still resolves to somebody rather
+   * than to nobody, which is the property that matters: there is no path here
+   * that publishes an unattributed review.
+   */
+  authorId?: string;
 }
 
 /* @extension-point per-product | optional | No review page for the product, and

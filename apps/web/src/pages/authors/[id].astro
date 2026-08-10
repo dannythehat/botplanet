@@ -1,0 +1,120 @@
+---
+/**
+ * One page per named author.
+ *
+ * WHY THESE EXIST AT ALL. An author box that links nowhere is a name in a
+ * circle. The reason to publish a person on a shopping site is so a reader can
+ * find out who is telling them not to buy something and what that person is on
+ * the hook for — and so the reviews they wrote point at ONE entity with a
+ * stable @id rather than at a string that happens to repeat.
+ *
+ * WHAT IS NOT ON THESE PAGES. No portrait, because we do not hold one and a
+ * stock photograph standing in for a real person is the same lie as an
+ * invented credential. No years of experience, no unit counts, no awards. The
+ * honesty rule at the top of content/team.ts applies hardest here, where a
+ * search engine reads everything as a claim about a real individual.
+ */
+import Base from "../../layouts/Base.astro";
+import { AUTHORS, EDITORIAL, authorForReview } from "../../content/team";
+import { REVIEWS } from "../../content/reviews";
+import { CATEGORIES as NAV_CATEGORIES } from "../../content/nav";
+import { productPath } from "../../content/routes";
+import { personSchema, webPageSchema, breadcrumbSchema } from "../../lib/seo";
+
+/* READ AT REQUEST TIME, NOT PRE-BUILT. This route shipped with
+   getStaticPaths(), which a Cloudflare SSR build ignores — the two pages
+   answered 404 and 500 respectively until it was caught on deploy. The rest of
+   the site resolves dynamic segments the same way: look the param up, and 404
+   when it is not ours rather than rendering an empty person. */
+const author = AUTHORS[Astro.params.id ?? ""];
+if (!author) return new Response(null, { status: 404 });
+
+/* What they actually wrote, read from the review registry rather than typed
+   here, so a review assigned tomorrow appears on the right page the same day
+   and a reassignment cannot leave a stale list behind. */
+const CATEGORY_NAME = new Map(NAV_CATEGORIES.map((c) => [c.slug, c.name]));
+const written = Object.values(REVIEWS)
+  .filter((r) => authorForReview(r.authorId).id === author.id)
+  .map((r) => ({
+    title: r.title.replace(/ review$/i, ""),
+    href: productPath(r.slug, r.categorySlug),
+    category: CATEGORY_NAME.get(r.categorySlug) ?? r.categorySlug,
+  }))
+  .sort((a, b) =>
+    a.category === b.category ? a.title.localeCompare(b.title) : a.category.localeCompare(b.category),
+  );
+
+const title = `${author.name} — ${author.role} at BotPlanet`;
+const description = `${author.name} is ${author.role} at BotPlanet. ${author.accountability}`.slice(0, 158);
+
+const schema = [
+  webPageSchema({ path: Astro.url.pathname, name: title, description, type: "AboutPage" }),
+  personSchema({
+    name: author.name,
+    jobTitle: author.role,
+    description: author.background ? `${author.bio} ${author.background}` : author.bio,
+    path: author.path,
+  }),
+  breadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Authors", path: "/authors/" },
+    { name: author.name, path: author.path },
+  ]),
+];
+---
+
+<Base title={title} description={description} schema={schema}>
+  <p class="muted"><a href="/authors/">Authors</a></p>
+  {author.portrait && (
+    <img
+      src={author.portrait.src}
+      srcset={`/media/authors/${author.id}-220w.webp 220w, /media/authors/${author.id}-440w.webp 440w`}
+      sizes="(min-width: 640px) 180px, 132px"
+      width="180"
+      height="180"
+      alt={author.portrait.alt}
+      style="border-radius:50%; object-fit:cover; display:block; margin:0 0 18px; max-width:180px; height:auto; aspect-ratio:1/1;"
+    />
+  )}
+  <h1>{author.name}</h1>
+  <p class="muted" style="font-size:18px;">{author.role}</p>
+
+  <p style="max-width:680px; font-size:17px;">{author.bio}</p>
+
+  {author.background && (
+    <>
+      <h2>Before BotPlanet</h2>
+      {/* Only what the owner supplied. Nothing has been added around it. */}
+      <p style="max-width:680px;">{author.background}</p>
+    </>
+  )}
+
+  <h2>What they are accountable for</h2>
+  <p style="max-width:680px;">{author.accountability}</p>
+
+  <h2>How the work is done</h2>
+  <p style="max-width:680px;">{EDITORIAL.method}</p>
+  <p class="muted">
+    The full method is on the <a href="/review-methodology/">review methodology</a> page, and how the
+    site earns its money is on the <a href="/affiliate-disclosure/">affiliate disclosure</a>.
+  </p>
+
+  {written.length > 0 && (
+    <>
+      <h2>{written.length} reviews by {author.name}</h2>
+      <ul style="max-width:680px; line-height:1.9;">
+        {written.map((r) => (
+          <li>
+            <a href={r.href}>{r.title}</a> <span class="muted">· {r.category}</span>
+          </li>
+        ))}
+      </ul>
+    </>
+  )}
+
+  <h2>Contact</h2>
+  <p>
+    Corrections and questions: <a href="/contact/">get in touch</a>. A correction on this site is
+    printed in the paragraph the mistake was in, with the date.
+  </p>
+</Base>

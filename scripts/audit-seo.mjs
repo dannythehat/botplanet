@@ -642,7 +642,34 @@ for (const [path, links] of ranked.slice(0, 5)) {
  * means one component generated all of them, and a reader meeting the same
  * eleven words in eleven places notices.
  */
+/**
+ * A BYLINE IS SUPPOSED TO BE UNIFORM, and this rule catches it as a fault.
+ *
+ * Author boxes went on all sixty-three reviews on 10 August 2026, and every one
+ * of them links to the author reading exactly their name — which is the only
+ * correct anchor text a byline can have. Varying it would produce "the reviews
+ * editor", "she", "our editor" pointing at a person's page, which is worse
+ * writing and a worse signal.
+ *
+ * Listed by path rather than pattern-matched, the same way every other judged
+ * exception in this repo is, so a second one cannot join it by accident.
+ */
+const ANCHOR_UNIFORMITY_BY_DESIGN = new Set([
+  "/authors/danny/",
+  "/authors/michelle-choa/",
+]);
+
 for (const [path, texts] of anchorsTo) {
+  if (ANCHOR_UNIFORMITY_BY_DESIGN.has(path)) {
+    add(
+      "NOTE",
+      "byline_anchor_by_design",
+      path,
+      "every inbound link reads the author's name, which is what a byline is",
+      "no action — an author link that varied its wording would be the fault",
+    );
+    continue;
+  }
   const total = [...texts.values()].reduce((a, b) => a + b, 0);
   if (total < 8) continue;
   const [topText, topCount] = [...texts.entries()].sort((a, b) => b[1] - a[1])[0];
