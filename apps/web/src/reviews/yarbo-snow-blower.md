@@ -128,15 +128,26 @@ the year.
 
 ## What we could not establish
 
-Amazon's own listing details for this machine. The page returns a bot check to
-a direct read, so the ASIN we hold comes from a search result title rather than
-from a listing we read. Identity itself is not in doubt — Lowe's publishes
-"Model #YARBO S1" and Best Buy titles it "Black Yarbo S1" — but until we can
-read Amazon's own brand and model fields, **this page carries no buy link.**
-That is deliberate and it is the same rule that kept a link off the roborock
-S8 MaxV Ultra, where every result carrying the searched name turned out to be
-an accessory kit. Our review methodology sets out what has to be true before a
-buy button appears on this site.
+Amazon's own details table. This page shipped without a buy link because the
+ASIN we held came from a search result title rather than from a listing anybody
+had read — the same rule that kept a link off the roborock S8 MaxV Ultra, where
+every result carrying the searched name turned out to be an accessory kit.
+
+The listing has since been read directly. It serves brand YARBO and a title
+naming this machine, printing two-stage, a 6 to 40 foot throw, a 12-inch intake
+and a 24-inch clearing width — four figures that match Yarbo's own site. That
+is enough for the buy button now on this page.
+
+It is worth saying what still was not read: the details table itself, which is
+where a Model Number field would sit. Every other buy button on this site rests
+on one, so this one rests on a weaker foundation than the rest, and identity
+leans partly on Lowe's item 8256113 publishing "Model #YARBO S1" and Best Buy
+titling it "Black Yarbo S1". Our review methodology sets out what has to be
+true before a buy button appears here.
+
+One small thing the Amazon title settles, or nearly. It says **feet**, which
+agrees with the conservative figure this page already uses. It is not Yarbo
+correcting its own module page, so the conflict above stands as recorded.
 
 We also have no independent measurement of throughput, noise, or how it behaves
 in wet heavy snow as against powder. Yarbo publishes no decibel figure. One

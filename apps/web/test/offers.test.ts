@@ -199,7 +199,15 @@ describe("exact-product destinations", () => {
     // OFFER_SETUP_PENDING and were wired. That state emptied the same day it
     // was created, which is the only good outcome for it — a product waiting
     // there is a published review nobody can buy from.
-    expect(exact).toHaveLength(49);
+    //
+    // 50 from 11 August 2026: the Yarbo Snow Blower. It waited in
+    // OFFER_SETUP_PENDING for one day because the evidence, not the paperwork,
+    // was the obstacle — its ASIN came from a search-result title. The listing
+    // was then read directly and served brand YARBO with four specification
+    // figures matching yarbo.com. The details table still could not be read,
+    // so this is the one destination here confirmed WITHOUT a Model Number
+    // field, and destinations.ts says so at the entry rather than here.
+    expect(exact).toHaveLength(50);
     expect(search).toHaveLength(0);
     for (const d of exact) {
       expect(d.identifierKind).toBe("asin");
@@ -1641,7 +1649,7 @@ describe("scheduled refresh — wiring", () => {
        fails loudly for any routed product whose key is absent from the text it
        reads — which is exactly the behaviour wanted. Read the directory rather
        than the list if a fourth category makes this tedious. */
-    const seed = ["pool", "window", "companion", "petcam", "coding", "litter", "lawn"]
+    const seed = ["pool", "window", "companion", "petcam", "coding", "litter", "lawn", "snow"]
       .map((c) => readFileSync(`packages/db/seed/${c}/commercial.ts`, "utf8"))
       .join("\n");
     for (const p of sellable()) {

@@ -641,8 +641,64 @@ for (const w of WINDOW_ASINS) {
   };
 }
 
+
+const SNOW_CHECK_DATE = "2026-08-11";
+
+/**
+ * ROBOT SNOW BLOWERS — one product, and the read that unblocked it.
+ *
+ * WHY THIS SAT WITHOUT A BUTTON. The Yarbo review shipped on 11 August 2026
+ * carrying no buy link and saying so on the page. The ASIN we held had come
+ * from an Amazon SEARCH RESULT TITLE rather than from a listing we had read,
+ * and that is precisely where the roborock S8 MaxV Ultra investigation began
+ * before every result carrying the searched name turned out to be an
+ * accessory kit. A $4,999 machine is the worst possible place to be wrong.
+ *
+ * WHAT WAS ACTUALLY READ, and the limits of it. The listing at B0FJF9V1JC was
+ * fetched directly and serves brand YARBO with the title 'YARBO 2-Stage 24/7
+ * Autonomous Robot Snow Blower with Modular Design | 24/7 Autonomous with
+ * 6-40ft Throwing Distance, 12" Intake Height, 24" Cleaning Width, AI
+ * Multi-Zone Mapping & RTK GPS'.
+ *
+ * THE DETAILS TABLE STILL COULD NOT BE READ — the response truncates before
+ * it, so there is no Model Number field here of the kind the pool and window
+ * entries rest on. This entry is therefore confirmed on a WEAKER basis than
+ * those, and says so rather than pretending otherwise: brand, plus a title
+ * that names the product outright, plus four independent specification
+ * figures that match what yarbo.com published to this catalogue — 2-stage,
+ * 6-40ft throw, 12in intake, 24in clearing width.
+ *
+ * That is a different situation from the roborock case in the way that
+ * matters. There, the titles named an accessory. Here the title names the
+ * machine and four of its numbers agree with the maker's own page.
+ *
+ * A BONUS THE TITLE SETTLES, PARTLY. Yarbo's own module page prints "up to 40
+ * feet" and "6-40 Yards Throw Control" in the same panel, and the review
+ * publishes that as an unresolved conflict. Amazon's title says FEET. It is
+ * evidence toward the conservative figure this site already chose; it is not
+ * Yarbo correcting its own page, so the review keeps recording the conflict.
+ */
+const SNOW_ASINS: WindowDestination[] = [
+  {
+    productId: "prod-yarbo-snow-blower",
+    asin: "B0FJF9V1JC",
+    exactModel: "Yarbo Snow Blower (YARBO S1)",
+    evidence:
+      "Read 11 August 2026 by direct fetch. Brand 'YARBO'. Title: 'YARBO 2-Stage 24/7 Autonomous Robot Snow Blower with Modular Design | 24/7 Autonomous with 6-40ft Throwing Distance, 12\" Intake Height, 24\" Cleaning Width, AI Multi-Zone Mapping & RTK GPS'. THE DETAILS TABLE WAS NOT READ — the response truncates before it — so there is no Model Number field, and this is confirmed on a weaker basis than the pool and window entries: brand, a title naming the machine, and four specification figures matching yarbo.com's own page as recorded in this catalogue (2-stage, 6-40ft throw, 12in intake, 24in clearing width). Identity was already corroborated off Amazon at two retailers: Lowe's item 8256113 publishes 'Model #YARBO S1' and Best Buy SKU J3Q5Q8G9GS titles it 'Black Yarbo S1'. THE MODULE IS THE TRAP HERE, not a bundle: the Snow Blower Module alone sells at $1,299 and is not a robot, while this listing is the complete machine. Any listing whose title omits 'robot' or names only the module is a different purchase and is denied.",
+  },
+];
+
+for (const p of SNOW_ASINS) {
+  IDENTITY_CHECKS[p.productId] = {
+    asin: p.asin,
+    confirmed: true,
+    evidence: p.evidence,
+    checkedOn: SNOW_CHECK_DATE,
+  };
+}
+
 export const DESTINATIONS: ProductDestination[] = [
-  ...[...LITTER_ASINS, ...LAWN_ASINS].map(
+  ...[...LITTER_ASINS, ...LAWN_ASINS, ...SNOW_ASINS].map(
     ({ productId, asin, exactModel, evidence }): ProductDestination => ({
       productId,
       retailerId: "ret-amazon",
@@ -884,6 +940,7 @@ export const REDIRECT_KEYS: Record<string, string> = {
   "prod-worx-landroid-vision-wr320": "lawn-worx-wr320-amazon",
   "prod-eufy-e15": "lawn-eufy-e15-amazon",
   "prod-dreame-a3-awd-1000": "lawn-dreame-a3awd1000-amazon",
+  "prod-yarbo-snow-blower": "snow-yarbo-snow-blower-amazon",
 };
 
 /* ------------------------------------------------------------------ */
