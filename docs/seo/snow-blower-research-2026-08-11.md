@@ -191,38 +191,180 @@ scoped to answer it.
 
 ---
 
-## Go / no-go
+## Product identity verification — 11 August 2026
 
-**GO, conditionally — and the condition is products, not keywords.**
+Run after the keyword batch, against the condition the go/no-go set. Every line
+below was read from the named source on 11 August 2026.
 
-The bar that cancelled 005 Home Security Robots was *no consumer demand in the
-SERPs*, and this category clears it without ambiguity: the head term returns
-Amazon selling a real robot snow blower at position 2, a popular-products
-carousel, two Reddit threads of people actively trying to buy one, and four
-People Also Ask entries that are all purchase questions. There is no
-institutional-procurement silo and no encyclopedia entry anywhere in the top
-ten. It also passes the swallow test that killed the pet-camera best-of idea —
-1–2 of 10 shared domains with the conventional snow-blower market, so the robot
-term is genuinely its own results page rather than a doorway into Toro and
-Ariens. At roughly 22,700/mo of generic demand at KD 0–9, this is the lowest
-difficulty against decent volume of any category researched for this site.
+### The answer to "is there a second machine": no, and the reason is not
+### that nobody has tried
 
-Two things temper it and neither is a kill. Yarbo owns 6–7 of 10 domains on the
-category term and its brand terms outweigh the generic ones, which under the
-standing no-brand-term rule means the site competes for the smaller half —
-though 22,700 at KD 0 is a better prize than most categories' larger half. And
-the demand is violently seasonal at 38× to 158× between January and August,
-which makes this the first category on the site that earns nothing for two
-thirds of the year; researching it in August is the favourable side of that,
-since a page has months to age before the spike rather than launching into it.
+**Snowbot IS Yarbo.** Hanyang Technology Co. Ltd of Shenzhen launched the
+Snowbot S1 in 2021 at $1,999, opened a New York branch as Hanyang Robotics in
+2019, and the S1 Pro that was to follow at $2,999 is now sold as the Yarbo. The
+old snowbot.com does not resolve; thesnowbot.com serves Yarbo's own store.
 
-**The condition: do not build until product verification finds a second
-buyable machine.** One product is a review, not a category — BotMatch cannot
-answer with fewer than two, and a hub, a comparison table and a matcher built
-around a single SKU would be four pages pretending to be a shortlist. Spend the
-next step on identity verification for Yarbo and on establishing whether
-thesnowbot.com or any other operator sells a consumer machine in the US. If a
-second product exists, this is the strongest category-010 case measured so far.
-If Yarbo is genuinely the only one, build the Yarbo review and the *"do robot
-snow blowers work"* question as guides under an existing hub, and hold the
-category.
+That collapses the apparent competitive field. Every non-Amazon result in all
+seven SERPs is Yarbo or a Yarbo dealer:
+
+| Domain in SERP | What it actually is |
+|---|---|
+| yarbo.com | The manufacturer |
+| thesnowbot.com | Yarbo's own store, under the former brand name |
+| smart-dots.com | **Dealer.** Lists "Yarbo Core $4,999.00 → $3,599.00", Yarbo Lawn Mower, Snow Blower, Blower |
+| cnygreenteam.com | **Dealer.** Nine SKUs, all Yarbo, $1,299 module to $7,400 4-in-1 |
+| amazon.com | Yarbo, ASIN B0FJF9V1JC |
+| lowes.com | Yarbo, item 8256113 |
+| bestbuy.com | Yarbo, SKU J3Q5Q8G9GS |
+
+**Left Hand Robotics** was the other candidate and is out: acquired by The Toro
+Company in March 2021, and commercial-class sidewalk clearing rather than
+consumer.
+
+**One manufacturer. No second machine exists to catalogue.**
+
+### Identity, from primary sources
+
+| Field | Value | Source |
+|---|---|---|
+| Brand | Yarbo | yarbo.com; Lowe's; Best Buy |
+| Model number | **YARBO S1** | Lowe's "Model #YARBO S1", item 8256113 |
+| Model in retail title | "Black Yarbo S1" | Best Buy SKU J3Q5Q8G9GS |
+| Canonical product name | Yarbo Snow Blower | yarbo.com/products/yarbo-snow-blower |
+| Amazon ASIN | B0FJF9V1JC | Amazon title "YARBO 2-Stage 24/7 Autonomous Robot Snow Blower with Modular Design" |
+| Seller | "Sold and Shipped by Yarbo" | Lowe's |
+| Ratings | **0 reviews (0.0)** | Lowe's, 11 August 2026 |
+
+The model number resolves cleanly, which several products on this site never
+managed. It also confirms the `yarbo s1` seed term (20/mo) is the real SKU
+designation and `yarbo m1` (50/mo) is the newer M Series, on Kickstarter
+pre-order rather than sold.
+
+### It is not a snow blower. It is a module on a robot.
+
+This is the finding that changes what the category would have to be.
+
+Yarbo is a "1+N" modular system: "One intelligent core powers multiple
+attachments with seamless hot-swapping." The snow blower is one of four modules
+alongside a lawn mower, a leaf blower and a trimmer.
+
+| SKU | Price | Source |
+|---|---:|---|
+| Snow Blower Module alone | $1,299.00 | yarbo.com/products/snow-blower-module |
+| **Yarbo Snow Blower** (Core + module + Data Center + battery + dock + snow track + tow hitch) | **$4,999.00** | yarbo.com/products/yarbo-snow-blower |
+| Yarbo Core alone, discounted by a dealer | $4,999.00 → $3,599.00 | smart-dots.com |
+| Modular Snow Blower Robot, dealer sale price | $4,530.00 | cnygreenteam.com |
+| Lawn Mower Pro + Snow Blower | $7,199.00 | yarbo.com |
+| Complete 4-in-1 | $7,999.00 | yarbo.com |
+
+A reader searching "robot snow blower" is being quoted $1,299 by one page and
+$4,999 by another for what both call a snow blower, and the difference is
+whether the robot is included. That confusion is a page in its own right and it
+is the single most useful thing this site could publish about the category.
+
+### Published specifications, first-party
+
+From yarbo.com/products/yarbo-snow-blower, 11 August 2026:
+
+| Field | Value |
+|---|---|
+| Clearing width | 24 in |
+| Intake height | 12 in, adjustable |
+| Throw distance | 6–40 ft, adjustable |
+| Battery | 38.4 Ah (36 V per third-party; not stated first-party) |
+| Runtime | approximately 90 minutes |
+| Charge time | 90 minutes, 20% to 80% |
+| Area per charge | up to 6,000 ft² at 1 inch of snow |
+| Max slope | 36% (21°) |
+| Operating temperature | −13°F to +140°F |
+| Construction | Q355 steel |
+| Ingress rating | IPX5 |
+| Warranty | up to 5 years ("2 years standard coverage") |
+
+### Conflicts found, recorded rather than resolved
+
+1. **Runtime: 90 minutes against 4 hours.** yarbo.com states "approximately 90
+   minutes". Third-party reviews (electrokit.blog, lawncareguides.com) state
+   "up to 4 hours" on a 36V/38.4Ah pack. First-party wins; the 4-hour figure is
+   not carried.
+2. **Throw distance: feet against yards on Yarbo's own site.** The Snow Blower
+   Module page reads "Throws snow up to 40 feet" and, in the same panel,
+   "6–40 Yards Throw Control". One of the two is wrong and both are Yarbo's.
+3. **Price: $4,999 against $1,999.** Third-party reviews headline "$4,999" and
+   also describe a "standalone snow blower package"; the module alone is
+   $1,299. Anything published here has to name which SKU it is pricing.
+4. **Zero reviews at Lowe's.** No owner evidence exists at that retailer at
+   all, which for a $4,999 purchase is worth stating rather than filling with
+   third-party enthusiasm.
+
+### What could not be read
+
+The Amazon listing's own details table. WebFetch returned the page head only,
+and DataForSEO's Amazon merchant endpoints are not enabled on this account
+(`40501 Invalid Field`). Brand and model therefore rest on Lowe's and Best Buy,
+which is a stronger position than the WYBOT C1 record started from, but the
+Amazon first-party check is outstanding and would be needed before a buy link
+ships.
+
+---
+
+## Go / no-go — revised after verification
+
+**NO-GO as a category. GO as three pages under the lawn hub.**
+
+The first draft of this verdict, written before product verification, was
+"GO, conditionally — and the condition is products, not keywords." That
+condition has failed, and it failed harder than expected. There is not one
+buyable machine and a possible second; there is **one manufacturer and no
+second machine at all.** Snowbot, which looked like the independent competitor,
+turns out to be Yarbo's own former brand name — Hanyang Technology of Shenzhen,
+S1 at $1,999 in 2021, S1 Pro at $2,999, now sold as Yarbo. Left Hand Robotics
+was bought by Toro in 2021 and builds commercial sidewalk machines. Every other
+domain in all seven SERPs is a Yarbo dealer.
+
+The keyword case remains as strong as it looked: ≈22,700/mo of generic robot
+demand at KD 0–9, a decisively commercial SERP with Amazon at position 2, four
+purchase-intent PAA questions, and only 1–2 of 10 shared domains with the
+conventional snow-blower market. None of that is in doubt and none of it is
+what kills this.
+
+What kills it as a *category* is that a category on this site means a hub, a
+comparison table, a BotMatch matcher and a best-of. All four are comparative
+surfaces and there is nothing to compare. `MIN_PRODUCTS_FOR_A_MATCH` is 2 and
+the matcher would be gated off on day one, exactly as grill is. A comparison
+table with one row is not a table. A best-of with one entry is an
+advertisement, which is the standard this site applied to the WINBOT W1 PRO and
+the HOBOT 298 when it refused to invent awards for them.
+
+**What to build instead, and it is worth building.** Three pages, under the
+existing robotic-lawn-mowers hub, because Yarbo is a modular yard robot whose
+snow blower is one attachment on the same core that mows the lawn — which is
+the honest place for it rather than a category invented around a single SKU:
+
+1. **A Yarbo review** — `yarbo` 18,100, `yarbo snow blower` 14,800,
+   `yarbo review` 1,900, `yarbo snow blower reviews` 2,900. The brand terms this
+   site would normally cede to their owner are cedeable precisely because Yarbo
+   ranks position 1 on all of them; what it does not answer is the $1,299
+   against $4,999 question, which is the single most useful thing anybody could
+   publish here.
+2. **"Do robot snow blowers work?"** — the head PAA question, taking
+   `robot snow blower` (12,100, KD 0), `robotic snow blower` and
+   `autonomous snow blower` (3,600, KD 0). The honest answer includes 90 minutes
+   of runtime rather than the four hours the review sites print, zero owner
+   reviews at Lowe's, and −13°F.
+3. **"How much does a robot snow blower cost?"** — the second PAA question, and
+   the one the market is actively confusing. $1,299 module, $4,999 complete,
+   $7,999 for the 4-in-1, dealer discounts to $3,599 and $4,530 on the same
+   week.
+
+Three pages against ≈36,000/mo of combined demand, at KD 0–13, with no
+comparative surface pretending a market exists. If a genuine second
+manufacturer ships a consumer machine — and the demand curve suggests somebody
+will — the category promotes cleanly from those three pages, because they were
+written about the machines rather than about a category.
+
+**Before any of it ships:** the Amazon listing's own details table still has not
+been read (WebFetch returns the head only, DataForSEO's merchant endpoints are
+not enabled on this account), and no buy link should go live until Brand and
+Model Number are confirmed first-party there — the roborock S8 MaxV Ultra began
+exactly this way.
