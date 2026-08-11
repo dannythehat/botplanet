@@ -1220,11 +1220,17 @@ export const EDITORIAL: Record<string, EditorialContent> = {
     standfirst:
       "Two measurements settle this category and neither is a feature: the square footage of your lawn, and the gradient of its worst slope. " +
       "Get those and the six machines below shorten to about two.",
+    /* Its own hero since 11 August. It borrowed the lawn hub's until then,
+       which meant the hub and the shortlist opened on the same picture. The
+       slope is deliberate: this page rules machines out on area and gradient,
+       and gradient is the number that eliminates four of the six below. */
     image: {
-      src: "/media/hubs/lawn/hero.webp",
+      src: "/media/editorial/best-lawn-mowers.webp",
       alt:
-        "A robot mower on a striped lawn at sunset with a lit stone house behind it.",
-      focal: "50% 55%",
+        "An unbadged silver robot mower working across a steep grass bank at " +
+        "night with its headlamps on, the slope falling away to a lit lakeside " +
+        "town and mountains far below, and a modern glass house above it.",
+      focal: "55% 60%",
     },
     prose: "best-robot-lawn-mowers",
     picks: [

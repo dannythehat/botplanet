@@ -1070,6 +1070,47 @@ export const ORIGINAL_ASSETS: MediaAssetRecord[] = [
     presentation: "bleed",
   },
   {
+    /* THE ONE SLOT THE 11 AUGUST DROP LEFT EMPTY, filled the same day.
+       Until this landed, /best-robots/robotic-lawn-mowers/ was rendering the
+       lawn HUB's hero — two different pages showing one picture, which is the
+       single thing artwork is not supposed to do.
+
+       IT IS NIGHT, AND THE BRIEF ASKED FOR LATE MORNING. The rule the brief
+       was actually enforcing was "not the hub's light", because the hub owns a
+       flat lawn at golden hour and the two had to stop looking alike. Night on
+       a mountainside above a lake differentiates harder than daylight would
+       have, and robot mowers genuinely do run after dark — quietly, which is
+       half their argument. Kept as supplied.
+
+       THE SLOPE IS THE POINT. This page rules machines out on two numbers, and
+       gradient is the one that eliminates four of the six. A hero showing a
+       machine holding a bank steep enough to think twice about says what the
+       page says before a word is read.
+
+       GENERIC ON PURPOSE, and this is why it is `illustration` rather than a
+       depiction: the page ranks six mowers, so a recognisable machine at the
+       top would be one brand's photograph heading a page about its rivals. The
+       machine here carries no badge and no model lettering, and nothing but
+       our own wordmark is set into the pixels — no year, no price, no claim. */
+    ...base("hero-editorial-best-lawn-mowers", "illustration"),
+    productId: null,
+    purpose: "Best robot lawn mowers page hero",
+    exactModel: null,
+    type: "educational_diagram",
+    checksum: "sha256:ffefe8c417ad3ec7a58823303a7b7b82a95c5ca68b2a6ff433096b73e016aa5b",
+    width: 1671,
+    height: 941,
+    src: "/media/editorial/best-lawn-mowers.webp",
+    altText:
+      "An unbadged silver robot mower working across a steep grass bank at " +
+      "night with its headlamps on, the slope falling away to a lit lakeside " +
+      "town and mountains far below, and a modern glass house above it.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+    presentation: "bleed",
+  },
+  {
     ...base("hero-editorial-do-window-robots-work", "illustration"),
     productId: null,
     purpose: "Do window cleaning robots work? page hero",
@@ -5934,9 +5975,10 @@ export const AUGUST_11_UPLOAD_ASSETS: MediaAssetRecord[] = [
  * titles the SKU "Black Yarbo S1". The brief was wrong and the artwork is not,
  * so nothing here is corrected in a caption.
  *
- * THE ONE SLOT THAT WENT UNFILLED is the lawn best-of hero. All six files are
- * Yarbo snow, so best-robot-lawn-mowers still borrows the lawn hub hero and is
- * still sharing an image with the hub. Recorded rather than quietly dropped.
+ * THE ONE SLOT THESE SIX LEFT UNFILLED was the lawn best-of hero — all six
+ * files are Yarbo snow. It was filled separately the same day and is recorded
+ * as `hero-editorial-best-lawn-mowers` up in ORIGINAL_ASSETS, alongside the
+ * other editorial heroes rather than down here, because it depicts no product.
  */
 export const YARBO_UPLOAD_ASSETS: MediaAssetRecord[] = [
   {

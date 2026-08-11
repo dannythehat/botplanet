@@ -5028,6 +5028,45 @@
     ]
   },
   {
+    "source": "/media/editorial/best-lawn-mowers.webp",
+    "sourceWidth": 1671,
+    "sourceHeight": 941,
+    "derivatives": [
+      {
+        "id": "media-editorial-best-lawn-mowers-webp-360",
+        "src": "/media/editorial/best-lawn-mowers-360w.webp",
+        "width": 360,
+        "height": 203,
+        "bytes": 9372,
+        "checksum": "sha256:91edbf88230013d4521e8b1478ca0c315bd2acaaf75db523b8794f5b9643c017"
+      },
+      {
+        "id": "media-editorial-best-lawn-mowers-webp-640",
+        "src": "/media/editorial/best-lawn-mowers-640w.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 26768,
+        "checksum": "sha256:f4961e6688f073aea27efdcbfa5b882c3acf202d1749a25ac9e3a2dec8efa0a6"
+      },
+      {
+        "id": "media-editorial-best-lawn-mowers-webp-960",
+        "src": "/media/editorial/best-lawn-mowers-960w.webp",
+        "width": 960,
+        "height": 541,
+        "bytes": 56722,
+        "checksum": "sha256:1e7c58d79e569759105a66b92b4ee1e5b17848e60308d0e412497ab51981ed9c"
+      },
+      {
+        "id": "media-editorial-best-lawn-mowers-webp-1440",
+        "src": "/media/editorial/best-lawn-mowers-1440w.webp",
+        "width": 1440,
+        "height": 811,
+        "bytes": 97240,
+        "checksum": "sha256:7f69a325c24455893005d7a4eaa42439b7f8b99c0c640d53dfdae39eb3ea8850"
+      }
+    ]
+  },
+  {
     "source": "/media/editorial/do-window-robots-work.webp",
     "sourceWidth": 1672,
     "sourceHeight": 941,

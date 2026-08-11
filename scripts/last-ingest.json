@@ -1,50 +1,10 @@
 [
   {
-    "to": "media/reviews/yarbo-snow-blower/hero.webp",
-    "checksum": "sha256:66ed07c1faa37a4b6d7955fcc121343f809d8374bf77ea7b294207446154be10",
-    "width": 1672,
+    "to": "media/editorial/best-lawn-mowers.webp",
+    "checksum": "sha256:ffefe8c417ad3ec7a58823303a7b7b82a95c5ca68b2a6ff433096b73e016aa5b",
+    "width": 1671,
     "height": 941,
-    "bytes": 240444,
-    "saved": 2036434
-  },
-  {
-    "to": "media/reviews/yarbo-snow-blower/module-split.webp",
-    "checksum": "sha256:0053b3a583fa408d4010ad34233ca952abd2f0db64e04e9c80258210353aad3f",
-    "width": 1122,
-    "height": 1402,
-    "bytes": 136066,
-    "saved": 1642827
-  },
-  {
-    "to": "media/reviews/yarbo-snow-blower/tracked-platform.webp",
-    "checksum": "sha256:341cbf2854caeeddc2722574a0708cefc16211cc81b6c508ed37ecc5eedf7174",
-    "width": 1122,
-    "height": 1402,
-    "bytes": 227638,
-    "saved": 2047997
-  },
-  {
-    "to": "media/reviews/yarbo-snow-blower/chute-control.webp",
-    "checksum": "sha256:7e5f2f9f8189f78bc14edb295f00a5f56164754283f64abb7230b791b1143f48",
-    "width": 1122,
-    "height": 1402,
-    "bytes": 274730,
-    "saved": 2124406
-  },
-  {
-    "to": "media/reviews/yarbo-snow-blower/conditions.webp",
-    "checksum": "sha256:38567a9811f5a9eba64a68b8a1cea2ff4b73c6351931dcd73f482849626c5a96",
-    "width": 1122,
-    "height": 1402,
-    "bytes": 284148,
-    "saved": 2190650
-  },
-  {
-    "to": "media/reviews/yarbo-snow-blower/daylight-driveway.webp",
-    "checksum": "sha256:cad64385e941ae915eb812e6227e44f3ab3b1ef963efb4bc45f9747b7a4c92f7",
-    "width": 1122,
-    "height": 1402,
-    "bytes": 199040,
-    "saved": 2008158
+    "bytes": 178402,
+    "saved": 1780450
   }
 ]

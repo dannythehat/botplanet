@@ -249,6 +249,7 @@ const SOURCES = [
   "/media/editorial/mowers-for-hills.webp",
   "/media/editorial/robotic-pets-for-elderly.webp",
   "/media/editorial/best-window-robots.webp",
+  "/media/editorial/best-lawn-mowers.webp",
   "/media/editorial/do-window-robots-work.webp",
   /* Category hub artwork, 8 August 2026. */
   "/media/hubs/vacuums/hero.webp",
