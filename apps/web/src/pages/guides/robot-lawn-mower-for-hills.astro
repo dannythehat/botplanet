@@ -21,7 +21,8 @@ import SlopePercentDegrees from "../../components/diagrams/SlopePercentDegrees.a
 import { editorialFor } from "../../content/editorial";
 import { buildEditorialPage } from "../../lib/editorial-page";
 import { breadcrumbsFor } from "../../lib/routing";
-import { articleSchema, faqPageSchema } from "../../lib/seo";
+import { articleSchema, faqPageSchema, imageObjectSchema } from "../../lib/seo";
+import { MEDIA_ASSETS } from "../../content/media/assets";
 import { FOUNDER } from "../../content/team";
 
 const PATH = "/guides/robot-lawn-mower-for-hills/";
@@ -34,6 +35,20 @@ const { html, picks, comparison } = await buildEditorialPage(
 
 const crumbs = breadcrumbsFor(PATH, article.title);
 
+/* The page's own artwork, used as the social preview and as Article schema's
+   image. Without this a share of this page shows the BotPlanet logo rather
+   than the picture at the top of it, and Article schema carries no image at
+   all — the same defect the elderly-pets guide was fixed for on its own. */
+const lead = article.image?.src ?? null;
+
+/* An ImageObject per picture this page renders: the lead, then each figure
+   the injector places. Built from the same list, so nothing is claimed in
+   markup that a reader cannot see. */
+const renderedImages = [lead, ...(article.figures ?? []).map((f) => f.src)]
+  .filter((src): src is string => Boolean(src))
+  .map((src) => MEDIA_ASSETS.find((a) => a.src === src))
+  .filter((a): a is NonNullable<typeof a> => Boolean(a?.width) && Boolean(a?.height));
+
 const pageSchema = [
   articleSchema({
     headline: article.title,
@@ -42,7 +57,11 @@ const pageSchema = [
     dateModified: article.lastReviewed,
     authorName: FOUNDER.name,
     authorPath: FOUNDER.path,
+    image: lead ?? undefined,
   }),
+  ...renderedImages.map((a) =>
+    imageObjectSchema({ path: a.src, caption: a.altText ?? "", width: a.width!, height: a.height! }),
+  ),
   faqPageSchema(article.faq, PATH),
 ];
 ---
@@ -50,6 +69,7 @@ const pageSchema = [
 <Base
   title={article.seoTitle}
   description={article.metaDescription}
+  ogImage={lead ?? undefined}
   breadcrumbs={crumbs}
   schema={pageSchema}
 >
