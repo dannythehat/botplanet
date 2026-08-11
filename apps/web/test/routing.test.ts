@@ -15,6 +15,7 @@ import {
   categoryRoutes,
   productInSitemap,
   sitemapRoutes,
+  LEGACY_REDIRECTS,
 } from "../src/content/routes";
 import { RETIRED_SLUGS, MERGED_REVIEWS } from "../src/content/product-names";
 import { COMPARE_PAGES, comparePageIsSubstantive } from "../src/content/compare-page";
@@ -341,5 +342,61 @@ describe("productInSitemap — hidden categories ship their reviews", () => {
     expect(paths).not.toContain(`/compare/${hidden}/`);
     expect(paths).not.toContain(`/botmatch/${hidden}/`);
     expect(paths).not.toContain(`/best-robots/${hidden}/`);
+  });
+});
+
+describe("legacy redirects from the previous site", () => {
+  /**
+   * See the long note above LEGACY_REDIRECTS in content/routes.ts. Google's
+   * index still holds the old site's URLs; these turn each dead one into a
+   * signpost instead of a 404.
+   */
+  it("never redirects a path that is a live route today", () => {
+    /* THE MISTAKE THIS CAUGHT ON THE WAY IN: /contact/ existed on the old site
+       AND exists on this one, and was about to be redirected to /about/. A
+       legacy map is written by looking at what USED to exist, which is exactly
+       the frame of mind in which you forget to check what still does. */
+    const live = new Set(ROUTES.map((r) => r.path));
+    const broken = LEGACY_REDIRECTS.filter((r) => live.has(r.from)).map((r) => r.from);
+    expect(broken).toEqual([]);
+  });
+
+  it("sends every legacy path somewhere that exists, in one hop", () => {
+    for (const r of LEGACY_REDIRECTS) {
+      const first = resolveRedirect(r.from);
+      expect(first, `${r.from} does not redirect`).not.toBeNull();
+      // One hop, never a chain: the destination must be final.
+      expect(resolveRedirect(first!.to), `${r.from} → ${first!.to} redirects again`).toBeNull();
+      expect(first!.status).toBe(301);
+    }
+  });
+
+  it("gives every legacy entry a written reason", () => {
+    for (const r of LEGACY_REDIRECTS) expect(r.why.length).toBeGreaterThan(20);
+  });
+
+  it("maps an old product URL onto the page that replaced it", () => {
+    const r = resolveRedirect("/product/sphero-bolt/");
+    expect(r?.to).toBe("/robots/educational-coding-robots/sphero-bolt/");
+    expect(r?.status).toBe(301);
+  });
+
+  it("matches an old review URL that carried a headline after the slug", () => {
+    // "sphero-bolt-review-the-smartest-hamster-ball-in-the-galaxy"
+    const r = resolveRedirect("/reviews/sphero-bolt-review-the-smartest-hamster-ball-in-the-galaxy/");
+    expect(r?.to).toBe("/robots/educational-coding-robots/sphero-bolt/");
+  });
+
+  it("sends a product we no longer hold to the category that covers it", () => {
+    expect(resolveRedirect("/product/irobot-roomba-j9-plus/")?.to).toBe("/robots/robot-vacuums/");
+    expect(resolveRedirect("/product/temi-v3-robot/")?.to).toBe("/robots/companion-robots/");
+  });
+
+  it("still 404s an old URL nobody can honestly place", () => {
+    /* The standard at the top of lib/routing.ts holds: unknown routes 404 and
+       are never swept to the homepage. A redirect that cannot be justified is
+       worse than an honest 404, because it tells a crawler the page moved. */
+    expect(resolveRedirect("/product/some-machine-that-never-existed/")).toBeNull();
+    expect(resolveRedirect("/nonsense/")).toBeNull();
   });
 });

@@ -1184,3 +1184,125 @@ export const REDIRECTS: { from: string; to: string }[] = ROUTES.flatMap((r) =>
 
 /** Categories, re-exported so consumers need only one import. */
 export { CATEGORIES, LAUNCH_CATEGORY, liveCategories };
+
+/* ============================================================
+   LEGACY REDIRECTS — the URLs Google still thinks are this site.
+
+   WHAT THIS FIXES, AND HOW IT WAS FOUND. Search Console on 11 August 2026:
+   62 pages indexed, and every one of them belongs to a PREVIOUS site on this
+   domain — /product/*, /reviews/*, /blog/*, /shop, /quiz, /gifts. The 111
+   pages that actually exist sit in "Discovered – currently not indexed" with
+   Last crawled: N/A. Google knows they are there, from the sitemap, and has
+   never fetched one of them.
+
+   Meanwhile every old URL 404s. /security-robots, /robot-vacuums,
+   /companion-robots and the rest were all checked by hand and all dead, each
+   with a live replacement under /robots/. Google's own internal-link report
+   still lists /shop, /categories, /new-robots and /returns-policy as this
+   site's most-linked pages, which is a fair summary of what it believes.
+
+   So the crawler spends what little budget a two-backlink domain earns on
+   re-checking dead URLs, and never reaches the new ones. A 301 turns each of
+   those dead ends into a signpost: it passes on whatever the old page was
+   worth, and it is the strongest "this moved, come and look" signal available.
+
+   WHAT IS DELIBERATELY NOT HERE. Anything that cannot be mapped honestly.
+   Products the catalogue no longer holds — a Roomba j9+, a temi, two
+   Husqvarnas — go to the category that covers them, because a reader who
+   wanted a robot vacuum is served by the vacuum hub and is not served by the
+   homepage. Old URLs with no category at all keep 404ing. The rule in
+   lib/routing.ts stands: unknown routes 404, they are never swept to the
+   homepage, and a redirect nobody can justify is worse than an honest 404.
+   ============================================================ */
+
+/** Old exact paths, and where each one honestly belongs now. */
+export const LEGACY_REDIRECTS: { from: string; to: string; why: string }[] = [
+  /* The old site put categories at the root. Every one of these is a live
+     category today, one path segment deeper. */
+  ...CATEGORIES.filter((c) => c.launch === "live").map((c) => ({
+    from: `/${c.slug}/`,
+    to: `/robots/${c.slug}/`,
+    why: "Root-level category from the previous structure; the category still exists one segment deeper.",
+  })),
+
+  /* Cancelled before it was built. 004 Home Security was ruled out on no
+     consumer demand in the SERPs, so there is no security category to land on
+     and the robots index is the honest destination. */
+  { from: "/security-robots/", to: "/robots/", why: "Home security was researched and cancelled; no such category exists, so the reader gets the full index rather than a 404." },
+  { from: "/home-security-robots/", to: "/robots/", why: "The second phrasing the old site used for the same cancelled category." },
+
+  /* Storefront-shaped pages from the old site. All of them were 'browse the
+     catalogue', which is what /robots/ is now. */
+  { from: "/shop/", to: "/robots/", why: "The old catalogue browse page." },
+  { from: "/categories/", to: "/robots/", why: "The old category index." },
+  { from: "/new-robots/", to: "/robots/", why: "The old new-arrivals list; nothing on this site replaces it, and the index is the nearest honest answer." },
+  { from: "/product/", to: "/robots/", why: "Bare product index from the old structure." },
+  { from: "/reviews/", to: "/robots/", why: "Bare review index from the old structure." },
+  { from: "/blog/", to: "/guides/", why: "The old blog is the guides section now." },
+
+  /* Decision tools. The quiz was the old site's version of what BotMatch does,
+     and gifts was a seasonal buying aid with no successor. */
+  { from: "/quiz/", to: "/botmatch/", why: "The old questionnaire. BotMatch is the same job done properly." },
+  { from: "/gifts/", to: "/robots/", why: "A seasonal gift finder with no successor page; the index is the nearest honest destination." },
+
+  /* Policy pages that were renamed rather than removed. */
+  { from: "/privacy-policy/", to: "/privacy/", why: "The policy is the same policy; only the URL got shorter when the site was rebuilt." },
+  /* NOT /contact/. It was on the old site and it is on this one, so it needs
+     no redirect — and a redirect would have broken a live page. Caught by
+     routing.test.ts, which is why the collision check below is a test rather
+     than a comment. */
+  { from: "/returns-policy/", to: "/terms/", why: "This site sells nothing directly, so it has no returns policy of its own. Terms is where the commercial relationship is described." },
+  { from: "/shipping-policy/", to: "/terms/", why: "As above — delivery is the retailer's, not ours." },
+];
+
+/**
+ * Old product and review URLs, resolved by slug rather than listed one by one.
+ *
+ * The previous site used /product/<slug> and /reviews/<slug>-review-<some
+ * headline>. Where that slug still names something in the catalogue the
+ * redirect is exact; where it does not, the reader goes to the category that
+ * covers what they were looking at.
+ */
+const LEGACY_PRODUCT_CATEGORY: Record<string, string> = {
+  /* Gone from the catalogue, but the category that covers them is live, so a
+     reader who arrived for one of these is still served. */
+  "irobot-roomba-j9-plus": "robot-vacuums",
+  "ecovacs-deebot-x2-omni": "robot-vacuums",
+  "husqvarna-automower-430xh": "robotic-lawn-mowers",
+  "husqvarna-automower-450x-nera": "robotic-lawn-mowers",
+  "ecovacs-goat-a3000": "robotic-lawn-mowers",
+  "miko-mini-ai-robot": "companion-robots",
+  "temi-v3-robot": "companion-robots",
+  "jjrc-r2-cady-wida": "educational-coding-robots",
+  "amazon-echo-show-10": "companion-robots",
+};
+
+/**
+ * Resolve a legacy /product/ or /reviews/ path, or return null.
+ *
+ * Old review slugs carried a headline — "sphero-bolt-review-the-smartest-
+ * hamster-ball-in-the-galaxy" — so the product slug is matched as a PREFIX and
+ * the longest match wins, which stops a shorter slug claiming a longer one's
+ * URL.
+ */
+export const legacyProductRedirect = (
+  pathname: string,
+  known: { slug: string; categorySlug: string }[],
+): string | null => {
+  const m = /^\/(?:product|reviews)\/([a-z0-9-]+)\/?$/.exec(pathname.toLowerCase());
+  if (!m) return null;
+  const slug = m[1];
+
+  const exact = known.find((k) => k.slug === slug);
+  if (exact) return productPath(exact.slug, exact.categorySlug);
+
+  const prefixed = known
+    .filter((k) => slug.startsWith(`${k.slug}-`))
+    .sort((a, b) => b.slug.length - a.slug.length)[0];
+  if (prefixed) return productPath(prefixed.slug, prefixed.categorySlug);
+
+  for (const [old, category] of Object.entries(LEGACY_PRODUCT_CATEGORY)) {
+    if (slug === old || slug.startsWith(`${old}-`)) return `/robots/${category}/`;
+  }
+  return null;
+};
