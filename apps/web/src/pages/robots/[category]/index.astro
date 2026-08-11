@@ -2,6 +2,7 @@
 import Base from "../../../layouts/Base.astro";
 import ProductCard from "../../../components/ProductCard.astro";
 import { RETIRED_SLUGS } from "../../../content/product-names";
+import { productPath } from "../../../content/routes";
 import { journeyFor } from "../../../content/journeys";
 import { getDb, schema } from "../../../lib/db";
 import { usd, titleCase } from "../../../lib/format";
@@ -376,7 +377,7 @@ const pageSchema = hero
     <div class="grid grid--products" id="products">
       {products.map((p, i) => (
         <ProductCard
-          href={`/robots/${cat.slug}/${p.slug}/`}
+          href={productPath(p.slug, cat.slug)}
           name={p.name}
           classification={titleCase(p.productClass)}
           meta={[titleCase(p.powerType), ...(p.environments as string[]).slice(0, 2).map(titleCase)]}
