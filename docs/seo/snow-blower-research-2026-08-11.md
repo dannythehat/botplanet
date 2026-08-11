@@ -595,3 +595,126 @@ not an award, it is the most on-brand sentence available.
   declaration now.**
 
 **Total research spend: $0.2487 of the $2.00 ceiling.**
+
+
+---
+
+## Merge review — signed off, two gates answered and a third found
+
+Signed off conditional on two build gates. Both were code questions; both are
+answered below. Answering the first uncovered a third gate neither review
+named, and it is the more dangerous of the three.
+
+### GATE 1 — does a product page under a hidden category inherit noindex? **NO. PASS.**
+
+`pages/robots/[category]/[slug].astro` never passes `noindex` to `Base`, and
+never reads the category's launch state at all. `noindex` is an explicit prop
+and nothing sets it on this route. A product page under a hidden category
+indexes normally.
+
+`hidden` is a navigation and listing concept, not a page-level one — which is
+what the definition in nav.ts already says: "reserved slug, noindex, not linked
+in nav" describes the *hub*, not everything beneath it.
+
+### GATE 1b — THE ONE NOBODY NAMED: the sitemap drops it. **FAIL, one-line fix.**
+
+Found while answering Gate 1. `sitemap.xml.ts` line 73 filters product rows on
+`liveSlugs.has(r.categorySlug)`, and `liveSlugs` is built from
+`liveCategories()`, which returns only `launch === "live"`.
+
+So a product in a hidden category is **indexable but absent from the sitemap**.
+That is worse than either failure mode the reviews were worried about: a money
+page that Google may index and that this site never declares, on a category
+whose whole thesis is a September indexation head start.
+
+Fix before build: the sitemap must admit products whose review is published
+even when their category is hidden, while continuing to exclude the hidden
+hub, comparison and matcher. One condition, and it needs a test.
+
+### GATE 2 — what does the breadcrumb render? **PASS, cleanly.**
+
+`ROUTES` contains no entry for `solar-panel-robots`, the existing hidden
+category — hidden categories get no route registered. `breadcrumbsFor()` walks
+the route registry and falls back to `nearestAncestor()`, which for
+`/robots/robot-snow-blowers/yarbo-snow-blower/` resolves to `/robots/`
+(registered, routes.ts line 83).
+
+The breadcrumb therefore renders **Home → Robots → Yarbo Snow Blower**. It
+never links the category segment, so the money page ships no crawlable link to
+a hidden or dead hub. The concern is real in principle and does not arise here,
+because a hidden category has no route to link to.
+
+### The review-intent SERP — pulled, $0.0040, and it changes the brief
+
+`yarbo snow blower reviews` (2,900) was never measured and is the closest SERP
+to the page being built.
+
+```
+features: ai_overview, video, people_also_ask, discussions_and_forums
+ 2 yarbo.com          Yarbo Snow Blower
+ 3 reddit.com         Extremely Disappointed with the Yarbo Snow Blower
+ 7 amazon.com         YARBO 2-Stage 24/7 Autonomous Robot Snow Blower
+ 8 trustpilot.com     Read Customer Service Reviews of yarbo.com
+ 9 forum.yarbo.com    Yarbo Blower - reviews/opinions
+10 pcworld.com        Yarbo robotic snow blower review: A yard crawler for all...
+11 thesnowbot.com     Yarbo Snow Blower Review
+13 facebook.com       Yarbo snow blower review and experience
+14 facebook.com       What is the Yarbo snowblower's performance like?
+15 blog.bluestarcreations.net  An honest review of the Yarbo experience
+```
+
+Three findings, in order of how much they change the build.
+
+1. **Owner evidence exists and it is not at retail — and the loudest of it is
+   negative.** Position 3 is a Reddit thread titled "Extremely Disappointed
+   with the Yarbo Snow Blower". Trustpilot, Yarbo's own forum and two Facebook
+   threads follow. The verification section recorded "0 owner reviews at
+   Lowe's" and left it there; the correct reading is that owner evidence was
+   never absent, it is simply somewhere else, and a review built only on
+   Yarbo's specification sheet would be contradicted by the third result on
+   its own money term. This is the strongest content angle in the whole run
+   and it was one pull away from being missed.
+2. **Text, not video.** One video block, zero YouTube in the top ten, against
+   YouTube ranking on nearly every generic term. The format question is
+   answered.
+3. **No incumbent editorial anywhere.** No Wirecutter, NYT, Consumer Reports
+   or TechGearLab. Only PCWorld at 10. The opportunity holds on the money term
+   as well as on the generics.
+
+Overlap: 4/10 against `robot snow blower`, 5/10 against `yarbo`, 4/10 against
+`yarbo snow blower`. **Stated honestly, this is the ambiguous middle of rule 2**
+— above the "under 3/10 justifies a separate URL" line and below the ">5/10
+must merge" line. It stays on the review because it is review intent for the
+same product and a second URL would compete with it, but the rule does not
+force that answer and this document should not pretend it does.
+
+### Trigger amended
+
+The December and January re-pull watched only domain overlap with the
+conventional SERP. If Wirecutter, NYT, Consumer Reports or TechGearLab enters
+a robot-term top ten directly, overlap with `snow blower` may not move at all
+while the difficulty reality changes completely. **Second trigger: flag if any
+of those four appears in any robot-term top ten.** Today's baseline is zero
+across all eleven SERPs.
+
+### `automatic snow removal` (110, KD 0) — assigned
+
+It appeared in the data and in neither the secondary nor the refused list.
+Unassigned is not a state this site permits — it fails tests for unregistered
+images and should not ship an unregistered keyword. **Assigned as a secondary
+on the review.**
+
+### Corrections carried
+
+- **"40–60% of nominal" is a PLANNING ASSUMPTION, UNMEASURED.** It was a
+  reviewer's heuristic and this document had begun presenting it beside
+  measured figures — the same error it had just finished diagnosing in the
+  "~20,000–22,000" line.
+- **The evidence base must be stated in the build prompt.** A $4,999–$7,999
+  product with no retail reviews means the review sources from: Yarbo's own
+  specifications, PCWorld's hands-on, and owner reports on Reddit, Trustpilot
+  and Yarbo's forum — each labelled by class. Without that instruction a writer
+  fills the gaps quietly, which is the failure this site's evidence labels
+  exist to prevent.
+
+**Total research spend: $0.2527 of the $2.00 ceiling.**
