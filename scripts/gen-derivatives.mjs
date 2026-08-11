@@ -84,16 +84,16 @@ async function derive(src) {
    ("pool", "window", "lawn-category"), not for the category slug.
    @extension-check manual */
 const SOURCES = [
-  "media/botmatch/finder-universal.webp",
-  "media/botmatch/finder-pool.webp",
-  "media/botmatch/finder-grill.webp",
-  "media/botmatch/finder-litter.webp",
-  "media/botmatch/finder-companion.webp",
-  "media/botmatch/finder-petcam.webp",
-  "media/botmatch/finder-coding.webp",
-  "media/botmatch/finder-vacuum.webp",
-  "media/botmatch/finder-lawn.webp",
-  "media/botmatch/finder-window.webp",
+  "/media/botmatch/finder-universal.webp",
+  "/media/botmatch/finder-pool.webp",
+  "/media/botmatch/finder-grill.webp",
+  "/media/botmatch/finder-litter.webp",
+  "/media/botmatch/finder-companion.webp",
+  "/media/botmatch/finder-petcam.webp",
+  "/media/botmatch/finder-coding.webp",
+  "/media/botmatch/finder-vacuum.webp",
+  "/media/botmatch/finder-lawn.webp",
+  "/media/botmatch/finder-window.webp",
   /* TIER-1 LISTING CARDS, 10 August 2026. Sixteen products were live with an
      empty grid slot; these are the files that fill them. Added here as well as
      to the media registry, because this list is hand-maintained and a card
@@ -405,6 +405,86 @@ const SOURCES = [
   "/media/coding/makeblock-mbot/figure-1.webp",
   "/media/coding/makeblock-mbot/figure-2.webp",
   "/media/coding/makeblock-mbot/card.webp",
+
+  /* THE 11 AUGUST DROP. Fifty-eight files across seventeen product reviews,
+     every one of which had an empty picture slot before this. Same reason as
+     the block above: hand-maintained, and a file missing here is served at
+     full authored size to a phone that wanted a third of it. */
+  // grillbot
+  "/media/reviews/grillbot/hero.webp",
+  // eufy-x10-pro-omni
+  "/media/reviews/eufy-x10-pro-omni/hero.webp",
+  "/media/reviews/eufy-x10-pro-omni/underside.webp",
+  // eufy-omni-s1-pro
+  "/media/reviews/eufy-omni-s1-pro/hero.webp",
+  "/media/reviews/eufy-omni-s1-pro/stain-lift.webp",
+  "/media/reviews/eufy-omni-s1-pro/slim-profile.webp",
+  // roborock-s8-max-ultra
+  "/media/reviews/roborock-s8-max-ultra/hero.webp",
+  "/media/reviews/roborock-s8-max-ultra/underside.webp",
+  "/media/reviews/roborock-s8-max-ultra/dock.webp",
+  // roborock-saros-10
+  "/media/reviews/roborock-saros-10/hero.webp",
+  "/media/reviews/roborock-saros-10/suction.webp",
+  "/media/reviews/roborock-saros-10/brushes.webp",
+  // dreame-x40-ultra
+  "/media/reviews/dreame-x40-ultra/hero.webp",
+  "/media/reviews/dreame-x40-ultra/washboard.webp",
+  "/media/reviews/dreame-x40-ultra/avoidance.webp",
+  // dreame-x50-ultra
+  "/media/reviews/dreame-x50-ultra/hero.webp",
+  "/media/reviews/dreame-x50-ultra/mop-washing.webp",
+  "/media/reviews/dreame-x50-ultra/brushes.webp",
+  // ecovacs-deebot-t90-pro-omni
+  "/media/reviews/ecovacs-deebot-t90-pro-omni/hero.webp",
+  "/media/reviews/ecovacs-deebot-t90-pro-omni/thresholds.webp",
+  "/media/reviews/ecovacs-deebot-t90-pro-omni/suction-noise.webp",
+  "/media/reviews/ecovacs-deebot-t90-pro-omni/lift.webp",
+  // shark-powerdetect-av2820s
+  "/media/reviews/shark-powerdetect-av2820s/hero.webp",
+  "/media/reviews/shark-powerdetect-av2820s/pet-hair.webp",
+  "/media/reviews/shark-powerdetect-av2820s/self-empty.webp",
+  "/media/reviews/shark-powerdetect-av2820s/neverstuck.webp",
+  // shark-matrix-plus-ur2650ws
+  "/media/reviews/shark-matrix-plus-ur2650ws/hero.webp",
+  "/media/reviews/shark-matrix-plus-ur2650ws/mapping.webp",
+  "/media/reviews/shark-matrix-plus-ur2650ws/filtration.webp",
+  "/media/reviews/shark-matrix-plus-ur2650ws/pets.webp",
+  // roomba-max-705
+  "/media/reviews/roomba-max-705/hero.webp",
+  "/media/reviews/roomba-max-705/precisionvision.webp",
+  "/media/reviews/roomba-max-705/lidar.webp",
+  "/media/reviews/roomba-max-705/edge.webp",
+  // husqvarna-automower-410iq
+  "/media/reviews/husqvarna-automower-410iq/hero.webp",
+  "/media/reviews/husqvarna-automower-410iq/wire-free.webp",
+  "/media/reviews/husqvarna-automower-410iq/durability.webp",
+  "/media/reviews/husqvarna-automower-410iq/cut-quality.webp",
+  // dreame-a3-awd-1000
+  "/media/reviews/dreame-a3-awd-1000/hero.webp",
+  "/media/reviews/dreame-a3-awd-1000/slope.webp",
+  "/media/reviews/dreame-a3-awd-1000/obstacle-vision.webp",
+  "/media/reviews/dreame-a3-awd-1000/coverage.webp",
+  // worx-landroid-vision-wr320
+  "/media/reviews/worx-landroid-vision-wr320/hero.webp",
+  "/media/reviews/worx-landroid-vision-wr320/obstacles.webp",
+  "/media/reviews/worx-landroid-vision-wr320/edge.webp",
+  "/media/reviews/worx-landroid-vision-wr320/coverage.webp",
+  // segway-navimow-i110n
+  "/media/reviews/segway-navimow-i110n/hero.webp",
+  "/media/reviews/segway-navimow-i110n/rtk.webp",
+  "/media/reviews/segway-navimow-i110n/zoning.webp",
+  "/media/reviews/segway-navimow-i110n/voice.webp",
+  // eufy-e15
+  "/media/reviews/eufy-e15/hero.webp",
+  "/media/reviews/eufy-e15/cutting-height.webp",
+  "/media/reviews/eufy-e15/obstacles.webp",
+  "/media/reviews/eufy-e15/app-security.webp",
+  // mammotion-luba-3-awd-1500h
+  "/media/reviews/mammotion-luba-3-awd-1500h/hero.webp",
+  "/media/reviews/mammotion-luba-3-awd-1500h/cutting-decks.webp",
+  "/media/reviews/mammotion-luba-3-awd-1500h/navigation.webp",
+  "/media/reviews/mammotion-luba-3-awd-1500h/obstacles.webp",
 ];
 
 const run = async () => {

@@ -1,26 +1,466 @@
 [
   {
-    "to": "media/botmatch/finder-coding.webp",
-    "checksum": "sha256:8681fe53980aec1bf43f05c5c76b4486fcf890419f78bdab434d4e96559d5a57",
-    "width": 1122,
-    "height": 1402,
-    "bytes": 248334,
-    "saved": 1884940
+    "to": "media/reviews/grillbot/hero.webp",
+    "checksum": "sha256:571da9967fddbc670fadc4cf8f92dcbde29a2ff64d6513dd06c3e6bec019b2fd",
+    "width": 1672,
+    "height": 941,
+    "bytes": 178342,
+    "saved": 1765433
   },
   {
-    "to": "media/botmatch/finder-vacuum.webp",
-    "checksum": "sha256:662dcc72c4586887677d1e582f0289ec7fb842d8cbfe802ad7d67fd9011ef898",
-    "width": 1024,
-    "height": 1536,
-    "bytes": 242096,
-    "saved": 1966379
+    "to": "media/reviews/eufy-x10-pro-omni/hero.webp",
+    "checksum": "sha256:ac06086f5b426dd1c620cb8fe45a6068bf8b1b8db19d486e4dec6fa54a69846f",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 161278,
+    "saved": 1816163
   },
   {
-    "to": "media/botmatch/finder-lawn.webp",
-    "checksum": "sha256:af68de91fac11957301eb7fe8abc3e4a370ebdb197ea840de5e2cf9583927f32",
+    "to": "media/reviews/eufy-x10-pro-omni/underside.webp",
+    "checksum": "sha256:b74fb69982a7220d1fb7ca4b93ec17f5d8e8c489363ffa9cfd23fa7b04611bc4",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 219912,
+    "saved": 2183347
+  },
+  {
+    "to": "media/reviews/eufy-omni-s1-pro/hero.webp",
+    "checksum": "sha256:087218b3c578cd31486613ed76ace88755d5d1df01a60056830196b7ac514ed7",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 207758,
+    "saved": 1789926
+  },
+  {
+    "to": "media/reviews/eufy-omni-s1-pro/stain-lift.webp",
+    "checksum": "sha256:1b89c270ef286f55a550038ebc5907ca121e81ab9bf5880d27349c4ca74514f9",
     "width": 1122,
     "height": 1402,
-    "bytes": 337788,
-    "saved": 2085930
+    "bytes": 198314,
+    "saved": 1700634
+  },
+  {
+    "to": "media/reviews/eufy-omni-s1-pro/slim-profile.webp",
+    "checksum": "sha256:271f12599a787d97610798511f00b8e290313ca966f8bd45dcdfe9b7ba9ba686",
+    "width": 1122,
+    "height": 1402,
+    "bytes": 115992,
+    "saved": 1699331
+  },
+  {
+    "to": "media/reviews/roborock-s8-max-ultra/hero.webp",
+    "checksum": "sha256:0f05926089e20527f077548c191a349dd0c8c5e81be4e8a28c5d7bedfc9a922b",
+    "width": 1122,
+    "height": 1402,
+    "bytes": 141716,
+    "saved": 1805452
+  },
+  {
+    "to": "media/reviews/roborock-s8-max-ultra/underside.webp",
+    "checksum": "sha256:ee2a2603ad4a2a3f8fc584d692cae1424861127752907168401ccbaaef799e43",
+    "width": 1122,
+    "height": 1402,
+    "bytes": 188600,
+    "saved": 1578285
+  },
+  {
+    "to": "media/reviews/roborock-s8-max-ultra/dock.webp",
+    "checksum": "sha256:49f448b9c7a47e8ff31ef5794b32cc23fd43346f6c1d6da5a6c053a8578b986e",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 156648,
+    "saved": 1654442
+  },
+  {
+    "to": "media/reviews/roborock-saros-10/hero.webp",
+    "checksum": "sha256:15c704c7abdd17cdeb2a7951e818af1d3b6ad2ab686cb4c39fa8b78e71e61c62",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 154304,
+    "saved": 1531250
+  },
+  {
+    "to": "media/reviews/roborock-saros-10/suction.webp",
+    "checksum": "sha256:6546cc07619c133ab9afb88948a3418de71c322e6a6b79393cc1125c8e0164de",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 203588,
+    "saved": 1984597
+  },
+  {
+    "to": "media/reviews/roborock-saros-10/brushes.webp",
+    "checksum": "sha256:b16ad289c5631d7b84ce09554c7db415a4c47e94a5db50afec70caad278264cd",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 153628,
+    "saved": 1726332
+  },
+  {
+    "to": "media/reviews/dreame-x40-ultra/hero.webp",
+    "checksum": "sha256:c3b0edb669f5192957440f98efaf36fa2e816181391539cfc7e4529877eb14d0",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 175020,
+    "saved": 1725320
+  },
+  {
+    "to": "media/reviews/dreame-x40-ultra/washboard.webp",
+    "checksum": "sha256:154a75e70771121ccc0332a856b82d1a54422e32840d78e8b866865499da980a",
+    "width": 1122,
+    "height": 1402,
+    "bytes": 263260,
+    "saved": 1902984
+  },
+  {
+    "to": "media/reviews/dreame-x40-ultra/avoidance.webp",
+    "checksum": "sha256:0fc1b9b546f52f78c1a74d4c078a5c00ccedeb17904b16ff34d22016c5e38a6e",
+    "width": 1122,
+    "height": 1402,
+    "bytes": 214784,
+    "saved": 1676875
+  },
+  {
+    "to": "media/reviews/dreame-x50-ultra/hero.webp",
+    "checksum": "sha256:27931b299696780169188316728d4e416ca6036e17ee51dabf207785bae999c0",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 161504,
+    "saved": 1883009
+  },
+  {
+    "to": "media/reviews/dreame-x50-ultra/mop-washing.webp",
+    "checksum": "sha256:2eea201cadc2721d7214685f867b7d8c4f0ace41561b67bbbd63bc87d8bab475",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 189878,
+    "saved": 1609678
+  },
+  {
+    "to": "media/reviews/dreame-x50-ultra/brushes.webp",
+    "checksum": "sha256:89143fb39239c1ea59226c911177f1c0903d4ff2535d67a3888c5693df6fd740",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 180768,
+    "saved": 1777936
+  },
+  {
+    "to": "media/reviews/ecovacs-deebot-t90-pro-omni/hero.webp",
+    "checksum": "sha256:ee94fc5f11d6925866b8c0c5bfde78406548b45d6c2db9ad488253f92966db39",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 198506,
+    "saved": 2023724
+  },
+  {
+    "to": "media/reviews/ecovacs-deebot-t90-pro-omni/thresholds.webp",
+    "checksum": "sha256:3f5b211482a48294c76a484ca66ad325eaacb84722a9562e7447144e68106de4",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 209342,
+    "saved": 1959958
+  },
+  {
+    "to": "media/reviews/ecovacs-deebot-t90-pro-omni/suction-noise.webp",
+    "checksum": "sha256:db61ad90c0074d706bb760ea010e74431df0647addb290efbc63f7f0eec5f377",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 209506,
+    "saved": 1882583
+  },
+  {
+    "to": "media/reviews/ecovacs-deebot-t90-pro-omni/lift.webp",
+    "checksum": "sha256:a4ea4f5e262e2fc76b89e9953f0a28cd57986a1d33fe1be5e19e926470eac3e6",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 153186,
+    "saved": 1705277
+  },
+  {
+    "to": "media/reviews/shark-powerdetect-av2820s/hero.webp",
+    "checksum": "sha256:16e6d22b97b2c906d819075d0049b90ffc06574454a67d57f73a4bcf5f44900c",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 264352,
+    "saved": 2042920
+  },
+  {
+    "to": "media/reviews/shark-powerdetect-av2820s/pet-hair.webp",
+    "checksum": "sha256:795046bd32160c0b25f16c4d9ddd38b11ed8ae1c041eb5dde1a4afc295e0a5d5",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 272076,
+    "saved": 1964398
+  },
+  {
+    "to": "media/reviews/shark-powerdetect-av2820s/self-empty.webp",
+    "checksum": "sha256:c0ec878539e77eb180735e6af4273b5e38bbe34b51691b705980cfbf3b9772f3",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 210656,
+    "saved": 1757347
+  },
+  {
+    "to": "media/reviews/shark-powerdetect-av2820s/neverstuck.webp",
+    "checksum": "sha256:00c5393ac1d32611b68ca92519957424ad6c64904ab0cb81c018600587cfa25a",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 242074,
+    "saved": 1937496
+  },
+  {
+    "to": "media/reviews/shark-matrix-plus-ur2650ws/hero.webp",
+    "checksum": "sha256:ab54375a473328fbfaac22531167ac276d36be1405fa699971f7bafae2a3845a",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 173998,
+    "saved": 1816413
+  },
+  {
+    "to": "media/reviews/shark-matrix-plus-ur2650ws/mapping.webp",
+    "checksum": "sha256:b3c71de0f22864bfdc2101ddc5d56e54fe3e0cf65a843d9d5c25ba755e962981",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 222314,
+    "saved": 1812729
+  },
+  {
+    "to": "media/reviews/shark-matrix-plus-ur2650ws/filtration.webp",
+    "checksum": "sha256:25e4507bfc00cc36bdfde7cb0c15f76389091b452ff1a686eb9f146d7e1f1091",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 127532,
+    "saved": 1513516
+  },
+  {
+    "to": "media/reviews/shark-matrix-plus-ur2650ws/pets.webp",
+    "checksum": "sha256:ea8c994035e68f76fde113cde15d352b1b37e368f7d26db91b7ccb5255559bd0",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 206890,
+    "saved": 1866891
+  },
+  {
+    "to": "media/reviews/roomba-max-705/hero.webp",
+    "checksum": "sha256:c048455ff657c02a1dfc17676f872c32fc12021ab3b0a24d74eb248282470132",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 175666,
+    "saved": 1778890
+  },
+  {
+    "to": "media/reviews/roomba-max-705/precisionvision.webp",
+    "checksum": "sha256:e0ee7af5423ca0e23e8a8cb078b68298b4448d32649e458b2eb4e32c49d17392",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 190374,
+    "saved": 1886332
+  },
+  {
+    "to": "media/reviews/roomba-max-705/lidar.webp",
+    "checksum": "sha256:029039d560127e9a4096bd7904e210b03d02a352a03924c6d36a9b70c12d9bd9",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 198310,
+    "saved": 1931753
+  },
+  {
+    "to": "media/reviews/roomba-max-705/edge.webp",
+    "checksum": "sha256:6d3e87552b1063d821605bedf505d7e54f442eba5b6f94bd560a5a682b705853",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 178042,
+    "saved": 1685098
+  },
+  {
+    "to": "media/reviews/husqvarna-automower-410iq/hero.webp",
+    "checksum": "sha256:c33115937479e8853d5169f37029ed5daa1b561e5282c449cf75681b4e971b31",
+    "width": 1672,
+    "height": 941,
+    "bytes": 173902,
+    "saved": 1643685
+  },
+  {
+    "to": "media/reviews/husqvarna-automower-410iq/wire-free.webp",
+    "checksum": "sha256:ebb33bae368fe226962ea11d56629fb6bb7c3de6e147ffcf8f9c89c338354f5e",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 298798,
+    "saved": 2111326
+  },
+  {
+    "to": "media/reviews/husqvarna-automower-410iq/durability.webp",
+    "checksum": "sha256:c262b07be9334c9ed246b6dacbf63edf83a709e5cfabfe0858b803795282d352",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 232058,
+    "saved": 1973795
+  },
+  {
+    "to": "media/reviews/husqvarna-automower-410iq/cut-quality.webp",
+    "checksum": "sha256:0c436871cf18bf8d98f130a97acced7f7bc75af893add72416f8965f01dc9800",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 233532,
+    "saved": 1847822
+  },
+  {
+    "to": "media/reviews/dreame-a3-awd-1000/hero.webp",
+    "checksum": "sha256:7f521aeb522a6f474f3a452ee730476f8099638c481ce5e3769eaba5413b05f8",
+    "width": 1672,
+    "height": 941,
+    "bytes": 278676,
+    "saved": 2011801
+  },
+  {
+    "to": "media/reviews/dreame-a3-awd-1000/slope.webp",
+    "checksum": "sha256:07f86d7da8df44400a1304790b262dbc3e0893f667d9646aa613d9d3d4e7109e",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 247528,
+    "saved": 2093341
+  },
+  {
+    "to": "media/reviews/dreame-a3-awd-1000/obstacle-vision.webp",
+    "checksum": "sha256:75f683421610bfca8765986c461f8f63fe070a86d595545562d6efc26bcd39d5",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 330074,
+    "saved": 2212327
+  },
+  {
+    "to": "media/reviews/dreame-a3-awd-1000/coverage.webp",
+    "checksum": "sha256:406c32b5f4b77db44bfdc76be1571cbde0f9492c52f1ef6f090b085fd7a38d88",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 345434,
+    "saved": 2207420
+  },
+  {
+    "to": "media/reviews/worx-landroid-vision-wr320/hero.webp",
+    "checksum": "sha256:2e0b249d7c71e6d17977bed41d8a2d6df979201a4c8e80157d684ce721738ecc",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 177300,
+    "saved": 1817956
+  },
+  {
+    "to": "media/reviews/worx-landroid-vision-wr320/obstacles.webp",
+    "checksum": "sha256:b48f3f73543147c5ddd59ab8c8fc7c43143d62e94edea1272c6e31ef14fe5ec6",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 434324,
+    "saved": 2436295
+  },
+  {
+    "to": "media/reviews/worx-landroid-vision-wr320/edge.webp",
+    "checksum": "sha256:de43a197bd21132b16e36fc7a77129504b48ec4d4d0ebe63e8f9fce56faef28e",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 286322,
+    "saved": 2044695
+  },
+  {
+    "to": "media/reviews/worx-landroid-vision-wr320/coverage.webp",
+    "checksum": "sha256:e0166e6ea3013bcdd5926cef3f64473fa44e7343d1f24647a216a19d126d7550",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 205486,
+    "saved": 1889328
+  },
+  {
+    "to": "media/reviews/segway-navimow-i110n/hero.webp",
+    "checksum": "sha256:32d083b9f3d34f83cd9d1f7580bcf6475e69cd569f90f562087464f8dfad7cae",
+    "width": 1672,
+    "height": 941,
+    "bytes": 247878,
+    "saved": 2006137
+  },
+  {
+    "to": "media/reviews/segway-navimow-i110n/rtk.webp",
+    "checksum": "sha256:306dfd8fb4d375935444ee8124ffe135e7aeacbadd0bc6e13b76f6f2ba71a651",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 341612,
+    "saved": 2209362
+  },
+  {
+    "to": "media/reviews/segway-navimow-i110n/zoning.webp",
+    "checksum": "sha256:57ada80b1ac2d73bb50ea0ce56703920d208a318c5ef39f277b67ab71a04287c",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 378040,
+    "saved": 2260561
+  },
+  {
+    "to": "media/reviews/segway-navimow-i110n/voice.webp",
+    "checksum": "sha256:81bacb9cae25ca750b511bdd6b3d69b6a22478d3b7e87eea1e301dc6cba17416",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 304818,
+    "saved": 2037094
+  },
+  {
+    "to": "media/reviews/eufy-e15/hero.webp",
+    "checksum": "sha256:dd0684de779e7c317a86af4073fe269f3772cebea8c5e0ebd61d618de833b943",
+    "width": 1672,
+    "height": 941,
+    "bytes": 221882,
+    "saved": 1828064
+  },
+  {
+    "to": "media/reviews/eufy-e15/cutting-height.webp",
+    "checksum": "sha256:1eebf4830c05b8d2b872fae9d2e9163aa7457a0ef0c9caa86988a6fc10f5a5d0",
+    "width": 815,
+    "height": 1050,
+    "bytes": 179342,
+    "saved": -75369
+  },
+  {
+    "to": "media/reviews/eufy-e15/obstacles.webp",
+    "checksum": "sha256:1131462964de8f2423528f8cb59b34c786667b86ffcad5e1d487d63192eb8571",
+    "width": 840,
+    "height": 1050,
+    "bytes": 169196,
+    "saved": -70745
+  },
+  {
+    "to": "media/reviews/eufy-e15/app-security.webp",
+    "checksum": "sha256:5cdd24248cef172188c398eeb25d72eda7afc5d322b799e4c94fe51a60038476",
+    "width": 860,
+    "height": 1050,
+    "bytes": 188992,
+    "saved": -84357
+  },
+  {
+    "to": "media/reviews/mammotion-luba-3-awd-1500h/hero.webp",
+    "checksum": "sha256:da34b1b0a345b3fa634b1505b9310363d170f15be916257ccf770f2d02bd6f23",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 192964,
+    "saved": 1744721
+  },
+  {
+    "to": "media/reviews/mammotion-luba-3-awd-1500h/cutting-decks.webp",
+    "checksum": "sha256:b55cb9ed753f4b2983689dd72fadbc52429dc710ca4e0bcb54643f15c3399ad9",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 216308,
+    "saved": 1932604
+  },
+  {
+    "to": "media/reviews/mammotion-luba-3-awd-1500h/navigation.webp",
+    "checksum": "sha256:e2b3c36137dbb8e60e64c5c95700f8e163e57b65977ea358366d1514c6dd64b1",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 123332,
+    "saved": 1615554
+  },
+  {
+    "to": "media/reviews/mammotion-luba-3-awd-1500h/obstacles.webp",
+    "checksum": "sha256:105277a8c077b408d4de562f17ec90a4bbae6f4319868c25330dd643223aa8ec",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 508668,
+    "saved": 2559160
   }
 ]

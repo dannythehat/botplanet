@@ -160,6 +160,25 @@ const alternatives =
   />
 )}
 
+{/* THE SECOND MACHINE, WHERE A REVIEW COVERS TWO.
+
+    Directly beneath the strip for the first, because the reader who has just
+    worked through an article about a range has one question left — which of
+    them — and the answer has to be actionable in both directions. A merged
+    page that can only sell one of the two machines it covers has quietly
+    retired the other, which is the failure this block exists to prevent.
+
+    Same /go route, same sponsored rel, same no-price rule as every other buy
+    surface. See ReviewContent.alsoCovers. */}
+{review.alsoCovers && (
+  <BuyStrip
+    tone="strong"
+    retailerName={review.alsoCovers.retailerName}
+    redirectKey={review.alsoCovers.redirectKey}
+    line={review.alsoCovers.line}
+  />
+)}
+
 <Alternatives matches={alternatives} categorySlug={review.categorySlug} productName={productName} />
 
 {/* AFTER Alternatives, and the order matters. Alternatives answers the reader

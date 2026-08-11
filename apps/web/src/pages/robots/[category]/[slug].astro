@@ -8,7 +8,7 @@ import { breadcrumbsFor } from "../../../lib/routing";
 import { buildOffers, publicationFor } from "../../../lib/offer-truth";
 import { retailer } from "../../../content/commerce/registry";
 import { catalogueStatusOf, CATALOGUE_WITHDRAWALS, OFFER_SETUP_PENDING } from "../../../content/products";
-import { resolveSlug, removedRedirect } from "../../../content/product-names";
+import { resolveSlug, removedRedirect, mergedRedirect } from "../../../content/product-names";
 import { latestAcceptedForProduct } from "../../../lib/providers/refresh-store";
 import ReviewArticle from "../../../components/ReviewArticle.astro";
 import { reviewFor } from "../../../content/reviews";
@@ -41,6 +41,14 @@ if (redirectTo) return Astro.redirect(`/robots/${category}/${redirectTo}/`, 301)
    page. The URL was indexed, so it goes to the category rather than 404ing. */
 const gone = removedRedirect(slug!);
 if (gone) return Astro.redirect(gone, 301);
+
+/* A product whose review was folded into a sibling's. Unlike the two above,
+   the product is entirely intact — it is still stocked, still matchable and
+   still has its own buy path. Only the page went, and it went into another
+   page that covers this machine by name. So this lands on the review rather
+   than on the category: the visitor gets the article they asked for. */
+const merged = mergedRedirect(slug!);
+if (merged) return Astro.redirect(merged, 301);
 
 const product = (
   await db.select().from(schema.products).where(eq(schema.products.slug, storedSlug)).limit(1)

@@ -1696,15 +1696,19 @@ const LAWN_BUILT = plannedReviews("robotic-lawn-mowers", "31073327230 + 31074893
   { slug: "eufy-e15", term: "eufy robot lawn mower e15", volume: 390, difficulty: 11, built: true, note: "Built 10 August 2026. Its rated area was recorded 26% too high until that day — 10,890 sq ft against eufy's own 800 m². Corrected in migration 0015 and stated on the page." },
   { slug: "worx-landroid-vision-wr320", term: "worx landroid vision", volume: 260, built: true, note: "Built 10 August 2026 on the WR320. Landroid Vision is a family of at least four live US models and the quarter-acre one is $23 away." },
   { slug: "dreame-a3-awd-1000", term: "dreame a3 awd", volume: 170, built: true, note: "Built 10 August 2026. The brief named a Dreame A1, which does not exist as a current product; this is the machine Dreame sells, judged on its own." },
-  { slug: "mammotion-luba-3-awd-3000h", term: "mammotion luba 3 awd 3000h", volume: 40, built: true, note: "Built 10 August 2026. The only machine in the catalogue covering three quarters of an acre while still climbing 80%." },
-  { slug: "mammotion-luba-3-awd-1500h", term: "mammotion luba 3 awd 1500h", volume: 30, built: true, note: "Built 10 August 2026. Low volume on the exact SKU; it carries `mammotion luba 3` (1,600) and `luba 3 awd` (1,000) as secondaries in the register." },
+  { slug: "mammotion-luba-3-awd-1500h", term: "mammotion luba 3", volume: 1600, built: true, note: "Built 10 August 2026 as two pages, merged into one on 11 August. The 1500H and 3000H are one design in two sizes, and the two pages were chasing the same 2,600/mo of head terms while each defended a SKU term worth 30 and 40. The surviving page names both machines, states the three differences Mammotion publishes only in its listing titles, and carries a tracked buy path for each; /mammotion-luba-3-awd-3000h/ 301s to it." },
 ]);
 
 const LAWN_REVIEWS = plannedReviews("robotic-lawn-mowers", "31073327230 + 31074893036 · 2026-08-06", [
   { slug: "husqvarna-automower", term: "husqvarna automower", volume: 14800, difficulty: 7 },
   { slug: "segway-navimow", term: "segway navimow", volume: 4400, difficulty: 39 },
   { slug: "mammotion-luba-2", term: "mammotion luba 2", volume: 2900, difficulty: 0 },
-  { slug: "mammotion-luba-3", term: "mammotion luba 3", volume: 1600, difficulty: 0 },
+  /* `mammotion-luba-3` was planned here as a separate range page for the head
+     term. It came off the list on 11 August 2026, because the merged 1500H /
+     3000H review IS the LUBA 3 AWD range page: it names both machines in its
+     H1, states what separates them, and sells either. Building a third page
+     for "mammotion luba 3" would have recreated the cannibalisation the merge
+     had just fixed, one level up. */
   { slug: "mammotion-yuka", term: "mammotion yuka", volume: 720, difficulty: 9 },
   { slug: "husqvarna-automower-115h", term: "husqvarna automower 115h", volume: 590, difficulty: 0 },
   /* `segway-navimow-i110n` moved to LAWN_BUILT above on 10 August 2026. It was

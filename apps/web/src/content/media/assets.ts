@@ -4634,6 +4634,1285 @@ export const CODING_UPLOAD_ASSETS: MediaAssetRecord[] = [
   },
 ];
 
+
+/* ------------------------------------------------------------------ */
+/* The 11 August 2026 artwork drop                                     */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Fifty-eight files across seventeen product reviews, supplied by the owner on
+ * 11 August 2026.
+ *
+ * WHAT CHANGED ON THE SITE. Every one of these seventeen machines was live
+ * with nothing in its picture slot — no creative, no branded card, not even a
+ * vector placeholder, because none of them was in the placeholder manifest.
+ * The vacuum, mower and grill categories were grids of text. This is the first
+ * artwork any of them has had.
+ *
+ * ONE IMAGE PER PRODUCT WAS THE OLD SHAPE AND IT WAS THE WRONG ONE. A review
+ * that argues about mop lift, threshold height and brush design needs a
+ * picture beside each of those arguments, not a single card at the top. So the
+ * first file for each product resolves the listing card AND the review lead,
+ * and the rest are placed against named sections in content/reviews.ts.
+ *
+ * TYPING, AND WHY MOST OF THESE ARE SHUT OUT OF PRODUCT SCHEMA. Nearly every
+ * file carries a headline and a claim set into the pixels — suction figures,
+ * threshold heights, percentages against unnamed rivals. Those are
+ * `promotional_panel` (or `branded_placeholder` where the file also fills the
+ * card) on ORIGINAL_SCHEMA with depictsRealProduct: false, exactly as the 10
+ * August batch above. A panel asserting "180x more suction" must not reach a
+ * consumer as this machine's photograph. The handful with nothing but the
+ * machine in a scene — the Grillbot, the eufy X10's underside — are
+ * depictions and open everywhere.
+ *
+ * THE ALT TEXT NAMES THE FIGURES RATHER THAN HIDING THEM, and attributes them
+ * to the maker. Where a printed figure disagrees with what the review could
+ * establish, `notes` records the disagreement: the Shark PowerDetect's
+ * 120-minute runtime and the Roomba Max 705's 180x suction are both marketing
+ * numbers this site's tables record as not disclosed, and both are labelled
+ * here rather than quietly adopted.
+ *
+ * TWO SUPPLIED FILES ARE NOT IN THIS ARRAY BECAUSE THEY ARE BYTE-IDENTICAL
+ * DUPLICATES of files that are: the X50 Ultra's hair-brush panel arrived
+ * twice, and the third file under the eufy X10 Pro Omni is the same file as
+ * the Omni S1 Pro's stain panel and carries the S1 Pro's name in its pixels,
+ * so it ships once, under the S1 Pro.
+ *
+ * THREE ARE HELD, AND THE REASON IS RECORDED IN QREVO_S5V_ARTWORK_HELD below.
+ */
+export const AUGUST_11_UPLOAD_ASSETS: MediaAssetRecord[] = [
+
+  /* ---- Grillbot ---- */
+  {
+    ...base("aug11-grillbot-hero", "depiction"),
+    productId: PRODUCT_ID["grillbot"] ?? "prod-grillbot",
+    purpose: "Grillbot — review lead and listing card",
+    exactModel: "Grillbot",
+    type: "product_hero",
+    checksum: "sha256:571da9967fddbc670fadc4cf8f92dcbde29a2ff64d6513dd06c3e6bec019b2fd",
+    width: 1672,
+    height: 941,
+    src: "/media/reviews/grillbot/hero.webp",
+    altText:
+      "The Grillbot on a hot grill grate: a squat red machine with three circular " +
+      "wire brushes underneath, sitting on the bars of a lit gas grill at dusk " +
+      "with steam rising around it.",
+    altTextStatus: "approved",
+    schema: DEPICTION_SCHEMA,
+    depictsRealProduct: true,
+    presentation: "bleed",
+  },
+
+  /* ---- eufy X10 Pro Omni ---- */
+  {
+    ...base("aug11-eufy-x10-pro-omni-hero", "illustration"),
+    productId: PRODUCT_ID["eufy-x10-pro-omni"] ?? "prod-eufy-x10-pro-omni",
+    purpose: "eufy X10 Pro Omni — review lead and listing card",
+    exactModel: "eufy X10 Pro Omni",
+    type: "branded_placeholder",
+    checksum: "sha256:ac06086f5b426dd1c620cb8fe45a6068bf8b1b8db19d486e4dec6fa54a69846f",
+    width: 1254,
+    height: 1254,
+    src: "/media/reviews/eufy-x10-pro-omni/hero.webp",
+    altText:
+      "A BotPlanet panel for the eufy X10 Pro Omni: the flat black robot parked " +
+      "under its tall auto-empty dock on dark wood flooring, a child sitting with " +
+      "a small dog on a rug behind. Four labels along the bottom read 8000 Pa, " +
+      "smart vacuum plus mop 2-in-1, auto-empty dock up to 60 days, and iPath " +
+      "laser navigation — eufy's own marketing wording, set into the artwork.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+    presentation: "bleed",
+  },
+  {
+    ...base("aug11-eufy-x10-pro-omni-underside", "depiction"),
+    productId: PRODUCT_ID["eufy-x10-pro-omni"] ?? "prod-eufy-x10-pro-omni",
+    purpose: "eufy X10 Pro Omni — review figure: underside",
+    exactModel: "eufy X10 Pro Omni",
+    type: "product_detail",
+    checksum: "sha256:b74fb69982a7220d1fb7ca4b93ec17f5d8e8c489363ffa9cfd23fa7b04611bc4",
+    width: 1254,
+    height: 1254,
+    src: "/media/reviews/eufy-x10-pro-omni/underside.webp",
+    altText:
+      "The underside of the eufy X10 Pro Omni: two round spinning mop pads at the " +
+      "rear, a full-width roller brush across the middle and a single side brush " +
+      "at the front edge.",
+    altTextStatus: "approved",
+    schema: DEPICTION_SCHEMA,
+    depictsRealProduct: true,
+    presentation: "bleed",
+  },
+
+  /* ---- eufy Omni S1 Pro ---- */
+  {
+    ...base("aug11-eufy-omni-s1-pro-hero", "illustration"),
+    productId: PRODUCT_ID["eufy-omni-s1-pro"] ?? "prod-eufy-omni-s1-pro",
+    purpose: "eufy Omni S1 Pro — review lead and listing card",
+    exactModel: "eufy Omni S1 Pro",
+    type: "branded_placeholder",
+    checksum: "sha256:087218b3c578cd31486613ed76ace88755d5d1df01a60056830196b7ac514ed7",
+    width: 1254,
+    height: 1254,
+    src: "/media/reviews/eufy-omni-s1-pro/hero.webp",
+    altText:
+      "A BotPlanet panel for the eufy Omni S1 Pro: the tall cylindrical UniClean " +
+      "station standing on a wooden floor with the slim black robot in front of " +
+      "it crossing a spilled-coffee stain. A feature list beside it reads " +
+      "UniClean station, vacuum and mop, tackles tough stains and premium smart " +
+      "cleaning — eufy's own marketing wording, set into the artwork.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+    presentation: "bleed",
+  },
+  {
+    ...base("aug11-eufy-omni-s1-pro-stain-lift", "illustration"),
+    productId: PRODUCT_ID["eufy-omni-s1-pro"] ?? "prod-eufy-omni-s1-pro",
+    purpose: "eufy Omni S1 Pro — review figure: stain-lift",
+    exactModel: "eufy Omni S1 Pro",
+    type: "promotional_panel",
+    checksum: "sha256:1b89c270ef286f55a550038ebc5907ca121e81ab9bf5880d27349c4ca74514f9",
+    width: 1122,
+    height: 1402,
+    src: "/media/reviews/eufy-omni-s1-pro/stain-lift.webp",
+    altText:
+      "A BotPlanet panel headed “Erase stains, leave no trace” for the eufy Omni " +
+      "S1 Pro, showing the robot crossing a wide spilled-coffee stain on a wooden " +
+      "floor. Labels read unclean roller mop, 48-hour deep clean, constant mop " +
+      "pressure, edge-to-edge coverage and AI-powered stain detection, above a " +
+      "two-way comparison marking the Omni S1 Pro clean and other robots " +
+      "streaked.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+    presentation: "bleed",
+  },
+  {
+    ...base("aug11-eufy-omni-s1-pro-slim-profile", "illustration"),
+    productId: PRODUCT_ID["eufy-omni-s1-pro"] ?? "prod-eufy-omni-s1-pro",
+    purpose: "eufy Omni S1 Pro — review figure: slim-profile",
+    exactModel: "eufy Omni S1 Pro",
+    type: "promotional_panel",
+    checksum: "sha256:271f12599a787d97610798511f00b8e290313ca966f8bd45dcdfe9b7ba9ba686",
+    width: 1122,
+    height: 1402,
+    src: "/media/reviews/eufy-omni-s1-pro/slim-profile.webp",
+    altText:
+      "A BotPlanet panel for the eufy Omni S1 Pro headed “Hands-free clean”, " +
+      "showing a hand pressing the top of the tall cylindrical station above four " +
+      "icons reading auto emptying, auto washing, auto drying and auto refilling. " +
+      "Below, the slim robot slides under low furniture beside the figure 3.78 " +
+      "inches, described as an ultra-slim profile.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+    presentation: "bleed",
+  },
+
+  /* ---- roborock S8 Max Ultra ---- */
+  {
+    ...base("aug11-roborock-s8-max-ultra-hero", "illustration"),
+    productId: PRODUCT_ID["roborock-s8-max-ultra"] ?? "prod-roborock-s8-max-ultra",
+    purpose: "roborock S8 Max Ultra — review lead and listing card",
+    exactModel: "roborock S8 Max Ultra",
+    type: "branded_placeholder",
+    checksum: "sha256:0f05926089e20527f077548c191a349dd0c8c5e81be4e8a28c5d7bedfc9a922b",
+    width: 1122,
+    height: 1402,
+    src: "/media/reviews/roborock-s8-max-ultra/hero.webp",
+    altText:
+      "A BotPlanet panel for the roborock S8 Max Ultra: the white robot on a lit " +
+      "plinth in front of its tall white dock, a phone showing a floor map beside " +
+      "them. Labels read smart docking, app control, auto washing and drying, and " +
+      "edge-to-edge cleaning.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+    presentation: "bleed",
+  },
+  {
+    ...base("aug11-roborock-s8-max-ultra-underside", "illustration"),
+    productId: PRODUCT_ID["roborock-s8-max-ultra"] ?? "prod-roborock-s8-max-ultra",
+    purpose: "roborock S8 Max Ultra — review figure: underside",
+    exactModel: "roborock S8 Max Ultra",
+    type: "promotional_panel",
+    checksum: "sha256:ee2a2603ad4a2a3f8fc584d692cae1424861127752907168401ccbaaef799e43",
+    width: 1122,
+    height: 1402,
+    src: "/media/reviews/roborock-s8-max-ultra/underside.webp",
+    altText:
+      "A BotPlanet panel for the roborock S8 Max Ultra showing the machine tipped " +
+      "up: a wide mop pad, a small round side mop and twin rubber rollers " +
+      "underneath, labelled DuoRoller Riser for carpet protection, twin vibration " +
+      "modules and DuoRoller brush. The figure 8,000 Pa is drawn in light beneath " +
+      "it.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+    presentation: "bleed",
+  },
+  {
+    ...base("aug11-roborock-s8-max-ultra-dock", "illustration"),
+    productId: PRODUCT_ID["roborock-s8-max-ultra"] ?? "prod-roborock-s8-max-ultra",
+    purpose: "roborock S8 Max Ultra — review figure: dock",
+    exactModel: "roborock S8 Max Ultra",
+    type: "promotional_panel",
+    checksum: "sha256:49f448b9c7a47e8ff31ef5794b32cc23fd43346f6c1d6da5a6c053a8578b986e",
+    width: 1254,
+    height: 1254,
+    src: "/media/reviews/roborock-s8-max-ultra/dock.webp",
+    altText:
+      "A BotPlanet panel headed “all-in-one dock” for the roborock S8 Max Ultra, " +
+      "showing the white dock with the robot beneath it and eight labelled panels " +
+      "around the edges reading auto tank refilling, hot water mop wash, hot air " +
+      "drying, auto dust emptying, auto detergent dispenser, intelligent dirt " +
+      "detection and dock self-cleaning.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+    presentation: "bleed",
+  },
+
+  /* ---- roborock Saros 10 ---- */
+  {
+    ...base("aug11-roborock-saros-10-hero", "illustration"),
+    productId: PRODUCT_ID["roborock-saros-10"] ?? "prod-roborock-saros-10",
+    purpose: "roborock Saros 10 — review lead and listing card",
+    exactModel: "roborock Saros 10",
+    type: "branded_placeholder",
+    checksum: "sha256:15c704c7abdd17cdeb2a7951e818af1d3b6ad2ab686cb4c39fa8b78e71e61c62",
+    width: 1254,
+    height: 1254,
+    src: "/media/reviews/roborock-saros-10/hero.webp",
+    altText:
+      "A BotPlanet panel for the roborock Saros 10: the black robot on a lit " +
+      "plinth in front of its tall dark dock, ringed by six labelled thumbnails " +
+      "reading app control, low-profile cleaning, smart navigation, edge " +
+      "cleaning, auto-dock support and powerful cleaning.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+    presentation: "bleed",
+  },
+  {
+    ...base("aug11-roborock-saros-10-suction", "illustration"),
+    productId: PRODUCT_ID["roborock-saros-10"] ?? "prod-roborock-saros-10",
+    purpose: "roborock Saros 10 — review figure: suction",
+    exactModel: "roborock Saros 10",
+    type: "promotional_panel",
+    checksum: "sha256:6546cc07619c133ab9afb88948a3418de71c322e6a6b79393cc1125c8e0164de",
+    width: 1254,
+    height: 1254,
+    src: "/media/reviews/roborock-saros-10/suction.webp",
+    altText:
+      "A BotPlanet panel for the roborock Saros 10 showing a close view of the " +
+      "machine's underside with the figure 22,000 Pa drawn in light across it, " +
+      "and labels reading zero per cent hair tangling, 100 per cent hair removal " +
+      "on carpet and zero-tangle brushes.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+    presentation: "bleed",
+  },
+  {
+    ...base("aug11-roborock-saros-10-brushes", "illustration"),
+    productId: PRODUCT_ID["roborock-saros-10"] ?? "prod-roborock-saros-10",
+    purpose: "roborock Saros 10 — review figure: brushes",
+    exactModel: "roborock Saros 10",
+    type: "promotional_panel",
+    checksum: "sha256:b16ad289c5631d7b84ce09554c7db415a4c47e94a5db50afec70caad278264cd",
+    width: 1254,
+    height: 1254,
+    src: "/media/reviews/roborock-saros-10/brushes.webp",
+    altText:
+      "A BotPlanet panel headed “zero-tangle brushes” for the roborock Saros 10, " +
+      "showing the underside brush assembly lit from below with labels reading " +
+      "hair-free roller design, smooth debris pickup and engineered for carpet " +
+      "and hard floors.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+    presentation: "bleed",
+  },
+
+  /* ---- Dreame X40 Ultra ---- */
+  {
+    ...base("aug11-dreame-x40-ultra-hero", "illustration"),
+    productId: PRODUCT_ID["dreame-x40-ultra"] ?? "prod-dreame-x40-ultra",
+    purpose: "Dreame X40 Ultra — review lead and listing card",
+    exactModel: "Dreame X40 Ultra",
+    type: "branded_placeholder",
+    checksum: "sha256:c3b0edb669f5192957440f98efaf36fa2e816181391539cfc7e4529877eb14d0",
+    width: 1254,
+    height: 1254,
+    src: "/media/reviews/dreame-x40-ultra/hero.webp",
+    altText:
+      "A BotPlanet panel for the Dreame X40 Ultra: the black robot beside its " +
+      "tall dock on a dark floor with a phone showing the Dreame app. The " +
+      "headline reads 12,000 Pa cleaning power, with labels for dual spinning " +
+      "mops, a smart dock system and app control.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+    presentation: "bleed",
+  },
+  {
+    ...base("aug11-dreame-x40-ultra-washboard", "illustration"),
+    productId: PRODUCT_ID["dreame-x40-ultra"] ?? "prod-dreame-x40-ultra",
+    purpose: "Dreame X40 Ultra — review figure: washboard",
+    exactModel: "Dreame X40 Ultra",
+    type: "promotional_panel",
+    checksum: "sha256:154a75e70771121ccc0332a856b82d1a54422e32840d78e8b866865499da980a",
+    width: 1122,
+    height: 1402,
+    src: "/media/reviews/dreame-x40-ultra/washboard.webp",
+    altText:
+      "A BotPlanet panel headed “self-cleaning washboard” for the Dreame X40 " +
+      "Ultra, showing the inside of the dock's washing tray with the two mop pads " +
+      "spinning over ridged plates in a burst of water. Labels read automatic " +
+      "self-wash, dual mop cleaning, fresh water rinse and low-maintenance dock.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+    presentation: "bleed",
+  },
+  {
+    ...base("aug11-dreame-x40-ultra-avoidance", "illustration"),
+    productId: PRODUCT_ID["dreame-x40-ultra"] ?? "prod-dreame-x40-ultra",
+    purpose: "Dreame X40 Ultra — review figure: avoidance",
+    exactModel: "Dreame X40 Ultra",
+    type: "promotional_panel",
+    checksum: "sha256:0fc1b9b546f52f78c1a74d4c078a5c00ccedeb17904b16ff34d22016c5e38a6e",
+    width: 1122,
+    height: 1402,
+    src: "/media/reviews/dreame-x40-ultra/avoidance.webp",
+    altText:
+      "A BotPlanet panel headed “smart avoidance, clean floors” for the Dreame " +
+      "X40 Ultra, showing the robot on a dark floor picking its way between a " +
+      "shoe, a cable, a bowl and a soft toy, with labels reading obstacle " +
+      "recognition, home-aware navigation, wet and dry separation and carpet-safe " +
+      "mopping.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+    presentation: "bleed",
+  },
+
+  /* ---- Dreame X50 Ultra ---- */
+  {
+    ...base("aug11-dreame-x50-ultra-hero", "illustration"),
+    productId: PRODUCT_ID["dreame-x50-ultra"] ?? "prod-dreame-x50-ultra",
+    purpose: "Dreame X50 Ultra — review lead and listing card",
+    exactModel: "Dreame X50 Ultra",
+    type: "branded_placeholder",
+    checksum: "sha256:27931b299696780169188316728d4e416ca6036e17ee51dabf207785bae999c0",
+    width: 1254,
+    height: 1254,
+    src: "/media/reviews/dreame-x50-ultra/hero.webp",
+    altText:
+      "A BotPlanet panel headed “reach into tight corners” for the Dreame X50 " +
+      "Ultra, showing the machine from a low angle with its roller brush and two " +
+      "round mop pads visible as it works into a corner. Labels read edge " +
+      "cleaning, under-furniture reach and corner precision.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+    presentation: "bleed",
+  },
+  {
+    ...base("aug11-dreame-x50-ultra-mop-washing", "illustration"),
+    productId: PRODUCT_ID["dreame-x50-ultra"] ?? "prod-dreame-x50-ultra",
+    purpose: "Dreame X50 Ultra — review figure: mop-washing",
+    exactModel: "Dreame X50 Ultra",
+    type: "promotional_panel",
+    checksum: "sha256:2eea201cadc2721d7214685f867b7d8c4f0ace41561b67bbbd63bc87d8bab475",
+    width: 1254,
+    height: 1254,
+    src: "/media/reviews/dreame-x50-ultra/mop-washing.webp",
+    altText:
+      "A BotPlanet panel headed “automatic mop washing” for the Dreame X50 Ultra, " +
+      "showing the open dock tray with the two round mop pads being washed under " +
+      "jets of water. Labels read deep cleans mop pads, helps reduce odours and " +
+      "residue, and always ready for the next clean.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+    presentation: "bleed",
+  },
+  {
+    ...base("aug11-dreame-x50-ultra-brushes", "illustration"),
+    productId: PRODUCT_ID["dreame-x50-ultra"] ?? "prod-dreame-x50-ultra",
+    purpose: "Dreame X50 Ultra — review figure: brushes",
+    exactModel: "Dreame X50 Ultra",
+    type: "promotional_panel",
+    checksum: "sha256:89143fb39239c1ea59226c911177f1c0903d4ff2535d67a3888c5693df6fd740",
+    width: 1254,
+    height: 1254,
+    src: "/media/reviews/dreame-x50-ultra/brushes.webp",
+    altText:
+      "A BotPlanet panel headed “no more tangled hair” for the Dreame X50 Ultra, " +
+      "showing a close view of the machine's tan-coloured anti-tangle roller " +
+      "brush, with two inset panels beneath showing it cleaning a floor crevice " +
+      "and crossing a carpet.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+    presentation: "bleed",
+  },
+
+  /* ---- ECOVACS DEEBOT T90 PRO Omni ---- */
+  {
+    ...base("aug11-ecovacs-deebot-t90-pro-omni-hero", "illustration"),
+    productId: PRODUCT_ID["ecovacs-deebot-t90-pro-omni"] ?? "prod-ecovacs-deebot-t90-pro-omni",
+    purpose: "ECOVACS DEEBOT T90 PRO Omni — review lead and listing card",
+    exactModel: "ECOVACS DEEBOT T90 PRO Omni",
+    type: "branded_placeholder",
+    checksum: "sha256:ee94fc5f11d6925866b8c0c5bfde78406548b45d6c2db9ad488253f92966db39",
+    width: 1254,
+    height: 1254,
+    src: "/media/reviews/ecovacs-deebot-t90-pro-omni/hero.webp",
+    altText:
+      "A BotPlanet panel for the ECOVACS DEEBOT T90 PRO Omni: the black robot in " +
+      "front of its dock on a dark floor beside a phone and two bottles of " +
+      "cleaning solution. The headline reads nonstop power, with labels for quick " +
+      "top-up charging, built for big homes and app-ready control.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+    presentation: "bleed",
+  },
+  {
+    ...base("aug11-ecovacs-deebot-t90-pro-omni-thresholds", "illustration"),
+    productId: PRODUCT_ID["ecovacs-deebot-t90-pro-omni"] ?? "prod-ecovacs-deebot-t90-pro-omni",
+    purpose: "ECOVACS DEEBOT T90 PRO Omni — review figure: thresholds",
+    exactModel: "ECOVACS DEEBOT T90 PRO Omni",
+    type: "promotional_panel",
+    checksum: "sha256:3f5b211482a48294c76a484ca66ad325eaacb84722a9562e7447144e68106de4",
+    width: 1254,
+    height: 1254,
+    src: "/media/reviews/ecovacs-deebot-t90-pro-omni/thresholds.webp",
+    altText:
+      "A BotPlanet panel headed “reliable and fast, every climb” for the ECOVACS " +
+      "DEEBOT T90 PRO Omni, showing the robot climbing a raised threshold strip. " +
+      "Labels read climbs higher, effortlessly clears thresholds up to 0.59 " +
+      "inches, smooth transition and all-surface confidence, with a comparison " +
+      "strip beneath marking other machines as getting stuck.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+    presentation: "bleed",
+  },
+  {
+    ...base("aug11-ecovacs-deebot-t90-pro-omni-suction-noise", "illustration"),
+    productId: PRODUCT_ID["ecovacs-deebot-t90-pro-omni"] ?? "prod-ecovacs-deebot-t90-pro-omni",
+    purpose: "ECOVACS DEEBOT T90 PRO Omni — review figure: suction-noise",
+    exactModel: "ECOVACS DEEBOT T90 PRO Omni",
+    type: "promotional_panel",
+    checksum: "sha256:db61ad90c0074d706bb760ea010e74431df0647addb290efbc63f7f0eec5f377",
+    width: 1254,
+    height: 1254,
+    src: "/media/reviews/ecovacs-deebot-t90-pro-omni/suction-noise.webp",
+    altText:
+      "A BotPlanet panel headed “powerful yet quiet” for the ECOVACS DEEBOT T90 " +
+      "PRO Omni, showing the robot on a ribbed rug with a golden retriever asleep " +
+      "behind it. The figures 33.9 CFM airflow and 30,000 Pa suction sit above " +
+      "three comparison figures reading 67 per cent stronger suction, 68 per cent " +
+      "less vacuuming noise and 50 per cent less emptying noise, footnoted as " +
+      "compared to the DEEBOT T90.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+    presentation: "bleed",
+  },
+  {
+    ...base("aug11-ecovacs-deebot-t90-pro-omni-lift", "illustration"),
+    productId: PRODUCT_ID["ecovacs-deebot-t90-pro-omni"] ?? "prod-ecovacs-deebot-t90-pro-omni",
+    purpose: "ECOVACS DEEBOT T90 PRO Omni — review figure: lift",
+    exactModel: "ECOVACS DEEBOT T90 PRO Omni",
+    type: "promotional_panel",
+    checksum: "sha256:a4ea4f5e262e2fc76b89e9953f0a28cd57986a1d33fe1be5e19e926470eac3e6",
+    width: 1254,
+    height: 1254,
+    src: "/media/reviews/ecovacs-deebot-t90-pro-omni/lift.webp",
+    altText:
+      "A BotPlanet panel headed “wet and dry, done right” for the ECOVACS DEEBOT " +
+      "T90 PRO Omni, showing three stacked detail panels numbered one to three: " +
+      "side and main brush lift to stop wet mess spreading, roller mop lift of " +
+      "0.59 inches to keep carpets dry, and side brush lift on hard floors to " +
+      "prevent debris scatter.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+    presentation: "bleed",
+  },
+
+  /* ---- Shark PowerDetect AV2820S ---- */
+  {
+    ...base("aug11-shark-powerdetect-av2820s-hero", "illustration"),
+    productId: PRODUCT_ID["shark-powerdetect-av2820s"] ?? "prod-shark-powerdetect-av2820s",
+    purpose: "Shark PowerDetect AV2820S — review lead and listing card",
+    exactModel: "Shark PowerDetect AV2820S",
+    type: "branded_placeholder",
+    checksum: "sha256:16e6d22b97b2c906d819075d0049b90ffc06574454a67d57f73a4bcf5f44900c",
+    width: 1254,
+    height: 1254,
+    src: "/media/reviews/shark-powerdetect-av2820s/hero.webp",
+    altText:
+      "A BotPlanet panel for the Shark PowerDetect AV2820S: the black robot in " +
+      "front of its bagless tower on a dark floor with scattered debris around it " +
+      "and a phone showing the DirtDetect screen. Three panels beneath read Dirt " +
+      "Detect, Edge Detect and Floor Detect, each quoting Shark's own " +
+      "up-to-50-per-cent improvement footnoted against the Shark RV900S and " +
+      "RV2600. A strip along the bottom adds up to 120 minutes of runtime.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+    presentation: "bleed",
+    notes:
+      "The 120-minute runtime printed on this artwork is Shark's marketing " +
+      "figure. The Amazon listing this review was built from publishes no " +
+      "runtime, and our table records it as not disclosed.",
+  },
+  {
+    ...base("aug11-shark-powerdetect-av2820s-pet-hair", "illustration"),
+    productId: PRODUCT_ID["shark-powerdetect-av2820s"] ?? "prod-shark-powerdetect-av2820s",
+    purpose: "Shark PowerDetect AV2820S — review figure: pet-hair",
+    exactModel: "Shark PowerDetect AV2820S",
+    type: "promotional_panel",
+    checksum: "sha256:795046bd32160c0b25f16c4d9ddd38b11ed8ae1c041eb5dde1a4afc295e0a5d5",
+    width: 1254,
+    height: 1254,
+    src: "/media/reviews/shark-powerdetect-av2820s/pet-hair.webp",
+    altText:
+      "A BotPlanet panel headed “exceptional pet hair performance” for the Shark " +
+      "PowerDetect AV2820S, showing a corgi lying on a rug with the robot working " +
+      "beside it. Labels read HEPA filtration, Dirt Detect technology, " +
+      "self-cleaning brushroll and anti-hair wrap.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+    presentation: "bleed",
+  },
+  {
+    ...base("aug11-shark-powerdetect-av2820s-self-empty", "illustration"),
+    productId: PRODUCT_ID["shark-powerdetect-av2820s"] ?? "prod-shark-powerdetect-av2820s",
+    purpose: "Shark PowerDetect AV2820S — review figure: self-empty",
+    exactModel: "Shark PowerDetect AV2820S",
+    type: "promotional_panel",
+    checksum: "sha256:c0ec878539e77eb180735e6af4273b5e38bbe34b51691b705980cfbf3b9772f3",
+    width: 1254,
+    height: 1254,
+    src: "/media/reviews/shark-powerdetect-av2820s/self-empty.webp",
+    altText:
+      "A BotPlanet panel headed “self-empty system” for the Shark PowerDetect " +
+      "AV2820S, showing the tall bagless base cut open to show the dust chamber. " +
+      "Labels read HEPA filtration with an anti-allergen complete seal, 30-day " +
+      "capacity, powerful suction, dust-free disposal and sealed system.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+    presentation: "bleed",
+  },
+  {
+    ...base("aug11-shark-powerdetect-av2820s-neverstuck", "illustration"),
+    productId: PRODUCT_ID["shark-powerdetect-av2820s"] ?? "prod-shark-powerdetect-av2820s",
+    purpose: "Shark PowerDetect AV2820S — review figure: neverstuck",
+    exactModel: "Shark PowerDetect AV2820S",
+    type: "promotional_panel",
+    checksum: "sha256:00c5393ac1d32611b68ca92519957424ad6c64904ab0cb81c018600587cfa25a",
+    width: 1254,
+    height: 1254,
+    src: "/media/reviews/shark-powerdetect-av2820s/neverstuck.webp",
+    altText:
+      "A BotPlanet panel for the Shark PowerDetect AV2820S headed with the " +
+      "NeverStuck name, showing the robot beside three labelled detail panels " +
+      "reading active lift and lower, detects and avoids objects, and goes over " +
+      "thresholds and uneven surfaces with ease.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+    presentation: "bleed",
+  },
+
+  /* ---- Shark Matrix Plus UR2650WS ---- */
+  {
+    ...base("aug11-shark-matrix-plus-ur2650ws-hero", "illustration"),
+    productId: PRODUCT_ID["shark-matrix-plus-ur2650ws"] ?? "prod-shark-matrix-plus-ur2650ws",
+    purpose: "Shark Matrix Plus UR2650WS — review lead and listing card",
+    exactModel: "Shark Matrix Plus UR2650WS",
+    type: "branded_placeholder",
+    checksum: "sha256:ab54375a473328fbfaac22531167ac276d36be1405fa699971f7bafae2a3845a",
+    width: 1254,
+    height: 1254,
+    src: "/media/reviews/shark-matrix-plus-ur2650ws/hero.webp",
+    altText:
+      "A BotPlanet panel for the Shark Matrix Plus UR2650WS: the black robot in " +
+      "front of its dock with a green tile above reading vac plus mop, described " +
+      "as a 2-in-1 robot vacuum and sonic mopping system. Two panels beneath read " +
+      "sonic mopping, scrubs hard floors up to 100 times per minute, and better " +
+      "edge cleaning using blasts of air.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+    presentation: "bleed",
+  },
+  {
+    ...base("aug11-shark-matrix-plus-ur2650ws-mapping", "illustration"),
+    productId: PRODUCT_ID["shark-matrix-plus-ur2650ws"] ?? "prod-shark-matrix-plus-ur2650ws",
+    purpose: "Shark Matrix Plus UR2650WS — review figure: mapping",
+    exactModel: "Shark Matrix Plus UR2650WS",
+    type: "promotional_panel",
+    checksum: "sha256:b3c71de0f22864bfdc2101ddc5d56e54fe3e0cf65a843d9d5c25ba755e962981",
+    width: 1254,
+    height: 1254,
+    src: "/media/reviews/shark-matrix-plus-ur2650ws/mapping.webp",
+    altText:
+      "A BotPlanet panel headed “precision home mapping” for the Shark Matrix " +
+      "Plus UR2650WS, showing the robot on a floor drawn as a blue wireframe room " +
+      "plan. Labels read 360-degree LiDAR for complete accurate home mapping, " +
+      "smart detection of rooms and obstacles, and optimised cleaning routes.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+    presentation: "bleed",
+  },
+  {
+    ...base("aug11-shark-matrix-plus-ur2650ws-filtration", "illustration"),
+    productId: PRODUCT_ID["shark-matrix-plus-ur2650ws"] ?? "prod-shark-matrix-plus-ur2650ws",
+    purpose: "Shark Matrix Plus UR2650WS — review figure: filtration",
+    exactModel: "Shark Matrix Plus UR2650WS",
+    type: "promotional_panel",
+    checksum: "sha256:25e4507bfc00cc36bdfde7cb0c15f76389091b452ff1a686eb9f146d7e1f1091",
+    width: 1254,
+    height: 1254,
+    src: "/media/reviews/shark-matrix-plus-ur2650ws/filtration.webp",
+    altText:
+      "A BotPlanet panel for the Shark Matrix Plus UR2650WS headed “traps 99.97 " +
+      "per cent of dust and allergens”, showing the robot docked with an arc of " +
+      "light rising from it beside a panel headed anti-allergen complete seal. " +
+      "The claim is footnoted to the ASTM F1977 test standard.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+    presentation: "bleed",
+  },
+  {
+    ...base("aug11-shark-matrix-plus-ur2650ws-pets", "illustration"),
+    productId: PRODUCT_ID["shark-matrix-plus-ur2650ws"] ?? "prod-shark-matrix-plus-ur2650ws",
+    purpose: "Shark Matrix Plus UR2650WS — review figure: pets",
+    exactModel: "Shark Matrix Plus UR2650WS",
+    type: "promotional_panel",
+    checksum: "sha256:ea8c994035e68f76fde113cde15d352b1b37e368f7d26db91b7ccb5255559bd0",
+    width: 1254,
+    height: 1254,
+    src: "/media/reviews/shark-matrix-plus-ur2650ws/pets.webp",
+    altText:
+      "A BotPlanet panel headed “perfect for homes with pets” for the Shark " +
+      "Matrix Plus UR2650WS, showing a golden retriever lying on a grey rug with " +
+      "the robot working beside it. Labels read powerful suction and " +
+      "self-cleaning brushroll.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+    presentation: "bleed",
+  },
+
+  /* ---- iRobot Roomba Max 705 ---- */
+  {
+    ...base("aug11-roomba-max-705-hero", "illustration"),
+    productId: PRODUCT_ID["roomba-max-705"] ?? "prod-roomba-max-705",
+    purpose: "iRobot Roomba Max 705 — review lead and listing card",
+    exactModel: "iRobot Roomba Max 705",
+    type: "branded_placeholder",
+    checksum: "sha256:c048455ff657c02a1dfc17676f872c32fc12021ab3b0a24d74eb248282470132",
+    width: 1254,
+    height: 1254,
+    src: "/media/reviews/roomba-max-705/hero.webp",
+    altText:
+      "A BotPlanet panel for the iRobot Roomba Max 705: the black robot on dark " +
+      "wood in front of its AutoEmpty dock, a phone showing the Roomba app beside " +
+      "it and scattered popcorn on the floor in front. Six labelled panels down " +
+      "the side read 75 days auto-emptying, extreme power with 180 times more " +
+      "suction, anti-tangle dual rubber brushes, four suction levels plus carpet " +
+      "boost, PrecisionVision AI with ClearView Pro LiDAR, and targeted cleaning.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+    presentation: "bleed",
+    notes:
+      "The 180x suction figure is iRobot's marketing wording, footnoted on the " +
+      "artwork as a comparison against the AeroVac system in the Roomba 600 " +
+      "series. The Amazon listing this review was built from publishes no suction " +
+      "figure at all, and our table records it as not disclosed.",
+  },
+  {
+    ...base("aug11-roomba-max-705-precisionvision", "illustration"),
+    productId: PRODUCT_ID["roomba-max-705"] ?? "prod-roomba-max-705",
+    purpose: "iRobot Roomba Max 705 — review figure: precisionvision",
+    exactModel: "iRobot Roomba Max 705",
+    type: "promotional_panel",
+    checksum: "sha256:e0ee7af5423ca0e23e8a8cb078b68298b4448d32649e458b2eb4e32c49d17392",
+    width: 1254,
+    height: 1254,
+    src: "/media/reviews/roomba-max-705/precisionvision.webp",
+    altText:
+      "A BotPlanet panel headed “PrecisionVision AI technology” for the iRobot " +
+      "Roomba Max 705, showing the robot approaching a bag, a pair of glasses and " +
+      "a cable on a wooden floor, each ringed by a green outline, described as " +
+      "smart object awareness.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+    presentation: "bleed",
+  },
+  {
+    ...base("aug11-roomba-max-705-lidar", "illustration"),
+    productId: PRODUCT_ID["roomba-max-705"] ?? "prod-roomba-max-705",
+    purpose: "iRobot Roomba Max 705 — review figure: lidar",
+    exactModel: "iRobot Roomba Max 705",
+    type: "promotional_panel",
+    checksum: "sha256:029039d560127e9a4096bd7904e210b03d02a352a03924c6d36a9b70c12d9bd9",
+    width: 1254,
+    height: 1254,
+    src: "/media/reviews/roomba-max-705/lidar.webp",
+    altText:
+      "A BotPlanet panel headed “ClearView Pro LiDAR” for the iRobot Roomba Max " +
+      "705, showing the robot on a floor drawn as a green wireframe room plan, " +
+      "described as expert home mapping.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+    presentation: "bleed",
+  },
+  {
+    ...base("aug11-roomba-max-705-edge", "illustration"),
+    productId: PRODUCT_ID["roomba-max-705"] ?? "prod-roomba-max-705",
+    purpose: "iRobot Roomba Max 705 — review figure: edge",
+    exactModel: "iRobot Roomba Max 705",
+    type: "promotional_panel",
+    checksum: "sha256:6d3e87552b1063d821605bedf505d7e54f442eba5b6f94bd560a5a682b705853",
+    width: 1254,
+    height: 1254,
+    src: "/media/reviews/roomba-max-705/edge.webp",
+    altText:
+      "A BotPlanet panel headed “edge cleaning” for the iRobot Roomba Max 705, " +
+      "showing the round black robot working into a corner with green light " +
+      "fanning out ahead of it, described as reaching tight corners.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+    presentation: "bleed",
+  },
+
+  /* ---- Husqvarna Automower 410iQ ---- */
+  {
+    ...base("aug11-husqvarna-automower-410iq-hero", "illustration"),
+    productId: PRODUCT_ID["husqvarna-automower-410iq"] ?? "prod-husqvarna-automower-410iq",
+    purpose: "Husqvarna Automower 410iQ — review lead and listing card",
+    exactModel: "Husqvarna Automower 410iQ",
+    type: "branded_placeholder",
+    checksum: "sha256:c33115937479e8853d5169f37029ed5daa1b561e5282c449cf75681b4e971b31",
+    width: 1672,
+    height: 941,
+    src: "/media/reviews/husqvarna-automower-410iq/hero.webp",
+    altText:
+      "A BotPlanet panel naming the Husqvarna Automower 410iQ, showing the low " +
+      "dark grey mower on a lawn at night with lit borders behind it.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+    presentation: "bleed",
+  },
+  {
+    ...base("aug11-husqvarna-automower-410iq-wire-free", "illustration"),
+    productId: PRODUCT_ID["husqvarna-automower-410iq"] ?? "prod-husqvarna-automower-410iq",
+    purpose: "Husqvarna Automower 410iQ — review figure: wire-free",
+    exactModel: "Husqvarna Automower 410iQ",
+    type: "promotional_panel",
+    checksum: "sha256:ebb33bae368fe226962ea11d56629fb6bb7c3de6e147ffcf8f9c89c338354f5e",
+    width: 1254,
+    height: 1254,
+    src: "/media/reviews/husqvarna-automower-410iq/wire-free.webp",
+    altText:
+      "A BotPlanet panel headed “wire-free setup” for the Husqvarna Automower " +
+      "410iQ, showing the mower on a lawn at night with a dotted line running " +
+      "down to it from a satellite and a cloud icon overhead, and a lit house " +
+      "behind.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+    presentation: "bleed",
+  },
+  {
+    ...base("aug11-husqvarna-automower-410iq-durability", "illustration"),
+    productId: PRODUCT_ID["husqvarna-automower-410iq"] ?? "prod-husqvarna-automower-410iq",
+    purpose: "Husqvarna Automower 410iQ — review figure: durability",
+    exactModel: "Husqvarna Automower 410iQ",
+    type: "promotional_panel",
+    checksum: "sha256:c262b07be9334c9ed246b6dacbf63edf83a709e5cfabfe0858b803795282d352",
+    width: 1254,
+    height: 1254,
+    src: "/media/reviews/husqvarna-automower-410iq/durability.webp",
+    altText:
+      "A BotPlanet panel headed “ultra-durable design” for the Husqvarna " +
+      "Automower 410iQ, showing the mower on wet grass in heavy rain with water " +
+      "beading across its dark shell and its lights on.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+    presentation: "bleed",
+  },
+  {
+    ...base("aug11-husqvarna-automower-410iq-cut-quality", "illustration"),
+    productId: PRODUCT_ID["husqvarna-automower-410iq"] ?? "prod-husqvarna-automower-410iq",
+    purpose: "Husqvarna Automower 410iQ — review figure: cut-quality",
+    exactModel: "Husqvarna Automower 410iQ",
+    type: "promotional_panel",
+    checksum: "sha256:0c436871cf18bf8d98f130a97acced7f7bc75af893add72416f8965f01dc9800",
+    width: 1254,
+    height: 1254,
+    src: "/media/reviews/husqvarna-automower-410iq/cut-quality.webp",
+    altText:
+      "A BotPlanet panel headed “professional-quality cut” for the Husqvarna " +
+      "Automower 410iQ, showing the mower crossing a striped lawn in front of a " +
+      "lit modern house at dusk.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+    presentation: "bleed",
+  },
+
+  /* ---- Dreame A3 AWD 1000 ---- */
+  {
+    ...base("aug11-dreame-a3-awd-1000-hero", "illustration"),
+    productId: PRODUCT_ID["dreame-a3-awd-1000"] ?? "prod-dreame-a3-awd-1000",
+    purpose: "Dreame A3 AWD 1000 — review lead and listing card",
+    exactModel: "Dreame A3 AWD 1000",
+    type: "branded_placeholder",
+    checksum: "sha256:7f521aeb522a6f474f3a452ee730476f8099638c481ce5e3769eaba5413b05f8",
+    width: 1672,
+    height: 941,
+    src: "/media/reviews/dreame-a3-awd-1000/hero.webp",
+    altText:
+      "A BotPlanet panel naming the Dreame A3 AWD 1000, showing the black, white " +
+      "and red four-wheel-drive mower on a lawn at night with lit planting behind " +
+      "it.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+    presentation: "bleed",
+  },
+  {
+    ...base("aug11-dreame-a3-awd-1000-slope", "illustration"),
+    productId: PRODUCT_ID["dreame-a3-awd-1000"] ?? "prod-dreame-a3-awd-1000",
+    purpose: "Dreame A3 AWD 1000 — review figure: slope",
+    exactModel: "Dreame A3 AWD 1000",
+    type: "promotional_panel",
+    checksum: "sha256:07f86d7da8df44400a1304790b262dbc3e0893f667d9646aa613d9d3d4e7109e",
+    width: 1254,
+    height: 1254,
+    src: "/media/reviews/dreame-a3-awd-1000/slope.webp",
+    altText:
+      "The Dreame A3 AWD 1000 climbing a grass bank in daylight in front of a " +
+      "Mediterranean villa, its four chunky wheels angled to the slope and its " +
+      "cutting deck following the ground.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+    presentation: "bleed",
+  },
+  {
+    ...base("aug11-dreame-a3-awd-1000-obstacle-vision", "illustration"),
+    productId: PRODUCT_ID["dreame-a3-awd-1000"] ?? "prod-dreame-a3-awd-1000",
+    purpose: "Dreame A3 AWD 1000 — review figure: obstacle-vision",
+    exactModel: "Dreame A3 AWD 1000",
+    type: "promotional_panel",
+    checksum: "sha256:75f683421610bfca8765986c461f8f63fe070a86d595545562d6efc26bcd39d5",
+    width: 1254,
+    height: 1254,
+    src: "/media/reviews/dreame-a3-awd-1000/obstacle-vision.webp",
+    altText:
+      "The Dreame A3 AWD 1000 on a lawn at night projecting a fan of blue light " +
+      "ahead of it, with a dog and a shrub drawn as blue wireframe shapes in the " +
+      "beam.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+    presentation: "bleed",
+  },
+  {
+    ...base("aug11-dreame-a3-awd-1000-coverage", "illustration"),
+    productId: PRODUCT_ID["dreame-a3-awd-1000"] ?? "prod-dreame-a3-awd-1000",
+    purpose: "Dreame A3 AWD 1000 — review figure: coverage",
+    exactModel: "Dreame A3 AWD 1000",
+    type: "promotional_panel",
+    checksum: "sha256:406c32b5f4b77db44bfdc76be1571cbde0f9492c52f1ef6f090b085fd7a38d88",
+    width: 1254,
+    height: 1254,
+    src: "/media/reviews/dreame-a3-awd-1000/coverage.webp",
+    altText:
+      "The Dreame A3 AWD 1000 seen head-on at night on a lawn, with arcs of light " +
+      "sweeping out around it and a lit house in the distance.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+    presentation: "bleed",
+  },
+
+  /* ---- WORX Landroid Vision WR320 ---- */
+  {
+    ...base("aug11-worx-landroid-vision-wr320-hero", "illustration"),
+    productId: PRODUCT_ID["worx-landroid-vision-wr320"] ?? "prod-worx-landroid-vision-wr320",
+    purpose: "WORX Landroid Vision WR320 — review lead and listing card",
+    exactModel: "WORX Landroid Vision WR320",
+    type: "branded_placeholder",
+    checksum: "sha256:2e0b249d7c71e6d17977bed41d8a2d6df979201a4c8e80157d684ce721738ecc",
+    width: 1254,
+    height: 1254,
+    src: "/media/reviews/worx-landroid-vision-wr320/hero.webp",
+    altText:
+      "A BotPlanet panel headed “smart height control” for the WORX Landroid " +
+      "Vision WR320, showing a hand holding a phone with the Landroid app's " +
+      "cutting-height slider set to medium, and the orange and black mower on the " +
+      "lawn behind.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+    presentation: "bleed",
+  },
+  {
+    ...base("aug11-worx-landroid-vision-wr320-obstacles", "illustration"),
+    productId: PRODUCT_ID["worx-landroid-vision-wr320"] ?? "prod-worx-landroid-vision-wr320",
+    purpose: "WORX Landroid Vision WR320 — review figure: obstacles",
+    exactModel: "WORX Landroid Vision WR320",
+    type: "promotional_panel",
+    checksum: "sha256:b48f3f73543147c5ddd59ab8c8fc7c43143d62e94edea1272c6e31ef14fe5ec6",
+    width: 1254,
+    height: 1254,
+    src: "/media/reviews/worx-landroid-vision-wr320/obstacles.webp",
+    altText:
+      "A BotPlanet panel headed “AI obstacle avoidance” for the WORX Landroid " +
+      "Vision WR320, showing the mower on a lawn with a curved blue path drawn " +
+      "around a football, a toy truck, a trowel and a rugby ball.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+    presentation: "bleed",
+  },
+  {
+    ...base("aug11-worx-landroid-vision-wr320-edge", "illustration"),
+    productId: PRODUCT_ID["worx-landroid-vision-wr320"] ?? "prod-worx-landroid-vision-wr320",
+    purpose: "WORX Landroid Vision WR320 — review figure: edge",
+    exactModel: "WORX Landroid Vision WR320",
+    type: "promotional_panel",
+    checksum: "sha256:de43a197bd21132b16e36fc7a77129504b48ec4d4d0ebe63e8f9fce56faef28e",
+    width: 1254,
+    height: 1254,
+    src: "/media/reviews/worx-landroid-vision-wr320/edge.webp",
+    altText:
+      "A BotPlanet panel headed “cut-to-edge mowing” for the WORX Landroid Vision " +
+      "WR320, showing the mower running along a strip of lawn beside a paved edge " +
+      "with a line of blue light under its deck.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+    presentation: "bleed",
+  },
+  {
+    ...base("aug11-worx-landroid-vision-wr320-coverage", "illustration"),
+    productId: PRODUCT_ID["worx-landroid-vision-wr320"] ?? "prod-worx-landroid-vision-wr320",
+    purpose: "WORX Landroid Vision WR320 — review figure: coverage",
+    exactModel: "WORX Landroid Vision WR320",
+    type: "promotional_panel",
+    checksum: "sha256:e0166e6ea3013bcdd5926cef3f64473fa44e7343d1f24647a216a19d126d7550",
+    width: 1254,
+    height: 1254,
+    src: "/media/reviews/worx-landroid-vision-wr320/coverage.webp",
+    altText:
+      "The WORX Landroid Vision WR320 on a lawn at dusk in front of a lit house, " +
+      "with arcs of green light sweeping out around it.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+    presentation: "bleed",
+  },
+
+  /* ---- Segway Navimow i110N ---- */
+  {
+    ...base("aug11-segway-navimow-i110n-hero", "illustration"),
+    productId: PRODUCT_ID["segway-navimow-i110n"] ?? "prod-segway-navimow-i110n",
+    purpose: "Segway Navimow i110N — review lead and listing card",
+    exactModel: "Segway Navimow i110N",
+    type: "branded_placeholder",
+    checksum: "sha256:32d083b9f3d34f83cd9d1f7580bcf6475e69cd569f90f562087464f8dfad7cae",
+    width: 1672,
+    height: 941,
+    src: "/media/reviews/segway-navimow-i110n/hero.webp",
+    altText:
+      "A BotPlanet panel naming the Segway Navimow i110N and describing it as " +
+      "wire-free robotic mowing, showing the grey and orange mower on a lawn at " +
+      "night with a blue line drawn along the lawn edge and a lit house behind.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+    presentation: "bleed",
+  },
+  {
+    ...base("aug11-segway-navimow-i110n-rtk", "illustration"),
+    productId: PRODUCT_ID["segway-navimow-i110n"] ?? "prod-segway-navimow-i110n",
+    purpose: "Segway Navimow i110N — review figure: rtk",
+    exactModel: "Segway Navimow i110N",
+    type: "promotional_panel",
+    checksum: "sha256:306dfd8fb4d375935444ee8124ffe135e7aeacbadd0bc6e13b76f6f2ba71a651",
+    width: 1254,
+    height: 1254,
+    src: "/media/reviews/segway-navimow-i110n/rtk.webp",
+    altText:
+      "A BotPlanet panel headed “RTK plus vision handles gardens with tall trees” " +
+      "for the Segway Navimow i110N, showing the mower on a lawn beneath tall " +
+      "trees at night with dotted lines running up to satellites overhead. Labels " +
+      "read stable RTK accuracy under tree cover, AI vision obstacle recognition " +
+      "and consistent coverage every time.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+    presentation: "bleed",
+  },
+  {
+    ...base("aug11-segway-navimow-i110n-zoning", "illustration"),
+    productId: PRODUCT_ID["segway-navimow-i110n"] ?? "prod-segway-navimow-i110n",
+    purpose: "Segway Navimow i110N — review figure: zoning",
+    exactModel: "Segway Navimow i110N",
+    type: "promotional_panel",
+    checksum: "sha256:57ada80b1ac2d73bb50ea0ce56703920d208a318c5ef39f277b67ab71a04287c",
+    width: 1254,
+    height: 1254,
+    src: "/media/reviews/segway-navimow-i110n/zoning.webp",
+    altText:
+      "A BotPlanet panel headed “smart zoning and scheduled mowing” for the " +
+      "Segway Navimow i110N, showing an overhead plan of a garden with a mowing " +
+      "zone outlined in green, three scheduling cards giving days and times, the " +
+      "mower at the lawn edge and a phone running the app.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+    presentation: "bleed",
+  },
+  {
+    ...base("aug11-segway-navimow-i110n-voice", "illustration"),
+    productId: PRODUCT_ID["segway-navimow-i110n"] ?? "prod-segway-navimow-i110n",
+    purpose: "Segway Navimow i110N — review figure: voice",
+    exactModel: "Segway Navimow i110N",
+    type: "promotional_panel",
+    checksum: "sha256:81bacb9cae25ca750b511bdd6b3d69b6a22478d3b7e87eea1e301dc6cba17416",
+    width: 1254,
+    height: 1254,
+    src: "/media/reviews/segway-navimow-i110n/voice.webp",
+    altText:
+      "A BotPlanet panel headed “smart home by voice control” for the Segway " +
+      "Navimow i110N, showing a woman sitting on a patio sofa with a cup beside a " +
+      "smart speaker while the mower works on the lawn behind. Badges read works " +
+      "with Alexa and works with Google Home.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+    presentation: "bleed",
+  },
+
+  /* ---- eufy Robot Lawn Mower E15 ---- */
+  {
+    ...base("aug11-eufy-e15-hero", "illustration"),
+    productId: PRODUCT_ID["eufy-e15"] ?? "prod-eufy-e15",
+    purpose: "eufy Robot Lawn Mower E15 — review lead and listing card",
+    exactModel: "eufy Robot Lawn Mower E15",
+    type: "branded_placeholder",
+    checksum: "sha256:dd0684de779e7c317a86af4073fe269f3772cebea8c5e0ebd61d618de833b943",
+    width: 1672,
+    height: 941,
+    src: "/media/reviews/eufy-e15/hero.webp",
+    altText:
+      "A BotPlanet panel for the eufy Robot Lawn Mower E15, showing the white and " +
+      "grey mower on a lawn at dusk with a curved blue guide line running behind " +
+      "it and a lit house beyond. Labels read wire-free freedom, precise vision " +
+      "navigation, smart and even cutting and app control.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+    presentation: "bleed",
+  },
+  {
+    ...base("aug11-eufy-e15-cutting-height", "illustration"),
+    productId: PRODUCT_ID["eufy-e15"] ?? "prod-eufy-e15",
+    purpose: "eufy Robot Lawn Mower E15 — review figure: cutting-height",
+    exactModel: "eufy Robot Lawn Mower E15",
+    type: "promotional_panel",
+    sourceProvider: "eufy",
+    checksum: "sha256:1eebf4830c05b8d2b872fae9d2e9163aa7457a0ef0c9caa86988a6fc10f5a5d0",
+    width: 815,
+    height: 1050,
+    src: "/media/reviews/eufy-e15/cutting-height.webp",
+    altText:
+      "Three stacked panels from eufy's own listing for the E15: the mower on " +
+      "grass above the cutting-height range 25 to 75 millimetres, with a note " +
+      "that 9 centimetres is the maximum grass height before mowing and that it " +
+      "is not suitable for dense Zoysia or St Augustine; the mower on a bank " +
+      "labelled slopes of up to 18 degrees; and the mower passing a person " +
+      "reading in a deckchair, labelled noise as low as 56 decibels.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+    presentation: "bleed",
+  },
+  {
+    ...base("aug11-eufy-e15-obstacles", "illustration"),
+    productId: PRODUCT_ID["eufy-e15"] ?? "prod-eufy-e15",
+    purpose: "eufy Robot Lawn Mower E15 — review figure: obstacles",
+    exactModel: "eufy Robot Lawn Mower E15",
+    type: "promotional_panel",
+    sourceProvider: "eufy",
+    checksum: "sha256:1131462964de8f2423528f8cb59b34c786667b86ffcad5e1d487d63192eb8571",
+    width: 840,
+    height: 1050,
+    src: "/media/reviews/eufy-e15/obstacles.webp",
+    altText:
+      "A panel from eufy's own listing for the E15 headed “precise obstacle " +
+      "avoiding”, showing a child and a small dog playing on a lawn beside the " +
+      "mower, above a row of icons for trunk, sprinkler, fence, fountain, pool, " +
+      "rock, light, lounger, ball, toy, human and pets.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+    presentation: "bleed",
+  },
+  {
+    ...base("aug11-eufy-e15-app-security", "illustration"),
+    productId: PRODUCT_ID["eufy-e15"] ?? "prod-eufy-e15",
+    purpose: "eufy Robot Lawn Mower E15 — review figure: app-security",
+    exactModel: "eufy Robot Lawn Mower E15",
+    type: "promotional_panel",
+    sourceProvider: "eufy",
+    checksum: "sha256:5cdd24248cef172188c398eeb25d72eda7afc5d322b799e4c94fe51a60038476",
+    width: 860,
+    height: 1050,
+    src: "/media/reviews/eufy-e15/app-security.webp",
+    altText:
+      "Two panels from eufy's own listing for the E15: a man sitting with a " +
+      "tablet on a lawn beside a pool under the heading app control, and beneath " +
+      "it a security system panel showing a phone alert and a badge reading GPS " +
+      "plus 4G.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+    presentation: "bleed",
+  },
+
+  /* ---- Mammotion LUBA 3 AWD 1500H ---- */
+  {
+    ...base("aug11-mammotion-luba-3-awd-1500h-hero", "illustration"),
+    productId: PRODUCT_ID["mammotion-luba-3-awd-1500h"] ?? "prod-mammotion-luba-3-awd-1500h",
+    purpose: "Mammotion LUBA 3 AWD 1500H — review lead and listing card",
+    exactModel: "Mammotion LUBA 3 AWD 1500H",
+    type: "branded_placeholder",
+    checksum: "sha256:da34b1b0a345b3fa634b1505b9310363d170f15be916257ccf770f2d02bd6f23",
+    width: 1254,
+    height: 1254,
+    src: "/media/reviews/mammotion-luba-3-awd-1500h/hero.webp",
+    altText:
+      "A BotPlanet panel naming the Mammotion LUBA 3 AWD, showing the white and " +
+      "orange four-wheel-drive mower on a lawn at night with a blue guide line " +
+      "drawn across the grass and a lit house behind.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+    presentation: "bleed",
+  },
+  {
+    ...base("aug11-mammotion-luba-3-awd-1500h-cutting-decks", "illustration"),
+    productId: PRODUCT_ID["mammotion-luba-3-awd-1500h"] ?? "prod-mammotion-luba-3-awd-1500h",
+    purpose: "Mammotion LUBA 3 AWD 1500H — review figure: cutting-decks",
+    exactModel: "Mammotion LUBA 3 AWD 1500H",
+    type: "promotional_panel",
+    checksum: "sha256:b55cb9ed753f4b2983689dd72fadbc52429dc710ca4e0bcb54643f15c3399ad9",
+    width: 1254,
+    height: 1254,
+    src: "/media/reviews/mammotion-luba-3-awd-1500h/cutting-decks.webp",
+    altText:
+      "The Mammotion LUBA 3 AWD tilted up to show its underside: two circular " +
+      "cutting discs spinning inside halos of blue light, with four chunky " +
+      "treaded wheels around them.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+    presentation: "bleed",
+  },
+  {
+    ...base("aug11-mammotion-luba-3-awd-1500h-navigation", "illustration"),
+    productId: PRODUCT_ID["mammotion-luba-3-awd-1500h"] ?? "prod-mammotion-luba-3-awd-1500h",
+    purpose: "Mammotion LUBA 3 AWD 1500H — review figure: navigation",
+    exactModel: "Mammotion LUBA 3 AWD 1500H",
+    type: "promotional_panel",
+    checksum: "sha256:e2b3c36137dbb8e60e64c5c95700f8e163e57b65977ea358366d1514c6dd64b1",
+    width: 1254,
+    height: 1254,
+    src: "/media/reviews/mammotion-luba-3-awd-1500h/navigation.webp",
+    altText:
+      "The Mammotion LUBA 3 AWD on a lit platform with translucent wireframe " +
+      "panels floating beside it showing a garden map, a house outline and a " +
+      "cloud icon.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+    presentation: "bleed",
+  },
+  {
+    ...base("aug11-mammotion-luba-3-awd-1500h-obstacles", "illustration"),
+    productId: PRODUCT_ID["mammotion-luba-3-awd-1500h"] ?? "prod-mammotion-luba-3-awd-1500h",
+    purpose: "Mammotion LUBA 3 AWD 1500H — review figure: obstacles",
+    exactModel: "Mammotion LUBA 3 AWD 1500H",
+    type: "promotional_panel",
+    checksum: "sha256:105277a8c077b408d4de562f17ec90a4bbae6f4319868c25330dd643223aa8ec",
+    width: 1254,
+    height: 1254,
+    src: "/media/reviews/mammotion-luba-3-awd-1500h/obstacles.webp",
+    altText:
+      "The Mammotion LUBA 3 AWD on a lawn at night at the centre of concentric " +
+      "rings of light, with a dog, a football, two bicycles and a child's toy " +
+      "scattered around it on the grass.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+    presentation: "bleed",
+  },
+];
+
+/**
+ * The three files supplied under "roborock Qrevo S5V" that this site cannot
+ * publish as supplied, and exactly why.
+ *
+ * ALL THREE CARRY "ROBOROCK SAROS 10" AS THEIR HEADLINE, in metal type across
+ * the top, while describing the Qrevo: one of them is a FlexiArm edge-mopping
+ * panel, and FlexiArm is the Qrevo's feature, not the Saros's. So the name in
+ * the pixels belongs to one machine and the content to another, and there is
+ * no page on this site where both halves are true at once:
+ *
+ *  - on the Qrevo S5V review, the reader is shown a different model's name,
+ *    on a page whose opening section exists to stop them buying the wrong
+ *    roborock;
+ *  - on the Saros 10 review, the name is right and the features are not.
+ *
+ * This is the narrow case the note above REVIEW_FIGURES_WITHHELD describes:
+ * pixels stating the opposite of the page, where no caption can hold both. It
+ * is a headline re-render rather than a re-shoot — the photography is fine and
+ * the machine is right. Held pending that, not discarded.
+ */
+export const QREVO_S5V_ARTWORK_HELD = [
+  { file: "Multifunctional Dock", headline: "ROBOROCK SAROS 10" },
+  { file: "FlexiArm Edge Mopping", headline: "ROBOROCK SAROS 10" },
+  { file: "Smart Navigation & Obstacle Avoidance", headline: "ROBOROCK SAROS 10" },
+] as const;
+
 /* Owner artwork sits ahead of the placeholders so a product that has both
    resolves to the artwork; the placeholder stays as the fallback if the
    artwork is ever withdrawn. */
@@ -4642,6 +5921,7 @@ export const MEDIA_ASSETS: MediaAssetRecord[] = [
   ...OWNER_PRODUCT_ARTWORK,
   ...AUGUST_UPLOAD_ASSETS,
   ...CODING_UPLOAD_ASSETS,
+  ...AUGUST_11_UPLOAD_ASSETS,
   ...REVIEW_FIGURE_ASSETS,
   ...PLACEHOLDER_ASSETS,
 ];
@@ -4676,7 +5956,14 @@ export const DERIVATIVES: import("./types").Derivative[] = DERIVATIVE_MANIFEST.f
   // Every group that can own a raster. Leaving one out does not fail loudly —
   // the derivative files still exist on disk, they just never reach a srcset,
   // and the product silently drops out of responsive-variant readiness.
-  const parent = [...ORIGINAL_ASSETS, ...OWNER_PRODUCT_ARTWORK, ...AUGUST_UPLOAD_ASSETS, ...CODING_UPLOAD_ASSETS, ...REVIEW_FIGURE_ASSETS].find(
+  const parent = [
+    ...ORIGINAL_ASSETS,
+    ...OWNER_PRODUCT_ARTWORK,
+    ...AUGUST_UPLOAD_ASSETS,
+    ...CODING_UPLOAD_ASSETS,
+    ...AUGUST_11_UPLOAD_ASSETS,
+    ...REVIEW_FIGURE_ASSETS,
+  ].find(
     (a) => a.src === entry.source,
   );
   if (!parent) return [];

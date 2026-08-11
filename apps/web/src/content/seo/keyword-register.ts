@@ -1845,23 +1845,27 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
     ],
     researchedOn: RUN_AUGUST_10,
   },
+  /* ONE ROW WHERE THERE WERE TWO, from 11 August 2026.
+
+     These were two pages both listing "mammotion luba 3" (1,600) and "luba 3
+     awd" (1,000) as secondaries they both had to rank for, each defending a
+     SKU term worth 30 and 40. That is not two pages covering a range, it is
+     two pages bidding against each other for 2,600 searches a month while
+     splitting whatever authority either could earn.
+
+     The merged page takes all four terms and both exact SKUs are mustAppear,
+     because a reader searching the 3000H by name has to find its name on the
+     page they land on — otherwise the merge has answered the wrong question.
+     See MERGED_REVIEWS in content/product-names.ts for the 301. */
   {
     path: "/robots/robotic-lawn-mowers/mammotion-luba-3-awd-1500h/",
-    primary: { term: "mammotion luba 3 awd 1500h", volume: 30, difficulty: 0, mustAppear: true },
+    primary: { term: "mammotion luba 3", volume: 1600, difficulty: 0, mustAppear: true },
     secondary: [
-      { term: "luba 3 awd 1500h", volume: 20, difficulty: 0, mustAppear: true },
-      { term: "mammotion luba 3", volume: 1600, difficulty: 0, mustAppear: true },
       { term: "luba 3 awd", volume: 1000, difficulty: 0, mustAppear: true },
-    ],
-    researchedOn: RUN_AUGUST_10,
-  },
-  {
-    path: "/robots/robotic-lawn-mowers/mammotion-luba-3-awd-3000h/",
-    primary: { term: "mammotion luba 3 awd 3000h", volume: 40, difficulty: 0, mustAppear: true },
-    secondary: [
+      { term: "mammotion luba 3 awd 3000h", volume: 40, difficulty: 0, mustAppear: true },
+      { term: "mammotion luba 3 awd 1500h", volume: 30, difficulty: 0, mustAppear: true },
       { term: "luba 3 awd 3000h", volume: 30, difficulty: 0, mustAppear: true },
-      { term: "mammotion luba 3", volume: 1600, difficulty: 0, mustAppear: true },
-      { term: "luba 3 awd", volume: 1000, difficulty: 0, mustAppear: true },
+      { term: "luba 3 awd 1500h", volume: 20, difficulty: 0, mustAppear: true },
     ],
     researchedOn: RUN_AUGUST_10,
   },

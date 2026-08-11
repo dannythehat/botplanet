@@ -1,12 +1,12 @@
 [
   {
-    "source": "media/botmatch/finder-universal.webp",
+    "source": "/media/botmatch/finder-universal.webp",
     "sourceWidth": 1122,
     "sourceHeight": 1402,
     "derivatives": [
       {
         "id": "media-botmatch-finder-universal-webp-360",
-        "src": "media/botmatch/finder-universal-360w.webp",
+        "src": "/media/botmatch/finder-universal-360w.webp",
         "width": 360,
         "height": 450,
         "bytes": 29912,
@@ -14,7 +14,7 @@
       },
       {
         "id": "media-botmatch-finder-universal-webp-640",
-        "src": "media/botmatch/finder-universal-640w.webp",
+        "src": "/media/botmatch/finder-universal-640w.webp",
         "width": 640,
         "height": 800,
         "bytes": 81600,
@@ -22,7 +22,7 @@
       },
       {
         "id": "media-botmatch-finder-universal-webp-960",
-        "src": "media/botmatch/finder-universal-960w.webp",
+        "src": "/media/botmatch/finder-universal-960w.webp",
         "width": 960,
         "height": 1200,
         "bytes": 170094,
@@ -31,13 +31,13 @@
     ]
   },
   {
-    "source": "media/botmatch/finder-pool.webp",
+    "source": "/media/botmatch/finder-pool.webp",
     "sourceWidth": 1122,
     "sourceHeight": 1402,
     "derivatives": [
       {
         "id": "media-botmatch-finder-pool-webp-360",
-        "src": "media/botmatch/finder-pool-360w.webp",
+        "src": "/media/botmatch/finder-pool-360w.webp",
         "width": 360,
         "height": 450,
         "bytes": 31954,
@@ -45,7 +45,7 @@
       },
       {
         "id": "media-botmatch-finder-pool-webp-640",
-        "src": "media/botmatch/finder-pool-640w.webp",
+        "src": "/media/botmatch/finder-pool-640w.webp",
         "width": 640,
         "height": 800,
         "bytes": 89632,
@@ -53,7 +53,7 @@
       },
       {
         "id": "media-botmatch-finder-pool-webp-960",
-        "src": "media/botmatch/finder-pool-960w.webp",
+        "src": "/media/botmatch/finder-pool-960w.webp",
         "width": 960,
         "height": 1200,
         "bytes": 184838,
@@ -62,13 +62,13 @@
     ]
   },
   {
-    "source": "media/botmatch/finder-grill.webp",
+    "source": "/media/botmatch/finder-grill.webp",
     "sourceWidth": 1122,
     "sourceHeight": 1402,
     "derivatives": [
       {
         "id": "media-botmatch-finder-grill-webp-360",
-        "src": "media/botmatch/finder-grill-360w.webp",
+        "src": "/media/botmatch/finder-grill-360w.webp",
         "width": 360,
         "height": 450,
         "bytes": 30578,
@@ -76,7 +76,7 @@
       },
       {
         "id": "media-botmatch-finder-grill-webp-640",
-        "src": "media/botmatch/finder-grill-640w.webp",
+        "src": "/media/botmatch/finder-grill-640w.webp",
         "width": 640,
         "height": 800,
         "bytes": 81360,
@@ -84,7 +84,7 @@
       },
       {
         "id": "media-botmatch-finder-grill-webp-960",
-        "src": "media/botmatch/finder-grill-960w.webp",
+        "src": "/media/botmatch/finder-grill-960w.webp",
         "width": 960,
         "height": 1200,
         "bytes": 165020,
@@ -93,13 +93,13 @@
     ]
   },
   {
-    "source": "media/botmatch/finder-litter.webp",
+    "source": "/media/botmatch/finder-litter.webp",
     "sourceWidth": 1024,
     "sourceHeight": 1536,
     "derivatives": [
       {
         "id": "media-botmatch-finder-litter-webp-360",
-        "src": "media/botmatch/finder-litter-360w.webp",
+        "src": "/media/botmatch/finder-litter-360w.webp",
         "width": 360,
         "height": 540,
         "bytes": 26378,
@@ -107,7 +107,7 @@
       },
       {
         "id": "media-botmatch-finder-litter-webp-640",
-        "src": "media/botmatch/finder-litter-640w.webp",
+        "src": "/media/botmatch/finder-litter-640w.webp",
         "width": 640,
         "height": 960,
         "bytes": 68992,
@@ -115,7 +115,7 @@
       },
       {
         "id": "media-botmatch-finder-litter-webp-960",
-        "src": "media/botmatch/finder-litter-960w.webp",
+        "src": "/media/botmatch/finder-litter-960w.webp",
         "width": 960,
         "height": 1440,
         "bytes": 134784,
@@ -124,13 +124,13 @@
     ]
   },
   {
-    "source": "media/botmatch/finder-companion.webp",
+    "source": "/media/botmatch/finder-companion.webp",
     "sourceWidth": 1024,
     "sourceHeight": 1536,
     "derivatives": [
       {
         "id": "media-botmatch-finder-companion-webp-360",
-        "src": "media/botmatch/finder-companion-360w.webp",
+        "src": "/media/botmatch/finder-companion-360w.webp",
         "width": 360,
         "height": 540,
         "bytes": 27760,
@@ -138,7 +138,7 @@
       },
       {
         "id": "media-botmatch-finder-companion-webp-640",
-        "src": "media/botmatch/finder-companion-640w.webp",
+        "src": "/media/botmatch/finder-companion-640w.webp",
         "width": 640,
         "height": 960,
         "bytes": 69314,
@@ -146,7 +146,7 @@
       },
       {
         "id": "media-botmatch-finder-companion-webp-960",
-        "src": "media/botmatch/finder-companion-960w.webp",
+        "src": "/media/botmatch/finder-companion-960w.webp",
         "width": 960,
         "height": 1440,
         "bytes": 129820,
@@ -155,13 +155,13 @@
     ]
   },
   {
-    "source": "media/botmatch/finder-petcam.webp",
+    "source": "/media/botmatch/finder-petcam.webp",
     "sourceWidth": 1122,
     "sourceHeight": 1402,
     "derivatives": [
       {
         "id": "media-botmatch-finder-petcam-webp-360",
-        "src": "media/botmatch/finder-petcam-360w.webp",
+        "src": "/media/botmatch/finder-petcam-360w.webp",
         "width": 360,
         "height": 450,
         "bytes": 32896,
@@ -169,7 +169,7 @@
       },
       {
         "id": "media-botmatch-finder-petcam-webp-640",
-        "src": "media/botmatch/finder-petcam-640w.webp",
+        "src": "/media/botmatch/finder-petcam-640w.webp",
         "width": 640,
         "height": 800,
         "bytes": 81846,
@@ -177,7 +177,7 @@
       },
       {
         "id": "media-botmatch-finder-petcam-webp-960",
-        "src": "media/botmatch/finder-petcam-960w.webp",
+        "src": "/media/botmatch/finder-petcam-960w.webp",
         "width": 960,
         "height": 1200,
         "bytes": 159398,
@@ -186,13 +186,13 @@
     ]
   },
   {
-    "source": "media/botmatch/finder-coding.webp",
+    "source": "/media/botmatch/finder-coding.webp",
     "sourceWidth": 1122,
     "sourceHeight": 1402,
     "derivatives": [
       {
         "id": "media-botmatch-finder-coding-webp-360",
-        "src": "media/botmatch/finder-coding-360w.webp",
+        "src": "/media/botmatch/finder-coding-360w.webp",
         "width": 360,
         "height": 450,
         "bytes": 28262,
@@ -200,7 +200,7 @@
       },
       {
         "id": "media-botmatch-finder-coding-webp-640",
-        "src": "media/botmatch/finder-coding-640w.webp",
+        "src": "/media/botmatch/finder-coding-640w.webp",
         "width": 640,
         "height": 800,
         "bytes": 70662,
@@ -208,7 +208,7 @@
       },
       {
         "id": "media-botmatch-finder-coding-webp-960",
-        "src": "media/botmatch/finder-coding-960w.webp",
+        "src": "/media/botmatch/finder-coding-960w.webp",
         "width": 960,
         "height": 1200,
         "bytes": 135200,
@@ -217,13 +217,13 @@
     ]
   },
   {
-    "source": "media/botmatch/finder-vacuum.webp",
+    "source": "/media/botmatch/finder-vacuum.webp",
     "sourceWidth": 1024,
     "sourceHeight": 1536,
     "derivatives": [
       {
         "id": "media-botmatch-finder-vacuum-webp-360",
-        "src": "media/botmatch/finder-vacuum-360w.webp",
+        "src": "/media/botmatch/finder-vacuum-360w.webp",
         "width": 360,
         "height": 540,
         "bytes": 28414,
@@ -231,7 +231,7 @@
       },
       {
         "id": "media-botmatch-finder-vacuum-webp-640",
-        "src": "media/botmatch/finder-vacuum-640w.webp",
+        "src": "/media/botmatch/finder-vacuum-640w.webp",
         "width": 640,
         "height": 960,
         "bytes": 74510,
@@ -239,7 +239,7 @@
       },
       {
         "id": "media-botmatch-finder-vacuum-webp-960",
-        "src": "media/botmatch/finder-vacuum-960w.webp",
+        "src": "/media/botmatch/finder-vacuum-960w.webp",
         "width": 960,
         "height": 1440,
         "bytes": 142186,
@@ -248,13 +248,13 @@
     ]
   },
   {
-    "source": "media/botmatch/finder-lawn.webp",
+    "source": "/media/botmatch/finder-lawn.webp",
     "sourceWidth": 1122,
     "sourceHeight": 1402,
     "derivatives": [
       {
         "id": "media-botmatch-finder-lawn-webp-360",
-        "src": "media/botmatch/finder-lawn-360w.webp",
+        "src": "/media/botmatch/finder-lawn-360w.webp",
         "width": 360,
         "height": 450,
         "bytes": 33316,
@@ -262,7 +262,7 @@
       },
       {
         "id": "media-botmatch-finder-lawn-webp-640",
-        "src": "media/botmatch/finder-lawn-640w.webp",
+        "src": "/media/botmatch/finder-lawn-640w.webp",
         "width": 640,
         "height": 800,
         "bytes": 92970,
@@ -270,7 +270,7 @@
       },
       {
         "id": "media-botmatch-finder-lawn-webp-960",
-        "src": "media/botmatch/finder-lawn-960w.webp",
+        "src": "/media/botmatch/finder-lawn-960w.webp",
         "width": 960,
         "height": 1200,
         "bytes": 185132,
@@ -279,13 +279,13 @@
     ]
   },
   {
-    "source": "media/botmatch/finder-window.webp",
+    "source": "/media/botmatch/finder-window.webp",
     "sourceWidth": 1122,
     "sourceHeight": 1402,
     "derivatives": [
       {
         "id": "media-botmatch-finder-window-webp-360",
-        "src": "media/botmatch/finder-window-360w.webp",
+        "src": "/media/botmatch/finder-window-360w.webp",
         "width": 360,
         "height": 450,
         "bytes": 26868,
@@ -293,7 +293,7 @@
       },
       {
         "id": "media-botmatch-finder-window-webp-640",
-        "src": "media/botmatch/finder-window-640w.webp",
+        "src": "/media/botmatch/finder-window-640w.webp",
         "width": 640,
         "height": 800,
         "bytes": 77404,
@@ -301,7 +301,7 @@
       },
       {
         "id": "media-botmatch-finder-window-webp-960",
-        "src": "media/botmatch/finder-window-960w.webp",
+        "src": "/media/botmatch/finder-window-960w.webp",
         "width": 960,
         "height": 1200,
         "bytes": 159508,
@@ -10022,6 +10022,1820 @@
         "height": 960,
         "bytes": 42988,
         "checksum": "sha256:3136de6b0ae239b75ad22701ed325d88a75a949587821a2140230339d9abbd86"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/grillbot/hero.webp",
+    "sourceWidth": 1672,
+    "sourceHeight": 941,
+    "derivatives": [
+      {
+        "id": "media-reviews-grillbot-hero-webp-360",
+        "src": "/media/reviews/grillbot/hero-360w.webp",
+        "width": 360,
+        "height": 203,
+        "bytes": 12104,
+        "checksum": "sha256:37a1ffc117aebb28616d55d6b369fe2440e065922c3417c67f51d7367d6a99d0"
+      },
+      {
+        "id": "media-reviews-grillbot-hero-webp-640",
+        "src": "/media/reviews/grillbot/hero-640w.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 30948,
+        "checksum": "sha256:923a247217f5536e8901061bf08528727a912da3fcb43388c1618b04481dba4f"
+      },
+      {
+        "id": "media-reviews-grillbot-hero-webp-960",
+        "src": "/media/reviews/grillbot/hero-960w.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 60896,
+        "checksum": "sha256:2e19e59e5a86d62d30fe7812951461e1b16a71800ac36d04ede68975b06a2438"
+      },
+      {
+        "id": "media-reviews-grillbot-hero-webp-1440",
+        "src": "/media/reviews/grillbot/hero-1440w.webp",
+        "width": 1440,
+        "height": 810,
+        "bytes": 97678,
+        "checksum": "sha256:b9011a1949016e4cbe0e3bd47aee29c924320837f9874f41ad01e98427307fbf"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/eufy-x10-pro-omni/hero.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-eufy-x10-pro-omni-hero-webp-360",
+        "src": "/media/reviews/eufy-x10-pro-omni/hero-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 13642,
+        "checksum": "sha256:1d065ccf2a9f0de85020447b89afc9bf75dfe8748e6df65c60212cd5ef482c4d"
+      },
+      {
+        "id": "media-reviews-eufy-x10-pro-omni-hero-webp-640",
+        "src": "/media/reviews/eufy-x10-pro-omni/hero-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 34690,
+        "checksum": "sha256:1ec60f1e624627d535ed4fd620029b9ae01009749f413686805748dbe45c2a94"
+      },
+      {
+        "id": "media-reviews-eufy-x10-pro-omni-hero-webp-960",
+        "src": "/media/reviews/eufy-x10-pro-omni/hero-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 68704,
+        "checksum": "sha256:a9e9f5ca6e63330ccf1aea81ce2130f9c0b357ea69bcfc85ee70c5fa8c697f51"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/eufy-x10-pro-omni/underside.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-eufy-x10-pro-omni-underside-webp-360",
+        "src": "/media/reviews/eufy-x10-pro-omni/underside-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 12190,
+        "checksum": "sha256:e1e3a2d0c6a2cea28c2b51b24e46d146050878a05304804404d3d108e89fe5d5"
+      },
+      {
+        "id": "media-reviews-eufy-x10-pro-omni-underside-webp-640",
+        "src": "/media/reviews/eufy-x10-pro-omni/underside-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 36446,
+        "checksum": "sha256:e454d6771a2ef532ae7d2cf16a12a5efe2aafc54aab44148970eab8a6b345d40"
+      },
+      {
+        "id": "media-reviews-eufy-x10-pro-omni-underside-webp-960",
+        "src": "/media/reviews/eufy-x10-pro-omni/underside-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 82758,
+        "checksum": "sha256:fb58dc38a9324b14176a1ceeee406514c8c9dc0faf661735c0426fb5e1312bf3"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/eufy-omni-s1-pro/hero.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-eufy-omni-s1-pro-hero-webp-360",
+        "src": "/media/reviews/eufy-omni-s1-pro/hero-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 19206,
+        "checksum": "sha256:1873e8275051dbe0e9c460b3ed0e8457a17a52305f45628b03b39d8758a49598"
+      },
+      {
+        "id": "media-reviews-eufy-omni-s1-pro-hero-webp-640",
+        "src": "/media/reviews/eufy-omni-s1-pro/hero-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 50248,
+        "checksum": "sha256:80c050e1dc4a2d2028cca788f378ac0ea2a3361f3646b226148b9de1e12091f3"
+      },
+      {
+        "id": "media-reviews-eufy-omni-s1-pro-hero-webp-960",
+        "src": "/media/reviews/eufy-omni-s1-pro/hero-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 98134,
+        "checksum": "sha256:bbd4fef17409b326de1eb2899108025b63baea1ed058b33e2d61e2e8275d2c8c"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/eufy-omni-s1-pro/stain-lift.webp",
+    "sourceWidth": 1122,
+    "sourceHeight": 1402,
+    "derivatives": [
+      {
+        "id": "media-reviews-eufy-omni-s1-pro-stain-lift-webp-360",
+        "src": "/media/reviews/eufy-omni-s1-pro/stain-lift-360w.webp",
+        "width": 360,
+        "height": 450,
+        "bytes": 22606,
+        "checksum": "sha256:d612d8260dd439358c5e60136c8f698ffb512532be9b362152b60acc55bcdc33"
+      },
+      {
+        "id": "media-reviews-eufy-omni-s1-pro-stain-lift-webp-640",
+        "src": "/media/reviews/eufy-omni-s1-pro/stain-lift-640w.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 56704,
+        "checksum": "sha256:d23b9001615b48c2a0a8e3a2c0b467dc6b95ce17fbbfaecefdca45b33a8fcdf2"
+      },
+      {
+        "id": "media-reviews-eufy-omni-s1-pro-stain-lift-webp-960",
+        "src": "/media/reviews/eufy-omni-s1-pro/stain-lift-960w.webp",
+        "width": 960,
+        "height": 1200,
+        "bytes": 109934,
+        "checksum": "sha256:e6b6863e5ede44f96e843b9100ab795f865fd4d9695869b14d89b09c31636222"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/eufy-omni-s1-pro/slim-profile.webp",
+    "sourceWidth": 1122,
+    "sourceHeight": 1402,
+    "derivatives": [
+      {
+        "id": "media-reviews-eufy-omni-s1-pro-slim-profile-webp-360",
+        "src": "/media/reviews/eufy-omni-s1-pro/slim-profile-360w.webp",
+        "width": 360,
+        "height": 450,
+        "bytes": 12644,
+        "checksum": "sha256:82f60209ae4af5fcecde1380e33a2dd0c2f66a8dd0035f683e37dd70a5ef3ca9"
+      },
+      {
+        "id": "media-reviews-eufy-omni-s1-pro-slim-profile-webp-640",
+        "src": "/media/reviews/eufy-omni-s1-pro/slim-profile-640w.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 31132,
+        "checksum": "sha256:4b3ace023045b7ffb8f878707e23a03c2750c72552afa46e6b581a8ca3baf33a"
+      },
+      {
+        "id": "media-reviews-eufy-omni-s1-pro-slim-profile-webp-960",
+        "src": "/media/reviews/eufy-omni-s1-pro/slim-profile-960w.webp",
+        "width": 960,
+        "height": 1200,
+        "bytes": 58882,
+        "checksum": "sha256:0e298672be3dab4903fd1bbc50f61fe64dbc318e872fe25fa0e99282c83066f5"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/roborock-s8-max-ultra/hero.webp",
+    "sourceWidth": 1122,
+    "sourceHeight": 1402,
+    "derivatives": [
+      {
+        "id": "media-reviews-roborock-s8-max-ultra-hero-webp-360",
+        "src": "/media/reviews/roborock-s8-max-ultra/hero-360w.webp",
+        "width": 360,
+        "height": 450,
+        "bytes": 16284,
+        "checksum": "sha256:b7e76c8e0227652192478cbef905ead6056b6dbf0e9283887caece59aec21184"
+      },
+      {
+        "id": "media-reviews-roborock-s8-max-ultra-hero-webp-640",
+        "src": "/media/reviews/roborock-s8-max-ultra/hero-640w.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 39118,
+        "checksum": "sha256:2fb4cc438da669c72864ac9941dbd4d5430e50e00a548740600d9cbd9a5057ad"
+      },
+      {
+        "id": "media-reviews-roborock-s8-max-ultra-hero-webp-960",
+        "src": "/media/reviews/roborock-s8-max-ultra/hero-960w.webp",
+        "width": 960,
+        "height": 1200,
+        "bytes": 73776,
+        "checksum": "sha256:0d5e7187e5f41beca4b28a005668207998babcde7f476b4d015bf817bdf7676e"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/roborock-s8-max-ultra/underside.webp",
+    "sourceWidth": 1122,
+    "sourceHeight": 1402,
+    "derivatives": [
+      {
+        "id": "media-reviews-roborock-s8-max-ultra-underside-webp-360",
+        "src": "/media/reviews/roborock-s8-max-ultra/underside-360w.webp",
+        "width": 360,
+        "height": 450,
+        "bytes": 17932,
+        "checksum": "sha256:0166c877a3a75718b0d7e0f2a1051adcd3e542cf473e3f2cbc2c9cc6c04053f3"
+      },
+      {
+        "id": "media-reviews-roborock-s8-max-ultra-underside-webp-640",
+        "src": "/media/reviews/roborock-s8-max-ultra/underside-640w.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 50408,
+        "checksum": "sha256:e81c281e2fed7305a65b5729f10722d07812ffb6fc11b5d56680ec46b259e1e7"
+      },
+      {
+        "id": "media-reviews-roborock-s8-max-ultra-underside-webp-960",
+        "src": "/media/reviews/roborock-s8-max-ultra/underside-960w.webp",
+        "width": 960,
+        "height": 1200,
+        "bytes": 103632,
+        "checksum": "sha256:af59d6d2162a7ed6c52f14e4a5c37320b7a8f44736e9e358d630421a3a9ad832"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/roborock-s8-max-ultra/dock.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-roborock-s8-max-ultra-dock-webp-360",
+        "src": "/media/reviews/roborock-s8-max-ultra/dock-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 15314,
+        "checksum": "sha256:79ad5bb802546d4b032e51a840666467d1c113fc67a802117806b610cf4de21d"
+      },
+      {
+        "id": "media-reviews-roborock-s8-max-ultra-dock-webp-640",
+        "src": "/media/reviews/roborock-s8-max-ultra/dock-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 38840,
+        "checksum": "sha256:4517357c625f53ae8c14175945c6bba3bd15498353fbfc83cce0a56e65ee2019"
+      },
+      {
+        "id": "media-reviews-roborock-s8-max-ultra-dock-webp-960",
+        "src": "/media/reviews/roborock-s8-max-ultra/dock-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 76168,
+        "checksum": "sha256:648e20a97347295ea61e3b49faffa26fbce2326e8b20b9121f39e4c8cac14d6d"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/roborock-saros-10/hero.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-roborock-saros-10-hero-webp-360",
+        "src": "/media/reviews/roborock-saros-10/hero-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 14416,
+        "checksum": "sha256:31fd10e0ed1a28f0bf34c316175badc6c4c98686c5590eb58cb57bd0ddc6f27b"
+      },
+      {
+        "id": "media-reviews-roborock-saros-10-hero-webp-640",
+        "src": "/media/reviews/roborock-saros-10/hero-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 37004,
+        "checksum": "sha256:237b32c387be14e1fed7e700f44f42e4aa6f508ebad6a33f238f9d820c5a172f"
+      },
+      {
+        "id": "media-reviews-roborock-saros-10-hero-webp-960",
+        "src": "/media/reviews/roborock-saros-10/hero-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 73388,
+        "checksum": "sha256:09ae09c477796d1a1d8ed79c7ceea77dc82e66f0976324586d39d5803b2c95da"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/roborock-saros-10/suction.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-roborock-saros-10-suction-webp-360",
+        "src": "/media/reviews/roborock-saros-10/suction-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 16764,
+        "checksum": "sha256:440c6d746990cb059d5c22904307bf56637b4dc311796e966901b5297b5dd264"
+      },
+      {
+        "id": "media-reviews-roborock-saros-10-suction-webp-640",
+        "src": "/media/reviews/roborock-saros-10/suction-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 43656,
+        "checksum": "sha256:6bae88915fac08c2d3b13d9cfed27cfe04236359b2efb25e7259691d3c381173"
+      },
+      {
+        "id": "media-reviews-roborock-saros-10-suction-webp-960",
+        "src": "/media/reviews/roborock-saros-10/suction-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 88384,
+        "checksum": "sha256:7a83b21d03fb73301df7e3ff970b50c87b372a24b48757a4858c8ef1f913177a"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/roborock-saros-10/brushes.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-roborock-saros-10-brushes-webp-360",
+        "src": "/media/reviews/roborock-saros-10/brushes-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 15604,
+        "checksum": "sha256:d7a0609e8fde426e3f0945d4c85598477289d593fc7ae0033dfa5a13b2da6e06"
+      },
+      {
+        "id": "media-reviews-roborock-saros-10-brushes-webp-640",
+        "src": "/media/reviews/roborock-saros-10/brushes-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 38360,
+        "checksum": "sha256:9ce5178bb24c24cd6ce78e5efb9c7a9da954ee6dfedf88e5a57c72fb6c70b418"
+      },
+      {
+        "id": "media-reviews-roborock-saros-10-brushes-webp-960",
+        "src": "/media/reviews/roborock-saros-10/brushes-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 72176,
+        "checksum": "sha256:ef274709a59244c8fdb51e5db793fb6178b3894ee5fe016722b389b5d84e24b9"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/dreame-x40-ultra/hero.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-dreame-x40-ultra-hero-webp-360",
+        "src": "/media/reviews/dreame-x40-ultra/hero-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 14836,
+        "checksum": "sha256:008c7b150cf3a41a512e2989205ead606568319a4dfe2f3888a149f0345b214b"
+      },
+      {
+        "id": "media-reviews-dreame-x40-ultra-hero-webp-640",
+        "src": "/media/reviews/dreame-x40-ultra/hero-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 38710,
+        "checksum": "sha256:e713b1ce9999dadaa6931bcfa71b78a7435a78e3a079624e9b2a92ff4caa22ad"
+      },
+      {
+        "id": "media-reviews-dreame-x40-ultra-hero-webp-960",
+        "src": "/media/reviews/dreame-x40-ultra/hero-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 79032,
+        "checksum": "sha256:a4fb70899688064488250dbf19a98762179c6156e2fca629845be2c13e70bd4a"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/dreame-x40-ultra/washboard.webp",
+    "sourceWidth": 1122,
+    "sourceHeight": 1402,
+    "derivatives": [
+      {
+        "id": "media-reviews-dreame-x40-ultra-washboard-webp-360",
+        "src": "/media/reviews/dreame-x40-ultra/washboard-360w.webp",
+        "width": 360,
+        "height": 450,
+        "bytes": 25674,
+        "checksum": "sha256:593aa5e8ca7119a2d6b0c6e2f2c19e083d9c14287fecedd2235a80c4d0bc9247"
+      },
+      {
+        "id": "media-reviews-dreame-x40-ultra-washboard-webp-640",
+        "src": "/media/reviews/dreame-x40-ultra/washboard-640w.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 72310,
+        "checksum": "sha256:4acf54c624ac4392b30c38ec9dc9f3e633ee6301c43224907ebfdb3a3ab18b34"
+      },
+      {
+        "id": "media-reviews-dreame-x40-ultra-washboard-webp-960",
+        "src": "/media/reviews/dreame-x40-ultra/washboard-960w.webp",
+        "width": 960,
+        "height": 1200,
+        "bytes": 147742,
+        "checksum": "sha256:78f4bc6a213da4062a12a6c92fa7b7c401ae5f5e0c162720fd81e99058730d32"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/dreame-x40-ultra/avoidance.webp",
+    "sourceWidth": 1122,
+    "sourceHeight": 1402,
+    "derivatives": [
+      {
+        "id": "media-reviews-dreame-x40-ultra-avoidance-webp-360",
+        "src": "/media/reviews/dreame-x40-ultra/avoidance-360w.webp",
+        "width": 360,
+        "height": 450,
+        "bytes": 22030,
+        "checksum": "sha256:719f51a7de9b3609d0ea0dcc36e9536dcef360a8fa71d3ad434460f8b7232ad8"
+      },
+      {
+        "id": "media-reviews-dreame-x40-ultra-avoidance-webp-640",
+        "src": "/media/reviews/dreame-x40-ultra/avoidance-640w.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 56986,
+        "checksum": "sha256:ebf4a392794bf2b042e17f45ca1f1cb43c6203478023452b97f5757f82df8459"
+      },
+      {
+        "id": "media-reviews-dreame-x40-ultra-avoidance-webp-960",
+        "src": "/media/reviews/dreame-x40-ultra/avoidance-960w.webp",
+        "width": 960,
+        "height": 1200,
+        "bytes": 113300,
+        "checksum": "sha256:144f43d1ab0b52176552e429ce2c84196ef84ac5712685b04fa3465a1792457f"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/dreame-x50-ultra/hero.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-dreame-x50-ultra-hero-webp-360",
+        "src": "/media/reviews/dreame-x50-ultra/hero-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 13384,
+        "checksum": "sha256:5a8d5b03940ef20d260bf2b43ca7868fdf12595f59dd0677c938eed6fd5aa303"
+      },
+      {
+        "id": "media-reviews-dreame-x50-ultra-hero-webp-640",
+        "src": "/media/reviews/dreame-x50-ultra/hero-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 36124,
+        "checksum": "sha256:522ca5615b2cc11e55a93df0b8e721a6ff2b73513c754e4d7893d7565a9848e1"
+      },
+      {
+        "id": "media-reviews-dreame-x50-ultra-hero-webp-960",
+        "src": "/media/reviews/dreame-x50-ultra/hero-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 71710,
+        "checksum": "sha256:3fbe4747a968591b5eda996bda2a02f337609a42131083ae7b6cc4b928c66c12"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/dreame-x50-ultra/mop-washing.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-dreame-x50-ultra-mop-washing-webp-360",
+        "src": "/media/reviews/dreame-x50-ultra/mop-washing-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 15784,
+        "checksum": "sha256:6b91a722f3f358c70daaa9e35c2675f1b3f67166c9f6a88a77ae8ecb94968f77"
+      },
+      {
+        "id": "media-reviews-dreame-x50-ultra-mop-washing-webp-640",
+        "src": "/media/reviews/dreame-x50-ultra/mop-washing-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 41920,
+        "checksum": "sha256:694987c07b157da0f89bc3cae3ad8388509ca58ad225a233d9ade5804ff9f805"
+      },
+      {
+        "id": "media-reviews-dreame-x50-ultra-mop-washing-webp-960",
+        "src": "/media/reviews/dreame-x50-ultra/mop-washing-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 87718,
+        "checksum": "sha256:59e6e539b226750c92d2b44e0794907daf0b744672dacac022ab6db75c489e8d"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/dreame-x50-ultra/brushes.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-dreame-x50-ultra-brushes-webp-360",
+        "src": "/media/reviews/dreame-x50-ultra/brushes-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 17076,
+        "checksum": "sha256:95a26f7a323e298c701be00b02bfc7060869494835c7871d8806cd8d91ae0fdf"
+      },
+      {
+        "id": "media-reviews-dreame-x50-ultra-brushes-webp-640",
+        "src": "/media/reviews/dreame-x50-ultra/brushes-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 42488,
+        "checksum": "sha256:e0d37603c92d717b2c6cc4357d27b5b10d51b791352b1585d093a9daf74cf3ca"
+      },
+      {
+        "id": "media-reviews-dreame-x50-ultra-brushes-webp-960",
+        "src": "/media/reviews/dreame-x50-ultra/brushes-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 83456,
+        "checksum": "sha256:3249e9566f28cadb38ed2320cf2dd328381fc23a87b08f6282fd39666f474453"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/ecovacs-deebot-t90-pro-omni/hero.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-ecovacs-deebot-t90-pro-omni-hero-webp-360",
+        "src": "/media/reviews/ecovacs-deebot-t90-pro-omni/hero-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 12462,
+        "checksum": "sha256:ff55255c3fe41ee8fdf74f62d30820f017c6f99e88d5f9937924dcb900783b6b"
+      },
+      {
+        "id": "media-reviews-ecovacs-deebot-t90-pro-omni-hero-webp-640",
+        "src": "/media/reviews/ecovacs-deebot-t90-pro-omni/hero-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 31804,
+        "checksum": "sha256:6e3cec5193370eda1fe9f1dec0832e5a14b6feb3df17115ff6e0d3f7830c3583"
+      },
+      {
+        "id": "media-reviews-ecovacs-deebot-t90-pro-omni-hero-webp-960",
+        "src": "/media/reviews/ecovacs-deebot-t90-pro-omni/hero-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 73422,
+        "checksum": "sha256:d03e99ebf10d392d973f39be5b30ef0a085502ab0c41dfb2248f325f4dd1ded0"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/ecovacs-deebot-t90-pro-omni/thresholds.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-ecovacs-deebot-t90-pro-omni-thresholds-webp-360",
+        "src": "/media/reviews/ecovacs-deebot-t90-pro-omni/thresholds-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 17722,
+        "checksum": "sha256:17c8f8b8c2c5f9317076b3bbfb077df6972eb02aec4924fc8ebb7dca7937715f"
+      },
+      {
+        "id": "media-reviews-ecovacs-deebot-t90-pro-omni-thresholds-webp-640",
+        "src": "/media/reviews/ecovacs-deebot-t90-pro-omni/thresholds-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 45350,
+        "checksum": "sha256:648b6468e01e6fe66feef16313f8d87ab0446ba337339e67db9a1c1a15f9f766"
+      },
+      {
+        "id": "media-reviews-ecovacs-deebot-t90-pro-omni-thresholds-webp-960",
+        "src": "/media/reviews/ecovacs-deebot-t90-pro-omni/thresholds-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 92646,
+        "checksum": "sha256:bf81cb825cc481c430acdecd4ca7cbf99b8ff51d8b18a61e3a7f581dea948197"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/ecovacs-deebot-t90-pro-omni/suction-noise.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-ecovacs-deebot-t90-pro-omni-suction-noise-webp-360",
+        "src": "/media/reviews/ecovacs-deebot-t90-pro-omni/suction-noise-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 18504,
+        "checksum": "sha256:144780e627d6f831922f84cc7a4fac2956ebe7453238d54ba4617772b99abf78"
+      },
+      {
+        "id": "media-reviews-ecovacs-deebot-t90-pro-omni-suction-noise-webp-640",
+        "src": "/media/reviews/ecovacs-deebot-t90-pro-omni/suction-noise-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 47692,
+        "checksum": "sha256:15cc41139df983a9f3e35b91e49e3caea196985586f482cde3979bb4fbab69f6"
+      },
+      {
+        "id": "media-reviews-ecovacs-deebot-t90-pro-omni-suction-noise-webp-960",
+        "src": "/media/reviews/ecovacs-deebot-t90-pro-omni/suction-noise-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 95384,
+        "checksum": "sha256:94edf42c75720c77a2d78ee3061e2aadd1b909b682136e802000183cf5f97a97"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/ecovacs-deebot-t90-pro-omni/lift.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-ecovacs-deebot-t90-pro-omni-lift-webp-360",
+        "src": "/media/reviews/ecovacs-deebot-t90-pro-omni/lift-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 16180,
+        "checksum": "sha256:8bfb97e67713bb58e8a1a91f79f3c7008338207a8b12dbc04a25189372e6ced1"
+      },
+      {
+        "id": "media-reviews-ecovacs-deebot-t90-pro-omni-lift-webp-640",
+        "src": "/media/reviews/ecovacs-deebot-t90-pro-omni/lift-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 39694,
+        "checksum": "sha256:de75592d6760d0b0b5dabb60282940e5cf5f3f1404777fd8581b55e48e2f768f"
+      },
+      {
+        "id": "media-reviews-ecovacs-deebot-t90-pro-omni-lift-webp-960",
+        "src": "/media/reviews/ecovacs-deebot-t90-pro-omni/lift-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 73626,
+        "checksum": "sha256:91085eebfe094fec929346ea2f338b75fc0b42c42821b1a5676db351d8fc404d"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/shark-powerdetect-av2820s/hero.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-shark-powerdetect-av2820s-hero-webp-360",
+        "src": "/media/reviews/shark-powerdetect-av2820s/hero-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 21014,
+        "checksum": "sha256:e03a3323f8bae5c6f5ac030f75c773fe5c3b99c1bc744fd8e8e3d77e0e7bfed4"
+      },
+      {
+        "id": "media-reviews-shark-powerdetect-av2820s-hero-webp-640",
+        "src": "/media/reviews/shark-powerdetect-av2820s/hero-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 57764,
+        "checksum": "sha256:9f0b9c0026e7b8bb182208815ff4948f44afd5d33458dfcb2510b28a4c244b89"
+      },
+      {
+        "id": "media-reviews-shark-powerdetect-av2820s-hero-webp-960",
+        "src": "/media/reviews/shark-powerdetect-av2820s/hero-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 118728,
+        "checksum": "sha256:44d147c307f353d4d0fb2944a9a1f16fbe3ec93a1e44665c76b25a28a8b38339"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/shark-powerdetect-av2820s/pet-hair.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-shark-powerdetect-av2820s-pet-hair-webp-360",
+        "src": "/media/reviews/shark-powerdetect-av2820s/pet-hair-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 24892,
+        "checksum": "sha256:c3994482e9d506f93eac20ff2a49bb36d36b4a4ea52a1b84394e0b96278d1199"
+      },
+      {
+        "id": "media-reviews-shark-powerdetect-av2820s-pet-hair-webp-640",
+        "src": "/media/reviews/shark-powerdetect-av2820s/pet-hair-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 66486,
+        "checksum": "sha256:9b41bac6b30019490786a2aa64a1c17f42cc2f1be9fb69866be5bdc21edbe081"
+      },
+      {
+        "id": "media-reviews-shark-powerdetect-av2820s-pet-hair-webp-960",
+        "src": "/media/reviews/shark-powerdetect-av2820s/pet-hair-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 132698,
+        "checksum": "sha256:b2e3da8da0f2937e970776200f3101934cbfdf13b3f7fc35a605758357c79f10"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/shark-powerdetect-av2820s/self-empty.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-shark-powerdetect-av2820s-self-empty-webp-360",
+        "src": "/media/reviews/shark-powerdetect-av2820s/self-empty-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 19606,
+        "checksum": "sha256:c36ca40fb6393d563c0e2bacda46bbcbe1abd69f0c9dbceb18d845f67d8adc60"
+      },
+      {
+        "id": "media-reviews-shark-powerdetect-av2820s-self-empty-webp-640",
+        "src": "/media/reviews/shark-powerdetect-av2820s/self-empty-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 50926,
+        "checksum": "sha256:e35c24a0af2289227cf8bcc56d91a78f19b585917a336f81332d716c92eae41a"
+      },
+      {
+        "id": "media-reviews-shark-powerdetect-av2820s-self-empty-webp-960",
+        "src": "/media/reviews/shark-powerdetect-av2820s/self-empty-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 99514,
+        "checksum": "sha256:cf1ee312fdffe3ac77269e7e78961139b6b756cee24571d013ec7767d78409ed"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/shark-powerdetect-av2820s/neverstuck.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-shark-powerdetect-av2820s-neverstuck-webp-360",
+        "src": "/media/reviews/shark-powerdetect-av2820s/neverstuck-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 20606,
+        "checksum": "sha256:4d19ab215bccc23a89a740ab166de980443dd6ec47bc86ca059bb2e2dea90d67"
+      },
+      {
+        "id": "media-reviews-shark-powerdetect-av2820s-neverstuck-webp-640",
+        "src": "/media/reviews/shark-powerdetect-av2820s/neverstuck-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 55730,
+        "checksum": "sha256:83c95916a3ea7c0bcc88d3403a09da9efdc699dd4e5d466572dc5fdd7190d84c"
+      },
+      {
+        "id": "media-reviews-shark-powerdetect-av2820s-neverstuck-webp-960",
+        "src": "/media/reviews/shark-powerdetect-av2820s/neverstuck-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 110248,
+        "checksum": "sha256:06324883539b5e86f31ef852f2a3739b3f37e48c617bc29823b7c7e3ac83c626"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/shark-matrix-plus-ur2650ws/hero.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-shark-matrix-plus-ur2650ws-hero-webp-360",
+        "src": "/media/reviews/shark-matrix-plus-ur2650ws/hero-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 14874,
+        "checksum": "sha256:fb6964155631c0a04db32da59a3c32d242ad285918be69e58a128c373cea1509"
+      },
+      {
+        "id": "media-reviews-shark-matrix-plus-ur2650ws-hero-webp-640",
+        "src": "/media/reviews/shark-matrix-plus-ur2650ws/hero-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 38494,
+        "checksum": "sha256:84651defe6a9ff18142b4188fdd036b86e77433e719a0a9114607f79a756492d"
+      },
+      {
+        "id": "media-reviews-shark-matrix-plus-ur2650ws-hero-webp-960",
+        "src": "/media/reviews/shark-matrix-plus-ur2650ws/hero-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 76178,
+        "checksum": "sha256:6cb579460477813281de62fee06e96ff05806c754d9b102e8af64e942b73467f"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/shark-matrix-plus-ur2650ws/mapping.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-shark-matrix-plus-ur2650ws-mapping-webp-360",
+        "src": "/media/reviews/shark-matrix-plus-ur2650ws/mapping-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 17202,
+        "checksum": "sha256:5131efa54a711b1722034175e00b7172346ef97b91b0d46c3ad71defa601221f"
+      },
+      {
+        "id": "media-reviews-shark-matrix-plus-ur2650ws-mapping-webp-640",
+        "src": "/media/reviews/shark-matrix-plus-ur2650ws/mapping-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 48464,
+        "checksum": "sha256:0a0811a499019692c6346432cfcbf3166f93fa115cdde69cd4ce2cfce3fd4b05"
+      },
+      {
+        "id": "media-reviews-shark-matrix-plus-ur2650ws-mapping-webp-960",
+        "src": "/media/reviews/shark-matrix-plus-ur2650ws/mapping-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 98538,
+        "checksum": "sha256:3cdd0aa6cb14ed9381f9664af6f85f307c34b1f62a6ca7f7ae093623c52abc70"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/shark-matrix-plus-ur2650ws/filtration.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-shark-matrix-plus-ur2650ws-filtration-webp-360",
+        "src": "/media/reviews/shark-matrix-plus-ur2650ws/filtration-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 12742,
+        "checksum": "sha256:5f0e1e7f793bf425dbfa8e25d950387bc03605e0a7c87c7fe1c2272536a12414"
+      },
+      {
+        "id": "media-reviews-shark-matrix-plus-ur2650ws-filtration-webp-640",
+        "src": "/media/reviews/shark-matrix-plus-ur2650ws/filtration-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 31616,
+        "checksum": "sha256:b289f7c70e00eaf07465ab22c2afdf820fe82a943ad92619e162d9f6fd75b65e"
+      },
+      {
+        "id": "media-reviews-shark-matrix-plus-ur2650ws-filtration-webp-960",
+        "src": "/media/reviews/shark-matrix-plus-ur2650ws/filtration-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 60398,
+        "checksum": "sha256:c33d92a78b118d31e21a97c711424697a3ef5e081b1ec4a7c8c7284e386878cc"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/shark-matrix-plus-ur2650ws/pets.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-shark-matrix-plus-ur2650ws-pets-webp-360",
+        "src": "/media/reviews/shark-matrix-plus-ur2650ws/pets-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 18766,
+        "checksum": "sha256:8e97b0b192669baa2d20cf4ffeaaf12f6661f3328659644140dc250f60bf48c4"
+      },
+      {
+        "id": "media-reviews-shark-matrix-plus-ur2650ws-pets-webp-640",
+        "src": "/media/reviews/shark-matrix-plus-ur2650ws/pets-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 48950,
+        "checksum": "sha256:a0ac7d1ff66093533068605109612ed911be5f2c2ade42208d03f4697298583d"
+      },
+      {
+        "id": "media-reviews-shark-matrix-plus-ur2650ws-pets-webp-960",
+        "src": "/media/reviews/shark-matrix-plus-ur2650ws/pets-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 96324,
+        "checksum": "sha256:1e8688271fe877e2bf93e573f198e46caae70393de4476848a3773b51ce9fa15"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/roomba-max-705/hero.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-roomba-max-705-hero-webp-360",
+        "src": "/media/reviews/roomba-max-705/hero-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 16410,
+        "checksum": "sha256:5386bf176e8ee18e733a9aa8cdbc1cabcd26b7a6eca53f93032dff1517be30c8"
+      },
+      {
+        "id": "media-reviews-roomba-max-705-hero-webp-640",
+        "src": "/media/reviews/roomba-max-705/hero-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 42214,
+        "checksum": "sha256:33a5f3b29083137e7a951f7e03b6fc76c23f2f67899ad347ffc64b77d021b6ef"
+      },
+      {
+        "id": "media-reviews-roomba-max-705-hero-webp-960",
+        "src": "/media/reviews/roomba-max-705/hero-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 82420,
+        "checksum": "sha256:26587302bffee9b30c1acc6cccfdb3a7a3efecb3a9856799388d5b00d8b6793f"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/roomba-max-705/precisionvision.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-roomba-max-705-precisionvision-webp-360",
+        "src": "/media/reviews/roomba-max-705/precisionvision-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 14306,
+        "checksum": "sha256:2443ed381a511c1b1c73aea99e97e7d85a7977db2c76c30a7e19bd25a7b11d9d"
+      },
+      {
+        "id": "media-reviews-roomba-max-705-precisionvision-webp-640",
+        "src": "/media/reviews/roomba-max-705/precisionvision-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 39658,
+        "checksum": "sha256:e7e03843b660d8425b0e2ca608de92194dbb779b936c4164d2ff51242cfe4cb9"
+      },
+      {
+        "id": "media-reviews-roomba-max-705-precisionvision-webp-960",
+        "src": "/media/reviews/roomba-max-705/precisionvision-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 81764,
+        "checksum": "sha256:147ea81514b3e70f8d249f9f28714f0ff2b227d763a553d44021375121190b6d"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/roomba-max-705/lidar.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-roomba-max-705-lidar-webp-360",
+        "src": "/media/reviews/roomba-max-705/lidar-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 13292,
+        "checksum": "sha256:e5b86b4f969fb4987639fbec305e36749d07d44bc23e0773f4f10e054ca493a2"
+      },
+      {
+        "id": "media-reviews-roomba-max-705-lidar-webp-640",
+        "src": "/media/reviews/roomba-max-705/lidar-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 38604,
+        "checksum": "sha256:b532ff331ca634af8e6db5d906a6e26ddb07802e9f3ebaa3a4d626bc5ec100a8"
+      },
+      {
+        "id": "media-reviews-roomba-max-705-lidar-webp-960",
+        "src": "/media/reviews/roomba-max-705/lidar-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 84194,
+        "checksum": "sha256:4ed6103e5b503563cd33cd8145a991b78645ccad1fd56ad9cec854e3b11423ba"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/roomba-max-705/edge.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-roomba-max-705-edge-webp-360",
+        "src": "/media/reviews/roomba-max-705/edge-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 13432,
+        "checksum": "sha256:2d7d49186bb0c1dd012c6f57d71b16fb156353aae4909e051709e55fb5f1867c"
+      },
+      {
+        "id": "media-reviews-roomba-max-705-edge-webp-640",
+        "src": "/media/reviews/roomba-max-705/edge-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 38410,
+        "checksum": "sha256:20a030307cff02053999fc51fc3c4ff4a83a4093dc5c5d0a838bfed5c62a44f2"
+      },
+      {
+        "id": "media-reviews-roomba-max-705-edge-webp-960",
+        "src": "/media/reviews/roomba-max-705/edge-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 79424,
+        "checksum": "sha256:cfe2fcdfe2af1d0822b152495c105b1e46e7b969cd98f6c584b5d5bfa34651f5"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/husqvarna-automower-410iq/hero.webp",
+    "sourceWidth": 1672,
+    "sourceHeight": 941,
+    "derivatives": [
+      {
+        "id": "media-reviews-husqvarna-automower-410iq-hero-webp-360",
+        "src": "/media/reviews/husqvarna-automower-410iq/hero-360w.webp",
+        "width": 360,
+        "height": 203,
+        "bytes": 9738,
+        "checksum": "sha256:16f4666263cbea8e7b6516b49ab34c05b060be820dcb76a7c268ebb35a5bdc99"
+      },
+      {
+        "id": "media-reviews-husqvarna-automower-410iq-hero-webp-640",
+        "src": "/media/reviews/husqvarna-automower-410iq/hero-640w.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 26578,
+        "checksum": "sha256:040a6e5b5d85b22436e38e62534af5007082cbd5f819c7c7c1b1155e444490c6"
+      },
+      {
+        "id": "media-reviews-husqvarna-automower-410iq-hero-webp-960",
+        "src": "/media/reviews/husqvarna-automower-410iq/hero-960w.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 56414,
+        "checksum": "sha256:159ac12e1c5f9a1ff3cf2318d488bcbb983ede8a682d9d20d8cf7b1d7b11f13b"
+      },
+      {
+        "id": "media-reviews-husqvarna-automower-410iq-hero-webp-1440",
+        "src": "/media/reviews/husqvarna-automower-410iq/hero-1440w.webp",
+        "width": 1440,
+        "height": 810,
+        "bytes": 93810,
+        "checksum": "sha256:a109296c3aebac6e0dc3cefad4be4bde351fcf3b93a67a88bfdc6d72944b17a9"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/husqvarna-automower-410iq/wire-free.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-husqvarna-automower-410iq-wire-free-webp-360",
+        "src": "/media/reviews/husqvarna-automower-410iq/wire-free-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 16098,
+        "checksum": "sha256:1ce9e63e5fb6d14376d6a25d460074ec614487b348eab8a7085cfcb5a6a939b6"
+      },
+      {
+        "id": "media-reviews-husqvarna-automower-410iq-wire-free-webp-640",
+        "src": "/media/reviews/husqvarna-automower-410iq/wire-free-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 51588,
+        "checksum": "sha256:8c3b0b0e6eb94543863cea81bb7882254c2d9245565119b24fc03e85067942f7"
+      },
+      {
+        "id": "media-reviews-husqvarna-automower-410iq-wire-free-webp-960",
+        "src": "/media/reviews/husqvarna-automower-410iq/wire-free-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 118050,
+        "checksum": "sha256:ab312b28a0c77f297aae306f76ec560bb440965943609afbafd43c774d45537a"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/husqvarna-automower-410iq/durability.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-husqvarna-automower-410iq-durability-webp-360",
+        "src": "/media/reviews/husqvarna-automower-410iq/durability-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 19978,
+        "checksum": "sha256:600fa2360add97d83a0378922458f1d731cbb88fb591da7c424c8a0481a1672d"
+      },
+      {
+        "id": "media-reviews-husqvarna-automower-410iq-durability-webp-640",
+        "src": "/media/reviews/husqvarna-automower-410iq/durability-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 55780,
+        "checksum": "sha256:b55cf000baf44bf06ac9262f0ea9f3bfb5220594e2e3984ef53b9d9ef3d74d5b"
+      },
+      {
+        "id": "media-reviews-husqvarna-automower-410iq-durability-webp-960",
+        "src": "/media/reviews/husqvarna-automower-410iq/durability-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 110366,
+        "checksum": "sha256:96f26b4e594ea4d9ebbb33465fe551f743404648de7e4d5fc102714f7cdfb2a5"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/husqvarna-automower-410iq/cut-quality.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-husqvarna-automower-410iq-cut-quality-webp-360",
+        "src": "/media/reviews/husqvarna-automower-410iq/cut-quality-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 19784,
+        "checksum": "sha256:c4a2c5fe13188e8897716bcb64252401fc1fdd329264c1b9edceb2f1a588351d"
+      },
+      {
+        "id": "media-reviews-husqvarna-automower-410iq-cut-quality-webp-640",
+        "src": "/media/reviews/husqvarna-automower-410iq/cut-quality-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 53846,
+        "checksum": "sha256:175935bc3453480fce78f6cb22d88859d530a758116ecb78ddc641ff430c5ef0"
+      },
+      {
+        "id": "media-reviews-husqvarna-automower-410iq-cut-quality-webp-960",
+        "src": "/media/reviews/husqvarna-automower-410iq/cut-quality-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 111802,
+        "checksum": "sha256:5a71254445214d722128464f55f144562bc1b78f3c8515900afcfd5b15ff6904"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/dreame-a3-awd-1000/hero.webp",
+    "sourceWidth": 1672,
+    "sourceHeight": 941,
+    "derivatives": [
+      {
+        "id": "media-reviews-dreame-a3-awd-1000-hero-webp-360",
+        "src": "/media/reviews/dreame-a3-awd-1000/hero-360w.webp",
+        "width": 360,
+        "height": 203,
+        "bytes": 12346,
+        "checksum": "sha256:08caf222a75b14131698ca0b6e788aada9072ffec9c84c2435b10f8e0c1eb5e9"
+      },
+      {
+        "id": "media-reviews-dreame-a3-awd-1000-hero-webp-640",
+        "src": "/media/reviews/dreame-a3-awd-1000/hero-640w.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 36364,
+        "checksum": "sha256:7741817bf406437f0f77ff2cfe6d61863b211db2cb301be059abfbdbd2ec641c"
+      },
+      {
+        "id": "media-reviews-dreame-a3-awd-1000-hero-webp-960",
+        "src": "/media/reviews/dreame-a3-awd-1000/hero-960w.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 81908,
+        "checksum": "sha256:f1aa00e8edfd9a2352d8c954a1d0f92947f10661a238438edcbecf09b4e1ece1"
+      },
+      {
+        "id": "media-reviews-dreame-a3-awd-1000-hero-webp-1440",
+        "src": "/media/reviews/dreame-a3-awd-1000/hero-1440w.webp",
+        "width": 1440,
+        "height": 810,
+        "bytes": 147728,
+        "checksum": "sha256:9dbbf12040eda4680ce14409d4046faa10c906fae5abb58a73587776dd493529"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/dreame-a3-awd-1000/slope.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-dreame-a3-awd-1000-slope-webp-360",
+        "src": "/media/reviews/dreame-a3-awd-1000/slope-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 21246,
+        "checksum": "sha256:9f343cc244057796ee6243432769f0af6c35f841a6cfcf05d4b82e5c7edb9335"
+      },
+      {
+        "id": "media-reviews-dreame-a3-awd-1000-slope-webp-640",
+        "src": "/media/reviews/dreame-a3-awd-1000/slope-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 56392,
+        "checksum": "sha256:2efaf73f50cd70233a7d5b0864a668d6157b88c3001c96b871a966fd4c5ac418"
+      },
+      {
+        "id": "media-reviews-dreame-a3-awd-1000-slope-webp-960",
+        "src": "/media/reviews/dreame-a3-awd-1000/slope-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 116874,
+        "checksum": "sha256:c844efd5c377bfedb5b14b8f4fd8d767adc2e591ac14589a30ae546401337be6"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/dreame-a3-awd-1000/obstacle-vision.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-dreame-a3-awd-1000-obstacle-vision-webp-360",
+        "src": "/media/reviews/dreame-a3-awd-1000/obstacle-vision-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 18218,
+        "checksum": "sha256:7705006fe8b75bdbd5e7e0a50903d2d5f13061982108dc446595922c67b27838"
+      },
+      {
+        "id": "media-reviews-dreame-a3-awd-1000-obstacle-vision-webp-640",
+        "src": "/media/reviews/dreame-a3-awd-1000/obstacle-vision-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 60218,
+        "checksum": "sha256:36ff8445cbeaa7b64c6aa21899fecf3efaf28578eb16ef1852150285828de001"
+      },
+      {
+        "id": "media-reviews-dreame-a3-awd-1000-obstacle-vision-webp-960",
+        "src": "/media/reviews/dreame-a3-awd-1000/obstacle-vision-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 136538,
+        "checksum": "sha256:9d78d0f94c50c94849e146d6606b61d8500bb3e574a321bbcc58657b569150bd"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/dreame-a3-awd-1000/coverage.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-dreame-a3-awd-1000-coverage-webp-360",
+        "src": "/media/reviews/dreame-a3-awd-1000/coverage-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 16080,
+        "checksum": "sha256:954f8c27f9467034be13ee9cf6086300ea15bda3fadf1485fcbbb4844a95a481"
+      },
+      {
+        "id": "media-reviews-dreame-a3-awd-1000-coverage-webp-640",
+        "src": "/media/reviews/dreame-a3-awd-1000/coverage-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 57780,
+        "checksum": "sha256:c50d80b7e0e9524eb421f01b7abf57e4484a026ac99e739b034e77e3936e96a6"
+      },
+      {
+        "id": "media-reviews-dreame-a3-awd-1000-coverage-webp-960",
+        "src": "/media/reviews/dreame-a3-awd-1000/coverage-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 135676,
+        "checksum": "sha256:23f1b8268efffd6f627fcfa3f38aae20642b9dd05db8c41ac5ef16390e7477ed"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/worx-landroid-vision-wr320/hero.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-worx-landroid-vision-wr320-hero-webp-360",
+        "src": "/media/reviews/worx-landroid-vision-wr320/hero-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 14992,
+        "checksum": "sha256:f9e9f8e1729dd3c7010bcce6df36e9d4dcee5bfd5472418231d614a9ec1fdeec"
+      },
+      {
+        "id": "media-reviews-worx-landroid-vision-wr320-hero-webp-640",
+        "src": "/media/reviews/worx-landroid-vision-wr320/hero-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 39456,
+        "checksum": "sha256:9cb2cb8508d258f197bdb720cf6338788fed77a93830241ab0eb18494e9734e0"
+      },
+      {
+        "id": "media-reviews-worx-landroid-vision-wr320-hero-webp-960",
+        "src": "/media/reviews/worx-landroid-vision-wr320/hero-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 79676,
+        "checksum": "sha256:757614161e217451e88f477b4d6e1e4cc244102f341caee3ca0df0e173a72703"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/worx-landroid-vision-wr320/obstacles.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-worx-landroid-vision-wr320-obstacles-webp-360",
+        "src": "/media/reviews/worx-landroid-vision-wr320/obstacles-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 23486,
+        "checksum": "sha256:a704e30828e9a9e680054e00e63896cb154955385fa42e76c3822d73ed953ee0"
+      },
+      {
+        "id": "media-reviews-worx-landroid-vision-wr320-obstacles-webp-640",
+        "src": "/media/reviews/worx-landroid-vision-wr320/obstacles-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 79060,
+        "checksum": "sha256:3418a68b749b77552e9bf0564094e21dd971bce8b6cc5dc2e31c570aae2f4fc4"
+      },
+      {
+        "id": "media-reviews-worx-landroid-vision-wr320-obstacles-webp-960",
+        "src": "/media/reviews/worx-landroid-vision-wr320/obstacles-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 184588,
+        "checksum": "sha256:da7f5146de34bc11082125261699f17edf5a69b98d431b92eb10601951712dff"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/worx-landroid-vision-wr320/edge.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-worx-landroid-vision-wr320-edge-webp-360",
+        "src": "/media/reviews/worx-landroid-vision-wr320/edge-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 20158,
+        "checksum": "sha256:9ec5561004088b1d60b048ead649d53d4dcf3ec6f1339b45fa567cc0ef574539"
+      },
+      {
+        "id": "media-reviews-worx-landroid-vision-wr320-edge-webp-640",
+        "src": "/media/reviews/worx-landroid-vision-wr320/edge-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 58222,
+        "checksum": "sha256:35922418ba48c4aa8ba0b970b721fc72f9fed673a23546ee79ac7df14665158f"
+      },
+      {
+        "id": "media-reviews-worx-landroid-vision-wr320-edge-webp-960",
+        "src": "/media/reviews/worx-landroid-vision-wr320/edge-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 125078,
+        "checksum": "sha256:06223ce5c78d20d136a80bc4939f21027ab92c6d5fc11f6f3eef6b129cf7593b"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/worx-landroid-vision-wr320/coverage.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-worx-landroid-vision-wr320-coverage-webp-360",
+        "src": "/media/reviews/worx-landroid-vision-wr320/coverage-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 17822,
+        "checksum": "sha256:43e6fcc8c193052e6a58b58b1c5904c2213835f076facf581066e0791c2bae6e"
+      },
+      {
+        "id": "media-reviews-worx-landroid-vision-wr320-coverage-webp-640",
+        "src": "/media/reviews/worx-landroid-vision-wr320/coverage-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 46660,
+        "checksum": "sha256:323836d0a49564983442e60c592ecf3ecad362a943d917b067b2896dbe42edf7"
+      },
+      {
+        "id": "media-reviews-worx-landroid-vision-wr320-coverage-webp-960",
+        "src": "/media/reviews/worx-landroid-vision-wr320/coverage-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 92528,
+        "checksum": "sha256:bec0022c3a9f4f61e7e2f18fa9ac1ad981bd376b38125760b7a24b11d7ce84aa"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/segway-navimow-i110n/hero.webp",
+    "sourceWidth": 1672,
+    "sourceHeight": 941,
+    "derivatives": [
+      {
+        "id": "media-reviews-segway-navimow-i110n-hero-webp-360",
+        "src": "/media/reviews/segway-navimow-i110n/hero-360w.webp",
+        "width": 360,
+        "height": 203,
+        "bytes": 13138,
+        "checksum": "sha256:17821f1c6c0feadbd35a8b582abcfeb5b1f3d00b2220fb8c6b4a9465c591c4f3"
+      },
+      {
+        "id": "media-reviews-segway-navimow-i110n-hero-webp-640",
+        "src": "/media/reviews/segway-navimow-i110n/hero-640w.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 36470,
+        "checksum": "sha256:487004a44c4012161488afa3fe7319e1c2cb0fac4a85239819616822ca9cec04"
+      },
+      {
+        "id": "media-reviews-segway-navimow-i110n-hero-webp-960",
+        "src": "/media/reviews/segway-navimow-i110n/hero-960w.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 78628,
+        "checksum": "sha256:96c8515028ecf25d7c47eefdba3c0619a9b5c8c5f9faf274eff339673ead8eb0"
+      },
+      {
+        "id": "media-reviews-segway-navimow-i110n-hero-webp-1440",
+        "src": "/media/reviews/segway-navimow-i110n/hero-1440w.webp",
+        "width": 1440,
+        "height": 810,
+        "bytes": 133080,
+        "checksum": "sha256:5b8924f7ad3b0ef27c80c981b31d120e2597b86a3138c434bf4f1debdba69484"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/segway-navimow-i110n/rtk.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-segway-navimow-i110n-rtk-webp-360",
+        "src": "/media/reviews/segway-navimow-i110n/rtk-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 27022,
+        "checksum": "sha256:e0bbdc0864140e2fd0595fc6758e3b59b50fb3640aded99024d5cbaa2f0d74b2"
+      },
+      {
+        "id": "media-reviews-segway-navimow-i110n-rtk-webp-640",
+        "src": "/media/reviews/segway-navimow-i110n/rtk-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 76970,
+        "checksum": "sha256:746e7f5b5d4277f19cb0ab65dfa149f6c0cdf628956b7f0bd2e71e1132adc96c"
+      },
+      {
+        "id": "media-reviews-segway-navimow-i110n-rtk-webp-960",
+        "src": "/media/reviews/segway-navimow-i110n/rtk-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 159674,
+        "checksum": "sha256:c0067a12070695b0d988ac17458dec4f915e261fce22a21d74a6a2ee3ee23f98"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/segway-navimow-i110n/zoning.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-segway-navimow-i110n-zoning-webp-360",
+        "src": "/media/reviews/segway-navimow-i110n/zoning-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 25052,
+        "checksum": "sha256:81591f99252e33a2739e078827341b698055e41bc1f5e5f58beae21591e01f78"
+      },
+      {
+        "id": "media-reviews-segway-navimow-i110n-zoning-webp-640",
+        "src": "/media/reviews/segway-navimow-i110n/zoning-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 74564,
+        "checksum": "sha256:74a7c2d74f87d33a5fe5e097ee3047b8c8856dcf691e1be253309ac5ff4dbf0e"
+      },
+      {
+        "id": "media-reviews-segway-navimow-i110n-zoning-webp-960",
+        "src": "/media/reviews/segway-navimow-i110n/zoning-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 162362,
+        "checksum": "sha256:3f93334f36bfbe873c9e62eab20f8ab18ba52ca4e5e8fa4c5665baff0cf49d1c"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/segway-navimow-i110n/voice.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-segway-navimow-i110n-voice-webp-360",
+        "src": "/media/reviews/segway-navimow-i110n/voice-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 25606,
+        "checksum": "sha256:58cfd9f62dcb7b1ed077b82c629ac258a46ce05bd98b456b4f2ed888e69dfe4d"
+      },
+      {
+        "id": "media-reviews-segway-navimow-i110n-voice-webp-640",
+        "src": "/media/reviews/segway-navimow-i110n/voice-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 71814,
+        "checksum": "sha256:2b6ef25111037780f2a897d1f0846c6b50ab796fcf87a97fbfe2521bee6a960d"
+      },
+      {
+        "id": "media-reviews-segway-navimow-i110n-voice-webp-960",
+        "src": "/media/reviews/segway-navimow-i110n/voice-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 145534,
+        "checksum": "sha256:24ba6d8e838837b12435ed7f6724b55fd25c7ec5488a47728d50bcba8add63e5"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/eufy-e15/hero.webp",
+    "sourceWidth": 1672,
+    "sourceHeight": 941,
+    "derivatives": [
+      {
+        "id": "media-reviews-eufy-e15-hero-webp-360",
+        "src": "/media/reviews/eufy-e15/hero-360w.webp",
+        "width": 360,
+        "height": 203,
+        "bytes": 13730,
+        "checksum": "sha256:9446fb984bf9d8681ed928fa78ebe87c7da0dd4c7faccc5734cbb64857df4669"
+      },
+      {
+        "id": "media-reviews-eufy-e15-hero-webp-640",
+        "src": "/media/reviews/eufy-e15/hero-640w.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 35546,
+        "checksum": "sha256:9e4111d1c031d38ee346a01edd1142913d24d6f270e394ff7f6cbfa4c5aa0e93"
+      },
+      {
+        "id": "media-reviews-eufy-e15-hero-webp-960",
+        "src": "/media/reviews/eufy-e15/hero-960w.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 74316,
+        "checksum": "sha256:8880ed6e4ff5685f328ff847bbdacd56eb0d00ee555d18722de47e44b0cdaf54"
+      },
+      {
+        "id": "media-reviews-eufy-e15-hero-webp-1440",
+        "src": "/media/reviews/eufy-e15/hero-1440w.webp",
+        "width": 1440,
+        "height": 810,
+        "bytes": 121510,
+        "checksum": "sha256:921bc9118286ed5c8db545cf6ff8f821ce6eab72b4d98f96e241690ca1e0e1f9"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/eufy-e15/cutting-height.webp",
+    "sourceWidth": 815,
+    "sourceHeight": 1050,
+    "derivatives": [
+      {
+        "id": "media-reviews-eufy-e15-cutting-height-webp-360",
+        "src": "/media/reviews/eufy-e15/cutting-height-360w.webp",
+        "width": 360,
+        "height": 464,
+        "bytes": 29826,
+        "checksum": "sha256:97d7d8dadd79f39508ca62d67dc7a20854a8b6a81af275fada093543134b3a23"
+      },
+      {
+        "id": "media-reviews-eufy-e15-cutting-height-webp-640",
+        "src": "/media/reviews/eufy-e15/cutting-height-640w.webp",
+        "width": 640,
+        "height": 825,
+        "bytes": 77212,
+        "checksum": "sha256:2d03cb572b59593ce1f2efcb42c86990015009c84361e08c20e6682d987eacc4"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/eufy-e15/obstacles.webp",
+    "sourceWidth": 840,
+    "sourceHeight": 1050,
+    "derivatives": [
+      {
+        "id": "media-reviews-eufy-e15-obstacles-webp-360",
+        "src": "/media/reviews/eufy-e15/obstacles-360w.webp",
+        "width": 360,
+        "height": 450,
+        "bytes": 28816,
+        "checksum": "sha256:2c869a3280cd9b0dd028cb9966420517fbcd82f0d18216e6b1bbf974d213f0c7"
+      },
+      {
+        "id": "media-reviews-eufy-e15-obstacles-webp-640",
+        "src": "/media/reviews/eufy-e15/obstacles-640w.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 72752,
+        "checksum": "sha256:7ce92929e1dc4479171d8846438b050681147adf334eb90a2bcfed5bd1b5b849"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/eufy-e15/app-security.webp",
+    "sourceWidth": 860,
+    "sourceHeight": 1050,
+    "derivatives": [
+      {
+        "id": "media-reviews-eufy-e15-app-security-webp-360",
+        "src": "/media/reviews/eufy-e15/app-security-360w.webp",
+        "width": 360,
+        "height": 440,
+        "bytes": 30722,
+        "checksum": "sha256:00b82ba94e7ec7ac22fc8ee3e6a852b9ba9b47922160ba79e59e9683c2fc0bd9"
+      },
+      {
+        "id": "media-reviews-eufy-e15-app-security-webp-640",
+        "src": "/media/reviews/eufy-e15/app-security-640w.webp",
+        "width": 640,
+        "height": 781,
+        "bytes": 77738,
+        "checksum": "sha256:6448c4a1a838379434157177c657342bd27094105aeb7ed9796e8efba3428172"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/mammotion-luba-3-awd-1500h/hero.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-mammotion-luba-3-awd-1500h-hero-webp-360",
+        "src": "/media/reviews/mammotion-luba-3-awd-1500h/hero-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 17022,
+        "checksum": "sha256:9d6bf77c725e8757558431898fd355acb1751e4eca135d35e2afe8f2158b99f0"
+      },
+      {
+        "id": "media-reviews-mammotion-luba-3-awd-1500h-hero-webp-640",
+        "src": "/media/reviews/mammotion-luba-3-awd-1500h/hero-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 44886,
+        "checksum": "sha256:12810ee9f9af3a0e1938880d1499872c296668c015cf06d869847bfb99177594"
+      },
+      {
+        "id": "media-reviews-mammotion-luba-3-awd-1500h-hero-webp-960",
+        "src": "/media/reviews/mammotion-luba-3-awd-1500h/hero-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 89418,
+        "checksum": "sha256:fdd9cad592add70036691dfa55fda64a36e27a9bd3c28539d6ac1c761f398582"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/mammotion-luba-3-awd-1500h/cutting-decks.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-mammotion-luba-3-awd-1500h-cutting-decks-webp-360",
+        "src": "/media/reviews/mammotion-luba-3-awd-1500h/cutting-decks-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 19260,
+        "checksum": "sha256:2542ce7fb3b1340104aa8ce791237ae2265929d5b0fe3ca124ede81258380014"
+      },
+      {
+        "id": "media-reviews-mammotion-luba-3-awd-1500h-cutting-decks-webp-640",
+        "src": "/media/reviews/mammotion-luba-3-awd-1500h/cutting-decks-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 50304,
+        "checksum": "sha256:c920b8f20b917fa2e6d516a938e53d37a46a87c4415c165de09ec7810d3ea349"
+      },
+      {
+        "id": "media-reviews-mammotion-luba-3-awd-1500h-cutting-decks-webp-960",
+        "src": "/media/reviews/mammotion-luba-3-awd-1500h/cutting-decks-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 98506,
+        "checksum": "sha256:27eaa6a61373e0c65f2e2c08facc6297505caf13a09e31f0099849c79374bdb1"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/mammotion-luba-3-awd-1500h/navigation.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-mammotion-luba-3-awd-1500h-navigation-webp-360",
+        "src": "/media/reviews/mammotion-luba-3-awd-1500h/navigation-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 12682,
+        "checksum": "sha256:c1d46acf4c839ad60ce4e90cf325a07bc605f288b7125df0264bf459cfdc7df5"
+      },
+      {
+        "id": "media-reviews-mammotion-luba-3-awd-1500h-navigation-webp-640",
+        "src": "/media/reviews/mammotion-luba-3-awd-1500h/navigation-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 30910,
+        "checksum": "sha256:3cb3b574e2a13eea9237f708a6eb4e071dfae486af5abb0b9bffa0d6145772d0"
+      },
+      {
+        "id": "media-reviews-mammotion-luba-3-awd-1500h-navigation-webp-960",
+        "src": "/media/reviews/mammotion-luba-3-awd-1500h/navigation-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 59820,
+        "checksum": "sha256:4bfd712977d379c0dbd842c391a8e8b1f8aabc035f7ee4a2cdd190bb089a5a5d"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/mammotion-luba-3-awd-1500h/obstacles.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-reviews-mammotion-luba-3-awd-1500h-obstacles-webp-360",
+        "src": "/media/reviews/mammotion-luba-3-awd-1500h/obstacles-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 21176,
+        "checksum": "sha256:fb8396de1409939130273d445cb7a849b4be4a98086ebf2ada5b6fbbc547a4cc"
+      },
+      {
+        "id": "media-reviews-mammotion-luba-3-awd-1500h-obstacles-webp-640",
+        "src": "/media/reviews/mammotion-luba-3-awd-1500h/obstacles-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 79926,
+        "checksum": "sha256:4ed4e5735e1e97ca38c897f93a9de1c7abc7c1f825562c8afeae0a5d878e8ad3"
+      },
+      {
+        "id": "media-reviews-mammotion-luba-3-awd-1500h-obstacles-webp-960",
+        "src": "/media/reviews/mammotion-luba-3-awd-1500h/obstacles-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 200466,
+        "checksum": "sha256:6cffe5f0318644629bfd6a305d6a116f72ecfa4675b30e857c32bb46348b40a9"
       }
     ]
   }

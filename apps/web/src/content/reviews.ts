@@ -56,6 +56,26 @@ export interface ReviewContent {
    * because an empty promise on a live page is worse than no section.
    */
   video?: ReviewVideo;
+  /**
+   * A second machine this review covers, with its own tracked buy path.
+   *
+   * WHY A REVIEW EVER COVERS TWO PRODUCTS. Some makers ship one design in two
+   * sizes and change nothing else. Two pages for those is two pages competing
+   * for the same head terms while each holds a SKU term worth almost nothing —
+   * so they merge, and the merged page has to be able to sell both or the
+   * merge has quietly made one of them unbuyable. This is that buy path.
+   *
+   * It carries no price. Price comes from D1 with the date it was read, and a
+   * figure typed here would be a second number on the page with no way to tell
+   * which one is current — the same rule BuyStrip already follows.
+   */
+  alsoCovers?: {
+    name: string;
+    retailerName: string;
+    /** A key from REDIRECT_KEYS. The /go/ route is what makes it tracked. */
+    redirectKey: string;
+    line: string;
+  };
   specGroups: SpecGroup[];
   /** Which SKU the specifications describe. */
   skuNote: string;
@@ -3087,6 +3107,15 @@ export const REVIEWS: Record<string, ReviewContent> = {
      ------------------------------------------------------------------ */
   "cozmo": {
     slug: "cozmo",
+    /* Wired 11 August 2026. The asset was already in the media registry —
+       it filled the listing card — but this review carried no image field
+       at all, so the page rendered with an empty space at the top. */
+    image: {
+      src: "/media/coding/cozmo/card.webp",
+      alt:
+        "A clean studio shot of the small white and red tracked robot alone on a " +
+        "plain white background.",
+    },
     categorySlug: "educational-coding-robots",
     eyebrow: "Coding robot review",
     title: "Cozmo robot review",
@@ -3135,6 +3164,13 @@ export const REVIEWS: Record<string, ReviewContent> = {
   },
   "moxie": {
     slug: "moxie",
+    /* Wired 11 August 2026. The asset was already in the media registry —
+       it filled the listing card — but this review carried no image field
+       at all, so the page rendered with an empty space at the top. */
+    image: {
+      src: "/media/companion/moxie/card.webp",
+      alt: "A clean studio shot of the robot alone on a plain background.",
+    },
     categorySlug: "companion-robots",
     eyebrow: "Companion robot review",
     title: "Moxie robot review",
@@ -4164,6 +4200,15 @@ export const REVIEWS: Record<string, ReviewContent> = {
      exists. */
   "joy-for-all-companion-pets": {
     slug: "joy-for-all-companion-pets",
+    /* Wired 11 August 2026. The asset was already in the media registry —
+       it filled the listing card — but this review carried no image field
+       at all, so the page rendered with an empty space at the top. */
+    image: {
+      src: "/media/companion/joy-for-all/card.webp",
+      alt:
+        "The Joy For All companion cat in silver with white mitts, lying with its " +
+        "paws forward, beside two inset photographs of older people holding one.",
+    },
     categorySlug: "companion-robots",
     eyebrow: "Companion robot review",
     title: "Joy For All Companion Pet Cat review",
@@ -4341,6 +4386,16 @@ export const REVIEWS: Record<string, ReviewContent> = {
 
   "ecovacs-winbot-w2s": {
     slug: "ecovacs-winbot-w2s",
+    /* Wired 11 August 2026. The asset was already in the media registry —
+       it filled the listing card — but this review carried no image field
+       at all, so the page rendered with an empty space at the top. */
+    image: {
+      src: "/media/window/ecovacs-winbot-w2s/card.webp",
+      alt:
+        "A BotPlanet card for the ECOVACS WINBOT W2S: the window robot alone on " +
+        "clear glass with no station in frame, with the model name and the " +
+        "BotPlanet logo set into the image.",
+    },
     categorySlug: "window-cleaning-robots",
     eyebrow: "Window robot review",
     title: "ECOVACS WINBOT W2S review",
@@ -4388,6 +4443,16 @@ export const REVIEWS: Record<string, ReviewContent> = {
 
   "ecovacs-winbot-mini": {
     slug: "ecovacs-winbot-mini",
+    /* Wired 11 August 2026. The asset was already in the media registry —
+       it filled the listing card — but this review carried no image field
+       at all, so the page rendered with an empty space at the top. */
+    image: {
+      src: "/media/window/ecovacs-winbot-mini/card.webp",
+      alt:
+        "A BotPlanet card for the ECOVACS WINBOT Mini: the small window robot " +
+        "alone on a plain background, with the model name and the BotPlanet logo " +
+        "set into the image.",
+    },
     categorySlug: "window-cleaning-robots",
     eyebrow: "Window robot review",
     title: "ECOVACS WINBOT Mini review",
@@ -4439,11 +4504,17 @@ export const REVIEWS: Record<string, ReviewContent> = {
 
   "grillbot": {
     slug: "grillbot",
-    /* No artwork supplied yet. The review ships without a lead image rather
-       than waiting for one: 18,100/mo at KD 11 is the reason this category
-       exists, and an unillustrated page that answers the query beats a
-       finished page that does not exist. */
-    image: undefined,
+    /* Artwork arrived 11 August 2026, and this is the only file in that drop
+       with nothing written into it — no headline, no figure, no logo on the
+       machine. So it is the only one typed as a depiction and left open to
+       Product structured data. */
+    image: {
+      src: "/media/reviews/grillbot/hero.webp",
+      alt:
+        "The Grillbot on a hot grill grate: a squat red machine with three " +
+        "circular wire brushes underneath, sitting on the bars of a lit gas " +
+        "grill at dusk with steam rising around it.",
+    },
     figures: [],
     categorySlug: "grill-cleaning-robots",
     eyebrow: "Grill-cleaning robot review",
@@ -4539,8 +4610,25 @@ export const REVIEWS: Record<string, ReviewContent> = {
 
   "eufy-x10-pro-omni": {
     slug: "eufy-x10-pro-omni",
-    image: undefined,
-    figures: [],
+    image: {
+      src: "/media/reviews/eufy-x10-pro-omni/hero.webp",
+      alt:
+        "A BotPlanet panel for the eufy X10 Pro Omni: the flat black robot parked " +
+        "under its tall auto-empty dock on dark wood flooring, a child sitting with " +
+        "a small dog on a rug behind. Four labels along the bottom read 8000 Pa, " +
+        "smart vacuum plus mop 2-in-1, auto-empty dock up to 60 days, and iPath " +
+        "laser navigation — eufy's own marketing wording, set into the artwork.",
+    },
+    figures: [
+      {
+        afterHeading: "What the 12 millimetres actually buys",
+        src: "/media/reviews/eufy-x10-pro-omni/underside.webp",
+        caption:
+          "The two round pads at the back are what lift 12mm. They spin rather than " +
+          "drag, which is the part that matters on a floor with dried-on marks — and " +
+          "the part that has to clear the carpet when it rises.",
+      },
+    ],
     categorySlug: "robot-vacuums",
     eyebrow: "Robot vacuum review",
     title: "eufy X10 Pro Omni review",
@@ -4598,8 +4686,34 @@ export const REVIEWS: Record<string, ReviewContent> = {
 
   "eufy-omni-s1-pro": {
     slug: "eufy-omni-s1-pro",
-    image: undefined,
-    figures: [],
+    image: {
+      src: "/media/reviews/eufy-omni-s1-pro/hero.webp",
+      alt:
+        "A BotPlanet panel for the eufy Omni S1 Pro: the tall cylindrical UniClean " +
+        "station standing on a wooden floor with the slim black robot in front of " +
+        "it crossing a spilled-coffee stain. A feature list beside it reads " +
+        "UniClean station, vacuum and mop, tackles tough stains and premium smart " +
+        "cleaning — eufy's own marketing wording, set into the artwork.",
+    },
+    figures: [
+      {
+        afterHeading: "The roller mop, which is the good idea here",
+        src: "/media/reviews/eufy-omni-s1-pro/stain-lift.webp",
+        caption:
+          "eufy's own claim, in eufy's own words: 48-hour dried coffee lifted, with a " +
+          "comparison against unnamed “other robots”. The comparison is the maker's, " +
+          "not a measurement of ours, and the small print on the artwork attributes " +
+          "it to internal lab testing.",
+      },
+      {
+        afterHeading: "eufy has moved on and says so",
+        src: "/media/reviews/eufy-omni-s1-pro/slim-profile.webp",
+        caption:
+          "3.78 inches is eufy's figure for the robot's height, printed on its own " +
+          "artwork. It is the number that decides whether the machine gets under your " +
+          "sofa, and it is one of the few this listing does publish.",
+      },
+    ],
     categorySlug: "robot-vacuums",
     eyebrow: "Robot vacuum review",
     title: "eufy Omni S1 Pro review",
@@ -4658,8 +4772,33 @@ export const REVIEWS: Record<string, ReviewContent> = {
 
   "roborock-s8-max-ultra": {
     slug: "roborock-s8-max-ultra",
-    image: undefined,
-    figures: [],
+    image: {
+      src: "/media/reviews/roborock-s8-max-ultra/hero.webp",
+      alt:
+        "A BotPlanet panel for the roborock S8 Max Ultra: the white robot on a lit " +
+        "plinth in front of its tall white dock, a phone showing a floor map beside " +
+        "them. Labels read smart docking, app control, auto washing and drying, and " +
+        "edge-to-edge cleaning.",
+    },
+    figures: [
+      {
+        afterHeading: "Twenty millimetres against twelve",
+        src: "/media/reviews/roborock-s8-max-ultra/underside.webp",
+        caption:
+          "The riser is the mechanism behind the 20mm figure: the roller assembly " +
+          "lifts the pad rather than the whole chassis. 8,000 Pa is roborock's " +
+          "published suction for this machine, and it is the same number our " +
+          "specification table carries.",
+      },
+      {
+        afterHeading: "What the machine does",
+        src: "/media/reviews/roborock-s8-max-ultra/dock.webp",
+        caption:
+          "Everything roborock lists the dock as doing, in one frame. What no " +
+          "roborock page we could read states is how long the bag lasts in a house " +
+          "with animals, as against the seven weeks it quotes.",
+      },
+    ],
     categorySlug: "robot-vacuums",
     eyebrow: "Robot vacuum review",
     /* THE H1 AND THE TITLE BOTH LEAD WITH "MaxV" AND THE PRODUCT IS NOT ONE.
@@ -4724,8 +4863,32 @@ export const REVIEWS: Record<string, ReviewContent> = {
 
   "roborock-saros-10": {
     slug: "roborock-saros-10",
-    image: undefined,
-    figures: [],
+    image: {
+      src: "/media/reviews/roborock-saros-10/hero.webp",
+      alt:
+        "A BotPlanet panel for the roborock Saros 10: the black robot on a lit " +
+        "plinth in front of its tall dark dock, ringed by six labelled thumbnails " +
+        "reading app control, low-profile cleaning, smart navigation, edge " +
+        "cleaning, auto-dock support and powerful cleaning.",
+    },
+    figures: [
+      {
+        afterHeading: "The 3.14 inches, which is the other real argument",
+        src: "/media/reviews/roborock-saros-10/suction.webp",
+        caption:
+          "22,000 Pa is roborock's published figure and the one our table carries. It " +
+          "is also, as the review argues above, not the number that decides anything " +
+          "at this end of the market — the 3.14 inches is.",
+      },
+      {
+        afterHeading: "Navigation",
+        src: "/media/reviews/roborock-saros-10/brushes.webp",
+        caption:
+          "Navigation gets the machine to the hair; the brush decides what happens " +
+          "next. roborock's zero-tangle claim is its own and unquantified — no " +
+          "percentage, no hair length, no test named.",
+      },
+    ],
     categorySlug: "robot-vacuums",
     eyebrow: "Robot vacuum review",
     title: "roborock Saros 10 review",
@@ -4842,8 +5005,33 @@ export const REVIEWS: Record<string, ReviewContent> = {
 
   "dreame-x40-ultra": {
     slug: "dreame-x40-ultra",
-    image: undefined,
-    figures: [],
+    image: {
+      src: "/media/reviews/dreame-x40-ultra/hero.webp",
+      alt:
+        "A BotPlanet panel for the Dreame X40 Ultra: the black robot beside its " +
+        "tall dock on a dark floor with a phone showing the Dreame app. The " +
+        "headline reads 12,000 Pa cleaning power, with labels for dual spinning " +
+        "mops, a smart dock system and app control.",
+    },
+    figures: [
+      {
+        afterHeading: "What the extending brush and the washboard are for",
+        src: "/media/reviews/dreame-x40-ultra/washboard.webp",
+        caption:
+          "The ridged plate is the whole idea: the pads are scrubbed against a " +
+          "surface rather than rinsed in standing water. Dreame does not publish a " +
+          "wash temperature for this model.",
+      },
+      {
+        afterHeading: "The gap in this page, stated first",
+        src: "/media/reviews/dreame-x40-ultra/avoidance.webp",
+        caption:
+          "This panel asserts obstacle avoidance. The Amazon listing we built this " +
+          "page from does not claim it, and Dreame's own pages would not load, so our " +
+          "catalogue records this machine as having none. The headline is the " +
+          "artwork's; the ruling above is ours, and it is the one the matcher uses.",
+      },
+    ],
     categorySlug: "robot-vacuums",
     eyebrow: "Robot vacuum review",
     title: "Dreame X40 Ultra review",
@@ -4901,8 +5089,32 @@ export const REVIEWS: Record<string, ReviewContent> = {
 
   "dreame-x50-ultra": {
     slug: "dreame-x50-ultra",
-    image: undefined,
-    figures: [],
+    image: {
+      src: "/media/reviews/dreame-x50-ultra/hero.webp",
+      alt:
+        "A BotPlanet panel headed “reach into tight corners” for the Dreame X50 " +
+        "Ultra, showing the machine from a low angle with its roller brush and two " +
+        "round mop pads visible as it works into a corner. Labels read edge " +
+        "cleaning, under-furniture reach and corner precision.",
+    },
+    figures: [
+      {
+        afterHeading: "Obstacle crossing is not mop lifting",
+        src: "/media/reviews/dreame-x50-ultra/mop-washing.webp",
+        caption:
+          "Washing the pads is not the same as lifting them, and this machine's " +
+          "listing documents the first and not the second. A clean pad dragged across " +
+          "carpet is still a wet pad dragged across carpet.",
+      },
+      {
+        afterHeading: "What the six centimetres is genuinely for",
+        src: "/media/reviews/dreame-x50-ultra/brushes.webp",
+        caption:
+          "The brush claim carries no figure — no hair length, no percentage, no " +
+          "test. It is the maker's wording, and we record it as a design description " +
+          "rather than a specification.",
+      },
+    ],
     categorySlug: "robot-vacuums",
     eyebrow: "Robot vacuum review",
     title: "Dreame X50 Ultra review",
@@ -4960,8 +5172,42 @@ export const REVIEWS: Record<string, ReviewContent> = {
 
   "ecovacs-deebot-t90-pro-omni": {
     slug: "ecovacs-deebot-t90-pro-omni",
-    image: undefined,
-    figures: [],
+    image: {
+      src: "/media/reviews/ecovacs-deebot-t90-pro-omni/hero.webp",
+      alt:
+        "A BotPlanet panel for the ECOVACS DEEBOT T90 PRO Omni: the black robot in " +
+        "front of its dock on a dark floor beside a phone and two bottles of " +
+        "cleaning solution. The headline reads nonstop power, with labels for quick " +
+        "top-up charging, built for big homes and app-ready control.",
+    },
+    figures: [
+      {
+        afterHeading: "\"ECOVACS DEEBOT\" is four machines, not one",
+        src: "/media/reviews/ecovacs-deebot-t90-pro-omni/thresholds.webp",
+        caption:
+          "0.59 inches is ECOVACS's own threshold figure for this model — the T90 PRO " +
+          "Omni specifically, not the three other machines sold under the DEEBOT T90 " +
+          "name. The comparison against “others” is the maker's and names nobody.",
+      },
+      {
+        afterHeading: "The suction number, and why it is the wrong number",
+        src: "/media/reviews/ecovacs-deebot-t90-pro-omni/suction-noise.webp",
+        caption:
+          "All five figures are ECOVACS's, and the three percentages are measured " +
+          "against ECOVACS's own T90 rather than against anything else on this page. " +
+          "30,000 Pa is the number the listing leads with; the section above is about " +
+          "why it is not the number to buy on.",
+      },
+      {
+        afterHeading: "Fifteen millimetres and a roller",
+        src: "/media/reviews/ecovacs-deebot-t90-pro-omni/lift.webp",
+        caption:
+          "The 15mm in the heading above is our figure for the mop lift; ECOVACS " +
+          "prints 0.59 inches here, which is the same measurement rounded to " +
+          "imperial. The three separate lifts are the part worth noticing — brushes " +
+          "and mop rise independently.",
+      },
+    ],
     categorySlug: "robot-vacuums",
     eyebrow: "Robot vacuum review",
     title: "ECOVACS DEEBOT T90 PRO Omni review",
@@ -5023,8 +5269,42 @@ export const REVIEWS: Record<string, ReviewContent> = {
 
   "shark-powerdetect-av2820s": {
     slug: "shark-powerdetect-av2820s",
-    image: undefined,
-    figures: [],
+    image: {
+      src: "/media/reviews/shark-powerdetect-av2820s/hero.webp",
+      alt:
+        "A BotPlanet panel for the Shark PowerDetect AV2820S: the black robot in " +
+        "front of its bagless tower on a dark floor with scattered debris around it " +
+        "and a phone showing the DirtDetect screen. Three panels beneath read Dirt " +
+        "Detect, Edge Detect and Floor Detect, each quoting Shark's own " +
+        "up-to-50-per-cent improvement footnoted against the Shark RV900S and " +
+        "RV2600. A strip along the bottom adds up to 120 minutes of runtime.",
+    },
+    figures: [
+      {
+        afterHeading: "What \"PowerDetect\" is doing",
+        src: "/media/reviews/shark-powerdetect-av2820s/pet-hair.webp",
+        caption:
+          "The self-cleaning brushroll and the anti-hair wrap are the two design " +
+          "claims Shark makes for a house with animals. Neither carries a figure on " +
+          "any page we read.",
+      },
+      {
+        afterHeading: "Not mopping is a feature for some houses",
+        src: "/media/reviews/shark-powerdetect-av2820s/self-empty.webp",
+        caption:
+          "Bagless, so there is nothing to re-order — and 30 days is Shark's own " +
+          "figure for how often you empty it. A machine that does not mop has no " +
+          "water tank to fill either, which is the point of the section above.",
+      },
+      {
+        afterHeading: "The fifty-dollar word",
+        src: "/media/reviews/shark-powerdetect-av2820s/neverstuck.webp",
+        caption:
+          "NeverStuck is the second of the two names in the fifty-dollar gap. It is a " +
+          "mechanism — the machine raises itself rather than reversing out — and it " +
+          "is the one of the pair that is easy to picture.",
+      },
+    ],
     categorySlug: "robot-vacuums",
     eyebrow: "Robot vacuum review",
     title: "Shark PowerDetect AV2820S review",
@@ -5082,8 +5362,40 @@ export const REVIEWS: Record<string, ReviewContent> = {
 
   "shark-matrix-plus-ur2650ws": {
     slug: "shark-matrix-plus-ur2650ws",
-    image: undefined,
-    figures: [],
+    image: {
+      src: "/media/reviews/shark-matrix-plus-ur2650ws/hero.webp",
+      alt:
+        "A BotPlanet panel for the Shark Matrix Plus UR2650WS: the black robot in " +
+        "front of its dock with a green tile above reading vac plus mop, described " +
+        "as a 2-in-1 robot vacuum and sonic mopping system. Two panels beneath read " +
+        "sonic mopping, scrubs hard floors up to 100 times per minute, and better " +
+        "edge cleaning using blasts of air.",
+    },
+    figures: [
+      {
+        afterHeading: "What $280 costs you",
+        src: "/media/reviews/shark-matrix-plus-ur2650ws/mapping.webp",
+        caption:
+          "LiDAR at this price is the thing that is not obvious from the number on " +
+          "the box, and it is the reason this machine maps rather than bounces.",
+      },
+      {
+        afterHeading: "Sonic mopping and the self-cleaning brushroll",
+        src: "/media/reviews/shark-matrix-plus-ur2650ws/filtration.webp",
+        caption:
+          "99.97 per cent is Shark's figure, and unusually for this category it names " +
+          "the test it comes from. That is more than most of the machines on this " +
+          "site can say.",
+      },
+      {
+        afterHeading: "Who this is genuinely right for",
+        src: "/media/reviews/shark-matrix-plus-ur2650ws/pets.webp",
+        caption:
+          "The self-cleaning brushroll is the claim that matters in a house that " +
+          "sheds, and it is one of the few things this machine has in common with " +
+          "Shark's much dearer models.",
+      },
+    ],
     categorySlug: "robot-vacuums",
     eyebrow: "Robot vacuum review",
     /* "Shark Matrix" names two Shark lines and the primary term is the family
@@ -5144,8 +5456,42 @@ export const REVIEWS: Record<string, ReviewContent> = {
 
   "roomba-max-705": {
     slug: "roomba-max-705",
-    image: undefined,
-    figures: [],
+    image: {
+      src: "/media/reviews/roomba-max-705/hero.webp",
+      alt:
+        "A BotPlanet panel for the iRobot Roomba Max 705: the black robot on dark " +
+        "wood in front of its AutoEmpty dock, a phone showing the Roomba app beside " +
+        "it and scattered popcorn on the floor in front. Six labelled panels down " +
+        "the side read 75 days auto-emptying, extreme power with 180 times more " +
+        "suction, anti-tangle dual rubber brushes, four suction levels plus carpet " +
+        "boost, PrecisionVision AI with ClearView Pro LiDAR, and targeted cleaning.",
+    },
+    figures: [
+      {
+        afterHeading: "What this one has",
+        src: "/media/reviews/roomba-max-705/precisionvision.webp",
+        caption:
+          "Object recognition rather than bump-and-turn: the machine is meant to name " +
+          "what is in front of it and decide. A cable is the classic case, and the " +
+          "one owners of every brand complain about.",
+      },
+      {
+        afterHeading: "The name iRobot did not use",
+        src: "/media/reviews/roomba-max-705/lidar.webp",
+        caption:
+          "iRobot names the navigation and not the suction. That is a choice about " +
+          "which number it wants read, and on a machine with rubber anti-tangle " +
+          "brushes it is arguably the right one.",
+      },
+      {
+        afterHeading: "Who should buy one",
+        src: "/media/reviews/roomba-max-705/edge.webp",
+        caption:
+          "A round robot cannot reach into a square corner, which is why every maker " +
+          "in this category prints an edge-cleaning panel. This one is a side brush " +
+          "doing what side brushes do.",
+      },
+    ],
     categorySlug: "robot-vacuums",
     eyebrow: "Robot vacuum review",
     title: "iRobot Roomba Max 705 review",
@@ -5231,7 +5577,16 @@ export const REVIEWS: Record<string, ReviewContent> = {
 
   "litter-robot-4": {
     slug: "litter-robot-4",
-    image: undefined,
+    /* Wired 11 August 2026. The asset was already in the media registry —
+       it filled the listing card — but this field was never pointed at it,
+       so the review itself rendered with an empty space at the top. */
+    image: {
+      src: "/media/litter/litter-robot-4/card.webp",
+      alt:
+        "A BotPlanet card for the Litter-Robot 4: the tall black globe-and-base " +
+        "unit in a dark utility room with a tabby cat standing beside it, with " +
+        "the model name and the BotPlanet logo set into the image.",
+    },
     figures: [],
     categorySlug: "self-cleaning-litter-boxes",
     eyebrow: "Self-cleaning litter box review",
@@ -5296,7 +5651,16 @@ export const REVIEWS: Record<string, ReviewContent> = {
 
   "petkit-purobot-max-pro-2": {
     slug: "petkit-purobot-max-pro-2",
-    image: undefined,
+    /* Wired 11 August 2026. The asset was already in the media registry —
+       it filled the listing card — but this field was never pointed at it,
+       so the review itself rendered with an empty space at the top. */
+    image: {
+      src: "/media/litter/petkit-purobot-max-pro-2/card.webp",
+      alt:
+        "A BotPlanet card for the PETKIT Purobot Max Pro 2: the drum unit with " +
+        "its wide opening facing the camera, with the model name and the " +
+        "BotPlanet logo set into the image.",
+    },
     figures: [],
     categorySlug: "self-cleaning-litter-boxes",
     eyebrow: "Self-cleaning litter box review",
@@ -5373,7 +5737,16 @@ export const REVIEWS: Record<string, ReviewContent> = {
 
   "casa-leo-loo-too": {
     slug: "casa-leo-loo-too",
-    image: undefined,
+    /* Wired 11 August 2026. The asset was already in the media registry —
+       it filled the listing card — but this field was never pointed at it,
+       so the review itself rendered with an empty space at the top. */
+    image: {
+      src: "/media/litter/casa-leo-loo-too/card.webp",
+      alt:
+        "A BotPlanet card for the Casa Leo Leo’s Loo Too: the domed unit on a " +
+        "plain floor, with the model name and the BotPlanet logo set into the " +
+        "image.",
+    },
     figures: [],
     categorySlug: "self-cleaning-litter-boxes",
     eyebrow: "Self-cleaning litter box review",
@@ -5451,7 +5824,16 @@ export const REVIEWS: Record<string, ReviewContent> = {
 
   "petsafe-scoopfree-crystal-pro": {
     slug: "petsafe-scoopfree-crystal-pro",
-    image: undefined,
+    /* Wired 11 August 2026. The asset was already in the media registry —
+       it filled the listing card — but this field was never pointed at it,
+       so the review itself rendered with an empty space at the top. */
+    image: {
+      src: "/media/litter/petsafe-scoopfree-crystal-pro/card.webp",
+      alt:
+        "A BotPlanet card for the PetSafe ScoopFree Crystal Pro: the white " +
+        "flat-tray unit with a hooded cover and a cat standing on the tray, with " +
+        "the model name and the BotPlanet logo set into the image.",
+    },
     figures: [],
     categorySlug: "self-cleaning-litter-boxes",
     eyebrow: "Self-cleaning litter box review",
@@ -5554,8 +5936,38 @@ export const REVIEWS: Record<string, ReviewContent> = {
 
   "husqvarna-automower-410iq": {
     slug: "husqvarna-automower-410iq",
-    image: undefined,
-    figures: [],
+    image: {
+      src: "/media/reviews/husqvarna-automower-410iq/hero.webp",
+      alt:
+        "A BotPlanet panel naming the Husqvarna Automower 410iQ, showing the low " +
+        "dark grey mower on a lawn at night with lit borders behind it.",
+    },
+    figures: [
+      {
+        afterHeading: "EPOS, and why the boundary is the interesting part",
+        src: "/media/reviews/husqvarna-automower-410iq/wire-free.webp",
+        caption:
+          "No boundary wire is the headline; a satellite reference station is the " +
+          "mechanism. The section above is about what that trade actually costs you " +
+          "when the signal is poor.",
+      },
+      {
+        afterHeading: "The numbers Husqvarna publishes that nobody else does",
+        src: "/media/reviews/husqvarna-automower-410iq/durability.webp",
+        caption:
+          "Husqvarna is the maker in this set that publishes the numbers behind a " +
+          "claim like this one. Working in rain is not a specification; the ingress " +
+          "rating and the slope figure in the section above are.",
+      },
+      {
+        afterHeading: "What the two area figures actually tell you",
+        src: "/media/reviews/husqvarna-automower-410iq/cut-quality.webp",
+        caption:
+          "The stripes are artwork rather than evidence — a mulching robot that cuts " +
+          "a little every day does not leave them. What it does leave is grass that " +
+          "never gets long enough to notice.",
+      },
+    ],
     categorySlug: "robotic-lawn-mowers",
     eyebrow: "Robotic lawn mower review",
     title: "Husqvarna Automower 410iQ review",
@@ -5624,24 +6036,73 @@ export const REVIEWS: Record<string, ReviewContent> = {
 
   "mammotion-luba-3-awd-1500h": {
     slug: "mammotion-luba-3-awd-1500h",
-    image: undefined,
-    figures: [],
+    image: {
+      src: "/media/reviews/mammotion-luba-3-awd-1500h/hero.webp",
+      alt:
+        "A BotPlanet panel naming the Mammotion LUBA 3 AWD, showing the white and " +
+        "orange four-wheel-drive mower on a lawn at night with a blue guide line " +
+        "drawn across the grass and a lit house behind.",
+    },
+    figures: [
+      {
+        afterHeading: "What the 3000H adds beyond the acreage",
+        src: "/media/lawn/mammotion-luba-3-awd-3000h/card.webp",
+        caption:
+          "The 3000H, which had its own page until 11 August 2026 and now shares " +
+          "this one. Same chassis, same slope, twice the ground.",
+      },
+      {
+        afterHeading: "What eighty per cent actually means",
+        src: "/media/reviews/mammotion-luba-3-awd-1500h/cutting-decks.webp",
+        caption:
+          "Two cutting discs rather than one, and four driven wheels around them. On " +
+          "a bank the wheels are what stops the machine, and the discs are what it " +
+          "can still do once stopped. Both sizes are built this way.",
+      },
+      {
+        afterHeading: "Navigation, and the reason this is not the cheap way to climb",
+        src: "/media/reviews/mammotion-luba-3-awd-1500h/navigation.webp",
+        caption:
+          "The positioning kit is the expensive part of this machine, not the blades. " +
+          "That is the trade the section above is about.",
+      },
+      {
+        afterHeading: "Who should not buy this",
+        src: "/media/reviews/mammotion-luba-3-awd-1500h/obstacles.webp",
+        caption:
+          "A garden with children, animals and things left out is the case this " +
+          "machine is built for, and it is also the case where an obstacle miss costs " +
+          "the most.",
+      },
+    ],
     categorySlug: "robotic-lawn-mowers",
     eyebrow: "Robotic lawn mower review",
-    title: "Mammotion LUBA 3 AWD 1500H review",
-    seoTitle: "Mammotion LUBA 3 AWD 1500H Review — 80% Slopes",
+    /* ONE ARTICLE, TWO MACHINES, from 11 August 2026.
+
+       The 1500H and the 3000H were two pages saying the same thing. They share
+       a chassis, a slope figure, a battery, a runtime and a cutting range, and
+       they differed on this site by one number — so the two pages competed for
+       the same 2,600/mo of head terms ("mammotion luba 3", "luba 3 awd") while
+       each carried a SKU term worth 30 and 40. That is cannibalisation with no
+       upside: neither page could win a term the other was also chasing.
+
+       The 3000H's URL now 301s here (see MERGED_REVIEWS in product-names.ts)
+       and this page sells both — its own buy box for the 1500H, and the strip
+       built from `alsoCovers` for the 3000H. Nothing became unbuyable. */
+    title: "Mammotion LUBA 3 AWD review: 1500H and 3000H",
+    seoTitle: "Mammotion LUBA 3 AWD Review — 1500H vs 3000H, 80% Slopes",
     metaDescription:
-      "All four wheels driven, 38.6 degrees, and LiDAR rather than satellites — so it works " +
-      "under trees too. $2,399 for 0.37 acre, and the acre is not the point.",
+      "Both LUBA 3 AWD sizes in one place: 80% slopes on all four wheels, LiDAR " +
+      "rather than satellites, and the sum that decides 1500H against 3000H.",
     verdict:
-      "Eighty per cent slopes on all-wheel drive, which is roughly double what most of this category manages, with 360-degree LiDAR and AI vision instead of satellite positioning — the pairing that matters, because steep gardens are often wooded gardens. At $2,399 for 0.37 of an acre it is a lot of money for not much ground, and the ground is not the point. On a flat lawn it is dead weight you are financing.",
+      "Eighty per cent slopes on all-wheel drive, roughly double what most of this category manages, with 360-degree LiDAR and AI vision rather than satellite positioning alone — the pairing that matters, because steep gardens are often wooded gardens. Two sizes: the 1500H covers 0.37 acre for $2,399 and the 3000H covers 0.75 for $2,799. The ground is not what you are paying for, and on a flat lawn either one is dead weight you are financing.",
     bestFor:
       "A genuine bank under 16,117 sq ft, especially with tree cover that would defeat a satellite-positioned machine.",
     notIdealFor:
-      "A flat lawn, where the WORX covers half an acre for $1,022.54 — and anything over 0.37 acre, which the 3000H handles for $400 more.",
+      "A flat lawn, where the WORX covers half an acre for $1,022.54 — and anything over 0.75 acre, which is past the larger of these two.",
     facts: [
-      { label: "Price", value: "$2,399, read 8 August 2026" },
-      { label: "Rated area", value: "0.37 acre (16,117 sq ft)" },
+      { label: "Price", value: "$2,399 (1500H) / $2,799 (3000H), read 8 August 2026" },
+      { label: "Rated area", value: "0.37 acre (1500H) / 0.75 acre (3000H)" },
       { label: "Max slope", value: "80% (38.6°), all-wheel drive" },
       { label: "Runtime", value: "215 min on up to 15 Ah" },
     ],
@@ -5649,10 +6110,16 @@ export const REVIEWS: Record<string, ReviewContent> = {
       {
         heading: "Your lawn",
         rows: [
-          { label: "Rated area", value: "0.37 acre (16,117 sq ft)" },
-          { label: "Max slope", value: "80% (38.6°), all-wheel drive" },
-          { label: "Navigation", value: "360° LiDAR plus AI vision — not satellite, so a canopy does not defeat it" },
-          { label: "Drive", value: "All-wheel" },
+          { label: "Rated area", value: "1500H — 0.37 acre (16,117 sq ft); 3000H — 0.75 acre (32,670 sq ft)" },
+          { label: "Max slope", value: "80% (38.6°), all-wheel drive — both sizes" },
+          {
+            label: "Navigation",
+            value: "1500H — 360° LiDAR plus dual-camera AI vision; 3000H — the same plus network RTK",
+            note: "Published in Mammotion's listing titles rather than in its specification tables. RTK adds accuracy on open ground and is the part that stops working under a canopy, which is why the 1500H is not the lesser machine on a wooded slope.",
+          },
+          { label: "Mowing rate", value: "1500H — 4,300 sq ft/h; 3000H — 5,400 sq ft/h" },
+          { label: "Multi-zone management", value: "1500H — 15 zones; 3000H — 30 zones" },
+          { label: "Drive", value: "All-wheel, both sizes" },
         ],
       },
       {
@@ -5669,8 +6136,8 @@ export const REVIEWS: Record<string, ReviewContent> = {
       {
         heading: "Running it",
         rows: [
-          { label: "Battery", value: "Up to 15 Ah" },
-          { label: "Runtime", value: "215 min per charge" },
+          { label: "Battery", value: "Up to 15 Ah, both sizes" },
+          { label: "Runtime", value: "215 min per charge, both sizes" },
         ],
       },
       {
@@ -5680,86 +6147,71 @@ export const REVIEWS: Record<string, ReviewContent> = {
           { label: "IP rating", value: null },
           { label: "Weight", value: null },
           { label: "Warranty", value: null },
-          { label: "Separate zones", value: null },
+          { label: "Noise under load on a slope", value: null },
         ],
       },
     ],
+    /* THE SECOND MACHINE, WITH ITS OWN TRACKED BUY PATH. The 3000H kept its
+       product record, its D1 row, its destination and its /go/ key when the two
+       pages merged — only the page went. This is what puts it back in front of
+       a reader, on the one page that now covers both. */
+    alsoCovers: {
+      name: "Mammotion LUBA 3 AWD 3000H",
+      retailerName: "Amazon",
+      redirectKey: "lawn-mammotion-luba3-3000h-amazon",
+      line:
+        "Over 16,117 sq ft of grass? That is past the 1500H and into the 3000H — " +
+        "0.75 acre, $400 more, same eighty per cent climb.",
+    },
     skuNote:
-      "Mammotion LUBA 3 AWD 1500H, ASIN B0GKNYZPC3, $2,399 read on 8 August 2026. The brief named a LUBA 2, and Mammotion's own US page for that machine is titled “2025 Model | Upgraded to 2026 LUBA 3” — so most of the internet's LUBA reviews are of a model its maker has marked superseded. The 15.7 in cutting width in circulation belongs to the LUBA 2 series and is NOT carried across. Specifications read from us.mammotion.com on 10 August 2026.",
-    lastReviewed: "2026-08-10",
+      "Two SKUs, both the high-cut version. Mammotion LUBA 3 AWD 1500H, ASIN B0GKNYZPC3, $2,399; Mammotion LUBA 3 AWD 3000H, ASIN B0GKNQKJJQ, $2,799. Both read on 8 August 2026, both listing titles giving a 2.2–4.0 in cutting range. The garage bundles B0GKM8JZDF and B0H1R9RJ3F sell the 3000H at $3,008 and are not what this page links to — same machine, different purchase. The brief named a LUBA 2, and Mammotion's own US page for that machine is titled “2025 Model | Upgraded to 2026 LUBA 3” — so most of the internet's LUBA reviews are of a model its maker has marked superseded. The 15.7 in cutting width in circulation belongs to the LUBA 2 series and is NOT carried across. Specifications read from us.mammotion.com on 10 August 2026.",
+    lastReviewed: "2026-08-11",
   },
 
-  "mammotion-luba-3-awd-3000h": {
-    slug: "mammotion-luba-3-awd-3000h",
-    image: undefined,
-    figures: [],
-    categorySlug: "robotic-lawn-mowers",
-    eyebrow: "Robotic lawn mower review",
-    title: "Mammotion LUBA 3 AWD 3000H review",
-    seoTitle: "Mammotion LUBA 3 AWD 3000H Review — Big and Steep",
-    metaDescription:
-      "Three quarters of an acre on 80% slopes, $400 above the 1500H for twice the ground. " +
-      "The only machine here that covers that much and still climbs a bank.",
-    verdict:
-      "Three quarters of an acre on eighty per cent slopes — the only machine in this catalogue that covers that much ground and still climbs a bank. Four hundred dollars over the 1500H for twice the area makes it the better buy of the two more often than the price suggests, and everything else about them is identical. On a lawn under a third of an acre it is more machine than the garden needs, in size, weight, noise and money.",
-    bestFor:
-      "A third to three quarters of an acre with real slopes, and possibly trees — nothing else here fits that description.",
-    notIdealFor:
-      "A small garden, where the Dreame A3 AWD 1000 climbs the same 80% for $1,200 less — and any flat lawn at all.",
-    facts: [
-      { label: "Price", value: "$2,799, read 8 August 2026" },
-      { label: "Rated area", value: "0.75 acre (32,670 sq ft)" },
-      { label: "Max slope", value: "80% (38.6°), all-wheel drive" },
-      { label: "Runtime", value: "215 min on up to 15 Ah" },
-    ],
-    specGroups: [
-      {
-        heading: "Your lawn",
-        rows: [
-          { label: "Rated area", value: "0.75 acre (32,670 sq ft)" },
-          { label: "Max slope", value: "80% (38.6°), all-wheel drive" },
-          { label: "Navigation", value: "360° LiDAR plus AI vision — not satellite, so a canopy does not defeat it" },
-          { label: "Drive", value: "All-wheel" },
-        ],
-      },
-      {
-        heading: "Cutting",
-        rows: [
-          {
-            label: "Cutting height",
-            value: "Standard 1.0–2.7 in; High version 2.2–4.0 in",
-            note: "The H is a cutting height, not a trim level. Warm-season grasses are cut at three inches and up, above the standard version's ceiling.",
-          },
-          { label: "Cutting width", value: null },
-        ],
-      },
-      {
-        heading: "Running it",
-        rows: [
-          { label: "Battery", value: "Up to 15 Ah" },
-          { label: "Runtime", value: "215 min per charge" },
-        ],
-      },
-      {
-        heading: "Not published",
-        rows: [
-          { label: "Noise", value: null },
-          { label: "IP rating", value: null },
-          { label: "Weight", value: null },
-          { label: "Warranty", value: null },
-          { label: "Separate zones", value: null },
-        ],
-      },
-    ],
-    skuNote:
-      "Mammotion LUBA 3 AWD 3000H, $2,799, part of the LUBA 3 AWD series verified on 8 August 2026 alongside the 1500H at ASIN B0GKNYZPC3. The 15.7 in cutting width in circulation belongs to the superseded LUBA 2 series and is NOT carried across. Specifications read from us.mammotion.com on 10 August 2026.",
-    lastReviewed: "2026-08-10",
-  },
+  /* The LUBA 3 AWD 3000H's record lived here until 11 August 2026. It is now
+     covered by the 1500H review above, which carries both machines, both
+     ASINs and a tracked buy path for each; the 3000H's URL 301s there via
+     MERGED_REVIEWS in content/product-names.ts.
+
+     THE PRODUCT DID NOT GO ANYWHERE. Its D1 row, its destination record, its
+     identity baseline and its /go/ key are all untouched, so it is still
+     matchable, still comparable and still buyable. What it lost was a second
+     page arguing with the first over the same search terms. */
 
   "dreame-a3-awd-1000": {
     slug: "dreame-a3-awd-1000",
-    image: undefined,
-    figures: [],
+    image: {
+      src: "/media/reviews/dreame-a3-awd-1000/hero.webp",
+      alt:
+        "A BotPlanet panel naming the Dreame A3 AWD 1000, showing the black, white " +
+        "and red four-wheel-drive mower on a lawn at night with lit planting behind " +
+        "it.",
+    },
+    figures: [
+      {
+        afterHeading: "Eighty per cent against forty-five",
+        src: "/media/reviews/dreame-a3-awd-1000/slope.webp",
+        caption:
+          "This is what an eighty per cent gradient claim is for. Four driven wheels " +
+          "rather than two is the difference between climbing a bank like this one " +
+          "and sliding down it.",
+      },
+      {
+        afterHeading: "OmniSense 3.0, and why it suits a steep garden",
+        src: "/media/reviews/dreame-a3-awd-1000/obstacle-vision.webp",
+        caption:
+          "Seeing an obstacle matters more on a slope than on the flat, because a " +
+          "machine that stops dead on a bank has to restart on one.",
+      },
+      {
+        afterHeading: "Who should not buy this",
+        src: "/media/reviews/dreame-a3-awd-1000/coverage.webp",
+        caption:
+          "The rated area is 1,000 square metres. Arcs on artwork are not coverage — " +
+          "the figure in the table is, and it is the one that rules a garden in or " +
+          "out.",
+      },
+    ],
     categorySlug: "robotic-lawn-mowers",
     eyebrow: "Robotic lawn mower review",
     title: "Dreame A3 AWD 1000 review",
@@ -5817,8 +6269,40 @@ export const REVIEWS: Record<string, ReviewContent> = {
 
   "worx-landroid-vision-wr320": {
     slug: "worx-landroid-vision-wr320",
-    image: undefined,
-    figures: [],
+    image: {
+      src: "/media/reviews/worx-landroid-vision-wr320/hero.webp",
+      alt:
+        "A BotPlanet panel headed “smart height control” for the WORX Landroid " +
+        "Vision WR320, showing a hand holding a phone with the Landroid app's " +
+        "cutting-height slider set to medium, and the orange and black mower on the " +
+        "lawn behind.",
+    },
+    figures: [
+      {
+        afterHeading: "The camera is the argument",
+        src: "/media/reviews/worx-landroid-vision-wr320/obstacles.webp",
+        caption:
+          "A camera rather than a bump sensor is the whole pitch for this machine. " +
+          "What WORX does not publish is what it does when the camera cannot see — at " +
+          "dusk, or in long wet grass.",
+      },
+      {
+        afterHeading: "Half an acre, and what \"Landroid Vision\" does not mean",
+        src: "/media/reviews/worx-landroid-vision-wr320/edge.webp",
+        caption:
+          "Cutting to the edge is the claim; how close is not a number WORX prints. " +
+          "Every robot mower in this set leaves a margin, and the size of it is the " +
+          "thing nobody publishes.",
+      },
+      {
+        afterHeading: "The numbers",
+        src: "/media/reviews/worx-landroid-vision-wr320/coverage.webp",
+        caption:
+          "The figures that decide this purchase are in the section above rather than " +
+          "in this picture: rated area, cutting width and slope, all three published " +
+          "by WORX.",
+      },
+    ],
     categorySlug: "robotic-lawn-mowers",
     eyebrow: "Robotic lawn mower review",
     title: "WORX Landroid Vision WR320 review",
@@ -5875,8 +6359,38 @@ export const REVIEWS: Record<string, ReviewContent> = {
 
   "segway-navimow-i110n": {
     slug: "segway-navimow-i110n",
-    image: undefined,
-    figures: [],
+    image: {
+      src: "/media/reviews/segway-navimow-i110n/hero.webp",
+      alt:
+        "A BotPlanet panel naming the Segway Navimow i110N and describing it as " +
+        "wire-free robotic mowing, showing the grey and orange mower on a lawn at " +
+        "night with a blue line drawn along the lawn edge and a lit house behind.",
+    },
+    figures: [
+      {
+        afterHeading: "What Network RTK saves you",
+        src: "/media/reviews/segway-navimow-i110n/rtk.webp",
+        caption:
+          "Tree cover is the failure mode for satellite positioning, and it is the " +
+          "reason a camera sits alongside the aerial rather than instead of it. " +
+          "Segway's own claim; no accuracy figure under canopy is published.",
+      },
+      {
+        afterHeading: "The numbers, and the one Segway does not print",
+        src: "/media/reviews/segway-navimow-i110n/zoning.webp",
+        caption:
+          "Zones and schedules are the part that is easy to show. The figure this " +
+          "artwork does not carry is the one the section above is about.",
+      },
+      {
+        afterHeading: "Who should buy one",
+        src: "/media/reviews/segway-navimow-i110n/voice.webp",
+        caption:
+          "Voice control is a convenience rather than a reason to buy. It is worth " +
+          "knowing it exists before you choose between this and a machine that only " +
+          "has an app.",
+      },
+    ],
     categorySlug: "robotic-lawn-mowers",
     eyebrow: "Robotic lawn mower review",
     title: "Segway Navimow i110N review",
@@ -5940,8 +6454,40 @@ export const REVIEWS: Record<string, ReviewContent> = {
 
   "eufy-e15": {
     slug: "eufy-e15",
-    image: undefined,
-    figures: [],
+    image: {
+      src: "/media/reviews/eufy-e15/hero.webp",
+      alt:
+        "A BotPlanet panel for the eufy Robot Lawn Mower E15, showing the white and " +
+        "grey mower on a lawn at dusk with a curved blue guide line running behind " +
+        "it and a lit house beyond. Labels read wire-free freedom, precise vision " +
+        "navigation, smart and even cutting and app control.",
+    },
+    figures: [
+      {
+        afterHeading: "Small, and honest about it",
+        src: "/media/reviews/eufy-e15/cutting-height.webp",
+        caption:
+          "eufy's own listing panels, and three figures it does publish: 25–75mm " +
+          "cutting height, an 18-degree slope limit and 56dB. The footnote is eufy's " +
+          "too — the E15 and E18 differ only in mowing area.",
+      },
+      {
+        afterHeading: "No wires, no antenna, no satellites",
+        src: "/media/reviews/eufy-e15/obstacles.webp",
+        caption:
+          "Twelve obstacle types named by eufy, and the reason the machine needs no " +
+          "perimeter wire: it is looking rather than following. What it does at dusk " +
+          "is not stated.",
+      },
+      {
+        afterHeading: "Who should not buy this",
+        src: "/media/reviews/eufy-e15/app-security.webp",
+        caption:
+          "GPS and 4G tracking is eufy's answer to a machine that lives outdoors " +
+          "unattended. The same footnote applies: this artwork is shared with the " +
+          "E18, which differs only in mowing area.",
+      },
+    ],
     categorySlug: "robotic-lawn-mowers",
     eyebrow: "Robotic lawn mower review",
     title: "eufy Robot Lawn Mower E15 review",
