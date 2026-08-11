@@ -13,8 +13,10 @@ import {
   ROUTES,
   builtBestOfCategories,
   categoryRoutes,
+  productInSitemap,
   sitemapRoutes,
 } from "../src/content/routes";
+import { RETIRED_SLUGS, MERGED_REVIEWS } from "../src/content/product-names";
 import { COMPARE_PAGES, comparePageIsSubstantive } from "../src/content/compare-page";
 
 describe("normalisePath — locked URL standards", () => {
@@ -274,5 +276,70 @@ describe("registry integrity", () => {
 
   it("keeps every registry path canonical", () => {
     for (const r of ROUTES) expect(r.path).toBe(normalisePath(r.path));
+  });
+});
+
+/**
+ * GATE 3, from the snow-blower merge review of 11 August 2026.
+ *
+ * The sitemap decided product inclusion with `liveSlugs.has(categorySlug)`,
+ * built from `liveCategories()`, which returns only `launch === "live"`. That
+ * silently dropped every product in a HIDDEN category — a reserved slug with
+ * no hub, no route and no comparative surfaces, but with real reviews beneath
+ * it that `[slug].astro` renders without ever setting noindex.
+ *
+ * So those pages indexed and this site never declared them. The failure is
+ * invisible from the page (it renders perfectly) and invisible from the
+ * sitemap (the URL simply is not there), which is why it needs a test rather
+ * than a comment.
+ */
+describe("productInSitemap — hidden categories ship their reviews", () => {
+  const live = CATEGORIES.find((c) => c.launch === "live")!.slug;
+  const hidden = CATEGORIES.find((c) => c.launch === "hidden")!.slug;
+
+  it("has a hidden category to test against", () => {
+    // If this ever fails the fixture is gone, not the rule.
+    expect(hidden).toBeTruthy();
+  });
+
+  it("admits a product in a live category", () => {
+    expect(productInSitemap({ slug: "x", categorySlug: live, hasPublishedReview: true })).toBe(true);
+    expect(productInSitemap({ slug: "x", categorySlug: live, hasPublishedReview: false })).toBe(true);
+  });
+
+  it("admits a REVIEWED product in a hidden category — the bug this fixes", () => {
+    expect(productInSitemap({ slug: "x", categorySlug: hidden, hasPublishedReview: true })).toBe(true);
+  });
+
+  it("keeps an unreviewed product in a hidden category out", () => {
+    // A hidden category is a reservation. Only a written review earns the URL.
+    expect(productInSitemap({ slug: "x", categorySlug: hidden, hasPublishedReview: false })).toBe(false);
+  });
+
+  it("keeps a coming_soon category's products out either way", () => {
+    const soon = CATEGORIES.find((c) => c.launch === "coming_soon")?.slug;
+    if (!soon) return;
+    expect(productInSitemap({ slug: "x", categorySlug: soon, hasPublishedReview: true })).toBe(false);
+  });
+
+  it("keeps retired and merged slugs out whatever their category", () => {
+    for (const slug of Object.keys(RETIRED_SLUGS)) {
+      expect(productInSitemap({ slug, categorySlug: live, hasPublishedReview: true })).toBe(false);
+    }
+    for (const slug of Object.keys(MERGED_REVIEWS)) {
+      expect(productInSitemap({ slug, categorySlug: live, hasPublishedReview: true })).toBe(false);
+    }
+  });
+
+  it("never admits a hidden category's own hub, comparison or matcher", () => {
+    /* Those come from the route registry rather than from this predicate, and
+       a hidden category has no routes registered — which is what makes the
+       hidden-category URL safe in the first place. Asserted here so the two
+       halves of the rule are checked in one place. */
+    const paths = sitemapRoutes().map((r) => r.path);
+    expect(paths).not.toContain(`/robots/${hidden}/`);
+    expect(paths).not.toContain(`/compare/${hidden}/`);
+    expect(paths).not.toContain(`/botmatch/${hidden}/`);
+    expect(paths).not.toContain(`/best-robots/${hidden}/`);
   });
 });

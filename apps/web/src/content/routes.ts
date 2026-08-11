@@ -22,7 +22,7 @@ import {
   routes as categoryPaths,
   type LaunchState,
 } from "./nav";
-import { MERGED_REVIEWS } from "./product-names";
+import { MERGED_REVIEWS, RETIRED_SLUGS } from "./product-names";
 
 export type RouteStatus = LaunchState;
 
@@ -1080,6 +1080,49 @@ export const footerGroups = (): { title: string; links: RouteDef[] }[] => {
 
 /** Canonical, indexable paths for the XML sitemap. */
 export const sitemapRoutes = () => ROUTES.filter((r) => r.inSitemap && r.indexable && r.status !== "hidden");
+
+/**
+ * Whether a product's own URL belongs in the sitemap.
+ *
+ * ONE PLACE FOR THE RULE, because the sitemap had it inline and got it wrong.
+ * Until 11 August 2026 the sitemap admitted a product only when
+ * `liveCategories()` contained its category — live, and nothing else. That was
+ * right for `coming_soon`, where the hub is a labelled placeholder and the
+ * category has not launched, and WRONG for `hidden`.
+ *
+ * A hidden category is a reserved slug with no hub, no route and no
+ * comparative surfaces — but a published review beneath it is a finished,
+ * indexable page. `[slug].astro` never passes `noindex` and never reads the
+ * category's launch state, so that page indexes normally. Under the old rule
+ * it indexed while this site never declared it: the worst of both, and
+ * especially so for a page whose whole plan is an indexation head start
+ * before a seasonal spike.
+ *
+ * So: live categories admit their products as before, hidden categories admit
+ * only products that actually have a review written, and `coming_soon` admits
+ * nothing. The hub, comparison and matcher of a hidden category stay out by
+ * construction rather than by this rule — `sitemapRoutes()` above filters on
+ * the route registry, and a hidden category has no routes registered at all.
+ *
+ * `hasPublishedReview` is passed in rather than read here, so this file does
+ * not have to import the review registry to answer a routing question.
+ */
+export const productInSitemap = (opts: {
+  slug: string;
+  categorySlug: string;
+  hasPublishedReview: boolean;
+}): boolean => {
+  /* A retired slug 301s to its replacement and a merged one 301s to the review
+     that absorbed it. Either way, listing the URL asks a crawler to spend a
+     fetch to be told to go somewhere else. */
+  if (opts.slug in RETIRED_SLUGS || opts.slug in MERGED_REVIEWS) return false;
+
+  const category = CATEGORIES.find((c) => c.slug === opts.categorySlug);
+  if (!category) return false;
+  if (category.launch === "live") return true;
+  if (category.launch === "hidden") return opts.hasPublishedReview;
+  return false; // coming_soon: the hub is a placeholder, so nothing under it ships
+};
 
 /**
  * The categories whose best-of page has actually been written.

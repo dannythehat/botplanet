@@ -2,9 +2,7 @@ import type { APIRoute } from "astro";
 import { and, eq } from "drizzle-orm";
 import { getDb, schema } from "../lib/db";
 import { SITE } from "../lib/site";
-import { productPath, sitemapRoutes } from "../content/routes";
-import { liveCategories } from "../content/nav";
-import { RETIRED_SLUGS, MERGED_REVIEWS } from "../content/product-names";
+import { productPath, productInSitemap, sitemapRoutes } from "../content/routes";
 import { REVIEWS } from "../content/reviews";
 import { comparePageIsSubstantive } from "../content/compare-page";
 
@@ -30,8 +28,6 @@ export const GET: APIRoute = async ({ locals }) => {
     .from(schema.products)
     .innerJoin(schema.categories, eq(schema.products.categoryId, schema.categories.id))
     .where(eq(schema.products.status, "published"));
-
-  const liveSlugs = new Set(liveCategories().map((c) => c.slug));
 
   /* How many published machines each category actually holds, which is what
      decides whether its comparison page is a page. */
@@ -67,12 +63,19 @@ export const GET: APIRoute = async ({ locals }) => {
        that kept everything except its page, because a sibling's review now
        covers it. Either way the URL answers a 301, and either way listing it
        asks a crawler to spend a fetch to be told to go elsewhere. */
+    /* THE RULE MOVED TO content/routes.ts ON 11 AUGUST 2026, and moving it
+       fixed it. Inline here it read `liveSlugs.has(categorySlug)`, which
+       silently dropped every product in a HIDDEN category — a reserved slug
+       with no hub but with real, indexable reviews beneath it. Those pages
+       indexed and were never declared. See productInSitemap for the whole
+       rule, including why coming_soon still admits nothing. */
     ...rows
-      .filter(
-        (r) =>
-          liveSlugs.has(r.categorySlug) &&
-          !(r.slug in RETIRED_SLUGS) &&
-          !(r.slug in MERGED_REVIEWS),
+      .filter((r) =>
+        productInSitemap({
+          slug: r.slug,
+          categorySlug: r.categorySlug,
+          hasPublishedReview: Boolean(REVIEWS[r.slug]),
+        }),
       )
       .map((r) => productPath(r.slug, r.categorySlug)),
   ];
