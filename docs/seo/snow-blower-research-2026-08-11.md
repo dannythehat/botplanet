@@ -470,3 +470,128 @@ they are a different class, though the PAA question *"are remote snowblowers
 worth the money"* earns them a walk-away paragraph inside the review.
 
 **Total research spend: $0.2447 of the $2.00 ceiling.**
+
+
+---
+
+## Second adversarial review — signed off with amendments, 11 August 2026
+
+Verdict: one page, signed off. Three amendments accepted, one architectural
+correction that turned out to be buildable, and three more instances of
+motivated reasoning removed. Both numbers the review asked for were fetched.
+
+### Amendment 1 — the URL. Reviewer right, and better than either proposal.
+
+The objection: `/robots/robotic-lawn-mowers/yarbo-snow-blower/` bakes
+"lawn-mowers" into a snow blower's address. A January searcher sees a lawn URL
+in the SERP, and if the flip condition ever fires, promotion forces a migration
+and a 301 on the money page at the worst possible moment.
+
+**The number asked for:** `content/nav.ts` line 60 —
+`product: (slug, productSlug) => /robots/${slug}/${productSlug}/`. The category
+slug *is* the URL segment. There is no product URL on this site that is not
+nested under a category, and `productPath()` is the single place that shape is
+decided.
+
+So "hub-link without URL-nesting" is not available as stated. **But a third
+option is, and it is better than both:** `LaunchState` has a `hidden` value —
+"reserved slug, noindex, not linked in nav" — and `solar-panel-robots` already
+uses it. `liveCategories()` excludes hidden categories, which is what the
+sitemap and the comparison-page gate read.
+
+**Resolution:** create `robot-snow-blowers` as a **hidden** category. The
+review lives at `/robots/robot-snow-blowers/yarbo-snow-blower/`.
+
+- No lawn baggage in the address.
+- No migration if the flip condition fires — the category is already the right
+  one, and promotion is a one-word state change from `hidden` to `live`.
+- Hidden means no hub in nav or sitemap, no comparison page, no matcher, no
+  best-of. The four comparative surfaces stay unbuilt, which was the whole
+  point of the no-go.
+
+Build-time check required: confirm a product page under a hidden category is
+not itself noindexed by inheritance. If it is, that is the blocker and the
+lawn nesting is the fallback.
+
+### Amendment 2 — lawn hub for linking, accepted
+
+Both sides are real. Against: nobody in a snowstorm is thinking about lawns.
+For: the Core physically is the lawn platform, the $7,199 mower-plus-snow
+bundle is a genuine cross-sell, and the alternative is an orphaned review with
+no hub at all, which is strictly worse.
+
+Accepted as stated: **lawn hub for linking and navigation, with a visible
+"winter module" block on the hub** so a human understands why it is there.
+Breadcrumbs will follow whatever the hidden category resolves to; if they are
+hub-locked, that is accepted.
+
+### Amendment 3 — re-measure in December and January, accepted
+
+The review's own answer is the reassuring one and it is right: the merge rests
+on brand-vs-generic overlap (7/10), which exists because Google resolved the
+*entity*. Seasons do not change entity resolution. What can change is
+robot-vs-conventional, currently 2/10, when big-box and gift guides flood snow
+SERPs in December.
+
+**Scheduled:** re-pull all nine SERPs in the first week of December and again
+in the first week of January.
+**Trigger:** if robot-vs-conventional exceeds 5/10, the generic terms are being
+absorbed into the big-box SERP. That halves the traffic expectation and argues
+for *fewer* pages, not more. The architecture is season-proof; the expectation
+is not.
+
+### Amendment 4 — value the cluster at 40–60% of nominal, accepted
+
+KD 0 is a warning wearing a prize's coat. It is low because no authority
+competes and the SERP is entity results rather than optimised content, so a
+competent review does take top-3 quickly. Against that: the AI Overview already
+answers "do they work", so informational variants bleed zero-click; KD 0 means
+the SERP has not settled and December can reshuffle it; and part of last
+January's 60,500 was the ABC7 news cycle, which was never buyable traffic.
+
+### The rescue attempt — `driveway snow removal` — REFUSED, measured
+
+Condition set: rescue as a secondary if it is how-to rather than a local
+services pack. Pulled, $0.0040:
+
+```
+features: LOCAL_PACK, people_also_ask, video, perspectives, images
+ 5 homedepot.com        Snow Removal Equipment
+ 7 instructables.com    Clear Snow the Laziest Way Imaginable
+ 8 lawnlove.com         How Much Does Snow Removal Cost in 2026?
+10 taskrabbit.com       How Much Does Snow Removal Cost?
+11 familyhandyman.com   10 Great Snow and Ice Removal Hacks
+17 allenoutdoorstl.com  Snow Removal - St. Louis
+18 spokanegreenscape.com Snow Removal in Spokane | Plowing, Sanding & De-Icing
+overlap: 1/10 against robot snow blower, yarbo AND conventional snow blower
+```
+
+A `local_pack` feature with TaskRabbit, LawnLove and two regional contractors.
+It is the services pack, not the how-to. **Refused, not even as a secondary** —
+1/10 against everything we hold, and unrankable without premises. The
+robot-versus-contractor-versus-shovel comparison still belongs in the review's
+walk-away section as *content*; it is simply not a term we target.
+
+### The clarification on `best robot snow blower` — accepted, and it is the line
+
+Refusing the page stays. But the review answers the PAA question verbatim:
+**"there is only one, which is why this site has no ranking for it."** That is
+not an award, it is the most on-brand sentence available.
+
+### Motivated reasoning, round two — three more removed
+
+- **"Loses to one indexed three months earlier" is invented precision.** The
+  direction is right and nothing in the data measures an indexation-age
+  advantage. The 15 September date stands; the fake certainty behind it is
+  struck.
+- **"~20,000–22,000 honest unique demand" is an estimated dedup rate, not a
+  measured one.** Restated as: *nominal generic volume is 22,700; true unique
+  demand is lower by an unmeasured amount, because the generic and brand SERPs
+  are 6–8/10 identical. Treat 22,700 as a ceiling, not a figure.*
+- **The flip condition excluded RC and hybrid machines by fiat.** Calling them
+  "a different class" is an assertion where this document demands measurements
+  everywhere else. Corrected: **if an RC or hybrid machine reaches mainstream
+  US retail, class membership is decided by SERP overlap at that point, not by
+  declaration now.**
+
+**Total research spend: $0.2487 of the $2.00 ceiling.**
