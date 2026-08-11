@@ -942,6 +942,21 @@ export const ROUTES: RouteDef[] = [
   },
 
   {
+    path: "/best-robots/robotic-lawn-mowers/",
+    label: "Best robot lawn mowers",
+    breadcrumbLabel: "Robotic Lawn Mowers",
+    section: "best",
+    parent: "/robots/robotic-lawn-mowers/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: true,
+    indexable: true,
+    category: "robotic-lawn-mowers",
+    summary: "Six mowers ranked on the two numbers that rule machines out: area and slope.",
+  },
+
+  {
     path: "/best-robots/window-cleaning-robots/",
     label: "Best window cleaning robots",
     breadcrumbLabel: "Window Cleaning Robots",

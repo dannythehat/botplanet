@@ -87,15 +87,18 @@ None of these are about cheapness. They are about a manufacturer declining to
 publish the numbers that would let you judge it, and that is a different problem
 from a low price.
 
-## What we cannot tell you yet
+## Which one, now that we can say
 
-Which machine is the best budget robot lawn mower, by name.
+Six mowers are in the catalogue, each checked against the manufacturer's own
+technical documentation before it went up, and they are ranked on our shortlist
+by the two numbers that rule machines out.
 
-There are no lawn mowers in the BotPlanet catalogue at the time of writing. We
-do not rank machines we have not checked against the manufacturer's own
-technical documentation, which is what our review methodology commits us to, and
-publishing a shortlist assembled from other people's shortlists would be worth
-nothing to you. When mowers go into the catalogue, this page gets a ranked list.
+The best budget robot lawn mower on that list is the WORX Landroid Vision WR320. It is
+rated for half an acre and it is the cheapest machine here by a distance that no
+feature list closes — the next cheapest rated for the same ground costs nearly
+two and a half times as much. What it will not do is climb: past thirty per cent
+it is outside its rating, and at that point you are into the money the rest of
+this page is about.
 
 The robotic lawn mower price question also moves faster than almost anything
 else we cover, because this category discounts hard in late summer. Any figure

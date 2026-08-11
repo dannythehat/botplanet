@@ -88,15 +88,18 @@ and a strimmer on a pole is the honest tool for it.
 
 Which machines climb, by name and by tested figure.
 
-There are no lawn mowers in the BotPlanet catalogue at the time of writing, and
-we do not publish a ranking assembled from other people's rankings. Every
-product here is checked against the manufacturer's own technical documentation
-first, which our review methodology sets out in full. Slope claims are exactly
-the sort of specification that gets copied between sites until nobody knows
-where the original figure came from, and this page will not add to that.
+Six mowers are now in the catalogue, each checked against the manufacturer's own
+technical documentation first, which our review methodology sets out in full.
+Slope claims are exactly the sort of specification that gets copied between sites
+until nobody knows where the original figure came from, so every gradient below
+is the maker's own published figure.
 
-When mowers enter the catalogue, this page becomes a shortlist ordered by stated
-gradient with the source named beside each figure.
+Two of the six climb properly: the Mammotion LUBA 3 AWD and the Dreame A3 AWD
+1000, both claiming eighty per cent — about 38.6 degrees — on four driven
+wheels. The Dreame is the cheaper of the two and its ceiling is a quarter acre;
+the Mammotion comes in two sizes and covers up to three quarters. Everything
+else here stops between eighteen degrees and forty-five per cent, and our
+shortlist sets out which is right for which lawn.
 
 ## What to do next
 

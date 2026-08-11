@@ -1689,6 +1689,45 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
     researchedOn: RUN_COMPANION,
   },
   {
+    /* BEST ROBOT LAWN MOWER, built 11 August 2026.
+
+       THE SERP DECIDED THIS, NOT THE SYMMETRY. "robot lawn mower" and
+       "best robot lawn mower" share 2 of 10 top-ten domains, so they are two
+       results pages and earn two URLs. The litter category was measured the
+       same way in the same run and shares 7 of 10 with its head term, which is
+       why /best-robots/self-cleaning-litter-boxes/ does not exist and the hub
+       keeps "best automatic litter box" in its own secondaries.
+
+       5,400 at KD 8 against the hub's 74,000 at KD 36. The 2026 phrasing is
+       not mustAppear: it is a real 1,000/mo query, and a page that stamps a
+       year into its copy has to be edited every January or it starts lying. */
+    path: "/best-robots/robotic-lawn-mowers/",
+    primary: { term: "best robot lawn mower", volume: 5400, difficulty: 8, mustAppear: true },
+    secondary: [
+      { term: "best robotic lawn mower", volume: 5400, difficulty: 15, mustAppear: true },
+      { term: "best robot lawn mower 2026", volume: 1000, difficulty: 3, mustAppear: false },
+      { term: "best robot lawn mower for 1 acre", volume: 880, difficulty: 4, mustAppear: false },
+    ],
+    cededTo: [
+      {
+        term: "robot lawn mower",
+        path: "/robots/robotic-lawn-mowers/",
+        why: "The 74,000 head term is the hub's. This page answers 'which one', which is a different results page — 2 of 10 shared domains — and must not reach for the broad query as well.",
+      },
+      {
+        term: "best robot lawn mower for hills",
+        path: "/guides/robot-lawn-mower-for-hills/",
+        why: "Ceded by the hub to the hills guide on 6 August and it stays there. The guide shares 7 of 10 domains with 'do robot lawn mowers work on hills' and only 3 of 10 with this page's primary.",
+      },
+      {
+        term: "cheap robot lawn mower",
+        path: "/guides/cheap-robot-lawn-mower/",
+        why: "Same ruling as the hub's. 390/mo on its own name plus the price cluster, and its own SERP.",
+      },
+    ],
+    researchedOn: RUN_AUGUST_10,
+  },
+  {
     path: "/best-robots/window-cleaning-robots/",
     /* Page 2 of the window map, ruled CREATE on 5 August 2026 and built on
        7 August — after the eleven reviews beneath it were given working buy

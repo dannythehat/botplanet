@@ -93,19 +93,21 @@ Judge the claim by where the antenna has to go. If the installation guide wants
 it high, clear and away from the house wall, the system is satellite-dependent
 and the tree question applies to you.
 
-## What we cannot tell you yet
+## Which specific machines
 
-Which specific machines to buy.
+Six are in the catalogue, all of them wire-free, and none of them uses the same
+navigation as all the others — which is the whole point of this page.
 
-BotPlanet has no lawn mowers in its catalogue at the time of writing, so there
-is no ranked list on this page and there will not be an invented one. Every
-product we publish is checked against the manufacturer's own technical
-documentation before it goes up, which is what our review methodology sets out,
-and no mower has been through that yet.
+Satellite positioning: the Segway Navimow i110N, on Network RTK with no antenna
+to mount. Camera only: the WORX Landroid Vision WR320 and the eufy E15, neither
+of which cares about tree cover. LiDAR with cameras: the Mammotion LUBA 3 AWD
+and the Dreame A3 AWD 1000, which is the pairing that survives a canopy and a
+slope at once. The Husqvarna Automower 410iQ uses EPOS satellite positioning
+with a physical boundary as the fallback.
 
-What we can tell you is which specification decides it, which is the paragraph
-above. When the catalogue has mowers in it, this page gets a shortlist and this
-sentence disappears.
+Each was checked against the manufacturer's own technical documentation before
+it went up, which is what our review methodology sets out, and our shortlist
+ranks them by area and gradient rather than by navigation type.
 
 ## What to do next
 

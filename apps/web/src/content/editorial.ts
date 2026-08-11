@@ -1187,6 +1187,140 @@ export const EDITORIAL: Record<string, EditorialContent> = {
   },
 
   /* ------------------------------------------------------------------
+     BEST ROBOT LAWN MOWER, built 11 August 2026.
+
+     WHY THIS GETS ITS OWN URL WHEN THE LITTER EQUIVALENT DOES NOT. The
+     August research measured SERP overlap for both. "robot lawn mower"
+     and "best robot lawn mower" share 2 of 10 top-ten domains — two
+     different results pages, so two pages. The litter pair shares 7 of
+     10, and that research explicitly ruled "separate best-of page: the
+     hub carries it". Same question, opposite answers, because the
+     evidence differed rather than because the categories feel
+     different.
+
+     5,400/mo at KD 8 on the primary, against the hub's 74,000 at KD 36
+     — the easier half of the category's demand, which is the same
+     reason the hub itself is written around the winnable phrasings.
+
+     SIX PICKS FOR SIX JOBS, and the awards are all shaped "best for X"
+     rather than "runner up". A ranking that orders machines by overall
+     goodness is answering a question nobody has: everyone arrives with
+     an area and a slope, and those two numbers rule out most of the
+     list before preference gets a say.
+     ------------------------------------------------------------------ */
+  "/best-robots/robotic-lawn-mowers/": {
+    path: "/best-robots/robotic-lawn-mowers/",
+    categorySlug: "robotic-lawn-mowers",
+    eyebrow: "Best of",
+    title: "The best robot lawn mower for your lawn, ranked",
+    seoTitle: "Best Robot Lawn Mower 2026: Ranked by Area and Slope",
+    metaDescription:
+      "The best robot lawn mower for each job, ranked on the two numbers that rule " +
+      "machines out: how much grass you have, and how steep the worst bit is.",
+    standfirst:
+      "Two measurements settle this category and neither is a feature: the square footage of your lawn, and the gradient of its worst slope. " +
+      "Get those and the six machines below shorten to about two.",
+    image: {
+      src: "/media/hubs/lawn/hero.webp",
+      alt:
+        "A robot mower on a striped lawn at sunset with a lit stone house behind it.",
+      focal: "50% 55%",
+    },
+    prose: "best-robot-lawn-mowers",
+    picks: [
+      {
+        productSlug: "worx-landroid-vision-wr320",
+        award: "Best overall",
+        why:
+          "Half an acre of rated area at a price the rest of this list does not approach — the next cheapest machine rated for the same ground costs nearly two and a half times as much. Camera navigation with no antenna to mount and no wire to bury, which removes the installation day that puts most people off this category.",
+        wrongFor:
+          "Any slope past 30%, which is outside its rating — and anyone who wants a published runtime figure before spending that much outdoors, because WORX does not print one.",
+      },
+      {
+        productSlug: "mammotion-luba-3-awd-1500h",
+        award: "Best for a steep lawn",
+        why:
+          "Eighty per cent — 38.6 degrees — on all four driven wheels, navigating by LiDAR and cameras rather than satellites. Steep gardens are usually wooded gardens, and that pairing is what keeps working under a canopy. Two sizes, 0.37 and 0.75 of an acre.",
+        wrongFor:
+          "A flat lawn, where the all-wheel drive is dead weight you are financing and the WORX covers more ground for a fraction of the outlay.",
+      },
+      {
+        productSlug: "dreame-a3-awd-1000",
+        award: "Best steep lawn under a quarter acre",
+        why:
+          "The same eighty per cent climb as the Mammotion for several hundred dollars less, on the same LiDAR-first navigation. If your slope is severe and your lawn is small, this is the cheaper of the only two machines that qualify.",
+        wrongFor:
+          "More than 10,764 sq ft, which is its ceiling — and any flat lawn, where the Segway covers a quarter acre for less.",
+      },
+      {
+        productSlug: "husqvarna-automower-410iq",
+        award: "Best for an awkwardly shaped lawn",
+        why:
+          "The only maker here that publishes its rated area twice — half an acre in a sensible shape, a quarter in an irregular one — which is the most honest specification in the category. Four years of warranty, against silence from most of this list.",
+        wrongFor:
+          "A bank of any seriousness: 45% inside the area and 15% at the boundary, against 80% for the two all-wheel-drive machines. And any budget the WORX would satisfy.",
+      },
+      {
+        productSlug: "segway-navimow-i110n",
+        award: "Best open quarter acre",
+        why:
+          "Network RTK with no antenna to mount and no subscription — Segway carries the cellular data cost, which nobody else here does. VisionFence handles obstacles on top of the positioning.",
+        wrongFor:
+          "A lawn under mature trees, where satellite positioning fails outright and no setting recovers it. Also anyone who cuts below two inches.",
+      },
+      {
+        productSlug: "eufy-e15",
+        award: "Best small lawn under trees",
+        why:
+          "Pure vision navigation: no boundary wire, no antenna, no satellites, so a canopy is not a problem and there is nothing to install. eufy publishes the cutting height range, the slope limit and the noise figure, which several makers here do not.",
+        wrongFor:
+          "More than 8,611 sq ft or any slope past 18 degrees — the tightest pair of limits in this list — and a lawn you like cut above three inches.",
+      },
+    ],
+    comparisonSlugs: [
+      "worx-landroid-vision-wr320",
+      "mammotion-luba-3-awd-1500h",
+      "dreame-a3-awd-1000",
+      "husqvarna-automower-410iq",
+      "segway-navimow-i110n",
+      "eufy-e15",
+    ],
+    faq: [
+      {
+        q: "What is the best robot lawn mower?",
+        a:
+          "For a flat lawn up to half an acre, the WORX Landroid Vision WR320 — nothing else here is rated for that much ground at anywhere near the price. It is also the best robotic lawn mower here for anyone who wants nothing to install. For a steep lawn it is the Mammotion LUBA 3 AWD, or the Dreame A3 AWD 1000 if the lawn is under a quarter acre. Area and slope decide it before any feature does.",
+      },
+      {
+        q: "What size robot lawn mower do I need?",
+        a:
+          "Measure your lawn in square feet and buy a machine rated above it. A rated area is a ceiling rather than a target: a mower rated for less ground than you have does not cut more slowly, it never finishes. Half an acre is 21,780 sq ft and a quarter is 10,890, and every machine here publishes its own figure.",
+      },
+      {
+        q: "Do robot lawn mowers work on slopes?",
+        a:
+          "Up to their published gradient and not past it. The two all-wheel-drive machines here claim eighty per cent — about 38.6 degrees — and the rest sit between eighteen degrees and forty-five per cent. Go and look at the steepest part of your lawn: if a wheelbarrow feels unwise you are above thirty per cent, and most of this list is already out.",
+      },
+      {
+        q: "Do I still need a boundary wire?",
+        a:
+          "Not for any machine on this list. Three navigate by satellite positioning, two by camera and one by LiDAR, and none needs a cable buried around the perimeter. What that trades away is different per machine: satellite positioning fails under trees, and camera navigation depends on being able to see.",
+      },
+      {
+        q: "Will a robot mower cut right up to the edge?",
+        a:
+          "No, and no maker publishes how close in inches. A round or square deck cannot reach against a wall, a fence or a border, so a margin is left everywhere the lawn meets something solid. Plan on a strimmer a few times a season whichever machine you buy.",
+      },
+      {
+        q: "Where can I read the full robot lawn mower reviews?",
+        a:
+          "Every mower ranked here has its own review with the manufacturer's published figures, what we could not establish, and who should not buy it. The comparison table puts them side by side on the specifications that actually differ.",
+      },
+    ],
+    lastReviewed: "2026-08-11",
+  },
+
+  /* ------------------------------------------------------------------
      Page 9 of the window map, and the last of it. Three query families
      merged into one page — "do window cleaning robots work" (90), "how
      do..." (40) and "are... worth it" (30) — because there is one intent

@@ -1,0 +1,65 @@
+---
+/**
+ * Best-of — robotic lawn mowers.
+ *
+ * BUILT ON A SERP MEASUREMENT RATHER THAN ON SYMMETRY. The obvious move after
+ * the pool and window best-of pages is one per category, and the obvious move
+ * would have been wrong for at least one of them. The August research measured
+ * top-ten domain overlap between each category's head term and its "best"
+ * phrasing: lawn came back 2 of 10, which is two different results pages and
+ * earns two URLs. The litter category came back 7 of 10 and that run ruled
+ * explicitly that the hub should carry it — so there is no
+ * /best-robots/self-cleaning-litter-boxes/, and the absence is a finding
+ * rather than an omission.
+ *
+ * SIX AWARDS FOR SIX MACHINES, WHICH NEEDS DEFENDING, because the window page
+ * above deliberately withholds an award from two of its eleven and says an
+ * award invented so every product has one is an advert. The difference is the
+ * catalogue rather than the standard: every mower here is rated for a
+ * different area-and-slope pair, and those two numbers rule machines out
+ * absolutely — a mower under-rated for your lawn does not cut it slowly, it
+ * never finishes. So each one genuinely is the only right answer to a
+ * particular pair, and there is no machine on this list that another beats at
+ * its own job. The day a seventh mower duplicates an existing pair, it gets no
+ * award.
+ */
+import Base from "../../../layouts/Base.astro";
+import EditorialArticle from "../../../components/EditorialArticle.astro";
+import { editorialFor } from "../../../content/editorial";
+import { buildEditorialPage } from "../../../lib/editorial-page";
+import { breadcrumbsFor } from "../../../lib/routing";
+import { articleSchema, faqPageSchema, itemListSchema } from "../../../lib/seo";
+import { FOUNDER } from "../../../content/team";
+
+const PATH = "/best-robots/robotic-lawn-mowers/";
+const article = editorialFor(PATH)!;
+const { html, picks, comparison } = await buildEditorialPage(
+  article,
+  Astro.locals,
+  import.meta.env.DEV,
+);
+
+const crumbs = breadcrumbsFor(PATH);
+
+const pageSchema = [
+  articleSchema({
+    headline: article.title,
+    description: article.metaDescription,
+    path: PATH,
+    dateModified: article.lastReviewed,
+    authorName: FOUNDER.name,
+    authorPath: FOUNDER.path,
+  }),
+  picks.length ? itemListSchema(picks.map((p) => ({ name: p.name, path: p.href })), article.title) : null,
+  faqPageSchema(article.faq, PATH),
+];
+---
+
+<Base
+  title={article.seoTitle}
+  description={article.metaDescription}
+  breadcrumbs={crumbs}
+  schema={pageSchema}
+>
+  <EditorialArticle article={article} html={html} picks={picks} comparison={comparison} />
+</Base>

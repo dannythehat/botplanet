@@ -279,6 +279,20 @@ export const CATEGORY_ANCHORS: Record<string, InternalAnchor[]> = {
      ------------------------------------------------------------------ */
   "robotic-lawn-mowers": [
     {
+      /* ADDED 11 August 2026 with the lawn best-of. The three lawn guides all
+         ended on a promise — "when mowers enter the catalogue, this page gets a
+         shortlist" — written when the catalogue was empty. Seven mowers went in
+         on 10 August and the promise went stale rather than being kept, so the
+         guides now name the shortlist and this anchor is what carries them to
+         it. Ahead of the hills guide deliberately: "shortlist" cannot collide
+         with any of the phrases below, and the commercial page in this category
+         should not be the last thing a reader can reach. */
+      anchor: "shortlist",
+      href: "/best-robots/robotic-lawn-mowers/",
+      why: "The best-of is where a reader who has decided to buy becomes a reader choosing which one. Every lawn guide reaches that moment and none of them could reach the page.",
+      status: "live",
+    },
+    {
       anchor: "best robot lawn mower for hills",
       href: "/guides/robot-lawn-mower-for-hills/",
       why: "Slope is the category's one hard exclusion and every lawn page mentions it. A reader meeting the phrase should reach the page that measures it rather than a paragraph that names it.",

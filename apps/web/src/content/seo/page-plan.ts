@@ -803,6 +803,49 @@ const WINDOW_WORKS_GUIDE: PagePlan = {
   evidence: "130/mo combined across three phrasings at KD 0, and the last unbuilt page on the window map. A Reddit-and-forums SERP rewards an honest answer, and this category has a real one — they work in the middle of the pane and disappoint at the edge.",
 };
 
+const LAWN_BEST: PagePlan = {
+  path: "/best-robots/robotic-lawn-mowers/",
+  category: "robotic-lawn-mowers",
+  type: "best-of",
+  status: "built",
+  intent: "Tell me which robot mower to buy for the lawn I actually have.",
+  primary: { term: "best robot lawn mower", volume: 5400, difficulty: 8 },
+  secondary: [
+    { term: "best robotic lawn mower", volume: 5400, difficulty: 15 },
+    { term: "best robot lawn mower 2026", volume: 1000, difficulty: 3 },
+    { term: "best robot lawn mower for 1 acre", volume: 880, difficulty: 4 },
+    { term: "best robot lawn mower for small yard", volume: 70, difficulty: 20 },
+  ],
+  ceded: [
+    { term: "robot lawn mower", toPath: "/robots/robotic-lawn-mowers/", why: "The 74,000 head term is the hub's. Measured overlap between the two is 2 of 10 top-ten domains, which is what justifies both pages existing rather than one." },
+    { term: "best robot lawn mower for hills", toPath: "/guides/robot-lawn-mower-for-hills/", why: "Ceded by the hub on 6 August and it stays ceded. 7 of 10 shared domains with 'do robot lawn mowers work on hills' against 3 of 10 with this page's primary." },
+    { term: "cheap robot lawn mower", toPath: "/guides/cheap-robot-lawn-mower/", why: "Its own SERP and its own guide, on the same ruling the hub made." },
+  ],
+  refused: [
+    { term: "best robot lawn mower for half acre", volume: 10, why: "Ten searches a month, and the same SERP as the primary. It is a sentence in the ranking, not a page." },
+    { term: "best robot lawn mower for large yard", volume: 0, why: "7 of 10 shared domains with 'robot lawn mower comparison' rather than with this page. If it is ever built it belongs to the comparison table." },
+  ],
+  products: [
+    "worx-landroid-vision-wr320",
+    "mammotion-luba-3-awd-1500h",
+    "dreame-a3-awd-1000",
+    "husqvarna-automower-410iq",
+    "segway-navimow-i110n",
+    "eufy-e15",
+  ],
+  productsNote: "Six pages for seven products: the LUBA 3 AWD 3000H shares the 1500H's review, which covers both sizes and carries a tracked buy path for each. Every machine in the catalogue gets an award here because every one of them is the right answer to a different pair of area-and-slope numbers — which is a fact about the catalogue rather than a decision to flatter it.",
+  linksOut: [
+    "/robots/robotic-lawn-mowers/",
+    "/compare/robotic-lawn-mowers/",
+    "/botmatch/",
+    "/review-methodology/",
+  ],
+  images: [{ slot: "hero", shows: "A robot mower on a striped lawn at sunset with a lit house behind", supplied: true }],
+  schema: ["Article", "ItemList", "FAQPage", "BreadcrumbList"],
+  research: "31073327230 + 31074893036 · 2026-08-06",
+  evidence: "5,400/mo at KD 8 with a $3.81 CPC, against the hub's 74,000 at KD 36. Built 11 August 2026 on the SERP measurement rather than on symmetry: 'robot lawn mower' and 'best robot lawn mower' share 2 of 10 top-ten domains, so they are two results pages. The same run measured the litter equivalent at 7 of 10 and ruled the hub should carry it, which is why there is no /best-robots/self-cleaning-litter-boxes/.",
+};
+
 const WINDOW_BEST: PagePlan = {
   path: "/best-robots/window-cleaning-robots/",
   category: "window-cleaning-robots",
@@ -1954,6 +1997,7 @@ export const PAGE_PLAN: PagePlan[] = [
   ...COMPARES,
   ...WINDOW_REVIEWS,
   WINDOW_BOTMATCH,
+  LAWN_BEST,
   WINDOW_BEST,
   WINDOW_WORKS_GUIDE,
   ...VACUUM_REVIEWS,
