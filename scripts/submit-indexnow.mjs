@@ -41,7 +41,14 @@ const MAX_URLS = 10000;
 const args = process.argv.slice(2);
 const sinceAt = args.indexOf("--since");
 const since = sinceAt >= 0 ? args[sinceAt + 1] : null;
-const explicit = args.filter((a, i) => a.startsWith("/") && i !== sinceAt + 1);
+/* THE OFF-BY-ONE THIS FIXES, found on 11 August 2026 by counting.
+   The guard exists to stop `--since 2026-08-11` being read as a path, so it
+   skipped index `sinceAt + 1`. With no `--since` flag, indexOf returns -1 and
+   `sinceAt + 1` is 0 — so the FIRST named path was silently dropped from every
+   submission that did not use the flag. Five paths went in, four were sent,
+   and the script reported success for the four. Guarding on the flag being
+   present is the whole fix. */
+const explicit = args.filter((a, i) => a.startsWith("/") && !(sinceAt >= 0 && i === sinceAt + 1));
 
 const say = (s = "") => process.stdout.write(s + "\n");
 
