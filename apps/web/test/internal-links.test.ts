@@ -1,7 +1,12 @@
 import { describe, expect, it } from "vitest";
 import { readFileSync } from "node:fs";
 import { applyInternalLinks } from "../src/lib/internal-linker";
-import { CATEGORY_ANCHORS, anchorsFor, liveAnchorsFor } from "../src/content/internal-links";
+import {
+  CATEGORY_ANCHORS,
+  RETROFITTED_INBOUND,
+  anchorsFor,
+  liveAnchorsFor,
+} from "../src/content/internal-links";
 import { REVIEWS } from "../src/content/reviews";
 import { ROUTES } from "../src/content/routes";
 import { productEditorial, catalogueStatusOf, PRODUCT_ID } from "../src/content/products";
@@ -268,5 +273,97 @@ describe("a product anchor points at the product it names", () => {
       }
     }
     expect(wrong).toEqual([]);
+  });
+});
+
+/**
+ * THE RETROFIT RULE — older pages must be updated to link to newer ones.
+ *
+ * See the long note above RETROFITTED_INBOUND in content/internal-links.ts for
+ * why this is a rule and not a habit. The short version: linking on this site
+ * only ever runs backwards in time unless something makes it run forwards, and
+ * every check that existed before this one passed while the newest page on the
+ * site had a single inbound link from a page built the same afternoon.
+ *
+ * The table cannot be satisfied by writing the table. Each claim is checked
+ * against the prose file on disk, so an entry added without the edit fails.
+ */
+describe("older pages link to newer ones", () => {
+  const proseOf = (name: string) => {
+    for (const dir of ["reviews", "articles"]) {
+      const f = `apps/web/src/${dir}/${name}.md`;
+      try {
+        return readFileSync(f, "utf8");
+      } catch {
+        /* try the other directory */
+      }
+    }
+    return null;
+  };
+
+  it("declares the anchor each retrofit relies on, and declares it live", () => {
+    for (const r of RETROFITTED_INBOUND) {
+      const declared = liveAnchorsFor(r.categorySlug).find((a) => a.anchor === r.anchor);
+      expect(declared, `${r.page}: no live anchor "${r.anchor}" in ${r.categorySlug}`).toBeDefined();
+      expect(declared!.href.split("#")[0], `${r.page}: "${r.anchor}" points elsewhere`).toBe(r.page);
+    }
+  });
+
+  it("names at least two older pages for every page that shipped", () => {
+    for (const r of RETROFITTED_INBOUND) {
+      expect(r.from.length, `${r.page} was retrofitted into too little`).toBeGreaterThanOrEqual(2);
+    }
+  });
+
+  it("finds the anchor phrase in each older page's prose, on disk", () => {
+    const missing: string[] = [];
+    for (const r of RETROFITTED_INBOUND) {
+      for (const src of r.from) {
+        const md = proseOf(src.prose);
+        if (md === null) {
+          missing.push(`${r.page}: no prose file for ${src.prose}`);
+          continue;
+        }
+        // The linker matches whitespace-flexibly, so a phrase that wrapped
+        // across a line in the source still links. Match the same way here,
+        // or a perfectly good retrofit fails on a line break.
+        const flexible = new RegExp(r.anchor.replace(/\s+/g, "\\s+"), "i");
+        if (!flexible.test(md)) missing.push(`${r.page}: "${r.anchor}" absent from ${src.prose}.md`);
+      }
+    }
+    expect(missing).toEqual([]);
+  });
+
+  it("only counts pages that genuinely predate the one they point at", () => {
+    const wrong: string[] = [];
+    for (const r of RETROFITTED_INBOUND) {
+      for (const src of r.from) {
+        if (src.shipped >= r.shipped) {
+          wrong.push(`${r.page} shipped ${r.shipped}; ${src.prose} shipped ${src.shipped}`);
+        }
+      }
+    }
+    expect(wrong).toEqual([]);
+  });
+
+  it("writes down why each older page earned the link", () => {
+    for (const r of RETROFITTED_INBOUND) {
+      for (const src of r.from) {
+        expect(src.why.length, `${r.page} → ${src.prose}: no reason given`).toBeGreaterThan(40);
+      }
+    }
+  });
+
+  /* Product URLs are generated per product and are not in ROUTES, so a page is
+     real if the registry knows it OR the catalogue holds an active product at
+     that slug — the same two-answer existence check the anchor plan uses. */
+  it("points every retrofitted page at somewhere that actually exists", () => {
+    const known = new Set(ROUTES.map((x) => x.path));
+    for (const r of RETROFITTED_INBOUND) {
+      const slug = /^\/robots\/[a-z0-9-]+\/([a-z0-9-]+)\/$/.exec(r.page)?.[1];
+      const productId = slug ? (PRODUCT_ID[slug] ?? productEditorial(slug)?.productId) : null;
+      const ok = known.has(r.page) || Boolean(productId && catalogueStatusOf(productId) === "active");
+      expect(ok, `${r.page} is neither a known route nor an active product`).toBe(true);
+    }
   });
 });

@@ -5907,6 +5907,174 @@ export const AUGUST_11_UPLOAD_ASSETS: MediaAssetRecord[] = [
  * is a headline re-render rather than a re-shoot — the photography is fine and
  * the machine is right. Held pending that, not discarded.
  */
+/**
+ * Six files for the Yarbo Snow Blower review, supplied 11 August 2026.
+ *
+ * WHAT THEY FIX. The review shipped earlier the same day with no artwork at
+ * all — no lead, no figures, and a social preview falling back to the generic
+ * BotPlanet brand card. It is the only page on the site arguing that a $1,299
+ * "snow blower" and a $4,999 "snow blower" are different objects, and it was
+ * making that argument in text alone. `module-split` makes it in one picture.
+ *
+ * ALL SIX ARE TYPED AS ILLUSTRATION AND SHUT OUT OF PRODUCT SCHEMA, and that
+ * is a stricter call than the 11 August batch above needed. Those files are
+ * shut out because they carry marketing claims in their pixels; these carry no
+ * claim at all — no price, no throw distance, no runtime, which is exactly
+ * what was asked for, since every one of those three numbers is either
+ * seasonal or a conflict this review publishes unresolved. They are shut out
+ * for a different reason: they are renders rather than photographs of the
+ * machine, and this page refuses a buy link because Amazon's own brand and
+ * model fields have not been read. Asserting `productImage` here would be
+ * claiming photographic authority over a machine whose listing identity we
+ * have just declined to assert. The two positions have to agree.
+ *
+ * WHAT THE PIXELS GOT RIGHT THAT THE BRIEF GOT WRONG. The brief asked for a
+ * white and grey machine. The renders are black and yellow, which is Yarbo's
+ * actual livery — Lowe's and Best Buy both picture it that way, and Best Buy
+ * titles the SKU "Black Yarbo S1". The brief was wrong and the artwork is not,
+ * so nothing here is corrected in a caption.
+ *
+ * THE ONE SLOT THAT WENT UNFILLED is the lawn best-of hero. All six files are
+ * Yarbo snow, so best-robot-lawn-mowers still borrows the lawn hub hero and is
+ * still sharing an image with the hub. Recorded rather than quietly dropped.
+ */
+export const YARBO_UPLOAD_ASSETS: MediaAssetRecord[] = [
+  {
+    ...base("yarbo-snow-blower-hero", "illustration"),
+    productId: PRODUCT_ID["yarbo-snow-blower"] ?? "prod-yarbo-snow-blower",
+    purpose: "Yarbo Snow Blower — review lead, listing card and social preview",
+    exactModel: "Yarbo Snow Blower (YARBO S1)",
+    type: "branded_placeholder",
+    checksum: "sha256:66ed07c1faa37a4b6d7955fcc121343f809d8374bf77ea7b294207446154be10",
+    width: 1672,
+    height: 941,
+    src: "/media/reviews/yarbo-snow-blower/hero.webp",
+    altText:
+      "A BotPlanet panel titled Yarbo Snow Blower: a black and yellow tracked " +
+      "robot on a driveway at night, snow arcing from its chute to the right, " +
+      "a lit house behind it and a cleared strip visible behind its tracks.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+    presentation: "bleed",
+  },
+  {
+    ...base("yarbo-snow-blower-module-split", "illustration"),
+    productId: PRODUCT_ID["yarbo-snow-blower"] ?? "prod-yarbo-snow-blower",
+    purpose: "Yarbo Snow Blower — review figure: the module and the Core, separated",
+    exactModel: "Yarbo Snow Blower (YARBO S1)",
+    type: "educational_diagram",
+    checksum: "sha256:0053b3a583fa408d4010ad34233ca952abd2f0db64e04e9c80258210353aad3f",
+    width: 1122,
+    height: 1402,
+    src: "/media/reviews/yarbo-snow-blower/module-split.webp",
+    altText:
+      "The two halves of the machine shown apart on black plinths: above, the " +
+      "snow blower module — a wide housing with two spiral augers across the " +
+      "front, a drive shaft running back to an impeller, and the chute rising " +
+      "from the top; below, the tracked Core platform on its own, a bare " +
+      "chassis on two rubber tracks with YARBO along the side.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+    presentation: "bleed",
+    notes:
+      "The single most useful image on the page. The module alone is $1,299 " +
+      "and is the top half; the thing sold as the Yarbo Snow Blower is both " +
+      "halves and costs $4,999. No figure is set into the pixels, so the " +
+      "prices stay in the text where they carry the date they were read.",
+  },
+  {
+    ...base("yarbo-snow-blower-tracked-platform", "illustration"),
+    productId: PRODUCT_ID["yarbo-snow-blower"] ?? "prod-yarbo-snow-blower",
+    purpose: "Yarbo Snow Blower — review figure: a robot carrying an attachment",
+    exactModel: "Yarbo Snow Blower (YARBO S1)",
+    type: "educational_diagram",
+    checksum: "sha256:341cbf2854caeeddc2722574a0708cefc16211cc81b6c508ed37ecc5eedf7174",
+    width: 1122,
+    height: 1402,
+    src: "/media/reviews/yarbo-snow-blower/tracked-platform.webp",
+    altText:
+      "The assembled machine seen from the front quarter at night: a low " +
+      "tracked chassis at the back with an antenna and a camera pod, and a " +
+      "separate blower housing bolted across the front with its augers turning " +
+      "in the snow and headlamps lit.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+    presentation: "bleed",
+  },
+  {
+    ...base("yarbo-snow-blower-chute-control", "illustration"),
+    productId: PRODUCT_ID["yarbo-snow-blower"] ?? "prod-yarbo-snow-blower",
+    purpose: "Yarbo Snow Blower — review figure: chute rotation and elevation",
+    exactModel: "Yarbo Snow Blower (YARBO S1)",
+    type: "educational_diagram",
+    checksum: "sha256:7e5f2f9f8189f78bc14edb295f00a5f56164754283f64abb7230b791b1143f48",
+    width: 1122,
+    height: 1402,
+    src: "/media/reviews/yarbo-snow-blower/chute-control.webp",
+    altText:
+      "Two panels of the same machine with arrows drawn over the chute. In the " +
+      "upper panel a curved arrow shows the chute swinging left and right and " +
+      "the snow throwing flat and wide; in the lower panel a straight arrow " +
+      "shows it raised and the snow throwing high.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+    presentation: "bleed",
+    notes:
+      "Deliberately carries no distance. Yarbo's own module page prints both " +
+      "up to 40 feet and 6-40 Yards Throw Control in one panel, and the review " +
+      "publishes that as an unresolved conflict — a number drawn into the " +
+      "artwork would pick a side we refused to pick.",
+  },
+  {
+    ...base("yarbo-snow-blower-conditions", "illustration"),
+    productId: PRODUCT_ID["yarbo-snow-blower"] ?? "prod-yarbo-snow-blower",
+    purpose: "Yarbo Snow Blower — review figure: four snow conditions",
+    exactModel: "Yarbo Snow Blower (YARBO S1)",
+    type: "educational_diagram",
+    checksum: "sha256:38567a9811f5a9eba64a68b8a1cea2ff4b73c6351931dcd73f482849626c5a96",
+    width: 1122,
+    height: 1402,
+    src: "/media/reviews/yarbo-snow-blower/conditions.webp",
+    altText:
+      "Four panels of the same machine in different snow: dry powder in an " +
+      "open field, heavy falling snow beside a lit house, wet slush on a " +
+      "streaming wet driveway, and a shoulder-high plough bank across a garage " +
+      "door.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+    presentation: "bleed",
+    notes:
+      "Placed against the section listing what this review could NOT " +
+      "establish, because those four conditions are precisely what nobody has " +
+      "measured this machine across. The caption says so rather than letting " +
+      "four confident renders read as four results.",
+  },
+  {
+    ...base("yarbo-snow-blower-daylight-driveway", "illustration"),
+    productId: PRODUCT_ID["yarbo-snow-blower"] ?? "prod-yarbo-snow-blower",
+    purpose: "Yarbo Snow Blower — review figure: deep snow, daylight",
+    exactModel: "Yarbo Snow Blower (YARBO S1)",
+    type: "educational_diagram",
+    checksum: "sha256:cad64385e941ae915eb812e6227e44f3ab3b1ef963efb4bc45f9747b7a4c92f7",
+    width: 1122,
+    height: 1402,
+    src: "/media/reviews/yarbo-snow-blower/daylight-driveway.webp",
+    altText:
+      "The machine working a long driveway in bright daylight under a blue " +
+      "sky, deep snow banked either side of the cleared strip, a timber house " +
+      "and snow-laden conifers behind.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: false,
+    presentation: "bleed",
+  },
+];
+
 export const QREVO_S5V_ARTWORK_HELD = [
   { file: "Multifunctional Dock", headline: "ROBOROCK SAROS 10" },
   { file: "FlexiArm Edge Mopping", headline: "ROBOROCK SAROS 10" },
@@ -5922,6 +6090,7 @@ export const MEDIA_ASSETS: MediaAssetRecord[] = [
   ...AUGUST_UPLOAD_ASSETS,
   ...CODING_UPLOAD_ASSETS,
   ...AUGUST_11_UPLOAD_ASSETS,
+  ...YARBO_UPLOAD_ASSETS,
   ...REVIEW_FIGURE_ASSETS,
   ...PLACEHOLDER_ASSETS,
 ];
@@ -5962,6 +6131,7 @@ export const DERIVATIVES: import("./types").Derivative[] = DERIVATIVE_MANIFEST.f
     ...AUGUST_UPLOAD_ASSETS,
     ...CODING_UPLOAD_ASSETS,
     ...AUGUST_11_UPLOAD_ASSETS,
+    ...YARBO_UPLOAD_ASSETS,
     ...REVIEW_FIGURE_ASSETS,
   ].find(
     (a) => a.src === entry.source,

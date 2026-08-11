@@ -1086,6 +1086,105 @@ export const CATEGORY_ANCHORS: Record<string, InternalAnchor[]> = {
   ],
 };
 
+/* ============================================================
+   THE RETROFIT RULE: a new page is not finished until older pages
+   point at it.
+
+   WHY THIS EXISTS. The natural direction of linking on this site is
+   backwards. A page written today can link to everything that came
+   before it, because all of it is sitting there while the writing
+   happens. Nothing already published links forward, because on the
+   day it was written the new page did not exist. Left alone, that
+   produces exactly what it sounds like: an archive of pages pointing
+   at the oldest thing on the site, and every new page arriving with
+   one inbound link from whichever surface happened to be built the
+   same afternoon.
+
+   The Yarbo Snow Blower review is what made this a rule rather than
+   a habit. It shipped on 11 August 2026 with a declared anchor in
+   the lawn category, and that anchor fired from exactly one page —
+   the lawn best-of, written the same day. Three lawn guides that had
+   been live for days, all of them arguing about gradient and
+   navigation, said nothing about it. Every automated check passed:
+   the anchor resolved, the route was live, the target was the right
+   machine. Nothing on this site was looking for the absence.
+
+   THE RULE. When a page ships, older pages get a natural anchor to
+   it, in the same commit. Not a link block, not a related-articles
+   rail — a phrase in a sentence that was worth writing anyway, which
+   is the same standard every anchor above is held to. If no older
+   page can carry the phrase honestly, that is a finding about the
+   new page's place on the site, not a formality to skip.
+
+   WHAT THIS TABLE IS. One entry per page shipped since the rule took
+   effect, naming the older pages retrofitted to reach it.
+   internal-links.test.ts reads it and proves three things: that the
+   anchor is declared live, that each named page's prose really does
+   contain it, and that each named page is genuinely older than the
+   page it points at. A page listed here whose prose was never
+   actually edited fails, which is the whole point — the table cannot
+   be satisfied by writing the table.
+   ============================================================ */
+export interface RetrofittedInbound {
+  /** The newer page that needed inbound links. */
+  page: string;
+  /** The day it shipped. Every page in `from` must predate this. */
+  shipped: string;
+  /** The category whose anchor set carries the phrase. */
+  categorySlug: string;
+  /** The declared anchor phrase the older prose was edited to contain. */
+  anchor: string;
+  /** Older pages retrofitted, as prose keys: review slugs or article names. */
+  from: { prose: string; shipped: string; why: string }[];
+}
+
+/* @extension-point per-page | required | Every new page adds an entry here in
+   the commit that ships it. A page with no entry is a page nothing older links
+   to, which is the failure this table exists to make visible. */
+export const RETROFITTED_INBOUND: RetrofittedInbound[] = [
+  {
+    page: "/robots/robot-snow-blowers/yarbo-snow-blower/",
+    shipped: "2026-08-11",
+    categorySlug: "robotic-lawn-mowers",
+    anchor: "Yarbo Snow Blower",
+    from: [
+      {
+        prose: "robot-lawn-mower-for-hills",
+        shipped: "2026-08-06",
+        why: "The guide lists four things that decide whether a mower climbs and every one of them is a wheel. Tracks are the fifth and no mower in the category has them, which is why the paragraph was worth writing before it was worth linking.",
+      },
+      {
+        prose: "wire-free-robot-lawn-mower",
+        shipped: "2026-08-06",
+        why: "The guide's own argument is that wire-free navigation is a stack rather than a mower feature. A machine running that stack over a driveway instead of a lawn is the clearest evidence for it on the site.",
+      },
+    ],
+  },
+  {
+    page: "/best-robots/robotic-lawn-mowers/",
+    shipped: "2026-08-11",
+    categorySlug: "robotic-lawn-mowers",
+    anchor: "shortlist",
+    from: [
+      {
+        prose: "robot-lawn-mower-for-hills",
+        shipped: "2026-08-06",
+        why: "Ended on a promise that a shortlist would follow once mowers entered the catalogue. Seven went in on 10 August and the promise went stale rather than being kept.",
+      },
+      {
+        prose: "wire-free-robot-lawn-mower",
+        shipped: "2026-08-06",
+        why: "Same stale promise, and the same reader — one who has finished deciding how the machine should navigate and now wants to know which one.",
+      },
+      {
+        prose: "cheap-robot-lawn-mower",
+        shipped: "2026-08-06",
+        why: "The budget reader is the one most likely to want a ranking rather than a category, because price has already done most of the filtering for them.",
+      },
+    ],
+  },
+];
+
 export const anchorsFor = (categorySlug: string | undefined): InternalAnchor[] =>
   categorySlug ? (CATEGORY_ANCHORS[categorySlug] ?? []) : [];
 

@@ -11838,5 +11838,199 @@
         "checksum": "sha256:6cffe5f0318644629bfd6a305d6a116f72ecfa4675b30e857c32bb46348b40a9"
       }
     ]
+  },
+  {
+    "source": "/media/reviews/yarbo-snow-blower/hero.webp",
+    "sourceWidth": 1672,
+    "sourceHeight": 941,
+    "derivatives": [
+      {
+        "id": "media-reviews-yarbo-snow-blower-hero-webp-360",
+        "src": "/media/reviews/yarbo-snow-blower/hero-360w.webp",
+        "width": 360,
+        "height": 203,
+        "bytes": 12370,
+        "checksum": "sha256:767764259dc75fbf803edd9ab157509adc85f2eec767654f69484c0451a36813"
+      },
+      {
+        "id": "media-reviews-yarbo-snow-blower-hero-webp-640",
+        "src": "/media/reviews/yarbo-snow-blower/hero-640w.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 34382,
+        "checksum": "sha256:49e8faf7fb5c231a469a4642ad119d22c7d6ccc6adadddee7110293a3ae26a55"
+      },
+      {
+        "id": "media-reviews-yarbo-snow-blower-hero-webp-960",
+        "src": "/media/reviews/yarbo-snow-blower/hero-960w.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 73998,
+        "checksum": "sha256:7350f62c8738ea1b4a041eefe0d3fd1a7b912a76f636aa82fb05ac41c8101b4e"
+      },
+      {
+        "id": "media-reviews-yarbo-snow-blower-hero-webp-1440",
+        "src": "/media/reviews/yarbo-snow-blower/hero-1440w.webp",
+        "width": 1440,
+        "height": 810,
+        "bytes": 127500,
+        "checksum": "sha256:7e24505dad7b0d1fc016a92ad0ef4ba6d41c002fce06ff0c322f8976bf082786"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/yarbo-snow-blower/module-split.webp",
+    "sourceWidth": 1122,
+    "sourceHeight": 1402,
+    "derivatives": [
+      {
+        "id": "media-reviews-yarbo-snow-blower-module-split-webp-360",
+        "src": "/media/reviews/yarbo-snow-blower/module-split-360w.webp",
+        "width": 360,
+        "height": 450,
+        "bytes": 16136,
+        "checksum": "sha256:6d0d1d9b8cedcbee8be72d4ea3b38e83982d6dddf93e9debdd5922d3d82537bc"
+      },
+      {
+        "id": "media-reviews-yarbo-snow-blower-module-split-webp-640",
+        "src": "/media/reviews/yarbo-snow-blower/module-split-640w.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 41024,
+        "checksum": "sha256:a92cde75eb0f119b468e3ac6d6d15d6e9129d85bd26e43869f11a5c32eb881f0"
+      },
+      {
+        "id": "media-reviews-yarbo-snow-blower-module-split-webp-960",
+        "src": "/media/reviews/yarbo-snow-blower/module-split-960w.webp",
+        "width": 960,
+        "height": 1200,
+        "bytes": 77646,
+        "checksum": "sha256:d1b117e6e4acbdd95f65aa8a56f2a0bf119b22a86e59781f253e6079de6c592a"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/yarbo-snow-blower/tracked-platform.webp",
+    "sourceWidth": 1122,
+    "sourceHeight": 1402,
+    "derivatives": [
+      {
+        "id": "media-reviews-yarbo-snow-blower-tracked-platform-webp-360",
+        "src": "/media/reviews/yarbo-snow-blower/tracked-platform-360w.webp",
+        "width": 360,
+        "height": 450,
+        "bytes": 22532,
+        "checksum": "sha256:8b3f7b6c770d0a628be176b05fdd27af1327dc3f4adfca940cdd6ba6f146cad5"
+      },
+      {
+        "id": "media-reviews-yarbo-snow-blower-tracked-platform-webp-640",
+        "src": "/media/reviews/yarbo-snow-blower/tracked-platform-640w.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 61628,
+        "checksum": "sha256:6336e74776fca434895ebd1d948f26a3c95fcf02f0c0a3bcedd34551fc428756"
+      },
+      {
+        "id": "media-reviews-yarbo-snow-blower-tracked-platform-webp-960",
+        "src": "/media/reviews/yarbo-snow-blower/tracked-platform-960w.webp",
+        "width": 960,
+        "height": 1200,
+        "bytes": 121368,
+        "checksum": "sha256:4e01afe461a7586e3f164e1bf9ff983855c6914db56a3c143d29f6289dcaa918"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/yarbo-snow-blower/chute-control.webp",
+    "sourceWidth": 1122,
+    "sourceHeight": 1402,
+    "derivatives": [
+      {
+        "id": "media-reviews-yarbo-snow-blower-chute-control-webp-360",
+        "src": "/media/reviews/yarbo-snow-blower/chute-control-360w.webp",
+        "width": 360,
+        "height": 450,
+        "bytes": 26624,
+        "checksum": "sha256:120e52f1899e9902c21af0d1cff9714747cb61915b17759292caf3c97ff3333a"
+      },
+      {
+        "id": "media-reviews-yarbo-snow-blower-chute-control-webp-640",
+        "src": "/media/reviews/yarbo-snow-blower/chute-control-640w.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 72312,
+        "checksum": "sha256:0548ec1fad0a9e5209e5cbcccd290cdd53f0035b63e6939e2487c33982ed43cd"
+      },
+      {
+        "id": "media-reviews-yarbo-snow-blower-chute-control-webp-960",
+        "src": "/media/reviews/yarbo-snow-blower/chute-control-960w.webp",
+        "width": 960,
+        "height": 1200,
+        "bytes": 143538,
+        "checksum": "sha256:70b983bba3ccd95368374734cc6d51caa327a0d9fda8817bab4c09626c3a9afd"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/yarbo-snow-blower/conditions.webp",
+    "sourceWidth": 1122,
+    "sourceHeight": 1402,
+    "derivatives": [
+      {
+        "id": "media-reviews-yarbo-snow-blower-conditions-webp-360",
+        "src": "/media/reviews/yarbo-snow-blower/conditions-360w.webp",
+        "width": 360,
+        "height": 450,
+        "bytes": 27394,
+        "checksum": "sha256:6ea28ff91b13cd92082f0ad08b1f49a843dfd0f68eafbd6154df1573dfcc3f9a"
+      },
+      {
+        "id": "media-reviews-yarbo-snow-blower-conditions-webp-640",
+        "src": "/media/reviews/yarbo-snow-blower/conditions-640w.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 75718,
+        "checksum": "sha256:783b17d3468c7d0f32b77f9abebf0895e2a2b954c9fd6e7eb1af7945ed868158"
+      },
+      {
+        "id": "media-reviews-yarbo-snow-blower-conditions-webp-960",
+        "src": "/media/reviews/yarbo-snow-blower/conditions-960w.webp",
+        "width": 960,
+        "height": 1200,
+        "bytes": 155328,
+        "checksum": "sha256:ab6ddfcec080e30f59fbd2ff38091cbc5f00615a1adde276d53e1d98fe5e9438"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/yarbo-snow-blower/daylight-driveway.webp",
+    "sourceWidth": 1122,
+    "sourceHeight": 1402,
+    "derivatives": [
+      {
+        "id": "media-reviews-yarbo-snow-blower-daylight-driveway-webp-360",
+        "src": "/media/reviews/yarbo-snow-blower/daylight-driveway-360w.webp",
+        "width": 360,
+        "height": 450,
+        "bytes": 23482,
+        "checksum": "sha256:b1c388d63c3e77e9c17799ec1b93979f6e027d07ae9975e517ff330fef6e83d6"
+      },
+      {
+        "id": "media-reviews-yarbo-snow-blower-daylight-driveway-webp-640",
+        "src": "/media/reviews/yarbo-snow-blower/daylight-driveway-640w.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 59414,
+        "checksum": "sha256:2580839c72e415e08cdc6a76e17edc43053e5f3d3af9780d82e8fa46e471cf2f"
+      },
+      {
+        "id": "media-reviews-yarbo-snow-blower-daylight-driveway-webp-960",
+        "src": "/media/reviews/yarbo-snow-blower/daylight-driveway-960w.webp",
+        "width": 960,
+        "height": 1200,
+        "bytes": 113568,
+        "checksum": "sha256:9ef76e45e217499f11f148894f244b6a72599943f32a9939e3e29dedaf263dab"
+      }
+    ]
   }
 ]

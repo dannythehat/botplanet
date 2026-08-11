@@ -109,6 +109,13 @@ Each was checked against the manufacturer's own technical documentation before
 it went up, which is what our review methodology sets out, and our shortlist
 ranks them by area and gradient rather than by navigation type.
 
+A seventh machine on this site runs the same stack and never goes near grass.
+The Yarbo Snow Blower maps a driveway with satellite positioning and cameras the
+way these map a lawn, then clears it, and its maker sells a mowing module for
+the same platform that we do not hold. It is here as a note on how far this
+navigation has travelled rather than as a mower, and it is the reason the
+question on this page is spreading beyond the lawn.
+
 ## What to do next
 
 Stand in your garden and look up.

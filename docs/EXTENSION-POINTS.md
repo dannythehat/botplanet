@@ -62,6 +62,14 @@ One entry per product slug. Adding a Maytronics pool robot, a fifth window brand
 | `packages/db/seed/pool/commercial.ts` | **required** | Both arrays below are built from offerSeeds. No seed means the buy button resolves to nothing and /go/<key> returns 404 — which is exactly what happened to the Proteus DX4 Plus and the Scuba V3 for a day. offers.test.ts now fails the build for this, so the failure is loud rather than silent. |
 | `packages/db/seed/pool/evidence.ts` | optional | The product ships with no cited source behind its specification claims. It renders, but every figure on the page is then unattributed, which is the thing the review methodology promises we do not do. |
 
+## Per page shipped
+
+One entry per page the site ships. Linking only ever runs backwards in time on its own, so a new page arrives with whatever inbound links the surfaces built the same day happen to give it. These are the lists that make the retrofit visible instead of optional.
+
+| File | | What happens if you skip it |
+|---|---|---|
+| `apps/web/src/content/internal-links.ts` | **required** | Every new page adds an entry here in the commit that ships it. A page with no entry is a page nothing older links to, which is the failure this table exists to make visible. |
+
 ## Per brand
 
 One entry per brand. Cheap, but a missing brand row breaks the product's foreign key.

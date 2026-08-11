@@ -55,6 +55,16 @@ they cost accordingly.
 a low setting scalps the crown of the bank. Setting the height 10 millimetres
 above what you would use on the flat solves most complaints about bald patches.
 
+There is a fifth thing that decides gradient and no mower in this category has
+it: tracks. Rubber tracks spread the machine's weight along their whole length
+instead of through four contact patches, which is why tracked vehicles hold
+ground that wheels give up. The one tracked robot on this site is not a mower —
+the Yarbo Snow Blower rides a modular platform rated to 36 per cent and sold to
+clear a driveway. The same maker builds a mowing module for it, we have not
+catalogued that module, and none of this changes which mower you should buy. It
+is worth knowing only because it explains why the wheeled machines below top out
+where they do.
+
 ## Wet grass is the real test
 
 Every published gradient figure is measured on dry grass, and no manufacturer we

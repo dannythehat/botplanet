@@ -485,6 +485,13 @@ const SOURCES = [
   "/media/reviews/mammotion-luba-3-awd-1500h/cutting-decks.webp",
   "/media/reviews/mammotion-luba-3-awd-1500h/navigation.webp",
   "/media/reviews/mammotion-luba-3-awd-1500h/obstacles.webp",
+  // yarbo-snow-blower
+  "/media/reviews/yarbo-snow-blower/hero.webp",
+  "/media/reviews/yarbo-snow-blower/module-split.webp",
+  "/media/reviews/yarbo-snow-blower/tracked-platform.webp",
+  "/media/reviews/yarbo-snow-blower/chute-control.webp",
+  "/media/reviews/yarbo-snow-blower/conditions.webp",
+  "/media/reviews/yarbo-snow-blower/daylight-driveway.webp",
 ];
 
 const run = async () => {

@@ -6653,6 +6653,69 @@ export const REVIEWS: Record<string, ReviewContent> = {
      ------------------------------------------------------------------ */
   "yarbo-snow-blower": {
     slug: "yarbo-snow-blower",
+    image: {
+      src: "/media/reviews/yarbo-snow-blower/hero.webp",
+      alt:
+        "BotPlanet artwork titled Yarbo Snow Blower: a black and yellow tracked " +
+        "robot clearing a driveway at night, snow arcing from its chute, a lit " +
+        "house behind and a cleared strip visible behind its tracks.",
+    },
+    /* Five figures, and the order they argue in matters more here than on any
+       other review on the site. `module-split` sits under the price section
+       rather than the specification section because the whole page turns on
+       one object being two objects, and a picture settles that faster than
+       four paragraphs. `conditions` deliberately sits under what we could NOT
+       establish: four confident renders of powder, falling snow, slush and a
+       plough bank, against a machine nobody has measured across any of them.
+       Its caption says so, because the alternative is artwork quietly making
+       a claim the text spent a section refusing to make. */
+    figures: [
+      {
+        afterHeading: "The first thing to understand: it is not a snow blower",
+        src: "/media/reviews/yarbo-snow-blower/tracked-platform.webp",
+        caption:
+          "Two objects, bolted together. The tracked chassis at the back is the " +
+          "Core — battery, satellite positioning and cameras — and it does " +
+          "nothing on its own. The blower housing across the front is one of " +
+          "four things you can attach to it.",
+      },
+      {
+        afterHeading: "Why you will see two prices, and which one is real",
+        src: "/media/reviews/yarbo-snow-blower/module-split.webp",
+        caption:
+          "The $1,299 part is the top half: augers, impeller and chute, with " +
+          "no way to move itself. The $4,999 product is both halves plus the " +
+          "dock, the battery and the Data Center. Third-party reviews quote " +
+          "the higher figure and call it standalone, which is how the " +
+          "confusion starts.",
+      },
+      {
+        afterHeading: "The published specification",
+        src: "/media/reviews/yarbo-snow-blower/chute-control.webp",
+        caption:
+          "The chute rotates and elevates, which is what turns a two-stage " +
+          "machine into one that can aim. No distance is printed on this " +
+          "artwork on purpose — Yarbo publishes two irreconcilable figures for " +
+          "it and we are not picking one by drawing it.",
+      },
+      {
+        afterHeading: "Who it might be for",
+        src: "/media/reviews/yarbo-snow-blower/daylight-driveway.webp",
+        caption:
+          "The case it makes best: a long driveway, deep snow, and twenty of " +
+          "these a winter. At 6,000 sq ft a charge, a driveway much longer " +
+          "than this one is a machine that docks partway and comes back.",
+      },
+      {
+        afterHeading: "What we could not establish",
+        src: "/media/reviews/yarbo-snow-blower/conditions.webp",
+        caption:
+          "Powder, falling snow, wet slush and a ploughed-in bank. These are " +
+          "renders, not results — the difference between the top two panels " +
+          "and the bottom two is exactly the throughput nobody has measured, " +
+          "and the wet-snow panel is the one we would most want tested.",
+      },
+    ],
     categorySlug: "robot-snow-blowers",
     /* Its own category is hidden and holds one product, so it has no siblings,
        no comparison table and no hub. The Core this machine rides on is the
