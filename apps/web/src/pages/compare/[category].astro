@@ -177,7 +177,18 @@ const nameSingular =
        said "Pool size" on every category until 8 August: pool was the first
        category and its vocabulary got left in the shared template. This one
        names only what every category actually has. */
-    `Every ${nameSingular} we hold, side by side on the same columns: what it is rated for, what it does, how it is powered and where its price sits.`
+    /* LEADS WITH THE TERM, AND USES THE PLURAL. Two faults in one line.
+
+       The register's primary for each of these pages is "compare <category>",
+       and this sentence never said the word "compare" — the one page-level
+       surface a searcher reads before clicking, and the term they typed was
+       not in it. Found 11 August 2026 by a new audit rule; six pages.
+
+       It also singularised, which produced "Every coding robots for kid we
+       hold" on the coding page, because that category's name is a phrase
+       rather than a noun. The plural needs no surgery and reads correctly for
+       all seven. */
+    `Compare ${namePlural}: every one we hold, side by side on what it is rated for, what it does, how it is powered and where its price sits.`
   }
   breadcrumbs={crumbs}
   schema={pageSchema}

@@ -17,23 +17,26 @@
  *     1. every indexable page has a keyword register row — a page with no row
  *        is a page nothing is asserting anything about;
  *     2. the primary term appears in the title, the H1 and the body;
- *     3. every mustAppear secondary term appears in the body;
- *     4. no two pages claim the same primary term (cannibalisation);
- *     5. no two pages share a title or a meta description;
- *     6. exactly one H1;
- *     7. title and meta description lengths that survive a SERP — skipped on
+ *     3. the primary term appears in the meta description — added 11 August
+ *        2026, when the description turned out to be the one surface this
+ *        audit measured the length of and never the content of;
+ *     4. every mustAppear secondary term appears in the body;
+ *     5. no two pages claim the same primary term (cannibalisation);
+ *     6. no two pages share a title or a meta description;
+ *     7. exactly one H1;
+ *     8. title and meta description lengths that survive a SERP — skipped on
  *        a page the register marks `notRanking`, which is not in a SERP fight.
  *
  *   JUMP LINKS
- *     8. every #fragment resolves to an id that exists on the target page,
+ *     9. every #fragment resolves to an id that exists on the target page,
  *        same-page and cross-page alike;
- *     9. a long page with sections offers a way to jump into them.
+ *    10. a long page with sections offers a way to jump into them.
  *
  *   INTERNAL LINKING
- *    10. anchor text is descriptive, not "click here" / "read more" / a URL;
- *    11. no page in the sitemap is orphaned — reachable only from nav chrome;
- *    12. no single target soaks up a disproportionate share of body links;
- *    13. the same anchor text is not repeated at one target past the point it
+ *    11. anchor text is descriptive, not "click here" / "read more" / a URL;
+ *    12. no page in the sitemap is orphaned — reachable only from nav chrome;
+ *    13. no single target soaks up a disproportionate share of body links;
+ *    14. the same anchor text is not repeated at one target past the point it
  *        reads as natural.
  *
  * WHAT IT DELIBERATELY DOES NOT DO. It does not score, grade or rank. Every
@@ -110,11 +113,35 @@ function loadRegister() {
  */
 const RETRYABLE = new Set([408, 425, 429, 500, 502, 503, 504]);
 
+/**
+ * A cache-bypassing fetch, and the reason it has to be one.
+ *
+ * THIS AUDIT REPORTED NINETEEN PAGES AS BROKEN AFTER THEY WERE FIXED. On 11
+ * August 2026 a run immediately after a deploy listed nineteen pages whose
+ * meta description was missing its keyword. Every one of them was correct in
+ * production; fetching any of them by hand with a random query string returned
+ * the new copy. The audit was reading Cloudflare's edge cache, which still
+ * held the previous deploy's HTML.
+ *
+ * That is worse than a missed finding. A false positive after a fix sends you
+ * back to change copy that is already right, and the second edit is made
+ * against a report rather than against the page.
+ *
+ * `cache: "no-store"` plus the two request headers asks for a revalidated copy
+ * without changing the URL — which matters, because appending a cache-buster
+ * query string would alter the very thing the technical audit checks
+ * (canonicals, and query-parameter variants of indexable URLs).
+ */
+const NO_CACHE = {
+  cache: "no-store",
+  headers: { "cache-control": "no-cache", pragma: "no-cache" },
+};
+
 async function get(url) {
   let last = { status: 0, body: "", finalUrl: url };
   for (let attempt = 0; attempt < 5; attempt++) {
     try {
-      const res = await fetch(url, { redirect: "follow" });
+      const res = await fetch(url, { redirect: "follow", ...NO_CACHE });
       const body = await res.text();
       last = { status: res.status, body, finalUrl: res.url };
       if (!RETRYABLE.has(res.status)) return last;
@@ -377,6 +404,33 @@ for (const [path, page] of pages) {
     const inH1 = phrasePresence(h1, primary);
     if (inH1 === "absent") {
       add("WARN", "primary_missing_from_h1", path, `H1 does not contain "${primary}" — H1 is "${h1 || "(none)"}"`, "work the primary term into the H1, or change the primary if the H1 is right");
+    }
+
+    /**
+     * THE META DESCRIPTION, which this audit checked the length of and never
+     * the content of.
+     *
+     * Title, H1 and body were all held to the primary term from the first
+     * version of this script; the description was measured for being between
+     * 70 and 160 characters and then left alone. That is the wrong half of the
+     * job. The description is the sentence a searcher reads before deciding
+     * whether to click, and it is the one place on the page where the words
+     * they just typed either appear or do not.
+     *
+     * WARN RATHER THAN FAIL, deliberately, and the reason is that a
+     * description is written for a human choosing between ten results — not
+     * for a matcher. A description that reads well and implies the term is
+     * doing its job better than one that recites it. So this is worth knowing
+     * about and is not worth failing a deploy over.
+     *
+     * `interrupted` is not reported at all here. A description of 155
+     * characters carrying every word of a five-word product name in order,
+     * with something between them, is a description doing exactly what it
+     * should — see the note above phrasePresence.
+     */
+    const inDesc = phrasePresence(page.description ?? "", primary);
+    if (page.description && inDesc === "absent") {
+      add("WARN", "primary_missing_from_description", path, `meta description never uses the words of "${primary}" — description is "${page.description}"`, "work the term in, or accept it: a description is read by a person deciding whether to click, and reciting a keyword at them is worse than implying it well");
     }
 
     const inBody = phrasePresence(page.text, primary);

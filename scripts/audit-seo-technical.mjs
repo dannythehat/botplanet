@@ -29,8 +29,32 @@ const findings = [];
 const add = (level, code, page, detail, fix) =>
   findings.push({ level, code, page, detail, fix });
 
+/**
+ * A cache-bypassing fetch, and the reason it has to be one.
+ *
+ * THIS AUDIT REPORTED NINETEEN PAGES AS BROKEN AFTER THEY WERE FIXED. On 11
+ * August 2026 a run immediately after a deploy listed nineteen pages whose
+ * meta description was missing its keyword. Every one of them was correct in
+ * production; fetching any of them by hand with a random query string returned
+ * the new copy. The audit was reading Cloudflare's edge cache, which still
+ * held the previous deploy's HTML.
+ *
+ * That is worse than a missed finding. A false positive after a fix sends you
+ * back to change copy that is already right, and the second edit is made
+ * against a report rather than against the page.
+ *
+ * `cache: "no-store"` plus the two request headers asks for a revalidated copy
+ * without changing the URL — which matters, because appending a cache-buster
+ * query string would alter the very thing the technical audit checks
+ * (canonicals, and query-parameter variants of indexable URLs).
+ */
+const NO_CACHE = {
+  cache: "no-store",
+  headers: { "cache-control": "no-cache", pragma: "no-cache" },
+};
+
 async function get(url, attempt = 0) {
-  const res = await fetch(url, { redirect: "follow" });
+  const res = await fetch(url, { redirect: "follow", ...NO_CACHE });
   if (RETRY_ON.includes(res.status) && attempt < 4) {
     await new Promise((r) => setTimeout(r, 400 * 2 ** attempt));
     return get(url, attempt + 1);

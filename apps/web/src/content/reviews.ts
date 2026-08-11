@@ -105,7 +105,8 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "Dolphin Nautilus CC Plus Wi-Fi review",
     seoTitle: "Dolphin Nautilus CC Plus Review — Wi-Fi, and the 40 ft Limit",
     metaDescription:
-      "What the Nautilus CC Plus cleans, what it leaves alone, the 40 ft pool limit, and the US and global SKU difference worth checking before you order.",
+      "Our Dolphin Nautilus CC Plus review: what it cleans, what it leaves alone, " +
+      "the 40 ft pool limit, and the US and global SKU difference worth checking.",
     verdict:
       "A corded floor-and-wall cleaner that does a specific job reliably and does not pretend " +
       "to do more. It plugs in, runs a two-hour cycle, climbs the walls, and never needs " +
@@ -299,7 +300,8 @@ export const REVIEWS: Record<string, ReviewContent> = {
     seoTitle:
       "Polaris FREEDOM Review — Cordless, and the Runtime Catch",
     metaDescription:
-      "Cordless, 2.5 hours of runtime, and a 50 ft pool limit that appears only in marketing artwork. What the battery really buys, and who should skip it.",
+      "Our Polaris Freedom review: cordless, 2.5 hours of runtime, and a 50 ft " +
+      "pool limit that appears only in marketing artwork. Who should skip it.",
     verdict:
       "A genuinely cordless in-ground cleaner that does the floor, the walls and the waterline, runs " +
       "two and a half hours on a charge, and parks itself on a dock. You are paying a premium for a " +
@@ -508,8 +510,8 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "Betta SE Plus solar skimmer review",
     seoTitle: "Betta SE Plus Review — Skims the Surface, Nothing Else",
     metaDescription:
-      "An honest review of the Betta SE Plus solar pool skimmer: 30 hours of runtime, a 200 micron " +
-      "basket, and the one thing it will never do — clean your floor.",
+      "An honest Betta SE Plus review: 30 hours of runtime, a 200 micron basket, " +
+      "and the one thing this solar skimmer will never do — clean your floor.",
     verdict:
       "Not a pool cleaner — a skimmer, and the difference is the whole review. It floats, runs on " +
       "sunlight, and takes leaves and pollen off the surface before they sink. It will never touch " +
@@ -688,7 +690,9 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "Aiper Scuba V3 AI Vision review",
     seoTitle: "Aiper Scuba V3 Review — AI Vision, and What the Camera Sees",
     metaDescription:
-      "What the camera actually does, what seven days on one charge really means, the 3-micron filter claim, and the privacy question nobody else is asking.",
+      "Our Aiper Scuba V3 review: what the camera does, what seven days on a " +
+      "charge means, the 3-micron filter claim, and the privacy question nobody " +
+      "else asks.",
     verdict:
       "The first robot in our catalogue that looks at your pool: a camera recognises debris and " +
       "steers at it instead of sweeping blind. Cordless, 18.1 lb, waterline coverage, and the " +
@@ -858,7 +862,9 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "Dolphin Proteus DX4 Plus review",
     seoTitle: "Dolphin Proteus DX4 Plus Review — The 33 ft Catch",
     metaDescription:
-      "The 33 ft limit that catches people out, the sibling rated for 50 ft, and why we are careful about the waterline claim on this particular machine.",
+      "Our Dolphin Proteus DX4 Plus review: the 33 ft limit that catches people " +
+      "out, the sibling rated for 50 ft, and why we are careful about the " +
+      "waterline claim.",
     verdict:
       "A corded Maytronics machine that climbs walls, does the sun ledges and — per Maytronics' own " +
       "listing copy — the waterline too. Rated for pools up to 33 ft, which is shorter than people " +
@@ -1004,7 +1010,9 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "Aiper Scuba X1 Pro Max review",
     seoTitle: "Aiper Scuba X1 Pro Max Review — It Skims the Surface Too",
     metaDescription:
-      "The only robot here that skims the surface as well as the floor. The 8,500 GPH claim, the three-year warranty, and the bundle that fooled our records.",
+      "Our Aiper Scuba X1 Pro Max review: the only robot here that skims the " +
+      "surface as well as the floor. The 8,500 GPH claim and the three-year " +
+      "warranty.",
     verdict:
       "The most expensive machine we cover and the only one that honestly claims all four jobs — " +
       "surface, waterline, walls and floor — with ultrasonic mapping, 8,500 GPH of claimed suction " +
@@ -1164,7 +1172,8 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "Aiper Seagull SE review",
     seoTitle: "Aiper Seagull SE Review — Floor Only, 90 Minutes",
     metaDescription:
-      "Ninety minutes of floor-only cleaning for a small above-ground pool, the sparsest spec sheet we cover, and the Amazon listing that died mid-review.",
+      "Our Aiper Seagull SE review: ninety minutes of floor-only cleaning for a " +
+      "small above-ground pool, and the sparsest specification sheet we cover.",
     verdict:
       "The cheapest machine we cover and the most honest thing in the budget end of the market: " +
       "a cordless vacuum that does the floor of a small above-ground pool for ninety minutes and " +
@@ -1303,7 +1312,9 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "Aiper Scuba S1 review",
     seoTitle: "Aiper Scuba S1 Review — The Runtime Aiper States Twice",
     metaDescription:
-      "Four-zone cleaning including 12-inch shallow ledges, a runtime Aiper states two different ways, and the Amazon listing we refuse to link to.",
+      "Our Aiper Scuba S1 review: four-zone cleaning including 12-inch ledges, a " +
+      "runtime Aiper states two different ways, and the listing we refuse to link " +
+      "to.",
     verdict:
       "Aiper's mid-range all-rounder: cordless, wall-climbing, waterline-scrubbing, with the " +
       "flagships' 3-micron filtration and a shallow-ledge claim most robots cannot make. Held " +
@@ -1458,7 +1469,8 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "BuBlue Bubot 800P Gen2 review",
     seoTitle: "BuBlue Bubot 800P Review — Gen2, Corded, So It Never Quits",
     metaDescription:
-      "Corded four-zone cleaning that never runs out of battery. What BuBlue actually publishes, and what its shallow-water claim really means in a pool.",
+      "Our BuBlue Bubot 800P review: corded four-zone cleaning that never runs " +
+      "out of battery, and what its shallow-water claim really means in a pool.",
     verdict:
       "The corded contrarian of the upper mid-range: unlimited mains power, floor-wall-waterline " +
       "coverage plus steps, published figures many bigger brands withhold, and a stated one-year " +
@@ -1615,7 +1627,8 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "WYBOT C1 review",
     seoTitle: "WYBOT C1 Review — Waterline Cleaning at the Budget End",
     metaDescription:
-      "Floor, wall and waterline cleaning at the budget end, and a weekly timer that splits one charge into four cleans. Plus the listing history to know.",
+      "Our WYBOT C1 review: floor, wall and waterline cleaning at the budget end, " +
+      "and a weekly timer that splits one charge into four separate cleans.",
     verdict:
       "The best budget case in our catalogue for a pool with walls worth climbing: " +
       "floor-wall-waterline coverage, a genuinely useful weekly cycle timer and a stated " +
@@ -1763,7 +1776,8 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "Beatbot AquaSense 2 Ultra review",
     seoTitle: "Beatbot AquaSense 2 Ultra Review — Five Jobs, One Robot",
     metaDescription:
-      "Five jobs in one machine, including surface skimming and clarification, a camera that maps your pool, and a three-year warranty that changes the sums.",
+      "Our Beatbot AquaSense 2 Ultra review: five jobs in one machine, a camera " +
+      "that maps your pool, and a three-year warranty that changes the sums.",
     verdict:
       "The ceiling of our catalogue: floor, walls, waterline, surface skimming and a " +
       "clarification system nobody else attempts, behind a pool-mapping camera stack and an " +
@@ -1967,7 +1981,9 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "ECOVACS WINBOT W2 PRO Omni review",
     seoTitle: "ECOVACS WINBOT W2 PRO Omni Review — The Cordless One",
     metaDescription:
-      "The only window robot here that works away from a socket. What the battery station buys, what it does not, and why the W2 PRO is the better buy for most houses.",
+      "The WINBOT W2 PRO Omni is the only window robot here that works away from " +
+      "a socket. What the battery station buys, and when the W2 PRO is the better " +
+      "buy.",
     verdict:
       "The only machine in our catalogue that cleans a window nowhere near a plug. That is the whole product — on glass it is a good mid-range robot whose suction is inside the same tolerance range as the cheaper W2 PRO.",
     bestFor:
@@ -2032,7 +2048,9 @@ export const REVIEWS: Record<string, ReviewContent> = {
     seoTitle:
       "ECOVACS WINBOT W2 PRO Review — The Default WINBOT",
     metaDescription:
-      "The flagship without the battery station, and on glass the difference sits inside ECOVACS's own tolerance. When the Omni is worth the premium.",
+      "The WINBOT W2 PRO is the flagship without the battery station, and on " +
+      "glass the difference sits inside ECOVACS's own tolerance. When the Omni is " +
+      "worth it.",
     verdict:
       "The WINBOT most people should buy: the same navigation, nozzles, tank and modes as the flagship, with suction inside an overlapping tolerance range, minus a 5.5 kg battery station most houses will never need.",
     bestFor:
@@ -2113,7 +2131,8 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "ECOVACS WINBOT W1 PRO review",
     seoTitle: "ECOVACS WINBOT W1 PRO Review — The Cheap Way In",
     metaDescription:
-      "Half the suction of the W2 PRO, three modes instead of seven, and a power-off hold ECOVACS will not put a number on. Who it is genuinely right for.",
+      "The WINBOT W1 PRO has half the suction of the W2 PRO, three modes instead " +
+      "of seven, and a power-off hold ECOVACS will not put a number on.",
     verdict:
       "The cheapest way into a brand with a real service operation behind it, and honest about being the entry model: 2,800 Pa, three modes, a dual cross nozzle, and the only WINBOT whose power-off hold is claimed without a published duration.",
     bestFor:
@@ -2208,7 +2227,8 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "HUTT S55 Pro review",
     seoTitle: "HUTT S55 Pro Review — The Only One Claiming Sloped Glass",
     metaDescription:
-      "The only window robot here claiming inclined glass: 6,500 Pa stated, an 80 ml tank, and a specification we could not verify. Read the gaps first.",
+      "The HUTT S55 Pro is the only window robot here claiming inclined glass: " +
+      "6,500 Pa stated, an 80 ml tank, and a specification we could not verify.",
     verdict:
       "The only machine in our catalogue claiming sloped glass, which is the whole reason it is here. Strong stated numbers — 6,500 Pa, an 80 ml tank, a HydroJet pump — and not one of them confirmed by HUTT's own published page.",
     bestFor:
@@ -2281,7 +2301,9 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "Mamibot W120-DP review",
     seoTitle: "Mamibot W120-DP Review — The Non-ECOVACS Option",
     metaDescription:
-      "Four nozzles, a 60 ml tank and 3,200 Pa stated, from the third brand in the catalogue. What the high-rise rating does and does not tell you.",
+      "The MAMIBOT W120-DP has four nozzles, a 60 ml tank and 3,200 Pa stated, " +
+      "from the third brand in the catalogue. What the high-rise rating does not " +
+      "tell you.",
     verdict:
       "A reasonable mid-price alternative in a catalogue six-elevenths owned by ECOVACS, with a proper four-nozzle spray spread. The high-rise wording is positioning rather than a specification — the figure that would justify it is not published.",
     bestFor:
@@ -2355,7 +2377,9 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "HOBOT 2S review",
     seoTitle: "HOBOT 2S Review — Two Tanks, and No Published Suction",
     metaDescription:
-      "Ultrasonic spray and two replaceable water tanks, which is a real advantage nothing else here offers. Also no published suction figure at all — what that means.",
+      "The HOBOT 2S has ultrasonic spray and two replaceable water tanks, a real " +
+      "advantage nothing else here offers. Also no published suction figure at " +
+      "all.",
     verdict:
       "Two replaceable water tanks and an ultrasonic atomiser instead of pumped nozzles. The tanks are a concrete advantage nothing else here offers; the spray advantage is a claim nobody has measured, and HOBOT publishes no suction figure at all.",
     bestFor:
@@ -2431,7 +2455,9 @@ export const REVIEWS: Record<string, ReviewContent> = {
     seoTitle:
       "HOBOT 298 Review — Ultrasonic Spray, Few Published Specs",
     metaDescription:
-      "The cheaper HOBOT and the machine we know least about in the whole catalogue. What it offers, and why we would point a first-time buyer elsewhere.",
+      "The HOBOT 298 is the cheaper HOBOT and the machine we know least about in " +
+      "the catalogue. What it offers, and why a first-time buyer should look " +
+      "elsewhere.",
     verdict:
       "The cheaper HOBOT, using the same ultrasonic spray as the 2S without its two replaceable tanks. It is the machine we know least about in this catalogue, and this review is short because padding it would misrepresent that.",
     bestFor:
@@ -2506,7 +2532,8 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "Cop Rose X5S review",
     seoTitle: "Cop Rose X5S Review — No App, and Framed Glass Only",
     metaDescription:
-      "The cheapest machine here, and the only one with a remote instead of an app. Also the only one not rated for frameless glass, which decides it.",
+      "The COP ROSE X5S is the cheapest machine here, and the only one with a " +
+      "remote instead of an app. Also the only one not rated for frameless glass.",
     verdict:
       "The cheapest machine in the catalogue and the only one with no app at all — a remote control instead, which for the right buyer is the feature rather than the compromise. It is also the only one rated for framed glass only.",
     bestFor:
@@ -2909,8 +2936,8 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "Eilik robot review",
     seoTitle: "Eilik Robot Review — The 1.5-Hour Battery Nobody Mentions",
     metaDescription:
-      "A $139.99 desk robot with real character, a 90-day warranty and 90 minutes of " +
-      "battery. What Eilik does, what the DQ adds, and whether two is better.",
+      "The Eilik robot: $139.99, real character, a 90-day warranty and 90 minutes " +
+      "of battery. What Eilik does, what the DQ adds, and whether two is better.",
     verdict:
       "The most personality per dollar in this category and the shortest battery life in it. Eilik is a desk toy that reacts to being touched and to another Eilik, with no subscription and no cloud account, and it runs for about ninety minutes between charges.",
     bestFor:
@@ -3020,8 +3047,8 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "Loona robot review",
     seoTitle: "Loona Robot Review — 90 Minutes of Play for $499",
     metaDescription:
-      "The most capable robot pet you can buy, and it charges longer than it plays. " +
-      "What $499 gets you, what the camera adds, and the battery nobody mentions.",
+      "The Loona robot is the most capable robot pet you can buy, and it charges " +
+      "longer than it plays. What $499 gets you, and the battery nobody mentions.",
     verdict:
       "The most capable machine in this category and the hardest to justify on paper. Loona sees, recognises faces and gestures, follows you, talks back, plays fetch and doubles as a home camera — for 90 minutes, after which it needs 2.5 hours on its dock.",
     bestFor:
@@ -3121,8 +3148,9 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "Cozmo robot review",
     seoTitle: "Cozmo Robot Review — Why You Cannot Buy One",
     metaDescription:
-      "Cozmo is listed at $399.99 with no stock and no ship date, and Pennsylvania is " +
-      "suing the seller over 14,000 unfulfilled orders. What to buy instead.",
+      "The Cozmo robot is listed at $399.99 with no stock and no ship date, and " +
+      "Pennsylvania is suing the seller over 14,000 unfulfilled orders. What to " +
+      "buy instead.",
     verdict:
       "A good robot from a company you should not send money to. Digital Dream Labs lists Cozmo 2.0 at $399.99 with no stock and no ship date, and the Pennsylvania Attorney General sued the company and its chief executive in September 2024 over roughly 14,000 prepaid orders that were never fulfilled.",
     bestFor:
@@ -3176,8 +3204,8 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "Moxie robot review",
     seoTitle: "Moxie Robot Review — It Stopped Working in 2025",
     metaDescription:
-      "Embodied shut down and Moxie's servers went off, mostly without refunds. What a " +
-      "used one can and cannot do on the community server, and what to buy instead.",
+      "Embodied shut down and the Moxie robot's servers went off, mostly without " +
+      "refunds. What a used one can still do, and what to buy instead.",
     verdict:
       "An $800 child's companion that stopped working when its maker ceased operations, with no refund for most owners. What survives runs on OpenMoxie — a community server you host yourself, with an OpenAI bill attached and some of the original content missing.",
     bestFor:
@@ -3257,8 +3285,9 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "Living.AI EMO robot review",
     seoTitle: "EMO Robot Review — And Why Amazon Sells Fakes",
     metaDescription:
-      "EMO is not sold on Amazon in the US, and searching for it returns copies. What " +
-      "the real Living.AI EMO does, and what to buy instead if you want it now.",
+      "The EMO robot is not sold on Amazon in the US, and searching for it " +
+      "returns copies. What the real Living.AI EMO does, and what to buy instead " +
+      "right now.",
     verdict:
       "The desktop robot everything else in this category gets compared against, and the hardest one to actually buy. Living.AI sells EMO directly and does not list it on Amazon in the US, so searching for it there returns imitations rather than the product.",
     bestFor:
@@ -3482,8 +3511,8 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "Enabot EBO Air 2 review",
     seoTitle: "Enabot EBO Air 2 Review — And Which One to Buy",
     metaDescription:
-      "A $149 camera that drives itself around your house. What the Air 2 does, how it " +
-      "differs from the 2S and the Plus, and why the original Air is gone.",
+      "The EBO Air 2 is a $149 camera that drives itself around your house. How " +
+      "it differs from the 2S and the Plus, and why the original Air is gone.",
     verdict:
       "A 2K camera on tracked wheels that you drive from your phone and that parks itself when the battery runs low. At $149 it is the one to buy in Enabot's range, and the more expensive models buy resolution and chat rather than a better robot.",
     bestFor:
@@ -3589,8 +3618,8 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "Enabot EBO SE review",
     seoTitle: "Enabot EBO SE Review — The $119 One That Fits Under",
     metaDescription:
-      "The cheapest driving pet camera Enabot sells. 1080p, 360-degree view, no " +
-      "subscription, and small enough to go under the sofa. What you give up.",
+      "The EBO SE is the cheapest driving pet camera Enabot sells: 1080p, a " +
+      "360-degree view, no subscription, and small enough to go under the sofa.",
     verdict:
       "The entry point, and the one that gets under furniture. 1080p instead of 2K and no emoticon face, but it drives, talks, sees in the dark and docks itself for $30 less than the Air 2.",
     bestFor:
@@ -3688,8 +3717,9 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "Enabot ROLA PetPal review",
     seoTitle: "Enabot ROLA PetPal Review — Treats On Wheels",
     metaDescription:
-      "The only pet camera robot that drives to your dog and gives it a treat. What the " +
-      "dispenser adds over a Furbo, and what the modular design costs.",
+      "The ROLA PetPal is the only pet camera robot that drives to your dog and " +
+      "gives it a treat. What the dispenser adds over a Furbo, and what " +
+      "modularity costs.",
     verdict:
       "The one machine that combines a treat dispenser with a camera that moves. Furbo throws treats from a shelf and Enabot's other models drive without treats — this does both, at 2.5K, for $179.",
     bestFor:
@@ -3794,7 +3824,9 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "Sphero BOLT review",
     seoTitle: "Sphero BOLT Review — The One That Grows With Them",
     metaDescription:
-      "A $179 coding ball that starts with drawing and ends in Python. Whether BOLT is worth three times a Sphero Mini, and who outgrows it.",
+      "The Sphero BOLT is a $179 coding ball that starts with drawing and ends in " +
+      "Python. Whether it is worth three times a Sphero Mini, and who outgrows " +
+      "it.",
     verdict:
       "The one robot here a child does not outgrow in a year. BOLT starts with drawing a path on a screen and ends with real Python, and the LED matrix is what makes the middle step — block coding — feel like it produces something rather than just moving a ball.",
     bestFor:
@@ -3881,7 +3913,8 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "Sphero Mini review",
     seoTitle: "Sphero Mini Review — The Cheap Way to Find Out",
     metaDescription:
-      "A $50 coding ball the size of a ping-pong ball, running the same app as the $179 BOLT. What the one-hour battery costs you.",
+      "The Sphero Mini is a $50 coding ball the size of a ping-pong ball, running " +
+      "the same app as the $179 BOLT. What the one-hour battery costs you.",
     verdict:
       "The cheapest honest way to find out whether a child likes coding. It runs the same Sphero Edu app as the BOLT — the same drawing, blocks and text — in a ball the size of a ping-pong ball, and it lasts about an hour between charges.",
     bestFor:
@@ -3972,7 +4005,8 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "Sphero indi review",
     seoTitle: "Sphero indi Review — Coding With No Screen At All",
     metaDescription:
-      "A $100 robot a four-year-old programs with coloured cards and no screen. What indi teaches, and the age it stops working.",
+      "The Sphero indi is a $100 robot a four-year-old programs with coloured " +
+      "cards and no screen. What indi teaches, and the age it stops working.",
     verdict:
       "The one product here that teaches programming without a screen. A four-year-old lays coloured cards on the floor, indi drives over them and does what each colour says, and that is a program — cause, effect and sequence, with nothing to log into.",
     bestFor:
@@ -4057,7 +4091,8 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "Ozobot Evo review",
     seoTitle: "Ozobot Evo Review — 700 Lessons and a Marker Pen",
     metaDescription:
-      "A $175 coding robot that reads lines drawn in felt-tip. What the Evo Entry Kit includes, and why it is built for a classroom.",
+      "The Ozobot Evo is a $175 coding robot that reads lines drawn in felt-tip. " +
+      "What the Evo Entry Kit includes, and why it is built for a classroom.",
     verdict:
       "A robot that follows lines you draw and obeys colour codes written in marker pen, with a block-coding app behind it carrying five skill levels and over 700 free lessons. It is built for a classroom and it works at a kitchen table.",
     bestFor:
@@ -4147,7 +4182,8 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "Makeblock mBot review",
     seoTitle: "Makeblock mBot Review — Build It, Then Code It",
     metaDescription:
-      "A $69 robot a child assembles in about 15 minutes and then programs in Scratch. The cheapest way into real electronics.",
+      "The Makeblock mBot is a $69 robot a child assembles in about 15 minutes " +
+      "and then programs in Scratch. The cheapest way into real electronics.",
     verdict:
       "The only one here that arrives in pieces, and that is the point. A child builds it in about a quarter of an hour, learns what the parts do while doing it, and then programs the result in Scratch. Nothing else at this price teaches the hardware as well as the code.",
     bestFor:
@@ -4214,7 +4250,9 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "Joy For All Companion Pet Cat review",
     seoTitle: "Joy For All Companion Pet Cat Review — Batteries, Not Wi-Fi",
     metaDescription:
-      "A $159 robotic cat with four C batteries, no app and no account. Why the least technological product here is the one most likely to get used.",
+      "The Joy For All Companion Pet cat: $159, four C batteries, no app and no " +
+      "account. Why the least technological product here is the one most likely " +
+      "to get used.",
     verdict:
       "The least technological thing on this site and the one most likely to be used every day by the person it was bought for. No app, no account, no dock — four C batteries and a purr you feel through the fur. Designed for one reader and honest about it.",
     bestFor:
@@ -4290,7 +4328,8 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "ECOVACS WINBOT W3 Omni review",
     seoTitle: "ECOVACS WINBOT W3 Omni Review — The Strongest Grip Here",
     metaDescription:
-      "10,000 Pa maximum and 3,300 Pa moving, on the dearest window robot we hold. Who the extra suction is for, and who should buy the W2 PRO Omni.",
+      "The WINBOT W3 Omni claims 10,000 Pa maximum and 3,300 Pa moving, on the " +
+      "dearest window robot we hold. Who the extra suction is genuinely for.",
     verdict:
       "The strongest grip in this catalogue and the biggest tank, on the most expensive window robot we hold. Both are real and both are margin rather than a cleaner pane \u2014 which makes this a machine for genuinely large glass and nobody else.",
     bestFor:
@@ -4402,7 +4441,9 @@ export const REVIEWS: Record<string, ReviewContent> = {
     seoTitle:
       "WINBOT W2S Review — Edge Scrubbers, No Published Suction",
     metaDescription:
-      "TruEdge scrubbers instead of six spray nozzles. Why the edge is a real complaint, and why no published suction figure is the reason to hesitate.",
+      "The WINBOT W2S has TruEdge scrubbers instead of six spray nozzles. Why the " +
+      "edge is a real complaint, and why no published suction figure is a reason " +
+      "to wait.",
     verdict:
       "One specific bet: that the border of the pane bothers you more than the middle. If it does, this is the only machine here built for that. If it does not, ECOVACS publishes less about this model than any other WINBOT and that is the reason to walk past it.",
     bestFor:
@@ -4458,7 +4499,8 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "ECOVACS WINBOT Mini review",
     seoTitle: "ECOVACS WINBOT Mini Review — Small Panes, Odd Suction Figure",
     metaDescription:
-      "7,500 Pa on the cheapest WINBOT, higher than machines costing three times as much. What that number means, and why size is the real reason to buy.",
+      "The WINBOT Mini claims 7,500 Pa, higher than machines costing three times " +
+      "as much. What that number means, and why size is the real reason to buy.",
     verdict:
       "The machine for a window every other robot here is too big for, at the lowest price in the range. Its headline suction beats the flagships and that comparison is not what it looks like \u2014 buy it for the size, and take the grip as a bonus.",
     bestFor:
@@ -4634,8 +4676,9 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "eufy X10 Pro Omni review",
     seoTitle: "eufy X10 Pro Omni Review — 12mm of Lift for $450",
     metaDescription:
-      "Vacuums, mops, lifts the pads 12mm off carpet and empties itself, for $449.99. " +
-      "What the lift really clears, and why 8,000 Pa is the wrong number to compare on.",
+      "The eufy X10 Pro Omni vacuums, mops, lifts the pads 12mm and empties " +
+      "itself for $449.99. What the lift clears, and why 8,000 Pa is the wrong " +
+      "comparison.",
     verdict:
       "The machine most people asking about robot vacuums should look at first. It vacuums, it mops, the pads lift 12mm onto carpet, it empties itself into the tower and it looks at the floor with a camera. At $449.99 with 39,206 ratings at 4.6 stars behind it, nothing else in the category offers that combination of capability, price and evidence.",
     bestFor:
@@ -4719,8 +4762,9 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "eufy Omni S1 Pro review",
     seoTitle: "eufy S1 Pro Review — Read the Price Twice",
     metaDescription:
-      "The biggest search term in the category, and the lowest-rated machine we hold. " +
-      "No price in the search row, 3.2 stars, and eufy's own range has moved on.",
+      "The eufy S1 Pro is the biggest search term in the category and the " +
+      "lowest-rated machine we hold. No price in the search row, 3.2 stars, and a " +
+      "range moved on.",
     verdict:
       "A self-washing roller mop on a machine the rest of eufy's range has overtaken. It is rated 3.2 from 776 ratings, the lowest of the eleven vacuums we catalogue by a distance, its Amazon search row carries no price at all, and at $919.58 it sits between a better-rated flagship and a cheaper machine using its own headline technology. The roller is a good idea. This is not the machine to buy it on.",
     bestFor:
@@ -4811,8 +4855,9 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "roborock S8 MaxV Ultra: what Amazon actually sells",
     seoTitle: "roborock S8 MaxV Ultra — What Amazon Actually Sells",
     metaDescription:
-      "The S8 MaxV Ultra has no Amazon US listing — only accessory kits. This is what " +
-      "roborock sells instead: 20mm of mop lift, structured-light seeing, $949.99.",
+      "The roborock S8 MaxV Ultra has no Amazon US listing — only accessory kits. " +
+      "This is what roborock sells instead: 20mm of mop lift, structured light, " +
+      "$949.99.",
     verdict:
       "Twenty millimetres of mop lift, the largest figure of the eleven vacuums we catalogue, with structured-light obstacle avoidance and a dock that empties mid-clean. It also carries the traffic for a term that names a different machine: the S8 MaxV Ultra has no first-party listing on Amazon US at all. At $949.99 the extra over a $449.99 eufy buys lift height, a better dock and better seeing.",
     bestFor:
@@ -4894,8 +4939,9 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "roborock Saros 10 review",
     seoTitle: "roborock Saros 10 Review — The Only Deep-Pile Answer",
     metaDescription:
-      "The one machine we catalogue whose maker makes a high-pile carpet claim: the chassis " +
-      "lifts 10mm and the mop detaches. $1,299.99, and almost nobody needs it.",
+      "The roborock Saros 10 is the one machine we hold whose maker claims high " +
+      "pile: the chassis lifts 10mm and the mop detaches. $1,299.99, and few need " +
+      "it.",
     verdict:
       "The only robot vacuum in our catalogue whose manufacturer says anything about deep pile. The chassis lifts 10mm on high-pile carpet and the mop detaches entirely in vacuum-only modes, which is different engineering from raising a pad. At $1,299.99 it is the most expensive machine here by $350, and for a house of hard floor and ordinary carpet it does nothing a $449.99 machine does not.",
     bestFor:
@@ -4953,8 +4999,9 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "roborock Qrevo S5V review",
     seoTitle: "roborock Qrevo S5V Review — Which Qrevo You Get",
     metaDescription:
-      "Qrevo is four machines from $499.98 to $879.99. The S5V is the cheapest: 10mm mop " +
-      "lift, FlexiArm edge reach, self-emptying dock, and two ASINs you have to pin.",
+      "roborock Qrevo is four machines from $499.98 to $879.99. The S5V is the " +
+      "cheapest: 10mm mop lift, FlexiArm edge reach, and two ASINs you have to " +
+      "pin.",
     verdict:
       "The cheapest entry to roborock's Qrevo line, with the FlexiArm edge reach that is the range's real argument and 10mm of mop lift. Fifty dollars more than the eufy X10 Pro Omni for the same four capabilities, a better edge reach and a review pool a twentieth the size. The trap is the name: Qrevo covers four machines across a $380 spread.",
     bestFor:
@@ -5037,8 +5084,9 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "Dreame X40 Ultra review",
     seoTitle: "Dreame X40 Ultra Review — A Gap We Could Not Close",
     metaDescription:
-      "Liftable mop, extending side brush, a dock that refills itself, $599.99. And no " +
-      "obstacle-avoidance claim anywhere we could read, which is why we record none.",
+      "The Dreame X40 Ultra has a liftable mop, an extending side brush and a " +
+      "self-refilling dock for $599.99. And no obstacle-avoidance claim we could " +
+      "read.",
     verdict:
       "A full sheet for six hundred dollars — a mop that lifts and detaches, a side brush that extends into corners, a washboard that scrubs the pads at 158°F, and a dock that empties the bin and refills the tank. What is missing is any obstacle-avoidance claim on the only page we could read, and dreame's own pages returned 404 to every URL we tried, so our record shows none.",
     bestFor:
@@ -5120,8 +5168,9 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "Dreame X50 Ultra review",
     seoTitle: "Dreame X50 Ultra Review — It Climbs, But Does It Lift?",
     metaDescription:
-      "6cm of obstacle crossing is the only claim like it we catalogue. Crossing is not " +
-      "mop lifting, dreame's own page would not load, and we record what we read.",
+      "The Dreame X50 Ultra claims 6cm of obstacle crossing, the only claim like " +
+      "it we catalogue. Crossing is not mop lifting, and we record only what we " +
+      "read.",
     verdict:
       "The only machine we catalogue claiming to climb a 6cm step, which makes it the answer for a house with a raised threshold the robot has to get over. It claims obstacle avoidance and 20,000 Pa. It does not claim mop lifting anywhere we could read — obstacle crossing is step climbing and not the same thing — so our record shows none, and at $999.99 that is a gap worth closing before you buy.",
     bestFor:
@@ -5216,8 +5265,9 @@ export const REVIEWS: Record<string, ReviewContent> = {
        on it does not serve the search that brings people here. */
     seoTitle: "ECOVACS DEEBOT T90 PRO Omni Review — 15mm of Lift",
     metaDescription:
-      "A mop roller that cleans itself as it runs, lifting 15mm on carpet, with a dock rated " +
-      "at 90 days. And 30,000 Pa, which is the number not to buy it for.",
+      "The ECOVACS DEEBOT T90 PRO Omni has a self-cleaning mop roller, lifts 15mm " +
+      "on carpet and docks for 90 days. And 30,000 Pa, the number not to buy it " +
+      "for.",
     verdict:
       "A self-cleaning mop roller that stays wet with clean water for a whole run, lifting 15mm onto carpet, with AIVI 3D obstacle recognition and a dock ECOVACS rates at ninety days. The 30,000 Pa on the front of the box is close to meaningless; the roller, the lift and the dock interval are what six hundred dollars actually buys, and the capability record here is one of the fullest we hold.",
     bestFor:
@@ -5310,8 +5360,9 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "Shark PowerDetect AV2820S review",
     seoTitle: "Shark PowerDetect AV2820S Review — It Does Not Mop",
     metaDescription:
-      "The self-empty vacuum, not the vacuum-and-mop sharing its name fifty dollars away. " +
-      "3D object detection, a 30-day HEPA base, $549.99, and no water tank.",
+      "The Shark PowerDetect self-empty vacuum, not the vacuum-and-mop sharing " +
+      "its name fifty dollars away. 3D object detection, a 30-day HEPA base, no " +
+      "water tank.",
     verdict:
       "A vacuum, and only a vacuum. The near-identically named PowerDetect NeverTouch Pro fifty dollars away is the one that mops, and nothing on either listing will stop you buying the wrong one. What this machine has is 3D object detection — the capability that separates driving round a charging cable from eating it — plus four kinds of floor sensing and a base rated at thirty days.",
     bestFor:
@@ -5404,8 +5455,9 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "Shark Matrix robot vacuum review: the Matrix Plus UR2650WS",
     seoTitle: "Shark Matrix Robot Vacuum — Which of the Two You Get",
     metaDescription:
-      "The cheapest good robot vacuum with a self-emptying base, and the two things $280 " +
-      "costs you: the mop pad does not lift, and LiDAR maps rather than sees.",
+      "The Shark Matrix robot vacuum is the cheapest here with a self-emptying " +
+      "base, and $280 costs you two things: no mop lift, and LiDAR that maps " +
+      "rather than sees.",
     verdict:
       "Thirty-five thousand nine hundred and seventeen ratings at 4.6 stars for $279.99, which no other machine in this catalogue comes near on either figure. Two things are missing and they are the two the dearer machines sell: the mop pad attaches by hand and never lifts, and 360° LiDAR maps the room without recognising anything in it. On a clear floor, neither may cost you anything.",
     bestFor:
@@ -5497,8 +5549,9 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "iRobot Roomba Max 705 review",
     seoTitle: "Roomba Max 705 Review — Two Machines, One Name",
     metaDescription:
-      "The $499 vacuum and the $799 Combo share a name and one extra word. The cheaper one " +
-      "is rated 4.3 against the Combo's 3.6, and it does not mop.",
+      "Two machines are called Roomba Max 705. The $499 vacuum is rated 4.3 " +
+      "against the $799 Combo's 3.6, and it does not mop. One extra word " +
+      "separates them.",
     verdict:
       "Rubber anti-tangle brushes, LiDAR navigation, anti-fall detection and a dock that empties itself, for $499. It does not mop, and the machine that does — the Roomba Max 705 Combo, one word and three hundred dollars away — is rated 3.6 against this one's 4.3 by a review pool six times the size. The brushes are the reason to choose this over a Shark at the same money.",
     bestFor:
@@ -5593,8 +5646,9 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "Litter-Robot 4 review",
     seoTitle: "Litter-Robot 4 Review — The Entry Size Nobody Compares",
     metaDescription:
-      "Takes cats 3 to 25 lb through the widest door in the category. What $699 buys, " +
-      "which part of the health tracking is paid for, and who should buy elsewhere.",
+      "The Litter-Robot 4 takes cats 3 to 25 lb through the widest door in the " +
+      "category. What $699 buys, and which part of the health tracking is paid " +
+      "for.",
     verdict:
       "The biggest opening in the category, at 15.75 inches square, and the widest stated cat weight range at 3 to 25 lb. It takes ordinary clumping clay from any shop, which is the running-cost difference that matters against the sealed-tray systems. What the pitch does not make obvious is that the health tracking shows seven days free and gates two years of history behind Whisker+ — the tracking is real, the long view is the paid product.",
     bestFor:
@@ -5667,8 +5721,9 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "PETKIT Purobot Max Pro 2 review",
     seoTitle: "PETKIT Purobot Max Pro 2 Review — It Knows Which Cat",
     metaDescription:
-      "Facial recognition for up to 15 cats, urine pH from the clump, two-year warranty, " +
-      "$509.99. And a door five inches narrower than the box it undercuts.",
+      "The PETKIT Purobot Max Pro 2 does facial recognition for up to 15 cats and " +
+      "urine pH from the clump, $509.99. And a door five inches narrower than its " +
+      "rival.",
     verdict:
       "The only litter box here that knows which cat just used it — 210-degree camera, facial recognition for up to fifteen animals, individual health profiles and clump analysis for urine pH. In a two-cat house that is the difference between a smeared visit log and an early warning that actually arrives. The catch is the door: 10.51 inches wide against the Litter-Robot's 15.75, on a machine called Max.",
     bestFor:
@@ -5753,8 +5808,9 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "Casa Leo Leo's Loo Too review",
     seoTitle: "Casa Leo Leo's Loo Too Review — The Only Kitten Box",
     metaDescription:
-      "Works with cats as light as 1 lb, where every rival gives up around three. Also " +
-      "the lowest ceiling here at 20 lb — and we had that wrong until today.",
+      "Leo's Loo Too works with cats as light as 1 lb, where every rival gives up " +
+      "around three. Also the lowest ceiling here at 20 lb — and we had that " +
+      "wrong.",
     verdict:
       "The only automatic litter box in our catalogue that detects a cat under three pounds — Casa Leo states it works with cats as light as 1 lb, where Whisker's minimum is 3 and PETKIT's is 3.3. That makes it the answer for a kitten and nothing else is. It is also the lowest ceiling of the four at 20 lb, and the only one that does not publish its entry size, which is the figure that decides whether a big cat uses it.",
     bestFor:
@@ -5840,8 +5896,8 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "PetSafe ScoopFree Crystal Pro review",
     seoTitle: "PetSafe ScoopFree Crystal Pro Review — 3.1 Stars",
     metaDescription:
-      "A third the price of the boxes beside it, thirty days hands-free, and rated a full " +
-      "star below all three. Plus a tray you are tied to for as long as you own it.",
+      "The PetSafe ScoopFree Crystal Pro is a third the price of the boxes beside " +
+      "it and rated a full star below all three. Plus a tray you are tied to.",
     verdict:
       "Thirty days untouched is the longest interval of the four boxes here and a real advantage, and $229.99 is a third of what the others cost. Two things go with that: it works only with PetSafe's own crystal trays for the life of the machine, and it is rated 3.1 stars from 184 ratings against 4.4, 4.0 and 4.0 for the rest. A comparison site that prints the price and omits the score is not doing the job.",
     bestFor:
@@ -5973,8 +6029,8 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "Husqvarna Automower 410iQ review",
     seoTitle: "Husqvarna Automower 410iQ Review — Two Area Figures",
     metaDescription:
-      "The only maker here that publishes a rated area twice: half an acre if your lawn is " +
-      "a sensible shape, a quarter if it is not. Plus a four-year warranty.",
+      "The Husqvarna Automower 410iQ is the only mower here with two rated areas: " +
+      "half an acre if your lawn is a sensible shape, a quarter if it is not.",
     verdict:
       "The only mower in this catalogue whose maker publishes two working-area figures — half an acre systematically, a quarter acre in irregular patterns — which is the most honest line on any lawn spec sheet we read. It is also the only one that can fall back to a physical boundary wire when satellites disappoint, and the only one with a four-year warranty. At $2,499.99 it is dear, and 45% is half the slope the all-wheel-drive machines manage.",
     bestFor:
@@ -6092,8 +6148,9 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "Mammotion LUBA 3 AWD review: 1500H and 3000H",
     seoTitle: "Mammotion LUBA 3 AWD Review — 1500H vs 3000H, 80% Slopes",
     metaDescription:
-      "Both LUBA 3 AWD sizes in one place: 80% slopes on all four wheels, LiDAR " +
-      "rather than satellites, and the sum that decides 1500H against 3000H.",
+      "Both Mammotion LUBA 3 AWD sizes in one place: 80% slopes on all four " +
+      "wheels, LiDAR rather than satellites, and the sum that decides 1500H " +
+      "against 3000H.",
     verdict:
       "Eighty per cent slopes on all-wheel drive, roughly double what most of this category manages, with 360-degree LiDAR and AI vision rather than satellite positioning alone — the pairing that matters, because steep gardens are often wooded gardens. Two sizes: the 1500H covers 0.37 acre for $2,399 and the 3000H covers 0.75 for $2,799. The ground is not what you are paying for, and on a flat lawn either one is dead weight you are financing.",
     bestFor:
@@ -6217,8 +6274,9 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "Dreame A3 AWD 1000 review",
     seoTitle: "Dreame A3 AWD 1000 Review — 80% Slopes for $1,600",
     metaDescription:
-      "The cheapest way to climb a bank here, on LiDAR rather than satellites. A quarter " +
-      "acre is the ceiling, and the product the brief asked for does not exist.",
+      "The Dreame A3 AWD 1000 is the cheapest way to climb a bank here, on LiDAR " +
+      "rather than satellites. A quarter acre is the ceiling, and 80% is the " +
+      "slope.",
     verdict:
       "Eighty per cent slopes for $1,599.99, which is eight hundred dollars less than the only other machine here that climbs like this. It navigates on 360-degree 3D LiDAR and binocular vision rather than satellites, so a canopy does not defeat it, and it cuts from 1.2 to 3.9 inches — a wider range than anything else at its price. The ceiling is a quarter acre, and on flat ground the all-wheel drive is the whole reason for the premium.",
     bestFor:
@@ -6308,8 +6366,9 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "WORX Landroid Vision WR320 review",
     seoTitle: "WORX Landroid Vision WR320 Review — Half an Acre, $1,023",
     metaDescription:
-      "Camera navigation, no antenna, half an acre — for forty per cent of what the " +
-      "Husqvarna rated for the same ground costs. And no published runtime at all.",
+      "The WORX Landroid Vision WR320 uses a camera, no antenna, and covers half " +
+      "an acre for forty per cent of the Husqvarna price. No published runtime at " +
+      "all.",
     verdict:
       "Half an acre for $1,022.54, navigated by camera rather than satellite, which is the right technology for a garden with trees and the reason this is comfortably the best value in the catalogue for a flat lawn. What WORX does not publish is anything about the battery — no capacity, no runtime, no charge time — on a machine rated for a lot of ground, and at thirty per cent it is not a slope mower.",
     bestFor:
@@ -6396,8 +6455,9 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "Segway Navimow i110N review",
     seoTitle: "Segway Navimow i110N Review — The Data Is Included",
     metaDescription:
-      "Network RTK with no antenna to mount and no subscription — Segway provides the " +
-      "cellular data free. A quarter acre for $1,099, and useless under trees.",
+      "The Segway Navimow i110N has Network RTK, no antenna and no subscription — " +
+      "the cellular data is free. A quarter acre for $1,099, and useless under " +
+      "trees.",
     verdict:
       "Network RTK with no local antenna to mount, and Segway states the access is included at no extra cost with the cellular data provided free — which removes both the afternoon of installation and the question of what happens when the free year ends. At $1,099 for a quarter acre that is a clean proposition. It is also satellite-positioned, so a mature canopy is a hard failure rather than a degradation.",
     bestFor:
@@ -6496,8 +6556,9 @@ export const REVIEWS: Record<string, ReviewContent> = {
        all five words even though it costs most of the line. */
     seoTitle: "eufy Robot Lawn Mower E15 Review — We Had This Wrong",
     metaDescription:
-      "Our catalogue said a quarter acre. eufy says 800 m², which is 8,611 sq ft — " +
-      "26% less grass, on a figure that rules machines out rather than ranking them.",
+      "The eufy Robot Lawn Mower E15 is rated at 800 m² — 8,611 sq ft, not the " +
+      "quarter acre our catalogue said. 26% less grass, on a figure that rules " +
+      "mowers out.",
     verdict:
       "Camera-only navigation with no wires, no antenna and no satellites, which is the shortest setup in the category and the right technology for a garden with trees. Everything else about it is at the modest end: eight-inch cut, three-inch ceiling, eighteen degrees of slope and 800 square metres. At $1,199.99 the WORX Landroid Vision covers two and a half times the ground for $177 less using the same kind of navigation, and that is a hard comparison to win.",
     bestFor:

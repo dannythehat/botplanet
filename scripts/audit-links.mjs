@@ -85,9 +85,18 @@ const fail = (rule, where, detail) => failures.push({ rule, where, detail });
    broken link would train everybody to ignore the report. */
 const warn = (rule, where, detail) => warnings.push({ rule, where, detail });
 
+/* Bypass the edge, for the reason recorded at NO_CACHE in audit-seo.mjs: a
+   run straight after a deploy read Cloudflare's cache and reported nineteen
+   already-fixed pages as broken. Headers rather than a query string, so the
+   URL under test stays the URL that ships. */
+const NO_CACHE = {
+  cache: "no-store",
+  headers: { "cache-control": "no-cache", pragma: "no-cache" },
+};
+
 const get = async (url, method = "GET") => {
   try {
-    const r = await fetch(url, { redirect: "manual", method });
+    const r = await fetch(url, { redirect: "manual", method, ...NO_CACHE });
     return { status: r.status, location: r.headers.get("location"), body: method === "GET" ? await r.text() : "" };
   } catch (e) {
     return { status: 0, location: null, body: "", error: String(e) };

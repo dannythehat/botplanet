@@ -127,7 +127,7 @@ export const EDITORIAL: Record<string, EditorialContent> = {
     title: "The best robotic pool cleaners for US pools",
     seoTitle: "The Best Robotic Pool Cleaners (2026) — Ranked by the Job",
     metaDescription:
-      "Nine machines ranked by what they are actually for — floor, walls, waterline, above-ground, big pools and heavy debris. Every pick names who should not buy it.",
+      "The best robotic pool cleaner for each job — floor, walls, waterline, above-ground, big pools and heavy debris. Every pick names who should not buy it.",
     standfirst:
       "There is no single best robotic pool cleaner, and any list that gives you one has decided your pool for you. " +
       "These nine are ranked by the job they do best, and each one says plainly who should not buy it.",
@@ -461,7 +461,7 @@ export const EDITORIAL: Record<string, EditorialContent> = {
     title: "Robotic pool cleaners for above-ground pools",
     seoTitle: "Robotic Pool Cleaners for Above-Ground Pools: Four Qualify",
     metaDescription:
-      "Six of the ten machines we hold are not rated for a vinyl liner at all. The four that are, and why the rating is compatibility rather than performance.",
+      "Which robotic pool cleaner for above ground pools is rated for a vinyl liner: six of the ten we hold are not, and the rating means fit rather than power.",
     standfirst:
       "Most robots are not rated for an above-ground pool, and that is about the liner and the curved join rather than about power. " +
       "Four of the ten cleaners we hold qualify. This is all four, and what actually separates them.",
@@ -563,7 +563,7 @@ export const EDITORIAL: Record<string, EditorialContent> = {
     title: "Are robotic pool cleaners worth it?",
     seoTitle: "Are Robotic Pool Cleaners Worth It? An Honest Answer",
     metaDescription:
-      "For most pools, yes — but not for all of them, and not for the reason the marketing gives. The four cases where a robot is the wrong purchase, stated plainly.",
+      "Are robotic pool cleaners worth it? For most pools yes, but not for the reason the marketing gives. The four cases where one is the wrong purchase.",
     standfirst:
       "For most in-ground pools, yes: the machine buys back an hour a week and it will still be doing it in three years. " +
       "For four specific situations it is the wrong purchase, and those are worth reading before the ones where it is right.",
@@ -648,8 +648,8 @@ export const EDITORIAL: Record<string, EditorialContent> = {
     title: "Wire-free robot lawn mowers: RTK, vision or LiDAR",
     seoTitle: "Wire-Free Robot Lawn Mower: Which System Suits Your Garden",
     metaDescription:
-      "Three navigation technologies sold under one label, and tree cover decides between them. " +
-      "When a buried cable is still the better buy.",
+      "A wire free robot lawn mower is three navigation technologies sold under one label, and " +
+      "tree cover decides between them. When a cable is still better.",
     standfirst:
       "Wire-free is worth paying for when your lawn is going to change, and worth skipping when it is not. " +
       "The three systems sold under that label behave differently under trees, which is the thing that actually decides it.",
@@ -717,8 +717,8 @@ export const EDITORIAL: Record<string, EditorialContent> = {
     title: "Cheap robot lawn mowers: what you give up, and what you do not",
     seoTitle: "Cheap Robot Lawn Mower: What the Low End Actually Costs You",
     metaDescription:
-      "The expensive part of this category is navigation, not cutting. What a budget machine gives up, " +
-      "and where a low price stops being a bargain.",
+      "The expensive part of a cheap robot lawn mower is navigation, not cutting. What a budget " +
+      "machine gives up, and where a low price stops being a bargain.",
     standfirst:
       "The cheapest sensible machine is small, wired and single-zone, and the saving is real — because every mower " +
       "in this category cuts to much the same standard. What you give up is area, zones and slope.",
@@ -785,8 +785,8 @@ export const EDITORIAL: Record<string, EditorialContent> = {
     title: "The best robot lawn mower for hills starts with your gradient",
     seoTitle: "Best Robot Lawn Mower for Hills: Measure the Slope First",
     metaDescription:
-      "Gradient is the one constraint you cannot work around. How to measure yours, what makes a machine " +
-      "climb, and when the answer is no robot.",
+      "The best robot lawn mower for hills is decided by gradient, the one constraint you cannot " +
+      "work around. How to measure yours, and when the answer is none.",
     standfirst:
       "Measure the gradient before you shop for anything else. Area you can compromise on and navigation you can choose, " +
       "but a machine that cannot hold your bank will never learn to.",
@@ -854,8 +854,8 @@ export const EDITORIAL: Record<string, EditorialContent> = {
     title: "Robotic pets for elderly relatives: choosing one honestly",
     seoTitle: "Robotic Pet for Elderly Relatives: How to Choose One",
     metaDescription:
-      "Three products are sold to this buyer and they answer three different problems. What the research " +
-      "supports, and when not to buy at all.",
+      "Three robotic pets for elderly owners are sold as one idea and answer three different " +
+      "problems. What the research supports, and when not to buy at all.",
     standfirst:
       "Buy the simplest machine that fixes the one thing you are actually trying to fix, and buy it for a person rather than " +
       "for a diagnosis. Three quite different products are sold to this reader, and picking the wrong one is the usual mistake.",
@@ -1079,8 +1079,8 @@ export const EDITORIAL: Record<string, EditorialContent> = {
     title: "The best window cleaning robot for your glass, ranked",
     seoTitle: "Best Window Cleaning Robot 2026: Which One Suits Your Glass",
     metaDescription:
-      "Six ranked by the job each does best, plus the two we hold and do not recommend. " +
-      "Frameless glass and a nearby socket decide this before any specification does.",
+      "The best window cleaning robot for each job, plus the two we hold and do not recommend. " +
+      "Frameless glass and a nearby socket decide it before any specification.",
     standfirst:
       "Two questions settle this category and both are about your windows: is the glass frameless, and is there a socket near the ones you actually want cleaned. " +
       "Answer those and the list below shortens to about three.",
@@ -1211,8 +1211,8 @@ export const EDITORIAL: Record<string, EditorialContent> = {
     title: "Do window cleaning robots work?",
     seoTitle: "Do Window Cleaning Robots Work? The Honest Answer",
     metaDescription:
-      "Yes in the middle of the pane, no at the edges. How they hold on, what stops them falling, and " +
-      "four times we would say do not buy.",
+      "Do window cleaning robots work? Yes in the middle of the pane, no at the edges. How they " +
+      "hold on, what stops them falling, and when not to buy one.",
     standfirst:
       "Yes in the middle of the pane, no at the edges — and that one sentence is the whole honest review of this category. " +
       "Whether it is worth it comes down to how much glass you own.",
