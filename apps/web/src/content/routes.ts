@@ -22,6 +22,7 @@ import {
   routes as categoryPaths,
   type LaunchState,
 } from "./nav";
+import { MERGED_REVIEWS } from "./product-names";
 
 export type RouteStatus = LaunchState;
 
@@ -1098,9 +1099,25 @@ export const categoryRoutes = (slug: string) => ({
  * internal links — must come through here. A second hand-written pattern is how
  * ten obsolete `/pool-cleaners/<slug>/` URLs reached the SEO register, and the
  * only durable fix is to leave exactly one place where the shape is decided.
+ *
+ * A MERGED PRODUCT RESOLVES TO THE PAGE THAT COVERS IT, and that has to happen
+ * here rather than at each caller. When the LUBA 3 AWD 3000H's review folded
+ * into the 1500H's, the product itself stayed published — so the category grid
+ * and the comparison table went on linking a URL that answers a 301, which the
+ * link audit caught the same hour. Every one of those surfaces builds its href
+ * from this function; making it merge-aware fixes all of them at once and
+ * makes it impossible for the next merge to reintroduce the same fault.
+ *
+ * The redirect in [slug].astro stays, because an external link or a bookmark
+ * on the old URL still has to land somewhere sensible. What changes is that we
+ * stop spending our own crawl budget on it.
  */
-export const productPath = (productSlug: string, categorySlug: string = LAUNCH_CATEGORY): string =>
-  categoryPaths.product(categorySlug, productSlug);
+export const productPath = (productSlug: string, categorySlug: string = LAUNCH_CATEGORY): string => {
+  const merged = MERGED_REVIEWS[productSlug];
+  return merged
+    ? categoryPaths.product(merged.categorySlug, merged.into)
+    : categoryPaths.product(categorySlug, productSlug);
+};
 
 /** Every alias in the registry, mapped to its canonical destination. */
 export const REDIRECTS: { from: string; to: string }[] = ROUTES.flatMap((r) =>
