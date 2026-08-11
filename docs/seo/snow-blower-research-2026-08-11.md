@@ -308,63 +308,165 @@ ships.
 
 ---
 
-## Go / no-go — revised after verification
+## Adversarial review, and what it broke — 11 August 2026
 
-**NO-GO as a category. GO as three pages under the lawn hub.**
+The verdict below went out for adversarial review. Four of its criticisms
+landed, and this section records them before the corrected verdict rather than
+quietly rewriting history above.
 
-The first draft of this verdict, written before product verification, was
-"GO, conditionally — and the condition is products, not keywords." That
-condition has failed, and it failed harder than expected. There is not one
-buyable machine and a possible second; there is **one manufacturer and no
-second machine at all.** Snowbot, which looked like the independent competitor,
-turns out to be Yarbo's own former brand name — Hanyang Technology of Shenzhen,
-S1 at $1,999 in 2021, S1 Pro at $2,999, now sold as Yarbo. Left Hand Robotics
-was bought by Toro in 2021 and builds commercial sidewalk machines. Every other
-domain in all seven SERPs is a Yarbo dealer.
+### Conceded 1: the stated reason for NO-GO contradicted the Grillbot precedent
 
-The keyword case remains as strong as it looked: ≈22,700/mo of generic robot
-demand at KD 0–9, a decisively commercial SERP with Amazon at position 2, four
-purchase-intent PAA questions, and only 1–2 of 10 shared domains with the
-conventional snow-blower market. None of that is in doubt and none of it is
-what kills this.
+The first verdict said no-go because "all four category surfaces are
+comparative and there is nothing to compare". That is not the bar this site
+actually applies. **006 Grill Cleaning Robots was built as a one-product
+category with its matcher gated off, and it earns** — on generic volume of
+5,400 against snow's 22,700. Applied consistently, Grillbot calibration says
+snow *qualifies*.
 
-What kills it as a *category* is that a category on this site means a hub, a
-comparison table, a BotMatch matcher and a best-of. All four are comparative
-surfaces and there is nothing to compare. `MIN_PRODUCTS_FOR_A_MATCH` is 2 and
-the matcher would be gated off on day one, exactly as grill is. A comparison
-table with one row is not a table. A best-of with one entry is an
-advertisement, which is the standard this site applied to the WINBOT W1 PRO and
-the HOBOT 298 when it refused to invent awards for them.
+Using "nothing to compare" as the reason silently moved the category bar and
+would have made Grillbot's survival unexplainable to the next person. The
+defensible reasons are different and are now stated as such:
 
-**What to build instead, and it is worth building.** Three pages, under the
-existing robotic-lawn-mowers hub, because Yarbo is a modular yard robot whose
-snow blower is one attachment on the same core that mows the lawn — which is
-the honest place for it rather than a category invented around a single SKU:
+- Yarbo's Core **is** the lawn platform. The entity belongs under lawn on the
+  merits, not as a consolation prize for a failed category.
+- `robot snow blower` shares **7/10** domains with `yarbo`. Google has already
+  collapsed the generic market onto one brand, so a category shell would be
+  four surfaces chasing one SERP.
 
-1. **A Yarbo review** — `yarbo` 18,100, `yarbo snow blower` 14,800,
-   `yarbo review` 1,900, `yarbo snow blower reviews` 2,900. The brand terms this
-   site would normally cede to their owner are cedeable precisely because Yarbo
-   ranks position 1 on all of them; what it does not answer is the $1,299
-   against $4,999 question, which is the single most useful thing anybody could
-   publish here.
-2. **"Do robot snow blowers work?"** — the head PAA question, taking
-   `robot snow blower` (12,100, KD 0), `robotic snow blower` and
-   `autonomous snow blower` (3,600, KD 0). The honest answer includes 90 minutes
-   of runtime rather than the four hours the review sites print, zero owner
-   reviews at Lowe's, and −13°F.
-3. **"How much does a robot snow blower cost?"** — the second PAA question, and
-   the one the market is actively confusing. $1,299 module, $4,999 complete,
-   $7,999 for the 4-in-1, dealer discounts to $3,599 and $4,530 on the same
-   week.
+### Conceded 2: the three-page map broke two house rules, on its own data
 
-Three pages against ≈36,000/mo of combined demand, at KD 0–13, with no
-comparative surface pretending a market exists. If a genuine second
-manufacturer ships a consumer machine — and the demand curve suggests somebody
-will — the category promotes cleanly from those three pages, because they were
-written about the machines rather than about a category.
+- **Rule 2 (>5/10 shared = merge).** Page 1 (Yarbo review) and page 2
+  (targeting `robot snow blower`) sit at 7/10 and 6/10 against the brand terms.
+  The map proposed as separate URLs two pages its own measurements said were
+  one SERP.
+- **Rule 5 (no prices in a guide).** Page 3 was a cost guide whose entire
+  purpose was the $1,299-against-$4,999 question. The angle is genuinely good,
+  which is exactly why the rule got forgotten.
 
-**Before any of it ships:** the Amazon listing's own details table still has not
-been read (WebFetch returns the head only, DataForSEO's merchant endpoints are
-not enabled on this account), and no buy link should go live until Brand and
-Model Number are confirmed first-party there — the roborock S8 MaxV Ultra began
-exactly this way.
+### Conceded 3: "~36,000/mo combined" was double-counting
+
+That figure summed brand and generic volumes across SERPs the same document
+had just proved were 6–7/10 identical. The same searchers were counted twice.
+**Honest unique demand is ~20,000–22,000/mo.**
+
+### The two overlap checks the review demanded — run, $0.0080
+
+The review made the guide conditional on two numbers that had never been
+measured: the generic terms against the *brand*, rather than against the
+conventional market. Both are now measured, and they resolve the map.
+
+| Pair | Shared | Consequence |
+|---|---:|---|
+| autonomous snow blower ↔ yarbo | **6/10** | Over the merge line. Guide folds into the review. |
+| autonomous snow blower ↔ yarbo snow blower | 5/10 | At the line. |
+| autonomous snow blower ↔ robot snow blower | 8/10 | Same SERP as the head term. |
+| snow removal robot ↔ robot snow blower | **7/10** | Same SERP. Merges transitively. |
+| snow removal robot ↔ yarbo | 5/10 | At the line. |
+| snow removal robot ↔ snow blower (conventional) | **0/10** | Fully separate from the conventional market. |
+
+The conditional resolves **against** the guide. `autonomous snow blower` at
+6/10 with the brand is over the merge threshold, and `snow removal robot` is
+7/10 with the head term that had already folded in. **The map is one page.**
+
+### "automatic snow shovel" — the review's hypothesis was right
+
+Predicted: the Snow Joe electric-shovel market, not robots. Measured SERP:
+
+```
+ 2 reddit.com          Do those electric snow shovels that throw the snow really...
+ 3 amazon.com          Snow Joe: Electric Snow Blowers & Shovels
+ 6 homedepot.com       Electric Snow Shovels
+ 7 nytimes.com         Ryobi One+ 18V Electric Snow Shovel Review
+ 8 lowes.com           Shop Power Snow Shovels
+ 9 greenworkstools.com Electric Snow Blowers, Throwers, & Shovels
+16 thespruce.com       The 5 Best Electric Snow Shovels of 2026, Tested and...
+17 acehardware.com     Powered Snow Shovels
+```
+
+Snow Joe, Ryobi, Greenworks, Home Depot, Ace — roughly $100 corded tools, with
+the New York Times and The Spruce already holding the review intent. 4/10
+against `robot snow blower` and populated entirely by conventional tool
+retail. This is the pet-camera swallowed-market pattern exactly.
+**REFUSED**, and the 4,400 at KD 0 is bait.
+
+---
+
+## Go / no-go — final
+
+**NO-GO as a category. ONE page, not three.**
+
+### Why no-go, stated correctly this time
+
+Not "nothing to compare" — Grillbot disproves that bar. Two reasons:
+
+1. **Google has already collapsed this market onto one brand.**
+   `robot snow blower` shares 7/10 domains with `yarbo` and 6/10 with
+   `yarbo snow blower`. A hub, a comparison table, a matcher and a best-of
+   would be four URLs competing for a single results page that Yarbo already
+   holds position 1 of.
+2. **The entity belongs under lawn on the merits.** Yarbo is a modular yard
+   robot; the snow blower is one attachment on the same Core that carries the
+   mower. Filing it under robotic-lawn-mowers describes the product rather
+   than working around a failed category.
+
+`best robot snow blower` (140/mo) is refused outright under rule 4 — a best-of
+with one product is an advertisement, which is the standard applied when this
+site declined to invent awards for the WINBOT W1 PRO and the HOBOT 298.
+
+### The map
+
+| URL | Type | Primary | Secondary | Ceded | Why one page |
+|---|---|---|---|---|---|
+| `/robots/robotic-lawn-mowers/yarbo-snow-blower/` | Product review | `yarbo snow blower` 14,800 / KD 6 | `yarbo` 18,100; `yarbo review` 1,900; `yarbo snow blower reviews` 2,900; `robot snow blower` 12,100; `robotic snow blower` 12,100; `autonomous snow blower` 3,600; `snow removal robot` 880; `robot snow plow` 1,000; `yarbo price` 260; M Series and S1 as sections | — | Every generic term measures 6–8/10 against the brand terms. They are one SERP, so they are one URL. It is also the only surface where dated prices may live under rule 5, which is where the $1,299-against-$4,999 question has to be answered. |
+
+Brand terms are permitted here under the review exception to rule 1: Yarbo
+ranks position 1 on its own name, and a review answers what its own page will
+not — 90 minutes rather than four hours, zero owner reviews at Lowe's, and
+which SKU the price refers to.
+
+### Refused, with reasons
+
+| Term | Volume | Why refused |
+|---|---:|---|
+| snow blower | 246,000 | Conventional market. Toro, Ariens, Husqvarna, Consumer Reports. |
+| best snow blower | 12,100 | Same market, same holders. |
+| electric snow blower | 40,500 | Machines we do not cover. |
+| gas snow blower | 18,100 | Same. |
+| snow blower craftsman | 22,200 | Brand term, not ours. |
+| snow blowers near me | 9,900 | Local intent, no premises. |
+| snow blower home depot / amazon | 5,400 / 2,900 | Retailer intent. |
+| best snow blower brand | 1,000 | Conventional market. |
+| best gas snow blower | 1,000 | Same. |
+| **automatic snow shovel** | **4,400** | **Measured: Snow Joe / Ryobi electric-shovel SERP with NYT and The Spruce on it. Swallowed market.** |
+| heated driveway | 9,900 | Different industry. The $4.25 CPC is bait. One unlinked mention at most. |
+| driveway snow removal | 1,900 | Contractor and local intent. Refused provisionally, unverified. |
+| **best robot snow blower** | **140** | **Rule 4. One product is an advertisement, and this is the term that makes the no-go real.** |
+| yarbo m1 / yarbo m series | 50 / 720 | Kickstarter pre-order, no buy path. Sections of the review only. |
+
+### Timing, which the seasonality dictates
+
+`yarbo snow blower` runs 720 in July to 74,000 in January — 103×. A page
+published into that curve has no chance against one that has been indexed for
+three months.
+
+- **Review live by 15 September.** That is the deliverable date, not a
+  preference.
+- **Cross-links from the lawn hub and the lawn best-of go up with it**, both of
+  which exist as of 11 August. Links stay permanent year-round; the page states
+  its own seasonality under rule 7 rather than being seasonally hidden.
+- **First week of January: price re-read and refresh.** Last January's spike was
+  partly news-driven — the ABC7 viral video is still ranking on the head term
+  in August — and freshness will decide January CTR.
+- **Before any buy link ships:** Amazon's own details table still has not been
+  read first-party. Brand and Model Number rest on Lowe's ("Model #YARBO S1")
+  and Best Buy. That check is outstanding.
+
+### What would flip this to a full category
+
+One thing only: **a second consumer autonomous machine from a distinct
+manufacturer, in mainstream US retail.** The Yarbo M Series does not count —
+same maker, and pre-order. Remote-control and hybrid gas machines do not count;
+they are a different class, though the PAA question *"are remote snowblowers
+worth the money"* earns them a walk-away paragraph inside the review.
+
+**Total research spend: $0.2447 of the $2.00 ceiling.**
