@@ -19,7 +19,7 @@
    should never be unclear about whether they are about to watch
    BotPlanet or the manufacturer's own marketing.
    ============================================================ */
-import { srcsetFor } from "../lib/srcset";
+import { srcsetFor, sizeOf } from "../lib/srcset";
 
 export interface ReviewVideo {
   /** Full YouTube watch URL, or an Amazon /vdp/ video page. */
@@ -87,6 +87,8 @@ const privacyLine = isYouTube
               src={video.poster}
               srcset={srcsetFor(video.poster)}
               sizes="(min-width: 760px) 640px, 100vw"
+              width={sizeOf(video.poster)?.width}
+              height={sizeOf(video.poster)?.height}
               alt=""
               loading="lazy"
               decoding="async"

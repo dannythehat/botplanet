@@ -17,7 +17,7 @@
    the click is attributed and counted. The disclosure sits inside
    the box, not in a footer nobody reads.
    ============================================================ */
-import { srcsetFor } from "../lib/srcset";
+import { srcsetFor, sizeOf } from "../lib/srcset";
 
 export interface BuyOffer {
   retailerName: string;
@@ -79,6 +79,8 @@ const others = linkable.filter((o) => o !== lead);
                 src={image.src}
                 srcset={srcsetFor(image.src)}
                 sizes="(min-width: 760px) 260px, 40vw"
+                width={sizeOf(image.src)?.width}
+                height={sizeOf(image.src)?.height}
                 alt=""
                 loading="lazy"
                 decoding="async"

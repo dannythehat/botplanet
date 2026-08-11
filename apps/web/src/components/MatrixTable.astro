@@ -42,7 +42,7 @@ interface Props {
 
 const { id, eyebrow, title, intro, columns, rows, note } = Astro.props;
 
-import { srcsetFor } from "../lib/srcset";
+import { srcsetFor, sizeOf } from "../lib/srcset";
 ---
 
 <section class="bp-mx" id={id}>
@@ -64,6 +64,10 @@ import { srcsetFor } from "../lib/srcset";
                 <img
                   class="bp-mx__thumb"
                   src={row.image.src}
+                  srcset={srcsetFor(row.image.src)}
+                  sizes="(min-width: 760px) 160px, 40vw"
+                  width={sizeOf(row.image.src)?.width}
+                  height={sizeOf(row.image.src)?.height}
                   alt={row.image.alt}
                   style={row.image.focal ? `object-position: ${row.image.focal}` : undefined}
                   loading="lazy"
