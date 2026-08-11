@@ -2855,8 +2855,12 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "Anki Vector 2.0 robot review",
     seoTitle: "Vector Robot Review — Is It Still Supported in 2026?",
     metaDescription:
-      "Anki went under in 2019 and Vector is still on sale. Who owns it now, what the " +
-      "$11.99 subscription covers, and whether the robot works without one.",
+      /* "vector robot" is this page's primary and it was in the title but not
+         here — the description said plain "Vector", which is the name a reader
+         already convinced would use and not the phrase 5,400 of them a month
+         actually search. One word, and it costs the sentence nothing. */
+      "Anki went under in 2019 and the Vector robot is still on sale. Who owns it now, what the " +
+      "$11.99 subscription covers, and whether it works without one.",
     verdict:
       "A palm-sized robot with more character than anything else at the price, sold by the third company to own it, and dependent on a subscription that costs more per year than some of its competitors cost outright. Buy it for what it is now, not for what Anki promised in 2018.",
     bestFor:
