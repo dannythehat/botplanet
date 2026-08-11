@@ -277,7 +277,51 @@ export const CATEGORY_ANCHORS: Record<string, InternalAnchor[]> = {
      the head term last. internal-links.test.ts checks this, but it is
      worth understanding rather than obeying.
      ------------------------------------------------------------------ */
+  /* ------------------------------------------------------------------
+     ROBOT SNOW BLOWERS, added 11 August 2026 with the Yarbo review.
+
+     ONE PRODUCT, SO EVERY ANCHOR POINTS OUT OF THE CATEGORY RATHER THAN
+     AROUND IT. There is nothing to link sideways to — no sibling, no
+     comparison table, no best-of — so these carry a reader from the snow
+     review to the machine that shares its Core, and to the method that
+     explains why a page with no buy button still has one.
+     ------------------------------------------------------------------ */
+  "robot-snow-blowers": [
+    {
+      anchor: "robot lawn mower",
+      href: "/robots/robotic-lawn-mowers/",
+      why: "The Yarbo Core is the same platform that carries Yarbo's mower, and the reader most likely to buy one is already thinking about the other. The hub is the honest destination because we do not hold the Yarbo mower itself.",
+      status: "live",
+    },
+    {
+      anchor: "shortlist",
+      href: "/best-robots/robotic-lawn-mowers/",
+      why: "A reader who arrived for snow and owns a lawn is one click from the ranking that answers the summer half of the same purchase.",
+      status: "live",
+    },
+    {
+      anchor: "review methodology",
+      href: "/review-methodology/",
+      why: "This page publishes a conflict it will not resolve and withholds a buy button on evidence grounds. Both are method rather than opinion, and the method has a page.",
+      status: "live",
+    },
+  ],
+
   "robotic-lawn-mowers": [
+    {
+      /* THE WINTER MODULE, added 11 August 2026 with the Yarbo review.
+
+         FIRST IN THE LIST BECAUSE IT CANNOT COLLIDE with anything below it,
+         and because it is the only link out of this category that answers a
+         question the category cannot: what the machine does for the eight
+         months it is not cutting grass. The Yarbo Core is a lawn platform that
+         takes a snow blower, so a mower buyer who also shovels a driveway is
+         looking at a different sum from the one this hub sets out. */
+      anchor: "Yarbo Snow Blower",
+      href: "/robots/robot-snow-blowers/yarbo-snow-blower/",
+      why: "The only autonomous snow blower sold in the US rides on the same modular Core as Yarbo's mower. A reader choosing a mower who also clears snow should meet it once, from the category that shares its platform.",
+      status: "live",
+    },
     {
       /* ADDED 11 August 2026 with the lawn best-of. The three lawn guides all
          ended on a promise — "when mowers enter the catalogue, this page gets a

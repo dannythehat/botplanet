@@ -3,6 +3,7 @@ import Base from "../../../layouts/Base.astro";
 import ProductCard from "../../../components/ProductCard.astro";
 import { RETIRED_SLUGS } from "../../../content/product-names";
 import { productPath } from "../../../content/routes";
+import { categoryBySlug } from "../../../content/nav";
 import { journeyFor } from "../../../content/journeys";
 import { getDb, schema } from "../../../lib/db";
 import { usd, titleCase } from "../../../lib/format";
@@ -41,6 +42,21 @@ const cat = (
   await db.select().from(schema.categories).where(eq(schema.categories.slug, category!)).limit(1)
 )[0];
 if (!cat) return new Response("Category not found", { status: 404 });
+
+/* A HIDDEN CATEGORY HAS NO HUB, and this route has to enforce it because it
+   reads D1 and D1 has no launch column. Seeding robot-snow-blowers on 11 August
+   2026 made this page render immediately: 200, `index, follow`, a bare H1 and
+   nothing else — a thin indexable page that the sitemap deliberately excludes,
+   which is the worst pair of properties a URL can have.
+
+   `hidden` means "reserved slug, noindex, not linked in nav" (see nav.ts). The
+   honest rendering of a hub that does not exist is 404, not an empty page with
+   a heading on it. The products beneath it are unaffected: [slug].astro never
+   reads the category's launch state, which is what lets a real review live
+   under a category with no front door. */
+if (categoryBySlug(category!)?.launch === "hidden") {
+  return new Response("Not found", { status: 404 });
+}
 
 const journey = journeyFor(category);
 

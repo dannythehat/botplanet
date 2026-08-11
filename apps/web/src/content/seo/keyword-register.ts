@@ -1689,6 +1689,44 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
     researchedOn: RUN_COMPANION,
   },
   {
+    /* YARBO SNOW BLOWER, built 11 August 2026 — one page carrying an entire
+       category's demand, because the SERPs say it is one page.
+
+       EVERY GENERIC TERM MEASURES 6-8 OF 10 SHARED DOMAINS AGAINST THE BRAND
+       TERMS. `robot snow blower` (12,100) shares 7 of 10 with `yarbo` and 6 of
+       10 with `yarbo snow blower`; `autonomous snow blower` shares 8 of 10 with
+       `robot snow blower`. Google has collapsed the generic market onto one
+       brand because there IS one brand, so a separate hub or guide would be a
+       second URL competing with this one for a single results page.
+
+       THE BRAND TERMS ARE TAKEN UNDER THE REVIEW EXCEPTION, not against the
+       no-brand-term rule that refused `litter robot`, `roborock` and `irobot
+       roomba`. Yarbo ranks position 1 on its own name; what its page does not
+       answer is which SKU the price refers to, and that is what a review is
+       for.
+
+       `yarbo snow blower reviews` is a judgement call rather than a rule.
+       It measures 4-5 of 10 — the ambiguous middle — and is kept here because
+       it is review intent for the same product. */
+    path: "/robots/robot-snow-blowers/yarbo-snow-blower/",
+    primary: { term: "yarbo snow blower", volume: 14800, difficulty: 6, mustAppear: true },
+    secondary: [
+      { term: "yarbo", volume: 18100, difficulty: 13, mustAppear: true },
+      { term: "yarbo snow blower reviews", volume: 2900, difficulty: 0, mustAppear: false },
+      { term: "robot snow blower", volume: 12100, difficulty: 0, mustAppear: true },
+      { term: "autonomous snow blower", volume: 3600, difficulty: 0, mustAppear: true },
+      { term: "snow blower module", volume: 0, difficulty: 0, mustAppear: true },
+    ],
+    cededTo: [
+      {
+        term: "robot lawn mower",
+        path: "/robots/robotic-lawn-mowers/",
+        why: "The Core is the same platform, and the review says so — but the 74,000 head term belongs to the mower hub. This page names the relationship and does not reach for the term.",
+      },
+    ],
+    researchedOn: RUN_AUGUST_10,
+  },
+  {
     /* BEST ROBOT LAWN MOWER, built 11 August 2026.
 
        THE SERP DECIDED THIS, NOT THE SYMMETRY. "robot lawn mower" and

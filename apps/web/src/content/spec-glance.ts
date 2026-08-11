@@ -93,6 +93,21 @@ export const GLANCE_FIELDS: Record<string, GlanceField[]> = {
      NAVIGATION IS THIRD because every mower here is wire-free and they get
      there three different ways — satellite RTK, camera vision, or both — and
      which one a buyer needs is decided entirely by whether they have trees. */
+  /* Robot snow blowers, added 11 August 2026 with the category's only product.
+     CLEARING WIDTH LEADS rather than price, because the price is the thing this
+     machine is most often misunderstood about and a two-word box cannot hold
+     "$1,299 for the module, $4,999 for the robot that carries it". That belongs
+     in prose, and the prose leads with it. */
+  "robot-snow-blowers": [
+    { label: "Clears", match: ["Clearing width"] },
+    { label: "Intake height", match: ["Intake height"] },
+    { label: "Throws", match: ["Throw distance"] },
+    { label: "Per charge", match: ["Area per charge"] },
+    { label: "Runtime", match: ["Runtime"] },
+    { label: "Max slope", match: ["Max slope"] },
+    { label: "Warranty", match: ["Warranty"] },
+  ],
+
   "robotic-lawn-mowers": [
     { label: "Rated for", match: ["Rated area"] },
     { label: "Max slope", match: ["Max slope"] },

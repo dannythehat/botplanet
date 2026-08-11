@@ -9,6 +9,7 @@ import { buildOffers, publicationFor } from "../../../lib/offer-truth";
 import { retailer } from "../../../content/commerce/registry";
 import { catalogueStatusOf, CATALOGUE_WITHDRAWALS, OFFER_SETUP_PENDING } from "../../../content/products";
 import { resolveSlug, removedRedirect, mergedRedirect } from "../../../content/product-names";
+import { categoryBySlug } from "../../../content/nav";
 import { latestAcceptedForProduct } from "../../../lib/providers/refresh-store";
 import ReviewArticle from "../../../components/ReviewArticle.astro";
 import { reviewFor } from "../../../content/reviews";
@@ -248,7 +249,17 @@ const reviewGraph = hasReview
   schema={reviewGraph}
   narrow={hasReview}
 >
-  <p class="muted"><a href={`/robots/${category}/`}>← {titleCase(category!)}</a></p>
+  {/* THE BACK-LINK CANNOT ASSUME ITS CATEGORY HAS A HUB. A hidden category
+      does not — it is a reserved slug with no front door — and this link
+      pointed at it anyway, which put a crawlable internal link to a 404 at the
+      top of the money page. Found on the Yarbo review the day it shipped,
+      after the breadcrumb had been checked and passed: breadcrumbs resolve
+      through the route registry, and this line was building a URL by hand. */}
+  {categoryBySlug(category!)?.launch === "live" ? (
+    <p class="muted"><a href={`/robots/${category}/`}>← {titleCase(category!)}</a></p>
+  ) : (
+    <p class="muted"><a href="/robots/">← All robot categories</a></p>
+  )}
 
   {hasReview && (
   <ReviewArticle

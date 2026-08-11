@@ -1,6 +1,6 @@
 {
   "generatedFor": "2026-07-31",
-  "launchProducts": 64,
+  "launchProducts": 65,
   "rows": [
     {
       "productId": "prod-beatbot-aquasense-2-ultra",
@@ -1964,6 +1964,35 @@
     {
       "productId": "prod-roomba-max-705",
       "canonicalUrl": "https://botplanet.io/robots/robot-vacuums/roomba-max-705/",
+      "verifiedOffers": 0,
+      "preferredOfferId": null,
+      "preferredOfferAudit": [
+        "0 offer(s) exist for this product",
+        "0 from an approved retailer",
+        "no approved offer — nothing is featured"
+      ],
+      "commissionUsedAsTieBreak": false,
+      "retailer": null,
+      "exactProductIdentifier": null,
+      "identifierKind": null,
+      "market": "us",
+      "priceState": "not_published",
+      "stockState": "unknown",
+      "deliveryState": "unknown",
+      "warrantyRoute": null,
+      "lastChecked": null,
+      "freshness": "unknown",
+      "affiliateProgramme": null,
+      "goPath": null,
+      "schemaEligible": false,
+      "blockers": [
+        "no approved offer"
+      ],
+      "nextAction": "Obtain price and availability through the Amazon Creators API so the offer can carry a current price and enter Offer schema."
+    },
+    {
+      "productId": "prod-yarbo-snow-blower",
+      "canonicalUrl": "https://botplanet.io/robots/robot-snow-blowers/yarbo-snow-blower/",
       "verifiedOffers": 0,
       "preferredOfferId": null,
       "preferredOfferAudit": [

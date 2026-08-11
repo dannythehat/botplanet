@@ -91,6 +91,24 @@ Long grass is the other one. These are mulching mowers that cut a little every
 day, and they are not a machine for a lawn that has been left three weeks. Cut
 it conventionally first, then let the robot hold it.
 
+## The one that also clears snow
+
+None of the six above does anything in January. One machine on this site does,
+and it is not a mower with an attachment — it is the other way round.
+
+Yarbo sells a self-driving Core that takes a mowing module, a snow blower, a
+leaf blower or a trimmer. Bought as a mower it is not in this ranking, because
+we do not hold it as a mower and will not rank a machine we have not
+catalogued. Bought for snow it is the only autonomous snow blower on sale in
+the United States, which is a statement about the market rather than a
+compliment.
+
+It is worth knowing about here for one reason: if you are choosing a mower and
+you also shovel a driveway every winter, the sums are not the sums on this
+page. Our Yarbo Snow Blower review has the numbers, including why the same
+three words are quoted at two prices nearly four times apart depending on
+whether the robot is included.
+
 ## How to choose in one minute
 
 Area first: over half an acre and only the larger LUBA 3 qualifies. Under

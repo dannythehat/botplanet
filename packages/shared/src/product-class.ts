@@ -66,6 +66,21 @@ export const PRODUCT_CLASSES = [
      only one bought to be outgrown: every other robot on this site is judged
      on how well it does a job, this one on whether a child keeps using it. */
   "educational_robot", // coding and STEM robot, kit or pre-built
+  /* Robot snow blowers, added 11 August 2026 for the Yarbo, the only consumer
+     machine of its kind sold in the US.
+
+     A SEPARATE CLASS FROM lawn_mower DESPITE SHARING A CHASSIS, and that is
+     the interesting part rather than an oversight. The Yarbo is a modular yard
+     robot: one Core takes a mower module, a snow blower module, a blower or a
+     trimmer. The same physical machine is both things depending on what is
+     bolted to it — so a database that treated them as one class would let a
+     snow blower win a "which mower for my lawn" recommendation on the strength
+     of a shared part number.
+
+     What a reader wants cleared in January and what they want cut in June are
+     different jobs with different rated areas, different slope limits and,
+     when the modules are bought separately, different prices. Two classes. */
+  "snow_blower", // autonomous snow blower — clears, does not cut
 ] as const;
 
 export type ProductClass = (typeof PRODUCT_CLASSES)[number];

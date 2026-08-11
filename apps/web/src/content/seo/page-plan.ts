@@ -846,6 +846,47 @@ const LAWN_BEST: PagePlan = {
   evidence: "5,400/mo at KD 8 with a $3.81 CPC, against the hub's 74,000 at KD 36. Built 11 August 2026 on the SERP measurement rather than on symmetry: 'robot lawn mower' and 'best robot lawn mower' share 2 of 10 top-ten domains, so they are two results pages. The same run measured the litter equivalent at 7 of 10 and ruled the hub should carry it, which is why there is no /best-robots/self-cleaning-litter-boxes/.",
 };
 
+const SNOW_YARBO: PagePlan = {
+  path: "/robots/robot-snow-blowers/yarbo-snow-blower/",
+  category: "robot-snow-blowers",
+  type: "review",
+  status: "built",
+  intent: "Decide whether the one autonomous snow blower on sale is worth five thousand dollars.",
+  primary: { term: "yarbo snow blower", volume: 14800, difficulty: 6 },
+  secondary: [
+    { term: "yarbo", volume: 18100, difficulty: 13 },
+    { term: "yarbo snow blower reviews", volume: 2900, difficulty: 0 },
+    { term: "yarbo review", volume: 1900, difficulty: 0 },
+    { term: "robot snow blower", volume: 12100, difficulty: 0 },
+    { term: "robotic snow blower", volume: 12100, difficulty: 0 },
+    { term: "autonomous snow blower", volume: 3600, difficulty: 0 },
+    { term: "automatic snow blower", volume: 1600, difficulty: 3 },
+    { term: "robot snow plow", volume: 1000, difficulty: 0 },
+    { term: "snow removal robot", volume: 880, difficulty: 9 },
+    { term: "automatic snow removal", volume: 110, difficulty: 0 },
+  ],
+  ceded: [],
+  refused: [
+    { term: "snow blower", volume: 246000, why: "The conventional market. Toro, Ariens, Husqvarna and Consumer Reports hold it, and 2 of 10 shared domains says it is a different results page rather than one we could take." },
+    { term: "best snow blower", volume: 12100, why: "Same market, same holders." },
+    { term: "automatic snow shovel", volume: 4400, why: "MEASURED on 11 August 2026: the SERP is Snow Joe, Ryobi, Greenworks, Home Depot and Ace, with the New York Times and The Spruce holding the review intent. Roughly $100 corded tools. The swallowed-market pattern that killed the pet-camera best-of." },
+    { term: "driveway snow removal", volume: 1900, why: "MEASURED: a local services pack with TaskRabbit, LawnLove and two regional contractors, at 1 of 10 shared domains against every term we hold. Unrankable without premises." },
+    { term: "heated driveway", volume: 9900, why: "A different industry. The $4.25 CPC is the bait." },
+    { term: "best robot snow blower", volume: 140, why: "One product is not a ranking. A best-of with a single entry is an advertisement, which is the standard applied when this site declined to invent awards for the WINBOT W1 PRO and the HOBOT 298. The review answers the question in words instead." },
+  ],
+  products: ["yarbo-snow-blower"],
+  productsNote: "One product, one manufacturer. Snowbot IS Yarbo — Hanyang Technology of Shenzhen, Snowbot S1 at $1,999 in 2021, now sold as Yarbo. Left Hand Robotics went to Toro in 2021 and builds commercial machines. smart-dots.com and cnygreenteam.com are dealers. The category is HIDDEN in nav.ts for exactly this reason: no hub, no comparison, no matcher, no best-of, because there is nothing to compare.",
+  linksOut: [
+    "/robots/robotic-lawn-mowers/",
+    "/best-robots/robotic-lawn-mowers/",
+    "/review-methodology/",
+  ],
+  images: [],
+  schema: ["Review", "Article", "BreadcrumbList"],
+  research: "31073327230 + 31074893036 · 2026-08-11",
+  evidence: "Built 11 August 2026 after four review rounds, $0.2527 of research. The generic terms all measure 6-8/10 shared domains against the brand terms, so they are one SERP and one URL rather than a page each. Nominal generic volume is 22,700 and that is a CEILING — true unique demand is lower by an unmeasured amount, because the SERPs overlap. Traffic valued at 40-60% of nominal as a PLANNING ASSUMPTION, UNMEASURED. Seasonality is 103x on the primary between July and January, which is why the deadline is 15 September rather than whenever it is ready.",
+};
+
 const WINDOW_BEST: PagePlan = {
   path: "/best-robots/window-cleaning-robots/",
   category: "window-cleaning-robots",
@@ -1997,6 +2038,7 @@ export const PAGE_PLAN: PagePlan[] = [
   ...COMPARES,
   ...WINDOW_REVIEWS,
   WINDOW_BOTMATCH,
+  SNOW_YARBO,
   LAWN_BEST,
   WINDOW_BEST,
   WINDOW_WORKS_GUIDE,

@@ -48,6 +48,17 @@ export const CATEGORIES: CategoryDef[] = [
   { slug: "grill-cleaning-robots", name: "Grill-Cleaning Robots", jtbd: "Clean my grill", short: "Robots that scrub the barbecue grates so you do not have to.", launch: "live", order: 9 },
   { slug: "educational-coding-robots", name: "Coding Robots for Kids", jtbd: "Teach my kid to code", short: "Robots children program themselves, from screen-free floor bots up.", launch: "live", order: 10 },
   { slug: "solar-panel-robots", name: "Solar-Panel Cleaning Robots", jtbd: "Clean solar panels", short: "Automated cleaners that keep rooftop and ground arrays producing.", launch: "hidden", order: 5 },
+  /* ROBOT SNOW BLOWERS — HIDDEN ON PURPOSE, and the purpose is not "not ready".
+     Added 11 August 2026 after four review rounds concluded the category has
+     exactly one manufacturer. Snowbot IS Yarbo; Left Hand Robotics went to Toro
+     in 2021 and builds commercial machines; every other domain selling one is a
+     Yarbo dealer. With nothing to compare, a hub, a comparison table, a matcher
+     and a best-of would be four surfaces pretending a market exists.
+     `hidden` gives the Yarbo review a clean URL — /robots/robot-snow-blowers/ —
+     with no hub, no route registered, and no surfaces rendered. If a second
+     manufacturer ever ships a consumer machine into US retail, promotion is one
+     word: hidden becomes live. See docs/seo/snow-blower-research-2026-08-11.md. */
+  { slug: "robot-snow-blowers", name: "Robot Snow Blowers", jtbd: "Clear snow", short: "Autonomous machines that clear a driveway without anybody going outside.", launch: "hidden", order: 10 },
 ];
 
 export const categoryBySlug = (slug: string): CategoryDef | undefined => CATEGORIES.find((c) => c.slug === slug);

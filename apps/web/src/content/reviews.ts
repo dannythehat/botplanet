@@ -57,6 +57,24 @@ export interface ReviewContent {
    */
   video?: ReviewVideo;
   /**
+   * Where to borrow comparisons from when this review's own category has none.
+   *
+   * EVERY FALLBACK IN also-compared.ts IS CATEGORY-SCOPED — head-to-head,
+   * nearest sibling, the comparison table, the hub. A category's first review
+   * has no siblings, which Grillbot hit on 10 August 2026 and the hub fallback
+   * answered. A review in a HIDDEN category has no hub either, so all four
+   * return nothing and the block renders empty.
+   *
+   * That is not a corner case to paper over: the Yarbo is a snow blower module
+   * on the same Core that carries Yarbo's mower, and the lawn hub is genuinely
+   * where a reader of this page should go next. Naming that relationship is
+   * more honest than inventing a sibling, and more useful than an empty block.
+   *
+   * Only ever the LAST resort — a real comparison in the review's own category
+   * always wins.
+   */
+  relatedCategorySlug?: string;
+  /**
    * A second machine this review covers, with its own tracked buy path.
    *
    * WHY A REVIEW EVER COVERS TWO PRODUCTS. Some makers ship one design in two
@@ -6611,6 +6629,99 @@ export const REVIEWS: Record<string, ReviewContent> = {
     skuNote:
       "eufy Robot Lawn Mower E15, ASIN B0DRVYDXWX, $1,199.99 read on 8 August 2026. There is an E18 in the same family and we did not verify it — every figure here is the E15's. Specifications read from eufy.com on 10 August 2026.",
     lastReviewed: "2026-08-10",
+  },
+
+  /* ------------------------------------------------------------------
+     YARBO SNOW BLOWER — the only product on this site in a HIDDEN category.
+
+     Approved 11 August 2026 after four review rounds. The category has one
+     manufacturer: Snowbot IS Yarbo, Left Hand Robotics went to Toro in 2021
+     and builds commercial machines, and every other domain selling one is a
+     Yarbo dealer. With nothing to compare, the four surfaces a category means
+     here are not built — see nav.ts, where robot-snow-blowers is `hidden`.
+
+     THE MONEY SERP DECIDED THE SHAPE OF THIS PAGE. `yarbo snow blower reviews`
+     returns Yarbo's own page, then a Reddit thread titled "Extremely
+     Disappointed with the Yarbo Snow Blower" at position 3, then Trustpilot
+     and Yarbo's own forum. Lowe's carries zero ratings. So the owner evidence
+     section sits high rather than at the foot, because a review built on the
+     specification sheet alone is contradicted by the third result on its own
+     name.
+
+     NO BUY LINK. OFFER_SETUP_PENDING with a real obstacle: Amazon's details
+     table could not be read, so the ASIN rests on a search-result title.
+     ------------------------------------------------------------------ */
+  "yarbo-snow-blower": {
+    slug: "yarbo-snow-blower",
+    categorySlug: "robot-snow-blowers",
+    /* Its own category is hidden and holds one product, so it has no siblings,
+       no comparison table and no hub. The Core this machine rides on is the
+       same platform as Yarbo's mower, which makes lawn the true neighbour
+       rather than a convenient one. */
+    relatedCategorySlug: "robotic-lawn-mowers",
+    eyebrow: "Robot snow blower review",
+    title: "Yarbo Snow Blower review",
+    seoTitle: "Yarbo Snow Blower Review — $1,299 or $4,999?",
+    metaDescription:
+      "The Yarbo Snow Blower is a module, not a robot — which is why you will " +
+      "see $1,299 and $4,999 for the same words. What owners actually say.",
+    verdict:
+      "The only autonomous snow blower a US buyer can actually purchase, which is a statement about the market rather than a compliment. It is a module on Yarbo's modular Core, so $1,299 buys the attachment and $4,999 buys the machine that carries it — a distinction every third-party review blurs. Yarbo's published figures are decent for a domestic driveway; the owner threads that rank on its own name are not uniformly happy, and Lowe's carries no ratings at all.",
+    bestFor:
+      "A snow-belt driveway inside 6,000 sq ft with twenty-plus clearing events a winter — or anybody already buying a Yarbo Core to mow, for whom the module is $1,299 rather than $4,999.",
+    notIdealFor:
+      "Anybody expecting $1,299 to buy a robot, a driveway that needs clearing in one pass, a slope past 36%, or anybody who would happily pay a contractor — the robot's argument is never going outside, not cost.",
+    facts: [
+      { label: "Price", value: "$4,999 complete / $1,299 module only, read 11 August 2026" },
+      { label: "Clearing", value: "24 in wide, 12 in intake, throws 6–40 ft" },
+      { label: "Runtime", value: "~90 min, 6,000 sq ft per charge at 1 in snow" },
+      { label: "Max slope", value: "36% (21°)" },
+    ],
+    specGroups: [
+      {
+        heading: "What it clears",
+        rows: [
+          { label: "Clearing width", value: "24 in" },
+          { label: "Intake height", value: "12 in, adjustable" },
+          {
+            label: "Throw distance",
+            value: "6–40 ft, adjustable",
+            note: "Yarbo's own module page prints \"up to 40 feet\" and \"6-40 Yards Throw Control\" in the same panel. One is wrong and both are Yarbo's; the conservative figure is used here.",
+          },
+          { label: "Stages", value: "Two — auger feeding an impeller" },
+          { label: "Area per charge", value: "Up to 6,000 sq ft at 1 in of snow" },
+          { label: "Max slope", value: "36% (21°)" },
+        ],
+      },
+      {
+        heading: "Running it",
+        rows: [
+          { label: "Battery", value: "38.4 Ah" },
+          {
+            label: "Runtime",
+            value: "Approximately 90 min",
+            note: "Several review sites state \"up to 4 hours\" on the same battery. Yarbo's own page says approximately 90 minutes, and the maker's figure is the one carried.",
+          },
+          { label: "Charge time", value: "90 min, 20% to 80%" },
+          { label: "Operating temperature", value: "−13°F to +140°F" },
+          { label: "Construction", value: "Q355 steel" },
+          { label: "Ingress rating", value: "IPX5" },
+          { label: "Warranty", value: "2 years standard, up to 5" },
+        ],
+      },
+      {
+        heading: "Not published",
+        rows: [
+          { label: "Noise", value: null },
+          { label: "Throughput in wet snow", value: null },
+          { label: "Machine weight", value: null },
+          { label: "Owner ratings at Lowe's", value: null },
+        ],
+      },
+    ],
+    skuNote:
+      "Two SKUs and the difference is the robot. The Snow Blower Module alone is $1,299 and requires a Core. The product Yarbo calls the \"Yarbo Snow Blower\" is $4,999 and includes the Core, Data Center, Y Series battery, docking station, snow track, tow hitch, charger and install kit. Both read from yarbo.com on 11 August 2026. Mower Pro plus Snow Blower is $7,199; the complete 4-in-1 is $7,999. Dealer pricing moves: SmartDots listed the Core at $4,999 struck to $3,599 and CNY Green Team a modular snow blower robot at $4,530, both read the same day. Identity is Lowe's \"Model #YARBO S1\" (item 8256113) and Best Buy SKU J3Q5Q8G9GS, \"Black Yarbo S1\". Amazon ASIN B0FJF9V1JC is from a search-result title and has NOT been confirmed against the listing's own details table, which is why this page carries no buy link.",
+    lastReviewed: "2026-08-11",
   },
 
 };

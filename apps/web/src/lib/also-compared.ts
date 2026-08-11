@@ -193,6 +193,31 @@ function categoryHub(r: ReviewContent): AlsoLink | null {
   };
 }
 
+/* The neighbour's surfaces, named as a neighbour's rather than dressed as this
+   category's own. Both say "related" in their reason text so a reader is never
+   told a snow blower belongs in a mower comparison. */
+function relatedCompare(categorySlug: string): AlsoLink | null {
+  const path = `/compare/${categorySlug}/`;
+  const route = ROUTES.find((x) => x.path === path && x.status === "live");
+  if (!route) return null;
+  return {
+    href: path,
+    title: route.title ?? "Compare the related range",
+    because: "The closest category we hold a full catalogue for, side by side on the same columns.",
+  };
+}
+
+function relatedHub(categorySlug: string): AlsoLink | null {
+  const path = `/robots/${categorySlug}/`;
+  const route = ROUTES.find((x) => x.path === path && x.status === "live");
+  if (!route) return null;
+  return {
+    href: path,
+    title: route.title ?? "The related category explained",
+    because: "The nearest category with a full catalogue, and where this machine's platform came from.",
+  };
+}
+
 export function alsoCompared(r: ReviewContent): AlsoLink[] {
   const out: AlsoLink[] = [];
   const seen = new Set<string>();
@@ -206,6 +231,24 @@ export function alsoCompared(r: ReviewContent): AlsoLink[] {
   if (out.length < 2) {
     const hub = categoryHub(r);
     if (hub && !seen.has(hub.href)) out.push(hub);
+  }
+
+  /* AND ONLY WHEN THE CATEGORY ITSELF OFFERS NOTHING, which is not the same
+     situation as a category's first review. A hidden category has no hub route
+     at all, so every one of the four fallbacks above returns null and the
+     block renders empty. See ReviewContent.relatedCategorySlug for why
+     borrowing a neighbour's surfaces is the honest answer rather than
+     inventing a sibling. */
+  if (out.length < 2 && r.relatedCategorySlug) {
+    for (const link of [
+      relatedCompare(r.relatedCategorySlug),
+      relatedHub(r.relatedCategorySlug),
+    ]) {
+      if (link && !seen.has(link.href) && out.length < 3) {
+        seen.add(link.href);
+        out.push(link);
+      }
+    }
   }
   return out.slice(0, 3);
 }

@@ -914,6 +914,13 @@ export const PRODUCT_ID: Record<string, string> = {
   "shark-powerdetect-av2820s": "prod-shark-powerdetect-av2820s",
   "shark-matrix-plus-ur2650ws": "prod-shark-matrix-plus-ur2650ws",
   "roomba-max-705": "prod-roomba-max-705",
+
+  /* ROBOT SNOW BLOWER, added 11 August 2026. One product, one manufacturer, and
+     a HIDDEN category rather than a real one — see nav.ts and migration 0017.
+     OFFER_SETUP_PENDING, and for once not as a formality: Amazon's own details
+     table has not been read, so the ASIN is unconfirmed and no buy link ships
+     until it is. */
+  "yarbo-snow-blower": "prod-yarbo-snow-blower",
 };
 
 /**
@@ -991,6 +998,17 @@ export const OFFER_SETUP_PENDING_DAYS = 30;
 export const OFFER_SETUP_PENDING: Record<string, OfferSetupPending> = {
   /* Re-opened on 10 August 2026 for the first grill-cleaning product. The
      shelf life above applies to it exactly as it did to the eleven. */
+  /* Yarbo, 11 August 2026. Unlike most entries that have sat here, the obstacle
+     is evidence rather than paperwork: Amazon's own details table for
+     B0FJF9V1JC could not be read, so the ASIN rests on a search-result title —
+     which is precisely where the roborock S8 MaxV Ultra investigation began
+     before every result carrying that name turned out to be an accessory kit.
+     The thirty-day clock is the right pressure on exactly this. */
+  "prod-yarbo-snow-blower": {
+    reason:
+      "Identity is confirmed at two retailers — Lowe's publishes Model #YARBO S1 against item 8256113, and Best Buy titles SKU J3Q5Q8G9GS \"Black Yarbo S1\" — but Amazon's own details table has NOT been read. WebFetch returns the page head only and this account's DataForSEO merchant endpoints are not enabled, so ASIN B0FJF9V1JC comes from a search-result title rather than from a page we read. On a $4,999 machine with zero owner ratings at Lowe's, a buy button is a promise this evidence does not support yet. Wire it when Brand and Model Number are read first-party on that listing, or refuse the sale in writing.",
+    since: "2026-08-11",
+  },
   "prod-grillbot": {
     reason:
       "Identity is confirmed through Amazon's own brand field on 10 August 2026 and the ASIN family is mapped, but the listing itself served a bot check rather than a product page when read directly — so the pinned ASIN rests on dated third-party evidence rather than a page we read. A buy button is a different promise from a published page, and this one waits for a first-party read of B00HFDFSAC before it is wired.",
@@ -1270,6 +1288,13 @@ const VACUUM_SLUGS = new Set([
   "roomba-max-705",
 ]);
 
+/* Robot snow blowers, from 11 August 2026. One slug, in a HIDDEN category —
+   which changes nothing here: the fall-through below files an unclaimed slug as
+   a pool cleaner regardless of whether its category is live, and a snow blower
+   sitting in the pool grid would be no less wrong for being in a category
+   nobody can navigate to. */
+const SNOW_SLUGS = new Set(["yarbo-snow-blower"]);
+
 const CATEGORY_OF: Record<string, string> = Object.fromEntries(
   Object.keys(PRODUCT_ID).map((slug) => [
     slug,
@@ -1289,6 +1314,8 @@ const CATEGORY_OF: Record<string, string> = Object.fromEntries(
                   ? "grill-cleaning-robots"
                 : VACUUM_SLUGS.has(slug)
                   ? "robot-vacuums"
+                : SNOW_SLUGS.has(slug)
+                  ? "robot-snow-blowers"
                 : /* THE DEFAULT IS POOL AND THAT IS A TRAP. A slug in no set
                      above lands in the launch category silently, which is how
                      ten litter boxes and lawn mowers were briefly filed as pool
