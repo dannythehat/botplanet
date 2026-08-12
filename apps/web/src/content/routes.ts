@@ -310,7 +310,19 @@ export const ROUTES: RouteDef[] = [
     parent: "/",
     status: "live",
     navSurface: "none",
-    footerGroup: null,
+    /* THE FOOTER'S BOTMATCH ENTRY SINCE 12 AUGUST 2026, replacing the pool
+       matcher that had the slot to itself.
+
+       THIS IS THE ONE PLACE THE JOURNEY WORK READS PAST THE LETTER OF A LOCKED
+       RULE, so it is written down rather than slipped in. content/journeys.ts
+       says the shell must never advertise a generic site-wide "find any robot",
+       and it says why: a questionnaire cannot pick a robot without first
+       knowing the category. This page is the answer to that objection rather
+       than an instance of it — it asks the job before it asks anything else,
+       hands the reader to that category's own questions, and scores nothing
+       itself. It is also already live, indexable and in the sitemap under this
+       exact label. A one-word owner instruction reverts it. */
+    footerGroup: "BotMatch",
     inSitemap: true,
     indexable: true,
   },
@@ -846,7 +858,16 @@ export const ROUTES: RouteDef[] = [
     parent: `/robots/${CAT}/`,
     status: "live",
     navSurface: "none",
-    footerGroup: "BotMatch",
+    /* OUT OF THE FOOTER, 12 August 2026. This was the ONLY entry in the
+       footer's BotMatch group, so the foot of every page on the site offered
+       "Find My Pool Cleaner" and named none of the other eight matchers — the
+       last surviving instance of the launch-category hardcode the audit found
+       in the header, the drawer, the mega panel and the footer prompt.
+
+       Not replaced by nine links: the footer's Explore group already lists all
+       nine categories, and each hub carries its own matcher. The group now
+       holds the universal picker instead, which asks the job first. */
+    footerGroup: null,
     /* Out of the sitemap since 6 August 2026. The page itself has always
        rendered <meta robots="noindex"> — see pages/botmatch/[category].astro —
        so listing it in the sitemap was submitting a URL for indexing while

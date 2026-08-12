@@ -1,11 +1,22 @@
 ---
 import { FOOTER_GROUPS, LEGAL_ITEMS } from "../content/nav-surfaces";
 import { SITE } from "../lib/site";
-import { shellJourney } from "../content/journeys";
+import { shellJourneyFor } from "../content/journeys";
+import { routeFor } from "../content/routes";
+import { categoryCanMatch } from "../content/matcher-router";
 const year = 2026;
-// Category-specific journey. No generic site-wide BotMatch prompt: one
-// questionnaire cannot meaningfully cover the whole robotics market.
-const journey = shellJourney();
+/* Category-specific journey, and since 12 August 2026 it is the journey for
+   THE PAGE rather than for the launch category. This called shellJourney()
+   with no argument, so the strip below read "Not sure which pool cleaner
+   fits?" at the foot of every page on the site — the window hub, the litter
+   hub, the coding hub, all of them. The heading was hardcoded on top of that,
+   so even a correct journey would have been introduced by the wrong question.
+
+   Null renders no strip. A category whose matcher cannot answer gets no
+   prompt rather than a prompt for somebody else's category. */
+const path = Astro.url.pathname;
+const journey = shellJourneyFor(path, { routeCategory: routeFor(path)?.category, canMatch: categoryCanMatch });
+const promptOne = journey?.subject ?? "";
 
 const LEGAL = LEGAL_ITEMS;
 ---
@@ -17,15 +28,17 @@ const LEGAL = LEGAL_ITEMS;
 -->
 <footer class="site">
   <!-- Slim conversion strip: one line of intent + one action. -->
+  {journey && (
   <div class="foot-prompt">
     <div class="wrap foot-prompt__inner">
       <p class="foot-prompt__text">
-        <strong>Not sure which pool cleaner fits?</strong>
+        <strong>Not sure which {promptOne} fits?</strong>
         <span class="muted">{journey.explanation}</span>
       </p>
       <a class="btn btn--accent btn--sm" href={journey.href}>{journey.ctaLabel}</a>
     </div>
   </div>
+  )}
 
   <div class="wrap">
     <div class="foot-main">

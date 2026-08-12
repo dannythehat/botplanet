@@ -1,24 +1,52 @@
 ---
-import { navCategories, routes, LAUNCH_CATEGORY } from "../content/nav";
+import { navCategories, categoryBySlug, routes, LAUNCH_CATEGORY } from "../content/nav";
 import { BAR_ITEMS, UTILITY_ITEMS } from "../content/nav-surfaces";
+import { builtBestOfCategories, routeFor } from "../content/routes";
 import { activeNavPath } from "../lib/routing";
-import { shellJourney } from "../content/journeys";
+import { categoryOfPath, shellJourneyFor } from "../content/journeys";
+import { categoryCanMatch } from "../content/matcher-router";
 
 const cats = navCategories();
-// BotMatch is category-specific: the shell advertises a concrete journey, never
-// a generic "find any robot". Label and route both come from the config.
-const journey = shellJourney();
-const botmatchHref = journey.href;
 const path = Astro.url.pathname;
+
+/* THE SHELL FOLLOWS THE PAGE, SINCE 12 AUGUST 2026.
+   It called shellJourney() with NO ARGUMENT, so the launch-category fallback
+   fired everywhere and every one of the nine hubs advertised "Find My Pool
+   Cleaner" — in the header, in the drawer and twice in the mega panel. A
+   window buyer was asked about their pool seven times on one page. The
+   function had always taken a category; nothing ever passed one.
+
+   Null is a real answer here and it renders no button. Grill holds one
+   published machine against a threshold of two, so its matcher cannot produce
+   a comparison, and falling back to pool on that page would be the same bug
+   with a smaller blast radius. See shellJourneyFor. */
+const pageCategory = categoryOfPath(path, routeFor(path)?.category);
+const journey = shellJourneyFor(path, { routeCategory: routeFor(path)?.category, canMatch: categoryCanMatch });
+const botmatchHref = journey?.href;
+
+/* The mega panel's second column was hardcoded to the launch category too:
+   headed "Robotic pool cleaners" and offering "Compare products for your pool"
+   on every page of every category. It follows the page as well now, and falls
+   back to the launch category off-category — which is what a browse panel on
+   the homepage should show. */
+const megaSlug = pageCategory && categoryBySlug(pageCategory)?.launch === "live" ? pageCategory : LAUNCH_CATEGORY;
+const megaCat = categoryBySlug(megaSlug)!;
+const megaName = megaCat.name.toLowerCase();
+/* Only where the page exists. Seven categories have no best-of — six refused
+   on SERP evidence — and a mega item pointing at a 404 is exactly the defect
+   this panel was fixed for on 8 August. */
+const megaBest = builtBestOfCategories().has(megaSlug) ? routes.best(megaSlug) : null;
+
 // Exactly one bar item may be active: the most specific section match.
 const activePath = activeNavPath(BAR_ITEMS.map((i) => i.href), path);
 const isActive = (href: string) => href === activePath;
 ---
 <!--
   Approved structure, unchanged: logo | navigation | search | saved | journey CTA.
-  The CTA is category-specific (currently "Find My Pool Cleaner") and carries the
-  primary accent because it is the highest-value action in the shell. BotMatch is
-  never advertised generically. No US label, no second logo row, no square logo,
+  The CTA is category-specific — it names the robot the page is about — and
+  carries the primary accent because it is the highest-value action in the
+  shell. On a category whose matcher cannot yet produce a comparison there is
+  no button at all. BotMatch is never advertised generically. No US label, no second logo row, no square logo,
   no preview strip, no duplicate branding.
 -->
 <header class="site" id="site-header" data-scrolled="false">
@@ -67,10 +95,10 @@ const isActive = (href: string) => href === activePath;
                   ))}
                 </div>
                 <div class="mega-col">
-                  <p class="mega-h">Robotic pool cleaners</p>
-                  <a class="mega-item" href={routes.category(LAUNCH_CATEGORY)}>
-                    <span class="mega-jtbd">Browse all pool robots</span>
-                    <span class="mega-sub">The full US launch catalogue</span>
+                  <p class="mega-h">{megaCat.name}</p>
+                  <a class="mega-item" href={routes.category(megaSlug)}>
+                    <span class="mega-jtbd">Browse all {megaName}</span>
+                    <span class="mega-sub">Every one we hold, with what we could not establish</span>
                   </a>
                   {/* POINTED AT THE POOL RANKING, NOT THE INDEX, 12 August 2026.
                       This column is headed "Robotic pool cleaners" and this item
@@ -86,28 +114,32 @@ const isActive = (href: string) => href === activePath;
                       the footer, which is where it now lives — reachable, and
                       not competing with nine category links for a browse
                       panel's attention. */}
-                  <a class="mega-item" href={routes.best(LAUNCH_CATEGORY)}>
-                    <span class="mega-jtbd">Best pool robots</span>
-                    <span class="mega-sub">Our top picks by use case</span>
-                  </a>
-                  <a class="mega-item" href={routes.compare(LAUNCH_CATEGORY)}>
+                  {megaBest && (
+                    <a class="mega-item" href={megaBest}>
+                      <span class="mega-jtbd">Best {megaName}</span>
+                      <span class="mega-sub">Our top picks by use case</span>
+                    </a>
+                  )}
+                  <a class="mega-item" href={routes.compare(megaSlug)}>
                     <span class="mega-jtbd">Compare</span>
-                    <span class="mega-sub">Compare products for your pool</span>
+                    <span class="mega-sub">Side by side, on what actually differs</span>
                   </a>
                   <a class="mega-item" href={routes.guides()}>
                     <span class="mega-jtbd">Buying &amp; care guides</span>
                     <span class="mega-sub">How they work, what to know</span>
                   </a>
                 </div>
-                <div class="mega-col mega-feature">
-                  <p class="mega-h">Not sure which pool cleaner?</p>
-                  <a class="mega-cta" href={botmatchHref}>
-                    <span class="mega-cta__title">{journey.ctaLabel} <span aria-hidden="true">→</span></span>
-                    <span class="mega-cta__body">
-                      {journey.explanation} Ranked on suitability — never commission.
-                    </span>
-                  </a>
-                </div>
+                {journey && (
+                  <div class="mega-col mega-feature">
+                    <p class="mega-h">Not sure which {journey.subject}?</p>
+                    <a class="mega-cta" href={journey.href}>
+                      <span class="mega-cta__title">{journey.ctaLabel} <span aria-hidden="true">→</span></span>
+                      <span class="mega-cta__body">
+                        {journey.explanation} Ranked on suitability — never commission.
+                      </span>
+                    </a>
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -133,7 +165,7 @@ const isActive = (href: string) => href === activePath;
       <button class="icon-btn" type="button" id="btn-saved" aria-label="Saved products" title="Saved">
         <span aria-hidden="true">♡</span><span class="saved-count" id="saved-count" hidden>0</span>
       </button>
-      <a class="btn btn--accent btn--sm cta" href={botmatchHref}>{journey.ctaLabel}</a>
+      {journey && <a class="btn btn--accent btn--sm cta" href={journey.href}>{journey.ctaLabel}</a>}
       <button
         class="icon-btn burger"
         type="button"
@@ -170,7 +202,7 @@ const isActive = (href: string) => href === activePath;
         <span aria-hidden="true">✕</span>
       </button>
     </div>
-    <a class="btn btn--accent btn--block drawer-cta" href={botmatchHref}>{journey.ctaLabel}</a>
+    {journey && <a class="btn btn--accent btn--block drawer-cta" href={journey.href}>{journey.ctaLabel}</a>}
     <div class="drawer-group">
       <p class="drawer-h">Shop robots</p>
       {cats.map((c) =>
@@ -211,7 +243,7 @@ const isActive = (href: string) => href === activePath;
   </div>
 </div>
 
-<script define:vars={{ cats, nav: [...BAR_ITEMS, ...UTILITY_ITEMS], botmatchHref, journeyLabel: journey.ctaLabel }}>
+<script define:vars={{ cats, nav: [...BAR_ITEMS, ...UTILITY_ITEMS], botmatchHref, journeyLabel: journey?.ctaLabel ?? null }}>
   const $ = (id) => document.getElementById(id);
 
   /* ---- Header gains a solid edge once the page scrolls under it. ---- */
@@ -317,7 +349,10 @@ const isActive = (href: string) => href === activePath;
   /* ---- Search overlay ---- */
   const base = [
     ...cats.filter((c) => c.launch === "live").map((c) => ({ name: c.name, href: "/robots/" + c.slug + "/", kind: "Category" })),
-    { name: journeyLabel + " (BotMatch)", href: botmatchHref, kind: "Tool" },
+    /* Only where the page has a matcher worth naming. On a category whose
+       matcher cannot answer there is no journey, and a search result offering
+       a tool that returns nothing is worse than one fewer result. */
+    ...(journeyLabel && botmatchHref ? [{ name: journeyLabel + " (BotMatch)", href: botmatchHref, kind: "Tool" }] : []),
     ...nav.filter((n) => !n.mega && n.status !== "coming_soon").map((n) => ({ name: n.label, href: n.href, kind: "Page" })),
   ];
   const ov = $("search-ov");

@@ -19,6 +19,8 @@
  * hands the reader to that category's existing questions.
  */
 
+import { REVIEWS } from "./reviews";
+
 export interface MatcherJob {
   /** Stable id, used in the URL and in analytics. */
   id: string;
@@ -118,6 +120,36 @@ export const jobForCategory = (categorySlug: string): MatcherJob | undefined =>
 /** Whether a category has enough published products to produce a real pick. */
 export const canMatch = (publishedCount: number): boolean =>
   publishedCount >= MIN_PRODUCTS_FOR_A_MATCH;
+
+/**
+ * The same question, answered WITHOUT a database read.
+ *
+ * WHY A SECOND ANSWER EXISTS. canMatch() takes a count, and every page that
+ * can supply one gets it from D1 — that is the truth and it stays the truth.
+ * The site SHELL cannot: the header renders on every page including ones that
+ * touch no product table, and adding a count query to all of them to decide
+ * what a button says is a query per request for a label.
+ *
+ * REVIEWS IS THE STATIC STAND-IN because it is versioned, testable, and
+ * conservative in the right direction: a product may exist in D1 without a
+ * review, never the reverse, so this can undercount and cannot overcount. It
+ * therefore fails towards NOT advertising a matcher, which is the safe way for
+ * this particular decision to be wrong.
+ *
+ * Checked against D1 on 12 August 2026 — 11/11/11/9/7/6/4/3/1/1 published,
+ * against 11/11/11/9/6/6/4/3/1/1 reviews. One lawn mower has no review yet;
+ * every category lands on the same side of the threshold either way.
+ */
+const REVIEWS_PER_CATEGORY = (): Map<string, number> => {
+  const counts = new Map<string, number>();
+  for (const r of Object.values(REVIEWS)) {
+    counts.set(r.categorySlug, (counts.get(r.categorySlug) ?? 0) + 1);
+  }
+  return counts;
+};
+
+export const categoryCanMatch = (categorySlug: string): boolean =>
+  canMatch(REVIEWS_PER_CATEGORY().get(categorySlug) ?? 0);
 
 /**
  * What the funnel says when a category cannot produce a pick.

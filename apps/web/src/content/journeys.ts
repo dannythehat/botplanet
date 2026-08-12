@@ -17,6 +17,18 @@ export interface BotMatchJourney {
   category: string;
   /** Button label, e.g. "Find My Pool Cleaner". Always category-specific. */
   ctaLabel: string;
+  /**
+   * The thing itself, singular and lowercase, for a sentence: "Not sure which
+   * POOL CLEANER fits?".
+   *
+   * WRITTEN OUT RATHER THAN DERIVED. The first version of the footer prompt
+   * took the category's display name and stripped a trailing "s", which
+   * produced "Not sure which self-cleaning litter BOXE fits?", "which robot
+   * vacuums & MOP", "which coding robots for KID" and "which companion robots
+   * & robot PET". Display names are plural noun phrases with ampersands in
+   * them; English singulars are not a regex. Nine short strings, typed once.
+   */
+  subject: string;
   /** Heading for the journey itself, e.g. on the questionnaire page. */
   journeyTitle: string;
   /** One sentence explaining what the questionnaire actually does. */
@@ -47,6 +59,7 @@ export const BOTMATCH_JOURNEYS: Record<string, BotMatchJourney> = {
   [LAUNCH_CATEGORY]: {
     category: LAUNCH_CATEGORY,
     ctaLabel: "Find My Pool Cleaner",
+    subject: "pool cleaner",
     journeyTitle: "Find your robotic pool cleaner",
     explanation:
       "Answer a few pool-specific questions and get one clear recommendation.",
@@ -60,6 +73,7 @@ export const BOTMATCH_JOURNEYS: Record<string, BotMatchJourney> = {
   "companion-robots": {
     category: "companion-robots",
     ctaLabel: "Find My Robot Pet",
+    subject: "robot pet",
     journeyTitle: "Find your robot pet",
     explanation:
       "Tell us who it is for and whether a monthly fee is acceptable, and get one clear recommendation.",
@@ -69,6 +83,7 @@ export const BOTMATCH_JOURNEYS: Record<string, BotMatchJourney> = {
   "pet-camera-robots": {
     category: "pet-camera-robots",
     ctaLabel: "Find My Pet Camera Robot",
+    subject: "pet camera robot",
     journeyTitle: "Find your pet camera robot",
     explanation:
       "Tell us about your stairs, your floors and your pet, and get one clear recommendation.",
@@ -78,6 +93,7 @@ export const BOTMATCH_JOURNEYS: Record<string, BotMatchJourney> = {
   "self-cleaning-litter-boxes": {
     category: "self-cleaning-litter-boxes",
     ctaLabel: "Find My Litter Box",
+    subject: "litter box",
     journeyTitle: "Find your self-cleaning litter box",
     explanation:
       "Tell us your cat's size and how many you have, and get one clear recommendation.",
@@ -87,6 +103,7 @@ export const BOTMATCH_JOURNEYS: Record<string, BotMatchJourney> = {
   "grill-cleaning-robots": {
     category: "grill-cleaning-robots",
     ctaLabel: "Find My Grill Cleaner",
+    subject: "grill cleaner",
     journeyTitle: "Find your grill cleaning robot",
     explanation:
       "Tell us what your grates are made of and how often you cook, and get one clear answer.",
@@ -96,6 +113,7 @@ export const BOTMATCH_JOURNEYS: Record<string, BotMatchJourney> = {
   "robot-vacuums": {
     category: "robot-vacuums",
     ctaLabel: "Find My Robot Vacuum",
+    subject: "robot vacuum",
     journeyTitle: "Find your robot vacuum",
     explanation:
       "Tell us what is on your floors and whether there is an animal in the house, and get one clear recommendation.",
@@ -105,13 +123,90 @@ export const BOTMATCH_JOURNEYS: Record<string, BotMatchJourney> = {
   "educational-coding-robots": {
     category: "educational-coding-robots",
     ctaLabel: "Find My Coding Robot",
+    subject: "coding robot",
     journeyTitle: "Find their first coding robot",
     explanation:
       "Tell us how old they are and whether a tablet is available, and get one clear recommendation.",
     href: routes.botmatch("educational-coding-robots"),
     accent: true,
   },
+  /* THE LAST TWO, ADDED 12 AUGUST 2026, and the reason the shell said
+     "Find My Pool Cleaner" to a window buyer and a lawn buyer for a week.
+     Both matchers have had their own question set and their own scoring config
+     since 7 and 10 August — window scores eleven machines, lawn scores seven —
+     so the only thing missing was the label the shell reads. */
+  "window-cleaning-robots": {
+    category: "window-cleaning-robots",
+    ctaLabel: "Find My Window Robot",
+    subject: "window robot",
+    journeyTitle: "Find your window cleaning robot",
+    explanation:
+      "Tell us whether your glass is frameless, whether there is a socket nearby and whether the window opens, and get one clear recommendation.",
+    href: routes.botmatch("window-cleaning-robots"),
+    accent: true,
+  },
+  "robotic-lawn-mowers": {
+    category: "robotic-lawn-mowers",
+    ctaLabel: "Find My Robot Mower",
+    subject: "robot mower",
+    journeyTitle: "Find your robot lawn mower",
+    explanation:
+      "Tell us your lawn's area, its worst slope and how much tree cover it has, and get one clear recommendation.",
+    href: routes.botmatch("robotic-lawn-mowers"),
+    accent: true,
+  },
 };
+
+/**
+ * The category a URL belongs to, or null.
+ *
+ * The registry answers this for every REGISTERED route, including guides,
+ * whose category is not in their path. It cannot answer for a product page —
+ * /robots/<cat>/<slug>/ is a dynamic route with no record — so the four
+ * category-scoped URL shapes are read directly first. Both halves are needed:
+ * the path shapes cover the pages that are not registered, the registry covers
+ * the pages whose category the path does not spell.
+ */
+export function categoryOfPath(pathname: string, routeCategory?: string | null): string | null {
+  const m = /^\/(robots|compare|botmatch|best-robots)\/([a-z0-9-]+)\//.exec(pathname.toLowerCase());
+  if (m) return m[2];
+  return routeCategory ?? null;
+}
+
+/**
+ * The journey the shell should advertise on a given page — or null, meaning
+ * show no BotMatch button at all.
+ *
+ * THREE OUTCOMES, AND THE THIRD IS THE POINT.
+ *
+ *  - A category page whose matcher can answer gets that category's journey.
+ *    This is what was broken: Header.astro called shellJourney() with no
+ *    argument, so the fallback fired on every page of every category and a
+ *    window buyer was offered "Find My Pool Cleaner" seven times over.
+ *
+ *  - A category page whose matcher CANNOT answer gets nothing. Grill has one
+ *    published machine against MIN_PRODUCTS_FOR_A_MATCH of two, so scoring a
+ *    questionnaire against it and announcing the result would tell a reader a
+ *    comparison happened when nothing was compared. PRE-BUILD-PROCESS.md Stage
+ *    5b, and it outranks having a button in the header. Falling back to pool
+ *    here would just be the original bug wearing a smaller hat.
+ *
+ *  - Everything else — the homepage, /about/, /guides/ — keeps the launch
+ *    journey, UNCHANGED. The universal job-picker at /botmatch/ is live and
+ *    would arguably be the better answer there, but the product rule at the top
+ *    of this file forbids the shell advertising a generic "find any robot" and
+ *    that rule is the owner's, not a builder's to reinterpret in passing.
+ */
+export function shellJourneyFor(
+  pathname: string,
+  opts: { routeCategory?: string | null; canMatch: (slug: string) => boolean },
+): BotMatchJourney | null {
+  const cat = categoryOfPath(pathname, opts.routeCategory);
+  if (!cat) return BOTMATCH_JOURNEYS[LAUNCH_CATEGORY];
+  const journey = journeyFor(cat);
+  if (!journey) return null;
+  return opts.canMatch(cat) ? journey : null;
+}
 
 /** The journey for a category, or null when that category has none yet. */
 export function journeyFor(category: string | undefined | null): BotMatchJourney | null {
