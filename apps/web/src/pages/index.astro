@@ -4,13 +4,7 @@ import BotFinderCard from "../components/BotFinderCard.astro";
 import { finderCardFor } from "../content/finder-cards";
 import { LAUNCH_CATEGORY, categoryRoutes, liveCategories, productPath } from "../content/routes";
 import { srcsetFor } from "../lib/srcset";
-import CategoryFeature from "../components/CategoryFeature.astro";
 import { webPageSchema, SITE_URL } from "../lib/seo";
-import { REVIEWS } from "../content/reviews";
-import { PRODUCT_ID } from "../content/products";
-import { CATEGORIES as NAV_CATEGORIES } from "../content/nav";
-import ProductImage from "../components/ProductImage.astro";
-import { MATCHER_JOBS } from "../content/matcher-router";
 
 const live = categoryRoutes(LAUNCH_CATEGORY);
 
@@ -27,135 +21,9 @@ const META_DESCRIPTION =
   "Compare real-world home robots for the US — vacuums, mowers, pool cleaners, " +
   "window robots, litter boxes and more. Evidence, honest rule-outs, and the gaps.";
 
-/**
- * The reviews, listed on the homepage.
- *
- * Until the audit of 4 August 2026 this page linked to the hub eleven times
- * and to a review not once — so eleven pages carrying every piece of original
- * work on this site sat two clicks from the front door, and the homepage
- * passed no authority to any of them. Reading REVIEWS rather than a hand-typed
- * list means a review that ships tomorrow appears here the same day, and one
- * that is renamed cannot leave a dead link behind.
- *
- * EVERY REVIEW, NOT EVERY POOL REVIEW.
- *
- * This filtered on `categorySlug === LAUNCH_CATEGORY` until 10 August 2026,
- * which was right on the day it was written — pool was the only category with
- * reviews — and quietly wrong from the moment the second one shipped. By the
- * time it was found the site had fifty-one reviews across eight categories and
- * the homepage linked eleven of them, all pool. The kicker above the grid read
- * "EVERY MODEL WE HAVE REVIEWED" while the filter denied it.
- *
- * That is the same failure the comment below this one describes, one level up:
- * the strongest page on the site passing its authority to a tenth of the work.
- * Twenty-two of those reviews were written on 10 August alone and none of them
- * had a route from the front door.
- *
- * ARTWORK COMES FROM THE REGISTRY RATHER THAN THE REVIEW RECORD. The pool
- * eleven each carry an `image`; the reviews built since do not yet, and a grid
- * that reads `r.image.src` would have crashed the homepage the moment the
- * filter came off. ProductImage asks the media registry per card and falls
- * through to the owned silhouette, which is the same path the listing cards
- * and the recommendation page already take — so a takedown recorded in one
- * data file empties this grid too, and nothing here can render a broken image.
- */
-const CATEGORY_NAME = new Map(NAV_CATEGORIES.map((c) => [c.slug, c.name]));
-
-const reviews = Object.values(REVIEWS)
-  .map((r) => ({
-    slug: r.slug,
-    productId: PRODUCT_ID[r.slug] ?? `prod-${r.slug}`,
-    title: r.title.replace(/ review$/i, ""),
-    href: productPath(r.slug, r.categorySlug),
-    categorySlug: r.categorySlug,
-    categoryName: CATEGORY_NAME.get(r.categorySlug) ?? r.categorySlug,
-    bestFor: r.facts?.find((f) => f.label === "Cleans")?.value ?? null,
-  }))
-  /* Category first so the grid reads as a catalogue rather than an alphabet,
-     and so the nine categories are visibly nine rather than one long list. */
-  .sort((a, b) =>
-    a.categoryName === b.categoryName
-      ? a.title.localeCompare(b.title)
-      : a.categoryName.localeCompare(b.categoryName),
-  );
-
-/* The universal Bot Finder card. Replaces the old explainer illustration,
-   which drew six category tiles into the pixels — one of them "Security",
-   a category cancelled on 6 August, still being advertised four days later.
-   This one draws no category names at all. */
 const finderCard = finderCardFor("universal")!;
 
-/* Retained only so the old pair is not silently orphaned in the registry. */
-const matcherImage = {
-  src: "/media/botmatch/explainer-desktop.webp",
-  mobileSrc: "/media/botmatch/explainer-mobile.webp",
-  width: 1672,
-  height: 941,
-  mobileWidth: 941,
-  mobileHeight: 1672,
-  /* The tile-by-tile list went with the Security cancellation of 6 August: it
-     named the artwork's six drawn tiles as though they were the site's
-     categories, and one of them no longer is. What it describes now is what
-     the picture is actually of. */
-  alt:
-    "A BotMatch panel at the centre of linked category tiles, showing a best-match result being confirmed.",
-};
 
-/* Category feature artwork. The sections' words and buttons are real HTML
-   beside the picture and never drawn into it, and each file is composed with
-   one side dark and empty, which is what `side` on the component names. The
-   pictures are described rather than marked decorative — see CategoryFeature
-   for why that changed. */
-const featureImage = {
-  src: "/media/pool-category/feature-desktop.webp",
-  mobileSrc: "/media/pool-category/feature-mobile.webp",
-  width: 1672,
-  height: 941,
-  alt: "A robotic pool cleaner working the floor of a lit in-ground swimming pool at dusk, its cable trailing to the edge.",
-};
-
-const windowFeatureImage = {
-  src: "/media/window-category/feature-desktop.webp",
-  mobileSrc: "/media/window-category/feature-mobile.webp",
-  width: 1672,
-  height: 941,
-  /* Pulled left of centre so the machine on the glass survives the crop when
-     the section is shorter than the file's own 16:9. */
-  focal: "24% center",
-  alt: "A window-cleaning robot gripping the glass of a tall window at dusk, water spread across the pane behind it.",
-};
-
-const lawnFeatureImage = {
-  src: "/media/lawn-category/feature-desktop.webp",
-  mobileSrc: "/media/lawn-category/feature-mobile.webp",
-  width: 1672,
-  height: 941,
-  /* Right of centre: the mower and the lit house are both over there, and a
-     centre crop would push the machine off the edge on a short section. */
-  focal: "78% center",
-  alt: "A robot lawn mower cutting a striped lawn in the evening, a lit house behind it.",
-};
-
-const floorFeatureImage = {
-  src: "/media/floor-category/feature-desktop.webp",
-  mobileSrc: "/media/floor-category/feature-mobile.webp",
-  width: 1672,
-  height: 941,
-  /* Left of centre: the machine and the lit room are both over there, and the
-     right of the frame is bare wall that survives any crop. */
-  focal: "22% center",
-  alt: "A robot vacuum crossing the hard floor of a lit living room, its docking station against the wall behind.",
-};
-
-const companionFeatureImage = {
-  src: "/media/companion-category/feature-desktop.webp",
-  mobileSrc: "/media/companion-category/feature-mobile.webp",
-  width: 1612,
-  height: 881,
-  /* Right of centre, where the robot and the lit living room both sit. */
-  focal: "76% center",
-  alt: "A small companion robot on a side table in a warmly lit living room, someone seated beyond it.",
-};
 
 /**
  * THE DIRECTORY, READ FROM THE REGISTRY RATHER THAN TYPED HERE.
@@ -344,30 +212,20 @@ const homeSchema = [
     </div>
   </section>
 
-  {/* THE COMPACT FINDER, ABOVE THE GRID AND DELIBERATELY BEFORE IT.
-      A reader who knows what they want scrolls past this in one flick; a
-      reader who does not is about to meet nine tiles and pick by picture.
-      Nine jobs in the reader's own words is a better first question than nine
-      category names, and it is the same first question the funnel asks — so
-      tapping one lands mid-conversation rather than at another front door. */}
-  <section class="finder" aria-labelledby="finder-title">
-    <div class="wrap finder__inner">
-      <p class="kicker">BOTMATCH</p>
-      <h2 id="finder-title">What do you want a robot to do?</h2>
-      <p class="finder__lede">
-        Start with the job, not our categories. A minute of questions, and the part that picks your
-        robot cannot see prices or commission at all.
-      </p>
-      <ul class="finder__jobs">
-        {MATCHER_JOBS.map((job) => (
-          <li>
-            <a href={`/botmatch/?job=${job.id}`}>{job.label}</a>
-          </li>
-        ))}
-      </ul>
-      <a class="finder__all" href="/botmatch/">Not sure yet? Start here &#8594;</a>
-    </div>
-  </section>
+  {/* THE COMPACT JOB FINDER WAS HERE AND IS GONE — owner decision, 12 August
+      2026, on seeing it on a phone.
+
+      The argument for it was that nine jobs in the reader's own words beat
+      nine category names as a first question. On a desktop it read that way.
+      On a phone it did not: eleven stacked pills pushed the directory — the
+      thing the homepage exists to show — most of a screen further down, and
+      every pill led to the same funnel the header button already opens. It
+      was a second front door in front of the first one.
+
+      If a job-first entry point comes back, it belongs INSIDE /botmatch/ as
+      its opening question, not as a section the homepage has to scroll past.
+      MATCHER_JOBS in content/matcher-router.ts still exists and is still used
+      by the funnel, so nothing was deleted with this. */}
 
   <section class="worlds" id="robot-worlds">
     <div class="wrap">
@@ -493,133 +351,22 @@ const homeSchema = [
     </div>
   </section>
 
-  <CategoryFeature
-    id="live-pool"
-    state="Live category"
-    heading="Robotic pool cleaners"
-    metalWord="pool"
-    body="Find verified robots that scrub floors, walls and waterlines."
-    side="left"
-    image={{ ...featureImage, focal: "82% center" }}
-    primary={{ label: "Browse pool-cleaning robots", href: live.hub }}
-    secondary={{ label: "Find My Pool Cleaner", href: live.botmatch }}
-    more={{ label: "Compare live models", href: live.compare }}
-  />
+  {/* THE FIVE CATEGORY FEATURE PANELS AND THE REVIEW LIST WERE HERE — owner
+      decision, 12 August 2026, on seeing the homepage on a phone.
 
-  {/* Every review, named and linked. The homepage used to send all of its
-      traffic to the hub and let the reader find the work from there; a list of
-      real model names is both the better click and the better signal. */}
-  <section class="reviews" id="reviews">
-    <div class="wrap">
-      <div class="section-intro section-intro--compact">
-        <p class="kicker">EVERY MODEL WE HAVE REVIEWED</p>
-        <h2>{reviews.length} robots, checked against the maker's own words.</h2>
-        <p>
-          Each review names its sources, records what the manufacturer will not state, and
-          says plainly who should buy something else. Prices are checked automatically and
-          dated on the page.
-        </p>
-        {/* THE THREE INDEXES, LINKED FROM THE PROSE RATHER THAN ONLY THE MENU.
-            /robots/, /best-robots/, /compare/ and /guides/ were reachable only
-            through nav chrome — which a crawler weights as template furniture
-            and a reader on a phone never opens. Named here by what each one is
-            for, because "browse" tells nobody which of the four they want. */}
-        <p class="reviews__ways">
-          Four ways in: <a href="/robots/">the robot categories</a> if you know what kind of
-          machine you want, <a href="/best-robots/">the best robots by use case</a> if you
-          know the job but not the machine, <a href="/compare/">the comparison tables</a> if
-          you already have a shortlist, and <a href="/guides/">the robot guides</a> for the
-          questions that come before any of it.
-        </p>
-      </div>
+      Both were duplication of the directory above. The five panels advertised
+      five of the nine categories the grid had already shown, one full screen
+      each, so a phone reader met pool twice before reaching anything new. The
+      review list printed all sixty-three model names, which on a narrow screen
+      is a wall between the directory and the footer.
 
-      <ul class="reviews__grid">
-        {reviews.map((r) => (
-          <li class="reviews__item">
-            <a href={r.href}>
-              <ProductImage
-                productId={r.productId}
-                placement="listing_card"
-                types={["product_hero", "product_alternate_view", "branded_placeholder"]}
-                sizes="(min-width: 900px) 22vw, 45vw"
-              />
-              <div class="reviews__body">
-                <p class="reviews__cat">{r.categoryName}</p>
-                <h3>{r.title}</h3>
-                {r.bestFor && <p class="reviews__meta">{r.bestFor}</p>}
-              </div>
-            </a>
-          </li>
-        ))}
-      </ul>
+      What they were solving is real and has to be solved somewhere else: those
+      sixty-three reviews still need internal links from a page with authority,
+      or they sit two clicks from the front door with nothing pointing at them.
+      The category hubs are the right place — each already lists its own
+      reviews — so the homepage links to nine hubs and the hubs link to the
+      work, instead of the homepage trying to do both jobs at once. */}
 
-      <div class="reviews__actions">
-        <a class="btn btn--quiet btn--lg" href={live.hub}>See the full category</a>
-        <a class="btn btn--quiet btn--lg" href={live.compare}>Compare them side by side</a>
-      </div>
-    </div>
-  </section>
-
-  {/* THESE FOUR ARE LIVE, AND THIS BLOCK USED TO SAY THEY WERE NOT.
-      Window and lawn read "In development", floor care and companion read
-      "Planned category", and all four sent the reader to /robots/ or back to
-      the pool — while all four had a hub, a comparison page, a matcher and
-      published products. A section that describes a built category as
-      unbuilt costs the click it was put there to earn.
-
-      Security was here too, on the same "Planned category" line. It was
-      cancelled on 6 August, so the section is gone rather than restated. */}
-  <CategoryFeature
-    id="next-window"
-    state="Live category"
-    heading="Window-cleaning robots"
-    metalWord="Window-cleaning"
-    body="Robots that grip glass and clean windows, balcony doors and high panes you would rather not reach."
-    side="right"
-    image={windowFeatureImage}
-    primary={{ label: "Browse window-cleaning robots", href: categoryRoutes("window-cleaning-robots").hub }}
-    secondary={{ label: "Find My Window Robot", href: categoryRoutes("window-cleaning-robots").botmatch }}
-    more={{ label: "Compare live models", href: categoryRoutes("window-cleaning-robots").compare }}
-  />
-
-  <CategoryFeature
-    id="next-lawn"
-    state="Live category"
-    heading="Robotic lawn mowers"
-    metalWord="lawn mowers"
-    body="Mowers that cut a little every day and keep the lawn level, on a boundary wire or without one."
-    side="left"
-    image={lawnFeatureImage}
-    primary={{ label: "Browse robotic lawn mowers", href: categoryRoutes("robotic-lawn-mowers").hub }}
-    secondary={{ label: "Find My Robot Mower", href: categoryRoutes("robotic-lawn-mowers").botmatch }}
-    more={{ label: "Compare live models", href: categoryRoutes("robotic-lawn-mowers").compare }}
-  />
-
-  <CategoryFeature
-    id="next-floor"
-    state="Live category"
-    heading="Robot vacuums and mops"
-    metalWord="vacuums"
-    body="Vacuum and mop robots that map the house, empty themselves and keep hard floors and carpet clean without being asked."
-    side="right"
-    image={floorFeatureImage}
-    primary={{ label: "Browse robot vacuums", href: categoryRoutes("robot-vacuums").hub }}
-    secondary={{ label: "Find My Robot Vacuum", href: categoryRoutes("robot-vacuums").botmatch }}
-    more={{ label: "Compare live models", href: categoryRoutes("robot-vacuums").compare }}
-  />
-
-  <CategoryFeature
-    id="next-companion"
-    state="Live category"
-    heading="Companion robots and robot pets"
-    metalWord="Companion"
-    body="Robot pets and desk companions built for company rather than chores — for a child's room, a desk, or somebody living on their own."
-    side="left"
-    image={companionFeatureImage}
-    primary={{ label: "Browse companion robots", href: categoryRoutes("companion-robots").hub }}
-    secondary={{ label: "Find My Companion Robot", href: categoryRoutes("companion-robots").botmatch }}
-    more={{ label: "Compare live models", href: categoryRoutes("companion-robots").compare }}
-  />
 
   <section class="system">
     <div class="wrap">
@@ -774,22 +521,6 @@ const homeSchema = [
   }
 
   /* ---------- Reviews ---------- */
-  .reviews { padding: clamp(1.1rem,2.4vw,2rem) 0; }
-  .reviews__grid { list-style: none; margin: 34px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 16px; }
-  .reviews__item a {
-    display: block; height: 100%; text-decoration: none; overflow: hidden;
-    border: 1px solid rgba(200,208,222,.16); border-radius: 16px; background: #090c0f;
-    transition: border-color .18s ease, transform .18s ease;
-  }
-  .reviews__item a:hover { border-color: rgba(226,232,244,.4); transform: translateY(-2px); }
-  .reviews__item img { display: block; width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover; }
-  .reviews__body { padding: 16px 18px 18px; }
-  .reviews__body h3 { margin: 0; font-size: 16px; letter-spacing: -.01em; color: #f1f3f6; line-height: 1.3; }
-  .reviews__cat { margin: 0 0 4px; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--text-tertiary); }
-  .reviews__meta { margin: 7px 0 0; font-size: 13px; line-height: 1.5; color: var(--text-tertiary); }
-  .reviews__actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 28px; }
-  @media (max-width: 900px) { .reviews__grid { grid-template-columns: repeat(2, minmax(0,1fr)); } }
-  @media (max-width: 460px) { .reviews__grid { grid-template-columns: 1fr; } }
 
   .worlds,.system { padding: var(--section-gap) 0; background: linear-gradient(180deg,rgba(255,255,255,.025),transparent); border-top: 1px solid rgba(210,216,224,.1); }
   /* Three across on a desktop, two on a tablet, one on a phone. Nine tiles
@@ -827,7 +558,6 @@ const homeSchema = [
      ============================================================ */
   .worlds > .wrap,
   .botmatch > .wrap,
-  .reviews > .wrap,
   .system > .wrap,
   .close > .wrap {
     position: relative;
@@ -845,7 +575,6 @@ const homeSchema = [
 
   .worlds > .wrap::before,
   .botmatch > .wrap::before,
-  .reviews > .wrap::before,
   .system > .wrap::before,
   .close > .wrap::before {
     content: "";
@@ -872,58 +601,4 @@ const homeSchema = [
   @media(max-width:960px){.system-grid{grid-template-columns:repeat(2,1fr)}}
   @media(max-width:620px){.hero{min-height:auto;padding:48px 0 70px}.hero__grid{gap:26px}h1{font-size:40px}.system-grid{grid-template-columns:1fr}.section-intro h2,.system h2{font-size:40px}}
 
-  /* ---------- compact finder, above the directory grid ---------- */
-  /* Mobile-first: the jobs wrap as chips from 390px up, so nine of them read
-     as a short list rather than nine full-width rows pushing the grid off the
-     first two screens. */
-  .finder {
-    padding: clamp(2.5rem, 7vw, 4rem) 0 0;
-  }
-  .finder__inner {
-    max-width: 52rem;
-  }
-  .finder h2 {
-    margin: 0.5rem 0 0;
-    font-size: clamp(1.5rem, 4.4vw, 2.1rem);
-    line-height: 1.15;
-    letter-spacing: -0.02em;
-  }
-  .finder__lede {
-    margin: 0.75rem 0 0;
-    color: var(--text-secondary);
-    line-height: 1.6;
-    max-width: 44ch;
-  }
-  .finder__jobs {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin: 1.35rem 0 0;
-    padding: 0;
-    list-style: none;
-  }
-  .finder__jobs a {
-    display: inline-block;
-    padding: 0.5rem 0.85rem;
-    border: 1px solid rgba(200, 208, 222, 0.18);
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.02);
-    color: inherit;
-    text-decoration: none;
-    font-size: 0.9375rem;
-    line-height: 1.3;
-    transition: border-color 0.15s ease, background 0.15s ease;
-  }
-  .finder__jobs a:hover,
-  .finder__jobs a:focus-visible {
-    border-color: var(--cs-sheen);
-    background: rgba(120, 190, 255, 0.08);
-  }
-  .finder__all {
-    display: inline-block;
-    margin: 1.1rem 0 0;
-    color: var(--text-secondary);
-    font-size: 0.9375rem;
-  }
-  .finder__all:hover { color: inherit; }
 </style>
