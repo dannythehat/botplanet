@@ -11,6 +11,11 @@
  * fill the space.
  */
 import { NOT_DISCLOSED, type ComparisonRow } from "../components/ComparisonTable.astro";
+/* THROUGH productPath, NOT A TEMPLATE STRING. The comment above productPath
+   says a second hand-written pattern is how ten obsolete URLs reached the SEO
+   register; this was one of two survivors, and on 11 August 2026 it linked a
+   merged product straight at its own 301. */
+import { productPath } from "./routes";
 
 /** The catalogue fields this needs. Deliberately not the whole product row. */
 export interface ComparableProduct {
@@ -72,7 +77,7 @@ export function comparisonRows(products: ComparableProduct[], categorySlug: stri
     .map((p) => ({
       productId: p.id,
       name: p.name,
-      href: `/robots/${categorySlug}/${p.slug}/`,
+      href: productPath(p.slug, categorySlug),
       poolSize: poolSizeCell(p),
       environments: p.environments.length ? p.environments.map(label).join(" · ") : NOT_DISCLOSED,
       cleans: p.cleans.length ? p.cleans.map(label).join(" · ") : NOT_DISCLOSED,

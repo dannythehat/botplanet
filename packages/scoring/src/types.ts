@@ -27,7 +27,19 @@ import type {
  * forces a migration on those columns.
  */
 export interface MatchAnswers {
-  environment: Environment;
+  /**
+   * Where the product has to work. OPTIONAL since 6 August 2026, because a
+   * category may genuinely have no environment axis: companion robots are the
+   * first, and nothing about a room stops a robot pet working. Inventing a
+   * distinction to fill this field would exclude candidates on something that
+   * does not exist.
+   *
+   * Only read when the category's config sets hardExclusions.environmentMismatch.
+   * A config that sets it while its questionnaire asks no environment question
+   * is a misconfiguration, and the scorer says so rather than silently
+   * excluding the whole catalogue.
+   */
+  environment?: Environment;
   primary_need: string;
   desired_cleans: CleaningSurface[];
   power_pref: PowerType | "no_pref";

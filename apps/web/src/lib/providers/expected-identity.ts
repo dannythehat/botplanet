@@ -185,6 +185,188 @@ export const EXPECTED_IDENTITIES: IdentityExpectation[] = [
     denyTokens: ["v3 pro", "scuba s1", "scuba x1", "x1 pro max", "seagull", "hydrocomm", "caddy"],
     exception: "recently_changed",
   },
+
+  /* ==================================================================
+     LITTER BOXES AND LAWN MOWERS, 8 August 2026 — the eleven that came
+     off OFFER_SETUP_PENDING when their offers were wired.
+
+     EVERY TOKEN BELOW IS A FIELD SOMEBODY READ. matchIdentity consults
+     `modelName`, `modelNumber` and `manufacturerPartNumber` and nothing
+     else — the title is copy the seller writes and is deliberately not
+     consulted. NONE of these eleven listings publishes a model NAME;
+     all eleven publish a model NUMBER, so that is what the tokens are.
+     A deny list of readable product names would have looked thorough
+     here and fired on nothing, which is worse than an empty one because
+     it reads as protection.
+
+     The sibling numbers were read the same day, listing by listing, and
+     three of them are the reason this section is long:
+
+       - THE LITTER-ROBOT 4 SUPPLY BUNDLE PUBLISHES OUR MODEL NUMBER.
+         B0FFDNZSHT gives model_number 'LR4-0301-00-CA' — byte-identical
+         to the bare machine's — and differs only in its part number,
+         'LR4-COREBD-BK'. The model number cannot separate them.
+       - THE NAVIMOW GARAGE BUNDLE PUBLISHES OUR MODEL NUMBER TOO.
+         B0CZ3R3SJH gives 'i110N', same as the bare mower. Nothing in
+         the details table separates a $1,099 mower from a $1,298 mower
+         plus garage.
+       - THE DREAME BUNDLE ALMOST DOES. B0H761SNFG gives
+         'MXXA7300+Bundle C', which contains our whole model number as
+         its first token, so 'mxxa7300' matches it. 'bundle' is what
+         refuses it, and deny is checked before match.
+
+     In two of those three the served-ASIN equality check is the only
+     thing standing between a reader and the wrong purchase. That check
+     runs first in matchIdentity, before brand and before model, which
+     is exactly why it was put there. ================================== */
+  {
+    productId: "prod-litter-robot-4",
+    asin: "B0BH6MD3DJ",
+    /* Whisker, not Litter-Robot. The brand row names the company and the
+       product name is the machine — they are different words here and
+       matching on the wrong one refuses the product forever. */
+    brand: "Whisker",
+    modelTokens: ["lr4 0301"],
+    /* 'lr4 corebd' is the supply bundle's part number and is the ONLY
+       field that separates it from this machine. 'bundle' catches the
+       accessory bundles that publish one. 'lr4' alone can never deny —
+       it is a whole-token substring of this machine's own number. */
+    denyTokens: ["lr4 corebd", "lr3", "bundle"],
+  },
+  {
+    productId: "prod-petkit-purobot-max-pro-2",
+    asin: "B0DM83CLW3",
+    brand: "PETKIT",
+    /* 't5 2' is the Max Pro 2's number in full. 't5' alone is a
+       whole-token substring of it and may appear in neither list. */
+    modelTokens: ["t5 2"],
+    /* The Purobot Max 3 publishes model_number 'PuraMax 2' — a
+       different product line wearing a similar name, and confirmed by
+       reading B0F1YMM29X on 8 August. The other two are name-shaped
+       guards for a listing that starts publishing a model name. */
+    denyTokens: ["puramax", "purobot max 3", "purobot mini"],
+  },
+  {
+    productId: "prod-casa-leo-loo-too",
+    asin: "B09LL9S99B",
+    /* SMARTY PEAR, NOT CASA LEO, and this is not an error in the
+       listing. Smarty Pear built Leo's Loo Too and Casa Leo is the
+       brand it sells under; the brand row carries the maker. Holding
+       'Casa Leo' here would fail brandOk on every run and the product
+       would never be checked again. */
+    brand: "Smarty Pear",
+    modelTokens: ["3746"],
+    /* Read on 8 August: B0HB41VTJX is 'V2-Avocado Green' and
+       B0H5HZXT4C is 'V2B-Pink', a $699 bundle. Both are live, both are
+       Smarty Pear, and neither is this $599 machine. 'v2' is
+       SKU-shaped, so it prefix-matches 'v2b' as well and covers the
+       whole V2 family in one token. */
+    denyTokens: ["v2", "v2b"],
+  },
+  {
+    productId: "prod-petsafe-scoopfree-crystal-pro",
+    asin: "B0DR3JP2FZ",
+    brand: "PetSafe",
+    modelTokens: ["pal00 18017"],
+    /* THE FOUR-CENT TRAP, NOW A NUMBER RATHER THAN A WARNING. All three
+       siblings were read on 8 August and all three publish a PAL00
+       number of their own: 16806 is the Crystal Pro *Legacy*
+       Front-Entry at $229.95 — four cents under this machine and a
+       generation older — 16805 is the Legacy uncovered at $142.49 and
+       17296 is the Crystal Classic at $99. 'crystal pro' can never
+       deny: it is a whole-token substring of the Legacy's name AND of
+       this one, which is the whole reason the name was never enough. */
+    denyTokens: ["pal00 16806", "pal00 16805", "pal00 17296", "legacy", "crystal classic"],
+  },
+  {
+    productId: "prod-navimow-i110n",
+    asin: "B0CX7T6BR3",
+    /* NAVIMOW, not Segway. Segway owns Navimow and the listing's brand
+       row says Navimow; the manufacturer row says 'Navimow B.V.'. */
+    brand: "NAVIMOW",
+    modelTokens: ["i110n"],
+    /* HONEST LIMIT, RECORDED. The Garage S bundle (B0CZ3R3SJH, $1,298)
+       publishes model_number 'i110N' — the same number as this $1,099
+       mower — and the Rough Terrain Kit listing (B0D7HG4319, $1,168.30)
+       publishes no model number at all. No deny token can separate
+       those from this machine, because the fields do not differ. The
+       served-ASIN check is what does it, and for this product it is not
+       a backstop but the primary guard. The tokens below cover the
+       genuine siblings in the range. */
+    denyTokens: ["i105n", "i108n", "i206n", "h800", "garage", "rough terrain"],
+  },
+  {
+    productId: "prod-luba-3-awd-1500h",
+    asin: "B0GKNYZPC3",
+    brand: "Mammotion",
+    modelTokens: ["luba 3 1500h", "1500h"],
+    /* The cleanest pair on the site: the two LUBA 3s publish
+       'LUBA 3 1500H' and 'LUBA 3 3000H', so each one's deny token is
+       the other's model number and both fire on a real field. */
+    denyTokens: ["3000h", "5000h", "luba 2", "yuka", "mini"],
+  },
+  {
+    productId: "prod-luba-3-awd-3000h",
+    asin: "B0GKNQKJJQ",
+    brand: "Mammotion",
+    modelTokens: ["luba 3 3000h", "3000h"],
+    denyTokens: ["1500h", "5000h", "luba 2", "yuka", "mini"],
+  },
+  {
+    productId: "prod-automower-410iq",
+    asin: "B0DTV7TR6W",
+    brand: "Husqvarna",
+    /* Husqvarna publishes a nine-digit part number rather than the
+       marketing name: this mower is 970727401. Nothing in the details
+       table says '410iQ' at all. */
+    modelTokens: ["970727401"],
+    /* 970727501 is the 420iQ, read on 8 August at $3,144.37 — one digit
+       away from this machine and $644 dearer. */
+    denyTokens: ["970727501", "420iq", "430x", "450x"],
+  },
+  {
+    productId: "prod-worx-landroid-vision-wr320",
+    asin: "B0GN8KK8XW",
+    brand: "WORX",
+    modelTokens: ["wr320"],
+    /* WORX puts the SKU in the model number, which makes this the one
+       product here whose deny list needed no extra reads: WO7144,
+       WR342 and WR344 are the other three live Landroid Visions and
+       every one of them answers to the family name. */
+    denyTokens: ["wr342", "wr344", "wo7144"],
+  },
+  {
+    productId: "prod-eufy-e15",
+    asin: "B0DRVYDXWX",
+    brand: "eufy",
+    /* Model number T2880, part number T28801a1. The token is
+       SKU-shaped, so it prefix-matches the longer part number, which is
+       what the prefix allowance exists for. */
+    modelTokens: ["t2880"],
+    /* THE WEAKEST DENY LIST HERE, AND IT SAYS SO. A search of Amazon US
+       on 8 August returned no eufy sibling mower — no E18, no E17,
+       nothing but this E15 — so there is no sibling model number to
+       read and deny. These are name-shaped and fire only if the listing
+       begins publishing a model name. Today the separator is the served
+       ASIN plus T2880, and that is the honest description of it. */
+    denyTokens: ["e18", "e17"],
+  },
+  {
+    productId: "prod-dreame-a3-awd-1000",
+    asin: "B0H3V799KT",
+    brand: "dreame",
+    modelTokens: ["mxxa7300"],
+    /* 'bundle' IS THE LOAD-BEARING TOKEN. B0H761SNFG sells this mower
+       with a cleaning and blade set at exactly the same $1,599.99 and
+       publishes 'MXXA7300+Bundle C', which normalises to
+       'mxxa7300 bundle c' — our model number is its first whole token,
+       so the match would confirm. Deny runs first and 'bundle' refuses
+       it. 'a3 awd 1000' denies B0H46DDHKC, which publishes that string
+       as its model number and is the same machine on a different
+       listing we did not take; it is absent from this ASIN's fields, so
+       denying it costs nothing here. */
+    denyTokens: ["bundle", "a3 awd 1000", "a3 awd pro", "3500"],
+  },
 ];
 
 /** Products with no confirmed ASIN. They need discovery, not a refresh. */

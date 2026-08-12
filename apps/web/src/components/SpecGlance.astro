@@ -1,0 +1,160 @@
+---
+/* ============================================================
+   BotPlanet — specification at a glance.
+
+   THE PROBLEM IT SOLVES. A review runs two thousand words and ends
+   in a full specification table. A reader who arrived from a search
+   result comparing three machines does not want two thousand words;
+   they want the four or five figures that rule this one in or out,
+   and they want them before the argument starts. Today they either
+   scroll to the bottom or they leave.
+
+   IT INTRODUCES NO FACT. Every value here is lifted out of the same
+   review's `specGroups` — see lib/spec-glance.ts, which can only
+   return strings that were already in that array. If a figure is
+   wrong it is wrong in the full table too, and correcting it there
+   corrects it here.
+
+   IT PUBLISHES NO PRICE. Prices on this site come from the offer
+   engine, pass a freshness gate and carry the date they were
+   checked; a price copied into a specification box would carry
+   none of that. The buy box below is where a price belongs.
+
+   IT CARRIES ITS DATE, for the same reason a price does. A
+   specification is a claim about a moment: manufacturers revise
+   sheets, and a figure with no date is a figure nobody can check.
+   The SKU line names exactly which variant the figures describe,
+   because the US and global SKUs of several machines here disagree.
+
+   A FIELD THE MAKER DOES NOT PUBLISH IS COUNTED, NOT FAKED. The
+   line under the box says how many of the category's fields are
+   missing and sends the reader to the full table, where each one
+   is named and marked "not disclosed". Silence is reported rather
+   than smoothed over.
+   ============================================================ */
+import { buildGlance } from "../lib/spec-glance";
+import type { SpecGroup } from "./SpecTable.astro";
+
+interface Props {
+  categorySlug: string;
+  groups: SpecGroup[];
+  /** Which SKU the figures describe. */
+  skuNote?: string;
+  /** The date this review's facts were last checked. */
+  lastReviewed: string;
+  /** Anchor of the full table, so the box can point at what it left out. */
+  fullTableId?: string;
+}
+
+const { categorySlug, groups, skuNote, lastReviewed, fullTableId = "specifications" } = Astro.props;
+const glance = buildGlance(categorySlug, groups);
+
+const reviewed = new Date(`${lastReviewed}T00:00:00Z`).toLocaleDateString("en-GB", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+  timeZone: "UTC",
+});
+---
+
+{glance.worthShowing && (
+  <section class="bp-glance" aria-labelledby="glance-heading">
+    <h2 id="glance-heading" class="bp-glance__h">The specification at a glance</h2>
+
+    <dl class="bp-glance__grid">
+      {glance.rows.map((r) => (
+        <div class="bp-glance__cell">
+          <dt>{r.label}</dt>
+          <dd>
+            {r.value}
+            {r.note && <span class="bp-glance__note">{r.note}</span>}
+          </dd>
+        </div>
+      ))}
+    </dl>
+
+    <p class="bp-glance__foot">
+      {glance.missing > 0 && (
+        <>
+          <strong>{glance.missing} of {glance.total}</strong>
+          {glance.missing === 1 ? " field here is not published by the maker." : " fields here are not published by the maker."}{" "}
+        </>
+      )}
+      <a href={`#${fullTableId}`}>The full specification</a> names every figure, including the ones
+      nobody discloses.
+      {skuNote && <span class="bp-glance__sku">Figures describe {skuNote}.</span>}
+      <span class="bp-glance__date">Checked {reviewed}. No price here — prices carry their own check date in the buy box.</span>
+    </p>
+  </section>
+)}
+
+<style>
+  .bp-glance {
+    margin: var(--space-7, 2.5rem) 0;
+    padding: clamp(1.1rem, 3vw, 1.6rem);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg, 14px);
+    background: var(--panel);
+  }
+
+  .bp-glance__h {
+    margin: 0 0 1rem;
+    font-size: clamp(1.05rem, 2.4vw, 1.2rem);
+    letter-spacing: -0.01em;
+  }
+
+  /* Auto-fit rather than a fixed column count: five cells read as five on a
+     desktop and as a stack on a phone without a breakpoint per category. */
+  .bp-glance__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1px;
+    margin: 0;
+    background: var(--border-2);
+    border: 1px solid var(--border-2);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .bp-glance__cell {
+    background: var(--panel-2, var(--panel));
+    padding: 0.75rem 0.85rem;
+  }
+
+  .bp-glance__cell dt {
+    margin: 0 0 0.3rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+  }
+
+  .bp-glance__cell dd {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    font-weight: 600;
+  }
+
+  .bp-glance__note {
+    display: block;
+    margin-top: 0.3rem;
+    font-size: 0.78rem;
+    font-weight: 400;
+    line-height: 1.45;
+    color: var(--text-secondary);
+  }
+
+  .bp-glance__foot {
+    margin: 0.85rem 0 0;
+    font-size: 0.82rem;
+    line-height: 1.55;
+    color: var(--text-secondary);
+  }
+
+  .bp-glance__sku,
+  .bp-glance__date {
+    display: block;
+    margin-top: 0.25rem;
+  }
+</style>

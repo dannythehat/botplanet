@@ -6,7 +6,7 @@
  * terms, Product Catalog and approved creatives are the operational source of
  * truth for the three Aiper models.
  *
- * WHAT THIS FILE HOLDS: the programme identity, the rights basis, and — the
+ * WHAT THIS FILE HOLDS: the programme identity, the terms, and — the
  * important part — the exact-model matchers. Aiper publishes no SKUs, so the
  * only thing standing between a correct catalogue match and a Scuba X1 Pro
  * image landing on the Scuba X1 page is the matcher below. It is written to
@@ -15,7 +15,7 @@
  * WHAT IT DOES NOT HOLD: credentials, tokens, or any API response. The client
  * reads the token from the Worker secret at request time and never persists it.
  */
-import type { Placement, Transformation } from "./types";
+import type { Placement } from "./types";
 
 /* ------------------------------------------------------------------ */
 /* Programme identity                                                  */
@@ -218,19 +218,18 @@ export const AIPER_CJ_TERMS: CjTerm[] = [
 ];
 
 /**
- * The rights basis an ingested CJ asset carries until the API returns the real
+ * The terms an ingested CJ asset carries until the API returns the real
  * terms. It is deliberately the most restrictive reading: remote-served, no
  * local copy, proportional resize only. When `fetchProgrammeTerms()` returns
  * something more permissive, this record is replaced by what CJ actually says —
  * never widened by assumption.
  */
-export const CJ_CONSERVATIVE_RIGHTS = {
+export const CJ_CONSERVATIVE_TERMS = {
   key: "cj_aiper_product_catalog",
   text:
     "Aiper product media supplied through the CJ Product Catalog and approved creatives under BotPlanet's joined publisher relationship (publisher 8029924, advertiser 6404897). Pending retrieval of the advertiser's written terms through the CJ API, the most restrictive reading applies: images are served from the provider's host, no local copy is stored, only proportional resizing is performed, and no crop, overlay or alteration is made.",
   allowedMarkets: ["us"],
   allowedPlacements: ["product_page", "category_page", "listing_card", "comparison"] as Placement[],
-  allowedTransformations: ["proportional_resize"] as Transformation[],
   remoteServingRequired: true,
   localStoragePermitted: false,
   attributionRequired: null as string | null,

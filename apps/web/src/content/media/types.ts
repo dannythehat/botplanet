@@ -1,45 +1,31 @@
 /**
- * Media rights model — types and vocabularies.
+ * Media model — types and vocabularies.
  *
- * The principle this encodes: an image is not a file, it is a PERMISSION with a
- * file attached. Every asset therefore carries the basis on which we may show
- * it, where we may show it, whether we may store it, and how it disappears when
- * the permission ends. A URL with no recorded basis is not an asset; it is a
- * liability, and the validator rejects it.
+ * An asset record exists so a surface can render an image correctly: what it
+ * is, what it depicts, how big it is, what it says to a screen reader, and
+ * which slots it is allowed to fill. That is the whole job.
  *
- * Nothing here stores credentials, signed URLs or API keys. Those live in
- * Worker secrets and are referenced by name only, so a rights record can never
- * leak an access token into the repository or into public HTML.
+ * `kind` distinguishes a real depiction of a machine from a placeholder that
+ * stands in for one. That distinction is not administrative — a placeholder in
+ * Product structured data would tell a machine consumer it is looking at a
+ * photograph of the product when it is looking at a graphic that names it.
  */
 
-/** Where an image came from, in the source hierarchy's order of preference. */
-export type SourceTier =
-  | "manufacturer_media_library" // 1. approved press kit / media library
-  | "manufacturer_page_permitted" // 2. manufacturer page via an explicitly permitted method
-  | "affiliate_api" // 3. approved affiliate API supplying image content
-  | "affiliate_media_feed" // 4. approved retailer/affiliate media feed
-  | "original_botplanet" // 5. artwork we made
-  | "branded_placeholder"; // 6. honest branded placeholder
+/** Whether the file shows the actual machine or stands in for it. */
+export type AssetKind =
+  /** Shows the real machine. */
+  | "depiction"
+  /** Original artwork illustrating a concept rather than a specific machine. */
+  | "illustration"
+  /** Names a model and depicts nothing. */
+  | "placeholder";
 
-/** Preference ranking. Lower number is the better source. */
-export const SOURCE_TIER_RANK: Record<SourceTier, number> = {
-  manufacturer_media_library: 1,
-  manufacturer_page_permitted: 2,
-  affiliate_api: 3,
-  affiliate_media_feed: 4,
-  original_botplanet: 5,
-  branded_placeholder: 6,
+/** Preference ranking when more than one asset could fill a slot. */
+export const KIND_RANK: Record<AssetKind, number> = {
+  depiction: 1,
+  illustration: 2,
+  placeholder: 3,
 };
-
-/** How the file was actually obtained. Scraping is not in this list by design. */
-export type AcquisitionMethod =
-  | "press_kit_download"
-  | "affiliate_api_response"
-  | "affiliate_feed_record"
-  | "authored_in_house"
-  | "generated_from_house_template"
-  /** Recorded when nothing has been obtained yet, so the gap is explicit. */
-  | "not_yet_acquired";
 
 /** What a media asset is FOR. Not every product needs every type. */
 export type AssetType =
@@ -74,15 +60,6 @@ export const PRODUCT_DEPICTING_TYPES: AssetType[] = [
   "listing_thumbnail",
 ];
 
-/** May the file be stored on our infrastructure, or must it stay at source? */
-export type StorageMode =
-  /** We may download, store, and serve it ourselves. */
-  | "local_permitted"
-  /** The licence requires it to be served from the provider's host. */
-  | "remote_required"
-  /** Nothing is stored because nothing has been acquired. */
-  | "none";
-
 /** Where an image is allowed to appear. */
 export type Placement =
   | "product_page"
@@ -95,25 +72,24 @@ export type Placement =
   | "structured_data"
   | "email";
 
-/** Transformations the licence allows. */
-export type Transformation =
-  | "proportional_resize"
-  | "format_conversion"
-  | "approved_crop"
-  | "none_permitted";
-
 export type WithdrawalStatus = "active" | "withdrawn" | "expired";
 
 export type AltTextStatus = "approved" | "draft" | "decorative" | "missing" | "rejected";
 
-/** Which structured-data or social slots an asset may legitimately fill. */
+/**
+ * Which structured-data or social slots an asset may fill.
+ *
+ * Everything defaults open. The one thing that stays shut is `productImage`
+ * on a placeholder, because a graphic that names a model is not a picture of
+ * it and Product schema would present it as one.
+ */
 export interface SchemaEligibility {
   productImage: boolean;
   imageObject: boolean;
   articleImage: boolean;
   openGraph: boolean;
   twitter: boolean;
-  /** Why anything above is false. Always written when something is false. */
+  /** Why anything above is false. Written whenever something is false. */
   reason: string | null;
 }
 
@@ -130,7 +106,7 @@ export interface Derivative {
   crop: "native" | "hero" | "card" | "thumbnail" | "og";
 }
 
-/** The rights record. One per asset, no exceptions. */
+/** One record per image on the site. */
 export interface MediaAssetRecord {
   id: string;
   /** Stable product ID, or null when the asset serves a non-product purpose. */
@@ -144,31 +120,17 @@ export interface MediaAssetRecord {
    */
   exactModel: string | null;
   type: AssetType;
-  tier: SourceTier;
+  kind: AssetKind;
+  /** Who made the file, for the admin surface. */
   sourceProvider: string;
-  /** URL or API reference. Never a signed URL, never a credential. */
-  sourceRef: string | null;
-  /** Name of the Worker secret holding any credential. Never the secret. */
-  credentialSecretRef: string | null;
-  acquisitionMethod: AcquisitionMethod;
-  /** The written permission we rely on. Never empty for a rendered asset. */
-  rightsBasis: string;
-  allowedMarkets: string[];
+  /** Which slots this image may fill. */
   allowedPlacements: Placement[];
-  allowedTransformations: Transformation[];
-  storage: StorageMode;
-  /** True when the licence forbids us hosting the file ourselves. */
-  remoteServingRequired: boolean;
-  /** Attribution string the licence requires, or null. */
-  attributionRequired: string | null;
-  retrievedDate: string | null;
-  lastCheckedDate: string | null;
-  /** ISO date, or a rule such as "re-check quarterly", or null for perpetual. */
-  expiryRule: string | null;
+  /** When the file entered the repository. */
+  addedDate: string | null;
   withdrawal: WithdrawalStatus;
   withdrawalDate: string | null;
   withdrawalReason: string | null;
-  /** SHA-256 of the stored bytes. Required when storage is local_permitted. */
+  /** SHA-256 of the stored bytes, so a silent edit fails a test. */
   checksum: string | null;
   /** Intrinsic size, so width/height can always be emitted and CLS avoided. */
   width: number | null;
@@ -178,10 +140,7 @@ export interface MediaAssetRecord {
   altText: string;
   altTextStatus: AltTextStatus;
   schema: SchemaEligibility;
-  reviewerStatus: "unreviewed" | "reviewed" | "rejected";
-  /** True only for a real BotPlanet capture. Never true otherwise. */
-  supportsTestedClaim: boolean;
-  /** True when the asset is a placeholder and depicts no real product. */
+  /** True when the file shows the machine rather than standing in for it. */
   depictsRealProduct: boolean;
   /**
    * How the file wants to be framed.
@@ -199,13 +158,11 @@ export interface MediaAssetRecord {
 
 /**
  * Image readiness, as nine separate states rather than one vague flag.
- * A product can have a complete rights record and no hero; those are different
+ * A product can have a complete asset record and no hero; those are different
  * facts with different consequences for the surfaces that consume them.
  */
 export interface ImageReadiness {
-  /** Every asset attached to this product has a complete rights record. */
-  rightsRecordComplete: boolean;
-  /** Every product-depicting asset names the exact Job 8 model. */
+  /** Every product-depicting asset names the exact verified model. */
   exactModelConfirmed: boolean;
   heroReady: boolean;
   supportingImagesReady: boolean;
@@ -216,17 +173,4 @@ export interface ImageReadiness {
   publicRenderingSafe: boolean;
   /** Hero + supporting + variants + alt text + schema, all true. */
   fullProductMediaSetReady: boolean;
-}
-
-/** Why a product has no lawful imagery yet, and what would unblock it. */
-export interface AcquisitionBlocker {
-  productId: string;
-  /** The best tier we established is actually available. */
-  bestAvailableTier: SourceTier;
-  /** What was checked, so "blocked" is a finding rather than an assumption. */
-  checked: string[];
-  blocker: string;
-  /** The specific action that unblocks it, and who must take it. */
-  unblockAction: string;
-  owner: "danny" | "claude" | "manufacturer";
 }

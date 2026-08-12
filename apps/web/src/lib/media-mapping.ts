@@ -9,7 +9,6 @@
  * mapping use, so the three can never disagree.
  */
 import { MEDIA_ASSETS } from "../content/media/assets";
-import { MEDIA_SOURCE_CHECK_DATE, PRODUCT_PHOTOGRAPHY_POSITION } from "../content/media/rights";
 import { productPath } from "../content/routes";
 import { absUrl } from "./seo";
 import { TARGET_TYPES, mediaReport, schemaImagesFor } from "./media-registry";
@@ -27,11 +26,7 @@ export interface MediaRegisterRow {
   renderedIsPlaceholder: boolean;
 
   imageSource: string;
-  rightsBasis: string;
   allowedPlacements: string[];
-  allowedMarkets: string[];
-  storage: string;
-  remoteServingRequired: boolean;
 
   altText: string;
   altTextStatus: string;
@@ -51,9 +46,7 @@ export interface MediaRegisterRow {
 }
 
 export function buildMediaMapping(): {
-  generatedFor: string;
   launchProducts: number;
-  position: string;
   totals: ReturnType<typeof mediaReport>["totals"];
   rows: MediaRegisterRow[];
 } {
@@ -71,10 +64,9 @@ export function buildMediaMapping(): {
         : "not_renderable";
 
     const blockers: string[] = [];
-    if (!p.readiness.heroReady) blockers.push("no rights-cleared product hero");
+    if (!p.readiness.heroReady) blockers.push("no product hero");
     if (!p.readiness.supportingImagesReady) blockers.push("no supporting product imagery");
     if (!p.readiness.schemaEligible) blockers.push("no image eligible for Product structured data");
-    if (p.blocker) blockers.push(p.blocker.blocker);
 
     return {
       productId: p.productId,
@@ -87,12 +79,8 @@ export function buildMediaMapping(): {
       renderedAssetId: rendered?.assetId ?? null,
       renderedIsPlaceholder: rendered?.isPlaceholder ?? false,
 
-      imageSource: asset ? `${asset.tier} — ${asset.sourceProvider}` : "none",
-      rightsBasis: asset?.rightsBasis ?? "none",
+      imageSource: asset ? `${asset.kind} — ${asset.sourceProvider}` : "none",
       allowedPlacements: asset?.allowedPlacements ?? [],
-      allowedMarkets: asset?.allowedMarkets ?? [],
-      storage: asset?.storage ?? "none",
-      remoteServingRequired: asset?.remoteServingRequired ?? false,
 
       altText: rendered?.alt ?? "",
       altTextStatus: asset?.altTextStatus ?? "missing",
@@ -104,7 +92,7 @@ export function buildMediaMapping(): {
 
       missingImageTypes: p.missingTypes,
       withdrawalFallback:
-        "the media registry re-resolves on every request: a withdrawn asset is skipped and the next-best asset renders, ending at the branded placeholder. No broken image can appear, and structured data and Open Graph references disappear with it.",
+        "the media registry re-resolves on every request: a pulled asset is skipped and the next-best asset renders, ending at the placeholder. No broken image can appear, and structured data and Open Graph references disappear with it.",
 
       readiness: { ...p.readiness } as unknown as Record<string, boolean>,
       imageReadinessStatus: status,
@@ -113,9 +101,7 @@ export function buildMediaMapping(): {
   });
 
   return {
-    generatedFor: MEDIA_SOURCE_CHECK_DATE,
     launchProducts: rows.length,
-    position: PRODUCT_PHOTOGRAPHY_POSITION,
     totals: report.totals,
     rows,
   };

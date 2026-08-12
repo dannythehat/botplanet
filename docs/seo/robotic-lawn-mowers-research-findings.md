@@ -293,7 +293,7 @@ HOBOT S7 Pro in the window build.
 Seven guides. Each one is checked against the hub and against the others.
 
 ### G1 — Wire-free navigation: RTK, GPS and LiDAR vs boundary wire
-**`/guides/robot-lawn-mower-without-boundary-wire/`**
+**`/guides/wire-free-robot-lawn-mower/`**
 
 | Term | Vol/mo | KD |
 |---|---|---|
@@ -345,7 +345,7 @@ where it belongs anyway, since acreage is the first question BotMatch asks.
 priced the answer at $0.004. That call was worth making.)*
 
 ### G3 — Budget robot mowers
-**`/guides/best-budget-robot-lawn-mower/`**
+**`/guides/cheap-robot-lawn-mower/`**
 
 | Term | Vol/mo | KD |
 |---|---|---|
@@ -619,3 +619,113 @@ The SERP also carries an **AI overview**, `discussions_and_forums` and
 Facebook threads rank in the top 18. Google is treating acreage as a question
 people argue about rather than one a buying guide settles, which is a second,
 independent reason not to give it a commercial page.
+
+---
+
+## Stage 4 amendment — 7 August 2026: 17 reviews cut to 10
+
+**The proposed 17 had the same fault the window category shipped with, and it
+was caught before anything was built rather than after.**
+
+Six of the seventeen were near-identical siblings inside one range, separated
+by mowing area and nothing else:
+
+| Pair | What actually differs |
+|---|---|
+| Husqvarna Automower 430X / 415X | area |
+| Segway Navimow i110N / i105N | area |
+| Segway Navimow X430 / X330 | area |
+| Eufy E18 / E15 | area |
+| ECOVACS GOAT O1000 / A2000 | area |
+| Mammotion LUBA 2 AWD / LUBA 3 | consecutive generations |
+
+Four Navimow pages and three Automower pages is a manufacturer's catalogue,
+not a comparison site. It is also the exact failure the window build made — six
+WINBOTs where the plan allowed three — which cost a merge, three redirects and
+a wasted set of artwork on 7 August. The owner's instruction is explicit: no
+duplicates, no different versions of the same thing.
+
+### The ruling: one machine per PROPOSITION, not per model number
+
+Selection is by what the hub itself says decides this category — boundary wire
+versus wire-free, then navigation type, then area — rather than by SKU.
+
+| # | Product | Vol/mo | The proposition it answers |
+|---|---|---|---|
+| 1 | Husqvarna Automower 430X | 14,800 | Wire · large yard · premium |
+| 2 | Mammotion LUBA 2 AWD | ~4,500 | Wire-free RTK · AWD · steep slopes |
+| 3 | Mammotion YUKA | 720 | Wire-free RTK · collects clippings |
+| 4 | Husqvarna Automower 115H | 590 | Wire · small yard · budget |
+| 5 | Eufy E18 | 590 | Wire-free · mid yard · cheapest wire-free |
+| 6 | Segway Navimow i110N | 480 | Wire-free RTK · quarter acre |
+| 7 | Segway Navimow X430 | 480 | Wire-free RTK **+ vision** · 1.2 acre |
+| 8 | Worx Landroid Vision | 260 | **Camera only** — no RTK, no wire |
+| 9 | Greenworks Optimow | 260 | Wire · mid yard · second wired brand |
+| 10 | ECOVACS GOAT O1000 | 210 | **LiDAR + vision** — the only one |
+
+**Ten reviews, seven brands, maximum two per brand** (was four). Navigation
+spread: 3 wired, 4 RTK, 1 RTK+vision, 1 camera-only, 1 LiDAR — every branch of
+the hub's own decision tree has exactly one machine behind it, which is also
+what BotMatch needs to score against.
+
+**LUBA 3 is folded into the LUBA 2 review** rather than dropped, the way the
+W3 Omni folded into the W2 PRO Omni. It is 1,600/mo and a real question — is
+the newer generation worth it — but it is a section, not a page. The combined
+figure above reflects both.
+
+**EcoFlow Blade (320) is dropped, not merged.** Its differentiator is a lawn
+sweeper, which the YUKA already answers at more than twice the volume. Two
+pages for one proposition is the thing this amendment exists to prevent.
+
+**Any of the six can return** if a measured SERP shows its own result set. The
+cut is on duplication, not on quality, and nothing here says these are bad
+machines.
+
+### Still blocking: none of the ten is confirmed buyable
+
+Stage 4 requires a live Amazon US ASIN per product before any becomes a page.
+Automated discovery on 7 August was rate-limited by Amazon after roughly twenty
+searches — it answered with a 2.3 KB page carrying no results, which the first
+run wrongly reported as "no listings" for all seventeen. `scripts/amazon-
+discover.mjs` now retries and treats a short body as a throttle rather than an
+empty shelf. **Husqvarna remains the known risk**: it sells heavily through
+dealers and Lowe's, and it carries the largest cluster in the category.
+
+### Stage 4 discovery run, 7 August 2026 — candidates only, none verified
+
+Twelve of seventeen returned a candidate ASIN. **Reading the titles shows at
+least four are the wrong machine**, which is the entire reason discovery and
+identity are separate steps on this site.
+
+| Product | ASIN | Listing says | Read |
+|---|---|---|---|
+| Husqvarna Automower 430X | B09WNF4V5G | "Automower 430X … GPS Assisted Navigation" | **plausible** |
+| Mammotion LUBA 2 AWD | B0DWRKVXD7 | "LUBA 2 AWD 5000HX … 1.25 Acres" | plausible, but 5000HX is one of three capacity variants |
+| Mammotion LUBA 3 | B0GKNQKJJQ | "LUBA 3 AWD 3000H, 0.75 Acre" | plausible |
+| Segway Navimow i110N | B0CX7T6BR3 | "Navimow i110N … 1/4 Acre RTK+Vision" | **plausible** |
+| Segway Navimow X430 | B0G8Y8CNH7 | "Navimow X430 … 1 Acre, 4WD, 84% Slopes" | **plausible** |
+| Worx Landroid Vision | B0GN8KK8XW | "… WR320 \| Landroid Vision Cloud" | plausible — WR320 is the Vision's SKU |
+| ECOVACS GOAT O1000 | B0GJ4F8MLF | "Goat O1000 **LiDAR PRO**" | variant, not the base O1000 |
+| ECOVACS GOAT A2000 | B0GGZQTY2N | "Goat A2000 **LiDAR PRO**" | variant |
+| Eufy E15 | B0DRVYDXWX | "Robot Lawn Mower E15 … Pure Vision" | plausible |
+| **Mammotion YUKA** | B0DT39TB3R | "**YUKA mini 2** 1000H" | **WRONG — sibling model** |
+| **Segway Navimow i105N** | B0G814F6Z4 | "Navimow **i206 AWD** … New i105N" | **WRONG — i206 listing** |
+| **EcoFlow Blade** | B0DTVF4QGY | "**Husqvarna Automower 420iQ**" | **WRONG — different manufacturer** |
+
+**The EcoFlow Blade result is the instructive one.** The matcher required the
+token `blade`, which appears in almost every mower listing as a component. A
+generic word is not a model identifier, and the match returned a Husqvarna.
+Any target whose model name is an ordinary noun needs a brand token too.
+
+Five returned no match at all: **Eufy E18, Husqvarna Automower 115H,
+Greenworks Optimow, Husqvarna Automower 415X, Segway Navimow X330.** Four of
+those five searches returned an ECOVACS Goat listing as the top result, which
+is Amazon answering a query it has no good match for — not evidence the
+product is unavailable. It needs a hand check before anything is concluded.
+
+**Effect on the ten-product plan: three of the ten have no usable candidate**
+(YUKA wrong, 115H unmatched, Optimow unmatched) and one more (E18) unmatched
+with its sibling E15 found instead. Nothing is dropped on this evidence — a
+failed automated search is not a finding — but no lawn product may become a
+page until its ASIN is machine-read and its identity confirmed, exactly as the
+eleven window products were on 6 August.

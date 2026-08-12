@@ -13,11 +13,11 @@
  * "No relationship exists" for its terms and its feed, so nothing can be
  * ingested and nothing is assumed.
  *
- * This file holds programme identity, the conservative rights basis and the
+ * This file holds programme identity, the conservative terms and the
  * exact-model matcher. It holds no credential: the client reads the token from
  * the Worker secret at call time.
  */
-import type { Placement, Transformation } from "./types";
+import type { Placement } from "./types";
 
 /* ------------------------------------------------------------------ */
 /* Programme identity                                                  */
@@ -159,13 +159,12 @@ export const WYBOT_US_TERMS: AwinTerm[] = [
   { term: "territory", value: "US, from the programme's primary region", source: "awin_api" },
 ];
 
-export const AWIN_CONSERVATIVE_RIGHTS = {
+export const AWIN_CONSERVATIVE_TERMS = {
   key: "awin_wybot_us_feed",
   text:
     "WYBOT product media supplied through the Awin US programme (publisher 3012175, advertiser 76816 WYBOTICS INC) once the advertiser approves the application. Pending retrieval of the programme's written terms, the most restrictive reading applies: images are served from the provider's host, no local copy is stored, only proportional resizing is performed, and no crop, overlay or alteration is made.",
   allowedMarkets: ["us"],
   allowedPlacements: ["product_page", "category_page", "listing_card", "comparison"] as Placement[],
-  allowedTransformations: ["proportional_resize"] as Transformation[],
   remoteServingRequired: true,
   localStoragePermitted: false,
   attributionRequired: null as string | null,

@@ -77,8 +77,28 @@ describe("brand voice — the rules exist and are usable", () => {
 });
 
 describe("published prose does not sound generated", () => {
+  /**
+   * A QUOTATION IS SOMEBODY ELSE'S WORDS, and these rules are about ours.
+   *
+   * The Yarbo review quotes a Reddit thread titled "Extremely Disappointed
+   * with the Yarbo Snow Blower" — it is the third result on that machine's own
+   * money term and the strongest evidence on the page. The empty-intensifier
+   * rule fired on it, which would have meant either dropping the evidence or
+   * misquoting it, and both are worse than the thing the rule prevents.
+   *
+   * So double-quoted spans are blanked before the banned-construction check
+   * and only that check. The sentence-length and rhythm rules still see the
+   * quotes, because a long quotation still makes a long sentence to read.
+   *
+   * This does not open a loophole worth worrying about: writing marketing
+   * filler and wrapping it in quotation marks to dodge the linter would be
+   * visible in review, and quoting a maker's own puffery in order to take it
+   * apart is exactly what this site does on purpose.
+   */
+  const withoutQuotations = (text: string) => text.replace(/"[^"]*"/g, '""');
+
   it.each(files)("%s uses no banned construction", (file) => {
-    const text = prose(readFileSync(`${REVIEW_DIR}/${file}`, "utf8"));
+    const text = withoutQuotations(prose(readFileSync(`${REVIEW_DIR}/${file}`, "utf8")));
     const hits: string[] = [];
 
     for (const b of BANNED_PHRASES) {

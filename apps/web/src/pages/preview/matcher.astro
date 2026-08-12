@@ -3,10 +3,12 @@
    not linked from anywhere. Delete once the funnel is signed off. */
 export const prerender = true;
 
-import PoolMatcher from "../../components/PoolMatcher.astro";
+import BotMatcher from "../../components/BotMatcher.astro";
+import { canMatch, emptyStateFor } from "../../content/matcher-router";
 import { questionsFor, tasksFor } from "../../content/matcher-questions";
 
 const SLUG = "robotic-pool-cleaners";
+const NAME = "Robotic Pool Cleaners";
 
 import "../../styles/tokens.css";
 import "../../styles/base.css";
@@ -25,11 +27,22 @@ import "../../styles/metal-theme.css";
   </head>
   <body>
     <main class="wrap" style="padding-top:2.5rem;padding-bottom:5rem;">
-      <PoolMatcher
-        categorySlug={SLUG}
-        categoryName="Robotic Pool Cleaners"
-        questions={questionsFor(SLUG)!}
-        tasks={tasksFor(SLUG)!}
+      <BotMatcher
+        mode="single"
+        categories={[
+          {
+            slug: SLUG,
+            name: NAME,
+            questions: questionsFor(SLUG)!,
+            tasks: tasksFor(SLUG)!,
+            /* A design preview, so it always renders the matchable branch —
+               the empty state has its own preview elsewhere and mixing them
+               here would hide whichever one the catalogue currently produces. */
+            matchable: canMatch(99),
+            emptyState: emptyStateFor(NAME, 0),
+            hubHref: `/robots/${SLUG}/`,
+          },
+        ]}
       />
     </main>
   </body>

@@ -1,21 +1,34 @@
 ---
-/** Best-of index. Lists only categories whose best-of work exists or is named. */
+/**
+ * Best-of index. Lists only categories whose best-of work exists or is named.
+ *
+ * A CARD IS A LINK ONLY WHERE THE PAGE EXISTS. It used to link wherever the
+ * CATEGORY was live, which is a different fact: nine categories are live and
+ * two best-of pages are written, so seven cards on this page pointed straight
+ * at a 404. Found 8 August 2026 by crawling every internal link on the site —
+ * they were the only broken links on it.
+ *
+ * The registry is the authority, because a best-of page gets a route record the
+ * moment it is built and /best-robots/[slug].astro deliberately 404s every
+ * other slug rather than inventing a thin page to fill the shape.
+ */
 import Base from "../../layouts/Base.astro";
-import { CATEGORIES, categoryRoutes } from "../../content/routes";
+import { CATEGORIES, builtBestOfCategories, categoryRoutes } from "../../content/routes";
 import { breadcrumbsFor } from "../../lib/routing";
 
 const cats = CATEGORIES.filter((c) => c.launch !== "hidden").sort((a, b) => a.order - b.order);
 const crumbs = breadcrumbsFor("/best-robots/");
+const built = builtBestOfCategories();
 ---
 <Base
   title="Best robots — our picks by use case"
-  description="BotPlanet's best-of picks, chosen by use case with the reasoning, the evidence level and who each product is wrong for."
+  description="The best robots for each job, chosen by use case with the reasoning, the evidence level, and who each product is wrong for."
   breadcrumbs={crumbs}
 >
   <div class="section-head">
     <span class="rule-accent" aria-hidden="true"></span>
     <span class="eyebrow">Best robots</span>
-    <h1 class="mt-0">Best picks by use case</h1>
+    <h1 class="mt-0">The best robots, by use case</h1>
     <p>
       Every pick states the reasoning, the evidence level behind it, and who should avoid it. Best-of pages publish as
       each category's product data is verified.
@@ -24,9 +37,9 @@ const crumbs = breadcrumbsFor("/best-robots/");
 
   <div class="grid grid--2">
     {cats.map((c) =>
-      c.launch === "live" ? (
+      built.has(c.slug) ? (
         <a class="card card--interactive" href={categoryRoutes(c.slug).best}>
-          <span class="pill pill--strong">In progress</span>
+          <span class="pill pill--strong">Published</span>
           <h2 class="b-title">Best {c.name.toLowerCase()}</h2>
           <p>{c.short}</p>
         </a>

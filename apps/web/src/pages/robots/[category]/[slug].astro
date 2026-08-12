@@ -1,19 +1,24 @@
 ---
 import Base from "../../../layouts/Base.astro";
 import { getDb, schema } from "../../../lib/db";
+import { productMetaDescription } from "../../../lib/product-meta";
 import { usd, freshnessLabel, titleCase } from "../../../lib/format";
 import { and, eq } from "drizzle-orm";
 import { breadcrumbsFor } from "../../../lib/routing";
 import { buildOffers, publicationFor } from "../../../lib/offer-truth";
 import { retailer } from "../../../content/commerce/registry";
-import { catalogueStatusOf, CATALOGUE_WITHDRAWALS } from "../../../content/products";
-import { resolveSlug, removedRedirect } from "../../../content/product-names";
+import { catalogueStatusOf, CATALOGUE_WITHDRAWALS, OFFER_SETUP_PENDING } from "../../../content/products";
+import { resolveSlug, removedRedirect, mergedRedirect } from "../../../content/product-names";
+import { categoryBySlug } from "../../../content/nav";
 import { latestAcceptedForProduct } from "../../../lib/providers/refresh-store";
 import ReviewArticle from "../../../components/ReviewArticle.astro";
 import { reviewFor } from "../../../content/reviews";
-import { reviewSchema, articleSchema, webPageSchema } from "../../../lib/seo";
-import { FOUNDER } from "../../../content/team";
+import { availabilityFor, reviewSchema, articleSchema, imageObjectSchema, webPageSchema } from "../../../lib/seo";
+import { FOUNDER, authorForReview } from "../../../content/team";
+import AuthorBox from "../../../components/AuthorBox.astro";
 import { deliveryLine, deliveryNote } from "../../../lib/delivery-wording";
+import { PRICE_WITHHELD_LABEL } from "../../../content/commerce/price-display";
+import { MEDIA_ASSETS } from "../../../content/media/assets";
 
 /* Today, as a date rather than an instant, resolved once for the whole render
    so two offers on one page cannot straddle midnight and disagree. */
@@ -37,6 +42,14 @@ if (redirectTo) return Astro.redirect(`/robots/${category}/${redirectTo}/`, 301)
    page. The URL was indexed, so it goes to the category rather than 404ing. */
 const gone = removedRedirect(slug!);
 if (gone) return Astro.redirect(gone, 301);
+
+/* A product whose review was folded into a sibling's. Unlike the two above,
+   the product is entirely intact — it is still stocked, still matchable and
+   still has its own buy path. Only the page went, and it went into another
+   page that covers this machine by name. So this lands on the review rather
+   than on the category: the visitor gets the article they asked for. */
+const merged = mergedRedirect(slug!);
+if (merged) return Astro.redirect(merged, 301);
 
 const product = (
   await db.select().from(schema.products).where(eq(schema.products.slug, storedSlug)).limit(1)
@@ -87,6 +100,10 @@ const engineOffers = buildOffers(new Date(), { live: live ? [live] : [] })
   .filter((x) => x.pub.showable);
 
 const withdrawn = catalogueStatusOf(product.id) !== "active";
+/* Verified and published, commercial wiring not built. See OFFER_SETUP_PENDING
+   in content/products.ts — it is dated and expires, and the build fails once a
+   product has sat in it for more than thirty days. */
+const offerSetupPending = product.id in OFFER_SETUP_PENDING;
 const withdrawal = CATALOGUE_WITHDRAWALS[product.id] ?? null;
 
 const evidence = await db
@@ -137,6 +154,11 @@ const siblings = hasReview
 
 /* Review + Article, and no rating anywhere in it — see reviewSchema for why a
    star is the one thing this site has not earned. */
+/* Who wrote it. Reviews default to the Reviews Editor — see authorForReview —
+   and the byline, the box and the structured data all read the same function,
+   so a page cannot credit one person to a reader and another to a crawler. */
+const reviewAuthor = hasReview ? authorForReview(review!.authorId) : FOUNDER;
+
 const reviewGraph = hasReview
   ? [
       webPageSchema({
@@ -147,12 +169,29 @@ const reviewGraph = hasReview
       reviewSchema({
         itemName: product.name,
         itemBrand: brand?.name ?? null,
+        itemSlug: product.slug,
+        /* THE SAME GATE THE VISIBLE PRICE USES, not a second one. An offer
+           reaches the markup on exactly the condition the card above prints
+           its price: `pub.priceShowable`. The offer URL is this page, which is
+           where the offer is actually published — /go/ is disallowed in
+           robots.txt and pointing structured data at it would ask a crawler to
+           fetch a URL it has been told not to. */
+        offers: engineOffers
+          .filter(({ pub, offer }) => pub.priceShowable && offer.basePriceMinor !== null)
+          .map(({ offer, pub }) => ({
+            priceMinor: offer.basePriceMinor,
+            currency: offer.currency ?? "USD",
+            availability: pub.stockShowable
+              ? (availabilityFor(offer.stock.state) ?? undefined)
+              : undefined,
+            url: Astro.url.pathname,
+          })),
         headline: review!.title,
         description: review!.metaDescription,
         path: Astro.url.pathname,
         dateModified: review!.lastReviewed,
-        authorName: FOUNDER.name,
-        authorPath: FOUNDER.path,
+        authorName: reviewAuthor.name,
+        authorPath: reviewAuthor.path,
         image: review!.image?.src,
         reviewBody: review!.verdict,
         positiveNotes: [review!.bestFor],
@@ -163,24 +202,64 @@ const reviewGraph = hasReview
         description: review!.metaDescription,
         path: Astro.url.pathname,
         dateModified: review!.lastReviewed,
-        authorName: FOUNDER.name,
-        authorPath: FOUNDER.path,
+        authorName: reviewAuthor.name,
+        authorPath: reviewAuthor.path,
         image: review!.image?.src,
       }),
+      /* AN ImageObject PER PICTURE THE PAGE ACTUALLY RENDERS.
+         The lead image and every in-body figure, and nothing else — a figure
+         listed in reviews.ts but skipped by the injector (because its heading
+         did not match) is not on the page and must not be in the graph.
+         Dimensions and caption come from the media registry, so the caption is
+         the same sentence the alt attribute carries and the size is the file's
+         own rather than the box it renders in.
+
+         PROMOTIONAL PANELS ARE HERE AND THAT IS CORRECT. ImageObject describes
+         a picture; it does not assert that the picture is this product's
+         photograph. What those panels stay out of is Product schema, which is
+         shut on them at the registry by ORIGINAL_SCHEMA. */
+      ...[review!.image?.src, ...(review!.figures ?? []).map((f) => f.src)]
+        .filter((src): src is string => Boolean(src))
+        .map((src) => MEDIA_ASSETS.find((a) => a.src === src))
+        .filter((a): a is NonNullable<typeof a> => Boolean(a) && Boolean(a!.width) && Boolean(a!.height))
+        .map((a) =>
+          imageObjectSchema({
+            path: a.src,
+            caption: a.altText ?? "",
+            width: a.width!,
+            height: a.height!,
+          }),
+        ),
     ]
   : [];
 ---
 
 <Base
   title={hasReview ? review!.seoTitle : `${product.name} — BotPlanet`}
-  description={hasReview ? review!.metaDescription : `${product.name}: specs, offers and suitability.`}
+  description={hasReview ? review!.metaDescription : productMetaDescription({
+    name: product.name,
+    productClass: product.productClass,
+    powerType: product.powerType,
+    environments: product.environments as string[],
+    cleans: product.cleans as string[],
+  })}
   ogImage={hasReview ? review!.image?.src : undefined}
   ogType={hasReview ? "article" : undefined}
   breadcrumbs={crumbs}
   schema={reviewGraph}
   narrow={hasReview}
 >
-  <p class="muted"><a href={`/robots/${category}/`}>← {titleCase(category!)}</a></p>
+  {/* THE BACK-LINK CANNOT ASSUME ITS CATEGORY HAS A HUB. A hidden category
+      does not — it is a reserved slug with no front door — and this link
+      pointed at it anyway, which put a crawlable internal link to a 404 at the
+      top of the money page. Found on the Yarbo review the day it shipped,
+      after the breadcrumb had been checked and passed: breadcrumbs resolve
+      through the route registry, and this line was building a URL by hand. */}
+  {categoryBySlug(category!)?.launch === "live" ? (
+    <p class="muted"><a href={`/robots/${category}/`}>← {titleCase(category!)}</a></p>
+  ) : (
+    <p class="muted"><a href="/robots/">← All robot categories</a></p>
+  )}
 
   {hasReview && (
   <ReviewArticle
@@ -237,12 +316,28 @@ const reviewGraph = hasReview
       a review still need somewhere to show their offers. */}
   {!hasReview && (
     <>
-      <h2 id="where-to-buy">Current offers</h2>
+      {/* id="buy", matching BuyBox.astro, because these two are alternatives
+          for the SAME section and callers link to it without knowing which
+          one rendered. They did not match until now: BotMatchSnapshot linked
+          "current offers" to #where-to-buy on every page, and on the 22 pages
+          that have a review the id was #buy, so the link went nowhere. */}
+      <h2 id="buy">Current offers</h2>
       {withdrawn ? (
     <p class="note">
       This robot is no longer part of the BotPlanet launch selection, so we do not link to a seller for it or
       recommend it. Its record stays published because the research behind it is still worth reading.
       {withdrawal && <span class="muted"> {withdrawal.reason}</span>}
+    </p>
+  ) : offerSetupPending ? (
+    /* OFFER_SETUP_PENDING. Verified and published, not yet wired to sell.
+       "Check current price" and nothing else: no figure, no /go link, and no
+       availability, because the identity check returned no stock field and a
+       product in this state makes no commercial claim at all. */
+    <p class="note">
+      <strong>Check current price.</strong> We have confirmed this is the current model and which listing is
+      the right one, and we have not finished setting up the link to buy it. Rather than send you somewhere we
+      have not checked, or print a price nobody read today, this page says so. Come back or search the model
+      name above.
     </p>
   ) : engineOffers.length === 0 ? (
     <p class="note">
@@ -251,9 +346,17 @@ const reviewGraph = hasReview
     </p>
   ) : (
     <>
+      {/* THE SENTENCE HAS TO SURVIVE A TABLE WITH NO PRICES IN IT. Eleven
+          litter boxes and lawn mowers were wired to Amazon on 8 August 2026
+          with a pinned ASIN each and no price at all — nothing has been
+          through the refresh service yet — and "every price below carries the
+          date it was checked" reads as an excuse on a table whose price column
+          is empty. It is a promise about the prices that ARE printed, so it is
+          only made when one is. */}
       <p class="note">
-        Every price below carries the date it was checked. Offer selection favours suitability and freshness, never
-        commission.
+        {engineOffers.some(({ pub, offer }) => pub.priceShowable && offer.basePriceMinor !== null)
+          ? "Every price below carries the date it was checked. Offer selection favours suitability and freshness, never commission."
+          : "The link below goes to the exact listing for this model, and nobody has checked its price on a recorded date yet — so this page shows none. Offer selection favours suitability and freshness, never commission."}
       </p>
       <table>
         <thead>
@@ -269,7 +372,11 @@ const reviewGraph = hasReview
                 )}
               </td>
               <td class="price" style="font-size:16px;">
-                {pub.priceShowable && offer.basePriceMinor !== null ? usd(offer.basePriceMinor) : <span class="muted">not confirmed</span>}
+                {/* "Check current price", the same words the buy box uses and
+                    the price ladder uses, rather than "not confirmed". They
+                    describe the same state and only one of them tells the
+                    reader what to do about it. */}
+                {pub.priceShowable && offer.basePriceMinor !== null ? usd(offer.basePriceMinor) : <span class="muted">{PRICE_WITHHELD_LABEL}</span>}
               </td>
               <td class="muted">{pub.stockShowable ? titleCase(offer.stock.state.replace(/_/g, " ")) : "—"}</td>
               <td class="muted">{(pub.shippingShowable && deliveryLine(offer.shipping.sourceWording, offer.sourceCheckedDate, TODAY)) || "—"}</td>
@@ -279,7 +386,9 @@ const reviewGraph = hasReview
               </td>
               <td>
                 {pub.linkable && offer.redirectKey ? (
-                  <a class="btn" href={`/go/${offer.redirectKey}`} rel="sponsored nofollow">View offer</a>
+                  <a class="btn" href={`/go/${offer.redirectKey}`} rel="sponsored nofollow">
+                    Check price on {retailer(offer.retailerId)?.displayName ?? "the retailer"}
+                  </a>
                 ) : null}
               </td>
             </tr>
@@ -299,5 +408,18 @@ const reviewGraph = hasReview
       ))}
     </>
   )}
+  {/* WHO WROTE THIS, ON THE PAGE AND NOT ONLY IN THE MARKUP. Every review here
+      named an author in its structured data and nobody in its HTML, so a
+      crawler knew who stood behind the rule-outs and a reader did not. It sits
+      last because it is the signature on the work rather than an introduction
+      to it. */}
+  {hasReview && (
+    <AuthorBox
+      author={reviewAuthor}
+      reviewed={review!.lastReviewed}
+      signedOffBy={FOUNDER}
+    />
+  )}
+
   <p class="note" style="margin-top:24px;">Affiliate disclosure: BotPlanet may earn a commission from retailer links. This never affects which product is recommended.</p>
 </Base>

@@ -1,10 +1,16 @@
 import { describe, expect, it } from "vitest";
 import { readFileSync } from "node:fs";
 import { applyInternalLinks } from "../src/lib/internal-linker";
-import { CATEGORY_ANCHORS, anchorsFor, liveAnchorsFor } from "../src/content/internal-links";
+import {
+  CATEGORY_ANCHORS,
+  RETROFITTED_INBOUND,
+  anchorsFor,
+  liveAnchorsFor,
+} from "../src/content/internal-links";
 import { REVIEWS } from "../src/content/reviews";
 import { ROUTES } from "../src/content/routes";
-import { productEditorial, catalogueStatusOf } from "../src/content/products";
+import { productEditorial, catalogueStatusOf, PRODUCT_ID } from "../src/content/products";
+import { EDITORIAL } from "../src/content/editorial";
 
 const POOL = anchorsFor("robotic-pool-cleaners");
 
@@ -49,7 +55,32 @@ describe("internal link anchors", () => {
     const { html } = applyInternalLinks("<p>a semi-cordless-ish machine</p>", POOL);
     expect(html).not.toContain("<a ");
     const g = applyInternalLinks("<p>an above-ground pool</p>", POOL);
-    expect(g.html).toContain(">above-ground</a>");
+    expect(g.html).toContain("above-ground");
+    expect(g.html).toContain("<a ");
+  });
+
+  it("gives an overlap to the longer phrase and never nests the shorter one", () => {
+    /* THE BUG THIS LOCKS OUT, and this test previously asserted it.
+       "above-ground pool" and "above-ground" are both live anchors. The old
+       linker rewrote the string in a loop, so the second one matched inside
+       the first one's freshly inserted <a> and emitted <a ...><a ...> — invalid
+       HTML that eight live pages were carrying. The longer, more specific
+       phrase should win the overlap outright. */
+    const { html, applied } = applyInternalLinks("<p>an above-ground pool</p>", POOL);
+    expect(html).not.toMatch(/<a\b[^>]*>[^<]*<a\b/);
+    expect(applied).toHaveLength(1);
+    expect(applied[0].anchor).toBe("above-ground pool");
+  });
+
+  it("emits no nested anchor for any category, on prose built to provoke one", () => {
+    for (const cat of Object.keys(CATEGORY_ANCHORS)) {
+      const live = liveAnchorsFor(cat);
+      if (live.length < 2) continue;
+      // One paragraph containing every anchor phrase this category declares.
+      const run = `<p>${live.map((a) => a.anchor).join(" and also ")}</p>`;
+      const { html } = applyInternalLinks(run, anchorsFor(cat));
+      expect(html, cat).not.toMatch(/<a\b[^>]*>[^<]*<a\b/);
+    }
   });
 
   it("renders nothing for a planned anchor, so no link points at a 404", () => {
@@ -76,10 +107,36 @@ describe("the anchor plan itself", () => {
    * point at a product only if that product is still active.
    */
   const productSlug = (path: string) => /^\/robots\/[a-z0-9-]+\/([a-z0-9-]+)\/$/.exec(path)?.[1];
+
+  /**
+   * Does the repo know this slug is a real, sellable product?
+   *
+   * WIDENED 6 August 2026, when the window reviews shipped. This used to
+   * require a PRODUCTS entry — the pool-era editorial map — and every window
+   * product failed it despite being published in D1 with verified
+   * specifications since 5 August. The test was asserting "has pool-style
+   * editorial", not "is an active product", and the two stopped being the same
+   * thing the moment a second category arrived whose editorial lives in
+   * reviews.ts instead.
+   *
+   * PRODUCT_ID is the right existence check: it is the slug-to-D1 join map
+   * every category has to appear in, whatever shape its editorial takes.
+   */
   const activeProduct = (slug: string) => {
-    const p = productEditorial(slug);
-    return Boolean(p && catalogueStatusOf(p.productId) === "active");
+    const productId = PRODUCT_ID[slug] ?? productEditorial(slug)?.productId;
+    return Boolean(productId && catalogueStatusOf(productId) === "active");
   };
+
+  /**
+   * Not every page under /robots/<category>/ is a product.
+   *
+   * The Enabot range page lives at /robots/pet-camera-robots/enabot/ because
+   * that is where a reader searching the brand expects it, and it is editorial
+   * — no catalogue row, no buy button, 9,900/mo. Both checks below read a path
+   * in that shape as a product slug and refused the first anchor pointing at
+   * it, which is the right instinct and the wrong answer.
+   */
+  const editorialPath = (path: string) => Boolean(EDITORIAL[path]);
 
   it("points every live anchor at a path the route registry knows", () => {
     const known = new Set(ROUTES.map((r) => r.path));
@@ -87,7 +144,7 @@ describe("the anchor plan itself", () => {
       for (const a of list.filter((x) => x.status === "live")) {
         const path = a.href.split("#")[0];
         const slug = productSlug(path);
-        const ok = slug ? activeProduct(slug) : known.has(path);
+        const ok = editorialPath(path) || (slug ? activeProduct(slug) : known.has(path));
         expect(ok, `${cat}: ${a.anchor} → ${path}`).toBe(true);
       }
     }
@@ -99,6 +156,7 @@ describe("the anchor plan itself", () => {
       for (const a of list.filter((x) => x.status === "live")) {
         const path = a.href.split("#")[0];
         const slug = productSlug(path);
+        if (editorialPath(path)) continue;
         if (slug) {
           /* A withdrawn product keeps its record and loses its page, so an
              anchor pointing at one would be a live link to a redirect. */
@@ -164,5 +222,148 @@ describe("phrases that wrap across a line", () => {
     expect(applyInternalLinks(src, POOL, self).html).not.toContain("polaris-freedom");
     // ...and still links it from any other page.
     expect(applyInternalLinks(src, POOL).html).toContain("polaris-freedom");
+  });
+});
+
+describe("a product anchor points at the product it names", () => {
+  /**
+   * THE REGRESSION THIS EXISTS FOR, found by crawling the live site on
+   * 8 August 2026 rather than by any test here.
+   *
+   * Three WINBOTs were merged into siblings on 7 August and their anchors were
+   * repointed with them — correct at the time. When the merge was reversed the
+   * next day and each got its page back, this file was not touched, so
+   * "WINBOT W3 Omni" went on sending the W3 Omni's own name to the W2 PRO
+   * Omni's page. Every existing check passed: the href was a real path, the
+   * route was live, the product was active. It was simply the wrong machine.
+   *
+   * The rule that catches it: an anchor naming a product must appear in that
+   * product's own review title. "WINBOT W3 Omni" is not a substring of
+   * "ECOVACS WINBOT W2 PRO Omni review", so the bad link fails here.
+   */
+  const norm = (x: string) => x.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+  const slugOf = (path: string) => /^\/robots\/[a-z-]+\/([a-z0-9-]+)\/$/.exec(path)?.[1] ?? null;
+  const isEditorial = (path: string) => Boolean(EDITORIAL[path]);
+
+  it("never sends a product's name to a different product's page", () => {
+    /* Only anchors that NAME a machine are judged. "iAquaLink" and "sun ledge"
+       point at product pages and name a feature, not a product; they are left
+       alone. The failure this catches is narrower and worse — an anchor that
+       matches some OTHER product's title and not the one it points at. */
+    const titles = Object.entries(REVIEWS).map(([slug, r]) => ({
+      slug,
+      hay: `${norm(r.title)} ${norm(slug)}`,
+    }));
+    const wrong: string[] = [];
+
+    for (const [cat, list] of Object.entries(CATEGORY_ANCHORS)) {
+      for (const a of list.filter((x) => x.status === "live")) {
+        const path = a.href.split("#")[0];
+        const slug = slugOf(path);
+        if (!slug || isEditorial(path)) continue;
+
+        const key = norm(a.anchor);
+        const target = titles.find((t) => t.slug === slug);
+        if (!target || target.hay.includes(key)) continue;
+
+        const elsewhere = titles.filter((t) => t.hay.includes(key)).map((t) => t.slug);
+        if (elsewhere.length) {
+          wrong.push(`${cat}: "${a.anchor}" → ${slug}, but it names ${elsewhere.join(" / ")}`);
+        }
+      }
+    }
+    expect(wrong).toEqual([]);
+  });
+});
+
+/**
+ * THE RETROFIT RULE — older pages must be updated to link to newer ones.
+ *
+ * See the long note above RETROFITTED_INBOUND in content/internal-links.ts for
+ * why this is a rule and not a habit. The short version: linking on this site
+ * only ever runs backwards in time unless something makes it run forwards, and
+ * every check that existed before this one passed while the newest page on the
+ * site had a single inbound link from a page built the same afternoon.
+ *
+ * The table cannot be satisfied by writing the table. Each claim is checked
+ * against the prose file on disk, so an entry added without the edit fails.
+ */
+describe("older pages link to newer ones", () => {
+  const proseOf = (name: string) => {
+    for (const dir of ["reviews", "articles"]) {
+      const f = `apps/web/src/${dir}/${name}.md`;
+      try {
+        return readFileSync(f, "utf8");
+      } catch {
+        /* try the other directory */
+      }
+    }
+    return null;
+  };
+
+  it("declares the anchor each retrofit relies on, and declares it live", () => {
+    for (const r of RETROFITTED_INBOUND) {
+      const declared = liveAnchorsFor(r.categorySlug).find((a) => a.anchor === r.anchor);
+      expect(declared, `${r.page}: no live anchor "${r.anchor}" in ${r.categorySlug}`).toBeDefined();
+      expect(declared!.href.split("#")[0], `${r.page}: "${r.anchor}" points elsewhere`).toBe(r.page);
+    }
+  });
+
+  it("names at least two older pages for every page that shipped", () => {
+    for (const r of RETROFITTED_INBOUND) {
+      expect(r.from.length, `${r.page} was retrofitted into too little`).toBeGreaterThanOrEqual(2);
+    }
+  });
+
+  it("finds the anchor phrase in each older page's prose, on disk", () => {
+    const missing: string[] = [];
+    for (const r of RETROFITTED_INBOUND) {
+      for (const src of r.from) {
+        const md = proseOf(src.prose);
+        if (md === null) {
+          missing.push(`${r.page}: no prose file for ${src.prose}`);
+          continue;
+        }
+        // The linker matches whitespace-flexibly, so a phrase that wrapped
+        // across a line in the source still links. Match the same way here,
+        // or a perfectly good retrofit fails on a line break.
+        const flexible = new RegExp(r.anchor.replace(/\s+/g, "\\s+"), "i");
+        if (!flexible.test(md)) missing.push(`${r.page}: "${r.anchor}" absent from ${src.prose}.md`);
+      }
+    }
+    expect(missing).toEqual([]);
+  });
+
+  it("only counts pages that genuinely predate the one they point at", () => {
+    const wrong: string[] = [];
+    for (const r of RETROFITTED_INBOUND) {
+      for (const src of r.from) {
+        if (src.shipped >= r.shipped) {
+          wrong.push(`${r.page} shipped ${r.shipped}; ${src.prose} shipped ${src.shipped}`);
+        }
+      }
+    }
+    expect(wrong).toEqual([]);
+  });
+
+  it("writes down why each older page earned the link", () => {
+    for (const r of RETROFITTED_INBOUND) {
+      for (const src of r.from) {
+        expect(src.why.length, `${r.page} → ${src.prose}: no reason given`).toBeGreaterThan(40);
+      }
+    }
+  });
+
+  /* Product URLs are generated per product and are not in ROUTES, so a page is
+     real if the registry knows it OR the catalogue holds an active product at
+     that slug — the same two-answer existence check the anchor plan uses. */
+  it("points every retrofitted page at somewhere that actually exists", () => {
+    const known = new Set(ROUTES.map((x) => x.path));
+    for (const r of RETROFITTED_INBOUND) {
+      const slug = /^\/robots\/[a-z0-9-]+\/([a-z0-9-]+)\/$/.exec(r.page)?.[1];
+      const productId = slug ? (PRODUCT_ID[slug] ?? productEditorial(slug)?.productId) : null;
+      const ok = known.has(r.page) || Boolean(productId && catalogueStatusOf(productId) === "active");
+      expect(ok, `${r.page} is neither a known route nor an active product`).toBe(true);
+    }
   });
 });

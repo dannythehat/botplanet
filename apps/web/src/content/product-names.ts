@@ -33,6 +33,27 @@ export interface RetiredSlug {
    changes or the product is dropped. Without an entry the old URL 404s instead
    of redirecting, and every link and ranking it had is thrown away. */
 export const RETIRED_SLUGS: Record<string, RetiredSlug> = {
+  /* THE THREE WINBOTS WERE MERGED HERE ON 7 AUGUST 2026 AND UNMERGED ON
+     8 AUGUST, at the owner's direction. Their entries are gone, so
+     /ecovacs-winbot-w3-omni/, /ecovacs-winbot-w2s/ and /ecovacs-winbot-mini/
+     serve their own reviews again rather than 301ing to a sibling.
+
+     WHY THE MERGE WAS WRONG, recorded because the reasoning for it was sound
+     and the outcome still was not. The 5 August research capped the category
+     at three WINBOTs on a real argument: "a category of one brand is a worse
+     page for a reader and a worse hedge for us." Eleven reviews were built the
+     next day ignoring that, six of them WINBOTs, and the merge was the
+     correction.
+
+     What it missed is that all three stayed PUBLISHED in D1 with live Amazon
+     offers. A redirect is the right answer for a product that no longer
+     exists. These exist, they are in stock, and they sit on the best-of page's
+     ranked list — so the 301s left three sellable products that no page on the
+     site could reach. Brand concentration is a reason to write about other
+     brands. It is not a reason to hide a buy button.
+
+     The parent reviews keep their variant sections. They now route to these
+     pages instead of standing in for them. */
   /* Both of these point at the FINAL destination, not at each other. The
      record moved twice in one day — X1 → X1 Pro → X1 Pro Max — and a chain of
      301s is a chain of chances to lose a visitor. Each retired URL gets there
@@ -73,6 +94,54 @@ export function resolveSlug(requested: string): { storedSlug: string; redirectTo
   const retired = RETIRED_SLUGS[requested];
   return retired ? { storedSlug: retired.to, redirectTo: retired.to } : { storedSlug: requested, redirectTo: null };
 }
+
+/* ------------------------------------------------------------------ */
+/* Reviews merged into another product's page                          */
+/* ------------------------------------------------------------------ */
+
+/**
+ * A product whose PAGE was merged into another product's review.
+ *
+ * DIFFERENT FROM BOTH TABLES AROUND IT, and the distinction is the whole
+ * reason this exists rather than being crammed into RETIRED_SLUGS. A retired
+ * slug means the record changed model — was named X, is named Y — and
+ * resolveSlug rewrites the D1 query with it. A removed product means the
+ * machine left the catalogue and its URL goes to the category. Neither is
+ * true here: the product is unchanged, still stocked, still matchable, still
+ * has its own destination and its own /go/ key. Only its page went, because
+ * it was the second page arguing with the first over the same search terms.
+ *
+ * So the redirect target is a REVIEW URL rather than a slug to re-query, and
+ * the merged review is required to carry a buy path for the machine whose page
+ * it absorbed — see ReviewContent.alsoCovers. A merge that drops the buy path
+ * has not merged two pages, it has deleted a product.
+ */
+export interface MergedReview {
+  /** Category the surviving review lives under. */
+  categorySlug: string;
+  /** Slug of the review that now covers this machine. */
+  into: string;
+  name: string;
+  mergedOn: string;
+  reason: string;
+}
+
+export const MERGED_REVIEWS: Record<string, MergedReview> = {
+  "mammotion-luba-3-awd-3000h": {
+    categorySlug: "robotic-lawn-mowers",
+    into: "mammotion-luba-3-awd-1500h",
+    name: "Mammotion LUBA 3 AWD 3000H",
+    mergedOn: "2026-08-11",
+    reason:
+      "The 1500H and the 3000H are one design in two sizes: same chassis, same 80% slope figure, same all-wheel drive, same 15 Ah battery, same 215-minute run, same 2.2–4.0 in cutting range on the SKUs we link. They differ on rated area, mowing rate, zone count and one navigation line. Two pages for that meant two pages chasing the same head terms — 'mammotion luba 3' at 1,600/mo and 'luba 3 awd' at 1,000 — while each held an exact-SKU term worth 30 and 40 respectively. Neither could win a term the other was also chasing. The surviving page names both machines in its H1, states the three differences its maker publishes only in listing titles, and carries a tracked buy path for each.",
+  },
+};
+
+/** Where a merged product's URL should send a visitor. */
+export const mergedRedirect = (slug: string): string | null => {
+  const m = MERGED_REVIEWS[slug];
+  return m ? `/robots/${m.categorySlug}/${m.into}/` : null;
+};
 
 /* ------------------------------------------------------------------ */
 /* Products removed from the catalogue                                 */

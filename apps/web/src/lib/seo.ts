@@ -55,6 +55,25 @@ export function isPreviewHost(host: string | undefined | null): boolean {
 export function buildMeta(input: MetaInput, host?: string | null): ResolvedMeta {
   const preview = isPreviewHost(host);
   const noindex = input.noindex || preview;
+  /**
+   * NOINDEX AND NOFOLLOW ARE DIFFERENT DECISIONS AND WERE BEING MADE TOGETHER.
+   *
+   * Every noindexed page on the production domain was also sending `nofollow`,
+   * which tells a crawler to discard every link on the page — the breadcrumbs,
+   * the header, the whole footer. That is right for a preview host, where the
+   * point is to keep the duplicate out of the index entirely. It is wrong for a
+   * real, linked page we simply do not want ranked: /botmatch/<category>/ is
+   * reachable from every category hub and links back into the catalogue, and
+   * `nofollow` was throwing those away.
+   *
+   * So: a page we choose not to index still gets crawled through, and only a
+   * host that should not be crawled at all gets the full stop.
+   */
+  const robots = preview
+    ? "noindex, nofollow"
+    : noindex
+      ? "noindex, follow"
+      : "index, follow";
   const image = absUrl(input.ogImage ?? OG_IMAGE_DEFAULT);
   return {
     title: input.title,
@@ -66,7 +85,7 @@ export function buildMeta(input: MetaInput, host?: string | null): ResolvedMeta 
     ogImage: image,
     ogUrl: absUrl(input.path),
     twitterCard: "summary_large_image",
-    robots: noindex ? "noindex, nofollow" : "index, follow",
+    robots,
   };
 }
 
@@ -162,10 +181,30 @@ export function breadcrumbSchema(items: Crumb[]) {
 export interface ProductOfferInput {
   priceMinor: number | null;
   currency?: string;
-  availability?: string; // schema.org availability enum tail e.g. "InStock"
+  /**
+   * schema.org availability enum tail, e.g. "InStock".
+   *
+   * OMITTED WHEN THE STOCK STATE IS NOT KNOWN, rather than defaulted. This used
+   * to fall back to "InStock", which is an invented claim in exactly the place
+   * the site is strictest about not making them — the offer engine already
+   * separates `priceShowable` from `stockShowable` precisely because a current
+   * price and a known stock state are different facts.
+   */
+  availability?: string;
   url: string;
   seller?: string;
 }
+
+/** schema.org availability for a stock state, or null where we do not know. */
+export const availabilityFor = (state: string): string | null =>
+  ({
+    in_stock: "InStock",
+    low_stock: "LimitedAvailability",
+    preorder: "PreOrder",
+    backorder: "BackOrder",
+    temporarily_unavailable: "OutOfStock",
+    unavailable: "OutOfStock",
+  })[state] ?? null;
 
 export interface ProductSchemaInput {
   name: string;
@@ -184,12 +223,15 @@ export interface ProductSchemaInput {
 export function productSchema(p: ProductSchemaInput) {
   const validOffers = p.offers.filter((o) => o.priceMinor != null);
   const prices = validOffers.map((o) => (o.priceMinor as number) / 100);
+  /* An empty sku or brand is worse than an absent one: it asserts the field
+     exists and is blank. Both are optional here because a Product built from a
+     review knows the model and may not know the rest. */
   const base: Record<string, unknown> = {
     "@type": "Product",
     name: p.name,
-    sku: p.slug,
-    brand: { "@type": "Brand", name: p.brand },
-    description: p.description,
+    ...(p.slug ? { sku: p.slug } : {}),
+    ...(p.brand ? { brand: { "@type": "Brand", name: p.brand } } : {}),
+    ...(p.description ? { description: p.description } : {}),
     url: absUrl(p.path),
   };
   if (p.image) base.image = absUrl(p.image);
@@ -199,7 +241,7 @@ export function productSchema(p: ProductSchemaInput) {
       "@type": "Offer",
       price: ((o.priceMinor as number) / 100).toFixed(2),
       priceCurrency: o.currency ?? "USD",
-      availability: `https://schema.org/${o.availability ?? "InStock"}`,
+      ...(o.availability ? { availability: `https://schema.org/${o.availability}` } : {}),
       url: absUrl(o.url),
     };
   } else if (validOffers.length > 1) {
@@ -234,6 +276,21 @@ export interface PersonInput {
   description?: string;
 }
 
+/**
+ * A named author, as a thing rather than a string.
+ *
+ * WHY THE @id MATTERS. Reviews carried `author: { "@type": "Person", name, url }`
+ * inline, which tells a crawler a name. A Person node with a stable @id at a URL
+ * that resolves lets the sixty-three reviews one person wrote point at ONE
+ * entity rather than sixty-three strings that happen to match — which is the
+ * whole mechanism behind an author being recognised as an author.
+ *
+ * THERE IS NO `award`, `alumniOf` OR `knowsAbout` HERE, deliberately. Those are
+ * the fields that turn an author box into a fabricated CV, and this site does
+ * not hold the facts to fill them. Everything emitted comes from
+ * content/team.ts, where the rule is that nothing about a real person is
+ * invented.
+ */
 export function personSchema(p: PersonInput) {
   return {
     "@type": "Person",
@@ -275,6 +332,21 @@ export interface ReviewSchemaInput {
   /** The exact model reviewed. */
   itemName: string;
   itemBrand?: string | null;
+  /** Catalogue slug, used as the Product sku. */
+  itemSlug?: string;
+  /** One line describing the machine, not the review. */
+  itemDescription?: string;
+  /**
+   * Offers for the machine, ALREADY THROUGH THE PUBLICATION GATE.
+   *
+   * The caller passes an offer here on exactly the condition it prints the
+   * price on the page — `publicationFor(offer).priceShowable`. Structured data
+   * that says $329 while the page says "price not current" is the same lie told
+   * to a machine instead of a reader, and it is the one Google penalises hardest
+   * on an affiliate site. Where nothing is publishable the Product still ships,
+   * without offers.
+   */
+  offers?: ProductOfferInput[];
   headline: string;
   description: string;
   path: string;
@@ -326,11 +398,27 @@ export function reviewSchema(r: ReviewSchemaInput) {
     ...(r.dateModified ? { dateModified: r.dateModified } : {}),
     author: { "@type": "Person", name: r.authorName, url: absUrl(r.authorPath) },
     publisher: { "@id": `${SITE_URL}/#organization` },
-    itemReviewed: {
-      "@type": "Product",
+    /**
+     * THE THING REVIEWED IS A PRODUCT, DESCRIBED AS ONE.
+     *
+     * This was `{ name, brand }` and nothing else, on all 38 review pages —
+     * valid, and about as much use to a search engine as a page title. The
+     * whole point of a review page on a shopping site is that the machine can
+     * be identified and bought, and productSchema() has existed since launch
+     * to say so; nothing had ever called it. Found 8 August 2026.
+     *
+     * Built by the same function the rest of the site would use, so there is
+     * one Product shape here rather than two that drift.
+     */
+    itemReviewed: productSchema({
       name: r.itemName,
-      ...(r.itemBrand ? { brand: { "@type": "Brand", name: r.itemBrand } } : {}),
-    },
+      slug: r.itemSlug ?? "",
+      path: r.path,
+      brand: r.itemBrand ?? "",
+      description: r.itemDescription ?? r.description,
+      image: r.image,
+      offers: r.offers ?? [],
+    }),
     ...(list(r.positiveNotes, "Best for") ? { positiveNotes: list(r.positiveNotes, "Best for") } : {}),
     ...(list(r.negativeNotes, "Not ideal for")
       ? { negativeNotes: list(r.negativeNotes, "Not ideal for") }

@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { injectFigures } from "../src/lib/review-figures";
+import { EDITORIAL } from "../src/content/editorial";
 import { REVIEWS } from "../src/content/reviews";
 import { MEDIA_ASSETS, REVIEW_FIGURES_WITHHELD } from "../src/content/media/assets";
 import { readFileSync } from "node:fs";
@@ -217,6 +218,34 @@ describe("every declared figure lands in its review", () => {
       for (const f of review.figures ?? []) {
         const want = f.afterHeading.replace(/[‘’]/g, "'").replace(/[“”]/g, '"').toLowerCase();
         expect(headings, `${review.slug}: no heading "${f.afterHeading}"`).toContain(want);
+      }
+    }
+  });
+});
+
+describe("editorial figures land too", () => {
+  /* Editorial pages gained figures on 8 August 2026. Same guard as the review
+     check above and the same failure it prevents: a figure naming a heading
+     nobody wrote is dropped silently in production, so the page renders
+     perfectly and is simply missing a picture. */
+  it("names a heading that exists, for every figure of every editorial page", () => {
+    for (const article of Object.values(EDITORIAL)) {
+      if (!article.figures?.length) continue;
+      const md = readFileSync(`apps/web/src/articles/${article.prose}.md`, "utf8");
+      const headings = [...md.matchAll(/^##\s+(.+)$/gm)].map((m) =>
+        m[1].trim().replace(/[\u2018\u2019]/g, "'").replace(/[\u201c\u201d]/g, '"').toLowerCase(),
+      );
+      for (const f of article.figures) {
+        const want = f.afterHeading.replace(/[\u2018\u2019]/g, "'").replace(/[\u201c\u201d]/g, '"').toLowerCase();
+        expect(headings, `${article.path}: no heading "${f.afterHeading}"`).toContain(want);
+      }
+    }
+  });
+
+  it("points every editorial figure at an asset the registry holds", () => {
+    for (const article of Object.values(EDITORIAL)) {
+      for (const f of article.figures ?? []) {
+        expect(MEDIA_ASSETS.some((a) => a.src === f.src), `${article.path}: ${f.src}`).toBe(true);
       }
     }
   });

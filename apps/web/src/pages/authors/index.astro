@@ -1,0 +1,77 @@
+---
+/**
+ * The named editorial team, which is two people and says so.
+ *
+ * A masthead on a site this size is not a status page. It exists because the
+ * position — we tell you when not to buy — is worth exactly as much as the
+ * reader's willingness to believe there is somebody behind it.
+ */
+import Base from "../../layouts/Base.astro";
+import { AUTHORS, EDITORIAL, authorForReview } from "../../content/team";
+import { REVIEWS } from "../../content/reviews";
+import { webPageSchema, breadcrumbSchema, personSchema } from "../../lib/seo";
+
+const authors = Object.values(AUTHORS);
+const countFor = (id: string) =>
+  Object.values(REVIEWS).filter((r) => authorForReview(r.authorId).id === id).length;
+
+const title = "Who writes BotPlanet";
+const description =
+  "The two people behind BotPlanet's reviews and recommendations, what each is accountable for, and how the work is actually done.";
+
+const schema = [
+  webPageSchema({ path: "/authors/", name: title, description, type: "AboutPage" }),
+  ...authors.map((a) =>
+    personSchema({
+      name: a.name,
+      jobTitle: a.role,
+      description: a.background ? `${a.bio} ${a.background}` : a.bio,
+      path: a.path,
+    }),
+  ),
+  breadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Authors", path: "/authors/" },
+  ]),
+];
+---
+
+<Base title={title} description={description} schema={schema}>
+  <h1>Who writes BotPlanet</h1>
+  <p class="muted" style="font-size:18px; max-width:680px;">
+    Two people, named, with what each one is accountable for. We do not claim hands-on testing we
+    have not done, and where a manufacturer will not publish a figure the review says so rather than
+    borrowing one.
+  </p>
+
+  <h2>The team</h2>
+  {authors.map((a) => (
+    <div class="card" style="max-width:680px; margin-bottom:16px; display:flex; gap:16px; align-items:flex-start;">
+      {a.portrait && (
+        <img
+          src={a.portrait.src}
+          srcset={`/media/authors/${a.id}-104w.webp 104w, /media/authors/${a.id}-220w.webp 220w`}
+          sizes="72px"
+          width="72"
+          height="72"
+          alt={a.portrait.alt}
+          loading="lazy"
+          decoding="async"
+          style="border-radius:50%; object-fit:cover; flex:none;"
+        />
+      )}
+      <div style="min-width:0;">
+      <h3 style="margin-top:0;"><a href={a.path}>{a.name}</a></h3>
+      <p class="muted">{a.role}{countFor(a.id) > 0 && <> · {countFor(a.id)} reviews</>}</p>
+      <p>{a.bio}</p>
+      <p class="muted">{a.covers}</p>
+      </div>
+    </div>
+  ))}
+
+  <h2>How the work is done</h2>
+  <p style="max-width:680px;">{EDITORIAL.method}</p>
+  <p class="muted">
+    The method in full is on the <a href="/review-methodology/">review methodology</a> page.
+  </p>
+</Base>

@@ -1,6 +1,18 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
-import { PRODUCTS } from "../src/content/products";
+import { PAGE_PLAN } from "../src/content/seo/page-plan";
+import {
+  CATALOGUE,
+  NO_OFFER_BY_DESIGN,
+  OFFER_SETUP_PENDING,
+  OFFER_SETUP_PENDING_DAYS,
+  PRODUCTS,
+  PRODUCT_ID,
+  POOL_SLUGS,
+  overduePendingOffers,
+  pendingAgeDays,
+} from "../src/content/products";
+import { REVIEWS } from "../src/content/reviews";
 import { DESTINATIONS, IDENTITY_CHECKS, REDIRECT_KEYS, REJECTED_CANDIDATES, destinationFor } from "../src/content/commerce/destinations";
 import { NOT_RELATIONSHIPS, PROGRAMMES, RETAILERS, approvedUsRetailers, programme, retailer, usableUsProgrammes } from "../src/content/commerce/registry";
 import { MANUAL_CHECKS } from "../src/content/commerce/manual-checks";
@@ -20,6 +32,7 @@ import {
 } from "../src/lib/offer-truth";
 import { buildOfferInventory, buildProductOfferMapping, buildProgrammeInventory, buildRejectedCandidates, buildRetailerInventory } from "../src/lib/commerce-mapping";
 import { isSafeAffiliateDestination } from "@botplanet/shared";
+import { pool as poolSeed } from "@botplanet/db/seed";
 import { SUPERSEDED_REFUSALS } from "../src/content/commerce/destinations";
 import { SerpApiAmazonProvider, SERPAPI_SECRET_REF, priceToMinor, toAttributes, toBuyingOptions } from "../src/lib/providers/serpapi-amazon";
 import { CATALOGUE_INTERVAL_DAYS, DAILY_INTERVAL_DAYS, MAX_DAILY_EXCEPTIONS, MONTHLY_CREDIT_CEILING, monthlyCost, planRefresh, type ExceptionReason } from "../src/lib/providers/refresh-policy";
@@ -28,10 +41,10 @@ import { buyNew, gate, matchIdentity, runRefresh } from "../src/lib/providers/re
 import { AWAITING_DISCOVERY, EXPECTED_IDENTITIES } from "../src/lib/providers/expected-identity";
 import type { BuyingOption } from "../src/lib/providers/amazon-provider";
 import { AMAZON_ASSOCIATE_TAG, AMAZON_ASSOCIATE_TAG_STATUS, amazonDestination } from "../src/lib/site";
-import { ACTIVE_PRODUCTS, CATALOGUE_WITHDRAWALS, LIFTED_WITHDRAWALS, catalogueStatusOf, productEditorialById } from "../src/content/products";
+import { ACTIVE_PRODUCTS, CATALOGUE_WITHDRAWALS, LIFTED_WITHDRAWALS, PRODUCT_ID, activeCatalogue, catalogueStatusOf, productEditorialById } from "../src/content/products";
 import { RETIRED_SLUGS, resolveSlug } from "../src/content/product-names";
 import { SHOW_PRICES } from "../src/content/commerce/price-display";
-import { marketplaceFor } from "../src/content/commerce/amazon-marketplaces";
+import { AMAZON_MARKETPLACES, REGIONAL_ASIN, REGIONAL_SKU_CONFLICTS, marketplaceFor } from "../src/content/commerce/amazon-marketplaces";
 import { RETIRED_VERIFICATIONS } from "../src/content/evidence/verification";
 import { deriveLedger } from "../src/content/evidence/derive";
 import { SERPAPI_OBSERVATIONS, SERPAPI_REJECTIONS, SERPAPI_RUN_CREDITS, SERPAPI_UNRESOLVED } from "../src/content/commerce/serpapi-observations";
@@ -40,7 +53,19 @@ const LEDGER_EVIDENCE = deriveLedger().evidence;
 
 const OFFERS = buildOffers();
 const REPORT = offerReport();
-const PRODUCT_IDS = Object.values(PRODUCTS).map((p) => p.productId);
+/*
+ * THE CATALOGUE, NOT THE POOL EDITORIAL. Corrected 6 August 2026.
+ *
+ * This read `PRODUCTS`, the same incomplete map buildOffers read, so every
+ * assertion below agreed with the code it was checking and proved nothing. All
+ * eleven window products were absent from both, which is how eleven published
+ * reviews shipped with a Buy heading and no offer behind any of them without a
+ * single test going red.
+ *
+ * A test that derives its universe from the same source as the code under test
+ * can only ever confirm they match. It cannot tell you the universe is wrong.
+ */
+const PRODUCT_IDS = Object.values(PRODUCT_ID);
 
 describe("identity and referential integrity", () => {
   it("passes validation with no errors", () => {
@@ -160,7 +185,29 @@ describe("exact-product destinations", () => {
     // A search fallback remains the honest answer whenever no correct listing
     // is held. If that happens again the count is what should change — never
     // the classification.
-    expect(exact).toHaveLength(12);
+    // 12 pool + 11 window + 1 companion. The window eleven arrived on 6 August
+    // 2026: their ASINs had been researched on 5 August and written into
+    // docs/seo/window-cleaning-robots-asins.md, and were never wired to
+    // anything. Identity for all eleven was machine-read before they were
+    // accepted here — see scripts/amazon-identity-check.mjs.
+    //
+    // Moflin joined on 8 August 2026, the first companion product with
+    // anything to sell. Five of that category's better-known names have no
+    // Amazon US listing at all, so this count will grow slowly and should.
+    //
+    // 49 from 8 August 2026: the eleven litter boxes and lawn mowers came off
+    // OFFER_SETUP_PENDING and were wired. That state emptied the same day it
+    // was created, which is the only good outcome for it — a product waiting
+    // there is a published review nobody can buy from.
+    //
+    // 50 from 11 August 2026: the Yarbo Snow Blower. It waited in
+    // OFFER_SETUP_PENDING for one day because the evidence, not the paperwork,
+    // was the obstacle — its ASIN came from a search-result title. The listing
+    // was then read directly and served brand YARBO with four specification
+    // figures matching yarbo.com. The details table still could not be read,
+    // so this is the one destination here confirmed WITHOUT a Model Number
+    // field, and destinations.ts says so at the entry rather than here.
+    expect(exact).toHaveLength(50);
     expect(search).toHaveLength(0);
     for (const d of exact) {
       expect(d.identifierKind).toBe("asin");
@@ -182,8 +229,27 @@ describe("exact-product destinations", () => {
       const check = IDENTITY_CHECKS[d.productId];
       const manual = MANUAL_CHECKS.find((m) => m.productId === d.productId && m.identityConfirmed);
       expect(Boolean(check?.confirmed) || Boolean(manual)).toBe(true);
-      // The evidence has to name what was read, not assert that it was.
-      if (check?.confirmed) expect(check.evidence).toMatch(/Model Number|Model Name|canonical/i);
+      /*
+       * The evidence has to NAME A FIELD SOMEBODY READ, not assert that
+       * reading happened.
+       *
+       * "Brand '...'" joined the list on 6 August 2026 with the window
+       * destinations. Amazon publishes an Item model number on some listings
+       * and not others — of the eleven window machines, exactly one has one
+       * (the W2 PRO Omni, 'W2MP'). For the other ten the fields that exist are
+       * Brand and the title, and both were read verbatim.
+       *
+       * "Sold by '...'" and "Title: '...'" joined for the same reason: on a
+       * listing that publishes neither a model number nor a model name, the
+       * storefront and the verbatim title are the fields that exist, and both
+       * were transcribed.
+       *
+       * The quote marks in the pattern are load-bearing. They demand a
+       * transcribed field VALUE rather than the word "brand" or "title"
+       * appearing in a sentence, which keeps the rule exactly where it was:
+       * name what the page said, do not describe having looked at it.
+       */
+      if (check?.confirmed) expect(check.evidence).toMatch(/Model Number|Model Name|canonical|Brand '|Sold by '|Title: '/i);
     }
     // Anything short of that stays researched_exact and says why.
     for (const d of DESTINATIONS.filter((x) => x.confidence === "researched_exact")) {
@@ -634,6 +700,81 @@ describe("/go redirect", () => {
     expect(route).toContain("amazon.com/s?k=");
   });
 
+  /**
+   * NO BARE US ASIN EVER LEAVES THE SITE TO A NON-US VISITOR.
+   *
+   * The owner followed our own Miko 3 link from the UK on 9 August 2026. Our
+   * ASIN is B0GV37M678. He did not get a Miko 3 and he did not get a 404 — he
+   * got a LOOI robot, a different machine from a different maker. AN ASIN IS
+   * NOT A GLOBAL IDENTIFIER: the same ten characters address different
+   * products on different stores.
+   *
+   * The old code's comment argued the opposite — that an unrouted country was
+   * "bounced FROM THE RIGHT PRODUCT rather than delivered to the wrong one".
+   * This test is that argument's replacement, and it walks every marketplace
+   * we know about plus a country we do not.
+   */
+  it("never sends a non-US click to a bare US ASIN", () => {
+    const NAME = "Miko 3";
+    const countries = [...AMAZON_MARKETPLACES.map((m) => m.country), "IE", "NZ", "ZZ"].filter((c) => c !== "US");
+    for (const cc of countries) {
+      const r = marketplaceFor("prod-miko-3", "B0GV37M678", cc, NAME);
+      expect(
+        r.url,
+        `${cc}: got the bare US ASIN, which is what sent the owner to a LOOI robot`,
+      ).not.toBe("https://www.amazon.com/dp/B0GV37M678");
+      /* Either a verified regional product page or a search. Never /dp/ on a
+         host we have not verified this ASIN against. */
+      if (r.url.includes("/dp/")) {
+        expect(r.kind, `${cc}: a /dp/ link that is not a verified regional ASIN`).toBe("regional_asin");
+      } else {
+        expect(r.url).toContain("/s?k=");
+        expect(decodeURIComponent(r.url)).toContain(NAME);
+      }
+    }
+  });
+
+  it("leaves a US click exactly as it was", () => {
+    const r = marketplaceFor("prod-miko-3", "B0GV37M678", "US", "Miko 3");
+    expect(r.url).toBe("https://www.amazon.com/dp/B0GV37M678");
+    expect(r.kind).toBe("us_asin");
+    expect(r.marketplace).toBe("US");
+    expect(amazonDestination(r.url, r.tag)).toBe("https://www.amazon.com/dp/B0GV37M678?tag=botplanet-20");
+  });
+
+  it("searches the visitor's own store, not amazon.com, where we have one", () => {
+    const gb = marketplaceFor("prod-miko-3", "B0GV37M678", "GB", "Miko 3");
+    expect(gb.url).toContain("www.amazon.co.uk/s?k=");
+    expect(gb.kind).toBe("regional_search");
+    expect(gb.marketplace).toBe("GB");
+  });
+
+  /* A store Earn Globally does not cover earns nothing, so the link goes out
+     clean rather than carrying a tag that store will not honour. */
+  it("attaches no tag on a store that does not credit us", () => {
+    const au = marketplaceFor("prod-miko-3", "B0GV37M678", "AU", "Miko 3");
+    expect(au.tag).toBeNull();
+    expect(amazonDestination(au.url, au.tag)).not.toContain("tag=");
+  });
+
+  it("records the Miko 3 collision rather than leaving it to be rediscovered", () => {
+    const conflict = REGIONAL_SKU_CONFLICTS.find((c) => c.productId === "prod-miko-3" && c.country === "GB");
+    expect(conflict, "the finding that caused this change is not written down").toBeTruthy();
+    expect(conflict!.asin).toBe("B0GV37M678");
+    expect(conflict!.conflict).toMatch(/LOOI/);
+  });
+
+  it("routes to a regional product page once a verified ASIN exists", () => {
+    /* REGIONAL_ASIN is empty today — no UK listing for anything we hold has
+       been verified. The branch still has to work, so it is exercised with a
+       constructed row rather than left untested until the day it matters. */
+    const withRow = { ...REGIONAL_ASIN, "prod-test:GB": "B000000GB1" };
+    expect(withRow["prod-test:GB"]).toBe("B000000GB1");
+    const gb = AMAZON_MARKETPLACES.find((m) => m.country === "GB")!;
+    expect(gb.host).toBe("www.amazon.co.uk");
+    expect(gb.tag).toBe("botplanet-20");
+  });
+
   it("refuses an unsafe destination rather than guessing", () => {
     expect(route).toContain("isSafeAffiliateDestination");
     expect(isSafeAffiliateDestination("https://www.amazon.com/dp/B0G64JV6K4")).toBe(true);
@@ -662,8 +803,109 @@ describe("/go redirect", () => {
   });
 
   it("records a key for every launch product", () => {
-    for (const id of PRODUCT_IDS) expect(REDIRECT_KEYS[id]).toBeTruthy();
-    expect(new Set(Object.values(REDIRECT_KEYS)).size).toBe(PRODUCT_IDS.length);
+    const sellableIds = PRODUCT_IDS.filter(
+      (id) => !(id in NO_OFFER_BY_DESIGN) && !(id in OFFER_SETUP_PENDING),
+    );
+    for (const id of sellableIds) expect(REDIRECT_KEYS[id]).toBeTruthy();
+    expect(new Set(Object.values(REDIRECT_KEYS)).size).toBe(sellableIds.length);
+  });
+
+  /* The other direction, and the one that stops the exemption becoming a
+     loophole: a product we have declared unsellable must not have a /go key or
+     an offer sitting behind it anyway. */
+  it("gives a refused product no buy route at all", () => {
+    for (const id of Object.keys(NO_OFFER_BY_DESIGN)) {
+      expect(REDIRECT_KEYS[id], `${id} is declared unsellable but has a /go key`).toBeUndefined();
+      expect(OFFERS.find((o) => o.productId === id), `${id} is declared unsellable but has an offer`).toBeUndefined();
+    }
+  });
+
+  /**
+   * THE ONE THAT MAKES THE OTHERS MEAN SOMETHING.
+   *
+   * Every published review either sells the product or declares that we refuse
+   * to. There is no third state, and until 8 August 2026 there was: Living.AI
+   * EMO had a page, a D1 row and no offer, and it passed every catalogue check
+   * by being absent from PRODUCT_ID rather than by saying so. That is a silent
+   * exclusion, and the problem with one is not that it is wrong — EMO genuinely
+   * should not have a buy button — but that it is indistinguishable from an
+   * oversight. A product that quietly never got its commercial work done looks
+   * exactly the same.
+   *
+   * This closes it: a review page must resolve to a slug this map knows, and
+   * that slug must then be sellable or refused in writing.
+   */
+  it("leaves no published review outside both the catalogue and the refusal list", () => {
+    const silent = Object.values(REVIEWS)
+      .map((r) => r.slug)
+      .filter((slug) => !(slug in PRODUCT_ID));
+    expect(silent, "reviewed products missing from PRODUCT_ID — sellable or refused, never neither").toEqual([]);
+  });
+
+  /**
+   * OFFER_SETUP_PENDING HAS A SHELF LIFE, AND THIS IS IT.
+   *
+   * Every "we'll wire it up later" state becomes the place products go to be
+   * forgotten. This one is dated and expires: thirty days after a product
+   * enters it, the build fails, and the only ways out are to wire the offer,
+   * refuse the sale in writing, or take the product down.
+   *
+   * The date is read from the system clock on purpose. A fixture would make
+   * this test pass forever, which is precisely the failure it exists to
+   * prevent.
+   */
+  it("fails once a pending product has waited longer than the shelf life", () => {
+    const today = new Date().toISOString().slice(0, 10);
+    const overdue = overduePendingOffers(today).map(
+      (id) => `${id} (since ${OFFER_SETUP_PENDING[id]!.since}, ${pendingAgeDays(OFFER_SETUP_PENDING[id]!.since, today)} days)`,
+    );
+    expect(
+      overdue,
+      `these have been OFFER_SETUP_PENDING more than ${OFFER_SETUP_PENDING_DAYS} days — wire the offer, refuse the sale in NO_OFFER_BY_DESIGN, or unpublish`,
+    ).toEqual([]);
+  });
+
+  it("gives every pending product a written reason and a real date", () => {
+    for (const [id, v] of Object.entries(OFFER_SETUP_PENDING)) {
+      expect(v.reason.length, `${id} is pending with no reason recorded`).toBeGreaterThan(40);
+      expect(v.since, `${id} has no valid since date`).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+      expect(Number.isNaN(Date.parse(v.since)), `${id}: since is not a date`).toBe(false);
+    }
+  });
+
+  /* The two states are mutually exclusive by definition: one says we refuse
+     the sale, the other says we have not built it yet. A product in both is a
+     product nobody has decided about. */
+  it("never puts a product in both pending and refused", () => {
+    const both = Object.keys(OFFER_SETUP_PENDING).filter((id) => id in NO_OFFER_BY_DESIGN);
+    expect(both, "declared both refused and pending").toEqual([]);
+  });
+
+  /* A pending product makes no commercial claim anywhere. */
+  it("gives a pending product no offer and no /go key", () => {
+    for (const id of Object.keys(OFFER_SETUP_PENDING)) {
+      expect(REDIRECT_KEYS[id], `${id} is pending but has a /go key`).toBeUndefined();
+      expect(OFFERS.find((o) => o.productId === id), `${id} is pending but has an offer`).toBeUndefined();
+    }
+  });
+
+  /**
+   * CATEGORY_OF defaults to the launch category, so a slug claimed by no set
+   * is filed as a pool cleaner in silence. That is not hypothetical: ten litter
+   * boxes and lawn mowers were briefly pool cleaners on 8 August 2026 because a
+   * ternary edit did not take, and nothing failed.
+   */
+  it("files no product in the launch category by accident", () => {
+    const pool = CATALOGUE.filter((p) => p.categorySlug === "robotic-pool-cleaners").map((p) => p.slug);
+    const known = new Set(POOL_SLUGS);
+    const strays = pool.filter((slug) => !known.has(slug));
+    expect(strays, "these fell through CATEGORY_OF into the launch category").toEqual([]);
+  });
+
+  it("gives every refused product a written reason", () => {
+    for (const [id, why] of Object.entries(NO_OFFER_BY_DESIGN)) {
+      expect(why.length, `${id} is refused with no reason recorded`).toBeGreaterThan(60);
+    }
   });
 
   it("carries no questionnaire answer into an outbound URL", () => {
@@ -716,7 +958,30 @@ describe("no private data escapes", () => {
   it("produces one mapping row per launch product with a canonical URL", () => {
     expect(exports.mapping.rows).toHaveLength(PRODUCT_IDS.length);
     for (const r of exports.mapping.rows) {
-      expect(r.canonicalUrl).toMatch(/^https:\/\/botplanet\.io\/robots\/robotic-pool-cleaners\/[a-z0-9-]+\/$/);
+      /* The category segment was hardcoded to robotic-pool-cleaners, from
+         when pool was the only category with products. It is now whichever
+         category the product belongs to — a window product's URL built on the
+         pool category is a 404, so this checks the shape and lets the mapping
+         name the category. */
+      expect(r.canonicalUrl).toMatch(/^https:\/\/botplanet\.io\/robots\/[a-z0-9-]+\/[a-z0-9-]+\/$/);
+      /* A SHAPE A WRONG ANSWER SATISFIES IS NOT A GATE. The assertion above
+         passed happily on 8 August 2026 while every companion product carried
+         a canonical URL of /robots/robotic-pool-cleaners/<slug>/ — five 404s
+         in the export whose entire job is telling an affiliate network where
+         our products live. The category segment must be the product's OWN
+         category, checked against the page plan rather than against a
+         pattern. */
+      const slug = r.canonicalUrl.replace(/\/$/, "").split("/").pop()!;
+      const category = r.canonicalUrl.split("/robots/")[1]!.split("/")[0]!;
+      /* Matched by SLUG across the whole plan, not by the URL we are checking
+         — asking planFor() for the URL would only confirm the URL agrees with
+         itself. A product with no planned review page is skipped rather than
+         failed: the withdrawn Dolphin E10 keeps a catalogue row and has no
+         page, which is correct and not a category error. */
+      const plan = PAGE_PLAN.find((p) => p.type === "review" && p.path.endsWith(`/${slug}/`));
+      if (plan) {
+        expect(plan.category, `${slug} is filed under ${category} but its page is in ${plan.category}`).toBe(category);
+      }
       expect(r.nextAction.length).toBeGreaterThan(20);
       // A fully evidenced product legitimately has no blockers — that is the
       // goal state, not a data error. Everything else must explain itself.
@@ -1305,9 +1570,89 @@ describe("scheduled refresh — wiring", () => {
    * string a human has to type in two places, which is where the mistake
    * actually happens.
    */
+  /**
+   * THE COVERAGE HOLE THAT COST THE WINDOW CATEGORY ITS BUY BUTTONS.
+   *
+   * Every guard above iterated a map derived from `PRODUCTS` — pool-era
+   * editorial — which is also what `buildOffers` iterated. A test that draws
+   * its universe from the same source as the code under test can only confirm
+   * the two agree. It cannot tell you the universe is wrong.
+   *
+   * It was. Eleven window machines were in `PRODUCT_ID`, in D1, and had
+   * published reviews with a Buy heading, and none of them was in `PRODUCTS`.
+   * So buildOffers produced nothing for them, every assertion skipped them,
+   * and the whole suite stayed green while a third of the published site could
+   * not earn a penny. Verified on botplanet.io before the fix: zero prices and
+   * zero /go/ links on every window review.
+   *
+   * This asserts against the CATALOGUE, which is the one list a product cannot
+   * be published without appearing in.
+   */
+  /* NO_OFFER_BY_DESIGN is subtracted from all three of these, and only from
+     these. The rule is "a buy button must lead somewhere real"; a page with no
+     buy button is outside it. The declaration lives in content/products.ts with
+     a written reason per product, so skipping one here costs an explicit
+     editorial statement rather than a quiet omission. */
+  const sellable = () =>
+    activeCatalogue().filter(
+      (p) => !(p.productId in NO_OFFER_BY_DESIGN) && !(p.productId in OFFER_SETUP_PENDING),
+    );
+
+  it("gives every product in the catalogue a real, buyable destination", () => {
+    for (const p of sellable()) {
+      const offer = OFFERS.find((o) => o.productId === p.productId);
+      expect(offer, `${p.slug}: no offer at all`).toBeDefined();
+      expect(offer!.destination.retailerProductId, `${p.slug}: no ASIN`).toMatch(/^B0[A-Z0-9]{8}$/);
+      expect(offer!.redirectKey, `${p.slug}: buy button has no /go key`).toBeTruthy();
+      expect(
+        publicationFor(offer!).linkable,
+        `${p.slug}: has a destination but the buy button will not render`,
+      ).toBe(true);
+    }
+  });
+
+  it("covers every window machine, by name", () => {
+    /* Listed rather than counted. A count passes when eleven products become
+       ten and a twelfth is added; these eleven are the ones whose reviews are
+       published, and each must be buyable. */
+    const WINDOW = [
+      "prod-ecovacs-winbot-w2-pro-omni", "prod-ecovacs-winbot-w2-pro",
+      "prod-ecovacs-winbot-w3-omni", "prod-ecovacs-winbot-w1-pro",
+      "prod-ecovacs-winbot-w2s", "prod-ecovacs-winbot-mini",
+      "prod-hobot-2s", "prod-hobot-298", "prod-cop-rose-x5s",
+      "prod-mamibot-w120-dp", "prod-hutt-s55-pro",
+    ];
+    for (const id of WINDOW) {
+      const o = OFFERS.find((x) => x.productId === id);
+      expect(o, `${id} has no offer`).toBeDefined();
+      /* `win-`, not `window-`. The keys are read out of D1 and abbreviate the
+         model; a derived key 404s. Checked against production 6 August 2026. */
+      expect(o!.redirectKey).toMatch(/^win-[a-z0-9-]+-amazon$/);
+      // Identity was machine-read before any of these was accepted.
+      expect(o!.destination.confidence).toBe("verified_exact");
+      /* Identity is not price. D1 holds 5 August research ESTIMATES for ten
+         of these — round numbers like 49900 — stored as snapshot/indicative so
+         the freshness gate can never publish them. Assert the gate, not the
+         column: the number may exist, and it must never reach a reader until
+         the refresh service reads a real one. */
+      expect(publicationFor(o!).priceShowable).toBe(false);
+    }
+  });
+
   it("gives every routed product a seeded offer behind its buy button", () => {
-    const seed = readFileSync("packages/db/seed/pool/commercial.ts", "utf8");
-    for (const p of Object.values(ACTIVE_PRODUCTS)) {
+    /* EVERY SEED, AND THE WHOLE CATALOGUE. This read only the pool seed and
+       only ACTIVE_PRODUCTS, so the eleven window keys it was meant to protect
+       were outside its reach in two separate ways at once.
+
+       A CATEGORY ADDED HERE IS A CATEGORY ADDED TO THIS LIST. Companion joined
+       on 8 August 2026 and the omission surfaced immediately, because the test
+       fails loudly for any routed product whose key is absent from the text it
+       reads — which is exactly the behaviour wanted. Read the directory rather
+       than the list if a fourth category makes this tedious. */
+    const seed = ["pool", "window", "companion", "petcam", "coding", "litter", "lawn", "snow"]
+      .map((c) => readFileSync(`packages/db/seed/${c}/commercial.ts`, "utf8"))
+      .join("\n");
+    for (const p of sellable()) {
       const key = REDIRECT_KEYS[p.productId];
       expect(key, `${p.slug}: no redirect key`).toBeTruthy();
       expect(
@@ -1449,8 +1794,17 @@ describe("the refresh cadence fits inside the allowance", () => {
     expect(worst).toBeLessThan(MONTHLY_CREDIT_CEILING);
   });
 
+  /* FOUR FROM 8 AUGUST 2026, AND THE NUMBER ABOVE IS WHY. Twenty-two products
+     on a three-day cadence is 220 credits before a single exception, against a
+     ceiling of 200 — twenty products is the most three days can fund and the
+     register passed it when litter and lawn were wired. Four days at one daily
+     exception costs 188 and keeps the whole catalogue on one cadence.
+
+     The bound still has to be a bound. A cap that drifts upward every time the
+     catalogue grows is not a cap, so this stays at four: the next product that
+     does not fit is a reason to look at the plan, not at this line. */
   it("caps how stale a published price can get", () => {
-    expect(CATALOGUE_INTERVAL_DAYS).toBeLessThanOrEqual(3);
+    expect(CATALOGUE_INTERVAL_DAYS).toBeLessThanOrEqual(4);
     expect(CATALOGUE_INTERVAL_DAYS).toBeGreaterThan(DAILY_INTERVAL_DAYS);
   });
 
@@ -1461,5 +1815,59 @@ describe("the refresh cadence fits inside the allowance", () => {
     );
     expect(decisions[0].due).toBe(true);
     expect(decisions[0].skipped).toBeNull();
+  });
+});
+
+/**
+ * RENAMED /go/ KEYS MUST STILL RESOLVE.
+ *
+ * A /go/ key is pasted into emails, saved in browsers and recorded in the click
+ * table. Renaming one without a forwarding address turns every one of those
+ * into a 404 on a buy button, which is the single most damaging failure this
+ * site has — the reader trusts the page and the click earns nothing.
+ *
+ * Two were renamed on 8 August 2026: the Bubot's keys still said
+ * "dolphin-premier" because the stable record ID they hang off does, and the
+ * machine on that record has been a BuBlue since 3 August.
+ */
+describe("renamed redirect keys", () => {
+  const src = readFileSync(
+    new URL("../src/pages/go/[key].ts", import.meta.url),
+    "utf8",
+  );
+  const block = /const RENAMED_KEYS: Record<string, string> = \{([\s\S]*?)\n\};/.exec(src)?.[1] ?? "";
+  const renamed = Object.fromEntries(
+    [...block.matchAll(/"([^"]+)":\s*"([^"]+)"/g)].map((m) => [m[1], m[2]]),
+  );
+  /* THE SEED, NOT THE TRUTH ENGINE. `/go/` looks a key up in redirect_links,
+     which the seed writes for every offer row. buildOffers() is a narrower set:
+     it suppresses the Leslie's row because BotPlanet has no relationship with
+     that retailer, so the key exists and resolves while the offer is not shown.
+     Asserting against the engine would have called a working link broken. */
+  const seededKeys = new Set(poolSeed.redirectLinkRows.map((r) => r.key));
+
+  it("forwards the Bubot's two legacy keys", () => {
+    expect(renamed["pool-dolphin-premier-amazon"]).toBe("pool-bublue-bubot800p-amazon");
+    expect(renamed["pool-dolphin-premier-leslies"]).toBe("pool-bublue-bubot800p-leslies");
+  });
+
+  it("sends every legacy key to a key an offer actually has", () => {
+    expect(Object.keys(renamed).length).toBeGreaterThan(0);
+    for (const [from, to] of Object.entries(renamed)) {
+      expect(seededKeys.has(to), `${from} forwards to ${to}, which has no redirect_links row`).toBe(true);
+    }
+  });
+
+  /* A key cannot be both retired and current: the route checks the forwarding
+     map first, so a live key listed there would redirect to itself forever. */
+  it("never forwards a key that is still in use", () => {
+    for (const from of Object.keys(renamed)) {
+      expect(seededKeys.has(from), `${from} is both live and retired`).toBe(false);
+    }
+  });
+
+  it("leaves no retired key in REDIRECT_KEYS", () => {
+    const pointed = new Set(Object.values(REDIRECT_KEYS));
+    for (const from of Object.keys(renamed)) expect(pointed.has(from)).toBe(false);
   });
 });

@@ -804,6 +804,289 @@ export const PRODUCT_ID: Record<string, string> = {
   "dolphin-e10": "prod-dolphin-e10",
   "dolphin-proteus-dx4-plus": "prod-dolphin-proteus-dx4-plus",
   "aiper-scuba-v3-ai-vision": "prod-aiper-scuba-v3-ai-vision",
+
+  /* WINDOW-CLEANING ROBOTS. Added 6 August 2026 with the review set.
+
+     These eleven have been published in D1 since 5 August with verified
+     manufacturer specifications, and the repo did not know they existed —
+     every map in this file was pool-only. The visible symptom was that the
+     internal-link anchor test could not confirm a window product was active,
+     because as far as the repo was concerned there was no such product.
+
+     Slug-to-ID only, deliberately. The editorial copy for these lives in
+     content/reviews.ts and src/reviews/*.md, which is where the window
+     category was built; PRODUCTS below is pool-era editorial that predates
+     the review template and is not worth duplicating for a second category. */
+  "ecovacs-winbot-w2-pro-omni": "prod-ecovacs-winbot-w2-pro-omni",
+  "ecovacs-winbot-w3-omni": "prod-ecovacs-winbot-w3-omni",
+  "ecovacs-winbot-w2-pro": "prod-ecovacs-winbot-w2-pro",
+  "ecovacs-winbot-w2s": "prod-ecovacs-winbot-w2s",
+  "ecovacs-winbot-w1-pro": "prod-ecovacs-winbot-w1-pro",
+  "ecovacs-winbot-mini": "prod-ecovacs-winbot-mini",
+  "hutt-s55-pro": "prod-hutt-s55-pro",
+  "mamibot-w120-dp": "prod-mamibot-w120-dp",
+  "hobot-2s": "prod-hobot-2s",
+  "hobot-298": "prod-hobot-298",
+  "cop-rose-x5s": "prod-cop-rose-x5s",
+
+  /* COMPANION ROBOTS. Added 8 August 2026 with the first review in the
+     category. Slug-to-ID only, as with window above: the editorial lives in
+     content/reviews.ts and src/reviews/*.md. */
+  "moflin": "prod-moflin",
+  "miko-3": "prod-miko-3",
+  "vector-2": "prod-vector-2",
+  "eilik": "prod-eilik",
+  "loona": "prod-loona",
+  "joy-for-all-companion-pets": "prod-joy-for-all-companion-pets",
+  "ropet": "prod-ropet",
+
+  /* PET CAMERA ROBOTS. Added 8 August 2026. */
+  "enabot-ebo-air-2": "prod-enabot-ebo-air-2",
+  "enabot-ebo-se": "prod-enabot-ebo-se",
+  "enabot-rola-petpal": "prod-enabot-rola-petpal",
+
+  /* EDUCATIONAL AND CODING ROBOTS. Added 8 August 2026 — the five of twelve
+     whose listings survived a read. */
+  "sphero-bolt": "prod-sphero-bolt",
+  "sphero-mini": "prod-sphero-mini",
+  "sphero-indi": "prod-sphero-indi",
+  "ozobot-evo": "prod-ozobot-evo",
+  "makeblock-mbot": "prod-makeblock-mbot",
+  /* Rule-out reviews. Real D1 rows and real pages, so they belong in the join
+     map like anything else — what they do not have is an offer, and that is
+     declared in NO_OFFER_BY_DESIGN below rather than by being left out here.
+
+     EMO JOINED THEM ON 8 AUGUST 2026. It had been absent from this map since
+     it shipped, which is how its page passed the catalogue tests: not by
+     declaring that we refuse the sale, but by not being visible to the check
+     at all. That is the same outcome reached two different ways, and only one
+     of them survives somebody reading the file in six months. */
+  "living-ai-emo": "prod-living-ai-emo",
+  "cozmo": "prod-cozmo",
+  /* Grillbot, added 10 August 2026 with the first grill-cleaning product. It
+     is OFFER_SETUP_PENDING — identity verified, no commercial wiring — and it
+     is in this map so it cannot be a SILENT exclusion: a review page must
+     resolve to a slug here and then be sellable or refused in writing, which
+     is the rule EMO's missing buy button taught. */
+  "grillbot": "prod-grillbot",
+  "moxie": "prod-moxie",
+
+  /* First products for litter boxes and lawn mowers, 8 August 2026. All ten
+     are OFFER_SETUP_PENDING: verified, published, not yet wired to sell. The
+     verification record — including the three the brief named wrongly and the
+     one refused outright — is docs/seo/litter-lawn-verification-2026-08-08.md. */
+  "litter-robot-4": "prod-litter-robot-4",
+  "petkit-purobot-max-pro-2": "prod-petkit-purobot-max-pro-2",
+  "casa-leo-loo-too": "prod-casa-leo-loo-too",
+  "petsafe-scoopfree-crystal-pro": "prod-petsafe-scoopfree-crystal-pro",
+  "segway-navimow-i110n": "prod-navimow-i110n",
+  "mammotion-luba-3-awd-1500h": "prod-luba-3-awd-1500h",
+  "mammotion-luba-3-awd-3000h": "prod-luba-3-awd-3000h",
+  "husqvarna-automower-410iq": "prod-automower-410iq",
+  "worx-landroid-vision-wr320": "prod-worx-landroid-vision-wr320",
+  "eufy-e15": "prod-eufy-e15",
+  /* Refused on 8 August as "Dreame A1", which does not exist; verified and
+     admitted the same day under its real name. See migration 0010. */
+  "dreame-a3-awd-1000": "prod-dreame-a3-awd-1000",
+
+  /* ROBOT VACUUMS, added 10 August 2026. The category with the most search
+     demand on the site and, until migration 0013, no catalogue at all.
+
+     TWO SLUGS DO NOT MATCH THE TERM THEY WERE PLANNED UNDER, and that is
+     deliberate rather than a typo. `roborock-s8-max-ultra` was planned as the
+     S8 MaxV Ultra, which has no first-party listing on Amazon US — every
+     result carrying that string is a third-party accessory kit — so the
+     product is built under the name the machine actually has. And
+     `eufy-omni-s1-pro` is the eufy S1 Pro of the plan, listed under eufy's own
+     "Omni S1 Pro" title. The full record is
+     docs/commerce/robot-vacuums-identity.md.
+
+     All eleven are OFFER_SETUP_PENDING: verified, published, not yet wired to
+     sell. */
+  "eufy-x10-pro-omni": "prod-eufy-x10-pro-omni",
+  "eufy-omni-s1-pro": "prod-eufy-omni-s1-pro",
+  "roborock-s8-max-ultra": "prod-roborock-s8-max-ultra",
+  "roborock-saros-10": "prod-roborock-saros-10",
+  "roborock-qrevo-s5v": "prod-roborock-qrevo-s5v",
+  "dreame-x40-ultra": "prod-dreame-x40-ultra",
+  "dreame-x50-ultra": "prod-dreame-x50-ultra",
+  "ecovacs-deebot-t90-pro-omni": "prod-ecovacs-deebot-t90-pro-omni",
+  "shark-powerdetect-av2820s": "prod-shark-powerdetect-av2820s",
+  "shark-matrix-plus-ur2650ws": "prod-shark-matrix-plus-ur2650ws",
+  "roomba-max-705": "prod-roomba-max-705",
+
+  /* ROBOT SNOW BLOWER, added 11 August 2026. One product, one manufacturer, and
+     a HIDDEN category rather than a real one — see nav.ts and migration 0017.
+     OFFER_SETUP_PENDING, and for once not as a formality: Amazon's own details
+     table has not been read, so the ASIN is unconfirmed and no buy link ships
+     until it is. */
+  "yarbo-snow-blower": "prod-yarbo-snow-blower",
+};
+
+/**
+ * Products that will never have an offer, and are not waiting for one.
+ *
+ * THE DISTINCTION THIS DRAWS. "No offer yet" is a gap and the catalogue tests
+ * are right to fail on it — a published review with a buy button pointing at
+ * nothing is the worst failure this site has. "No offer, ever" is an editorial
+ * decision, and it needs saying out loud rather than being smuggled past those
+ * tests by leaving the product out of PRODUCT_ID.
+ *
+ * Both entries here are rule-out reviews: pages that own a large search term
+ * and spend it telling the reader to buy something else. Cozmo's seller is
+ * under suit by a state Attorney General over roughly 14,000 prepaid orders
+ * that were never delivered. Moxie's maker ceased trading and the robots
+ * stopped working. Neither page carries a buy button, so the rule about buy
+ * buttons has nothing to say about them.
+ *
+ * Adding a slug here is not a shortcut for "we have not done the commercial
+ * work yet". It is a statement that we refuse the sale.
+ */
+/**
+ * OFFER_SETUP_PENDING — verified and published, not yet wired to sell.
+ *
+ * THE THIRD STATE, AND THE ONE THE OTHER TWO KEPT PRETENDING NOT TO NEED.
+ * A product used to be either sellable or refused. Ten litter boxes and lawn
+ * mowers verified on 8 August 2026 are neither: their identity is confirmed at
+ * the retailer and the manufacturer, they belong in the hub tables and the
+ * matcher, and nobody has built their commercial wiring yet. Filing them under
+ * NO_OFFER_BY_DESIGN would say we refuse the sale, which is false. Leaving them
+ * out of PRODUCT_ID would be the silent exclusion this file spent a day
+ * removing.
+ *
+ * WHAT IT MEANS ON THE PAGE. No /go link. No price. No availability or stock
+ * claim anywhere — a product in this state has an unknown stock state by
+ * definition, and the buy box says "Check current price" rather than inventing
+ * one.
+ *
+ * WHY IT EXPIRES. Every state like this is a silent exclusion waiting to
+ * happen: it starts as a note and becomes the place products go to be
+ * forgotten. So it has a date and a shelf life. A product sitting here more
+ * than THIRTY DAYS fails the build, and the fix is to wire the offer, refuse
+ * the sale in writing, or take the product down. There is no fourth option and
+ * there is no extending the clock quietly.
+ */
+export interface OfferSetupPending {
+  /** Why the offer is not wired yet. Not "TODO". */
+  reason: string;
+  /** ISO date the product entered this state. The clock starts here. */
+  since: string;
+}
+
+export const OFFER_SETUP_PENDING_DAYS = 30;
+
+/**
+ * EMPTY, AND THE DAY IT EMPTIED IS THE POINT.
+ *
+ * Eleven products entered this state on 8 August 2026 and all eleven left it
+ * the same day, wired to Amazon US with a pinned ASIN, a /go key and a seeded
+ * offer each. Nothing was carried forward and nothing was quietly re-dated.
+ *
+ * The eleven reasons that used to sit here have not been deleted — they are in
+ * git, and the wiring that answers each of them is recorded beside the ASIN it
+ * pins in commerce/destinations.ts. Two of those reasons turned out to be
+ * wrong about the obstacle, which is worth keeping in mind the next time
+ * something lands here: "Whisker's affiliate programme has not been applied
+ * for" and "Anker's programme is unapplied" both described a direct
+ * relationship nobody needs. Every one of these sells on Amazon US, where
+ * BotPlanet already has a programme, so the work was pinning a SKU rather than
+ * signing an agreement.
+ *
+ * The map stays, and so does its shelf life. This is the state a verified
+ * product waits in, and an empty one is the only good state for it to be in.
+ */
+export const OFFER_SETUP_PENDING: Record<string, OfferSetupPending> = {
+  /* Re-opened on 10 August 2026 for the first grill-cleaning product. The
+     shelf life above applies to it exactly as it did to the eleven. */
+  "prod-grillbot": {
+    reason:
+      "Identity is confirmed through Amazon's own brand field on 10 August 2026 and the ASIN family is mapped, but the listing itself served a bot check rather than a product page when read directly — so the pinned ASIN rests on dated third-party evidence rather than a page we read. A buy button is a different promise from a published page, and this one waits for a first-party read of B00HFDFSAC before it is wired.",
+    since: "2026-08-10",
+  },
+
+  /* THE ELEVEN ROBOT VACUUMS, 10 August 2026.
+     Identity is verified for all eleven — pinned ASIN, price and rating read
+     off each listing's own page the same day, recorded in
+     docs/commerce/robot-vacuums-identity.md. What none of them has is a
+     retailer destination, and this category is the one where wiring one
+     carelessly costs the most: four of the eleven sit in variation families or
+     one word away from a differently-priced sibling, and a bare /dp/ link on
+     any of them can land a reader on a machine that does not do what the page
+     they came from said it does. */
+  "prod-eufy-x10-pro-omni": {
+    reason:
+      "Verified at $449.99 on 10 August 2026, and it is a two-colour variation family: B0CPFBBHP4 black and B0DG5G9HQM white share one price and one review pool. A link without th=1&psc=1 lands on whichever child Amazon prefers. Waits for a pinned-variant destination.",
+    since: "2026-08-10",
+  },
+  "prod-eufy-omni-s1-pro": {
+    reason:
+      "The Amazon SEARCH row for B0CTY6VT8Y returns no price at all, which normally means no buy-box winner; the listing read on 10 August 2026 returns $919.58. It is also the lowest-rated machine in the category at 3.2 stars, and eufy's own line has moved to the Omni S2 and the C28. We are willing to publish a page about it because 33,100 people a month search the term. We are not willing to send a buyer at a price that may be a third-party seller's until the buy box is confirmed.",
+    since: "2026-08-10",
+  },
+  "prod-roborock-s8-max-ultra": {
+    reason:
+      "Verified at $949.99 on 10 August 2026 against both the listing and roborock's own product page. It carries the traffic for a term — roborock S8 MaxV Ultra — that names a DIFFERENT machine, and the reader arriving on that term has to understand the substitution before a buy button is the right thing to show them.",
+    since: "2026-08-10",
+  },
+  "prod-roborock-saros-10": {
+    reason:
+      "Verified at $1,299.99 on 10 August 2026 against both the listing and roborock's own page. A second ASIN for the same model, B0DLH45139, carries no price and 94 ratings; the pinned one must be held against that sibling before a destination is wired.",
+    since: "2026-08-10",
+  },
+  "prod-roborock-qrevo-s5v": {
+    reason:
+      "Verified at $499.98 on 10 August 2026. B0DSP8J476 and B0FX4SZ4KB are the same machine at the same price sharing one review pool, so this needs a pinned-variant destination rather than a bare /dp/ link. It also stands in for the family term roborock Qrevo, which covers four machines from $499.98 to $879.99.",
+    since: "2026-08-10",
+  },
+  "prod-dreame-x40-ultra": {
+    reason:
+      "Verified at $599.99 on 10 August 2026 from the Amazon listing. Dreame's own product page returned 404 or truncated content to a direct fetch, so the capability record here is thinner than the rest of the category — no obstacle avoidance is claimed because nothing we read claims it. The maker page gets read before this is wired.",
+    since: "2026-08-10",
+  },
+  "prod-dreame-x50-ultra": {
+    reason:
+      "Verified at $999.99 on 10 August 2026 from the Amazon listing, with the $989.99 Complete bundle held out as a different product. Dreame's own page returned 404 to a direct fetch, so no mop lifting is recorded — the listing claims obstacle crossing, which is step climbing and not the same claim. The maker page gets read before this is wired.",
+    since: "2026-08-10",
+  },
+  "prod-ecovacs-deebot-t90-pro-omni": {
+    reason:
+      "Verified at $599 on 10 August 2026 against both the listing and ECOVACS' own page. It stands in for the family term ecovacs deebot, which covers four current machines from $349 to $1,499.99, so the destination has to be right about which DEEBOT the reader is being sent to.",
+    since: "2026-08-10",
+  },
+  "prod-shark-powerdetect-av2820s": {
+    reason:
+      "Verified at $549.99 on 10 August 2026. This SKU is the self-empty VACUUM and its sibling RV2820ZE at $599.99 is the vacuum-and-mop; the two are fifty dollars and one word apart. A destination that lands a reader on the wrong one sells them a mop they did not want or denies them one they did.",
+    since: "2026-08-10",
+  },
+  "prod-shark-matrix-plus-ur2650ws": {
+    reason:
+      "Verified at $279.99 on 10 August 2026, with the largest review pool of the eleven at 35,917. The Matrix name covers four Shark machines across two different lines at $278.34 to $420.39, and this is the only one of them at the budget tier — so the destination must pin this SKU rather than the family.",
+    since: "2026-08-10",
+  },
+  "prod-roomba-max-705": {
+    reason:
+      "Verified at $499 on 10 August 2026. B0DWG15XKQ at $799 is the Roomba Max 705 COMBO — a different machine with a mop and an AutoWash dock, with its own review pool of 4,800. Three hundred dollars and one word apart is the worst kind of near-miss to wire in a hurry.",
+    since: "2026-08-10",
+  },
+};
+
+/** Days a product has been waiting, against the day given. */
+export const pendingAgeDays = (since: string, today: string): number =>
+  Math.floor((Date.parse(today) - Date.parse(since)) / 86_400_000);
+
+/** Products that have outstayed the shelf life, as of `today`. */
+export const overduePendingOffers = (today: string): string[] =>
+  Object.entries(OFFER_SETUP_PENDING)
+    .filter(([, v]) => pendingAgeDays(v.since, today) > OFFER_SETUP_PENDING_DAYS)
+    .map(([id]) => id);
+
+export const NO_OFFER_BY_DESIGN: Record<string, string> = {
+  "prod-living-ai-emo":
+    "Living.AI sells EMO direct and does not list it on Amazon US. Searching for it there returns imitations — EMOPET and unbranded desk robots — with the Living.AI brand token absent from every top result we read on 8 August 2026. There is no destination we could send a buyer to that we are confident sells the real product, so we send them nowhere. A SPECIFIC LISTING WAS PUT UP FOR THIS AND CHECKED ON 9 AUGUST 2026, amazon.com/dp/B0DG8JPL6J, and it failed on three counts. Its own details table gives brand 'EMOPET' and manufacturer 'EMOPET', and the storefront reads 'Visit the EMOPET Store' — the Living.AI token appears nowhere on the listing. It asks $419.00 for what its model number calls 'EMO GO HOME', against $369.00 for the EMO Go Home on Living.AI's own store, so it is fifty dollars ABOVE the maker's price, which is the wrong direction for an authorised reseller and the right one for a reseller nobody authorised. And Living.AI's own staff, on Living.AI's own forum, say the official store is 'the only legitimate place to purchase EMO' and that they cannot confirm Living.ai is the seller behind an Amazon listing. Sibling B0DDT2MT9K carries a near-identical EMOPET title, so this is a brand running a family of these listings rather than one stray reseller. Rechecking is welcome; wiring it on this evidence is not.",
+  "prod-cozmo":
+    "Digital Dream Labs is under suit by the Pennsylvania Attorney General over about 14,000 prepaid orders that went undelivered, and its store lists Cozmo 2.0 with no stock and no ship date. We will not route a buyer into that.",
+  "prod-moxie":
+    "Embodied ceased operations and Moxie stopped working when its servers went off. There is no new stock, and a used unit may never function. There is nothing here we would sell.",
 };
 
 /** Editorial records with the stable productId attached, keyed by slug (route id). */
@@ -885,6 +1168,174 @@ export const LIFTED_WITHDRAWALS: Record<string, { on: string; reason: string; li
 export const ACTIVE_PRODUCTS: Record<string, ProductEditorial> = Object.fromEntries(
   Object.entries(PRODUCTS).filter(([, p]) => catalogueStatusOf(p.productId) === "active"),
 );
+
+/**
+ * THE CATALOGUE. Every product that has a page, whatever shape its editorial
+ * takes.
+ *
+ * Added 6 August 2026 to fix a failure that was total and completely silent.
+ * `PRODUCTS` above is pool-era editorial keyed by slug, and the offer engine,
+ * the offer validator, the offer report and the product-offer mapping all
+ * treated it as "the catalogue". No window machine is in it — that category
+ * was built on reviews.ts and src/reviews/*.md, which is a different and
+ * perfectly good shape — so eleven published reviews with a Buy heading could
+ * not produce a single offer between them, and no test noticed, because the
+ * tests iterated the same map as the code.
+ *
+ * PRODUCT_ID is the real catalogue: it is the slug-to-D1 join every product
+ * must appear in to exist at all. Editorial is optional and looked up per
+ * product; the category comes from CATEGORY_OF below because productPath()
+ * needs it and a product URL built on the wrong category is a 404.
+ */
+/* THE THIRD SHAPE ARRIVED, AND THE BRANCH THAT LIVED HERE WAS WRONG ABOUT IT.
+   This was a two-way branch: window slugs by prefix, everything else pool. Its
+   own comment said "when a third shape arrives this becomes a lookup rather
+   than a branch". Companion robots arrived on 8 August 2026 and the branch
+   silently filed all five under robotic-pool-cleaners, so the product-offer
+   mapping published canonical URLs like
+   /robots/robotic-pool-cleaners/moflin/ — five 404s, in an export whose whole
+   job is telling an affiliate network where our products live.
+
+   NO TEST CAUGHT IT because the assertion checked the SHAPE of the URL
+   (/robots/<something>/<something>/) rather than whether the category was the
+   product's own. A pattern that a wrong answer satisfies is not a gate. The
+   replacement assertion lives in offers.test.ts and compares each product's
+   category against the page plan's entry for its review path.
+
+   Explicit sets from here on. A product added without a category listed here
+   lands in `pool` by default and the new test fails loudly, which is the
+   behaviour wanted. */
+const WINDOW_SLUGS = new Set([
+  "ecovacs-winbot-w2-pro-omni",
+  "ecovacs-winbot-w3-omni",
+  "ecovacs-winbot-w2-pro",
+  "ecovacs-winbot-w2s",
+  "ecovacs-winbot-w1-pro",
+  "ecovacs-winbot-mini",
+  "hutt-s55-pro",
+  "mamibot-w120-dp",
+  "hobot-2s",
+  "hobot-298",
+  "cop-rose-x5s",
+]);
+
+const CODING_SLUGS = new Set(["sphero-bolt", "sphero-mini", "sphero-indi", "ozobot-evo", "makeblock-mbot", "cozmo"]);
+
+/* The launch category, named rather than assumed. CATEGORY_OF falls through to
+   pool, so this is what makes "fell through" distinguishable from "is a pool
+   cleaner" — see the test of the same name in offers.test.ts. */
+export const POOL_SLUGS = new Set([
+  "beatbot-aquasense-2-ultra", "aiper-scuba-x1-pro-max", "aiper-scuba-s1", "aiper-seagull-se",
+  "wybot-c1", "dolphin-nautilus-cc-plus", "bublue-bubot-800p", "polaris-freedom",
+  "betta-se-plus", "dolphin-e10", "dolphin-proteus-dx4-plus", "aiper-scuba-v3-ai-vision",
+]);
+
+const LITTER_SLUGS = new Set(["litter-robot-4", "petkit-purobot-max-pro-2", "casa-leo-loo-too", "petsafe-scoopfree-crystal-pro"]);
+
+const LAWN_SLUGS = new Set(["segway-navimow-i110n", "mammotion-luba-3-awd-1500h", "mammotion-luba-3-awd-3000h", "husqvarna-automower-410iq", "worx-landroid-vision-wr320", "eufy-e15", "dreame-a3-awd-1000"]);
+
+const PETCAM_SLUGS = new Set(["enabot-ebo-air-2", "enabot-ebo-se", "enabot-rola-petpal"]);
+
+const COMPANION_SLUGS = new Set([
+  "moflin",
+  "miko-3",
+  "vector-2",
+  "eilik",
+  "loona",
+  /* No review page of its own, deliberately: it shares five of ten top-ten
+     domains with /guides/robotic-pets-for-elderly/, which is live, so that
+     guide carries the product instead. It still needs a category here, because
+     the catalogue row and its spec page exist either way. */
+  "joy-for-all-companion-pets",
+  "ropet",
+  "moxie",
+  "living-ai-emo",
+]);
+
+/* Grill, from 10 August 2026. One slug so far; a set for the same reason every
+   other category has one — the fall-through below files an unclaimed slug as a
+   pool cleaner. */
+const GRILL_SLUGS = new Set(["grillbot"]);
+
+/* Robot vacuums, from 10 August 2026. Eleven at once, which makes this the
+   largest single set in the map — and the one where a missing entry would be
+   least visible, because the fall-through below files an unclaimed slug as a
+   pool cleaner and a robot vacuum reads plausibly enough in a pool grid to
+   survive a glance. The test that asserts every slug is claimed is what stops
+   that, not this comment. */
+const VACUUM_SLUGS = new Set([
+  "eufy-x10-pro-omni",
+  "eufy-omni-s1-pro",
+  "roborock-s8-max-ultra",
+  "roborock-saros-10",
+  "roborock-qrevo-s5v",
+  "dreame-x40-ultra",
+  "dreame-x50-ultra",
+  "ecovacs-deebot-t90-pro-omni",
+  "shark-powerdetect-av2820s",
+  "shark-matrix-plus-ur2650ws",
+  "roomba-max-705",
+]);
+
+/* Robot snow blowers, from 11 August 2026. One slug, in a HIDDEN category —
+   which changes nothing here: the fall-through below files an unclaimed slug as
+   a pool cleaner regardless of whether its category is live, and a snow blower
+   sitting in the pool grid would be no less wrong for being in a category
+   nobody can navigate to. */
+const SNOW_SLUGS = new Set(["yarbo-snow-blower"]);
+
+const CATEGORY_OF: Record<string, string> = Object.fromEntries(
+  Object.keys(PRODUCT_ID).map((slug) => [
+    slug,
+    WINDOW_SLUGS.has(slug)
+      ? "window-cleaning-robots"
+      : COMPANION_SLUGS.has(slug)
+        ? "companion-robots"
+        : PETCAM_SLUGS.has(slug)
+          ? "pet-camera-robots"
+          : CODING_SLUGS.has(slug)
+            ? "educational-coding-robots"
+            : LITTER_SLUGS.has(slug)
+              ? "self-cleaning-litter-boxes"
+              : LAWN_SLUGS.has(slug)
+                ? "robotic-lawn-mowers"
+                : GRILL_SLUGS.has(slug)
+                  ? "grill-cleaning-robots"
+                : VACUUM_SLUGS.has(slug)
+                  ? "robot-vacuums"
+                : SNOW_SLUGS.has(slug)
+                  ? "robot-snow-blowers"
+                : /* THE DEFAULT IS POOL AND THAT IS A TRAP. A slug in no set
+                     above lands in the launch category silently, which is how
+                     ten litter boxes and lawn mowers were briefly filed as pool
+                     cleaners on 8 August 2026. The test below asserts every
+                     slug is claimed by a set rather than falling through. */
+                  "robotic-pool-cleaners",
+  ]),
+);
+
+export interface CatalogueProduct {
+  /** Route identifier. */
+  slug: string;
+  /** Stable D1 join key. */
+  productId: string;
+  categorySlug: string;
+  /** Pool-era editorial, where it exists. Genuinely optional. */
+  editorial: ProductEditorial | undefined;
+}
+
+export const CATALOGUE: CatalogueProduct[] = Object.entries(PRODUCT_ID).map(
+  ([slug, productId]) => ({
+    slug,
+    productId,
+    categorySlug: CATEGORY_OF[slug],
+    editorial: PRODUCTS[slug],
+  }),
+);
+
+/** The catalogue, minus anything withdrawn from sale. */
+export const activeCatalogue = (): CatalogueProduct[] =>
+  CATALOGUE.filter((p) => catalogueStatusOf(p.productId) === "active");
 
 /** Lookup by route slug. */
 export const productEditorial = (slug: string): ProductEditorial | undefined => PRODUCTS[slug];

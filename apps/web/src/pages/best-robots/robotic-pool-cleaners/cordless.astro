@@ -1,0 +1,94 @@
+---
+/**
+ * Best-of guide — cordless robotic pool cleaners.
+ *
+ * Page 3 of the pool map, and the biggest single wedge in the whole pool
+ * dataset: "cordless robotic pool cleaner" is 22,200/mo at KD 0 — more than
+ * three times the "best robotic pool cleaner" cluster at a fraction of the
+ * difficulty. It earns its own URL because the SERP is list content in its own
+ * right (thepoolnerd, poolbots, Beatbot, Amazon, Reddit) rather than a section
+ * of the general best-of.
+ *
+ * A CHILD ROUTE, NOT A SIBLING. It sits under the best-of page because that is
+ * the relationship: this is the cordless subset of the same argument, and the
+ * breadcrumb should say so.
+ */
+import Base from "../../../layouts/Base.astro";
+import EditorialArticle from "../../../components/EditorialArticle.astro";
+import CordedVsCordless from "../../../components/diagrams/CordedVsCordless.astro";
+import { editorialFor } from "../../../content/editorial";
+import { buildEditorialPage } from "../../../lib/editorial-page";
+import { breadcrumbsFor } from "../../../lib/routing";
+import { articleSchema, faqPageSchema, itemListSchema, imageObjectSchema } from "../../../lib/seo";
+import { MEDIA_ASSETS } from "../../../content/media/assets";
+import { FOUNDER } from "../../../content/team";
+
+const PATH = "/best-robots/robotic-pool-cleaners/cordless/";
+const article = editorialFor(PATH)!;
+const { html, picks, comparison } = await buildEditorialPage(
+  article,
+  Astro.locals,
+  import.meta.env.DEV,
+);
+
+const crumbs = breadcrumbsFor(PATH);
+
+/* The page's own artwork, used as the social preview and as Article schema's
+   image. Without this a share of this page shows the BotPlanet logo rather
+   than the picture at the top of it, and Article schema carries no image at
+   all — the same defect the elderly-pets guide was fixed for on its own. */
+const lead = article.image?.src ?? null;
+
+/* An ImageObject per picture this page renders: the lead, then each figure
+   the injector places. Built from the same list, so nothing is claimed in
+   markup that a reader cannot see. */
+const renderedImages = [lead, ...(article.figures ?? []).map((f) => f.src)]
+  .filter((src): src is string => Boolean(src))
+  .map((src) => MEDIA_ASSETS.find((a) => a.src === src))
+  .filter((a): a is NonNullable<typeof a> => Boolean(a?.width) && Boolean(a?.height));
+
+const pageSchema = [
+  articleSchema({
+    headline: article.title,
+    description: article.metaDescription,
+    path: PATH,
+    dateModified: article.lastReviewed,
+    authorName: FOUNDER.name,
+    authorPath: FOUNDER.path,
+    image: lead ?? undefined,
+  }),
+  ...renderedImages.map((a) =>
+    imageObjectSchema({ path: a.src, caption: a.altText ?? "", width: a.width!, height: a.height! }),
+  ),
+  picks.length ? itemListSchema(picks.map((p) => ({ name: p.name, path: p.href })), article.title) : null,
+  faqPageSchema(article.faq, PATH),
+];
+---
+
+<Base
+  title={article.seoTitle}
+  description={article.metaDescription}
+  ogImage={lead ?? undefined}
+  breadcrumbs={crumbs}
+  schema={pageSchema}
+>
+  <EditorialArticle
+    article={article}
+    html={html}
+    picks={picks}
+    comparison={comparison}
+    splitAt={["when-to-buy-corded-instead"]}
+  >
+    {/* THE HONEST SECTION ON A PAGE THAT EXISTS TO SELL THE OTHER THING. This
+        page opens by saying cordless buys handling and not better cleaning, and
+        it is here that it tells a reader to go and buy a cable instead. The
+        trade is genuinely two-sided — no cable to snag against a runtime that
+        ends and a cell that ages — and a two-sided trade is what this drawing
+        is: neither side is the winner, and neither column is longer.
+
+        Placed on this page rather than on the parent best-of, which is the
+        broader argument. A reader who walks hub to page should not meet the
+        same picture twice. */}
+    <CordedVsCordless slot="diagram-1" />
+  </EditorialArticle>
+</Base>

@@ -1,0 +1,173 @@
+---
+/**
+ * The universal BotMatch entry.
+ *
+ * WHAT THIS SOLVES. Every other matcher on this site starts by assuming the
+ * reader already knows which of nine categories they are in. Somebody arriving
+ * from the homepage does not — they know the dog is alone until six, or that
+ * the pool is green. This asks the job first and hands them to that category's
+ * own questions, inline, without a redirect.
+ *
+ * INDEXABLE, UNLIKE THE PER-CATEGORY FUNNELS. Those are noindex because a
+ * questionnaire has nothing for a search engine to rank and the result pages
+ * are private by design. This one carries real copy about how picking works,
+ * including the thing worth ranking for: the part that chooses a robot cannot
+ * see prices or commission. Individual result URLs stay noindex, as now.
+ *
+ * NO SCORING LIVES HERE. Categories, their questions and their published
+ * counts are read and passed to the funnel; every product decision still
+ * happens in @botplanet/scoring behind /api/botmatch, against that category's
+ * own stored config.
+ */
+import Base from "../../layouts/Base.astro";
+import { getDb, schema } from "../../lib/db";
+import { and, eq } from "drizzle-orm";
+import { breadcrumbsFor } from "../../lib/routing";
+import BotMatcher from "../../components/BotMatcher.astro";
+import { MATCHER_JOBS, canMatch, emptyStateFor } from "../../content/matcher-router";
+import { questionsFor, tasksFor } from "../../content/matcher-questions";
+import { faqPageSchema, webPageSchema } from "../../lib/seo";
+import "../../styles/prose.css";
+
+const db = getDb(Astro.locals);
+const PATH = "/botmatch/";
+const crumbs = breadcrumbsFor(PATH);
+
+const cats = await db.select().from(schema.categories);
+const published = await db
+  .select({ id: schema.products.id, categoryId: schema.products.categoryId })
+  .from(schema.products)
+  .where(eq(schema.products.status, "published"));
+const countFor = (categoryId: string) => published.filter((p) => p.categoryId === categoryId).length;
+
+/**
+ * One entry per job, and a job whose category has no question set is dropped.
+ *
+ * NOT SILENTLY, THOUGH — the count below is rendered on the page, so a job
+ * that vanishes is visible as a smaller number rather than as nothing. All
+ * nine have question sets today; this is the guard for the tenth.
+ */
+const categories = MATCHER_JOBS.map((job) => {
+  const cat = cats.find((c) => c.slug === job.categorySlug);
+  const questions = questionsFor(job.categorySlug);
+  const tasks = tasksFor(job.categorySlug);
+  if (!cat || !questions || !tasks) return null;
+  const n = countFor(cat.id);
+  return {
+    slug: cat.slug,
+    name: cat.name,
+    questions,
+    tasks,
+    matchable: canMatch(n),
+    emptyState: emptyStateFor(cat.name, n),
+    hubHref: `/robots/${cat.slug}/`,
+  };
+}).filter((c): c is NonNullable<typeof c> => c !== null);
+
+const jobs = MATCHER_JOBS.filter((j) => categories.some((c) => c.slug === j.categorySlug));
+const matchableCount = categories.filter((c) => c.matchable).length;
+
+const FAQ = [
+  {
+    q: "How does BotMatch choose a robot?",
+    a:
+      "It scores every published product in the category against the answers you gave, using weights stored for that category. " +
+      "The part that does the scoring cannot see prices, offers or commission — those are not in the data it reads. " +
+      "If two products score the same on everything we have recorded, it says so instead of picking one.",
+  },
+  {
+    q: "Does commission affect which robot I am shown?",
+    a:
+      "No. Suitability is scored first and commission is not one of the inputs. Commission can only ever break a tie between two " +
+      "offers for the same product we have already chosen — never between products, and never which product wins.",
+  },
+  {
+    q: "What if you have not tested a category yet?",
+    a:
+      "Then it says so and sends you to the category page. A questionnaire run against one product is not a comparison, so we do " +
+      "not present one as a match.",
+  },
+  {
+    q: "Do I have to give an email address?",
+    a:
+      "To have the result emailed, yes. The result itself is saved at its own link either way, and that link is what the email " +
+      "contains — we do not put affiliate links in email.",
+  },
+];
+
+const pageSchema = [
+  webPageSchema({
+    path: PATH,
+    name: "BotMatch — find your robot",
+    description:
+      "Answer a few questions about the job you need done and get a suitability-first recommendation from the robots we have researched.",
+  }),
+  faqPageSchema(FAQ, PATH),
+];
+---
+
+<Base
+  title="BotMatch: Find Your Robot — Suitability First | BotPlanet"
+  description="Find your robot by the job, not the category. A minute of questions, then something we have actually researched — scored without seeing price or commission."
+  breadcrumbs={crumbs}
+  schema={pageSchema}
+>
+  <BotMatcher mode="choose" categories={categories} jobs={jobs} />
+
+  <article class="bp-prose bp-bm-copy">
+    <h2 id="how-it-works">How the picking actually works</h2>
+    <p>
+      You tell us the job. We hand you the questions that category uses — its own, never another
+      category's — and score every published product in it against your answers. The weights are
+      stored per category, because the questions that decide a mower are not the questions that
+      decide a pool robot. There is a longer account of
+      <a href="/how-botmatch-works/">how BotMatch works</a>, including the exclusions it applies
+      before it scores anything.
+    </p>
+
+    <h2 id="commission">The part that picks your robot cannot see money</h2>
+    <p>
+      This is the bit worth being specific about. The scoring engine receives the product's
+      attributes and your answers. It does not receive prices, offers, retailers or commission
+      rates — they are not in the data passed to it, so it could not weigh them if it wanted to.
+    </p>
+    <p>
+      Commission enters exactly once, and only after a product has been chosen: if that one product
+      has two offers we consider equivalent on price, delivery and freshness, commission breaks that
+      tie. It never chooses between products. There is a test in the repository that fails the build
+      if commission reaches the suitability scorer at all.
+    </p>
+
+    <h2 id="ties">When two robots tie, we say so</h2>
+    <p>
+      If the top of the ranking is shared, nothing is chosen. You get the group, labelled as
+      equivalent on current data, rather than a winner picked alphabetically out of a tie. That
+      happens most often where we hold fewer recorded attributes than the products actually differ
+      by — which is a gap in our research, and saying so is more useful than hiding it.
+    </p>
+
+    <h2 id="coverage">Where we have not finished</h2>
+    <p>
+      {matchableCount} of the {categories.length} categories have enough published products for a
+      match to mean something. The rest will tell you that plainly and send you to the category page
+      instead. A questionnaire run against a single product is not a comparison and we will not
+      dress one up as a recommendation.
+    </p>
+
+    <h2 id="email">What happens to your answers</h2>
+    <p>
+      Your result is saved at its own link whether or not you give us an email address. If you do,
+      we send that link and the reasoning behind the match. Affiliate links never go in email — the
+      result page is the destination, which is also what Amazon's terms require.
+    </p>
+  </article>
+</Base>
+
+<style>
+  .bp-bm-copy {
+    max-width: 46rem;
+    margin: clamp(3rem, 8vw, 5rem) auto 0;
+    padding-top: clamp(2rem, 5vw, 3rem);
+    border-top: 1px solid rgba(200, 208, 222, 0.14);
+  }
+</style>

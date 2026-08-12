@@ -1,0 +1,240 @@
+---
+/* ============================================================
+   BotPlanet — the editorial article.
+
+   ONE TEMPLATE FOR EVERY BEST-OF AND EVERY GUIDE, the same way
+   ReviewArticle.astro is one template for every review. Adding
+   an editorial page is two files: a record in content/editorial.ts
+   and the prose in src/articles/<slug>.md.
+
+   ORDER, AND WHY IT IS THIS ORDER:
+
+     H1 and the standfirst — the answer, before the reasoning
+     → the ranked picks, for the reader who came for a shortlist
+       and is not going to read nine hundred words to get one
+     → the prose, where the picks are justified and the caveats
+       live
+     → the comparison table, generated from the catalogue
+     → BotMatch, for the reader who wants it decided for their
+       own pool rather than in general
+     → FAQ, which also feeds the FAQPage schema
+     → who checked it and when
+
+   A GUIDE HAS NO PICKS and passes an empty array; the section
+   disappears and the prose moves up. That is why one component
+   covers both page types rather than two that drift apart.
+
+   The prose is run through the internal linker before it renders,
+   so a product named in a sentence becomes a link to that product
+   without anything being inserted into the writing. See
+   content/internal-links.ts for the rules.
+   ============================================================ */
+
+import PickList from "./PickList.astro";
+import type { RenderedPick } from "./PickList.astro";
+import ComparisonTable from "./ComparisonTable.astro";
+import type { ComparisonRow } from "./ComparisonTable.astro";
+import ArticleContents from "./ArticleContents.astro";
+import BotMatchCta from "./BotMatchCta.astro";
+import FaqList from "./FaqList.astro";
+import ArticleFooter from "./ArticleFooter.astro";
+import { botMatchCtaFor } from "../content/category-sections";
+import { srcsetFor } from "../lib/srcset";
+import { applyInternalLinks } from "../lib/internal-linker";
+import { anchorsFor } from "../content/internal-links";
+import type { EditorialContent } from "../content/editorial";
+import "../styles/prose.css";
+
+interface Props {
+  article: EditorialContent;
+  /** Compiled Markdown for the prose. */
+  html: string;
+  /**
+   * Heading ids to split the prose at, so a diagram can sit inside the article
+   * rather than after it.
+   *
+   * WHY A SPLIT RATHER THAN THE FIGURE INJECTOR. lib/review-figures.ts builds
+   * an <img> tag and glues it into the compiled HTML string, which works for a
+   * file and cannot work for a component — an Astro component is not a string
+   * and cannot be interpolated into one. So the prose is cut at the heading and
+   * the page fills a named slot between the halves. The diagram stays a
+   * component: versioned, themeable, and with LABELS THAT REMAIN EDITABLE,
+   * which is the whole argument for drawing these rather than commissioning
+   * them as artwork with the words baked in.
+   */
+  splitAt?: string[];
+  picks: RenderedPick[];
+  comparison: ComparisonRow[];
+}
+
+const { article, html, picks, comparison, splitAt = [] } = Astro.props;
+const bmCta = botMatchCtaFor(article.categorySlug);
+
+/* Self-path passed so the page cannot link its own URL: the cordless best-of
+   names "cordless robotic pool cleaner" repeatedly, and that phrase is an
+   anchor pointing here. */
+const { html: body } = applyInternalLinks(html, anchorsFor(article.categorySlug), article.path);
+
+/* Cut the compiled prose immediately before each named heading, in document
+   order. A heading id that is not present yields no cut and no slot, so a
+   diagram declared against a heading somebody renamed disappears rather than
+   landing in the wrong section — the same failure mode the figure injector
+   guards, and the same answer. */
+/* NUMBERED SLOTS, because Astro requires a slot name to be a static string.
+   The page passes its diagrams in the same order as `splitAt`, and three is
+   the ceiling — a guide wanting a fourth diagram is a guide that should be
+   two pages. */
+const parts: { html: string; slot: number | null }[] = [];
+{
+  let rest = body;
+  for (const id of splitAt) {
+    const marker = `<h2 id="${id}"`;
+    const at = rest.indexOf(marker);
+    if (at === -1) continue;
+    parts.push({ html: rest.slice(0, at), slot: parts.length + 1 });
+    rest = rest.slice(at);
+  }
+  parts.push({ html: rest, slot: null });
+}
+---
+
+<header class="bp-ed__head">
+  <span class="eyebrow">{article.eyebrow}</span>
+  <h1 class="bp-ed__h1">{article.title}</h1>
+  <p class="bp-ed__stand">{article.standfirst}</p>
+</header>
+
+{article.image?.src && (
+  <figure class="bp-ed__hero">
+    <img
+      src={article.image.src}
+      srcset={srcsetFor(article.image.src)}
+      sizes="(min-width: 1100px) 1040px, 100vw"
+      alt={article.image.alt}
+      style={article.image.focal ? `object-position: ${article.image.focal}` : undefined}
+      width="1672"
+      height="941"
+      loading="eager"
+      fetchpriority="high"
+      decoding="async"
+    />
+  </figure>
+)}
+
+{picks.length > 0 && (
+  <PickList
+    id="picks"
+    eyebrow="The shortlist"
+    title="The picks, and who each one is wrong for"
+    intro="Every entry names the job it wins and the buyer it does not suit. Facts in each panel come from the catalogue record, not from the copy above it — where a manufacturer has not published a figure, the panel says so."
+    picks={picks}
+  />
+)}
+
+<ArticleContents html={body} extra={comparison.length > 1 ? [{ id: "compare", text: "Compare them side by side" }] : []} />
+
+<article class="bp-prose">
+  {parts.map((part) => (
+    <>
+      <Fragment set:html={part.html} />
+      {part.slot === 1 && <slot name="diagram-1" />}
+      {part.slot === 2 && <slot name="diagram-2" />}
+      {part.slot === 3 && <slot name="diagram-3" />}
+    </>
+  ))}
+</article>
+
+{comparison.length > 1 && (
+  <ComparisonTable
+    id="compare"
+    eyebrow="Side by side"
+    title="Compare them side by side"
+    intro={`All ${comparison.length} machines on this page on the four things that decide whether one fits your pool. Where a manufacturer does not publish a figure the cell says so rather than guessing.`}
+    rows={comparison}
+    note="Ordered by price band, then alphabetically — not by what we earn, and not in the ranked order above. The size column shows a maximum length where the maker publishes one and a maximum area where it publishes that instead; the two are not interchangeable."
+  />
+)}
+
+{bmCta && (
+  <BotMatchCta
+    categorySlug={article.categorySlug}
+    headline={bmCta.headline}
+    body={bmCta.body}
+    points={bmCta.points}
+    ctaLabel={bmCta.ctaLabelInArticle ?? bmCta.ctaLabel}
+    note={bmCta.note}
+    image={bmCta.image}
+  />
+)}
+
+{article.faq.length > 0 && (
+  <FaqList
+    id="faq"
+    eyebrow="Questions"
+    title="Questions people actually ask"
+    intro="The questions this page gets asked, answered in a sentence or two each. Anything that needs more than that has its own page."
+    items={article.faq}
+  />
+)}
+
+{/* THE INDEX, LINKED FROM THE WRITING RATHER THAN ONLY FROM THE MENU. Every
+    guide and every best-of page hung off an index that no page's body copy
+    pointed at — a crawler discounts nav chrome, and a reader who has just
+    finished two thousand words is exactly the person who wants the next one.
+    Named by what it holds, not "back to index". */}
+<p class="bp-ed__index">
+  {article.path.startsWith("/guides/") ? (
+    <a href="/guides/">Every robot guide we have published</a>
+  ) : (
+    <a href="/best-robots/">Every best-of list, by the job you need doing</a>
+  )}
+</p>
+
+<ArticleFooter lastReviewed={article.lastReviewed} />
+
+<style>
+  .bp-ed__index { margin: 1.5rem 0 0; font-size: 0.94rem; }
+  .bp-ed__index a { font-weight: 600; }
+
+  /* The hero sits between the standfirst and the picks: the reader gets the
+     answer in text first, then the scene. Eager and high-priority because it
+     is above the fold and it is the LCP element on every page that has one. */
+  .bp-ed__hero {
+    margin: 0 0 var(--space-7);
+    border-radius: var(--radius-lg, 14px);
+    overflow: hidden;
+  }
+  .bp-ed__hero img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1672 / 941;
+    object-fit: cover;
+  }
+
+  .bp-ed__head {
+    max-width: 62ch;
+    margin: 0 0 clamp(2rem, 5vw, 3rem);
+  }
+
+  .bp-ed__h1 {
+    margin: 0.9rem 0 0;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2rem, 5.6vw, 3.1rem);
+    line-height: 1.06;
+    letter-spacing: -0.024em;
+    text-wrap: balance;
+    background: linear-gradient(172deg, #ffffff 4%, #e4e9f1 44%, #a2aab8 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .bp-ed__stand {
+    margin: 1.2rem 0 0;
+    font-size: clamp(1.05rem, 2.4vw, 1.25rem);
+    line-height: 1.6;
+    color: var(--text-secondary);
+  }
+</style>

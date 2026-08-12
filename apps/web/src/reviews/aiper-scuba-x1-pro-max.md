@@ -149,6 +149,24 @@ most of this market does, and a three-year term suggests Aiper believes them.
 
 ---
 
+## Not recalled, and the storage rule that protects the outlay
+
+Neither of Aiper's two recalls touches this machine. They were the Elite Pro,
+model GS100, in August 2023, and the Seagull Pro, model ZT6001, in March 2025 —
+both charging faults, both on the mains side rather than a cell failing in water.
+The CPSC recall database holds no other Aiper recall.
+
+We can say no recall because the database is public and we read it. We cannot say
+no incidents: the consumer report database is not queryable per model, and a claim
+we cannot check is not one we will print.
+
+The part that matters at this price is what happens in the nine months it is not
+in the pool. Aiper's own instruction is 40-60 percent charge every two months, in
+a cool, well-ventilated place, and never charging in direct sunlight. On a
+machine costing this much, with a 3-year warranty that is the strongest here, a
+cell left full in a hot shed all winter is the cheapest mistake available and the
+most expensive one to discover.
+
 ## What we cannot tell you
 
 Written from published sources and no pool:

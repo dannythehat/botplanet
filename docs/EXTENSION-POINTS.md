@@ -27,9 +27,10 @@ One entry per category slug. Adding security robots, robot vacuums or anything e
 
 | File | | What happens if you skip it |
 |---|---|---|
-| `apps/web/src/components/PoolMatcher.astro` | optional | The funnel falls back to general wording — "for you", and a criteria line that does not name the category's real inputs. True, but flat, and it wastes the one line that tells a reader we understand their problem. |
+| `apps/web/src/components/BotMatcher.astro` | optional | The funnel falls back to general wording — "for you", and a criteria line that does not name the category's real inputs. True, but flat, and it wastes the one line that tells a reader we understand their problem. |
 | `apps/web/src/content/category-hero.ts` | **required** | The page falls back to a bare generic heading: no H1 of its own, no <title>, no meta description, no OG image and no CollectionPage schema. It renders, so nothing complains. |
 | `apps/web/src/content/category-sections.ts` | **required** | Nine records live in this file — DECISION, COVERAGE, SPLIT, MATRIX, CHECK, PRICE, VERDICT, FAQ and BOTMATCH_CTA — and each is looked up independently. A missing record drops its section silently; a category with none renders a hero, a product grid and nothing in between. FAQ also feeds the FAQPage schema, so an absent record means no FAQ rich result. |
+| `apps/web/src/content/editorial.ts` | optional | Best-of pages and standalone guides for a category, keyed by canonical path. OPTIONAL because these are earned, not owed: a category gets a best-of page when its research shows a ranked-list SERP that the hub cannot serve, and not otherwise. A category with no row here has no sub-pages, which is a legitimate state and the one nine of the ten categories are in today. What is NOT legitimate is a route registered as live with no record behind it — editorial.test.ts checks the pairing in both directions. |
 | `apps/web/src/content/internal-links.ts` | optional | The category's pages stop cross-linking to each other, which costs internal PageRank and leaves a reader at the bottom of a review with nowhere to go. internal-links.test.ts checks the anchors that DO exist resolve; it cannot check for absence. |
 | `apps/web/src/content/journeys.ts` | optional | The shell's BotMatch button keeps pointing at the launch category's journey, so a reader on a lawn page is offered "Find My Pool Cleaner". Cosmetic but wrong, and visible in the header on every page of the category. |
 | `apps/web/src/content/matcher-questions.ts` | **required** | BotMatch returns 404 for the category. That is deliberate and must stay that way: a category never inherits another category's questions. MATCHER_TASKS_BY_CATEGORY and MATCHER_DEFAULTS in this file are keyed the same way. |
@@ -51,7 +52,7 @@ One entry per product slug. Adding a Maytronics pool robot, a fifth window brand
 |---|---|---|
 | `apps/web/src/content/commerce/destinations.ts` | **required** | Three records here decide whether a reader can buy: DESTINATIONS (which retailer and which ASIN), IDENTITY_CHECKS (that the ASIN is the right machine and not a sibling model) and REDIRECT_KEYS (the /go/ key the button points at). A REDIRECT_KEYS entry with no matching offer seed is a 404 on the buy button — the single most damaging failure on the site, and the one offers.test.ts now guards. |
 | `apps/web/src/content/evidence/verification.ts` | **required** | The product has no dated record of what was actually read on the retailer's page — price, stock, seller, returns, and the model number that proves identity. Without it nothing on the page can carry the "checked on" date the methodology promises. |
-| `apps/web/src/content/media/assets.ts` | **required** | Every image on the site needs a record here stating who made it and on what rights basis. An image without one fails media.test.ts and does not ship — deliberately, because publishing a picture we cannot prove we may use is the one mistake that costs money rather than traffic. |
+| `apps/web/src/content/media/assets.ts` | **required** | Every image on the site needs a record here stating who made it and on what asset record. An image without one fails media.test.ts and does not ship — deliberately, because publishing a picture we cannot prove we may use is the one mistake that costs money rather than traffic. |
 | `apps/web/src/content/product-names.ts` | optional | Only needed when a product's slug changes or the product is dropped. Without an entry the old URL 404s instead of redirecting, and every link and ranking it had is thrown away. |
 | `apps/web/src/content/products.ts` | **required** | Four records in this file are keyed by product slug: PRODUCT_ID, PRODUCTS (the editorial copy), CATALOGUE_STATUS and CATALOGUE_WITHDRAWALS. Without a PRODUCTS entry the product has no editorial voice at all — no summary, no who-it-is-for, no rule-outs — and the card falls back to bare catalogue fields. |
 | `apps/web/src/content/reviews.ts` | optional | No review page for the product, and no card in the homepage review grid, which is built from this record so new reviews appear automatically. A catalogued product with no review still works — it just never gets the page that ranks. |
@@ -60,6 +61,14 @@ One entry per product slug. Adding a Maytronics pool robot, a fifth window brand
 | `packages/db/seed/pool/catalogue.ts` | **required** | The product does not exist: no catalogue row, no card on the category page, no comparison row, and nothing for BotMatch to score. This is also where productClass, environments, cleans, powerType and priceTier are set — the five fields the scoring engine actually reads, so a wrong value here is a wrong recommendation. |
 | `packages/db/seed/pool/commercial.ts` | **required** | Both arrays below are built from offerSeeds. No seed means the buy button resolves to nothing and /go/<key> returns 404 — which is exactly what happened to the Proteus DX4 Plus and the Scuba V3 for a day. offers.test.ts now fails the build for this, so the failure is loud rather than silent. |
 | `packages/db/seed/pool/evidence.ts` | optional | The product ships with no cited source behind its specification claims. It renders, but every figure on the page is then unattributed, which is the thing the review methodology promises we do not do. |
+
+## Per page shipped
+
+One entry per page the site ships. Linking only ever runs backwards in time on its own, so a new page arrives with whatever inbound links the surfaces built the same day happen to give it. These are the lists that make the retrofit visible instead of optional.
+
+| File | | What happens if you skip it |
+|---|---|---|
+| `apps/web/src/content/internal-links.ts` | **required** | Every new page adds an entry here in the commit that ships it. A page with no entry is a page nothing older links to, which is the failure this table exists to make visible. |
 
 ## Per brand
 

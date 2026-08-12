@@ -2,7 +2,7 @@
  * Generates the branded product placeholders.
  *
  * WHY FILES RATHER THAN AN INLINE COMPONENT: a placeholder is an ASSET. It has
- * to carry a checksum, intrinsic dimensions and a rights record like everything
+ * to carry a checksum, intrinsic dimensions and a asset record like everything
  * else, and it has to be withdrawable through the same switch. Inline markup
  * cannot be catalogued or withdrawn; a file can.
  *

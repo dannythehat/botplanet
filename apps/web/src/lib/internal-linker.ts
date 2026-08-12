@@ -93,11 +93,32 @@ export function applyInternalLinks(
 
   return { html: out, applied };
 
+  /**
+   * Link every anchor that fits, without ever nesting one inside another.
+   *
+   * THE BUG THIS REPLACES. The old version searched and rewrote the same
+   * string in a loop, so the second anchor was matched against text that
+   * already contained the first anchor's `<a>` tag — and cheerfully matched
+   * inside it. That produced `<a ...><a ...>`, which is invalid HTML and whose
+   * rendering is the browser's guess. Eight pages carried one before this was
+   * found by crawling the live site and grepping for the pattern.
+   *
+   * The walker above cannot prevent it: it tracks the depth of anchors it
+   * meets in the incoming HTML, and a link created in here was never in that
+   * HTML to be counted.
+   *
+   * So matching now happens once, against the untouched run, and every hit
+   * claims a range. A later anchor may not overlap a claimed range, which
+   * makes nesting impossible rather than unlikely. The string is assembled at
+   * the end, in document order.
+   */
   function linkRun(run: string): string {
-    let result = run;
+    const claims: { start: number; end: number; href: string; phrase: string; anchor: string }[] = [];
+    const overlaps = (a: number, b: number) => claims.some((c) => a < c.end && b > c.start);
+
     for (const a of live) {
       const key = a.anchor.toLowerCase();
-      const left = remaining.get(key) ?? 0;
+      let left = remaining.get(key) ?? 0;
       if (left <= 0) continue;
 
       /* \b does not work either side of a hyphen, so the boundary is spelled
@@ -112,21 +133,28 @@ export function applyInternalLinks(
          Found on the live Polaris review, where the one cross-review link on
          the page was missing for exactly this reason. */
       const pattern = escapeRe(a.anchor).replace(/ /g, "\\s+");
-      const re = new RegExp(`(^|[^\\w-])(${pattern})(?![\\w-])`, "i");
-      const hit = re.exec(result);
-      if (!hit) continue;
+      const re = new RegExp(`(^|[^\\w-])(${pattern})(?![\\w-])`, "gi");
 
-      const before = hit[1];
-      const phrase = hit[2];
-      result =
-        result.slice(0, hit.index) +
-        before +
-        `<a href="${a.href}" class="bp-prose__link">${phrase}</a>` +
-        result.slice(hit.index + hit[0].length);
-
-      remaining.set(key, left - 1);
-      applied.push({ anchor: phrase, href: a.href });
+      for (let m = re.exec(run); m && left > 0; m = re.exec(run)) {
+        const s0 = m.index + m[1].length;
+        const e0 = s0 + m[2].length;
+        if (overlaps(s0, e0)) continue;
+        claims.push({ start: s0, end: e0, href: a.href, phrase: m[2], anchor: a.anchor });
+        left -= 1;
+      }
+      remaining.set(key, left);
     }
-    return result;
+
+    if (claims.length === 0) return run;
+    claims.sort((x, y) => x.start - y.start);
+
+    let out2 = "";
+    let at = 0;
+    for (const c of claims) {
+      out2 += run.slice(at, c.start) + `<a href="${c.href}" class="bp-prose__link">${c.phrase}</a>`;
+      at = c.end;
+      applied.push({ anchor: c.phrase, href: c.href });
+    }
+    return out2 + run.slice(at);
   }
 }

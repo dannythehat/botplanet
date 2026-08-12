@@ -20,6 +20,7 @@
  * Scopes:
  *   per-category   one entry per category slug (pool, window, lawn, security…)
  *   per-product    one entry per product slug
+ *   per-page       one entry per page the site ships
  *   per-brand      one entry per brand
  *   per-retailer   one entry per retailer or affiliate network
  *   shared-vocab   the enums every category draws its values from
@@ -60,10 +61,11 @@ import { join, relative } from "node:path";
 const ROOT = process.cwd();
 const DOC = "docs/EXTENSION-POINTS.md";
 
-const SCOPES = ["per-category", "per-product", "per-brand", "per-retailer", "shared-vocab"];
+const SCOPES = ["per-category", "per-product", "per-page", "per-brand", "per-retailer", "shared-vocab"];
 const SCOPE_TITLE = {
   "per-category": "Per category",
   "per-product": "Per product",
+  "per-page": "Per page shipped",
   "per-brand": "Per brand",
   "per-retailer": "Per retailer / affiliate network",
   "shared-vocab": "Shared vocabulary",
@@ -76,6 +78,10 @@ const SCOPE_BLURB = {
   "per-product":
     "One entry per product slug. Adding a Maytronics pool robot, a fifth window brand or the " +
     "first mower means walking this list for that product.",
+  "per-page":
+    "One entry per page the site ships. Linking only ever runs backwards in time on its own, so a " +
+    "new page arrives with whatever inbound links the surfaces built the same day happen to give " +
+    "it. These are the lists that make the retrofit visible instead of optional.",
   "per-brand": "One entry per brand. Cheap, but a missing brand row breaks the product's foreign key.",
   "per-retailer":
     "One entry per retailer or affiliate network. Grows when a programme is approved — Amazon " +

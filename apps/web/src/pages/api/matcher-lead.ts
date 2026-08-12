@@ -62,7 +62,25 @@ function orderedAnswers(categorySlug: string | undefined, answers: Record<string
    their "pool". The `seen` and `theirs` maps in renderReply below are the same
    decision and need the same entry. */
 function reflect(categorySlug: string | undefined, a: Record<string, string>): string {
-  const lower = (s: string) => s.toLowerCase();
+  /**
+   * NEVER PRINT A DATABASE TOKEN AT A READER.
+   *
+   * The browser sends the option's own label — "In-ground", "Everything —
+   * floor, walls and waterline" — and this only lowercases it. But the
+   * endpoint is a public POST and the answers are free-form, so anything that
+   * submits the SCORING values instead sends `in_ground`, `full_clean`,
+   * `above_ground`. Those went straight into the sentence: "you have in_ground
+   * pool, the job is full_clean". Seen in a real inbox.
+   *
+   * A value that looks like a token — snake_case, no spaces — is turned back
+   * into words rather than printed raw. It cannot fix a bad integration, but
+   * it stops one reading like a database dump.
+   */
+  const lower = (s: string) => {
+    const t = s.trim();
+    const looksLikeToken = /^[a-z0-9]+(?:_[a-z0-9]+)+$/.test(t);
+    return (looksLikeToken ? t.replace(/_/g, " ") : t).toLowerCase();
+  };
   let bits: (string | null)[] = [];
 
   if (categorySlug === "window-cleaning-robots") {
@@ -78,6 +96,48 @@ function reflect(categorySlug: string | undefined, a: Record<string, string>): s
       a.environment ? `it is ${lower(a.environment)}` : null,
       a.primary_need ? `the ground is ${lower(a.primary_need)}` : null,
       a.boundary_pref ? `on a boundary wire, ${lower(a.boundary_pref)}` : null,
+    ];
+  } else if (categorySlug === "companion-robots") {
+    bits = [
+      a.primary_need ? `it's ${lower(a.primary_need)}` : null,
+      a.subscription_tolerance ? `on a monthly fee, ${lower(a.subscription_tolerance)}` : null,
+      a.movement ? `you'd like something that ${lower(a.movement)}` : null,
+      a.talking ? `on talking, ${lower(a.talking)}` : null,
+    ];
+  } else if (categorySlug === "pet-camera-robots") {
+    bits = [
+      a.primary_need ? `you mainly want to ${lower(a.primary_need)}` : null,
+      a.environment ? `on stairs, ${lower(a.environment)}` : null,
+      a.flooring ? `the floors are ${lower(a.flooring)}` : null,
+      a.autonomy ? `you'd like it to ${lower(a.autonomy)}` : null,
+    ];
+  } else if (categorySlug === "self-cleaning-litter-boxes") {
+    bits = [
+      a.environment ? `your cat is ${lower(a.environment)}` : null,
+      a.primary_need ? `there ${a.primary_need === "One" ? "is" : "are"} ${lower(a.primary_need)}` : null,
+      a.litter_pref ? `on the maker's own refills, ${lower(a.litter_pref)}` : null,
+      a.tracking ? `on health tracking, ${lower(a.tracking)}` : null,
+    ];
+  } else if (categorySlug === "grill-cleaning-robots") {
+    bits = [
+      a.environment ? `your grates are ${lower(a.environment)}` : null,
+      a.bar_spacing ? `the bars are ${lower(a.bar_spacing)}` : null,
+      a.primary_need ? `the problem is ${lower(a.primary_need)}` : null,
+      a.frequency ? `you cook ${lower(a.frequency)}` : null,
+    ];
+  } else if (categorySlug === "robot-vacuums") {
+    bits = [
+      a.environment ? `your floors are ${lower(a.environment)}` : null,
+      a.primary_need ? `on hair, ${lower(a.primary_need)}` : null,
+      a.clutter ? `the floor is usually ${lower(a.clutter)}` : null,
+      a.emptying ? `on emptying, ${lower(a.emptying)}` : null,
+    ];
+  } else if (categorySlug === "educational-coding-robots") {
+    bits = [
+      a.environment ? `they are ${lower(a.environment)}` : null,
+      a.device ? `on a tablet, ${lower(a.device)}` : null,
+      a.primary_need ? `you want it to ${lower(a.primary_need)}` : null,
+      a.asked_for_it ? `and ${lower(a.asked_for_it)}` : null,
     ];
   } else if (categorySlug === "robotic-pool-cleaners") {
     bits = [
@@ -130,6 +190,18 @@ function renderReply(opts: {
     "window-cleaning-robots":
       "framed or frameless glass, which glass you need reached, power and budget band",
     "robotic-lawn-mowers": "lawn size, tree cover, slopes, separate zones and budget band",
+    "companion-robots":
+      "who it is for, whether it moves, how much it talks and your budget band",
+    "pet-camera-robots":
+      "whether there are stairs, what is on your floors, what you need it to do and your budget band",
+    "self-cleaning-litter-boxes":
+      "your cat's size, how many cats, which litter you will use and your budget band",
+    "grill-cleaning-robots":
+      "what your grates are made of, how the bars are spaced, how often you cook and your budget band",
+    "robot-vacuums":
+      "what is on your floors, whether there is hair in the house, how clear the floor is and your budget band",
+    "educational-coding-robots":
+      "the child's age, whether a tablet is free, what you want from it and your budget band",
   };
   const seen = SEEN[opts.categorySlug ?? ""] ?? "what you told us and your budget band";
   /* "your pool" in the sign-off, or the right noun for the category. */
@@ -137,6 +209,12 @@ function renderReply(opts: {
     "robotic-pool-cleaners": "your pool",
     "window-cleaning-robots": "your windows",
     "robotic-lawn-mowers": "your lawn",
+    "companion-robots": "who this is for",
+    "pet-camera-robots": "your home",
+    "self-cleaning-litter-boxes": "your cat",
+    "grill-cleaning-robots": "your grill",
+    "robot-vacuums": "your floors",
+    "educational-coding-robots": "the child",
   };
   const theirs = THEIRS[opts.categorySlug ?? ""] ?? "what you told us";
   const p = (t: string) =>
@@ -234,7 +312,11 @@ export const POST: APIRoute = async ({ request, locals }) => {
   const answers = (body.answers && typeof body.answers === "object" ? body.answers : {}) as Record<string, string>;
   const env = (locals as App.Locals).runtime?.env as Record<string, unknown> | undefined;
   const origin = new URL(request.url).origin;
-  const resultUrl = body.resultToken ? `${origin}/recommendation/${body.resultToken}` : null;
+  /* WITH THE TRAILING SLASH. The site canonicalises to it, so this link was
+     answering 301 before it answered 200 — an extra hop on the one link the
+     email exists to deliver, and one more thing between a reader and their
+     result. */
+  const resultUrl = body.resultToken ? `${origin}/recommendation/${body.resultToken}/` : null;
 
   /* ---- store ---- */
   const id = crypto.randomUUID();
@@ -272,13 +354,52 @@ export const POST: APIRoute = async ({ request, locals }) => {
 
   /* ---- notify + reply ---- */
   const apiKey = env?.RESEND_API_KEY as string | undefined;
+  /**
+   * BOTH SENDS ARE HANDED TO waitUntil, AND THAT IS NOT A TIDY-UP.
+   *
+   * They were `void fetch(...)`. A Worker is entitled to be torn down the
+   * moment its handler returns a Response, and a promise nobody registered is
+   * exactly what gets torn down with it — so the reader saw "Check your inbox",
+   * the endpoint answered {ok:true}, and whether the mail ever left was down to
+   * whether the runtime happened to still be alive. Silent, intermittent, and
+   * invisible to every test we have, because the failure is in the platform's
+   * lifecycle rather than in this code's logic.
+   *
+   * waitUntil is the contract for "finish this before you kill me". Where the
+   * runtime does not expose it, the sends are awaited instead: a slightly
+   * slower response is worth more than a lead that quietly never arrives.
+   */
+  const ctx = (locals as App.Locals).runtime?.ctx as
+    | { waitUntil?: (p: Promise<unknown>) => void }
+    | undefined;
+  const keepAlive = (p: Promise<unknown>) =>
+    typeof ctx?.waitUntil === "function" ? ctx.waitUntil(p) : p;
+
+  /**
+   * A REJECTED SEND USED TO VANISH. Both calls ended `.catch(() => {})`, so a
+   * bad key, an unverified sending domain or a malformed payload produced
+   * exactly the same silence as a delivered email — and the endpoint returned
+   * {ok:true} either way. Resend answers 4xx with a JSON body naming the
+   * reason; that reason is worth more than the empty catch that hid it.
+   */
+  const report = (what: string) => async (res: Response) => {
+    if (!res.ok) {
+      const detail = await res.text().catch(() => "");
+      console.error(`resend ${what} failed: HTTP ${res.status} ${detail.slice(0, 400)}`);
+    }
+    return res;
+  };
+  const reportFailure = (what: string) => (e: unknown) => {
+    console.error(`resend ${what} threw: ${String(e).slice(0, 300)}`);
+  };
+
   if (apiKey) {
     const rows = orderedAnswers(body.categorySlug, answers)
       .map((a) => `<tr><td style="padding:4px 10px 4px 0;color:#666">${esc(a.question)}</td><td style="padding:4px 0"><strong>${esc(a.answer)}</strong></td></tr>`)
       .join("");
 
     // Team notification, immediately.
-    void fetch("https://api.resend.com/emails", {
+    const teamSend = fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: { Authorization: `Bearer ${apiKey}`, "content-type": "application/json" },
       body: JSON.stringify({
@@ -291,10 +412,14 @@ export const POST: APIRoute = async ({ request, locals }) => {
                }</p>
                <table style="font:14px system-ui;border-collapse:collapse">${rows}</table>`,
       }),
-    }).catch(() => {});
+    }).then(report("team notification")).catch(reportFailure("team notification"));
+    keepAlive(teamSend);
 
-    // Personal reply, scheduled 50–80 minutes out so it does not read as a robot.
-    const delayMin = 50 + Math.floor(Math.random() * 31);
+    /* REPLIES IMMEDIATELY. This used to schedule the reader's own email 50 to
+       80 minutes out, on the theory that an instant answer reads as a robot.
+       It reads as nothing at all: the page says "check your inbox", the inbox
+       is empty for an hour, and the reader has closed the tab and forgotten
+       us. They asked a question and pressed a button; the answer goes now. */
     const { subject, html, text } = renderReply({
       name: firstName,
       categorySlug: body.categorySlug,
@@ -302,7 +427,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
       productName: body.productName ?? null,
       resultUrl,
     });
-    void fetch("https://api.resend.com/emails", {
+    const replySend = fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: { Authorization: `Bearer ${apiKey}`, "content-type": "application/json" },
       body: JSON.stringify({
@@ -311,12 +436,12 @@ export const POST: APIRoute = async ({ request, locals }) => {
         subject,
         html,
         text,
-        scheduled_at: new Date(Date.now() + delayMin * 60_000).toISOString(),
         headers: {
           "List-Unsubscribe": `<mailto:${SITE.emailFrom.replace(/.*<|>.*/g, "")}?subject=unsubscribe>`,
         },
       }),
-    }).catch(() => {});
+    }).then(report("reader reply")).catch(reportFailure("reader reply"));
+    keepAlive(replySend);
   }
 
   return json({ ok: true });

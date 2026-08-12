@@ -7,7 +7,18 @@ import {
   resolveRedirect,
   safeQuery,
 } from "../src/lib/routing";
-import { REDIRECTS, ROUTES, sitemapRoutes } from "../src/content/routes";
+import {
+  CATEGORIES,
+  REDIRECTS,
+  ROUTES,
+  builtBestOfCategories,
+  categoryRoutes,
+  productInSitemap,
+  sitemapRoutes,
+  LEGACY_REDIRECTS,
+} from "../src/content/routes";
+import { RETIRED_SLUGS, MERGED_REVIEWS } from "../src/content/product-names";
+import { COMPARE_PAGES, comparePageIsSubstantive } from "../src/content/compare-page";
 
 describe("normalisePath — locked URL standards", () => {
   it("lowercases, collapses slashes and enforces one trailing slash", () => {
@@ -32,12 +43,22 @@ describe("normalisePath — locked URL standards", () => {
 });
 
 describe("resolveRedirect", () => {
-  it("sends generic BotMatch entries to the category journey", () => {
-    for (const p of ["/find-my-robot/", "/botmatch/", "/find-my-robot/pool-cleaners/"]) {
+  /* "/botmatch/" IS NO LONGER ONE OF THESE, and the change is the point of the
+     universal finder. It used to redirect onto the pool funnel, so anyone who
+     typed the obvious URL was asked about their swimming pool whatever they
+     had come for. It is a real page now, and it asks what job they want done
+     before it asks anything else. The two legacy paths still forward, because
+     they were only ever the pool matcher. */
+  it("sends legacy BotMatch entries to the category journey", () => {
+    for (const p of ["/find-my-robot/", "/find-my-robot/pool-cleaners/"]) {
       const r = resolveRedirect(p);
       expect(r?.to).toBe("/botmatch/robotic-pool-cleaners/");
       expect(r?.status).toBe(301);
     }
+  });
+
+  it("no longer sends /botmatch/ to the pool funnel", () => {
+    expect(resolveRedirect("/botmatch/")).toBeNull();
   });
 
   it("redirects the old /best/ section to /best-robots/", () => {
@@ -176,6 +197,63 @@ describe("sitemap inclusion rules", () => {
   });
 });
 
+/**
+ * The /best-robots/ index links a card per category, and it linked wherever the
+ * CATEGORY was live rather than wherever the PAGE was written — seven cards
+ * onto a 404. This asserts the fact the page now reads instead.
+ */
+describe("builtBestOfCategories", () => {
+  it("names only categories whose best-of URL is a registered live route", () => {
+    const live = new Set(ROUTES.filter((r) => r.status === "live").map((r) => r.path));
+    const built = builtBestOfCategories();
+    expect(built.size).toBeGreaterThan(0);
+    for (const slug of built) {
+      expect(live.has(categoryRoutes(slug).best), `/best-robots/${slug}/ is not a live route`).toBe(
+        true,
+      );
+    }
+  });
+
+  it("leaves out a live category with no best-of page written", () => {
+    const built = builtBestOfCategories();
+    const liveCats = CATEGORIES.filter((c) => c.launch === "live").map((c) => c.slug);
+    const unwritten = liveCats.filter((s) => !built.has(s));
+    const live = new Set(ROUTES.filter((r) => r.status === "live").map((r) => r.path));
+    for (const slug of unwritten) {
+      expect(live.has(categoryRoutes(slug).best), `${slug} would link at a 404`).toBe(false);
+    }
+  });
+});
+
+describe("comparePageIsSubstantive", () => {
+  const compareRoutes = () => sitemapRoutes().filter((r) => r.section === "compare" && r.category);
+
+  it("keeps out a comparison of nothing, and of one machine", () => {
+    expect(comparePageIsSubstantive("robot-vacuums", 0)).toBe(false);
+    expect(comparePageIsSubstantive("robot-vacuums", 1)).toBe(false);
+  });
+
+  it("lets a category in as soon as it has two published machines", () => {
+    expect(comparePageIsSubstantive("robot-vacuums", 2)).toBe(true);
+  });
+
+  it("keeps a category with written comparison research whatever the count", () => {
+    for (const slug of Object.keys(COMPARE_PAGES)) {
+      expect(comparePageIsSubstantive(slug, 0)).toBe(true);
+    }
+  });
+
+  /* Every compare route in the registry is category-scoped except the hub, and
+     the hub carries no `category` — so nothing may slip past the filter for
+     want of one. */
+  it("gives every registry compare route but the hub a category to judge", () => {
+    const compare = sitemapRoutes().filter((r) => r.section === "compare");
+    const withoutCategory = compare.filter((r) => !r.category).map((r) => r.path);
+    expect(withoutCategory).toEqual(["/compare/"]);
+    expect(compareRoutes().length).toBeGreaterThan(0);
+  });
+});
+
 describe("registry integrity", () => {
   it("has unique canonical paths", () => {
     const seen = new Set<string>();
@@ -199,5 +277,126 @@ describe("registry integrity", () => {
 
   it("keeps every registry path canonical", () => {
     for (const r of ROUTES) expect(r.path).toBe(normalisePath(r.path));
+  });
+});
+
+/**
+ * GATE 3, from the snow-blower merge review of 11 August 2026.
+ *
+ * The sitemap decided product inclusion with `liveSlugs.has(categorySlug)`,
+ * built from `liveCategories()`, which returns only `launch === "live"`. That
+ * silently dropped every product in a HIDDEN category — a reserved slug with
+ * no hub, no route and no comparative surfaces, but with real reviews beneath
+ * it that `[slug].astro` renders without ever setting noindex.
+ *
+ * So those pages indexed and this site never declared them. The failure is
+ * invisible from the page (it renders perfectly) and invisible from the
+ * sitemap (the URL simply is not there), which is why it needs a test rather
+ * than a comment.
+ */
+describe("productInSitemap — hidden categories ship their reviews", () => {
+  const live = CATEGORIES.find((c) => c.launch === "live")!.slug;
+  const hidden = CATEGORIES.find((c) => c.launch === "hidden")!.slug;
+
+  it("has a hidden category to test against", () => {
+    // If this ever fails the fixture is gone, not the rule.
+    expect(hidden).toBeTruthy();
+  });
+
+  it("admits a product in a live category", () => {
+    expect(productInSitemap({ slug: "x", categorySlug: live, hasPublishedReview: true })).toBe(true);
+    expect(productInSitemap({ slug: "x", categorySlug: live, hasPublishedReview: false })).toBe(true);
+  });
+
+  it("admits a REVIEWED product in a hidden category — the bug this fixes", () => {
+    expect(productInSitemap({ slug: "x", categorySlug: hidden, hasPublishedReview: true })).toBe(true);
+  });
+
+  it("keeps an unreviewed product in a hidden category out", () => {
+    // A hidden category is a reservation. Only a written review earns the URL.
+    expect(productInSitemap({ slug: "x", categorySlug: hidden, hasPublishedReview: false })).toBe(false);
+  });
+
+  it("keeps a coming_soon category's products out either way", () => {
+    const soon = CATEGORIES.find((c) => c.launch === "coming_soon")?.slug;
+    if (!soon) return;
+    expect(productInSitemap({ slug: "x", categorySlug: soon, hasPublishedReview: true })).toBe(false);
+  });
+
+  it("keeps retired and merged slugs out whatever their category", () => {
+    for (const slug of Object.keys(RETIRED_SLUGS)) {
+      expect(productInSitemap({ slug, categorySlug: live, hasPublishedReview: true })).toBe(false);
+    }
+    for (const slug of Object.keys(MERGED_REVIEWS)) {
+      expect(productInSitemap({ slug, categorySlug: live, hasPublishedReview: true })).toBe(false);
+    }
+  });
+
+  it("never admits a hidden category's own hub, comparison or matcher", () => {
+    /* Those come from the route registry rather than from this predicate, and
+       a hidden category has no routes registered — which is what makes the
+       hidden-category URL safe in the first place. Asserted here so the two
+       halves of the rule are checked in one place. */
+    const paths = sitemapRoutes().map((r) => r.path);
+    expect(paths).not.toContain(`/robots/${hidden}/`);
+    expect(paths).not.toContain(`/compare/${hidden}/`);
+    expect(paths).not.toContain(`/botmatch/${hidden}/`);
+    expect(paths).not.toContain(`/best-robots/${hidden}/`);
+  });
+});
+
+describe("legacy redirects from the previous site", () => {
+  /**
+   * See the long note above LEGACY_REDIRECTS in content/routes.ts. Google's
+   * index still holds the old site's URLs; these turn each dead one into a
+   * signpost instead of a 404.
+   */
+  it("never redirects a path that is a live route today", () => {
+    /* THE MISTAKE THIS CAUGHT ON THE WAY IN: /contact/ existed on the old site
+       AND exists on this one, and was about to be redirected to /about/. A
+       legacy map is written by looking at what USED to exist, which is exactly
+       the frame of mind in which you forget to check what still does. */
+    const live = new Set(ROUTES.map((r) => r.path));
+    const broken = LEGACY_REDIRECTS.filter((r) => live.has(r.from)).map((r) => r.from);
+    expect(broken).toEqual([]);
+  });
+
+  it("sends every legacy path somewhere that exists, in one hop", () => {
+    for (const r of LEGACY_REDIRECTS) {
+      const first = resolveRedirect(r.from);
+      expect(first, `${r.from} does not redirect`).not.toBeNull();
+      // One hop, never a chain: the destination must be final.
+      expect(resolveRedirect(first!.to), `${r.from} → ${first!.to} redirects again`).toBeNull();
+      expect(first!.status).toBe(301);
+    }
+  });
+
+  it("gives every legacy entry a written reason", () => {
+    for (const r of LEGACY_REDIRECTS) expect(r.why.length).toBeGreaterThan(20);
+  });
+
+  it("maps an old product URL onto the page that replaced it", () => {
+    const r = resolveRedirect("/product/sphero-bolt/");
+    expect(r?.to).toBe("/robots/educational-coding-robots/sphero-bolt/");
+    expect(r?.status).toBe(301);
+  });
+
+  it("matches an old review URL that carried a headline after the slug", () => {
+    // "sphero-bolt-review-the-smartest-hamster-ball-in-the-galaxy"
+    const r = resolveRedirect("/reviews/sphero-bolt-review-the-smartest-hamster-ball-in-the-galaxy/");
+    expect(r?.to).toBe("/robots/educational-coding-robots/sphero-bolt/");
+  });
+
+  it("sends a product we no longer hold to the category that covers it", () => {
+    expect(resolveRedirect("/product/irobot-roomba-j9-plus/")?.to).toBe("/robots/robot-vacuums/");
+    expect(resolveRedirect("/product/temi-v3-robot/")?.to).toBe("/robots/companion-robots/");
+  });
+
+  it("still 404s an old URL nobody can honestly place", () => {
+    /* The standard at the top of lib/routing.ts holds: unknown routes 404 and
+       are never swept to the homepage. A redirect that cannot be justified is
+       worse than an honest 404, because it tells a crawler the page moved. */
+    expect(resolveRedirect("/product/some-machine-that-never-existed/")).toBeNull();
+    expect(resolveRedirect("/nonsense/")).toBeNull();
   });
 });

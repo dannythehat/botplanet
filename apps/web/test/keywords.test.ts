@@ -63,6 +63,20 @@ describe("keyword register", () => {
     }
   });
 
+  /**
+   * A page can opt out of competing, but not out of explaining itself. The two
+   * rows that carry this — /privacy/ and /terms/ — record volumes in the tens
+   * of thousands for the bare English words "privacy" and "terms", and without
+   * a stated reason the next person to read a rank report would take those for
+   * an opportunity.
+   */
+  it("makes a page that is not competing say why", () => {
+    for (const k of KEYWORD_REGISTER) {
+      if (k.notRanking === undefined) continue;
+      expect(k.notRanking.length, `${k.path} opts out of ranking without a reason`).toBeGreaterThan(60);
+    }
+  });
+
   it("says where a ceded term went, and why", () => {
     for (const k of KEYWORD_REGISTER) {
       for (const c of k.cededTo ?? []) {

@@ -15,7 +15,14 @@
  * supersedes the older `/find-my-robot` proposal. The divergence is recorded
  * in the handoff for ChatGPT to ratify.
  */
-import { CATEGORIES, LAUNCH_CATEGORY, routes as categoryPaths, type LaunchState } from "./nav";
+import {
+  CATEGORIES,
+  LAUNCH_CATEGORY,
+  liveCategories,
+  routes as categoryPaths,
+  type LaunchState,
+} from "./nav";
+import { MERGED_REVIEWS, RETIRED_SLUGS } from "./product-names";
 
 export type RouteStatus = LaunchState;
 
@@ -162,6 +169,46 @@ export const ROUTES: RouteDef[] = [
       "Commercial cleaning, inspection and service robots. A separate track — no affiliate links and no BotMatch.",
   },
   {
+    /* The masthead. It exists because "we tell you when not to buy" is worth
+       exactly what a reader's willingness to believe somebody is behind it is
+       worth, and until 10 August 2026 the answer was a name in a schema block
+       nobody sees. */
+    path: "/authors/",
+    label: "Who writes this",
+    breadcrumbLabel: "Authors",
+    section: "company",
+    parent: "/",
+    status: "live",
+    navSurface: "utility",
+    footerGroup: "Company",
+    inSitemap: true,
+    indexable: true,
+  },
+  {
+    path: "/authors/danny/",
+    label: "Daniel Allan",
+    breadcrumbLabel: "Daniel Allan",
+    section: "company",
+    parent: "/authors/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: true,
+    indexable: true,
+  },
+  {
+    path: "/authors/michelle-choa/",
+    label: "Michelle Choa",
+    breadcrumbLabel: "Michelle Choa",
+    section: "company",
+    parent: "/authors/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: true,
+    indexable: true,
+  },
+  {
     path: "/about/",
     label: "About",
     breadcrumbLabel: "About BotPlanet",
@@ -219,6 +266,55 @@ export const ROUTES: RouteDef[] = [
     indexable: true,
     category: "robotic-lawn-mowers",
   },
+  /* THE FIRST PRODUCT-VERSUS-PRODUCT PAGE, 9 August 2026.
+
+     Every other /compare/ route is a category — one page holding a whole
+     range side by side. This one is two named machines, and it exists
+     because Google's own People Also Ask carries the question in almost
+     these words: "Which is better, Eilik or Emo?". The 6 August rule says
+     the URL follows the phrasing people actually use, so the term is
+     "eilik vs emo" and Eilik leads, in that order, because that is the
+     order the question is asked in.
+
+     It sits at a STATIC path so it wins against /compare/[category].astro,
+     which would otherwise try to resolve "eilik-vs-emo" as a category and
+     return a 404. */
+  /* THE UNIVERSAL FINDER, 9 August 2026, and the first BotMatch route that
+     is indexable.
+
+     The nine per-category funnels are noindex: a questionnaire has nothing to
+     rank and the result pages are private by design. This one is different
+     because it carries the argument rather than just the form — how a robot
+     gets picked, and the fact that the scorer cannot see price or commission.
+     That is the claim worth being findable for.
+
+     Its own children stay noindex. /botmatch/<category>/ and
+     /recommendation/<token>/ are unchanged. */
+  {
+    path: "/botmatch/",
+    label: "Find your robot",
+    breadcrumbLabel: "BotMatch",
+    section: "botmatch",
+    parent: "/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: true,
+    indexable: true,
+  },
+  {
+    path: "/compare/eilik-vs-emo/",
+    label: "Eilik vs EMO",
+    breadcrumbLabel: "Eilik vs EMO",
+    section: "compare",
+    parent: "/compare/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: true,
+    indexable: true,
+    category: "companion-robots",
+  },
   {
     path: "/compare/robotic-lawn-mowers/",
     label: "Compare robot mowers",
@@ -249,12 +345,277 @@ export const ROUTES: RouteDef[] = [
        questions and then have nothing to recommend. It flips to live with the
        first published lawn product. Not in the sitemap either way, same as
        pool and window: the page renders noindex. */
-    status: "coming_soon",
+    status: "live",
     navSurface: "none",
     footerGroup: null,
     inSitemap: false,
     indexable: false,
     category: "robotic-lawn-mowers",
+  },
+
+  /* ---------------- Companion robots ----------------
+     Added 2026-08-06. Named for the category, targeted at "robot pet" — see
+     the keyword register for why the head term is not the H1. */
+  {
+    path: "/robots/companion-robots/",
+    label: "Companion Robots & Robot Pets",
+    breadcrumbLabel: "Companion Robots",
+    section: "shop",
+    parent: "/robots/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: "Explore",
+    inSitemap: true,
+    indexable: true,
+    category: "companion-robots",
+  },
+  {
+    path: "/compare/companion-robots/",
+    label: "Compare companion robots",
+    breadcrumbLabel: "Companion Robots",
+    section: "compare",
+    parent: "/compare/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: true,
+    indexable: true,
+    category: "companion-robots",
+  },
+  {
+    path: "/botmatch/companion-robots/",
+    label: "Find My Robot Pet",
+    breadcrumbLabel: "Find My Robot Pet",
+    parent: "/robots/companion-robots/",
+    section: "botmatch",
+    /* Its own question set exists and scores against sc-companion-v1. Still
+       coming_soon for the same reason lawn is: no products in the catalogue
+       yet, so the funnel would ask six good questions and recommend nothing.
+       Flips to live with the first published companion product. */
+    status: "live",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: false,
+    indexable: false,
+    category: "companion-robots",
+  },
+
+  /* ---------------- Pet camera robots ----------------
+     A separate category from companion robots, on measured evidence rather
+     than taste: the two head SERPs share only Amazon, Reddit and YouTube, and
+     "pet camera robot" peaks in July while everything companion peaks in
+     December. Recorded in docs/seo/companion-robots-research-findings.md. */
+  {
+    path: "/robots/pet-camera-robots/",
+    label: "Pet Camera Robots",
+    section: "shop",
+    parent: "/robots/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: "Explore",
+    inSitemap: true,
+    indexable: true,
+    category: "pet-camera-robots",
+  },
+  {
+    path: "/compare/pet-camera-robots/",
+    label: "Compare pet camera robots",
+    breadcrumbLabel: "Pet Camera Robots",
+    section: "compare",
+    parent: "/compare/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: true,
+    indexable: true,
+    category: "pet-camera-robots",
+  },
+  {
+    path: "/botmatch/pet-camera-robots/",
+    label: "Find My Pet Camera Robot",
+    breadcrumbLabel: "Find My Pet Camera Robot",
+    parent: "/robots/pet-camera-robots/",
+    section: "botmatch",
+    status: "live",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: false,
+    indexable: false,
+    category: "pet-camera-robots",
+  },
+
+  /* ---------------- Educational and coding robots ----------------
+     Page 010, the last of the locked ten. Named for the demand rather than
+     the topic: "coding robot" is a consumer SERP, "educational robot" is an
+     institutional one. See the keyword register. */
+  {
+    path: "/robots/educational-coding-robots/",
+    label: "Coding Robots for Kids",
+    section: "shop",
+    parent: "/robots/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: "Explore",
+    inSitemap: true,
+    indexable: true,
+    category: "educational-coding-robots",
+  },
+  {
+    path: "/compare/educational-coding-robots/",
+    label: "Compare coding robots",
+    breadcrumbLabel: "Coding Robots for Kids",
+    section: "compare",
+    parent: "/compare/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: true,
+    indexable: true,
+    category: "educational-coding-robots",
+  },
+  {
+    path: "/botmatch/educational-coding-robots/",
+    label: "Find My Coding Robot",
+    breadcrumbLabel: "Find My Coding Robot",
+    parent: "/robots/educational-coding-robots/",
+    section: "botmatch",
+    status: "live",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: false,
+    indexable: false,
+    category: "educational-coding-robots",
+  },
+
+  /* ---------------- Robot vacuums and mops ----------------
+     Page 009, and the biggest category on the site at 135,000/mo. One URL
+     carries all of it: mop and self-emptying both measured 6-7 shared domains
+     with the head term. Flipped from coming_soon to live with this build. */
+  {
+    path: "/robots/robot-vacuums/",
+    label: "Robot Vacuums & Mops",
+    section: "shop",
+    parent: "/robots/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: "Explore",
+    inSitemap: true,
+    indexable: true,
+    category: "robot-vacuums",
+  },
+  {
+    path: "/compare/robot-vacuums/",
+    label: "Compare robot vacuums",
+    breadcrumbLabel: "Robot Vacuums & Mops",
+    section: "compare",
+    parent: "/compare/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: true,
+    indexable: true,
+    category: "robot-vacuums",
+  },
+  {
+    path: "/botmatch/robot-vacuums/",
+    label: "Find My Robot Vacuum",
+    breadcrumbLabel: "Find My Robot Vacuum",
+    parent: "/robots/robot-vacuums/",
+    section: "botmatch",
+    status: "live",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: false,
+    indexable: false,
+    category: "robot-vacuums",
+  },
+
+  /* ---------------- Grill-cleaning robots ----------------
+     Page 006. The category survived the run that was designed to kill it —
+     see the keyword register for the grill-brush control that cleared it. */
+  {
+    path: "/robots/grill-cleaning-robots/",
+    label: "Grill-Cleaning Robots",
+    section: "shop",
+    parent: "/robots/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: "Explore",
+    inSitemap: true,
+    indexable: true,
+    category: "grill-cleaning-robots",
+  },
+  {
+    path: "/compare/grill-cleaning-robots/",
+    label: "Compare grill-cleaning robots",
+    breadcrumbLabel: "Grill-Cleaning Robots",
+    section: "compare",
+    parent: "/compare/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: true,
+    indexable: true,
+    category: "grill-cleaning-robots",
+  },
+  {
+    path: "/botmatch/grill-cleaning-robots/",
+    label: "Find My Grill Cleaner",
+    breadcrumbLabel: "Find My Grill Cleaner",
+    parent: "/robots/grill-cleaning-robots/",
+    section: "botmatch",
+    status: "live",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: false,
+    indexable: false,
+    category: "grill-cleaning-robots",
+  },
+
+  /* ---------------- Self-cleaning litter boxes ----------------
+     Page 004 of the owner-locked ten. One URL carries the entire commercial
+     category: every buying phrasing measured 5-9 shared top-ten domains
+     against the head term. See the keyword register for the table. */
+  {
+    path: "/robots/self-cleaning-litter-boxes/",
+    label: "Self-Cleaning Litter Boxes",
+    section: "shop",
+    parent: "/robots/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: "Explore",
+    inSitemap: true,
+    indexable: true,
+    category: "self-cleaning-litter-boxes",
+  },
+  {
+    path: "/compare/self-cleaning-litter-boxes/",
+    label: "Compare self-cleaning litter boxes",
+    breadcrumbLabel: "Self-Cleaning Litter Boxes",
+    section: "compare",
+    parent: "/compare/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: true,
+    indexable: true,
+    category: "self-cleaning-litter-boxes",
+  },
+  {
+    path: "/botmatch/self-cleaning-litter-boxes/",
+    label: "Find My Litter Box",
+    breadcrumbLabel: "Find My Litter Box",
+    parent: "/robots/self-cleaning-litter-boxes/",
+    section: "botmatch",
+    /* Its own questions and its own config, sc-litterbox-v1. coming_soon only
+       because the catalogue is empty — the funnel asks the right questions and
+       has nothing to recommend yet. */
+    status: "live",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: false,
+    indexable: false,
+    category: "self-cleaning-litter-boxes",
   },
 
   /* ---------------- Window-cleaning robots ----------------
@@ -335,20 +696,66 @@ export const ROUTES: RouteDef[] = [
     category: CAT,
     aliases: ["/compare/pool-cleaners/"],
   },
+  /* LIVE SINCE 6 AUGUST 2026. These three carried `coming_soon` and a
+     RoutePlaceholder from launch, which was correct while they were empty and
+     became wrong the day they were written. All three are ruled CREATE in
+     docs/seo/pool-research-findings.md — nothing here exists because a site
+     "should have" a best-of page. */
   {
     path: `/best-robots/${CAT}/`,
     label: "Best robotic pool cleaners",
     breadcrumbLabel: "Robotic Pool Cleaners",
     section: "best",
     parent: "/best-robots/",
-    status: "coming_soon",
+    status: "live",
     navSurface: "none",
     footerGroup: null,
-    inSitemap: false,
-    indexable: false,
+    inSitemap: true,
+    indexable: true,
     category: CAT,
     aliases: [`/best/${CAT}/`],
-    summary: "Our best-of picks for robotic pool cleaners.",
+    summary: "Nine robotic pool cleaners ranked by the job each does best, with who each one is wrong for.",
+  },
+  {
+    /* The single biggest wedge in the pool dataset: 22,200/mo at KD 0, more
+       than three times the "best robotic pool cleaner" cluster. A child of the
+       best-of page rather than a sibling, because it is the cordless subset of
+       the same argument and the breadcrumb should say so. */
+    path: `/best-robots/${CAT}/cordless/`,
+    label: "Best cordless robotic pool cleaners",
+    breadcrumbLabel: "Cordless",
+    section: "best",
+    parent: `/best-robots/${CAT}/`,
+    status: "live",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: true,
+    indexable: true,
+    category: CAT,
+    summary: "The seven cordless machines ranked, and the honest case for buying corded instead.",
+  },
+  {
+    /* Not on the 1 August map. The second pool run measured "robotic pool
+       cleaner for above ground pool" at 2,400/mo, KD 0 — the first run saw
+       above-ground at 140 and folded it into the best-of, which was right on
+       the number it had.
+
+       A page rather than a section because the above-ground rating is a
+       COMPATIBILITY claim, not a performance one: six of our ten cleaners are
+       not rated for a vinyl liner at all, so this reader is choosing from a
+       different shortlist. */
+    path: `/best-robots/${CAT}/above-ground-pools/`,
+    label: "Best above-ground pool cleaners",
+    breadcrumbLabel: "Above-ground pools",
+    section: "best",
+    parent: `/best-robots/${CAT}/`,
+    status: "live",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: true,
+    indexable: true,
+    category: CAT,
+    summary: "The four machines rated for a vinyl liner, and why the other six are not.",
   },
   {
     path: `/guides/${CAT}/`,
@@ -356,13 +763,31 @@ export const ROUTES: RouteDef[] = [
     breadcrumbLabel: "Robotic Pool Cleaners",
     section: "guides",
     parent: "/guides/",
-    status: "coming_soon",
+    status: "live",
     navSurface: "none",
     footerGroup: null,
-    inSitemap: false,
-    indexable: false,
+    inSitemap: true,
+    indexable: true,
     category: CAT,
-    summary: "Buying and care guides for robotic pool cleaners.",
+    summary: "How robotic pool cleaners work and what actually decides which one suits your pool.",
+  },
+  {
+    /* Only 40/mo on the exact phrase. It is here because "Is a robot pool
+       cleaner worth it?" is the number one People Also Ask entry on the
+       40,500 head term — a snippet play, not a volume play. Parented to the
+       guides index rather than to the category's guide hub: the URL has no
+       category segment, and a breadcrumb that claims one would not match it. */
+    path: "/guides/are-robotic-pool-cleaners-worth-it/",
+    label: "Are robotic pool cleaners worth it?",
+    section: "guides",
+    parent: "/guides/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: true,
+    indexable: true,
+    category: CAT,
+    summary: "For most in-ground pools yes, and for four specific situations no.",
   },
   {
     path: `/deals/${CAT}/`,
@@ -397,8 +822,16 @@ export const ROUTES: RouteDef[] = [
     inSitemap: false,
     indexable: false,
     category: CAT,
-    // Generic BotMatch entries must never exist as pages; they land here.
-    aliases: ["/find-my-robot/", "/botmatch/", "/find-my-robot/pool-cleaners/"],
+    /* "/botmatch/" LEFT THIS LIST ON 9 AUGUST 2026 AND THAT IS THE POINT OF
+       THE WHOLE CHANGE. It was an alias onto the pool funnel, written when
+       pool was the only category with questions — so every reader who typed
+       the obvious URL, or followed a generic link, was asked about their
+       swimming pool whatever they had come for. It is now a real page that
+       asks what job they want done first.
+
+       The other two stay: /find-my-robot/ and its pool variant are legacy
+       paths that were only ever the pool matcher. */
+    aliases: ["/find-my-robot/", "/find-my-robot/pool-cleaners/"],
   },
 
   /* ---------------- Company / trust ---------------- */
@@ -480,7 +913,145 @@ export const ROUTES: RouteDef[] = [
     footerGroup: "Trust & legal",
     inSitemap: true,
     indexable: true,
-    summary: "The terms that apply when you use BotPlanet.",
+    summary:
+      "The terms that apply when you use BotPlanet, including what our recommendations are and are not, and how affiliate links affect what you read here.",
+  },
+
+  {
+    /* Page 2 of the window map, ruled CREATE 5 August 2026 and built on the
+       7th — after the eleven reviews under it were given working buy buttons.
+       1,300/mo at KD 0-3. Parented to the category hub, which owns the head
+       term this page deliberately does not chase. */
+    /* The Enabot range page. A STATIC ROUTE INSIDE THE PRODUCT ROUTE'S SPACE:
+       /robots/<category>/<slug>/ is normally a product, and "enabot" is not
+       one. Astro gives the static file precedence, so the dynamic route never
+       sees it. Parented to the pet-camera hub, whose head term it does not
+       chase — 9,900/mo on the brand against 480 on the category. */
+    path: "/robots/pet-camera-robots/enabot/",
+    label: "Enabot range",
+    breadcrumbLabel: "Enabot",
+    section: "robots",
+    parent: "/robots/pet-camera-robots/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: true,
+    indexable: true,
+    category: "pet-camera-robots",
+    summary: "Seven driving pet cameras, and which of them is the one to buy.",
+  },
+
+  {
+    path: "/best-robots/robotic-lawn-mowers/",
+    label: "Best robot lawn mowers",
+    breadcrumbLabel: "Robotic Lawn Mowers",
+    section: "best",
+    parent: "/robots/robotic-lawn-mowers/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: true,
+    indexable: true,
+    category: "robotic-lawn-mowers",
+    summary: "Six mowers ranked on the two numbers that rule machines out: area and slope.",
+  },
+
+  {
+    path: "/best-robots/window-cleaning-robots/",
+    label: "Best window cleaning robots",
+    breadcrumbLabel: "Window Cleaning Robots",
+    section: "best",
+    parent: "/robots/window-cleaning-robots/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: true,
+    indexable: true,
+    category: "window-cleaning-robots",
+    summary: "Nine ranked by the job each does best, and the two we hold and do not recommend.",
+  },
+
+  {
+    /* Page 9 of the window map and the last of it. Parented to /guides/ like
+       the pool worth-it guide: the URL carries no category segment, so a
+       breadcrumb claiming one would not match the path the reader walked. */
+    path: "/guides/do-window-cleaning-robots-work/",
+    label: "Do window cleaning robots work?",
+    section: "guides",
+    parent: "/guides/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: true,
+    indexable: true,
+    category: "window-cleaning-robots",
+    summary: "Yes in the middle of the pane, no at the edges — and when not to buy one at all.",
+  },
+
+  /* ---------------- Standalone guides, 6 August 2026 ----------------
+     The first pages published for categories with NOTHING IN THE
+     CATALOGUE. Each answers a decision rather than ranking machines,
+     and each says in its own words what it cannot yet tell the reader.
+
+     PARENTED TO /guides/ RATHER THAN TO A CATEGORY GUIDE HUB, for the
+     same reason the pool worth-it guide is: the URL carries no category
+     segment, so a breadcrumb claiming one would not match the path the
+     reader actually walked. The category is still recorded below, which
+     is what joins them to the right internal-link anchor set.
+
+     Full plans — keywords, links, images, schema — in
+     content/seo/page-plan.ts. None has artwork yet. */
+  {
+    path: "/guides/wire-free-robot-lawn-mower/",
+    label: "Wire-free robot lawn mowers",
+    section: "guides",
+    parent: "/guides/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: true,
+    indexable: true,
+    category: "robotic-lawn-mowers",
+    summary: "RTK, vision or LiDAR — and when a buried cable is still the better buy.",
+  },
+  {
+    path: "/guides/cheap-robot-lawn-mower/",
+    label: "Cheap robot lawn mowers",
+    section: "guides",
+    parent: "/guides/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: true,
+    indexable: true,
+    category: "robotic-lawn-mowers",
+    summary: "What the budget end gives up, what it does not, and where a low price stops being a bargain.",
+  },
+  {
+    path: "/guides/robot-lawn-mower-for-hills/",
+    label: "Robot lawn mowers for hills",
+    section: "guides",
+    parent: "/guides/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: true,
+    indexable: true,
+    category: "robotic-lawn-mowers",
+    summary: "Measure the gradient first: it is the one constraint you cannot work around.",
+  },
+  {
+    path: "/guides/robotic-pets-for-elderly/",
+    label: "Robotic pets for elderly relatives",
+    section: "guides",
+    parent: "/guides/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: true,
+    indexable: true,
+    category: "companion-robots",
+    summary: "Three different products are sold to this buyer, and they answer three different problems.",
   },
 ];
 
@@ -510,6 +1081,65 @@ export const footerGroups = (): { title: string; links: RouteDef[] }[] => {
 /** Canonical, indexable paths for the XML sitemap. */
 export const sitemapRoutes = () => ROUTES.filter((r) => r.inSitemap && r.indexable && r.status !== "hidden");
 
+/**
+ * Whether a product's own URL belongs in the sitemap.
+ *
+ * ONE PLACE FOR THE RULE, because the sitemap had it inline and got it wrong.
+ * Until 11 August 2026 the sitemap admitted a product only when
+ * `liveCategories()` contained its category — live, and nothing else. That was
+ * right for `coming_soon`, where the hub is a labelled placeholder and the
+ * category has not launched, and WRONG for `hidden`.
+ *
+ * A hidden category is a reserved slug with no hub, no route and no
+ * comparative surfaces — but a published review beneath it is a finished,
+ * indexable page. `[slug].astro` never passes `noindex` and never reads the
+ * category's launch state, so that page indexes normally. Under the old rule
+ * it indexed while this site never declared it: the worst of both, and
+ * especially so for a page whose whole plan is an indexation head start
+ * before a seasonal spike.
+ *
+ * So: live categories admit their products as before, hidden categories admit
+ * only products that actually have a review written, and `coming_soon` admits
+ * nothing. The hub, comparison and matcher of a hidden category stay out by
+ * construction rather than by this rule — `sitemapRoutes()` above filters on
+ * the route registry, and a hidden category has no routes registered at all.
+ *
+ * `hasPublishedReview` is passed in rather than read here, so this file does
+ * not have to import the review registry to answer a routing question.
+ */
+export const productInSitemap = (opts: {
+  slug: string;
+  categorySlug: string;
+  hasPublishedReview: boolean;
+}): boolean => {
+  /* A retired slug 301s to its replacement and a merged one 301s to the review
+     that absorbed it. Either way, listing the URL asks a crawler to spend a
+     fetch to be told to go somewhere else. */
+  if (opts.slug in RETIRED_SLUGS || opts.slug in MERGED_REVIEWS) return false;
+
+  const category = CATEGORIES.find((c) => c.slug === opts.categorySlug);
+  if (!category) return false;
+  if (category.launch === "live") return true;
+  if (category.launch === "hidden") return opts.hasPublishedReview;
+  return false; // coming_soon: the hub is a placeholder, so nothing under it ships
+};
+
+/**
+ * The categories whose best-of page has actually been written.
+ *
+ * /best-robots/ used to decide this from the category's launch state, which is
+ * a different fact entirely: nine categories are live and two best-of pages
+ * exist, so seven cards linked at a 404. /best-robots/[slug].astro deliberately
+ * returns 404 for an unwritten slug rather than filling the URL shape with a
+ * thin page, so the registry is the only thing that knows.
+ */
+export const builtBestOfCategories = (): Set<string> =>
+  new Set(
+    ROUTES.filter((r) => r.section === "best" && r.status === "live" && r.category).map(
+      (r) => r.category as string,
+    ),
+  );
+
 /** Category-scoped section paths, generated rather than hard-coded. */
 export const categoryRoutes = (slug: string) => ({
   hub: categoryPaths.category(slug),
@@ -527,9 +1157,25 @@ export const categoryRoutes = (slug: string) => ({
  * internal links — must come through here. A second hand-written pattern is how
  * ten obsolete `/pool-cleaners/<slug>/` URLs reached the SEO register, and the
  * only durable fix is to leave exactly one place where the shape is decided.
+ *
+ * A MERGED PRODUCT RESOLVES TO THE PAGE THAT COVERS IT, and that has to happen
+ * here rather than at each caller. When the LUBA 3 AWD 3000H's review folded
+ * into the 1500H's, the product itself stayed published — so the category grid
+ * and the comparison table went on linking a URL that answers a 301, which the
+ * link audit caught the same hour. Every one of those surfaces builds its href
+ * from this function; making it merge-aware fixes all of them at once and
+ * makes it impossible for the next merge to reintroduce the same fault.
+ *
+ * The redirect in [slug].astro stays, because an external link or a bookmark
+ * on the old URL still has to land somewhere sensible. What changes is that we
+ * stop spending our own crawl budget on it.
  */
-export const productPath = (productSlug: string, categorySlug: string = LAUNCH_CATEGORY): string =>
-  categoryPaths.product(categorySlug, productSlug);
+export const productPath = (productSlug: string, categorySlug: string = LAUNCH_CATEGORY): string => {
+  const merged = MERGED_REVIEWS[productSlug];
+  return merged
+    ? categoryPaths.product(merged.categorySlug, merged.into)
+    : categoryPaths.product(categorySlug, productSlug);
+};
 
 /** Every alias in the registry, mapped to its canonical destination. */
 export const REDIRECTS: { from: string; to: string }[] = ROUTES.flatMap((r) =>
@@ -537,4 +1183,126 @@ export const REDIRECTS: { from: string; to: string }[] = ROUTES.flatMap((r) =>
 );
 
 /** Categories, re-exported so consumers need only one import. */
-export { CATEGORIES, LAUNCH_CATEGORY };
+export { CATEGORIES, LAUNCH_CATEGORY, liveCategories };
+
+/* ============================================================
+   LEGACY REDIRECTS — the URLs Google still thinks are this site.
+
+   WHAT THIS FIXES, AND HOW IT WAS FOUND. Search Console on 11 August 2026:
+   62 pages indexed, and every one of them belongs to a PREVIOUS site on this
+   domain — /product/*, /reviews/*, /blog/*, /shop, /quiz, /gifts. The 111
+   pages that actually exist sit in "Discovered – currently not indexed" with
+   Last crawled: N/A. Google knows they are there, from the sitemap, and has
+   never fetched one of them.
+
+   Meanwhile every old URL 404s. /security-robots, /robot-vacuums,
+   /companion-robots and the rest were all checked by hand and all dead, each
+   with a live replacement under /robots/. Google's own internal-link report
+   still lists /shop, /categories, /new-robots and /returns-policy as this
+   site's most-linked pages, which is a fair summary of what it believes.
+
+   So the crawler spends what little budget a two-backlink domain earns on
+   re-checking dead URLs, and never reaches the new ones. A 301 turns each of
+   those dead ends into a signpost: it passes on whatever the old page was
+   worth, and it is the strongest "this moved, come and look" signal available.
+
+   WHAT IS DELIBERATELY NOT HERE. Anything that cannot be mapped honestly.
+   Products the catalogue no longer holds — a Roomba j9+, a temi, two
+   Husqvarnas — go to the category that covers them, because a reader who
+   wanted a robot vacuum is served by the vacuum hub and is not served by the
+   homepage. Old URLs with no category at all keep 404ing. The rule in
+   lib/routing.ts stands: unknown routes 404, they are never swept to the
+   homepage, and a redirect nobody can justify is worse than an honest 404.
+   ============================================================ */
+
+/** Old exact paths, and where each one honestly belongs now. */
+export const LEGACY_REDIRECTS: { from: string; to: string; why: string }[] = [
+  /* The old site put categories at the root. Every one of these is a live
+     category today, one path segment deeper. */
+  ...CATEGORIES.filter((c) => c.launch === "live").map((c) => ({
+    from: `/${c.slug}/`,
+    to: `/robots/${c.slug}/`,
+    why: "Root-level category from the previous structure; the category still exists one segment deeper.",
+  })),
+
+  /* Cancelled before it was built. 004 Home Security was ruled out on no
+     consumer demand in the SERPs, so there is no security category to land on
+     and the robots index is the honest destination. */
+  { from: "/security-robots/", to: "/robots/", why: "Home security was researched and cancelled; no such category exists, so the reader gets the full index rather than a 404." },
+  { from: "/home-security-robots/", to: "/robots/", why: "The second phrasing the old site used for the same cancelled category." },
+
+  /* Storefront-shaped pages from the old site. All of them were 'browse the
+     catalogue', which is what /robots/ is now. */
+  { from: "/shop/", to: "/robots/", why: "The old catalogue browse page." },
+  { from: "/categories/", to: "/robots/", why: "The old category index." },
+  { from: "/new-robots/", to: "/robots/", why: "The old new-arrivals list; nothing on this site replaces it, and the index is the nearest honest answer." },
+  { from: "/product/", to: "/robots/", why: "Bare product index from the old structure." },
+  { from: "/reviews/", to: "/robots/", why: "Bare review index from the old structure." },
+  { from: "/blog/", to: "/guides/", why: "The old blog is the guides section now." },
+
+  /* Decision tools. The quiz was the old site's version of what BotMatch does,
+     and gifts was a seasonal buying aid with no successor. */
+  { from: "/quiz/", to: "/botmatch/", why: "The old questionnaire. BotMatch is the same job done properly." },
+  { from: "/gifts/", to: "/robots/", why: "A seasonal gift finder with no successor page; the index is the nearest honest destination." },
+
+  /* Policy pages that were renamed rather than removed. */
+  { from: "/privacy-policy/", to: "/privacy/", why: "The policy is the same policy; only the URL got shorter when the site was rebuilt." },
+  /* NOT /contact/. It was on the old site and it is on this one, so it needs
+     no redirect — and a redirect would have broken a live page. Caught by
+     routing.test.ts, which is why the collision check below is a test rather
+     than a comment. */
+  { from: "/returns-policy/", to: "/terms/", why: "This site sells nothing directly, so it has no returns policy of its own. Terms is where the commercial relationship is described." },
+  { from: "/shipping-policy/", to: "/terms/", why: "As above — delivery is the retailer's, not ours." },
+];
+
+/**
+ * Old product and review URLs, resolved by slug rather than listed one by one.
+ *
+ * The previous site used /product/<slug> and /reviews/<slug>-review-<some
+ * headline>. Where that slug still names something in the catalogue the
+ * redirect is exact; where it does not, the reader goes to the category that
+ * covers what they were looking at.
+ */
+const LEGACY_PRODUCT_CATEGORY: Record<string, string> = {
+  /* Gone from the catalogue, but the category that covers them is live, so a
+     reader who arrived for one of these is still served. */
+  "irobot-roomba-j9-plus": "robot-vacuums",
+  "ecovacs-deebot-x2-omni": "robot-vacuums",
+  "husqvarna-automower-430xh": "robotic-lawn-mowers",
+  "husqvarna-automower-450x-nera": "robotic-lawn-mowers",
+  "ecovacs-goat-a3000": "robotic-lawn-mowers",
+  "miko-mini-ai-robot": "companion-robots",
+  "temi-v3-robot": "companion-robots",
+  "jjrc-r2-cady-wida": "educational-coding-robots",
+  "amazon-echo-show-10": "companion-robots",
+};
+
+/**
+ * Resolve a legacy /product/ or /reviews/ path, or return null.
+ *
+ * Old review slugs carried a headline — "sphero-bolt-review-the-smartest-
+ * hamster-ball-in-the-galaxy" — so the product slug is matched as a PREFIX and
+ * the longest match wins, which stops a shorter slug claiming a longer one's
+ * URL.
+ */
+export const legacyProductRedirect = (
+  pathname: string,
+  known: { slug: string; categorySlug: string }[],
+): string | null => {
+  const m = /^\/(?:product|reviews)\/([a-z0-9-]+)\/?$/.exec(pathname.toLowerCase());
+  if (!m) return null;
+  const slug = m[1];
+
+  const exact = known.find((k) => k.slug === slug);
+  if (exact) return productPath(exact.slug, exact.categorySlug);
+
+  const prefixed = known
+    .filter((k) => slug.startsWith(`${k.slug}-`))
+    .sort((a, b) => b.slug.length - a.slug.length)[0];
+  if (prefixed) return productPath(prefixed.slug, prefixed.categorySlug);
+
+  for (const [old, category] of Object.entries(LEGACY_PRODUCT_CATEGORY)) {
+    if (slug === old || slug.startsWith(`${old}-`)) return `/robots/${category}/`;
+  }
+  return null;
+};

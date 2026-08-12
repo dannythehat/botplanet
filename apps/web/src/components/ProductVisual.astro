@@ -6,7 +6,7 @@
  * media library, product tiles render a branded monogram panel that names the
  * exact model — deliberate, not empty, and never misleading.
  *
- * When a real, rights-cleared image exists, pass `src` and it is used instead.
+ * When a real, image exists, pass `src` and it is used instead.
  */
 interface Props {
   name: string;
@@ -16,11 +16,12 @@ interface Props {
   ratio?: string; // e.g. "16 / 10"
   small?: boolean;
 }
+import { srcsetFor, sizeOf } from "../lib/srcset";
 const { name, brand, src, alt, ratio = "16 / 10", small = false } = Astro.props;
 const initials = (brand ?? name).split(/\s+/).slice(0, 2).map((w) => w[0]).join("").toUpperCase();
 ---
 {src ? (
-  <img class="pv-img" src={src} alt={alt ?? name} loading="lazy" decoding="async" style={`aspect-ratio:${ratio}`} />
+  <img class="pv-img" src={src} srcset={srcsetFor(src)} sizes="(min-width: 760px) 320px, 45vw" width={sizeOf(src)?.width} height={sizeOf(src)?.height} alt={alt ?? name} loading="lazy" decoding="async" style={`aspect-ratio:${ratio}`} />
 ) : (
   <div class:list={["pv", { small }]} style={`aspect-ratio:${ratio}`} role="img" aria-label={`${name} — product imagery pending`}>
     <span class="pv-mono" aria-hidden="true">{initials}</span>

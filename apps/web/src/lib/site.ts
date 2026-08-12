@@ -1,6 +1,6 @@
 /**
  * Central site / brand / EEAT config. Founder + business fields are placeholders
- * until confirmed — search for "TODO:founder" to fill in.
+ * The founder was confirmed on 10 August 2026; the TODO that stood here is done.
  */
 export const SITE = {
   name: "BotPlanet",
@@ -12,9 +12,12 @@ export const SITE = {
    * This is the single source for structured data and any rendered use.
    */
   tagline: "Shop the planet’s real-world robots with clearer comparisons, evidence and category-specific guidance.",
-  // TODO:founder — replace with the real accountable editorial owner.
+  /* Confirmed by the owner on 10 August 2026 — the TODO that stood here since
+     launch is answered. The byline is the full name because a byline is an
+     accountability statement and "Danny" is what the emails sign off as, not
+     what a reader can hold anybody to. */
   founder: {
-    name: "Danny",
+    name: "Daniel Allan",
     title: "Founder & Editorial Owner",
     bio: "Founder of BotPlanet. Reviews and recommendations here are written to help you buy the right robot, with independence from commission.",
   },
@@ -41,10 +44,17 @@ export const AMAZON_ASSOCIATE_TAG_STATUS =
 /**
  * The ONLY way an outbound Amazon URL is built. Appends the tag when there is a
  * verified one and leaves the URL clean when there is not.
+ *
+ * THE TAG IS NOW PER-MARKET, and the second argument is how. Under Earn
+ * Globally `botplanet-20` is credited on ten stores and on none of the others,
+ * so a click routed to amazon.com.au or amazon.co.jp must go out CLEAN rather
+ * than carrying a tag that store will not honour. Pass the tag the marketplace
+ * router returned; omit the argument and the US tag is used, which is the old
+ * behaviour and correct for every US click.
  */
-export function amazonDestination(url: string): string {
-  if (!AMAZON_ASSOCIATE_TAG) return url;
-  return `${url}${url.includes("?") ? "&" : "?"}tag=${AMAZON_ASSOCIATE_TAG}`;
+export function amazonDestination(url: string, tag: string | null = AMAZON_ASSOCIATE_TAG): string {
+  if (!tag) return url;
+  return `${url}${url.includes("?") ? "&" : "?"}tag=${tag}`;
 }
 
 /** Trust pages shown in the footer. */

@@ -146,6 +146,27 @@ field, not just the title — before you pay.
 
 ---
 
+## The machine Aiper was ordered to hand out
+
+On 20 March 2025 the CPSC recalled the Aiper Seagull Pro, model ZT6001, over an
+adapter that could overheat: 19 reports of melting, smoking or fire while
+charging, five with property damage, no injuries. The remedy the Commission
+published is specific, and it is this machine — recalled Seagull Pro owners get a
+free Scuba S1 and a prepaid label.
+
+That is worth knowing for two reasons. This machine is not recalled, and a fair
+number of the Scuba S1s in American pools this season arrived as replacements for
+one that was.
+
+Aiper's earlier recall, the Elite Pro model GS100 in August 2023, was also not
+this machine. Both faults were on the mains side — a cord used without its
+adapter, then an adapter on its own — rather than a cell failing in the water.
+
+We are not telling you nobody has ever reported a problem with a Scuba S1. The
+recall database is public and complete and holds nothing against it; the consumer
+incident database is not something we can query per model, so we are not going to
+pretend to have.
+
 ## What we cannot tell you
 
 Written from published sources and no pool:

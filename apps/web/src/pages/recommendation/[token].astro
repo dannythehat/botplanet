@@ -1,5 +1,6 @@
 ---
 import Base from "../../layouts/Base.astro";
+import ProductImage from "../../components/ProductImage.astro";
 import { getDb, schema } from "../../lib/db";
 import { usd, freshnessLabel } from "../../lib/format";
 import { eq } from "drizzle-orm";
@@ -30,15 +31,150 @@ const alternatives = scores
   .sort((a, b) => b.suitabilityScore - a.suitabilityScore)
   .slice(0, 3);
 
-const explanation = (rec.explanationJson as { text?: string } | null)?.text ?? "";
-const catSlug = "robotic-pool-cleaners";
+/**
+ * DID THIS READER ALREADY GIVE US THEIR ADDRESS?
+ *
+ * The page carried an "Email my result" form unconditionally, which is the
+ * right offer for somebody who has just finished the matcher and the wrong one
+ * for somebody who arrived by clicking the link in the email we already sent
+ * them. That reader has given us their address, received the result, and is
+ * being asked for it again by the page the email pointed at.
+ *
+ * matcher_leads is written by /api/matcher-lead with the result token, so the
+ * page can simply ask. Raw SQL because that table is not in the drizzle schema
+ * — same access the insert uses.
+ */
+let alreadyEmailed: { email: string; created_at: string } | null = null;
+try {
+  const raw = (Astro.locals as App.Locals).runtime?.env?.DB as
+    | { prepare: (q: string) => any }
+    | undefined;
+  if (raw) {
+    alreadyEmailed = await raw
+      .prepare(`SELECT email, created_at FROM matcher_leads WHERE result_token = ? ORDER BY rowid DESC LIMIT 1`)
+      .bind(token)
+      .first();
+  }
+} catch {
+  /* A lookup failure must not take the page down — it only decides which of
+     two blocks renders, and the form is the safe one to fall back to. */
+  alreadyEmailed = null;
+}
+
+const maskEmail = (e: string) => {
+  const [user, domain] = e.split("@");
+  if (!domain) return e;
+  const shown = user.slice(0, Math.min(2, user.length));
+  return `${shown}${"•".repeat(Math.max(1, user.length - shown.length))}@${domain}`;
+};
+
+const explanationJson = rec.explanationJson as {
+  text?: string;
+  kind?: "whole_range" | "indistinguishable";
+  equivalent?: string[];
+} | null;
+const explanation = explanationJson?.text ?? "";
+/**
+ * WHOSE FAULT THE TIE IS.
+ *
+ * `whole_range` means every eligible machine tied, which happens when the
+ * reader answers "not sure" on power and "show me the range" on budget — they
+ * ruled nothing out and the honest reply is "here is everything". Telling that
+ * reader we cannot separate the machines is modest to the point of being wrong,
+ * and it hides the one thing they could do about it.
+ *
+ * `indistinguishable` means we narrowed the field and then ran out of recorded
+ * difference, which is the case the original copy was written for.
+ *
+ * Recommendations saved before 10 August 2026 carry no `kind`. They fall back
+ * to the honest-about-our-data wording, which is what they were written under.
+ */
+const tieIsWholeRange = explanationJson?.kind === "whole_range";
+
+/**
+ * THE TIED GROUP, WHEN THERE IS ONE.
+ *
+ * `chosenProductId` is null and `equivalent` holds two or more product ids when
+ * the matcher could not separate the top of the ranking on recorded data. That
+ * is a real result, not a failure, and it renders as a group rather than
+ * falling through to "no perfect match" — which would be wrong in the opposite
+ * direction, since these all fit.
+ */
+const equivalent = (explanationJson?.equivalent ?? [])
+  .map((id) => productById(id))
+  .filter((p): p is NonNullable<typeof p> => Boolean(p))
+  .sort((a, b) => a.name.localeCompare(b.name));
+/**
+ * THE CATEGORY, READ FROM THE PRODUCTS RATHER THAN ASSUMED.
+ *
+ * This was hard-coded to "robotic-pool-cleaners" from when pool was the only
+ * category with a matcher. There are nine now, so a litter-box result was
+ * linking at /robots/robotic-pool-cleaners/litter-robot-4/ and sending "start
+ * over" to the pool questions. Taken from whichever products this
+ * recommendation actually names.
+ */
+const categories = await db.select().from(schema.categories);
+const catSlugOf = (p: { categoryId: string } | undefined) =>
+  categories.find((c) => c.id === p?.categoryId)?.slug ?? "robotic-pool-cleaners";
+const catSlug = catSlugOf(chosen ?? equivalent[0]);
+const hrefFor = (p: { categoryId: string; slug: string }) => `/robots/${catSlugOf(p)}/${p.slug}/`;
 ---
 
 <Base title="Your BotPlanet recommendation" description="Your personalised, suitability-first robot recommendation.">
   <p class="muted">Your personalised recommendation · saved at this link</p>
-  {chosen ? (
+  {equivalent.length > 1 ? (
     <>
       <div class="hero">
+        <span class="pill class">{tieIsWholeRange ? "The whole range" : "Equivalent on current data"}</span>
+        <h1 style="margin-top:10px;">
+          {tieIsWholeRange
+            ? `All ${equivalent.length} of them fit what you asked for`
+            : `${equivalent.length} machines, and we cannot separate them`}
+        </h1>
+        <p style="font-size:17px;">{explanation}</p>
+        {/* A tie is still an answer, and the reader still has to choose. A bare
+            list of names asks them to do that blind. */}
+        <div class="grid" style="margin-top:18px;">
+          {equivalent.map((p) => (
+            <a class="card rec-alt" href={hrefFor(p)}>
+              <span class="rec-alt__art">
+                <ProductImage
+                  productId={p.id}
+                  placement="listing_card"
+                  types={["product_hero", "product_alternate_view", "branded_placeholder"]}
+                  sizes="(min-width: 900px) 260px, 45vw"
+                />
+              </span>
+              <h3>{p.name}</h3>
+              <span class="muted">View details →</span>
+            </a>
+          ))}
+        </div>
+        <p class="muted" style="margin-top:16px;">
+          {tieIsWholeRange
+            ? "Nothing here has been ruled out, because nothing you told us rules anything out. Answer again with a budget or a firmer constraint and this gets a great deal shorter."
+            : "Naming one of these as the winner would mean picking it out of a tie, and we would rather tell you the truth about what we know. When the attributes that separate them are recorded, this answer gets sharper."}
+        </p>
+      </div>
+    </>
+  ) : chosen ? (
+    <>
+      {/* THE PAGE THE EMAIL SENDS PEOPLE TO HAD NO PICTURE OF ANYTHING.
+          A reader who has answered five questions, been emailed a link and
+          clicked it is the most committed visitor this site gets, and they
+          arrived at a page of text with a price on it. Every one of these
+          machines has artwork in the media registry — the same resolver the
+          listing cards use, so a withdrawn asset empties this too. */}
+      <div class="hero">
+        <div class="rec-hero__art">
+          <ProductImage
+            productId={chosen.id}
+            placement="listing_card"
+            types={["product_hero", "product_alternate_view", "branded_placeholder"]}
+            sizes="(min-width: 900px) 420px, 90vw"
+            priority
+          />
+        </div>
         <span class="pill class">BotPlanet recommends</span>
         <h1 style="margin-top:10px;">{chosen.name}</h1>
         <p style="font-size:17px;">{explanation}</p>
@@ -49,7 +185,7 @@ const catSlug = "robotic-pool-cleaners";
             {chosenOffer.redirectKey && (
               <a class="btn primary" href={`/go/${chosenOffer.redirectKey}`} rel="sponsored nofollow">See current offer</a>
             )}
-            <a class="btn" href={`/robots/${catSlug}/${chosen.slug}/`}>Full details</a>
+            <a class="btn" href={hrefFor(chosen)}>Full details</a>
           </div>
         )}
       </div>
@@ -61,7 +197,15 @@ const catSlug = "robotic-pool-cleaners";
             {alternatives.map((a) => {
               const p = productById(a.productId);
               return p ? (
-                <a class="card" href={`/robots/${catSlug}/${p.slug}/`}>
+                <a class="card rec-alt" href={hrefFor(p)}>
+                  <span class="rec-alt__art">
+                    <ProductImage
+                      productId={p.id}
+                      placement="listing_card"
+                      types={["product_hero", "product_alternate_view", "branded_placeholder"]}
+                      sizes="(min-width: 900px) 260px, 45vw"
+                    />
+                  </span>
                   <span class="pill">Suitability {a.suitabilityScore}/100</span>
                   <h3>{p.name}</h3>
                   <span class="muted">View details →</span>
@@ -79,10 +223,20 @@ const catSlug = "robotic-pool-cleaners";
     </>
   )}
 
-  {chosen && (
+  {chosen && alreadyEmailed && (
     <div class="card" style="max-width:480px; margin-top:28px;">
-      <h3 style="margin:0;">📧 Email my result</h3>
-      <p class="muted" style="margin:4px 0 12px;">We'll send this recommendation link to your inbox. No spam.</p>
+      <h3 style="margin:0;">This is saved to you</h3>
+      <p class="muted" style="margin:4px 0 0;">
+        We sent it to {maskEmail(alreadyEmailed.email)}. This link stays live and stays current, so
+        bookmark it or come back to that email whenever you want to check prices again.
+      </p>
+    </div>
+  )}
+
+  {chosen && !alreadyEmailed && (
+    <div class="card" style="max-width:480px; margin-top:28px;">
+      <h3 style="margin:0;">Keep this result</h3>
+      <p class="muted" style="margin:4px 0 12px;">We'll send this link to your inbox so you can come back to it. No spam.</p>
       <form id="emailform" data-token={token}>
         <div class="row">
           <input type="email" name="email" required placeholder="you@example.com" style="flex:1; min-width:200px;" />
@@ -122,3 +276,30 @@ const catSlug = "robotic-pool-cleaners";
   </p>
   <p style="margin-top:16px;"><a class="btn" href={`/botmatch/${catSlug}/`}>Start over</a></p>
 </Base>
+
+<style>
+  .rec-hero__art {
+    max-width: 420px;
+    margin: 0 0 18px;
+    border-radius: 14px;
+    overflow: hidden;
+    background: var(--panel, #0d1017);
+  }
+  .rec-hero__art :global(img) { display: block; width: 100%; height: auto; }
+
+  /* NO FORCED SQUARE, AND NO CROP.
+     This was aspect-ratio 1/1 with object-fit: cover, which is right for
+     photographs and wrong for everything this site actually holds: the
+     artwork is wide composed panels with the product's NAME set into the
+     pixels, so cropping to a square sliced the name off — "SCUBA X1 PRO MAX"
+     rendered as "CUBA X1 O MAX". The picture is shown whole, at whatever
+     shape it is. */
+  .rec-alt__art {
+    display: block;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 10px;
+    background: var(--panel, #0d1017);
+  }
+  .rec-alt__art :global(img) { width: 100%; height: auto; display: block; }
+</style>

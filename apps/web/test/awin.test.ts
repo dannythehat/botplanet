@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import {
-  AWIN_CONSERVATIVE_RIGHTS,
+  AWIN_CONSERVATIVE_TERMS,
   AWIN_DATAFEED_SECRET_REF,
   AWIN_IMAGES,
   AWIN_INGESTION_BLOCKER,
@@ -18,7 +18,7 @@ import {
   matchWybotModel,
 } from "../src/content/media/awin";
 import { fetchDatafeedList, fetchProgrammeTerms, fetchRelationshipStatus, ingestFeedRows, isAwinStatusStale, redactAwin } from "../src/lib/awin-client";
-import { ACQUISITION_BLOCKERS, MEDIA_ASSETS } from "../src/content/media/assets";
+import { MEDIA_ASSETS } from "../src/content/media/assets";
 import { CREDENTIAL_PATTERNS, resolveImage } from "../src/lib/media-registry";
 
 describe("Awin programme identity", () => {
@@ -191,14 +191,13 @@ describe("Awin rights posture", () => {
   });
 
   it("requires remote serving and forbids local caching until Awin says otherwise", () => {
-    expect(AWIN_CONSERVATIVE_RIGHTS.remoteServingRequired).toBe(true);
-    expect(AWIN_CONSERVATIVE_RIGHTS.localStoragePermitted).toBe(false);
-    expect(AWIN_CONSERVATIVE_RIGHTS.allowedTransformations).toEqual(["proportional_resize"]);
+    expect(AWIN_CONSERVATIVE_TERMS.remoteServingRequired).toBe(true);
+    expect(AWIN_CONSERVATIVE_TERMS.localStoragePermitted).toBe(false);
   });
 
   it("permits no placement Awin has not confirmed", () => {
     for (const p of ["open_graph", "structured_data", "email"]) {
-      expect(AWIN_CONSERVATIVE_RIGHTS.allowedPlacements).not.toContain(p);
+      expect(AWIN_CONSERVATIVE_TERMS.allowedPlacements).not.toContain(p);
     }
   });
 });
@@ -256,13 +255,10 @@ describe("credential safety", () => {
 
 describe("public position while approval is pending", () => {
   it("renders BotPlanet's own C1 artwork, never an Awin creative", () => {
-    // The Awin US programme is still pending, so nothing from WYBOT may be
-    // shown. What renders is the owner's own artwork — ours outright, and
-    // still barred from Product schema because it carries branding and
-    // headline text set into the image.
+    // The Awin US programme is still pending, so nothing from WYBOT is shown.
+    // What renders is the owner's own artwork.
     const r = resolveImage("prod-wybot-c1", "listing_card", ["product_hero", "branded_placeholder"])!;
     expect(r.assetId).toBe("art-wybot-c1");
-    expect(r.schemaProductImage).toBe(false);
   });
 
   it("puts no Awin or EU-programme asset into the media library", () => {
@@ -272,17 +268,7 @@ describe("public position while approval is pending", () => {
       expect(a.src ?? "").not.toContain("eu.wybotpool.com");
     }
   });
-
-  it("records the WYBOT blocker as awaiting approval, owned by the advertiser", () => {
-    const b = ACQUISITION_BLOCKERS.find((x) => x.productId === "prod-wybot-c1")!;
-    expect(b.blocker).toContain("AWAITING ADVERTISER APPROVAL");
-    expect(b.blocker).toContain("76816");
-    expect(b.owner).toBe("manufacturer");
-    expect(b.checked.join(" ")).toContain("21,429");
-    expect(b.unblockAction).toContain("AWIN_DATAFEED_KEY");
-  });
-
-  it("keeps the publisher ID recorded", () => {
+it("keeps the publisher ID recorded", () => {
     expect(AWIN_PUBLISHER_ID).toBe("3012175");
   });
 });

@@ -17,7 +17,7 @@
    the click is attributed and counted. The disclosure sits inside
    the box, not in a footer nobody reads.
    ============================================================ */
-import { srcsetFor } from "../lib/srcset";
+import { srcsetFor, sizeOf } from "../lib/srcset";
 
 export interface BuyOffer {
   retailerName: string;
@@ -79,6 +79,8 @@ const others = linkable.filter((o) => o !== lead);
                 src={image.src}
                 srcset={srcsetFor(image.src)}
                 sizes="(min-width: 760px) 260px, 40vw"
+                width={sizeOf(image.src)?.width}
+                height={sizeOf(image.src)?.height}
                 alt=""
                 loading="lazy"
                 decoding="async"
@@ -141,10 +143,19 @@ const others = linkable.filter((o) => o !== lead);
       </p>
     )}
 
-    <p class="bp-buy__disclosure">
-      BotPlanet may earn a commission from this link. It never changes which robot we recommend —
-      commission is not available to the part of the system that ranks them.
-    </p>
+    {/* THE DISCLOSURE ONLY RENDERS WHEN THERE IS A LINK TO DISCLOSE.
+        It read "BotPlanet may earn a commission from this link" directly under
+        "No verified offer yet" on twelve pages — every product in
+        OFFER_SETUP_PENDING — which names a link the reader can see is not
+        there. A disclosure attached to nothing is not cautious, it is one more
+        sentence on the page that does not survive being read carefully, and
+        this is the box where being believed matters most. */}
+    {lead && (
+      <p class="bp-buy__disclosure">
+        BotPlanet may earn a commission from this link. It never changes which robot we recommend —
+        commission is not available to the part of the system that ranks them.
+      </p>
+    )}
   </div>
 </section>
 

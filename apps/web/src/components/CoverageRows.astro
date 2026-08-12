@@ -21,6 +21,14 @@ export interface CoverageRow {
   whoFor: string;
   /** Two to four sentences. */
   body: string;
+  /**
+   * Optional thumbnail for this row.
+   *
+   * Renders small and square beside the heading, so it has to be a tight
+   * detail shot with one subject — a scene shrunk to 96px is a grey smudge.
+   * The row is complete without it and lays out identically when absent.
+   */
+  image?: HeroImage;
 }
 
 interface Props {
@@ -60,7 +68,19 @@ import { srcsetFor } from "../lib/srcset";
 
   <div class="bp-cov__rows">
     {rows.map((row) => (
-      <article class="bp-crow">
+      <article class={row.image?.src ? "bp-crow bp-crow--img" : "bp-crow"}>
+        {row.image?.src && (
+          <img
+            class="bp-crow__thumb"
+            src={row.image.src}
+            srcset={srcsetFor(row.image.src)}
+            sizes="112px"
+            alt={row.image.alt}
+            style={row.image.focal ? `object-position: ${row.image.focal}` : undefined}
+            loading="lazy"
+            decoding="async"
+          />
+        )}
         <div class="bp-crow__label">
           <h3 class="bp-crow__title">{row.title}</h3>
           <span class="bp-crow__who">{row.whoFor}</span>
@@ -123,6 +143,40 @@ import { srcsetFor } from "../lib/srcset";
     width: 2px;
     border-radius: 0 2px 2px 0;
     background: linear-gradient(180deg, var(--cs-hi), rgba(138, 146, 161, 0.14));
+  }
+
+  /* With a thumbnail the row becomes two columns: picture, then the label and
+     body stacked beside it. Without one the grid is untouched, which is what
+     keeps an image optional rather than load-bearing. */
+  .bp-crow--img {
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+      "thumb label"
+      "thumb body";
+    align-items: start;
+    column-gap: clamp(1rem, 2.4vw, 1.4rem);
+  }
+  .bp-crow--img .bp-crow__label { grid-area: label; }
+  .bp-crow--img .bp-crow__body { grid-area: body; }
+
+  .bp-crow__thumb {
+    grid-area: thumb;
+    display: block;
+    width: clamp(72px, 11vw, 112px);
+    aspect-ratio: 1;
+    object-fit: cover;
+    border: 1px solid var(--cs-line);
+    border-radius: 12px;
+    background: var(--cs-surface);
+  }
+
+  /* On a narrow screen the two-column split leaves the body about twelve
+     characters wide, so the picture goes back above the text. */
+  @media (max-width: 560px) {
+    .bp-crow--img {
+      grid-template-columns: 1fr;
+      grid-template-areas: "thumb" "label" "body";
+    }
   }
 
   .bp-crow__title {

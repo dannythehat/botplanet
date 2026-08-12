@@ -13,7 +13,22 @@
  *  - no internal link may point at a redirected path
  *  - unknown routes 404; they are never swept to the homepage
  */
-import { REDIRECTS, ROUTES, routeFor, type RouteDef } from "../content/routes";
+import {
+  LEGACY_REDIRECTS,
+  REDIRECTS,
+  ROUTES,
+  legacyProductRedirect,
+  routeFor,
+  type RouteDef,
+} from "../content/routes";
+import { REVIEWS } from "../content/reviews";
+
+/* Every product this site actually holds, for resolving old /product/ and
+   /reviews/ URLs onto the page that replaced them. Built once. */
+const KNOWN_PRODUCTS = Object.values(REVIEWS).map((r) => ({
+  slug: r.slug,
+  categorySlug: r.categorySlug,
+}));
 
 /** Paths that are handled outside the page router and must never be rewritten. */
 const PASSTHROUGH = [/^\/go\//, /^\/api\//, /^\/admin(\/|$)/, /^\/_/, /^\/fonts\//, /^\/logo\//, /^\/og\//];
@@ -42,7 +57,7 @@ export interface RedirectResult {
   to: string;
   /** Permanent by definition — these are structural moves, not experiments. */
   status: 301;
-  reason: "normalise" | "alias";
+  reason: "normalise" | "alias" | "legacy";
 }
 
 /**
@@ -62,6 +77,21 @@ export function resolveRedirect(pathname: string): RedirectResult | null {
     const target = normalisePath(alias.to);
     // Guard against a registry mistake pointing an alias at itself.
     if (target !== normalised) return { to: target, status: 301, reason: "alias" };
+  }
+
+  /* The previous site on this domain, whose URLs are still what Google has
+     indexed. See the long note above LEGACY_REDIRECTS in content/routes.ts:
+     these are 404s today, and each 404 is crawl budget spent on nothing. */
+  const legacy = LEGACY_REDIRECTS.find((r) => normalisePath(r.from) === normalised);
+  if (legacy) {
+    const target = normalisePath(legacy.to);
+    if (target !== normalised) return { to: target, status: 301, reason: "legacy" };
+  }
+
+  const legacyProduct = legacyProductRedirect(normalised, KNOWN_PRODUCTS);
+  if (legacyProduct) {
+    const target = normalisePath(legacyProduct);
+    if (target !== normalised) return { to: target, status: 301, reason: "legacy" };
   }
 
   if (normalised !== pathname) return { to: normalised, status: 301, reason: "normalise" };

@@ -48,6 +48,17 @@ export const categoryRows: (typeof categories.$inferInsert)[] = [
   { id: "cat-pool-cleaners", slug: "robotic-pool-cleaners", name: "Robotic Pool Cleaners", parentId: null },
   { id: "cat-window-cleaners", slug: "window-cleaning-robots", name: "Window-Cleaning Robots", parentId: null },
   { id: "cat-lawn-mowers", slug: "robotic-lawn-mowers", name: "Robotic Lawn Mowers", parentId: null },
+  /* Two rows, not one. Companion robots and pet-camera robots are separate
+     categories on measured SERP evidence — see
+     docs/seo/companion-robots-research-findings.md. Seeded here at the same
+     time the pages were built, rather than being created against D1 first and
+     backfilled later the way window and lawn were. */
+  { id: "cat-companion-robots", slug: "companion-robots", name: "Companion Robots & Robot Pets", parentId: null },
+  { id: "cat-pet-camera-robots", slug: "pet-camera-robots", name: "Pet Camera Robots", parentId: null },
+  { id: "cat-litter-boxes", slug: "self-cleaning-litter-boxes", name: "Self-Cleaning Litter Boxes", parentId: null },
+  { id: "cat-grill-cleaners", slug: "grill-cleaning-robots", name: "Grill-Cleaning Robots", parentId: null },
+  { id: "cat-robot-vacuums", slug: "robot-vacuums", name: "Robot Vacuums & Mops", parentId: null },
+  { id: "cat-coding-robots", slug: "educational-coding-robots", name: "Coding Robots for Kids", parentId: null },
 ];
 
 /* @extension-point per-brand | required | A product row references its brand by
@@ -228,6 +239,59 @@ export const productRows: (typeof products.$inferInsert)[] = [
     // Corded, but the cord is 50 ft and that is NOT a pool-length rating.
     // BuBlue publishes an area only.
     maxPoolAreaSqFt: 1076,
+    specsJson: { snapshotDate: SNAPSHOT_DATE },
+    status: "published",
+  },
+  /* ADDED 6 August 2026, and the reason is a bug rather than a new product.
+
+     Both of these joined the catalogue on 3-4 August with editorial, a review,
+     a redirect key and — from 4 August — an offer row in commercial.ts. What
+     they never got was a row HERE. The consequence was invisible on the live
+     site, because production D1 has both, and total on a fresh one: the seed
+     inserts offers referencing product IDs that do not exist yet, so the whole
+     file dies on `FOREIGN KEY constraint failed` and stops. A rebuilt
+     environment would have come up missing two products and two reviews, and
+     the failure would have looked like a broken seed script rather than two
+     absent records.
+
+     Transcribed from production D1 on 6 August 2026, which is the source of
+     truth for both. `model` is null on each because neither manufacturer
+     publishes a model number on its own product page — Aiper's was later
+     machine-read from Amazon as PRN31, but that is a listing field rather than
+     a published specification, so it stays out of the catalogue row. */
+  {
+    id: "prod-aiper-scuba-v3-ai-vision",
+    slug: "aiper-scuba-v3-ai-vision",
+    brandId: "brand-aiper",
+    categoryId: "cat-pool-cleaners",
+    productClass: "full_cleaner",
+    name: "Aiper Scuba V3 AI Vision",
+    model: null,
+    environments: ["in_ground"],
+    cleans: ["floor", "walls", "waterline"],
+    powerType: "cordless",
+    priceTier: "mid",
+    // Aiper publishes an area for this one and no maximum length at all.
+    maxPoolLengthFt: null,
+    maxPoolAreaSqFt: 1614,
+    specsJson: { snapshotDate: SNAPSHOT_DATE },
+    status: "published",
+  },
+  {
+    id: "prod-dolphin-proteus-dx4-plus",
+    slug: "dolphin-proteus-dx4-plus",
+    brandId: "brand-dolphin",
+    categoryId: "cat-pool-cleaners",
+    productClass: "full_cleaner",
+    name: "Dolphin Proteus DX4 Plus",
+    model: null,
+    environments: ["in_ground"],
+    cleans: ["floor", "walls", "waterline"],
+    powerType: "corded",
+    // 33 ft, which is shorter than the Proteus DX4 sitting beside it on the
+    // same Maytronics page and the single most common rule-out on this record.
+    maxPoolLengthFt: 33,
+    priceTier: "mid",
     specsJson: { snapshotDate: SNAPSHOT_DATE },
     status: "published",
   },

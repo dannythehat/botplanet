@@ -1,12 +1,31 @@
 ---
 import Base from "../layouts/Base.astro";
-import { LAUNCH_CATEGORY, categoryRoutes, productPath } from "../content/routes";
+import BotFinderCard from "../components/BotFinderCard.astro";
+import { finderCardFor } from "../content/finder-cards";
+import { LAUNCH_CATEGORY, categoryRoutes, liveCategories, productPath } from "../content/routes";
 import { srcsetFor } from "../lib/srcset";
 import CategoryFeature from "../components/CategoryFeature.astro";
 import { webPageSchema, SITE_URL } from "../lib/seo";
 import { REVIEWS } from "../content/reviews";
+import { PRODUCT_ID } from "../content/products";
+import { CATEGORIES as NAV_CATEGORIES } from "../content/nav";
+import ProductImage from "../components/ProductImage.astro";
+import { MATCHER_JOBS } from "../content/matcher-router";
 
 const live = categoryRoutes(LAUNCH_CATEGORY);
+
+/**
+ * NAMES THE BIGGEST CATEGORIES, WHICH IT DID NOT.
+ *
+ * This read "pool cleaners, window robots, companion pets and coding robots"
+ * until 10 August 2026 — four of nine, and the four it omitted included the two
+ * largest terms the site targets: `robot vacuum` at 135,000/mo and `robot lawn
+ * mower` at 74,000. The meta description is the sentence that earns the click
+ * in the result, and it was advertising the smaller half of the catalogue.
+ */
+const META_DESCRIPTION =
+  "Compare real-world home robots for the US — vacuums, mowers, pool cleaners, " +
+  "window robots, litter boxes and more. Evidence, honest rule-outs, and the gaps.";
 
 /**
  * The reviews, listed on the homepage.
@@ -17,20 +36,56 @@ const live = categoryRoutes(LAUNCH_CATEGORY);
  * passed no authority to any of them. Reading REVIEWS rather than a hand-typed
  * list means a review that ships tomorrow appears here the same day, and one
  * that is renamed cannot leave a dead link behind.
+ *
+ * EVERY REVIEW, NOT EVERY POOL REVIEW.
+ *
+ * This filtered on `categorySlug === LAUNCH_CATEGORY` until 10 August 2026,
+ * which was right on the day it was written — pool was the only category with
+ * reviews — and quietly wrong from the moment the second one shipped. By the
+ * time it was found the site had fifty-one reviews across eight categories and
+ * the homepage linked eleven of them, all pool. The kicker above the grid read
+ * "EVERY MODEL WE HAVE REVIEWED" while the filter denied it.
+ *
+ * That is the same failure the comment below this one describes, one level up:
+ * the strongest page on the site passing its authority to a tenth of the work.
+ * Twenty-two of those reviews were written on 10 August alone and none of them
+ * had a route from the front door.
+ *
+ * ARTWORK COMES FROM THE REGISTRY RATHER THAN THE REVIEW RECORD. The pool
+ * eleven each carry an `image`; the reviews built since do not yet, and a grid
+ * that reads `r.image.src` would have crashed the homepage the moment the
+ * filter came off. ProductImage asks the media registry per card and falls
+ * through to the owned silhouette, which is the same path the listing cards
+ * and the recommendation page already take — so a takedown recorded in one
+ * data file empties this grid too, and nothing here can render a broken image.
  */
+const CATEGORY_NAME = new Map(NAV_CATEGORIES.map((c) => [c.slug, c.name]));
+
 const reviews = Object.values(REVIEWS)
-  .filter((r) => r.categorySlug === LAUNCH_CATEGORY)
   .map((r) => ({
     slug: r.slug,
+    productId: PRODUCT_ID[r.slug] ?? `prod-${r.slug}`,
     title: r.title.replace(/ review$/i, ""),
     href: productPath(r.slug, r.categorySlug),
+    categorySlug: r.categorySlug,
+    categoryName: CATEGORY_NAME.get(r.categorySlug) ?? r.categorySlug,
     bestFor: r.facts?.find((f) => f.label === "Cleans")?.value ?? null,
-    price: r.facts?.find((f) => f.label.startsWith("Max"))?.value ?? null,
-    image: r.image,
   }))
-  .sort((a, b) => a.title.localeCompare(b.title));
+  /* Category first so the grid reads as a catalogue rather than an alphabet,
+     and so the nine categories are visibly nine rather than one long list. */
+  .sort((a, b) =>
+    a.categoryName === b.categoryName
+      ? a.title.localeCompare(b.title)
+      : a.categoryName.localeCompare(b.categoryName),
+  );
 
-/* BotMatch section artwork, supplied as a composed desktop/mobile pair. */
+/* The universal Bot Finder card. Replaces the old explainer illustration,
+   which drew six category tiles into the pixels — one of them "Security",
+   a category cancelled on 6 August, still being advertised four days later.
+   This one draws no category names at all. */
+const finderCard = finderCardFor("universal")!;
+
+/* Retained only so the old pair is not silently orphaned in the registry. */
 const matcherImage = {
   src: "/media/botmatch/explainer-desktop.webp",
   mobileSrc: "/media/botmatch/explainer-mobile.webp",
@@ -38,18 +93,25 @@ const matcherImage = {
   height: 941,
   mobileWidth: 941,
   mobileHeight: 1672,
+  /* The tile-by-tile list went with the Security cancellation of 6 August: it
+     named the artwork's six drawn tiles as though they were the site's
+     categories, and one of them no longer is. What it describes now is what
+     the picture is actually of. */
   alt:
-    "A BotMatch panel at the centre of six linked category tiles — pool cleaning, window cleaning, floor care, lawn and garden, security, and companion and service — showing a best-match result being confirmed.",
+    "A BotMatch panel at the centre of linked category tiles, showing a best-match result being confirmed.",
 };
 
-/* Category feature artwork. All decorative — the sections' words and buttons
-   are real HTML beside the picture, never drawn into it. Each file is composed
-   with one side dark and empty, which is what `side` on the component names. */
+/* Category feature artwork. The sections' words and buttons are real HTML
+   beside the picture and never drawn into it, and each file is composed with
+   one side dark and empty, which is what `side` on the component names. The
+   pictures are described rather than marked decorative — see CategoryFeature
+   for why that changed. */
 const featureImage = {
   src: "/media/pool-category/feature-desktop.webp",
   mobileSrc: "/media/pool-category/feature-mobile.webp",
   width: 1672,
   height: 941,
+  alt: "A robotic pool cleaner working the floor of a lit in-ground swimming pool at dusk, its cable trailing to the edge.",
 };
 
 const windowFeatureImage = {
@@ -60,6 +122,7 @@ const windowFeatureImage = {
   /* Pulled left of centre so the machine on the glass survives the crop when
      the section is shorter than the file's own 16:9. */
   focal: "24% center",
+  alt: "A window-cleaning robot gripping the glass of a tall window at dusk, water spread across the pane behind it.",
 };
 
 const lawnFeatureImage = {
@@ -70,6 +133,7 @@ const lawnFeatureImage = {
   /* Right of centre: the mower and the lit house are both over there, and a
      centre crop would push the machine off the edge on a short section. */
   focal: "78% center",
+  alt: "A robot lawn mower cutting a striped lawn in the evening, a lit house behind it.",
 };
 
 const floorFeatureImage = {
@@ -80,16 +144,7 @@ const floorFeatureImage = {
   /* Left of centre: the machine and the lit room are both over there, and the
      right of the frame is bare wall that survives any crop. */
   focal: "22% center",
-};
-
-const securityFeatureImage = {
-  src: "/media/security-category/feature-desktop.webp",
-  mobileSrc: "/media/security-category/feature-mobile.webp",
-  width: 1672,
-  height: 941,
-  /* Well right of centre: the patrol robot sits near the edge of the wide file
-     and a centre crop would walk it out of the frame. */
-  focal: "84% center",
+  alt: "A robot vacuum crossing the hard floor of a lit living room, its docking station against the wall behind.",
 };
 
 const companionFeatureImage = {
@@ -99,28 +154,116 @@ const companionFeatureImage = {
   height: 881,
   /* Right of centre, where the robot and the lit living room both sit. */
   focal: "76% center",
+  alt: "A small companion robot on a side table in a warmly lit living room, someone seated beyond it.",
 };
 
-/* Kept for the ItemList in structured data. On the page the six categories
-   are full-width feature sections, not tiles: each artwork is composed with
-   one half deliberately empty for the copy, and a thumbnail crop throws that
-   composition away. */
-const categories = [
-  { name: "Pool cleaning", description: "Robots that scrub floors, walls and waterlines.", state: "Live", href: live.hub, code: "01" },
-  { name: "Window cleaning", description: "Glass-cleaning robots for homes and high-rise surfaces.", state: "In development", code: "02" },
-  { name: "Lawn & garden", description: "Autonomous mowers, irrigation and outdoor maintenance.", state: "In development", code: "03" },
-  { name: "Floor care", description: "Vacuum, mop and specialist indoor cleaning robots.", state: "Planned", code: "04" },
-  { name: "Security", description: "Patrol, monitoring and property-protection robotics.", state: "Planned", code: "05" },
-  { name: "Companion & service", description: "Useful home, hospitality and personal-assistance robots.", state: "Planned", code: "06" },
-];
+/**
+ * THE DIRECTORY, READ FROM THE REGISTRY RATHER THAN TYPED HERE.
+ *
+ * This was a hand-written list of six, and every line of it had gone stale.
+ * It called window and lawn "in development" and floor care, companion and
+ * security "planned" while five of those categories were live and published;
+ * it listed Security, which was cancelled on 6 August; and it did not mention
+ * pet cameras, litter boxes, grill robots or coding robots at all. The front
+ * door of the site was describing a roadmap from before four categories
+ * shipped.
+ *
+ * A hand-typed copy of the registry cannot stay true, so this no longer keeps
+ * one. liveCategories() is the same function the header, the footer, the
+ * /robots/ index and the sitemap read, which means a category is on this page
+ * the day it goes live and cannot be on it a day before.
+ */
+/**
+ * Artwork for the directory tiles, one per category.
+ *
+ * TWO RULES DECIDED EVERY CHOICE HERE, AND ONE OF THEM RULED OUT THE OBVIOUS
+ * PICKS. Nothing with a word painted into it, and nothing that is not the
+ * category's best frame.
+ *
+ * The obvious files were each hub's own `hero`, and for pool and window those
+ * are the two on the site with type burnt in: /media/pool/hero-desktop.webp
+ * carries the BotPlanet wordmark, and /media/window/hero-desktop.webp carries
+ * the wordmark plus a "Window Cleaning Robots / Crystal-clear views" headline.
+ * A headline drawn into a JPEG is invisible to Google, silent to a screen
+ * reader and impossible to translate, and at tile size it would be unreadable
+ * anyway. Those two use their category feature file instead, which is the same
+ * subject shot clean.
+ *
+ * `focal` is where the subject actually sits, because a 16:9 master cropped to
+ * a 3:2 tile loses the sides — centre-cropping the vacuums frame walks the
+ * robot straight out of it.
+ *
+ * FIVE OF THESE ARE THE OWNER'S OWN PHOTOGRAPHS, supplied 8 August 2026, and
+ * they replaced BotPlanet artwork on pool, companion, grill and pet camera.
+ * Pet camera had nothing at all until they arrived — it was the one hub that
+ * had never had any artwork, and its tile was rendering an empty plate.
+ */
+const TILE_ART: Record<string, { src: string; focal?: string; alt: string }> = {
+  "robotic-pool-cleaners": {
+    src: "/media/hubs/pool/tile.webp",
+    alt: "A tracked robotic pool cleaner resting on a white cover at the edge of a sunlit blue pool.",
+  },
+  "window-cleaning-robots": {
+    src: "/media/window-category/feature-desktop.webp",
+    focal: "24% center",
+    alt: "A window-cleaning robot gripping the glass of a hillside house at dusk, the view beyond.",
+  },
+  "robotic-lawn-mowers": {
+    src: "/media/hubs/lawn/hero.webp",
+    alt: "A robot mower on a striped lawn at sunset, a lit stone house behind it.",
+  },
+  "robot-vacuums": {
+    src: "/media/hubs/vacuums/hero.webp",
+    focal: "70% center",
+    alt: "A round robot vacuum crossing the wood floor of a sunlit open-plan living room.",
+  },
+  "companion-robots": {
+    src: "/media/hubs/companion/tile.webp",
+    alt: "Four rendered companion robots standing together against a pale background, including a robot dog.",
+  },
+  "self-cleaning-litter-boxes": {
+    src: "/media/hubs/litter/hero.webp",
+    focal: "60% center",
+    alt: "A long-haired tabby walking towards a white self-cleaning litter box in a utility room.",
+  },
+  "grill-cleaning-robots": {
+    src: "/media/hubs/grill/tile.webp",
+    alt: "A red grill-cleaning robot sitting on stainless steel grill grates between a pair of tongs and a spatula.",
+  },
+  "pet-camera-robots": {
+    /* The tile crop, not the master. The supplied file is nearly square and
+       carries a phone showing the live view; a 3:2 window centred on it cuts
+       the phone in half, which reads as a rendering fault. See the note on
+       hub-petcam-tile in the media register. */
+    src: "/media/hubs/petcam/tile.webp",
+    alt: "A pet camera robot on its wheels beside its white charging dock.",
+  },
+  "educational-coding-robots": {
+    src: "/media/hubs/coding/hero.webp",
+    focal: "60% center",
+    alt: "A child's hands beside a small tracked coding robot on a kitchen table, parts laid out around it.",
+  },
+};
 
-/* The homepage is a directory of six categories, and until now its markup
-   said so to a reader but not to a crawler: the graph described a company and
-   a website and never the thing the page actually lists.
+const categories = liveCategories()
+  .slice()
+  .sort((a, b) => a.order - b.order)
+  .map((c, i) => ({
+    name: c.name,
+    description: c.short,
+    jtbd: c.jtbd,
+    href: categoryRoutes(c.slug).hub,
+    code: String(i + 1).padStart(2, "0"),
+    art: TILE_ART[c.slug] ?? null,
+  }));
 
-   Only the live category carries a url, because only it has a page. A ListItem
-   naming a category we have not built yet is still true — it is on the roadmap
-   and the page says so — but pointing it at a URL would not be. */
+/* The homepage is a directory of categories, and until now its markup said so
+   to a reader but not to a crawler: the graph described a company and a
+   website and never the thing the page actually lists.
+
+   Every entry carries a url now, because every category listed is live and has
+   a page. The old list mixed built categories with roadmap ones and gave a URL
+   only to the first. */
 const categoryList = {
   "@type": "ItemList",
   "@id": `${SITE_URL}/#robot-categories`,
@@ -141,7 +284,7 @@ const homeSchema = [
     path: "/",
     name: "BotPlanet — the world of real-world robots",
     description:
-      "Discover, compare and choose real-world robots across home, garden, cleaning, security and service categories. Robotic pool cleaners are the first live category.",
+      "Discover, compare and choose real-world robots for the US — pool, window, lawn, vacuum, companion, pet camera, litter, grill and coding robots, with the evidence behind every pick.",
     type: "CollectionPage",
   }),
   categoryList,
@@ -149,8 +292,8 @@ const homeSchema = [
 ---
 
 <Base
-  title="BotPlanet — the world of real-world robots"
-  description="Discover, compare and choose real-world robots across home, garden, cleaning, security and service categories. Robotic pool cleaners are the first live category."
+  title="Home Robots Compared on the Evidence — BotPlanet"
+  description={META_DESCRIPTION}
   bleed={true}
   schema={homeSchema}
 >
@@ -158,16 +301,22 @@ const homeSchema = [
     <div class="wrap hero__grid">
       <div class="hero__copy">
         <p class="hero__marker">THE WORLD OF REAL-WORLD ROBOTS</p>
-        <h1>Robots are leaving the lab.<br /><span>We help you choose the right ones.</span></h1>
+        <h1>Home robots are leaving the lab.<br /><span>We help you choose the right ones.</span></h1>
         <p class="hero__lede">
           BotPlanet is building the premium destination for robots that do useful work in homes, gardens, businesses and everyday life. We compare the machines, verify the claims and track where they can actually be bought.
         </p>
-        {/* One action, not three. BotMatch used to sit here as a second button
-            and again below as a third — the same tool asked for twice before
-            the reader knew what it was. It now has its own section instead. */}
+        {/* TWO ACTIONS NOW, AND THE FIRST ONE IS NEW. This carried a single
+            button into the pool hub, on the reasoning that BotMatch appearing
+            twice asked for the same thing before a reader knew what it was.
+            That reasoning held while BotMatch was nine separate funnels you
+            had to already know the category to enter. It stopped holding when
+            the finder learned to start from the job — "Find your robot" now
+            answers the question the homepage actually raises, and the hub link
+            stays for anyone who would rather browse. */}
         <div class="hero__actions">
+          <a class="btn btn--accent btn--lg" href="/botmatch/">Find your robot</a>
           <a class="btn btn--primary btn--lg" href={live.hub}>Explore robotic pool cleaners</a>
-          <a class="hero__more" href="#robot-worlds">See all six robot worlds &#8595;</a>
+          <a class="hero__more" href="#robot-worlds">See all {categories.length} robot worlds &#8595;</a>
         </div>
       </div>
 
@@ -186,12 +335,37 @@ const homeSchema = [
             sizes="(min-width: 1100px) 58vw, 100vw"
             width="1672"
             height="941"
-            alt="A night-time home where six kinds of robot are working at once: a pool cleaner in the water, a window cleaner on the glass, a mower on the lawn, a vacuum on the terrace, a four-legged patrol robot and a companion robot at the door, beneath the BotPlanet logo and the Earth."
+            alt="A night-time home where several kinds of robot are working at once: a pool cleaner in the water, a window cleaner on the glass, a mower on the lawn, a vacuum on the terrace and a companion robot at the door, beneath the BotPlanet logo and the Earth."
             fetchpriority="high"
             decoding="async"
           />
         </picture>
       </figure>
+    </div>
+  </section>
+
+  {/* THE COMPACT FINDER, ABOVE THE GRID AND DELIBERATELY BEFORE IT.
+      A reader who knows what they want scrolls past this in one flick; a
+      reader who does not is about to meet nine tiles and pick by picture.
+      Nine jobs in the reader's own words is a better first question than nine
+      category names, and it is the same first question the funnel asks — so
+      tapping one lands mid-conversation rather than at another front door. */}
+  <section class="finder" aria-labelledby="finder-title">
+    <div class="wrap finder__inner">
+      <p class="kicker">BOTMATCH</p>
+      <h2 id="finder-title">What do you want a robot to do?</h2>
+      <p class="finder__lede">
+        Start with the job, not our categories. A minute of questions, and the part that picks your
+        robot cannot see prices or commission at all.
+      </p>
+      <ul class="finder__jobs">
+        {MATCHER_JOBS.map((job) => (
+          <li>
+            <a href={`/botmatch/?job=${job.id}`}>{job.label}</a>
+          </li>
+        ))}
+      </ul>
+      <a class="finder__all" href="/botmatch/">Not sure yet? Start here &#8594;</a>
     </div>
   </section>
 
@@ -201,10 +375,45 @@ const homeSchema = [
         <p class="kicker">BOTPLANET DIRECTORY</p>
         <h2>One planet. Every useful robot.</h2>
         <p>
-          Pool cleaners are where we begin, not where BotPlanet ends. Each new category will receive its own evidence model, comparisons, buying guidance and category-specific recommendation journey.
+          {categories.length} categories are live, each with its own evidence model, comparisons, buying
+          guidance and its own recommendation journey. The questions that decide a mower are not the
+          questions that decide a pool robot, so no category borrows another's.
         </p>
       </div>
 
+      {/* Generated from the registry — see the note above `categories`. The
+          section stood empty for a while and the hero still pointed a reader
+          at it, so the anchor landed on a heading and nothing to click. */}
+      <ul class="worlds__grid">
+        {categories.map((c) => (
+          <li>
+            <a class="card card--interactive worlds__card" href={c.href}>
+              {c.art ? (
+                <img
+                  class="worlds__img"
+                  src={c.art.src}
+                  srcset={srcsetFor(c.art.src)}
+                  sizes="(min-width: 900px) 33vw, (min-width: 520px) 50vw, 100vw"
+                  alt={c.art.alt}
+                  loading="lazy"
+                  decoding="async"
+                  style={c.art.focal ? `object-position: ${c.art.focal}` : undefined}
+                />
+              ) : (
+                /* An empty plate, not a stand-in. Borrowing another category's
+                   photograph would be the one thing worse than having none. */
+                <span class="worlds__img worlds__img--none" aria-hidden="true"></span>
+              )}
+              <span class="worlds__text">
+                <span class="worlds__code" aria-hidden="true">{c.code}</span>
+                <h3 class="worlds__name">{c.name}</h3>
+                <p class="worlds__body">{c.description}</p>
+                <span class="worlds__jtbd">{c.jtbd}</span>
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
     </div>
   </section>
 
@@ -217,35 +426,31 @@ const homeSchema = [
     <div class="wrap botmatch__grid">
       <div class="botmatch__intro">
         <p class="kicker">BOTMATCH</p>
-        <h2>One matcher per robot world. Each one asks what its own job needs.</h2>
+        {/* WRITTEN AT THE READER, NOT AT THE ARCHITECTURE. This led with "One
+            matcher per robot world. Each one asks what its own job needs." —
+            a true sentence about how the system is built and a useless one to
+            somebody who wants a gift for a seven-year-old. The three examples
+            below are not invented: each is a question a live matcher actually
+            asks. Coding asks whether the child has asked for one; pool asks
+            about length and a sun ledge; litter says outright when a cat is
+            too small for every machine in the category. */}
+        <h2>Tell us the job. We will tell you the robot — or tell you not to buy one.</h2>
         <p class="large">
-          Specifications only matter once you translate them into your home. BotMatch does that translation — a handful of plain questions about the space a machine has to work in, and a shortlist of the ones that actually suit it, with the ones to rule out and why. Every category gets its own, because the questions that decide a mower are not the questions that decide a pool robot or a window cleaner.
+          A coding robot for a seven-year-old who has not asked for one. A pool cleaner for a 50 ft pool with a sun ledge. A litter box for a cat that may be too small for any of them. Answer a handful of plain questions about the job rather than the machine, and BotMatch searches every robot we have researched across {categories.length} categories — then emails you the shortlist, what each pick was matched on, and the ones we ruled out for you.
         </p>
       </div>
 
-      {matcherImage && (
-        <figure class="botmatch__art">
-          <picture>
-            <source
-              media="(max-width: 720px)"
-              srcset={srcsetFor(matcherImage.mobileSrc)}
-              sizes="100vw"
-              width={matcherImage.mobileWidth}
-              height={matcherImage.mobileHeight}
-            />
-            <img
-              src={matcherImage.src}
-              srcset={srcsetFor(matcherImage.src)}
-              sizes="(min-width: 1000px) 46vw, 100vw"
-              width={matcherImage.width}
-              height={matcherImage.height}
-              alt={matcherImage.alt}
-              loading="lazy"
-              decoding="async"
-            />
-          </picture>
-        </figure>
-      )}
+      <div class="botmatch__art">
+        <BotFinderCard
+          src={finderCard.src}
+          alt={finderCard.alt}
+          label={finderCard.label}
+          href="/botmatch/"
+          width={finderCard.width}
+          height={finderCard.height}
+          cta={finderCard.cta}
+        />
+      </div>
 
       <div class="botmatch__detail">
         <ol class="botmatch__steps">
@@ -267,17 +472,22 @@ const homeSchema = [
         </ol>
 
         <p class="botmatch__note">
-          <strong>Pool cleaners is the first matcher to open.</strong> The other five are mapped and not yet built — each one arrives with its own set of questions when its category does.
+          <strong>Every live category has its own matcher.</strong> {categories.length} of them, each with its own questions and its own scoring — a new one arrives with the category rather than after it.
         </p>
 
         <p class="botmatch__integrity">
           What BotMatch cannot see is what we earn. Commission is not available to the part of the system that chooses your robot — that is enforced in the code, not promised in a policy.
         </p>
 
+        {/* THE BUTTONS WERE THE WRONG WAY ROUND, AND THE SECOND ONE WAS STALE.
+            The primary sent a reader who had just been told what BotMatch does
+            to a page explaining what BotMatch does; the quiet one offered the
+            POOL matcher only, which was right while BotMatch was nine separate
+            funnels and wrong from the day it started asking for the job first.
+            Starting it is the action this section is for. */}
         <div class="botmatch__actions">
-          <a class="btn btn--primary btn--lg" href="/how-botmatch-works/">How BotMatch works</a>
-          <a class="btn btn--quiet btn--lg" href={`/botmatch/${LAUNCH_CATEGORY}/`}>Try the pool matcher</a>
-          
+          <a class="btn btn--primary btn--lg" href="/botmatch/">Start — say what you need done</a>
+          <a class="btn btn--quiet btn--lg" href="/how-botmatch-works/">How BotMatch works</a>
         </div>
       </div>
     </div>
@@ -299,7 +509,7 @@ const homeSchema = [
   {/* Every review, named and linked. The homepage used to send all of its
       traffic to the hub and let the reader find the work from there; a list of
       real model names is both the better click and the better signal. */}
-  <section class="reviews" id="pool-reviews">
+  <section class="reviews" id="reviews">
     <div class="wrap">
       <div class="section-intro section-intro--compact">
         <p class="kicker">EVERY MODEL WE HAVE REVIEWED</p>
@@ -309,23 +519,32 @@ const homeSchema = [
           says plainly who should buy something else. Prices are checked automatically and
           dated on the page.
         </p>
+        {/* THE THREE INDEXES, LINKED FROM THE PROSE RATHER THAN ONLY THE MENU.
+            /robots/, /best-robots/, /compare/ and /guides/ were reachable only
+            through nav chrome — which a crawler weights as template furniture
+            and a reader on a phone never opens. Named here by what each one is
+            for, because "browse" tells nobody which of the four they want. */}
+        <p class="reviews__ways">
+          Four ways in: <a href="/robots/">the robot categories</a> if you know what kind of
+          machine you want, <a href="/best-robots/">the best robots by use case</a> if you
+          know the job but not the machine, <a href="/compare/">the comparison tables</a> if
+          you already have a shortlist, and <a href="/guides/">the robot guides</a> for the
+          questions that come before any of it.
+        </p>
       </div>
 
       <ul class="reviews__grid">
         {reviews.map((r) => (
           <li class="reviews__item">
             <a href={r.href}>
-              <img
-                src={r.image.src}
-                srcset={srcsetFor(r.image.src)}
+              <ProductImage
+                productId={r.productId}
+                placement="listing_card"
+                types={["product_hero", "product_alternate_view", "branded_placeholder"]}
                 sizes="(min-width: 900px) 22vw, 45vw"
-                width="1254"
-                height="1254"
-                alt={r.image.alt}
-                loading="lazy"
-                decoding="async"
               />
               <div class="reviews__body">
+                <p class="reviews__cat">{r.categoryName}</p>
                 <h3>{r.title}</h3>
                 {r.bestFor && <p class="reviews__meta">{r.bestFor}</p>}
               </div>
@@ -341,73 +560,65 @@ const homeSchema = [
     </div>
   </section>
 
-  {/* Window cleaning is genuinely in development: there is no
-      /robots/window-cleaning-robots/ page to send anyone to, so this section
-      does not pretend otherwise. The state line says so, and both buttons go
-      somewhere that exists today rather than to a 404 dressed as a category. */}
+  {/* THESE FOUR ARE LIVE, AND THIS BLOCK USED TO SAY THEY WERE NOT.
+      Window and lawn read "In development", floor care and companion read
+      "Planned category", and all four sent the reader to /robots/ or back to
+      the pool — while all four had a hub, a comparison page, a matcher and
+      published products. A section that describes a built category as
+      unbuilt costs the click it was put there to earn.
+
+      Security was here too, on the same "Planned category" line. It was
+      cancelled on 6 August, so the section is gone rather than restated. */}
   <CategoryFeature
     id="next-window"
-    state="In development"
+    state="Live category"
     heading="Window-cleaning robots"
     metalWord="Window-cleaning"
-    body="Robots that grip glass and clean windows, balcony doors and high panes you would rather not reach. We are verifying the models now."
+    body="Robots that grip glass and clean windows, balcony doors and high panes you would rather not reach."
     side="right"
     image={windowFeatureImage}
-    primary={{ label: "See every robot category", href: "/robots/" }}
-    secondary={{ label: "Start with pool cleaners", href: live.hub }}
-    more={{ label: "How BotPlanet verifies a robot", href: "/review-methodology/" }}
+    primary={{ label: "Browse window-cleaning robots", href: categoryRoutes("window-cleaning-robots").hub }}
+    secondary={{ label: "Find My Window Robot", href: categoryRoutes("window-cleaning-robots").botmatch }}
+    more={{ label: "Compare live models", href: categoryRoutes("window-cleaning-robots").compare }}
   />
 
   <CategoryFeature
     id="next-lawn"
-    state="In development"
-    heading="Lawn and garden robots"
-    metalWord="Lawn and garden"
-    body="Wire-free mowers that keep the lawn cut on their own, plus the irrigation and outdoor machines that work alongside them."
+    state="Live category"
+    heading="Robotic lawn mowers"
+    metalWord="lawn mowers"
+    body="Mowers that cut a little every day and keep the lawn level, on a boundary wire or without one."
     side="left"
     image={lawnFeatureImage}
-    primary={{ label: "See every robot category", href: "/robots/" }}
-    secondary={{ label: "Start with pool cleaners", href: live.hub }}
-    more={{ label: "How BotPlanet verifies a robot", href: "/review-methodology/" }}
+    primary={{ label: "Browse robotic lawn mowers", href: categoryRoutes("robotic-lawn-mowers").hub }}
+    secondary={{ label: "Find My Robot Mower", href: categoryRoutes("robotic-lawn-mowers").botmatch }}
+    more={{ label: "Compare live models", href: categoryRoutes("robotic-lawn-mowers").compare }}
   />
 
   <CategoryFeature
     id="next-floor"
-    state="Planned category"
-    heading="Robotic floor cleaners"
-    metalWord="floor"
+    state="Live category"
+    heading="Robot vacuums and mops"
+    metalWord="vacuums"
     body="Vacuum and mop robots that map the house, empty themselves and keep hard floors and carpet clean without being asked."
     side="right"
     image={floorFeatureImage}
-    primary={{ label: "See every robot category", href: "/robots/" }}
-    secondary={{ label: "Start with pool cleaners", href: live.hub }}
-    more={{ label: "How BotPlanet verifies a robot", href: "/review-methodology/" }}
-  />
-
-  <CategoryFeature
-    id="next-security"
-    state="Planned category"
-    heading="Security robots"
-    metalWord="Security"
-    body="Patrol and monitoring machines that walk the property, watch the approaches and tell you what they found."
-    side="left"
-    image={securityFeatureImage}
-    primary={{ label: "See every robot category", href: "/robots/" }}
-    secondary={{ label: "Start with pool cleaners", href: live.hub }}
-    more={{ label: "How BotPlanet verifies a robot", href: "/review-methodology/" }}
+    primary={{ label: "Browse robot vacuums", href: categoryRoutes("robot-vacuums").hub }}
+    secondary={{ label: "Find My Robot Vacuum", href: categoryRoutes("robot-vacuums").botmatch }}
+    more={{ label: "Compare live models", href: categoryRoutes("robot-vacuums").compare }}
   />
 
   <CategoryFeature
     id="next-companion"
-    state="Planned category"
-    heading="Companion and service robots"
+    state="Live category"
+    heading="Companion robots and robot pets"
     metalWord="Companion"
-    body="Machines that help rather than clean — company at home, assistance where it is needed, and service robots that carry, greet and fetch."
+    body="Robot pets and desk companions built for company rather than chores — for a child's room, a desk, or somebody living on their own."
     side="left"
     image={companionFeatureImage}
-    primary={{ label: "See every robot category", href: "/robots/" }}
-    secondary={{ label: "Start with pool cleaners", href: live.hub }}
-    more={{ label: "How BotPlanet verifies a robot", href: "/review-methodology/" }}
+    primary={{ label: "Browse companion robots", href: categoryRoutes("companion-robots").hub }}
+    secondary={{ label: "Find My Companion Robot", href: categoryRoutes("companion-robots").botmatch }}
+    more={{ label: "Compare live models", href: categoryRoutes("companion-robots").compare }}
   />
 
   <section class="system">
@@ -441,8 +652,8 @@ const homeSchema = [
   .hero { display: grid; align-items: center; padding: clamp(14px, 2vw, 30px) 0 clamp(48px, 6vw, 84px); overflow: hidden; position: relative; }
   .hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 75% 44%, rgba(219,224,230,.11), transparent 24rem); pointer-events: none; }
   /* One column, artwork first to the eye and the H1 first in the source. The
-     picture carries the brand and the six categories in one frame; putting it
-     beside the copy at half width would shrink six robots into a thumbnail. */
+     picture carries the brand and the whole range in one frame; putting it
+     beside the copy at half width would shrink every robot into a thumbnail. */
   /* Stacked by default — on a phone the artwork leads and the copy follows.
      Two columns from 1100px, where a 16:9 frame beside the copy still reads at
      full composition AND leaves the buttons above the fold. A full-width
@@ -527,9 +738,10 @@ const homeSchema = [
 
   .botmatch__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; margin-top: 30px; }
   .botmatch__note { margin: 20px 0 0; font-size: 13.5px; line-height: 1.6; color: var(--text-tertiary); max-width: 62ch; }
-  /* The artwork shows six routes into the matcher and five of them do not
-     exist yet. This line is the correction, so it is not dimmed into a
-     footnote beside a picture that promises more than the tool does. */
+  /* This line used to be a correction — the artwork drew six routes into the
+     matcher and five of them did not exist. Every live category has one now,
+     so the line states the count rather than apologising for it, and it stays
+     undimmed because it is the fact the picture is making a claim about. */
   .botmatch__note strong { color: #eef0f3; font-weight: 600; }
 
   .botmatch__art {
@@ -573,12 +785,37 @@ const homeSchema = [
   .reviews__item img { display: block; width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover; }
   .reviews__body { padding: 16px 18px 18px; }
   .reviews__body h3 { margin: 0; font-size: 16px; letter-spacing: -.01em; color: #f1f3f6; line-height: 1.3; }
+  .reviews__cat { margin: 0 0 4px; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--text-tertiary); }
   .reviews__meta { margin: 7px 0 0; font-size: 13px; line-height: 1.5; color: var(--text-tertiary); }
   .reviews__actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 28px; }
   @media (max-width: 900px) { .reviews__grid { grid-template-columns: repeat(2, minmax(0,1fr)); } }
   @media (max-width: 460px) { .reviews__grid { grid-template-columns: 1fr; } }
 
   .worlds,.system { padding: var(--section-gap) 0; background: linear-gradient(180deg,rgba(255,255,255,.025),transparent); border-top: 1px solid rgba(210,216,224,.1); }
+  /* Three across on a desktop, two on a tablet, one on a phone. Nine tiles
+     divide evenly by three, which is the whole reason for the column count. */
+  .worlds__grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; }
+  .worlds__grid > li { display: flex; }
+  /* The card's own padding is overridden: the picture goes edge to edge and
+     the copy carries the inset, which is what stops a photograph floating in
+     a box inside a box. */
+  .worlds__grid .worlds__card { display: flex; flex-direction: column; width: 100%; padding: 0; overflow: hidden; text-decoration: none; }
+  .worlds__img {
+    display: block; width: 100%; aspect-ratio: 3 / 2; object-fit: cover; object-position: center;
+    border-bottom: 1px solid rgba(200,208,222,.14);
+  }
+  /* The plate for a category with no artwork yet. Deliberately empty: it holds
+     the grid's rhythm without pretending to be a photograph of anything. */
+  .worlds__img--none { background: linear-gradient(158deg, #191d23 0%, #0d1015 58%, #101419 100%); }
+  .worlds__text { display: flex; flex-direction: column; flex: 1; padding: 16px 18px 18px; }
+  .worlds__code { font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: .16em; color: var(--text-tertiary); }
+  .worlds__name { margin: 10px 0 0; font-family: var(--font-display); font-size: 19px; letter-spacing: -.02em; line-height: 1.25; color: #f1f3f6; }
+  .worlds__body { margin: 9px 0 0; font-size: 14px; line-height: 1.55; color: var(--text-secondary); }
+  /* Pushed to the bottom so the job-to-be-done lines up across a row whose
+     descriptions run to different lengths. */
+  .worlds__jtbd { margin-top: auto; padding-top: 14px; font-size: 13px; color: var(--text-tertiary); }
+  @media (max-width: 900px) { .worlds__grid { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+  @media (max-width: 520px) { .worlds__grid { grid-template-columns: 1fr; } }
   .section-intro { max-width: 820px; margin-bottom: 46px; }.section-intro--compact { margin-bottom: 30px; }
   .section-intro h2,.system h2 { margin: 0; font-size: clamp(38px,5vw,64px); letter-spacing: -.045em; }
   .section-intro > p:last-child { color: var(--text-secondary); font-size: 19px; line-height: 1.65; }
@@ -634,4 +871,59 @@ const homeSchema = [
   .close { padding: clamp(70px,10vw,140px) 0; }.close__inner { text-align: center; }.close img { width: min(520px,82vw); height: auto; }.close p { margin: 20px auto 30px; color: var(--text-secondary); font-size: 20px; }
   @media(max-width:960px){.system-grid{grid-template-columns:repeat(2,1fr)}}
   @media(max-width:620px){.hero{min-height:auto;padding:48px 0 70px}.hero__grid{gap:26px}h1{font-size:40px}.system-grid{grid-template-columns:1fr}.section-intro h2,.system h2{font-size:40px}}
+
+  /* ---------- compact finder, above the directory grid ---------- */
+  /* Mobile-first: the jobs wrap as chips from 390px up, so nine of them read
+     as a short list rather than nine full-width rows pushing the grid off the
+     first two screens. */
+  .finder {
+    padding: clamp(2.5rem, 7vw, 4rem) 0 0;
+  }
+  .finder__inner {
+    max-width: 52rem;
+  }
+  .finder h2 {
+    margin: 0.5rem 0 0;
+    font-size: clamp(1.5rem, 4.4vw, 2.1rem);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+  .finder__lede {
+    margin: 0.75rem 0 0;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    max-width: 44ch;
+  }
+  .finder__jobs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1.35rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .finder__jobs a {
+    display: inline-block;
+    padding: 0.5rem 0.85rem;
+    border: 1px solid rgba(200, 208, 222, 0.18);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.02);
+    color: inherit;
+    text-decoration: none;
+    font-size: 0.9375rem;
+    line-height: 1.3;
+    transition: border-color 0.15s ease, background 0.15s ease;
+  }
+  .finder__jobs a:hover,
+  .finder__jobs a:focus-visible {
+    border-color: var(--cs-sheen);
+    background: rgba(120, 190, 255, 0.08);
+  }
+  .finder__all {
+    display: inline-block;
+    margin: 1.1rem 0 0;
+    color: var(--text-secondary);
+    font-size: 0.9375rem;
+  }
+  .finder__all:hover { color: inherit; }
 </style>

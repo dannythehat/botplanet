@@ -9,7 +9,7 @@
  * value, no signed URL. A programme record carries the NAME of its Worker secret
  * and nothing more, and a test asserts the exports stay clean.
  */
-import { PRODUCTS } from "../content/products";
+import { CATALOGUE } from "../content/products";
 import { productPath } from "../content/routes";
 import { absUrl } from "./seo";
 import { DESTINATIONS, REJECTED_CANDIDATES } from "../content/commerce/destinations";
@@ -118,7 +118,10 @@ export const buildProductOfferMapping = () => {
     generatedFor: AS_AT,
     launchProducts: report.products.length,
     rows: report.products.map((p) => {
-      const product = Object.values(PRODUCTS).find((x) => x.productId === p.productId)!;
+      /* The category matters: productPath() defaults to the launch category,
+         so building a window product's URL without it produced a pool URL
+         that 404s. */
+      const product = CATALOGUE.find((x) => x.productId === p.productId)!;
       const pref = p.offers.find((o) => o.id === p.preferred.offerId) ?? null;
       const prefPub = pref ? publicationFor(pref) : null;
       const dest = DESTINATIONS.find((d) => d.productId === p.productId);
@@ -132,7 +135,7 @@ export const buildProductOfferMapping = () => {
 
       return {
         productId: p.productId,
-        canonicalUrl: absUrl(productPath(product.slug)),
+        canonicalUrl: absUrl(productPath(product.slug, product.categorySlug)),
         verifiedOffers: p.verifiedOffers,
         preferredOfferId: p.preferred.offerId,
         preferredOfferAudit: p.preferred.audit,
