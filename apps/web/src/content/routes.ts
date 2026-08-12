@@ -1232,18 +1232,16 @@ export const LEGACY_REDIRECTS: { from: string; to: string; why: string }[] = [
   { from: "/home-security-robots/", to: "/robots/", why: "The second phrasing the old site used for the same cancelled category." },
 
   /* Storefront-shaped pages from the old site. All of them were 'browse the
-     catalogue', which is what /robots/ is now. */
-  { from: "/shop/", to: "/robots/", why: "The old catalogue browse page." },
+     catalogue', which is what /robots/ is now. (/shop/ is NOT here — it is a
+     410, see GONE_PREFIXES.) */
   { from: "/categories/", to: "/robots/", why: "The old category index." },
   { from: "/new-robots/", to: "/robots/", why: "The old new-arrivals list; nothing on this site replaces it, and the index is the nearest honest answer." },
   { from: "/product/", to: "/robots/", why: "Bare product index from the old structure." },
   { from: "/reviews/", to: "/robots/", why: "Bare review index from the old structure." },
   { from: "/blog/", to: "/guides/", why: "The old blog is the guides section now." },
 
-  /* Decision tools. The quiz was the old site's version of what BotMatch does,
-     and gifts was a seasonal buying aid with no successor. */
-  { from: "/quiz/", to: "/botmatch/", why: "The old questionnaire. BotMatch is the same job done properly." },
-  { from: "/gifts/", to: "/robots/", why: "A seasonal gift finder with no successor page; the index is the nearest honest destination." },
+  /* /quiz/, /gifts/ and /shop/ USED TO REDIRECT AND NOW RETURN 410. See
+     GONE_PREFIXES below for why. They are deliberately absent from this list. */
 
   /* Policy pages that were renamed rather than removed. */
   { from: "/privacy-policy/", to: "/privacy/", why: "The policy is the same policy; only the URL got shorter when the site was rebuilt." },
@@ -1254,6 +1252,88 @@ export const LEGACY_REDIRECTS: { from: string; to: string; why: string }[] = [
   { from: "/returns-policy/", to: "/terms/", why: "This site sells nothing directly, so it has no returns policy of its own. Terms is where the commercial relationship is described." },
   { from: "/shipping-policy/", to: "/terms/", why: "As above — delivery is the retailer's, not ours." },
 ];
+
+/**
+ * THE OLD SITES' URLS THAT ARE NOT COMING BACK — 410 Gone, not 404, not 301.
+ *
+ * Two earlier sites lived on this domain. Google still holds their URLs and was
+ * still crawling them on 8 August 2026, spending crawl budget on a site that
+ * has almost none: two backlinks, ten Googlebot visits a fortnight, and
+ * twenty-seven current pages it has never fetched.
+ *
+ * WHY 410 RATHER THAN 404. Both say "not here", but 404 means "maybe later" and
+ * 410 means "deliberately gone". Google retries a 404 for a long time and drops
+ * a 410 far faster. When the goal is to get an old catalogue out of the index so
+ * the crawler spends its budget on the current pages, 410 is the instruction
+ * that actually says so.
+ *
+ * WHY 410 RATHER THAN 301. These three were redirected until 12 August 2026 —
+ * /shop/ and /gifts/ to /robots/, /quiz/ to /botmatch/. A redirect claims the
+ * destination answers the request, and it does not: somebody looking for a
+ * seasonal gift finder or a storefront basket is not looking for a robot
+ * comparison index. Worse, a 301 keeps the old URL alive in Google's mind
+ * indefinitely, which is the opposite of what we want. Owner decision,
+ * 12 August 2026.
+ *
+ * MATCHED BY PREFIX, and the query string is ignored: the old catalogue's URLs
+ * were /shop?category=cleaning-robots and similar, so matching the path alone
+ * covers every variant without listing them.
+ */
+export const GONE_PREFIXES: { prefix: string; why: string }[] = [
+  { prefix: "/gifts", why: "Seasonal gift finder from the previous site. No successor, and a robot index does not answer it." },
+  { prefix: "/quiz", why: "The previous site's questionnaire. BotMatch does the job properly, but at its own URL and with its own questions." },
+  { prefix: "/shop", why: "The previous site's storefront, including /shop?category=… . This site sells nothing directly." },
+];
+
+/**
+ * The previous robot site's content URLs, which DO have live equivalents.
+ *
+ * Unlike the three above, these were real editorial pages about real machines,
+ * and the reader who follows one still wants what it was about. Each maps
+ * explicitly — no pattern-guessing a destination, because a redirect that lands
+ * on the wrong robot is worse than one that lands on the index.
+ *
+ * Every `from` here was seen in Search Console.
+ */
+export const LEGACY_CONTENT_REDIRECTS: { from: string; to: string; why: string }[] = [
+  {
+    from: "/product/emo-ai-desktop-pet/",
+    to: "/robots/companion-robots/living-ai-emo/",
+    why: "The same machine. The old site called it by its marketing name, this one by maker and model.",
+  },
+  {
+    from: "/reviews/worx-landroid-m-review-your-weekend-back-for-a-grand/",
+    to: "/robots/robotic-lawn-mowers/worx-landroid-vision-wr320/",
+    why: "The Landroid M is discontinued; the Landroid Vision WR320 is the model that replaced it in the same range and price band.",
+  },
+  {
+    from: "/blog/best-ai-pet-robots/",
+    to: "/robots/companion-robots/",
+    why: "A best-of listicle about robot pets. The companion hub is the page that covers those machines now.",
+  },
+  {
+    from: "/category/wearable-robots/",
+    to: "/robots/",
+    why: "No wearable-robot category exists here and none is planned, so the reader gets the full index rather than a pretend match.",
+  },
+];
+
+/**
+ * Path prefixes from the old robot site whose UNMAPPED children go to /robots/.
+ *
+ * The explicit map above handles what Search Console showed. This handles the
+ * long tail nobody has seen yet: an old /blog/ post or /category/ page that
+ * still has a link somewhere. /robots/ is the honest destination — it is the
+ * index of everything this site covers, and it is a real answer to "I was
+ * looking at robots on this domain".
+ *
+ * Deliberately NOT a redirect to the homepage: the homepage sells the site,
+ * the index answers the request.
+ */
+export const LEGACY_PREFIX_FALLBACK = {
+  prefixes: ["/product/", "/category/", "/reviews/", "/blog/"],
+  to: "/robots/",
+} as const;
 
 /**
  * Old product and review URLs, resolved by slug rather than listed one by one.

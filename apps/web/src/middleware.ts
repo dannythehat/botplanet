@@ -1,5 +1,5 @@
 import { defineMiddleware } from "astro:middleware";
-import { resolveRedirect, safeQuery } from "./lib/routing";
+import { isGone, resolveRedirect, safeQuery } from "./lib/routing";
 
 /**
  * Protect /admin and /api/admin with a shared token (ADMIN_TOKEN secret).
@@ -15,6 +15,32 @@ export const onRequest = defineMiddleware(async (context, next) => {
   if (host === "www.botplanet.io") {
     const url = new URL(context.request.url);
     return context.redirect(`https://botplanet.io${url.pathname}${url.search}`, 301);
+  }
+
+  /**
+   * The previous sites' dead sections — 410 Gone, and BEFORE any redirect.
+   *
+   * Order is the whole point. Put this after the resolver and /gifts/x answers
+   * 301 to /gifts/x/ first, so a crawler spends two requests to learn what one
+   * should have told it, and the first response says "moved" about something
+   * that has not moved. See GONE_PREFIXES in content/routes.ts for why these
+   * are 410 rather than 404 or 301.
+   *
+   * A plain-text body on purpose: this is an answer for a crawler, and rendering
+   * the full site chrome around "this page is gone" would ship a navigation bar
+   * and a footer full of links on every one of them.
+   */
+  if (isGone(context.url.pathname)) {
+    return new Response("410 Gone. This page was part of a previous site on this domain and has been permanently removed.\n", {
+      status: 410,
+      headers: {
+        "content-type": "text/plain; charset=utf-8",
+        /* Cached, because the answer will not change and a crawler that asks
+           repeatedly should be answered from the edge. */
+        "cache-control": "public, max-age=86400",
+        "x-robots-tag": "noindex",
+      },
+    });
   }
 
   /**

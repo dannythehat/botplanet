@@ -14,6 +14,9 @@
  *  - unknown routes 404; they are never swept to the homepage
  */
 import {
+  GONE_PREFIXES,
+  LEGACY_CONTENT_REDIRECTS,
+  LEGACY_PREFIX_FALLBACK,
   LEGACY_REDIRECTS,
   REDIRECTS,
   ROUTES,
@@ -52,6 +55,25 @@ export function normalisePath(pathname: string): string {
   return p;
 }
 
+/**
+ * Is this one of the previous sites' URLs that should return 410 Gone?
+ *
+ * Checked on the PATH only, so /shop?category=cleaning-robots is caught by the
+ * same rule as /shop/. Checked BEFORE any redirect logic, including
+ * normalisation — otherwise /gifts/x answers 301 to /gifts/x/ and only then
+ * 410s, which is a redirect chain that ends in a dead end and tells Google
+ * nothing on the first hop.
+ *
+ * Prefix matching is bounded at a segment: /shop and /shop/anything are gone,
+ * /shopping-guide would not be. Nothing on this site currently starts with one
+ * of these words, and the guard means nothing ever accidentally will.
+ */
+export function isGone(pathname: string): boolean {
+  if (isPassthrough(pathname) || isFilePath(pathname)) return false;
+  const p = pathname.toLowerCase().replace(/\/+$/, "");
+  return GONE_PREFIXES.some(({ prefix }) => p === prefix || p.startsWith(`${prefix}/`));
+}
+
 export interface RedirectResult {
   /** Canonical destination path. */
   to: string;
@@ -88,9 +110,27 @@ export function resolveRedirect(pathname: string): RedirectResult | null {
     if (target !== normalised) return { to: target, status: 301, reason: "legacy" };
   }
 
+  /* Explicit old-content mappings, ahead of the slug resolver: these are the
+     ones Search Console actually showed, and each was chosen by hand because a
+     guessed destination is worse than the index. */
+  const content = LEGACY_CONTENT_REDIRECTS.find((r) => normalisePath(r.from) === normalised);
+  if (content) {
+    const target = normalisePath(content.to);
+    if (target !== normalised) return { to: target, status: 301, reason: "legacy" };
+  }
+
   const legacyProduct = legacyProductRedirect(normalised, KNOWN_PRODUCTS);
   if (legacyProduct) {
     const target = normalisePath(legacyProduct);
+    if (target !== normalised) return { to: target, status: 301, reason: "legacy" };
+  }
+
+  /* The long tail under the old site's four content prefixes. Anything still
+     unmatched lands on the robot index rather than a 404, because it came from
+     a page about robots on this domain and the index is a real answer to that.
+     Last, so it can never shadow a mapping above. */
+  if (LEGACY_PREFIX_FALLBACK.prefixes.some((p) => normalised.startsWith(p))) {
+    const target = normalisePath(LEGACY_PREFIX_FALLBACK.to);
     if (target !== normalised) return { to: target, status: 301, reason: "legacy" };
   }
 

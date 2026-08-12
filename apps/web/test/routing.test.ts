@@ -4,6 +4,7 @@ import {
   breadcrumbsFor,
   isNavActive,
   normalisePath,
+  isGone,
   resolveRedirect,
   safeQuery,
 } from "../src/lib/routing";
@@ -16,6 +17,8 @@ import {
   productInSitemap,
   sitemapRoutes,
   LEGACY_REDIRECTS,
+  LEGACY_CONTENT_REDIRECTS,
+  LEGACY_PREFIX_FALLBACK,
 } from "../src/content/routes";
 import { RETIRED_SLUGS, MERGED_REVIEWS } from "../src/content/product-names";
 import { COMPARE_PAGES, comparePageIsSubstantive } from "../src/content/compare-page";
@@ -392,11 +395,123 @@ describe("legacy redirects from the previous site", () => {
     expect(resolveRedirect("/product/temi-v3-robot/")?.to).toBe("/robots/companion-robots/");
   });
 
-  it("still 404s an old URL nobody can honestly place", () => {
-    /* The standard at the top of lib/routing.ts holds: unknown routes 404 and
-       are never swept to the homepage. A redirect that cannot be justified is
-       worse than an honest 404, because it tells a crawler the page moved. */
-    expect(resolveRedirect("/product/some-machine-that-never-existed/")).toBeNull();
+  it("404s an unknown path that is not the old site's", () => {
+    /* The standard at the top of lib/routing.ts still holds for the open web:
+       unknown routes 404 and are never swept to the homepage. */
     expect(resolveRedirect("/nonsense/")).toBeNull();
+    expect(resolveRedirect("/robots/not-a-category/")).toBeNull();
+  });
+
+  /* THIS REVERSES A PREVIOUS DECISION, on the owner's instruction of 12 August
+     2026, and the reversal is narrow enough to be worth stating.
+
+     The rule was "a redirect that cannot be justified is worse than an honest
+     404". That is right in general and wrong for these four prefixes, because
+     they are not unknown paths — they are the previous robot site's content
+     URLs, and a request for one is a request for robots on this domain. The
+     robot index answers that. It stays a 404 everywhere else. */
+  it("sends the old site's unmapped content URLs to the robot index", () => {
+    for (const p of [
+      "/blog/whatever/",
+      "/blog/some-old-listicle/",
+      "/category/anything/",
+      "/product/some-machine-that-never-existed/",
+      "/reviews/a-review-of-something-gone/",
+    ]) {
+      const r = resolveRedirect(p);
+      expect(r?.to, p).toBe("/robots/");
+      expect(r?.status, p).toBe(301);
+    }
+  });
+
+  it("maps the four URLs Search Console actually showed, exactly", () => {
+    expect(resolveRedirect("/product/emo-ai-desktop-pet/")?.to).toBe(
+      "/robots/companion-robots/living-ai-emo/",
+    );
+    expect(
+      resolveRedirect("/reviews/worx-landroid-m-review-your-weekend-back-for-a-grand/")?.to,
+    ).toBe("/robots/robotic-lawn-mowers/worx-landroid-vision-wr320/");
+    expect(resolveRedirect("/blog/best-ai-pet-robots/")?.to).toBe("/robots/companion-robots/");
+    expect(resolveRedirect("/category/wearable-robots/")?.to).toBe("/robots/");
+  });
+
+  it("reaches those mappings in ONE hop from the unslashed form", () => {
+    /* The trailing-slash normaliser used to win this race: /product/x answered
+       301 to /product/x/, which then answered 301 again. Two hops to say one
+       thing, and Google discounts the second. */
+    const r = resolveRedirect("/product/emo-ai-desktop-pet");
+    expect(r?.to).toBe("/robots/companion-robots/living-ai-emo/");
+  });
+});
+
+describe("410 Gone — the previous sites' dead sections", () => {
+  it("marks every gone prefix gone, with or without a trailing slash", () => {
+    for (const p of ["/gifts", "/gifts/", "/quiz", "/quiz/", "/shop", "/shop/"]) {
+      expect(isGone(p), p).toBe(true);
+    }
+  });
+
+  it("marks children of a gone prefix gone", () => {
+    for (const p of ["/gifts/anything/", "/quiz/step-2/", "/shop/cleaning-robots/"]) {
+      expect(isGone(p), p).toBe(true);
+    }
+  });
+
+  it("ignores the query string, which is how the old storefront built its URLs", () => {
+    /* isGone takes a pathname; the middleware passes url.pathname, so
+       /shop?category=x arrives here as "/shop". Asserted so a future change
+       that starts passing the full URL is caught. */
+    expect(isGone("/shop")).toBe(true);
+  });
+
+  it("does not catch a live path that merely starts with the same letters", () => {
+    for (const p of ["/shopping-guide/", "/quizzes-and-tools/", "/giftsomething/"]) {
+      expect(isGone(p), p).toBe(false);
+    }
+  });
+
+  it("leaves every live route alone", () => {
+    for (const p of ["/", "/robots/", "/robots/robotic-pool-cleaners/", "/guides/", "/botmatch/"]) {
+      expect(isGone(p), p).toBe(false);
+    }
+  });
+
+  it("never touches assets or passthrough paths", () => {
+    for (const p of ["/go/pool-aiper-scuba-s1-amazon", "/api/botmatch", "/_astro/x.js"]) {
+      expect(isGone(p), p).toBe(false);
+    }
+  });
+
+  it("does not also redirect a gone path — 410 is the whole answer", () => {
+    /* If both fired, the middleware's ordering would decide the outcome and a
+       reordering would silently change it. Neither should have an opinion. */
+    for (const p of ["/gifts/", "/quiz/", "/shop/"]) {
+      expect(resolveRedirect(p)?.to, p).not.toBe("/robots/");
+    }
+  });
+});
+
+describe("no redirect points at another redirect", () => {
+  it("resolves every registry destination to a final URL in one hop", () => {
+    const targets = [
+      ...REDIRECTS.map((r) => r.to),
+      ...LEGACY_CONTENT_REDIRECTS.map((r) => r.to),
+      LEGACY_PREFIX_FALLBACK.to,
+    ];
+    for (const to of targets) {
+      const again = resolveRedirect(to);
+      expect(again, `${to} redirects onward — that is a chain`).toBeNull();
+    }
+  });
+
+  it("never sends a redirect to a path that is itself 410", () => {
+    const targets = [
+      ...REDIRECTS.map((r) => r.to),
+      ...LEGACY_CONTENT_REDIRECTS.map((r) => r.to),
+      LEGACY_PREFIX_FALLBACK.to,
+    ];
+    for (const to of targets) {
+      expect(isGone(to), `${to} is a redirect target AND gone`).toBe(false);
+    }
   });
 });
