@@ -326,7 +326,20 @@ const pageSchema = hero
       id="compare"
       eyebrow="Side by side"
       title={`Compare every ${cat.name.toLowerCase().replace(/s$/, "")}`}
-      intro={`All ${compareRows.length} ${cat.name.toLowerCase()} we hold, on the four things that decide whether one fits your pool. Where a manufacturer does not publish a figure the cell says so rather than guessing.`}
+      {/* "whether one fits YOUR POOL" until 12 August 2026 — on every hub, in a
+          template that renders nine categories. A window buyer, a cat owner and
+          somebody choosing a lawn mower were all asked about their pool. Same
+          disease as the "Pool size" column header found on 8 August: this
+          template was written for the launch category and its copy was never
+          re-read when eight more categories arrived. Found by an external audit
+          of the window hub.
+
+          THE SHELL IS STILL WRONG AND IS NOT FIXED HERE. The header CTA, the
+          drawer CTA and the mega panel all say "Find My Pool Cleaner" on all
+          nine hubs, because shellJourney() resolves one journey site-wide. That
+          needs per-page resolution and it is its own job — a one-word patch
+          here would have hidden it. */}
+      intro={`All ${compareRows.length} ${cat.name.toLowerCase()} we hold, on the four things that most often rule a machine out. Where a manufacturer does not publish a figure the cell says so rather than guessing.`}
       rows={compareRows}
       note={`Ordered by price band, then alphabetically — not by what we earn. The size column shows a maximum length where the maker publishes one and a maximum area where it publishes that instead; the two are not interchangeable.`}
     />

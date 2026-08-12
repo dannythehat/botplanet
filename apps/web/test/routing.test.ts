@@ -1,4 +1,6 @@
 import { describe, expect, it } from "vitest";
+import { readFileSync } from "node:fs";
+import { fileURLToPath } from "node:url";
 import {
   activeNavPath,
   breadcrumbsFor,
@@ -681,6 +683,47 @@ describe("best-of consolidation", () => {
        substance. */
     for (const machine of ["winbot w2 pro", "hobot 2s", "cop rose x5s", "mamibot w120-dp", "hutt s55 pro"]) {
       expect(copy.includes(machine), `the window hub no longer names the ${machine}`).toBe(true);
+    }
+  });
+
+  /**
+   * THE DEFECT EVERY OTHER ASSERTION IN THIS FILE MISSED, found by an external
+   * audit on 12 August 2026 and not by us.
+   *
+   * The WINBOT ladder on the window hub ended "...and the best-of page makes
+   * that argument". That page had folded into the very page the sentence was
+   * printed on. Nothing caught it because every guard here checks HREFS — a
+   * page referred to in words, with no link, is invisible to all of them.
+   *
+   * The rule this asserts is narrow and mechanical on purpose: a component
+   * built for ONE category must not talk about a page type that category does
+   * not have. It would have failed on the exact sentence above.
+   */
+  it("never lets a category-specific component name a page its category lacks", () => {
+    const COMPONENTS = fileURLToPath(new URL("../src/components/", import.meta.url));
+    /* The dispatch map in HubTable.astro, restated. Each of these renders for
+       exactly one category, so each may only speak about that category. */
+    const OWNED_BY: Record<string, string> = {
+      "WinbotLadder.astro": "window-cleaning-robots",
+      "CapabilityTable.astro": "companion-robots",
+    };
+    const built = builtBestOfCategories();
+
+    for (const [file, slug] of Object.entries(OWNED_BY)) {
+      const src = readFileSync(`${COMPONENTS}${file}`, "utf8");
+      /* Strip the Astro frontmatter and every comment: this is about what a
+         READER is told, and a code comment explaining the history is exactly
+         the thing that should be allowed to mention it. */
+      const copy = src
+        .replace(/^---[\s\S]*?---/, "")
+        .replace(/\/\*[\s\S]*?\*\//g, "")
+        .replace(/\{\/\*[\s\S]*?\*\/\}/g, "")
+        .toLowerCase();
+      if (built.has(slug)) continue;
+      expect(
+        /best-of page|shortlist page|best-of above|our best-of/.test(copy),
+        `${file} renders for ${slug}, which has no best-of page, and its copy still refers to one`,
+      ).toBe(false);
     }
   });
 
