@@ -56,6 +56,36 @@ const gaId = (Astro.locals as App.Locals).runtime?.env?.GA_MEASUREMENT_ID;
 const gaValid = typeof gaId === "string" && /^G-[A-Z0-9]{4,20}$/i.test(gaId);
 const gaEnabled = gaValid && import.meta.env.PROD && !preview;
 
+/* CLOUDFLARE WEB ANALYTICS — a second beacon, deliberately, alongside GA4.
+   Two reasons, and neither is "more numbers is better".
+
+   FIRST, IT SETTLES A QUESTION THE EDGE DATA CANNOT. Cloudflare's edge log
+   classifies visitors by user-agent string, and on 12 August 2026 that showed
+   584 Safari page views across a fortnight — 40% of all browser traffic —
+   arriving every single day. The owner has never owned an Apple device, so it
+   is not him. It is either real iPhone users or scrapers wearing an iPhone
+   user-agent, which is a common way to avoid being blocked, and the edge log
+   cannot tell the two apart. A beacon can: bots do not execute JavaScript. If
+   this reports Safari traffic, those are people.
+
+   SECOND, IT IS THE ONE WE CAN READ. GA4 answers the same question, but there
+   is no Google credential anywhere in this project by design (see
+   lib/reporting.ts), so its numbers can only be read by a human opening a
+   dashboard. Cloudflare's are available over an API this project already
+   authenticates against, which is what lets scripts/traffic-report.mjs commit
+   a dated report instead of somebody transcribing one.
+
+   Also cookieless, so it raises no consent obligation that GA4 does not
+   already raise.
+
+   Gated exactly like GA4: production only, never on a preview host, and off
+   entirely until CF_BEACON_TOKEN is set in wrangler.toml [vars]. The token is
+   public by design — it identifies a site to Cloudflare, it does not authorise
+   anything — which is why it sits in vars rather than in secrets. */
+const cfBeacon = (Astro.locals as App.Locals).runtime?.env?.CF_BEACON_TOKEN;
+const cfBeaconValid = typeof cfBeacon === "string" && /^[a-f0-9]{32}$/i.test(cfBeacon);
+const cfBeaconEnabled = cfBeaconValid && import.meta.env.PROD && !preview;
+
 const graph = schemaGraph(
   organizationSchema(),
   websiteSchema(),
@@ -115,6 +145,14 @@ const graph = schemaGraph(
           set:html={`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${gaId}');`}
         />
       </Fragment>
+    )}
+    {cfBeaconEnabled && (
+      <script
+        is:inline
+        defer
+        src="https://static.cloudflareinsights.com/beacon.min.js"
+        data-cf-beacon={`{"token":"${cfBeacon}"}`}
+      ></script>
     )}
   </head>
   <body>

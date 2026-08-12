@@ -63,3 +63,20 @@ enabled = true
 # production host loads it (see Base.astro).
 [vars]
 GA_MEASUREMENT_ID = "G-EEHDN6DNZN"
+
+# Cloudflare Web Analytics. Public by design, like the GA4 id above: it names a
+# site to Cloudflare, it authorises nothing.
+#
+# EMPTY UNTIL SOMEBODY CREATES THE SITE. Cloudflare dashboard -> Web Analytics
+# -> Add a site -> botplanet.io -> "Manual installation", and paste the 32-hex
+# token from the snippet here. Creating it over the API needs Account
+# Analytics:Edit, which the deploy token does not carry.
+#
+# Until this is filled in, Base.astro renders no beacon at all — the gate is a
+# 32-hex format check, so a placeholder cannot accidentally ship a broken tag.
+#
+# WHY IT IS WORTH FILLING IN. Cloudflare's edge log counts by user-agent and
+# cannot distinguish a person on an iPhone from a scraper claiming to be one.
+# On 12 August 2026 that ambiguity covered 40% of all browser traffic. A beacon
+# runs JavaScript, and bots do not.
+CF_BEACON_TOKEN = ""
