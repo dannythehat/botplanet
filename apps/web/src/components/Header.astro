@@ -72,7 +72,21 @@ const isActive = (href: string) => href === activePath;
                     <span class="mega-jtbd">Browse all pool robots</span>
                     <span class="mega-sub">The full US launch catalogue</span>
                   </a>
-                  <a class="mega-item" href={routes.best()}>
+                  {/* POINTED AT THE POOL RANKING, NOT THE INDEX, 12 August 2026.
+                      This column is headed "Robotic pool cleaners" and this item
+                      is labelled "Best pool robots", and it linked to
+                      /best-robots/ — a section index listing every category.
+                      The label promised one page and the href delivered another,
+                      which is the one thing a nav item must never do.
+
+                      It is also the last reference to /best-robots/ anywhere in
+                      the navigation. That is deliberate: two best-of pages exist
+                      and six more were refused on SERP evidence, so the index is
+                      a directory rather than a section. A directory belongs in
+                      the footer, which is where it now lives — reachable, and
+                      not competing with nine category links for a browse
+                      panel's attention. */}
+                  <a class="mega-item" href={routes.best(LAUNCH_CATEGORY)}>
                     <span class="mega-jtbd">Best pool robots</span>
                     <span class="mega-sub">Our top picks by use case</span>
                   </a>

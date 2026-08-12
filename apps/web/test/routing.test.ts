@@ -22,7 +22,8 @@ import {
 } from "../src/content/routes";
 import { RETIRED_SLUGS, MERGED_REVIEWS } from "../src/content/product-names";
 import { COMPARE_PAGES, comparePageIsSubstantive } from "../src/content/compare-page";
-import { BAR_ITEMS, FOOTER_GROUPS } from "../src/content/nav-surfaces";
+import { BAR_ITEMS, FOOTER_GROUPS, UTILITY_ITEMS } from "../src/content/nav-surfaces";
+import { routes, LAUNCH_CATEGORY } from "../src/content/nav";
 import { heroFor } from "../src/content/category-hero";
 import { CATEGORY_ANCHORS, RETROFITTED_INBOUND } from "../src/content/internal-links";
 import { PAGE_PLAN } from "../src/content/seo/page-plan";
@@ -594,12 +595,28 @@ describe("best-of consolidation", () => {
    * evidence rather than merely unbuilt. It stays in the footer, which is a
    * link rather than a promise.
    */
-  it("takes /best-robots/ out of the top bar but keeps it reachable", () => {
+  it("takes /best-robots/ out of the navigation but keeps it reachable", () => {
     const best = ROUTES.find((r) => r.path === "/best-robots/")!;
     expect(BAR_ITEMS.map((i) => i.href)).not.toContain("/best-robots/");
     expect(BAR_ITEMS.some((i) => i.href.startsWith("/best-robots/"))).toBe(false);
+    expect(UTILITY_ITEMS.map((i) => i.href)).not.toContain("/best-robots/");
+    // Reachable, from the one surface that is a directory rather than a
+    // promise of a section behind it.
     expect(best.footerGroup).toBe("Explore");
     expect(FOOTER_GROUPS.flatMap((g) => g.links).map((l) => l.href)).toContain("/best-robots/");
+  });
+
+  /**
+   * The mega panel's "Best pool robots" item pointed at /best-robots/ — the
+   * index of every category — under a column headed "Robotic pool cleaners".
+   * A nav item that names one page and links to another is the failure this
+   * whole consolidation is about, in miniature.
+   */
+  it("sends the mega panel's pool item to the pool ranking, not the index", () => {
+    expect(routes.best(LAUNCH_CATEGORY)).toBe("/best-robots/robotic-pool-cleaners/");
+    expect(ROUTES.some((r) => r.path === routes.best(LAUNCH_CATEGORY) && r.status === "live")).toBe(
+      true,
+    );
   });
 
   /**
