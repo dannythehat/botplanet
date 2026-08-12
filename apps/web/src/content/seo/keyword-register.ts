@@ -134,6 +134,17 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
       { term: "window cleaning robots", volume: 12100, difficulty: 5, mustAppear: true },
       { term: "frameless", volume: 0, difficulty: 0, mustAppear: true },
       { term: "safety tether", volume: 0, difficulty: 0, mustAppear: false },
+      /* THE COMMERCIAL HALF, RECLAIMED 12 AUGUST 2026. These four belonged to
+         /best-robots/window-cleaning-robots/ from 7 August until that page
+         folded back into this one. They are here rather than there because the
+         note below has been true since 5 August and was overruled by a build
+         rather than by a measurement. */
+      { term: "best window cleaning robot", volume: 1300, difficulty: 3, mustAppear: true },
+      { term: "best robot window cleaner", volume: 1300, difficulty: 3, mustAppear: true },
+      { term: "window cleaning robot reviews", volume: 1000, difficulty: 7, mustAppear: true },
+      /* A SECTION, not a page, and the claim most makers write and fewest
+         support with a number. Carried in the buying checklist. */
+      { term: "high rise", volume: 0, difficulty: 0, mustAppear: true },
     ],
     cededTo: [
       {
@@ -146,7 +157,15 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
        carried by this page. Six of the top ten results are identical between
        the two terms and NYTimes ranks first for both with one article, so a
        separate best-of page would have competed with this one for the same
-       result set. */
+       result set.
+
+       THAT NOTE WAS WRITTEN ON 5 AUGUST 2026 AND IGNORED ON 7 AUGUST, when
+       /best-robots/window-cleaning-robots/ was built for exactly the term it
+       forbids. The measurement never changed — 6 of 10 shared domains is over
+       the 5-of-10 line that decides one page or two — so the page folded back
+       into this one on 12 August rather than the note being rewritten to suit
+       it. Compare the lawn pair, which measured 2 of 10 and correctly has two
+       URLs. Same rule, different evidence, opposite answers. */
     researchedOn: RUN_WINDOW,
   },
   {
@@ -1765,33 +1784,12 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
     ],
     researchedOn: RUN_AUGUST_10,
   },
-  {
-    path: "/best-robots/window-cleaning-robots/",
-    /* Page 2 of the window map, ruled CREATE on 5 August 2026 and built on
-       7 August — after the eleven reviews beneath it were given working buy
-       buttons. A shortlist funnelling into pages nobody can buy from is an
-       ornament, which is why it waited. 1,300/mo at KD 0-3, $3.20 CPC. */
-    primary: { term: "best window cleaning robot", volume: 1300, difficulty: 3, mustAppear: true },
-    secondary: [
-      { term: "best robot window cleaner", volume: 1300, difficulty: 3, mustAppear: true },
-      { term: "window cleaning robot reviews", volume: 1000, difficulty: 7, mustAppear: true },
-      { term: "best window cleaning robot 2026", volume: 210, difficulty: 0, mustAppear: false },
-      /* Both are SECTIONS here rather than pages: each returns the same SERP
-         as the general best-of, so a separate URL would cannibalise this one.
-         Frameless leads the page because it is the exclusion that disqualifies
-         machines outright. */
-      { term: "frameless", volume: 0, difficulty: 0, mustAppear: true },
-      { term: "high rise", volume: 0, difficulty: 0, mustAppear: true },
-    ],
-    cededTo: [
-      {
-        term: "window cleaning robot",
-        path: "/robots/window-cleaning-robots/",
-        why: "The 12,100 head term belongs to the hub, which explains how these machines work. This page takes the commercial half of the category and does not compete for the explanation.",
-      },
-    ],
-    researchedOn: RUN_WINDOW,
-  },
+  /* THE ROW FOR "/best-robots/window-cleaning-robots/" WAS HERE and is gone
+     with the page, 12 August 2026. Every term it held — "best window cleaning
+     robot", "best robot window cleaner", "window cleaning robot reviews",
+     "high rise" — moved into the hub's row at the top of this file, which is
+     where its own research said they belonged all along. */
+
   {
     path: "/guides/do-window-cleaning-robots-work/",
     /* THREE QUERY FAMILIES MERGED INTO ONE PAGE: "do window cleaning robots
@@ -1811,8 +1809,8 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
     cededTo: [
       {
         term: "best window cleaning robot",
-        path: "/best-robots/window-cleaning-robots/",
-        why: "A guide that ranks machines is a best-of wearing a hat. This page answers whether to buy at all and hands the reader to the page that answers which one.",
+        path: "/robots/window-cleaning-robots/",
+        why: "A guide that ranks machines is a best-of wearing a hat. The ranking sits on the hub — 6 of the top 10 results are shared with the head term — and this page answers whether to buy at all before handing the reader on.",
       },
       {
         term: "window cleaning robot",
@@ -2185,8 +2183,8 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
       },
       {
         term: "best window cleaning robot",
-        path: "/best-robots/window-cleaning-robots/",
-        why: "The ranked list is a separate page that already targets this term, and two of our own pages competing for it helps neither.",
+        path: "/robots/window-cleaning-robots/",
+        why: "The ranking lives on the hub, which is where the SERP measurement put it: 6 of the top 10 results are shared with the head term. This table answers a narrower question and must not fight the page that carries the recommendation.",
       },
     ],
     researchedOn: RUN_AUGUST_10,

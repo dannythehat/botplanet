@@ -1072,119 +1072,22 @@ export const EDITORIAL: Record<string, EditorialContent> = {
     lastReviewed: "2026-08-08",
   },
 
-  "/best-robots/window-cleaning-robots/": {
-    path: "/best-robots/window-cleaning-robots/",
-    categorySlug: "window-cleaning-robots",
-    eyebrow: "Best of",
-    title: "The best window cleaning robot for your glass, ranked",
-    seoTitle: "Best Window Cleaning Robot 2026: Which One Suits Your Glass",
-    metaDescription:
-      "The best window cleaning robot for each job, plus the two we hold and do not recommend. " +
-      "Frameless glass and a nearby socket decide it before any specification.",
-    standfirst:
-      "Two questions settle this category and both are about your windows: is the glass frameless, and is there a socket near the ones you actually want cleaned. " +
-      "Answer those and the list below shortens to about three.",
-    image: {
-      src: "/media/editorial/best-window-robots.webp",
-      alt:
-        "A window cleaning robot part-way down a tall pane with its safety tether running up out of frame, a city skyline and river beyond.",
-      focal: "50% 45%",
-    },
-    prose: "best-window-cleaning-robots",
-    picks: [
-      {
-        productSlug: "ecovacs-winbot-w2-pro",
-        award: "Best overall",
-        why:
-          "The same navigation, nozzles, tank and cleaning modes as the flagship above it, with suction inside an overlapping tolerance band. What the extra money buys higher up the range is a battery station weighing more than three times the robot.",
-        wrongFor:
-          "The windows you actually want cleaned are the ones with no socket nearby, which is the single problem this machine cannot solve at any price.",
-      },
-      {
-        productSlug: "ecovacs-winbot-w2-pro-omni",
-        award: "Best where there is no socket",
-        why:
-          "The only machine in this catalogue that cleans a window nowhere near a plug, which is the whole product rather than a feature of it. Stairwell landings, conservatories, the window behind the sofa — the ones that stay dirty because the cable will not reach.",
-        wrongFor:
-          "Every window you own has a socket beneath it, in which case you are paying a large premium for a battery station you will never once use.",
-      },
-      {
-        productSlug: "hutt-s55-pro",
-        award: "Best for sloped and roof glass",
-        why:
-          "The only machine here that offers to work on slanted glass at all — conservatory roofs, skylights, gable windows. Nothing else in the catalogue claims the capability, so there is no like-for-like comparison to make.",
-        wrongFor:
-          "Your windows are ordinary and vertical, in which case you are paying for an unusual capability from the least-verified maker in this catalogue.",
-      },
-      {
-        productSlug: "hobot-2s",
-        award: "Best if refilling is the annoyance",
-        why:
-          "Two replaceable water tanks, which nothing else here offers, plus an ultrasonic atomiser in place of pumped nozzles. In a house with a lot of glass, the tank swap is the difference between one session and three.",
-        wrongFor:
-          "You want to compare it properly against a WINBOT, which you cannot — the suction and hold figures that would let you are not published.",
-      },
-      {
-        productSlug: "cop-rose-x5s",
-        award: "Best on a tight budget",
-        why:
-          "The cheapest machine we hold and the only one with no app at all. It uses a remote control instead, which for a buyer who does not want another account and another phone icon is the feature rather than the compromise.",
-        wrongFor:
-          "Your glass is frameless — it does not claim it, and that is not a matter of judgement or a specification worth arguing with.",
-      },
-      {
-        productSlug: "mamibot-w120-dp",
-        award: "Best alternative to ECOVACS",
-        why:
-          "Six of the eleven machines here are one brand, which is a real concern if you would rather not depend on a single maker's service operation. This is the mid-price alternative, with a proper four-nozzle spray spread.",
-        wrongFor:
-          "You are buying specifically for the high-rise rating, because the figure that would justify that wording is not published anywhere we could find.",
-      },
-    ],
-    comparisonSlugs: [
-      "ecovacs-winbot-w2-pro",
-      "ecovacs-winbot-w2-pro-omni",
-      "ecovacs-winbot-w1-pro",
-      "hutt-s55-pro",
-      "hobot-2s",
-      "hobot-298",
-      "cop-rose-x5s",
-      "mamibot-w120-dp",
-    ],
-    faq: [
-      {
-        q: "What is the best window cleaning robot?",
-        a:
-          "For most homes the WINBOT W2 PRO, because it carries the flagship's navigation, nozzles and modes without the battery station most people never need. If the windows you want cleaned have no socket near them, the W2 PRO Omni is the only machine that solves it. If your glass is frameless, check the maker claims it before anything else.",
-      },
-      {
-        q: "Are these machines any good, honestly?",
-        a:
-          "At the middle of a pane, yes. At the border, less so — the pattern holds across brands and price points, and the last centimetre against the frame is where a cloth still wins. Buy one to stop cleaning the whole window rather than to stop cleaning windows.",
-      },
-      {
-        q: "Which is the best robot window cleaner for high rise flats?",
-        a:
-          "Judge it on one number: how long the machine holds the glass after the power fails, stated in minutes with the battery capacity behind it. Several makers use the words and few publish the figure. Where it is absent, treat the claim as positioning — and use the safety rope on every window above the ground floor regardless of what any machine claims.",
-      },
-      {
-        q: "Do window cleaning robots work on frameless glass?",
-        a:
-          "Most of the ones here do and some do not. A robot that navigates by feeling for a frame will drive off the edge of a pane that has none, so where a maker does not claim frameless glass explicitly, that silence is the answer rather than an oversight.",
-      },
-      {
-        q: "Can they clean the outside of an upstairs window?",
-        a:
-          "Only if the window opens inwards far enough for you to place the machine on the outer face and attach the safety rope. These clean one side of the glass at a time. No machine we hold works on both sides at once, and no magnetic robot that would is currently sold in the US.",
-      },
-      {
-        q: "Where can I read the full window cleaning robot reviews?",
-        a:
-          "Every machine ranked here has its own review with the manufacturer's published figures, what we could not establish, and who should not buy it. The comparison table puts all eleven side by side on the specifications that differ.",
-      },
-    ],
-    lastReviewed: "2026-08-07",
-  },
+  /* "/best-robots/window-cleaning-robots/" WAS HERE UNTIL 12 AUGUST 2026.
+
+     It ranked nine of the eleven window machines and named two it would not
+     recommend, and it should never have been a separate URL: the window hub's
+     own keyword register row already recorded that "window cleaning robot" and
+     "best window cleaning robot" return six of the same top ten results, and
+     ruled that a best-of "would have competed with this one for the same
+     result set". This page was built five days later anyway.
+
+     Folded into /robots/window-cleaning-robots/ rather than deleted. The
+     recommendation now sits in that hub's price ladder, where a reader is
+     choosing by budget; the headline answer and the two non-recommendations
+     are its first FAQ; the one-side-at-a-time limit and the noise are in the
+     coverage rows and the verdict; and its hero illustration is the coverage
+     section's picture. The URL is an alias of the hub — see routes.ts.
+     ------------------------------------------------------------------ */
 
   /* ------------------------------------------------------------------
      BEST ROBOT LAWN MOWER, built 11 August 2026.

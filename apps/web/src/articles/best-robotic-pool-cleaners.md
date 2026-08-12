@@ -109,3 +109,9 @@ Nothing has been left out because of what it pays. If you want the reasoning for
 your own pool rather than in general, BotMatch asks eight questions about the
 pool itself and scores the catalogue against your answers — and it cannot see
 commission, by design.
+
+If you have not decided that you want one yet, start a level up:
+[our robotic pool cleaner category page](/robots/robotic-pool-cleaners/)
+explains what these machines actually clean, what corded and cordless change,
+what the money buys at each step and whether the whole idea is worth it. This
+page assumes you have been through that and want to know which one.

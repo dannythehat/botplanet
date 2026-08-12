@@ -22,6 +22,21 @@ import {
 } from "../src/content/routes";
 import { RETIRED_SLUGS, MERGED_REVIEWS } from "../src/content/product-names";
 import { COMPARE_PAGES, comparePageIsSubstantive } from "../src/content/compare-page";
+import { BAR_ITEMS, FOOTER_GROUPS } from "../src/content/nav-surfaces";
+import { heroFor } from "../src/content/category-hero";
+import { CATEGORY_ANCHORS, RETROFITTED_INBOUND } from "../src/content/internal-links";
+import { PAGE_PLAN } from "../src/content/seo/page-plan";
+import { KEYWORD_REGISTER } from "../src/content/seo/keyword-register";
+import {
+  decisionSectionFor,
+  coverageSectionFor,
+  splitSectionFor,
+  matrixSectionFor,
+  checkSectionFor,
+  priceSectionFor,
+  verdictSectionFor,
+  faqSectionFor,
+} from "../src/content/category-sections";
 
 describe("normalisePath — locked URL standards", () => {
   it("lowercases, collapses slashes and enforces one trailing slash", () => {
@@ -512,6 +527,172 @@ describe("no redirect points at another redirect", () => {
     ];
     for (const to of targets) {
       expect(isGone(to), `${to} is a redirect target AND gone`).toBe(false);
+    }
+  });
+});
+
+/**
+ * THE BEST-OF CONSOLIDATION, 12 August 2026.
+ *
+ * Nine categories are live and three best-of pages existed. Six were never
+ * built because each category's research measured its head term against its
+ * "best" term, found five or more shared results in the top ten, and ruled one
+ * page — which is the rule this site runs on. Window was measured at SIX and
+ * got a second page anyway, two days after its own keyword register row said
+ * not to. That page is now an alias of its hub.
+ *
+ * These assertions are the shape of the site after that, so nobody has to
+ * remember which of the two rulings applied to which category.
+ */
+describe("best-of consolidation", () => {
+  const WINDOW_BEST = "/best-robots/window-cleaning-robots/";
+  const WINDOW_HUB = "/robots/window-cleaning-robots/";
+  const SURVIVORS = ["/best-robots/robotic-pool-cleaners/", "/best-robots/robotic-lawn-mowers/"];
+
+  it("301s the window best-of to the window hub in one hop", () => {
+    const hop = resolveRedirect(WINDOW_BEST);
+    expect(hop?.to).toBe(WINDOW_HUB);
+    expect(hop?.status).toBe(301);
+    // And the destination is final — not itself a redirect, and not gone.
+    expect(resolveRedirect(WINDOW_HUB)).toBeNull();
+    expect(isGone(WINDOW_HUB)).toBe(false);
+  });
+
+  it("also catches the older /best/ shape of the same URL", () => {
+    expect(resolveRedirect("/best/window-cleaning-robots/")?.to).toBe(WINDOW_HUB);
+  });
+
+  it("keeps the window best-of out of the sitemap and out of the registry", () => {
+    expect(sitemapRoutes().map((r) => r.path)).not.toContain(WINDOW_BEST);
+    expect(ROUTES.some((r) => r.path === WINDOW_BEST)).toBe(false);
+    // The hub itself is still declared — folding the shortlist in must not
+    // take the page it folded into with it.
+    expect(sitemapRoutes().map((r) => r.path)).toContain(WINDOW_HUB);
+  });
+
+  it("leaves both surviving best-of pages live and declared", () => {
+    for (const path of SURVIVORS) {
+      const route = ROUTES.find((r) => r.path === path);
+      expect(route, `${path} lost its route record`).toBeDefined();
+      expect(route!.status).toBe("live");
+      expect(route!.indexable).toBe(true);
+      expect(sitemapRoutes().map((r) => r.path), `${path} left the sitemap`).toContain(path);
+      expect(resolveRedirect(path), `${path} redirects`).toBeNull();
+    }
+  });
+
+  it("names only the two survivors as built", () => {
+    expect([...builtBestOfCategories()].sort()).toEqual([
+      "robotic-lawn-mowers",
+      "robotic-pool-cleaners",
+    ]);
+  });
+
+  /**
+   * A section index is a promise that a section is behind it. Two pages is not
+   * a section, and six of the seven that would have filled it were refused on
+   * evidence rather than merely unbuilt. It stays in the footer, which is a
+   * link rather than a promise.
+   */
+  it("takes /best-robots/ out of the top bar but keeps it reachable", () => {
+    const best = ROUTES.find((r) => r.path === "/best-robots/")!;
+    expect(BAR_ITEMS.map((i) => i.href)).not.toContain("/best-robots/");
+    expect(BAR_ITEMS.some((i) => i.href.startsWith("/best-robots/"))).toBe(false);
+    expect(best.footerGroup).toBe("Explore");
+    expect(FOOTER_GROUPS.flatMap((g) => g.links).map((l) => l.href)).toContain("/best-robots/");
+  });
+
+  /**
+   * The prominent route to a ranking is now from inside the category the
+   * ranking is about, which is where a reader is already choosing. It was the
+   * top bar, which asked every reader on every page to care about a section
+   * that answers two categories.
+   */
+  it("links each surviving best-of from its own hub, above the fold", () => {
+    for (const slug of builtBestOfCategories()) {
+      const hero = heroFor(slug)!;
+      const ctas = [hero.primaryCta?.href, hero.secondaryCta?.href];
+      expect(ctas, `the ${slug} hub does not link its best-of from the hero`).toContain(
+        categoryRoutes(slug).best,
+      );
+    }
+  });
+
+  /**
+   * And back the other way. A best-of hangs off its hub so the breadcrumb IS
+   * the link home; the pool page hung off /best-robots/ until this change and
+   * offered the reader no way into the category it ranks.
+   */
+  it("parents each surviving best-of to its hub, so the breadcrumb leads back", () => {
+    for (const slug of builtBestOfCategories()) {
+      const route = ROUTES.find((r) => r.path === categoryRoutes(slug).best)!;
+      expect(route.parent, `${route.path} does not hang off its hub`).toBe(`/robots/${slug}/`);
+      expect(breadcrumbsFor(route.path).map((c) => c.path)).toContain(`/robots/${slug}/`);
+    }
+  });
+
+  /**
+   * The point of the whole exercise. The hub took the shortlist's terms, so it
+   * has to say the words — and no internal link may still point at the URL
+   * that folded.
+   */
+  it("moves the shortlist's commercial terms onto the hub copy", () => {
+    const slug = "window-cleaning-robots";
+    const copy = JSON.stringify([
+      heroFor(slug),
+      decisionSectionFor(slug),
+      coverageSectionFor(slug),
+      splitSectionFor(slug),
+      matrixSectionFor(slug),
+      checkSectionFor(slug),
+      priceSectionFor(slug),
+      verdictSectionFor(slug),
+      faqSectionFor(slug),
+    ]).toLowerCase();
+
+    for (const term of [
+      "best window cleaning robot",
+      "best robot window cleaner",
+      "window cleaning robot reviews",
+      "high rise",
+    ]) {
+      expect(copy.includes(term), `the window hub no longer says "${term}"`).toBe(true);
+    }
+
+    /* The named recommendations came with the terms. Awards without the
+       machines behind them would be the folded page's shape and none of its
+       substance. */
+    for (const machine of ["winbot w2 pro", "hobot 2s", "cop rose x5s", "mamibot w120-dp", "hutt s55 pro"]) {
+      expect(copy.includes(machine), `the window hub no longer names the ${machine}`).toBe(true);
+    }
+  });
+
+  /**
+   * An internal link into a 301 spends a crawl to be told to go somewhere
+   * else, and it is exactly what happens when a page is folded and its
+   * inbound links are not. The registry's own alias entry is the one legitimate
+   * mention of this URL anywhere in the codebase.
+   */
+  it("leaves nothing pointing at the folded URL but the alias itself", () => {
+    const anchors = [
+      ...Object.values(CATEGORY_ANCHORS).flat().map((a) => a.href),
+      ...RETROFITTED_INBOUND.flatMap((r) => (r as { links?: { href: string }[] }).links?.map((l) => l.href) ?? []),
+    ];
+    for (const href of anchors) {
+      expect(href.split("#")[0], "an internal anchor still points at the folded best-of").not.toBe(
+        WINDOW_BEST,
+      );
+    }
+
+    for (const p of PAGE_PLAN) {
+      expect(p.path).not.toBe(WINDOW_BEST);
+      expect(p.linksOut, `${p.path} links out to the folded best-of`).not.toContain(WINDOW_BEST);
+      for (const c of p.ceded) expect(c.toPath, `${p.path} cedes to the folded best-of`).not.toBe(WINDOW_BEST);
+    }
+
+    for (const k of KEYWORD_REGISTER) {
+      expect(k.path).not.toBe(WINDOW_BEST);
+      for (const c of k.cededTo ?? []) expect(c.path, `${k.path} cedes to the folded best-of`).not.toBe(WINDOW_BEST);
     }
   });
 });

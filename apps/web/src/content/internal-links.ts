@@ -691,14 +691,15 @@ export const CATEGORY_ANCHORS: Record<string, InternalAnchor[]> = {
       status: "live",
     },
     {
-      /* ADDED 7 August 2026 with the "do they work" guide, which named the
-         shortlist in its own words and had nowhere to send the reader — the
-         window anchor set predates the best-of page by two days. This is the
-         commercial destination in a category whose reviews now earn, so it is
-         the most valuable link in the list. */
+      /* ADDED 7 August 2026 pointing at /best-robots/window-cleaning-robots/,
+         REPOINTED 12 August when that page folded into the hub. The phrase the
+         guides use has not changed and neither has the reader's need — only
+         the URL that answers it. Deep-linked to the price ladder, which is
+         where the ranking now lives, so the reader lands on the recommendation
+         rather than at the top of a long hub. */
       anchor: "ranked shortlist",
-      href: "/best-robots/window-cleaning-robots/",
-      why: "The best-of is the page that turns a reader who has decided to buy into a reader choosing which one. Any window page reaching that moment should be one click from it.",
+      href: "/robots/window-cleaning-robots/#cost",
+      why: "The moment a reader stops asking whether to buy and starts asking which one. The hub carries the ranking on measured evidence — 6 of 10 shared results with the head term — so this is the commercial destination for the category.",
       status: "live",
     },
     {
@@ -828,10 +829,10 @@ export const CATEGORY_ANCHORS: Record<string, InternalAnchor[]> = {
     },
     {
       /* Below "ranked shortlist" on purpose, so the fuller phrase takes a
-         mention before the bare one does. */
+         mention before the bare one does. Repointed with it on 12 August. */
       anchor: "shortlist",
-      href: "/best-robots/window-cleaning-robots/",
-      why: "The commercial page for the category had two inbound links and none from a review. A reader at the end of one machine's page wanting the ranked list is the most obvious journey on the site and it was not linked.",
+      href: "/robots/window-cleaning-robots/#cost",
+      why: "A reader at the end of one machine's review wanting the ranked list is the most obvious journey in this category. It now lands on the hub's price ladder, which is where the ranking lives.",
       status: "live",
     },
   ],

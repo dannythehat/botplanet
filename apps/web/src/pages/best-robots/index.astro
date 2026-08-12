@@ -1,12 +1,21 @@
 ---
 /**
- * Best-of index. Lists only categories whose best-of work exists or is named.
+ * Best-of index. Lists ONLY the best-of pages that exist.
  *
  * A CARD IS A LINK ONLY WHERE THE PAGE EXISTS. It used to link wherever the
  * CATEGORY was live, which is a different fact: nine categories are live and
  * two best-of pages are written, so seven cards on this page pointed straight
  * at a 404. Found 8 August 2026 by crawling every internal link on the site —
  * they were the only broken links on it.
+ *
+ * AND THE "COMING SOON" CARDS ARE GONE TOO, 12 August 2026. They were the
+ * honest fix for a broken link and the wrong answer to the real question. Six
+ * of the seven were never coming: each category's research measured its head
+ * term against its "best" term, found five or more shared results in the top
+ * ten, and ruled that the hub carries the ranking — window's was measured at
+ * six and was the one category that got a second page anyway, which is why it
+ * folded back into its hub on the same day this changed. A card promising a
+ * page that was refused on evidence is a promise nobody intends to keep.
  *
  * The registry is the authority, because a best-of page gets a route record the
  * moment it is built and /best-robots/[slug].astro deliberately 404s every
@@ -16,9 +25,9 @@ import Base from "../../layouts/Base.astro";
 import { CATEGORIES, builtBestOfCategories, categoryRoutes } from "../../content/routes";
 import { breadcrumbsFor } from "../../lib/routing";
 
-const cats = CATEGORIES.filter((c) => c.launch !== "hidden").sort((a, b) => a.order - b.order);
 const crumbs = breadcrumbsFor("/best-robots/");
 const built = builtBestOfCategories();
+const cats = CATEGORIES.filter((c) => built.has(c.slug)).sort((a, b) => a.order - b.order);
 ---
 <Base
   title="Best robots — our picks by use case"
@@ -30,32 +39,29 @@ const built = builtBestOfCategories();
     <span class="eyebrow">Best robots</span>
     <h1 class="mt-0">The best robots, by use case</h1>
     <p>
-      Every pick states the reasoning, the evidence level behind it, and who should avoid it. Best-of pages publish as
-      each category's product data is verified.
+      Every pick states the reasoning, the evidence level behind it, and who should avoid it.
+      Only two categories have a ranking of their own: in every other one the same search returns
+      the same results as the category page, so the ranking lives on that page instead of
+      competing with it.
     </p>
   </div>
 
   <div class="grid grid--2">
-    {cats.map((c) =>
-      built.has(c.slug) ? (
-        <a class="card card--interactive" href={categoryRoutes(c.slug).best}>
-          <span class="pill pill--strong">Published</span>
-          <h2 class="b-title">Best {c.name.toLowerCase()}</h2>
-          <p>{c.short}</p>
-        </a>
-      ) : (
-        /* Not a link: the destination does not exist yet, and a nav item must
-           never point at a page that is not there. */
-        <div class="card is-soon">
-          <span class="pill pill--warn">Coming soon</span>
-          <h2 class="b-title">Best {c.name.toLowerCase()}</h2>
-          <p>{c.short}</p>
-        </div>
-      )
-    )}
+    {cats.map((c) => (
+      <a class="card card--interactive" href={categoryRoutes(c.slug).best}>
+        <span class="pill pill--strong">Published</span>
+        <h2 class="b-title">Best {c.name.toLowerCase()}</h2>
+        <p>{c.short}</p>
+      </a>
+    ))}
   </div>
+
+  <p class="b-note">
+    Looking for a category that is not here? Its ranking is on the category page —
+    <a href="/robots/">browse every robot we hold</a>.
+  </p>
 </Base>
 <style>
   .b-title { font-size: var(--type-card); margin: 0; }
-  .card.is-soon { opacity: 0.72; }
+  .b-note { margin-top: clamp(1.5rem, 3vw, 2.25rem); color: var(--cs-ink-soft); }
 </style>

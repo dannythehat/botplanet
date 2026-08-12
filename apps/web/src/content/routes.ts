@@ -112,7 +112,19 @@ export const ROUTES: RouteDef[] = [
     section: "best",
     parent: "/",
     status: "live",
-    navSurface: "bar-secondary",
+    /* OUT OF THE TOP BAR, 12 AUGUST 2026. A nav slot is a promise that there
+       is a section behind it, and there is not: two best-of pages exist and
+       six of the categories that would fill this index were REFUSED by their
+       own research, because their head term and their "best" term return the
+       same results page. This index will never hold nine cards, and a bar item
+       that opens onto two was buying a top-level slot with a category count
+       that is not coming.
+
+       Still in the footer, and deliberately. It is a real page with two real
+       destinations, and a page reachable from nowhere is an orphan in the
+       sitemap. The prominent route to a best-of is now from inside its own
+       category hub, where a reader is already choosing. */
+    navSurface: "none",
     footerGroup: "Explore",
     inSitemap: true,
     indexable: true,
@@ -635,6 +647,23 @@ export const ROUTES: RouteDef[] = [
     inSitemap: true,
     indexable: true,
     category: "window-cleaning-robots",
+    /* THE SHORTLIST FOLDED INTO THIS PAGE, 12 August 2026.
+       /best-robots/window-cleaning-robots/ was built on 7 August against this
+       page's own research, which had already ruled the opposite way: the
+       keyword register row for this hub records that "window cleaning robot"
+       and "best window cleaning robot" share SIX of the top ten results and
+       that a separate best-of "would have competed with this one for the same
+       result set". It was built anyway, and for five days two of our URLs
+       chased one SERP.
+
+       An alias rather than a legacy redirect because it is neither — it is a
+       page of ours that became a section of another page of ours, which is
+       exactly what an alias is for: one permanent hop, no chain, and the
+       destination proven canonical by the same test that proves every other
+       alias. The content came with it; see PRICE_SECTION and FAQ_SECTION in
+       content/category-sections.ts, and the register row for the terms this
+       page now carries. */
+    aliases: ["/best-robots/window-cleaning-robots/", "/best/window-cleaning-robots/"],
   },
   {
     path: "/compare/window-cleaning-robots/",
@@ -706,7 +735,13 @@ export const ROUTES: RouteDef[] = [
     label: "Best robotic pool cleaners",
     breadcrumbLabel: "Robotic Pool Cleaners",
     section: "best",
-    parent: "/best-robots/",
+    /* REPARENTED FROM /best-robots/ TO THE CATEGORY HUB, 12 August 2026.
+       The lawn best-of has always hung off its hub and this one hung off the
+       index, so the two identical page types produced two different crumb
+       trails — and this one gave the reader no way back to the category it
+       ranks. A breadcrumb is the link back from a best-of to its hub; making
+       both point the same way is what makes that true everywhere. */
+    parent: `/robots/${CAT}/`,
     status: "live",
     navSurface: "none",
     footerGroup: null,
@@ -956,20 +991,12 @@ export const ROUTES: RouteDef[] = [
     summary: "Six mowers ranked on the two numbers that rule machines out: area and slope.",
   },
 
-  {
-    path: "/best-robots/window-cleaning-robots/",
-    label: "Best window cleaning robots",
-    breadcrumbLabel: "Window Cleaning Robots",
-    section: "best",
-    parent: "/robots/window-cleaning-robots/",
-    status: "live",
-    navSurface: "none",
-    footerGroup: null,
-    inSitemap: true,
-    indexable: true,
-    category: "window-cleaning-robots",
-    summary: "Nine ranked by the job each does best, and the two we hold and do not recommend.",
-  },
+  /* /best-robots/window-cleaning-robots/ WAS HERE UNTIL 12 AUGUST 2026 and is
+     now an alias of /robots/window-cleaning-robots/. Removed from the registry
+     rather than flagged out of the sitemap, because a route record is what
+     makes a URL a page: leaving one behind would keep the breadcrumb, the
+     best-of index card and builtBestOfCategories() all pointing at something
+     that answers 301. The reason it folded is on the hub's record above. */
 
   {
     /* Page 9 of the window map and the last of it. Parented to /guides/ like

@@ -432,8 +432,15 @@ export const CATEGORY_HERO: Record<string, CategoryHeroContent> = {
        ask a lawn buyer how long their pool is. Sending readers there would be
        advertising a tool that does not exist. The second CTA goes to the
        decision this category actually turns on instead. Swap it back to
-       BotMatch when the lawn question set lands. */
-    secondaryCta: { label: "Wire or wire-free?", href: "#navigation" },
+       BotMatch when the lawn question set lands.
+
+       IT POINTED AT #navigation UNTIL 12 AUGUST 2026, which the jump-links bar
+       three lines below the hero already offered by name. Two controls to the
+       same anchor is one control wasted, and this category has a ranked
+       shortlist of its own that nothing above the fold reached — lawn is one of
+       only two categories where the SERP evidence supports a separate best-of
+       (2 of 10 shared domains), so the page exists and deserves the slot. */
+    secondaryCta: { label: "See the ranked shortlist", href: "/best-robots/robotic-lawn-mowers/" },
     /* No hero artwork yet. The interface allows it and the hero renders
        text-only rather than blocking the page — the category was built before
        its images on the owner's instruction of 6 August 2026 ("we will do
@@ -509,7 +516,14 @@ export const CATEGORY_HERO: Record<string, CategoryHeroContent> = {
       "Compare robotic pool cleaners by pool type, floor, wall and waterline coverage, corded " +
       "or cordless power and filtration. Find the right pool robot.",
     primaryCta: { label: "Compare pool robots", href: "#products" },
-    secondaryCta: { label: "Try Pool BotMatch", href: "/botmatch/robotic-pool-cleaners/" },
+    /* BOTMATCH LOST THIS SLOT ON 12 AUGUST 2026 and lost nothing by it: this
+       page already carries the composed Bot Finder card in the middle of the
+       template, so the matcher had two entry points and the ranked best-of had
+       none above the fold. Pool is one of only two categories whose research
+       supports a separate best-of page at all, and it also owns the 22,200/mo
+       cordless child beneath it — the largest single wedge in the pool data.
+       Nothing above the fold reached either. */
+    secondaryCta: { label: "See the ranked shortlist", href: "/best-robots/robotic-pool-cleaners/" },
 
     /* Owner-created BotPlanet artwork. Carries approved in-image BotPlanet
        branding, which is deliberate editorial media — do not crop it out or

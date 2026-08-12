@@ -109,6 +109,57 @@ describe("cannibalisation is prevented, not remembered", () => {
     expect(broken).toEqual([]);
   });
 
+  /**
+   * THE GAP THAT LET /best-robots/window-cleaning-robots/ EXIST FOR FIVE DAYS.
+   *
+   * The assertion above compares primary against primary, so two pages fighting
+   * for one term pass it as long as only one of them CALLS it their primary.
+   * The window hub declared "best window cleaning robot" in its secondary list
+   * on 5 August, with a research note saying the two terms share six of the top
+   * ten results and a second page would compete with it. A best-of page was
+   * built on 7 August with that exact term as its primary. Nothing failed.
+   *
+   * Declaring a term at all is a claim on it. Taking it as your primary when
+   * another page has already declared it is the cannibalisation this whole
+   * registry exists to prevent.
+   */
+  it("never lets one page take another's declared term as its primary", () => {
+    /**
+     * ONE UNRESOLVED CLASH, LISTED RATHER THAN PATTERN-MATCHED so a second one
+     * cannot join it quietly, and it is a MEASUREMENT the owner has to
+     * commission rather than a tidy-up.
+     *
+     * /guides/robotic-pets-for-elderly/ declares "joy for all companion pets"
+     * at 1,900/mo; the Joy For All review declares the same term as its PRIMARY
+     * at 880. Two research runs measured one phrase and disagreed by a factor
+     * of two, and the guide's own comment says the review was "CANCELLED rather
+     * than deferred" — after which the review was built anyway, because the
+     * product was already live in D1 with a working buy button.
+     *
+     * Which page should own it needs a SERP overlap reading between the two,
+     * the same measurement that decided window (6 of 10, one page) and lawn
+     * (2 of 10, two pages). Guessing it here would be the mistake this test was
+     * written to catch, wearing a different hat.
+     */
+    const AWAITING_A_SERP_READING = new Set(["joy for all companion pets"]);
+
+    const clashes: string[] = [];
+    for (const p of PAGE_PLAN) {
+      const term = p.primary.term.toLowerCase();
+      if (AWAITING_A_SERP_READING.has(term)) continue;
+      for (const other of PAGE_PLAN) {
+        if (other.path === p.path) continue;
+        // Ceding it is the sanctioned way to hand a term over, and a page that
+        // has ceded a term is not competing for it.
+        if (other.ceded.some((c) => c.term.toLowerCase() === term)) continue;
+        if (other.secondary.some((s) => s.term.toLowerCase() === term)) {
+          clashes.push(`${p.path} takes "${term}" as its primary, but ${other.path} also targets it`);
+        }
+      }
+    }
+    expect(clashes).toEqual([]);
+  });
+
   it("never cedes a term to itself", () => {
     for (const p of PAGE_PLAN) {
       for (const c of p.ceded) expect(c.toPath, `${p.path} cedes to itself`).not.toBe(p.path);

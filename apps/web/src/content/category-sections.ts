@@ -1154,6 +1154,18 @@ export const COVERAGE_SECTION: Record<string, CoverageSectionContent> = {
       "operation, and wind, rain and a wet frame all change the odds. Sloped glass is a third " +
       "claim again, and only one machine we list makes it. Check which of the three you " +
       "actually need before you compare anything else.",
+    /* THE SHORTLIST'S HERO, KEPT PUBLISHED. This picture was drawn for
+       /best-robots/window-cleaning-robots/, which folded into this page on
+       12 August 2026. The section it belongs to is this one — a machine
+       part-way down a tall exterior pane with its tether running out of frame
+       is the exterior row, drawn. Leaving it attached to a redirected URL
+       would have quietly unpublished it. */
+    image: {
+      src: "/media/editorial/best-window-robots.webp",
+      alt:
+        "A window cleaning robot part-way down a tall pane with its safety tether running up " +
+        "out of frame, a city skyline and river beyond.",
+    },
     rows: [
       {
         title: "Interior glass",
@@ -1168,10 +1180,14 @@ export const COVERAGE_SECTION: Record<string, CoverageSectionContent> = {
         title: "Exterior glass",
         whoFor: "Upper floors, high-rise, anything above a ladder",
         body:
-          "The reason to buy one. Every machine we list can work exterior glass, but the tether " +
-          "and its anchor stop being a specification and become the whole safety case. Read the " +
-          "power-cut behaviour before the suction number: these hold for about 30 minutes on a " +
-          "full charge, which is what gets the machine back to you rather than onto the drive.",
+          "The reason to buy one, with one catch nobody advertises: these clean one side of the " +
+          "glass at a time, so an upstairs exterior pane is only reachable if the window opens " +
+          "inwards far enough for you to place the machine on the outer face and attach the " +
+          "rope. No machine we hold does both sides at once. Beyond that the tether and its " +
+          "anchor stop being a specification and become the whole safety case, and the " +
+          "power-cut behaviour matters more than the suction number: these hold for about 30 " +
+          "minutes on a full charge, which is what gets the machine back to you rather than " +
+          "onto the drive.",
       },
       {
         title: "Sloped and skylight glass",
@@ -2544,8 +2560,10 @@ export const CHECK_SECTION: Record<string, CheckSectionContent> = {
         body:
           "The internal battery is a safety system, not a runtime. The machines here state " +
           "around 30 minutes of hold on a full charge, which is the window you have to get it " +
-          "down. A model that does not state this figure has not answered the question.",
-        ask: "How long does it stay on the glass with the power off?",
+          "down. It should be stated in minutes with the battery capacity behind it. Several " +
+          "makers write \"high rise\" on the box and never publish that figure — where it is " +
+          "absent, treat the words as positioning rather than a specification.",
+        ask: "How long does it stay on the glass with the power off, and what battery is behind that?",
       },
       {
         title: "The tether and where it anchors",
@@ -2995,27 +3013,43 @@ export const PRICE_SECTION: Record<string, PriceSectionContent> = {
       "claims a stronger grip than the $499 one. What you actually pay for is nozzles, " +
       "cleaning modes, navigation and whether a station comes with it. Prices move week to " +
       "week, so what follows is what each step up buys rather than a number.",
+    /* THE RUNGS NAME MACHINES SINCE 12 AUGUST 2026. They described what each
+       step up buys and named nothing, which is the right shape for a ladder and
+       the wrong shape for the only place on this page a reader is choosing by
+       budget. The names come from the folded shortlist, which is where the
+       recommendation used to live. */
     rungs: [
       {
         label: "Entry",
         what:
           "Around $150 to $200. Mains powered, three cleaning modes, fewer nozzles, simpler " +
           "path planning. Genuinely enough for interior glass and ordinary framed windows — " +
-          "and grip is not the compromise here.",
+          "and grip is not the compromise here. The Cop Rose X5S is the cheapest we hold and " +
+          "the only one with no app at all, a remote control instead, which for a buyer who " +
+          "does not want another account is the feature rather than the compromise. It does " +
+          "not claim frameless glass, and that rules it out for a lot of modern windows.",
       },
       {
         label: "Mid",
         what:
           "Roughly $230 to $380. More nozzles, more modes, better edge handling and the " +
           "navigation generation that plans a proper path rather than a pattern. This is where " +
-          "most people should be looking.",
+          "most people should be looking, and the WINBOT W2 PRO is the machine to look at: the " +
+          "same navigation, nozzles, tank and modes as the flagship above it. Two alternatives " +
+          "sit here for particular jobs — the HOBOT 2S if refilling is the part you resent, " +
+          "because it takes two replaceable tanks and nothing else here does, and the Mamibot " +
+          "W120-DP if you would rather not depend on one maker, since six of the eleven " +
+          "machines we hold are ECOVACS.",
       },
       {
         label: "Premium",
         what:
           "About $500 to $550. A station — either portable, so the robot works away from a " +
           "socket, or self-cleaning. The top of the range also brings the strongest suction and " +
-          "the most modes, but the station is what the price is really for.",
+          "the most modes, but the station is what the price is really for. The WINBOT W2 PRO " +
+          "Omni is the one worth the jump, and only for the windows with no socket near them: " +
+          "stairwell landings, conservatories, the window behind the sofa. If every window you " +
+          "own has a plug beneath it, this is a premium for a station you will never use.",
       },
     ],
     note:
@@ -3313,7 +3347,9 @@ export const VERDICT_SECTION: Record<string, VerdictSectionContent> = {
     title: "Are window cleaning robots worth it?",
     intro:
       "The question this category attracts most, and the honest answer depends entirely on " +
-      "which windows you mean.",
+      "which windows you mean. The best robot window cleaner for glass you cannot safely " +
+      "reach is a different machine from the one that suits a patio door, and the money only " +
+      "makes sense for one of the two.",
     verdict:
       "For glass you cannot safely reach, yes — clearly. For windows you can reach with a " +
       "cloth, no.",
@@ -3327,10 +3363,11 @@ export const VERDICT_SECTION: Record<string, VerdictSectionContent> = {
       "inside a year on most houses. Judged against a cloth, it never does.",
     against:
       "The case against is real and worth stating: streaking on a first pass is common, " +
-      "corners are where every one of them is weakest, pads and solution run out mid-job, and " +
-      "on a frameless pane you are trusting an edge sensor with a machine hanging above your " +
-      "drive. None of that is a reason not to buy one. All of it is a reason to buy the right " +
-      "one and tie the tether on properly.",
+      "corners are where every one of them is weakest, pads and solution run out mid-job, " +
+      "they are loud enough that you will leave the room, and on a frameless pane you are " +
+      "trusting an edge sensor with a machine hanging above your drive. None of that is a " +
+      "reason not to buy one. All of it is a reason to buy the right one and tie the tether " +
+      "on properly.",
   },
   "robotic-pool-cleaners": {
     id: "worth-it",
@@ -3890,8 +3927,30 @@ export const FAQ_SECTION: Record<string, FaqSectionContent> = {
     title: "Window cleaning robot FAQs",
     intro:
       "The questions people actually ask before buying, answered plainly. Anything needing a " +
-      "longer answer gets its own guide rather than a paragraph here.",
+      "longer answer gets its own guide rather than a paragraph here, and our full window " +
+      "cleaning robot reviews sit one level beneath this page — one per machine, with the " +
+      "maker's published figures and what we could not establish.",
     items: [
+      /* FIRST, AND IT IS THE QUESTION THE CATEGORY IS ACTUALLY SEARCHED WITH.
+         "best window cleaning robot" is 1,300/mo at KD 3 and this page has
+         always been the page that carries it — the register row above has said
+         so since 5 August 2026, because the two terms share six of the top ten
+         results. A second URL was built for it anyway on 7 August and folded
+         back in here on 12 August. This answer is what came back with it. */
+      {
+        q: "What is the best window cleaning robot?",
+        a:
+          "For most homes the ECOVACS WINBOT W2 PRO, and it is not the flagship: it carries the " +
+          "same navigation, nozzles, tank and cleaning modes as the machine above it, and what " +
+          "the extra money buys higher up the range is a battery station weighing more than " +
+          "three times the robot. If the windows you actually want cleaned have no socket near " +
+          "them, the W2 PRO Omni is the only machine here that solves it. For sloped or roof " +
+          "glass it is the HUTT S55 Pro, the only one that claims the capability at all. If " +
+          "your glass is frameless, check the maker claims it before anything else — that " +
+          "rules machines out before any preference does. Two we hold and do not recommend: " +
+          "the WINBOT W1 PRO, overtaken inside its own range by the cheaper Mini, and the " +
+          "HOBOT 298, whose maker publishes almost nothing measurable about it.",
+      },
       {
         q: "Can a window cleaning robot fall off?",
         a:
@@ -3921,9 +3980,19 @@ export const FAQ_SECTION: Record<string, FaqSectionContent> = {
       {
         q: "Can they clean the outside of upper-floor windows?",
         a:
-          "Yes, and that is the case for owning one. The robot works the outside pane while you " +
-          "stay inside, which is the whole proposition. Tether it, check the anchor, and read " +
-          "the power-cut hold before you let it out of the window.",
+          "Only if the window opens inwards far enough for you to place the machine on the " +
+          "outer face and attach the safety rope — these clean one side of the glass at a " +
+          "time, and no machine we hold works on both sides at once. Where the window does " +
+          "open, this is the case for owning one: the robot works the outside pane while you " +
+          "stay inside. Tether it, check the anchor, and read the power-cut hold before you " +
+          "let it out of the window.",
+      },
+      {
+        q: "Are they loud?",
+        a:
+          "Closer to a vacuum cleaner than to an appliance you can ignore in the next room. It " +
+          "is a suction pump holding a machine against glass, and there is no quiet way to do " +
+          "that. Plan to be out of the room rather than working beside it.",
       },
       {
         q: "How much does a window cleaning robot cost?",

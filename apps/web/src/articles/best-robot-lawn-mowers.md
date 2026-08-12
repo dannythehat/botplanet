@@ -125,3 +125,9 @@ your area, your slope and your boundary, then scores the whole catalogue
 against the answers — and it cannot see what anything pays us. You can also
 compare every mower we hold side by side, and our review methodology sets out
 what we check before anything gets recommended.
+
+And if the ranking is ahead of where you are, go back a level:
+[our robot lawn mower category page](/robots/robotic-lawn-mowers/) covers how
+these machines handle yard size, slope, boundaries and tree cover, and what the
+price steps actually buy. This page starts from the assumption that you have
+settled all of that and want the shortlist.

@@ -420,6 +420,12 @@ const HUB_SEEDS: HubSeed[] = [
       { term: "robot window cleaner", volume: 12100, difficulty: 5 },
       { term: "best window cleaning robot", volume: 1300, difficulty: 3 },
       { term: "frameless", volume: 0, difficulty: 0 },
+      /* Folded in from the retired best-of plan, 12 August 2026. They were
+         always this page's on the measurement above; they spent five days on a
+         second URL. */
+      { term: "best robot window cleaner", volume: 1300, difficulty: 3 },
+      { term: "window cleaning robot reviews", volume: 1000, difficulty: 7 },
+      { term: "high rise", volume: 0, difficulty: 0 },
     ],
     ceded: [],
     refused: [
@@ -787,13 +793,13 @@ const WINDOW_WORKS_GUIDE: PagePlan = {
   ],
   ceded: [
     { term: "window cleaning robot", toPath: "/robots/window-cleaning-robots/", why: "The 12,100 head term is the hub's. This guide answers the scepticism question and hands the reader on rather than re-explaining the category." },
-    { term: "best window cleaning robot", toPath: "/best-robots/window-cleaning-robots/", why: "A guide that ranks machines is a best-of wearing a hat, and it would compete with the page built for that query. This one answers whether to buy at all." },
+    { term: "best window cleaning robot", toPath: "/robots/window-cleaning-robots/", why: "A guide that ranks machines is a best-of wearing a hat. The ranking sits on the hub, which shares 6 of the top 10 results with that term; this page answers whether to buy at all." },
   ],
   products: [],
   productsNote: "No picks by design. The eleven machines are ranked on the best-of; naming a winner here would split one argument across two URLs competing for one result.",
   linksOut: [
     "/robots/window-cleaning-robots/",
-    "/best-robots/window-cleaning-robots/",
+    "/compare/window-cleaning-robots/",
     "/botmatch/window-cleaning-robots/",
     "/review-methodology/",
   ],
@@ -887,52 +893,19 @@ const SNOW_YARBO: PagePlan = {
   evidence: "Built 11 August 2026 after four review rounds, $0.2527 of research. The generic terms all measure 6-8/10 shared domains against the brand terms, so they are one SERP and one URL rather than a page each. Nominal generic volume is 22,700 and that is a CEILING — true unique demand is lower by an unmeasured amount, because the SERPs overlap. Traffic valued at 40-60% of nominal as a PLANNING ASSUMPTION, UNMEASURED. Seasonality is 103x on the primary between July and January, which is why the deadline is 15 September rather than whenever it is ready.",
 };
 
-const WINDOW_BEST: PagePlan = {
-  path: "/best-robots/window-cleaning-robots/",
-  category: "window-cleaning-robots",
-  type: "best-of",
-  status: "built",
-  intent: "Tell me which window robot to buy, and which one is wrong for my glass.",
-  primary: { term: "best window cleaning robot", volume: 1300, difficulty: 3 },
-  secondary: [
-    { term: "best robot window cleaner", volume: 1300, difficulty: 3 },
-    { term: "window cleaning robot reviews", volume: 1000, difficulty: 7 },
-    { term: "best window cleaning robot 2026", volume: 210, difficulty: 0 },
-    { term: "frameless", volume: 0, difficulty: 0 },
-    { term: "high rise", volume: 0, difficulty: 0 },
-  ],
-  ceded: [
-    { term: "window cleaning robot", toPath: "/robots/window-cleaning-robots/", why: "The 12,100 head term is the hub's. This page takes the commercial half of the category and leaves the explanation of how the machines work where it already sits." },
-  ],
-  refused: [
-    { term: "best budget window cleaning robot", volume: 0, why: "SERP identical to the general best-of. A second page would cannibalise this one for a segment that is a paragraph, not a market." },
-    { term: "best cordless window cleaning robot", volume: 0, why: "Nearly every machine here runs a cable for power and a battery for the fall. Cordless is not a segment in this category, so the term describes nothing to rank for." },
-    { term: "best window cleaning robot for high rise", volume: 0, why: "Same SERP as the general best-of, so it is a SECTION here. It is also the claim most makers write and fewest support with a number." },
-    { term: "best window cleaning robot for frameless glass", volume: 0, why: "Same SERP again, and the honest exclusion most models fail. Carried as a section because a reader with frameless glass needs it before anything else on the page." },
-  ],
-  products: [
-    "ecovacs-winbot-w2-pro",
-    "ecovacs-winbot-w2-pro-omni",
-    "ecovacs-winbot-w3-omni",
-    "ecovacs-winbot-w2s",
-    "ecovacs-winbot-mini",
-    "hutt-s55-pro",
-    "hobot-2s",
-    "cop-rose-x5s",
-    "mamibot-w120-dp",
-  ],
-  productsNote: "Nine ranked out of eleven held. The WINBOT W1 PRO and the HOBOT-298 are named on the page and deliberately given no award — both are beaten on price and on published evidence by machines already on the list, and an award invented so every product has one is an advert.",
-  linksOut: [
-    "/robots/window-cleaning-robots/",
-    "/compare/window-cleaning-robots/",
-    "/botmatch/window-cleaning-robots/",
-    "/review-methodology/",
-  ],
-  images: [{ slot: "hero", shows: "A window robot mid-pane on a large clean window, tether visible", supplied: false }],
-  schema: ["Article", "ItemList", "FAQPage", "BreadcrumbList"],
-  research: "30981257806 · 2026-08-05 · $0.2044",
-  evidence: "1,300/mo at KD 0-3 with a $3.20 CPC, and the one CREATE ruling from the window run that was never acted on. Eleven reviews already sit under it with working Amazon buy buttons, so it is the shortest path from a commercial query to a click that earns.",
-};
+/* WINDOW_BEST WAS HERE UNTIL 12 AUGUST 2026 — the plan for
+   /best-robots/window-cleaning-robots/, which is now an alias of the hub.
+
+   IT CONTRADICTED THE HUB SEED ABOVE FROM THE DAY IT WAS WRITTEN. Read
+   HUB_SEEDS["window-cleaning-robots"]: "best window cleaning robot" is in its
+   secondary list and its evidence line says outright "THE HUB CARRIES THE
+   BEST-OF JOB ITSELF: 6 of the top 10 are identical between the head term and
+   'best window cleaning robot'". WINDOW_BEST then claimed the same term as its
+   PRIMARY. Nothing caught it because the cannibalisation test compares primary
+   against primary, so a page taking another page's secondary as its own
+   primary passed silently. That gap is now its own test — see
+   page-plan.test.ts, "never lets one page take another's declared term as its
+   primary". */
 
 const WINDOW_BOTMATCH: PagePlan = {
   path: "/botmatch/window-cleaning-robots/",
@@ -1248,13 +1221,17 @@ const COMPANION_REVIEWS: PagePlan[] = [
       { term: "eilik desktop robot", volume: 50, difficulty: 29 },
       { term: "eilik price", volume: 30, difficulty: 0 },
       { term: "eilik robot for sale", volume: 30, difficulty: 26 },
-      { term: "eilik vs emo", volume: 20, difficulty: 0 },
       { term: "is eilik worth it", volume: 10, difficulty: 0 },
       { term: "two eilik robots", volume: 10, difficulty: 0 },
       { term: "eilik battery life", volume: 10, difficulty: 0 },
     ],
     ceded: [
       { term: "emo robot", toPath: "/robots/companion-robots/living-ai-emo/", why: "Google's own PAA on this SERP asks 'Which is better, Eilik or Emo?', so the comparison has to be answered here — but the 18,100/mo term belongs to the EMO page, which is the only page that should rank for it." },
+      /* CEDED 12 AUGUST 2026. It sat in this page's secondary at 20/mo while
+         /compare/eilik-vs-emo/ held it as its PRIMARY at 320 — the same shape
+         of mistake as the window best-of, found by the new guard in
+         page-plan.test.ts on the same commit. A review answers one machine. */
+      { term: "eilik vs emo", toPath: "/compare/eilik-vs-emo/", why: "A dedicated comparison page owns this as its primary at 320/mo. The review names the comparison because Google's PAA asks it, but naming a question is not targeting its term." },
     ],
     products: ["eilik"],
     productsNote: "Catalogued as prod-eilik, 8 August 2026 — the BASE Eilik, B0C2C9LJNQ at $139.99, matching Energize Lab's own price. The DQ (B0DBVM5BCY, $199.98) turned out to be the Desert Quester: identical hardware in a desert colourway with an exclusive game and a weapon kit. It is described on the page and deliberately NOT seeded as a second offer, because one product row carrying two Amazon offers would print the DQ's price under the Eilik's name.",
@@ -1369,9 +1346,11 @@ const COMPANION_REVIEWS: PagePlan[] = [
     primary: { term: "emo robot", volume: 18100, difficulty: 21 },
     secondary: [
       { term: "robot pet emo", volume: 70, difficulty: 11 },
-      { term: "eilik vs emo", volume: 20, difficulty: 0 },
     ],
-    ceded: [],
+    ceded: [
+      /* The other half of the same fix — see the Eilik record above. */
+      { term: "eilik vs emo", toPath: "/compare/eilik-vs-emo/", why: "A dedicated comparison page owns this as its primary at 320/mo, against the 20 it was declared at here. Two of our pages in one result set is the thing this registry exists to stop." },
+    ],
     products: [],
     productsNote: "NO OFFER AND NONE EXPECTED. Amazon US searched twice on 8 August 2026; only unbranded EMOPET-style knockoffs returned, with the brand token 'Living.AI' absent from both. This page carries no buy button and routes internally instead.",
     linksOut: [
@@ -2040,7 +2019,6 @@ export const PAGE_PLAN: PagePlan[] = [
   WINDOW_BOTMATCH,
   SNOW_YARBO,
   LAWN_BEST,
-  WINDOW_BEST,
   WINDOW_WORKS_GUIDE,
   ...VACUUM_REVIEWS,
   ...LITTER_REVIEWS,
