@@ -88,8 +88,22 @@ const bleed = productId ? Boolean(resolveImage(productId, "listing_card")?.bleed
         {meta.map((m) => <li>{m}</li>)}
       </ul>
     )}
+    {/* A CARD NEVER SHOWS A BARE DASH. Defect B1-2, per-page audit 13 August
+        2026: a product with no printable price rendered "—" here, which reads
+        as broken rather than as honest. Every blank card on the companion hub
+        and the Aiper Scuba S1 card on the pool hub were the same line.
+
+        THE ABSENCE IS USUALLY DELIBERATE AND THAT IS THE POINT. The S1's only
+        Amazon listing fails the identity register — its model field says S1
+        and its part number says X5 Pro — so the product is held in a
+        no-printed-price state ON PURPOSE while that reconciles. The card was
+        rendering that decision as a dash. "Check current price" says the same
+        thing in words a reader can act on, and it is what the review's own buy
+        box already says for this exact case.
+
+        Two states, no third: a dated figure, or this. */}
     <div class="pcard__foot">
-      <span class="price">{price ?? "—"}</span>
+      <span class:list={["price", { "price--unpriced": !price }]}>{price ?? "Check current price"}</span>
       <span class="pcard__go" aria-hidden="true">→</span>
     </div>
     {priceNote && <span class="pcard__note">{priceNote}</span>}
@@ -280,5 +294,15 @@ const bleed = productId ? Boolean(resolveImage(productId, "listing_card")?.bleed
     font-size: var(--type-meta);
     color: var(--text-quaternary);
     line-height: var(--leading-normal);
+  }
+
+  /* "Check current price" is a sentence where a figure normally sits, so it
+     must not compete with a real price for weight. Smaller and quieter — it is
+     an invitation, not a number. */
+  .price--unpriced {
+    font-size: var(--type-meta);
+    font-weight: 500;
+    color: var(--text-tertiary);
+    letter-spacing: 0;
   }
 </style>
