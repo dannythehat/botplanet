@@ -1,5 +1,5 @@
-**The short answer.** The Scuba X1 Pro Max is the most expensive machine we cover
-and the only one that genuinely does all four jobs: it skims the surface, scrubs the
+**The short answer.** The Scuba X1 Pro Max sits near the top of what we cover
+and is the only one that genuinely does all four jobs: it skims the surface, scrubs the
 waterline, climbs the walls and vacuums the floor, mapping the pool with ultrasound
 as it goes. Aiper backs it with a three-year warranty — the longest stated term in
 our catalogue — and publishes more engineering detail than any rival we have read.

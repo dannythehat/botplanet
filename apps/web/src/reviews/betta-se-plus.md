@@ -88,8 +88,8 @@ more realistic than one that does not.
 
 A 200 micron fine-mesh basket with a handle on top.
 
-That is a genuinely useful figure, and worth pausing on: two of the three pool robots
-we have reviewed so far publish no micron rating at all. Betta publishes one. Two
+That is a genuinely useful figure, and worth pausing on: most pool robots publish no
+micron rating at all. Betta publishes one. Two
 hundred microns is coarse compared with a pressure filter, which is the right choice
 here — this basket is catching leaves and insects, not clarifying water, and a finer
 mesh would clog in an afternoon under a tree.
@@ -121,7 +121,7 @@ water. That is a real number for anyone with a shallow tanning ledge.
 A wireless remote is named. A full box-contents list is not published, which is
 unusual and mildly annoying.
 
-The warranty is one year, and unlike the last two machines we reviewed, that figure
+The warranty is one year, and unlike most of this catalogue, that figure
 is stated twice — on the product page and in the manual — so it is not in doubt.
 
 **No docking station is included.** Some of our own artwork on this page shows the

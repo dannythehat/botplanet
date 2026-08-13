@@ -192,8 +192,16 @@ export const SNAPSHOTS: Record<string, ProductSnapshot> = {
   "betta-se-plus": {
     slug: "betta-se-plus",
     priceBand: "entry",
+    /* IT SAID "THE CHEAPEST MACHINE WE COVER" UNTIL 13 AUGUST 2026, AND THAT
+       WAS FALSE. The Betta is $389.90; the Seagull SE is $159.99 and its own
+       review makes the same claim correctly. Two pages held one superlative
+       and one of them was wrong — written when the catalogue was small enough
+       for it to be true, never re-read as it grew. Found by the per-page audit.
+
+       The sentence never needed the superlative: the point is that a skimmer
+       is not an alternative to a floor robot at any price. */
     priceBandWhy:
-      "The cheapest machine we cover, and it is not competing with the others. A skimmer and a floor robot do different jobs, so this is an addition to a setup rather than an alternative to one.",
+      "Priced against floor robots it looks cheap, and the comparison is the wrong one to make. A skimmer and a floor robot do different jobs, so this is an addition to a setup rather than an alternative to one.",
     shipping: "Prime-eligible on Amazon, so usually a day or two rather than a week.",
     shippingSpeed: "fast",
     points: [
@@ -313,7 +321,13 @@ export const SNAPSHOTS: Record<string, ProductSnapshot> = {
       {
         label: "Filter",
         value: "3 μm + 180 μm layers",
-        note: "The finest published rating in our catalogue. Manufacturer's figure, not a lab result.",
+        /* "The finest published rating in our catalogue" until 13 August 2026,
+           stated as though this machine held it alone. It is shared with the
+           Scuba S1 and the X1 Pro Max — both of whose own pages say so in the
+           same sentence — so this one read as a contradiction of two siblings.
+           Same class as the Betta "cheapest" and the X1 Pro Max "most
+           expensive": a superlative written before the catalogue grew past it. */
+        note: "The finest published rating in our catalogue, shared with the other 3-micron Scubas. Manufacturer's figure, not a lab result.",
       },
       {
         label: "Weight",
