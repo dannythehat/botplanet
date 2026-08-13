@@ -17,11 +17,26 @@ const DIR = fileURLToPath(new URL("../src/reviews/", import.meta.url));
 const FILES = readdirSync(DIR).filter((f) => f.endsWith(".md"));
 const prose = (f: string) => readFileSync(DIR + f, "utf8");
 
-/** Everything a review puts in front of a reader: its markdown and its snapshot. */
+/**
+ * EVERYTHING a review puts in front of a reader.
+ *
+ * THREE SURFACES, NOT TWO, and missing the third is how the first version of
+ * this test passed while a false claim stayed live. It read the markdown and
+ * the snapshot only. The Scuba X1 Pro Max's "most expensive machine we cover"
+ * ALSO sits in its record in content/reviews.ts — the verdict and standfirst
+ * that render above the prose — so the guard went green, the page shipped, and
+ * production still said it. Caught by verifying against the live page rather
+ * than trusting the suite.
+ */
 function copyFor(slug: string): string {
   const file = FILES.find((f) => f === `${slug}.md`);
   const snap = (SNAPSHOTS as Record<string, unknown>)[slug];
-  return [file ? prose(file) : "", snap ? JSON.stringify(snap) : ""].join(" ").toLowerCase();
+  const record = (REVIEWS as Record<string, unknown>)[slug];
+  return [
+    file ? prose(file) : "",
+    snap ? JSON.stringify(snap) : "",
+    record ? JSON.stringify(record) : "",
+  ].join(" ").toLowerCase();
 }
 
 describe("S2 — review prose never counts the catalogue", () => {

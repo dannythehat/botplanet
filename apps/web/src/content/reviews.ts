@@ -1032,7 +1032,10 @@ export const REVIEWS: Record<string, ReviewContent> = {
       "surface as well as the floor. The 8,500 GPH claim and the three-year " +
       "warranty.",
     verdict:
-      "The most expensive machine we cover and the only one that honestly claims all four jobs — " +
+      /* "The most expensive machine we cover" until 13 August 2026, at
+         $1,699.99, against the Beatbot at $2,199. True when it was written and
+         overtaken when the Beatbot was catalogued. */
+      "Near the top of what we cover and the only one that honestly claims all four jobs — " +
       "surface, waterline, walls and floor — with ultrasonic mapping, 8,500 GPH of claimed suction " +
       "and the longest stated warranty in our catalogue. Twice the price of Aiper's own camera " +
       "robot, and the difference is mostly the skimming.",
