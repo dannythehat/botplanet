@@ -1,4 +1,4 @@
-7,500 Pa on the cheapest WINBOT in the range, at $150.
+7,500 Pa on the cheapest WINBOT in the range.
 
 That is more maximum suction than the W2 PRO Omni's 5,500 and the W2 PRO's
 5,300, both of which cost considerably more. It is the strangest number on this
@@ -71,5 +71,5 @@ Buy it because your panes are small, and treat the suction figure as a pleasant
 surprise rather than the reason.
 
 It is the right machine for a specific and common window that every other robot
-in this catalogue is too big for, and at $150 it is the cheapest honest answer
+in this catalogue is too big for, and it is the cheapest honest answer
 to that problem. Buy it for large glass and you will spend the money twice.
