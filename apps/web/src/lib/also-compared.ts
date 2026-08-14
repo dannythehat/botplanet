@@ -34,13 +34,26 @@
  */
 import { REVIEWS, type ReviewContent } from "../content/reviews";
 import { ROUTES } from "../content/routes";
-import { NO_OFFER_BY_DESIGN, PRODUCT_ID } from "../content/products";
+import { ANTI_RECOMMENDED, NO_OFFER_BY_DESIGN, PRODUCT_ID } from "../content/products";
 import { productNameOf, specValue } from "./decision-tables";
 
 /** True when we refuse the sale of this product in writing. */
 function isRefused(slug: string): boolean {
   const id = PRODUCT_ID[slug];
   return Boolean(id && NO_OFFER_BY_DESIGN[id]);
+}
+
+/**
+ * True when our own copy argues against buying this machine.
+ *
+ * THE PICKER RECOMMENDED BOTH OF THEM. The window hub's FAQ names two machines
+ * it will not recommend, and this block offered the 298 on the W2 PRO's page
+ * and the W1 PRO on the W2 PRO Omni's — the site arguing against a machine in
+ * one paragraph and volunteering it in the next. The verdict lived in prose,
+ * so nothing could see it. It is a register now. See ANTI_RECOMMENDED.
+ */
+function isAntiRecommended(slug: string): boolean {
+  return slug in ANTI_RECOMMENDED;
 }
 
 /**
@@ -137,7 +150,10 @@ function nearestSibling(r: ReviewContent): AlsoLink | null {
   /* Buyable first. A refused product falls back in only when nothing else in
      the category qualifies, and never carries the "closest thing we hold"
      wording — see isRefused above. */
-  const buyable = all.filter((s) => !isRefused(s.slug));
+  /* Refused OR argued against. Both fall back in only when the category has
+     nothing else, and neither ever carries the "closest thing we hold"
+     wording — a machine we tell people to skip is not a recommendation. */
+  const buyable = all.filter((s) => !isRefused(s.slug) && !isAntiRecommended(s.slug));
   const siblings = buyable.length > 0 ? buyable : all;
   if (siblings.length === 0) return null;
 

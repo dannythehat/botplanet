@@ -25,6 +25,7 @@
  * It never recommends the product being reviewed.
  */
 import type { RuleOut } from "../content/snapshots";
+import { ANTI_RECOMMENDED } from "../content/products";
 
 export interface AlternativeCandidate {
   id: string;
@@ -70,7 +71,12 @@ export function findAlternatives(
   candidates: AlternativeCandidate[],
   excludeSlug: string,
 ): AlternativeMatch[] {
-  const pool = candidates.filter((c) => c.slug !== excludeSlug);
+  /* A machine our own copy argues against is never the answer to "this one is
+     wrong for you". See ANTI_RECOMMENDED — the window hub names two, and both
+     were being volunteered by the pickers until 14 August 2026. */
+  const pool = candidates.filter(
+    (c) => c.slug !== excludeSlug && !(c.slug in ANTI_RECOMMENDED),
+  );
 
   /**
    * ONE PRODUCT ANSWERS ONE RULE-OUT, NOT SEVERAL.

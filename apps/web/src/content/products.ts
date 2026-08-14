@@ -1033,6 +1033,35 @@ export const overduePendingOffers = (today: string): string[] =>
     .filter(([, v]) => pendingAgeDays(v.since, today) > OFFER_SETUP_PENDING_DAYS)
     .map(([id]) => id);
 
+/**
+ * PRODUCTS THE SITE TELLS READERS NOT TO BUY.
+ *
+ * NOT THE SAME AS NO_OFFER_BY_DESIGN, and the difference is the whole reason
+ * this exists. That register refuses the SALE — we will not take a commission
+ * on the machine at all. This one records an EDITORIAL verdict: the product is
+ * perfectly buyable, we hold it, the buy button works, and our own copy says
+ * you should buy something else instead.
+ *
+ * WHY IT HAD TO BECOME MACHINE-READABLE. The window hub's FAQ names two
+ * machines it will not recommend — the WINBOT W1 PRO, overtaken inside its own
+ * range by the cheaper Mini, and the HOBOT 298, whose maker publishes almost
+ * nothing measurable about it. Both statements were prose, so nothing else on
+ * the site could see them, and the "readers also compared" picker went on
+ * offering both as the nearest sibling: the 298 on the W2 PRO's page, the
+ * W1 PRO on the W2 PRO Omni's. A site that argues against a machine in one
+ * paragraph and recommends it in the next has no opinion at all.
+ *
+ * A page about one of these is still a legitimate destination — somebody
+ * researching the W1 PRO should reach our review of it. What must never happen
+ * is the site VOLUNTEERING one as the thing to look at instead.
+ */
+export const ANTI_RECOMMENDED: Record<string, string> = {
+  "ecovacs-winbot-w1-pro":
+    "A competent entry machine overtaken inside its own range: the Mini costs less and grips harder. Named in the window hub's FAQ as one of two we hold and do not recommend.",
+  "hobot-298":
+    "The machine we know least about — its own maker publishes almost nothing measurable, and the W1 PRO costs about the same while publishing what the 298 does not. Named in the window hub's FAQ as the second of the two.",
+};
+
 export const NO_OFFER_BY_DESIGN: Record<string, string> = {
   "prod-living-ai-emo":
     "Living.AI sells EMO direct and does not list it on Amazon US. Searching for it there returns imitations — EMOPET and unbranded desk robots — with the Living.AI brand token absent from every top result we read on 8 August 2026. There is no destination we could send a buyer to that we are confident sells the real product, so we send them nowhere. A SPECIFIC LISTING WAS PUT UP FOR THIS AND CHECKED ON 9 AUGUST 2026, amazon.com/dp/B0DG8JPL6J, and it failed on three counts. Its own details table gives brand 'EMOPET' and manufacturer 'EMOPET', and the storefront reads 'Visit the EMOPET Store' — the Living.AI token appears nowhere on the listing. It asks $419.00 for what its model number calls 'EMO GO HOME', against $369.00 for the EMO Go Home on Living.AI's own store, so it is fifty dollars ABOVE the maker's price, which is the wrong direction for an authorised reseller and the right one for a reseller nobody authorised. And Living.AI's own staff, on Living.AI's own forum, say the official store is 'the only legitimate place to purchase EMO' and that they cannot confirm Living.ai is the seller behind an Amazon listing. Sibling B0DDT2MT9K carries a near-identical EMOPET title, so this is a brand running a family of these listings rather than one stray reseller. Rechecking is welcome; wiring it on this evidence is not.",

@@ -12,6 +12,8 @@ import { readFileSync, readdirSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { REVIEWS } from "../src/content/reviews";
 import { SNAPSHOTS } from "../src/content/snapshots";
+import { ANTI_RECOMMENDED } from "../src/content/products";
+import { alsoCompared } from "../src/lib/also-compared";
 
 const DIR = fileURLToPath(new URL("../src/reviews/", import.meta.url));
 const FILES = readdirSync(DIR).filter((f) => f.endsWith(".md"));
@@ -270,5 +272,45 @@ describe("the spec table's sourcing claim is built from its rows", () => {
       /retailer[- ]stated|retailer's listing|listing states|amazon states/.test(notes),
       "the HUTT no longer declares its rows retailer-stated — check what changed",
     ).toBe(true);
+  });
+});
+
+/**
+ * THE SITE NEVER VOLUNTEERS A MACHINE IT ARGUES AGAINST.
+ *
+ * The window hub's FAQ names two it will not recommend — the WINBOT W1 PRO and
+ * the HOBOT 298. Both were being offered by the "readers also compared" picker
+ * anyway: the 298 on the W2 PRO's page, the W1 PRO on the W2 PRO Omni's. The
+ * verdict lived in prose, so nothing on the site could see it.
+ *
+ * A page ABOUT one of these is still a legitimate destination. What must not
+ * happen is the site suggesting one as the thing to look at instead.
+ */
+describe("anti-recommended machines are never suggested", () => {
+  it("is a register rather than a paragraph", () => {
+    expect(Object.keys(ANTI_RECOMMENDED).length).toBeGreaterThan(0);
+    for (const [slug, why] of Object.entries(ANTI_RECOMMENDED)) {
+      expect(REVIEWS[slug], `${slug} is anti-recommended but has no review`).toBeDefined();
+      expect(why.length, `${slug} is anti-recommended without a stated reason`).toBeGreaterThan(60);
+    }
+  });
+
+  /** The two the hub names, asserted by name so a rewrite cannot drop them. */
+  it("holds the two the window hub names", () => {
+    expect(Object.keys(ANTI_RECOMMENDED)).toEqual(
+      expect.arrayContaining(["ecovacs-winbot-w1-pro", "hobot-298"]),
+    );
+  });
+
+  it("never offers one as the nearest sibling on another page", () => {
+    const offered: string[] = [];
+    for (const [slug, review] of Object.entries(REVIEWS)) {
+      if (slug in ANTI_RECOMMENDED) continue;
+      for (const link of alsoCompared(review)) {
+        const target = link.href.replace(/^\/robots\/[^/]+\//, "").replace(/\/$/, "");
+        if (target in ANTI_RECOMMENDED) offered.push(`${slug} offers ${target}`);
+      }
+    }
+    expect(offered, "a page suggests a machine the site tells readers not to buy").toEqual([]);
   });
 });
