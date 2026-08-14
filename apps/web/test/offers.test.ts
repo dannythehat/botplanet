@@ -207,7 +207,13 @@ describe("exact-product destinations", () => {
     // figures matching yarbo.com. The details table still could not be read,
     // so this is the one destination here confirmed WITHOUT a Model Number
     // field, and destinations.ts says so at the entry rather than here.
-    expect(exact).toHaveLength(50);
+    /* 61 since 14 August 2026: the eleven robot vacuums. Their ASINs were read
+       on 10 August and written into their own review records, and the wiring
+       that turns a read ASIN into an offer was never done — so the site's
+       largest category sat live with a buy heading and nothing under it. They
+       enter at researched_exact, not verified_exact: the identifier is pinned
+       but no published identity field was transcribed off the listing. */
+    expect(exact).toHaveLength(61);
     expect(search).toHaveLength(0);
     for (const d of exact) {
       expect(d.identifierKind).toBe("asin");
@@ -1649,7 +1655,14 @@ describe("scheduled refresh — wiring", () => {
        fails loudly for any routed product whose key is absent from the text it
        reads — which is exactly the behaviour wanted. Read the directory rather
        than the list if a fourth category makes this tedious. */
-    const seed = ["pool", "window", "companion", "petcam", "coding", "litter", "lawn", "snow"]
+    /* "vacuums" JOINED ON 14 AUGUST 2026 AND THE OMISSION IS THE WHOLE STORY.
+       This list is read rather than the directory, so a category with no seed
+       directory is not checked, passes, and can ship eleven reviews with no
+       buy path behind any of them — which is exactly what robot vacuums did
+       for four days. Read the directory rather than the list if a tenth
+       category makes this tedious; until then, adding a category means adding
+       it here on the same commit. */
+    const seed = ["pool", "window", "companion", "petcam", "coding", "litter", "lawn", "snow", "vacuums"]
       .map((c) => readFileSync(`packages/db/seed/${c}/commercial.ts`, "utf8"))
       .join("\n");
     for (const p of sellable()) {

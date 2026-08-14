@@ -1004,70 +1004,23 @@ export const OFFER_SETUP_PENDING: Record<string, OfferSetupPending> = {
     since: "2026-08-10",
   },
 
-  /* THE ELEVEN ROBOT VACUUMS, 10 August 2026.
-     Identity is verified for all eleven — pinned ASIN, price and rating read
-     off each listing's own page the same day, recorded in
-     docs/commerce/robot-vacuums-identity.md. What none of them has is a
-     retailer destination, and this category is the one where wiring one
-     carelessly costs the most: four of the eleven sit in variation families or
-     one word away from a differently-priced sibling, and a bare /dp/ link on
-     any of them can land a reader on a machine that does not do what the page
-     they came from said it does. */
-  "prod-eufy-x10-pro-omni": {
-    reason:
-      "Verified at $449.99 on 10 August 2026, and it is a two-colour variation family: B0CPFBBHP4 black and B0DG5G9HQM white share one price and one review pool. A link without th=1&psc=1 lands on whichever child Amazon prefers. Waits for a pinned-variant destination.",
-    since: "2026-08-10",
-  },
-  "prod-eufy-omni-s1-pro": {
-    reason:
-      "The Amazon SEARCH row for B0CTY6VT8Y returns no price at all, which normally means no buy-box winner; the listing read on 10 August 2026 returns $919.58. It is also the lowest-rated machine in the category at 3.2 stars, and eufy's own line has moved to the Omni S2 and the C28. We are willing to publish a page about it because 33,100 people a month search the term. We are not willing to send a buyer at a price that may be a third-party seller's until the buy box is confirmed.",
-    since: "2026-08-10",
-  },
-  "prod-roborock-s8-max-ultra": {
-    reason:
-      "Verified at $949.99 on 10 August 2026 against both the listing and roborock's own product page. It carries the traffic for a term — roborock S8 MaxV Ultra — that names a DIFFERENT machine, and the reader arriving on that term has to understand the substitution before a buy button is the right thing to show them.",
-    since: "2026-08-10",
-  },
-  "prod-roborock-saros-10": {
-    reason:
-      "Verified at $1,299.99 on 10 August 2026 against both the listing and roborock's own page. A second ASIN for the same model, B0DLH45139, carries no price and 94 ratings; the pinned one must be held against that sibling before a destination is wired.",
-    since: "2026-08-10",
-  },
-  "prod-roborock-qrevo-s5v": {
-    reason:
-      "Verified at $499.98 on 10 August 2026. B0DSP8J476 and B0FX4SZ4KB are the same machine at the same price sharing one review pool, so this needs a pinned-variant destination rather than a bare /dp/ link. It also stands in for the family term roborock Qrevo, which covers four machines from $499.98 to $879.99.",
-    since: "2026-08-10",
-  },
-  "prod-dreame-x40-ultra": {
-    reason:
-      "Verified at $599.99 on 10 August 2026 from the Amazon listing. Dreame's own product page returned 404 or truncated content to a direct fetch, so the capability record here is thinner than the rest of the category — no obstacle avoidance is claimed because nothing we read claims it. The maker page gets read before this is wired.",
-    since: "2026-08-10",
-  },
-  "prod-dreame-x50-ultra": {
-    reason:
-      "Verified at $999.99 on 10 August 2026 from the Amazon listing, with the $989.99 Complete bundle held out as a different product. Dreame's own page returned 404 to a direct fetch, so no mop lifting is recorded — the listing claims obstacle crossing, which is step climbing and not the same claim. The maker page gets read before this is wired.",
-    since: "2026-08-10",
-  },
-  "prod-ecovacs-deebot-t90-pro-omni": {
-    reason:
-      "Verified at $599 on 10 August 2026 against both the listing and ECOVACS' own page. It stands in for the family term ecovacs deebot, which covers four current machines from $349 to $1,499.99, so the destination has to be right about which DEEBOT the reader is being sent to.",
-    since: "2026-08-10",
-  },
-  "prod-shark-powerdetect-av2820s": {
-    reason:
-      "Verified at $549.99 on 10 August 2026. This SKU is the self-empty VACUUM and its sibling RV2820ZE at $599.99 is the vacuum-and-mop; the two are fifty dollars and one word apart. A destination that lands a reader on the wrong one sells them a mop they did not want or denies them one they did.",
-    since: "2026-08-10",
-  },
-  "prod-shark-matrix-plus-ur2650ws": {
-    reason:
-      "Verified at $279.99 on 10 August 2026, with the largest review pool of the eleven at 35,917. The Matrix name covers four Shark machines across two different lines at $278.34 to $420.39, and this is the only one of them at the budget tier — so the destination must pin this SKU rather than the family.",
-    since: "2026-08-10",
-  },
-  "prod-roomba-max-705": {
-    reason:
-      "Verified at $499 on 10 August 2026. B0DWG15XKQ at $799 is the Roomba Max 705 COMBO — a different machine with a mop and an AutoWash dock, with its own review pool of 4,800. Three hundred dollars and one word apart is the worst kind of near-miss to wire in a hurry.",
-    since: "2026-08-10",
-  },
+  /* THE ELEVEN ROBOT VACUUMS CAME OFF THIS LIST ON 14 AUGUST 2026, wired to
+     Amazon with the ASINs that had been sitting in their own review records
+     since 10 August. See VACUUM_ASINS in commerce/destinations.ts.
+
+     WHAT THIS REGISTER GOT RIGHT AND WHAT IT COST. The reason written here was
+     sound — four of the eleven sit in variation families or one word from a
+     differently-priced sibling, and a careless /dp/ link on any of them lands a
+     reader on a machine that does not do what the page said. So the wiring
+     waited, correctly. What nobody set was a date to come back, and the site's
+     largest category — a 135,000/mo head term, eleven published reviews — then
+     spent four days live with a buy heading and nothing under it. The audit of
+     14 August found it; this register did not surface it.
+
+     Every one of the eleven now carries a pinned ASIN with its siblings named
+     and denied in the identity check, which is the careful version the delay
+     was for. */
+
 };
 
 /** Days a product has been waiting, against the day given. */

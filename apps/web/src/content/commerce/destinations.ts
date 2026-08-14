@@ -622,6 +622,141 @@ for (const p of [...LITTER_ASINS, ...LAWN_ASINS]) {
   };
 }
 
+
+/**
+ * ROBOT VACUUMS — eleven machines that were researched, written up and
+ * published with no buy path at all.
+ *
+ * THE ASINS WERE NEVER MISSING. Every one of these was read at Amazon on
+ * 10 August 2026 and written into its review's own record, along with the
+ * price and the sibling listings that had to be denied. What never happened is
+ * the step that turns a read ASIN into an offer: the category was catalogued
+ * outside the seed pipeline the other eight went through, so D1 held eleven
+ * published products with zero offer rows and eleven reviews rendered a buy
+ * heading with nothing under it.
+ *
+ * That is the largest category on the site — a 135,000/mo head term — and it
+ * has been live and unmonetised since 10 August. Found by the full-site audit
+ * of 14 August 2026.
+ *
+ * EVERY EVIDENCE STRING BELOW IS COPIED FROM THE REVIEW THAT RECORDED IT, not
+ * re-derived and not re-read. Where a sibling listing exists it is named and
+ * denied, because that is the failure this register exists to prevent — the
+ * bundle, the colourway and the one-letter model variant are how a buy button
+ * ends up on the wrong machine.
+ */
+const VACUUM_CHECK_DATE = "2026-08-10";
+
+const VACUUM_ASINS: WindowDestination[] = [
+  {
+    productId: "prod-eufy-x10-pro-omni",
+    asin: "B0CPFBBHP4",
+    exactModel: "eufy X10 Pro Omni",
+    evidence:
+      "eufy X10 Pro Omni, ASIN B0CPFBBHP4. $449.99 read on 10 August 2026. B0DG5G9HQM is the same machine in white at the same price sharing one review pool, and is denied so a request cannot be answered with the other colourway's data.",
+  },
+  {
+    productId: "prod-eufy-omni-s1-pro",
+    asin: "B0CTY6VT8Y",
+    exactModel: "eufy Robot Vacuum Omni S1 Pro",
+    evidence:
+      "eufy Robot Vacuum Omni S1 Pro, ASIN B0CTY6VT8Y. The Amazon search row returns no price; the listing itself read $919.58 on 10 August 2026. eufy's own product page returned 404 to a direct fetch the same day, so the listing is the only live source.",
+  },
+  {
+    productId: "prod-roborock-s8-max-ultra",
+    asin: "B0D9B9LK9F",
+    exactModel: "roborock S8 Max Ultra with Refill & Drainage System",
+    evidence:
+      "roborock S8 Max Ultra with Refill & Drainage System, ASIN B0D9B9LK9F. $949.99 read on 10 August 2026. NOT the S8 MaxV Ultra, which is a different machine at a different price — the single letter is the whole difference and is why the SKU is carried in the name we publish.",
+  },
+  {
+    productId: "prod-roborock-saros-10",
+    asin: "B0DLH247PS",
+    exactModel: "roborock Saros 10",
+    evidence:
+      "roborock Saros 10, ASIN B0DLH247PS. $1,299.99 read on 10 August 2026. A second listing, B0DLH45139, carries the same model with no price and is denied.",
+  },
+  {
+    productId: "prod-roborock-qrevo-s5v",
+    asin: "B0DSP8J476",
+    exactModel: "roborock Qrevo S5V",
+    evidence:
+      "roborock Qrevo S5V, ASIN B0DSP8J476. $499.98 read on 10 August 2026. B0FX4SZ4KB is the same machine at the same price sharing one review pool and is denied.",
+  },
+  {
+    productId: "prod-dreame-x40-ultra",
+    asin: "B0CXDXKSXP",
+    exactModel: "Dreame X40 Ultra",
+    evidence:
+      "Dreame X40 Ultra, ASIN B0CXDXKSXP. $599.99 read on 10 August 2026. B0DZHNSL1H is a second listing at $594.99 with a separate review pool and is denied.",
+  },
+  {
+    productId: "prod-dreame-x50-ultra",
+    asin: "B0DM5J52GC",
+    exactModel: "Dreame X50 Ultra",
+    evidence:
+      "Dreame X50 Ultra, ASIN B0DM5J52GC. $999.99 read on 10 August 2026. B0F3J51GW5 and B0F3HZFZBL at $989.99 are the Complete bundle and are denied — the bundle is a different purchase.",
+  },
+  {
+    productId: "prod-shark-powerdetect-av2820s",
+    asin: "B0CDJFHM4J",
+    exactModel: "Shark PowerDetect Self-Empty Robot Vacuum AV2820S",
+    evidence:
+      "Shark PowerDetect Self-Empty Robot Vacuum AV2820S, ASIN B0CDJFHM4J. $549.99 read on 10 August 2026. The RV2820ZE at $599.99 is the vacuum-only configuration and is denied.",
+  },
+  {
+    productId: "prod-shark-matrix-plus-ur2650ws",
+    asin: "B0FDX7GFQX",
+    exactModel: "Shark Matrix Plus Robot Vacuum and Mop UR2650WS",
+    evidence:
+      "Shark Matrix Plus Robot Vacuum and Mop UR2650WS, ASIN B0FDX7GFQX. $279.99 read on 10 August 2026. The AI Ultra AV2501S and AV2511AE are different machines in the same family and are denied.",
+  },
+  {
+    productId: "prod-roomba-max-705",
+    asin: "B0DWG3C3ZF",
+    exactModel: "iRobot Roomba Max 705 Robot Vacuum with AutoEmpty Dock",
+    evidence:
+      "iRobot Roomba Max 705 Robot Vacuum with AutoEmpty Dock, ASIN B0DWG3C3ZF. $499.00 read on 10 August 2026. B0DWG15XKQ at $799 is the Max 705 Combo — a different machine — and is denied.",
+  },
+  {
+    productId: "prod-ecovacs-deebot-t90-pro-omni",
+    asin: "B0GJ5S4V78",
+    exactModel: "ECOVACS DEEBOT T90 PRO OMNI",
+    evidence:
+      "ECOVACS DEEBOT T90 PRO OMNI, ASIN B0GJ5S4V78. $599.00 read on 10 August 2026.",
+  },
+];
+
+/**
+ * CONFIRMED IS FALSE ON ALL ELEVEN, AND THAT IS NOT A FORMALITY.
+ *
+ * The window and lawn destinations were cleared by transcribing a published
+ * field off the listing — Brand, Model Name, Model Number — verbatim. That is
+ * what `confirmed` means here and offers.test.ts enforces it: name what the
+ * page said, do not describe having looked at it.
+ *
+ * The vacuum verification of 10 August was a different method. SerpAPI's
+ * amazon_product engine was asked for each pinned ASIN and returned price,
+ * rating and review count, and the search titles carried the exact model term.
+ * That is enough to publish a review and enough to wire a destination that
+ * points at a specific ASIN. It is not a transcribed identity field, so
+ * claiming `confirmed` would be claiming a check nobody ran.
+ *
+ * The buy buttons work either way — the destination is a pinned ASIN, not a
+ * search — and the sibling ASINs that could be substituted are named and
+ * denied in every evidence string above, which is the risk the delay was
+ * actually about. What is outstanding is one field read per listing, and
+ * marking it false is what keeps that visible instead of quietly done.
+ */
+for (const p of VACUUM_ASINS) {
+  IDENTITY_CHECKS[p.productId] = {
+    asin: p.asin,
+    confirmed: false,
+    evidence: p.evidence,
+    checkedOn: VACUUM_CHECK_DATE,
+  };
+}
+
 /**
  * The window identity checks, DERIVED from WINDOW_ASINS rather than typed out
  * a second time.
@@ -698,6 +833,41 @@ for (const p of SNOW_ASINS) {
 }
 
 export const DESTINATIONS: ProductDestination[] = [
+  /**
+   * The eleven vacuums, at researched_exact rather than verified_exact.
+   *
+   * The identifier was captured — a pinned ASIN read through SerpAPI's
+   * amazon_product engine on 10 August 2026, with price, rating and review
+   * count returned and the sibling ASINs named and denied. What was never done
+   * is the second read: transcribing a published identity field off the
+   * listing before the button was wired. That is exactly the difference the
+   * two levels exist to record, so these sit at the level that is true.
+   *
+   * The button still lands on a specific ASIN rather than a search, which is
+   * what a reader needs. Raising these to verified_exact takes one field read
+   * each and nothing else.
+   */
+  ...VACUUM_ASINS.map(
+    ({ productId, asin, exactModel, evidence }): ProductDestination => ({
+      productId,
+      retailerId: "ret-amazon",
+      market: "us",
+      retailerProductId: asin,
+      identifierKind: "asin",
+      exactModel,
+      destinationUrl: `https://www.amazon.com/dp/${asin}`,
+      confidence: "researched_exact" as const,
+      notes:
+        "IDENTITY NOT CONFIRMED to the standard the window and lawn destinations meet. " +
+        "The ASIN is pinned and was read through SerpAPI's amazon_product engine on " +
+        `${VACUUM_CHECK_DATE}, returning price, rating and review count, and every sibling ASIN ` +
+        "that could be substituted is named and denied above. What has not been done is " +
+        "transcribing a published identity field — Brand, Model Name, Model Number — off the " +
+        "listing itself. One field read per listing raises this to verified_exact.",
+      sourceReference: `ASIN pinned and read through the SerpAPI amazon_product engine on ${VACUUM_CHECK_DATE}; full working in docs/commerce/robot-vacuums-identity.md. ${evidence}`,
+    }),
+  ),
+
   ...[...LITTER_ASINS, ...LAWN_ASINS, ...SNOW_ASINS].map(
     ({ productId, asin, exactModel, evidence }): ProductDestination => ({
       productId,
@@ -941,6 +1111,22 @@ export const REDIRECT_KEYS: Record<string, string> = {
   "prod-eufy-e15": "lawn-eufy-e15-amazon",
   "prod-dreame-a3-awd-1000": "lawn-dreame-a3awd1000-amazon",
   "prod-yarbo-snow-blower": "snow-yarbo-snow-blower-amazon",
+
+  /* The eleven vacuums, added 14 August 2026 with their offers. Same house
+     pattern — prefix, brand, compressed model, `-amazon`. The two Sharks and
+     the three roborocks differ only by the SKU in the middle, which is the
+     whole difference between the machines as well. */
+  "prod-eufy-x10-pro-omni": "vac-eufy-x10proomni-amazon",
+  "prod-eufy-omni-s1-pro": "vac-eufy-omnis1pro-amazon",
+  "prod-roborock-s8-max-ultra": "vac-roborock-s8maxultra-amazon",
+  "prod-roborock-saros-10": "vac-roborock-saros10-amazon",
+  "prod-roborock-qrevo-s5v": "vac-roborock-qrevos5v-amazon",
+  "prod-dreame-x40-ultra": "vac-dreame-x40ultra-amazon",
+  "prod-dreame-x50-ultra": "vac-dreame-x50ultra-amazon",
+  "prod-shark-powerdetect-av2820s": "vac-shark-av2820s-amazon",
+  "prod-shark-matrix-plus-ur2650ws": "vac-shark-ur2650ws-amazon",
+  "prod-roomba-max-705": "vac-irobot-max705-amazon",
+  "prod-ecovacs-deebot-t90-pro-omni": "vac-ecovacs-t90proomni-amazon",
 };
 
 /* ------------------------------------------------------------------ */
