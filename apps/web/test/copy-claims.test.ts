@@ -220,3 +220,55 @@ describe("a spec table never answers the same question twice", () => {
     expect(copied, "a power-off duration is shared verbatim between products").toEqual([]);
   });
 });
+
+/**
+ * A PAGE MAY NOT CLAIM A SOURCING STANDARD ITS OWN TABLE DOES NOT MEET.
+ *
+ * Every review printed a fixed sentence above its specification table: "Every
+ * figure below comes from the manufacturer's own product page." On the HUTT
+ * S55 Pro that sat directly above a table whose every row reads
+ * retailer-stated, on a page whose own copy says NOTHING HERE IS
+ * MANUFACTURER-VERIFIED in capitals. Third proven instance by 14 August 2026.
+ *
+ * The sentence is derived from the rows now. This asserts the derivation
+ * exists rather than restating the strings, so the wording can be edited
+ * without the guard needing to know about it.
+ */
+describe("the spec table's sourcing claim is built from its rows", () => {
+  const REVIEW_ARTICLE = readFileSync(
+    fileURLToPath(new URL("../src/components/ReviewArticle.astro", import.meta.url)),
+    "utf8",
+  );
+
+  it("does not hardcode the manufacturer claim", () => {
+    const markup = REVIEW_ARTICLE.split("<style>")[0]
+      .replace(/\{\/\*[\s\S]*?\*\/\}/g, "")
+      .replace(/\/\*[\s\S]*?\*\//g, "");
+    expect(markup).toContain("intro={specIntro}");
+    expect(
+      /intro="Every figure below comes from the manufacturer/.test(markup),
+      "the fixed manufacturer claim is back above the spec table",
+    ).toBe(false);
+  });
+
+  it("reads the rows to decide what it may claim", () => {
+    expect(REVIEW_ARTICLE).toMatch(/retailer\[- \]stated|retailer\[-\s\]stated|retailer/i);
+    expect(REVIEW_ARTICLE).toContain("hasRetailerStated");
+    expect(REVIEW_ARTICLE).toContain("hasResearched");
+  });
+
+  /**
+   * And the page that proved it. If the HUTT's rows ever stop saying
+   * retailer-stated, that is a sourcing change somebody has to make on purpose.
+   */
+  it("still sees the HUTT S55 Pro as retailer-sourced", () => {
+    const notes = REVIEWS["hutt-s55-pro"].specGroups
+      .flatMap((g) => g.rows)
+      .map((r) => `${r.value ?? ""} ${(r as { note?: string }).note ?? ""}`.toLowerCase())
+      .join(" ");
+    expect(
+      /retailer[- ]stated|retailer's listing|listing states|amazon states/.test(notes),
+      "the HUTT no longer declares its rows retailer-stated — check what changed",
+    ).toBe(true);
+  });
+});

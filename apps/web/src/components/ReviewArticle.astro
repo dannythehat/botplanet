@@ -62,6 +62,25 @@ interface Props {
 }
 
 const { review, html, productName, offers = [], siblings = [] } = Astro.props;
+
+/**
+ * What the specification table may honestly claim about its own sourcing.
+ *
+ * Read from the rows rather than asserted above them. See the note at the
+ * SpecTable call.
+ */
+const specNotes = review.specGroups
+  .flatMap((g) => g.rows)
+  .map((r) => `${r.value ?? ""} ${(r as { note?: string }).note ?? ""}`.toLowerCase())
+  .join(" ");
+const hasRetailerStated = /retailer[- ]stated|retailer's listing|listing states|amazon states/.test(specNotes);
+const hasResearched = /researched|owner research|our own research/.test(specNotes);
+const specIntro = hasRetailerStated
+  ? "Not every figure below comes from the manufacturer. Rows marked retailer-stated were read from a listing rather than from the maker's own page, and are only as good as that listing. Where a value is not published anywhere, it says so rather than borrowing a number from a sibling model."
+  : hasResearched
+    ? "Most figures below come from the manufacturer's own product page for the exact SKU named underneath. Rows marked researched are ours rather than theirs. Where a value is not published, it says so rather than borrowing a number from a sibling model."
+    : "Every figure below comes from the manufacturer's own product page for the exact SKU named underneath. Where a value is not published, it says so rather than borrowing a number from a sibling model.";
+
 const snapshot = snapshotFor(review.slug);
 const bmCta = botMatchCtaFor(review.categorySlug);
 
@@ -202,7 +221,18 @@ const alternatives =
   id="specifications"
   eyebrow="Specifications"
   title="The full specification"
-  intro="Every figure below comes from the manufacturer's own product page for the exact SKU named underneath. Where a value is not published, it says so rather than borrowing a number from elsewhere."
+  {/* THE BOILERPLATE LIED ON EVERY PAGE THAT DID NOT MEET IT, and it was a
+      FIXED STRING claiming a sourcing standard the page below might not hold.
+      The HUTT S55 Pro prints "NOTHING HERE IS MANUFACTURER-VERIFIED" in its own
+      copy and tags every row retailer-stated; this sentence sat directly above
+      that table promising the opposite. Third proven instance by 14 August
+      2026 — the 298 and the Betta were the first two.
+
+      It is derived from the rows now. A table whose values are all attributed
+      to the maker says so; one carrying retailer-stated or researched values
+      says THAT instead. The claim can no longer outrun the evidence, because
+      it is built from it. */}
+  intro={specIntro}
   groups={review.specGroups}
   skuNote={review.skuNote}
 />
