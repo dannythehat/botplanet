@@ -63,8 +63,12 @@ The 60 ml tank matches everything in the ECOVACS range except the W3 Omni's 80.
 For the ECOVACS machines we read the numbers off ecovacs.com on 5 August 2026;
 we could not find an equivalent published specification page for this model.
 
-**No power-off hold, no warranty term, no weight.** All three are published for
-most of the ECOVACS range and absent here.
+**No warranty term, no weight.** Both are published for most of the ECOVACS
+range and absent here. The power-off hold is NOT in that list, and this section
+claimed it was until 14 August 2026 — Mamibot's own manual states that a fully
+charged UPS keeps the W120-DP on the glass for 20 to 30 minutes, which is
+exactly the figure this page argued nobody had published. The spec table had it
+sourced correctly all along; this paragraph was the stale half.
 
 **Whether the listing is this machine.** The ASIN came from an Amazon search on
 5 August 2026 and replaced a different Mamibot model in our records the same
