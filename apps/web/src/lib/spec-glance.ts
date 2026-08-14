@@ -57,6 +57,12 @@ function flatten(groups: SpecGroup[]): SpecRow[] {
   return groups.flatMap((g) => g.rows);
 }
 
+/** Values that state an absence rather than a figure. */
+const isAbsence = (value: string): boolean =>
+  /^(not published|not disclosed|not stated|unpublished|none published|no figure published)\.?$/i.test(
+    value.trim(),
+  );
+
 export function buildGlance(categorySlug: string, groups: SpecGroup[]): Glance {
   const fields = glanceFieldsFor(categorySlug);
   const rows = flatten(groups);
@@ -71,7 +77,13 @@ export function buildGlance(categorySlug: string, groups: SpecGroup[]): Glance {
       hit = rows.find((r) => norm(r.label) === norm(alias) && r.value !== null && r.value !== "");
       if (hit) break;
     }
-    if (!hit || hit.value === null) continue;
+    /* A ROW SAYING "Not published" IS A MISSING FIGURE, NOT A PRESENT ONE.
+       The counter read "1 of 5 fields here is not published" on the W2S while
+       four of its spec rows said exactly that — a wrong number on the page
+       whose entire theme is missing numbers. Absence took two shapes and this
+       only recognised one: no row at all, and a row whose value IS the
+       absence. Both are the maker not publishing it. */
+    if (!hit || hit.value === null || isAbsence(hit.value)) continue;
     out.push({ label: field.label, value: hit.value, ...(hit.note ? { note: hit.note } : {}) });
   }
 

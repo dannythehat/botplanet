@@ -1,5 +1,5 @@
 The WINBOT W2S trades the W2 PRO's six spray nozzles for TruEdge scrubbers and
-asks $330 for it.
+asks a mid-range price for it.
 
 That is one specific bet: that the border of the pane bothers you more than the
 middle of it. If it does, this is the machine. If it does not, ECOVACS will not
@@ -26,7 +26,7 @@ this one.** No tank figure, no weight, no dimensions. The W2 PRO publishes all
 four.
 
 That is the honest reason to walk past it. Not that it is bad — we have no
-evidence either way — but that a machine at $330 with no published grip figure
+evidence either way — but that a mid-priced machine with no published grip figure
 is a machine you are buying on a brand name.
 
 **Anyone whose problem is the middle of the pane.** Three nozzles against the

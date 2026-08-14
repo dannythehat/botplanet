@@ -14,6 +14,7 @@ import { REVIEWS } from "../src/content/reviews";
 import { SNAPSHOTS } from "../src/content/snapshots";
 import { ANTI_RECOMMENDED } from "../src/content/products";
 import { alsoCompared } from "../src/lib/also-compared";
+import { buildGlance } from "../src/lib/spec-glance";
 
 const DIR = fileURLToPath(new URL("../src/reviews/", import.meta.url));
 const FILES = readdirSync(DIR).filter((f) => f.endsWith(".md"));
@@ -312,5 +313,31 @@ describe("anti-recommended machines are never suggested", () => {
       }
     }
     expect(offered, "a page suggests a machine the site tells readers not to buy").toEqual([]);
+  });
+});
+
+/**
+ * THE GLANCE COUNTER COUNTS BOTH SHAPES OF ABSENCE.
+ *
+ * It read "1 of 5 fields here is not published" on the WINBOT W2S while four
+ * of that page's spec rows said exactly that — a wrong number on the page whose
+ * whole theme is missing numbers. Absence takes two shapes: no row at all, and
+ * a row whose value IS the absence. Only the first was counted.
+ */
+describe("the spec glance counts every unpublished field", () => {
+  it.each(Object.keys(REVIEWS))("%s's counter agrees with its own rows", (slug) => {
+    const review = REVIEWS[slug];
+    const glance = buildGlance(review.categorySlug, review.specGroups);
+    if (!glance.worthShowing) return;
+    /* Nothing the glance PRINTS may be a stated absence — those are the rows
+       that belong in the missing count instead. */
+    const printedAbsences = glance.rows.filter((r) =>
+      /^(not published|not disclosed|not stated)\.?$/i.test(String(r.value).trim()),
+    );
+    expect(
+      printedAbsences.map((r) => r.label),
+      `${slug} prints "not published" as if it were a figure, and counts it as one`,
+    ).toEqual([]);
+    expect(glance.missing + glance.rows.length).toBe(glance.total);
   });
 });

@@ -102,7 +102,7 @@ glazing bars, bathroom windows and anywhere the machine has to live in a drawer,
 it is the better tool. On large glass its three cleaning modes and older
 navigation are the real limit, not its grip.
 
-Neither has its own page here. Both are variants of the machine on this page
+The W2S has its own review here; the other does not. Both are variants of the machine on this page
 rather than separate propositions, and a review that repeated this one three
 times with different numbers missing would serve nobody.
 

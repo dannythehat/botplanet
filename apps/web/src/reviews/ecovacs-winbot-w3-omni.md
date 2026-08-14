@@ -1,5 +1,5 @@
 10,000 Pa maximum and 3,300 Pa while moving — the strongest grip in this
-catalogue, on the most expensive window robot we hold at $550.
+catalogue, on the most expensive window robot we hold.
 
 The moving figure is the one that matters, and this is the only machine here
 that publishes a number worth the money.
@@ -31,7 +31,7 @@ same job with the same station for less, and its 5,500 Pa is not the reason
 your glass looks the way it does. This is the honest rule-out and it applies to
 most people reading.
 
-**Anyone counting.** At $550 this is roughly double the W2 PRO. What the money
+**Anyone counting.** This is roughly double the W2 PRO. What the money
 buys is suction margin, a bigger tank and a newer navigation generation — not a
 cleaner pane.
 
@@ -96,7 +96,7 @@ all of which come from ECOVACS's own model comparison rather than from us.
 
 ## The verdict
 
-Buy it if your glass is large enough that grip margin is worth $550, and if the
+Buy it if your glass is large enough that the grip margin is worth the premium, and if the
 window you care about has no socket under it.
 
 For everything else in this range the W2 PRO Omni is the machine, and this
