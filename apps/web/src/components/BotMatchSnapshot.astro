@@ -38,7 +38,7 @@ const { snapshot, productName, categorySlug } = Astro.props;
 /* The category's own noun — "pool", "windows", "lawn" — from the journey that
    already names it for the shell CTA. Falls back to a neutral word rather than
    another category's, which is the failure being fixed. */
-const subject = journeyFor(categorySlug)?.subject ?? "needs";
+const matchAgainst = journeyFor(categorySlug)?.matchAgainst ?? "what I need";
 
 const bandLabel = PRICE_BAND_LABEL[snapshot.priceBand];
 const bandStep = PRICE_BAND_STEP[snapshot.priceBand];
@@ -119,7 +119,7 @@ const speedLabel =
         offered a match against a pool they do not have. The subject comes from
         the journey now, so it names the category the reader is actually in. */}
     <a class="bp-snap__cta" href={`/botmatch/${categorySlug}/?start=quiz`}>
-      Match this against my {subject}
+      Match this against {matchAgainst}
       <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </a>
   </div>

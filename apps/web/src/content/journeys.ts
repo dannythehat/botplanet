@@ -29,6 +29,16 @@ export interface BotMatchJourney {
    * them; English singulars are not a regex. Nine short strings, typed once.
    */
   subject: string;
+  /**
+   * What the reader is matching AGAINST — their windows, their pool, their
+   * lawn. Not the machine.
+   *
+   * The snapshot CTA read "Match this against my window robot" when it was
+   * first given a noun on 14 August 2026, which matches a robot against a
+   * robot. `subject` is the product; this is the thing the product has to
+   * suit, and they are never the same word.
+   */
+  matchAgainst: string;
   /** Heading for the journey itself, e.g. on the questionnaire page. */
   journeyTitle: string;
   /** One sentence explaining what the questionnaire actually does. */
@@ -60,6 +70,7 @@ export const BOTMATCH_JOURNEYS: Record<string, BotMatchJourney> = {
     category: LAUNCH_CATEGORY,
     ctaLabel: "Find My Pool Cleaner",
     subject: "pool cleaner",
+    matchAgainst: "my pool",
     journeyTitle: "Find your robotic pool cleaner",
     explanation:
       "Answer a few pool-specific questions and get one clear recommendation.",
@@ -74,6 +85,7 @@ export const BOTMATCH_JOURNEYS: Record<string, BotMatchJourney> = {
     category: "companion-robots",
     ctaLabel: "Find My Robot Pet",
     subject: "robot pet",
+    matchAgainst: "who it is for",
     journeyTitle: "Find your robot pet",
     explanation:
       "Tell us who it is for and whether a monthly fee is acceptable, and get one clear recommendation.",
@@ -84,6 +96,7 @@ export const BOTMATCH_JOURNEYS: Record<string, BotMatchJourney> = {
     category: "pet-camera-robots",
     ctaLabel: "Find My Pet Camera Robot",
     subject: "pet camera robot",
+    matchAgainst: "my home and my pet",
     journeyTitle: "Find your pet camera robot",
     explanation:
       "Tell us about your stairs, your floors and your pet, and get one clear recommendation.",
@@ -94,6 +107,7 @@ export const BOTMATCH_JOURNEYS: Record<string, BotMatchJourney> = {
     category: "self-cleaning-litter-boxes",
     ctaLabel: "Find My Litter Box",
     subject: "litter box",
+    matchAgainst: "my cat",
     journeyTitle: "Find your self-cleaning litter box",
     explanation:
       "Tell us your cat's size and how many you have, and get one clear recommendation.",
@@ -104,6 +118,7 @@ export const BOTMATCH_JOURNEYS: Record<string, BotMatchJourney> = {
     category: "grill-cleaning-robots",
     ctaLabel: "Find My Grill Cleaner",
     subject: "grill cleaner",
+    matchAgainst: "my grill",
     journeyTitle: "Find your grill cleaning robot",
     explanation:
       "Tell us what your grates are made of and how often you cook, and get one clear answer.",
@@ -114,6 +129,7 @@ export const BOTMATCH_JOURNEYS: Record<string, BotMatchJourney> = {
     category: "robot-vacuums",
     ctaLabel: "Find My Robot Vacuum",
     subject: "robot vacuum",
+    matchAgainst: "my floors",
     journeyTitle: "Find your robot vacuum",
     explanation:
       "Tell us what is on your floors and whether there is an animal in the house, and get one clear recommendation.",
@@ -124,6 +140,7 @@ export const BOTMATCH_JOURNEYS: Record<string, BotMatchJourney> = {
     category: "educational-coding-robots",
     ctaLabel: "Find My Coding Robot",
     subject: "coding robot",
+    matchAgainst: "their age and their kit",
     journeyTitle: "Find their first coding robot",
     explanation:
       "Tell us how old they are and whether a tablet is available, and get one clear recommendation.",
@@ -139,6 +156,7 @@ export const BOTMATCH_JOURNEYS: Record<string, BotMatchJourney> = {
     category: "window-cleaning-robots",
     ctaLabel: "Find My Window Robot",
     subject: "window robot",
+    matchAgainst: "my windows",
     journeyTitle: "Find your window cleaning robot",
     explanation:
       "Tell us whether your glass is frameless, whether there is a socket nearby and whether the window opens, and get one clear recommendation.",
@@ -149,6 +167,7 @@ export const BOTMATCH_JOURNEYS: Record<string, BotMatchJourney> = {
     category: "robotic-lawn-mowers",
     ctaLabel: "Find My Robot Mower",
     subject: "robot mower",
+    matchAgainst: "my lawn",
     journeyTitle: "Find your robot lawn mower",
     explanation:
       "Tell us your lawn's area, its worst slope and how much tree cover it has, and get one clear recommendation.",

@@ -17,6 +17,7 @@
  */
 import { describe, expect, it } from "vitest";
 import { readdirSync, readFileSync } from "node:fs";
+import { BOTMATCH_JOURNEYS } from "../src/content/journeys";
 import { fileURLToPath } from "node:url";
 
 const DIR = fileURLToPath(new URL("../src/components/", import.meta.url));
@@ -82,7 +83,26 @@ describe("shared components speak to whoever is reading", () => {
    */
   it("takes the snapshot CTA's noun from the category's own journey", () => {
     const src = readFileSync(DIR + "BotMatchSnapshot.astro", "utf8");
-    expect(src).toContain("journeyFor(categorySlug)?.subject");
-    expect(src).toContain("Match this against my {subject}");
+    expect(src).toContain("journeyFor(categorySlug)?.matchAgainst");
+    expect(src).toContain("Match this against {matchAgainst}");
+  });
+
+  /**
+   * MATCHING A ROBOT AGAINST A ROBOT. The first version of this CTA used the
+   * PRODUCT noun and rendered "Match this against my window robot" — the
+   * reader is matching the machine against their windows, not against another
+   * machine. `subject` names the product; `matchAgainst` names the thing it
+   * has to suit, and they are never the same words.
+   */
+  it("never matches a product against itself", () => {
+    for (const [slug, j] of Object.entries(BOTMATCH_JOURNEYS)) {
+      expect(j.matchAgainst, `${slug} has no matchAgainst`).toBeTruthy();
+      expect(
+        j.matchAgainst.toLowerCase().includes(j.subject.toLowerCase()),
+        `${slug}: "Match this against ${j.matchAgainst}" names the product, not what it must suit`,
+      ).toBe(false);
+      // The reader's own thing, or the person it is for — never a machine.
+      expect(j.matchAgainst).not.toMatch(/robot|cleaner|vacuum|mower/i);
+    }
   });
 });

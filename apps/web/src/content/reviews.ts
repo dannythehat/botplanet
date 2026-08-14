@@ -2508,7 +2508,28 @@ export const REVIEWS: Record<string, ReviewContent> = {
       { heading: "Navigation and safety", rows: [
         { label: "Navigation", value: null },
         { label: "Glass types", value: "Framed and frameless" },
-        { label: "Power-off hold", value: "20 minutes on the embedded UPS, with an alerting sound" },
+        {
+            label: "Power-off hold",
+            value: "Not published",
+            /* IT READ "20 minutes on the embedded UPS, with an alerting sound"
+               UNTIL 14 AUGUST 2026, and the same page said "Not published"
+               three times — including in the row directly above this table.
+               Four statements about one figure, in direct contradiction.
+
+               THE FIGURE IS NOT HOBOT'S. Every other value on this page is
+               attributed and this one never was; the identical wording, UPS
+               and alert sound appear on the Mamibot W120-DP and the Cop Rose
+               X5S, both of which cite a manual for it. It was borrowed from a
+               sibling record and it describes a different machine.
+
+               AND IT IS THE ONE FIGURE THAT MUST NOT BE BORROWED. This is the
+               category's safety number — how long the robot stays on the glass
+               after the power fails — and this page's own buying advice tells
+               a reader to judge a machine on it. Publishing an unsourced
+               twenty minutes against a machine three storeys up is the worst
+               thing this site could print. HOBOT does not state it, so neither
+               do we. */
+          },
       ]},
       { heading: "Physical", rows: [
         { label: "Robot weight", value: null },

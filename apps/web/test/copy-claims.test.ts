@@ -153,3 +153,70 @@ describe("S1/S3 — an exclusive superlative belongs to one product", () => {
     expect(unqualified).toEqual([]);
   });
 });
+
+/**
+ * ONE PAGE, ONE ANSWER PER FIGURE.
+ *
+ * The HOBOT 298 said "Power-off hold: Not published" three times and, in its
+ * own spec table, "20 minutes on the embedded UPS, with an alerting sound".
+ * Four statements about one number, in direct contradiction, on the flagship
+ * safety figure of the category — how long a robot stays on the glass three
+ * storeys up after the power fails.
+ *
+ * The 20 minutes was not HOBOT's. The identical wording appears on the Mamibot
+ * W120-DP and the Cop Rose X5S, both of which cite a manual for it; it had been
+ * borrowed from a sibling record and attributed to nothing.
+ */
+describe("a spec table never answers the same question twice", () => {
+  it.each(Object.keys(REVIEWS))("%s states each specification once", (slug) => {
+    const rows = REVIEWS[slug].specGroups.flatMap((g) => g.rows);
+    const byLabel = new Map<string, string[]>();
+    for (const r of rows) {
+      const key = r.label.trim().toLowerCase();
+      byLabel.set(key, [...(byLabel.get(key) ?? []), String(r.value ?? "")]);
+    }
+    const contradictions = [...byLabel.entries()]
+      .filter(([, values]) => new Set(values.map((v) => v.trim().toLowerCase())).size > 1)
+      .map(([label, values]) => `${label}: ${values.join(" / ")}`);
+    expect(
+      contradictions,
+      `${slug} gives two different answers for the same specification`,
+    ).toEqual([]);
+  });
+
+  /**
+   * And the safety figure specifically — but testing the thing that is PROVEN
+   * rather than the thing that is merely suspected.
+   *
+   * The first version demanded a source note on every printed power-off
+   * duration and failed four more products: two WINBOTs at "30 minutes", the
+   * Mini, and the HOBOT 2S at "20 minutes on the embedded UPS". Those may well
+   * be their makers' own figures — the window hub says ECOVACS states around
+   * thirty — but nobody has re-read those pages, and a test that forces a
+   * source note gets a source note invented to satisfy it. That is a worse
+   * outcome than the gap. They are recorded for a source read instead.
+   *
+   * What IS provable is the 298's failure: a duration whose exact wording
+   * appears in another product's record. That is not a coincidence and it is
+   * not a manufacturer figure — it is one page's number printed under another
+   * machine's name, on the one specification where being wrong is dangerous.
+   */
+  it("never prints a power-off duration copied verbatim from another product", () => {
+    const durations = new Map<string, string[]>();
+    for (const [slug, review] of Object.entries(REVIEWS)) {
+      for (const r of review.specGroups.flatMap((g) => g.rows)) {
+        if (!/power-off|power off|power cut/i.test(r.label)) continue;
+        const value = String(r.value ?? "").trim().toLowerCase();
+        if (!/\d+\s*(min|hour)/i.test(value)) continue;
+        /* A bare "30 minutes" is a figure two makers can legitimately both
+           state. A whole descriptive phrase repeated word for word is a copy. */
+        if (value.split(/\s+/).length < 4) continue;
+        durations.set(value, [...(durations.get(value) ?? []), slug]);
+      }
+    }
+    const copied = [...durations.entries()]
+      .filter(([, slugs]) => slugs.length > 1)
+      .map(([value, slugs]) => `"${value}" appears on ${slugs.join(" and ")}`);
+    expect(copied, "a power-off duration is shared verbatim between products").toEqual([]);
+  });
+});
