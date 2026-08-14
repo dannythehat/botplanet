@@ -1,4 +1,6 @@
 ---
+import { applyInternalLinks } from "../lib/internal-linker";
+import { liveAnchorsFor } from "../content/internal-links";
 /* ============================================================
    BotPlanet — FAQ section (section head + expandable questions)
 
@@ -28,16 +30,32 @@ interface Props {
   eyebrow?: string;
   title: string;
   intro: string;
+  /* Passed straight to SectionHead so the hub prose can carry a product
+     link. See the note there. */
+  linkCategory?: string;
   items: FaqItem[];
   /** Open the first question by default. */
   openFirst?: boolean;
 }
 
-const { id, eyebrow, title, intro, items, openFirst = true } = Astro.props;
+const { id, eyebrow, title, intro, items, openFirst = true, linkCategory } = Astro.props;
+
+/* Product names live in these bodies, not in the section intro — the price
+   rungs and the FAQ answers are where a hub actually says "the WINBOT W2 PRO".
+   Injecting here is what puts a product link in hub prose; the intro pass in
+   SectionHead only ever found in-page anchors, because intros are written
+   generically on purpose. See the note in SectionHead.astro. */
+const escapeHtml = (t: string) =>
+  t.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+const weave = (t: string) =>
+  linkCategory
+    ? applyInternalLinks(escapeHtml(t), liveAnchorsFor(linkCategory), `/robots/${linkCategory}/`).html
+    : null;
+
 ---
 
 <section class="bp-faq" id={id}>
-  <SectionHead eyebrow={eyebrow} title={title} intro={intro} />
+  <SectionHead eyebrow={eyebrow} title={title} intro={intro} linkCategory={linkCategory} />
 
   <div class="bp-faq__list">
     {items.map((item, i) => (
@@ -46,7 +64,7 @@ const { id, eyebrow, title, intro, items, openFirst = true } = Astro.props;
           <h3 class="bp-faq__q">{item.q}</h3>
           <span class="bp-faq__icon" aria-hidden="true"></span>
         </summary>
-        <p class="bp-faq__a">{item.a}</p>
+        {weave(item.a) ? <p class="bp-faq__a" set:html={weave(item.a)} /> : <p class="bp-faq__a">{item.a}</p>}
       </details>
     ))}
   </div>

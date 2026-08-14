@@ -28,14 +28,17 @@ interface Props {
   eyebrow?: string;
   title: string;
   intro: string;
+  /* Passed straight to SectionHead so the hub prose can carry a product
+     link. See the note there. */
+  linkCategory?: string;
   panels: SplitPanel[];
 }
 
-const { id, eyebrow, title, intro, panels } = Astro.props;
+const { id, eyebrow, title, intro, panels, linkCategory } = Astro.props;
 ---
 
 <section class="bp-split" id={id}>
-  <SectionHead eyebrow={eyebrow} title={title} intro={intro} />
+  <SectionHead eyebrow={eyebrow} title={title} intro={intro} linkCategory={linkCategory} />
 
   <div class="bp-split__grid">
     {panels.map((panel) => (

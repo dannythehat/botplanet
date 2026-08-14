@@ -1,4 +1,6 @@
 ---
+import { applyInternalLinks } from "../lib/internal-linker";
+import { liveAnchorsFor } from "../content/internal-links";
 /* ============================================================
    BotPlanet — Shared section header
 
@@ -16,9 +18,43 @@ interface Props {
   title: string;
   /** 60–100 words. */
   intro: string;
+  /**
+   * Category whose internal-link anchors may be woven into the intro.
+   *
+   * THE ONE PLACE NINE HUBS' PROSE CAN GAIN A LINK. Every category hub carries
+   * roughly 3,200 words and, until 14 August 2026, not one link from any of it
+   * to a product — the full-site audit found the same defect on all nine. The
+   * cause was structural rather than editorial: the internal-link injector runs
+   * on MARKDOWN, so reviews and guides get links woven through their prose,
+   * while hub sections are structured records rendered straight to HTML and
+   * could never be reached by it.
+   *
+   * Every section on every hub renders its intro through this component, so
+   * doing it here covers all nine and cannot drift from what a section says
+   * next. Omit the prop and the intro renders as plain text exactly as before.
+   */
+  linkCategory?: string;
 }
 
-const { eyebrow, title, intro } = Astro.props;
+const { eyebrow, title, intro, linkCategory } = Astro.props;
+
+/* The intro is plain prose from a content module, so the only escaping it
+   needs is the three characters that would otherwise be read as markup. The
+   injector then inserts anchors it built itself from the registry.
+
+   Each anchor already carries its own cap of one occurrence, and a 60-to-100
+   word paragraph rarely contains more than one registered phrase, so this
+   yields a link or two rather than a link farm. */
+const escapeHtml = (t: string) =>
+  t.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+/* SELF-PATH PASSED so the hub cannot link its own URL. Fragment anchors into
+   this page survive that check by design — a jump to #coverage is navigation,
+   not a self-link — and those are useful here: the intros are what a reader
+   scans before deciding which section to read. */
+const linked = linkCategory
+  ? applyInternalLinks(escapeHtml(intro), liveAnchorsFor(linkCategory), `/robots/${linkCategory}/`).html
+  : null;
 ---
 
 <header class="bp-shead">
@@ -29,7 +65,7 @@ const { eyebrow, title, intro } = Astro.props;
     </div>
   )}
   <h2 class="bp-shead__title">{title}</h2>
-  <p class="bp-shead__intro">{intro}</p>
+  {linked ? <p class="bp-shead__intro" set:html={linked} /> : <p class="bp-shead__intro">{intro}</p>}
 </header>
 
 <style>

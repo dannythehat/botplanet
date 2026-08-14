@@ -279,7 +279,7 @@ const pageSchema = hero
       title={decision.title}
       intro={decision.intro}
       cards={decision.cards}
-    />
+    linkCategory={cat.slug} />
   )}
 
   {/* THE HUB'S ONE DRAWING, directly under the decision it belongs to.
@@ -302,15 +302,15 @@ const pageSchema = hero
       intro={coverage.intro}
       image={coverage.image}
       rows={coverage.rows}
-    />
+    linkCategory={cat.slug} />
   )}
 
   {split && (
-    <DecisionSplit id={split.id} eyebrow={split.eyebrow} title={split.title} intro={split.intro} panels={split.panels} />
+    <DecisionSplit id={split.id} eyebrow={split.eyebrow} title={split.title} intro={split.intro} panels={split.panels} linkCategory={cat.slug} />
   )}
 
   {matrix && (
-    <MatrixTable id={matrix.id} eyebrow={matrix.eyebrow} title={matrix.title} intro={matrix.intro} columns={matrix.columns} rows={matrix.rows} note={matrix.note} />
+    <MatrixTable id={matrix.id} eyebrow={matrix.eyebrow} title={matrix.title} intro={matrix.intro} columns={matrix.columns} rows={matrix.rows} note={matrix.note} linkCategory={cat.slug} />
   )}
 
   {/* BEFORE the generic comparison grid, deliberately. The grid compares the
@@ -346,7 +346,7 @@ const pageSchema = hero
   )}
 
   {check && (
-    <CheckList id={check.id} eyebrow={check.eyebrow} title={check.title} intro={check.intro} boxLabel={check.boxLabel} items={check.items} />
+    <CheckList id={check.id} eyebrow={check.eyebrow} title={check.title} intro={check.intro} boxLabel={check.boxLabel} items={check.items} linkCategory={cat.slug} />
   )}
 
   {/* A composed Bot Finder card where one exists for this category, and the
@@ -379,15 +379,15 @@ const pageSchema = hero
   ) : null}
 
   {price && (
-    <PriceLadder id={price.id} eyebrow={price.eyebrow} title={price.title} intro={price.intro} rungs={price.rungs} note={price.note} />
+    <PriceLadder id={price.id} eyebrow={price.eyebrow} title={price.title} intro={price.intro} rungs={price.rungs} note={price.note} linkCategory={cat.slug} />
   )}
 
   {verdict && (
-    <VerdictPanel id={verdict.id} eyebrow={verdict.eyebrow} title={verdict.title} intro={verdict.intro} verdict={verdict.verdict} body={verdict.body} against={verdict.against} />
+    <VerdictPanel id={verdict.id} eyebrow={verdict.eyebrow} title={verdict.title} intro={verdict.intro} verdict={verdict.verdict} body={verdict.body} against={verdict.against} linkCategory={cat.slug} />
   )}
 
   {faq && (
-    <FaqList id={faq.id} eyebrow={faq.eyebrow} title={faq.title} intro={faq.intro} items={faq.items} />
+    <FaqList id={faq.id} eyebrow={faq.eyebrow} title={faq.title} intro={faq.intro} items={faq.items} linkCategory={cat.slug} />
   )}
 
   <ArticleFooter lastReviewed={LAST_REVIEWED} />

@@ -15,7 +15,7 @@ edge, and the Mammotion LUBA 3 AWD and the Dreame A3 AWD both do eighty per
 cent on all four wheels.
 
 Anyone on a tight budget. Two and a half thousand dollars buys the WORX
-Landroid Vision at $1,022.54 and a great deal of change, and the WORX covers
+Landroid Vision for well under this and a great deal of change, and the WORX covers
 the same half acre.
 
 ## What the two area figures actually tell you

@@ -36,18 +36,21 @@ interface Props {
   eyebrow?: string;
   title: string;
   intro: string;
+  /* Passed straight to SectionHead so the hub prose can carry a product
+     link. See the note there. */
+  linkCategory?: string;
   /** Optional supporting visual, shown above the rows. */
   image?: HeroImage;
   rows: CoverageRow[];
 }
 
-const { id, eyebrow, title, intro, image, rows } = Astro.props;
+const { id, eyebrow, title, intro, image, rows, linkCategory } = Astro.props;
 
 import { srcsetFor } from "../lib/srcset";
 ---
 
 <section class="bp-cov" id={id}>
-  <SectionHead eyebrow={eyebrow} title={title} intro={intro} />
+  <SectionHead eyebrow={eyebrow} title={title} intro={intro} linkCategory={linkCategory} />
 
   {image?.src && (
     <figure class="bp-cov__figure">

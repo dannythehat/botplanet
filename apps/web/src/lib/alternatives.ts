@@ -72,10 +72,29 @@ export function findAlternatives(
 ): AlternativeMatch[] {
   const pool = candidates.filter((c) => c.slug !== excludeSlug);
 
+  /**
+   * ONE PRODUCT ANSWERS ONE RULE-OUT, NOT SEVERAL.
+   *
+   * Each rule-out scanned the same pool from the top independently, so the
+   * first machine that satisfied two different needs was printed twice in one
+   * block — the BuBlue page listed the Beatbot for two separate reasons, and
+   * the full-site sweep of 14 August 2026 found four pages doing it. A block
+   * naming the same machine twice reads as a page with one idea, and it wastes
+   * the slot that could have shown the reader something else.
+   *
+   * A rule-out with no unused answer renders nothing, which is the existing
+   * behaviour for "nothing qualifies" and is the honest outcome.
+   */
+  const used = new Set<string>();
+
   return ruleOuts.map((r) => {
     for (const c of pool) {
+      if (used.has(c.slug)) continue;
       const because = satisfies(c, r.test);
-      if (because) return { need: r.need, pick: { slug: c.slug, name: c.name, because } };
+      if (because) {
+        used.add(c.slug);
+        return { need: r.need, pick: { slug: c.slug, name: c.name, because } };
+      }
     }
     return { need: r.need, pick: null };
   });

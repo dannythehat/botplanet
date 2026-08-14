@@ -1,4 +1,4 @@
-Half an acre for $1,022.54. Nothing else in our lawn catalogue covers that much
+Half an acre for about a thousand dollars. Nothing else in our lawn catalogue covers that much
 ground for anywhere near that money — the Husqvarna rated for the same area
 costs $2,499.99.
 
@@ -36,7 +36,7 @@ it, and it is the single most common disappointment in this category.
 
 "Landroid Vision" is a family, not a model. At least four are live in the US:
 
-- WR320, 2WD, half acre, $1,022.54 — this one
+- WR320, 2WD, half acre — this one, and the cheapest of the four
 - WO7144, quarter acre, $999.99
 - WR342, 4WD, half acre, $2,069.99
 - WR344, 4WD, one acre, $2,646.18

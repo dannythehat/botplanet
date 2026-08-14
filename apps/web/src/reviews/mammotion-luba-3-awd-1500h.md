@@ -11,7 +11,7 @@ same review twice and hoping you found the right copy.
 ## Who should not buy this
 
 Anybody with a flat lawn. Two thousand four hundred dollars against the WORX
-Landroid Vision at $1,022.54, which covers a bigger area — half an acre against
+Landroid Vision at a fraction of the price, which covers a bigger area — half an acre against
 0.37 — and cuts flat grass just as well. If your garden is level, the
 all-wheel drive is dead weight you are financing, and that is true of the 3000H
 at $2,799 as well.

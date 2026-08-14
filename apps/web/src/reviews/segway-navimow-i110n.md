@@ -13,7 +13,7 @@ Anybody with mature trees over the lawn. This is a satellite-positioned machine
 and a canopy defeats satellite positioning — not slowly, not partially, but as
 a hard failure with no setting that fixes it. VisionFence helps it avoid things;
 it does not tell the mower where it is. Under trees the answer is a
-camera-navigated machine: the WORX Landroid Vision at $1,022.54 or the eufy E15
+camera-navigated machine: the WORX Landroid Vision or the eufy E15
 at $1,199.99.
 
 Anybody with a slope past thirty per cent, which is seventeen degrees. That

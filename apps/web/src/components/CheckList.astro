@@ -30,16 +30,19 @@ interface Props {
   eyebrow?: string;
   title: string;
   intro: string;
+  /* Passed straight to SectionHead so the hub prose can carry a product
+     link. See the note there. */
+  linkCategory?: string;
   /** Label across the top of the box. */
   boxLabel?: string;
   items: CheckItem[];
 }
 
-const { id, eyebrow, title, intro, boxLabel = "Check these before buying", items } = Astro.props;
+const { id, eyebrow, title, intro, boxLabel = "Check these before buying", items, linkCategory } = Astro.props;
 ---
 
 <section class="bp-chk" id={id}>
-  <SectionHead eyebrow={eyebrow} title={title} intro={intro} />
+  <SectionHead eyebrow={eyebrow} title={title} intro={intro} linkCategory={linkCategory} />
 
   <div class="bp-chk__box">
     <p class="bp-chk__boxlabel">{boxLabel}</p>

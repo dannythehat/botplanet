@@ -1,4 +1,5 @@
 ---
+import { journeyFor } from "../content/journeys";
 /* ============================================================
    BotPlanet — the BotMatch snapshot panel.
 
@@ -34,6 +35,11 @@ interface Props {
 
 const { snapshot, productName, categorySlug } = Astro.props;
 
+/* The category's own noun — "pool", "windows", "lawn" — from the journey that
+   already names it for the shell CTA. Falls back to a neutral word rather than
+   another category's, which is the failure being fixed. */
+const subject = journeyFor(categorySlug)?.subject ?? "needs";
+
 const bandLabel = PRICE_BAND_LABEL[snapshot.priceBand];
 const bandStep = PRICE_BAND_STEP[snapshot.priceBand];
 const BANDS = ["entry", "mid", "upper_mid", "premium"] as const;
@@ -52,8 +58,9 @@ const speedLabel =
       <p class="bp-snap__eyebrow">BotMatch snapshot</p>
       <h2 id="snapshot-heading">{productName}, in short</h2>
       <p class="bp-snap__lede">
+        {/* "suits your pool" on all sixty-four reviews until 14 August 2026. */}
         The same summary BotMatch sends after a match — the things that decide whether this
-        machine suits your pool, before the detail.
+        machine suits you, before the detail.
       </p>
     </header>
 
@@ -106,8 +113,13 @@ const speedLabel =
       </div>
     </div>
 
+    {/* "Match this against my pool" on all sixty-four reviews until 14 August
+        2026 — the second half of the same hardcode the hub chrome was fixed for
+        that morning. A window buyer, a cat owner and a lawn owner were all
+        offered a match against a pool they do not have. The subject comes from
+        the journey now, so it names the category the reader is actually in. */}
     <a class="bp-snap__cta" href={`/botmatch/${categorySlug}/?start=quiz`}>
-      Match this against my pool
+      Match this against my {subject}
       <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </a>
   </div>

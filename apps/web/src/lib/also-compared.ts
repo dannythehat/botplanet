@@ -76,9 +76,17 @@ const reviewHref = (r: ReviewContent) => `/robots/${r.categorySlug}/${r.slug}/`;
  * "same category", which is honest rather than pretending to a closer match.
  */
 const NEARNESS: Record<string, { label: string; match: string[] }[]> = {
+  /* POWER TYPE DROPPED TO LAST, 14 August 2026. It was first, and it is the
+     weakest characteristic in the category: corded-or-cordless splits eleven
+     machines into two heaps and says nothing about whether either suits the
+     reader. The captions gave it away in their own words — "shares the same
+     power type" appeared on eight pages, which is the picker admitting it
+     matched on nothing useful, and it put a $159 floor-only skimmer beside a
+     $2,199 flagship. Surfaces first: what a machine actually cleans is the
+     thing a reader is choosing between. */
   "robotic-pool-cleaners": [
-    { label: "the same power type", match: ["Power type"] },
     { label: "the same surfaces", match: ["Surfaces"] },
+    { label: "the same power type", match: ["Power type"] },
   ],
   "window-cleaning-robots": [
     { label: "the same glass types", match: ["Glass types"] },

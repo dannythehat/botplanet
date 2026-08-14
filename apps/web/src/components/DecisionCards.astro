@@ -29,16 +29,19 @@ interface Props {
   eyebrow?: string;
   title: string;
   intro: string;
+  /* Passed straight to SectionHead so the hub prose can carry a product
+     link. See the note there. */
+  linkCategory?: string;
   cards: DecisionCard[];
 }
 
-const { id, eyebrow, title, intro, cards } = Astro.props;
+const { id, eyebrow, title, intro, cards, linkCategory } = Astro.props;
 
 import { srcsetFor } from "../lib/srcset";
 ---
 
 <section class="bp-dsec" id={id}>
-  <SectionHead eyebrow={eyebrow} title={title} intro={intro} />
+  <SectionHead eyebrow={eyebrow} title={title} intro={intro} linkCategory={linkCategory} />
 
   <div class="bp-dsec__grid" data-count={cards.length}>
     {cards.map((card, i) => (

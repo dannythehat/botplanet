@@ -33,6 +33,9 @@ interface Props {
   eyebrow?: string;
   title: string;
   intro: string;
+  /* Passed straight to SectionHead so the hub prose can carry a product
+     link. See the note there. */
+  linkCategory?: string;
   /** Column headings, excluding the row-label column. */
   columns: string[];
   rows: MatrixRow[];
@@ -40,13 +43,13 @@ interface Props {
   note?: string;
 }
 
-const { id, eyebrow, title, intro, columns, rows, note } = Astro.props;
+const { id, eyebrow, title, intro, columns, rows, note, linkCategory } = Astro.props;
 
 import { srcsetFor, sizeOf } from "../lib/srcset";
 ---
 
 <section class="bp-mx" id={id}>
-  <SectionHead eyebrow={eyebrow} title={title} intro={intro} />
+  <SectionHead eyebrow={eyebrow} title={title} intro={intro} linkCategory={linkCategory} />
 
   <div class="bp-mx__frame">
     <table class="bp-mx__table">

@@ -109,11 +109,17 @@ const alternatives =
   <BotMatchSnapshot snapshot={snapshot} productName={productName} categorySlug={review.categorySlug} />
 )}
 
+{/* IT ASKED SIXTY-FOUR REVIEWS ABOUT THE READER'S POOL until 14 August 2026 —
+    every window robot, every mower, every robot pet, every litter box. Written
+    for the launch category and never re-read when eight more arrived, exactly
+    like the comparison table and the shell CTA before it. The line does not
+    need a category at all: what it is actually saying is "you have read the
+    summary and it fits", which is true of any machine. */}
 {lead?.redirectKey && (
   <BuyStrip
     retailerName={lead.retailerName}
     redirectKey={lead.redirectKey}
-    line="Read the snapshot and it already sounds like your pool? The current price and delivery are one tap away."
+    line="Read the snapshot and it already sounds right? The current price and delivery are one tap away."
   />
 )}
 
@@ -156,7 +162,7 @@ const alternatives =
     tone="strong"
     retailerName={lead.retailerName}
     redirectKey={lead.redirectKey}
-    line="That is the whole case, good and bad. If it still fits your pool, here is where to get it."
+    line="That is the whole case, good and bad. If it still fits, here is where to get it."
   />
 )}
 

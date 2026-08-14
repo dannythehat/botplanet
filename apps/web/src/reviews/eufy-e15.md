@@ -48,7 +48,7 @@ they describe the machine accurately: a suburban lawn robot for a flat garden
 under about a fifth of an acre, at $1,199.99.
 
 What it is not is a cheap way into the category. The WORX Landroid Vision
-covers half an acre for $1,022.54 — a hundred and seventy-seven dollars less
+covers half an acre for less than this — and the gap
 for two and a half times the ground — and also navigates by camera. On paper
 that is a hard comparison for the E15 to win, and the honest thing is to say so
 rather than find a reason it does not count.

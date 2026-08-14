@@ -18,6 +18,9 @@ interface Props {
   eyebrow?: string;
   title: string;
   intro: string;
+  /* Passed straight to SectionHead so the hub prose can carry a product
+     link. See the note there. */
+  linkCategory?: string;
   /** The short answer, set large. One or two sentences. */
   verdict: string;
   /** The reasoning. 120–180 words. */
@@ -29,12 +32,11 @@ interface Props {
 
 const {
   id, eyebrow, title, intro, verdict, body,
-  againstLabel = "When it is not worth it", against,
-} = Astro.props;
+  againstLabel = "When it is not worth it", against, linkCategory } = Astro.props;
 ---
 
 <section class="bp-verdict" id={id}>
-  <SectionHead eyebrow={eyebrow} title={title} intro={intro} />
+  <SectionHead eyebrow={eyebrow} title={title} intro={intro} linkCategory={linkCategory} />
 
   <div class="bp-verdict__panel">
     <p class="bp-verdict__lead">{verdict}</p>
