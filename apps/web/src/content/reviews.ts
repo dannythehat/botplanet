@@ -2430,7 +2430,22 @@ export const REVIEWS: Record<string, ReviewContent> = {
       { heading: "Navigation and safety", rows: [
         { label: "Navigation", value: "AI route planning (no version published)" },
         { label: "Glass types", value: "Framed and frameless" },
-        { label: "Power-off hold", value: "20 minutes on the embedded UPS, with an audio alert" },
+        {
+            label: "Power-off hold",
+            value: "Not published",
+            /* THE SECOND HOBOT WITH THIS DEFECT, and finding it twice named the
+               cause. It read "20 minutes on the embedded UPS, with an audio
+               alert" while this page's own snapshot and gaps section said "not
+               published — we cannot tell you what happens when your power
+               cuts". The 298 said the same with one word changed: "with an
+               alerting sound".
+
+               THE FIGURE BELONGS TO THE MAMIBOT AND THE COP ROSE. Both of those
+               records carry it WITH a manual cited; both HOBOT records carried
+               it with nothing. It was copied across and drifted by a word, which
+               is why the verbatim-duplicate guard caught the 298 and not this.
+               HOBOT publishes no duration for either machine. */
+          },
       ]},
       { heading: "Physical", rows: [
         { label: "Robot weight", value: null },

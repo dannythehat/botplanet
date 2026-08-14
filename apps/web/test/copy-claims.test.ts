@@ -214,7 +214,21 @@ describe("a spec table never answers the same question twice", () => {
         /* A bare "30 minutes" is a figure two makers can legitimately both
            state. A whole descriptive phrase repeated word for word is a copy. */
         if (value.split(/\s+/).length < 4) continue;
-        durations.set(value, [...(durations.get(value) ?? []), slug]);
+        /* NORMALISED, BECAUSE ONE WORD OF DRIFT HID THE SECOND ONE. The 298
+           said "20 minutes on the embedded UPS, with an alerting sound" and
+           the HOBOT 2S "…with an audio alert" — the same borrowed figure from
+           the same source, and the verbatim check caught only the first. The
+           key is now the numbers and the distinctive nouns, so a synonym
+           swapped into a copied phrase cannot slip past. */
+        const key = value
+          .replace(/\b(with|an|a|the|and|on)\b/g, " ")
+          .replace(/alerting sound|audio alert|warning sound|alarm/g, "alert")
+          .replace(/[^a-z0-9 ]/g, " ")
+          .split(/\s+/)
+          .filter(Boolean)
+          .sort()
+          .join(" ");
+        durations.set(key, [...(durations.get(key) ?? []), slug]);
       }
     }
     const copied = [...durations.entries()]
