@@ -16,6 +16,8 @@ import { NOT_DISCLOSED, type ComparisonRow } from "../components/ComparisonTable
    register; this was one of two survivors, and on 11 August 2026 it linked a
    merged product straight at its own 301. */
 import { productPath } from "./routes";
+import { REVIEWS } from "./reviews";
+import { RESEARCHED_SUFFIX, sizeIsResearched } from "../lib/size-provenance";
 
 /** The catalogue fields this needs. Deliberately not the whole product row. */
 export interface ComparableProduct {
@@ -54,17 +56,16 @@ const WORD: Record<string, string> = {
 
 const label = (v: string) => WORD[v] ?? v.replace(/_/g, " ");
 
-/**
- * How big a pool it is rated for.
- *
- * Length is preferred because a reader can measure their pool with a tape and
- * cannot easily judge its area. Where the maker publishes only an area — Aiper
- * does this for the Scuba V3, BuBlue for the Bubot — the area is shown rather
- * than a "Not disclosed" that would misrepresent a published rating as silence.
- */
+/* Provenance lives in lib/size-provenance.ts so it can be unit tested — this
+   file imports from a .astro component and therefore cannot be. See the note
+   there. */
+
 export function poolSizeCell(p: ComparableProduct): string {
-  if (p.maxPoolLengthFt !== null) return `Up to ${p.maxPoolLengthFt} ft long`;
-  if (p.maxPoolAreaSqFt !== null) return `Up to ${p.maxPoolAreaSqFt.toLocaleString("en-US")} sq ft`;
+  const suffix = sizeIsResearched(REVIEWS[p.slug]) ? RESEARCHED_SUFFIX : "";
+  if (p.maxPoolLengthFt !== null) return `Up to ${p.maxPoolLengthFt} ft long${suffix}`;
+  if (p.maxPoolAreaSqFt !== null) {
+    return `Up to ${p.maxPoolAreaSqFt.toLocaleString("en-US")} sq ft${suffix}`;
+  }
   return NOT_DISCLOSED;
 }
 

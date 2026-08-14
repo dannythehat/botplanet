@@ -1037,7 +1037,7 @@ export const REVIEWS: Record<string, ReviewContent> = {
          overtaken when the Beatbot was catalogued. */
       "Near the top of what we cover and the only one that honestly claims all four jobs — " +
       "surface, waterline, walls and floor — with ultrasonic mapping, 8,500 GPH of claimed suction " +
-      "and the longest stated warranty in our catalogue. Twice the price of Aiper's own camera " +
+      "and a warranty term matched only by the Beatbot. Twice the price of Aiper's own camera " +
       "robot, and the difference is mostly the skimming.",
     bestFor:
       "A large in-ground pool whose owner wants one machine doing the skimmer's job and the " +

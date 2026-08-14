@@ -2,7 +2,8 @@
 and is the only one that genuinely does all four jobs: it skims the surface, scrubs the
 waterline, climbs the walls and vacuums the floor, mapping the pool with ultrasound
 as it goes. Aiper backs it with a three-year warranty — the longest stated term in
-our catalogue — and publishes more engineering detail than any rival we have read.
+our catalogue, matched only by the Beatbot, which backs its three years with
+replacement rather than repair — and publishes more engineering detail than any rival we have read.
 
 At $1,700 it costs twice what the camera-guided Scuba V3 does. Whether the second
 thousand dollars is worth it comes down to one question: do you want one machine
@@ -137,9 +138,11 @@ never the URL and never the title. Ours says, in full, "Scuba X1 Pro Max".
 
 ## Warranty and durability, in writing
 
-Three years, stated on Aiper's own page — the longest published term in our
-catalogue, against one year for the Nautilus and the Betta, and no stated term at
-all for the Polaris FREEDOM or the Scuba V3.
+Three years, stated on Aiper's own page — level with the Beatbot for the longest
+published term in our catalogue, against one year for the Nautilus and the Betta,
+and no stated term at all for the Polaris FREEDOM or the Scuba V3. The Beatbot's
+three years promise replacement rather than repair, which is the part this does
+not match.
 
 Around it, Aiper publishes an unusually specific durability sheet: a ten-year
 design lifespan, salt tested to 50,000 ppm, chlorine to 40 ppm, temperature tested

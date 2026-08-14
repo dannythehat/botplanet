@@ -32,7 +32,8 @@ anything else we cover.
 - **Your pool is modest and flat-bottomed.** A WYBOT C1 does floor, walls and
   waterline for about a fifth of this price. Most pools need that, not this.
 - **You want surface skimming without flagship money.** The Aiper Scuba X1 Pro Max
-  vacuums and skims for hundreds less, with a published pool-length rating.
+  vacuums and skims for hundreds less, and carries a 100 ft pool rating — from our
+  own research rather than from Aiper, which publishes no length for it.
 - **Your pool is above-ground.** Beatbot markets the Ultra for in-ground pools.
 - **You distrust young premium brands.** The warranty is exceptional on paper, and
   the brand making the promise is only a few years old. Both facts are real.
@@ -122,9 +123,12 @@ between.
 ## The warranty that changes the arithmetic
 
 Beatbot backs the Ultra with a 3-year full replacement warranty and calls itself
-the first in the industry to offer one. Nothing else we cover comes close: the
-Dolphin Nautilus CC Plus states one year, BuBlue states one, WYBOT states two, and
-Aiper's product pages for the machines we review state no term at all.
+the first in the industry to offer one.
+
+On term alone it is not alone. The Dolphin Nautilus CC Plus states one year,
+BuBlue states one, WYBOT states two, and Aiper states three on the Scuba X1 Pro
+Max. What no other machine here matches is the second half of the promise:
+replacement rather than repair.
 
 On a $2,299 machine, that term is doing real work. Amortised bluntly, a Ultra that
 lives its full warranty costs about $766 a year with a replacement promise
