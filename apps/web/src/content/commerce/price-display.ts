@@ -50,10 +50,21 @@ export const SHOW_PRICES = true;
 export const PRICE_WITHHELD_LABEL = "Check current price";
 
 /**
- * The reason, in the reader's language rather than ours. Shown once per
- * surface — a page that repeats it in five places is a page apologising.
+ * RETIRED 14 AUGUST 2026, ON THE OWNER'S INSTRUCTION.
+ *
+ * This printed "We are not printing a price for this model while we reconcile
+ * a disagreement between the price our check recorded and the price on the
+ * listing" wherever a price was missing. On the W3 Omni and the W2 PRO it had
+ * been saying it since 31 July, and it was not true: there was no
+ * disagreement, because the checker had never read either listing. Forty-two
+ * of sixty-four products were in the same position.
+ *
+ * Even where it had been true it was the wrong thing to print. A reader wants
+ * a price or a link; a paragraph about our reconciliation process is neither,
+ * and it makes a working buy button look broken. The label is
+ * "Check current price" and the button goes to the live page. That is the
+ * whole answer.
+ *
+ * Kept as a comment rather than deleted so nobody reinstates it by writing it
+ * again from scratch.
  */
-export const PRICE_WITHHELD_NOTE =
-  "We are not printing a price for this model while we reconcile a disagreement between " +
-  "the price our check recorded and the price on the listing. The link goes to the live " +
-  "page, where the current figure is the one that counts.";

@@ -51,7 +51,7 @@ interface Props {
   emptyNote?: string;
 }
 
-import { PRICE_WITHHELD_LABEL, PRICE_WITHHELD_NOTE } from "../content/commerce/price-display";
+import { PRICE_WITHHELD_LABEL } from "../content/commerce/price-display";
 
 const { productName, offers, image, emptyNote } = Astro.props;
 const linkable = offers.filter((o) => o.redirectKey);
@@ -107,7 +107,15 @@ const others = linkable.filter((o) => o !== lead);
               {lead.checkedDate && <li>Price checked {lead.checkedDate}</li>}
             </ul>
 
-            {!lead.price && <p class="bp-buy__shipnote">{PRICE_WITHHELD_NOTE}</p>}
+            {/* THE APOLOGY IS GONE, 14 August 2026. Where there was no price
+                this printed three lines about reconciling a disagreement
+                between our check and the listing — on the two most expensive
+                window robots it had been saying that since 31 July, and there
+                was no disagreement to reconcile: the checker had simply never
+                read them. A paragraph explaining our internal process is not
+                something a reader wants or can act on. The button below already
+                says "Check price on Amazon" and goes to the live page, where
+                the current figure is the one that counts. Owner instruction. */}
             {lead.shippingNote && <p class="bp-buy__shipnote">{lead.shippingNote}</p>}
 
             <a class="bp-buy__cta" href={`/go/${lead.redirectKey}`} rel="sponsored nofollow">
