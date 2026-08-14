@@ -370,4 +370,75 @@ export const EXPECTED_IDENTITIES: IdentityExpectation[] = [
 ];
 
 /** Products with no confirmed ASIN. They need discovery, not a refresh. */
-export const AWAITING_DISCOVERY = ["prod-aiper-scuba-s1"];
+export const AWAITING_DISCOVERY = [
+  "prod-aiper-scuba-s1",
+
+  /* FORTY-TWO PRODUCTS JOINED THIS LIST ON 14 AUGUST 2026, and none of them
+     should have been able to reach production without being on it.
+
+     The price checker reads EXPECTED_IDENTITIES. That list holds pool, litter
+     and lawn and nothing else, so every window robot, vacuum, companion,
+     coding robot, pet camera, the grill machine and the snow blower has NEVER
+     had a price read — 42 of 64 published products. It is why both premium
+     WINBOTs have told readers "we are reconciling a price disagreement" since
+     31 July: there is no disagreement, there is no observation at all.
+
+     THE COVERAGE TEST THAT WAS WRITTEN TO CATCH EXACTLY THIS DID NOT, because
+     it iterated ACTIVE_PRODUCTS — pool-era editorial that no later category
+     appears in. A guard reading the same incomplete list as the code it checks
+     agrees with it and proves nothing. It reads PRODUCT_ID now.
+
+     THEY GO HERE RATHER THAN INTO EXPECTED_IDENTITIES, and the distinction is
+     the whole safety mechanism. An entry there needs modelTokens and, more
+     importantly, DENY tokens — the WYBOT C1 taught that a listing titled
+     "2026 WYBOT C1" can read C1 PLUS in its own fields. Writing 42 sets of
+     deny tokens quickly is how the checker confirms the wrong machine and
+     publishes a price for a product nobody is selling. Awaiting discovery is
+     the honest state: the gap is now recorded, tested and visible, instead of
+     silent for six weeks.
+
+     Promoting a category is per-product work: read the listing, transcribe the
+     identity fields, write the deny tokens for its siblings, move it up. */
+  "prod-ecovacs-winbot-w2-pro-omni",
+  "prod-ecovacs-winbot-w3-omni",
+  "prod-ecovacs-winbot-w2-pro",
+  "prod-ecovacs-winbot-w2s",
+  "prod-ecovacs-winbot-w1-pro",
+  "prod-ecovacs-winbot-mini",
+  "prod-hutt-s55-pro",
+  "prod-mamibot-w120-dp",
+  "prod-hobot-2s",
+  "prod-hobot-298",
+  "prod-cop-rose-x5s",
+  "prod-moflin",
+  "prod-miko-3",
+  "prod-vector-2",
+  "prod-eilik",
+  "prod-loona",
+  "prod-joy-for-all-companion-pets",
+  "prod-ropet",
+  "prod-enabot-ebo-air-2",
+  "prod-enabot-ebo-se",
+  "prod-enabot-rola-petpal",
+  "prod-sphero-bolt",
+  "prod-sphero-mini",
+  "prod-sphero-indi",
+  "prod-ozobot-evo",
+  "prod-makeblock-mbot",
+  "prod-living-ai-emo",
+  "prod-cozmo",
+  "prod-grillbot",
+  "prod-moxie",
+  "prod-eufy-x10-pro-omni",
+  "prod-eufy-omni-s1-pro",
+  "prod-roborock-s8-max-ultra",
+  "prod-roborock-saros-10",
+  "prod-roborock-qrevo-s5v",
+  "prod-dreame-x40-ultra",
+  "prod-dreame-x50-ultra",
+  "prod-ecovacs-deebot-t90-pro-omni",
+  "prod-shark-powerdetect-av2820s",
+  "prod-shark-matrix-plus-ur2650ws",
+  "prod-roomba-max-705",
+  "prod-yarbo-snow-blower",
+];

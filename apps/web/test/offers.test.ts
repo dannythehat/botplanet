@@ -1554,11 +1554,27 @@ describe("scheduled refresh — wiring", () => {
        ASINs, and no price check ever run against either, because neither was
        on either list. A product is either checkable or awaiting discovery.
        There is no third state, and silence is not one. */
-    for (const p of Object.values(ACTIVE_PRODUCTS)) {
+    /* AND IT ITERATED THE WRONG LIST UNTIL 14 AUGUST 2026, which is the third
+       time that exact mistake has been found in a week.
+
+       ACTIVE_PRODUCTS derives from PRODUCTS — pool-era editorial keyed by slug,
+       which no category added after pool appears in. So this loop ran over
+       eleven pool machines and passed, while FORTY-TWO published products sat
+       in neither list: every window robot, every vacuum, every companion,
+       coding, pet-camera, grill and snow machine. None of them has ever had a
+       price read. The two premium WINBOTs have said "we are reconciling a price
+       disagreement" since 31 July for that reason and no other.
+
+       A guard that iterates the same incomplete list as the code it checks
+       agrees with it perfectly and proves nothing. PRODUCT_ID is the slug-to-D1
+       join map every category must appear in, whatever shape its editorial
+       takes — the same correction offer-truth.ts made on 6 August for the same
+       reason. */
+    for (const productId of Object.values(PRODUCT_ID)) {
       const known =
-        EXPECTED_IDENTITIES.some((e) => e.productId === p.productId) ||
-        AWAITING_DISCOVERY.includes(p.productId);
-      expect(known, `${p.slug}: no identity expectation and not awaiting discovery`).toBe(true);
+        EXPECTED_IDENTITIES.some((e) => e.productId === productId) ||
+        AWAITING_DISCOVERY.includes(productId);
+      expect(known, `${productId}: no identity expectation and not awaiting discovery`).toBe(true);
     }
   });
 
