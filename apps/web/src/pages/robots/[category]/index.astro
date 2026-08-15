@@ -126,6 +126,33 @@ const bmCta = canMatch(products.length) ? botMatchCtaFor(category) : undefined;
 
 /* Built from the catalogue rather than written out, so a product that changes
    model cannot leave a stale row behind. */
+
+/**
+ * THE PRODUCTS WERE ALL AT THE BOTTOM, BELOW THE SIGN-OFF.
+ *
+ * Every hub rendered its entire catalogue in one block AFTER ArticleFooter —
+ * after the affiliate disclosure and the "last reviewed" line. The full-site
+ * audit measured the grid starting 84% of the way down the companion hub's
+ * document. A reader who scrolled through three thousand words of category
+ * argument reached the end of the page before meeting a single machine, and
+ * anyone who stopped early met none.
+ *
+ * THREE CLUSTERS, PLACED WHERE THE READER HAS JUST EARNED THEM. The first
+ * follows the decision cards — the reader now knows which kind of machine
+ * suits them and wants to see some. The second follows the comparison table,
+ * which is the moment they are actually choosing. The third follows the price
+ * ladder, for the reader who came down to budget. Split evenly, in the order
+ * the catalogue already sorts, so no cluster is a favoured slot.
+ *
+ * The FIRST cluster keeps id="products", because every hub hero's primary CTA
+ * points at #products and it should land on the first machines, not the last.
+ */
+const cluster = (n: 0 | 1 | 2) => {
+  if (products.length === 0) return [];
+  const size = Math.ceil(products.length / 3);
+  return products.slice(n * size, (n + 1) * size);
+};
+
 const compareRows = comparisonRows(
   products.map((p) => ({
     id: p.id,
@@ -294,6 +321,25 @@ const pageSchema = hero
       brochure. */}
   <HubDiagram category={cat.slug} />
 
+  {cluster(0).length > 0 && (
+    <div class="grid grid--products" id="products">
+      {cluster(0).map((p, i) => (
+        <ProductCard
+          href={productPath(p.slug, cat.slug)}
+          name={p.name}
+          classification={titleCase(p.productClass)}
+          meta={[titleCase(p.powerType), ...(p.environments as string[]).slice(0, 2).map(titleCase)]}
+          price={prices.get(p.id) ? usd(prices.get(p.id)!.priceMinor) : null}
+          priceNote={prices.get(p.id) ? checkedNote(prices.get(p.id)!.checkedDate) : undefined}
+          productId={p.id}
+          variant={i + 0}
+          saveId={p.id}
+        />
+      ))}
+    </div>
+  )}
+
+
   {coverage && (
     <CoverageRows
       id={coverage.id}
@@ -345,6 +391,24 @@ const pageSchema = hero
     />
   )}
 
+  {cluster(1).length > 0 && (
+    <div class="grid grid--products">
+      {cluster(1).map((p, i) => (
+        <ProductCard
+          href={productPath(p.slug, cat.slug)}
+          name={p.name}
+          classification={titleCase(p.productClass)}
+          meta={[titleCase(p.powerType), ...(p.environments as string[]).slice(0, 2).map(titleCase)]}
+          price={prices.get(p.id) ? usd(prices.get(p.id)!.priceMinor) : null}
+          priceNote={prices.get(p.id) ? checkedNote(prices.get(p.id)!.checkedDate) : undefined}
+          productId={p.id}
+          variant={i + 4}
+          saveId={p.id}
+        />
+      ))}
+    </div>
+  )}
+
   {check && (
     <CheckList id={check.id} eyebrow={check.eyebrow} title={check.title} intro={check.intro} boxLabel={check.boxLabel} items={check.items} linkCategory={cat.slug} />
   )}
@@ -382,29 +446,9 @@ const pageSchema = hero
     <PriceLadder id={price.id} eyebrow={price.eyebrow} title={price.title} intro={price.intro} rungs={price.rungs} note={price.note} linkCategory={cat.slug} />
   )}
 
-  {verdict && (
-    <VerdictPanel id={verdict.id} eyebrow={verdict.eyebrow} title={verdict.title} intro={verdict.intro} verdict={verdict.verdict} body={verdict.body} against={verdict.against} linkCategory={cat.slug} />
-  )}
-
-  {faq && (
-    <FaqList id={faq.id} eyebrow={faq.eyebrow} title={faq.title} intro={faq.intro} items={faq.items} linkCategory={cat.slug} />
-  )}
-
-  <ArticleFooter lastReviewed={LAST_REVIEWED} />
-
-  {products.length === 0 ? (
-    /* Carries id="products" so the hero's own "Compare …" button lands here
-       rather than nowhere. Every hub hero points at #products; on a category
-       with nothing published the id existed on no element, so the button was
-       dead on the grill and vacuum hubs. Landing on "none yet" is the honest
-       answer to the question the button asks. */
-    <div class="empty" id="products">
-      <p class="empty__title">No products published in this category yet</p>
-      <p>Published products appear here automatically.</p>
-    </div>
-  ) : (
-    <div class="grid grid--products" id="products">
-      {products.map((p, i) => (
+  {cluster(2).length > 0 && (
+    <div class="grid grid--products">
+      {cluster(2).map((p, i) => (
         <ProductCard
           href={productPath(p.slug, cat.slug)}
           name={p.name}
@@ -413,10 +457,30 @@ const pageSchema = hero
           price={prices.get(p.id) ? usd(prices.get(p.id)!.priceMinor) : null}
           priceNote={prices.get(p.id) ? checkedNote(prices.get(p.id)!.checkedDate) : undefined}
           productId={p.id}
-          variant={i}
+          variant={i + 8}
           saveId={p.id}
         />
       ))}
     </div>
   )}
+
+  {verdict && (
+    <VerdictPanel id={verdict.id} eyebrow={verdict.eyebrow} title={verdict.title} intro={verdict.intro} verdict={verdict.verdict} body={verdict.body} against={verdict.against} linkCategory={cat.slug} />
+  )}
+
+  {faq && (
+    <FaqList id={faq.id} eyebrow={faq.eyebrow} title={faq.title} intro={faq.intro} items={faq.items} linkCategory={cat.slug} />
+  )}
+
+  {products.length === 0 && (
+    /* Carries id="products" so the hero's own "Compare …" button lands here
+       rather than nowhere. Landing on "none yet" is the honest answer to the
+       question the button asks. */
+    <div class="empty" id="products">
+      <p class="empty__title">No products published in this category yet</p>
+      <p>Published products appear here automatically.</p>
+    </div>
+  )}
+
+  <ArticleFooter lastReviewed={LAST_REVIEWED} />
 </Base>
