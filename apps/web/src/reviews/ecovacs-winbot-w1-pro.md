@@ -82,6 +82,13 @@ Buy it to find out whether you want one, and buy it for ordinary framed windows
 you can reach.
 
 Do not buy it as a cheaper flagship, because it is not one — half the suction,
-three modes, and a safety figure the maker declines to print. If the machine
-earns its place in your routine, the WINBOT W2 PRO is what you replace it with,
-and you will have spent less finding that out than most people spend guessing.
+three modes, and no backup battery at all.
+
+And check the WINBOT Mini before you buy this one. It costs less, it grips
+harder — 7,500 Pa against this machine's 2,800 — and it is small enough for
+panes this one cannot fit. That is why our window hub names the W1 PRO as one
+of two machines we hold and do not recommend: not because it is bad, but
+because its own cheaper sibling beats it on the two numbers a buyer actually
+compares. Buy it if you specifically want the larger body. Otherwise the Mini
+is the better machine at the lower price, and the W2 PRO is what you move up
+to when you have decided you want one properly.

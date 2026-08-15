@@ -2022,7 +2022,7 @@ export const REVIEWS: Record<string, ReviewContent> = {
     facts: [
       { label: "Power", value: "Cordless via station" },
       { label: "Max suction", value: "5,500 Pa ±500" },
-      { label: "Power-off hold", value: "30 min" },
+      { label: "Power-off hold", value: "30 min", note: "ECOVACS states this across the WINBOT range; the same figure appears on every W-series record we hold and in the category research of 5 August 2026. Not re-read from the product page since." },
       { label: "Glass", value: "Framed and frameless" },
     ],
     specGroups: [
@@ -2041,7 +2041,7 @@ export const REVIEWS: Record<string, ReviewContent> = {
         rows: [
           { label: "Navigation", value: "WIN-SLAM 4.0" },
           { label: "Protection stages", value: "12" },
-          { label: "Power-off hold", value: "30 minutes" },
+          { label: "Power-off hold", value: "30 minutes", note: "ECOVACS states this across the WINBOT range; the same figure appears on every W-series record we hold and in the category research of 5 August 2026. Not re-read from the product page since." },
           { label: "Glass types", value: "Framed and frameless" },
         ],
       },
@@ -2108,7 +2108,7 @@ export const REVIEWS: Record<string, ReviewContent> = {
         rows: [
           { label: "Navigation", value: "WIN-SLAM 4.0" },
           { label: "Protection stages", value: "10" },
-          { label: "Power-off hold", value: "30 minutes" },
+          { label: "Power-off hold", value: "30 minutes", note: "ECOVACS states this across the WINBOT range; the same figure appears on every W-series record we hold and in the category research of 5 August 2026. Not re-read from the product page since." },
           { label: "Glass types", value: "Framed and frameless" },
         ],
       },
@@ -4571,7 +4571,7 @@ export const REVIEWS: Record<string, ReviewContent> = {
     facts: [
       { label: "Max suction", value: "7,500 Pa" },
       { label: "Size", value: "215 \u00d7 215 \u00d7 55 mm" },
-      { label: "Power-off hold", value: "30 minutes" },
+      { label: "Power-off hold", value: "30 minutes", note: "ECOVACS states this across the WINBOT range; the same figure appears on every W-series record we hold and in the category research of 5 August 2026. Not re-read from the product page since." },
       { label: "Cleaning modes", value: "3" },
     ],
     specGroups: [
@@ -4594,7 +4594,17 @@ export const REVIEWS: Record<string, ReviewContent> = {
       {
         heading: "Safety and route",
         rows: [
-          { label: "Power-off hold", value: "30 minutes \u2014 the same figure ECOVACS prints for its flagships" },
+          {
+            label: "Power-off hold",
+            value: "30 minutes",
+            /* THE MINI CARRIED TWO POWER-OFF ROWS and this was the second, its
+               value ending "— the same figure ECOVACS prints for its
+               flagships". Same number, different wording, one page. The
+               comparison belongs in the prose; a spec table answering the same
+               question twice is what the HOBOT 298 was fixed for. */
+            note:
+              "ECOVACS states this across the WINBOT range; the same figure appears on every W-series record we hold and in the category research of 5 August 2026. Not re-read from the product page since.",
+          },
           { label: "Navigation", value: "WIN-SLAM 3.0, two generations behind the W2 machines" },
           { label: "Cleaning modes", value: "3, against 7 on the W2 PRO" },
         ],

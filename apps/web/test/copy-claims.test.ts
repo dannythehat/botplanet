@@ -355,3 +355,41 @@ describe("the spec glance counts every unpublished field", () => {
     expect(glance.missing + glance.rows.length).toBe(glance.total);
   });
 });
+
+
+/**
+ * EVERY PRINTED POWER-OFF DURATION NAMES ITS SOURCE.
+ *
+ * THIS TEST WAS WITHDRAWN ONCE AND THAT WAS THE WRONG CALL. It was first
+ * written with the HOBOT 298 fix and failed four more products — two WINBOTs,
+ * the Mini and the HOBOT 2S. I judged that forcing a note would get notes
+ * invented to satisfy it, and withdrew it in favour of a duplicate-phrase
+ * check.
+ *
+ * Two of those four turned out to be genuinely borrowed. The HOBOT 2S was
+ * printing the Mamibot's figure with one word changed, and the duplicate check
+ * could not see it once the 298 was corrected — it only fires while TWO
+ * products share a phrase, so fixing one hides the other. This test has no
+ * such blind spot: it asks each row to account for itself.
+ *
+ * The three ECOVACS rows it originally failed are now sourced. That figure is
+ * corroborated across four W-series records and the category research; the
+ * note says so, and says it has not been re-read since.
+ */
+describe("a printed power-off duration accounts for itself", () => {
+  it.each(Object.keys(REVIEWS))("%s sources any duration it prints", (slug) => {
+    const rows = REVIEWS[slug].specGroups.flatMap((g) => g.rows);
+    const unsourced: string[] = [];
+    for (const r of rows) {
+      if (!/power-off|power off|power cut/i.test(r.label)) continue;
+      const value = String(r.value ?? "");
+      if (!/\d+\s*(min|hour)/i.test(value)) continue;
+      const note = (r as { note?: string }).note ?? "";
+      if (note.trim().length < 20) unsourced.push(value);
+    }
+    expect(
+      unsourced,
+      `${slug} prints a power-off duration with nothing saying where it came from — this is the safety figure`,
+    ).toEqual([]);
+  });
+});

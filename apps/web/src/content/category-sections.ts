@@ -519,7 +519,7 @@ export const DECISION_SECTION: Record<string, DecisionSectionContent> = {
             "meeting floor and ceiling with almost no visible framing.",
         },
         points: [
-          "Every ECOVACS WINBOT in this catalogue states frameless support — it is not the hard exclusion the category's reputation suggests.",
+          "The WINBOT W2 PRO states frameless support outright. Most of the range does not publish a glass-type list at all, so check the exact model — it is not the blanket exclusion the category's reputation suggests.",
           "What varies is how fast the edge sensor reacts, not whether it exists.",
           "The risk is at the edge, so the safety tether matters more here than anywhere.",
         ],
@@ -2551,8 +2551,8 @@ export const CHECK_SECTION: Record<string, CheckSectionContent> = {
         title: "Frameless support, if you have frameless glass",
         body:
           "A machine that needs a frame to find an edge is not going on a frameless pane. " +
-          "Every ECOVACS WINBOT here states frameless support, so this rules in more machines " +
-          "than the category's reputation suggests — but it still has to be stated.",
+          "The WINBOT W2 PRO states frameless support; several of its siblings publish no glass-type list at " +
+          "all, and silence is not a yes — so this has to be checked model by model rather than by brand.",
         ask: "Does the maker state frameless support for this exact model?",
       },
       {
@@ -3964,10 +3964,11 @@ export const FAQ_SECTION: Record<string, FaqSectionContent> = {
       {
         q: "Do window cleaning robots work on frameless windows?",
         a:
-          "More often than the category's reputation suggests. Every ECOVACS WINBOT we list " +
-          "states support for frameless as well as framed glass. What differs is how quickly " +
-          "the edge sensor reacts, not whether one is fitted. The thing to check is that your " +
-          "exact model states it — support is not automatic across a brand.",
+          "More often than the category's reputation suggests, but not on every model we list. The WINBOT W2 PRO " +
+          "states support for frameless as well as framed glass. Several machines here publish no glass-type " +
+          "list at all, and our decoder table says so rather than assuming the brand covers them. The thing to " +
+          "check is that your exact model states it — support is not automatic across a brand, and a maker's " +
+          "silence is the answer rather than an oversight.",
       },
       {
         q: "Do they leave streaks?",
