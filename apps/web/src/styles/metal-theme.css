@@ -159,34 +159,9 @@ a:not(.btn):hover,
   border-color: rgba(204, 210, 218, 0.15) !important;
 }
 
-/* Never allow the temporary text-heavy product placeholders to dominate public pages. */
-img[data-placeholder="true"] {
-  opacity: 0 !important;
-}
-
-[data-placeholder="true"] + *,
-.stage:has(img[data-placeholder="true"]),
-.pcard__media:has(img[data-placeholder="true"]) {
-  position: relative;
-  background:
-    radial-gradient(circle at 50% 42%, rgba(232,235,239,.17), transparent 8%),
-    radial-gradient(ellipse at 50% 60%, rgba(137,145,156,.12), transparent 38%),
-    linear-gradient(145deg, #171b20 0%, #090b0e 52%, #1b2026 100%) !important;
-}
-
-.stage:has(img[data-placeholder="true"])::after,
-.pcard__media:has(img[data-placeholder="true"])::after {
-  content: "MEDIA PENDING";
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  color: #aeb4bc;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: .18em;
-  white-space: nowrap;
-}
+/* Branded placeholder artwork (ProductImage/media-registry) renders as designed —
+   it already names the model and never claims to be a product photo, so there is
+   no reason to blank it out behind a bare "MEDIA PENDING" label. */
 
 @media (max-width: 900px) {
   .logo-full { width: 168px !important; height: auto; }
