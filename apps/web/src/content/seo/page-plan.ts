@@ -1911,6 +1911,12 @@ const COMPANION_GUIDE: PagePlan = {
     { term: "robotic pet for dementia", volume: 170, difficulty: 0 },
     { term: "companion robot for elderly", volume: 140, difficulty: 0 },
     { term: "robotic pets for elderly", volume: 390, difficulty: 0 },
+    { term: "robot cat realistic", volume: 1000, difficulty: 10 },
+    { term: "robotic cat for elderly", volume: 320, difficulty: 2 },
+    { term: "free robotic pets for seniors", volume: 170, difficulty: 0 },
+    { term: "interactive robotic cat toy", volume: 170, difficulty: 0 },
+    { term: "best robotic cat for seniors", volume: 110, difficulty: 1 },
+    { term: "dementia cat toy", volume: 110, difficulty: 0 },
   ],
   ceded: [
     { term: "robot pet", toPath: "/robots/companion-robots/", why: "The 8,100 head term belongs to the hub. This guide takes the care-setting intent, which is a different reader with a different question." },
