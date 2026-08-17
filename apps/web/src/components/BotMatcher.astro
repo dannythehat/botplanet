@@ -212,9 +212,17 @@ const payload = JSON.stringify({
   </section>
 
   <!-- 3. analysing -->
-  <section class="bp-mm__stage" data-stage="analysing" hidden>
+  <section class="bp-mm__stage" data-stage="analysing" hidden aria-live="polite">
     <span class="bp-mm__kicker">Working through it</span>
     <h2 class="bp-mm__q" data-analysing-title>Matching what you told us against what we have researched</h2>
+    <div class="bp-mm__thinking" role="status">
+      <span class="bp-mm__thinking-orbit" aria-hidden="true">
+        <span></span><span></span><span></span>
+        <img src="/logo/favicon-128.png" alt="" width="64" height="64" />
+      </span>
+      <strong>BotMatch is comparing your answers</strong>
+      <small>Checking fit, exclusions and honest ties.</small>
+    </div>
     <ul class="bp-mm__tasks" data-tasks></ul>
   </section>
 
@@ -277,6 +285,17 @@ const payload = JSON.stringify({
       matchable: boolean; emptyState: string; hubHref: string;
     };
     type Job = { id: string; label: string; description: string; categorySlug: string };
+    type ProductView = {
+      name: string;
+      url: string;
+      image: {
+        src: string;
+        srcset: { src: string; width: number }[];
+        alt: string;
+        width: number | null;
+        height: number | null;
+      } | null;
+    };
 
     const cfg = JSON.parse(root.dataset.config || "{}") as {
       categories: Cat[]; jobs: Job[]; mode: "single" | "choose"; analyseMs: number;
@@ -297,7 +316,13 @@ const payload = JSON.stringify({
     let selected: Cat[] = mode === "choose" ? [] : categories.slice();
     let catIndex = 0;
     const answersByCat: Record<string, Record<string, string>> = {};
-    const resultsByCat: Record<string, { token: string | null; productName: string | null; equivalent: string[] }> = {};
+    const resultsByCat: Record<string, {
+      token: string | null;
+      productName: string | null;
+      equivalent: string[];
+      product: ProductView | null;
+      equivalentProducts: ProductView[];
+    }> = {};
 
     let step = 0;
     let locked = false;
@@ -482,6 +507,8 @@ const payload = JSON.stringify({
             token: data.token ?? null,
             productName: data.productName ?? null,
             equivalent: Array.isArray(data.equivalent) ? data.equivalent : [],
+            product: data.product ?? null,
+            equivalentProducts: Array.isArray(data.equivalentProducts) ? data.equivalentProducts : [],
           };
         } catch { /* the funnel must not fail because scoring did */ }
       }));
@@ -559,49 +586,102 @@ const payload = JSON.stringify({
       show("done");
     });
 
-    /* ---------- done: one block per category ---------- */
+    /* ---------- done: one visual block per category ---------- */
+    function appendProductCard(parent: HTMLElement, product: ProductView) {
+      const card = document.createElement("article");
+      card.className = "bp-mm__product-card";
+
+      if (product.image) {
+        const img = document.createElement("img");
+        img.src = product.image.src;
+        img.alt = product.image.alt;
+        img.loading = "lazy";
+        img.decoding = "async";
+        if (product.image.width) img.width = product.image.width;
+        if (product.image.height) img.height = product.image.height;
+        if (product.image.srcset.length) {
+          img.srcset = product.image.srcset.map((item) => `${item.src} ${item.width}w`).join(", ");
+          img.sizes = "(min-width: 700px) 240px, 100vw";
+        }
+        card.appendChild(img);
+      }
+
+      const copy = document.createElement("div");
+      copy.className = "bp-mm__product-copy";
+      const label = document.createElement("span");
+      label.textContent = "YOUR MATCH";
+      const name = document.createElement("strong");
+      name.textContent = product.name;
+      const link = document.createElement("a");
+      link.className = "bp-mm__product-button";
+      link.href = product.url;
+      link.textContent = "View product";
+      copy.append(label, name, link);
+      card.appendChild(copy);
+      parent.appendChild(card);
+    }
+
     function renderResults() {
       const box = q<HTMLElement>("[data-results]");
       box.innerHTML = "";
 
       selected.forEach((cat) => {
-        const wrap = document.createElement("div");
+        const wrap = document.createElement("section");
         wrap.className = "bp-mm__result";
+        const heading = document.createElement("h3");
+        heading.textContent = cat.name;
+        wrap.appendChild(heading);
 
-        /* THE HONEST EMPTY STATE. A category we cannot pick from says so and
-           sends the reader to the hub. It never falls through to "no match",
-           which reads as a failure of their answers rather than of our
-           catalogue. */
         if (!cat.matchable) {
-          wrap.innerHTML =
-            `<h3>${cat.name}</h3><p>${cat.emptyState}</p>` +
-            `<a class="bp-mm__resultlink" href="${cat.hubHref}">Read what we know about ${cat.name.toLowerCase()} →</a>`;
+          const message = document.createElement("p");
+          message.textContent = cat.emptyState;
+          const hub = document.createElement("a");
+          hub.className = "bp-mm__resultlink";
+          hub.href = cat.hubHref;
+          hub.textContent = `Explore ${cat.name.toLowerCase()} →`;
+          wrap.append(message, hub);
           box.appendChild(wrap);
           return;
         }
 
-        const r = resultsByCat[cat.slug];
-        if (!r || !r.token) {
-          wrap.innerHTML =
-            `<h3>${cat.name}</h3><p>We could not complete this match just now. Your answers are safe — the category page has the full comparison.</p>` +
-            `<a class="bp-mm__resultlink" href="${cat.hubHref}">Open ${cat.name.toLowerCase()} →</a>`;
+        const result = resultsByCat[cat.slug];
+        if (!result || !result.token) {
+          const message = document.createElement("p");
+          message.textContent =
+            "We could not complete this match just now. The category page has the full comparison.";
+          const hub = document.createElement("a");
+          hub.className = "bp-mm__resultlink";
+          hub.href = cat.hubHref;
+          hub.textContent = `Open ${cat.name.toLowerCase()} →`;
+          wrap.append(message, hub);
           box.appendChild(wrap);
           return;
         }
 
-        /* A TIE IS PRESENTED AS A TIE. The API returns `equivalent` when the
-           recorded data cannot separate the top of the ranking, and it is
-           named here for the same reason it is named on the result page:
-           picking one of them would be inventing a comparison. */
-        const body = r.equivalent.length > 1
-          ? `<p>Equivalent on current data: <strong>${r.equivalent.join("</strong>, <strong>")}</strong>. We do not hold the attributes that would separate them.</p>`
-          : r.productName
-            ? `<p>Your match: <strong>${r.productName}</strong>.</p>`
-            : `<p>Your result is saved and ready.</p>`;
+        if (result.equivalentProducts.length > 1) {
+          const message = document.createElement("p");
+          message.textContent =
+            "These robots are equivalent on the answers and evidence we currently hold. We will not invent a winner:";
+          wrap.appendChild(message);
+          const group = document.createElement("div");
+          group.className = "bp-mm__product-group";
+          result.equivalentProducts.forEach((product) => appendProductCard(group, product));
+          wrap.appendChild(group);
+        } else if (result.product) {
+          appendProductCard(wrap, result.product);
+        } else {
+          const message = document.createElement("p");
+          message.textContent = result.productName
+            ? `Your match is ${result.productName}.`
+            : "Your result is saved and ready.";
+          wrap.appendChild(message);
+        }
 
-        wrap.innerHTML =
-          `<h3>${cat.name}</h3>${body}` +
-          `<a class="bp-mm__resultlink" href="/recommendation/${r.token}">See why, and what it does not do well →</a>`;
+        const reason = document.createElement("a");
+        reason.className = "bp-mm__resultlink";
+        reason.href = `/recommendation/${result.token}`;
+        reason.textContent = "See why this matched, including its limitations →";
+        wrap.appendChild(reason);
         box.appendChild(wrap);
       });
     }
@@ -733,12 +813,42 @@ const payload = JSON.stringify({
   /* ---------- done: one block per category ---------- */
   .bp-mm__results { display: grid; gap: 1rem; margin: 1.6rem 0 0; }
   .bp-mm__result {
-    padding: 1.1rem 1.15rem; border: 1px solid rgba(200, 208, 222, 0.16);
-    border-radius: 12px; background: rgba(255, 255, 255, 0.02);
+    padding: clamp(1rem, 3vw, 1.4rem); border: 1px solid rgba(200, 208, 222, 0.18);
+    border-radius: 18px; background: linear-gradient(178deg, rgba(18, 23, 30, .96), rgba(8, 11, 15, .98));
   }
-  .bp-mm__result h3 { margin: 0 0 0.45rem; font-size: 1rem; font-weight: 600; }
-  .bp-mm__result p { margin: 0 0 0.7rem; color: var(--text-secondary); line-height: 1.5; font-size: 0.95rem; }
-  .bp-mm__result .bp-mm__resultlink { margin: 0; }
+  .bp-mm__result h3 { margin: 0 0 0.75rem; font-size: 1.05rem; font-weight: 600; }
+  .bp-mm__result p { margin: 0 0 0.9rem; color: var(--text-secondary); line-height: 1.55; font-size: 0.95rem; }
+  .bp-mm__result .bp-mm__resultlink { margin-top: 1rem; }
+  .bp-mm__product-group { display: grid; gap: 0.9rem; }
+  .bp-mm__product-card {
+    display: grid; grid-template-columns: minmax(150px, 42%) 1fr; overflow: hidden;
+    border: 1px solid rgba(200, 208, 222, .20); border-radius: 15px; background: #070a0e;
+  }
+  .bp-mm__product-card > img {
+    display: block; width: 100%; height: 100%; min-height: 170px; object-fit: cover;
+    border-right: 1px solid rgba(200, 208, 222, .16);
+  }
+  .bp-mm__product-copy {
+    display: flex; min-width: 0; flex-direction: column; align-items: flex-start; justify-content: center;
+    gap: 0.55rem; padding: 1.15rem;
+  }
+  .bp-mm__product-copy > span {
+    color: #54d9ff; font-family: var(--font-mono); font-size: 0.65rem; font-weight: 700; letter-spacing: .17em;
+  }
+  .bp-mm__product-copy > strong { color: var(--text-primary); font-size: 1.12rem; line-height: 1.3; }
+  .bp-mm__product-button {
+    display: inline-flex; align-items: center; justify-content: center; min-height: 42px;
+    margin-top: 0.4rem; padding: 0 1.1rem; border: 1px solid #7ce6ff; border-radius: 999px;
+    background: linear-gradient(135deg, #7ce6ff 0%, #2aa9ff 100%);
+    box-shadow: 0 8px 24px rgba(42, 169, 255, .22); color: #041018;
+    font-weight: 750; text-decoration: none;
+  }
+  .bp-mm__product-button:hover { filter: brightness(1.08); transform: translateY(-1px); }
+  .bp-mm__product-button:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+  @media (max-width: 560px) {
+    .bp-mm__product-card { grid-template-columns: 1fr; }
+    .bp-mm__product-card > img { aspect-ratio: 16 / 10; min-height: 0; border-right: 0; border-bottom: 1px solid rgba(200, 208, 222, .16); }
+  }
 
   /* Global rather than scoped: the option buttons and task rows are created in
      JavaScript at runtime, so Astro's scoped attribute never lands on them.
@@ -832,6 +942,35 @@ const payload = JSON.stringify({
   .bp-mm__opt-text span { display: block; margin-top: 0.18rem; font-size: 0.88rem; color: var(--text-tertiary); }
 
   /* ---------- analysing ---------- */
+  .bp-mm__thinking {
+    display: grid; justify-items: center; gap: 0.45rem;
+    margin: 1.4rem 0 1.8rem; padding: 1.6rem 1.2rem;
+    border: 1px solid rgba(78, 205, 255, 0.28); border-radius: 18px;
+    background: radial-gradient(circle at 50% 28%, rgba(48, 180, 255, 0.12), transparent 55%), #090d12;
+    text-align: center;
+  }
+  .bp-mm__thinking-orbit {
+    position: relative; display: grid; place-items: center;
+    width: 108px; height: 108px; margin-bottom: 0.55rem;
+  }
+  .bp-mm__thinking-orbit > span {
+    position: absolute; inset: 0; border: 1px solid rgba(80, 210, 255, 0.24); border-radius: 50%;
+    animation: bm-orbit 1.8s linear infinite;
+  }
+  .bp-mm__thinking-orbit > span:nth-child(2) { inset: 12px; animation-duration: 1.35s; animation-direction: reverse; }
+  .bp-mm__thinking-orbit > span:nth-child(3) { inset: 24px; animation-duration: 1s; }
+  .bp-mm__thinking-orbit > span::after {
+    content: ""; position: absolute; top: -3px; left: 50%; width: 7px; height: 7px;
+    border-radius: 50%; background: #54d9ff; box-shadow: 0 0 18px rgba(84, 217, 255, 0.9);
+  }
+  .bp-mm__thinking-orbit img {
+    width: 48px; height: 48px; border-radius: 14px;
+    box-shadow: 0 0 28px rgba(84, 217, 255, 0.18);
+  }
+  .bp-mm__thinking strong { color: var(--text-primary); font-size: 1rem; }
+  .bp-mm__thinking small { color: var(--text-tertiary); font-size: 0.86rem; }
+  @keyframes bm-orbit { to { transform: rotate(360deg); } }
+
   .bp-mm__tasks { margin: 1.75rem 0 0; padding: 0; list-style: none; display: grid; gap: 0.85rem; }
   .bp-mm__tasks li {
     display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 0.85rem;
@@ -879,5 +1018,6 @@ const payload = JSON.stringify({
   }
   @media (prefers-reduced-motion: reduce) {
     .bp-mm__progress-bar, .bp-mm__opt, .bp-mm__tasks li { transition: none; }
+    .bp-mm__thinking-orbit > span { animation: none; }
   }
 </style>
