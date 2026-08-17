@@ -149,26 +149,9 @@ const COLUMNS = [sizeLabel, typeLabel, "Cleans", "Power", "Price band"];
 
   {note && <p class="bp-cmp__note">{note}</p>}
 
-  {/* THE HUB'S OWN TABLE IS A SUMMARY; THE COMPARISON PAGE IS THE FULL ONE,
-      and until now no hub linked to it. The comparison pages were reachable
-      from the menu and from whichever reviews happened to mention them, which
-      left /compare/self-cleaning-litter-boxes/ with exactly one inbound link
-      in the site's entire body copy — because that category has no reviews yet
-      to carry it. The link belongs here, under the abbreviated table, where a
-      reader has just discovered they want more columns. */}
-  {categorySlug && (
-    <p class="bp-cmp__full">
-      <a href={`/compare/${categorySlug}/`}>
-        Every column, every model: the full {title.toLowerCase()} table
-      </a>
-    </p>
-  )}
 </section>
 
 <style is:global>
-  .bp-cmp__full { margin-top: 0.85rem; font-size: 0.92rem; }
-  .bp-cmp__full a { font-weight: 600; }
-
   /* The frame is the lit metal plate the rest of the page uses, one step in
      from the section plate around it so the nesting reads as depth. */
   .bp-cmp__frame {

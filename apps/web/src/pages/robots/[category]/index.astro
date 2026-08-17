@@ -18,7 +18,10 @@ import CoverageRows from "../../../components/CoverageRows.astro";
 import DecisionSplit from "../../../components/DecisionSplit.astro";
 import MatrixTable from "../../../components/MatrixTable.astro";
 import ComparisonTable from "../../../components/ComparisonTable.astro";
+import BrandPairs from "../../../components/BrandPairs.astro";
+import type { RenderedPair } from "../../../components/BrandPairs.astro";
 import { comparisonRows } from "../../../content/comparison";
+import { comparePageFor } from "../../../content/compare-page";
 import CheckList from "../../../components/CheckList.astro";
 import JumpLinks from "../../../components/JumpLinks.astro";
 import TrustStrip from "../../../components/TrustStrip.astro";
@@ -32,8 +35,18 @@ import VerdictPanel from "../../../components/VerdictPanel.astro";
 import FaqList from "../../../components/FaqList.astro";
 import { decisionSectionFor, coverageSectionFor, splitSectionFor, matrixSectionFor, checkSectionFor, priceSectionFor, verdictSectionFor, faqSectionFor, botMatchCtaFor } from "../../../content/category-sections";
 import { MEDIA_ASSETS } from "../../../content/media/assets";
+import { editorialForCategory } from "../../../content/editorial";
+import { applyInternalLinks } from "../../../lib/internal-linker";
+import { anchorsFor } from "../../../content/internal-links";
+import { srcsetFor } from "../../../lib/srcset";
 import HubDiagram from "../../../components/diagrams/HubDiagram.astro";
 import HubTable from "../../../components/HubTable.astro";
+import "../../../styles/prose.css";
+
+const ARTICLE_PROSE = import.meta.glob<{ compiledContent: () => string | Promise<string> }>(
+  "../../../articles/*.md",
+  { eager: true },
+);
 
 const { category } = Astro.params;
 const db = getDb(Astro.locals);
@@ -168,6 +181,52 @@ const compareRows = comparisonRows(
   cat.slug,
 );
 
+/* The only retired comparison page with unique editorial work is pool. Its
+   research now lives on the category hub that owns the same search intent. */
+const comparisonArticle = comparePageFor(cat.slug);
+const comparisonByProduct = new Map(compareRows.map((row) => [row.productId, row]));
+const comparisonPairs: RenderedPair[] = (comparisonArticle?.pairs ?? []).map((pair) => ({
+  ...pair,
+  machines: pair.picks
+    .map((pick) => {
+      const product = products.find((item) => item.slug === pick.slug);
+      const row = product ? comparisonByProduct.get(product.id) : undefined;
+      return row
+        ? {
+            name: row.name,
+            href: row.href,
+            why: pick.why,
+            cleans: row.cleans,
+            power: row.power,
+            poolSize: row.poolSize,
+          }
+        : null;
+    })
+    .filter((machine): machine is NonNullable<typeof machine> => machine !== null),
+}));
+
+let comparisonBody = "";
+if (comparisonArticle) {
+  const mod = ARTICLE_PROSE[`../../../articles/${comparisonArticle.prose}.md`];
+  if (!mod) throw new Error(`No comparison prose for ${cat.slug}`);
+  comparisonBody = applyInternalLinks(
+    await mod.compiledContent(),
+    anchorsFor(cat.slug),
+    `/robots/${cat.slug}/`,
+  ).html;
+}
+
+/* The retired pool-guide directory was a list, not an article. Preserve its
+   useful destinations here and retire the duplicate URL. */
+const mergedGuides =
+  cat.slug === "robotic-pool-cleaners"
+    ? editorialForCategory(cat.slug).filter(
+        (entry) =>
+          entry.path.startsWith("/guides/") &&
+          entry.path !== "/guides/robotic-pool-cleaners/",
+      )
+    : [];
+
 /* Jump links are derived from the sections this page actually renders, so the
    list can never name a heading that is not there. Label is the section's
    eyebrow — short enough for a chip, unlike the full H2. */
@@ -179,15 +238,17 @@ const jumpTargets = [
      above — but it is the section most readers actually want, and leaving it
      out of the jump nav hid it behind eight scrolls. Inserted where it renders
      rather than appended, so the nav order matches the page order. */
+  ...(comparisonArticle ? [{ id: "brand-comparisons", label: "Brand comparisons" }] : []),
   ...(compareRows.length > 1 ? [{ id: "compare", label: "Compare all" }] : []),
   ...[check, price, verdict, faq]
     .filter((sec): sec is NonNullable<typeof sec> => Boolean(sec?.id && sec?.eyebrow))
     .map((sec) => ({ id: sec.id, label: sec.eyebrow! })),
+  ...(mergedGuides.length ? [{ id: "buying-advice", label: "Buying advice" }] : []),
 ];
 
 /* Every figure below is real. Nothing claims hands-on testing — the evidence
    model here is desk research plus dated manual checks. */
-const LAST_REVIEWED = "2026-08-03";
+const LAST_REVIEWED = comparisonArticle?.lastReviewed ?? "2026-08-03";
 const trustItems = [
   /* A category whose catalogue is not seeded yet would otherwise open with
      "0 robotic lawn mowers researched", which reads as a broken page rather
@@ -199,7 +260,7 @@ const trustItems = [
     : { value: "Research first", label: "Keywords and market mapped before any product goes live" },
   { value: "Suitability first", label: "Commission never picks your robot", href: "/editorial-policy/" },
   { value: "Dated", label: "Every price carries the date it was checked" },
-  { value: "3 Aug 2026", label: "Last reviewed", href: "/review-methodology/" },
+  { value: comparisonArticle ? "6 Aug 2026" : "3 Aug 2026", label: "Last reviewed", href: "/review-methodology/" },
 ];
 
 /* Schema is built from the images this page actually renders, so every
@@ -220,6 +281,13 @@ const dims = (path: string, w: number, h: number) => {
 const editorialImages = [
   hero?.image?.src
     ? { path: hero.image.src, caption: hero.image.alt, ...dims(hero.image.src, 1600, 900) }
+    : null,
+  comparisonArticle?.image?.src
+    ? {
+        path: comparisonArticle.image.src,
+        caption: comparisonArticle.image.alt,
+        ...dims(comparisonArticle.image.src, 1672, 941),
+      }
     : null,
   ...(decision?.cards ?? [])
     .filter((c) => c.image?.src)
@@ -259,7 +327,16 @@ const pageSchema = hero
             `${cat.name} compared`,
           )
         : null,
-      faqPageSchema(faq?.items ?? [], `/robots/${cat.slug}/`),
+      mergedGuides.length
+        ? itemListSchema(
+            mergedGuides.map((guide) => ({ name: guide.title, path: guide.path })),
+            "Robotic pool cleaner buying advice",
+          )
+        : null,
+      faqPageSchema(
+        [...(faq?.items ?? []), ...(comparisonArticle?.faq ?? [])],
+        `/robots/${cat.slug}/`,
+      ),
     ]
   : [];
 ---
@@ -366,6 +443,29 @@ const pageSchema = hero
       reads the grid better. Categories with no entry render nothing. */}
   <HubTable category={cat.slug} />
 
+  {comparisonArticle && (
+    <section class="bp-merged-comparison" id="brand-comparisons">
+      <span class="eyebrow">Brand comparison</span>
+      <h2>{comparisonArticle.title}</h2>
+      <p class="bp-merged-comparison__standfirst">{comparisonArticle.standfirst}</p>
+      {comparisonArticle.image?.src && (
+        <figure class="bp-merged-comparison__figure">
+          <img
+            src={comparisonArticle.image.src}
+            srcset={srcsetFor(comparisonArticle.image.src)}
+            sizes="(min-width: 1100px) 1040px, 100vw"
+            alt={comparisonArticle.image.alt}
+            width="1672"
+            height="941"
+            loading="lazy"
+            decoding="async"
+          />
+        </figure>
+      )}
+      {comparisonBody && <article class="bp-prose" set:html={comparisonBody} />}
+    </section>
+  )}
+
   {compareRows.length > 1 && (
     <ComparisonTable
       categorySlug={cat.slug}
@@ -391,6 +491,26 @@ const pageSchema = hero
     />
   )}
 
+  {comparisonPairs.length > 0 && (
+    <BrandPairs
+      id="brand-matchups"
+      eyebrow="Brand matchups"
+      title="The matchups people actually search for"
+      intro="The verdict comes first. Each machine underneath is the model that best answers for its brand."
+      pairs={comparisonPairs}
+    />
+  )}
+
+  {comparisonArticle && comparisonArticle.faq.length > 0 && (
+    <FaqList
+      id="comparison-questions"
+      eyebrow="Comparison questions"
+      title="Questions people ask before choosing a brand"
+      intro="Direct answers to the questions that repeatedly come up when these machines are compared."
+      items={comparisonArticle.faq}
+    />
+  )}
+
   {cluster(1).length > 0 && (
     <div class="grid grid--products">
       {cluster(1).map((p, i) => (
@@ -411,6 +531,34 @@ const pageSchema = hero
 
   {check && (
     <CheckList id={check.id} eyebrow={check.eyebrow} title={check.title} intro={check.intro} boxLabel={check.boxLabel} items={check.items} linkCategory={cat.slug} />
+  )}
+
+  {mergedGuides.length > 0 && (
+    <section class="bp-merged-guides" id="buying-advice">
+      <div class="section-head">
+        <span class="eyebrow">Buying advice</span>
+        <h2>Understand the machine before you choose one</h2>
+        <p>
+          These guides answer the questions a ranking cannot: how the cleaner works,
+          what it will not fix and when buying one is worth it.
+        </p>
+      </div>
+      <div class="bp-merged-guides__grid">
+        {mergedGuides.map((guide) => (
+          <a class="card card--interactive" href={guide.path}>
+            <span class="pill pill--strong">Guide</span>
+            <h3>{guide.title}</h3>
+            <p>{guide.standfirst}</p>
+          </a>
+        ))}
+      </div>
+      <p class="bp-merged-guides__next">
+        Want a ranked shortlist instead? See the{" "}
+        <a href="/best-robots/robotic-pool-cleaners/">best robotic pool cleaners</a>, compare the{" "}
+        <a href="/best-robots/robotic-pool-cleaners/cordless/">best cordless models</a>, or let{" "}
+        <a href="/botmatch/robotic-pool-cleaners/">BotMatch</a> score your pool.
+      </p>
+    </section>
   )}
 
   {/* A composed Bot Finder card where one exists for this category, and the
@@ -484,3 +632,15 @@ const pageSchema = hero
 
   <ArticleFooter lastReviewed={LAST_REVIEWED} />
 </Base>
+
+<style>
+  .bp-merged-comparison,
+  .bp-merged-guides { margin: clamp(3rem, 7vw, 5rem) 0; scroll-margin-top: 5.5rem; }
+  .bp-merged-comparison > h2 { max-width: 22ch; margin: 0.75rem 0 0; }
+  .bp-merged-comparison__standfirst { max-width: 68ch; font-size: clamp(1.05rem, 2vw, 1.2rem); }
+  .bp-merged-comparison__figure { margin: 1.5rem 0 2rem; overflow: hidden; border-radius: 18px; }
+  .bp-merged-comparison__figure img { display: block; width: 100%; height: auto; aspect-ratio: 1672 / 941; object-fit: cover; }
+  .bp-merged-guides__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); gap: 1rem; }
+  .bp-merged-guides__grid h3 { margin: 0; font-size: var(--type-card); }
+  .bp-merged-guides__next { max-width: 70ch; margin: 1.25rem 0 0; }
+</style>

@@ -25,6 +25,7 @@ import {
   type RouteDef,
 } from "../content/routes";
 import { REVIEWS } from "../content/reviews";
+import { isConsolidatedPath, isRemovedPath } from "../content/url-consolidation";
 
 /* Every product this site actually holds, for resolving old /product/ and
    /reviews/ URLs onto the page that replaced them. Built once. */
@@ -70,6 +71,7 @@ export function normalisePath(pathname: string): string {
  */
 export function isGone(pathname: string): boolean {
   if (isPassthrough(pathname) || isFilePath(pathname)) return false;
+  if (isRemovedPath(pathname)) return true;
   const p = pathname.toLowerCase().replace(/\/+$/, "");
   return GONE_PREFIXES.some(({ prefix }) => p === prefix || p.startsWith(`${prefix}/`));
 }
@@ -79,7 +81,7 @@ export interface RedirectResult {
   to: string;
   /** Permanent by definition — these are structural moves, not experiments. */
   status: 301;
-  reason: "normalise" | "alias" | "legacy";
+  reason: "normalise" | "alias" | "legacy" | "consolidation";
 }
 
 /**
@@ -98,7 +100,13 @@ export function resolveRedirect(pathname: string): RedirectResult | null {
   if (alias) {
     const target = normalisePath(alias.to);
     // Guard against a registry mistake pointing an alias at itself.
-    if (target !== normalised) return { to: target, status: 301, reason: "alias" };
+    if (target !== normalised) {
+      return {
+        to: target,
+        status: 301,
+        reason: isConsolidatedPath(normalised) ? "consolidation" : "alias",
+      };
+    }
   }
 
   /* The previous site on this domain, whose URLs are still what Google has

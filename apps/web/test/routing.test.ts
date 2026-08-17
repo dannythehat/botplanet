@@ -24,6 +24,7 @@ import {
 } from "../src/content/routes";
 import { RETIRED_SLUGS, MERGED_REVIEWS } from "../src/content/product-names";
 import { COMPARE_PAGES, comparePageIsSubstantive } from "../src/content/compare-page";
+import { isConsolidatedPath, isRemovedPath } from "../src/content/url-consolidation";
 import { BAR_ITEMS, FOOTER_GROUPS, UTILITY_ITEMS } from "../src/content/nav-surfaces";
 import { routes, LAUNCH_CATEGORY } from "../src/content/nav";
 import { heroFor } from "../src/content/category-hero";
@@ -82,14 +83,14 @@ describe("resolveRedirect", () => {
     expect(resolveRedirect("/botmatch/")).toBeNull();
   });
 
-  it("redirects the old /best/ section to /best-robots/", () => {
-    expect(resolveRedirect("/best/")?.to).toBe("/best-robots/");
+  it("redirects the old /best/ section directly to the surviving robot index", () => {
+    expect(resolveRedirect("/best/")?.to).toBe("/robots/");
     expect(resolveRedirect("/best/robotic-pool-cleaners/")?.to).toBe("/best-robots/robotic-pool-cleaners/");
   });
 
   it("redirects legacy category slugs", () => {
     expect(resolveRedirect("/robots/pool-cleaners/")?.to).toBe("/robots/robotic-pool-cleaners/");
-    expect(resolveRedirect("/compare/pool-cleaners/")?.to).toBe("/compare/robotic-pool-cleaners/");
+    expect(resolveRedirect("/compare/pool-cleaners/")?.to).toBe("/robots/robotic-pool-cleaners/");
   });
 
   it("normalises casing and missing trailing slashes in one hop", () => {
@@ -98,12 +99,16 @@ describe("resolveRedirect", () => {
   });
 
   it("returns null for canonical paths, so there is no redirect loop", () => {
-    for (const r of ROUTES) expect(resolveRedirect(r.path)).toBeNull();
+    for (const r of ROUTES.filter((route) => !isConsolidatedPath(route.path) && !isRemovedPath(route.path))) {
+      expect(resolveRedirect(r.path)).toBeNull();
+    }
   });
 
   it("produces no redirect chains: every destination is already canonical", () => {
-    for (const { to } of REDIRECTS) {
-      expect(resolveRedirect(to)).toBeNull();
+    for (const { from } of REDIRECTS) {
+      const first = resolveRedirect(from);
+      expect(first, from).not.toBeNull();
+      expect(resolveRedirect(first!.to), from).toBeNull();
     }
   });
 
@@ -264,14 +269,10 @@ describe("comparePageIsSubstantive", () => {
     }
   });
 
-  /* Every compare route in the registry is category-scoped except the hub, and
-     the hub carries no `category` — so nothing may slip past the filter for
-     want of one. */
-  it("gives every registry compare route but the hub a category to judge", () => {
+  it("keeps only the named comparison article in the sitemap", () => {
     const compare = sitemapRoutes().filter((r) => r.section === "compare");
-    const withoutCategory = compare.filter((r) => !r.category).map((r) => r.path);
-    expect(withoutCategory).toEqual(["/compare/"]);
-    expect(compareRoutes().length).toBeGreaterThan(0);
+    expect(compare.map((route) => route.path)).toEqual(["/compare/eilik-vs-emo/"]);
+    expect(compareRoutes().length).toBe(1);
   });
 });
 
@@ -286,7 +287,10 @@ describe("registry integrity", () => {
 
   it("has no alias colliding with a real route", () => {
     const real = new Set(ROUTES.map((r) => r.path));
-    for (const { from } of REDIRECTS) expect(real.has(normalisePath(from))).toBe(false);
+    for (const { from } of REDIRECTS) {
+      const canonical = normalisePath(from);
+      expect(real.has(canonical) && !isConsolidatedPath(canonical)).toBe(false);
+    }
   });
 
   it("gives every route a resolvable parent", () => {
@@ -597,15 +601,13 @@ describe("best-of consolidation", () => {
    * evidence rather than merely unbuilt. It stays in the footer, which is a
    * link rather than a promise.
    */
-  it("takes /best-robots/ out of the navigation but keeps it reachable", () => {
-    const best = ROUTES.find((r) => r.path === "/best-robots/")!;
+  it("retires the section index from every navigation surface", () => {
     expect(BAR_ITEMS.map((i) => i.href)).not.toContain("/best-robots/");
     expect(BAR_ITEMS.some((i) => i.href.startsWith("/best-robots/"))).toBe(false);
     expect(UTILITY_ITEMS.map((i) => i.href)).not.toContain("/best-robots/");
-    // Reachable, from the one surface that is a directory rather than a
-    // promise of a section behind it.
-    expect(best.footerGroup).toBe("Explore");
-    expect(FOOTER_GROUPS.flatMap((g) => g.links).map((l) => l.href)).toContain("/best-robots/");
+    expect(FOOTER_GROUPS.flatMap((g) => g.links).map((l) => l.href)).not.toContain("/best-robots/");
+    expect(sitemapRoutes().map((route) => route.path)).not.toContain("/best-robots/");
+    expect(resolveRedirect("/best-robots/")?.to).toBe("/robots/");
   });
 
   /**
