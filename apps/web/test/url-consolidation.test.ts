@@ -71,5 +71,9 @@ describe("URL consolidation", () => {
     expect(hub).toContain("<BrandPairs");
     expect(hub).toContain("editorialForCategory(cat.slug)");
     expect(hub).toContain("Robotic pool cleaner buying advice");
+
+    const table = readFileSync("apps/web/src/components/ComparisonTable.astro", "utf8");
+    expect(table).not.toContain("`/compare/${categorySlug}/`");
+    expect(table).not.toContain("Every column, every model");
   });
 });
