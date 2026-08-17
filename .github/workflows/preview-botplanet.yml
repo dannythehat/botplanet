@@ -12,6 +12,9 @@ name: Preview BotPlanet
 # and is never printed.
 
 on:
+  push:
+    branches:
+      - agent/page-2-robot-categories
   workflow_dispatch:
     inputs:
       ref:
