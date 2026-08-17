@@ -184,12 +184,29 @@ describe("no scoring logic moved into the funnel", () => {
     }
   });
 
+  it("shows that the system is thinking after answers are complete", () => {
+    expect(island).toContain('data-stage="analysing"');
+    expect(island).toContain("bp-mm__thinking");
+    expect(island).toContain('role="status"');
+    expect(island).toContain('aria-live="polite"');
+    expect(island).toContain("BotMatch is comparing your answers");
+  });
+
+  it("gives every result a visual product card and canonical destination", () => {
+    expect(island).toContain("bp-mm__product-card");
+    expect(island).toContain("bp-mm__product-image");
+    expect(island).toContain("bp-mm__product-button");
+    expect(island).toContain("View product");
+    expect(island).toContain("result.product");
+    expect(island).toContain("result.equivalentProducts");
+  });
+
   it("presents a tie as a tie rather than choosing from it", () => {
     /* The API returns `equivalent` when the top of the ranking is shared. The
        funnel must render that group; picking one would re-introduce exactly
        the failure topGroup exists to prevent. */
     expect(island).toContain("equivalent");
-    expect(island).toContain("Equivalent on current data");
+    expect(island).toContain("equivalent on the answers and evidence we currently hold");
     const code = island.split("\n").filter((l) => !l.trim().startsWith("*")).join("\n");
     expect(code).not.toMatch(/equivalent\s*\[\s*0\s*\]/);
   });
