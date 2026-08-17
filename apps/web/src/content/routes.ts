@@ -112,18 +112,13 @@ export const ROUTES: RouteDef[] = [
     section: "best",
     parent: "/",
     status: "live",
-    /* OUT OF THE TOP BAR, 12 AUGUST 2026. A nav slot is a promise that there
-       is a section behind it, and there is not: two best-of pages exist and
-       six of the categories that would fill this index were REFUSED by their
-       own research, because their head term and their "best" term return the
-       same results page. This index will never hold nine cards, and a bar item
-       that opens onto two was buying a top-level slot with a category count
-       that is not coming.
-
-       Still in the footer, and deliberately. It is a real page with two real
-       destinations, and a page reachable from nowhere is an orphan in the
-       sitemap. The prominent route to a best-of is now from inside its own
-       category hub, where a reader is already choosing. */
+    /* The recovered index is a useful visual route across every live job:
+       categories with a distinct ranked guide link to it, while categories
+       whose best picks belong on the hub link to that evidence-led comparison.
+       Only two separate best-of URLs exist, because the search evidence does
+       not justify duplicating the other hubs. The page remains in the footer
+       and sitemap; any future top-bar position is an owner navigation decision,
+       not something inferred from the number of ranked child pages. */
     navSurface: "none",
     footerGroup: "Explore",
     inSitemap: true,
