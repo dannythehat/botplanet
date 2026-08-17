@@ -68,7 +68,7 @@ describe("owner-approved universal BotMatch page", () => {
     expect(MATCHER).toContain('role="status"');
     expect(MATCHER).toContain('aria-live="polite"');
     expect(MATCHER).toContain("BotMatch is comparing your answers");
-    expect(MATCHER).toContain("bp-mm-thinking-orbit");
+    expect(MATCHER).toContain("bp-mm__thinking-orbit");
     expect(MATCHER).toContain("@media (prefers-reduced-motion: reduce)");
   });
 
