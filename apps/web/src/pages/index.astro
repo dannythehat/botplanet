@@ -2,11 +2,9 @@
 import Base from "../layouts/Base.astro";
 import BotFinderCard from "../components/BotFinderCard.astro";
 import { finderCardFor } from "../content/finder-cards";
-import { LAUNCH_CATEGORY, categoryRoutes, liveCategories, productPath } from "../content/routes";
+import { categoryRoutes, liveCategories } from "../content/routes";
 import { srcsetFor } from "../lib/srcset";
 import { webPageSchema, SITE_URL } from "../lib/seo";
-
-const live = categoryRoutes(LAUNCH_CATEGORY);
 
 /**
  * NAMES THE BIGGEST CATEGORIES, WHICH IT DID NOT.
@@ -183,8 +181,7 @@ const homeSchema = [
             stays for anyone who would rather browse. */}
         <div class="hero__actions">
           <a class="btn btn--accent btn--lg" href="/botmatch/">Find your robot</a>
-          <a class="btn btn--primary btn--lg" href={live.hub}>Explore robotic pool cleaners</a>
-          <a class="hero__more" href="#robot-worlds">Explore all robot categories &#8595;</a>
+          <a class="btn btn--primary btn--lg" href="#robot-worlds">Explore robot categories</a>
         </div>
       </div>
 
