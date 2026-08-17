@@ -1,0 +1,55 @@
+---
+/**
+ * Original BotPlanet graphic — how BotMatch works (suitability first, commission
+ * isolated).
+ *
+ * AMENDED 9 August 2026, the day it first rendered on a page. Step one said
+ * "pool, budget, debris, priorities" — the pool questionnaire's own fields,
+ * drawn when pool was the only category with questions. BotMatch now covers
+ * nine, and a picture listing one category's questions as though they were
+ * everyone's makes the same promise /botmatch/ used to make and could not keep.
+ * The commission box was also butted hard against its own dashed border.
+ */
+---
+<figure class="dgm">
+  <svg viewBox="0 0 640 220" width="100%" role="img" aria-label="How BotMatch works: your answers feed a deterministic suitability score; commission is applied only as a final tie-break between equally-suitable options, never to the recommendation.">
+    <rect x="0" y="0" width="640" height="220" rx="14" fill="var(--panel)" stroke="var(--border)"/>
+    <!-- step 1 -->
+    <g>
+      <rect x="30" y="70" width="120" height="80" rx="12" fill="var(--panel-2)" stroke="var(--border-2)"/>
+      <text x="90" y="104" font-size="13" font-weight="700" fill="#f5f5f7" text-anchor="middle">Your answers</text>
+      <text x="90" y="124" font-size="11" fill="#8b8b95" text-anchor="middle">the job, the space,</text>
+      <text x="90" y="138" font-size="11" fill="#8b8b95" text-anchor="middle">budget, priorities</text>
+    </g>
+    <path d="M150 110 L188 110" stroke="#c9c9d1" stroke-width="2" marker-end="url(#a)"/>
+    <!-- step 2 -->
+    <g>
+      <rect x="192" y="60" width="150" height="100" rx="12" fill="var(--panel-2)" stroke="#4fd1c5"/>
+      <text x="267" y="92" font-size="13" font-weight="700" fill="#4fd1c5" text-anchor="middle">Suitability score</text>
+      <text x="267" y="112" font-size="11" fill="#c9c9d1" text-anchor="middle">deterministic · versioned</text>
+      <text x="267" y="130" font-size="11" fill="#c9c9d1" text-anchor="middle">NO commercial fields</text>
+      <text x="267" y="148" font-size="10.5" fill="#8b8b95" text-anchor="middle">(fit to your needs only)</text>
+    </g>
+    <path d="M342 110 L380 110" stroke="#c9c9d1" stroke-width="2" marker-end="url(#a)"/>
+    <!-- step 3 -->
+    <g>
+      <rect x="384" y="70" width="140" height="80" rx="12" fill="var(--panel-2)" stroke="var(--border-2)"/>
+      <text x="454" y="100" font-size="13" font-weight="700" fill="#f5f5f7" text-anchor="middle">Your match</text>
+      <text x="454" y="120" font-size="11" fill="#8b8b95" text-anchor="middle">best + alternatives,</text>
+      <text x="454" y="134" font-size="11" fill="#8b8b95" text-anchor="middle">with plain reasons</text>
+    </g>
+    <!-- commission note -->
+    <g>
+      <rect x="360" y="168" width="256" height="32" rx="8" fill="none" stroke="#e0b657" stroke-dasharray="4 4"/>
+      <text x="488" y="188" font-size="10.5" fill="#e0b657" text-anchor="middle">Commission: final tie-break only, between equals</text>
+    </g>
+    <text x="30" y="40" font-size="15" font-weight="800" fill="#f5f5f7">How BotMatch decides</text>
+    <defs><marker id="a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 Z" fill="#c9c9d1"/></marker></defs>
+  </svg>
+  <figcaption class="note">Your answers drive a deterministic suitability score with no commercial inputs. Commission can only break a tie between products that are already equally suitable — it never moves the recommendation.</figcaption>
+</figure>
+<style>
+  .dgm { margin: 1.75rem 0; }
+  .dgm svg { max-width: 640px; display: block; }
+  .dgm .note { margin-top: 8px; }
+</style>

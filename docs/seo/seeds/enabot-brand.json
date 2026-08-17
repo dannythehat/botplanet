@@ -1,0 +1,8 @@
+{
+  "category": "enabot-brand",
+  "note": "A deliberately tiny run, 8 August 2026, to settle ONE question the pet-camera build left open: where does 'enabot' go? It measures 9,900/mo at KD 4 — twenty times the category head term 'pet camera robot' at 480 — and the first run measured its product SERPs but never the brand's own. Assigning the biggest term in a category to a page without looking at its results is exactly the guessing this process exists to stop. The four SERPs here answer it: does 'enabot' resolve to the hub's result set, to the Air 2 review's, or to neither. Seeds are minimal on purpose; the volumes are already known from the 8 August product run and are not being re-bought for their own sake.",
+  "researchedOn": "2026-08-08",
+  "leads": ["enabot"],
+  "seeds": ["enabot", "enabot robot", "enabot ebo", "pet camera robot"],
+  "serpQueries": ["enabot", "enabot robot", "enabot ebo", "pet camera robot", "ebo air 2"]
+}

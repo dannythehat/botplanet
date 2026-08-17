@@ -1,0 +1,11 @@
+-- Maximum pool AREA, alongside the existing maximum length.
+--
+-- Added because manufacturers publish one or the other and not reliably both:
+-- Aiper rates the Scuba V3 at 1,614 sq ft and states no maximum length, while
+-- Maytronics rates the Nautilus CC Plus at 40 ft and states no area. Carrying
+-- only length forced a choice between inventing a figure and letting a product
+-- be judged on nothing. Neither is acceptable, so the schema now holds both and
+-- the matcher treats an absent pair as unknown rather than as ineligible.
+--
+-- SQLite has no ADD COLUMN IF NOT EXISTS; this runs once, tracked by wrangler.
+ALTER TABLE products ADD COLUMN max_pool_area_sqft INTEGER;

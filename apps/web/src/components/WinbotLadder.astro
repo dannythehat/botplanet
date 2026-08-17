@@ -1,0 +1,123 @@
+---
+/* ============================================================
+   BotPlanet — the WINBOT ladder.
+
+   THE QUERY THIS ANSWERS AND NOBODY ELSE DOES CLEANLY. ECOVACS
+   sells six WINBOTs whose names do not explain themselves: Mini,
+   W1 PRO, W2 PRO, W2 PRO Omni, W2S, W3 Omni. A shopper cannot tell
+   from the names which is newer, which is bigger, or what "Omni"
+   buys. Every result for the question is either one product page
+   or a listicle that ranks them without saying what separates
+   them.
+
+   SIX RUNGS, NOT FIVE. The brief said five WINBOTs differ; the
+   catalogue holds six. A ladder missing a rung is worse than no
+   ladder, because the reader looking at the missing machine
+   concludes the comparison does not cover it and leaves.
+
+   EVERY CELL IS THE MAKER'S OWN FIGURE, lifted from that model's
+   review. "Not published" is printed where ECOVACS does not state
+   it — which is itself the finding on the Mini and the W2S, where
+   the glass type is not published at all and glass type is the
+   specification that rules a window robot out.
+   ============================================================ */
+import SectionHead from "./SectionHead.astro";
+import type { LadderEntry } from "../content/decision-tables";
+
+interface Props {
+  entries: LadderEntry[];
+}
+
+const { entries } = Astro.props;
+const labels = entries[0]?.separators.map((s) => s.label) ?? [];
+---
+
+{entries.length > 0 && (
+  <section class="bp-lad" id="which-winbot" aria-label="Which WINBOT">
+    <SectionHead
+      eyebrow="The range, decoded"
+      title={`Which WINBOT — all ${entries.length} compared`}
+      intro="ECOVACS sells six window robots whose names do not explain themselves, and the difference between them is not the number. Every figure below is ECOVACS' own, taken from that model's review. Where the maker does not publish a figure, the cell says so rather than borrowing one."
+    />
+
+    <div class="bp-lad__scroll">
+      <table class="bp-lad__table">
+        <thead>
+          <tr>
+            <th scope="col">Model</th>
+            {labels.map((l) => <th scope="col">{l}</th>)}
+          </tr>
+        </thead>
+        <tbody>
+          {entries.map((e) => (
+            <tr>
+              <th scope="row"><a href={e.href}>{e.name}</a></th>
+              {e.separators.map((s) => (
+                <td data-published={s.value === "Not published" ? "false" : "true"}>{s.value}</td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    {/* IT SAID "and the best-of page makes that argument" UNTIL 12 AUGUST 2026.
+        That page folded into this one the same day and the sentence was left
+        pointing at nothing — unlinked prose, which is precisely why every
+        registry-level test walked past it: nothing checks a claim made in words
+        about a page, only hrefs. Found by an external audit, not by us.
+        The argument it referred to is now this page's own first FAQ. */}
+    <p class="note bp-lad__note">
+      Listed in model order, not in ours — this is the range as ECOVACS sells it, not a ranking.
+      Which one to buy depends on your glass before it depends on any figure here, and the
+      <a href="#faqs">first question below</a> makes that argument.
+    </p>
+  </section>
+)}
+
+<style>
+  .bp-lad { margin: var(--space-7, 2.5rem) 0; }
+
+  .bp-lad__scroll {
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg, 14px);
+    background: var(--panel);
+  }
+
+  .bp-lad__table {
+    width: 100%;
+    min-width: 780px;
+    border-collapse: collapse;
+    font-size: 0.86rem;
+  }
+
+  .bp-lad__table th,
+  .bp-lad__table td {
+    padding: 0.7rem 0.8rem;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid var(--border-2);
+  }
+
+  .bp-lad__table thead th {
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    background: var(--panel-2, var(--panel));
+    white-space: nowrap;
+  }
+
+  .bp-lad__table tbody th { font-weight: 650; white-space: nowrap; }
+  .bp-lad__table tbody th a { font-weight: 650; }
+
+  /* An unpublished cell is greyed rather than blank: a blank reads as a
+     rendering fault, and the fact that ECOVACS does not state it is the point. */
+  .bp-lad__table td[data-published="false"] {
+    color: var(--text-secondary);
+    font-style: italic;
+  }
+
+  .bp-lad__note { margin-top: 0.75rem; }
+</style>

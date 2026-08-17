@@ -1,0 +1,243 @@
+---
+/**
+ * Eilik vs EMO — the first product-versus-product page on the site.
+ *
+ * WHY THIS PAGE AND NOT A CATEGORY COMPARE. Every other /compare/ route holds a
+ * whole range side by side. This one holds two machines, because Google's own
+ * People Also Ask carries the question in almost these words — "Which is
+ * better, Eilik or Emo?" — and a category page answers a different question.
+ *
+ * A STATIC ROUTE, deliberately. /compare/[category].astro would otherwise try
+ * to resolve "eilik-vs-emo" as a category slug and return a 404. Astro gives a
+ * static path precedence over a dynamic one, so this file is the answer.
+ *
+ * THE VERDICT IS NOT A COIN TOSS AND IT IS NOT A SALE. One of these two has a
+ * buy button on this site and the other does not, and the page says why in the
+ * first screen rather than burying it: the EMO listings on Amazon US are a
+ * different brand's, so we route nobody to them. That is the single most useful
+ * thing a reader arriving on this question can be told, and it happens to be
+ * the thing an affiliate page would be most tempted to leave out.
+ *
+ * FAQ SCHEMA COMES FROM THE QUESTIONS THIS PAGE VISIBLY ANSWERS. The three
+ * below are rendered on the page in the same words. Nothing is emitted that a
+ * reader cannot read.
+ */
+import Base from "../../layouts/Base.astro";
+import { breadcrumbsFor } from "../../lib/routing";
+import FaqList from "../../components/FaqList.astro";
+import ArticleFooter from "../../components/ArticleFooter.astro";
+import { srcsetFor } from "../../lib/srcset";
+import { articleSchema, faqPageSchema, imageObjectSchema, webPageSchema } from "../../lib/seo";
+import { FOUNDER } from "../../content/team";
+import { MEDIA_ASSETS } from "../../content/media/assets";
+import "../../styles/prose.css";
+
+const PATH = "/compare/eilik-vs-emo/";
+const crumbs = breadcrumbsFor(PATH);
+const LAST_REVIEWED = "2026-08-09";
+
+const HERO = "/media/companion/emo-vs-eilik/hero.webp";
+const heroAsset = MEDIA_ASSETS.find((a) => a.src === HERO);
+
+const TITLE = "Eilik vs EMO: which desk robot is actually better?";
+
+const FAQ = [
+  {
+    q: "Which is better, Eilik or EMO?",
+    a:
+      "Eilik, for most people, and the reason is availability rather than personality. Both are " +
+      "expressive desk robots at a similar price. Eilik can be bought from a listing whose own " +
+      "fields say Energize Lab. The EMO listings on Amazon US say EMOPET, not Living.AI, so the " +
+      "safer route to a genuine EMO is Living.AI's own store — which is slower and costs more.",
+  },
+  {
+    q: "Is the EMO on Amazon a real Living.AI EMO?",
+    a:
+      "We could not establish that it is. The listing we were asked to check gives its brand and " +
+      "its manufacturer as EMOPET, sells at $419 against Living.AI's own $369 for the same " +
+      "configuration, and Living.AI staff say on their own forum that their store is the only " +
+      "place they can vouch for. We carry no buy button for EMO on that evidence.",
+  },
+  {
+    q: "Do either of them need a subscription?",
+    a:
+      "Neither charges one to work. EMO's optional AI features have been sold as an add-on by " +
+      "Living.AI at various points; Eilik has never had a subscription of any kind. Anything " +
+      "advertising an EMO with a mandatory monthly fee is not selling a Living.AI product.",
+  },
+];
+
+const pageSchema = [
+  webPageSchema({
+    path: PATH,
+    name: TITLE,
+    description:
+      "Two expressive desk robots at a similar price. Which one to buy, which one to skip, and why only one of them has a buy button here.",
+  }),
+  articleSchema({
+    headline: TITLE,
+    description:
+      "Eilik and EMO compared on what they do, what they cost and whether you can buy a genuine one.",
+    path: PATH,
+    dateModified: LAST_REVIEWED,
+    authorName: FOUNDER.name,
+    authorPath: FOUNDER.path,
+    image: HERO,
+  }),
+  /* Only the image this page renders, and its real dimensions. */
+  ...(heroAsset && heroAsset.width && heroAsset.height
+    ? [
+        imageObjectSchema({
+          path: heroAsset.src,
+          caption: heroAsset.altText ?? "",
+          width: heroAsset.width,
+          height: heroAsset.height,
+        }),
+      ]
+    : []),
+  faqPageSchema(FAQ, PATH),
+];
+---
+
+<Base
+  title="Eilik vs EMO — Which Desk Robot Is Better? | BotPlanet"
+  description="Eilik vs EMO on price, personality and whether you can buy a genuine one. Only one of the two has a buy button here, and this page says why."
+  breadcrumbs={crumbs}
+  schema={pageSchema}
+  ogImage={HERO}
+  ogType="article"
+  narrow
+>
+  <header class="bp-vs-head">
+    <span class="eyebrow">Head to head</span>
+    <h1 class="bp-vs-head__h1">{TITLE}</h1>
+    <p class="bp-vs-head__stand">
+      Two small robots that sit on a desk and react to you, within about eighty dollars of each
+      other. The specification difference is real but it is not what decides this. What decides it
+      is that one of them can be bought with confidence from a mainstream retailer and the other
+      cannot.
+    </p>
+    {heroAsset && (
+      <figure class="bp-vs-head__hero">
+        <img
+          src={HERO}
+          srcset={srcsetFor(HERO)}
+          sizes="(min-width: 1100px) 1040px, 100vw"
+          alt={heroAsset.altText ?? ""}
+          width={heroAsset.width}
+          height={heroAsset.height}
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+        />
+      </figure>
+    )}
+  </header>
+
+  <article class="bp-prose">
+    <h2 id="the-answer">The short answer</h2>
+    <p>
+      <strong>Buy the Eilik.</strong> Not because it is the better robot on paper — that is closer
+      than either side's marketing suggests — but because you can order one and be reasonably sure
+      what arrives. Eilik sells on Amazon US under a listing whose own brand field reads Energize
+      Lab, which is the company that makes it.
+    </p>
+    <p>
+      EMO is the more capable machine and the harder one to buy safely. Searching for it on Amazon
+      US returns EMOPET and a run of similarly named desk robots. On 9 August 2026 we checked the
+      specific listing readers keep sending us. Its brand field and its manufacturer field both read
+      EMOPET. It asks $419 for what its own model number calls EMO GO HOME, where Living.AI's own
+      store sells that configuration for $369 — fifty dollars above the maker, which is the wrong
+      direction for an authorised reseller. And Living.AI's staff, posting on Living.AI's own forum,
+      describe their store as the only legitimate place to buy one.
+    </p>
+    <p>
+      So: <strong>we carry a buy button for Eilik and none for EMO.</strong> If you want an EMO, buy
+      it from living.ai directly and check the box says Living.AI before you accept it.
+    </p>
+
+    <h2 id="what-they-actually-do">What each one actually does</h2>
+    <p>
+      <strong>Eilik</strong> is a pair of robots pretending to be one product. A single unit is
+      expressive enough on a desk, but the thing it is built around is two of them reacting to each
+      other — they bicker, they high-five, and that is genuinely the pitch. It has arms, which
+      nothing else at this price does. Energize Lab sells it in several colourways and alongside a
+      DQ variant, an AI Station, a Panxer and an Eiliko, which is worth knowing before you search:
+      the range is wider than the product.
+    </p>
+    <p>
+      <strong>EMO</strong> walks. It has legs, it moves around a desk under its own power, it
+      recognises faces and it responds to voice. It is the more advanced machine by a clear margin,
+      and it is also roughly three times the price of an Eilik once you have a genuine one.
+    </p>
+
+    <h2 id="who-should-buy-neither">Who should buy neither</h2>
+    <p>
+      If you are buying this for a child under about eight, buy neither. Both are desk objects with
+      small parts and neither is built for handling by small hands; a Miko 3 or a Loona is designed
+      for that job and survives it.
+    </p>
+    <p>
+      If you want a robot that does something — vacuums, watches the house, mows — buy neither.
+      These are companions. They perform no task and they are not pretending to.
+    </p>
+    <p>
+      And if the appeal is specifically a robot that walks around your desk, an Eilik will
+      disappoint you and you should wait until you can buy an EMO from its maker rather than take a
+      chance on a listing that will not name Living.AI.
+    </p>
+
+    <h2 id="read-the-full-reviews">The full reviews</h2>
+    <p>
+      Each of these has its own page with the specification, the range traps and the buying advice
+      in full: <a href="/robots/companion-robots/eilik/">the Eilik review</a> and
+      <a href="/robots/companion-robots/living-ai-emo/">the EMO review</a>.
+    </p>
+  </article>
+
+  <FaqList
+    id="faq"
+    eyebrow="Questions"
+    title="Questions people actually ask"
+    intro="The three this comparison gets asked most, answered in a couple of sentences each."
+    items={FAQ}
+  />
+
+  <ArticleFooter lastReviewed={LAST_REVIEWED} />
+</Base>
+
+<style>
+  .bp-vs-head {
+    max-width: 62ch;
+    margin: 0 0 clamp(2rem, 5vw, 3rem);
+  }
+  .bp-vs-head__h1 {
+    margin: 0.9rem 0 0;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2rem, 5.6vw, 3.1rem);
+    line-height: 1.06;
+    letter-spacing: -0.024em;
+    text-wrap: balance;
+    background: linear-gradient(172deg, #ffffff 4%, #e4e9f1 44%, #a2aab8 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .bp-vs-head__stand {
+    margin: 1.2rem 0 0;
+    font-size: clamp(1.05rem, 2.4vw, 1.25rem);
+    line-height: 1.6;
+    color: var(--text-secondary);
+  }
+  .bp-vs-head__hero {
+    margin: var(--space-6) 0 0;
+    border-radius: var(--radius-lg, 14px);
+    overflow: hidden;
+  }
+  .bp-vs-head__hero img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+</style>

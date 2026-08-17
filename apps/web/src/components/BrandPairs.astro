@@ -1,0 +1,203 @@
+---
+/* ============================================================
+   BotPlanet — brand-versus-brand sections.
+
+   The body of a comparison hub. One plate per matchup, each with
+   the verdict first, the reasoning under it, and the two machines
+   that actually answer for their brands.
+
+   WHY THESE ARE SECTIONS AND NOT PAGES. `aiper vs dolphin` is
+   110/mo and `dolphin vs polaris` is 30. Split across separate
+   URLs that is nine thin pages competing with each other for a
+   hundred searches. Held together it is one page that answers
+   every version of the question — see the ruling in
+   docs/seo/pool-research-findings.md.
+
+   The measured volume is rendered where there is one, and
+   silently omitted where there is not. A section built on
+   reasoning rather than on demand should not imply a number it
+   does not have.
+
+   NO PRICE, for the same reason as the pick list: this page is
+   read months after it is written.
+   ============================================================ */
+
+import SectionHead from "./SectionHead.astro";
+import type { BrandPair } from "../content/compare-page";
+
+export interface RenderedPair extends BrandPair {
+  /** Products resolved against the catalogue, in declared order. */
+  machines: { name: string; href: string; why: string; cleans: string; power: string; poolSize: string }[];
+}
+
+interface Props {
+  id?: string;
+  eyebrow?: string;
+  title: string;
+  intro: string;
+  pairs: RenderedPair[];
+}
+
+const { id, eyebrow, title, intro, pairs } = Astro.props;
+---
+
+<section class="bp-pairs" id={id}>
+  <SectionHead eyebrow={eyebrow} title={title} intro={intro} />
+
+  <div class="bp-pairs__list">
+    {pairs.map((p) => (
+      <article class="bp-pairs__item" id={p.id}>
+        <header class="bp-pairs__head">
+          <h3 class="bp-pairs__h">{p.heading}</h3>
+          {p.volume > 0 && (
+            <span class="bp-pairs__vol">{p.volume.toLocaleString("en-US")} US searches/mo</span>
+          )}
+        </header>
+
+        <p class="bp-pairs__verdict">{p.verdict}</p>
+        <p class="bp-pairs__body">{p.body}</p>
+
+        <div class="bp-pairs__machines">
+          {p.machines.map((m) => (
+            <div class="bp-pairs__machine">
+              <a class="bp-pairs__name" href={m.href}>{m.name}</a>
+              <p class="bp-pairs__why">{m.why}</p>
+              <dl class="bp-pairs__facts">
+                <div><dt>Cleans</dt><dd>{m.cleans}</dd></div>
+                <div><dt>Power</dt><dd>{m.power}</dd></div>
+                <div><dt>Rated for</dt><dd>{m.poolSize}</dd></div>
+              </dl>
+            </div>
+          ))}
+        </div>
+      </article>
+    ))}
+  </div>
+</section>
+
+<style>
+  .bp-pairs { margin: clamp(3rem, 7vw, 5rem) 0; }
+
+  .bp-pairs__list { display: grid; gap: clamp(1rem, 2.4vw, 1.4rem); }
+
+  .bp-pairs__item {
+    padding: clamp(1.25rem, 3vw, 1.75rem);
+    border: 1px solid var(--cs-line-soft);
+    border-radius: 18px;
+    background: linear-gradient(178deg, rgba(20, 25, 32, 0.72), rgba(10, 13, 17, 0.72));
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    scroll-margin-top: 5.5rem;
+  }
+
+  .bp-pairs__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem 1rem;
+  }
+
+  .bp-pairs__h {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.2rem, 3.2vw, 1.5rem);
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+    color: var(--cs-hi);
+  }
+
+  /* The measured number, shown because it is why the section exists. A page
+     that ranks matchups without saying which ones people search for is asking
+     to be trusted on the order. */
+  .bp-pairs__vol {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+  }
+
+  .bp-pairs__verdict {
+    margin: 0.9rem 0 0;
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    font-weight: 600;
+    color: var(--cs-hi);
+  }
+
+  .bp-pairs__body {
+    margin: 0.75rem 0 0;
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+  }
+
+  .bp-pairs__machines {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: 0.9rem;
+    margin: clamp(1rem, 2.6vw, 1.3rem) 0 0;
+    padding: 1rem 0 0;
+    border-top: 1px solid var(--cs-line-soft);
+  }
+
+  .bp-pairs__machine {
+    padding: 0.9rem 1rem;
+    border: 1px solid var(--cs-line-soft);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  .bp-pairs__name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.02rem;
+    color: var(--cs-hi);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(200, 208, 222, 0.4);
+    padding-bottom: 1px;
+  }
+
+  .bp-pairs__name:hover { color: #fff; border-color: rgba(246, 248, 252, 0.9); }
+  .bp-pairs__name:focus-visible { outline: var(--focus-ring, 2px solid #dfe4ec); outline-offset: 3px; }
+
+  .bp-pairs__why {
+    margin: 0.6rem 0 0;
+    font-size: 0.95rem;
+    line-height: 1.55;
+    color: var(--text-secondary);
+  }
+
+  .bp-pairs__facts {
+    display: grid;
+    gap: 0.4rem;
+    margin: 0.8rem 0 0;
+    padding: 0.7rem 0 0;
+    border-top: 1px solid var(--cs-line-soft);
+  }
+
+  .bp-pairs__facts > div { display: flex; gap: 0.5rem; align-items: baseline; }
+
+  .bp-pairs__facts dt {
+    flex: 0 0 5.2rem;
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+  }
+
+  .bp-pairs__facts dd {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    color: var(--cs-hi);
+  }
+
+  @media (min-width: 900px) {
+    .bp-pairs__body, .bp-pairs__verdict { font-size: 1.1rem; }
+  }
+</style>

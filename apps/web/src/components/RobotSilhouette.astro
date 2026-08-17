@@ -1,0 +1,106 @@
+---
+/**
+ * Original BotPlanet robot silhouette — an owned, monochrome line asset used as
+ * the neutral media placeholder until rights-cleared product photography lands.
+ *
+ * RIGHTS: drawn here as geometry (no external source, no traced photograph), so
+ * BotPlanet owns it outright. It is a GENERIC robotic pool cleaner form and is
+ * deliberately abstract — it never implies it depicts a specific model, which is
+ * the image-rights rule from Job 2.
+ *
+ * It is decorative: the surrounding card supplies the accessible name.
+ */
+interface Props {
+  /** Slight form variation so a grid of cards doesn't look rubber-stamped. */
+  variant?: number;
+  class?: string;
+}
+const { variant = 0, class: className } = Astro.props;
+const v = ((variant % 3) + 3) % 3;
+// Brush-head count and vent rhythm shift per variant — same family, not clones.
+const vents = [3, 4, 5][v];
+const uid = `rs-${v}-${Math.abs(variant)}`;
+---
+<svg
+  class:list={["robot-sil", className]}
+  viewBox="0 0 240 160"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+  aria-hidden="true"
+  focusable="false"
+>
+  <defs>
+    <linearGradient id={`${uid}-body`} x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.20" />
+      <stop offset="55%" stop-color="#ffffff" stop-opacity="0.085" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.035" />
+    </linearGradient>
+    <linearGradient id={`${uid}-edge`} x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.10" />
+      <stop offset="45%" stop-color="#ffffff" stop-opacity="0.55" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.10" />
+    </linearGradient>
+  </defs>
+
+  <!-- Contact shadow on the stage floor -->
+  <ellipse cx="120" cy="139" rx="62" ry="6.5" fill="#000" opacity="0.55" />
+
+  <!-- Tracks -->
+  <rect x="58" y="112" width="34" height="20" rx="10" fill="#fff" opacity="0.10" />
+  <rect x="148" y="112" width="34" height="20" rx="10" fill="#fff" opacity="0.10" />
+  <rect x="58" y="112" width="34" height="20" rx="10" stroke="#fff" stroke-opacity="0.22" />
+  <rect x="148" y="112" width="34" height="20" rx="10" stroke="#fff" stroke-opacity="0.22" />
+
+  <!-- Main body -->
+  <path
+    d="M62 58c0-9 7-16 16-16h84c9 0 16 7 16 16v42c0 11-9 20-20 20H82c-11 0-20-9-20-20V58Z"
+    fill={`url(#${uid}-body)`}
+    stroke="#fff"
+    stroke-opacity="0.30"
+  />
+
+  <!-- Reflective top edge -->
+  <path d="M74 44h92" stroke={`url(#${uid}-edge)`} stroke-width="1.5" stroke-linecap="round" />
+
+  <!-- Handle -->
+  <path
+    d="M96 42V32c0-7 6-13 13-13h22c7 0 13 6 13 13v10"
+    stroke="#fff"
+    stroke-opacity="0.34"
+    stroke-width="2.5"
+    stroke-linecap="round"
+  />
+
+  <!-- Sensor / status lens: the single focal highlight -->
+  <circle cx="120" cy="72" r="13" fill="#fff" opacity="0.06" />
+  <circle cx="120" cy="72" r="13" stroke="#fff" stroke-opacity="0.42" />
+  <circle cx="120" cy="72" r="4.5" fill="#fff" opacity="0.55" />
+
+  <!-- Intake vents -->
+  {Array.from({ length: vents }).map((_, i) => (
+    <path
+      d={`M${92 + i * 14} 96h56`}
+      stroke="#fff"
+      stroke-opacity="0.16"
+      stroke-width="2"
+      stroke-linecap="round"
+      transform={`translate(${-28 + i * 0} ${i * 0})`}
+      style={`transform: translateY(${i * 7}px)`}
+    />
+  ))}
+
+  <!-- Brush bar -->
+  <rect x="84" y="124" width="72" height="7" rx="3.5" fill="#fff" opacity="0.13" />
+  <rect x="84" y="124" width="72" height="7" rx="3.5" stroke="#fff" stroke-opacity="0.20" />
+</svg>
+
+<style>
+  .robot-sil {
+    width: 100%;
+    height: auto;
+    max-width: 240px;
+    display: block;
+    /* A faint glow beneath the form, so it reads as lit on the stage. */
+    filter: drop-shadow(0 12px 26px rgba(0, 0, 0, 0.6));
+  }
+</style>

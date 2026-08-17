@@ -1,0 +1,344 @@
+---
+/**
+ * Internal evidence review. Not a public editorial page: it sits behind the
+ * admin gate and is noindex, because it exposes gaps, conflicts and confidence
+ * grades that would be misread as product judgements.
+ *
+ * Everything on this page is derived. Nothing is typed in twice.
+ */
+import Admin from "../../layouts/Admin.astro";
+import { buildReport } from "../../lib/evidence-report";
+import { buildClaimLedger } from "../../content/evidence/claims";
+import { FIELD_REGISTRY } from "../../content/evidence/field-registry";
+import { VERIFICATION_DATE } from "../../content/evidence/verification";
+import { productPath } from "../../content/routes";
+import { REVIEW_WEIGHTED_THRESHOLD, REVIEW_SECTIONS } from "../../lib/evidence-report";
+
+const today = new Date();
+const { claims, blocked } = buildClaimLedger();
+const { ledger, issues, products, denominators, totals } = buildReport(today, claims);
+const errors = issues.filter((i) => i.severity === "error");
+const warnings = issues.filter((i) => i.severity === "warning");
+
+const PUB_LABEL: Record<string, string> = {
+  structurallyValid: "Structurally valid",
+  factuallyEvidenced: "Factually evidenced",
+  currentlyVerified: "Currently verified",
+  safeForLimitedFactualUse: "Safe for limited factual use",
+  readyForReviewWriting: "Ready for review writing",
+  readyForComparison: "Ready for comparison",
+  readyForBotMatch: "Ready for BotMatch",
+};
+
+const STATUS_TONE: Record<string, string> = {
+  launch_ready: "ok",
+  limited_factual_use: "warn",
+  candidate_under_review: "bad",
+};
+
+const pubKeys = Object.keys(PUB_LABEL);
+/** Reads one publication state by key. Kept out of the template because the
+ *  Astro compiler cannot parse a generic type assertion inside JSX. */
+const pubState = (p: (typeof products)[number], key: string): boolean =>
+  Boolean((p.publication as unknown as Record<string, boolean>)[key]);
+const readyCount = (k: string) => products.filter((p) => pubState(p, k)).length;
+---
+
+<Admin title="Product evidence review" section="evidence">
+  <p class="sub">
+    Field-level evidence for the {denominators.launchProducts} launch products, verified against live manufacturer
+    sources on <strong>{VERIFICATION_DATE}</strong>. Every score names its denominator — nothing here is a percentage
+    of an unknown total.
+  </p>
+
+  <div class="grid">
+    <div class="card">
+      <div class="muted">Completeness</div>
+      <div class="big">{totals.weightedPercent}%</div>
+      <div class="muted">weighted · {totals.rawPercent}% raw · {denominators.applicableFields} applicable fields</div>
+    </div>
+    <div class="card">
+      <div class="muted">Evidence records</div>
+      <div class="big">{ledger.evidence.length}</div>
+      <div class="muted">across {ledger.sources.length} sources</div>
+    </div>
+    <div class="card">
+      <div class="muted">Conflicts</div>
+      <div class="big" style={totals.unresolvedConflicts ? "color:var(--warn)" : "color:var(--ok)"}>{totals.conflicts}</div>
+      <div class="muted">{totals.unresolvedConflicts} unresolved and suppressed</div>
+    </div>
+    <div class="card">
+      <div class="muted">Validation errors</div>
+      <div class="big" style={errors.length ? "color:var(--bad)" : "color:var(--ok)"}>{errors.length}</div>
+      <div class="muted">{warnings.length} warnings</div>
+    </div>
+  </div>
+
+  <h2>Field states</h2>
+  <div class="card">
+    <table>
+      <thead><tr><th>State</th><th>Fields</th><th>What it means</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="tag ok">Populated</span></td>
+          <td class="mono">{totals.stateCounts.populated}</td>
+          <td class="muted">A named source states it, read on a known date, uncontradicted. Publishable.</td>
+        </tr>
+        <tr>
+          <td><span class="tag">Not publicly stated</span></td>
+          <td class="mono">{totals.stateCounts.not_publicly_stated}</td>
+          <td class="muted">Official sources were checked and none publishes this value. The sources checked are recorded per field.</td>
+        </tr>
+        <tr>
+          <td><span class="tag warn">Suppressed</span></td>
+          <td class="mono">{totals.stateCounts.suppressed}</td>
+          <td class="muted">We held a value and are now withholding it because no checked source supports it.</td>
+        </tr>
+        <tr>
+          <td><span class="tag bad">Conflicting</span></td>
+          <td class="mono">{totals.stateCounts.conflicting}</td>
+          <td class="muted">Sources disagree and authority cannot settle it. Nothing is published.</td>
+        </tr>
+        <tr>
+          <td><span class="tag">Not applicable</span></td>
+          <td class="mono">{totals.stateCounts.not_applicable}</td>
+          <td class="muted">The field cannot exist for this product. Excluded from both denominators.</td>
+        </tr>
+        <tr>
+          <td><span class="tag warn">Pending verification</span></td>
+          <td class="mono">{totals.stateCounts.pending_verification}</td>
+          <td class="muted">A value exists but has not been re-checked against its source.</td>
+        </tr>
+        <tr>
+          <td><span class="tag bad">Never checked</span></td>
+          <td class="mono">{totals.stateCounts.unknown}</td>
+          <td class="muted">No value and nobody looked. This must stay at zero after a verification pass.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Scoring method</h2>
+  <div class="card">
+    <ul style="margin:0;padding-left:18px;line-height:1.9;">
+      <li><strong>Denominator:</strong> the {denominators.fieldsInRegistry}-field registry, declared in advance — not the subset that happens to have data. Across ten products that is {denominators.fieldRecordsExpected} field records, of which {denominators.applicableFields} apply.</li>
+      <li><strong>Raw completeness:</strong> publishable fields ÷ applicable fields.</li>
+      <li><strong>Weighted completeness:</strong> publishable field weight ÷ applicable field weight, out of {denominators.applicableWeight}. Weights run 1–5; warranty, power type and pool size carry 5, dimensions carries 2.</li>
+      <li><strong>Applicability:</strong> a cordless robot has no cable length and a corded one has no charge time. Those are removed from the denominator, not counted as missing.</li>
+      <li><strong>Conflict resolution:</strong> the higher-authority source wins (manual &gt; manufacturer page &gt; retailer API &gt; retailer listing &gt; editorial). Equal authority, or an implausible winner, means nothing is published.</li>
+    </ul>
+  </div>
+
+  <h2>Reconciliation — {Object.values(totals.reconciliation).reduce((a, b) => a + b, 0)} stored values checked against their live source</h2>
+  <div class="card">
+    <table>
+      <thead><tr><th>Outcome</th><th>Count</th><th>Consequence</th></tr></thead>
+      <tbody>
+        <tr><td>Agrees</td><td class="mono">{totals.reconciliation.agrees}</td><td class="muted">No action.</td></tr>
+        <tr><td>Agrees (rounded/converted)</td><td class="mono">{totals.reconciliation.agrees_rounded}</td><td class="muted">Stored figure is a stated rounding; the source unit is published.</td></tr>
+        <tr><td>Agrees, unverified detail</td><td class="mono">{totals.reconciliation.agrees_with_unverified_detail}</td><td class="muted">Headline verified; unsourced wording must be trimmed from the editorial copy.</td></tr>
+        <tr><td>Derived from a range</td><td class="mono">{totals.reconciliation.derived_from_range}</td><td class="muted">Midpoint replaced by the range the source publishes.</td></tr>
+        <tr><td>Newly populated</td><td class="mono">{totals.reconciliation.newly_populated}</td><td class="muted">The source supplied a value we did not hold.</td></tr>
+        <tr><td>Conflicts</td><td class="mono" style="color:var(--bad)">{totals.reconciliation.conflicts}</td><td class="muted">Stored value contradicts the source. Source wins, or nothing is published.</td></tr>
+        <tr><td>Unsupported</td><td class="mono" style="color:var(--warn)">{totals.reconciliation.unsupported}</td><td class="muted">No checked source states it. Suppressed.</td></tr>
+        <tr><td>Not applicable</td><td class="mono">{totals.reconciliation.not_applicable}</td><td class="muted">Excluded from the denominator.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Publication readiness</h2>
+  <div class="card">
+    <p class="muted" style="margin-top:0">
+      Seven separate states, not one flag. A product can be safe to quote a fact from and still unfit for a comparison
+      table.
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th>Product</th>
+          {pubKeys.map((k) => <th style="writing-mode:vertical-rl;height:150px">{PUB_LABEL[k]}</th>)}
+          <th>Blockers</th>
+        </tr>
+      </thead>
+      <tbody>
+        {products.map((p) => (
+          <tr>
+            <td>
+              <a href={productPath(p.slug)}>{p.canonicalName}</a>
+              <div class="muted mono" style="font-size:11px">{p.modelNumber ?? "no model number published"}</div>
+              <div style="margin-top:4px"><span class={`tag ${STATUS_TONE[p.launchStatus]}`}>{p.launchStatus.replace(/_/g, " ")}</span></div>
+            </td>
+            {pubKeys.map((k) => (
+              <td style="text-align:center">
+                {pubState(p, k) ? <span class="tag ok">yes</span> : <span class="tag warn">no</span>}
+              </td>
+            ))}
+            <td class="muted" style="font-size:12px">{p.publicationBlockers.join("; ") || "—"}</td>
+          </tr>
+        ))}
+        <tr>
+          <td class="muted">Ready</td>
+          {pubKeys.map((k) => <td class="mono" style="text-align:center">{readyCount(k)}/{products.length}</td>)}
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Per-product completeness</h2>
+  <div class="card">
+    <table>
+      <thead>
+        <tr>
+          <th>Product</th><th>Weighted</th><th>Raw</th><th>Applicable</th>
+          <th>Populated</th><th>Not stated</th><th>Suppressed</th><th>Conflicting</th>
+          <th>Sources</th><th>Verified</th>
+        </tr>
+      </thead>
+      <tbody>
+        {products.map((p) => (
+          <tr>
+            <td>{p.canonicalName}</td>
+            <td class="mono">{p.overall.weightedPercent}%</td>
+            <td class="mono">{p.overall.rawPercent}%</td>
+            <td class="mono">{p.overall.applicable}</td>
+            <td class="mono">{p.stateCounts.populated}</td>
+            <td class="mono">{p.stateCounts.not_publicly_stated}</td>
+            <td class="mono" style={p.stateCounts.suppressed ? "color:var(--warn)" : ""}>{p.stateCounts.suppressed}</td>
+            <td class="mono" style={p.stateCounts.conflicting ? "color:var(--bad)" : ""}>{p.stateCounts.conflicting}</td>
+            <td class="mono">{p.sourceCount}</td>
+            <td class="mono">{p.latestVerification ?? "—"}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Conflict matrix</h2>
+  <div class="card">
+    {ledger.conflicts.length === 0 ? (
+      <p class="muted" style="margin:0">No conflicts.</p>
+    ) : (
+      <table>
+        <thead><tr><th>Product</th><th>Field</th><th>Competing values</th><th>Resolution</th></tr></thead>
+        <tbody>
+          {ledger.conflicts.map((c) => (
+            <tr>
+              <td class="mono" style="font-size:12px">{c.productId}</td>
+              <td>{c.field}</td>
+              <td>
+                {c.values.map((v) => (
+                  <div style="margin-bottom:4px">
+                    <span class="tag">{v.sourceType}</span>{" "}
+                    <span class="mono" style="font-size:12px">{String(v.value)}</span>{" "}
+                    <span class="muted" style="font-size:11px">— {v.publisher}</span>
+                  </div>
+                ))}
+              </td>
+              <td>
+                {c.suppressed
+                  ? <span class="tag bad">suppressed</span>
+                  : <span class="tag ok">{String(c.resolvedTo)}</span>}
+                <div class="muted" style="font-size:11px;margin-top:4px">{c.resolutionRule}</div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    )}
+  </div>
+
+  <h2>Model identity</h2>
+  <div class="card">
+    <p class="muted" style="margin-top:0">
+      Near-identical siblings are the main way a catalogue publishes the wrong number. Every product records how it is
+      told apart from its siblings, and which document actually covers it.
+    </p>
+    <table>
+      <thead><tr><th>Product</th><th>Model number</th><th>Manual</th><th>Identity risk</th></tr></thead>
+      <tbody>
+        {products.map((p) => (
+          <tr>
+            <td>{p.canonicalName}</td>
+            <td class="mono" style="font-size:12px">{p.modelNumber ?? <span class="tag warn">not published</span>}</td>
+            <td>{p.manualUrl ? <a href={p.manualUrl}>document</a> : <span class="tag warn">none accepted</span>}</td>
+            <td class="muted" style="font-size:12px">{p.identityIssue}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Review-writing gates</h2>
+  <div class="card">
+    <p class="muted" style="margin-top:0">
+      A percentage alone never makes a product ready. All six gates must pass, on top of safe-for-factual-use.
+      The weighted floor is {REVIEW_WEIGHTED_THRESHOLD}%. Review sections checked:
+      {REVIEW_SECTIONS.map((s) => s.section).join(", ")}.
+    </p>
+    <table>
+      <thead><tr><th>Product</th><th>Status</th><th>Failing gates</th></tr></thead>
+      <tbody>
+        {products.map((p) => (
+          <tr>
+            <td>{p.canonicalName}</td>
+            <td><span class={`tag ${STATUS_TONE[p.launchStatus]}`}>{p.launchStatus.replace(/_/g, " ")}</span></td>
+            <td class="muted" style="font-size:12px">
+              {p.reviewGates.filter((g) => !g.passed).length === 0
+                ? "all gates pass"
+                : p.reviewGates.filter((g) => !g.passed).map((g) => <div>{g.gate}: {g.detail}</div>)}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Warranty status</h2>
+  <div class="card">
+    <p class="muted" style="margin-top:0">
+      A term is confirmed only when the manufacturer's own page or manual states it. A dealer's warranty offer is
+      never promoted to the product's canonical warranty, and an unconfirmed term is never written as an absence.
+    </p>
+    <table>
+      <thead><tr><th>Product</th><th>Status</th><th>Public wording</th><th>Why</th></tr></thead>
+      <tbody>
+        {products.map((p) => (
+          <tr>
+            <td>{p.canonicalName}</td>
+            <td>{p.warranty.status === "confirmed" ? <span class="tag ok">confirmed</span> : <span class="tag warn">not confirmed</span>}</td>
+            <td>{p.warranty.text}</td>
+            <td class="muted" style="font-size:12px">{p.warranty.internalReason ?? "—"}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Claims</h2>
+  <div class="grid">
+    <div class="card"><div class="muted">Publishable claims</div><div class="big">{claims.length}</div><div class="muted">every one generated from a verified field</div></div>
+    <div class="card"><div class="muted">Blocked claims</div><div class="big" style="color:var(--warn)">{blocked.length}</div><div class="muted">field not publishable — recorded, not hidden</div></div>
+    <div class="card"><div class="muted">Registry fields</div><div class="big">{FIELD_REGISTRY.length}</div><div class="muted">the declared denominator</div></div>
+  </div>
+
+  {warnings.length > 0 && (
+    <>
+      <h2>Warnings</h2>
+      <div class="card">
+        <table>
+          <thead><tr><th>Rule</th><th>Product</th><th>Detail</th></tr></thead>
+          <tbody>
+            {warnings.map((w) => (
+              <tr><td class="mono" style="font-size:12px">{w.rule}</td><td class="mono" style="font-size:12px">{w.productId ?? "—"}</td><td class="muted">{w.detail}</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </>
+  )}
+
+  <style>
+    .big { font-size: 26px; font-weight: 700; letter-spacing: -0.02em; margin: 4px 0; }
+  </style>
+</Admin>

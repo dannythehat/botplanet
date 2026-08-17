@@ -1,0 +1,101 @@
+---
+/* ============================================================
+   BotPlanet — Trust strip
+
+   Step 5 of the approved component order. A thin band under the
+   hero that answers "why should I believe this page" before the
+   reader invests any time in it.
+
+   Every figure here is passed in from something real. Nothing is
+   decorative and nothing claims hands-on testing, because the
+   evidence model behind this site is desk research plus dated
+   manual checks — a different and smaller claim.
+   ============================================================ */
+
+export interface TrustItem {
+  /** The figure or short value. */
+  value: string;
+  /** What it means. */
+  label: string;
+  /** Optional supporting page. */
+  href?: string;
+}
+
+interface Props {
+  items: TrustItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<section class="bp-trust" aria-label="How this page is researched">
+  <ul class="bp-trust__list">
+    {items.map((item) => (
+      <li class="bp-trust__item">
+        <span class="bp-trust__value">{item.value}</span>
+        {item.href ? (
+          <a class="bp-trust__label bp-trust__label--link" href={item.href}>{item.label}</a>
+        ) : (
+          <span class="bp-trust__label">{item.label}</span>
+        )}
+      </li>
+    ))}
+  </ul>
+</section>
+
+<style is:global>
+  .bp-trust {
+    margin: 0 0 clamp(3rem, 7vw, 5rem);
+    padding: clamp(1.15rem, 3vw, 1.5rem) clamp(1.15rem, 3vw, 1.75rem);
+    border: 1px solid var(--cs-line-soft);
+    border-radius: 14px;
+    background: var(--cs-surface);
+  }
+
+  .bp-trust__list {
+    display: grid;
+    gap: clamp(1rem, 2.5vw, 1.5rem);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .bp-trust__item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.28rem;
+  }
+
+  .bp-trust__value {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.05rem, 2.4vw, 1.22rem);
+    line-height: 1.2;
+    letter-spacing: -0.012em;
+    background: linear-gradient(174deg, #ffffff 8%, #e2e7ee 50%, #a6aeba 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .bp-trust__label {
+    font-size: 0.85rem;
+    line-height: 1.42;
+    color: var(--text-tertiary);
+  }
+
+  .bp-trust__label--link {
+    color: var(--cs-mid);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .bp-trust__label--link:hover { color: var(--cs-hi); }
+
+  @media (min-width: 760px) {
+    .bp-trust__list {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+</style>

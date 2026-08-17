@@ -1,0 +1,143 @@
+---
+/* ============================================================
+   BotPlanet — decision table.
+
+   One row per reader situation, the machines whose recorded
+   specification satisfies it, and THE TEST THAT WAS APPLIED
+   printed beside them.
+
+   The rule column is not decoration and is not a footnote. It is
+   the difference between a table a reader can check and a table a
+   reader has to trust. "Rated to 100 ft" is checkable against the
+   specification table on the linked review; "best for large pools"
+   is not checkable against anything.
+
+   A ROW WITH NO MATCH SAYS SO, in the same words the alternatives
+   block uses, because the failure mode is identical: a reader who
+   has just told you their exact constraint is the last person to
+   fob off with the nearest thing.
+   ============================================================ */
+import SectionHead from "./SectionHead.astro";
+import type { GuideTable } from "../content/decision-tables";
+
+interface Props {
+  table: GuideTable;
+  eyebrow?: string;
+}
+
+const { table, eyebrow = "Decide" } = Astro.props;
+---
+
+{/* aria-label rather than aria-labelledby: SectionHead owns the H2 and does
+    not take an id, and inventing one here would mean two components both
+    believing they name this section. */}
+<section class="bp-dt" id={table.id} aria-label={table.title}>
+  <SectionHead eyebrow={eyebrow} title={table.title} intro={table.intro} />
+
+  <div class="bp-dt__scroll">
+    <table class="bp-dt__table">
+      <thead>
+        <tr>
+          <th scope="col">{table.situationHeading}</th>
+          <th scope="col">What we checked</th>
+          <th scope="col">What qualifies</th>
+        </tr>
+      </thead>
+      <tbody>
+        {table.rows.map((row) => (
+          <tr>
+            <th scope="row">{row.situation}</th>
+            <td class="bp-dt__rule">{row.rule}</td>
+            <td>
+              {row.picks.length > 0 ? (
+                <ul class="bp-dt__picks">
+                  {row.picks.map((p) => (
+                    <li>
+                      <a href={p.href}>{p.name}</a>
+                      {/* An absence is our record of a silence, not a quoted
+                          figure, and is set apart so it cannot be read as one. */}
+                      <span class="bp-dt__ev" data-absence={p.absence ? "true" : "false"}>
+                        {p.evidence}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <span class="bp-dt__none">
+                  Nothing in our catalogue does this yet. We would rather say so than send you to
+                  the nearest thing.
+                </span>
+              )}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <p class="note bp-dt__note">{table.note}</p>
+</section>
+
+<style>
+  .bp-dt { margin: var(--space-7, 2.5rem) 0; }
+
+  /* The table scrolls inside its own box rather than pushing the page sideways
+     — three columns of prose do not fit a 390px screen and never will. */
+  .bp-dt__scroll {
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg, 14px);
+    background: var(--panel);
+  }
+
+  .bp-dt__table {
+    width: 100%;
+    min-width: 640px;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+
+  .bp-dt__table th,
+  .bp-dt__table td {
+    padding: 0.8rem 0.9rem;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid var(--border-2);
+  }
+
+  .bp-dt__table thead th {
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    background: var(--panel-2, var(--panel));
+  }
+
+  .bp-dt__table tbody th {
+    font-weight: 650;
+    width: 30%;
+  }
+
+  .bp-dt__rule {
+    color: var(--text-secondary);
+    font-size: 0.83rem;
+    width: 26%;
+  }
+
+  .bp-dt__picks { margin: 0; padding: 0; list-style: none; }
+  .bp-dt__picks li { margin: 0 0 0.5rem; }
+  .bp-dt__picks li:last-child { margin-bottom: 0; }
+  .bp-dt__picks a { font-weight: 600; }
+
+  .bp-dt__ev {
+    display: block;
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    margin-top: 0.1rem;
+  }
+
+  .bp-dt__ev[data-absence="true"] { font-style: italic; }
+
+  .bp-dt__none { color: var(--text-secondary); font-size: 0.86rem; }
+  .bp-dt__note { margin-top: 0.75rem; }
+</style>

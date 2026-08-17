@@ -1,0 +1,241 @@
+---
+import Base from "../../layouts/Base.astro";
+import { categoryRoutes, liveCategories } from "../../content/routes";
+import { CATEGORY_DIRECTORY_ART } from "../../content/category-directory-art";
+import { breadcrumbsFor } from "../../lib/routing";
+import { itemListSchema, webPageSchema } from "../../lib/seo";
+import { srcsetFor } from "../../lib/srcset";
+
+const categories = liveCategories()
+  .slice()
+  .sort((a, b) => a.order - b.order)
+  .map((category) => ({
+    ...category,
+    href: categoryRoutes(category.slug).hub,
+    art: CATEGORY_DIRECTORY_ART[category.slug] ?? null,
+  }));
+
+const crumbs = breadcrumbsFor("/robots/");
+const description =
+  "Explore every robot category BotPlanet covers — robot vacuums, lawn mowers, pool cleaners, " +
+  "window robots, companions, pet cameras and more.";
+
+const schema = [
+  webPageSchema({
+    path: "/robots/",
+    name: "Robot Categories: Types of Home Robots | BotPlanet",
+    description,
+    type: "CollectionPage",
+  }),
+  itemListSchema(
+    categories.map((category) => ({ name: category.name, path: category.href })),
+    "Robot categories on BotPlanet",
+  ),
+];
+---
+
+<Base
+  title="Robot Categories: Types of Home Robots | BotPlanet"
+  description={description}
+  path="/robots/"
+  breadcrumbs={crumbs}
+  schema={schema}
+>
+  <header class="category-hero">
+    <p class="kicker">EXPLORE THE PLANET</p>
+    <h1>Robot categories</h1>
+    <p class="category-hero__lede">
+      Explore the types of robots that can clean your home, care for your garden, watch your pets,
+      keep you company and help children learn. Choose a category to compare the machines, understand
+      their limits and find the right fit.
+    </p>
+  </header>
+
+  <ul class="category-grid">
+    {categories.map((category) => (
+      <li>
+        <a class="category-card" href={category.href}>
+          {category.art && (
+            <img
+              class="category-card__image"
+              src={category.art.src}
+              srcset={srcsetFor(category.art.src)}
+              sizes="(min-width: 960px) 33vw, (min-width: 620px) 50vw, 100vw"
+              alt={category.art.alt}
+              loading="lazy"
+              decoding="async"
+              style={category.art.focal ? `object-position: ${category.art.focal}` : undefined}
+            />
+          )}
+          <span class="category-card__copy">
+            <h2>{category.name}</h2>
+            <p>{category.short}</p>
+            <span class="category-card__action">{category.jtbd}<span aria-hidden="true"> →</span></span>
+          </span>
+        </a>
+      </li>
+    ))}
+  </ul>
+
+  <section class="finder-panel" aria-labelledby="finder-heading">
+    <div>
+      <p class="kicker">BOTMATCH</p>
+      <h2 id="finder-heading">Not sure which kind of robot you need?</h2>
+      <p>Tell us what you want done. We will take you to the right questions and show you the shortlist you can check.</p>
+    </div>
+    <a class="btn btn--accent btn--lg" href="/botmatch/">Find your robot</a>
+  </section>
+</Base>
+
+<style>
+  .category-hero {
+    max-width: 850px;
+    padding: clamp(42px, 7vw, 88px) 0 clamp(30px, 5vw, 54px);
+  }
+
+  .kicker {
+    margin: 0 0 14px;
+    color: var(--text-tertiary);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .18em;
+  }
+
+  .category-hero h1 {
+    margin: 0;
+    font-size: clamp(46px, 7vw, 78px);
+    line-height: 1;
+    letter-spacing: -.05em;
+  }
+
+  .category-hero__lede {
+    max-width: 70ch;
+    margin: 22px 0 0;
+    color: var(--text-secondary);
+    font-size: clamp(18px, 2vw, 21px);
+    line-height: 1.65;
+  }
+
+  .category-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .category-grid > li { display: flex; margin: 0; }
+
+  .category-card {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid rgba(200, 208, 222, .20);
+    border-radius: 20px;
+    background:
+      radial-gradient(ellipse at 12% -10%, rgba(226, 232, 244, .05), transparent 58%),
+      linear-gradient(178deg, #11151b 0%, #090c10 100%);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .05), 0 22px 48px rgba(0, 0, 0, .35);
+    color: inherit;
+    text-decoration: none;
+    transition: transform var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out);
+  }
+
+  .category-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(225, 231, 240, .42);
+  }
+
+  .category-card:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: 4px;
+  }
+
+  .category-card__image {
+    display: block;
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    object-position: center;
+    border-bottom: 1px solid rgba(200, 208, 222, .16);
+  }
+
+  .category-card__copy {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding: 20px 22px 22px;
+  }
+
+  .category-card h2 {
+    margin: 0;
+    color: var(--text-primary);
+    font-size: 20px;
+    line-height: 1.25;
+    letter-spacing: -.025em;
+  }
+
+  .category-card p {
+    margin: 10px 0 0;
+    color: var(--text-secondary);
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  .category-card__action {
+    margin-top: auto;
+    padding-top: 18px;
+    color: var(--text-tertiary);
+    font-size: 13px;
+    font-weight: var(--weight-semibold);
+  }
+
+  .category-card:hover .category-card__action { color: var(--text-primary); }
+
+  .finder-panel {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: clamp(24px, 5vw, 64px);
+    margin: clamp(48px, 7vw, 86px) 0;
+    padding: clamp(28px, 5vw, 52px);
+    border: 1px solid rgba(200, 208, 222, .20);
+    border-radius: 22px;
+    background:
+      radial-gradient(ellipse at 12% -20%, rgba(226, 232, 244, .06), transparent 60%),
+      linear-gradient(178deg, #11151b 0%, #0a0d11 100%);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .06), 0 26px 60px rgba(0, 0, 0, .45);
+  }
+
+  .finder-panel > div { max-width: 650px; }
+
+  .finder-panel h2 {
+    margin: 0;
+    font-size: clamp(30px, 4vw, 46px);
+    line-height: 1.08;
+    letter-spacing: -.04em;
+  }
+
+  .finder-panel p:last-child {
+    margin: 16px 0 0;
+    color: var(--text-secondary);
+    font-size: 17px;
+    line-height: 1.6;
+  }
+
+  .finder-panel .btn { flex: 0 0 auto; }
+
+  @media (max-width: 900px) {
+    .category-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+
+  @media (max-width: 620px) {
+    .category-hero { padding-top: 34px; }
+    .category-grid { grid-template-columns: 1fr; }
+    .finder-panel { align-items: flex-start; flex-direction: column; }
+    .finder-panel .btn { width: 100%; }
+  }
+</style>

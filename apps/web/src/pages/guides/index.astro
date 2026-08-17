@@ -1,0 +1,114 @@
+---
+/**
+ * Guides index.
+ *
+ * REWRITTEN 6 August 2026, because it was linking to pages that do not exist.
+ *
+ * The old version rendered one card per live category pointing at
+ * `/guides/<slug>/`. Exactly one of those pages has ever been built — pool —
+ * so every other live category card was a link to a 404, and the four guides
+ * published on 6 August had no entry point from anywhere on the site except
+ * each other and the sitemap.
+ *
+ * It now renders from what is actually published: the editorial registry for
+ * the guides, and the route registry for the category guide hubs. A category
+ * with a hub links to the hub. A category with guides but no hub lists its
+ * guides directly, which is the case for lawn and companion. A category with
+ * neither renders a card that is deliberately not a link.
+ *
+ * The rule this file now obeys, which is the same rule the pool guides hub
+ * obeys: never link to a page that does not exist, and never advertise a guide
+ * that has not been written.
+ */
+import Base from "../../layouts/Base.astro";
+import { CATEGORIES, ROUTES, categoryRoutes } from "../../content/routes";
+import { editorialForCategory } from "../../content/editorial";
+import { breadcrumbsFor } from "../../lib/routing";
+import { itemListSchema, webPageSchema } from "../../lib/seo";
+
+const PATH = "/guides/";
+const crumbs = breadcrumbsFor(PATH);
+
+const liveHub = (slug: string) =>
+  ROUTES.find((r) => r.path === categoryRoutes(slug).guides && r.status === "live");
+
+const sections = CATEGORIES.filter((c) => c.launch !== "hidden")
+  .sort((a, b) => a.order - b.order)
+  .map((c) => ({
+    category: c,
+    hub: liveHub(c.slug),
+    guides: editorialForCategory(c.slug).filter((e) => e.path.startsWith("/guides/")),
+  }));
+
+/* Schema lists the guides themselves rather than the category cards. A reader
+   arriving from a result for one of these wants the article, not a shelf. */
+const published = sections.flatMap((s) => s.guides);
+
+const pageSchema = [
+  webPageSchema({
+    path: PATH,
+    name: "Robot guides",
+    description:
+      "Plain explanations of how these machines work and what actually decides which one suits you.",
+  }),
+  published.length
+    ? itemListSchema(
+        published.map((g) => ({ name: g.title, path: g.path })),
+        "Robot guides",
+      )
+    : null,
+];
+---
+<Base
+  title="Robot guides — how they work and what matters"
+  description="Robot guides for the real world: how these machines work, what actually matters when choosing one, and how to keep one running once you own it."
+  breadcrumbs={crumbs}
+  schema={pageSchema}
+>
+  <div class="section-head">
+    <span class="rule-accent" aria-hidden="true"></span>
+    <span class="eyebrow">Guides</span>
+    <h1 class="mt-0">Robot guides</h1>
+    <p>Plain explanations of how these machines work, what matters when choosing one, and how to keep one running.</p>
+  </div>
+
+  {sections.map(({ category, hub, guides }) => (
+    <section class="g-cat">
+      <div class="g-cat__head">
+        <h2 class="g-cat__title">
+          {hub ? <a href={hub.path}>{category.name} guides</a> : `${category.name} guides`}
+        </h2>
+        <p class="g-cat__intro">{category.short}</p>
+      </div>
+
+      {guides.length > 0 ? (
+        <div class="grid grid--2">
+          {guides.map((g) => (
+            <a class="card card--interactive" href={g.path}>
+              <span class="pill pill--strong">Guide</span>
+              <h3 class="g-title">{g.title}</h3>
+              <p>{g.standfirst}</p>
+            </a>
+          ))}
+        </div>
+      ) : (
+        /* Not a link, and not dressed up as one: nothing is published here
+           yet, and a card that pretends otherwise is a promise the site
+           cannot keep. */
+        <div class="card is-soon">
+          <span class="pill pill--warn">Coming soon</span>
+          <p class="mb-0">No guides published for this category yet.</p>
+        </div>
+      )}
+    </section>
+  ))}
+</Base>
+<style>
+  .g-cat { margin-block: clamp(2rem, 5vw, 3rem); }
+  .g-cat__head { margin-bottom: 1rem; }
+  .g-cat__title { font-size: var(--type-section, 1.5rem); margin: 0 0 0.25rem; }
+  .g-cat__intro { margin: 0; color: var(--ink-muted, inherit); }
+  .g-title { font-size: var(--type-card); margin: 0; }
+  .card.is-soon { opacity: 0.72; }
+  .mb-0 { margin-bottom: 0; }
+</style>

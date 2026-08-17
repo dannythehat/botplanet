@@ -1,0 +1,278 @@
+---
+/* ============================================================
+   BotPlanet — the video section.
+
+   A framed link out to a YouTube video about the product.
+
+   IT DOES NOT EMBED, DELIBERATELY. A YouTube iframe loads roughly
+   half a megabyte of Google's JavaScript before anyone presses
+   play, sets cookies on a visitor who never asked to be tracked,
+   and is consistently the heaviest thing on any page that carries
+   one. This renders a poster and a real link. The reader gets the
+   video; the page does not get the payload.
+
+   IT RENDERS NOTHING WITHOUT A URL. There is no placeholder and no
+   "video coming soon" — an empty promise on a live page is worse
+   than no section at all.
+
+   WHOSE VIDEO IT IS. `channel` is required and printed. A reader
+   should never be unclear about whether they are about to watch
+   BotPlanet or the manufacturer's own marketing.
+   ============================================================ */
+import { srcsetFor, sizeOf } from "../lib/srcset";
+
+export interface ReviewVideo {
+  /** Full YouTube watch URL, or an Amazon /vdp/ video page. */
+  url: string;
+  title: string;
+  /** Who made it — printed, so its provenance is never ambiguous. */
+  channel: string;
+  /**
+   * WHOSE VIDEO IT IS, AS A FACT RATHER THAN A TONE.
+   *
+   * "independent" is somebody who bought one. "seller" is the manufacturer or
+   * their storefront — an Amazon URL carrying `amzn1.ive.seller.video` is the
+   * latter by definition, and the Polaris FREEDOM link is exactly that.
+   *
+   * It is a separate field rather than something inferred from the channel
+   * name because the difference changes what the reader should take from the
+   * footage, and a reader cannot be expected to decode an Amazon URL. A seller
+   * video shows a machine working; it is not evidence that it works.
+   */
+  source?: "independent" | "seller";
+  /** Roughly how long, e.g. "8 min". */
+  duration?: string;
+  /** One line on what it shows and what it does not. */
+  note?: string;
+  /** Poster image path from the media registry. Falls back to a plain plate. */
+  poster?: string;
+}
+
+interface Props {
+  video: ReviewVideo;
+  productName: string;
+}
+
+const { video, productName } = Astro.props;
+
+/** True only for a real YouTube watch or short-link URL. */
+const isYouTube = /^https:\/\/(www\.)?(youtube\.com\/watch\?v=|youtu\.be\/)/.test(video.url);
+/** An Amazon video detail page, which is where a seller's own footage lives. */
+const isAmazon = /^https:\/\/(www\.)?amazon\.[a-z.]+\/vdp\//.test(video.url);
+const renders = isYouTube || isAmazon;
+
+const isSeller = video.source === "seller";
+const host = isYouTube ? "YouTube" : "Amazon";
+
+/* The credit over the poster. Our poster is BotPlanet-branded, so without this
+   the card reads as our own footage — and for a seller video that would be two
+   wrong impressions at once. */
+const creditLabel = isSeller ? `${video.channel} — seller video` : `Video by ${video.channel}`;
+
+const privacyLine = isYouTube
+  ? "Opens on YouTube in a new tab. We do not embed the player, so nothing loads from Google until you choose to go there."
+  : "Opens on Amazon in a new tab. We do not embed the player, so nothing loads from Amazon until you choose to go there.";
+---
+
+{renders && (
+  <section class="bp-vid" aria-labelledby="video-heading">
+    <div class="bp-vid__plate">
+      <p class="bp-vid__eyebrow">Watch it work</p>
+      <h2 id="video-heading">{productName} on video</h2>
+
+      <a class="bp-vid__link" href={video.url} rel="noopener nofollow" target="_blank">
+        <span class="bp-vid__poster">
+          {video.poster ? (
+            <img
+              src={video.poster}
+              srcset={srcsetFor(video.poster)}
+              sizes="(min-width: 760px) 640px, 100vw"
+              width={sizeOf(video.poster)?.width}
+              height={sizeOf(video.poster)?.height}
+              alt=""
+              loading="lazy"
+              decoding="async"
+            />
+          ) : (
+            <span class="bp-vid__blank" aria-hidden="true"></span>
+          )}
+          {/* The poster is BotPlanet-branded and the video is not ours. Without
+              this the card reads as our own footage, which is exactly the
+              confusion the channel line further down is meant to prevent —
+              and a caption below a picture loses to the picture every time. */}
+          <span class="bp-vid__credit" data-seller={isSeller ? "true" : "false"}>{creditLabel}</span>
+          <span class="bp-vid__play" aria-hidden="true">
+            <svg viewBox="0 0 68 48"><path class="bp-vid__playbg" d="M66.5 7.7a8.6 8.6 0 0 0-6-6C55.2 0 34 0 34 0S12.8 0 7.5 1.6a8.6 8.6 0 0 0-6 6A89.6 89.6 0 0 0 0 24a89.6 89.6 0 0 0 1.5 16.3 8.6 8.6 0 0 0 6 6C12.8 48 34 48 34 48s21.2 0 26.5-1.6a8.6 8.6 0 0 0 6-6A89.6 89.6 0 0 0 68 24a89.6 89.6 0 0 0-1.5-16.3z"/><path d="M45 24 27 14v20z" fill="#fff"/></svg>
+          </span>
+        </span>
+
+        <span class="bp-vid__detail">
+          <span class="bp-vid__title">{video.title}</span>
+          <span class="bp-vid__by">
+            {video.channel}
+            {video.duration && <span class="bp-vid__dur">{video.duration}</span>}
+          </span>
+          <span class="bp-vid__go">Watch on {host} <span aria-hidden="true">&#8599;</span></span>
+        </span>
+      </a>
+
+      {video.note && <p class="bp-vid__note">{video.note}</p>}
+
+      <p class="bp-vid__privacy">{privacyLine}</p>
+    </div>
+  </section>
+)}
+
+<style is:global>
+  .bp-vid { margin: clamp(2.5rem, 6vw, 4rem) 0; }
+
+  .bp-vid__plate {
+    position: relative;
+    overflow: hidden;
+    padding: clamp(1.4rem, 4vw, 2.4rem);
+    border: 1px solid var(--cs-line);
+    border-radius: 22px;
+    background:
+      radial-gradient(120% 90% at 88% -20%, rgba(226, 234, 248, 0.09), transparent 60%),
+      linear-gradient(178deg, #12171d 0%, #0a0d11 62%, #0d1116 100%);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 26px 34px rgba(0, 0, 0, 0.5);
+  }
+
+  .bp-vid__plate::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(246, 248, 252, 0.5) 30%, rgba(255,255,255,.8) 50%, rgba(246, 248, 252, 0.45) 70%, transparent);
+  }
+
+  .bp-vid__eyebrow {
+    margin: 0 0 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    background: var(--cs-sheen);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .bp-vid h2 {
+    margin: 0 0 clamp(1.1rem, 2.6vw, 1.5rem);
+    font-family: var(--font-display);
+    font-size: clamp(1.3rem, 3vw, 1.75rem);
+    letter-spacing: -0.022em;
+    line-height: 1.14;
+    color: var(--cs-hi);
+  }
+
+  .bp-vid__link {
+    display: grid;
+    gap: clamp(1rem, 2.4vw, 1.5rem);
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .bp-vid__poster {
+    position: relative;
+    display: block;
+    border: 1px solid var(--cs-line-soft);
+    border-radius: 14px;
+    overflow: hidden;
+    background: var(--cs-surface);
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .bp-vid__poster img { display: block; width: 100%; height: auto; }
+  .bp-vid__blank { display: block; aspect-ratio: 16 / 9; background: linear-gradient(150deg, #161b22, #0a0d11); }
+
+  .bp-vid__credit {
+    position: absolute;
+    left: 0.7rem;
+    bottom: 0.7rem;
+    z-index: 2;
+    padding: 0.3rem 0.65rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    background: rgba(6, 9, 13, 0.82);
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #e8edf5;
+  }
+
+  /* A seller's own footage gets an amber rim rather than the neutral one. Not
+     a warning — a label. The reader should be able to tell at a glance whether
+     they are about to watch an owner or a marketing department. */
+  .bp-vid__credit[data-seller="true"] {
+    border-color: rgba(217, 164, 65, 0.6);
+    color: #f0dcb4;
+  }
+
+  .bp-vid__play {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+  }
+
+  .bp-vid__play svg { width: 4.2rem; height: auto; filter: drop-shadow(0 6px 18px rgba(0,0,0,.6)); }
+  .bp-vid__playbg { fill: rgba(18, 18, 18, 0.82); transition: fill 0.2s ease; }
+
+  .bp-vid__link:hover .bp-vid__poster { border-color: var(--cs-line); transform: translateY(-2px); }
+  .bp-vid__link:hover .bp-vid__playbg { fill: #ff0033; }
+  .bp-vid__link:focus-visible .bp-vid__poster { outline: var(--focus-ring, 2px solid #dfe4ec); outline-offset: 3px; }
+
+  .bp-vid__detail { display: grid; gap: 0.4rem; }
+
+  .bp-vid__title {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--cs-hi);
+  }
+
+  .bp-vid__by {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 0.85rem;
+    font-size: 0.88rem;
+    color: var(--text-tertiary);
+  }
+
+  .bp-vid__dur {
+    padding: 0.14rem 0.5rem;
+    border: 1px solid var(--cs-line-soft);
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+  }
+
+  .bp-vid__go { margin-top: 0.35rem; font-weight: 700; color: var(--cs-hi); }
+
+  .bp-vid__note { margin: 1.1rem 0 0; font-size: 0.95rem; line-height: 1.6; color: var(--text-secondary); }
+
+  .bp-vid__privacy {
+    margin: 1rem 0 0;
+    padding-top: 1rem;
+    border-top: 1px solid var(--cs-line-soft);
+    font-size: 0.8rem;
+    line-height: 1.55;
+    color: var(--text-quaternary);
+  }
+
+  @media (min-width: 760px) {
+    .bp-vid__link { grid-template-columns: 1.15fr 0.85fr; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bp-vid__poster, .bp-vid__link:hover .bp-vid__poster { transform: none; transition: none; }
+  }
+</style>

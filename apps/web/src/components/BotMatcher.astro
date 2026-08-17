@@ -1,0 +1,1054 @@
+---
+/* ============================================================
+   BotMatch funnel.
+
+   Ported from the CryptoWatchdog matcher: five stages held in
+   one component — landing → quiz → analysing → capture → done.
+   Same structure, same perceived-value beat, same honeypot.
+
+   Rewritten as a vanilla island, because this app deliberately
+   runs no React on the worker (see astro.config.mjs). No
+   framer-motion, no icon library — CSS transitions and inline
+   SVG instead.
+
+   To change the questions, edit content/matcher-questions.ts.
+   Nothing in here needs to change.
+   ============================================================ */
+
+import { ANALYSE_MS, type MatcherQuestion } from "../content/matcher-questions";
+
+export interface MatcherCategory {
+  slug: string;
+  name: string;
+  questions: MatcherQuestion[];
+  tasks: string[];
+  /** False when the catalogue cannot support a pick — see matcher-router.ts. */
+  matchable: boolean;
+  /** The sentence shown instead of a result when `matchable` is false. */
+  emptyState: string;
+  hubHref: string;
+}
+
+interface Props {
+  /* Questions and tasks are PASSED IN, not imported. The component used to
+     import one global array, which is how every category ended up sharing the
+     pool questionnaire. Making them required props means a caller cannot
+     render this funnel without deciding, explicitly, which category's
+     questions it is rendering. */
+  categories: MatcherCategory[];
+  /**
+   * "single" — one category, chosen by the URL. The original behaviour.
+   * "choose" — the universal entry: ask what job the robot should do first,
+   *            then run the chosen categories' own question sets in sequence.
+   *
+   * BOTH MODES ARE THIS COMPONENT because the second is the first with a
+   * question in front of it. A separate universal funnel would have meant two
+   * copies of the stage machine, the honeypot, the tie handling and the lead
+   * submit, and the second copy would have drifted. It always does.
+   */
+  mode: "single" | "choose";
+  jobs?: { id: string; label: string; description: string; categorySlug: string }[];
+}
+const { categories, mode, jobs = [] } = Astro.props;
+
+/* In single mode there is exactly one, and the landing copy names it. In
+   choose mode the landing is about the site rather than a category. */
+const only = categories.length === 1 ? categories[0] : null;
+const categorySlug = only?.slug ?? "universal";
+const categoryName = only?.name ?? "robot";
+
+/* Landing copy, per category.
+
+   This block said "for your pool" and "Pool type, size, coverage, power and
+   budget" for EVERY category until 6 August 2026, because pool was the only
+   one when it was written. It went live on a window URL on 5 August reading
+   "Find the right window-cleaning robots for your pool".
+
+   Every line here now names what the category's own questions actually ask.
+   A category added later without an entry gets wording that is general but
+   still true, never another category's specifics.
+
+   The question count is counted, not typed. It said "Eight short questions"
+   while the funnel asked seven. */
+/* @extension-point per-category | optional | The funnel falls back to general
+   wording — "for you", and a criteria line that does not name the category's
+   real inputs. True, but flat, and it wastes the one line that tells a reader
+   we understand their problem. */
+const COPY: Record<string, { audience: string; criteria: string }> = {
+  "robotic-pool-cleaners": {
+    audience: "for your pool",
+    criteria: "Pool type, size, coverage, power and budget — nothing else.",
+  },
+  "window-cleaning-robots": {
+    audience: "for your windows",
+    criteria: "Framed or frameless, which glass, power and budget — nothing else.",
+  },
+  "robotic-lawn-mowers": {
+    audience: "for your lawn",
+    criteria: "Lawn size, tree cover, slopes, zones and budget — nothing else.",
+  },
+  "companion-robots": {
+    audience: "for whoever it's for",
+    criteria: "Who it's for, subscription tolerance, movement, conversation and budget — nothing else.",
+  },
+  "pet-camera-robots": {
+    audience: "for your home",
+    criteria: "Stairs, floors, what you need to do remotely and budget — nothing else.",
+  },
+  "self-cleaning-litter-boxes": {
+    audience: "for your cat",
+    criteria: "Cat size, how many cats, litter type, tracking and budget — nothing else.",
+  },
+  "grill-cleaning-robots": {
+    audience: "for your grill",
+    criteria: "Grate material, bar spacing, how often you cook and budget — nothing else.",
+  },
+  "robot-vacuums": {
+    audience: "for your floors",
+    criteria: "Floor type, hair, clutter, self-emptying and budget — nothing else.",
+  },
+  "educational-coding-robots": {
+    audience: "for the child",
+    criteria: "Age, whether a tablet is free, what you want from it and budget — nothing else.",
+  },
+};
+const copy = COPY[categorySlug] ?? {
+  audience: "for you",
+  criteria: "What you need it to do, where it has to work, and your budget — nothing else.",
+};
+const COUNT_WORDS = ["no", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"];
+/* Counted, never typed. It said "Eight short questions" while the funnel asked
+   seven. In choose mode there is no single number to give, because the reader
+   has not picked a category yet — so the landing says what is true instead. */
+const countWord = only ? (COUNT_WORDS[only.questions.length] ?? String(only.questions.length)) : "";
+
+const payload = JSON.stringify({
+  categories: categories.map((c) => ({
+    slug: c.slug, name: c.name, questions: c.questions, tasks: c.tasks,
+    matchable: c.matchable, emptyState: c.emptyState, hubHref: c.hubHref,
+  })),
+  jobs,
+  mode,
+  analyseMs: ANALYSE_MS,
+});
+---
+
+<div class="bp-mm" data-matcher data-config={payload}>
+  <!-- progress -->
+  <div class="bp-mm__progress" data-progress-wrap hidden>
+    <span class="bp-mm__progress-bar" data-progress></span>
+  </div>
+
+  <!-- 1. landing -->
+  <section class="bp-mm__stage" data-stage="landing">
+    <span class="bp-mm__eyebrow">BotMatch</span>
+    {only ? (
+      <>
+        <h1 class="bp-mm__title">Find the right {categoryName.toLowerCase()} {copy.audience}</h1>
+        <p class="bp-mm__lead">
+          {countWord} short questions, about a minute. No account, nothing to install. We match you
+          against the robots we have actually researched — and the part that picks your robot
+          cannot see prices or commission at all.
+        </p>
+        <ul class="bp-mm__steps">
+          <li><strong>Answer {only.questions.length} questions</strong><span>Plain English. Tap what sounds like you.</span></li>
+          <li><strong>We match on suitability</strong><span>{copy.criteria}</span></li>
+          <li><strong>We send your result</strong><span>Your match, why it won, and what it does not do well.</span></li>
+        </ul>
+      </>
+    ) : (
+      <>
+        <h1 class="bp-mm__title">Find your robot</h1>
+        <p class="bp-mm__lead">
+          Start with the job you want done, not with our categories. A minute of questions, no
+          account, nothing to install — and the part that picks your robot cannot see prices or
+          commission at all.
+        </p>
+        <ul class="bp-mm__steps">
+          <li><strong>Say what you need done</strong><span>Pick one job, or more than one. Not sure? We will show you the list.</span></li>
+          <li><strong>Answer a few questions</strong><span>Each job has its own questions. Nothing borrowed from another category.</span></li>
+          <li><strong>We send your result</strong><span>Your match, why it won, and what it does not do well.</span></li>
+        </ul>
+      </>
+    )}
+
+    {/* THE BUTTON THAT STARTS THE WHOLE THING, and the one the universal
+        rewrite deleted. The landing stage was rebuilt into two branches — one
+        category or nine — and the CTA under the old single-category copy went
+        with the copy. The script still bound it, unguarded, on the first line
+        of its wiring block, so the island threw before it rendered anything and
+        EVERY funnel on the site sat dead behind a landing page with no way
+        forward. Nothing caught it: the tests read the file as text, and the
+        markup was valid. It took a browser.
+
+        Two labels, because in "choose" mode the next thing the reader sees is
+        the job list rather than a question, and "it takes a minute" is a promise
+        about a questionnaire they have not chosen yet. */}
+    <button class="btn btn--accent bp-mm__cta" type="button" data-start>
+      {only ? "Start — it takes a minute" : "Start — say what you need done"}
+    </button>
+    <p class="bp-mm__note">Free. No account needed.</p>
+  </section>
+
+  <!-- 1b. chooser (choose mode only) -->
+  <section class="bp-mm__stage" data-stage="choose" hidden>
+    <span class="bp-mm__kicker">First question</span>
+    <h2 class="bp-mm__q">What do you want the robot to do?</h2>
+    <p class="bp-mm__choosehint">Pick as many as apply. Each one adds its own short set of questions.</p>
+    <div class="bp-mm__jobs" data-jobs></div>
+    <button class="bp-mm__notsure" type="button" data-notsure>Not sure yet — show me what these all are</button>
+    <button class="btn btn--accent bp-mm__cta" type="button" data-jobs-next disabled>Continue</button>
+  </section>
+
+  <!-- 2. quiz -->
+  <section class="bp-mm__stage" data-stage="quiz" hidden>
+    <div class="bp-mm__qhead">
+      <button class="bp-mm__back" type="button" data-back aria-label="Previous question">← Back</button>
+      <span class="bp-mm__count" data-count></span>
+    </div>
+    <span class="bp-mm__kicker" data-kicker></span>
+    <h2 class="bp-mm__q" data-question></h2>
+    <div class="bp-mm__options" data-options></div>
+  </section>
+
+  <!-- 3. analysing -->
+  <section class="bp-mm__stage" data-stage="analysing" hidden aria-live="polite">
+    <span class="bp-mm__kicker">Working through it</span>
+    <h2 class="bp-mm__q" data-analysing-title>Matching what you told us against what we have researched</h2>
+    <div class="bp-mm__thinking" role="status">
+      <span class="bp-mm__thinking-orbit" aria-hidden="true">
+        <span></span><span></span><span></span>
+        <img src="/logo/favicon-128.png" alt="" width="64" height="64" />
+      </span>
+      <strong>BotMatch is comparing your answers</strong>
+      <small>Checking fit, exclusions and honest ties.</small>
+    </div>
+    <ul class="bp-mm__tasks" data-tasks></ul>
+  </section>
+
+  <!-- 4. capture -->
+  <section class="bp-mm__stage" data-stage="capture" hidden>
+    <span class="bp-mm__eyebrow">Result ready</span>
+    <h2 class="bp-mm__title bp-mm__title--sm">Want a copy by email?</h2>
+    <p class="bp-mm__lead">
+      Your match is ready. Email is optional: send yourself the saved result link, or continue
+      straight to the answer on this screen.
+    </p>
+
+    <form class="bp-mm__form" data-form novalidate>
+      <!-- honeypots: never shown, never filled by a person -->
+      <div class="bp-mm__hp" aria-hidden="true">
+        <label>Company<input type="text" name="company" tabindex="-1" autocomplete="off" /></label>
+        <label>Website<input type="text" name="website_url" tabindex="-1" autocomplete="off" /></label>
+      </div>
+
+      <label class="bp-mm__field">
+        <span>First name</span>
+        <input type="text" name="firstName" autocomplete="given-name" required />
+      </label>
+      <label class="bp-mm__field">
+        <span>Email</span>
+        <input type="email" name="email" autocomplete="email" required />
+      </label>
+      <label class="bp-mm__consent">
+        <input type="checkbox" name="consent" required />
+        <span>Yes, email me my BotMatch result. No spam, unsubscribe any time.</span>
+      </label>
+
+      <p class="bp-mm__error" data-error hidden></p>
+      <button class="btn btn--accent bp-mm__cta" type="submit" data-submit>Email my result</button>
+    </form>
+    <button class="bp-mm__skip-email" type="button" data-skip-email>
+      Skip email — show my result
+    </button>
+  </section>
+
+  <!-- 5. done -->
+  <section class="bp-mm__stage" data-stage="done" hidden>
+    <span class="bp-mm__eyebrow" data-done-eyebrow>Result ready</span>
+    <h2 class="bp-mm__title bp-mm__title--sm" data-done-title>Your results</h2>
+    <p class="bp-mm__lead" data-done-msg>
+      Here is what matches your answers, including where our current evidence cannot separate
+      two robots or support a fair comparison.
+    </p>
+    <div class="bp-mm__results" data-results></div>
+  </section>
+</div>
+
+<script>
+  type Opt = { label: string; hint?: string; scores?: Record<string, unknown> };
+  type Q = { id: string; kicker: string; q: string; options: Opt[] };
+
+  document.querySelectorAll<HTMLElement>("[data-matcher]").forEach((root) => {
+    type Cat = {
+      slug: string; name: string; questions: Q[]; tasks: string[];
+      matchable: boolean; emptyState: string; hubHref: string;
+    };
+    type Job = { id: string; label: string; description: string; categorySlug: string };
+    type ProductView = {
+      name: string;
+      url: string;
+      image: {
+        src: string;
+        srcset: { src: string; width: number }[];
+        alt: string;
+        width: number | null;
+        height: number | null;
+      } | null;
+    };
+
+    const cfg = JSON.parse(root.dataset.config || "{}") as {
+      categories: Cat[]; jobs: Job[]; mode: "single" | "choose"; analyseMs: number;
+    };
+    const { categories, jobs, mode, analyseMs } = cfg;
+
+    const q = <T extends Element>(s: string) => root.querySelector<T>(s)!;
+    const stages = new Map<string, HTMLElement>();
+    root.querySelectorAll<HTMLElement>("[data-stage]").forEach((el) => stages.set(el.dataset.stage!, el));
+
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    /* ONE RUN PER CATEGORY, IN SEQUENCE. `selected` is what the reader chose in
+       choose mode, or the single category in single mode. `catIndex` walks it.
+       Answers are kept per category because two question sets can and do share
+       question ids — budget is `budget` in all nine — and folding them into one
+       object would let a lawn answer overwrite a pool one. */
+    let selected: Cat[] = mode === "choose" ? [] : categories.slice();
+    let catIndex = 0;
+    const answersByCat: Record<string, Record<string, string>> = {};
+    const resultsByCat: Record<string, {
+      token: string | null;
+      productName: string | null;
+      equivalent: string[];
+      product: ProductView | null;
+      equivalentProducts: ProductView[];
+    }> = {};
+
+    let step = 0;
+    let locked = false;
+
+    const cur = () => selected[catIndex];
+    const answers = () => (answersByCat[cur().slug] ??= {});
+
+    const track = (name: string, params: Record<string, unknown> = {}) => {
+      (window as any).gtag?.("event", name, { ...params, category: cur()?.slug ?? "universal", mode });
+    };
+
+    const progressWrap = q<HTMLElement>("[data-progress-wrap]");
+    const progressBar = q<HTMLElement>("[data-progress]");
+
+    /* Progress across the WHOLE run, not the current category. Two categories
+       selected means the bar reaches half way at the end of the first set — a
+       bar that filled and reset would read as the funnel starting over. */
+    function quizPct() {
+      const total = selected.reduce((n, c) => n + c.questions.length, 0) || 1;
+      const done = selected.slice(0, catIndex).reduce((n, c) => n + c.questions.length, 0) + step;
+      return (done / total) * 92;
+    }
+
+    function show(name: string) {
+      stages.forEach((el, key) => { el.hidden = key !== name; });
+      progressWrap.hidden = name === "landing";
+      const pct = name === "quiz" ? quizPct()
+        : name === "choose" ? 4 : name === "analysing" ? 96 : name === "capture" ? 98 : name === "done" ? 100 : 0;
+      progressBar.style.width = `${pct}%`;
+      if (name !== "landing") root.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+    }
+
+    /* ---------- 1b. chooser ---------- */
+    const chosenJobs = new Set<string>();
+
+    function renderJobs(showDescriptions: boolean) {
+      const box = q<HTMLElement>("[data-jobs]");
+      box.innerHTML = "";
+      jobs.forEach((job) => {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.className = "bp-mm__job" + (chosenJobs.has(job.id) ? " is-picked" : "");
+        b.setAttribute("aria-pressed", chosenJobs.has(job.id) ? "true" : "false");
+        b.innerHTML =
+          `<span class="bp-mm__job-tick" aria-hidden="true"></span>` +
+          `<span class="bp-mm__job-text"><strong>${job.label}</strong>` +
+          (showDescriptions ? `<span>${job.description}</span>` : "") + `</span>`;
+        b.addEventListener("click", () => {
+          if (chosenJobs.has(job.id)) chosenJobs.delete(job.id);
+          else chosenJobs.add(job.id);
+          renderJobs(showDescriptions);
+          q<HTMLButtonElement>("[data-jobs-next]").disabled = chosenJobs.size === 0;
+        });
+        box.appendChild(b);
+      });
+    }
+
+    /* ---------- quiz ---------- */
+    function renderQuestion() {
+      const cat = cur();
+      const question = cat.questions[step];
+      q<HTMLElement>("[data-kicker]").textContent =
+        selected.length > 1 ? `${cat.name} · ${question.kicker}` : question.kicker;
+      q<HTMLElement>("[data-question]").textContent = question.q;
+      q<HTMLElement>("[data-count]").textContent =
+        selected.length > 1
+          ? `${cat.name}: ${step + 1} of ${cat.questions.length}`
+          : `${step + 1} of ${cat.questions.length}`;
+      q<HTMLElement>("[data-back]").style.visibility = step === 0 && catIndex === 0 ? "hidden" : "visible";
+
+      const box = q<HTMLElement>("[data-options]");
+      box.innerHTML = "";
+      question.options.forEach((opt, i) => {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.className = "bp-mm__opt";
+        b.innerHTML =
+          `<span class="bp-mm__opt-key">${String.fromCharCode(65 + i)}</span>` +
+          `<span class="bp-mm__opt-text"><strong>${opt.label}</strong>` +
+          (opt.hint ? `<span>${opt.hint}</span>` : "") + `</span>`;
+        b.addEventListener("click", () => choose(question, opt, b));
+        box.appendChild(b);
+      });
+      progressBar.style.width = `${quizPct()}%`;
+    }
+
+    function choose(question: Q, opt: Opt, btn: HTMLElement) {
+      if (locked) return;
+      locked = true;
+      btn.classList.add("is-picked");
+      answers()[question.id] = opt.label;
+      track("matcher_answer", { step: step + 1, question: question.id, value: opt.label });
+      window.setTimeout(() => {
+        locked = false;
+        if (step + 1 < cur().questions.length) { step += 1; renderQuestion(); }
+        else if (catIndex + 1 < selected.length) { catIndex += 1; step = 0; renderQuestion(); }
+        else { track("matcher_analysing_view"); runAnalysis(); }
+      }, reduce ? 0 : 380);
+    }
+
+    /* ---------- analysing ---------- */
+    function runAnalysis() {
+      show("analysing");
+      q<HTMLElement>("[data-analysing-title]").textContent =
+        selected.length > 1
+          ? `Matching what you told us across ${selected.length} categories`
+          : `Matching what you told us against what we have researched`;
+
+      const list = q<HTMLElement>("[data-tasks]");
+      list.innerHTML = "";
+      /* The tasks belong to the categories being run. With more than one
+         selected they are concatenated and de-duplicated — several sets open
+         with the same line, and repeating it reads as a stuck progress list. */
+      const seen = new Set<string>();
+      const taskText = selected.flatMap((c) => c.tasks).filter((t) => !seen.has(t) && seen.add(t));
+      const items = taskText.map((t) => {
+        const li = document.createElement("li");
+        li.innerHTML = `<span class="bp-mm__tick"></span><span>${t}</span>`;
+        list.appendChild(li);
+        return li;
+      });
+
+      void scoreInBackground();
+
+      const per = Math.max(400, Math.floor(analyseMs / Math.max(1, items.length)));
+      items.forEach((li, i) => window.setTimeout(() => li.classList.add("is-done"), per * (i + 1)));
+      window.setTimeout(() => { track("matcher_capture_view"); show("capture"); }, analyseMs);
+    }
+
+    /* Folds the chosen options' `scores` fragments into the shape the scoring
+       engine expects. Profile-only questions carry no fragment, so they cannot
+       reach the scorer even by accident. Per category, because the fragments
+       are only meaningful against that category's own stored config. */
+    /* `desired_cleans` UNIONS. EVERYTHING ELSE IS LAST-WINS.
+
+       This was `Object.assign` until 10 August 2026, which meant the last
+       question to mention `desired_cleans` threw away every capability the
+       reader had asked for before it. A vacuum reader who said hard floors,
+       shedding animal, cluttered floor and yes-empty-itself reached the scorer
+       wanting ONE capability, and four of their five answers had been
+       collected for nothing.
+
+       It must stay identical to mergeScores() in content/matcher-questions.ts,
+       which is the server-side twin. Two folders that disagree would mean the
+       page scored one thing and the tests asserted another. */
+    function toScoringAnswers(cat: Cat): Record<string, unknown> {
+      const out: Record<string, unknown> = {};
+      const given = answersByCat[cat.slug] ?? {};
+      for (const question of cat.questions) {
+        const chosen = given[question.id];
+        if (!chosen) continue;
+        const opt = question.options.find((o) => o.label === chosen);
+        if (!opt?.scores) continue;
+        for (const [key, value] of Object.entries(opt.scores)) {
+          if (key === "desired_cleans" && Array.isArray(value)) {
+            const prior = (out.desired_cleans as string[] | undefined) ?? [];
+            out.desired_cleans = [...new Set([...prior, ...(value as string[])])];
+          } else {
+            out[key] = value;
+          }
+        }
+      }
+      return out;
+    }
+
+    /* ONE CALL PER CATEGORY, TO THE SAME ENDPOINT. /api/botmatch is unchanged:
+       it still scores one category against that category's own stored config,
+       still refuses to pick a winner out of a tie, and still writes its own
+       recommendation row. Nothing about how a product is chosen lives here. */
+    async function scoreInBackground() {
+      await Promise.all(selected.map(async (cat) => {
+        if (!cat.matchable) return;
+        try {
+          const res = await fetch("/api/botmatch", {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify({ category: cat.slug, answers: toScoringAnswers(cat) }),
+          });
+          if (!res.ok) return;
+          const data = await res.json();
+          resultsByCat[cat.slug] = {
+            token: data.token ?? null,
+            productName: data.productName ?? null,
+            equivalent: Array.isArray(data.equivalent) ? data.equivalent : [],
+            product: data.product ?? null,
+            equivalentProducts: Array.isArray(data.equivalentProducts) ? data.equivalentProducts : [],
+          };
+        } catch { /* the funnel must not fail because scoring did */ }
+      }));
+    }
+
+    /* ---------- capture ---------- */
+    const form = q<HTMLFormElement>("[data-form]");
+    const errBox = q<HTMLElement>("[data-error]");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const fd = new FormData(form);
+      const firstName = String(fd.get("firstName") || "").trim();
+      const email = String(fd.get("email") || "").trim();
+      const consent = fd.get("consent") != null;
+
+      const fail = (m: string) => { errBox.textContent = m; errBox.hidden = false; };
+      errBox.hidden = true;
+      if (!firstName) return fail("Please enter your first name.");
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return fail("Please enter a valid email address.");
+      if (!consent) return fail("Please tick the box so we can email your result.");
+
+      const btn = q<HTMLButtonElement>("[data-submit]");
+      btn.disabled = true;
+      btn.textContent = "Sending…";
+
+      /* ONE EMAIL, FOR THE FIRST CATEGORY THAT PRODUCED A RESULT.
+         /api/matcher-lead writes category-specific copy — it reflects the
+         reader's own answers back in that category's language — so a combined
+         email would need new prose for every combination of nine. Every result
+         is saved and linked on this page instead, and the capture copy says so
+         rather than implying the inbox will hold all of them. */
+      const lead = selected.find((c) => resultsByCat[c.slug]?.token) ?? selected[0];
+      const leadResult = lead ? resultsByCat[lead.slug] : undefined;
+
+      try {
+        const res = await fetch("/api/matcher-lead", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({
+            firstName, email, consent,
+            categorySlug: lead?.slug,
+            answers: lead ? (answersByCat[lead.slug] ?? {}) : {},
+            resultToken: leadResult?.token ?? null,
+            productName: leadResult?.productName ?? null,
+            company: fd.get("company") || "",
+            website_url: fd.get("website_url") || "",
+            submittedAt: new Date().toISOString(),
+            sourcePage: mode === "choose" ? "botmatch" : `botmatch/${lead?.slug ?? ""}`,
+          }),
+        });
+        const data = await res.json().catch(() => ({ ok: false }));
+        if (!data.ok) { btn.disabled = false; btn.textContent = "Email my result"; return fail(data.error || "Something went wrong. Please try again."); }
+      } catch {
+        btn.disabled = false; btn.textContent = "Email my result";
+        return fail("Network problem. Please try again.");
+      }
+
+      track("matcher_lead_submit", { sourcePage: mode === "choose" ? "botmatch" : `botmatch/${lead?.slug ?? ""}` });
+      q<HTMLElement>("[data-done-eyebrow]").textContent = "On its way";
+      q<HTMLElement>("[data-done-title]").textContent = "Check your inbox";
+      q<HTMLElement>("[data-done-msg]").textContent =
+        "Your result is on its way. If it has not arrived shortly, check your spam folder.";
+      renderResults();
+      show("done");
+    });
+
+    q<HTMLElement>("[data-skip-email]").addEventListener("click", () => {
+      track("matcher_result_without_email");
+      q<HTMLElement>("[data-done-eyebrow]").textContent = "Result ready";
+      q<HTMLElement>("[data-done-title]").textContent = "Your results";
+      q<HTMLElement>("[data-done-msg]").textContent =
+        "Here is what matches your answers, including where our current evidence cannot separate two robots or support a fair comparison.";
+      renderResults();
+      show("done");
+    });
+
+    /* ---------- done: one visual block per category ---------- */
+    function appendProductCard(parent: HTMLElement, product: ProductView) {
+      const card = document.createElement("article");
+      card.className = "bp-mm__product-card";
+
+      const media = document.createElement("div");
+      media.className = "bp-mm__product-media";
+      if (product.image) {
+        const img = document.createElement("img");
+        img.className = "bp-mm__product-image";
+        img.src = product.image.src;
+        img.alt = product.image.alt;
+        img.loading = "lazy";
+        img.decoding = "async";
+        if (product.image.width) img.width = product.image.width;
+        if (product.image.height) img.height = product.image.height;
+        if (product.image.srcset.length) {
+          img.srcset = product.image.srcset.map((item) => `${item.src} ${item.width}w`).join(", ");
+          img.sizes = "(min-width: 700px) 240px, 100vw";
+        }
+        media.appendChild(img);
+      } else {
+        media.classList.add("bp-mm__product-media--fallback");
+        const mark = document.createElement("img");
+        mark.src = "/logo/favicon-128.png";
+        mark.alt = "";
+        mark.width = 64;
+        mark.height = 64;
+        mark.loading = "lazy";
+        const fallbackLabel = document.createElement("span");
+        fallbackLabel.textContent = "BOTPLANET MATCH";
+        media.append(mark, fallbackLabel);
+      }
+      card.appendChild(media);
+
+      const copy = document.createElement("div");
+      copy.className = "bp-mm__product-copy";
+      const label = document.createElement("span");
+      label.textContent = "YOUR MATCH";
+      const name = document.createElement("strong");
+      name.textContent = product.name;
+      const link = document.createElement("a");
+      link.className = "bp-mm__product-button";
+      link.href = product.url;
+      link.textContent = "View product";
+      copy.append(label, name, link);
+      card.appendChild(copy);
+      parent.appendChild(card);
+    }
+
+    function renderResults() {
+      const box = q<HTMLElement>("[data-results]");
+      box.innerHTML = "";
+
+      selected.forEach((cat) => {
+        const wrap = document.createElement("section");
+        wrap.className = "bp-mm__result";
+        const heading = document.createElement("h3");
+        heading.textContent = cat.name;
+        wrap.appendChild(heading);
+
+        if (!cat.matchable) {
+          const message = document.createElement("p");
+          message.textContent = cat.emptyState;
+          const hub = document.createElement("a");
+          hub.className = "bp-mm__resultlink";
+          hub.href = cat.hubHref;
+          hub.textContent = `Explore ${cat.name.toLowerCase()} →`;
+          wrap.append(message, hub);
+          box.appendChild(wrap);
+          return;
+        }
+
+        const result = resultsByCat[cat.slug];
+        if (!result || !result.token) {
+          const message = document.createElement("p");
+          message.textContent =
+            "We could not complete this match just now. The category page has the full comparison.";
+          const hub = document.createElement("a");
+          hub.className = "bp-mm__resultlink";
+          hub.href = cat.hubHref;
+          hub.textContent = `Open ${cat.name.toLowerCase()} →`;
+          wrap.append(message, hub);
+          box.appendChild(wrap);
+          return;
+        }
+
+        if (result.equivalentProducts.length > 1) {
+          const message = document.createElement("p");
+          message.textContent =
+            "These robots are equivalent on the answers and evidence we currently hold. We will not invent a winner:";
+          wrap.appendChild(message);
+          const group = document.createElement("div");
+          group.className = "bp-mm__product-group";
+          result.equivalentProducts.forEach((product) => appendProductCard(group, product));
+          wrap.appendChild(group);
+        } else if (result.product) {
+          appendProductCard(wrap, result.product);
+        } else {
+          const message = document.createElement("p");
+          message.textContent = result.productName
+            ? `Your match is ${result.productName}.`
+            : "Your result is saved and ready.";
+          wrap.appendChild(message);
+        }
+
+        const reason = document.createElement("a");
+        reason.className = "bp-mm__resultlink";
+        reason.href = `/recommendation/${result.token}`;
+        reason.textContent = "See why this matched, including its limitations →";
+        wrap.appendChild(reason);
+        box.appendChild(wrap);
+      });
+    }
+
+    /* ---------- wiring ---------- */
+    function startQuiz() {
+      catIndex = 0; step = 0;
+      renderQuestion();
+      show("quiz");
+    }
+
+    q<HTMLElement>("[data-start]").addEventListener("click", () => {
+      track("matcher_start");
+      if (mode === "choose") { renderJobs(false); show("choose"); }
+      else startQuiz();
+    });
+
+    if (mode === "choose") {
+      q<HTMLElement>("[data-notsure]").addEventListener("click", () => {
+        track("matcher_not_sure");
+        renderJobs(true);
+        q<HTMLElement>("[data-notsure]").hidden = true;
+      });
+
+      q<HTMLElement>("[data-jobs-next]").addEventListener("click", () => {
+        const wanted = jobs.filter((j) => chosenJobs.has(j.id)).map((j) => j.categorySlug);
+        selected = wanted
+          .map((slug) => categories.find((c) => c.slug === slug))
+          .filter((c): c is Cat => Boolean(c));
+        if (!selected.length) return;
+        track("matcher_jobs_chosen", { count: selected.length, jobs: [...chosenJobs].join(",") });
+
+        /* A selection of nothing but unmatchable categories has no questions to
+           ask, so it goes straight to the honest answer rather than through an
+           empty quiz. */
+        if (selected.every((c) => !c.matchable)) { renderResults(); show("done"); return; }
+        selected = selected.filter((c) => c.matchable).concat(selected.filter((c) => !c.matchable));
+        startQuiz();
+      });
+    }
+
+    q<HTMLElement>("[data-back]").addEventListener("click", () => {
+      errBox.hidden = true;
+      if (step > 0) { step -= 1; renderQuestion(); show("quiz"); }
+      else if (catIndex > 0) { catIndex -= 1; step = selected[catIndex].questions.length - 1; renderQuestion(); show("quiz"); }
+      else if (mode === "choose") { renderJobs(false); show("choose"); }
+      else show("landing");
+    });
+
+    /* ---------- deep links ---------- */
+    const params = new URLSearchParams(location.search);
+
+    /* ?job=pool or ?job=pool,lawn — the homepage chips.
+       THIS IS THE "ONE CONVERSATION" REQUIREMENT MADE LITERAL. A chip that
+       dropped the reader on the landing screen would have made them answer
+       "what do you want the robot to do?" immediately after they had just
+       answered it by tapping. So a valid job pre-selects and goes straight to
+       its first question; the Back button still walks them to the chooser, so
+       nothing is lost by arriving this way. */
+    const wantedJobs = (params.get("job") ?? "")
+      .split(",").map((x) => x.trim()).filter(Boolean);
+
+    if (mode === "choose" && wantedJobs.length) {
+      const picked = jobs.filter((j) => wantedJobs.includes(j.id));
+      const cats = picked
+        .map((j) => categories.find((c) => c.slug === j.categorySlug))
+        .filter((c): c is Cat => Boolean(c));
+      if (cats.length) {
+        picked.forEach((j) => chosenJobs.add(j.id));
+        selected = cats.filter((c) => c.matchable).concat(cats.filter((c) => !c.matchable));
+        track("matcher_start", { via: "job_link", jobs: wantedJobs.join(",") });
+        if (selected.every((c) => !c.matchable)) { renderResults(); show("done"); }
+        else startQuiz();
+      }
+    } else if (params.get("start") === "quiz") {
+      // ?start=quiz jumps straight in, so a promo card can skip the landing screen.
+      track("matcher_start", { via: "promo" });
+      if (mode === "choose") { renderJobs(false); show("choose"); }
+      else startQuiz();
+    }
+  });
+</script>
+
+<style is:global>
+  /* ---------- 1b. job chooser ---------- */
+  /* Mobile-first: one column at 390px, two only when there is genuinely room.
+     The tick sits left so the labels align down the column and the eye reads a
+     list of jobs rather than a grid of boxes. */
+  .bp-mm__choosehint {
+    margin: 0.65rem 0 1.4rem; color: var(--text-secondary); font-size: 0.95rem;
+  }
+  .bp-mm__jobs { display: grid; gap: 0.6rem; }
+  @media (min-width: 40rem) { .bp-mm__jobs { grid-template-columns: 1fr 1fr; } }
+
+  .bp-mm__job {
+    display: flex; gap: 0.85rem; align-items: flex-start; width: 100%;
+    padding: 0.95rem 1rem; text-align: left; cursor: pointer;
+    border: 1px solid rgba(200, 208, 222, 0.16); border-radius: 12px;
+    background: rgba(255, 255, 255, 0.02); color: inherit;
+    transition: border-color 0.15s ease, background 0.15s ease;
+  }
+  .bp-mm__job:hover { border-color: rgba(200, 208, 222, 0.34); }
+  .bp-mm__job:focus-visible { outline: 2px solid var(--cs-sheen); outline-offset: 2px; }
+  .bp-mm__job.is-picked { border-color: var(--cs-sheen); background: rgba(120, 190, 255, 0.08); }
+
+  .bp-mm__job-tick {
+    flex: 0 0 auto; width: 1.15rem; height: 1.15rem; margin-top: 0.15rem;
+    border: 1px solid rgba(200, 208, 222, 0.4); border-radius: 5px; position: relative;
+  }
+  .bp-mm__job.is-picked .bp-mm__job-tick { border-color: var(--cs-sheen); background: var(--cs-sheen); }
+  .bp-mm__job.is-picked .bp-mm__job-tick::after {
+    content: ""; position: absolute; left: 0.32rem; top: 0.1rem;
+    width: 0.28rem; height: 0.58rem; border: solid #08111f;
+    border-width: 0 2px 2px 0; transform: rotate(45deg);
+  }
+  .bp-mm__job-text { display: grid; gap: 0.2rem; }
+  .bp-mm__job-text strong { font-weight: 600; line-height: 1.3; }
+  .bp-mm__job-text span { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.45; }
+
+  .bp-mm__notsure {
+    display: block; margin: 1.1rem 0 0; padding: 0; border: 0; background: none;
+    color: var(--text-secondary); font-size: 0.95rem; text-decoration: underline;
+    text-underline-offset: 3px; cursor: pointer;
+  }
+  .bp-mm__notsure:hover { color: inherit; }
+  .bp-mm [data-jobs-next] { margin-top: 1.6rem; }
+  .bp-mm [data-jobs-next]:disabled { opacity: 0.45; cursor: not-allowed; }
+
+  /* ---------- done: one block per category ---------- */
+  .bp-mm__results { display: grid; gap: 1rem; margin: 1.6rem 0 0; }
+  .bp-mm__result {
+    padding: clamp(1rem, 3vw, 1.4rem); border: 1px solid rgba(200, 208, 222, 0.18);
+    border-radius: 18px; background: linear-gradient(178deg, rgba(18, 23, 30, .96), rgba(8, 11, 15, .98));
+  }
+  .bp-mm__result h3 { margin: 0 0 0.75rem; font-size: 1.05rem; font-weight: 600; }
+  .bp-mm__result p { margin: 0 0 0.9rem; color: var(--text-secondary); line-height: 1.55; font-size: 0.95rem; }
+  .bp-mm__result .bp-mm__resultlink { margin-top: 1rem; }
+  .bp-mm__product-group { display: grid; gap: 0.9rem; }
+  .bp-mm__product-card {
+    display: grid; grid-template-columns: minmax(150px, 42%) 1fr; overflow: hidden;
+    border: 1px solid rgba(200, 208, 222, .20); border-radius: 15px; background: #070a0e;
+  }
+  .bp-mm__product-media {
+    display: grid; min-height: 170px; overflow: hidden; place-items: center;
+    border-right: 1px solid rgba(200, 208, 222, .16);
+  }
+  .bp-mm__product-media > .bp-mm__product-image {
+    display: block; width: 100%; height: 100%; min-height: 170px; object-fit: cover;
+  }
+  .bp-mm__product-media--fallback {
+    align-content: center; gap: .7rem; padding: 1.2rem;
+    background:
+      radial-gradient(circle at 50% 42%, rgba(84, 217, 255, .20), transparent 34%),
+      linear-gradient(145deg, #101923 0%, #05080d 68%);
+  }
+  .bp-mm__product-media--fallback > img {
+    width: 64px; height: 64px; filter: drop-shadow(0 0 18px rgba(84, 217, 255, .28));
+  }
+  .bp-mm__product-media--fallback > span {
+    color: #8fdfff; font-family: var(--font-mono); font-size: .62rem; font-weight: 700; letter-spacing: .18em;
+  }
+  .bp-mm__product-copy {
+    display: flex; min-width: 0; flex-direction: column; align-items: flex-start; justify-content: center;
+    gap: 0.55rem; padding: 1.15rem;
+  }
+  .bp-mm__product-copy > span {
+    color: #54d9ff; font-family: var(--font-mono); font-size: 0.65rem; font-weight: 700; letter-spacing: .17em;
+  }
+  .bp-mm__product-copy > strong { color: var(--text-primary); font-size: 1.12rem; line-height: 1.3; }
+  .bp-mm__product-button {
+    display: inline-flex; align-items: center; justify-content: center; min-height: 42px;
+    margin-top: 0.4rem; padding: 0 1.1rem; border: 1px solid #7ce6ff; border-radius: 999px;
+    background: linear-gradient(135deg, #7ce6ff 0%, #2aa9ff 100%);
+    box-shadow: 0 8px 24px rgba(42, 169, 255, .22); color: #041018;
+    font-weight: 750; text-decoration: none;
+  }
+  .bp-mm__product-button:hover { filter: brightness(1.08); transform: translateY(-1px); }
+  .bp-mm__product-button:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+  @media (max-width: 560px) {
+    .bp-mm__product-card { grid-template-columns: 1fr; }
+    .bp-mm__product-media { aspect-ratio: 16 / 10; min-height: 0; border-right: 0; border-bottom: 1px solid rgba(200, 208, 222, .16); }
+    .bp-mm__product-media > .bp-mm__product-image { min-height: 0; }
+  }
+
+  /* Global rather than scoped: the option buttons and task rows are created in
+     JavaScript at runtime, so Astro's scoped attribute never lands on them.
+     Every selector below is namespaced under .bp-mm, so nothing leaks out. */
+  .bp-mm { max-width: 46rem; margin: 0 auto; }
+
+  /* ---------- progress ---------- */
+  .bp-mm__progress {
+    position: sticky; top: 0; z-index: 5;
+    height: 2px; margin-bottom: 2rem; border-radius: 2px;
+    background: rgba(200, 208, 222, 0.14);
+  }
+  .bp-mm__progress-bar {
+    display: block; height: 100%; width: 0%; border-radius: 2px;
+    background: var(--cs-sheen);
+    transition: width 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* ---------- shared ---------- */
+  .bp-mm__eyebrow, .bp-mm__kicker {
+    display: inline-block; margin-bottom: 0.9rem;
+    font-family: var(--font-mono); font-size: 0.68rem; font-weight: 700;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    background: var(--cs-sheen); -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .bp-mm__title {
+    margin: 0; font-family: var(--font-display); font-weight: 700;
+    font-size: clamp(1.9rem, 5.2vw, 2.8rem); line-height: 1.1; letter-spacing: -0.021em;
+    text-wrap: balance;
+    background: linear-gradient(172deg, #fff 4%, #e4e9f1 44%, #a2aab8 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .bp-mm__title--sm { font-size: clamp(1.6rem, 4.4vw, 2.2rem); }
+  .bp-mm__lead {
+    margin: 1.05rem 0 0; max-width: 54ch;
+    font-size: 1.0625rem; line-height: 1.66; color: var(--text-secondary);
+  }
+  .bp-mm__cta { margin-top: 1.9rem; min-height: 3.1rem; padding: 0 1.6rem; }
+  .bp-mm__note { margin: 0.85rem 0 0; font-size: 0.85rem; color: var(--text-quaternary); }
+
+  /* ---------- landing steps ---------- */
+  .bp-mm__steps { margin: 2rem 0 0; padding: 0; list-style: none; display: grid; gap: 0.85rem; }
+  .bp-mm__steps li {
+    position: relative; padding: 1.05rem 1.2rem 1.05rem 3.2rem;
+    border: 1px solid var(--cs-line-soft); border-radius: 13px; background: var(--cs-surface);
+  }
+  .bp-mm__steps li::before {
+    counter-increment: s; content: counter(s);
+    position: absolute; left: 1.1rem; top: 1.05rem;
+    display: grid; place-items: center; width: 1.5rem; height: 1.5rem; border-radius: 999px;
+    font-family: var(--font-mono); font-size: 0.66rem; font-weight: 700; color: #0a0d11;
+    background: var(--cs-sheen);
+  }
+  .bp-mm__steps { counter-reset: s; }
+  .bp-mm__steps strong { display: block; color: var(--cs-hi); font-size: 1rem; }
+  .bp-mm__steps span { display: block; margin-top: 0.25rem; font-size: 0.93rem; line-height: 1.5; color: var(--text-secondary); }
+
+  /* ---------- quiz ---------- */
+  .bp-mm__qhead { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.4rem; }
+  .bp-mm__back {
+    padding: 0.35rem 0; border: 0; background: none; cursor: pointer;
+    font-size: 0.9rem; color: var(--cs-mid);
+  }
+  .bp-mm__back:hover { color: var(--cs-hi); }
+  .bp-mm__count { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.14em; color: var(--text-quaternary); }
+  .bp-mm__q {
+    margin: 0 0 1.6rem; font-family: var(--font-display); font-weight: 700;
+    font-size: clamp(1.45rem, 4vw, 1.95rem); line-height: 1.18; letter-spacing: -0.016em;
+    text-wrap: balance; color: var(--cs-hi);
+  }
+  .bp-mm__options { display: grid; gap: 0.7rem; }
+  .bp-mm .bp-mm__opt,
+  .bp-mm__opt {
+    -webkit-appearance: none;
+    appearance: none;
+    font: inherit;
+    color: inherit;
+    display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 0.95rem;
+    width: 100%; padding: 1.05rem 1.2rem; text-align: left; cursor: pointer;
+    border: 1px solid var(--cs-line); border-radius: 13px; background: var(--cs-surface);
+    transition: border-color 0.18s ease, background 0.18s ease, transform 0.18s ease;
+  }
+  .bp-mm__opt:hover { border-color: rgba(233, 237, 242, 0.5); background: rgba(255, 255, 255, 0.045); }
+  .bp-mm__opt.is-picked { border-color: var(--cs-hi); background: rgba(255, 255, 255, 0.075); transform: scale(0.995); }
+  .bp-mm__opt-key {
+    display: grid; place-items: center; width: 1.75rem; height: 1.75rem; border-radius: 8px;
+    font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700; color: #0a0d11;
+    background: var(--cs-sheen);
+  }
+  .bp-mm__opt-text strong { display: block; font-size: 1rem; color: var(--cs-hi); }
+  .bp-mm__opt-text span { display: block; margin-top: 0.18rem; font-size: 0.88rem; color: var(--text-tertiary); }
+
+  /* ---------- analysing ---------- */
+  .bp-mm__thinking {
+    display: grid; justify-items: center; gap: 0.45rem;
+    margin: 1.4rem 0 1.8rem; padding: 1.6rem 1.2rem;
+    border: 1px solid rgba(78, 205, 255, 0.28); border-radius: 18px;
+    background: radial-gradient(circle at 50% 28%, rgba(48, 180, 255, 0.12), transparent 55%), #090d12;
+    text-align: center;
+  }
+  .bp-mm__thinking-orbit {
+    position: relative; display: grid; place-items: center;
+    width: 108px; height: 108px; margin-bottom: 0.55rem;
+  }
+  .bp-mm__thinking-orbit > span {
+    position: absolute; inset: 0; border: 1px solid rgba(80, 210, 255, 0.24); border-radius: 50%;
+    animation: bm-orbit 1.8s linear infinite;
+  }
+  .bp-mm__thinking-orbit > span:nth-child(2) { inset: 12px; animation-duration: 1.35s; animation-direction: reverse; }
+  .bp-mm__thinking-orbit > span:nth-child(3) { inset: 24px; animation-duration: 1s; }
+  .bp-mm__thinking-orbit > span::after {
+    content: ""; position: absolute; top: -3px; left: 50%; width: 7px; height: 7px;
+    border-radius: 50%; background: #54d9ff; box-shadow: 0 0 18px rgba(84, 217, 255, 0.9);
+  }
+  .bp-mm__thinking-orbit img {
+    width: 48px; height: 48px; border-radius: 14px;
+    box-shadow: 0 0 28px rgba(84, 217, 255, 0.18);
+  }
+  .bp-mm__thinking strong { color: var(--text-primary); font-size: 1rem; }
+  .bp-mm__thinking small { color: var(--text-tertiary); font-size: 0.86rem; }
+  @keyframes bm-orbit { to { transform: rotate(360deg); } }
+
+  .bp-mm__tasks { margin: 1.75rem 0 0; padding: 0; list-style: none; display: grid; gap: 0.85rem; }
+  .bp-mm__tasks li {
+    display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 0.85rem;
+    font-size: 0.99rem; color: var(--text-quaternary);
+    transition: color 0.4s ease;
+  }
+  .bp-mm__tasks li.is-done { color: var(--text-secondary); }
+  .bp-mm__tick {
+    position: relative; width: 1.15rem; height: 1.15rem; border-radius: 999px;
+    border: 1px solid var(--cs-line);
+  }
+  .bp-mm__tasks li.is-done .bp-mm__tick { border-color: var(--cs-bright); background: rgba(255,255,255,0.05); }
+  .bp-mm__tasks li.is-done .bp-mm__tick::after {
+    content: ""; position: absolute; left: 0.36rem; top: 0.17rem;
+    width: 0.26rem; height: 0.52rem; transform: rotate(42deg);
+    border-right: 1.5px solid var(--cs-hi); border-bottom: 1.5px solid var(--cs-hi);
+  }
+
+  /* ---------- capture ---------- */
+  .bp-mm__form { margin-top: 1.9rem; display: grid; gap: 1.05rem; }
+  .bp-mm__hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  .bp-mm__field { display: grid; gap: 0.4rem; }
+  .bp-mm__field span { font-size: 0.87rem; color: var(--cs-mid); }
+  .bp-mm__field input {
+    padding: 0.85rem 1rem; border-radius: 11px;
+    border: 1px solid var(--cs-line); background: rgba(255, 255, 255, 0.03);
+    color: var(--text-primary); font-size: 1rem;
+  }
+  .bp-mm__field input:focus { outline: 2px solid rgba(233, 237, 242, 0.45); outline-offset: 1px; }
+  .bp-mm__consent { display: grid; grid-template-columns: auto 1fr; gap: 0.7rem; align-items: start; font-size: 0.92rem; line-height: 1.5; color: var(--text-secondary); }
+  .bp-mm__consent input { margin-top: 0.2rem; width: 1.05rem; height: 1.05rem; }
+  .bp-mm__error { margin: 0; font-size: 0.9rem; color: #ffb4b4; }
+
+  .bp-mm__resultlink { display: inline-block; margin-top: 1.4rem; font-weight: 600; color: var(--cs-hi); }
+  .bp-mm__skip-email {
+    display: inline-block; margin: 1rem 0 0; padding: 0; border: 0; background: none;
+    color: var(--text-secondary); font: inherit; font-size: 0.92rem; text-decoration: underline;
+    text-underline-offset: 3px; cursor: pointer;
+  }
+  .bp-mm__skip-email:hover { color: var(--text-primary); }
+  .bp-mm__skip-email:focus-visible { outline: var(--focus-ring); outline-offset: 4px; }
+
+  @media (min-width: 860px) {
+    .bp-mm__lead { font-size: 1.1875rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .bp-mm__progress-bar, .bp-mm__opt, .bp-mm__tasks li { transition: none; }
+    .bp-mm__thinking-orbit > span { animation: none; }
+  }
+</style>

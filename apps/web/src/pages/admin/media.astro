@@ -1,0 +1,124 @@
+---
+/**
+ * Internal media review. Behind the admin gate and noindex, because it exposes
+ * coverage gaps that would be misread as product judgements.
+ */
+import Admin from "../../layouts/Admin.astro";
+import { mediaReport } from "../../lib/media-registry";
+import { TARGET_TYPES } from "../../lib/media-registry";
+import { productPath } from "../../content/routes";
+
+const { issues, products, totals } = mediaReport();
+const errors = issues.filter((i) => i.severity === "error");
+const warnings = issues.filter((i) => i.severity === "warning");
+
+const READINESS_LABEL: Record<string, string> = {
+  exactModelConfirmed: "Exact model",
+  heroReady: "Hero",
+  supportingImagesReady: "Supporting",
+  responsiveVariantsReady: "Variants",
+  altTextApproved: "Alt text",
+  schemaEligible: "Schema",
+  publicRenderingSafe: "Public safe",
+  fullProductMediaSetReady: "Full set",
+};
+const readinessKeys = Object.keys(READINESS_LABEL);
+const readinessOf = (p: (typeof products)[number], key: string): boolean =>
+  Boolean((p.readiness as unknown as Record<string, boolean>)[key]);
+---
+
+<Admin title="Media library" section="media">
+  <p class="sub">
+    Every image BotPlanet can show, what it depicts, and which slots are still empty.
+  </p>
+
+  <div class="grid">
+    <div class="card"><div class="muted">Assets</div><div class="big">{totals.assets}</div><div class="muted">{totals.productAssets} attached to a product</div></div>
+    <div class="card"><div class="muted">Renderable</div><div class="big">{totals.publicSafe}/{products.length}</div><div class="muted">products render something today</div></div>
+    <div class="card"><div class="muted">Show the machine</div><div class="big">{totals.depictions}</div><div class="muted">{totals.placeholders} placeholders standing in</div></div>
+    <div class="card"><div class="muted">Validation errors</div><div class="big" style={errors.length ? "color:var(--bad)" : "color:var(--ok)"}>{errors.length}</div><div class="muted">{warnings.length} warnings</div></div>
+  </div>
+
+  <h2>Product coverage</h2>
+  <div class="card">
+    <p class="muted" style="margin-top:0">
+      Target types for an image-complete product: {TARGET_TYPES.map((t) => t.replace(/_/g, " ")).join(", ")}.
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th>Product</th>
+          {readinessKeys.map((k) => <th style="writing-mode:vertical-rl;height:130px">{READINESS_LABEL[k]}</th>)}
+          <th>Renders</th>
+          <th>Missing</th>
+        </tr>
+      </thead>
+      <tbody>
+        {products.map((p) => (
+          <tr>
+            <td>
+              <a href={productPath(p.slug)}>{p.exactModel}</a>
+              <div class="muted mono" style="font-size:11px">{p.productId}</div>
+            </td>
+            {readinessKeys.map((k) => (
+              <td style="text-align:center">
+                {readinessOf(p, k) ? <span class="tag ok">yes</span> : <span class="tag warn">no</span>}
+              </td>
+            ))}
+            <td class="mono" style="font-size:11px">
+              {p.rendered ? p.rendered.assetId : "—"}
+              {p.rendered?.isPlaceholder && <div><span class="tag warn">placeholder</span></div>}
+            </td>
+            <td class="muted" style="font-size:11px">{p.missingTypes.map((t) => t.replace(/_/g, " ")).join(", ") || "—"}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Asset inventory</h2>
+  <div class="card">
+    <table>
+      <thead>
+        <tr><th>Asset</th><th>Product</th><th>Type</th><th>Kind</th><th>Alt</th><th>Product schema</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        {products.flatMap((p) => p.assets).concat(...[]).map((a) => (
+          <tr>
+            <td class="mono" style="font-size:11px">{a.id}</td>
+            <td class="mono" style="font-size:11px">{a.productId ?? a.purpose}</td>
+            <td>{a.type.replace(/_/g, " ")}</td>
+            <td class="muted" style="font-size:11px">{a.kind}</td>
+            <td>{a.altTextStatus === "approved" ? <span class="tag ok">approved</span> : <span class="tag">{a.altTextStatus}</span>}</td>
+            <td>{a.schema.productImage ? <span class="tag ok">eligible</span> : <span class="tag warn">no</span>}</td>
+            <td>{a.withdrawal === "active" ? <span class="tag ok">active</span> : <span class="tag bad">{a.withdrawal}</span>}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  {issues.length > 0 && (
+    <>
+      <h2>Validation</h2>
+      <div class="card">
+        <table>
+          <thead><tr><th>Severity</th><th>Rule</th><th>Detail</th></tr></thead>
+          <tbody>
+            {issues.map((i) => (
+              <tr>
+                <td>{i.severity === "error" ? <span class="tag bad">error</span> : <span class="tag warn">warning</span>}</td>
+                <td class="mono" style="font-size:12px">{i.rule}</td>
+                <td class="muted">{i.detail}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </>
+  )}
+
+  <style>
+    .big { font-size: 26px; font-weight: 700; letter-spacing: -0.02em; margin: 4px 0; }
+  </style>
+</Admin>

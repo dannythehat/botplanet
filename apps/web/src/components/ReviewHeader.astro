@@ -1,0 +1,213 @@
+---
+/* ============================================================
+   BotPlanet — Review header
+
+   The top of a product review: eyebrow, H1, the one-line verdict,
+   the owner-created artwork, and the two honest lines that matter
+   most — who it suits and who should look elsewhere.
+
+   No score, no stars, no rating out of ten. The blueprint forbids
+   an invented rating, and a number would imply a test we have not
+   run. "Best for" and "not ideal for" say more anyway.
+   ============================================================ */
+
+import type { HeroImage } from "./CategoryHero.astro";
+
+interface Props {
+  /** e.g. "Robotic pool cleaner review". */
+  eyebrow: string;
+  /** The H1 — the exact model name plus "review". */
+  title: string;
+  /** One or two sentences. The answer, before the reasoning. */
+  verdict: string;
+  bestFor: string;
+  notIdealFor: string;
+  image?: HeroImage;
+  /** Shown as a labelled row under the verdict. */
+  facts?: { label: string; value: string }[];
+}
+
+import { srcsetFor, sizeOf } from "../lib/srcset";
+
+const { eyebrow, title, verdict, bestFor, notIdealFor, image, facts = [] } = Astro.props;
+---
+
+<header class="bp-rev">
+  <div class="bp-rev__inner" data-has-image={image?.src ? "true" : "false"}>
+    <div class="bp-rev__copy">
+      <span class="bp-rev__eyebrow">{eyebrow}</span>
+      <h1 class="bp-rev__title">{title}</h1>
+      <p class="bp-rev__verdict">{verdict}</p>
+
+      {facts.length > 0 && (
+        <ul class="bp-rev__facts">
+          {facts.map((f) => (
+            <li><span>{f.label}</span><strong>{f.value}</strong></li>
+          ))}
+        </ul>
+      )}
+    </div>
+
+    {image?.src && (
+      <figure class="bp-rev__figure">
+        <picture>
+          {image.mobileSrc && (
+            <source media="(max-width: 719px)" srcset={srcsetFor(image.mobileSrc) ?? image.mobileSrc} sizes="100vw" />
+          )}
+          {/* This is the one image above the fold, and it had no srcset — so
+              every visitor downloaded the full-size creative regardless of the
+              space it renders into. */}
+          <img
+            src={image.src}
+            srcset={srcsetFor(image.src)}
+            sizes="(min-width: 900px) 44vw, 100vw"
+            alt={image.alt}
+            width={sizeOf(image.src)?.width}
+            height={sizeOf(image.src)?.height}
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+          />
+        </picture>
+      </figure>
+    )}
+  </div>
+
+  <div class="bp-rev__suits">
+    <div class="bp-rev__suit bp-rev__suit--for">
+      <span class="bp-rev__suit-label">Best for</span>
+      <p>{bestFor}</p>
+    </div>
+    <div class="bp-rev__suit bp-rev__suit--against">
+      <span class="bp-rev__suit-label">Look elsewhere if</span>
+      <p>{notIdealFor}</p>
+    </div>
+  </div>
+</header>
+
+<style is:global>
+  .bp-rev { margin: 0 0 clamp(2.5rem, 6vw, 4rem); }
+
+  .bp-rev__inner {
+    display: grid;
+    gap: clamp(1.5rem, 4vw, 2.75rem);
+    align-items: center;
+    margin-bottom: clamp(1.5rem, 3.5vw, 2.25rem);
+  }
+
+  .bp-rev__eyebrow {
+    display: inline-block;
+    margin-bottom: 1rem;
+    padding: 0.34rem 0.72rem;
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #0a0d11;
+    background: var(--cs-sheen);
+  }
+
+  .bp-rev__title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.95rem, 5.4vw, 3rem);
+    line-height: 1.08;
+    letter-spacing: -0.022em;
+    text-wrap: balance;
+    background: linear-gradient(172deg, #ffffff 4%, #e6ebf2 44%, #a4acb9 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .bp-rev__verdict {
+    margin: 1.15rem 0 0;
+    max-width: 56ch;
+    font-size: 1.1rem;
+    line-height: 1.62;
+    color: var(--text-secondary);
+  }
+
+  /* key facts, stated not sold */
+  .bp-rev__facts {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.85rem 1.5rem;
+    margin: 1.6rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .bp-rev__facts li { display: flex; flex-direction: column; gap: 0.16rem; }
+
+  .bp-rev__facts span {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-quaternary);
+  }
+
+  .bp-rev__facts strong {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--cs-hi);
+  }
+
+  .bp-rev__figure {
+    margin: 0;
+    border: 1px solid var(--cs-line);
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--cs-surface);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.06), 0 22px 34px rgba(0,0,0,.5);
+  }
+
+  .bp-rev__figure img { display: block; width: 100%; height: auto; }
+
+  /* ---------- suits / does not suit ---------- */
+  .bp-rev__suits {
+    display: grid;
+    gap: 0.9rem;
+  }
+
+  .bp-rev__suit {
+    padding: 1.15rem 1.3rem;
+    border: 1px solid var(--cs-line-soft);
+    border-radius: 13px;
+    background: var(--cs-surface);
+  }
+
+  .bp-rev__suit--against { background: rgba(0, 0, 0, 0.3); }
+
+  .bp-rev__suit-label {
+    display: block;
+    margin-bottom: 0.4rem;
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    background: var(--cs-sheen);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .bp-rev__suit p {
+    margin: 0;
+    font-size: 0.97rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+  }
+
+  @media (min-width: 900px) {
+    .bp-rev__inner[data-has-image="true"] { grid-template-columns: 1.1fr 0.9fr; }
+    .bp-rev__suits { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>

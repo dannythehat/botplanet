@@ -1,0 +1,702 @@
+{
+  "launchProducts": 12,
+  "totals": {
+    "assets": 366,
+    "productAssets": 254,
+    "depictions": 141,
+    "illustrations": 214,
+    "placeholders": 11,
+    "withdrawn": 0,
+    "exactModelConfirmed": 12,
+    "publicSafe": 12,
+    "heroReady": 11,
+    "fullSetReady": 11,
+    "derivatives": 1145,
+    "altApproved": 352,
+    "altDecorative": 14,
+    "altMissing": 0,
+    "altRejected": 0,
+    "schemaProductEligible": 127,
+    "schemaOpenGraphEligible": 366
+  },
+  "rows": [
+    {
+      "productId": "prod-wybot-c1",
+      "slug": "wybot-c1",
+      "canonicalUrl": "https://botplanet.io/robots/robotic-pool-cleaners/wybot-c1/",
+      "exactModel": "WYBOT C1 Cordless Robotic Pool Cleaner",
+      "heroAssetId": "art-wybot-c1",
+      "supportingAssetIds": [
+        "fig-wybot-c1-hero",
+        "fig-wybot-c1-suction",
+        "fig-wybot-c1-cycles",
+        "fig-wybot-c1-charging"
+      ],
+      "renderedAssetId": "art-wybot-c1",
+      "renderedIsPlaceholder": false,
+      "imageSource": "depiction — BotPlanet",
+      "allowedPlacements": [
+        "product_page",
+        "category_page",
+        "listing_card",
+        "comparison",
+        "homepage",
+        "guide",
+        "open_graph",
+        "structured_data",
+        "email"
+      ],
+      "altText": "BotPlanet artwork for the WYBOT C1 Cordless Robotic Pool Cleaner: the black and silver tracked cleaner on stone paving beside a lit pool at dusk, with a phone showing the WYBOT app and callouts for app control, floor, wall and waterline cleaning, cordless running and navigation.",
+      "altTextStatus": "approved",
+      "structuredDataImages": [
+        "/media/products/wybot-c1.webp",
+        "/media/reviews/wybot-c1/hero.webp",
+        "/media/reviews/wybot-c1/suction.webp",
+        "/media/reviews/wybot-c1/cycles.webp",
+        "/media/reviews/wybot-c1/charging.webp"
+      ],
+      "structuredDataEligible": true,
+      "openGraphEligible": true,
+      "schemaExclusionReason": null,
+      "missingImageTypes": [
+        "product_alternate_view",
+        "product_detail",
+        "listing_thumbnail"
+      ],
+      "withdrawalFallback": "the media registry re-resolves on every request: a pulled asset is skipped and the next-best asset renders, ending at the placeholder. No broken image can appear, and structured data and Open Graph references disappear with it.",
+      "readiness": {
+        "exactModelConfirmed": true,
+        "heroReady": true,
+        "supportingImagesReady": true,
+        "responsiveVariantsReady": true,
+        "altTextApproved": true,
+        "schemaEligible": true,
+        "publicRenderingSafe": true,
+        "fullProductMediaSetReady": true
+      },
+      "imageReadinessStatus": "full_set",
+      "blockers": []
+    },
+    {
+      "productId": "prod-dolphin-nautilus-cc-plus",
+      "slug": "dolphin-nautilus-cc-plus",
+      "canonicalUrl": "https://botplanet.io/robots/robotic-pool-cleaners/dolphin-nautilus-cc-plus/",
+      "exactModel": "Dolphin Nautilus CC Plus w/Wi-Fi",
+      "heroAssetId": "art-dolphin-nautilus-cc-plus",
+      "supportingAssetIds": [
+        "fig-dolphin-nautilus-cc-plus-hero",
+        "fig-dolphin-nautilus-cc-plus-plug-and-play",
+        "fig-dolphin-nautilus-cc-plus-app-control",
+        "fig-dolphin-nautilus-cc-plus-video-poster",
+        "fig-dolphin-nautilus-cc-plus-filter-access"
+      ],
+      "renderedAssetId": "art-dolphin-nautilus-cc-plus",
+      "renderedIsPlaceholder": false,
+      "imageSource": "depiction — BotPlanet",
+      "allowedPlacements": [
+        "product_page",
+        "category_page",
+        "listing_card",
+        "comparison",
+        "homepage",
+        "guide",
+        "open_graph",
+        "structured_data",
+        "email"
+      ],
+      "altText": "BotPlanet artwork for the Dolphin Nautilus CC Plus w/Wi-Fi: the black and blue cleaner lifting out of dark water beside a phone showing the Dolphin app, over icons for Wi-Fi control, wall climbing and top-load filter access.",
+      "altTextStatus": "approved",
+      "structuredDataImages": [
+        "/media/products/dolphin-nautilus-cc-plus.webp",
+        "/media/reviews/dolphin-nautilus-cc-plus/hero.webp",
+        "/media/reviews/dolphin-nautilus-cc-plus/plug-and-play.webp",
+        "/media/reviews/dolphin-nautilus-cc-plus/app-control.webp",
+        "/media/reviews/dolphin-nautilus-cc-plus/video-poster.webp",
+        "/media/reviews/dolphin-nautilus-cc-plus/filter-access.webp"
+      ],
+      "structuredDataEligible": true,
+      "openGraphEligible": true,
+      "schemaExclusionReason": null,
+      "missingImageTypes": [
+        "product_alternate_view",
+        "product_detail",
+        "listing_thumbnail"
+      ],
+      "withdrawalFallback": "the media registry re-resolves on every request: a pulled asset is skipped and the next-best asset renders, ending at the placeholder. No broken image can appear, and structured data and Open Graph references disappear with it.",
+      "readiness": {
+        "exactModelConfirmed": true,
+        "heroReady": true,
+        "supportingImagesReady": true,
+        "responsiveVariantsReady": true,
+        "altTextApproved": true,
+        "schemaEligible": true,
+        "publicRenderingSafe": true,
+        "fullProductMediaSetReady": true
+      },
+      "imageReadinessStatus": "full_set",
+      "blockers": []
+    },
+    {
+      "productId": "prod-dolphin-premier",
+      "slug": "bublue-bubot-800p",
+      "canonicalUrl": "https://botplanet.io/robots/robotic-pool-cleaners/bublue-bubot-800p/",
+      "exactModel": "BuBlue Bubot 800P Gen2",
+      "heroAssetId": "art-dolphin-premier",
+      "supportingAssetIds": [
+        "fig-bublue-bubot-800p-hero",
+        "fig-bublue-bubot-800p-filtration",
+        "fig-bublue-bubot-800p-schedule",
+        "fig-bublue-bubot-800p-shallow"
+      ],
+      "renderedAssetId": "art-dolphin-premier",
+      "renderedIsPlaceholder": false,
+      "imageSource": "depiction — BotPlanet",
+      "allowedPlacements": [
+        "product_page",
+        "category_page",
+        "listing_card",
+        "comparison",
+        "homepage",
+        "guide",
+        "open_graph",
+        "structured_data",
+        "email"
+      ],
+      "altText": "BotPlanet artwork for the BuBlue Bubot 800P Gen2: the grey corded cleaner on its caddy at the poolside at night, lit blue along its front edge, with a phone showing the BuBlue app and callouts for suction, navigation, runtime, filtration and app control.",
+      "altTextStatus": "approved",
+      "structuredDataImages": [
+        "/media/products/dolphin-premier.webp",
+        "/media/reviews/bublue-bubot-800p/hero.webp",
+        "/media/reviews/bublue-bubot-800p/filtration.webp",
+        "/media/reviews/bublue-bubot-800p/schedule.webp",
+        "/media/reviews/bublue-bubot-800p/shallow.webp"
+      ],
+      "structuredDataEligible": true,
+      "openGraphEligible": true,
+      "schemaExclusionReason": null,
+      "missingImageTypes": [
+        "product_alternate_view",
+        "product_detail",
+        "listing_thumbnail"
+      ],
+      "withdrawalFallback": "the media registry re-resolves on every request: a pulled asset is skipped and the next-best asset renders, ending at the placeholder. No broken image can appear, and structured data and Open Graph references disappear with it.",
+      "readiness": {
+        "exactModelConfirmed": true,
+        "heroReady": true,
+        "supportingImagesReady": true,
+        "responsiveVariantsReady": true,
+        "altTextApproved": true,
+        "schemaEligible": true,
+        "publicRenderingSafe": true,
+        "fullProductMediaSetReady": true
+      },
+      "imageReadinessStatus": "full_set",
+      "blockers": []
+    },
+    {
+      "productId": "prod-polaris-freedom",
+      "slug": "polaris-freedom",
+      "canonicalUrl": "https://botplanet.io/robots/robotic-pool-cleaners/polaris-freedom/",
+      "exactModel": "Polaris FREEDOM Cordless Robotic Cleaner",
+      "heroAssetId": "art-polaris-freedom",
+      "supportingAssetIds": [
+        "fig-polaris-freedom-hero",
+        "fig-polaris-freedom-cordless-dock",
+        "fig-polaris-freedom-app-control"
+      ],
+      "renderedAssetId": "art-polaris-freedom",
+      "renderedIsPlaceholder": false,
+      "imageSource": "depiction — BotPlanet",
+      "allowedPlacements": [
+        "product_page",
+        "category_page",
+        "listing_card",
+        "comparison",
+        "homepage",
+        "guide",
+        "open_graph",
+        "structured_data",
+        "email"
+      ],
+      "altText": "BotPlanet artwork for the Polaris FREEDOM Cordless Robotic Cleaner: the blue tracked cordless cleaner in shallow water beside a phone showing the Polaris app, with callouts for cordless running, four cleaning modes, navigation and the top-load filter.",
+      "altTextStatus": "approved",
+      "structuredDataImages": [
+        "/media/products/polaris-freedom.webp",
+        "/media/reviews/polaris-freedom/hero.webp",
+        "/media/reviews/polaris-freedom/cordless-dock.webp",
+        "/media/reviews/polaris-freedom/app-control.webp"
+      ],
+      "structuredDataEligible": true,
+      "openGraphEligible": true,
+      "schemaExclusionReason": null,
+      "missingImageTypes": [
+        "product_alternate_view",
+        "product_detail",
+        "listing_thumbnail"
+      ],
+      "withdrawalFallback": "the media registry re-resolves on every request: a pulled asset is skipped and the next-best asset renders, ending at the placeholder. No broken image can appear, and structured data and Open Graph references disappear with it.",
+      "readiness": {
+        "exactModelConfirmed": true,
+        "heroReady": true,
+        "supportingImagesReady": true,
+        "responsiveVariantsReady": true,
+        "altTextApproved": true,
+        "schemaEligible": true,
+        "publicRenderingSafe": true,
+        "fullProductMediaSetReady": true
+      },
+      "imageReadinessStatus": "full_set",
+      "blockers": []
+    },
+    {
+      "productId": "prod-betta-se-plus",
+      "slug": "betta-se-plus",
+      "canonicalUrl": "https://botplanet.io/robots/robotic-pool-cleaners/betta-se-plus/",
+      "exactModel": "Betta SE Plus — Solar-Powered Robotic Pool Skimmer",
+      "heroAssetId": "art-betta-se-plus",
+      "supportingAssetIds": [
+        "fig-betta-se-plus-hero",
+        "fig-betta-se-plus-twin-motors",
+        "fig-betta-se-plus-sensors",
+        "fig-betta-se-plus-debris-basket"
+      ],
+      "renderedAssetId": "art-betta-se-plus",
+      "renderedIsPlaceholder": false,
+      "imageSource": "depiction — BotPlanet",
+      "allowedPlacements": [
+        "product_page",
+        "category_page",
+        "listing_card",
+        "comparison",
+        "homepage",
+        "guide",
+        "open_graph",
+        "structured_data",
+        "email"
+      ],
+      "altText": "BotPlanet artwork for the Betta SE Plus — Solar-Powered Robotic Pool Skimmer: the solar-panelled surface skimmer floating on a leaf-strewn pool in a sunlit garden, with callouts for continuous surface cleaning, solar charging, dual charging and shallow-water safeguarding.",
+      "altTextStatus": "approved",
+      "structuredDataImages": [
+        "/media/products/betta-se-plus.webp",
+        "/media/reviews/betta-se-plus/hero.webp",
+        "/media/reviews/betta-se-plus/twin-motors.webp",
+        "/media/reviews/betta-se-plus/sensors.webp",
+        "/media/reviews/betta-se-plus/debris-basket.webp"
+      ],
+      "structuredDataEligible": true,
+      "openGraphEligible": true,
+      "schemaExclusionReason": null,
+      "missingImageTypes": [
+        "product_alternate_view",
+        "product_detail",
+        "listing_thumbnail"
+      ],
+      "withdrawalFallback": "the media registry re-resolves on every request: a pulled asset is skipped and the next-best asset renders, ending at the placeholder. No broken image can appear, and structured data and Open Graph references disappear with it.",
+      "readiness": {
+        "exactModelConfirmed": true,
+        "heroReady": true,
+        "supportingImagesReady": true,
+        "responsiveVariantsReady": true,
+        "altTextApproved": true,
+        "schemaEligible": true,
+        "publicRenderingSafe": true,
+        "fullProductMediaSetReady": true
+      },
+      "imageReadinessStatus": "full_set",
+      "blockers": []
+    },
+    {
+      "productId": "prod-aiper-scuba-v3-ai-vision",
+      "slug": "aiper-scuba-v3-ai-vision",
+      "canonicalUrl": "https://botplanet.io/robots/robotic-pool-cleaners/aiper-scuba-v3-ai-vision/",
+      "exactModel": "AIPER Scuba V3 AI Vision",
+      "heroAssetId": "art-aiper-scuba-v3-ai-vision",
+      "supportingAssetIds": [
+        "fig-aiper-scuba-v3-ai-vision-hero",
+        "fig-aiper-scuba-v3-ai-vision-ai-patrol",
+        "fig-aiper-scuba-v3-ai-vision-carefree",
+        "fig-aiper-scuba-v3-ai-vision-filtration"
+      ],
+      "renderedAssetId": "art-aiper-scuba-v3-ai-vision",
+      "renderedIsPlaceholder": false,
+      "imageSource": "depiction — BotPlanet",
+      "allowedPlacements": [
+        "product_page",
+        "category_page",
+        "listing_card",
+        "comparison",
+        "homepage",
+        "guide",
+        "open_graph",
+        "structured_data",
+        "email"
+      ],
+      "altText": "BotPlanet artwork for the AIPER Scuba V3 AI Vision: the black cordless cleaner on its charging dock beside a lit resort pool, with callouts for camera navigation, wireless charging, weight, filtration and floor, wall and waterline cleaning.",
+      "altTextStatus": "approved",
+      "structuredDataImages": [
+        "/media/products/aiper-scuba-v3-ai-vision.webp",
+        "/media/reviews/aiper-scuba-v3-ai-vision/hero.webp",
+        "/media/reviews/aiper-scuba-v3-ai-vision/ai-patrol.webp",
+        "/media/reviews/aiper-scuba-v3-ai-vision/carefree.webp",
+        "/media/reviews/aiper-scuba-v3-ai-vision/filtration.webp"
+      ],
+      "structuredDataEligible": true,
+      "openGraphEligible": true,
+      "schemaExclusionReason": null,
+      "missingImageTypes": [
+        "product_alternate_view",
+        "product_detail",
+        "listing_thumbnail"
+      ],
+      "withdrawalFallback": "the media registry re-resolves on every request: a pulled asset is skipped and the next-best asset renders, ending at the placeholder. No broken image can appear, and structured data and Open Graph references disappear with it.",
+      "readiness": {
+        "exactModelConfirmed": true,
+        "heroReady": true,
+        "supportingImagesReady": true,
+        "responsiveVariantsReady": true,
+        "altTextApproved": true,
+        "schemaEligible": true,
+        "publicRenderingSafe": true,
+        "fullProductMediaSetReady": true
+      },
+      "imageReadinessStatus": "full_set",
+      "blockers": []
+    },
+    {
+      "productId": "prod-dolphin-proteus-dx4-plus",
+      "slug": "dolphin-proteus-dx4-plus",
+      "canonicalUrl": "https://botplanet.io/robots/robotic-pool-cleaners/dolphin-proteus-dx4-plus/",
+      "exactModel": "Dolphin Proteus DX4 Plus",
+      "heroAssetId": "art-dolphin-proteus-dx4-plus",
+      "supportingAssetIds": [
+        "fig-dolphin-proteus-dx4-plus-hero",
+        "fig-dolphin-proteus-dx4-plus-every-surface",
+        "fig-dolphin-proteus-dx4-plus-weekly-timer",
+        "fig-dolphin-proteus-dx4-plus-filtration"
+      ],
+      "renderedAssetId": "art-dolphin-proteus-dx4-plus",
+      "renderedIsPlaceholder": false,
+      "imageSource": "depiction — BotPlanet",
+      "allowedPlacements": [
+        "product_page",
+        "category_page",
+        "listing_card",
+        "comparison",
+        "homepage",
+        "guide",
+        "open_graph",
+        "structured_data",
+        "email"
+      ],
+      "altText": "BotPlanet artwork for the Dolphin Proteus DX4 Plus: the grey and blue tracked cleaner resting on stone coping beside a curved pool at dusk, with callouts for navigation, wall and waterline cleaning and top-load filtration.",
+      "altTextStatus": "approved",
+      "structuredDataImages": [
+        "/media/products/dolphin-proteus-dx4-plus.webp",
+        "/media/reviews/dolphin-proteus-dx4-plus/hero.webp",
+        "/media/reviews/dolphin-proteus-dx4-plus/every-surface.webp",
+        "/media/reviews/dolphin-proteus-dx4-plus/weekly-timer.webp",
+        "/media/reviews/dolphin-proteus-dx4-plus/filtration.webp"
+      ],
+      "structuredDataEligible": true,
+      "openGraphEligible": true,
+      "schemaExclusionReason": null,
+      "missingImageTypes": [
+        "product_alternate_view",
+        "product_detail",
+        "listing_thumbnail"
+      ],
+      "withdrawalFallback": "the media registry re-resolves on every request: a pulled asset is skipped and the next-best asset renders, ending at the placeholder. No broken image can appear, and structured data and Open Graph references disappear with it.",
+      "readiness": {
+        "exactModelConfirmed": true,
+        "heroReady": true,
+        "supportingImagesReady": true,
+        "responsiveVariantsReady": true,
+        "altTextApproved": true,
+        "schemaEligible": true,
+        "publicRenderingSafe": true,
+        "fullProductMediaSetReady": true
+      },
+      "imageReadinessStatus": "full_set",
+      "blockers": []
+    },
+    {
+      "productId": "prod-dolphin-e10",
+      "slug": "dolphin-e10",
+      "canonicalUrl": "https://botplanet.io/robots/robotic-pool-cleaners/dolphin-e10/",
+      "exactModel": "Dolphin E10",
+      "heroAssetId": null,
+      "supportingAssetIds": [],
+      "renderedAssetId": "ph-dolphin-e10",
+      "renderedIsPlaceholder": true,
+      "imageSource": "placeholder — BotPlanet",
+      "allowedPlacements": [
+        "product_page",
+        "category_page",
+        "listing_card",
+        "comparison",
+        "homepage",
+        "guide",
+        "open_graph",
+        "structured_data",
+        "email"
+      ],
+      "altText": "BotPlanet placeholder panel naming the Dolphin E10. Product photography is not yet available under a licence we hold.",
+      "altTextStatus": "approved",
+      "structuredDataImages": [],
+      "structuredDataEligible": false,
+      "openGraphEligible": true,
+      "schemaExclusionReason": "a placeholder names the model and depicts nothing; Product schema would present it as a photograph of the machine",
+      "missingImageTypes": [
+        "product_hero",
+        "product_alternate_view",
+        "product_detail",
+        "listing_thumbnail"
+      ],
+      "withdrawalFallback": "the media registry re-resolves on every request: a pulled asset is skipped and the next-best asset renders, ending at the placeholder. No broken image can appear, and structured data and Open Graph references disappear with it.",
+      "readiness": {
+        "exactModelConfirmed": true,
+        "heroReady": false,
+        "supportingImagesReady": false,
+        "responsiveVariantsReady": true,
+        "altTextApproved": true,
+        "schemaEligible": false,
+        "publicRenderingSafe": true,
+        "fullProductMediaSetReady": false
+      },
+      "imageReadinessStatus": "public_safe_placeholder_only",
+      "blockers": [
+        "no product hero",
+        "no supporting product imagery",
+        "no image eligible for Product structured data"
+      ]
+    },
+    {
+      "productId": "prod-beatbot-aquasense-2-ultra",
+      "slug": "beatbot-aquasense-2-ultra",
+      "canonicalUrl": "https://botplanet.io/robots/robotic-pool-cleaners/beatbot-aquasense-2-ultra/",
+      "exactModel": "Beatbot AquaSense 2 Ultra Robotic Pool Cleaner",
+      "heroAssetId": "art-beatbot-aquasense-2-ultra",
+      "supportingAssetIds": [
+        "fig-beatbot-aquasense-2-ultra-hero",
+        "fig-beatbot-aquasense-2-ultra-coverage",
+        "fig-beatbot-aquasense-2-ultra-navigation",
+        "fig-beatbot-aquasense-2-ultra-battery"
+      ],
+      "renderedAssetId": "art-beatbot-aquasense-2-ultra",
+      "renderedIsPlaceholder": false,
+      "imageSource": "depiction — BotPlanet",
+      "allowedPlacements": [
+        "product_page",
+        "category_page",
+        "listing_card",
+        "comparison",
+        "homepage",
+        "guide",
+        "open_graph",
+        "structured_data",
+        "email"
+      ],
+      "altText": "BotPlanet artwork for the Beatbot AquaSense 2 Ultra Robotic Pool Cleaner: the dark grey cleaner tilted on its dock beside a lit infinity pool at dusk, with a phone showing the AquaSense 2 Ultra app mid-cycle and callouts for app control, floor, wall and waterline cleaning, cordless running and navigation.",
+      "altTextStatus": "approved",
+      "structuredDataImages": [
+        "/media/products/beatbot-aquasense-2-ultra.webp",
+        "/media/reviews/beatbot-aquasense-2-ultra/hero.webp",
+        "/media/reviews/beatbot-aquasense-2-ultra/coverage.webp",
+        "/media/reviews/beatbot-aquasense-2-ultra/navigation.webp",
+        "/media/reviews/beatbot-aquasense-2-ultra/battery.webp"
+      ],
+      "structuredDataEligible": true,
+      "openGraphEligible": true,
+      "schemaExclusionReason": null,
+      "missingImageTypes": [
+        "product_alternate_view",
+        "product_detail",
+        "listing_thumbnail"
+      ],
+      "withdrawalFallback": "the media registry re-resolves on every request: a pulled asset is skipped and the next-best asset renders, ending at the placeholder. No broken image can appear, and structured data and Open Graph references disappear with it.",
+      "readiness": {
+        "exactModelConfirmed": true,
+        "heroReady": true,
+        "supportingImagesReady": true,
+        "responsiveVariantsReady": true,
+        "altTextApproved": true,
+        "schemaEligible": true,
+        "publicRenderingSafe": true,
+        "fullProductMediaSetReady": true
+      },
+      "imageReadinessStatus": "full_set",
+      "blockers": []
+    },
+    {
+      "productId": "prod-aiper-scuba-x1",
+      "slug": "aiper-scuba-x1-pro-max",
+      "canonicalUrl": "https://botplanet.io/robots/robotic-pool-cleaners/aiper-scuba-x1-pro-max/",
+      "exactModel": "Aiper Scuba X1 Pro Max",
+      "heroAssetId": "art-aiper-scuba-x1",
+      "supportingAssetIds": [
+        "fig-aiper-scuba-x1-pro-max-hero",
+        "fig-aiper-scuba-x1-pro-max-suction",
+        "fig-aiper-scuba-x1-pro-max-runtimes",
+        "fig-aiper-scuba-x1-pro-max-filtration"
+      ],
+      "renderedAssetId": "art-aiper-scuba-x1",
+      "renderedIsPlaceholder": false,
+      "imageSource": "depiction — BotPlanet",
+      "allowedPlacements": [
+        "product_page",
+        "category_page",
+        "listing_card",
+        "comparison",
+        "homepage",
+        "guide",
+        "open_graph",
+        "structured_data",
+        "email"
+      ],
+      "altText": "BotPlanet artwork for the Aiper Scuba X1 Pro Max: the grey and black cleaner on its dock at the poolside at night, 'SCUBA X1 Pro Max' printed on its front, with a phone showing the Aiper app and callouts for suction, surface skimming, navigation, filtration and runtime.",
+      "altTextStatus": "approved",
+      "structuredDataImages": [
+        "/media/products/aiper-scuba-x1.webp",
+        "/media/reviews/aiper-scuba-x1-pro-max/hero.webp",
+        "/media/reviews/aiper-scuba-x1-pro-max/suction.webp",
+        "/media/reviews/aiper-scuba-x1-pro-max/runtimes.webp",
+        "/media/reviews/aiper-scuba-x1-pro-max/filtration.webp"
+      ],
+      "structuredDataEligible": true,
+      "openGraphEligible": true,
+      "schemaExclusionReason": null,
+      "missingImageTypes": [
+        "product_alternate_view",
+        "product_detail",
+        "listing_thumbnail"
+      ],
+      "withdrawalFallback": "the media registry re-resolves on every request: a pulled asset is skipped and the next-best asset renders, ending at the placeholder. No broken image can appear, and structured data and Open Graph references disappear with it.",
+      "readiness": {
+        "exactModelConfirmed": true,
+        "heroReady": true,
+        "supportingImagesReady": true,
+        "responsiveVariantsReady": true,
+        "altTextApproved": true,
+        "schemaEligible": true,
+        "publicRenderingSafe": true,
+        "fullProductMediaSetReady": true
+      },
+      "imageReadinessStatus": "full_set",
+      "blockers": []
+    },
+    {
+      "productId": "prod-aiper-scuba-s1",
+      "slug": "aiper-scuba-s1",
+      "canonicalUrl": "https://botplanet.io/robots/robotic-pool-cleaners/aiper-scuba-s1/",
+      "exactModel": "Aiper Scuba S1 Cordless Robotic Pool Cleaner",
+      "heroAssetId": "art-aiper-scuba-s1",
+      "supportingAssetIds": [
+        "fig-aiper-scuba-s1-hero",
+        "fig-aiper-scuba-s1-four-zone",
+        "fig-aiper-scuba-s1-filtration",
+        "fig-aiper-scuba-s1-modes"
+      ],
+      "renderedAssetId": "art-aiper-scuba-s1",
+      "renderedIsPlaceholder": false,
+      "imageSource": "depiction — BotPlanet",
+      "allowedPlacements": [
+        "product_page",
+        "category_page",
+        "listing_card",
+        "comparison",
+        "homepage",
+        "guide",
+        "open_graph",
+        "structured_data",
+        "email"
+      ],
+      "altText": "BotPlanet artwork for the Aiper Scuba S1 Cordless Robotic Pool Cleaner: the grey and black tracked cleaner on wet paving beside a lit pool at night, with a phone showing the Aiper app mid-cycle and callouts for navigation, suction, waterline cleaning, filtration and battery life.",
+      "altTextStatus": "approved",
+      "structuredDataImages": [
+        "/media/products/aiper-scuba-s1.webp",
+        "/media/reviews/aiper-scuba-s1/hero.webp",
+        "/media/reviews/aiper-scuba-s1/four-zone.webp",
+        "/media/reviews/aiper-scuba-s1/filtration.webp",
+        "/media/reviews/aiper-scuba-s1/modes.webp"
+      ],
+      "structuredDataEligible": true,
+      "openGraphEligible": true,
+      "schemaExclusionReason": null,
+      "missingImageTypes": [
+        "product_alternate_view",
+        "product_detail",
+        "listing_thumbnail"
+      ],
+      "withdrawalFallback": "the media registry re-resolves on every request: a pulled asset is skipped and the next-best asset renders, ending at the placeholder. No broken image can appear, and structured data and Open Graph references disappear with it.",
+      "readiness": {
+        "exactModelConfirmed": true,
+        "heroReady": true,
+        "supportingImagesReady": true,
+        "responsiveVariantsReady": true,
+        "altTextApproved": true,
+        "schemaEligible": true,
+        "publicRenderingSafe": true,
+        "fullProductMediaSetReady": true
+      },
+      "imageReadinessStatus": "full_set",
+      "blockers": []
+    },
+    {
+      "productId": "prod-aiper-seagull-se",
+      "slug": "aiper-seagull-se",
+      "canonicalUrl": "https://botplanet.io/robots/robotic-pool-cleaners/aiper-seagull-se/",
+      "exactModel": "Aiper Seagull SE",
+      "heroAssetId": "art-aiper-seagull-se",
+      "supportingAssetIds": [
+        "fig-aiper-seagull-se-hero",
+        "fig-aiper-seagull-se-charging",
+        "fig-aiper-seagull-se-battery",
+        "fig-aiper-seagull-se-retrieval"
+      ],
+      "renderedAssetId": "art-aiper-seagull-se",
+      "renderedIsPlaceholder": false,
+      "imageSource": "depiction — BotPlanet",
+      "allowedPlacements": [
+        "product_page",
+        "category_page",
+        "listing_card",
+        "comparison",
+        "homepage",
+        "guide",
+        "open_graph",
+        "structured_data",
+        "email"
+      ],
+      "altText": "BotPlanet artwork for the Aiper Seagull SE: the compact grey cleaner on poolside paving next to its retrieval hook, 'SEAGULL SE' on the carry handle, with callouts for cordless running, self-parking, easy retrieval and a compact build.",
+      "altTextStatus": "approved",
+      "structuredDataImages": [
+        "/media/products/aiper-seagull-se.webp",
+        "/media/reviews/aiper-seagull-se/hero.webp",
+        "/media/reviews/aiper-seagull-se/charging.webp",
+        "/media/reviews/aiper-seagull-se/battery.webp",
+        "/media/reviews/aiper-seagull-se/retrieval.webp"
+      ],
+      "structuredDataEligible": true,
+      "openGraphEligible": true,
+      "schemaExclusionReason": null,
+      "missingImageTypes": [
+        "product_alternate_view",
+        "product_detail",
+        "listing_thumbnail"
+      ],
+      "withdrawalFallback": "the media registry re-resolves on every request: a pulled asset is skipped and the next-best asset renders, ending at the placeholder. No broken image can appear, and structured data and Open Graph references disappear with it.",
+      "readiness": {
+        "exactModelConfirmed": true,
+        "heroReady": true,
+        "supportingImagesReady": true,
+        "responsiveVariantsReady": true,
+        "altTextApproved": true,
+        "schemaEligible": true,
+        "publicRenderingSafe": true,
+        "fullProductMediaSetReady": true
+      },
+      "imageReadinessStatus": "full_set",
+      "blockers": []
+    }
+  ]
+}

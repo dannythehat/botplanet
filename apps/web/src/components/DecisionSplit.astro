@@ -1,0 +1,200 @@
+---
+/* ============================================================
+   BotPlanet — Split decision section (section head + 2 panels)
+
+   For the one binary choice each category has: corded or
+   cordless here, mains or battery, wired or wireless elsewhere.
+
+   A third element type, so the page keeps its rhythm. Kept
+   short by design — the detail belongs on the dedicated guide,
+   not on the category hub.
+   ============================================================ */
+
+import SectionHead from "./SectionHead.astro";
+
+export interface SplitPanel {
+  /** Short label, e.g. "CORDED". */
+  label: string;
+  /** The H3, e.g. "When corded is the stronger choice". */
+  title: string;
+  /** Two or three reasons to choose this side. */
+  points: string[];
+  /** The honest downside. Always shown — never omit it. */
+  tradeOff: string;
+}
+
+interface Props {
+  id?: string;
+  eyebrow?: string;
+  title: string;
+  intro: string;
+  /* Passed straight to SectionHead so the hub prose can carry a product
+     link. See the note there. */
+  linkCategory?: string;
+  panels: SplitPanel[];
+}
+
+const { id, eyebrow, title, intro, panels, linkCategory } = Astro.props;
+---
+
+<section class="bp-split" id={id}>
+  <SectionHead eyebrow={eyebrow} title={title} intro={intro} linkCategory={linkCategory} />
+
+  <div class="bp-split__grid">
+    {panels.map((panel) => (
+      <article class="bp-spanel">
+        <span class="bp-spanel__label">{panel.label}</span>
+        <h3 class="bp-spanel__title">{panel.title}</h3>
+
+        <ul class="bp-spanel__points">
+          {panel.points.map((point) => <li>{point}</li>)}
+        </ul>
+
+        <div class="bp-spanel__tradeoff">
+          <span class="bp-spanel__tradeoff-label">Trade-off</span>
+          <p class="bp-spanel__tradeoff-text">{panel.tradeOff}</p>
+        </div>
+      </article>
+    ))}
+  </div>
+</section>
+
+<style>
+  .bp-split {
+    /* Outer spacing, padding, border and background come from the section
+       plate rule in metal-theme.css, so every section shares one rhythm. */
+  }
+
+  .bp-split__grid {
+    display: grid;
+    gap: clamp(1rem, 2.2vw, 1.5rem);
+    grid-template-columns: 1fr;
+  }
+
+  /* ---------- panel ---------- */
+  .bp-spanel {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: clamp(1.6rem, 3.8vw, 2.15rem);
+    border: 1px solid var(--cs-line);
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--cs-surface-lift);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.06),
+      0 22px 34px rgba(0, 0, 0, 0.46);
+  }
+
+  .bp-spanel::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(246, 248, 252, 0.5) 26%,
+      rgba(246, 248, 252, 0.72) 50%,
+      rgba(246, 248, 252, 0.42) 74%,
+      transparent
+    );
+  }
+
+  .bp-spanel__label {
+    align-self: flex-start;
+    margin-bottom: 1.05rem;
+    padding: 0.34rem 0.78rem;
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    color: #0a0d11;
+    background: var(--cs-sheen);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.85),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.35),
+      0 4px 12px rgba(0, 0, 0, 0.4);
+  }
+
+  .bp-spanel__title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.25rem, 2.4vw, 1.42rem);
+    line-height: 1.2;
+    letter-spacing: -0.014em;
+    color: var(--cs-hi);
+  }
+
+  .bp-spanel__points {
+    margin: 1.3rem 0 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.78rem;
+  }
+
+  .bp-spanel__points li {
+    position: relative;
+    padding-left: 1.35rem;
+    font-size: 0.99rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+  }
+
+  .bp-spanel__points li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 0.4rem;
+    height: 0.4rem;
+    transform: rotate(45deg);
+    background: var(--cs-sheen);
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4);
+  }
+
+  /* the downside, inset so it reads as a real caveat */
+  .bp-spanel__tradeoff {
+    margin-top: auto;
+    padding: 1.05rem 1.15rem;
+    border: 1px solid var(--cs-line-soft);
+    border-radius: 11px;
+    background: rgba(0, 0, 0, 0.28);
+  }
+
+  .bp-spanel__tradeoff + .bp-spanel__tradeoff,
+  .bp-spanel__points + .bp-spanel__tradeoff {
+    margin-top: 1.5rem;
+  }
+
+  .bp-spanel__tradeoff-label {
+    display: block;
+    margin-bottom: 0.4rem;
+    font-family: var(--font-mono);
+    font-size: 0.63rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    background: var(--cs-sheen);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .bp-spanel__tradeoff-text {
+    margin: 0;
+    font-size: 0.93rem;
+    line-height: 1.6;
+    color: var(--cs-mid);
+  }
+
+  /* ---------- wider screens ---------- */
+  @media (min-width: 860px) {
+    .bp-split__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

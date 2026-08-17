@@ -1,0 +1,232 @@
+---
+/* ============================================================
+   BotPlanet — Decision section (section head + decision cards)
+
+   Reusable on every category page: only the heading, the intro
+   and the cards change.
+
+   Cards are designed to look finished with no picture at all,
+   so a page is never blocked waiting on artwork. Add an image
+   to a card later and it appears above that card's text.
+   ============================================================ */
+
+import SectionHead from "./SectionHead.astro";
+import type { HeroImage } from "./CategoryHero.astro";
+
+export interface DecisionCard {
+  /** Short label, e.g. "In-ground pools". */
+  title: string;
+  /** One line answering "who is this for?". */
+  bestFor: string;
+  /** Two or three scannable points. */
+  points: string[];
+  /** Optional. The card is complete without it. */
+  image?: HeroImage;
+}
+
+interface Props {
+  id?: string;
+  eyebrow?: string;
+  title: string;
+  intro: string;
+  /* Passed straight to SectionHead so the hub prose can carry a product
+     link. See the note there. */
+  linkCategory?: string;
+  cards: DecisionCard[];
+}
+
+const { id, eyebrow, title, intro, cards, linkCategory } = Astro.props;
+
+import { srcsetFor } from "../lib/srcset";
+---
+
+<section class="bp-dsec" id={id}>
+  <SectionHead eyebrow={eyebrow} title={title} intro={intro} linkCategory={linkCategory} />
+
+  <div class="bp-dsec__grid" data-count={cards.length}>
+    {cards.map((card, i) => (
+      <article class="bp-dcard">
+        {card.image?.src && (
+          <figure class="bp-dcard__figure">
+            <picture>
+              {card.image.mobileSrc && (
+                <source media="(max-width: 719px)" srcset={srcsetFor(card.image.mobileSrc) ?? card.image.mobileSrc} sizes="100vw" />
+              )}
+              <img
+                src={card.image.src}
+                srcset={srcsetFor(card.image.src)}
+                sizes="(min-width: 900px) 33vw, 100vw"
+                alt={card.image.alt}
+                style={card.image.focal ? `object-position: ${card.image.focal}` : undefined}
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
+          </figure>
+        )}
+
+        <div class="bp-dcard__body">
+          <span class="bp-dcard__index">{String(i + 1).padStart(2, "0")}</span>
+          <h3 class="bp-dcard__title">{card.title}</h3>
+          <p class="bp-dcard__bestfor">{card.bestFor}</p>
+
+          <span class="bp-dcard__divider" aria-hidden="true"></span>
+
+          <ul class="bp-dcard__points">
+            {card.points.map((point) => <li>{point}</li>)}
+          </ul>
+        </div>
+      </article>
+    ))}
+  </div>
+</section>
+
+<style>
+  .bp-dsec {
+    /* Outer spacing, padding, border and background come from the section
+       plate rule in metal-theme.css, so every section shares one rhythm. */
+  }
+
+  .bp-dsec__grid {
+    display: grid;
+    gap: clamp(1rem, 2.2vw, 1.5rem);
+    grid-template-columns: 1fr;
+  }
+
+  /* ---------- card ---------- */
+  .bp-dcard {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid var(--cs-line);
+    border-radius: 16px;
+    background: var(--cs-surface-lift);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.06),
+      0 22px 34px rgba(0, 0, 0, 0.46);
+  }
+
+  /* brushed hairline across the top of each card */
+  .bp-dcard::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(246, 248, 252, 0.5) 26%,
+      rgba(246, 248, 252, 0.72) 50%,
+      rgba(246, 248, 252, 0.42) 74%,
+      transparent
+    );
+    z-index: 1;
+  }
+
+  .bp-dcard__figure {
+    margin: 0;
+    border-bottom: 1px solid var(--cs-line-soft);
+  }
+
+  .bp-dcard__figure img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+  }
+
+  .bp-dcard__body {
+    padding: clamp(1.5rem, 3.6vw, 2rem);
+  }
+
+  /* ---------- index chip ---------- */
+  .bp-dcard__index {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.15rem;
+    height: 1.6rem;
+    margin-bottom: 1.05rem;
+    padding: 0 0.5rem;
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: #0a0d11;
+    background: var(--cs-sheen);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.85),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.35),
+      0 4px 12px rgba(0, 0, 0, 0.4);
+  }
+
+  .bp-dcard__title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.25rem, 2.4vw, 1.4rem);
+    line-height: 1.2;
+    letter-spacing: -0.014em;
+    color: var(--cs-hi);
+  }
+
+  .bp-dcard__bestfor {
+    margin: 0.6rem 0 0;
+    font-size: 0.97rem;
+    line-height: 1.5;
+    color: var(--cs-mid);
+  }
+
+  .bp-dcard__divider {
+    display: block;
+    height: 1px;
+    margin: 1.35rem 0;
+    background: linear-gradient(90deg, var(--cs-line), transparent 78%);
+  }
+
+  .bp-dcard__points {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .bp-dcard__points li {
+    position: relative;
+    padding-left: 1.35rem;
+    font-size: 0.97rem;
+    line-height: 1.58;
+    color: var(--text-secondary);
+  }
+
+  /* chrome diamond instead of a bullet */
+  .bp-dcard__points li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 0.4rem;
+    height: 0.4rem;
+    transform: rotate(45deg);
+    background: var(--cs-sheen);
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4);
+  }
+
+  /* ---------- wider screens ---------- */
+  @media (min-width: 700px) {
+    .bp-dsec__grid[data-count="2"],
+    .bp-dsec__grid[data-count="4"] {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 940px) {
+    .bp-dsec__grid[data-count="3"],
+    .bp-dsec__grid[data-count="5"] {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

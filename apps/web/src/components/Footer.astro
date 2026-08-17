@@ -1,0 +1,224 @@
+---
+import { FOOTER_GROUPS, LEGAL_ITEMS } from "../content/nav-surfaces";
+import { SITE } from "../lib/site";
+import { shellJourneyFor } from "../content/journeys";
+import { routeFor } from "../content/routes";
+import { categoryCanMatch } from "../content/matcher-router";
+const year = 2026;
+/* Category-specific journey, and since 12 August 2026 it is the journey for
+   THE PAGE rather than for the launch category. This called shellJourney()
+   with no argument, so the strip below read "Not sure which pool cleaner
+   fits?" at the foot of every page on the site — the window hub, the litter
+   hub, the coding hub, all of them. The heading was hardcoded on top of that,
+   so even a correct journey would have been introduced by the wrong question.
+
+   Null renders no strip. A category whose matcher cannot answer gets no
+   prompt rather than a prompt for somebody else's category. */
+const path = Astro.url.pathname;
+const journey = shellJourneyFor(path, { routeCategory: routeFor(path)?.category, canMatch: categoryCanMatch });
+const promptOne = journey?.subject ?? "";
+
+const LEGAL = LEGAL_ITEMS;
+---
+<!--
+  Compact by design. The footer closes the page; it must never be its largest
+  visual section. One slim, CATEGORY-SPECIFIC journey prompt, tight link groups,
+  then legal. No generic site-wide BotMatch claim and no duplicate brand
+  lockup — the header already carries the mark.
+-->
+<footer class="site">
+  <!-- Slim conversion strip: one line of intent + one action. -->
+  {journey && (
+  <div class="foot-prompt">
+    <div class="wrap foot-prompt__inner">
+      <p class="foot-prompt__text">
+        <strong>Not sure which {promptOne} fits?</strong>
+        <span class="muted">{journey.explanation}</span>
+      </p>
+      <a class="btn btn--accent btn--sm" href={journey.href}>{journey.ctaLabel}</a>
+    </div>
+  </div>
+  )}
+
+  <div class="wrap">
+    <div class="foot-main">
+      <nav class="foot-nav" aria-label="Footer">
+        {FOOTER_GROUPS.map((g) => (
+          <div class="foot-col">
+            <h2 class="foot-h">{g.title}</h2>
+            <ul class="foot-list">
+              {g.links.map((l) => (
+                <li>
+                  {l.state === "coming_soon" ? (
+                    <span class="foot-link is-soon">{l.label}<em>soon</em></span>
+                  ) : (
+                    <a class="foot-link" href={l.href}>{l.label}</a>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </nav>
+    </div>
+
+    <div class="foot-legal">
+      <p class="foot-disclosure">
+        <strong>Affiliate disclosure.</strong> Some links are affiliate links — we may earn a commission at no cost to
+        you. It never changes which product BotMatch recommends. Prices and stock are dated snapshots; confirm the
+        current price at the retailer.
+      </p>
+      <div class="foot-legal__row">
+        <p class="foot-copy">© {year} BotPlanet · Independent robot recommendations for the United States</p>
+        <ul class="foot-legal__links">
+          {LEGAL.map((l) => <li><a class="foot-link" href={l.href}>{l.label}</a></li>)}
+          <li><a class="foot-link" href={`mailto:${SITE.business.contactEmail}`}>Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  footer.site {
+    margin-top: var(--section-gap-tight);
+    border-top: 1px solid var(--border-subtle);
+    background: var(--bg-raised);
+  }
+
+  /* ---- Slim prompt strip ---- */
+  .foot-prompt {
+    border-bottom: 1px solid var(--border-subtle);
+    background:
+      radial-gradient(60% 180% at 22% 50%, rgba(255, 255, 255, 0.045), transparent 70%),
+      var(--bg-sunken);
+  }
+
+  .foot-prompt__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-md);
+    /* One row, not a block: ~64px tall on desktop. */
+    padding-block: var(--space-md);
+    flex-wrap: wrap;
+  }
+
+  .foot-prompt__text {
+    margin: 0;
+    font-size: var(--type-body-sm);
+    line-height: var(--leading-normal);
+  }
+
+  .foot-prompt__text strong {
+    font-family: var(--font-display);
+    font-weight: var(--weight-semibold);
+    color: var(--text-primary);
+    margin-right: var(--space-xs);
+  }
+
+  /* ---- Link groups ---- */
+  .foot-main { padding-block: var(--space-xl) var(--space-lg); }
+
+  .foot-nav {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-lg);
+  }
+
+  .foot-h {
+    font-family: var(--font-display);
+    font-size: 11.5px;
+    font-weight: var(--weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-caps);
+    color: var(--text-tertiary);
+    margin: 0 0 var(--space-xs);
+  }
+
+  .foot-list { list-style: none; margin: 0; padding: 0; }
+  .foot-list li { margin: 0; }
+
+  .foot-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2xs);
+    /* Tight, but still a comfortable target. */
+    padding: 5px 0;
+    color: var(--text-secondary);
+    font-size: var(--type-body-sm);
+    line-height: 1.4;
+  }
+
+  .foot-link:hover { color: var(--text-primary); }
+  .foot-link:focus-visible { outline: var(--focus-ring); outline-offset: 3px; }
+  .foot-link.is-soon { color: var(--text-quaternary); }
+
+  .foot-link em {
+    font-style: normal;
+    font-size: 9.5px;
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-caps);
+    color: var(--text-quaternary);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-xs);
+    padding: 1px 4px;
+  }
+
+  /* ---- Legal ---- */
+  .foot-legal {
+    border-top: 1px solid var(--border-subtle);
+    padding-block: var(--space-md) var(--space-lg);
+  }
+
+  .foot-disclosure {
+    max-width: 96ch;
+    margin: 0 0 var(--space-sm);
+    font-size: var(--type-meta);
+    line-height: var(--leading-normal);
+    color: var(--text-quaternary);
+  }
+
+  .foot-disclosure strong { color: var(--text-tertiary); font-weight: var(--weight-semibold); }
+
+  .foot-legal__row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+  }
+
+  .foot-copy {
+    margin: 0;
+    font-size: var(--type-meta);
+    color: var(--text-tertiary);
+  }
+
+  .foot-legal__links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0 var(--space-md);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .foot-legal__links li { margin: 0; }
+  .foot-legal__links .foot-link { font-size: var(--type-meta); padding: 3px 0; }
+
+  /* ---- Responsive ---- */
+  @media (max-width: 900px) {
+    .foot-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-lg) var(--space-md); }
+  }
+
+  @media (max-width: 560px) {
+    .foot-prompt__inner { justify-content: flex-start; gap: var(--space-sm); }
+    .foot-legal__row { flex-direction: column; align-items: flex-start; gap: var(--space-xs); }
+  }
+
+  @media (max-width: 420px) {
+    .foot-nav { grid-template-columns: 1fr 1fr; }
+  }
+</style>

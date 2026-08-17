@@ -1,0 +1,49 @@
+---
+/* TEMPORARY preview of the BotMatch funnel. Prerendered, noindex,
+   not linked from anywhere. Delete once the funnel is signed off. */
+export const prerender = true;
+
+import BotMatcher from "../../components/BotMatcher.astro";
+import { canMatch, emptyStateFor } from "../../content/matcher-router";
+import { questionsFor, tasksFor } from "../../content/matcher-questions";
+
+const SLUG = "robotic-pool-cleaners";
+const NAME = "Robotic Pool Cleaners";
+
+import "../../styles/tokens.css";
+import "../../styles/base.css";
+import "../../styles/layout.css";
+import "../../styles/depth.css";
+import "../../styles/components.css";
+import "../../styles/metal-theme.css";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>BotMatch preview — BotPlanet</title>
+  </head>
+  <body>
+    <main class="wrap" style="padding-top:2.5rem;padding-bottom:5rem;">
+      <BotMatcher
+        mode="single"
+        categories={[
+          {
+            slug: SLUG,
+            name: NAME,
+            questions: questionsFor(SLUG)!,
+            tasks: tasksFor(SLUG)!,
+            /* A design preview, so it always renders the matchable branch —
+               the empty state has its own preview elsewhere and mixing them
+               here would hide whichever one the catalogue currently produces. */
+            matchable: canMatch(99),
+            emptyState: emptyStateFor(NAME, 0),
+            hubHref: `/robots/${SLUG}/`,
+          },
+        ]}
+      />
+    </main>
+  </body>
+</html>

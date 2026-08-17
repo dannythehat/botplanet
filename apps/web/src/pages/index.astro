@@ -1,0 +1,601 @@
+---
+import Base from "../layouts/Base.astro";
+import BotFinderCard from "../components/BotFinderCard.astro";
+import { finderCardFor } from "../content/finder-cards";
+import { categoryRoutes, liveCategories } from "../content/routes";
+import { srcsetFor } from "../lib/srcset";
+import { webPageSchema, SITE_URL } from "../lib/seo";
+
+/**
+ * NAMES THE BIGGEST CATEGORIES, WHICH IT DID NOT.
+ *
+ * This read "pool cleaners, window robots, companion pets and coding robots"
+ * until 10 August 2026 — four of nine, and the four it omitted included the two
+ * largest terms the site targets: `robot vacuum` at 135,000/mo and `robot lawn
+ * mower` at 74,000. The meta description is the sentence that earns the click
+ * in the result, and it was advertising the smaller half of the catalogue.
+ */
+const META_DESCRIPTION =
+  "Independent comparisons and buying advice for home robots — robot vacuums, lawn mowers, " +
+  "pool cleaners, window robots, litter boxes and more.";
+
+const finderCard = finderCardFor("universal")!;
+
+
+
+/**
+ * THE DIRECTORY, READ FROM THE REGISTRY RATHER THAN TYPED HERE.
+ *
+ * This was a hand-written list of six, and every line of it had gone stale.
+ * It called window and lawn "in development" and floor care, companion and
+ * security "planned" while five of those categories were live and published;
+ * it listed Security, which was cancelled on 6 August; and it did not mention
+ * pet cameras, litter boxes, grill robots or coding robots at all. The front
+ * door of the site was describing a roadmap from before four categories
+ * shipped.
+ *
+ * A hand-typed copy of the registry cannot stay true, so this no longer keeps
+ * one. liveCategories() is the same function the header, the footer, the
+ * /robots/ index and the sitemap read, which means a category is on this page
+ * the day it goes live and cannot be on it a day before.
+ */
+/**
+ * Artwork for the directory tiles, one per category.
+ *
+ * TWO RULES DECIDED EVERY CHOICE HERE, AND ONE OF THEM RULED OUT THE OBVIOUS
+ * PICKS. Nothing with a word painted into it, and nothing that is not the
+ * category's best frame.
+ *
+ * The obvious files were each hub's own `hero`, and for pool and window those
+ * are the two on the site with type burnt in: /media/pool/hero-desktop.webp
+ * carries the BotPlanet wordmark, and /media/window/hero-desktop.webp carries
+ * the wordmark plus a "Window Cleaning Robots / Crystal-clear views" headline.
+ * A headline drawn into a JPEG is invisible to Google, silent to a screen
+ * reader and impossible to translate, and at tile size it would be unreadable
+ * anyway. Those two use their category feature file instead, which is the same
+ * subject shot clean.
+ *
+ * `focal` is where the subject actually sits, because a 16:9 master cropped to
+ * a 3:2 tile loses the sides — centre-cropping the vacuums frame walks the
+ * robot straight out of it.
+ *
+ * FIVE OF THESE ARE THE OWNER'S OWN PHOTOGRAPHS, supplied 8 August 2026, and
+ * they replaced BotPlanet artwork on pool, companion, grill and pet camera.
+ * Pet camera had nothing at all until they arrived — it was the one hub that
+ * had never had any artwork, and its tile was rendering an empty plate.
+ */
+const TILE_ART: Record<string, { src: string; focal?: string; alt: string }> = {
+  "robotic-pool-cleaners": {
+    src: "/media/hubs/pool/tile.webp",
+    alt: "A tracked robotic pool cleaner resting on a white cover at the edge of a sunlit blue pool.",
+  },
+  "window-cleaning-robots": {
+    src: "/media/window-category/feature-desktop.webp",
+    focal: "24% center",
+    alt: "A window-cleaning robot gripping the glass of a hillside house at dusk, the view beyond.",
+  },
+  "robotic-lawn-mowers": {
+    src: "/media/hubs/lawn/hero.webp",
+    alt: "A robot mower on a striped lawn at sunset, a lit stone house behind it.",
+  },
+  "robot-vacuums": {
+    src: "/media/hubs/vacuums/hero.webp",
+    focal: "70% center",
+    alt: "A round robot vacuum crossing the wood floor of a sunlit open-plan living room.",
+  },
+  "companion-robots": {
+    src: "/media/hubs/companion/tile.webp",
+    alt: "Four rendered companion robots standing together against a pale background, including a robot dog.",
+  },
+  "self-cleaning-litter-boxes": {
+    src: "/media/hubs/litter/hero.webp",
+    focal: "60% center",
+    alt: "A long-haired tabby walking towards a white self-cleaning litter box in a utility room.",
+  },
+  "grill-cleaning-robots": {
+    src: "/media/hubs/grill/tile.webp",
+    alt: "A red grill-cleaning robot sitting on stainless steel grill grates between a pair of tongs and a spatula.",
+  },
+  "pet-camera-robots": {
+    /* The tile crop, not the master. The supplied file is nearly square and
+       carries a phone showing the live view; a 3:2 window centred on it cuts
+       the phone in half, which reads as a rendering fault. See the note on
+       hub-petcam-tile in the media register. */
+    src: "/media/hubs/petcam/tile.webp",
+    alt: "A pet camera robot on its wheels beside its white charging dock.",
+  },
+  "educational-coding-robots": {
+    src: "/media/hubs/coding/hero.webp",
+    focal: "60% center",
+    alt: "A child's hands beside a small tracked coding robot on a kitchen table, parts laid out around it.",
+  },
+};
+
+const categories = liveCategories()
+  .slice()
+  .sort((a, b) => a.order - b.order)
+  .map((c, i) => ({
+    name: c.name,
+    description: c.short,
+    jtbd: c.jtbd,
+    href: categoryRoutes(c.slug).hub,
+    code: String(i + 1).padStart(2, "0"),
+    art: TILE_ART[c.slug] ?? null,
+  }));
+
+/* The homepage is a directory of categories, and until now its markup said so
+   to a reader but not to a crawler: the graph described a company and a
+   website and never the thing the page actually lists.
+
+   Every entry carries a url now, because every category listed is live and has
+   a page. The old list mixed built categories with roadmap ones and gave a URL
+   only to the first. */
+const categoryList = {
+  "@type": "ItemList",
+  "@id": `${SITE_URL}/#robot-categories`,
+  name: "Robot categories on BotPlanet",
+  numberOfItems: categories.length,
+  itemListOrder: "https://schema.org/ItemListOrderAscending",
+  itemListElement: categories.map((c, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    name: c.name,
+    description: c.description,
+    ...(c.href ? { url: `${SITE_URL}${c.href}` } : {}),
+  })),
+};
+
+const homeSchema = [
+  webPageSchema({
+    path: "/",
+    name: "Home Robots: Reviews, Comparisons & Buying Advice | BotPlanet",
+    description: META_DESCRIPTION,
+    type: "CollectionPage",
+  }),
+  categoryList,
+];
+---
+
+<Base
+  title="Home Robots: Reviews, Comparisons & Buying Advice | BotPlanet"
+  description={META_DESCRIPTION}
+  bleed={true}
+  schema={homeSchema}
+>
+  <section class="hero">
+    <div class="wrap hero__grid">
+      <div class="hero__copy">
+        <p class="hero__marker">THE WORLD OF REAL-WORLD ROBOTS</p>
+        <h1>Home robots are leaving the lab.<br /><span>We help you choose the right ones.</span></h1>
+        <p class="hero__lede">
+          BotPlanet is building the premium destination for robots that do useful work in homes, gardens, businesses and everyday life. We compare the machines, verify the claims and track where they can actually be bought.
+        </p>
+        {/* TWO ACTIONS NOW, AND THE FIRST ONE IS NEW. This carried a single
+            button into the pool hub, on the reasoning that BotMatch appearing
+            twice asked for the same thing before a reader knew what it was.
+            That reasoning held while BotMatch was nine separate funnels you
+            had to already know the category to enter. It stopped holding when
+            the finder learned to start from the job — "Find your robot" now
+            answers the question the homepage actually raises, and the hub link
+            stays for anyone who would rather browse. */}
+        <div class="hero__actions">
+          <a class="btn btn--accent btn--lg" href="/botmatch/">Find your robot</a>
+          <a class="btn btn--primary btn--lg" href="#robot-worlds">Explore robot categories</a>
+        </div>
+      </div>
+
+      <figure class="hero__art">
+        <picture>
+          <source
+            media="(max-width: 720px)"
+            srcset={srcsetFor("/media/home/hero-mobile.webp")}
+            sizes="100vw"
+            width="941"
+            height="1672"
+          />
+          <img
+            src="/media/home/hero-desktop.webp"
+            srcset={srcsetFor("/media/home/hero-desktop.webp")}
+            sizes="(min-width: 1100px) 58vw, 100vw"
+            width="1672"
+            height="941"
+            alt="A night-time home where several kinds of robot are working at once: a pool cleaner in the water, a window cleaner on the glass, a mower on the lawn, a vacuum on the terrace and a companion robot at the door, beneath the BotPlanet logo and the Earth."
+            fetchpriority="high"
+            decoding="async"
+          />
+        </picture>
+      </figure>
+    </div>
+  </section>
+
+  {/* THE COMPACT JOB FINDER WAS HERE AND IS GONE — owner decision, 12 August
+      2026, on seeing it on a phone.
+
+      The argument for it was that nine jobs in the reader's own words beat
+      nine category names as a first question. On a desktop it read that way.
+      On a phone it did not: eleven stacked pills pushed the directory — the
+      thing the homepage exists to show — most of a screen further down, and
+      every pill led to the same funnel the header button already opens. It
+      was a second front door in front of the first one.
+
+      If a job-first entry point comes back, it belongs INSIDE /botmatch/ as
+      its opening question, not as a section the homepage has to scroll past.
+      MATCHER_JOBS in content/matcher-router.ts still exists and is still used
+      by the funnel, so nothing was deleted with this. */}
+
+  <section class="worlds" id="robot-worlds">
+    <div class="wrap">
+      <div class="section-intro">
+        <p class="kicker">EXPLORE THE CATEGORIES</p>
+        <h2>Robots that earn their place.</h2>
+        <p>
+          Explore useful robots for your home, garden and everyday life. Compare what they do,
+          where they fall short and which models are genuinely worth considering.
+        </p>
+      </div>
+
+      {/* Generated from the registry — see the note above `categories`. The
+          section stood empty for a while and the hero still pointed a reader
+          at it, so the anchor landed on a heading and nothing to click. */}
+      <ul class="worlds__grid">
+        {categories.map((c) => (
+          <li>
+            <a class="card card--interactive worlds__card" href={c.href}>
+              {c.art ? (
+                <img
+                  class="worlds__img"
+                  src={c.art.src}
+                  srcset={srcsetFor(c.art.src)}
+                  sizes="(min-width: 900px) 33vw, (min-width: 520px) 50vw, 100vw"
+                  alt={c.art.alt}
+                  loading="lazy"
+                  decoding="async"
+                  style={c.art.focal ? `object-position: ${c.art.focal}` : undefined}
+                />
+              ) : (
+                /* An empty plate, not a stand-in. Borrowing another category's
+                   photograph would be the one thing worse than having none. */
+                <span class="worlds__img worlds__img--none" aria-hidden="true"></span>
+              )}
+              <span class="worlds__text">
+                <span class="worlds__code" aria-hidden="true">{c.code}</span>
+                <h3 class="worlds__name">{c.name}</h3>
+                <p class="worlds__body">{c.description}</p>
+                <span class="worlds__jtbd">{c.jtbd}</span>
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="botmatch" id="botmatch">
+    {/* Three blocks, in the order a reader needs them: what it is, what it
+        looks like, how it works — and the button last. The section used to
+        put the button in the middle and keep talking afterwards, with the
+        picture stranded below all of it on a phone. Nothing follows the
+        call to action now. */}
+    <div class="wrap botmatch__grid">
+      <div class="botmatch__intro">
+        <p class="kicker">BOTMATCH</p>
+        {/* WRITTEN AT THE READER, NOT AT THE ARCHITECTURE. This led with "One
+            matcher per robot world. Each one asks what its own job needs." —
+            a true sentence about how the system is built and a useless one to
+            somebody who wants a gift for a seven-year-old. The three examples
+            below are not invented: each is a question a live matcher actually
+            asks. Coding asks whether the child has asked for one; pool asks
+            about length and a sun ledge; litter says outright when a cat is
+            too small for every machine in the category. */}
+        <h2>Tell us the job. We will tell you the robot — or tell you not to buy one.</h2>
+        <p class="large">
+          A coding robot for a seven-year-old who has not asked for one. A pool cleaner for a 50 ft pool with a sun ledge. A litter box for a cat that may be too small for any of them. Answer a handful of plain questions about the job rather than the machine, and BotMatch searches every robot we have researched — then emails you the shortlist, what each pick was matched on, and the ones we ruled out for you.
+        </p>
+      </div>
+
+      <div class="botmatch__art">
+        <BotFinderCard
+          src={finderCard.src}
+          alt={finderCard.alt}
+          label={finderCard.label}
+          href="/botmatch/"
+          width={finderCard.width}
+          height={finderCard.height}
+          cta={finderCard.cta}
+        />
+      </div>
+
+      <div class="botmatch__detail">
+        <ol class="botmatch__steps">
+          <li>
+            <span class="botmatch__step">01</span>
+            <h3>It asks about your space, not about models</h3>
+            <p>Size, shape, surface, and what you are tired of doing yourself. No model numbers and no jargon, whichever robot world you are in.</p>
+          </li>
+          <li>
+            <span class="botmatch__step">02</span>
+            <h3>It rules machines out before it ranks them</h3>
+            <p>A machine rated below what your space needs is excluded outright, not quietly ranked lower. Where a maker publishes nothing, that reads as unknown — never as unsuitable.</p>
+          </li>
+          <li>
+            <span class="botmatch__step">03</span>
+            <h3>You get a result you can check</h3>
+            <p>Every recommendation shows what it was matched on, so you can disagree with it. We email the result and keep it on a page you can return to.</p>
+          </li>
+        </ol>
+
+        <p class="botmatch__note">
+          <strong>Every robot category has its own matcher,</strong> with questions and scoring built around the job it needs to do.
+        </p>
+
+        <p class="botmatch__integrity">
+          What BotMatch cannot see is what we earn. Commission is not available to the part of the system that chooses your robot — that is enforced in the code, not promised in a policy.
+        </p>
+
+        {/* THE BUTTONS WERE THE WRONG WAY ROUND, AND THE SECOND ONE WAS STALE.
+            The primary sent a reader who had just been told what BotMatch does
+            to a page explaining what BotMatch does; the quiet one offered the
+            POOL matcher only, which was right while BotMatch was nine separate
+            funnels and wrong from the day it started asking for the job first.
+            Starting it is the action this section is for. */}
+        <div class="botmatch__actions">
+          <a class="btn btn--primary btn--lg" href="/botmatch/">Start — say what you need done</a>
+          <a class="btn btn--quiet btn--lg" href="/how-botmatch-works/">How BotMatch works</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* THE FIVE CATEGORY FEATURE PANELS AND THE REVIEW LIST WERE HERE — owner
+      decision, 12 August 2026, on seeing the homepage on a phone.
+
+      Both were duplication of the directory above. The five panels advertised
+      five of the nine categories the grid had already shown, one full screen
+      each, so a phone reader met pool twice before reaching anything new. The
+      review list printed all sixty-three model names, which on a narrow screen
+      is a wall between the directory and the footer.
+
+      What they were solving is real and has to be solved somewhere else: those
+      sixty-three reviews still need internal links from a page with authority,
+      or they sit two clicks from the front door with nothing pointing at them.
+      The category hubs are the right place — each already lists its own
+      reviews — so the homepage links to nine hubs and the hubs link to the
+      work, instead of the homepage trying to do both jobs at once. */}
+
+
+  <section class="system">
+    <div class="wrap">
+      <div class="section-intro section-intro--compact">
+        <p class="kicker">THE BOTPLANET STANDARD</p>
+        <h2>Built to separate robotics from marketing.</h2>
+      </div>
+      <div class="system-grid">
+        <article><span>01</span><h3>Exact product identity</h3><p>No sibling models, regional variants or accessories silently mixed together.</p></article>
+        <article><span>02</span><h3>Evidence behind claims</h3><p>Specifications, limitations and conflicts remain tied to their sources.</p></article>
+        <article><span>03</span><h3>Current commercial truth</h3><p>Retailer, stock, price and delivery data are dated instead of presented as permanent facts.</p></article>
+        <article><span>04</span><h3>Suitability before commission</h3><p>The right robot is chosen first. The purchase route is considered afterwards.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="close">
+    <div class="wrap close__inner">
+      <img src="/logo/botplanet-metal.svg" alt="BotPlanet" width="380" height="80" />
+      <p>The robotics market is expanding fast. BotPlanet is building the map.</p>
+      <a class="btn btn--primary btn--lg" href="#robot-worlds">Explore the planet</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  /* The artwork now carries the height the hero used to get from a full
+     viewport of empty space, so the padding comes down and the call to action
+     stays above the fold instead of two scrolls beneath a headline. */
+  .hero { display: grid; align-items: center; padding: clamp(14px, 2vw, 30px) 0 clamp(48px, 6vw, 84px); overflow: hidden; position: relative; }
+  .hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 75% 44%, rgba(219,224,230,.11), transparent 24rem); pointer-events: none; }
+  /* One column, artwork first to the eye and the H1 first in the source. The
+     picture carries the brand and the whole range in one frame; putting it
+     beside the copy at half width would shrink every robot into a thumbnail. */
+  /* Stacked by default — on a phone the artwork leads and the copy follows.
+     Two columns from 1100px, where a 16:9 frame beside the copy still reads at
+     full composition AND leaves the buttons above the fold. A full-width
+     picture on a laptop is a whole viewport of image and nothing to click. */
+  .hero__grid { display: grid; grid-template-columns: 1fr; max-width: 1440px; gap: clamp(26px, 4vw, 44px); justify-items: center; text-align: center; }
+  .hero__copy { max-width: 62rem; }
+  @media (min-width: 1100px) {
+    .hero__grid { grid-template-columns: minmax(0, 1.18fr) minmax(0, 0.82fr); gap: clamp(32px, 4vw, 56px); align-items: center; justify-items: stretch; text-align: left; }
+    .hero__art { order: 0; }
+    /* Three lines, not five: the column is narrower than a full-width hero
+       and a headline that stacks into a ladder stops reading as a sentence. */
+    .hero__copy h1 { font-size: clamp(32px, 2.7vw, 43px); }
+    .hero__lede { margin-left: 0; margin-right: 0; font-size: 17px; }
+    .hero__actions { justify-content: flex-start; }
+  }
+  .hero__art {
+    order: -1;
+    width: 100%;
+    margin: 0;
+    border: 1px solid rgba(206, 214, 228, 0.22);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.07), 0 30px 70px rgba(0,0,0,.55);
+  }
+  .hero__art img { display: block; width: 100%; height: auto; }
+  .hero__more { display: inline-flex; align-items: center; align-self: center; margin-left: 6px; color: var(--text-tertiary); font-size: 14px; text-decoration: none; }
+  .hero__more:hover { color: #f3f5f7; text-decoration: underline; }
+  .hero__marker,.kicker { color: #aeb4bc; font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: .18em; margin: 0 0 14px; }
+  h1 { max-width: 980px; margin: 0 auto; font-size: clamp(50px,7.2vw,94px); line-height: .98; letter-spacing: -.055em; }
+  /* Smaller than a text-only hero would need: the picture above it is doing
+     the shouting, and a headline that fills the screen buries the buttons. */
+  .hero__copy h1 { font-size: clamp(34px, 4.4vw, 58px); line-height: 1.04; letter-spacing: -.04em; }
+  h1 span { color: #9ba2ac; }
+  .hero__lede { max-width: 700px; margin: 20px auto 0; color: var(--text-secondary); font-size: clamp(18px,2vw,22px); line-height: 1.55; }
+  .hero__actions { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 14px; margin-top: 26px; }
+  /* ---------- BotMatch ---------- */
+  /* Its own band rather than a button. The tool was previously asked for twice
+     in the first screen and explained nowhere, which is the wrong way round:
+     nobody presses "find my robot" before they know what it does. */
+  .botmatch {
+    padding: clamp(64px, 8vw, 110px) 0;
+    border-top: 1px solid rgba(210,216,224,.12);
+    background:
+      radial-gradient(ellipse at 12% 0%, rgba(226,232,244,.055), transparent 58%),
+      linear-gradient(180deg, #0c1015 0%, #080a0d 100%);
+  }
+  /* One column on a phone, and the DOM order is the reading order: what it
+     is, what it looks like, how it works, then the button. */
+  .botmatch__grid { display: grid; grid-template-columns: 1fr; gap: clamp(28px, 4vw, 44px); align-items: start; }
+  .botmatch__intro, .botmatch__detail { max-width: 62rem; min-width: 0; }
+  .botmatch h2 { margin: 0; max-width: 20ch; font-size: clamp(32px,4vw,50px); letter-spacing: -.04em; line-height: 1.06; }
+  .botmatch .large { margin: 22px 0 0; max-width: 60ch; }
+
+  .botmatch__steps { list-style: none; margin: 34px 0 0; padding: 0; display: grid; gap: 18px; }
+  .botmatch__steps li {
+    position: relative;
+    padding: 18px 20px 18px 62px;
+    border: 1px solid rgba(200,208,222,.14);
+    border-radius: 14px;
+    background: linear-gradient(180deg, rgba(255,255,255,.022), rgba(255,255,255,0));
+  }
+  .botmatch__step {
+    position: absolute; left: 20px; top: 19px;
+    font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: .16em;
+    color: #0a0d11; background: linear-gradient(135deg,#f6f8fc 0%,#cfd6e2 38%,#8a92a1 72%,#dfe4ec 100%);
+    padding: 3px 7px; border-radius: 5px;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.8);
+  }
+  .botmatch__steps h3 { margin: 0 0 6px; font-size: 17px; letter-spacing: -.01em; color: #f1f3f6; }
+  .botmatch__steps p { margin: 0; font-size: 15px; line-height: 1.6; color: var(--text-secondary); }
+
+  /* The one claim here worth setting apart, because it is the reason to trust
+     the answer rather than a feature of it. */
+  .botmatch__integrity {
+    max-width: 72ch;
+    margin: 26px auto 0;
+    padding: 0;
+    border-left: 0;
+    text-align: center;
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--text-tertiary);
+  }
+
+  .botmatch__actions { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 16px; margin-top: 30px; }
+  .botmatch__note { margin: 20px auto 0; text-align: center; font-size: 13.5px; line-height: 1.6; color: var(--text-tertiary); max-width: 62ch; }
+  /* This line used to be a correction — the artwork drew six routes into the
+     matcher and five of them did not exist. Every live category has one now,
+     so the line states the count rather than apologising for it, and it stays
+     undimmed because it is the fact the picture is making a claim about. */
+  .botmatch__note strong { color: #eef0f3; font-weight: 600; }
+
+  .botmatch__art {
+    margin: 0;
+    border: 1px solid rgba(206,214,228,.2);
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.06), 0 26px 60px rgba(0,0,0,.5);
+  }
+  .botmatch__art img { display: block; width: 100%; height: auto; }
+
+  @media (min-width: 1000px) {
+    /* Intro beside the artwork on the top row, then the detail runs the full
+       width beneath both. The artwork used to hold a column of its own down
+       the whole section, which left a tall empty gap beside the steps. */
+    .botmatch__grid:has(.botmatch__art) {
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr);
+      grid-template-areas: "intro art" "detail detail";
+      column-gap: clamp(32px, 5vw, 56px);
+      align-items: center;
+    }
+    .botmatch__grid:has(.botmatch__art) .botmatch__intro  { grid-area: intro; }
+    .botmatch__grid:has(.botmatch__art) .botmatch__detail { grid-area: detail; }
+    .botmatch__grid:has(.botmatch__art) .botmatch__art    { grid-area: art; }
+
+    /* Three steps across, so the row reads as one sequence rather than a tall
+       stack down one side of the plate. */
+    .botmatch__steps { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    .botmatch__note, .botmatch__integrity { max-width: 68ch; }
+  }
+
+  /* ---------- Reviews ---------- */
+
+  .worlds,.system { padding: var(--section-gap) 0; background: linear-gradient(180deg,rgba(255,255,255,.025),transparent); border-top: 1px solid rgba(210,216,224,.1); }
+  /* Three across on a desktop, two on a tablet, one on a phone. Nine tiles
+     divide evenly by three, which is the whole reason for the column count. */
+  .worlds__grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; }
+  .worlds__grid > li { display: flex; }
+  /* The card's own padding is overridden: the picture goes edge to edge and
+     the copy carries the inset, which is what stops a photograph floating in
+     a box inside a box. */
+  .worlds__grid .worlds__card { display: flex; flex-direction: column; width: 100%; padding: 0; overflow: hidden; text-decoration: none; }
+  .worlds__img {
+    display: block; width: 100%; aspect-ratio: 3 / 2; object-fit: cover; object-position: center;
+    border-bottom: 1px solid rgba(200,208,222,.14);
+  }
+  /* The plate for a category with no artwork yet. Deliberately empty: it holds
+     the grid's rhythm without pretending to be a photograph of anything. */
+  .worlds__img--none { background: linear-gradient(158deg, #191d23 0%, #0d1015 58%, #101419 100%); }
+  .worlds__text { display: flex; flex-direction: column; flex: 1; padding: 16px 18px 18px; }
+  .worlds__code { font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: .16em; color: var(--text-tertiary); }
+  .worlds__name { margin: 10px 0 0; font-family: var(--font-display); font-size: 19px; letter-spacing: -.02em; line-height: 1.25; color: #f1f3f6; }
+  .worlds__body { margin: 9px 0 0; font-size: 14px; line-height: 1.55; color: var(--text-secondary); }
+  /* Pushed to the bottom so the job-to-be-done lines up across a row whose
+     descriptions run to different lengths. */
+  .worlds__jtbd { margin-top: auto; padding-top: 14px; font-size: 13px; color: var(--text-tertiary); }
+  @media (max-width: 900px) { .worlds__grid { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+  @media (max-width: 520px) { .worlds__grid { grid-template-columns: 1fr; } }
+  .section-intro { max-width: 820px; margin-bottom: 46px; }.section-intro--compact { margin-bottom: 30px; }
+  .section-intro h2,.system h2 { margin: 0; font-size: clamp(38px,5vw,64px); letter-spacing: -.045em; }
+  .section-intro > p:last-child { color: var(--text-secondary); font-size: 19px; line-height: 1.65; }
+  /* ============================================================
+     Every homepage section is a metallic plate, so one band ends and
+     the next visibly begins. Same hairline, radius and shadow the
+     category pages use, so the site reads as one set of parts.
+     The feature sections build their own — see CategoryFeature.astro.
+     ============================================================ */
+  .worlds > .wrap,
+  .botmatch > .wrap,
+  .system > .wrap,
+  .close > .wrap {
+    position: relative;
+    isolation: isolate;
+    padding: clamp(1.6rem, 4vw, 3rem);
+    border: 1px solid var(--cs-line, rgba(200,208,222,.2));
+    border-radius: 22px;
+    background:
+      radial-gradient(ellipse at 10% -20%, rgba(226,232,244,.05), transparent 60%),
+      linear-gradient(178deg, #11151b 0%, #0a0d11 62%, #0d1116 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.06),
+      0 26px 60px rgba(0,0,0,.5);
+  }
+
+  .worlds > .wrap::before,
+  .botmatch > .wrap::before,
+  .system > .wrap::before,
+  .close > .wrap::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 1px;
+    border-radius: 22px 22px 0 0;
+    background: linear-gradient(90deg, transparent, rgba(246,248,252,.32) 24%, rgba(246,248,252,.55) 50%, rgba(246,248,252,.3) 76%, transparent);
+    pointer-events: none;
+  }
+
+  /* The plates carry the separation now, so the bands drop their own rules
+     and backgrounds — two frames around the same content reads as a mistake. */
+  .worlds, .system { border-top: 0; background: none; padding: clamp(1.1rem,2.4vw,2rem) 0; }
+  .botmatch { border-top: 0; background: none; padding: clamp(1.1rem,2.4vw,2rem) 0; }
+  .close { padding: clamp(1.1rem,2.4vw,2rem) 0 clamp(3rem,6vw,5rem); }
+
+  /* The category feature sections style themselves — see CategoryFeature.astro. */
+  .text-link { color: #c8cdd4; text-align: center; text-decoration: none; font-weight: 700; }
+  .system-grid { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 14px; }
+  .system-grid article { padding: 25px; background: #090c0f; border: 1px solid rgba(207,213,220,.13); border-radius: 16px; }
+  .system-grid span { color: #747b85; font: 700 12px/1 var(--font-mono); }.system-grid h3 { margin: 34px 0 12px; }.system-grid p { color: var(--text-secondary); line-height: 1.55; }
+  .close { padding: clamp(70px,10vw,140px) 0; }.close__inner { text-align: center; }.close img { width: min(520px,82vw); height: auto; }.close p { margin: 20px auto 30px; color: var(--text-secondary); font-size: 20px; }
+  @media(max-width:960px){.system-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:620px){.hero{min-height:auto;padding:48px 0 70px}.hero__grid{gap:26px}h1{font-size:40px}.system-grid{grid-template-columns:1fr}.section-intro h2,.system h2{font-size:40px}}
+
+</style>

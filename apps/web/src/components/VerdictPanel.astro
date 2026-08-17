@@ -1,0 +1,141 @@
+---
+/* ============================================================
+   BotPlanet — Verdict section (section head + verdict panel)
+
+   A seventh element type: one framed answer to the big question
+   the category attracts, with the honest counterweight beneath
+   it.
+
+   Deliberately short. The full argument belongs on the dedicated
+   guide; this is the category-level answer someone deserves
+   without leaving the page.
+   ============================================================ */
+
+import SectionHead from "./SectionHead.astro";
+
+interface Props {
+  id?: string;
+  eyebrow?: string;
+  title: string;
+  intro: string;
+  /* Passed straight to SectionHead so the hub prose can carry a product
+     link. See the note there. */
+  linkCategory?: string;
+  /** The short answer, set large. One or two sentences. */
+  verdict: string;
+  /** The reasoning. 120–180 words. */
+  body: string;
+  /** When it genuinely is not worth it. Never omitted. */
+  againstLabel?: string;
+  against: string;
+}
+
+const {
+  id, eyebrow, title, intro, verdict, body,
+  againstLabel = "When it is not worth it", against, linkCategory } = Astro.props;
+---
+
+<section class="bp-verdict" id={id}>
+  <SectionHead eyebrow={eyebrow} title={title} intro={intro} linkCategory={linkCategory} />
+
+  <div class="bp-verdict__panel">
+    <p class="bp-verdict__lead">{verdict}</p>
+    <p class="bp-verdict__body">{body}</p>
+
+    <div class="bp-verdict__against">
+      <span class="bp-verdict__against-label">{againstLabel}</span>
+      <p class="bp-verdict__against-text">{against}</p>
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  .bp-verdict {
+    /* Outer spacing, padding, border and background come from the section
+       plate rule in metal-theme.css, so every section shares one rhythm. */
+  }
+
+  .bp-verdict__panel {
+    position: relative;
+    padding: clamp(1.6rem, 4vw, 2.6rem);
+    border: 1px solid var(--cs-line);
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--cs-surface-lift);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.06),
+      0 22px 34px rgba(0, 0, 0, 0.46);
+  }
+
+  .bp-verdict__panel::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(246, 248, 252, 0.5) 26%,
+      rgba(246, 248, 252, 0.72) 50%,
+      rgba(246, 248, 252, 0.42) 74%,
+      transparent
+    );
+  }
+
+  /* the short answer, set as the thing the eye lands on */
+  .bp-verdict__lead {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.3rem, 3.4vw, 1.75rem);
+    line-height: 1.26;
+    letter-spacing: -0.016em;
+    text-wrap: balance;
+    background: linear-gradient(174deg, #ffffff 6%, #e6e9ed 46%, #a8b0bc 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .bp-verdict__body {
+    margin: 1.25rem 0 0;
+    font-size: 1.0625rem;
+    line-height: 1.68;
+    color: var(--text-secondary);
+  }
+
+  /* the counterweight — always shown, never buried */
+  .bp-verdict__against {
+    margin-top: clamp(1.5rem, 3.5vw, 2rem);
+    padding: 1.15rem 1.3rem;
+    border: 1px solid var(--cs-line-soft);
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.28);
+  }
+
+  .bp-verdict__against-label {
+    display: block;
+    margin-bottom: 0.42rem;
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    background: var(--cs-sheen);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .bp-verdict__against-text {
+    margin: 0;
+    font-size: 0.96rem;
+    line-height: 1.62;
+    color: var(--cs-mid);
+  }
+
+  @media (min-width: 860px) {
+    .bp-verdict__body { font-size: 1.1rem; max-width: 68ch; }
+    .bp-verdict__against-text { max-width: 68ch; }
+  }
+</style>

@@ -1,0 +1,108 @@
+---
+/* TEMPORARY preview of the review article template. Prerendered,
+   noindex, not linked. Delete once the template is signed off.
+
+   The real review lives on the DB-backed product page — Notion's
+   rule is one canonical page per model — so this preview exists
+   only to show the layout without a database.
+
+   IT RENDERS <ReviewArticle>, NOT A COPY OF IT.
+
+   The first version of this file reimplemented the template: its
+   own component order, its own 90 lines of .bp-prose CSS. Within a
+   week the real page had a snapshot panel, a video section, buy
+   strips, folded sections and internal links, and this page had
+   none of them — while still being the page anyone opened to check
+   what the template looked like. A preview that can disagree with
+   the thing it previews is worse than no preview.
+
+   So: one component, the same one the product page mounts, fed
+   from the committed offer snapshot and the repo catalogue. If the
+   template changes, this changes with it or it does not build.
+   ============================================================ */
+export const prerender = true;
+
+import ReviewArticle from "../../components/ReviewArticle.astro";
+import { reviewFor } from "../../content/reviews";
+import { buildOffers, publicationFor } from "../../lib/offer-truth";
+import { retailer } from "../../content/commerce/registry";
+import { usd, freshnessLabel } from "../../lib/format";
+import { PRODUCT_ID } from "../../content/products";
+/* Reached by path rather than through the package's exports map on purpose.
+   This page is temporary; widening @botplanet/db's public surface so a preview
+   can read the seed would outlive it. */
+import { productRows } from "../../../../../packages/db/seed/pool/catalogue";
+import { compiledContent } from "../../reviews/dolphin-nautilus-cc-plus.md";
+import { deliveryLine, deliveryNote } from "../../lib/delivery-wording";
+
+const TODAY = new Date().toISOString().slice(0, 10);
+
+import "../../styles/tokens.css";
+import "../../styles/base.css";
+import "../../styles/layout.css";
+import "../../styles/depth.css";
+import "../../styles/components.css";
+import "../../styles/metal-theme.css";
+
+const SLUG = "dolphin-nautilus-cc-plus";
+const review = reviewFor(SLUG)!;
+const productId = PRODUCT_ID[SLUG];
+
+/* Async in Astro 5 — the product page learned that the hard way, by shipping
+   a page that stopped after the breadcrumbs. */
+const html = await compiledContent();
+
+/* The committed snapshot, with no live D1 row to beat it. Same publication
+   gates as production, so an offer too stale to show on the real page is too
+   stale to show here. Nothing is invented for the preview. */
+const offers = buildOffers(new Date(), { live: [] })
+  .filter((o) => o.productId === productId)
+  .map((o) => ({ offer: o, pub: publicationFor(o) }))
+  .filter((x) => x.pub.showable)
+  .map(({ offer, pub }) => ({
+    retailerName: retailer(offer.retailerId)?.name ?? offer.retailerId,
+    sellerIdentity: offer.sellerIdentity ?? null,
+    price: pub.showPrice && offer.priceCents != null ? usd(offer.priceCents) : null,
+    checkedDate: offer.checkedAt ? freshnessLabel(offer.checkedAt) : null,
+    stock: offer.availability ?? null,
+    shipping: deliveryLine(offer.deliveryNote, offer.checkedAt ?? null, TODAY),
+    shippingNote: deliveryNote(offer.deliveryNote, offer.checkedAt ?? null, TODAY),
+    redirectKey: pub.showLink ? offer.redirectKey ?? null : null,
+    primary: offer.primary ?? false,
+  }));
+
+/* Catalogue facts only, read from the committed seed — which is the same data
+   the D1 rows were loaded from, so the alternatives shown here are the ones
+   the live page shows. findAlternatives still cannot see a price: the shape
+   passed in has no field for one. */
+const siblings = productRows
+  .filter((p) => p.categoryId === "cat-pool-cleaners" && p.status === "published")
+  .map((p) => ({
+    id: p.id!,
+    slug: p.slug!,
+    name: p.name!,
+    cleans: (p.cleans as string[]) ?? [],
+    powerType: p.powerType ?? null,
+    maxPoolLengthFt: p.maxPoolLengthFt ?? null,
+  }));
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>{review.seoTitle}</title>
+  </head>
+  <body>
+    <main class="wrap" style="padding-top:2.5rem;padding-bottom:5rem;">
+      <ReviewArticle
+        review={review}
+        html={html}
+        productName="Dolphin Nautilus CC Plus Wi-Fi"
+        offers={offers}
+        siblings={siblings}
+      />
+    </main>
+  </body>
+</html>

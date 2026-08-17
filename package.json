@@ -1,0 +1,40 @@
+{
+  "name": "botplanet",
+  "version": "0.0.0",
+  "private": true,
+  "description": "BotPlanet \u2014 global robot shopping & recommendation platform (US-first). Foundation: data model, migrations, deterministic BotMatch scoring. No frontend yet.",
+  "type": "module",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsc --build",
+    "typecheck": "tsc --build --pretty",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "db:generate": "cd packages/db && drizzle-kit generate",
+    "gen:media-mapping": "tsx scripts/gen-media-mapping.ts",
+    "gen:derivatives": "node scripts/gen-derivatives.mjs",
+    "ext": "node scripts/extension-points.mjs",
+    "ext:write": "node scripts/extension-points.mjs --write",
+    "audit:links": "node scripts/audit-links.mjs",
+    "audit:seo": "node scripts/audit-seo.mjs",
+    "audit:matchers": "node scripts/audit-matchers.mjs",
+    "audit:weight": "node scripts/audit-weight.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "drizzle-kit": "^0.30.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.0",
+    "vitest": "^2.1.0"
+  },
+  "dependencies": {
+    "drizzle-orm": "^0.38.0",
+    "zod": "^3.24.0"
+  }
+}

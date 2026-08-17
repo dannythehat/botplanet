@@ -1,0 +1,53 @@
+---
+// Original BotPlanet branded category hero artwork (robotic pool cleaners).
+// Abstract brand illustration — deliberately NOT a photo of any product.
+interface Props { class?: string; }
+const { class: cls = "" } = Astro.props;
+---
+<svg class={cls} viewBox="0 0 1120 420" width="100%" role="img" aria-label="BotPlanet robotic pool cleaners — a stylised robot gliding across a moonlit pool under a starfield." preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <radialGradient id="chGlow" cx="78%" cy="6%" r="80%">
+      <stop offset="0%" stop-color="#5a6ebe" stop-opacity="0.30"/>
+      <stop offset="60%" stop-color="#141a30" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#050507" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="chWater" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1c4a5f"/>
+      <stop offset="100%" stop-color="#0b1f2b"/>
+    </linearGradient>
+    <linearGradient id="chSheen" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#4fd1c5" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#4fd1c5" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#4fd1c5" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="1120" height="420" fill="#050507"/>
+  <rect width="1120" height="420" fill="url(#chGlow)"/>
+  <g fill="#ffffff">
+    <circle cx="120" cy="70" r="1.4" opacity="0.5"/><circle cx="300" cy="120" r="1" opacity="0.35"/>
+    <circle cx="520" cy="60" r="1.2" opacity="0.45"/><circle cx="820" cy="90" r="1" opacity="0.3"/>
+    <circle cx="980" cy="150" r="1.5" opacity="0.5"/><circle cx="700" cy="40" r="1" opacity="0.3"/>
+    <circle cx="1040" cy="60" r="1.1" opacity="0.4"/><circle cx="200" cy="180" r="1" opacity="0.3"/>
+  </g>
+  <!-- pool basin -->
+  <g transform="translate(0,150)">
+    <path d="M0 60 Q 560 -10 1120 60 L1120 270 L0 270 Z" fill="url(#chWater)"/>
+    <path d="M0 60 Q 560 -10 1120 60" fill="none" stroke="#4fd1c5" stroke-width="2" opacity="0.6"/>
+    <!-- caustic sheen lines -->
+    <path d="M120 120 Q 400 100 720 130" fill="none" stroke="url(#chSheen)" stroke-width="3"/>
+    <path d="M300 175 Q 640 150 980 185" fill="none" stroke="url(#chSheen)" stroke-width="2" opacity="0.7"/>
+    <!-- robot silhouette gliding -->
+    <g transform="translate(690,150)">
+      <ellipse cx="0" cy="60" rx="120" ry="18" fill="#000000" opacity="0.28"/>
+      <rect x="-70" y="0" width="140" height="58" rx="20" fill="#2a3358" stroke="#4fd1c5" stroke-width="2"/>
+      <rect x="-70" y="0" width="140" height="20" rx="12" fill="#39456f"/>
+      <circle cx="-40" cy="58" r="14" fill="#12141f" stroke="#4a557c" stroke-width="3"/>
+      <circle cx="40" cy="58" r="14" fill="#12141f" stroke="#4a557c" stroke-width="3"/>
+      <circle cx="0" cy="24" r="9" fill="#4fd1c5" opacity="0.9"/>
+      <path d="M-70 30 Q -140 20 -180 -20" fill="none" stroke="#7c93ff" stroke-width="2.5" opacity="0.7"/>
+    </g>
+  </g>
+</svg>
+<style>
+  svg { display: block; border-radius: 20px; }
+</style>

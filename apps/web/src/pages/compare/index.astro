@@ -1,0 +1,43 @@
+---
+/** Compare landing — routes into each live category's comparison builder. */
+import Base from "../../layouts/Base.astro";
+import { CATEGORIES, categoryRoutes } from "../../content/routes";
+import { breadcrumbsFor } from "../../lib/routing";
+
+const live = CATEGORIES.filter((c) => c.launch === "live").sort((a, b) => a.order - b.order);
+const soon = CATEGORIES.filter((c) => c.launch === "coming_soon").sort((a, b) => a.order - b.order);
+const crumbs = breadcrumbsFor("/compare/");
+---
+<Base
+  title="Compare robots — head to head"
+  description="Compare real-world robots side by side on BotPlanet, with the winner explained by use case rather than by commission."
+  breadcrumbs={crumbs}
+>
+  <div class="section-head">
+    <span class="rule-accent" aria-hidden="true"></span>
+    <span class="eyebrow">Compare</span>
+    <h1 class="mt-0">Compare robots</h1>
+    <p>Pick a category to compare products side by side. Winners are chosen on suitability, never on commission.</p>
+  </div>
+
+  <div class="grid grid--2">
+    {live.map((c) => (
+      <a class="card card--interactive" href={categoryRoutes(c.slug).compare}>
+        <span class="pill pill--strong">Live</span>
+        <h2 class="c-title">{c.name}</h2>
+        <p>Compare every {c.name.toLowerCase()} we cover, filtered by pool type, power and coverage.</p>
+      </a>
+    ))}
+    {soon.map((c) => (
+      <div class="card is-soon">
+        <span class="pill pill--warn">Coming soon</span>
+        <h2 class="c-title">{c.name}</h2>
+        <p>{c.short}</p>
+      </div>
+    ))}
+  </div>
+</Base>
+<style>
+  .c-title { font-size: var(--type-card); margin: 0; }
+  .card.is-soon { opacity: 0.72; }
+</style>

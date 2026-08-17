@@ -1,0 +1,186 @@
+{
+  "category": "window-cleaning-robots",
+  "hardCapUsd": 2,
+  "totalCostUsd": 0.2044,
+  "batches": [
+    {
+      "label": "search_volume",
+      "path": "/keywords_data/google_ads/search_volume/live",
+      "tasks": 1,
+      "cost": 0.09,
+      "runningTotal": 0.09
+    },
+    {
+      "label": "bulk_kd",
+      "path": "/dataforseo_labs/google/bulk_keyword_difficulty/live",
+      "tasks": 1,
+      "cost": 0.02532,
+      "runningTotal": 0.11532
+    },
+    {
+      "label": "related_keywords(batch)",
+      "path": "/dataforseo_labs/google/related_keywords/live",
+      "tasks": 13,
+      "cost": 0.01308,
+      "runningTotal": 0.1284
+    },
+    {
+      "label": "serp:window cleaning robot",
+      "path": "/serp/google/organic/live/advanced",
+      "tasks": 1,
+      "cost": 0.004,
+      "runningTotal": 0.1324
+    },
+    {
+      "label": "serp:best window cleaning robot",
+      "path": "/serp/google/organic/live/advanced",
+      "tasks": 1,
+      "cost": 0.004,
+      "runningTotal": 0.1364
+    },
+    {
+      "label": "serp:best robot window cleaner",
+      "path": "/serp/google/organic/live/advanced",
+      "tasks": 1,
+      "cost": 0.004,
+      "runningTotal": 0.1404
+    },
+    {
+      "label": "serp:best window cleaning robot for high rise",
+      "path": "/serp/google/organic/live/advanced",
+      "tasks": 1,
+      "cost": 0.004,
+      "runningTotal": 0.1444
+    },
+    {
+      "label": "serp:best budget window cleaning robot",
+      "path": "/serp/google/organic/live/advanced",
+      "tasks": 1,
+      "cost": 0.004,
+      "runningTotal": 0.1484
+    },
+    {
+      "label": "serp:best cordless window cleaning robot",
+      "path": "/serp/google/organic/live/advanced",
+      "tasks": 1,
+      "cost": 0.004,
+      "runningTotal": 0.1524
+    },
+    {
+      "label": "serp:best window cleaning robot for frameless glass",
+      "path": "/serp/google/organic/live/advanced",
+      "tasks": 1,
+      "cost": 0.004,
+      "runningTotal": 0.1564
+    },
+    {
+      "label": "serp:ecovacs winbot w2 pro omni review",
+      "path": "/serp/google/organic/live/advanced",
+      "tasks": 1,
+      "cost": 0.004,
+      "runningTotal": 0.1604
+    },
+    {
+      "label": "serp:ecovacs winbot w1 pro review",
+      "path": "/serp/google/organic/live/advanced",
+      "tasks": 1,
+      "cost": 0.004,
+      "runningTotal": 0.1644
+    },
+    {
+      "label": "serp:hobot s7 pro review",
+      "path": "/serp/google/organic/live/advanced",
+      "tasks": 1,
+      "cost": 0.004,
+      "runningTotal": 0.1684
+    },
+    {
+      "label": "serp:hobot 2s review",
+      "path": "/serp/google/organic/live/advanced",
+      "tasks": 1,
+      "cost": 0.004,
+      "runningTotal": 0.1724
+    },
+    {
+      "label": "serp:mamibot window cleaning robot review",
+      "path": "/serp/google/organic/live/advanced",
+      "tasks": 1,
+      "cost": 0.002,
+      "runningTotal": 0.1744
+    },
+    {
+      "label": "serp:winbot vs hobot window cleaner",
+      "path": "/serp/google/organic/live/advanced",
+      "tasks": 1,
+      "cost": 0.002,
+      "runningTotal": 0.1764
+    },
+    {
+      "label": "serp:hobot s7 pro vs winbot w2 pro",
+      "path": "/serp/google/organic/live/advanced",
+      "tasks": 1,
+      "cost": 0.004,
+      "runningTotal": 0.1804
+    },
+    {
+      "label": "serp:do window cleaning robots work",
+      "path": "/serp/google/organic/live/advanced",
+      "tasks": 1,
+      "cost": 0.004,
+      "runningTotal": 0.1844
+    },
+    {
+      "label": "serp:are window cleaning robots worth it",
+      "path": "/serp/google/organic/live/advanced",
+      "tasks": 1,
+      "cost": 0.004,
+      "runningTotal": 0.1884
+    },
+    {
+      "label": "serp:can window cleaning robots fall",
+      "path": "/serp/google/organic/live/advanced",
+      "tasks": 1,
+      "cost": 0.002,
+      "runningTotal": 0.1904
+    },
+    {
+      "label": "serp:do window cleaning robots work on frameless windows",
+      "path": "/serp/google/organic/live/advanced",
+      "tasks": 1,
+      "cost": 0.002,
+      "runningTotal": 0.1924
+    },
+    {
+      "label": "serp:do window cleaning robots leave streaks",
+      "path": "/serp/google/organic/live/advanced",
+      "tasks": 1,
+      "cost": 0.002,
+      "runningTotal": 0.1944
+    },
+    {
+      "label": "serp:which window cleaning robot should i buy",
+      "path": "/serp/google/organic/live/advanced",
+      "tasks": 1,
+      "cost": 0.002,
+      "runningTotal": 0.1964
+    },
+    {
+      "label": "serp:how do window cleaning robots work",
+      "path": "/serp/google/organic/live/advanced",
+      "tasks": 1,
+      "cost": 0.004,
+      "runningTotal": 0.2004
+    },
+    {
+      "label": "serp:window cleaning robot comparison",
+      "path": "/serp/google/organic/live/advanced",
+      "tasks": 1,
+      "cost": 0.004,
+      "runningTotal": 0.2044
+    }
+  ],
+  "runId": 30981257806,
+  "completed": "2026-08-05T06:34:23Z",
+  "seedFile": "docs/seo/seeds/window-cleaning-robots.json",
+  "findings": "docs/seo/window-cleaning-robots-research-findings.md"
+}

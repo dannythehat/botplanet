@@ -1,0 +1,1421 @@
+{
+  "generatedFor": "2026-07-31",
+  "launchProducts": 12,
+  "fieldsInRegistry": 31,
+  "totals": {
+    "fieldRecords": 372,
+    "evidenceRecords": 201,
+    "stateCounts": {
+      "populated": 195,
+      "unknown": 28,
+      "not_applicable": 31,
+      "not_publicly_stated": 95,
+      "conflicting": 1,
+      "suppressed": 19,
+      "pending_verification": 3
+    },
+    "reconciliation": {
+      "agrees": 45,
+      "agrees_rounded": 4,
+      "agrees_with_unverified_detail": 8,
+      "derived_from_range": 1,
+      "conflicts": 2,
+      "unsupported": 16,
+      "newly_populated": 1,
+      "not_applicable": 11
+    },
+    "rawPercent": 57,
+    "weightedPercent": 65,
+    "conflicts": 3,
+    "unresolvedConflicts": 1
+  },
+  "rows": [
+    {
+      "productId": "prod-wybot-c1",
+      "slug": "wybot-c1",
+      "url": "https://botplanet.io/robots/robotic-pool-cleaners/wybot-c1/",
+      "path": "/robots/robotic-pool-cleaners/wybot-c1/",
+      "canonicalName": "WYBOT C1 Cordless Robotic Pool Cleaner",
+      "brand": "WYBOT",
+      "modelNumber": "OS7010C",
+      "officialProductPage": "https://www.wybotpool.com/products/wybot-c1-cordless-robotic-pool-cleaner",
+      "manualUrl": null,
+      "manualDocumentId": null,
+      "manualRevision": null,
+      "modelIdentityNote": "WYBOT sells C1, C1 Pro and C1 Max as separate models with separate manuals, and wybotpool.com publishes no model number for any of them. The model number here comes from the Amazon listing's details table, machine-read on 4 August 2026 — until that read, the C1 could not be told apart from its siblings by SKU at all, which is why one earlier candidate titled 'C1' turned out to be a C1 PLUS.",
+      "verificationDate": "2026-07-31",
+      "sourcesUsed": 2,
+      "sourcesUnreadable": [
+        "https://www.amazon.com/WYBOT-Pool-Vacuum-Inground-Navigation/dp/B0G64JV6K4",
+        "https://www.wybotpool.com/pages/user-manual"
+      ],
+      "completenessRawPercent": 64,
+      "completenessWeightedPercent": 75,
+      "fieldsApplicable": 28,
+      "fieldsPublishable": 18,
+      "weightApplicable": 102,
+      "weightPublishable": 77,
+      "fieldStates": {
+        "populated": 18,
+        "unknown": 0,
+        "not_applicable": 3,
+        "not_publicly_stated": 10,
+        "conflicting": 0,
+        "suppressed": 0,
+        "pending_verification": 0
+      },
+      "fieldsNotPubliclyStated": [
+        "manualUrl",
+        "batteryCapacity",
+        "maxDepthFt",
+        "minDepthFt",
+        "surfaceTypes",
+        "filterCapacityL",
+        "dimensions",
+        "includedAccessories",
+        "wifi",
+        "remoteControl"
+      ],
+      "fieldsSuppressed": [],
+      "fieldsConflicting": [],
+      "conflicts": [],
+      "editorialCorrections": [
+        {
+          "field": "warranty",
+          "outcome": "agrees_with_unverified_detail",
+          "action": "Trim the unsourced wording; the headline value is verified. The 2-year term matches the official page. Unsourced wording: '30-day money-back' is a retailer return policy and is not stated by WYBOT on the product page."
+        },
+        {
+          "field": "appSupport",
+          "outcome": "agrees_with_unverified_detail",
+          "action": "Trim the unsourced wording; the headline value is verified. WYBOT App and OTA updates are both stated officially. Unsourced wording: 'weekly scheduling' is not stated on the official product page."
+        }
+      ],
+      "publicationStates": {
+        "structurallyValid": true,
+        "factuallyEvidenced": true,
+        "currentlyVerified": true,
+        "safeForLimitedFactualUse": true,
+        "readyForReviewWriting": true,
+        "readyForComparison": true,
+        "readyForBotMatch": true
+      },
+      "publicationBlockers": [],
+      "launchStatus": "launch_ready",
+      "reviewGates": [
+        {
+          "gate": "weighted_completeness",
+          "passed": true,
+          "detail": "weighted completeness 75% against a 65% floor"
+        },
+        {
+          "gate": "model_identity",
+          "passed": true,
+          "detail": "identified by https://www.wybotpool.com/products/wybot-c1-cordless-robotic-pool-cleaner, with a published model number, no manual accepted"
+        },
+        {
+          "gate": "no_material_conflict",
+          "passed": true,
+          "detail": "no unresolved conflict on a material review field"
+        },
+        {
+          "gate": "review_sections_writable",
+          "passed": true,
+          "detail": "every intended review section has the evidence it needs"
+        },
+        {
+          "gate": "no_speculation",
+          "passed": true,
+          "detail": "no review section rests on a suppressed value"
+        },
+        {
+          "gate": "corrections_identified",
+          "passed": true,
+          "detail": "every unsupported or conflicting stored value carries a written correction"
+        }
+      ],
+      "evidenceQualification": null,
+      "warrantyStatus": "confirmed",
+      "warrantyPublicWording": "WYBOT states a warranty of 2-year warranty.",
+      "claimsPublishable": 13,
+      "claimsBlocked": 3
+    },
+    {
+      "productId": "prod-dolphin-nautilus-cc-plus",
+      "slug": "dolphin-nautilus-cc-plus",
+      "url": "https://botplanet.io/robots/robotic-pool-cleaners/dolphin-nautilus-cc-plus/",
+      "path": "/robots/robotic-pool-cleaners/dolphin-nautilus-cc-plus/",
+      "canonicalName": "Dolphin Nautilus CC Plus w/Wi-Fi",
+      "brand": "Maytronics (Dolphin)",
+      "modelNumber": "99996409-PCI",
+      "officialProductPage": "https://www.maytronics.com/en-us/store/residential-pools/best-performance-cleaners/dolphin-nautilus-cc-plus-w%2Fwi-fi/99996409-PCI.html",
+      "manualUrl": "https://brand.maytronics.com/m/669381d55bca5c37/original/UM-8151830.pdf",
+      "manualDocumentId": "MBC8-UNI 8151830",
+      "manualRevision": null,
+      "modelIdentityNote": "Maytronics ships several near-identical Nautilus CC variants (CC, CC Plus, CC Plus w/Wi-Fi) under different part numbers. Only 99996409-PCI is recorded here; figures must not be carried across from the other CC models.",
+      "verificationDate": "2026-07-31",
+      "sourcesUsed": 2,
+      "sourcesUnreadable": [],
+      "completenessRawPercent": 72,
+      "completenessWeightedPercent": 82,
+      "fieldsApplicable": 29,
+      "fieldsPublishable": 21,
+      "weightApplicable": 104,
+      "weightPublishable": 85,
+      "fieldStates": {
+        "populated": 21,
+        "unknown": 0,
+        "not_applicable": 2,
+        "not_publicly_stated": 7,
+        "conflicting": 0,
+        "suppressed": 1,
+        "pending_verification": 0
+      },
+      "fieldsNotPubliclyStated": [
+        "manualRevisionDate",
+        "maxDepthFt",
+        "minDepthFt",
+        "surfaceTypes",
+        "filterCapacityL",
+        "suctionRate",
+        "remoteControl"
+      ],
+      "fieldsSuppressed": [
+        "cableLengthFt"
+      ],
+      "fieldsConflicting": [],
+      "conflicts": [
+        {
+          "field": "warranty",
+          "resolvedTo": "1 year",
+          "rule": "manufacturer source outranks the stored editorial value",
+          "suppressed": false
+        }
+      ],
+      "editorialCorrections": [
+        {
+          "field": "cableLengthFt",
+          "outcome": "unsupported",
+          "action": "Remove the stored value or find a source for it — nothing checked states it. Stored 60 ft. Neither the official US product page nor the linked platform manual states a cable length; the manual's '3.5 m (12 ft)' is a power-supply placement distance, not cable length. The stored figure is withheld."
+        },
+        {
+          "field": "navigation",
+          "outcome": "agrees_with_unverified_detail",
+          "action": "Trim the unsourced wording; the headline value is verified. CleverClean is stated officially. Unsourced wording: 'anti-tangle swivel cable' is not stated on the official US product page."
+        },
+        {
+          "field": "warranty",
+          "outcome": "conflicts",
+          "action": "Correct the stored value — the manufacturer source disagrees. Stored '2-year limited (varies by retailer)'. The official Maytronics US page for part 99996409-PCI states '1 year'. The manufacturer figure wins and the stored value is withheld."
+        }
+      ],
+      "publicationStates": {
+        "structurallyValid": true,
+        "factuallyEvidenced": true,
+        "currentlyVerified": true,
+        "safeForLimitedFactualUse": true,
+        "readyForReviewWriting": true,
+        "readyForComparison": true,
+        "readyForBotMatch": true
+      },
+      "publicationBlockers": [],
+      "launchStatus": "launch_ready",
+      "reviewGates": [
+        {
+          "gate": "weighted_completeness",
+          "passed": true,
+          "detail": "weighted completeness 82% against a 65% floor"
+        },
+        {
+          "gate": "model_identity",
+          "passed": true,
+          "detail": "identified by https://www.maytronics.com/en-us/store/residential-pools/best-performance-cleaners/dolphin-nautilus-cc-plus-w%2Fwi-fi/99996409-PCI.html, with a published model number, no manual accepted"
+        },
+        {
+          "gate": "no_material_conflict",
+          "passed": true,
+          "detail": "no unresolved conflict on a material review field"
+        },
+        {
+          "gate": "review_sections_writable",
+          "passed": true,
+          "detail": "every intended review section has the evidence it needs"
+        },
+        {
+          "gate": "no_speculation",
+          "passed": true,
+          "detail": "no review section rests on a suppressed value"
+        },
+        {
+          "gate": "corrections_identified",
+          "passed": true,
+          "detail": "every unsupported or conflicting stored value carries a written correction"
+        }
+      ],
+      "evidenceQualification": null,
+      "warrantyStatus": "confirmed",
+      "warrantyPublicWording": "Maytronics (Dolphin) states a warranty of 1 year.",
+      "claimsPublishable": 13,
+      "claimsBlocked": 2
+    },
+    {
+      "productId": "prod-dolphin-premier",
+      "slug": "bublue-bubot-800p",
+      "url": "https://botplanet.io/robots/robotic-pool-cleaners/bublue-bubot-800p/",
+      "path": "/robots/robotic-pool-cleaners/bublue-bubot-800p/",
+      "canonicalName": "BuBlue Bubot 800P Gen2",
+      "brand": "BUBLUE",
+      "modelNumber": "Bubot 800P gen2",
+      "officialProductPage": "https://www.bublue.com/products/bublue-bubot-800p",
+      "manualUrl": null,
+      "manualDocumentId": null,
+      "manualRevision": null,
+      "modelIdentityNote": "MODEL AND MANUFACTURER BOTH CHANGED ON 3 AUGUST 2026. This record held the Maytronics Dolphin Premier, which was withdrawn on 31 July for having no manufacturer page, a manual covering a different machine, and no Amazon US listing at all. The owner replaced it with the BuBlue Bubot 800P Gen2. Every observation the Dolphin record held was read from a Maytronics dealer's specification page and has been REMOVED rather than carried across — it describes a different machine from a different manufacturer. The owner's message named an '880P'; the Amazon listing and the owner's own artwork both say 800P, and the listing's Model Number field reads 'Bubot 800P gen2', so 800P is what is recorded. On 4 August 2026 BuBlue's own product page was read as well — this record briefly said no BuBlue website existed, which was our wrong-domain error — and the specification now rests on manufacturer statements where the observations say so.",
+      "verificationDate": "2026-08-03",
+      "sourcesUsed": 2,
+      "sourcesUnreadable": [],
+      "completenessRawPercent": 58,
+      "completenessWeightedPercent": 67,
+      "fieldsApplicable": 26,
+      "fieldsPublishable": 15,
+      "weightApplicable": 95,
+      "weightPublishable": 64,
+      "fieldStates": {
+        "populated": 15,
+        "unknown": 8,
+        "not_applicable": 5,
+        "not_publicly_stated": 3,
+        "conflicting": 0,
+        "suppressed": 0,
+        "pending_verification": 0
+      },
+      "fieldsNotPubliclyStated": [
+        "manualUrl",
+        "cableLengthFt",
+        "weightLbs"
+      ],
+      "fieldsSuppressed": [],
+      "fieldsConflicting": [],
+      "conflicts": [],
+      "editorialCorrections": [
+        {
+          "field": "cableLengthFt",
+          "outcome": "unsupported",
+          "action": "Remove the stored value or find a source for it — nothing checked states it. Stored null. The owner's research gives a 50 ft cord; neither BuBlue's page nor the listing states a length, so nothing is published."
+        },
+        {
+          "field": "navigation",
+          "outcome": "agrees_with_unverified_detail",
+          "action": "Trim the unsourced wording; the headline value is verified. Ultrasonic sensors and app path control are stated — the listing bullets name the sensors, BuBlue's page the path-width control. Unsourced wording: '(no camera)' is an inference — neither source states the absence of a camera."
+        },
+        {
+          "field": "weightLbs",
+          "outcome": "unsupported",
+          "action": "Remove the stored value or find a source for it — nothing checked states it. Stored null. Neither BuBlue's page nor the listing states a weight, so nothing is published."
+        }
+      ],
+      "publicationStates": {
+        "structurallyValid": true,
+        "factuallyEvidenced": true,
+        "currentlyVerified": true,
+        "safeForLimitedFactualUse": true,
+        "readyForReviewWriting": false,
+        "readyForComparison": false,
+        "readyForBotMatch": false
+      },
+      "publicationBlockers": [
+        "insufficient evidence coverage for review section(s): Living with it"
+      ],
+      "launchStatus": "limited_factual_use",
+      "reviewGates": [
+        {
+          "gate": "weighted_completeness",
+          "passed": true,
+          "detail": "weighted completeness 67% against a 65% floor"
+        },
+        {
+          "gate": "model_identity",
+          "passed": true,
+          "detail": "identified by https://www.bublue.com/products/bublue-bubot-800p, with a published model number, no manual accepted"
+        },
+        {
+          "gate": "no_material_conflict",
+          "passed": true,
+          "detail": "no unresolved conflict on a material review field"
+        },
+        {
+          "gate": "review_sections_writable",
+          "passed": false,
+          "detail": "insufficient evidence coverage for review section(s): Living with it"
+        },
+        {
+          "gate": "no_speculation",
+          "passed": true,
+          "detail": "no review section rests on a suppressed value"
+        },
+        {
+          "gate": "corrections_identified",
+          "passed": true,
+          "detail": "every unsupported or conflicting stored value carries a written correction"
+        }
+      ],
+      "evidenceQualification": null,
+      "warrantyStatus": "confirmed",
+      "warrantyPublicWording": "BUBLUE states a warranty of 1 year, with 30-day money-back and 24/7 support.",
+      "claimsPublishable": 10,
+      "claimsBlocked": 4
+    },
+    {
+      "productId": "prod-polaris-freedom",
+      "slug": "polaris-freedom",
+      "url": "https://botplanet.io/robots/robotic-pool-cleaners/polaris-freedom/",
+      "path": "/robots/robotic-pool-cleaners/polaris-freedom/",
+      "canonicalName": "Polaris FREEDOM Cordless Robotic Cleaner",
+      "brand": "Polaris (Fluidra)",
+      "modelNumber": "FFREEDOM (SKU); FR550CBR; TYPE EB37 (manual)",
+      "officialProductPage": "https://www.polarispool.com/en/support/parts/polaris-freedom-cordless-robotic-cleaner",
+      "manualUrl": "https://downloads.eu.ctfassets.net/au38h2e94wka/43b8bfef-h0748900-pdf/223fcbecdb9253add444ce3697ccec5d/h0748900.pdf",
+      "manualDocumentId": "H0748900_REVC",
+      "manualRevision": "REV C, © 2024 Fluidra",
+      "modelIdentityNote": "Polaris sells FREEDOM, FREEDOM SC, FREEDOM LT and FREEDOM Plus. The EB37 chassis designation is shared with FREEDOM Plus, so the chassis code alone does not identify the model — the FFREEDOM SKU does. Only base-FREEDOM figures are recorded.",
+      "verificationDate": "2026-07-31",
+      "sourcesUsed": 4,
+      "sourcesUnreadable": [
+        "https://www.polarispool.com/en/products/pool-cleaners/robotic-pool-cleaners/polaris-freedom"
+      ],
+      "completenessRawPercent": 83,
+      "completenessWeightedPercent": 86,
+      "fieldsApplicable": 30,
+      "fieldsPublishable": 25,
+      "weightApplicable": 106,
+      "weightPublishable": 91,
+      "fieldStates": {
+        "populated": 25,
+        "unknown": 0,
+        "not_applicable": 1,
+        "not_publicly_stated": 5,
+        "conflicting": 0,
+        "suppressed": 0,
+        "pending_verification": 0
+      },
+      "fieldsNotPubliclyStated": [
+        "surfaceTypes",
+        "filtrationMicrons",
+        "suctionRate",
+        "remoteControl",
+        "warranty"
+      ],
+      "fieldsSuppressed": [],
+      "fieldsConflicting": [],
+      "conflicts": [],
+      "editorialCorrections": [
+        {
+          "field": "weightLbs",
+          "outcome": "newly_populated",
+          "action": "Add the newly sourced value to the stored record. The stored record had no weight. The owner's manual states 'Weight of Cleaner 20 lbs. (9.1 kg)'. Packed weight (33 lbs.) is deliberately not used."
+        },
+        {
+          "field": "warranty",
+          "outcome": "unsupported",
+          "action": "Remove the stored value or find a source for it — nothing checked states it. Stored '2-year limited'. The owner's manual mentions a Limited Warranty only inside an exclusion clause and never states its term; the support page states none."
+        }
+      ],
+      "publicationStates": {
+        "structurallyValid": true,
+        "factuallyEvidenced": true,
+        "currentlyVerified": true,
+        "safeForLimitedFactualUse": true,
+        "readyForReviewWriting": true,
+        "readyForComparison": false,
+        "readyForBotMatch": true
+      },
+      "publicationBlockers": [
+        "comparison field unavailable: warranty"
+      ],
+      "launchStatus": "launch_ready",
+      "reviewGates": [
+        {
+          "gate": "weighted_completeness",
+          "passed": true,
+          "detail": "weighted completeness 86% against a 65% floor"
+        },
+        {
+          "gate": "model_identity",
+          "passed": true,
+          "detail": "identified by https://www.polarispool.com/en/support/parts/polaris-freedom-cordless-robotic-cleaner, with a published model number, manual accepted"
+        },
+        {
+          "gate": "no_material_conflict",
+          "passed": true,
+          "detail": "no unresolved conflict on a material review field"
+        },
+        {
+          "gate": "review_sections_writable",
+          "passed": true,
+          "detail": "every intended review section has the evidence it needs"
+        },
+        {
+          "gate": "no_speculation",
+          "passed": true,
+          "detail": "no review section rests on a suppressed value"
+        },
+        {
+          "gate": "corrections_identified",
+          "passed": true,
+          "detail": "every unsupported or conflicting stored value carries a written correction"
+        }
+      ],
+      "evidenceQualification": null,
+      "warrantyStatus": "not_confirmed",
+      "warrantyPublicWording": "Manufacturer warranty term not confirmed",
+      "claimsPublishable": 14,
+      "claimsBlocked": 2
+    },
+    {
+      "productId": "prod-betta-se-plus",
+      "slug": "betta-se-plus",
+      "url": "https://botplanet.io/robots/robotic-pool-cleaners/betta-se-plus/",
+      "path": "/robots/robotic-pool-cleaners/betta-se-plus/",
+      "canonicalName": "Betta SE Plus — Solar-Powered Robotic Pool Skimmer",
+      "brand": "Betta (Solar Pool Technologies)",
+      "modelNumber": null,
+      "officialProductPage": "https://bettabot.com/products/betta-se-plus",
+      "manualUrl": "https://cdn.shopify.com/s/files/1/0114/1935/3184/files/Betta_SE_Plus_User_Manual_44a2f6a1-8891-49bb-88d3-9e21136efb64.pdf",
+      "manualDocumentId": null,
+      "manualRevision": "published 2024-02-13 (CDN version stamp v=1707781205)",
+      "modelIdentityNote": "DEFECT FOUND AND CORRECTED: the stored record cited https://bettabot.com/products/betta-se, which is the Betta SE — a DIFFERENT model with its own manual and its own 1-year warranty. The correct page for the stored product is /products/betta-se-plus. The two models are close enough to be confused and are now kept apart by URL and by manual.",
+      "verificationDate": "2026-07-31",
+      "sourcesUsed": 2,
+      "sourcesUnreadable": [],
+      "completenessRawPercent": 60,
+      "completenessWeightedPercent": 69,
+      "fieldsApplicable": 30,
+      "fieldsPublishable": 18,
+      "weightApplicable": 106,
+      "weightPublishable": 73,
+      "fieldStates": {
+        "populated": 18,
+        "unknown": 0,
+        "not_applicable": 1,
+        "not_publicly_stated": 10,
+        "conflicting": 0,
+        "suppressed": 2,
+        "pending_verification": 0
+      },
+      "fieldsNotPubliclyStated": [
+        "modelNumber",
+        "manualDocumentId",
+        "batteryCapacity",
+        "maxDepthFt",
+        "minDepthFt",
+        "filterCapacityL",
+        "suctionRate",
+        "dimensions",
+        "includedAccessories",
+        "wifi"
+      ],
+      "fieldsSuppressed": [
+        "weightLbs",
+        "appSupport"
+      ],
+      "fieldsConflicting": [],
+      "conflicts": [],
+      "editorialCorrections": [
+        {
+          "field": "weightLbs",
+          "outcome": "unsupported",
+          "action": "Remove the stored value or find a source for it — nothing checked states it. Stored 15 lb. Neither the official product page nor the official manual publishes a weight."
+        },
+        {
+          "field": "appSupport",
+          "outcome": "unsupported",
+          "action": "Remove the stored value or find a source for it — nothing checked states it. Stored 'No app — wireless remote or fully automatic'. The remote is verified; the absence of an app is not stated by Betta and is therefore not published as a fact."
+        }
+      ],
+      "publicationStates": {
+        "structurallyValid": true,
+        "factuallyEvidenced": true,
+        "currentlyVerified": true,
+        "safeForLimitedFactualUse": true,
+        "readyForReviewWriting": false,
+        "readyForComparison": false,
+        "readyForBotMatch": false
+      },
+      "publicationBlockers": [
+        "insufficient evidence coverage for review section(s): Living with it",
+        "review section(s) would rest on suppressed value(s): weightLbs",
+        "BotMatch field unavailable: appSupport"
+      ],
+      "launchStatus": "limited_factual_use",
+      "reviewGates": [
+        {
+          "gate": "weighted_completeness",
+          "passed": true,
+          "detail": "weighted completeness 69% against a 65% floor"
+        },
+        {
+          "gate": "model_identity",
+          "passed": true,
+          "detail": "identified by https://bettabot.com/products/betta-se-plus, model number not published by the maker, manual accepted"
+        },
+        {
+          "gate": "no_material_conflict",
+          "passed": true,
+          "detail": "no unresolved conflict on a material review field"
+        },
+        {
+          "gate": "review_sections_writable",
+          "passed": false,
+          "detail": "insufficient evidence coverage for review section(s): Living with it"
+        },
+        {
+          "gate": "no_speculation",
+          "passed": false,
+          "detail": "review section(s) would rest on suppressed value(s): weightLbs"
+        },
+        {
+          "gate": "corrections_identified",
+          "passed": true,
+          "detail": "every unsupported or conflicting stored value carries a written correction"
+        }
+      ],
+      "evidenceQualification": null,
+      "warrantyStatus": "confirmed",
+      "warrantyPublicWording": "Betta states a warranty of 1-YEAR WARRANTY.",
+      "claimsPublishable": 11,
+      "claimsBlocked": 5
+    },
+    {
+      "productId": "prod-aiper-scuba-v3-ai-vision",
+      "slug": "aiper-scuba-v3-ai-vision",
+      "url": "https://botplanet.io/robots/robotic-pool-cleaners/aiper-scuba-v3-ai-vision/",
+      "path": "/robots/robotic-pool-cleaners/aiper-scuba-v3-ai-vision/",
+      "canonicalName": "AIPER Scuba V3 AI Vision",
+      "brand": "AIPER",
+      "modelNumber": "PRN31",
+      "officialProductPage": "https://aiper.com/us/aiper-scuba-v3",
+      "manualUrl": null,
+      "manualDocumentId": null,
+      "manualRevision": null,
+      "modelIdentityNote": "Owner-supplied on 3 August 2026. Aiper's own page for this machine is titled 'Scuba V3 Cognitive AI Robotic Pool Cleaner' — the model is the SCUBA V3, and 'AI Vision' is a tier descriptor rather than part of the name. The stored canonical name keeps the owner's wording because that is what the listing and the artwork both say, but anyone matching on model name should match on 'Scuba V3'. Aiper sells Scuba SE, S1, S1 Pro, X1 Essential, X1 Pro, X1 Pro Max and V3 with no published model number, so the models separate only by page URL and product name — with one exception now: the listing's own Model Number field reads 'PRN31', machine-read on 4 August 2026, which is the only SKU any source has given for this machine.",
+      "verificationDate": "2026-08-03",
+      "sourcesUsed": 2,
+      "sourcesUnreadable": [],
+      "completenessRawPercent": 32,
+      "completenessWeightedPercent": 40,
+      "fieldsApplicable": 28,
+      "fieldsPublishable": 9,
+      "weightApplicable": 102,
+      "weightPublishable": 41,
+      "fieldStates": {
+        "populated": 9,
+        "unknown": 9,
+        "not_applicable": 3,
+        "not_publicly_stated": 3,
+        "conflicting": 0,
+        "suppressed": 5,
+        "pending_verification": 2
+      },
+      "fieldsNotPubliclyStated": [
+        "manualUrl",
+        "filtrationMicrons",
+        "dimensions"
+      ],
+      "fieldsSuppressed": [
+        "runtimeMins",
+        "chargeTimeHrs",
+        "poolSizeSuitability",
+        "weightLbs",
+        "warranty"
+      ],
+      "fieldsConflicting": [],
+      "conflicts": [],
+      "editorialCorrections": [],
+      "publicationStates": {
+        "structurallyValid": true,
+        "factuallyEvidenced": true,
+        "currentlyVerified": true,
+        "safeForLimitedFactualUse": true,
+        "readyForReviewWriting": false,
+        "readyForComparison": false,
+        "readyForBotMatch": false
+      },
+      "publicationBlockers": [
+        "weighted completeness 40% against a 65% floor",
+        "insufficient evidence coverage for review section(s): Where it fits, What it cleans, How it runs, Living with it",
+        "review section(s) would rest on suppressed value(s): poolSizeSuitability, runtimeMins, weightLbs",
+        "comparison field unavailable: poolSizeSuitability",
+        "comparison field unavailable: runtimeMins",
+        "comparison field unavailable: filtration",
+        "comparison field unavailable: warranty",
+        "BotMatch field unavailable: poolSizeSuitability",
+        "BotMatch field unavailable: appSupport"
+      ],
+      "launchStatus": "limited_factual_use",
+      "reviewGates": [
+        {
+          "gate": "weighted_completeness",
+          "passed": false,
+          "detail": "weighted completeness 40% against a 65% floor"
+        },
+        {
+          "gate": "model_identity",
+          "passed": true,
+          "detail": "identified by https://aiper.com/us/aiper-scuba-v3, with a published model number, no manual accepted"
+        },
+        {
+          "gate": "no_material_conflict",
+          "passed": true,
+          "detail": "no unresolved conflict on a material review field"
+        },
+        {
+          "gate": "review_sections_writable",
+          "passed": false,
+          "detail": "insufficient evidence coverage for review section(s): Where it fits, What it cleans, How it runs, Living with it"
+        },
+        {
+          "gate": "no_speculation",
+          "passed": false,
+          "detail": "review section(s) would rest on suppressed value(s): poolSizeSuitability, runtimeMins, weightLbs"
+        },
+        {
+          "gate": "corrections_identified",
+          "passed": true,
+          "detail": "every unsupported or conflicting stored value carries a written correction"
+        }
+      ],
+      "evidenceQualification": null,
+      "warrantyStatus": "not_confirmed",
+      "warrantyPublicWording": "Manufacturer warranty term not confirmed",
+      "claimsPublishable": 4,
+      "claimsBlocked": 11
+    },
+    {
+      "productId": "prod-dolphin-proteus-dx4-plus",
+      "slug": "dolphin-proteus-dx4-plus",
+      "url": "https://botplanet.io/robots/robotic-pool-cleaners/dolphin-proteus-dx4-plus/",
+      "path": "/robots/robotic-pool-cleaners/dolphin-proteus-dx4-plus/",
+      "canonicalName": "Dolphin Proteus DX4 Plus",
+      "brand": "Maytronics",
+      "modelNumber": "99996207-LESW",
+      "officialProductPage": null,
+      "manualUrl": null,
+      "manualDocumentId": null,
+      "manualRevision": null,
+      "modelIdentityNote": "Owner-supplied on 3 August 2026 and READ the same day, which upgraded this from the owner's word to published fields: Brand 'Dolphin', Manufacturer 'MAYTRONICS US, INC.', Model Name 'Proteus DX4 plus'. One thing conflicts and is recorded rather than resolved — the owner's research names SKU 99996290-DX4, while the listing's own Model Number field reads 99996207-LESW. Maytronics part numbers carry a market/retailer suffix, so both may be genuine for different channels; the listing's own figure is stored because that is the one that was read. Maytronics ships Proteus DX3, DX4 and DX4 Plus, and the title names the Plus.",
+      "verificationDate": "2026-08-03",
+      "sourcesUsed": 1,
+      "sourcesUnreadable": [],
+      "completenessRawPercent": 37,
+      "completenessWeightedPercent": 44,
+      "fieldsApplicable": 27,
+      "fieldsPublishable": 10,
+      "weightApplicable": 100,
+      "weightPublishable": 44,
+      "fieldStates": {
+        "populated": 10,
+        "unknown": 10,
+        "not_applicable": 4,
+        "not_publicly_stated": 5,
+        "conflicting": 0,
+        "suppressed": 1,
+        "pending_verification": 1
+      },
+      "fieldsNotPubliclyStated": [
+        "officialProductPageUrl",
+        "manualUrl",
+        "cableLengthFt",
+        "runtimeMins",
+        "filtrationMicrons"
+      ],
+      "fieldsSuppressed": [
+        "warranty"
+      ],
+      "fieldsConflicting": [],
+      "conflicts": [],
+      "editorialCorrections": [],
+      "publicationStates": {
+        "structurallyValid": true,
+        "factuallyEvidenced": true,
+        "currentlyVerified": true,
+        "safeForLimitedFactualUse": true,
+        "readyForReviewWriting": false,
+        "readyForComparison": false,
+        "readyForBotMatch": false
+      },
+      "publicationBlockers": [
+        "manufacturer identity/evidence weakness: no manufacturer-sourced value for this model",
+        "no accepted official manufacturer page",
+        "no accepted manual",
+        "weighted completeness 44% against a 65% floor",
+        "insufficient evidence coverage for review section(s): Where it fits, How it runs",
+        "comparison field unavailable: poolTypes",
+        "comparison field unavailable: runtimeMins",
+        "comparison field unavailable: warranty",
+        "BotMatch field unavailable: poolTypes",
+        "BotMatch field unavailable: appSupport"
+      ],
+      "launchStatus": "candidate_under_review",
+      "reviewGates": [
+        {
+          "gate": "weighted_completeness",
+          "passed": false,
+          "detail": "weighted completeness 44% against a 65% floor"
+        },
+        {
+          "gate": "model_identity",
+          "passed": false,
+          "detail": "no accepted official manufacturer page for this exact model"
+        },
+        {
+          "gate": "no_material_conflict",
+          "passed": true,
+          "detail": "no unresolved conflict on a material review field"
+        },
+        {
+          "gate": "review_sections_writable",
+          "passed": false,
+          "detail": "insufficient evidence coverage for review section(s): Where it fits, How it runs"
+        },
+        {
+          "gate": "no_speculation",
+          "passed": true,
+          "detail": "no review section rests on a suppressed value"
+        },
+        {
+          "gate": "corrections_identified",
+          "passed": true,
+          "detail": "every unsupported or conflicting stored value carries a written correction"
+        }
+      ],
+      "evidenceQualification": "dealer-sourced: no manufacturer page or manual was accepted for this model, so every value is attributed to the dealer that published it and none is presented as manufacturer-stated",
+      "warrantyStatus": "not_confirmed",
+      "warrantyPublicWording": "Manufacturer warranty term not confirmed",
+      "claimsPublishable": 6,
+      "claimsBlocked": 8
+    },
+    {
+      "productId": "prod-dolphin-e10",
+      "slug": "dolphin-e10",
+      "url": "https://botplanet.io/robots/robotic-pool-cleaners/dolphin-e10/",
+      "path": "/robots/robotic-pool-cleaners/dolphin-e10/",
+      "canonicalName": "Dolphin E10",
+      "brand": "Maytronics (Dolphin)",
+      "modelNumber": "99996133 (global) / 99996133-US (US)",
+      "officialProductPage": "https://www.maytronics.com/global/store/residential-pools/best-value-cleaners/dolphin-e10/99996133.html",
+      "manualUrl": "https://brand.maytronics.com/m/29de184d3f07aa7b/original/UM-8151910.pdf",
+      "manualDocumentId": "8151910",
+      "manualRevision": null,
+      "modelIdentityNote": "The cited product page is Maytronics' GLOBAL store, not the US store, and the US part number carries a -US suffix. Values below are therefore recorded with a global-market applicability flag and must not be presented as US-specific without re-checking the US page.",
+      "verificationDate": "2026-07-31",
+      "sourcesUsed": 2,
+      "sourcesUnreadable": [],
+      "completenessRawPercent": 72,
+      "completenessWeightedPercent": 80,
+      "fieldsApplicable": 29,
+      "fieldsPublishable": 21,
+      "weightApplicable": 104,
+      "weightPublishable": 83,
+      "fieldStates": {
+        "populated": 21,
+        "unknown": 0,
+        "not_applicable": 2,
+        "not_publicly_stated": 7,
+        "conflicting": 0,
+        "suppressed": 1,
+        "pending_verification": 0
+      },
+      "fieldsNotPubliclyStated": [
+        "manualRevisionDate",
+        "surfaceTypes",
+        "filtrationMicrons",
+        "filterCapacityL",
+        "dimensions",
+        "wifi",
+        "remoteControl"
+      ],
+      "fieldsSuppressed": [
+        "appSupport"
+      ],
+      "fieldsConflicting": [],
+      "conflicts": [
+        {
+          "field": "poolSizeSuitability",
+          "resolvedTo": "8 m",
+          "rule": "manufacturer source outranks the stored editorial value",
+          "suppressed": false
+        }
+      ],
+      "editorialCorrections": [
+        {
+          "field": "poolSizeSuitability",
+          "outcome": "conflicts",
+          "action": "Correct the stored value — the manufacturer source disagrees. Stored 'Above-ground pools up to 30 ft'. Maytronics states a maximum pool length of 8 m, which is 26.2 ft. The stored figure overstates the manufacturer's rating by roughly four feet and is withheld."
+        },
+        {
+          "field": "filtration",
+          "outcome": "agrees_with_unverified_detail",
+          "action": "Trim the unsourced wording; the headline value is verified. Maytronics lists a 'Fine Filter Kit' for this model. Unsourced wording: 'ultra-fine' is not offered on the E10 — that kit belongs to higher models in the range."
+        },
+        {
+          "field": "appSupport",
+          "outcome": "unsupported",
+          "action": "Remove the stored value or find a source for it — nothing checked states it. Stored 'None — no app or remote'. Maytronics' specification table carries app and Wi-Fi rows for models that have them and carries neither for the E10, which is suggestive but is not a statement that no app exists. The absence is not published as a fact."
+        }
+      ],
+      "publicationStates": {
+        "structurallyValid": true,
+        "factuallyEvidenced": true,
+        "currentlyVerified": true,
+        "safeForLimitedFactualUse": true,
+        "readyForReviewWriting": true,
+        "readyForComparison": true,
+        "readyForBotMatch": false
+      },
+      "publicationBlockers": [
+        "BotMatch field unavailable: appSupport"
+      ],
+      "launchStatus": "launch_ready",
+      "reviewGates": [
+        {
+          "gate": "weighted_completeness",
+          "passed": true,
+          "detail": "weighted completeness 80% against a 65% floor"
+        },
+        {
+          "gate": "model_identity",
+          "passed": true,
+          "detail": "identified by https://www.maytronics.com/global/store/residential-pools/best-value-cleaners/dolphin-e10/99996133.html, with a published model number, manual accepted"
+        },
+        {
+          "gate": "no_material_conflict",
+          "passed": true,
+          "detail": "no unresolved conflict on a material review field"
+        },
+        {
+          "gate": "review_sections_writable",
+          "passed": true,
+          "detail": "every intended review section has the evidence it needs"
+        },
+        {
+          "gate": "no_speculation",
+          "passed": true,
+          "detail": "no review section rests on a suppressed value"
+        },
+        {
+          "gate": "corrections_identified",
+          "passed": true,
+          "detail": "every unsupported or conflicting stored value carries a written correction"
+        }
+      ],
+      "evidenceQualification": null,
+      "warrantyStatus": "confirmed",
+      "warrantyPublicWording": "Maytronics (Dolphin) states a warranty of 2 Years.",
+      "claimsPublishable": 12,
+      "claimsBlocked": 3
+    },
+    {
+      "productId": "prod-beatbot-aquasense-2-ultra",
+      "slug": "beatbot-aquasense-2-ultra",
+      "url": "https://botplanet.io/robots/robotic-pool-cleaners/beatbot-aquasense-2-ultra/",
+      "path": "/robots/robotic-pool-cleaners/beatbot-aquasense-2-ultra/",
+      "canonicalName": "Beatbot AquaSense 2 Ultra Robotic Pool Cleaner",
+      "brand": "Beatbot",
+      "modelNumber": null,
+      "officialProductPage": "https://beatbot.com/pages/aquasense-2-ultra",
+      "manualUrl": "https://drive.google.com/file/d/1j8-c5Pkk5-QzreFJBhWnXF13ar9Kf3if/view",
+      "manualDocumentId": null,
+      "manualRevision": null,
+      "modelIdentityNote": "Beatbot sells AquaSense 2, AquaSense 2 Pro and AquaSense 2 Ultra with separate manuals and materially different capability. Only Ultra figures are recorded; no value is carried across from the Pro.",
+      "verificationDate": "2026-07-31",
+      "sourcesUsed": 2,
+      "sourcesUnreadable": [],
+      "completenessRawPercent": 53,
+      "completenessWeightedPercent": 66,
+      "fieldsApplicable": 30,
+      "fieldsPublishable": 16,
+      "weightApplicable": 106,
+      "weightPublishable": 70,
+      "fieldStates": {
+        "populated": 16,
+        "unknown": 0,
+        "not_applicable": 1,
+        "not_publicly_stated": 13,
+        "conflicting": 0,
+        "suppressed": 1,
+        "pending_verification": 0
+      },
+      "fieldsNotPubliclyStated": [
+        "modelNumber",
+        "manualDocumentId",
+        "manualRevisionDate",
+        "maxDepthFt",
+        "minDepthFt",
+        "surfaceTypes",
+        "filterCapacityL",
+        "suctionRate",
+        "cleaningModes",
+        "dimensions",
+        "includedAccessories",
+        "wifi",
+        "remoteControl"
+      ],
+      "fieldsSuppressed": [
+        "weightLbs"
+      ],
+      "fieldsConflicting": [],
+      "conflicts": [],
+      "editorialCorrections": [
+        {
+          "field": "navigation",
+          "outcome": "agrees_with_unverified_detail",
+          "action": "Trim the unsourced wording; the headline value is verified. HybridSense AI with dual TOF sensors is stated officially. Unsourced wording: 'camera + IR/ultrasonic' and 'CleverNav' are not named on the official product page."
+        },
+        {
+          "field": "weightLbs",
+          "outcome": "unsupported",
+          "action": "Remove the stored value or find a source for it — nothing checked states it. Stored 29 lb. Beatbot publishes no weight on the official product page."
+        }
+      ],
+      "publicationStates": {
+        "structurallyValid": true,
+        "factuallyEvidenced": true,
+        "currentlyVerified": true,
+        "safeForLimitedFactualUse": true,
+        "readyForReviewWriting": false,
+        "readyForComparison": false,
+        "readyForBotMatch": false
+      },
+      "publicationBlockers": [
+        "insufficient evidence coverage for review section(s): Living with it",
+        "review section(s) would rest on suppressed value(s): weightLbs"
+      ],
+      "launchStatus": "limited_factual_use",
+      "reviewGates": [
+        {
+          "gate": "weighted_completeness",
+          "passed": true,
+          "detail": "weighted completeness 66% against a 65% floor"
+        },
+        {
+          "gate": "model_identity",
+          "passed": true,
+          "detail": "identified by https://beatbot.com/pages/aquasense-2-ultra, model number not published by the maker, manual accepted"
+        },
+        {
+          "gate": "no_material_conflict",
+          "passed": true,
+          "detail": "no unresolved conflict on a material review field"
+        },
+        {
+          "gate": "review_sections_writable",
+          "passed": false,
+          "detail": "insufficient evidence coverage for review section(s): Living with it"
+        },
+        {
+          "gate": "no_speculation",
+          "passed": false,
+          "detail": "review section(s) would rest on suppressed value(s): weightLbs"
+        },
+        {
+          "gate": "corrections_identified",
+          "passed": true,
+          "detail": "every unsupported or conflicting stored value carries a written correction"
+        }
+      ],
+      "evidenceQualification": null,
+      "warrantyStatus": "confirmed",
+      "warrantyPublicWording": "Beatbot states a warranty of 3-year full replacement.",
+      "claimsPublishable": 13,
+      "claimsBlocked": 3
+    },
+    {
+      "productId": "prod-aiper-scuba-x1",
+      "slug": "aiper-scuba-x1-pro-max",
+      "url": "https://botplanet.io/robots/robotic-pool-cleaners/aiper-scuba-x1-pro-max/",
+      "path": "/robots/robotic-pool-cleaners/aiper-scuba-x1-pro-max/",
+      "canonicalName": "Aiper Scuba X1 Pro Max",
+      "brand": "AIPER",
+      "modelNumber": "X9-Grey",
+      "officialProductPage": "https://aiper.com/us/aiper-scuba-series/aiper-scuba-x1-pro-max",
+      "manualUrl": null,
+      "manualDocumentId": null,
+      "manualRevision": null,
+      "modelIdentityNote": "THIS RECORD MOVED TWICE ON 3 AUGUST 2026: Scuba X1 → Scuba X1 Pro → Scuba X1 Pro Max, each time at the owner's direction. It is worth stating why, because the middle step is a caution. The page the original record was built against is titled 'Scuba X1 Essential' — the entry model. A listing supplied for the Pro was accepted on the strength of its URL reading /AIPER-Scuba-X1-Pro-Underwater/ and was WRONG: the listing's own fields give Model Name 'Scuba X1+Hy Pro', the base X1 bundled with a HydroComm Pro monitor. It was refused once read. The Pro Max listing names itself in its own details table — Brand AIPER, Model Name 'Scuba X1 Pro Max' — and Aiper publishes a matching page, so this identity rests on published fields rather than on a URL that looked like confirmation. Every observation the Essential's record held was removed rather than carried across.",
+      "verificationDate": "2026-08-03",
+      "sourcesUsed": 2,
+      "sourcesUnreadable": [],
+      "completenessRawPercent": 64,
+      "completenessWeightedPercent": 71,
+      "fieldsApplicable": 28,
+      "fieldsPublishable": 18,
+      "weightApplicable": 102,
+      "weightPublishable": 72,
+      "fieldStates": {
+        "populated": 18,
+        "unknown": 1,
+        "not_applicable": 3,
+        "not_publicly_stated": 8,
+        "conflicting": 0,
+        "suppressed": 1,
+        "pending_verification": 0
+      },
+      "fieldsNotPubliclyStated": [
+        "batteryCapacity",
+        "maxDepthFt",
+        "minDepthFt",
+        "cleaningModes",
+        "weightLbs",
+        "includedAccessories",
+        "wifi",
+        "remoteControl"
+      ],
+      "fieldsSuppressed": [
+        "warranty"
+      ],
+      "fieldsConflicting": [],
+      "conflicts": [],
+      "editorialCorrections": [
+        {
+          "field": "navigation",
+          "outcome": "agrees_with_unverified_detail",
+          "action": "Trim the unsourced wording; the headline value is verified. WavePath 3.0 is stated officially. Unsourced wording: '~14 sensors' is not stated on the official product page."
+        },
+        {
+          "field": "warranty",
+          "outcome": "unsupported",
+          "action": "Remove the stored value or find a source for it — nothing checked states it. Stored '2-year limited'. No warranty term appears anywhere on the official product page."
+        }
+      ],
+      "publicationStates": {
+        "structurallyValid": true,
+        "factuallyEvidenced": true,
+        "currentlyVerified": true,
+        "safeForLimitedFactualUse": true,
+        "readyForReviewWriting": false,
+        "readyForComparison": false,
+        "readyForBotMatch": false
+      },
+      "publicationBlockers": [
+        "insufficient evidence coverage for review section(s): Living with it",
+        "comparison field unavailable: warranty"
+      ],
+      "launchStatus": "limited_factual_use",
+      "reviewGates": [
+        {
+          "gate": "weighted_completeness",
+          "passed": true,
+          "detail": "weighted completeness 71% against a 65% floor"
+        },
+        {
+          "gate": "model_identity",
+          "passed": true,
+          "detail": "identified by https://aiper.com/us/aiper-scuba-series/aiper-scuba-x1-pro-max, with a published model number, no manual accepted"
+        },
+        {
+          "gate": "no_material_conflict",
+          "passed": true,
+          "detail": "no unresolved conflict on a material review field"
+        },
+        {
+          "gate": "review_sections_writable",
+          "passed": false,
+          "detail": "insufficient evidence coverage for review section(s): Living with it"
+        },
+        {
+          "gate": "no_speculation",
+          "passed": true,
+          "detail": "no review section rests on a suppressed value"
+        },
+        {
+          "gate": "corrections_identified",
+          "passed": true,
+          "detail": "every unsupported or conflicting stored value carries a written correction"
+        }
+      ],
+      "evidenceQualification": null,
+      "warrantyStatus": "not_confirmed",
+      "warrantyPublicWording": "Manufacturer warranty term not confirmed",
+      "claimsPublishable": 11,
+      "claimsBlocked": 5
+    },
+    {
+      "productId": "prod-aiper-scuba-s1",
+      "slug": "aiper-scuba-s1",
+      "url": "https://botplanet.io/robots/robotic-pool-cleaners/aiper-scuba-s1/",
+      "path": "/robots/robotic-pool-cleaners/aiper-scuba-s1/",
+      "canonicalName": "Aiper Scuba S1 Cordless Robotic Pool Cleaner",
+      "brand": "Aiper",
+      "modelNumber": null,
+      "officialProductPage": "https://aiper.com/us/aiper-scuba-series/aiper-scuba-s1",
+      "manualUrl": null,
+      "manualDocumentId": null,
+      "manualRevision": null,
+      "modelIdentityNote": "The Scuba S1 and Scuba S1 Pro are separate models with separate manuals. Only base-S1 figures are recorded. No model number is published and no official manual index was found on aiper.com.",
+      "verificationDate": "2026-07-31",
+      "sourcesUsed": 1,
+      "sourcesUnreadable": [],
+      "completenessRawPercent": 54,
+      "completenessWeightedPercent": 58,
+      "fieldsApplicable": 28,
+      "fieldsPublishable": 15,
+      "weightApplicable": 102,
+      "weightPublishable": 59,
+      "fieldStates": {
+        "populated": 15,
+        "unknown": 0,
+        "not_applicable": 3,
+        "not_publicly_stated": 10,
+        "conflicting": 1,
+        "suppressed": 2,
+        "pending_verification": 0
+      },
+      "fieldsNotPubliclyStated": [
+        "modelNumber",
+        "manualUrl",
+        "batteryCapacity",
+        "maxDepthFt",
+        "minDepthFt",
+        "surfaceTypes",
+        "cleaningModes",
+        "dimensions",
+        "wifi",
+        "remoteControl"
+      ],
+      "fieldsSuppressed": [
+        "weightLbs",
+        "warranty"
+      ],
+      "fieldsConflicting": [
+        "poolTypes"
+      ],
+      "conflicts": [
+        {
+          "field": "poolTypes",
+          "resolvedTo": null,
+          "rule": "sources of equal authority disagree — no automatic resolution is possible",
+          "suppressed": true
+        }
+      ],
+      "editorialCorrections": [
+        {
+          "field": "chargeTimeHrs",
+          "outcome": "derived_from_range",
+          "action": "Replace the derived figure with the range the source publishes. Stored 3.5 hours is the midpoint of Aiper's '3-4 Hours'. A midpoint is a calculation, not a manufacturer statement, so the range is published instead of the single figure."
+        },
+        {
+          "field": "weightLbs",
+          "outcome": "unsupported",
+          "action": "Remove the stored value or find a source for it — nothing checked states it. Stored 16 lb. Aiper publishes no weight for this model."
+        },
+        {
+          "field": "warranty",
+          "outcome": "unsupported",
+          "action": "Remove the stored value or find a source for it — nothing checked states it. Stored '2-year limited'. No warranty term appears anywhere on the official product page."
+        }
+      ],
+      "publicationStates": {
+        "structurallyValid": true,
+        "factuallyEvidenced": true,
+        "currentlyVerified": true,
+        "safeForLimitedFactualUse": true,
+        "readyForReviewWriting": false,
+        "readyForComparison": false,
+        "readyForBotMatch": false
+      },
+      "publicationBlockers": [
+        "unresolved conflict on poolTypes",
+        "weighted completeness 58% against a 65% floor",
+        "insufficient evidence coverage for review section(s): Where it fits, Living with it",
+        "review section(s) would rest on suppressed value(s): weightLbs",
+        "comparison field unavailable: poolTypes",
+        "comparison field unavailable: warranty",
+        "BotMatch field unavailable: poolTypes"
+      ],
+      "launchStatus": "candidate_under_review",
+      "reviewGates": [
+        {
+          "gate": "weighted_completeness",
+          "passed": false,
+          "detail": "weighted completeness 58% against a 65% floor"
+        },
+        {
+          "gate": "model_identity",
+          "passed": true,
+          "detail": "identified by https://aiper.com/us/aiper-scuba-series/aiper-scuba-s1, model number not published by the maker, no manual accepted"
+        },
+        {
+          "gate": "no_material_conflict",
+          "passed": false,
+          "detail": "unresolved conflict on material review field(s): poolTypes"
+        },
+        {
+          "gate": "review_sections_writable",
+          "passed": false,
+          "detail": "insufficient evidence coverage for review section(s): Where it fits, Living with it"
+        },
+        {
+          "gate": "no_speculation",
+          "passed": false,
+          "detail": "review section(s) would rest on suppressed value(s): weightLbs"
+        },
+        {
+          "gate": "corrections_identified",
+          "passed": true,
+          "detail": "every unsupported or conflicting stored value carries a written correction"
+        }
+      ],
+      "evidenceQualification": null,
+      "warrantyStatus": "not_confirmed",
+      "warrantyPublicWording": "Manufacturer warranty term not confirmed",
+      "claimsPublishable": 9,
+      "claimsBlocked": 6
+    },
+    {
+      "productId": "prod-aiper-seagull-se",
+      "slug": "aiper-seagull-se",
+      "url": "https://botplanet.io/robots/robotic-pool-cleaners/aiper-seagull-se/",
+      "path": "/robots/robotic-pool-cleaners/aiper-seagull-se/",
+      "canonicalName": "Aiper Seagull SE",
+      "brand": "Aiper",
+      "modelNumber": null,
+      "officialProductPage": "https://aiper.com/us/aiper-seagull-series/aiper-seagull-se-new",
+      "manualUrl": null,
+      "manualDocumentId": null,
+      "manualRevision": null,
+      "modelIdentityNote": "Aiper has shipped more than one revision of the Seagull SE; the cited URL carries a '-new' suffix, indicating a refreshed page for a refreshed unit. Without a model number the revisions cannot be distinguished, so every value here is flagged as applying to the current page revision only.",
+      "verificationDate": "2026-07-31",
+      "sourcesUsed": 1,
+      "sourcesUnreadable": [],
+      "completenessRawPercent": 32,
+      "completenessWeightedPercent": 40,
+      "fieldsApplicable": 28,
+      "fieldsPublishable": 9,
+      "weightApplicable": 102,
+      "weightPublishable": 41,
+      "fieldStates": {
+        "populated": 9,
+        "unknown": 0,
+        "not_applicable": 3,
+        "not_publicly_stated": 14,
+        "conflicting": 0,
+        "suppressed": 5,
+        "pending_verification": 0
+      },
+      "fieldsNotPubliclyStated": [
+        "modelNumber",
+        "manualUrl",
+        "batteryCapacity",
+        "maxDepthFt",
+        "minDepthFt",
+        "surfaceTypes",
+        "filtrationMicrons",
+        "filterCapacityL",
+        "suctionRate",
+        "cleaningModes",
+        "weightLbs",
+        "dimensions",
+        "wifi",
+        "remoteControl"
+      ],
+      "fieldsSuppressed": [
+        "chargeTimeHrs",
+        "poolSizeSuitability",
+        "filtration",
+        "appSupport",
+        "warranty"
+      ],
+      "fieldsConflicting": [],
+      "conflicts": [],
+      "editorialCorrections": [
+        {
+          "field": "poolSizeSuitability",
+          "outcome": "unsupported",
+          "action": "Remove the stored value or find a source for it — nothing checked states it. Stored 'flat above-ground up to ~40 ft (round to ~33 ft); flat-floored in-ground'. The official page publishes no pool dimension of any kind for this model."
+        },
+        {
+          "field": "chargeTimeHrs",
+          "outcome": "unsupported",
+          "action": "Remove the stored value or find a source for it — nothing checked states it. Stored 2.5 hours. The official page states a runtime but no charge time."
+        },
+        {
+          "field": "filtration",
+          "outcome": "unsupported",
+          "action": "Remove the stored value or find a source for it — nothing checked states it. Stored 'basic flat mesh filter basket (no fine micron rating)'. The official page publishes no filtration description at all, so neither the basket type nor the absence of a micron rating is sourced."
+        },
+        {
+          "field": "navigation",
+          "outcome": "agrees_with_unverified_detail",
+          "action": "Trim the unsourced wording; the headline value is verified. Auto-parking at the pool wall is stated officially. Unsourced wording: 'random path' and 'no smart mapping' are inferences; Aiper describes neither."
+        },
+        {
+          "field": "warranty",
+          "outcome": "unsupported",
+          "action": "Remove the stored value or find a source for it — nothing checked states it. Stored '1-year limited'. No warranty term appears on the official product page."
+        },
+        {
+          "field": "appSupport",
+          "outcome": "unsupported",
+          "action": "Remove the stored value or find a source for it — nothing checked states it. Stored 'None'. Aiper does not state the absence of an app for this model, and absence of a mention is not a statement."
+        }
+      ],
+      "publicationStates": {
+        "structurallyValid": true,
+        "factuallyEvidenced": true,
+        "currentlyVerified": true,
+        "safeForLimitedFactualUse": true,
+        "readyForReviewWriting": false,
+        "readyForComparison": false,
+        "readyForBotMatch": false
+      },
+      "publicationBlockers": [
+        "weighted completeness 40% against a 65% floor",
+        "insufficient evidence coverage for review section(s): Where it fits, What it cleans, Living with it",
+        "review section(s) would rest on suppressed value(s): poolSizeSuitability, filtration",
+        "comparison field unavailable: poolSizeSuitability",
+        "comparison field unavailable: filtration",
+        "comparison field unavailable: warranty",
+        "BotMatch field unavailable: poolSizeSuitability",
+        "BotMatch field unavailable: appSupport"
+      ],
+      "launchStatus": "limited_factual_use",
+      "reviewGates": [
+        {
+          "gate": "weighted_completeness",
+          "passed": false,
+          "detail": "weighted completeness 40% against a 65% floor"
+        },
+        {
+          "gate": "model_identity",
+          "passed": true,
+          "detail": "identified by https://aiper.com/us/aiper-seagull-series/aiper-seagull-se-new, model number not published by the maker, no manual accepted"
+        },
+        {
+          "gate": "no_material_conflict",
+          "passed": true,
+          "detail": "no unresolved conflict on a material review field"
+        },
+        {
+          "gate": "review_sections_writable",
+          "passed": false,
+          "detail": "insufficient evidence coverage for review section(s): Where it fits, What it cleans, Living with it"
+        },
+        {
+          "gate": "no_speculation",
+          "passed": false,
+          "detail": "review section(s) would rest on suppressed value(s): poolSizeSuitability, filtration"
+        },
+        {
+          "gate": "corrections_identified",
+          "passed": true,
+          "detail": "every unsupported or conflicting stored value carries a written correction"
+        }
+      ],
+      "evidenceQualification": null,
+      "warrantyStatus": "not_confirmed",
+      "warrantyPublicWording": "Manufacturer warranty term not confirmed",
+      "claimsPublishable": 5,
+      "claimsBlocked": 10
+    }
+  ]
+}

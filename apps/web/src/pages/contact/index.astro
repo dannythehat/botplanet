@@ -1,0 +1,31 @@
+---
+import Base from "../../layouts/Base.astro";
+import { SITE } from "../../lib/site";
+import { breadcrumbsFor } from "../../lib/routing";
+const crumbs = breadcrumbsFor("/contact/");
+---
+<Base
+  title="Contact BotPlanet — corrections, questions and press"
+  description="Contact BotPlanet about a correction, product data, a partnership or press — who reads each one, and what we will and will not answer."
+  breadcrumbs={crumbs}
+  narrow={true}
+>
+  <h1>Contact BotPlanet</h1>
+  <p class="lede">
+    BotPlanet is a small independent operation. Email is the only channel, and it is read by a person.
+  </p>
+  <p>
+    <a class="link" href={`mailto:${SITE.business.contactEmail}`}>{SITE.business.contactEmail}</a>
+  </p>
+  <h2>What to send</h2>
+  <ul>
+    <li><strong>Corrections</strong> — if a specification, price or claim on this site is wrong, tell us what and where. Corrections are made in public.</li>
+    <li><strong>Manufacturers and retailers</strong> — product data, imagery rights and availability.</li>
+    <li><strong>Press</strong> — questions about our methodology or independence.</li>
+  </ul>
+  <p class="note">
+    We do not accept payment for a recommendation or for a better position in any ranking. See our
+    <a class="link" href="/editorial-policy/">editorial policy</a> and
+    <a class="link" href="/affiliate-disclosure/">affiliate disclosure</a>.
+  </p>
+</Base>

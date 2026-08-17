@@ -1,0 +1,98 @@
+---
+/**
+ * Best-of guide — robotic pool cleaners.
+ *
+ * Page 2 of the pool map in docs/seo/pool-research-findings.md, targeting the
+ * "best robotic pool cleaner" cluster (6,600/mo, KD 13). Google groups the
+ * "best robot pool cleaner", "top rated" and "for inground pools" phrasings
+ * into the same cluster, so there is no separate inground page — the inground
+ * argument is a section of this one.
+ *
+ * Everything except the prose comes from content/editorial.ts and the
+ * catalogue. See lib/editorial-page.ts for the assembly.
+ */
+import Base from "../../../layouts/Base.astro";
+import EditorialArticle from "../../../components/EditorialArticle.astro";
+import PoolSizeShape from "../../../components/diagrams/PoolSizeShape.astro";
+import { editorialFor } from "../../../content/editorial";
+import { buildEditorialPage } from "../../../lib/editorial-page";
+import { breadcrumbsFor } from "../../../lib/routing";
+import { articleSchema, faqPageSchema, itemListSchema, imageObjectSchema } from "../../../lib/seo";
+import { MEDIA_ASSETS } from "../../../content/media/assets";
+import { FOUNDER } from "../../../content/team";
+
+const PATH = "/best-robots/robotic-pool-cleaners/";
+const article = editorialFor(PATH)!;
+const { html, picks, comparison } = await buildEditorialPage(
+  article,
+  Astro.locals,
+  import.meta.env.DEV,
+);
+
+const crumbs = breadcrumbsFor(PATH);
+
+/* ItemList carries the ranked picks in the order the page ranks them — which
+   is the one place on this page where the order is an editorial claim rather
+   than a sort. No Product or Offer nodes: this page publishes no price. */
+/* The page's own artwork, used as the social preview and as Article schema's
+   image. Without this a share of this page shows the BotPlanet logo rather
+   than the picture at the top of it, and Article schema carries no image at
+   all — the same defect the elderly-pets guide was fixed for on its own. */
+const lead = article.image?.src ?? null;
+
+/* An ImageObject per picture this page renders: the lead, then each figure
+   the injector places. Built from the same list, so nothing is claimed in
+   markup that a reader cannot see. */
+const renderedImages = [lead, ...(article.figures ?? []).map((f) => f.src)]
+  .filter((src): src is string => Boolean(src))
+  .map((src) => MEDIA_ASSETS.find((a) => a.src === src))
+  .filter((a): a is NonNullable<typeof a> => Boolean(a?.width) && Boolean(a?.height));
+
+const pageSchema = [
+  articleSchema({
+    headline: article.title,
+    description: article.metaDescription,
+    path: PATH,
+    dateModified: article.lastReviewed,
+    authorName: FOUNDER.name,
+    authorPath: FOUNDER.path,
+    image: lead ?? undefined,
+  }),
+  ...renderedImages.map((a) =>
+    imageObjectSchema({ path: a.src, caption: a.altText ?? "", width: a.width!, height: a.height! }),
+  ),
+  picks.length ? itemListSchema(picks.map((p) => ({ name: p.name, path: p.href })), article.title) : null,
+  faqPageSchema(article.faq, PATH),
+];
+---
+
+<Base
+  title={article.seoTitle}
+  description={article.metaDescription}
+  ogImage={lead ?? undefined}
+  breadcrumbs={crumbs}
+  schema={pageSchema}
+>
+  <EditorialArticle
+    article={article}
+    html={html}
+    picks={picks}
+    comparison={comparison}
+    splitAt={["big-pools-the-number-that-decides-it"]}
+  >
+    {/* Eight sections of prose between the picks and the table, and this is the
+        one that changes subject — from what a machine does to whether it will
+        reach the end of your pool. Placed before the section explaining that a
+        maximum length and a maximum area are not interchangeable.
+
+        THE DRAWING CARRIES NO PRODUCT AND NO RATING. The specific figures — 100
+        ft for the Scuba X1 Pro Max, 33 for the Proteus DX4 Plus — stay in the
+        prose beside the maker who published them, where a changed spec changes
+        one sentence rather than an image nobody re-reads.
+
+        Corded vs cordless is deliberately NOT drawn here. That figure lives on
+        the cordless page, which is the argument's own URL; running it on both
+        would show the same reader the same picture twice on one journey. */}
+    <PoolSizeShape slot="diagram-1" />
+  </EditorialArticle>
+</Base>

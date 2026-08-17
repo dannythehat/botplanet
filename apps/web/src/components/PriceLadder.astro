@@ -1,0 +1,192 @@
+---
+import { applyInternalLinks } from "../lib/internal-linker";
+import { liveAnchorsFor } from "../content/internal-links";
+/* ============================================================
+   BotPlanet — Price section (section head + price ladder)
+
+   A sixth element type: rungs that widen as the price climbs,
+   so the reader sees what each step up actually buys.
+
+   Prices are OPTIONAL and every one carries the date it was
+   checked and who was selling it. A rung with no price shows
+   "Check current price", per the rule that an unknown price is
+   never guessed and never printed without a date.
+
+   The section answers the cost question without becoming a
+   deals page: what drives the number, and what changes as it
+   goes up — not a price list that is stale by Tuesday.
+   ============================================================ */
+
+import SectionHead from "./SectionHead.astro";
+
+export interface PriceRung {
+  /** Short tier label, e.g. "Budget". */
+  label: string;
+  /** What you get at this level. */
+  what: string;
+  /**
+   * Optional. Only ever set from a dated, verified check — never estimated.
+   * `seller` distinguishes the retailer from a marketplace seller.
+   */
+  price?: { display: string; checkedOn: string; seller: string };
+}
+
+interface Props {
+  id?: string;
+  eyebrow?: string;
+  title: string;
+  intro: string;
+  /* Passed straight to SectionHead so the hub prose can carry a product
+     link. See the note there. */
+  linkCategory?: string;
+  rungs: PriceRung[];
+  /** Shown under the ladder. */
+  note?: string;
+}
+
+const { id, eyebrow, title, intro, rungs, note, linkCategory } = Astro.props;
+
+/* Product names live in these bodies, not in the section intro — the price
+   rungs and the FAQ answers are where a hub actually says "the WINBOT W2 PRO".
+   Injecting here is what puts a product link in hub prose; the intro pass in
+   SectionHead only ever found in-page anchors, because intros are written
+   generically on purpose. See the note in SectionHead.astro. */
+const escapeHtml = (t: string) =>
+  t.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+const weave = (t: string) =>
+  linkCategory
+    ? applyInternalLinks(escapeHtml(t), liveAnchorsFor(linkCategory), `/robots/${linkCategory}/`).html
+    : null;
+
+---
+
+<section class="bp-price" id={id}>
+  <SectionHead eyebrow={eyebrow} title={title} intro={intro} linkCategory={linkCategory} />
+
+  <ol class="bp-price__ladder">
+    {rungs.map((rung, i) => (
+      <li class="bp-rung" style={`--fill:${Math.round(((i + 1) / rungs.length) * 100)}%`}>
+        <div class="bp-rung__head">
+          <span class="bp-rung__label">{rung.label}</span>
+          {rung.price ? (
+            <span class="bp-rung__price">
+              {rung.price.display}
+              <span class="bp-rung__checked">
+                {rung.price.seller} · checked {rung.price.checkedOn}
+              </span>
+            </span>
+          ) : (
+            <span class="bp-rung__price bp-rung__price--unknown">Check current price</span>
+          )}
+        </div>
+        <span class="bp-rung__bar" aria-hidden="true"><span class="bp-rung__fill"></span></span>
+        {weave(rung.what) ? <p class="bp-rung__what" set:html={weave(rung.what)} /> : <p class="bp-rung__what">{rung.what}</p>}
+      </li>
+    ))}
+  </ol>
+
+  {note && <p class="bp-price__note">{note}</p>}
+</section>
+
+<style>
+  .bp-price {
+    /* Outer spacing, padding, border and background come from the section
+       plate rule in metal-theme.css, so every section shares one rhythm. */
+  }
+
+  .bp-price__ladder {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: clamp(0.9rem, 2vw, 1.15rem);
+  }
+
+  /* ---------- a rung ---------- */
+  .bp-rung {
+    padding: clamp(1.35rem, 3.4vw, 1.75rem);
+    border: 1px solid var(--cs-line-soft);
+    border-radius: 14px;
+    background: var(--cs-surface);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.32);
+  }
+
+  .bp-rung__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.6rem;
+  }
+
+  .bp-rung__label {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.1rem, 2.2vw, 1.24rem);
+    letter-spacing: -0.012em;
+    color: var(--cs-hi);
+  }
+
+  .bp-rung__price {
+    text-align: right;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--cs-bright);
+  }
+
+  .bp-rung__price--unknown {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 0.93rem;
+    color: var(--cs-mid);
+  }
+
+  /* the date and seller sit with the price, never apart from it */
+  .bp-rung__checked {
+    display: block;
+    margin-top: 0.2rem;
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-quaternary);
+  }
+
+  /* ---------- the climbing bar ---------- */
+  .bp-rung__bar {
+    display: block;
+    height: 3px;
+    margin: 1.05rem 0;
+    border-radius: 3px;
+    background: rgba(200, 208, 222, 0.1);
+    overflow: hidden;
+  }
+
+  .bp-rung__fill {
+    display: block;
+    height: 100%;
+    width: var(--fill, 25%);
+    border-radius: 3px;
+    background: var(--cs-sheen);
+  }
+
+  .bp-rung__what {
+    margin: 0;
+    font-size: 0.99rem;
+    line-height: 1.62;
+    color: var(--text-secondary);
+  }
+
+  .bp-price__note {
+    margin: 1.15rem 0 0;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--text-tertiary);
+  }
+
+  @media (min-width: 860px) {
+    .bp-rung__what { max-width: 68ch; }
+  }
+</style>

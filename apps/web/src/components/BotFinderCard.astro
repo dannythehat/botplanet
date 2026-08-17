@@ -1,0 +1,233 @@
+---
+/* ============================================================
+   BotPlanet — Bot Finder card.
+
+   ONE COMPOSED ADVERTISEMENT WITH ONE LIVE BUTTON. The artwork
+   carries the whole pitch — logo, headline, the fleet, the frame —
+   and leaves a glowing rectangle at the bottom deliberately EMPTY.
+   The button that goes in it is real HTML sitting on top, never
+   drawn into the picture.
+
+   WHY THE BUTTON IS NOT PART OF THE IMAGE. A drawn button cannot be
+   clicked, cannot be reached by keyboard, cannot show a hover state
+   and cannot be read by a screen reader — and a drawn label goes
+   stale the moment the wording changes, which on this site is not a
+   hypothetical: the previous BotMatch artwork had a "Security" tile
+   baked into it and sat on the homepage advertising a category that
+   had been cancelled four days earlier.
+
+   THE GEOMETRY IS MEASURED, NOT EYEBALLED. The empty frame in
+   finder-universal.webp (1122×1402) was found by scanning the file
+   for its stroke pixels:
+
+     outer stroke   x 238–883   y 1223–1351
+     inner stroke   x 251–871   y 1232–1340
+
+   The button targets the INNER box so it never covers the blue and
+   violet border, and it is anchored from the CENTRE rather than
+   from the left and top — the frame's midpoint is x 561 of 1122,
+   which is 50.00% exactly. Centre-anchoring means any rounding
+   error at a given viewport width spreads evenly on both sides
+   instead of walking the button towards one edge.
+
+   EVERY DIMENSION IS A PERCENTAGE, so the button is locked to the
+   artwork at every width. There is no breakpoint here and there is
+   not supposed to be: the picture scales, the button scales with
+   it, and the two cannot come apart.
+
+   THE TEXT SCALES WITH THE CARD, NOT WITH THE VIEWPORT. `cqw` units
+   read the card's own width, so the label keeps its proportion to
+   the drawn frame whether the card is 320px or 640px wide. Sized
+   with the viewport it would be right at one width and wrong at
+   every other.
+
+   REUSABLE FOR THE NINE CATEGORY CARDS. They are the same layout
+   with a different fleet and a different headline, so they take the
+   same component — pass a different `src`, `alt` and `label`. If a
+   future card puts its frame somewhere else, override the four
+   custom properties rather than forking this file.
+   ============================================================ */
+
+interface Props {
+  /** The composed card artwork. Its CTA frame must be left empty. */
+  src: string;
+  /** Describes the artwork. The drawn words are invisible without it. */
+  alt: string;
+  /** The live button's words. Never drawn into the picture. */
+  label: string;
+  href: string;
+  width: number;
+  height: number;
+  /** Above the fold on the homepage; lazy everywhere else. */
+  priority?: boolean;
+  /**
+   * Where the empty frame sits in THIS artwork, as percentages of the image.
+   *
+   * PER-CARD, BECAUSE THE GENERATOR DOES NOT PUT IT IN THE SAME PLACE TWICE.
+   * The universal card's frame is 57.6% wide centred at 91.8% down; the window
+   * card's is 67.2% wide centred at 89.5%. Measured from the files themselves
+   * by scripts/measure-cta-frame.mjs, never estimated by eye.
+   */
+  cta: { centreY: string; width: string; height: string; centreX?: string };
+  class?: string;
+}
+
+const {
+  src,
+  alt,
+  label,
+  href,
+  width,
+  height,
+  priority = false,
+  cta,
+  class: className = "",
+} = Astro.props;
+
+/* Derivatives exist at these widths — see scripts/gen-derivatives.mjs. */
+const stem = src.replace(/\.webp$/, "");
+const srcset = [360, 640, 960]
+  .map((w) => `${stem}-${w}w.webp ${w}w`)
+  .concat(`${src} ${width}w`)
+  .join(", ");
+---
+
+<a class:list={["bp-finder", className]} href={href}>
+  <img
+    class="bp-finder__img"
+    src={src}
+    srcset={srcset}
+    sizes="(min-width: 900px) 560px, 92vw"
+    width={width}
+    height={height}
+    alt={alt}
+    loading={priority ? "eager" : "lazy"}
+    fetchpriority={priority ? "high" : undefined}
+    decoding="async"
+  />
+
+  {/* Sits in the drawn frame. Interior is barely-there so the artwork's own
+      glow still reads around and behind it. */}
+  <span
+    class="bp-finder__cta"
+    style={`--cta-centre-x:${cta.centreX ?? "50%"};--cta-centre-y:${cta.centreY};--cta-width:${cta.width};--cta-height:${cta.height};`}
+  >
+    <span class="bp-finder__label">{label}</span>
+    <svg class="bp-finder__chev" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  </span>
+</a>
+
+<style>
+  .bp-finder {
+    /* cqw inside reads THIS box, which is what keeps the label proportional
+       to the drawn frame at every width. */
+    container-type: inline-size;
+
+    position: relative;
+    display: block;
+    width: 100%;
+    max-width: 560px;
+    margin-inline: auto;
+    border-radius: 14px;
+    /* The artwork draws its own frame; nothing here may add a second one. */
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* width:100%/height:auto, so the card is never cropped and the logo,
+     headline, robots and CTA frame all survive at every size. */
+  .bp-finder__img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 14px;
+  }
+
+  .bp-finder__cta {
+    /* Fallbacks only. The real numbers arrive per card as inline custom
+       properties — see the `cta` prop and the note at the top of this file. */
+    --cta-centre-x: 50%;
+    --cta-centre-y: 91.73%;
+    --cta-width: 53.5%;
+    --cta-height: 7%;
+
+    position: absolute;
+    left: var(--cta-centre-x);
+    top: var(--cta-centre-y);
+    transform: translate(-50%, -50%);
+    width: var(--cta-width);
+    height: var(--cta-height);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45em;
+
+    border-radius: 5px;
+    background: rgba(3, 6, 16, 0.3);
+    color: #fff;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    font-size: clamp(0.6rem, 3.05cqw, 1.3rem);
+    line-height: 1;
+    text-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);
+    transition: background 160ms ease, box-shadow 200ms ease, transform 120ms ease;
+  }
+
+  .bp-finder__label {
+    /* Never let a long category label push past the drawn frame. */
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .bp-finder__chev {
+    width: 1.05em;
+    height: 1.05em;
+    flex: none;
+    transition: transform 160ms ease;
+  }
+
+  /* Hovering anywhere on the card lights the button, because the whole card
+     is the link and a reader who has moused onto the artwork is already
+     asking the question the button answers. */
+  .bp-finder:hover .bp-finder__cta,
+  .bp-finder:focus-visible .bp-finder__cta {
+    background: rgba(8, 14, 38, 0.55);
+    box-shadow:
+      0 0 0 1px rgba(120, 170, 255, 0.55),
+      0 0 22px rgba(80, 130, 255, 0.5),
+      0 0 46px rgba(150, 90, 255, 0.4);
+  }
+
+  .bp-finder:hover .bp-finder__chev {
+    transform: translateX(0.18em);
+  }
+
+  .bp-finder:active .bp-finder__cta {
+    transform: translate(-50%, -50%) scale(0.985);
+    background: rgba(8, 14, 38, 0.7);
+  }
+
+  /* Keyboard users get the same glow plus a ring that survives any
+     background — the card behind it is nearly black in some places and
+     brightly lit in others. */
+  .bp-finder:focus-visible {
+    outline: none;
+  }
+  .bp-finder:focus-visible .bp-finder__cta {
+    outline: 3px solid #fff;
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bp-finder__cta,
+    .bp-finder__chev {
+      transition: none;
+    }
+  }
+</style>

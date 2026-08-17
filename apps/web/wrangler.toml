@@ -1,0 +1,82 @@
+name = "botplanet-web"
+main = "./dist/_worker.js/index.js"
+compatibility_date = "2025-04-01"
+compatibility_flags = ["nodejs_compat"]
+# Custom domain (botplanet.io) is managed in the Cloudflare dashboard, not here.
+
+# Static assets produced by the Astro Cloudflare adapter.
+assets = { directory = "./dist", binding = "ASSETS" }
+
+# --- Bindings (dedicated botplanet-* resources) ---
+[[d1_databases]]
+binding = "DB"
+database_name = "botplanet-db"
+database_id = "0ee6da7d-ebc1-46b1-9fe4-e96821891ab7"
+migrations_dir = "../../packages/db/migrations"
+
+[[kv_namespaces]]
+binding = "KV"
+id = "0fc715f587504227a21a131e0ce28f47"
+
+# Astro Cloudflare adapter uses a "SESSION" KV binding for its session store.
+[[kv_namespaces]]
+binding = "SESSION"
+id = "0fc715f587504227a21a131e0ce28f47"
+
+[[r2_buckets]]
+binding = "MEDIA"
+bucket_name = "botplanet-media"
+
+# --- Scheduled offer refresh (Job 10 operational addendum) ---
+#
+# Times are UTC. Europe/Sofia is UTC+3 in summer, so 03:00 UTC is 06:00 local —
+# before anyone is reading the site, and well clear of Amazon's own overnight
+# price churn.
+#
+# Weekly sweeps the active catalogue; daily serves ONLY the capped exception
+# list, and the planner refuses anything not actually due, so the daily trigger
+# costs nothing on a day with no exceptions.
+# --- Scheduled offer refresh (Job 10 operational addendum) ---
+#
+# ONE trigger, because Cloudflare allows five per ACCOUNT and four belong to
+# other workers. A slot was freed by consolidating content-engine-draft's two
+# identical triggers into one equivalent expression — same fire times, no code
+# change, since that worker ignores which trigger fired.
+#
+# One daily firing is enough. The planner enforces the interval per product:
+# seven days for the catalogue, one for the capped exception list, and anything
+# not yet due is skipped without spending a credit. So a single trigger gives
+# the same weekly-plus-exceptions behaviour two triggers would, at about 90
+# credits a month against a 200 ceiling.
+#
+# 03:00 UTC is 06:00 Europe/Sofia — before anyone is reading, and clear of
+# Amazon's overnight price churn.
+[triggers]
+crons = ["0 3 * * *"]
+
+[observability]
+enabled = true
+
+# --- Public configuration (NOT secrets) ---
+# Google Analytics 4 measurement ID. Public by design: it is rendered into the
+# page HTML, so it belongs in versioned config, not in Worker secrets. Only the
+# production host loads it (see Base.astro).
+[vars]
+GA_MEASUREMENT_ID = "G-EEHDN6DNZN"
+
+# Cloudflare Web Analytics. Public by design, like the GA4 id above: it names a
+# site to Cloudflare, it authorises nothing.
+#
+# EMPTY UNTIL SOMEBODY CREATES THE SITE. Cloudflare dashboard -> Web Analytics
+# -> Add a site -> botplanet.io -> "Manual installation", and paste the 32-hex
+# token from the snippet here. Creating it over the API needs Account
+# Analytics:Edit, which the deploy token does not carry.
+#
+# Until this is filled in, Base.astro renders no beacon at all — the gate is a
+# 32-hex format check, so a placeholder cannot accidentally ship a broken tag.
+#
+# WHY IT IS WORTH FILLING IN. Cloudflare's edge log counts by user-agent and
+# cannot distinguish a person on an iPhone from a scraper claiming to be one.
+# On 12 August 2026 that ambiguity covered 40% of all browser traffic. A beacon
+# runs JavaScript, and bots do not.
+CF_BEACON_TOKEN = ""

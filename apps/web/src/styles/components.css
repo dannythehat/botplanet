@@ -1,0 +1,859 @@
+/**
+ * Core component library.
+ *
+ * Every interactive component defines: rest, :hover, :focus-visible, :active,
+ * [disabled]/[aria-disabled] and, where relevant, a loading state. Nothing
+ * communicates state by colour alone — shape, weight, border or an icon always
+ * carries the same message.
+ */
+
+/* ================================================================ */
+/* Buttons                                                          */
+/* ================================================================ */
+
+.btn {
+  --btn-bg: transparent;
+  --btn-fg: var(--text-primary);
+  --btn-border: var(--border-default);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  min-height: 42px;
+  padding: 11px 20px;
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  border: 1px solid var(--btn-border);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-body);
+  font-size: var(--type-body-sm);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-body);
+  line-height: 1;
+  text-align: center;
+  cursor: pointer;
+  white-space: nowrap;
+  user-select: none;
+  transition:
+    background-color var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
+}
+
+.btn:hover {
+  --btn-border: var(--border-strong);
+  --btn-bg: var(--surface-2);
+  color: var(--text-primary);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-offset);
+}
+
+/**
+ * ACCENT — the highest-value action on a page (a recommendation journey, a key
+ * conversion). One per view. This is the top of the hierarchy; white is no
+ * longer the automatic primary treatment.
+ */
+.btn--accent {
+  --btn-bg: var(--accent-primary);
+  --btn-fg: var(--text-on-accent);
+  --btn-border: var(--accent-primary);
+  font-weight: var(--weight-bold);
+}
+
+.btn--accent:hover {
+  --btn-bg: var(--accent-primary-hover);
+  --btn-border: var(--accent-primary-hover);
+  color: var(--text-on-accent);
+  box-shadow: 0 0 0 4px var(--accent-primary-soft);
+}
+
+.btn--accent:active {
+  --btn-bg: var(--accent-primary-active);
+  --btn-border: var(--accent-primary-active);
+}
+
+.btn--accent[disabled],
+.btn--accent[aria-disabled="true"] {
+  --btn-bg: var(--accent-primary-soft);
+  --btn-fg: var(--accent-primary-text);
+  --btn-border: var(--accent-primary-border);
+  opacity: 0.6;
+}
+
+.btn--accent[data-loading="true"] {
+  color: var(--text-on-accent);
+  opacity: 0.85;
+}
+
+/* Quiet accent — accent intent without a filled block (e.g. inline journeys). */
+.btn--accent-soft {
+  --btn-bg: var(--accent-primary-soft);
+  --btn-fg: var(--accent-primary-text);
+  --btn-border: var(--accent-primary-border);
+}
+
+.btn--accent-soft:hover {
+  --btn-bg: var(--accent-primary-soft);
+  --btn-border: var(--accent-primary);
+  color: var(--accent-primary-text);
+}
+
+/**
+ * Primary (white) — retained for strong monochrome editorial moments. It is NOT
+ * the default primary treatment; use .btn--accent for the highest-value action.
+ */
+.btn--primary,
+.btn.primary {
+  --btn-bg: var(--surface-inverse);
+  --btn-fg: var(--text-on-inverse);
+  --btn-border: var(--surface-inverse);
+}
+
+.btn--primary:hover,
+.btn.primary:hover {
+  --btn-bg: #ffffff;
+  --btn-border: #ffffff;
+  color: var(--text-on-inverse);
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.10);
+}
+
+/* Quiet — for tertiary actions that should not compete. */
+.btn--quiet {
+  --btn-border: transparent;
+  --btn-fg: var(--text-secondary);
+}
+
+.btn--quiet:hover {
+  --btn-bg: var(--surface-2);
+  --btn-border: transparent;
+}
+
+.btn--lg {
+  min-height: 52px;
+  padding: 15px 30px;
+  font-size: var(--type-body);
+}
+
+.btn--sm {
+  min-height: 34px;
+  padding: 8px 14px;
+  font-size: var(--type-label);
+}
+
+.btn--block {
+  width: 100%;
+}
+
+.btn[disabled],
+.btn[aria-disabled="true"] {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+  /* Disabled is signalled by more than opacity: the border goes flat too. */
+  --btn-border: var(--border-subtle);
+}
+
+/* Loading: the label stays (so width doesn't jump) and a spinner leads it. */
+.btn[data-loading="true"] {
+  pointer-events: none;
+  color: var(--text-tertiary);
+}
+
+.btn[data-loading="true"]::before {
+  content: "";
+  width: 14px;
+  height: 14px;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: bp-spin 620ms linear infinite;
+}
+
+@keyframes bp-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn[data-loading="true"]::before {
+    animation: none;
+    border-top-color: currentColor;
+    opacity: 0.5;
+  }
+}
+
+/* ================================================================ */
+/* Icon buttons — square, always at least a comfortable tap target.  */
+/* ================================================================ */
+
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  font-size: 17px;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    color var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out);
+}
+
+.icon-btn:hover {
+  color: var(--text-primary);
+  border-color: var(--border-strong);
+  background: var(--surface-2);
+}
+
+.icon-btn:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.icon-btn:active {
+  background: var(--surface-3);
+}
+
+/* Saved is a selected state — one of the permitted accent uses. */
+.icon-btn[aria-pressed="true"],
+.icon-btn.is-saved {
+  color: var(--accent-primary-text);
+  border-color: var(--accent-primary-border);
+  background: var(--accent-primary-soft);
+}
+
+/* Keep the visual box tidy while guaranteeing a 44px hit area on touch. */
+@media (pointer: coarse) {
+  .icon-btn::after {
+    content: "";
+    position: absolute;
+    inset: 50% auto auto 50%;
+    translate: -50% -50%;
+    width: var(--tap-min);
+    height: var(--tap-min);
+  }
+}
+
+/* ================================================================ */
+/* Pills / status labels                                             */
+/* ================================================================ */
+
+.pill,
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  padding: 5px 11px;
+  background: var(--surface-2);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-pill);
+  font-size: var(--type-meta);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-label);
+  line-height: 1.35;
+  white-space: nowrap;
+}
+
+/* Emphasised classification pill. */
+.pill--strong,
+.pill.class {
+  color: var(--text-primary);
+  border-color: var(--border-strong);
+}
+
+/*
+ * Status pills. Colour is a *reinforcement* here, not the message: each one
+ * carries a leading glyph so meaning survives greyscale and colour blindness.
+ */
+.pill--ok,
+.pill.ok,
+.tag.ok {
+  color: var(--accent-positive);
+  border-color: color-mix(in srgb, var(--accent-positive) 34%, var(--border-subtle));
+  background: color-mix(in srgb, var(--accent-positive) 8%, var(--surface-2));
+}
+
+.pill--ok::before,
+.pill.ok::before,
+.tag.ok::before {
+  content: "●";
+  font-size: 0.75em;
+}
+
+.pill--warn,
+.pill.warn,
+.tag.warn {
+  color: var(--impact-caution);
+  border-color: color-mix(in srgb, var(--impact-caution) 34%, var(--border-subtle));
+}
+
+.pill--warn::before,
+.pill.warn::before,
+.tag.warn::before {
+  content: "▲";
+  font-size: 0.68em;
+}
+
+.pill--bad,
+.pill.bad,
+.tag.bad {
+  color: var(--impact-critical);
+  border-color: color-mix(in srgb, var(--impact-critical) 34%, var(--border-subtle));
+}
+
+.pill--bad::before,
+.pill.bad::before,
+.tag.bad::before {
+  content: "■";
+  font-size: 0.68em;
+}
+
+/* ================================================================ */
+/* Cards                                                             */
+/* ================================================================ */
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  padding: var(--space-lg);
+  background: var(--surface-1);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-inset-hairline);
+  transition:
+    border-color var(--duration-base) var(--ease-out),
+    background-color var(--duration-base) var(--ease-out),
+    transform var(--duration-base) var(--ease-out);
+}
+
+.card > h3 {
+  font-size: var(--type-card);
+}
+
+.card p {
+  color: var(--text-secondary);
+  font-size: var(--type-body-sm);
+  margin: 0;
+}
+
+/* Only interactive cards move. Static cards stay still — no idle animation. */
+a.card,
+.card--interactive {
+  cursor: pointer;
+}
+
+a.card:hover,
+.card--interactive:hover {
+  border-color: var(--border-strong);
+  background: var(--surface-2);
+  transform: translateY(-2px);
+}
+
+a.card:focus-visible,
+.card--interactive:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-offset);
+  transform: translateY(-2px);
+}
+
+a.card:active,
+.card--interactive:active {
+  transform: translateY(0);
+}
+
+.card--flat {
+  background: transparent;
+  box-shadow: none;
+}
+
+.card--inset {
+  background: var(--bg-sunken);
+}
+
+.card--pad-sm {
+  padding: var(--space-md);
+}
+
+/* ---- Product card: media well, then facts, then price. ---- */
+.product-card {
+  padding: 0;
+  overflow: hidden;
+  gap: 0;
+}
+
+.product-card__media {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  background: var(--bg-sunken);
+  border-bottom: 1px solid var(--border-subtle);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.product-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--duration-slow) var(--ease-out);
+}
+
+a.product-card:hover .product-card__media img {
+  transform: scale(1.03);
+}
+
+.product-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  padding: var(--space-md) var(--space-lg) var(--space-lg);
+}
+
+.product-card__title {
+  font-size: var(--type-card);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-heading);
+  margin: 0;
+}
+
+.product-card__meta {
+  font-size: var(--type-meta);
+  color: var(--text-tertiary);
+}
+
+.product-card__foot {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  margin-top: auto;
+  padding-top: var(--space-xs);
+}
+
+/* A save affordance pinned in the media corner. */
+.product-card__save {
+  position: absolute;
+  top: var(--space-xs);
+  right: var(--space-xs);
+  z-index: 2;
+  background: rgba(7, 7, 10, 0.72);
+  backdrop-filter: blur(6px);
+}
+
+/* ================================================================ */
+/* Hero — editorial, monochrome, no boxed card and no colour wash.   */
+/* ================================================================ */
+
+.hero {
+  position: relative;
+  padding-block: clamp(var(--space-2xl), 7vw, var(--space-4xl)) var(--space-2xl);
+}
+
+.hero h1,
+.hero .text-display {
+  font-size: var(--type-display);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-display);
+  font-weight: var(--weight-bold);
+  max-width: 22ch;
+  margin: 0 0 var(--space-lg);
+}
+
+.hero p {
+  font-size: var(--type-body-lg);
+  line-height: var(--leading-relaxed);
+  color: var(--text-secondary);
+  max-width: 58ch;
+}
+
+/* A hairline the headline sits above, so the hero has structure without a box. */
+.hero::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: linear-gradient(90deg, var(--border-strong), transparent 72%);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-top: var(--space-xl);
+}
+
+@media (max-width: 480px) {
+  /* Full-width stacked CTAs are easier to hit than two cramped pills. */
+  .hero__actions .btn {
+    width: 100%;
+  }
+}
+
+/* ================================================================ */
+/* Feature block — icon/rule + heading + copy, no card chrome.        */
+/* ================================================================ */
+
+.feature {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--border-default);
+}
+
+.feature h3 {
+  font-size: var(--type-card);
+  margin: 0;
+}
+
+.feature p {
+  color: var(--text-secondary);
+  font-size: var(--type-body-sm);
+  margin: 0;
+}
+
+/* ================================================================ */
+/* Comparison highlight — a verdict, deliberately emphatic.          */
+/* ================================================================ */
+
+.verdict {
+  display: grid;
+  gap: var(--space-sm);
+  padding: var(--space-lg) var(--space-xl);
+  background: var(--surface-inverse);
+  color: var(--text-on-inverse);
+  border-radius: var(--radius-lg);
+}
+
+.verdict__label {
+  font-family: var(--font-display);
+  font-size: var(--type-label);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: #55555f;
+}
+
+.verdict__title {
+  font-family: var(--font-display);
+  font-size: var(--type-heading);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-title);
+  color: var(--text-on-inverse);
+  margin: 0;
+}
+
+.verdict__body {
+  color: #3a3a44;
+  margin: 0;
+  max-width: 62ch;
+}
+
+/* ================================================================ */
+/* Editorial callout — a quiet aside with a strong left rule.         */
+/* ================================================================ */
+
+.callout {
+  display: grid;
+  gap: var(--space-xs);
+  padding: var(--space-md) var(--space-lg);
+  background: var(--surface-1);
+  border: 1px solid var(--border-subtle);
+  border-left: 2px solid var(--border-inverse);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+}
+
+.callout__title {
+  font-family: var(--font-display);
+  font-size: var(--type-card);
+  font-weight: var(--weight-semibold);
+  margin: 0;
+}
+
+.callout p {
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.callout--caution {
+  border-left-color: var(--impact-caution);
+}
+
+.callout--evidence {
+  border-left-color: var(--impact-positive);
+}
+
+/* ================================================================ */
+/* Trust / evidence block — states what is known and how.            */
+/* ================================================================ */
+
+.evidence {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-sm) var(--space-lg);
+  padding: var(--space-md) var(--space-lg);
+  background: var(--bg-sunken);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+}
+
+.evidence__item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-size: var(--type-body-sm);
+  color: var(--text-secondary);
+}
+
+.evidence__item strong {
+  color: var(--text-primary);
+  font-weight: var(--weight-semibold);
+}
+
+/* ================================================================ */
+/* Form controls                                                     */
+/* ================================================================ */
+
+label {
+  display: inline-block;
+  font-size: var(--type-body-sm);
+  font-weight: var(--weight-medium);
+  color: var(--text-primary);
+  margin-bottom: var(--space-2xs);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="search"],
+input[type="number"],
+input[type="password"],
+select,
+textarea {
+  width: 100%;
+  min-height: 44px;
+  padding: 11px 14px;
+  background: var(--surface-2);
+  color: var(--text-primary);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-sm);
+  font-family: inherit;
+  font-size: var(--type-body);
+  transition:
+    border-color var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-quaternary);
+}
+
+input:hover,
+select:hover,
+textarea:hover {
+  border-color: var(--border-strong);
+}
+
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: 1px;
+  border-color: var(--impact-signal);
+  background: var(--surface-1);
+}
+
+input[disabled],
+select[disabled],
+textarea[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+input[aria-invalid="true"] {
+  border-color: var(--impact-critical);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+}
+
+.field__hint {
+  font-size: var(--type-meta);
+  color: var(--text-tertiary);
+}
+
+/* ================================================================ */
+/* Tables — dense data, readable, and scrollable inside their box.   */
+/* ================================================================ */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--type-body-sm);
+}
+
+thead th {
+  position: sticky;
+  top: 0;
+  background: var(--bg-raised);
+  text-align: left;
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 1px solid var(--border-default);
+  font-family: var(--font-display);
+  font-size: var(--type-meta);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  white-space: nowrap;
+}
+
+tbody td {
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 1px solid var(--border-subtle);
+  vertical-align: top;
+  color: var(--text-secondary);
+}
+
+tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+tbody tr:hover td {
+  background: var(--surface-1);
+}
+
+td strong {
+  color: var(--text-primary);
+}
+
+/* Numeric columns align on the decimal. */
+td.num,
+th.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ================================================================ */
+/* Empty and loading states — honest, never a fake figure.           */
+/* ================================================================ */
+
+.empty {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-2xl) var(--space-lg);
+  text-align: center;
+  background: var(--bg-sunken);
+  border: 1px dashed var(--border-default);
+  border-radius: var(--radius-lg);
+}
+
+.empty__title {
+  font-family: var(--font-display);
+  font-size: var(--type-subheading);
+  font-weight: var(--weight-semibold);
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.empty p {
+  color: var(--text-tertiary);
+  max-width: 46ch;
+  margin: 0;
+}
+
+/* Skeleton: a calm two-stop shimmer, disabled under reduced motion. */
+.skeleton {
+  background: linear-gradient(90deg, var(--surface-1) 25%, var(--surface-2) 37%, var(--surface-1) 63%);
+  background-size: 400% 100%;
+  border-radius: var(--radius-sm);
+  animation: bp-shimmer 1400ms var(--ease-in-out) infinite;
+}
+
+.skeleton--text {
+  height: 1em;
+  margin-bottom: var(--space-xs);
+}
+
+.skeleton--title {
+  height: 1.6em;
+  width: 60%;
+}
+
+.skeleton--card {
+  height: 190px;
+}
+
+@keyframes bp-shimmer {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: 0 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    animation: none;
+    background: var(--surface-2);
+  }
+}
+
+/* Anything mid-request tells assistive tech, not just the eye. */
+[aria-busy="true"] {
+  cursor: progress;
+}
+
+/* ================================================================ */
+/* Reveal-on-scroll — one subtle, opt-in entrance. No looping.       */
+/* ================================================================ */
+
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    transform: translateY(14px);
+    transition:
+      opacity var(--duration-slow) var(--ease-out),
+      transform var(--duration-slow) var(--ease-out);
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Without JS (or with reduced motion) content is simply visible. */
+.no-js .reveal,
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}

@@ -1,0 +1,37 @@
+# dependencies
+node_modules/
+.pnpm-store/
+
+# build output
+dist/
+.astro/
+*.tsbuildinfo
+# compiled TS output must never sit beside sources (all package source is .ts)
+packages/**/src/**/*.js
+packages/**/src/**/*.d.ts
+packages/**/test/**/*.js
+packages/**/test/**/*.d.ts
+
+# local dev / secrets — NEVER commit secrets or affiliate credentials
+.env
+.env.*
+!.env.example
+.dev.vars
+.wrangler/
+
+# local databases
+*.sqlite
+*.sqlite3
+*.db
+
+# os / editor
+.DS_Store
+*.log
+.idea/
+.vscode/
+
+# SEO research raw API cache — never committed
+docs/seo/cache/
+
+# Raw DataForSEO responses never enter git — PRE-BUILD-PROCESS.md Stage 2.
+research-output/

@@ -1,0 +1,30 @@
+---
+/**
+ * The category hub's structured table, chosen by category.
+ *
+ * Same reasoning as HubDiagram.astro: every hub is rendered by one template,
+ * so there is no per-category page to pass a component from, and a switch in
+ * the hub file would put a growing lookup in the middle of something already
+ * assembling schema, prices and a comparison grid.
+ *
+ * A category with no entry renders nothing. Two have one today because two
+ * have a question a table answers better than prose: which of six near-identically
+ * named WINBOTs to buy, and which robot pet actually does what.
+ *
+ * These are NOT the comparison grid that already sits lower on every hub. That
+ * grid compares the catalogue on four fixed columns. These answer a question
+ * specific to the category — and where the comparison grid prints a dash for a
+ * missing value, these print who did not publish it, which is the point.
+ */
+import WinbotLadder from "./WinbotLadder.astro";
+import CapabilityTable from "./CapabilityTable.astro";
+import { winbotLadder, companionCapabilities } from "../content/decision-tables";
+
+interface Props {
+  category: string;
+}
+
+const { category } = Astro.props;
+---
+{category === "window-cleaning-robots" && <WinbotLadder entries={winbotLadder()} />}
+{category === "companion-robots" && <CapabilityTable rows={companionCapabilities()} />}

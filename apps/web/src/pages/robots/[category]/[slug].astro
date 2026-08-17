@@ -1,0 +1,425 @@
+---
+import Base from "../../../layouts/Base.astro";
+import { getDb, schema } from "../../../lib/db";
+import { productMetaDescription } from "../../../lib/product-meta";
+import { usd, freshnessLabel, titleCase } from "../../../lib/format";
+import { and, eq } from "drizzle-orm";
+import { breadcrumbsFor } from "../../../lib/routing";
+import { buildOffers, publicationFor } from "../../../lib/offer-truth";
+import { retailer } from "../../../content/commerce/registry";
+import { catalogueStatusOf, CATALOGUE_WITHDRAWALS, OFFER_SETUP_PENDING } from "../../../content/products";
+import { resolveSlug, removedRedirect, mergedRedirect } from "../../../content/product-names";
+import { categoryBySlug } from "../../../content/nav";
+import { latestAcceptedForProduct } from "../../../lib/providers/refresh-store";
+import ReviewArticle from "../../../components/ReviewArticle.astro";
+import { reviewFor } from "../../../content/reviews";
+import { availabilityFor, reviewSchema, articleSchema, imageObjectSchema, webPageSchema } from "../../../lib/seo";
+import { FOUNDER, authorForReview } from "../../../content/team";
+import AuthorBox from "../../../components/AuthorBox.astro";
+import { deliveryLine, deliveryNote } from "../../../lib/delivery-wording";
+import { PRICE_WITHHELD_LABEL } from "../../../content/commerce/price-display";
+import { MEDIA_ASSETS } from "../../../content/media/assets";
+
+/* Today, as a date rather than an instant, resolved once for the whole render
+   so two offers on one page cannot straddle midnight and disagree. */
+const TODAY = new Date().toISOString().slice(0, 10);
+
+/* Review prose, loaded by slug. A product with a review renders the article;
+   one without keeps the plain specification page, so adding a review is two
+   files and no change here. */
+const REVIEW_PROSE = import.meta.glob<{ compiledContent: () => string | Promise<string> }>("../../../reviews/*.md", { eager: true });
+
+const { category, slug } = Astro.params;
+const db = getDb(Astro.locals);
+
+/* A slug lives in D1 and can go stale relative to what the record now holds.
+   The repo declares the correct URL; a request on the old one is redirected
+   permanently rather than answered with a page that contradicts its address. */
+const { storedSlug, redirectTo } = resolveSlug(slug!);
+if (redirectTo) return Astro.redirect(`/robots/${category}/${redirectTo}/`, 301);
+
+/* A product that has left the catalogue keeps its archived row but loses its
+   page. The URL was indexed, so it goes to the category rather than 404ing. */
+const gone = removedRedirect(slug!);
+if (gone) return Astro.redirect(gone, 301);
+
+/* A product whose review was folded into a sibling's. Unlike the two above,
+   the product is entirely intact — it is still stocked, still matchable and
+   still has its own buy path. Only the page went, and it went into another
+   page that covers this machine by name. So this lands on the review rather
+   than on the category: the visitor gets the article they asked for. */
+const merged = mergedRedirect(slug!);
+if (merged) return Astro.redirect(merged, 301);
+
+const product = (
+  await db.select().from(schema.products).where(eq(schema.products.slug, storedSlug)).limit(1)
+)[0];
+if (!product) return new Response("Product not found", { status: 404 });
+
+const brand = (
+  await db.select().from(schema.brands).where(eq(schema.brands.id, product.brandId)).limit(1)
+)[0];
+
+const offers = await db
+  .select()
+  .from(schema.offers)
+  .where(and(eq(schema.offers.productId, product.id), eq(schema.offers.offerStatus, "active")));
+
+/**
+ * THE LIVE PRICE COMES FROM D1; THE GATES COME FROM THE ENGINE.
+ *
+ * `refresh_observations` is written by the scheduled refresh and is the
+ * production source for price, seller, availability, delivery and check date.
+ * One query, for this product only — not one per card, and not a
+ * whole-catalogue read to render a single page.
+ *
+ * The committed snapshot remains ONLY as a fallback for D1 being unreachable.
+ * It cannot make stale data look current: `buildOffers` takes whichever source
+ * was CHECKED MOST RECENTLY, so an older fallback never displaces a newer row,
+ * and if both are past their freshness window the price is suppressed either
+ * way. Fail-closed survives the fallback.
+ *
+ * Only `accepted = 1` rows are read. An observation the refresh refused stays
+ * in the table as evidence and never reaches this page.
+ */
+let live: Awaited<ReturnType<typeof latestAcceptedForProduct>> = null;
+let liveSource: "d1" | "fallback_snapshot" = "d1";
+try {
+  live = await latestAcceptedForProduct(Astro.locals.runtime.env.DB, product.id);
+  if (!live) liveSource = "fallback_snapshot";
+} catch (err) {
+  // Explicit and logged. A silent fallback is how a site starts showing last
+  // month's price while looking perfectly healthy.
+  liveSource = "fallback_snapshot";
+  console.error(`[offers] D1 unavailable for ${product.id}; falling back to the committed snapshot`, err);
+}
+
+const engineOffers = buildOffers(new Date(), { live: live ? [live] : [] })
+  .filter((o) => o.productId === product.id)
+  .map((o) => ({ offer: o, pub: publicationFor(o) }))
+  .filter((x) => x.pub.showable);
+
+const withdrawn = catalogueStatusOf(product.id) !== "active";
+/* Verified and published, commercial wiring not built. See OFFER_SETUP_PENDING
+   in content/products.ts — it is dated and expires, and the build fails once a
+   product has sat in it for more than thirty days. */
+const offerSetupPending = product.id in OFFER_SETUP_PENDING;
+const withdrawal = CATALOGUE_WITHDRAWALS[product.id] ?? null;
+
+const evidence = await db
+  .select()
+  .from(schema.evidence)
+  .where(eq(schema.evidence.productId, product.id));
+
+const crumbs = breadcrumbsFor(Astro.url.pathname, product.name);
+
+const review = reviewFor(product.slug);
+const proseModule = review ? REVIEW_PROSE[`../../../reviews/${product.slug}.md`] : undefined;
+
+/* A review entry with no prose file is a half-built page; render the plain
+   specification page rather than an article with a hole where the body goes.
+ *
+ * `await` because compiledContent() is async in Astro 5 — awaiting a plain
+ * string is harmless, so this is right either way. The try/catch is the real
+ * lesson: the first version threw here and the response simply stopped after
+ * the breadcrumbs. A blank page is far worse than a plain one, so a failure
+ * now falls back to the specification page and says so in the log. */
+let reviewHtml: string | null = null;
+if (proseModule) {
+  try {
+    reviewHtml = await proseModule.compiledContent();
+  } catch (err) {
+    console.error(`[review] could not compile prose for ${product.slug}; falling back to the plain page`, err);
+  }
+}
+const hasReview = Boolean(review && reviewHtml);
+
+/* Siblings in the same category, for answering the review's rule-outs.
+   Catalogue facts only — no price, no offer, nothing commission-shaped. */
+const siblings = hasReview
+  ? (
+      await db
+        .select()
+        .from(schema.products)
+        .where(and(eq(schema.products.categoryId, product.categoryId), eq(schema.products.status, "published")))
+    ).map((p) => ({
+      id: p.id,
+      slug: p.slug,
+      name: p.name,
+      cleans: (p.cleans as string[]) ?? [],
+      powerType: p.powerType,
+      maxPoolLengthFt: p.maxPoolLengthFt ?? null,
+    }))
+  : [];
+
+/* Review + Article, and no rating anywhere in it — see reviewSchema for why a
+   star is the one thing this site has not earned. */
+/* Who wrote it. Reviews default to the Reviews Editor — see authorForReview —
+   and the byline, the box and the structured data all read the same function,
+   so a page cannot credit one person to a reader and another to a crawler. */
+const reviewAuthor = hasReview ? authorForReview(review!.authorId) : FOUNDER;
+
+const reviewGraph = hasReview
+  ? [
+      webPageSchema({
+        path: Astro.url.pathname,
+        name: review!.title,
+        description: review!.metaDescription,
+      }),
+      reviewSchema({
+        itemName: product.name,
+        itemBrand: brand?.name ?? null,
+        itemSlug: product.slug,
+        /* THE SAME GATE THE VISIBLE PRICE USES, not a second one. An offer
+           reaches the markup on exactly the condition the card above prints
+           its price: `pub.priceShowable`. The offer URL is this page, which is
+           where the offer is actually published — /go/ is disallowed in
+           robots.txt and pointing structured data at it would ask a crawler to
+           fetch a URL it has been told not to. */
+        offers: engineOffers
+          .filter(({ pub, offer }) => pub.priceShowable && offer.basePriceMinor !== null)
+          .map(({ offer, pub }) => ({
+            priceMinor: offer.basePriceMinor,
+            currency: offer.currency ?? "USD",
+            availability: pub.stockShowable
+              ? (availabilityFor(offer.stock.state) ?? undefined)
+              : undefined,
+            url: Astro.url.pathname,
+          })),
+        headline: review!.title,
+        description: review!.metaDescription,
+        path: Astro.url.pathname,
+        dateModified: review!.lastReviewed,
+        authorName: reviewAuthor.name,
+        authorPath: reviewAuthor.path,
+        image: review!.image?.src,
+        reviewBody: review!.verdict,
+        positiveNotes: [review!.bestFor],
+        negativeNotes: [review!.notIdealFor],
+      }),
+      articleSchema({
+        headline: review!.title,
+        description: review!.metaDescription,
+        path: Astro.url.pathname,
+        dateModified: review!.lastReviewed,
+        authorName: reviewAuthor.name,
+        authorPath: reviewAuthor.path,
+        image: review!.image?.src,
+      }),
+      /* AN ImageObject PER PICTURE THE PAGE ACTUALLY RENDERS.
+         The lead image and every in-body figure, and nothing else — a figure
+         listed in reviews.ts but skipped by the injector (because its heading
+         did not match) is not on the page and must not be in the graph.
+         Dimensions and caption come from the media registry, so the caption is
+         the same sentence the alt attribute carries and the size is the file's
+         own rather than the box it renders in.
+
+         PROMOTIONAL PANELS ARE HERE AND THAT IS CORRECT. ImageObject describes
+         a picture; it does not assert that the picture is this product's
+         photograph. What those panels stay out of is Product schema, which is
+         shut on them at the registry by ORIGINAL_SCHEMA. */
+      ...[review!.image?.src, ...(review!.figures ?? []).map((f) => f.src)]
+        .filter((src): src is string => Boolean(src))
+        .map((src) => MEDIA_ASSETS.find((a) => a.src === src))
+        .filter((a): a is NonNullable<typeof a> => Boolean(a) && Boolean(a!.width) && Boolean(a!.height))
+        .map((a) =>
+          imageObjectSchema({
+            path: a.src,
+            caption: a.altText ?? "",
+            width: a.width!,
+            height: a.height!,
+          }),
+        ),
+    ]
+  : [];
+---
+
+<Base
+  title={hasReview ? review!.seoTitle : `${product.name} — BotPlanet`}
+  description={hasReview ? review!.metaDescription : productMetaDescription({
+    name: product.name,
+    productClass: product.productClass,
+    powerType: product.powerType,
+    environments: product.environments as string[],
+    cleans: product.cleans as string[],
+  })}
+  ogImage={hasReview ? review!.image?.src : undefined}
+  ogType={hasReview ? "article" : undefined}
+  breadcrumbs={crumbs}
+  schema={reviewGraph}
+  narrow={hasReview}
+>
+  {/* THE BACK-LINK CANNOT ASSUME ITS CATEGORY HAS A HUB. A hidden category
+      does not — it is a reserved slug with no front door — and this link
+      pointed at it anyway, which put a crawlable internal link to a 404 at the
+      top of the money page. Found on the Yarbo review the day it shipped,
+      after the breadcrumb had been checked and passed: breadcrumbs resolve
+      through the route registry, and this line was building a URL by hand. */}
+  {categoryBySlug(category!)?.launch === "live" ? (
+    <p class="muted"><a href={`/robots/${category}/`}>← {titleCase(category!)}</a></p>
+  ) : (
+    <p class="muted"><a href="/robots/">← All robot categories</a></p>
+  )}
+
+  {hasReview && (
+  <ReviewArticle
+    review={review!}
+    html={reviewHtml!}
+    productName={product.name}
+    offers={engineOffers.map(({ offer, pub }) => ({
+      retailerName: retailer(offer.retailerId)?.displayName ?? offer.retailerId,
+      sellerIdentity: offer.destination.sellerIdentity ?? null,
+      price: pub.priceShowable && offer.basePriceMinor !== null ? usd(offer.basePriceMinor) : null,
+      checkedDate: offer.sourceCheckedDate ?? null,
+      stock: pub.stockShowable ? titleCase(offer.stock.state.replace(/_/g, " ")) : null,
+      /* NOT the captured wording. A delivery sentence rots faster than the
+         price it was read alongside — see lib/delivery-wording.ts for the
+         one this page shipped for four days. */
+      shipping: pub.shippingShowable
+        ? deliveryLine(offer.shipping.sourceWording, offer.sourceCheckedDate, TODAY)
+        : null,
+      shippingNote: pub.shippingShowable
+        ? deliveryNote(offer.shipping.sourceWording, offer.sourceCheckedDate, TODAY)
+        : null,
+      redirectKey: pub.linkable ? (offer.redirectKey ?? null) : null,
+    }))}
+    siblings={siblings}
+  />
+)}
+
+  {/* The review supplies its own H1, verdict and key facts, so the plain
+      product header would be a second H1 saying the same thing in a weaker
+      voice. Products without a review still need it. */}
+  {!hasReview && (
+    <>
+      <div class="row" style="justify-content:space-between; align-items:flex-start;">
+        <div>
+          <h1>{product.name}</h1>
+          <div class="row">
+            <span class="pill class">{titleCase(product.productClass)}</span>
+            <span class="pill">{titleCase(product.powerType)}</span>
+            <span class="pill">{(product.environments as string[]).map(titleCase).join(" / ")}</span>
+            <span class="pill">{brand?.name}</span>
+          </div>
+        </div>
+        <a class="btn primary" href={`/botmatch/${category}/`}>Is this right for my pool?</a>
+      </div>
+
+      <h2>Cleans</h2>
+      <div class="row">
+        {(product.cleans as string[]).map((c) => <span class="pill class">{titleCase(c)}</span>)}
+      </div>
+    </>
+  )}
+
+  {/* The buy box above replaces this table on a review page. Products without
+      a review still need somewhere to show their offers. */}
+  {!hasReview && (
+    <>
+      {/* id="buy", matching BuyBox.astro, because these two are alternatives
+          for the SAME section and callers link to it without knowing which
+          one rendered. They did not match until now: BotMatchSnapshot linked
+          "current offers" to #where-to-buy on every page, and on the 22 pages
+          that have a review the id was #buy, so the link went nowhere. */}
+      <h2 id="buy">Current offers</h2>
+      {withdrawn ? (
+    <p class="note">
+      This robot is no longer part of the BotPlanet launch selection, so we do not link to a seller for it or
+      recommend it. Its record stays published because the research behind it is still worth reading.
+      {withdrawal && <span class="muted"> {withdrawal.reason}</span>}
+    </p>
+  ) : offerSetupPending ? (
+    /* OFFER_SETUP_PENDING. Verified and published, not yet wired to sell.
+       "Check current price" and nothing else: no figure, no /go link, and no
+       availability, because the identity check returned no stock field and a
+       product in this state makes no commercial claim at all. */
+    <p class="note">
+      <strong>Check current price.</strong> We have confirmed this is the current model and which listing is
+      the right one, and we have not finished setting up the link to buy it. Rather than send you somewhere we
+      have not checked, or print a price nobody read today, this page says so. Come back or search the model
+      name above.
+    </p>
+  ) : engineOffers.length === 0 ? (
+    <p class="note">
+      No verified offer yet. We only show a price once someone has checked the seller's page on a recorded date —
+      we would rather show nothing than a figure that has quietly gone out of date.
+    </p>
+  ) : (
+    <>
+      {/* THE SENTENCE HAS TO SURVIVE A TABLE WITH NO PRICES IN IT. Eleven
+          litter boxes and lawn mowers were wired to Amazon on 8 August 2026
+          with a pinned ASIN each and no price at all — nothing has been
+          through the refresh service yet — and "every price below carries the
+          date it was checked" reads as an excuse on a table whose price column
+          is empty. It is a promise about the prices that ARE printed, so it is
+          only made when one is. */}
+      <p class="note">
+        {engineOffers.some(({ pub, offer }) => pub.priceShowable && offer.basePriceMinor !== null)
+          ? "Every price below carries the date it was checked. Offer selection favours suitability and freshness, never commission."
+          : "The link below goes to the exact listing for this model, and nobody has checked its price on a recorded date yet — so this page shows none. Offer selection favours suitability and freshness, never commission."}
+      </p>
+      <table>
+        <thead>
+          <tr><th>Retailer</th><th>Price</th><th>Availability</th><th>Delivery</th><th>Checked</th><th></th></tr>
+        </thead>
+        <tbody>
+          {engineOffers.map(({ offer, pub }) => (
+            <tr>
+              <td>
+                {retailer(offer.retailerId)?.displayName ?? offer.retailerId}
+                {offer.destination.sellerIdentity && (
+                  <div class="muted" style="font-size:12px">sold by {offer.destination.sellerIdentity}</div>
+                )}
+              </td>
+              <td class="price" style="font-size:16px;">
+                {/* "Check current price", the same words the buy box uses and
+                    the price ladder uses, rather than "not confirmed". They
+                    describe the same state and only one of them tells the
+                    reader what to do about it. */}
+                {pub.priceShowable && offer.basePriceMinor !== null ? usd(offer.basePriceMinor) : <span class="muted">{PRICE_WITHHELD_LABEL}</span>}
+              </td>
+              <td class="muted">{pub.stockShowable ? titleCase(offer.stock.state.replace(/_/g, " ")) : "—"}</td>
+              <td class="muted">{(pub.shippingShowable && deliveryLine(offer.shipping.sourceWording, offer.sourceCheckedDate, TODAY)) || "—"}</td>
+              <td class="muted" style="font-size:12px">
+                {offer.sourceCheckedDate ?? "—"}
+                {liveSource === "fallback_snapshot" && <div style="font-size:10px">last recorded check</div>}
+              </td>
+              <td>
+                {pub.linkable && offer.redirectKey ? (
+                  <a class="btn" href={`/go/${offer.redirectKey}`} rel="sponsored nofollow">
+                    Check price on {retailer(offer.retailerId)?.displayName ?? "the retailer"}
+                  </a>
+                ) : null}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </>
+  )}
+    </>
+  )}
+
+  {evidence.length > 0 && (
+    <>
+      <h2>Evidence</h2>
+      {evidence.map((e) => (
+        <p><span class="pill class">{titleCase(e.evidenceLevel)}</span> {e.claim} {e.sourceUrl && <a href={e.sourceUrl} rel="nofollow">source</a>}</p>
+      ))}
+    </>
+  )}
+  {/* WHO WROTE THIS, ON THE PAGE AND NOT ONLY IN THE MARKUP. Every review here
+      named an author in its structured data and nobody in its HTML, so a
+      crawler knew who stood behind the rule-outs and a reader did not. It sits
+      last because it is the signature on the work rather than an introduction
+      to it. */}
+  {hasReview && (
+    <AuthorBox
+      author={reviewAuthor}
+      reviewed={review!.lastReviewed}
+      signedOffBy={FOUNDER}
+    />
+  )}
+
+  <p class="note" style="margin-top:24px;">Affiliate disclosure: BotPlanet may earn a commission from retailer links. This never affects which product is recommended.</p>
+</Base>

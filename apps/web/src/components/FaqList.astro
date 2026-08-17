@@ -1,0 +1,174 @@
+---
+import { applyInternalLinks } from "../lib/internal-linker";
+import { liveAnchorsFor } from "../content/internal-links";
+/* ============================================================
+   BotPlanet — FAQ section (section head + expandable questions)
+
+   An eighth element type, and the only one that opens and closes.
+   Built on native <details>, so it works with no JavaScript, is
+   keyboard operable for free, and the answers are in the page
+   for search engines whether they are open or not.
+
+   Each question is a real H3 inside its summary, so the
+   sub-questions are headings rather than styled text.
+
+   The FAQPage schema is generated from THIS array by
+   `faqPageSchema()` in lib/seo.ts, so the structured data cannot
+   claim a question the page does not display.
+   ============================================================ */
+
+import SectionHead from "./SectionHead.astro";
+
+export interface FaqItem {
+  q: string;
+  /** Concise and factual. Troubleshooting belongs on a guide. */
+  a: string;
+}
+
+interface Props {
+  id?: string;
+  eyebrow?: string;
+  title: string;
+  intro: string;
+  /* Passed straight to SectionHead so the hub prose can carry a product
+     link. See the note there. */
+  linkCategory?: string;
+  items: FaqItem[];
+  /** Open the first question by default. */
+  openFirst?: boolean;
+}
+
+const { id, eyebrow, title, intro, items, openFirst = true, linkCategory } = Astro.props;
+
+/* Product names live in these bodies, not in the section intro — the price
+   rungs and the FAQ answers are where a hub actually says "the WINBOT W2 PRO".
+   Injecting here is what puts a product link in hub prose; the intro pass in
+   SectionHead only ever found in-page anchors, because intros are written
+   generically on purpose. See the note in SectionHead.astro. */
+const escapeHtml = (t: string) =>
+  t.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+const weave = (t: string) =>
+  linkCategory
+    ? applyInternalLinks(escapeHtml(t), liveAnchorsFor(linkCategory), `/robots/${linkCategory}/`).html
+    : null;
+
+---
+
+<section class="bp-faq" id={id}>
+  <SectionHead eyebrow={eyebrow} title={title} intro={intro} linkCategory={linkCategory} />
+
+  <div class="bp-faq__list">
+    {items.map((item, i) => (
+      <details class="bp-faq__item" open={openFirst && i === 0}>
+        <summary class="bp-faq__summary">
+          <h3 class="bp-faq__q">{item.q}</h3>
+          <span class="bp-faq__icon" aria-hidden="true"></span>
+        </summary>
+        {weave(item.a) ? <p class="bp-faq__a" set:html={weave(item.a)} /> : <p class="bp-faq__a">{item.a}</p>}
+      </details>
+    ))}
+  </div>
+</section>
+
+<style is:global>
+  .bp-faq {
+    /* Outer spacing, padding, border and background come from the section
+       plate rule in metal-theme.css, so every section shares one rhythm. */
+  }
+
+  .bp-faq__list {
+    display: grid;
+    gap: 0.7rem;
+  }
+
+  .bp-faq__item {
+    border: 1px solid var(--cs-line-soft);
+    border-radius: 13px;
+    background: var(--cs-surface);
+    overflow: hidden;
+    transition: border-color 0.18s ease;
+  }
+
+  .bp-faq__item[open] {
+    border-color: var(--cs-line);
+  }
+
+  .bp-faq__summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: clamp(1.05rem, 2.8vw, 1.35rem) clamp(1.15rem, 3vw, 1.5rem);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  /* hide the native disclosure triangle in both engines */
+  .bp-faq__summary::-webkit-details-marker { display: none; }
+  .bp-faq__summary::marker { content: ""; }
+
+  .bp-faq__summary:hover .bp-faq__q { color: #fff; }
+
+  .bp-faq__q {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1rem, 2.2vw, 1.12rem);
+    line-height: 1.32;
+    letter-spacing: -0.008em;
+    color: var(--cs-hi);
+    transition: color 0.18s ease;
+  }
+
+  /* chrome plus that becomes a minus when open */
+  .bp-faq__icon {
+    position: relative;
+    flex: none;
+    width: 1.35rem;
+    height: 1.35rem;
+    border: 1px solid var(--cs-line);
+    border-radius: 7px;
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  .bp-faq__icon::before,
+  .bp-faq__icon::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 0.6rem;
+    height: 1px;
+    background: var(--cs-hi);
+    transform: translate(-50%, -50%);
+    transition: opacity 0.18s ease, transform 0.18s ease;
+  }
+
+  .bp-faq__icon::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+  }
+
+  .bp-faq__item[open] .bp-faq__icon::after {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  .bp-faq__a {
+    margin: 0;
+    padding: 0 clamp(1.15rem, 3vw, 1.5rem) clamp(1.2rem, 3vw, 1.5rem);
+    font-size: 0.99rem;
+    line-height: 1.66;
+    color: var(--text-secondary);
+  }
+
+  @media (min-width: 860px) {
+    .bp-faq__a { max-width: 72ch; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bp-faq__item,
+    .bp-faq__q,
+    .bp-faq__icon::before,
+    .bp-faq__icon::after { transition: none; }
+  }
+</style>

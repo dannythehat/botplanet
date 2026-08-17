@@ -1,0 +1,187 @@
+---
+/**
+ * Internal offer control. Behind the admin gate and noindex: it exposes
+ * approval states, suppression reasons and rejected candidates that would be
+ * misread as commercial judgements if public.
+ *
+ * It shows no commission value. Rates live in D1's private columns and are read
+ * only by the tie-break, never rendered.
+ */
+import Admin from "../../layouts/Admin.astro";
+import { offerReport, publicationFor } from "../../lib/offer-truth";
+import { NOT_RELATIONSHIPS, PROGRAMMES, RETAILERS } from "../../content/commerce/registry";
+import { REJECTED_CANDIDATES } from "../../content/commerce/destinations";
+import { productPath } from "../../content/routes";
+
+const { issues, products, totals } = offerReport();
+const errors = issues.filter((i) => i.severity === "error");
+const warnings = issues.filter((i) => i.severity === "warning");
+
+const APPROVAL_TONE: Record<string, string> = { approved: "ok", pending: "warn", researched_only: "", paused: "warn", declined: "bad" };
+const STATE_TONE: Record<string, string> = { active: "ok", pending: "warn", territory_restricted: "bad", paused: "warn", declined: "bad" };
+---
+
+<Admin title="Offers, retailers and programmes" section="commerce">
+  <p class="sub">
+    Commercial truth for the {products.length} launch products. An offer exists only for an approved retailer backed by
+    an active, US-usable programme — everything else is recorded and suppressed rather than shown.
+  </p>
+
+  <div class="grid">
+    <div class="card"><div class="muted">Offers</div><div class="big">{totals.offers}</div><div class="muted">{totals.exactDestination} exact · {totals.searchOnly} search-only</div></div>
+    <div class="card"><div class="muted">Linkable</div><div class="big">{totals.linkable}</div><div class="muted">buy button may render</div></div>
+    <div class="card"><div class="muted">Price publishable</div><div class="big" style="color:var(--warn)">{totals.priceShowable}</div><div class="muted">no approved price source yet</div></div>
+    <div class="card"><div class="muted">Validation errors</div><div class="big" style={errors.length ? "color:var(--bad)" : "color:var(--ok)"}>{errors.length}</div><div class="muted">{warnings.length} warnings</div></div>
+  </div>
+
+  <h2>Retailers</h2>
+  <div class="card">
+    <table>
+      <thead><tr><th>Retailer</th><th>Type</th><th>Seller model</th><th>Approval</th><th>May carry an offer</th><th>Warranty route</th></tr></thead>
+      <tbody>
+        {RETAILERS.map((r) => (
+          <tr>
+            <td>{r.displayName}<div class="muted mono" style="font-size:11px">{r.id}</div></td>
+            <td class="muted" style="font-size:12px">{r.type.replace(/_/g, " ")}</td>
+            <td class="muted" style="font-size:12px">{r.sellerModel.replace(/_/g, " ")}</td>
+            <td><span class={`tag ${APPROVAL_TONE[r.approval]}`}>{r.approval.replace(/_/g, " ")}</span></td>
+            <td>{r.approval === "approved" ? <span class="tag ok">yes</span> : <span class="tag warn">no</span>}</td>
+            <td class="muted" style="font-size:11px">{r.warrantyRoute}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Affiliate programmes</h2>
+  <div class="card">
+    <table>
+      <thead><tr><th>Programme</th><th>Network</th><th>Advertiser</th><th>State</th><th>US usable</th><th>Email links</th><th>Secret</th><th>Restriction</th></tr></thead>
+      <tbody>
+        {PROGRAMMES.map((p) => (
+          <tr>
+            <td class="mono" style="font-size:12px">{p.id}</td>
+            <td>{p.network}</td>
+            <td class="mono" style="font-size:12px">{p.advertiserId ?? "—"}</td>
+            <td><span class={`tag ${STATE_TONE[p.state]}`}>{p.state.replace(/_/g, " ")}</span></td>
+            <td>{p.usableForUsMarket ? <span class="tag ok">yes</span> : <span class="tag bad">no</span>}</td>
+            <td>{p.emailLinksAllowed ? <span class="tag ok">allowed</span> : <span class="tag warn">prohibited</span>}</td>
+            <td class="mono" style="font-size:11px">{p.secretRef ?? "—"}</td>
+            <td class="muted" style="font-size:11px">{p.restriction ?? "—"}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+    <p class="muted" style="font-size:12px;margin-bottom:0">
+      Secret names only. No commission rate, payout term or credential value appears on this page or in any export.
+      Networks recorded as researched but NOT relationships: {NOT_RELATIONSHIPS.map((n) => n.network).join(", ")}.
+    </p>
+  </div>
+
+  <h2>Offers</h2>
+  <div class="card">
+    <table>
+      <thead>
+        <tr><th>Product</th><th>Retailer</th><th>Exact match</th><th>Identifier</th><th>Price</th><th>Stock</th><th>Shipping</th><th>Freshness</th><th>/go</th><th>Rights</th></tr>
+      </thead>
+      <tbody>
+        {products.map((p) => p.publications.map(({ offer, pub }) => (
+          <tr>
+            <td><a href={productPath(p.slug)}>{p.slug}</a></td>
+            <td class="muted" style="font-size:12px">{offer.retailerId.replace(/^ret-/, "")}</td>
+            <td>
+              {offer.destination.confidence === "search_only"
+                ? <span class="tag warn">search only</span>
+                : <span class="tag ok">{offer.destination.confidence.replace(/_/g, " ")}</span>}
+            </td>
+            <td class="mono" style="font-size:11px">{offer.destination.retailerProductId ?? "—"}</td>
+            <td class="mono">{offer.basePriceMinor === null ? <span class="muted">none</span> : `$${(offer.basePriceMinor / 100).toFixed(2)}`}</td>
+            <td class="muted" style="font-size:12px">{offer.stock.state.replace(/_/g, " ")}</td>
+            <td class="muted" style="font-size:12px">{offer.shipping.state.replace(/_/g, " ")}</td>
+            <td class="muted" style="font-size:12px">{offer.freshness.replace(/_/g, " ")}</td>
+            <td class="mono" style="font-size:11px">{offer.redirectKey ? `/go/${offer.redirectKey}` : "—"}</td>
+            <td style="font-size:11px">
+              {pub.linkable && <span class="tag ok">link</span>}{" "}
+              {pub.priceShowable ? <span class="tag ok">price</span> : <span class="tag warn">no price</span>}{" "}
+              {pub.schemaEligible ? <span class="tag ok">schema</span> : <span class="tag warn">no schema</span>}
+            </td>
+          </tr>
+        )))}
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Preferred offer, with the reasoning</h2>
+  <div class="card">
+    <table>
+      <thead><tr><th>Product</th><th>Preferred</th><th>Commission used</th><th>Audit</th></tr></thead>
+      <tbody>
+        {products.map((p) => (
+          <tr>
+            <td>{p.slug}</td>
+            <td class="mono" style="font-size:11px">{p.preferred.offerId ?? "—"}</td>
+            <td>{p.preferred.commissionUsedAsTieBreak ? <span class="tag warn">tie-break</span> : <span class="tag ok">no</span>}</td>
+            <td class="muted" style="font-size:11px">{p.preferred.audit.join(" → ")}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Why an offer is not publishable</h2>
+  <div class="card">
+    <table>
+      <thead><tr><th>Offer</th><th>Blockers</th></tr></thead>
+      <tbody>
+        {products.flatMap((p) => p.offers).map((o) => (
+          <tr>
+            <td class="mono" style="font-size:11px">{o.id.replace("offer-prod-", "")}</td>
+            <td class="muted" style="font-size:12px">{publicationFor(o).blockers.join("; ") || "none"}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Rejected candidates ({REJECTED_CANDIDATES.length})</h2>
+  <div class="card">
+    <table>
+      <thead><tr><th>Product</th><th>Retailer</th><th>Candidate</th><th>Rule</th><th>Reason</th></tr></thead>
+      <tbody>
+        {REJECTED_CANDIDATES.map((c) => (
+          <tr>
+            <td class="mono" style="font-size:11px">{c.productId.replace("prod-", "")}</td>
+            <td class="muted" style="font-size:11px">{c.retailerId.replace("ret-", "")}</td>
+            <td class="muted" style="font-size:11px">{c.candidate}</td>
+            <td><span class="tag warn">{c.rule.replace(/_/g, " ")}</span></td>
+            <td class="muted" style="font-size:11px">{c.reason}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  {issues.length > 0 && (
+    <>
+      <h2>Validation</h2>
+      <div class="card">
+        <table>
+          <thead><tr><th>Severity</th><th>Rule</th><th>Detail</th></tr></thead>
+          <tbody>
+            {issues.map((i) => (
+              <tr>
+                <td>{i.severity === "error" ? <span class="tag bad">error</span> : <span class="tag warn">warning</span>}</td>
+                <td class="mono" style="font-size:12px">{i.rule}</td>
+                <td class="muted">{i.detail}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </>
+  )}
+
+  <style>
+    .big { font-size: 26px; font-weight: 700; letter-spacing: -0.02em; margin: 4px 0; }
+  </style>
+</Admin>

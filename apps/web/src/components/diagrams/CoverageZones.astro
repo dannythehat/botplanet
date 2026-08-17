@@ -1,0 +1,70 @@
+---
+/**
+ * Original BotPlanet graphic — floor / wall / waterline coverage zones.
+ *
+ * REDRAWN 9 August 2026, on the day it first rendered on a page. The legend was
+ * laid out in two columns inside the pool shell, and at any real width the first
+ * entry ran straight into the second swatch — "Waterline — grease & scum line"
+ * collided with the box for "Walls". It had never been seen, because the
+ * component was registered in MEDIA_ASSETS and imported by nothing.
+ *
+ * The legend is now a row under the shell, the three entries read in the order
+ * the prose argues them (every robot does the floor, wall-climbing adds the
+ * walls, only some scrub the waterline), and the drawing carries a title and a
+ * standfirst like every other figure on the site.
+ *
+ * Conceptual; not a depiction of any specific product or test.
+ */
+---
+<figure class="dgm">
+  <svg viewBox="0 0 640 320" width="100%" role="img"
+    aria-label="Pool cross-section highlighting the three cleaning zones: the floor, which every robot cleans; the walls, which only a wall-climbing machine reaches; and the waterline, which only some machines scrub.">
+    <rect x="0" y="0" width="640" height="320" rx="14" fill="var(--panel)" stroke="var(--border)"/>
+
+    <text x="24" y="34" font-size="15" font-weight="700" fill="#f5f5f7">Three zones, and not every robot does all three</text>
+    <text x="24" y="54" font-size="11.5" fill="#c9c9d1">Match the coverage to where your own pool actually gets dirty.</text>
+
+    <!-- pool shell -->
+    <path d="M70 82 L70 252 L570 252 L570 82" fill="none" stroke="#3a4a66" stroke-width="6" stroke-linecap="round"/>
+    <rect x="73" y="106" width="494" height="145" fill="#173a4d" opacity="0.8"/>
+
+    <!-- waterline zone -->
+    <rect x="73" y="106" width="494" height="16" fill="#4fd1c5" opacity="0.45"/>
+    <!-- wall zones -->
+    <rect x="70" y="122" width="10" height="129" fill="#7c93ff" opacity="0.5"/>
+    <rect x="560" y="122" width="10" height="129" fill="#7c93ff" opacity="0.5"/>
+    <!-- floor zone -->
+    <rect x="80" y="242" width="480" height="10" fill="#e0b657" opacity="0.6"/>
+
+    <!-- robot -->
+    <rect x="300" y="226" width="46" height="24" rx="6" fill="#c9c9d1"/>
+    <circle cx="311" cy="250" r="5" fill="#0b0f17"/>
+    <circle cx="335" cy="250" r="5" fill="#0b0f17"/>
+
+    {/* LEGEND UNDER THE SHELL, ONE ROW, in the order the argument runs: what
+        every machine does, what a wall-climber adds, what only some do. */}
+    <g font-size="11">
+      <rect x="24" y="276" width="12" height="12" rx="3" fill="#e0b657" opacity="0.85"/>
+      <text x="42" y="286" fill="#c9c9d1">Floor — silt, sand, leaves</text>
+      <text x="42" y="302" fill="#8b8b95">every robot</text>
+
+      <rect x="232" y="276" width="12" height="12" rx="3" fill="#7c93ff" opacity="0.75"/>
+      <text x="250" y="286" fill="#c9c9d1">Walls — algae and steps</text>
+      <text x="250" y="302" fill="#8b8b95">wall-climbing machines</text>
+
+      <rect x="440" y="276" width="12" height="12" rx="3" fill="#4fd1c5" opacity="0.75"/>
+      <text x="458" y="286" fill="#c9c9d1">Waterline — the scum line</text>
+      <text x="458" y="302" fill="#8b8b95">only some</text>
+    </g>
+  </svg>
+  <figcaption class="note">
+    Every robot cleans the floor; wall-climbing adds the walls; only some also scrub the waterline.
+    If the ring of grease at the surface is your actual complaint, that is the capability to check
+    for by name — it is the one most easily assumed and most often absent.
+  </figcaption>
+</figure>
+<style>
+  .dgm { margin: 1.75rem 0; }
+  .dgm svg { max-width: 640px; display: block; }
+  .dgm .note { margin-top: 8px; }
+</style>

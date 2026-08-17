@@ -1,0 +1,306 @@
+/* BotPlanet metallic direction — global override loaded after the core system. */
+:root {
+  --bg-void: #010203;
+  --bg-base: #050607;
+  --bg-raised: #0a0c0f;
+  --bg-sunken: #020304;
+  --surface-1: #0c0f12;
+  --surface-2: #12161b;
+  --surface-3: #1b2026;
+  --surface-inverse: #e8ebef;
+  --text-primary: #f4f6f8;
+  --text-secondary: #c2c7ce;
+  --text-tertiary: #9299a3;
+  --text-quaternary: #7d848e;
+  --text-decorative: #5f6670;
+  --text-on-inverse: #050607;
+  --border-subtle: #171b20;
+  --border-default: #2b3139;
+  --border-strong: #59616b;
+  --border-inverse: #f2f4f7;
+  --accent-primary: #c9ced5;
+  --accent-primary-hover: #f2f4f7;
+  --accent-primary-active: #979ea8;
+  --accent-primary-text: #e4e7eb;
+  --accent-primary-soft: rgba(205, 211, 218, 0.09);
+  --accent-primary-border: rgba(213, 218, 224, 0.42);
+  --text-on-accent: #08090b;
+  --accent-positive: #d6dbe1;
+  --accent-warning: #a9afb8;
+  --accent-critical: #7d838c;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.55);
+  --shadow-md: 0 16px 36px rgba(0, 0, 0, 0.62);
+  --shadow-lg: 0 34px 90px rgba(0, 0, 0, 0.72);
+}
+
+/* NO background-attachment: fixed, AND NO GRADIENT ON THE SCROLLING BODY.
+   Both used to be here. `fixed` stops the browser from scrolling the painted
+   layer, so every scroll frame repaints the full-page gradient — on a review
+   page 21,000px tall that was the single largest raster on the scroll path.
+   Dropping `fixed` alone would only trade it for a gradient stretched over
+   21,000px, which is barely better.
+
+   So the body is a flat fill (free to scroll) and every gradient moved into
+   the fixed pseudo-element below, which the compositor already keeps as its
+   own layer. Identical look, one layer instead of one repaint per frame. */
+html { background: #030405; }
+
+/* Deliberately transparent, not the same flat fill. A negative-z-index child
+   of <body> paints above the canvas but *below* body's own background box, so
+   giving body a background here would bury both pseudo-elements. */
+body { background: transparent; }
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -2;
+  background:
+    radial-gradient(circle at 18% -10%, rgba(218, 223, 229, 0.08), transparent 31rem),
+    radial-gradient(circle at 85% 7%, rgba(112, 119, 129, 0.07), transparent 26rem),
+    linear-gradient(180deg, #07090b 0%, #020304 42%, #050607 100%);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.18;
+  background-image:
+    linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.014) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: linear-gradient(to bottom, #000, transparent 82%);
+  z-index: -1;
+}
+
+header.site {
+  background: rgba(4, 6, 8, 0.88) !important;
+  border-bottom: 1px solid rgba(219, 224, 230, 0.14);
+  box-shadow: inset 0 -1px 0 rgba(255,255,255,.025), 0 10px 28px rgba(0,0,0,.34);
+}
+
+.logo-full,
+.drawer-logo {
+  content: url('/logo/botplanet-metal.svg');
+  width: auto !important;
+  height: 46px !important;
+  object-fit: contain;
+  filter: drop-shadow(0 5px 12px rgba(0,0,0,.6));
+}
+
+.drawer-logo { height: 38px !important; }
+
+.btn,
+button,
+input,
+select,
+textarea {
+  border-color: rgba(202, 208, 216, 0.26);
+}
+
+.btn--primary,
+.btn--accent,
+.mega-cta {
+  color: #07090b !important;
+  background:
+    linear-gradient(180deg, #f4f5f7 0%, #bfc5cc 43%, #767e88 100%) !important;
+  border-color: #e3e6ea !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.9),
+    inset 0 -1px 0 rgba(0,0,0,.45),
+    0 9px 25px rgba(0,0,0,.42) !important;
+  text-shadow: 0 1px 0 rgba(255,255,255,.42);
+}
+
+.btn--primary:hover,
+.btn--accent:hover,
+.mega-cta:hover {
+  background: linear-gradient(180deg, #fff 0%, #d6dae0 45%, #9299a3 100%) !important;
+  transform: translateY(-1px);
+}
+
+.elevated,
+.card,
+.path,
+.cmp,
+.bm-card,
+.principle {
+  background:
+    linear-gradient(145deg, rgba(255,255,255,.035), transparent 34%),
+    linear-gradient(180deg, #11151a, #080a0d) !important;
+  border-color: rgba(207, 213, 221, 0.17) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.055),
+    0 18px 44px rgba(0,0,0,.42) !important;
+}
+
+.rule-accent,
+.marker__dot,
+.feat__label,
+.eyebrow,
+.soon-tag {
+  background: linear-gradient(90deg, #f1f3f5, #7e858f) !important;
+  color: #08090b !important;
+}
+
+.link,
+a:not(.btn):hover,
+.nav-link.active {
+  color: #f2f4f7 !important;
+}
+
+.stage,
+.pimg,
+.cat-visual,
+.hero-visual {
+  border-color: rgba(204, 210, 218, 0.15) !important;
+}
+
+/* Branded placeholder artwork (ProductImage/media-registry) renders as designed —
+   it already names the model and never claims to be a product photo, so there is
+   no reason to blank it out behind a bare "MEDIA PENDING" label. */
+
+@media (max-width: 900px) {
+  .logo-full { width: 168px !important; height: auto; }
+}
+
+/* ------------------------------------------------------------------
+   Cosmic silver — the section accent.
+   A cool, high-luminance chrome with a faint blue-violet cast in the
+   shadows. Used for section eyebrows, index chips, tags and markers
+   so the page below the hero carries the same metal as the hero does.
+   ------------------------------------------------------------------ */
+:root {
+  --cs-hi: #f6f8fc;
+  --cs-bright: #dfe4ec;
+  --cs-mid: #aab2c0;
+  --cs-low: #6c7482;
+  --cs-deep: #3d434e;
+
+  --cs-sheen: linear-gradient(135deg, #f6f8fc 0%, #cfd6e2 38%, #8a92a1 72%, #dfe4ec 100%);
+  --cs-rule: linear-gradient(90deg, rgba(246,248,252,.72), rgba(138,146,161,.16));
+  --cs-line: rgba(200, 208, 222, 0.2);
+  --cs-line-soft: rgba(200, 208, 222, 0.12);
+  --cs-glow: rgba(198, 208, 226, 0.09);
+
+  --cs-surface: linear-gradient(180deg, #12161c 0%, #0a0d11 100%);
+  --cs-surface-lift:
+    radial-gradient(ellipse at 0% 0%, rgba(226, 232, 244, 0.07), transparent 60%),
+    linear-gradient(180deg, #141920 0%, #0a0d11 100%);
+
+  /* ----------------------------------------------------------------
+     THE GLINT — colour, in the quantity metal actually has it.
+
+     Polished steel is never grey. It is grey with something cold
+     caught in it, and that is the only colour this palette gets:
+     an edge, a dot, a two-percent wash under a highlight. These
+     three blues already existed on the BotMatch panel; they were
+     just trapped on the one white surface on the site while every
+     dark plate stayed monochrome.
+
+     The rule for using them: a glint marks an EDGE or a STATE. It
+     never fills an area, never colours body text, and never
+     competes with the silver for the eye. If a change reads as
+     "the box is blue now" rather than "the box has a highlight",
+     it has gone too far.
+     ---------------------------------------------------------------- */
+  --cs-glint: #3d8ef0;
+  --cs-glint-deep: #1b5fc4;
+  --cs-glint-wash: rgba(61, 142, 240, 0.14);
+
+  /* States. Cool enough to sit beside the steel rather than on top of it. */
+  --cs-good: #3fb87a;
+  --cs-good-wash: rgba(63, 184, 122, 0.14);
+  --cs-warn: #d9a441;
+
+  /* Silver with the blue left in, for a highlight that should read as a
+     reflection rather than as a coloured object. */
+  --cs-sheen-cool: linear-gradient(135deg, #ffffff 0%, #dbe6f7 30%, #93a6c4 68%, #e8eefa 100%);
+}
+
+/* ------------------------------------------------------------------
+   Section plates.
+
+   Every editorial section on a category page sits on its own metallic
+   plate, so the reader can see at a glance where one idea stops and
+   the next begins. Applied here rather than in each component because
+   the treatment is a page-level rhythm, not a property of any one
+   element — changing the radius or the sheen once changes all nine.
+
+   The plate is the OUTER frame. Anything already framed inside it —
+   a card, a rung, a table, an accordion row — steps down to the soft
+   hairline so a box inside a box does not read as two heavy borders.
+   ------------------------------------------------------------------ */
+.bp-dsec,
+.bp-cov,
+.bp-split,
+.bp-mx,
+.bp-chk,
+.bp-price,
+.bp-verdict,
+.bp-faq {
+  position: relative;
+  margin-bottom: clamp(1.75rem, 4vw, 2.75rem);
+  padding: clamp(1.35rem, 4vw, 2.75rem);
+  /* Brighter than the hairlines used inside a section: this edge has to be
+     findable at a glance, which is the whole point of boxing them. */
+  border: 1px solid rgba(206, 214, 228, 0.26);
+  border-radius: 20px;
+  background:
+    radial-gradient(ellipse at 6% -20%, rgba(226, 232, 244, 0.06), transparent 55%),
+    linear-gradient(179deg, #12161c 0%, #0a0d11 68%, #0e1217 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.5),
+    0 22px 52px rgba(0, 0, 0, 0.4);
+}
+
+/* A hairline of light across the top edge — the same lit-metal cue the
+   hero uses, held back so it separates plates without competing with
+   the BotMatch panel, which is meant to be the brightest thing here. */
+.bp-dsec::before,
+.bp-cov::before,
+.bp-split::before,
+.bp-mx::before,
+.bp-chk::before,
+.bp-price::before,
+.bp-verdict::before,
+.bp-faq::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1px;
+  border-radius: 20px 20px 0 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(246, 248, 252, 0.3) 24%,
+    rgba(246, 248, 252, 0.5) 50%,
+    rgba(246, 248, 252, 0.28) 76%,
+    transparent
+  );
+  pointer-events: none;
+}
+
+/* Nested frames step down a level so the plate stays the outer edge.
+   The element qualifier is deliberate: Astro's scoped styles carry an
+   attribute selector, so a bare class here would tie and lose. */
+section.bp-dsec .bp-dcard,
+section.bp-split .bp-spanel,
+section.bp-mx .bp-mx__frame,
+section.bp-chk .bp-chk__box,
+section.bp-price .bp-rung,
+section.bp-verdict .bp-verdict__panel,
+section.bp-faq .bp-faq__item,
+section.bp-cov .bp-cov__figure {
+  border-color: var(--cs-line-soft);
+}
+
+/* The last plate before the product grid needs its normal breathing room
+   back, otherwise the footer and the grid crowd the final section. */
+.bp-faq {
+  margin-bottom: clamp(2.5rem, 6vw, 4rem);
+}
