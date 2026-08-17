@@ -24,7 +24,7 @@ import {
 } from "../src/content/journeys";
 import { REVIEWS } from "../src/content/reviews";
 import { categoryCanMatch, MIN_PRODUCTS_FOR_A_MATCH } from "../src/content/matcher-router";
-import { liveCategories, LAUNCH_CATEGORY } from "../src/content/nav";
+import { liveCategories } from "../src/content/nav";
 
 const opts = { canMatch: categoryCanMatch };
 const HEADER = readFileSync(fileURLToPath(new URL("../src/components/Header.astro", import.meta.url)), "utf8");
@@ -76,15 +76,11 @@ describe("the shell's BotMatch journey follows the page", () => {
   });
 
   it("uses the universal job-first journey on every universal discovery page", () => {
-    for (const p of ["/", "/robots/", "/best-robots/", "/botmatch/"]) {
+    for (const p of ["/", "/robots/", "/botmatch/", "/about/", "/guides/", "/review-methodology/"]) {
       const journey = shellJourneyFor(p, opts);
       expect(journey?.category, p).toBe("universal");
       expect(journey?.ctaLabel, p).toBe("Find My Robot");
       expect(journey?.href, p).toBe("/botmatch/");
-    }
-
-    for (const p of ["/about/", "/guides/", "/review-methodology/"]) {
-      expect(shellJourneyFor(p, opts)?.category, p).toBe(LAUNCH_CATEGORY);
     }
   });
 
