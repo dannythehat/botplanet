@@ -12,9 +12,6 @@ name: Preview BotPlanet
 # and is never printed.
 
 on:
-  push:
-    branches:
-      - agent/homepage-visual-and-shell-fixes
   workflow_dispatch:
     inputs:
       ref:
