@@ -591,6 +591,8 @@ const payload = JSON.stringify({
       const card = document.createElement("article");
       card.className = "bp-mm__product-card";
 
+      const media = document.createElement("div");
+      media.className = "bp-mm__product-media";
       if (product.image) {
         const img = document.createElement("img");
         img.className = "bp-mm__product-image";
@@ -604,8 +606,20 @@ const payload = JSON.stringify({
           img.srcset = product.image.srcset.map((item) => `${item.src} ${item.width}w`).join(", ");
           img.sizes = "(min-width: 700px) 240px, 100vw";
         }
-        card.appendChild(img);
+        media.appendChild(img);
+      } else {
+        media.classList.add("bp-mm__product-media--fallback");
+        const mark = document.createElement("img");
+        mark.src = "/logo/favicon-128.png";
+        mark.alt = "";
+        mark.width = 64;
+        mark.height = 64;
+        mark.loading = "lazy";
+        const fallbackLabel = document.createElement("span");
+        fallbackLabel.textContent = "BOTPLANET MATCH";
+        media.append(mark, fallbackLabel);
       }
+      card.appendChild(media);
 
       const copy = document.createElement("div");
       copy.className = "bp-mm__product-copy";
@@ -825,9 +839,24 @@ const payload = JSON.stringify({
     display: grid; grid-template-columns: minmax(150px, 42%) 1fr; overflow: hidden;
     border: 1px solid rgba(200, 208, 222, .20); border-radius: 15px; background: #070a0e;
   }
-  .bp-mm__product-card > img {
-    display: block; width: 100%; height: 100%; min-height: 170px; object-fit: cover;
+  .bp-mm__product-media {
+    display: grid; min-height: 170px; overflow: hidden; place-items: center;
     border-right: 1px solid rgba(200, 208, 222, .16);
+  }
+  .bp-mm__product-media > .bp-mm__product-image {
+    display: block; width: 100%; height: 100%; min-height: 170px; object-fit: cover;
+  }
+  .bp-mm__product-media--fallback {
+    align-content: center; gap: .7rem; padding: 1.2rem;
+    background:
+      radial-gradient(circle at 50% 42%, rgba(84, 217, 255, .20), transparent 34%),
+      linear-gradient(145deg, #101923 0%, #05080d 68%);
+  }
+  .bp-mm__product-media--fallback > img {
+    width: 64px; height: 64px; filter: drop-shadow(0 0 18px rgba(84, 217, 255, .28));
+  }
+  .bp-mm__product-media--fallback > span {
+    color: #8fdfff; font-family: var(--font-mono); font-size: .62rem; font-weight: 700; letter-spacing: .18em;
   }
   .bp-mm__product-copy {
     display: flex; min-width: 0; flex-direction: column; align-items: flex-start; justify-content: center;
@@ -848,7 +877,8 @@ const payload = JSON.stringify({
   .bp-mm__product-button:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
   @media (max-width: 560px) {
     .bp-mm__product-card { grid-template-columns: 1fr; }
-    .bp-mm__product-card > img { aspect-ratio: 16 / 10; min-height: 0; border-right: 0; border-bottom: 1px solid rgba(200, 208, 222, .16); }
+    .bp-mm__product-media { aspect-ratio: 16 / 10; min-height: 0; border-right: 0; border-bottom: 1px solid rgba(200, 208, 222, .16); }
+    .bp-mm__product-media > .bp-mm__product-image { min-height: 0; }
   }
 
   /* Global rather than scoped: the option buttons and task rows are created in
