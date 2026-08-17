@@ -81,7 +81,7 @@ export const ROUTES: RouteDef[] = [
   },
   {
     path: "/robots/",
-    label: "Shop Robots",
+    label: "Explore Robots",
     breadcrumbLabel: "Robot Categories",
     section: "shop",
     parent: "/",
@@ -149,8 +149,11 @@ export const ROUTES: RouteDef[] = [
     section: "deals",
     parent: "/",
     status: "coming_soon",
-    navSurface: "bar-secondary",
-    footerGroup: "Explore",
+    /* BotPlanet is an independent affiliate comparison publisher, not a shop.
+       Keep the future route reserved, but do not advertise an empty retail
+       destination in the global navigation or footer. */
+    navSurface: "none",
+    footerGroup: null,
     inSitemap: false,
     indexable: false,
     summary: "Verified price drops. Nothing is listed until a price is confirmed at the retailer.",
