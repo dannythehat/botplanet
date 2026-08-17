@@ -133,7 +133,8 @@ export const ROUTES: RouteDef[] = [
   },
   {
     path: "/guides/",
-    label: "Guides",
+    label: "Buying Advice",
+    breadcrumbLabel: "Buying Advice",
     section: "guides",
     parent: "/",
     status: "live",
