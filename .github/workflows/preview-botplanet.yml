@@ -12,9 +12,6 @@ name: Preview BotPlanet
 # and is never printed.
 
 on:
-  push:
-    branches:
-      - agent/url-consolidation
   workflow_dispatch:
     inputs:
       ref:
@@ -37,7 +34,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.inputs.ref || github.ref }}
+          ref: ${{ inputs.ref }}
 
       - name: Report the commit being previewed
         run: |
@@ -82,7 +79,7 @@ jobs:
             echo ""
             echo "| Field | Value |"
             echo "| --- | --- |"
-            echo "| Requested ref | \`${{ github.event.inputs.ref || github.ref }}\` |"
+            echo "| Requested ref | \`${{ inputs.ref }}\` |"
             echo "| Commit | \`${PREVIEW_SHA}\` |"
             echo "| Worker version | \`${{ steps.preview.outputs.version_id }}\` |"
             echo "| Preview URL | ${{ steps.preview.outputs.preview_url }} |"
