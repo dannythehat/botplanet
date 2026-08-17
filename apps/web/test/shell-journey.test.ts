@@ -75,11 +75,13 @@ describe("the shell's BotMatch journey follows the page", () => {
     }
   });
 
-  it("uses the universal job-first journey on the homepage only", () => {
-    const home = shellJourneyFor("/", opts);
-    expect(home?.category).toBe("universal");
-    expect(home?.ctaLabel).toBe("Find My Robot");
-    expect(home?.href).toBe("/botmatch/");
+  it("uses the universal job-first journey on both discovery pages", () => {
+    for (const p of ["/", "/robots/"]) {
+      const journey = shellJourneyFor(p, opts);
+      expect(journey?.category, p).toBe("universal");
+      expect(journey?.ctaLabel, p).toBe("Find My Robot");
+      expect(journey?.href, p).toBe("/botmatch/");
+    }
 
     for (const p of ["/about/", "/guides/", "/review-methodology/"]) {
       expect(shellJourneyFor(p, opts)?.category, p).toBe(LAUNCH_CATEGORY);

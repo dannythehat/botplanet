@@ -6,12 +6,10 @@ export const SITE = {
   name: "BotPlanet",
   domain: "botplanet.io",
   /**
-   * Brand-level statement. Deliberately NOT a BotMatch promise: BotMatch is
-   * category-specific and currently covers robotic pool cleaners only, so no
-   * copy may imply one journey recommends across the whole robotics market.
-   * This is the single source for structured data and any rendered use.
+   * Brand-level statement for structured data and rendered brand surfaces.
+   * BotPlanet is an independent affiliate publisher, not a retailer or shop.
    */
-  tagline: "Shop the planet’s real-world robots with clearer comparisons, evidence and category-specific guidance.",
+  tagline: "Independent comparisons and buying advice for useful real-world robots.",
   /* Confirmed by the owner on 10 August 2026 — the TODO that stood here since
      launch is answered. The byline is the full name because a byline is an
      accountability statement and "Danny" is what the emails sign off as, not
