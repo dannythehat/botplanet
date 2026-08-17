@@ -180,7 +180,7 @@ export const BOTMATCH_JOURNEYS: Record<string, BotMatchJourney> = {
  * concrete matcher; only the front door uses the job-first router. */
 export const UNIVERSAL_BOTMATCH_JOURNEY: BotMatchJourney = {
   category: "universal",
-  ctaLabel: "Find Your Robot",
+  ctaLabel: "Find My Robot",
   subject: "robot",
   matchAgainst: "the job",
   journeyTitle: "Find the right robot for the job",
