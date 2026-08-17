@@ -1,10 +1,10 @@
 /**
  * BotMatch journeys — category-aware recommendation configuration.
  *
- * PRODUCT RULE: BotMatch is category-specific. It cannot meaningfully "find any
- * robot" without first knowing the category and the customer's need, so the
- * public shell must never advertise a generic site-wide "Find My Robot".
- * Every CTA is supplied by the journey for a concrete category.
+ * PRODUCT RULE: Category pages advertise their own concrete matcher. The two
+ * universal discovery pages — the homepage and the category directory — use
+ * the job-first "Find My Robot" router so they never pretend the visitor has
+ * already chosen a category.
  *
  * Adding a future category means adding one entry here — no component changes,
  * no hard-coded label anywhere in the shell. Only the launch category is
@@ -176,8 +176,8 @@ export const BOTMATCH_JOURNEYS: Record<string, BotMatchJourney> = {
   },
 };
 
-/** Universal homepage journey. Category pages continue to use their own
- * concrete matcher; only the front door uses the job-first router. */
+/** Universal discovery journey. Category pages continue to use their own
+ * concrete matcher; the homepage and category directory use the job-first router. */
 export const UNIVERSAL_BOTMATCH_JOURNEY: BotMatchJourney = {
   category: "universal",
   ctaLabel: "Find My Robot",
@@ -223,18 +223,20 @@ export function categoryOfPath(pathname: string, routeCategory?: string | null):
  *    5b, and it outranks having a button in the header. Falling back to pool
  *    here would just be the original bug wearing a smaller hat.
  *
- *  - Everything else — the homepage, /about/, /guides/ — keeps the launch
- *    journey, UNCHANGED. The universal job-picker at /botmatch/ is live and
- *    would arguably be the better answer there, but the product rule at the top
- *    of this file forbids the shell advertising a generic "find any robot" and
- *    that rule is the owner's, not a builder's to reinterpret in passing.
+ *  - The homepage and /robots/ category directory use the universal job-first
+ *    journey. Other uncategorised pages retain the launch fallback until each
+ *    is reviewed in its own page-by-page recovery pass.
  */
 export function shellJourneyFor(
   pathname: string,
   opts: { routeCategory?: string | null; canMatch: (slug: string) => boolean },
 ): BotMatchJourney | null {
   const cat = categoryOfPath(pathname, opts.routeCategory);
-  if (!cat) return pathname === "/" ? UNIVERSAL_BOTMATCH_JOURNEY : BOTMATCH_JOURNEYS[LAUNCH_CATEGORY];
+  if (!cat) {
+    return pathname === "/" || pathname === "/robots/"
+      ? UNIVERSAL_BOTMATCH_JOURNEY
+      : BOTMATCH_JOURNEYS[LAUNCH_CATEGORY];
+  }
   const journey = journeyFor(cat);
   if (!journey) return null;
   return opts.canMatch(cat) ? journey : null;
