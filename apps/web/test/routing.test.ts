@@ -165,7 +165,7 @@ describe("breadcrumbsFor", () => {
 
   it("builds a guide article trail", () => {
     expect(breadcrumbsFor("/guides/how-robot-pool-cleaners-work/", "How robot pool cleaners work").map((x) => x.name)).toEqual([
-      "Guides",
+      "Buying Advice",
       "How robot pool cleaners work",
     ]);
   });
