@@ -1,43 +1,10 @@
 ---
-/**
- * Branded 404. Returns a genuine 404 status (Astro sets it for this route),
- * is noindex, and offers real onward routes instead of dead-ending or making
- * a misleading BotMatch promise.
- */
 import Base from "../layouts/Base.astro";
-import { LAUNCH_CATEGORY, categoryRoutes } from "../content/routes";
-import { shellJourney } from "../content/journeys";
-const cat = categoryRoutes(LAUNCH_CATEGORY);
-const journey = shellJourney();
 ---
-<Base title="Page not found — BotPlanet" description="That page does not exist on BotPlanet." noindex={true} narrow={true}>
-  <div class="nf">
-    <span class="eyebrow">Error 404</span>
-    <h1>That page doesn't exist.</h1>
-    <p class="lede">
-      The address may be mistyped, or the page may have been moved. Nothing has been lost — here is where to go next.
-    </p>
-
-    <form class="search-form" method="get" action="/search/" role="search">
-      <label class="sr-only" for="nf-q">Search BotPlanet</label>
-      <input type="search" id="nf-q" name="q" placeholder="Search robots, guides, comparisons…" />
-      <button class="btn btn--primary" type="submit">Search</button>
-    </form>
-
-    <ul class="nf-links">
-      <li><a class="link" href="/robots/">All robot categories</a></li>
-      <li><a class="link" href={cat.hub}>Robotic pool cleaners</a> — the live US catalogue</li>
-      <li><a class="link" href={cat.compare}>Compare pool cleaners</a></li>
-      <li><a class="link" href={journey.href}>{journey.ctaLabel}</a></li>
-      <li><a class="link" href="/">Back to the homepage</a></li>
-    </ul>
-  </div>
+<Base title="Page not found | BotPlanet" description="That page does not exist on BotPlanet." noindex={true}>
+  <section class="lost"><figure><img src="/media/home/hero-desktop.webp" srcset="/media/home/hero-desktop-360w.webp 360w, /media/home/hero-desktop-640w.webp 640w, /media/home/hero-desktop-960w.webp 960w" sizes="(min-width:850px) 48vw,100vw" width="960" height="540" alt="Useful robots around a home, ready to help you continue exploring BotPlanet." loading="eager" fetchpriority="high" decoding="async" /></figure><div><p class="kicker">ERROR 404</p><h1>This route left the planet.</h1><p>The address may be mistyped, or the page may have moved. Search for a robot or choose a clear way back into the site.</p><form method="get" action="/search/" role="search"><label class="sr-only" for="lost-q">Search BotPlanet</label><input type="search" id="lost-q" name="q" placeholder="Search robots by name…" /><button class="btn btn--accent" type="submit">Search</button></form><nav aria-label="Continue browsing"><a href="/robots/">Explore robot categories <span aria-hidden="true">→</span></a><a href="/botmatch/">Find my robot <span aria-hidden="true">→</span></a><a href="/guides/">Read buying advice <span aria-hidden="true">→</span></a><a href="/">Back to the homepage <span aria-hidden="true">→</span></a></nav></div></section>
 </Base>
 <style>
-  .nf { padding-block: var(--space-xl) var(--space-2xl); }
-  .search-form { display: flex; gap: var(--space-sm); margin: var(--space-lg) 0; flex-wrap: wrap; max-width: 520px; }
-  .search-form input { flex: 1 1 220px; }
-  .nf-links { list-style: none; padding: 0; margin: var(--space-lg) 0 0; display: grid; gap: var(--space-sm); }
-  .nf-links li { margin: 0; color: var(--text-tertiary); font-size: var(--type-body-sm); }
-  .nf-links a { font-weight: var(--weight-semibold); }
+  .kicker{margin:0 0 .8rem;color:var(--text-tertiary);font:700 .7rem/1 var(--font-mono);letter-spacing:.18em}.lost{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(2rem,6vw,6rem);align-items:center;max-width:1200px;min-height:68vh;margin:0 auto;padding:clamp(3rem,7vw,6rem) 0}.lost figure{overflow:hidden;margin:0;aspect-ratio:16/10;border:1px solid var(--border-default);border-radius:1.4rem;background:var(--surface-raised);filter:grayscale(.35)}.lost img{width:100%;height:100%;object-fit:cover}.lost h1{margin:0;font-size:clamp(3.1rem,5.5vw,5.5rem);line-height:.95;letter-spacing:-.06em}.lost>div>p:not(.kicker){color:var(--text-secondary);font-size:1.1rem;line-height:1.65}.lost form{display:flex;gap:.6rem;margin:1.5rem 0}.lost input{min-width:0;flex:1}.lost nav{display:flex;flex-direction:column;overflow:hidden;border:1px solid var(--border-subtle);border-radius:1rem}.lost nav a{display:flex;justify-content:space-between;padding:1rem 1.1rem}.lost nav a+a{border-top:1px solid var(--border-subtle)}
+  @media(max-width:850px){.lost{grid-template-columns:1fr}.lost figure{order:2}}@media(max-width:520px){.lost form{align-items:stretch;flex-direction:column}.lost form .btn{justify-content:center}}
 </style>

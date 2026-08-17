@@ -1,63 +1,29 @@
 ---
-/**
- * Search results route. The header overlay is the fast path; this page exists
- * so search is reachable without JavaScript and so a shared or bookmarked
- * search URL resolves. It is noindex: query variants must never create
- * indexable near-duplicate pages.
- */
 import Base from "../../layouts/Base.astro";
 import { getDb, schema } from "../../lib/db";
 import { eq } from "drizzle-orm";
-import { LAUNCH_CATEGORY, categoryRoutes } from "../../content/routes";
+import { categoryRoutes, liveCategories } from "../../content/routes";
+import { CATEGORY_DIRECTORY_ART } from "../../content/category-directory-art";
+import { srcsetFor } from "../../lib/srcset";
 
-const q = (Astro.url.searchParams.get("q") ?? "").trim();
-const db = getDb(Astro.locals);
-const cat = categoryRoutes(LAUNCH_CATEGORY);
-
-const all = await db
-  .select({ slug: schema.products.slug, name: schema.products.name })
-  .from(schema.products)
-  .where(eq(schema.products.status, "published"));
-const products = q ? all.filter((p) => p.name.toLowerCase().includes(q.toLowerCase())) : [];
+const q=(Astro.url.searchParams.get("q")??"").trim();
+const db=getDb(Astro.locals);
+const categories=liveCategories().slice().sort((a,b)=>a.order-b.order);
+const categoryBySlug=new Map(categories.map(c=>[c.slug,c]));
+const categoryRecords=await db.select({id:schema.categories.id,slug:schema.categories.slug,name:schema.categories.name}).from(schema.categories);
+const categoryById=new Map(categoryRecords.map(c=>[c.id,c]));
+const all=await db.select({slug:schema.products.slug,name:schema.products.name,categoryId:schema.products.categoryId}).from(schema.products).where(eq(schema.products.status,"published"));
+const normalise=(value:string)=>value.toLowerCase().replace(/[^a-z0-9]+/g," ").trim();
+const needle=normalise(q);
+const products=needle?all.filter(p=>normalise(`${p.name} ${categoryById.get(p.categoryId)?.name??p.categoryId}`).includes(needle)).slice(0,48):[];
+const suggestions=categories.slice(0,6).map(category=>({...category,href:categoryRoutes(category.slug).hub,art:CATEGORY_DIRECTORY_ART[category.slug]??null}));
 ---
-<Base
-  title={q ? `Search: ${q} — BotPlanet` : "Search — BotPlanet"}
-  description="Search BotPlanet."
-  noindex={true}
-  narrow={true}
->
-  <h1>Search</h1>
-  <form class="search-form" method="get" action="/search/" role="search">
-    <label class="sr-only" for="q">Search BotPlanet</label>
-    <input type="search" id="q" name="q" value={q} placeholder="Search robots, guides, comparisons…" />
-    <button class="btn btn--primary" type="submit">Search</button>
-  </form>
-
-  {q === "" ? (
-    <div class="empty mt-lg">
-      <p class="empty__title">Type what you're looking for</p>
-      <p>Try a product name, or start from <a class="link" href={cat.hub}>robotic pool cleaners</a>.</p>
-    </div>
-  ) : products.length === 0 ? (
-    <div class="empty mt-lg">
-      <p class="empty__title">No matches for “{q}”</p>
-      <p>
-        Only the robotic pool cleaner catalogue is searchable today. Browse
-        <a class="link" href={cat.hub}> all pool cleaners</a>, or
-        <a class="link" href={cat.botmatch}> answer a few questions</a> instead.
-      </p>
-    </div>
-  ) : (
-    <ul class="results mt-lg">
-      {products.map((p) => (
-        <li><a class="link" href={`/robots/${LAUNCH_CATEGORY}/${p.slug}/`}>{p.name}</a></li>
-      ))}
-    </ul>
-  )}
+<Base title={q?`Search results for ${q} | BotPlanet`:"Search Robots | BotPlanet"} description="Search BotPlanet products and browse every robot category." noindex={true}>
+  <header class="search-hero"><p class="kicker">SEARCH BOTPLANET</p><h1>{q?<>Results for “{q}”</>:<>Which robot are<br />you looking for?</>}</h1><form method="get" action="/search/" role="search"><label class="sr-only" for="q">Search robots</label><input type="search" id="q" name="q" value={q} placeholder="Product or robot category…" autofocus /><button class="btn btn--accent btn--lg" type="submit">Search</button></form></header>
+  {q&&products.length>0?<section class="results" aria-live="polite"><p>{products.length} matching {products.length===1?"robot":"robots"}</p><ul>{products.map(p=>{const record=categoryById.get(p.categoryId);const category=record?categoryBySlug.get(record.slug):undefined;return <li><a href={`/robots/${record?.slug??""}/${p.slug}/`}><span class="result-mark" aria-hidden="true">{p.name.slice(0,1)}</span><span><strong>{p.name}</strong><small>{category?.name??record?.name??"Robot"}</small></span><b aria-hidden="true">→</b></a></li>})}</ul></section>:q?<section class="empty" aria-live="polite"><p class="kicker">NO EXACT PRODUCT MATCH</p><h2>Try the job instead.</h2><p>Search by a shorter product name, browse the categories below or tell BotMatch what you want done.</p><a class="btn btn--accent" href="/botmatch/">Find my robot</a></section>:null}
+  <section class="browse" aria-labelledby="browse-title"><header><p class="kicker">BROWSE BY JOB</p><h2 id="browse-title">Explore robot categories</h2></header><ul>{suggestions.map(category=><li><a href={category.href}>{category.art&&<img src={category.art.src} srcset={srcsetFor(category.art.src)} sizes="(min-width:900px) 33vw,(min-width:600px) 50vw,100vw" alt={category.art.alt} loading="lazy" decoding="async" style={category.art.focal?`object-position:${category.art.focal}`:undefined}/>}<span><strong>{category.name}</strong><small>{category.short}</small></span></a></li>)}</ul><a class="all" href="/robots/">See every robot category <span aria-hidden="true">→</span></a></section>
 </Base>
 <style>
-  .search-form { display: flex; gap: var(--space-sm); margin-top: var(--space-md); flex-wrap: wrap; }
-  .search-form input { flex: 1 1 260px; }
-  .results { list-style: none; padding: 0; display: grid; gap: var(--space-sm); }
-  .results li { margin: 0; }
+  .kicker{margin:0 0 .8rem;color:var(--text-tertiary);font:700 .7rem/1 var(--font-mono);letter-spacing:.18em}.search-hero{max-width:920px;margin:0 auto;padding:clamp(3rem,7vw,6rem) 0 clamp(2rem,4vw,3.5rem);text-align:center}.search-hero h1{margin:0;font-size:clamp(3.1rem,6vw,6rem);line-height:.95;letter-spacing:-.06em}.search-hero form{display:flex;gap:.7rem;max-width:720px;margin:2rem auto 0}.search-hero input{min-width:0;flex:1;font-size:1.05rem}.results,.empty,.browse{max-width:1120px;margin:0 auto clamp(5rem,8vw,7rem)}.results>p{color:var(--text-secondary)}.results ul{display:grid;grid-template-columns:repeat(2,1fr);gap:.8rem;margin:0;padding:0;list-style:none}.results a{display:grid;grid-template-columns:48px 1fr auto;gap:1rem;align-items:center;padding:1rem;border:1px solid var(--border-subtle);border-radius:1rem;background:var(--surface-raised)}.result-mark{display:grid;width:48px;height:48px;place-items:center;border:1px solid var(--border-default);border-radius:.8rem;color:var(--accent);font:700 1.1rem var(--font-mono)}.results strong,.results small{display:block}.results small{margin-top:.2rem;color:var(--text-secondary)}.empty{padding:clamp(2rem,5vw,4rem);border:1px solid var(--border-subtle);border-radius:1.2rem;background:var(--surface-raised);text-align:center}.empty h2,.browse h2{margin:0;font-size:clamp(2.2rem,4vw,3.8rem);letter-spacing:-.05em}.empty>p:not(.kicker){color:var(--text-secondary)}.browse>header{text-align:center}.browse ul{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:2rem 0 0;padding:0;list-style:none}.browse li{display:flex}.browse li>a{display:flex;width:100%;flex-direction:column;overflow:hidden;border:1px solid var(--border-subtle);border-radius:1rem;background:var(--surface-raised)}.browse img{width:100%;aspect-ratio:3/2;object-fit:cover}.browse li span{padding:1rem}.browse strong,.browse small{display:block}.browse small{margin-top:.35rem;color:var(--text-secondary);line-height:1.45}.browse .all{display:block;margin-top:1.5rem;text-align:center;font-weight:700}
+  @media(max-width:800px){.browse ul{grid-template-columns:repeat(2,1fr)}.results ul{grid-template-columns:1fr}}@media(max-width:560px){.search-hero form{align-items:stretch;flex-direction:column}.search-hero .btn{justify-content:center}.browse ul{grid-template-columns:1fr}}
 </style>
