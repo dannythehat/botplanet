@@ -12,6 +12,9 @@ name: Preview BotPlanet
 # and is never printed.
 
 on:
+  push:
+    branches:
+      - agent/utility-pages-rebuild
   workflow_dispatch:
     inputs:
       ref:
