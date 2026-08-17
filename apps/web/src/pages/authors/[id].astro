@@ -1,163 +1,30 @@
 ---
-/**
- * One page per named author.
- *
- * WHY THESE EXIST AT ALL. An author box that links nowhere is a name in a
- * circle. The reason to publish a person on a shopping site is so a reader can
- * find out who is telling them not to buy something and what that person is on
- * the hook for — and so the reviews they wrote point at ONE entity with a
- * stable @id rather than at a string that happens to repeat.
- *
- * WHAT IS NOT ON THESE PAGES. No portrait, because we do not hold one and a
- * stock photograph standing in for a real person is the same lie as an
- * invented credential. No years of experience, no unit counts, no awards. The
- * honesty rule at the top of content/team.ts applies hardest here, where a
- * search engine reads everything as a claim about a real individual.
- */
 import Base from "../../layouts/Base.astro";
 import { AUTHORS, EDITORIAL, authorForReview } from "../../content/team";
 import { REVIEWS } from "../../content/reviews";
 import { CATEGORIES as NAV_CATEGORIES } from "../../content/nav";
 import { productPath } from "../../content/routes";
 import { personSchema, webPageSchema, breadcrumbSchema } from "../../lib/seo";
-
-/* READ AT REQUEST TIME, NOT PRE-BUILT. This route shipped with
-   getStaticPaths(), which a Cloudflare SSR build ignores — the two pages
-   answered 404 and 500 respectively until it was caught on deploy. The rest of
-   the site resolves dynamic segments the same way: look the param up, and 404
-   when it is not ours rather than rendering an empty person. */
-const author = AUTHORS[Astro.params.id ?? ""];
-if (!author) return new Response(null, { status: 404 });
-
-/* What they actually wrote, read from the review registry rather than typed
-   here, so a review assigned tomorrow appears on the right page the same day
-   and a reassignment cannot leave a stale list behind. */
-const CATEGORY_NAME = new Map(NAV_CATEGORIES.map((c) => [c.slug, c.name]));
-const written = Object.values(REVIEWS)
-  .filter((r) => authorForReview(r.authorId).id === author.id)
-  .map((r) => ({
-    title: r.title.replace(/ review$/i, ""),
-    href: productPath(r.slug, r.categorySlug),
-    category: CATEGORY_NAME.get(r.categorySlug) ?? r.categorySlug,
-  }))
-  .sort((a, b) =>
-    a.category === b.category ? a.title.localeCompare(b.title) : a.category.localeCompare(b.category),
-  );
-
-const readable = (iso: string) =>
-  new Date(`${iso}T00:00:00Z`).toLocaleDateString("en-GB", {
-    day: "numeric", month: "long", year: "numeric", timeZone: "UTC",
-  });
-
-/* Newest first. A record of judgement reads as a record when the most recent
-   call is at the top; oldest-first reads as a CV. */
-const work = [...(author.notableWork ?? [])].sort((a, b) => b.date.localeCompare(a.date));
-
-const title = `${author.name} — ${author.role} at BotPlanet`;
-const description = `${author.name} is ${author.role} at BotPlanet. ${author.accountability}`.slice(0, 158);
-
-const schema = [
-  webPageSchema({ path: Astro.url.pathname, name: title, description, type: "AboutPage" }),
-  personSchema({
-    name: author.name,
-    jobTitle: author.role,
-    description: author.background ? `${author.bio} ${author.background}` : author.bio,
-    path: author.path,
-  }),
-  breadcrumbSchema([
-    { name: "Home", path: "/" },
-    { name: "Authors", path: "/authors/" },
-    { name: author.name, path: author.path },
-  ]),
-];
+const author=AUTHORS[Astro.params.id??""];
+if(!author)return new Response(null,{status:404});
+const categoryName=new Map(NAV_CATEGORIES.map(category=>[category.slug,category.name]));
+const written=Object.values(REVIEWS).filter(review=>authorForReview(review.authorId).id===author.id).map(review=>({title:review.title.replace(/ review$/i,""),href:productPath(review.slug,review.categorySlug),category:categoryName.get(review.categorySlug)??review.categorySlug})).sort((a,b)=>a.category===b.category?a.title.localeCompare(b.title):a.category.localeCompare(b.category));
+const groups=Array.from(written.reduce((map,item)=>{const rows=map.get(item.category)??[];rows.push(item);map.set(item.category,rows);return map},new Map<string,typeof written>()).entries()).map(([category,items])=>({category,items}));
+const readable=(iso:string)=>new Date(`${iso}T00:00:00Z`).toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric",timeZone:"UTC"});
+const work=[...(author.notableWork??[])].sort((a,b)=>b.date.localeCompare(a.date));
+const TITLE=`${author.name} | ${author.role} at BotPlanet`;
+const DESCRIPTION=`${author.name} is ${author.role} at BotPlanet. ${author.accountability}`.slice(0,158);
+const schema=[webPageSchema({path:author.path,name:TITLE,description:DESCRIPTION,type:"AboutPage"}),personSchema({name:author.name,jobTitle:author.role,description:author.background?`${author.bio} ${author.background}`:author.bio,path:author.path}),breadcrumbSchema([{name:"Home",path:"/"},{name:"Authors",path:"/authors/"},{name:author.name,path:author.path}])];
 ---
-
-<Base title={title} description={description} schema={schema}>
-  <p class="muted"><a href="/authors/">Authors</a></p>
-  {author.portrait && (
-    <img
-      src={author.portrait.src}
-      srcset={`/media/authors/${author.id}-220w.webp 220w, /media/authors/${author.id}-440w.webp 440w`}
-      sizes="(min-width: 640px) 180px, 132px"
-      width="180"
-      height="180"
-      alt={author.portrait.alt}
-      style="border-radius:50%; object-fit:cover; display:block; margin:0 0 18px; max-width:180px; height:auto; aspect-ratio:1/1;"
-    />
-  )}
-  <h1>{author.name}</h1>
-  <p class="muted" style="font-size:18px;">{author.role}</p>
-
-  <p style="max-width:680px; font-size:17px;">{author.bio}</p>
-
-  {author.background && (
-    <>
-      <h2>Before BotPlanet</h2>
-      {/* Only what the owner supplied. Nothing has been added around it. */}
-      <p style="max-width:680px;">{author.background}</p>
-    </>
-  )}
-
-  <h2>What they are accountable for</h2>
-  <p style="max-width:680px;">{author.accountability}</p>
-
-  {work.length > 0 && (
-    <>
-      <h2>Calls on the record</h2>
-      {/* THE ONLY EXPERTISE CLAIM THIS SITE MAKES, and the reason it is a list
-          of dated decisions rather than a paragraph about experience. Every one
-          of these leads to a page that still says what it says, so a reader who
-          doubts it can go and check — which is the whole difference between
-          showing judgement and asserting it. */}
-      <p class="muted" style="max-width:680px;">
-        Specific decisions, dated, each one still live on the page it changed. We publish these
-        instead of a career summary because a reader can check them.
-      </p>
-      <ul style="max-width:720px; line-height:1.7;">
-        {work.map((w) => (
-          <li style="margin-bottom:12px;">
-            <span class="muted" style="font-size:13px;">{readable(w.date)}</span><br />
-            {w.what}
-          </li>
-        ))}
-      </ul>
-    </>
-  )}
-
-  <h2>How the work is done</h2>
-  <p style="max-width:680px;">{EDITORIAL.method}</p>
-  <p class="muted" style="max-width:680px;">
-    The full method is on the <a href="/review-methodology/">review methodology</a> page, and how the
-    site earns its money is on the <a href="/affiliate-disclosure/">affiliate disclosure</a>.
-  </p>
-
-  <h2>What we do not claim</h2>
-  {/* The honesty rule from content/team.ts, said to the reader rather than
-      only to the next developer. An author page that lists strengths and no
-      limits is the shape of every fabricated one. */}
-  <p style="max-width:680px;">
-    Nothing on this site has been tested in a pool, on a lawn or on a window. Where a review
-    describes how a machine behaves, it is describing what its manufacturer publishes, what a
-    retailer listing states on a dated read, or what owners report — each labelled. No page here
-    carries a star rating, because a score is the one thing we have not earned.
-  </p>
-
-  {written.length > 0 && (
-    <>
-      <h2>{written.length} reviews by {author.name}</h2>
-      <ul style="max-width:680px; line-height:1.9;">
-        {written.map((r) => (
-          <li>
-            <a href={r.href}>{r.title}</a> <span class="muted">· {r.category}</span>
-          </li>
-        ))}
-      </ul>
-    </>
-  )}
-
-  <h2>Contact</h2>
-  <p>
-    Corrections and questions: <a href="/contact/">get in touch</a>. A correction on this site is
-    printed in the paragraph the mistake was in, with the date.
-  </p>
+<Base title={TITLE} description={DESCRIPTION} path={author.path} ogImage={author.portrait?.src} schema={schema}>
+  <header class="author-hero"><figure>{author.portrait&&<img src={author.portrait.src} srcset={`/media/authors/${author.id}-220w.webp 220w, /media/authors/${author.id}-440w.webp 440w`} sizes="(min-width:800px) 360px,220px" width="440" height="440" alt={author.portrait.alt} loading="eager" fetchpriority="high" decoding="async" />}</figure><div><p class="kicker">{author.role.toUpperCase()}</p><h1>{author.name}</h1><p>{author.bio}</p>{author.background&&<p class="background"><strong>Before BotPlanet</strong><span>{author.background}</span></p>}</div></header>
+  <section class="accountable" aria-labelledby="accountable-title"><div><p class="kicker">NAMED ACCOUNTABILITY</p><h2 id="accountable-title">What {author.name.split(" ")[0]} owns</h2></div><blockquote>{author.accountability}<footer>{author.covers}</footer></blockquote></section>
+  {work.length>0&&<section class="record" aria-labelledby="record-title"><header><p class="kicker">CALLS ON THE RECORD</p><h2 id="record-title">Judgement you can check</h2><p>Specific editorial decisions, dated, with the outcome still visible on the affected page.</p></header><ol>{work.map(item=><li><time datetime={item.date}>{readable(item.date)}</time><p>{item.what}</p></li>)}</ol></section>}
+  <section class="standard" aria-labelledby="standard-title"><div><p class="kicker">THE WORKING STANDARD</p><h2 id="standard-title">Research is labelled as research.</h2><p>{EDITORIAL.method}</p><p>A page uses a hands-on label only when BotPlanet physically used the product under the published method. No star rating is invented to make researched evidence look like testing.</p></div><nav><a href="/review-methodology/">Review methodology <span aria-hidden="true">→</span></a><a href="/editorial-policy/">Editorial policy <span aria-hidden="true">→</span></a><a href="/affiliate-disclosure/">How the site earns <span aria-hidden="true">→</span></a></nav></section>
+  {written.length>0&&<section class="work" aria-labelledby="work-title"><header><p class="kicker">PUBLISHED WORK</p><h2 id="work-title">{written.length} {written.length===1?"review":"reviews"} by {author.name}</h2></header><div class="work__groups">{groups.map(group=><section><h3>{group.category}<span>{group.items.length}</span></h3><ul>{group.items.map(item=><li><a href={item.href}>{item.title}<span aria-hidden="true">→</span></a></li>)}</ul></section>)}</div></section>}
+  <aside class="corrections"><div><strong>Found something that needs correcting?</strong><span>A correction is made on the page where the error appeared.</span></div><a class="btn btn--accent" href="/contact/">Contact BotPlanet</a></aside>
 </Base>
+<style>
+  .kicker{margin:0 0 .8rem;color:var(--text-tertiary);font:700 .7rem/1 var(--font-mono);letter-spacing:.18em}.author-hero{display:grid;grid-template-columns:360px minmax(0,1fr);gap:clamp(2rem,6vw,6rem);align-items:center;max-width:1120px;margin:0 auto;padding:clamp(3rem,7vw,6rem) 0}.author-hero figure{overflow:hidden;margin:0;aspect-ratio:1;border:1px solid var(--border-default);border-radius:1.4rem;background:var(--surface-raised)}.author-hero img{width:100%;height:100%;object-fit:cover}.author-hero h1{margin:0;font-size:clamp(3.3rem,6vw,6rem);line-height:.95;letter-spacing:-.06em}.author-hero>div>p:not(.kicker,.background){max-width:44rem;color:var(--text-secondary);font-size:clamp(1.02rem,1.5vw,1.18rem);line-height:1.68}.background{display:flex;gap:.8rem;margin-top:1.4rem;padding-top:1.2rem;border-top:1px solid var(--border-subtle)}.background span{color:var(--text-secondary)}.accountable,.record,.standard,.work,.corrections{max-width:1120px;margin:0 auto clamp(5rem,8vw,7rem)}.accountable{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(2rem,5vw,5rem);align-items:center}.accountable h2,.record h2,.standard h2,.work h2{margin:0;font-size:clamp(2.2rem,4.3vw,4rem);line-height:1.03;letter-spacing:-.05em}.accountable blockquote{margin:0;padding:clamp(1.6rem,4vw,2.8rem);border:1px solid rgba(119,222,255,.3);border-radius:1.2rem;background:linear-gradient(120deg,rgba(69,171,210,.13),var(--surface-raised) 60%);font-size:clamp(1.15rem,2vw,1.45rem);line-height:1.6}.accountable footer{margin-top:1rem;color:var(--text-secondary);font-size:.9rem}.record>header,.work>header{max-width:50rem;margin:0 auto 2rem;text-align:center}.record>header>p:last-child{color:var(--text-secondary)}.record ol{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin:0;padding:0;list-style:none}.record li{padding:1.5rem;border:1px solid var(--border-subtle);border-radius:1rem;background:var(--surface-raised)}.record time{color:var(--accent);font:700 .7rem var(--font-mono);letter-spacing:.08em;text-transform:uppercase}.record li p{color:var(--text-secondary);line-height:1.6}.standard{display:grid;grid-template-columns:1fr .75fr;gap:clamp(2rem,5vw,5rem);align-items:center}.standard p{color:var(--text-secondary);line-height:1.65}.standard nav{display:flex;flex-direction:column;overflow:hidden;border:1px solid var(--border-subtle);border-radius:1rem;background:var(--surface-raised)}.standard nav a{display:flex;justify-content:space-between;padding:1rem 1.2rem}.standard nav a+a{border-top:1px solid var(--border-subtle)}.work__groups{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;align-items:start}.work__groups>section{overflow:hidden;border:1px solid var(--border-subtle);border-radius:1rem;background:var(--surface-raised)}.work__groups h3{display:flex;justify-content:space-between;margin:0;padding:1rem 1.2rem;border-bottom:1px solid var(--border-subtle)}.work__groups h3 span{color:var(--accent);font-family:var(--font-mono);font-size:.8rem}.work__groups ul{margin:0;padding:0;list-style:none}.work__groups li+li{border-top:1px solid var(--border-subtle)}.work__groups a{display:flex;justify-content:space-between;gap:1rem;padding:.85rem 1.2rem;color:var(--text-secondary)}.work__groups a:hover{color:var(--text-primary)}.corrections{display:flex;align-items:center;justify-content:space-between;gap:2rem;padding:1.4rem;border-top:1px solid var(--border-subtle)}.corrections strong,.corrections span{display:block}.corrections span{margin-top:.25rem;color:var(--text-secondary)}
+  @media(max-width:800px){.author-hero{grid-template-columns:180px 1fr}.accountable,.standard{grid-template-columns:1fr}.record ol,.work__groups{grid-template-columns:1fr}}@media(max-width:580px){.author-hero{grid-template-columns:1fr}.author-hero figure{max-width:220px}.background{flex-direction:column}.corrections{align-items:stretch;flex-direction:column}.corrections .btn{justify-content:center}}
+</style>

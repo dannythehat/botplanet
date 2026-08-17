@@ -1692,6 +1692,12 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
       { term: "robotic pet for dementia", volume: 170, difficulty: 0, mustAppear: true },
       { term: "companion robot for elderly", volume: 140, difficulty: 0, mustAppear: true },
       { term: "robotic pets for elderly", volume: 390, difficulty: 0, mustAppear: true },
+      { term: "robot cat realistic", volume: 1000, difficulty: 10, mustAppear: false },
+      { term: "robotic cat for elderly", volume: 320, difficulty: 2, mustAppear: false },
+      { term: "free robotic pets for seniors", volume: 170, difficulty: 0, mustAppear: false },
+      { term: "interactive robotic cat toy", volume: 170, difficulty: 0, mustAppear: false },
+      { term: "best robotic cat for seniors", volume: 110, difficulty: 1, mustAppear: false },
+      { term: "dementia cat toy", volume: 110, difficulty: 0, mustAppear: false },
     ],
     cededTo: [
       {

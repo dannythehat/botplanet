@@ -124,38 +124,10 @@ describe("cannibalisation is prevented, not remembered", () => {
    * registry exists to prevent.
    */
   it("never lets one page take another's declared term as its primary", () => {
-    /**
-     * ONE UNRESOLVED CLASH, LISTED RATHER THAN PATTERN-MATCHED so a second one
-     * cannot join it quietly, and it is a MEASUREMENT the owner has to
-     * commission rather than a tidy-up.
-     *
-     * /guides/robotic-pets-for-elderly/ declares "joy for all companion pets"
-     * at 1,900/mo; the Joy For All review declares the same term as its PRIMARY
-     * at 880. Two research runs measured one phrase and disagreed by a factor
-     * of two, and the guide's own comment says the review was "CANCELLED rather
-     * than deferred" — after which the review was built anyway, because the
-     * product was already live in D1 with a working buy button.
-     *
-     * Which page should own it needs a SERP overlap reading between the two,
-     * the same measurement that decided window (6 of 10, one page) and lawn
-     * (2 of 10, two pages). Guessing it here would be the mistake this test was
-     * written to catch, wearing a different hat.
-     *
-     * IT IS DATED, AND THAT IS THE POINT. An allow-list with a written reason
-     * and no deadline stops being a disclosure and becomes camouflage — an
-     * external audit made exactly that objection on 12 August 2026 and it was
-     * right. The next paid research session pulls the SERP overlap for this
-     * term and re-measures the 1,900-vs-880 discrepancy, which most likely
-     * comes from a variant or a locale. Whichever way it lands, this entry is
-     * deleted: either the guide cedes the term, or the review does.
-     *
-     * Owner deadline: 12 SEPTEMBER 2026. If this set is still populated after
-     * that date, nothing is being measured and the entry should be treated as
-     * a failing test rather than a note.
-     */
-    const AWAITING_A_SERP_READING = new Set(["joy for all companion pets"]);
-    const RE_MEASURE_BY = "2026-09-12";
-    void RE_MEASURE_BY;
+    /* Every overlap must now be resolved in the page plan. Brand-specific
+       Joy For All queries belong to its product review; generic eldercare
+       decisions belong to the guide. No dated exception remains. */
+    const AWAITING_A_SERP_READING = new Set<string>();
 
     const clashes: string[] = [];
     for (const p of PAGE_PLAN) {
