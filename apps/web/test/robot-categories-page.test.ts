@@ -21,7 +21,7 @@ describe("owner-approved robot category directory", () => {
       const art = CATEGORY_DIRECTORY_ART[category.slug];
       expect(art, `${category.slug} is missing directory artwork`).toBeDefined();
       expect(art.src, `${category.slug} image is missing`).toMatch(/^\/media\/.+\.webp$/);
-      expect(art.alt, `${category.slug} alt text is missing`).toMatch(/\S{20,}/);
+      expect(art.alt.trim().length, `${category.slug} alt text is missing`).toBeGreaterThan(20);
     }
 
     expect(PAGE).toContain("category-card__image");
