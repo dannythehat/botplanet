@@ -206,7 +206,7 @@ describe("no scoring logic moved into the funnel", () => {
        funnel must render that group; picking one would re-introduce exactly
        the failure topGroup exists to prevent. */
     expect(island).toContain("equivalent");
-    expect(island).toContain("Equivalent on current data");
+    expect(island).toContain("equivalent on the answers and evidence we currently hold");
     const code = island.split("\n").filter((l) => !l.trim().startsWith("*")).join("\n");
     expect(code).not.toMatch(/equivalent\s*\[\s*0\s*\]/);
   });
