@@ -1,53 +1,30 @@
 ---
-/**
- * Saved products. Device-local only (localStorage) — there is no account and
- * no cloud sync, and the page states that rather than implying one.
- */
 import Base from "../../layouts/Base.astro";
-import { LAUNCH_CATEGORY, categoryRoutes } from "../../content/routes";
-const cat = categoryRoutes(LAUNCH_CATEGORY);
+import { categoryRoutes, liveCategories } from "../../content/routes";
+import { CATEGORY_DIRECTORY_ART } from "../../content/category-directory-art";
+import { srcsetFor } from "../../lib/srcset";
+const suggestions=liveCategories().slice().sort((a,b)=>a.order-b.order).slice(0,3).map(category=>({...category,href:categoryRoutes(category.slug).hub,art:CATEGORY_DIRECTORY_ART[category.slug]??null}));
 ---
-<Base
-  title="Saved products — BotPlanet"
-  description="Products you have saved on this device."
-  noindex={true}
-  narrow={true}
->
-  <h1>Saved products</h1>
-  <p class="note">
-    Saved items are stored on this device only. There is no BotPlanet account and nothing is synced to a server, so
-    clearing your browser data clears this list.
-  </p>
-
-  <div id="saved-list" class="mt-lg" aria-live="polite">
-    <div class="empty">
-      <p class="empty__title">Nothing saved yet</p>
-      <p>Tap the heart on any product to keep it here. Start with <a class="link" href={cat.hub}>robotic pool cleaners</a>.</p>
-    </div>
-  </div>
+<Base title="Saved Robots | BotPlanet" description="Robots you saved on this device." noindex={true}>
+  <header class="saved-hero"><p class="kicker">YOUR SHORTLIST</p><h1>Saved robots</h1><p>Keep products together while you compare. Saved items live only in this browser—there is no account and nothing is uploaded to BotPlanet.</p></header>
+  <section id="saved-list" class="saved-panel" aria-live="polite"><div class="saved-empty"><span class="heart" aria-hidden="true">♡</span><h2>Nothing saved yet</h2><p>Tap the heart on a product card or review and it will appear here.</p><a class="btn btn--accent" href="/robots/">Explore robot categories</a></div></section>
+  <section class="saved-note"><strong>Private to this device</strong><span>Clearing browser storage clears this list. Saved products do not sync between phones or computers.</span><button id="clear-saved" class="btn" type="button" hidden>Clear saved items</button></section>
+  <section class="discover" aria-labelledby="discover-title"><header><p class="kicker">KEEP EXPLORING</p><h2 id="discover-title">Browse by category</h2></header><ul>{suggestions.map(category=><li><a href={category.href}>{category.art&&<img src={category.art.src} srcset={srcsetFor(category.art.src)} sizes="(min-width:800px) 33vw,100vw" alt={category.art.alt} loading="lazy" decoding="async"/>}<span><strong>{category.name}</strong><small>{category.short}</small></span></a></li>)}</ul></section>
 </Base>
 <script is:inline>
-  (function () {
-    var el = document.getElementById("saved-list");
-    if (!el) return;
-    var ids = [];
-    try { ids = JSON.parse(localStorage.getItem("bp_saved") || "[]"); } catch (e) { ids = []; }
-    if (!ids.length) return;
-    var recent = [];
-    try { recent = JSON.parse(localStorage.getItem("bp_recent") || "[]"); } catch (e) { recent = []; }
-    var byId = {};
-    recent.forEach(function (r) { if (r && r.slug) byId["prod-" + r.slug] = r; });
-    var rows = ids.map(function (id) {
-      var r = byId[id];
-      return r
-        ? '<li><a class="link" href="' + r.href + '">' + r.name + '</a></li>'
-        : '<li class="muted">' + String(id).replace(/^prod-/, "").replace(/-/g, " ") + '</li>';
-    });
-    el.innerHTML =
-      '<p class="note">' + ids.length + ' saved on this device.</p><ul class="results">' + rows.join("") + '</ul>';
+  (function(){
+    var root=document.getElementById("saved-list");var clear=document.getElementById("clear-saved");if(!root)return;
+    function read(key){try{var value=JSON.parse(localStorage.getItem(key)||"[]");return Array.isArray(value)?value:[]}catch(e){return[]}}
+    var ids=read("bp_saved");if(!ids.length)return;
+    var recent=read("bp_recent"),byId={};recent.forEach(function(item){if(item&&item.slug)byId["prod-"+item.slug]=item});
+    var heading=document.createElement("div");heading.className="saved-heading";var title=document.createElement("h2");title.textContent=ids.length+" saved "+(ids.length===1?"robot":"robots");heading.appendChild(title);
+    var list=document.createElement("ul");list.className="saved-results";
+    ids.forEach(function(id){var item=byId[id],li=document.createElement("li"),link=document.createElement("a");if(item&&typeof item.href==="string")link.href=item.href;else link.href="/robots/";var mark=document.createElement("span");mark.className="saved-mark";mark.setAttribute("aria-hidden","true");var name=item&&item.name?String(item.name):String(id).replace(/^prod-/,"").replace(/-/g," ");mark.textContent=name.charAt(0).toUpperCase();var copy=document.createElement("span"),strong=document.createElement("strong"),small=document.createElement("small");strong.textContent=name;small.textContent=item&&item.href?"View saved product":"Find this product in the catalogue";copy.appendChild(strong);copy.appendChild(small);var arrow=document.createElement("b");arrow.setAttribute("aria-hidden","true");arrow.textContent="→";link.appendChild(mark);link.appendChild(copy);link.appendChild(arrow);li.appendChild(link);list.appendChild(li)});
+    root.replaceChildren(heading,list);if(clear)clear.hidden=false;
+    clear&&clear.addEventListener("click",function(){localStorage.removeItem("bp_saved");location.reload()});
   })();
 </script>
-<style>
-  .results { list-style: none; padding: 0; display: grid; gap: var(--space-sm); margin-top: var(--space-md); }
-  .results li { margin: 0; }
+<style is:global>
+  .kicker{margin:0 0 .8rem;color:var(--text-tertiary);font:700 .7rem/1 var(--font-mono);letter-spacing:.18em}.saved-hero{max-width:820px;margin:0 auto;padding:clamp(3rem,7vw,6rem) 0 2.5rem;text-align:center}.saved-hero h1{margin:0;font-size:clamp(3.2rem,6vw,6rem);line-height:.95;letter-spacing:-.06em}.saved-hero>p:last-child{max-width:46rem;margin:1.3rem auto 0;color:var(--text-secondary);font-size:1.08rem;line-height:1.65}.saved-panel{max-width:920px;margin:0 auto 1.5rem;padding:clamp(1.5rem,4vw,3rem);border:1px solid var(--border-subtle);border-radius:1.2rem;background:var(--surface-raised)}.saved-empty{text-align:center}.heart{display:grid;width:70px;height:70px;margin:0 auto 1rem;place-items:center;border:1px solid var(--border-default);border-radius:50%;color:var(--accent);font-size:2.3rem}.saved-empty h2{margin:0;font-size:2rem}.saved-empty p{color:var(--text-secondary)}.saved-heading h2{margin:0 0 1rem}.saved-results{display:grid;gap:.7rem;margin:0;padding:0;list-style:none}.saved-results a{display:grid;grid-template-columns:48px 1fr auto;gap:1rem;align-items:center;padding:1rem;border:1px solid var(--border-subtle);border-radius:.9rem;background:var(--surface-base)}.saved-mark{display:grid;width:48px;height:48px;place-items:center;border:1px solid var(--border-default);border-radius:.75rem;color:var(--accent);font:700 1.1rem var(--font-mono)}.saved-results strong,.saved-results small{display:block}.saved-results small{margin-top:.2rem;color:var(--text-secondary)}.saved-note{display:flex;align-items:center;gap:1.2rem;max-width:920px;margin:0 auto clamp(5rem,8vw,7rem);padding:1rem 0}.saved-note span{flex:1;color:var(--text-secondary);font-size:.9rem}.discover{max-width:1120px;margin:0 auto 5rem}.discover>header{text-align:center}.discover h2{margin:0;font-size:clamp(2.2rem,4vw,3.8rem);letter-spacing:-.05em}.discover ul{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:2rem 0 0;padding:0;list-style:none}.discover a{display:flex;height:100%;flex-direction:column;overflow:hidden;border:1px solid var(--border-subtle);border-radius:1rem;background:var(--surface-raised)}.discover img{width:100%;aspect-ratio:3/2;object-fit:cover}.discover li span{padding:1rem}.discover strong,.discover small{display:block}.discover small{margin-top:.35rem;color:var(--text-secondary);line-height:1.45}
+  @media(max-width:760px){.discover ul{grid-template-columns:1fr}.saved-note{align-items:flex-start;flex-direction:column}.saved-note span{flex:auto}}
 </style>

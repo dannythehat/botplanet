@@ -1,18 +1,30 @@
 ---
 import Base from "../../layouts/Base.astro";
-import RoutePlaceholder from "../../components/RoutePlaceholder.astro";
-import { routeFor } from "../../content/routes";
+import { SITE } from "../../lib/site";
 import { breadcrumbsFor } from "../../lib/routing";
+import { webPageSchema } from "../../lib/seo";
 
-const route = routeFor("/terms/")!;
-const crumbs = breadcrumbsFor("/terms/");
+const PATH = "/terms/";
+const TITLE = "Terms of Use | BotPlanet";
+const DESCRIPTION = "The terms that apply when you use BotPlanet, BotMatch, product information and third-party retailer links.";
+const UPDATED = "17 August 2026";
 ---
-<Base
-  title={`${route.label} of use — using BotPlanet and the links it carries`}
-  description={route.summary ?? route.label}
-  noindex={!route.indexable}
-  breadcrumbs={crumbs}
-  narrow={true}
->
-  <RoutePlaceholder title="Terms" summary="The terms that apply when you use BotPlanet." owner="legal copy pending owner sign-off" />
+
+<Base title={TITLE} description={DESCRIPTION} path={PATH} noindex={true} breadcrumbs={breadcrumbsFor(PATH)} schema={[webPageSchema({ path: PATH, name: TITLE, description: DESCRIPTION })]}>
+  <header class="terms-hero"><p class="kicker">TERMS OF USE</p><h1>Clear rules for using BotPlanet.</h1><p>These terms explain what BotPlanet provides, what it cannot promise and how third-party retailer links work.</p><span>Last updated {UPDATED}</span></header>
+  <section class="terms-summary"><article><strong>Independent information</strong><span>BotPlanet provides research and recommendations, not professional advice.</span></article><article><strong>Retailers are separate</strong><span>Purchases, delivery, returns and warranties are between you and the seller.</span></article><article><strong>Affiliate-funded</strong><span>We may earn commission, but it cannot change a product recommendation.</span></article></section>
+  <article class="terms-copy">
+    <section><span>01</span><div><h2>Agreement</h2><p>By accessing or using BotPlanet, you agree to these terms and the <a href="/privacy/">privacy policy</a>. If you do not agree, do not use the service. You must be legally able to enter this agreement in the place where you live.</p></div></section>
+    <section><span>02</span><div><h2>What BotPlanet provides</h2><p>BotPlanet publishes product information, comparisons, buying guidance and recommendations produced by BotMatch. The service is for general informational purposes. It is not engineering, safety, medical, legal or financial advice.</p><p>A recommendation is based on the answers and evidence available when it is produced. You remain responsible for checking that a product is safe, compatible and suitable for your own property, people, animals and intended use.</p></div></section>
+    <section><span>03</span><div><h2>Accuracy, prices and availability</h2><p>We work to keep information accurate and label missing or unverified claims. Robot specifications, software features, stock, prices, delivery and support can change without notice. A displayed price is a dated snapshot, not an offer from BotPlanet.</p><p>Always confirm material specifications, compatibility, current price, stock, warranty and return terms with the manufacturer or retailer before buying.</p></div></section>
+    <section><span>04</span><div><h2>Retailer and affiliate links</h2><p>BotPlanet may receive a commission when you follow a marked link and complete a purchase, at no additional cost to you. Retailer websites are independent services. Their terms, privacy practices, fulfilment, returns, warranties and customer support are their responsibility.</p><p>Commission cannot change which product BotMatch selects. Read the <a href="/affiliate-disclosure/">affiliate disclosure</a> and <a href="/editorial-policy/">editorial policy</a>.</p></div></section>
+    <section><span>05</span><div><h2>Acceptable use</h2><p>You may use BotPlanet for personal, lawful purposes. You may not interfere with the service, bypass security or access controls, scrape it at a level that disrupts operation, introduce malicious code, impersonate another person, use the content to mislead others, or infringe intellectual-property or privacy rights.</p></div></section>
+    <section><span>06</span><div><h2>Content and intellectual property</h2><p>BotPlanet's original text, design, software, scoring logic, graphics and branding are protected by applicable intellectual-property law. Product names, trademarks and third-party media belong to their respective owners. Limited quotation and linking are welcome where the source is credited; wholesale republication or commercial reuse requires permission.</p></div></section>
+    <section><span>07</span><div><h2>Service availability and liability</h2><p>The service is provided “as is” and “as available” to the extent permitted by law. We do not guarantee uninterrupted availability or that every error will be corrected immediately. BotPlanet is not responsible for indirect or consequential loss arising from reliance on the service or from a third-party product or retailer, except where liability cannot legally be excluded.</p></div></section>
+    <section><span>08</span><div><h2>Changes and contact</h2><p>We may change the service or these terms. The date above will change when revised terms are published. Continued use after an update means the revised terms apply from that point.</p><p>Questions about these terms: <a href={`mailto:${SITE.business.contactEmail}`}>{SITE.business.contactEmail}</a>.</p></div></section>
+  </article>
 </Base>
+<style>
+  .kicker{margin:0 0 .8rem;color:var(--text-tertiary);font:700 .7rem/1 var(--font-mono);letter-spacing:.18em}.terms-hero{max-width:900px;margin:0 auto;padding:clamp(3rem,7vw,6rem) 0 clamp(2.5rem,5vw,4rem);text-align:center}.terms-hero h1{margin:0;font-size:clamp(3.2rem,6vw,6.2rem);line-height:.95;letter-spacing:-.06em}.terms-hero>p:not(.kicker){max-width:45rem;margin:1.4rem auto .8rem;color:var(--text-secondary);font-size:clamp(1.05rem,1.6vw,1.25rem);line-height:1.65}.terms-hero>span{color:var(--text-tertiary);font-size:.82rem}.terms-summary{display:grid;grid-template-columns:repeat(3,1fr);max-width:1060px;margin:0 auto clamp(4rem,7vw,6rem);overflow:hidden;border:1px solid var(--border-subtle);border-radius:1.2rem;background:var(--surface-raised)}.terms-summary article{padding:1.5rem}.terms-summary article+article{border-left:1px solid var(--border-subtle)}.terms-summary strong,.terms-summary span{display:block}.terms-summary span{margin-top:.45rem;color:var(--text-secondary);font-size:.9rem;line-height:1.5}.terms-copy{max-width:900px;margin:0 auto}.terms-copy section{display:grid;grid-template-columns:60px 1fr;gap:1.5rem;padding:2.4rem 0;border-top:1px solid var(--border-subtle)}.terms-copy section>span{color:var(--accent);font-family:var(--font-mono);font-size:.72rem}.terms-copy h2{margin:0 0 1rem;font-size:clamp(1.8rem,3vw,2.5rem);letter-spacing:-.035em}.terms-copy p{color:var(--text-secondary);line-height:1.75}.terms-copy p:last-child{margin-bottom:0}
+  @media(max-width:700px){.terms-summary{grid-template-columns:1fr}.terms-summary article+article{border-top:1px solid var(--border-subtle);border-left:0}.terms-copy section{grid-template-columns:34px 1fr;gap:.7rem}}
+</style>

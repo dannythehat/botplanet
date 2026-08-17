@@ -1,27 +1,30 @@
 ---
 import Base from "../layouts/Base.astro";
 import { SITE } from "../lib/site";
+import { breadcrumbsFor } from "../lib/routing";
+import { webPageSchema } from "../lib/seo";
+
+const PATH = "/privacy/";
+const TITLE = "Privacy Policy | BotPlanet";
+const DESCRIPTION = "How BotPlanet handles BotMatch answers, analytics, affiliate attribution and email—and the choices available to you.";
+const UPDATED = "17 August 2026";
 ---
-<Base title="Privacy — what BotPlanet collects and what it does not" description="How BotPlanet handles your data: what we collect, what we do not, who sees it, and how to ask us to delete it. Plain English rather than legal boilerplate.">
-  <h1>Privacy</h1>
-  <p style="max-width:680px;">We collect as little as possible.</p>
 
-  <h2>BotMatch</h2>
-  <ul>
-    <li>Your questionnaire answers are used to compute your recommendation.</li>
-    <li>We don't require personal details to get a recommendation.</li>
-    <li>If you ask us to email your result, we store your email address for that purpose and any consent you give.</li>
-    <li>Questionnaire answers are never included in outbound retailer links or analytics.</li>
-  </ul>
-
-  <h2>Analytics & attribution</h2>
-  <ul>
-    <li>We record anonymous events (e.g. which offer was clicked) to understand performance.</li>
-    <li>Retailer purchases and commissions are reconciled from the affiliate networks, not from personal data.</li>
-  </ul>
-
-  <h2>Your choices</h2>
-  <p>You can request deletion of any recommendation record tied to your email by contacting <a href={`mailto:${SITE.business.contactEmail}`}>{SITE.business.contactEmail}</a>.</p>
-
-  <p class="note">This is a launch policy and will be expanded with full legal detail (US state privacy laws, CAN-SPAM, GDPR/UK GDPR) before we operate commercially.</p>
+<Base title={TITLE} description={DESCRIPTION} path={PATH} breadcrumbs={breadcrumbsFor(PATH)} schema={[webPageSchema({ path: PATH, name: TITLE, description: DESCRIPTION })]}>
+  <header class="legal-hero"><p class="kicker">PRIVACY, IN PLAIN ENGLISH</p><h1>We collect less<br />because we need less.</h1><p>BotPlanet does not require an account to browse products or use BotMatch. This policy explains the limited data involved when you use the site.</p><span>Last updated {UPDATED}</span></header>
+  <section class="summary" aria-label="Privacy summary"><article><strong>No account required</strong><span>Browse, compare and get a recommendation without creating a profile.</span></article><article><strong>Answers stay out of retailer links</strong><span>Your BotMatch responses are never sent in an affiliate click.</span></article><article><strong>You can ask for deletion</strong><span>Contact us about a recommendation record connected to your email.</span></article></section>
+  <div class="legal-layout"><nav aria-label="On this page"><strong>On this page</strong><a href="#collect">What we collect</a><a href="#botmatch">BotMatch</a><a href="#analytics">Analytics and affiliates</a><a href="#storage">Storage and security</a><a href="#choices">Your choices</a><a href="#children">Children</a><a href="#changes">Changes</a></nav><article class="legal-copy">
+    <section id="collect"><h2>What we collect</h2><p>We process information you choose to provide, technical information needed to deliver the site, and limited measurement data used to understand whether pages and retailer links work. We do not sell personal information.</p><ul><li>BotMatch answers and the recommendation produced from them.</li><li>An email address only when you explicitly ask for a result or contact us.</li><li>Basic request and device information produced when a website is served, such as IP address, browser type, timestamps and security logs.</li><li>Anonymous or pseudonymous usage events, such as a page view or retailer-offer click.</li></ul></section>
+    <section id="botmatch"><h2>BotMatch recommendations</h2><p>Your answers are used to calculate and explain a recommendation. No personal details are required for the calculation. If a result is saved or emailed, we may retain the answers, engine version and resulting scores so the recommendation can be reproduced and audited.</p><p>Questionnaire answers are not placed in outbound retailer URLs and are not shared with an affiliate network as part of a click.</p></section>
+    <section id="analytics"><h2>Analytics and affiliate attribution</h2><p>BotPlanet uses limited analytics to understand traffic and improve the service. When you follow a marked retailer link, the retailer or affiliate network may set its own cookie or use a click identifier to attribute a purchase. Their handling of data is governed by their own privacy policy.</p><p>Commission reports received from affiliate partners are used for accounting and performance measurement; they do not change product rankings or BotMatch scoring.</p></section>
+    <section id="storage"><h2>Storage, retention and security</h2><p>Information is retained only for as long as needed for the purpose described, legal obligations, fraud prevention or resolving a dispute. Saved products are stored in your browser on that device and are not a BotPlanet cloud account.</p><p>No internet service can promise perfect security. We use reasonable technical and organisational safeguards and restrict access to information that could identify a person.</p></section>
+    <section id="choices"><h2>Your choices</h2><p>You may ask what personal information BotPlanet holds about you, request correction or deletion, or withdraw email consent. Contact <a href={`mailto:${SITE.business.contactEmail}`}>{SITE.business.contactEmail}</a>. We may need enough information to verify and locate the relevant record.</p><p>You can clear device-local saved products through your browser storage controls and control cookies through your browser settings.</p></section>
+    <section id="children"><h2>Children</h2><p>BotPlanet is intended for a general audience and does not knowingly collect personal information from children under 13. A parent or guardian who believes a child supplied personal information should contact us for deletion.</p></section>
+    <section id="changes"><h2>Changes to this policy</h2><p>We may update this policy as the service, providers or law changes. The date at the top will change when a revised policy is published. Material changes will not be applied retroactively where consent is required.</p></section>
+  </article></div>
+  <aside class="legal-contact"><div><strong>Privacy question or deletion request?</strong><span>Email the person responsible for the site.</span></div><a class="btn btn--accent" href={`mailto:${SITE.business.contactEmail}`}>Contact BotPlanet</a></aside>
 </Base>
+<style>
+  .kicker{margin:0 0 .8rem;color:var(--text-tertiary);font:700 .7rem/1 var(--font-mono);letter-spacing:.18em}.legal-hero{max-width:900px;margin:0 auto;padding:clamp(3rem,7vw,6rem) 0 clamp(2.5rem,5vw,4rem);text-align:center}.legal-hero h1{margin:0;font-size:clamp(3.2rem,6vw,6.2rem);line-height:.95;letter-spacing:-.06em}.legal-hero>p:not(.kicker){max-width:46rem;margin:1.4rem auto .8rem;color:var(--text-secondary);font-size:clamp(1.05rem,1.6vw,1.25rem);line-height:1.65}.legal-hero>span{color:var(--text-tertiary);font-size:.82rem}.summary{display:grid;grid-template-columns:repeat(3,1fr);max-width:1120px;margin:0 auto clamp(4rem,7vw,6rem);overflow:hidden;border:1px solid var(--border-subtle);border-radius:1.2rem;background:var(--surface-raised)}.summary article{padding:1.5rem}.summary article+article{border-left:1px solid var(--border-subtle)}.summary strong,.summary span{display:block}.summary span{margin-top:.45rem;color:var(--text-secondary);font-size:.9rem;line-height:1.5}.legal-layout{display:grid;grid-template-columns:220px minmax(0,720px);gap:clamp(2rem,6vw,6rem);justify-content:center;max-width:1120px;margin:0 auto 5rem}.legal-layout nav{position:sticky;top:100px;align-self:start;display:flex;flex-direction:column;gap:.75rem;padding:1.2rem;border:1px solid var(--border-subtle);border-radius:1rem;background:var(--surface-raised)}.legal-layout nav strong{margin-bottom:.4rem}.legal-layout nav a{color:var(--text-secondary);font-size:.9rem}.legal-copy section{scroll-margin-top:110px}.legal-copy section+section{margin-top:3rem;padding-top:3rem;border-top:1px solid var(--border-subtle)}.legal-copy h2{margin:0 0 1rem;font-size:clamp(1.8rem,3vw,2.5rem);letter-spacing:-.035em}.legal-copy p,.legal-copy li{color:var(--text-secondary);line-height:1.75}.legal-copy li+li{margin-top:.55rem}.legal-contact{display:flex;align-items:center;justify-content:space-between;gap:2rem;max-width:940px;margin:0 auto;padding:1.5rem;border:1px solid rgba(119,222,255,.3);border-radius:1.1rem;background:linear-gradient(120deg,rgba(69,171,210,.13),var(--surface-raised) 60%)}.legal-contact strong,.legal-contact span{display:block}.legal-contact span{margin-top:.3rem;color:var(--text-secondary)}
+  @media(max-width:760px){.summary{grid-template-columns:1fr}.summary article+article{border-top:1px solid var(--border-subtle);border-left:0}.legal-layout{grid-template-columns:1fr}.legal-layout nav{position:static}.legal-contact{align-items:stretch;flex-direction:column}.legal-contact .btn{justify-content:center}}
+</style>
