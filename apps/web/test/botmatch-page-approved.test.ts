@@ -81,7 +81,7 @@ describe("owner-approved universal BotMatch page", () => {
     expect(MATCHER).toContain("result.equivalentProducts");
     expect(API).toContain('import { productPath } from "../../content/routes"');
     expect(API).toContain('import { resolveImage } from "../../lib/media-registry"');
-    expect(API).toContain('resolveImage(product.id, "listing_card"');
+    expect(API).toMatch(/resolveImage\(\s*product\.id,\s*"listing_card"/);
     expect(API).toContain("url: productPath(product.slug, cat.slug)");
     expect(API).toContain("equivalentProducts");
   });
