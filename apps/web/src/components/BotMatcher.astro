@@ -221,10 +221,10 @@ const payload = JSON.stringify({
   <!-- 4. capture -->
   <section class="bp-mm__stage" data-stage="capture" hidden>
     <span class="bp-mm__eyebrow">Result ready</span>
-    <h2 class="bp-mm__title bp-mm__title--sm">Where should we send it?</h2>
+    <h2 class="bp-mm__title bp-mm__title--sm">Want a copy by email?</h2>
     <p class="bp-mm__lead">
-      Your match, the reasoning behind it, and the honest limitations — sent to you, and saved
-      on a page you can come back to.
+      Your match is ready. Email is optional: send yourself the saved result link, or continue
+      straight to the answer on this screen.
     </p>
 
     <form class="bp-mm__form" data-form novalidate>
@@ -248,20 +248,22 @@ const payload = JSON.stringify({
       </label>
 
       <p class="bp-mm__error" data-error hidden></p>
-      <button class="btn btn--accent bp-mm__cta" type="submit" data-submit>Send my result</button>
+      <button class="btn btn--accent bp-mm__cta" type="submit" data-submit>Email my result</button>
     </form>
+    <button class="bp-mm__skip-email" type="button" data-skip-email>
+      Skip email — show my result
+    </button>
   </section>
 
   <!-- 5. done -->
   <section class="bp-mm__stage" data-stage="done" hidden>
-    <span class="bp-mm__eyebrow">On its way</span>
-    <h2 class="bp-mm__title bp-mm__title--sm">Check your inbox</h2>
+    <span class="bp-mm__eyebrow" data-done-eyebrow>Result ready</span>
+    <h2 class="bp-mm__title bp-mm__title--sm" data-done-title>Your results</h2>
     <p class="bp-mm__lead" data-done-msg>
-      Your result is on its way. If it has not arrived shortly, check your spam folder — and
-      reply to it if anything we have said does not match your situation.
+      Here is what matches your answers, including where our current evidence cannot separate
+      two robots or support a fair comparison.
     </p>
     <div class="bp-mm__results" data-results></div>
-    <a class="bp-mm__resultlink" data-result-link hidden href="#">View your recommendation now →</a>
   </section>
 </div>
 
@@ -532,13 +534,27 @@ const payload = JSON.stringify({
           }),
         });
         const data = await res.json().catch(() => ({ ok: false }));
-        if (!data.ok) { btn.disabled = false; btn.textContent = "Send my result"; return fail(data.error || "Something went wrong. Please try again."); }
+        if (!data.ok) { btn.disabled = false; btn.textContent = "Email my result"; return fail(data.error || "Something went wrong. Please try again."); }
       } catch {
-        btn.disabled = false; btn.textContent = "Send my result";
+        btn.disabled = false; btn.textContent = "Email my result";
         return fail("Network problem. Please try again.");
       }
 
       track("matcher_lead_submit", { sourcePage: mode === "choose" ? "botmatch" : `botmatch/${lead?.slug ?? ""}` });
+      q<HTMLElement>("[data-done-eyebrow]").textContent = "On its way";
+      q<HTMLElement>("[data-done-title]").textContent = "Check your inbox";
+      q<HTMLElement>("[data-done-msg]").textContent =
+        "Your result is on its way. If it has not arrived shortly, check your spam folder.";
+      renderResults();
+      show("done");
+    });
+
+    q<HTMLElement>("[data-skip-email]").addEventListener("click", () => {
+      track("matcher_result_without_email");
+      q<HTMLElement>("[data-done-eyebrow]").textContent = "Result ready";
+      q<HTMLElement>("[data-done-title]").textContent = "Your results";
+      q<HTMLElement>("[data-done-msg]").textContent =
+        "Here is what matches your answers, including where our current evidence cannot separate two robots or support a fair comparison.";
       renderResults();
       show("done");
     });
@@ -850,6 +866,13 @@ const payload = JSON.stringify({
   .bp-mm__error { margin: 0; font-size: 0.9rem; color: #ffb4b4; }
 
   .bp-mm__resultlink { display: inline-block; margin-top: 1.4rem; font-weight: 600; color: var(--cs-hi); }
+  .bp-mm__skip-email {
+    display: inline-block; margin: 1rem 0 0; padding: 0; border: 0; background: none;
+    color: var(--text-secondary); font: inherit; font-size: 0.92rem; text-decoration: underline;
+    text-underline-offset: 3px; cursor: pointer;
+  }
+  .bp-mm__skip-email:hover { color: var(--text-primary); }
+  .bp-mm__skip-email:focus-visible { outline: var(--focus-ring); outline-offset: 4px; }
 
   @media (min-width: 860px) {
     .bp-mm__lead { font-size: 1.1875rem; }
