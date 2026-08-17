@@ -1,7 +1,7 @@
 name: Deploy BotPlanet
 
 # Production deployment of the botplanet-web Worker.
-# Runs for pushes to main and can also be started manually.
+# Runs for site-affecting pushes to main and can also be started manually.
 # CLOUDFLARE_API_TOKEN comes exclusively from GitHub Actions repository secrets
 # and is never printed. The Cloudflare account ID is non-secret configuration.
 
@@ -11,6 +11,8 @@ on:
       - main
     paths-ignore:
       - "docs/deployments/**"
+      - "docs/traffic/**"
+      - ".github/workflows/**"
   workflow_dispatch:
 
 permissions:
