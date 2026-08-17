@@ -3,6 +3,7 @@ import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { CATEGORY_DIRECTORY_ART } from "../src/content/category-directory-art";
 import { liveCategories } from "../src/content/routes";
+import { SITE } from "../src/lib/site";
 
 const PAGE = readFileSync(
   fileURLToPath(new URL("../src/pages/robots/index.astro", import.meta.url)),
@@ -40,6 +41,8 @@ describe("owner-approved robot category directory", () => {
 
   it("does not publish the rejected launch-roadmap or shop language", () => {
     const copy = PAGE.toLowerCase();
+    expect(SITE.tagline.toLowerCase()).not.toMatch(/\bshop\b|\bstore\b|\bbuy from us\b/);
+
     for (const rejected of [
       "shop robots",
       "category live",
