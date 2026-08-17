@@ -1,8 +1,8 @@
 /**
  * BotMatch journeys — category-aware recommendation configuration.
  *
- * PRODUCT RULE: Category pages advertise their own concrete matcher. The two
- * universal discovery pages — the homepage and the category directory — use
+ * PRODUCT RULE: Category pages advertise their own concrete matcher. The three
+ * universal discovery pages — the homepage, category directory and BotMatch entry — use
  * the job-first "Find My Robot" router so they never pretend the visitor has
  * already chosen a category.
  *
@@ -177,7 +177,7 @@ export const BOTMATCH_JOURNEYS: Record<string, BotMatchJourney> = {
 };
 
 /** Universal discovery journey. Category pages continue to use their own
- * concrete matcher; the homepage and category directory use the job-first router. */
+ * concrete matcher; the homepage, category directory and BotMatch entry use the job-first router. */
 export const UNIVERSAL_BOTMATCH_JOURNEY: BotMatchJourney = {
   category: "universal",
   ctaLabel: "Find My Robot",
@@ -223,7 +223,7 @@ export function categoryOfPath(pathname: string, routeCategory?: string | null):
  *    5b, and it outranks having a button in the header. Falling back to pool
  *    here would just be the original bug wearing a smaller hat.
  *
- *  - The homepage and /robots/ category directory use the universal job-first
+ *  - The homepage, /robots/ directory and /botmatch/ entry use the universal job-first
  *    journey. Other uncategorised pages retain the launch fallback until each
  *    is reviewed in its own page-by-page recovery pass.
  */
@@ -233,7 +233,7 @@ export function shellJourneyFor(
 ): BotMatchJourney | null {
   const cat = categoryOfPath(pathname, opts.routeCategory);
   if (!cat) {
-    return pathname === "/" || pathname === "/robots/"
+    return pathname === "/" || pathname === "/robots/" || pathname === "/botmatch/"
       ? UNIVERSAL_BOTMATCH_JOURNEY
       : BOTMATCH_JOURNEYS[LAUNCH_CATEGORY];
   }
