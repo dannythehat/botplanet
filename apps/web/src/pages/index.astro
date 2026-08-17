@@ -16,8 +16,8 @@ import { webPageSchema, SITE_URL } from "../lib/seo";
  * in the result, and it was advertising the smaller half of the catalogue.
  */
 const META_DESCRIPTION =
-  "Compare real-world home robots for the US — vacuums, mowers, pool cleaners, " +
-  "window robots, litter boxes and more. Evidence, honest rule-outs, and the gaps.";
+  "Independent comparisons and buying advice for home robots — robot vacuums, lawn mowers, " +
+  "pool cleaners, window robots, litter boxes and more.";
 
 const finderCard = finderCardFor("universal")!;
 
@@ -148,9 +148,8 @@ const categoryList = {
 const homeSchema = [
   webPageSchema({
     path: "/",
-    name: "BotPlanet — the world of real-world robots",
-    description:
-      "Discover, compare and choose real-world robots for the US — pool, window, lawn, vacuum, companion, pet camera, litter, grill and coding robots, with the evidence behind every pick.",
+    name: "Home Robots: Reviews, Comparisons & Buying Advice | BotPlanet",
+    description: META_DESCRIPTION,
     type: "CollectionPage",
   }),
   categoryList,
@@ -158,7 +157,7 @@ const homeSchema = [
 ---
 
 <Base
-  title="Home Robots Compared on the Evidence — BotPlanet"
+  title="Home Robots: Reviews, Comparisons & Buying Advice | BotPlanet"
   description={META_DESCRIPTION}
   bleed={true}
   schema={homeSchema}
