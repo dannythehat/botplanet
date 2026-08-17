@@ -12,6 +12,10 @@ const MATCHER = readFileSync(
   fileURLToPath(new URL("../src/components/BotMatcher.astro", import.meta.url)),
   "utf8",
 );
+const API = readFileSync(
+  fileURLToPath(new URL("../src/pages/api/botmatch.ts", import.meta.url)),
+  "utf8",
+);
 
 describe("owner-approved universal BotMatch page", () => {
   it("keeps the whole shell universal rather than reverting to pool", () => {
@@ -56,6 +60,30 @@ describe("owner-approved universal BotMatch page", () => {
     expect(skipHandler).toContain("renderResults()");
     expect(skipHandler).toContain('show("done")');
     expect(skipHandler).not.toContain("/api/matcher-lead");
+  });
+
+  it("shows a real thinking state after the final answer", () => {
+    expect(MATCHER).toContain('data-stage="analysing"');
+    expect(MATCHER).toContain("bp-mm__thinking");
+    expect(MATCHER).toContain('role="status"');
+    expect(MATCHER).toContain('aria-live="polite"');
+    expect(MATCHER).toContain("BotMatch is comparing your answers");
+    expect(MATCHER).toContain("bp-mm-thinking-orbit");
+    expect(MATCHER).toContain("@media (prefers-reduced-motion: reduce)");
+  });
+
+  it("renders every recommendation as a visual product destination", () => {
+    expect(MATCHER).toContain("bp-mm__product-card");
+    expect(MATCHER).toContain("bp-mm__product-image");
+    expect(MATCHER).toContain("bp-mm__product-button");
+    expect(MATCHER).toContain("View product");
+    expect(MATCHER).toContain("result.product");
+    expect(MATCHER).toContain("result.equivalentProducts");
+    expect(API).toContain('import { productPath } from "../../content/routes"');
+    expect(API).toContain('import { resolveImage } from "../../content/media-registry"');
+    expect(API).toContain('resolveImage(product.id, "listing_card"');
+    expect(API).toContain("url: productPath(product.slug, cat.slug)");
+    expect(API).toContain("equivalentProducts");
   });
 
   it("keeps the owner-approved trust promises visible", () => {
