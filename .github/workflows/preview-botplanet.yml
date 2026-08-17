@@ -12,6 +12,11 @@ name: Preview BotPlanet
 # and is never printed.
 
 on:
+  # Temporary branch-only trigger so this review can produce a Cloudflare
+  # preview without changing production. Removed before merge.
+  push:
+    branches:
+      - agent/homepage-visual-and-shell-fixes
   workflow_dispatch:
     inputs:
       ref:
