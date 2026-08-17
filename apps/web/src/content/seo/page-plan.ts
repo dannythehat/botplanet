@@ -1075,9 +1075,10 @@ const LITTER_REVIEWS = plannedReviews("self-cleaning-litter-boxes", "31090590604
 
    Three products replace them, all with a confirmed ASIN read from
    the listing's own fields: Vector 2.0, Miko 3 and — retitled —
-   Moflin. Joy For All is deleted as a review and handed to the
-   seniors guide, which shares five of its top-ten domains and was
-   already built waiting for exactly this product.
+   Moflin. Joy For All was originally handed entirely to the seniors
+   guide. A later audit found that its product review was already live.
+   Rechecked 17 August 2026: the review now owns every branded Joy For
+   All query, while the guide owns the generic eldercare decision.
 
    ORDER IS THE CALENDAR, NOT THE VOLUME. Everything here except
    Moflin peaks in December: `miko robot` runs 2,400 in June and
