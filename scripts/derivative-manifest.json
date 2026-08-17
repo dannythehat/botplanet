@@ -12257,5 +12257,44 @@
         "checksum": "sha256:9ef76e45e217499f11f148894f244b6a72599943f32a9939e3e29dedaf263dab"
       }
     ]
+  },
+  {
+    "source": "/media/best-robots/hero.webp",
+    "sourceWidth": 1672,
+    "sourceHeight": 941,
+    "derivatives": [
+      {
+        "id": "media-best-robots-hero-webp-360",
+        "src": "/media/best-robots/hero-360w.webp",
+        "width": 360,
+        "height": 203,
+        "bytes": 7188,
+        "checksum": "sha256:b8c16058362b984b8eb470f9224b40a642a4bdd64d5c1e1e3cfa04139e35373f"
+      },
+      {
+        "id": "media-best-robots-hero-webp-640",
+        "src": "/media/best-robots/hero-640w.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 16596,
+        "checksum": "sha256:557db2bc5df7466159a3e130496b1c8f51b6f3bc07e9cfdff76da6fd3515adb6"
+      },
+      {
+        "id": "media-best-robots-hero-webp-960",
+        "src": "/media/best-robots/hero-960w.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 32262,
+        "checksum": "sha256:68d0dda46a01f207b0a71e4607a868c5425ecc90dc737bcb3cf3e8977de4c92d"
+      },
+      {
+        "id": "media-best-robots-hero-webp-1440",
+        "src": "/media/best-robots/hero-1440w.webp",
+        "width": 1440,
+        "height": 810,
+        "bytes": 61364,
+        "checksum": "sha256:316cfb847487bcdfd2bf11d294ccfaeafe5be4ccf249b2ca755b17b08a03dbd0"
+      }
+    ]
   }
 ]

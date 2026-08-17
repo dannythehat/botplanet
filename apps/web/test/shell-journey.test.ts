@@ -76,7 +76,7 @@ describe("the shell's BotMatch journey follows the page", () => {
   });
 
   it("uses the universal job-first journey on every universal discovery page", () => {
-    for (const p of ["/", "/robots/", "/botmatch/"]) {
+    for (const p of ["/", "/robots/", "/best-robots/", "/botmatch/"]) {
       const journey = shellJourneyFor(p, opts);
       expect(journey?.category, p).toBe("universal");
       expect(journey?.ctaLabel, p).toBe("Find My Robot");
