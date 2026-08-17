@@ -1318,14 +1318,20 @@ const COMPANION_REVIEWS: PagePlan[] = [
   {
     ...companionReviewShell("joy for all companion pets"),
     path: "/robots/companion-robots/joy-for-all-companion-pets/",
-    primary: { term: "joy for all companion pets", volume: 880, difficulty: 8 },
+    primary: { term: "joy for all companion pet", volume: 1900, difficulty: 0 },
     secondary: [
-      { term: "robotic cat for elderly", volume: 320, difficulty: 0 },
-      { term: "joy for all cat", volume: 260, difficulty: 0 },
+      { term: "joy for all companion pets", volume: 880, difficulty: 8 },
+      { term: "joy for all companion cat", volume: 1000, difficulty: 0 },
+      { term: "joy for all cat", volume: 590, difficulty: 0 },
+      { term: "joy for all dog", volume: 390, difficulty: 0 },
+      { term: "joy for all orange tabby cat", volume: 210, difficulty: 0 },
+      { term: "joy for all golden pup", volume: 70, difficulty: 0 },
+      { term: "ageless innovation joy for all", volume: 50, difficulty: 5 },
       { term: "companion pet cat", volume: 210, difficulty: 0 },
     ],
     ceded: [
       { term: "robotic pet for elderly", toPath: "/guides/robotic-pets-for-elderly/", why: "The guide owns the eldercare term and this product is its top pick. The review answers one machine; the guide answers the decision, and sending the decision-stage reader to the review would drop them past the comparison they came for." },
+      { term: "robotic cat for elderly", toPath: "/guides/robotic-pets-for-elderly/", why: "The generic care-setting query belongs to the guide, which compares choices for an older person. This review answers the branded Joy For All product." },
     ],
     products: ["joy-for-all-companion-pets"],
     productsNote: "Catalogued as prod-joy-for-all-companion-pets, 8 August 2026. Amazon US B017JQQ00Q at $159, sold by Ageless Innovation LLC, 4.5 stars from 12,307 ratings. Part number B7594 pins this to the Silver with White Mitts; the cat sells in several colourways and there is a dog as well.",
@@ -1904,33 +1910,18 @@ const COMPANION_GUIDE: PagePlan = {
     { term: "robotic pet for dementia", volume: 170, difficulty: 0 },
     { term: "companion robot for elderly", volume: 140, difficulty: 0 },
     { term: "robotic pets for elderly", volume: 390, difficulty: 0 },
-    /* ADDED 8 August 2026. "joy for all companion pet" shares FIVE of ten
-       top-ten domains with this page's primary — joyforall.com, alzstore.com,
-       reddit.com, keyirobot.com, amazon.com — which is the threshold. The Joy
-       For All review that was planned separately is CANCELLED rather than
-       deferred, because building it would put two BotPlanet pages into one
-       result set. This page was already built waiting for the product:
-       "Joy for All and Tombot Jennie are the obvious candidates and neither
-       is in the catalogue." Tombot cannot be sold. Joy For All can.
-       About 6,500/mo of KD 0-10 traffic onto a page currently ranking for 390. */
-    { term: "joy for all companion pet", volume: 1900, difficulty: 0 },
-    { term: "joy for all companion pets", volume: 1900, difficulty: 0 },
-    { term: "robot cat realistic", volume: 1000, difficulty: 10 },
-    { term: "joy for all companion cat", volume: 1000, difficulty: 0 },
-    { term: "joy for all cat", volume: 590, difficulty: 0 },
-    { term: "joy for all dog", volume: 390, difficulty: 0 },
-    { term: "robotic cat for elderly", volume: 320, difficulty: 2 },
-    { term: "joy for all orange tabby cat", volume: 210, difficulty: 0 },
-    { term: "free robotic pets for seniors", volume: 170, difficulty: 0 },
-    { term: "interactive robotic cat toy", volume: 170, difficulty: 0 },
-    { term: "best robotic cat for seniors", volume: 110, difficulty: 1 },
-    { term: "dementia cat toy", volume: 110, difficulty: 0 },
-    { term: "joy for all golden pup", volume: 70, difficulty: 0 },
-    { term: "ageless innovation joy for all", volume: 50, difficulty: 5 },
   ],
   ceded: [
     { term: "robot pet", toPath: "/robots/companion-robots/", why: "The 8,100 head term belongs to the hub. This guide takes the care-setting intent, which is a different reader with a different question." },
     { term: "pet camera robot", toPath: "/robots/pet-camera-robots/", why: "Named here because 'checking in from a distance' is one of the three motivations readers arrive with, and the one a companion robot answers worst. Naming the honest alternative is not targeting its term." },
+    { term: "joy for all companion pet", toPath: "/robots/companion-robots/joy-for-all-companion-pets/", why: "Current search results are product- and brand-specific: the exact phrase returns the maker, product listings and product explainers. The review owns that intent; this guide owns the broader eldercare decision." },
+    { term: "joy for all companion pets", toPath: "/robots/companion-robots/joy-for-all-companion-pets/", why: "Plural and singular resolve to the same branded product family. Sending both to the review prevents the eldercare guide and the product page competing for one product query." },
+    { term: "joy for all companion cat", toPath: "/robots/companion-robots/joy-for-all-companion-pets/", why: "A model-family query belongs to the product review, while this guide compares several kinds of robotic companion for an older person." },
+    { term: "joy for all cat", toPath: "/robots/companion-robots/joy-for-all-companion-pets/", why: "This is a short branded product query, not the broader care-setting decision the guide exists to answer." },
+    { term: "joy for all dog", toPath: "/robots/companion-robots/joy-for-all-companion-pets/", why: "This is another model in the same branded product family and belongs with the product review rather than the category decision." },
+    { term: "joy for all orange tabby cat", toPath: "/robots/companion-robots/joy-for-all-companion-pets/", why: "The colourway query is product-specific and is owned by the review page for the Joy For All family." },
+    { term: "joy for all golden pup", toPath: "/robots/companion-robots/joy-for-all-companion-pets/", why: "The named pup is part of the Joy For All family, so the product review is the unambiguous destination." },
+    { term: "ageless innovation joy for all", toPath: "/robots/companion-robots/joy-for-all-companion-pets/", why: "A maker-plus-product query is navigational product intent and belongs to the review, not the comparative eldercare guide." },
   ],
   refused: [
     /* THE TERM THAT LOOKS OBVIOUS AND IS POISON. "robotic cat" is swamped by
@@ -1943,7 +1934,7 @@ const COMPANION_GUIDE: PagePlan = {
     { term: "tombot jennie", volume: 2400, why: "The other obvious product for this page and it cannot be bought — Tombot takes waitlist deposits rather than selling. Named in the copy as an honest alternative, targeted nowhere." },
   ],
   products: ["joy-for-all-companion-pets"],
-  productsNote: "Amazon US B017JQQ00Q confirmed 8 August 2026 — $159.99, in stock, identity read from the listing. This page was built in August waiting for exactly this product; the separately planned Joy For All review is cancelled, not deferred, because the two share five of ten top-ten domains. Catalogue row and verified specification still to come.",
+  productsNote: "Joy For All is the guide's current top pick and links to its dedicated review. Rechecked 17 August 2026: generic eldercare queries remain with this guide; branded Joy For All queries are product-specific and belong to the review.",
   linksOut: [
     "/robots/companion-robots/",
     "/robots/pet-camera-robots/",
@@ -1954,7 +1945,7 @@ const COMPANION_GUIDE: PagePlan = {
   /* No ItemList: nothing is ranked on this page yet. */
   schema: ["Article", "FAQPage", "BreadcrumbList"],
   research: "31081889310 · 2026-08-06",
-  evidence: "≈1,090/mo combined across four phrasings, all KD 0, and a genuinely distinct reader from the hub's. The hub gave the term up to build it — it was a secondary on /robots/companion-robots/ until 6 August 2026.",
+  evidence: "≈1,090/mo combined across four generic eldercare phrasings, all KD 0, and a genuinely distinct reader from the hub's. Rechecked 17 August 2026: branded Joy For All searches return maker and product results, so those terms are ceded to the dedicated review while this guide owns the care-setting decision.",
 };
 
 /* Two pool pages the SECOND run proved, 6 August 2026, $0.1795.

@@ -1,77 +1,22 @@
 ---
-/**
- * The named editorial team, which is two people and says so.
- *
- * A masthead on a site this size is not a status page. It exists because the
- * position — we tell you when not to buy — is worth exactly as much as the
- * reader's willingness to believe there is somebody behind it.
- */
 import Base from "../../layouts/Base.astro";
 import { AUTHORS, EDITORIAL, authorForReview } from "../../content/team";
 import { REVIEWS } from "../../content/reviews";
 import { webPageSchema, breadcrumbSchema, personSchema } from "../../lib/seo";
-
-const authors = Object.values(AUTHORS);
-const countFor = (id: string) =>
-  Object.values(REVIEWS).filter((r) => authorForReview(r.authorId).id === id).length;
-
-const title = "Who writes BotPlanet";
-const description =
-  "The two people behind BotPlanet's reviews and recommendations, what each is accountable for, and how the work is actually done.";
-
-const schema = [
-  webPageSchema({ path: "/authors/", name: title, description, type: "AboutPage" }),
-  ...authors.map((a) =>
-    personSchema({
-      name: a.name,
-      jobTitle: a.role,
-      description: a.background ? `${a.bio} ${a.background}` : a.bio,
-      path: a.path,
-    }),
-  ),
-  breadcrumbSchema([
-    { name: "Home", path: "/" },
-    { name: "Authors", path: "/authors/" },
-  ]),
-];
+const PATH="/authors/";
+const TITLE="Who Writes BotPlanet | Editorial Team";
+const DESCRIPTION="Meet the two people accountable for BotPlanet's reviews, recommendations and evidence standards, and see exactly what each one owns.";
+const authors=Object.values(AUTHORS);
+const countFor=(id:string)=>Object.values(REVIEWS).filter(review=>authorForReview(review.authorId).id===id).length;
+const schema=[webPageSchema({path:PATH,name:TITLE,description:DESCRIPTION,type:"AboutPage"}),...authors.map(author=>personSchema({name:author.name,jobTitle:author.role,description:author.background?`${author.bio} ${author.background}`:author.bio,path:author.path})),breadcrumbSchema([{name:"Home",path:"/"},{name:"Authors",path:PATH}])];
 ---
-
-<Base title={title} description={description} schema={schema}>
-  <h1>Who writes BotPlanet</h1>
-  <p class="muted" style="font-size:18px; max-width:680px;">
-    Two people, named, with what each one is accountable for. We do not claim hands-on testing we
-    have not done, and where a manufacturer will not publish a figure the review says so rather than
-    borrowing one.
-  </p>
-
-  <h2>The team</h2>
-  {authors.map((a) => (
-    <div class="card" style="max-width:680px; margin-bottom:16px; display:flex; gap:16px; align-items:flex-start;">
-      {a.portrait && (
-        <img
-          src={a.portrait.src}
-          srcset={`/media/authors/${a.id}-104w.webp 104w, /media/authors/${a.id}-220w.webp 220w`}
-          sizes="72px"
-          width="72"
-          height="72"
-          alt={a.portrait.alt}
-          loading="lazy"
-          decoding="async"
-          style="border-radius:50%; object-fit:cover; flex:none;"
-        />
-      )}
-      <div style="min-width:0;">
-      <h3 style="margin-top:0;"><a href={a.path}>{a.name}</a></h3>
-      <p class="muted">{a.role}{countFor(a.id) > 0 && <> · {countFor(a.id)} reviews</>}</p>
-      <p>{a.bio}</p>
-      <p class="muted">{a.covers}</p>
-      </div>
-    </div>
-  ))}
-
-  <h2>How the work is done</h2>
-  <p style="max-width:680px;">{EDITORIAL.method}</p>
-  <p class="muted">
-    The method in full is on the <a href="/review-methodology/">review methodology</a> page.
-  </p>
+<Base title={TITLE} description={DESCRIPTION} path={PATH} ogImage="/media/authors/danny.webp" schema={schema}>
+  <header class="team-hero"><p class="kicker">NAMED EDITORIAL ACCOUNTABILITY</p><h1>Who writes BotPlanet</h1><p>Two people, named, with different responsibilities. We publish what each person owns because a recommendation is only as trustworthy as the person answerable for it.</p></header>
+  <section class="people" aria-label="BotPlanet editorial team">{authors.map(author=><article><a class="portrait" href={author.path}>{author.portrait&&<img src={author.portrait.src} srcset={`/media/authors/${author.id}-220w.webp 220w, /media/authors/${author.id}-440w.webp 440w`} sizes="(min-width:800px) 260px,180px" width="440" height="440" alt={author.portrait.alt} loading="eager" decoding="async" />}</a><div><p class="role">{author.role}</p><h2><a href={author.path}>{author.name}</a></h2><p>{author.bio}</p><dl><div><dt>Accountable for</dt><dd>{author.covers}</dd></div>{countFor(author.id)>0&&<div><dt>Published reviews</dt><dd>{countFor(author.id)}</dd></div>}</dl><a class="profile" href={author.path}>See {author.name.split(" ")[0]}'s record <span aria-hidden="true">→</span></a></div></article>)}</section>
+  <section class="method" aria-labelledby="method-title"><div><p class="kicker">ONE SHARED STANDARD</p><h2 id="method-title">How the work is done</h2><p>{EDITORIAL.method}</p></div><ol><li><span>01</span><strong>Source the claim</strong><p>First-party specifications, manuals, retailer facts and attributable owner evidence stay distinct.</p></li><li><span>02</span><strong>Name the limit</strong><p>Every useful verdict states who should avoid the product and what remains unknown.</p></li><li><span>03</span><strong>Keep money downstream</strong><p>Suitability chooses the product before retailer offers or commission enter the process.</p></li></ol></section>
+  <aside class="team-links"><strong>Check the standards behind the names.</strong><nav><a href="/review-methodology/">Review methodology <span aria-hidden="true">→</span></a><a href="/editorial-policy/">Editorial policy <span aria-hidden="true">→</span></a><a href="/affiliate-disclosure/">Affiliate disclosure <span aria-hidden="true">→</span></a></nav></aside>
 </Base>
+<style>
+  .kicker{margin:0 0 .8rem;color:var(--text-tertiary);font:700 .7rem/1 var(--font-mono);letter-spacing:.18em}.team-hero{max-width:900px;margin:0 auto;padding:clamp(3rem,7vw,6rem) 0 clamp(2.5rem,5vw,4rem);text-align:center}.team-hero h1{margin:0;font-size:clamp(3.2rem,6vw,6.2rem);line-height:.95;letter-spacing:-.06em}.team-hero>p:last-child{max-width:48rem;margin:1.4rem auto 0;color:var(--text-secondary);font-size:clamp(1.05rem,1.6vw,1.23rem);line-height:1.65}.people,.method,.team-links{max-width:1120px;margin:0 auto clamp(5rem,8vw,7rem)}.people{display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem}.people article{overflow:hidden;border:1px solid var(--border-subtle);border-radius:1.25rem;background:var(--surface-raised)}.portrait{display:block;overflow:hidden;aspect-ratio:16/10}.portrait img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 28%;transition:transform .25s ease}.portrait:hover img{transform:scale(1.02)}.people article>div{padding:1.5rem}.role{margin:0;color:var(--accent);font:700 .7rem/1 var(--font-mono);letter-spacing:.12em;text-transform:uppercase}.people h2{margin:.55rem 0;font-size:2rem}.people article>div>p:not(.role){color:var(--text-secondary);line-height:1.6}.people dl{margin:1.2rem 0;padding-top:1.1rem;border-top:1px solid var(--border-subtle)}.people dl div+div{margin-top:.8rem}.people dt{color:var(--text-tertiary);font-size:.75rem;text-transform:uppercase;letter-spacing:.08em}.people dd{margin:.3rem 0 0;line-height:1.5}.profile{display:inline-block;margin-top:.6rem;font-weight:700}.method{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(2rem,5vw,5rem);align-items:start}.method h2{margin:0;font-size:clamp(2.2rem,4.3vw,4rem);letter-spacing:-.05em}.method>div>p:last-child,.method li p{color:var(--text-secondary);line-height:1.6}.method ol{overflow:hidden;margin:0;padding:0;border:1px solid var(--border-subtle);border-radius:1.2rem;background:var(--surface-raised);list-style:none}.method li{display:grid;grid-template-columns:38px .65fr 1.35fr;gap:1rem;padding:1.25rem}.method li+li{border-top:1px solid var(--border-subtle)}.method li>span{color:var(--accent);font-family:var(--font-mono);font-size:.72rem}.method li p{margin:0}.team-links{display:flex;align-items:center;justify-content:space-between;gap:2rem;padding:1.4rem;border:1px solid rgba(119,222,255,.3);border-radius:1.1rem;background:linear-gradient(120deg,rgba(69,171,210,.13),var(--surface-raised) 60%)}.team-links nav{display:flex;gap:1.2rem;flex-wrap:wrap}
+  @media(max-width:850px){.people,.method{grid-template-columns:1fr}.method li{grid-template-columns:34px 1fr}.method li p{grid-column:2}.team-links{align-items:flex-start;flex-direction:column}.team-links nav{flex-direction:column}}@media(max-width:520px){.people{grid-template-columns:1fr}}
+</style>
