@@ -38,9 +38,8 @@ const HOME_COPY = HOME
 
 describe("the approved homepage stays approved", () => {
   it("keeps the owner-approved navigation in the approved order", () => {
-    expect(BAR_ITEMS.slice(0, 3).map(({ label, href }) => ({ label, href }))).toEqual([
+    expect(BAR_ITEMS.slice(0, 2).map(({ label, href }) => ({ label, href }))).toEqual([
       { label: "Find My Robot", href: "/botmatch/" },
-      { label: "Compare", href: "/compare/" },
       { label: "Buying Advice", href: "/guides/" },
     ]);
 

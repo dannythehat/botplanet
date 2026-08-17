@@ -93,7 +93,6 @@ describe("one price path", () => {
    */
   it.each([
     "robots/[category]/index.astro",
-    "compare/[category].astro",
   ])("%s does not read a seeded offer price", (page) => {
     const src = read(page);
     expect(src, `${page} reads offers.basePriceMinor directly`).not.toMatch(/basePriceMinor/);

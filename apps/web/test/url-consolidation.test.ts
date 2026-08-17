@@ -56,10 +56,10 @@ describe("URL consolidation", () => {
 
     for (const path of [
       "apps/web/src/pages/compare/eilik-vs-emo.astro",
-      "apps/web/src/pages/best-robots/robotic-pool-cleaners.astro",
-      "apps/web/src/pages/best-robots/robotic-pool-cleaners/above-ground.astro",
+      "apps/web/src/pages/best-robots/robotic-pool-cleaners/index.astro",
+      "apps/web/src/pages/best-robots/robotic-pool-cleaners/above-ground-pools.astro",
       "apps/web/src/pages/best-robots/robotic-pool-cleaners/cordless.astro",
-      "apps/web/src/pages/best-robots/robotic-lawn-mowers.astro",
+      "apps/web/src/pages/best-robots/robotic-lawn-mowers/index.astro",
     ]) {
       expect(existsSync(path), path).toBe(true);
     }

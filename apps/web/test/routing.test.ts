@@ -601,15 +601,13 @@ describe("best-of consolidation", () => {
    * evidence rather than merely unbuilt. It stays in the footer, which is a
    * link rather than a promise.
    */
-  it("takes /best-robots/ out of the navigation but keeps it reachable", () => {
-    const best = ROUTES.find((r) => r.path === "/best-robots/")!;
+  it("retires the section index from every navigation surface", () => {
     expect(BAR_ITEMS.map((i) => i.href)).not.toContain("/best-robots/");
     expect(BAR_ITEMS.some((i) => i.href.startsWith("/best-robots/"))).toBe(false);
     expect(UTILITY_ITEMS.map((i) => i.href)).not.toContain("/best-robots/");
-    // Reachable, from the one surface that is a directory rather than a
-    // promise of a section behind it.
-    expect(best.footerGroup).toBe("Explore");
-    expect(FOOTER_GROUPS.flatMap((g) => g.links).map((l) => l.href)).toContain("/best-robots/");
+    expect(FOOTER_GROUPS.flatMap((g) => g.links).map((l) => l.href)).not.toContain("/best-robots/");
+    expect(sitemapRoutes().map((route) => route.path)).not.toContain("/best-robots/");
+    expect(resolveRedirect("/best-robots/")?.to).toBe("/robots/");
   });
 
   /**
