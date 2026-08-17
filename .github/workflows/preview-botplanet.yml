@@ -12,6 +12,9 @@ name: Preview BotPlanet
 # and is never printed.
 
 on:
+  push:
+    branches:
+      - agent/authors-seo-resolution
   workflow_dispatch:
     inputs:
       ref:
