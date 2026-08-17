@@ -1,43 +1,403 @@
 ---
-/** Compare landing — routes into each live category's comparison builder. */
 import Base from "../../layouts/Base.astro";
-import { CATEGORIES, categoryRoutes } from "../../content/routes";
+import { CATEGORY_DIRECTORY_ART } from "../../content/category-directory-art";
+import { COMPARE_CATEGORY_DETAILS } from "../../content/compare-details";
+import { categoryRoutes, liveCategories } from "../../content/routes";
 import { breadcrumbsFor } from "../../lib/routing";
+import { itemListSchema, webPageSchema } from "../../lib/seo";
+import { srcsetFor } from "../../lib/srcset";
 
-const live = CATEGORIES.filter((c) => c.launch === "live").sort((a, b) => a.order - b.order);
-const soon = CATEGORIES.filter((c) => c.launch === "coming_soon").sort((a, b) => a.order - b.order);
-const crumbs = breadcrumbsFor("/compare/");
+const PATH = "/compare/";
+const TITLE = "Compare Robots Side by Side | BotPlanet";
+const DESCRIPTION =
+  "Compare robots side by side by the things that decide the purchase: your space, surfaces, safety, power, upkeep and the job you need done.";
+
+const categories = liveCategories()
+  .slice()
+  .sort((a, b) => a.order - b.order)
+  .map((category) => ({
+    ...category,
+    href: categoryRoutes(category.slug).compare,
+    art: CATEGORY_DIRECTORY_ART[category.slug],
+    detail: COMPARE_CATEGORY_DETAILS[category.slug],
+  }));
+
+const crumbs = breadcrumbsFor(PATH);
+const schema = [
+  webPageSchema({
+    path: PATH,
+    name: TITLE,
+    description: DESCRIPTION,
+    type: "CollectionPage",
+  }),
+  itemListSchema(
+    categories.map((category) => ({ name: `Compare ${category.name}`, path: category.href })),
+    "Robot comparison tools on BotPlanet",
+  ),
+];
 ---
-<Base
-  title="Compare robots — head to head"
-  description="Compare real-world robots side by side on BotPlanet, with the winner explained by use case rather than by commission."
-  breadcrumbs={crumbs}
->
-  <div class="section-head">
-    <span class="rule-accent" aria-hidden="true"></span>
-    <span class="eyebrow">Compare</span>
-    <h1 class="mt-0">Compare robots</h1>
-    <p>Pick a category to compare products side by side. Winners are chosen on suitability, never on commission.</p>
-  </div>
 
-  <div class="grid grid--2">
-    {live.map((c) => (
-      <a class="card card--interactive" href={categoryRoutes(c.slug).compare}>
-        <span class="pill pill--strong">Live</span>
-        <h2 class="c-title">{c.name}</h2>
-        <p>Compare every {c.name.toLowerCase()} we cover, filtered by pool type, power and coverage.</p>
-      </a>
-    ))}
-    {soon.map((c) => (
-      <div class="card is-soon">
-        <span class="pill pill--warn">Coming soon</span>
-        <h2 class="c-title">{c.name}</h2>
-        <p>{c.short}</p>
+<Base
+  title={TITLE}
+  description={DESCRIPTION}
+  path={PATH}
+  ogImage="/media/compare/hero.webp"
+  breadcrumbs={crumbs}
+  schema={schema}
+>
+  <header class="compare-hero">
+    <div class="compare-hero__copy">
+      <p class="compare-kicker">COMPARE WHAT ACTUALLY MATTERS</p>
+      <h1>Compare robots side by side. Choose the one that fits.</h1>
+      <p class="compare-hero__lede">
+        A longer feature list does not make a robot right for your home. Start with the job,
+        then compare the machines against the space, surfaces, safety limits and upkeep that
+        will decide whether they genuinely work for you.
+      </p>
+      <div class="compare-hero__actions">
+        <a class="btn btn--accent btn--lg" href="#compare-by-job">Choose what to compare</a>
+        <a class="btn btn--outline btn--lg" href="/botmatch/">Let BotMatch shortlist</a>
       </div>
-    ))}
-  </div>
+    </div>
+
+    <figure class="compare-hero__visual">
+      <img
+        src="/media/compare/hero.webp"
+        srcset={srcsetFor("/media/compare/hero.webp")}
+        sizes="(min-width: 1000px) 52vw, 100vw"
+        width="1672"
+        height="941"
+        alt="A robotic lawn mower and a robot vacuum facing one another on a dark comparison platform, separated by a fine cyan light plane."
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
+      />
+    </figure>
+  </header>
+
+  <section class="compare-principles" aria-label="What BotPlanet comparison means">
+    <article>
+      <span>01</span>
+      <div>
+        <strong>Same job, fair comparison</strong>
+        <p>Pool cleaners are compared with pool cleaners, not with an unrelated robot.</p>
+      </div>
+    </article>
+    <article>
+      <span>02</span>
+      <div>
+        <strong>Your non-negotiables first</strong>
+        <p>A machine that cannot handle the space or surface is ruled out before extras matter.</p>
+      </div>
+    </article>
+    <article>
+      <span>03</span>
+      <div>
+        <strong>No paid winner</strong>
+        <p>Price and commission are not inputs to which robot fits the job.</p>
+      </div>
+    </article>
+  </section>
+
+  <section class="compare-section" id="compare-by-job" aria-labelledby="compare-by-job-title">
+    <header class="compare-section__head">
+      <div>
+        <p class="compare-kicker">CHOOSE THE JOB</p>
+        <h2 id="compare-by-job-title">What kind of robot are you comparing?</h2>
+      </div>
+      <p>
+        Every robot type has different deal-breakers. Choose one below and the comparison changes
+        with it. No more asking a window robot about pool size.
+      </p>
+    </header>
+
+    <ul class="compare-grid">
+      {categories.map((category) => (
+        <li>
+          <a class="compare-card" href={category.href}>
+            <span class="compare-card__media">
+              <img
+                src={category.art.src}
+                srcset={srcsetFor(category.art.src)}
+                sizes="(min-width: 1080px) 33vw, (min-width: 680px) 50vw, 100vw"
+                alt={category.art.alt}
+                loading="lazy"
+                decoding="async"
+                style={category.art.focal ? `object-position: ${category.art.focal}` : undefined}
+              />
+              <span class="compare-card__job">{category.jtbd}</span>
+            </span>
+            <span class="compare-card__copy">
+              <h3>{category.name}</h3>
+              <p>{category.detail.intro}</p>
+              <span class="compare-card__label">COMPARE ON</span>
+              <span class="compare-card__criteria">
+                {category.detail.compareOn.map((criterion) => <span>{criterion}</span>)}
+              </span>
+              <span class="compare-card__action">
+                {category.detail.action}<span aria-hidden="true"> →</span>
+              </span>
+            </span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="compare-explainer" aria-labelledby="compare-explainer-title">
+    <div class="compare-explainer__copy">
+      <p class="compare-kicker">HOW TO USE THE TABLES</p>
+      <h2 id="compare-explainer-title">Specifications tell you what it has. Fit tells you whether to buy it.</h2>
+      <p>
+        Our tables put the facts in one place, but they do not hide behind a wall of ticks.
+        Start with the columns that can rule a robot out, then use convenience features to choose
+        between the machines that remain.
+      </p>
+    </div>
+    <ol class="compare-explainer__steps">
+      <li><span>1</span><div><strong>Rule out</strong><p>Remove anything that cannot handle the job, dimensions or safety limits.</p></div></li>
+      <li><span>2</span><div><strong>Compare the trade-offs</strong><p>See what each machine gains, gives up and asks you to maintain.</p></div></li>
+      <li><span>3</span><div><strong>Open the evidence</strong><p>Read the product review before following any retailer link.</p></div></li>
+    </ol>
+  </section>
+
+  <section class="compare-finder" aria-labelledby="compare-finder-title">
+    <div>
+      <p class="compare-kicker">TOO MANY OPTIONS?</p>
+      <h2 id="compare-finder-title">Let BotMatch make the first cut.</h2>
+      <p>Choose the job, answer the category-specific questions and get a visual shortlist with direct links to the product reviews.</p>
+    </div>
+    <a class="btn btn--accent btn--lg" href="/botmatch/">Find my robot</a>
+  </section>
 </Base>
+
 <style>
-  .c-title { font-size: var(--type-card); margin: 0; }
-  .card.is-soon { opacity: 0.72; }
+  .compare-kicker {
+    margin: 0 0 14px;
+    color: var(--text-tertiary);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .18em;
+  }
+
+  .compare-hero {
+    display: grid;
+    grid-template-columns: minmax(390px, .86fr) minmax(0, 1.14fr);
+    gap: clamp(34px, 5vw, 72px);
+    align-items: center;
+    padding: clamp(50px, 7vw, 94px) 0 clamp(32px, 5vw, 62px);
+  }
+
+  .compare-hero h1 {
+    max-width: 680px;
+    margin: 0;
+    font-size: clamp(44px, 5.8vw, 76px);
+    line-height: .99;
+    letter-spacing: -.055em;
+  }
+
+  .compare-hero__lede {
+    max-width: 61ch;
+    margin: 24px 0 0;
+    color: var(--text-secondary);
+    font-size: clamp(17px, 1.65vw, 21px);
+    line-height: 1.62;
+  }
+
+  .compare-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 30px;
+  }
+
+  .compare-hero__visual {
+    position: relative;
+    overflow: hidden;
+    margin: 0;
+    aspect-ratio: 16 / 9;
+    border: 1px solid rgba(200, 208, 222, .24);
+    border-radius: 24px;
+    background: #06090c;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.06), 0 34px 80px rgba(0,0,0,.48);
+  }
+
+  .compare-hero__visual::after {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(130deg, rgba(112,221,255,.04), transparent 45%, rgba(0,0,0,.08));
+    content: "";
+    pointer-events: none;
+  }
+
+  .compare-hero__visual img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .compare-principles {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    overflow: hidden;
+    margin-bottom: clamp(68px, 9vw, 112px);
+    border: 1px solid rgba(200,208,222,.18);
+    border-radius: 20px;
+    background: linear-gradient(160deg, #11161d 0%, #080b0f 78%);
+  }
+
+  .compare-principles article {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    gap: 14px;
+    padding: 24px;
+  }
+
+  .compare-principles article + article { border-left: 1px solid rgba(200,208,222,.14); }
+  .compare-principles article > span { color: #70ddff; font-family: var(--font-mono); font-size: 12px; letter-spacing: .12em; }
+  .compare-principles strong { display: block; color: var(--text-primary); font-size: 16px; }
+  .compare-principles p { margin: 7px 0 0; color: var(--text-secondary); font-size: 14px; line-height: 1.55; }
+
+  .compare-section__head {
+    display: grid;
+    grid-template-columns: minmax(0, .92fr) minmax(340px, 1.08fr);
+    gap: clamp(28px, 6vw, 78px);
+    align-items: end;
+    margin-bottom: 32px;
+  }
+
+  .compare-section__head h2 {
+    max-width: 720px;
+    margin: 0;
+    font-size: clamp(34px, 5vw, 58px);
+    line-height: 1.05;
+    letter-spacing: -.04em;
+  }
+
+  .compare-section__head > p { max-width: 65ch; margin: 0; color: var(--text-secondary); font-size: 17px; line-height: 1.65; }
+
+  .compare-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .compare-grid > li { display: flex; margin: 0; }
+
+  .compare-card {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid rgba(200,208,222,.20);
+    border-radius: 20px;
+    background: linear-gradient(178deg, #11151b 0%, #080b0f 100%);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.05), 0 22px 48px rgba(0,0,0,.34);
+    color: inherit;
+    text-decoration: none;
+    transition: transform var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out);
+  }
+
+  .compare-card:hover { transform: translateY(-4px); border-color: rgba(112,221,255,.55); }
+  .compare-card:focus-visible { outline: var(--focus-ring); outline-offset: 4px; }
+
+  .compare-card__media {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    aspect-ratio: 16 / 10;
+    border-bottom: 1px solid rgba(200,208,222,.17);
+    background: #070a0d;
+  }
+
+  .compare-card__media img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .45s var(--ease-out), filter .45s var(--ease-out); }
+  .compare-card:hover .compare-card__media img { transform: scale(1.025); filter: brightness(1.06); }
+
+  .compare-card__job {
+    position: absolute;
+    right: 14px;
+    bottom: 14px;
+    padding: 7px 10px;
+    border: 1px solid rgba(112,221,255,.48);
+    border-radius: 999px;
+    background: rgba(5,8,12,.82);
+    backdrop-filter: blur(12px);
+    color: #8ce6ff;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+  }
+
+  .compare-card__copy { display: flex; flex: 1; flex-direction: column; padding: 22px; }
+  .compare-card h3 { margin: 0; font-size: 21px; line-height: 1.25; letter-spacing: -.02em; }
+  .compare-card p { margin: 12px 0 20px; color: var(--text-secondary); font-size: 15px; line-height: 1.55; }
+  .compare-card__label { margin-bottom: 9px; color: var(--text-tertiary); font-family: var(--font-mono); font-size: 9px; font-weight: 700; letter-spacing: .16em; }
+  .compare-card__criteria { display: flex; flex-wrap: wrap; gap: 7px; }
+  .compare-card__criteria > span { padding: 6px 8px; border: 1px solid rgba(200,208,222,.18); border-radius: 999px; color: #c8ced8; font-size: 12px; line-height: 1; }
+  .compare-card__action { margin-top: 24px; color: #81e3ff; font-weight: 700; }
+
+  .compare-explainer {
+    display: grid;
+    grid-template-columns: minmax(0, 1.08fr) minmax(360px, .92fr);
+    gap: clamp(34px, 7vw, 94px);
+    align-items: start;
+    margin: clamp(72px, 9vw, 118px) 0;
+    padding: clamp(30px, 5vw, 54px);
+    border: 1px solid rgba(200,208,222,.20);
+    border-radius: 24px;
+    background: radial-gradient(circle at 0 0, rgba(84,217,255,.08), transparent 38%), linear-gradient(145deg, #12171e 0%, #080b0f 78%);
+  }
+
+  .compare-explainer h2 { max-width: 760px; margin: 0; font-size: clamp(32px, 4.5vw, 54px); line-height: 1.07; letter-spacing: -.04em; }
+  .compare-explainer__copy > p:not(.compare-kicker) { max-width: 65ch; margin: 20px 0 0; color: var(--text-secondary); font-size: 16px; line-height: 1.65; }
+  .compare-explainer__steps { margin: 0; padding: 0; list-style: none; }
+  .compare-explainer__steps li { display: grid; grid-template-columns: 40px 1fr; gap: 14px; padding: 18px 0; }
+  .compare-explainer__steps li + li { border-top: 1px solid rgba(200,208,222,.15); }
+  .compare-explainer__steps li > span { display: grid; width: 34px; height: 34px; place-items: center; border: 1px solid rgba(112,221,255,.42); border-radius: 50%; color: #8ce6ff; font-family: var(--font-mono); font-size: 12px; }
+  .compare-explainer__steps strong { display: block; color: var(--text-primary); }
+  .compare-explainer__steps p { margin: 6px 0 0; color: var(--text-secondary); font-size: 14px; line-height: 1.55; }
+
+  .compare-finder {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: clamp(50px, 7vw, 86px);
+    padding: clamp(28px, 5vw, 50px);
+    border: 1px solid rgba(200,208,222,.20);
+    border-radius: 24px;
+    background: #0a0e13;
+  }
+
+  .compare-finder h2 { margin: 0; font-size: clamp(30px, 4vw, 47px); letter-spacing: -.04em; }
+  .compare-finder p:not(.compare-kicker) { max-width: 65ch; margin: 14px 0 0; color: var(--text-secondary); line-height: 1.65; }
+  .compare-finder .btn { flex: 0 0 auto; }
+
+  @media (max-width: 1000px) {
+    .compare-hero { grid-template-columns: 1fr; }
+    .compare-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .compare-explainer { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 700px) {
+    .compare-hero { padding-top: 40px; }
+    .compare-hero__actions { align-items: stretch; flex-direction: column; }
+    .compare-hero__actions .btn { width: 100%; }
+    .compare-hero__visual { border-radius: 18px; }
+    .compare-principles { grid-template-columns: 1fr; }
+    .compare-principles article + article { border-top: 1px solid rgba(200,208,222,.14); border-left: 0; }
+    .compare-section__head { grid-template-columns: 1fr; }
+    .compare-grid { grid-template-columns: 1fr; }
+    .compare-card__job { right: 10px; bottom: 10px; }
+    .compare-finder { align-items: stretch; flex-direction: column; }
+    .compare-finder .btn { width: 100%; }
+  }
 </style>
