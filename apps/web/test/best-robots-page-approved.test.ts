@@ -19,6 +19,15 @@ describe("owner-reviewed Best Robots hub", () => {
     expect(PAGE).toContain('href="#best-by-job"');
   });
 
+  it("uses original responsive multi-robot hero artwork", () => {
+    expect(PAGE).toContain('src="/media/best-robots/hero.webp"');
+    expect(PAGE).toContain('srcset={srcsetFor("/media/best-robots/hero.webp")}');
+    expect(PAGE).toContain('width="1672"');
+    expect(PAGE).toContain('height="941"');
+    expect(PAGE).toContain("a pool cleaner underwater");
+    expect(PAGE).toContain('fetchpriority="high"');
+  });
+
   it("gives every live robot category a useful visual destination", () => {
     const ranked = builtBestOfCategories();
     for (const category of liveCategories()) {
@@ -54,7 +63,7 @@ describe("owner-reviewed Best Robots hub", () => {
     expect(PAGE).toContain("description={DESCRIPTION}");
     expect(PAGE).toContain('type: "CollectionPage"');
     expect(PAGE).toContain("itemListSchema(");
-    expect(PAGE).toContain('ogImage="/media/home/hero-desktop.webp"');
+    expect(PAGE).toContain('ogImage="/media/best-robots/hero.webp"');
   });
 
   it("explains the editorial standard in reader language", () => {
