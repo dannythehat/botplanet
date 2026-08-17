@@ -12296,5 +12296,44 @@
         "checksum": "sha256:316cfb847487bcdfd2bf11d294ccfaeafe5be4ccf249b2ca755b17b08a03dbd0"
       }
     ]
+  },
+  {
+    "source": "/media/compare/hero.webp",
+    "sourceWidth": 1672,
+    "sourceHeight": 941,
+    "derivatives": [
+      {
+        "id": "media-compare-hero-webp-360",
+        "src": "/media/compare/hero-360w.webp",
+        "width": 360,
+        "height": 203,
+        "bytes": 4696,
+        "checksum": "sha256:09ad6f5742ec664e153dd2fd6880f720c3749a703720c531cc701126d7bbe1be"
+      },
+      {
+        "id": "media-compare-hero-webp-640",
+        "src": "/media/compare/hero-640w.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 9552,
+        "checksum": "sha256:4c6079a7b698ec2125afb683c3ffa5d1cabb9ee3e06fbd277c8a12e54a3a83ce"
+      },
+      {
+        "id": "media-compare-hero-webp-960",
+        "src": "/media/compare/hero-960w.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 15870,
+        "checksum": "sha256:f54bbe6584beb930d13e91fc0d21a51813b6345885446d82979fc87ea958bde1"
+      },
+      {
+        "id": "media-compare-hero-webp-1440",
+        "src": "/media/compare/hero-1440w.webp",
+        "width": 1440,
+        "height": 810,
+        "bytes": 26450,
+        "checksum": "sha256:375c88987d3831d903c83121a380397cfb856b46017739c3c0cd7e8fe6fb1834"
+      }
+    ]
   }
 ]
