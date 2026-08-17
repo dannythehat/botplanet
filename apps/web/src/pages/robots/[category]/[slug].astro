@@ -12,6 +12,7 @@ import { resolveSlug, removedRedirect, mergedRedirect } from "../../../content/p
 import { categoryBySlug } from "../../../content/nav";
 import { latestAcceptedForProduct } from "../../../lib/providers/refresh-store";
 import ReviewArticle from "../../../components/ReviewArticle.astro";
+import ProductImage from "../../../components/ProductImage.astro";
 import { reviewFor } from "../../../content/reviews";
 import { availabilityFor, reviewSchema, articleSchema, imageObjectSchema, webPageSchema } from "../../../lib/seo";
 import { FOUNDER, authorForReview } from "../../../content/team";
@@ -19,6 +20,9 @@ import AuthorBox from "../../../components/AuthorBox.astro";
 import { deliveryLine, deliveryNote } from "../../../lib/delivery-wording";
 import { PRICE_WITHHELD_LABEL } from "../../../content/commerce/price-display";
 import { MEDIA_ASSETS } from "../../../content/media/assets";
+import { resolveImage } from "../../../lib/media-registry";
+import { journeyFor } from "../../../content/journeys";
+import { categoryCanMatch } from "../../../content/matcher-router";
 
 /* Today, as a date rather than an instant, resolved once for the whole render
    so two offers on one page cannot straddle midnight and disagree. */
@@ -115,6 +119,26 @@ const crumbs = breadcrumbsFor(Astro.url.pathname, product.name);
 
 const review = reviewFor(product.slug);
 const proseModule = review ? REVIEW_PROSE[`../../../reviews/${product.slug}.md`] : undefined;
+
+/* Every product page gets a real visual surface. A finished review keeps its
+   authored hero; a review still waiting on dedicated artwork uses the best
+   rights-cleared product asset in the central media registry. This is display
+   fallback only — placeholders never enter Product structured data. */
+const resolvedProductImage = resolveImage(product.id, "product_page");
+const displayImage = review?.image ?? (resolvedProductImage
+  ? { src: resolvedProductImage.src, alt: resolvedProductImage.alt, focal: "50% 50%" }
+  : undefined);
+const displayReview = review ? { ...review, image: displayImage } : null;
+
+const plainDescription = productMetaDescription({
+  name: product.name,
+  productClass: product.productClass,
+  powerType: product.powerType,
+  environments: product.environments as string[],
+  cleans: product.cleans as string[],
+});
+const capabilities = (product.cleans as string[]) ?? [];
+const productJourney = categoryCanMatch(category!) ? journeyFor(category!) : null;
 
 /* A review entry with no prose file is a half-built page; render the plain
    specification page rather than an article with a hole where the body goes.
@@ -236,14 +260,9 @@ const reviewGraph = hasReview
 
 <Base
   title={hasReview ? review!.seoTitle : `${product.name} — BotPlanet`}
-  description={hasReview ? review!.metaDescription : productMetaDescription({
-    name: product.name,
-    productClass: product.productClass,
-    powerType: product.powerType,
-    environments: product.environments as string[],
-    cleans: product.cleans as string[],
-  })}
-  ogImage={hasReview ? review!.image?.src : undefined}
+  description={hasReview ? review!.metaDescription : plainDescription}
+  path={Astro.url.pathname}
+  ogImage={hasReview ? displayImage?.src : resolvedProductImage?.src}
   ogType={hasReview ? "article" : undefined}
   breadcrumbs={crumbs}
   schema={reviewGraph}
@@ -263,7 +282,7 @@ const reviewGraph = hasReview
 
   {hasReview && (
   <ReviewArticle
-    review={review!}
+    review={displayReview!}
     html={reviewHtml!}
     productName={product.name}
     offers={engineOffers.map(({ offer, pub }) => ({
@@ -292,23 +311,42 @@ const reviewGraph = hasReview
       voice. Products without a review still need it. */}
   {!hasReview && (
     <>
-      <div class="row" style="justify-content:space-between; align-items:flex-start;">
-        <div>
-          <h1>{product.name}</h1>
-          <div class="row">
-            <span class="pill class">{titleCase(product.productClass)}</span>
-            <span class="pill">{titleCase(product.powerType)}</span>
-            <span class="pill">{(product.environments as string[]).map(titleCase).join(" / ")}</span>
-            <span class="pill">{brand?.name}</span>
-          </div>
-        </div>
-        <a class="btn primary" href={`/botmatch/${category}/`}>Is this right for my pool?</a>
-      </div>
+      <header class="plain-product">
+        <figure class="plain-product__media">
+          <ProductImage
+            productId={product.id}
+            placement="product_page"
+            sizes="(min-width: 1000px) 52vw, 100vw"
+            priority
+            class="plain-product__image"
+          />
+        </figure>
 
-      <h2>Cleans</h2>
-      <div class="row">
-        {(product.cleans as string[]).map((c) => <span class="pill class">{titleCase(c)}</span>)}
-      </div>
+        <div class="plain-product__copy">
+          <p class="plain-product__eyebrow">PRODUCT OVERVIEW</p>
+          <h1>{product.name}</h1>
+          <p class="plain-product__lede">{plainDescription}</p>
+          <ul class="plain-product__facts">
+            <li>{titleCase(product.productClass)}</li>
+            <li>{titleCase(product.powerType)}</li>
+            <li>{(product.environments as string[]).map(titleCase).join(" / ")}</li>
+            {brand?.name && <li>{brand.name}</li>}
+          </ul>
+          {productJourney && (
+            <a class="btn btn--accent btn--lg" href={productJourney.href}>{productJourney.ctaLabel}</a>
+          )}
+        </div>
+      </header>
+
+      {capabilities.length > 0 && (
+        <section class="plain-product__capabilities" aria-labelledby="plain-capabilities-title">
+          <p class="plain-product__eyebrow">RECORDED CAPABILITIES</p>
+          <h2 id="plain-capabilities-title">What it is built to do</h2>
+          <div class="row">
+            {capabilities.map((capability) => <span class="pill class">{titleCase(capability)}</span>)}
+          </div>
+        </section>
+      )}
     </>
   )}
 
@@ -423,3 +461,99 @@ const reviewGraph = hasReview
 
   <p class="note" style="margin-top:24px;">Affiliate disclosure: BotPlanet may earn a commission from retailer links. This never affects which product is recommended.</p>
 </Base>
+
+
+<style>
+  .plain-product {
+    display: grid;
+    grid-template-columns: minmax(0, 1.06fr) minmax(22rem, 0.94fr);
+    gap: clamp(2.25rem, 5vw, 4.5rem);
+    align-items: center;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: clamp(2rem, 5vw, 4.5rem) 0;
+  }
+
+  .plain-product__media {
+    display: grid;
+    overflow: hidden;
+    min-height: 26rem;
+    margin: 0;
+    place-items: center;
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-xl, 24px);
+    background: var(--surface-raised);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), var(--shadow-lg);
+  }
+
+  .plain-product__media :global(.plain-product__image) {
+    width: 100%;
+    max-height: 42rem;
+    object-fit: contain;
+  }
+
+  .plain-product__copy h1 {
+    max-width: 14ch;
+    margin: 0;
+    font-size: clamp(2.7rem, 5vw, 5rem);
+    line-height: 1;
+    letter-spacing: -0.05em;
+  }
+
+  .plain-product__eyebrow {
+    margin: 0 0 0.8rem;
+    color: var(--text-tertiary);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+  }
+
+  .plain-product__lede {
+    max-width: 40rem;
+    margin: 1.25rem 0 0;
+    color: var(--text-secondary);
+    font-size: clamp(1.05rem, 1.6vw, 1.22rem);
+    line-height: 1.6;
+  }
+
+  .plain-product__facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1.25rem 0 1.75rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  .plain-product__facts li {
+    padding: 0.38rem 0.72rem;
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-pill);
+    color: var(--text-secondary);
+    font-size: 0.82rem;
+  }
+
+  .plain-product__capabilities {
+    max-width: 1080px;
+    margin: 1rem auto clamp(3rem, 7vw, 5rem);
+    padding: clamp(1.4rem, 3vw, 2.25rem);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    background: var(--surface-raised);
+  }
+
+  .plain-product__capabilities h2 { margin: 0 0 1rem; }
+
+  @media (max-width: 900px) {
+    .plain-product { grid-template-columns: 1fr; }
+    .plain-product__media { min-height: 18rem; }
+  }
+
+  @media (max-width: 620px) {
+    .plain-product { padding-top: 1rem; }
+    .plain-product__media { min-height: 14rem; border-radius: 18px; }
+    .plain-product__copy h1 { font-size: clamp(2.5rem, 13vw, 3.6rem); }
+    .plain-product__copy .btn { width: 100%; justify-content: center; }
+  }
+</style>
