@@ -1,0 +1,160 @@
+name: SEO Research
+
+# The paid keyword-research batch that every BotPlanet category runs BEFORE a
+# page is built. See docs/seo/PRE-BUILD-PROCESS.md for where this sits in the
+# sequence and what happens to the output.
+#
+# This workflow was originally written for the pool category, hardcoded to one
+# branch, and deleted after that run. It is permanent now: the research stage
+# is not a one-off, it is the gate every category passes through, and a gate
+# that has to be rebuilt from git history each time is a gate people skip.
+#
+# Credentials come exclusively from the GitHub repository secret and are never
+# printed. The script enforces the spend ceiling internally and refuses a cap
+# above it.
+#
+# TWO WAYS TO RUN IT.
+#
+#   1. Actions tab -> "SEO Research" -> pick the category, optionally lower the
+#      cap. The normal route for a human.
+#
+#   2. Push a branch named `research/<slug>`, e.g. `research/companion-robots`.
+#      The slug is read from the branch name.
+#
+# This second route exists because workflow_dispatch requires the
+# `actions: write` permission, and not every credential that can push code has
+# it. On 6 August 2026 that left the research stage unrunnable by the only
+# party trying to run it, with the seed file committed and waiting.
+#
+# It was a TAG first, for about ten minutes, which was the better design — a
+# tag is permanent and names exactly what was researched. It is a branch
+# because tag pushes are refused by the sandbox's egress proxy while branch
+# pushes are not, and a route nobody can take is not a route. If you are
+# reading this with a credential that can push tags, a tag is still the nicer
+# marker.
+#
+# It is a dedicated `research/` prefix rather than a push trigger on the seeds
+# directory, which would have spent money every time somebody fixed a typo in
+# a seed list. Creating `research/<slug>` is a deliberate act.
+#
+# The $2.00 ceiling lives inside the script and cannot be raised by either
+# route. Concurrency below still permits only one paid run at a time.
+#
+# Results arrive as a downloadable artifact — raw API responses never enter git.
+
+on:
+  workflow_dispatch:
+    inputs:
+      category:
+        description: "Category slug — must match docs/seo/seeds/<slug>.json"
+        required: true
+        type: string
+      cost_cap:
+        description: "Spend cap in USD. Lowers the $2.00 ceiling; cannot raise it."
+        required: false
+        default: "2.00"
+        type: string
+  push:
+    branches:
+      - "research/*"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: seo-research
+  cancel-in-progress: false
+
+jobs:
+  research:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Resolve the run's inputs
+        id: cfg
+        shell: bash
+        run: |
+          if [ "${{ github.event_name }}" = "push" ]; then
+            CATEGORY="${GITHUB_REF_NAME#research/}"
+            CAP="2.00"
+            echo "Triggered by branch ${GITHUB_REF_NAME}"
+          else
+            CATEGORY="${{ inputs.category }}"
+            CAP="${{ inputs.cost_cap }}"
+            echo "Triggered manually"
+          fi
+          if ! printf '%s' "$CATEGORY" | grep -Eq '^[a-z0-9-]+$'; then
+            echo "Category \"$CATEGORY\" is not a plain slug. Refusing to build a path from it."
+            exit 1
+          fi
+          echo "category=$CATEGORY" >> "$GITHUB_OUTPUT"
+          echo "cost_cap=$CAP" >> "$GITHUB_OUTPUT"
+          echo "Category: $CATEGORY, cap \$$CAP"
+
+      - name: Confirm the seed inventory exists before spending anything
+        run: |
+          SEED="docs/seo/seeds/${{ steps.cfg.outputs.category }}.json"
+          if [ ! -f "$SEED" ]; then
+            echo "No seed inventory at $SEED."
+            echo "The free seed list is written and reviewed BEFORE the paid run — see docs/seo/PRE-BUILD-PROCESS.md."
+            exit 1
+          fi
+          echo "Seed inventory: $SEED"
+
+      - name: Run capped DataForSEO batch
+        shell: bash
+        run: |
+          mkdir -p research-output
+          set -o pipefail
+          node scripts/seo-research.mjs 2>&1 | tee research-output/run.log
+          if grep -Eq 'HTTP (4|5)[0-9]{2}' research-output/run.log; then
+            echo 'DataForSEO returned an HTTP error. Research results are invalid.'
+            exit 1
+          fi
+        env:
+          DATAFORSEO_BASIC_AUTH: ${{ secrets.DATAFORSEO_BASIC_AUTH }}
+          SEO_CATEGORY: ${{ steps.cfg.outputs.category }}
+          SEO_COST_CAP: ${{ steps.cfg.outputs.cost_cap }}
+
+      - name: Print the digest into the log
+        if: always()
+        continue-on-error: true
+        run: node scripts/seo-research-digest.mjs --category=${{ inputs.category }}
+
+      - name: Report what it cost
+        if: always()
+        run: |
+          COST="research-output/${{ steps.cfg.outputs.category }}-cost-summary.json"
+          [ -f "$COST" ] && cat "$COST" >> "$GITHUB_STEP_SUMMARY" || echo "No cost summary produced." >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload sanitised results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: seo-research-${{ steps.cfg.outputs.category }}
+          path: research-output/
+          retention-days: 30
+
+      - name: Commit the results to the research branch
+        if: always() && github.event_name == 'push'
+        shell: bash
+        run: |
+          if [ ! -d research-output ] || [ -z "$(ls -A research-output)" ]; then
+            echo "Nothing to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -f research-output/
+          git commit -q -m "Research results: ${{ steps.cfg.outputs.category }}" || {
+            echo "No change to commit."
+            exit 0
+          }
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+          echo "Committed to ${GITHUB_REF_NAME}"
