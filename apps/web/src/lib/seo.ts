@@ -111,7 +111,7 @@ export function organizationSchema() {
       caption: "BotPlanet",
     },
     description:
-      "BotPlanet helps people discover, compare and choose useful real-world robots, starting with robotic pool cleaners in the United States.",
+      "BotPlanet helps people discover, compare and choose useful real-world robots for homes, gardens and everyday life in the United States.",
     slogan: SITE.tagline,
   };
 }
