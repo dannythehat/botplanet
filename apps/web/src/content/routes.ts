@@ -81,12 +81,12 @@ export const ROUTES: RouteDef[] = [
   },
   {
     path: "/robots/",
-    label: "Explore Robots",
+    label: "Robot Categories",
     breadcrumbLabel: "Robot Categories",
     section: "shop",
     parent: "/",
     status: "live",
-    navSurface: "bar",
+    navSurface: "none",
     footerGroup: "Explore",
     inSitemap: true,
     indexable: true,
@@ -307,12 +307,12 @@ export const ROUTES: RouteDef[] = [
      /recommendation/<token>/ are unchanged. */
   {
     path: "/botmatch/",
-    label: "Find your robot",
+    label: "Find My Robot",
     breadcrumbLabel: "BotMatch",
     section: "botmatch",
     parent: "/",
     status: "live",
-    navSurface: "none",
+    navSurface: "bar",
     /* THE FOOTER'S BOTMATCH ENTRY SINCE 12 AUGUST 2026, replacing the pool
        matcher that had the slot to itself.
 
