@@ -1,27 +1,56 @@
 ---
 import Base from "../layouts/Base.astro";
+import { FOUNDER, REVIEWS_EDITOR } from "../content/team";
 import { SITE } from "../lib/site";
+import { breadcrumbsFor } from "../lib/routing";
+import { webPageSchema } from "../lib/seo";
+
+const PATH = "/about/";
+const TITLE = "About BotPlanet | Independent Robot Recommendations";
+const DESCRIPTION = "Meet the people behind BotPlanet and see how we research useful robots, keep recommendations independent and fund the site through affiliate links.";
+const people = [FOUNDER, REVIEWS_EDITOR];
 ---
-<Base title="About BotPlanet — who we are and how we earn" description="Who is behind BotPlanet, how the site earns its money, and why a comparison site that tells you when not to buy is worth more than one that never does.">
-  <h1>About BotPlanet</h1>
-  <p class="muted" style="font-size:18px; max-width:680px;">
-    BotPlanet helps people find and buy the right real-world robot — pool cleaners today, more categories soon.
-    You can browse and compare normally, or let BotMatch recommend one based on your needs.
-  </p>
 
-  <h2>Our promise</h2>
-  <p>Recommendations are based on <strong>suitability, not commission</strong>. Our BotMatch engine chooses the best product for you before it ever looks at which retailer pays us. We disclose affiliate relationships, label manufacturer claims we haven't independently verified, and show when every price was last checked.</p>
+<Base title={TITLE} description={DESCRIPTION} path={PATH} ogImage="/media/home/hero-desktop.webp" breadcrumbs={breadcrumbsFor(PATH)} schema={[webPageSchema({ path: PATH, name: TITLE, description: DESCRIPTION, type: "AboutPage" })]}>
+  <header class="about-hero">
+    <div class="about-hero__copy">
+      <p class="kicker">THE PEOPLE AND THE PURPOSE</p>
+      <h1>Useful robots.<br /><span>Honest answers.</span></h1>
+      <p>BotPlanet helps people choose robots that do real work. We compare what the machines can genuinely handle, state what their makers will not disclose and make it clear when buying nothing is the better answer.</p>
+    </div>
+    <figure>
+      <img src="/media/home/hero-desktop.webp" srcset="/media/home/hero-desktop-360w.webp 360w, /media/home/hero-desktop-640w.webp 640w, /media/home/hero-desktop-960w.webp 960w, /media/home/hero-desktop-1440w.webp 1440w" sizes="(min-width: 900px) 50vw, 100vw" width="1440" height="810" alt="A collection of useful robots working around a modern home and garden." loading="eager" fetchpriority="high" decoding="async" />
+    </figure>
+  </header>
 
-  <h2>Who writes this</h2>
-  <div class="card" style="max-width:640px;">
-    <h3>{SITE.founder.name}</h3>
-    <p class="muted">{SITE.founder.title}</p>
-    <p>{SITE.founder.bio}</p>
-  </div>
+  <section class="purpose" aria-labelledby="purpose-title">
+    <header><p class="kicker">WHY BOTPLANET EXISTS</p><h2 id="purpose-title">The right robot depends on the job.</h2></header>
+    <div class="purpose__grid">
+      <article><span>01</span><h3>Start with the real need</h3><p>Every category has different deciding questions. We do not reuse a pool-cleaner scorecard for a mower, vacuum, window cleaner or companion robot.</p></article>
+      <article><span>02</span><h3>Show the evidence</h3><p>Manufacturer data, retailer facts and owner evidence are labelled. If a figure is not published, the page says so instead of guessing.</p></article>
+      <article><span>03</span><h3>Name the limitation</h3><p>A useful review explains who should avoid a product, not just who might buy it. Poor fits are ruled out before offers are considered.</p></article>
+    </div>
+  </section>
 
-  <h2>How we make money</h2>
-  <p>When you buy through a retailer link we may earn a commission — at no extra cost to you. That commission never changes which product BotMatch recommends. See our <a href="/affiliate-disclosure/">affiliate disclosure</a>.</p>
+  <section class="team" aria-labelledby="team-title">
+    <header><p class="kicker">ACCOUNTABILITY HAS NAMES</p><h2 id="team-title">Who is behind the work</h2><p>Every recommendation and review has a named person responsible for it.</p></header>
+    <div class="team__grid">
+      {people.map((person) => <article class="person-card">
+        {person.portrait && <img src={person.portrait.src} width="320" height="320" alt={person.portrait.alt} loading="lazy" decoding="async" />}
+        <div><p class="person-card__role">{person.role}</p><h3>{person.name}</h3><p>{person.accountability}</p><a href={person.path}>Meet {person.name.split(" ")[0]} <span aria-hidden="true">→</span></a></div>
+      </article>)}
+    </div>
+  </section>
 
-  <h2>Contact</h2>
-  <p>Questions or corrections: <a href={`mailto:${SITE.business.contactEmail}`}>{SITE.business.contactEmail}</a>.</p>
+  <section class="independence" aria-labelledby="independence-title">
+    <div><p class="kicker">HOW THE SITE IS FUNDED</p><h2 id="independence-title">Affiliate-funded. Recommendation-independent.</h2><p>BotPlanet may earn a commission when a reader buys through a retailer link, at no extra cost to them. BotMatch chooses the product before retailer offers or commission enter the process, and paid placement cannot buy a verdict.</p></div>
+    <nav aria-label="Learn about our standards"><a class="btn btn--accent" href="/how-botmatch-works/">How BotMatch works</a><a class="btn" href="/affiliate-disclosure/">Affiliate disclosure</a></nav>
+  </section>
+
+  <section class="contact-strip"><div><strong>Questions, corrections or evidence we should see?</strong><span>We want the page to be right more than we want to look right.</span></div><a href={`mailto:${SITE.business.contactEmail}`}>{SITE.business.contactEmail}</a></section>
 </Base>
+
+<style>
+  .kicker{margin:0 0 .8rem;color:var(--text-tertiary);font:700 .7rem/1 var(--font-mono);letter-spacing:.18em}.about-hero{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(2rem,5vw,5rem);align-items:center;max-width:1360px;margin:0 auto;padding:clamp(3rem,7vw,6rem) 0}.about-hero h1{margin:0;font-size:clamp(3.2rem,6vw,6.4rem);line-height:.94;letter-spacing:-.06em}.about-hero h1 span{color:var(--text-tertiary)}.about-hero__copy>p:last-child{max-width:38rem;margin:1.5rem 0 0;color:var(--text-secondary);font-size:clamp(1.05rem,1.5vw,1.25rem);line-height:1.65}.about-hero figure{overflow:hidden;margin:0;aspect-ratio:16/10;border:1px solid var(--border-default);border-radius:1.5rem;background:var(--surface-raised)}.about-hero img{display:block;width:100%;height:100%;object-fit:cover}.purpose,.team{max-width:1120px;margin:0 auto clamp(5rem,9vw,8rem)}.purpose>header,.team>header{max-width:48rem;margin:0 auto 2rem;text-align:center}.purpose h2,.team h2,.independence h2{margin:0;font-size:clamp(2.2rem,4.5vw,4rem);line-height:1.02;letter-spacing:-.05em}.team>header>p:last-child{color:var(--text-secondary)}.purpose__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}.purpose article{padding:1.6rem;border:1px solid var(--border-subtle);border-radius:1rem;background:var(--surface-raised)}.purpose article>span{color:var(--accent);font-family:var(--font-mono);font-size:.72rem}.purpose h3{margin:2rem 0 .7rem}.purpose article p,.person-card p{color:var(--text-secondary);line-height:1.6}.team__grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem}.person-card{display:grid;grid-template-columns:140px 1fr;gap:1.4rem;padding:1.25rem;border:1px solid var(--border-subtle);border-radius:1.2rem;background:var(--surface-raised)}.person-card img{width:140px;height:140px;object-fit:cover;border-radius:.9rem;filter:grayscale(.15)}.person-card__role{margin:0!important;color:var(--accent)!important;font:700 .7rem/1 var(--font-mono);letter-spacing:.12em;text-transform:uppercase}.person-card h3{margin:.45rem 0;font-size:1.55rem}.person-card p{margin:.45rem 0}.person-card a{display:inline-block;margin-top:.4rem;font-weight:700}.independence{display:flex;align-items:center;justify-content:space-between;gap:2.5rem;max-width:1120px;margin:0 auto 2rem;padding:clamp(1.7rem,4vw,3rem);border:1px solid rgba(119,222,255,.3);border-radius:1.3rem;background:linear-gradient(120deg,rgba(69,171,210,.13),var(--surface-raised) 58%)}.independence>div{max-width:48rem}.independence p:last-child{color:var(--text-secondary);line-height:1.65}.independence nav{display:flex;flex-direction:column;gap:.7rem;min-width:220px}.independence .btn{justify-content:center}.contact-strip{display:flex;align-items:center;justify-content:space-between;gap:2rem;max-width:1120px;margin:0 auto;padding:1.4rem 0;border-top:1px solid var(--border-subtle)}.contact-strip strong,.contact-strip span{display:block}.contact-strip span{margin-top:.25rem;color:var(--text-secondary)}
+  @media(max-width:900px){.about-hero{grid-template-columns:1fr}.purpose__grid{grid-template-columns:1fr}.team__grid{grid-template-columns:1fr}.independence{align-items:stretch;flex-direction:column}.independence nav{min-width:0}}@media(max-width:580px){.person-card{grid-template-columns:80px 1fr}.person-card img{width:80px;height:80px}.contact-strip{align-items:flex-start;flex-direction:column}.about-hero{padding-top:2rem}}
+</style>
