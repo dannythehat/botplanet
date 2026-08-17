@@ -1,9 +1,11 @@
 name: CI
 
+# Pull-request validation only. Production pushes are already tested by the
+# Deploy BotPlanet workflow, so running this suite again on every main push
+# only duplicates work and Actions usage.
 on:
   pull_request:
-  push:
-    branches: [main]
+  workflow_dispatch:
 
 jobs:
   build-test:
