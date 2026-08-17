@@ -31,7 +31,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
    * and a footer full of links on every one of them.
    */
   if (isGone(context.url.pathname)) {
-    return new Response("410 Gone. This page was part of a previous site on this domain and has been permanently removed.\n", {
+    return new Response("410 Gone. This page has been permanently removed.\n", {
       status: 410,
       headers: {
         "content-type": "text/plain; charset=utf-8",

@@ -23,6 +23,12 @@ import {
   type LaunchState,
 } from "./nav";
 import { MERGED_REVIEWS, RETIRED_SLUGS } from "./product-names";
+import {
+  URL_CONSOLIDATION_REDIRECTS,
+  consolidatedDestination,
+  isConsolidatedPath,
+  isRemovedPath,
+} from "./url-consolidation";
 
 export type RouteStatus = LaunchState;
 
@@ -1112,21 +1118,42 @@ export const routeFor = (path: string): RouteDef | undefined => BY_PATH.get(path
 
 /** Routes shown in the desktop top bar, in registry order. */
 export const barRoutes = () =>
-  ROUTES.filter((r) => r.navSurface === "bar" || r.navSurface === "bar-secondary");
+  ROUTES.filter(
+    (r) =>
+      (r.navSurface === "bar" || r.navSurface === "bar-secondary") &&
+      !isConsolidatedPath(r.path) &&
+      !isRemovedPath(r.path),
+  );
 
 /** Utility destinations: reachable via the mega menu's More column and drawer. */
-export const utilityRoutes = () => ROUTES.filter((r) => r.navSurface === "utility");
+export const utilityRoutes = () =>
+  ROUTES.filter(
+    (r) => r.navSurface === "utility" && !isConsolidatedPath(r.path) && !isRemovedPath(r.path),
+  );
 
 /** Footer groups, assembled from the registry so nothing can drift. */
 export const footerGroups = (): { title: string; links: RouteDef[] }[] => {
   const order = ["Explore", "BotMatch", "Company", "Trust & legal"];
   return order
-    .map((title) => ({ title, links: ROUTES.filter((r) => r.footerGroup === title) }))
+    .map((title) => ({
+      title,
+      links: ROUTES.filter(
+        (r) => r.footerGroup === title && !isConsolidatedPath(r.path) && !isRemovedPath(r.path),
+      ),
+    }))
     .filter((g) => g.links.length > 0);
 };
 
 /** Canonical, indexable paths for the XML sitemap. */
-export const sitemapRoutes = () => ROUTES.filter((r) => r.inSitemap && r.indexable && r.status !== "hidden");
+export const sitemapRoutes = () =>
+  ROUTES.filter(
+    (r) =>
+      r.inSitemap &&
+      r.indexable &&
+      r.status !== "hidden" &&
+      !isConsolidatedPath(r.path) &&
+      !isRemovedPath(r.path),
+  );
 
 /**
  * Whether a product's own URL belongs in the sitemap.
@@ -1190,9 +1217,10 @@ export const builtBestOfCategories = (): Set<string> =>
 /** Category-scoped section paths, generated rather than hard-coded. */
 export const categoryRoutes = (slug: string) => ({
   hub: categoryPaths.category(slug),
-  compare: categoryPaths.compare(slug),
+  /* Category comparison and guide-directory intent now belongs to the hub. */
+  compare: categoryPaths.category(slug),
   best: categoryPaths.best(slug),
-  guides: categoryPaths.categoryGuides(slug),
+  guides: categoryPaths.category(slug),
   deals: categoryPaths.categoryDeals(slug),
   botmatch: categoryPaths.botmatch(slug),
 });
@@ -1225,9 +1253,12 @@ export const productPath = (productSlug: string, categorySlug: string = LAUNCH_C
 };
 
 /** Every alias in the registry, mapped to its canonical destination. */
-export const REDIRECTS: { from: string; to: string }[] = ROUTES.flatMap((r) =>
-  (r.aliases ?? []).map((from) => ({ from, to: r.path })),
-);
+export const REDIRECTS: { from: string; to: string }[] = [
+  ...Object.entries(URL_CONSOLIDATION_REDIRECTS).map(([from, to]) => ({ from, to })),
+  ...ROUTES.flatMap((r) =>
+    (r.aliases ?? []).map((from) => ({ from, to: consolidatedDestination(r.path) ?? r.path })),
+  ),
+];
 
 /** Categories, re-exported so consumers need only one import. */
 export { CATEGORIES, LAUNCH_CATEGORY, liveCategories };

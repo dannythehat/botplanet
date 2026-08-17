@@ -21,7 +21,7 @@ export interface BarItem {
 
 /** Desktop top bar. Put the universal finder first: it is the homepage's
  * primary job, while comparison and editorial guidance follow it. */
-const BAR_ORDER = ["/botmatch/", "/compare/", "/guides/"];
+const BAR_ORDER = ["/botmatch/", "/guides/"];
 export const BAR_ITEMS: BarItem[] = barRoutes()
   .slice()
   .sort((a, b) => {
