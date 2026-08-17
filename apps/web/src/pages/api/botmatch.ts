@@ -12,6 +12,8 @@ import {
 import { getDb, schema } from "../../lib/db";
 import { loadScoringConfig } from "../../lib/scoring-config";
 import { NO_OFFER_BY_DESIGN, catalogueStatusOf } from "../../content/products";
+import { productPath } from "../../content/routes";
+import { resolveImage } from "../../lib/media-registry";
 
 const freshnessRank = (c: string | null) => (c === "live" ? 2 : c === "recently_verified" ? 1 : 0);
 
@@ -212,22 +214,51 @@ export const POST: APIRoute = async ({ request, locals }) => {
     );
   }
 
-  // The winner's name, so the matcher's email can say what it picked without a
-  // second round trip. Nothing commercial is returned here.
-  const winnerName = winner
-    ? (products.find((p) => p.id === winner.productId)?.name ?? null)
+  /**
+   * The public result needs to be a useful destination, not just a product
+   * name. Resolve the canonical review URL and the same centrally governed
+   * listing image the catalogue uses. A withdrawn asset therefore disappears
+   * here automatically and falls back safely.
+   */
+  const publicProduct = (product: (typeof products)[number]) => {
+    const image = resolveImage(
+      product.id,
+      "listing_card",
+      ["product_hero", "product_alternate_view", "branded_placeholder"],
+    );
+    return {
+      name: product.name,
+      url: productPath(product.slug, cat.slug),
+      image: image
+        ? {
+            src: image.src,
+            srcset: image.srcset,
+            alt: image.alt,
+            width: image.width,
+            height: image.height,
+          }
+        : null,
+    };
+  };
+
+  const winnerProduct = winner
+    ? (products.find((product) => product.id === winner.productId) ?? null)
     : null;
+  const winnerName = winnerProduct?.name ?? null;
+  const product = winnerProduct ? publicProduct(winnerProduct) : null;
 
-  /* Named so the funnel can say what it could not separate. Sorted by name
-     rather than by score, because they have the same score — presenting them
-     in score order would imply an order that does not exist. */
-  const equivalent = tied
+  /* Keep the name-only array for the saved recommendation and existing email
+     contract, while the visual funnel receives canonical links and images. */
+  const equivalentProducts = tied
     ? top
-        .map((t) => products.find((p) => p.id === t.productId)?.name ?? t.productId)
-        .sort((a, b) => a.localeCompare(b))
+        .map((item) => products.find((product) => product.id === item.productId))
+        .filter((item): item is (typeof products)[number] => Boolean(item))
+        .map(publicProduct)
+        .sort((a, b) => a.name.localeCompare(b.name))
     : [];
+  const equivalent = equivalentProducts.map((item) => item.name);
 
-  return json({ token, productName: winnerName, equivalent });
+  return json({ token, productName: winnerName, equivalent, product, equivalentProducts });
 };
 
 /**
