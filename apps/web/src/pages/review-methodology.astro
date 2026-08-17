@@ -1,29 +1,43 @@
 ---
 import Base from "../layouts/Base.astro";
+import { breadcrumbsFor } from "../lib/routing";
+import { webPageSchema } from "../lib/seo";
+
+const PATH = "/review-methodology/";
+const TITLE = "How BotPlanet Reviews Robots | Testing & Research Method";
+const DESCRIPTION = "See how BotPlanet researches and tests robots, labels every level of evidence and decides who a product fits—and who should avoid it.";
+const evidence = [
+  ["Hands-on tested", "BotPlanet physically used the product under the published method and captured original evidence."],
+  ["Hands-on demo", "We observed a live demonstration but did not control every condition. The limits of that access are stated."],
+  ["Researched", "Original analysis of manufacturer specifications, manuals, warranty, support, retailer facts and owner evidence."],
+  ["Verified owner", "Attributable evidence from an owner whose relationship with the product could be established."],
+  ["Manufacturer claimed", "A maker's claim that we have not independently verified. It is never presented as our own finding."],
+];
 ---
-<Base title="Review & testing methodology" description="Our review and testing methodology: what counts as a manufacturer claim, what is measured, and what we could not establish and say so on the page.">
-  <h1>Review & testing methodology</h1>
-  <p class="muted" style="max-width:680px;">We are transparent about which conclusions are hands-on and which are researched.</p>
 
-  <h2>Evidence levels</h2>
-  <table>
-    <thead><tr><th>Label</th><th>What it means</th></tr></thead>
-    <tbody>
-      <tr><td><span class="pill class">Tested</span></td><td>BotPlanet used the product hands-on and captured original evidence.</td></tr>
-      <tr><td><span class="pill class">Hands-on demo</span></td><td>We saw a live demonstration, clearly identified as such.</td></tr>
-      <tr><td><span class="pill class">Researched</span></td><td>Original analysis of specs, manuals, warranty, support and suitability.</td></tr>
-      <tr><td><span class="pill class">Verified owner</span></td><td>Attributable evidence from a verified owner.</td></tr>
-      <tr><td><span class="pill class">Manufacturer claimed</span></td><td>A manufacturer claim we haven't independently verified.</td></tr>
-    </tbody>
-  </table>
+<Base title={TITLE} description={DESCRIPTION} path={PATH} ogImage="/media/guides/hero.webp" breadcrumbs={breadcrumbsFor(PATH)} schema={[webPageSchema({ path: PATH, name: TITLE, description: DESCRIPTION })]}>
+  <header class="method-hero">
+    <div class="method-hero__copy"><p class="kicker">THE BOTPLANET METHOD</p><h1>Evidence before adjectives.</h1><p>Robots work in different places and fail in different ways. Our method starts with the job, checks the facts that decide fit and labels exactly how we know each claim.</p><a class="btn btn--accent btn--lg" href="/guides/">Read the buying advice</a></div>
+    <figure><img src="/media/guides/hero.webp" srcset="/media/guides/hero-360w.webp 360w, /media/guides/hero-640w.webp 640w, /media/guides/hero-960w.webp 960w, /media/guides/hero-1440w.webp 1440w" sizes="(min-width: 900px) 48vw, 100vw" width="1440" height="960" alt="A researcher examining useful home robots and their evidence." loading="eager" fetchpriority="high" decoding="async" /></figure>
+  </header>
 
-  <h2>What we assess</h2>
-  <ul>
-    <li>Suitability by pool type, size and cleaning need.</li>
-    <li>Cleaning coverage: floor, walls, waterline, surface.</li>
-    <li>Power (cordless vs corded), warranty, support and returns.</li>
-    <li>Real limitations and who should avoid the product.</li>
-  </ul>
+  <section class="process" aria-labelledby="process-title"><header><p class="kicker">ONE PROCESS, CATEGORY-SPECIFIC QUESTIONS</p><h2 id="process-title">How a verdict is built</h2></header><ol>
+    <li><span>01</span><div><h3>Define the job</h3><p>We identify what success means in that category and which limitations can make a product unsuitable.</p></div></li>
+    <li><span>02</span><div><h3>Build the source record</h3><p>Official product pages, manuals, support terms, warranties and verified retailer data come before secondary claims.</p></div></li>
+    <li><span>03</span><div><h3>Separate fact from claim</h3><p>Measured, observed, researched and manufacturer-claimed evidence remain visibly different.</p></div></li>
+    <li><span>04</span><div><h3>Publish the rule-outs</h3><p>The page names who should buy something else. A recommendation without its limits is advertising.</p></div></li>
+  </ol></section>
 
-  <p class="note">At launch, our evidence is primarily "researched". We label everything honestly and upgrade to hands-on evidence as we obtain review units.</p>
+  <section class="evidence" aria-labelledby="evidence-title"><header><p class="kicker">EVIDENCE LABELS</p><h2 id="evidence-title">What each label actually means</h2><p>These labels stop researched conclusions from being dressed up as hands-on testing.</p></header><div class="evidence__list">
+    {evidence.map(([label, meaning], index) => <article><span>{String(index + 1).padStart(2, "0")}</span><h3>{label}</h3><p>{meaning}</p></article>)}
+  </div></section>
+
+  <section class="assess" aria-labelledby="assess-title"><div><p class="kicker">WHAT CHANGES BY CATEGORY</p><h2 id="assess-title">The scorecard follows the machine.</h2><p>A mower is judged on area, boundary system and terrain. A pool robot on pool type, coverage and power. A vacuum on surfaces, navigation and maintenance. The principle is shared; the deciding evidence is not.</p></div><div class="assess__cards"><article><strong>Fit</strong><span>Environment, size, surfaces and the actual job.</span></article><article><strong>Ownership</strong><span>Setup, maintenance, consumables, support and warranty.</span></article><article><strong>Limits</strong><span>Known exclusions, missing data and who should avoid it.</span></article><article><strong>Value</strong><span>Capability for the money—not simply the lowest price.</span></article></div></section>
+
+  <aside class="honesty"><strong>Current evidence status</strong><p>BotPlanet is research-led. A product is labelled “hands-on tested” only after BotPlanet has physically used it. Until then, the page says researched—plainly and prominently.</p></aside>
 </Base>
+
+<style>
+  .kicker{margin:0 0 .8rem;color:var(--text-tertiary);font:700 .7rem/1 var(--font-mono);letter-spacing:.18em}.method-hero{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(2rem,5vw,5rem);align-items:center;max-width:1360px;margin:0 auto;padding:clamp(3rem,7vw,6rem) 0}.method-hero h1{max-width:10ch;margin:0;font-size:clamp(3.2rem,6vw,6.2rem);line-height:.94;letter-spacing:-.06em}.method-hero__copy>p:not(.kicker){max-width:38rem;margin:1.4rem 0 1.7rem;color:var(--text-secondary);font-size:clamp(1.05rem,1.6vw,1.25rem);line-height:1.65}.method-hero figure{overflow:hidden;margin:0;aspect-ratio:3/2;border:1px solid var(--border-default);border-radius:1.5rem;background:var(--surface-raised)}.method-hero img{display:block;width:100%;height:100%;object-fit:cover}.process,.evidence,.assess,.honesty{max-width:1120px;margin:0 auto clamp(5rem,9vw,8rem)}.process>header,.evidence>header{max-width:48rem;margin:0 auto 2rem;text-align:center}.process h2,.evidence h2,.assess h2{margin:0;font-size:clamp(2.2rem,4.4vw,4rem);line-height:1.02;letter-spacing:-.05em}.process ol{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin:0;padding:0;list-style:none}.process li{padding:1.5rem;border:1px solid var(--border-subtle);border-radius:1rem;background:var(--surface-raised)}.process li>span,.evidence article>span{color:var(--accent);font-family:var(--font-mono);font-size:.72rem}.process h3{margin:2rem 0 .6rem}.process p,.evidence p,.assess p{color:var(--text-secondary);line-height:1.6}.evidence>header>p:last-child{margin-bottom:0}.evidence__list{overflow:hidden;border:1px solid var(--border-subtle);border-radius:1.2rem;background:var(--surface-raised)}.evidence article{display:grid;grid-template-columns:44px minmax(180px,.55fr) 1.45fr;gap:1rem;align-items:start;padding:1.35rem 1.5rem}.evidence article+article{border-top:1px solid var(--border-subtle)}.evidence h3,.evidence p{margin:0}.assess{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(2rem,5vw,5rem);align-items:center}.assess__cards{display:grid;grid-template-columns:repeat(2,1fr);gap:.8rem}.assess__cards article{padding:1.3rem;border:1px solid var(--border-subtle);border-radius:1rem;background:var(--surface-raised)}.assess__cards strong,.assess__cards span{display:block}.assess__cards span{margin-top:.4rem;color:var(--text-secondary);font-size:.9rem;line-height:1.5}.honesty{padding:clamp(1.6rem,4vw,2.7rem);border:1px solid rgba(119,222,255,.3);border-radius:1.2rem;background:linear-gradient(120deg,rgba(69,171,210,.13),var(--surface-raised) 60%);text-align:center}.honesty strong{font-size:1.3rem}.honesty p{max-width:48rem;margin:.6rem auto 0;color:var(--text-secondary);line-height:1.65}
+  @media(max-width:950px){.method-hero{grid-template-columns:1fr}.process ol{grid-template-columns:repeat(2,1fr)}.assess{grid-template-columns:1fr}}@media(max-width:620px){.method-hero{padding-top:2rem}.process ol,.assess__cards{grid-template-columns:1fr}.evidence article{grid-template-columns:34px 1fr}.evidence article p{grid-column:2}.method-hero .btn{width:100%;justify-content:center}}
+</style>
