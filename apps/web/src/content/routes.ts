@@ -81,12 +81,12 @@ export const ROUTES: RouteDef[] = [
   },
   {
     path: "/robots/",
-    label: "Shop Robots",
+    label: "Robot Categories",
     breadcrumbLabel: "Robot Categories",
     section: "shop",
     parent: "/",
     status: "live",
-    navSurface: "bar",
+    navSurface: "none",
     footerGroup: "Explore",
     inSitemap: true,
     indexable: true,
@@ -133,7 +133,8 @@ export const ROUTES: RouteDef[] = [
   },
   {
     path: "/guides/",
-    label: "Guides",
+    label: "Buying Advice",
+    breadcrumbLabel: "Buying Advice",
     section: "guides",
     parent: "/",
     status: "live",
@@ -149,8 +150,11 @@ export const ROUTES: RouteDef[] = [
     section: "deals",
     parent: "/",
     status: "coming_soon",
-    navSurface: "bar-secondary",
-    footerGroup: "Explore",
+    /* BotPlanet is an independent affiliate comparison publisher, not a shop.
+       Keep the future route reserved, but do not advertise an empty retail
+       destination in the global navigation or footer. */
+    navSurface: "none",
+    footerGroup: null,
     inSitemap: false,
     indexable: false,
     summary: "Verified price drops. Nothing is listed until a price is confirmed at the retailer.",
@@ -304,12 +308,12 @@ export const ROUTES: RouteDef[] = [
      /recommendation/<token>/ are unchanged. */
   {
     path: "/botmatch/",
-    label: "Find your robot",
+    label: "Find My Robot",
     breadcrumbLabel: "BotMatch",
     section: "botmatch",
     parent: "/",
     status: "live",
-    navSurface: "none",
+    navSurface: "bar",
     /* THE FOOTER'S BOTMATCH ENTRY SINCE 12 AUGUST 2026, replacing the pool
        matcher that had the slot to itself.
 

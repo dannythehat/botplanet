@@ -75,8 +75,13 @@ describe("the shell's BotMatch journey follows the page", () => {
     }
   });
 
-  it("keeps the launch journey off-category, which is the locked product rule", () => {
-    for (const p of ["/", "/about/", "/guides/", "/review-methodology/"]) {
+  it("uses the universal job-first journey on the homepage only", () => {
+    const home = shellJourneyFor("/", opts);
+    expect(home?.category).toBe("universal");
+    expect(home?.ctaLabel).toBe("Find My Robot");
+    expect(home?.href).toBe("/botmatch/");
+
+    for (const p of ["/about/", "/guides/", "/review-methodology/"]) {
       expect(shellJourneyFor(p, opts)?.category, p).toBe(LAUNCH_CATEGORY);
     }
   });

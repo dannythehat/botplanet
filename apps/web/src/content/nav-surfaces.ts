@@ -19,8 +19,17 @@ export interface BarItem {
   section: string;
 }
 
-/** Desktop top bar. Shop Robots owns the mega menu. */
-export const BAR_ITEMS: BarItem[] = barRoutes().map((r) => ({
+/** Desktop top bar. Put the universal finder first: it is the homepage's
+ * primary job, while comparison and editorial guidance follow it. */
+const BAR_ORDER = ["/botmatch/", "/compare/", "/guides/"];
+export const BAR_ITEMS: BarItem[] = barRoutes()
+  .slice()
+  .sort((a, b) => {
+    const ai = BAR_ORDER.indexOf(a.path);
+    const bi = BAR_ORDER.indexOf(b.path);
+    return (ai < 0 ? Number.MAX_SAFE_INTEGER : ai) - (bi < 0 ? Number.MAX_SAFE_INTEGER : bi);
+  })
+  .map((r) => ({
   label: r.label,
   href: r.path,
   mega: r.path === "/robots/",

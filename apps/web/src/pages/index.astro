@@ -2,11 +2,9 @@
 import Base from "../layouts/Base.astro";
 import BotFinderCard from "../components/BotFinderCard.astro";
 import { finderCardFor } from "../content/finder-cards";
-import { LAUNCH_CATEGORY, categoryRoutes, liveCategories, productPath } from "../content/routes";
+import { categoryRoutes, liveCategories } from "../content/routes";
 import { srcsetFor } from "../lib/srcset";
 import { webPageSchema, SITE_URL } from "../lib/seo";
-
-const live = categoryRoutes(LAUNCH_CATEGORY);
 
 /**
  * NAMES THE BIGGEST CATEGORIES, WHICH IT DID NOT.
@@ -18,8 +16,8 @@ const live = categoryRoutes(LAUNCH_CATEGORY);
  * in the result, and it was advertising the smaller half of the catalogue.
  */
 const META_DESCRIPTION =
-  "Compare real-world home robots for the US — vacuums, mowers, pool cleaners, " +
-  "window robots, litter boxes and more. Evidence, honest rule-outs, and the gaps.";
+  "Independent comparisons and buying advice for home robots — robot vacuums, lawn mowers, " +
+  "pool cleaners, window robots, litter boxes and more.";
 
 const finderCard = finderCardFor("universal")!;
 
@@ -150,9 +148,8 @@ const categoryList = {
 const homeSchema = [
   webPageSchema({
     path: "/",
-    name: "BotPlanet — the world of real-world robots",
-    description:
-      "Discover, compare and choose real-world robots for the US — pool, window, lawn, vacuum, companion, pet camera, litter, grill and coding robots, with the evidence behind every pick.",
+    name: "Home Robots: Reviews, Comparisons & Buying Advice | BotPlanet",
+    description: META_DESCRIPTION,
     type: "CollectionPage",
   }),
   categoryList,
@@ -160,7 +157,7 @@ const homeSchema = [
 ---
 
 <Base
-  title="Home Robots Compared on the Evidence — BotPlanet"
+  title="Home Robots: Reviews, Comparisons & Buying Advice | BotPlanet"
   description={META_DESCRIPTION}
   bleed={true}
   schema={homeSchema}
@@ -183,8 +180,7 @@ const homeSchema = [
             stays for anyone who would rather browse. */}
         <div class="hero__actions">
           <a class="btn btn--accent btn--lg" href="/botmatch/">Find your robot</a>
-          <a class="btn btn--primary btn--lg" href={live.hub}>Explore robotic pool cleaners</a>
-          <a class="hero__more" href="#robot-worlds">See all {categories.length} robot worlds &#8595;</a>
+          <a class="btn btn--primary btn--lg" href="#robot-worlds">Explore robot categories</a>
         </div>
       </div>
 
@@ -230,12 +226,11 @@ const homeSchema = [
   <section class="worlds" id="robot-worlds">
     <div class="wrap">
       <div class="section-intro">
-        <p class="kicker">BOTPLANET DIRECTORY</p>
-        <h2>One planet. Every useful robot.</h2>
+        <p class="kicker">EXPLORE THE CATEGORIES</p>
+        <h2>Robots that earn their place.</h2>
         <p>
-          {categories.length} categories are live, each with its own evidence model, comparisons, buying
-          guidance and its own recommendation journey. The questions that decide a mower are not the
-          questions that decide a pool robot, so no category borrows another's.
+          Explore useful robots for your home, garden and everyday life. Compare what they do,
+          where they fall short and which models are genuinely worth considering.
         </p>
       </div>
 
@@ -294,7 +289,7 @@ const homeSchema = [
             too small for every machine in the category. */}
         <h2>Tell us the job. We will tell you the robot — or tell you not to buy one.</h2>
         <p class="large">
-          A coding robot for a seven-year-old who has not asked for one. A pool cleaner for a 50 ft pool with a sun ledge. A litter box for a cat that may be too small for any of them. Answer a handful of plain questions about the job rather than the machine, and BotMatch searches every robot we have researched across {categories.length} categories — then emails you the shortlist, what each pick was matched on, and the ones we ruled out for you.
+          A coding robot for a seven-year-old who has not asked for one. A pool cleaner for a 50 ft pool with a sun ledge. A litter box for a cat that may be too small for any of them. Answer a handful of plain questions about the job rather than the machine, and BotMatch searches every robot we have researched — then emails you the shortlist, what each pick was matched on, and the ones we ruled out for you.
         </p>
       </div>
 
@@ -330,7 +325,7 @@ const homeSchema = [
         </ol>
 
         <p class="botmatch__note">
-          <strong>Every live category has its own matcher.</strong> {categories.length} of them, each with its own questions and its own scoring — a new one arrives with the category rather than after it.
+          <strong>Every robot category has its own matcher,</strong> with questions and scoring built around the job it needs to do.
         </p>
 
         <p class="botmatch__integrity">
@@ -405,7 +400,7 @@ const homeSchema = [
      Two columns from 1100px, where a 16:9 frame beside the copy still reads at
      full composition AND leaves the buttons above the fold. A full-width
      picture on a laptop is a whole viewport of image and nothing to click. */
-  .hero__grid { display: grid; grid-template-columns: 1fr; gap: clamp(26px, 4vw, 44px); justify-items: center; text-align: center; }
+  .hero__grid { display: grid; grid-template-columns: 1fr; max-width: 1440px; gap: clamp(26px, 4vw, 44px); justify-items: center; text-align: center; }
   .hero__copy { max-width: 62rem; }
   @media (min-width: 1100px) {
     .hero__grid { grid-template-columns: minmax(0, 1.18fr) minmax(0, 0.82fr); gap: clamp(32px, 4vw, 56px); align-items: center; justify-items: stretch; text-align: left; }
@@ -475,16 +470,18 @@ const homeSchema = [
   /* The one claim here worth setting apart, because it is the reason to trust
      the answer rather than a feature of it. */
   .botmatch__integrity {
-    margin: 26px 0 0;
-    padding-left: 16px;
-    border-left: 2px solid rgba(226,232,244,.32);
+    max-width: 72ch;
+    margin: 26px auto 0;
+    padding: 0;
+    border-left: 0;
+    text-align: center;
     font-size: 15px;
     line-height: 1.65;
     color: var(--text-tertiary);
   }
 
-  .botmatch__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; margin-top: 30px; }
-  .botmatch__note { margin: 20px 0 0; font-size: 13.5px; line-height: 1.6; color: var(--text-tertiary); max-width: 62ch; }
+  .botmatch__actions { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 16px; margin-top: 30px; }
+  .botmatch__note { margin: 20px auto 0; text-align: center; font-size: 13.5px; line-height: 1.6; color: var(--text-tertiary); max-width: 62ch; }
   /* This line used to be a correction — the artwork drew six routes into the
      matcher and five of them did not exist. Every live category has one now,
      so the line states the count rather than apologising for it, and it stays

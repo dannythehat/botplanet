@@ -176,6 +176,19 @@ export const BOTMATCH_JOURNEYS: Record<string, BotMatchJourney> = {
   },
 };
 
+/** Universal homepage journey. Category pages continue to use their own
+ * concrete matcher; only the front door uses the job-first router. */
+export const UNIVERSAL_BOTMATCH_JOURNEY: BotMatchJourney = {
+  category: "universal",
+  ctaLabel: "Find My Robot",
+  subject: "robot",
+  matchAgainst: "the job",
+  journeyTitle: "Find the right robot for the job",
+  explanation: "Tell us what you need done and get a shortlist you can check.",
+  href: "/botmatch/",
+  accent: true,
+};
+
 /**
  * The category a URL belongs to, or null.
  *
@@ -221,7 +234,7 @@ export function shellJourneyFor(
   opts: { routeCategory?: string | null; canMatch: (slug: string) => boolean },
 ): BotMatchJourney | null {
   const cat = categoryOfPath(pathname, opts.routeCategory);
-  if (!cat) return BOTMATCH_JOURNEYS[LAUNCH_CATEGORY];
+  if (!cat) return pathname === "/" ? UNIVERSAL_BOTMATCH_JOURNEY : BOTMATCH_JOURNEYS[LAUNCH_CATEGORY];
   const journey = journeyFor(cat);
   if (!journey) return null;
   return opts.canMatch(cat) ? journey : null;
