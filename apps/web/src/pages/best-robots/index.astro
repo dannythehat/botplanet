@@ -63,11 +63,25 @@ const schema = [
   title={TITLE}
   description={DESCRIPTION}
   path={PATH}
-  ogImage="/media/home/hero-desktop.webp"
+  ogImage="/media/best-robots/hero.webp"
   breadcrumbs={crumbs}
   schema={schema}
 >
   <header class="best-hero">
+    <figure class="best-hero__visual">
+      <img
+        src="/media/best-robots/hero.webp"
+        srcset={srcsetFor("/media/best-robots/hero.webp")}
+        sizes="(min-width: 1000px) 57vw, 100vw"
+        width="1672"
+        height="941"
+        alt="Six useful home robots working around a modern house at night: a pool cleaner underwater, a robot mower on the lawn, a window cleaner on glass, a robot vacuum indoors, a companion robot and a wheeled pet camera."
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
+      />
+    </figure>
+
     <div class="best-hero__copy">
       <p class="kicker">BOTPLANET EDITOR'S PICKS</p>
       <h1>The best robots for every job</h1>
@@ -81,31 +95,31 @@ const schema = [
         <a class="btn btn--outline btn--lg" href="/botmatch/">Let BotMatch help</a>
       </div>
     </div>
-
-    <div class="best-hero__method" aria-label="How to use this page">
-      <article>
-        <span>01</span>
-        <div>
-          <strong>Start with the job</strong>
-          <p>Pool, floors, lawn, windows, pets, company or learning.</p>
-        </div>
-      </article>
-      <article>
-        <span>02</span>
-        <div>
-          <strong>Rule out the wrong fit</strong>
-          <p>Size, surfaces, safety, power and support matter before features.</p>
-        </div>
-      </article>
-      <article>
-        <span>03</span>
-        <div>
-          <strong>See why a pick wins</strong>
-          <p>Every recommendation names its evidence and its honest limitations.</p>
-        </div>
-      </article>
-    </div>
   </header>
+
+  <section class="best-hero__method" aria-label="How to use this page">
+    <article>
+      <span>01</span>
+      <div>
+        <strong>Start with the job</strong>
+        <p>Pool, floors, lawn, windows, pets, company or learning.</p>
+      </div>
+    </article>
+    <article>
+      <span>02</span>
+      <div>
+        <strong>Rule out the wrong fit</strong>
+        <p>Size, surfaces, safety, power and support matter before features.</p>
+      </div>
+    </article>
+    <article>
+      <span>03</span>
+      <div>
+        <strong>See why a pick wins</strong>
+        <p>Every recommendation names its evidence and its honest limitations.</p>
+      </div>
+    </article>
+  </section>
 
   <section class="best-trust" aria-label="How BotPlanet chooses">
     <div>
@@ -191,25 +205,52 @@ const schema = [
 
   .best-hero {
     display: grid;
-    grid-template-columns: minmax(0, 1.16fr) minmax(330px, .84fr);
-    gap: clamp(34px, 6vw, 86px);
+    grid-template-columns: minmax(0, 1.12fr) minmax(390px, .88fr);
+    gap: clamp(34px, 5vw, 72px);
     align-items: center;
-    padding: clamp(48px, 8vw, 104px) 0 clamp(44px, 7vw, 88px);
+    padding: clamp(48px, 7vw, 92px) 0 clamp(30px, 5vw, 58px);
+  }
+
+  .best-hero__visual {
+    position: relative;
+    overflow: hidden;
+    margin: 0;
+    aspect-ratio: 16 / 9;
+    border: 1px solid rgba(200, 208, 222, .24);
+    border-radius: 24px;
+    background: #070a0e;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .06), 0 34px 80px rgba(0, 0, 0, .48);
+  }
+
+  .best-hero__visual::after {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(130deg, rgba(112, 221, 255, .05), transparent 38%, rgba(0, 0, 0, .10));
+    content: "";
+    pointer-events: none;
+  }
+
+  .best-hero__visual img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   .best-hero h1 {
-    max-width: 780px;
+    max-width: 720px;
     margin: 0;
-    font-size: clamp(48px, 7vw, 86px);
+    font-size: clamp(46px, 6.1vw, 78px);
     line-height: .98;
     letter-spacing: -.055em;
   }
 
   .best-hero__lede {
-    max-width: 67ch;
+    max-width: 62ch;
     margin: 24px 0 0;
     color: var(--text-secondary);
-    font-size: clamp(18px, 2vw, 22px);
+    font-size: clamp(17px, 1.7vw, 21px);
     line-height: 1.62;
   }
 
@@ -221,23 +262,26 @@ const schema = [
   }
 
   .best-hero__method {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     overflow: hidden;
+    margin-bottom: 18px;
     border: 1px solid rgba(200, 208, 222, .22);
-    border-radius: 24px;
+    border-radius: 20px;
     background:
-      radial-gradient(circle at 100% 0%, rgba(84, 217, 255, .10), transparent 38%),
-      linear-gradient(160deg, #131820 0%, #080b0f 76%);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .06), 0 30px 70px rgba(0, 0, 0, .42);
+      radial-gradient(circle at 100% 0%, rgba(84, 217, 255, .08), transparent 34%),
+      linear-gradient(160deg, #11161d 0%, #080b0f 76%);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .05), 0 24px 60px rgba(0, 0, 0, .36);
   }
 
   .best-hero__method article {
     display: grid;
-    grid-template-columns: 44px 1fr;
-    gap: 16px;
-    padding: 24px;
+    grid-template-columns: 42px 1fr;
+    gap: 14px;
+    padding: 22px;
   }
 
-  .best-hero__method article + article { border-top: 1px solid rgba(200, 208, 222, .14); }
+  .best-hero__method article + article { border-left: 1px solid rgba(200, 208, 222, .14); }
 
   .best-hero__method article > span {
     padding-top: 3px;
@@ -247,7 +291,7 @@ const schema = [
     letter-spacing: .12em;
   }
 
-  .best-hero__method strong { display: block; color: var(--text-primary); font-size: 17px; }
+  .best-hero__method strong { display: block; color: var(--text-primary); font-size: 16px; }
   .best-hero__method p { margin: 6px 0 0; color: var(--text-secondary); font-size: 14px; line-height: 1.55; }
 
   .best-trust {
@@ -418,9 +462,9 @@ const schema = [
 
   @media (max-width: 1000px) {
     .best-hero { grid-template-columns: 1fr; }
-    .best-hero__method { display: grid; grid-template-columns: repeat(3, 1fr); }
+    .best-hero__copy { order: 1; }
+    .best-hero__visual { order: 2; }
     .best-hero__method article { grid-template-columns: 1fr; }
-    .best-hero__method article + article { border-top: 0; border-left: 1px solid rgba(200, 208, 222, .14); }
     .best-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   }
 
@@ -428,6 +472,7 @@ const schema = [
     .best-hero { padding-top: 40px; }
     .best-hero__actions { align-items: stretch; flex-direction: column; }
     .best-hero__actions .btn { width: 100%; }
+    .best-hero__visual { border-radius: 18px; }
     .best-hero__method { grid-template-columns: 1fr; }
     .best-hero__method article { grid-template-columns: 38px 1fr; }
     .best-hero__method article + article { border-top: 1px solid rgba(200, 208, 222, .14); border-left: 0; }
