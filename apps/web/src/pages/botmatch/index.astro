@@ -1,36 +1,24 @@
 ---
 /**
- * The universal BotMatch entry.
- *
- * WHAT THIS SOLVES. Every other matcher on this site starts by assuming the
- * reader already knows which of nine categories they are in. Somebody arriving
- * from the homepage does not — they know the dog is alone until six, or that
- * the pool is green. This asks the job first and hands them to that category's
- * own questions, inline, without a redirect.
- *
- * INDEXABLE, UNLIKE THE PER-CATEGORY FUNNELS. Those are noindex because a
- * questionnaire has nothing for a search engine to rank and the result pages
- * are private by design. This one carries real copy about how picking works,
- * including the thing worth ranking for: the part that chooses a robot cannot
- * see prices or commission. Individual result URLs stay noindex, as now.
- *
- * NO SCORING LIVES HERE. Categories, their questions and their published
- * counts are read and passed to the funnel; every product decision still
- * happens in @botplanet/scoring behind /api/botmatch, against that category's
- * own stored config.
+ * Universal BotMatch entry: choose the job first, then run that job's own
+ * questions through the existing suitability scorer. Product scoring remains
+ * in /api/botmatch and never receives price, retailer or commission data.
  */
 import Base from "../../layouts/Base.astro";
 import { getDb, schema } from "../../lib/db";
-import { and, eq } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 import { breadcrumbsFor } from "../../lib/routing";
 import BotMatcher from "../../components/BotMatcher.astro";
 import { MATCHER_JOBS, canMatch, emptyStateFor } from "../../content/matcher-router";
 import { questionsFor, tasksFor } from "../../content/matcher-questions";
-import { faqPageSchema, webPageSchema } from "../../lib/seo";
-import "../../styles/prose.css";
+import { webPageSchema } from "../../lib/seo";
+import { srcsetFor } from "../../lib/srcset";
 
 const db = getDb(Astro.locals);
 const PATH = "/botmatch/";
+const TITLE = "Find Your Robot with BotMatch | BotPlanet";
+const DESCRIPTION =
+  "Find your robot with BotMatch. Choose the job, answer a few practical questions and see which researched robot fits — with price and commission kept out of scoring.";
 const crumbs = breadcrumbsFor(PATH);
 
 const cats = await db.select().from(schema.categories);
@@ -40,13 +28,6 @@ const published = await db
   .where(eq(schema.products.status, "published"));
 const countFor = (categoryId: string) => published.filter((p) => p.categoryId === categoryId).length;
 
-/**
- * One entry per job, and a job whose category has no question set is dropped.
- *
- * NOT SILENTLY, THOUGH — the count below is rendered on the page, so a job
- * that vanishes is visible as a smaller number rather than as nothing. All
- * nine have question sets today; this is the guard for the tenth.
- */
 const categories = MATCHER_JOBS.map((job) => {
   const cat = cats.find((c) => c.slug === job.categorySlug);
   const questions = questionsFor(job.categorySlug);
@@ -64,110 +45,272 @@ const categories = MATCHER_JOBS.map((job) => {
   };
 }).filter((c): c is NonNullable<typeof c> => c !== null);
 
-const jobs = MATCHER_JOBS.filter((j) => categories.some((c) => c.slug === j.categorySlug));
-const matchableCount = categories.filter((c) => c.matchable).length;
-
-const FAQ = [
-  {
-    q: "How does BotMatch choose a robot?",
-    a:
-      "It scores every published product in the category against the answers you gave, using weights stored for that category. " +
-      "The part that does the scoring cannot see prices, offers or commission — those are not in the data it reads. " +
-      "If two products score the same on everything we have recorded, it says so instead of picking one.",
-  },
-  {
-    q: "Does commission affect which robot I am shown?",
-    a:
-      "No. Suitability is scored first and commission is not one of the inputs. Commission can only ever break a tie between two " +
-      "offers for the same product we have already chosen — never between products, and never which product wins.",
-  },
-  {
-    q: "What if you have not tested a category yet?",
-    a:
-      "Then it says so and sends you to the category page. A questionnaire run against one product is not a comparison, so we do " +
-      "not present one as a match.",
-  },
-  {
-    q: "Do I have to give an email address?",
-    a:
-      "To have the result emailed, yes. The result itself is saved at its own link either way, and that link is what the email " +
-      "contains — we do not put affiliate links in email.",
-  },
-];
+const jobs = MATCHER_JOBS.filter((job) =>
+  categories.some((category) => category.slug === job.categorySlug),
+);
 
 const pageSchema = [
   webPageSchema({
     path: PATH,
-    name: "BotMatch — find your robot",
-    description:
-      "Answer a few questions about the job you need done and get a suitability-first recommendation from the robots we have researched.",
+    name: TITLE,
+    description: DESCRIPTION,
   }),
-  faqPageSchema(FAQ, PATH),
 ];
 ---
 
 <Base
-  title="BotMatch: Find Your Robot — Suitability First | BotPlanet"
-  description="Find your robot by the job, not the category. A minute of questions, then something we have actually researched — scored without seeing price or commission."
+  title={TITLE}
+  description={DESCRIPTION}
+  path={PATH}
+  ogImage="/media/botmatch/finder-universal.webp"
   breadcrumbs={crumbs}
   schema={pageSchema}
 >
-  <BotMatcher mode="choose" categories={categories} jobs={jobs} />
+  <section class="bm-entry" aria-label="BotMatch robot finder">
+    <div class="bm-entry__matcher">
+      <BotMatcher mode="choose" categories={categories} jobs={jobs} />
+    </div>
 
-  <article class="bp-prose bp-bm-copy">
-    <h2 id="how-it-works">How the picking actually works</h2>
-    <p>
-      You tell us the job. We hand you the questions that category uses — its own, never another
-      category's — and score every published product in it against your answers. The weights are
-      stored per category, because the questions that decide a mower are not the questions that
-      decide a pool robot. There is a longer account of
-      <a href="/how-botmatch-works/">how BotMatch works</a>, including the exclusions it applies
-      before it scores anything.
-    </p>
+    <aside class="bm-entry__visual">
+      <img
+        src="/media/botmatch/finder-universal.webp"
+        srcset={srcsetFor("/media/botmatch/finder-universal.webp")}
+        sizes="(min-width: 960px) 42vw, 100vw"
+        alt="A selection of useful home robots arranged around the BotPlanet BotMatch interface."
+        width="960"
+        height="960"
+        decoding="async"
+      />
+      <div class="bm-entry__caption">
+        <span>BOTMATCH</span>
+        <strong>One starting point. Questions that change with the job.</strong>
+      </div>
+    </aside>
+  </section>
 
-    <h2 id="commission">The part that picks your robot cannot see money</h2>
-    <p>
-      This is the bit worth being specific about. The scoring engine receives the product's
-      attributes and your answers. It does not receive prices, offers, retailers or commission
-      rates — they are not in the data passed to it, so it could not weigh them if it wanted to.
-    </p>
-    <p>
-      Commission enters exactly once, and only after a product has been chosen: if that one product
-      has two offers we consider equivalent on price, delivery and freshness, commission breaks that
-      tie. It never chooses between products. There is a test in the repository that fails the build
-      if commission reaches the suitability scorer at all.
-    </p>
+  <section class="bm-explainer" aria-labelledby="bm-explainer-title">
+    <picture>
+      <source
+        media="(max-width: 620px)"
+        srcset={srcsetFor("/media/botmatch/explainer-mobile.webp")}
+        sizes="100vw"
+      />
+      <img
+        src="/media/botmatch/explainer-desktop.webp"
+        srcset={srcsetFor("/media/botmatch/explainer-desktop.webp")}
+        sizes="(min-width: 960px) 52vw, 100vw"
+        alt="BotMatch flow from choosing a household job to answering relevant questions and receiving a reasoned robot match."
+        loading="lazy"
+        decoding="async"
+      />
+    </picture>
 
-    <h2 id="ties">When two robots tie, we say so</h2>
-    <p>
-      If the top of the ranking is shared, nothing is chosen. You get the group, labelled as
-      equivalent on current data, rather than a winner picked alphabetically out of a tie. That
-      happens most often where we hold fewer recorded attributes than the products actually differ
-      by — which is a gap in our research, and saying so is more useful than hiding it.
-    </p>
+    <div class="bm-explainer__copy">
+      <p class="bm-kicker">HOW IT WORKS</p>
+      <h2 id="bm-explainer-title">The job comes first.</h2>
+      <p>
+        Tell us what you want done. BotMatch opens the right questions for that job and checks your
+        answers against the robots we have researched. A mower needs different answers from a pool
+        cleaner, so the questions never get borrowed from another kind of robot.
+      </p>
+      <a href="/how-botmatch-works/">See exactly how BotMatch works →</a>
+    </div>
+  </section>
 
-    <h2 id="coverage">Where we have not finished</h2>
-    <p>
-      {matchableCount} of the {categories.length} categories have enough published products for a
-      match to mean something. The rest will tell you that plainly and send you to the category page
-      instead. A questionnaire run against a single product is not a comparison and we will not
-      dress one up as a recommendation.
-    </p>
+  <section class="bm-principles" aria-labelledby="bm-principles-title">
+    <header>
+      <p class="bm-kicker">A FAIRER MATCH</p>
+      <h2 id="bm-principles-title">What happens behind the answer</h2>
+    </header>
 
-    <h2 id="email">What happens to your answers</h2>
-    <p>
-      Your result is saved at its own link whether or not you give us an email address. If you do,
-      we send that link and the reasoning behind the match. Affiliate links never go in email — the
-      result page is the destination, which is also what Amazon's terms require.
-    </p>
-  </article>
+    <div class="bm-principles__grid">
+      <article>
+        <span>01</span>
+        <h3>Money stays out of scoring</h3>
+        <p>
+          The scorer receives product attributes and your answers. It does not receive prices,
+          retailers or commission rates, so none of them can decide which robot fits.
+        </p>
+      </article>
+      <article>
+        <span>02</span>
+        <h3>A tie stays a tie</h3>
+        <p>
+          If the recorded evidence cannot separate the leaders, you see the tied group. BotMatch
+          will not invent a winner just to produce one name.
+        </p>
+      </article>
+      <article>
+        <span>03</span>
+        <h3>No fake comparison</h3>
+        <p>
+          When we do not hold enough researched products to make a fair comparison, BotMatch says
+          so and points you to the category page instead.
+        </p>
+      </article>
+      <article>
+        <span>04</span>
+        <h3>Email is optional</h3>
+        <p>
+          See your result on screen without giving us an email address. If you want a copy, we can
+          send the saved result link to your inbox.
+        </p>
+      </article>
+    </div>
+  </section>
 </Base>
 
 <style>
-  .bp-bm-copy {
-    max-width: 46rem;
-    margin: clamp(3rem, 8vw, 5rem) auto 0;
-    padding-top: clamp(2rem, 5vw, 3rem);
-    border-top: 1px solid rgba(200, 208, 222, 0.14);
+  .bm-entry {
+    display: grid;
+    grid-template-columns: minmax(0, 1.08fr) minmax(340px, .92fr);
+    align-items: start;
+    gap: clamp(34px, 6vw, 82px);
+    padding: clamp(42px, 7vw, 86px) 0 clamp(58px, 8vw, 100px);
+  }
+
+  .bm-entry__matcher { min-width: 0; }
+
+  .bm-entry__visual {
+    position: sticky;
+    top: 104px;
+    overflow: hidden;
+    border: 1px solid rgba(200, 208, 222, .22);
+    border-radius: 24px;
+    background: #090c10;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .06), 0 30px 70px rgba(0, 0, 0, .48);
+  }
+
+  .bm-entry__visual img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+  }
+
+  .bm-entry__caption {
+    display: grid;
+    gap: 7px;
+    padding: 18px 20px 21px;
+    border-top: 1px solid rgba(200, 208, 222, .16);
+    background: linear-gradient(180deg, rgba(18, 22, 28, .98), rgba(8, 11, 15, .98));
+  }
+
+  .bm-entry__caption span,
+  .bm-kicker {
+    color: var(--text-tertiary);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .18em;
+  }
+
+  .bm-entry__caption strong {
+    color: var(--text-primary);
+    font-size: 16px;
+    line-height: 1.4;
+  }
+
+  .bm-explainer {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(280px, .85fr);
+    align-items: center;
+    gap: clamp(30px, 6vw, 72px);
+    padding: clamp(28px, 5vw, 54px);
+    border: 1px solid rgba(200, 208, 222, .20);
+    border-radius: 24px;
+    background:
+      radial-gradient(ellipse at 8% 0%, rgba(226, 232, 244, .07), transparent 52%),
+      linear-gradient(178deg, #12161c 0%, #090c10 100%);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .06), 0 28px 64px rgba(0, 0, 0, .4);
+  }
+
+  .bm-explainer picture,
+  .bm-explainer img {
+    display: block;
+    width: 100%;
+  }
+
+  .bm-explainer img {
+    border: 1px solid rgba(200, 208, 222, .15);
+    border-radius: 18px;
+  }
+
+  .bm-kicker { margin: 0 0 14px; }
+
+  .bm-explainer h2,
+  .bm-principles h2 {
+    margin: 0;
+    color: var(--text-primary);
+    font-size: clamp(32px, 4.5vw, 52px);
+    line-height: 1.06;
+    letter-spacing: -.04em;
+  }
+
+  .bm-explainer__copy > p:not(.bm-kicker) {
+    margin: 20px 0 0;
+    color: var(--text-secondary);
+    font-size: 17px;
+    line-height: 1.65;
+  }
+
+  .bm-explainer__copy a {
+    display: inline-block;
+    margin-top: 22px;
+    color: var(--text-primary);
+    font-weight: var(--weight-semibold);
+  }
+
+  .bm-principles { padding: clamp(68px, 10vw, 118px) 0 clamp(52px, 8vw, 90px); }
+  .bm-principles > header { max-width: 720px; }
+
+  .bm-principles__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: 34px;
+  }
+
+  .bm-principles article {
+    padding: clamp(24px, 4vw, 36px);
+    border: 1px solid rgba(200, 208, 222, .17);
+    border-radius: 18px;
+    background: linear-gradient(178deg, rgba(18, 22, 28, .88), rgba(8, 11, 15, .94));
+  }
+
+  .bm-principles article > span {
+    color: var(--text-quaternary);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: .16em;
+  }
+
+  .bm-principles h3 {
+    margin: 30px 0 0;
+    color: var(--text-primary);
+    font-size: 22px;
+    letter-spacing: -.025em;
+  }
+
+  .bm-principles article p {
+    margin: 12px 0 0;
+    color: var(--text-secondary);
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  @media (max-width: 900px) {
+    .bm-entry,
+    .bm-explainer { grid-template-columns: 1fr; }
+    .bm-entry__visual { position: static; }
+    .bm-entry__visual img { aspect-ratio: 16 / 10; }
+    .bm-explainer__copy { max-width: 680px; }
+  }
+
+  @media (max-width: 620px) {
+    .bm-entry { padding-top: 30px; }
+    .bm-entry__visual,
+    .bm-explainer { border-radius: 18px; }
+    .bm-principles__grid { grid-template-columns: 1fr; }
   }
 </style>
