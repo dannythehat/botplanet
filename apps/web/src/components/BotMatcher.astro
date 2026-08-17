@@ -593,6 +593,7 @@ const payload = JSON.stringify({
 
       if (product.image) {
         const img = document.createElement("img");
+        img.className = "bp-mm__product-image";
         img.src = product.image.src;
         img.alt = product.image.alt;
         img.loading = "lazy";
