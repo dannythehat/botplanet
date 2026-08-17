@@ -75,6 +75,8 @@ describe("owner-approved universal BotMatch page", () => {
   it("renders every recommendation as a visual product destination", () => {
     expect(MATCHER).toContain("bp-mm__product-card");
     expect(MATCHER).toContain("bp-mm__product-image");
+    expect(MATCHER).toContain("bp-mm__product-media--fallback");
+    expect(MATCHER).toContain("BOTPLANET MATCH");
     expect(MATCHER).toContain("bp-mm__product-button");
     expect(MATCHER).toContain("View product");
     expect(MATCHER).toContain("result.product");
