@@ -405,7 +405,7 @@ const homeSchema = [
      Two columns from 1100px, where a 16:9 frame beside the copy still reads at
      full composition AND leaves the buttons above the fold. A full-width
      picture on a laptop is a whole viewport of image and nothing to click. */
-  .hero__grid { display: grid; grid-template-columns: 1fr; gap: clamp(26px, 4vw, 44px); justify-items: center; text-align: center; }
+  .hero__grid { display: grid; grid-template-columns: 1fr; max-width: 1440px; gap: clamp(26px, 4vw, 44px); justify-items: center; text-align: center; }
   .hero__copy { max-width: 62rem; }
   @media (min-width: 1100px) {
     .hero__grid { grid-template-columns: minmax(0, 1.18fr) minmax(0, 0.82fr); gap: clamp(32px, 4vw, 56px); align-items: center; justify-items: stretch; text-align: left; }
@@ -475,16 +475,18 @@ const homeSchema = [
   /* The one claim here worth setting apart, because it is the reason to trust
      the answer rather than a feature of it. */
   .botmatch__integrity {
-    margin: 26px 0 0;
-    padding-left: 16px;
-    border-left: 2px solid rgba(226,232,244,.32);
+    max-width: 72ch;
+    margin: 26px auto 0;
+    padding: 0;
+    border-left: 0;
+    text-align: center;
     font-size: 15px;
     line-height: 1.65;
     color: var(--text-tertiary);
   }
 
-  .botmatch__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; margin-top: 30px; }
-  .botmatch__note { margin: 20px 0 0; font-size: 13.5px; line-height: 1.6; color: var(--text-tertiary); max-width: 62ch; }
+  .botmatch__actions { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 16px; margin-top: 30px; }
+  .botmatch__note { margin: 20px auto 0; text-align: center; font-size: 13.5px; line-height: 1.6; color: var(--text-tertiary); max-width: 62ch; }
   /* This line used to be a correction — the artwork drew six routes into the
      matcher and five of them did not exist. Every live category has one now,
      so the line states the count rather than apologising for it, and it stays
