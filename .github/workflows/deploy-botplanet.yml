@@ -12,8 +12,6 @@ on:
     paths-ignore:
       - "docs/deployments/**"
   workflow_dispatch:
-  issues:
-    types: [opened]
 
 permissions:
   contents: write
@@ -24,14 +22,12 @@ concurrency:
 
 jobs:
   deploy:
-    if: github.ref == 'refs/heads/main' || (github.event_name == 'issues' && github.event.issue.title == 'Deploy BotPlanet production')
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     env:
       CLOUDFLARE_ACCOUNT_ID: a517d133ccec0093de719211a6694951
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: main
 
       - uses: actions/setup-node@v4
         with:
