@@ -1,0 +1,53 @@
+name: Super Signals Performance Hotfix
+
+on:
+  push:
+    branches:
+      - claude/cloudflare-notion-setup-nso4uj
+    paths:
+      - "ops/super-signals-performance-hotfix/**"
+      - ".github/workflows/super-signals-performance-hotfix.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: super-signals-performance-hotfix
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      CLOUDFLARE_ACCOUNT_ID: a517d133ccec0093de719211a6694951
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Require Cloudflare credentials
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "${CLOUDFLARE_API_TOKEN:-}"
+          test -n "${CLOUDFLARE_ACCOUNT_ID:-}"
+
+      - name: Deploy narrow Super Signals performance hotfix
+        shell: bash
+        run: |
+          set -euo pipefail
+          npx --yes wrangler@4 deploy --config ops/super-signals-performance-hotfix/wrangler.jsonc
+
+      - name: Verify hotfix Worker
+        shell: bash
+        run: |
+          set -euo pipefail
+          for attempt in {1..12}; do
+            body="$(curl -fsS "https://super-signals-performance-hotfix.dannythehat2.workers.dev/data/public-performance.json?verify=$(date +%s)" || true)"
+            if printf '%s' "$body" | grep -q '"live_source":"vantage_equity_21_sofia_hotfix"'; then
+              printf '%s' "$body" | python -m json.tool | tail -80
+              exit 0
+            fi
+            sleep 5
+          done
+          exit 1
