@@ -4287,6 +4287,100 @@ export const REVIEWS: Record<string, ReviewContent> = {
     lastReviewed: "2026-08-08",
   },
 
+  /* BOTLEY 2.0, added 26 September 2026. One of the seven coding robots the
+     8 August research left unbuilt — the ASIN on file then served a
+     classroom bundle rather than the single consumer unit. Re-checked
+     because the head term swings from a few hundred searches a month to
+     4,400 every December, and the swing is on the product name itself, not
+     on any "gift" phrasing — see docs/seo/coding-robots-gift-topup-findings.md. */
+  "botley-the-coding-robot": {
+    slug: "botley-the-coding-robot",
+    categorySlug: "educational-coding-robots",
+    eyebrow: "Coding robot review",
+    title: "Botley 2.0 review",
+    seoTitle: "Botley 2.0 Review — Screen-Free Coding Before They Can Read",
+    metaDescription:
+      "Botley 2.0 is a screen-free coding robot for ages 5 to 7: a child programs " +
+      "moves with a remote, Botley plays them back. What the activity set does and does not.",
+    verdict:
+      "A coding toy built for a child who cannot yet read fluently, let alone code on a screen. A detachable remote programs up to 80 moves at once by pressing directional buttons in sequence; Botley then drives that sequence back. No app, no login, no screen at any point.",
+    bestFor:
+      "A five to seven year old getting their first taste of sequencing and cause-and-effect, and a household that wants a coding toy with no screen involved anywhere.",
+    notIdealFor:
+      "A child who has already outgrown screen-free sequencing — there is no coding-app tier to grow into here the way Sphero's lineup offers one.",
+    facts: [
+      { label: "Ages", value: "5 to 7 (manufacturer rating)" },
+      { label: "Coding method", value: "Detachable remote, screen-free" },
+      { label: "Sequence length", value: "Up to 80 steps in one program" },
+      { label: "Included", value: "Activity mats and cards, per the manufacturer's standard set" },
+    ],
+    specGroups: [
+      {
+        heading: "What it does",
+        rows: [
+          { label: "Coding", value: "Remote-control button sequence, played back by the robot — no app or screen" },
+          { label: "Sequence length", value: "Up to 80 steps, per the manufacturer" },
+          { label: "Sensors", value: "Object detection to avoid driving off a mat edge, per the manufacturer" },
+          { label: "In the box", value: "Robot, detachable remote and activity cards/mats — exact count varies by listing" },
+        ],
+      },
+      {
+        heading: "Ages",
+        rows: [
+          { label: "Manufacturer rating", value: "5 to 7" },
+        ],
+      },
+    ],
+    skuNote:
+      "IDENTITY NOT READ FROM THE LISTING ITSELF. ASIN B083T58PKM found via web search — 'Learning Resources Botley the Coding Robot 2.0 Activity Set - 78 Pieces, Ages 5+' — because Amazon blocked every direct fetch attempted. No price is published here: search snippets disagreed across sources ($64 to $84.99), so nothing is quoted until the automated refresh service reads and dates a real figure. Learning Resources also sells a materially more expensive Classroom Set; this ASIN is the standard retail activity set, not that one.",
+    lastReviewed: "2026-09-26",
+  },
+
+  /* CODE & GO ROBOT MOUSE, added 26 September 2026. Same research pass as
+     Botley — see the note above it. Smaller head term (590/mo baseline,
+     880/mo in December) but the SKU question the 8 August research left
+     open is now resolved: this ASIN is the bare single unit, not the
+     $71.99 activity set or the $270.99 classroom set. */
+  "code-and-go-robot-mouse": {
+    slug: "code-and-go-robot-mouse",
+    categorySlug: "educational-coding-robots",
+    eyebrow: "Coding robot review",
+    title: "Code & Go Robot Mouse review",
+    seoTitle: "Code & Go Robot Mouse Review — Coding With Cards, Ages 4+",
+    metaDescription:
+      "The Code & Go Robot Mouse is a $39.99 screen-free coding toy: a child places " +
+      "direction cards to guide it to the cheese. What the bare unit includes.",
+    verdict:
+      "The youngest-rated coding toy in this category and the only card-based one: a child lays directional cards in a sequence and the mouse follows them, with no remote, no app and no screen. Cheaper and simpler than Botley, aimed at a child a couple of years younger.",
+    bestFor:
+      "A four to seven year old, and anyone who wants the cheapest honest way to find out whether screen-free sequencing holds a child's attention before spending more on a coding toy.",
+    notIdealFor:
+      "A child who already codes with Sphero's block or text editors — this is a step below that, by age and by design, not an upgrade path to it.",
+    facts: [
+      { label: "Ages", value: "4 and up (manufacturer rating)" },
+      { label: "Coding method", value: "Physical direction cards, screen-free" },
+      { label: "Included", value: "Robot mouse and card set, per the manufacturer's standard listing" },
+      { label: "Price", value: "$39.99, per the retailer's own listing title — not yet read from the page itself" },
+    ],
+    specGroups: [
+      {
+        heading: "What it does",
+        rows: [
+          { label: "Coding", value: "Sequence of physical direction cards, read and followed by the mouse — no app or screen" },
+          { label: "Objective", value: "Navigate a maze or grid to reach a wedge of cheese, per the manufacturer" },
+        ],
+      },
+      {
+        heading: "Ages",
+        rows: [
+          { label: "Manufacturer rating", value: "4 and up" },
+        ],
+      },
+    ],
+    skuNote:
+      "IDENTITY NOT READ FROM THE LISTING ITSELF. ASIN B01B14XK00 found via web search — 'Learning Resources Code & Go® Robot Mouse, Screen-Free Coding Robot Toy, Early Programming for Kids Ages 4+' — because Amazon blocked every direct fetch attempted. $39.99 is the search snippet's own figure, dated 26 September 2026, not a page read; treat it as indicative until the automated refresh service confirms one. Learning Resources also sells a $71.99 Activity Set and a $270.99 Classroom Set under similar names; this ASIN is neither.",
+    lastReviewed: "2026-09-26",
+  },
 
   /* JOY FOR ALL, added 8 August 2026. This product was LIVE, PUBLISHED, CARRYING
      A WORKING BUY BUTTON and recommended as the top pick on the eldercare guide

@@ -1,6 +1,6 @@
 {
   "generatedFor": "2026-07-31",
-  "launchProducts": 65,
+  "launchProducts": 67,
   "rows": [
     {
       "productId": "prod-beatbot-aquasense-2-ultra",
@@ -1195,6 +1195,70 @@
       "freshness": "indicative",
       "affiliateProgramme": "prog-amazon-us",
       "goPath": "/go/code-makeblock-mbot-amazon",
+      "schemaEligible": false,
+      "blockers": [
+        "no current price from an approved source",
+        "stock state unknown",
+        "not eligible for Offer structured data"
+      ],
+      "nextAction": "Obtain price and availability through the Amazon Creators API so the offer can carry a current price and enter Offer schema."
+    },
+    {
+      "productId": "prod-botley-2",
+      "canonicalUrl": "https://botplanet.io/robots/educational-coding-robots/botley-the-coding-robot/",
+      "verifiedOffers": 1,
+      "preferredOfferId": "offer-prod-botley-2-ret-amazon",
+      "preferredOfferAudit": [
+        "1 offer(s) exist for this product",
+        "1 from an approved retailer",
+        "ranked by exact-match confidence, then stock, then delivered price",
+        "chosen: offer-prod-botley-2-ret-amazon (researched_exact)"
+      ],
+      "commissionUsedAsTieBreak": false,
+      "retailer": "ret-amazon",
+      "exactProductIdentifier": "B083T58PKM",
+      "identifierKind": "asin",
+      "market": "us",
+      "priceState": "not_published",
+      "stockState": "unknown",
+      "deliveryState": "not_exposed_by_source",
+      "warrantyRoute": "Manufacturer warranty term not confirmed",
+      "lastChecked": "2026-07-31",
+      "freshness": "indicative",
+      "affiliateProgramme": "prog-amazon-us",
+      "goPath": "/go/code-botley2-amazon",
+      "schemaEligible": false,
+      "blockers": [
+        "no current price from an approved source",
+        "stock state unknown",
+        "not eligible for Offer structured data"
+      ],
+      "nextAction": "Obtain price and availability through the Amazon Creators API so the offer can carry a current price and enter Offer schema."
+    },
+    {
+      "productId": "prod-code-and-go-robot-mouse",
+      "canonicalUrl": "https://botplanet.io/robots/educational-coding-robots/code-and-go-robot-mouse/",
+      "verifiedOffers": 1,
+      "preferredOfferId": "offer-prod-code-and-go-robot-mouse-ret-amazon",
+      "preferredOfferAudit": [
+        "1 offer(s) exist for this product",
+        "1 from an approved retailer",
+        "ranked by exact-match confidence, then stock, then delivered price",
+        "chosen: offer-prod-code-and-go-robot-mouse-ret-amazon (researched_exact)"
+      ],
+      "commissionUsedAsTieBreak": false,
+      "retailer": "ret-amazon",
+      "exactProductIdentifier": "B01B14XK00",
+      "identifierKind": "asin",
+      "market": "us",
+      "priceState": "not_published",
+      "stockState": "unknown",
+      "deliveryState": "not_exposed_by_source",
+      "warrantyRoute": "Manufacturer warranty term not confirmed",
+      "lastChecked": "2026-07-31",
+      "freshness": "indicative",
+      "affiliateProgramme": "prog-amazon-us",
+      "goPath": "/go/code-robotmouse-amazon",
       "schemaEligible": false,
       "blockers": [
         "no current price from an approved source",

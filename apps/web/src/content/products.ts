@@ -852,6 +852,11 @@ export const PRODUCT_ID: Record<string, string> = {
   "sphero-indi": "prod-sphero-indi",
   "ozobot-evo": "prod-ozobot-evo",
   "makeblock-mbot": "prod-makeblock-mbot",
+  /* Added 26 September 2026 — the two of the seven remaining that Christmas
+     seasonality research justified re-checking, per
+     docs/seo/coding-robots-gift-topup-findings.md. */
+  "botley-the-coding-robot": "prod-botley-2",
+  "code-and-go-robot-mouse": "prod-code-and-go-robot-mouse",
   /* Rule-out reviews. Real D1 rows and real pages, so they belong in the join
      map like anything else — what they do not have is an offer, and that is
      declared in NO_OFFER_BY_DESIGN below rather than by being left out here.
@@ -1201,7 +1206,16 @@ const WINDOW_SLUGS = new Set([
   "cop-rose-x5s",
 ]);
 
-const CODING_SLUGS = new Set(["sphero-bolt", "sphero-mini", "sphero-indi", "ozobot-evo", "makeblock-mbot", "cozmo"]);
+const CODING_SLUGS = new Set([
+  "sphero-bolt",
+  "sphero-mini",
+  "sphero-indi",
+  "ozobot-evo",
+  "makeblock-mbot",
+  "cozmo",
+  "botley-the-coding-robot",
+  "code-and-go-robot-mouse",
+]);
 
 /* The launch category, named rather than assumed. CATEGORY_OF falls through to
    pool, so this is what makes "fell through" distinguishable from "is a pool

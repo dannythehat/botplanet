@@ -34,6 +34,14 @@ const offerSeeds: CodingOfferSeed[] = [
   { id: "off-sphero-indi-amazon", productId: "prod-sphero-indi", asin: "B094X6TV5V", redirectKey: "code-sphero-indi-amazon", snapshotMinor: 10000 },
   { id: "off-ozobot-evo-amazon", productId: "prod-ozobot-evo", asin: "B0CSR53WXV", redirectKey: "code-ozobot-evo-amazon", snapshotMinor: 17500 },
   { id: "off-makeblock-mbot-amazon", productId: "prod-makeblock-mbot", asin: "B00SK5RUQY", redirectKey: "code-makeblock-mbot-amazon", snapshotMinor: 6900 },
+  /* Added 26 September 2026, identity-read via web search rather than a
+     listing fetch — see CODING_GIFT_ASINS in commerce/destinations.ts and
+     docs/seo/coding-robots-gift-topup-findings.md. snapshotMinor null on
+     both: Botley's price disagreed across sources, and neither was read from
+     the listing itself, so nothing is quoted until the refresh service
+     reads and dates a figure. */
+  { id: "off-botley2-amazon", productId: "prod-botley-2", asin: "B083T58PKM", redirectKey: "code-botley2-amazon", snapshotMinor: null },
+  { id: "off-robotmouse-amazon", productId: "prod-code-and-go-robot-mouse", asin: "B01B14XK00", redirectKey: "code-robotmouse-amazon", snapshotMinor: null },
 ];
 
 export const offerRows: (typeof offers.$inferInsert)[] = offerSeeds.map((o) => ({

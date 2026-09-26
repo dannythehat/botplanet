@@ -1728,6 +1728,37 @@ const CODING_BUILT: PagePlan[] = [
     productsNote: "Catalogued as prod-makeblock-mbot, 8 August 2026. Amazon US B00SK5RUQY at $69. Makeblock also sells the mBot2, the mBot Ranger and the mBot Ultimate; none of those names appears in this listing's title. The productTitle element did not render on our second read, so identity rests on the search-result title and the served-ASIN equality check.",
     evidence: "880/mo at KD 29 on the model name, and 1,040 more on 'mbot2' and 'mbot ranger' at KD 0 — a family question the page answers rather than a set of pages, because we sell one of the three and saying so is the useful part. 'scratch coding robot' at 260/KD 8 lands here because this is the only Scratch-native machine in the catalogue.",
   },
+  {
+    ...codingShell("botley the coding robot"),
+    path: "/robots/educational-coding-robots/botley-the-coding-robot/",
+    primary: { term: "botley the coding robot", volume: 1300, difficulty: 0 },
+    secondary: [
+      { term: "botley 2.0", volume: 720, difficulty: 0 },
+      { term: "learning resources botley", volume: 70, difficulty: 14 },
+      { term: "botley the coding robot activity set", volume: 210, difficulty: 0 },
+      { term: "botley 2.0 review", volume: 10, difficulty: 27 },
+    ],
+    ceded: [],
+    refused: [],
+    products: ["botley-the-coding-robot"],
+    productsNote: "Catalogued as prod-botley-2, 26 September 2026. ASIN B083T58PKM found via web search, not read from the listing — Amazon blocked every direct fetch attempted. No price published; search snippets disagreed ($64 to $84.99) across sources.",
+    evidence: "1,300/mo baseline swinging to 4,400/mo every December (KD 0) — the same head-term-not-gift-phrase Christmas shape as the companion-robots cluster. Blocked since 8 August on the wrong ASIN (a classroom-style listing); re-checked 26 September and the standard retail activity-set listing is the correct SKU. See docs/seo/coding-robots-gift-topup-findings.md.",
+  },
+  {
+    ...codingShell("code and go robot mouse"),
+    path: "/robots/educational-coding-robots/code-and-go-robot-mouse/",
+    primary: { term: "code and go robot mouse", volume: 590, difficulty: 0 },
+    secondary: [
+      { term: "code & go robot mouse", volume: 590, difficulty: 0 },
+      { term: "learning resources robot mouse", volume: 20, difficulty: 16 },
+      { term: "robot mouse game", volume: 140, difficulty: 13 },
+    ],
+    ceded: [],
+    refused: [],
+    products: ["code-and-go-robot-mouse"],
+    productsNote: "Catalogued as prod-code-and-go-robot-mouse, 26 September 2026. ASIN B01B14XK00 found via web search, not read from the listing — Amazon blocked every direct fetch attempted. $39.99 per the search snippet, not a page read.",
+    evidence: "590/mo baseline swinging to 880/mo every December (KD 0). Smaller than Botley but real, and the SKU question left open on 8 August is now resolved: this ASIN is the bare single unit, not the $71.99 activity set or the $270.99 classroom set. See docs/seo/coding-robots-gift-topup-findings.md.",
+  },
 ];
 
 /* The seven that are NOT built, and why each one is not. Left as planned rather
@@ -1739,9 +1770,13 @@ const CODING_REVIEWS = plannedReviews("educational-coding-robots", "31094454463 
   { slug: "lego-spike-essential", term: "lego spike essential", volume: 3600, difficulty: 11, note: "EDUCATION SKU AT $597, and the listing served a different ASIN than requested. Same failure as Bee-Bot: a classroom kit against a consumer term." },
   { slug: "vex-go", term: "vex go", volume: 2900, difficulty: 8, note: "NO AMAZON US LISTING. The best difficulty score in the category and nothing to sell — a search returns a HEXBUG toy. VEX sells GO through the education channel, which its brand SERP confirms. Blocked on a retail listing anywhere." },
   { slug: "sphero-rvr", term: "sphero rvr", volume: 720, difficulty: 5, note: "THE CANDIDATE IS THE WRONG MACHINE. B0BLF8CLQF is titled 'Sphero RVR+', a different and dearer model at $339. Either the RVR is discontinued and this term should point at the RVR+, or the correct ASIN has not been found. Not settled, so not written." },
-  { slug: "botley-2", term: "botley 2.0", volume: 720, difficulty: 0, note: "Serves a different ASIN than requested — an Activity Set parent listing. Probably resolvable, not resolved." },
-  { slug: "code-and-go-robot-mouse", term: "code and go robot mouse", volume: 590, difficulty: 0, note: "Serves a different ASIN than requested — an Activity Set parent listing. Probably resolvable, not resolved." },
 ]);
+/* Botley 2.0 and Code & Go Robot Mouse left this list on 26 September 2026 —
+   see the two built entries above and docs/seo/coding-robots-gift-topup-findings.md.
+   Botley's "Activity Set parent listing" is no longer treated as the wrong
+   product: it is how Learning Resources sells it at retail, not a classroom
+   bulk pack. Code & Go's listing was re-checked and a clean single-unit ASIN
+   now exists where a classroom-set ASIN sat in August. */
 
 /* Grill. One product dominates, so one review matters. */
 const GRILL_REVIEWS = plannedReviews("grill-cleaning-robots", "31092662805 · 2026-08-06", [

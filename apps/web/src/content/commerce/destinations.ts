@@ -875,6 +875,56 @@ for (const p of SNOW_ASINS) {
   };
 }
 
+/**
+ * BOTLEY 2.0 AND CODE & GO ROBOT MOUSE, 26 September 2026.
+ *
+ * WIRED AT researched_exact, ON A WEAKER BASIS THAN EVERY OTHER ENTRY AT THIS
+ * LEVEL. The vacuums and Grillbot were each read through SerpAPI's
+ * amazon_product engine or a direct fetch that returned a title. Neither of
+ * these was: Amazon blocked every automated fetch attempted (the same wall
+ * Grillbot hit before its own listing read finally succeeded), so the ASIN,
+ * price range and "in stock" status below come from a web search result's
+ * own title and snippet, never from a listing BotPlanet opened itself. No
+ * served-ASIN-equality check was possible and no sibling-ASIN family search
+ * was run. See docs/seo/coding-robots-gift-topup-findings.md.
+ *
+ * Both were flagged unbuilt in the original 8 August coding-robots research
+ * for exactly this reason — the ASINs on file then served classroom or
+ * activity-set bundles rather than the single consumer unit. Re-checked here:
+ * Code & Go Robot Mouse now has a clean standalone Amazon listing; Botley
+ * 2.0's standard retail listing is treated as correct because Learning
+ * Resources sells it bundled with activity cards at retail by design, not as
+ * a classroom bulk pack — it is not the $691-style multi-unit problem Bee-Bot
+ * still has, which is why Bee-Bot still has no entry here.
+ */
+const CODING_GIFT_CHECK_DATE = "2026-09-26";
+
+const CODING_GIFT_ASINS: WindowDestination[] = [
+  {
+    productId: "prod-botley-2",
+    asin: "B083T58PKM",
+    exactModel: "Botley 2.0 The Coding Robot Activity Set",
+    evidence:
+      "Amazon search result title: 'Learning Resources Botley the Coding Robot 2.0 Activity Set - 78 Pieces, Ages 5+'. Not opened directly — Amazon blocked the fetch. Search snippets disagreed on price across sources ($64–$84.99), so no price is published; the buy box shows 'Check current price' until the refresh service reads and dates one. Learning Resources also sells a Classroom Set at a materially higher price point; that listing is not this one and is not linked.",
+  },
+  {
+    productId: "prod-code-and-go-robot-mouse",
+    asin: "B01B14XK00",
+    exactModel: "Code & Go Robot Mouse",
+    evidence:
+      "Amazon search result title: 'Learning Resources Code & Go® Robot Mouse, Screen-Free Coding Robot Toy, Early Programming for Kids Ages 4+'. Not opened directly — Amazon blocked the fetch. $39.99 per the search snippet, dated 26 September 2026. Learning Resources also sells this as a $71.99 Activity Set (B01A5YMCH4) and a $270.99 Classroom Set (B0792H2KXN); this ASIN is the bare single unit and is deliberately not either of those.",
+  },
+];
+
+for (const p of CODING_GIFT_ASINS) {
+  IDENTITY_CHECKS[p.productId] = {
+    asin: p.asin,
+    confirmed: false,
+    evidence: p.evidence,
+    checkedOn: CODING_GIFT_CHECK_DATE,
+  };
+}
+
 export const DESTINATIONS: ProductDestination[] = [
   /**
    * The eleven vacuums, at researched_exact rather than verified_exact.
@@ -933,6 +983,27 @@ export const DESTINATIONS: ProductDestination[] = [
         "listing read that did not bounce off Amazon's bot check. One clean read raises " +
         "this to verified_exact.",
       sourceReference: `ASIN pinned and read on ${GRILL_CHECK_DATE}; brand field confirmed the same day. ${evidence}`,
+    }),
+  ),
+
+  /* Botley 2.0 and Code & Go Robot Mouse — see the note above
+     CODING_GIFT_ASINS. Weaker than every other researched_exact entry: no
+     SerpAPI read and no direct fetch, only a web search result's own title.
+     Still a pinned ASIN and not a bare search link, which is the line
+     search_only sits on the other side of. */
+  ...CODING_GIFT_ASINS.map(
+    ({ productId, asin, exactModel, evidence }): ProductDestination => ({
+      productId,
+      retailerId: "ret-amazon",
+      market: "us",
+      retailerProductId: asin,
+      identifierKind: "asin",
+      exactModel,
+      destinationUrl: `https://www.amazon.com/dp/${asin}`,
+      confidence: "researched_exact" as const,
+      notes:
+        "IDENTITY NOT CONFIRMED to the standard the window and lawn destinations meet, and weaker than the vacuums and Grillbot besides: this ASIN was never opened directly or read through a product API, only found in a web search result's own title and snippet, because Amazon blocked every automated fetch attempted. What has not been done is opening the listing itself, transcribing a published identity field, or confirming no sibling ASIN family exists. One clean listing read raises this to verified_exact.",
+      sourceReference: `ASIN found via web search on ${CODING_GIFT_CHECK_DATE}, not opened directly. ${evidence}`,
     }),
   ),
 
@@ -1155,6 +1226,8 @@ export const REDIRECT_KEYS: Record<string, string> = {
   "prod-sphero-indi": "code-sphero-indi-amazon",
   "prod-ozobot-evo": "code-ozobot-evo-amazon",
   "prod-makeblock-mbot": "code-makeblock-mbot-amazon",
+  "prod-botley-2": "code-botley2-amazon",
+  "prod-code-and-go-robot-mouse": "code-robotmouse-amazon",
 
   /* LITTER AND LAWN. Written into D1 on 8 August 2026 by this job, in the same
      order the companion keys were: the offer row and the redirect_links row go

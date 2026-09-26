@@ -218,8 +218,16 @@ describe("exact-product destinations", () => {
        after it arrived — 17 past its own shelf life. Same researched_exact
        bar as the vacuums, for the same reason: the ASIN is pinned and the
        brand field matched, but the read that would raise it to verified_exact
-       kept hitting Amazon's bot check instead of the listing. */
-    expect(exact).toHaveLength(62);
+       kept hitting Amazon's bot check instead of the listing.
+
+       64 later the same day: Botley 2.0 and Code & Go Robot Mouse, two of
+       the seven coding robots the 8 August research left unbuilt, re-checked
+       after a Christmas-seasonality top-up run found real demand on both
+       head terms. Weaker than every entry above — neither ASIN was read
+       through SerpAPI or a direct fetch, only found in a web search result's
+       own title, because Amazon blocked every automated fetch attempted.
+       Still a pinned ASIN naming the product, not a bare search link. */
+    expect(exact).toHaveLength(64);
     expect(search).toHaveLength(0);
     for (const d of exact) {
       expect(d.identifierKind).toBe("asin");

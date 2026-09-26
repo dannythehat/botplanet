@@ -428,6 +428,8 @@ export const AWAITING_DISCOVERY = [
   "prod-living-ai-emo",
   "prod-cozmo",
   "prod-grillbot",
+  "prod-botley-2",
+  "prod-code-and-go-robot-mouse",
   "prod-moxie",
   "prod-eufy-x10-pro-omni",
   "prod-eufy-omni-s1-pro",
