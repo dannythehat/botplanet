@@ -1,0 +1,146 @@
+---
+/* ============================================================
+   BotPlanet — the sticky buy bar.
+
+   THE PROBLEM IT FIXES. Every buy surface on a review page —
+   BuyStrip, BuyBox — only exists at one scroll position. A reader
+   two screens past the last one has no visible way to act without
+   scrolling to find one again, and a reader who has to hunt for a
+   button is a reader who leaves instead.
+
+   WHAT IT DOES. Sits fixed to the bottom of the viewport once the
+   reader has scrolled past the first buy surface, and hides again
+   once the full buy box (#buy) is on screen — so it never sits
+   directly beside the thing it is a stand-in for. Same /go route,
+   same rel, same "Check price on" wording as every other buy
+   surface. No price here either: see BuyStrip for why.
+   ============================================================ */
+
+interface Props {
+  productName: string;
+  retailerName: string;
+  redirectKey: string;
+}
+
+const { productName, retailerName, redirectKey } = Astro.props;
+---
+
+<div class="bp-stickybuy" data-visible="false">
+  <p class="bp-stickybuy__name">{productName}</p>
+  <a class="bp-stickybuy__cta" href={`/go/${redirectKey}`} rel="sponsored nofollow">
+    <span>Check price on {retailerName}</span>
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </a>
+</div>
+
+<script>
+  /* Two sentinels, both already on the page: the first .bp-strip (the buy
+     strip set right after the verdict) marks where "past the top of the
+     article" begins, and #buy (the full buy box) marks where this bar
+     should stand down rather than duplicate it. Either can be absent —
+     a review with no lead offer renders neither, and this bar does not
+     render either in that case — so both observers check for null. */
+  const bar = document.querySelector<HTMLElement>(".bp-stickybuy");
+  if (bar) {
+    const topStrip = document.querySelector(".bp-strip");
+    const buyBox = document.getElementById("buy");
+
+    let pastTop = !topStrip;
+    let onBuyBox = false;
+
+    const render = () => {
+      bar.dataset.visible = String(pastTop && !onBuyBox);
+    };
+
+    if (topStrip) {
+      new IntersectionObserver(
+        ([entry]) => {
+          pastTop = entry.boundingClientRect.top < 0;
+          render();
+        },
+        { threshold: 0 },
+      ).observe(topStrip);
+    }
+
+    if (buyBox) {
+      new IntersectionObserver(
+        ([entry]) => {
+          onBuyBox = entry.isIntersecting;
+          render();
+        },
+        { threshold: 0 },
+      ).observe(buyBox);
+    }
+  }
+</script>
+
+<style is:global>
+  .bp-stickybuy {
+    position: fixed;
+    left: 0.7rem;
+    right: 0.7rem;
+    bottom: 0.7rem;
+    z-index: 40;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.9rem;
+    padding: 0.6rem 0.7rem 0.6rem 1rem;
+    border: 1px solid rgba(120, 168, 240, 0.34);
+    border-radius: 14px;
+    background: linear-gradient(178deg, #171c24 0%, #0a0d11 100%);
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.55);
+    transform: translateY(140%);
+    opacity: 0;
+    transition: transform 0.22s ease, opacity 0.22s ease;
+  }
+
+  .bp-stickybuy[data-visible="true"] {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  .bp-stickybuy__name {
+    margin: 0;
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 0.86rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+  }
+
+  .bp-stickybuy__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex: 0 0 auto;
+    min-height: 2.7rem;
+    padding: 0 0.85rem 0 1.05rem;
+    border-radius: 11px;
+    border: 1px solid rgba(120, 176, 255, 0.55);
+    background: linear-gradient(180deg, #2f7fe4 0%, #1a55b4 100%);
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.88rem;
+    text-decoration: none;
+    white-space: nowrap;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.26), 0 6px 16px rgba(16, 60, 130, 0.4);
+  }
+
+  .bp-stickybuy__cta svg { width: 0.95rem; height: 0.95rem; flex: 0 0 auto; }
+  .bp-stickybuy__cta:focus-visible { outline: var(--focus-ring, 2px solid #dfe4ec); outline-offset: 3px; }
+
+  /* The name is redundant with the page title on a wide viewport, where
+     there is room for the bar to just be a confident, centred CTA. */
+  @media (min-width: 760px) {
+    .bp-stickybuy { left: auto; right: 1.4rem; bottom: 1.4rem; max-width: 22rem; }
+    .bp-stickybuy__name { display: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bp-stickybuy { transition: none; }
+  }
+</style>

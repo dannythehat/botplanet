@@ -29,6 +29,7 @@ import ReviewHeader from "./ReviewHeader.astro";
 import BotMatchSnapshot from "./BotMatchSnapshot.astro";
 import BuyBox from "./BuyBox.astro";
 import BuyStrip from "./BuyStrip.astro";
+import StickyBuyBar from "./StickyBuyBar.astro";
 import ArticleContents from "./ArticleContents.astro";
 import Alternatives from "./Alternatives.astro";
 import VideoSection from "./VideoSection.astro";
@@ -250,6 +251,13 @@ const alternatives =
 )}
 
 <ArticleFooter lastReviewed={review.lastReviewed} />
+
+{/* Fixed to the viewport, not the article flow — it has to survive every
+    scroll position, which is the one thing nothing above it does. Renders
+    nothing when there is no lead offer, same guard as the strips above. */}
+{lead?.redirectKey && (
+  <StickyBuyBar productName={productName} retailerName={lead.retailerName} redirectKey={lead.redirectKey} />
+)}
 
 <script>
   /* A contents link that lands on a shut door is worse than no link: the
