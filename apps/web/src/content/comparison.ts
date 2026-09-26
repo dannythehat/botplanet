@@ -30,6 +30,8 @@ export interface ComparableProduct {
   priceTier: string;
   maxPoolLengthFt: number | null;
   maxPoolAreaSqFt: number | null;
+  /** /go redirect key of an active offer, or null. Never a price. */
+  redirectKey: string | null;
 }
 
 const BAND_LABEL: Record<string, string> = {
@@ -84,5 +86,6 @@ export function comparisonRows(products: ComparableProduct[], categorySlug: stri
       cleans: p.cleans.length ? p.cleans.map(label).join(" · ") : NOT_DISCLOSED,
       power: label(p.powerType),
       band: BAND_LABEL[p.priceTier] ?? p.priceTier,
+      redirectKey: p.redirectKey,
     }));
 }

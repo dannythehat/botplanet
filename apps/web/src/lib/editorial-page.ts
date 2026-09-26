@@ -23,6 +23,7 @@ import { eq, and } from "drizzle-orm";
 import { getDb, schema } from "./db";
 import { comparisonRows, type ComparableProduct } from "../content/comparison";
 import type { ComparisonRow } from "../components/ComparisonTable.astro";
+import { redirectKeysByProduct } from "./catalogue-redirects";
 import type { RenderedPick } from "../components/PickList.astro";
 import type { EditorialContent } from "../content/editorial";
 import { injectFigures } from "./review-figures";
@@ -76,6 +77,7 @@ export async function buildEditorialPage(
      cannot appear on a page whose argument never covered it — and so the
      cordless page can never print a corded machine. */
   const allowed = published.filter((p) => article.comparisonSlugs.includes(p.slug));
+  const redirectByProduct = await redirectKeysByProduct(db);
 
   const comparable = (p: (typeof published)[number]): ComparableProduct => ({
     id: p.id,
@@ -87,6 +89,7 @@ export async function buildEditorialPage(
     priceTier: p.priceTier,
     maxPoolLengthFt: p.maxPoolLengthFt,
     maxPoolAreaSqFt: (p as { maxPoolAreaSqFt?: number | null }).maxPoolAreaSqFt ?? null,
+    redirectKey: redirectByProduct.get(p.id) ?? null,
   });
 
   const comparison = comparisonRows(allowed.map(comparable), cat.slug);

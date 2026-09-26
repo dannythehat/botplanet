@@ -8,6 +8,7 @@ import { journeyFor } from "../../../content/journeys";
 import { getDb, schema } from "../../../lib/db";
 import { usd, titleCase } from "../../../lib/format";
 import { cataloguePrices, checkedNote } from "../../../lib/catalogue-prices";
+import { redirectKeysByProduct } from "../../../lib/catalogue-redirects";
 import { and, eq } from "drizzle-orm";
 import { breadcrumbsFor } from "../../../lib/routing";
 import { collectionPageSchema, imageObjectSchema, faqPageSchema, itemListSchema } from "../../../lib/seo";
@@ -90,6 +91,11 @@ const rows = await db
   .from(schema.products)
   .where(and(eq(schema.products.categoryId, cat.id), eq(schema.products.status, "published")));
 const products = rows.filter((p) => !(p.slug in RETIRED_SLUGS));
+
+/* WHO GETS A BUY LINK IN THE TABLE, NOT WHAT THE TABLE IS SORTED BY.
+   See lib/catalogue-redirects.ts: a redirect key carries no price or
+   commission and plays no part in the sort above. */
+const redirectByProduct = await redirectKeysByProduct(db);
 
 /* PRICES COME FROM THE CHECKER, NOT FROM THE SEEDED OFFER ROWS.
    This used to read `offers.base_price_minor` and print the lowest — a figure
@@ -177,6 +183,7 @@ const compareRows = comparisonRows(
     priceTier: p.priceTier,
     maxPoolLengthFt: p.maxPoolLengthFt,
     maxPoolAreaSqFt: (p as { maxPoolAreaSqFt?: number | null }).maxPoolAreaSqFt ?? null,
+    redirectKey: redirectByProduct.get(p.id) ?? null,
   })),
   cat.slug,
 );

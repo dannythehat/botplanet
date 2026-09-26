@@ -44,6 +44,12 @@ export interface ComparisonRow {
   power: string;
   /** Price band label, e.g. "Mid". Never a figure. */
   band: string;
+  /**
+   * /go redirect key of an active offer, or null. A link target only — no
+   * price or commission value reaches this component through it, and it
+   * plays no part in the sort above. See the "Check price" action below.
+   */
+  redirectKey: string | null;
 }
 
 interface Props {
@@ -140,6 +146,15 @@ const COLUMNS = [sizeLabel, typeLabel, "Cleans", "Power", "Price band"];
               <a class="bp-cmp__more" href={r.href}>
                 Details<span aria-hidden="true">&#8594;</span>
               </a>
+              {/* Only for a reader who has already decided from the row alone
+                  and would otherwise open the review just to find a way to
+                  buy. Same /go route and disclosure obligation as everywhere
+                  else — this is a shortcut, not a second recommendation. */}
+              {r.redirectKey && (
+                <a class="bp-cmp__price" href={`/go/${r.redirectKey}`} rel="sponsored nofollow">
+                  Check price
+                </a>
+              )}
             </td>
           </tr>
         ))}
@@ -375,7 +390,34 @@ const COLUMNS = [sizeLabel, typeLabel, "Cleans", "Power", "Price band"];
   }
 
   /* ---------- the link out ---------- */
-  .bp-cmp__actions { text-align: right; }
+  .bp-cmp__actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.4rem;
+  }
+
+  .bp-cmp__price {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.4rem 0.8rem;
+    border-radius: 999px;
+    border: 1px solid rgba(120, 176, 255, 0.55);
+    background: linear-gradient(180deg, #2f7fe4 0%, #1a55b4 100%);
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #fff;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .bp-cmp__price:focus-visible {
+    outline: var(--focus-ring, 2px solid #dfe4ec);
+    outline-offset: 2px;
+  }
 
   .bp-cmp__more {
     display: inline-flex;
@@ -499,7 +541,7 @@ const COLUMNS = [sizeLabel, typeLabel, "Cleans", "Power", "Price band"];
     .bp-cmp__tags { justify-content: flex-end; }
 
     .bp-cmp__actions {
-      justify-content: stretch;
+      align-items: stretch;
       padding: 0.7rem 1rem 1rem;
     }
 
@@ -511,6 +553,16 @@ const COLUMNS = [sizeLabel, typeLabel, "Cleans", "Power", "Price band"];
       padding: 0.62rem 0.8rem;
       color: var(--cs-bright);
       border-color: var(--cs-line);
+    }
+
+    .bp-cmp__price {
+      width: 100%;
+      justify-content: center;
+      padding: 0.62rem 0.8rem;
+      /* Above Details, not below — the reader who has already decided from
+         the card alone should not have to scan past a second link to find
+         the one that acts. */
+      order: -1;
     }
   }
 </style>
