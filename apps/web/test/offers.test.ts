@@ -1,4 +1,4 @@
-import { readFileSync } from "node:fs";
+import { readdirSync, readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { PAGE_PLAN } from "../src/content/seo/page-plan";
 import {
@@ -212,8 +212,14 @@ describe("exact-product destinations", () => {
        that turns a read ASIN into an offer was never done — so the site's
        largest category sat live with a buy heading and nothing under it. They
        enter at researched_exact, not verified_exact: the identifier is pinned
-       but no published identity field was transcribed off the listing. */
-    expect(exact).toHaveLength(61);
+       but no published identity field was transcribed off the listing.
+
+       62 since 26 September 2026: Grillbot, off OFFER_SETUP_PENDING 47 days
+       after it arrived — 17 past its own shelf life. Same researched_exact
+       bar as the vacuums, for the same reason: the ASIN is pinned and the
+       brand field matched, but the read that would raise it to verified_exact
+       kept hitting Amazon's bot check instead of the listing. */
+    expect(exact).toHaveLength(62);
     expect(search).toHaveLength(0);
     for (const d of exact) {
       expect(d.identifierKind).toBe("asin");
@@ -1671,14 +1677,20 @@ describe("scheduled refresh — wiring", () => {
        fails loudly for any routed product whose key is absent from the text it
        reads — which is exactly the behaviour wanted. Read the directory rather
        than the list if a fourth category makes this tedious. */
-    /* "vacuums" JOINED ON 14 AUGUST 2026 AND THE OMISSION IS THE WHOLE STORY.
-       This list is read rather than the directory, so a category with no seed
-       directory is not checked, passes, and can ship eleven reviews with no
-       buy path behind any of them — which is exactly what robot vacuums did
-       for four days. Read the directory rather than the list if a tenth
-       category makes this tedious; until then, adding a category means adding
-       it here on the same commit. */
-    const seed = ["pool", "window", "companion", "petcam", "coding", "litter", "lawn", "snow", "vacuums"]
+    /* THIS USED TO BE A HARDCODED LIST, AND THE SAME GAP BIT TWICE. Robot
+       vacuums shipped eleven reviews with no buy path behind any of them for
+       four days because "vacuums" was missing from the list; Grillbot then
+       sat in OFFER_SETUP_PENDING 17 days past its own shelf life because
+       "grill" was missing too, and nobody was forced to notice either time —
+       a hardcoded list that agrees with itself proves nothing about the
+       category nobody added.
+       It reads the directory now, so a new category's seed file is checked
+       the moment it exists rather than the moment somebody remembers to list
+       it. `index.ts` and `to-sql.ts` are not category seeds. */
+    const categoryDirs = readdirSync("packages/db/seed", { withFileTypes: true })
+      .filter((e) => e.isDirectory())
+      .map((e) => e.name);
+    const seed = categoryDirs
       .map((c) => readFileSync(`packages/db/seed/${c}/commercial.ts`, "utf8"))
       .join("\n");
     for (const p of sellable()) {

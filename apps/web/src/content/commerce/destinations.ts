@@ -728,6 +728,49 @@ const VACUUM_ASINS: WindowDestination[] = [
 ];
 
 /**
+ * GRILLBOT — parked in OFFER_SETUP_PENDING since 10 August 2026 and still
+ * there 47 days later when its own 30-day shelf life started failing the
+ * build. The only product in its category, so the whole grill vertical had
+ * no working buy button for six and a half weeks.
+ *
+ * WHY IT WAS STUCK. Amazon's brand field confirmed the identity on
+ * 10 August, and the same day's price read got $129.99 into this product's
+ * review record — that price is what the pending note calls "dated
+ * third-party evidence". What never happened is a first-party re-read: the
+ * one direct fetch attempt on record hit Amazon's bot-check page instead of
+ * the listing. Nobody has SerpAPI credit or time earmarked to try again
+ * since, so a fixable one-listing gap sat as a silent zero-revenue category
+ * for over six weeks.
+ *
+ * WIRED AT researched_exact, SAME BAR AS THE VACUUMS. The ASIN is pinned,
+ * the brand field matched on the read that succeeded, and there is no
+ * sibling ASIN family recorded to confuse it with. What is missing is the
+ * same thing the vacuums were missing: a transcribed Brand/Model field off
+ * a listing read that did not bounce off a bot page. One clean read raises
+ * it to verified_exact.
+ */
+const GRILL_CHECK_DATE = "2026-08-10";
+
+const GRILL_ASINS: WindowDestination[] = [
+  {
+    productId: "prod-grillbot",
+    asin: "B00HFDFSAC",
+    exactModel: "Grillbot Automatic Grill Cleaning Robot",
+    evidence:
+      "Grillbot Automatic Grill Cleaning Robot, ASIN B00HFDFSAC. Amazon's brand field confirmed the listing on 10 August 2026 and the same read returned $129.99. No sibling ASIN family is recorded for this listing.",
+  },
+];
+
+for (const p of GRILL_ASINS) {
+  IDENTITY_CHECKS[p.productId] = {
+    asin: p.asin,
+    confirmed: false,
+    evidence: p.evidence,
+    checkedOn: GRILL_CHECK_DATE,
+  };
+}
+
+/**
  * CONFIRMED IS FALSE ON ALL ELEVEN, AND THAT IS NOT A FORMALITY.
  *
  * The window and lawn destinations were cleared by transcribing a published
@@ -865,6 +908,31 @@ export const DESTINATIONS: ProductDestination[] = [
         "transcribing a published identity field — Brand, Model Name, Model Number — off the " +
         "listing itself. One field read per listing raises this to verified_exact.",
       sourceReference: `ASIN pinned and read through the SerpAPI amazon_product engine on ${VACUUM_CHECK_DATE}; full working in docs/commerce/robot-vacuums-identity.md. ${evidence}`,
+    }),
+  ),
+
+  /* Grillbot, off OFFER_SETUP_PENDING on 26 September 2026 after 47 days —
+     see the note above GRILL_ASINS. Same researched_exact bar as the vacuums:
+     the ASIN is pinned and the brand field matched, but no transcribed field
+     survives from a listing read that did not hit the bot page. */
+  ...GRILL_ASINS.map(
+    ({ productId, asin, exactModel, evidence }): ProductDestination => ({
+      productId,
+      retailerId: "ret-amazon",
+      market: "us",
+      retailerProductId: asin,
+      identifierKind: "asin",
+      exactModel,
+      destinationUrl: `https://www.amazon.com/dp/${asin}`,
+      confidence: "researched_exact" as const,
+      notes:
+        "IDENTITY NOT CONFIRMED to the standard the window and lawn destinations meet. " +
+        "Amazon's brand field matched on the read that succeeded on " +
+        `${GRILL_CHECK_DATE}, and no sibling ASIN family is recorded for this listing. ` +
+        "What has not been done is transcribing a published Brand/Model field off a " +
+        "listing read that did not bounce off Amazon's bot check. One clean read raises " +
+        "this to verified_exact.",
+      sourceReference: `ASIN pinned and read on ${GRILL_CHECK_DATE}; brand field confirmed the same day. ${evidence}`,
     }),
   ),
 
@@ -1127,6 +1195,8 @@ export const REDIRECT_KEYS: Record<string, string> = {
   "prod-shark-matrix-plus-ur2650ws": "vac-shark-ur2650ws-amazon",
   "prod-roomba-max-705": "vac-irobot-max705-amazon",
   "prod-ecovacs-deebot-t90-pro-omni": "vac-ecovacs-t90proomni-amazon",
+
+  "prod-grillbot": "grill-grillbot-amazon",
 };
 
 /* ------------------------------------------------------------------ */

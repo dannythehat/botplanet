@@ -996,13 +996,13 @@ export const OFFER_SETUP_PENDING_DAYS = 30;
  * product waits in, and an empty one is the only good state for it to be in.
  */
 export const OFFER_SETUP_PENDING: Record<string, OfferSetupPending> = {
-  /* Re-opened on 10 August 2026 for the first grill-cleaning product. The
-     shelf life above applies to it exactly as it did to the eleven. */
-  "prod-grillbot": {
-    reason:
-      "Identity is confirmed through Amazon's own brand field on 10 August 2026 and the ASIN family is mapped, but the listing itself served a bot check rather than a product page when read directly — so the pinned ASIN rests on dated third-party evidence rather than a page we read. A buy button is a different promise from a published page, and this one waits for a first-party read of B00HFDFSAC before it is wired.",
-    since: "2026-08-10",
-  },
+  /* GRILLBOT LEFT ON 26 SEPTEMBER 2026, 47 DAYS AFTER IT ARRIVED — 17 days
+     past its own 30-day shelf life, which is what finally failed the build.
+     It was the only product in its category, so grill-cleaning-robots earned
+     nothing for six and a half weeks over a single un-repeated listing read.
+     Wired at researched_exact in commerce/destinations.ts — see GRILL_ASINS
+     there for what is and is not confirmed. */
+
 
   /* THE ELEVEN ROBOT VACUUMS CAME OFF THIS LIST ON 14 AUGUST 2026, wired to
      Amazon with the ASINs that had been sitting in their own review records

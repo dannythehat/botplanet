@@ -1264,29 +1264,32 @@
     {
       "productId": "prod-grillbot",
       "canonicalUrl": "https://botplanet.io/robots/grill-cleaning-robots/grillbot/",
-      "verifiedOffers": 0,
-      "preferredOfferId": null,
+      "verifiedOffers": 1,
+      "preferredOfferId": "offer-prod-grillbot-ret-amazon",
       "preferredOfferAudit": [
-        "0 offer(s) exist for this product",
-        "0 from an approved retailer",
-        "no approved offer — nothing is featured"
+        "1 offer(s) exist for this product",
+        "1 from an approved retailer",
+        "ranked by exact-match confidence, then stock, then delivered price",
+        "chosen: offer-prod-grillbot-ret-amazon (researched_exact)"
       ],
       "commissionUsedAsTieBreak": false,
-      "retailer": null,
-      "exactProductIdentifier": null,
-      "identifierKind": null,
+      "retailer": "ret-amazon",
+      "exactProductIdentifier": "B00HFDFSAC",
+      "identifierKind": "asin",
       "market": "us",
       "priceState": "not_published",
       "stockState": "unknown",
-      "deliveryState": "unknown",
-      "warrantyRoute": null,
-      "lastChecked": null,
-      "freshness": "unknown",
-      "affiliateProgramme": null,
-      "goPath": null,
+      "deliveryState": "not_exposed_by_source",
+      "warrantyRoute": "Manufacturer warranty term not confirmed",
+      "lastChecked": "2026-07-31",
+      "freshness": "indicative",
+      "affiliateProgramme": "prog-amazon-us",
+      "goPath": "/go/grill-grillbot-amazon",
       "schemaEligible": false,
       "blockers": [
-        "no approved offer"
+        "no current price from an approved source",
+        "stock state unknown",
+        "not eligible for Offer structured data"
       ],
       "nextAction": "Obtain price and availability through the Amazon Creators API so the offer can carry a current price and enter Offer schema."
     },
