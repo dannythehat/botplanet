@@ -256,6 +256,18 @@ const reviewGraph = hasReview
         ),
     ]
   : [];
+
+/* NOTHING ON THIS PAGE IS PER-VISITOR. Every value above comes from D1 or the
+   static content files, keyed only by the URL's own category and slug, so
+   the response for a given URL is the same for every reader and every
+   crawler. It was rendering fresh on every single request regardless —
+   including every Googlebot fetch — which is a full D1 round trip this page
+   never needed to pay twice for the same URL inside five minutes.
+   stale-while-revalidate means a visitor is never made to wait on a refetch:
+   the edge serves the (at most five-minute-old) copy immediately and updates
+   its cache in the background. Prices are unaffected — they already carry
+   their own checked date and are refreshed once a day, not by this cache. */
+Astro.response.headers.set("cache-control", "public, max-age=300, stale-while-revalidate=86400");
 ---
 
 <Base

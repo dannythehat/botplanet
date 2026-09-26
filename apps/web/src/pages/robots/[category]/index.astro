@@ -339,6 +339,11 @@ const pageSchema = hero
       ),
     ]
   : [];
+
+/* Same reasoning as the review page's cache-control: nothing here is keyed on
+   the visitor, only on the category slug, so the edge can serve repeat
+   requests — including repeat crawler fetches — without a fresh D1 read. */
+Astro.response.headers.set("cache-control", "public, max-age=300, stale-while-revalidate=86400");
 ---
 
 <Base
