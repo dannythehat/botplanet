@@ -1,0 +1,36 @@
+{
+  "category": "coding-robots-gift-topup",
+  "note": "Top-up run, 26 September 2026. docs/seo/coding-robots-findings.md (8 August) flagged Botley 2.0 and Code & Go Robot Mouse as buyable-but-unsettled: the plan's target ASINs served classroom/activity-set listings rather than the single consumer unit. Re-checked 26 September against Amazon: Code & Go Robot Mouse now has a clean standalone listing (B01B14XK00, $39.99, not the $71.99 activity-set or $270.99 classroom-set ASINs); Botley 2.0's standard retail listing (B083T58PKM) is the activity set, which is how Learning Resources sells it at retail rather than a classroom bulk pack, so it is treated as the correct SKU. Bee-Bot was re-checked and dropped again: every US Amazon listing found is still a multi-pack or classroom bundle, unchanged from August. This run prices both products' head terms plus the Christmas gift-modifier tail neither prior coding-robots run ever bought, since the category was researched in August against year-round intent, not December.",
+  "researchedOn": "2026-09-26",
+  "leads": ["code and go robot mouse", "botley the coding robot", "stem toys for christmas"],
+  "seeds": [
+    "code and go robot mouse",
+    "code and go robot mouse review",
+    "code and go robot mouse price",
+    "code & go robot mouse",
+    "learning resources robot mouse",
+    "robot mouse coding toy",
+    "code and go mouse vs botley",
+    "botley the coding robot",
+    "botley 2.0",
+    "botley 2.0 review",
+    "botley coding robot price",
+    "botley vs code and go robot mouse",
+    "learning resources botley",
+    "screen free coding toy for kids",
+    "best coding robot for christmas",
+    "best stem toys for christmas 2026",
+    "coding robot gift for kids",
+    "christmas gifts for kids who like robots",
+    "coding toys for 4 year old",
+    "coding toys for 5 year old",
+    "best educational robot toys 2026"
+  ],
+  "serpQueries": [
+    "code and go robot mouse",
+    "botley the coding robot",
+    "best coding robot for christmas",
+    "best stem toys for christmas 2026",
+    "coding robot gift for kids"
+  ]
+}
