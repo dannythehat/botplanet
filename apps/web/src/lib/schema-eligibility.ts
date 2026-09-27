@@ -16,48 +16,73 @@ function usableOffer(value: unknown): boolean {
   }
 
   if (type === "AggregateOffer") {
-    return (
-      hasValue(offer.priceCurrency) &&
-      hasValue(offer.lowPrice) &&
-      hasValue(offer.highPrice)
-    );
+    return hasValue(offer.priceCurrency) && hasValue(offer.lowPrice);
   }
 
   return false;
 }
 
-/**
- * Keep Product markup truthful and remove only an incomplete offers property.
- * A Product is still useful entity markup without an offer; an Offer that
- * claims a sale without a price/currency is not.
- */
-function sanitizeProduct(product: SchemaNode): SchemaNode {
-  if (!("offers" in product)) return product;
+function hasEligibleRatingOrReview(product: SchemaNode): boolean {
+  const aggregate = asNode(product.aggregateRating);
+  const aggregateEligible = Boolean(
+    aggregate &&
+      hasValue(aggregate.ratingValue) &&
+      (hasValue(aggregate.ratingCount) || hasValue(aggregate.reviewCount)),
+  );
+  if (aggregateEligible) return true;
 
-  const offers = product.offers;
-  if (Array.isArray(offers)) {
-    const valid = offers.filter(usableOffer);
-    if (valid.length) return { ...product, offers: valid };
-    const { offers: _discarded, ...rest } = product;
-    return rest;
+  const reviews = Array.isArray(product.review) ? product.review : [product.review];
+  return reviews.some((value) => {
+    const review = asNode(value);
+    if (!review) return false;
+    const rating = asNode(review.reviewRating);
+    return Boolean(rating && hasValue(rating.ratingValue));
+  });
+}
+
+/**
+ * Return only Product markup that is eligible for Google's product snippet
+ * interpretation without inventing facts. Google requires a Product to carry
+ * at least one of offers, review or aggregateRating. BotPlanet therefore drops
+ * a bare Product when a current publishable price/rating does not exist.
+ */
+function sanitizeProduct(product: SchemaNode): SchemaNode | null {
+  let sanitized: SchemaNode = product;
+
+  if ("offers" in product) {
+    const offers = product.offers;
+    if (Array.isArray(offers)) {
+      const valid = offers.filter(usableOffer);
+      if (valid.length) sanitized = { ...product, offers: valid };
+      else {
+        const { offers: _discarded, ...rest } = product;
+        sanitized = rest;
+      }
+    } else if (!usableOffer(offers)) {
+      const { offers: _discarded, ...rest } = product;
+      sanitized = rest;
+    }
   }
 
-  if (usableOffer(offers)) return product;
-  const { offers: _discarded, ...rest } = product;
-  return rest;
+  const remainingOffers = sanitized.offers;
+  const hasOffer = Array.isArray(remainingOffers)
+    ? remainingOffers.some(usableOffer)
+    : usableOffer(remainingOffers);
+
+  return hasOffer || hasEligibleRatingOrReview(sanitized) ? sanitized : null;
 }
 
 /**
  * Prevent BotPlanet from advertising Google rich-result types whose required
  * factual fields we do not possess.
  *
- * - Review requires a real rating for Google's review rich result. BotPlanet
- *   deliberately has no invented star scores, so an unrated Review is replaced
- *   by its truthful Product entity instead of fabricating ratingValue.
+ * - Review is kept only when a real rating exists. BotPlanet does not invent
+ *   stars. An unrated editorial review may fall back to its Product entity only
+ *   when that Product independently has an eligible priced offer/rating.
  * - Article is emitted only when a genuine publication date exists. A
  *   last-reviewed date is not silently relabelled as datePublished.
- * - Product offers survive only when the price fields needed by their concrete
- *   Offer/AggregateOffer type are present.
+ * - Product is emitted only with an eligible offer, review or aggregateRating;
+ *   incomplete offers are removed rather than guessed.
  */
 export function sanitizeRichResultNode(node: SchemaNode | null | undefined): SchemaNode | null {
   if (!node) return null;
