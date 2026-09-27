@@ -1,17 +1,11 @@
 ---
 /**
- * ChatGPT December 2026 Amazon challenge page.
+ * Robot-dog buying guide — US / Christmas 2026.
  *
- * DataForSEO — US — 27 Sep 2026:
- *   robot dog toy             14,800/mo · 49,500 Nov 2025 · 33,100 Dec 2025 · KD 0
- *   ai robot dog               3,600/mo · 12,100 Dec 2025 · KD 0
- *   interactive robot dog      1,600/mo ·  5,400 Dec 2025 · KD 10
- *   loona robot dog            1,000/mo ·  5,400 Dec 2025 · KD 3
- *   interactive robot dog toy  1,000/mo · KD 0
- *
- * Canonical-intent rule: this URL owns the generic robot-dog buying cluster.
- * Branded Loona intent remains with the Loona product review; coding-robot and
- * companion-robot category head terms remain with their category hubs.
+ * Search ownership:
+ * - this URL owns the generic robot-dog buying cluster;
+ * - branded Loona intent stays with the Loona product review;
+ * - coding-robot and companion-robot head terms stay with their category hubs.
  */
 import Base from "../../layouts/Base.astro";
 import {
@@ -38,25 +32,15 @@ const IMAGE = {
   mechdog: `${MEDIA}file_00000000ae38820a921680cc557de558.png`,
   puppypi: `${MEDIA}file_00000000847c81f4b42e8bec3cacde96.png`,
   maker: `${MEDIA}file_00000000bdb0820aa04b0dc01bf44e3d.png`,
-  senior: `${MEDIA}file_00000000aaa0820a8ca862b887a250a0.png`,
+  senior: `${MEDIA}file_00000000aaa0820aa04b0dc01bf44e3d.png`,
   priceTiers: `${MEDIA}file_00000000f9ec820abb6b05d868057faf.png`,
   christmas: `${MEDIA}file_000000009f30820a9b08917b5d41f679.png`,
 };
 
+/* Breadcrumbs.astro adds Home itself. */
 const crumbs = [
-  { name: "Home", path: "/" },
   { name: "Buying Advice", path: "/guides/" },
   { name: "Robot Dog Toys", path: PATH },
-];
-
-const picks = [
-  { name: "Loona Robot Pet", path: PATH + "#loona" },
-  { name: "Ruko 18011 Robot Dog", path: PATH + "#ruko" },
-  { name: "YESHIN CyberDog", path: PATH + "#yeshin" },
-  { name: "LewanSoul MechDog", path: PATH + "#mechdog" },
-  { name: "Petoi Bittle X V2", path: PATH + "#bittle" },
-  { name: "HIWONDER PuppyPi", path: PATH + "#puppypi" },
-  { name: "Chongker Companion Robot Dog", path: PATH + "#chongker" },
 ];
 
 const products = [
@@ -67,7 +51,7 @@ const products = [
     name: "Loona Robot Pet",
     status: "In stock at snapshot",
     image: IMAGE.loona,
-    imageAlt: "Editorial lifestyle illustration of a compact AI companion robot pet in a bright family home.",
+    imageAlt: "A compact AI companion robot pet in a bright contemporary family home.",
     imageCaption: "Editorial illustration — check the retailer listing for the exact Loona configuration.",
     verdict:
       "The strongest choice when the buyer really means AI robot pet. Loona combines voice interaction, face and gesture recognition, autonomous movement, a camera and a charging dock in a product designed for normal homes rather than robotics labs.",
@@ -99,7 +83,7 @@ const products = [
     name: "Ruko 18011 Robot Dog",
     status: "In stock at snapshot",
     image: IMAGE.ruko,
-    imageAlt: "Editorial lifestyle illustration of a child playing with a friendly interactive robot dog in a modern home.",
+    imageAlt: "A child playing with a friendly black-and-gold interactive robot dog in a modern home.",
     imageCaption: "Editorial illustration — use the Amazon listing for exact colour and included accessories.",
     verdict:
       "Ruko is the mass-market pick: an interactive robot dog for kids with remote and gesture control, programmable actions and more than 30 LED-face expressions. It is much easier to gift than a developer quadruped and far cheaper than Loona.",
@@ -156,8 +140,8 @@ const products = [
     name: "LewanSoul MechDog",
     status: "Standard kit in stock at snapshot",
     image: IMAGE.mechdog,
-    imageAlt: "Editorial illustration of a yellow programmable quadruped robot dog in a modern coding and robotics workspace.",
-    imageCaption: "Editorial illustration based on the programmable-robot use case, not a substitute for the exact retailer product image.",
+    imageAlt: "A yellow programmable quadruped robot dog in a modern robotics workspace.",
+    imageCaption: "Editorial illustration of the maker use case — check the exact retailer configuration.",
     verdict:
       "MechDog is where robot dog stops being mainly a toy. The listing we checked combines ESP32 hardware, an AI camera, app and PC control, self-balancing movement and coding support across Scratch, Python and Arduino.",
     facts: [
@@ -188,8 +172,8 @@ const products = [
     name: "Petoi Bittle X V2",
     status: "Amazon variants verified",
     image: IMAGE.bittle,
-    imageAlt: "Editorial illustration of a yellow-and-black open-source quadruped robot dog on a maker workbench beside robotics software.",
-    imageCaption: "Editorial illustration — exact Bittle X V2 hardware varies by construction and pre-assembled configuration.",
+    imageAlt: "A yellow-and-black open-source quadruped robot dog on a maker workbench beside robotics software.",
+    imageCaption: "Editorial illustration — exact Bittle X V2 hardware varies by kit and pre-assembled configuration.",
     verdict:
       "Bittle X V2 is for the buyer who wants to understand and change the robot. Petoi positions Bittle as an open-source quadruped platform, and the Amazon variants we checked let you choose between a construction kit and a pre-assembled machine.",
     facts: [
@@ -220,8 +204,8 @@ const products = [
     name: "HIWONDER PuppyPi",
     status: "Advanced kit in stock at snapshot",
     image: IMAGE.puppypi,
-    imageAlt: "Editorial illustration of an advanced black AI quadruped robot dog with cameras and LiDAR-style sensing in a robotics laboratory.",
-    imageCaption: "Editorial illustration of the advanced-robotics use case; exact sensors depend on the PuppyPi kit selected.",
+    imageAlt: "An advanced black AI quadruped robot dog with camera and LiDAR-style sensing in a robotics laboratory.",
+    imageCaption: "Editorial illustration — exact sensors depend on the PuppyPi kit selected.",
     verdict:
       "PuppyPi is where this guide stops being about toys entirely. The Advanced configuration we checked targets serious AI and robotics work: Raspberry Pi, AI vision, voice interaction and embodied-AI experiments, with higher configurations adding deeper autonomy and navigation hardware.",
     facts: [
@@ -245,6 +229,15 @@ const products = [
     internalHref: "/robots/educational-coding-robots/",
     internalLabel: "Explore coding robots",
   },
+];
+
+const quick = [
+  ["Loona", "#loona", "Premium AI pet", "$499 · $399 coupon shown", "Best mix of pet-like AI and home usability"],
+  ["Ruko 18011", "#ruko", "Kids' interactive dog", "~$59.49", "Easy play, gestures and programmable actions"],
+  ["YESHIN CyberDog", "#yeshin", "Budget quadruped toy", "$65.99", "Robot-dog movement without serious-robot pricing"],
+  ["MechDog", "#mechdog", "Value programming", "$299.99", "Scratch, Python and Arduino entry point"],
+  ["Bittle X V2", "#bittle", "Open-source STEM", "$319 / $399", "Maker platform with kit and prebuilt choices"],
+  ["PuppyPi", "#puppypi", "Advanced AI robotics", "$719.99", "Vision, voice, ROS and higher-tier navigation"],
 ];
 
 const faq = [
@@ -278,6 +271,9 @@ const faq = [
   },
 ];
 
+const picks = products.map((product) => ({ name: product.name, path: `${PATH}#${product.id}` }));
+picks.push({ name: "Chongker Companion Robot Dog", path: `${PATH}#chongker` });
+
 const schema = [
   webPageSchema({ path: PATH, name: H1, description: DESCRIPTION }),
   articleSchema({
@@ -304,249 +300,160 @@ const schema = [
   schema={schema}
   ogType="article"
 >
-  <article class="dog-guide">
-    <header class="hero reveal">
-      <div class="hero-copy">
-        <p class="eyebrow">Christmas 2026 buying guide · Updated 27 September</p>
+  <article class="rd-guide">
+    <header class="rd-hero reveal">
+      <div class="rd-hero__copy">
+        <p class="rd-kicker">Christmas 2026 buying guide · Updated 27 September</p>
         <h1>{H1}</h1>
-        <p class="standfirst">
-          A <strong>robot dog toy</strong> can be a $60 kids' gift, a $500 AI pet, a
-          programmable quadruped for an adult maker or a soft companion dog for an older relative.
-          We separate those jobs first — then pick the robot that actually fits.
+        <p class="rd-standfirst">
+          A <strong>robot dog toy</strong> can be a $60 kids' gift, a $500 AI pet, a programmable
+          quadruped for an adult maker or a soft companion dog for an older relative. We separate those
+          jobs first — then pick the robot that actually fits.
         </p>
-        <div class="byline">
+        <div class="rd-byline">
           <span>Research and buying guide by</span>
           <a href={FOUNDER.path}>{FOUNDER.name}</a>
           <span aria-hidden="true">·</span>
           <a href="/editorial-policy/">Editorial policy</a>
         </div>
-        <div class="hero-actions">
-          <a class="button button--primary" href="#our-picks">See the 6 main picks</a>
-          <a class="button button--ghost" href="#not-just-kids">Not just for kids</a>
+        <div class="rd-actions">
+          <a class="rd-button rd-button--primary" href="#our-picks">See the 6 main picks</a>
+          <a class="rd-button" href="#not-just-kids">Not just for kids</a>
         </div>
-        <p class="commercial-note">
-          Amazon prices and stock can move quickly. Prices below are dated observations from
-          27 September 2026; use the retailer buttons for the current offer.
-        </p>
+        <p class="rd-note">Amazon prices and stock can move quickly. Prices below are dated observations from 27 September 2026; use the retailer buttons for the current offer.</p>
       </div>
-
-      <figure class="hero-visual">
-        <img
-          src={IMAGE.hero}
-          width="1672"
-          height="941"
-          alt="A premium buying-guide illustration showing a kids robot dog, home AI companion, programmable quadruped and plush companion robot dog together."
-          loading="eager"
-          fetchpriority="high"
-          decoding="async"
-        />
+      <figure class="rd-media rd-hero__media">
+        <img src={IMAGE.hero} width="1536" height="864" alt="A premium buying-guide scene showing a kids robot dog, home AI companion, programmable quadruped and plush companion dog together." loading="eager" fetchpriority="high" decoding="async" />
         <figcaption>Robot dogs now span toys, AI companions, coding platforms and soft companion pets.</figcaption>
       </figure>
     </header>
 
-    <nav class="intent-nav" aria-label="Jump to robot dog type">
+    <nav class="rd-intents" aria-label="Jump to robot dog type">
       <a href="#ruko"><strong>Robot dog toy</strong><small>easy, immediate play</small></a>
-      <a href="#mechdog"><strong>Programmable robot dog</strong><small>Scratch, Python, Arduino</small></a>
+      <a href="#programming"><strong>Programmable robot dog</strong><small>Scratch, Python, Arduino</small></a>
       <a href="#loona"><strong>AI robot dog</strong><small>voice, recognition, autonomy</small></a>
       <a href="#chongker"><strong>Companion robot dog</strong><small>soft, familiar, low complexity</small></a>
     </nav>
 
-    <section class="christmas-band reveal" aria-labelledby="christmas-title">
-      <figure>
-        <img
-          src={IMAGE.christmas}
-          width="1672"
-          height="941"
-          alt="Three different robot dogs presented as premium Christmas gifts beside a decorated tree."
-          loading="lazy"
-          decoding="async"
-        />
-      </figure>
-      <div>
-        <p class="section-kicker">Christmas 2026</p>
+    <section class="rd-split reveal" aria-labelledby="christmas-title">
+      <div class="rd-split__copy">
+        <p class="rd-kicker">Christmas 2026</p>
         <h2 id="christmas-title">The best Christmas robot dog is the one they will still use in January</h2>
-        <p>
-          Younger children usually want instant tricks and easy controls. A teen who already codes may
-          get more from a buildable quadruped. An adult maker may want ROS and sensors. A senior may value
-          a soft familiar companion far more than any specification sheet.
-        </p>
-        <a class="text-link" href="#quick-compare">Compare the six picks →</a>
+        <p>Younger children usually want instant tricks and easy controls. A teen who already codes may get more from a buildable quadruped. An adult maker may want ROS and sensors. A senior may value a soft familiar companion far more than any specification sheet.</p>
+        <a class="rd-text-link" href="#quick-compare">Compare the six picks →</a>
       </div>
+      <figure class="rd-media">
+        <img src={IMAGE.christmas} width="1536" height="864" alt="Three robot dogs presented as premium Christmas gifts in a stylish modern home." loading="lazy" decoding="async" />
+      </figure>
     </section>
 
-    <section id="not-just-kids" class="all-ages reveal" aria-labelledby="all-ages-title">
-      <div class="section-copy">
-        <p class="section-kicker">Not all robot dogs are for kids</p>
+    <section id="not-just-kids" class="rd-split rd-split--image-first reveal" aria-labelledby="all-ages-title">
+      <figure class="rd-media">
+        <img src={IMAGE.allAges} width="1536" height="864" alt="A child with a toy robot dog, an adult working on a programmable quadruped and an older adult with a companion robot dog." loading="lazy" decoding="async" />
+        <figcaption>Robot-dog use cases now span children, adult makers and older adults.</figcaption>
+      </figure>
+      <div class="rd-split__copy">
+        <p class="rd-kicker">Not all robot dogs are for kids</p>
         <h2 id="all-ages-title">One search term now covers three generations of buyers</h2>
-        <p>
-          The most useful way to shop is by <strong>who the robot is for</strong>. Toy-grade dogs prioritise
-          immediate fun. Programmable robot dogs trade softness for servos, code, sensors and experimentation.
-          Companion robot dogs for seniors prioritise familiarity, touch and low-complexity interaction.
-        </p>
-        <div class="audience-chips">
+        <p>The useful way to shop is by <strong>who the robot is for</strong>. Toy-grade dogs prioritise immediate fun. Programmable robot dogs trade softness for servos, code and sensors. Companion robot dogs for seniors prioritise familiarity, touch and low-complexity interaction.</p>
+        <div class="rd-chips">
           <a href="#ruko">Kids & families</a>
           <a href="#programming">Adult makers & coders</a>
           <a href="#chongker">Older adults & seniors</a>
         </div>
       </div>
-      <figure class="wide-figure">
-        <img
-          src={IMAGE.allAges}
-          width="1672"
-          height="941"
-          alt="A child with a toy robot dog, an adult working on a programmable quadruped and an older adult with a companion robot dog in one home scene."
-          loading="lazy"
-          decoding="async"
-        />
-        <figcaption>Editorial illustration: robot-dog use cases for children, adult makers and older adults.</figcaption>
-      </figure>
     </section>
 
-    <section id="quick-compare" class="matrix matrix--top reveal">
-      <div class="section-head">
-        <p class="section-kicker">Quick comparison</p>
-        <h2>Which robot dog should you buy?</h2>
+    <section id="quick-compare" class="rd-section reveal" aria-labelledby="quick-title">
+      <header class="rd-section__head">
+        <p class="rd-kicker">Quick comparison</p>
+        <h2 id="quick-title">Which robot dog should you buy?</h2>
         <p>Start with the recipient and the job. Everything else follows from that.</p>
+      </header>
+      <div class="rd-compare-grid">
+        {quick.map(([name, href, bestFor, price, reason]) => (
+          <article class="rd-compare-card">
+            <div class="rd-compare-card__top"><a href={href}>{name}</a><span>{price}</span></div>
+            <strong>{bestFor}</strong>
+            <p>{reason}</p>
+          </article>
+        ))}
       </div>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr><th>Pick</th><th>Best for</th><th>Observed Amazon price*</th><th>Why it wins</th></tr>
-          </thead>
-          <tbody>
-            <tr><td><a href="#loona"><strong>Loona</strong></a></td><td>Premium AI robot pet</td><td>$499; $399 coupon shown</td><td>Best mix of pet-like AI, interaction and home usability</td></tr>
-            <tr><td><a href="#ruko"><strong>Ruko 18011</strong></a></td><td>Kids' interactive robot dog</td><td>About $59.49 on the variant seen</td><td>Playful, programmable and easier to gift than a coding platform</td></tr>
-            <tr><td><a href="#yeshin"><strong>YESHIN CyberDog</strong></a></td><td>Budget quadruped-style toy</td><td>$65.99; coupon shown</td><td>Robot-dog shape and movement without serious-robot pricing</td></tr>
-            <tr><td><a href="#mechdog"><strong>MechDog</strong></a></td><td>Value programmable robot dog</td><td>$299.99 standard</td><td>Scratch + Python + Arduino at the lowest serious-coding entry price here</td></tr>
-            <tr><td><a href="#bittle"><strong>Bittle X V2</strong></a></td><td>Open-source STEM</td><td>$319 kit / $399 prebuilt</td><td>Strong maker platform with construction and prebuilt options</td></tr>
-            <tr><td><a href="#puppypi"><strong>PuppyPi</strong></a></td><td>Advanced AI robotics</td><td>$719.99 advanced</td><td>AI vision, voice, ROS and higher-tier navigation options</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <p class="price-footnote">*Observed on Amazon US on 27 September 2026. Coupon eligibility, variants, stock and price can change.</p>
+      <p class="rd-note">*Observed on Amazon US on 27 September 2026. Coupon eligibility, variants, stock and price can change.</p>
     </section>
 
-    <section class="price-story reveal" aria-labelledby="price-story-title">
-      <figure>
-        <img
-          src={IMAGE.priceTiers}
-          width="1672"
-          height="941"
-          alt="Four robot dogs progressing from a simple toy to a more advanced programmable AI quadruped."
-          loading="lazy"
-          decoding="async"
-        />
+    <section class="rd-split rd-split--image-first reveal" aria-labelledby="price-title">
+      <figure class="rd-media">
+        <img src={IMAGE.priceTiers} width="1536" height="864" alt="Four robot dogs progressing from a simple toy to an advanced programmable AI quadruped." loading="lazy" decoding="async" />
         <figcaption>Illustrative price-tier progression — not exact product photography.</figcaption>
       </figure>
-      <div>
-        <p class="section-kicker">What extra money buys</p>
-        <h2 id="price-story-title">From toy tricks to cameras, code and autonomy</h2>
-        <p>
-          The jump from roughly $60 to $300 is not mainly about nicer plastic. It is the move from canned
-          actions to programmable hardware. Above that, buyers start paying for cameras, compute, mapping,
-          ROS-oriented tooling and increasingly autonomous behaviour.
-        </p>
-        <ul>
-          <li><strong>~$60:</strong> remote control, gestures, sounds and programmed tricks.</li>
-          <li><strong>~$300–$400:</strong> real coding, exposed hardware, sensors and maker workflows.</li>
-          <li><strong>~$500:</strong> polished home AI-pet experience or higher-spec maker hardware.</li>
-          <li><strong>$700+:</strong> advanced AI vision, ROS, mapping and research-style development.</li>
+      <div class="rd-split__copy">
+        <p class="rd-kicker">What extra money buys</p>
+        <h2 id="price-title">From toy tricks to cameras, code and autonomy</h2>
+        <p>The jump from roughly $60 to $300 is not mainly about nicer plastic. It is the move from canned actions to programmable hardware. Above that, buyers start paying for cameras, compute, mapping, ROS-oriented tooling and increasingly autonomous behaviour.</p>
+        <ul class="rd-tier-list">
+          <li><strong>~$60</strong><span>remote control, gestures, sounds and programmed tricks</span></li>
+          <li><strong>~$300–$400</strong><span>real coding, exposed hardware, sensors and maker workflows</span></li>
+          <li><strong>~$500</strong><span>polished home AI-pet experience or higher-spec maker hardware</span></li>
+          <li><strong>$700+</strong><span>advanced AI vision, ROS, mapping and research-style development</span></li>
         </ul>
       </div>
     </section>
 
-    <section id="our-picks" class="picks">
-      <div class="section-head reveal">
-        <p class="section-kicker">The shortlist</p>
+    <section id="our-picks" class="rd-section rd-picks">
+      <header class="rd-section__head reveal">
+        <p class="rd-kicker">The shortlist</p>
         <h2>Six robot dogs, six different reasons to buy</h2>
-        <p>
-          There is no fake overall score. A kids' toy should not lose because it cannot run ROS, and a
-          developer robot should not lose because it is not cuddly.
-        </p>
-      </div>
+        <p>There is no fake overall score. A kids' toy should not lose because it cannot run ROS, and a developer robot should not lose because it is not cuddly.</p>
+      </header>
 
       {products.map((product, index) => (
-        <article id={product.id} class:list={["pick", "reveal", { "pick--featured": product.id === "loona", "pick--reverse": index % 2 === 1 && product.image }]}>
+        <article id={product.id} class:list={["rd-pick", "reveal", { "rd-pick--featured": product.id === "loona", "rd-pick--reverse": index % 2 === 1 && product.image }]}>
           {product.image && (
-            <figure class="pick-media">
-              <img
-                src={product.image}
-                width="1672"
-                height="941"
-                alt={product.imageAlt}
-                loading="lazy"
-                decoding="async"
-              />
+            <figure class="rd-media rd-pick__media">
+              <img src={product.image} width="1536" height="864" alt={product.imageAlt} loading="lazy" decoding="async" />
               <figcaption>{product.imageCaption}</figcaption>
             </figure>
           )}
-
-          <div class="pick-content">
-            <div class="pick-topline">
-              <span class="pick-number">{product.number}</span>
-              <span class="award">{product.award}</span>
-              <span class="status">{product.status}</span>
+          <div class="rd-pick__content">
+            <div class="rd-pick__topline">
+              <span class="rd-number">{product.number}</span>
+              <span class="rd-award">{product.award}</span>
+              <span class="rd-status">{product.status}</span>
             </div>
             <h3>{product.name}</h3>
-            <p class="verdict">{product.verdict}</p>
-
-            <div class="fact-grid">
+            <p class="rd-verdict">{product.verdict}</p>
+            <div class="rd-facts">
               {product.facts.map(([label, value, note]) => (
                 <div><span>{label}</span><strong>{value}</strong><small>{note}</small></div>
               ))}
             </div>
-
-            <div class="pros-cons">
-              <div>
-                <strong>Why buy it</strong>
-                <ul>{product.pros.map((item) => <li>{item}</li>)}</ul>
-              </div>
-              <div>
-                <strong>Skip it if…</strong>
-                <ul>{product.cons.map((item) => <li>{item}</li>)}</ul>
-              </div>
+            <div class="rd-pros-cons">
+              <div><strong>Why buy it</strong><ul>{product.pros.map((item) => <li>{item}</li>)}</ul></div>
+              <div><strong>Skip it if…</strong><ul>{product.cons.map((item) => <li>{item}</li>)}</ul></div>
             </div>
-
             {product.id === "yeshin" && (
-              <div class="editor-note">
-                <strong>Why only one clone-style pick?</strong>
-                <p>
-                  Several Amazon listings use the same broad CyberDog recipe. Adding all of them would
-                  make this guide longer without making the decision better, so this page keeps one
-                  representative budget option rather than manufacturing six awards for near-duplicates.
-                </p>
-              </div>
+              <div class="rd-editor-note"><strong>Why only one clone-style pick?</strong><p>Several Amazon listings use the same broad CyberDog recipe. Adding all of them would make this guide longer without making the decision better.</p></div>
             )}
-
-            <div class="pick-actions">
-              <a class="button button--primary" href={product.amazonHref} rel="sponsored nofollow">{product.amazonLabel}</a>
-              {product.internalHref && <a class="text-link" href={product.internalHref}>{product.internalLabel} →</a>}
+            <div class="rd-actions">
+              <a class="rd-button rd-button--primary" href={product.amazonHref} rel="sponsored nofollow">{product.amazonLabel}</a>
+              {product.internalHref && <a class="rd-text-link" href={product.internalHref}>{product.internalLabel} →</a>}
             </div>
           </div>
         </article>
       ))}
     </section>
 
-    <section id="programming" class="maker-section reveal" aria-labelledby="maker-title">
-      <figure>
-        <img
-          src={IMAGE.maker}
-          width="1672"
-          height="941"
-          alt="Close-up editorial illustration of an adult maker adjusting the articulated leg and camera assembly of a programmable robot dog."
-          loading="lazy"
-          decoding="async"
-        />
+    <section id="programming" class="rd-split rd-split--image-first reveal" aria-labelledby="maker-title">
+      <figure class="rd-media">
+        <img src={IMAGE.maker} width="1536" height="864" alt="An adult maker adjusting the articulated leg and sensor assembly of a programmable robot dog." loading="lazy" decoding="async" />
         <figcaption>Programming platforms make more sense for makers than buyers who simply want a pet-like toy.</figcaption>
       </figure>
-      <div class="maker-copy">
-        <p class="section-kicker">Robot dogs for adults</p>
+      <div class="rd-split__copy">
+        <p class="rd-kicker">Robot dogs for adults</p>
         <h2 id="maker-title">MechDog vs Bittle vs PuppyPi: choose the development depth</h2>
-        <p>
-          If the recipient already enjoys Python, Arduino, sensors, computer vision or robotics, do not
-          steer them toward a child-focused toy just because the search term says “robot dog”.
-        </p>
-        <div class="maker-links">
+        <p>If the recipient already enjoys Python, Arduino, sensors, computer vision or robotics, do not steer them toward a child-focused toy just because the search term says “robot dog”.</p>
+        <div class="rd-maker-grid">
           <a href="#mechdog"><strong>MechDog</strong><span>Best value coding entry</span></a>
           <a href="#bittle"><strong>Bittle X V2</strong><span>Best open-source maker fit</span></a>
           <a href="#puppypi"><strong>PuppyPi</strong><span>Best advanced AI / ROS platform</span></a>
@@ -554,79 +461,45 @@ const schema = [
       </div>
     </section>
 
-    <section class="matrix reveal">
-      <div class="section-head">
-        <p class="section-kicker">Programmable robot dog comparison</p>
-        <h2>MechDog vs Bittle X V2 vs PuppyPi</h2>
-      </div>
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>Need</th><th>MechDog</th><th>Bittle X V2</th><th>PuppyPi</th></tr></thead>
-          <tbody>
-            <tr><td>Easy coding entry</td><td><strong>Best</strong></td><td>Very good</td><td>Overkill</td></tr>
-            <tr><td>Open-source maker focus</td><td>Good</td><td><strong>Best fit</strong></td><td>Advanced / ROS focused</td></tr>
-            <tr><td>Scratch / Python / Arduino</td><td><strong>Strong</strong></td><td>Strong</td><td>Different, more advanced stack</td></tr>
-            <tr><td>AI vision / navigation</td><td>Entry-level camera features</td><td>Expandable</td><td><strong>Best</strong></td></tr>
-            <tr><td>Lowest observed entry price</td><td><strong>$299.99</strong></td><td>$319</td><td>$719.99 advanced configuration checked</td></tr>
-          </tbody>
-        </table>
+    <section class="rd-section reveal" aria-labelledby="prog-title">
+      <header class="rd-section__head"><p class="rd-kicker">Programmable robot dog comparison</p><h2 id="prog-title">Three levels of serious robotics</h2></header>
+      <div class="rd-program-grid">
+        <article><span>Value entry</span><h3>MechDog</h3><strong>$299.99 observed</strong><p>Best when you want an accessible route into Scratch, Python, Arduino and sensor expansion.</p></article>
+        <article><span>Open-source maker</span><h3>Bittle X V2</h3><strong>$319 kit / $399 prebuilt</strong><p>Best when construction, gait experiments and open-source tinkering matter more than polished pet behaviour.</p></article>
+        <article><span>Advanced AI / ROS</span><h3>PuppyPi</h3><strong>$719.99 observed</strong><p>Best when AI vision, ROS, navigation and higher-tier mapping are capabilities you will actually use.</p></article>
       </div>
     </section>
 
-    <section id="chongker" class="senior-section reveal" aria-labelledby="senior-title">
-      <div class="senior-copy">
-        <p class="section-kicker">Robot dogs for seniors / elderly companion use</p>
+    <section id="chongker" class="rd-split reveal" aria-labelledby="senior-title">
+      <div class="rd-split__copy">
+        <p class="rd-kicker">Robot dogs for seniors</p>
         <h2 id="senior-title">A soft companion dog solves a completely different problem</h2>
-        <p>
-          Chongker's plush companion robot dogs are designed around familiar pet-like interaction rather
-          than coding, cameras or stunt features. The models we saw emphasised a soft body, voice interaction
-          and heartbeat / purring-style feedback.
-        </p>
-        <div class="fact-grid fact-grid--senior">
+        <p>Chongker's plush companion robot dogs are designed around familiar pet-like interaction rather than coding, cameras or stunt features. The models we saw emphasised a soft body, voice interaction and heartbeat / purring-style feedback.</p>
+        <div class="rd-facts rd-facts--stack">
           <div><span>Observed price</span><strong>$99</strong><small>Border Collie / Golden Dog variants shown</small></div>
           <div><span>Amazon signal</span><strong>4.5★</strong><small>615 reviews shown on one listing</small></div>
           <div><span>Best for</span><strong>Low-complexity companionship</strong><small>not a developer robot</small></div>
         </div>
-        <div class="companion-note">
-          <strong>Important:</strong> a companion robot can be comforting entertainment, but it is not a replacement for human contact, professional care or a living animal.
-        </div>
-        <div class="pick-actions">
-          <a class="button button--primary" href="https://www.amazon.com/s?k=Chongker+Companion+Robot+Dog+Elderly&tag=botplanet-20" rel="sponsored nofollow">See Chongker companion dogs on Amazon</a>
-          <a class="text-link" href="/robots/companion-robots/">Explore companion robots →</a>
+        <div class="rd-companion-note"><strong>Important:</strong> a companion robot can be comforting entertainment, but it is not a replacement for human contact, professional care or a living animal.</div>
+        <div class="rd-actions">
+          <a class="rd-button rd-button--primary" href="https://www.amazon.com/s?k=Chongker+Companion+Robot+Dog+Elderly&tag=botplanet-20" rel="sponsored nofollow">See Chongker companion dogs on Amazon</a>
+          <a class="rd-text-link" href="/robots/companion-robots/">Explore companion robots →</a>
         </div>
       </div>
-      <figure>
-        <img
-          src={IMAGE.senior}
-          width="1672"
-          height="941"
-          alt="Editorial illustration of an older adult warmly holding a lifelike plush robotic companion dog."
-          loading="lazy"
-          decoding="async"
-        />
+      <figure class="rd-media">
+        <img src={IMAGE.senior} width="1536" height="864" alt="An older adult warmly holding a lifelike plush robotic companion dog." loading="lazy" decoding="async" />
         <figcaption>Editorial illustration of the companion use case — not exact Chongker product photography.</figcaption>
       </figure>
     </section>
 
-    <section class="watchlist reveal" aria-labelledby="doge-title">
-      <div>
-        <p class="section-kicker">Worth watching</p>
-        <h2 id="doge-title">What about WowWee Dog-E?</h2>
-        <p>
-          Dog-E remains one of the better-known mainstream interactive robot dogs, with 200+ sounds and
-          reactions, games and app features. The genuine Amazon listing we checked was unavailable, so it
-          does not earn a main Christmas recommendation while buyers cannot actually order it.
-        </p>
-      </div>
-      <a class="button button--ghost" href="https://www.amazon.com/s?k=WowWee+Dog-E&tag=botplanet-20" rel="sponsored nofollow">Check if Dog-E is back</a>
+    <section class="rd-watch reveal" aria-labelledby="doge-title">
+      <div><p class="rd-kicker">Worth watching</p><h2 id="doge-title">What about WowWee Dog-E?</h2><p>Dog-E remains one of the better-known mainstream interactive robot dogs, with 200+ sounds and reactions, games and app features. The genuine Amazon listing we checked was unavailable, so it does not earn a main Christmas recommendation while buyers cannot actually order it.</p></div>
+      <a class="rd-button" href="https://www.amazon.com/s?k=WowWee+Dog-E&tag=botplanet-20" rel="sponsored nofollow">Check if Dog-E is back</a>
     </section>
 
-    <section class="warning-grid reveal">
-      <div class="section-head">
-        <p class="section-kicker">Before Christmas morning</p>
-        <h2>Five things robot-dog listings rarely make clear</h2>
-      </div>
-      <div class="warnings">
+    <section class="rd-section reveal" aria-labelledby="before-title">
+      <header class="rd-section__head"><p class="rd-kicker">Before Christmas morning</p><h2 id="before-title">Five things robot-dog listings rarely make clear</h2></header>
+      <div class="rd-warning-grid">
         <article><span>01</span><h3>Pet, toy, project or companion?</h3><p>Bittle can be brilliant for a tinkerer and disappointing for somebody who wanted affection. A plush senior companion dog solves a different problem again.</p></article>
         <article><span>02</span><h3>How much setup?</h3><p>Remote-control toys start quickly. Programmable quadrupeds may need software, Wi-Fi, coding tools and patience.</p></article>
         <article><span>03</span><h3>Does the fun survive without an app?</h3><p>Connected features are useful, but buyers should know what remains if the app, account or service changes.</p></article>
@@ -635,70 +508,32 @@ const schema = [
       </div>
     </section>
 
-    <section class="related reveal" aria-labelledby="related-title">
-      <div class="section-head">
-        <p class="section-kicker">Keep researching on BotPlanet</p>
-        <h2 id="related-title">Useful next pages without creating keyword cannibalisation</h2>
-        <p>
-          This guide owns the generic robot-dog buying intent. Brand-specific and category-wide questions
-          stay on the pages built to answer them.
-        </p>
-      </div>
-      <div class="related-grid">
-        <a href="/robots/companion-robots/">
-          <span>Category</span><strong>Companion robots & robot pets</strong><small>Broader robot-pet market, not another robot-dog list.</small>
-        </a>
-        <a href="/robots/educational-coding-robots/">
-          <span>Category</span><strong>Coding robots for kids</strong><small>For buyers whose real priority is learning to code.</small>
-        </a>
-        <a href="/robots/companion-robots/loona/">
-          <span>Product review</span><strong>Loona review</strong><small>Branded Loona intent stays with the dedicated review.</small>
-        </a>
-        <a href="/botmatch/">
-          <span>Finder</span><strong>Find My Robot</strong><small>Start from the job if a robot dog is not necessarily the answer.</small>
-        </a>
+    <section class="rd-section reveal" aria-labelledby="related-title">
+      <header class="rd-section__head"><p class="rd-kicker">Keep researching on BotPlanet</p><h2 id="related-title">Useful next pages without keyword cannibalisation</h2><p>This guide owns the generic robot-dog buying intent. Brand-specific and category-wide questions stay on the pages built to answer them.</p></header>
+      <div class="rd-related-grid">
+        <a href="/robots/companion-robots/"><span>Category</span><strong>Companion robots & robot pets</strong><small>Broader robot-pet market, not another robot-dog list.</small></a>
+        <a href="/robots/educational-coding-robots/"><span>Category</span><strong>Coding robots for kids</strong><small>For buyers whose real priority is learning to code.</small></a>
+        <a href="/robots/companion-robots/loona/"><span>Product review</span><strong>Loona review</strong><small>Branded Loona intent stays with the dedicated review.</small></a>
+        <a href="/botmatch/"><span>Finder</span><strong>Find My Robot</strong><small>Start from the job if a robot dog is not necessarily the answer.</small></a>
       </div>
     </section>
 
-    <section class="faq reveal">
-      <div class="section-head">
-        <p class="section-kicker">Robot dog FAQ</p>
-        <h2>Questions buyers ask before choosing</h2>
-      </div>
-      {faq.map((item) => (
-        <details>
-          <summary>{item.q}</summary>
-          <p>{item.a}</p>
-        </details>
-      ))}
+    <section class="rd-section rd-faq reveal" aria-labelledby="faq-title">
+      <header class="rd-section__head"><p class="rd-kicker">Robot dog FAQ</p><h2 id="faq-title">Questions buyers ask before choosing</h2></header>
+      {faq.map((item) => (<details><summary>{item.q}</summary><p>{item.a}</p></details>))}
     </section>
 
-    <section class="trust-row reveal" aria-label="Editorial and commercial policies">
-      <div>
-        <strong>Affiliate disclosure</strong>
-        <p>BotPlanet may earn a commission when you buy through qualifying Amazon links. That does not change the price you pay or which robot we recommend.</p>
-        <a href="/affiliate-disclosure/">Read the affiliate disclosure →</a>
-      </div>
-      <div>
-        <strong>How this guide was built</strong>
-        <p>We researched US search demand first, then grouped products by the buyer job instead of forcing toys, AI pets and developer platforms into one score.</p>
-        <a href="/review-methodology/">Read the review methodology →</a>
-      </div>
+    <section class="rd-trust reveal" aria-label="Editorial and commercial policies">
+      <div><strong>Affiliate disclosure</strong><p>BotPlanet may earn a commission when you buy through qualifying Amazon links. That does not change the price you pay or which robot we recommend.</p><a href="/affiliate-disclosure/">Read the affiliate disclosure →</a></div>
+      <div><strong>How this guide was built</strong><p>We researched US search demand first, then grouped products by the buyer job instead of forcing toys, AI pets and developer platforms into one score.</p><a href="/review-methodology/">Read the review methodology →</a></div>
     </section>
 
-    <footer class="method-note">
-      <p>
-        <strong>Last reviewed 27 September 2026.</strong> Prices and stock are dated observations, not
-        promises of future availability. We do not publish aggregate ratings or review scores we did not
-        earn ourselves. For the exact hardware, colour and included accessories, always check the retailer
-        listing before buying.
-      </p>
-    </footer>
+    <footer class="rd-method"><p><strong>Last reviewed 27 September 2026.</strong> Prices and stock are dated observations, not promises of future availability. We do not publish aggregate ratings or review scores we did not earn ourselves. For exact hardware, colour and included accessories, check the retailer listing before buying.</p></footer>
   </article>
 </Base>
 
 <style>
-  .dog-guide{max-width:1240px;margin:0 auto;padding:32px 24px 104px}.hero{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:42px;align-items:center;padding:44px 0 54px}.hero-copy{min-width:0}.eyebrow,.section-kicker{text-transform:uppercase;letter-spacing:.16em;font-size:.72rem;font-weight:850;color:#8fe6ff}.hero h1{margin:12px 0 20px;font-size:clamp(3rem,6.1vw,5.9rem);line-height:.94;letter-spacing:-.055em}.standfirst{max-width:760px;font-size:clamp(1.08rem,1.9vw,1.38rem);line-height:1.58;color:rgba(255,255,255,.78)}.byline{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px;color:rgba(255,255,255,.5);font-size:.84rem}.byline a{color:#d9f7ff;text-decoration:none}.commercial-note,.price-footnote{font-size:.78rem;line-height:1.55;color:rgba(255,255,255,.5)}.hero-actions,.pick-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}.button{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:0 19px;border-radius:999px;text-decoration:none;font-weight:850;font-size:.91rem;border:1px solid rgba(255,255,255,.18);transition:transform .18s ease,border-color .18s ease}.button:hover{transform:translateY(-1px);border-color:rgba(255,255,255,.45)}.button--primary{background:#fff;color:#050505}.button--ghost{color:#fff;background:rgba(255,255,255,.035)}.text-link{color:#bfefff;text-decoration:none;font-weight:780;align-self:center}.hero-visual,.wide-figure,.pick-media,.christmas-band figure,.price-story figure,.maker-section figure,.senior-section figure{margin:0;overflow:hidden;border:1px solid rgba(255,255,255,.13);border-radius:24px;background:#090c10;box-shadow:0 28px 60px rgba(0,0,0,.26)}.hero-visual img,.wide-figure img,.pick-media img,.christmas-band img,.price-story img,.maker-section img,.senior-section img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}.hero-visual figcaption,.wide-figure figcaption,.pick-media figcaption,.maker-section figcaption,.senior-section figcaption,.price-story figcaption{padding:10px 14px;color:rgba(255,255,255,.48);font-size:.72rem;line-height:1.45;background:rgba(0,0,0,.34)}.intent-nav{display:grid;grid-template-columns:repeat(4,1fr);overflow:hidden;border:1px solid rgba(255,255,255,.1);border-radius:20px;background:rgba(255,255,255,.02)}.intent-nav a{padding:20px 18px;color:#fff;text-decoration:none;border-right:1px solid rgba(255,255,255,.1)}.intent-nav a:last-child{border-right:0}.intent-nav strong,.intent-nav small{display:block}.intent-nav small{margin-top:4px;color:rgba(255,255,255,.46)}.christmas-band,.all-ages,.price-story,.maker-section,.senior-section{display:grid;grid-template-columns:1.05fr .95fr;gap:36px;align-items:center;padding:78px 0;border-bottom:1px solid rgba(255,255,255,.1)}.christmas-band>div,.section-copy,.price-story>div,.maker-copy,.senior-copy{max-width:650px}.christmas-band h2,.all-ages h2,.price-story h2,.maker-section h2,.senior-section h2,.section-head h2{margin:8px 0 16px;font-size:clamp(2rem,4.3vw,4rem);line-height:1;letter-spacing:-.04em}.christmas-band p,.all-ages p,.price-story p,.maker-section p,.senior-section p,.section-head>p,.method-note p,.trust-row p,.watchlist p{color:rgba(255,255,255,.68);line-height:1.7}.christmas-band figure{order:2}.christmas-band>div{order:1}.audience-chips,.maker-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}.audience-chips a{padding:8px 12px;border-radius:999px;border:1px solid rgba(143,230,255,.25);color:#c9f3ff;text-decoration:none;font-weight:760}.matrix{padding:74px 0;border-bottom:1px solid rgba(255,255,255,.1)}.matrix--top{padding-top:68px}.section-head{max-width:850px;margin-bottom:30px}.table-wrap{overflow-x:auto;border:1px solid rgba(255,255,255,.1);border-radius:20px}table{width:100%;min-width:820px;border-collapse:collapse;background:rgba(255,255,255,.02)}th,td{padding:17px;text-align:left;vertical-align:top;border-bottom:1px solid rgba(255,255,255,.08)}th{color:#8fe6ff;font-size:.72rem;text-transform:uppercase;letter-spacing:.08em}td{color:rgba(255,255,255,.7);line-height:1.5}tbody tr:last-child td{border-bottom:0}td a{color:#fff;text-decoration:none}.price-story ul{margin:22px 0 0;padding-left:20px;color:rgba(255,255,255,.67);line-height:1.72}.picks{padding:78px 0 20px}.pick{display:grid;grid-template-columns:minmax(0,.86fr) minmax(0,1.14fr);gap:34px;align-items:center;padding:46px 0;border-top:1px solid rgba(255,255,255,.11);scroll-margin-top:72px}.pick--reverse .pick-media{order:2}.pick--reverse .pick-content{order:1}.pick--featured{margin-top:28px;padding:30px;border:1px solid rgba(143,230,255,.24);border-radius:28px;background:radial-gradient(circle at 0 0,rgba(143,230,255,.08),transparent 42%),rgba(255,255,255,.018)}.pick:not(:has(.pick-media)){grid-template-columns:1fr}.pick-content{min-width:0}.pick-topline{display:flex;gap:9px;align-items:center;flex-wrap:wrap}.pick-number{font-size:.72rem;font-weight:900;color:rgba(255,255,255,.36)}.award,.status{display:inline-flex;padding:7px 10px;border-radius:999px;font-size:.68rem;font-weight:850;text-transform:uppercase;letter-spacing:.07em;border:1px solid rgba(255,255,255,.14)}.award{color:#8fe6ff;border-color:rgba(143,230,255,.3)}.status{color:#c4ffd9;border-color:rgba(145,255,187,.22)}.pick h3{margin:15px 0 10px;font-size:clamp(1.9rem,3.8vw,3.35rem);letter-spacing:-.04em}.verdict{max-width:840px;font-size:1.04rem;line-height:1.72;color:rgba(255,255,255,.78)}.fact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:22px 0}.fact-grid>div{padding:15px;border-radius:15px;border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.028)}.fact-grid span,.fact-grid small{display:block;color:rgba(255,255,255,.48);font-size:.74rem}.fact-grid strong{display:block;margin:5px 0 3px;font-size:1.05rem}.pros-cons{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:20px}.pros-cons>div,.editor-note,.companion-note{padding:18px;border-radius:17px;background:rgba(255,255,255,.034);border:1px solid rgba(255,255,255,.09)}.pros-cons ul{margin:9px 0 0;padding-left:19px;color:rgba(255,255,255,.64);line-height:1.64}.editor-note{max-width:830px;margin-top:18px}.editor-note p{margin-bottom:0;color:rgba(255,255,255,.59);line-height:1.62}.maker-links{display:grid;gap:10px}.maker-links a{display:flex;justify-content:space-between;gap:18px;padding:13px 15px;border-radius:15px;border:1px solid rgba(255,255,255,.1);color:#fff;text-decoration:none;background:rgba(255,255,255,.025)}.maker-links span{color:rgba(255,255,255,.5)}.senior-section{grid-template-columns:1.08fr .92fr}.fact-grid--senior{margin-top:24px}.companion-note{margin-top:18px;color:rgba(255,255,255,.66);line-height:1.6}.watchlist{display:flex;align-items:center;justify-content:space-between;gap:30px;padding:32px;margin:70px 0;border:1px solid rgba(255,255,255,.1);border-radius:22px;background:rgba(255,255,255,.025)}.watchlist>div{max-width:800px}.watchlist h2{margin:8px 0 10px;font-size:clamp(1.8rem,3vw,2.7rem);letter-spacing:-.04em}.watchlist .button{flex:0 0 auto}.warning-grid{padding:72px 0}.warnings{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.warnings article{padding:23px;border-radius:19px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.025)}.warnings span{color:#8fe6ff;font-size:.7rem;font-weight:800}.warnings h3{margin:12px 0 8px;font-size:1.18rem}.warnings p{margin:0;color:rgba(255,255,255,.59);line-height:1.62}.related{padding:72px 0;border-top:1px solid rgba(255,255,255,.1)}.related-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.related-grid a{display:block;padding:21px;border:1px solid rgba(255,255,255,.1);border-radius:18px;color:#fff;text-decoration:none;background:rgba(255,255,255,.024);transition:transform .18s ease,border-color .18s ease}.related-grid a:hover{transform:translateY(-2px);border-color:rgba(143,230,255,.36)}.related-grid span,.related-grid small{display:block}.related-grid span{color:#8fe6ff;font-size:.7rem;text-transform:uppercase;letter-spacing:.1em}.related-grid strong{display:block;margin:7px 0 6px;font-size:1.15rem}.related-grid small{color:rgba(255,255,255,.52);line-height:1.45}.faq{padding:65px 0;border-top:1px solid rgba(255,255,255,.1)}details{padding:19px 0;border-top:1px solid rgba(255,255,255,.1)}details:last-child{border-bottom:1px solid rgba(255,255,255,.1)}summary{cursor:pointer;font-weight:800;font-size:1.06rem}details p{max-width:880px;color:rgba(255,255,255,.63);line-height:1.7}.trust-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}.trust-row>div{padding:22px;border:1px solid rgba(255,255,255,.1);border-radius:18px;background:rgba(255,255,255,.024)}.trust-row p{margin:.6rem 0}.trust-row a{color:#bfefff;text-decoration:none;font-weight:750}.method-note{max-width:850px;padding-top:28px;color:rgba(255,255,255,.6)}
-  @media(max-width:900px){.dog-guide{padding-inline:18px}.hero,.christmas-band,.all-ages,.price-story,.maker-section,.senior-section,.pick{grid-template-columns:1fr}.hero-visual{order:-1}.christmas-band figure{order:0}.christmas-band>div{order:1}.pick--reverse .pick-media,.pick--reverse .pick-content{order:initial}.intent-nav{grid-template-columns:1fr 1fr}.intent-nav a:nth-child(2){border-right:0}.intent-nav a:nth-child(-n+2){border-bottom:1px solid rgba(255,255,255,.1)}.watchlist{align-items:stretch;flex-direction:column}.watchlist .button{width:100%}}
-  @media(max-width:620px){.dog-guide{padding-top:18px}.hero{gap:26px;padding-top:20px}.hero h1{font-size:clamp(2.65rem,13vw,4rem)}.hero-actions .button,.pick-actions .button{width:100%}.intent-nav{grid-template-columns:1fr}.intent-nav a{border-right:0!important;border-bottom:1px solid rgba(255,255,255,.1)}.intent-nav a:last-child{border-bottom:0}.fact-grid,.pros-cons,.warnings,.related-grid,.trust-row{grid-template-columns:1fr}.pick--featured{padding:18px}.table-wrap{border-radius:14px}.christmas-band,.all-ages,.price-story,.maker-section,.senior-section{padding:56px 0}.maker-links a{flex-direction:column;gap:4px}}
+  .rd-guide{max-width:1240px;margin:0 auto;padding:26px 24px 104px;color:#f7f8fa}.rd-guide *{box-sizing:border-box}.rd-guide [id]{scroll-margin-top:110px}.rd-kicker{margin:0 0 10px;color:#8fe6ff;font-size:.72rem;font-weight:850;letter-spacing:.16em;text-transform:uppercase}.rd-hero{display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);gap:42px;align-items:center;padding:38px 0 54px}.rd-hero h1{margin:0;font-size:clamp(3rem,6.1vw,5.8rem);line-height:.94;letter-spacing:-.055em}.rd-standfirst{max-width:760px;margin:20px 0 0;color:rgba(255,255,255,.78);font-size:clamp(1.08rem,1.9vw,1.38rem);line-height:1.6}.rd-byline{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;color:rgba(255,255,255,.52);font-size:.84rem}.rd-byline a,.rd-text-link{color:#c9f3ff;text-decoration:none;font-weight:760}.rd-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}.rd-button{display:inline-flex;min-height:46px;align-items:center;justify-content:center;padding:0 18px;border:1px solid rgba(255,255,255,.18);border-radius:999px;background:rgba(255,255,255,.035);color:#fff;text-decoration:none;font-size:.9rem;font-weight:850}.rd-button--primary{background:#fff;color:#050607}.rd-note{margin-top:15px;color:rgba(255,255,255,.48);font-size:.78rem;line-height:1.55}.rd-media{margin:0;overflow:hidden;border:1px solid rgba(255,255,255,.13);border-radius:24px;background:#090c10;box-shadow:0 28px 60px rgba(0,0,0,.28)}.rd-media img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}.rd-media figcaption{padding:11px 14px;background:rgba(0,0,0,.42);color:rgba(255,255,255,.5);font-size:.73rem;line-height:1.45}.rd-intents{display:grid;grid-template-columns:repeat(4,1fr);overflow:hidden;border:1px solid rgba(255,255,255,.1);border-radius:20px;background:rgba(255,255,255,.018)}.rd-intents a{padding:20px 18px;border-right:1px solid rgba(255,255,255,.1);color:#fff;text-decoration:none}.rd-intents a:last-child{border-right:0}.rd-intents strong,.rd-intents small{display:block}.rd-intents small{margin-top:5px;color:rgba(255,255,255,.46)}.rd-split{display:grid;grid-template-columns:1fr 1fr;gap:38px;align-items:center;padding:76px 0;border-bottom:1px solid rgba(255,255,255,.1)}.rd-split--image-first .rd-media{order:-1}.rd-split__copy{max-width:650px}.rd-split h2,.rd-section h2,.rd-watch h2{margin:0;font-size:clamp(2rem,4.3vw,4rem);line-height:1;letter-spacing:-.04em}.rd-split__copy>p:not(.rd-kicker),.rd-section__head>p:not(.rd-kicker),.rd-watch p,.rd-method p,.rd-trust p{color:rgba(255,255,255,.68);line-height:1.72}.rd-chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:20px}.rd-chips a{padding:8px 12px;border:1px solid rgba(143,230,255,.24);border-radius:999px;color:#c9f3ff;text-decoration:none;font-weight:760}.rd-section{padding:72px 0;border-bottom:1px solid rgba(255,255,255,.1)}.rd-section__head{max-width:850px;margin-bottom:28px}.rd-compare-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.rd-compare-card{min-width:0;padding:20px;border:1px solid rgba(255,255,255,.1);border-radius:18px;background:rgba(255,255,255,.025)}.rd-compare-card__top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.rd-compare-card__top a{color:#fff;text-decoration:none;font-size:1.15rem;font-weight:850}.rd-compare-card__top span{flex:0 0 auto;color:#c4ffd9;font-size:.78rem;font-weight:800;text-align:right}.rd-compare-card>strong{display:block;margin-top:18px;color:#8fe6ff}.rd-compare-card p{margin:7px 0 0;color:rgba(255,255,255,.58);line-height:1.55}.rd-tier-list{display:grid;gap:10px;margin:22px 0 0;padding:0;list-style:none}.rd-tier-list li{display:grid;grid-template-columns:110px 1fr;gap:12px;padding-top:10px;border-top:1px solid rgba(255,255,255,.08)}.rd-tier-list span{color:rgba(255,255,255,.6);line-height:1.5}.rd-picks{padding-bottom:20px}.rd-pick{display:grid;grid-template-columns:minmax(0,.86fr) minmax(0,1.14fr);gap:34px;align-items:center;padding:46px 0;border-top:1px solid rgba(255,255,255,.11)}.rd-pick--reverse .rd-pick__media{order:2}.rd-pick--reverse .rd-pick__content{order:1}.rd-pick--featured{margin-top:26px;padding:30px;border:1px solid rgba(143,230,255,.24);border-radius:28px;background:radial-gradient(circle at 0 0,rgba(143,230,255,.08),transparent 42%),rgba(255,255,255,.018)}.rd-pick:not(:has(.rd-pick__media)){grid-template-columns:1fr}.rd-pick__content{min-width:0}.rd-pick__topline{display:flex;flex-wrap:wrap;gap:9px;align-items:center}.rd-number{color:rgba(255,255,255,.38);font-size:.72rem;font-weight:900}.rd-award,.rd-status{display:inline-flex;padding:7px 10px;border:1px solid rgba(255,255,255,.14);border-radius:999px;font-size:.68rem;font-weight:850;letter-spacing:.07em;text-transform:uppercase}.rd-award{border-color:rgba(143,230,255,.3);color:#8fe6ff}.rd-status{border-color:rgba(145,255,187,.22);color:#c4ffd9}.rd-pick h3{margin:15px 0 10px;font-size:clamp(1.9rem,3.8vw,3.35rem);letter-spacing:-.04em}.rd-verdict{max-width:840px;margin:0;background:transparent!important;color:rgba(255,255,255,.8)!important;font-size:1.04rem;line-height:1.72}.rd-facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:22px 0}.rd-facts>div{padding:15px;border:1px solid rgba(255,255,255,.09);border-radius:15px;background:rgba(255,255,255,.028)}.rd-facts span,.rd-facts small{display:block;color:rgba(255,255,255,.48);font-size:.74rem}.rd-facts strong{display:block;margin:5px 0 3px;font-size:1.05rem}.rd-pros-cons{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:20px}.rd-pros-cons>div,.rd-editor-note,.rd-companion-note{padding:18px;border:1px solid rgba(255,255,255,.09);border-radius:17px;background:rgba(255,255,255,.034)}.rd-pros-cons ul{margin:9px 0 0;padding-left:19px;color:rgba(255,255,255,.64);line-height:1.64}.rd-editor-note{max-width:830px;margin-top:18px}.rd-editor-note p{margin-bottom:0;color:rgba(255,255,255,.59);line-height:1.62}.rd-maker-grid{display:grid;gap:9px;margin-top:20px}.rd-maker-grid a{display:flex;justify-content:space-between;gap:15px;padding:13px 15px;border:1px solid rgba(255,255,255,.1);border-radius:15px;background:rgba(255,255,255,.025);color:#fff;text-decoration:none}.rd-maker-grid span{color:rgba(255,255,255,.52)}.rd-program-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.rd-program-grid article{padding:22px;border:1px solid rgba(255,255,255,.1);border-radius:18px;background:rgba(255,255,255,.025)}.rd-program-grid span{color:#8fe6ff;font-size:.7rem;font-weight:850;letter-spacing:.11em;text-transform:uppercase}.rd-program-grid h3{margin:9px 0 6px;font-size:1.55rem}.rd-program-grid>article>strong{color:#c4ffd9}.rd-program-grid p{color:rgba(255,255,255,.58);line-height:1.6}.rd-facts--stack{grid-template-columns:1fr}.rd-companion-note{margin-top:17px;color:rgba(255,255,255,.66);line-height:1.6}.rd-watch{display:flex;align-items:center;justify-content:space-between;gap:30px;margin:68px 0;padding:30px;border:1px solid rgba(255,255,255,.1);border-radius:22px;background:rgba(255,255,255,.025)}.rd-watch>div{max-width:800px}.rd-watch h2{font-size:clamp(1.8rem,3vw,2.7rem)}.rd-watch .rd-button{flex:0 0 auto}.rd-warning-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.rd-warning-grid article{padding:22px;border:1px solid rgba(255,255,255,.1);border-radius:18px;background:rgba(255,255,255,.025)}.rd-warning-grid span{color:#8fe6ff;font-size:.7rem;font-weight:800}.rd-warning-grid h3{margin:11px 0 7px;font-size:1.18rem}.rd-warning-grid p{margin:0;color:rgba(255,255,255,.59);line-height:1.62}.rd-related-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.rd-related-grid a{display:block;padding:20px;border:1px solid rgba(255,255,255,.1);border-radius:18px;background:rgba(255,255,255,.024);color:#fff;text-decoration:none}.rd-related-grid span,.rd-related-grid small{display:block}.rd-related-grid span{color:#8fe6ff;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase}.rd-related-grid strong{display:block;margin:7px 0 6px;font-size:1.15rem}.rd-related-grid small{color:rgba(255,255,255,.52);line-height:1.45}.rd-faq details{padding:19px 0;border-top:1px solid rgba(255,255,255,.1)}.rd-faq details:last-child{border-bottom:1px solid rgba(255,255,255,.1)}.rd-faq summary{cursor:pointer;font-size:1.06rem;font-weight:800}.rd-faq details p{max-width:880px;color:rgba(255,255,255,.63);line-height:1.7}.rd-trust{display:grid;grid-template-columns:1fr 1fr;gap:13px;padding-top:64px}.rd-trust>div{padding:22px;border:1px solid rgba(255,255,255,.1);border-radius:18px;background:rgba(255,255,255,.024)}.rd-trust p{margin:.6rem 0}.rd-trust a{color:#bfefff;text-decoration:none;font-weight:750}.rd-method{max-width:850px;padding-top:28px}.rd-method p{color:rgba(255,255,255,.58);line-height:1.65}
+  @media(max-width:900px){.rd-guide{padding-inline:18px}.rd-hero,.rd-split,.rd-pick{grid-template-columns:1fr}.rd-hero__media{order:-1}.rd-split--image-first .rd-media{order:-1}.rd-pick--reverse .rd-pick__media,.rd-pick--reverse .rd-pick__content{order:initial}.rd-intents{grid-template-columns:1fr 1fr}.rd-intents a:nth-child(2){border-right:0}.rd-intents a:nth-child(-n+2){border-bottom:1px solid rgba(255,255,255,.1)}.rd-compare-grid,.rd-program-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.rd-watch{align-items:stretch;flex-direction:column}.rd-watch .rd-button{width:100%}}
+  @media(max-width:620px){.rd-guide{padding-top:14px}.rd-hero{gap:24px;padding-top:14px}.rd-hero h1{font-size:clamp(2.65rem,13vw,4rem)}.rd-actions .rd-button{width:100%}.rd-intents{grid-template-columns:1fr}.rd-intents a{border-right:0!important;border-bottom:1px solid rgba(255,255,255,.1)}.rd-intents a:last-child{border-bottom:0}.rd-split,.rd-section{padding:54px 0}.rd-compare-grid,.rd-program-grid,.rd-facts,.rd-pros-cons,.rd-warning-grid,.rd-related-grid,.rd-trust{grid-template-columns:1fr}.rd-pick{grid-template-columns:1fr;gap:24px;padding:38px 0}.rd-pick--featured{padding:17px}.rd-pick__topline{align-items:flex-start}.rd-award,.rd-status{line-height:1.35}.rd-maker-grid a{flex-direction:column;gap:4px}.rd-tier-list li{grid-template-columns:1fr;gap:2px}.rd-compare-card__top{display:grid;grid-template-columns:1fr}.rd-compare-card__top span{text-align:left}.rd-watch{margin:54px 0}.rd-media{border-radius:20px}}
 </style>
