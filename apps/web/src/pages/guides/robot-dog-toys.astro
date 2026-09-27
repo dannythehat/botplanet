@@ -1,6 +1,5 @@
 ---
 import Base from "../../layouts/Base.astro";
-import "../../styles/robot-dog-guide.css";
 import {
   articleSchema,
   faqPageSchema,
@@ -13,7 +12,7 @@ const PATH = "/guides/robot-dog-toys/";
 const SEO_TITLE = "Best Robot Dog Toys & AI Robot Dogs 2026 | BotPlanet";
 const H1 = "Best robot dog toys & AI robot dogs in 2026";
 const DESCRIPTION =
-  "Compare the best robot dog toys, AI robot pets and programmable quadrupeds in 2026. Evidence-led picks for children, families, programmers, robotics enthusiasts and older adults.";
+  "Compare the best robot dog toys, AI robot pets and programmable quadrupeds in 2026, with clear picks for children, families, coders, robotics enthusiasts and older adults.";
 
 const MEDIA = "/images/guides/robot-dog-toys/";
 const IMAGE = {
@@ -31,382 +30,196 @@ const crumbs = [
   { name: "Robot Dog Toys", path: PATH },
 ];
 
-const products = [
+const picks = [
   {
     id: "ruko",
-    number: "01",
-    award: "Best robot dog toy for kids",
-    name: "Ruko 18011 Robot Dog",
-    status: "Research-led pick",
+    badge: "Best for kids",
+    name: "Ruko 18011",
     image: IMAGE.ruko,
-    imageAlt: "A child playing with a black-and-gold interactive robot dog in a home.",
-    imageCaption: "Editorial lifestyle image. Check the retailer for the exact Ruko colour and included accessories.",
-    verdict:
-      "Ruko 18011 is the easiest recommendation when the real brief is simple: a child wants a robot dog that is fun immediately. It uses remote and gesture control, can perform programmed action sequences and does not ask the buyer to learn a robotics stack before the present becomes enjoyable.",
-    facts: [
-      ["Official price checked", "$69.99", "Ruko US store on 27 Sep 2026"],
-      ["Control", "Remote + gesture", "simple physical interaction"],
-      ["Programming", "Action sequences", "toy-level, not a coding platform"],
-      ["Best fit", "Child / easy gift", "low setup burden"],
+    imageAlt: "A child playing with a robot dog at home.",
+    price: "$69.99 official price when checked",
+    bestFor: "Children who want a fun robot dog straight out of the box",
+    summary:
+      "Ruko is the easiest recommendation for a child who wants a robot dog, not a robotics project. It is remote controlled, responds to gestures and can run simple programmed action sequences without needing a coding environment.",
+    keyFacts: [
+      "Remote and gesture control",
+      "Simple programmable action sequences",
+      "Low setup burden",
     ],
-    evidence: [
-      "Ruko manufacturer page checked",
-      "Amazon US listing snapshot checked",
-      "Variant and seller differences treated separately",
-    ],
-    verified: [
-      "Ruko markets the 18011 as an interactive robot dog with gesture control, expressive LED behaviour and programmable play.",
-      "The manufacturer's own US price and Amazon prices do not always match, so this guide identifies the source rather than pretending there is one universal price.",
-      "This is a toy-first recommendation. It is not being ranked against Bittle or PuppyPi as if they do the same job.",
-    ],
-    caution:
-      "Retailer bundles, colours and battery claims can differ. Check the exact listing before buying rather than carrying a number from one variant to another.",
-    closest:
-      "Choose Loona instead when recognition, autonomous behaviour and an AI-pet personality are worth several hundred dollars more. Choose Bittle only when the recipient genuinely wants to code and tinker.",
-    pros: [
-      "Very low setup compared with programmable quadrupeds",
-      "Remote and gesture control are easy to understand",
-      "Programmable play without requiring a development environment",
-      "Price sits in normal gift territory rather than robotics-lab territory",
-    ],
-    cons: [
-      "The recipient wants real Python, C++ or ROS work",
-      "You expect face recognition or autonomous navigation",
-      "You want a long-term open hardware platform",
+    watch: [
+      "It is a toy first, so do not expect Loona-style recognition or autonomous behaviour.",
+      "Retailer bundles and prices can differ from Ruko's own store.",
     ],
     sourceHref: "https://www.ruko.net/products/ruko-18011-rc-robot-dog-toy",
-    sourceLabel: "Ruko manufacturer source",
-    amazonHref: "https://www.amazon.com/s?k=Ruko+18011+Robot+Dog+Toy&tag=botplanet-20",
-    amazonLabel: "Check Ruko 18011 on Amazon",
+    sourceLabel: "Ruko product page",
+    buyHref: "https://www.amazon.com/s?k=Ruko+18011+Robot+Dog+Toy&tag=botplanet-20",
+    buyLabel: "Check Ruko 18011 on Amazon",
   },
   {
     id: "loona",
-    number: "02",
-    award: "Best premium AI robot pet",
+    badge: "Best AI pet",
     name: "Loona Petbot",
-    status: "Research-led pick",
     image: IMAGE.loona,
-    imageAlt: "A compact premium AI companion robot pet in a contemporary living room.",
-    imageCaption: "Editorial lifestyle image. Check the current Loona bundle for the dock, game props and exact accessories.",
-    verdict:
-      "Loona is the strongest fit here for a normal home that wants an expressive AI companion rather than a remote-control toy or an engineering project. KEYi positions it around AI conversation, face and gesture recognition, autonomous indoor behaviour and a charging dock, which puts it in a different buying decision from Ruko.",
-    facts: [
-      ["Official bundle seen", "$399.90+", "manufacturer pricing can change"],
-      ["Interaction", "Voice + recognition", "face and gesture features"],
-      ["Home use", "Self-charging dock", "connected AI companion"],
-      ["Best fit", "Premium AI pet", "family / enthusiast home"],
+    imageAlt: "A compact AI robot pet in a family home.",
+    price: "$399.90+ official bundle when checked",
+    bestFor: "Families who want an expressive AI companion rather than a toy",
+    summary:
+      "Loona is the best fit here if the point is personality. It combines movement, voice interaction, face and gesture recognition, games and a charging dock, so it feels much more like a home companion than a remote-control toy.",
+    keyFacts: [
+      "Voice, face and gesture recognition",
+      "Autonomous movement and charging dock",
+      "Connected app and software features",
     ],
-    evidence: [
-      "KEYi manufacturer page checked",
-      "Amazon US listing snapshot checked",
-      "BotPlanet's dedicated Loona review cross-checked",
-    ],
-    verified: [
-      "KEYi describes Loona as an AI pet with conversational features, face and gesture recognition, games and remote-monitoring functions.",
-      "The charging dock is a meaningful difference from simple rechargeable toys because Loona is designed to live in the home rather than be taken out only for a short play session.",
-      "Manufacturer and Amazon bundle pricing can differ, so this page separates official and retailer observations.",
-    ],
-    caution:
-      "Loona depends more heavily on software, accounts and connected services than a simple toy dog. Buyers should care about future app support and cloud-dependent features, not only what the hardware can do today.",
-    closest:
-      "Choose Ruko if the buyer is a child who mainly wants immediate play. Choose Joy for All if the real need is soft, familiar companionship with less technical complexity.",
-    pros: [
-      "Recognition and expressive behaviour make it feel more companion-like",
-      "Charging dock supports everyday home use",
-      "Conversation and connected features go far beyond a basic toy",
-      "A dedicated BotPlanet review already exists for deeper research",
-    ],
-    cons: [
-      "You want a cheap gift",
-      "You want open-source hardware or a coding project",
-      "You actively avoid cloud- or app-dependent products",
+    watch: [
+      "Some of its value depends on software, accounts and connected services continuing to work well.",
+      "It costs several times more than a normal children's robot toy.",
     ],
     sourceHref: "https://keyirobot.com/en-us/products/petbot",
-    sourceLabel: "KEYi manufacturer source",
-    amazonHref: "/go/comp-loona-amazon",
-    amazonLabel: "Check Loona price on Amazon",
+    sourceLabel: "KEYi Loona product page",
+    buyHref: "/go/comp-loona-amazon",
+    buyLabel: "Check Loona on Amazon",
     internalHref: "/robots/companion-robots/loona/",
-    internalLabel: "Read the full Loona review",
+    internalLabel: "Read our full Loona review",
   },
   {
     id: "mechdog",
-    number: "03",
-    award: "Best value programmable robot dog",
+    badge: "Best coding value",
     name: "Hiwonder MechDog",
-    status: "Research-led pick",
     image: IMAGE.mechdog,
-    imageAlt: "A yellow programmable quadruped robot dog in a modern robotics workspace.",
-    imageCaption: "Editorial programming image. Camera, sensors and accessories vary by MechDog kit.",
-    verdict:
-      "MechDog is where this guide leaves toy programming and becomes a genuine robotics purchase. Hiwonder's platform is built around an ESP32 controller and supports Scratch, Python and Arduino, with AI-camera options and sensor expansion. That makes it the most approachable middle ground before the price and complexity jump to PuppyPi.",
-    facts: [
-      ["Retailer snapshot", "~$299.99", "standard-kit pricing observed"],
-      ["Controller", "ESP32 family", "embedded robotics platform"],
-      ["Coding", "Scratch / Python / Arduino", "multiple learning paths"],
-      ["Best fit", "Learning + projects", "more build than pet"],
+    imageAlt: "A programmable yellow quadruped robot on a coding desk.",
+    price: "About $299.99 retailer snapshot when checked",
+    bestFor: "Learners who want real programming without jumping straight into ROS",
+    summary:
+      "MechDog is the middle ground between toy programming and advanced robotics. Hiwonder supports Scratch, Python and Arduino, with camera and sensor options on some kits. That gives it far more learning depth than a toy without making every project a Linux-and-ROS exercise.",
+    keyFacts: [
+      "Scratch, Python and Arduino",
+      "ESP32-based platform",
+      "Camera and sensor kit options",
     ],
-    evidence: [
-      "Hiwonder manufacturer page checked",
-      "Amazon US listing snapshot checked",
-      "Kit differences kept visible",
-    ],
-    verified: [
-      "Hiwonder describes MechDog as a programmable AI robot dog built around ESP32 hardware.",
-      "The platform supports Scratch, Python and Arduino rather than only canned actions.",
-      "Camera and sensor capability depends on the selected kit, so this guide does not merge every configuration into one imaginary specification.",
-    ],
-    caution:
-      "Do not buy a higher MechDog kit because the feature list looks impressive. The value appears only if the recipient will actually use the camera, sensors or programming paths.",
-    closest:
-      "Choose Bittle X V2 when open-source hardware tinkering and building the robot are the attraction. Choose PuppyPi only when ROS, Raspberry Pi compute and higher-end autonomy are requirements.",
-    pros: [
-      "Three useful coding routes for different experience levels",
-      "Real embedded robotics rather than toy-only sequencing",
-      "AI-camera and sensor options create room to grow",
-      "Lower technical and price barrier than PuppyPi",
-    ],
-    cons: [
-      "The recipient wants a cuddly or social companion",
-      "Setup and coding will feel like homework",
-      "You specifically need ROS, SLAM or LiDAR workflows",
+    watch: [
+      "The exact hardware changes by kit, so compare the box contents rather than just the MechDog name.",
+      "It is a programming platform, not a cuddly or social companion.",
     ],
     sourceHref: "https://www.hiwonder.com/products/mechdog",
-    sourceLabel: "Hiwonder manufacturer source",
-    amazonHref: "https://www.amazon.com/s?k=Hiwonder+MechDog+Robot+Dog&tag=botplanet-20",
-    amazonLabel: "Check MechDog on Amazon",
+    sourceLabel: "Hiwonder MechDog product page",
+    buyHref: "https://www.amazon.com/s?k=Hiwonder+MechDog+Robot+Dog&tag=botplanet-20",
+    buyLabel: "Check MechDog on Amazon",
     internalHref: "/robots/educational-coding-robots/",
     internalLabel: "Explore coding robots",
   },
   {
     id: "bittle",
-    number: "04",
-    award: "Best open-source robot dog",
+    badge: "Best open-source pick",
     name: "Petoi Bittle X V2",
-    status: "Research-led pick",
     image: IMAGE.bittle,
-    imageAlt: "A yellow-and-black open-source quadruped robot dog on a maker workbench.",
-    imageCaption: "Editorial maker image. Construction, servo and pre-assembled Bittle variants differ.",
-    verdict:
-      "Bittle X V2 is the better choice when understanding and changing the robot is the point of the purchase. Petoi sells Bittle as an open-source programmable quadruped and supports block coding, Python and C++ alongside built-in actions and voice control. It rewards tinkering more than polished pet behaviour.",
-    facts: [
-      ["Official range", "From ~$279 MSRP", "model and kit dependent"],
-      ["Programming", "Blocks / Python / C++", "open-source orientation"],
-      ["Behaviour", "35+ actions", "voice commands on Bittle X"],
-      ["Best fit", "Hardware tinkering", "students / hobbyists"],
-    ],
-    evidence: [
-      "Petoi manufacturer page checked",
-      "Petoi documentation checked",
-      "Amazon variants treated as separate configurations",
-    ],
-    verified: [
-      "Petoi describes Bittle X as a programmable robot dog for building, coding and experimentation rather than a sealed toy.",
-      "Petoi's documentation describes more than 35 predefined actions and voice-command behaviour.",
-      "Pricing changes materially between kits, servo sets and pre-assembled versions, so a single headline price would be misleading.",
-    ],
-    caution:
-      "Do not assume every Bittle configuration includes the same servos, accessories or expansion hardware. Compare the exact kit contents before purchase.",
-    closest:
-      "Choose MechDog for a broader ready-made learning path with camera/sensor kits. Choose PuppyPi when the project genuinely requires Raspberry Pi, ROS or mapping.",
-    pros: [
+    imageAlt: "A yellow-and-black programmable robot dog on a maker workbench.",
+    price: "From about $279 MSRP, depending on kit",
+    bestFor: "Hobbyists who want to build, change and understand the robot",
+    summary:
+      "Bittle X V2 makes sense when tinkering is the attraction. Petoi's platform supports block coding, Python and C++, and the robot can be bought in configurations that put more emphasis on assembly, servos and hardware experimentation than polished pet behaviour.",
+    keyFacts: [
+      "Blocks, Python and C++",
       "Open-source orientation",
-      "Programming extends beyond block coding",
-      "Construction option adds mechanical learning",
-      "Compact platform is practical for desk and classroom experimentation",
+      "Build and prebuilt configurations",
     ],
-    cons: [
-      "You want a polished AI pet personality",
-      "You want zero assembly or setup",
-      "Your main goal is autonomous mapping and navigation",
+    watch: [
+      "Servos, accessories and assembly level vary by configuration.",
+      "Buy Loona instead if the recipient wants companionship rather than a maker project.",
     ],
     sourceHref: "https://www.petoi.com/products/petoi-robot-dog-bittle-x-voice-controlled",
-    sourceLabel: "Petoi manufacturer source",
-    amazonHref: "https://www.amazon.com/s?k=Petoi+Bittle+X+V2&tag=botplanet-20",
-    amazonLabel: "Check Bittle X V2 on Amazon",
+    sourceLabel: "Petoi Bittle X product page",
+    buyHref: "https://www.amazon.com/s?k=Petoi+Bittle+X+V2&tag=botplanet-20",
+    buyLabel: "Check Bittle X V2 on Amazon",
     internalHref: "/robots/educational-coding-robots/",
     internalLabel: "Explore coding robots",
   },
   {
     id: "puppypi",
-    number: "05",
-    award: "Best advanced robotics platform",
+    badge: "Best advanced platform",
     name: "Hiwonder PuppyPi",
-    status: "Research-led pick",
     image: IMAGE.puppypi,
-    imageAlt: "An advanced black AI quadruped robot dog with sensing hardware in a robotics lab.",
-    imageCaption: "Editorial laboratory image. Exact PuppyPi compute and sensors depend on the configuration.",
-    verdict:
-      "PuppyPi is the advanced platform in this guide, not the 'better version' of a toy dog. Hiwonder builds it around Raspberry Pi 5, ROS1/ROS2, AI vision and eight coreless servos, with higher configurations supporting LiDAR and mapping. Buy it for development capability, not because the specification list is longer.",
-    facts: [
-      ["Official configs", "From ~$589.99", "configuration dependent"],
-      ["Compute", "Raspberry Pi 5", "higher-level development"],
-      ["Software", "ROS1 / ROS2 + Python", "open robotics workflow"],
-      ["Best fit", "Advanced development", "vision / navigation / research"],
+    imageAlt: "An advanced quadruped robot with sensing hardware in a robotics lab.",
+    price: "From about $589.99, configuration dependent",
+    bestFor: "Developers who actually need ROS, Raspberry Pi and computer vision",
+    summary:
+      "PuppyPi belongs in a different class from a toy dog. It is built around Raspberry Pi 5, supports ROS1/ROS2 and Python, and higher configurations add more advanced sensing and mapping hardware. Buy it for projects, not because it has the longest specification sheet.",
+    keyFacts: [
+      "Raspberry Pi 5",
+      "ROS1 / ROS2 and Python",
+      "AI vision; LiDAR / SLAM on selected kits",
     ],
-    evidence: [
-      "Hiwonder manufacturer page checked",
-      "Hiwonder documentation checked",
-      "Retailer configurations compared separately",
-    ],
-    verified: [
-      "Hiwonder states PuppyPi uses Raspberry Pi 5 and eight coreless servos.",
-      "The platform supports ROS1/ROS2 and Python, with AI-vision functions and voice interaction.",
-      "LiDAR and SLAM belong to particular higher configurations; this guide does not imply every PuppyPi box contains the same sensors.",
-    ],
-    caution:
-      "This is expensive hardware whose value depends on the work done with it. For a normal gift recipient who will not use ROS, vision or navigation tools, Bittle or MechDog is usually the smarter purchase.",
-    closest:
-      "Bittle X V2 is the better desk-scale open-source learning machine. Unitree Go2 is the next serious step in physical capability, but it belongs in a much more expensive class.",
-    pros: [
-      "Raspberry Pi 5 gives far more compute headroom than toy platforms",
-      "ROS1/ROS2 support makes it relevant to real robotics workflows",
-      "AI vision and higher sensor tiers create meaningful research depth",
-      "Open documentation and development tooling matter more than novelty tricks",
-    ],
-    cons: [
-      "You are buying for a normal child",
-      "You want pet-like personality rather than engineering capability",
-      "You will not use the development stack",
+    watch: [
+      "The expensive configurations only make sense if the recipient will use the development stack.",
+      "Do not assume every PuppyPi package includes the same sensors.",
     ],
     sourceHref: "https://www.hiwonder.com/products/puppypi",
-    sourceLabel: "Hiwonder manufacturer source",
-    amazonHref: "https://www.amazon.com/s?k=HIWONDER+PuppyPi+Robot+Dog&tag=botplanet-20",
-    amazonLabel: "Check PuppyPi on Amazon",
+    sourceLabel: "Hiwonder PuppyPi product page",
+    buyHref: "https://www.amazon.com/s?k=HIWONDER+PuppyPi+Robot+Dog&tag=botplanet-20",
+    buyLabel: "Check PuppyPi on Amazon",
     internalHref: "/robots/educational-coding-robots/",
     internalLabel: "Explore coding robots",
   },
-];
-
-const winners = [
-  ["Best kids' toy", "Ruko 18011", "Simple play", "#ruko"],
-  ["Best AI pet", "Loona", "Recognition + personality", "#loona"],
-  ["Best coding value", "MechDog", "Scratch / Python / Arduino", "#mechdog"],
-  ["Best open source", "Bittle X V2", "Build + tinker", "#bittle"],
-  ["Best advanced", "PuppyPi", "ROS / vision / mapping", "#puppypi"],
-  ["Best soft companion", "Joy for All", "Older-adult companionship", "#companion"],
+  {
+    id: "joy",
+    badge: "Best soft companion",
+    name: "Joy for All Companion Pet",
+    image: IMAGE.senior,
+    imageAlt: "An older adult interacting with a soft robotic companion dog.",
+    price: "Varies by model and retailer",
+    bestFor: "Older adults who value comfort, familiarity and very little setup",
+    summary:
+      "Joy for All is here because not every robot-dog buyer wants cameras, apps or tricks. These companion pets respond to touch and sound and are designed around simple, familiar interaction. For the right person, that is more useful than a technically smarter machine.",
+    keyFacts: [
+      "Voice and touch response",
+      "Soft, familiar form",
+      "Very low technical burden",
+    ],
+    watch: [
+      "This is a companion product, not an autonomous walking robot.",
+      "A robot pet can be comforting entertainment, but it is not a substitute for human contact or professional care.",
+    ],
+    sourceHref: "https://joyforall.com/",
+    sourceLabel: "Joy for All manufacturer site",
+    buyHref: "/robots/companion-robots/joy-for-all-companion-pets/",
+    buyLabel: "Read our Joy for All review",
+    internalHref: "/guides/robotic-pets-for-elderly/",
+    internalLabel: "See our guide to robotic pets for older adults",
+  },
 ];
 
 const comparison = [
-  ["Ruko 18011", "$69.99 official; retailer varies", "Child / easy gift", "Remote + gesture", "Toy action sequences", "Charge + remote", "Manufacturer + retailer"],
-  ["Loona", "$399.90+ official bundle; retailer varies", "Premium AI pet", "Voice + face / gesture recognition", "Not coding-first", "App / Wi-Fi + dock", "Manufacturer + BotPlanet review"],
-  ["MechDog", "~$299.99 retailer snapshot", "Learner / programmer", "App + PC", "Scratch / Python / Arduino", "Software + calibration", "Manufacturer + retailer"],
-  ["Bittle X V2", "From ~$279 MSRP; kit dependent", "Hobbyist / STEM", "Voice / app / commands", "Blocks / Python / C++", "Kit build or prebuilt setup", "Manufacturer + docs"],
-  ["PuppyPi", "From ~$589.99; config dependent", "Advanced developer", "ROS / software / controller", "ROS1/ROS2 + Python", "Linux / ROS + hardware setup", "Manufacturer + docs"],
-  ["Joy for All", "Varies by model / retailer", "Older adult / comfort", "Voice + touch response", "None", "Very little technical setup", "Manufacturer + BotPlanet review"],
-];
-
-const alternatives = [
-  {
-    name: "Unitree Go2",
-    label: "Serious quadruped, different budget",
-    copy:
-      "Unitree's Go2 starts far above the consumer-toy tier and is built around mobility, sensing and robotics capability rather than pet-like interaction. It belongs in the conversation, but not in the same 'gift under $700' shortlist.",
-    href: "https://www.unitree.com/go2/",
-    cta: "See Unitree's Go2 specification →",
-  },
-  {
-    name: "Sony aibo",
-    label: "Iconic AI pet, difficult practical buy",
-    copy:
-      "aibo is one of the category's defining products, but current US availability and pricing are less straightforward than the products above. We will not pretend an iconic name is a practical 2026 recommendation when the buying route is unclear.",
-    href: "https://electronics.sony.com/more/aibo",
-    cta: "Check Sony's current aibo information →",
-  },
-  {
-    name: "WowWee Dog-E",
-    label: "Worth checking if stock returns",
-    copy:
-      "Dog-E remains a recognisable mainstream toy option. It was not promoted into the main shortlist because availability has been inconsistent; an unavailable product does not become a winner because its old reviews are good.",
-    href: "https://wowwee.com/dog-e/",
-    cta: "Check Dog-E availability →",
-  },
-  {
-    name: "Chongker companion dogs",
-    label: "Soft companion alternative",
-    copy:
-      "Chongker sells plush companion dogs aimed at comforting, low-complexity interaction. We now put Joy for All ahead because BotPlanet already has a dedicated review and the brand's older-adult use case is clearer and better documented.",
-    href: "https://www.amazon.com/s?k=Chongker+Companion+Robot+Dog+Elderly&tag=botplanet-20",
-    cta: "See current Chongker listings →",
-    sponsored: true,
-  },
-  {
-    name: "YESHIN / CyberDog-style toys",
-    label: "Budget quadruped look",
-    copy:
-      "These can be fun low-cost toys, but tiny review pools and shifting listings make them weaker editorial winners. Ruko has a clearer manufacturer trail and is easier for us to stand behind.",
-    href: "https://www.amazon.com/s?k=YESHIN+Smart+Robot+Dog+CyberDog&tag=botplanet-20",
-    cta: "See current budget listings →",
-    sponsored: true,
-  },
-];
-
-const duels = [
-  {
-    title: "Ruko 18011 vs Loona",
-    left: ["Ruko", "Buy for a child who wants immediate play, simple controls and a normal gift budget."],
-    right: ["Loona", "Buy when recognition, autonomous behaviour and AI-pet personality are the reason for spending more."],
-    verdict: "Ruko wins the toy decision. Loona wins the AI-companion decision. They are not substitutes at the same price.",
-  },
-  {
-    title: "MechDog vs Bittle X V2",
-    left: ["MechDog", "Choose for a broader ready-made learning path across Scratch, Python, Arduino, camera and sensor kits."],
-    right: ["Bittle X V2", "Choose when building, gaits, servos and open-source experimentation are the attraction."],
-    verdict: "MechDog is the easier coding route; Bittle is the better pure tinkering platform.",
-  },
-  {
-    title: "Bittle X V2 vs PuppyPi",
-    left: ["Bittle X V2", "Choose when desk-scale experimentation and open-source quadruped work are enough."],
-    right: ["PuppyPi", "Choose when Raspberry Pi, ROS, AI vision and navigation are actual project requirements."],
-    verdict: "Do not pay PuppyPi money unless the recipient will use the advanced robotics stack.",
-  },
-  {
-    title: "Loona vs Joy for All",
-    left: ["Loona", "Responsive moving AI pet with recognition, conversation and connected software."],
-    right: ["Joy for All", "Soft, familiar companion behaviour with far less technical complexity."],
-    verdict: "For companionship, more advanced does not automatically mean better. The right answer depends on the person, not the processor.",
-  },
+  ["Ruko 18011", "$69.99 official", "Kids / easy gift", "Remote + gesture", "Toy-level sequences", "Low"],
+  ["Loona", "$399.90+ official", "AI companion", "Voice + recognition", "Not coding-first", "Medium"],
+  ["MechDog", "~$299.99 retailer", "Learning / coding", "App + PC", "Scratch / Python / Arduino", "Medium"],
+  ["Bittle X V2", "From ~$279", "Tinkering / STEM", "App / commands", "Blocks / Python / C++", "Medium-high"],
+  ["PuppyPi", "From ~$589.99", "Advanced robotics", "ROS / software", "ROS1/2 + Python", "High"],
+  ["Joy for All", "Varies", "Soft companionship", "Voice + touch", "None", "Very low"],
 ];
 
 const faq = [
   {
     q: "What is the best robot dog toy in 2026?",
-    a:
-      "For a child who mainly wants play, Ruko 18011 is our strongest mainstream starting point. Loona is the premium AI-pet choice. MechDog, Bittle X V2 and PuppyPi should be bought as robotics platforms rather than toys.",
+    a: "For a child who mainly wants play, Ruko 18011 is our strongest starting point. Loona is the premium AI-pet choice. MechDog, Bittle X V2 and PuppyPi make more sense when the buyer actually wants programming or robotics projects.",
   },
   {
     q: "What is the best AI robot dog?",
-    a:
-      "For a normal home, Loona is the easiest premium AI-pet recommendation because recognition, autonomous movement, conversation and its charging dock are central to the product. PuppyPi is more advanced as a development platform, but it is not trying to be the same kind of pet.",
+    a: "For a normal home, Loona is the strongest AI-pet pick because recognition, movement, conversation and its charging dock are central to the product. PuppyPi is technically more advanced, but it is a development platform rather than the better pet.",
   },
   {
     q: "What is the best programmable robot dog?",
-    a:
-      "MechDog is our value programming pick, Bittle X V2 is the open-source tinkering choice, and PuppyPi is the advanced option when ROS, Raspberry Pi, AI vision and mapping matter.",
+    a: "MechDog is the easiest value pick for learning, Bittle X V2 is the stronger open-source tinkering choice, and PuppyPi is the advanced option when ROS, Raspberry Pi and computer vision are genuine requirements.",
   },
   {
     q: "Are robot dogs only for kids?",
-    a:
-      "No. Ruko is a toy-first product, Loona is an AI home companion, Bittle and MechDog are learning platforms, PuppyPi is advanced robotics hardware, and Joy for All targets soft companion use for older adults.",
-  },
-  {
-    q: "Are there robot dogs for older adults?",
-    a:
-      "Yes. Soft companion pets such as Joy for All and Chongker are designed around familiar pet-like interaction rather than coding or stunt features. They can provide comforting entertainment, but they are not replacements for human contact, professional care or a living animal.",
-  },
-  {
-    q: "Are robot dogs good Christmas gifts?",
-    a:
-      "They can be, but the category hides very different products. A child may get more value from a simple toy than a $700 development platform, while a teenager or adult who already enjoys coding may prefer MechDog or Bittle. Match the robot to the recipient before matching it to a budget.",
+    a: "No. Ruko is toy-first, Loona is an AI home companion, MechDog and Bittle are learning platforms, PuppyPi is advanced robotics hardware, and Joy for All is aimed at low-complexity companion use.",
   },
   {
     q: "Do robot dogs need an app or internet connection?",
-    a:
-      "Some do and some do not. Simple toys can work with a remote or onboard controls. Connected AI pets rely more on apps and online services. Programmable quadrupeds may use desktop software, local networks, coding environments or ROS. Check what still works offline before buying.",
+    a: "Some do and some do not. Simple toys can work with a remote. Connected AI pets rely more on apps and online services. Programmable quadrupeds may use desktop software, local networks or ROS. Check what still works offline before buying.",
   },
   {
-    q: "Is a Unitree Go2 a better robot dog than Loona?",
-    a:
-      "It is more capable as a physical quadruped, but that does not make it a better pet. Unitree Go2 is a much more expensive robotics platform focused on locomotion and sensing; Loona is designed around home interaction and companion behaviour.",
+    q: "Is Unitree Go2 a better robot dog than Loona?",
+    a: "It is far more capable as a physical quadruped, but it is not the better pet for most homes. Go2 is a much more expensive robotics platform; Loona is designed around interaction and companion behaviour.",
   },
 ];
 
@@ -423,11 +236,8 @@ const schema = [
     image: IMAGE.hero,
   }),
   itemListSchema(
-    [
-      ...products.map((p) => ({ name: p.name, path: `${PATH}#${p.id}` })),
-      { name: "Joy for All Companion Pet", path: `${PATH}#companion` },
-    ],
-    "Best robot dog toys, AI pets and programmable robot dogs for 2026",
+    picks.map((p) => ({ name: p.name, path: `${PATH}#${p.id}` })),
+    "Best robot dog toys and AI robot dogs for 2026",
   ),
   faqPageSchema(faq, PATH),
 ];
@@ -442,441 +252,300 @@ const schema = [
   schema={schema}
   ogType="article"
 >
-  <article class="rd-guide">
-    <header class="rd-hero reveal">
-      <div>
-        <p class="rd-kicker">2026 US buying guide · Last reviewed 27 September</p>
+  <article class="dog-guide">
+    <header class="dog-hero">
+      <div class="dog-hero__copy">
+        <p class="dog-kicker">2026 buying guide · updated 27 September</p>
         <h1>{H1}</h1>
-        <p class="rd-standfirst">
-          “Robot dog” now describes completely different products: a <strong>$70 toy</strong>, a
-          <strong>connected AI pet</strong>, an <strong>open-source coding platform</strong>, a
-          <strong>ROS quadruped</strong> or a <strong>soft companion for an older adult</strong>.
-          We separate those jobs first, then choose the strongest fit in each.
+        <p class="dog-lede">
+          A “robot dog” can be a <strong>$70 toy</strong>, a <strong>$400 AI pet</strong>, a
+          <strong>coding platform</strong> or a serious <strong>ROS quadruped</strong>. The best one
+          depends on who is opening the box.
         </p>
-        <div class="rd-hero__badges">
-          <span>6 category winners</span>
-          <span>Manufacturer sources checked</span>
-          <span>Retailer prices dated</span>
-          <span>No invented overall score</span>
+        <div class="dog-hero__actions">
+          <a class="dog-btn dog-btn--primary" href="#quick-picks">See the winners</a>
+          <a class="dog-btn" href="#compare">Compare all six</a>
         </div>
-        <div class="rd-byline">
-          <span>Research and buying guide by</span><a href={FOUNDER.path}>{FOUNDER.name}</a><span>·</span>
-          <a href="/review-methodology/">How BotPlanet researches robots</a>
-        </div>
-        <div class="rd-actions">
-          <a class="rd-button rd-button--primary" href="#comparison">Compare the six picks</a>
-          <a class="rd-button" href="#method">See the evidence standard</a>
-        </div>
+        <p class="dog-method-note">
+          <strong>How we researched this:</strong> manufacturer documentation, current retailer
+          listings and BotPlanet's existing product research. We have not physically tested every
+          product on this page. <a href="/review-methodology/">Read our methodology.</a>
+        </p>
       </div>
-      <figure class="rd-media rd-hero__media">
+      <figure class="dog-hero__media">
         <img
           src={IMAGE.hero}
           width="1536"
           height="864"
-          alt="Several kinds of robot dog shown together for children, families, programmers and companion use."
+          alt="Several kinds of robot dog shown together in one buying guide."
           loading="eager"
           fetchpriority="high"
           decoding="async"
         />
-        <figcaption>One search term, five different buying decisions: toy, AI pet, learning platform, advanced quadruped and soft companion.</figcaption>
       </figure>
     </header>
 
-    <section class="rd-evidence-hero reveal" id="method" aria-labelledby="method-title">
-      <div>
-        <p class="rd-kicker">Evidence standard</p>
-        <h2 id="method-title">Research-led. Not hands-on tested by BotPlanet.</h2>
-        <p>
-          We have <strong>not physically tested these six units side by side</strong>, so we do not
-          pretend we have. Recommendations come from manufacturer documentation, current retailer
-          checks, BotPlanet's existing product research and clear buyer-fit comparisons. A claim
-          that cannot be tied to a source is either removed or labelled uncertain.
-        </p>
-      </div>
-      <div class="rd-evidence-grid">
-        <article><strong>Manufacturer first</strong><span>Core capability comes from the maker or its technical documentation where available.</span></article>
-        <article><strong>Retailer second</strong><span>Prices, coupons, stock and review counts are dated snapshots, never permanent facts.</span></article>
-        <article><strong>Variants stay separate</strong><span>A kit with LiDAR is not silently merged with a cheaper kit that does not include it.</span></article>
-        <article><strong>No fake precision</strong><span>We removed percentage “fit scores” because a number such as 94/100 meant nothing without a reproducible test.</span></article>
-      </div>
-      <p class="rd-note">
-        This is the standard BotPlanet uses across research-led reviews. <a href="/review-methodology/">Read the full review methodology →</a>
-      </p>
-    </section>
-
-    <nav class="rd-winners" aria-label="Best robot dog picks by buyer type">
-      {winners.map(([label, name, reason, href]) => (
-        <a class="rd-winner" href={href}>
-          <small>{label}</small><strong>{name}</strong><span>{reason}</span>
-        </a>
-      ))}
-    </nav>
-
-    <section class="rd-section reveal">
-      <header class="rd-section__head">
-        <p class="rd-kicker">The answer first</p>
-        <h2>Choose the job before you choose the robot</h2>
-        <p>
-          This is the most important distinction on the page. A machine can be technically more
-          advanced and still be the wrong present.
-        </p>
+    <section class="dog-section" id="quick-picks">
+      <header class="dog-section__head">
+        <p class="dog-kicker">Quick answer</p>
+        <h2>The best robot dog for each kind of buyer</h2>
+        <p>Do not pay for advanced robotics unless the person receiving it actually wants advanced robotics.</p>
       </header>
-      <div class="rd-intent-cards">
-        <a class="rd-intent-card" href="#ruko"><span>Child / easy gift</span><strong>Ruko 18011</strong><small>Immediate play, remote control, gestures and simple programmable actions.</small></a>
-        <a class="rd-intent-card" href="#loona"><span>Family / AI pet</span><strong>Loona</strong><small>Recognition, conversation, movement, software and a charging dock.</small></a>
-        <a class="rd-intent-card" href="#programming"><span>Programming</span><strong>MechDog or Bittle</strong><small>Choose learning path and hardware openness before choosing price.</small></a>
-        <a class="rd-intent-card" href="#puppypi"><span>Advanced robotics</span><strong>PuppyPi</strong><small>Raspberry Pi, ROS, vision and higher-end sensor configurations.</small></a>
-        <a class="rd-intent-card" href="#companion"><span>Older adult</span><strong>Joy for All</strong><small>Soft, familiar interaction rather than cameras, coding or autonomous navigation.</small></a>
-        <a class="rd-intent-card" href="#alternatives"><span>Serious quadruped</span><strong>Unitree Go2</strong><small>Much higher physical capability and a completely different budget.</small></a>
-      </div>
-    </section>
-
-    <section id="comparison" class="rd-section reveal">
-      <header class="rd-section__head">
-        <p class="rd-kicker">Full comparison</p>
-        <h2>Six robot dogs compared without fake scores</h2>
-        <p>
-          The table uses things a buyer can actually verify: the price source, who the machine is
-          for, controls, programming route and what setup is involved.
-        </p>
-      </header>
-      <div class="rd-snapshot">
-        <div class="rd-snapshot__top">
-          <div><h3>Robot dog decision matrix</h3><p>Retailer and manufacturer figures checked 27 September 2026.</p></div>
-          <span class="rd-pill rd-pill--green">Research-led</span>
-        </div>
-        <div class="rd-table-wrap">
-          <table class="rd-table">
-            <thead>
-              <tr>
-                <th>Robot</th><th>Price reference</th><th>Best for</th><th>Controls</th>
-                <th>Programming</th><th>Typical setup</th><th>Evidence base</th>
-              </tr>
-            </thead>
-            <tbody>{comparison.map((row) => <tr>{row.map((cell) => <td>{cell}</td>)}</tr>)}</tbody>
-          </table>
-        </div>
-      </div>
-      <p class="rd-note">
-        Prices are reference points, not promises. Seller, bundle, coupon and kit configuration can
-        change the number. When official and retailer prices differ, we say so.
-      </p>
-    </section>
-
-    <section id="head-to-head" class="rd-section reveal">
-      <header class="rd-section__head">
-        <p class="rd-kicker">Head-to-head</p>
-        <h2>The comparisons that actually change the buying decision</h2>
-        <p>A useful comparison explains where the decision turns instead of pretending every robot competes on one universal score.</p>
-      </header>
-      <div class="rd-duel-grid">
-        {duels.map((duel) => (
-          <article class="rd-duel">
-            <div class="rd-duel__title"><span>Head to head</span><h3>{duel.title}</h3></div>
-            <div class="rd-duel__vs">
-              <div class="rd-duel__side"><strong>{duel.left[0]}</strong><small>{duel.left[1]}</small></div>
-              <div class="rd-vs">VS</div>
-              <div class="rd-duel__side"><strong>{duel.right[0]}</strong><small>{duel.right[1]}</small></div>
-            </div>
-            <p class="rd-duel__verdict"><strong>Bottom line:</strong> {duel.verdict}</p>
-          </article>
+      <div class="dog-quick-grid">
+        {picks.map((pick) => (
+          <a class="dog-quick" href={`#${pick.id}`}>
+            <span>{pick.badge}</span>
+            <strong>{pick.name}</strong>
+            <small>{pick.bestFor}</small>
+          </a>
         ))}
       </div>
     </section>
 
-    <section class="rd-section rd-picks" id="our-picks">
-      <header class="rd-section__head reveal">
-        <p class="rd-kicker">Why each pick wins</p>
-        <h2>The five main robot dogs, evidence first</h2>
-        <p>
-          These are not pretending to be six hands-on laboratory reviews. Each section shows the
-          buying conclusion, the facts we could verify, the important uncertainty and the nearest
-          alternative.
-        </p>
+    <section class="dog-section" id="compare">
+      <header class="dog-section__head">
+        <p class="dog-kicker">Side by side</p>
+        <h2>Robot dog comparison</h2>
+        <p>Prices are dated reference points. The useful comparison is what the robot is for, how much setup it needs and how far the programming goes.</p>
+      </header>
+      <div class="dog-table-wrap" role="region" aria-label="Robot dog comparison table" tabindex="0">
+        <table class="dog-table">
+          <thead>
+            <tr>
+              <th>Robot</th>
+              <th>Price reference</th>
+              <th>Best for</th>
+              <th>Controls</th>
+              <th>Programming</th>
+              <th>Setup</th>
+            </tr>
+          </thead>
+          <tbody>
+            {comparison.map((row) => <tr>{row.map((cell) => <td>{cell}</td>)}</tr>)}
+          </tbody>
+        </table>
+      </div>
+      <p class="dog-small">Checked 27 September 2026. Exact seller, bundle and kit configuration can change the price.</p>
+    </section>
+
+    <section class="dog-section dog-reviews" id="reviews">
+      <header class="dog-section__head">
+        <p class="dog-kicker">Our picks</p>
+        <h2>Why we chose these six</h2>
+        <p>Each recommendation answers a different job. That is more useful than forcing every robot into one fake overall score.</p>
       </header>
 
-      {products.map((product, index) => (
-        <article
-          id={product.id}
-          class:list={[
-            "rd-pick",
-            "reveal",
-            { "rd-pick--featured": product.id === "loona", "rd-pick--reverse": index % 2 === 1 },
-          ]}
-        >
-          <figure class="rd-media rd-pick__media">
-            <img
-              src={product.image}
-              width="1536"
-              height="864"
-              alt={product.imageAlt}
-              loading="lazy"
-              decoding="async"
-            />
-            <figcaption>{product.imageCaption}</figcaption>
+      {picks.map((pick) => (
+        <article class="dog-review" id={pick.id}>
+          <figure class="dog-review__media">
+            <img src={pick.image} width="1536" height="864" alt={pick.imageAlt} loading="lazy" decoding="async" />
           </figure>
-          <div class="rd-pick__content">
-            <div class="rd-pick__topline">
-              <span class="rd-number">{product.number}</span>
-              <span class="rd-award">{product.award}</span>
-              <span class="rd-status">{product.status}</span>
-            </div>
-            <h3>{product.name}</h3>
-            <p class="rd-verdict">{product.verdict}</p>
+          <div class="dog-review__copy">
+            <p class="dog-review__badge">{pick.badge}</p>
+            <h3>{pick.name}</h3>
+            <p class="dog-review__best"><strong>Best for:</strong> {pick.bestFor}</p>
+            <p class="dog-review__summary">{pick.summary}</p>
 
-            <div class="rd-fact-row">
-              {product.facts.map(([label, value, note]) => (
-                <div class="rd-fact"><span>{label}</span><strong>{value}</strong><small>{note}</small></div>
-              ))}
-            </div>
-
-            <div class="rd-source-box">
-              <strong>What we checked</strong>
-              <ul>{product.evidence.map((item) => <li>{item}</li>)}</ul>
-              <a href={product.sourceHref} rel="nofollow">{product.sourceLabel} →</a>
+            <div class="dog-review__facts">
+              <div><span>Price reference</span><strong>{pick.price}</strong></div>
+              <div>
+                <span>What matters</span>
+                <ul>{pick.keyFacts.map((fact) => <li>{fact}</li>)}</ul>
+              </div>
             </div>
 
-            <div class="rd-verified">
-              <strong>What we could verify</strong>
-              <ul>{product.verified.map((item) => <li>{item}</li>)}</ul>
+            <div class="dog-watch">
+              <strong>Watch-outs</strong>
+              <ul>{pick.watch.map((item) => <li>{item}</li>)}</ul>
             </div>
 
-            <div class="rd-caution"><strong>Important uncertainty:</strong> {product.caution}</div>
-            <p class="rd-nearest"><strong>Closest alternative:</strong> {product.closest}</p>
-
-            <div class="rd-pros-cons">
-              <div><strong>Why buy it</strong><ul>{product.pros.map((item) => <li>{item}</li>)}</ul></div>
-              <div><strong>Skip it if…</strong><ul>{product.cons.map((item) => <li>{item}</li>)}</ul></div>
-            </div>
-
-            <div class="rd-product-links">
-              <a class="rd-button rd-button--primary" href={product.amazonHref} rel="sponsored nofollow">{product.amazonLabel}</a>
-              {product.internalHref && <a class="rd-button" href={product.internalHref}>{product.internalLabel}</a>}
-              <a class="rd-button" href={product.sourceHref} rel="nofollow">Check manufacturer</a>
+            <div class="dog-links">
+              <a class="dog-btn dog-btn--primary" href={pick.buyHref} rel={pick.buyHref.startsWith("http") ? "sponsored nofollow" : undefined}>{pick.buyLabel}</a>
+              {pick.internalHref && <a class="dog-btn" href={pick.internalHref}>{pick.internalLabel}</a>}
+              <a class="dog-text-link" href={pick.sourceHref} rel="nofollow">Manufacturer source →</a>
             </div>
           </div>
         </article>
       ))}
     </section>
 
-    <section id="programming" class="rd-section reveal">
-      <header class="rd-section__head">
-        <p class="rd-kicker">For programmers, students & robotics enthusiasts</p>
-        <h2>MechDog vs Bittle vs PuppyPi: the technical ladder</h2>
-        <p>
-          The price jump buys different development depth, not a universally “better” dog. Buy the
-          lowest level that genuinely supports the projects the recipient wants to build.
-        </p>
+    <section class="dog-section">
+      <header class="dog-section__head">
+        <p class="dog-kicker">How to choose</p>
+        <h2>Four questions decide almost everything</h2>
       </header>
-      <div class="rd-program-grid">
-        <article class="rd-program-card">
-          <span>Best learning value</span><h3>MechDog</h3><strong>ESP32-based</strong>
-          <p>Best when you want several programming routes and sensor/camera projects without moving straight into ROS.</p>
-          <ul><li>Scratch</li><li>Python</li><li>Arduino</li><li>AI-camera kit options</li></ul>
-          <a class="rd-text-link" href="#mechdog">Read the MechDog evidence →</a>
-        </article>
-        <article class="rd-program-card">
-          <span>Best open-source tinkering</span><h3>Bittle X V2</h3><strong>Build + code</strong>
-          <p>Best when construction, servos, gaits and changing the robot itself are central to the fun.</p>
-          <ul><li>Block coding</li><li>Python</li><li>C++</li><li>Open-source orientation</li></ul>
-          <a class="rd-text-link" href="#bittle">Read the Bittle evidence →</a>
-        </article>
-        <article class="rd-program-card">
-          <span>Best advanced stack</span><h3>PuppyPi</h3><strong>Raspberry Pi 5 + ROS</strong>
-          <p>Best when computer vision, ROS and higher sensor tiers are actual project requirements.</p>
-          <ul><li>ROS1 / ROS2</li><li>Python</li><li>AI vision</li><li>LiDAR / SLAM on selected kits</li></ul>
-          <a class="rd-text-link" href="#puppypi">Read the PuppyPi evidence →</a>
-        </article>
+      <div class="dog-advice-grid">
+        <article><span>01</span><h3>Is this a toy, a pet or a project?</h3><p>Ruko, Loona and PuppyPi can all be called robot dogs, but they solve completely different problems. Start with the job, not the spec sheet.</p></article>
+        <article><span>02</span><h3>Will the recipient actually code?</h3><p>If the answer is no, do not buy ROS, LiDAR or a complex open-source kit just because it sounds impressive.</p></article>
+        <article><span>03</span><h3>How much software dependence is acceptable?</h3><p>Connected AI pets can depend on apps, accounts and cloud services. A simple remote-control toy has fewer moving parts outside the robot itself.</p></article>
+        <article><span>04</span><h3>Which exact kit are you buying?</h3><p>MechDog, Bittle and PuppyPi are sold in multiple configurations. Cameras, sensors, servos and compute can change with the kit.</p></article>
       </div>
     </section>
 
-    <section id="companion" class="rd-section reveal">
-      <div class="rd-senior-panel">
-        <div>
-          <p class="rd-kicker">Best soft companion for older adults</p>
-          <h2>Joy for All is a better-documented companion pick</h2>
-          <p>
-            This is deliberately separate from Loona. Ageless Innovation's Joy for All pets are
-            designed around soft, familiar pet-like interaction and respond to voice and touch.
-            That can be the better answer when comfort and simplicity matter more than movement,
-            cameras or software.
-          </p>
-          <div class="rd-companion-facts">
-            <div><span>Interaction</span><strong>Voice + touch</strong></div>
-            <div><span>Technical burden</span><strong>Low</strong></div>
-            <div><span>Best for</span><strong>Simple companionship</strong></div>
-          </div>
-          <div class="rd-caution">
-            <strong>Important:</strong> companion robots can provide comforting entertainment, but
-            they are not replacements for human contact, professional care or a living animal.
-          </div>
-          <div class="rd-actions">
-            <a class="rd-button rd-button--gold" href="/robots/companion-robots/joy-for-all-companion-pets/">Read BotPlanet's Joy for All review</a>
-            <a class="rd-button" href="https://joyforall.com/" rel="nofollow">Check the manufacturer</a>
-          </div>
-        </div>
-        <figure class="rd-media">
-          <img
-            src={IMAGE.senior}
-            width="1536"
-            height="864"
-            alt="An older adult interacting warmly with a soft robotic companion dog."
-            loading="lazy"
-            decoding="async"
-          />
-          <figcaption>Editorial companion-use image — exact companion-pet appearance varies by model.</figcaption>
-        </figure>
+    <section class="dog-section">
+      <header class="dog-section__head">
+        <p class="dog-kicker">Also worth knowing</p>
+        <h2>Why some famous robot dogs are not in the top six</h2>
+      </header>
+      <div class="dog-alt-list">
+        <article><h3>Unitree Go2</h3><p>A serious quadruped with far greater physical capability — and a completely different budget. It is not a normal toy or home AI-pet purchase.</p><a href="https://www.unitree.com/go2/" rel="nofollow">See Unitree Go2 →</a></article>
+        <article><h3>Sony aibo</h3><p>One of the defining robot pets, but current US availability and purchasing are less straightforward than the products above.</p><a href="https://electronics.sony.com/more/aibo" rel="nofollow">Check Sony aibo →</a></article>
+        <article><h3>WowWee Dog-E</h3><p>A mainstream toy worth considering when it is readily available. We have not promoted it above products with a clearer current buying route.</p><a href="https://wowwee.com/dog-e/" rel="nofollow">Check Dog-E →</a></article>
+        <article><h3>Chongker companion dogs</h3><p>A soft companion alternative. We prefer Joy for All here because BotPlanet already has deeper product research and a clearer older-adult use case.</p></article>
       </div>
     </section>
 
-    <section id="alternatives" class="rd-section reveal">
-      <header class="rd-section__head">
-        <p class="rd-kicker">What about the famous names?</p>
-        <h2>Robots you expected to see — and why they are not winners</h2>
-        <p>
-          A complete buying guide should explain the omissions. These products matter to the search
-          result, but each falls outside the main shortlist for a specific reason.
-        </p>
-      </header>
-      <div class="rd-also-grid">
-        {alternatives.map((item) => (
-          <article class="rd-also">
-            <span>{item.label}</span><h3>{item.name}</h3><p>{item.copy}</p>
-            <a href={item.href} rel={item.sponsored ? "sponsored nofollow" : "nofollow"}>{item.cta}</a>
-          </article>
-        ))}
-      </div>
-    </section>
-
-    <section class="rd-section reveal">
-      <header class="rd-section__head">
-        <p class="rd-kicker">Before you buy</p>
-        <h2>Seven checks that matter more than marketing copy</h2>
-      </header>
-      <div class="rd-buying-grid">
-        <article><span>01</span><h3>Toy, pet, project or companion?</h3><p>Bittle can delight a robotics hobbyist and disappoint somebody who wanted affection. The category name hides completely different jobs.</p></article>
-        <article><span>02</span><h3>What survives without an app?</h3><p>Ask what still works if an app, account or cloud service changes. This matters far more for an AI pet than a remote-control toy.</p></article>
-        <article><span>03</span><h3>Camera and microphone privacy</h3><p>Recognition and remote-monitoring features are useful, but a connected camera in the home is also a privacy decision. Read the current app permissions and privacy policy before buying.</p></article>
-        <article><span>04</span><h3>Battery and charging behaviour</h3><p>A self-docking home companion behaves differently from a toy that must be plugged in after play. Runtime only matters in context.</p></article>
-        <article><span>05</span><h3>Exact kit, not just model name</h3><p>MechDog, Bittle and PuppyPi configurations can change servos, compute, cameras, sensors and price. Compare the box contents line by line.</p></article>
-        <article><span>06</span><h3>Support and replacement parts</h3><p>Servos, batteries and chargers are wear items. A serious robotics purchase needs documentation and parts availability, not just impressive launch videos.</p></article>
-        <article><span>07</span><h3>Do not buy specs nobody will use</h3><p>ROS, LiDAR and computer vision are valuable only when the recipient genuinely wants to experiment with them.</p></article>
-      </div>
-    </section>
-
-    <section class="rd-section reveal">
-      <header class="rd-section__head">
-        <p class="rd-kicker">Christmas 2026</p>
-        <h2>The best Christmas robot dog depends on who opens the box</h2>
-        <p>
-          Ruko is the easy child-friendly gift. Loona is the premium family AI-pet gift. MechDog
-          and Bittle make more sense for somebody already interested in programming. PuppyPi is a
-          specialist present for a developer, not an expensive way to impress somebody who asked
-          for a robot puppy. Joy for All is the softer companion choice.
-        </p>
-      </header>
-      <div class="rd-christmas-grid">
-        <article><strong>Under $100</strong><span>Ruko 18011</span><p>Choose simple play over technical ambition.</p></article>
-        <article><strong>Premium home gift</strong><span>Loona</span><p>Choose it for interaction and personality, not because it has “AI” in the name.</p></article>
-        <article><strong>Teen / adult coder</strong><span>MechDog or Bittle</span><p>Choose based on learning path and appetite for tinkering.</p></article>
-        <article><strong>Advanced developer</strong><span>PuppyPi</span><p>Only when ROS and robotics development are already the hobby.</p></article>
-      </div>
-    </section>
-
-    <section class="rd-section reveal">
-      <header class="rd-section__head">
-        <p class="rd-kicker">Keep researching on BotPlanet</p>
-        <h2>Use the deeper page for the question you actually have</h2>
-        <p>This guide owns the broad robot-dog buying intent. Product and category pages go deeper without repeating the same article.</p>
-      </header>
-      <div class="rd-related-grid">
-        <a href="/robots/companion-robots/"><span>Category</span><strong>Companion robots & robot pets</strong><small>Compare AI pets and companion machines beyond robot dogs.</small></a>
-        <a href="/robots/educational-coding-robots/"><span>Category</span><strong>Educational & coding robots</strong><small>For buyers whose real priority is learning, programming and STEM.</small></a>
-        <a href="/robots/companion-robots/loona/"><span>Product review</span><strong>Loona review</strong><small>Dedicated research, specifications, strengths, weaknesses and support risk.</small></a>
-        <a href="/robots/companion-robots/joy-for-all-companion-pets/"><span>Product review</span><strong>Joy for All review</strong><small>The soft-companion option for older-adult use.</small></a>
-        <a href="/guides/robotic-pets-for-elderly/"><span>Guide</span><strong>Robotic pets for older adults</strong><small>Go deeper on companion use rather than robot-dog technology.</small></a>
-        <a href="/botmatch/"><span>Finder</span><strong>Find My Robot</strong><small>Start from the job if a robot dog may not be the right answer at all.</small></a>
-      </div>
-    </section>
-
-    <section class="rd-section rd-faq reveal" aria-labelledby="faq-title">
-      <header class="rd-section__head">
-        <p class="rd-kicker">Robot dog FAQ</p>
-        <h2 id="faq-title">Questions buyers ask before choosing</h2>
-      </header>
-      {faq.map((item) => <details><summary>{item.q}</summary><p>{item.a}</p></details>)}
-    </section>
-
-    <section class="rd-trust reveal">
+    <section class="dog-section dog-gift">
       <div>
-        <strong>Affiliate disclosure</strong>
-        <p>BotPlanet may earn a commission when you buy through qualifying retailer links. Commission does not decide which product wins a category.</p>
-        <a href="/affiliate-disclosure/">Read the affiliate disclosure →</a>
-      </div>
-      <div>
-        <strong>How this guide was built</strong>
-        <p>Manufacturer documentation came first, retailer observations were dated, configuration differences stayed visible and BotPlanet did not claim hands-on testing that did not happen.</p>
-        <a href="/review-methodology/">Read the review methodology →</a>
+        <p class="dog-kicker">Gift shortcut</p>
+        <h2>If you are buying this as a present</h2>
+        <p><strong>Young child:</strong> Ruko. <strong>Family AI pet:</strong> Loona. <strong>Coder or maker:</strong> MechDog or Bittle. <strong>Advanced developer:</strong> PuppyPi. <strong>Older adult who wants a soft companion:</strong> Joy for All.</p>
       </div>
     </section>
 
-    <footer class="rd-method">
+    <section class="dog-section dog-faq" id="faq">
+      <header class="dog-section__head">
+        <p class="dog-kicker">FAQ</p>
+        <h2>Robot dog questions</h2>
+      </header>
+      {faq.map((item) => (
+        <details>
+          <summary>{item.q}</summary>
+          <p>{item.a}</p>
+        </details>
+      ))}
+    </section>
+
+    <footer class="dog-footer">
       <p>
-        <strong>Last reviewed 27 September 2026.</strong> Prices, bundles, coupons and stock can
-        move quickly. For exact hardware, accessories, warranty, software support and current
-        availability, check the manufacturer and retailer pages linked in each section.
+        Research and buying guide by <a href={FOUNDER.path}>{FOUNDER.name}</a>. Prices and availability
+        change, so retailer figures are snapshots rather than promises.
       </p>
+      <nav aria-label="Related BotPlanet pages">
+        <a href="/robots/companion-robots/">Companion robots</a>
+        <a href="/robots/educational-coding-robots/">Coding robots</a>
+        <a href="/guides/robotic-pets-for-elderly/">Robotic pets for older adults</a>
+        <a href="/review-methodology/">Review methodology</a>
+      </nav>
     </footer>
   </article>
 </Base>
 
 <style>
-  .rd-guide .rd-section,
-  .rd-guide .rd-pick { content-visibility: auto; contain-intrinsic-size: 900px; }
-  .rd-guide .rd-evidence-hero {
-    margin: 0 0 40px;
-    padding: clamp(22px, 4vw, 36px);
-    border: 1px solid rgba(143,230,255,.24);
-    border-radius: 26px;
-    background: linear-gradient(145deg, rgba(143,230,255,.08), rgba(255,255,255,.018));
+  .dog-guide {
+    --dog-line: rgba(255,255,255,.11);
+    --dog-panel: rgba(255,255,255,.035);
+    --dog-muted: rgba(247,249,252,.67);
+    --dog-soft: rgba(247,249,252,.48);
+    --dog-accent: #8fe6ff;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 1.5rem 1.25rem 6rem;
+    color: #f7f9fc;
   }
-  .rd-guide .rd-evidence-hero h2 { margin: 0; font-size: clamp(1.8rem, 4vw, 3.4rem); line-height: 1; letter-spacing: -.04em; }
-  .rd-guide .rd-evidence-hero > div > p { color: var(--rd-muted); line-height: 1.7; }
-  .rd-guide .rd-evidence-grid { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 10px; margin-top: 22px; }
-  .rd-guide .rd-evidence-grid article { padding: 16px; border: 1px solid var(--rd-line); border-radius: 16px; background: rgba(0,0,0,.16); }
-  .rd-guide .rd-evidence-grid strong,
-  .rd-guide .rd-evidence-grid span { display: block; }
-  .rd-guide .rd-evidence-grid strong { color: #fff; }
-  .rd-guide .rd-evidence-grid span { margin-top: 6px; color: var(--rd-soft); font-size: .82rem; line-height: 1.5; }
-  .rd-guide .rd-evidence-hero .rd-note a { color: var(--rd-cyan); }
-  .rd-guide .rd-source-box,
-  .rd-guide .rd-verified { margin-top: 16px; padding: 17px 18px; border: 1px solid var(--rd-line); border-radius: 17px; background: rgba(255,255,255,.022); }
-  .rd-guide .rd-source-box strong,
-  .rd-guide .rd-verified strong { display: block; margin-bottom: 8px; }
-  .rd-guide .rd-source-box ul,
-  .rd-guide .rd-verified ul { margin: 0; padding-left: 19px; color: var(--rd-muted); line-height: 1.6; }
-  .rd-guide .rd-source-box a { display: inline-block; margin-top: 10px; color: var(--rd-cyan); font-weight: 800; text-decoration: none; }
-  .rd-guide .rd-nearest { color: var(--rd-muted); line-height: 1.65; }
-  .rd-guide .rd-nearest strong { color: #fff; }
-  .rd-guide .rd-intent-cards { grid-template-columns: repeat(3,minmax(0,1fr)); }
-  .rd-guide .rd-buying-grid { grid-template-columns: repeat(4,minmax(0,1fr)); }
-  .rd-guide .rd-christmas-grid { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 12px; }
-  .rd-guide .rd-christmas-grid article { padding: 20px; border: 1px solid var(--rd-line); border-radius: 19px; background: rgba(255,255,255,.025); }
-  .rd-guide .rd-christmas-grid strong,
-  .rd-guide .rd-christmas-grid span { display: block; }
-  .rd-guide .rd-christmas-grid strong { color: var(--rd-cyan); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; }
-  .rd-guide .rd-christmas-grid span { margin-top: 7px; color: #fff; font-size: 1.2rem; font-weight: 900; }
-  .rd-guide .rd-christmas-grid p { color: var(--rd-muted); line-height: 1.55; }
-  @media(max-width:900px) {
-    .rd-guide .rd-evidence-grid,
-    .rd-guide .rd-buying-grid,
-    .rd-guide .rd-christmas-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .dog-guide * { box-sizing: border-box; }
+  .dog-guide [id] { scroll-margin-top: 6.5rem; }
+  .dog-kicker { margin: 0 0 .7rem; color: var(--dog-accent); font-size: .72rem; font-weight: 850; letter-spacing: .14em; text-transform: uppercase; }
+  .dog-btn { display:inline-flex; min-height:46px; align-items:center; justify-content:center; padding:0 1rem; border:1px solid var(--dog-line); border-radius:999px; color:#fff; background:rgba(255,255,255,.025); text-decoration:none; font-weight:800; }
+  .dog-btn--primary { border-color:#fff; background:#fff; color:#050607; }
+  .dog-text-link { color:#c8f4ff; text-decoration:none; font-weight:800; }
+
+  .dog-hero { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,.95fr); gap:2.5rem; align-items:center; padding:2.5rem 0 4.5rem; }
+  .dog-hero h1 { max-width: 10ch; margin:0; font-size:clamp(3rem,6vw,5.6rem); line-height:.96; letter-spacing:-.055em; }
+  .dog-lede { max-width:42rem; margin:1.25rem 0 0; color:var(--dog-muted); font-size:clamp(1.08rem,1.8vw,1.3rem); line-height:1.6; }
+  .dog-lede strong { color:#fff; }
+  .dog-hero__actions { display:flex; flex-wrap:wrap; gap:.7rem; margin-top:1.5rem; }
+  .dog-method-note { max-width:44rem; margin:1.35rem 0 0; color:var(--dog-soft); font-size:.82rem; line-height:1.55; }
+  .dog-method-note strong { color:rgba(255,255,255,.78); }
+  .dog-method-note a { color:#c8f4ff; }
+  .dog-hero__media { margin:0; overflow:hidden; border:1px solid var(--dog-line); border-radius:1.6rem; background:#090c10; }
+  .dog-hero__media img { display:block; width:100%; height:auto; aspect-ratio:16/9; object-fit:cover; }
+
+  .dog-section { padding:4.25rem 0; border-top:1px solid var(--dog-line); }
+  .dog-section__head { max-width:760px; margin-bottom:1.75rem; }
+  .dog-section h2 { margin:0; max-width:16ch; font-size:clamp(2.1rem,4vw,3.8rem); line-height:1; letter-spacing:-.045em; }
+  .dog-section__head > p:not(.dog-kicker) { margin:.95rem 0 0; color:var(--dog-muted); font-size:1.02rem; line-height:1.65; }
+
+  .dog-quick-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:.8rem; }
+  .dog-quick { min-height:150px; padding:1.2rem; border:1px solid var(--dog-line); border-radius:1.25rem; background:linear-gradient(145deg,rgba(255,255,255,.05),rgba(255,255,255,.018)); color:#fff; text-decoration:none; }
+  .dog-quick span { display:block; color:var(--dog-accent); font-size:.7rem; font-weight:850; letter-spacing:.09em; text-transform:uppercase; }
+  .dog-quick strong { display:block; margin:.55rem 0 .45rem; font-size:1.28rem; }
+  .dog-quick small { color:var(--dog-muted); line-height:1.5; }
+
+  .dog-table-wrap { overflow-x:auto; border:1px solid var(--dog-line); border-radius:1.25rem; background:#0b0f14; -webkit-overflow-scrolling:touch; }
+  .dog-table { width:100%; min-width:900px; border-collapse:collapse; }
+  .dog-table th,.dog-table td { padding:1rem .9rem; border-bottom:1px solid var(--dog-line); text-align:left; vertical-align:top; }
+  .dog-table th { color:var(--dog-accent); font-size:.68rem; letter-spacing:.08em; text-transform:uppercase; }
+  .dog-table td { color:var(--dog-muted); line-height:1.45; }
+  .dog-table td:first-child { color:#fff; font-weight:850; }
+  .dog-small { margin:.8rem 0 0; color:var(--dog-soft); font-size:.78rem; }
+
+  .dog-reviews { padding-bottom:2rem; }
+  .dog-review { display:grid; grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr); gap:2rem; align-items:start; padding:3rem 0; border-top:1px solid var(--dog-line); }
+  .dog-review:first-of-type { border-top:0; }
+  .dog-review__media { margin:0; overflow:hidden; border:1px solid var(--dog-line); border-radius:1.35rem; background:#090c10; }
+  .dog-review__media img { display:block; width:100%; height:auto; aspect-ratio:4/3; object-fit:cover; }
+  .dog-review__badge { margin:0 0 .55rem; color:var(--dog-accent); font-size:.72rem; font-weight:850; letter-spacing:.09em; text-transform:uppercase; }
+  .dog-review h3 { margin:0; font-size:clamp(2rem,3.5vw,3.25rem); line-height:1; letter-spacing:-.04em; }
+  .dog-review__best { margin:.9rem 0 0; color:#fff; }
+  .dog-review__summary { margin:.9rem 0 0; color:var(--dog-muted); font-size:1.02rem; line-height:1.7; }
+  .dog-review__facts { display:grid; grid-template-columns:.8fr 1.2fr; gap:.75rem; margin-top:1.25rem; }
+  .dog-review__facts > div { padding:1rem; border:1px solid var(--dog-line); border-radius:1rem; background:var(--dog-panel); }
+  .dog-review__facts span { display:block; margin-bottom:.35rem; color:var(--dog-soft); font-size:.72rem; font-weight:800; text-transform:uppercase; letter-spacing:.06em; }
+  .dog-review__facts strong { color:#fff; }
+  .dog-review__facts ul,.dog-watch ul { margin:.4rem 0 0; padding-left:1.15rem; color:var(--dog-muted); line-height:1.55; }
+  .dog-watch { margin-top:.8rem; padding:1rem; border-left:3px solid rgba(143,230,255,.45); background:rgba(143,230,255,.035); }
+  .dog-watch > strong { color:#fff; }
+  .dog-links { display:flex; flex-wrap:wrap; gap:.65rem; align-items:center; margin-top:1rem; }
+
+  .dog-advice-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.8rem; }
+  .dog-advice-grid article { padding:1.25rem; border:1px solid var(--dog-line); border-radius:1.15rem; background:var(--dog-panel); }
+  .dog-advice-grid span { color:var(--dog-accent); font-size:.72rem; font-weight:850; }
+  .dog-advice-grid h3 { margin:.55rem 0 0; font-size:1.25rem; }
+  .dog-advice-grid p { margin:.65rem 0 0; color:var(--dog-muted); line-height:1.6; }
+
+  .dog-alt-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.8rem; }
+  .dog-alt-list article { padding:1.25rem; border:1px solid var(--dog-line); border-radius:1.15rem; background:var(--dog-panel); }
+  .dog-alt-list h3 { margin:0; font-size:1.25rem; }
+  .dog-alt-list p { color:var(--dog-muted); line-height:1.6; }
+  .dog-alt-list a { color:#c8f4ff; font-weight:800; text-decoration:none; }
+
+  .dog-gift { padding:3rem; border:1px solid rgba(143,230,255,.24); border-radius:1.5rem; background:radial-gradient(circle at 100% 0,rgba(143,230,255,.09),transparent 40%),rgba(255,255,255,.02); }
+  .dog-gift h2 { max-width:18ch; }
+  .dog-gift p:last-child { max-width:780px; color:var(--dog-muted); line-height:1.7; }
+  .dog-gift strong { color:#fff; }
+
+  .dog-faq details { border-top:1px solid var(--dog-line); }
+  .dog-faq summary { padding:1.2rem 0; cursor:pointer; color:#fff; font-size:1.06rem; font-weight:800; }
+  .dog-faq details p { margin:0 0 1.25rem; max-width:760px; color:var(--dog-muted); line-height:1.65; }
+
+  .dog-footer { margin-top:3.5rem; padding-top:1.5rem; border-top:1px solid var(--dog-line); color:var(--dog-soft); font-size:.82rem; line-height:1.55; }
+  .dog-footer nav { display:flex; flex-wrap:wrap; gap:.9rem 1.2rem; margin-top:.8rem; }
+  .dog-footer a { color:#c8f4ff; }
+
+  @media (max-width: 900px) {
+    .dog-hero,.dog-review { grid-template-columns:1fr; }
+    .dog-hero__media { order:-1; }
+    .dog-review__media { max-width:720px; }
+    .dog-quick-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
   }
-  @media(max-width:640px) {
-    .rd-guide .rd-evidence-grid,
-    .rd-guide .rd-intent-cards,
-    .rd-guide .rd-buying-grid,
-    .rd-guide .rd-christmas-grid { grid-template-columns: 1fr; }
-    .rd-guide .rd-evidence-hero { border-radius: 20px; }
+
+  @media (max-width: 640px) {
+    .dog-guide { padding:1rem .9rem 4rem; }
+    .dog-hero { gap:1.5rem; padding:1rem 0 3rem; }
+    .dog-hero h1 { max-width:11ch; font-size:clamp(2.65rem,13vw,4rem); line-height:.98; }
+    .dog-lede { font-size:1.05rem; }
+    .dog-hero__actions .dog-btn { width:100%; }
+    .dog-section { padding:3rem 0; }
+    .dog-section h2 { font-size:clamp(2rem,10vw,3rem); }
+    .dog-quick-grid,.dog-advice-grid,.dog-alt-list { grid-template-columns:1fr; }
+    .dog-quick { min-height:0; }
+    .dog-review { gap:1.25rem; padding:2.4rem 0; }
+    .dog-review__media img { aspect-ratio:16/10; }
+    .dog-review__facts { grid-template-columns:1fr; }
+    .dog-links { align-items:stretch; flex-direction:column; }
+    .dog-links .dog-btn { width:100%; }
+    .dog-gift { padding:1.5rem; }
+    .dog-table { min-width:760px; }
   }
 </style>
