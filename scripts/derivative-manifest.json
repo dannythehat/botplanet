@@ -5067,192 +5067,6 @@
     ]
   },
   {
-    "source": "/media/window/soil-dust-film.webp",
-    "sourceWidth": 1586,
-    "sourceHeight": 992,
-    "derivatives": [
-      {
-        "id": "media-window-soil-dust-film-webp-360",
-        "src": "/media/window/soil-dust-film-360w.webp",
-        "width": 360,
-        "height": 225,
-        "bytes": 19894,
-        "checksum": "sha256:16055a8e55b5e2b667ed4bd260358bc2eb07c28100b6d416003576be4df4f82d"
-      },
-      {
-        "id": "media-window-soil-dust-film-webp-640",
-        "src": "/media/window/soil-dust-film-640w.webp",
-        "width": 640,
-        "height": 400,
-        "bytes": 71652,
-        "checksum": "sha256:4830e9ae58527df6dc1e05ac2e0963434f27df354ff80bce889f166afa7bee12"
-      },
-      {
-        "id": "media-window-soil-dust-film-webp-960",
-        "src": "/media/window/soil-dust-film-960w.webp",
-        "width": 960,
-        "height": 600,
-        "bytes": 172860,
-        "checksum": "sha256:e36ce1434e6355043752e2230eae59dbf42ce2633c002c46b1814f9547b66a9a"
-      },
-      {
-        "id": "media-window-soil-dust-film-webp-1440",
-        "src": "/media/window/soil-dust-film-1440w.webp",
-        "width": 1440,
-        "height": 901,
-        "bytes": 326388,
-        "checksum": "sha256:37fb84a10b86de7fb374a5451bf9b15ae94ff0a3c4e1a0865ba8f1bdfe5ebdfc"
-      }
-    ]
-  },
-  {
-    "source": "/media/window/soil-rain-spots.webp",
-    "sourceWidth": 1586,
-    "sourceHeight": 992,
-    "derivatives": [
-      {
-        "id": "media-window-soil-rain-spots-webp-360",
-        "src": "/media/window/soil-rain-spots-360w.webp",
-        "width": 360,
-        "height": 225,
-        "bytes": 20342,
-        "checksum": "sha256:9afdb0f9405885b4de2395ec151c6fce909a914867f64e8fb8eff629db49fc3a"
-      },
-      {
-        "id": "media-window-soil-rain-spots-webp-640",
-        "src": "/media/window/soil-rain-spots-640w.webp",
-        "width": 640,
-        "height": 400,
-        "bytes": 70410,
-        "checksum": "sha256:ce22dab1d825346b42316234fe156b8dfec0a6bc2c7346d67a4718eb7ea85be3"
-      },
-      {
-        "id": "media-window-soil-rain-spots-webp-960",
-        "src": "/media/window/soil-rain-spots-960w.webp",
-        "width": 960,
-        "height": 600,
-        "bytes": 165174,
-        "checksum": "sha256:40d9a216d5430bc5de7df3c3635cb4686b221445b2846f0d0a0bcef2e90ecf5f"
-      },
-      {
-        "id": "media-window-soil-rain-spots-webp-1440",
-        "src": "/media/window/soil-rain-spots-1440w.webp",
-        "width": 1440,
-        "height": 901,
-        "bytes": 291634,
-        "checksum": "sha256:66175d07cd3e6906a0cfd273820c4dbaa558080391f9f454c38b123768a1e53d"
-      }
-    ]
-  },
-  {
-    "source": "/media/window/soil-greasy-marks.webp",
-    "sourceWidth": 1586,
-    "sourceHeight": 992,
-    "derivatives": [
-      {
-        "id": "media-window-soil-greasy-marks-webp-360",
-        "src": "/media/window/soil-greasy-marks-360w.webp",
-        "width": 360,
-        "height": 225,
-        "bytes": 8674,
-        "checksum": "sha256:582975957cb558249eb2f41a205df44db502c8c1b5b1840ce74a014678919d6c"
-      },
-      {
-        "id": "media-window-soil-greasy-marks-webp-640",
-        "src": "/media/window/soil-greasy-marks-640w.webp",
-        "width": 640,
-        "height": 400,
-        "bytes": 27748,
-        "checksum": "sha256:7b4afee8636b1e4685fadfa5375288321d0562bd24d1170c2a9740adbd74da62"
-      },
-      {
-        "id": "media-window-soil-greasy-marks-webp-960",
-        "src": "/media/window/soil-greasy-marks-960w.webp",
-        "width": 960,
-        "height": 600,
-        "bytes": 64186,
-        "checksum": "sha256:f363a6c7f24b313b7e1145d7218a0ae9069489cdbc1897d94b0595bac08c134c"
-      },
-      {
-        "id": "media-window-soil-greasy-marks-webp-1440",
-        "src": "/media/window/soil-greasy-marks-1440w.webp",
-        "width": 1440,
-        "height": 901,
-        "bytes": 112156,
-        "checksum": "sha256:6b28382b9dc43e80838681a235e5f0d4662d4be1245a3bafb9070531dbbd3d0b"
-      }
-    ]
-  },
-  {
-    "source": "/media/pool/debris-leaves.webp",
-    "sourceWidth": 700,
-    "sourceHeight": 467,
-    "derivatives": [
-      {
-        "id": "media-pool-debris-leaves-webp-360",
-        "src": "/media/pool/debris-leaves-360w.webp",
-        "width": 360,
-        "height": 240,
-        "bytes": 10484,
-        "checksum": "sha256:f7a4db110c9c5d236a47f7d1750f4fdbd8bbb730413b299113dc1bebbc6389c4"
-      },
-      {
-        "id": "media-pool-debris-leaves-webp-640",
-        "src": "/media/pool/debris-leaves-640w.webp",
-        "width": 640,
-        "height": 427,
-        "bytes": 32332,
-        "checksum": "sha256:f02cd349f70f484661722558fa3a8a22dd476dc8637a36fa66e601a24b086289"
-      }
-    ]
-  },
-  {
-    "source": "/media/pool/debris-silt.webp",
-    "sourceWidth": 700,
-    "sourceHeight": 467,
-    "derivatives": [
-      {
-        "id": "media-pool-debris-silt-webp-360",
-        "src": "/media/pool/debris-silt-360w.webp",
-        "width": 360,
-        "height": 240,
-        "bytes": 9322,
-        "checksum": "sha256:19686d5205cbf0f1ea572216c985f8b1a208b47e5637c96c9ad4880de84abd25"
-      },
-      {
-        "id": "media-pool-debris-silt-webp-640",
-        "src": "/media/pool/debris-silt-640w.webp",
-        "width": 640,
-        "height": 427,
-        "bytes": 29860,
-        "checksum": "sha256:f11e05a7e2b4115068011088089b8ebb9fa8e643342c3113906489ab9f28c9fa"
-      }
-    ]
-  },
-  {
-    "source": "/media/pool/debris-algae.webp",
-    "sourceWidth": 700,
-    "sourceHeight": 467,
-    "derivatives": [
-      {
-        "id": "media-pool-debris-algae-webp-360",
-        "src": "/media/pool/debris-algae-360w.webp",
-        "width": 360,
-        "height": 240,
-        "bytes": 9260,
-        "checksum": "sha256:9bdae46d2065cb38dcbcd09cedfbee535669b53a3514bf761ba9058594e7b755"
-      },
-      {
-        "id": "media-pool-debris-algae-webp-640",
-        "src": "/media/pool/debris-algae-640w.webp",
-        "width": 640,
-        "height": 427,
-        "bytes": 27206,
-        "checksum": "sha256:9d12fc1a56fb183da014866f723968c0a53260064c9f8a79a58d5b9f8a9adc4d"
-      }
-    ]
-  },
-  {
     "source": "/media/editorial/do-window-robots-work.webp",
     "sourceWidth": 1672,
     "sourceHeight": 941,
@@ -10251,6 +10065,270 @@
     ]
   },
   {
+    "source": "/media/coding/code-and-go-robot-mouse/hero.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-coding-code-and-go-robot-mouse-hero-webp-360",
+        "src": "/media/coding/code-and-go-robot-mouse/hero-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 20520,
+        "checksum": "sha256:3c0437c5cedd103e58d3f725839034baee743b63d7a3c7d60899ad45daec8d21"
+      },
+      {
+        "id": "media-coding-code-and-go-robot-mouse-hero-webp-640",
+        "src": "/media/coding/code-and-go-robot-mouse/hero-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 49536,
+        "checksum": "sha256:98295c8780059b54ec609a8268b0eabe35527c503e1cb7d17b4f30608d7363b6"
+      },
+      {
+        "id": "media-coding-code-and-go-robot-mouse-hero-webp-960",
+        "src": "/media/coding/code-and-go-robot-mouse/hero-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 94596,
+        "checksum": "sha256:14bae4512325d4ba01de52180d775310bccd7f1f16be831d0adcf495af8b365b"
+      }
+    ]
+  },
+  {
+    "source": "/media/coding/code-and-go-robot-mouse/figure-1.webp",
+    "sourceWidth": 1295,
+    "sourceHeight": 1214,
+    "derivatives": [
+      {
+        "id": "media-coding-code-and-go-robot-mouse-figure-1-webp-360",
+        "src": "/media/coding/code-and-go-robot-mouse/figure-1-360w.webp",
+        "width": 360,
+        "height": 337,
+        "bytes": 15584,
+        "checksum": "sha256:152ac71fe75bd3a0ca1fae76bdbbc51e1c44e75e812bee91ebfc66a6de76e301"
+      },
+      {
+        "id": "media-coding-code-and-go-robot-mouse-figure-1-webp-640",
+        "src": "/media/coding/code-and-go-robot-mouse/figure-1-640w.webp",
+        "width": 640,
+        "height": 600,
+        "bytes": 35336,
+        "checksum": "sha256:ef7291145cc1be3d1d249fa7121140f7109beb4a1d79fdd318ef34aae2cd3d45"
+      },
+      {
+        "id": "media-coding-code-and-go-robot-mouse-figure-1-webp-960",
+        "src": "/media/coding/code-and-go-robot-mouse/figure-1-960w.webp",
+        "width": 960,
+        "height": 900,
+        "bytes": 64598,
+        "checksum": "sha256:1ddb7b7a706556af5962d76207f6eb452181e2348da88322430ed3fd5590183d"
+      }
+    ]
+  },
+  {
+    "source": "/media/coding/code-and-go-robot-mouse/figure-2.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-coding-code-and-go-robot-mouse-figure-2-webp-360",
+        "src": "/media/coding/code-and-go-robot-mouse/figure-2-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 24422,
+        "checksum": "sha256:0c4410f7107db7f1f51e72dad331662ce670a8f05f508ee7b2828f4df8259f8f"
+      },
+      {
+        "id": "media-coding-code-and-go-robot-mouse-figure-2-webp-640",
+        "src": "/media/coding/code-and-go-robot-mouse/figure-2-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 58754,
+        "checksum": "sha256:451c8e5b227a91c2569c76eaa0182a69b73349d7b0bb402c809136a5e3ab4ebb"
+      },
+      {
+        "id": "media-coding-code-and-go-robot-mouse-figure-2-webp-960",
+        "src": "/media/coding/code-and-go-robot-mouse/figure-2-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 110064,
+        "checksum": "sha256:e6852f25589158500be24466a8379bb679c5768dc91dd2c4cfcbc11705c348b3"
+      }
+    ]
+  },
+  {
+    "source": "/media/coding/code-and-go-robot-mouse/card.webp",
+    "sourceWidth": 1295,
+    "sourceHeight": 1214,
+    "derivatives": [
+      {
+        "id": "media-coding-code-and-go-robot-mouse-card-webp-360",
+        "src": "/media/coding/code-and-go-robot-mouse/card-360w.webp",
+        "width": 360,
+        "height": 337,
+        "bytes": 15584,
+        "checksum": "sha256:152ac71fe75bd3a0ca1fae76bdbbc51e1c44e75e812bee91ebfc66a6de76e301"
+      },
+      {
+        "id": "media-coding-code-and-go-robot-mouse-card-webp-640",
+        "src": "/media/coding/code-and-go-robot-mouse/card-640w.webp",
+        "width": 640,
+        "height": 600,
+        "bytes": 35336,
+        "checksum": "sha256:ef7291145cc1be3d1d249fa7121140f7109beb4a1d79fdd318ef34aae2cd3d45"
+      },
+      {
+        "id": "media-coding-code-and-go-robot-mouse-card-webp-960",
+        "src": "/media/coding/code-and-go-robot-mouse/card-960w.webp",
+        "width": 960,
+        "height": 900,
+        "bytes": 64598,
+        "checksum": "sha256:1ddb7b7a706556af5962d76207f6eb452181e2348da88322430ed3fd5590183d"
+      }
+    ]
+  },
+  {
+    "source": "/media/coding/botley-the-coding-robot/hero.webp",
+    "sourceWidth": 1536,
+    "sourceHeight": 1024,
+    "derivatives": [
+      {
+        "id": "media-coding-botley-the-coding-robot-hero-webp-360",
+        "src": "/media/coding/botley-the-coding-robot/hero-360w.webp",
+        "width": 360,
+        "height": 240,
+        "bytes": 22550,
+        "checksum": "sha256:2bc5a075d9ddd1b0f59bf4fdfa8039767772154c0067cbc5423e600e26f38b59"
+      },
+      {
+        "id": "media-coding-botley-the-coding-robot-hero-webp-640",
+        "src": "/media/coding/botley-the-coding-robot/hero-640w.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 56296,
+        "checksum": "sha256:dc44e93532ce40876b9ac622291e61cea4204262926ff1b1ae74bbb52986d121"
+      },
+      {
+        "id": "media-coding-botley-the-coding-robot-hero-webp-960",
+        "src": "/media/coding/botley-the-coding-robot/hero-960w.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 110134,
+        "checksum": "sha256:9aa4aebcef05ff206b575f56b5a7a7f7dcfd094864ae5b4a9e07ffba46c210be"
+      },
+      {
+        "id": "media-coding-botley-the-coding-robot-hero-webp-1440",
+        "src": "/media/coding/botley-the-coding-robot/hero-1440w.webp",
+        "width": 1440,
+        "height": 960,
+        "bytes": 180984,
+        "checksum": "sha256:82e58d05d5a695bc64e4121666c518379d8cd8d4434567765f946f533e0ab4f6"
+      }
+    ]
+  },
+  {
+    "source": "/media/coding/botley-the-coding-robot/figure-1.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-coding-botley-the-coding-robot-figure-1-webp-360",
+        "src": "/media/coding/botley-the-coding-robot/figure-1-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 28848,
+        "checksum": "sha256:e2be660c491f5663a4944c582f8fdbdb896095bd79ebcb7f284ddae6c921a93d"
+      },
+      {
+        "id": "media-coding-botley-the-coding-robot-figure-1-webp-640",
+        "src": "/media/coding/botley-the-coding-robot/figure-1-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 67250,
+        "checksum": "sha256:7d2936d6ac58cb2e2b5cbfd79c813172e141e966e57b3439db5f128d5e9bc2ff"
+      },
+      {
+        "id": "media-coding-botley-the-coding-robot-figure-1-webp-960",
+        "src": "/media/coding/botley-the-coding-robot/figure-1-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 124516,
+        "checksum": "sha256:0790ac53a6b5ae7841a8462a8f0135be1163db17fab2065262452ee52e182711"
+      }
+    ]
+  },
+  {
+    "source": "/media/coding/botley-the-coding-robot/figure-2.webp",
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "derivatives": [
+      {
+        "id": "media-coding-botley-the-coding-robot-figure-2-webp-360",
+        "src": "/media/coding/botley-the-coding-robot/figure-2-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 27194,
+        "checksum": "sha256:b226ba544fa5bc3d4f713ebc836d1128f644675d4fe83bcfbcf9a6e624ec2797"
+      },
+      {
+        "id": "media-coding-botley-the-coding-robot-figure-2-webp-640",
+        "src": "/media/coding/botley-the-coding-robot/figure-2-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 65392,
+        "checksum": "sha256:7e89b4572b92230d13ea7f66cbdc0602c8bafb68a6ba6ea6db8013fb65d24c64"
+      },
+      {
+        "id": "media-coding-botley-the-coding-robot-figure-2-webp-960",
+        "src": "/media/coding/botley-the-coding-robot/figure-2-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 122502,
+        "checksum": "sha256:a024a6bcb3f17b939ddaf3d367e53b1cc4072e07acb0b3403bf5a293daefa9b0"
+      }
+    ]
+  },
+  {
+    "source": "/media/coding/botley-the-coding-robot/card.webp",
+    "sourceWidth": 1536,
+    "sourceHeight": 1024,
+    "derivatives": [
+      {
+        "id": "media-coding-botley-the-coding-robot-card-webp-360",
+        "src": "/media/coding/botley-the-coding-robot/card-360w.webp",
+        "width": 360,
+        "height": 240,
+        "bytes": 22550,
+        "checksum": "sha256:2bc5a075d9ddd1b0f59bf4fdfa8039767772154c0067cbc5423e600e26f38b59"
+      },
+      {
+        "id": "media-coding-botley-the-coding-robot-card-webp-640",
+        "src": "/media/coding/botley-the-coding-robot/card-640w.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 56296,
+        "checksum": "sha256:dc44e93532ce40876b9ac622291e61cea4204262926ff1b1ae74bbb52986d121"
+      },
+      {
+        "id": "media-coding-botley-the-coding-robot-card-webp-960",
+        "src": "/media/coding/botley-the-coding-robot/card-960w.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 110134,
+        "checksum": "sha256:9aa4aebcef05ff206b575f56b5a7a7f7dcfd094864ae5b4a9e07ffba46c210be"
+      },
+      {
+        "id": "media-coding-botley-the-coding-robot-card-webp-1440",
+        "src": "/media/coding/botley-the-coding-robot/card-1440w.webp",
+        "width": 1440,
+        "height": 960,
+        "bytes": 180984,
+        "checksum": "sha256:82e58d05d5a695bc64e4121666c518379d8cd8d4434567765f946f533e0ab4f6"
+      }
+    ]
+  },
+  {
     "source": "/media/reviews/grillbot/hero.webp",
     "sourceWidth": 1672,
     "sourceHeight": 941,
@@ -12255,45 +12333,6 @@
         "height": 1200,
         "bytes": 113568,
         "checksum": "sha256:9ef76e45e217499f11f148894f244b6a72599943f32a9939e3e29dedaf263dab"
-      }
-    ]
-  },
-  {
-    "source": "/media/best-robots/hero.webp",
-    "sourceWidth": 1672,
-    "sourceHeight": 941,
-    "derivatives": [
-      {
-        "id": "media-best-robots-hero-webp-360",
-        "src": "/media/best-robots/hero-360w.webp",
-        "width": 360,
-        "height": 203,
-        "bytes": 7188,
-        "checksum": "sha256:b8c16058362b984b8eb470f9224b40a642a4bdd64d5c1e1e3cfa04139e35373f"
-      },
-      {
-        "id": "media-best-robots-hero-webp-640",
-        "src": "/media/best-robots/hero-640w.webp",
-        "width": 640,
-        "height": 360,
-        "bytes": 16596,
-        "checksum": "sha256:557db2bc5df7466159a3e130496b1c8f51b6f3bc07e9cfdff76da6fd3515adb6"
-      },
-      {
-        "id": "media-best-robots-hero-webp-960",
-        "src": "/media/best-robots/hero-960w.webp",
-        "width": 960,
-        "height": 540,
-        "bytes": 32262,
-        "checksum": "sha256:68d0dda46a01f207b0a71e4607a868c5425ecc90dc737bcb3cf3e8977de4c92d"
-      },
-      {
-        "id": "media-best-robots-hero-webp-1440",
-        "src": "/media/best-robots/hero-1440w.webp",
-        "width": 1440,
-        "height": 810,
-        "bytes": 61364,
-        "checksum": "sha256:316cfb847487bcdfd2bf11d294ccfaeafe5be4ccf249b2ca755b17b08a03dbd0"
       }
     ]
   }

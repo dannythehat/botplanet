@@ -406,6 +406,21 @@ const SOURCES = [
   "/media/coding/makeblock-mbot/figure-1.webp",
   "/media/coding/makeblock-mbot/figure-2.webp",
   "/media/coding/makeblock-mbot/card.webp",
+  /* Code & Go Robot Mouse, owner-supplied 26 September 2026. card.webp is a
+     separate file from figure-1.webp despite matching bytes: the derivative
+     matcher below keys derivatives to the first asset record found at a given
+     source path, so two MEDIA_ASSETS records sharing one path silently lose
+     responsive variants on whichever record loses that lookup. */
+  "/media/coding/code-and-go-robot-mouse/hero.webp",
+  "/media/coding/code-and-go-robot-mouse/figure-1.webp",
+  "/media/coding/code-and-go-robot-mouse/figure-2.webp",
+  "/media/coding/code-and-go-robot-mouse/card.webp",
+  /* Botley 2.0, owner-supplied 26 September 2026. Same reason card.webp is
+     its own file rather than reusing hero.webp. */
+  "/media/coding/botley-the-coding-robot/hero.webp",
+  "/media/coding/botley-the-coding-robot/figure-1.webp",
+  "/media/coding/botley-the-coding-robot/figure-2.webp",
+  "/media/coding/botley-the-coding-robot/card.webp",
 
   /* THE 11 AUGUST DROP. Fifty-eight files across seventeen product reviews,
      every one of which had an empty picture slot before this. Same reason as

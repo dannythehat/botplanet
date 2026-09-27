@@ -4673,6 +4673,153 @@ export const CODING_UPLOAD_ASSETS: MediaAssetRecord[] = [
     schema: DEPICTION_SCHEMA,
     depictsRealProduct: true,
   },
+  /* Code & Go Robot Mouse, owner-supplied 26 September 2026. */
+  {
+    ...base("code-and-go-robot-mouse-hero", "depiction"),
+    productId: "prod-code-and-go-robot-mouse",
+    purpose: "Code & Go Robot Mouse review — lead",
+    exactModel: "Code & Go Robot Mouse",
+    type: "product_detail",
+    checksum: "sha256:8856a99c7f8377c78a4b5803e78e6b4df61d317d3b20f376e9b31449d1340d24",
+    width: 1254,
+    height: 1254,
+    src: "/media/coding/code-and-go-robot-mouse/hero.webp",
+    altText:
+      "A young girl pressing a button on a purple Code & Go Robot Mouse, with a stack of green directional cards laid out on the table in front of her.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: true,
+  },
+  {
+    ...base("code-and-go-robot-mouse-figure-1", "depiction"),
+    productId: "prod-code-and-go-robot-mouse",
+    purpose: "Code & Go Robot Mouse review — close-up",
+    exactModel: "Code & Go Robot Mouse",
+    type: "product_detail",
+    checksum: "sha256:072ae968f00a080289b3ba61dbb0d1940bfad879420b61ce968a9a6fcf079093",
+    width: 1295,
+    height: 1214,
+    src: "/media/coding/code-and-go-robot-mouse/figure-1.webp",
+    altText:
+      "A close-up of the purple Code & Go Robot Mouse, showing its coloured directional buttons and painted-on eyes and whiskers.",
+    altTextStatus: "approved",
+    schema: DEPICTION_SCHEMA,
+    depictsRealProduct: true,
+  },
+  {
+    ...base("code-and-go-robot-mouse-figure-2", "depiction"),
+    productId: "prod-code-and-go-robot-mouse",
+    purpose: "Code & Go Robot Mouse review — box and cards",
+    exactModel: "Code & Go Robot Mouse",
+    type: "product_detail",
+    checksum: "sha256:2df12fee5ed9ad1878369f5d535bcbf41340f1c795386d1f64254f029b3f4526",
+    width: 1254,
+    height: 1254,
+    src: "/media/coding/code-and-go-robot-mouse/figure-2.webp",
+    altText:
+      "The Code & Go Robot Mouse retail box beside the purple mouse itself and a fanned-out set of its green directional cards.",
+    altTextStatus: "approved",
+    schema: DEPICTION_SCHEMA,
+    depictsRealProduct: true,
+  },
+  {
+    /* card.webp is a byte-identical copy of figure-1.webp, kept as its own
+       file rather than the same path reused across two records: the
+       derivative generator matches a manifest entry to the FIRST asset record
+       found at that source path, so a second record sharing figure-1's path
+       would silently never link to its own responsive derivatives. */
+    ...base("code-and-go-robot-mouse-card", "depiction"),
+    productId: "prod-code-and-go-robot-mouse",
+    purpose: "Code & Go Robot Mouse — listing card",
+    exactModel: "Code & Go Robot Mouse",
+    type: "product_hero",
+    checksum: "sha256:072ae968f00a080289b3ba61dbb0d1940bfad879420b61ce968a9a6fcf079093",
+    width: 1295,
+    height: 1214,
+    src: "/media/coding/code-and-go-robot-mouse/card.webp",
+    altText:
+      "A close-up of the purple Code & Go Robot Mouse, showing its coloured directional buttons and painted-on eyes and whiskers.",
+    altTextStatus: "approved",
+    schema: DEPICTION_SCHEMA,
+    depictsRealProduct: true,
+  },
+  /* Botley 2.0, owner-supplied 26 September 2026. All three carry marketing
+     text and claims composited into the pixels — "Easy to use & packed with
+     advanced features!", "Ready to go right out of the box!" — so all three
+     take ORIGINAL_SCHEMA rather than DEPICTION_SCHEMA, same reasoning as the
+     makeblock-mbot hero above: a claim-laden promotional composition is not
+     the neutral photograph Product structured data should point at, even
+     though it does show the real machine. */
+  {
+    ...base("botley-hero", "depiction"),
+    productId: "prod-botley-2",
+    purpose: "Botley 2.0 review — lead",
+    exactModel: "Botley 2.0",
+    type: "promotional_panel",
+    checksum: "sha256:e518c5552d924fcb9ee97daf3191b840355ef15d5263501060db6755ba720e7f",
+    width: 1536,
+    height: 1024,
+    src: "/media/coding/botley-the-coding-robot/hero.webp",
+    altText:
+      "The Botley 2.0 Activity Set retail box beside the robot, its detachable remote, activity cards, cones and flags laid out on a table.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: true,
+  },
+  {
+    ...base("botley-figure-1", "depiction"),
+    productId: "prod-botley-2",
+    purpose: "Botley 2.0 review — the remote in use",
+    exactModel: "Botley 2.0",
+    type: "promotional_panel",
+    checksum: "sha256:775e902bfc793fff6cea13fec78b81e1026669f0070cf65cdf7cb3141e8a6bee",
+    width: 1254,
+    height: 1254,
+    src: "/media/coding/botley-the-coding-robot/figure-1.webp",
+    altText:
+      "A child pressing a button on Botley's detachable remote, with the green-and-blue robot and its directional cards on the floor in front of them.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: true,
+  },
+  {
+    ...base("botley-figure-2", "depiction"),
+    productId: "prod-botley-2",
+    purpose: "Botley 2.0 review — a course laid out",
+    exactModel: "Botley 2.0",
+    type: "promotional_panel",
+    checksum: "sha256:af63205611496b71b1089fd27af9fc3da90e0119ed486167939be0111af792d1",
+    width: 1254,
+    height: 1254,
+    src: "/media/coding/botley-the-coding-robot/figure-2.webp",
+    altText:
+      "Botley the robot beside cube obstacles and two flag markers set up as a course on a patterned rug.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: true,
+  },
+  {
+    /* card.webp is a byte-identical copy of hero.webp, kept as its own file
+       for the same reason as the Code & Go Robot Mouse card above — a shared
+       path silently drops one of the two records out of responsive-variant
+       readiness. product_hero for the grid slot; still ORIGINAL_SCHEMA since
+       the image itself is the claim-laden box shot, not Product schema
+       eligible. */
+    ...base("botley-card", "depiction"),
+    productId: "prod-botley-2",
+    purpose: "Botley 2.0 — listing card",
+    exactModel: "Botley 2.0",
+    type: "product_hero",
+    checksum: "sha256:e518c5552d924fcb9ee97daf3191b840355ef15d5263501060db6755ba720e7f",
+    width: 1536,
+    height: 1024,
+    src: "/media/coding/botley-the-coding-robot/card.webp",
+    altText:
+      "The Botley 2.0 Activity Set retail box beside the robot, its detachable remote, activity cards, cones and flags laid out on a table.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: true,
+  },
 ];
 
 

@@ -4295,6 +4295,25 @@ export const REVIEWS: Record<string, ReviewContent> = {
      on any "gift" phrasing — see docs/seo/coding-robots-gift-topup-findings.md. */
   "botley-the-coding-robot": {
     slug: "botley-the-coding-robot",
+    image: {
+      src: "/media/coding/botley-the-coding-robot/hero.webp",
+      alt:
+        "The Botley 2.0 Activity Set retail box beside the robot, its detachable remote, activity cards, cones and flags laid out on a table.",
+    },
+    figures: [
+      {
+        afterHeading: "How the coding actually works",
+        src: "/media/coding/botley-the-coding-robot/figure-1.webp",
+        caption:
+          "Programming happens on the detachable remote, not on the robot itself.",
+      },
+      {
+        afterHeading: "Who this is for",
+        src: "/media/coding/botley-the-coding-robot/figure-2.webp",
+        caption:
+          "A course built from the set's own cones and flags. The cards are what turn it into a program.",
+      },
+    ],
     categorySlug: "educational-coding-robots",
     eyebrow: "Coding robot review",
     title: "Botley 2.0 review",
@@ -4343,6 +4362,25 @@ export const REVIEWS: Record<string, ReviewContent> = {
      $71.99 activity set or the $270.99 classroom set. */
   "code-and-go-robot-mouse": {
     slug: "code-and-go-robot-mouse",
+    image: {
+      src: "/media/coding/code-and-go-robot-mouse/hero.webp",
+      alt:
+        "A young girl pressing a button on a purple Code & Go Robot Mouse, with a stack of green directional cards laid out on the table in front of her.",
+    },
+    figures: [
+      {
+        afterHeading: "The simplest coding toy in this category",
+        src: "/media/coding/code-and-go-robot-mouse/figure-1.webp",
+        caption:
+          "No remote, no app — the buttons on top set the sequence directly on the mouse itself.",
+      },
+      {
+        afterHeading: "Who this is for",
+        src: "/media/coding/code-and-go-robot-mouse/figure-2.webp",
+        caption:
+          "The retail box, the mouse and its full set of direction cards.",
+      },
+    ],
     categorySlug: "educational-coding-robots",
     eyebrow: "Coding robot review",
     title: "Code & Go Robot Mouse review",
