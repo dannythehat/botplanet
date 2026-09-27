@@ -17,3 +17,53 @@
 @media(max-width:1050px){.rd-winners{grid-template-columns:repeat(3,1fr)}.rd-buying-grid{grid-template-columns:repeat(3,1fr)}.rd-related-grid{grid-template-columns:repeat(2,1fr)}.rd-also-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:900px){.rd-guide{padding-inline:18px}.rd-hero,.rd-split,.rd-pick,.rd-senior-panel{grid-template-columns:1fr}.rd-hero__media{order:-1}.rd-split--image-first .rd-media{order:-1}.rd-pick--reverse .rd-pick__media,.rd-pick--reverse .rd-pick__content{order:initial}.rd-intent-cards,.rd-choice-grid{grid-template-columns:repeat(2,1fr)}.rd-duel-grid,.rd-program-grid{grid-template-columns:1fr 1fr}.rd-gallery{grid-template-columns:1fr 1fr}.rd-gallery figure:first-child{grid-row:auto;grid-column:1/-1}.rd-gallery figure:first-child img{min-height:340px}.rd-fact-row{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:640px){.rd-guide{padding-top:14px}.rd-hero{gap:22px;padding-top:12px}.rd-hero h1{font-size:clamp(2.65rem,13vw,4.2rem)}.rd-actions .rd-button{width:100%}.rd-winners{grid-template-columns:1fr 1fr}.rd-section,.rd-split{padding:54px 0}.rd-intent-cards,.rd-choice-grid,.rd-duel-grid,.rd-program-grid,.rd-buying-grid,.rd-related-grid,.rd-also-grid,.rd-trust,.rd-companion-facts,.rd-pros-cons,.rd-fact-row{grid-template-columns:1fr}.rd-duel__vs{grid-template-columns:1fr}.rd-vs{text-align:center}.rd-snapshot__top{display:block}.rd-snapshot__top p{margin-top:8px}.rd-price-ladder{grid-template-columns:1fr 1fr}.rd-pick{grid-template-columns:1fr;gap:22px;padding:38px 0}.rd-pick--featured{padding:16px}.rd-fit{grid-template-columns:90px 1fr 48px}.rd-gallery{grid-template-columns:1fr}.rd-gallery figure:first-child{grid-column:auto}.rd-gallery figure:first-child img,.rd-gallery img{min-height:220px}.rd-winner{padding:14px}.rd-media{border-radius:20px}}
+
+/* 2026-09-27 visual refinement: clearer sections, frosted surfaces and image-led comparisons */
+.rd-section,.rd-split{position:relative}.rd-section:not(.rd-picks)::before,.rd-split::before{content:"";position:absolute;left:0;right:0;top:-1px;height:1px;background:linear-gradient(90deg,transparent,rgba(143,230,255,.34) 18%,rgba(255,255,255,.17) 50%,rgba(245,202,103,.2) 82%,transparent)}
+.rd-winner,.rd-intent-card,.rd-choice,.rd-duel,.rd-program-card,.rd-also,.rd-buying-grid article,.rd-related-grid a,.rd-trust>div{backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:inset 0 1px 0 rgba(255,255,255,.045),0 16px 44px rgba(0,0,0,.16)}
+.rd-winner:hover,.rd-intent-card:hover,.rd-choice:hover,.rd-related-grid a:hover{border-color:rgba(143,230,255,.34);transform:translateY(-2px);transition:.22s ease}
+
+/* Comparison matrix: image-led rows rather than a spreadsheet wall */
+.rd-snapshot{border-color:rgba(143,230,255,.17);background:radial-gradient(circle at 6% 0,rgba(108,168,255,.11),transparent 34%),linear-gradient(180deg,rgba(13,19,28,.94),rgba(6,9,13,.88));box-shadow:0 24px 70px rgba(0,0,0,.26)}
+.rd-snapshot__top{padding:26px 28px;background:rgba(255,255,255,.025);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.rd-table{border-collapse:separate;border-spacing:0 10px;padding:4px 12px 14px;min-width:1120px}
+.rd-table th{position:static;border:0;padding:12px 14px;background:transparent;color:rgba(143,230,255,.85)}
+.rd-table td{border-top:1px solid rgba(255,255,255,.075);border-bottom:1px solid rgba(255,255,255,.075);background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.025));padding:17px 14px;color:rgba(247,249,252,.72)}
+.rd-table tbody tr:hover td{background:linear-gradient(180deg,rgba(143,230,255,.075),rgba(255,255,255,.028));border-color:rgba(143,230,255,.22)}
+.rd-table td:first-child{position:relative;min-width:214px;padding-left:94px;border-left:1px solid rgba(255,255,255,.075);border-radius:18px 0 0 18px;color:#fff;vertical-align:middle}
+.rd-table td:last-child{border-right:1px solid rgba(255,255,255,.075);border-radius:0 18px 18px 0}
+.rd-table td:first-child::before{content:"";position:absolute;left:14px;top:50%;width:64px;height:64px;transform:translateY(-50%);border:1px solid rgba(255,255,255,.12);border-radius:14px;background-color:#0b0f14;background-size:cover;background-position:center;box-shadow:0 8px 20px rgba(0,0,0,.34)}
+.rd-table tbody tr:nth-child(1) td:first-child::before{background-image:url('/images/guides/robot-dog-toys/file_00000000114881f4962200e6b3ab3714.png')}
+.rd-table tbody tr:nth-child(2) td:first-child::before{background-image:url('/images/guides/robot-dog-toys/Screenshot_2026-09-27-05-15-02-752_com.android.chrome.jpg')}
+.rd-table tbody tr:nth-child(3) td:first-child::before{background-image:url('/images/guides/robot-dog-toys/file_000000006f48820a89a67189ad2509a5.png')}
+.rd-table tbody tr:nth-child(4) td:first-child::before{background-image:url('/images/guides/robot-dog-toys/file_00000000ae38820a921680cc557de558.png')}
+.rd-table tbody tr:nth-child(5) td:first-child::before{background-image:url('/images/guides/robot-dog-toys/file_00000000ef2c820a992c8712d08fa4ed.png')}
+.rd-table tbody tr:nth-child(6) td:first-child::before{background-image:url('/images/guides/robot-dog-toys/file_00000000847c81f4b42e8bec3cacde96.png')}
+.rd-table tbody tr:nth-child(7) td:first-child::before{background-image:url('/images/guides/robot-dog-toys/file_00000000aaa0820aa04b0dc01bf44e3d.png')}
+
+/* Every detailed robot now reads as its own visual chapter */
+.rd-picks{border-top:0}.rd-picks>.rd-section__head{margin-bottom:34px}.rd-pick{--accent:143,230,255;position:relative;isolation:isolate;overflow:hidden;margin:34px 0;padding:34px;border:1px solid rgba(var(--accent),.22);border-radius:34px;background:linear-gradient(135deg,rgba(var(--accent),.095),rgba(255,255,255,.024) 46%,rgba(5,7,10,.72));box-shadow:inset 0 1px 0 rgba(255,255,255,.055),0 28px 80px rgba(0,0,0,.24)}
+.rd-pick::before{content:"";position:absolute;z-index:-1;left:0;right:0;top:0;height:2px;background:linear-gradient(90deg,transparent,rgba(var(--accent),.92),rgba(255,255,255,.5),transparent)}
+.rd-pick::after{content:"";position:absolute;z-index:-2;right:-12%;top:-25%;width:52%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(var(--accent),.13),transparent 69%);filter:blur(10px);pointer-events:none}
+.rd-pick#loona{--accent:110,215,255}.rd-pick#ruko{--accent:245,202,103}.rd-pick#yeshin{--accent:170,190,255}.rd-pick#mechdog{--accent:255,179,71}.rd-pick#bittle{--accent:255,211,73}.rd-pick#puppypi{--accent:126,171,255}
+.rd-pick--featured{margin:34px 0;padding:34px;border-color:rgba(var(--accent),.28);background:linear-gradient(135deg,rgba(var(--accent),.11),rgba(255,255,255,.028) 48%,rgba(5,7,10,.78))}
+.rd-pick__content{padding:26px;border:1px solid rgba(255,255,255,.105);border-radius:26px;background:linear-gradient(180deg,rgba(15,20,27,.66),rgba(8,11,16,.52));backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);box-shadow:inset 0 1px 0 rgba(255,255,255,.055),0 20px 44px rgba(0,0,0,.18)}
+.rd-pick__media{align-self:stretch;border-color:rgba(var(--accent),.2);background:rgba(3,5,8,.76)}
+.rd-pick__media img{height:100%;min-height:430px;aspect-ratio:auto;object-fit:cover}.rd-pick__media figcaption{border-top:1px solid rgba(var(--accent),.14);background:rgba(5,8,12,.78)}
+.rd-pick .rd-award{color:rgb(var(--accent));border-color:rgba(var(--accent),.34);background:rgba(var(--accent),.06)}
+.rd-pick .rd-status{background:rgba(184,255,208,.045)}
+.rd-pick .rd-fact{border-color:rgba(255,255,255,.095);background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.022));backdrop-filter:blur(12px)}
+.rd-pick .rd-fact strong{font-size:1.08rem}.rd-pick .rd-fit__track{height:10px;background:rgba(255,255,255,.075);box-shadow:inset 0 1px 4px rgba(0,0,0,.35)}.rd-pick .rd-fit__track i{background:linear-gradient(90deg,rgb(var(--accent)),rgba(255,255,255,.86));box-shadow:0 0 16px rgba(var(--accent),.24)}
+.rd-pick .rd-pros-cons>div{background:rgba(255,255,255,.035);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}.rd-pick .rd-pros-cons>div:first-child{border-color:rgba(184,255,208,.15);background:linear-gradient(180deg,rgba(184,255,208,.052),rgba(255,255,255,.024))}.rd-pick .rd-pros-cons>div:last-child{border-color:rgba(255,176,176,.13);background:linear-gradient(180deg,rgba(255,176,176,.04),rgba(255,255,255,.024))}
+.rd-pick+.rd-pick{margin-top:46px}
+
+/* Make supporting chapters feel intentionally separated too */
+#programming{margin-top:34px;padding:72px 34px;border:1px solid rgba(143,230,255,.13);border-radius:32px;background:radial-gradient(circle at 100% 0,rgba(108,168,255,.09),transparent 40%),rgba(255,255,255,.014)}
+#programming .rd-program-card{background:linear-gradient(180deg,rgba(20,28,40,.68),rgba(8,12,18,.54));border-color:rgba(143,230,255,.12)}
+#chongker{margin-top:34px}.rd-senior-panel{padding:34px;background:radial-gradient(circle at 100% 0,rgba(245,202,103,.1),transparent 46%),linear-gradient(145deg,rgba(245,202,103,.045),rgba(255,255,255,.018));backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.rd-companion-facts div{background:rgba(255,255,255,.035);backdrop-filter:blur(12px)}
+.rd-duel{overflow:hidden;position:relative}.rd-duel::after{content:"VS";position:absolute;right:-8px;top:-26px;color:rgba(255,255,255,.025);font-size:8rem;font-weight:950;letter-spacing:-.09em;pointer-events:none}.rd-duel__side{background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.02));backdrop-filter:blur(12px)}
+.rd-price-step{position:relative;overflow:hidden;background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02));backdrop-filter:blur(12px)}.rd-price-step::before{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:linear-gradient(90deg,var(--rd-cyan),transparent)}
+
+@media(max-width:900px){.rd-pick{padding:24px}.rd-pick__content{padding:22px}.rd-pick__media img{min-height:320px}#programming{padding:58px 22px}}
+@media(max-width:640px){.rd-pick,.rd-pick--featured{margin:26px 0;padding:14px;border-radius:24px}.rd-pick+.rd-pick{margin-top:34px}.rd-pick__content{padding:18px;border-radius:20px}.rd-pick__media img{min-height:250px}.rd-table{min-width:1020px;padding-inline:8px}.rd-table td:first-child{min-width:198px;padding-left:84px}.rd-table td:first-child::before{left:11px;width:58px;height:58px}.rd-snapshot__top{padding:20px}.rd-snapshot__top .rd-pill{margin-top:12px}#programming{padding:48px 14px;border-radius:24px}.rd-duel::after{font-size:6rem}.rd-section:not(.rd-picks)::before,.rd-split::before{left:8%;right:8%}}
