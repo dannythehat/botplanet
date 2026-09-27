@@ -367,6 +367,31 @@ export const EXPECTED_IDENTITIES: IdentityExpectation[] = [
        denying it costs nothing here. */
     denyTokens: ["bundle", "a3 awd 1000", "a3 awd pro", "3500"],
   },
+  {
+    /* Owner-verified 27 September 2026 by a direct screenshot of the live
+       listing on his own phone — not a details-table read, but a real,
+       current look at the actual page, which is why this graduated straight
+       from awaiting discovery rather than sitting in the researched_exact
+       tier commerce/destinations.ts still records it at. Brand and title
+       match exactly; no sibling name appears anywhere in the screenshot. */
+    productId: "prod-botley-2",
+    asin: "B083T58PKM",
+    brand: "Learning Resources",
+    modelTokens: ["botley 2.0", "botley the coding robot"],
+    /* Learning Resources also sells a Botley 2.0 Classroom Set at a
+       materially different price point; deny it explicitly. */
+    denyTokens: ["classroom", "classroom set"],
+  },
+  {
+    /* Owner-verified 27 September 2026, same method as Botley above. */
+    productId: "prod-code-and-go-robot-mouse",
+    asin: "B01B14XK00",
+    brand: "Learning Resources",
+    modelTokens: ["code & go robot mouse", "code and go robot mouse", "robot mouse"],
+    /* Learning Resources also sells this as a $71.99 Activity Set and a
+       $270.99 Classroom Set under near-identical names; deny both. */
+    denyTokens: ["activity set", "classroom set", "classroom"],
+  },
 ];
 
 /** Products with no confirmed ASIN. They need discovery, not a refresh. */
@@ -428,8 +453,6 @@ export const AWAITING_DISCOVERY = [
   "prod-living-ai-emo",
   "prod-cozmo",
   "prod-grillbot",
-  "prod-botley-2",
-  "prod-code-and-go-robot-mouse",
   "prod-moxie",
   "prod-eufy-x10-pro-omni",
   "prod-eufy-omni-s1-pro",

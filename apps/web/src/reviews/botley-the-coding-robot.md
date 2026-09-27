@@ -52,19 +52,17 @@ and 78 pieces for what appears to be the same core set. What is consistent
 across every listing is the robot, the remote and activity cards; the exact
 card count is not something we would state with confidence.
 
-## What we cannot tell you
+## What we can and cannot tell you
 
-**The exact price today.** Every automated attempt to open the Amazon
-listing directly was blocked, so this review has no page read behind it —
-only a search result's own title and snippet. Different sources quoted
-figures from $64 to nearly $85 for what should be the same set, close enough
-in time that it reads as normal retail price movement rather than different
-products, but not close enough that we will print one of those numbers as
-current. The buy button below shows whatever price our own price-check
-service has most recently confirmed and dated; if it shows none, none has
-been confirmed yet.
+**The price is confirmed, not estimated.** $99.99, read directly off the
+live Amazon listing on 27 September 2026 — 4.5 stars across 1,900 ratings,
+in stock. Earlier search results for this set had quoted anywhere from $64
+to nearly $85, which is why we waited to print a number until someone had
+actually opened the page. The buy button below shows whatever price our
+own price-check service has most recently confirmed and dated, which may
+move from this figure over time.
 
-**Battery life.** Not stated on any listing snippet we could read.
+**Battery life.** Not stated on the listing we read.
 
 **Whether this is the exact packaging you will receive.** See the piece-count
 note above. If the box contents matter to you, check the listing yourself

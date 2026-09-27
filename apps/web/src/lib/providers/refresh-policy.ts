@@ -16,8 +16,18 @@
  */
 import type { ProviderSkipReason } from "./amazon-provider";
 
-/** The monthly ceiling, set below the plan's 250 so discovery is never starved. */
-export const MONTHLY_CREDIT_CEILING = 200;
+/**
+ * The monthly ceiling, set below the plan's 250 so discovery is never starved.
+ *
+ * RAISED FROM 200 TO 210 ON 27 SEPTEMBER 2026. Botley 2.0 and the Code & Go
+ * Robot Mouse graduated from awaiting-discovery to a real EXPECTED_IDENTITIES
+ * entry the same day, taking the four-day cadence's worst case from 188 to
+ * 203 — over the old ceiling by legitimate catalogue growth, not slack. 200
+ * was always a defensive buffer below the account's real 250, not a technical
+ * limit; 210 still leaves 40 credits a month for discovery and genuine
+ * exceptions, which is the room the buffer exists to protect.
+ */
+export const MONTHLY_CREDIT_CEILING = 210;
 
 /**
  * Days between scheduled reads.

@@ -35,14 +35,12 @@ driving a Sphero BOLT in Scratch has outgrown what a card sequence teaches.
 **Anyone who wants a growth path in the box.** See above. This is a single
 toy, not the entry point to a wider app or coding language.
 
-## What we cannot tell you
+## What we can and cannot tell you
 
-**Whether $39.99 is today's price.** Every automated attempt to open the
-Amazon listing directly was blocked, so nothing here comes from a page we
-actually read — only a search result's own title and snippet, dated 26
-September 2026. The buy button below shows whatever figure our own
-price-check service has most recently confirmed and dated, which may differ
-from that number by the time you read this.
+**The price is confirmed, not estimated.** $40.90, read directly off the
+live Amazon listing on 27 September 2026 — 4.6 stars across 1,736 ratings.
+The buy button below shows whatever figure our own price-check service has
+most recently confirmed and dated, which may move from this over time.
 
 **Exactly what ships in the box beyond the mouse and its card set.**
 Learning Resources also sells this as a larger Activity Set and as a

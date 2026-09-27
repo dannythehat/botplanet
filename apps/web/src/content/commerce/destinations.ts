@@ -876,17 +876,23 @@ for (const p of SNOW_ASINS) {
 }
 
 /**
- * BOTLEY 2.0 AND CODE & GO ROBOT MOUSE, 26 September 2026.
+ * BOTLEY 2.0 AND CODE & GO ROBOT MOUSE, 26 September 2026, UPGRADED 27
+ * September 2026.
  *
- * WIRED AT researched_exact, ON A WEAKER BASIS THAN EVERY OTHER ENTRY AT THIS
- * LEVEL. The vacuums and Grillbot were each read through SerpAPI's
- * amazon_product engine or a direct fetch that returned a title. Neither of
- * these was: Amazon blocked every automated fetch attempted (the same wall
- * Grillbot hit before its own listing read finally succeeded), so the ASIN,
- * price range and "in stock" status below come from a web search result's
- * own title and snippet, never from a listing BotPlanet opened itself. No
- * served-ASIN-equality check was possible and no sibling-ASIN family search
- * was run. See docs/seo/coding-robots-gift-topup-findings.md.
+ * WIRED AT researched_exact, STILL SHORT OF verified_exact FOR A SPECIFIC
+ * REASON. Both ASINs were found the first day via web search, with no listing
+ * ever opened directly — Amazon blocked every automated fetch attempted. The
+ * owner then opened both listings himself on his own phone on 27 September
+ * and sent screenshots: both ASINs are real and live, both serve the correct
+ * product with no sibling model in view, brand reads "Learning Resources" on
+ * both, and real prices and ratings are now on record. What is still missing
+ * is the one thing verified_exact requires — a transcribed Model Name or
+ * Model Number field off an expandable details table, which a mobile
+ * screenshot of the listing's summary view does not capture. One more read
+ * that opens that table raises both to verified_exact.
+ *
+ * See docs/seo/coding-robots-gift-topup-findings.md for the 26 September
+ * search-only state this replaces.
  *
  * Both were flagged unbuilt in the original 8 August coding-robots research
  * for exactly this reason — the ASINs on file then served classroom or
@@ -897,7 +903,7 @@ for (const p of SNOW_ASINS) {
  * a classroom bulk pack — it is not the $691-style multi-unit problem Bee-Bot
  * still has, which is why Bee-Bot still has no entry here.
  */
-const CODING_GIFT_CHECK_DATE = "2026-09-26";
+const CODING_GIFT_CHECK_DATE = "2026-09-27";
 
 const CODING_GIFT_ASINS: WindowDestination[] = [
   {
@@ -905,14 +911,14 @@ const CODING_GIFT_ASINS: WindowDestination[] = [
     asin: "B083T58PKM",
     exactModel: "Botley 2.0 The Coding Robot Activity Set",
     evidence:
-      "Amazon search result title: 'Learning Resources Botley the Coding Robot 2.0 Activity Set - 78 Pieces, Ages 5+'. Not opened directly — Amazon blocked the fetch. Search snippets disagreed on price across sources ($64–$84.99), so no price is published; the buy box shows 'Check current price' until the refresh service reads and dates one. Learning Resources also sells a Classroom Set at a materially higher price point; that listing is not this one and is not linked.",
+      "Owner screenshot of the live listing, 27 September 2026: seller row reads 'Learning Resources', title reads 'Learning Resources Botley 2.0 The Coding Robot Activity Set' with no sibling model in view, 4.5 stars (1,900 ratings), $99.99, In Stock. No expandable details table was captured, so no Model Name or Model Number field is on record — that read raises this to verified_exact. Learning Resources also sells a Classroom Set at a materially higher price point; that listing is not this one and is not linked.",
   },
   {
     productId: "prod-code-and-go-robot-mouse",
     asin: "B01B14XK00",
     exactModel: "Code & Go Robot Mouse",
     evidence:
-      "Amazon search result title: 'Learning Resources Code & Go® Robot Mouse, Screen-Free Coding Robot Toy, Early Programming for Kids Ages 4+'. Not opened directly — Amazon blocked the fetch. $39.99 per the search snippet, dated 26 September 2026. Learning Resources also sells this as a $71.99 Activity Set (B01A5YMCH4) and a $270.99 Classroom Set (B0792H2KXN); this ASIN is the bare single unit and is deliberately not either of those.",
+      "Owner screenshot of the live listing, 27 September 2026: seller row reads 'Learning Resources', title reads 'Learning Resources Code & Go Robot Mouse' with no sibling model in view, 4.6 stars (1,736 ratings), $40.90. No expandable details table was captured, so no Model Name or Model Number field is on record — that read raises this to verified_exact. Learning Resources also sells this as a $71.99 Activity Set (B01A5YMCH4) and a $270.99 Classroom Set (B0792H2KXN); this ASIN is the bare single unit and is deliberately not either of those.",
   },
 ];
 
@@ -1002,8 +1008,8 @@ export const DESTINATIONS: ProductDestination[] = [
       destinationUrl: `https://www.amazon.com/dp/${asin}`,
       confidence: "researched_exact" as const,
       notes:
-        "IDENTITY NOT CONFIRMED to the standard the window and lawn destinations meet, and weaker than the vacuums and Grillbot besides: this ASIN was never opened directly or read through a product API, only found in a web search result's own title and snippet, because Amazon blocked every automated fetch attempted. What has not been done is opening the listing itself, transcribing a published identity field, or confirming no sibling ASIN family exists. One clean listing read raises this to verified_exact.",
-      sourceReference: `ASIN found via web search on ${CODING_GIFT_CHECK_DATE}, not opened directly. ${evidence}`,
+        "IDENTITY NOT CONFIRMED to the standard the window and lawn destinations meet: the owner opened this listing directly on 27 September 2026 and confirmed brand, exact title and a live price and rating, but no expandable details table was captured, so no Model Name or Model Number field is on record. One read that opens that table raises this to verified_exact.",
+      sourceReference: `Owner-opened listing, ${CODING_GIFT_CHECK_DATE}. ${evidence}`,
     }),
   ),
 

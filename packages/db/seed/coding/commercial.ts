@@ -36,12 +36,13 @@ const offerSeeds: CodingOfferSeed[] = [
   { id: "off-makeblock-mbot-amazon", productId: "prod-makeblock-mbot", asin: "B00SK5RUQY", redirectKey: "code-makeblock-mbot-amazon", snapshotMinor: 6900 },
   /* Added 26 September 2026, identity-read via web search rather than a
      listing fetch — see CODING_GIFT_ASINS in commerce/destinations.ts and
-     docs/seo/coding-robots-gift-topup-findings.md. snapshotMinor null on
-     both: Botley's price disagreed across sources, and neither was read from
-     the listing itself, so nothing is quoted until the refresh service
-     reads and dates a figure. */
-  { id: "off-botley2-amazon", productId: "prod-botley-2", asin: "B083T58PKM", redirectKey: "code-botley2-amazon", snapshotMinor: null },
-  { id: "off-robotmouse-amazon", productId: "prod-code-and-go-robot-mouse", asin: "B01B14XK00", redirectKey: "code-robotmouse-amazon", snapshotMinor: null },
+     docs/seo/coding-robots-gift-topup-findings.md. Owner opened both listings
+     directly on 27 September and confirmed brand, title and a live price on
+     each; snapshotMinor mirrors that read. The live price on the page comes
+     from refresh_observations, not from this column — see the note at the
+     top of this file. */
+  { id: "off-botley2-amazon", productId: "prod-botley-2", asin: "B083T58PKM", redirectKey: "code-botley2-amazon", snapshotMinor: 9999 },
+  { id: "off-robotmouse-amazon", productId: "prod-code-and-go-robot-mouse", asin: "B01B14XK00", redirectKey: "code-robotmouse-amazon", snapshotMinor: 4090 },
 ];
 
 export const offerRows: (typeof offers.$inferInsert)[] = offerSeeds.map((o) => ({

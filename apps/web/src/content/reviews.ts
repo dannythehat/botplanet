@@ -4331,7 +4331,7 @@ export const REVIEWS: Record<string, ReviewContent> = {
       { label: "Ages", value: "5 to 7 (manufacturer rating)" },
       { label: "Coding method", value: "Detachable remote, screen-free" },
       { label: "Sequence length", value: "Up to 80 steps in one program" },
-      { label: "Included", value: "Activity mats and cards, per the manufacturer's standard set" },
+      { label: "Price", value: "$99.99, confirmed 27 September 2026 by opening the live listing" },
     ],
     specGroups: [
       {
@@ -4351,8 +4351,8 @@ export const REVIEWS: Record<string, ReviewContent> = {
       },
     ],
     skuNote:
-      "IDENTITY NOT READ FROM THE LISTING ITSELF. ASIN B083T58PKM found via web search — 'Learning Resources Botley the Coding Robot 2.0 Activity Set - 78 Pieces, Ages 5+' — because Amazon blocked every direct fetch attempted. No price is published here: search snippets disagreed across sources ($64 to $84.99), so nothing is quoted until the automated refresh service reads and dates a real figure. Learning Resources also sells a materially more expensive Classroom Set; this ASIN is the standard retail activity set, not that one.",
-    lastReviewed: "2026-09-26",
+      "ASIN B083T58PKM, owner-confirmed 27 September 2026 by opening the live listing directly: brand 'Learning Resources', title 'Learning Resources Botley 2.0 The Coding Robot Activity Set', 4.5 stars (1,900 ratings), $99.99, In Stock. No expandable details table was captured on that check, so no Model Name or Model Number field is on record yet — one read that opens it raises this from researched_exact to verified_exact. Learning Resources also sells a materially more expensive Classroom Set; this ASIN is the standard retail activity set, not that one.",
+    lastReviewed: "2026-09-27",
   },
 
   /* CODE & GO ROBOT MOUSE, added 26 September 2026. Same research pass as
@@ -4386,7 +4386,7 @@ export const REVIEWS: Record<string, ReviewContent> = {
     title: "Code & Go Robot Mouse review",
     seoTitle: "Code & Go Robot Mouse Review — Coding With Cards, Ages 4+",
     metaDescription:
-      "The Code & Go Robot Mouse is a $39.99 screen-free coding toy: a child places " +
+      "The Code & Go Robot Mouse is a $40.90 screen-free coding toy: a child places " +
       "direction cards to guide it to the cheese. What the bare unit includes.",
     verdict:
       "The youngest-rated coding toy in this category and the only card-based one: a child lays directional cards in a sequence and the mouse follows them, with no remote, no app and no screen. Cheaper and simpler than Botley, aimed at a child a couple of years younger.",
@@ -4398,7 +4398,7 @@ export const REVIEWS: Record<string, ReviewContent> = {
       { label: "Ages", value: "4 and up (manufacturer rating)" },
       { label: "Coding method", value: "Physical direction cards, screen-free" },
       { label: "Included", value: "Robot mouse and card set, per the manufacturer's standard listing" },
-      { label: "Price", value: "$39.99, per the retailer's own listing title — not yet read from the page itself" },
+      { label: "Price", value: "$40.90, confirmed 27 September 2026 by opening the live listing" },
     ],
     specGroups: [
       {
@@ -4416,8 +4416,8 @@ export const REVIEWS: Record<string, ReviewContent> = {
       },
     ],
     skuNote:
-      "IDENTITY NOT READ FROM THE LISTING ITSELF. ASIN B01B14XK00 found via web search — 'Learning Resources Code & Go® Robot Mouse, Screen-Free Coding Robot Toy, Early Programming for Kids Ages 4+' — because Amazon blocked every direct fetch attempted. $39.99 is the search snippet's own figure, dated 26 September 2026, not a page read; treat it as indicative until the automated refresh service confirms one. Learning Resources also sells a $71.99 Activity Set and a $270.99 Classroom Set under similar names; this ASIN is neither.",
-    lastReviewed: "2026-09-26",
+      "ASIN B01B14XK00, owner-confirmed 27 September 2026 by opening the live listing directly: brand 'Learning Resources', title 'Learning Resources Code & Go Robot Mouse', 4.6 stars (1,736 ratings), $40.90. No expandable details table was captured on that check, so no Model Name or Model Number field is on record yet — one read that opens it raises this from researched_exact to verified_exact. Learning Resources also sells a $71.99 Activity Set and a $270.99 Classroom Set under similar names; this ASIN is neither.",
+    lastReviewed: "2026-09-27",
   },
 
   /* JOY FOR ALL, added 8 August 2026. This product was LIVE, PUBLISHED, CARRYING
