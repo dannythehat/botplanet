@@ -1,5 +1,6 @@
 import { defineMiddleware } from "astro:middleware";
 import { isGone, resolveRedirect, safeQuery } from "./lib/routing";
+import { isSeoMigrationRetiredPath } from "./content/seo-migration-overrides";
 
 /**
  * Protect /admin and /api/admin with a shared token (ADMIN_TOKEN secret).
@@ -9,6 +10,17 @@ import { isGone, resolveRedirect, safeQuery } from "./lib/routing";
  */
 const PUBLIC = new Set(["/admin/login", "/api/admin/login"]);
 
+function goneResponse(): Response {
+  return new Response("410 Gone. This page has been permanently removed.\n", {
+    status: 410,
+    headers: {
+      "content-type": "text/plain; charset=utf-8",
+      "cache-control": "public, max-age=86400",
+      "x-robots-tag": "noindex",
+    },
+  });
+}
+
 export const onRequest = defineMiddleware(async (context, next) => {
   // Canonical host: 301 www → apex so there is one true production host.
   const host = context.request.headers.get("host")?.toLowerCase() ?? "";
@@ -16,6 +28,14 @@ export const onRequest = defineMiddleware(async (context, next) => {
     const url = new URL(context.request.url);
     return context.redirect(`https://botplanet.io${url.pathname}${url.search}`, 301);
   }
+
+  /**
+   * Search Console migration retirements — 410 before the historical redirect
+   * registry gets a say. The legacy registry remains useful bookkeeping, but
+   * these two security URLs have no topic-equivalent successor on the rebuilt
+   * site and must not be sent to the generic /robots/ directory.
+   */
+  if (isSeoMigrationRetiredPath(context.url.pathname)) return goneResponse();
 
   /**
    * The previous sites' dead sections — 410 Gone, and BEFORE any redirect.
@@ -30,18 +50,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
    * the full site chrome around "this page is gone" would ship a navigation bar
    * and a footer full of links on every one of them.
    */
-  if (isGone(context.url.pathname)) {
-    return new Response("410 Gone. This page has been permanently removed.\n", {
-      status: 410,
-      headers: {
-        "content-type": "text/plain; charset=utf-8",
-        /* Cached, because the answer will not change and a crawler that asks
-           repeatedly should be answered from the edge. */
-        "cache-control": "public, max-age=86400",
-        "x-robots-tag": "noindex",
-      },
-    });
-  }
+  if (isGone(context.url.pathname)) return goneResponse();
 
   /**
    * Canonical URL enforcement. One permanent hop, never a chain: the resolver

@@ -17,11 +17,26 @@ export const SEO_MIGRATION_REDIRECTS: Readonly<Record<string, string>> = {
   "/category/desk-robots/": "/robots/companion-robots/",
 };
 
-/* Confirmed retired URLs with no topic-equivalent successor. These take
-   precedence over older legacy redirect decisions in routing.ts so Google and
-   readers are not sent to a generic destination that does not answer the old
-   search intent. */
-export const SEO_MIGRATION_GONE_PATHS = new Set<string>([
+/* Kept for routing.ts's existing generic Gone mechanism. The security URLs
+   below are intentionally NOT in this set because they still appear in the
+   historical LEGACY_REDIRECTS registry, whose integrity tests require every
+   registry entry to resolve. Their live retirement happens one layer earlier,
+   in middleware, before resolveRedirect is called. */
+export const SEO_MIGRATION_GONE_PATHS = new Set<string>();
+
+const EDGE_RETIRED_PATHS = new Set<string>([
   "/security-robots/",
   "/home-security-robots/",
 ]);
+
+/**
+ * True for legacy URLs that must answer 410 at the HTTP edge before historical
+ * redirect resolution. Normalises casing, duplicate slashes and a missing
+ * trailing slash so the first response is 410 rather than a redirect hop.
+ */
+export function isSeoMigrationRetiredPath(pathname: string): boolean {
+  let path = (pathname || "/").toLowerCase().replace(/\/{2,}/g, "/");
+  if (!path.startsWith("/")) path = "/" + path;
+  if (!path.endsWith("/")) path += "/";
+  return EDGE_RETIRED_PATHS.has(path);
+}

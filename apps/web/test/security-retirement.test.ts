@@ -1,16 +1,21 @@
 import { describe, expect, it } from "vitest";
-import { isGone, resolveRedirect } from "../src/lib/routing";
+import { isSeoMigrationRetiredPath } from "../src/content/seo-migration-overrides";
+import { resolveRedirect } from "../src/lib/routing";
 
 describe("retired security robot URLs", () => {
-  it("returns Gone instead of redirecting legacy security intent to the generic robot directory", () => {
+  it("marks legacy security intent for a pre-redirect 410 response", () => {
     for (const path of ["/security-robots/", "/home-security-robots/"]) {
-      expect(isGone(path), path).toBe(true);
-      expect(resolveRedirect(path), path).toBeNull();
+      expect(isSeoMigrationRetiredPath(path), path).toBe(true);
     }
   });
 
-  it("catches casing and missing trailing slash without creating a redirect hop", () => {
-    expect(isGone("/Security-Robots")).toBe(true);
-    expect(resolveRedirect("/Security-Robots")).toBeNull();
+  it("catches casing, duplicate slashes and missing trailing slash", () => {
+    expect(isSeoMigrationRetiredPath("/Security-Robots")).toBe(true);
+    expect(isSeoMigrationRetiredPath("//home-security-robots")).toBe(true);
+  });
+
+  it("leaves the historical legacy registry resolvable for integrity checks", () => {
+    expect(resolveRedirect("/security-robots/")?.to).toBe("/robots/");
+    expect(resolveRedirect("/home-security-robots/")?.to).toBe("/robots/");
   });
 });
