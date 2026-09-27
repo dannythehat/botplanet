@@ -354,3 +354,86 @@ samp {
   font-variant-numeric: tabular-nums;
   color: var(--text-primary);
 }
+
+/* Robot dog guide: hard image-height limits. These deliberately use !important
+   because the guide's later visual-refinement rules previously stretched
+   landscape artwork to the height of adjacent content on mobile. */
+.rd-guide .rd-media {
+  align-self: start !important;
+  height: auto !important;
+  max-height: none !important;
+}
+
+.rd-guide .rd-media > img {
+  width: 100% !important;
+  height: 340px !important;
+  min-height: 0 !important;
+  max-height: 340px !important;
+  aspect-ratio: auto !important;
+  object-fit: cover !important;
+  object-position: center !important;
+}
+
+.rd-guide .rd-hero__media > img {
+  height: 360px !important;
+  max-height: 360px !important;
+}
+
+.rd-guide .rd-pick__media {
+  align-self: start !important;
+}
+
+.rd-guide .rd-pick__media > img {
+  height: 300px !important;
+  min-height: 0 !important;
+  max-height: 300px !important;
+}
+
+.rd-guide .rd-gallery img {
+  height: 220px !important;
+  min-height: 0 !important;
+  max-height: 220px !important;
+  object-fit: cover !important;
+}
+
+.rd-guide .rd-gallery figure:first-child img {
+  height: 320px !important;
+  min-height: 0 !important;
+  max-height: 320px !important;
+}
+
+@media (max-width: 900px) {
+  .rd-guide .rd-media > img {
+    height: 280px !important;
+    max-height: 280px !important;
+  }
+  .rd-guide .rd-hero__media > img {
+    height: 300px !important;
+    max-height: 300px !important;
+  }
+  .rd-guide .rd-pick__media > img {
+    height: 250px !important;
+    max-height: 250px !important;
+  }
+  .rd-guide .rd-gallery img,
+  .rd-guide .rd-gallery figure:first-child img {
+    height: 220px !important;
+    max-height: 220px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .rd-guide .rd-media > img,
+  .rd-guide .rd-hero__media > img,
+  .rd-guide .rd-pick__media > img {
+    height: 210px !important;
+    min-height: 0 !important;
+    max-height: 210px !important;
+  }
+  .rd-guide .rd-gallery img,
+  .rd-guide .rd-gallery figure:first-child img {
+    height: 180px !important;
+    min-height: 0 !important;
+    max-height: 180px !important;
+  }
+}
