@@ -1,0 +1,154 @@
+{
+  "category": "chat-december-challenge",
+  "hardCapUsd": 2,
+  "totalCostUsd": 0.26756,
+  "batches": [
+    {
+      "label": "search_volume",
+      "path": "/keywords_data/google_ads/search_volume/live",
+      "tasks": 1,
+      "cost": 0.09,
+      "runningTotal": 0.09
+    },
+    {
+      "label": "bulk_kd",
+      "path": "/dataforseo_labs/google/bulk_keyword_difficulty/live",
+      "tasks": 1,
+      "cost": 0.02256,
+      "runningTotal": 0.11256
+    },
+    {
+      "label": "related:robot dog toy",
+      "path": "/dataforseo_labs/google/related_keywords/live",
+      "tasks": 1,
+      "cost": 0.01308,
+      "runningTotal": 0.12564
+    },
+    {
+      "label": "related:ai robot toy",
+      "path": "/dataforseo_labs/google/related_keywords/live",
+      "tasks": 1,
+      "cost": 0.01284,
+      "runningTotal": 0.13848
+    },
+    {
+      "label": "related:robot pet",
+      "path": "/dataforseo_labs/google/related_keywords/live",
+      "tasks": 1,
+      "cost": 0.01308,
+      "runningTotal": 0.15156
+    },
+    {
+      "label": "related:loona robot",
+      "path": "/dataforseo_labs/google/related_keywords/live",
+      "tasks": 1,
+      "cost": 0.01296,
+      "runningTotal": 0.16452
+    },
+    {
+      "label": "related:eilik robot",
+      "path": "/dataforseo_labs/google/related_keywords/live",
+      "tasks": 1,
+      "cost": 0.01308,
+      "runningTotal": 0.1776
+    },
+    {
+      "label": "related:miko 3 robot",
+      "path": "/dataforseo_labs/google/related_keywords/live",
+      "tasks": 1,
+      "cost": 0.01284,
+      "runningTotal": 0.19044
+    },
+    {
+      "label": "related:sphero mini",
+      "path": "/dataforseo_labs/google/related_keywords/live",
+      "tasks": 1,
+      "cost": 0.01308,
+      "runningTotal": 0.20352
+    },
+    {
+      "label": "related:makeblock mbot",
+      "path": "/dataforseo_labs/google/related_keywords/live",
+      "tasks": 1,
+      "cost": 0.01308,
+      "runningTotal": 0.2166
+    },
+    {
+      "label": "related:ruko robot",
+      "path": "/dataforseo_labs/google/related_keywords/live",
+      "tasks": 1,
+      "cost": 0.01296,
+      "runningTotal": 0.22956
+    },
+    {
+      "label": "serp:robot dog toy",
+      "path": "/serp/google/organic/live/advanced",
+      "tasks": 1,
+      "cost": 0.004,
+      "runningTotal": 0.23356
+    },
+    {
+      "label": "serp:ai robot toy",
+      "path": "/serp/google/organic/live/advanced",
+      "tasks": 1,
+      "cost": 0.004,
+      "runningTotal": 0.23756
+    },
+    {
+      "label": "serp:robot pet",
+      "path": "/serp/google/organic/live/advanced",
+      "tasks": 1,
+      "cost": 0.004,
+      "runningTotal": 0.24156
+    },
+    {
+      "label": "serp:loona robot",
+      "path": "/serp/google/organic/live/advanced",
+      "tasks": 1,
+      "cost": 0.004,
+      "runningTotal": 0.24556
+    },
+    {
+      "label": "serp:eilik robot",
+      "path": "/serp/google/organic/live/advanced",
+      "tasks": 1,
+      "cost": 0.004,
+      "runningTotal": 0.24956
+    },
+    {
+      "label": "serp:miko 3 robot",
+      "path": "/serp/google/organic/live/advanced",
+      "tasks": 1,
+      "cost": 0.002,
+      "runningTotal": 0.25156
+    },
+    {
+      "label": "serp:sphero mini",
+      "path": "/serp/google/organic/live/advanced",
+      "tasks": 1,
+      "cost": 0.004,
+      "runningTotal": 0.25556
+    },
+    {
+      "label": "serp:makeblock mbot",
+      "path": "/serp/google/organic/live/advanced",
+      "tasks": 1,
+      "cost": 0.004,
+      "runningTotal": 0.25956
+    },
+    {
+      "label": "serp:ruko robot",
+      "path": "/serp/google/organic/live/advanced",
+      "tasks": 1,
+      "cost": 0.004,
+      "runningTotal": 0.26356
+    },
+    {
+      "label": "serp:best robot gift 2026",
+      "path": "/serp/google/organic/live/advanced",
+      "tasks": 1,
+      "cost": 0.004,
+      "runningTotal": 0.26756
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+Category: chat-december-challenge (docs/seo/seeds/chat-december-challenge.json)
+Seeds after dedupe: 88 · leads 9 · SERP queries 10
+Cost cap: $2.00 (ceiling $2.00)
+search_volume: 1 task(s), cost $0.0900, total $0.0900, api 20000
+bulk_kd: 1 task(s), cost $0.0226, total $0.1126, api 20000
+related:robot dog toy: 1 task(s), cost $0.0131, total $0.1256, api 20000
+related:ai robot toy: 1 task(s), cost $0.0128, total $0.1385, api 20000
+related:robot pet: 1 task(s), cost $0.0131, total $0.1516, api 20000
+related:loona robot: 1 task(s), cost $0.0130, total $0.1645, api 20000
+related:eilik robot: 1 task(s), cost $0.0131, total $0.1776, api 20000
+related:miko 3 robot: 1 task(s), cost $0.0128, total $0.1904, api 20000
+related:sphero mini: 1 task(s), cost $0.0131, total $0.2035, api 20000
+related:makeblock mbot: 1 task(s), cost $0.0131, total $0.2166, api 20000
+related:ruko robot: 1 task(s), cost $0.0130, total $0.2296, api 20000
+related_keywords: 9 of 9 leads harvested, 75 long-tail terms.
+serp:robot dog toy: 1 task(s), cost $0.0040, total $0.2336, api 20000
+serp:ai robot toy: 1 task(s), cost $0.0040, total $0.2376, api 20000
+serp:robot pet: 1 task(s), cost $0.0040, total $0.2416, api 20000
+serp:loona robot: 1 task(s), cost $0.0040, total $0.2456, api 20000
+serp:eilik robot: 1 task(s), cost $0.0040, total $0.2496, api 20000
+serp:miko 3 robot: 1 task(s), cost $0.0020, total $0.2516, api 20000
+serp:sphero mini: 1 task(s), cost $0.0040, total $0.2556, api 20000
+serp:makeblock mbot: 1 task(s), cost $0.0040, total $0.2596, api 20000
+serp:ruko robot: 1 task(s), cost $0.0040, total $0.2636, api 20000
+serp:best robot gift 2026: 1 task(s), cost $0.0040, total $0.2676, api 20000
+DONE. Total spend $0.2676 of $2.00 cap.
