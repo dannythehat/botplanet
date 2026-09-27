@@ -26,32 +26,53 @@ The Christmas modifiers themselves have little or no measurable demand. The dema
 Canonical target: `/guides/robot-dog-toys/`
 
 Primary: `robot dog toy`  
-Secondary: `ai robot dog`, `interactive robot dog`, `interactive robot dog toy`, `best robot dog toy`, `robot dog toy amazon`, `loona robot dog`, `programmable robot dog`, `robot dog for kids`.
+Secondary: `ai robot dog`, `interactive robot dog`, `interactive robot dog toy`, `best robot dog toy`, `robot dog toy amazon`, `programmable robot dog`, `robot dog for kids`.
 
-Supportive long-tail language is also used naturally for **robot dogs for adults**, **robot dogs for seniors / elderly people**, coding, STEM and companion use. These do not get separate URLs until search evidence justifies them.
+Supportive long-tail language is used naturally for **robot dogs for adults**, **robot dogs for seniors / elderly people**, coding, STEM and companion use. These do not get separate URLs until search evidence justifies them.
 
-## Current page implementation
+## Cannibalisation ownership
 
-SEO title: **Best Robot Dog Toys 2026: AI, Kids & Coding Picks**
+This URL owns the generic commercial/buying cluster around **robot dog toy**, **best robot dog toy**, **interactive robot dog**, **AI robot dog** and **programmable robot dog** when the query is asking which robot dog to buy.
+
+It deliberately does **not** try to own every branded or category-wide query:
+
+- branded **Loona** intent remains with `/robots/companion-robots/loona/`;
+- the broader **companion robots / robot pets** head intent remains with `/robots/companion-robots/`;
+- the broader **coding robots for kids** intent remains with `/robots/educational-coding-robots/`;
+- generic robot discovery stays with `/robots/` and `/botmatch/`;
+- Christmas is a seasonal conversion layer on this evergreen URL, not a duplicate `/christmas-robot-dogs/` page.
+
+The live page links to those owners explicitly so Google and readers get a clear route to the deeper intent instead of a second page competing for it.
+
+## Final page implementation
+
+SEO title: **Best Robot Dog Toys 2026: AI, Kids, Coding & Seniors**
 
 H1: **Best robot dog toys and AI robot dogs for 2026**
 
-Meta description covers robot dog toys for kids, adults and seniors, plus Loona, Ruko, Bittle, MechDog, PuppyPi and companion-dog intent.
+Meta description: **Compare the best robot dog toys and AI robot dogs for Christmas 2026, with picks for kids, adult coders, makers and seniors — from Loona to PuppyPi.**
 
-The page now includes:
+The finished page includes:
 
-- above-the-fold decision framing and a quick-comparison table;
+- a bespoke visual hero used as the Open Graph / social image;
+- visible author/byline and links to BotPlanet's editorial policy;
+- natural above-the-fold placement of the primary `robot dog toy` term;
+- a jump navigation for robot dog toy / programmable / AI / companion intent;
+- a visual Christmas section without creating a duplicate seasonal URL;
+- a three-generation section explaining why not all robot dogs are for kids;
+- a quick-comparison table and price-tier visual;
 - six differentiated main picks rather than one fake overall ranking;
-- a dedicated **not all robot dogs are for kids** section;
-- adult-maker positioning for MechDog, Bittle and PuppyPi;
-- a senior/elderly companion section using Chongker as the representative soft companion robot dog;
-- a dedicated `MechDog vs Bittle vs PuppyPi` comparison table for programmable/coding intent;
+- a dedicated adult-maker section and `MechDog vs Bittle vs PuppyPi` table;
+- a dedicated senior/elderly companion section using Chongker as the representative soft companion robot dog;
 - a stock-watch treatment for WowWee Dog-E instead of ranking an unavailable product as a primary Christmas buy;
 - FAQ content targeting AI robot dogs, programmable robot dogs, adult use, elderly companion use, apps and Christmas suitability;
-- explicit Amazon affiliate disclosure and dated price/stock language;
-- `Article`, `ItemList` and `FAQPage` structured data, plus global Organization, WebSite and Breadcrumb nodes from the BotPlanet layout.
+- internal links to the companion-robot category, coding-robot category, Loona review and BotMatch;
+- Amazon outbound affiliate links with `tag=botplanet-20` or the existing BotPlanet redirect route;
+- explicit affiliate disclosure, review-methodology links and dated price/stock language;
+- `WebPage`, `Article`, `ItemList` and `FAQPage` structured data, plus global Organization, WebSite and Breadcrumb nodes from the BotPlanet layout;
+- the hero image wired into both `Article.image` and Open Graph metadata.
 
-No `aggregateRating` or `reviewRating` is fabricated.
+No `aggregateRating` or `reviewRating` is fabricated. Product offer schema is intentionally not asserted from one-day Amazon screenshots; dated prices remain visible editorial observations instead.
 
 ## Commercial/editorial lineup
 
@@ -86,4 +107,20 @@ Prices in page copy are explicitly labelled dated observations. Offer schema is 
 
 ## Media
 
-The owner explicitly confirmed BotPlanet may use the Amazon/product images supplied in the working session. Product imagery and a bespoke BotPlanet hero/social image are the final visual layer; the copy/layout/schema do not depend on them to render.
+The owner explicitly confirmed BotPlanet may use the Amazon/product images supplied in the working session. The final page uses the bespoke image set created for the guide as editorial/lifestyle illustration, with captions making clear that these images are not substitutes for exact retailer configuration photography.
+
+The page currently wires dedicated imagery for:
+
+- the four robot-dog buying types / OG hero;
+- Christmas robot-dog gifting;
+- robot dogs across kids, adult makers and seniors;
+- price-tier progression;
+- Loona-style AI companion use;
+- Ruko-style child play;
+- MechDog-style coding;
+- Bittle-style open-source making;
+- PuppyPi-style advanced AI robotics;
+- adult hardware tinkering;
+- senior companion use.
+
+The owner-supplied Amazon images and screenshots remain in the same guide media folder as evidence/reference material for later feature-detail expansions without forcing them into the visual design.
