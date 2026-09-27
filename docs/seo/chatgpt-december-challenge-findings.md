@@ -1,4 +1,4 @@
-# ChatGPT December 2026 challenge — robot-dog opportunity
+# ChatGPT December 2026 Amazon challenge — research ruling
 
 **Research date:** 27 September 2026  
 **Market:** United States / Google  
@@ -9,7 +9,7 @@
 
 Build one page for the **robot dog toy** intent cluster. Do not build a generic Christmas gift page.
 
-The Christmas modifiers themselves have little or no measurable demand. The demand sits on the product/category names and surges in November/December. That is the same pattern found in the earlier Botley research, but this cluster is much larger.
+The Christmas modifiers themselves have little or no measurable demand. The demand sits on the product/category names and surges in November/December, so the page targets the product/category language and uses Christmas naturally in the title, H1 and buying context.
 
 ## The numbers that decide it
 
@@ -23,51 +23,51 @@ The Christmas modifiers themselves have little or no measurable demand. The dema
 | robot dog toy amazon | 480 | — | — | 0 |
 | best robot dog toy | 210 | 720 | 590 | 0 |
 
-The head term alone is roughly **7.5× Botley's 4,400 December peak** from Claude's page research. Ranking is not guaranteed, but the opportunity is large enough to justify a dedicated page immediately.
-
-## SERP opening
-
-The live US SERP for `robot dog toy` is unusually weak for a 14,800-volume commercial query. DataForSEO returned Target at organic position 7, WowWee at 8, Reddit at 10, Alibaba at 11 and Amazon India at 12, alongside videos and forums. It also carries Popular Products and People Also Ask.
-
-People Also Ask includes:
-
-- What is the most realistic robotic dog?
-- What is the best robot dog toy?
-- Are the robot dogs any good?
-- What is the Nicoo robot Puppy?
-
-This is a category-buying-guide SERP, not a single-product SERP. The page should answer the buying decision first, then send readers to exact Amazon listings.
-
-## Page ruling
-
 Canonical target: `/guides/robot-dog-toys/`
 
 Primary: `robot dog toy`  
-Secondary: `ai robot dog`, `interactive robot dog`, `interactive robot dog toy`, `best robot dog toy`, `robot dog toy amazon`, `loona robot dog`.
+Secondary: `ai robot dog`, `interactive robot dog`, `interactive robot dog toy`, `best robot dog toy`, `robot dog toy amazon`, `loona robot dog`, `programmable robot dog`, `robot dog for kids`.
 
-SEO title: **Best Robot Dog Toys (2026) — From $70 Toys to Loona AI**
+## Current page implementation
 
-H1: **The robot dogs actually worth buying in 2026**
+SEO title: **Best Robot Dog Toys 2026: AI, Coding & Kids' Picks**
 
-The page must not pretend a $70 remote-control puppy and a ~$400 AI pet are the same purchase. It should split the market by job and budget, make the limitations obvious, and use the highest-value Amazon CTA where the exact SKU is already verified.
+H1: **Best robot dog toys and AI robot dogs for Christmas 2026**
 
-## Product shortlist
+Meta description covers robot dog toys, AI robot dogs, programmable robot dogs and Christmas 2026 buying intent.
 
-1. **Loona Petbot** — premium AI robot dog / realistic interaction. Existing BotPlanet Amazon identity and `/go/comp-loona-amazon` route are already verified. Highest AOV on the page.
-2. **WowWee Dog-E** — best mainstream children's robot dog. Maker confirms 200+ sounds/reactions, six games, app profiles, tricks, feeding and tug-of-war. US Amazon ASIN candidate B0BWTW7BGR must be owner-verified before BotPlanet creates a revenue link.
-3. **Petoi Bittle** — best buildable/programming robot dog. Amazon identity still needs a clean US listing read before any affiliate route is created.
-4. **Lexibook Power Puppy** — best simple remote-control choice / lower price tier. Current US retail evidence exists; Amazon identity still needs verification.
+The page now includes:
 
-No product gets a tracked Amazon button until its exact listing identity is confirmed. A page can be published with the verified Loona exit first and the remaining buying routes added as they clear the same gate.
+- above-the-fold decision framing and a quick-comparison table;
+- six clearly differentiated products rather than one fake overall ranking;
+- buyer-intent sections for younger kids, coding/STEM users, family AI-pet buyers and advanced robotics users;
+- a dedicated `MechDog vs Bittle vs PuppyPi` comparison table for programmable/coding intent;
+- FAQ content targeting the actual buying questions around AI robot dogs, programmable robot dogs, apps and Christmas suitability;
+- explicit Amazon affiliate disclosure and dated price/stock language;
+- `Article`, `ItemList` and `FAQPage` structured data, plus global Organization, WebSite and Breadcrumb nodes from the BotPlanet layout.
 
-## Conversion thesis
+No `aggregateRating` or `reviewRating` is fabricated.
 
-Claude's Botley page targets a ~$100 product. This page deliberately mixes large Christmas traffic with a **premium Loona exit**. At a similar Amazon commission rate, one ~$400 Loona order is worth roughly four ~$100 orders before considering any basket additions during the Amazon attribution window.
+## Commercial/editorial lineup
 
-That does not make Loona the answer for everybody. It makes it the commercially important premium branch on a page whose head term is large enough to feed several price tiers.
+1. **Loona Robot Pet** — best premium AI robot dog / family companion.
+2. **WowWee Dog-E** — mainstream interactive robot dog; genuine Amazon listing was unavailable at the 27 Sep snapshot, so the page says so rather than pretending it is a live primary buy.
+3. **LewanSoul MechDog** — best value programmable robot dog; Scratch, Python, Arduino, ESP32/AI-camera angle.
+4. **Petoi Bittle X V2** — best open-source STEM robot dog; construction and pre-assembled Amazon variants verified by owner.
+5. **HIWONDER PuppyPi** — best advanced AI/developer robot dog; Raspberry Pi, AI vision/voice and ROS-oriented development, with higher tiers adding SLAM/LiDAR/manipulation capabilities.
+6. **Lexibook Power Puppy** — simple lower-complexity robot dog for younger buyers.
 
-## What is needed from the owner
+## Amazon snapshots supplied/verified by owner on 27 Sep 2026
 
-For the three unverified Amazon products, open the live US listing and send a screenshot that shows the product title and current price, plus the Product Information / model section if Amazon exposes it. We need exact-SKU identity, not a search-result snippet.
+- Loona with charging dock: $499 base price; $399 coupon shown; in stock; shipped by Amazon and sold by Loona Petbot.
+- Petoi Bittle X V2 construction/lite-servos variant: $319 shown in stock.
+- Petoi Bittle X V2 pre-assembled/alloy-servos variant: $399 shown with low stock.
+- LewanSoul MechDog Standard Kit: $299.99 in stock; Advance $399.99; Ultimate $499.99 shown.
+- HIWONDER PuppyPi Advanced RPi 5 4G: $719.99 with six left at snapshot.
+- Genuine WowWee Dog-E Amazon listing: currently unavailable at snapshot.
 
-Priority order: **Dog-E first**, then **Petoi Bittle**, then **Power Puppy**.
+Prices in page copy are explicitly labelled dated observations. Offer schema is not asserted for products that are not yet wired through BotPlanet's live price-publication gate.
+
+## Media
+
+The owner explicitly confirmed BotPlanet may use the Amazon/product images supplied in the working session. Product imagery and a bespoke BotPlanet hero/social image are the final visual layer; the copy/layout/schema do not depend on them to render.
