@@ -1,19 +1,17 @@
-/* Production polish for the robot-dog buying guide.
-   Loaded after the compiled guide CSS. Keep this file deliberately light:
-   large editorial images belong in <img loading="lazy"> elements, never CSS backgrounds. */
+/* Final production polish for the evidence-led robot-dog buying guide.
+   Loaded after the compiled guide CSS. Keep this file light: no heavyweight
+   editorial images are ever loaded as CSS backgrounds. */
 
-/* ---------- Media: predictable aspect ratios, no stretching ---------- */
+/* Media stays predictable and readable on every breakpoint. */
 .rd-guide .rd-pick__media{align-self:start}
 .rd-guide .rd-pick__media img{display:block;width:100%;height:auto;min-height:0;aspect-ratio:16/9;object-fit:cover;object-position:center}
-.rd-guide .rd-gallery figure,.rd-guide .rd-gallery figure:first-child{grid-row:auto}
-.rd-guide .rd-gallery img,.rd-guide .rd-gallery figure:first-child img{display:block;width:100%;height:auto;min-height:0;aspect-ratio:4/3;object-fit:cover;object-position:center}
 
-/* ---------- Visual chapters ---------- */
+/* Give the longest decision sections visual chapters without obscuring copy. */
 .rd-guide #comparison,
 .rd-guide #head-to-head,
 .rd-guide #programming,
-.rd-guide #chongker,
-.rd-guide .rd-section:has(.rd-choice-grid),
+.rd-guide #companion,
+.rd-guide #alternatives,
 .rd-guide .rd-section:has(.rd-buying-grid),
 .rd-guide .rd-section:has(.rd-related-grid),
 .rd-guide .rd-faq{
@@ -26,53 +24,13 @@
 }
 .rd-guide #head-to-head{background:radial-gradient(circle at 8% 0,rgba(108,168,255,.11),transparent 36%),linear-gradient(145deg,rgba(14,19,31,.92),rgba(7,9,14,.92))}
 .rd-guide #programming{background:radial-gradient(circle at 92% 0,rgba(91,154,255,.12),transparent 38%),linear-gradient(145deg,rgba(11,18,30,.94),rgba(6,9,14,.92))}
-.rd-guide #chongker{background:radial-gradient(circle at 92% 0,rgba(245,202,103,.11),transparent 38%),linear-gradient(145deg,rgba(25,21,14,.8),rgba(7,9,12,.94))}
+.rd-guide #companion{background:radial-gradient(circle at 92% 0,rgba(245,202,103,.1),transparent 38%),linear-gradient(145deg,rgba(25,21,14,.82),rgba(7,9,12,.94))}
+.rd-guide #alternatives{background:radial-gradient(circle at 8% 0,rgba(184,255,208,.07),transparent 36%),linear-gradient(145deg,rgba(10,18,18,.9),rgba(7,10,14,.94))}
 .rd-guide .rd-section:has(.rd-buying-grid){background:radial-gradient(circle at 10% 0,rgba(184,255,208,.07),transparent 32%),linear-gradient(145deg,rgba(10,20,19,.86),rgba(7,10,14,.94))}
 .rd-guide .rd-section:has(.rd-related-grid){background:radial-gradient(circle at 90% 0,rgba(108,168,255,.09),transparent 32%),linear-gradient(145deg,rgba(10,15,25,.9),rgba(7,10,14,.94))}
 .rd-guide .rd-faq{background:radial-gradient(circle at 10% 0,rgba(143,230,255,.07),transparent 32%),linear-gradient(145deg,rgba(9,15,21,.92),rgba(6,8,12,.96))}
 
-/* ---------- Fast answers: readable cards, not giant image overlays ----------
-   The previous version used six 1.8–2.4 MB PNGs as CSS backgrounds.
-   Browsers cannot lazy-load CSS backgrounds, so those images were fetched eagerly
-   and the text sat directly on top of bright photography on mobile. */
-.rd-guide .rd-choice{
-  min-height:220px;
-  padding:24px;
-  background:linear-gradient(150deg,rgba(255,255,255,.055),rgba(255,255,255,.018));
-  transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease;
-  cursor:pointer;
-  isolation:isolate
-}
-.rd-guide .rd-choice::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  width:auto;
-  height:auto;
-  background:radial-gradient(circle at 100% 0,rgba(143,230,255,.11),transparent 42%);
-  pointer-events:none;
-  z-index:-1
-}
-.rd-guide .rd-choice::after{
-  content:"";
-  position:absolute;
-  left:24px;
-  right:24px;
-  top:0;
-  height:2px;
-  background:linear-gradient(90deg,rgba(143,230,255,.9),rgba(108,168,255,.12),transparent);
-  opacity:.72
-}
-.rd-guide .rd-choice:nth-child(2)::before{background:radial-gradient(circle at 100% 0,rgba(108,168,255,.13),transparent 44%)}
-.rd-guide .rd-choice:nth-child(3)::before{background:radial-gradient(circle at 100% 0,rgba(184,255,208,.09),transparent 44%)}
-.rd-guide .rd-choice:nth-child(4)::before{background:radial-gradient(circle at 100% 0,rgba(143,230,255,.09),transparent 44%)}
-.rd-guide .rd-choice:nth-child(5)::before{background:radial-gradient(circle at 100% 0,rgba(108,168,255,.15),transparent 44%)}
-.rd-guide .rd-choice:nth-child(6)::before{background:radial-gradient(circle at 100% 0,rgba(245,202,103,.1),transparent 44%)}
-.rd-guide .rd-choice p{color:rgba(247,249,252,.7)}
-.rd-guide .rd-choice a{color:#fff}
-.rd-guide .rd-choice:hover,.rd-guide .rd-choice:focus-within,.rd-guide .rd-click-card:focus{transform:translateY(-3px);border-color:rgba(143,230,255,.34);box-shadow:0 22px 50px rgba(0,0,0,.28),0 0 0 1px rgba(143,230,255,.08);outline:none}
-
-/* ---------- Head-to-head: remove duplicate heavyweight product strips ---------- */
+/* Head-to-heads and programming cards remain interactive but image-free. */
 .rd-guide .rd-duel{position:relative;padding:24px;background:linear-gradient(160deg,rgba(255,255,255,.045),rgba(255,255,255,.014));overflow:hidden}
 .rd-guide .rd-duel::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 0 0,rgba(108,168,255,.095),transparent 38%);pointer-events:none}
 .rd-guide .rd-duel>*{position:relative}
@@ -80,24 +38,17 @@
 .rd-guide .rd-duel__side{background:rgba(255,255,255,.025)}
 .rd-guide .rd-duel__side--clickable{cursor:pointer;transition:border-color .18s ease,background .18s ease,transform .18s ease}
 .rd-guide .rd-duel__side--clickable:hover,.rd-guide .rd-duel__side--clickable:focus{border-color:rgba(143,230,255,.34);background:rgba(143,230,255,.06);transform:translateY(-2px);outline:none}
-
-/* ---------- Programming cards: technical feel without eager 2 MB backgrounds ---------- */
 .rd-guide .rd-program-card{position:relative;overflow:hidden;padding:24px;cursor:pointer;transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease;background:linear-gradient(155deg,rgba(255,255,255,.05),rgba(255,255,255,.016))}
 .rd-guide .rd-program-card::before{content:"";position:absolute;right:-60px;top:-70px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(108,168,255,.12),transparent 68%);pointer-events:none}
 .rd-guide .rd-program-card>*{position:relative}
 .rd-guide .rd-program-card:hover,.rd-guide .rd-program-card:focus{transform:translateY(-3px);border-color:rgba(143,230,255,.3);box-shadow:0 18px 44px rgba(0,0,0,.24);outline:none}
 
-/* ---------- Comparison ---------- */
+/* Comparison rows can jump to the corresponding evidence section. */
 .rd-guide .rd-table-row--clickable{cursor:pointer}
 .rd-guide .rd-row-cta{display:block;margin-top:6px;color:var(--rd-cyan);font-size:.67rem;font-weight:900;letter-spacing:.04em;text-transform:uppercase}
 .rd-guide .rd-table-row--clickable:focus{outline:2px solid rgba(143,230,255,.55);outline-offset:2px}
 
-/* ---------- Price ladder ---------- */
-.rd-guide .rd-price-step{min-height:170px;padding:22px;background:linear-gradient(160deg,rgba(255,255,255,.065),rgba(255,255,255,.018));box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 16px 34px rgba(0,0,0,.15)}
-.rd-guide .rd-price-step strong{font-size:1.6rem}
-.rd-guide .rd-price-step span{font-size:1.02rem}
-
-/* ---------- Utility cards ---------- */
+/* Utility cards. */
 .rd-guide .rd-buying-grid article{position:relative;overflow:hidden;min-height:205px;padding:24px;background:linear-gradient(155deg,rgba(255,255,255,.055),rgba(255,255,255,.018))}
 .rd-guide .rd-buying-grid article::after{content:"";position:absolute;right:-44px;bottom:-44px;width:130px;height:130px;border-radius:50%;background:radial-gradient(circle,rgba(143,230,255,.09),transparent 66%)}
 .rd-guide .rd-buying-grid span{display:inline-flex;width:38px;height:38px;align-items:center;justify-content:center;border-radius:12px;border:1px solid rgba(143,230,255,.2);background:rgba(143,230,255,.055)}
@@ -105,7 +56,7 @@
 .rd-guide .rd-related-grid a::after{content:"→";position:absolute;right:20px;bottom:18px;color:var(--rd-cyan);font-size:1.35rem;font-weight:900}
 .rd-guide .rd-related-grid a:hover{transform:translateY(-3px);border-color:rgba(143,230,255,.32)}
 
-/* ---------- FAQ ---------- */
+/* FAQ. */
 .rd-guide .rd-faq details{margin:10px 0;padding:0;border:1px solid rgba(255,255,255,.09)!important;border-radius:18px;background:rgba(255,255,255,.025);overflow:hidden}
 .rd-guide .rd-faq summary{padding:20px 22px;list-style:none}
 .rd-guide .rd-faq summary::-webkit-details-marker{display:none}
@@ -113,9 +64,9 @@
 .rd-guide .rd-faq details[open] summary::after{content:"–"}
 .rd-guide .rd-faq details p{margin:0;padding:0 22px 22px;color:rgba(247,249,252,.72)}
 
-.rd-guide .rd-hero__badges span,.rd-guide .rd-award,.rd-guide .rd-choice__tag{box-shadow:inset 0 1px 0 rgba(255,255,255,.04)}
+.rd-guide .rd-hero__badges span,.rd-guide .rd-award{box-shadow:inset 0 1px 0 rgba(255,255,255,.04)}
 
-/* Skip expensive layout/paint work until long-page sections approach the viewport. */
+/* Long-page paint work is deferred until sections approach the viewport. */
 @supports(content-visibility:auto){
   .rd-guide .rd-section,
   .rd-guide .rd-picks,
@@ -126,48 +77,38 @@
 }
 
 @media(max-width:900px){
-  .rd-guide .rd-pick__media img,.rd-guide .rd-gallery img,.rd-guide .rd-gallery figure:first-child img{height:auto;min-height:0;aspect-ratio:16/9}
-  .rd-guide #comparison,.rd-guide #head-to-head,.rd-guide #programming,.rd-guide #chongker,.rd-guide .rd-section:has(.rd-choice-grid),.rd-guide .rd-section:has(.rd-buying-grid),.rd-guide .rd-section:has(.rd-related-grid),.rd-guide .rd-faq{padding:28px 22px;border-radius:26px}
+  .rd-guide .rd-pick__media img{height:auto;min-height:0;aspect-ratio:16/9}
+  .rd-guide #comparison,.rd-guide #head-to-head,.rd-guide #programming,.rd-guide #companion,.rd-guide #alternatives,.rd-guide .rd-section:has(.rd-buying-grid),.rd-guide .rd-section:has(.rd-related-grid),.rd-guide .rd-faq{padding:28px 22px;border-radius:26px}
 }
 
 @media(max-width:720px){
-  /* Turn the wide comparison table into compact buying cards. */
+  /* The 7-column matrix becomes readable stacked cards instead of a horizontal spreadsheet. */
   .rd-guide .rd-table-wrap{overflow:visible}
   .rd-guide .rd-table{display:block;width:100%;min-width:0;padding:8px}
   .rd-guide .rd-table thead{display:none}
   .rd-guide .rd-table tbody{display:grid;gap:14px}
-  .rd-guide .rd-table tbody tr{position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 16px;padding:16px;border:1px solid rgba(255,255,255,.105);border-radius:20px;background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.018));box-shadow:inset 0 1px 0 rgba(255,255,255,.04),0 14px 34px rgba(0,0,0,.18)}
-  .rd-guide .rd-table td{display:block!important;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;min-width:0;color:rgba(247,249,252,.68)}
-  .rd-guide .rd-table td:first-child{grid-column:1/2;min-height:68px;padding-left:78px!important;display:flex!important;flex-direction:column;align-items:flex-start;justify-content:center;font-size:1.04rem;color:#fff}
-  .rd-guide .rd-table td:first-child::before{left:0;width:64px;height:64px;border-radius:15px}
-  .rd-guide .rd-table td:nth-child(2){grid-column:2/3;grid-row:1;align-self:center;text-align:right;color:#fff;font-size:1.04rem;font-weight:850}
-  .rd-guide .rd-table td:nth-child(3){grid-column:1/-1;margin-top:3px;color:var(--rd-cyan);font-size:.88rem;font-weight:800}
-  .rd-guide .rd-table td:nth-child(3)::before{content:"BEST FOR  ";display:block;margin-bottom:3px;color:rgba(143,230,255,.55);font-size:.62rem;letter-spacing:.1em}
-  .rd-guide .rd-table td:nth-child(4),.rd-guide .rd-table td:nth-child(5),.rd-guide .rd-table td:nth-child(6),.rd-guide .rd-table td:nth-child(7){display:inline-flex!important;width:max-content;max-width:100%;padding:6px 9px!important;border:1px solid rgba(255,255,255,.09)!important;border-radius:999px!important;background:rgba(255,255,255,.028)!important;font-size:.7rem;line-height:1.25}
-  .rd-guide .rd-table td:nth-child(4){grid-column:1/2}.rd-guide .rd-table td:nth-child(5){grid-column:2/3;justify-self:end}.rd-guide .rd-table td:nth-child(6){grid-column:1/2}.rd-guide .rd-table td:nth-child(7){grid-column:2/3;justify-self:end}
-  .rd-guide .rd-table td:nth-child(4)::before{content:"Control: ";color:var(--rd-soft)}
-  .rd-guide .rd-table td:nth-child(5)::before{content:"Coding: ";color:var(--rd-soft)}
-  .rd-guide .rd-table td:nth-child(6)::before{content:"AI: ";color:var(--rd-soft)}
-  .rd-guide .rd-table td:nth-child(7)::before{content:"Setup: ";color:var(--rd-soft)}
-  .rd-guide .rd-table td:nth-child(8){grid-column:1/-1;padding-top:8px!important;border-top:1px solid rgba(255,255,255,.07)!important;color:var(--rd-green);font-size:.72rem}
-  .rd-guide .rd-table td:nth-child(8)::before{content:"Amazon snapshot · ";color:var(--rd-soft)}
+  .rd-guide .rd-table tbody tr{display:grid;grid-template-columns:minmax(0,1fr);gap:9px;padding:16px;border:1px solid rgba(255,255,255,.105);border-radius:20px;background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.018));box-shadow:inset 0 1px 0 rgba(255,255,255,.04),0 14px 34px rgba(0,0,0,.18)}
+  .rd-guide .rd-table td{display:block!important;padding:0!important;border:0!important;background:transparent!important;min-width:0;color:rgba(247,249,252,.72);font-size:.78rem;line-height:1.4}
+  .rd-guide .rd-table td:first-child{font-size:1.08rem;font-weight:900;color:#fff}
+  .rd-guide .rd-table td:nth-child(2){padding-bottom:8px!important;border-bottom:1px solid rgba(255,255,255,.07)!important;color:var(--rd-green);font-weight:800}
+  .rd-guide .rd-table td:nth-child(3){color:var(--rd-cyan);font-weight:800}
+  .rd-guide .rd-table td:nth-child(n+4){display:grid!important;grid-template-columns:88px minmax(0,1fr);gap:8px;align-items:start}
+  .rd-guide .rd-table td:nth-child(2)::before{content:"PRICE  ";color:var(--rd-soft);font-size:.62rem;letter-spacing:.08em}
+  .rd-guide .rd-table td:nth-child(3)::before{content:"BEST FOR  ";display:block;margin-bottom:2px;color:rgba(143,230,255,.55);font-size:.62rem;letter-spacing:.08em}
+  .rd-guide .rd-table td:nth-child(4)::before{content:"Controls";color:var(--rd-soft);font-weight:800}
+  .rd-guide .rd-table td:nth-child(5)::before{content:"Programming";color:var(--rd-soft);font-weight:800}
+  .rd-guide .rd-table td:nth-child(6)::before{content:"Setup";color:var(--rd-soft);font-weight:800}
+  .rd-guide .rd-table td:nth-child(7)::before{content:"Evidence";color:var(--rd-soft);font-weight:800}
   .rd-guide .rd-row-cta{font-size:.62rem}
-
-  .rd-guide .rd-choice{min-height:0;padding:22px}
   .rd-guide .rd-duel{padding:20px 18px}
   .rd-guide .rd-program-card{padding:22px 20px}
-  .rd-guide .rd-price-step{min-height:155px}
 }
 
 @media(max-width:640px){
-  .rd-guide .rd-pick__media img,.rd-guide .rd-gallery img,.rd-guide .rd-gallery figure:first-child img{height:auto;min-height:0;aspect-ratio:16/9}
-  .rd-guide #comparison,.rd-guide #head-to-head,.rd-guide #programming,.rd-guide #chongker,.rd-guide .rd-section:has(.rd-choice-grid),.rd-guide .rd-section:has(.rd-buying-grid),.rd-guide .rd-section:has(.rd-related-grid),.rd-guide .rd-faq{margin:22px 0;padding:20px 14px;border-radius:22px}
-  .rd-guide .rd-choice{padding:20px 18px}
-  .rd-guide .rd-choice::after{left:18px;right:18px}
+  .rd-guide #comparison,.rd-guide #head-to-head,.rd-guide #programming,.rd-guide #companion,.rd-guide #alternatives,.rd-guide .rd-section:has(.rd-buying-grid),.rd-guide .rd-section:has(.rd-related-grid),.rd-guide .rd-faq{margin:22px 0;padding:20px 14px;border-radius:22px}
   .rd-guide .rd-table tbody tr{padding:14px}
-  .rd-guide .rd-table td:first-child{padding-left:72px!important}.rd-guide .rd-table td:first-child::before{width:58px;height:58px}
 }
 
 @media(prefers-reduced-motion:reduce){
-  .rd-guide .rd-choice,.rd-guide .rd-program-card,.rd-guide .rd-duel__side--clickable,.rd-guide .rd-related-grid a{transition:none!important}
+  .rd-guide .rd-program-card,.rd-guide .rd-duel__side--clickable,.rd-guide .rd-related-grid a{transition:none!important}
 }
