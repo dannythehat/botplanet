@@ -25,18 +25,10 @@
 html {
   background: var(--bg-base);
   scroll-behavior: smooth;
-  /* Anchor targets clear the sticky header instead of hiding beneath it. */
   scroll-padding-top: var(--scroll-offset);
   -webkit-text-size-adjust: 100%;
 }
 
-/**
- * Sticky-header clearance. scroll-padding-top alone is not enough: it is
- * ignored by some in-page jumps and by focus-driven scrolling. Every heading
- * and every element that can be an anchor destination also carries a matching
- * scroll-margin-top, so a destination is never hidden under the bar — whether
- * it was reached by link, by keyboard, or by the skip link.
- */
 h1,
 h2,
 h3,
@@ -51,12 +43,8 @@ article {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-  *,
-  *::before,
-  *::after {
+  html { scroll-behavior: auto; }
+  *,*::before,*::after {
     animation-duration: 1ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 1ms !important;
@@ -74,16 +62,9 @@ body {
   letter-spacing: var(--tracking-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* Nothing may cause sideways scrolling of the page itself. Wide content
-     scrolls inside its own container (see .table-wrap / .scroll-x). */
   overflow-x: hidden;
 }
 
-/**
- * Star field — the one piece of ambient atmosphere. Static (no animation),
- * very low contrast, fixed so it reads as depth rather than decoration. It is
- * pure CSS: no image request, no particles, no glow.
- */
 body::before {
   content: "";
   position: fixed;
@@ -100,8 +81,6 @@ body::before {
   opacity: 0.55;
 }
 
-/* A single, very wide horizon glow anchored behind the header. Monochrome-safe:
-   it is white at 4%, not a colour wash. */
 body::after {
   content: "";
   position: fixed;
@@ -115,325 +94,60 @@ body::after {
   background: radial-gradient(50% 50% at 50% 50%, rgba(255, 255, 255, 0.045), transparent 70%);
 }
 
-/* ---------------------------------------------------------------- */
-/* Typography                                                       */
-/* ---------------------------------------------------------------- */
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1,h2,h3,h4,h5,h6 {
   font-family: var(--font-display);
   color: var(--text-primary);
-  text-wrap: balance; /* avoids a single orphaned word on a headline */
+  text-wrap: balance;
   margin: 0;
 }
 
-h1 {
-  font-size: var(--type-title);
-  line-height: var(--leading-snug);
-  letter-spacing: var(--tracking-title);
-  font-weight: var(--weight-semibold);
-  margin-bottom: var(--space-md);
+h1 {font-size:var(--type-title);line-height:var(--leading-snug);letter-spacing:var(--tracking-title);font-weight:var(--weight-semibold);margin-bottom:var(--space-md)}
+h2 {font-size:var(--type-heading);line-height:var(--leading-snug);letter-spacing:var(--tracking-heading);font-weight:var(--weight-semibold);margin:var(--space-2xl) 0 var(--space-md)}
+h3 {font-size:var(--type-subheading);line-height:var(--leading-snug);letter-spacing:var(--tracking-heading);font-weight:var(--weight-semibold);margin:0 0 var(--space-xs)}
+h4 {font-size:var(--type-card);font-weight:var(--weight-semibold);letter-spacing:var(--tracking-heading)}
+section > h2:first-child,.section > h2:first-child {margin-top:0}
+p {margin:0 0 var(--space-md)}
+p:last-child {margin-bottom:0}
+strong,b {font-weight:var(--weight-semibold);color:var(--text-primary)}
+small {font-size:var(--type-meta)}
+a {color:inherit;text-decoration:none;transition:color var(--duration-fast) var(--ease-out)}
+.prose a:not(.btn):not(.card),a.link {color:var(--text-primary);text-decoration:underline;text-decoration-color:var(--border-strong);text-underline-offset:3px;text-decoration-thickness:1px}
+.prose a:not(.btn):not(.card):hover,a.link:hover {text-decoration-color:var(--text-primary)}
+hr {border:0;border-top:1px solid var(--border-subtle);margin:var(--space-2xl) 0}
+img,picture,video,canvas,svg {display:block;max-width:100%}
+ul,ol {margin:0 0 var(--space-md);padding-left:1.25em}
+li {margin-bottom:var(--space-2xs)}
+code,kbd,samp {font-family:var(--font-mono);font-size:.92em}
+:focus-visible {outline:var(--focus-ring);outline-offset:var(--focus-offset);border-radius:var(--radius-xs)}
+:focus:not(:focus-visible) {outline:none}
+::selection {background:var(--text-primary);color:var(--bg-base)}
+.skip {position:absolute;left:-9999px;top:0}
+.skip:focus {left:var(--space-sm);top:var(--space-sm);z-index:200;background:var(--surface-inverse);color:var(--text-on-inverse);padding:var(--space-xs) var(--space-sm);border-radius:var(--radius-sm);font-weight:var(--weight-semibold)}
+.sr-only {position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.text-display {font-family:var(--font-display);font-size:var(--type-display);line-height:var(--leading-tight);letter-spacing:var(--tracking-display);font-weight:var(--weight-bold);text-wrap:balance}
+.lede {font-size:var(--type-body-lg);line-height:var(--leading-relaxed);color:var(--text-secondary);max-width:62ch}
+.muted {color:var(--text-tertiary)}
+.note,.small {font-size:var(--type-meta);line-height:var(--leading-normal);color:var(--text-tertiary)}
+.mono {font-family:var(--font-mono);font-size:.94em}
+.eyebrow {display:block;font-family:var(--font-display);font-size:var(--type-label);font-weight:var(--weight-semibold);letter-spacing:var(--tracking-caps);text-transform:uppercase;color:var(--text-tertiary);margin-bottom:var(--space-sm)}
+.metric {font-family:var(--font-display);font-size:var(--type-title);line-height:1;letter-spacing:var(--tracking-title);font-weight:var(--weight-bold);font-variant-numeric:tabular-nums}
+.price {font-family:var(--font-display);font-size:21px;font-weight:var(--weight-bold);letter-spacing:var(--tracking-title);font-variant-numeric:tabular-nums;color:var(--text-primary)}
+
+/* Robot dog guide: hard image-height limits. */
+.rd-guide .rd-media {align-self:start!important;height:auto!important;max-height:none!important}
+.rd-guide .rd-media>img {width:100%!important;height:340px!important;min-height:0!important;max-height:340px!important;aspect-ratio:auto!important;object-fit:cover!important;object-position:center!important}
+.rd-guide .rd-hero__media>img {height:360px!important;max-height:360px!important}
+.rd-guide .rd-pick__media {align-self:start!important}
+.rd-guide .rd-pick__media>img {height:300px!important;min-height:0!important;max-height:300px!important}
+.rd-guide .rd-gallery img {height:220px!important;min-height:0!important;max-height:220px!important;object-fit:cover!important}
+.rd-guide .rd-gallery figure:first-child img {height:320px!important;min-height:0!important;max-height:320px!important}
+@media(max-width:900px){
+  .rd-guide .rd-media>img{height:280px!important;max-height:280px!important}
+  .rd-guide .rd-hero__media>img{height:300px!important;max-height:300px!important}
+  .rd-guide .rd-pick__media>img{height:250px!important;max-height:250px!important}
+  .rd-guide .rd-gallery img,.rd-guide .rd-gallery figure:first-child img{height:220px!important;max-height:220px!important}
 }
-
-h2 {
-  font-size: var(--type-heading);
-  line-height: var(--leading-snug);
-  letter-spacing: var(--tracking-heading);
-  font-weight: var(--weight-semibold);
-  margin: var(--space-2xl) 0 var(--space-md);
-}
-
-h3 {
-  font-size: var(--type-subheading);
-  line-height: var(--leading-snug);
-  letter-spacing: var(--tracking-heading);
-  font-weight: var(--weight-semibold);
-  margin: 0 0 var(--space-xs);
-}
-
-h4 {
-  font-size: var(--type-card);
-  font-weight: var(--weight-semibold);
-  letter-spacing: var(--tracking-heading);
-}
-
-/* First heading in a section should not push an extra top margin. */
-section > h2:first-child,
-.section > h2:first-child {
-  margin-top: 0;
-}
-
-p {
-  margin: 0 0 var(--space-md);
-}
-
-p:last-child {
-  margin-bottom: 0;
-}
-
-strong,
-b {
-  font-weight: var(--weight-semibold);
-  color: var(--text-primary);
-}
-
-small {
-  font-size: var(--type-meta);
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-  transition: color var(--duration-fast) var(--ease-out);
-}
-
-/* Inline links inside prose stay recognisable without relying on colour alone. */
-.prose a:not(.btn):not(.card),
-a.link {
-  color: var(--text-primary);
-  text-decoration: underline;
-  text-decoration-color: var(--border-strong);
-  text-underline-offset: 3px;
-  text-decoration-thickness: 1px;
-}
-
-.prose a:not(.btn):not(.card):hover,
-a.link:hover {
-  text-decoration-color: var(--text-primary);
-}
-
-hr {
-  border: 0;
-  border-top: 1px solid var(--border-subtle);
-  margin: var(--space-2xl) 0;
-}
-
-img,
-picture,
-video,
-canvas,
-svg {
-  display: block;
-  max-width: 100%;
-}
-
-ul,
-ol {
-  margin: 0 0 var(--space-md);
-  padding-left: 1.25em;
-}
-
-li {
-  margin-bottom: var(--space-2xs);
-}
-
-code,
-kbd,
-samp {
-  font-family: var(--font-mono);
-  font-size: 0.92em;
-}
-
-/* ---------------------------------------------------------------- */
-/* Focus — one treatment, always visible, never removed.            */
-/* ---------------------------------------------------------------- */
-
-:focus-visible {
-  outline: var(--focus-ring);
-  outline-offset: var(--focus-offset);
-  border-radius: var(--radius-xs);
-}
-
-/* Mouse users don't get a ring; keyboard users always do. */
-:focus:not(:focus-visible) {
-  outline: none;
-}
-
-::selection {
-  background: var(--text-primary);
-  color: var(--bg-base);
-}
-
-/* Skip link — visible the moment it receives keyboard focus. */
-.skip {
-  position: absolute;
-  left: -9999px;
-  top: 0;
-}
-
-.skip:focus {
-  left: var(--space-sm);
-  top: var(--space-sm);
-  z-index: 200;
-  background: var(--surface-inverse);
-  color: var(--text-on-inverse);
-  padding: var(--space-xs) var(--space-sm);
-  border-radius: var(--radius-sm);
-  font-weight: var(--weight-semibold);
-}
-
-/* Screen-reader-only text that still exists for assistive tech. */
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
-/* ---------------------------------------------------------------- */
-/* Text utility roles                                               */
-/* ---------------------------------------------------------------- */
-
-.text-display {
-  font-family: var(--font-display);
-  font-size: var(--type-display);
-  line-height: var(--leading-tight);
-  letter-spacing: var(--tracking-display);
-  font-weight: var(--weight-bold);
-  text-wrap: balance;
-}
-
-.lede {
-  font-size: var(--type-body-lg);
-  line-height: var(--leading-relaxed);
-  color: var(--text-secondary);
-  max-width: 62ch;
-}
-
-.muted {
-  color: var(--text-tertiary);
-}
-
-.note,
-.small {
-  font-size: var(--type-meta);
-  line-height: var(--leading-normal);
-  color: var(--text-tertiary);
-}
-
-.mono {
-  font-family: var(--font-mono);
-  font-size: 0.94em;
-}
-
-/* The one sanctioned all-caps role: short structural labels. */
-.eyebrow {
-  display: block;
-  font-family: var(--font-display);
-  font-size: var(--type-label);
-  font-weight: var(--weight-semibold);
-  letter-spacing: var(--tracking-caps);
-  text-transform: uppercase;
-  color: var(--text-tertiary);
-  margin-bottom: var(--space-sm);
-}
-
-.metric {
-  font-family: var(--font-display);
-  font-size: var(--type-title);
-  line-height: 1;
-  letter-spacing: var(--tracking-title);
-  font-weight: var(--weight-bold);
-  font-variant-numeric: tabular-nums;
-}
-
-.price {
-  font-family: var(--font-display);
-  font-size: 21px;
-  font-weight: var(--weight-bold);
-  letter-spacing: var(--tracking-title);
-  font-variant-numeric: tabular-nums;
-  color: var(--text-primary);
-}
-
-/* Robot dog guide: hard image-height limits. These deliberately use !important
-   because the guide's later visual-refinement rules previously stretched
-   landscape artwork to the height of adjacent content on mobile. */
-.rd-guide .rd-media {
-  align-self: start !important;
-  height: auto !important;
-  max-height: none !important;
-}
-
-.rd-guide .rd-media > img {
-  width: 100% !important;
-  height: 340px !important;
-  min-height: 0 !important;
-  max-height: 340px !important;
-  aspect-ratio: auto !important;
-  object-fit: cover !important;
-  object-position: center !important;
-}
-
-.rd-guide .rd-hero__media > img {
-  height: 360px !important;
-  max-height: 360px !important;
-}
-
-.rd-guide .rd-pick__media {
-  align-self: start !important;
-}
-
-.rd-guide .rd-pick__media > img {
-  height: 300px !important;
-  min-height: 0 !important;
-  max-height: 300px !important;
-}
-
-.rd-guide .rd-gallery img {
-  height: 220px !important;
-  min-height: 0 !important;
-  max-height: 220px !important;
-  object-fit: cover !important;
-}
-
-.rd-guide .rd-gallery figure:first-child img {
-  height: 320px !important;
-  min-height: 0 !important;
-  max-height: 320px !important;
-}
-
-@media (max-width: 900px) {
-  .rd-guide .rd-media > img {
-    height: 280px !important;
-    max-height: 280px !important;
-  }
-  .rd-guide .rd-hero__media > img {
-    height: 300px !important;
-    max-height: 300px !important;
-  }
-  .rd-guide .rd-pick__media > img {
-    height: 250px !important;
-    max-height: 250px !important;
-  }
-  .rd-guide .rd-gallery img,
-  .rd-guide .rd-gallery figure:first-child img {
-    height: 220px !important;
-    max-height: 220px !important;
-  }
-}
-
-@media (max-width: 640px) {
-  .rd-guide .rd-media > img,
-  .rd-guide .rd-hero__media > img,
-  .rd-guide .rd-pick__media > img {
-    height: 210px !important;
-    min-height: 0 !important;
-    max-height: 210px !important;
-  }
-  .rd-guide .rd-gallery img,
-  .rd-guide .rd-gallery figure:first-child img {
-    height: 180px !important;
-    min-height: 0 !important;
-    max-height: 180px !important;
-  }
+@media(max-width:640px){
+  .rd-guide .rd-media>img,.rd-guide .rd-hero__media>img,.rd-guide .rd-pick__media>img{height:210px!important;min-height:0!important;max-height:210px!important}
+  .rd-guide .rd-gallery img,.rd-guide .rd-gallery figure:first-child img{height:180px!important;min-height:0!important;max-height:180px!important}
 }
