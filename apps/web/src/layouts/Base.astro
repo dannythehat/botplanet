@@ -47,7 +47,6 @@ const {
 const host = Astro.request.headers.get("host");
 const canonicalPath = path ?? Astro.url.pathname;
 const isRobotDogGuide = canonicalPath === "/guides/robot-dog-toys/";
-const robotDogKeywords = "best robot dog 2026, robot dog toy, AI robot dog, robot pet dog, programmable robot dog, robot dog for kids, robot dog for adults, robot dog for elderly, coding robot dog, STEM robot dog, Loona robot pet, Ruko 18011 robot dog, MechDog robot dog, Petoi Bittle X V2, PuppyPi robot dog, Christmas robot dog gift";
 const meta = buildMeta({ title, description, path: canonicalPath, ogImage, ogType, noindex }, host);
 const preview = isPreviewHost(host);
 
@@ -103,7 +102,6 @@ const graph = schemaGraph(
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{meta.title}</title>
     <meta name="description" content={meta.description} />
-    {isRobotDogGuide && <meta name="keywords" content={robotDogKeywords} />}
     <link rel="canonical" href={meta.canonical} />
     <meta name="robots" content={meta.robots} />
     <meta name="color-scheme" content="dark" />
