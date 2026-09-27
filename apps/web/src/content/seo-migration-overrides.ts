@@ -5,8 +5,8 @@
  * in its index while many of the rebuilt category/product URLs are only just
  * being adopted. A broad "old content -> /robots/" redirect throws away topic
  * relevance and can be treated like a soft 404. Only redirect when the old
- * intent has a genuinely close successor; otherwise return 410 Gone so Google
- * can retire the obsolete URL and spend crawl budget on the current site.
+ * intent has a genuinely close successor; otherwise let the request fall
+ * through to the site's normal not-found handling.
  */
 
 export const SEO_MIGRATION_REDIRECTS: Readonly<Record<string, string>> = {
@@ -18,8 +18,7 @@ export const SEO_MIGRATION_REDIRECTS: Readonly<Record<string, string>> = {
   "/category/desk-robots/": "/robots/companion-robots/",
 };
 
-export const SEO_MIGRATION_GONE_PATHS = new Set([
-  "/security-robots/",
-  "/home-security-robots/",
-  "/category/wearable-robots/",
-]);
+/* Reserved for confirmed retired paths that should return 410. Keep empty
+   until an existing exact legacy rule is removed from content/routes.ts, so
+   this correction layer cannot disagree with the legacy registry. */
+export const SEO_MIGRATION_GONE_PATHS = new Set<string>();
