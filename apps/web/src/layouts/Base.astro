@@ -5,6 +5,7 @@ import Breadcrumbs from "../components/Breadcrumbs.astro";
 import {
   buildMeta, isPreviewHost, schemaGraph, organizationSchema, websiteSchema, breadcrumbSchema, OG_IMAGE_DEFAULT, type Crumb,
 } from "../lib/seo";
+import { sanitizeRichResultNodes } from "../lib/schema-eligibility";
 
 // Global design system. Order matters: tokens → element base → layout → components → metallic direction.
 import "../styles/tokens.css";
@@ -87,11 +88,16 @@ const cfBeacon = (Astro.locals as App.Locals).runtime?.env?.CF_BEACON_TOKEN;
 const cfBeaconValid = typeof cfBeacon === "string" && /^[a-f0-9]{32}$/i.test(cfBeacon);
 const cfBeaconEnabled = cfBeaconValid && import.meta.env.PROD && !preview;
 
+/* Pages can describe themselves richly, but the final layout is the last safe
+   point before JSON-LD reaches a crawler. Gate rich-result types here so one
+   page cannot accidentally publish an unrated Review, an undated Article or
+   an incomplete Offer. The guard removes claims; it never invents data. */
+const safeSchema = sanitizeRichResultNodes(schema);
 const graph = schemaGraph(
   organizationSchema(),
   websiteSchema(),
   breadcrumbs.length ? breadcrumbSchema(breadcrumbs) : null,
-  ...schema,
+  ...safeSchema,
 );
 ---
 
