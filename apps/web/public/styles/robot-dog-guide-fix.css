@@ -1,0 +1,53 @@
+/* Robot dog guide image proportion override.
+   The 2026-09-27 visual pass intentionally stretched product media to the card height.
+   That worked on desktop but produced huge portrait-like images on mobile. Keep editorial media landscape. */
+
+.rd-guide .rd-pick__media {
+  align-self: start;
+}
+
+.rd-guide .rd-pick__media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: center;
+}
+
+.rd-guide .rd-gallery figure,
+.rd-guide .rd-gallery figure:first-child {
+  grid-row: auto;
+}
+
+.rd-guide .rd-gallery img,
+.rd-guide .rd-gallery figure:first-child img {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: center;
+}
+
+@media (max-width: 900px) {
+  .rd-guide .rd-pick__media img,
+  .rd-guide .rd-gallery img,
+  .rd-guide .rd-gallery figure:first-child img {
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 16 / 9;
+  }
+}
+
+@media (max-width: 640px) {
+  .rd-guide .rd-pick__media img,
+  .rd-guide .rd-gallery img,
+  .rd-guide .rd-gallery figure:first-child img {
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 16 / 9;
+  }
+}
