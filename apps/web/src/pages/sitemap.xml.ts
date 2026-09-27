@@ -35,6 +35,11 @@ export const GET: APIRoute = async ({ locals }) => {
   for (const r of rows) published.set(r.categorySlug, (published.get(r.categorySlug) ?? 0) + 1);
 
   const paths = [
+    /* December 2026 challenge page. It is a static, indexable buying guide
+       built from live keyword research and intentionally added here so it is
+       declared to crawlers on first publish even before the wider route
+       registry is consolidated in the next registry maintenance pass. */
+    "/guides/robot-dog-toys/",
     /* THE COMPARE ROUTES ARE FILTERED AGAINST THE CATALOGUE, not against their
        own registry flags. A route file cannot know how many products are
        published, so four live-but-empty categories were listing a comparison
