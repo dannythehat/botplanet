@@ -16,7 +16,6 @@
 import {
   GONE_PREFIXES,
   LEGACY_CONTENT_REDIRECTS,
-  LEGACY_PREFIX_FALLBACK,
   LEGACY_REDIRECTS,
   REDIRECTS,
   ROUTES,
@@ -26,6 +25,10 @@ import {
 } from "../content/routes";
 import { REVIEWS } from "../content/reviews";
 import { isConsolidatedPath, isRemovedPath } from "../content/url-consolidation";
+import {
+  SEO_MIGRATION_GONE_PATHS,
+  SEO_MIGRATION_REDIRECTS,
+} from "../content/seo-migration-overrides";
 
 /* Every product this site actually holds, for resolving old /product/ and
    /reviews/ URLs onto the page that replaced them. Built once. */
@@ -71,6 +74,8 @@ export function normalisePath(pathname: string): string {
  */
 export function isGone(pathname: string): boolean {
   if (isPassthrough(pathname) || isFilePath(pathname)) return false;
+  const canonical = normalisePath(pathname);
+  if (SEO_MIGRATION_GONE_PATHS.has(canonical)) return true;
   if (isRemovedPath(pathname)) return true;
   const p = pathname.toLowerCase().replace(/\/+$/, "");
   return GONE_PREFIXES.some(({ prefix }) => p === prefix || p.startsWith(`${prefix}/`));
@@ -93,6 +98,7 @@ export interface RedirectResult {
  */
 export function resolveRedirect(pathname: string): RedirectResult | null {
   if (isPassthrough(pathname) || isFilePath(pathname)) return null;
+  if (isGone(pathname)) return null;
 
   const normalised = normalisePath(pathname);
   const alias = REDIRECTS.find((r) => normalisePath(r.from) === normalised);
@@ -107,6 +113,15 @@ export function resolveRedirect(pathname: string): RedirectResult | null {
         reason: isConsolidatedPath(normalised) ? "consolidation" : "alias",
       };
     }
+  }
+
+  /* Search Console migration corrections take precedence over older legacy
+     decisions. They are explicit because topic-equivalent redirects preserve
+     intent; generic sweeps do not. */
+  const migrationTarget = SEO_MIGRATION_REDIRECTS[normalised];
+  if (migrationTarget) {
+    const target = normalisePath(migrationTarget);
+    if (target !== normalised) return { to: target, status: 301, reason: "legacy" };
   }
 
   /* The previous site on this domain, whose URLs are still what Google has
@@ -133,14 +148,10 @@ export function resolveRedirect(pathname: string): RedirectResult | null {
     if (target !== normalised) return { to: target, status: 301, reason: "legacy" };
   }
 
-  /* The long tail under the old site's four content prefixes. Anything still
-     unmatched lands on the robot index rather than a 404, because it came from
-     a page about robots on this domain and the index is a real answer to that.
-     Last, so it can never shadow a mapping above. */
-  if (LEGACY_PREFIX_FALLBACK.prefixes.some((p) => normalised.startsWith(p))) {
-    const target = normalisePath(LEGACY_PREFIX_FALLBACK.to);
-    if (target !== normalised) return { to: target, status: 301, reason: "legacy" };
-  }
+  /* No broad legacy catch-all here. If an old editorial/product URL has no
+     defensible replacement, it must 404 (or be explicitly marked 410 above)
+     rather than pretending /robots/ answers the same intent. This prevents
+     the migration from creating soft-404-style redirects. */
 
   if (normalised !== pathname) return { to: normalised, status: 301, reason: "normalise" };
   return null;

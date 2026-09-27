@@ -20,7 +20,6 @@ import {
   sitemapRoutes,
   LEGACY_REDIRECTS,
   LEGACY_CONTENT_REDIRECTS,
-  LEGACY_PREFIX_FALLBACK,
 } from "../src/content/routes";
 import { RETIRED_SLUGS, MERGED_REVIEWS } from "../src/content/product-names";
 import { COMPARE_PAGES, comparePageIsSubstantive } from "../src/content/compare-page";
@@ -65,12 +64,6 @@ describe("normalisePath — locked URL standards", () => {
 });
 
 describe("resolveRedirect", () => {
-  /* "/botmatch/" IS NO LONGER ONE OF THESE, and the change is the point of the
-     universal finder. It used to redirect onto the pool funnel, so anyone who
-     typed the obvious URL was asked about their swimming pool whatever they
-     had come for. It is a real page now, and it asks what job they want done
-     before it asks anything else. The two legacy paths still forward, because
-     they were only ever the pool matcher. */
   it("sends legacy BotMatch entries to the category journey", () => {
     for (const p of ["/find-my-robot/", "/find-my-robot/pool-cleaners/"]) {
       const r = resolveRedirect(p);
@@ -223,20 +216,13 @@ describe("sitemap inclusion rules", () => {
   });
 });
 
-/**
- * The /best-robots/ index links a card per category, and it linked wherever the
- * CATEGORY was live rather than wherever the PAGE was written — seven cards
- * onto a 404. This asserts the fact the page now reads instead.
- */
 describe("builtBestOfCategories", () => {
   it("names only categories whose best-of URL is a registered live route", () => {
     const live = new Set(ROUTES.filter((r) => r.status === "live").map((r) => r.path));
     const built = builtBestOfCategories();
     expect(built.size).toBeGreaterThan(0);
     for (const slug of built) {
-      expect(live.has(categoryRoutes(slug).best), `/best-robots/${slug}/ is not a live route`).toBe(
-        true,
-      );
+      expect(live.has(categoryRoutes(slug).best), `/best-robots/${slug}/ is not a live route`).toBe(true);
     }
   });
 
@@ -305,26 +291,11 @@ describe("registry integrity", () => {
   });
 });
 
-/**
- * GATE 3, from the snow-blower merge review of 11 August 2026.
- *
- * The sitemap decided product inclusion with `liveSlugs.has(categorySlug)`,
- * built from `liveCategories()`, which returns only `launch === "live"`. That
- * silently dropped every product in a HIDDEN category — a reserved slug with
- * no hub, no route and no comparative surfaces, but with real reviews beneath
- * it that `[slug].astro` renders without ever setting noindex.
- *
- * So those pages indexed and this site never declared them. The failure is
- * invisible from the page (it renders perfectly) and invisible from the
- * sitemap (the URL simply is not there), which is why it needs a test rather
- * than a comment.
- */
 describe("productInSitemap — hidden categories ship their reviews", () => {
   const live = CATEGORIES.find((c) => c.launch === "live")!.slug;
   const hidden = CATEGORIES.find((c) => c.launch === "hidden")!.slug;
 
   it("has a hidden category to test against", () => {
-    // If this ever fails the fixture is gone, not the rule.
     expect(hidden).toBeTruthy();
   });
 
@@ -333,12 +304,11 @@ describe("productInSitemap — hidden categories ship their reviews", () => {
     expect(productInSitemap({ slug: "x", categorySlug: live, hasPublishedReview: false })).toBe(true);
   });
 
-  it("admits a REVIEWED product in a hidden category — the bug this fixes", () => {
+  it("admits a REVIEWED product in a hidden category", () => {
     expect(productInSitemap({ slug: "x", categorySlug: hidden, hasPublishedReview: true })).toBe(true);
   });
 
   it("keeps an unreviewed product in a hidden category out", () => {
-    // A hidden category is a reservation. Only a written review earns the URL.
     expect(productInSitemap({ slug: "x", categorySlug: hidden, hasPublishedReview: false })).toBe(false);
   });
 
@@ -358,10 +328,6 @@ describe("productInSitemap — hidden categories ship their reviews", () => {
   });
 
   it("never admits a hidden category's own hub, comparison or matcher", () => {
-    /* Those come from the route registry rather than from this predicate, and
-       a hidden category has no routes registered — which is what makes the
-       hidden-category URL safe in the first place. Asserted here so the two
-       halves of the rule are checked in one place. */
     const paths = sitemapRoutes().map((r) => r.path);
     expect(paths).not.toContain(`/robots/${hidden}/`);
     expect(paths).not.toContain(`/compare/${hidden}/`);
@@ -371,16 +337,7 @@ describe("productInSitemap — hidden categories ship their reviews", () => {
 });
 
 describe("legacy redirects from the previous site", () => {
-  /**
-   * See the long note above LEGACY_REDIRECTS in content/routes.ts. Google's
-   * index still holds the old site's URLs; these turn each dead one into a
-   * signpost instead of a 404.
-   */
   it("never redirects a path that is a live route today", () => {
-    /* THE MISTAKE THIS CAUGHT ON THE WAY IN: /contact/ existed on the old site
-       AND exists on this one, and was about to be redirected to /about/. A
-       legacy map is written by looking at what USED to exist, which is exactly
-       the frame of mind in which you forget to check what still does. */
     const live = new Set(ROUTES.map((r) => r.path));
     const broken = LEGACY_REDIRECTS.filter((r) => live.has(r.from)).map((r) => r.from);
     expect(broken).toEqual([]);
@@ -390,7 +347,6 @@ describe("legacy redirects from the previous site", () => {
     for (const r of LEGACY_REDIRECTS) {
       const first = resolveRedirect(r.from);
       expect(first, `${r.from} does not redirect`).not.toBeNull();
-      // One hop, never a chain: the destination must be final.
       expect(resolveRedirect(first!.to), `${r.from} → ${first!.to} redirects again`).toBeNull();
       expect(first!.status).toBe(301);
     }
@@ -407,7 +363,6 @@ describe("legacy redirects from the previous site", () => {
   });
 
   it("matches an old review URL that carried a headline after the slug", () => {
-    // "sphero-bolt-review-the-smartest-hamster-ball-in-the-galaxy"
     const r = resolveRedirect("/reviews/sphero-bolt-review-the-smartest-hamster-ball-in-the-galaxy/");
     expect(r?.to).toBe("/robots/educational-coding-robots/sphero-bolt/");
   });
@@ -418,21 +373,11 @@ describe("legacy redirects from the previous site", () => {
   });
 
   it("404s an unknown path that is not the old site's", () => {
-    /* The standard at the top of lib/routing.ts still holds for the open web:
-       unknown routes 404 and are never swept to the homepage. */
     expect(resolveRedirect("/nonsense/")).toBeNull();
     expect(resolveRedirect("/robots/not-a-category/")).toBeNull();
   });
 
-  /* THIS REVERSES A PREVIOUS DECISION, on the owner's instruction of 12 August
-     2026, and the reversal is narrow enough to be worth stating.
-
-     The rule was "a redirect that cannot be justified is worse than an honest
-     404". That is right in general and wrong for these four prefixes, because
-     they are not unknown paths — they are the previous robot site's content
-     URLs, and a request for one is a request for robots on this domain. The
-     robot index answers that. It stays a 404 everywhere else. */
-  it("sends the old site's unmapped content URLs to the robot index", () => {
+  it("does not sweep unmapped old content URLs to the robot index", () => {
     for (const p of [
       "/blog/whatever/",
       "/blog/some-old-listicle/",
@@ -440,13 +385,11 @@ describe("legacy redirects from the previous site", () => {
       "/product/some-machine-that-never-existed/",
       "/reviews/a-review-of-something-gone/",
     ]) {
-      const r = resolveRedirect(p);
-      expect(r?.to, p).toBe("/robots/");
-      expect(r?.status, p).toBe(301);
+      expect(resolveRedirect(p), p).toBeNull();
     }
   });
 
-  it("maps the four URLs Search Console actually showed, exactly", () => {
+  it("maps the explicit legacy URLs exactly", () => {
     expect(resolveRedirect("/product/emo-ai-desktop-pet/")?.to).toBe(
       "/robots/companion-robots/living-ai-emo/",
     );
@@ -455,12 +398,11 @@ describe("legacy redirects from the previous site", () => {
     ).toBe("/robots/robotic-lawn-mowers/worx-landroid-vision-wr320/");
     expect(resolveRedirect("/blog/best-ai-pet-robots/")?.to).toBe("/robots/companion-robots/");
     expect(resolveRedirect("/category/wearable-robots/")?.to).toBe("/robots/");
+    expect(resolveRedirect("/blog/best-robot-pets-2026/")?.to).toBe("/robots/companion-robots/");
+    expect(resolveRedirect("/category/desk-robots/")?.to).toBe("/robots/companion-robots/");
   });
 
-  it("reaches those mappings in ONE hop from the unslashed form", () => {
-    /* The trailing-slash normaliser used to win this race: /product/x answered
-       301 to /product/x/, which then answered 301 again. Two hops to say one
-       thing, and Google discounts the second. */
+  it("reaches explicit mappings in ONE hop from the unslashed form", () => {
     const r = resolveRedirect("/product/emo-ai-desktop-pet");
     expect(r?.to).toBe("/robots/companion-robots/living-ai-emo/");
   });
@@ -480,9 +422,6 @@ describe("410 Gone — the previous sites' dead sections", () => {
   });
 
   it("ignores the query string, which is how the old storefront built its URLs", () => {
-    /* isGone takes a pathname; the middleware passes url.pathname, so
-       /shop?category=x arrives here as "/shop". Asserted so a future change
-       that starts passing the full URL is caught. */
     expect(isGone("/shop")).toBe(true);
   });
 
@@ -504,9 +443,7 @@ describe("410 Gone — the previous sites' dead sections", () => {
     }
   });
 
-  it("does not also redirect a gone path — 410 is the whole answer", () => {
-    /* If both fired, the middleware's ordering would decide the outcome and a
-       reordering would silently change it. Neither should have an opinion. */
+  it("does not also redirect a gone path", () => {
     for (const p of ["/gifts/", "/quiz/", "/shop/"]) {
       expect(resolveRedirect(p)?.to, p).not.toBe("/robots/");
     }
@@ -518,7 +455,6 @@ describe("no redirect points at another redirect", () => {
     const targets = [
       ...REDIRECTS.map((r) => r.to),
       ...LEGACY_CONTENT_REDIRECTS.map((r) => r.to),
-      LEGACY_PREFIX_FALLBACK.to,
     ];
     for (const to of targets) {
       const again = resolveRedirect(to);
@@ -530,7 +466,6 @@ describe("no redirect points at another redirect", () => {
     const targets = [
       ...REDIRECTS.map((r) => r.to),
       ...LEGACY_CONTENT_REDIRECTS.map((r) => r.to),
-      LEGACY_PREFIX_FALLBACK.to,
     ];
     for (const to of targets) {
       expect(isGone(to), `${to} is a redirect target AND gone`).toBe(false);
@@ -538,19 +473,6 @@ describe("no redirect points at another redirect", () => {
   });
 });
 
-/**
- * THE BEST-OF CONSOLIDATION, 12 August 2026.
- *
- * Nine categories are live and three best-of pages existed. Six were never
- * built because each category's research measured its head term against its
- * "best" term, found five or more shared results in the top ten, and ruled one
- * page — which is the rule this site runs on. Window was measured at SIX and
- * got a second page anyway, two days after its own keyword register row said
- * not to. That page is now an alias of its hub.
- *
- * These assertions are the shape of the site after that, so nobody has to
- * remember which of the two rulings applied to which category.
- */
 describe("best-of consolidation", () => {
   const WINDOW_BEST = "/best-robots/window-cleaning-robots/";
   const WINDOW_HUB = "/robots/window-cleaning-robots/";
@@ -560,7 +482,6 @@ describe("best-of consolidation", () => {
     const hop = resolveRedirect(WINDOW_BEST);
     expect(hop?.to).toBe(WINDOW_HUB);
     expect(hop?.status).toBe(301);
-    // And the destination is final — not itself a redirect, and not gone.
     expect(resolveRedirect(WINDOW_HUB)).toBeNull();
     expect(isGone(WINDOW_HUB)).toBe(false);
   });
@@ -572,8 +493,6 @@ describe("best-of consolidation", () => {
   it("keeps the window best-of out of the sitemap and out of the registry", () => {
     expect(sitemapRoutes().map((r) => r.path)).not.toContain(WINDOW_BEST);
     expect(ROUTES.some((r) => r.path === WINDOW_BEST)).toBe(false);
-    // The hub itself is still declared — folding the shortlist in must not
-    // take the page it folded into with it.
     expect(sitemapRoutes().map((r) => r.path)).toContain(WINDOW_HUB);
   });
 
@@ -595,12 +514,6 @@ describe("best-of consolidation", () => {
     ]);
   });
 
-  /**
-   * A section index is a promise that a section is behind it. Two pages is not
-   * a section, and six of the seven that would have filled it were refused on
-   * evidence rather than merely unbuilt. It stays in the footer, which is a
-   * link rather than a promise.
-   */
   it("retires the section index from every navigation surface", () => {
     expect(BAR_ITEMS.map((i) => i.href)).not.toContain("/best-robots/");
     expect(BAR_ITEMS.some((i) => i.href.startsWith("/best-robots/"))).toBe(false);
@@ -610,40 +523,19 @@ describe("best-of consolidation", () => {
     expect(resolveRedirect("/best-robots/")?.to).toBe("/robots/");
   });
 
-  /**
-   * The mega panel's "Best pool robots" item pointed at /best-robots/ — the
-   * index of every category — under a column headed "Robotic pool cleaners".
-   * A nav item that names one page and links to another is the failure this
-   * whole consolidation is about, in miniature.
-   */
   it("sends the mega panel's pool item to the pool ranking, not the index", () => {
     expect(routes.best(LAUNCH_CATEGORY)).toBe("/best-robots/robotic-pool-cleaners/");
-    expect(ROUTES.some((r) => r.path === routes.best(LAUNCH_CATEGORY) && r.status === "live")).toBe(
-      true,
-    );
+    expect(ROUTES.some((r) => r.path === routes.best(LAUNCH_CATEGORY) && r.status === "live")).toBe(true);
   });
 
-  /**
-   * The prominent route to a ranking is now from inside the category the
-   * ranking is about, which is where a reader is already choosing. It was the
-   * top bar, which asked every reader on every page to care about a section
-   * that answers two categories.
-   */
   it("links each surviving best-of from its own hub, above the fold", () => {
     for (const slug of builtBestOfCategories()) {
       const hero = heroFor(slug)!;
       const ctas = [hero.primaryCta?.href, hero.secondaryCta?.href];
-      expect(ctas, `the ${slug} hub does not link its best-of from the hero`).toContain(
-        categoryRoutes(slug).best,
-      );
+      expect(ctas, `the ${slug} hub does not link its best-of from the hero`).toContain(categoryRoutes(slug).best);
     }
   });
 
-  /**
-   * And back the other way. A best-of hangs off its hub so the breadcrumb IS
-   * the link home; the pool page hung off /best-robots/ until this change and
-   * offered the reader no way into the category it ranks.
-   */
   it("parents each surviving best-of to its hub, so the breadcrumb leads back", () => {
     for (const slug of builtBestOfCategories()) {
       const route = ROUTES.find((r) => r.path === categoryRoutes(slug).best)!;
@@ -652,11 +544,6 @@ describe("best-of consolidation", () => {
     }
   });
 
-  /**
-   * The point of the whole exercise. The hub took the shortlist's terms, so it
-   * has to say the words — and no internal link may still point at the URL
-   * that folded.
-   */
   it("moves the shortlist's commercial terms onto the hub copy", () => {
     const slug = "window-cleaning-robots";
     const copy = JSON.stringify([
@@ -680,31 +567,13 @@ describe("best-of consolidation", () => {
       expect(copy.includes(term), `the window hub no longer says "${term}"`).toBe(true);
     }
 
-    /* The named recommendations came with the terms. Awards without the
-       machines behind them would be the folded page's shape and none of its
-       substance. */
     for (const machine of ["winbot w2 pro", "hobot 2s", "cop rose x5s", "mamibot w120-dp", "hutt s55 pro"]) {
       expect(copy.includes(machine), `the window hub no longer names the ${machine}`).toBe(true);
     }
   });
 
-  /**
-   * THE DEFECT EVERY OTHER ASSERTION IN THIS FILE MISSED, found by an external
-   * audit on 12 August 2026 and not by us.
-   *
-   * The WINBOT ladder on the window hub ended "...and the best-of page makes
-   * that argument". That page had folded into the very page the sentence was
-   * printed on. Nothing caught it because every guard here checks HREFS — a
-   * page referred to in words, with no link, is invisible to all of them.
-   *
-   * The rule this asserts is narrow and mechanical on purpose: a component
-   * built for ONE category must not talk about a page type that category does
-   * not have. It would have failed on the exact sentence above.
-   */
   it("never lets a category-specific component name a page its category lacks", () => {
     const COMPONENTS = fileURLToPath(new URL("../src/components/", import.meta.url));
-    /* The dispatch map in HubTable.astro, restated. Each of these renders for
-       exactly one category, so each may only speak about that category. */
     const OWNED_BY: Record<string, string> = {
       "WinbotLadder.astro": "window-cleaning-robots",
       "CapabilityTable.astro": "companion-robots",
@@ -713,9 +582,6 @@ describe("best-of consolidation", () => {
 
     for (const [file, slug] of Object.entries(OWNED_BY)) {
       const src = readFileSync(`${COMPONENTS}${file}`, "utf8");
-      /* Strip the Astro frontmatter and every comment: this is about what a
-         READER is told, and a code comment explaining the history is exactly
-         the thing that should be allowed to mention it. */
       const copy = src
         .replace(/^---[\s\S]*?---/, "")
         .replace(/\/\*[\s\S]*?\*\//g, "")
@@ -729,21 +595,13 @@ describe("best-of consolidation", () => {
     }
   });
 
-  /**
-   * An internal link into a 301 spends a crawl to be told to go somewhere
-   * else, and it is exactly what happens when a page is folded and its
-   * inbound links are not. The registry's own alias entry is the one legitimate
-   * mention of this URL anywhere in the codebase.
-   */
   it("leaves nothing pointing at the folded URL but the alias itself", () => {
     const anchors = [
       ...Object.values(CATEGORY_ANCHORS).flat().map((a) => a.href),
       ...RETROFITTED_INBOUND.flatMap((r) => (r as { links?: { href: string }[] }).links?.map((l) => l.href) ?? []),
     ];
     for (const href of anchors) {
-      expect(href.split("#")[0], "an internal anchor still points at the folded best-of").not.toBe(
-        WINDOW_BEST,
-      );
+      expect(href.split("#")[0], "an internal anchor still points at the folded best-of").not.toBe(WINDOW_BEST);
     }
 
     for (const p of PAGE_PLAN) {
