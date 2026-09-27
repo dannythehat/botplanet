@@ -3,14 +3,16 @@
 
   var targetByName = {
     'Ruko 18011': '#ruko',
-    'YESHIN CyberDog': '#yeshin',
-    'Loona': '#loona',
-    'MechDog': '#mechdog',
-    'Bittle X V2': '#bittle',
-    'PuppyPi': '#puppypi',
-    'Chongker plush': '#chongker',
     'Ruko': '#ruko',
-    'Chongker': '#chongker'
+    'Loona': '#loona',
+    'Loona Petbot': '#loona',
+    'MechDog': '#mechdog',
+    'Hiwonder MechDog': '#mechdog',
+    'Bittle X V2': '#bittle',
+    'Petoi Bittle X V2': '#bittle',
+    'PuppyPi': '#puppypi',
+    'Hiwonder PuppyPi': '#puppypi',
+    'Joy for All': '#companion'
   };
 
   function go(target) {
@@ -49,24 +51,6 @@
       if (event.key === 'Enter' || event.key === ' ') {
         event.preventDefault();
         go(target);
-      }
-    });
-  });
-
-  document.querySelectorAll('.rd-choice').forEach(function (card) {
-    var link = card.querySelector('a[href]');
-    if (!link) return;
-    card.classList.add('rd-click-card');
-    card.setAttribute('role', 'link');
-    card.setAttribute('tabindex', '0');
-    card.addEventListener('click', function (event) {
-      if (event.target.closest('a, button')) return;
-      window.location.href = link.href;
-    });
-    card.addEventListener('keydown', function (event) {
-      if (event.key === 'Enter' || event.key === ' ') {
-        event.preventDefault();
-        window.location.href = link.href;
       }
     });
   });
