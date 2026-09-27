@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { sanitizeRichResultNode, sanitizeRichResultNodes } from "../src/lib/schema-eligibility";
 
 describe("rich-result eligibility", () => {
-  it("replaces an unrated Review with its truthful Product entity", () => {
+  it("lets an unrated Review fall back to Product only when Product has a valid offer", () => {
     const product = {
       "@type": "Product",
       name: "Example Robot",
@@ -16,6 +16,16 @@ describe("rich-result eligibility", () => {
         itemReviewed: product,
       }),
     ).toEqual(product);
+  });
+
+  it("drops an unrated Review when its Product has no independently eligible rich-result data", () => {
+    expect(
+      sanitizeRichResultNode({
+        "@type": "Review",
+        headline: "Example review",
+        itemReviewed: { "@type": "Product", name: "Example Robot" },
+      }),
+    ).toBeNull();
   });
 
   it("keeps a Review only when a real ratingValue exists", () => {
@@ -33,14 +43,31 @@ describe("rich-result eligibility", () => {
     expect(sanitizeRichResultNode(article)).toEqual(article);
   });
 
-  it("removes an incomplete Offer instead of inventing its price", () => {
+  it("drops a Product whose only offer is incomplete instead of inventing its price", () => {
     expect(
       sanitizeRichResultNode({
         "@type": "Product",
         name: "Example Robot",
         offers: { "@type": "Offer", url: "https://botplanet.io/example/" },
       }),
-    ).toEqual({ "@type": "Product", name: "Example Robot" });
+    ).toBeNull();
+  });
+
+  it("drops a bare Product with no offer, review or aggregate rating", () => {
+    expect(sanitizeRichResultNode({ "@type": "Product", name: "Example Robot" })).toBeNull();
+  });
+
+  it("keeps a Product with a genuine aggregate rating", () => {
+    const product = {
+      "@type": "Product",
+      name: "Rated Robot",
+      aggregateRating: {
+        "@type": "AggregateRating",
+        ratingValue: 4.4,
+        ratingCount: 37,
+      },
+    };
+    expect(sanitizeRichResultNode(product)).toEqual(product);
   });
 
   it("keeps valid Offer and AggregateOffer shapes", () => {
@@ -56,7 +83,6 @@ describe("rich-result eligibility", () => {
         "@type": "AggregateOffer",
         priceCurrency: "USD",
         lowPrice: "299.00",
-        highPrice: "349.00",
       },
     };
     expect(sanitizeRichResultNode(offerProduct)).toEqual(offerProduct);
@@ -69,6 +95,7 @@ describe("rich-result eligibility", () => {
       sanitizeRichResultNodes([
         faq,
         { "@type": "Article", headline: "No publish date" },
+        { "@type": "Product", name: "Bare product" },
         null,
       ]),
     ).toEqual([faq]);
