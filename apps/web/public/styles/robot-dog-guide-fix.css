@@ -1,53 +1,132 @@
-/* Robot dog guide image proportion override.
-   The 2026-09-27 visual pass intentionally stretched product media to the card height.
-   That worked on desktop but produced huge portrait-like images on mobile. Keep editorial media landscape. */
+/* Final production polish for the robot-dog buying guide.
+   This file intentionally loads after the compiled guide CSS. */
 
-.rd-guide .rd-pick__media {
-  align-self: start;
+/* Keep every editorial image compact and landscape. */
+.rd-guide .rd-pick__media{align-self:start}
+.rd-guide .rd-pick__media img{display:block;width:100%;height:auto;min-height:0;aspect-ratio:16/9;object-fit:cover;object-position:center}
+.rd-guide .rd-gallery figure,.rd-guide .rd-gallery figure:first-child{grid-row:auto}
+.rd-guide .rd-gallery img,.rd-guide .rd-gallery figure:first-child img{display:block;width:100%;height:auto;min-height:0;aspect-ratio:4/3;object-fit:cover;object-position:center}
+
+/* Give the long page visual chapters rather than one continuous black column. */
+.rd-guide #comparison,
+.rd-guide #head-to-head,
+.rd-guide #programming,
+.rd-guide #chongker,
+.rd-guide .rd-section:has(.rd-choice-grid),
+.rd-guide .rd-section:has(.rd-buying-grid),
+.rd-guide .rd-section:has(.rd-related-grid),
+.rd-guide .rd-faq{
+  margin:34px 0;
+  padding:42px;
+  border:1px solid rgba(255,255,255,.105);
+  border-radius:32px;
+  background:
+    radial-gradient(circle at 90% 0,rgba(143,230,255,.075),transparent 34%),
+    linear-gradient(145deg,rgba(14,20,28,.78),rgba(7,10,15,.72));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.055),0 28px 80px rgba(0,0,0,.18);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px)
+}
+.rd-guide #head-to-head{background:radial-gradient(circle at 8% 0,rgba(108,168,255,.11),transparent 36%),linear-gradient(145deg,rgba(14,19,31,.82),rgba(7,9,14,.76))}
+.rd-guide #programming{background:radial-gradient(circle at 92% 0,rgba(91,154,255,.12),transparent 38%),linear-gradient(145deg,rgba(11,18,30,.84),rgba(6,9,14,.76))}
+.rd-guide #chongker{background:radial-gradient(circle at 92% 0,rgba(245,202,103,.115),transparent 38%),linear-gradient(145deg,rgba(25,21,14,.68),rgba(7,9,12,.8))}
+.rd-guide .rd-section:has(.rd-buying-grid){background:radial-gradient(circle at 10% 0,rgba(184,255,208,.07),transparent 32%),linear-gradient(145deg,rgba(10,20,19,.7),rgba(7,10,14,.78))}
+.rd-guide .rd-section:has(.rd-related-grid){background:radial-gradient(circle at 90% 0,rgba(108,168,255,.09),transparent 32%),linear-gradient(145deg,rgba(10,15,25,.76),rgba(7,10,14,.8))}
+.rd-guide .rd-faq{background:radial-gradient(circle at 10% 0,rgba(143,230,255,.07),transparent 32%),linear-gradient(145deg,rgba(9,15,21,.8),rgba(6,8,12,.84))}
+
+/* Fast-answer cards: image-led and the whole card feels interactive. */
+.rd-guide .rd-choice{min-height:300px;padding:154px 22px 22px;background-position:top center;background-repeat:no-repeat;background-size:100% 132px,100% 100%;transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease;cursor:pointer}
+.rd-guide .rd-choice:nth-child(1){background-image:linear-gradient(to bottom,transparent 56%,rgba(8,11,16,.98)),url('/images/guides/robot-dog-toys/file_00000000114881f4962200e6b3ab3714.png')}
+.rd-guide .rd-choice:nth-child(2){background-image:linear-gradient(to bottom,transparent 56%,rgba(8,11,16,.98)),url('/images/guides/robot-dog-toys/file_000000006f48820a89a67189ad2509a5.png')}
+.rd-guide .rd-choice:nth-child(3){background-image:linear-gradient(to bottom,transparent 56%,rgba(8,11,16,.98)),url('/images/guides/robot-dog-toys/file_00000000ae38820a921680cc557de558.png')}
+.rd-guide .rd-choice:nth-child(4){background-image:linear-gradient(to bottom,transparent 56%,rgba(8,11,16,.98)),url('/images/guides/robot-dog-toys/file_00000000ef2c820a992c8712d08fa4ed.png')}
+.rd-guide .rd-choice:nth-child(5){background-image:linear-gradient(to bottom,transparent 56%,rgba(8,11,16,.98)),url('/images/guides/robot-dog-toys/file_00000000847c81f4b42e8bec3cacde96.png')}
+.rd-guide .rd-choice:nth-child(6){background-image:linear-gradient(to bottom,transparent 56%,rgba(8,11,16,.98)),url('/images/guides/robot-dog-toys/file_00000000aaa0820aa04b0dc01bf44e3d.png')}
+.rd-guide .rd-choice:hover,.rd-guide .rd-choice:focus-within,.rd-guide .rd-click-card:focus{transform:translateY(-3px);border-color:rgba(143,230,255,.34);box-shadow:0 24px 55px rgba(0,0,0,.3),0 0 0 1px rgba(143,230,255,.08)}
+
+/* Head-to-head cards get a visual product strip so they stop reading like plain text. */
+.rd-guide .rd-duel{padding-top:176px;background-color:rgba(7,10,15,.84)}
+.rd-guide .rd-duel::before{content:"";position:absolute;left:0;right:0;top:0;height:148px;border-bottom:1px solid rgba(255,255,255,.08);background-repeat:no-repeat;background-size:100% 100%,50% 100%,50% 100%;background-position:center,left center,right center;filter:saturate(.92);opacity:.9}
+.rd-guide .rd-duel:nth-child(1)::before{background-image:linear-gradient(to bottom,rgba(4,7,11,.06),rgba(4,7,11,.9)),url('/images/guides/robot-dog-toys/file_000000006f48820a89a67189ad2509a5.png'),url('/images/guides/robot-dog-toys/file_00000000114881f4962200e6b3ab3714.png')}
+.rd-guide .rd-duel:nth-child(2)::before{background-image:linear-gradient(to bottom,rgba(4,7,11,.06),rgba(4,7,11,.9)),url('/images/guides/robot-dog-toys/file_00000000ae38820a921680cc557de558.png'),url('/images/guides/robot-dog-toys/file_00000000ef2c820a992c8712d08fa4ed.png')}
+.rd-guide .rd-duel:nth-child(3)::before{background-image:linear-gradient(to bottom,rgba(4,7,11,.06),rgba(4,7,11,.9)),url('/images/guides/robot-dog-toys/file_00000000ef2c820a992c8712d08fa4ed.png'),url('/images/guides/robot-dog-toys/file_00000000847c81f4b42e8bec3cacde96.png')}
+.rd-guide .rd-duel:nth-child(4)::before{background-image:linear-gradient(to bottom,rgba(4,7,11,.06),rgba(4,7,11,.9)),url('/images/guides/robot-dog-toys/file_000000006f48820a89a67189ad2509a5.png'),url('/images/guides/robot-dog-toys/file_00000000aaa0820aa04b0dc01bf44e3d.png')}
+.rd-guide .rd-duel__side--clickable{cursor:pointer;transition:border-color .18s ease,background .18s ease,transform .18s ease}
+.rd-guide .rd-duel__side--clickable:hover,.rd-guide .rd-duel__side--clickable:focus{border-color:rgba(143,230,255,.34);background:rgba(143,230,255,.06);transform:translateY(-2px);outline:none}
+
+/* Programming cards get their own technical photography. */
+.rd-guide .rd-program-card{position:relative;overflow:hidden;padding-top:176px;cursor:pointer;transition:transform .2s ease,border-color .2s ease}
+.rd-guide .rd-program-card::before{content:"";position:absolute;left:0;right:0;top:0;height:150px;border-bottom:1px solid rgba(255,255,255,.08);background-size:cover;background-position:center;opacity:.86}
+.rd-guide .rd-program-card:nth-child(1)::before{background-image:linear-gradient(to bottom,transparent 40%,rgba(7,11,17,.94)),url('/images/guides/robot-dog-toys/file_00000000ae38820a921680cc557de558.png')}
+.rd-guide .rd-program-card:nth-child(2)::before{background-image:linear-gradient(to bottom,transparent 40%,rgba(7,11,17,.94)),url('/images/guides/robot-dog-toys/file_00000000ef2c820a992c8712d08fa4ed.png')}
+.rd-guide .rd-program-card:nth-child(3)::before{background-image:linear-gradient(to bottom,transparent 40%,rgba(7,11,17,.94)),url('/images/guides/robot-dog-toys/file_00000000847c81f4b42e8bec3cacde96.png')}
+
+/* Comparison: desktop remains a matrix; mobile becomes real buying cards. */
+.rd-guide .rd-table-row--clickable{cursor:pointer}
+.rd-guide .rd-row-cta{display:block;margin-top:6px;color:var(--rd-cyan);font-size:.67rem;font-weight:900;letter-spacing:.04em;text-transform:uppercase}
+.rd-guide .rd-table-row--clickable:focus{outline:2px solid rgba(143,230,255,.55);outline-offset:2px}
+
+/* Price ladder gets stronger visual hierarchy. */
+.rd-guide .rd-price-step{min-height:170px;padding:22px;background:linear-gradient(160deg,rgba(255,255,255,.065),rgba(255,255,255,.018));box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 16px 34px rgba(0,0,0,.15)}
+.rd-guide .rd-price-step strong{font-size:1.6rem}
+.rd-guide .rd-price-step span{font-size:1.02rem}
+
+/* Buying checks and related links should feel like designed utility cards. */
+.rd-guide .rd-buying-grid article{position:relative;overflow:hidden;min-height:205px;padding:24px;background:linear-gradient(155deg,rgba(255,255,255,.055),rgba(255,255,255,.018))}
+.rd-guide .rd-buying-grid article::after{content:"";position:absolute;right:-44px;bottom:-44px;width:130px;height:130px;border-radius:50%;background:radial-gradient(circle,rgba(143,230,255,.09),transparent 66%)}
+.rd-guide .rd-buying-grid span{display:inline-flex;width:38px;height:38px;align-items:center;justify-content:center;border-radius:12px;border:1px solid rgba(143,230,255,.2);background:rgba(143,230,255,.055)}
+.rd-guide .rd-related-grid a{position:relative;overflow:hidden;min-height:175px;padding:24px;background:linear-gradient(155deg,rgba(255,255,255,.055),rgba(255,255,255,.018));transition:.2s ease}
+.rd-guide .rd-related-grid a::after{content:"→";position:absolute;right:20px;bottom:18px;color:var(--rd-cyan);font-size:1.35rem;font-weight:900}
+.rd-guide .rd-related-grid a:hover{transform:translateY(-3px);border-color:rgba(143,230,255,.32)}
+
+/* FAQ becomes a proper frosted accordion, not loose rules on black. */
+.rd-guide .rd-faq details{margin:10px 0;padding:0;border:1px solid rgba(255,255,255,.09)!important;border-radius:18px;background:rgba(255,255,255,.025);overflow:hidden}
+.rd-guide .rd-faq summary{padding:20px 22px;list-style:none}
+.rd-guide .rd-faq summary::-webkit-details-marker{display:none}
+.rd-guide .rd-faq summary::after{content:"+";float:right;color:var(--rd-cyan);font-size:1.25rem;font-weight:900}
+.rd-guide .rd-faq details[open] summary::after{content:"–"}
+.rd-guide .rd-faq details p{margin:0;padding:0 22px 22px;color:rgba(247,249,252,.72)}
+
+/* Visible keyword cues that are useful to people, not stuffed text. */
+.rd-guide .rd-hero__badges span,.rd-guide .rd-award,.rd-guide .rd-choice__tag{box-shadow:inset 0 1px 0 rgba(255,255,255,.04)}
+
+@media(max-width:900px){
+  .rd-guide .rd-pick__media img,.rd-guide .rd-gallery img,.rd-guide .rd-gallery figure:first-child img{height:auto;min-height:0;aspect-ratio:16/9}
+  .rd-guide #comparison,.rd-guide #head-to-head,.rd-guide #programming,.rd-guide #chongker,.rd-guide .rd-section:has(.rd-choice-grid),.rd-guide .rd-section:has(.rd-buying-grid),.rd-guide .rd-section:has(.rd-related-grid),.rd-guide .rd-faq{padding:28px 22px;border-radius:26px}
 }
 
-.rd-guide .rd-pick__media img {
-  display: block;
-  width: 100%;
-  height: auto;
-  min-height: 0;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-  object-position: center;
+@media(max-width:720px){
+  .rd-guide .rd-table-wrap{overflow:visible}
+  .rd-guide .rd-table{display:block;width:100%;min-width:0;padding:10px}
+  .rd-guide .rd-table thead{display:none}
+  .rd-guide .rd-table tbody{display:grid;gap:14px}
+  .rd-guide .rd-table tbody tr{position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 16px;padding:16px;border:1px solid rgba(255,255,255,.105);border-radius:20px;background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.018));box-shadow:inset 0 1px 0 rgba(255,255,255,.04),0 14px 34px rgba(0,0,0,.18)}
+  .rd-guide .rd-table td{display:block!important;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;min-width:0;color:rgba(247,249,252,.68)}
+  .rd-guide .rd-table td:first-child{grid-column:1/2;min-height:68px;padding-left:78px!important;display:flex!important;flex-direction:column;align-items:flex-start;justify-content:center;font-size:1.04rem;color:#fff}
+  .rd-guide .rd-table td:first-child::before{left:0;width:64px;height:64px;border-radius:15px}
+  .rd-guide .rd-table td:nth-child(2){grid-column:2/3;grid-row:1;align-self:center;text-align:right;color:#fff;font-size:1.04rem;font-weight:850}
+  .rd-guide .rd-table td:nth-child(3){grid-column:1/-1;margin-top:3px;color:var(--rd-cyan);font-size:.88rem;font-weight:800}
+  .rd-guide .rd-table td:nth-child(3)::before{content:"BEST FOR  ";display:block;margin-bottom:3px;color:rgba(143,230,255,.55);font-size:.62rem;letter-spacing:.1em}
+  .rd-guide .rd-table td:nth-child(4),.rd-guide .rd-table td:nth-child(5),.rd-guide .rd-table td:nth-child(6),.rd-guide .rd-table td:nth-child(7){display:inline-flex!important;width:max-content;max-width:100%;padding:6px 9px!important;border:1px solid rgba(255,255,255,.09)!important;border-radius:999px!important;background:rgba(255,255,255,.028)!important;font-size:.7rem;line-height:1.25}
+  .rd-guide .rd-table td:nth-child(4){grid-column:1/2}.rd-guide .rd-table td:nth-child(5){grid-column:2/3;justify-self:end}.rd-guide .rd-table td:nth-child(6){grid-column:1/2}.rd-guide .rd-table td:nth-child(7){grid-column:2/3;justify-self:end}
+  .rd-guide .rd-table td:nth-child(4)::before{content:"Control: ";color:var(--rd-soft)}
+  .rd-guide .rd-table td:nth-child(5)::before{content:"Coding: ";color:var(--rd-soft)}
+  .rd-guide .rd-table td:nth-child(6)::before{content:"AI: ";color:var(--rd-soft)}
+  .rd-guide .rd-table td:nth-child(7)::before{content:"Setup: ";color:var(--rd-soft)}
+  .rd-guide .rd-table td:nth-child(8){grid-column:1/-1;padding-top:8px!important;border-top:1px solid rgba(255,255,255,.07)!important;color:var(--rd-green);font-size:.72rem}
+  .rd-guide .rd-table td:nth-child(8)::before{content:"Amazon snapshot · ";color:var(--rd-soft)}
+  .rd-guide .rd-row-cta{font-size:.62rem}
+
+  .rd-guide .rd-choice{min-height:290px;padding-top:146px}
+  .rd-guide .rd-duel{padding:162px 18px 20px}.rd-guide .rd-duel::before{height:136px}
+  .rd-guide .rd-program-card{padding-top:158px}.rd-guide .rd-program-card::before{height:134px}
+  .rd-guide .rd-price-step{min-height:155px}
 }
 
-.rd-guide .rd-gallery figure,
-.rd-guide .rd-gallery figure:first-child {
-  grid-row: auto;
-}
-
-.rd-guide .rd-gallery img,
-.rd-guide .rd-gallery figure:first-child img {
-  display: block;
-  width: 100%;
-  height: auto;
-  min-height: 0;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-  object-position: center;
-}
-
-@media (max-width: 900px) {
-  .rd-guide .rd-pick__media img,
-  .rd-guide .rd-gallery img,
-  .rd-guide .rd-gallery figure:first-child img {
-    height: auto;
-    min-height: 0;
-    aspect-ratio: 16 / 9;
-  }
-}
-
-@media (max-width: 640px) {
-  .rd-guide .rd-pick__media img,
-  .rd-guide .rd-gallery img,
-  .rd-guide .rd-gallery figure:first-child img {
-    height: auto;
-    min-height: 0;
-    aspect-ratio: 16 / 9;
-  }
+@media(max-width:640px){
+  .rd-guide .rd-pick__media img,.rd-guide .rd-gallery img,.rd-guide .rd-gallery figure:first-child img{height:auto;min-height:0;aspect-ratio:16/9}
+  .rd-guide #comparison,.rd-guide #head-to-head,.rd-guide #programming,.rd-guide #chongker,.rd-guide .rd-section:has(.rd-choice-grid),.rd-guide .rd-section:has(.rd-buying-grid),.rd-guide .rd-section:has(.rd-related-grid),.rd-guide .rd-faq{margin:22px 0;padding:22px 14px;border-radius:22px}
+  .rd-guide .rd-choice{min-height:0;padding:138px 18px 20px;background-size:100% 120px,100% 100%}
+  .rd-guide .rd-table tbody tr{padding:14px}
+  .rd-guide .rd-table td:first-child{padding-left:72px!important}.rd-guide .rd-table td:first-child::before{width:58px;height:58px}
 }
