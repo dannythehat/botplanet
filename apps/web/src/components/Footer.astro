@@ -17,9 +17,40 @@ const year = 2026;
 const path = Astro.url.pathname;
 const journey = shellJourneyFor(path, { routeCategory: routeFor(path)?.category, canMatch: categoryCanMatch });
 const promptOne = journey?.subject ?? "";
+const isHome = path === "/";
 
 const LEGAL = LEGAL_ITEMS;
 ---
+
+{isHome && (
+  <section class="home-dog-guide" aria-labelledby="home-dog-guide-title">
+    <div class="wrap home-dog-guide__card">
+      <figure class="home-dog-guide__media">
+        <img
+          src="/media/hubs/companion/tile.webp"
+          width="1536"
+          height="1024"
+          alt="Companion robots including a robot dog."
+          loading="lazy"
+          decoding="async"
+        />
+      </figure>
+      <div class="home-dog-guide__copy">
+        <p class="home-dog-guide__kicker">FEATURED BUYING GUIDE</p>
+        <h2 id="home-dog-guide-title">Best robot dog toys & AI robot dogs in 2026</h2>
+        <p>
+          From a simple robot puppy for a child to Loona, open-source coding dogs and advanced
+          quadrupeds, compare the models by the kind of buyer they actually suit.
+        </p>
+        <div class="home-dog-guide__actions">
+          <a class="btn btn--accent btn--lg" href="/guides/robot-dog-toys/">Compare robot dogs</a>
+          <a class="btn btn--quiet btn--lg" href="/robots/companion-robots/">Explore companion robots</a>
+        </div>
+      </div>
+    </div>
+  </section>
+)}
+
 <!--
   Compact by design. The footer closes the page; it must never be its largest
   visual section. One slim, CATEGORY-SPECIFIC journey prompt, tight link groups,
@@ -80,6 +111,72 @@ const LEGAL = LEGAL_ITEMS;
 </footer>
 
 <style>
+  .home-dog-guide {
+    padding: clamp(1.1rem, 2.4vw, 2rem) 0;
+  }
+
+  .home-dog-guide__card {
+    display: grid;
+    grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr);
+    gap: clamp(24px, 4vw, 52px);
+    align-items: center;
+    padding: clamp(1.5rem, 4vw, 3rem);
+    border: 1px solid rgba(200, 208, 222, .2);
+    border-radius: 22px;
+    background:
+      radial-gradient(ellipse at 8% 0%, rgba(143,230,255,.08), transparent 58%),
+      linear-gradient(178deg, #11151b 0%, #0a0d11 62%, #0d1116 100%);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.06), 0 26px 60px rgba(0,0,0,.5);
+  }
+
+  .home-dog-guide__media {
+    margin: 0;
+    overflow: hidden;
+    border: 1px solid rgba(200,208,222,.16);
+    border-radius: 18px;
+    background: #080b0f;
+  }
+
+  .home-dog-guide__media img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+  }
+
+  .home-dog-guide__kicker {
+    margin: 0 0 12px;
+    color: #aeb4bc;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .18em;
+  }
+
+  .home-dog-guide__copy h2 {
+    margin: 0;
+    max-width: 16ch;
+    font-size: clamp(32px, 4vw, 54px);
+    line-height: 1.02;
+    letter-spacing: -.045em;
+  }
+
+  .home-dog-guide__copy > p:not(.home-dog-guide__kicker) {
+    margin: 18px 0 0;
+    max-width: 58ch;
+    color: var(--text-secondary);
+    font-size: 17px;
+    line-height: 1.65;
+  }
+
+  .home-dog-guide__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 24px;
+  }
+
   footer.site {
     margin-top: var(--section-gap-tight);
     border-top: 1px solid var(--border-subtle);
@@ -211,6 +308,12 @@ const LEGAL = LEGAL_ITEMS;
   /* ---- Responsive ---- */
   @media (max-width: 900px) {
     .foot-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-lg) var(--space-md); }
+  }
+
+  @media (max-width: 820px) {
+    .home-dog-guide__card { grid-template-columns: 1fr; }
+    .home-dog-guide__media { order: -1; }
+    .home-dog-guide__actions .btn { width: 100%; justify-content: center; }
   }
 
   @media (max-width: 560px) {
