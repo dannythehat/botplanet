@@ -1,111 +1,112 @@
 (function () {
   'use strict';
 
-  var targetByName = {
-    'Ruko 18011': '#ruko',
-    'Ruko': '#ruko',
-    'Loona': '#loona',
-    'Loona Petbot': '#loona',
-    'MechDog': '#mechdog',
-    'Hiwonder MechDog': '#mechdog',
-    'Bittle X V2': '#bittle',
-    'Petoi Bittle X V2': '#bittle',
-    'PuppyPi': '#puppypi',
-    'Hiwonder PuppyPi': '#puppypi',
-    'Joy for All': '#joy',
-    'Joy for All Companion Pet': '#joy'
+  var products = {
+    'Ruko 18011': {
+      target: '#ruko',
+      amazon: 'https://www.amazon.com/s?k=Ruko+18011+Robot+Dog+Toy&tag=botplanet-20'
+    },
+    'Loona': {
+      target: '#loona',
+      amazon: '/go/comp-loona-amazon'
+    },
+    'MechDog': {
+      target: '#mechdog',
+      amazon: 'https://www.amazon.com/s?k=Hiwonder+MechDog+Robot+Dog&tag=botplanet-20'
+    },
+    'Bittle X V2': {
+      target: '#bittle',
+      amazon: 'https://www.amazon.com/s?k=Petoi+Bittle+X+V2&tag=botplanet-20'
+    },
+    'PuppyPi': {
+      target: '#puppypi',
+      amazon: 'https://www.amazon.com/s?k=HIWONDER+PuppyPi+Robot+Dog&tag=botplanet-20'
+    },
+    'Joy for All': {
+      target: '#joy',
+      amazon: 'https://www.amazon.com/s?k=Joy+for+All+Companion+Pet+Dog&tag=botplanet-20'
+    }
   };
 
-  function go(target) {
-    if (!target) return;
-    var el = document.querySelector(target);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      history.replaceState(null, '', target);
-    } else {
-      window.location.hash = target;
+  function isExternal(url) {
+    return /^https?:\/\//i.test(url);
+  }
+
+  function addComparisonTableLinks() {
+    var table = document.querySelector('.dog-table');
+    if (!table) return;
+
+    var headRow = table.querySelector('thead tr');
+    if (headRow && !headRow.querySelector('.dog-table__buy-head')) {
+      var th = document.createElement('th');
+      th.className = 'dog-table__buy-head';
+      th.scope = 'col';
+      th.textContent = 'Buy';
+      headRow.appendChild(th);
+    }
+
+    table.querySelectorAll('tbody tr').forEach(function (row) {
+      var first = row.querySelector('td:first-child');
+      if (!first) return;
+
+      var name = first.textContent.trim();
+      var product = products[name];
+      if (!product) return;
+
+      if (!first.querySelector('a')) {
+        first.textContent = '';
+        var reviewLink = document.createElement('a');
+        reviewLink.href = product.target;
+        reviewLink.className = 'dog-table-product';
+        reviewLink.textContent = name;
+        first.appendChild(reviewLink);
+      }
+
+      if (!row.querySelector('.dog-table__buy')) {
+        var td = document.createElement('td');
+        td.className = 'dog-table__buy';
+        var buy = document.createElement('a');
+        buy.href = product.amazon;
+        buy.className = 'dog-table-buy';
+        buy.textContent = 'Amazon →';
+        if (isExternal(product.amazon)) buy.rel = 'sponsored nofollow';
+        td.appendChild(buy);
+        row.appendChild(td);
+      }
+    });
+
+    if (!document.getElementById('dog-table-link-styles')) {
+      var style = document.createElement('style');
+      style.id = 'dog-table-link-styles';
+      style.textContent = '.dog-table-product{color:#fff;text-decoration:underline;text-decoration-color:rgba(143,230,255,.45);text-underline-offset:3px}.dog-table-product:hover{color:#c8f4ff}.dog-table-buy{display:inline-flex;align-items:center;justify-content:center;min-height:36px;padding:0 12px;border-radius:999px;background:#fff;color:#050607;text-decoration:none;font-size:.78rem;font-weight:850;white-space:nowrap}.dog-table-buy:hover{opacity:.88}.dog-table__buy{white-space:nowrap}';
+      document.head.appendChild(style);
     }
   }
 
-  /* The Joy for All card originally sent its main CTA to our review while every
-     other commercial pick had a direct Amazon route. Keep the review, but make
-     the purchase path consistent and explicit. */
-  var joyLinks = document.querySelector('#joy .dog-links');
-  if (joyLinks && !joyLinks.querySelector('[data-joy-amazon]')) {
-    var existingPrimary = joyLinks.querySelector('.dog-btn--primary');
-    if (existingPrimary) existingPrimary.classList.remove('dog-btn--primary');
+  function fixJoyForAllBuyLink() {
+    var review = document.querySelector('.dog-review#joy');
+    if (!review) return;
+    var links = review.querySelector('.dog-links');
+    if (!links) return;
 
-    var joyAmazon = document.createElement('a');
-    joyAmazon.className = 'dog-btn dog-btn--primary';
-    joyAmazon.href = 'https://www.amazon.com/s?k=Joy+for+All+Companion+Pet+Dog&tag=botplanet-20';
-    joyAmazon.rel = 'sponsored nofollow';
-    joyAmazon.textContent = 'Check Joy for All on Amazon';
-    joyAmazon.setAttribute('data-joy-amazon', 'true');
-    joyLinks.insertBefore(joyAmazon, joyLinks.firstChild);
+    var primary = links.querySelector('.dog-btn--primary');
+    var amazon = products['Joy for All'].amazon;
+    if (primary) {
+      primary.href = amazon;
+      primary.textContent = 'Check Joy for All on Amazon';
+      primary.rel = 'sponsored nofollow';
+    }
+
+    if (!links.querySelector('a[href="/robots/companion-robots/joy-for-all-companion-pets/"]')) {
+      var reviewLink = document.createElement('a');
+      reviewLink.className = 'dog-btn';
+      reviewLink.href = '/robots/companion-robots/joy-for-all-companion-pets/';
+      reviewLink.textContent = 'Read our full Joy for All review';
+      var source = links.querySelector('.dog-text-link');
+      links.insertBefore(reviewLink, source || null);
+    }
   }
 
-  document.querySelectorAll('.rd-table tbody tr').forEach(function (row) {
-    var first = row.querySelector('td:first-child');
-    if (!first) return;
-    var name = first.textContent.trim();
-    var target = targetByName[name];
-    if (!target) return;
-
-    row.classList.add('rd-table-row--clickable');
-    row.setAttribute('role', 'link');
-    row.setAttribute('tabindex', '0');
-    row.setAttribute('aria-label', 'View ' + name + ' details');
-
-    var cta = document.createElement('span');
-    cta.className = 'rd-row-cta';
-    cta.textContent = 'View details →';
-    first.appendChild(cta);
-
-    row.addEventListener('click', function (event) {
-      if (event.target.closest('a, button')) return;
-      go(target);
-    });
-    row.addEventListener('keydown', function (event) {
-      if (event.key === 'Enter' || event.key === ' ') {
-        event.preventDefault();
-        go(target);
-      }
-    });
-  });
-
-  document.querySelectorAll('.rd-program-card').forEach(function (card) {
-    var link = card.querySelector('a[href]');
-    if (!link) return;
-    card.classList.add('rd-click-card');
-    card.setAttribute('role', 'link');
-    card.setAttribute('tabindex', '0');
-    card.addEventListener('click', function (event) {
-      if (event.target.closest('a, button')) return;
-      window.location.href = link.href;
-    });
-    card.addEventListener('keydown', function (event) {
-      if (event.key === 'Enter' || event.key === ' ') {
-        event.preventDefault();
-        window.location.href = link.href;
-      }
-    });
-  });
-
-  document.querySelectorAll('.rd-duel__side').forEach(function (side) {
-    var strong = side.querySelector('strong');
-    if (!strong) return;
-    var target = targetByName[strong.textContent.trim()];
-    if (!target) return;
-    side.classList.add('rd-duel__side--clickable');
-    side.setAttribute('role', 'link');
-    side.setAttribute('tabindex', '0');
-    side.setAttribute('aria-label', 'Jump to ' + strong.textContent.trim());
-    side.addEventListener('click', function () { go(target); });
-    side.addEventListener('keydown', function (event) {
-      if (event.key === 'Enter' || event.key === ' ') {
-        event.preventDefault();
-        go(target);
-      }
-    });
-  });
+  addComparisonTableLinks();
+  fixJoyForAllBuyLink();
 })();
