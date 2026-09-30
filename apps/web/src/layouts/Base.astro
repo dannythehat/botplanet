@@ -2,6 +2,7 @@
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import Breadcrumbs from "../components/Breadcrumbs.astro";
+import HomepageRobotDogFeature from "../components/HomepageRobotDogFeature.astro";
 import {
   buildMeta, isPreviewHost, schemaGraph, organizationSchema, websiteSchema, breadcrumbSchema, OG_IMAGE_DEFAULT, type Crumb,
 } from "../lib/seo";
@@ -48,6 +49,7 @@ const {
 const host = Astro.request.headers.get("host");
 const canonicalPath = path ?? Astro.url.pathname;
 const isRobotDogGuide = canonicalPath === "/guides/robot-dog-toys/";
+const isHomePage = canonicalPath === "/";
 const meta = buildMeta({ title, description, path: canonicalPath, ogImage, ogType, noindex }, host);
 const preview = isPreviewHost(host);
 
@@ -177,6 +179,7 @@ const graph = schemaGraph(
         </div>
       )}
     </main>
+    {isHomePage && <HomepageRobotDogFeature />}
     <Footer />
     <script is:inline>
       document.documentElement.classList.remove("no-js");
