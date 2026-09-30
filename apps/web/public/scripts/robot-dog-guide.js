@@ -12,7 +12,8 @@
     'Petoi Bittle X V2': '#bittle',
     'PuppyPi': '#puppypi',
     'Hiwonder PuppyPi': '#puppypi',
-    'Joy for All': '#companion'
+    'Joy for All': '#joy',
+    'Joy for All Companion Pet': '#joy'
   };
 
   function go(target) {
@@ -24,6 +25,23 @@
     } else {
       window.location.hash = target;
     }
+  }
+
+  /* The Joy for All card originally sent its main CTA to our review while every
+     other commercial pick had a direct Amazon route. Keep the review, but make
+     the purchase path consistent and explicit. */
+  var joyLinks = document.querySelector('#joy .dog-links');
+  if (joyLinks && !joyLinks.querySelector('[data-joy-amazon]')) {
+    var existingPrimary = joyLinks.querySelector('.dog-btn--primary');
+    if (existingPrimary) existingPrimary.classList.remove('dog-btn--primary');
+
+    var joyAmazon = document.createElement('a');
+    joyAmazon.className = 'dog-btn dog-btn--primary';
+    joyAmazon.href = 'https://www.amazon.com/s?k=Joy+for+All+Companion+Pet+Dog&tag=botplanet-20';
+    joyAmazon.rel = 'sponsored nofollow';
+    joyAmazon.textContent = 'Check Joy for All on Amazon';
+    joyAmazon.setAttribute('data-joy-amazon', 'true');
+    joyLinks.insertBefore(joyAmazon, joyLinks.firstChild);
   }
 
   document.querySelectorAll('.rd-table tbody tr').forEach(function (row) {
