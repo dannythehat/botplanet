@@ -241,7 +241,7 @@ const SOURCES = [
   /* Editorial page heroes, 8 August 2026. */
   "/media/editorial/best-robotic-pool-cleaners.webp",
   "/media/editorial/best-cordless-pool-cleaners.webp",
-  "/media/editorial/best-solar-pool-skimmers.webp",
+  "/media/editorial/best-solar-pool-skimmers-v3.webp",
   "/media/editorial/above-ground-pool-cleaners.webp",
   "/media/editorial/pool-cleaner-comparison.webp",
   "/media/editorial/are-pool-cleaners-worth-it.webp",

@@ -22,3 +22,12 @@ Every image needs:
 Until a product has a real picture, the site shows a generic silhouette. It never shows a broken image.
 
 Pictures a person supplies are published, with any inaccuracy corrected in the caption.
+
+## Never overwrite an image under the same filename
+
+Images are served with a seven-day cache keyed on the filename. If you replace a picture and keep its
+name, anyone who has seen the page keeps seeing the old one, and so does Cloudflare. The solar
+skimmers hero was replaced three times under one name and the owner kept seeing the first version.
+
+When a picture changes, give the new file a new name (`-v2`, `-v3`) and point the page file, the media
+record and `scripts/gen-derivatives.mjs` at it. Delete the old file and its derivatives.

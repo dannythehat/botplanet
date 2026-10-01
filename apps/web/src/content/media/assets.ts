@@ -6724,7 +6724,7 @@ export const SOLAR_SKIMMER_NEW_ASSETS: MediaAssetRecord[] = [
     checksum: "sha256:41d0ad92663a0ac39549f27411e6128ee8a242b2f9e82b1564a3faa4f72ce1b7",
     width: 1672,
     height: 941,
-    src: "/media/editorial/best-solar-pool-skimmers.webp",
+    src: "/media/editorial/best-solar-pool-skimmers-v3.webp",
     altText:
       "Four solar pool skimmers in a row under the words Solar Skimmers: the grey Betta SE Plus on a dark platter, the grey and teal BRINBO SK01 in a pool, the dark blue Beatbot iSkim at dusk, and the grey Aiper Surfer S2 on a dark platter.",
     altTextStatus: "approved",

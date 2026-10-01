@@ -14,6 +14,8 @@ source of rules, and `AGENTS.md` points to the same file.
 * Attribute a maker's claims to the maker, in the text and in alt text.
 * Every new page gets inbound links from older pages: `RETROFITTED_INBOUND` in `content/internal-links.ts`.
 * Publish every picture the owner supplies. Correct any inaccuracy in the caption instead of withholding it.
+* Never overwrite an image under the same filename. Images are cached for a week by name, so a changed
+  picture needs a new name (`-v2`, `-v3`). See `docs/page-system/IMAGE_REQUIREMENTS.md`.
 * Credentials live outside the repository. Never write one into a file or a commit.
 * Keep replies to the owner short. Do not raise image rights or licensing; the owner has closed that topic.
 * Do not open a pull request unless asked. Work on the branch you were given, then merge to `main`
