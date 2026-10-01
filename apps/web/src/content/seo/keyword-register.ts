@@ -1269,6 +1269,71 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
     researchedOn: RUN,
   },
   {
+    path: "/robots/robotic-pool-cleaners/aiper-ecosurfer-s2/",
+    primary: { term: "aiper ecosurfer s2 review", volume: 0, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "aiper ecosurfer s2", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "solar pool skimmer", volume: 0, difficulty: 0, mustAppear: false },
+      { term: "aiper surfer s2", volume: 0, difficulty: 0, mustAppear: false },
+    ],
+    cededTo: [
+      {
+        term: "robotic pool cleaner",
+        path: "/robots/robotic-pool-cleaners/",
+        why: "The category head term belongs to the hub, and this machine is a skimmer, not a cleaner.",
+      },
+      {
+        term: "best solar pool skimmer",
+        path: "/best-robots/robotic-pool-cleaners/solar-powered-skimmers/",
+        why: "A comparison SERP. One review is not a best-of, and the four-machine page owns it.",
+      },
+    ],
+    researchedOn: RUN,
+  },
+  {
+    path: "/robots/robotic-pool-cleaners/beatbot-iskim/",
+    primary: { term: "beatbot iskim review", volume: 0, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "beatbot iskim", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "solar pool skimmer", volume: 0, difficulty: 0, mustAppear: false },
+      { term: "beatbot iskim 9l basket", volume: 0, difficulty: 0, mustAppear: false },
+    ],
+    cededTo: [
+      {
+        term: "robotic pool cleaner",
+        path: "/robots/robotic-pool-cleaners/",
+        why: "The category head term belongs to the hub, and this machine is a skimmer, not a cleaner.",
+      },
+      {
+        term: "best solar pool skimmer",
+        path: "/best-robots/robotic-pool-cleaners/solar-powered-skimmers/",
+        why: "A comparison SERP. One review is not a best-of, and the four-machine page owns it.",
+      },
+    ],
+    researchedOn: RUN,
+  },
+  {
+    path: "/robots/robotic-pool-cleaners/brinbo-sk01/",
+    primary: { term: "brinbo sk01 review", volume: 0, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "brinbo sk01", volume: 0, difficulty: 0, mustAppear: true },
+      { term: "solar pool skimmer", volume: 0, difficulty: 0, mustAppear: false },
+    ],
+    cededTo: [
+      {
+        term: "robotic pool cleaner",
+        path: "/robots/robotic-pool-cleaners/",
+        why: "The category head term belongs to the hub, and this machine is a skimmer, not a cleaner.",
+      },
+      {
+        term: "best solar pool skimmer",
+        path: "/best-robots/robotic-pool-cleaners/solar-powered-skimmers/",
+        why: "A comparison SERP. One review is not a best-of, and the four-machine page owns it.",
+      },
+    ],
+    researchedOn: RUN,
+  },
+  {
     path: "/robots/robotic-pool-cleaners/betta-se-plus/",
     primary: { term: "betta se plus review", volume: 0, difficulty: 0, mustAppear: true },
     secondary: [

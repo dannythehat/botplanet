@@ -1203,6 +1203,301 @@ export const REVIEWS: Record<string, ReviewContent> = {
     lastReviewed: "2026-08-04",
   },
 
+  "aiper-ecosurfer-s2": {
+    slug: "aiper-ecosurfer-s2",
+    categorySlug: "robotic-pool-cleaners",
+    eyebrow: "Robotic pool skimmer review",
+    title: "Aiper EcoSurfer S2 solar skimmer review",
+    seoTitle: "Aiper EcoSurfer S2 Review — A Solar Skimmer, Not a Cleaner",
+    metaDescription:
+      "Our Aiper EcoSurfer S2 review: a solar skimmer with a 35 hour battery claim, dToF edge sensing and a 150 micron filter. What it does and what it cannot.",
+    verdict:
+      "A solar skimmer, so it keeps the surface clear and never touches the floor, the walls or the waterline. It has thousands of Amazon ratings and the most specific sensing claims of the four skimmers we cover; its 35 hour battery figure is Aiper's own.",
+    bestFor:
+      "A pool under trees, ideally alongside a floor robot, where debris caught at the surface never sinks.",
+    notIdealFor:
+      "The floor, walls or waterline are your actual complaint, or you want a machine with a long record of owner reports on a specific, published runtime.",
+    image: {
+      src: "/media/reviews/aiper-ecosurfer-s2/hero.webp",
+      alt:
+        "Aiper's own marketing panel for the EcoSurfer S2, showing a blue solar skimmer floating in sunlit water beside a battery graphic.",
+    },
+    figures: [
+      {
+        afterHeading: "Edges, corners and sensors",
+        src: "/media/reviews/aiper-ecosurfer-s2/edge-corner.webp",
+        caption: "Two dToF sensors and close edge cleaning, in Aiper's words. Aiper's panel; we have not tested it.",
+      },
+      {
+        afterHeading: "Not getting stuck",
+        src: "/media/reviews/aiper-ecosurfer-s2/anti-stranding.webp",
+        caption: "The adjustable anti-stranding columns on the underside, set between zero and two inches in Aiper's description.",
+      },
+      {
+        afterHeading: "Filtration",
+        src: "/media/reviews/aiper-ecosurfer-s2/filtration.webp",
+        caption: "A 150 micron mesh and a leak-proof baffle, both Aiper's claims.",
+      },
+    ],
+    facts: [
+      { label: "Power", value: "Solar, with a mains adapter" },
+      { label: "Cleans", value: "The surface only" },
+      { label: "Runtime", value: "35 h (Aiper's claim)" },
+      { label: "App", value: "Yes" },
+    ],
+    specGroups: [
+      {
+        heading: "Power and runtime",
+        rows: [
+          { label: "Power type", value: "Solar panel and battery, plus wall adapter" },
+          { label: "Battery life", value: "Up to 35 hours", note: "Aiper's claim, on its listing panel. Not measured here." },
+          { label: "Charge time", value: null, note: "Not stated in what we read." },
+        ],
+      },
+      {
+        heading: "Pool compatibility",
+        rows: [
+          { label: "Pool type", value: "Above-ground and in-ground" },
+          { label: "Max pool size", value: null, note: "Not stated in what we read." },
+        ],
+      },
+      {
+        heading: "Cleaning",
+        rows: [
+          { label: "Surfaces", value: "Water surface only", note: "No floor, no walls, no waterline." },
+          { label: "Navigation", value: "Two dToF sensors, adjustable anti-stranding columns", note: "Aiper's description." },
+          { label: "Filtration", value: "150 micron mesh with a leak-proof baffle", note: "Aiper's description. Basket volume not stated." },
+          { label: "Edges", value: "Edge and corner cleaning", note: "Aiper's claim." },
+        ],
+      },
+      {
+        heading: "Control and support",
+        rows: [
+          { label: "App", value: "Yes, with over-the-air upgrades", note: "From the listing title." },
+          { label: "Warranty", value: null, note: "Not stated in what we read." },
+        ],
+      },
+      {
+        heading: "Handling",
+        rows: [
+          { label: "Weight", value: null, note: "Not stated in what we read." },
+        ],
+      },
+    ],
+    skuNote:
+      "Specifications come from the Amazon listing title and Aiper's listing panels, read on 1 October 2026 from images the owner supplied, and the ASIN B0DPHGPLGM is the Blue listing. Amazon calls it the EcoSurfer S2; the unit's casing and some independent write-ups say Surfer S2. Gray is a separate ASIN and Renewed stock is sold separately; check the title says EcoSurfer S2 and that it is not Renewed.",
+    lastReviewed: "2026-10-01",
+  },
+
+  "beatbot-iskim": {
+    slug: "beatbot-iskim",
+    categorySlug: "robotic-pool-cleaners",
+    eyebrow: "Robotic pool skimmer review",
+    title: "Beatbot iSkim solar skimmer review",
+    seoTitle: "Beatbot iSkim Review — The 9 Litre Solar Skimmer",
+    metaDescription:
+      "Our Beatbot iSkim review: a solar skimmer with a 9 litre basket, an anti-spill intake and app parking. What Beatbot claims and what we cannot yet confirm.",
+    verdict:
+      "A solar skimmer, so it keeps the surface clear and never touches the floor, the walls or the waterline. It lists the largest basket of the four we cover, 9 litres, and a covered intake Beatbot says stops debris escaping; it publishes no runtime in hours.",
+    bestFor:
+      "A pool that sheds a lot, where a bigger basket means fewer trips to empty it.",
+    notIdealFor:
+      "The floor, walls or waterline are your actual complaint, or you need a stated runtime to compare against other skimmers.",
+    image: {
+      src: "/media/reviews/beatbot-iskim/hero.webp",
+      alt:
+        "The dark blue Beatbot iSkim solar skimmer on a white background, with its mains charger beside it.",
+    },
+    figures: [
+      {
+        afterHeading: "Keeping debris in",
+        src: "/media/reviews/beatbot-iskim/anti-spill.webp",
+        caption: "The covered intake against an open one, in Beatbot's own comparison. The rival is unnamed and the claim is Beatbot's.",
+      },
+      {
+        afterHeading: "Power",
+        src: "/media/reviews/beatbot-iskim/rain-24-7.webp",
+        caption: "A 24 watt panel and a 10,000 mAh battery for 24/7 cleaning in moderate rain, in Beatbot's description.",
+      },
+      {
+        afterHeading: "Following the sun",
+        src: "/media/reviews/beatbot-iskim/solartrack.webp",
+        caption: "SolarTrack, which Beatbot says steers the machine toward sunlight. Beatbot's claim; we have not tested it.",
+      },
+      {
+        afterHeading: "Obstacles",
+        src: "/media/reviews/beatbot-iskim/sonicsense.webp",
+        caption: "SonicSense dual-ultrasonic detection in Beatbot's panel, which compares it with an unnamed rival.",
+      },
+      {
+        afterHeading: "Edges",
+        src: "/media/reviews/beatbot-iskim/edge-following.webp",
+        caption: "The guide wheel Beatbot says helps the machine follow a pool edge.",
+      },
+      {
+        afterHeading: "Parking and the app",
+        src: "/media/reviews/beatbot-iskim/auto-park.webp",
+        caption: "Auto-park after cleaning, or on one tap in the Beatbot app, in Beatbot's description.",
+      },
+      {
+        afterHeading: "The basket",
+        src: "/media/reviews/beatbot-iskim/basket-9l.webp",
+        caption: "The 9 litre basket and Beatbot's own fill chart against a 4.5 litre basket. The chart is Beatbot's estimate.",
+      },
+    ],
+    facts: [
+      { label: "Power", value: "Solar, 24 W panel" },
+      { label: "Cleans", value: "The surface only" },
+      { label: "Basket", value: "9 litres (Beatbot's figure)" },
+      { label: "App", value: "Yes, with auto-park" },
+    ],
+    specGroups: [
+      {
+        heading: "Power and runtime",
+        rows: [
+          { label: "Power type", value: "Solar panel and battery" },
+          { label: "Solar panel", value: "24 W", note: "Beatbot's figure." },
+          { label: "Battery", value: "10,000 mAh", note: "Beatbot's figure." },
+          { label: "Runtime", value: null, note: "Beatbot says 24/7 cleaning but gives no hours in what we read." },
+        ],
+      },
+      {
+        heading: "Pool compatibility",
+        rows: [
+          { label: "Pool type", value: "Above-ground and in-ground" },
+          { label: "Max pool size", value: null, note: "Not stated in what we read." },
+        ],
+      },
+      {
+        heading: "Cleaning",
+        rows: [
+          { label: "Surfaces", value: "Water surface only", note: "No floor, no walls, no waterline." },
+          { label: "Basket", value: "9 litres", note: "Beatbot's figure, against 4.5 litres it says rivals hold." },
+          { label: "Intake", value: "Covered, anti-spill", note: "Beatbot's claim that debris stays inside when reversing." },
+          { label: "Navigation", value: "SonicSense dual-ultrasonic, guide wheel for edges", note: "Beatbot's description." },
+        ],
+      },
+      {
+        heading: "Control and support",
+        rows: [
+          { label: "App", value: "Yes: auto-park and one-tap parking", note: "Beatbot's description." },
+          { label: "Warranty", value: null, note: "Not stated in what we read." },
+        ],
+      },
+      {
+        heading: "Handling",
+        rows: [
+          { label: "Weight", value: null, note: "Not stated in what we read." },
+        ],
+      },
+    ],
+    skuNote:
+      "Specifications come from the Amazon listing title and Beatbot's listing panels, read on 1 October 2026 from images the owner supplied, and the ASIN B0GWF6FPPS is the Navy Blue listing. The iSkim is sold in more than one colour, with and without a charger, and a larger iSkim Ultra is a different machine; check the title says iSkim and not iSkim Ultra.",
+    lastReviewed: "2026-10-01",
+  },
+
+  "brinbo-sk01": {
+    slug: "brinbo-sk01",
+    categorySlug: "robotic-pool-cleaners",
+    eyebrow: "Robotic pool skimmer review",
+    title: "BRINBO SK01 solar skimmer review",
+    seoTitle: "BRINBO SK01 Review — A New Solar Skimmer, Few Ratings",
+    metaDescription:
+      "Our BRINBO SK01 review: a new solar skimmer with an app, two speeds and a 2.5 hour adapter charge, and only 28 ratings. What we know and what we do not.",
+    verdict:
+      "A solar skimmer, so it keeps the surface clear and never touches the floor, the walls or the waterline. It has an app, two speeds and a stated 2.5 hour adapter charge and the best rating of the four, from 28 ratings; runtime, basket size and warranty are not published.",
+    bestFor:
+      "Someone who wants an app on a solar skimmer and is comfortable buying a newer brand.",
+    notIdealFor:
+      "The floor, walls or waterline are your actual complaint, or you want a long record of owner reports before buying.",
+    image: {
+      src: "/media/reviews/brinbo-sk01/hero.webp",
+      alt:
+        "The grey and black BRINBO SK01 solar skimmer on a white background, with a phone beside it showing the SK01 app.",
+    },
+    figures: [
+      {
+        afterHeading: "What it picks up",
+        src: "/media/reviews/brinbo-sk01/surface-cleaning.webp",
+        caption: "Leaves, dust, hair and twigs, in BRINBO's list. We have not tested it.",
+      },
+      {
+        afterHeading: "Charging",
+        src: "/media/reviews/brinbo-sk01/charging.webp",
+        caption: "Solar charging, with a 2.5 hour adapter charge in BRINBO's panel.",
+      },
+      {
+        afterHeading: "The app",
+        src: "/media/reviews/brinbo-sk01/app-support.webp",
+        caption: "The SK01 app in BRINBO's panel: battery, temperature, park and pause.",
+      },
+      {
+        afterHeading: "Avoiding obstacles",
+        src: "/media/reviews/brinbo-sk01/ultrasonic.webp",
+        caption: "Ultrasonic obstacle avoidance in BRINBO's panel, which spells radar as Rader.",
+      },
+      {
+        afterHeading: "Not getting stuck",
+        src: "/media/reviews/brinbo-sk01/anti-stuck.webp",
+        caption: "The adjustable anti-stuck bars on the underside, in BRINBO's description.",
+      },
+      {
+        afterHeading: "Two speeds",
+        src: "/media/reviews/brinbo-sk01/two-modes.webp",
+        caption: "Slow on one press, fast on two, in BRINBO's panel.",
+      },
+    ],
+    facts: [
+      { label: "Power", value: "Solar, with a mains adapter" },
+      { label: "Cleans", value: "The surface only" },
+      { label: "Adapter charge", value: "2.5 h (BRINBO's claim)" },
+      { label: "App", value: "Yes" },
+    ],
+    specGroups: [
+      {
+        heading: "Power and runtime",
+        rows: [
+          { label: "Power type", value: "Solar panel and battery, plus wall adapter" },
+          { label: "Adapter charge time", value: "2.5 hours", note: "BRINBO's figure." },
+          { label: "Runtime", value: null, note: "Not stated in what we read." },
+        ],
+      },
+      {
+        heading: "Pool compatibility",
+        rows: [
+          { label: "Pool type", value: "Described as ideal for most pool surfaces" },
+          { label: "Max pool size", value: null, note: "Not stated in what we read." },
+        ],
+      },
+      {
+        heading: "Cleaning",
+        rows: [
+          { label: "Surfaces", value: "Water surface only", note: "No floor, no walls, no waterline." },
+          { label: "Picks up", value: "Leaves, dust, hair, twigs", note: "BRINBO's list." },
+          { label: "Filter", value: "Described as large", note: "No mesh or volume stated." },
+          { label: "Navigation", value: "Ultrasonic obstacle avoidance, adjustable anti-stuck bars", note: "BRINBO's description." },
+        ],
+      },
+      {
+        heading: "Control and support",
+        rows: [
+          { label: "App", value: "Yes", note: "Battery, temperature, park and pause shown in BRINBO's panel." },
+          { label: "Speeds", value: "Two, set by one button or the app", note: "BRINBO's description." },
+          { label: "Warranty", value: null, note: "Not stated in what we read." },
+        ],
+      },
+      {
+        heading: "Handling",
+        rows: [
+          { label: "Weight", value: null, note: "Not stated in what we read." },
+        ],
+      },
+    ],
+    skuNote:
+      "Specifications come from the Amazon listing title and BRINBO's listing panels, read on 1 October 2026 from images the owner supplied, and the ASIN B0H6ZCNK7B is the Black Blue listing. The listing is marked as new for 2026 and had 28 ratings when read, so treat the rating as an early signal.",
+    lastReviewed: "2026-10-01",
+  },
+
   "aiper-seagull-se": {
     slug: "aiper-seagull-se",
     categorySlug: "robotic-pool-cleaners",

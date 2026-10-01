@@ -532,6 +532,26 @@ const SOURCES = [
   "/media/reviews/betta-se-plus/fall-winter.webp",
   "/media/reviews/betta-se-plus/basket-photo.webp",
   "/media/reviews/betta-se-plus/radar-uv.webp",
+  // 1 October 2026: the three new solar skimmers.
+  "/media/reviews/aiper-ecosurfer-s2/hero.webp",
+  "/media/reviews/aiper-ecosurfer-s2/edge-corner.webp",
+  "/media/reviews/aiper-ecosurfer-s2/filtration.webp",
+  "/media/reviews/aiper-ecosurfer-s2/anti-stranding.webp",
+  "/media/reviews/beatbot-iskim/hero.webp",
+  "/media/reviews/beatbot-iskim/basket-9l.webp",
+  "/media/reviews/beatbot-iskim/rain-24-7.webp",
+  "/media/reviews/beatbot-iskim/sonicsense.webp",
+  "/media/reviews/beatbot-iskim/edge-following.webp",
+  "/media/reviews/beatbot-iskim/anti-spill.webp",
+  "/media/reviews/beatbot-iskim/solartrack.webp",
+  "/media/reviews/beatbot-iskim/auto-park.webp",
+  "/media/reviews/brinbo-sk01/hero.webp",
+  "/media/reviews/brinbo-sk01/surface-cleaning.webp",
+  "/media/reviews/brinbo-sk01/charging.webp",
+  "/media/reviews/brinbo-sk01/app-support.webp",
+  "/media/reviews/brinbo-sk01/ultrasonic.webp",
+  "/media/reviews/brinbo-sk01/anti-stuck.webp",
+  "/media/reviews/brinbo-sk01/two-modes.webp",
 ];
 
 const run = async () => {
