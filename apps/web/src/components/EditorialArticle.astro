@@ -132,7 +132,7 @@ const parts: { html: string; slot: number | null }[] = [];
 {article.contentsFirst && (
   <ArticleContents
     html={body}
-    before={picks.length > 0 ? [{ id: "picks", text: "Our picks, and who each one is not for" }] : []}
+    before={picks.length > 0 ? [{ id: "picks", text: "Our picks" }] : []}
     extra={[
       ...(comparison.length > 1 ? [{ id: "compare", text: "Compare them side by side" }] : []),
       ...(article.extraContents ?? []),
@@ -144,8 +144,8 @@ const parts: { html: string; slot: number | null }[] = [];
   <PickList
     id="picks"
     eyebrow="The shortlist"
-    title="Our picks, and who each one is not for"
-    intro="Each pick says what it does best and who should buy something else instead. Where a maker has not published a figure, we say so rather than guess."
+    title="Our picks"
+    intro="Each pick shows what it does best and who should look at a different one. Where a maker has not published a figure, we say so rather than guess."
     picks={picks}
   />
 )}
@@ -170,9 +170,9 @@ const parts: { html: string; slot: number | null }[] = [];
     id="compare"
     eyebrow="Side by side"
     title="Compare them side by side"
-    intro={`All ${comparison.length} machines on this page on the four things that decide whether one is right for you. Where a manufacturer does not publish a figure the cell says so rather than guessing.`}
+    intro={`All ${comparison.length} machines side by side. Where a maker does not publish a figure, the cell says so.`}
     rows={comparison}
-    note="Ordered by price band, then alphabetically — not by what we earn, and not in the ranked order above. The size column shows a maximum length where the maker publishes one and a maximum area where it publishes that instead; the two are not interchangeable."
+    note="Listed by price band, then by name. This is not a ranking, and what we earn plays no part in the order. Size is the largest pool length or area the maker states; the two are not interchangeable."
   />
 )}
 
