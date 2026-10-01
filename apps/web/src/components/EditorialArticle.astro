@@ -85,6 +85,17 @@ const { html: body } = applyInternalLinks(html, anchorsFor(article.categorySlug)
    The page passes its diagrams in the same order as `splitAt`, and three is
    the ceiling — a guide wanting a fourth diagram is a guide that should be
    two pages. */
+/* SECTION PANELS. On a centred page each H2 and what follows it is wrapped in its
+   own panel (see .bp-sec in styles/prose.css), so the writing reads as a stack of
+   parts like the pick cards above it, not one long column of text. */
+const wrap = (html: string): string =>
+  article.centered
+    ? html
+        .split(/(?=<h2\b)/)
+        .map((chunk) => (chunk.startsWith("<h2") ? `<section class="bp-sec">${chunk}</section>` : chunk))
+        .join("")
+    : html;
+
 const parts: { html: string; slot: number | null }[] = [];
 {
   let rest = body;
@@ -162,7 +173,7 @@ const parts: { html: string; slot: number | null }[] = [];
 <article class:list={["bp-prose", article.centered && "is-centered"]}>
   {parts.map((part) => (
     <>
-      <Fragment set:html={part.html} />
+      <Fragment set:html={wrap(part.html)} />
       {part.slot === 1 && <slot name="diagram-1" />}
       {part.slot === 2 && <slot name="diagram-2" />}
       {part.slot === 3 && <slot name="diagram-3" />}

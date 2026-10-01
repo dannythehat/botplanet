@@ -157,3 +157,64 @@
 
 /* A centred reading column, for pages that opt in (page file layout.centered). */
 .bp-prose.is-centered { margin-inline: auto; }
+
+/* ---------- Centred pages: each section is its own frosted panel ----------
+   Same glass as the pick cards, a numbered chip on every heading, and a divider
+   in the gap between panels, so the writing and the cards read as one system. */
+.bp-prose.is-centered {
+  counter-reset: sec;
+  max-width: 54rem;
+  display: grid;
+  gap: clamp(2.6rem, 6vw, 3.6rem);
+}
+.bp-prose.is-centered .bp-sec {
+  counter-increment: sec;
+  position: relative;
+  padding: clamp(1.3rem, 3.2vw, 2.3rem);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 22px;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.02) 55%, rgba(90, 150, 255, 0.05));
+  -webkit-backdrop-filter: blur(16px) saturate(130%);
+  backdrop-filter: blur(16px) saturate(130%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14), 0 18px 40px rgba(0, 0, 0, 0.3);
+}
+.bp-prose.is-centered .bp-sec:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 6%;
+  right: 6%;
+  bottom: calc(clamp(2.6rem, 6vw, 3.6rem) / -2);
+  height: 7px;
+  transform: translateY(50%);
+  background:
+    radial-gradient(circle at 50% 50%, rgba(159, 208, 255, 0.95) 0 3px, transparent 4px),
+    linear-gradient(90deg, transparent, rgba(159, 208, 255, 0.55) 20%, rgba(159, 208, 255, 0.55) 80%, transparent) center / 100% 1px no-repeat;
+  pointer-events: none;
+}
+/* The heading's old milled rule becomes a numbered chip. */
+.bp-prose.is-centered .bp-sec h2 { margin-top: 0; font-size: clamp(1.45rem, 3.2vw, 2rem); }
+.bp-prose.is-centered .bp-sec h2::before {
+  content: counter(sec, decimal-leading-zero);
+  display: inline-block;
+  height: auto;
+  width: auto;
+  margin: 0 0 0.9rem;
+  padding: 0.3rem 0.7rem;
+  border: 1px solid rgba(120, 176, 255, 0.45);
+  border-radius: 999px;
+  background: rgba(61, 142, 240, 0.14);
+  color: #bfdcff;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+.bp-prose.is-centered .bp-sec h2 + p { margin-top: 0.4rem; }
+.bp-prose.is-centered .bp-sec > :last-child { margin-bottom: 0; }
+.bp-prose.is-centered .bp-sec strong { color: var(--cs-hi, #f4f6fa); }
+.bp-prose.is-centered .bp-sec ul {
+  padding: 1rem 1.1rem;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.03);
+}
