@@ -98,6 +98,8 @@ export interface EditorialContent {
   comparisonSlugs: string[];
   faq: FaqItem[];
   lastReviewed: string;
+  /** The day the page first went live, when it is known. Article schema is emitted only when this exists — a last-reviewed date is never relabelled as a publication date. */
+  published?: string;
 }
 
 /* @extension-point per-category | optional | Best-of pages and standalone
@@ -631,6 +633,7 @@ export const EDITORIAL: Record<string, EditorialContent> = {
           "Some park themselves. Beatbot says the iSkim parks after cleaning or on one tap in its app, and the BRINBO app shows a park button. The Betta SE Plus runs automatically or from a remote. Otherwise it is a pole or a hand.",
       },
     ],
+    published: "2026-10-01",
     lastReviewed: "2026-10-01",
   },
 
