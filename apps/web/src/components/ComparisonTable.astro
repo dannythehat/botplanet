@@ -143,6 +143,7 @@ const COLUMNS = [sizeLabel, typeLabel, "Cleans", "Power", "Price band"];
             <td data-label="Price band"><span class="bp-cmp__band" data-band={r.band.toLowerCase()}>{r.band}</span></td>
 
             <td data-label="" class="bp-cmp__actions">
+              <div class="bp-cmp__actionbox">
               <a class="bp-cmp__more" href={r.href}>
                 Details<span aria-hidden="true">&#8594;</span>
               </a>
@@ -155,6 +156,7 @@ const COLUMNS = [sizeLabel, typeLabel, "Cleans", "Power", "Price band"];
                   Check price
                 </a>
               )}
+              </div>
             </td>
           </tr>
         ))}
@@ -195,13 +197,13 @@ const COLUMNS = [sizeLabel, typeLabel, "Cleans", "Power", "Price band"];
      starves the widest column — "Cleans" carries up to four tags and would
      stack them vertically, making one row three times the height of its
      neighbours and destroying the scannability the table exists for. */
-  .bp-cmp__table :is(th, td):nth-child(1) { width: 23%; }
-  .bp-cmp__table :is(th, td):nth-child(2) { width: 13%; }
+  .bp-cmp__table :is(th, td):nth-child(1) { width: 22%; }
+  .bp-cmp__table :is(th, td):nth-child(2) { width: 14%; }
   .bp-cmp__table :is(th, td):nth-child(3) { width: 12%; }
-  .bp-cmp__table :is(th, td):nth-child(4) { width: 24%; }
-  .bp-cmp__table :is(th, td):nth-child(5) { width: 9%; }
+  .bp-cmp__table :is(th, td):nth-child(4) { width: 18%; }
+  .bp-cmp__table :is(th, td):nth-child(5) { width: 8%; }
   .bp-cmp__table :is(th, td):nth-child(6) { width: 9%; }
-  .bp-cmp__table :is(th, td):nth-child(7) { width: 10%; }
+  .bp-cmp__table :is(th, td):nth-child(7) { width: 17%; }
 
   /* ---------- head ---------- */
   .bp-cmp__table thead th {
@@ -314,7 +316,7 @@ const COLUMNS = [sizeLabel, typeLabel, "Cleans", "Power", "Price band"];
     font-size: 0.84rem;
     letter-spacing: 0.01em;
     color: var(--cs-bright);
-    white-space: nowrap;
+    white-space: normal;
   }
 
   /* A gap reads as a gap. Dimmed, italic, not monospaced — deliberately
@@ -390,7 +392,13 @@ const COLUMNS = [sizeLabel, typeLabel, "Cleans", "Power", "Price band"];
   }
 
   /* ---------- the link out ---------- */
-  .bp-cmp__actions {
+  /* THE FLEX LIVES ON A WRAPPER, NOT ON THE <td>. `display: flex` on a table
+     cell takes it out of the table: the row silently has one cell fewer, the
+     columns after it slide left, and the Details and Check price buttons land on
+     top of the Price band cell. That is exactly what shipped on every comparison
+     table from the day the Check price button was added, found on 1 October
+     2026 from a screenshot of the solar skimmer page. */
+  .bp-cmp__actionbox {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
@@ -541,8 +549,12 @@ const COLUMNS = [sizeLabel, typeLabel, "Cleans", "Power", "Price band"];
     .bp-cmp__tags { justify-content: flex-end; }
 
     .bp-cmp__actions {
-      align-items: stretch;
       padding: 0.7rem 1rem 1rem;
+    }
+
+    .bp-cmp__actionbox {
+      width: 100%;
+      align-items: stretch;
     }
 
     .bp-cmp__actions::before { display: none; }

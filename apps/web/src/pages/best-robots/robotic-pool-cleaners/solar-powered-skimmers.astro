@@ -20,6 +20,7 @@ import { breadcrumbsFor } from "../../../lib/routing";
 import { articleSchema, faqPageSchema, itemListSchema, imageObjectSchema } from "../../../lib/seo";
 import { MEDIA_ASSETS } from "../../../content/media/assets";
 import { FOUNDER } from "../../../content/team";
+import SkimmerGlance from "../../../components/SkimmerGlance.astro";
 import ProductCard from "../../../components/ProductCard.astro";
 import ProductImage from "../../../components/ProductImage.astro";
 import { getDb, schema } from "../../../lib/db";
@@ -98,7 +99,9 @@ const pageSchema = [
     html={html}
     picks={picks}
     comparison={comparison}
+    splitAt={["saltwater-and-the-app"]}
   >
+    <SkimmerGlance slot="diagram-1" rows={comparison} />
     <Fragment slot="after-comparison">
       {buyRows.length > 0 && (
         <section class="sk-buy" id="where-to-buy" aria-labelledby="sk-buy-h">

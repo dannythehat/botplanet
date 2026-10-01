@@ -21,9 +21,11 @@ interface Props {
   html: string;
   /** Extra destinations that are not H2s in the prose. */
   extra?: { id: string; text: string }[];
+  /** Destinations that come before the prose headings, for a page whose picks lead. */
+  before?: { id: string; text: string }[];
 }
 
-const { html, extra = [] } = Astro.props;
+const { html, extra = [], before = [] } = Astro.props;
 
 /**
  * Astro's markdown pipeline gives every heading an id, so this reads what is
@@ -35,7 +37,7 @@ const headings = [...html.matchAll(/<h2\b[^>]*\bid="([^"]+)"[^>]*>([\s\S]*?)<\/h
   text: m[2].replace(/<[^>]+>/g, "").trim(),
 }));
 
-const items = [...headings, ...extra];
+const items = [...before, ...headings, ...extra];
 const show = headings.length >= 4;
 ---
 

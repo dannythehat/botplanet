@@ -121,6 +121,20 @@ const parts: { html: string; slot: number | null }[] = [];
   </figure>
 )}
 
+{/* A PAGE WHOSE PICKS ARE TALL puts its contents ahead of them. With four full
+    pick panels the contents block sat 3,500px down a 13,000px page, which is
+    halfway to nowhere for a reader who wanted to jump to a section. */}
+{article.contentsFirst && (
+  <ArticleContents
+    html={body}
+    before={picks.length > 0 ? [{ id: "picks", text: "The picks, and who each one is wrong for" }] : []}
+    extra={[
+      ...(comparison.length > 1 ? [{ id: "compare", text: "Compare them side by side" }] : []),
+      ...(article.extraContents ?? []),
+    ]}
+  />
+)}
+
 {picks.length > 0 && (
   <PickList
     id="picks"
@@ -131,7 +145,9 @@ const parts: { html: string; slot: number | null }[] = [];
   />
 )}
 
-<ArticleContents html={body} extra={comparison.length > 1 ? [{ id: "compare", text: "Compare them side by side" }] : []} />
+
+
+{!article.contentsFirst && <ArticleContents html={body} extra={comparison.length > 1 ? [{ id: "compare", text: "Compare them side by side" }] : []} />}
 
 <article class="bp-prose">
   {parts.map((part) => (

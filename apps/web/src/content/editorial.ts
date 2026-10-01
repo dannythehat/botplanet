@@ -100,6 +100,10 @@ export interface EditorialContent {
   lastReviewed: string;
   /** The day the page first went live, when it is known. Article schema is emitted only when this exists — a last-reviewed date is never relabelled as a publication date. */
   published?: string;
+  /** Put the contents block ahead of the picks, for a page whose picks are tall. */
+  contentsFirst?: boolean;
+  /** Extra jump links appended to the contents, for sections the page's slot adds. */
+  extraContents?: { id: string; text: string }[];
 }
 
 /* @extension-point per-category | optional | Best-of pages and standalone
@@ -572,7 +576,7 @@ export const EDITORIAL: Record<string, EditorialContent> = {
     image: {
       src: "/media/editorial/best-solar-pool-skimmers.webp",
       alt:
-        "Four solar pool skimmers in a grid: the Aiper EcoSurfer S2 panel, the Beatbot iSkim, the BRINBO SK01 beside its app and the Betta SE Plus.",
+        "Four solar pool skimmers on labelled cards: the Aiper EcoSurfer S2, the Beatbot iSkim, the BRINBO SK01 beside its app and the Betta SE Plus.",
       focal: "50% 50%",
     },
     prose: "best-solar-pool-skimmers",
@@ -632,6 +636,12 @@ export const EDITORIAL: Record<string, EditorialContent> = {
         a:
           "Some park themselves. Beatbot says the iSkim parks after cleaning or on one tap in its app, and the BRINBO app shows a park button. The Betta SE Plus runs automatically or from a remote. Otherwise it is a pole or a hand.",
       },
+    ],
+    contentsFirst: true,
+    extraContents: [
+      { id: "where-to-buy", text: "Where to buy the four" },
+      { id: "more-pool-robots", text: "If the floor is the problem" },
+      { id: "faq", text: "Questions people actually ask" },
     ],
     published: "2026-10-01",
     lastReviewed: "2026-10-01",

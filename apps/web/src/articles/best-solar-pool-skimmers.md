@@ -33,16 +33,7 @@ Four numbers decide most of it, and none of them is how long the marketing says 
 
 ## The four at a glance
 
-| | Betta SE Plus | Aiper EcoSurfer S2 | Beatbot iSkim | BRINBO SK01 |
-|---|---|---|---|---|
-| Runtime claim | 30 hours | 35 hours | not stated | not stated |
-| Basket / mesh | 200 micron | 150 micron | 9 litres | large, no figure |
-| Sensing | Ultrasonic radar | Two dToF sensors | Dual ultrasonic | Ultrasonic |
-| Adapter charge | 3.5 hours | not stated | not stated | 2.5 hours |
-| App | No | Yes | Yes | Yes |
-| Evidence behind it | Manufacturer page and manual | Listing | Listing | Listing |
-
-Every figure in that table is the maker's own claim. Where a cell says not stated, we did not find it in what we read, and the review says the same.
+The table below puts the four side by side on the figures that decide most skimmer purchases. Each machine links to its review and to its Amazon listing.
 
 ## Saltwater, and the app
 
