@@ -31,7 +31,9 @@
   "prose": "best-solar-pool-skimmers",
   "layout": {
     "contents_first": true,
-    "quick_buy": true
+    "quick_buy": true,
+    "comparison_table": false,
+    "centered": true
   },
   "picks": [
     {

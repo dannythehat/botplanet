@@ -154,3 +154,6 @@
   font-weight: 600;
   color: var(--text-primary, inherit);
 }
+
+/* A centred reading column, for pages that opt in (page file layout.centered). */
+.bp-prose.is-centered { margin-inline: auto; }

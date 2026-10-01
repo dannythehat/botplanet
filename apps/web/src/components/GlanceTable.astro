@@ -82,6 +82,10 @@ const midWidth = (65 / COLS.length).toFixed(2);
     width: min(66rem, calc(100vw - 2rem));
     max-width: none;
     margin: 1.6rem 0 2rem;
+    /* Centred on the reading column it sits in, however much wider it is. */
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
   }
   .gl__frame {
     border: 1px solid var(--cs-line);
@@ -160,7 +164,7 @@ const midWidth = (65 / COLS.length).toFixed(2);
   .gl__note { margin: 0.8rem 0 0; font-size: 0.85rem; color: var(--text-secondary); }
 
   @media (max-width: 859px) {
-    .gl { width: 100%; }
+    .gl { width: 100%; left: 0; transform: none; }
     .gl__frame { border: 0; background: none; overflow: visible; }
     .gl__table, .gl__table tbody, .gl__table tr, .gl__table td, .gl__table tbody th { display: block; width: 100%; }
     .gl__table { table-layout: auto; }

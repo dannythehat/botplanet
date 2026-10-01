@@ -174,7 +174,7 @@ for (const page of PAGE_FILES) {
       const buttons =
         (page.layout.quick_buy ? n : 0) + // under the hero
         page.picks.length + //               one per pick
-        n + //                               comparison table
+        (page.layout.comparison_table ? n : 0) + // comparison table
         n + //                               glance table
         n + //                               buy strip
         page.related.products.length; //     related robot cards

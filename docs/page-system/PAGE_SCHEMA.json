@@ -151,6 +151,14 @@
             "quick_buy": {
               "type": "boolean",
               "default": true
+            },
+            "comparison_table": {
+              "type": "boolean",
+              "default": true
+            },
+            "centered": {
+              "type": "boolean",
+              "default": true
             }
           },
           "additionalProperties": false,

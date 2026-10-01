@@ -98,7 +98,7 @@ const parts: { html: string; slot: number | null }[] = [];
 }
 ---
 
-<header class="bp-ed__head">
+<header class:list={["bp-ed__head", article.centered && "is-centered"]}>
   <span class="eyebrow">{article.eyebrow}</span>
   <h1 class="bp-ed__h1">{article.title}</h1>
   <p class="bp-ed__stand">{article.standfirst}</p>
@@ -134,7 +134,7 @@ const parts: { html: string; slot: number | null }[] = [];
     html={body}
     before={picks.length > 0 ? [{ id: "picks", text: "Our picks" }] : []}
     extra={[
-      ...(comparison.length > 1 ? [{ id: "compare", text: "Compare them side by side" }] : []),
+      ...(comparison.length > 1 && !article.hideComparisonTable ? [{ id: "compare", text: "Compare them side by side" }] : []),
       ...(article.extraContents ?? []),
     ]}
   />
@@ -152,9 +152,9 @@ const parts: { html: string; slot: number | null }[] = [];
 
 
 
-{!article.contentsFirst && <ArticleContents html={body} extra={comparison.length > 1 ? [{ id: "compare", text: "Compare them side by side" }] : []} />}
+{!article.contentsFirst && <ArticleContents html={body} extra={comparison.length > 1 && !article.hideComparisonTable ? [{ id: "compare", text: "Compare them side by side" }] : []} />}
 
-<article class="bp-prose">
+<article class:list={["bp-prose", article.centered && "is-centered"]}>
   {parts.map((part) => (
     <>
       <Fragment set:html={part.html} />
@@ -165,7 +165,7 @@ const parts: { html: string; slot: number | null }[] = [];
   ))}
 </article>
 
-{comparison.length > 1 && (
+{comparison.length > 1 && !article.hideComparisonTable && (
   <ComparisonTable
     id="compare"
     eyebrow="Side by side"
@@ -241,6 +241,11 @@ const parts: { html: string; slot: number | null }[] = [];
     .bp-ed__hero--portrait img {
       aspect-ratio: 900 / 1125;
     }
+  }
+
+  .bp-ed__head.is-centered {
+    margin-inline: auto;
+    text-align: center;
   }
 
   .bp-ed__head {

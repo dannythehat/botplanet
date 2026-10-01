@@ -108,6 +108,10 @@ export interface EditorialContent {
   contentsFirst?: boolean;
   /** Portrait hero for phones. Falls back to `image` when absent. */
   heroMobileSrc?: string;
+  /** Centre the header and the reading column instead of hanging them from the left edge. */
+  centered?: boolean;
+  /** Leave out the generic side-by-side table, for a page whose own table says more. */
+  hideComparisonTable?: boolean;
   /** Extra jump links appended to the contents, for sections the page's slot adds. */
   extraContents?: { id: string; text: string }[];
 }

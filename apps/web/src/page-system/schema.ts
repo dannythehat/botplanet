@@ -104,6 +104,10 @@ export const BestOfPageSchema = z.object({
       contents_first: z.boolean().default(true),
       /** A row of Amazon buttons straight under the hero. */
       quick_buy: z.boolean().default(true),
+      /** The generic Size / Suits / Cleans / Power / Price band table. Turn it off when every row would read the same. */
+      comparison_table: z.boolean().default(true),
+      /** Centre the header and reading column. */
+      centered: z.boolean().default(true),
     })
     .default({}),
   picks: z.array(PickSchema).min(MIN_PICKS),

@@ -44,6 +44,8 @@ export function pageFileToEditorial(p: BestOfPage): EditorialContent {
     published: p.dates.published,
     lastReviewed: p.dates.reviewed,
     contentsFirst: p.layout.contents_first,
+    centered: p.layout.centered,
+    hideComparisonTable: !p.layout.comparison_table,
     extraContents: [
       { id: SECTION_IDS.buy, text: p.buy_strip.heading },
       { id: SECTION_IDS.related, text: p.related.heading },
