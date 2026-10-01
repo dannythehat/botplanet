@@ -1,0 +1,53 @@
+{
+  "page_type": "best-of",
+  "path": "/best-robots/TODO-category/TODO-slug/",
+  "category": "TODO-category",
+  "eyebrow": "TODO Best of · Topic",
+  "title": "TODO The best <things>",
+  "seo_title": "TODO Best <Things> — N Compared",
+  "meta_description": "TODO One sentence of 70 to 160 characters that says what the page compares and what it leaves the reader knowing.",
+  "standfirst": "TODO Two sentences, 80 to 320 characters: the answer first, then what the page does about it.",
+  "keywords": { "primary": "TODO primary keyword", "secondary": ["TODO secondary one", "TODO secondary two"] },
+  "index": true,
+  "dates": { "published": "YYYY-MM-DD", "reviewed": "YYYY-MM-DD" },
+  "hero": {
+    "desktop": "/media/editorial/TODO-slug.webp",
+    "mobile": null,
+    "alt": "TODO Describe the picture in a full sentence, including any words set on it.",
+    "focal": "50% 50%",
+    "headline": "TODO Short Title",
+    "source": "TODO who made or supplied the picture"
+  },
+  "prose": "TODO-slug",
+  "layout": { "contents_first": true, "quick_buy": true },
+  "picks": [
+    { "product": "TODO-product-slug", "award": "TODO Best for X", "why": "TODO Why it wins this award, in plain English, at least 60 characters.", "not_for": "TODO Who should buy something else." }
+  ],
+  "comparison": ["TODO-product-slug"],
+  "glance": {
+    "before_heading_id": "TODO-heading-id-in-the-prose",
+    "columns": ["TODO Column one", "TODO Column two", "TODO Column three"],
+    "rows": { "TODO-product-slug": ["TODO", "TODO", "TODO"] },
+    "note": "TODO Say whose claims these are and what Not stated means."
+  },
+  "buy_strip": {
+    "heading": "TODO Where to buy",
+    "intro": "TODO One or two sentences that tell the reader to check the listing title before buying.",
+    "disclosure": "TODO We earn a commission on qualifying Amazon purchases made through these links, at no extra cost to you."
+  },
+  "related": {
+    "heading": "TODO Related heading",
+    "intro": "TODO Two sentences that explain why these products belong next to this page.",
+    "products": ["TODO-product-slug", "TODO-product-slug"],
+    "links": [
+      { "href": "/robots/TODO-category/", "label": "TODO Every robot we cover in this category" },
+      { "href": "/best-robots/TODO-category/", "label": "TODO The category best-of" },
+      { "href": "/botmatch/TODO-category/", "label": "TODO BotMatch for this category" }
+    ]
+  },
+  "faq": [
+    { "q": "TODO A question people actually ask?", "a": "TODO A plain answer in a sentence or two, at least 40 characters." },
+    { "q": "TODO A second question?", "a": "TODO A second plain answer." },
+    { "q": "TODO A third question?", "a": "TODO A third plain answer." }
+  ]
+}

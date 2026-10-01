@@ -24,7 +24,12 @@
     "audit:links": "node scripts/audit-links.mjs",
     "audit:seo": "node scripts/audit-seo.mjs",
     "audit:matchers": "node scripts/audit-matchers.mjs",
-    "audit:weight": "node scripts/audit-weight.mjs"
+    "audit:weight": "node scripts/audit-weight.mjs",
+    "page:new": "tsx scripts/page-tool.ts new",
+    "page:check": "tsx scripts/page-tool.ts check",
+    "page:publish": "tsx scripts/page-tool.ts publish",
+    "page:schema": "tsx scripts/page-tool.ts schema",
+    "page:hero": "node scripts/page-hero.mjs"
   },
   "devDependencies": {
     "@types/node": "^22.10.0",

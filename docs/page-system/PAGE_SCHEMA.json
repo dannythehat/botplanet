@@ -1,0 +1,363 @@
+{
+  "$ref": "#/definitions/BestOfPage",
+  "definitions": {
+    "BestOfPage": {
+      "type": "object",
+      "properties": {
+        "page_type": {
+          "type": "string",
+          "const": "best-of"
+        },
+        "path": {
+          "type": "string",
+          "pattern": "^\\/[a-z0-9\\-/]*\\/$"
+        },
+        "category": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "eyebrow": {
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 48
+        },
+        "title": {
+          "type": "string",
+          "minLength": 10,
+          "maxLength": 80
+        },
+        "seo_title": {
+          "type": "string",
+          "minLength": 20,
+          "maxLength": 60
+        },
+        "meta_description": {
+          "type": "string",
+          "minLength": 70,
+          "maxLength": 160
+        },
+        "standfirst": {
+          "type": "string",
+          "minLength": 80,
+          "maxLength": 320
+        },
+        "keywords": {
+          "type": "object",
+          "properties": {
+            "primary": {
+              "type": "string",
+              "minLength": 3
+            },
+            "secondary": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 3
+              },
+              "minItems": 2
+            }
+          },
+          "required": [
+            "primary",
+            "secondary"
+          ],
+          "additionalProperties": false
+        },
+        "index": {
+          "type": "boolean",
+          "default": true
+        },
+        "dates": {
+          "type": "object",
+          "properties": {
+            "published": {
+              "type": "string",
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+            },
+            "reviewed": {
+              "type": "string",
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+            }
+          },
+          "required": [
+            "published",
+            "reviewed"
+          ],
+          "additionalProperties": false
+        },
+        "hero": {
+          "type": "object",
+          "properties": {
+            "desktop": {
+              "type": "string",
+              "pattern": "^\\/media\\/[a-z0-9\\-/._]+\\.webp$"
+            },
+            "mobile": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^\\/media\\/[a-z0-9\\-/._]+\\.webp$"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "alt": {
+              "type": "string",
+              "minLength": 40
+            },
+            "focal": {
+              "type": "string",
+              "pattern": "^\\d{1,3}% \\d{1,3}%$",
+              "default": "50% 50%"
+            },
+            "headline": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 40
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "source": {
+              "type": "string",
+              "minLength": 5
+            }
+          },
+          "required": [
+            "desktop",
+            "alt",
+            "source"
+          ],
+          "additionalProperties": false
+        },
+        "prose": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "layout": {
+          "type": "object",
+          "properties": {
+            "contents_first": {
+              "type": "boolean",
+              "default": true
+            },
+            "quick_buy": {
+              "type": "boolean",
+              "default": true
+            }
+          },
+          "additionalProperties": false,
+          "default": {}
+        },
+        "picks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "product": {
+                "type": "string",
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+              },
+              "award": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 40
+              },
+              "why": {
+                "type": "string",
+                "minLength": 60
+              },
+              "not_for": {
+                "type": "string",
+                "minLength": 20
+              }
+            },
+            "required": [
+              "product",
+              "award",
+              "why",
+              "not_for"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 3
+        },
+        "comparison": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+          },
+          "minItems": 3
+        },
+        "glance": {
+          "type": "object",
+          "properties": {
+            "before_heading_id": {
+              "type": "string",
+              "minLength": 3
+            },
+            "columns": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 2
+              },
+              "minItems": 3,
+              "maxItems": 6
+            },
+            "rows": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "propertyNames": {
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+              }
+            },
+            "note": {
+              "type": "string",
+              "minLength": 20
+            }
+          },
+          "required": [
+            "before_heading_id",
+            "columns",
+            "rows",
+            "note"
+          ],
+          "additionalProperties": false
+        },
+        "buy_strip": {
+          "type": "object",
+          "properties": {
+            "heading": {
+              "type": "string",
+              "minLength": 5
+            },
+            "intro": {
+              "type": "string",
+              "minLength": 40
+            },
+            "disclosure": {
+              "type": "string",
+              "minLength": 40
+            }
+          },
+          "required": [
+            "heading",
+            "intro",
+            "disclosure"
+          ],
+          "additionalProperties": false
+        },
+        "related": {
+          "type": "object",
+          "properties": {
+            "heading": {
+              "type": "string",
+              "minLength": 5
+            },
+            "intro": {
+              "type": "string",
+              "minLength": 40
+            },
+            "products": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+              },
+              "minItems": 2,
+              "maxItems": 4
+            },
+            "links": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "href": {
+                    "type": "string",
+                    "pattern": "^\\/[a-z0-9\\-/]*\\/$"
+                  },
+                  "label": {
+                    "type": "string",
+                    "minLength": 5
+                  }
+                },
+                "required": [
+                  "href",
+                  "label"
+                ],
+                "additionalProperties": false
+              },
+              "minItems": 3
+            }
+          },
+          "required": [
+            "heading",
+            "intro",
+            "products",
+            "links"
+          ],
+          "additionalProperties": false
+        },
+        "faq": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "q": {
+                "type": "string",
+                "minLength": 10
+              },
+              "a": {
+                "type": "string",
+                "minLength": 40
+              }
+            },
+            "required": [
+              "q",
+              "a"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 3
+        }
+      },
+      "required": [
+        "page_type",
+        "path",
+        "category",
+        "eyebrow",
+        "title",
+        "seo_title",
+        "meta_description",
+        "standfirst",
+        "keywords",
+        "dates",
+        "hero",
+        "prose",
+        "picks",
+        "comparison",
+        "glance",
+        "buy_strip",
+        "related",
+        "faq"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

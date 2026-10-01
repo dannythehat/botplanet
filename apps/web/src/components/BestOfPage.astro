@@ -1,0 +1,289 @@
+---
+/**
+ * The BotPlanet "best-of" page, built entirely from a page file.
+ *
+ * A route file is now three lines: it names the page file's path and renders this.
+ * Everything that makes the page look and behave the same as every other best-of
+ * (hero, quick-buy row, contents ahead of the picks, picks, glance table,
+ * comparison table, buy strip, related robots, FAQ, schema) lives here once, so a
+ * new best-of cannot drift from the last one. See docs/page-system/.
+ */
+import Base from "../layouts/Base.astro";
+import EditorialArticle from "./EditorialArticle.astro";
+import GlanceTable from "./GlanceTable.astro";
+import ProductCard from "./ProductCard.astro";
+import ProductImage from "./ProductImage.astro";
+import { editorialFor } from "../content/editorial";
+import { pageFileFor } from "../page-system/load";
+import { buildEditorialPage } from "../lib/editorial-page";
+import { breadcrumbsFor } from "../lib/routing";
+import { articleSchema, faqPageSchema, itemListSchema, imageObjectSchema } from "../lib/seo";
+import { MEDIA_ASSETS } from "../content/media/assets";
+import { FOUNDER } from "../content/team";
+import { getDb, schema } from "../lib/db";
+import { redirectKeysByProduct } from "../lib/catalogue-redirects";
+import { productPath } from "../content/routes";
+import { and, eq, inArray } from "drizzle-orm";
+
+interface Props {
+  /** The page's canonical path, which names its file in content/pages/. */
+  path: string;
+}
+const PATH = Astro.props.path;
+const page = pageFileFor(PATH);
+const article = editorialFor(PATH);
+if (!page || !article) throw new Error(`No page file for ${PATH}. Add content/pages/<slug>.page.json.`);
+
+const { html, picks, comparison } = await buildEditorialPage(article, Astro.locals, import.meta.env.DEV);
+const crumbs = breadcrumbsFor(PATH);
+
+/* Related robots, each with its own buy button. */
+const FLOOR_SLUGS = page.related.products;
+const db = getDb(Astro.locals);
+const redirects = await redirectKeysByProduct(db);
+const floorRows = (
+  await db
+    .select()
+    .from(schema.products)
+    .where(and(eq(schema.products.status, "published"), inArray(schema.products.slug, FLOOR_SLUGS)))
+).sort((a, b) => FLOOR_SLUGS.indexOf(a.slug) - FLOOR_SLUGS.indexOf(b.slug));
+const titleCase = (v: string) => v.replace(/_/g, " ").replace(/^\w/, (c) => c.toUpperCase());
+const buyRows = comparison.filter((r) => r.redirectKey);
+
+/* The page's own picture is the social preview and Article schema's image. */
+const lead = article.image?.src ?? null;
+const renderedImages = [lead, ...(article.figures ?? []).map((f) => f.src)]
+  .filter((src): src is string => Boolean(src))
+  .map((src) => MEDIA_ASSETS.find((a) => a.src === src))
+  .filter((a): a is NonNullable<typeof a> => Boolean(a?.width) && Boolean(a?.height));
+
+const pageSchema = [
+  articleSchema({
+    headline: article.title,
+    description: article.metaDescription,
+    path: PATH,
+    datePublished: article.published,
+    dateModified: article.lastReviewed,
+    authorName: FOUNDER.name,
+    authorPath: FOUNDER.path,
+    image: lead ?? undefined,
+  }),
+  ...renderedImages.map((a) =>
+    imageObjectSchema({ path: a.src, caption: a.altText ?? "", width: a.width!, height: a.height! }),
+  ),
+  picks.length ? itemListSchema(picks.map((p) => ({ name: p.name, path: p.href })), article.title) : null,
+  faqPageSchema(article.faq, PATH),
+];
+---
+
+<Base
+  title={article.seoTitle}
+  description={article.metaDescription}
+  ogImage={lead ?? undefined}
+  breadcrumbs={crumbs}
+  schema={pageSchema}
+>
+  <EditorialArticle
+    article={article}
+    html={html}
+    picks={picks}
+    comparison={comparison}
+    splitAt={[page.glance.before_heading_id]}
+  >
+    {page.layout.quick_buy && (
+    <nav slot="after-hero" class="bo-top" aria-label="Check prices on Amazon">
+      <span class="bo-top__label">Check price on Amazon</span>
+      {buyRows.map((r) => (
+        <a class="bo-top__btn" href={`/go/${r.redirectKey}`} rel="sponsored nofollow">{r.name}</a>
+      ))}
+    </nav>
+    )}
+    <GlanceTable slot="diagram-1" rows={comparison} glance={page.glance} />
+    <Fragment slot="after-comparison">
+      {buyRows.length > 0 && (
+        <section class="bo-buy" id="where-to-buy" aria-labelledby="bo-buy-h">
+          <h2 id="bo-buy-h" class="bo-h">{page.buy_strip.heading}</h2>
+          <p class="bo-lede">{page.buy_strip.intro}</p>
+          <ul class="bo-buy__grid">
+            {buyRows.map((r) => (
+              <li class="bo-buy__item">
+                <a class="bo-buy__thumb" href={r.href} aria-label={`${r.name} review`}>
+                  <ProductImage productId={r.productId} placement="comparison" compact sizes="72px" />
+                </a>
+                <div class="bo-buy__text">
+                  <a class="bo-buy__name" href={r.href}>{r.name}</a>
+                  <span class="bo-buy__sub">Read the review first</span>
+                </div>
+                <a class="bo-buy__btn" href={`/go/${r.redirectKey}`} rel="sponsored nofollow">
+                  Check price on Amazon
+                </a>
+              </li>
+            ))}
+          </ul>
+          <p class="bo-note">{page.buy_strip.disclosure}</p>
+        </section>
+      )}
+
+      <section class="bo-more" id="more-pool-robots" aria-labelledby="bo-more-h">
+        <h2 id="bo-more-h" class="bo-h">{page.related.heading}</h2>
+        <p class="bo-lede">{page.related.intro}</p>
+        <div class="grid grid--products">
+          {floorRows.map((p, i) => (
+            <ProductCard
+              href={productPath(p.slug, "robotic-pool-cleaners")}
+              name={p.name}
+              classification={titleCase(p.productClass)}
+              meta={[titleCase(p.powerType), ...(p.environments as string[]).slice(0, 2).map(titleCase)]}
+              productId={p.id}
+              variant={i}
+              saveId={p.id}
+              buyKey={redirects.get(p.id) ?? null}
+            />
+          ))}
+        </div>
+        <ul class="bo-links">
+          {page.related.links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+        </ul>
+      </section>
+    </Fragment>
+  </EditorialArticle>
+</Base>
+
+<style>
+  .bo-top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.6rem;
+    max-width: 68rem;
+    margin: 1.2rem auto 0;
+    padding: 0 1rem;
+  }
+  .bo-top__label {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    margin-right: 0.4rem;
+  }
+  .bo-top__btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.55rem 1rem;
+    border-radius: 999px;
+    border: 1px solid rgba(120, 176, 255, 0.55);
+    background: linear-gradient(180deg, #2f7fe4 0%, #1a55b4 100%);
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-decoration: none;
+  }
+  .bo-top__btn:hover { filter: brightness(1.1); }
+  .bo-top__btn:focus-visible { outline: 2px solid #dfe4ec; outline-offset: 2px; }
+  .bo-buy,
+  .bo-more {
+    max-width: 68rem;
+    margin: 2.5rem auto 0;
+    padding: 0 1rem;
+  }
+  .bo-h {
+    font-size: clamp(1.35rem, 2.4vw, 1.75rem);
+    margin: 0 0 0.6rem;
+  }
+  .bo-lede {
+    max-width: 46rem;
+    margin: 0 0 1.2rem;
+    color: var(--text-secondary);
+  }
+  .bo-buy__grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.9rem;
+  }
+  .bo-buy__item {
+    display: grid;
+    grid-template-columns: 72px 1fr;
+    grid-template-areas: "thumb text" "btn btn";
+    gap: 0.6rem 0.9rem;
+    align-items: center;
+    padding: 0.9rem;
+    border: 1px solid var(--cs-line, rgba(255, 255, 255, 0.12));
+    border-radius: 14px;
+    background: var(--cs-surface-lift, rgba(255, 255, 255, 0.03));
+  }
+  .bo-buy__thumb {
+    grid-area: thumb;
+    display: block;
+    width: 72px;
+    height: 72px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #fff;
+  }
+  .bo-buy__thumb :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  .bo-buy__text {
+    grid-area: text;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    min-width: 0;
+  }
+  .bo-buy__name {
+    font-weight: 700;
+    color: inherit;
+    text-decoration: none;
+  }
+  .bo-buy__name:hover {
+    text-decoration: underline;
+  }
+  .bo-buy__sub {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+  }
+  .bo-buy__btn {
+    grid-area: btn;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.7rem 1rem;
+    border-radius: 999px;
+    font-weight: 700;
+    text-decoration: none;
+    color: #10141a;
+    background: #f5b942;
+  }
+  .bo-buy__btn:hover {
+    background: #ffc95c;
+  }
+  .bo-buy__btn:focus-visible {
+    outline: 2px solid #dfe4ec;
+    outline-offset: 2px;
+  }
+  .bo-note {
+    margin: 0.9rem 0 0;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+  }
+  .bo-links {
+    list-style: none;
+    margin: 1.4rem 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem 1.4rem;
+  }
+  @media (max-width: 720px) {
+    .bo-buy__grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

@@ -29,6 +29,7 @@
 import type { FaqItem } from "../components/FaqList.astro";
 import type { HeroImage } from "../components/CategoryHero.astro";
 import type { ReviewFigureRef } from "../lib/review-figures";
+import { PAGE_FILES, pageFileToEditorial } from "../page-system/load";
 
 /** One ranked recommendation. */
 export interface EditorialPick {
@@ -102,6 +103,8 @@ export interface EditorialContent {
   published?: string;
   /** Put the contents block ahead of the picks, for a page whose picks are tall. */
   contentsFirst?: boolean;
+  /** Portrait hero for phones. Falls back to `image` when absent. */
+  heroMobileSrc?: string;
   /** Extra jump links appended to the contents, for sections the page's slot adds. */
   extraContents?: { id: string; text: string }[];
 }
@@ -552,100 +555,9 @@ export const EDITORIAL: Record<string, EditorialContent> = {
     lastReviewed: "2026-08-06",
   },
 
-  /* ------------------------------------------------------------------
-     The solar skimmer best-of, 1 October 2026. Planned on 6 August at 6,600/mo
-     for "solar powered pool skimmer" and held on the gate "one product is a thin
-     page". The owner chose the four best-selling solar skimmers on Amazon US and
-     supplied each listing's images, so the gate is met.
+  /* The solar skimmer best-of lives in content/pages/solar-powered-skimmers.page.json,
+     the first page written in the BotPlanet page format. See docs/page-system/. */
 
-     AWARDS ANSWER A QUESTION, THEY DO NOT CROWN A WINNER. Nobody here has run
-     any of the four. The Betta SE Plus has a manufacturer page and manual behind
-     it; the other three have a listing. The page says so and the awards are
-     worded to match.
-     ------------------------------------------------------------------ */
-  "/best-robots/robotic-pool-cleaners/solar-powered-skimmers/": {
-    path: "/best-robots/robotic-pool-cleaners/solar-powered-skimmers/",
-    categorySlug: "robotic-pool-cleaners",
-    eyebrow: "Best of · Solar skimmers",
-    title: "The best solar powered pool skimmers",
-    seoTitle: "Best Solar Powered Pool Skimmers — Four Compared",
-    metaDescription:
-      "The four best-selling solar pool skimmers on Amazon compared: runtime claims, basket size, sensors and apps, and what each listing does not tell you.",
-    standfirst:
-      "A solar pool skimmer takes leaves off the surface before they sink, and does nothing else. These four are the best sellers on Amazon US, compared on the claims that matter and on what each maker leaves out.",
-    image: {
-      src: "/media/editorial/best-solar-pool-skimmers.webp",
-      alt:
-        "A solar pool skimmer floating on a still pool at sunset, drawing fallen leaves into its intake, with the words Solar Skimmers over the water.",
-      focal: "50% 50%",
-    },
-    prose: "best-solar-pool-skimmers",
-    picks: [
-      {
-        productSlug: "betta-se-plus",
-        award: "Best documented",
-        why:
-          "The only one of the four with a manufacturer's product page and manual to read: a stated one-year warranty, a 200 micron basket, 3.5 hours on the adapter and 5 to 6 on the sun. Betta's 30 hour figure is a claim, but it sits among numbers you can check.",
-        wrongFor:
-          "Anyone who wants an app or edge following, or a pool in permanent shade.",
-      },
-      {
-        productSlug: "aiper-ecosurfer-s2",
-        award: "Best for edges and steps",
-        why:
-          "Aiper's listing is the most specific about how the machine stays out of trouble: two dToF sensors for walls and corners, and adjustable anti-stranding columns for steps. It also has the 35 hour battery figure, which is a claim.",
-        wrongFor:
-          "Anyone who needs a published basket volume or warranty term before buying; the listing gives neither.",
-      },
-      {
-        productSlug: "beatbot-iskim",
-        award: "Best for heavy debris",
-        why:
-          "A 9 litre basket, the largest volume any of the four states, behind a covered intake Beatbot says keeps debris in when the machine reverses. For a pool that sheds, fewer trips to empty it is the point.",
-        wrongFor:
-          "Anyone who needs a stated runtime in hours; the listing gives none.",
-      },
-      {
-        productSlug: "brinbo-sk01",
-        award: "One to watch",
-        why:
-          "An app, two speeds and a stated 2.5 hour adapter charge, with the highest rating of the four. It is also the newest, with 28 ratings, so the rating is an early signal and not a record.",
-        wrongFor:
-          "Anyone who wants a long record of owner reports, or a brand with a track record in pool robots.",
-      },
-    ],
-    comparisonSlugs: ["betta-se-plus", "aiper-ecosurfer-s2", "beatbot-iskim", "brinbo-sk01"],
-    faq: [
-      {
-        q: "Does a solar pool skimmer work on cloudy days?",
-        a:
-          "It works from its battery, and the battery is refilled by the panel or, on all four, by a wall adapter. Every maker here claims round-the-clock cleaning, and none of the figures is ours. How long a machine runs after several grey days is the number to look for in owner reviews.",
-      },
-      {
-        q: "Do I still need a robotic pool cleaner if I have a skimmer?",
-        a:
-          "Yes, if the floor or walls get dirty. A skimmer collects what floats and nothing else. It is a good partner for a floor robot because debris caught at the surface never sinks.",
-      },
-      {
-        q: "Are solar pool skimmers safe in a saltwater pool?",
-        a:
-          "Two of these four say something about salt: the Betta SE Plus describes salt chlorine tolerant motors and the Beatbot iSkim listing says saltwater-safe. The Aiper and BRINBO listings we read do not say, so check before using one in a salt pool.",
-      },
-      {
-        q: "How do you get a floating skimmer out of the pool?",
-        a:
-          "Some park themselves. Beatbot says the iSkim parks after cleaning or on one tap in its app, and the BRINBO app shows a park button. The Betta SE Plus runs automatically or from a remote. Otherwise it is a pole or a hand.",
-      },
-    ],
-    contentsFirst: true,
-    extraContents: [
-      { id: "where-to-buy", text: "Where to buy the four" },
-      { id: "more-pool-robots", text: "If the floor is the problem" },
-      { id: "faq", text: "Questions people actually ask" },
-    ],
-    published: "2026-10-01",
-    lastReviewed: "2026-10-01",
-  },
 
   /* ------------------------------------------------------------------
      Page 11 of the pool map. 40/mo on the exact phrase, which does not
@@ -1404,6 +1316,10 @@ export const EDITORIAL: Record<string, EditorialContent> = {
     lastReviewed: "2026-08-07",
   },
 };
+
+/* PAGES WRITTEN AS PAGE FILES. Validated on load by page-system/schema.ts and
+   merged here, so editorialFor() and everything built on it sees one registry. */
+for (const file of PAGE_FILES) EDITORIAL[file.path] = pageFileToEditorial(file);
 
 export function editorialFor(path: string | undefined): EditorialContent | undefined {
   return path ? EDITORIAL[path] : undefined;

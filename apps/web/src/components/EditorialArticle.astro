@@ -106,18 +106,21 @@ const parts: { html: string; slot: number | null }[] = [];
 
 {article.image?.src && (
   <figure class="bp-ed__hero">
-    <img
-      src={article.image.src}
-      srcset={srcsetFor(article.image.src)}
-      sizes="(min-width: 1100px) 1040px, 100vw"
-      alt={article.image.alt}
-      style={article.image.focal ? `object-position: ${article.image.focal}` : undefined}
-      width="1672"
-      height="941"
-      loading="eager"
-      fetchpriority="high"
-      decoding="async"
-    />
+    <picture>
+      {article.heroMobileSrc && <source media="(max-width: 720px)" srcset={article.heroMobileSrc} />}
+      <img
+        src={article.image.src}
+        srcset={srcsetFor(article.image.src)}
+        sizes="(min-width: 1100px) 1040px, 100vw"
+        alt={article.image.alt}
+        style={article.image.focal ? `object-position: ${article.image.focal}` : undefined}
+        width="1672"
+        height="941"
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
+      />
+    </picture>
   </figure>
 )}
 

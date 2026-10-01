@@ -1,0 +1,193 @@
+---
+/* ============================================================
+   BotPlanet — the "at a glance" table.
+
+   One row per product, one column per fact, driven by the page file's `glance`
+   block. It takes the page's full width (the prose column is too narrow for a
+   comparison), shows each machine with its picture and a buy button, and turns
+   into stacked cards on a phone, the same way ComparisonTable does.
+
+   It was a Markdown table first and shipped looking like a spreadsheet pasted
+   into a column: six columns in about 600px, the fourth machine behind a
+   horizontal scrollbar. A comparison the reader has to scroll sideways to finish
+   is not a comparison.
+
+   EVERY CELL IS THE MAKER'S CLAIM unless the page file says otherwise, and a cell
+   reading "Not stated" means we did not find the figure. Nothing is estimated and
+   nothing is borrowed from a sibling model.
+   ============================================================ */
+import ProductImage from "./ProductImage.astro";
+import type { ComparisonRow } from "./ComparisonTable.astro";
+import type { BestOfPage } from "../page-system/schema";
+
+interface Props {
+  rows: ComparisonRow[];
+  glance: BestOfPage["glance"];
+}
+const { rows, glance } = Astro.props;
+const NOT_STATED = "Not stated";
+const slugOf = (href: string) => href.split("/").filter(Boolean).pop() ?? "";
+const COLS = glance.columns;
+const cells = (slug: string) => glance.rows[slug] ?? [];
+const shown = rows.filter((r) => glance.rows[slugOf(r.href)]);
+const midWidth = (65 / COLS.length).toFixed(2);
+---
+
+<section class="gl" id="at-a-glance" aria-label="At a glance">
+  <div class="gl__frame">
+    <table class="gl__table">
+      <colgroup>
+        <col style="width: 21%" />
+        {COLS.map(() => <col style={`width: ${midWidth}%`} />)}
+        <col style="width: 14%" />
+      </colgroup>
+      <caption class="sr-only">
+        Side by side on {COLS.join(", ").toLowerCase()}. Cells reading “{NOT_STATED}” mean the maker does not publish the figure.
+      </caption>
+      <thead>
+        <tr>
+          <th scope="col">Product</th>
+          {COLS.map((c) => <th scope="col">{c}</th>)}
+          <th scope="col"><span class="sr-only">Buy</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        {shown.map((r) => (
+          <tr>
+            <th scope="row" class="gl__rowhead">
+              <a href={r.href}>
+                <span class="gl__thumb"><ProductImage productId={r.productId} placement="comparison" compact sizes="72px" /></span>
+                <span class="gl__name">{r.name}</span>
+              </a>
+            </th>
+            {cells(slugOf(r.href)).map((v, i) => (
+              <td data-label={COLS[i]}><span class:list={["gl__v", v === NOT_STATED && "is-unknown"]}>{v}</span></td>
+            ))}
+            <td class="gl__buy" data-label="">
+              {r.redirectKey && (
+                <a class="gl__btn" href={`/go/${r.redirectKey}`} rel="sponsored nofollow">Check price on Amazon</a>
+              )}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+  <p class="gl__note">{glance.note}</p>
+</section>
+
+<style>
+  .gl {
+    /* Wider than the prose column it sits in, up to the page container. */
+    width: min(66rem, calc(100vw - 2rem));
+    max-width: none;
+    margin: 1.6rem 0 2rem;
+  }
+  .gl__frame {
+    border: 1px solid var(--cs-line);
+    border-radius: 16px;
+    background: var(--cs-surface-lift);
+    overflow: hidden;
+  }
+  .gl__table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    table-layout: fixed;
+    font-size: 0.92rem;
+  }
+  .gl__table thead th {
+    padding: 0.9rem 0.8rem;
+    text-align: left;
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--cs-mid);
+    background: linear-gradient(180deg, #171c23 0%, #10141a 100%);
+    border-bottom: 1px solid var(--cs-line);
+  }
+  .gl__table td,
+  .gl__table tbody th {
+    padding: 0.85rem 0.8rem;
+    text-align: left;
+    vertical-align: middle;
+    color: var(--text-secondary);
+    line-height: 1.4;
+    border-top: 1px solid var(--cs-line-soft);
+  }
+  .gl__table tbody tr:first-child td,
+  .gl__table tbody tr:first-child th { border-top: 0; }
+  .gl__rowhead a {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    color: var(--text-primary, inherit);
+    text-decoration: none;
+  }
+  .gl__rowhead a:hover .gl__name { text-decoration: underline; }
+  .gl__thumb {
+    flex: 0 0 auto;
+    width: 56px;
+    height: 56px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #fff;
+  }
+  .gl__thumb :global(img) { width: 100%; height: 100%; object-fit: contain; display: block; }
+  .gl__name { font-weight: 700; }
+  .gl__v { color: var(--cs-bright); }
+  .gl__v.is-unknown { color: var(--text-secondary); font-style: italic; opacity: 0.8; }
+  .gl__btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    padding: 0.55rem 0.5rem;
+    border-radius: 999px;
+    border: 1px solid rgba(120, 176, 255, 0.55);
+    background: linear-gradient(180deg, #2f7fe4 0%, #1a55b4 100%);
+    color: #fff;
+    font-size: 0.78rem;
+    font-weight: 700;
+    line-height: 1.2;
+    text-decoration: none;
+  }
+  .gl__btn:hover { filter: brightness(1.1); }
+  .gl__btn:focus-visible { outline: 2px solid #dfe4ec; outline-offset: 2px; }
+  .gl__note { margin: 0.8rem 0 0; font-size: 0.85rem; color: var(--text-secondary); }
+
+  @media (max-width: 859px) {
+    .gl { width: 100%; }
+    .gl__frame { border: 0; background: none; overflow: visible; }
+    .gl__table, .gl__table tbody, .gl__table tr, .gl__table td, .gl__table tbody th { display: block; width: 100%; }
+    .gl__table { table-layout: auto; }
+    .gl__table :is(th, td):nth-child(n) { width: 100%; }
+    .gl__table thead { position: absolute; clip-path: inset(50%); width: 1px; height: 1px; overflow: hidden; }
+    .gl__table tbody tr {
+      margin-bottom: 0.9rem;
+      border: 1px solid var(--cs-line);
+      border-radius: 14px;
+      overflow: hidden;
+      background: var(--cs-surface-lift);
+    }
+    .gl__table tbody tr:first-child td, .gl__table tbody tr:first-child th { border-top: 0; }
+    .gl__rowhead { padding: 0.9rem 1rem; border-top: 0; border-bottom: 1px solid var(--cs-line-soft); background: rgba(255,255,255,0.025); }
+    .gl__table td { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 0.5rem 1rem; border-top: 0; text-align: right; }
+    .gl__table td::before {
+      content: attr(data-label);
+      flex: 0 0 auto;
+      text-align: left;
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--cs-low);
+    }
+    .gl__buy { padding: 0.7rem 1rem 1rem; }
+    .gl__buy::before { display: none; }
+  }
+</style>

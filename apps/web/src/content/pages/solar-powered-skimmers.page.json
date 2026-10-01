@@ -1,0 +1,173 @@
+{
+  "page_type": "best-of",
+  "path": "/best-robots/robotic-pool-cleaners/solar-powered-skimmers/",
+  "category": "robotic-pool-cleaners",
+  "eyebrow": "Best of · Solar skimmers",
+  "title": "The best solar powered pool skimmers",
+  "seo_title": "Best Solar Powered Pool Skimmers — Four Compared",
+  "meta_description": "The four best-selling solar pool skimmers on Amazon compared: runtime claims, basket size, sensors and apps, and what each listing does not tell you.",
+  "standfirst": "A solar pool skimmer takes leaves off the surface before they sink, and does nothing else. These four are the best sellers on Amazon US, compared on the claims that matter and on what each maker leaves out.",
+  "keywords": {
+    "primary": "solar powered pool skimmer",
+    "secondary": [
+      "solar pool skimmer",
+      "robotic pool skimmer",
+      "best solar pool skimmer"
+    ]
+  },
+  "index": true,
+  "dates": {
+    "published": "2026-10-01",
+    "reviewed": "2026-10-01"
+  },
+  "hero": {
+    "desktop": "/media/editorial/best-solar-pool-skimmers.webp",
+    "mobile": "/media/editorial/best-solar-pool-skimmers-mobile.webp",
+    "alt": "A solar pool skimmer floating on a still pool at sunset, drawing fallen leaves into its intake, with the words Solar Skimmers over the water.",
+    "focal": "50% 50%",
+    "headline": "Solar Skimmers",
+    "source": "Owner-supplied illustration, cropped to 16:9 with the page title set over it"
+  },
+  "prose": "best-solar-pool-skimmers",
+  "layout": {
+    "contents_first": true,
+    "quick_buy": true
+  },
+  "picks": [
+    {
+      "product": "betta-se-plus",
+      "award": "Best documented",
+      "why": "The only one of the four with a manufacturer's product page and manual to read: a stated one-year warranty, a 200 micron basket, 3.5 hours on the adapter and 5 to 6 on the sun. Betta's 30 hour figure is a claim, but it sits among numbers you can check.",
+      "not_for": "Anyone who wants an app or edge following, or a pool in permanent shade."
+    },
+    {
+      "product": "aiper-ecosurfer-s2",
+      "award": "Best for edges and steps",
+      "why": "Aiper's listing is the most specific about how the machine stays out of trouble: two dToF sensors for walls and corners, and adjustable anti-stranding columns for steps. It also has the 35 hour battery figure, which is a claim.",
+      "not_for": "Anyone who needs a published basket volume or warranty term before buying; the listing gives neither."
+    },
+    {
+      "product": "beatbot-iskim",
+      "award": "Best for heavy debris",
+      "why": "A 9 litre basket, the largest volume any of the four states, behind a covered intake Beatbot says keeps debris in when the machine reverses. For a pool that sheds, fewer trips to empty it is the point.",
+      "not_for": "Anyone who needs a stated runtime in hours; the listing gives none."
+    },
+    {
+      "product": "brinbo-sk01",
+      "award": "One to watch",
+      "why": "An app, two speeds and a stated 2.5 hour adapter charge, with the highest rating of the four. It is also the newest, with 28 ratings, so the rating is an early signal and not a record.",
+      "not_for": "Anyone who wants a long record of owner reports, or a brand with a track record in pool robots."
+    }
+  ],
+  "comparison": [
+    "betta-se-plus",
+    "aiper-ecosurfer-s2",
+    "beatbot-iskim",
+    "brinbo-sk01"
+  ],
+  "glance": {
+    "before_heading_id": "saltwater-and-the-app",
+    "columns": [
+      "Runtime claim",
+      "Basket or mesh",
+      "Sensing",
+      "Adapter charge",
+      "App",
+      "Evidence"
+    ],
+    "rows": {
+      "betta-se-plus": [
+        "30 hours",
+        "200 micron mesh",
+        "Ultrasonic radar",
+        "3.5 hours",
+        "No",
+        "Manufacturer page and manual"
+      ],
+      "aiper-ecosurfer-s2": [
+        "35 hours",
+        "150 micron mesh",
+        "Two dToF sensors",
+        "Not stated",
+        "Yes",
+        "Listing"
+      ],
+      "beatbot-iskim": [
+        "Not stated",
+        "9 litres",
+        "Dual ultrasonic",
+        "Not stated",
+        "Yes",
+        "Listing"
+      ],
+      "brinbo-sk01": [
+        "Not stated",
+        "Large, no figure",
+        "Ultrasonic",
+        "2.5 hours",
+        "Yes",
+        "Listing"
+      ]
+    },
+    "note": "Every figure is the maker's own claim. “Not stated” means we did not find it in what we read, and the review of each machine says the same."
+  },
+  "buy_strip": {
+    "heading": "Where to buy the four",
+    "intro": "Each button goes to that machine's own Amazon listing. Check the title names the model and colour you want before you add it to a basket, because Amazon sells colours, bundles and refurbished units as separate listings.",
+    "disclosure": "We earn a commission on qualifying Amazon purchases made through these links, at no extra cost to you. It does not decide the order or the awards above."
+  },
+  "related": {
+    "heading": "If the floor is the problem, start here",
+    "intro": "A skimmer works the surface and nothing else. These are the floor-and-wall robots our pool pages recommend most, and each pairs with any skimmer above. The full ranking is on the best robotic pool cleaners page.",
+    "products": [
+      "aiper-scuba-s1",
+      "wybot-c1",
+      "beatbot-aquasense-2-ultra",
+      "dolphin-nautilus-cc-plus"
+    ],
+    "links": [
+      {
+        "href": "/robots/robotic-pool-cleaners/",
+        "label": "Every robotic pool cleaner we cover"
+      },
+      {
+        "href": "/best-robots/robotic-pool-cleaners/",
+        "label": "Best robotic pool cleaners"
+      },
+      {
+        "href": "/best-robots/robotic-pool-cleaners/cordless/",
+        "label": "Best cordless robotic pool cleaners"
+      },
+      {
+        "href": "/best-robots/robotic-pool-cleaners/above-ground-pools/",
+        "label": "Best for above-ground pools"
+      },
+      {
+        "href": "/botmatch/robotic-pool-cleaners/",
+        "label": "BotMatch: score your own pool"
+      },
+      {
+        "href": "/guides/are-robotic-pool-cleaners-worth-it/",
+        "label": "Are robotic pool cleaners worth it?"
+      }
+    ]
+  },
+  "faq": [
+    {
+      "q": "Does a solar pool skimmer work on cloudy days?",
+      "a": "It works from its battery, and the battery is refilled by the panel or, on all four, by a wall adapter. Every maker here claims round-the-clock cleaning, and none of the figures is ours. How long a machine runs after several grey days is the number to look for in owner reviews."
+    },
+    {
+      "q": "Do I still need a robotic pool cleaner if I have a skimmer?",
+      "a": "Yes, if the floor or walls get dirty. A skimmer collects what floats and nothing else. It is a good partner for a floor robot because debris caught at the surface never sinks."
+    },
+    {
+      "q": "Are solar pool skimmers safe in a saltwater pool?",
+      "a": "Two of these four say something about salt: the Betta SE Plus describes salt chlorine tolerant motors and the Beatbot iSkim listing says saltwater-safe. The Aiper and BRINBO listings we read do not say, so check before using one in a salt pool."
+    },
+    {
+      "q": "How do you get a floating skimmer out of the pool?",
+      "a": "Some park themselves. Beatbot says the iSkim parks after cleaning or on one tap in its app, and the BRINBO app shows a park button. The Betta SE Plus runs automatically or from a remote. Otherwise it is a pole or a hand."
+    }
+  ]
+}
