@@ -171,11 +171,6 @@ const ratedFor = (p: RenderedPick): string | null => {
     ))}
   </ol>
 
-  <p class="bp-picks__note">
-    Each pick is chosen for a job, not given a score, and what a product pays us plays no part. Our
-    <a href="/editorial-policy/">editorial policy</a> explains how we choose. We do not print prices
-    here because they change; each review shows the current price and the date it was checked.
-  </p>
 </section>
 
 <style>
@@ -471,15 +466,6 @@ const ratedFor = (p: RenderedPick): string | null => {
   .bp-picks__more:hover { color: #fff; border-color: rgba(246, 248, 252, 0.9); }
   .bp-picks__more:focus-visible { outline: var(--focus-ring, 2px solid #dfe4ec); outline-offset: 3px; }
 
-  .bp-picks__note {
-    margin: clamp(1.25rem, 3vw, 1.6rem) 0 0;
-    font-size: 0.9rem;
-    line-height: 1.6;
-    color: var(--text-tertiary);
-    max-width: 68ch;
-  }
-
-  .bp-picks__note a { color: var(--cs-mid); }
 
   @media (min-width: 900px) {
     .bp-picks__why { font-size: 1.1rem; }
