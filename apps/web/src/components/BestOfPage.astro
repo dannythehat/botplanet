@@ -108,7 +108,7 @@ const pageSchema = [
             {buyRows.map((r) => (
               <li class="bo-buy__item">
                 <a class="bo-buy__thumb" href={r.href} aria-label={`${r.name} review`}>
-                  <ProductImage productId={r.productId} placement="comparison" compact sizes="72px" />
+                  <ProductImage productId={r.productId} placement="comparison" compact sizes="96px" />
                 </a>
                 <div class="bo-buy__text">
                   <a class="bo-buy__name" href={r.href}>{r.name}</a>
@@ -213,7 +213,7 @@ const pageSchema = [
   }
   .bo-buy__item {
     display: grid;
-    grid-template-columns: 72px 1fr;
+    grid-template-columns: 96px 1fr;
     grid-template-areas: "thumb text" "btn btn";
     gap: 0.6rem 0.9rem;
     align-items: center;
@@ -225,7 +225,7 @@ const pageSchema = [
   .bo-buy__thumb {
     grid-area: thumb;
     display: block;
-    width: 72px;
+    width: 96px;
     height: 72px;
     border-radius: 10px;
     overflow: hidden;
