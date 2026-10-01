@@ -392,6 +392,34 @@ export const EXPECTED_IDENTITIES: IdentityExpectation[] = [
        $270.99 Classroom Set under near-identical names; deny both. */
     denyTokens: ["activity set", "classroom set", "classroom"],
   },
+  {
+    /* Owner-supplied 1 October 2026; Blue. Gray (B0DPG7L6QP) and Renewed
+       (B0GKPXB186) are other ASINs. The unit's own casing and independent
+       reviews say "Surfer S2", Amazon says "EcoSurfer S2": both tokens match. */
+    productId: "prod-aiper-ecosurfer-s2",
+    asin: "B0DPHGPLGM",
+    brand: "Aiper",
+    modelTokens: ["ecosurfer s2", "surfer s2"],
+    denyTokens: ["renewed", "refurbished", "surfer s1", "seagull", "scuba"],
+  },
+  {
+    /* Owner-supplied 1 October 2026; Navy Blue. The iSkim has several listings
+       (colour, with a charger) and a larger iSkim Ultra that is a different
+       machine at a different price. */
+    productId: "prod-beatbot-iskim",
+    asin: "B0GWF6FPPS",
+    brand: "Beatbot",
+    modelTokens: ["iskim"],
+    denyTokens: ["iskim ultra", "iskim pro", "aquasense", "renewed", "refurbished"],
+  },
+  {
+    /* Owner-supplied 1 October 2026; Black Blue. */
+    productId: "prod-brinbo-sk01",
+    asin: "B0H6ZCNK7B",
+    brand: "BRINBO",
+    modelTokens: ["sk01"],
+    denyTokens: ["renewed", "refurbished", "bundle"],
+  },
 ];
 
 /** Products with no confirmed ASIN. They need discovery, not a refresh. */

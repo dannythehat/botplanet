@@ -801,6 +801,9 @@ export const PRODUCT_ID: Record<string, string> = {
   "bublue-bubot-800p": "prod-dolphin-premier",
   "polaris-freedom": "prod-polaris-freedom",
   "betta-se-plus": "prod-betta-se-plus",
+  "aiper-ecosurfer-s2": "prod-aiper-ecosurfer-s2",
+  "beatbot-iskim": "prod-beatbot-iskim",
+  "brinbo-sk01": "prod-brinbo-sk01",
   "dolphin-e10": "prod-dolphin-e10",
   "dolphin-proteus-dx4-plus": "prod-dolphin-proteus-dx4-plus",
   "aiper-scuba-v3-ai-vision": "prod-aiper-scuba-v3-ai-vision",
@@ -1224,6 +1227,7 @@ export const POOL_SLUGS = new Set([
   "beatbot-aquasense-2-ultra", "aiper-scuba-x1-pro-max", "aiper-scuba-s1", "aiper-seagull-se",
   "wybot-c1", "dolphin-nautilus-cc-plus", "bublue-bubot-800p", "polaris-freedom",
   "betta-se-plus", "dolphin-e10", "dolphin-proteus-dx4-plus", "aiper-scuba-v3-ai-vision",
+  "aiper-ecosurfer-s2", "beatbot-iskim", "brinbo-sk01",
 ]);
 
 const LITTER_SLUGS = new Set(["litter-robot-4", "petkit-purobot-max-pro-2", "casa-leo-loo-too", "petsafe-scoopfree-crystal-pro"]);

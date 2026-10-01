@@ -931,6 +931,61 @@ for (const p of CODING_GIFT_ASINS) {
   };
 }
 
+/**
+ * THE OWNER'S TOP FOUR SOLAR SKIMMERS, 1 October 2026.
+ *
+ * Betta SE Plus was already here. These three joined it the same day. The owner
+ * opened each listing on a phone, sent screenshots of the title block and the
+ * listing's images, and then pasted the product address; each ASIN below was
+ * fetched afterwards and its page title matches the screenshot title.
+ *
+ * WEAKER THAN THE POOL ENTRIES ABOVE, AND RECORDED AS SUCH. Amazon serves a
+ * fetch only the page head, never the details table, so no Brand or Model Number
+ * field was read for any of the three. What exists is a pinned ASIN, a title
+ * naming the machine and the owner's own sight of the listing. The three are the
+ * same grade as Botley and Code & Go: researched_exact, one transcribed field
+ * short of verified_exact.
+ *
+ * ONE ASIN PER PRODUCT. Colours, bundles and Renewed stock are separate ASINs.
+ * The Aiper has a Gray ASIN (B0DPG7L6QP) and a Renewed one (B0GKPXB186); the
+ * iSkim has Ink Blue and Navy Blue listings and a larger iSkim Ultra; the owner
+ * supplied the Navy Blue iSkim here and the Blue EcoSurfer.
+ */
+const SOLAR_SKIMMER_CHECK_DATE = "2026-10-01";
+
+const SOLAR_SKIMMER_ASINS: WindowDestination[] = [
+  {
+    productId: "prod-aiper-ecosurfer-s2",
+    asin: "B0DPHGPLGM",
+    exactModel: "Aiper EcoSurfer S2 (Blue)",
+    evidence:
+      "Owner screenshot of the live listing, 1 October 2026: 'AIPER EcoSurfer S2 24/7 Solar Pool Skimmer Robot with App Support, Blue', store 'AIPER', 4.4 stars from 2,374 ratings, Amazon's Choice, 300+ bought in the past month. The ASIN was pasted by the owner and a fetch returns the same title. Details table not read. Gray is B0DPG7L6QP and a Renewed listing is B0GKPXB186; both are denied. The older Surfer S1 is a different machine.",
+  },
+  {
+    productId: "prod-beatbot-iskim",
+    asin: "B0GWF6FPPS",
+    exactModel: "Beatbot iSkim (Navy Blue)",
+    evidence:
+      "Owner-pasted ASIN, 1 October 2026; a fetch returns 'Beatbot iSkim 24/7 Solar Pool Skimmer Robot with App Control, 9L Basket | App Recall, Anti-Stranding, 24/7 Cleaning, Dual-Ultrasonic Avoidance, Auto Return, Saltwater-Safe, Navy Blue'. The owner's screenshot was of the Ink Blue 'with Charger' set (4.4 stars, 303 ratings, 200+ bought in the past month), a different ASIN; Navy Blue was shown at a higher price on the same page. Details table not read. iSkim Ultra and other iSkim listings are different products and are denied.",
+  },
+  {
+    productId: "prod-brinbo-sk01",
+    asin: "B0H6ZCNK7B",
+    exactModel: "BRINBO SK01 (Black Blue)",
+    evidence:
+      "Owner screenshot of the live listing, 1 October 2026: '[2026 NEW] BRINBO SK01 Solar Pool Skimmer Robot with APP, Black Blue', store 'BRINBO', 4.7 stars from 28 ratings, 200+ bought in the past month. The ASIN was pasted by the owner and a fetch returns the same title. Details table not read. A new brand with few ratings, which is why the review says so.",
+  },
+];
+
+for (const p of SOLAR_SKIMMER_ASINS) {
+  IDENTITY_CHECKS[p.productId] = {
+    asin: p.asin,
+    confirmed: false,
+    evidence: p.evidence,
+    checkedOn: SOLAR_SKIMMER_CHECK_DATE,
+  };
+}
+
 export const DESTINATIONS: ProductDestination[] = [
   /**
    * The eleven vacuums, at researched_exact rather than verified_exact.
@@ -1010,6 +1065,25 @@ export const DESTINATIONS: ProductDestination[] = [
       notes:
         "IDENTITY NOT CONFIRMED to the standard the window and lawn destinations meet: the owner opened this listing directly on 27 September 2026 and confirmed brand, exact title and a live price and rating, but no expandable details table was captured, so no Model Name or Model Number field is on record. One read that opens that table raises this to verified_exact.",
       sourceReference: `Owner-opened listing, ${CODING_GIFT_CHECK_DATE}. ${evidence}`,
+    }),
+  ),
+
+  /* The owner's top four solar skimmers, 1 October 2026. The weakest evidence
+     tier we publish a button on: pinned ASIN and a title naming the machine,
+     no details table. See the note above SOLAR_SKIMMER_ASINS. */
+  ...SOLAR_SKIMMER_ASINS.map(
+    ({ productId, asin, exactModel, evidence }): ProductDestination => ({
+      productId,
+      retailerId: "ret-amazon",
+      market: "us",
+      retailerProductId: asin,
+      identifierKind: "asin",
+      exactModel,
+      destinationUrl: `https://www.amazon.com/dp/${asin}`,
+      confidence: "researched_exact" as const,
+      notes:
+        "IDENTITY NOT CONFIRMED to the standard the window and lawn destinations meet: the owner opened this listing on 1 October 2026 and supplied the ASIN, and a fetch returns a title naming the machine, but the details table (Brand, Model Name, Model Number) could not be read. One field read raises this to verified_exact.",
+      sourceReference: `Owner-supplied listing, ${SOLAR_SKIMMER_CHECK_DATE}. ${evidence}`,
     }),
   ),
 
@@ -1175,6 +1249,9 @@ export const REDIRECT_KEYS: Record<string, string> = {
   "prod-aiper-seagull-se": "pool-aiper-seagull-amazon",
   "prod-beatbot-aquasense-2-ultra": "pool-beatbot-ultra-amazon",
   "prod-betta-se-plus": "pool-betta-seplus-amazon",
+  "prod-aiper-ecosurfer-s2": "pool-aiper-ecosurfers2-amazon",
+  "prod-beatbot-iskim": "pool-beatbot-iskim-amazon",
+  "prod-brinbo-sk01": "pool-brinbo-sk01-amazon",
   "prod-dolphin-e10": "pool-dolphin-e10-amazon",
   "prod-dolphin-nautilus-cc-plus": "pool-dolphin-ccplus-amazon",
   "prod-dolphin-premier": "pool-bublue-bubot800p-amazon",

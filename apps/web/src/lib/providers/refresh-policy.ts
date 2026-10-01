@@ -26,8 +26,16 @@ import type { ProviderSkipReason } from "./amazon-provider";
  * was always a defensive buffer below the account's real 250, not a technical
  * limit; 210 still leaves 40 credits a month for discovery and genuine
  * exceptions, which is the room the buffer exists to protect.
+ *
+ * RAISED FROM 210 TO 230 ON 1 OCTOBER 2026. Three solar skimmers (Aiper
+ * EcoSurfer S2, Beatbot iSkim, BRINBO SK01) joined the identity register the
+ * same day, taking the four-day cadence's worst case from 203 to 225. They
+ * carry no price on purpose, so a live read is the only way they ever show
+ * one. 230 leaves 20 of the account's 250 for discovery. The next product
+ * added will not fit, and that is a subscription decision for the owner, not a
+ * constant to keep nudging.
  */
-export const MONTHLY_CREDIT_CEILING = 210;
+export const MONTHLY_CREDIT_CEILING = 230;
 
 /**
  * Days between scheduled reads.
