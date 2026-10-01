@@ -6396,6 +6396,22 @@ export const SOLAR_SKIMMER_UPLOAD_ASSETS: MediaAssetRecord[] = [
    product shots are the only product-image eligible records. */
 export const SOLAR_SKIMMER_NEW_ASSETS: MediaAssetRecord[] = [
   {
+    ...base("aiper-ecosurfer-s2-thumb", "depiction"),
+    productId: PRODUCT_ID["aiper-ecosurfer-s2"] ?? "prod-aiper-ecosurfer-s2",
+    purpose: "Aiper EcoSurfer S2 — listing card, comparison thumbnail and social preview",
+    exactModel: "Aiper EcoSurfer S2",
+    type: "product_hero",
+    checksum: "sha256:d6ef91a9b198397688b4a0a8f9762420c9b4f540dc603a4cd92806b1c37b1a19",
+    width: 900,
+    height: 910,
+    src: "/media/reviews/aiper-ecosurfer-s2/thumb.webp",
+    altText: "The grey and teal Aiper EcoSurfer S2 floating beside a pool wall, seen from above: a dark mesh solar panel in a grey frame, a teal carry handle with the Aiper name beside it, and a few leaves on the water.",
+    altTextStatus: "approved",
+    schema: DEPICTION_SCHEMA,
+    depictsRealProduct: true,
+    notes: "A crop of the owner-supplied Aiper edge and corner panel with the headline text removed, so it can stand as a thumbnail. No pixels were added.",
+  },
+  {
     ...base("aiper-ecosurfer-s2-hero", "illustration"),
     productId: PRODUCT_ID["aiper-ecosurfer-s2"] ?? "prod-aiper-ecosurfer-s2",
     purpose: "Aiper EcoSurfer S2 \u2014 review lead, Aiper's own panel on battery and solar charging",
@@ -6405,7 +6421,7 @@ export const SOLAR_SKIMMER_NEW_ASSETS: MediaAssetRecord[] = [
     width: 1500,
     height: 1500,
     src: "/media/reviews/aiper-ecosurfer-s2/hero.webp",
-    altText: "Aiper's own marketing panel for the EcoSurfer S2: a blue skimmer floating in sunlit water beside a battery graphic, with the headline claiming a 35 hour battery and 24/7 cleaning with Aiper's SolarSeeker technology. The 35 hours and the 24/7 are Aiper's claims, not measurements made here.",
+    altText: "Aiper's own marketing panel for the EcoSurfer S2: a close-up of the grey and teal skimmer's solar panel with the Aiper name along its edge, under a headline claiming a 35 hour battery and 24/7 cleaning with Aiper's SolarSeeker technology. The 35 hours and the 24/7 are Aiper's claims, not measurements made here.",
     altTextStatus: "approved",
     schema: ORIGINAL_SCHEMA,
     depictsRealProduct: true,

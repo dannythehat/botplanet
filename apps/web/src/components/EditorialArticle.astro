@@ -155,6 +155,8 @@ const parts: { html: string; slot: number | null }[] = [];
   />
 )}
 
+<slot name="after-comparison" />
+
 {bmCta && (
   <BotMatchCta
     categorySlug={article.categorySlug}

@@ -535,6 +535,7 @@ const SOURCES = [
   "/media/reviews/betta-se-plus/radar-uv.webp",
   // 1 October 2026: the three new solar skimmers.
   "/media/reviews/aiper-ecosurfer-s2/hero.webp",
+  "/media/reviews/aiper-ecosurfer-s2/thumb.webp",
   "/media/reviews/aiper-ecosurfer-s2/edge-corner.webp",
   "/media/reviews/aiper-ecosurfer-s2/filtration.webp",
   "/media/reviews/aiper-ecosurfer-s2/anti-stranding.webp",

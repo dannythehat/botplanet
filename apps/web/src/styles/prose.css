@@ -125,3 +125,32 @@
 @media (min-width: 900px) {
   .bp-prose p, .bp-prose li { font-size: 1.1rem; }
 }
+
+/* TABLES IN PROSE. First used by the solar skimmer best-of. The table scrolls
+   sideways on a phone rather than squeezing four machines into a column each. */
+.bp-prose table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  margin: 1.4rem 0 0;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  -webkit-overflow-scrolling: touch;
+}
+.bp-prose th,
+.bp-prose td {
+  padding: 0.6rem 0.8rem;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--cs-line-soft, rgba(255, 255, 255, 0.1));
+  min-width: 7.5rem;
+}
+.bp-prose thead th {
+  font-weight: 700;
+  color: var(--text-primary, inherit);
+  border-bottom: 1px solid var(--cs-line, rgba(255, 255, 255, 0.2));
+}
+.bp-prose tbody td:first-child {
+  font-weight: 600;
+  color: var(--text-primary, inherit);
+}

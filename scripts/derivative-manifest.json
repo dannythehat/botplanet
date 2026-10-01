@@ -12983,6 +12983,29 @@
     ]
   },
   {
+    "source": "/media/reviews/aiper-ecosurfer-s2/thumb.webp",
+    "sourceWidth": 900,
+    "sourceHeight": 910,
+    "derivatives": [
+      {
+        "id": "media-reviews-aiper-ecosurfer-s2-thumb-webp-360",
+        "src": "/media/reviews/aiper-ecosurfer-s2/thumb-360w.webp",
+        "width": 360,
+        "height": 364,
+        "bytes": 22830,
+        "checksum": "sha256:c6ec9b984a969f386f1df0315bb28f38ee97b282bdebd78a413042171c29aede"
+      },
+      {
+        "id": "media-reviews-aiper-ecosurfer-s2-thumb-webp-640",
+        "src": "/media/reviews/aiper-ecosurfer-s2/thumb-640w.webp",
+        "width": 640,
+        "height": 647,
+        "bytes": 78666,
+        "checksum": "sha256:49d61f91be02ff6c1405b27a6a6e9931858718b690247d7f8dfa33a10f6adedd"
+      }
+    ]
+  },
+  {
     "source": "/media/reviews/aiper-ecosurfer-s2/edge-corner.webp",
     "sourceWidth": 1500,
     "sourceHeight": 1500,

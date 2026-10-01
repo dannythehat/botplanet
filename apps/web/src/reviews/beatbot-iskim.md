@@ -52,3 +52,5 @@ Through the app the machine can park itself after cleaning or on a single tap, w
 ## The verdict
 
 The iSkim is the skimmer for heavy debris. The 9 litre basket and the covered intake are the two claims that set it apart, and they are the two you should check against owner reviews on the Amazon listing. It does not publish a runtime, so it is hard to line up against the others on battery alone.
+
+See how it sits against the Betta SE Plus and the other two in our ranking of the [best solar powered pool skimmers](/best-robots/robotic-pool-cleaners/solar-powered-skimmers/).

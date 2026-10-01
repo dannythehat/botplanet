@@ -46,3 +46,5 @@ Two cleaning speeds are set from one button, one press for slow and two for fast
 ## The verdict
 
 The SK01 is worth a look if the app and the published charge time appeal, and the price is right. It is the one of the four we would wait on for more owner reports, because the numbers that matter most, runtime and basket size, are missing and the rating rests on a small sample. A rating this good from so few buyers is encouraging and proves nothing yet.
+
+See how it sits against the Betta SE Plus and the other two in our ranking of the [best solar powered pool skimmers](/best-robots/robotic-pool-cleaners/solar-powered-skimmers/).

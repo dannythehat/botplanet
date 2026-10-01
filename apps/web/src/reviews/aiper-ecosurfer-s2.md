@@ -47,3 +47,5 @@ Charging is solar, with a wall adapter as the second route. The listing also nam
 ## The verdict
 
 The EcoSurfer S2 is the skimmer to look at first if you want the most-reviewed machine and a maker that publishes specific claims about sensing and anti-stranding. It is a skimmer, so it adds to a floor robot and never replaces one. The number to hold it to is not 35 hours but how it behaves on a cloudy week.
+
+See how it sits against the Betta SE Plus and the other two in our ranking of the [best solar powered pool skimmers](/best-robots/robotic-pool-cleaners/solar-powered-skimmers/).
