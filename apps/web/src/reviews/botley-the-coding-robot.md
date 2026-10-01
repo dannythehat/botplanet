@@ -19,15 +19,19 @@ sequence that works first try.
 
 ## What "screen-free" buys you here
 
-Sphero's indi and Sphero's Mini both aim younger too, and both still route
-through a phone or tablet at some point — indi through colour cards read by
-a camera-adjacent sensor, Mini through the Sphero Edu app directly. Botley
-does not touch a screen anywhere in the loop. The remote is the only
-interface, and it is a physical object a small child can hold and press
-without an adult unlocking a device first.
+Sphero's Mini is not the comparison: its whole experience lives inside a
+tablet app. The honest comparison is Sphero's indi, which is also screen-free
+— colour cards laid on the floor, with an app that exists but is optional.
 
-That is a real difference for a household trying to keep a five year old off
-tablets specifically, not just off screens in general terms.
+What separates Botley from indi is the interface, not the screen. indi reads
+cards a child lays down; Botley is programmed with buttons on a remote, in
+sequences of up to 80 steps, and never needs an app at all. The remote is a
+physical object a small child can hold and press without an adult unlocking a
+device first.
+
+For a household that wants no screen anywhere near a five year old, both
+qualify. The choice is cards on the floor from around four, or a remote and a
+longer sequence at five to seven.
 
 ## Who this is for
 

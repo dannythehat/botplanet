@@ -46,6 +46,7 @@ import { foldSections } from "../lib/collapsible-sections";
 import { snapshotFor } from "../content/snapshots";
 import { findAlternatives } from "../lib/alternatives";
 import { applyInternalLinks } from "../lib/internal-linker";
+import { reconcilePriceFact } from "../lib/price-fact";
 import { anchorsFor } from "../content/internal-links";
 import type { ReviewContent } from "../content/reviews";
 import "../styles/prose.css";
@@ -107,6 +108,10 @@ const { html: body } = foldSections(linked, review.folds, import.meta.env.DEV);
    reach findAlternatives — see the note at the top of lib/alternatives.ts. */
 const lead = offers.find((o) => o.redirectKey) ?? null;
 
+/* The header's typed price must not contradict the buy box on the same page.
+   See lib/price-fact.ts for the three pages that did, and the rule. */
+const facts = reconcilePriceFact(review.facts, lead);
+
 const alternatives =
   snapshot?.ruleOuts?.length && siblings.length
     ? findAlternatives(snapshot.ruleOuts, siblings, review.slug)
@@ -120,7 +125,7 @@ const alternatives =
   bestFor={review.bestFor}
   notIdealFor={review.notIdealFor}
   image={review.image}
-  facts={review.facts}
+  facts={facts}
 />
 
 {/* Before the long read, not after it: the reader who only wants the answer

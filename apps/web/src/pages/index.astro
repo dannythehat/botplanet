@@ -408,6 +408,17 @@ const homeSchema = [
     box-shadow: inset 0 1px 0 rgba(255,255,255,.07), 0 30px 70px rgba(0,0,0,.55);
   }
   .hero__art img { display: block; width: 100%; height: auto; }
+  /* ON A PHONE THE FIRST SCREEN WAS ONE PICTURE. Measured 1 October 2026 at
+     390x844: the portrait artwork filled 625px of the viewport, the headline
+     started at 805px and the buttons at 1,163px, so a visitor's first screen had
+     no words and nothing to press. Capped to a panoramic strip so the headline
+     and both buttons land inside the first screen; the crop sits low in the
+     frame where the robots are, and it also drops the BotPlanet wordmark painted
+     into the top of the artwork, which the header already carries. Desktop is
+     untouched. */
+  @media (max-width: 720px) {
+    .hero__art img { height: min(28svh, 240px); object-fit: cover; object-position: 50% 62%; }
+  }
   .hero__more { display: inline-flex; align-items: center; align-self: center; margin-left: 6px; color: var(--text-tertiary); font-size: 14px; text-decoration: none; }
   .hero__more:hover { color: #f3f5f7; text-decoration: underline; }
   .hero__marker,.kicker { color: #aeb4bc; font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: .18em; margin: 0 0 14px; }

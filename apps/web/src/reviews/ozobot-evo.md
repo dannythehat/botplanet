@@ -49,7 +49,8 @@ Ozobot.
 Believe the title. A toddler cannot draw a straight line in marker pen, let
 alone a three-dash colour code, and buying this for a three-year-old will end
 with an expensive robot in a drawer. The Sphero indi is the screen-free option
-that genuinely works at four.
+that genuinely works at four, and the Code and Go Robot Mouse is the cheaper,
+plainer one at $40.90.
 
 We are naming the contradiction rather than picking the flattering number,
 because it is the kind of field that gets copied across a dozen sites without

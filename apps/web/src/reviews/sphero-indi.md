@@ -1,9 +1,9 @@
 A four-year-old programs the Sphero indi by putting coloured cards on the
 floor.
 
-No screen. No account. No app, unless you want one. That makes it the only
-product in this category a preschooler can use alone, and $100 is what it
-costs.
+No screen. No account. No app, unless you want one. It is one of three
+screen-free robots in this category — Botley and the Code and Go Robot Mouse
+are the other two — and $100 is what it costs.
 
 ## How a card becomes a program
 
@@ -15,7 +15,8 @@ robot take it, and changes a card when it goes wrong. That is a program: a
 sequence, an outcome, and a debug.
 
 Nobody has to explain any of this. A three-year-old works it out by watching
-once, which is not true of a single other robot on this site.
+once. Botley and the Code and Go Robot Mouse are the only other robots on this
+site sold as screen-free.
 
 ## Screen-free is the actual product
 

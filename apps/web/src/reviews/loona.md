@@ -102,7 +102,10 @@ wants a home camera and a companion and would rather buy one thing.
 hours off.
 
 **Anyone on a budget.** Eilik is $139.99 and has a fraction of the capability
-but none of the charging problem, because you never expected it to roam.
+but none of the charging problem, because you never expected it to roam. If
+what you actually want is a robot dog rather than a robot pet, our guide to
+robot dog toys sorts the cheap toys from the AI pets and the programmable
+quadrupeds.
 
 **Anyone whose main goal is watching a pet.** The pet-camera robots do that
 job properly and cost far less. Loona monitoring your home is a bonus on a

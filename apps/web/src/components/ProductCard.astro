@@ -36,6 +36,19 @@ interface Props {
   variant?: number;
   /** Product id for the save affordance. */
   saveId?: string;
+  /**
+   * Redirect key of the product's active offer, when it has one. Renders a
+   * "Check price on Amazon" action under the card.
+   *
+   * A SIBLING OF THE CARD LINK, NOT A CHILD. The card is one big <a>, and an
+   * anchor inside an anchor is invalid HTML whose recovery differs by browser.
+   * Found 1 October 2026: the first Amazon button on every category hub sat
+   * 11,500 to 17,000px down a page 25,000 to 40,000px tall, because the only
+   * place a reader could act was a table at the bottom. A reader who has
+   * picked a card from the grid should not have to scroll thirty screens to
+   * buy it.
+   */
+  buyKey?: string | null;
 }
 
 const {
@@ -48,6 +61,7 @@ const {
   productId,
   variant = 0,
   saveId,
+  buyKey = null,
 } = Astro.props;
 
 /* Ask the registry how this card's image wants to be framed. ProductImage
@@ -56,6 +70,7 @@ const {
    chip dropped on top of it lands on the logo. */
 const bleed = productId ? Boolean(resolveImage(productId, "listing_card")?.bleed) : false;
 ---
+<div class="pcard-shell">
 <a class="pcard elevated reveal" href={href} data-bleed={bleed ? "true" : undefined}>
   <div class="pcard__stage stage">
     {productId ? (
@@ -109,8 +124,39 @@ const bleed = productId ? Boolean(resolveImage(productId, "listing_card")?.bleed
     {priceNote && <span class="pcard__note">{priceNote}</span>}
   </div>
 </a>
+{buyKey && (
+  <a class="pcard-buy" href={`/go/${buyKey}`} rel="sponsored nofollow">
+    <span>Check price on Amazon</span>
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </a>
+)}
+</div>
 
 <style>
+  .pcard-shell { display: flex; flex-direction: column; gap: 0.6rem; min-width: 0; }
+  .pcard-shell > .pcard { flex: 1 1 auto; }
+
+  .pcard-buy {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.8rem;
+    min-height: 2.75rem;
+    padding: 0 0.9rem 0 1.1rem;
+    border-radius: 11px;
+    border: 1px solid rgba(120, 176, 255, 0.55);
+    background: linear-gradient(180deg, #2f7fe4 0%, #1a55b4 100%);
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.92rem;
+    text-decoration: none;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.26), 0 6px 16px rgba(16, 60, 130, 0.35);
+    transition: transform 0.16s ease, box-shadow 0.16s ease;
+  }
+  .pcard-buy svg { width: 1rem; height: 1rem; flex: none; }
+  .pcard-buy:hover, .pcard-buy:focus-visible { transform: translateY(-1px); box-shadow: inset 0 1px 0 rgba(255,255,255,.3), 0 9px 22px rgba(16,60,130,.5); }
+  .pcard-buy:focus-visible { outline: var(--focus-ring); outline-offset: var(--focus-offset); }
+
   .pcard {
     display: flex;
     flex-direction: column;

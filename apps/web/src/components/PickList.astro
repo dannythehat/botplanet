@@ -55,6 +55,8 @@ export interface RenderedPick extends EditorialPick {
    * implies a manufacturer withheld a figure that does not exist.
    */
   categorySlug?: string;
+  /** Active offer's redirect key, when the product has one. Never a price. */
+  redirectKey?: string | null;
 }
 
 interface Props {
@@ -114,10 +116,18 @@ const ratedFor = (p: RenderedPick): string | null => {
           {p.wrongFor}
         </p>
 
-        <a class="bp-picks__more" href={p.href}>
-          Read the full {p.name} review
-          <span aria-hidden="true">→</span>
-        </a>
+        <div class="bp-picks__actions">
+          {p.redirectKey && (
+            <a class="bp-picks__buy" href={`/go/${p.redirectKey}`} rel="sponsored nofollow">
+              <span>Check price on Amazon</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          )}
+          <a class="bp-picks__more" href={p.href}>
+            Read the full {p.name} review
+            <span aria-hidden="true">→</span>
+          </a>
+        </div>
       </li>
     ))}
   </ol>
@@ -130,6 +140,29 @@ const ratedFor = (p: RenderedPick): string | null => {
 </section>
 
 <style>
+  .bp-picks__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.8rem 1.4rem; margin-top: 1.1rem; }
+  .bp-picks__actions .bp-picks__more { margin-top: 0; }
+  .bp-picks__buy {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.9rem;
+    min-height: 2.9rem;
+    padding: 0 0.95rem 0 1.2rem;
+    border-radius: 11px;
+    border: 1px solid rgba(120, 176, 255, 0.55);
+    background: linear-gradient(180deg, #2f7fe4 0%, #1a55b4 100%);
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.93rem;
+    text-decoration: none;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.26), 0 6px 16px rgba(16, 60, 130, 0.4);
+    transition: transform 0.16s ease, box-shadow 0.16s ease;
+  }
+  .bp-picks__buy svg { width: 1rem; height: 1rem; flex: none; }
+  .bp-picks__buy:hover, .bp-picks__buy:focus-visible { transform: translateY(-1px); box-shadow: inset 0 1px 0 rgba(255,255,255,.3), 0 9px 22px rgba(16,60,130,.5); }
+  .bp-picks__buy:focus-visible { outline: var(--focus-ring); outline-offset: var(--focus-offset); }
+
   .bp-picks {
     margin: clamp(3rem, 7vw, 5rem) 0;
   }

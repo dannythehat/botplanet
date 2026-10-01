@@ -61,7 +61,8 @@ right starting point rather than a compromise.
 step. The Mini's ceiling is its battery and its lack of a display.
 
 **Under-eights.** Rated 8+, and the app is the whole experience. For a
-four-year-old the Sphero indi does this without a screen at all.
+four-year-old the Sphero indi does this without a screen at all, and for a
+five to seven year old Botley does it with a remote and no app.
 
 **Anyone wanting an afternoon of play.** One hour. It will not change.
 

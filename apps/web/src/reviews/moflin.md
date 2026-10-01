@@ -122,7 +122,9 @@ Two comparisons come up constantly and both deserve an honest answer.
 recognises faces, and it costs several times a Moflin. It is also not sold on
 Amazon in the US, which makes it a considerably harder thing to buy than its
 fame suggests. If you want a robot that moves around your house, aibo is the
-product — Moflin is not competing for that buyer.
+product — Moflin is not competing for that buyer. If you want something
+dog-shaped for far less than an aibo, our guide to robot dog toys sets out what
+each price band buys and who each one is for.
 
 **Ropet** is the newer one, an interactive robot pet at around $299 with a
 screen face rather than fur. It is closer to Moflin in intent than aibo is. We

@@ -59,6 +59,22 @@ export interface InternalAnchor {
    checks the anchors that DO exist resolve; it cannot check for absence. */
 export const CATEGORY_ANCHORS: Record<string, InternalAnchor[]> = {
   "educational-coding-robots": [
+    /* ADDED 1 OCTOBER 2026 — the retrofit rule, for the two reviews that shipped
+       on 27 September with one inbound link between them. The older Sphero and
+       Ozobot reviews are where a reader choosing a screen-free first robot is
+       already comparing, so they are the pages that should reach these two. */
+    {
+      anchor: "Code and Go Robot Mouse",
+      href: "/robots/educational-coding-robots/code-and-go-robot-mouse/",
+      why: "The cheapest and plainest screen-free option, named by the reviews that rule out under-fives or point a parent at a screen-free alternative. Written as 'and' rather than '&' because that is how it is searched and because an ampersand is escaped in rendered HTML, which silently stops an anchor matching.",
+      status: "live",
+    },
+    {
+      anchor: "Botley",
+      href: "/robots/educational-coding-robots/botley-the-coding-robot/",
+      why: "The screen-free robot a child programs with a remote rather than cards, named wherever a review sends a parent to a screen-free alternative for the five-to-seven band. Bare 'Botley' because every page that says it means this one product.",
+      status: "live",
+    },
     /* Product anchors \u2014 see the note on companion-robots above. */
     {
       anchor: "Sphero BOLT",
@@ -413,6 +429,15 @@ export const CATEGORY_ANCHORS: Record<string, InternalAnchor[]> = {
      to watch their dog has arrived in the wrong place, and the fastest honest
      fix is a link rather than a paragraph explaining the SERP evidence. */
   "companion-robots": [
+    /* ADDED 1 OCTOBER 2026 — the robot dog guide shipped on 27 September linked
+       from the guides index and nothing else. Moflin, Loona and the seniors
+       guide are the three places a reader is already thinking "dog". */
+    {
+      anchor: "robot dog toys",
+      href: "/guides/robot-dog-toys/",
+      why: "The guide that separates a cheap toy, an AI pet and a programmable quadruped, named by the companion pages that get asked 'is there a dog one'. The phrase is the guide's own primary term, so the anchor is the exact words a reader would search.",
+      status: "live",
+    },
     /* PRODUCT ANCHORS, added 8 August 2026 after a crawl of all 81 live pages built the real inbound-link graph. Pool declares 14 product anchors and its flagship review has FIFTEEN inbound links; window declares 11 and its flagship has nine. Every category without product anchors had exactly TWO inbound links per review \u2014 its hub and its comparison table \u2014 and no review linked to a sibling. The prose already names siblings constantly; nothing here required a word of it to be rewritten. One anchor per product, shortest unambiguous form: where a longer variant exists (BOLT+, Air 2 Plus, mBot Ranger) the review being linked is the one that covers it, so a match inside the longer name lands on the right page rather than the wrong one. */
     {
       anchor: "Moflin",
@@ -1143,6 +1168,65 @@ export interface RetrofittedInbound {
    the commit that ships it. A page with no entry is a page nothing older links
    to, which is the failure this table exists to make visible. */
 export const RETROFITTED_INBOUND: RetrofittedInbound[] = [
+  {
+    page: "/robots/educational-coding-robots/botley-the-coding-robot/",
+    shipped: "2026-09-27",
+    categorySlug: "educational-coding-robots",
+    anchor: "Botley",
+    from: [
+      {
+        prose: "sphero-indi",
+        shipped: "2026-08-08",
+        why: "indi's whole argument is screen-free, and it opened by calling itself the only product a preschooler could use alone. Botley is the second screen-free robot in the category, so the page now says there are three and names them.",
+      },
+      {
+        prose: "sphero-mini",
+        shipped: "2026-08-08",
+        why: "The Mini's under-eights rule-out sent a four-year-old to indi and nobody else. A five to seven year old with no tablet is exactly who Botley is for.",
+      },
+    ],
+  },
+  {
+    page: "/robots/educational-coding-robots/code-and-go-robot-mouse/",
+    shipped: "2026-09-27",
+    categorySlug: "educational-coding-robots",
+    anchor: "Code and Go Robot Mouse",
+    from: [
+      {
+        prose: "sphero-indi",
+        shipped: "2026-08-08",
+        why: "The page that names the screen-free alternatives is the one a parent on a budget is reading; $40.90 against $100 is the comparison they came to make.",
+      },
+      {
+        prose: "ozobot-evo",
+        shipped: "2026-08-08",
+        why: "Its listing-says-toddler section already sends a parent of a four-year-old to indi, and the cheaper plainer option belongs in the same sentence.",
+      },
+    ],
+  },
+  {
+    page: "/guides/robot-dog-toys/",
+    shipped: "2026-09-27",
+    categorySlug: "companion-robots",
+    anchor: "robot dog toys",
+    from: [
+      {
+        prose: "moflin",
+        shipped: "2026-08-08",
+        why: "Names aibo as the robot dog people mean and then sends them elsewhere. The honest next step for someone who wanted a dog for less is the guide that prices them.",
+      },
+      {
+        prose: "loona",
+        shipped: "2026-08-08",
+        why: "Loona is the closest thing to a robot dog that anybody sells, and its rule-outs said nothing to the reader who wanted a dog rather than a pet.",
+      },
+      {
+        prose: "robotic-pets-for-elderly",
+        shipped: "2026-08-06",
+        why: "Joy For All makes a dog as well as a cat, and the dog guide covers it as the soft-companion pick.",
+      },
+    ],
+  },
   {
     page: "/robots/robot-snow-blowers/yarbo-snow-blower/",
     shipped: "2026-08-11",

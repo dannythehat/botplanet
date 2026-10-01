@@ -423,6 +423,7 @@ Astro.response.headers.set("cache-control", "public, max-age=300, stale-while-re
           productId={p.id}
           variant={i + 0}
           saveId={p.id}
+          buyKey={redirectByProduct.get(p.id) ?? null}
         />
       ))}
     </div>
@@ -536,6 +537,7 @@ Astro.response.headers.set("cache-control", "public, max-age=300, stale-while-re
           productId={p.id}
           variant={i + 4}
           saveId={p.id}
+          buyKey={redirectByProduct.get(p.id) ?? null}
         />
       ))}
     </div>
@@ -619,6 +621,7 @@ Astro.response.headers.set("cache-control", "public, max-age=300, stale-while-re
           productId={p.id}
           variant={i + 8}
           saveId={p.id}
+          buyKey={redirectByProduct.get(p.id) ?? null}
         />
       ))}
     </div>

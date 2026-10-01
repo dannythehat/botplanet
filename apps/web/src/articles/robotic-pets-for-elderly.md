@@ -135,7 +135,9 @@ Loneliness or agitation, and the person is receptive: a simple robotic animal,
 no screen, batteries you can change. Worry from a distance: buy a monitoring
 device and stop calling it a companion. Someone sharp, curious and bored: a
 robot pet with conversation may suit, but read what the subscription covers
-before you pay for it.
+before you pay for it. If the person would rather have a dog than a cat, our
+guide to robot dog toys covers the soft companion dogs alongside the more
+technical machines, and says which kind each is.
 
 Our companion robots page explains the audiences, the support risk and the
 desk-or-floor split in full, and you can compare the machines we hold there as

@@ -9,10 +9,10 @@ That is the entire interface.
 ## The simplest coding toy in this category
 
 Botley uses a physical remote. Sphero's indi reads colour cards through a
-sensor. This is a step below both: no electronics between the child and the
-instruction at all, just cards on a mat and a mouse that reads whichever
-sequence is in front of it. Rated for age 4 and up, the youngest floor in the
-whole coding-robot lineup, and the mechanism is simple enough to justify it.
+sensor. This is the plainest of the three: cards on a mat and a mouse that
+follows whichever sequence is in front of it. Rated for age 4 and up, which
+ties Sphero's indi for the youngest floor in the coding-robot lineup, and the
+mechanism is simple enough to justify it.
 
 What that trades away is obvious. There is nothing to grow into here — no
 app, no block editor, no text mode waiting a year down the line. This is a

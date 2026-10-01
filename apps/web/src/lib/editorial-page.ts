@@ -124,6 +124,11 @@ export async function buildEditorialPage(
          anything and has no pool-size rating; without this the pick prints
          "Cleans: companionship" and "Rated for: Not disclosed". */
       categorySlug: article.categorySlug,
+      /* So the pick can offer the next step a buyer wants. A best-of is the page
+         a reader arrives on when they have decided to buy, and until this its
+         only action was "Read the full review" — the buy buttons were in a table
+         ~11,700px further down. */
+      redirectKey: redirectByProduct.get(product.id) ?? null,
     });
   }
 
