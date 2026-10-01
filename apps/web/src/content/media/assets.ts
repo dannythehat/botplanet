@@ -6721,16 +6721,16 @@ export const SOLAR_SKIMMER_NEW_ASSETS: MediaAssetRecord[] = [
     purpose: "Best solar pool skimmers page hero",
     exactModel: null,
     type: "educational_diagram",
-    checksum: "sha256:0ccd1cdb221512dc97bbab2c074da0e3272e7d096de0096415c6c131625a9daf",
+    checksum: "sha256:a6651702c885f146a6f27ad383b667d64af28d8bee61ce739bfdd97b95fa8c4b",
     width: 1672,
-    height: 940,
+    height: 941,
     src: "/media/editorial/best-solar-pool-skimmers.webp",
     altText:
-      "Four solar pool skimmers on four labelled cards: the Aiper EcoSurfer S2 floating beside a pool wall, the dark blue Beatbot iSkim with its charger, the grey and black BRINBO SK01 beside a phone showing its app, and the grey Betta SE Plus from above.",
+      "A grey and black solar pool skimmer floating on a still infinity pool at sunset, its solar panel facing up and fallen leaves being drawn into its intake, with a modern house and palm trees beyond and the words Solar Skimmers set over the water.",
     altTextStatus: "approved",
     schema: ORIGINAL_SCHEMA,
-    depictsRealProduct: true,
-    notes: "Four owner-supplied listing images on labelled cards over the site background. The Aiper card is a crop of an Aiper panel with its headline text removed; the other three are the makers' own product photographs.",
+    depictsRealProduct: false,
+    notes: "Owner-supplied illustration of a generic skimmer, not a picture of any one product, cropped to 16:9 with the page title set over it. Title text is our own.",
   },
 ];
 

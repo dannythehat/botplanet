@@ -576,7 +576,7 @@ export const EDITORIAL: Record<string, EditorialContent> = {
     image: {
       src: "/media/editorial/best-solar-pool-skimmers.webp",
       alt:
-        "Four solar pool skimmers on labelled cards: the Aiper EcoSurfer S2, the Beatbot iSkim, the BRINBO SK01 beside its app and the Betta SE Plus.",
+        "A solar pool skimmer floating on a still pool at sunset, drawing fallen leaves into its intake, with the words Solar Skimmers over the water.",
       focal: "50% 50%",
     },
     prose: "best-solar-pool-skimmers",
