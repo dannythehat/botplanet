@@ -63,18 +63,34 @@ side-by-side comparison table. A "where to buy" strip. Related robots as cards w
 button. The FAQ. Meta tags, Open Graph, canonical, breadcrumbs, and Article, ImageObject, ItemList
 and FAQ schema, with Article dated from `dates.published`.
 
+## Pictures that are not made yet
+
+A page can be built before its pictures exist. The hero shows a correctly sized BotPlanet placeholder
+carrying the page's short title, and a product with no picture shows the generic robot silhouette, so
+nothing breaks and nothing jumps when the real picture arrives. In the page file set `hero.desktop` to
+`null`.
+
+* `npm run page:images -- <slug>` lists every picture the page needs, which are ready and which are
+  pending, and the file name to give each one.
+* Drop finished pictures in `docs/image-inbox/<slug>/` (made by `page:new`) and commit them to `main`.
+* While any picture is pending the page must be noindex (`"index": false`). The test fails otherwise, so
+  an unfinished page never reaches search results.
+
 ## What a page file cannot contain, and why
 
 * **Prices.** A price typed into a file is stale from the day it is committed. Prices come from the
   price service with the date they were read.
-* **Ratings.** We do not publish stars we did not collect.
+* **Our own ratings or scores.** We do not publish stars we did not collect. Amazon's rating is shown on
+  picks and in the glance table, but it comes from `content/commerce/amazon-ratings.ts` with the day it
+  was read, is labelled as Amazon's, is never put in structured data, and expires after 120 days.
 * **Affiliate links.** The page names a product. The buy button comes from that product's redirect key.
   A page cannot name a URL.
 
 ## Standing rules
 
-* Never invent a price, a rating, a spec or a warranty. Where the maker is silent the page says
-  "Not stated".
+* Never invent a price, a rating, a spec or a warranty. Where a figure is not known, leave it out.
+  Do not print gap labels ("Not stated", "Not disclosed", "Not published") in a table, a card or a
+  pros-and-cons list. A "What to know" box appears only when there is a real downside to put in it.
 * A claim from a maker's listing is written as the maker's claim, in the text and in the picture's alt text.
 * Plain English. See `BANNED_PHRASES` in `rules.ts`, and write the way you would say it aloud.
 * Older pages must link to every new page. Add the entry to `RETROFITTED_INBOUND`.

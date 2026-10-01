@@ -40,8 +40,8 @@ export const PickSchema = z.object({
   not_for: z.string().min(20),
   /** Two to four things in its favour. Say whose claim it is when it is the maker's. */
   pros: z.array(z.string().min(5)).min(2).max(4),
-  /** One to three things to know before buying. Required for the same reason as not_for. */
-  cons: z.array(z.string().min(5)).min(1).max(3),
+  /** Real downsides only, up to three. Leave it empty rather than fill it: a list of gaps ("not published") is filler, not a downside. */
+  cons: z.array(z.string().min(5)).max(3).default([]),
 });
 
 export const GlanceSchema = z
@@ -86,16 +86,26 @@ export const BestOfPageSchema = z.object({
     published: isoDate,
     reviewed: isoDate,
   }),
-  hero: z.object({
-    desktop: mediaPath,
-    /** Optional until a portrait crop exists; the template falls back to desktop. */
-    mobile: mediaPath.nullable().default(null),
-    alt: z.string().min(40, "describe the picture in a full sentence"),
-    focal: z.string().regex(/^\d{1,3}% \d{1,3}%$/).default("50% 50%"),
-    /** The words set on the picture itself, when the generator put any there. */
-    headline: z.string().max(40).nullable().default(null),
-    source: z.string().min(5, "say who made or supplied the picture"),
-  }),
+  hero: z
+    .object({
+      /** null until the picture exists: the template then draws a BotPlanet placeholder at the hero size. */
+      desktop: mediaPath.nullable().default(null),
+      /** Optional until a portrait crop exists; the template falls back to desktop. */
+      mobile: mediaPath.nullable().default(null),
+      /** Required once there is a picture. */
+      alt: z.string().default(""),
+      focal: z.string().regex(/^\d{1,3}% \d{1,3}%$/).default("50% 50%"),
+      /** The words set on the picture itself, and on the placeholder until then. */
+      headline: z.string().min(3).max(40),
+      /** Say who made or supplied the picture. Required once there is one. */
+      source: z.string().default(""),
+    })
+    .superRefine((h, ctx) => {
+      if (h.desktop) {
+        if (h.alt.length < 40) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ["alt"], message: "describe the picture in a full sentence" });
+        if (h.source.length < 5) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ["source"], message: "say who made or supplied the picture" });
+      }
+    }),
   /** Markdown file in src/articles/, without the extension. */
   prose: slug,
   layout: z

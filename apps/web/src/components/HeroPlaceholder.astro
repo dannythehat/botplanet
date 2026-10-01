@@ -1,0 +1,79 @@
+---
+/* ============================================================
+   BotPlanet — the hero placeholder.
+
+   Stands in for a page's hero picture until the real one is made, at EXACTLY the
+   hero's shape (1672 x 941), so the page lays out the same before and after and
+   nothing jumps when the picture arrives. It carries the page's own short title so
+   it reads as a deliberate panel, not a broken image.
+
+   It is drawn in CSS, not a file, so there is nothing to cache, nothing to
+   register and nothing to forget to delete. A page using it must be noindex (the
+   page test enforces this): an unfinished page does not belong in search results.
+   ============================================================ */
+import RobotSilhouette from "./RobotSilhouette.astro";
+
+interface Props {
+  /** The short title set on the panel, the same words the real hero would carry. */
+  headline: string;
+  kicker?: string;
+}
+const { headline, kicker } = Astro.props;
+---
+
+<figure class="bp-hero-ph" role="img" aria-label={`Picture for ${headline} coming soon`}>
+  <div class="bp-hero-ph__art" aria-hidden="true"><RobotSilhouette variant={1} /></div>
+  <figcaption class="bp-hero-ph__text">
+    {kicker && <span class="bp-hero-ph__kicker">{kicker}</span>}
+    <span class="bp-hero-ph__title">{headline}</span>
+    <span class="bp-hero-ph__soon">Picture coming soon</span>
+  </figcaption>
+</figure>
+
+<style>
+  .bp-hero-ph {
+    position: relative;
+    margin: 0 0 var(--space-7);
+    border-radius: var(--radius-lg, 14px);
+    overflow: hidden;
+    aspect-ratio: 1672 / 941;
+    background:
+      radial-gradient(120% 90% at 85% 10%, rgba(61, 142, 240, 0.22), transparent 55%),
+      linear-gradient(160deg, #0d1218, #070a0e 70%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .bp-hero-ph__art {
+    position: absolute;
+    right: 6%;
+    bottom: 8%;
+    width: 38%;
+    opacity: 0.35;
+  }
+  .bp-hero-ph__art :global(svg) { width: 100%; height: auto; }
+  .bp-hero-ph__text {
+    position: absolute;
+    left: clamp(1.2rem, 4vw, 3.6rem);
+    bottom: clamp(1.2rem, 5vw, 4rem);
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .bp-hero-ph__kicker {
+    font-family: var(--font-mono);
+    font-size: clamp(0.6rem, 1.4vw, 0.85rem);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #9fd0ff;
+  }
+  .bp-hero-ph__title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.7rem, 6vw, 4.2rem);
+    line-height: 1.02;
+    color: #fff;
+  }
+  .bp-hero-ph__soon {
+    font-size: clamp(0.7rem, 1.5vw, 0.95rem);
+    color: var(--text-tertiary);
+  }
+</style>

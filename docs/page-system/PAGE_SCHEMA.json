@@ -89,8 +89,16 @@
           "type": "object",
           "properties": {
             "desktop": {
-              "type": "string",
-              "pattern": "^\\/media\\/[a-z0-9\\-/._]+\\.webp$"
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^\\/media\\/[a-z0-9\\-/._]+\\.webp$"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
             },
             "mobile": {
               "anyOf": [
@@ -106,7 +114,7 @@
             },
             "alt": {
               "type": "string",
-              "minLength": 40
+              "default": ""
             },
             "focal": {
               "type": "string",
@@ -114,26 +122,17 @@
               "default": "50% 50%"
             },
             "headline": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "maxLength": 40
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "default": null
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 40
             },
             "source": {
               "type": "string",
-              "minLength": 5
+              "default": ""
             }
           },
           "required": [
-            "desktop",
-            "alt",
-            "source"
+            "headline"
           ],
           "additionalProperties": false
         },
@@ -201,8 +200,8 @@
                   "type": "string",
                   "minLength": 5
                 },
-                "minItems": 1,
-                "maxItems": 3
+                "maxItems": 3,
+                "default": []
               }
             },
             "required": [
@@ -210,8 +209,7 @@
               "award",
               "why",
               "not_for",
-              "pros",
-              "cons"
+              "pros"
             ],
             "additionalProperties": false
           },

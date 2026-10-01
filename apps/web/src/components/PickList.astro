@@ -29,6 +29,7 @@
 
 import SectionHead from "./SectionHead.astro";
 import ProductImage from "./ProductImage.astro";
+import { readOnLabel, type AmazonRating } from "../content/commerce/amazon-ratings";
 import type { EditorialPick } from "../content/editorial";
 
 export interface RenderedPick extends EditorialPick {
@@ -58,6 +59,8 @@ export interface RenderedPick extends EditorialPick {
   categorySlug?: string;
   /** Active offer's redirect key, when the product has one. Never a price. */
   redirectKey?: string | null;
+  /** Amazon's own rating for the listing, with the day it was read. Not ours; labelled as Amazon's. */
+  amazonRating?: AmazonRating;
   /** Stable product id, so the card can show the product's picture from the media registry. */
   productId?: string;
 }
@@ -85,7 +88,10 @@ const doesLabel = (p: RenderedPick): string =>
    apply. */
 const ratedFor = (p: RenderedPick): string | null => {
   if (p.categorySlug && DOES_NOT_CLEAN.has(p.categorySlug)) return null;
-  return /not disclosed/i.test(p.poolSize) ? p.poolSize : p.poolSize;
+  /* "Rated for: Not disclosed" on every card read like a star rating that did not
+     exist. The chip is the pool-size limit the maker states, called "Suits up to",
+     and it is simply left out when the maker states none. */
+  return /not disclosed/i.test(p.poolSize) ? null : p.poolSize;
 };
 ---
 
@@ -112,15 +118,22 @@ const ratedFor = (p: RenderedPick): string | null => {
 
           <ul class="bp-picks__chips" aria-label={`${p.name} at a glance`}>
             <li><span>{doesLabel(p)}</span>{p.cleans}</li>
+            {p.amazonRating && (
+              <li class="bp-picks__stars" title={`Amazon's rating for this listing, read ${readOnLabel(p.amazonRating.readOn)}`}>
+                <span>Amazon rating</span>
+                <b><i aria-hidden="true">★</i> {p.amazonRating.rating.toFixed(1)}</b>
+                <em>{p.amazonRating.ratingsLabel} ratings · read {readOnLabel(p.amazonRating.readOn)}</em>
+              </li>
+            )}
             <li><span>Power</span>{p.power}</li>
-            {ratedFor(p) && <li><span>Rated for</span>{ratedFor(p)}</li>}
+            {ratedFor(p) && <li><span>Suits up to</span>{ratedFor(p)?.replace(/^Up to /, "")}</li>}
             <li><span>Price band</span>{p.band}</li>
           </ul>
 
           <p class="bp-picks__why">{p.why}</p>
 
           {(p.pros?.length || p.cons?.length) && (
-            <div class="bp-picks__proscons">
+            <div class:list={["bp-picks__proscons", !(p.cons?.length) && "is-single"]}>
               {p.pros?.length ? (
                 <div class="bp-picks__pc bp-picks__pc--pro">
                   <h4>What is good</h4>
@@ -285,6 +298,9 @@ const ratedFor = (p: RenderedPick): string | null => {
     font-size: 0.92rem;
     color: var(--cs-hi);
   }
+  .bp-picks__stars b { font-size: 1.05rem; color: var(--cs-hi); }
+  .bp-picks__stars i { color: #f5b942; font-style: normal; }
+  .bp-picks__stars em { font-style: normal; font-size: 0.72rem; color: var(--text-tertiary); }
   .bp-picks__chips li span {
     font-family: var(--font-mono);
     font-size: 0.6rem;
@@ -302,6 +318,7 @@ const ratedFor = (p: RenderedPick): string | null => {
   @media (min-width: 700px) {
     .bp-picks__proscons { grid-template-columns: 1fr 1fr; }
   }
+  .bp-picks__proscons.is-single { grid-template-columns: 1fr; }
   .bp-picks__pc {
     padding: 0.9rem 1rem 1rem;
     border-radius: 14px;

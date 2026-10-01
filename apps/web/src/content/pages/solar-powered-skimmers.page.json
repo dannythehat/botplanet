@@ -48,9 +48,7 @@
         "Twin salt chlorine tolerant motors, Betta says"
       ],
       "cons": [
-        "No app",
-        "The 30 hour runtime is Betta's own figure",
-        "Skims the surface only, never the floor"
+        "No app"
       ]
     },
     {
@@ -64,11 +62,7 @@
         "150 micron filter with a leak-proof baffle, Aiper says",
         "App with over-the-air upgrades"
       ],
-      "cons": [
-        "Basket volume and warranty are not published",
-        "The 35 hour battery is Aiper's own figure",
-        "Adapter charge time is not stated"
-      ]
+      "cons": []
     },
     {
       "product": "beatbot-iskim",
@@ -82,9 +76,7 @@
         "Listed as saltwater-safe"
       ],
       "cons": [
-        "No runtime in hours is given",
-        "Sold in several versions, so check the title",
-        "Warranty and weight are not stated"
+        "Sold in several versions, so check the title"
       ]
     },
     {
@@ -99,9 +91,7 @@
         "Adjustable anti-stuck bars underneath"
       ],
       "cons": [
-        "A new brand with 28 ratings",
-        "Runtime, basket size and warranty are not published",
-        "Saltwater use is not stated"
+        "A new brand with only 28 ratings"
       ]
     }
   ],
@@ -114,48 +104,38 @@
   "glance": {
     "before_heading_id": "saltwater-and-the-app",
     "columns": [
-      "Runtime claim",
       "Basket or mesh",
       "Sensing",
-      "Adapter charge",
       "App",
       "Evidence"
     ],
     "rows": {
       "betta-se-plus": [
-        "30 hours",
         "200 micron mesh",
         "Ultrasonic radar",
-        "3.5 hours",
         "No",
         "Manufacturer page and manual"
       ],
       "aiper-ecosurfer-s2": [
-        "35 hours",
         "150 micron mesh",
         "Two dToF sensors",
-        "Not stated",
         "Yes",
-        "Listing"
+        "Amazon listing"
       ],
       "beatbot-iskim": [
-        "Not stated",
-        "9 litres",
+        "9 litre basket",
         "Dual ultrasonic",
-        "Not stated",
         "Yes",
-        "Listing"
+        "Amazon listing"
       ],
       "brinbo-sk01": [
-        "Not stated",
-        "Large, no figure",
+        "Large basket",
         "Ultrasonic",
-        "2.5 hours",
         "Yes",
-        "Listing"
+        "Amazon listing"
       ]
     },
-    "note": "Every figure is the maker's own claim. “Not stated” means we did not find it in what we read, and the review of each machine says the same."
+    "note": "Every figure is the maker's own claim. Amazon's rating is Amazon's, with the date we read it."
   },
   "buy_strip": {
     "heading": "Where to buy the four",

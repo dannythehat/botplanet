@@ -27,6 +27,7 @@ import { redirectKeysByProduct } from "./catalogue-redirects";
 import type { RenderedPick } from "../components/PickList.astro";
 import type { EditorialContent } from "../content/editorial";
 import { injectFigures } from "./review-figures";
+import { ratingFor } from "../content/commerce/amazon-ratings";
 
 /* Compiled at build time, the same way review prose is. Eager, because there
    are three of them and a lazy import would buy nothing. */
@@ -115,6 +116,7 @@ export async function buildEditorialPage(
     picks.push({
       ...pick,
       productId: product.id,
+      amazonRating: ratingFor(product.slug),
       name: row.name,
       href: row.href,
       band: row.band,

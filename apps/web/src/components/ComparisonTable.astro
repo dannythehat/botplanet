@@ -123,7 +123,7 @@ const COLUMNS = [sizeLabel, typeLabel, "Cleans", "Power", "Price band"];
             </th>
 
             <td data-label={sizeLabel}>
-              <span class:list={["bp-cmp__figure", r.poolSize === NOT_DISCLOSED && "is-unknown"]}>{r.poolSize}</span>
+              <span class:list={["bp-cmp__figure", r.poolSize === NOT_DISCLOSED && "is-unknown"]} title={r.poolSize === NOT_DISCLOSED ? "The maker does not state a size" : undefined}>{r.poolSize === NOT_DISCLOSED ? "—" : r.poolSize}</span>
             </td>
 
             <td data-label={typeLabel}>

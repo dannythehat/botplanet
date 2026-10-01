@@ -4,6 +4,7 @@
  *   npm run page:new     -- best-of <slug>       start a draft from the template
  *   npm run page:check   -- <draft-or-page.json> list every problem with a page file
  *   npm run page:publish -- <slug>               move a passing draft into the site
+ *   npm run page:images  -- <slug>               list which pictures are ready and which are still placeholders
  *   npm run page:schema                          regenerate docs/page-system/PAGE_SCHEMA.json
  *
  * Drafts live in apps/web/src/content/pages-drafts/ where the site never loads them,
@@ -13,6 +14,7 @@
 import { copyFileSync, existsSync, mkdirSync, readFileSync, renameSync, writeFileSync } from "node:fs";
 import { zodToJsonSchema } from "zod-to-json-schema";
 import { BestOfPageSchema } from "../apps/web/src/page-system/schema";
+import { imageSlots } from "../apps/web/src/page-system/images";
 
 const WEB = "apps/web/src";
 const DRAFTS = `${WEB}/content/pages-drafts`;
@@ -45,8 +47,27 @@ if (cmd === "schema") {
   const md = `${DRAFTS}/${slug}.md`;
   if (existsSync(json)) throw new Error(`${json} already exists`);
   copyFileSync(`${WEB}/page-system/templates/best-of.page.json`, json);
+  mkdirSync(`docs/image-inbox/${slug}`, { recursive: true });
+  writeFileSync(
+    `docs/image-inbox/${slug}/README.md`,
+    `# Image inbox: ${slug}\n\nDrop this page's pictures here and commit them to main. Nothing in this folder is published; the pictures are moved into the site.\n\nUntil they exist the page shows BotPlanet placeholders and has to stay noindex.\n\nRun \`npm run page:images -- ${slug}\` for the list of pictures this page needs, and the file name to give each.\n`,
+  );
   writeFileSync(md, "## TODO First section\n\nWrite at least 700 words in plain English, with at least five links to other BotPlanet pages.\n");
   console.log(`created ${json}\ncreated ${md}\nnext: fill them in, then  npm run page:check -- ${json}`);
+} else if (cmd === "images") {
+  const slug = rest[0];
+  const file = [`${DRAFTS}/${slug}.page.json`, `${PAGES}/${slug}.page.json`].find((f) => slug && existsSync(f));
+  if (!file) throw new Error(`no page file for "${slug}" in ${DRAFTS} or ${PAGES}`);
+  const parsed = BestOfPageSchema.safeParse(JSON.parse(readFileSync(file, "utf8")));
+  if (!parsed.success) {
+    console.log("The page file does not pass the schema yet, so its picture list cannot be worked out. Run page:check first.");
+    process.exit(1);
+  }
+  const slots = imageSlots(parsed.data);
+  console.log(`Pictures for ${file}\n`);
+  for (const sl of slots) console.log(`  ${sl.ready ? "READY  " : "PENDING"}  ${sl.slot.padEnd(34)} ${sl.ready ? "" : `name it "${sl.inboxName}" in docs/image-inbox/${slug}/\n           ${sl.need}`}`);
+  const pending = slots.filter((x) => !x.ready).length;
+  console.log(`\n${pending === 0 ? "Every picture is in." : `${pending} still pending. Until they are made the page shows placeholders and must have "index": false.`}`);
 } else if (cmd === "check") {
   if (!rest[0]) throw new Error("usage: page:check -- <file>");
   process.exit(check(rest[0]) ? 0 : 1);
@@ -71,6 +92,6 @@ if (cmd === "schema") {
   4. inbound links from older pages: RETROFITTED_INBOUND in content/internal-links.ts
   5. npm test`);
 } else {
-  console.error("commands: new | check | publish | schema");
+  console.error("commands: new | check | images | publish | schema");
   process.exit(1);
 }

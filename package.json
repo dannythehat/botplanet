@@ -29,7 +29,8 @@
     "page:check": "tsx scripts/page-tool.ts check",
     "page:publish": "tsx scripts/page-tool.ts publish",
     "page:schema": "tsx scripts/page-tool.ts schema",
-    "page:hero": "node scripts/page-hero.mjs"
+    "page:hero": "node scripts/page-hero.mjs",
+    "page:images": "tsx scripts/page-tool.ts images"
   },
   "devDependencies": {
     "@types/node": "^22.10.0",

@@ -35,6 +35,7 @@ import type { RenderedPick } from "./PickList.astro";
 import ComparisonTable from "./ComparisonTable.astro";
 import type { ComparisonRow } from "./ComparisonTable.astro";
 import ArticleContents from "./ArticleContents.astro";
+import HeroPlaceholder from "./HeroPlaceholder.astro";
 import BotMatchCta from "./BotMatchCta.astro";
 import FaqList from "./FaqList.astro";
 import ArticleFooter from "./ArticleFooter.astro";
@@ -103,6 +104,10 @@ const parts: { html: string; slot: number | null }[] = [];
   <h1 class="bp-ed__h1">{article.title}</h1>
   <p class="bp-ed__stand">{article.standfirst}</p>
 </header>
+
+{!article.image?.src && article.heroPlaceholder && (
+  <HeroPlaceholder headline={article.heroPlaceholder.headline} kicker={article.eyebrow} />
+)}
 
 {article.image?.src && (
   <figure class:list={["bp-ed__hero", article.heroMobileSrc && "bp-ed__hero--portrait"]}>

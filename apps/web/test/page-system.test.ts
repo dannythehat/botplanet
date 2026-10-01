@@ -18,6 +18,7 @@ import { existsSync, readFileSync } from "node:fs";
 import sharp from "sharp";
 import { describe, expect, it } from "vitest";
 import { PAGE_FILES } from "../src/page-system/load";
+import { pendingImageSlots } from "../src/page-system/images";
 import { BestOfPageSchema } from "../src/page-system/schema";
 import {
   BANNED_PHRASES,
@@ -91,8 +92,9 @@ for (const page of PAGE_FILES) {
       expect(r!.inSitemap).toBe(page.index);
     });
 
-    it("has a hero at the one allowed size, with a registry record and real alt text", () => {
+    it("has a hero at the one allowed size, with a registry record and real alt text, or a placeholder", () => {
       return (async () => {
+        if (!page.hero.desktop) return; // placeholder: covered by the noindex rule below
         const f = `${PUBLIC}${page.hero.desktop}`;
         expect(existsSync(f), `missing ${f}`).toBe(true);
         const m = await sharp(f).metadata();
@@ -111,6 +113,13 @@ for (const page of PAGE_FILES) {
           expect(MEDIA_ASSETS.find((a) => a.src === page.hero.mobile)).toBeDefined();
         }
       })();
+    });
+
+    it("is noindex for as long as any of its pictures is still a placeholder", () => {
+      const pending = pendingImageSlots(page);
+      if (pending.length > 0) {
+        expect(page.index, `pictures still needed: ${pending.map((p) => p.slot).join(", ")}. Set index to false until they exist.`).toBe(false);
+      }
     });
 
     it("has SEO text inside the search-result limits, and unique across the site", () => {

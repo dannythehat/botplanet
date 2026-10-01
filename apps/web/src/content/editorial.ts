@@ -108,6 +108,8 @@ export interface EditorialContent {
   contentsFirst?: boolean;
   /** Portrait hero for phones. Falls back to `image` when absent. */
   heroMobileSrc?: string;
+  /** Set when the real hero is not made yet: the template draws a correctly sized BotPlanet panel with this title. */
+  heroPlaceholder?: { headline: string };
   /** Centre the header and the reading column instead of hanging them from the left edge. */
   centered?: boolean;
   /** Leave out the generic side-by-side table, for a page whose own table says more. */

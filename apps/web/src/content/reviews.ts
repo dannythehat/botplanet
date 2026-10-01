@@ -1286,14 +1286,12 @@ export const REVIEWS: Record<string, ReviewContent> = {
         rows: [
           { label: "Power type", value: "Solar panel and battery, plus wall adapter" },
           { label: "Battery life", value: "Up to 35 hours", note: "Aiper's claim, on its listing panel. Not measured here." },
-          { label: "Charge time", value: null, note: "Not stated in what we read." },
         ],
       },
       {
         heading: "Pool compatibility",
         rows: [
           { label: "Pool type", value: "Above-ground and in-ground" },
-          { label: "Max pool size", value: null, note: "Not stated in what we read." },
         ],
       },
       {
@@ -1309,13 +1307,11 @@ export const REVIEWS: Record<string, ReviewContent> = {
         heading: "Control and support",
         rows: [
           { label: "App", value: "Yes, with over-the-air upgrades", note: "From the listing title." },
-          { label: "Warranty", value: null, note: "Not stated in what we read." },
         ],
       },
       {
         heading: "Handling",
         rows: [
-          { label: "Weight", value: null, note: "Not stated in what we read." },
         ],
       },
     ],
@@ -1393,14 +1389,12 @@ export const REVIEWS: Record<string, ReviewContent> = {
           { label: "Power type", value: "Solar panel and battery" },
           { label: "Solar panel", value: "24 W", note: "Beatbot's figure." },
           { label: "Battery", value: "10,000 mAh", note: "Beatbot's figure." },
-          { label: "Runtime", value: null, note: "Beatbot says 24/7 cleaning but gives no hours in what we read." },
         ],
       },
       {
         heading: "Pool compatibility",
         rows: [
           { label: "Pool type", value: "Above-ground and in-ground" },
-          { label: "Max pool size", value: null, note: "Not stated in what we read." },
         ],
       },
       {
@@ -1416,13 +1410,11 @@ export const REVIEWS: Record<string, ReviewContent> = {
         heading: "Control and support",
         rows: [
           { label: "App", value: "Yes: auto-park and one-tap parking", note: "Beatbot's description." },
-          { label: "Warranty", value: null, note: "Not stated in what we read." },
         ],
       },
       {
         heading: "Handling",
         rows: [
-          { label: "Weight", value: null, note: "Not stated in what we read." },
         ],
       },
     ],
@@ -1494,14 +1486,12 @@ export const REVIEWS: Record<string, ReviewContent> = {
         rows: [
           { label: "Power type", value: "Solar panel and battery, plus wall adapter" },
           { label: "Adapter charge time", value: "2.5 hours", note: "BRINBO's figure." },
-          { label: "Runtime", value: null, note: "Not stated in what we read." },
         ],
       },
       {
         heading: "Pool compatibility",
         rows: [
           { label: "Pool type", value: "Described as ideal for most pool surfaces" },
-          { label: "Max pool size", value: null, note: "Not stated in what we read." },
         ],
       },
       {
@@ -1518,13 +1508,11 @@ export const REVIEWS: Record<string, ReviewContent> = {
         rows: [
           { label: "App", value: "Yes", note: "Battery, temperature, park and pause shown in BRINBO's panel." },
           { label: "Speeds", value: "Two, set by one button or the app", note: "BRINBO's description." },
-          { label: "Warranty", value: null, note: "Not stated in what we read." },
         ],
       },
       {
         heading: "Handling",
         rows: [
-          { label: "Weight", value: null, note: "Not stated in what we read." },
         ],
       },
     ],

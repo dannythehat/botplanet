@@ -19,7 +19,7 @@ Every image needs:
 3. Derivatives, from `npm run gen:derivatives`, and `npm run gen:media-mapping`.
 4. No raw PNG or JPEG over 200 KB anywhere in the source (a test enforces this).
 
-Until a product has a real picture, the site shows a generic silhouette. It never shows a broken image.
+Until a picture exists the site shows a placeholder, never a broken image: the generic silhouette for a product, and a BotPlanet panel at the hero's exact shape, carrying the page's title, for a hero. A page showing any placeholder stays noindex. `npm run page:images -- <slug>` lists what is still needed.
 
 Pictures a person supplies are published, with any inaccuracy corrected in the caption.
 
