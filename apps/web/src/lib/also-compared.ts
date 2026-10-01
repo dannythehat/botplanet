@@ -36,6 +36,7 @@ import { REVIEWS, type ReviewContent } from "../content/reviews";
 import { ROUTES } from "../content/routes";
 import { ANTI_RECOMMENDED, NO_OFFER_BY_DESIGN, PRODUCT_ID } from "../content/products";
 import { productNameOf, specValue } from "./decision-tables";
+import { consolidatedDestination } from "../content/url-consolidation";
 
 /** True when we refuse the sale of this product in writing. */
 function isRefused(slug: string): boolean {
@@ -185,11 +186,20 @@ function nearestSibling(r: ReviewContent): AlsoLink | null {
 }
 
 function categoryCompare(r: ReviewContent): AlsoLink | null {
+  /* A comparison of one machine is not a comparison. This used to offer "every
+     machine in the category side by side" for a category holding a single
+     review, which the Grillbot page said and which was not true. */
+  const reviewsInCategory = Object.values(REVIEWS).filter((x) => x.categorySlug === r.categorySlug).length;
+  if (reviewsInCategory < 2) return null;
   const path = `/compare/${r.categorySlug}/`;
   const route = ROUTES.find((x) => x.path === path && x.status === "live");
   if (!route) return null;
   return {
-    href: path,
+    /* /compare/<category>/ 301s to the hub since the URL consolidation, because
+       the hub owns the comparison table. The block still asks "does this
+       category have a comparison?" of the registry, but links where the reader
+       will actually land — a link to the redirect costs a hop per click. */
+    href: consolidatedDestination(path) ?? path,
     title: route.title ?? "Compare the range",
     because: "Every machine in the category on the same columns, side by side.",
   };
@@ -225,7 +235,7 @@ function relatedCompare(categorySlug: string): AlsoLink | null {
   const route = ROUTES.find((x) => x.path === path && x.status === "live");
   if (!route) return null;
   return {
-    href: path,
+    href: consolidatedDestination(path) ?? path,
     title: route.title ?? "Compare the related range",
     because: "The closest category we hold a full catalogue for, side by side on the same columns.",
   };
@@ -273,6 +283,20 @@ export function alsoCompared(r: ReviewContent): AlsoLink[] {
         out.push(link);
       }
     }
+  }
+
+  /* LAST RESORT, and named for what it is. A category's only review has no
+     sibling, no real comparison and a hub that is the same page as the other
+     fallback, so the block can still end up with one link. The method page is
+     the honest second one: it explains how every claim on this page was
+     labelled, which is the one thing a reader of a lone review is most likely
+     to want to check. */
+  if (out.length < 2 && !seen.has("/review-methodology/")) {
+    out.push({
+      href: "/review-methodology/",
+      title: "How we review robots",
+      because: "Every claim on this page is labelled researched, observed or tested, and this explains what each label costs us to earn.",
+    });
   }
   return out.slice(0, 3);
 }
