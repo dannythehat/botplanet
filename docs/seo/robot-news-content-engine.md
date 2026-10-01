@@ -93,3 +93,31 @@ policy we can state. Each entry has our own picture, a dated "added" stamp, and 
 * The source shortlist, agreed with the owner.
 * Then the templates (news brief, explainer, arrivals entry), then the arrivals list with its first products,
   then the first posts by hand, then the automation.
+
+---
+
+## Decisions so far (owner, 1 October 2026)
+
+* Cadence: one or two articles a day, each approved before it publishes.
+* Images: OpenAI's image API, with the owner's key. The key lives in a private file outside the repo while we
+  work, and in a GitHub Actions secret if a scheduled job ever runs. Never in a file or a commit.
+* Every article names its sources, in the text and in a Sources list.
+* Every article ends with a "Where to buy" block built from a product list. A product we hold gets our buy button.
+  A product we do not hold gets the best link we have: our affiliate link where a programme exists, otherwise the
+  maker's or retailer's own page with no commission. Each also links to our own page for it.
+
+## News sources checked (feeds reachable from our build environment, 1 October 2026)
+
+Working feeds: The Robot Report, IEEE Spectrum Robotics, TechCrunch Robotics, Interesting Engineering,
+humanoid.guide, Engadget. The Verge's robots feed answered with almost nothing and needs another look.
+Maker pages reachable: 1X, Unitree, Figure. Boston Dynamics' newsroom did not answer.
+These are for finding stories and checking facts. Nothing is copied from them.
+
+## Affiliate availability: not confirmed yet
+
+* RobotShop is a Unitree distributor (R1 on pre-order there). A search found no stated affiliate programme.
+* No affiliate or referral programme for 1X NEO turned up.
+* Unitree sells direct and through resellers; no programme confirmed.
+* This has to be checked inside the networks the owner holds (Awin, CJ, Impact, Rakuten, ShareASale, FlexOffers)
+  by searching each for RobotShop, RoboStore, Unitree and the other sellers. Until a programme is confirmed,
+  those products are linked without commission.
