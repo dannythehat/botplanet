@@ -582,6 +582,41 @@ export const REVIEWS: Record<string, ReviewContent> = {
         src: "/media/reviews/betta-se-plus/fall-winter.webp",
         caption: "Betta's explanation of shorter autumn and winter runs: less sun, not a worn battery. It is plausible and unverified here.",
       },
+      {
+        afterHeading: "The Betta SE, and why these photographs are blue",
+        src: "/media/reviews/betta-se-plus/se-basket.webp",
+        caption: "The SE's removable basket, emptied by hand. The SE Plus has no dock either.",
+      },
+      {
+        afterHeading: "The Betta SE, and why these photographs are blue",
+        src: "/media/reviews/betta-se-plus/se-radar-uv.webp",
+        caption: "Betta's panel on ultrasonic radar and the UV-resistant body, on the SE.",
+      },
+      {
+        afterHeading: "The Betta SE, and why these photographs are blue",
+        src: "/media/reviews/betta-se-plus/se-motors.webp",
+        caption: "Betta's panel on the twin salt chlorine tolerant motors, on the SE. The SE Plus listing makes the same claim for its own motors.",
+      },
+      {
+        afterHeading: "The Betta SE, and why these photographs are blue",
+        src: "/media/reviews/betta-se-plus/se-exploded.webp",
+        caption: "An exploded view of the SE: the panel lifts away from the basket, and water flows in at the front and out at the back.",
+      },
+      {
+        afterHeading: "The Betta SE, and why these photographs are blue",
+        src: "/media/reviews/betta-se-plus/se-cordless-solar.webp",
+        caption: "Betta's panel on solar power, with the wireless remote. It shows the SE.",
+      },
+      {
+        afterHeading: "The Betta SE, and why these photographs are blue",
+        src: "/media/reviews/betta-se-plus/se-auto-clean.webp",
+        caption: "Betta's panel on automatic surface cleaning. It shows the SE.",
+      },
+      {
+        afterHeading: "The Betta SE, and why these photographs are blue",
+        src: "/media/reviews/betta-se-plus/se-front.webp",
+        caption: "The Betta SE in blue, from the front. This is the SE, not the SE Plus: Betta's own product photograph of the cheaper model.",
+      },
     ],
     /* Seller's own footage, hosted on Amazon — the URL carries
        amzn1.ive.seller.video. Share token stripped. */

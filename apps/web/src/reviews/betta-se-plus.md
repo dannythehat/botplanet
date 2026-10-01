@@ -132,6 +132,12 @@ one to buy.
 
 ---
 
+## The Betta SE, and why these photographs are blue
+
+Betta also sells a cheaper machine called the Betta SE, and it is the one you will meet most often on Amazon: its listing is Amazon's Choice with 4.4 stars from 8,228 ratings. The SE Plus is the dearer one, and Betta's own page treats the two as separate models with separate manuals, so check which name is in the listing title before you buy.
+
+The pictures below are Betta's listing images for the SE, which is the blue machine. They show the SE, not the SE Plus. We use them because Betta's listings for both describe twin Salt Chlorine Tolerant motors, ultrasonic radar and a removable debris basket, and each caption says which machine is pictured.
+
 ## What we cannot tell you
 
 Written from published sources and no pool. Betta publishes less than most:

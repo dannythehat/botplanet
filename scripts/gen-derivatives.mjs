@@ -553,6 +553,14 @@ const SOURCES = [
   "/media/reviews/brinbo-sk01/ultrasonic.webp",
   "/media/reviews/brinbo-sk01/anti-stuck.webp",
   "/media/reviews/brinbo-sk01/two-modes.webp",
+  // 1 October 2026: Betta SE (base model) listing images.
+  "/media/reviews/betta-se-plus/se-front.webp",
+  "/media/reviews/betta-se-plus/se-auto-clean.webp",
+  "/media/reviews/betta-se-plus/se-cordless-solar.webp",
+  "/media/reviews/betta-se-plus/se-exploded.webp",
+  "/media/reviews/betta-se-plus/se-motors.webp",
+  "/media/reviews/betta-se-plus/se-radar-uv.webp",
+  "/media/reviews/betta-se-plus/se-basket.webp",
 ];
 
 const run = async () => {

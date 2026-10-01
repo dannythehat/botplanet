@@ -13683,5 +13683,214 @@
         "checksum": "sha256:ba2206e8d8ee87d46a73a95f1860f50b081208c7cd6146f5ad06887f3e4002eb"
       }
     ]
+  },
+  {
+    "source": "/media/reviews/betta-se-plus/se-front.webp",
+    "sourceWidth": 880,
+    "sourceHeight": 707,
+    "derivatives": [
+      {
+        "id": "media-reviews-betta-se-plus-se-front-webp-360",
+        "src": "/media/reviews/betta-se-plus/se-front-360w.webp",
+        "width": 360,
+        "height": 289,
+        "bytes": 7658,
+        "checksum": "sha256:a7582a007a3749f794a658cf0ee6dd4a95dbb1e551001011a637cf0ad30286f7"
+      },
+      {
+        "id": "media-reviews-betta-se-plus-se-front-webp-640",
+        "src": "/media/reviews/betta-se-plus/se-front-640w.webp",
+        "width": 640,
+        "height": 514,
+        "bytes": 19384,
+        "checksum": "sha256:1288a817e4df98c914900308d9831d750d792e2d7672d975681064c6f34e85aa"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/betta-se-plus/se-auto-clean.webp",
+    "sourceWidth": 1080,
+    "sourceHeight": 1080,
+    "derivatives": [
+      {
+        "id": "media-reviews-betta-se-plus-se-auto-clean-webp-360",
+        "src": "/media/reviews/betta-se-plus/se-auto-clean-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 29678,
+        "checksum": "sha256:3e2e6f32613fe64032da120b134dc660704ea19447754fd5e0d71f60a1686be2"
+      },
+      {
+        "id": "media-reviews-betta-se-plus-se-auto-clean-webp-640",
+        "src": "/media/reviews/betta-se-plus/se-auto-clean-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 73434,
+        "checksum": "sha256:4238e28e333dff1805ee04efb50c5d65ffb7f05df6e70d46f04c52e7127a3dc8"
+      },
+      {
+        "id": "media-reviews-betta-se-plus-se-auto-clean-webp-960",
+        "src": "/media/reviews/betta-se-plus/se-auto-clean-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 144750,
+        "checksum": "sha256:9db22dff3a9c8e408f1e9fe31a232ce9d25fdcdf425afa0024b492d80f9cfe22"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/betta-se-plus/se-cordless-solar.webp",
+    "sourceWidth": 1080,
+    "sourceHeight": 1080,
+    "derivatives": [
+      {
+        "id": "media-reviews-betta-se-plus-se-cordless-solar-webp-360",
+        "src": "/media/reviews/betta-se-plus/se-cordless-solar-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 22300,
+        "checksum": "sha256:fc61af97a5e2c90c0ae8e0272bf382d5fef8a1c0559e2cc7db14bf3745f72668"
+      },
+      {
+        "id": "media-reviews-betta-se-plus-se-cordless-solar-webp-640",
+        "src": "/media/reviews/betta-se-plus/se-cordless-solar-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 60852,
+        "checksum": "sha256:ba1ab6abf977f38a0ca95d16dce2a881866bdee71092a8e60deb39a4929804ca"
+      },
+      {
+        "id": "media-reviews-betta-se-plus-se-cordless-solar-webp-960",
+        "src": "/media/reviews/betta-se-plus/se-cordless-solar-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 134952,
+        "checksum": "sha256:5b1ee2092a6cfa72ca5dc4d06e35f2fa073489a1ecb2af3b86845be80399a4b1"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/betta-se-plus/se-exploded.webp",
+    "sourceWidth": 966,
+    "sourceHeight": 848,
+    "derivatives": [
+      {
+        "id": "media-reviews-betta-se-plus-se-exploded-webp-360",
+        "src": "/media/reviews/betta-se-plus/se-exploded-360w.webp",
+        "width": 360,
+        "height": 316,
+        "bytes": 14904,
+        "checksum": "sha256:b2903b2538538293d2d651d07175f85ec0f395a5204f758250a5684ffca4e4a1"
+      },
+      {
+        "id": "media-reviews-betta-se-plus-se-exploded-webp-640",
+        "src": "/media/reviews/betta-se-plus/se-exploded-640w.webp",
+        "width": 640,
+        "height": 562,
+        "bytes": 35844,
+        "checksum": "sha256:9208526b8177bf4ffda77844895b61c09c3bc5a8918eb6c6871ed7aeefacae9b"
+      },
+      {
+        "id": "media-reviews-betta-se-plus-se-exploded-webp-960",
+        "src": "/media/reviews/betta-se-plus/se-exploded-960w.webp",
+        "width": 960,
+        "height": 843,
+        "bytes": 67098,
+        "checksum": "sha256:ed3ce41e995678cf158a48b3caab931523baa660a2b3cd104d8ede2684425bff"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/betta-se-plus/se-motors.webp",
+    "sourceWidth": 1080,
+    "sourceHeight": 1080,
+    "derivatives": [
+      {
+        "id": "media-reviews-betta-se-plus-se-motors-webp-360",
+        "src": "/media/reviews/betta-se-plus/se-motors-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 16448,
+        "checksum": "sha256:ff0d6e25dd6d355a8c34530f968af932bb866723d83aa78454eb5db72201daeb"
+      },
+      {
+        "id": "media-reviews-betta-se-plus-se-motors-webp-640",
+        "src": "/media/reviews/betta-se-plus/se-motors-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 38526,
+        "checksum": "sha256:f23a5adac3fb5a361231e7642ee48483e0ebeba4e4a10770c4b955560bb07f5a"
+      },
+      {
+        "id": "media-reviews-betta-se-plus-se-motors-webp-960",
+        "src": "/media/reviews/betta-se-plus/se-motors-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 74676,
+        "checksum": "sha256:8653a4c03fb302cba9b8ace65e3c2bbd9b916bd1a7c1afddd48ca6aa98379469"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/betta-se-plus/se-radar-uv.webp",
+    "sourceWidth": 1080,
+    "sourceHeight": 1080,
+    "derivatives": [
+      {
+        "id": "media-reviews-betta-se-plus-se-radar-uv-webp-360",
+        "src": "/media/reviews/betta-se-plus/se-radar-uv-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 25144,
+        "checksum": "sha256:7dcc7c2ee81d8ea8879eb5feadff167733e36ab87069ed744b78db022bdf7cc8"
+      },
+      {
+        "id": "media-reviews-betta-se-plus-se-radar-uv-webp-640",
+        "src": "/media/reviews/betta-se-plus/se-radar-uv-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 64084,
+        "checksum": "sha256:c38eebd0be6074e1c2d215112f63b0129080e82be195e8dfba837a67d59344bf"
+      },
+      {
+        "id": "media-reviews-betta-se-plus-se-radar-uv-webp-960",
+        "src": "/media/reviews/betta-se-plus/se-radar-uv-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 128126,
+        "checksum": "sha256:fdc5d248560dbf3afcb392fb1c71b10e47317154594b754cbab698a31dabe07a"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/betta-se-plus/se-basket.webp",
+    "sourceWidth": 1080,
+    "sourceHeight": 1080,
+    "derivatives": [
+      {
+        "id": "media-reviews-betta-se-plus-se-basket-webp-360",
+        "src": "/media/reviews/betta-se-plus/se-basket-360w.webp",
+        "width": 360,
+        "height": 360,
+        "bytes": 19724,
+        "checksum": "sha256:caefaf74f53f9a5ccd484db8cf0d4788224d2c9cb7d9aec96c9b2f8803e10d4b"
+      },
+      {
+        "id": "media-reviews-betta-se-plus-se-basket-webp-640",
+        "src": "/media/reviews/betta-se-plus/se-basket-640w.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 45208,
+        "checksum": "sha256:f8ecaefb866959ac6a733acafff13aae7c0a3f57319862dc3a60c3348d050b55"
+      },
+      {
+        "id": "media-reviews-betta-se-plus-se-basket-webp-960",
+        "src": "/media/reviews/betta-se-plus/se-basket-960w.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 85072,
+        "checksum": "sha256:397db8aebecec81181fcb5fb68a4bdf77a058ac060d56d8177578fd9930fd5d1"
+      }
+    ]
   }
 ]
