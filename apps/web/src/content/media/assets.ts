@@ -6859,12 +6859,15 @@ export const BETTA_SE_ASSETS: MediaAssetRecord[] = [
    artwork is ever withdrawn. */
 export const MEDIA_ASSETS: MediaAssetRecord[] = [
   ...ORIGINAL_ASSETS,
+  /* Real photographs of the Betta SE Plus go ahead of the BotPlanet artwork for
+     it: both are depictions, the sort is stable, and a photograph the maker
+     published should win a tie against our own picture of the machine. */
+  ...SOLAR_SKIMMER_UPLOAD_ASSETS,
   ...OWNER_PRODUCT_ARTWORK,
   ...AUGUST_UPLOAD_ASSETS,
   ...CODING_UPLOAD_ASSETS,
   ...AUGUST_11_UPLOAD_ASSETS,
   ...YARBO_UPLOAD_ASSETS,
-  ...SOLAR_SKIMMER_UPLOAD_ASSETS,
   ...SOLAR_SKIMMER_NEW_ASSETS,
   ...BETTA_SE_ASSETS,
   ...REVIEW_FIGURE_ASSETS,

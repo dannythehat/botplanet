@@ -253,7 +253,7 @@
       "slug": "betta-se-plus",
       "canonicalUrl": "https://botplanet.io/robots/robotic-pool-cleaners/betta-se-plus/",
       "exactModel": "Betta SE Plus — Solar-Powered Robotic Pool Skimmer",
-      "heroAssetId": "art-betta-se-plus",
+      "heroAssetId": "betta-se-plus-photo-top",
       "supportingAssetIds": [
         "betta-se-plus-basket-photo",
         "fig-betta-se-plus-hero",
@@ -261,7 +261,7 @@
         "fig-betta-se-plus-sensors",
         "fig-betta-se-plus-debris-basket"
       ],
-      "renderedAssetId": "art-betta-se-plus",
+      "renderedAssetId": "betta-se-plus-photo-top",
       "renderedIsPlaceholder": false,
       "imageSource": "depiction — BotPlanet",
       "allowedPlacements": [
@@ -275,11 +275,11 @@
         "structured_data",
         "email"
       ],
-      "altText": "BotPlanet artwork for the Betta SE Plus — Solar-Powered Robotic Pool Skimmer: the solar-panelled surface skimmer floating on a leaf-strewn pool in a sunlit garden, with callouts for continuous surface cleaning, solar charging, dual charging and shallow-water safeguarding.",
+      "altText": "Front view of the blue and black Betta solar skimmer on a white background: a dark solar panel across the top, the Betta name on the front lip above the open intake, and two small blue propellers underneath.",
       "altTextStatus": "approved",
       "structuredDataImages": [
-        "/media/products/betta-se-plus.webp",
         "/media/reviews/betta-se-plus/photo-top.webp",
+        "/media/products/betta-se-plus.webp",
         "/media/reviews/betta-se-plus/hero.webp",
         "/media/reviews/betta-se-plus/twin-motors.webp",
         "/media/reviews/betta-se-plus/sensors.webp",

@@ -415,7 +415,10 @@ it("lists the missing target types honestly rather than inventing records", () =
 
 describe("public integration", () => {
   it("prefers owner artwork over the placeholder, and falls back when it is pulled", () => {
-    const id = [...ARTWORK_PRODUCT_IDS][0];
+    /* Not the Betta SE Plus: its real photographs deliberately outrank the BotPlanet
+       artwork for it (see the ordering note in MEDIA_ASSETS), so it no longer
+       resolves to an `art-` record. */
+    const id = [...ARTWORK_PRODUCT_IDS].find((i) => i !== "prod-betta-se-plus")!;
     const chosen = resolveImage(id, "listing_card")!;
     expect(chosen.assetId.startsWith("art-")).toBe(true);
     expect(chosen.bleed).toBe(true);

@@ -121,13 +121,15 @@ const parts: { html: string; slot: number | null }[] = [];
   </figure>
 )}
 
+<slot name="after-hero" />
+
 {/* A PAGE WHOSE PICKS ARE TALL puts its contents ahead of them. With four full
     pick panels the contents block sat 3,500px down a 13,000px page, which is
     halfway to nowhere for a reader who wanted to jump to a section. */}
 {article.contentsFirst && (
   <ArticleContents
     html={body}
-    before={picks.length > 0 ? [{ id: "picks", text: "The picks, and who each one is wrong for" }] : []}
+    before={picks.length > 0 ? [{ id: "picks", text: "Our picks, and who each one is not for" }] : []}
     extra={[
       ...(comparison.length > 1 ? [{ id: "compare", text: "Compare them side by side" }] : []),
       ...(article.extraContents ?? []),
@@ -139,8 +141,8 @@ const parts: { html: string; slot: number | null }[] = [];
   <PickList
     id="picks"
     eyebrow="The shortlist"
-    title="The picks, and who each one is wrong for"
-    intro="Every entry names the job it wins and the buyer it does not suit. Facts in each panel come from the catalogue record, not from the copy above it — where a manufacturer has not published a figure, the panel says so."
+    title="Our picks, and who each one is not for"
+    intro="Each pick says what it does best and who should buy something else instead. Where a maker has not published a figure, we say so rather than guess."
     picks={picks}
   />
 )}

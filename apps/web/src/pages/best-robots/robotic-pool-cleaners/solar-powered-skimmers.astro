@@ -101,6 +101,12 @@ const pageSchema = [
     comparison={comparison}
     splitAt={["saltwater-and-the-app"]}
   >
+    <nav slot="after-hero" class="sk-top" aria-label="Check prices on Amazon">
+      <span class="sk-top__label">Check price on Amazon</span>
+      {buyRows.map((r) => (
+        <a class="sk-top__btn" href={`/go/${r.redirectKey}`} rel="sponsored nofollow">{r.name}</a>
+      ))}
+    </nav>
     <SkimmerGlance slot="diagram-1" rows={comparison} />
     <Fragment slot="after-comparison">
       {buyRows.length > 0 && (
@@ -168,6 +174,38 @@ const pageSchema = [
 </Base>
 
 <style>
+  .sk-top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.6rem;
+    max-width: 68rem;
+    margin: 1.2rem auto 0;
+    padding: 0 1rem;
+  }
+  .sk-top__label {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    margin-right: 0.4rem;
+  }
+  .sk-top__btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.55rem 1rem;
+    border-radius: 999px;
+    border: 1px solid rgba(120, 176, 255, 0.55);
+    background: linear-gradient(180deg, #2f7fe4 0%, #1a55b4 100%);
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-decoration: none;
+  }
+  .sk-top__btn:hover { filter: brightness(1.1); }
+  .sk-top__btn:focus-visible { outline: 2px solid #dfe4ec; outline-offset: 2px; }
   .sk-buy,
   .sk-more {
     max-width: 68rem;
