@@ -127,7 +127,7 @@ const pageSchema = [
       <section class="bo-more" id="more-pool-robots" aria-labelledby="bo-more-h">
         <h2 id="bo-more-h" class="bo-h">{page.related.heading}</h2>
         <p class="bo-lede">{page.related.intro}</p>
-        <div class="grid grid--products">
+        <div class="grid grid--products bo-rel" style={`--rel-cols: ${floorRows.length % 3 === 0 ? 3 : 2}`}>
           {floorRows.map((p, i) => (
             <ProductCard
               href={productPath(p.slug, "robotic-pool-cleaners")}
@@ -278,6 +278,14 @@ const pageSchema = [
     margin: 0.9rem 0 0;
     font-size: 0.85rem;
     color: var(--text-secondary);
+  }
+  /* ROWS THAT ADD UP. Two or four cards sit two to a row, three sit three to a row,
+     so there is never a lone card left on a row of its own. */
+  .bo-rel {
+    grid-template-columns: repeat(var(--rel-cols, 2), minmax(0, 1fr));
+  }
+  @media (max-width: 720px) {
+    .bo-rel { grid-template-columns: minmax(0, 1fr); }
   }
   .bo-links {
     list-style: none;
