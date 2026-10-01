@@ -1,0 +1,18 @@
+{
+  "category": "robot-news-retry",
+  "note": "Retry of the five SERP reads that timed out in the robot-news-and-new-arrivals run, 1 October 2026.",
+  "researchedOn": null,
+  "leads": [
+    "robots for sale"
+  ],
+  "seeds": [
+    "robots for sale"
+  ],
+  "serpQueries": [
+    "new robots 2026",
+    "humanoid robot for home",
+    "ai robot news",
+    "robots for sale",
+    "ces robots"
+  ]
+}
