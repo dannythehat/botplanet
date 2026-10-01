@@ -2382,9 +2382,65 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
     researchedOn: RUN_AUGUST_10,
   },
   {
-    path: "/review-methodology/",
-    primary: { term: "testing methodology", volume: 390, difficulty: 0, mustAppear: true },
+    /* ROBOT DOG TOYS, built 27 September 2026 and given its register row on
+       1 October — the page shipped for five days with nothing asserting what it
+       was built around, so its copy could drift off its term unnoticed.
+       Research: docs/seo/chatgpt-december-challenge-findings.md. Average monthly
+       figures, not the November/December peaks (49,500 and 33,100): a page that
+       is written to a seasonal spike is written to a number that is wrong for
+       ten months. KD 0 on the head term. */
+    path: "/guides/robot-dog-toys/",
+    primary: { term: "robot dog toy", volume: 14800, difficulty: 0, mustAppear: true },
     secondary: [
+      { term: "ai robot dog", volume: 3600, difficulty: 0, mustAppear: true },
+      { term: "interactive robot dog", volume: 1600, difficulty: 10, mustAppear: false },
+      { term: "loona robot dog", volume: 1000, difficulty: 3, mustAppear: false },
+      { term: "interactive robot dog toy", volume: 1000, difficulty: 0, mustAppear: false },
+      { term: "robot dog toy amazon", volume: 480, difficulty: 0, mustAppear: false },
+      { term: "best robot dog toy", volume: 210, difficulty: 0, mustAppear: false },
+    ],
+    researchedOn: "2026-09-27",
+  },
+  {
+    /* Baseline, not December: 1,300/mo swinging to 4,400 every December at
+       KD 0. The same figures the page plan already carries. */
+    path: "/robots/educational-coding-robots/botley-the-coding-robot/",
+    primary: { term: "botley the coding robot", volume: 1300, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "botley 2.0", volume: 720, difficulty: 0, mustAppear: true },
+      { term: "learning resources botley", volume: 70, difficulty: 14, mustAppear: false },
+      { term: "botley the coding robot activity set", volume: 210, difficulty: 0, mustAppear: false },
+      { term: "botley 2.0 review", volume: 10, difficulty: 27, mustAppear: false },
+    ],
+    researchedOn: "2026-09-26",
+  },
+  {
+    /* 590/mo baseline swinging to 880 every December, KD 0. */
+    path: "/robots/educational-coding-robots/code-and-go-robot-mouse/",
+    primary: { term: "code and go robot mouse", volume: 590, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "code & go robot mouse", volume: 590, difficulty: 0, mustAppear: false },
+      { term: "learning resources robot mouse", volume: 20, difficulty: 16, mustAppear: false },
+      { term: "robot mouse game", volume: 140, difficulty: 13, mustAppear: false },
+    ],
+    researchedOn: "2026-09-26",
+  },
+  {
+    /* RETARGETED 1 OCTOBER 2026, and the reason is honesty rather than tidiness.
+       The row used to be built around "testing methodology" (390/mo, KD 0) and
+       the audit correctly found neither the title nor the body used it. The fix
+       the audit offers is to work the term in. Doing that would have headlined
+       a page about TESTING when most reviews here are labelled "Researched",
+       and the page's own evidence ladder says exactly that — hands-on testing
+       is the top rung and most pages are not on it. A title promising testing
+       over a body saying "researched" is the one mismatch this page exists to
+       prevent. So the row is retargeted to what the page genuinely is. 390/mo
+       is left on the table on purpose, and "testing methodology" stays as a
+       secondary so the loss is visible rather than forgotten. */
+    path: "/review-methodology/",
+    primary: { term: "how botplanet reviews robots", volume: 0, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "testing methodology", volume: 390, difficulty: 0, mustAppear: false },
       { term: "how we test robots", volume: 0, difficulty: 0, mustAppear: false },
     ],
     researchedOn: RUN_AUGUST_10,

@@ -1,5 +1,5 @@
 ---
-import { srcsetFor } from "../lib/srcset";
+import { srcsetFor, sizeOf } from "../lib/srcset";
 ---
 
 <section class="home-dog" aria-labelledby="home-dog-title">
@@ -9,8 +9,8 @@ import { srcsetFor } from "../lib/srcset";
         src="/media/hubs/companion/tile.webp"
         srcset={srcsetFor("/media/hubs/companion/tile.webp")}
         sizes="(min-width: 960px) 46vw, 100vw"
-        width="1536"
-        height="1024"
+        width={sizeOf("/media/hubs/companion/tile.webp")?.width}
+        height={sizeOf("/media/hubs/companion/tile.webp")?.height}
         alt="Companion robots, including a robot dog, shown together."
         loading="lazy"
         decoding="async"

@@ -3,6 +3,7 @@ import { FOOTER_GROUPS, LEGAL_ITEMS } from "../content/nav-surfaces";
 import { SITE } from "../lib/site";
 import { shellJourneyFor } from "../content/journeys";
 import { routeFor } from "../content/routes";
+import { srcsetFor, sizeOf } from "../lib/srcset";
 import { categoryCanMatch } from "../content/matcher-router";
 const year = 2026;
 /* Category-specific journey, and since 12 August 2026 it is the journey for
@@ -28,8 +29,10 @@ const LEGAL = LEGAL_ITEMS;
       <figure class="home-dog-guide__media">
         <img
           src="/media/hubs/companion/tile.webp"
-          width="1536"
-          height="1024"
+          srcset={srcsetFor("/media/hubs/companion/tile.webp")}
+          sizes="(min-width: 900px) 480px, 100vw"
+          width={sizeOf("/media/hubs/companion/tile.webp")?.width}
+          height={sizeOf("/media/hubs/companion/tile.webp")?.height}
           alt="Companion robots including a robot dog."
           loading="lazy"
           decoding="async"

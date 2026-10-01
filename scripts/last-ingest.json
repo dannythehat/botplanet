@@ -1,10 +1,66 @@
 [
   {
-    "to": "media/editorial/best-lawn-mowers.webp",
-    "checksum": "sha256:ffefe8c417ad3ec7a58823303a7b7b82a95c5ca68b2a6ff433096b73e016aa5b",
-    "width": 1671,
+    "to": "media/guides/robot-dog-toys/hero.webp",
+    "checksum": "sha256:871d9b853e878cdc16a5e8f3f6382b02680e11a1152ae6510e94da4255faacd6",
+    "width": 1672,
     "height": 941,
-    "bytes": 178402,
-    "saved": 1780450
+    "bytes": 151692,
+    "saved": 1738310
+  },
+  {
+    "to": "media/guides/robot-dog-toys/loona.webp",
+    "checksum": "sha256:5b3cbd316ceafd7dbded64709c5185c0c7f3059286f1c5d104dbda70c96ccf42",
+    "width": 1672,
+    "height": 941,
+    "bytes": 167616,
+    "saved": 1858539
+  },
+  {
+    "to": "media/guides/robot-dog-toys/ruko.webp",
+    "checksum": "sha256:7fafac6bd7acc1e49435f5c05c9884f0352324aa41e279b86b1cd4068159d071",
+    "width": 1672,
+    "height": 941,
+    "bytes": 228138,
+    "saved": 2002493
+  },
+  {
+    "to": "media/guides/robot-dog-toys/bittle.webp",
+    "checksum": "sha256:b60576cecc48f11d2b880a33d7e4df8c040423258f25a11e8b03de163c6539f3",
+    "width": 1672,
+    "height": 941,
+    "bytes": 194516,
+    "saved": 1888025
+  },
+  {
+    "to": "media/guides/robot-dog-toys/mechdog.webp",
+    "checksum": "sha256:24ddec6b945d2f1f166da9f804590257e4dfb1492e9f1b3de8582bd6ab0a51e6",
+    "width": 1672,
+    "height": 941,
+    "bytes": 213522,
+    "saved": 1832043
+  },
+  {
+    "to": "media/guides/robot-dog-toys/puppypi.webp",
+    "checksum": "sha256:b6612879ef953e4ab95a05e5cb46037d6b37447ba435797b98a00810e78fbc5f",
+    "width": 1672,
+    "height": 941,
+    "bytes": 212422,
+    "saved": 1909228
+  },
+  {
+    "to": "media/guides/robot-dog-toys/senior.webp",
+    "checksum": "sha256:35b6785811a87b33fd75bae35da6da330a6cbdb4406b4d7471e865c494592841",
+    "width": 1672,
+    "height": 941,
+    "bytes": 241326,
+    "saved": 2168084
+  },
+  {
+    "to": "media/guides/robot-dog-toys/thumb-row-2.webp",
+    "checksum": "sha256:7d04c2850d8608d840f57d4b3477b09517f9cf34bd68b2ae8f272da8d6cdfc89",
+    "width": 1080,
+    "height": 2400,
+    "bytes": 145134,
+    "saved": 470058
   }
 ]

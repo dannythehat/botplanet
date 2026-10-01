@@ -70,7 +70,11 @@ export const routes = {
   category: (slug: string) => `/robots/${slug}/`,
   product: (slug: string, productSlug: string) => `/robots/${slug}/${productSlug}/`,
   botmatch: (slug: string) => `/botmatch/${slug}/`,
-  compare: (slug: string) => `/compare/${slug}/`,
+  /* Since the URL consolidation, /compare/<category>/ 301s to the category hub
+     because the hub owns the comparison table. A link must point at where the
+     reader will actually land: linking a redirect costs a hop on every click and
+     tells a crawler the site does not know its own URLs. */
+  compare: (slug: string) => `/robots/${slug}/`,
   best: (slug?: string) => (slug ? `/best-robots/${slug}/` : "/best-robots/"),
   guide: (guideSlug: string) => `/guides/${guideSlug}/`,
   categoryGuides: (slug: string) => `/guides/${slug}/`,

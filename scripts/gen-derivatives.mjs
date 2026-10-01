@@ -508,6 +508,21 @@ const SOURCES = [
   "/media/reviews/yarbo-snow-blower/chute-control.webp",
   "/media/reviews/yarbo-snow-blower/conditions.webp",
   "/media/reviews/yarbo-snow-blower/daylight-driveway.webp",
+  // robot-dog-toys guide. These arrived as seven 2MB PNGs under /images/ with
+  // generator filenames and were served as-is: the guide's hero downloaded
+  // 1.8MB before first paint and the comparison table used 2MB files as 64px
+  // thumbnails. Found by audit:weight on 1 October 2026.
+  "/media/guides/robot-dog-toys/hero.webp",
+  "/media/guides/robot-dog-toys/loona.webp",
+  "/media/guides/robot-dog-toys/ruko.webp",
+  "/media/guides/robot-dog-toys/bittle.webp",
+  "/media/guides/robot-dog-toys/mechdog.webp",
+  "/media/guides/robot-dog-toys/puppypi.webp",
+  "/media/guides/robot-dog-toys/senior.webp",
+  "/media/guides/robot-dog-toys/thumb-row-2.webp",
+  // Rendered in the homepage footer and the robot-dog feature with no responsive
+  // variants until audit:weight flagged it on 1 October 2026.
+  "/media/hubs/companion/tile.webp",
 ];
 
 const run = async () => {

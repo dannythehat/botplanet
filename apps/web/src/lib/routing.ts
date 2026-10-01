@@ -24,7 +24,7 @@ import {
   type RouteDef,
 } from "../content/routes";
 import { REVIEWS } from "../content/reviews";
-import { isConsolidatedPath, isRemovedPath } from "../content/url-consolidation";
+import { consolidatedDestination, isConsolidatedPath, isRemovedPath } from "../content/url-consolidation";
 import {
   SEO_MIGRATION_GONE_PATHS,
   SEO_MIGRATION_REDIRECTS,
@@ -200,9 +200,20 @@ export function breadcrumbsFor(path: string, currentLabel?: string): Crumb[] {
     node = node.parent ? routeFor(node.parent) : undefined;
   }
 
-  const crumbs: Crumb[] = chain
-    .filter((r) => r.path !== "/")
-    .map((r) => ({ name: r.breadcrumbLabel ?? r.label, path: r.path }));
+  /* A crumb must point where the reader will land. /compare/ and /best-robots/
+     301 to /robots/ since the consolidation, so a trail through them linked a
+     redirect on every comparison and best-of page. Resolve each crumb to its
+     destination, take the destination's own label, and collapse the repeat. */
+  const crumbs: Crumb[] = [];
+  for (const r of chain.filter((x) => x.path !== "/")) {
+    const dest = consolidatedDestination(r.path);
+    const target = dest ? routeFor(dest) : undefined;
+    const crumb = dest
+      ? { name: target?.breadcrumbLabel ?? target?.label ?? r.label, path: dest }
+      : { name: r.breadcrumbLabel ?? r.label, path: r.path };
+    if (crumbs.length && crumbs[crumbs.length - 1].path === crumb.path) continue;
+    crumbs.push(crumb);
+  }
 
   // A dynamic leaf (product, guide article) appends itself.
   if (!route && currentLabel) crumbs.push({ name: currentLabel, path: canonical });

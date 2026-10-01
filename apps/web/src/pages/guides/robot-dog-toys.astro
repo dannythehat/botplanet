@@ -7,6 +7,7 @@ import {
   webPageSchema,
 } from "../../lib/seo";
 import { FOUNDER } from "../../content/team";
+import { srcsetFor, sizeOf } from "../../lib/srcset";
 
 const PATH = "/guides/robot-dog-toys/";
 const SEO_TITLE = "Best Robot Dog Toys & AI Robot Dogs 2026 | BotPlanet";
@@ -14,15 +15,15 @@ const H1 = "Best robot dog toys & AI robot dogs in 2026";
 const DESCRIPTION =
   "Compare the best robot dog toys, AI robot pets and programmable quadrupeds in 2026, with clear picks for children, families, coders, robotics enthusiasts and older adults.";
 
-const MEDIA = "/images/guides/robot-dog-toys/";
+const MEDIA = "/media/guides/robot-dog-toys/";
 const IMAGE = {
-  hero: `${MEDIA}file_000000009b5c820ab534e72adacdb919.png`,
-  loona: `${MEDIA}file_000000006f48820a89a67189ad2509a5.png`,
-  ruko: `${MEDIA}file_00000000114881f4962200e6b3ab3714.png`,
-  bittle: `${MEDIA}file_00000000ef2c820a992c8712d08fa4ed.png`,
-  mechdog: `${MEDIA}file_00000000ae38820a921680cc557de558.png`,
-  puppypi: `${MEDIA}file_00000000847c81f4b42e8bec3cacde96.png`,
-  senior: `${MEDIA}file_00000000aaa0820aa04b0dc01bf44e3d.png`,
+  hero: `${MEDIA}hero.webp`,
+  loona: `${MEDIA}loona.webp`,
+  ruko: `${MEDIA}ruko.webp`,
+  bittle: `${MEDIA}bittle.webp`,
+  mechdog: `${MEDIA}mechdog.webp`,
+  puppypi: `${MEDIA}puppypi.webp`,
+  senior: `${MEDIA}senior.webp`,
 };
 
 const crumbs = [
@@ -275,8 +276,10 @@ const schema = [
       <figure class="dog-hero__media">
         <img
           src={IMAGE.hero}
-          width="1536"
-          height="864"
+          srcset={srcsetFor(IMAGE.hero)}
+          sizes="(min-width: 900px) 46vw, 100vw"
+          width={sizeOf(IMAGE.hero)?.width}
+          height={sizeOf(IMAGE.hero)?.height}
           alt="Several kinds of robot dog shown together in one buying guide."
           loading="eager"
           fetchpriority="high"
@@ -338,7 +341,7 @@ const schema = [
       {picks.map((pick) => (
         <article class="dog-review" id={pick.id}>
           <figure class="dog-review__media">
-            <img src={pick.image} width="1536" height="864" alt={pick.imageAlt} loading="lazy" decoding="async" />
+            <img src={pick.image} srcset={srcsetFor(pick.image)} sizes="(min-width: 900px) 46vw, 100vw" width={sizeOf(pick.image)?.width} height={sizeOf(pick.image)?.height} alt={pick.imageAlt} loading="lazy" decoding="async" />
           </figure>
           <div class="dog-review__copy">
             <p class="dog-review__badge">{pick.badge}</p>

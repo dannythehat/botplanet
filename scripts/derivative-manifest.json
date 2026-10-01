@@ -12335,5 +12335,340 @@
         "checksum": "sha256:9ef76e45e217499f11f148894f244b6a72599943f32a9939e3e29dedaf263dab"
       }
     ]
+  },
+  {
+    "source": "/media/guides/robot-dog-toys/hero.webp",
+    "sourceWidth": 1672,
+    "sourceHeight": 941,
+    "derivatives": [
+      {
+        "id": "media-guides-robot-dog-toys-hero-webp-360",
+        "src": "/media/guides/robot-dog-toys/hero-360w.webp",
+        "width": 360,
+        "height": 203,
+        "bytes": 10402,
+        "checksum": "sha256:fe610efd6cdbcb77a6804d5a2eaf76994abeb0d5952b6334cbfacb997b02e221"
+      },
+      {
+        "id": "media-guides-robot-dog-toys-hero-webp-640",
+        "src": "/media/guides/robot-dog-toys/hero-640w.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 25810,
+        "checksum": "sha256:79ad3c8f860dac947eb03e994d30f223c3e6407cc077230399feec70a4715fb5"
+      },
+      {
+        "id": "media-guides-robot-dog-toys-hero-webp-960",
+        "src": "/media/guides/robot-dog-toys/hero-960w.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 50740,
+        "checksum": "sha256:bd3aa6e52e9409322c315ba5996fe9373bd60adc373202c7e2d55ae99bae4d85"
+      },
+      {
+        "id": "media-guides-robot-dog-toys-hero-webp-1440",
+        "src": "/media/guides/robot-dog-toys/hero-1440w.webp",
+        "width": 1440,
+        "height": 810,
+        "bytes": 82810,
+        "checksum": "sha256:781cde0823dc473a246f95d40fe0edfdce35f4169f4961d8fd423a2b9b975241"
+      }
+    ]
+  },
+  {
+    "source": "/media/guides/robot-dog-toys/loona.webp",
+    "sourceWidth": 1672,
+    "sourceHeight": 941,
+    "derivatives": [
+      {
+        "id": "media-guides-robot-dog-toys-loona-webp-360",
+        "src": "/media/guides/robot-dog-toys/loona-360w.webp",
+        "width": 360,
+        "height": 203,
+        "bytes": 14370,
+        "checksum": "sha256:a1c94fe7ea702e4aa3bca3dce05220179b100cf43bd6cb92e716094e2ebf9bac"
+      },
+      {
+        "id": "media-guides-robot-dog-toys-loona-webp-640",
+        "src": "/media/guides/robot-dog-toys/loona-640w.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 32908,
+        "checksum": "sha256:54a039e75da590c4ea1dcddb95dfeb886ed9a9c51693126ba2501e37fad0a97a"
+      },
+      {
+        "id": "media-guides-robot-dog-toys-loona-webp-960",
+        "src": "/media/guides/robot-dog-toys/loona-960w.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 62502,
+        "checksum": "sha256:69d275ce47bd99416e2e0d9e50d3dcc0d51568f23d3b481e62b9eb6852781c63"
+      },
+      {
+        "id": "media-guides-robot-dog-toys-loona-webp-1440",
+        "src": "/media/guides/robot-dog-toys/loona-1440w.webp",
+        "width": 1440,
+        "height": 810,
+        "bytes": 96746,
+        "checksum": "sha256:cb324bb9eb066e2c5789ff2a22de088329acc86a25b822a99e09596cc239ae65"
+      }
+    ]
+  },
+  {
+    "source": "/media/guides/robot-dog-toys/ruko.webp",
+    "sourceWidth": 1672,
+    "sourceHeight": 941,
+    "derivatives": [
+      {
+        "id": "media-guides-robot-dog-toys-ruko-webp-360",
+        "src": "/media/guides/robot-dog-toys/ruko-360w.webp",
+        "width": 360,
+        "height": 203,
+        "bytes": 15386,
+        "checksum": "sha256:42b6edfc2b03ad11b4aea81ffce97e3a4ce6e4f509087f86833163c61f5e68da"
+      },
+      {
+        "id": "media-guides-robot-dog-toys-ruko-webp-640",
+        "src": "/media/guides/robot-dog-toys/ruko-640w.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 37650,
+        "checksum": "sha256:463104610cb699e186154f50491cf3b10e877479262d6f02dd66ac471e701e78"
+      },
+      {
+        "id": "media-guides-robot-dog-toys-ruko-webp-960",
+        "src": "/media/guides/robot-dog-toys/ruko-960w.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 75300,
+        "checksum": "sha256:003386965b1b91c07aa7b4179de5810985c9aafbe2149a0bc09dc3794b0f36c3"
+      },
+      {
+        "id": "media-guides-robot-dog-toys-ruko-webp-1440",
+        "src": "/media/guides/robot-dog-toys/ruko-1440w.webp",
+        "width": 1440,
+        "height": 810,
+        "bytes": 121838,
+        "checksum": "sha256:9429973e45cf9f6867221fc04fb6b15dafac574cbc9652c46f631ce522c6e425"
+      }
+    ]
+  },
+  {
+    "source": "/media/guides/robot-dog-toys/bittle.webp",
+    "sourceWidth": 1672,
+    "sourceHeight": 941,
+    "derivatives": [
+      {
+        "id": "media-guides-robot-dog-toys-bittle-webp-360",
+        "src": "/media/guides/robot-dog-toys/bittle-360w.webp",
+        "width": 360,
+        "height": 203,
+        "bytes": 15482,
+        "checksum": "sha256:13a8cb06214d199df8f8ddd0d2083fee2bcfc3874f84f91e007c026713aa3c76"
+      },
+      {
+        "id": "media-guides-robot-dog-toys-bittle-webp-640",
+        "src": "/media/guides/robot-dog-toys/bittle-640w.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 37104,
+        "checksum": "sha256:3792fdebe9cca1e266f1ca12ea2655424897c059977d87477e5fb5d4190f5344"
+      },
+      {
+        "id": "media-guides-robot-dog-toys-bittle-webp-960",
+        "src": "/media/guides/robot-dog-toys/bittle-960w.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 70662,
+        "checksum": "sha256:15f1d48196ffef1ae56df412652c2921c3b5827d8e2439e398c734fe09ccb5e6"
+      },
+      {
+        "id": "media-guides-robot-dog-toys-bittle-webp-1440",
+        "src": "/media/guides/robot-dog-toys/bittle-1440w.webp",
+        "width": 1440,
+        "height": 810,
+        "bytes": 111252,
+        "checksum": "sha256:a851da751b1ca646afc6656831060734e587762a36f93286d04e1c0c958dafb4"
+      }
+    ]
+  },
+  {
+    "source": "/media/guides/robot-dog-toys/mechdog.webp",
+    "sourceWidth": 1672,
+    "sourceHeight": 941,
+    "derivatives": [
+      {
+        "id": "media-guides-robot-dog-toys-mechdog-webp-360",
+        "src": "/media/guides/robot-dog-toys/mechdog-360w.webp",
+        "width": 360,
+        "height": 203,
+        "bytes": 17528,
+        "checksum": "sha256:4780e35062fc16327ccea262e1580761fcce3a1897e0dd66e092f22e4243c6a8"
+      },
+      {
+        "id": "media-guides-robot-dog-toys-mechdog-webp-640",
+        "src": "/media/guides/robot-dog-toys/mechdog-640w.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 42410,
+        "checksum": "sha256:d949906944a4b2f485d3d03a385fa66f6513f920a1ba87ee3fe1177a42bd71db"
+      },
+      {
+        "id": "media-guides-robot-dog-toys-mechdog-webp-960",
+        "src": "/media/guides/robot-dog-toys/mechdog-960w.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 80482,
+        "checksum": "sha256:33fe57a4124203f6636c25370aa37345cb9fb520f5a2cf91e59b7666fe6fbee5"
+      },
+      {
+        "id": "media-guides-robot-dog-toys-mechdog-webp-1440",
+        "src": "/media/guides/robot-dog-toys/mechdog-1440w.webp",
+        "width": 1440,
+        "height": 810,
+        "bytes": 128612,
+        "checksum": "sha256:300ed86d4f1c7e87e32a2d1b7bd786716d434ee61ff2c2ec95a9d06b2c1e9b62"
+      }
+    ]
+  },
+  {
+    "source": "/media/guides/robot-dog-toys/puppypi.webp",
+    "sourceWidth": 1672,
+    "sourceHeight": 941,
+    "derivatives": [
+      {
+        "id": "media-guides-robot-dog-toys-puppypi-webp-360",
+        "src": "/media/guides/robot-dog-toys/puppypi-360w.webp",
+        "width": 360,
+        "height": 203,
+        "bytes": 16594,
+        "checksum": "sha256:f7fb01bf603bf0470a43c206935a1e722271d0aca8ef9bdad174f7289406bbb2"
+      },
+      {
+        "id": "media-guides-robot-dog-toys-puppypi-webp-640",
+        "src": "/media/guides/robot-dog-toys/puppypi-640w.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 40236,
+        "checksum": "sha256:2d41f86d1996d8a97cb224542b648327a8624d3b3f2a16177040990b1f254184"
+      },
+      {
+        "id": "media-guides-robot-dog-toys-puppypi-webp-960",
+        "src": "/media/guides/robot-dog-toys/puppypi-960w.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 77386,
+        "checksum": "sha256:b6f87298ebbffee8c67c728e9462dee90702e4d3c24ed0081747b014fb37083d"
+      },
+      {
+        "id": "media-guides-robot-dog-toys-puppypi-webp-1440",
+        "src": "/media/guides/robot-dog-toys/puppypi-1440w.webp",
+        "width": 1440,
+        "height": 810,
+        "bytes": 125666,
+        "checksum": "sha256:e1959ab89a979e32f2b7cc2fb9a079e6212b1439e78ff899ad329e7da83f7849"
+      }
+    ]
+  },
+  {
+    "source": "/media/guides/robot-dog-toys/senior.webp",
+    "sourceWidth": 1672,
+    "sourceHeight": 941,
+    "derivatives": [
+      {
+        "id": "media-guides-robot-dog-toys-senior-webp-360",
+        "src": "/media/guides/robot-dog-toys/senior-360w.webp",
+        "width": 360,
+        "height": 203,
+        "bytes": 14876,
+        "checksum": "sha256:1576814cbde467d3002c9b077021db11bcff3535a74c82a4fb28967fdbcf8e77"
+      },
+      {
+        "id": "media-guides-robot-dog-toys-senior-webp-640",
+        "src": "/media/guides/robot-dog-toys/senior-640w.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 37876,
+        "checksum": "sha256:e227925c5d3747b7beaca4081af237cb1cb1d087b5994c798173f1908b7b0cae"
+      },
+      {
+        "id": "media-guides-robot-dog-toys-senior-webp-960",
+        "src": "/media/guides/robot-dog-toys/senior-960w.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 78404,
+        "checksum": "sha256:16b377e81a86f41278de42131ab63578081c54b92b8b189867a4f85318020b48"
+      },
+      {
+        "id": "media-guides-robot-dog-toys-senior-webp-1440",
+        "src": "/media/guides/robot-dog-toys/senior-1440w.webp",
+        "width": 1440,
+        "height": 810,
+        "bytes": 129914,
+        "checksum": "sha256:012fa953ea37d65a8717c98fd41639553f49265c08d48b580d066cc29e4b4cfb"
+      }
+    ]
+  },
+  {
+    "source": "/media/guides/robot-dog-toys/thumb-row-2.webp",
+    "sourceWidth": 1080,
+    "sourceHeight": 2400,
+    "derivatives": [
+      {
+        "id": "media-guides-robot-dog-toys-thumb-row-2-webp-360",
+        "src": "/media/guides/robot-dog-toys/thumb-row-2-360w.webp",
+        "width": 360,
+        "height": 800,
+        "bytes": 24390,
+        "checksum": "sha256:e7c69ca83652e2cdebc78cf710581b93b03de874841af5b1f100a6305339e5a5"
+      },
+      {
+        "id": "media-guides-robot-dog-toys-thumb-row-2-webp-640",
+        "src": "/media/guides/robot-dog-toys/thumb-row-2-640w.webp",
+        "width": 640,
+        "height": 1422,
+        "bytes": 54734,
+        "checksum": "sha256:fd072b6102b6811db6da660fb7c6d910db123a35e69e7356e3e309f5930ca88f"
+      },
+      {
+        "id": "media-guides-robot-dog-toys-thumb-row-2-webp-960",
+        "src": "/media/guides/robot-dog-toys/thumb-row-2-960w.webp",
+        "width": 960,
+        "height": 2133,
+        "bytes": 94484,
+        "checksum": "sha256:29d9a1845852b9a32b797f295cbbb6f4fdc5ccdc71989301e79c76a6d3540dcc"
+      }
+    ]
+  },
+  {
+    "source": "/media/hubs/companion/tile.webp",
+    "sourceWidth": 1200,
+    "sourceHeight": 900,
+    "derivatives": [
+      {
+        "id": "media-hubs-companion-tile-webp-360",
+        "src": "/media/hubs/companion/tile-360w.webp",
+        "width": 360,
+        "height": 270,
+        "bytes": 7798,
+        "checksum": "sha256:32ec02e90df3e5df3219bf4a5701262827cda9fffd2b016d8c87ab8da53955c1"
+      },
+      {
+        "id": "media-hubs-companion-tile-webp-640",
+        "src": "/media/hubs/companion/tile-640w.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 18682,
+        "checksum": "sha256:759de88941b0ed0782632b42d99a5f8ebf55fb8f0e4ea1e1fe8a1443a2c44085"
+      },
+      {
+        "id": "media-hubs-companion-tile-webp-960",
+        "src": "/media/hubs/companion/tile-960w.webp",
+        "width": 960,
+        "height": 720,
+        "bytes": 35174,
+        "checksum": "sha256:2f02ea03d59d43d66843dfee1ec1aff8ffc4f23662e83ad7aba5ea03c118e803"
+      }
+    ]
   }
 ]

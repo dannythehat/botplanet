@@ -33,10 +33,10 @@ const people = [FOUNDER, REVIEWS_EDITOR];
   </section>
 
   <section class="team" aria-labelledby="team-title">
-    <header><p class="kicker">ACCOUNTABILITY HAS NAMES</p><h2 id="team-title">Who is behind the work</h2><p>Every recommendation and review has a named person responsible for it.</p></header>
+    <header><p class="kicker">ACCOUNTABILITY HAS NAMES</p><h2 id="team-title">Who is behind the work</h2><p>Every recommendation and review has a named person responsible for it, and the <a href="/authors/">full editorial masthead</a> says who does what.</p></header>
     <div class="team__grid">
       {people.map((person) => <article class="person-card">
-        {person.portrait && <img src={person.portrait.src} width="320" height="320" alt={person.portrait.alt} loading="lazy" decoding="async" />}
+        {person.portrait && <img src={person.portrait.src} srcset={`/media/authors/${person.id}-220w.webp 220w, /media/authors/${person.id}-440w.webp 440w`} sizes="320px" width="320" height="320" alt={person.portrait.alt} loading="lazy" decoding="async" />}
         <div><p class="person-card__role">{person.role}</p><h3>{person.name}</h3><p>{person.accountability}</p><a href={person.path}>Meet {person.name.split(" ")[0]} <span aria-hidden="true">→</span></a></div>
       </article>)}
     </div>

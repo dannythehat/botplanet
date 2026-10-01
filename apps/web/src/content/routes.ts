@@ -146,6 +146,29 @@ export const ROUTES: RouteDef[] = [
     summary: "How these robots work, what to look for, and how to keep them running.",
   },
   {
+    /* REGISTERED 1 OCTOBER 2026. The robot dog guide shipped on 27 September
+       as a hand-written page with its path typed into sitemap.xml.ts and a
+       comment promising it would join this registry "in the next maintenance
+       pass". Until then it had no route, so no breadcrumb chain, no registry
+       checks and nothing asserting it existed — the keyword register's own
+       path test failed the moment the page was given a row.
+
+       NO `category`, deliberately. "Robot dog" spans a $70 toy, an AI pet, an
+       open-source coding platform and a ROS quadruped, so it belongs to no
+       single category here, and a category field would make the page plan
+       demand a plan entry for a page that is a cross-category guide. */
+    path: "/guides/robot-dog-toys/",
+    label: "Robot dog toys and AI robot dogs",
+    section: "guides",
+    parent: "/guides/",
+    status: "live",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: true,
+    indexable: true,
+    summary: "Robot dog can mean a $70 toy, an AI pet, a coding platform or a ROS quadruped. Picks by job.",
+  },
+  {
     path: "/deals/",
     label: "Deals",
     section: "deals",

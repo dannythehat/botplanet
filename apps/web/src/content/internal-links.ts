@@ -117,7 +117,7 @@ export const CATEGORY_ANCHORS: Record<string, InternalAnchor[]> = {
     },
     {
       anchor: "compare",
-      href: "/compare/educational-coding-robots/",
+      href: "/robots/educational-coding-robots/",
       why: "The comparison table is the next step once the age band has narrowed the field.",
       status: "live",
     },
@@ -162,7 +162,7 @@ export const CATEGORY_ANCHORS: Record<string, InternalAnchor[]> = {
     },
     {
       anchor: "compare",
-      href: "/compare/robot-vacuums/",
+      href: "/robots/robot-vacuums/",
       why: "The comparison table is the honest next step once floor type has narrowed the field.",
       status: "live",
     },
@@ -201,7 +201,7 @@ export const CATEGORY_ANCHORS: Record<string, InternalAnchor[]> = {
     },
     {
       anchor: "compare",
-      href: "/compare/grill-cleaning-robots/",
+      href: "/robots/grill-cleaning-robots/",
       why: "The comparison table is the next step once grate type has been settled.",
       status: "live",
     },
@@ -246,7 +246,7 @@ export const CATEGORY_ANCHORS: Record<string, InternalAnchor[]> = {
     },
     {
       anchor: "compare",
-      href: "/compare/self-cleaning-litter-boxes/",
+      href: "/robots/self-cleaning-litter-boxes/",
       why: "The comparison table is the honest next step once cat size and litter type have narrowed the field.",
       status: "live",
     },
@@ -386,7 +386,7 @@ export const CATEGORY_ANCHORS: Record<string, InternalAnchor[]> = {
     },
     {
       anchor: "compare",
-      href: "/compare/robotic-lawn-mowers/",
+      href: "/robots/robotic-lawn-mowers/",
       why: "The comparison table is the honest next step once area, terrain and navigation have narrowed the field to two or three machines.",
       status: "live",
     },
@@ -528,7 +528,7 @@ export const CATEGORY_ANCHORS: Record<string, InternalAnchor[]> = {
     },
     {
       anchor: "compare",
-      href: "/compare/companion-robots/",
+      href: "/robots/companion-robots/",
       why: "The comparison table is the honest next step for a reader who has narrowed it to two machines.",
       status: "live",
     },
@@ -613,7 +613,7 @@ export const CATEGORY_ANCHORS: Record<string, InternalAnchor[]> = {
     },
     {
       anchor: "compare",
-      href: "/compare/pet-camera-robots/",
+      href: "/robots/pet-camera-robots/",
       why: "The comparison table is the honest next step once a reader has confirmed the layout works.",
       status: "live",
     },
@@ -704,7 +704,7 @@ export const CATEGORY_ANCHORS: Record<string, InternalAnchor[]> = {
     },
     {
       anchor: "compare",
-      href: "/compare/window-cleaning-robots/",
+      href: "/robots/window-cleaning-robots/",
       why: "The comparison table is the honest next step for a reader who has decided one model is close but wants it beside the others.",
       status: "live",
     },
@@ -911,7 +911,7 @@ export const CATEGORY_ANCHORS: Record<string, InternalAnchor[]> = {
     },
     {
       anchor: "compare",
-      href: "/compare/robotic-pool-cleaners/",
+      href: "/robots/robotic-pool-cleaners/",
       why: "The comparison table is the honest next step for a reader who has decided this model is close but wants to see it beside the others.",
       status: "live",
     },

@@ -146,11 +146,25 @@ describe("breadcrumbsFor", () => {
     expect(c[c.length - 1].path).toBe("/robots/robotic-pool-cleaners/dolphin-e10/");
   });
 
-  it("builds the comparison trail under Compare, not under Shop", () => {
+  it("builds the comparison trail without passing through a redirected page", () => {
+    /* This used to expect "Compare Robots" as the first crumb. /compare/ has
+       301'd to /robots/ since the URL consolidation, so that crumb linked a
+       redirect on every comparison page. The trail now resolves to where the
+       reader would actually land. */
     expect(breadcrumbsFor("/compare/robotic-pool-cleaners/").map((x) => x.name)).toEqual([
-      "Compare Robots",
+      "Robot Categories",
       "Robotic Pool Cleaners",
     ]);
+  });
+
+  it("never emits a breadcrumb that itself redirects", () => {
+    const bad: string[] = [];
+    for (const route of ROUTES) {
+      for (const crumb of breadcrumbsFor(route.path)) {
+        if (resolveRedirect(crumb.path)) bad.push(`${route.path} → crumb ${crumb.path}`);
+      }
+    }
+    expect(bad).toEqual([]);
   });
 
   it("builds the BotMatch trail under the category", () => {
