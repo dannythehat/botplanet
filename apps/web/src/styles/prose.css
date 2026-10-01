@@ -218,3 +218,26 @@
   border-radius: 14px;
   background: rgba(255, 255, 255, 0.03);
 }
+
+/* "BotPlanet takeaway": the plain-English so-what at the end of a section. A
+   blockquote that opens with a bold label becomes a highlighted callout. */
+.bp-prose.is-centered .bp-sec blockquote {
+  margin: 1.4rem 0 0;
+  padding: 1rem 1.2rem 1.1rem;
+  border: 1px solid rgba(120, 176, 255, 0.35);
+  border-left: 3px solid #4d9bff;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(61, 142, 240, 0.14), rgba(61, 142, 240, 0.04));
+  font-style: normal;
+  color: var(--cs-hi, #f4f6fa);
+}
+.bp-prose.is-centered .bp-sec blockquote p { margin: 0 0 0.5rem; font-size: 1.02rem; line-height: 1.6; }
+.bp-prose.is-centered .bp-sec blockquote p:last-child { margin-bottom: 0; }
+.bp-prose.is-centered .bp-sec blockquote p:first-child {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #9fd0ff;
+}
+.bp-prose.is-centered .bp-sec blockquote p:first-child strong { color: inherit; }
