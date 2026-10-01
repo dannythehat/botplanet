@@ -136,7 +136,7 @@ interface OfferSeed {
   productId: string;
   retailerId: string;
   affiliateProgramId: string | null;
-  priceUsd: number;
+  priceUsd: number | null;
   warranty: string | null;
   redirectKey: string;
 }
@@ -205,6 +205,12 @@ const offerSeeds: OfferSeed[] = [
      reach publication with no offer behind its button. */
   { id: "off-proteus-amazon", productId: "prod-dolphin-proteus-dx4-plus", retailerId: "ret-amazon", affiliateProgramId: "ap-amazon-us", priceUsd: 899, warranty: "2-year", redirectKey: "pool-dolphin-proteus-dx4plus-amazon" },
   { id: "off-scubav3-amazon", productId: "prod-aiper-scuba-v3-ai-vision", retailerId: "ret-amazon", affiliateProgramId: "ap-amazon-us", priceUsd: 849, warranty: "2-year", redirectKey: "pool-aiper-scubav3-amazon" },
+  /* ADDED 1 October 2026 by migration 0019. The owner's top four solar skimmers on
+     Amazon US. The price is NULL on purpose: the refresh service fills it with the
+     date it was read, and a number typed here would be stale on commit. */
+  { id: "off-aiper-ecosurfer-s2-amazon", productId: "prod-aiper-ecosurfer-s2", retailerId: "ret-amazon", affiliateProgramId: "ap-amazon-us", priceUsd: null, warranty: null, redirectKey: "pool-aiper-ecosurfers2-amazon" },
+  { id: "off-beatbot-iskim-amazon", productId: "prod-beatbot-iskim", retailerId: "ret-amazon", affiliateProgramId: "ap-amazon-us", priceUsd: null, warranty: null, redirectKey: "pool-beatbot-iskim-amazon" },
+  { id: "off-brinbo-sk01-amazon", productId: "prod-brinbo-sk01", retailerId: "ret-amazon", affiliateProgramId: "ap-amazon-us", priceUsd: null, warranty: null, redirectKey: "pool-brinbo-sk01-amazon" },
 ];
 
 /* @extension-point per-product | required | Both arrays below are built from
@@ -219,7 +225,7 @@ export const offerRows: (typeof offers.$inferInsert)[] = offerSeeds.map((o) => (
   marketId: "us",
   affiliateProgramId: o.affiliateProgramId,
   currencyCode: USD,
-  basePriceMinor: toMinorUnits(o.priceUsd, "USD"),
+  basePriceMinor: o.priceUsd === null ? null : toMinorUnits(o.priceUsd, "USD"),
   deliveryPriceMinor: null,
   totalLandedMinor: null,
   stockStatus: "unknown",

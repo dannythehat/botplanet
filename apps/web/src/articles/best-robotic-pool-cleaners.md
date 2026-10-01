@@ -64,7 +64,9 @@ If your pool sits under trees, the robot is not your first purchase. A floor
 cleaner deals with leaves after they have sunk, stained and started to break
 down. A skimmer takes them off the surface before any of that happens, and the
 two are different product classes doing different jobs — which is why the Betta
-SE Plus is in our catalogue but is not on this list.
+SE Plus is in our catalogue but is not on this list. The solar pool skimmers have a
+page of their own, where the Betta sits beside the Aiper EcoSurfer S2 and the
+Beatbot iSkim.
 
 The strongest setup for a pool under trees is a surface skimmer running alongside
 a floor robot. The alternative is one of the two flagships that do both: the

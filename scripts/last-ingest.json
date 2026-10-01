@@ -1,58 +1,154 @@
 [
   {
-    "to": "media/reviews/betta-se-plus/photo-top.webp",
-    "checksum": "sha256:3ce12269b91e77153aef370aa73d37c7ebc253dba80a51c50714e186296e69dc",
+    "to": "media/reviews/aiper-ecosurfer-s2/hero.webp",
+    "checksum": "sha256:eb1e9e65773a500460bce773dd3831f04fda9795559f8ade747983ed8ace6a04",
     "width": 1500,
-    "height": 1044,
-    "bytes": 159674,
-    "saved": -27554
+    "height": 1500,
+    "bytes": 438634,
+    "saved": -89444
   },
   {
-    "to": "media/reviews/betta-se-plus/charging-modes.webp",
-    "checksum": "sha256:8478410b5c9b942fd6d794815c5939eaa571a45ebbf98795c2e0ca8d4c913207",
-    "width": 1080,
-    "height": 1080,
-    "bytes": 141492,
-    "saved": -10671
+    "to": "media/reviews/aiper-ecosurfer-s2/edge-corner.webp",
+    "checksum": "sha256:fba48da979cb054d97d62cccacb74f38b7b010f49a20e4be6f03445ae879f304",
+    "width": 1500,
+    "height": 1500,
+    "bytes": 444354,
+    "saved": -86959
   },
   {
-    "to": "media/reviews/betta-se-plus/non-stop-30h.webp",
-    "checksum": "sha256:cfa6154abb646ec039c8c024a2e30f436b670e16b86d47e6ac4573ab1729fdb7",
-    "width": 1455,
-    "height": 1455,
-    "bytes": 200614,
-    "saved": -12517
+    "to": "media/reviews/aiper-ecosurfer-s2/filtration.webp",
+    "checksum": "sha256:49e256b5fed2e3aaa85d9b692cdf1c613fc794b5a8f740264a364abab267188c",
+    "width": 1500,
+    "height": 1500,
+    "bytes": 229096,
+    "saved": -20277
   },
   {
-    "to": "media/reviews/betta-se-plus/motors-sct.webp",
-    "checksum": "sha256:56cdcd70985e300a217d18cd8d50731107b51181d173e06aeb08a862dea9483c",
-    "width": 1080,
-    "height": 1080,
-    "bytes": 97098,
-    "saved": 822
+    "to": "media/reviews/aiper-ecosurfer-s2/anti-stranding.webp",
+    "checksum": "sha256:d0af9fb095a8915860860bfb91d58416a771fb177960e103178325d12f51fb31",
+    "width": 1500,
+    "height": 1500,
+    "bytes": 319396,
+    "saved": -42973
   },
   {
-    "to": "media/reviews/betta-se-plus/fall-winter.webp",
-    "checksum": "sha256:287c1703c6d9e78c03e038addd53b1f2d283832d7607f7d9c3432e3fdf4ad29a",
-    "width": 1080,
-    "height": 1058,
-    "bytes": 188452,
-    "saved": -28737
+    "to": "media/reviews/beatbot-iskim/hero.webp",
+    "checksum": "sha256:69f36d69099dd957d994a38cf63daed7e32c49940397fde71ec373bd5444e617",
+    "width": 1500,
+    "height": 1172,
+    "bytes": 121382,
+    "saved": -10759
   },
   {
-    "to": "media/reviews/betta-se-plus/basket-photo.webp",
-    "checksum": "sha256:b831156912e42ee71e4e40557847d72f4637bf204e08492e744eda634b82cdb3",
-    "width": 1080,
-    "height": 1080,
-    "bytes": 207024,
-    "saved": -32160
+    "to": "media/reviews/beatbot-iskim/basket-9l.webp",
+    "checksum": "sha256:c66d4ceff61bdfcfcfbb59c7673fec8ff80ed0715032f7ba6fe10a85bce29234",
+    "width": 1500,
+    "height": 1500,
+    "bytes": 230058,
+    "saved": -10869
   },
   {
-    "to": "media/reviews/betta-se-plus/radar-uv.webp",
-    "checksum": "sha256:624b864f54eec83f2acdc04a62ed63b4230f61e3ea7e86e9413778c99080d4d8",
-    "width": 1080,
-    "height": 1080,
-    "bytes": 198466,
-    "saved": -26339
+    "to": "media/reviews/beatbot-iskim/rain-24-7.webp",
+    "checksum": "sha256:ca6c8f28468c736853546e3ca1f4293e1acd581793583075e75bdb40943b590a",
+    "width": 1500,
+    "height": 1500,
+    "bytes": 121200,
+    "saved": 16285
+  },
+  {
+    "to": "media/reviews/beatbot-iskim/sonicsense.webp",
+    "checksum": "sha256:b51ac94a8234bc0c966d1df884edf4368b649bf92ea052fdc3d314d774c89aeb",
+    "width": 1500,
+    "height": 1500,
+    "bytes": 248440,
+    "saved": -15110
+  },
+  {
+    "to": "media/reviews/beatbot-iskim/edge-following.webp",
+    "checksum": "sha256:62111fff37bcb3d63b90f5d3fd6c52a055af6e8b50602803d47e08f801225dbd",
+    "width": 1500,
+    "height": 1500,
+    "bytes": 198422,
+    "saved": -1984
+  },
+  {
+    "to": "media/reviews/beatbot-iskim/anti-spill.webp",
+    "checksum": "sha256:48c06dde07657f3ba334568c98cfdf90b81116b08457ff83dbb32b44b9c8355e",
+    "width": 1500,
+    "height": 1500,
+    "bytes": 241842,
+    "saved": -18157
+  },
+  {
+    "to": "media/reviews/beatbot-iskim/solartrack.webp",
+    "checksum": "sha256:79f59617e7c993575f9065704c1cbb60d3bb41e30bfd85d437c0d5f44c881b35",
+    "width": 1500,
+    "height": 1500,
+    "bytes": 215456,
+    "saved": -3222
+  },
+  {
+    "to": "media/reviews/beatbot-iskim/auto-park.webp",
+    "checksum": "sha256:a7fbc76176b145fbc5253e515c86c92a06f2159a3858b98affed432485dd55ab",
+    "width": 1500,
+    "height": 1500,
+    "bytes": 198182,
+    "saved": -4250
+  },
+  {
+    "to": "media/reviews/brinbo-sk01/hero.webp",
+    "checksum": "sha256:f00af736bcc4e26a4ff09d474a6fa0b951af04a61b13f3ee33734a0c42d70d32",
+    "width": 1500,
+    "height": 1156,
+    "bytes": 135790,
+    "saved": -8180
+  },
+  {
+    "to": "media/reviews/brinbo-sk01/surface-cleaning.webp",
+    "checksum": "sha256:130e04e4c532a95568e150911e79cc87338f8380651a0ec9c297e6d73abf340d",
+    "width": 1500,
+    "height": 1500,
+    "bytes": 194242,
+    "saved": 6217
+  },
+  {
+    "to": "media/reviews/brinbo-sk01/charging.webp",
+    "checksum": "sha256:9516d308a04a37050d1b7b7a078ebe9c9e009d818fc2b7f16c04ce2068c8c25d",
+    "width": 1500,
+    "height": 1500,
+    "bytes": 151094,
+    "saved": 8175
+  },
+  {
+    "to": "media/reviews/brinbo-sk01/app-support.webp",
+    "checksum": "sha256:2e63f2437c366bf47596c5b75e457306c56374a6197a0057241d4cae2ab1e472",
+    "width": 1500,
+    "height": 1500,
+    "bytes": 215652,
+    "saved": -6675
+  },
+  {
+    "to": "media/reviews/brinbo-sk01/ultrasonic.webp",
+    "checksum": "sha256:efc918f10ddbd771ef81f3e9f90a9eb867e1ee469f27ab36fa0cad17802f77eb",
+    "width": 1500,
+    "height": 1500,
+    "bytes": 152946,
+    "saved": 12943
+  },
+  {
+    "to": "media/reviews/brinbo-sk01/anti-stuck.webp",
+    "checksum": "sha256:5b4500b2b70a362d9232d24fbf6466915ece8140b7c728aca16370675fe6269a",
+    "width": 1500,
+    "height": 1500,
+    "bytes": 346362,
+    "saved": -49435
+  },
+  {
+    "to": "media/reviews/brinbo-sk01/two-modes.webp",
+    "checksum": "sha256:9436017f749bb3609e8ded79787d8139da4a4f9afc579ebd6f6781860991849a",
+    "width": 1500,
+    "height": 1500,
+    "bytes": 108858,
+    "saved": 16568
   }
 ]

@@ -60,7 +60,8 @@ surface first, and it is rated for above-ground use.
 
 None of the four machines above skims. The two flagships that do are in-ground
 only, so for an above-ground pool the skimmer is genuinely a second purchase
-rather than a feature you can buy your way to.
+rather than a feature you can buy your way to. We compare the solar pool
+skimmers on their own page.
 
 ## What we would not do
 

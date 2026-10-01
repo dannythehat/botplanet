@@ -157,6 +157,10 @@ obviously worthwhile machine we have looked at, because it is cheap relative to 
 floor robots, it runs on sunlight, and it removes a problem the others only clean up
 after.
 
+It is one of four solar pool skimmers we rank side by side, alongside the Aiper
+EcoSurfer S2 and the BRINBO SK01, and it is the one with the most documentation
+behind it.
+
 Do not buy it as your only robot unless the only thing that bothers you is the
 surface. It will not clean your floor and it does not claim to — Betta is unusually
 straight about that, and we would rather you heard it from us before the box arrives

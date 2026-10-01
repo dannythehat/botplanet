@@ -226,8 +226,14 @@ describe("exact-product destinations", () => {
        head terms. Weaker than every entry above — neither ASIN was read
        through SerpAPI or a direct fetch, only found in a web search result's
        own title, because Amazon blocked every automated fetch attempted.
-       Still a pinned ASIN naming the product, not a bare search link. */
-    expect(exact).toHaveLength(64);
+       Still a pinned ASIN naming the product, not a bare search link.
+
+       67 on 1 October 2026: the Aiper EcoSurfer S2, Beatbot iSkim and BRINBO
+       SK01, three of the owner's top four solar skimmers (the fourth, the
+       Betta SE Plus, was already here). The owner pasted each ASIN and a
+       fetch returned a title naming the machine; no details table. Same
+       grade as Botley and Code & Go. */
+    expect(exact).toHaveLength(67);
     expect(search).toHaveLength(0);
     for (const d of exact) {
       expect(d.identifierKind).toBe("asin");

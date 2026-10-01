@@ -863,6 +863,33 @@ export const CATEGORY_ANCHORS: Record<string, InternalAnchor[]> = {
   ],
 
   "robotic-pool-cleaners": [
+    /* SOLAR SKIMMERS, ADDED 1 OCTOBER 2026 with the four-machine best-of and
+       three new reviews. The best-of phrase goes first; the machine names are
+       distinct strings and cannot collide with it. */
+    {
+      anchor: "solar pool skimmers",
+      href: "/best-robots/robotic-pool-cleaners/solar-powered-skimmers/",
+      why: "The pool pages already tell a tree-lined pool to add a skimmer, and until now the next step was a single review. The best-of is where the four are compared.",
+      status: "live",
+    },
+    {
+      anchor: "Aiper EcoSurfer S2",
+      href: "/robots/robotic-pool-cleaners/aiper-ecosurfer-s2/",
+      why: "The skimmer named beside the Betta wherever skimmers are discussed.",
+      status: "live",
+    },
+    {
+      anchor: "Beatbot iSkim",
+      href: "/robots/robotic-pool-cleaners/beatbot-iskim/",
+      why: "The skimmer with the biggest basket, named wherever skimmers are discussed.",
+      status: "live",
+    },
+    {
+      anchor: "BRINBO SK01",
+      href: "/robots/robotic-pool-cleaners/brinbo-sk01/",
+      why: "The newest skimmer of the four, named wherever skimmers are discussed.",
+      status: "live",
+    },
     /* CROSS-CATEGORY, ADDED 8 AUGUST 2026 in the internal-link pass. Three
        hubs were sitting on two contextual inbound links each because nothing
        outside their own category ever mentioned them. These fire on prose that
@@ -1168,6 +1195,49 @@ export interface RetrofittedInbound {
    the commit that ships it. A page with no entry is a page nothing older links
    to, which is the failure this table exists to make visible. */
 export const RETROFITTED_INBOUND: RetrofittedInbound[] = [
+  {
+    page: "/best-robots/robotic-pool-cleaners/solar-powered-skimmers/",
+    shipped: "2026-10-01",
+    categorySlug: "robotic-pool-cleaners",
+    anchor: "solar pool skimmers",
+    from: [
+      { prose: "best-robotic-pool-cleaners", shipped: "2026-08-06", why: "Tells a pool under trees to run a skimmer beside a floor robot and, until now, had nowhere to send the reader." },
+      { prose: "betta-se-plus", shipped: "2026-07-31", why: "The review of the only skimmer we held; it now has three comparisons to point at." },
+      { prose: "robotic-pool-cleaners-compared", shipped: "2026-08-06", why: "Explains why the Betta is outside every group; the skimmers are the group it belongs to." },
+      { prose: "aiper-seagull-se", shipped: "2026-08-04", why: "Its rule-outs send a reader with a leaf problem to a skimmer, and the comparison is the useful next click." },
+      { prose: "best-above-ground-pool-cleaners", shipped: "2026-08-06", why: "Says an above-ground pool under trees needs a skimmer as a second purchase and had no page to send them to." },
+    ],
+  },
+  {
+    page: "/robots/robotic-pool-cleaners/aiper-ecosurfer-s2/",
+    shipped: "2026-10-01",
+    categorySlug: "robotic-pool-cleaners",
+    anchor: "Aiper EcoSurfer S2",
+    from: [
+      { prose: "best-robotic-pool-cleaners", shipped: "2026-08-06", why: "Names the skimmers that exist beside the Betta." },
+      { prose: "betta-se-plus", shipped: "2026-07-31", why: "The Betta review now names its closest rivals." },
+    ],
+  },
+  {
+    page: "/robots/robotic-pool-cleaners/beatbot-iskim/",
+    shipped: "2026-10-01",
+    categorySlug: "robotic-pool-cleaners",
+    anchor: "Beatbot iSkim",
+    from: [
+      { prose: "best-robotic-pool-cleaners", shipped: "2026-08-06", why: "Names the skimmers that exist beside the Betta." },
+      { prose: "robotic-pool-cleaners-compared", shipped: "2026-08-06", why: "Places the Betta among the skimmers rather than leaving it in none of the groups." },
+    ],
+  },
+  {
+    page: "/robots/robotic-pool-cleaners/brinbo-sk01/",
+    shipped: "2026-10-01",
+    categorySlug: "robotic-pool-cleaners",
+    anchor: "BRINBO SK01",
+    from: [
+      { prose: "betta-se-plus", shipped: "2026-07-31", why: "The Betta review now names its closest rivals." },
+      { prose: "robotic-pool-cleaners-compared", shipped: "2026-08-06", why: "Places the Betta among the skimmers rather than leaving it in none of the groups." },
+    ],
+  },
   {
     page: "/robots/educational-coding-robots/botley-the-coding-robot/",
     shipped: "2026-09-27",

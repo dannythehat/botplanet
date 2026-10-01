@@ -32,6 +32,8 @@ Ranked by what they reach, the catalogue splits four ways:
 
 The Betta SE Plus is in none of those groups because it is a skimmer, not a
 cleaner. That distinction is worth more than any brand preference on this page.
+The solar pool skimmers are compared on their own page, including the Beatbot
+iSkim and the BRINBO SK01.
 
 ## Then compare on the pool you actually own
 
