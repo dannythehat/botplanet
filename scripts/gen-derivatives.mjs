@@ -523,6 +523,15 @@ const SOURCES = [
   // Rendered in the homepage footer and the robot-dog feature with no responsive
   // variants until audit:weight flagged it on 1 October 2026.
   "/media/hubs/companion/tile.webp",
+  // betta-se-plus, the seven panels added 1 October 2026 (the SE Plus is the
+  // solar-skimmer best-of's anchor machine).
+  "/media/reviews/betta-se-plus/photo-top.webp",
+  "/media/reviews/betta-se-plus/charging-modes.webp",
+  "/media/reviews/betta-se-plus/non-stop-30h.webp",
+  "/media/reviews/betta-se-plus/motors-sct.webp",
+  "/media/reviews/betta-se-plus/fall-winter.webp",
+  "/media/reviews/betta-se-plus/basket-photo.webp",
+  "/media/reviews/betta-se-plus/radar-uv.webp",
 ];
 
 const run = async () => {

@@ -1,23 +1,23 @@
 {
   "launchProducts": 12,
   "totals": {
-    "assets": 374,
-    "productAssets": 262,
-    "depictions": 149,
-    "illustrations": 214,
+    "assets": 381,
+    "productAssets": 269,
+    "depictions": 150,
+    "illustrations": 220,
     "placeholders": 11,
     "withdrawn": 0,
     "exactModelConfirmed": 12,
     "publicSafe": 12,
     "heroReady": 11,
     "fullSetReady": 11,
-    "derivatives": 1174,
-    "altApproved": 360,
+    "derivatives": 1197,
+    "altApproved": 367,
     "altDecorative": 14,
     "altMissing": 0,
     "altRejected": 0,
-    "schemaProductEligible": 130,
-    "schemaOpenGraphEligible": 374
+    "schemaProductEligible": 131,
+    "schemaOpenGraphEligible": 381
   },
   "rows": [
     {
@@ -255,6 +255,7 @@
       "exactModel": "Betta SE Plus — Solar-Powered Robotic Pool Skimmer",
       "heroAssetId": "art-betta-se-plus",
       "supportingAssetIds": [
+        "betta-se-plus-basket-photo",
         "fig-betta-se-plus-hero",
         "fig-betta-se-plus-twin-motors",
         "fig-betta-se-plus-sensors",
@@ -278,6 +279,7 @@
       "altTextStatus": "approved",
       "structuredDataImages": [
         "/media/products/betta-se-plus.webp",
+        "/media/reviews/betta-se-plus/photo-top.webp",
         "/media/reviews/betta-se-plus/hero.webp",
         "/media/reviews/betta-se-plus/twin-motors.webp",
         "/media/reviews/betta-se-plus/sensors.webp",

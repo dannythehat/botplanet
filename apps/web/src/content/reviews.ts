@@ -548,22 +548,39 @@ export const REVIEWS: Record<string, ReviewContent> = {
     },
     figures: [
       {
-        afterHeading: "Runtime, and the number that sounds like a typo",
-        src: "/media/reviews/betta-se-plus/twin-motors.webp",
-        caption:
-          "Twin Salt Chlorine Tolerant motors and dual charging — solar, with a mains adapter for a bad week. The dock shown here is illustrative: Betta does not sell one, and the machine charges afloat or on the adapter.",
+        afterHeading: "What a skimmer actually does, and why it is not a lesser robot",
+        src: "/media/reviews/betta-se-plus/photo-top.webp",
+        caption: "The skimmer from the front: solar panel on top, open intake below it, two propellers underneath. Betta's own product photograph.",
       },
       {
-        afterHeading: "Navigation, and what \"ultrasonic radar\" is doing here",
-        src: "/media/reviews/betta-se-plus/sensors.webp",
-        caption:
-          "Ultrasonic radar for obstacle detection and a UV-resistant shell — both Betta's own wording, and both matter more on a machine that lives in full sun.",
+        afterHeading: "Who this is for",
+        src: "/media/reviews/betta-se-plus/motors-sct.webp",
+        caption: "Twin motors Betta describes as salt chlorine tolerant, which is the claim that matters if your pool is a salt pool. Betta's panel; we have not tested it.",
+      },
+      {
+        afterHeading: "Runtime, and the number that sounds like a typo",
+        src: "/media/reviews/betta-se-plus/non-stop-30h.webp",
+        caption: "Betta's panel for the 30 hour figure. It is the maker's claim and we have not measured it.",
       },
       {
         afterHeading: "Filtration, and the one number Betta does publish",
-        src: "/media/reviews/betta-se-plus/debris-basket.webp",
-        caption:
-          "The 200 micron basket lifts out by its handle. The docking station in this illustration is not part of the product — there is no dock to buy.",
+        src: "/media/reviews/betta-se-plus/basket-photo.webp",
+        caption: "The debris basket lifted out. It is emptied by hand; there is no dock.",
+      },
+      {
+        afterHeading: "Navigation, and what \"ultrasonic radar\" is doing here",
+        src: "/media/reviews/betta-se-plus/radar-uv.webp",
+        caption: "Ultrasonic radar and a UV-resistant body, both in Betta's own wording.",
+      },
+      {
+        afterHeading: "What is in the box, and the warranty",
+        src: "/media/reviews/betta-se-plus/charging-modes.webp",
+        caption: "Solar charging, with a mains adapter option for a run of dull days. Betta's panel.",
+      },
+      {
+        afterHeading: "What we cannot tell you",
+        src: "/media/reviews/betta-se-plus/fall-winter.webp",
+        caption: "Betta's explanation of shorter autumn and winter runs: less sun, not a worn battery. It is plausible and unverified here.",
       },
     ],
     /* Seller's own footage, hosted on Amazon — the URL carries
