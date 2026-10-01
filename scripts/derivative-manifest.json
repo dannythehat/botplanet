@@ -4718,39 +4718,39 @@
   {
     "source": "/media/editorial/best-solar-pool-skimmers.webp",
     "sourceWidth": 1672,
-    "sourceHeight": 940,
+    "sourceHeight": 941,
     "derivatives": [
       {
         "id": "media-editorial-best-solar-pool-skimmers-webp-360",
         "src": "/media/editorial/best-solar-pool-skimmers-360w.webp",
         "width": 360,
-        "height": 202,
-        "bytes": 8282,
-        "checksum": "sha256:af5c1a597b8c1c53193245310a04f0ba83e63440637531e61ece461dcb91e083"
+        "height": 203,
+        "bytes": 14888,
+        "checksum": "sha256:53594158c1e16ed9ea8e25cd7fc7836e4edd77a5dc56d60999751151ad45add5"
       },
       {
         "id": "media-editorial-best-solar-pool-skimmers-webp-640",
         "src": "/media/editorial/best-solar-pool-skimmers-640w.webp",
         "width": 640,
         "height": 360,
-        "bytes": 19318,
-        "checksum": "sha256:0da2adc4e841267d0c8b8438e761a2cfbccae69c2780edb4be09f8714663bebf"
+        "bytes": 37294,
+        "checksum": "sha256:c1534b305b7b055ecc83f1b7d1436eac82720d98d272d62f7c0bbabf2ccf27d6"
       },
       {
         "id": "media-editorial-best-solar-pool-skimmers-webp-960",
         "src": "/media/editorial/best-solar-pool-skimmers-960w.webp",
         "width": 960,
         "height": 540,
-        "bytes": 36686,
-        "checksum": "sha256:93e2d5eda75b18100b508f585967f181f5e9ce4851704dc3690d9847f93d6d95"
+        "bytes": 74632,
+        "checksum": "sha256:2d16ab89f460d9d1b18ab3bf3f548b622bdd55e61cb552723edba390e183b9db"
       },
       {
         "id": "media-editorial-best-solar-pool-skimmers-webp-1440",
         "src": "/media/editorial/best-solar-pool-skimmers-1440w.webp",
         "width": 1440,
         "height": 810,
-        "bytes": 61826,
-        "checksum": "sha256:e96f34bb33723579cbf271bd52f2b40b34dba1255fc8062243c69790c63a0a93"
+        "bytes": 121158,
+        "checksum": "sha256:e6a65d1cd75ac4aa2bbe5509a5150255d4a32a742fa41bf59dc43b5e3dc3671f"
       }
     ]
   },
@@ -13913,6 +13913,154 @@
         "height": 960,
         "bytes": 85072,
         "checksum": "sha256:397db8aebecec81181fcb5fb68a4bdf77a058ac060d56d8177578fd9930fd5d1"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/betta-se-plus/render.webp",
+    "sourceWidth": 1504,
+    "sourceHeight": 1046,
+    "derivatives": [
+      {
+        "id": "media-reviews-betta-se-plus-render-webp-360",
+        "src": "/media/reviews/betta-se-plus/render-360w.webp",
+        "width": 360,
+        "height": 250,
+        "bytes": 9590,
+        "checksum": "sha256:48fa97bc23f31ebf4c33e8dd78e03fd70fbf6cad1e06f529a9fb0eff773b8a58"
+      },
+      {
+        "id": "media-reviews-betta-se-plus-render-webp-640",
+        "src": "/media/reviews/betta-se-plus/render-640w.webp",
+        "width": 640,
+        "height": 445,
+        "bytes": 24768,
+        "checksum": "sha256:16f8b05a1e7ac99219a4b8bd42e3b4c952efc4d13b4f4d5eeadc5060fe86802d"
+      },
+      {
+        "id": "media-reviews-betta-se-plus-render-webp-960",
+        "src": "/media/reviews/betta-se-plus/render-960w.webp",
+        "width": 960,
+        "height": 668,
+        "bytes": 54898,
+        "checksum": "sha256:964a2f8be80dec82486fb3b5b73339e2394a0c6f96343f576d62f30472039d50"
+      },
+      {
+        "id": "media-reviews-betta-se-plus-render-webp-1440",
+        "src": "/media/reviews/betta-se-plus/render-1440w.webp",
+        "width": 1440,
+        "height": 1001,
+        "bytes": 100526,
+        "checksum": "sha256:ca1c80ece1936ef85f24d2fda2d64afa3e6522de8df3aa470356820e014dcaa9"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/brinbo-sk01/render.webp",
+    "sourceWidth": 1428,
+    "sourceHeight": 1101,
+    "derivatives": [
+      {
+        "id": "media-reviews-brinbo-sk01-render-webp-360",
+        "src": "/media/reviews/brinbo-sk01/render-360w.webp",
+        "width": 360,
+        "height": 278,
+        "bytes": 21772,
+        "checksum": "sha256:4c5a184f3b64ba1403d50f5c28088991a5b5f4c0ea47729900ca165975d21639"
+      },
+      {
+        "id": "media-reviews-brinbo-sk01-render-webp-640",
+        "src": "/media/reviews/brinbo-sk01/render-640w.webp",
+        "width": 640,
+        "height": 493,
+        "bytes": 58616,
+        "checksum": "sha256:bdd4273c0a180edd39e8aac7b11b434866e895051b4d830d3fd1b6b51a283d88"
+      },
+      {
+        "id": "media-reviews-brinbo-sk01-render-webp-960",
+        "src": "/media/reviews/brinbo-sk01/render-960w.webp",
+        "width": 960,
+        "height": 740,
+        "bytes": 126636,
+        "checksum": "sha256:2ef0ed265961bd7aed3348764be77f2c0096011fcda0e06f10e9740d900941fa"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/beatbot-iskim/render.webp",
+    "sourceWidth": 1596,
+    "sourceHeight": 986,
+    "derivatives": [
+      {
+        "id": "media-reviews-beatbot-iskim-render-webp-360",
+        "src": "/media/reviews/beatbot-iskim/render-360w.webp",
+        "width": 360,
+        "height": 222,
+        "bytes": 16234,
+        "checksum": "sha256:8cb1f6c7f6a8d374dfc9a3c7a0dbd6c50b325419286c43fc67d715a1bfd24634"
+      },
+      {
+        "id": "media-reviews-beatbot-iskim-render-webp-640",
+        "src": "/media/reviews/beatbot-iskim/render-640w.webp",
+        "width": 640,
+        "height": 395,
+        "bytes": 44922,
+        "checksum": "sha256:7969a4526eef4ffbca674d597206f0c634a9e77e8d0b019b40368572d0054420"
+      },
+      {
+        "id": "media-reviews-beatbot-iskim-render-webp-960",
+        "src": "/media/reviews/beatbot-iskim/render-960w.webp",
+        "width": 960,
+        "height": 593,
+        "bytes": 95668,
+        "checksum": "sha256:5eb7bc791229e5cbd7784583fcc2d7b97c5d14045ee8961707d7aed9aeca07e4"
+      },
+      {
+        "id": "media-reviews-beatbot-iskim-render-webp-1440",
+        "src": "/media/reviews/beatbot-iskim/render-1440w.webp",
+        "width": 1440,
+        "height": 890,
+        "bytes": 165904,
+        "checksum": "sha256:673a65e2914f215084bec9aed541cfd3096ba7f35422e7fd5412ba7ddbddb912"
+      }
+    ]
+  },
+  {
+    "source": "/media/reviews/aiper-ecosurfer-s2/render.webp",
+    "sourceWidth": 1504,
+    "sourceHeight": 1046,
+    "derivatives": [
+      {
+        "id": "media-reviews-aiper-ecosurfer-s2-render-webp-360",
+        "src": "/media/reviews/aiper-ecosurfer-s2/render-360w.webp",
+        "width": 360,
+        "height": 250,
+        "bytes": 10172,
+        "checksum": "sha256:0b9ae0af2c18dd7ce0b6368dcc756750d32a00d04ec0f906d05c88beb2526df2"
+      },
+      {
+        "id": "media-reviews-aiper-ecosurfer-s2-render-webp-640",
+        "src": "/media/reviews/aiper-ecosurfer-s2/render-640w.webp",
+        "width": 640,
+        "height": 445,
+        "bytes": 31120,
+        "checksum": "sha256:4f15ebfde4a2d48902562b13de2ff30cc5add6c32f2936329fd853ac25753c9f"
+      },
+      {
+        "id": "media-reviews-aiper-ecosurfer-s2-render-webp-960",
+        "src": "/media/reviews/aiper-ecosurfer-s2/render-960w.webp",
+        "width": 960,
+        "height": 668,
+        "bytes": 79760,
+        "checksum": "sha256:6d84bfe1e1cc1095739de2339b3c36e809bbc873181ace42bffbe89e9c873a3d"
+      },
+      {
+        "id": "media-reviews-aiper-ecosurfer-s2-render-webp-1440",
+        "src": "/media/reviews/aiper-ecosurfer-s2/render-1440w.webp",
+        "width": 1440,
+        "height": 1001,
+        "bytes": 168334,
+        "checksum": "sha256:34d05cde886e3d861113992354906a16020eec33f0c1acb2bd6025260961c108"
       }
     ]
   }

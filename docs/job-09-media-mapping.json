@@ -1,23 +1,23 @@
 {
   "launchProducts": 12,
   "totals": {
-    "assets": 410,
-    "productAssets": 289,
-    "depictions": 154,
-    "illustrations": 245,
+    "assets": 413,
+    "productAssets": 293,
+    "depictions": 158,
+    "illustrations": 244,
     "placeholders": 11,
     "withdrawn": 0,
     "exactModelConfirmed": 12,
     "publicSafe": 12,
     "heroReady": 11,
     "fullSetReady": 11,
-    "derivatives": 1299,
-    "altApproved": 396,
+    "derivatives": 1314,
+    "altApproved": 399,
     "altDecorative": 14,
     "altMissing": 0,
     "altRejected": 0,
     "schemaProductEligible": 134,
-    "schemaOpenGraphEligible": 410
+    "schemaOpenGraphEligible": 413
   },
   "rows": [
     {
@@ -253,7 +253,7 @@
       "slug": "betta-se-plus",
       "canonicalUrl": "https://botplanet.io/robots/robotic-pool-cleaners/betta-se-plus/",
       "exactModel": "Betta SE Plus — Solar-Powered Robotic Pool Skimmer",
-      "heroAssetId": "betta-se-plus-photo-top",
+      "heroAssetId": "betta-se-plus-render",
       "supportingAssetIds": [
         "betta-se-plus-basket-photo",
         "fig-betta-se-plus-hero",
@@ -261,7 +261,7 @@
         "fig-betta-se-plus-sensors",
         "fig-betta-se-plus-debris-basket"
       ],
-      "renderedAssetId": "betta-se-plus-photo-top",
+      "renderedAssetId": "betta-se-plus-render",
       "renderedIsPlaceholder": false,
       "imageSource": "depiction — BotPlanet",
       "allowedPlacements": [
@@ -275,7 +275,7 @@
         "structured_data",
         "email"
       ],
-      "altText": "Front view of the blue and black Betta solar skimmer on a white background: a dark solar panel across the top, the Betta name on the front lip above the open intake, and two small blue propellers underneath.",
+      "altText": "The silver and grey Betta SE Plus solar skimmer on a round dark metal platter edged with cyan light, seen from above at an angle: a dark solar panel across the top with a long clear window, the Betta name on the front, and a pale grey side cover.",
       "altTextStatus": "approved",
       "structuredDataImages": [
         "/media/reviews/betta-se-plus/photo-top.webp",

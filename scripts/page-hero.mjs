@@ -4,7 +4,7 @@
  *
  *   node scripts/page-hero.mjs --src <picture> --title "Solar Skimmers" \
  *     --kicker "BEST OF · POOL" --out apps/web/public/media/editorial/<slug>.webp \
- *     [--mobile-out apps/web/public/media/editorial/<slug>-mobile.webp] [--focus-x 0.63] [--mobile-focus-x 0.72]
+ *     [--mobile-out apps/web/public/media/editorial/<slug>-mobile.webp] [--focus-x 0.63] [--mobile-focus-x 0.72] [--layout panorama]
  *
  * Desktop is 1672x941 (16:9). Mobile, when asked for, is 900x1125 (4:5). Both are
  * cropped around --focus-x (0 left edge, 1 right edge; default centre) so the
@@ -69,5 +69,36 @@ async function make(W, H, out, mobile) {
   console.log(`wrote ${out} (${W}x${H})`);
 }
 
+/* A wide picture (say four products in a row) cannot be cropped to 16:9 without
+   losing some of them. --layout panorama keeps all of it: the picture sits at the
+   bottom at full width, fades into the page colour at its top edge, and the title
+   goes in the band above. */
+async function panorama(W, H, out) {
+  const meta = await sharp(args.src).metadata();
+  const ih = Math.round((meta.height * W) / meta.width);
+  const top = H - ih;
+  const pic = await sharp(args.src).resize(W, ih).toBuffer();
+  const fade = Buffer.from(
+    `<svg width="${W}" height="${ih}"><defs><linearGradient id="f" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#070a0e"/><stop offset="0.22" stop-color="#070a0e" stop-opacity="0"/></linearGradient></defs><rect width="${W}" height="${ih}" fill="url(#f)"/></svg>`,
+  );
+  const picFaded = await sharp(pic).composite([{ input: fade }]).toBuffer();
+  const kick = args.kicker
+    ? `<text x="66" y="${Math.round(top * 0.36)}" font-size="26" letter-spacing="7" fill="#9fd0ff">${esc(args.kicker)}</text>`
+    : "";
+  const title = `<text x="64" y="${Math.round(top * 0.86)}" font-size="${Math.min(96, Math.round(top * 0.52))}">${esc(args.title)}</text>`;
+  const svg = Buffer.from(
+    `<svg width="${W}" height="${H}" xmlns="http://www.w3.org/2000/svg"><g font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-weight="700" fill="#fff">${kick}${title}</g></svg>`,
+  );
+  await sharp({ create: { width: W, height: H, channels: 3, background: "#070a0e" } })
+    .composite([{ input: picFaded, left: 0, top }, { input: svg }])
+    .webp({ quality: 90 })
+    .toFile(out);
+  console.log(`wrote ${out} (${W}x${H}, panorama)`);
+}
+
+if (args.layout === "panorama") {
+  await panorama(1672, 941, args.out);
+  process.exit(0);
+}
 await make(1672, 941, args.out, false);
 if (args["mobile-out"]) await make(900, 1125, args["mobile-out"], true);

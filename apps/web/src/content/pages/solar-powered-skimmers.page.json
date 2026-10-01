@@ -22,11 +22,11 @@
   },
   "hero": {
     "desktop": "/media/editorial/best-solar-pool-skimmers.webp",
-    "mobile": "/media/editorial/best-solar-pool-skimmers-mobile.webp",
-    "alt": "A solar pool skimmer floating on a still pool at sunset, drawing fallen leaves into its intake, with the words Solar Skimmers over the water.",
+    "mobile": null,
+    "alt": "Four solar pool skimmers in a row under the words Solar Skimmers: the grey Betta SE Plus on a dark platter, the grey and teal BRINBO SK01 in a pool, the dark blue Beatbot iSkim at dusk, and the grey Aiper Surfer S2 on a dark platter.",
     "focal": "50% 50%",
     "headline": "Solar Skimmers",
-    "source": "Owner-supplied illustration, cropped to 16:9 with the page title set over it"
+    "source": "Owner-made panorama of the four machines, with a title band set by us"
   },
   "prose": "best-solar-pool-skimmers",
   "layout": {

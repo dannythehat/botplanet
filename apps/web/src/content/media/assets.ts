@@ -6716,37 +6716,21 @@ export const SOLAR_SKIMMER_NEW_ASSETS: MediaAssetRecord[] = [
     notes: "Owner-supplied from the Amazon listing images; any text in the picture is the maker's marketing.",
   },
   {
-    ...base("hero-editorial-best-solar-pool-skimmers-mobile", "illustration"),
-    productId: null,
-    purpose: "Best solar pool skimmers page hero, portrait crop for phones",
-    exactModel: null,
-    type: "educational_diagram",
-    checksum: "sha256:e330a9c0509d8b6f8c7eb54858ca0a118e080eab2b7013b7f5702fe06089397b",
-    width: 900,
-    height: 1125,
-    src: "/media/editorial/best-solar-pool-skimmers-mobile.webp",
-    altText: "A grey and black solar pool skimmer floating at the edge of a pool at sunset, its solar panel catching the light and fallen leaves being drawn into its intake, with the words Solar Skimmers set over the water.",
-    altTextStatus: "approved",
-    schema: ORIGINAL_SCHEMA,
-    depictsRealProduct: false,
-    notes: "Portrait crop of the same owner-supplied illustration, for phones. Title text is our own.",
-  },
-  {
     ...base("hero-editorial-best-solar-pool-skimmers", "illustration"),
     productId: null,
     purpose: "Best solar pool skimmers page hero",
     exactModel: null,
     type: "educational_diagram",
-    checksum: "sha256:a6651702c885f146a6f27ad383b667d64af28d8bee61ce739bfdd97b95fa8c4b",
+    checksum: "sha256:41d0ad92663a0ac39549f27411e6128ee8a242b2f9e82b1564a3faa4f72ce1b7",
     width: 1672,
     height: 941,
     src: "/media/editorial/best-solar-pool-skimmers.webp",
     altText:
-      "A grey and black solar pool skimmer floating on a still infinity pool at sunset, its solar panel facing up and fallen leaves being drawn into its intake, with a modern house and palm trees beyond and the words Solar Skimmers set over the water.",
+      "Four solar pool skimmers in a row under the words Solar Skimmers: the grey Betta SE Plus on a dark platter, the grey and teal BRINBO SK01 in a pool, the dark blue Beatbot iSkim at dusk, and the grey Aiper Surfer S2 on a dark platter.",
     altTextStatus: "approved",
     schema: ORIGINAL_SCHEMA,
-    depictsRealProduct: false,
-    notes: "Owner-supplied illustration of a generic skimmer, not a picture of any one product, cropped to 16:9 with the page title set over it. Title text is our own.",
+    depictsRealProduct: true,
+    notes: "Owner-made panorama of the four machines, placed under a title band we set. Illustrations, not photographs.",
   },
 ];
 
@@ -6870,11 +6854,85 @@ export const BETTA_SE_ASSETS: MediaAssetRecord[] = [
   },
 ];
 
+
+/* Pictures the owner made for the four solar skimmers, 1 October 2026. They are
+   renders, not photographs, so they are NOT eligible as Product schema images
+   (ORIGINAL_SCHEMA) but they are the picture every table, card and preview shows.
+   Listed ahead of the supplied listing photographs so they win the tie when the
+   site picks a product's picture. */
+export const SOLAR_SKIMMER_RENDER_ASSETS: MediaAssetRecord[] = [
+  {
+    ...base("betta-se-plus-render", "depiction"),
+    productId: PRODUCT_ID["betta-se-plus"] ?? "prod-betta-se-plus",
+    purpose: "Betta SE Plus \u2014 owner-made render for tables, cards and previews",
+    exactModel: "Betta SE Plus \u2014 Solar-Powered Robotic Pool Skimmer",
+    type: "product_hero",
+    checksum: "sha256:a887b54ae5bf443e5556a34e46cfa76670d87f74b66915bafcebc0785f4d7736",
+    width: 1504,
+    height: 1046,
+    src: "/media/reviews/betta-se-plus/render.webp",
+    altText: "The silver and grey Betta SE Plus solar skimmer on a round dark metal platter edged with cyan light, seen from above at an angle: a dark solar panel across the top with a long clear window, the Betta name on the front, and a pale grey side cover.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: true,
+    notes: "Made by the owner as an illustration of the machine, not a photograph of it.",
+  },
+  {
+    ...base("brinbo-sk01-render", "depiction"),
+    productId: PRODUCT_ID["brinbo-sk01"] ?? "prod-brinbo-sk01",
+    purpose: "BRINBO SK01 \u2014 owner-made render for tables, cards and previews",
+    exactModel: "BRINBO SK01",
+    type: "product_hero",
+    checksum: "sha256:82c20795d93d1d56b75b2899c58cf3135506b4592c83b68bfff7e16c22bc3bbe",
+    width: 1428,
+    height: 1101,
+    src: "/media/reviews/brinbo-sk01/render.webp",
+    altText: "The grey and black BRINBO SK01 solar skimmer floating in bright blue pool water beside a stone edge: a dark mesh panel under a clear lid, a teal carry handle, and two large teal-ringed propellers at the front.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: true,
+    notes: "Made by the owner as an illustration of the machine, not a photograph of it.",
+  },
+  {
+    ...base("beatbot-iskim-render", "depiction"),
+    productId: PRODUCT_ID["beatbot-iskim"] ?? "prod-beatbot-iskim",
+    purpose: "Beatbot iSkim \u2014 owner-made render for tables, cards and previews",
+    exactModel: "Beatbot iSkim",
+    type: "product_hero",
+    checksum: "sha256:6c35a90eda36df547efd358d917f4db2ef55b03e216213e6dee6fe8d2e84d9a5",
+    width: 1596,
+    height: 986,
+    src: "/media/reviews/beatbot-iskim/render.webp",
+    altText: "The dark blue Beatbot iSkim floating on a pool at dusk, covered in drops of water: a square solar panel on top, the Beatbot name on the right-hand float, and lights from a house and a bay in the background.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: true,
+    notes: "Made by the owner as an illustration of the machine, not a photograph of it.",
+  },
+  {
+    ...base("aiper-ecosurfer-s2-render", "depiction"),
+    productId: PRODUCT_ID["aiper-ecosurfer-s2"] ?? "prod-aiper-ecosurfer-s2",
+    purpose: "Aiper EcoSurfer S2 \u2014 owner-made render for tables, cards and previews",
+    exactModel: "Aiper EcoSurfer S2",
+    type: "product_hero",
+    checksum: "sha256:c00cbfef3a09af5e15ab600458c6c40212b5368e1a8cd1efc5e8dddea0c0a795",
+    width: 1504,
+    height: 1046,
+    src: "/media/reviews/aiper-ecosurfer-s2/render.webp",
+    altText: "The grey Aiper skimmer on a round dark metal platter edged with cyan light, seen from above at an angle: a dark mesh panel, the Aiper name and a teal handle on the front, and Surfer S2 lettered on the side. Amazon sells this machine as the EcoSurfer S2.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: true,
+    notes: "Made by the owner as an illustration of the machine, not a photograph of it.",
+  },
+];
+
 /* Owner artwork sits ahead of the placeholders so a product that has both
    resolves to the artwork; the placeholder stays as the fallback if the
    artwork is ever withdrawn. */
 export const MEDIA_ASSETS: MediaAssetRecord[] = [
   ...ORIGINAL_ASSETS,
+  ...SOLAR_SKIMMER_RENDER_ASSETS,
   /* Real photographs of the Betta SE Plus go ahead of the BotPlanet artwork for
      it: both are depictions, the sort is stable, and a photograph the maker
      published should win a tie against our own picture of the machine. */
@@ -6922,6 +6980,7 @@ export const DERIVATIVES: import("./types").Derivative[] = DERIVATIVE_MANIFEST.f
   // and the product silently drops out of responsive-variant readiness.
   const parent = [
     ...ORIGINAL_ASSETS,
+    ...SOLAR_SKIMMER_RENDER_ASSETS,
     ...OWNER_PRODUCT_ARTWORK,
     ...AUGUST_UPLOAD_ASSETS,
     ...CODING_UPLOAD_ASSETS,

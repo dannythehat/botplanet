@@ -562,6 +562,11 @@ const SOURCES = [
   "/media/reviews/betta-se-plus/se-motors.webp",
   "/media/reviews/betta-se-plus/se-radar-uv.webp",
   "/media/reviews/betta-se-plus/se-basket.webp",
+  // 1 October 2026: owner-made product renders for the four solar skimmers.
+  "/media/reviews/betta-se-plus/render.webp",
+  "/media/reviews/brinbo-sk01/render.webp",
+  "/media/reviews/beatbot-iskim/render.webp",
+  "/media/reviews/aiper-ecosurfer-s2/render.webp",
 ];
 
 const run = async () => {
