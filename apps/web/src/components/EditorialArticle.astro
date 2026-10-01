@@ -105,7 +105,7 @@ const parts: { html: string; slot: number | null }[] = [];
 </header>
 
 {article.image?.src && (
-  <figure class="bp-ed__hero">
+  <figure class:list={["bp-ed__hero", article.heroMobileSrc && "bp-ed__hero--portrait"]}>
     <picture>
       {article.heroMobileSrc && <source media="(max-width: 720px)" srcset={article.heroMobileSrc} />}
       <img
@@ -233,6 +233,14 @@ const parts: { html: string; slot: number | null }[] = [];
     height: auto;
     aspect-ratio: 1672 / 941;
     object-fit: cover;
+  }
+
+  /* A page with a portrait hero shows it whole on a phone, at its own shape,
+     instead of cropping it into the landscape box. */
+  @media (max-width: 720px) {
+    .bp-ed__hero--portrait img {
+      aspect-ratio: 900 / 1125;
+    }
   }
 
   .bp-ed__head {
