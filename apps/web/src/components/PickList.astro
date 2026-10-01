@@ -211,7 +211,22 @@ const ratedFor = (p: RenderedPick): string | null => {
     padding: 0;
     list-style: none;
     display: grid;
-    gap: clamp(1rem, 2.4vw, 1.4rem);
+    /* A wide gap, with a divider drawn in the middle of it, so each product reads
+       as its own block and the picture of one never runs into the next. */
+    gap: clamp(2.6rem, 6vw, 3.6rem);
+  }
+  .bp-picks__item:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    left: 6%;
+    right: 6%;
+    bottom: calc(clamp(2.6rem, 6vw, 3.6rem) / -2);
+    height: 7px;
+    transform: translateY(50%);
+    background:
+      radial-gradient(circle at 50% 50%, rgba(159, 208, 255, 0.95) 0 3px, transparent 4px),
+      linear-gradient(90deg, transparent, rgba(159, 208, 255, 0.55) 20%, rgba(159, 208, 255, 0.55) 80%, transparent) center / 100% 1px no-repeat;
+    pointer-events: none;
   }
 
   .bp-picks__item {
@@ -240,6 +255,8 @@ const ratedFor = (p: RenderedPick): string | null => {
   }
   @media (min-width: 900px) {
     .bp-picks__item { grid-template-columns: minmax(0, 300px) minmax(0, 1fr); align-items: start; }
+    /* The picture stays beside the text while a tall card scrolls past. */
+    .bp-picks__media { position: sticky; top: 6.5rem; }
   }
 
   /* The product's picture, on a pale pane so a white-background product shot
