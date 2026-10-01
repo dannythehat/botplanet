@@ -4317,7 +4317,7 @@ export const REVIEWS: Record<string, ReviewContent> = {
     categorySlug: "educational-coding-robots",
     eyebrow: "Coding robot review",
     title: "Botley 2.0 review",
-    seoTitle: "Botley 2.0 Review — Screen-Free Coding Before They Can Read",
+    seoTitle: "Botley the Coding Robot (2.0) Review — Screen-Free Coding",
     metaDescription:
       "Botley 2.0 is a screen-free coding robot for ages 5 to 7: a child programs " +
       "moves with a remote, Botley plays them back. What the activity set does and does not.",
@@ -4384,7 +4384,7 @@ export const REVIEWS: Record<string, ReviewContent> = {
     categorySlug: "educational-coding-robots",
     eyebrow: "Coding robot review",
     title: "Code & Go Robot Mouse review",
-    seoTitle: "Code & Go Robot Mouse Review — Coding With Cards, Ages 4+",
+    seoTitle: "Code and Go Robot Mouse Review — Coding With Cards, Ages 4+",
     metaDescription:
       "The Code & Go Robot Mouse is a $40.90 screen-free coding toy: a child places " +
       "direction cards to guide it to the cheese. What the bare unit includes.",
