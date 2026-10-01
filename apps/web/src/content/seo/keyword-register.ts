@@ -1269,6 +1269,25 @@ export const KEYWORD_REGISTER: PageKeywords[] = [
     researchedOn: RUN,
   },
   {
+    path: "/best-robots/robotic-pool-cleaners/solar-powered-skimmers/",
+    primary: { term: "solar powered pool skimmer", volume: 6600, difficulty: 0, mustAppear: true },
+    secondary: [
+      { term: "solar pool skimmer", volume: 6600, difficulty: 9, mustAppear: true },
+      { term: "robotic pool skimmer", volume: 2900, difficulty: 24, mustAppear: true },
+      { term: "automatic pool skimmer", volume: 1600, difficulty: 0, mustAppear: false },
+      { term: "best solar pool skimmer", volume: 320, difficulty: 0, mustAppear: true },
+      { term: "pool surface skimmer robot", volume: 210, difficulty: 0, mustAppear: false },
+    ],
+    cededTo: [
+      {
+        term: "robotic pool cleaner",
+        path: "/robots/robotic-pool-cleaners/",
+        why: "A skimmer is a different product class from a cleaner and the hub is where that distinction is drawn.",
+      },
+    ],
+    researchedOn: RUN,
+  },
+  {
     path: "/robots/robotic-pool-cleaners/aiper-ecosurfer-s2/",
     primary: { term: "aiper ecosurfer s2 review", volume: 0, difficulty: 0, mustAppear: true },
     secondary: [

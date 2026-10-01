@@ -6699,6 +6699,23 @@ export const SOLAR_SKIMMER_NEW_ASSETS: MediaAssetRecord[] = [
     depictsRealProduct: true,
     notes: "Owner-supplied from the Amazon listing images; any text in the picture is the maker's marketing.",
   },
+  {
+    ...base("hero-editorial-best-solar-pool-skimmers", "illustration"),
+    productId: null,
+    purpose: "Best solar pool skimmers page hero",
+    exactModel: null,
+    type: "educational_diagram",
+    checksum: "sha256:ed562e4a01a32dcac7ad91adbc0fe2f76766ac490d632bf1db1ba020f9d78fef",
+    width: 1672,
+    height: 940,
+    src: "/media/editorial/best-solar-pool-skimmers.webp",
+    altText:
+      "Four solar pool skimmers in a grid: a close-up of the Aiper EcoSurfer S2's solar panel with Aiper's 35 hour and SolarSeeker claims, the dark blue Beatbot iSkim with its charger, the grey and black BRINBO SK01 beside a phone showing its app, and the grey Betta SE Plus seen from above.",
+    altTextStatus: "approved",
+    schema: ORIGINAL_SCHEMA,
+    depictsRealProduct: true,
+    notes: "A grid of four owner-supplied listing images, one per machine. The Aiper tile is Aiper's own panel and carries Aiper's claim in its pixels.",
+  },
 ];
 
 /* Owner artwork sits ahead of the placeholders so a product that has both

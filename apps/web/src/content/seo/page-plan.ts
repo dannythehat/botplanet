@@ -2022,7 +2022,7 @@ const POOL_ROUND_TWO: PagePlan[] = [
     path: "/best-robots/robotic-pool-cleaners/solar-powered-skimmers/",
     category: "robotic-pool-cleaners",
     type: "best-of",
-    status: "planned",
+    status: "built",
     intent: "Stop leaves sinking before a floor robot has to deal with them.",
     primary: { term: "solar powered pool skimmer", volume: 6600, difficulty: 0 },
     secondary: [
@@ -2035,10 +2035,9 @@ const POOL_ROUND_TWO: PagePlan[] = [
     ceded: [
       { term: "robotic pool cleaner", toPath: "/robots/robotic-pool-cleaners/", why: "A skimmer is a different product class from a cleaner and the hub is where that distinction is drawn." },
     ],
-    products: ["betta-se-plus"],
-    productsNote: "BLOCKED ON A SECOND SKIMMER. We hold exactly one, and a one-product segment page is thin whatever the volume. Ruling 7 of the 1 August run deferred this on the same gate and the gate has not moved — what changed is that the keyword case is now the strongest in the category that we cannot act on.",
+    products: ["betta-se-plus", "aiper-ecosurfer-s2", "beatbot-iskim", "brinbo-sk01"],
     linksOut: ["/robots/robotic-pool-cleaners/", "/robots/robotic-pool-cleaners/betta-se-plus/", "/best-robots/robotic-pool-cleaners/"],
-    images: [{ slot: "hero", shows: "A solar skimmer floating on a leaf-strewn surface, trees overhead", supplied: false }],
+    images: [{ slot: "hero", shows: "A solar skimmer floating on a leaf-strewn surface, trees overhead", supplied: true }],
     schema: ["Article", "ItemList", "FAQPage", "BreadcrumbList"],
     research: "local run · 2026-08-06 · $0.1795",
     evidence: "~11,600/mo combined across six phrasings, and 'solar powered pool skimmer' is the same 6,600 as 'solar pool skimmer' at KD 0 instead of 9 — the easy-phrasing trick the vacuum category also turned on.",

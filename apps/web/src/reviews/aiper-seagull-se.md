@@ -31,7 +31,8 @@ cleaners than anyone else.
   corded Dolphin Nautilus CC Plus does floors and walls for the mid-range money.
 - **The waterline ring is your complaint.** Nothing here touches it.
 - **Leaves land on your water faster than they sink.** A surface skimmer like the
-  Betta SE Plus attacks that problem at the top, which is where it starts.
+  Betta SE Plus attacks that problem at the top, which is where it starts, and
+  we compare the solar pool skimmers on a page of their own.
 - **You want an app, a schedule, or a map.** There is a power button. That is the
   interface.
 

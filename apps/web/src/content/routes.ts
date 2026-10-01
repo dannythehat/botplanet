@@ -810,6 +810,23 @@ export const ROUTES: RouteDef[] = [
     summary: "The seven cordless machines ranked, and the honest case for buying corded instead.",
   },
   {
+    /* A child of the pool best-of: a skimmer is a different product class from a
+       cleaner and the parent is where that distinction is drawn. Built 1 October
+       2026 from the owner's four best-selling solar skimmers on Amazon US. */
+    path: `/best-robots/${CAT}/solar-powered-skimmers/`,
+    label: "Best solar powered pool skimmers",
+    breadcrumbLabel: "Solar skimmers",
+    section: "best",
+    parent: `/best-robots/${CAT}/`,
+    status: "live",
+    navSurface: "none",
+    footerGroup: null,
+    inSitemap: true,
+    indexable: true,
+    category: CAT,
+    summary: "Four solar pool skimmers compared on runtime claims, basket size, sensors and apps.",
+  },
+  {
     /* Not on the 1 August map. The second pool run measured "robotic pool
        cleaner for above ground pool" at 2,400/mo, KD 0 — the first run saw
        above-ground at 140 and folded it into the best-of, which was right on

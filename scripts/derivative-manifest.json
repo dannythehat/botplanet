@@ -4716,6 +4716,45 @@
     ]
   },
   {
+    "source": "/media/editorial/best-solar-pool-skimmers.webp",
+    "sourceWidth": 1672,
+    "sourceHeight": 940,
+    "derivatives": [
+      {
+        "id": "media-editorial-best-solar-pool-skimmers-webp-360",
+        "src": "/media/editorial/best-solar-pool-skimmers-360w.webp",
+        "width": 360,
+        "height": 202,
+        "bytes": 8578,
+        "checksum": "sha256:1d8bb69290fb3ca23b37aa3a5dd5882453780466a7785e09451d495a49ceeea2"
+      },
+      {
+        "id": "media-editorial-best-solar-pool-skimmers-webp-640",
+        "src": "/media/editorial/best-solar-pool-skimmers-640w.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 20908,
+        "checksum": "sha256:ef8a24817e40b0785dec0343809569c6c03c1d646f74fb4eec0ff369c2154244"
+      },
+      {
+        "id": "media-editorial-best-solar-pool-skimmers-webp-960",
+        "src": "/media/editorial/best-solar-pool-skimmers-960w.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 45020,
+        "checksum": "sha256:80f5cb836f251d0c2d1a10dae61e417d4a9f6e7aefd875c7abecef7f1a1a4c36"
+      },
+      {
+        "id": "media-editorial-best-solar-pool-skimmers-webp-1440",
+        "src": "/media/editorial/best-solar-pool-skimmers-1440w.webp",
+        "width": 1440,
+        "height": 810,
+        "bytes": 90274,
+        "checksum": "sha256:72320706421a5a5afebeb19f6fcaefe43217a605bddfbcff7ab2722ed30ce101"
+      }
+    ]
+  },
+  {
     "source": "/media/editorial/above-ground-pool-cleaners.webp",
     "sourceWidth": 1672,
     "sourceHeight": 941,
