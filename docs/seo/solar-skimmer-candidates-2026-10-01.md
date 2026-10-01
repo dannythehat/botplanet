@@ -69,3 +69,14 @@ prices only.
 A best-of recommends a few machines it can stand behind. Brands with ten ratings
 are noted for completeness and are not candidates unless the owner's top-four
 list says otherwise.
+
+## Owner-supplied top four (1 October 2026)
+
+| # | Machine | Listing as supplied | Images staged | Catalogued |
+|---|---|---|---|---|
+| 1 | Aiper EcoSurfer S2 | see above | 4 | no |
+| 2 | Betta SE Plus (owner confirmed SE Plus) | 4.4 stars; Amazon's Choice | 7 | yes, images placed |
+| 3 | Beatbot iSkim (Ink Blue with charger $399; Navy $429) | 4.4 stars, 303 ratings, 200+ bought past month | 8 | no |
+| 4 | BRINBO SK01 "2026 NEW" Solar Pool Skimmer Robot with APP, Black Blue | 4.7 stars, 28 ratings, 200+ bought past month | 7 | no |
+
+ASINs for #1, #3 and #4 are not in the screenshots (the URL bar is truncated). They need the owner's links before any buy button is created.
