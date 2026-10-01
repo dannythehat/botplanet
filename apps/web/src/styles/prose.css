@@ -195,9 +195,9 @@
 .bp-prose.is-centered .bp-sec h2 { margin-top: 0; font-size: clamp(1.45rem, 3.2vw, 2rem); }
 .bp-prose.is-centered .bp-sec h2::before {
   content: counter(sec, decimal-leading-zero);
-  display: inline-block;
+  display: block;
   height: auto;
-  width: auto;
+  width: fit-content;
   margin: 0 0 0.9rem;
   padding: 0.3rem 0.7rem;
   border: 1px solid rgba(120, 176, 255, 0.45);
