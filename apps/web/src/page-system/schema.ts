@@ -38,6 +38,10 @@ export const PickSchema = z.object({
   why: z.string().min(60),
   /** Who should buy something else. Required: a pick with no downside is an advert. */
   not_for: z.string().min(20),
+  /** Two to four things in its favour. Say whose claim it is when it is the maker's. */
+  pros: z.array(z.string().min(5)).min(2).max(4),
+  /** One to three things to know before buying. Required for the same reason as not_for. */
+  cons: z.array(z.string().min(5)).min(1).max(3),
 });
 
 export const GlanceSchema = z

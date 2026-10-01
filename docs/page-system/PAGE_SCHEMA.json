@@ -177,13 +177,33 @@
               "not_for": {
                 "type": "string",
                 "minLength": 20
+              },
+              "pros": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 5
+                },
+                "minItems": 2,
+                "maxItems": 4
+              },
+              "cons": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 5
+                },
+                "minItems": 1,
+                "maxItems": 3
               }
             },
             "required": [
               "product",
               "award",
               "why",
-              "not_for"
+              "not_for",
+              "pros",
+              "cons"
             ],
             "additionalProperties": false
           },

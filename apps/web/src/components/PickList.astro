@@ -28,6 +28,7 @@
    ============================================================ */
 
 import SectionHead from "./SectionHead.astro";
+import ProductImage from "./ProductImage.astro";
 import type { EditorialPick } from "../content/editorial";
 
 export interface RenderedPick extends EditorialPick {
@@ -57,6 +58,8 @@ export interface RenderedPick extends EditorialPick {
   categorySlug?: string;
   /** Active offer's redirect key, when the product has one. Never a price. */
   redirectKey?: string | null;
+  /** Stable product id, so the card can show the product's picture from the media registry. */
+  productId?: string;
 }
 
 interface Props {
@@ -91,42 +94,65 @@ const ratedFor = (p: RenderedPick): string | null => {
 
   <ol class="bp-picks__list">
     {picks.map((p, i) => (
-      <li class="bp-picks__item">
-        <div class="bp-picks__head">
-          <span class="bp-picks__rank" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
-          <div>
+      <li class:list={["bp-picks__item", i === 0 && "is-top"]}>
+        {p.productId && (
+          <a class="bp-picks__media" href={p.href} tabindex="-1" aria-hidden="true">
+            <span class="bp-picks__rank" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
+            <ProductImage productId={p.productId} placement="listing_card" sizes="(min-width: 900px) 300px, 90vw" />
+          </a>
+        )}
+
+        <div class="bp-picks__body">
+          <div class="bp-picks__head">
             <p class="bp-picks__award">{p.award}</p>
             <h3 class="bp-picks__name">
               <a href={p.href}>{p.name}</a>
             </h3>
           </div>
-        </div>
 
-        <dl class="bp-picks__facts">
-          <div><dt>{doesLabel(p)}</dt><dd>{p.cleans}</dd></div>
-          <div><dt>Power</dt><dd>{p.power}</dd></div>
-          {ratedFor(p) && <div><dt>Rated for</dt><dd>{ratedFor(p)}</dd></div>}
-          <div><dt>Price band</dt><dd>{p.band}</dd></div>
-        </dl>
+          <ul class="bp-picks__chips" aria-label={`${p.name} at a glance`}>
+            <li><span>{doesLabel(p)}</span>{p.cleans}</li>
+            <li><span>Power</span>{p.power}</li>
+            {ratedFor(p) && <li><span>Rated for</span>{ratedFor(p)}</li>}
+            <li><span>Price band</span>{p.band}</li>
+          </ul>
 
-        <p class="bp-picks__why">{p.why}</p>
+          <p class="bp-picks__why">{p.why}</p>
 
-        <p class="bp-picks__against">
-          <span class="bp-picks__against-label">Skip it if</span>
-          {p.wrongFor}
-        </p>
-
-        <div class="bp-picks__actions">
-          {p.redirectKey && (
-            <a class="bp-picks__buy" href={`/go/${p.redirectKey}`} rel="sponsored nofollow">
-              <span>Check price on Amazon</span>
-              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
+          {(p.pros?.length || p.cons?.length) && (
+            <div class="bp-picks__proscons">
+              {p.pros?.length ? (
+                <div class="bp-picks__pc bp-picks__pc--pro">
+                  <h4>What is good</h4>
+                  <ul>{p.pros.map((x) => <li>{x}</li>)}</ul>
+                </div>
+              ) : null}
+              {p.cons?.length ? (
+                <div class="bp-picks__pc bp-picks__pc--con">
+                  <h4>What to know</h4>
+                  <ul>{p.cons.map((x) => <li>{x}</li>)}</ul>
+                </div>
+              ) : null}
+            </div>
           )}
-          <a class="bp-picks__more" href={p.href}>
-            Read the full {p.name} review
-            <span aria-hidden="true">→</span>
-          </a>
+
+          <p class="bp-picks__against">
+            <span class="bp-picks__against-label">Skip it if</span>
+            {p.wrongFor}
+          </p>
+
+          <div class="bp-picks__actions">
+            {p.redirectKey && (
+              <a class="bp-picks__buy" href={`/go/${p.redirectKey}`} rel="sponsored nofollow">
+                <span>Check price on Amazon</span>
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+            )}
+            <a class="bp-picks__more" href={p.href}>
+              Read the full {p.name} review
+              <span aria-hidden="true">→</span>
+            </a>
+          </div>
         </div>
       </li>
     ))}
@@ -176,37 +202,140 @@ const ratedFor = (p: RenderedPick): string | null => {
   }
 
   .bp-picks__item {
-    padding: clamp(1.25rem, 3vw, 1.75rem);
-    border: 1px solid var(--cs-line-soft);
-    border-radius: 18px;
-    background: linear-gradient(178deg, rgba(20, 25, 32, 0.72), rgba(10, 13, 17, 0.72));
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    position: relative;
+    display: grid;
+    gap: clamp(1rem, 2.4vw, 1.6rem);
+    padding: clamp(1rem, 2.4vw, 1.5rem);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 22px;
+    /* Frosted glass: a lit pane over the page's dark background. */
+    background:
+      linear-gradient(145deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.02) 55%, rgba(90, 150, 255, 0.05));
+    -webkit-backdrop-filter: blur(16px) saturate(130%);
+    backdrop-filter: blur(16px) saturate(130%);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.14),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.02),
+      0 18px 40px rgba(0, 0, 0, 0.35);
+  }
+  .bp-picks__item.is-top {
+    border-color: rgba(120, 176, 255, 0.4);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.18),
+      0 0 0 1px rgba(61, 142, 240, 0.25),
+      0 22px 48px rgba(10, 40, 100, 0.4);
+  }
+  @media (min-width: 900px) {
+    .bp-picks__item { grid-template-columns: minmax(0, 300px) minmax(0, 1fr); align-items: start; }
   }
 
-  /* The top pick reads as the top pick without a badge shouting it. */
-  .bp-picks__item:first-child {
-    border-color: var(--cs-line);
-    box-shadow: inset 2px 0 0 rgba(61, 142, 240, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  /* The product's picture, on a pale pane so a white-background product shot
+     sits in a frame instead of floating on black. */
+  .bp-picks__media {
+    position: relative;
+    display: block;
+    border-radius: 16px;
+    overflow: hidden;
+    background: linear-gradient(160deg, #f4f7fb, #dfe6f0);
+    aspect-ratio: 1 / 1;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.04);
   }
-
-  .bp-picks__head {
-    display: flex;
-    align-items: baseline;
-    gap: clamp(0.75rem, 2vw, 1.1rem);
+  .bp-picks__media :global(img), .bp-picks__media :global(svg) {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
   }
-
   .bp-picks__rank {
-    flex: none;
+    position: absolute;
+    z-index: 2;
+    top: 0.7rem;
+    left: 0.7rem;
+    min-width: 2.3rem;
+    padding: 0.28rem 0.6rem;
+    border-radius: 999px;
+    background: rgba(8, 11, 15, 0.82);
+    color: #fff;
     font-family: var(--font-mono);
-    font-size: clamp(1.3rem, 3.4vw, 1.75rem);
-    font-weight: 600;
-    line-height: 1;
-    color: transparent;
-    background: var(--cs-sheen);
-    -webkit-background-clip: text;
-    background-clip: text;
-    opacity: 0.75;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-align: center;
   }
+
+  .bp-picks__body { min-width: 0; }
+  .bp-picks__head { display: block; }
+
+  .bp-picks__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .bp-picks__chips li {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    padding: 0.5rem 0.8rem;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.045);
+    font-size: 0.92rem;
+    color: var(--cs-hi);
+  }
+  .bp-picks__chips li span {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+  }
+
+  .bp-picks__proscons {
+    display: grid;
+    gap: 0.8rem;
+    margin-top: 1.1rem;
+  }
+  @media (min-width: 700px) {
+    .bp-picks__proscons { grid-template-columns: 1fr 1fr; }
+  }
+  .bp-picks__pc {
+    padding: 0.9rem 1rem 1rem;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.035);
+  }
+  .bp-picks__pc--pro { border-top: 2px solid rgba(76, 201, 140, 0.7); }
+  .bp-picks__pc--con { border-top: 2px solid rgba(245, 185, 66, 0.75); }
+  .bp-picks__pc h4 {
+    margin: 0 0 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--cs-hi);
+  }
+  .bp-picks__pc ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 0.45rem; }
+  .bp-picks__pc li {
+    position: relative;
+    padding-left: 1.3rem;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: var(--text-secondary);
+  }
+  .bp-picks__pc li::before {
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-weight: 700;
+  }
+  .bp-picks__pc--pro li::before { content: "✓"; color: #4cc98c; }
+  .bp-picks__pc--con li::before { content: "!"; color: #f5b942; left: 0.2rem; }
 
   .bp-picks__award {
     margin: 0;

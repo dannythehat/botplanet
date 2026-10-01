@@ -38,7 +38,7 @@ export function pageFileToEditorial(p: BestOfPage): EditorialContent {
     image: { src: p.hero.desktop, alt: p.hero.alt, focal: p.hero.focal },
     heroMobileSrc: p.hero.mobile ?? undefined,
     prose: p.prose,
-    picks: p.picks.map((k) => ({ productSlug: k.product, award: k.award, why: k.why, wrongFor: k.not_for })),
+    picks: p.picks.map((k) => ({ productSlug: k.product, award: k.award, why: k.why, wrongFor: k.not_for, pros: k.pros, cons: k.cons })),
     comparisonSlugs: p.comparison,
     faq: p.faq,
     published: p.dates.published,

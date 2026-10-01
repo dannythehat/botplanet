@@ -48,7 +48,10 @@ export interface EditorialPick {
    * is an advert. Taken from the review's `notIdealFor` so the two pages
    * cannot end up telling a reader different things.
    */
-  wrongFor: string;
+  wrongFor: string;  /** What is good about it, as short plain statements. Maker claims say whose claim they are. */
+  pros?: string[];
+  /** What to know before buying it. */
+  cons?: string[];
 }
 
 export interface EditorialContent {

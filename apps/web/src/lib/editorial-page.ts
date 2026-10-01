@@ -114,6 +114,7 @@ export async function buildEditorialPage(
     }
     picks.push({
       ...pick,
+      productId: product.id,
       name: row.name,
       href: row.href,
       band: row.band,

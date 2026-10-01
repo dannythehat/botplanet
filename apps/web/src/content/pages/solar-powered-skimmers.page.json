@@ -38,25 +38,69 @@
       "product": "betta-se-plus",
       "award": "Best documented",
       "why": "The only one of the four with a manufacturer's product page and manual to read: a stated one-year warranty, a 200 micron basket, 3.5 hours on the adapter and 5 to 6 on the sun. Betta's 30 hour figure is a claim, but it sits among numbers you can check.",
-      "not_for": "Anyone who wants an app or edge following, or a pool in permanent shade."
+      "not_for": "Anyone who wants an app or edge following, or a pool in permanent shade.",
+      "pros": [
+        "A manufacturer page and manual you can read",
+        "A stated one-year warranty",
+        "3.5 hours on the adapter, 5 to 6 in the sun",
+        "Twin salt chlorine tolerant motors, Betta says"
+      ],
+      "cons": [
+        "No app",
+        "The 30 hour runtime is Betta's own figure",
+        "Skims the surface only, never the floor"
+      ]
     },
     {
       "product": "aiper-ecosurfer-s2",
       "award": "Best for edges and steps",
       "why": "Aiper's listing is the most specific about how the machine stays out of trouble: two dToF sensors for walls and corners, and adjustable anti-stranding columns for steps. It also has the 35 hour battery figure, which is a claim.",
-      "not_for": "Anyone who needs a published basket volume or warranty term before buying; the listing gives neither."
+      "not_for": "Anyone who needs a published basket volume or warranty term before buying; the listing gives neither.",
+      "pros": [
+        "Two dToF sensors for edges and corners, Aiper says",
+        "Adjustable columns to stop it stranding on steps",
+        "150 micron filter with a leak-proof baffle, Aiper says",
+        "App with over-the-air upgrades"
+      ],
+      "cons": [
+        "Basket volume and warranty are not published",
+        "The 35 hour battery is Aiper's own figure",
+        "Adapter charge time is not stated"
+      ]
     },
     {
       "product": "beatbot-iskim",
       "award": "Best for heavy debris",
       "why": "A 9 litre basket, the largest volume any of the four states, behind a covered intake Beatbot says keeps debris in when the machine reverses. For a pool that sheds, fewer trips to empty it is the point.",
-      "not_for": "Anyone who needs a stated runtime in hours; the listing gives none."
+      "not_for": "Anyone who needs a stated runtime in hours; the listing gives none.",
+      "pros": [
+        "A 9 litre basket, the largest stated here",
+        "A covered intake that Beatbot says keeps debris in",
+        "App with one-tap parking",
+        "Listed as saltwater-safe"
+      ],
+      "cons": [
+        "No runtime in hours is given",
+        "Sold in several versions, so check the title",
+        "Warranty and weight are not stated"
+      ]
     },
     {
       "product": "brinbo-sk01",
       "award": "One to watch",
       "why": "An app, two speeds and a stated 2.5 hour adapter charge, with the highest rating of the four. It is also the newest, with 28 ratings, so the rating is an early signal and not a record.",
-      "not_for": "Anyone who wants a long record of owner reports, or a brand with a track record in pool robots."
+      "not_for": "Anyone who wants a long record of owner reports, or a brand with a track record in pool robots.",
+      "pros": [
+        "App showing battery and water temperature",
+        "Two speeds from one button",
+        "A stated 2.5 hour adapter charge",
+        "Adjustable anti-stuck bars underneath"
+      ],
+      "cons": [
+        "A new brand with 28 ratings",
+        "Runtime, basket size and warranty are not published",
+        "Saltwater use is not stated"
+      ]
     }
   ],
   "comparison": [
