@@ -6,20 +6,55 @@ const asNode = (value: unknown): SchemaNode | null =>
 const hasValue = (value: unknown): boolean =>
   typeof value === "number" || (typeof value === "string" && value.trim().length > 0);
 
-function usableOffer(value: unknown): boolean {
-  const offer = asNode(value);
-  if (!offer) return false;
-  const type = offer["@type"];
+const schemaTypes = (node: SchemaNode): string[] => {
+  const type = node["@type"];
+  if (typeof type === "string") return [type];
+  if (Array.isArray(type)) return type.filter((entry): entry is string => typeof entry === "string");
+  return [];
+};
 
-  if (type === "Offer") {
-    return hasValue(offer.price) && hasValue(offer.priceCurrency);
+const isOfferType = (node: SchemaNode): boolean => {
+  const types = schemaTypes(node);
+  return types.includes("Offer") || types.includes("AggregateOffer");
+};
+
+const PRODUCT_MERCHANT_FIELDS = new Set([
+  "offers",
+  "shippingDetails",
+  "hasMerchantReturnPolicy",
+  "availability",
+  "seller",
+]);
+
+/**
+ * BotPlanet is an affiliate/editorial publisher, not the merchant of record.
+ *
+ * This is deliberately recursive because Offer markup can be nested inside a
+ * Review's itemReviewed Product, not only supplied as a top-level graph node.
+ * No schema path is allowed to tell Google that BotPlanet sells, stocks,
+ * ships, or accepts returns for a product.
+ */
+function stripMerchantClaimsDeep(value: unknown): unknown {
+  if (Array.isArray(value)) {
+    return value
+      .map(stripMerchantClaimsDeep)
+      .filter((entry) => entry !== null && entry !== undefined);
   }
 
-  if (type === "AggregateOffer") {
-    return hasValue(offer.priceCurrency) && hasValue(offer.lowPrice);
+  const node = asNode(value);
+  if (!node) return value;
+  if (isOfferType(node)) return null;
+
+  const product = schemaTypes(node).includes("Product");
+  const clean: SchemaNode = {};
+
+  for (const [key, child] of Object.entries(node)) {
+    if (product && PRODUCT_MERCHANT_FIELDS.has(key)) continue;
+    const sanitized = stripMerchantClaimsDeep(child);
+    if (sanitized !== null && sanitized !== undefined) clean[key] = sanitized;
   }
 
-  return false;
+  return clean;
 }
 
 function hasEligibleRatingOrReview(product: SchemaNode): boolean {
@@ -41,66 +76,50 @@ function hasEligibleRatingOrReview(product: SchemaNode): boolean {
 }
 
 /**
- * Return only Product markup that is eligible for Google's product snippet
- * interpretation without inventing facts. Google requires a Product to carry
- * at least one of offers, review or aggregateRating. BotPlanet therefore drops
- * a bare Product when a current publishable price/rating does not exist.
+ * Product rich-result markup is allowed only when it is supported by a real
+ * rating/review. Affiliate retailer prices are intentionally NOT an
+ * eligibility route: publishing them as Product.offers is what makes Google
+ * classify BotPlanet as a merchant and ask BotPlanet for shipping/returns.
  */
 function sanitizeProduct(product: SchemaNode): SchemaNode | null {
-  let sanitized: SchemaNode = product;
-
-  if ("offers" in product) {
-    const offers = product.offers;
-    if (Array.isArray(offers)) {
-      const valid = offers.filter(usableOffer);
-      if (valid.length) sanitized = { ...product, offers: valid };
-      else {
-        const { offers: _discarded, ...rest } = product;
-        sanitized = rest;
-      }
-    } else if (!usableOffer(offers)) {
-      const { offers: _discarded, ...rest } = product;
-      sanitized = rest;
-    }
-  }
-
-  const remainingOffers = sanitized.offers;
-  const hasOffer = Array.isArray(remainingOffers)
-    ? remainingOffers.some(usableOffer)
-    : usableOffer(remainingOffers);
-
-  return hasOffer || hasEligibleRatingOrReview(sanitized) ? sanitized : null;
+  const stripped = stripMerchantClaimsDeep(product);
+  const sanitized = asNode(stripped);
+  if (!sanitized) return null;
+  return hasEligibleRatingOrReview(sanitized) ? sanitized : null;
 }
 
 /**
- * Prevent BotPlanet from advertising Google rich-result types whose required
- * factual fields we do not possess.
+ * Final structured-data gate before JSON-LD reaches Google.
  *
- * - Review is kept only when a real rating exists. BotPlanet does not invent
- *   stars. An unrated editorial review may fall back to its Product entity only
- *   when that Product independently has an eligible priced offer/rating.
- * - Article is emitted only when a genuine publication date exists. A
- *   last-reviewed date is not silently relabelled as datePublished.
- * - Product is emitted only with an eligible offer, review or aggregateRating;
- *   incomplete offers are removed rather than guessed.
+ * Affiliate policy:
+ * - Offer and AggregateOffer are never emitted by BotPlanet.
+ * - Merchant-only Product fields are stripped recursively, including offers,
+ *   shippingDetails, return policy, availability and seller.
+ * - An unrated editorial Review is not converted into a priced Product.
+ * - Product markup survives only with a genuine review/rating signal.
+ * - Article is emitted only when a genuine publication date exists.
+ *
+ * The guard removes unsupported claims; it never invents replacement data.
  */
 export function sanitizeRichResultNode(node: SchemaNode | null | undefined): SchemaNode | null {
   if (!node) return null;
-  const type = node["@type"];
 
-  if (type === "Review") {
-    const rating = asNode(node.reviewRating);
-    if (rating && hasValue(rating.ratingValue)) return node;
+  const stripped = stripMerchantClaimsDeep(node);
+  const clean = asNode(stripped);
+  if (!clean) return null;
 
-    const itemReviewed = asNode(node.itemReviewed);
-    if (itemReviewed?.["@type"] === "Product") return sanitizeProduct(itemReviewed);
-    return null;
+  const types = schemaTypes(clean);
+  if (types.includes("Offer") || types.includes("AggregateOffer")) return null;
+
+  if (types.includes("Review")) {
+    const rating = asNode(clean.reviewRating);
+    return rating && hasValue(rating.ratingValue) ? clean : null;
   }
 
-  if (type === "Article" && !hasValue(node.datePublished)) return null;
-  if (type === "Product") return sanitizeProduct(node);
+  if (types.includes("Article") && !hasValue(clean.datePublished)) return null;
+  if (types.includes("Product")) return sanitizeProduct(clean);
 
-  return node;
+  return clean;
 }
 
 export function sanitizeRichResultNodes(
