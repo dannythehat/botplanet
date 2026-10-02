@@ -8,6 +8,9 @@
  *    protection) — computed from the request host in Base.astro.
  *  - No fabricated Review / aggregateRating is ever emitted. Ratings only
  *    appear where a real, attributable review exists.
+ *  - BotPlanet is an affiliate/editorial site, not the merchant. Product
+ *    structured data must never claim that BotPlanet sells, ships, stocks or
+ *    accepts returns for a product.
  */
 
 import { SITE } from "./site";
@@ -115,10 +118,15 @@ export function breadcrumbSchema(items: Crumb[]) {
   };
 }
 
+/**
+ * Kept only for backwards-compatible call sites. Affiliate retailer prices
+ * are display/click-out data and must never be emitted as BotPlanet Offer
+ * structured data.
+ */
 export interface ProductOfferInput {
   priceMinor: number | null;
   currency?: string;
-  availability?: string; // schema.org availability enum tail e.g. "InStock"
+  availability?: string;
   url: string;
   seller?: string;
 }
@@ -130,16 +138,17 @@ export interface ProductSchemaInput {
   brand: string;
   description: string;
   image?: string;
-  offers: ProductOfferInput[];
+  /** @deprecated Affiliate offers are intentionally ignored in JSON-LD. */
+  offers?: ProductOfferInput[];
 }
 
 /**
- * Product schema WITHOUT any aggregateRating/review unless legitimately
- * supplied elsewhere. Offers use real snapshot prices when present.
+ * Editorial Product metadata only. This builder intentionally does not emit
+ * Offer/AggregateOffer markup. Without a genuine nested Review or
+ * aggregateRating, schemaGraph will drop the Product node rather than publish
+ * an ineligible product rich-result object.
  */
 export function productSchema(p: ProductSchemaInput) {
-  const validOffers = p.offers.filter((o) => o.priceMinor != null);
-  const prices = validOffers.map((o) => (o.priceMinor as number) / 100);
   const base: Record<string, unknown> = {
     "@type": "Product",
     name: p.name,
@@ -149,24 +158,6 @@ export function productSchema(p: ProductSchemaInput) {
     url: absUrl(p.path),
   };
   if (p.image) base.image = absUrl(p.image);
-  if (validOffers.length === 1) {
-    const o = validOffers[0];
-    base.offers = {
-      "@type": "Offer",
-      price: ((o.priceMinor as number) / 100).toFixed(2),
-      priceCurrency: o.currency ?? "USD",
-      availability: `https://schema.org/${o.availability ?? "InStock"}`,
-      url: absUrl(o.url),
-    };
-  } else if (validOffers.length > 1) {
-    base.offers = {
-      "@type": "AggregateOffer",
-      priceCurrency: "USD",
-      lowPrice: Math.min(...prices).toFixed(2),
-      highPrice: Math.max(...prices).toFixed(2),
-      offerCount: validOffers.length,
-    };
-  }
   return base;
 }
 
@@ -245,10 +236,54 @@ export function faqSchema(qas: QA[]) {
   };
 }
 
-/** Wrap builders into one @graph document. Drops null/undefined entries. */
+function schemaTypes(node: Record<string, unknown>): string[] {
+  const type = node["@type"];
+  if (typeof type === "string") return [type];
+  if (Array.isArray(type)) return type.filter((entry): entry is string => typeof entry === "string");
+  return [];
+}
+
+/**
+ * Final affiliate-site safety gate.
+ *
+ * - Standalone Offer/AggregateOffer nodes are never published.
+ * - Product nodes have merchant-only fields removed, even if a future page
+ *   adds them manually instead of using productSchema().
+ * - A Product node is published only when it carries a genuine editorial
+ *   review/aggregate rating signal. This avoids both Merchant listings and
+ *   invalid Product snippet warnings from offer-only/product-only markup.
+ */
+export function affiliateSafeSchemaNode(
+  node: Record<string, unknown>,
+): Record<string, unknown> | null {
+  const types = schemaTypes(node);
+
+  if (types.includes("Offer") || types.includes("AggregateOffer")) return null;
+  if (!types.includes("Product")) return node;
+
+  const clean: Record<string, unknown> = { ...node };
+  delete clean.offers;
+  delete clean.shippingDetails;
+  delete clean.hasMerchantReturnPolicy;
+  delete clean.availability;
+  delete clean.seller;
+
+  if (!("review" in clean) && !("aggregateRating" in clean)) return null;
+  return clean;
+}
+
+/**
+ * Wrap builders into one @graph document and enforce BotPlanet's affiliate
+ * schema policy before anything reaches the page.
+ */
 export function schemaGraph(...nodes: (Record<string, unknown> | null | undefined)[]) {
+  const safeNodes = nodes
+    .filter((node): node is Record<string, unknown> => node != null)
+    .map(affiliateSafeSchemaNode)
+    .filter((node): node is Record<string, unknown> => node != null);
+
   return {
     "@context": "https://schema.org",
-    "@graph": nodes.filter(Boolean),
+    "@graph": safeNodes,
   };
 }
