@@ -1,6 +1,6 @@
-# Traffic — botplanet.io, 2026-09-15 to 2026-09-28
+# Traffic — botplanet.io, 2026-09-21 to 2026-10-04
 
-Generated 2026-09-29 by `scripts/traffic-report.mjs` from the Cloudflare GraphQL
+Generated 2026-10-05 by `scripts/traffic-report.mjs` from the Cloudflare GraphQL
 Analytics API. Cloudflare plan: **Free Website**. Window: **14 days**, ending
 yesterday — today is always partial and would read as a collapse.
 
@@ -8,13 +8,13 @@ yesterday — today is always partial and would read as a collapse.
 
 | | |
 |---|---|
-| Browser page views (people, probably) | **3852** |
-| Crawler page views | **140** |
-| Unidentified / tooling page views *(excluded above)* | 2955 |
-| Total requests | 68169 |
-| Unique visitors (Cloudflare's estimate) | 4390 |
-| Threats blocked | 5369 |
-| Bandwidth | 0.75 GB |
+| Browser page views (people, probably) | **3914** |
+| Crawler page views | **333** |
+| Unidentified / tooling page views *(excluded above)* | 6454 |
+| Total requests | 77641 |
+| Unique visitors (Cloudflare's estimate) | 4244 |
+| Threats blocked | 4762 |
+| Bandwidth | 1.69 GB |
 
 **Two things this cannot tell you**, and they matter more than anything above:
 
@@ -28,34 +28,33 @@ yesterday — today is always partial and would read as a collapse.
 
 | Browser | Page views |
 |---|---|
-| Chrome | 3164 |
-| MobileSafari | 380 |
-| Firefox | 117 |
-| ChromeMobile | 71 |
-| Edge | 52 |
-| Safari | 52 |
-| ChromeDerivative | 7 |
-| Opera | 3 |
-| SamsungInternet | 3 |
+| Chrome | 3336 |
+| MobileSafari | 381 |
+| Firefox | 81 |
+| ChromeMobile | 40 |
+| Safari | 33 |
+| Edge | 23 |
+| SamsungInternet | 8 |
+| ChromeDerivative | 8 |
+| Opera | 2 |
 | ChromeMobileWebview | 2 |
-| OperaMobile | 1 |
 
 ## Crawlers
 
 | Crawler | Page views |
 |---|---|
-| BingBot | 60 |
-| YandexBot | 35 |
-| GoogleBot | 22 |
-| AppleBot | 21 |
-| ChromeHeadless | 2 |
+| ChromeHeadless | 225 |
+| BingBot | 50 |
+| AppleBot | 36 |
+| GoogleBot | 18 |
+| YandexBot | 4 |
 
 Googlebot is the number to watch. Google does not accept IndexNow, so it finds
 pages by crawling, and a page it has never fetched cannot rank.
 
 ## Requests by country
 
-US 28866 · NL 8419 · SG 8257 · DE 7137 · BE 4772 · CA 1089 · HK 957 · PL 940 · ID 791 · IN 745 · KR 684 · JP 616
+US 34646 · SG 9236 · NL 8113 · DE 6467 · BE 3649 · PL 2137 · IN 1917 · AU 1775 · CA 1397 · KR 1249 · HK 1129 · JP 871
 
 Datacentre traffic inflates NL, FR and DE — those are clouds, not customers.
 
@@ -63,12 +62,6 @@ Datacentre traffic inflates NL, FR and DE — those are clouds, not customers.
 
 | Date | Requests | Browser page views |
 |---|---|---|
-| 2026-09-15 | 1922 | 124 |
-| 2026-09-16 | 1781 | 109 |
-| 2026-09-17 | 3551 | 326 |
-| 2026-09-18 | 4019 | 292 |
-| 2026-09-19 | 2314 | 155 |
-| 2026-09-20 | 10389 | 120 |
 | 2026-09-21 | 7345 | 137 |
 | 2026-09-22 | 10824 | 348 |
 | 2026-09-23 | 5429 | 276 |
@@ -77,3 +70,9 @@ Datacentre traffic inflates NL, FR and DE — those are clouds, not customers.
 | 2026-09-26 | 3207 | 245 |
 | 2026-09-27 | 8144 | 1274 |
 | 2026-09-28 | 2786 | 162 |
+| 2026-09-29 | 5378 | 217 |
+| 2026-09-30 | 3219 | 175 |
+| 2026-10-01 | 16598 | 125 |
+| 2026-10-02 | 2689 | 174 |
+| 2026-10-03 | 2153 | 358 |
+| 2026-10-04 | 3411 | 139 |
