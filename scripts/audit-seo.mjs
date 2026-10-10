@@ -326,6 +326,46 @@ const add = (level, rule, path, detail, fix) =>
 /* Run                                                                 */
 /* ------------------------------------------------------------------ */
 
+
+/* STRUCTURED DATA GATE. Search Console emailed on 10 October 2026 about "Either
+   offers, review, or aggregateRating should be specified" on a Product snippet. The
+   site's schema sanitiser (lib/schema-eligibility.ts) is meant to make that
+   impossible, and on the day of the email every one of 700 routable pages was clean,
+   so the email reflected an older crawl. This puts the same check in the audit, so a
+   regression is caught from the live pages and not from an email. */
+function checkStructuredData(html, path) {
+  const walk = (n, out) => {
+    if (Array.isArray(n)) n.forEach((x) => walk(x, out));
+    else if (n && typeof n === "object") {
+      out.push(n);
+      Object.values(n).forEach((v) => walk(v, out));
+    }
+  };
+  for (const b of html.matchAll(/<script type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)) {
+    let json;
+    try {
+      json = JSON.parse(b[1]);
+    } catch {
+      add("FAIL", "jsonld_unparseable", path, "a JSON-LD block is not valid JSON", "fix the schema builder");
+      continue;
+    }
+    const nodes = [];
+    walk(json, nodes);
+    for (const n of nodes) {
+      const types = [].concat(n["@type"] ?? []);
+      if (types.includes("Product") && !(n.offers || n.review || n.aggregateRating)) {
+        add("FAIL", "product_snippet_incomplete", path, `Product "${n.name ?? "?"}" has no offers, review or aggregateRating`, "drop the Product node or supply a priced offer; see lib/schema-eligibility.ts");
+      }
+      if (types.includes("Offer") && (n.price === undefined || !n.priceCurrency)) {
+        add("FAIL", "offer_incomplete", path, "an Offer is missing its price or currency", "drop the offer");
+      }
+      if (types.includes("Review") && !n.reviewRating) {
+        add("FAIL", "review_without_rating", path, "a Review node has no reviewRating", "drop the Review node");
+      }
+    }
+  }
+}
+
 const REGISTER = loadRegister();
 const registerFor = (p) => REGISTER.find((k) => k.path === p);
 
@@ -357,6 +397,7 @@ for (let i = 0; i < paths.length; i += 4) {
       return;
     }
     pages.set(p, parse(got[j].body, p));
+    checkStructuredData(got[j].body, p);
   });
 }
 say(`fetched: ${pages.size} pages\n`);
