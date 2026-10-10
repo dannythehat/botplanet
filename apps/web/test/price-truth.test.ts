@@ -205,9 +205,9 @@ describe("product markup carries no price the page would not print", () => {
    * The gate itself. The page must not have a second, looser condition for the
    * markup than for the visible card — one flag, read once, used twice.
    */
-  it("gates the review page's markup on priceShowable", () => {
+  it("emits no Product/Review markup on the review page", () => {
     const src = read("robots/[category]/[slug].astro");
-    expect(src).toMatch(/offers:\s*engineOffers[\s\S]{0,200}pub\.priceShowable/);
+    expect(src).not.toMatch(/reviewSchema\(/);
   });
 
   it("gives the review a full Product to review", () => {

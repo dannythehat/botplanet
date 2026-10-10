@@ -14,7 +14,7 @@ import { latestAcceptedForProduct } from "../../../lib/providers/refresh-store";
 import ReviewArticle from "../../../components/ReviewArticle.astro";
 import ProductImage from "../../../components/ProductImage.astro";
 import { reviewFor } from "../../../content/reviews";
-import { availabilityFor, reviewSchema, articleSchema, imageObjectSchema, webPageSchema } from "../../../lib/seo";
+import { articleSchema, imageObjectSchema, webPageSchema } from "../../../lib/seo";
 import { FOUNDER, authorForReview } from "../../../content/team";
 import AuthorBox from "../../../components/AuthorBox.astro";
 import { deliveryLine, deliveryNote } from "../../../lib/delivery-wording";
@@ -190,37 +190,10 @@ const reviewGraph = hasReview
         name: review!.title,
         description: review!.metaDescription,
       }),
-      reviewSchema({
-        itemName: product.name,
-        itemBrand: brand?.name ?? null,
-        itemSlug: product.slug,
-        /* THE SAME GATE THE VISIBLE PRICE USES, not a second one. An offer
-           reaches the markup on exactly the condition the card above prints
-           its price: `pub.priceShowable`. The offer URL is this page, which is
-           where the offer is actually published — /go/ is disallowed in
-           robots.txt and pointing structured data at it would ask a crawler to
-           fetch a URL it has been told not to. */
-        offers: engineOffers
-          .filter(({ pub, offer }) => pub.priceShowable && offer.basePriceMinor !== null)
-          .map(({ offer, pub }) => ({
-            priceMinor: offer.basePriceMinor,
-            currency: offer.currency ?? "USD",
-            availability: pub.stockShowable
-              ? (availabilityFor(offer.stock.state) ?? undefined)
-              : undefined,
-            url: Astro.url.pathname,
-          })),
-        headline: review!.title,
-        description: review!.metaDescription,
-        path: Astro.url.pathname,
-        dateModified: review!.lastReviewed,
-        authorName: reviewAuthor.name,
-        authorPath: reviewAuthor.path,
-        image: review!.image?.src,
-        reviewBody: review!.verdict,
-        positiveNotes: [review!.bestFor],
-        negativeNotes: [review!.notIdealFor],
-      }),
+      /* NO Product/Review node. BotPlanet is an affiliate site: price and
+         stock snippets belong to the merchant, and an unrated Product only
+         draws Search Console "Product snippets" warnings. Article + WebPage
+         carry the page. */
       articleSchema({
         headline: review!.title,
         description: review!.metaDescription,
