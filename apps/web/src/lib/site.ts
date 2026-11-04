@@ -51,8 +51,12 @@ export const AMAZON_ASSOCIATE_TAG_STATUS =
  * behaviour and correct for every US click.
  */
 export function amazonDestination(url: string, tag: string | null = AMAZON_ASSOCIATE_TAG): string {
-  if (!tag) return url;
-  return `${url}${url.includes("?") ? "&" : "?"}tag=${tag}`;
+  // Use URL's query parser: manual concatenation can place ?tag= after a #fragment,
+  // where Amazon never receives it, or create duplicate tag parameters.
+  const destination = new URL(url);
+  if (tag) destination.searchParams.set("tag", tag);
+  else destination.searchParams.delete("tag");
+  return destination.toString();
 }
 
 /** Trust pages shown in the footer. */
