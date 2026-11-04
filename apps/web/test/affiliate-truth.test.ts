@@ -64,6 +64,10 @@ describe("homepage guide and affiliate semantics", () => {
     const homepage = readFileSync("apps/web/src/pages/index.astro", "utf8");
     expect(homepage.match(/<section class="featured-guide"/g) ?? []).toHaveLength(1);
     expect(homepage).toContain('href="/guides/robot-dog-toys/"');
+    const layout = readFileSync("apps/web/src/layouts/Base.astro", "utf8");
+    const footer = readFileSync("apps/web/src/components/Footer.astro", "utf8");
+    expect(layout).not.toContain("HomepageRobotDogFeature");
+    expect(footer).not.toContain("home-dog-guide");
   });
 
   it("never labels an unpriced listing as a verified price check", () => {
