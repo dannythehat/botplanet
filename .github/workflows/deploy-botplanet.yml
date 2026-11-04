@@ -88,6 +88,24 @@ jobs:
           echo "redirect_status=$redirect_status" >> "$GITHUB_OUTPUT"
           echo "redirect_location=$redirect_location" >> "$GITHUB_OUTPUT"
 
+      - name: Verify deployed buying-guide HTML, not just HTTP 200
+        shell: bash
+        run: |
+          set -euo pipefail
+          # Unique query prevents an old cached homepage from passing the test.
+          homepage="$(curl --retry 3 -fsSL "https://botplanet.io/?bp_deploy_check=${GITHUB_SHA}")"
+          guide_count="$(printf '%s' "$homepage" | grep -o 'FEATURED BUYING GUIDE' | wc -l | tr -d '[:space:]')"
+          if [[ "$guide_count" != "1" ]]; then
+            echo "::error::Live homepage has $guide_count featured guide sections; expected exactly one."
+            exit 1
+          fi
+          guide="$(curl --retry 3 -fsSL "https://botplanet.io/guides/robot-dog-toys/?bp_deploy_check=${GITHUB_SHA}")"
+          if ! grep -q 'Search Amazon for Ruko 18011' <<< "$guide"; then
+            echo "::error::Live robot dog buying guide still has the old Amazon search label."
+            exit 1
+          fi
+          echo "Live homepage: one featured guide. Live buying guide: corrected Amazon search labels."
+
       - name: Record deployment receipt
         shell: bash
         env:
