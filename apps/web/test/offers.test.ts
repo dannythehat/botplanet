@@ -768,11 +768,13 @@ describe("/go redirect", () => {
     expect(amazonDestination(r.url, r.tag)).toBe("https://www.amazon.com/dp/B0GV37M678?tag=botplanet-20");
   });
 
-  it("searches the visitor's own store, not amazon.com, where we have one", () => {
+  it("lets OneLink route tagged international searches from amazon.com", () => {
     const gb = marketplaceFor("prod-miko-3", "B0GV37M678", "GB", "Miko 3");
-    expect(gb.url).toContain("www.amazon.co.uk/s?k=");
-    expect(gb.kind).toBe("regional_search");
+    expect(gb.url).toContain("www.amazon.com/s?k=");
+    expect(gb.kind).toBe("us_search");
     expect(gb.marketplace).toBe("GB");
+    expect(gb.tag).toBe("botplanet-20");
+    expect(amazonDestination(gb.url, gb.tag)).toContain("tag=botplanet-20");
   });
 
   /* A store Earn Globally does not cover earns nothing, so the link goes out

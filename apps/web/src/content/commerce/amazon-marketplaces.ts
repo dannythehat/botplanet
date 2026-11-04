@@ -257,20 +257,32 @@ export function marketplaceFor(
     };
   }
 
-  /* 2. Otherwise, a SEARCH on the store the visitor is actually on.
-        A NAME CANNOT COLLIDE THE WAY AN IDENTIFIER CAN. B0GV37M678 is a Miko 3
-        here and something else on amazon.co.uk; "Miko 3" is "Miko 3"
-        everywhere. The visitor lands on a search page, which looks like what
-        it is, instead of on a product page that looks like the one they asked
-        for and is not. */
+  /* 2. Without a verified regional ASIN, search by the exact product name.
+        For OneLink-enabled markets, start on amazon.com with the known-valid
+        US Associates tag and let Amazon perform its official store-ID-aware
+        redirect. Directly adding the US tag to an amazon.de/amazon.co.uk URL
+        does not establish attribution. The full product name also avoids
+        the ASIN collision seen with Miko 3 in the UK. */
   const name = (productName ?? "").trim();
+  if (market && name && market.tag) {
+    return {
+      url: `https://${us.host}/s?k=${encodeURIComponent(name)}`,
+      marketplace: cc,
+      localised: false,
+      kind: "us_search",
+      tag: us.tag,
+    };
+  }
+
+  /* For a store not enabled for OneLink, prefer an honest local search,
+     without a tag we cannot claim earns anything. */
   if (market && name) {
     return {
       url: `https://${market.host}/s?k=${encodeURIComponent(name)}`,
       marketplace: cc,
       localised: true,
       kind: "regional_search",
-      tag: market.tag,
+      tag: null,
     };
   }
 

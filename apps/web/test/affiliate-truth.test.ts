@@ -26,10 +26,49 @@ describe("Amazon referral configuration", () => {
     );
   });
 
+  it("updates an existing tag instead of appending a duplicate", () => {
+    expect(amazonDestination("https://www.amazon.com/dp/B0BX9DJS7R?tag=old-id-20")).toBe(
+      "https://www.amazon.com/dp/B0BX9DJS7R?tag=botplanet-20",
+    );
+  });
+
+  it("puts the tracking tag before a URL fragment so Amazon receives it", () => {
+    expect(amazonDestination("https://www.amazon.com/dp/B0BX9DJS7R#reviews")).toBe(
+      "https://www.amazon.com/dp/B0BX9DJS7R?tag=botplanet-20#reviews",
+    );
+  });
+
+  it("keeps a deliberately unmonetised marketplace link free of tracking tags", () => {
+    expect(amazonDestination("https://www.amazon.com.au/s?k=robot&tag=stale-20", null)).toBe(
+      "https://www.amazon.com.au/s?k=robot",
+    );
+  });
+
+  it("centralises guide Amazon tags and marks /go links as sponsored", () => {
+    const guide = readFileSync("apps/web/src/pages/guides/robot-dog-toys.astro", "utf8");
+    expect(guide).toContain('import { amazonDestination } from "../../lib/site"');
+    expect(guide).not.toContain("tag=botplanet-20");
+    expect(guide).toContain('pick.buyHref.startsWith("/go/")');
+    expect(guide).toContain("Search Amazon for Ruko 18011");
+  });
+
   it("keeps raw catalogue destinations untagged so the central builder remains the only tagging point", () => {
     for (const destination of DESTINATIONS) {
       expect(destination.sourceUrl ?? "").not.toContain("tag=");
     }
+  });
+});
+
+describe("homepage guide and affiliate semantics", () => {
+  it("renders the robot-dog buying-guide feature once from the homepage", () => {
+    const homepage = readFileSync("apps/web/src/pages/index.astro", "utf8");
+    expect(homepage.match(/<section class="featured-guide"/g) ?? []).toHaveLength(1);
+    expect(homepage).toContain('href="/guides/robot-dog-toys/"');
+  });
+
+  it("never labels an unpriced listing as a verified price check", () => {
+    const buyBox = readFileSync("apps/web/src/components/BuyBox.astro", "utf8");
+    expect(buyBox).toContain('lead.price ? "Price checked" : "Listing last checked"');
   });
 });
 

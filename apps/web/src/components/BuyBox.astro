@@ -104,7 +104,7 @@ const others = linkable.filter((o) => o !== lead);
                   should not look identical. */}
               {lead.stock && <li data-state={/in stock|available/i.test(lead.stock) ? "good" : "warn"}>{lead.stock}</li>}
               {lead.shipping && <li>{lead.shipping}</li>}
-              {lead.checkedDate && <li>Price checked {lead.checkedDate}</li>}
+              {lead.checkedDate && <li>{lead.price ? "Price checked" : "Listing last checked"} {lead.checkedDate}</li>}
             </ul>
 
             {/* THE APOLOGY IS GONE, 14 August 2026. Where there was no price
