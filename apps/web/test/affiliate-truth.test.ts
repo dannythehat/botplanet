@@ -76,6 +76,15 @@ describe("homepage guide and affiliate semantics", () => {
   });
 });
 
+describe("production deploy smoke tests", () => {
+  it("checks real homepage HTML for duplicated buying guide sections", () => {
+    const workflow = readFileSync(".github/workflows/deploy-botplanet.yml", "utf8");
+    expect(workflow).toContain("Verify deployed buying-guide HTML");
+    expect(workflow).toContain('guide_count');
+    expect(workflow).toContain('Search Amazon for Ruko 18011');
+  });
+});
+
 describe("Amazon internal surfaces", () => {
   it("admin derives its status and wording from the central tag configuration", () => {
     const src = adminSource();
