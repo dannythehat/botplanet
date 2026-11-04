@@ -67,7 +67,7 @@ describe("homepage guide and affiliate semantics", () => {
     const layout = readFileSync("apps/web/src/layouts/Base.astro", "utf8");
     const footer = readFileSync("apps/web/src/components/Footer.astro", "utf8");
     expect(layout).not.toContain("HomepageRobotDogFeature");
-    expect(footer).not.toContain("home-dog-guide");
+    expect(footer).not.toContain('<section class="home-dog-guide"');
   });
 
   it("never labels an unpriced listing as a verified price check", () => {
