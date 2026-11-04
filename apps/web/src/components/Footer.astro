@@ -3,7 +3,6 @@ import { FOOTER_GROUPS, LEGAL_ITEMS } from "../content/nav-surfaces";
 import { SITE } from "../lib/site";
 import { shellJourneyFor } from "../content/journeys";
 import { routeFor } from "../content/routes";
-import { srcsetFor, sizeOf } from "../lib/srcset";
 import { categoryCanMatch } from "../content/matcher-router";
 const year = 2026;
 /* Category-specific journey, and since 12 August 2026 it is the journey for
@@ -18,41 +17,11 @@ const year = 2026;
 const path = Astro.url.pathname;
 const journey = shellJourneyFor(path, { routeCategory: routeFor(path)?.category, canMatch: categoryCanMatch });
 const promptOne = journey?.subject ?? "";
-const isHome = path === "/";
 
 const LEGAL = LEGAL_ITEMS;
 ---
 
-{isHome && (
-  <section class="home-dog-guide" aria-labelledby="home-dog-guide-title">
-    <div class="wrap home-dog-guide__card">
-      <figure class="home-dog-guide__media">
-        <img
-          src="/media/hubs/companion/tile.webp"
-          srcset={srcsetFor("/media/hubs/companion/tile.webp")}
-          sizes="(min-width: 900px) 480px, 100vw"
-          width={sizeOf("/media/hubs/companion/tile.webp")?.width}
-          height={sizeOf("/media/hubs/companion/tile.webp")?.height}
-          alt="Companion robots including a robot dog."
-          loading="lazy"
-          decoding="async"
-        />
-      </figure>
-      <div class="home-dog-guide__copy">
-        <p class="home-dog-guide__kicker">FEATURED BUYING GUIDE</p>
-        <h2 id="home-dog-guide-title">Best robot dog toys & AI robot dogs in 2026</h2>
-        <p>
-          From a simple robot puppy for a child to Loona, open-source coding dogs and advanced
-          quadrupeds, compare the models by the kind of buyer they actually suit.
-        </p>
-        <div class="home-dog-guide__actions">
-          <a class="btn btn--accent btn--lg" href="/guides/robot-dog-toys/">Compare robot dogs</a>
-          <a class="btn btn--quiet btn--lg" href="/robots/companion-robots/">Explore companion robots</a>
-        </div>
-      </div>
-    </div>
-  </section>
-)}
+
 
 <!--
   Compact by design. The footer closes the page; it must never be its largest
