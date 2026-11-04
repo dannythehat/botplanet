@@ -59,6 +59,19 @@ describe("Amazon referral configuration", () => {
   });
 });
 
+describe("homepage guide and affiliate semantics", () => {
+  it("renders the robot-dog buying-guide feature once from the homepage", () => {
+    const homepage = readFileSync("apps/web/src/pages/index.astro", "utf8");
+    expect(homepage.match(/<section class="featured-guide"/g) ?? []).toHaveLength(1);
+    expect(homepage).toContain('href="/guides/robot-dog-toys/"');
+  });
+
+  it("never labels an unpriced listing as a verified price check", () => {
+    const buyBox = readFileSync("apps/web/src/components/BuyBox.astro", "utf8");
+    expect(buyBox).toContain('lead.price ? "Price checked" : "Listing last checked"');
+  });
+});
+
 describe("Amazon internal surfaces", () => {
   it("admin derives its status and wording from the central tag configuration", () => {
     const src = adminSource();
