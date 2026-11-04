@@ -7,6 +7,7 @@ import {
   webPageSchema,
 } from "../../lib/seo";
 import { FOUNDER } from "../../content/team";
+import { amazonDestination } from "../../lib/site";
 import { srcsetFor, sizeOf } from "../../lib/srcset";
 
 const PATH = "/guides/robot-dog-toys/";
@@ -53,8 +54,8 @@ const picks = [
     ],
     sourceHref: "https://www.ruko.net/products/ruko-18011-rc-robot-dog-toy",
     sourceLabel: "Ruko product page",
-    buyHref: "https://www.amazon.com/s?k=Ruko+18011+Robot+Dog+Toy&tag=botplanet-20",
-    buyLabel: "Check Ruko 18011 on Amazon",
+    buyHref: amazonDestination("https://www.amazon.com/s?k=Ruko+18011+Robot+Dog+Toy"),
+    buyLabel: "Search Amazon for Ruko 18011",
   },
   {
     id: "loona",
@@ -103,8 +104,8 @@ const picks = [
     ],
     sourceHref: "https://www.hiwonder.com/products/mechdog",
     sourceLabel: "Hiwonder MechDog product page",
-    buyHref: "https://www.amazon.com/s?k=Hiwonder+MechDog+Robot+Dog&tag=botplanet-20",
-    buyLabel: "Check MechDog on Amazon",
+    buyHref: amazonDestination("https://www.amazon.com/s?k=Hiwonder+MechDog+Robot+Dog"),
+    buyLabel: "Search Amazon for MechDog",
     internalHref: "/robots/educational-coding-robots/",
     internalLabel: "Explore coding robots",
   },
@@ -129,8 +130,8 @@ const picks = [
     ],
     sourceHref: "https://www.petoi.com/products/petoi-robot-dog-bittle-x-voice-controlled",
     sourceLabel: "Petoi Bittle X product page",
-    buyHref: "https://www.amazon.com/s?k=Petoi+Bittle+X+V2&tag=botplanet-20",
-    buyLabel: "Check Bittle X V2 on Amazon",
+    buyHref: amazonDestination("https://www.amazon.com/s?k=Petoi+Bittle+X+V2"),
+    buyLabel: "Search Amazon for Bittle X V2",
     internalHref: "/robots/educational-coding-robots/",
     internalLabel: "Explore coding robots",
   },
@@ -155,8 +156,8 @@ const picks = [
     ],
     sourceHref: "https://www.hiwonder.com/products/puppypi",
     sourceLabel: "Hiwonder PuppyPi product page",
-    buyHref: "https://www.amazon.com/s?k=HIWONDER+PuppyPi+Robot+Dog&tag=botplanet-20",
-    buyLabel: "Check PuppyPi on Amazon",
+    buyHref: amazonDestination("https://www.amazon.com/s?k=HIWONDER+PuppyPi+Robot+Dog"),
+    buyLabel: "Search Amazon for PuppyPi",
     internalHref: "/robots/educational-coding-robots/",
     internalLabel: "Explore coding robots",
   },
@@ -363,7 +364,7 @@ const schema = [
             </div>
 
             <div class="dog-links">
-              <a class="dog-btn dog-btn--primary" href={pick.buyHref} rel={pick.buyHref.startsWith("http") ? "sponsored nofollow" : undefined}>{pick.buyLabel}</a>
+              <a class="dog-btn dog-btn--primary" href={pick.buyHref} rel={pick.buyHref.startsWith("http") || pick.buyHref.startsWith("/go/") ? "sponsored nofollow" : undefined}>{pick.buyLabel}</a>
               {pick.internalHref && <a class="dog-btn" href={pick.internalHref}>{pick.internalLabel}</a>}
               <a class="dog-text-link" href={pick.sourceHref} rel="nofollow">Manufacturer source →</a>
             </div>
